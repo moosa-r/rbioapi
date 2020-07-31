@@ -1,0 +1,27 @@
+Package: rbioapi
+Type: Package
+Title: User-friendly interface to Biological Databases' APIs
+Version: 0.1.0
+Authors@R: person("Moosa", "Rezwani", email = "moosa.rezwani@gmail.com",
+  role = c("aut", "cre"))
+Description: This package provides an easy, user-friendly and unified access to
+  Biological databases' API. rbioapi tries to provide a unified experience,
+  effortless and of course, user-friendly interface to
+  the most relevant Biological databases. The end user is not expected to have
+  knowlage about curl, api, http requests, etc.
+  This is an on-going project; new databases will be implemented periodically.
+  Do you see yourself querying data from a certain database which is not
+  supported by this package? feel free to contact me and I will try to
+  implement that database in the future releases.
+License: GPL-3
+Encoding: UTF-8
+URL: https://github.com/moosa-r/rbioapi
+BugReports: https://github.com/moosa-r/rbioapi/issues
+Imports:
+  httr,
+  jsonlite,
+  purrr,
+  rvest,
+  utils,
+  xml2
+RoxygenNote: 7.1.1
