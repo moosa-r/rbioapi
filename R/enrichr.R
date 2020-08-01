@@ -422,8 +422,8 @@ rba_enrichr_gene_map = function(gene,
   call_query = list("gene" = gene,
                     "json" = "true")
 
-  additional_pars = list(list(catagorize == TRUE),
-                         list("setup" = "true"))
+  additional_pars = list(list(catagorize == TRUE,
+                              list("setup" = "true")))
 
   call_query = rba_ba_body_add_pars(call_body = call_query,
                                     additional_pars = additional_pars)
