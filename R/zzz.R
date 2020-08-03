@@ -14,8 +14,10 @@ NULL
   packageStartupMessage("Welcome to rbioAPI.\r\n....Fill this message later....")
   ##### provide the dates which you last updated and checked for a database API. ###
   ## save each database """"base url""" as an option.
-  options("url_string" = "https://string-db.org")
-  options("url_enrichr" = "https://amp.pharm.mssm.edu")
+  options("rbioapi_databases" = c("STRING", "Enrichr"))
+  options("url_string" = c("STRING" = "https://string-db.org"))
+  options("url_enrichr" = c("Enrichr" = "https://amp.pharm.mssm.edu"))
+
 }
 
 

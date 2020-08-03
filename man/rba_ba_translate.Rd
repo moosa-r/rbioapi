@@ -4,7 +4,7 @@
 \alias{rba_ba_translate}
 \title{Translate HTTP status code to human readable explanation}
 \usage{
-rba_ba_translate(http_status)
+rba_ba_translate(http_status, verbose = TRUE)
 }
 \arguments{
 \item{http_status}{}

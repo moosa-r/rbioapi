@@ -15,35 +15,103 @@ rba_ba_internet_handler = function(retry_max = 1,
                                    verbose = FALSE,
                                    diagnostics = FALSE) {
   if (verbose == TRUE) {message("Testing the internet connection.\r\n")}
-  net_test = !as.logical(system("ping -n 1 google.com",
-                                invisible = TRUE,
-                                show.output.on.console = diagnostics))
+
+  net_status = httr::status_code(httr::HEAD("https://www.google.com/",
+                                           if (diagnostics) httr::verbose()
+  ))
+
+
   retry_count = 0
-  while (net_test == FALSE & retry_count < retry_max) {
+  while (net_status != 200 & retry_count < retry_max) {
     retry_count = retry_count + 1
 
     if (verbose == TRUE) {message("No internet connection, waiting for ",
-                              wait_time,
-                              " seconds and retrying (retry count: ",
-                              retry_count, "/",
-                              retry_max, ")\r\n")}
+                                  wait_time,
+                                  " seconds and retrying (retry count: ",
+                                  retry_count, "/",
+                                  retry_max, ")\r\n")}
 
     Sys.sleep(wait_time)
-    net_test = !as.logical(system("ping -n 1 google.com",
-                                  invisible = TRUE,
-                                  show.output.on.console = diagnostics))
+    net_status = httr::status_code(httr::HEAD("https://www.google.com/",
+                                             if (diagnostics) httr::verbose()
+    ))
 
   } #end of while
 
-  if (net_test == TRUE) {
+  if (net_status == 200) {
     if (verbose == TRUE) {message("Device is connected to the internet!\r\n")}
-  } else if (net_test == FALSE) {
+  } else {
     stop("NO internet connection! Terminating Code excutation!\r\n",
          call. = diagnostics)
   } #end of if net_test
-  return(net_test)
+  return(net_status == 200)
 } # end of function
 
+#' Test connection with a rest server
+#'
+#' @param name
+#' @param url
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ba_api_check = function(url, diagnostics = FALSE){
+  if (diagnostics == TRUE){
+    test_result = try(httr::status_code(httr::HEAD(url,
+                                                   httr::verbose())),
+                      silent = TRUE)
+  } else {
+    test_result = try(httr::status_code(httr::HEAD(url)), silent = TRUE)
+  }
+  if (is.numeric(test_result)) {
+    if (test_result == 200) {
+      return("\U2705 The Server is Respoding.")
+    } else {
+      return(paste("\U274C",
+                   rba_ba_translate(test_result,
+                                    verbose = FALSE)))
+    }
+
+  } else {
+    return(paste("\U274C", test_result))
+  }
+}
+
+#' Test if The supported servers are Responding
+#'
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_connection_test = function(diagnostics = FALSE) {
+  message("Checking Your connection to the Databases Currently Supported by rbioapi:")
+
+  urls = list("STRING" = paste0(getOption("url_string"), "/api/json/version"),
+              "Enrichr" = paste0(getOption("url_enrichr"), "/Enrichr")
+  )
+
+  cat("-", "Internet", ":\r\n")
+  google = try(httr::status_code(httr::HEAD("https://www.google.com/",
+                                            if (diagnostics) httr::verbose())
+  ), silent = TRUE)
+
+  if (google == 200) {
+    cat("\U2705 Connected to the Internet.\r\n")
+  } else {
+    cat("\U274C No Internet Connection.\r\n")
+    stop("Could not resolve google.com", " . Check Your internet Connection.", call. = diagnostics)
+  }
+
+  for (i in seq_along(urls)) {
+    cat("-", names(urls)[[i]], ":\r\n")
+    cat(rba_ba_api_check(urls[[i]], diagnostics = diagnostics), "\r\n")
+  }
+  invisible()
+
+}
 
 #' Translate HTTP status code to human readable explanation
 #'
@@ -53,7 +121,7 @@ rba_ba_internet_handler = function(retry_max = 1,
 #' @export
 #'
 #' @examples
-rba_ba_translate = function(http_status){
+rba_ba_translate = function(http_status, verbose = TRUE){
   #source: Wikipedia (https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
   #1xx Informational response
   #2xx Success
@@ -129,13 +197,24 @@ rba_ba_translate = function(http_status){
                         "511" = "Network Authentication Required"
   )
 
-  if (as.character(http_status) %in% names(status_dictionary)){
-    output = paste0("The server returned HTTP status ",
-                    http_status, "(",
-                    status_dictionary[as.character(http_status)], ")")
+  if (verbose == TRUE) {
+    if (as.character(http_status) %in% names(status_dictionary)){
+      output = paste0("The server returned HTTP status ",
+                      http_status, " (",
+                      status_dictionary[as.character(http_status)], ")")
 
+    } else {
+      output = paste0("The server returned HTTP status ", http_status)
+    }
   } else {
-    output = paste0("The server returned HTTP status ", http_status)
+    if (as.character(http_status) %in% names(status_dictionary)){
+      output = paste0("HTTP status ",
+                      http_status, " (",
+                      status_dictionary[as.character(http_status)], ")")
+
+    } else {
+      output = paste0("HTTP status ", http_status)
+    }
   }
   return(output)
 } # end of function

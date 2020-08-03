@@ -415,7 +415,7 @@ rba_enrichr_gene_map = function(gene,
                                    diagnostics = diagnostics))
 
   if (verbose == TRUE){
-    message("Retrieving your uploading gene list under the provided ID.")
+    message("Finding terms that contain gene: ", gene)
   }
 
   ## build GET API request's query
