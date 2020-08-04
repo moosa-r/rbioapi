@@ -8,7 +8,7 @@ rba_string_map_ids(
   input,
   species = NA,
   echo_query = FALSE,
-  limit = 1,
+  limit = NA,
   caller_identity = NA,
   verbose = TRUE,
   progress_bar = FALSE,

@@ -1,5 +1,3 @@
-
-
 #' Map a Set of Identifiers to String Identifiers
 #' @description This function Calls String's API to Convert a set of identifiers
 #'   to String Identifiers. Although You can call STRING with a variety of
@@ -26,13 +24,13 @@
 #'
 #' @examples
 rba_string_map_ids = function(input,
-                               species = NA,
-                               echo_query = FALSE,
-                               limit = 1,
-                               caller_identity = NA,
-                               verbose = TRUE,
-                               progress_bar = FALSE,
-                               diagnostics = FALSE){
+                              species = NA,
+                              echo_query = FALSE,
+                              limit = NA,
+                              caller_identity = NA,
+                              verbose = TRUE,
+                              progress_bar = FALSE,
+                              diagnostics = FALSE){
 
   ## Check input arguments
   invisible(rba_ba_arguments_check(cons = list(list(arg = input,
@@ -95,7 +93,7 @@ rba_string_map_ids = function(input,
                                      encode = "form",
                                      httr::user_agent(getOption("rba_ua")),
                                      httr::accept_json()
-                                     ))
+  ))
 
   call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
                                          diagnostics = diagnostics,
@@ -215,7 +213,7 @@ rba_string_network_image = function(input,
 
   if (verbose == TRUE){
     message("Getting STRING network image of ", length(input),
-        " Input Identifiers.\r\n")
+            " Input Identifiers.\r\n")
   }
 
   ## build POST API request's body
@@ -250,16 +248,20 @@ rba_string_network_image = function(input,
                                      path = "api/image/network",
                                      body = call_body,
                                      httr::write_disk(save_to, overwrite = TRUE),
-                                     httr::user_agent(getOption("rba_ua")),
-                                     httr::accept_json()
-                                     ))
+                                     httr::user_agent(getOption("rba_ua"))
+  ))
 
   call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
                                          diagnostics = diagnostics,
                                          progress_bar = progress_bar)
 
-  response_parser_input = quote(httr::content(output,
-                                              type = "image/png"))
+  if (output_format != "svg") {
+    response_parser_input = quote(httr::content(output,
+                                                type = "image/png"))
+  } else {
+    response_parser_input = quote(httr::content(output))
+  }
+
 
   # create file_path
   if (is.na(save_to)){
@@ -374,7 +376,7 @@ rba_string_network_interactions = function(input,
                                      encode = "form",
                                      httr::user_agent(getOption("rba_ua")),
                                      httr::accept_json()
-                                     ))
+  ))
 
   call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
                                          diagnostics = diagnostics,
@@ -483,7 +485,7 @@ rba_string_interaction_partners = function(input,
                                      encode = "form",
                                      httr::user_agent(getOption("rba_ua")),
                                      httr::accept_json()
-                                     ))
+  ))
 
   call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
                                          diagnostics = diagnostics,
@@ -576,7 +578,7 @@ rba_string_homology = function(input,
                                      encode = "form",
                                      httr::user_agent(getOption("rba_ua")),
                                      httr::accept_json()
-                                     ))
+  ))
 
   call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
                                          diagnostics = diagnostics,
@@ -675,7 +677,7 @@ rba_string_homology_best = function(input,
                                      encode = "form",
                                      httr::user_agent(getOption("rba_ua")),
                                      httr::accept_json()
-                                     ))
+  ))
 
   call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
                                          diagnostics = diagnostics,
@@ -775,7 +777,7 @@ rba_string_enrichment = function(input,
                                      encode = "form",
                                      httr::user_agent(getOption("rba_ua")),
                                      httr::accept_json()
-                                     ))
+  ))
 
   call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
                                          diagnostics = diagnostics,
@@ -875,7 +877,7 @@ rba_string_functional_annotation = function(input,
                                      encode = "form",
                                      httr::user_agent(getOption("rba_ua")),
                                      httr::accept_json()
-                                     ))
+  ))
 
   call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
                                          diagnostics = diagnostics,
@@ -977,7 +979,7 @@ rba_string_ppi_enrichment = function(input,
                                      encode = "form",
                                      httr::user_agent(getOption("rba_ua")),
                                      httr::accept_json()
-                                     ))
+  ))
 
   call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
                                          diagnostics = diagnostics,
@@ -1038,7 +1040,7 @@ rba_string_version = function(verbose = TRUE,
                                      encode = "form",
                                      httr::user_agent(getOption("rba_ua")),
                                      httr::accept_json()
-                                     ))
+  ))
 
   call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
                                          diagnostics = diagnostics,

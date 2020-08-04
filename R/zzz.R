@@ -1,7 +1,13 @@
 #' rbioapi: User-friendly interface to Biological Databases' APIs
 #'
-#' This package provides and easy, user-friendly and unified access to Biological databases' API.
-#' STRING, Reactome, Uniprot, Pubmed
+#' @description This package provides an easy, user-friendly and unified access
+#' toBiological databases' API. rbioapi tries to provide a unified experience,
+#' effortless and of course, user-friendly interface tothe most relevant
+#' Biological databases. The end user is not expected to haveknowlage about
+#' curl, api, http requests, etc.This is an on-going project; new databases
+#' will be implemented periodically.Do you see yourself querying data from a
+#' certain database which is notsupported by this package? feel free to contact
+#' me and I will try toimplement that database in the future releases.
 #'
 #' @section STRING functions:
 #' map, interactions, image
@@ -23,9 +29,10 @@ NULL
                         "STRING: Aug 04 2020\r\n",
                         "Enrichr: Aug 04 2020"
   )
-  ## save each database "base URL" as an option.
+  ## save list of supported databases
   options("rba_databases" = c("STRING",
                               "Enrichr"))
+  ## save each database names & "base URL" as an option.
   options("rba_url_string" = c("STRING" = "https://string-db.org"))
   options("rba_url_enrichr" = c("Enrichr" = "https://amp.pharm.mssm.edu"))
   ## save user agent for api Calls as an option
@@ -34,22 +41,11 @@ NULL
 }
 
 
-
-# .onLoad <- function(libname, pkgname) {
-#   op <- options()
-#   op.devtools <- list(
-#     devtools.path = "~/R-dev",
-#     devtools.install.args = "",
-#     devtools.name = "Your name goes here",
-#     devtools.desc.author = "First Last <first.last@example.com> [aut, cre]",
-#     devtools.desc.license = "What license is it under?",
-#     devtools.desc.suggests = NULL,
-#     devtools.desc = list()
-#   )
-#   toset <- !(names(op.devtools) %in% names(op))
-#   if(any(toset)) options(op.devtools[toset])
-#
-#   invisible()
-# }
-
-# .onUnload()
+genes = c("p53", "BRCA1", "cdk2", "Q99835", "CDC42","CDK1","KIF23","PLK1",
+          "RAC2","RACGAP1","RHOA","RHOB", "PHF14", "RBM3", "MSL1",
+          "PHF21A", "ARL10", "INSR", "JADE2",
+          "P2RX7", "LINC00662", "CCDC101", "PPM1B", "KANSL1L", "CRYZL1",
+          "ANAPC16", "TMCC1", "CDH8", "RBM11", "CNPY2", "HSPA1L", "CUL2",
+          "PLBD2", "LARP7", "TECPR2", "ZNF302", "CUX1", "MOB2", "CYTH2",
+          "SEC22C", "EIF4E3", "ROBO2", "ADAMTS9-AS2", "CXXC1", "LINC01314",
+          "ATF7", "ATP5F1")

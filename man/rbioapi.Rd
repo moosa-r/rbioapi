@@ -5,8 +5,14 @@
 \alias{rbioapi}
 \title{rbioapi: User-friendly interface to Biological Databases' APIs}
 \description{
-This package provides and easy, user-friendly and unified access to Biological databases' API.
-STRING, Reactome, Uniprot, Pubmed
+This package provides an easy, user-friendly and unified access
+toBiological databases' API. rbioapi tries to provide a unified experience,
+effortless and of course, user-friendly interface tothe most relevant
+Biological databases. The end user is not expected to haveknowlage about
+curl, api, http requests, etc.This is an on-going project; new databases
+will be implemented periodically.Do you see yourself querying data from a
+certain database which is notsupported by this package? feel free to contact
+me and I will try toimplement that database in the future releases.
 }
 \section{STRING functions}{
 

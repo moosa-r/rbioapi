@@ -17,7 +17,7 @@ rba_ba_internet_handler = function(retry_max = 1,
   if (verbose == TRUE) {message("Testing the internet connection.\r\n")}
 
   net_status = httr::status_code(httr::HEAD("https://www.google.com/",
-                                           if (diagnostics) httr::verbose()
+                                            if (diagnostics) httr::verbose()
   ))
 
 
@@ -33,7 +33,7 @@ rba_ba_internet_handler = function(retry_max = 1,
 
     Sys.sleep(wait_time)
     net_status = httr::status_code(httr::HEAD("https://www.google.com/",
-                                             if (diagnostics) httr::verbose()
+                                              if (diagnostics) httr::verbose()
     ))
 
   } #end of while
@@ -299,6 +299,7 @@ rba_ba_arguments_check = function(cons = NULL,
   # name,
   # class,
   # val
+  # len
   # min_len,
   # max_len,
   # min_val,
@@ -327,6 +328,15 @@ rba_ba_arguments_check = function(cons = NULL,
                                            collapse = " or "),
              "'\r\n(Your provided argument is '",
              cons[[i]][["arg"]], "')\r\n", call. = diagnostics)
+      }
+
+      # check  length
+      if (!is.null(cons[[i]][["len"]]) &&
+          length(cons[[i]][["arg"]]) != cons[[i]][["len"]]) {
+        stop("\r\nInvalid Argument: ", cons[[i]][["name"]],
+             " should of length ", cons[[i]][["len"]],
+             "\r\n(Your provided argument's length is '",
+             length(cons[[i]][["arg"]]), "')\r\n", call. = diagnostics)
       }
 
       # check minimum length
