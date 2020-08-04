@@ -35,8 +35,11 @@ rba_enrichr_info = function(verbose = TRUE,
   }
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("url_enrichr"),
-                                    path = "Enrichr/datasetStatistics"))
+  call_func_input = quote(httr::GET(url = getOption("rba_url_enrichr"),
+                                    path = "Enrichr/datasetStatistics",
+                                    httr::user_agent(getOption("rba_ua")),
+                                    httr::accept_json()
+  ))
 
   call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
                                          diagnostics = diagnostics,
@@ -114,9 +117,12 @@ rba_enrichr_add_list = function(gene_list,
                                    additional_pars = additional_pars)
 
   ## make function-specific calls
-  call_func_input = quote(httr::POST(url = getOption("url_enrichr"),
+  call_func_input = quote(httr::POST(url = getOption("rba_url_enrichr"),
                                      path = "Enrichr/addList",
-                                     body = call_body))
+                                     body = call_body,
+                                     httr::user_agent(getOption("rba_ua")),
+                                     httr::accept_json()
+  ))
 
   call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
                                          diagnostics = diagnostics,
@@ -175,9 +181,12 @@ rba_enrichr_view_list = function(user_list_id,
   call_query = list("userListId" = user_list_id)
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("url_enrichr"),
+  call_func_input = quote(httr::GET(url = getOption("rba_url_enrichr"),
                                     path = "Enrichr/view",
-                                    query = call_query))
+                                    query = call_query,
+                                    httr::user_agent(getOption("rba_ua")),
+                                    httr::accept_json()
+  ))
 
   call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
                                          diagnostics = diagnostics,
@@ -219,10 +228,12 @@ rba_enrichr_enrich_internal = function(user_list_id_input,
                     "backgroundType" = gene_set_library_input)
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("url_enrichr"),
+  call_func_input = quote(httr::GET(url = getOption("rba_url_enrichr"),
                                     path = "Enrichr/export",
                                     query = call_query,
-                                    httr::content_type("text/tab-separated-values")))
+                                    httr::content_type("text/tab-separated-values"),
+                                    httr::user_agent(getOption("rba_ua"))
+  ))
 
 
   call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
@@ -428,9 +439,12 @@ rba_enrichr_gene_map = function(gene,
   call_query = rba_ba_body_add_pars(call_body = call_query,
                                     additional_pars = additional_pars)
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("url_enrichr"),
+  call_func_input = quote(httr::GET(url = getOption("rba_url_enrichr"),
                                     path = "Enrichr/genemap",
-                                    query = call_query))
+                                    query = call_query,
+                                    httr::user_agent(getOption("rba_ua")),
+                                    httr::accept_json()
+  ))
 
 
   call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,

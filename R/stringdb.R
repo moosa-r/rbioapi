@@ -89,10 +89,13 @@ rba_string_map_ids = function(input,
                                    additional_pars = additional_pars)
 
   ## make function-specific calls
-  call_func_input = quote(httr::POST(url = getOption("url_string"),
+  call_func_input = quote(httr::POST(url = getOption("rba_url_string"),
                                      path = "api/json/resolve",
                                      body = call_body,
-                                     encode = "form"))
+                                     encode = "form",
+                                     httr::user_agent(getOption("rba_ua")),
+                                     httr::accept_json()
+                                     ))
 
   call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
                                          diagnostics = diagnostics,
@@ -243,10 +246,13 @@ rba_string_network_image = function(input,
 
 
   ## make function-specific calls
-  call_func_input = quote(httr::POST(url = getOption("url_string"),
+  call_func_input = quote(httr::POST(url = getOption("rba_url_string"),
                                      path = "api/image/network",
                                      body = call_body,
-                                     httr::write_disk(save_to, overwrite = TRUE)))
+                                     httr::write_disk(save_to, overwrite = TRUE),
+                                     httr::user_agent(getOption("rba_ua")),
+                                     httr::accept_json()
+                                     ))
 
   call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
                                          diagnostics = diagnostics,
@@ -362,10 +368,13 @@ rba_string_network_interactions = function(input,
                                    additional_pars = additional_pars)
 
   ## make function-specific calls
-  call_func_input = quote(httr::POST(url = getOption("url_string"),
+  call_func_input = quote(httr::POST(url = getOption("rba_url_string"),
                                      path = "api/json/network",
                                      body = call_body,
-                                     encode = "form"))
+                                     encode = "form",
+                                     httr::user_agent(getOption("rba_ua")),
+                                     httr::accept_json()
+                                     ))
 
   call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
                                          diagnostics = diagnostics,
@@ -468,10 +477,13 @@ rba_string_interaction_partners = function(input,
                                    additional_pars = additional_pars)
 
   ## make function-specific calls
-  call_func_input = quote(httr::POST(url = getOption("url_string"),
+  call_func_input = quote(httr::POST(url = getOption("rba_url_string"),
                                      path = "api/json/interaction_partners",
                                      body = call_body,
-                                     encode = "form"))
+                                     encode = "form",
+                                     httr::user_agent(getOption("rba_ua")),
+                                     httr::accept_json()
+                                     ))
 
   call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
                                          diagnostics = diagnostics,
@@ -558,10 +570,13 @@ rba_string_homology = function(input,
                                    additional_pars = additional_pars)
 
   ## make function-specific calls
-  call_func_input = quote(httr::POST(url = getOption("url_string"),
+  call_func_input = quote(httr::POST(url = getOption("rba_url_string"),
                                      path = "api/json/homology",
                                      body = call_body,
-                                     encode = "form"))
+                                     encode = "form",
+                                     httr::user_agent(getOption("rba_ua")),
+                                     httr::accept_json()
+                                     ))
 
   call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
                                          diagnostics = diagnostics,
@@ -654,10 +669,13 @@ rba_string_homology_best = function(input,
                                    additional_pars = additional_pars)
 
   ## make function-specific calls
-  call_func_input = quote(httr::POST(url = getOption("url_string"),
+  call_func_input = quote(httr::POST(url = getOption("rba_url_string"),
                                      path = "api/json/homology_best",
                                      body = call_body,
-                                     encode = "form"))
+                                     encode = "form",
+                                     httr::user_agent(getOption("rba_ua")),
+                                     httr::accept_json()
+                                     ))
 
   call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
                                          diagnostics = diagnostics,
@@ -751,10 +769,13 @@ rba_string_enrichment = function(input,
                                    additional_pars = additional_pars)
 
   ## make function-specific calls
-  call_func_input = quote(httr::POST(url = getOption("url_string"),
+  call_func_input = quote(httr::POST(url = getOption("rba_url_string"),
                                      path = "api/json/enrichment",
                                      body = call_body,
-                                     encode = "form"))
+                                     encode = "form",
+                                     httr::user_agent(getOption("rba_ua")),
+                                     httr::accept_json()
+                                     ))
 
   call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
                                          diagnostics = diagnostics,
@@ -848,10 +869,13 @@ rba_string_functional_annotation = function(input,
                                    additional_pars = additional_pars)
 
   ## make function-specific calls
-  call_func_input = quote(httr::POST(url = getOption("url_string"),
+  call_func_input = quote(httr::POST(url = getOption("rba_url_string"),
                                      path = "api/json/functional_annotation",
                                      body = call_body,
-                                     encode = "form"))
+                                     encode = "form",
+                                     httr::user_agent(getOption("rba_ua")),
+                                     httr::accept_json()
+                                     ))
 
   call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
                                          diagnostics = diagnostics,
@@ -947,10 +971,13 @@ rba_string_ppi_enrichment = function(input,
                                    additional_pars = additional_pars)
 
   ## make function-specific calls
-  call_func_input = quote(httr::POST(url = getOption("url_string"),
+  call_func_input = quote(httr::POST(url = getOption("rba_url_string"),
                                      path = "api/json/functional_annotation",
                                      body = call_body,
-                                     encode = "form"))
+                                     encode = "form",
+                                     httr::user_agent(getOption("rba_ua")),
+                                     httr::accept_json()
+                                     ))
 
   call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
                                          diagnostics = diagnostics,
@@ -1005,10 +1032,13 @@ rba_string_version = function(verbose = TRUE,
   call_body = list("format" = "text")
 
   ## make function-specific calls
-  call_func_input = quote(httr::POST(url = getOption("url_string"),
+  call_func_input = quote(httr::POST(url = getOption("rba_url_string"),
                                      path = "api/json/version",
                                      body = call_body,
-                                     encode = "form"))
+                                     encode = "form",
+                                     httr::user_agent(getOption("rba_ua")),
+                                     httr::accept_json()
+                                     ))
 
   call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
                                          diagnostics = diagnostics,

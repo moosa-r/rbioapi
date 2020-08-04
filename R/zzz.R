@@ -11,12 +11,25 @@
 NULL
 
 .onAttach = function(libname, pkgname) {
-  packageStartupMessage("Welcome to rbioAPI.\r\n....Fill this message later....")
-  ##### provide the dates which you last updated and checked for a database API. ###
-  ## save each database """"base url""" as an option.
-  options("rbioapi_databases" = c("STRING", "Enrichr"))
-  options("url_string" = c("STRING" = "https://string-db.org"))
-  options("url_enrichr" = c("Enrichr" = "https://amp.pharm.mssm.edu"))
+  packageStartupMessage("Welcome to rbioAPI.\r\n",
+                        "This package provides an easy, user-friendly and ",
+                        "unified access to Biological databases' API from R.\r\n",
+                        "Due to nature of this package, some function could ",
+                        "break after the databases changes in their API. ",
+                        "if so, kindly report the broken function[s] to:\r\n",
+                        "https://github.com/moosa-r/rbioapi ",
+                        "or moosa.rezwani@gmail.com\r\n",
+                        "Last API verbs check for currently supported Databases:\r\n",
+                        "STRING: Aug 04 2020\r\n",
+                        "Enrichr: Aug 04 2020"
+  )
+  ## save each database "base URL" as an option.
+  options("rba_databases" = c("STRING",
+                              "Enrichr"))
+  options("rba_url_string" = c("STRING" = "https://string-db.org"))
+  options("rba_url_enrichr" = c("Enrichr" = "https://amp.pharm.mssm.edu"))
+  ## save user agent for api Calls as an option
+  options("rba_ua" = "rbioapi R package")
 
 }
 
