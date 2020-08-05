@@ -354,14 +354,15 @@ rba_enrichr_enrich = function(user_list_id,
     return(final_output)
 
   } else if (run_mode == "multiple") {
+    if (verbose == TRUE) {
+      message("Enriching Gene set ", user_list_id,
+              " using multiple Enrichr libraries:") }
+
     message("note: You have selected ", length(gene_set_library),
             " Enrichr libraries. ",
             "note that for each library, a seperate call should be send to the ",
             "Enrichr server. thus, this could take a while depending on the ",
             "number of selected libraries and your network connection.")
-    if (verbose == TRUE) {
-      message("Enriching Gene set ", user_list_id,
-              " using multiple Enrichr libraries:") }
 
     final_output = as.list(gene_set_library)
     names(final_output) = gene_set_library
