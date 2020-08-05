@@ -43,23 +43,15 @@ rba_ensembl_info_analysis = function(species,
   call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
                                     path = paste0("/info/analysis/",
                                                   species),
-                                    httr::user_agent(getOption("rba_ua")),
                                     httr::accept_json()
   ))
 
-  call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
-                                         diagnostics = diagnostics,
-                                         progress_bar = progress_bar)
-
-  response_parser_input = quote(as.list(jsonlite::fromJSON(httr::content(output,
-                                                                         as = "text",
-                                                                         encoding = "UTF-8"),
-                                                           flatten = TRUE)
-                                        ))
-
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = response_parser_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
                                   verbose = verbose,
                                   diagnostics = diagnostics)
 
@@ -129,23 +121,15 @@ rba_ensembl_info_aassembly = function(species,
                                     path = paste0("/info/assembly/",
                                                   species),
                                     query = call_query,
-                                    httr::user_agent(getOption("rba_ua")),
                                     httr::accept_json()
   ))
 
-  call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
-                                         diagnostics = diagnostics,
-                                         progress_bar = progress_bar)
-
-  response_parser_input = quote(as.list(jsonlite::fromJSON(httr::content(output,
-                                                                         as = "text",
-                                                                         encoding = "UTF-8"),
-                                                           flatten = TRUE)
-                                        ))
-
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = response_parser_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
                                   verbose = verbose,
                                   diagnostics = diagnostics)
 
@@ -224,23 +208,15 @@ rba_ensembl_info_assembly_region_name = function(species,
                                                   "/",
                                                   region_name),
                                     query = call_query,
-                                    httr::user_agent(getOption("rba_ua")),
                                     httr::accept_json()
   ))
 
-  call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
-                                         diagnostics = diagnostics,
-                                         progress_bar = progress_bar)
-
-  response_parser_input = quote(data.frame(jsonlite::fromJSON(httr::content(output,
-                                                                         as = "text",
-                                                                         encoding = "UTF-8"),
-                                                           flatten = TRUE),
-                                        stringsAsFactors = FALSE))
-
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = response_parser_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->df",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
                                   verbose = verbose,
                                   diagnostics = diagnostics)
 
@@ -291,23 +267,15 @@ rba_ensembl_info_biotypes = function(species,
   call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
                                     path = paste0("/info/biotypes/",
                                                   species),
-                                    httr::user_agent(getOption("rba_ua")),
                                     httr::accept_json()
   ))
 
-  call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
-                                         diagnostics = diagnostics,
-                                         progress_bar = progress_bar)
-
-  response_parser_input = quote(data.frame(jsonlite::fromJSON(httr::content(output,
-                                                                         as = "text",
-                                                                         encoding = "UTF-8"),
-                                                           flatten = TRUE),
-                                        stringsAsFactors = FALSE))
-
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = response_parser_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->df",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
                                   verbose = verbose,
                                   diagnostics = diagnostics)
 

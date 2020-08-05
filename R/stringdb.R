@@ -91,24 +91,15 @@ rba_string_map_ids = function(input,
                                      path = "api/json/resolve",
                                      body = call_body,
                                      encode = "form",
-                                     httr::user_agent(getOption("rba_ua")),
                                      httr::accept_json()
   ))
 
-  call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
-                                         diagnostics = diagnostics,
-                                         progress_bar = progress_bar)
-
-
-  response_parser_input = quote(data.frame(jsonlite::fromJSON(httr::content(output,
-                                                                            as = "text",
-                                                                            encoding = "UTF-8"),
-                                                              flatten = TRUE),
-                                           stringsAsFactors = FALSE))
-
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = response_parser_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->df",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
                                   verbose = verbose,
                                   diagnostics = diagnostics)
   return(final_output)
@@ -248,13 +239,8 @@ rba_string_network_image = function(input,
   call_func_input = quote(httr::POST(url = getOption("rba_url_string"),
                                      path = "api/image/network",
                                      body = call_body,
-                                     httr::write_disk(save_to, overwrite = TRUE),
-                                     httr::user_agent(getOption("rba_ua"))
+                                     httr::write_disk(save_to, overwrite = TRUE)
   ))
-
-  call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
-                                         diagnostics = diagnostics,
-                                         progress_bar = progress_bar)
 
   if (output_format != "svg") {
     response_parser_input = quote(httr::content(output,
@@ -280,6 +266,9 @@ rba_string_network_image = function(input,
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
                                   response_parser = response_parser_input,
+                                  parser_type = NA,
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
                                   verbose = verbose,
                                   diagnostics = diagnostics)
   return(final_output)
@@ -375,23 +364,15 @@ rba_string_network_interactions = function(input,
                                      path = "api/json/network",
                                      body = call_body,
                                      encode = "form",
-                                     httr::user_agent(getOption("rba_ua")),
                                      httr::accept_json()
   ))
 
-  call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
-                                         diagnostics = diagnostics,
-                                         progress_bar = progress_bar)
-
-  response_parser_input = quote(data.frame(jsonlite::fromJSON(httr::content(output,
-                                                                            as = "text",
-                                                                            encoding = "UTF-8"),
-                                                              flatten = TRUE),
-                                           stringsAsFactors = FALSE))
-
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = response_parser_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->df",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
                                   verbose = verbose,
                                   diagnostics = diagnostics)
   return(final_output)
@@ -484,23 +465,15 @@ rba_string_interaction_partners = function(input,
                                      path = "api/json/interaction_partners",
                                      body = call_body,
                                      encode = "form",
-                                     httr::user_agent(getOption("rba_ua")),
                                      httr::accept_json()
   ))
 
-  call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
-                                         diagnostics = diagnostics,
-                                         progress_bar = progress_bar)
-
-  response_parser_input = quote(data.frame(jsonlite::fromJSON(httr::content(output,
-                                                                            as = "text",
-                                                                            encoding = "UTF-8"),
-                                                              flatten = TRUE),
-                                           stringsAsFactors = FALSE))
-
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = response_parser_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->df",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
                                   verbose = verbose,
                                   diagnostics = diagnostics)
   return(final_output)
@@ -577,23 +550,15 @@ rba_string_homology = function(input,
                                      path = "api/json/homology",
                                      body = call_body,
                                      encode = "form",
-                                     httr::user_agent(getOption("rba_ua")),
                                      httr::accept_json()
   ))
 
-  call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
-                                         diagnostics = diagnostics,
-                                         progress_bar = progress_bar)
-
-  response_parser_input = quote(data.frame(jsonlite::fromJSON(httr::content(output,
-                                                                            as = "text",
-                                                                            encoding = "UTF-8"),
-                                                              flatten = TRUE),
-                                           stringsAsFactors = FALSE))
-
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = response_parser_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->df",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
                                   verbose = verbose,
                                   diagnostics = diagnostics)
   return(final_output)
@@ -676,23 +641,15 @@ rba_string_homology_best = function(input,
                                      path = "api/json/homology_best",
                                      body = call_body,
                                      encode = "form",
-                                     httr::user_agent(getOption("rba_ua")),
                                      httr::accept_json()
   ))
 
-  call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
-                                         diagnostics = diagnostics,
-                                         progress_bar = progress_bar)
-
-  response_parser_input = quote(data.frame(jsonlite::fromJSON(httr::content(output,
-                                                                            as = "text",
-                                                                            encoding = "UTF-8"),
-                                                              flatten = TRUE),
-                                           stringsAsFactors = FALSE))
-
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = response_parser_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->df",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
                                   verbose = verbose,
                                   diagnostics = diagnostics)
   return(final_output)
@@ -776,23 +733,15 @@ rba_string_enrichment = function(input,
                                      path = "api/json/enrichment",
                                      body = call_body,
                                      encode = "form",
-                                     httr::user_agent(getOption("rba_ua")),
                                      httr::accept_json()
   ))
 
-  call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
-                                         diagnostics = diagnostics,
-                                         progress_bar = progress_bar)
-
-  response_parser_input = quote(data.frame(jsonlite::fromJSON(httr::content(output,
-                                                                            as = "text",
-                                                                            encoding = "UTF-8"),
-                                                              flatten = TRUE),
-                                           stringsAsFactors = FALSE))
-
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = response_parser_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->df",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
                                   verbose = verbose,
                                   diagnostics = diagnostics)
   return(final_output)
@@ -876,23 +825,15 @@ rba_string_functional_annotation = function(input,
                                      path = "api/json/functional_annotation",
                                      body = call_body,
                                      encode = "form",
-                                     httr::user_agent(getOption("rba_ua")),
                                      httr::accept_json()
   ))
 
-  call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
-                                         diagnostics = diagnostics,
-                                         progress_bar = progress_bar)
-
-  response_parser_input = quote(data.frame(jsonlite::fromJSON(httr::content(output,
-                                                                            as = "text",
-                                                                            encoding = "UTF-8"),
-                                                              flatten = TRUE),
-                                           stringsAsFactors = FALSE))
-
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = response_parser_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->df",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
                                   verbose = verbose,
                                   diagnostics = diagnostics)
   return(final_output)
@@ -978,23 +919,15 @@ rba_string_ppi_enrichment = function(input,
                                      path = "api/json/functional_annotation",
                                      body = call_body,
                                      encode = "form",
-                                     httr::user_agent(getOption("rba_ua")),
                                      httr::accept_json()
   ))
 
-  call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
-                                         diagnostics = diagnostics,
-                                         progress_bar = progress_bar)
-
-  response_parser_input = quote(data.frame(jsonlite::fromJSON(httr::content(output,
-                                                                            as = "text",
-                                                                            encoding = "UTF-8"),
-                                                              flatten = TRUE),
-                                           stringsAsFactors = FALSE))
-
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = response_parser_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->df",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
                                   verbose = verbose,
                                   diagnostics = diagnostics)
   return(final_output)
@@ -1032,30 +965,22 @@ rba_string_version = function(verbose = TRUE,
                                                     class = "logical")),
                                    diagnostics = diagnostics))
   ## build POST API request's body
-  call_body = list("format" = "text")
+  call_query = list("format" = "text")
 
   ## make function-specific calls
-  call_func_input = quote(httr::POST(url = getOption("rba_url_string"),
+  call_func_input = quote(httr::GET(url = getOption("rba_url_string"),
                                      path = "api/json/version",
-                                     body = call_body,
+                                     query = call_query,
                                      encode = "form",
-                                     httr::user_agent(getOption("rba_ua")),
                                      httr::accept_json()
   ))
 
-  call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
-                                         diagnostics = diagnostics,
-                                         progress_bar = progress_bar)
-
-  response_parser_input = quote(data.frame(jsonlite::fromJSON(httr::content(output,
-                                                                            as = "text",
-                                                                            encoding = "UTF-8"),
-                                                              flatten = TRUE),
-                                           stringsAsFactors = FALSE))
-
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = response_parser_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
                                   verbose = verbose,
                                   diagnostics = diagnostics)
   return(final_output)

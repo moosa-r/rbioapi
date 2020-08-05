@@ -6,15 +6,18 @@
 \usage{
 rba_ba_skeletion(
   call_function,
-  response_parser,
-  no_interet_retry_max = 1,
-  no_internet_wait_time = 10,
+  response_parser = NULL,
+  parser_type = NA,
+  user_agent = FALSE,
+  progress_bar = FALSE,
   verbose = FALSE,
-  diagnostics = FALSE
+  diagnostics = FALSE,
+  no_interet_retry_max = 1,
+  no_internet_wait_time = 10
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{progress_bar}{}
 }
 \value{
 

@@ -11,7 +11,7 @@
 #'
 #' @examples
 rba_ba_internet_handler = function(retry_max = 1,
-                                   wait_time = 1,
+                                   wait_time = 10,
                                    verbose = FALSE,
                                    diagnostics = FALSE) {
   if (verbose == TRUE) {message("Testing the internet connection.\r\n")}
@@ -65,8 +65,8 @@ rba_ba_api_check = function(url, diagnostics = FALSE){
   } else {
     test_result = try(httr::status_code(httr::HEAD(url,
                                                    httr::user_agent(getOption("rba_ua"))
-                                                   )),
-                      silent = TRUE)
+    )),
+    silent = TRUE)
   }
   if (is.numeric(test_result)) {
     if (test_result == 200) {
@@ -101,7 +101,7 @@ rba_connection_test = function(diagnostics = FALSE) {
   google = try(httr::status_code(httr::HEAD("https://www.google.com/",
                                             if (diagnostics) httr::verbose(),
                                             httr::user_agent(getOption("rba_ua"))
-                                            )
+  )
   ), silent = TRUE)
 
   if (google == 200) {
@@ -227,6 +227,38 @@ rba_ba_translate = function(http_status, verbose = TRUE){
 
 ##### API Calls ##################################################
 
+#' Parse API Response
+#'
+#' @param type
+#' @param parser
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ba_response_parser = function(type = NA, parser = NULL) {
+  #create a parser if not provided
+  if (is.null(parser)) {
+    if (type == "json->df") {
+      parser = quote(data.frame(jsonlite::fromJSON(httr::content(response,
+                                                                 as = "text",
+                                                                 encoding = "UTF-8"),
+                                                   flatten = TRUE),
+                                stringsAsFactors = FALSE))
+    } else if (type == "json->list") {
+      parser = quote(as.list(jsonlite::fromJSON(httr::content(response,
+                                                              as = "text",
+                                                              encoding = "UTF-8"),
+                                                flatten = TRUE)))
+    } else {
+      stop("Internal Error: Specify the parser expression!", call. = TRUE)
+    }
+  }
+  # parse the response
+  output = eval(parser, envir = parent.frame())
+  return(output)
+}
+
 #' General skeleton for all functions in the package
 #'
 #' @param call_function
@@ -235,22 +267,43 @@ rba_ba_translate = function(http_status, verbose = TRUE){
 #' @param verbose
 #' @param response_parser
 #' @param diagnostics
+#' @param parser_type
+#' @param user_agent
+#' @param progress_bar
 #'
 #' @return
 #' @export
 #'
 #' @examples
 rba_ba_skeletion = function(call_function,
-                            response_parser,
-                            no_interet_retry_max = 1,
-                            no_internet_wait_time = 10,
+                            response_parser = NULL,
+                            parser_type = NA,
+                            user_agent = FALSE,
+                            progress_bar = FALSE,
                             verbose = FALSE,
-                            diagnostics = FALSE){
-  # Make API Call
-  output = eval(call_function, envir = parent.frame())
+                            diagnostics = FALSE,
+                            no_interet_retry_max = 1,
+                            no_internet_wait_time = 10) {
+  ## 1 Make API Call
+  call_function = as.list(call_function)
+  if (diagnostics == TRUE) {
+    call_function = append(call_function,
+                           quote(httr::verbose()))
+  }
+  if (progress_bar == TRUE) {
+    call_function = append(call_function,
+                           quote(httr::progress()))
+  }
+  if (user_agent == TRUE) {
+    call_function = append(call_function,
+                           quote(httr::user_agent(getOption("rba_ua"))))
+  }
+  call_function = as.call(call_function)
 
-  # check the API call's output
-  if (as.character(output$status) != "200"){
+  response = eval(call_function, envir = parent.frame())
+
+  ## 2 Check the API call's response
+  if (as.character(response$status) != "200"){
     ## check if there is an internet connection
     net_connected = rba_ba_internet_handler(retry_max = no_interet_retry_max,
                                             wait_time = no_internet_wait_time,
@@ -258,18 +311,19 @@ rba_ba_skeletion = function(call_function,
                                             diagnostics = diagnostics)
     if (net_connected == TRUE) {
       ## the problem is not related to the internet connectivity
-      stop(rba_ba_translate(output$status_code), call. = diagnostics)
+      stop(rba_ba_translate(response$status_code), call. = diagnostics)
     } else {
-      ## the system is connected to the internet now
-      output = eval(call_function, envir = parent.frame())
-      if (as.character(output$status_code) != "200") {
-        stop(rba_ba_translate(output$status_code), call. = diagnostics)
+      ## the system is connected to the internet now, retrying
+      response = eval(call_function, envir = parent.frame())
+      if (as.character(response$status_code) != "200") {
+        stop(rba_ba_translate(response$status_code), call. = diagnostics)
       }
     }
   } else {
-    ### everything is ok (http status == 200), parse the request's output to a suitable format
-    final_output = eval(response_parser)
-
+    ## 3 everything is OK (http status == 200)
+    # parse the request's output to a suitable format
+    final_output = rba_ba_response_parser(type = parser_type,
+                                          parser = response_parser)
     return(final_output)
   }
 } # end of function
@@ -285,6 +339,25 @@ rba_ba_multi_batch = function(){
 
 } # end of function
 
+#' Add additional parameters to API call's body
+#'
+#' @param additional_pars
+#' @param call_body
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ba_body_add_pars = function(call_body, additional_pars) {
+  for(i in seq_along(additional_pars)){
+    if (additional_pars[[i]][[1]] == TRUE) {
+      call_body = append(call_body, additional_pars[[i]][[2]])
+    }
+  }
+  return(call_body)
+}
+
+#### Check Arguments #######
 
 #' Check provided Arguments
 #'
@@ -401,48 +474,4 @@ rba_ba_arguments_check = function(cons = NULL,
 
 
   return(TRUE)
-}
-
-#' Add additional parameters to API call's body
-#'
-#' @param additional_pars
-#' @param call_body
-#'
-#' @return
-#' @export
-#'
-#' @examples
-rba_ba_body_add_pars = function(call_body, additional_pars) {
-  for(i in seq_along(additional_pars)){
-    if (additional_pars[[i]][[1]] == TRUE) {
-      call_body = append(call_body, additional_pars[[i]][[2]])
-    }
-  }
-  return(call_body)
-}
-
-#' add addition parameters to function call
-#'
-#' @param call_func_input
-#' @param progress_bar
-#' @param diagnostics
-#'
-#' @return
-#' @export
-#'
-#' @examples
-rba_ba_call_add_pars = function(call_func_input, diagnostics, progress_bar) {
-  if (diagnostics == TRUE) {
-    call_func_input = as.list(call_func_input)
-    call_func_input = as.call(append(call_func_input,
-                                     quote(httr::verbose())))
-  }
-
-  if (progress_bar == TRUE) {
-    call_func_input = as.list(call_func_input)
-    call_func_input = as.call(append(call_func_input,
-                                     quote(httr::progress())))
-  }
-
-  return(call_func_input)
 }

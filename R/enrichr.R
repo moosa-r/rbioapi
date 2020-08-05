@@ -15,8 +15,8 @@
 #'
 #' @examples
 rba_enrichr_info = function(verbose = TRUE,
-                            progress_bar = FALSE,
                             store_in_options = TRUE,
+                            progress_bar = FALSE,
                             diagnostics = FALSE) {
   ## Check input arguments
   invisible(rba_ba_arguments_check(cons = list(list(arg = verbose,
@@ -37,25 +37,18 @@ rba_enrichr_info = function(verbose = TRUE,
   ## make function-specific calls
   call_func_input = quote(httr::GET(url = getOption("rba_url_enrichr"),
                                     path = "Enrichr/datasetStatistics",
-                                    httr::user_agent(getOption("rba_ua")),
                                     httr::accept_json()
   ))
 
-  call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
-                                         diagnostics = diagnostics,
-                                         progress_bar = progress_bar)
-
-  response_parser_input = quote(data.frame(jsonlite::fromJSON(httr::content(output,
-                                                                            as = "text",
-                                                                            encoding = "UTF-8"),
-                                                              flatten = TRUE),
-                                           stringsAsFactors = FALSE))
-
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = response_parser_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->df",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
                                   verbose = verbose,
                                   diagnostics = diagnostics)
+
 
   ## save library names as global options
   if (store_in_options == TRUE && is.null(getOption("rba_enrichr_libs"))) {
@@ -120,23 +113,15 @@ rba_enrichr_add_list = function(gene_list,
   call_func_input = quote(httr::POST(url = getOption("rba_url_enrichr"),
                                      path = "Enrichr/addList",
                                      body = call_body,
-                                     httr::user_agent(getOption("rba_ua")),
                                      httr::accept_json()
   ))
 
-  call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
-                                         diagnostics = diagnostics,
-                                         progress_bar = progress_bar)
-
-
-  response_parser_input = quote(as.list(jsonlite::fromJSON(httr::content(output,
-                                                                         as = "text",
-                                                                         encoding = "UTF-8"),
-                                                           flatten = TRUE)))
-
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = response_parser_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
                                   verbose = verbose,
                                   diagnostics = diagnostics)
   return(final_output)
@@ -185,23 +170,15 @@ rba_enrichr_view_list = function(user_list_id,
   call_func_input = quote(httr::GET(url = getOption("rba_url_enrichr"),
                                     path = "Enrichr/view",
                                     query = call_query,
-                                    httr::user_agent(getOption("rba_ua")),
                                     httr::accept_json()
   ))
 
-  call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
-                                         diagnostics = diagnostics,
-                                         progress_bar = progress_bar)
-
-
-  response_parser_input = quote(as.list(jsonlite::fromJSON(httr::content(output,
-                                                                         as = "text",
-                                                                         encoding = "UTF-8"),
-                                                           flatten = TRUE)))
-
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = response_parser_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
                                   verbose = verbose,
                                   diagnostics = diagnostics)
   return(final_output)
@@ -219,30 +196,23 @@ rba_enrichr_view_list = function(user_list_id,
 #' @export
 #'
 #' @examples
-rba_enrichr_enrich_internal = function(user_list_id_input,
-                                       gene_set_library_input,
-                                       verbose_input = FALSE,
-                                       progress_bar_input = FALSE,
-                                       diagnostics_input = FALSE) {
+rba_enrichr_enrich_internal = function(user_list_id,
+                                       gene_set_library,
+                                       verbose = FALSE,
+                                       progress_bar = FALSE,
+                                       diagnostics = FALSE) {
   ## build GET API request's query
-  call_query = list("userListId" = user_list_id_input,
-                    "backgroundType" = gene_set_library_input)
+  call_query = list("userListId" = user_list_id,
+                    "backgroundType" = gene_set_library)
 
   ## make function-specific calls
   call_func_input = quote(httr::GET(url = getOption("rba_url_enrichr"),
                                     path = "Enrichr/export",
                                     query = call_query,
-                                    httr::accept("text/tab-separated-values"),
-                                    httr::user_agent(getOption("rba_ua"))
+                                    httr::accept("text/tab-separated-values")
   ))
 
-
-  call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
-                                         diagnostics = diagnostics_input,
-                                         progress_bar = progress_bar_input)
-
-
-  response_parser_input = quote(httr::content(output,
+  response_parser_input = quote(httr::content(response,
                                               as = "text",
                                               type = "text/tab-separated-values",
                                               encoding = "UTF-8"))
@@ -250,8 +220,11 @@ rba_enrichr_enrich_internal = function(user_list_id_input,
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
                                   response_parser = response_parser_input,
-                                  verbose = verbose_input,
-                                  diagnostics = diagnostics_input)
+                                  parser_type = NA,
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
 
   final_output = utils::read.delim(textConnection(final_output),
                                    sep = "\t", header = TRUE)
@@ -346,11 +319,11 @@ rba_enrichr_enrich = function(user_list_id,
               " using Enrichr library: ", gene_set_library)
     }
 
-    final_output = rba_enrichr_enrich_internal(user_list_id_input = user_list_id,
-                                               gene_set_library_input = gene_set_library,
-                                               verbose_input = diagnostics,
-                                               progress_bar_input = progress_bar,
-                                               diagnostics_input = diagnostics)
+    final_output = rba_enrichr_enrich_internal(user_list_id = user_list_id,
+                                               gene_set_library = gene_set_library,
+                                               verbose = verbose,
+                                               progress_bar = progress_bar,
+                                               diagnostics = diagnostics)
     return(final_output)
 
   } else if (run_mode == "multiple") {
@@ -375,11 +348,11 @@ rba_enrichr_enrich = function(user_list_id,
     }
 
     final_output = purrr::map(final_output, function(x){
-      lib_enrich_res = rba_enrichr_enrich_internal(user_list_id_input = user_list_id,
-                                                   gene_set_library_input = x,
-                                                   verbose_input = verbose,
-                                                   progress_bar_input = progress_bar,
-                                                   diagnostics_input = diagnostics)
+      lib_enrich_res = rba_enrichr_enrich_internal(user_list_id = user_list_id,
+                                                   gene_set_library = x,
+                                                   verbose = verbose,
+                                                   progress_bar = progress_bar,
+                                                   diagnostics = diagnostics)
       #advance the progress bar
       if (multi_libs_progress_bar == TRUE) {
         utils::setTxtProgressBar(pb, which(final_output == x))
@@ -446,24 +419,15 @@ rba_enrichr_gene_map = function(gene,
   call_func_input = quote(httr::GET(url = getOption("rba_url_enrichr"),
                                     path = "Enrichr/genemap",
                                     query = call_query,
-                                    httr::user_agent(getOption("rba_ua")),
                                     httr::accept_json()
   ))
 
-
-  call_func_input = rba_ba_call_add_pars(call_func_input = call_func_input,
-                                         diagnostics = diagnostics,
-                                         progress_bar = progress_bar)
-
-
-  response_parser_input = quote(as.list(jsonlite::fromJSON(httr::content(output,
-                                                                         as = "text",
-                                                                         encoding = "UTF-8"),
-                                                           flatten = TRUE)))
-
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = response_parser_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
                                   verbose = verbose,
                                   diagnostics = diagnostics)
   return(final_output)

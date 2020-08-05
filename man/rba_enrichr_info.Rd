@@ -6,8 +6,8 @@
 \usage{
 rba_enrichr_info(
   verbose = TRUE,
-  progress_bar = FALSE,
   store_in_options = TRUE,
+  progress_bar = FALSE,
   diagnostics = FALSE
 )
 }

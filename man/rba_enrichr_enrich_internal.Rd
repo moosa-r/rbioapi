@@ -5,11 +5,11 @@
 \title{Internal function for rba_enrichr_enrich}
 \usage{
 rba_enrichr_enrich_internal(
-  user_list_id_input,
-  gene_set_library_input,
-  verbose_input = FALSE,
-  progress_bar_input = FALSE,
-  diagnostics_input = FALSE
+  user_list_id,
+  gene_set_library,
+  verbose = FALSE,
+  progress_bar = FALSE,
+  diagnostics = FALSE
 )
 }
 \arguments{

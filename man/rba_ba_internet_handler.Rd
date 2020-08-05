@@ -6,7 +6,7 @@
 \usage{
 rba_ba_internet_handler(
   retry_max = 1,
-  wait_time = 1,
+  wait_time = 10,
   verbose = FALSE,
   diagnostics = FALSE
 )
