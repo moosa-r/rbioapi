@@ -20,10 +20,10 @@ rba_enrichr_info = function(verbose = TRUE,
                             diagnostics = FALSE) {
   ## Check input arguments
   invisible(rba_ba_arguments_check(cons = list(list(arg = verbose,
-                                                    name = "what",
+                                                    name = "verbose",
                                                     class = "logical"),
                                                list(arg = progress_bar,
-                                                    name = "verbose",
+                                                    name = "progress_bar",
                                                     class = "logical"),
                                                list(arg = diagnostics,
                                                     name = "diagnostics",

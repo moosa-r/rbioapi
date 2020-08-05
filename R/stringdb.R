@@ -103,7 +103,8 @@ rba_string_map_ids = function(input,
   response_parser_input = quote(data.frame(jsonlite::fromJSON(httr::content(output,
                                                                             as = "text",
                                                                             encoding = "UTF-8"),
-                                                              flatten = TRUE), stringsAsFactors = FALSE))
+                                                              flatten = TRUE),
+                                           stringsAsFactors = FALSE))
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
