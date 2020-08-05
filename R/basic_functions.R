@@ -59,10 +59,14 @@ rba_ba_internet_handler = function(retry_max = 1,
 rba_ba_api_check = function(url, diagnostics = FALSE){
   if (diagnostics == TRUE){
     test_result = try(httr::status_code(httr::HEAD(url,
+                                                   httr::user_agent(getOption("rba_ua")),
                                                    httr::verbose())),
                       silent = TRUE)
   } else {
-    test_result = try(httr::status_code(httr::HEAD(url)), silent = TRUE)
+    test_result = try(httr::status_code(httr::HEAD(url,
+                                                   httr::user_agent(getOption("rba_ua"))
+                                                   )),
+                      silent = TRUE)
   }
   if (is.numeric(test_result)) {
     if (test_result == 200) {
@@ -89,13 +93,15 @@ rba_ba_api_check = function(url, diagnostics = FALSE){
 rba_connection_test = function(diagnostics = FALSE) {
   message("Checking Your connection to the Databases Currently Supported by rbioapi:")
 
-  urls = list("STRING" = paste0(getOption("url_string"), "/api/json/version"),
-              "Enrichr" = paste0(getOption("url_enrichr"), "/Enrichr")
+  urls = list("STRING" = paste0(getOption("rba_url_string"), "/api/json/version"),
+              "Enrichr" = paste0(getOption("rba_url_enrichr"), "/Enrichr")
   )
 
   cat("-", "Internet", ":\r\n")
   google = try(httr::status_code(httr::HEAD("https://www.google.com/",
-                                            if (diagnostics) httr::verbose())
+                                            if (diagnostics) httr::verbose(),
+                                            httr::user_agent(getOption("rba_ua"))
+                                            )
   ), silent = TRUE)
 
   if (google == 200) {
