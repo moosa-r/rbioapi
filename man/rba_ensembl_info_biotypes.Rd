@@ -10,7 +10,6 @@ rba_ensembl_info_biotypes(
   species,
   verbose = TRUE,
   progress_bar = FALSE,
-  store_in_options = TRUE,
   diagnostics = FALSE
 )
 }

@@ -62,12 +62,12 @@ rba_string_map_ids = function(input,
   ## when querying more that 100 IDs, STRING returns a HTML page asking to specify the specie
   if (length(input) > 100 && is.na(species)) {
     stop("Input's length is ", length(input), ". Please Specify the specie. ",
-         "(Homo Sapiens NCBI taxa ID is 9606)\r\n")
+         "(Homo Sapiens NCBI taxa ID is 9606)")
   }
 
   if (verbose == TRUE){
     message("Mapping ", length(input),
-            " Input Identifiers to STRING Identifiers.\r\n")
+            " Input Identifiers to STRING Identifiers.")
   }
 
   ## build POST API request's body
@@ -200,12 +200,12 @@ rba_string_network_image = function(input,
   ## when querying more that 100 IDs, STRING returns a HTML page asking to specify the specie
   if (length(input) > 100 && is.na(species)) {
     stop("Input's length is ", length(input), ". Please Specify the specie. ",
-         "(Homo Sapiens NCBI taxa ID is 9606)\r\n")
+         "(Homo Sapiens NCBI taxa ID is 9606)")
   }
 
   if (verbose == TRUE){
     message("Getting STRING network image of ", length(input),
-            " Input Identifiers.\r\n")
+            " Input Identifiers.")
   }
 
   ## build POST API request's body
@@ -257,10 +257,10 @@ rba_string_network_image = function(input,
     save_to = file.path(getwd(), "STRING_network_images", file_name)
     dir.create(dirname(save_to), showWarnings = TRUE, recursive = TRUE)
     message("No file path was provided with 'save_to' argument.",
-            " Saving to:\r\n", save_to, "\r\n")
+            " Saving to:\r\n", save_to)
   } else {
     if (verbose == TRUE) {
-      message("Saving to:\r\n", save_to, "\r\n")
+      message("Saving to:\r\n", save_to)
     }
   }
   ## call API
@@ -335,11 +335,11 @@ rba_string_network_interactions = function(input,
   ## when querying more that 100 IDs, STRING returns a HTML page asking to specify the specie
   if (length(input) > 100 && is.na(species)) {
     stop("Input's length is ", length(input), ". Please Specify the specie. ",
-         "(Homo Sapiens NCBI taxa ID is 9606)\r\n")
+         "(Homo Sapiens NCBI taxa ID is 9606)")
   }
 
   if (verbose == TRUE){
-    message("Getting STRING Network interaction of ", length(input), " inputs.\r\n")
+    message("Getting STRING Network interaction of ", length(input), " inputs.")
   }
 
   ## build POST API request's body
@@ -437,11 +437,11 @@ rba_string_interaction_partners = function(input,
   ## when querying more that 100 IDs, STRING returns a HTML page asking to specify the specie
   if (length(input) > 100 && is.na(species)) {
     stop("Input's length is ", length(input), ". Please Specify the specie. ",
-         "(Homo Sapiens NCBI taxa ID is 9606)\r\n")
+         "(Homo Sapiens NCBI taxa ID is 9606)")
   }
 
   if (verbose == TRUE){
-    message("Retrieving Interacting partners of ", length(input), " inputs.\r\n")
+    message("Retrieving Interacting partners of ", length(input), " inputs.")
   }
 
   ## build POST API request's body
@@ -526,11 +526,11 @@ rba_string_homology = function(input,
   ## when querying more that 100 IDs, STRING returns a HTML page asking to specify the specie
   if (length(input) > 100 && is.na(species)) {
     stop("Input's length is ", length(input), ". Please Specify the specie. ",
-         "(Homo Sapiens NCBI taxa ID is 9606)\r\n")
+         "(Homo Sapiens NCBI taxa ID is 9606)")
   }
 
   if (verbose == TRUE){
-    message("Retrieving similarity scores between ", length(input), " inputs.\r\n")
+    message("Retrieving similarity scores between ", length(input), " inputs.")
   }
 
   ## build POST API request's body
@@ -615,11 +615,11 @@ rba_string_homology_best = function(input,
   ## when querying more that 100 IDs, STRING returns a HTML page asking to specify the specie
   if (length(input) > 100 && is.na(species)) {
     stop("Input's length is ", length(input), ". Please Specify the specie. ",
-         "(Homo Sapiens NCBI taxa ID is 9606)\r\n")
+         "(Homo Sapiens NCBI taxa ID is 9606)")
   }
 
   if (verbose == TRUE){
-    message("Retrieving similarity scores between ", length(input), " inputs.\r\n")
+    message("Retrieving similarity scores between ", length(input), " inputs.")
   }
 
   ## build POST API request's body
@@ -707,11 +707,11 @@ rba_string_enrichment = function(input,
   ## when querying more that 100 IDs, STRING returns a HTML page asking to specify the specie
   if (length(input) > 100 && is.na(species)) {
     stop("Input's length is ", length(input), ". Please Specify the specie. ",
-         "(Homo Sapiens NCBI taxa ID is 9606)\r\n")
+         "(Homo Sapiens NCBI taxa ID is 9606)")
   }
 
   if (verbose == TRUE){
-    message("Retrieving similarity scores between ", length(input), " inputs.\r\n")
+    message("Retrieving similarity scores between ", length(input), " inputs.")
   }
 
   ## build POST API request's body
@@ -799,11 +799,11 @@ rba_string_functional_annotation = function(input,
   ## when querying more that 100 IDs, STRING returns a HTML page asking to specify the specie
   if (length(input) > 100 && is.na(species)) {
     stop("Input's length is ", length(input), ". Please Specify the specie. ",
-         "(Homo Sapiens NCBI taxa ID is 9606)\r\n")
+         "(Homo Sapiens NCBI taxa ID is 9606)")
   }
 
   if (verbose == TRUE){
-    message("Retrieving similarity scores between ", length(input), " inputs.\r\n")
+    message("Retrieving similarity scores between ", length(input), " inputs.")
   }
 
   ## build POST API request's body
@@ -893,11 +893,11 @@ rba_string_ppi_enrichment = function(input,
   ## when querying more that 100 IDs, STRING returns a HTML page asking to specify the specie
   if (length(input) > 100 && is.na(species)) {
     stop("Input's length is ", length(input), ". Please Specify the specie. ",
-         "(Homo Sapiens NCBI taxa ID is 9606)\r\n")
+         "(Homo Sapiens NCBI taxa ID is 9606)")
   }
 
   if (verbose == TRUE){
-    message("Retrieving similarity scores between ", length(input), " inputs.\r\n")
+    message("Retrieving similarity scores between ", length(input), " inputs.")
   }
 
   ## build POST API request's body
@@ -950,7 +950,7 @@ rba_string_version = function(verbose = TRUE,
                               diagnostics = FALSE){
 
   if (verbose == TRUE){
-    message("Retrieving Current STRING database version.\r\n")
+    message("Retrieving Current STRING database version.")
   }
 
   ## Check input arguments
@@ -1016,7 +1016,7 @@ rba_string_info = function(what = "statistics",
 
   if (what == "statistics") {
     if (verbose == TRUE){
-      message("Retrieving STRNG statistics.\r\n")
+      message("Retrieving STRNG statistics.")
     }
 
     input_url = paste0("https://string-db.org/",
@@ -1027,7 +1027,7 @@ rba_string_info = function(what = "statistics",
 
   } else if (what == "organisms") {
     if (verbose == TRUE){
-      message("Retrieving STRNG Organism tubular view\r\n")
+      message("Retrieving STRNG Organism tubular view")
     }
 
     input_url = paste0("https://string-db.org/",

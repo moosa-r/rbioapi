@@ -12,7 +12,6 @@ rba_ensembl_info_assembly_region_name(
   synonyms = FALSE,
   verbose = TRUE,
   progress_bar = FALSE,
-  store_in_options = TRUE,
   diagnostics = FALSE
 )
 }

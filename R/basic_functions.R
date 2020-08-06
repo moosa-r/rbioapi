@@ -14,7 +14,7 @@ rba_ba_internet_handler = function(retry_max = 1,
                                    wait_time = 10,
                                    verbose = FALSE,
                                    diagnostics = FALSE) {
-  if (verbose == TRUE) {message("Testing the internet connection.\r\n")}
+  if (verbose == TRUE) {message("Testing the internet connection.")}
 
   net_status = httr::status_code(httr::HEAD("https://www.google.com/",
                                             if (diagnostics) httr::verbose()
@@ -29,7 +29,7 @@ rba_ba_internet_handler = function(retry_max = 1,
                                   wait_time,
                                   " seconds and retrying (retry count: ",
                                   retry_count, "/",
-                                  retry_max, ")\r\n")}
+                                  retry_max, ")")}
 
     Sys.sleep(wait_time)
     net_status = httr::status_code(httr::HEAD("https://www.google.com/",
@@ -39,9 +39,9 @@ rba_ba_internet_handler = function(retry_max = 1,
   } #end of while
 
   if (net_status == 200) {
-    if (verbose == TRUE) {message("Device is connected to the internet!\r\n")}
+    if (verbose == TRUE) {message("Device is connected to the internet!")}
   } else {
-    stop("NO internet connection! Terminating Code excutation!\r\n",
+    stop("NO internet connection! Terminating Code excutation!",
          call. = diagnostics)
   } #end of if net_test
   return(net_status == 200)
@@ -94,7 +94,8 @@ rba_connection_test = function(diagnostics = FALSE) {
   message("Checking Your connection to the Databases Currently Supported by rbioapi:")
 
   urls = list("STRING" = paste0(getOption("rba_url_string"), "/api/json/version"),
-              "Enrichr" = paste0(getOption("rba_url_enrichr"), "/Enrichr")
+              "Enrichr" = paste0(getOption("rba_url_enrichr"), "/Enrichr"),
+              "Ensembl" = paste0(getOption("rba_url_ensembl"), "/info/ping")
   )
 
   cat("-", "Internet", ":\r\n")
@@ -248,12 +249,18 @@ rba_ba_response_parser = function(type = NA, parser = NULL) {
     } else if (type == "json->list") {
       parser = quote(as.list(jsonlite::fromJSON(httr::content(response,
                                                               as = "text",
-                                                              encoding = "UTF-8"),
-                                                flatten = TRUE)))
+                                                              encoding = "UTF-8")
+      )))
+    } else if (type == "json->chr") {
+      parser = quote(as.character(jsonlite::fromJSON(httr::content(response,
+                                                              as = "text",
+                                                              encoding = "UTF-8")
+      )))
     } else {
       stop("Internal Error: Specify the parser expression!", call. = TRUE)
     }
   }
+
   # parse the response
   output = eval(parser, envir = parent.frame())
   return(output)
@@ -335,7 +342,7 @@ rba_ba_skeletion = function(call_function,
 #'
 #' @examples
 rba_ba_multi_batch = function(){
-  ############ to do
+  ############ TODO
 
 } # end of function
 
@@ -383,8 +390,18 @@ rba_ba_arguments_check = function(cons = NULL,
   # max_len,
   # min_val,
   # max_val
+  ## example:
+  # list(arg = progress_bar,
+  #      name = "progress_bar",
+  #      class = "logical")
 
-  ### "cond" should be an expression to be evaluated
+  ### "cond" should be sub-list containing an expression to be evaluated
+  ### and an optional error message.
+  # example:
+  # list(list(quote(genes < background),
+  #           "Provided genes length cannot be greater than the background")
+  #      )
+
   ###  Check  arguments ----
   for (i in seq_along(cons)){
     # only check if the provided argument is not NA or Null
@@ -392,7 +409,7 @@ rba_ba_arguments_check = function(cons = NULL,
       # check class
       if (!is.null(cons[[i]][["class"]]) &&
           !class(cons[[i]][["arg"]]) %in% cons[[i]][["class"]]) {
-        stop("\r\nInvalid Argument: ", cons[[i]][["name"]],
+        stop("Invalid Argument: ", cons[[i]][["name"]],
              " should be of class '", paste0(cons[[i]][["class"]],
                                              collapse = " or "),
              "'\r\n(Your provided argument is '",
@@ -402,7 +419,7 @@ rba_ba_arguments_check = function(cons = NULL,
       # check for allowed values
       if (!is.null(cons[[i]][["val"]]) &&
           !all(cons[[i]][["arg"]] %in% cons[[i]][["val"]])) {
-        stop("\r\nInvalid Argument: ", cons[[i]][["name"]],
+        stop("Invalid Argument: ", cons[[i]][["name"]],
              " should be either '", paste0(cons[[i]][["val"]],
                                            collapse = " or "),
              "'\r\n(Your provided argument is '",
@@ -412,7 +429,7 @@ rba_ba_arguments_check = function(cons = NULL,
       # check  length
       if (!is.null(cons[[i]][["len"]]) &&
           length(cons[[i]][["arg"]]) != cons[[i]][["len"]]) {
-        stop("\r\nInvalid Argument: ", cons[[i]][["name"]],
+        stop("Invalid Argument: ", cons[[i]][["name"]],
              " should of length ", cons[[i]][["len"]],
              "\r\n(Your provided argument's length is '",
              length(cons[[i]][["arg"]]), "')\r\n", call. = diagnostics)
@@ -421,7 +438,7 @@ rba_ba_arguments_check = function(cons = NULL,
       # check minimum length
       if (!is.null(cons[[i]][["min_len"]]) &&
           length(cons[[i]][["arg"]]) < cons[[i]][["min_len"]]) {
-        stop("\r\nInvalid Argument: ", cons[[i]][["name"]],
+        stop("Invalid Argument: ", cons[[i]][["name"]],
              " should of minimum length ", cons[[i]][["min_len"]],
              "\r\n(Your provided argument's length is '",
              length(cons[[i]][["arg"]]), "')\r\n", call. = diagnostics)
@@ -430,7 +447,7 @@ rba_ba_arguments_check = function(cons = NULL,
       # check maximum length
       if (!is.null(cons[[i]][["max_len"]]) &&
           length(cons[[i]][["arg"]]) > cons[[i]][["max_len"]]) {
-        stop("\r\nInvalid Argument: ", cons[[i]][["name"]],
+        stop("Invalid Argument: ", cons[[i]][["name"]],
              " should of maximum length ", cons[[i]][["max_len"]],
              "\r\n(Your provided argument's length is '",
              length(cons[[i]][["arg"]]), "')\r\n", call. = diagnostics)
@@ -439,7 +456,7 @@ rba_ba_arguments_check = function(cons = NULL,
       # check minimum value
       if (!is.null(cons[[i]][["min_val"]])
           && cons[[i]][["arg"]] < cons[[i]][["min_val"]]) {
-        stop("\r\nInvalid Argument: ", cons[[i]][["name"]],
+        stop("Invalid Argument: ", cons[[i]][["name"]],
              " should be equal or greather than ",
              cons[[i]][["min_val"]],
              "\r\n(Your provided argument is '",
@@ -449,7 +466,7 @@ rba_ba_arguments_check = function(cons = NULL,
       # check maximum value
       if (!is.null(cons[[i]][["max_value"]])
           && cons[[i]][["arg"]] > cons[[i]][["max_value"]]) {
-        stop("\r\nInvalid Argument: ", cons[[i]][["name"]],
+        stop("Invalid Argument: ", cons[[i]][["name"]],
              " should be equal or less than ",
              cons[[i]][["max_value"]],
              "\r\n(Your provided argument is '",
@@ -463,10 +480,16 @@ rba_ba_arguments_check = function(cons = NULL,
   ###  Check relationship between arguments ----
   if(!is.null(cond[[1]])){
     for (i in seq_along(cond)){
-      if (!eval(cond[[i]], envir = parent.frame())){
-        stop("\r\nArgument's conditions are not satisfied:\r\n'",
-             as.character(cond[[i]]), "' is FALSE.\r\n",
-             call. = diagnostics)
+      # check if the expression is TRUE
+      if (eval(cond[[i]][[1]], envir = parent.frame())){
+        # throw an error message
+        if (!is.null(cond[[i]][[2]])) {
+          stop(cond[[i]][[2]], call. = diagnostics)
+        } else {
+          stop("Argument's conditions are not satisfied:\r\n'",
+               as.character(cond[[i]]), "' is TRUE.\r\n",
+               call. = diagnostics)
+        }
       }
     }
   }

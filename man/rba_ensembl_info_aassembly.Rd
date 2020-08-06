@@ -11,7 +11,6 @@ rba_ensembl_info_aassembly(
   synonyms = FALSE,
   verbose = TRUE,
   progress_bar = FALSE,
-  store_in_options = TRUE,
   diagnostics = FALSE
 )
 }
