@@ -5,8 +5,8 @@
 \title{Retrieve a List of available libraries from Enrichr}
 \usage{
 rba_enrichr_info(
-  verbose = TRUE,
   store_in_options = TRUE,
+  verbose = TRUE,
   progress_bar = FALSE,
   diagnostics = FALSE
 )

@@ -14,24 +14,15 @@
 #' @export
 #'
 #' @examples
-rba_enrichr_info = function(verbose = TRUE,
-                            store_in_options = TRUE,
+rba_enrichr_info = function(store_in_options = TRUE,
+                            verbose = TRUE,
                             progress_bar = FALSE,
                             diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = store_in_options,
-                                                    name = "store_in_options",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = store_in_options,
+                                         name = "store_in_options",
+                                         class = "logical")),
+                        diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("Retrieving List of available libraries and statistics of Enrichr.")
@@ -80,22 +71,13 @@ rba_enrichr_add_list = function(gene_list,
                                 diagnostics = FALSE){
 
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = gene_list,
-                                                    name = "gene_list",
-                                                    class = "character"),
-                                               list(arg = description,
-                                                    name = "description",
-                                                    class = "character"),
-                                               list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = gene_list,
+                                         name = "gene_list",
+                                         class = "character"),
+                                    list(arg = description,
+                                         name = "description",
+                                         class = "character")),
+                        diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("Uploading ", length(gene_list),
@@ -147,20 +129,11 @@ rba_enrichr_view_list = function(user_list_id,
                                  diagnostics = FALSE){
 
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = user_list_id,
-                                                    name = "user_list_id",
-                                                    class = c("numeric", "integer"),
-                                                    len = 1),
-                                               list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = user_list_id,
+                                         name = "user_list_id",
+                                         class = c("numeric", "integer"),
+                                         len = 1)),
+                        diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("Retrieving your uploaded gene list under the provided ID.")
@@ -294,27 +267,18 @@ rba_enrichr_enrich = function(user_list_id,
   }
 
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = user_list_id,
-                                                    name = "user_list_id",
-                                                    class = c("numeric", "integer"),
-                                                    len = 1),
-                                               list(arg = gene_set_library,
-                                                    name = "gene_set_library",
-                                                    class = "character",
-                                                    val = getOption("rba_enrichr_libs")),
-                                               list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = multi_libs_progress_bar,
-                                                    name = "multi_libs_progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = user_list_id,
+                                         name = "user_list_id",
+                                         class = c("numeric", "integer"),
+                                         len = 1),
+                                    list(arg = gene_set_library,
+                                         name = "gene_set_library",
+                                         class = "character",
+                                         val = getOption("rba_enrichr_libs")),
+                                    list(arg = multi_libs_progress_bar,
+                                         name = "multi_libs_progress_bar",
+                                         class = "logical")),
+                        diagnostics = diagnostics))
   ## call Enrichr API
   if (run_mode == "single") {
     if (verbose == TRUE) {
@@ -387,23 +351,14 @@ rba_enrichr_gene_map = function(gene,
                                 diagnostics = FALSE){
 
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = gene,
-                                                    name = "gene",
-                                                    class = "character",
-                                                    len = 1),
-                                               list(arg = catagorize,
-                                                    name = "catagorize",
-                                                    class = "logical"),
-                                               list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = gene,
+                                         name = "gene",
+                                         class = "character",
+                                         len = 1),
+                                    list(arg = catagorize,
+                                         name = "catagorize",
+                                         class = "logical")),
+                        diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("Finding terms that contain gene: ", gene)
@@ -460,28 +415,19 @@ rba_enrichr = function(gene_list,
                        verbose = TRUE,
                        diagnostics = FALSE) {
 
-  invisible(rba_ba_arguments_check(cons = list(list(arg = gene_list,
-                                                    name = "gene_list",
-                                                    class = "character"),
-                                               list(arg = description,
-                                                    name = "description",
-                                                    class = "character"),
-                                               list(arg = regex_library_name,
-                                                    name = "regex_library_name",
-                                                    class = "logical"),
-                                               list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = multi_libs_progress_bar,
-                                                    name = "multi_libs_progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = gene_list,
+                                         name = "gene_list",
+                                         class = "character"),
+                                    list(arg = description,
+                                         name = "description",
+                                         class = "character"),
+                                    list(arg = regex_library_name,
+                                         name = "regex_library_name",
+                                         class = "logical"),
+                                    list(arg = multi_libs_progress_bar,
+                                         name = "multi_libs_progress_bar",
+                                         class = "logical")),
+                        diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("--Step 1:")

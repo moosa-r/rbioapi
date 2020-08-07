@@ -253,8 +253,8 @@ rba_ba_response_parser = function(type = NA, parser = NULL) {
       )))
     } else if (type == "json->chr") {
       parser = quote(as.character(jsonlite::fromJSON(httr::content(response,
-                                                              as = "text",
-                                                              encoding = "UTF-8")
+                                                                   as = "text",
+                                                                   encoding = "UTF-8")
       )))
     } else {
       stop("Internal Error: Specify the parser expression!", call. = TRUE)
@@ -376,24 +376,14 @@ rba_ba_body_add_pars = function(call_body, additional_pars) {
 #' @export
 #'
 #' @examples
-rba_ba_arguments_check = function(cons = NULL,
-                                  cond = NULL,
-                                  diagnostics = FALSE){
-  ### per each argument,the function input "cons" should be a named
+rba_ba_args = function(cons = NULL,
+                       cond = NULL,
+                       diagnostics = FALSE){
+  ## per each argument,the function input "cons" should be a named
   # sub-list with one of these members:
-  # arg,
-  # name,
-  # class,
-  # val
-  # len
-  # min_len,
-  # max_len,
-  # min_val,
-  # max_val
+  # arg, name, class, val, min_val, max_val, len, min_len, max_len,
   ## example:
-  # list(arg = progress_bar,
-  #      name = "progress_bar",
-  #      class = "logical")
+  # list(arg = progress_bar, name = "progress_bar", class = "logical")
 
   ### "cond" should be sub-list containing an expression to be evaluated
   ### and an optional error message.
@@ -402,7 +392,29 @@ rba_ba_arguments_check = function(cons = NULL,
   #           "Provided genes length cannot be greater than the background")
   #      )
 
-  ###  Check  arguments ----
+  ### 1 append extra arguments which occurs in most functions:
+  if (exists("verbose", envir = parent.frame())) {
+    cons = append(cons, list(list(arg = eval(parse(text = "verbose"),
+                                             envir = parent.frame()),
+                                  name = "verbose",
+                                  class = "logical",
+                                  len = 1)))
+  }
+  if (exists("progress_bar", envir = parent.frame())) {
+    cons = append(cons, list(list(arg = eval(parse(text = "progress_bar"),
+                                             envir = parent.frame()),
+                                  name = "progress_bar",
+                                  class = "logical",
+                                  len = 1)))
+  }
+  if (exists("diagnostics", envir = parent.frame())) {
+    cons = append(cons, list(list(arg = eval(parse(text = "diagnostics"),
+                                             envir = parent.frame()),
+                                  name = "diagnostics",
+                                  class = "logical",
+                                  len = 1)))
+  }
+  ### 2 Check  arguments
   for (i in seq_along(cons)){
     # only check if the provided argument is not NA or Null
     if (!is.na(cons[[i]][["arg"]][[1]]) & !is.null(cons[[i]][["arg"]][[1]])) {
@@ -477,7 +489,7 @@ rba_ba_arguments_check = function(cons = NULL,
     }
   }
 
-  ###  Check relationship between arguments ----
+  ###  3 Check relationship between arguments
   if(!is.null(cond[[1]])){
     for (i in seq_along(cond)){
       # check if the expression is TRUE

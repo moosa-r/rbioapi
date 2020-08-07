@@ -18,21 +18,12 @@ rba_ensembl_info_analysis = function(species,
                                      progress_bar = FALSE,
                                      diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = species,
-                                                    name = "species",
-                                                    class = c("numeric",
-                                                              "character"),
-                                                    len = 1),
-                                               list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = species,
+                                         name = "species",
+                                         class = c("numeric",
+                                                   "character"),
+                                         len = 1)),
+                        diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("List the names of analyses involved in generating Ensembl data")
@@ -79,27 +70,18 @@ rba_ensembl_info_aassembly = function(species,
                                       progress_bar = FALSE,
                                       diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = species,
-                                                    name = "species",
-                                                    class = c("numeric",
-                                                              "character"),
-                                                    len = 1),
-                                               list(arg = bands,
-                                                    name = "bands",
-                                                    class = "logical"),
-                                               list(arg = synonyms,
-                                                    name = "synonyms",
-                                                    class = "logical"),
-                                               list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = species,
+                                         name = "species",
+                                         class = c("numeric",
+                                                   "character"),
+                                         len = 1),
+                                    list(arg = bands,
+                                         name = "bands",
+                                         class = "logical"),
+                                    list(arg = synonyms,
+                                         name = "synonyms",
+                                         class = "logical")),
+                        diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("GET info/assembly/:species")
@@ -158,32 +140,23 @@ rba_ensembl_info_assembly_region_name = function(species,
                                                  progress_bar = FALSE,
                                                  diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = species,
-                                                    name = "species",
-                                                    class = c("numeric",
-                                                              "character"),
-                                                    len = 1),
-                                               list(arg = region_name,
-                                                    name = "region_name",
-                                                    class = c("numeric",
-                                                              "character"),
-                                                    len = 1),
-                                               list(arg = bands,
-                                                    name = "bands",
-                                                    class = "logical"),
-                                               list(arg = synonyms,
-                                                    name = "synonyms",
-                                                    class = "logical"),
-                                               list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = species,
+                                         name = "species",
+                                         class = c("numeric",
+                                                   "character"),
+                                         len = 1),
+                                    list(arg = region_name,
+                                         name = "region_name",
+                                         class = c("numeric",
+                                                   "character"),
+                                         len = 1),
+                                    list(arg = bands,
+                                         name = "bands",
+                                         class = "logical"),
+                                    list(arg = synonyms,
+                                         name = "synonyms",
+                                         class = "logical")),
+                        diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("GET info/assembly/:species/:region_name")
@@ -239,21 +212,12 @@ rba_ensembl_info_biotypes = function(species,
                                      progress_bar = FALSE,
                                      diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = species,
-                                                    name = "species",
-                                                    class = c("numeric",
-                                                              "character"),
-                                                    len = 1),
-                                               list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = species,
+                                         name = "species",
+                                         class = c("numeric",
+                                                   "character"),
+                                         len = 1)),
+                        diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("GET info/biotypes/:species")
@@ -299,30 +263,21 @@ rba_ensembl_info_biotypes_groups = function(group = NA,
                                             progress_bar = FALSE,
                                             diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = group,
-                                                    name = "group",
-                                                    class = "character",
-                                                    len = 1),
-                                               list(arg = object_type,
-                                                    name = "object_type",
-                                                    class = "character",
-                                                    val = c("gene",
-                                                            "transcript")),
-                                               list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   cond = list(list(!is.na(object_type) &&
-                                                      is.na(group),
-                                                    c("You can't provide ",
-                                                      "'object_type' without ",
-                                                      "providing 'group'."))),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = group,
+                                         name = "group",
+                                         class = "character",
+                                         len = 1),
+                                    list(arg = object_type,
+                                         name = "object_type",
+                                         class = "character",
+                                         val = c("gene",
+                                                 "transcript"))),
+                        cond = list(list(!is.na(object_type) &&
+                                           is.na(group),
+                                         c("You can't provide ",
+                                           "'object_type' without ",
+                                           "providing 'group'."))),
+                        diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("GET info/biotypes/groups/:group/:object_type")
@@ -378,25 +333,16 @@ rba_ensembl_info_biotypes_names = function(name = NA,
                                            progress_bar = FALSE,
                                            diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = name,
-                                                    name = "name",
-                                                    class = "character",
-                                                    len = 1),
-                                               list(arg = object_type,
-                                                    name = "object_type",
-                                                    class = "character",
-                                                    val = c("gene",
-                                                            "transcript")),
-                                               list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = name,
+                                         name = "name",
+                                         class = "character",
+                                         len = 1),
+                                    list(arg = object_type,
+                                         name = "object_type",
+                                         class = "character",
+                                         val = c("gene",
+                                                 "transcript"))),
+                        diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("GET info/biotypes/name/:name/:object_type")
@@ -446,24 +392,15 @@ rba_ensembl_info_compara_methods = function(class = NA,
                                             progress_bar = FALSE,
                                             diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = class,
-                                                    name = "class",
-                                                    class = "character",
-                                                    len = 1),
-                                               list(arg = compara,
-                                                    name = "compara",
-                                                    class = "character",
-                                                    len = 1),
-                                               list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = class,
+                                         name = "class",
+                                         class = "character",
+                                         len = 1),
+                                    list(arg = compara,
+                                         name = "compara",
+                                         class = "character",
+                                         len = 1)),
+                        diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("GET info/compara/methods")
@@ -515,24 +452,15 @@ rba_ensembl_info_compara_methods = function(method,
                                             progress_bar = FALSE,
                                             diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = method,
-                                                    name = "method",
-                                                    class = "character",
-                                                    len = 1),
-                                               list(arg = compara,
-                                                    name = "compara",
-                                                    class = "character",
-                                                    len = 1),
-                                               list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = method,
+                                         name = "method",
+                                         class = "character",
+                                         len = 1),
+                                    list(arg = compara,
+                                         name = "compara",
+                                         class = "character",
+                                         len = 1)),
+                        diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("GET info/compara/species_sets/:method")
@@ -579,16 +507,7 @@ rba_ensembl_info_comparas = function(verbose = TRUE,
                                      progress_bar = FALSE,
                                      diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("GET info/comparas")
@@ -629,16 +548,7 @@ rba_ensembl_info_data = function(verbose = TRUE,
                                  progress_bar = FALSE,
                                  diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("GET info/data")
@@ -678,16 +588,7 @@ rba_ensembl_info_eg_version = function(verbose = TRUE,
                                        progress_bar = FALSE,
                                        diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("GET info/eg_version")
@@ -733,34 +634,25 @@ rba_ensembl_info_external_dbs = function(species,
                                          progress_bar = FALSE,
                                          diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = species,
-                                                    name = "species",
-                                                    class = c("numeric",
-                                                              "character"),
-                                                    len = 1),
-                                               list(arg = filter,
-                                                    name = "filter",
-                                                    class = "character",
-                                                    len = 1),
-                                               list(arg = feature,
-                                                    name = "compara",
-                                                    class = "character",
-                                                    len = 1,
-                                                    val = c("dna_align_feature",
-                                                            "protein_align_feature",
-                                                            "unmapped_object",
-                                                            "xref",
-                                                            "seq_region_synonym")),
-                                               list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = species,
+                                         name = "species",
+                                         class = c("numeric",
+                                                   "character"),
+                                         len = 1),
+                                    list(arg = filter,
+                                         name = "filter",
+                                         class = "character",
+                                         len = 1),
+                                    list(arg = feature,
+                                         name = "compara",
+                                         class = "character",
+                                         len = 1,
+                                         val = c("dna_align_feature",
+                                                 "protein_align_feature",
+                                                 "unmapped_object",
+                                                 "xref",
+                                                 "seq_region_synonym"))),
+                        diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("GET info/external_dbs/:species")
@@ -809,16 +701,7 @@ rba_ensembl_info_divisions = function(verbose = TRUE,
                                       progress_bar = FALSE,
                                       diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("GET info/divisions")
@@ -862,24 +745,15 @@ rba_ensembl_info_genomes = function(genome_name,
                                     progress_bar = FALSE,
                                     diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = genome_name,
-                                                    name = "genome_name",
-                                                    class = "character",
-                                                    len = 1),
-                                               list(arg = expand,
-                                                    name = "expand",
-                                                    class = "logical",
-                                                    len = 1),
-                                               list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = genome_name,
+                                         name = "genome_name",
+                                         class = "character",
+                                         len = 1),
+                                    list(arg = expand,
+                                         name = "expand",
+                                         class = "logical",
+                                         len = 1)),
+                        diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("GET info/genomes/:genome_name")
@@ -930,24 +804,15 @@ rba_ensembl_info_genomes_accession = function(accession,
                                               progress_bar = FALSE,
                                               diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = accession,
-                                                    name = "accession",
-                                                    class = "character",
-                                                    len = 1),
-                                               list(arg = expand,
-                                                    name = "expand",
-                                                    class = "logical",
-                                                    len = 1),
-                                               list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = accession,
+                                         name = "accession",
+                                         class = "character",
+                                         len = 1),
+                                    list(arg = expand,
+                                         name = "expand",
+                                         class = "logical",
+                                         len = 1)),
+                        diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("GET info/genomes/accession/:accession")
@@ -998,24 +863,15 @@ rba_ensembl_info_genomes_assembly = function(assembly_id,
                                              progress_bar = FALSE,
                                              diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = assembly_id,
-                                                    name = "assembly_id",
-                                                    class = "character",
-                                                    len = 1),
-                                               list(arg = expand,
-                                                    name = "expand",
-                                                    class = "logical",
-                                                    len = 1),
-                                               list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = assembly_id,
+                                         name = "assembly_id",
+                                         class = "character",
+                                         len = 1),
+                                    list(arg = expand,
+                                         name = "expand",
+                                         class = "logical",
+                                         len = 1)),
+                        diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("GET info/genomes/assembly/:assembly_id")
@@ -1066,24 +922,15 @@ rba_ensembl_info_genomes_division = function(division_name,
                                              progress_bar = FALSE,
                                              diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = division_name,
-                                                    name = "division_name",
-                                                    class = "character",
-                                                    len = 1),
-                                               list(arg = expand,
-                                                    name = "expand",
-                                                    class = "logical",
-                                                    len = 1),
-                                               list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = division_name,
+                                         name = "division_name",
+                                         class = "character",
+                                         len = 1),
+                                    list(arg = expand,
+                                         name = "expand",
+                                         class = "logical",
+                                         len = 1)),
+                        diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("GET info/genomes/division/:division_name")
@@ -1134,25 +981,16 @@ rba_ensembl_info_genomes_taxonomy = function(taxon_name,
                                              progress_bar = FALSE,
                                              diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = taxon_name,
-                                                    name = "taxon_name",
-                                                    class = c("character",
-                                                              "numeric"),
-                                                    len = 1),
-                                               list(arg = expand,
-                                                    name = "expand",
-                                                    class = "logical",
-                                                    len = 1),
-                                               list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = taxon_name,
+                                         name = "taxon_name",
+                                         class = c("character",
+                                                   "numeric"),
+                                         len = 1),
+                                    list(arg = expand,
+                                         name = "expand",
+                                         class = "logical",
+                                         len = 1)),
+                        diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("GET info/genomes/taxonomy/:taxon_name")
@@ -1199,16 +1037,7 @@ rba_ensembl_info_rest = function(verbose = TRUE,
                                  progress_bar = FALSE,
                                  diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("GET info/rest")
@@ -1248,16 +1077,7 @@ rba_ensembl_info_software = function(verbose = TRUE,
                                      progress_bar = FALSE,
                                      diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("GET info/software")
@@ -1305,27 +1125,18 @@ rba_ensembl_info_species = function(division = NA,
                                     progress_bar = FALSE,
                                     diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = division,
-                                                    name = "expand",
-                                                    class = "character",
-                                                    len = 1),
-                                               list(arg = hide_strain_info,
-                                                    name = "hide_strain_info",
-                                                    class = "logical"),
-                                               list(arg = strain_collection,
-                                                    name = "strain_collection",
-                                                    class = "character",
-                                                    len = 1),
-                                               list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = division,
+                                         name = "expand",
+                                         class = "character",
+                                         len = 1),
+                                    list(arg = hide_strain_info,
+                                         name = "hide_strain_info",
+                                         class = "logical"),
+                                    list(arg = strain_collection,
+                                         name = "strain_collection",
+                                         class = "character",
+                                         len = 1)),
+                        diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("GET info/species")
@@ -1379,25 +1190,16 @@ rba_ensembl_info_variation_species = function(species,
                                               progress_bar = FALSE,
                                               diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = species,
-                                                    name = "species",
-                                                    class = c("character",
-                                                              "numeric"),
-                                                    len = 1),
-                                               list(arg = filter,
-                                                    name = "filter",
-                                                    class = "character",
-                                                    len = 1),
-                                               list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric"),
+                                         len = 1),
+                                    list(arg = filter,
+                                         name = "filter",
+                                         class = "character",
+                                         len = 1)),
+                        diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("GET info/variation/:species")
@@ -1446,20 +1248,11 @@ rba_ensembl_info_variation_consequence_types = function(rank = FALSE,
                                                         progress_bar = FALSE,
                                                         diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = rank,
-                                                    name = "rank",
-                                                    class = "logical",
-                                                    len = 1),
-                                               list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = rank,
+                                         name = "rank",
+                                         class = "logical",
+                                         len = 1)),
+                        diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("GET info/variation/consequence_types")
@@ -1509,25 +1302,16 @@ rba_ensembl_info_variation_populations = function(species,
                                                   progress_bar = FALSE,
                                                   diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = species,
-                                                    name = "species",
-                                                    class = c("character",
-                                                              "numeric"),
-                                                    len = 1),
-                                               list(arg = filter,
-                                                    name = "filter",
-                                                    class = "character",
-                                                    len = 1),
-                                               list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric"),
+                                         len = 1),
+                                    list(arg = filter,
+                                         name = "filter",
+                                         class = "character",
+                                         len = 1)),
+                        diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("GET info/variation/populations/:species")
@@ -1578,25 +1362,16 @@ rba_ensembl_info_variation_populations_species = function(species,
                                                           progress_bar = FALSE,
                                                           diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = species,
-                                                    name = "species",
-                                                    class = c("character",
-                                                              "numeric"),
-                                                    len = 1),
-                                               list(arg = population_name,
-                                                    name = "population_name",
-                                                    class = "character",
-                                                    len = 1),
-                                               list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric"),
+                                         len = 1),
+                                    list(arg = population_name,
+                                         name = "population_name",
+                                         class = "character",
+                                         len = 1)),
+                        diagnostics = diagnostics))
 
   if (verbose == TRUE){
     message("GET info/variation/populations/:species:/:population_name")
@@ -1650,42 +1425,33 @@ rba_ensembl_info_variation = function(species = NA,
                                       progress_bar = FALSE,
                                       diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = species,
-                                                    name = "species",
-                                                    class = c("character",
-                                                              "numeric"),
-                                                    len = 1),
-                                               list(arg = consequence_types,
-                                                    name = "consequence_types",
-                                                    class = "logical",
-                                                    len = 1),
-                                               list(arg = consequence_rank,
-                                                    name = "consequence_rank",
-                                                    class = "logical",
-                                                    len = 1),
-                                               list(arg = populations,
-                                                    name = "populations",
-                                                    class = c("character",
-                                                              "logical"),
-                                                    len = 1),
-                                               list(arg = species_filter,
-                                                    name = "species_filter",
-                                                    class = "character",
-                                                    len = 1),
-                                               list(arg = populations_filter,
-                                                    name = "populations_filter",
-                                                    class = "character",
-                                                    len = 1),
-                                               list(arg = verbose,
-                                                    name = "verbose",
-                                                    class = "logical"),
-                                               list(arg = progress_bar,
-                                                    name = "progress_bar",
-                                                    class = "logical"),
-                                               list(arg = diagnostics,
-                                                    name = "diagnostics",
-                                                    class = "logical")),
-                                   diagnostics = diagnostics))
+  invisible(rba_ba_args(cons = list(list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric"),
+                                         len = 1),
+                                    list(arg = consequence_types,
+                                         name = "consequence_types",
+                                         class = "logical",
+                                         len = 1),
+                                    list(arg = consequence_rank,
+                                         name = "consequence_rank",
+                                         class = "logical",
+                                         len = 1),
+                                    list(arg = populations,
+                                         name = "populations",
+                                         class = c("character",
+                                                   "logical"),
+                                         len = 1),
+                                    list(arg = species_filter,
+                                         name = "species_filter",
+                                         class = "character",
+                                         len = 1),
+                                    list(arg = populations_filter,
+                                         name = "populations_filter",
+                                         class = "character",
+                                         len = 1)),
+                        diagnostics = diagnostics))
   ## Decide which function to call
   if (consequence_types == TRUE) {
     if (verbose == TRUE && !is.na(species)) {
