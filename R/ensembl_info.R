@@ -18,7 +18,7 @@ rba_ensembl_info_analysis = function(species,
                                      progress_bar = FALSE,
                                      diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_arguments_check(cons = list(list(arg = "species",
+  invisible(rba_ba_arguments_check(cons = list(list(arg = species,
                                                     name = "species",
                                                     class = c("numeric",
                                                               "character"),
