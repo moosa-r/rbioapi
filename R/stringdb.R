@@ -944,7 +944,8 @@ rba_string_info = function(what = "statistics",
                        "organism_overview.html")
     input_html = xml2::read_html(input_url)
     output_table = rvest::html_table(input_html)[[1]]
-    output_table[[2]] = paste0("https://stringdb-static.org/", output_table[[2]][[2]])
+    output_table[[2]] = paste0("https://stringdb-static.org/",
+                               output_table[[2]][[2]])
   }
 
   return(output_table)

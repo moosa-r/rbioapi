@@ -16,9 +16,11 @@ rba_ba_internet_handler = function(retry_max = 1,
                                    diagnostics = FALSE) {
   if (verbose == TRUE) {message("Testing the internet connection.")}
 
-  net_status = httr::status_code(httr::HEAD("https://www.google.com/",
-                                            if (diagnostics) httr::verbose()
-  ))
+  net_status = try(httr::status_code(httr::HEAD("https://www.google.com/",
+                                                if (diagnostics)
+                                                  httr::verbose())),
+                   silent = TRUE)
+
 
 
   retry_count = 0
@@ -32,16 +34,17 @@ rba_ba_internet_handler = function(retry_max = 1,
                                   retry_max, ")")}
 
     Sys.sleep(wait_time)
-    net_status = httr::status_code(httr::HEAD("https://www.google.com/",
-                                              if (diagnostics) httr::verbose()
-    ))
+    net_status = try(httr::status_code(httr::HEAD("https://www.google.com/",
+                                                  if (diagnostics)
+                                                    httr::verbose())),
+                     silent = TRUE)
 
   } #end of while
 
   if (net_status == 200) {
     if (verbose == TRUE) {message("Device is connected to the internet!")}
   } else {
-    stop("NO internet connection! Terminating Code excutation!",
+    stop("No internet connection! Terminating code excutation!",
          call. = diagnostics)
   } #end of if net_test
   return(net_status == 200)
@@ -61,12 +64,12 @@ rba_ba_api_check = function(url, diagnostics = FALSE){
     test_result = try(httr::status_code(httr::HEAD(url,
                                                    httr::user_agent(getOption("rba_ua")),
                                                    httr::verbose())),
-                      silent = TRUE)
+                      silent = !diagnostics)
   } else {
     test_result = try(httr::status_code(httr::HEAD(url,
                                                    httr::user_agent(getOption("rba_ua"))
     )),
-    silent = TRUE)
+    silent = !diagnostics)
   }
   if (is.numeric(test_result)) {
     if (test_result == 200) {
@@ -91,11 +94,15 @@ rba_ba_api_check = function(url, diagnostics = FALSE){
 #'
 #' @examples
 rba_connection_test = function(diagnostics = FALSE) {
-  message("Checking Your connection to the Databases Currently Supported by rbioapi:")
+  message("Checking Your connection to the Databases",
+          " Currently Supported by rbioapi:")
 
-  urls = list("STRING" = paste0(getOption("rba_url_string"), "/api/json/version"),
-              "Enrichr" = paste0(getOption("rba_url_enrichr"), "/Enrichr"),
-              "Ensembl" = paste0(getOption("rba_url_ensembl"), "/info/ping")
+  urls = list("STRING" = paste0(getOption("rba_url_string"),
+                                "/api/json/version"),
+              "Enrichr" = paste0(getOption("rba_url_enrichr"),
+                                 "/Enrichr"),
+              "Ensembl" = paste0(getOption("rba_url_ensembl"),
+                                 "/info/ping")
   )
 
   cat("-", "Internet", ":\r\n")
@@ -109,7 +116,8 @@ rba_connection_test = function(diagnostics = FALSE) {
     cat("\U2705 Connected to the Internet.\r\n")
   } else {
     cat("\U274C No Internet Connection.\r\n")
-    stop("Could not resolve google.com", " . Check Your internet Connection.", call. = diagnostics)
+    stop("Could not resolve google.com", " . Check Your internet Connection.",
+         call. = diagnostics)
   }
 
   for (i in seq_along(urls)) {
@@ -266,6 +274,67 @@ rba_ba_response_parser = function(type = NA, parser = NULL) {
   return(output)
 }
 
+#' Internal function to make http request
+#'
+#' @param call_function
+#' @param skip_error
+#' @param no_interet_retry_max
+#' @param no_internet_wait_time
+#' @param verbose
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ba_api_call = function(call_function,
+                           skip_error = FALSE,
+                           no_interet_retry_max = 1,
+                           no_internet_wait_time = 10,
+                           verbose = TRUE,
+                           diagnostics = FALSE) {
+  ## 1 call API
+  response = try(eval(call_function, envir = parent.frame(n = 2)),
+                 silent = !diagnostics)
+  ## 2 check the internet connection & 5xx http status
+  if (class(response) != "response" ||
+      any(grep("^5\\d\\d", response$status_code))) {
+    ## 2.1 there is an internet connection or server issue
+    # wait for the internet connection
+    net_connected = rba_ba_internet_handler(retry_max = no_interet_retry_max,
+                                            wait_time = no_internet_wait_time,
+                                            verbose = verbose,
+                                            diagnostics = diagnostics)
+    if (net_connected == TRUE) {
+      ## 2.1.1 net_connection test is passed
+      response = try(eval(call_function, envir = parent.frame(n = 2)),
+                     silent = !diagnostics)
+    } else {
+      ## 2.1.2 net_connection test is not passed
+      stop("No internet connection! Terminating code excutation!",
+           call. = diagnostics)
+    }
+  } # end of step 2
+
+  ## 3 Decide what to return
+  if (class(response) != "response") {
+    ## 3.1 errors un-related to server's response
+    stop(response, call. = diagnostics)
+  } else if (as.character(response$status_code) != "200") {
+    ## 3.2 API call was not successful
+    if (skip_error == TRUE) {
+      return(rba_ba_translate(response$status_code, verbose = FALSE))
+    } else {
+      stop(rba_ba_translate(response$status_code, verbose = TRUE),
+           call. = diagnostics)
+    }
+  } else {
+    ## 3.3 Everything is OK (HTTP status == 200)
+    return(response)
+  }
+
+}
+
 #' General skeleton for all functions in the package
 #'
 #' @param call_function
@@ -283,15 +352,17 @@ rba_ba_response_parser = function(type = NA, parser = NULL) {
 #'
 #' @examples
 rba_ba_skeletion = function(call_function,
+                            batch_mode = FALSE,
                             response_parser = NULL,
                             parser_type = NA,
+                            skip_error = FALSE,
                             user_agent = FALSE,
                             progress_bar = FALSE,
-                            verbose = FALSE,
+                            verbose = TRUE,
                             diagnostics = FALSE,
                             no_interet_retry_max = 1,
                             no_internet_wait_time = 10) {
-  ## 1 Make API Call
+  ## 1 Build API Call expression
   call_function = as.list(call_function)
   if (diagnostics == TRUE) {
     call_function = append(call_function,
@@ -307,32 +378,24 @@ rba_ba_skeletion = function(call_function,
   }
   call_function = as.call(call_function)
 
-  response = eval(call_function, envir = parent.frame())
+  ## 2 Make API Call
+  response = rba_ba_api_call(call_function = call_function,
+                             skip_error = skip_error,
+                             no_interet_retry_max = no_interet_retry_max,
+                             no_internet_wait_time = no_internet_wait_time,
+                             verbose = verbose,
+                             diagnostics = diagnostics)
 
-  ## 2 Check the API call's response
-  if (as.character(response$status) != "200"){
-    ## check if there is an internet connection
-    net_connected = rba_ba_internet_handler(retry_max = no_interet_retry_max,
-                                            wait_time = no_internet_wait_time,
-                                            verbose = verbose,
-                                            diagnostics = diagnostics)
-    if (net_connected == TRUE) {
-      ## the problem is not related to the internet connectivity
-      stop(rba_ba_translate(response$status_code), call. = diagnostics)
-    } else {
-      ## the system is connected to the internet now, retrying
-      response = eval(call_function, envir = parent.frame())
-      if (as.character(response$status_code) != "200") {
-        stop(rba_ba_translate(response$status_code), call. = diagnostics)
-      }
-    }
-  } else {
-    ## 3 everything is OK (http status == 200)
-    # parse the request's output to a suitable format
+  ## 3 Parse the the response if possible
+  if (class(response) == "response") {
     final_output = rba_ba_response_parser(type = parser_type,
                                           parser = response_parser)
-    return(final_output)
+  } else {
+    final_output = response
   }
+
+  ## 4 Return the output
+  return(final_output)
 } # end of function
 
 #' A wrapper for General skeleton for long inputs

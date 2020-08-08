@@ -6,11 +6,13 @@
 \usage{
 rba_ba_skeletion(
   call_function,
+  batch_mode = FALSE,
   response_parser = NULL,
   parser_type = NA,
+  skip_error = FALSE,
   user_agent = FALSE,
   progress_bar = FALSE,
-  verbose = FALSE,
+  verbose = TRUE,
   diagnostics = FALSE,
   no_interet_retry_max = 1,
   no_internet_wait_time = 10

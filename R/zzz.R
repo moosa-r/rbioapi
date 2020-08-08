@@ -38,7 +38,7 @@ NULL
   options("rba_url_enrichr" = c("Enrichr" = "https://amp.pharm.mssm.edu"))
   options("rba_url_ensembl" = c("Ensembl" = "http://rest.ensembl.org"))
   ## save user agent for api Calls as an option
-  options("rba_ua" = "rbioapi R package")
+  options("rba_ua" = "rbioapi R package") #default user agent
 
 }
 
