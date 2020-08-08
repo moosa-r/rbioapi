@@ -301,3 +301,200 @@ rba_ensembl_xrefs_name = function(name,
   return(final_output)
 }
 
+#### EQTL Endpoints ####
+
+#' Returns all tissues currently available in the DB
+#'
+#' @param species
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_eqtl_tissue = function(species,
+                                   verbose = TRUE,
+                                   progress_bar = FALSE,
+                                   diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = species,
+                                         name = "species",
+                                         class = c("numeric",
+                                                   "character"))),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET eqtl/tissue/:species/")
+  }
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
+                                    path = paste0("eqtl/tissue/",
+                                                  species),
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Returns the p-value for each SNP in a given gene
+#'
+#' @param stable_id
+#' @param species
+#' @param statistic
+#' @param tissue
+#' @param variant_name
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_eqtl_gene = function(stable_id,
+                                 species,
+                                 statistic = NA,
+                                 tissue = NA,
+                                 variant_name = NA,
+                                 verbose = TRUE,
+                                 progress_bar = FALSE,
+                                 diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = stable_id,
+                                         name = "stable_id",
+                                         class = "character"),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("numeric",
+                                                   "character")),
+                                    list(arg = statistic,
+                                         name = "statistic",
+                                         class = "character"),
+                                    list(arg = tissue,
+                                         name = "tissue",
+                                         class = "character"),
+                                    list(arg = variant_name,
+                                         name = "variant_name",
+                                         class = "character")),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET eqtl/stable_id/:species/:stable_id")
+  }
+  ## build GET API request's query
+  additional_pars = list(list(!is.na(statistic),
+                              list("statistic" = statistic)),
+                         list(!is.na(tissue),
+                              list("tissue" = tissue)),
+                         list(!is.na(variant_name),
+                              list("variant_name" = variant_name)))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
+                                    path = paste0("eqtl/id/",
+                                                  species, "/", stable_id),
+                                    query = call_query,
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->df",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Returns the p-values for a SNP (e.g. rs123)
+#'
+#' @param variant_name
+#' @param species
+#' @param stable_id
+#' @param statistic
+#' @param tissue
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_eqtl_variant_name = function(variant_name,
+                                         species,
+                                         stable_id = NA,
+                                         statistic = NA,
+                                         tissue = NA,
+                                         verbose = TRUE,
+                                         progress_bar = FALSE,
+                                         diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = variant_name,
+                                         name = "variant_name",
+                                         class = "character"),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("numeric",
+                                                   "character")),
+                                    list(arg = stable_id,
+                                         name = "stable_id",
+                                         class = "character"),
+                                    list(arg = statistic,
+                                         name = "statistic",
+                                         class = "character"),
+                                    list(arg = tissue,
+                                         name = "tissue",
+                                         class = "character")),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET eqtl/variant_name/:species/:variant_name")
+  }
+  ## build GET API request's query
+  additional_pars = list(list(!is.na(stable_id),
+                              list("stable_id" = stable_id)),
+                         list(!is.na(statistic),
+                              list("statistic" = statistic)),
+                         list(!is.na(tissue),
+                              list("tissue" = tissue)))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
+                                    path = paste0("eqtl/variant_name/",
+                                                  species, "/", variant_name),
+                                    query = call_query,
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->df",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
