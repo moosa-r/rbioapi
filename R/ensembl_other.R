@@ -49,6 +49,1130 @@ rba_ensembl_archive = function(ids,
   return(final_output)
 }
 
+#### Comparative Genomics Endpoints ####
+
+#' Retrieves a cafe tree of the gene tree using the gene tree stable identifier
+#'
+#' @param genetree_id
+#' @param compara
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_cafe_genetree  = function(genetree_id,
+                                      compara = "vertebrates",
+                                      verbose = TRUE,
+                                      progress_bar = FALSE,
+                                      diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = genetree_id,
+                                         name = "genetree_id",
+                                         class = "character"),
+                                    list(arg = compara,
+                                         name = "compara",
+                                         class = "character")),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET cafe/genetree/id/:id")
+  }
+  ## build GET API request's query
+  additional_pars = list(list(compara != "vertebrates",
+                              list("compara" = compara)))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
+                                    path = paste0("cafe/genetree/id/",
+                                                  genetree_id),
+                                    query = call_query,
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+rba_ensembl_cafe_genetree_id  = function(genetree_id,
+                                         compara = "vertebrates",
+                                         verbose = TRUE,
+                                         progress_bar = FALSE,
+                                         diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = genetree_id,
+                                         name = "genetree_id",
+                                         class = "character"),
+                                    list(arg = compara,
+                                         name = "compara",
+                                         class = "character")),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET cafe/genetree/id/:id")
+  }
+  ## build GET API request's query
+  additional_pars = list(list(compara != "vertebrates",
+                              list("compara" = compara)))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
+                                    path = paste0("cafe/genetree/id/",
+                                                  genetree_id),
+                                    query = call_query,
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Retrieves the cafe tree of the gene tree that contains the gene /
+#' transcript / translation stable identifier
+#'
+#' @param ensembl_id
+#' @param compara
+#' @param db_type
+#' @param object_type
+#' @param species
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_cafe_genetree_member_id  = function(ensembl_id,
+                                                compara = "vertebrates",
+                                                db_type = NA,
+                                                object_type = NA,
+                                                species = NA,
+                                                verbose = TRUE,
+                                                progress_bar = FALSE,
+                                                diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = ensembl_id,
+                                         name = "ensembl_id",
+                                         class = "character"),
+                                    list(arg = compara,
+                                         name = "compara",
+                                         class = "character"),
+                                    list(arg = db_type,
+                                         name = "db_type",
+                                         class = "character"),
+                                    list(arg = object_type,
+                                         name = "object_type",
+                                         class = "character"),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric"))),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET cafe/genetree/member/id/:id")
+  }
+  ## build GET API request's query
+  additional_pars = list(list(compara != "vertebrates",
+                              list("compara" = compara)),
+                         list(!is.na(db_type),
+                              list("db_type" = db_type)),
+                         list(!is.na(object_type),
+                              list("object_type" = object_type)),
+                         list(!is.na(species),
+                              list("species" = species)))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
+                                    path = paste0("cafe/genetree/member/id/",
+                                                  ensembl_id),
+                                    query = call_query,
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Retrieves the cafe tree of the gene tree that contains the gene
+#' identified by a symbol
+#'
+#' @param gene_symbol
+#' @param species
+#' @param compara
+#' @param db_type
+#' @param external_db
+#' @param object_type
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_cafe_genetree_member_symbol  = function(gene_symbol,
+                                                    species,
+                                                    compara = "vertebrates",
+                                                    db_type = "core",
+                                                    external_db = NA,
+                                                    object_type = NA,
+                                                    verbose = TRUE,
+                                                    progress_bar = FALSE,
+                                                    diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = gene_symbol,
+                                         name = "gene_symbol",
+                                         class = "character"),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric")),
+                                    list(arg = compara,
+                                         name = "compara",
+                                         class = "character"),
+                                    list(arg = db_type,
+                                         name = "db_type",
+                                         class = "character"),
+                                    list(arg = external_db,
+                                         name = "external_db",
+                                         class = "character"),
+                                    list(arg = object_type,
+                                         name = "object_type",
+                                         class = "character")),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET cafe/genetree/member/symbol/:species/:symbol")
+  }
+  ## build GET API request's query
+  additional_pars = list(list(compara != "vertebrates",
+                              list("compara" = compara)),
+                         list(db_type != "core",
+                              list("db_type" = db_type)),
+                         list(!is.na(external_db),
+                              list("external_db" = external_db)),
+                         list(!is.na(object_type),
+                              list("object_type" = object_type)))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
+                                    path = paste0("cafe/genetree/member/symbol/",
+                                                  species, "/",
+                                                  gene_symbol),
+                                    query = call_query,
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Retrieves a family information using the family stable identifier
+#'
+#' @param familiy_id
+#' @param aligned
+#' @param compara
+#' @param member_source
+#' @param sequence
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_family_id  = function(familiy_id,
+                                  aligned = TRUE,
+                                  compara = "vertebrates",
+                                  member_source = "all",
+                                  sequence = "protein",
+                                  verbose = TRUE,
+                                  progress_bar = FALSE,
+                                  diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = familiy_id,
+                                         name = "familiy_id",
+                                         class = "character"),
+                                    list(arg = aligned,
+                                         name = "aligned",
+                                         class = "logical"),
+                                    list(arg = compara,
+                                         name = "compara",
+                                         class = "character"),
+                                    list(arg = member_source,
+                                         name = "member_source",
+                                         class = "character",
+                                         val = c("all",
+                                                 "ensembl",
+                                                 "uniprot")),
+                                    list(arg = sequence,
+                                         name = "sequence",
+                                         class = "character",
+                                         val = c("none",
+                                                 "cdna",
+                                                 "protein"))),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET family/id/:id")
+  }
+  ## build GET API request's query
+  additional_pars = list(list(aligned == FALSE,
+                              list("aligned" = "0")),
+                         list(compara != "vertebrates",
+                              list("compara" = compara)),
+                         list(member_source != "all",
+                              list("member_source" = member_source)),
+                         list(sequence != "protein",
+                              list("sequence" = sequence)))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
+                                    path = paste0("family/id/",
+                                                  familiy_id),
+                                    query = call_query,
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Retrieves the information for all the families that contains the gene /
+#' transcript / translation stable identifier
+#'
+#' @param familiy_id
+#' @param aligned
+#' @param compara
+#' @param member_source
+#' @param sequence
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_member_id  = function(ensembl_id,
+                                  aligned = TRUE,
+                                  compara = "vertebrates",
+                                  member_source = "all",
+                                  sequence = "protein",
+                                  verbose = TRUE,
+                                  progress_bar = FALSE,
+                                  diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = ensembl_id,
+                                         name = "ensembl_id",
+                                         class = "character"),
+                                    list(arg = aligned,
+                                         name = "aligned",
+                                         class = "logical"),
+                                    list(arg = compara,
+                                         name = "compara",
+                                         class = "character"),
+                                    list(arg = member_source,
+                                         name = "member_source",
+                                         class = "character",
+                                         val = c("all",
+                                                 "ensembl",
+                                                 "uniprot")),
+                                    list(arg = sequence,
+                                         name = "sequence",
+                                         class = "character",
+                                         val = c("none",
+                                                 "cdna",
+                                                 "protein"))),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET family/member/id/:id")
+  }
+  ## build GET API request's query
+  additional_pars = list(list(aligned == FALSE,
+                              list("aligned" = "0")),
+                         list(compara != "vertebrates",
+                              list("compara" = compara)),
+                         list(member_source != "all",
+                              list("member_source" = member_source)),
+                         list(sequence != "protein",
+                              list("sequence" = sequence)))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
+                                    path = paste0("family/member/id/",
+                                                  ensembl_id),
+                                    query = call_query,
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Retrieves the information for all the families that contains the gene
+#' identified by a symbol
+#'
+#' @param gene_symbol
+#' @param species
+#' @param aligned
+#' @param compara
+#' @param db_type
+#' @param external_db
+#' @param member_source
+#' @param object_type
+#' @param sequence
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_member_symbol  = function(gene_symbol,
+                                      species,
+                                      aligned = TRUE,
+                                      compara = "vertebrates",
+                                      db_type = "core",
+                                      external_db = NA,
+                                      member_source = "all",
+                                      object_type = NA,
+                                      sequence = "protein",
+                                      verbose = TRUE,
+                                      progress_bar = FALSE,
+                                      diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = gene_symbol,
+                                         name = "gene_symbol",
+                                         class = "character"),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric")),
+                                    list(arg = aligned,
+                                         name = "aligned",
+                                         class = "logical"),
+                                    list(arg = compara,
+                                         name = "compara",
+                                         class = "character"),
+                                    list(arg = db_type,
+                                         name = "db_type",
+                                         class = "character"),
+                                    list(arg = external_db,
+                                         name = "external_db",
+                                         class = "character"),
+                                    list(arg = member_source,
+                                         name = "member_source",
+                                         class = "character",
+                                         val = c("all",
+                                                 "ensembl",
+                                                 "uniprot")),
+                                    list(arg = sequence,
+                                         name = "sequence",
+                                         class = "character",
+                                         val = c("none",
+                                                 "cdna",
+                                                 "protein"))),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET family/member/symbol/:species/:symbol")
+  }
+  ## build GET API request's query
+  additional_pars = list(list(aligned == FALSE,
+                              list("aligned" = "0")),
+                         list(compara != "vertebrates",
+                              list("compara" = compara)),
+                         list(db_type != "core",
+                              list("db_type" = db_type)),
+                         list(!is.na(external_db),
+                              list("external_db" = external_db)),
+                         list(member_source != "all",
+                              list("member_source" = member_source)),
+                         list(!is.na(object_type),
+                              list("object_type" = object_type)),
+                         list(sequence != "protein",
+                              list("sequence" = sequence)))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
+                                    path = paste0("family/member/symbol/",
+                                                  species, "/",
+                                                  gene_symbol),
+                                    query = call_query,
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Retrieves a gene tree for a gene tree stable identifier
+#'
+#' @param genetree_id
+#' @param aligned
+#' @param cigar_line
+#' @param cluterset_id
+#' @param compara
+#' @param prune_species
+#' @param prune_taxon
+#' @param sequence
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_genetree_id  = function(genetree_id,
+                                    aligned = FALSE,
+                                    cigar_line = FALSE,
+                                    cluterset_id = NA,
+                                    compara = "vertebrates",
+                                    prune_species = NA,
+                                    prune_taxon = NA,
+                                    sequence = "protein",
+                                    verbose = TRUE,
+                                    progress_bar = FALSE,
+                                    diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = genetree_id,
+                                         name = "genetree_id",
+                                         class = "character"),
+                                    list(arg = aligned,
+                                         name = "aligned",
+                                         class = "logical"),
+                                    list(arg = cigar_line,
+                                         name = "cigar_line",
+                                         class = "logical"),
+                                    list(arg = cluterset_id,
+                                         name = "cluterset_id",
+                                         class = "character"),
+                                    list(arg = compara,
+                                         name = "compara",
+                                         class = "character"),
+                                    list(arg = prune_species,
+                                         name = "prune_species",
+                                         class = "character"),
+                                    list(arg = prune_taxon,
+                                         name = "prune_taxon",
+                                         class = "character"),
+                                    list(arg = sequence,
+                                         name = "sequence",
+                                         class = "character",
+                                         val = c("none",
+                                                 "cdna",
+                                                 "protein"))),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET genetree/id/:id")
+  }
+  ## build GET API request's query
+  additional_pars = list(list(aligned == TRUE,
+                              list("aligned" = "1")),
+                         list(cigar_line == TRUE,
+                              list("cigar_line" = "1")),
+                         list(!is.na(cluterset_id),
+                              list("cluterset_id" = cluterset_id)),
+                         list(compara != "vertebrates",
+                              list("compara" = compara)),
+                         list(!is.na(prune_species),
+                              list("prune_species" = prune_species)),
+                         list(!is.na(prune_taxon),
+                              list("prune_taxon" = prune_taxon)),
+                         list(sequence != "protein",
+                              list("sequence" = sequence)))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
+                                    path = paste0("genetree/id/",
+                                                  genetree_id),
+                                    query = call_query,
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Retrieves the gene tree that contains the gene identified by a symbol
+#'
+#' @param gene_symbol
+#' @param species
+#' @param aligned
+#' @param cigar_line
+#' @param cluterset_id
+#' @param compara
+#' @param db_type
+#' @param external_db
+#' @param object_type
+#' @param prune_species
+#' @param prune_taxon
+#' @param sequence
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_genetree_member_symbol  = function(gene_symbol,
+                                               species,
+                                               aligned = FALSE,
+                                               cigar_line = FALSE,
+                                               cluterset_id = NA,
+                                               compara = "vertebrates",
+                                               db_type = "core",
+                                               external_db = NA,
+                                               object_type = NA,
+                                               prune_species = NA,
+                                               prune_taxon = NA,
+                                               sequence = "protein",
+                                               verbose = TRUE,
+                                               progress_bar = FALSE,
+                                               diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = gene_symbol,
+                                         name = "gene_symbol",
+                                         class = "character"),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric")),
+                                    list(arg = aligned,
+                                         name = "aligned",
+                                         class = "logical"),
+                                    list(arg = cigar_line,
+                                         name = "cigar_line",
+                                         class = "logical"),
+                                    list(arg = cluterset_id,
+                                         name = "cluterset_id",
+                                         class = "character"),
+                                    list(arg = compara,
+                                         name = "compara",
+                                         class = "character"),
+                                    list(arg = db_type,
+                                         name = "db_type",
+                                         class = "character"),
+                                    list(arg = external_db,
+                                         name = "external_db",
+                                         class = "character"),
+                                    list(arg = object_type,
+                                         name = "object_type",
+                                         class = "character"),
+                                    list(arg = prune_species,
+                                         name = "prune_species",
+                                         class = "character"),
+                                    list(arg = prune_taxon,
+                                         name = "prune_taxon",
+                                         class = "character"),
+                                    list(arg = sequence,
+                                         name = "sequence",
+                                         class = "character",
+                                         val = c("none",
+                                                 "cdna",
+                                                 "protein"))),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET genetree/member/symbol/:species/:symbol")
+  }
+  ## build GET API request's query
+  additional_pars = list(list(aligned == TRUE,
+                              list("aligned" = "1")),
+                         list(cigar_line == TRUE,
+                              list("cigar_line" = "1")),
+                         list(!is.na(cluterset_id),
+                              list("cluterset_id" = cluterset_id)),
+                         list(compara != "vertebrates",
+                              list("compara" = compara)),
+                         list(db_type != "core",
+                              list("db_type" = db_type)),
+                         list(!is.na(external_db),
+                              list("external_db" = external_db)),
+                         list(!is.na(object_type),
+                              list("object_type" = object_type)),
+                         list(!is.na(prune_species),
+                              list("prune_species" = prune_species)),
+                         list(!is.na(prune_taxon),
+                              list("prune_taxon" = prune_taxon)),
+                         list(sequence != "protein",
+                              list("sequence" = sequence)))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
+                                    path = paste0("genetree/member/symbol/",
+                                                  species, "/",
+                                                  gene_symbol),
+                                    query = call_query,
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Retrieves genomic alignments as separate blocks based on a region and species
+#'
+#' @param region
+#' @param species
+#' @param aligned
+#' @param compact
+#' @param compara
+#' @param display_species_set
+#' @param mask
+#' @param method
+#' @param species_set
+#' @param species_set_group
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_alignment_region  = function(region,
+                                         species,
+                                         aligned = TRUE,
+                                         compact = TRUE,
+                                         compara = "vertebrates",
+                                         display_species_set = NA,
+                                         mask = NA,
+                                         method = "EPO",
+                                         species_set = NA,
+                                         species_set_group = "mammals",
+                                         verbose = TRUE,
+                                         progress_bar = FALSE,
+                                         diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = region,
+                                         name = "region",
+                                         class = "character"),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric")),
+                                    list(arg = aligned,
+                                         name = "aligned",
+                                         class = "logical"),
+                                    list(arg = compact,
+                                         name = "compact",
+                                         class = "logical"),
+                                    list(arg = compara,
+                                         name = "compara",
+                                         class = "character"),
+                                    list(arg = display_species_set,
+                                         name = "display_species_set",
+                                         class = "character"),
+                                    list(arg = mask,
+                                         name = "mask",
+                                         class = "character",
+                                         val = c("hard",
+                                                 "soft")),
+                                    list(arg = method,
+                                         name = "method",
+                                         class = "character",
+                                         val = c("EPO",
+                                                 "EPO_LOW_COVERAGE",
+                                                 "PECAN",
+                                                 "LASTZ_NET",
+                                                 "BLASTZ_NET",
+                                                 "TRANSLATED_BLAT_NET",
+                                                 "CACTUS_HAL",
+                                                 "CACTUS_HAL_PW")),
+                                    list(arg = species_set,
+                                         name = "species_set",
+                                         class = "character"),
+                                    list(arg = species_set_group,
+                                         name = "species_set_group",
+                                         class = "character")),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET alignment/region/:species/:region")
+  }
+  ## build GET API request's query
+  additional_pars = list(list(aligned == FALSE,
+                              list("aligned" = "0")),
+                         list(compact == FALSE,
+                              list("compact" = "0")),
+                         list(compara != "vertebrates",
+                              list("compara" = compara)),
+                         list(!is.na(display_species_set),
+                              list("display_species_set" = display_species_set)),
+                         list(!is.na(mask),
+                              list("mask" = mask)),
+                         list(method != "EPO",
+                              list("method" = method)),
+                         list(!is.na(species_set),
+                              list("species_set" = species_set)),
+                         list(!is.na(species_set_group),
+                              list("species_set_group" = species_set_group)))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
+                                    path = paste0("alignment/region/",
+                                                  species, "/",
+                                                  region),
+                                    query = call_query,
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Retrieves homology information (orthologs) by Ensembl gene id
+#'
+#' @param ensemble_id
+#' @param aligned
+#' @param cigar_line
+#' @param compara
+#' @param format
+#' @param sequence
+#' @param target_species
+#' @param target_taxon
+#' @param type
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_homology_id  = function(ensemble_id,
+                                    aligned = TRUE,
+                                    cigar_line = TRUE,
+                                    compara = "vertebrates",
+                                    format = "full",
+                                    sequence = "protein",
+                                    target_species = NA,
+                                    target_taxon = NA,
+                                    type = "all",
+                                    verbose = TRUE,
+                                    progress_bar = FALSE,
+                                    diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = ensemble_id,
+                                         name = "ensemble_id",
+                                         class = "character"),
+                                    list(arg = aligned,
+                                         name = "aligned",
+                                         class = "logical"),
+                                    list(arg = cigar_line,
+                                         name = "cigar_line",
+                                         class = "logical"),
+                                    list(arg = compara,
+                                         name = "compara",
+                                         class = "character"),
+                                    list(arg = format,
+                                         name = "format",
+                                         class = "character",
+                                         val = c("full",
+                                                 "condensed")),
+                                    list(arg = sequence,
+                                         name = "sequence",
+                                         class = "character",
+                                         val = c("none",
+                                                 "cdna",
+                                                 "protein")),
+                                    list(arg = target_species,
+                                         name = "target_species",
+                                         class = "character"),
+                                    list(arg = target_taxon,
+                                         name = "target_taxon",
+                                         class = "numeric"),
+                                    list(arg = type,
+                                         name = "type",
+                                         class = "character",
+                                         val = c("orthologues",
+                                                 "paralogues",
+                                                 "projections",
+                                                 "all"))),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET homology/id/:id")
+  }
+  ## build GET API request's query
+  additional_pars = list(list(aligned == FALSE,
+                              list("aligned" = "0")),
+                         list(cigar_line == FALSE,
+                              list("cigar_line" = "0")),
+                         list(compara != "vertebrates",
+                              list("compara" = compara)),
+                         list(format != "full",
+                              list("format" = format)),
+                         list(sequence != "protein",
+                              list("protein" = "protein")),
+                         list(!is.na(target_species),
+                              list("target_species" = target_species)),
+                         list(!is.na( target_taxon ),
+                              list(" target_taxon " =  target_taxon )),
+                         list(type != "all",
+                              list("type" = type)))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
+                                    path = paste0("homology/id/",
+                                                  ensemble_id),
+                                    query = call_query,
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Retrieves homology information (orthologs) by symbol
+#'
+#' @param gene_symbol
+#' @param species
+#' @param aligned
+#' @param cigar_line
+#' @param compara
+#' @param external_db
+#' @param format
+#' @param sequence
+#' @param target_species
+#' @param target_taxon
+#' @param type
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_homology_symbol  = function(gene_symbol,
+                                        species,
+                                        aligned = TRUE,
+                                        cigar_line = TRUE,
+                                        compara = "vertebrates",
+                                        external_db = NA,
+                                        format = "full",
+                                        sequence = "protein",
+                                        target_species = NA,
+                                        target_taxon = NA,
+                                        type = "all",
+                                        verbose = TRUE,
+                                        progress_bar = FALSE,
+                                        diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = gene_symbol,
+                                         name = "gene_symbol",
+                                         class = "character"),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric")),
+                                    list(arg = aligned,
+                                         name = "aligned",
+                                         class = "logical"),
+                                    list(arg = cigar_line,
+                                         name = "cigar_line",
+                                         class = "logical"),
+                                    list(arg = compara,
+                                         name = "compara",
+                                         class = "character"),
+                                    list(arg = external_db,
+                                         name = "external_db",
+                                         class = "character"),
+                                    list(arg = format,
+                                         name = "format",
+                                         class = "character",
+                                         val = c("full",
+                                                 "condensed")),
+                                    list(arg = sequence,
+                                         name = "sequence",
+                                         class = "character",
+                                         val = c("none",
+                                                 "cdna",
+                                                 "protein")),
+                                    list(arg = target_species,
+                                         name = "target_species",
+                                         class = "character"),
+                                    list(arg = target_taxon,
+                                         name = "target_taxon",
+                                         class = "numeric"),
+                                    list(arg = type,
+                                         name = "type",
+                                         class = "character",
+                                         val = c("orthologues",
+                                                 "paralogues",
+                                                 "projections",
+                                                 "all"))),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET homology/symbol/:species/:symbol")
+  }
+  ## build GET API request's query
+  additional_pars = list(list(aligned == FALSE,
+                              list("aligned" = "0")),
+                         list(cigar_line == FALSE,
+                              list("cigar_line" = "0")),
+                         list(compara != "vertebrates",
+                              list("compara" = compara)),
+                         list(!is.na(external_db),
+                              list("external_db" = external_db)),
+                         list(format != "full",
+                              list("format" = format)),
+                         list(sequence != "protein",
+                              list("protein" = "protein")),
+                         list(!is.na(target_species),
+                              list("target_species" = target_species)),
+                         list(!is.na( target_taxon ),
+                              list(" target_taxon " =  target_taxon )),
+                         list(type != "all",
+                              list("type" = type)))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
+                                    path = paste0("homology/symbol/",
+                                                  species, "/",
+                                                  gene_symbol),
+                                    query = call_query,
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
 #### Cross References Endpoints ####
 
 #' Looks up an external symbol and returns all Ensembl objects linked to it.
@@ -2028,7 +3152,7 @@ rba_ensembl_overlap_translation = function(ensembl_id,
   return(final_output)
 }
 
-#### 	Phenotype annotations Endpoints ####
+#### Phenotype annotations Endpoints ####
 
 #' Return phenotype annotations for genomic features given a phenotype
 #' ontology accession
@@ -2315,14 +3439,14 @@ rba_ensembl_phenotype_region = function(region,
 #'
 #' @examples
 rba_ensembl_phenotype_term = function(term,
-                                           species,
-                                           include_children = FALSE,
-                                           include_pubmed_id = FALSE,
-                                           include_review_status = FALSE,
-                                           source = "undef",
-                                           verbose = TRUE,
-                                           progress_bar = FALSE,
-                                           diagnostics = FALSE) {
+                                      species,
+                                      include_children = FALSE,
+                                      include_pubmed_id = FALSE,
+                                      include_review_status = FALSE,
+                                      source = "undef",
+                                      verbose = TRUE,
+                                      progress_bar = FALSE,
+                                      diagnostics = FALSE) {
   ## Check input arguments
   invisible(rba_ba_args(cons = list(list(arg = term,
                                          name = "term",
@@ -2382,3 +3506,479 @@ rba_ensembl_phenotype_term = function(term,
 
   return(final_output)
 }
+
+#### Regulation Endpoints ####
+
+#' Returns information about a specific microarray
+#'
+#' @param microarray
+#' @param vendor
+#' @param species
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_microarray_vendor = function(microarray,
+                                         vendor,
+                                         species,
+                                         verbose = TRUE,
+                                         progress_bar = FALSE,
+                                         diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = microarray,
+                                         name = "microarray",
+                                         class = "character"),
+                                    list(arg = vendor,
+                                         name = "vendor",
+                                         class = "character"),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric"))),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET regulatory/species/:species/microarray/:microarray/vendor/:vendor")
+  }
+
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
+                                    path = paste0("regulatory/species/",
+                                                  species,
+                                                  "/microarray/",
+                                                  microarray,
+                                                  "/vendor/",
+                                                  vendor),
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Returns information about all microarrays available for the given species
+#'
+#' @param species
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_microarray_species = function(species,
+                                          verbose = TRUE,
+                                          progress_bar = FALSE,
+                                          diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric"))),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET regulatory/species/:species/microarray")
+  }
+
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
+                                    path = paste0("regulatory/species/",
+                                                  species,
+                                                  "/microarray"),
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->df",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Returns information about a specific probe from a microarray
+#'
+#' @param microarray
+#' @param probe
+#' @param species
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_microarray_probe = function(microarray,
+                                        probe,
+                                        species,
+                                        verbose = TRUE,
+                                        progress_bar = FALSE,
+                                        diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = microarray,
+                                         name = "microarray",
+                                         class = "character"),
+                                    list(arg = probe,
+                                         name = "probe",
+                                         class = "character"),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric"))),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET regulatory/species/:species/microarray/:microarray/probe/:probe")
+  }
+
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
+                                    path = paste0("regulatory/species/",
+                                                  species,
+                                                  "/microarray/",
+                                                  microarray,
+                                                  "/probe/",
+                                                  probe),
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Returns information about a specific probe_set from a microarray
+#'
+#' @param microarray
+#' @param probe_set
+#' @param species
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_microarray_probe_set = function(microarray,
+                                            probe_set,
+                                            species,
+                                            verbose = TRUE,
+                                            progress_bar = FALSE,
+                                            diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = microarray,
+                                         name = "microarray",
+                                         class = "character"),
+                                    list(arg = probe_set,
+                                         name = "probe_set",
+                                         class = "character"),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric"))),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET regulatory/species/:species/microarray/:microarray/probe_set/:probe_set")
+  }
+
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
+                                    path = paste0("regulatory/species/",
+                                                  species,
+                                                  "/microarray/",
+                                                  microarray,
+                                                  "/probe_set/",
+                                                  probe_set),
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Returns information about all epigenomes available for the given species
+#'
+#' @param species
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_microarray_epigenome = function(species,
+                                            verbose = TRUE,
+                                            progress_bar = FALSE,
+                                            diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric"))),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET regulatory/species/:species/epigenome")
+  }
+
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
+                                    path = paste0("regulatory/species/",
+                                                  species,
+                                                  "/epigenome"),
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->df",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Return the specified binding matrix
+#'
+#' @param binding_matrix_id
+#' @param species
+#' @param unit
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_microarray_binding_matrix = function(binding_matrix_id,
+                                                 species,
+                                                 unit = "frequencies",
+                                                 verbose = TRUE,
+                                                 progress_bar = FALSE,
+                                                 diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = binding_matrix_id,
+                                         name = "binding_matrix_id",
+                                         class = "character"),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric")),
+                                    list(arg = unit,
+                                         name = "unit",
+                                         class = "character")),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET species/:species/binding_matrix/:binding_matrix_stable_id/")
+  }
+  ## build GET API request's query
+  additional_pars = list(list(!is.na(unit),
+                              list("unit" = unit)))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
+                                    path = paste0("species/",
+                                                  species,
+                                                  "/binding_matrix/",
+                                                  binding_matrix_id),
+                                    query = call_query,
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->df",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Returns a RegulatoryFeature given its stable ID
+#'
+#' @param regulatory_feature_id
+#' @param species
+#' @param activity
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_microarray_regulatory_feature  = function(regulatory_feature_id,
+                                                      species,
+                                                      activity = FALSE,
+                                                      verbose = TRUE,
+                                                      progress_bar = FALSE,
+                                                      diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = regulatory_feature_id,
+                                         name = "regulatory_feature_id",
+                                         class = "character"),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric")),
+                                    list(arg = activity,
+                                         name = "activity",
+                                         class = "logical")),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET regulatory/species/:species/id/:id")
+  }
+  ## build GET API request's query
+  additional_pars = list(list(activity == TRUE,
+                              list("activity" = "1")))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
+                                    path = paste0("regulatory/species/",
+                                                  species,
+                                                  "/id/",
+                                                  regulatory_feature_id),
+                                    query = call_query,
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->df",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#### Transcript Haplotypes ####
+
+#' Computes observed transcript haplotype sequences based on phased genotype data
+#'
+#' @param transcript_id
+#' @param species
+#' @param aligned_sequences
+#' @param samples
+#' @param sequence
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_transcript_haplotypes  = function(transcript_id,
+                                              species,
+                                              aligned_sequences = FALSE,
+                                              samples = FALSE,
+                                              sequence = FALSE,
+                                              verbose = TRUE,
+                                              progress_bar = FALSE,
+                                              diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = transcript_id,
+                                         name = "transcript_id",
+                                         class = "character"),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric")),
+                                    list(arg = aligned_sequences,
+                                         name = "aligned_sequences",
+                                         class = "logical"),
+                                    list(arg = samples,
+                                         name = "samples",
+                                         class = "logical"),
+                                    list(arg = sequence,
+                                         name = "sequence",
+                                         class = "logical")),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET transcript_haplotypes/:species/:id")
+  }
+  ## build GET API request's query
+  additional_pars = list(list(aligned_sequences == TRUE,
+                              list("aligned_sequences" = "1")),
+                         list(samples == TRUE,
+                              list("samples" = "1")),
+                         list(sequence == TRUE,
+                              list("sequence" = "1")))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
+                                    path = paste0("transcript_haplotypes/",
+                                                  species, "/",
+                                                  transcript_id),
+                                    query = call_query,
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
