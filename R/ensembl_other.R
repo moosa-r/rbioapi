@@ -1896,15 +1896,15 @@ rba_ensembl_ld_region = function(region,
 #' @export
 #'
 #' @examples
-rba_lookup_id = function(ids,
-                         db_type = NA,
-                         expand = FALSE,
-                         format = NA,
-                         object_type = NA,
-                         species = NA,
-                         verbose = TRUE,
-                         progress_bar = FALSE,
-                         diagnostics = FALSE) {
+rba_ensembl_lookup_id = function(ids,
+                                 db_type = NA,
+                                 expand = FALSE,
+                                 format = NA,
+                                 object_type = NA,
+                                 species = NA,
+                                 verbose = TRUE,
+                                 progress_bar = FALSE,
+                                 diagnostics = FALSE) {
   ## Check input arguments
   invisible(rba_ba_args(cons = list(list(arg = ids,
                                          name = "ids",
@@ -1986,13 +1986,13 @@ rba_lookup_id = function(ids,
 #' @export
 #'
 #' @examples
-rba_lookup_symbol = function(symbols,
-                             species,
-                             expand = FALSE,
-                             format = NA,
-                             verbose = TRUE,
-                             progress_bar = FALSE,
-                             diagnostics = FALSE) {
+rba_ensembl_lookup_symbol = function(symbols,
+                                     species,
+                                     expand = FALSE,
+                                     format = NA,
+                                     verbose = TRUE,
+                                     progress_bar = FALSE,
+                                     diagnostics = FALSE) {
   ## Check input arguments
   invisible(rba_ba_args(cons = list(list(arg = symbols,
                                          name = "symbols",
@@ -4227,6 +4227,1435 @@ rba_ensembl_transcript_haplotypes  = function(transcript_id,
                                                   species, "/",
                                                   transcript_id),
                                     query = call_query,
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#### VEP Endpoints ####
+
+#' Fetch variant consequences for multiple HGVS notations
+#'
+#' @param hgvs_notations
+#' @param species
+#' @param Blosum62
+#' @param CADD
+#' @param GeneSplicer
+#' @param LoF
+#' @param MaxEntScan
+#' @param Phenotypes
+#' @param SpliceAI
+#' @param SpliceRegion
+#' @param appris
+#' @param canonical
+#' @param ccds
+#' @param dbNSFP
+#' @param dbscSNV
+#' @param distance
+#' @param domains
+#' @param failed
+#' @param hgvs
+#' @param mane
+#' @param merged
+#' @param miRNA
+#' @param minimal
+#' @param numbers
+#' @param protein
+#' @param refseq
+#' @param shift_3prime
+#' @param shift_genomic
+#' @param transcript_id
+#' @param transcript_version
+#' @param tsl
+#' @param uniprot
+#' @param variant_class
+#' @param vcf_string
+#' @param xref_refseq
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_vep_hgvs = function(hgvs_notations,
+                                species,
+                                Blosum62 = FALSE,
+                                CADD = FALSE,
+                                GeneSplicer = FALSE,
+                                LoF = FALSE,
+                                MaxEntScan = FALSE,
+                                Phenotypes = FALSE,
+                                SpliceAI = FALSE,
+                                SpliceRegion = FALSE,
+                                appris = FALSE,
+                                canonical = FALSE,
+                                ccds = FALSE,
+                                dbNSFP = NA,
+                                dbscSNV = FALSE,
+                                distance = NA,
+                                domains = FALSE,
+                                failed = FALSE,
+                                hgvs = FALSE,
+                                mane = FALSE,
+                                merged = FALSE,
+                                miRNA = FALSE,
+                                minimal = FALSE,
+                                numbers = FALSE,
+                                protein = FALSE,
+                                refseq = FALSE,
+                                shift_3prime = FALSE,
+                                shift_genomic = FALSE,
+                                transcript_id = NA,
+                                transcript_version = FALSE,
+                                tsl = FALSE,
+                                uniprot = FALSE,
+                                variant_class = FALSE,
+                                vcf_string = FALSE,
+                                xref_refseq = FALSE,
+                                verbose = TRUE,
+                                progress_bar = FALSE,
+                                diagnostics = FALSE) {
+
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = hgvs_notations,
+                                         name = "hgvs_notations",
+                                         class = "character",
+                                         max_len = 200),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric")),
+                                    list(arg = Blosum62,
+                                         name = "Blosum62",
+                                         class = "logical"),
+                                    list(arg = CADD,
+                                         name = "CADD",
+                                         class = "logical"),
+                                    list(arg = GeneSplicer,
+                                         name = "GeneSplicer",
+                                         class = "logical"),
+                                    list(arg = LoF,
+                                         name = "LoF",
+                                         class = "logical"),
+                                    list(arg = MaxEntScan,
+                                         name = "MaxEntScan",
+                                         class = "logical"),
+                                    list(arg = Phenotypes,
+                                         name = "Phenotypes",
+                                         class = "logical"),
+                                    list(arg = SpliceAI,
+                                         name = "SpliceAI",
+                                         class = "logical"),
+                                    list(arg = SpliceRegion,
+                                         name = "SpliceRegion",
+                                         class = "logical"),
+                                    list(arg = appris,
+                                         name = "appris",
+                                         class = "logical"),
+                                    list(arg = canonical,
+                                         name = "canonical",
+                                         class = "logical"),
+                                    list(arg = ccds,
+                                         name = "ccds",
+                                         class = "logical"),
+                                    list(arg = dbNSFP,
+                                         name = "dbNSFP",
+                                         class = "character"),
+                                    list(arg = dbscSNV,
+                                         name = "dbscSNV",
+                                         class = "logical"),
+                                    list(arg = distance,
+                                         name = "distance",
+                                         class = "numeric"),
+                                    list(arg = domains,
+                                         name = "domains",
+                                         class = "logical"),
+                                    list(arg = failed,
+                                         name = "failed",
+                                         class = "logical"),
+                                    list(arg = hgvs,
+                                         name = "hgvs",
+                                         class = "logical"),
+                                    list(arg = mane,
+                                         name = "mane",
+                                         class = "logical"),
+                                    list(arg = merged,
+                                         name = "merged",
+                                         class = "logical"),
+                                    list(arg = miRNA,
+                                         name = "miRNA",
+                                         class = "logical"),
+                                    list(arg = minimal,
+                                         name = "minimal",
+                                         class = "logical"),
+                                    list(arg = numbers,
+                                         name = "numbers",
+                                         class = "logical"),
+                                    list(arg = protein,
+                                         name = "protein",
+                                         class = "logical"),
+                                    list(arg = refseq,
+                                         name = "refseq",
+                                         class = "logical"),
+                                    list(arg = shift_3prime,
+                                         name = "shift_3prime",
+                                         class = "logical"),
+                                    list(arg = shift_genomic,
+                                         name = "shift_genomic",
+                                         class = "logical"),
+                                    list(arg = transcript_id,
+                                         name = "transcript_id",
+                                         class = "character"),
+                                    list(arg = transcript_version,
+                                         name = "transcript_version",
+                                         class = "logical"),
+                                    list(arg = tsl,
+                                         name = "tsl",
+                                         class = "logical"),
+                                    list(arg = uniprot,
+                                         name = "uniprot",
+                                         class = "logical"),
+                                    list(arg = variant_class,
+                                         name = "variant_class",
+                                         class = "logical"),
+                                    list(arg = vcf_string,
+                                         name = "vcf_string",
+                                         class = "logical"),
+                                    list(arg = xref_refseq,
+                                         name = "xref_refseq",
+                                         class = "logical")),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("POST vep/:species/hgvs")
+  }
+  ## build POST API request's query
+  additional_pars = list(list(Blosum62 == TRUE,
+                              list("Blosum62" = "1")),
+                         list(CADD == TRUE,
+                              list("CADD" = "1")),
+                         list(GeneSplicer == TRUE,
+                              list("GeneSplicer" = "1")),
+                         list(LoF == TRUE,
+                              list("LoF" = "1")),
+                         list(MaxEntScan == TRUE,
+                              list("MaxEntScan" = "1")),
+                         list(Phenotypes == TRUE,
+                              list("Phenotypes" = "1")),
+                         list(SpliceAI == TRUE,
+                              list("SpliceAI" = "1")),
+                         list(SpliceRegion == TRUE,
+                              list("SpliceRegion" = "1")),
+                         list(appris == TRUE,
+                              list("appris" = "1")),
+                         list(canonical == TRUE,
+                              list("canonical" = "1")),
+                         list(ccds == TRUE,
+                              list("ccds" = "1")),
+                         list(!is.na(dbNSFP),
+                              list("dbNSFP" = dbNSFP)),
+                         list(dbscSNV == TRUE,
+                              list("dbscSNV" = "1")),
+                         list(!is.na(distance),
+                              list("distance" = as.integer(distance))),
+                         list(domains == TRUE,
+                              list("domains" = "1")),
+                         list(failed == TRUE,
+                              list("failed" = "1")),
+                         list(hgvs == TRUE,
+                              list("hgvs" = "1")),
+                         list(mane == TRUE,
+                              list("mane" = "1")),
+                         list(merged == TRUE,
+                              list("merged" = "1")),
+                         list(miRNA == TRUE,
+                              list("miRNA" = "1")),
+                         list(minimal == TRUE,
+                              list("minimal" = "1")),
+                         list(numbers == TRUE,
+                              list("numbers" = "1")),
+                         list(protein == TRUE,
+                              list("protein" = "1")),
+                         list(refseq == TRUE,
+                              list("refseq" = "1")),
+                         list(shift_3prime == TRUE,
+                              list("shift_3prime" = "1")),
+                         list(shift_genomic == TRUE,
+                              list("shift_genomic" = "1")),
+                         list(!is.na(transcript_id),
+                              list("transcript_id" = transcript_id)),
+                         list(transcript_version == TRUE,
+                              list("transcript_version" = "1")),
+                         list(tsl == TRUE,
+                              list("tsl" = "1")),
+                         list(uniprot == TRUE,
+                              list("uniprot" = "1")),
+                         list(variant_class == TRUE,
+                              list("variant_class" = "1")),
+                         list(vcf_string == TRUE,
+                              list("vcf_string" = "1")),
+                         list(xref_refseq == TRUE,
+                              list("xref_refseq" = "1")))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+  ## build POST API request's URL
+  call_body = jsonlite::toJSON(list("hgvs_notations" = as.array(hgvs_notations)))
+
+  ## make function-specific calls
+  call_func_input = quote(httr::POST(url = getOption("rba_url_ensembl"),
+                                     path = paste0("vep/",
+                                                   species,
+                                                   "/hgvs"),
+                                     body = call_body,
+                                     query = call_query,
+                                     httr::accept_json(),
+                                     httr::content_type("application/json")
+  ))
+
+  ## call API
+  parser = quote(as.list(jsonlite::fromJSON(httr::content(response,
+                                                          as = "text",
+                                                          encoding = "UTF-8"),
+                                            simplifyVector = FALSE)))
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = parser,
+                                  parser_type = NA,
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Fetch variant consequences for multiple ids
+#'
+#' @param ids
+#' @param species
+#' @param Blosum62
+#' @param CADD
+#' @param GeneSplicer
+#' @param LoF
+#' @param MaxEntScan
+#' @param Phenotypes
+#' @param SpliceAI
+#' @param SpliceRegion
+#' @param appris
+#' @param canonical
+#' @param ccds
+#' @param dbNSFP
+#' @param dbscSNV
+#' @param distance
+#' @param domains
+#' @param failed
+#' @param hgvs
+#' @param mane
+#' @param merged
+#' @param miRNA
+#' @param minimal
+#' @param numbers
+#' @param protein
+#' @param refseq
+#' @param shift_3prime
+#' @param shift_genomic
+#' @param transcript_id
+#' @param transcript_version
+#' @param tsl
+#' @param uniprot
+#' @param variant_class
+#' @param vcf_string
+#' @param xref_refseq
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_vep_ids = function(ids,
+                               species,
+                               Blosum62 = FALSE,
+                               CADD = FALSE,
+                               GeneSplicer = FALSE,
+                               LoF = FALSE,
+                               MaxEntScan = FALSE,
+                               Phenotypes = FALSE,
+                               SpliceAI = FALSE,
+                               SpliceRegion = FALSE,
+                               appris = FALSE,
+                               canonical = FALSE,
+                               ccds = FALSE,
+                               dbNSFP = NA,
+                               dbscSNV = FALSE,
+                               distance = NA,
+                               domains = FALSE,
+                               failed = FALSE,
+                               hgvs = FALSE,
+                               mane = FALSE,
+                               merged = FALSE,
+                               miRNA = FALSE,
+                               minimal = FALSE,
+                               numbers = FALSE,
+                               protein = FALSE,
+                               refseq = FALSE,
+                               shift_3prime = FALSE,
+                               shift_genomic = FALSE,
+                               transcript_id = NA,
+                               transcript_version = FALSE,
+                               tsl = FALSE,
+                               uniprot = FALSE,
+                               variant_class = FALSE,
+                               vcf_string = FALSE,
+                               xref_refseq = FALSE,
+                               verbose = TRUE,
+                               progress_bar = FALSE,
+                               diagnostics = FALSE) {
+
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = ids,
+                                         name = "ids",
+                                         class = "character",
+                                         max_len = 200),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric")),
+                                    list(arg = Blosum62,
+                                         name = "Blosum62",
+                                         class = "logical"),
+                                    list(arg = CADD,
+                                         name = "CADD",
+                                         class = "logical"),
+                                    list(arg = GeneSplicer,
+                                         name = "GeneSplicer",
+                                         class = "logical"),
+                                    list(arg = LoF,
+                                         name = "LoF",
+                                         class = "logical"),
+                                    list(arg = MaxEntScan,
+                                         name = "MaxEntScan",
+                                         class = "logical"),
+                                    list(arg = Phenotypes,
+                                         name = "Phenotypes",
+                                         class = "logical"),
+                                    list(arg = SpliceAI,
+                                         name = "SpliceAI",
+                                         class = "logical"),
+                                    list(arg = SpliceRegion,
+                                         name = "SpliceRegion",
+                                         class = "logical"),
+                                    list(arg = appris,
+                                         name = "appris",
+                                         class = "logical"),
+                                    list(arg = canonical,
+                                         name = "canonical",
+                                         class = "logical"),
+                                    list(arg = ccds,
+                                         name = "ccds",
+                                         class = "logical"),
+                                    list(arg = dbNSFP,
+                                         name = "dbNSFP",
+                                         class = "character"),
+                                    list(arg = dbscSNV,
+                                         name = "dbscSNV",
+                                         class = "logical"),
+                                    list(arg = distance,
+                                         name = "distance",
+                                         class = "numeric"),
+                                    list(arg = domains,
+                                         name = "domains",
+                                         class = "logical"),
+                                    list(arg = failed,
+                                         name = "failed",
+                                         class = "logical"),
+                                    list(arg = hgvs,
+                                         name = "hgvs",
+                                         class = "logical"),
+                                    list(arg = mane,
+                                         name = "mane",
+                                         class = "logical"),
+                                    list(arg = merged,
+                                         name = "merged",
+                                         class = "logical"),
+                                    list(arg = miRNA,
+                                         name = "miRNA",
+                                         class = "logical"),
+                                    list(arg = minimal,
+                                         name = "minimal",
+                                         class = "logical"),
+                                    list(arg = numbers,
+                                         name = "numbers",
+                                         class = "logical"),
+                                    list(arg = protein,
+                                         name = "protein",
+                                         class = "logical"),
+                                    list(arg = refseq,
+                                         name = "refseq",
+                                         class = "logical"),
+                                    list(arg = shift_3prime,
+                                         name = "shift_3prime",
+                                         class = "logical"),
+                                    list(arg = shift_genomic,
+                                         name = "shift_genomic",
+                                         class = "logical"),
+                                    list(arg = transcript_id,
+                                         name = "transcript_id",
+                                         class = "character"),
+                                    list(arg = transcript_version,
+                                         name = "transcript_version",
+                                         class = "logical"),
+                                    list(arg = tsl,
+                                         name = "tsl",
+                                         class = "logical"),
+                                    list(arg = uniprot,
+                                         name = "uniprot",
+                                         class = "logical"),
+                                    list(arg = variant_class,
+                                         name = "variant_class",
+                                         class = "logical"),
+                                    list(arg = vcf_string,
+                                         name = "vcf_string",
+                                         class = "logical"),
+                                    list(arg = xref_refseq,
+                                         name = "xref_refseq",
+                                         class = "logical")),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("POST vep/:species/id")
+  }
+  ## build POST API request's query
+  additional_pars = list(list(Blosum62 == TRUE,
+                              list("Blosum62" = "1")),
+                         list(CADD == TRUE,
+                              list("CADD" = "1")),
+                         list(GeneSplicer == TRUE,
+                              list("GeneSplicer" = "1")),
+                         list(LoF == TRUE,
+                              list("LoF" = "1")),
+                         list(MaxEntScan == TRUE,
+                              list("MaxEntScan" = "1")),
+                         list(Phenotypes == TRUE,
+                              list("Phenotypes" = "1")),
+                         list(SpliceAI == TRUE,
+                              list("SpliceAI" = "1")),
+                         list(SpliceRegion == TRUE,
+                              list("SpliceRegion" = "1")),
+                         list(appris == TRUE,
+                              list("appris" = "1")),
+                         list(canonical == TRUE,
+                              list("canonical" = "1")),
+                         list(ccds == TRUE,
+                              list("ccds" = "1")),
+                         list(!is.na(dbNSFP),
+                              list("dbNSFP" = dbNSFP)),
+                         list(dbscSNV == TRUE,
+                              list("dbscSNV" = "1")),
+                         list(!is.na(distance),
+                              list("distance" = as.integer(distance))),
+                         list(domains == TRUE,
+                              list("domains" = "1")),
+                         list(failed == TRUE,
+                              list("failed" = "1")),
+                         list(hgvs == TRUE,
+                              list("hgvs" = "1")),
+                         list(mane == TRUE,
+                              list("mane" = "1")),
+                         list(merged == TRUE,
+                              list("merged" = "1")),
+                         list(miRNA == TRUE,
+                              list("miRNA" = "1")),
+                         list(minimal == TRUE,
+                              list("minimal" = "1")),
+                         list(numbers == TRUE,
+                              list("numbers" = "1")),
+                         list(protein == TRUE,
+                              list("protein" = "1")),
+                         list(refseq == TRUE,
+                              list("refseq" = "1")),
+                         list(shift_3prime == TRUE,
+                              list("shift_3prime" = "1")),
+                         list(shift_genomic == TRUE,
+                              list("shift_genomic" = "1")),
+                         list(!is.na(transcript_id),
+                              list("transcript_id" = transcript_id)),
+                         list(transcript_version == TRUE,
+                              list("transcript_version" = "1")),
+                         list(tsl == TRUE,
+                              list("tsl" = "1")),
+                         list(uniprot == TRUE,
+                              list("uniprot" = "1")),
+                         list(variant_class == TRUE,
+                              list("variant_class" = "1")),
+                         list(vcf_string == TRUE,
+                              list("vcf_string" = "1")),
+                         list(xref_refseq == TRUE,
+                              list("xref_refseq" = "1")))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+  ## build POST API request's URL
+  call_body = jsonlite::toJSON(list("ids" = as.array(ids)))
+
+  ## make function-specific calls
+  call_func_input = quote(httr::POST(url = getOption("rba_url_ensembl"),
+                                     path = paste0("vep/",
+                                                   species,
+                                                   "/id"),
+                                     body = call_body,
+                                     query = call_query,
+                                     httr::accept_json(),
+                                     httr::content_type("application/json")
+  ))
+
+  ## call API
+  parser = quote(as.list(jsonlite::fromJSON(httr::content(response,
+                                                          as = "text",
+                                                          encoding = "UTF-8"),
+                                            simplifyVector = FALSE)))
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = parser,
+                                  parser_type = NA,
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Fetch variant consequences for multiple regions
+#'
+#' @param variant
+#' @param species
+#' @param Blosum62
+#' @param CADD
+#' @param GeneSplicer
+#' @param LoF
+#' @param MaxEntScan
+#' @param Phenotypes
+#' @param SpliceAI
+#' @param SpliceRegion
+#' @param appris
+#' @param canonical
+#' @param ccds
+#' @param dbNSFP
+#' @param dbscSNV
+#' @param distance
+#' @param domains
+#' @param failed
+#' @param hgvs
+#' @param mane
+#' @param merged
+#' @param miRNA
+#' @param minimal
+#' @param numbers
+#' @param protein
+#' @param refseq
+#' @param shift_3prime
+#' @param shift_genomic
+#' @param transcript_id
+#' @param transcript_version
+#' @param tsl
+#' @param uniprot
+#' @param variant_class
+#' @param vcf_string
+#' @param xref_refseq
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_vep_variant = function(variants,
+                                   species,
+                                   Blosum62 = FALSE,
+                                   CADD = FALSE,
+                                   GeneSplicer = FALSE,
+                                   LoF = FALSE,
+                                   MaxEntScan = FALSE,
+                                   Phenotypes = FALSE,
+                                   SpliceAI = FALSE,
+                                   SpliceRegion = FALSE,
+                                   appris = FALSE,
+                                   canonical = FALSE,
+                                   ccds = FALSE,
+                                   dbNSFP = NA,
+                                   dbscSNV = FALSE,
+                                   distance = NA,
+                                   domains = FALSE,
+                                   failed = FALSE,
+                                   hgvs = FALSE,
+                                   mane = FALSE,
+                                   merged = FALSE,
+                                   miRNA = FALSE,
+                                   minimal = FALSE,
+                                   numbers = FALSE,
+                                   protein = FALSE,
+                                   refseq = FALSE,
+                                   shift_3prime = FALSE,
+                                   shift_genomic = FALSE,
+                                   transcript_id = NA,
+                                   transcript_version = FALSE,
+                                   tsl = FALSE,
+                                   uniprot = FALSE,
+                                   variant_class = FALSE,
+                                   vcf_string = FALSE,
+                                   xref_refseq = FALSE,
+                                   verbose = TRUE,
+                                   progress_bar = FALSE,
+                                   diagnostics = FALSE) {
+
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = variants,
+                                         name = "variants",
+                                         class = "character",
+                                         max_len = 200),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric")),
+                                    list(arg = Blosum62,
+                                         name = "Blosum62",
+                                         class = "logical"),
+                                    list(arg = CADD,
+                                         name = "CADD",
+                                         class = "logical"),
+                                    list(arg = GeneSplicer,
+                                         name = "GeneSplicer",
+                                         class = "logical"),
+                                    list(arg = LoF,
+                                         name = "LoF",
+                                         class = "logical"),
+                                    list(arg = MaxEntScan,
+                                         name = "MaxEntScan",
+                                         class = "logical"),
+                                    list(arg = Phenotypes,
+                                         name = "Phenotypes",
+                                         class = "logical"),
+                                    list(arg = SpliceAI,
+                                         name = "SpliceAI",
+                                         class = "logical"),
+                                    list(arg = SpliceRegion,
+                                         name = "SpliceRegion",
+                                         class = "logical"),
+                                    list(arg = appris,
+                                         name = "appris",
+                                         class = "logical"),
+                                    list(arg = canonical,
+                                         name = "canonical",
+                                         class = "logical"),
+                                    list(arg = ccds,
+                                         name = "ccds",
+                                         class = "logical"),
+                                    list(arg = dbNSFP,
+                                         name = "dbNSFP",
+                                         class = "character"),
+                                    list(arg = dbscSNV,
+                                         name = "dbscSNV",
+                                         class = "logical"),
+                                    list(arg = distance,
+                                         name = "distance",
+                                         class = "numeric"),
+                                    list(arg = domains,
+                                         name = "domains",
+                                         class = "logical"),
+                                    list(arg = failed,
+                                         name = "failed",
+                                         class = "logical"),
+                                    list(arg = hgvs,
+                                         name = "hgvs",
+                                         class = "logical"),
+                                    list(arg = mane,
+                                         name = "mane",
+                                         class = "logical"),
+                                    list(arg = merged,
+                                         name = "merged",
+                                         class = "logical"),
+                                    list(arg = miRNA,
+                                         name = "miRNA",
+                                         class = "logical"),
+                                    list(arg = minimal,
+                                         name = "minimal",
+                                         class = "logical"),
+                                    list(arg = numbers,
+                                         name = "numbers",
+                                         class = "logical"),
+                                    list(arg = protein,
+                                         name = "protein",
+                                         class = "logical"),
+                                    list(arg = refseq,
+                                         name = "refseq",
+                                         class = "logical"),
+                                    list(arg = shift_3prime,
+                                         name = "shift_3prime",
+                                         class = "logical"),
+                                    list(arg = shift_genomic,
+                                         name = "shift_genomic",
+                                         class = "logical"),
+                                    list(arg = transcript_id,
+                                         name = "transcript_id",
+                                         class = "character"),
+                                    list(arg = transcript_version,
+                                         name = "transcript_version",
+                                         class = "logical"),
+                                    list(arg = tsl,
+                                         name = "tsl",
+                                         class = "logical"),
+                                    list(arg = uniprot,
+                                         name = "uniprot",
+                                         class = "logical"),
+                                    list(arg = variant_class,
+                                         name = "variant_class",
+                                         class = "logical"),
+                                    list(arg = vcf_string,
+                                         name = "vcf_string",
+                                         class = "logical"),
+                                    list(arg = xref_refseq,
+                                         name = "xref_refseq",
+                                         class = "logical")),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("POST vep/:species/region")
+  }
+  ## build POST API request's query
+  additional_pars = list(list(Blosum62 == TRUE,
+                              list("Blosum62" = "1")),
+                         list(CADD == TRUE,
+                              list("CADD" = "1")),
+                         list(GeneSplicer == TRUE,
+                              list("GeneSplicer" = "1")),
+                         list(LoF == TRUE,
+                              list("LoF" = "1")),
+                         list(MaxEntScan == TRUE,
+                              list("MaxEntScan" = "1")),
+                         list(Phenotypes == TRUE,
+                              list("Phenotypes" = "1")),
+                         list(SpliceAI == TRUE,
+                              list("SpliceAI" = "1")),
+                         list(SpliceRegion == TRUE,
+                              list("SpliceRegion" = "1")),
+                         list(appris == TRUE,
+                              list("appris" = "1")),
+                         list(canonical == TRUE,
+                              list("canonical" = "1")),
+                         list(ccds == TRUE,
+                              list("ccds" = "1")),
+                         list(!is.na(dbNSFP),
+                              list("dbNSFP" = dbNSFP)),
+                         list(dbscSNV == TRUE,
+                              list("dbscSNV" = "1")),
+                         list(!is.na(distance),
+                              list("distance" = as.integer(distance))),
+                         list(domains == TRUE,
+                              list("domains" = "1")),
+                         list(failed == TRUE,
+                              list("failed" = "1")),
+                         list(hgvs == TRUE,
+                              list("hgvs" = "1")),
+                         list(mane == TRUE,
+                              list("mane" = "1")),
+                         list(merged == TRUE,
+                              list("merged" = "1")),
+                         list(miRNA == TRUE,
+                              list("miRNA" = "1")),
+                         list(minimal == TRUE,
+                              list("minimal" = "1")),
+                         list(numbers == TRUE,
+                              list("numbers" = "1")),
+                         list(protein == TRUE,
+                              list("protein" = "1")),
+                         list(refseq == TRUE,
+                              list("refseq" = "1")),
+                         list(shift_3prime == TRUE,
+                              list("shift_3prime" = "1")),
+                         list(shift_genomic == TRUE,
+                              list("shift_genomic" = "1")),
+                         list(!is.na(transcript_id),
+                              list("transcript_id" = transcript_id)),
+                         list(transcript_version == TRUE,
+                              list("transcript_version" = "1")),
+                         list(tsl == TRUE,
+                              list("tsl" = "1")),
+                         list(uniprot == TRUE,
+                              list("uniprot" = "1")),
+                         list(variant_class == TRUE,
+                              list("variant_class" = "1")),
+                         list(vcf_string == TRUE,
+                              list("vcf_string" = "1")),
+                         list(xref_refseq == TRUE,
+                              list("xref_refseq" = "1")))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+  ## build POST API request's URL
+  call_body = jsonlite::toJSON(list("variants" = as.array(variants)))
+
+  ## make function-specific calls
+  call_func_input = quote(httr::POST(url = getOption("rba_url_ensembl"),
+                                     path = paste0("vep/",
+                                                   species,
+                                                   "/region"),
+                                     body = call_body,
+                                     query = call_query,
+                                     httr::accept_json(),
+                                     httr::content_type("application/json")
+  ))
+
+  ## call API
+  parser = quote(as.list(jsonlite::fromJSON(httr::content(response,
+                                                          as = "text",
+                                                          encoding = "UTF-8"),
+                                            simplifyVector = FALSE)))
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = parser,
+                                  parser_type = NA,
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Fetch variant consequences
+#'
+#' @param allele
+#' @param region
+#' @param species
+#' @param Blosum62
+#' @param CADD
+#' @param GeneSplicer
+#' @param LoF
+#' @param MaxEntScan
+#' @param Phenotypes
+#' @param SpliceAI
+#' @param SpliceRegion
+#' @param appris
+#' @param canonical
+#' @param ccds
+#' @param dbNSFP
+#' @param dbscSNV
+#' @param distance
+#' @param domains
+#' @param failed
+#' @param hgvs
+#' @param mane
+#' @param merged
+#' @param miRNA
+#' @param minimal
+#' @param numbers
+#' @param protein
+#' @param refseq
+#' @param shift_3prime
+#' @param shift_genomic
+#' @param transcript_id
+#' @param transcript_version
+#' @param tsl
+#' @param uniprot
+#' @param variant_class
+#' @param vcf_string
+#' @param xref_refseq
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_vep_allele = function(allele,
+                                  region,
+                                  species,
+                                  Blosum62 = FALSE,
+                                  CADD = FALSE,
+                                  GeneSplicer = FALSE,
+                                  LoF = FALSE,
+                                  MaxEntScan = FALSE,
+                                  Phenotypes = FALSE,
+                                  SpliceAI = FALSE,
+                                  SpliceRegion = FALSE,
+                                  appris = FALSE,
+                                  canonical = FALSE,
+                                  ccds = FALSE,
+                                  dbNSFP = NA,
+                                  dbscSNV = FALSE,
+                                  distance = NA,
+                                  domains = FALSE,
+                                  failed = FALSE,
+                                  hgvs = FALSE,
+                                  mane = FALSE,
+                                  merged = FALSE,
+                                  miRNA = FALSE,
+                                  minimal = FALSE,
+                                  numbers = FALSE,
+                                  protein = FALSE,
+                                  refseq = FALSE,
+                                  shift_3prime = FALSE,
+                                  shift_genomic = FALSE,
+                                  transcript_id = NA,
+                                  transcript_version = FALSE,
+                                  tsl = FALSE,
+                                  uniprot = FALSE,
+                                  variant_class = FALSE,
+                                  vcf_string = FALSE,
+                                  xref_refseq = FALSE,
+                                  verbose = TRUE,
+                                  progress_bar = FALSE,
+                                  diagnostics = FALSE) {
+
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = allele,
+                                         name = "variants",
+                                         class = "character"),
+                                    list(arg = region,
+                                         name = "variants",
+                                         class = "character"),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric")),
+                                    list(arg = Blosum62,
+                                         name = "Blosum62",
+                                         class = "logical"),
+                                    list(arg = CADD,
+                                         name = "CADD",
+                                         class = "logical"),
+                                    list(arg = GeneSplicer,
+                                         name = "GeneSplicer",
+                                         class = "logical"),
+                                    list(arg = LoF,
+                                         name = "LoF",
+                                         class = "logical"),
+                                    list(arg = MaxEntScan,
+                                         name = "MaxEntScan",
+                                         class = "logical"),
+                                    list(arg = Phenotypes,
+                                         name = "Phenotypes",
+                                         class = "logical"),
+                                    list(arg = SpliceAI,
+                                         name = "SpliceAI",
+                                         class = "logical"),
+                                    list(arg = SpliceRegion,
+                                         name = "SpliceRegion",
+                                         class = "logical"),
+                                    list(arg = appris,
+                                         name = "appris",
+                                         class = "logical"),
+                                    list(arg = canonical,
+                                         name = "canonical",
+                                         class = "logical"),
+                                    list(arg = ccds,
+                                         name = "ccds",
+                                         class = "logical"),
+                                    list(arg = dbNSFP,
+                                         name = "dbNSFP",
+                                         class = "character"),
+                                    list(arg = dbscSNV,
+                                         name = "dbscSNV",
+                                         class = "logical"),
+                                    list(arg = distance,
+                                         name = "distance",
+                                         class = "numeric"),
+                                    list(arg = domains,
+                                         name = "domains",
+                                         class = "logical"),
+                                    list(arg = failed,
+                                         name = "failed",
+                                         class = "logical"),
+                                    list(arg = hgvs,
+                                         name = "hgvs",
+                                         class = "logical"),
+                                    list(arg = mane,
+                                         name = "mane",
+                                         class = "logical"),
+                                    list(arg = merged,
+                                         name = "merged",
+                                         class = "logical"),
+                                    list(arg = miRNA,
+                                         name = "miRNA",
+                                         class = "logical"),
+                                    list(arg = minimal,
+                                         name = "minimal",
+                                         class = "logical"),
+                                    list(arg = numbers,
+                                         name = "numbers",
+                                         class = "logical"),
+                                    list(arg = protein,
+                                         name = "protein",
+                                         class = "logical"),
+                                    list(arg = refseq,
+                                         name = "refseq",
+                                         class = "logical"),
+                                    list(arg = shift_3prime,
+                                         name = "shift_3prime",
+                                         class = "logical"),
+                                    list(arg = shift_genomic,
+                                         name = "shift_genomic",
+                                         class = "logical"),
+                                    list(arg = transcript_id,
+                                         name = "transcript_id",
+                                         class = "character"),
+                                    list(arg = transcript_version,
+                                         name = "transcript_version",
+                                         class = "logical"),
+                                    list(arg = tsl,
+                                         name = "tsl",
+                                         class = "logical"),
+                                    list(arg = uniprot,
+                                         name = "uniprot",
+                                         class = "logical"),
+                                    list(arg = variant_class,
+                                         name = "variant_class",
+                                         class = "logical"),
+                                    list(arg = vcf_string,
+                                         name = "vcf_string",
+                                         class = "logical"),
+                                    list(arg = xref_refseq,
+                                         name = "xref_refseq",
+                                         class = "logical")),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET vep/:species/region/:region/:allele/")
+  }
+  ## build POST API request's query
+  additional_pars = list(list(Blosum62 == TRUE,
+                              list("Blosum62" = "1")),
+                         list(CADD == TRUE,
+                              list("CADD" = "1")),
+                         list(GeneSplicer == TRUE,
+                              list("GeneSplicer" = "1")),
+                         list(LoF == TRUE,
+                              list("LoF" = "1")),
+                         list(MaxEntScan == TRUE,
+                              list("MaxEntScan" = "1")),
+                         list(Phenotypes == TRUE,
+                              list("Phenotypes" = "1")),
+                         list(SpliceAI == TRUE,
+                              list("SpliceAI" = "1")),
+                         list(SpliceRegion == TRUE,
+                              list("SpliceRegion" = "1")),
+                         list(appris == TRUE,
+                              list("appris" = "1")),
+                         list(canonical == TRUE,
+                              list("canonical" = "1")),
+                         list(ccds == TRUE,
+                              list("ccds" = "1")),
+                         list(!is.na(dbNSFP),
+                              list("dbNSFP" = dbNSFP)),
+                         list(dbscSNV == TRUE,
+                              list("dbscSNV" = "1")),
+                         list(!is.na(distance),
+                              list("distance" = as.integer(distance))),
+                         list(domains == TRUE,
+                              list("domains" = "1")),
+                         list(failed == TRUE,
+                              list("failed" = "1")),
+                         list(hgvs == TRUE,
+                              list("hgvs" = "1")),
+                         list(mane == TRUE,
+                              list("mane" = "1")),
+                         list(merged == TRUE,
+                              list("merged" = "1")),
+                         list(miRNA == TRUE,
+                              list("miRNA" = "1")),
+                         list(minimal == TRUE,
+                              list("minimal" = "1")),
+                         list(numbers == TRUE,
+                              list("numbers" = "1")),
+                         list(protein == TRUE,
+                              list("protein" = "1")),
+                         list(refseq == TRUE,
+                              list("refseq" = "1")),
+                         list(shift_3prime == TRUE,
+                              list("shift_3prime" = "1")),
+                         list(shift_genomic == TRUE,
+                              list("shift_genomic" = "1")),
+                         list(!is.na(transcript_id),
+                              list("transcript_id" = transcript_id)),
+                         list(transcript_version == TRUE,
+                              list("transcript_version" = "1")),
+                         list(tsl == TRUE,
+                              list("tsl" = "1")),
+                         list(uniprot == TRUE,
+                              list("uniprot" = "1")),
+                         list(variant_class == TRUE,
+                              list("variant_class" = "1")),
+                         list(vcf_string == TRUE,
+                              list("vcf_string" = "1")),
+                         list(xref_refseq == TRUE,
+                              list("xref_refseq" = "1")))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
+                                    path = paste0("vep/",
+                                                  species,
+                                                  "/region/",
+                                                  region, "/",
+                                                  allele),
+                                    query = call_query,
+                                    httr::accept_json(),
+                                    httr::content_type("application/json")
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#### Variation Endpoints ####
+
+#' Translate a list of variant identifiers, HGVS notations or genomic SPDI
+#' notations to all possible variant IDs, HGVS and genomic SPDI
+#'
+#' @param ids
+#' @param species
+#' @param fields
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_variant_recoder = function(ids,
+                                       species,
+                                       fields = NA,
+                                       verbose = TRUE,
+                                       progress_bar = FALSE,
+                                       diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = ids,
+                                         name = "ids",
+                                         class = "character",
+                                         max_len = 200),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric")),
+                                    list(arg = fields,
+                                         name = "fields",
+                                         class = "character",
+                                         val = c("id",
+                                                 "hgvsg",
+                                                 "hgvsc",
+                                                 "hgvsp",
+                                                 "spdi",
+                                                 "vcf_string"))),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("POST variant_recoder/:species")
+  }
+
+  ## build POST API request's query
+  additional_pars = list(list(any(is.na(fields)),
+                              list("fields" = paste(fields, collapse = ","))))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+  ## build POST API request's URL
+  call_body = jsonlite::toJSON(list("ids" = as.array(ids)))
+
+  ## make function-specific calls
+  call_func_input = quote(httr::POST(url = getOption("rba_url_ensembl"),
+                                     path = paste0("variant_recoder/",
+                                                   species),
+                                     body = call_body,
+                                     query = call_query,
+                                     httr::accept_json(),
+                                     httr::content_type("application/json")
+  ))
+
+  ## call API
+  parser = quote(as.list(jsonlite::fromJSON(httr::content(response,
+                                                          as = "text",
+                                                          encoding = "UTF-8"),
+                                            simplifyVector = FALSE)))
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = parser,
+                                  parser_type = NA,
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Uses a list of variant identifiers (e.g. rsID) to return the variation
+#' features including optional genotype, phenotype and population data
+#'
+#' @param ids
+#' @param species
+#' @param genotypes
+#' @param phenotypes
+#' @param pops
+#' @param population_genotypes
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_variation_id  = function(ids,
+                                     species,
+                                     genotypes = FALSE,
+                                     phenotypes = FALSE,
+                                     pops = FALSE,
+                                     population_genotypes = FALSE,
+                                     verbose = TRUE,
+                                     progress_bar = FALSE,
+                                     diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = ids,
+                                         name = "ids",
+                                         class = "character",
+                                         max_len = 200),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric")),
+                                    list(arg = genotypes,
+                                         name = "genotypes",
+                                         class = "logical"),
+                                    list(arg = phenotypes,
+                                         name = "phenotypes",
+                                         class = "logical"),
+                                    list(arg = pops,
+                                         name = "pops",
+                                         class = "logical"),
+                                    list(arg = population_genotypes,
+                                         name = "population_genotypes",
+                                         class = "logical")),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("POST variation/:species/")
+  }
+
+  ## build POST API request's query
+  additional_pars = list(list(genotypes == TRUE,
+                              list("genotypes" = "1")),
+                         list(phenotypes == TRUE,
+                              list("phenotypes" = "1")),
+                         list(pops == TRUE,
+                              list("pops" = "1,")),
+                         list(population_genotypes == TRUE,
+                              list("population_genotypes" = "1")))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+  ## build POST API request's URL
+  call_body = jsonlite::toJSON(list("ids" = as.array(ids)))
+
+  ## make function-specific calls
+  call_func_input = quote(httr::POST(url = getOption("rba_url_ensembl"),
+                                     path = paste0("variation/",
+                                                   species),
+                                     body = call_body,
+                                     query = call_query,
+                                     httr::accept_json(),
+                                     httr::content_type("application/json")
+  ))
+
+  ## call API
+  parser = quote(as.list(jsonlite::fromJSON(httr::content(response,
+                                                          as = "text",
+                                                          encoding = "UTF-8"),
+                                            simplifyVector = FALSE)))
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = parser,
+                                  parser_type = NA,
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Fetch variants by publication using PubMed Central reference number (PMCID)
+#' or PubMed reference number (PMID)
+#'
+#' @param pmid
+#' @param pmcid
+#' @param species
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_variation_pubmed  = function(pmid = NA,
+                                         pmcid = NA,
+                                         species,
+                                         verbose = TRUE,
+                                         progress_bar = FALSE,
+                                         diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = pmid,
+                                         name = "pmid",
+                                         class = "character"),
+                                    list(arg = pmcid,
+                                         name = "pmcid",
+                                         class = "character"),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric"))),
+                        cond = list(list(sum(!is.na(pmid), !is.na(pmcid)) == 2,
+                                         "You can only provide either PMID or PMCID in one function call."),
+                                    list(sum(!is.na(pmid), !is.na(pmcid)) == 0,
+                                         "Provide either PMID or PMCID.")),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET variation/:species/pmcid/:pmcid",
+            "GET variation/:species/pmid/:pmid")
+  }
+  if (!is.na(pmid)) {
+    path_input = paste0("variation/", species, "/pmid/", pmid)
+  } else if (!is.na(pmcid)) {
+    path_input = paste0("variation/", species, "/pmcid/", pmcid)
+  }
+
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
+                                    path = path_input,
                                     httr::accept_json()
   ))
 
