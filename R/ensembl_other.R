@@ -409,14 +409,14 @@ rba_ensembl_family_id  = function(familiy_id,
 #' @export
 #'
 #' @examples
-rba_ensembl_member_id  = function(ensembl_id,
-                                  aligned = TRUE,
-                                  compara = "vertebrates",
-                                  member_source = "all",
-                                  sequence = "protein",
-                                  verbose = TRUE,
-                                  progress_bar = FALSE,
-                                  diagnostics = FALSE) {
+rba_ensembl_familiy_member_id  = function(ensembl_id,
+                                          aligned = TRUE,
+                                          compara = "vertebrates",
+                                          member_source = "all",
+                                          sequence = "protein",
+                                          verbose = TRUE,
+                                          progress_bar = FALSE,
+                                          diagnostics = FALSE) {
   ## Check input arguments
   invisible(rba_ba_args(cons = list(list(arg = ensembl_id,
                                          name = "ensembl_id",
@@ -496,18 +496,18 @@ rba_ensembl_member_id  = function(ensembl_id,
 #' @export
 #'
 #' @examples
-rba_ensembl_member_symbol  = function(gene_symbol,
-                                      species,
-                                      aligned = TRUE,
-                                      compara = "vertebrates",
-                                      db_type = "core",
-                                      external_db = NA,
-                                      member_source = "all",
-                                      object_type = NA,
-                                      sequence = "protein",
-                                      verbose = TRUE,
-                                      progress_bar = FALSE,
-                                      diagnostics = FALSE) {
+rba_ensembl_familiy_member_symbol  = function(gene_symbol,
+                                              species,
+                                              aligned = TRUE,
+                                              compara = "vertebrates",
+                                              db_type = "core",
+                                              external_db = NA,
+                                              member_source = "all",
+                                              object_type = NA,
+                                              sequence = "protein",
+                                              verbose = TRUE,
+                                              progress_bar = FALSE,
+                                              diagnostics = FALSE) {
   ## Check input arguments
   invisible(rba_ba_args(cons = list(list(arg = gene_symbol,
                                          name = "gene_symbol",
@@ -3904,7 +3904,267 @@ rba_ensembl_microarray_regulatory_feature  = function(regulatory_feature_id,
   return(final_output)
 }
 
-#### Transcript Haplotypes ####
+#### Sequence Endpoints ####
+
+#' Request multiple types of sequence by a stable identifier list
+#'
+#' @param ids
+#' @param db_type
+#' @param start
+#' @param end
+#' @param expand_3prime
+#' @param expand_5prime
+#' @param format
+#' @param mask
+#' @param mask_feature
+#' @param object_type
+#' @param type
+#' @param species
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_sequence_id = function(ids,
+                                   db_type = NA,
+                                   start = NA,
+                                   end = NA,
+                                   expand_3prime = NA,
+                                   expand_5prime = NA,
+                                   format = NA,
+                                   mask = NA,
+                                   mask_feature = FALSE,
+                                   object_type = NA,
+                                   type = NA,
+                                   species = NA,
+                                   verbose = TRUE,
+                                   progress_bar = FALSE,
+                                   diagnostics = FALSE) {
+
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = ids,
+                                         name = "ids",
+                                         class = "character",
+                                         max_len = 50),
+                                    list(arg = db_type,
+                                         name = "db_type",
+                                         class = "character"),
+                                    list(arg = start,
+                                         name = "start",
+                                         class = "numeric"),
+                                    list(arg = end,
+                                         name = "end",
+                                         class = "numeric"),
+                                    list(arg = expand_3prime,
+                                         name = "expand_3prime",
+                                         class = "numeric"),
+                                    list(arg = expand_5prime,
+                                         name = "expand_5prime",
+                                         class = "numeric"),
+                                    list(arg = format,
+                                         name = "format",
+                                         class = "character"),
+                                    list(arg = mask,
+                                         name = "mask",
+                                         class = "character",
+                                         val = c("hard",
+                                                 "soft")),
+                                    list(arg = mask_feature,
+                                         name = "mask_feature",
+                                         class = "logical"),
+                                    list(arg = object_type,
+                                         name = "object_type",
+                                         class = "character"),
+                                    list(arg = type,
+                                         name = "type",
+                                         class = "character",
+                                         val = c("genomic",
+                                                 "cds",
+                                                 "cdna",
+                                                 "protein")),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric"))),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("POST sequence/id")
+  }
+  ## build POST API request's query
+  additional_pars = list(list(!is.na(db_type),
+                              list("db_type" = db_type)),
+                         list(!is.na(start),
+                              list("start" = as.integer(start))),
+                         list(!is.na(end),
+                              list("end" = as.integer(end))),
+                         list(!is.na(expand_3prime),
+                              list("expand_3prime" = as.integer(expand_3prime))),
+                         list(!is.na(expand_5prime),
+                              list("expand_5prime" = as.integer(expand_5prime))),
+                         list(!is.na(format),
+                              list("format" = format)),
+                         list(!is.na(mask),
+                              list("mask" = mask)),
+                         list(mask_feature == TRUE,
+                              list("mask_feature" = "1")),
+                         list(!is.na(object_type),
+                              list("object_type" = object_type)),
+                         list(!is.na(type),
+                              list("type" = type)),
+                         list(!is.na(species),
+                              list("species" = species)))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+  ## build POST API request's URL
+  call_body = jsonlite::toJSON(list("ids" = as.array(ids)))
+
+  ## make function-specific calls
+  call_func_input = quote(httr::POST(url = getOption("rba_url_ensembl"),
+                                     path = "sequence/id",
+                                     body = call_body,
+                                     query = call_query,
+                                     httr::accept_json(),
+                                     httr::content_type("application/json")
+  ))
+
+  ## call API
+  parser = quote(as.list(jsonlite::fromJSON(httr::content(response,
+                                                          as = "text",
+                                                          encoding = "UTF-8"),
+                                            simplifyVector = FALSE)))
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = parser,
+                                  parser_type = NA,
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Request multiple types of sequence by a list of regions
+#'
+#' @param regions
+#' @param species
+#' @param coord_system
+#' @param coord_system_version
+#' @param expand_3prime
+#' @param expand_5prime
+#' @param format
+#' @param mask
+#' @param mask_feature
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ensembl_sequence_region = function(regions,
+                                       species,
+                                       coord_system = NA,
+                                       coord_system_version = NA,
+                                       expand_3prime = NA,
+                                       expand_5prime = NA,
+                                       format = NA,
+                                       mask = NA,
+                                       mask_feature = FALSE,
+                                       verbose = TRUE,
+                                       progress_bar = FALSE,
+                                       diagnostics = FALSE) {
+
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = regions,
+                                         name = "region",
+                                         class = "character",
+                                         max_len = 50),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric")),
+                                    list(arg = coord_system,
+                                         name = "coord_system",
+                                         class = "character"),
+                                    list(arg = coord_system_version,
+                                         name = "coord_system_version",
+                                         class = "character"),
+                                    list(arg = expand_3prime,
+                                         name = "expand_3prime",
+                                         class = "numeric"),
+                                    list(arg = expand_5prime,
+                                         name = "expand_5prime",
+                                         class = "numeric"),
+                                    list(arg = format,
+                                         name = "format",
+                                         class = "character"),
+                                    list(arg = mask,
+                                         name = "mask",
+                                         class = "character",
+                                         val = c("hard",
+                                                 "soft")),
+                                    list(arg = mask_feature,
+                                         name = "mask_feature",
+                                         class = "logical")),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("POST sequence/region/:species")
+  }
+  ## build POST API request's query
+  additional_pars = list(list(!is.na(coord_system),
+                              list("coord_system" = coord_system)),
+                         list(!is.na(coord_system_version),
+                              list("coord_system_version" = coord_system_version)),
+                         list(!is.na(expand_3prime),
+                              list("expand_3prime" = as.integer(expand_3prime))),
+                         list(!is.na(expand_5prime),
+                              list("expand_5prime" = as.integer(expand_5prime))),
+                         list(!is.na(format),
+                              list("format" = format)),
+                         list(!is.na(mask),
+                              list("mask" = mask)),
+                         list(mask_feature == TRUE,
+                              list("mask_feature" = "1")))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+  ## build POST API request's URL
+  call_body = jsonlite::toJSON(list("regions" = as.array(regions)))
+
+  ## make function-specific calls
+  call_func_input = quote(httr::POST(url = getOption("rba_url_ensembl"),
+                                     path = paste0("sequence/region/",
+                                                   species),
+                                     body = call_body,
+                                     query = call_query,
+                                     httr::accept_json(),
+                                     httr::content_type("application/json")
+  ))
+
+  ## call API
+  parser = quote(as.list(jsonlite::fromJSON(httr::content(response,
+                                                          as = "text",
+                                                          encoding = "UTF-8"),
+                                            simplifyVector = FALSE)))
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = parser,
+                                  parser_type = NA,
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#### Transcript Haplotypes Endpoints ####
 
 #' Computes observed transcript haplotype sequences based on phased genotype data
 #'
