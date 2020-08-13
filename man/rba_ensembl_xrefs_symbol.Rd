@@ -11,7 +11,7 @@ supplied symbol the service will return both gene and transcript
 rba_ensembl_xrefs_symbol(
   external_symbol,
   species,
-  db_type = NA,
+  db_type = "core",
   external_db = NA,
   object_type = NA,
   verbose = TRUE,

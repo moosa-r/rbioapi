@@ -5,7 +5,7 @@
 \title{Returns the p-value for each SNP in a given gene}
 \usage{
 rba_ensembl_eqtl_gene(
-  stable_id,
+  gene_id,
   species,
   statistic = NA,
   tissue = NA,

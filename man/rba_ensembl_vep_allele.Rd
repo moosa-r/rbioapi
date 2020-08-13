@@ -21,7 +21,7 @@ rba_ensembl_vep_allele(
   ccds = FALSE,
   dbNSFP = NA,
   dbscSNV = FALSE,
-  distance = NA,
+  distance = 5000,
   domains = FALSE,
   failed = FALSE,
   hgvs = FALSE,

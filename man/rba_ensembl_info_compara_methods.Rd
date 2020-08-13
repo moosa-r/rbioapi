@@ -7,7 +7,7 @@ comparative data).}
 \usage{
 rba_ensembl_info_compara_methods(
   method,
-  compara = NA,
+  compara = "vertebrates",
   verbose = TRUE,
   progress_bar = FALSE,
   diagnostics = FALSE
@@ -15,7 +15,7 @@ rba_ensembl_info_compara_methods(
 
 rba_ensembl_info_compara_methods(
   method,
-  compara = NA,
+  compara = "vertebrates",
   verbose = TRUE,
   progress_bar = FALSE,
   diagnostics = FALSE

@@ -27,7 +27,8 @@ NULL
                         "or moosa.rezwani@gmail.com\r\n",
                         "Last API verbs check for currently supported Databases:\r\n",
                         "STRING: Aug 04 2020\r\n",
-                        "Enrichr: Aug 04 2020"
+                        "Enrichr: Aug 04 2020\r\n",
+                        "Ensembl:Aug 13 2020"
   )
   ## save list of supported databases
   options("rba_databases" = c("STRING",

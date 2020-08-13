@@ -5,7 +5,7 @@
 \title{Lists all available species, their aliases, available adaptor groups and data release.}
 \usage{
 rba_ensembl_info_species(
-  division = NA,
+  division = "EnsemblVertebrates",
   hide_strain_info = FALSE,
   strain_collection = NA,
   expand = FALSE,

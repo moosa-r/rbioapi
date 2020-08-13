@@ -327,7 +327,7 @@ rba_ensembl_info_biotypes_groups = function(group = NA,
 #' @export
 #'
 #' @examples
-rba_ensembl_info_biotypes_names = function(name = NA,
+rba_ensembl_info_biotypes_names = function(name,
                                            object_type = NA,
                                            verbose = TRUE,
                                            progress_bar = FALSE,
@@ -387,7 +387,7 @@ rba_ensembl_info_biotypes_names = function(name = NA,
 #'
 #' @examples
 rba_ensembl_info_compara_methods = function(class = NA,
-                                            compara = NA,
+                                            compara = "vertebrates",
                                             verbose = TRUE,
                                             progress_bar = FALSE,
                                             diagnostics = FALSE) {
@@ -409,7 +409,7 @@ rba_ensembl_info_compara_methods = function(class = NA,
   ## build GET API request's query
   additional_pars = list(list(!is.na(class),
                               list("class" = class)),
-                         list(!is.na(compara),
+                         list(compara != "vertebrates",
                               list("compara" = compara)))
 
   call_query = rba_ba_body_add_pars(call_body = list(),
@@ -447,7 +447,7 @@ rba_ensembl_info_compara_methods = function(class = NA,
 #'
 #' @examples
 rba_ensembl_info_compara_methods = function(method,
-                                            compara = NA,
+                                            compara = "vertebrates",
                                             verbose = TRUE,
                                             progress_bar = FALSE,
                                             diagnostics = FALSE) {
@@ -467,7 +467,7 @@ rba_ensembl_info_compara_methods = function(method,
   }
 
   ## build GET API request's query
-  additional_pars = list(list(!is.na(compara),
+  additional_pars = list(list(compara != "vertebrates",
                               list("compara" = compara)))
 
   call_query = rba_ba_body_add_pars(call_body = list(),
@@ -739,7 +739,7 @@ rba_ensembl_info_divisions = function(verbose = TRUE,
 #' @export
 #'
 #' @examples
-rba_ensembl_info_genomes = function(genome_name,
+rba_ensembl_info_genomes_name = function(genome_name,
                                     expand = FALSE,
                                     verbose = TRUE,
                                     progress_bar = FALSE,
@@ -1117,7 +1117,7 @@ rba_ensembl_info_software = function(verbose = TRUE,
 #' @export
 #'
 #' @examples
-rba_ensembl_info_species = function(division = NA,
+rba_ensembl_info_species = function(division = "EnsemblVertebrates",
                                     hide_strain_info = FALSE,
                                     strain_collection = NA,
                                     expand = FALSE,
@@ -1143,7 +1143,7 @@ rba_ensembl_info_species = function(division = NA,
   }
 
   ## build GET API request's query
-  additional_pars = list(list(!is.na(division),
+  additional_pars = list(list(division != "EnsemblVertebrates",
                               list("division" = division)),
                          list(hide_strain_info == TRUE,
                               list("hide_strain_info" = 1)),

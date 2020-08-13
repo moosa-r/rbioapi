@@ -20,7 +20,7 @@ rba_ensembl_vep_ids(
   ccds = FALSE,
   dbNSFP = NA,
   dbscSNV = FALSE,
-  distance = NA,
+  distance = 5000,
   domains = FALSE,
   failed = FALSE,
   hgvs = FALSE,

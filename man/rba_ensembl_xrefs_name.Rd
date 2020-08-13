@@ -8,10 +8,8 @@ external reference and returning the information we hold about the entry}
 rba_ensembl_xrefs_name(
   name,
   species,
-  all_levels = FALSE,
-  db_type = NA,
+  db_type = "core",
   external_db = NA,
-  object_type = NA,
   verbose = TRUE,
   progress_bar = FALSE,
   diagnostics = FALSE

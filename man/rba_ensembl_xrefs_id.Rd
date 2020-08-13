@@ -9,7 +9,7 @@ rba_ensembl_xrefs_id(
   ensembl_id,
   species = NA,
   all_levels = FALSE,
-  db_type = NA,
+  db_type = "core",
   external_db = NA,
   object_type = NA,
   verbose = TRUE,

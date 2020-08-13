@@ -9,8 +9,8 @@ rba_ensembl_map_assembly(
   asm_two,
   region,
   species,
-  coord_system = NA,
-  target_coord_system = NA,
+  coord_system = "chromosome",
+  target_coord_system = "chromosome",
   verbose = TRUE,
   progress_bar = FALSE,
   diagnostics = FALSE

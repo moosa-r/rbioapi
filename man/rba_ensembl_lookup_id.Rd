@@ -9,7 +9,7 @@ rba_ensembl_lookup_id(
   ids,
   db_type = NA,
   expand = FALSE,
-  format = NA,
+  format = "full",
   object_type = NA,
   species = NA,
   verbose = TRUE,

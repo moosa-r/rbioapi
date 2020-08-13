@@ -9,7 +9,7 @@ rba_ensembl_lookup_symbol(
   symbols,
   species,
   expand = FALSE,
-  format = NA,
+  format = "full",
   verbose = TRUE,
   progress_bar = FALSE,
   diagnostics = FALSE

@@ -15,7 +15,7 @@ rba_ensembl_sequence_id(
   mask = NA,
   mask_feature = FALSE,
   object_type = NA,
-  type = NA,
+  type = "genomic",
   species = NA,
   verbose = TRUE,
   progress_bar = FALSE,
