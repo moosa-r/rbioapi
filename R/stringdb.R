@@ -225,10 +225,10 @@ rba_string_network_image = function(input,
   ))
 
   if (output_format != "svg") {
-    response_parser_input = quote(httr::content(output,
+    response_parser_input = quote(httr::content(response,
                                                 type = "image/png"))
   } else {
-    response_parser_input = quote(httr::content(output))
+    response_parser_input = quote(httr::content(response))
   }
 
 

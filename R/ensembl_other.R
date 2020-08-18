@@ -2264,15 +2264,10 @@ rba_ensembl_map_assembly = function(asm_one,
                                     httr::accept_json()
   ))
 
-  resp_parser = quote(as.list(jsonlite::fromJSON(httr::content(response,
-                                                               as = "text",
-                                                               encoding = "UTF-8"),
-                                                 simplifyVector = FALSE)
-  ))
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = resp_parser,
-                                  parser_type = NA,
+                                  response_parser = NULL,
+                                  parser_type = "json->list_no_simp",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -4035,13 +4030,9 @@ rba_ensembl_sequence_id = function(ids,
   ))
 
   ## call API
-  parser = quote(as.list(jsonlite::fromJSON(httr::content(response,
-                                                          as = "text",
-                                                          encoding = "UTF-8"),
-                                            simplifyVector = FALSE)))
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = parser,
-                                  parser_type = NA,
+                                  response_parser = NULL,
+                                  parser_type = "json->list_no_simp",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -4151,13 +4142,9 @@ rba_ensembl_sequence_region = function(regions,
   ))
 
   ## call API
-  parser = quote(as.list(jsonlite::fromJSON(httr::content(response,
-                                                          as = "text",
-                                                          encoding = "UTF-8"),
-                                            simplifyVector = FALSE)))
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = parser,
-                                  parser_type = NA,
+                                  response_parser = NULL,
+                                  parser_type = "json->list_no_simp",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -4528,13 +4515,9 @@ rba_ensembl_vep_hgvs = function(hgvs_notations,
   ))
 
   ## call API
-  parser = quote(as.list(jsonlite::fromJSON(httr::content(response,
-                                                          as = "text",
-                                                          encoding = "UTF-8"),
-                                            simplifyVector = FALSE)))
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = parser,
-                                  parser_type = NA,
+                                  response_parser = NULL,
+                                  parser_type = "json->list_no_simp",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -4825,13 +4808,9 @@ rba_ensembl_vep_ids = function(ids,
   ))
 
   ## call API
-  parser = quote(as.list(jsonlite::fromJSON(httr::content(response,
-                                                          as = "text",
-                                                          encoding = "UTF-8"),
-                                            simplifyVector = FALSE)))
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = parser,
-                                  parser_type = NA,
+                                  response_parser = NULL,
+                                  parser_type = "json->list_no_simp",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -5122,13 +5101,9 @@ rba_ensembl_vep_variant = function(variants,
   ))
 
   ## call API
-  parser = quote(as.list(jsonlite::fromJSON(httr::content(response,
-                                                          as = "text",
-                                                          encoding = "UTF-8"),
-                                            simplifyVector = FALSE)))
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = parser,
-                                  parser_type = NA,
+                                  response_parser = NULL,
+                                  parser_type = "json->list_no_simp",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -5499,13 +5474,9 @@ rba_ensembl_variant_recoder = function(ids,
   ))
 
   ## call API
-  parser = quote(as.list(jsonlite::fromJSON(httr::content(response,
-                                                          as = "text",
-                                                          encoding = "UTF-8"),
-                                            simplifyVector = FALSE)))
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = parser,
-                                  parser_type = NA,
+                                  response_parser = NULL,
+                                  parser_type = "json->list_no_simp",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -5593,13 +5564,9 @@ rba_ensembl_variation_id  = function(ids,
   ))
 
   ## call API
-  parser = quote(as.list(jsonlite::fromJSON(httr::content(response,
-                                                          as = "text",
-                                                          encoding = "UTF-8"),
-                                            simplifyVector = FALSE)))
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = parser,
-                                  parser_type = NA,
+                                  response_parser = NULL,
+                                  parser_type = "json->list_no_simp",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,

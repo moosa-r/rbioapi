@@ -261,6 +261,12 @@ rba_ba_response_parser = function(type = NA, parser = NULL) {
                                                               as = "text",
                                                               encoding = "UTF-8")
       )))
+    } else if (type == "json->list_no_simp") {
+      parser = quote(as.list(jsonlite::fromJSON(httr::content(response,
+                                                              as = "text",
+                                                              encoding = "UTF-8"),
+                                                simplifyVector = FALSE)
+      ))
     } else if (type == "json->chr") {
       parser = quote(as.character(jsonlite::fromJSON(httr::content(response,
                                                                    as = "text",
