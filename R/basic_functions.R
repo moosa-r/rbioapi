@@ -102,7 +102,9 @@ rba_connection_test = function(diagnostics = FALSE) {
               "Enrichr" = paste0(getOption("rba_url_enrichr"),
                                  "/Enrichr"),
               "Ensembl" = paste0(getOption("rba_url_ensembl"),
-                                 "/info/ping")
+                                 "/info/ping"),
+              "Reactome" = paste0(getOption("rba_url_reactome"),
+                                  "/ContentService/data/database/name")
   )
 
   cat("-", "Internet", ":\r\n")
@@ -263,7 +265,25 @@ rba_ba_response_parser = function(type = NA, parser = NULL) {
       parser = quote(as.character(jsonlite::fromJSON(httr::content(response,
                                                                    as = "text",
                                                                    encoding = "UTF-8")
-      )))
+                                                     )))
+    } else if (type == "text->chr") {
+      parser = quote(as.character(httr::content(response,
+                                                as = "text",
+                                                encoding = "UTF-8")
+                                  ))
+    } else if (type == "text->df") {
+      parser = quote(read.table(text = httr::content(response,
+                                                     type = "text/plain",
+                                                     as = "text",
+                                                     encoding = "UTF-8"),
+                                header = FALSE,
+                                stringsAsFactors = FALSE)
+                     )
+    } else if (type == "tsv->df") {
+      parser = quote(as.character(httr::content(response,
+                                                as = "text",
+                                                encoding = "UTF-8")
+      ))
     } else {
       stop("Internal Error: Specify the parser expression!", call. = TRUE)
     }
@@ -360,8 +380,8 @@ rba_ba_skeletion = function(call_function,
                             progress_bar = FALSE,
                             verbose = TRUE,
                             diagnostics = FALSE,
-                            no_interet_retry_max = 1,
-                            no_internet_wait_time = 10) {
+                            no_interet_retry_max = getOption("max_retry"),
+                            no_internet_wait_time = getOption("wait_time")) {
   ## 1 Build API Call expression
   call_function = as.list(call_function)
   if (diagnostics == TRUE) {

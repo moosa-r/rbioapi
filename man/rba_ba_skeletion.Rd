@@ -14,8 +14,8 @@ rba_ba_skeletion(
   progress_bar = FALSE,
   verbose = TRUE,
   diagnostics = FALSE,
-  no_interet_retry_max = 1,
-  no_internet_wait_time = 10
+  no_interet_retry_max = getOption("max_retry"),
+  no_internet_wait_time = getOption("wait_time")
 )
 }
 \arguments{

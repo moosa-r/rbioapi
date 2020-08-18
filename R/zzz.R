@@ -38,8 +38,12 @@ NULL
   options("rba_url_string" = c("STRING" = "https://string-db.org"))
   options("rba_url_enrichr" = c("Enrichr" = "https://amp.pharm.mssm.edu"))
   options("rba_url_ensembl" = c("Ensembl" = "http://rest.ensembl.org"))
+  options("rba_url_reactome" = c("Ensembl" = "https://reactome.org"))
   ## save user agent for api Calls as an option
   options("rba_ua" = "rbioapi R package") #default user agent
+  ## other global variables
+  options("max_retry" = 1)
+  options("wait_time" = 10)
 
 }
 
