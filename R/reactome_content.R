@@ -363,3 +363,585 @@ rba_reactome_event_ancestors = function(species,
   return(final_output)
 }
 
+#### Exporter Endpoints ####
+
+#' This method accepts identifiers for Event class instances.
+#' When a diagrammed pathway is provided, the diagram is exported to the
+#' specified format. When a subpathway is provided, the diagram for
+#' the parent is exported and the events that are part of the subpathways
+#' are selected. When a reaction is provided, the diagram containing the
+#' reaction is exported and the reaction is selected.
+#'
+#' @param event_id
+#' @param output_format
+#' @param save_to
+#' @param quality
+#' @param flg
+#' @param flg_interactors
+#' @param sel
+#' @param title
+#' @param margin
+#' @param ehld
+#' @param diagram_profile
+#' @param token
+#' @param resource
+#' @param analysis_profile
+#' @param exp_column
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_reactome_exporter_diagram = function(event_id,
+                                         output_format = "png",
+                                         save_to = NA,
+                                         quality = 5,
+                                         flg = NA,
+                                         flg_interactors = TRUE,
+                                         sel = NA,
+                                         title = TRUE,
+                                         margin = 15,
+                                         ehld = TRUE,
+                                         diagram_profile = "Modern",
+                                         token = NA,
+                                         resource = "TOTAL",
+                                         analysis_profile = "Standard",
+                                         exp_column = NA,
+                                         verbose = TRUE,
+                                         progress_bar = FALSE,
+                                         diagnostics = FALSE){
+
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = event_id,
+                                         name = "event_id",
+                                         class = "character"),
+                                    list(arg = output_format,
+                                         name = "output_format",
+                                         class = "character",
+                                         val = c("png",
+                                                 "jpeg",
+                                                 "svg",
+                                                 "gif")),
+                                    list(arg = save_to,
+                                         name = "save_to",
+                                         class = "character"),
+                                    list(arg = quality,
+                                         name = "quality",
+                                         class = "numeric",
+                                         ran = c(1,10)),
+                                    list(arg = flg,
+                                         name = "flg",
+                                         class = "character"),
+                                    list(arg = flg_interactors,
+                                         name = "flg_interactors",
+                                         class = "logical"),
+                                    list(arg = sel,
+                                         name = "sel",
+                                         class = "character"),
+                                    list(arg = title,
+                                         name = "title",
+                                         class = "logical"),
+                                    list(arg = margin,
+                                         name = "margin",
+                                         class = "numeric",
+                                         ran = c(0,20)),
+                                    list(arg = ehld,
+                                         name = "ehld",
+                                         class = "logical"),
+                                    list(arg = diagram_profile,
+                                         name = "diagram_profile",
+                                         class = "character",
+                                         val = c("Modern",
+                                                 "Standard")),
+                                    list(arg = token,
+                                         name = "token",
+                                         class = "character"),
+                                    list(arg = resource,
+                                         name = "resource",
+                                         class = "character"),
+                                    list(arg = analysis_profile,
+                                         name = "analysis_profile",
+                                         class = "character",
+                                         val = c("Standard",
+                                                 "Strosobar",
+                                                 "Copper Plus")),
+                                    list(arg = exp_column,
+                                         name = "exp_column",
+                                         class = "character")),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("/exporter/diagram/{identifier}.{ext}",
+            "Exports a given pathway diagram to the specified image format")
+  }
+
+  ## build GET API request's query
+  additional_pars = list(list(quality != 5,
+                              list("quality" = quality)),
+                         list(!is.na(flg),
+                              list("flg" = flg)),
+                         list(flg_interactors == FALSE,
+                              list("flgInteractors" = "false")),
+                         list(!is.na(sel),
+                              list("sel" = sel)),
+                         list(title == FALSE,
+                              list("title" = "false")),
+                         list(margin != 15,
+                              list("margin" = as.integer(margin))),
+                         list(ehld == FALSE,
+                              list("ehld" = ehld)),
+                         list(diagram_profile != "Modern",
+                              list("diagramProfile" = diagram_profile)),
+                         list(!is.na(token),
+                              list("token" = token)),
+                         list(resource != "TOTAL",
+                              list("resource" = resource)),
+                         list(!is.na(analysis_profile),
+                              list("analysisProfile" = analysis_profile)),
+                         list(!is.na(exp_column),
+                              list("expColumn" = exp_column)))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+
+
+  ## make function-specific calls
+  if (output_format == "svg") {
+    content_type = "image/svg+xml"
+  } else {
+    content_type = paste0("image/", output_format)
+  }
+  call_func_input = quote(httr::GET(url = getOption("rba_url_reactome"),
+                                    path = paste0("ContentService/",
+                                                  "exporter/diagram/",
+                                                  event_id, ".",
+                                                  output_format),
+                                    query = call_query,
+                                    httr::accept(content_type),
+                                    httr::write_disk(save_to, overwrite = TRUE)
+  ))
+  response_parser_input = quote(NA)
+
+  # create file_path
+  if (is.na(save_to)){
+    file_name = paste0(event_id, ".", output_format)
+    save_to = file.path(getwd(), "reactome_exporter", file_name)
+    dir.create(dirname(save_to), showWarnings = TRUE, recursive = TRUE)
+    message("No file path was provided with 'save_to' argument.",
+            " Saving to:\r\n", save_to)
+  } else {
+    if (!grepl(pattern = paste0("\\.", output_format, "$"),
+               x = save_to, ignore.case = TRUE)) {
+      warning("Your provided output_format (", output_format, ")",
+              " does not match the file prefix of your provided save_to argument",
+              " (", basename(save_to), ")",
+              call. = diagnostics)
+    }
+    if (verbose == TRUE) {
+      message("Saving to:\r\n", save_to)
+    }
+  }
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = response_parser_input,
+                                  parser_type = NA,
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+  invisible()
+}
+
+#' This method accepts identifiers for Event class instances.
+#' The generated document contains the details for the given event and,
+#' optionally, its children (see level parameter). These details include:
+#' - A diagram image
+#' - Summation
+#' - Literature references
+#' - Edit history
+#' - Other details: type, location, compartments, diseases
+#'
+#' @param event_id
+#' @param save_to
+#' @param level
+#' @param diagram_profile
+#' @param token
+#' @param resource
+#' @param analysis_profile
+#' @param exp_column
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_reactome_exporter_document = function(event_id,
+                                          save_to = NA,
+                                          level  = 1,
+                                          diagram_profile = "Modern",
+                                          token = NA,
+                                          resource = "TOTAL",
+                                          analysis_profile = "Standard",
+                                          exp_column = NA,
+                                          verbose = TRUE,
+                                          progress_bar = FALSE,
+                                          diagnostics = FALSE){
+
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = event_id,
+                                         name = "event_id",
+                                         class = "character"),
+                                    list(arg = save_to,
+                                         name = "save_to",
+                                         class = "character"),
+                                    list(arg = level,
+                                         name = "level",
+                                         class = "numeric",
+                                         val = c(0,1)),
+                                    list(arg = diagram_profile,
+                                         name = "diagram_profile",
+                                         class = "character",
+                                         val = c("Modern",
+                                                 "Standard")),
+                                    list(arg = token,
+                                         name = "token",
+                                         class = "character"),
+                                    list(arg = resource,
+                                         name = "resource",
+                                         class = "character"),
+                                    list(arg = analysis_profile,
+                                         name = "analysis_profile",
+                                         class = "character",
+                                         val = c("Standard",
+                                                 "Strosobar",
+                                                 "Copper Plus")),
+                                    list(arg = exp_column,
+                                         name = "exp_column",
+                                         class = "character")),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("/exporter/document/event/{identifier}.pdf",
+            "Exports the content of a given event (pathway or reaction) to a PDF document")
+  }
+
+  ## build GET API request's query
+  additional_pars = list(list(level != 1,
+                              list("level" = level)),
+                         list(diagram_profile != "Modern",
+                              list("diagramProfile" = diagram_profile)),
+                         list(!is.na(token),
+                              list("token" = token)),
+                         list(resource != "TOTAL",
+                              list("resource" = resource)),
+                         list(!is.na(analysis_profile),
+                              list("analysisProfile" = analysis_profile)),
+                         list(!is.na(exp_column),
+                              list("expColumn" = exp_column)))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+
+
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_reactome"),
+                                    path = paste0("ContentService/",
+                                                  "exporter/document/event/",
+                                                  event_id, ".pdf"),
+                                    query = call_query,
+                                    httr::accept("application/pdf"),
+                                    httr::write_disk(save_to, overwrite = TRUE)
+  ))
+  response_parser_input = quote(NA)
+
+  # create file_path
+  if (is.na(save_to)){
+    file_name = paste0(event_id, ".pdf")
+    save_to = file.path(getwd(), "reactome_exporter", file_name)
+    dir.create(dirname(save_to), showWarnings = TRUE, recursive = TRUE)
+    message("No file path was provided with 'save_to' argument.",
+            " Saving to:\r\n", save_to)
+  } else {
+    if (!grepl(pattern = paste0("\\.pdf$"),
+               x = save_to, ignore.case = TRUE)) {
+      warning("The output format (pdf)) does not match the file prefix of ",
+              "your provided save_to argument",
+              " (", basename(save_to), ")",
+              call. = diagnostics)
+    }
+    if (verbose == TRUE) {
+      message("Saving to:\r\n", save_to)
+    }
+  }
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = response_parser_input,
+                                  parser_type = NA,
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+  invisible()
+}
+
+#' Exports a given pathway or reaction to SBGN or SBML
+#'
+#' @param event_id
+#' @param output_format
+#' @param save_to
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_reactome_exporter_event = function(event_id,
+                                       output_format,
+                                       save_to = NA,
+                                       verbose = TRUE,
+                                       progress_bar = FALSE,
+                                       diagnostics = FALSE){
+
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = event_id,
+                                         name = "event_id",
+                                         class = "character"),
+                                    list(arg = output_format,
+                                         name = "output_format",
+                                         class = "character",
+                                         val = c("sbgn",
+                                                 "sbml")),
+                                    list(arg = save_to,
+                                         name = "save_to",
+                                         class = "character")),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("/exporter/event/{identifier}.sbgn",
+            "Exports a given pathway or reaction to SBGN or SBML")
+  }
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_reactome"),
+                                    path = paste0("ContentService/",
+                                                  "/exporter/event/",
+                                                  event_id, ".",
+                                                  output_format),
+                                    httr::write_disk(save_to, overwrite = TRUE)
+  ))
+  response_parser_input = quote(NA)
+
+  # create file_path
+  if (is.na(save_to)){
+    file_name = paste0(event_id, ".", output_format)
+    save_to = file.path(getwd(), "reactome_exporter", file_name)
+    dir.create(dirname(save_to), showWarnings = TRUE, recursive = TRUE)
+    message("No file path was provided with 'save_to' argument.",
+            " Saving to:\r\n", save_to)
+  } else {
+    if (!grepl(pattern = paste0("\\.", output_format, "$"),
+               x = save_to, ignore.case = TRUE)) {
+      warning("Your provided output_format (", output_format, ")",
+              " does not match the file prefix of your provided save_to argument",
+              " (", basename(save_to), ")",
+              call. = diagnostics)
+    }
+    if (verbose == TRUE) {
+      message("Saving to:\r\n", save_to)
+    }
+  }
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = response_parser_input,
+                                  parser_type = NA,
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+  invisible()
+}
+
+#' Exports a given pathway overview of a specie to the specified image format
+#'
+#' @param species
+#' @param output_format
+#' @param save_to
+#' @param quality
+#' @param flg
+#' @param flg_interactors
+#' @param sel
+#' @param title
+#' @param margin
+#' @param diagram_profile
+#' @param token
+#' @param resource
+#' @param exp_column
+#' @param coverage
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_reactome_exporter_overview = function(species,
+                                          output_format = "png",
+                                          save_to = NA,
+                                          quality = 5,
+                                          flg = NA,
+                                          flg_interactors = TRUE,
+                                          sel = NA,
+                                          title = TRUE,
+                                          margin = 15,
+                                          diagram_profile = "Copper",
+                                          token = NA,
+                                          resource = "TOTAL",
+                                          exp_column = NA,
+                                          coverage = FALSE,
+                                          verbose = TRUE,
+                                          progress_bar = FALSE,
+                                          diagnostics = FALSE){
+
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric")),
+                                    list(arg = output_format,
+                                         name = "output_format",
+                                         class = "character",
+                                         val = c("png",
+                                                 "jpeg",
+                                                 "svg",
+                                                 "gif")),
+                                    list(arg = save_to,
+                                         name = "save_to",
+                                         class = "character"),
+                                    list(arg = quality,
+                                         name = "quality",
+                                         class = "numeric",
+                                         ran = c(1,10)),
+                                    list(arg = flg,
+                                         name = "flg",
+                                         class = "character"),
+                                    list(arg = flg_interactors,
+                                         name = "flg_interactors",
+                                         class = "logical"),
+                                    list(arg = sel,
+                                         name = "sel",
+                                         class = "character"),
+                                    list(arg = title,
+                                         name = "title",
+                                         class = "logical"),
+                                    list(arg = margin,
+                                         name = "margin",
+                                         class = "numeric",
+                                         ran = c(0,20)),
+                                    list(arg = diagram_profile,
+                                         name = "diagram_profile",
+                                         class = "character",
+                                         val = c("Copper",
+                                                 "Copper Plus",
+                                                 "Barium Lithium",
+                                                 "calcium salts")),
+                                    list(arg = token,
+                                         name = "token",
+                                         class = "character"),
+                                    list(arg = resource,
+                                         name = "resource",
+                                         class = "character"),
+                                    list(arg = exp_column,
+                                         name = "exp_column",
+                                         class = "character"),
+                                    list(arg = coverage,
+                                         name = "coverage",
+                                         class = "logical")),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("/exporter/fireworks/{species}.{ext}",
+            "Exports a given pathway overview to the specified image format")
+  }
+
+  ## build GET API request's query
+  additional_pars = list(list(quality != 5,
+                              list("quality" = quality)),
+                         list(!is.na(flg),
+                              list("flg" = flg)),
+                         list(flg_interactors == FALSE,
+                              list("flgInteractors" = "false")),
+                         list(!is.na(sel),
+                              list("sel" = sel)),
+                         list(title == FALSE,
+                              list("title" = "false")),
+                         list(margin != 15,
+                              list("margin" = as.integer(margin))),
+                         list(diagram_profile != "Copper",
+                              list("diagramProfile" = diagram_profile)),
+                         list(!is.na(token),
+                              list("token" = token)),
+                         list(resource != "TOTAL",
+                              list("resource" = resource)),
+                         list(!is.na(exp_column),
+                              list("expColumn" = exp_column)),
+                         list(coverage == TRUE,
+                              list("coverage" = "true")))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+
+
+  ## make function-specific calls
+  if (output_format == "svg") {
+    content_type = "image/svg+xml"
+  } else {
+    content_type = paste0("image/", output_format)
+  }
+  call_func_input = quote(httr::GET(url = getOption("rba_url_reactome"),
+                                    path = paste0("ContentService/",
+                                                  "/exporter/fireworks/",
+                                                  species, ".",
+                                                  output_format),
+                                    query = call_query,
+                                    httr::accept(content_type),
+                                    httr::write_disk(save_to, overwrite = TRUE)
+  ))
+  response_parser_input = quote(NA)
+
+  # create file_path
+  if (is.na(save_to)){
+    file_name = paste0(species, ".", output_format)
+    save_to = file.path(getwd(), "reactome_exporter", file_name)
+    dir.create(dirname(save_to), showWarnings = TRUE, recursive = TRUE)
+    message("No file path was provided with 'save_to' argument.",
+            " Saving to:\r\n", save_to)
+  } else {
+    if (!grepl(pattern = paste0("\\.", output_format, "$"),
+               x = save_to, ignore.case = TRUE)) {
+      warning("Your provided output_format (", output_format, ")",
+              " does not match the file prefix of your provided save_to argument",
+              " (", basename(save_to), ")",
+              call. = diagnostics)
+    }
+    if (verbose == TRUE) {
+      message("Saving to:\r\n", save_to)
+    }
+  }
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = response_parser_input,
+                                  parser_type = NA,
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+  invisible()
+}
