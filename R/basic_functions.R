@@ -470,7 +470,7 @@ rba_ba_args = function(cons = NULL,
                        diagnostics = FALSE){
   ## per each argument,the function input "cons" should be a named
   # sub-list with one of these members:
-  # arg, name, class, val, min_val, max_val, len, min_len, max_len,
+  # arg, name, class, val, range, min_val, max_val, len, min_len, max_len,
   ## example:
   # list(arg = progress_bar, name = "progress_bar", class = "logical")
 
@@ -523,6 +523,17 @@ rba_ba_args = function(cons = NULL,
         stop("Invalid Argument: ", cons[[i]][["name"]],
              " should be either '", paste0(cons[[i]][["val"]],
                                            collapse = " or "),
+             "'\r\n(Your provided argument is '",
+             cons[[i]][["arg"]], "')\r\n", call. = diagnostics)
+      }
+
+      # check for allowed range
+      if (!is.null(cons[[i]][["ran"]]) &&
+          !all(cons[[i]][["arg"]] >= cons[[i]][["ran"]][[1]] &
+               cons[[i]][["arg"]] <= cons[[i]][["ran"]][[2]])) {
+        stop("Invalid Argument: ", cons[[i]][["name"]],
+             " should be from '", cons[[i]][["ran"]][[1]],
+             "' to '", cons[[i]][["ran"]][[2]],
              "'\r\n(Your provided argument is '",
              cons[[i]][["arg"]], "')\r\n", call. = diagnostics)
       }
@@ -582,7 +593,7 @@ rba_ba_args = function(cons = NULL,
   if(!is.null(cond[[1]])){
     for (i in seq_along(cond)){
       # check if the expression is TRUE
-      if (eval(cond[[i]][[1]], envir = parent.frame())){
+      if (eval(cond[[i]][[1]], envir = parent.frame()) == TRUE){
         # throw an error message
         if (!is.null(cond[[i]][[2]])) {
           stop(cond[[i]][[2]], call. = diagnostics)
