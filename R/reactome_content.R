@@ -240,7 +240,7 @@ rba_reactome_complex_other_forms = function(entity_id,
   ## make function-specific calls
   call_func_input = quote(httr::GET(url = getOption("rba_url_reactome"),
                                     path = paste0("ContentService/",
-                                                  "/data/entity/",
+                                                  "data/entity/",
                                                   entity_id,
                                                   "/otherForms"),
                                     httr::accept_json()
@@ -293,7 +293,7 @@ rba_reactome_event_ancestors = function(event_id,
   ## make function-specific calls
   call_func_input = quote(httr::GET(url = getOption("rba_url_reactome"),
                                     path = paste0("ContentService/",
-                                                  "/data/event/",
+                                                  "data/event/",
                                                   event_id,
                                                   "/ancestors"),
                                     httr::accept_json()
@@ -730,7 +730,7 @@ rba_reactome_exporter_event = function(event_id,
   ## make function-specific calls
   call_func_input = quote(httr::GET(url = getOption("rba_url_reactome"),
                                     path = paste0("ContentService/",
-                                                  "/exporter/event/",
+                                                  "exporter/event/",
                                                   event_id, ".",
                                                   output_format),
                                     httr::write_disk(save_to, overwrite = TRUE)
@@ -907,7 +907,7 @@ rba_reactome_exporter_overview = function(species,
   }
   call_func_input = quote(httr::GET(url = getOption("rba_url_reactome"),
                                     path = paste0("ContentService/",
-                                                  "/exporter/fireworks/",
+                                                  "exporter/fireworks/",
                                                   species, ".",
                                                   output_format),
                                     query = call_query,
@@ -944,4 +944,593 @@ rba_reactome_exporter_overview = function(species,
                                   verbose = verbose,
                                   diagnostics = diagnostics)
   invisible()
+}
+
+#### interactors Endpoints ####
+
+#' Retrieve clustered interaction, sorted by score, of a given accession(s)
+#' by resource.
+#'
+#' @param resource
+#' @param proteins
+#' @param level
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_reactome_interactors_psicquic = function(resource,
+                                             proteins,
+                                             details = "details",
+                                             verbose = TRUE,
+                                             progress_bar = FALSE,
+                                             diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = resource,
+                                         name = "resource",
+                                         class = "character"),
+                                    list(arg = proteins,
+                                         name = "proteins",
+                                         class = c("character",
+                                                   "numeric"),
+                                         max_len = 1000),
+                                    list(arg = details,
+                                         name = "details",
+                                         class = "character",
+                                         val = c("details",
+                                                 "summary"))),
+
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("POST /interactors/psicquic/molecules/{resource}/details",
+            "Retrieve clustered interaction, sorted by score, of a given accession(s) by resource.")
+  }
+
+  ## build POST API request's URL
+  call_body = paste(unique(proteins),collapse = "\n")
+
+  ## make function-specific calls
+  call_func_input = quote(httr::POST(url = getOption("rba_url_reactome"),
+                                     path = paste0("ContentService/",
+                                                   "interactors/psicquic/molecules/",
+                                                   resource, "/",
+                                                   details),
+                                     body = call_body,
+                                     httr::accept_json(),
+                                     httr::content_type("text/plain")
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list_no_simp",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Retrieve a list of all Psicquic Registries services
+#'
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_reactome_interactors_resources = function(verbose = TRUE,
+                                              progress_bar = FALSE,
+                                              diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET /interactors/psicquic/resources",
+            "Retrieve a list of all Psicquic Registries services")
+  }
+
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_reactome"),
+                                    path = paste0("ContentService/",
+                                                  "/interactors/psicquic/resources"),
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->df",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+  return(final_output)
+}
+
+#### Mapping Endpoints ####
+
+#' Entities play different roles in reactions, and reactions are events that
+#' conform a pathway. This method retrieves the pathways for which an
+#' identifier plays a role within one or more of their events.
+#'
+#' @param id
+#' @param resource
+#' @param species
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_reactome_mapping_pathways = function(id,
+                                         resource,
+                                         species = NA,
+                                         verbose = TRUE,
+                                         progress_bar = FALSE,
+                                         diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = id,
+                                         name = "id",
+                                         class = c("character",
+                                                   "numeric")),
+                                    list(arg = resource,
+                                         name = "resource",
+                                         class = "character"),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric"))),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET /data/mapping/{resource}/{identifier}/pathways",
+            "The lower level pathways where an identifier can be mapped to")
+  }
+  ## build GET API request's query
+  additional_pars = list(list(!is.na(species),
+                              list("species" = species)))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_reactome"),
+                                    path = paste0("ContentService/",
+                                                  "data/mapping/",
+                                                  resource, "/",
+                                                  id, "/pathways"),
+                                    query = call_query,
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->df",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Entities play different roles in reactions. This method retrieves the
+#' reactions for which an identifier plays a role .
+#'
+#' @param id
+#' @param resource
+#' @param species
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_reactome_mapping_reactions = function(id,
+                                          resource,
+                                          species = NA,
+                                          verbose = TRUE,
+                                          progress_bar = FALSE,
+                                          diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = id,
+                                         name = "id",
+                                         class = c("character",
+                                                   "numeric")),
+                                    list(arg = resource,
+                                         name = "resource",
+                                         class = "character"),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric"))),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET /data/mapping/{resource}/{identifier}/reactions",
+            "The reactions where an identifier can be mapped to")
+  }
+  ## build GET API request's query
+  additional_pars = list(list(!is.na(species),
+                              list("species" = species)))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_reactome"),
+                                    path = paste0("ContentService/",
+                                                  "data/mapping/",
+                                                  resource, "/",
+                                                  id, "/reactions"),
+                                    query = call_query,
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->df",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#### Orthology Endpoints ####
+
+#' Reactome uses the set of manually curated human reactions to computationally
+#' infer reactions in twenty evolutionarily divergent eukaryotic species for
+#' which high-quality whole-genome sequence data are available, and hence a
+#' comprehensive and high-quality set of protein predictions exists. Thus,
+#' this method retrieves the orthology for any given event or entity in the
+#' specified species. Here you can find more information about the
+#' computationally inferred events.
+#'
+#' @param ids
+#' @param species_id
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_reactome_orthology = function(ids,
+                                  species_id,
+                                  verbose = TRUE,
+                                  progress_bar = FALSE,
+                                  diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = ids,
+                                         name = "ids",
+                                         class = "character"),
+                                    list(arg = species_id,
+                                         name = "species_id",
+                                         class = "numeric")),
+
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("POST /data/orthologies/ids/species/{speciesId}",
+            "The orthologies of a given set of events or entities")
+  }
+
+  ## build POST API request's URL
+  call_body = paste(unique(ids),collapse = "\n")
+
+  ## make function-specific calls
+  call_func_input = quote(httr::POST(url = getOption("rba_url_reactome"),
+                                     path = paste0("ContentService/",
+                                                   "data/orthologies/ids/species/",
+                                                   species_id),
+                                     body = call_body,
+                                     httr::accept_json(),
+                                     httr::content_type("text/plain")
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#### Participants Endpoints ####
+
+#' Participants contains a PhysicalEntity (dbId, displayName) and a
+#' collection of ReferenceEntities (dbId, name, identifier, url)
+#'
+#' @param id
+#' @param physical_entities
+#' @param reference_entities
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_reactome_participants = function(id,
+                                     physical_entities = FALSE,
+                                     reference_entities = FALSE,
+                                     verbose = TRUE,
+                                     progress_bar = FALSE,
+                                     diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = id,
+                                         name = "id",
+                                         class = c("character",
+                                                   "numeric")),
+                                    list(arg = physical_entities,
+                                         name = "physical_entities",
+                                         class = "logical"),
+                                    list(arg = reference_entities,
+                                         name = "reference_entities",
+                                         class = "logical")),
+                        cond = list(list(sum(physical_entities, reference_entities) == 2,
+                                         "You can only Request either physical_entities or reference_entities in one function call.")),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET data/participants/{id}",
+            "A list of participants /participating PhysicalEntities /participating ReferenceEntities for a given event")
+  }
+
+  ## make function-specific calls
+  path_input = paste0("ContentService/",
+                      "data/participants/",
+                      id)
+  if (physical_entities == TRUE){
+    path_input = paste0(path_input, "/participatingPhysicalEntities")
+  } else if (reference_entities == TRUE) {
+    path_input = paste0(path_input, "/referenceEntities")
+  }
+
+  call_func_input = quote(httr::GET(url = getOption("rba_url_reactome"),
+                                    path = path_input,
+                                    httr::accept_json()
+  ))
+
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list_no_simp",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+  return(final_output)
+}
+
+#### pathways Endpoints ####
+
+#' Events are the building blocks used in Reactome to represent all biological
+#' processes, and they include pathways and reactions. Typically, an event can
+#' contain other events. For example, a pathway can contain smaller pathways
+#' (subpathways) and reactions. This method recursively retrieves a single
+#' attribute for each of the events contained in the given event.
+#'
+#' @param id
+#' @param attribute_name
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_reactome_pathways_participants = function(id,
+                                              attribute_name = NA,
+                                              verbose = TRUE,
+                                              progress_bar = FALSE,
+                                              diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = id,
+                                         name = "id",
+                                         class = c("character",
+                                                   "numeric")),
+                                    list(arg = attribute_name,
+                                         name = "attribute_name",
+                                         class = "character")),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET /data/pathway/{id}/containedEvents",
+            "All the events contained in the given event",
+            "/data/pathway/{id}/containedEvents/{attributeName}",
+            "A single property for each event contained in the given event")
+  }
+
+  ## make function-specific calls
+  path_input = paste0("ContentService/",
+                      "data/pathway/",
+                      id,
+                      "/containedEvents")
+  accept_input = "application/json"
+  parser_type_input = "json->df"
+  parser_input = NULL
+
+  if (!is.na(attribute_name)){
+    path_input = paste0(path_input, "/", attribute_name)
+    accept_input = "text/plain"
+    parser_type_input = NA
+    parser_input = quote(unlist(strsplit(x = gsub(pattern = "\\[|\\]",
+                                                  replacement = "",
+                                                  x = as.character(httr::content(response,
+                                                                                 as = "text",
+                                                                                 encoding = "UTF-8")),
+    ),
+    split = ", ", perl = TRUE)
+    ))
+  }
+
+  call_func_input = quote(httr::GET(url = getOption("rba_url_reactome"),
+                                    path = path_input,
+                                    httr::accept(accept_input)
+  ))
+
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = parser_input,
+                                  parser_type = parser_type_input,
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+  return(final_output)
+}
+
+#' This method traverses the event hierarchy and retrieves the list of all
+#' lower level pathways that have a diagram and contain the given
+#' PhysicalEntity or Event.
+#'
+#' @param entity_id
+#' @param with_diagram
+#' @param all_forms
+#' @param species
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_reactome_pathways_low = function(entity_id,
+                                     with_diagram = FALSE,
+                                     all_forms = FALSE,
+                                     species = NA,
+                                     verbose = TRUE,
+                                     progress_bar = FALSE,
+                                     diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = entity_id,
+                                         name = "entity_id",
+                                         class = "character"),
+                                    list(arg = all_forms,
+                                         name = "all_forms",
+                                         class = "logical"),
+                                    list(arg = with_diagram,
+                                         name = "with_diagram",
+                                         class = "logical"),
+                                    list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric"))),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET /data/pathways/low/diagram/entity/{id}",
+            "A list of lower level pathways with diagram containing a given entity or event",
+            "GET /data/pathways/low/diagram/entity/{id}/allForms",
+            "A list of lower level pathways with diagram containing any form of a given entity",
+            "GET /data/pathways/low/entity/{id}",
+            "A list of lower level pathways containing a given entity or event",
+            "GET /data/pathways/low/entity/{id}/allForms",
+            "A list of lower level pathways containing any form of a given entity")
+  }
+
+  ## make function-specific calls
+  path_input = paste0("ContentService/",
+                      "/data/pathways/low/entity/",
+                      entity_id)
+  if (all_forms == TRUE) {
+    path_input = paste0(path_input,
+                        "/allForms")
+  }
+  if (with_diagram == TRUE) {
+    path_input = sub("/low/entity/", "/low/diagram/entity/", path_input)
+  }
+
+
+  call_func_input = quote(httr::GET(url = getOption("rba_url_reactome"),
+                                    path = path_input,
+                                    httr::accept_json()))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->df",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+  return(final_output)
+}
+
+#' This method retrieves the list of top level pathways for the given species
+#'
+#' @param species
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_reactome_pathways_top = function(species,
+                                     verbose = TRUE,
+                                     progress_bar = FALSE,
+                                     diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = species,
+                                         name = "species",
+                                         class = c("character",
+                                                   "numeric"))),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET /data/pathways/top/{species}",
+            "All Reactome top level pathways")
+  }
+  ## build GET API request's query
+  additional_pars = list(list(!is.na(species),
+                              list("species" = species)))
+
+  call_query = rba_ba_body_add_pars(call_body = list(),
+                                    additional_pars = additional_pars)
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_reactome"),
+                                    path = paste0("ContentService/",
+                                                  "data/pathways/top/",
+                                                  species),
+                                    query = call_query,
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->df",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
 }
