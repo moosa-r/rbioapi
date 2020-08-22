@@ -9,8 +9,14 @@ and entity sets can be excluded setting the ‘excludeStructures’ optional
 parameter to ‘true’}
 \usage{
 rba_reactome_complex_subunits(
-  complex_id,
-  exclude_structures = FALSE,
+  id,
+  verbose = TRUE,
+  progress_bar = FALSE,
+  diagnostics = FALSE
+)
+
+rba_reactome_complex_subunits(
+  id,
   verbose = TRUE,
   progress_bar = FALSE,
   diagnostics = FALSE
@@ -21,6 +27,8 @@ rba_reactome_complex_subunits(
 }
 \value{
 
+
+
 }
 \description{
 Retrieves the list of subunits that constitute any given complex. In case
@@ -28,4 +36,6 @@ the complex comprises other complexes, this method recursively traverses
 the content returning each contained PhysicalEntity. Contained complexes
 and entity sets can be excluded setting the ‘excludeStructures’ optional
 parameter to ‘true’
+
+Retrieves a list containing all the reference entities for a given identifier.
 }

@@ -510,9 +510,9 @@ rba_reactome_exporter_diagram = function(event_id,
 
   ## make function-specific calls
   if (output_format == "svg") {
-    content_type = "image/svg+xml"
+    accept_input = "image/svg+xml"
   } else {
-    content_type = paste0("image/", output_format)
+    accept_input = paste0("image/", output_format)
   }
   call_func_input = quote(httr::GET(url = getOption("rba_url_reactome"),
                                     path = paste0("ContentService/",
@@ -520,7 +520,7 @@ rba_reactome_exporter_diagram = function(event_id,
                                                   event_id, ".",
                                                   output_format),
                                     query = call_query,
-                                    httr::accept(content_type),
+                                    httr::accept(accept_input),
                                     httr::write_disk(save_to, overwrite = TRUE)
   ))
   response_parser_input = quote(NA)
@@ -901,9 +901,9 @@ rba_reactome_exporter_overview = function(species,
 
   ## make function-specific calls
   if (output_format == "svg") {
-    content_type = "image/svg+xml"
+    accept_input = "image/svg+xml"
   } else {
-    content_type = paste0("image/", output_format)
+    accept_input = paste0("image/", output_format)
   }
   call_func_input = quote(httr::GET(url = getOption("rba_url_reactome"),
                                     path = paste0("ContentService/",
@@ -911,7 +911,7 @@ rba_reactome_exporter_overview = function(species,
                                                   species, ".",
                                                   output_format),
                                     query = call_query,
-                                    httr::accept(content_type),
+                                    httr::accept(accept_input),
                                     httr::write_disk(save_to, overwrite = TRUE)
   ))
   response_parser_input = quote(NA)
@@ -946,7 +946,7 @@ rba_reactome_exporter_overview = function(species,
   invisible()
 }
 
-#### interactors Endpoints ####
+#### Interactors Endpoints ####
 
 #' Retrieve clustered interaction, sorted by score, of a given accession(s)
 #' by resource.
@@ -1324,7 +1324,7 @@ rba_reactome_participants = function(id,
   return(final_output)
 }
 
-#### pathways Endpoints ####
+#### Pathways Endpoints ####
 
 #' Events are the building blocks used in Reactome to represent all biological
 #' processes, and they include pathways and reactions. Typically, an event can
@@ -1456,7 +1456,7 @@ rba_reactome_pathways_low = function(entity_id,
 
   ## make function-specific calls
   path_input = paste0("ContentService/",
-                      "/data/pathways/low/entity/",
+                      "data/pathways/low/entity/",
                       entity_id)
   if (all_forms == TRUE) {
     path_input = paste0(path_input,
@@ -1520,6 +1520,347 @@ rba_reactome_pathways_top = function(species,
                                                   "data/pathways/top/",
                                                   species),
                                     query = call_query,
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->df",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#### Person Endpoints ####
+
+#' Retrieves a list of people in Reactome with either their first or last name
+#' partly/exactly matching the given string.
+#'
+#' @param person_name
+#' @param exact
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_reactome_people_name = function(person_name,
+                                    exact = FALSE,
+                                    verbose = TRUE,
+                                    progress_bar = FALSE,
+                                    diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = person_name,
+                                         name = "person_name",
+                                         class = "character"),
+                                    list(arg = exact,
+                                         name = "exact",
+                                         class = "logical")),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("/data/people/name/{name}",
+            "A list of people with first or last name partly matching a given string",
+            "/data/people/name/{name}/exact",
+            "A list of people with first AND last name exactly matching a given string")
+  }
+
+  ## make function-specific calls
+  path_input = paste0("ContentService/",
+                      "data/people/name/",
+                      gsub(" ", "%20", person_name))
+  if (exact == TRUE) {
+    path_input = paste0(path_input, "/exact")
+  }
+  call_func_input = quote(httr::GET(url = getOption("rba_url_reactome"),
+                                    path = path_input,
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list_no_simp",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+rba_reactome_people_id = function(id,
+                                  authored_pathways = FALSE,
+                                  publications = FALSE,
+                                  attribute_name = NA,
+                                  verbose = TRUE,
+                                  progress_bar = FALSE,
+                                  diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = id,
+                                         name = "id",
+                                         class = "character"),
+                                    list(arg = authored_pathways,
+                                         name = "authored_pathways",
+                                         class = "logical"),
+                                    list(arg = publications,
+                                         name = "publications",
+                                         class = "logical"),
+                                    list(arg = attribute_name,
+                                         name = "attribute_name",
+                                         class = "character")),
+                        cond = list(list(sum(!is.na(attribute_name),
+                                             authored_pathways == TRUE,
+                                             publications == TRUE) > 1,
+                                         "You can only provide either attribute_name, authored_pathways or publications function call.")),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET /data/person/{id}",
+            "A person by his/her identifier")
+  }
+
+  ## make function-specific calls
+  path_input = paste0("ContentService/",
+                      "data/person/",
+                      id)
+  accept_input = "application/json"
+  parser_type_input = "json->list_no_simp"
+
+  if (authored_pathways == TRUE) {
+    path_input = paste0(path_input, "/authoredPathways")
+  } else if (publications == TRUE) {
+    path_input = paste0(path_input, "/publications")
+  } else if (!is.na(attribute_name)) {
+    path_input = paste0(path_input, "/", attribute_name)
+    accept_input = "text/plain"
+    parser_type_input = "text->chr"
+  }
+  call_func_input = quote(httr::GET(url = getOption("rba_url_reactome"),
+                                    path = path_input,
+                                    httr::accept(accept_input)
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = parser_type_input,
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#### Query Endpoints ####
+
+#' all in one: query Reactome Data: Common data retrieval
+#'
+#' @param ids
+#' @param enhanced
+#' @param map
+#' @param verbose
+#' @param attribute_name
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_reactome_query = function(ids,
+                              enhanced = FALSE,
+                              map = FALSE,
+                              verbose = TRUE,
+                              attribute_name = NA,
+                              progress_bar = FALSE,
+                              diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = ids,
+                                         name = "ids",
+                                         class = "character",
+                                         max_len = 20),
+                                    list(arg = enhanced,
+                                         name = "enhanced",
+                                         class = "logical"),
+                                    list(arg = map,
+                                         name = "map",
+                                         class = "logical"),
+                                    list(arg = attribute_name,
+                                         name = "attribute_name",
+                                         class = "character")),
+                        cond = list(list(length(ids) > 1 &
+                                           (enhanced == TRUE | !is.na(attribute_name)),
+                                         "You can only use 'enhnaced' or 'attribute_name' with a single id not multiple ids"),
+                                    list(!is.na(attribute_name) && enhanced == TRUE,
+                                         "You can only provide 'attribute_name' when enhanced is 'FALSE'")),
+                        diagnostics = diagnostics))
+
+  if (length(ids) > 1) {
+    #### use POST
+    ## build POST API request's URL
+    call_body = paste(unique(ids),collapse = ",")
+    parser_type_input = "json->list_no_simp"
+    if (map == TRUE) {
+      if (verbose == TRUE){
+        message("POST /data/query/ids/map",
+                "A list of entries with their mapping to the provided identifiers")}
+      path_input = paste0("ContentService/",
+                          "data/query/ids/map")
+    } else {
+      if (verbose == TRUE){
+        message("POST /data/query/ids/map",
+                "A list of entries with their mapping to the provided identifiers")}
+      path_input = paste0("ContentService/",
+                          "data/query/ids")
+    }
+    ## make function-specific calls
+    call_func_input = quote(httr::POST(url = getOption("rba_url_reactome"),
+                                       path = path_input,
+                                       body = call_body,
+                                       httr::accept_json(),
+                                       httr::content_type("text/plain")
+    ))
+  } else {
+    #### use GET
+    ## make function-specific calls
+    path_input = paste0("ContentService/",
+                        "data/query/",
+                        ids)
+    accept_input = "application/json"
+    parser_type_input = "json->list_no_simp"
+    if (!is.na(attribute_name)) {
+      if (verbose == TRUE){
+        message("GET /data/query/{id}/{attributeName}",
+                "A single property of an entry in Reactome knowledgebase")}
+      path_input = paste0(path_input, "/", attribute_name)
+      accept_input = "text/plain"
+      parser_type_input = "text->chr"
+    } else if (enhanced == TRUE){
+      if (verbose == TRUE){
+        message("GET /data/query/enhanced/{id}",
+                "More information on an entry in Reactome knowledgebase")}
+      path_input = sub("/query/", "/query/enhanced/", path_input)
+    } else {
+      if (verbose == TRUE){
+        message("GET /data/query/{id}",
+                "An entry in Reactome knowledgebase")}
+    }
+    call_func_input = quote(httr::GET(url = getOption("rba_url_reactome"),
+                                      path = path_input,
+                                      httr::accept(accept_input)
+    ))
+
+  }
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = parser_type_input,
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#### Refrences Endpoints ####
+
+#' Retrieves a list containing all the reference entities for a given identifier.
+#'
+#' @param id
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_reactome_complex_subunits = function(id,
+                                         verbose = TRUE,
+                                         progress_bar = FALSE,
+                                         diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = id,
+                                         name = "id",
+                                         class = c("character",
+                                                   "numeric"))),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET /references/mapping/{identifier}",
+            "All ReferenceEntities for a given identifier")
+  }
+
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_reactome"),
+                                    path = paste0("ContentService/",
+                                                  "references/mapping/",
+                                                  id),
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list_no_simp",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#### species Endpoints
+
+#' This method retrieves the list of main species in Reactome knowledgebase,
+#' sorted by name, but having ‘Homo sapiens’ as the first one. It should be
+#' mentioned that for Reactome, main species are considered those have either
+#' manually curated or computationally inferred pathways.
+#'
+#' @param species_type
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_reactome_species = function(species_type = "all",
+                                verbose = TRUE,
+                                progress_bar = FALSE,
+                                diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = species_type,
+                                         name = "species_type",
+                                         class = "character",
+                                         val = c("all",
+                                                 "main"))),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET /data/species/all",
+            "The list of all species in Reactome",
+            "GET /data/species/main",
+            "The list of main species in Reactome")
+  }
+
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_reactome"),
+                                    path = paste0("ContentService/",
+                                                  "data/species/",
+                                                  species_type),
                                     httr::accept_json()
   ))
 
