@@ -986,7 +986,9 @@ rba_reactome_interactors_psicquic = function(resource,
 
   if (verbose == TRUE){
     message("POST /interactors/psicquic/molecules/{resource}/details",
-            "Retrieve clustered interaction, sorted by score, of a given accession(s) by resource.")
+            "Retrieve clustered interaction, sorted by score, of a given accession(s) by resource.",
+            "POST/interactors/psicquic/molecules/{resource}/summary",
+            "Retrieve a summary of a given accession list by resource.")
   }
 
   ## build POST API request's URL
@@ -1051,6 +1053,57 @@ rba_reactome_interactors_resources = function(verbose = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
                                   diagnostics = diagnostics)
+  return(final_output)
+}
+
+rba_reactome_interactors_static = function(proteins,
+                                             details = "details",
+                                             verbose = TRUE,
+                                             progress_bar = FALSE,
+                                             diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = proteins,
+                                         name = "proteins",
+                                         class = c("character",
+                                                   "numeric"),
+                                         max_len = 1000),
+                                    list(arg = details,
+                                         name = "details",
+                                         class = "character",
+                                         val = c("details",
+                                                 "summary"))),
+
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("POST /interactors/static/molecules/details",
+            "Retrieve a detailed interaction information of a given accession",
+            "POST/interactors/static/molecules/summary",
+            "Retrieve a summary of a given accession list")
+  }
+
+  ## build POST API request's URL
+  call_body = paste(unique(proteins),collapse = "\n")
+
+  ## make function-specific calls
+  call_func_input = quote(httr::POST(url = getOption("rba_url_reactome"),
+                                     path = paste0("ContentService/",
+                                                   "interactors/static/molecules/",
+                                                   details),
+                                     body = call_body,
+                                     httr::accept_json(),
+                                     httr::content_type("text/plain")
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list_no_simp",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
   return(final_output)
 }
 
@@ -1359,7 +1412,7 @@ rba_reactome_pathways_participants = function(id,
   if (verbose == TRUE){
     message("GET /data/pathway/{id}/containedEvents",
             "All the events contained in the given event",
-            "/data/pathway/{id}/containedEvents/{attributeName}",
+            "GET /data/pathway/{id}/containedEvents/{attributeName}",
             "A single property for each event contained in the given event")
   }
 
