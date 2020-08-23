@@ -200,7 +200,56 @@ rba_reactome_complex_list = function(id,
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
                                   response_parser = NULL,
-                                  parser_type = "json->df",
+                                  parser_type = "json->list",
+                                  user_agent = TRUE,
+                                  progress_bar = progress_bar,
+                                  verbose = verbose,
+                                  diagnostics = diagnostics)
+
+  return(final_output)
+}
+
+#' Retrieves the list of structures (Complexes and Sets) that include the
+#' given entity as their component. It should be mentioned that the list
+#' includes only simplified entries (type, names, ids) and not full
+#' information about each item.
+#'
+#' @param entity_id
+#' @param verbose
+#' @param progress_bar
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_reactome_entity_component_of = function(entity_id,
+                                            verbose = TRUE,
+                                            progress_bar = FALSE,
+                                            diagnostics = FALSE) {
+  ## Check input arguments
+  invisible(rba_ba_args(cons = list(list(arg = entity_id,
+                                         name = "entity_id",
+                                         class = "character")),
+                        diagnostics = diagnostics))
+
+  if (verbose == TRUE){
+    message("GET/data/entity/{id}/componentOf",
+            "A list of larger structures containing the entity")
+  }
+  ## make function-specific calls
+  call_func_input = quote(httr::GET(url = getOption("rba_url_reactome"),
+                                    path = paste0("ContentService/",
+                                                  "data/entity/",
+                                                  entity_id,
+                                                  "/componentOf"),
+                                    httr::accept_json()
+  ))
+
+  ## call API
+  final_output = rba_ba_skeletion(call_function = call_func_input,
+                                  response_parser = NULL,
+                                  parser_type = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -223,7 +272,7 @@ rba_reactome_complex_list = function(id,
 #' @export
 #'
 #' @examples
-rba_reactome_complex_other_forms = function(entity_id,
+rba_reactome_entity_other_forms = function(entity_id,
                                             verbose = TRUE,
                                             progress_bar = FALSE,
                                             diagnostics = FALSE) {
@@ -328,7 +377,7 @@ rba_reactome_event_ancestors = function(event_id,
 #' @export
 #'
 #' @examples
-rba_reactome_event_ancestors = function(species,
+rba_reactome_event_hierarchy = function(species,
                                         verbose = TRUE,
                                         progress_bar = FALSE,
                                         diagnostics = FALSE) {
@@ -523,30 +572,18 @@ rba_reactome_exporter_diagram = function(event_id,
                                     httr::accept(accept_input),
                                     httr::write_disk(save_to, overwrite = TRUE)
   ))
-  response_parser_input = quote(NA)
 
   # create file_path
-  if (is.na(save_to)){
-    file_name = paste0(event_id, ".", output_format)
-    save_to = file.path(getwd(), "reactome_exporter", file_name)
-    dir.create(dirname(save_to), showWarnings = TRUE, recursive = TRUE)
-    message("No file path was provided with 'save_to' argument.",
-            " Saving to:\r\n", save_to)
-  } else {
-    if (!grepl(pattern = paste0("\\.", output_format, "$"),
-               x = save_to, ignore.case = TRUE)) {
-      warning("Your provided output_format (", output_format, ")",
-              " does not match the file prefix of your provided save_to argument",
-              " (", basename(save_to), ")",
-              call. = diagnostics)
-    }
-    if (verbose == TRUE) {
-      message("Saving to:\r\n", save_to)
-    }
-  }
+  save_to = rba_ba_file_path(file_ext = output_format,
+                             file_name = event_id,
+                             dir_name = "rba_reactome",
+                             save_to = save_to,
+                             verbose = verbose,
+                             diagnostics = diagnostics)
+
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = response_parser_input,
+                                  response_parser = NA,
                                   parser_type = NA,
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
@@ -554,6 +591,7 @@ rba_reactome_exporter_diagram = function(event_id,
                                   diagnostics = diagnostics)
   invisible()
 }
+
 
 #' This method accepts identifiers for Event class instances.
 #' The generated document contains the details for the given event and,
@@ -657,30 +695,17 @@ rba_reactome_exporter_document = function(event_id,
                                     httr::accept("application/pdf"),
                                     httr::write_disk(save_to, overwrite = TRUE)
   ))
-  response_parser_input = quote(NA)
 
   # create file_path
-  if (is.na(save_to)){
-    file_name = paste0(event_id, ".pdf")
-    save_to = file.path(getwd(), "reactome_exporter", file_name)
-    dir.create(dirname(save_to), showWarnings = TRUE, recursive = TRUE)
-    message("No file path was provided with 'save_to' argument.",
-            " Saving to:\r\n", save_to)
-  } else {
-    if (!grepl(pattern = paste0("\\.pdf$"),
-               x = save_to, ignore.case = TRUE)) {
-      warning("The output format (pdf)) does not match the file prefix of ",
-              "your provided save_to argument",
-              " (", basename(save_to), ")",
-              call. = diagnostics)
-    }
-    if (verbose == TRUE) {
-      message("Saving to:\r\n", save_to)
-    }
-  }
+  save_to = rba_ba_file_path(file_ext = "pdf",
+                             file_name = event_id,
+                             dir_name = "rba_reactome",
+                             save_to = save_to,
+                             verbose = verbose,
+                             diagnostics = diagnostics)
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = response_parser_input,
+                                  response_parser = NA,
                                   parser_type = NA,
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
@@ -735,31 +760,18 @@ rba_reactome_exporter_event = function(event_id,
                                                   output_format),
                                     httr::write_disk(save_to, overwrite = TRUE)
   ))
-  response_parser_input = quote(NA)
 
   # create file_path
-  if (is.na(save_to)){
-    file_name = paste0(event_id, ".", output_format)
-    save_to = file.path(getwd(), "reactome_exporter", file_name)
-    dir.create(dirname(save_to), showWarnings = TRUE, recursive = TRUE)
-    message("No file path was provided with 'save_to' argument.",
-            " Saving to:\r\n", save_to)
-  } else {
-    if (!grepl(pattern = paste0("\\.", output_format, "$"),
-               x = save_to, ignore.case = TRUE)) {
-      warning("Your provided output_format (", output_format, ")",
-              " does not match the file prefix of your provided save_to argument",
-              " (", basename(save_to), ")",
-              call. = diagnostics)
-    }
-    if (verbose == TRUE) {
-      message("Saving to:\r\n", save_to)
-    }
-  }
+  save_to = rba_ba_file_path(file_ext = output_format,
+                             file_name = event_id,
+                             dir_name = "rba_reactome",
+                             save_to = save_to,
+                             verbose = verbose,
+                             diagnostics = diagnostics)
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = response_parser_input,
+                                  response_parser = NA,
                                   parser_type = NA,
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
@@ -908,36 +920,23 @@ rba_reactome_exporter_overview = function(species,
   call_func_input = quote(httr::GET(url = getOption("rba_url_reactome"),
                                     path = paste0("ContentService/",
                                                   "exporter/fireworks/",
-                                                  species, ".",
-                                                  output_format),
+                                                  gsub(" ", "%20",species),
+                                                  ".", output_format),
                                     query = call_query,
                                     httr::accept(accept_input),
                                     httr::write_disk(save_to, overwrite = TRUE)
   ))
-  response_parser_input = quote(NA)
 
   # create file_path
-  if (is.na(save_to)){
-    file_name = paste0(species, ".", output_format)
-    save_to = file.path(getwd(), "reactome_exporter", file_name)
-    dir.create(dirname(save_to), showWarnings = TRUE, recursive = TRUE)
-    message("No file path was provided with 'save_to' argument.",
-            " Saving to:\r\n", save_to)
-  } else {
-    if (!grepl(pattern = paste0("\\.", output_format, "$"),
-               x = save_to, ignore.case = TRUE)) {
-      warning("Your provided output_format (", output_format, ")",
-              " does not match the file prefix of your provided save_to argument",
-              " (", basename(save_to), ")",
-              call. = diagnostics)
-    }
-    if (verbose == TRUE) {
-      message("Saving to:\r\n", save_to)
-    }
-  }
+  save_to = rba_ba_file_path(file_ext = output_format,
+                             file_name = species,
+                             dir_name = "rba_reactome",
+                             save_to = save_to,
+                             verbose = verbose,
+                             diagnostics = diagnostics)
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = response_parser_input,
+                                  response_parser = NA,
                                   parser_type = NA,
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
@@ -1821,7 +1820,7 @@ rba_reactome_complex_subunits = function(id,
   return(final_output)
 }
 
-#### species Endpoints
+#### species Endpoints ####
 
 #' This method retrieves the list of main species in Reactome knowledgebase,
 #' sorted by name, but having ‘Homo sapiens’ as the first one. It should be

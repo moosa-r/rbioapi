@@ -10,14 +10,7 @@ Therefore, this method retrieves a list of all possible paths from the
 requested event to the top level pathway(s).}
 \usage{
 rba_reactome_event_ancestors(
-  species,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
-
-rba_reactome_event_ancestors(
-  species,
+  event_id,
   verbose = TRUE,
   progress_bar = FALSE,
   diagnostics = FALSE
@@ -28,8 +21,6 @@ rba_reactome_event_ancestors(
 }
 \value{
 
-
-
 }
 \description{
 The Reactome definition of events includes pathways and reactions. Although
@@ -38,12 +29,4 @@ more than one location, i.e. a reaction can take part in different pathways
 while, in the same way, a sub-pathway can take part in many pathways.
 Therefore, this method retrieves a list of all possible paths from the
 requested event to the top level pathway(s).
-
-Events (pathways and reactions) in Reactome are organised in a hierarchical
-structure for every species. By following all ‘hasEvent’ relationships,
-this method retrieves the full event hierarchy for any given species.
-The result is a list of tree structures, one for each TopLevelPathway.
-Every event in these trees is represented by a PathwayBrowserNode.
-The latter contains the stable identifier, the name, the species, the url,
-the type, and the diagram of the particular event.
 }

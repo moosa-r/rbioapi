@@ -233,18 +233,19 @@ rba_string_network_image = function(input,
 
 
   # create file_path
-  if (is.na(save_to)){
-    file_name = paste0(paste0(input[seq_len(min(3, length(input)))], collapse = "_"),
-                       ifelse(output_format == "svg", ".svg", ".png"))
-    save_to = file.path(getwd(), "STRING_network_images", file_name)
-    dir.create(dirname(save_to), showWarnings = TRUE, recursive = TRUE)
-    message("No file path was provided with 'save_to' argument.",
-            " Saving to:\r\n", save_to)
-  } else {
-    if (verbose == TRUE) {
-      message("Saving to:\r\n", save_to)
-    }
-  }
+  file_name_input = paste0(input[seq_len(min(3,
+                                             length(input)))],
+                           collapse = "_")
+  file_ext_input = ifelse("output_format" == "svg",
+                          "svg",
+                          "png")
+  save_to = rba_ba_file_path(file_ext = file_ext_input,
+                             file_name = file_name_input,
+                             dir_name = "rba_string",
+                             save_to = save_to,
+                             verbose = verbose,
+                             diagnostics = diagnostics)
+
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
                                   response_parser = response_parser_input,
@@ -255,8 +256,6 @@ rba_string_network_image = function(input,
                                   diagnostics = diagnostics)
   return(final_output)
 }
-
-
 
 #' Getting the STRING network interactions
 #'

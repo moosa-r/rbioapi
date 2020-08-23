@@ -301,6 +301,45 @@ rba_ba_response_parser = function(type = NA, parser = NULL) {
   return(output)
 }
 
+#' Create/check provided file address
+#'
+#' @param file_ext
+#' @param file_name
+#' @param dir_name
+#' @param save_to
+#' @param diagnostics
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ba_file_path = function(file_ext,
+                            file_name = NA,
+                            dir_name = NA,
+                            save_to = NA,
+                            verbose = TRUE,
+                            diagnostics = FALSE) {
+  ## only create file path if now save_to argument was provided
+  if (is.na(save_to)){
+    file_adrs = paste0(file_name, ".", file_ext)
+    save_to = file.path(getwd(), dir_name, file_adrs)
+    message("No save path was provided.",
+            " Saving to:\r\n", save_to)
+  } else {
+    if (!grepl(pattern = paste0("\\.", file_ext, "$"),
+               x = save_to, ignore.case = TRUE)) {
+      warning("Your requested file format (", file_ext, ")",
+              " does not match your provided file address's extention.",
+              " (", basename(save_to), ")",
+              call. = diagnostics)
+    }
+    if (verbose == TRUE) {
+      message("Saving to:\r\n", save_to)
+    }
+  } # end of if is.na(save_to)
+  dir.create(dirname(save_to), showWarnings = diagnostics, recursive = TRUE)
+  return(save_to)
+}
 #' Internal function to make http request
 #'
 #' @param call_function
