@@ -507,6 +507,7 @@ rba_ba_body_add_pars = function(call_body, additional_pars) {
 #' @examples
 rba_ba_args = function(cons = NULL,
                        cond = NULL,
+                       cond_warning = FALSE,
                        diagnostics = FALSE){
   ## per each argument,the function input "cons" should be a named
   # sub-list with one of these members:
@@ -578,7 +579,7 @@ rba_ba_args = function(cons = NULL,
              cons[[i]][["arg"]], "')\r\n", call. = diagnostics)
       }
 
-      # check  length
+      # check length
       if (!is.null(cons[[i]][["len"]]) &&
           length(cons[[i]][["arg"]]) != cons[[i]][["len"]]) {
         stop("Invalid Argument: ", cons[[i]][["name"]],
@@ -634,13 +635,23 @@ rba_ba_args = function(cons = NULL,
     for (i in seq_along(cond)){
       # check if the expression is TRUE
       if (eval(cond[[i]][[1]], envir = parent.frame()) == TRUE){
-        # throw an error message
+        # throw an error / warning message
         if (!is.null(cond[[i]][[2]])) {
-          stop(cond[[i]][[2]], call. = diagnostics)
+          if (cond_warning == TRUE) {
+            warning(cond[[i]][[2]], call. = diagnostics)
+          } else {
+            stop(cond[[i]][[2]], call. = diagnostics)
+          }
         } else {
-          stop("Argument's conditions are not satisfied:\r\n'",
-               as.character(cond[[i]]), "' is TRUE.\r\n",
-               call. = diagnostics)
+          if (cond_warning == TRUE) {
+            warning("Argument's conditions are not satisfied:\r\n'",
+                 as.character(cond[[i]]), "' is TRUE.\r\n",
+                 call. = diagnostics)
+          } else {
+            stop("Argument's conditions are not satisfied:\r\n'",
+                 as.character(cond[[i]]), "' is TRUE.\r\n",
+                 call. = diagnostics)
+          }
         }
       }
     }
