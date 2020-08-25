@@ -592,7 +592,6 @@ rba_reactome_exporter_diagram = function(event_id,
   invisible()
 }
 
-
 #' This method accepts identifiers for Event class instances.
 #' The generated document contains the details for the given event and,
 #' optionally, its children (see level parameter). These details include:

@@ -7,9 +7,9 @@
 rba_reactome_analysis(
   input,
   input_type = NA,
-  species = NA,
   projection = FALSE,
   interactors = FALSE,
+  species = NA,
   sort_by = "ENTITIES_PVALUE",
   order = "ASC",
   resource = "TOTAL",

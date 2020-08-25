@@ -7,8 +7,8 @@
 rba_ba_reactome_input(
   input,
   type = NA,
+  handle = TRUE,
   verbose = TRUE,
-  progress_bar = FALSE,
   diagnostics = FALSE
 )
 }

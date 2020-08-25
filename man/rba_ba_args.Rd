@@ -4,7 +4,12 @@
 \alias{rba_ba_args}
 \title{Check provided Arguments}
 \usage{
-rba_ba_args(cons = NULL, cond = NULL, diagnostics = FALSE)
+rba_ba_args(
+  cons = NULL,
+  cond = NULL,
+  cond_warning = FALSE,
+  diagnostics = FALSE
+)
 }
 \arguments{
 \item{diagnostics}{}
