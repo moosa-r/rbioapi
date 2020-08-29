@@ -28,7 +28,7 @@ NULL
                         "Last API verbs check for currently supported Databases:\r\n",
                         "STRING: Aug 04 2020\r\n",
                         "Enrichr: Aug 04 2020\r\n",
-                        "Ensembl: Aug 13 2020",
+                        "Ensembl: Aug 13 2020\r\n",
                         "Reactome: Aug 26 2020"
   )
   ## save list of supported databases
@@ -39,7 +39,9 @@ NULL
   options("rba_url_string" = c("STRING" = "https://string-db.org"))
   options("rba_url_enrichr" = c("Enrichr" = "https://amp.pharm.mssm.edu"))
   options("rba_url_ensembl" = c("Ensembl" = "http://rest.ensembl.org"))
-  options("rba_url_reactome" = c("Ensembl" = "https://reactome.org"))
+  options("rba_url_reactome" = c("Reactome" = "https://reactome.org"))
+  options("rba_url_uniprot" = c("UniProt" = "https://www.ebi.ac.uk"))
+  options("rba_pth_uniprot" = c("UniProt" = "proteins/api/"))
   ## save user agent for api Calls as an option
   options("rba_ua" = "rbioapi R package") #default user agent
   ## other global variables
