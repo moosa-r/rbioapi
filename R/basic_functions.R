@@ -103,8 +103,12 @@ rba_connection_test = function(diagnostics = FALSE) {
                                  "/Enrichr"),
               "Ensembl" = paste0(getOption("rba_url_ensembl"),
                                  "/info/ping"),
-              "Reactome" = paste0(getOption("rba_url_reactome"),
-                                  "/ContentService/data/database/name")
+              "Reactome_ContentService" = paste0(getOption("rba_url_reactome"),
+                                                 "/ContentService/data/database/name"),
+              "Reactome_AnalysisService" = paste0(getOption("rba_url_reactome"),
+                                                  "/AnalysisService/database/name"),
+              "UniProt" = paste0(getOption("rba_url_uniprot"),
+                                                  "/proteins/api/proteins/P25445")
   )
 
   cat("-", "Internet", ":\r\n")
@@ -272,12 +276,12 @@ rba_ba_response_parser = function(type = NA, parser = NULL) {
       parser = quote(as.character(jsonlite::fromJSON(httr::content(response,
                                                                    as = "text",
                                                                    encoding = "UTF-8")
-                                                     )))
+      )))
     } else if (type == "text->chr") {
       parser = quote(as.character(httr::content(response,
                                                 as = "text",
                                                 encoding = "UTF-8")
-                                  ))
+      ))
     } else if (type == "text->df") {
       parser = quote(read.table(text = httr::content(response,
                                                      type = "text/plain",
@@ -285,7 +289,7 @@ rba_ba_response_parser = function(type = NA, parser = NULL) {
                                                      encoding = "UTF-8"),
                                 header = FALSE,
                                 stringsAsFactors = FALSE)
-                     )
+      )
     } else if (type == "tsv->df") {
       parser = quote(as.character(httr::content(response,
                                                 as = "text",
@@ -645,8 +649,8 @@ rba_ba_args = function(cons = NULL,
         } else {
           if (cond_warning == TRUE) {
             warning("Argument's conditions are not satisfied:\r\n'",
-                 as.character(cond[[i]]), "' is TRUE.\r\n",
-                 call. = diagnostics)
+                    as.character(cond[[i]]), "' is TRUE.\r\n",
+                    call. = diagnostics)
           } else {
             stop("Argument's conditions are not satisfied:\r\n'",
                  as.character(cond[[i]]), "' is TRUE.\r\n",
