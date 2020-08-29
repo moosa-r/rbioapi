@@ -1582,9 +1582,9 @@ rba_uniprot_antigen_search = function(accession = NA,
 #'
 #' @examples
 rba_uniprot_antigen = function(accession,
-                                  verbose = TRUE,
-                                  progress_bar = FALSE,
-                                  diagnostics = FALSE) {
+                               verbose = TRUE,
+                               progress_bar = FALSE,
+                               diagnostics = FALSE) {
   ## Check input arguments
   invisible(rba_ba_args(cons = list(list(arg = accession,
                                          name = "accession",
@@ -1614,3 +1614,4 @@ rba_uniprot_antigen = function(accession,
 
   return(final_output)
 }
+
