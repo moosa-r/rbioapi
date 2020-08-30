@@ -285,7 +285,7 @@ rba_uniprot_genecentric = function(accession,
                                    diagnostics = FALSE) {
   ## Check input arguments
   invisible(rba_ba_args(cons = list(list(arg = accession,
-                                         name = "upid",
+                                         name = "accession",
                                          class = "character")),
                         diagnostics = diagnostics))
 
@@ -297,7 +297,6 @@ rba_uniprot_genecentric = function(accession,
                                     path = paste0(getOption("rba_pth_uniprot"),
                                                   "genecentric/",
                                                   accession),
-                                    query = call_query,
                                     httr::accept_json()
   ))
 
