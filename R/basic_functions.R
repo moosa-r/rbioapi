@@ -108,7 +108,7 @@ rba_connection_test = function(diagnostics = FALSE) {
               "Reactome_AnalysisService" = paste0(getOption("rba_url_reactome"),
                                                   "/AnalysisService/database/name"),
               "UniProt" = paste0(getOption("rba_url_uniprot"),
-                                                  "/proteins/api/proteins/P25445")
+                                 "/proteins/api/proteins/P25445")
   )
 
   cat("-", "Internet", ":\r\n")
@@ -244,65 +244,51 @@ rba_ba_translate = function(http_status, verbose = TRUE){
 
 #' Parse API Response
 #'
-#' @param type
 #' @param parser
 #'
 #' @return
 #' @export
 #'
 #' @examples
-rba_ba_response_parser = function(type = NA, parser = NULL) {
+rba_ba_response_parser = function(parser) {
   #create a parser if not provided
-  if (is.null(parser)) {
-    if (type == "json->df") {
-      parser = quote(data.frame(jsonlite::fromJSON(httr::content(response,
-                                                                 as = "text",
-                                                                 encoding = "UTF-8"),
-                                                   flatten = TRUE),
-                                stringsAsFactors = FALSE))
-    } else if (type == "json->list") {
-      parser = quote(as.list(jsonlite::fromJSON(httr::content(response,
-                                                              as = "text",
-                                                              encoding = "UTF-8"),
-                                                simplifyVector = TRUE)
-      ))
-    } else if (type == "json->list_no_simp") {
-      parser = quote(as.list(jsonlite::fromJSON(httr::content(response,
-                                                              as = "text",
-                                                              encoding = "UTF-8"),
-                                                simplifyVector = FALSE)
-      ))
-    } else if (type == "json->chr") {
-      parser = quote(as.character(jsonlite::fromJSON(httr::content(response,
+  if (!is.call(parser)) {
+    parser = switch(parser,
+                    "json->df" = quote(data.frame(jsonlite::fromJSON(httr::content(response,
+                                                                                   as = "text",
+                                                                                   encoding = "UTF-8"),
+                                                                     flatten = TRUE),
+                                                  stringsAsFactors = FALSE)),
+                    "json->list" = quote(as.list(jsonlite::fromJSON(httr::content(response,
+                                                                                  as = "text",
+                                                                                  encoding = "UTF-8"),
+                                                                    simplifyVector = TRUE))),
+                    "json->list_no_simp" = quote(as.list(jsonlite::fromJSON(httr::content(response,
+                                                                                          as = "text",
+                                                                                          encoding = "UTF-8"),
+                                                                            simplifyVector = FALSE))),
+                    "json->chr" = quote(as.character(jsonlite::fromJSON(httr::content(response,
+                                                                                      as = "text",
+                                                                                      encoding = "UTF-8")))),
+                    "text->chr" = quote(as.character(httr::content(response,
                                                                    as = "text",
-                                                                   encoding = "UTF-8")
-      )))
-    } else if (type == "text->chr") {
-      parser = quote(as.character(httr::content(response,
-                                                as = "text",
-                                                encoding = "UTF-8")
-      ))
-    } else if (type == "text->df") {
-      parser = quote(read.table(text = httr::content(response,
-                                                     type = "text/plain",
-                                                     as = "text",
-                                                     encoding = "UTF-8"),
-                                header = FALSE,
-                                stringsAsFactors = FALSE)
-      )
-    } else if (type == "tsv->df") {
-      parser = quote(as.character(httr::content(response,
-                                                as = "text",
-                                                encoding = "UTF-8")
-      ))
-    } else {
-      stop("Internal Error: Specify the parser expression!", call. = TRUE)
-    }
+                                                                   encoding = "UTF-8"))),
+                    "text->df" = quote(read.table(text = httr::content(response,
+                                                                       type = "text/plain",
+                                                                       as = "text",
+                                                                       encoding = "UTF-8"),
+                                                  header = FALSE,
+                                                  stringsAsFactors = FALSE)),
+                    "tsv->df" = quote(as.character(httr::content(response,
+                                                                 as = "text",
+                                                                 encoding = "UTF-8"))),
+                    stop("Internal Error: Specify the parser expression!", call. = TRUE)
+    )
   }
-
   # parse the response
   output = eval(parser, envir = parent.frame())
   return(output)
+
 }
 
 #' Create/check provided file address
@@ -413,9 +399,10 @@ rba_ba_api_call = function(call_function,
 #' @param verbose
 #' @param response_parser
 #' @param diagnostics
-#' @param parser_type
 #' @param user_agent
 #' @param progress_bar
+#' @param batch_mode
+#' @param skip_error
 #'
 #' @return
 #' @export
@@ -424,7 +411,6 @@ rba_ba_api_call = function(call_function,
 rba_ba_skeletion = function(call_function,
                             batch_mode = FALSE,
                             response_parser = NULL,
-                            parser_type = NA,
                             skip_error = FALSE,
                             user_agent = FALSE,
                             progress_bar = FALSE,
@@ -458,8 +444,7 @@ rba_ba_skeletion = function(call_function,
 
   ## 3 Parse the the response if possible
   if (class(response) == "response") {
-    final_output = rba_ba_response_parser(type = parser_type,
-                                          parser = response_parser)
+    final_output = rba_ba_response_parser(parser = response_parser)
   } else {
     final_output = response
   }

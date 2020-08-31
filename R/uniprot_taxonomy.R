@@ -35,8 +35,7 @@ rba_uniprot_taxonomy_ancestor = function(ids,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -113,8 +112,7 @@ rba_uniprot_taxonomy = function(ids,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -159,8 +157,7 @@ rba_uniprot_taxonomy_ancestor = function(id,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -224,8 +221,7 @@ rba_uniprot_taxonomy_path = function(id,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list_no_simp",
+                                  response_parser = "json->list_no_simp",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -279,8 +275,7 @@ rba_uniprot_taxonomy_relationship = function(from,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list_no_simp",
+                                  response_parser = "json->list_no_simp",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,

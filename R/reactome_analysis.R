@@ -247,8 +247,7 @@ rba_reactome_analysis = function(input,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -383,8 +382,7 @@ rba_reactome_analysis_pdf = function(token,
   ))
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NA,
-                                  parser_type = NA,
+                                  response_parser = NULL,
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -508,8 +506,7 @@ rba_reactome_analysis_download = function(token,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NA,
-                                  parser_type = NA,
+                                  response_parser = NULL,
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -579,8 +576,7 @@ rba_reactome_analysis_import = function(input,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -661,8 +657,7 @@ rba_reactome_analysis_mapping = function(input,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list_no_simp",
+                                  response_parser = "json->list_no_simp",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -780,8 +775,7 @@ rba_reactome_analysis_species = function(species_dbid,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -912,8 +906,7 @@ rba_reactome_analysis_token = function(token,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,

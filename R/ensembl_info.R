@@ -106,8 +106,7 @@ rba_ensembl_info_aassembly = function(species,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -183,8 +182,7 @@ rba_ensembl_info_assembly_region_name = function(species,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -232,8 +230,7 @@ rba_ensembl_info_biotypes = function(species,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -304,8 +301,7 @@ rba_ensembl_info_biotypes_groups = function(group = NA,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = parser_type_input,
+                                  response_parser = parser_type_input,
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -363,8 +359,7 @@ rba_ensembl_info_biotypes_names = function(name,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -424,8 +419,7 @@ rba_ensembl_info_compara_methods = function(class = NA,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -483,8 +477,7 @@ rba_ensembl_info_compara_methods = function(method,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -523,8 +516,7 @@ rba_ensembl_info_comparas = function(verbose = TRUE,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -564,8 +556,7 @@ rba_ensembl_info_data = function(verbose = TRUE,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -604,8 +595,7 @@ rba_ensembl_info_eg_version = function(verbose = TRUE,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -677,8 +667,7 @@ rba_ensembl_info_external_dbs = function(species,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -717,8 +706,7 @@ rba_ensembl_info_divisions = function(verbose = TRUE,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->chr",
+                                  response_parser = "json->chr",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -776,8 +764,7 @@ rba_ensembl_info_genomes_name = function(genome_name,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -835,8 +822,7 @@ rba_ensembl_info_genomes_accession = function(accession,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -894,8 +880,7 @@ rba_ensembl_info_genomes_assembly = function(assembly_id,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -953,8 +938,7 @@ rba_ensembl_info_genomes_division = function(division_name,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -1013,8 +997,7 @@ rba_ensembl_info_genomes_taxonomy = function(taxon_name,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -1053,8 +1036,7 @@ rba_ensembl_info_rest = function(verbose = TRUE,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -1093,8 +1075,7 @@ rba_ensembl_info_software = function(verbose = TRUE,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -1162,8 +1143,7 @@ rba_ensembl_info_species = function(division = "EnsemblVertebrates",
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -1222,8 +1202,7 @@ rba_ensembl_info_variation_species = function(species,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -1274,8 +1253,7 @@ rba_ensembl_info_variation_consequence_types = function(rank = FALSE,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -1334,8 +1312,7 @@ rba_ensembl_info_variation_populations = function(species,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -1389,8 +1366,7 @@ rba_ensembl_info_variation_populations_species = function(species,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,

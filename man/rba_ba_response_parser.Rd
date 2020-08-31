@@ -4,7 +4,7 @@
 \alias{rba_ba_response_parser}
 \title{Parse API Response}
 \usage{
-rba_ba_response_parser(type = NA, parser = NULL)
+rba_ba_response_parser(parser)
 }
 \arguments{
 \item{parser}{}

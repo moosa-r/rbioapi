@@ -8,7 +8,6 @@ rba_ba_skeletion(
   call_function,
   batch_mode = FALSE,
   response_parser = NULL,
-  parser_type = NA,
   skip_error = FALSE,
   user_agent = FALSE,
   progress_bar = FALSE,
@@ -19,7 +18,7 @@ rba_ba_skeletion(
 )
 }
 \arguments{
-\item{progress_bar}{}
+\item{skip_error}{}
 }
 \value{
 

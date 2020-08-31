@@ -28,8 +28,7 @@ rba_reactome_version = function(verbose = TRUE,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "text->chr",
+                                  response_parser = "text->chr",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -85,8 +84,7 @@ rba_reactome_diseases = function(doid = FALSE,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = parser_input,
+                                  response_parser = parser_input,
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -147,8 +145,7 @@ rba_reactome_complex_subunits = function(complex_id,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -199,8 +196,7 @@ rba_reactome_complex_list = function(id,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -248,8 +244,7 @@ rba_reactome_entity_component_of = function(entity_id,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -297,8 +292,7 @@ rba_reactome_entity_other_forms = function(entity_id,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -350,8 +344,7 @@ rba_reactome_event_ancestors = function(event_id,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -402,8 +395,7 @@ rba_reactome_event_hierarchy = function(species,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list_no_simp",
+                                  response_parser = "json->list_no_simp",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -583,8 +575,7 @@ rba_reactome_exporter_diagram = function(event_id,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NA,
-                                  parser_type = NA,
+                                  response_parser = NULL,
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -704,8 +695,7 @@ rba_reactome_exporter_document = function(event_id,
                              diagnostics = diagnostics)
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NA,
-                                  parser_type = NA,
+                                  response_parser = NULL,
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -770,8 +760,7 @@ rba_reactome_exporter_event = function(event_id,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NA,
-                                  parser_type = NA,
+                                  response_parser = NULL,
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -935,8 +924,7 @@ rba_reactome_exporter_overview = function(species,
                              diagnostics = diagnostics)
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NA,
-                                  parser_type = NA,
+                                  response_parser = NULL,
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -1006,8 +994,7 @@ rba_reactome_interactors_psicquic = function(resource,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list_no_simp",
+                                  response_parser = "json->list_no_simp",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -1046,8 +1033,7 @@ rba_reactome_interactors_resources = function(verbose = TRUE,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -1096,8 +1082,7 @@ rba_reactome_interactors_static = function(proteins,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list_no_simp",
+                                  response_parser = "json->list_no_simp",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -1165,8 +1150,7 @@ rba_reactome_mapping_pathways = function(id,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -1231,8 +1215,7 @@ rba_reactome_mapping_reactions = function(id,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -1296,8 +1279,7 @@ rba_reactome_orthology = function(ids,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -1366,8 +1348,7 @@ rba_reactome_participants = function(id,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list_no_simp",
+                                  response_parser = "json->list_no_simp",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -1421,13 +1402,11 @@ rba_reactome_pathways_participants = function(id,
                       id,
                       "/containedEvents")
   accept_input = "application/json"
-  parser_type_input = "json->df"
-  parser_input = NULL
+  parser_input = "json->df"
 
   if (!is.na(attribute_name)){
     path_input = paste0(path_input, "/", attribute_name)
     accept_input = "text/plain"
-    parser_type_input = NA
     parser_input = quote(unlist(strsplit(x = gsub(pattern = "\\[|\\]",
                                                   replacement = "",
                                                   x = as.character(httr::content(response,
@@ -1447,7 +1426,6 @@ rba_reactome_pathways_participants = function(id,
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
                                   response_parser = parser_input,
-                                  parser_type = parser_type_input,
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -1524,8 +1502,7 @@ rba_reactome_pathways_low = function(entity_id,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -1576,8 +1553,7 @@ rba_reactome_pathways_top = function(species,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -1636,8 +1612,7 @@ rba_reactome_people_name = function(person_name,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list_no_simp",
+                                  response_parser = "json->list_no_simp",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -1700,8 +1675,7 @@ rba_reactome_people_id = function(id,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = parser_type_input,
+                                  response_parser = parser_type_input,
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -1813,8 +1787,7 @@ rba_reactome_query = function(ids,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = parser_type_input,
+                                  response_parser = parser_type_input,
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -1862,8 +1835,7 @@ rba_reactome_complex_subunits = function(id,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list_no_simp",
+                                  response_parser = "json->list_no_simp",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -1917,8 +1889,7 @@ rba_reactome_species = function(species_type = "all",
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,

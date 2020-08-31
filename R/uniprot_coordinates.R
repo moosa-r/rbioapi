@@ -93,8 +93,7 @@ rba_uniprot_coordinates_search = function(accession = NA,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list_no_simp",
+                                  response_parser = "json->list_no_simp",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -169,8 +168,7 @@ rba_uniprot_coordinates_location = function(accession,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -242,8 +240,7 @@ rba_uniprot_coordinates = function(accession = NA,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list_no_simp",
+                                  response_parser = "json->list_no_simp",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -312,8 +309,7 @@ rba_uniprot_coordinates_taxonomy = function(taxid,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list_no_simp",
+                                  response_parser = "json->list_no_simp",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,

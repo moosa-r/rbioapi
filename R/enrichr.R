@@ -36,8 +36,7 @@ rba_enrichr_info = function(store_in_options = TRUE,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -103,8 +102,7 @@ rba_enrichr_add_list = function(gene_list,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -151,8 +149,7 @@ rba_enrichr_view_list = function(user_list_id,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -196,7 +193,6 @@ rba_enrichr_enrich_internal = function(user_list_id,
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
                                   response_parser = response_parser_input,
-                                  parser_type = NA,
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -382,8 +378,7 @@ rba_enrichr_gene_map = function(gene,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,

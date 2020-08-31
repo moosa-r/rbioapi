@@ -87,8 +87,7 @@ rba_string_map_ids = function(input,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -249,7 +248,6 @@ rba_string_network_image = function(input,
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
                                   response_parser = response_parser_input,
-                                  parser_type = NA,
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -341,8 +339,7 @@ rba_string_network_interactions = function(input,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -433,8 +430,7 @@ rba_string_interaction_partners = function(input,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -509,8 +505,7 @@ rba_string_homology = function(input,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -591,8 +586,7 @@ rba_string_homology_best = function(input,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -674,8 +668,7 @@ rba_string_enrichment = function(input,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -757,8 +750,7 @@ rba_string_functional_annotation = function(input,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -842,8 +834,7 @@ rba_string_ppi_enrichment = function(input,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->df",
+                                  response_parser = "json->df",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
@@ -886,8 +877,7 @@ rba_string_version = function(verbose = TRUE,
 
   ## call API
   final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
+                                  response_parser = "json->list",
                                   user_agent = TRUE,
                                   progress_bar = progress_bar,
                                   verbose = verbose,
