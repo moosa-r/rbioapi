@@ -31,10 +31,6 @@ NULL
                         "Ensembl: Aug 13 2020\r\n",
                         "Reactome: Aug 26 2020"
   )
-  ## save list of supported databases
-  options("rba_databases" = c("STRING",
-                              "Enrichr",
-                              "Ensembl"))
   ## save each database names & "base URL" as an option.
   options("rba_url_string" = c("STRING" = "https://string-db.org"))
   options("rba_url_enrichr" = c("Enrichr" = "https://amp.pharm.mssm.edu"))
@@ -44,7 +40,7 @@ NULL
   options("rba_pth_uniprot" = c("UniProt" = "proteins/api/"))
   ## save user agent for api Calls as an option
   options("rba_ua" = "rbioapi R package") #default user agent
-  ## other global variables
+  ## other global options
   options("max_retry" = 1)
   options("wait_time" = 10)
 

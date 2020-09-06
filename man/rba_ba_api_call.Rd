@@ -5,7 +5,7 @@
 \title{Internal function to make http request}
 \usage{
 rba_ba_api_call(
-  call_function,
+  input_call,
   skip_error = FALSE,
   no_interet_retry_max = 1,
   no_internet_wait_time = 10,
@@ -14,7 +14,7 @@ rba_ba_api_call(
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{input_call}{}
 }
 \value{
 
