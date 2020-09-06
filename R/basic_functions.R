@@ -359,9 +359,9 @@ rba_ba_query = function(init, ...) {
 #'
 #' @examples
 rba_ba_httr = function(httr,
-                          url = NULL,
-                          path = NULL,
-                          ...) {
+                       url = NULL,
+                       path = NULL,
+                       ...) {
   ### 1 capture extra arguments
   # possible args: all args supported by httr +
   # args to this function: [file/obj_]accept, [file/obj_]parser, save_to
@@ -532,19 +532,19 @@ rba_ba_api_call = function(input_call,
 #'
 #' @examples
 rba_ba_skeleton = function(input_call,
-                               response_parser = NULL,
-                               skip_error = FALSE,
-                               no_interet_retry_max = getOption("max_retry"),
-                               no_internet_wait_time = getOption("wait_time")) {
+                           response_parser = NULL,
+                           skip_error = FALSE,
+                           no_interet_retry_max = getOption("max_retry"),
+                           no_internet_wait_time = getOption("wait_time")) {
   ## 1 Make API Call
   response = rba_ba_api_call(input_call = input_call$call,
-                                skip_error = skip_error,
-                                no_interet_retry_max = no_interet_retry_max,
-                                no_internet_wait_time = no_internet_wait_time,
-                                verbose = eval(quote(verbose),
-                                               envir = parent.frame(1)),
-                                diagnostics = eval(quote(diagnostics),
-                                                   envir = parent.frame(1))
+                             skip_error = skip_error,
+                             no_interet_retry_max = no_interet_retry_max,
+                             no_internet_wait_time = no_internet_wait_time,
+                             verbose = eval(quote(verbose),
+                                            envir = parent.frame(1)),
+                             diagnostics = eval(quote(diagnostics),
+                                                envir = parent.frame(1))
   )
   ## 2 Parse the the response if possible
   if (class(response) == "response") {
@@ -579,8 +579,8 @@ rba_ba_skeleton = function(input_call,
 #'
 #' @examples
 rba_ba_args = function(cons = NULL,
-                          cond = NULL,
-                          cond_warning = FALSE){
+                       cond = NULL,
+                       cond_warning = FALSE){
   ## per each argument,the function input "cons" should be a named
   # sub-list with one of these members:
   # arg, class, val, range, min_val, max_val, len, min_len, max_len,
@@ -595,22 +595,22 @@ rba_ba_args = function(cons = NULL,
   #      )
 
   ### 1 append extra arguments which occurs in most functions:
-  if (exists("diagnostics", envir = parent.frame())) {
+  if (exists("diagnostics", envir = parent.frame(1))) {
     cons = append(list(list(arg = "diagnostics",
                             class = "logical",
                             len = 1)),
                   cons)
-    diagnostics = eval(quote(parse(text = "diagnostics")),
+    diagnostics = eval(parse(text = "diagnostics"),
                        envir = parent.frame())
   } else {
     diagnostics = TRUE
   }
-  if (exists("verbose", envir = parent.frame())) {
+  if (exists("verbose", envir = parent.frame(1))) {
     cons = append(cons, list(list(arg = "verbose",
                                   class = "logical",
                                   len = 1)))
   }
-  if (exists("progress_bar", envir = parent.frame())) {
+  if (exists("progress_bar", envir = parent.frame(1))) {
     cons = append(cons, list(list(arg = "progress_bar",
                                   class = "logical",
                                   len = 1)))
@@ -846,4 +846,26 @@ rba_ba_error_parser = function(response,
                                        verbose = verbose)
   }
   return(error_message)
+}
+#### Misselineius ####
+#' Alternative messaging system
+#'
+#' @param msg
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
+v_msg = function(msg, ...) {
+  if (exists("verbose", envir = parent.frame(1)) &&
+      eval(quote(verbose), envir = parent.frame(1)) == TRUE) {
+    ext = list(...)
+    if (length(ext) == 0) {
+      message(msg, appendLF = TRUE)
+    } else {
+      message(sprintf(msg, ...), appendLF = TRUE)
+    }
+  }
+  invisible()
 }
