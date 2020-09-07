@@ -8,8 +8,8 @@ rba_ba_skeleton(
   input_call,
   response_parser = NULL,
   skip_error = FALSE,
-  no_interet_retry_max = getOption("max_retry"),
-  no_internet_wait_time = getOption("wait_time")
+  no_interet_retry_max = 1,
+  no_internet_wait_time = 10
 )
 }
 \arguments{

@@ -23,7 +23,7 @@ rba_ba_reactome_input = function(input,
     } else if (is.character(input) &&
                length(input) == 1) {
       if (file.exists(input) |
-          grepl(pattern = "^[a-zA-z]:|^\\\\\\w|^/|^\\w+\\.\\w+$",
+          grepl(pattern = "^[a-zA-z]:|^\\\\\\w|^/|\\w+\\.\\w+$",
                 x = input)
       ) {
         type = "file"

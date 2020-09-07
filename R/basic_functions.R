@@ -283,6 +283,7 @@ rba_ba_http_status = function(http_status, verbose = FALSE){
 
 #' Create/check provided file address
 #'@description changed name from rba_ba_file_path
+#'
 #' @param file_ext
 #' @param file_name
 #' @param dir_name
@@ -295,31 +296,47 @@ rba_ba_http_status = function(http_status, verbose = FALSE){
 rba_ba_file = function(file_ext,
                        file_name = NA,
                        dir_name = NA,
-                       save_to = NULL) {
-  # only precede if save_to was not FALSE
+                       save_to = TRUE) {
   if (save_to != FALSE) {
-    ## only create file path if no save_to argument was provided
-    if (is.null(save_to) | save_to == TRUE){
-      file_adrs = paste0(file_name, ".", file_ext)
-      save_to = file.path(getwd(), dir_name, file_adrs)
-      message("No save path was provided.",
-              " Saving to:\r\n", save_to)
-    } else {
-      if (!grepl(pattern = paste0("\\.", file_ext, "$"),
-                 x = save_to, ignore.case = TRUE)) {
-        warning("Your requested file format (", file_ext, ")",
-                " does not match your provided file address's extention.",
-                " (", basename(save_to), ")",
-                call. = eval(quote(diagnostics), envir = parent.frame(1)))
+    # 1 file path will be generated unless save_to == FALSE
+    verbose = eval(parse(text = "verbose"), envir = parent.frame(1))
+    diagnostics = eval(parse(text = "diagnostics"), envir = parent.frame(1))
+
+    if (is.character(save_to)) {
+      # 2 the user provided a file path, just check if it is valid
+      if (!grepl("^[a-zA-z]:|^\\\\\\w|^/|\\w+\\.\\w+$", save_to)) {
+        # 2.1 not a valid file path!
+        v_msg("\"%s\" is not a valid file path. Ignoring that.",
+              save_to)
+        save_to = TRUE
+      } else if (!grepl(pattern = paste0("\\.", file_ext, "$"),
+                        x = save_to, ignore.case = TRUE)) {
+        # 2.2 valid file path, but...
+        warning(sprintf("Your requested file format (\"%s\") does not match your provided file address's extention(\"%s\").",
+                        file_ext, basename(save_to)),
+                call. = diagnostics)
       }
-      if (eval(quote(verbose), envir = parent.frame(1)) == TRUE) {
-        message("Saving to:\r\n", save_to)
-      }
-    } # end of if is.null(save_to)
+    } # end of if (is.character(save_to)...
+
+    if (save_to == TRUE){
+      # 3 the user didn't provide or provided non-valid file path, generate one
+      # a random string to prevent over-writing a file!
+      rndm_str = paste0(sample(999, 1, replace = TRUE),
+                        sample(LETTERS, 1, replace = TRUE),
+                        sample(9, 1, replace = TRUE),
+                        sample(letters, 1, replace = TRUE), collapse = "")
+      file_name = ifelse(is.na(file_name),
+                         paste0(rndm_str, ".", file_ext),
+                         paste0(file_name, "_", rndm_str, ".", file_ext))
+      dir_name = ifelse(is.na(dir_name), getOption("def_dir_name"), dir_name)
+      save_to = file.path(getwd(), dir_name, file_name)
+      v_msg("Saving to: %s", save_to)
+    }
+    ### 4 create the directory
     dir.create(dirname(save_to),
-               showWarnings = eval(quote(diagnostics), envir = parent.frame(1)),
+               showWarnings = diagnostics,
                recursive = TRUE)
-  }
+  } # end if save_to != FALSE
   return(save_to)
 }
 
@@ -534,8 +551,8 @@ rba_ba_api_call = function(input_call,
 rba_ba_skeleton = function(input_call,
                            response_parser = NULL,
                            skip_error = FALSE,
-                           no_interet_retry_max = getOption("max_retry"),
-                           no_internet_wait_time = getOption("wait_time")) {
+                           no_interet_retry_max = 1,
+                           no_internet_wait_time = 10) {
   ## 1 Make API Call
   response = rba_ba_api_call(input_call = input_call$call,
                              skip_error = skip_error,
@@ -547,16 +564,15 @@ rba_ba_skeleton = function(input_call,
                                                 envir = parent.frame(1))
   )
   ## 2 Parse the the response if possible
-  if (class(response) == "response") {
-    ## choose the parser
-    # Parser Provided via rba_ba_skeleton's 'response parser' argument will
-    #overwrite the 'parser' provided in input call
-    if (!is.null(response_parser)) {
-      parser_input = response_parser
-    } else {
-      parser_input = input_call$parser
-    }
+  # Parser Provided via rba_ba_skeleton's 'response parser' argument will
+  #overwrite the 'parser' provided in input call
+  if (!is.null(response_parser)) {
+    parser_input = response_parser
+  } else {
+    parser_input = input_call$parser
+  }
 
+  if (class(response) == "response" && !is.null(parser_input)) {
     final_output = rba_ba_response_parser(parser = parser_input)
   } else {
     final_output = response
@@ -565,6 +581,7 @@ rba_ba_skeleton = function(input_call,
   ## 3 Return the output
   return(final_output)
 }
+
 
 #### Check Arguments #######
 

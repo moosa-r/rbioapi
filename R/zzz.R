@@ -43,6 +43,7 @@ NULL
   ## other global options
   options("max_retry" = 1)
   options("wait_time" = 10)
+  options("def_dir_name" = "rba")
 
 }
 
