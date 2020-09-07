@@ -22,5 +22,5 @@ rba_string_interaction_partners(
 
 }
 \description{
-#' @family STRING
+Getting all the STRING interaction partners of the protein set
 }

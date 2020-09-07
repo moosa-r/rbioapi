@@ -7,7 +7,7 @@
 rba_string_functional_annotation(
   input,
   species = NA,
-  allow_pubmed = NA,
+  allow_pubmed = FALSE,
   caller_identity = NA,
   verbose = TRUE,
   progress_bar = FALSE,
@@ -21,5 +21,5 @@ rba_string_functional_annotation(
 
 }
 \description{
-#' @family STRING
+Retrieving functional annotation
 }

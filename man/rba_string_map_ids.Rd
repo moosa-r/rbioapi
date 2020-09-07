@@ -48,4 +48,3 @@ This function Calls String's API to Convert a set of identifiers
 \references{
 \url{https://string-db.org/help/api/#mapping-identifiers}
 }
-\concept{STRING}

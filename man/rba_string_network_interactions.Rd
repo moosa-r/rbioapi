@@ -22,5 +22,5 @@ rba_string_network_interactions(
 
 }
 \description{
-#' @family STRING
+Getting the STRING network interactions
 }

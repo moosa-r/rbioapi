@@ -5,7 +5,6 @@
 #'   map Your Protein/genes Identifiers to STRING Identifiers and then proceed
 #'   with other STRING API functions. This  function's Documentation is based
 #'   on: \url{https://string-db.org/help/api/#mapping-identifiers}
-#' @family STRING
 #'
 #' @param input A character or/and numeric vector containing your desired Identifiers to be mapped
 #' @param species (optional) Numeric, NCBI taxon identifiers (e.g. Human is 9606, see:
@@ -31,75 +30,57 @@ rba_string_map_ids = function(input,
                               verbose = TRUE,
                               progress_bar = FALSE,
                               diagnostics = FALSE){
-
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = input,
-                                         name = "input",
-                                         class = c("character", "numeric")),
-                                    list(arg = species,
-                                         name = "species",
-                                         class = "numeric"),
-                                    list(arg = echo_query,
-                                         name = "echo_query",
-                                         class = "logical"),
-                                    list(arg = limit,
-                                         name = "limit",
-                                         class = "numeric"),
-                                    list(arg = caller_identity,
-                                         name = "caller_identity",
-                                         class = "character")),
-                        diagnostics = diagnostics))
-
-  ## when querying more that 100 IDs, STRING returns a HTML page asking to specify the specie
-  if (length(input) > 100 && is.na(species)) {
-    stop("Input's length is ", length(input), ". Please Specify the specie. ",
-         "(Homo Sapiens NCBI taxa ID is 9606)")
-  }
-
-  if (verbose == TRUE){
-    message("Mapping ", length(input),
-            " Input Identifiers to STRING Identifiers.")
-  }
+  rba_ba_args(cons = list(list(arg = "input",
+                               class = c("character", "numeric")),
+                          list(arg = "species",
+                               class = "numeric"),
+                          list(arg = "echo_query",
+                               class = "logical"),
+                          list(arg = "limit",
+                               class = "numeric"),
+                          list(arg = "caller_identity",
+                               class = "character")),
+              cond = list(list("length(input) > 100 && is.na(species)",
+                               sprintf(paste0("Input's length is %s. Please Specify the specie. ",
+                                              "(Homo Sapiens NCBI taxa ID is 9606)"),
+                                       length(input)))
+              ))
+  v_msg("Mapping %s Input Identifiers to STRING Identifiers.", length(input))
 
   ## build POST API request's body
-  call_body = list("format" = "text",
-                   "identifiers" = paste(unique(input),collapse = "%0d"))
-
-  additional_pars = list(list(!is.na(species),
-                              list("species" = species)),
-                         list(echo_query == TRUE,
-                              list("echo_query" = "1")),
-                         list(!is.na(limit),
-                              list("limit" = limit)),
-                         list(!is.na(caller_identity),
-                              list("caller_identity" = caller_identity)))
-
-  call_body = rba_ba_body_add_pars(call_body = call_body,
-                                   additional_pars = additional_pars)
+  call_body = rba_ba_query(init = list("format" = "text",
+                                       "identifiers" = paste(unique(input),
+                                                             collapse = "%0d")),
+                           list("species",
+                                !is.na(species),
+                                species),
+                           list("echo_query",
+                                echo_query == TRUE,
+                                "1"),
+                           list("limit",
+                                !is.na(limit),
+                                limit),
+                           list("caller_identity",
+                                !is.na(caller_identity),
+                                caller_identity))
 
   ## make function-specific calls
-  call_func_input = quote(httr::POST(url = getOption("rba_url_string"),
-                                     path = "api/json/resolve",
-                                     body = call_body,
-                                     encode = "form",
-                                     httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "post",
+                           url = rba_ba_stg("string", "url"),
+                           path = paste0(rba_ba_stg("string", "pth"),
+                                         "json/resolve"),
+                           body = call_body,
+                           encode = "form",
+                           accept = "application/json",
+                           parser = "json->df")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->df",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
-
-
 #' Getting STRING network image
-#'
-#' #' @family STRING
 #'
 #' @param input
 #' @param species
@@ -123,7 +104,7 @@ rba_string_map_ids = function(input,
 #' @examples
 rba_string_network_image = function(input,
                                     output_format = "image",
-                                    save_to = NA,
+                                    save_file = TRUE,
                                     species = NA,
                                     add_color_nodes = FALSE,
                                     add_white_nodes = NA,
@@ -136,128 +117,105 @@ rba_string_network_image = function(input,
                                     verbose = TRUE,
                                     progress_bar = FALSE,
                                     diagnostics = FALSE){
-
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = input,
-                                         name = "input",
-                                         class = c("character", "numeric")),
-                                    list(arg = species,
-                                         name = "species",
-                                         class = "numeric"),
-                                    list(arg = output_format,
-                                         name = "output_format",
-                                         val = c("image", "highres_image", "svg")),
-                                    list(arg = save_to,
-                                         name = "save_to",
-                                         class = "character"),
-                                    list(arg = add_color_nodes,
-                                         name = "add_color_nodes",
-                                         class = "logical"),
-                                    list(arg = add_white_nodes,
-                                         name = "add_white_nodes",
-                                         class = "numeric"),
-                                    list(arg = required_score,
-                                         name = "required_score",
-                                         class = "numeric",
-                                         min_val = 0,
-                                         max_val = 1000),
-                                    list(arg = network_flavor,
-                                         name = "network_flavor",
-                                         val = c("evidence", "confidence", "actions")),
-                                    list(arg = hide_node_labels,
-                                         name = "hide_node_labels",
-                                         class = "logical"),
-                                    list(arg = hide_disconnected_nodes,
-                                         name = "hide_disconnected_nodes",
-                                         class = "logical"),
-                                    list(arg = block_structure_pics_in_bubbles,
-                                         name = "block_structure_pics_in_bubbles",
-                                         class = "logical"),
-                                    list(arg = caller_identity,
-                                         name = "caller_identity",
-                                         class = "character")),
-                        diagnostics = diagnostics))
+  rba_ba_args(cons = list(list(arg = "input",
+                               class = c("character", "numeric")),
+                          list(arg = "species",
+                               class = "numeric"),
+                          list(arg = "output_format",
+                               val = c("image", "highres_image", "svg")),
+                          list(arg = "save_file",
+                               class = c("character",
+                                         "logical")),
+                          list(arg = "add_color_nodes",
+                               class = "logical"),
+                          list(arg = "add_white_nodes",
+                               class = "numeric"),
+                          list(arg = "required_score",
+                               class = "numeric",
+                               min_val = 0,
+                               max_val = 1000),
+                          list(arg = "network_flavor",
+                               val = c("evidence", "confidence", "actions")),
+                          list(arg = "hide_node_labels",
+                               class = "logical"),
+                          list(arg = "hide_disconnected_nodes",
+                               class = "logical"),
+                          list(arg = "block_structure_pics_in_bubbles",
+                               class = "logical"),
+                          list(arg = "caller_identity",
+                               class = "character")),
+              cond = list(list("length(input) > 100 && is.na(species)",
+                               sprintf(paste0("Input's length is %s. Please Specify the specie. ",
+                                              "(Homo Sapiens NCBI taxa ID is 9606)"),
+                                       length(input)))
+              ))
 
-  ## when querying more that 100 IDs, STRING returns a HTML page asking to specify the specie
-  if (length(input) > 100 && is.na(species)) {
-    stop("Input's length is ", length(input), ". Please Specify the specie. ",
-         "(Homo Sapiens NCBI taxa ID is 9606)")
-  }
-
-  if (verbose == TRUE){
-    message("Getting STRING network image of ", length(input),
-            " Input Identifiers.")
-  }
+  v_msg("Getting STRING network image of %s Input Identifiers.", length(input))
 
   ## build POST API request's body
-  call_body = list("format" = "text",
-                   "identifiers" = paste(unique(input),collapse = "%0d"))
+  call_body = rba_ba_query(init = list("format" = "text",
+                                       "identifiers" = paste(unique(input),
+                                                             collapse = "%0d")),
+                           list("species",
+                                !is.na(species),
+                                species),
+                           list("add_color_nodes",
+                                add_color_nodes == TRUE,
+                                "1"),
+                           list("add_white_nodes",
+                                !is.na(add_white_nodes),
+                                add_white_nodes),
+                           list("required_score",
+                                !is.na(required_score),
+                                required_score),
+                           list("network_flavor",
+                                !is.na(network_flavor),
+                                network_flavor),
+                           list("hide_node_labels",
+                                hide_node_labels == TRUE,
+                                "1"),
+                           list("hide_disconnected_nodes",
+                                hide_disconnected_nodes == TRUE,
+                                "1"),
+                           list("block_structure_pics_in_bubbles",
+                                block_structure_pics_in_bubbles == TRUE,
+                                "1"),
+                           list("caller_identity",
+                                !is.na(caller_identity),
+                                caller_identity))
 
-  additional_pars = list(list(!is.na(species),
-                              list("species" = species)),
-                         list(add_color_nodes == TRUE,
-                              list("add_color_nodes" = "1")),
-                         list(!is.na(add_white_nodes),
-                              list("add_white_nodes" = add_white_nodes)),
-                         list(!is.na(required_score),
-                              list("required_score" = required_score)),
-                         list(!is.na(network_flavor),
-                              list("network_flavor" = network_flavor)),
-                         list(hide_node_labels == TRUE,
-                              list("hide_node_labels" = "1")),
-                         list(hide_disconnected_nodes == TRUE,
-                              list("hide_disconnected_nodes" = "1")),
-                         list(block_structure_pics_in_bubbles == TRUE,
-                              list("block_structure_pics_in_bubbles" = "1")),
-                         list(!is.na(caller_identity),
-                              list("caller_identity" = caller_identity)))
-
-  call_body = rba_ba_body_add_pars(call_body = call_body,
-                                   additional_pars = additional_pars)
-
+  ## make file path
+  if (output_format == "svg") {
+    ext_input = "svg"
+    accept_input = "image/svg+xml"
+    parser_input = quote(httr::content(response))
+  } else {
+    ext_input = "png"
+    accept_input = "image/png"
+    parser_input = quote(httr::content(response,
+                                       type = "image/png"))
+  }
+  save_file = rba_ba_file(file_ext = ext_input,
+                          file_name = "string_network_image",
+                          save_to = save_file)
 
   ## make function-specific calls
-  call_func_input = quote(httr::POST(url = getOption("rba_url_string"),
-                                     path = "api/image/network",
-                                     body = call_body,
-                                     httr::write_disk(save_to, overwrite = TRUE)
-  ))
-
-  if (output_format != "svg") {
-    response_parser_input = quote(httr::content(response,
-                                                type = "image/png"))
-  } else {
-    response_parser_input = quote(httr::content(response))
-  }
-
-
-  # create file_path
-  file_name_input = paste0(input[seq_len(min(3,
-                                             length(input)))],
-                           collapse = "_")
-  file_ext_input = ifelse("output_format" == "svg",
-                          "svg",
-                          "png")
-  save_to = rba_ba_file_path(file_ext = file_ext_input,
-                             file_name = file_name_input,
-                             dir_name = "rba_string",
-                             save_to = save_to,
-                             verbose = verbose,
-                             diagnostics = diagnostics)
+  input_call = rba_ba_httr(httr = "post",
+                           url = rba_ba_stg("string", "url"),
+                           path = paste0(rba_ba_stg("string", "pth"),
+                                         "image/network"),
+                           accept = accept_input,
+                           parser = parser_input,
+                           body = call_body,
+                           save_to = save_file)
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = response_parser_input,
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
 #' Getting the STRING network interactions
-#'
-#' #' @family STRING
 #'
 #' @param input
 #' @param species
@@ -280,79 +238,62 @@ rba_string_network_interactions = function(input,
                                            verbose = TRUE,
                                            progress_bar = FALSE,
                                            diagnostics = FALSE){
-
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = input,
-                                         name = "input",
-                                         class = c("character", "numeric")),
-                                    list(arg = species,
-                                         name = "species",
-                                         class = "numeric"),
-                                    list(arg = required_score,
-                                         name = "required_score",
-                                         class = "numeric",
-                                         min_val = 0,
-                                         max_val = 1000),
-                                    list(arg = add_nodes,
-                                         name = "add_nodes",
-                                         class = "numeric",
-                                         min_val = 0),
-                                    list(arg = caller_identity,
-                                         name = "caller_identity",
-                                         class = "character")),
-                        diagnostics = diagnostics))
+  rba_ba_args(cons = list(list(arg = "input",
+                               class = c("character", "numeric")),
+                          list(arg = "species",
+                               class = "numeric"),
+                          list(arg = "required_score",
+                               class = "numeric",
+                               min_val = 0,
+                               max_val = 1000),
+                          list(arg = "add_nodes",
+                               class = "numeric",
+                               min_val = 0),
+                          list(arg = "caller_identity",
+                               class = "character")),
+              cond = list(list("length(input) > 100 && is.na(species)",
+                               sprintf(paste0("Input's length is %s. Please Specify the specie. ",
+                                              "(Homo Sapiens NCBI taxa ID is 9606)"),
+                                       length(input)))
+              ))
 
-  ## when querying more that 100 IDs, STRING returns a HTML page asking to specify the specie
-  if (length(input) > 100 && is.na(species)) {
-    stop("Input's length is ", length(input), ". Please Specify the specie. ",
-         "(Homo Sapiens NCBI taxa ID is 9606)")
-  }
-
-  if (verbose == TRUE){
-    message("Getting STRING Network interaction of ", length(input), " inputs.")
-  }
+  v_msg("Getting STRING Network interaction of %s inputs.", length(input))
 
   ## build POST API request's body
-  call_body = list("format" = "text",
-                   "identifiers" = paste(unique(input),collapse = "%0d"))
-
-
-  additional_pars = list(list(!is.na(species),
-                              list("species" = species)),
-                         list(!is.na(required_score),
-                              list("required_score" = required_score)),
-                         list(!is.na(add_nodes),
-                              list("add_nodes" = add_nodes)),
-                         list(!is.na(caller_identity),
-                              list("caller_identity" = caller_identity)))
-
-  call_body = rba_ba_body_add_pars(call_body = call_body,
-                                   additional_pars = additional_pars)
+  call_body = rba_ba_query(init = list("format" = "text",
+                                       "identifiers" = paste(unique(input),
+                                                             collapse = "%0d")),
+                           list("species",
+                                !is.na(species),
+                                species),
+                           list("required_score",
+                                !is.na(required_score),
+                                required_score),
+                           list("add_nodes",
+                                !is.na(add_nodes),
+                                add_nodes),
+                           list("caller_identity",
+                                !is.na(caller_identity),
+                                caller_identity)
+  )
 
   ## make function-specific calls
-  call_func_input = quote(httr::POST(url = getOption("rba_url_string"),
-                                     path = "api/json/network",
-                                     body = call_body,
-                                     encode = "form",
-                                     httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "post",
+                           url = rba_ba_stg("string", "url"),
+                           path = paste0(rba_ba_stg("string", "pth"),
+                                         "json/network"),
+                           body = call_body,
+                           encode = "form",
+                           accept = "application/json",
+                           parser = "json->df")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->df",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
-
-
-
 #' Getting all the STRING interaction partners of the protein set
-#'
-#' #' @family STRING
 #'
 #' @param input
 #' @param species
@@ -375,66 +316,59 @@ rba_string_interaction_partners = function(input,
                                            verbose = TRUE,
                                            progress_bar = FALSE,
                                            diagnostics = FALSE){
-
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = input,
-                                         name = "input",
-                                         class = c("character", "numeric")),
-                                    list(arg = species,
-                                         name = "species",
-                                         class = "numeric"),
-                                    list(arg = required_score,
-                                         name = "required_score",
-                                         class = "numeric",
-                                         min_val = 0,
-                                         max_val = 1000),
-                                    list(arg = limit,
-                                         name = "limit",
-                                         class = "numeric",
-                                         min_val = 1)),
-                        diagnostics = diagnostics))
+  rba_ba_args(cons = list(list(arg = input,
+                               name = "input",
+                               class = c("character", "numeric")),
+                          list(arg = species,
+                               name = "species",
+                               class = "numeric"),
+                          list(arg = required_score,
+                               name = "required_score",
+                               class = "numeric",
+                               min_val = 0,
+                               max_val = 1000),
+                          list(arg = limit,
+                               name = "limit",
+                               class = "numeric",
+                               min_val = 1)),
+              cond = list(list("length(input) > 100 && is.na(species)",
+                               sprintf(paste0("Input's length is %s. Please Specify the specie. ",
+                                              "(Homo Sapiens NCBI taxa ID is 9606)"),
+                                       length(input)))
+              ))
 
-  ## when querying more that 100 IDs, STRING returns a HTML page asking to specify the specie
-  if (length(input) > 100 && is.na(species)) {
-    stop("Input's length is ", length(input), ". Please Specify the specie. ",
-         "(Homo Sapiens NCBI taxa ID is 9606)")
-  }
-
-  if (verbose == TRUE){
-    message("Retrieving Interacting partners of ", length(input), " inputs.")
-  }
+  v_msg("Retrieving Interacting partners of ", length(input), " inputs.")
 
   ## build POST API request's body
-  call_body = list("format" = "text",
-                   "identifiers" = paste(unique(input),collapse = "%0d"))
-
-  additional_pars = list(list(!is.na(species),
-                              list("species" = species)),
-                         list(!is.na(limit),
-                              list("limit" = limit)),
-                         list(!is.na(required_score),
-                              list("required_score" = required_score)),
-                         list(!is.na(caller_identity),
-                              list("caller_identity" = caller_identity)))
-
-  call_body = rba_ba_body_add_pars(call_body = call_body,
-                                   additional_pars = additional_pars)
+  call_body = rba_ba_query(init = list("format" = "text",
+                                       "identifiers" = paste(unique(input),
+                                                             collapse = "%0d")),
+                           list("species",
+                                !is.na(species),
+                                species),
+                           list("limit",
+                                !is.na(limit),
+                                limit),
+                           list("required_score",
+                                !is.na(required_score),
+                                required_score),
+                           list("caller_identity",
+                                !is.na(caller_identity),
+                                caller_identity))
 
   ## make function-specific calls
-  call_func_input = quote(httr::POST(url = getOption("rba_url_string"),
-                                     path = "api/json/interaction_partners",
-                                     body = call_body,
-                                     encode = "form",
-                                     httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "post",
+                           url = rba_ba_stg("string", "url"),
+                           path = paste0(rba_ba_stg("string", "pth"),
+                                         "/json/interaction_partners"),
+                           body = call_body,
+                           encode = "form",
+                           accept = "application/json",
+                           parser = "json->df")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->df",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -462,54 +396,43 @@ rba_string_homology = function(input,
                                diagnostics = FALSE){
 
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = input,
-                                         name = "input",
-                                         class = c("character", "numeric")),
-                                    list(arg = species,
-                                         name = "species",
-                                         class = "numeric"),
-                                    list(arg = caller_identity,
-                                         name = "caller_identity",
-                                         class = "character")),
-                        diagnostics = diagnostics))
+  rba_ba_args(cons = list(list(arg = "input",
+                               class = c("character", "numeric")),
+                          list(arg = "species",
+                               class = "numeric"),
+                          list(arg = "caller_identity",
+                               class = "character")),
+              cond = list(list("length(input) > 100 && is.na(species)",
+                               sprintf(paste0("Input's length is %s. Please Specify the specie. ",
+                                              "(Homo Sapiens NCBI taxa ID is 9606)"),
+                                       length(input)))
+              ))
 
-  ## when querying more that 100 IDs, STRING returns a HTML page asking to specify the specie
-  if (length(input) > 100 && is.na(species)) {
-    stop("Input's length is ", length(input), ". Please Specify the specie. ",
-         "(Homo Sapiens NCBI taxa ID is 9606)")
-  }
-
-  if (verbose == TRUE){
-    message("Retrieving similarity scores between ", length(input), " inputs.")
-  }
+  v_msg("Retrieving similarity scores between %s inputs.", length(input))
 
   ## build POST API request's body
-  call_body = list("format" = "text",
-                   "identifiers" = paste(unique(input),collapse = "%0d"))
-
-  additional_pars = list(list(!is.na(species),
-                              list("species" = species)),
-                         list(!is.na(caller_identity),
-                              list("caller_identity" = caller_identity)))
-
-  call_body = rba_ba_body_add_pars(call_body = call_body,
-                                   additional_pars = additional_pars)
+  call_body = rba_ba_query(init = list("format" = "text",
+                                       "identifiers" = paste(unique(input),
+                                                             collapse = "%0d")),
+                           list("species",
+                                !is.na(species),
+                                species),
+                           list("caller_identity",
+                                !is.na(caller_identity),
+                                caller_identity))
 
   ## make function-specific calls
-  call_func_input = quote(httr::POST(url = getOption("rba_url_string"),
-                                     path = "api/json/homology",
-                                     body = call_body,
-                                     encode = "form",
-                                     httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "post",
+                           url = rba_ba_stg("string", "url"),
+                           path = paste0(rba_ba_stg("string", "pth"),
+                                         "json/homology"),
+                           body = call_body,
+                           encode = "form",
+                           accept = "application/json",
+                           parser = "json->df")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->df",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -538,59 +461,47 @@ rba_string_homology_best = function(input,
                                     diagnostics = FALSE){
 
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = input,
-                                         name = "input",
-                                         class = c("character", "numeric")),
-                                    list(arg = species,
-                                         name = "species",
-                                         class = "numeric"),
-                                    list(arg = species_b,
-                                         name = "species_b",
-                                         class = "numeric"),
-                                    list(arg = caller_identity,
-                                         name = "caller_identity",
-                                         class = "character")),
-                        diagnostics = diagnostics))
-
-  ## when querying more that 100 IDs, STRING returns a HTML page asking to specify the specie
-  if (length(input) > 100 && is.na(species)) {
-    stop("Input's length is ", length(input), ". Please Specify the specie. ",
-         "(Homo Sapiens NCBI taxa ID is 9606)")
-  }
-
-  if (verbose == TRUE){
-    message("Retrieving similarity scores between ", length(input), " inputs.")
-  }
+  rba_ba_args(cons = list(list(arg = "input",
+                               class = c("character", "numeric")),
+                          list(arg = "species",
+                               class = "numeric"),
+                          list(arg = "species_b",
+                               class = "numeric"),
+                          list(arg = "caller_identity",
+                               class = "character")),
+              cond = list(list("length(input) > 100 && is.na(species)",
+                               sprintf(paste0("Input's length is %s. Please Specify the specie. ",
+                                              "(Homo Sapiens NCBI taxa ID is 9606)"),
+                                       length(input)))
+              ))
+  v_msg("Retrieving similarity scores between %s inputs.", length(input))
 
   ## build POST API request's body
-  call_body = list("format" = "text",
-                   "identifiers" = paste(unique(input),collapse = "%0d"))
-
-  additional_pars = list(list(!is.na(species),
-                              list("species" = species)),
-                         list(!is.na(species_b),
-                              list("species_b" = paste(unique(species_b),collapse = "%0d"))),
-                         list(!is.na(caller_identity),
-                              list("caller_identity" = caller_identity)))
-
-  call_body = rba_ba_body_add_pars(call_body = call_body,
-                                   additional_pars = additional_pars)
+  call_body = rba_ba_query(init = list("format" = "text",
+                                       "identifiers" = paste(unique(input),
+                                                             collapse = "%0d")),
+                           list("species",
+                                !is.na(species),
+                                species),
+                           list("species_b",
+                                !is.na(species_b),
+                                paste(unique(species_b),collapse = "%0d")),
+                           list("caller_identity",
+                                !is.na(caller_identity),
+                                caller_identity))
 
   ## make function-specific calls
-  call_func_input = quote(httr::POST(url = getOption("rba_url_string"),
-                                     path = "api/json/homology_best",
-                                     body = call_body,
-                                     encode = "form",
-                                     httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "post",
+                           url = rba_ba_stg("string", "url"),
+                           path = paste0(rba_ba_stg("string", "pth"),
+                                         "json/homology_best"),
+                           body = call_body,
+                           encode = "form",
+                           accept = "application/json",
+                           parser = "json->df")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->df",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -601,11 +512,11 @@ rba_string_homology_best = function(input,
 #'
 #' @param input
 #' @param species
-#' @param background_string_identifiers
 #' @param caller_identity
 #' @param verbose
 #' @param progress_bar
 #' @param diagnostics
+#' @param background_string_ids
 #'
 #' @return
 #' @export
@@ -613,73 +524,60 @@ rba_string_homology_best = function(input,
 #' @examples
 rba_string_enrichment = function(input,
                                  species = NA,
-                                 background_string_identifiers = NA,
+                                 background_string_ids = NA,
                                  caller_identity = NA,
                                  verbose = TRUE,
                                  progress_bar = FALSE,
                                  diagnostics = FALSE){
 
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = input,
-                                         name = "input",
-                                         class = c("character", "numeric")),
-                                    list(arg = species,
-                                         name = "species",
-                                         class = "numeric"),
-                                    list(arg = background_string_identifiers,
-                                         name = "background_string_identifiers",
-                                         class = "character"),
-                                    list(arg = caller_identity,
-                                         name = "caller_identity",
-                                         class = "character")),
-                        diagnostics = diagnostics))
-
-  ## when querying more that 100 IDs, STRING returns a HTML page asking to specify the specie
-  if (length(input) > 100 && is.na(species)) {
-    stop("Input's length is ", length(input), ". Please Specify the specie. ",
-         "(Homo Sapiens NCBI taxa ID is 9606)")
-  }
-
-  if (verbose == TRUE){
-    message("Retrieving similarity scores between ", length(input), " inputs.")
-  }
+  rba_ba_args(cons = list(list(arg ="input",
+                               class = c("character", "numeric")),
+                          list(arg = "species",
+                               class = "numeric"),
+                          list(arg = "background_string_ids",
+                               class = "character"),
+                          list(arg = "caller_identity",
+                               class = "character")),
+              cond = list(list("length(input) > 100 && is.na(species)",
+                               sprintf(paste0("Input's length is %s. Please Specify the specie. ",
+                                              "(Homo Sapiens NCBI taxa ID is 9606)"),
+                                       length(input)))
+              ))
+  v_msg("Retrieving similarity scores between %s inputs.", length(input))
 
   ## build POST API request's body
-  call_body = list("format" = "text",
-                   "identifiers" = paste(unique(input),collapse = "%0d"))
-
-  additional_pars = list(list(!is.na(species),
-                              list("species" = species)),
-                         list(!is.na(background_string_identifiers),
-                              list("background_string_identifiers" = paste(unique(background_string_identifiers),collapse = "%0d"))),
-                         list(!is.na(caller_identity),
-                              list("caller_identity" = caller_identity)))
-
-  call_body = rba_ba_body_add_pars(call_body = call_body,
-                                   additional_pars = additional_pars)
+  call_body = rba_ba_query(init = list("format" = "text",
+                                       "identifiers" = paste(unique(input),
+                                                             collapse = "%0d")),
+                           list("species",
+                                !is.na(species),
+                                species),
+                           list("background_string_identifiers",
+                                !is.na(background_string_ids),
+                                paste(unique(background_string_ids),
+                                      collapse = "%0d")),
+                           list("caller_identity",
+                                !is.na(caller_identity),
+                                caller_identity))
 
   ## make function-specific calls
-  call_func_input = quote(httr::POST(url = getOption("rba_url_string"),
-                                     path = "api/json/enrichment",
-                                     body = call_body,
-                                     encode = "form",
-                                     httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "post",
+                           url = rba_ba_stg("string", "url"),
+                           path = paste0(rba_ba_stg("string", "pth"),
+                                         "json/enrichment"),
+                           body = call_body,
+                           encode = "form",
+                           accept = "application/json",
+                           parser = "json->df")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->df",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
 
 #' Retrieving functional annotation
-#'
-#' #' @family STRING
 #'
 #' @param input
 #' @param species
@@ -695,66 +593,55 @@ rba_string_enrichment = function(input,
 #' @examples
 rba_string_functional_annotation = function(input,
                                             species = NA,
-                                            allow_pubmed = NA,
+                                            allow_pubmed = FALSE,
                                             caller_identity = NA,
                                             verbose = TRUE,
                                             progress_bar = FALSE,
                                             diagnostics = FALSE){
 
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = input,
-                                         name = "input",
-                                         class = c("character", "numeric")),
-                                    list(arg = species,
-                                         name = "species",
-                                         class = "numeric"),
-                                    list(arg = allow_pubmed,
-                                         name = "allow_pubmed",
-                                         class = "logical"),
-                                    list(arg = caller_identity,
-                                         name = "caller_identity",
-                                         class = "character")),
-                        diagnostics = diagnostics))
+  rba_ba_args(cons = list(list(arg = "input",
+                               class = c("character", "numeric")),
+                          list(arg = "species",
+                               class = "numeric"),
+                          list(arg = "allow_pubmed",
+                               class = "logical"),
+                          list(arg = "caller_identity",
+                               class = "character")),
+              cond = list(list("length(input) > 100 && is.na(species)",
+                               sprintf(paste0("Input's length is %s. Please Specify the specie. ",
+                                              "(Homo Sapiens NCBI taxa ID is 9606)"),
+                                       length(input)))
+              ))
 
-  ## when querying more that 100 IDs, STRING returns a HTML page asking to specify the specie
-  if (length(input) > 100 && is.na(species)) {
-    stop("Input's length is ", length(input), ". Please Specify the specie. ",
-         "(Homo Sapiens NCBI taxa ID is 9606)")
-  }
-
-  if (verbose == TRUE){
-    message("Retrieving similarity scores between ", length(input), " inputs.")
-  }
+  v_msg("Retrieving functional annotations of %s inputs.", length(input))
 
   ## build POST API request's body
-  call_body = list("format" = "text",
-                   "identifiers" = paste(unique(input),collapse = "%0d"))
-
-  additional_pars = list(list(!is.na(species),
-                              list("species" = species)),
-                         list(allow_pubmed == TRUE,
-                              list("allow_pubmed" = 1)),
-                         list(!is.na(caller_identity),
-                              list("caller_identity" = caller_identity)))
-
-  call_body = rba_ba_body_add_pars(call_body = call_body,
-                                   additional_pars = additional_pars)
+  call_body = rba_ba_query(init = list("format" = "text",
+                                       "identifiers" = paste(unique(input),
+                                                             collapse = "%0d")),
+                           list("species",
+                                !is.na(species),
+                                species),
+                           list("allow_pubmed",
+                                allow_pubmed == TRUE,
+                                1),
+                           list("caller_identity",
+                                !is.na(caller_identity),
+                                caller_identity))
 
   ## make function-specific calls
-  call_func_input = quote(httr::POST(url = getOption("rba_url_string"),
-                                     path = "api/json/functional_annotation",
-                                     body = call_body,
-                                     encode = "form",
-                                     httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "post",
+                           url = rba_ba_stg("string", "url"),
+                           path = paste0(rba_ba_stg("string", "pth"),
+                                         "json/functional_annotation"),
+                           body = call_body,
+                           encode = "form",
+                           accept = "application/json",
+                           parser = "json->df")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->df",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -784,61 +671,49 @@ rba_string_ppi_enrichment = function(input,
                                      diagnostics = FALSE){
 
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = input,
-                                         name = "input",
-                                         class = c("character", "numeric")),
-                                    list(arg = species,
-                                         name = "species",
-                                         class = "numeric"),
-                                    list(arg = required_score,
-                                         name = "required_score",
-                                         class = "numeric",
-                                         min_val = 0,
-                                         max_val = 1000),
-                                    list(arg = caller_identity,
-                                         name = "caller_identity",
-                                         class = "character")),
-                        diagnostics = diagnostics))
+  rba_ba_args(cons = list(list(arg = "input",
+                               class = c("character", "numeric")),
+                          list(arg = "species",
+                               class = "numeric"),
+                          list(arg = "required_score",
+                               class = "numeric",
+                               min_val = 0,
+                               max_val = 1000),
+                          list(arg = "caller_identity",
+                               class = "character")),
+              cond = list(list("length(input) > 100 && is.na(species)",
+                               sprintf(paste0("Input's length is %s. Please Specify the specie. ",
+                                              "(Homo Sapiens NCBI taxa ID is 9606)"),
+                                       length(input)))
+              ))
 
-  ## when querying more that 100 IDs, STRING returns a HTML page asking to specify the specie
-  if (length(input) > 100 && is.na(species)) {
-    stop("Input's length is ", length(input), ". Please Specify the specie. ",
-         "(Homo Sapiens NCBI taxa ID is 9606)")
-  }
-
-  if (verbose == TRUE){
-    message("Retrieving similarity scores between ", length(input), " inputs.")
-  }
+  v_msg("Performing PPI Enrichment of %s inputs.", length(input))
 
   ## build POST API request's body
-  call_body = list("format" = "text",
-                   "identifiers" = paste(unique(input),collapse = "%0d"))
-
-  additional_pars = list(list(!is.na(species),
-                              list("species" = species)),
-                         list(!is.na(required_score),
-                              list("required_score" = required_score)),
-                         list(!is.na(caller_identity),
-                              list("caller_identity" = caller_identity)))
-
-  call_body = rba_ba_body_add_pars(call_body = call_body,
-                                   additional_pars = additional_pars)
+  call_body = rba_ba_query(init = list("format" = "text",
+                                       "identifiers" = paste(unique(input),
+                                                             collapse = "%0d")),
+                           list("species",
+                                !is.na(species),
+                                species),
+                           list("required_score",
+                                !is.na(required_score),
+                                required_score),
+                           list("caller_identity",
+                                !is.na(caller_identity),
+                                caller_identity))
 
   ## make function-specific calls
-  call_func_input = quote(httr::POST(url = getOption("rba_url_string"),
-                                     path = "api/json/functional_annotation",
-                                     body = call_body,
-                                     encode = "form",
-                                     httr::accept_json()
-  ))
-
+  input_call = rba_ba_httr(httr = "post",
+                           url = rba_ba_stg("string", "url"),
+                           path = paste0(rba_ba_stg("string", "pth"),
+                                         "json/ppi_enrichment"),
+                           body = call_body,
+                           encode = "form",
+                           accept = "application/json",
+                           parser = "json->df")
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->df",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -858,77 +733,62 @@ rba_string_version = function(verbose = TRUE,
                               progress_bar = FALSE,
                               diagnostics = FALSE){
 
-  if (verbose == TRUE){
-    message("Retrieving Current STRING database version.")
-  }
-
   ## Check input arguments
-  invisible(rba_ba_args(diagnostics = diagnostics))
+  rba_ba_args()
+  v_msg("Retrieving Current STRING database version.")
+
   ## build POST API request's body
   call_query = list("format" = "text")
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_string"),
-                                    path = "api/json/version",
-                                    query = call_query,
-                                    encode = "form",
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("string", "url"),
+                           path = paste0(rba_ba_stg("string", "pth"),
+                                         "json/version"),
+                           body = call_query,
+                           encode = "form",
+                           accept = "application/json",
+                           parser = "json->list")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
 
 #' Get Statistics from STRING database
 #'
-#' @param what
 #' @param verbose
 #' @param diagnostics
+#' @param type
 #'
 #' @return
 #' @export
 #'
 #' @examples
-rba_string_info = function(what = "statistics",
+rba_string_info = function(type = "statistics",
                            verbose = TRUE,
                            diagnostics = FALSE){
 
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = what,
-                                         name = "what",
-                                         class = "character",
-                                         val = c("statistics", "organisms")),
-                                    list(arg = verbose,
-                                         name = "verbose",
-                                         class = "logical"),
-                                    list(arg = diagnostics,
-                                         name = "diagnostics",
-                                         class = "logical")),
-                        diagnostics = diagnostics))
+  rba_ba_args(cons = list(list(arg = "type",
+                               class = "character",
+                               val = c("statistics", "organisms")),
+                          list(arg = "verbose",
+                               class = "logical"),
+                          list(arg = "diagnostics",
+                               class = "logical")))
 
-  if (what == "statistics") {
-    if (verbose == TRUE){
-      message("Retrieving STRNG statistics.")
-    }
-
+  if (type == "statistics") {
+    v_msg("Retrieving STRNG statistics.")
     input_url = paste0("https://string-db.org/",
                        "cgi/about.pl?footer_active_subpage=statistics")
     input_html = xml2::read_html(input_url)
     input_html = rvest::html_nodes(input_html, ".footer_stats_table")
     output_table = rvest::html_table(input_html)
 
-  } else if (what == "organisms") {
-    if (verbose == TRUE){
-      message("Retrieving STRNG Organism tubular view")
-    }
-
+  } else if (type == "organisms") {
+    v_msg("Retrieving STRNG Organism tubular view")
     input_url = paste0("https://string-db.org/",
                        "organism_overview.html")
     input_html = xml2::read_html(input_url)

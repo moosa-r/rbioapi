@@ -7,7 +7,7 @@
 rba_string_network_image(
   input,
   output_format = "image",
-  save_to = NA,
+  save_file = TRUE,
   species = NA,
   add_color_nodes = FALSE,
   add_white_nodes = NA,
@@ -29,5 +29,5 @@ rba_string_network_image(
 
 }
 \description{
-#' @family STRING
+Getting STRING network image
 }
