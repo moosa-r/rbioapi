@@ -21,7 +21,10 @@ rba_ba_stg = function(...){
                   ensembl = switch(arg[[2]],
                                    name = "Ensembl",
                                    url = "https://rest.ensembl.org",
-                                   ptn = "(http.*://)*rest.ensembl.org/\\w+.*"),
+                                   ptn = "(http.*://)*rest.ensembl.org/\\w+.*",
+                                   err = c("400","404"),
+                                   err_prs = "json->list",
+                                   err_fun = function(x) {x[["error"]][[1]]}),
                   reactome = switch(arg[[2]],
                                     name = "Reactome",
                                     url = "https://reactome.org",
@@ -848,11 +851,11 @@ rba_ba_error_parser = function(response,
     }
   }
   if (db_found == TRUE &&
-      !is.null(rba_ba_stg(db, "err"))) {
+      as.character(response$status_code) %in% rba_ba_stg(db, "err")) {
     ## The API server returns an error string for this status code
-    server_error = rba_ba_response_parser(rba_ba_stg("uniprot", "err_prs"))
-    server_error = rba_ba_stg("uniprot", "err_fun")(server_error)
-    error_message = sprintf("%s server returned \"%s\" with this error message:\r\n\t %s",
+    server_error = rba_ba_response_parser(rba_ba_stg(db, "err_prs"))
+    server_error = rba_ba_stg(db, "err_fun")(server_error)
+    error_message = sprintf("%s server returned \"%s\".\r\n  with this error message:\r\n  \"%s\"",
                             rba_ba_stg(db, "name"),
                             rba_ba_http_status(response$status_code,
                                                verbose = FALSE),
@@ -864,7 +867,7 @@ rba_ba_error_parser = function(response,
   }
   return(error_message)
 }
-#### Misselineius ####
+#### Miscellaneous ####
 #' Alternative messaging system
 #'
 #' @param msg
