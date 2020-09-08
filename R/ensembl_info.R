@@ -1,6 +1,5 @@
 #### information endpoints in Ensembl API
 
-
 #' List the names of analyses involved in generating Ensembl data
 #'
 #' @param species
@@ -18,33 +17,22 @@ rba_ensembl_info_analysis = function(species,
                                      progress_bar = FALSE,
                                      diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = species,
-                                         name = "species",
-                                         class = c("numeric",
-                                                   "character"),
-                                         len = 1)),
-                        diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("List the names of analyses involved in generating Ensembl data")
-  }
+  rba_ba_args(cons = list(list(arg = "species",
+                               class = c("numeric",
+                                         "character"),
+                               len = 1)))
+  v_msg("List the names of analyses involved in generating Ensembl data")
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
-                                    path = paste0("/info/analysis/",
-                                                  species),
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("ensembl", "url"),
+                           path = paste0("info/analysis/",
+                                         species),
+                           accept = "application/json",
+                           parser = "json->list")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = NULL,
-                                  parser_type = "json->list",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -70,48 +58,36 @@ rba_ensembl_info_aassembly = function(species,
                                       progress_bar = FALSE,
                                       diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = species,
-                                         name = "species",
-                                         class = c("numeric",
-                                                   "character"),
-                                         len = 1),
-                                    list(arg = bands,
-                                         name = "bands",
-                                         class = "logical"),
-                                    list(arg = synonyms,
-                                         name = "synonyms",
-                                         class = "logical")),
-                        diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("GET info/assembly/:species")
-  }
+  rba_ba_args(cons = list(list(arg = "species",
+                               class = c("numeric",
+                                         "character"),
+                               len = 1),
+                          list(arg = "bands",
+                               class = "logical"),
+                          list(arg = "synonyms",
+                               class = "logical")))
+  v_msg("GET info/assembly/:species")
 
   ## build GET API request's query
-  additional_pars = list(list(bands == TRUE,
-                              list("bands" = "1")),
-                         list(synonyms == TRUE,
-                              list("synonyms" = "1")))
-
-  call_query = rba_ba_body_add_pars(call_body = list(),
-                                    additional_pars = additional_pars)
+  call_query = rba_ba_query(init = list(),
+                            list("bands",
+                                 bands == TRUE,
+                                 "1"),
+                            list("synonyms",
+                                 synonyms == TRUE,
+                                 "1"))
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
-                                    path = paste0("/info/assembly/",
-                                                  species),
-                                    query = call_query,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("ensembl", "url"),
+                           path = paste0("info/assembly/",
+                                         species),
+                           query = call_query,
+                           accept = "application/json",
+                           parser = "json->list")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -139,55 +115,42 @@ rba_ensembl_info_assembly_region_name = function(species,
                                                  progress_bar = FALSE,
                                                  diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = species,
-                                         name = "species",
-                                         class = c("numeric",
-                                                   "character"),
-                                         len = 1),
-                                    list(arg = region_name,
-                                         name = "region_name",
-                                         class = c("numeric",
-                                                   "character"),
-                                         len = 1),
-                                    list(arg = bands,
-                                         name = "bands",
-                                         class = "logical"),
-                                    list(arg = synonyms,
-                                         name = "synonyms",
-                                         class = "logical")),
-                        diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("GET info/assembly/:species/:region_name")
-  }
+  rba_ba_args(cons = list(list(arg = "species",
+                               class = c("numeric",
+                                         "character"),
+                               len = 1),
+                          list(arg = "region_name",
+                               class = c("numeric",
+                                         "character"),
+                               len = 1),
+                          list(arg = "bands",
+                               class = "logical"),
+                          list(arg = "synonyms",
+                               class = "logical")))
+  v_msg("GET info/assembly/:species/:region_name")
 
   ## build GET API request's query
-  additional_pars = list(list(bands == TRUE,
-                              list("bands" = "1")),
-                         list(synonyms == TRUE,
-                              list("synonyms" = "1")))
-
-  call_query = rba_ba_body_add_pars(call_body = list(),
-                                    additional_pars = additional_pars)
+  call_query = rba_ba_query(init = list(),
+                            list("bands",
+                                 bands  == TRUE,
+                                 "1"),
+                            list("synonyms",
+                                 synonyms == TRUE,
+                                 "1"))
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
-                                    path = paste0("/info/assembly/",
-                                                  species,
-                                                  "/",
-                                                  region_name),
-                                    query = call_query,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("ensembl", "url"),
+                           path = paste0("info/assembly/",
+                                         species,
+                                         "/",
+                                         region_name),
+                           query = call_query,
+                           accept = "application/json",
+                           parser = "json->df")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->df",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -210,32 +173,22 @@ rba_ensembl_info_biotypes = function(species,
                                      progress_bar = FALSE,
                                      diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = species,
-                                         name = "species",
-                                         class = c("numeric",
-                                                   "character"),
-                                         len = 1)),
-                        diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("GET info/biotypes/:species")
-  }
+  rba_ba_args(cons = list(list(arg = "species",
+                               class = c("numeric",
+                                         "character"),
+                               len = 1)))
+  v_msg("GET info/biotypes/:species")
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
-                                    path = paste0("/info/biotypes/",
-                                                  species),
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("ensembl", "url"),
+                           path = paste0("info/biotypes/",
+                                         species),
+                           accept = "application/json",
+                           parser = "json->df")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->df",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -260,53 +213,38 @@ rba_ensembl_info_biotypes_groups = function(group = NA,
                                             progress_bar = FALSE,
                                             diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = group,
-                                         name = "group",
-                                         class = "character",
-                                         len = 1),
-                                    list(arg = object_type,
-                                         name = "object_type",
-                                         class = "character",
-                                         val = c("gene",
-                                                 "transcript"))),
-                        cond = list(list(!is.na(object_type) &&
-                                           is.na(group),
-                                         c("You can't provide ",
-                                           "'object_type' without ",
-                                           "providing 'group'."))),
-                        diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("GET info/biotypes/groups/:group/:object_type")
-  }
+  rba_ba_args(cons = list(list(arg = "group",
+                               class = "character",
+                               len = 1),
+                          list(arg = "object_type",
+                               class = "character",
+                               val = c("gene",
+                                       "transcript"))),
+              cond = list(list(quote(!is.na(object_type) && is.na(group)),
+                               c("You can't provide ",
+                                 "'object_type' without ",
+                                 "providing 'group'."))))
+  v_msg("GET info/biotypes/groups/:group/:object_type")
 
   ## make function-specific calls
-  #make path and specify parser type
-  if (is.na(group)) {
-    parser_type_input = "json->list"
-    path_input = "/info/biotypes/groups/"
-  } else {
-    parser_type_input = "json->df"
-    if (is.na(object_type)) {
-      path_input = paste0("/info/biotypes/groups/", group)
-    } else {
-      path_input = paste0("/info/biotypes/groups/", group, "/", object_type)
-    }
+  parser_input = "json->list"
+  path_input = "/info/biotypes/groups/"
+  if (!is.na(group)){
+    parser_input = "json->df"
+    path_input = paste0(path_input, group)
+  }
+  if (!is.na(object_type)){
+    path_input = paste0(path_input, "/", object_type)
   }
 
-  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
-                                    path = path_input,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("ensembl", "url"),
+                           path = path_input,
+                           accept = "application/json",
+                           parser = parser_input)
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = parser_type_input,
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -329,42 +267,29 @@ rba_ensembl_info_biotypes_names = function(name,
                                            progress_bar = FALSE,
                                            diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = name,
-                                         name = "name",
-                                         class = "character",
-                                         len = 1),
-                                    list(arg = object_type,
-                                         name = "object_type",
-                                         class = "character",
-                                         val = c("gene",
-                                                 "transcript"))),
-                        diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("GET info/biotypes/name/:name/:object_type")
-  }
+  rba_ba_args(cons = list(list(arg = "name",
+                               class = "character",
+                               len = 1),
+                          list(arg = "object_type",
+                               class = "character",
+                               val = c("gene",
+                                       "transcript"))))
+  v_msg("GET info/biotypes/name/:name/:object_type")
 
   ## make function-specific calls
-  #make path and specify parser type
-  if (is.na(object_type)) {
-    path_input = paste0("/info/biotypes/name/", name)
-  } else {
-    path_input = paste0("/info/biotypes/name/", name, "/", object_type)
+  path_input = paste0("info/biotypes/name/", name)
+  if (!is.na(object_type)){
+    path_input = paste0(path_input, "/", object_type)
   }
 
-  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
-                                    path = path_input,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("ensembl", "url"),
+                           path = path_input,
+                           accept = "application/json",
+                           parser = "json->df")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->df",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -387,44 +312,33 @@ rba_ensembl_info_compara_methods = function(class = NA,
                                             progress_bar = FALSE,
                                             diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = class,
-                                         name = "class",
-                                         class = "character",
-                                         len = 1),
-                                    list(arg = compara,
-                                         name = "compara",
-                                         class = "character",
-                                         len = 1)),
-                        diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("GET info/compara/methods")
-  }
+  rba_ba_args(cons = list(list(arg = "class",
+                               class = "character",
+                               len = 1),
+                          list(arg = "compara",
+                               class = "character",
+                               len = 1)))
+  v_msg("GET info/compara/methods")
 
   ## build GET API request's query
-  additional_pars = list(list(!is.na(class),
-                              list("class" = class)),
-                         list(compara != "vertebrates",
-                              list("compara" = compara)))
-
-  call_query = rba_ba_body_add_pars(call_body = list(),
-                                    additional_pars = additional_pars)
+  call_query = rba_ba_query(init = list(),
+                            list("class",
+                                 !is.na(class),
+                                 class),
+                            list("compara",
+                                 compara != "vertebrates",
+                                 compara))
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
-                                    path = "info/compara/methods/",
-                                    query = call_query,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("ensembl", "url"),
+                           path = "info/compara/methods/",
+                           query = call_query,
+                           accept = "application/json",
+                           parser = "json->list")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -446,43 +360,31 @@ rba_ensembl_info_compara_methods = function(method,
                                             progress_bar = FALSE,
                                             diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = method,
-                                         name = "method",
-                                         class = "character",
-                                         len = 1),
-                                    list(arg = compara,
-                                         name = "compara",
-                                         class = "character",
-                                         len = 1)),
-                        diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("GET info/compara/species_sets/:method")
-  }
+  rba_ba_args(cons = list(list(arg = "method",
+                               class = "character",
+                               len = 1),
+                          list(arg = "compara",
+                               class = "character",
+                               len = 1)))
+  v_msg("GET info/compara/species_sets/:method")
 
   ## build GET API request's query
-  additional_pars = list(list(compara != "vertebrates",
-                              list("compara" = compara)))
-
-  call_query = rba_ba_body_add_pars(call_body = list(),
-                                    additional_pars = additional_pars)
+  call_query = rba_ba_query(init = list(),
+                            list("compara",
+                                 compara != "vertebrates",
+                                 compara))
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
-                                    path = paste0("info/compara/species_sets/",
-                                                  method),
-                                    query = call_query,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("ensembl", "url"),
+                           path = paste0("info/compara/species_sets/",
+                                         method),
+                           query = call_query,
+                           accept = "application/json",
+                           parser = "json->list")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -500,28 +402,18 @@ rba_ensembl_info_comparas = function(verbose = TRUE,
                                      progress_bar = FALSE,
                                      diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("GET info/comparas")
-  }
+  rba_ba_args()
+  v_msg("GET info/comparas")
 
   ## build GET API request's query
-
-  ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
-                                    path = "info/comparas",
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("ensembl", "url"),
+                           path = "info/comparas",
+                           accept = "application/json",
+                           parser = "json->df")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->df",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -540,28 +432,18 @@ rba_ensembl_info_data = function(verbose = TRUE,
                                  progress_bar = FALSE,
                                  diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("GET info/data")
-  }
-
-  ## build GET API request's query
+  rba_ba_args()
+  v_msg("GET info/data")
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
-                                    path = "info/data",
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("ensembl", "url"),
+                           path = "info/data",
+                           accept = "application/json",
+                           parser = "json->list")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -579,28 +461,18 @@ rba_ensembl_info_eg_version = function(verbose = TRUE,
                                        progress_bar = FALSE,
                                        diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("GET info/eg_version")
-  }
-
-  ## build GET API request's query
+  rba_ba_args()
+  v_msg("GET info/eg_version")
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
-                                    path = "info/eg_version",
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("ensembl", "url"),
+                           path = "info/eg_version",
+                           accept = "application/json",
+                           parser = "json->list")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -624,55 +496,43 @@ rba_ensembl_info_external_dbs = function(species,
                                          progress_bar = FALSE,
                                          diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = species,
-                                         name = "species",
-                                         class = c("numeric",
-                                                   "character"),
-                                         len = 1),
-                                    list(arg = filter,
-                                         name = "filter",
-                                         class = "character",
-                                         len = 1),
-                                    list(arg = feature,
-                                         name = "compara",
-                                         class = "character",
-                                         len = 1,
-                                         val = c("dna_align_feature",
-                                                 "protein_align_feature",
-                                                 "unmapped_object",
-                                                 "xref",
-                                                 "seq_region_synonym"))),
-                        diagnostics = diagnostics))
+  rba_ba_args(cons = list(list(arg = "species",
+                               class = c("numeric",
+                                         "character"),
+                               len = 1),
+                          list(arg = "filter",
+                               class = "character",
+                               len = 1),
+                          list(arg = "compara",
+                               class = "character",
+                               len = 1,
+                               val = c("dna_align_feature",
+                                       "protein_align_feature",
+                                       "unmapped_object",
+                                       "xref",
+                                       "seq_region_synonym"))))
 
-  if (verbose == TRUE){
-    message("GET info/external_dbs/:species")
-  }
-
+  v_msg("GET info/external_dbs/:species")
   ## build GET API request's query
-  additional_pars = list(list(!is.na(filter),
-                              list("filter" = filter)),
-                         list(!is.na(feature),
-                              list("feature" = feature)))
-
-  call_query = rba_ba_body_add_pars(call_body = list(),
-                                    additional_pars = additional_pars)
+  call_query = rba_ba_query(init = list(),
+                            list("filter",
+                                 !is.na(filter),
+                                 filter),
+                            list("feature",
+                                 !is.na(feature),
+                                 feature))
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
-                                    path = paste0("info/external_dbs/",
-                                                  species),
-                                    query = call_query,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("ensembl", "url"),
+                           path = paste0("info/external_dbs/",
+                                         species),
+                           query = call_query,
+                           accept = "application/json",
+                           parser = "json->df")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->df",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -690,27 +550,17 @@ rba_ensembl_info_divisions = function(verbose = TRUE,
                                       progress_bar = FALSE,
                                       diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("GET info/divisions")
-  }
-
-  ## build GET API request's query
+  rba_ba_args()
+  v_msg("GET info/divisions")
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
-                                    path = "info/divisions",
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get", url = rba_ba_stg("ensembl", "url"),
+                           path = "info/divisions",
+                           accept = "application/json",
+                           parser = "json->chr")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->chr",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
+  final_output = rba_ba_skeleton(input_call)
 
   return(final_output)
 }
@@ -728,48 +578,35 @@ rba_ensembl_info_divisions = function(verbose = TRUE,
 #'
 #' @examples
 rba_ensembl_info_genomes_name = function(genome_name,
-                                    expand = FALSE,
-                                    verbose = TRUE,
-                                    progress_bar = FALSE,
-                                    diagnostics = FALSE) {
+                                         expand = FALSE,
+                                         verbose = TRUE,
+                                         progress_bar = FALSE,
+                                         diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = genome_name,
-                                         name = "genome_name",
-                                         class = "character",
-                                         len = 1),
-                                    list(arg = expand,
-                                         name = "expand",
-                                         class = "logical",
-                                         len = 1)),
-                        diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("GET info/genomes/:genome_name")
-  }
+  rba_ba_args(cons = list(list(arg = "genome_name",
+                               class = "character",
+                               len = 1),
+                          list(arg = "expand",
+                               class = "logical",
+                               len = 1)))
+  v_msg("GET info/genomes/:genome_name")
 
   ## build GET API request's query
-  additional_pars = list(list(expand == TRUE,
-                              list("expand" = "1")))
-
-  call_query = rba_ba_body_add_pars(call_body = list(),
-                                    additional_pars = additional_pars)
+  call_query = rba_ba_query(init = list(),
+                            list("expand",
+                                 expand == TRUE,
+                                 "1"))
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
-                                    path = paste0("info/genomes/",
-                                                  genome_name),
-                                    query = call_query,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get", url = rba_ba_stg("ensembl", "url"),
+                           path = paste0("info/genomes/",
+                                         genome_name),
+                           query = call_query,
+                           accept = "application/json",
+                           parser = "json->list")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -791,43 +628,30 @@ rba_ensembl_info_genomes_accession = function(accession,
                                               progress_bar = FALSE,
                                               diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = accession,
-                                         name = "accession",
-                                         class = "character",
-                                         len = 1),
-                                    list(arg = expand,
-                                         name = "expand",
-                                         class = "logical",
-                                         len = 1)),
-                        diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("GET info/genomes/accession/:accession")
-  }
+  rba_ba_args(cons = list(list(arg = "accession",
+                               class = "character",
+                               len = 1),
+                          list(arg = "expand",
+                               class = "logical",
+                               len = 1)))
+  v_msg("GET info/genomes/accession/:accession")
 
   ## build GET API request's query
-  additional_pars = list(list(expand == TRUE,
-                              list("expand" = "1")))
-
-  call_query = rba_ba_body_add_pars(call_body = list(),
-                                    additional_pars = additional_pars)
+  call_query = rba_ba_query(init = list(),
+                            list("expand",
+                                 expand == TRUE,
+                                 "1"))
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
-                                    path = paste0("info/genomes/accession/",
-                                                  accession),
-                                    query = call_query,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get", url = rba_ba_stg("ensembl", "url"),
+                           path = paste0("info/genomes/accession/",
+                                         accession),
+                           query = call_query,
+                           accept = "application/json",
+                           parser = "json->list")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -849,43 +673,30 @@ rba_ensembl_info_genomes_assembly = function(assembly_id,
                                              progress_bar = FALSE,
                                              diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = assembly_id,
-                                         name = "assembly_id",
-                                         class = "character",
-                                         len = 1),
-                                    list(arg = expand,
-                                         name = "expand",
-                                         class = "logical",
-                                         len = 1)),
-                        diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("GET info/genomes/assembly/:assembly_id")
-  }
+  rba_ba_args(cons = list(list(arg = "assembly_id",
+                               class = "character",
+                               len = 1),
+                          list(arg = "expand",
+                               class = "logical",
+                               len = 1)))
+  v_msg("GET info/genomes/assembly/:assembly_id")
 
   ## build GET API request's query
-  additional_pars = list(list(expand == TRUE,
-                              list("expand" = "1")))
-
-  call_query = rba_ba_body_add_pars(call_body = list(),
-                                    additional_pars = additional_pars)
+  call_query = rba_ba_query(init = list(),
+                            list("expand",
+                                 expand == TRUE,
+                                 "1"))
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
-                                    path = paste0("info/genomes/assembly/",
-                                                  assembly_id),
-                                    query = call_query,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get", url = rba_ba_stg("ensembl", "url"),
+                           path = paste0("info/genomes/assembly/",
+                                         assembly_id),
+                           query = call_query,
+                           accept = "application/json",
+                           parser = "json->list")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -907,43 +718,30 @@ rba_ensembl_info_genomes_division = function(division_name,
                                              progress_bar = FALSE,
                                              diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = division_name,
-                                         name = "division_name",
-                                         class = "character",
-                                         len = 1),
-                                    list(arg = expand,
-                                         name = "expand",
-                                         class = "logical",
-                                         len = 1)),
-                        diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("GET info/genomes/division/:division_name")
-  }
+  rba_ba_args(cons = list(list(arg = "division_name",
+                               class = "character",
+                               len = 1),
+                          list(arg = "expand",
+                               class = "logical",
+                               len = 1)))
+  v_msg("GET info/genomes/division/:division_name")
 
   ## build GET API request's query
-  additional_pars = list(list(expand == TRUE,
-                              list("expand" = "1")))
-
-  call_query = rba_ba_body_add_pars(call_body = list(),
-                                    additional_pars = additional_pars)
+  call_query = rba_ba_query(init = list(),
+                            list("expand",
+                                 expand == TRUE,
+                                 "1"))
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
-                                    path = paste0("info/genomes/division/",
-                                                  division_name),
-                                    query = call_query,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get", url = rba_ba_stg("ensembl", "url"),
+                           path = paste0("info/genomes/division/",
+                                         division_name),
+                           query = call_query,
+                           accept = "application/json",
+                           parser = "json->df")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->df",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -965,44 +763,31 @@ rba_ensembl_info_genomes_taxonomy = function(taxon_name,
                                              progress_bar = FALSE,
                                              diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = taxon_name,
-                                         name = "taxon_name",
-                                         class = c("character",
-                                                   "numeric"),
-                                         len = 1),
-                                    list(arg = expand,
-                                         name = "expand",
-                                         class = "logical",
-                                         len = 1)),
-                        diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("GET info/genomes/taxonomy/:taxon_name")
-  }
+  rba_ba_args(cons = list(list(arg = "taxon_name",
+                               class = c("character",
+                                         "numeric"),
+                               len = 1),
+                          list(arg = "expand",
+                               class = "logical",
+                               len = 1)))
+  v_msg("GET info/genomes/taxonomy/:taxon_name")
 
   ## build GET API request's query
-  additional_pars = list(list(expand == TRUE,
-                              list("expand" = "1")))
-
-  call_query = rba_ba_body_add_pars(call_body = list(),
-                                    additional_pars = additional_pars)
+  call_query = rba_ba_query(init = list(),
+                            list("expand",
+                                 expand == TRUE,
+                                 "1"))
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
-                                    path = paste0("info/genomes/taxonomy/",
-                                                  taxon_name),
-                                    query = call_query,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get", url = rba_ba_stg("ensembl", "url"),
+                           path = paste0("info/genomes/taxonomy/",
+                                         taxon_name),
+                           query = call_query,
+                           accept = "application/json",
+                           parser = "json->list")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -1020,28 +805,17 @@ rba_ensembl_info_rest = function(verbose = TRUE,
                                  progress_bar = FALSE,
                                  diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("GET info/rest")
-  }
-
-  ## build GET API request's query
+  rba_ba_args()
+  v_msg("GET info/rest")
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
-                                    path = "info/rest",
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get", url = rba_ba_stg("ensembl", "url"),
+                           path = "info/rest",
+                           accept = "application/json",
+                           parser = "json->list")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -1059,28 +833,17 @@ rba_ensembl_info_software = function(verbose = TRUE,
                                      progress_bar = FALSE,
                                      diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("GET info/software")
-  }
-
-  ## build GET API request's query
+  rba_ba_args()
+  v_msg("GET info/software")
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
-                                    path = "info/software",
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get", url = rba_ba_stg("ensembl", "url"),
+                           path = "info/software",
+                           accept = "application/json",
+                           parser = "json->list")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -1106,49 +869,37 @@ rba_ensembl_info_species = function(division = "EnsemblVertebrates",
                                     progress_bar = FALSE,
                                     diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = division,
-                                         name = "expand",
-                                         class = "character",
-                                         len = 1),
-                                    list(arg = hide_strain_info,
-                                         name = "hide_strain_info",
-                                         class = "logical"),
-                                    list(arg = strain_collection,
-                                         name = "strain_collection",
-                                         class = "character",
-                                         len = 1)),
-                        diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("GET info/species")
-  }
+  rba_ba_args(cons = list(list(arg = "expand",
+                               class = "character",
+                               len = 1),
+                          list(arg = "hide_strain_info",
+                               class = "logical"),
+                          list(arg = "strain_collection",
+                               class = "character",
+                               len = 1)))
+  v_msg("GET info/species")
 
   ## build GET API request's query
-  additional_pars = list(list(division != "EnsemblVertebrates",
-                              list("division" = division)),
-                         list(hide_strain_info == TRUE,
-                              list("hide_strain_info" = 1)),
-                         list(!is.na(strain_collection),
-                              list("strain_collection" = strain_collection)))
-
-  call_query = rba_ba_body_add_pars(call_body = list(),
-                                    additional_pars = additional_pars)
+  call_query = rba_ba_query(init = list(),
+                            list("division",
+                                 division != "EnsemblVertebrates",
+                                 division),
+                            list("hide_strain_info",
+                                 hide_strain_info == TRUE,
+                                 "1"),
+                            list("strain_collection",
+                                 !is.na(strain_collection),
+                                 strain_collection))
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
-                                    path = "info/species",
-                                    query = call_query,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get", url = rba_ba_stg("ensembl", "url"),
+                           path = "info/species",
+                           query = call_query,
+                           accept = "application/json",
+                           parser = "json->df")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->df",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -1170,44 +921,31 @@ rba_ensembl_info_variation_species = function(species,
                                               progress_bar = FALSE,
                                               diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = species,
-                                         name = "species",
-                                         class = c("character",
-                                                   "numeric"),
-                                         len = 1),
-                                    list(arg = filter,
-                                         name = "filter",
-                                         class = "character",
-                                         len = 1)),
-                        diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("GET info/variation/:species")
-  }
+  rba_ba_args(cons = list(list(arg = "species",
+                               class = c("character",
+                                         "numeric"),
+                               len = 1),
+                          list(arg = "filter",
+                               class = "character",
+                               len = 1)))
+  v_msg("GET info/variation/:species")
 
   ## build GET API request's query
-  additional_pars = list(list(!(is.na(filter)),
-                              list("filter" = filter)))
-
-  call_query = rba_ba_body_add_pars(call_body = list(),
-                                    additional_pars = additional_pars)
+  call_query = rba_ba_query(init = list(),
+                            list("filter",
+                                 !is.na(filter),
+                                 filter))
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
-                                    path = paste0("info/variation/",
-                                                  species),
-                                    query = call_query,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get", url = rba_ba_stg("ensembl", "url"),
+                           path = paste0("info/variation/",
+                                         species),
+                           query = call_query,
+                           accept = "application/json",
+                           parser = "json->df")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->df",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -1227,38 +965,26 @@ rba_ensembl_info_variation_consequence_types = function(rank = FALSE,
                                                         progress_bar = FALSE,
                                                         diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = rank,
-                                         name = "rank",
-                                         class = "logical",
-                                         len = 1)),
-                        diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("GET info/variation/consequence_types")
-  }
+  rba_ba_args(cons = list(list(arg = "rank",
+                               class = "logical",
+                               len = 1)))
+  v_msg("GET info/variation/consequence_types")
 
   ## build GET API request's query
-  additional_pars = list(list(rank == TRUE,
-                              list("rank" = 1)))
-
-  call_query = rba_ba_body_add_pars(call_body = list(),
-                                    additional_pars = additional_pars)
+  call_query = rba_ba_query(init = list(),
+                            list("rank",
+                                 rank == TRUE,
+                                 "1"))
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
-                                    path = "info/variation/consequence_types",
-                                    query = call_query,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get", url = rba_ba_stg("ensembl", "url"),
+                           path = "info/variation/consequence_types",
+                           query = call_query,
+                           accept = "application/json",
+                           parser = "json->df")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->df",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -1280,44 +1006,31 @@ rba_ensembl_info_variation_populations = function(species,
                                                   progress_bar = FALSE,
                                                   diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = species,
-                                         name = "species",
-                                         class = c("character",
-                                                   "numeric"),
-                                         len = 1),
-                                    list(arg = filter,
-                                         name = "filter",
-                                         class = "character",
-                                         len = 1)),
-                        diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("GET info/variation/populations/:species")
-  }
+  rba_ba_args(cons = list(list(arg = "species",
+                               class = c("character",
+                                         "numeric"),
+                               len = 1),
+                          list(arg = "filter",
+                               class = "character",
+                               len = 1)))
+  v_msg("GET info/variation/populations/:species")
 
   ## build GET API request's query
-  additional_pars = list(list(!(is.na(filter)),
-                              list("filter" = filter)))
-
-  call_query = rba_ba_body_add_pars(call_body = list(),
-                                    additional_pars = additional_pars)
+  call_query = rba_ba_query(init = list(),
+                            list("filter",
+                                 !is.na(filter),
+                                 filter))
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
-                                    path = paste0("info/variation/populations/",
-                                                  species),
-                                    query = call_query,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get", url = rba_ba_stg("ensembl", "url"),
+                           path = paste0("info/variation/populations/",
+                                         species),
+                           query = call_query,
+                           accept = "application/json",
+                           parser = "json->df")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->df",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -1339,39 +1052,25 @@ rba_ensembl_info_variation_populations_species = function(species,
                                                           progress_bar = FALSE,
                                                           diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = species,
-                                         name = "species",
-                                         class = c("character",
-                                                   "numeric"),
-                                         len = 1),
-                                    list(arg = population_name,
-                                         name = "population_name",
-                                         class = "character",
-                                         len = 1)),
-                        diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("GET info/variation/populations/:species:/:population_name")
-  }
-
-  ## build GET API request's query
+  rba_ba_args(cons = list(list(arg = "species",
+                               class = c("character",
+                                         "numeric"),
+                               len = 1),
+                          list(arg = "population_name",
+                               class = "character",
+                               len = 1)))
+  v_msg("GET info/variation/populations/:species:/:population_name")
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_ensembl"),
-                                    path = paste0("info/variation/populations/",
-                                                  species, "/",
-                                                  population_name),
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get", url = rba_ba_stg("ensembl", "url"),
+                           path = paste0("info/variation/populations/",
+                                         species, "/",
+                                         population_name),
+                           accept = "application/json",
+                           parser = "json->list")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -1401,33 +1100,26 @@ rba_ensembl_info_variation = function(species = NA,
                                       progress_bar = FALSE,
                                       diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = species,
-                                         name = "species",
-                                         class = c("character",
-                                                   "numeric"),
-                                         len = 1),
-                                    list(arg = consequence_types,
-                                         name = "consequence_types",
-                                         class = "logical",
-                                         len = 1),
-                                    list(arg = consequence_rank,
-                                         name = "consequence_rank",
-                                         class = "logical",
-                                         len = 1),
-                                    list(arg = populations,
-                                         name = "populations",
-                                         class = c("character",
-                                                   "logical"),
-                                         len = 1),
-                                    list(arg = species_filter,
-                                         name = "species_filter",
-                                         class = "character",
-                                         len = 1),
-                                    list(arg = populations_filter,
-                                         name = "populations_filter",
-                                         class = "character",
-                                         len = 1)),
-                        diagnostics = diagnostics))
+  rba_ba_args(cons = list(list(arg = "species",
+                               class = c("character",
+                                         "numeric"),
+                               len = 1),
+                          list(arg = "consequence_types",
+                               class = "logical",
+                               len = 1),
+                          list(arg = "consequence_rank",
+                               class = "logical",
+                               len = 1),
+                          list(arg = "populations",
+                               class = c("character",
+                                         "logical"),
+                               len = 1),
+                          list(arg = "species_filter",
+                               class = "character",
+                               len = 1),
+                          list(arg = "populations_filter",
+                               class = "character",
+                               len = 1)))
   ## Decide which function to call
   if (consequence_types == TRUE) {
     if (verbose == TRUE && !is.na(species)) {
@@ -1461,6 +1153,4 @@ rba_ensembl_info_variation = function(species = NA,
     }
   }
   return(final_output)
-
-
 }

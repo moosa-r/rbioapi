@@ -42,8 +42,7 @@ rba_string_map_ids = function(input,
                           list(arg = "caller_identity",
                                class = "character")),
               cond = list(list("length(input) > 100 && is.na(species)",
-                               sprintf(paste0("Input's length is %s. Please Specify the specie. ",
-                                              "(Homo Sapiens NCBI taxa ID is 9606)"),
+                               sprintf("Input's length is %s. Please Specify the specie. (Homo Sapiens NCBI taxa ID is 9606.)",
                                        length(input)))
               ))
   v_msg("Mapping %s Input Identifiers to STRING Identifiers.", length(input))
@@ -146,8 +145,7 @@ rba_string_network_image = function(input,
                           list(arg = "caller_identity",
                                class = "character")),
               cond = list(list("length(input) > 100 && is.na(species)",
-                               sprintf(paste0("Input's length is %s. Please Specify the specie. ",
-                                              "(Homo Sapiens NCBI taxa ID is 9606)"),
+                               sprintf("Input's length is %s. Please Specify the specie. (Homo Sapiens NCBI taxa ID is 9606.)",
                                        length(input)))
               ))
 
@@ -253,8 +251,7 @@ rba_string_network_interactions = function(input,
                           list(arg = "caller_identity",
                                class = "character")),
               cond = list(list("length(input) > 100 && is.na(species)",
-                               sprintf(paste0("Input's length is %s. Please Specify the specie. ",
-                                              "(Homo Sapiens NCBI taxa ID is 9606)"),
+                               sprintf("Input's length is %s. Please Specify the specie. (Homo Sapiens NCBI taxa ID is 9606.)",
                                        length(input)))
               ))
 
@@ -329,8 +326,7 @@ rba_string_interaction_partners = function(input,
                                class = "numeric",
                                min_val = 1)),
               cond = list(list("length(input) > 100 && is.na(species)",
-                               sprintf(paste0("Input's length is %s. Please Specify the specie. ",
-                                              "(Homo Sapiens NCBI taxa ID is 9606)"),
+                               sprintf("Input's length is %s. Please Specify the specie. (Homo Sapiens NCBI taxa ID is 9606.)",
                                        length(input)))
               ))
 
@@ -399,8 +395,7 @@ rba_string_homology = function(input,
                           list(arg = "caller_identity",
                                class = "character")),
               cond = list(list("length(input) > 100 && is.na(species)",
-                               sprintf(paste0("Input's length is %s. Please Specify the specie. ",
-                                              "(Homo Sapiens NCBI taxa ID is 9606)"),
+                               sprintf("Input's length is %s. Please Specify the specie. (Homo Sapiens NCBI taxa ID is 9606.)",
                                        length(input)))
               ))
 
@@ -466,8 +461,7 @@ rba_string_homology_best = function(input,
                           list(arg = "caller_identity",
                                class = "character")),
               cond = list(list("length(input) > 100 && is.na(species)",
-                               sprintf(paste0("Input's length is %s. Please Specify the specie. ",
-                                              "(Homo Sapiens NCBI taxa ID is 9606)"),
+                               sprintf("Input's length is %s. Please Specify the specie. (Homo Sapiens NCBI taxa ID is 9606.)",
                                        length(input)))
               ))
   v_msg("Retrieving similarity scores between %s inputs.", length(input))
@@ -536,8 +530,7 @@ rba_string_enrichment = function(input,
                           list(arg = "caller_identity",
                                class = "character")),
               cond = list(list("length(input) > 100 && is.na(species)",
-                               sprintf(paste0("Input's length is %s. Please Specify the specie. ",
-                                              "(Homo Sapiens NCBI taxa ID is 9606)"),
+                               sprintf("Input's length is %s. Please Specify the specie. (Homo Sapiens NCBI taxa ID is 9606.)",
                                        length(input)))
               ))
   v_msg("Retrieving similarity scores between %s inputs.", length(input))
@@ -605,8 +598,7 @@ rba_string_functional_annotation = function(input,
                           list(arg = "caller_identity",
                                class = "character")),
               cond = list(list("length(input) > 100 && is.na(species)",
-                               sprintf(paste0("Input's length is %s. Please Specify the specie. ",
-                                              "(Homo Sapiens NCBI taxa ID is 9606)"),
+                               sprintf("Input's length is %s. Please Specify the specie. (Homo Sapiens NCBI taxa ID is 9606.)",
                                        length(input)))
               ))
 
@@ -678,8 +670,7 @@ rba_string_ppi_enrichment = function(input,
                           list(arg = "caller_identity",
                                class = "character")),
               cond = list(list("length(input) > 100 && is.na(species)",
-                               sprintf(paste0("Input's length is %s. Please Specify the specie. ",
-                                              "(Homo Sapiens NCBI taxa ID is 9606)"),
+                               sprintf("Input's length is %s. Please Specify the specie. (Homo Sapiens NCBI taxa ID is 9606.)",
                                        length(input)))
               ))
 
