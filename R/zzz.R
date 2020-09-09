@@ -44,6 +44,9 @@ NULL
   options("max_retry" = 1)
   options("wait_time" = 10)
   options("def_dir_name" = "rba")
+  options("rba_diagnostics" = FALSE)
+  options("rba_verbose" = TRUE)
+  options("rba_progress_bar" = FALSE)
 
 }
 

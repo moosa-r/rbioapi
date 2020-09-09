@@ -302,8 +302,12 @@ rba_ba_file = function(file_ext,
                        save_to = TRUE) {
   if (save_to != FALSE) {
     # 1 file path will be generated unless save_to == FALSE
-    verbose = eval(parse(text = "verbose"), envir = parent.frame(1))
-    diagnostics = eval(parse(text = "diagnostics"), envir = parent.frame(1))
+    diagnostics = ifelse(exists("diagnostics", envir = parent.frame(1)),
+                         eval(parse(text = "diagnostics"), envir = parent.frame(1)),
+                         getOption("rba_diagnostics"))
+    verbose = ifelse(exists("verbose", envir = parent.frame(1)),
+                          eval(parse(text = "verbose"), envir = parent.frame(1)),
+                          getOption("rba_verbose"))
 
     if (is.character(save_to)) {
       # 2 the user provided a file path, just check if it is valid
@@ -382,6 +386,14 @@ rba_ba_httr = function(httr,
                        url = NULL,
                        path = NULL,
                        ...) {
+  ## assign diagnostics and progress_bar
+  diagnostics = ifelse(exists("diagnostics", envir = parent.frame(1)),
+                       eval(parse(text = "diagnostics"), envir = parent.frame(1)),
+                       getOption("rba_diagnostics"))
+  progress_bar = ifelse(exists("progress_bar", envir = parent.frame(1)),
+                       eval(parse(text = "progress_bar"), envir = parent.frame(1)),
+                       getOption("rba_progress_bar"))
+
   ### 1 capture extra arguments
   # possible args: all args supported by httr +
   # args to this function: [file/obj_]accept, [file/obj_]parser, save_to
@@ -401,10 +413,10 @@ rba_ba_httr = function(httr,
                    path = as.character(path),
                    quote(httr::user_agent(getOption("rba_ua")))
   )
-  if (eval(quote(diagnostics), envir = parent.frame(1)) == TRUE) {
+  if (diagnostics == TRUE) {
     httr_call = append(httr_call, quote(httr::verbose()))
   }
-  if (eval(quote(progress_bar), envir = parent.frame(1)) == TRUE) {
+  if (progress_bar == TRUE) {
     httr_call = append(httr_call, quote(httr::progress()))
   }
 
@@ -553,22 +565,24 @@ rba_ba_api_call = function(input_call,
 #' @examples
 rba_ba_skeleton = function(input_call,
                            response_parser = NULL,
-                           skip_error = FALSE,
-                           no_interet_retry_max = 1,
-                           no_internet_wait_time = 10) {
+                           skip_error = FALSE) {
+  ## 0 assign verbose & diagnostics
+  diagnostics = ifelse(exists("diagnostics", envir = parent.frame(1)),
+                       eval(parse(text = "diagnostics"), envir = parent.frame(1)),
+                       getOption("rba_diagnostics"))
+  verbose = ifelse(exists("verbose", envir = parent.frame(1)),
+                        eval(parse(text = "verbose"), envir = parent.frame(1)),
+                        getOption("rba_verbose"))
   ## 1 Make API Call
   response = rba_ba_api_call(input_call = input_call$call,
                              skip_error = skip_error,
-                             no_interet_retry_max = no_interet_retry_max,
-                             no_internet_wait_time = no_internet_wait_time,
-                             verbose = eval(quote(verbose),
-                                            envir = parent.frame(1)),
-                             diagnostics = eval(quote(diagnostics),
-                                                envir = parent.frame(1))
-  )
+                             no_interet_retry_max = getOption("max_retry"),
+                             no_internet_wait_time = getOption("wait_time"),
+                             verbose = verbose,
+                             diagnostics = diagnostics)
   ## 2 Parse the the response if possible
   # Parser Provided via rba_ba_skeleton's 'response parser' argument will
-  #overwrite the 'parser' provided in input call
+  # override the 'parser' provided in input call
   if (!is.null(response_parser)) {
     parser_input = response_parser
   } else {
@@ -623,7 +637,7 @@ rba_ba_args = function(cons = NULL,
     diagnostics = eval(parse(text = "diagnostics"),
                        envir = parent.frame())
   } else {
-    diagnostics = TRUE
+    diagnostics = getOption("rba_diagnostics")
   }
   if (exists("verbose", envir = parent.frame(1))) {
     cons = append(cons, list(list(arg = "verbose",
@@ -822,7 +836,7 @@ rba_ba_response_parser = function(parser) {
                     "tsv->df" = quote(as.character(httr::content(response,
                                                                  as = "text",
                                                                  encoding = "UTF-8"))),
-                    stop("Internal Error: Specify the parser expression!", call. = TRUE)
+                    stop("Internal Error: Specify the valid parser expression!", call. = TRUE)
     )
   }
   # parse the response
