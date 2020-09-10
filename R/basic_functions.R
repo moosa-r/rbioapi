@@ -306,8 +306,8 @@ rba_ba_file = function(file_ext,
                          eval(parse(text = "diagnostics"), envir = parent.frame(1)),
                          getOption("rba_diagnostics"))
     verbose = ifelse(exists("verbose", envir = parent.frame(1)),
-                          eval(parse(text = "verbose"), envir = parent.frame(1)),
-                          getOption("rba_verbose"))
+                     eval(parse(text = "verbose"), envir = parent.frame(1)),
+                     getOption("rba_verbose"))
 
     if (is.character(save_to)) {
       # 2 the user provided a file path, just check if it is valid
@@ -349,6 +349,9 @@ rba_ba_file = function(file_ext,
 
 #' Add additional parameters to API call's body
 #' @description changed the name from rba_ba_body_add_pars
+#' the format shoud be 1- init which is a named list, followed by optional
+#' lists with the following order: argument name, a condition which may be TRUE,
+#' a value that should be appended to the list
 #' @param additional_pars
 #' @param call_body
 #'
@@ -364,10 +367,25 @@ rba_ba_query = function(init, ...) {
   }
   ## evaluate extra parameters
   for(i in seq_along(ext_par)){
-    if (ext_par[[i]][[2]] == TRUE) {
-      init[[ext_par[[i]][[1]]]] = ext_par[[i]][[3]]
+    # check if the condition has more than 1 element
+    if (length(ext_par[[i]][[2]]) > 1) {
+      warning("Internal Query Builder:\r\n",
+              ext_par[[i]][[1]], " has more than one element. ",
+              "only the first element will be used.",
+              call. = FALSE, immediate. = TRUE)
     }
-  }
+    # only proceed if the condition is indeed logical
+    if (!is.logical(ext_par[[i]][[2]])) {
+      warning("Internal Query Builder:\r\n",
+              "The evaluation result of ",
+              ext_par[[i]][[1]], " is not logical, thus skipping that.",
+              call. = FALSE, immediate. = TRUE)
+    } else {
+      if (ext_par[[i]][[2]][[1]] == TRUE) {
+        init[[ext_par[[i]][[1]]]] = ext_par[[i]][[3]]
+      }
+    }
+  } # end of for(i ...
   return(init)
 }
 
@@ -391,8 +409,8 @@ rba_ba_httr = function(httr,
                        eval(parse(text = "diagnostics"), envir = parent.frame(1)),
                        getOption("rba_diagnostics"))
   progress_bar = ifelse(exists("progress_bar", envir = parent.frame(1)),
-                       eval(parse(text = "progress_bar"), envir = parent.frame(1)),
-                       getOption("rba_progress_bar"))
+                        eval(parse(text = "progress_bar"), envir = parent.frame(1)),
+                        getOption("rba_progress_bar"))
 
   ### 1 capture extra arguments
   # possible args: all args supported by httr +
@@ -571,8 +589,8 @@ rba_ba_skeleton = function(input_call,
                        eval(parse(text = "diagnostics"), envir = parent.frame(1)),
                        getOption("rba_diagnostics"))
   verbose = ifelse(exists("verbose", envir = parent.frame(1)),
-                        eval(parse(text = "verbose"), envir = parent.frame(1)),
-                        getOption("rba_verbose"))
+                   eval(parse(text = "verbose"), envir = parent.frame(1)),
+                   getOption("rba_verbose"))
   ## 1 Make API Call
   response = rba_ba_api_call(input_call = input_call$call,
                              skip_error = skip_error,
@@ -845,7 +863,7 @@ rba_ba_response_parser = function(parser) {
 
 }
 
-#' Try to Pars an appropriate error response
+#' Try to Parse an appropriate error response
 #'
 #' @param response
 #' @param verbose
