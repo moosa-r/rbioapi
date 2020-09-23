@@ -13,14 +13,28 @@ rba_ensembl_info_biotypes_groups(
   progress_bar = FALSE,
   diagnostics = FALSE
 )
+
+rba_ensembl_info_biotypes_groups(
+  group = NA,
+  object_type = NA,
+  verbose = TRUE,
+  progress_bar = FALSE,
+  diagnostics = FALSE
+)
 }
 \arguments{
 \item{diagnostics}{}
 }
 \value{
 
+
+
 }
 \description{
+Without argument the list of available biotype groups is returned. With
+:group argument provided, list the properties of biotypes within that group.
+Object type (gene or transcript) can be provided for filtering.
+
 Without argument the list of available biotype groups is returned. With
 :group argument provided, list the properties of biotypes within that group.
 Object type (gene or transcript) can be provided for filtering.

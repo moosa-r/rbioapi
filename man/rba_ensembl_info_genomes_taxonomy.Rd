@@ -11,13 +11,25 @@ rba_ensembl_info_genomes_taxonomy(
   progress_bar = FALSE,
   diagnostics = FALSE
 )
+
+rba_ensembl_info_genomes_taxonomy(
+  taxon_name,
+  expand = FALSE,
+  verbose = TRUE,
+  progress_bar = FALSE,
+  diagnostics = FALSE
+)
 }
 \arguments{
 \item{diagnostics}{}
 }
 \value{
 
+
+
 }
 \description{
+Find information about all genomes beneath a given node of the taxonomy
+
 Find information about all genomes beneath a given node of the taxonomy
 }

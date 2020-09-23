@@ -11,13 +11,25 @@ rba_ensembl_info_variation_species(
   progress_bar = FALSE,
   diagnostics = FALSE
 )
+
+rba_ensembl_info_variation_species(
+  species,
+  filter = NA,
+  verbose = TRUE,
+  progress_bar = FALSE,
+  diagnostics = FALSE
+)
 }
 \arguments{
 \item{diagnostics}{}
 }
 \value{
 
+
+
 }
 \description{
+List the variation sources used in Ensembl for a species.
+
 List the variation sources used in Ensembl for a species.
 }

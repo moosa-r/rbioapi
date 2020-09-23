@@ -13,14 +13,28 @@ rba_ensembl_info_aassembly(
   progress_bar = FALSE,
   diagnostics = FALSE
 )
+
+rba_ensembl_info_aassembly(
+  species,
+  bands = FALSE,
+  synonyms = FALSE,
+  verbose = TRUE,
+  progress_bar = FALSE,
+  diagnostics = FALSE
+)
 }
 \arguments{
 \item{diagnostics}{}
 }
 \value{
 
+
+
 }
 \description{
+List the currently available assemblies for a species, along with toplevel
+sequences, chromosomes and cytogenetic bands.
+
 List the currently available assemblies for a species, along with toplevel
 sequences, chromosomes and cytogenetic bands.
 }

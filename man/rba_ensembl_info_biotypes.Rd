@@ -12,14 +12,27 @@ rba_ensembl_info_biotypes(
   progress_bar = FALSE,
   diagnostics = FALSE
 )
+
+rba_ensembl_info_biotypes(
+  species,
+  verbose = TRUE,
+  progress_bar = FALSE,
+  diagnostics = FALSE
+)
 }
 \arguments{
 \item{diagnostics}{}
 }
 \value{
 
+
+
 }
 \description{
+List the functional classifications of gene models that Ensembl associates
+ with a particular species. Useful for restricting the type of
+ genes/transcripts retrieved by other endpoints.
+
 List the functional classifications of gene models that Ensembl associates
  with a particular species. Useful for restricting the type of
  genes/transcripts retrieved by other endpoints.

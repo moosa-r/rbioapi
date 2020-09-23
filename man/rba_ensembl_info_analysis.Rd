@@ -10,13 +10,24 @@ rba_ensembl_info_analysis(
   progress_bar = FALSE,
   diagnostics = FALSE
 )
+
+rba_ensembl_info_analysis(
+  species,
+  verbose = TRUE,
+  progress_bar = FALSE,
+  diagnostics = FALSE
+)
 }
 \arguments{
 \item{diagnostics}{}
 }
 \value{
 
+
+
 }
 \description{
+List the names of analyses involved in generating Ensembl data
+
 List the names of analyses involved in generating Ensembl data
 }

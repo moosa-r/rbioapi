@@ -12,13 +12,26 @@ rba_ensembl_info_external_dbs(
   progress_bar = FALSE,
   diagnostics = FALSE
 )
+
+rba_ensembl_info_external_dbs(
+  species,
+  filter = NA,
+  feature = NA,
+  verbose = TRUE,
+  progress_bar = FALSE,
+  diagnostics = FALSE
+)
 }
 \arguments{
 \item{diagnostics}{}
 }
 \value{
 
+
+
 }
 \description{
+Lists all available external sources for a species.
+
 Lists all available external sources for a species.
 }

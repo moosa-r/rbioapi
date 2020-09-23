@@ -11,13 +11,25 @@ rba_ensembl_info_genomes_name(
   progress_bar = FALSE,
   diagnostics = FALSE
 )
+
+rba_ensembl_info_genomes_name(
+  genome_name,
+  expand = FALSE,
+  verbose = TRUE,
+  progress_bar = FALSE,
+  diagnostics = FALSE
+)
 }
 \arguments{
 \item{diagnostics}{}
 }
 \value{
 
+
+
 }
 \description{
+Find information about a given genome
+
 Find information about a given genome
 }

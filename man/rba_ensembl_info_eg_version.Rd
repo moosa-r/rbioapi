@@ -9,13 +9,23 @@ rba_ensembl_info_eg_version(
   progress_bar = FALSE,
   diagnostics = FALSE
 )
+
+rba_ensembl_info_eg_version(
+  verbose = TRUE,
+  progress_bar = FALSE,
+  diagnostics = FALSE
+)
 }
 \arguments{
 \item{diagnostics}{}
 }
 \value{
 
+
+
 }
 \description{
+Returns the Ensembl Genomes version of the databases backing this service
+
 Returns the Ensembl Genomes version of the databases backing this service
 }

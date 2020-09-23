@@ -11,13 +11,25 @@ rba_ensembl_info_genomes_assembly(
   progress_bar = FALSE,
   diagnostics = FALSE
 )
+
+rba_ensembl_info_genomes_assembly(
+  assembly_id,
+  expand = FALSE,
+  verbose = TRUE,
+  progress_bar = FALSE,
+  diagnostics = FALSE
+)
 }
 \arguments{
 \item{diagnostics}{}
 }
 \value{
 
+
+
 }
 \description{
+Find information about a genome with a specified assembly
+
 Find information about a genome with a specified assembly
 }

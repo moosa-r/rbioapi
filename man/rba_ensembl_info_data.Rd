@@ -10,14 +10,25 @@ rba_ensembl_info_data(
   progress_bar = FALSE,
   diagnostics = FALSE
 )
+
+rba_ensembl_info_data(
+  verbose = TRUE,
+  progress_bar = FALSE,
+  diagnostics = FALSE
+)
 }
 \arguments{
 \item{diagnostics}{}
 }
 \value{
 
+
+
 }
 \description{
+Shows the data releases available on this REST server. May return more than
+one release (unfrequent non-standard Ensembl configuration).
+
 Shows the data releases available on this REST server. May return more than
 one release (unfrequent non-standard Ensembl configuration).
 }

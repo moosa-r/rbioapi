@@ -11,13 +11,25 @@ rba_ensembl_info_variation_populations_species(
   progress_bar = FALSE,
   diagnostics = FALSE
 )
+
+rba_ensembl_info_variation_populations_species(
+  species,
+  population_name,
+  verbose = TRUE,
+  progress_bar = FALSE,
+  diagnostics = FALSE
+)
 }
 \arguments{
 \item{diagnostics}{}
 }
 \value{
 
+
+
 }
 \description{
+List all individuals for a population from a species
+
 List all individuals for a population from a species
 }

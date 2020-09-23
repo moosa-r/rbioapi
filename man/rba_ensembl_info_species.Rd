@@ -13,13 +13,27 @@ rba_ensembl_info_species(
   progress_bar = FALSE,
   diagnostics = FALSE
 )
+
+rba_ensembl_info_species(
+  division = "EnsemblVertebrates",
+  hide_strain_info = FALSE,
+  strain_collection = NA,
+  expand = FALSE,
+  verbose = TRUE,
+  progress_bar = FALSE,
+  diagnostics = FALSE
+)
 }
 \arguments{
 \item{diagnostics}{}
 }
 \value{
 
+
+
 }
 \description{
+Lists all available species, their aliases, available adaptor groups and data release.
+
 Lists all available species, their aliases, available adaptor groups and data release.
 }

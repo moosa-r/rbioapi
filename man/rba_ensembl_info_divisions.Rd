@@ -9,13 +9,23 @@ rba_ensembl_info_divisions(
   progress_bar = FALSE,
   diagnostics = FALSE
 )
+
+rba_ensembl_info_divisions(
+  verbose = TRUE,
+  progress_bar = FALSE,
+  diagnostics = FALSE
+)
 }
 \arguments{
 \item{diagnostics}{}
 }
 \value{
 
+
+
 }
 \description{
+Get list of all Ensembl divisions for which information is available
+
 Get list of all Ensembl divisions for which information is available
 }

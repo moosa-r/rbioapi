@@ -9,13 +9,23 @@ rba_ensembl_info_rest(
   progress_bar = FALSE,
   diagnostics = FALSE
 )
+
+rba_ensembl_info_rest(
+  verbose = TRUE,
+  progress_bar = FALSE,
+  diagnostics = FALSE
+)
 }
 \arguments{
 \item{diagnostics}{}
 }
 \value{
 
+
+
 }
 \description{
+Shows the current version of the Ensembl REST API.
+
 Shows the current version of the Ensembl REST API.
 }

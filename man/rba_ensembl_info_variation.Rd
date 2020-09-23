@@ -15,13 +15,29 @@ rba_ensembl_info_variation(
   progress_bar = FALSE,
   diagnostics = FALSE
 )
+
+rba_ensembl_info_variation(
+  species = NA,
+  consequence_types = FALSE,
+  consequence_rank = FALSE,
+  populations = FALSE,
+  species_filter = NA,
+  populations_filter = NA,
+  verbose = TRUE,
+  progress_bar = FALSE,
+  diagnostics = FALSE
+)
 }
 \arguments{
 \item{diagnostics}{}
 }
 \value{
 
+
+
 }
 \description{
+A wrapper around all info/variation/... endpoints
+
 A wrapper around all info/variation/... endpoints
 }

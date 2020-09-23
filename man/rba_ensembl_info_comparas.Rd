@@ -9,13 +9,23 @@ rba_ensembl_info_comparas(
   progress_bar = FALSE,
   diagnostics = FALSE
 )
+
+rba_ensembl_info_comparas(
+  verbose = TRUE,
+  progress_bar = FALSE,
+  diagnostics = FALSE
+)
 }
 \arguments{
 \item{diagnostics}{}
 }
 \value{
 
+
+
 }
 \description{
+Lists all available comparative genomics databases and their data release.
+
 Lists all available comparative genomics databases and their data release.
 }

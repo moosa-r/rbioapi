@@ -11,13 +11,25 @@ rba_ensembl_info_genomes_accession(
   progress_bar = FALSE,
   diagnostics = FALSE
 )
+
+rba_ensembl_info_genomes_accession(
+  accession,
+  expand = FALSE,
+  verbose = TRUE,
+  progress_bar = FALSE,
+  diagnostics = FALSE
+)
 }
 \arguments{
 \item{diagnostics}{}
 }
 \value{
 
+
+
 }
 \description{
+Find information about genomes containing a specified INSDC accession
+
 Find information about genomes containing a specified INSDC accession
 }

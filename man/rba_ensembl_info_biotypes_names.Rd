@@ -12,14 +12,27 @@ rba_ensembl_info_biotypes_names(
   progress_bar = FALSE,
   diagnostics = FALSE
 )
+
+rba_ensembl_info_biotypes_names(
+  name,
+  object_type = NA,
+  verbose = TRUE,
+  progress_bar = FALSE,
+  diagnostics = FALSE
+)
 }
 \arguments{
 \item{diagnostics}{}
 }
 \value{
 
+
+
 }
 \description{
+List the properties of biotypes with a given name. Object type
+(gene or transcript) can be provided for filtering.
+
 List the properties of biotypes with a given name. Object type
 (gene or transcript) can be provided for filtering.
 }

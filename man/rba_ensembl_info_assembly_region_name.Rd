@@ -14,14 +14,29 @@ rba_ensembl_info_assembly_region_name(
   progress_bar = FALSE,
   diagnostics = FALSE
 )
+
+rba_ensembl_info_assembly_region_name(
+  species,
+  region_name,
+  bands = FALSE,
+  synonyms = FALSE,
+  verbose = TRUE,
+  progress_bar = FALSE,
+  diagnostics = FALSE
+)
 }
 \arguments{
 \item{diagnostics}{}
 }
 \value{
 
+
+
 }
 \description{
+Returns information about the specified toplevel sequence region for the
+given species.
+
 Returns information about the specified toplevel sequence region for the
 given species.
 }

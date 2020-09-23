@@ -10,13 +10,24 @@ rba_ensembl_info_variation_consequence_types(
   progress_bar = FALSE,
   diagnostics = FALSE
 )
+
+rba_ensembl_info_variation_consequence_types(
+  rank = FALSE,
+  verbose = TRUE,
+  progress_bar = FALSE,
+  diagnostics = FALSE
+)
 }
 \arguments{
 \item{diagnostics}{}
 }
 \value{
 
+
+
 }
 \description{
+Lists all variant consequence types.
+
 Lists all variant consequence types.
 }

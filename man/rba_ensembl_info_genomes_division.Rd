@@ -11,13 +11,25 @@ rba_ensembl_info_genomes_division(
   progress_bar = FALSE,
   diagnostics = FALSE
 )
+
+rba_ensembl_info_genomes_division(
+  division_name,
+  expand = FALSE,
+  verbose = TRUE,
+  progress_bar = FALSE,
+  diagnostics = FALSE
+)
 }
 \arguments{
 \item{diagnostics}{}
 }
 \value{
 
+
+
 }
 \description{
+Find information about all genomes in a given division.
+
 Find information about all genomes in a given division.
 }
