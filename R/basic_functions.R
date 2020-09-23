@@ -911,7 +911,7 @@ rba_ba_error_parser = function(response,
 #' @examples
 v_msg = function(msg, ...) {
   if (exists("verbose", envir = parent.frame(1)) &&
-      eval(quote(verbose), envir = parent.frame(1)) == TRUE) {
+      eval(parse(text = "verbose"), envir = parent.frame(1)) == TRUE) {
     ext = list(...)
     if (length(ext) == 0) {
       message(msg, appendLF = TRUE)

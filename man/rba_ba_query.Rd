@@ -14,4 +14,7 @@ rba_ba_query(init, ...)
 }
 \description{
 changed the name from rba_ba_body_add_pars
+the format shoud be 1- init which is a named list, followed by optional
+lists with the following order: argument name, a condition which may be TRUE,
+a value that should be appended to the list
 }

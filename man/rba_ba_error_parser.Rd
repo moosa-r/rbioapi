@@ -2,7 +2,7 @@
 % Please edit documentation in R/basic_functions.R
 \name{rba_ba_error_parser}
 \alias{rba_ba_error_parser}
-\title{Try to Pars an appropriate error response}
+\title{Try to Parse an appropriate error response}
 \usage{
 rba_ba_error_parser(response, verbose = verbose)
 }
@@ -13,5 +13,5 @@ rba_ba_error_parser(response, verbose = verbose)
 
 }
 \description{
-Try to Pars an appropriate error response
+Try to Parse an appropriate error response
 }
