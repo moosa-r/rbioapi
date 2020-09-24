@@ -298,6 +298,7 @@ rba_ba_http_status = function(http_status, verbose = FALSE){
 #' @examples
 rba_ba_file = function(file_ext,
                        file_name = NA,
+                       randomize = TRUE,
                        dir_name = NA,
                        save_to = TRUE) {
   if (save_to != FALSE) {
@@ -313,8 +314,8 @@ rba_ba_file = function(file_ext,
       # 2 the user provided a file path, just check if it is valid
       if (!grepl("^[a-zA-z]:|^\\\\\\w|^/|\\w+\\.\\w+$", save_to)) {
         # 2.1 not a valid file path!
-        v_msg("\"%s\" is not a valid file path. Ignoring that.",
-              save_to)
+        warning(sprintf("\"%s\" is not a valid file path. Ignored that.",
+                        save_to))
         save_to = TRUE
       } else if (!grepl(pattern = paste0("\\.", file_ext, "$"),
                         x = save_to, ignore.case = TRUE)) {
@@ -332,10 +333,19 @@ rba_ba_file = function(file_ext,
                         sample(LETTERS, 1, replace = TRUE),
                         sample(9, 1, replace = TRUE),
                         sample(letters, 1, replace = TRUE), collapse = "")
-      file_name = ifelse(is.na(file_name),
-                         paste0(rndm_str, ".", file_ext),
-                         paste0(file_name, "_", rndm_str, ".", file_ext))
+      # set file name
+      if (is.na(file_name)) {
+        file_name = paste0(rndm_str, ".", file_ext)
+      } else {
+        if (randomize == TRUE) {
+          file_name = paste0(file_name, "_", rndm_str, ".", file_ext)
+        } else {
+          file_name = paste0(file_name, ".", file_ext)
+        }
+      }
+      #set dir name
       dir_name = ifelse(is.na(dir_name), getOption("def_dir_name"), dir_name)
+      #set file path
       save_to = file.path(getwd(), dir_name, file_name)
       v_msg("Saving to: %s", save_to)
     }

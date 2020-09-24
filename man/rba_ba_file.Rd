@@ -4,7 +4,13 @@
 \alias{rba_ba_file}
 \title{Create/check provided file address}
 \usage{
-rba_ba_file(file_ext, file_name = NA, dir_name = NA, save_to = TRUE)
+rba_ba_file(
+  file_ext,
+  file_name = NA,
+  randomize = TRUE,
+  dir_name = NA,
+  save_to = TRUE
+)
 }
 \arguments{
 \item{save_to}{}
