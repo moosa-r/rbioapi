@@ -1,51 +1,3 @@
-#### Internal functions ####
-#' Internal function to alternate uniprot calls between saving files/R objects
-#'
-#' @param call_func_input
-#' @param save_switch
-#' @param file_accept
-#' @param file_parser
-#' @param file_ext
-#' @param file_name
-#' @param obj_accept
-#' @param obj_parser
-#' @param verbose
-#' @param diagnostics
-#'
-#' @return
-#' @export
-#'
-#' @examples
-rba_ba_uniprot_call = function(call_func_input,
-                               save_switch,
-                               file_accept,
-                               file_parser,
-                               file_ext,
-                               file_name,
-                               obj_accept,
-                               obj_parser,
-                               verbose = TRUE,
-                               diagnostics = FALSE) {
-  if (save_switch == TRUE) {
-    accept_input = file_accept
-    parser_input = file_parser
-    # create file_path
-    save_to = rba_ba_file_path(file_ext = file_ext,
-                               file_name = file_name,
-                               dir_name = "rba_uniprot",
-                               save_to = save_to,
-                               verbose = verbose,
-                               diagnostics = diagnostics)
-    call_func_input = as.call(append(as.list(call_func_input),
-                                     quote(httr::write_disk(save_to,
-                                                            overwrite = TRUE))))
-  } else {
-    accept_input = obj_accept
-    parser_input = obj_parser
-  }
-  call_func_input = as.call(append(as.list(call_func_input),
-                                   quote(httr::accept(accept_input))))
-}
 #### Proteins Endpoints ####
 #' Search UniProt entries
 #'
@@ -89,119 +41,106 @@ rba_uniprot_proteins_search = function(accession = NA,
                                        progress_bar = FALSE,
                                        diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = accession,
-                                         name = "accession",
-                                         class = "character",
-                                         max_len = 100),
-                                    list(arg = reviewed,
-                                         name = "reviewed",
-                                         class = "logical"),
-                                    list(arg = isoform,
-                                         name = "isoform",
-                                         class = "numeric",
-                                         val = 0:2),
-                                    list(arg = go_term,
-                                         name = "go_terms",
-                                         class = "character"),
-                                    list(arg = keyword,
-                                         name = "keyword",
-                                         class = "character"),
-                                    list(arg = ec,
-                                         name = "ec",
-                                         class = "character",
-                                         max_len = 20),
-                                    list(arg = gene,
-                                         name = "gene",
-                                         class = "character",
-                                         max_len = 20),
-                                    list(arg = exact_gene,
-                                         name = "exact_gene",
-                                         class = "character",
-                                         max_len = 20),
-                                    list(arg = protein,
-                                         name = "protein",
-                                         class = "character"),
-                                    list(arg = organism,
-                                         name = "organism",
-                                         class = "character"),
-                                    list(arg = taxid,
-                                         name = "taxid",
-                                         class = "numeric",
-                                         max_len = 20),
-                                    list(arg = pubmed,
-                                         name = "pubmed",
-                                         class = "character",
-                                         max_len = 20),
-                                    list(arg = seq_length,
-                                         name = "seq_length",
-                                         class = "character"),
-                                    list(arg = md5,
-                                         name = "md5",
-                                         class = "character")),
-                        diagnostics = diagnostics))
+  rba_ba_args(cons = list(list(arg = "accession",
+                               class = "character",
+                               max_len = 100),
+                          list(arg = "reviewed",
+                               class = "logical"),
+                          list(arg = "isoform",
+                               class = "numeric",
+                               val = 0:2),
+                          list(arg = "go_terms",
+                               class = "character"),
+                          list(arg = "keyword",
+                               class = "character"),
+                          list(arg = "ec",
+                               class = "character",
+                               max_len = 20),
+                          list(arg = "gene",
+                               class = "character",
+                               max_len = 20),
+                          list(arg = "exact_gene",
+                               class = "character",
+                               max_len = 20),
+                          list(arg = "protein",
+                               class = "character"),
+                          list(arg = "organism",
+                               class = "character"),
+                          list(arg = "taxid",
+                               class = "numeric",
+                               max_len = 20),
+                          list(arg = "pubmed",
+                               class = "character",
+                               max_len = 20),
+                          list(arg = "seq_length",
+                               class = "character"),
+                          list(arg = "md5",
+                               class = "character")))
 
-  if (verbose == TRUE){
-    message("get /proteins")
-  }
+  v_msg(paste("get /proteins"))
   ## build GET API request's query
-  call_query = list("size" = "-1")
-
-  additional_pars = list(list(any(!is.na(accession)),
-                              list("accession" = paste0(accession,
-                                                        collapse = ","))),
-                         list(!is.na(reviewed),
-                              list("reviewed" = ifelse(reviewed,
-                                                       "true",
-                                                       "false"))),
-                         list(!is.na(isoform),
-                              list("isoform" = isoform)),
-                         list(!is.na(go_term),
-                              list("goterms" = go_term)),
-                         list(!is.na(keyword),
-                              list("keyword" = keyword)),
-                         list(any(!is.na(ec)),
-                              list("ec" = paste0(ec,
-                                                 collapse = ","))),
-                         list(any(!is.na(gene)),
-                              list("gene" = paste0(gene,
-                                                   collapse = ","))),
-                         list(any(!is.na(exact_gene)),
-                              list("exact_gene" = paste0(exact_gene,
-                                                         collapse = ","))),
-                         list(!is.na(protein),
-                              list("protein" = protein)),
-                         list(!is.na(organism),
-                              list("organism" = organism)),
-                         list(any(!is.na(taxid)),
-                              list("taxid" = paste0(taxid,
-                                                    collapse = ","))),
-                         list(any(!is.na(pubmed)),
-                              list("pubmed" = paste0(pubmed,
-                                                     collapse = ","))),
-                         list(!is.na(seq_length),
-                              list("seq_length" = seq_length)),
-                         list(!is.na(md5),
-                              list("md5" = md5))
-  )
-
-  call_query = rba_ba_body_add_pars(call_body = call_query,
-                                    additional_pars = additional_pars)
+  call_query = rba_ba_query(init = list("size" = "-1"),
+                            list("accession",
+                                 any(!is.na(accession)),
+                                 paste0(accession,
+                                        collapse = ",")),
+                            list("reviewed",
+                                 !is.na(reviewed),
+                                 ifelse(reviewed,
+                                        "true",
+                                        "false")),
+                            list("isoform",
+                                 !is.na(isoform),
+                                 isoform),
+                            list("goterms",
+                                 !is.na(go_term),
+                                 go_term),
+                            list("keyword",
+                                 !is.na(keyword),
+                                 keyword),
+                            list("ec",
+                                 any(!is.na(ec)),
+                                 paste0(ec,
+                                        collapse = ",")),
+                            list("gene",
+                                 any(!is.na(gene)),
+                                 paste0(gene,
+                                        collapse = ",")),
+                            list("exact_gene",
+                                 any(!is.na(exact_gene)),
+                                 paste0(exact_gene,
+                                        collapse = ",")),
+                            list("protein",
+                                 !is.na(protein),
+                                 protein),
+                            list("organism",
+                                 !is.na(organism),
+                                 organism),
+                            list("taxid",
+                                 any(!is.na(taxid)),
+                                 paste0(taxid,
+                                        collapse = ",")),
+                            list("pubmed",
+                                 any(!is.na(pubmed)),
+                                 paste0(pubmed,
+                                        collapse = ",")),
+                            list("seq_length",
+                                 !is.na(seq_length),
+                                 seq_length),
+                            list("md5",
+                                 !is.na(md5),
+                                 md5))
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_uniprot"),
-                                    path = paste0(getOption("rba_pth_uniprot"),
-                                                  "proteins"),
-                                    query = call_query,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("uniprot", "url"),
+                           path = paste0(rba_ba_stg("uniprot", "pth"),
+                                         "proteins"),
+                           query = call_query,
+                           accept = "application/json",
+                           parser = "json->list_no_simp")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list_no_simp",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -225,41 +164,33 @@ rba_uniprot_proteins = function(accession = NA,
                                 progress_bar = FALSE,
                                 diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = accession,
-                                         name = "accession",
-                                         class = "character")),
-                        diagnostics = diagnostics))
+  rba_ba_args(cons = list(list(arg = "accession",
+                               class = "character")),
+              cond = list(quote(sum(interaction, isoforms) == 2),
+                          "You can only set only one of interaction or isoform as TRUE in one function call."))
 
-  if (verbose == TRUE){
-    message("get /proteins/{accession} Get UniProt entry by accession",
-            "get /proteins/{accession}/isoforms Get UniProt isoform entries from parent entry accession",
-            "get /proteins/interaction/{accession} Get UniProt interactions by accession")
-  }
+  v_msg(paste("get /proteins/{accession} Get UniProt entry by accession",
+              "get /proteins/{accession}/isoforms Get UniProt isoform entries from parent entry accession",
+              "get /proteins/interaction/{accession} Get UniProt interactions by accession"))
 
   ## make function-specific calls
-  path_input = paste0(getOption("rba_pth_uniprot"),
-                      "proteins/",
-                      accession)
-  if (interaction == TRUE) {
-    path_input = sub(pattern = "/proteins/",
-                     replacement = "/proteins/interaction/",
-                     x = path_input)
-  } else if (isoforms == TRUE) {
+  path_input = sprintf("%s%s/%s",
+                       rba_ba_stg("uniprot", "pth"),
+                       ifelse(interaction == TRUE,
+                              yes = "proteins/interaction",
+                              no = "proteins"),
+                       accession)
+  if (isoforms == TRUE) {
     path_input = paste0(path_input, "/isoforms")
   }
-  call_func_input = quote(httr::GET(url = getOption("rba_url_uniprot"),
-                                    path = path_input,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("uniprot", "url"),
+                           path = path_input,
+                           accept = "application/json",
+                           parser = "json->list")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -285,55 +216,41 @@ rba_uniprot_proteins_crossref = function(db_type,
                                          progress_bar = FALSE,
                                          diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = db_type,
-                                         name = "db_type",
-                                         class = "character"),
-                                    list(arg = db_id,
-                                         name = "db_id",
-                                         class = "character"),
-                                    list(arg = reviewed,
-                                         name = "reviewed",
-                                         class = "logical"),
-                                    list(arg = isoform,
-                                         name = "isoform",
-                                         class = "numeric",
-                                         val = c(0,1))),
-                        diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("get /proteins/{dbtype}:{dbid} Get UniProt entries by UniProt cross reference and its ID")
-  }
-  ## build GET API request's query
-  call_query = list("size" = "-1")
-
-  additional_pars = list(list(!is.na(reviewed),
-                              list("reviewed" = ifelse(reviewed,
-                                                       "true",
-                                                       "false"))),
-                         list(!is.na(isoform),
-                              list("isoform" = isoform))
+  rba_ba_args(cons = list(list(arg = "db_type",
+                               class = "character"),
+                          list(arg = "db_id",
+                               class = "character"),
+                          list(arg = "reviewed",
+                               class = "logical"),
+                          list(arg = "isoform",
+                               class = "numeric",
+                               val = c(0,1)))
   )
 
-  call_query = rba_ba_body_add_pars(call_body = call_query,
-                                    additional_pars = additional_pars)
+  v_msg(paste("get /proteins/{dbtype}:{dbid} Get UniProt entries by UniProt cross reference and its ID"))
+  ## build GET API request's query
+  call_query = rba_ba_query(init = list("size" = "-1"),
+                            list("reviewed",
+                                 !is.na(reviewed),
+                                 ifelse(reviewed,
+                                        "true",
+                                        "false")),
+                            list("isoform",
+                                 !is.na(isoform),
+                                 isoform))
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_uniprot"),
-                                    path = paste0(getOption("rba_pth_uniprot"),
-                                                  "proteins/",
-                                                  db_type, ":",
-                                                  db_id),
-                                    query = call_query,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("uniprot", "url"),
+                           path = sprintf("%sproteins/%s:%s",
+                                          rba_ba_stg("uniprot", "pth"),
+                                          db_type,
+                                          db_id),
+                           query = call_query,
+                           accept = "application/json",
+                           parser = "json->list")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -371,141 +288,129 @@ rba_uniprot_features_search = function(accession = NA,
                                        progress_bar = FALSE,
                                        diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = accession,
-                                         name = "accession",
-                                         class = "character",
-                                         max_len = 100),
-                                    list(arg = gene,
-                                         name = "gene",
-                                         class = "character",
-                                         max_len = 20),
-                                    list(arg = exact_gene,
-                                         name = "exact_gene",
-                                         class = "character",
-                                         max_len = 20),
-                                    list(arg = protein,
-                                         name = "protein",
-                                         class = "character"),
-                                    list(arg = reviewed,
-                                         name = "reviewed",
-                                         class = "logical"),
-                                    list(arg = organism,
-                                         name = "organism",
-                                         class = "character"),
-                                    list(arg = taxid,
-                                         name = "taxid",
-                                         class = "numeric",
-                                         max_len = 20),
-                                    list(arg = categories,
-                                         name = "categories",
-                                         class = "character",
-                                         val = c("MOLECULE_PROCESSING",
-                                                 "TOPOLOGY",
-                                                 "SEQUENCE_INFORMATION",
-                                                 "STRUCTURAL",
-                                                 "DOMAINS_AND_SITES",
-                                                 "PTM",
-                                                 "VARIANTS",
-                                                 "MUTAGENESIS."),
-                                         max_len = 8),
-                                    list(arg = types,
-                                         name = "types",
-                                         class = "character",
-                                         max_len = 20,
-                                         val = c("INIT_MET",
-                                                 "SIGNAL",
-                                                 "PROPEP",
-                                                 "TRANSIT",
-                                                 "CHAIN",
-                                                 "PEPTIDE",
-                                                 "TOPO_DOM",
-                                                 "TRANSMEM",
-                                                 "DOMAIN",
-                                                 "REPEAT",
-                                                 "CA_BIND",
-                                                 "ZN_FING",
-                                                 "DNA_BIND",
-                                                 "NP_BIND",
-                                                 "REGION",
-                                                 "COILED",
-                                                 "MOTIF",
-                                                 "COMPBIAS",
-                                                 "ACT_SITE",
-                                                 "METAL",
-                                                 "BINDING",
-                                                 "SITE",
-                                                 "NON_STD",
-                                                 "MOD_RES",
-                                                 "LIPID",
-                                                 "CARBOHYD",
-                                                 "DISULFID",
-                                                 "CROSSLNK",
-                                                 "VAR_SEQ",
-                                                 "VARIANT",
-                                                 "MUTAGEN",
-                                                 "UNSURE",
-                                                 "CONFLICT",
-                                                 "NON_CONS",
-                                                 "NON_TER",
-                                                 "HELIX",
-                                                 "TURN",
-                                                 "STRAND",
-                                                 "INTRAMEM")
-                                    )),
-                        diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("get /features Search protein sequence features in UniProt")
-  }
-  ## build GET API request's query
-  call_query = list("size" = "-1")
-
-  additional_pars = list(list(any(!is.na(accession)),
-                              list("accession" = paste0(accession,
-                                                        collapse = ","))),
-                         list(any(!is.na(gene)),
-                              list("gene" = paste0(gene,
-                                                   collapse = ","))),
-                         list(any(!is.na(exact_gene)),
-                              list("exact_gene" = paste0(exact_gene,
-                                                         collapse = ","))),
-                         list(!is.na(protein),
-                              list("protein" = protein)),
-                         list(!is.na(reviewed),
-                              list("reviewed" = ifelse(reviewed,
-                                                       "true",
-                                                       "false"))),
-                         list(!is.na(organism),
-                              list("organism" = organism)),
-                         list(any(!is.na(taxid)),
-                              list("taxid" = paste0(taxid,
-                                                    collapse = ","))),
-                         list(any(!is.na(categories)),
-                              list("categories" = paste0(categories,
-                                                         collapse = ","))),
-                         list(any(!is.na(types)),
-                              list("types" = paste0(types,
-                                                    collapse = ",")))
+  rba_ba_args(cons = list(list(arg = "accession",
+                               class = "character",
+                               max_len = 100),
+                          list(arg = "gene",
+                               class = "character",
+                               max_len = 20),
+                          list(arg = "exact_gene",
+                               class = "character",
+                               max_len = 20),
+                          list(arg = "protein",
+                               class = "character"),
+                          list(arg = "reviewed",
+                               class = "logical"),
+                          list(arg = "organism",
+                               class = "character"),
+                          list(arg = "taxid",
+                               class = "numeric",
+                               max_len = 20),
+                          list(arg = "categories",
+                               class = "character",
+                               val = c("MOLECULE_PROCESSING",
+                                       "TOPOLOGY",
+                                       "SEQUENCE_INFORMATION",
+                                       "STRUCTURAL",
+                                       "DOMAINS_AND_SITES",
+                                       "PTM",
+                                       "VARIANTS",
+                                       "MUTAGENESIS."),
+                               max_len = 8),
+                          list(arg = "types",
+                               class = "character",
+                               max_len = 20,
+                               val = c("INIT_MET",
+                                       "SIGNAL",
+                                       "PROPEP",
+                                       "TRANSIT",
+                                       "CHAIN",
+                                       "PEPTIDE",
+                                       "TOPO_DOM",
+                                       "TRANSMEM",
+                                       "DOMAIN",
+                                       "REPEAT",
+                                       "CA_BIND",
+                                       "ZN_FING",
+                                       "DNA_BIND",
+                                       "NP_BIND",
+                                       "REGION",
+                                       "COILED",
+                                       "MOTIF",
+                                       "COMPBIAS",
+                                       "ACT_SITE",
+                                       "METAL",
+                                       "BINDING",
+                                       "SITE",
+                                       "NON_STD",
+                                       "MOD_RES",
+                                       "LIPID",
+                                       "CARBOHYD",
+                                       "DISULFID",
+                                       "CROSSLNK",
+                                       "VAR_SEQ",
+                                       "VARIANT",
+                                       "MUTAGEN",
+                                       "UNSURE",
+                                       "CONFLICT",
+                                       "NON_CONS",
+                                       "NON_TER",
+                                       "HELIX",
+                                       "TURN",
+                                       "STRAND",
+                                       "INTRAMEM")
+                          ))
   )
 
-  call_query = rba_ba_body_add_pars(call_body = call_query,
-                                    additional_pars = additional_pars)
+  v_msg(paste("get /features Search protein sequence features in UniProt"))
+  ## build GET API request's query
+  call_query = rba_ba_query(init = list("size" = "-1"),
+                            list("accession",
+                                 any(!is.na(accession)),
+                                 paste0(accession,
+                                        collapse = ",")),
+                            list("gene",
+                                 any(!is.na(gene)),
+                                 paste0(gene,
+                                        collapse = ",")),
+                            list("exact_gene",
+                                 any(!is.na(exact_gene)),
+                                 paste0(exact_gene,
+                                        collapse = ",")),
+                            list("protein",
+                                 !is.na(protein),
+                                 protein),
+                            list("reviewed",
+                                 !is.na(reviewed),
+                                 ifelse(reviewed,
+                                        "true",
+                                        "false")),
+                            list("organism",
+                                 !is.na(organism),
+                                 organism),
+                            list("taxid",
+                                 any(!is.na(taxid)),
+                                 paste0(taxid,
+                                        collapse = ",")),
+                            list("categories",
+                                 any(!is.na(categories)),
+                                 paste0(categories,
+                                        collapse = ",")),
+                            list("types",
+                                 any(!is.na(types)),
+                                 paste0(types,
+                                        collapse = ",")))
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_uniprot"),
-                                    path = paste0(getOption("rba_pth_uniprot"),
-                                                  "features"),
-                                    query = call_query,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("uniprot", "url"),
+                           path = paste0(rba_ba_stg("uniprot", "pth"),
+                                         "features"),
+                           query = call_query,
+                           accept = "application/json",
+                           parser = "json->list_no_simp")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list_no_simp",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -532,101 +437,88 @@ rba_uniprot_features_type = function(terms,
                                      progress_bar = FALSE,
                                      diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = terms,
-                                         name = "terms",
-                                         class = "character",
-                                         max_len = 20),
-                                    list(arg = type,
-                                         name = "type",
-                                         class = "character",
-                                         len = 1,
-                                         val = c("INIT_MET",
-                                                 "SIGNAL",
-                                                 "PROPEP",
-                                                 "TRANSIT",
-                                                 "CHAIN",
-                                                 "PEPTIDE",
-                                                 "TOPO_DOM",
-                                                 "TRANSMEM",
-                                                 "DOMAIN",
-                                                 "REPEAT",
-                                                 "CA_BIND",
-                                                 "ZN_FING",
-                                                 "DNA_BIND",
-                                                 "NP_BIND",
-                                                 "REGION",
-                                                 "COILED",
-                                                 "MOTIF",
-                                                 "COMPBIAS",
-                                                 "ACT_SITE",
-                                                 "METAL",
-                                                 "BINDING",
-                                                 "SITE",
-                                                 "NON_STD",
-                                                 "MOD_RES",
-                                                 "LIPID",
-                                                 "CARBOHYD",
-                                                 "DISULFID",
-                                                 "CROSSLNK",
-                                                 "VAR_SEQ",
-                                                 "VARIANT",
-                                                 "MUTAGEN",
-                                                 "UNSURE",
-                                                 "CONFLICT",
-                                                 "NON_CONS",
-                                                 "NON_TER",
-                                                 "HELIX",
-                                                 "TURN",
-                                                 "STRAND",
-                                                 "INTRAMEM")),
-                                    list(arg = categories,
-                                         name = "categories",
-                                         class = "character",
-                                         val = c("MOLECULE_PROCESSING",
-                                                 "TOPOLOGY",
-                                                 "SEQUENCE_INFORMATION",
-                                                 "STRUCTURAL",
-                                                 "DOMAINS_AND_SITES",
-                                                 "PTM",
-                                                 "VARIANTS",
-                                                 "MUTAGENESIS."),
-                                         max_len = 8)
-  ),
-  diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("get /features/type/{type} Search protein sequence features of a given type in UniProt")
-  }
-  ## build GET API request's query
-  call_query = list("size" = "-1")
-
-  additional_pars = list(list(any(!is.na(categories)),
-                              list("categories" = paste0(categories,
-                                                         collapse = ","))),
-                         list(any(!is.na(terms)),
-                              list("terms" = paste0(terms,
-                                                    collapse = ",")))
+  rba_ba_args(cons = list(list(arg = "terms",
+                               class = "character",
+                               max_len = 20),
+                          list(arg = "type",
+                               class = "character",
+                               len = 1,
+                               val = c("INIT_MET",
+                                       "SIGNAL",
+                                       "PROPEP",
+                                       "TRANSIT",
+                                       "CHAIN",
+                                       "PEPTIDE",
+                                       "TOPO_DOM",
+                                       "TRANSMEM",
+                                       "DOMAIN",
+                                       "REPEAT",
+                                       "CA_BIND",
+                                       "ZN_FING",
+                                       "DNA_BIND",
+                                       "NP_BIND",
+                                       "REGION",
+                                       "COILED",
+                                       "MOTIF",
+                                       "COMPBIAS",
+                                       "ACT_SITE",
+                                       "METAL",
+                                       "BINDING",
+                                       "SITE",
+                                       "NON_STD",
+                                       "MOD_RES",
+                                       "LIPID",
+                                       "CARBOHYD",
+                                       "DISULFID",
+                                       "CROSSLNK",
+                                       "VAR_SEQ",
+                                       "VARIANT",
+                                       "MUTAGEN",
+                                       "UNSURE",
+                                       "CONFLICT",
+                                       "NON_CONS",
+                                       "NON_TER",
+                                       "HELIX",
+                                       "TURN",
+                                       "STRAND",
+                                       "INTRAMEM")),
+                          list(arg = "categories",
+                               class = "character",
+                               val = c("MOLECULE_PROCESSING",
+                                       "TOPOLOGY",
+                                       "SEQUENCE_INFORMATION",
+                                       "STRUCTURAL",
+                                       "DOMAINS_AND_SITES",
+                                       "PTM",
+                                       "VARIANTS",
+                                       "MUTAGENESIS."),
+                               max_len = 8)
+  )
   )
 
-  call_query = rba_ba_body_add_pars(call_body = call_query,
-                                    additional_pars = additional_pars)
+  v_msg(paste("get /features/type/{type} Search protein sequence features of a given type in UniProt"))
+  ## build GET API request's query
+  call_query = rba_ba_query(init = list("size" = "-1"),
+                            list("categories",
+                                 any(!is.na(categories)),
+                                 paste0(categories,
+                                        collapse = ",")),
+                            list("terms",
+                                 any(!is.na(terms)),
+                                 paste0(terms,
+                                        collapse = ",")))
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_uniprot"),
-                                    path = paste0(getOption("rba_pth_uniprot"),
-                                                  "features/type/",
-                                                  type),
-                                    query = call_query,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("uniprot", "url"),
+                           path = paste0(rba_ba_stg("uniprot", "pth"),
+                                         "features/type/",
+                                         type),
+                           query = call_query,
+                           accept = "application/json",
+                           parser = "json->list_no_simp")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list_no_simp",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -650,100 +542,87 @@ rba_uniprot_features = function(accession,
                                 progress_bar = FALSE,
                                 diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = accession,
-                                         name = "accession",
-                                         class = "character"),
-                                    list(arg = types,
-                                         name = "types",
-                                         class = "character",
-                                         len = 1,
-                                         val = c("INIT_MET",
-                                                 "SIGNAL",
-                                                 "PROPEP",
-                                                 "TRANSIT",
-                                                 "CHAIN",
-                                                 "PEPTIDE",
-                                                 "TOPO_DOM",
-                                                 "TRANSMEM",
-                                                 "DOMAIN",
-                                                 "REPEAT",
-                                                 "CA_BIND",
-                                                 "ZN_FING",
-                                                 "DNA_BIND",
-                                                 "NP_BIND",
-                                                 "REGION",
-                                                 "COILED",
-                                                 "MOTIF",
-                                                 "COMPBIAS",
-                                                 "ACT_SITE",
-                                                 "METAL",
-                                                 "BINDING",
-                                                 "SITE",
-                                                 "NON_STD",
-                                                 "MOD_RES",
-                                                 "LIPID",
-                                                 "CARBOHYD",
-                                                 "DISULFID",
-                                                 "CROSSLNK",
-                                                 "VAR_SEQ",
-                                                 "VARIANT",
-                                                 "MUTAGEN",
-                                                 "UNSURE",
-                                                 "CONFLICT",
-                                                 "NON_CONS",
-                                                 "NON_TER",
-                                                 "HELIX",
-                                                 "TURN",
-                                                 "STRAND",
-                                                 "INTRAMEM")),
-                                    list(arg = categories,
-                                         name = "categories",
-                                         class = "character",
-                                         val = c("MOLECULE_PROCESSING",
-                                                 "TOPOLOGY",
-                                                 "SEQUENCE_INFORMATION",
-                                                 "STRUCTURAL",
-                                                 "DOMAINS_AND_SITES",
-                                                 "PTM",
-                                                 "VARIANTS",
-                                                 "MUTAGENESIS."),
-                                         max_len = 8)
-  ),
-  diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("get /features/{accession} Get UniProt protein sequence features by accession")
-  }
-  ## build GET API request's query
-  call_query = list("size" = "-1")
-
-  additional_pars = list(list(any(!is.na(categories)),
-                              list("categories" = paste0(categories,
-                                                         collapse = ","))),
-                         list(any(!is.na(types)),
-                              list("types" = paste0(types,
-                                                    collapse = ",")))
+  rba_ba_args(cons = list(list(arg = "accession",
+                               class = "character"),
+                          list(arg = "types",
+                               class = "character",
+                               len = 1,
+                               val = c("INIT_MET",
+                                       "SIGNAL",
+                                       "PROPEP",
+                                       "TRANSIT",
+                                       "CHAIN",
+                                       "PEPTIDE",
+                                       "TOPO_DOM",
+                                       "TRANSMEM",
+                                       "DOMAIN",
+                                       "REPEAT",
+                                       "CA_BIND",
+                                       "ZN_FING",
+                                       "DNA_BIND",
+                                       "NP_BIND",
+                                       "REGION",
+                                       "COILED",
+                                       "MOTIF",
+                                       "COMPBIAS",
+                                       "ACT_SITE",
+                                       "METAL",
+                                       "BINDING",
+                                       "SITE",
+                                       "NON_STD",
+                                       "MOD_RES",
+                                       "LIPID",
+                                       "CARBOHYD",
+                                       "DISULFID",
+                                       "CROSSLNK",
+                                       "VAR_SEQ",
+                                       "VARIANT",
+                                       "MUTAGEN",
+                                       "UNSURE",
+                                       "CONFLICT",
+                                       "NON_CONS",
+                                       "NON_TER",
+                                       "HELIX",
+                                       "TURN",
+                                       "STRAND",
+                                       "INTRAMEM")),
+                          list(arg = "categories",
+                               class = "character",
+                               val = c("MOLECULE_PROCESSING",
+                                       "TOPOLOGY",
+                                       "SEQUENCE_INFORMATION",
+                                       "STRUCTURAL",
+                                       "DOMAINS_AND_SITES",
+                                       "PTM",
+                                       "VARIANTS",
+                                       "MUTAGENESIS."),
+                               max_len = 8)
+  )
   )
 
-  call_query = rba_ba_body_add_pars(call_body = call_query,
-                                    additional_pars = additional_pars)
+  v_msg(paste("get /features/{accession} Get UniProt protein sequence features by accession"))
+  ## build GET API request's query
+  call_query = rba_ba_query(init = list("size" = "-1"),
+                            list("categories",
+                                 any(!is.na(categories)),
+                                 paste0(categories,
+                                        collapse = ",")),
+                            list("types",
+                                 any(!is.na(types)),
+                                 paste0(types,
+                                        collapse = ",")))
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_uniprot"),
-                                    path = paste0(getOption("rba_pth_uniprot"),
-                                                  "features/",
-                                                  accession),
-                                    query = call_query,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("uniprot", "url"),
+                           path = paste0(rba_ba_stg("uniprot", "pth"),
+                                         "features/",
+                                         accession),
+                           query = call_query,
+                           accept = "application/json",
+                           parser = "json->list_no_simp")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list_no_simp",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -768,7 +647,6 @@ rba_uniprot_features = function(accession,
 #' @param db_type
 #' @param db_id
 #' @param save_peff
-#' @param save_to
 #' @param verbose
 #' @param progress_bar
 #' @param diagnostics
@@ -778,6 +656,7 @@ rba_uniprot_features = function(accession,
 #'
 #' @examples
 rba_uniprot_variation_search = function(accession = NA,
+                                        save_peff = FALSE,
                                         source_type = NA,
                                         consequence_type = NA,
                                         wild_type = NA,
@@ -789,151 +668,120 @@ rba_uniprot_variation_search = function(accession = NA,
                                         taxid = NA,
                                         db_type = NA,
                                         db_id = NA,
-                                        save_peff = FALSE,
-                                        save_to = NA,
                                         verbose = TRUE,
                                         progress_bar = FALSE,
                                         diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = accession,
-                                         name = "accession",
-                                         class = "character",
-                                         max_len = 100),
-                                    list(arg = source_type,
-                                         name = "source_type",
-                                         class = "character",
-                                         val = c("uniprot",
-                                                 "large scale study",
-                                                 "mixed"),
-                                         max_len = 2),
-                                    list(arg = consequence_type,
-                                         name = "consequence_type",
-                                         class = "character",
-                                         val = c("missense",
-                                                 "stop gained",
-                                                 "stop lost")),
-                                    list(arg = wild_type,
-                                         name = "wild_type",
-                                         class = "character",
-                                         max_len = 20),
-                                    list(arg = alternative_sequence,
-                                         name = "alternative_sequence",
-                                         class = "character",
-                                         max_len = 20),
-                                    list(arg = location,
-                                         name = "location",
-                                         class = "character"),
-                                    list(arg = disease,
-                                         name = "disease",
-                                         class = "character"),
-                                    list(arg = omim,
-                                         name = "omim",
-                                         class = "character",
-                                         max_len = 20),
-                                    list(arg = evidence,
-                                         name = "evidence",
-                                         class = "numeric",
-                                         max_len = 20),
-                                    list(arg = taxid,
-                                         name = "taxid",
-                                         class = "numeric",
-                                         max_len = 20),
-                                    list(arg = db_type,
-                                         name = "db_type",
-                                         class = "character",
-                                         max_len = 2),
-                                    list(arg = db_id,
-                                         name = "db_id",
-                                         class = "character",
-                                         max_len = 20),
-                                    list(arg = save_peff,
-                                         name = "save_peff",
-                                         class = "logical"),
-                                    list(arg = save_to,
-                                         name = "save_to",
-                                         class = "character")),
-                        cond = list(list(!is.na(save_to) & save_peff == FALSE,
-                                         "'save_to' is ignored because you didn't set 'save_peff' to TRUE.")),
-                        cond_warning = TRUE,
-                        diagnostics = diagnostics))
+  rba_ba_args(cons = list(list(arg = "accession",
+                               class = "character",
+                               max_len = 100),
+                          list(arg = "source_type",
+                               class = "character",
+                               val = c("uniprot",
+                                       "large scale study",
+                                       "mixed"),
+                               max_len = 2),
+                          list(arg = "consequence_type",
+                               class = "character",
+                               val = c("missense",
+                                       "stop gained",
+                                       "stop lost")),
+                          list(arg = "wild_type",
+                               class = "character",
+                               max_len = 20),
+                          list(arg = "alternative_sequence",
+                               class = "character",
+                               max_len = 20),
+                          list(arg = "location",
+                               class = "character"),
+                          list(arg = "disease",
+                               class = "character"),
+                          list(arg = "omim",
+                               class = "character",
+                               max_len = 20),
+                          list(arg = "evidence",
+                               class = "numeric",
+                               max_len = 20),
+                          list(arg = "taxid",
+                               class = "numeric",
+                               max_len = 20),
+                          list(arg = "db_type",
+                               class = "character",
+                               max_len = 2),
+                          list(arg = "db_id",
+                               class = "character",
+                               max_len = 20),
+                          list(arg = "save_peff",
+                               class = c("logical",
+                                         "character"))))
 
-  if (verbose == TRUE){
-    message("get /variation Search natural variants in UniProt")
-  }
+  v_msg(paste("get /variation Search natural variants in UniProt"))
   ## build GET API request's query
-  call_query = list("size" = "-1")
-
-  additional_pars = list(list(any(!is.na(accession)),
-                              list("accession" = paste0(accession,
-                                                        collapse = ","))),
-                         list(any(!is.na(source_type)),
-                              list("sourcetype" = paste0(source_type,
-                                                         collapse = ","))),
-                         list(any(!is.na(consequence_type)),
-                              list("consequencetype" = paste0(consequence_type,
-                                                              collapse = ","))),
-                         list(any(!is.na(wild_type)),
-                              list("wildtype" = paste0(wild_type,
-                                                       collapse = ","))),
-                         list(any(!is.na(alternative_sequence)),
-                              list("alternativesequence" = paste0(alternative_sequence,
-                                                                  collapse = ","))),
-                         list(!is.na(location),
-                              list("location" = location)),
-                         list(!is.na(disease),
-                              list("disease" = disease)),
-                         list(any(!is.na(omim)),
-                              list("omim" = paste0(omim,
-                                                   collapse = ","))),
-                         list(any(!is.na(evidence)),
-                              list("evidence" = paste0(evidence,
-                                                       collapse = ","))),
-                         list(any(!is.na(taxid)),
-                              list("taxid" = paste0(taxid,
-                                                    collapse = ","))),
-                         list(any(!is.na(db_type)),
-                              list("dbtype" = paste0(db_type,
-                                                     collapse = ","))),
-                         list(any(!is.na(db_id)),
-                              list("dbid" = paste0(db_type,
-                                                   collapse = ","))))
-
-  call_query = rba_ba_body_add_pars(call_body = call_query,
-                                    additional_pars = additional_pars)
+  call_query = rba_ba_query(init = list("size" = "-1"),
+                            list("accession",
+                                 any(!is.na(accession)),
+                                 paste0(accession,
+                                        collapse = ",")),
+                            list("sourcetype",
+                                 any(!is.na(source_type)),
+                                 paste0(source_type,
+                                        collapse = ",")),
+                            list("consequencetype",
+                                 any(!is.na(consequence_type)),
+                                 paste0(consequence_type,
+                                        collapse = ",")),
+                            list("wildtype",
+                                 any(!is.na(wild_type)),
+                                 paste0(wild_type,
+                                        collapse = ",")),
+                            list("alternativesequence",
+                                 any(!is.na(alternative_sequence)),
+                                 paste0(alternative_sequence,
+                                        collapse = ",")),
+                            list("location",
+                                 !is.na(location),
+                                 location),
+                            list("disease",
+                                 !is.na(disease),
+                                 disease),
+                            list("omim",
+                                 any(!is.na(omim)),
+                                 paste0(omim,
+                                        collapse = ",")),
+                            list("evidence",
+                                 any(!is.na(evidence)),
+                                 paste0(evidence,
+                                        collapse = ",")),
+                            list("taxid",
+                                 any(!is.na(taxid)),
+                                 paste0(taxid,
+                                        collapse = ",")),
+                            list("dbtype",
+                                 any(!is.na(db_type)),
+                                 paste0(db_type,
+                                        collapse = ",")),
+                            list("dbid",
+                                 any(!is.na(db_id)),
+                                 paste0(db_type,
+                                        collapse = ",")))
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_uniprot"),
-                                    path = paste0(getOption("rba_pth_uniprot"),
-                                                  "variation"),
-                                    query = call_query))
-  if (save_peff == TRUE) {
-    accept_input = "text/x-peff"
-    parser_input = "text->chr"
-    # create file_path
-    save_to = rba_ba_file_path(file_ext = "peff",
-                               file_name = format(Sys.time(),
-                                                  "%Y_%m_%d_%H_%M_%S"),
-                               dir_name = "rba_uniprot",
-                               save_to = save_to,
-                               verbose = verbose,
-                               diagnostics = diagnostics)
-    call_func_input = as.call(append(as.list(call_func_input),
-                                     quote(httr::write_disk(save_to,
-                                                            overwrite = TRUE))))
-  } else {
-    accept_input = "application/json"
-    parser_input = "json->list"
-  }
-  call_func_input = as.call(append(as.list(call_func_input),
-                                   quote(httr::accept(accept_input))))
+  save_to = rba_ba_file(file_ext = "peff",
+                        file_name = "uniprot_variation",
+                        save_to = save_peff)
 
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("uniprot", "url"),
+                           path = paste0(rba_ba_stg("uniprot", "pth"),
+                                         "variation"),
+                           query = call_query,
+                           save_to = save_to,
+                           file_accept = "text/x-peff",
+                           file_parser = "text->chr",
+                           obj_accept = "application/json",
+                           obj_parser = "json->list"
+  )
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = parser_input,
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -946,7 +794,6 @@ rba_uniprot_variation_search = function(accession = NA,
 #' @param alternative_sequence
 #' @param location
 #' @param save_peff
-#' @param save_to
 #' @param verbose
 #' @param progress_bar
 #' @param diagnostics
@@ -956,113 +803,82 @@ rba_uniprot_variation_search = function(accession = NA,
 #'
 #' @examples
 rba_uniprot_variation_dbsnp = function(db_id,
+                                       save_peff = FALSE,
                                        source_type = NA,
                                        consequence_type = NA,
                                        wild_type = NA,
                                        alternative_sequence = NA,
                                        location = NA,
-                                       save_peff = FALSE,
-                                       save_to = NA,
                                        verbose = TRUE,
                                        progress_bar = FALSE,
                                        diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = db_id,
-                                         name = "db_id",
-                                         class = "character"),
-                                    list(arg = source_type,
-                                         name = "source_type",
-                                         class = "character",
-                                         val = c("uniprot",
-                                                 "large scale study",
-                                                 "mixed"),
-                                         max_len = 2),
-                                    list(arg = consequence_type,
-                                         name = "consequence_type",
-                                         class = "character",
-                                         val = c("missense",
-                                                 "stop gained",
-                                                 "stop lost")),
-                                    list(arg = wild_type,
-                                         name = "wild_type",
-                                         class = "character",
-                                         max_len = 20),
-                                    list(arg = alternative_sequence,
-                                         name = "alternative_sequence",
-                                         class = "character",
-                                         max_len = 20),
-                                    list(arg = location,
-                                         name = "location",
-                                         class = "character"),
-                                    list(arg = save_peff,
-                                         name = "save_peff",
-                                         class = "logical"),
-                                    list(arg = save_to,
-                                         name = "save_to",
-                                         class = "character")),
-                        cond = list(list(!is.na(save_to) & save_peff == FALSE,
-                                         "'save_to' is ignored because you didn't set 'save_peff' to TRUE.")),
-                        cond_warning = TRUE,
-                        diagnostics = diagnostics))
+  rba_ba_args(cons = list(list(arg = "db_id",
+                               class = "character"),
+                          list(arg = "source_type",
+                               class = "character",
+                               val = c("uniprot",
+                                       "large scale study",
+                                       "mixed"),
+                               max_len = 2),
+                          list(arg = "consequence_type",
+                               class = "character",
+                               val = c("missense",
+                                       "stop gained",
+                                       "stop lost")),
+                          list(arg = "wild_type",
+                               class = "character",
+                               max_len = 20),
+                          list(arg = "alternative_sequence",
+                               class = "character",
+                               max_len = 20),
+                          list(arg = "location",
+                               class = "character"),
+                          list(arg = "save_peff",
+                               class = c("logical",
+                                         "character"))))
 
-  if (verbose == TRUE){
-    message("get /variation/dbsnp/{dbid} Get natural variants in UniProt by NIH-NCBI SNP database identifier")
-  }
+  v_msg(paste("get /variation/dbsnp/{dbid} Get natural variants in UniProt by NIH-NCBI SNP database identifier"))
   ## build GET API request's query
-  call_query = list("size" = "-1")
-
-  additional_pars = list(list(any(!is.na(source_type)),
-                              list("sourcetype" = paste0(source_type,
-                                                         collapse = ","))),
-                         list(any(!is.na(consequence_type)),
-                              list("consequencetype" = paste0(consequence_type,
-                                                              collapse = ","))),
-                         list(any(!is.na(wild_type)),
-                              list("wildtype" = paste0(wild_type,
-                                                       collapse = ","))),
-                         list(any(!is.na(alternative_sequence)),
-                              list("alternativesequence" = paste0(alternative_sequence,
-                                                                  collapse = ","))),
-                         list(!is.na(location),
-                              list("location" = location)))
-
-  call_query = rba_ba_body_add_pars(call_body = call_query,
-                                    additional_pars = additional_pars)
+  call_query = rba_ba_query(init = list("size" = "-1"),
+                            list("sourcetype",
+                                 any(!is.na(source_type)),
+                                 paste0(source_type,
+                                        collapse = ",")),
+                            list("consequencetype",
+                                 any(!is.na(consequence_type)),
+                                 paste0(consequence_type,
+                                        collapse = ",")),
+                            list("wildtype",
+                                 any(!is.na(wild_type)),
+                                 paste0(wild_type,
+                                        collapse = ",")),
+                            list("alternativesequence",
+                                 any(!is.na(alternative_sequence)),
+                                 paste0(alternative_sequence,
+                                        collapse = ",")),
+                            list("location",
+                                 !is.na(location),
+                                 location))
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_uniprot"),
-                                    path = paste0(getOption("rba_pth_uniprot"),
-                                                  "variation/dbsnp/",
-                                                  db_id),
-                                    query = call_query))
-  if (save_peff == TRUE) {
-    accept_input = "text/x-peff"
-    parser_input = "text->chr"
-    # create file_path
-    save_to = rba_ba_file_path(file_ext = "peff",
-                               file_name = format(Sys.time(),
-                                                  "%Y_%m_%d_%H_%M_%S"),
-                               dir_name = "rba_uniprot",
-                               save_to = save_to,
-                               verbose = verbose,
-                               diagnostics = diagnostics)
-    call_func_input = as.call(append(as.list(call_func_input),
-                                     quote(httr::write_disk(save_to,
-                                                            overwrite = TRUE))))
-  } else {
-    accept_input = "application/json"
-    parser_input = "json->list"
-  }
-  call_func_input = as.call(append(as.list(call_func_input),
-                                   quote(httr::accept(accept_input))))
+  save_to = rba_ba_file(file_ext = "peff",
+                        file_name = "uniprot_variation_dbsnp",
+                        save_to = save_peff)
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("uniprot", "url"),
+                           path = paste0(rba_ba_stg("uniprot", "pth"),
+                                         "variation/dbsnp/",
+                                         db_id),
+                           query = call_query,
+                           save_to = save_to,
+                           file_accept = "text/x-peff",
+                           file_parser = "text->chr",
+                           obj_accept = "application/json",
+                           obj_parser = "json->list"
+  )
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = parser_input,
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -1075,7 +891,6 @@ rba_uniprot_variation_dbsnp = function(db_id,
 #' @param alternative_sequence
 #' @param location
 #' @param save_peff
-#' @param save_to
 #' @param verbose
 #' @param progress_bar
 #' @param diagnostics
@@ -1085,242 +900,178 @@ rba_uniprot_variation_dbsnp = function(db_id,
 #'
 #' @examples
 rba_uniprot_variation_hgvs = function(hgvs,
+                                      save_peff = FALSE,
                                       source_type = NA,
                                       consequence_type = NA,
                                       wild_type = NA,
                                       alternative_sequence = NA,
                                       location = NA,
-                                      save_peff = FALSE,
-                                      save_to = NA,
                                       verbose = TRUE,
                                       progress_bar = FALSE,
                                       diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = hgvs,
-                                         name = "hgvs",
-                                         class = "character"),
-                                    list(arg = source_type,
-                                         name = "source_type",
-                                         class = "character",
-                                         val = c("uniprot",
-                                                 "large scale study",
-                                                 "mixed"),
-                                         max_len = 2),
-                                    list(arg = consequence_type,
-                                         name = "consequence_type",
-                                         class = "character",
-                                         val = c("missense",
-                                                 "stop gained",
-                                                 "stop lost")),
-                                    list(arg = wild_type,
-                                         name = "wild_type",
-                                         class = "character",
-                                         max_len = 20),
-                                    list(arg = alternative_sequence,
-                                         name = "alternative_sequence",
-                                         class = "character",
-                                         max_len = 20),
-                                    list(arg = location,
-                                         name = "location",
-                                         class = "character"),
-                                    list(arg = save_peff,
-                                         name = "save_peff",
-                                         class = "logical"),
-                                    list(arg = save_to,
-                                         name = "save_to",
-                                         class = "character")),
-                        cond = list(list(!is.na(save_to) & save_peff == FALSE,
-                                         "'save_to' is ignored because you didn't set 'save_peff' to TRUE.")),
-                        cond_warning = TRUE,
-                        diagnostics = diagnostics))
+  rba_ba_args(cons = list(list(arg = "hgvs",
+                               class = "character"),
+                          list(arg = "source_type",
+                               class = "character",
+                               val = c("uniprot",
+                                       "large scale study",
+                                       "mixed"),
+                               max_len = 2),
+                          list(arg = "consequence_type",
+                               class = "character",
+                               val = c("missense",
+                                       "stop gained",
+                                       "stop lost")),
+                          list(arg = "wild_type",
+                               class = "character",
+                               max_len = 20),
+                          list(arg = "alternative_sequence",
+                               class = "character",
+                               max_len = 20),
+                          list(arg = "location",
+                               class = "character"),
+                          list(arg = "save_peff",
+                               class = c("logical",
+                                         "character"))))
 
-  if (verbose == TRUE){
-    message("get /variation/hgvs/{hgvs} Get natural variants in UniProt by HGVS expression")
-  }
+  v_msg(paste("get /variation/hgvs/{hgvs} Get natural variants in UniProt by HGVS expression"))
   ## build GET API request's query
-  call_query = list("size" = "-1")
-
-  additional_pars = list(list(any(!is.na(source_type)),
-                              list("sourcetype" = paste0(source_type,
-                                                         collapse = ","))),
-                         list(any(!is.na(consequence_type)),
-                              list("consequencetype" = paste0(consequence_type,
-                                                              collapse = ","))),
-                         list(any(!is.na(wild_type)),
-                              list("wildtype" = paste0(wild_type,
-                                                       collapse = ","))),
-                         list(any(!is.na(alternative_sequence)),
-                              list("alternativesequence" = paste0(alternative_sequence,
-                                                                  collapse = ","))),
-                         list(!is.na(location),
-                              list("location" = location)))
-
-  call_query = rba_ba_body_add_pars(call_body = call_query,
-                                    additional_pars = additional_pars)
+  call_query = rba_ba_query(init = list("size" = "-1"),
+                            list("sourcetype",
+                                 any(!is.na(source_type)),
+                                 paste0(source_type,
+                                        collapse = ",")),
+                            list("consequencetype",
+                                 any(!is.na(consequence_type)),
+                                 paste0(consequence_type,
+                                        collapse = ",")),
+                            list("wildtype",
+                                 any(!is.na(wild_type)),
+                                 paste0(wild_type,
+                                        collapse = ",")),
+                            list("alternativesequence",
+                                 any(!is.na(alternative_sequence)),
+                                 paste0(alternative_sequence,
+                                        collapse = ",")),
+                            list("location",
+                                 !is.na(location),
+                                 location))
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_uniprot"),
-                                    path = paste0(getOption("rba_pth_uniprot"),
-                                                  "variation/hgvs/",
-                                                  hgvs),
-                                    query = call_query))
-  if (save_peff == TRUE) {
-    accept_input = "text/x-peff"
-    parser_input = "text->chr"
-    # create file_path
-    save_to = rba_ba_file_path(file_ext = "peff",
-                               file_name = format(Sys.time(),
-                                                  "%Y_%m_%d_%H_%M_%S"),
-                               dir_name = "rba_uniprot",
-                               save_to = save_to,
-                               verbose = verbose,
-                               diagnostics = diagnostics)
-    call_func_input = as.call(append(as.list(call_func_input),
-                                     quote(httr::write_disk(save_to,
-                                                            overwrite = TRUE))))
-  } else {
-    accept_input = "application/json"
-    parser_input = "json->list"
-  }
-  call_func_input = as.call(append(as.list(call_func_input),
-                                   quote(httr::accept(accept_input))))
+  save_to = rba_ba_file(file_ext = "peff",
+                        file_name = "uniprot_variation_hgvs",
+                        save_to = save_peff)
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("uniprot", "url"),
+                           path = paste0(rba_ba_stg("uniprot", "pth"),
+                                         "variation/hgvs/",
+                                         hgvs),
+                           query = call_query,
+                           save_to = save_to,
+                           file_accept = "text/x-peff",
+                           file_parser = "text->chr",
+                           obj_accept = "application/json",
+                           obj_parser = "json->list"
+  )
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = parser_input,
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
 #' Get natural variants by UniProt accession
 #'
-#' @param hgvs
 #' @param source_type
 #' @param consequence_type
 #' @param wild_type
 #' @param alternative_sequence
 #' @param location
 #' @param save_peff
-#' @param save_to
 #' @param verbose
 #' @param progress_bar
 #' @param diagnostics
+#' @param accession
 #'
 #' @return
 #' @export
 #'
 #' @examples
 rba_uniprot_variation_accession = function(accession,
+                                           save_peff = FALSE,
                                            source_type = NA,
                                            consequence_type = NA,
                                            wild_type = NA,
                                            alternative_sequence = NA,
                                            location = NA,
-                                           save_peff = FALSE,
-                                           save_to = NA,
                                            verbose = TRUE,
                                            progress_bar = FALSE,
                                            diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = accession,
-                                         name = "accession",
-                                         class = "character"),
-                                    list(arg = source_type,
-                                         name = "source_type",
-                                         class = "character",
-                                         val = c("uniprot",
-                                                 "large scale study",
-                                                 "mixed"),
-                                         max_len = 2),
-                                    list(arg = consequence_type,
-                                         name = "consequence_type",
-                                         class = "character",
-                                         val = c("missense",
-                                                 "stop gained",
-                                                 "stop lost")),
-                                    list(arg = wild_type,
-                                         name = "wild_type",
-                                         class = "character",
-                                         max_len = 20),
-                                    list(arg = alternative_sequence,
-                                         name = "alternative_sequence",
-                                         class = "character",
-                                         max_len = 20),
-                                    list(arg = location,
-                                         name = "location",
-                                         class = "character"),
-                                    list(arg = save_peff,
-                                         name = "save_peff",
-                                         class = "logical"),
-                                    list(arg = save_to,
-                                         name = "save_to",
-                                         class = "character")),
-                        cond = list(list(!is.na(save_to) & save_peff == FALSE,
-                                         "'save_to' is ignored because you didn't set 'save_peff' to TRUE.")),
-                        cond_warning = TRUE,
-                        diagnostics = diagnostics))
+  rba_ba_args(cons = list(list(arg = "accession",
+                               class = "character"),
+                          list(arg = "source_type",
+                               class = "character",
+                               val = c("uniprot",
+                                       "large scale study",
+                                       "mixed"),
+                               max_len = 2),
+                          list(arg = "consequence_type",
+                               class = "character",
+                               val = c("missense",
+                                       "stop gained",
+                                       "stop lost")),
+                          list(arg = "wild_type",
+                               class = "character",
+                               max_len = 20),
+                          list(arg = "alternative_sequence",
+                               class = "character",
+                               max_len = 20),
+                          list(arg = "location",
+                               class = "character"),
+                          list(arg = "save_peff",
+                               class = c("logical",
+                                         "character"))))
 
-  if (verbose == TRUE){
-    message("get /variation/hgvs/{hgvs} Get natural variants in UniProt by HGVS expression")
-  }
+  v_msg(paste("get /variation/hgvs/{hgvs} Get natural variants in UniProt by HGVS expression"))
   ## build GET API request's query
-  call_query = list("size" = "-1")
-
-  additional_pars = list(list(any(!is.na(source_type)),
-                              list("sourcetype" = paste0(source_type,
-                                                         collapse = ","))),
-                         list(any(!is.na(consequence_type)),
-                              list("consequencetype" = paste0(consequence_type,
-                                                              collapse = ","))),
-                         list(any(!is.na(wild_type)),
-                              list("wildtype" = paste0(wild_type,
-                                                       collapse = ","))),
-                         list(any(!is.na(alternative_sequence)),
-                              list("alternativesequence" = paste0(alternative_sequence,
-                                                                  collapse = ","))),
-                         list(!is.na(location),
-                              list("location" = location)))
-
-  call_query = rba_ba_body_add_pars(call_body = call_query,
-                                    additional_pars = additional_pars)
+  call_query = rba_ba_query(init = list("size" = "-1"),
+                            list("sourcetype",
+                                 any(!is.na(source_type)),
+                                 paste0(source_type,
+                                        collapse = ",")),
+                            list("consequencetype",
+                                 any(!is.na(consequence_type)),
+                                 paste0(consequence_type,
+                                        collapse = ",")),
+                            list("wildtype",
+                                 any(!is.na(wild_type)),
+                                 paste0(wild_type,
+                                        collapse = ",")),
+                            list("alternativesequence",
+                                 any(!is.na(alternative_sequence)),
+                                 paste0(alternative_sequence,
+                                        collapse = ",")),
+                            list("location",
+                                 !is.na(location),
+                                 location))
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_uniprot"),
-                                    path = paste0(getOption("rba_pth_uniprot"),
-                                                  "variation/",
-                                                  accession),
-                                    query = call_query))
-  if (save_peff == TRUE) {
-    accept_input = "text/x-peff"
-    parser_input = "text->chr"
-    # create file_path
-    save_to = rba_ba_file_path(file_ext = "peff",
-                               file_name = format(Sys.time(),
-                                                  "%Y_%m_%d_%H_%M_%S"),
-                               dir_name = "rba_uniprot",
-                               save_to = save_to,
-                               verbose = verbose,
-                               diagnostics = diagnostics)
-    call_func_input = as.call(append(as.list(call_func_input),
-                                     quote(httr::write_disk(save_to,
-                                                            overwrite = TRUE))))
-  } else {
-    accept_input = "application/json"
-    parser_input = "json->list"
-  }
-  call_func_input = as.call(append(as.list(call_func_input),
-                                   quote(httr::accept(accept_input))))
-
+  save_to = rba_ba_file(file_ext = "peff",
+                        file_name = "uniprot_variation",
+                        save_to = save_peff)
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("uniprot", "url"),
+                           path = paste0(rba_ba_stg("uniprot", "pth"),
+                                         "variation/",
+                                         accession),
+                           query = call_query,
+                           save_to = save_to,
+                           file_accept = "text/x-peff",
+                           file_parser = "text->chr",
+                           obj_accept = "application/json",
+                           obj_parser = "json->list"
+  )
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = parser_input,
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -1351,78 +1102,66 @@ rba_uniprot_proteomics_search = function(accession = NA,
                                          progress_bar = FALSE,
                                          diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = accession,
-                                         name = "accession",
-                                         class = "character",
-                                         max_len = 100),
-                                    list(arg = taxid,
-                                         name = "taxid",
-                                         class = "numeric",
-                                         max_len = 20),
-                                    list(arg = upid,
-                                         name = "upid",
-                                         class = "character",
-                                         max_len = 100),
-                                    list(arg = data_source,
-                                         name = "data_source",
-                                         class = "character",
-                                         max_len = 2,
-                                         vals = c("MaxQB",
-                                                  "PeptideAtlas",
-                                                  "EPD",
-                                                  "ProteomicsDB")),
-                                    list(arg = peptide,
-                                         name = "peptide",
-                                         class = "character",
-                                         max_len = 20),
-                                    list(arg = unique,
-                                         name = "unique",
-                                         class = "logical")),
-                        diagnostics = diagnostics))
-
-  if (verbose == TRUE){
-    message("get /proteomics Search proteomics peptides in UniProt")
-  }
-  ## build GET API request's query
-  call_query = list("size" = "-1")
-
-  additional_pars = list(list(any(!is.na(accession)),
-                              list("accession" = paste0(accession,
-                                                        collapse = ","))),
-                         list(any(!is.na(taxid)),
-                              list("taxid" = paste0(taxid,
-                                                    collapse = ","))),
-                         list(any(!is.na(upid)),
-                              list("upid" = paste0(upid,
-                                                   collapse = ","))),
-                         list(any(!is.na(data_source)),
-                              list("data_source" = paste0(data_source,
-                                                          collapse = ","))),
-                         list(any(!is.na(peptide)),
-                              list("peptide" = paste0(peptide,
-                                                      collapse = ","))),
-                         list(!is.na(unique),
-                              list("unique" = ifelse(unique, "true", "false")))
+  rba_ba_args(cons = list(list(arg = "accession",
+                               class = "character",
+                               max_len = 100),
+                          list(arg = "taxid",
+                               class = "numeric",
+                               max_len = 20),
+                          list(arg = "upid",
+                               class = "character",
+                               max_len = 100),
+                          list(arg = "data_source",
+                               class = "character",
+                               max_len = 2,
+                               vals = c("MaxQB",
+                                        "PeptideAtlas",
+                                        "EPD",
+                                        "ProteomicsDB")),
+                          list(arg = "peptide",
+                               class = "character",
+                               max_len = 20),
+                          list(arg = "unique",
+                               class = "logical"))
   )
 
-  call_query = rba_ba_body_add_pars(call_body = call_query,
-                                    additional_pars = additional_pars)
+  v_msg(paste("get /proteomics Search proteomics peptides in UniProt"))
+  ## build GET API request's query
+  call_query = rba_ba_query(init = list("size" = "-1"),
+                            list("accession",
+                                 any(!is.na(accession)),
+                                 paste0(accession,
+                                        collapse = ",")),
+                            list("taxid",
+                                 any(!is.na(taxid)),
+                                 paste0(taxid,
+                                        collapse = ",")),
+                            list("upid",
+                                 any(!is.na(upid)),
+                                 paste0(upid,
+                                        collapse = ",")),
+                            list("data_source",
+                                 any(!is.na(data_source)),
+                                 paste0(data_source,
+                                        collapse = ",")),
+                            list("peptide",
+                                 any(!is.na(peptide)),
+                                 paste0(peptide,
+                                        collapse = ",")),
+                            list("unique",
+                                 !is.na(unique),
+                                 ifelse(unique, "true", "false")))
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_uniprot"),
-                                    path = paste0(getOption("rba_pth_uniprot"),
-                                                  "proteomics"),
-                                    query = call_query,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("uniprot", "url"),
+                           path = paste0(rba_ba_stg("uniprot", "pth"),
+                                         "proteomics"),
+                           query = call_query,
+                           accept = "application/json",
+                           parser = "json->list_no_simp")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list_no_simp",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -1442,31 +1181,23 @@ rba_uniprot_proteomics = function(accession,
                                   progress_bar = FALSE,
                                   diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = accession,
-                                         name = "accession",
-                                         class = "character",
-                                         len = 1)),
-                        diagnostics = diagnostics))
+  rba_ba_args(cons = list(list(arg = "accession",
+                               class = "character",
+                               len = 1))
+  )
 
-  if (verbose == TRUE){
-    message("get /proteomics/{accession} Get proteomics peptides mapped to UniProt by accession")
-  }
+  v_msg(paste("get /proteomics/{accession} Get proteomics peptides mapped to UniProt by accession"))
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_uniprot"),
-                                    path = paste0(getOption("rba_pth_uniprot"),
-                                                  "proteomics/",
-                                                  accession),
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("uniprot", "url"),
+                           path = paste0(rba_ba_stg("uniprot", "pth"),
+                                         "proteomics/",
+                                         accession),
+                           accept = "application/json",
+                           parser = "json->list")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -1496,64 +1227,53 @@ rba_uniprot_antigen_search = function(accession = NA,
                                       progress_bar = FALSE,
                                       diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = accession,
-                                         name = "accession",
-                                         class = "character",
-                                         max_len = 100),
-                                    list(arg = antigen_sequence,
-                                         name = "antigen_sequence",
-                                         class = "character"),
-                                    list(arg = antigen_id,
-                                         name = "antigen_id",
-                                         class = "character",
-                                         max_len = 20),
-                                    list(arg = ensembl_id,
-                                         name = "ensembl_id",
-                                         class = "character",
-                                         max_len = 20),
-                                    list(arg = match_score,
-                                         name = "match_score",
-                                         class = "numeric")),
-                        diagnostics = diagnostics))
+  rba_ba_args(cons = list(list(arg = "accession",
+                               class = "character",
+                               max_len = 100),
+                          list(arg = "antigen_sequence",
+                               class = "character"),
+                          list(arg = "antigen_id",
+                               class = "character",
+                               max_len = 20),
+                          list(arg = "ensembl_id",
+                               class = "character",
+                               max_len = 20),
+                          list(arg = "match_score",
+                               class = "numeric"))
+  )
 
-  if (verbose == TRUE){
-    message("get /antigen Search antigens in UniProt")
-  }
+  v_msg(paste("get /antigen Search antigens in UniProt"))
   ## build GET API request's query
-  call_query = list("size" = "-1")
-
-  additional_pars = list(list(any(!is.na(accession)),
-                              list("accession" = paste0(accession,
-                                                        collapse = ","))),
-                         list(!is.na(antigen_sequence),
-                              list("antigen_sequence" = antigen_sequence)),
-                         list(any(!is.na(antigen_id)),
-                              list("antigen_id" = paste0(antigen_id,
-                                                         collapse = ","))),
-                         list(any(!is.na(ensembl_id)),
-                              list("ensembl_id" = paste0(ensembl_id,
-                                                         collapse = ","))),
-                         list(!is.na(match_score),
-                              list("match_score" = match_score)))
-
-  call_query = rba_ba_body_add_pars(call_body = call_query,
-                                    additional_pars = additional_pars)
+  call_query = rba_ba_query(init = list("size" = "-1"),
+                            list("accession",
+                                 any(!is.na(accession)),
+                                 paste0(accession,
+                                        collapse = ",")),
+                            list("antigen_sequence",
+                                 !is.na(antigen_sequence),
+                                 antigen_sequence),
+                            list("antigen_id",
+                                 any(!is.na(antigen_id)),
+                                 paste0(antigen_id,
+                                        collapse = ",")),
+                            list("ensembl_id",
+                                 any(!is.na(ensembl_id)),
+                                 paste0(ensembl_id,
+                                        collapse = ",")),
+                            list("match_score",
+                                 !is.na(match_score),
+                                 match_score))
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_uniprot"),
-                                    path = paste0(getOption("rba_pth_uniprot"),
-                                                  "antigen"),
-                                    query = call_query,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("uniprot", "url"),
+                           path = paste0(rba_ba_stg("uniprot", "pth"),
+                                         "antigen"),
+                           query = call_query,
+                           accept = "application/json",
+                           parser = "json->list_no_simp")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list_no_simp",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -1573,31 +1293,23 @@ rba_uniprot_antigen = function(accession,
                                progress_bar = FALSE,
                                diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = accession,
-                                         name = "accession",
-                                         class = "character",
-                                         len = 1)),
-                        diagnostics = diagnostics))
+  rba_ba_args(cons = list(list(arg = "accession",
+                               class = "character",
+                               len = 1))
+  )
 
-  if (verbose == TRUE){
-    message("get /antigen/{accession} Get antigen by UniProt accession")
-  }
+  v_msg(paste("get /antigen/{accession} Get antigen by UniProt accession"))
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_uniprot"),
-                                    path = paste0(getOption("rba_pth_uniprot"),
-                                                  "antigen/",
-                                                  accession),
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("uniprot", "url"),
+                           path = paste0(rba_ba_stg("uniprot", "pth"),
+                                         "antigen/",
+                                         accession),
+                           accept = "application/json",
+                           parser = "json->list")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 

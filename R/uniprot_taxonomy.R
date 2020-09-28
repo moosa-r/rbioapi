@@ -16,31 +16,23 @@ rba_uniprot_taxonomy_ancestor = function(ids,
                                          progress_bar = FALSE,
                                          diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = ids,
-                                         name = "ids",
-                                         class = "numeric",
-                                         min_len = 2)),
-                        diagnostics = diagnostics))
+  rba_ba_args(cons = list(list(arg = "ids",
+                               class = "numeric",
+                               min_len = 2))
+  )
 
-  if (verbose == TRUE){
-    message("get /ancestor/{ids} This service returns the lowest common ancestor (LCA) of two taxonomy nodes.")
-  }
+  v_msg(paste("get /ancestor/{ids} This service returns the lowest common ancestor (LCA) of two taxonomy nodes."))
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_uniprot"),
-                                    path = paste0(getOption("rba_pth_uniprot"),
-                                                  "taxonomy/ancestor/",
-                                                  paste0(ids, collapse = ",")),
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("uniprot", "url"),
+                           path = paste0(rba_ba_stg("uniprot", "pth"),
+                                         "taxonomy/ancestor/",
+                                         paste0(ids, collapse = ",")),
+                           accept = "application/json",
+                           parser = "json->list")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -65,38 +57,31 @@ rba_uniprot_taxonomy = function(ids,
                                 progress_bar = FALSE,
                                 diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = ids,
-                                         name = "id",
-                                         class = "numeric"),
-                                    list(arg = hierarchy,
-                                         name = "hierarchy",
-                                         class = "character",
-                                         val = c("children",
-                                                 "parent",
-                                                 "siblings")),
-                                    list(arg = node,
-                                         name = "node",
-                                         class = "logical")),
-                        cond = list(list(length(ids) > 1 && !is.na(hierarchy),
-                                         "you cannot specify 'hierarchy' when providing more than 1 id.")),
-                        diagnostics = diagnostics))
+  rba_ba_args(cons = list(list(arg = "id",
+                               class = "numeric"),
+                          list(arg = "hierarchy",
+                               class = "character",
+                               val = c("children",
+                                       "parent",
+                                       "siblings")),
+                          list(arg = "node",
+                               class = "logical")),
+              cond = list(list(quote(length(ids) > 1 && !is.na(hierarchy)),
+                               "you cannot specify 'hierarchy' when providing more than 1 ids."))
+  )
 
-  if (verbose == TRUE){
-    message("get /id/{id}/siblings etc")
-  }
+  v_msg(paste("get /id/{id}/siblings etc"))
   ## build GET API request's query
   call_query = list("size" = "-1")
 
   ## make function-specific calls
-  if (length(ids) > 1) {
-    path_input = paste0(getOption("rba_pth_uniprot"),
-                        "taxonomy/ids/",
-                        paste0(ids, collapse = ","))
-  } else {
-    path_input = paste0(getOption("rba_pth_uniprot"),
-                        "taxonomy/id/",
-                        ids)
-  }
+  path_input = sprintf("%staxonomy/%s/%s",
+                       rba_ba_stg("uniprot", "pth"),
+                       ifelse(length(ids) > 1,
+                              yes = "ids",
+                              no = "id"),
+                       paste0(ids, collapse = ",")
+  )
   if (!is.na(hierarchy)) {
     path_input = paste0(path_input, "/", hierarchy)
   }
@@ -104,20 +89,15 @@ rba_uniprot_taxonomy = function(ids,
     path_input = paste0(path_input, "/node")
   }
 
-  call_func_input = quote(httr::GET(url = getOption("rba_url_uniprot"),
-                                    path = path_input,
-                                    query = call_query,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("uniprot", "url"),
+                           path = path_input,
+                           query = call_query,
+                           accept = "application/json",
+                           parser = "json->list")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -139,30 +119,21 @@ rba_uniprot_taxonomy_ancestor = function(id,
                                          progress_bar = FALSE,
                                          diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = id,
-                                         name = "id",
-                                         class = "numeric")),
-                        diagnostics = diagnostics))
+  rba_ba_args(cons = list(list(arg = "id",
+                               class = "numeric")))
 
-  if (verbose == TRUE){
-    message("get /lineage/{id} This service returns the taxonomic lineage for a given taxonomy node. It lists the nodes as they appear in the taxonomic tree, with the more specific listed first.")
-  }
+  v_msg(paste("get /lineage/{id} This service returns the taxonomic lineage for a given taxonomy node. It lists the nodes as they appear in the taxonomic tree, with the more specific listed first."))
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_uniprot"),
-                                    path = paste0(getOption("rba_pth_uniprot"),
-                                                  "taxonomy/lineage/",
-                                                  id),
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("uniprot", "url"),
+                           path = paste0(rba_ba_stg("uniprot", "pth"),
+                                         "taxonomy/lineage/",
+                                         id),
+                           accept = "application/json",
+                           parser = "json->list")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -188,23 +159,17 @@ rba_uniprot_taxonomy_path = function(id,
                                      progress_bar = FALSE,
                                      diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = id,
-                                         name = "id",
-                                         class = "numeric"),
-                                    list(arg = direction,
-                                         name = "direction",
-                                         class = "character",
-                                         val = c("TOP",
-                                                 "BOTTOM")),
-                                    list(arg = depth,
-                                         name = "depth",
-                                         class = "numeric",
-                                         ran = c(1,5))),
-                        diagnostics = diagnostics))
+  rba_ba_args(cons = list(list(arg = "id",
+                               class = "numeric"),
+                          list(arg = "direction",
+                               class = "character",
+                               val = c("TOP",
+                                       "BOTTOM")),
+                          list(arg = "depth",
+                               class = "numeric",
+                               ran = c(1,5))))
 
-  if (verbose == TRUE){
-    message("get /path This service returns all taxonomic nodes that have a relationship with the queried taxonomy ID in a specific direction (TOP or BOTTOM) and depth level.")
-  }
+  v_msg(paste("get /path This service returns all taxonomic nodes that have a relationship with the queried taxonomy ID in a specific direction (TOP or BOTTOM) and depth level."))
 
   ## build GET API request's query
   call_query = list("id" = id,
@@ -212,21 +177,16 @@ rba_uniprot_taxonomy_path = function(id,
                     "depth" = depth)
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_uniprot"),
-                                    path = paste0(getOption("rba_pth_uniprot"),
-                                                  "taxonomy/path"),
-                                    query = call_query,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("uniprot", "url"),
+                           path = paste0(rba_ba_stg("uniprot", "pth"),
+                                         "taxonomy/path"),
+                           query = call_query,
+                           accept = "application/json",
+                           parser = "json->list_no_simp")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list_no_simp",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
 
@@ -249,37 +209,28 @@ rba_uniprot_taxonomy_relationship = function(from,
                                              progress_bar = FALSE,
                                              diagnostics = FALSE) {
   ## Check input arguments
-  invisible(rba_ba_args(cons = list(list(arg = from,
-                                         name = "from",
-                                         class = "numeric"),
-                                    list(arg = to,
-                                         name = "to",
-                                         class = "numeric")),
-                        diagnostics = diagnostics))
+  rba_ba_args(cons = list(list(arg = "from",
+                               class = "numeric"),
+                          list(arg = "to",
+                               class = "numeric"))
+  )
 
-  if (verbose == TRUE){
-    message("get /relationship This service returns the shortest path between two taxonomy nodes showing their relationship.")
-  }
+  v_msg(paste("get /relationship This service returns the shortest path between two taxonomy nodes showing their relationship."))
 
   ## build GET API request's query
   call_query = list("from" = from,
                     "to" = to)
 
   ## make function-specific calls
-  call_func_input = quote(httr::GET(url = getOption("rba_url_uniprot"),
-                                    path = paste0(getOption("rba_pth_uniprot"),
-                                                  "taxonomy/relationship"),
-                                    query = call_query,
-                                    httr::accept_json()
-  ))
+  input_call = rba_ba_httr(httr = "get",
+                           url = rba_ba_stg("uniprot", "url"),
+                           path = paste0(rba_ba_stg("uniprot", "pth"),
+                                         "taxonomy/relationship"),
+                           query = call_query,
+                           accept = "application/json",
+                           parser = "json->list_no_simp")
 
   ## call API
-  final_output = rba_ba_skeletion(call_function = call_func_input,
-                                  response_parser = "json->list_no_simp",
-                                  user_agent = TRUE,
-                                  progress_bar = progress_bar,
-                                  verbose = verbose,
-                                  diagnostics = diagnostics)
-
+  final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }

@@ -6,20 +6,19 @@
 \usage{
 rba_uniprot_variation_accession(
   accession,
+  save_peff = FALSE,
   source_type = NA,
   consequence_type = NA,
   wild_type = NA,
   alternative_sequence = NA,
   location = NA,
-  save_peff = FALSE,
-  save_to = NA,
   verbose = TRUE,
   progress_bar = FALSE,
   diagnostics = FALSE
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{accession}{}
 }
 \value{
 

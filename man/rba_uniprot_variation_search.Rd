@@ -10,6 +10,7 @@ reported in the output.}
 \usage{
 rba_uniprot_variation_search(
   accession = NA,
+  save_peff = FALSE,
   source_type = NA,
   consequence_type = NA,
   wild_type = NA,
@@ -21,8 +22,6 @@ rba_uniprot_variation_search(
   taxid = NA,
   db_type = NA,
   db_id = NA,
-  save_peff = FALSE,
-  save_to = NA,
   verbose = TRUE,
   progress_bar = FALSE,
   diagnostics = FALSE
