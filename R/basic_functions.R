@@ -457,22 +457,15 @@ rba_ba_httr = function(httr,
       ## 3.1.a it was up to the  end-user to choose the response type
       if (ext_args$save_to == FALSE) {
         httr_call = append(httr_call,
-                           list(
-                             str2lang(sub("!acc_inpt!",
-                                          ext_args$obj_accept,
-                                          'httr::accept("!acc_inpt!")'))))
+                           list(str2lang(sprintf("httr::accept(\"%s\")",
+                                              ext_args$obj_accept))))
         if (utils::hasName(ext_args, "obj_parser")) {parser = ext_args$obj_parser}
       } else {
         httr_call = append(httr_call,
-                           list(
-                             str2lang(sub("!acc_inpt!",
-                                          ext_args$file_accept,
-                                          'httr::accept("!acc_inpt!")'
-                             )),
-                             str2lang(sub("!svto!",
-                                          ext_args$save_to,
-                                          'httr::write_disk("!svto!", overwrite = TRUE)'
-                             ))
+                           list(str2lang(sprintf("httr::accept(\"%s\")",
+                                                 ext_args$file_accept)),
+                                str2lang(sprintf("httr::write_disk(\"%s\", overwrite = TRUE)",
+                                                 ext_args$save_to))
                            ))
         if (utils::hasName(ext_args, "file_parser")) {parser = ext_args$file_parser}
       }
@@ -481,18 +474,14 @@ rba_ba_httr = function(httr,
       # accept header?
       if (utils::hasName(ext_args, "accept")) {
         httr_call = append(httr_call,
-                           list(
-                             str2lang(sub("acc_inpt",
-                                          ext_args$accept,
-                                          'httr::accept("acc_inpt")'))))
+                           list(str2lang(sprintf("httr::accept(\"%s\")",
+                                              ext_args$accept))))
       }
       # save to file?
       if (utils::hasName(ext_args, "save_to") && ext_args$save_to != FALSE) {
         httr_call = append(httr_call,
-                           list(
-                             str2lang(sub("!svto!",
-                                          ext_args$save_to,
-                                          'httr::write_disk("!svto!", overwrite = TRUE)'))))
+                           list(str2lang(sprintf("httr::write_disk(\"%s\", overwrite = TRUE)",
+                                              ext_args$save_to))))
       }
       # parser?
       if (utils::hasName(ext_args, "parser")) {
