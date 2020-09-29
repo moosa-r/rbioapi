@@ -10,9 +10,13 @@
 rba_ba_stg = function(...){
   arg = c(...)
   #possible arguments
-  arg_1 = c("db", "enrichr", "ensembl", "reactome", "string", "uniprot")
+  arg_1 = c("db", "options", "enrichr", "ensembl", "reactome", "string", "uniprot")
   output = switch(match.arg(arg[[1]], arg_1),
                   db = c("enrichr", "ensembl", "reactome", "string", "uniprot"),
+                  options = switch(as.character(length(arg)),
+                                   "1" = options()[grep("^rba_",
+                                                        names(options()))],
+                                   getOption(arg[[2]])),
                   enrichr = switch(arg[[2]],
                                    name = "Enrichr",
                                    url = "https://amp.pharm.mssm.edu",
@@ -50,6 +54,7 @@ rba_ba_stg = function(...){
   )
   return(output)
 }
+
 ##### Internet connectivity ##################################################
 #' Handle situations when internet connection is disturbed or http statis 5xx
 #' @description changed name from rba_ba_internet_handler
@@ -106,17 +111,15 @@ rba_ba_net_handle = function(retry_max = 1,
 #'
 #' @examples
 rba_ba_api_check = function(url, diagnostics = FALSE){
-  if (diagnostics == TRUE){
-    test_result = try(httr::status_code(httr::HEAD(url,
-                                                   httr::user_agent(getOption("rba_ua")),
-                                                   httr::verbose())),
-                      silent = !diagnostics)
-  } else {
-    test_result = try(httr::status_code(httr::HEAD(url,
-                                                   httr::user_agent(getOption("rba_ua"))
-    )),
-    silent = !diagnostics)
+  request = quote(httr::HEAD(url = url,
+                             httr::user_agent(getOption("rba_user_agent"))))
+  if (diagnostics == TRUE) {
+    request = as.call(append(as.list(request),
+                             quote(httr::verbose())))
   }
+  test_result = try(httr::status_code(eval(request)),
+                    silent = !diagnostics)
+
   if (is.numeric(test_result)) {
     if (test_result == 200) {
       return("\U2705 The Server is Respoding.")
@@ -125,7 +128,6 @@ rba_ba_api_check = function(url, diagnostics = FALSE){
                    rba_ba_http_status(test_result,
                                       verbose = FALSE)))
     }
-
   } else {
     return(paste("\U274C", test_result))
   }
@@ -143,24 +145,24 @@ rba_connection_test = function(diagnostics = FALSE) {
   message("Checking Your connection to the Databases",
           " Currently Supported by rbioapi:")
 
-  urls = list("STRING" = paste0(getOption("rba_url_string"),
+  urls = list("STRING" = paste0(rba_ba_stg("string", "url"),
                                 "/api/json/version"),
-              "Enrichr" = paste0(getOption("rba_url_enrichr"),
+              "Enrichr" = paste0(rba_ba_stg("enrichr", "url"),
                                  "/Enrichr"),
-              "Ensembl" = paste0(getOption("rba_url_ensembl"),
+              "Ensembl" = paste0(rba_ba_stg("ensembl", "url"),
                                  "/info/ping"),
-              "Reactome_ContentService" = paste0(getOption("rba_url_reactome"),
+              "Reactome_ContentService" = paste0(rba_ba_stg("reactome", "url"),
                                                  "/ContentService/data/database/name"),
-              "Reactome_AnalysisService" = paste0(getOption("rba_url_reactome"),
+              "Reactome_AnalysisService" = paste0(rba_ba_stg("reactome", "url"),
                                                   "/AnalysisService/database/name"),
-              "UniProt" = paste0(getOption("rba_url_uniprot"),
+              "UniProt" = paste0(rba_ba_stg("uniprot", "url"),
                                  "/proteins/api/proteins/P25445")
   )
 
   cat("-", "Internet", ":\r\n")
   google = try(httr::status_code(httr::HEAD("https://www.google.com/",
                                             if (diagnostics) httr::verbose(),
-                                            httr::user_agent(getOption("rba_ua"))
+                                            httr::user_agent(getOption("rba_user_agent"))
   )
   ), silent = TRUE)
 
@@ -344,7 +346,9 @@ rba_ba_file = function(file_ext,
         }
       }
       #set dir name
-      dir_name = ifelse(is.na(dir_name), getOption("def_dir_name"), dir_name)
+      dir_name = ifelse(is.na(dir_name),
+                        yes = getOption("rba_dir_name"),
+                        no = dir_name)
       #set file path
       save_to = file.path(getwd(), dir_name, file_name)
       v_msg("Saving to: %s", save_to)
@@ -439,7 +443,7 @@ rba_ba_httr = function(httr,
                                call. = TRUE)),
                    url = as.character(url),
                    path = as.character(path),
-                   quote(httr::user_agent(getOption("rba_ua")))
+                   quote(httr::user_agent(getOption("rba_user_agent")))
   )
   if (diagnostics == TRUE) {
     httr_call = append(httr_call, quote(httr::verbose()))
@@ -593,8 +597,8 @@ rba_ba_skeleton = function(input_call,
   ## 1 Make API Call
   response = rba_ba_api_call(input_call = input_call$call,
                              skip_error = skip_error,
-                             no_interet_retry_max = getOption("max_retry"),
-                             no_internet_wait_time = getOption("wait_time"),
+                             no_interet_retry_max = getOption("rba_max_retry"),
+                             no_internet_wait_time = getOption("rba_wait_time"),
                              verbose = verbose,
                              diagnostics = diagnostics)
   ## 2 Parse the the response if possible
@@ -920,3 +924,4 @@ v_msg = function(msg, ...) {
   }
   invisible()
 }
+

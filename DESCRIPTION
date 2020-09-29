@@ -8,7 +8,7 @@ Description: This package provides an easy, user-friendly and unified access to
   Biological databases' API. rbioapi tries to provide a unified experience,
   effortless and of course, user-friendly interface to
   the most relevant Biological databases. The end user is not expected to have
-  knowlage about curl, api, http requests, etc.
+  knowlage about curl, api, http requests, and other technicalities.
   This is an on-going project; new databases will be implemented periodically.
   Do you see yourself querying data from a certain database which is not
   supported by this package? feel free to contact me and I will try to

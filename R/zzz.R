@@ -29,27 +29,21 @@ NULL
                         "STRING: Aug 04 2020\r\n",
                         "Enrichr: Aug 04 2020\r\n",
                         "Ensembl: Aug 13 2020\r\n",
-                        "Reactome: Aug 26 2020"
+                        "Reactome: Aug 26 2020\r\n",
+                        "UniProt: Sep 29 2020"
   )
-  ## save each database names & "base URL" as an option.
-  options("rba_url_string" = c("STRING" = "https://string-db.org"))
-  options("rba_url_enrichr" = c("Enrichr" = "https://amp.pharm.mssm.edu"))
-  options("rba_url_ensembl" = c("Ensembl" = "http://rest.ensembl.org"))
-  options("rba_url_reactome" = c("Reactome" = "https://reactome.org"))
-  options("rba_url_uniprot" = c("UniProt" = "https://www.ebi.ac.uk"))
-  options("rba_pth_uniprot" = c("UniProt" = "proteins/api/"))
-  ## save user agent for api Calls as an option
-  options("rba_ua" = "rbioapi R package") #default user agent
-  ## other global options
-  options("max_retry" = 1)
-  options("wait_time" = 10)
-  options("def_dir_name" = "rba")
-  options("rba_diagnostics" = FALSE)
-  options("rba_verbose" = TRUE)
-  options("rba_progress_bar" = FALSE)
 
 }
 
+.onLoad = function(libname, pkgname){
+  options(rba_dir_name = "rbioapi",
+          rba_diagnostics = FALSE,
+          rba_max_retry = 1,
+          rba_progress_bar = FALSE,
+          rba_user_agent = "rbioapi R package",
+          rba_verbose = TRUE,
+          rba_wait_time = 10)
+}
 
 genes = c("p53", "BRCA1", "cdk2", "Q99835", "CDC42","CDK1","KIF23","PLK1",
           "RAC2","RACGAP1","RHOA","RHOB", "PHF14", "RBM3", "MSL1",
