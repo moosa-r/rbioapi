@@ -36,13 +36,15 @@ NULL
 }
 
 .onLoad = function(libname, pkgname){
-  options(rba_dir_name = "rbioapi",
+  options(rba_client_timeout = 30,
+          rba_dir_name = "rbioapi",
           rba_diagnostics = FALSE,
           rba_max_retry = 1,
           rba_progress_bar = FALSE,
           rba_user_agent = "rbioapi R package",
           rba_verbose = TRUE,
           rba_wait_time = 10)
+  invisible()
 }
 
 genes = c("p53", "BRCA1", "cdk2", "Q99835", "CDC42","CDK1","KIF23","PLK1",

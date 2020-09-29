@@ -73,6 +73,7 @@ rba_ba_net_handle = function(retry_max = 1,
                              diagnostics = FALSE) {
   if (diagnostics == TRUE) {message("Testing the internet connection.")}
   net_status = try(httr::status_code(httr::HEAD("https://www.google.com/",
+                                                httr::timeout(getOption("rba_client_timeout")),
                                                 if (diagnostics)
                                                   httr::verbose())),
                    silent = TRUE)
@@ -87,6 +88,7 @@ rba_ba_net_handle = function(retry_max = 1,
                                   retry_max, ")")}
     Sys.sleep(wait_time)
     net_status = try(httr::status_code(httr::HEAD("https://www.google.com/",
+                                                  httr::timeout(getOption("rba_client_timeout")),
                                                   if (diagnostics)
                                                     httr::verbose())),
                      silent = TRUE)
@@ -112,6 +114,7 @@ rba_ba_net_handle = function(retry_max = 1,
 #' @examples
 rba_ba_api_check = function(url, diagnostics = FALSE){
   request = quote(httr::HEAD(url = url,
+                             httr::timeout(getOption("rba_client_timeout")),
                              httr::user_agent(getOption("rba_user_agent"))))
   if (diagnostics == TRUE) {
     request = as.call(append(as.list(request),
@@ -162,7 +165,8 @@ rba_connection_test = function(diagnostics = FALSE) {
   cat("-", "Internet", ":\r\n")
   google = try(httr::status_code(httr::HEAD("https://www.google.com/",
                                             if (diagnostics) httr::verbose(),
-                                            httr::user_agent(getOption("rba_user_agent"))
+                                            httr::user_agent(getOption("rba_user_agent")),
+                                            httr::timeout(getOption("rba_client_timeout"))
   )
   ), silent = TRUE)
 
@@ -443,7 +447,8 @@ rba_ba_httr = function(httr,
                                call. = TRUE)),
                    url = as.character(url),
                    path = as.character(path),
-                   quote(httr::user_agent(getOption("rba_user_agent")))
+                   quote(httr::user_agent(getOption("rba_user_agent"))),
+                   quote(httr::timeout(getOption("rba_client_timeout")))
   )
   if (diagnostics == TRUE) {
     httr_call = append(httr_call, quote(httr::verbose()))
@@ -925,3 +930,50 @@ v_msg = function(msg, ...) {
   invisible()
 }
 
+#### Options ####
+#' Set rbioAPI global options
+#'
+#' @param verbose
+#' @param diagnostics
+#' @param progress_bar
+#' @param default_dir_name
+#' @param wait_time
+#' @param max_retries
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_options = function(verbose = NA,
+                       diagnostics = NA,
+                       progress_bar = NA,
+                       default_dir_name = NA,
+                       client_timeout = NA,
+                       wait_time = NA,
+                       max_retries = NA) {
+  rba_ba_args(cons = list(list(arg = "default_dir_name",
+                               class = "character",
+                               len = 1),
+                          list(arg = "wait_time",
+                               class = "numeric",
+                               len = 1,
+                               min_val = 1),
+                          list(arg = "client_timeout",
+                               class = "numeric",
+                               len = 1,
+                               min_val = 0.1),
+                          list(arg = "max_retries",
+                               class = "numeric",
+                               len = 1)),
+              cond = list(list(quote(!is.na(default_dir_name) &&
+                                       !grepl("\\/?%*:|\"<>", default_dir_name)),
+                               "default_dir_name should be a valid directory name.")))
+  if (!is.na(verbose)) options(rba_verbose = verbose)
+  if (!is.na(diagnostics)) options(rba_diagnostics = diagnostics)
+  if (!is.na(progress_bar)) options(rba_progress_bar = progress_bar)
+  if (!is.na(default_dir_name)) options(rba_dir_name = default_dir_name)
+  if (!is.na(client_timeout)) options(rba_client_timeout = client_timeout)
+  if (!is.na(wait_time)) options(rba_wait_time = wait_time)
+  if (!is.na(max_retries)) options(rba_max_retry = max_retries)
+  invisible()
+}
