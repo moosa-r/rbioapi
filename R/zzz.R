@@ -17,7 +17,7 @@
 NULL
 
 .onAttach = function(libname, pkgname) {
-  packageStartupMessage("Welcome to rbioAPI.\r\n",
+  packageStartupMessage("Welcome to rbioapi.\r\n",
                         "This package provides an easy, user-friendly and ",
                         "unified access to Biological databases' API from R.\r\n",
                         "Due to nature of this package, some function could ",

@@ -72,10 +72,11 @@ rba_ba_net_handle = function(retry_max = 1,
                              verbose = FALSE,
                              diagnostics = FALSE) {
   if (diagnostics == TRUE) {message("Testing the internet connection.")}
-  net_status = try(httr::status_code(httr::HEAD("https://www.google.com/",
-                                                httr::timeout(getOption("rba_client_timeout")),
-                                                if (diagnostics)
-                                                  httr::verbose())),
+  test_call = quote(httr::status_code(httr::HEAD("https://www.google.com/",
+                                                 httr::timeout(getOption("rba_client_timeout")),
+                                                 if (diagnostics) httr::verbose()
+  )))
+  net_status = try(eval(test_call),
                    silent = TRUE)
   retry_count = 0
 
@@ -88,10 +89,7 @@ rba_ba_net_handle = function(retry_max = 1,
                       retry_max))
     }
     Sys.sleep(wait_time)
-    net_status = try(httr::status_code(httr::HEAD("https://www.google.com/",
-                                                  httr::timeout(getOption("rba_client_timeout")),
-                                                  if (diagnostics)
-                                                    httr::verbose())),
+    net_status = try(eval(test_call),
                      silent = TRUE)
   } #end of while
 
@@ -116,11 +114,9 @@ rba_ba_net_handle = function(retry_max = 1,
 rba_ba_api_check = function(url, diagnostics = FALSE){
   request = quote(httr::HEAD(url = url,
                              httr::timeout(getOption("rba_client_timeout")),
-                             httr::user_agent(getOption("rba_user_agent"))))
-  if (diagnostics == TRUE) {
-    request = as.call(append(as.list(request),
-                             quote(httr::verbose())))
-  }
+                             httr::user_agent(getOption("rba_user_agent")),
+                             if (diagnostics) httr::verbose()
+  ))
   test_result = try(httr::status_code(eval(request)),
                     silent = !diagnostics)
 
@@ -155,10 +151,10 @@ rba_connection_test = function(diagnostics = FALSE) {
                                  "/Enrichr"),
               "Ensembl" = paste0(rba_ba_stg("ensembl", "url"),
                                  "/info/ping"),
-              "Reactome_ContentService" = paste0(rba_ba_stg("reactome", "url"),
-                                                 "/ContentService/data/database/name"),
-              "Reactome_AnalysisService" = paste0(rba_ba_stg("reactome", "url"),
-                                                  "/AnalysisService/database/name"),
+              "Reactome Content Service" = paste0(rba_ba_stg("reactome", "url"),
+                                                  "/ContentService/data/database/name"),
+              "Reactome Analysis Service" = paste0(rba_ba_stg("reactome", "url"),
+                                                   "/AnalysisService/database/name"),
               "UniProt" = paste0(rba_ba_stg("uniprot", "url"),
                                  "/proteins/api/proteins/P25445")
   )
@@ -167,9 +163,8 @@ rba_connection_test = function(diagnostics = FALSE) {
   google = try(httr::status_code(httr::HEAD("https://www.google.com/",
                                             if (diagnostics) httr::verbose(),
                                             httr::user_agent(getOption("rba_user_agent")),
-                                            httr::timeout(getOption("rba_client_timeout"))
-  )
-  ), silent = TRUE)
+                                            httr::timeout(getOption("rba_client_timeout"))))
+               , silent = TRUE)
 
   if (google == 200) {
     cat("\U2705 Connected to the Internet.\r\n")
@@ -184,7 +179,6 @@ rba_connection_test = function(diagnostics = FALSE) {
     cat(rba_ba_api_check(urls[[i]], diagnostics = diagnostics), "\r\n")
   }
   invisible()
-
 }
 
 #' Translate HTTP status code to human readable explanation
@@ -378,7 +372,7 @@ rba_ba_file = function(file_ext,
 rba_ba_query = function(init, ...) {
   ## check the input method
   ext_par = list(...)
-  if (utils::hasName(ext_par, "extra_pars")){
+  if (utils::hasName(ext_par, "extra_pars")) {
     ext_par = ext_par$extra_pars
   }
   ## evaluate extra parameters
@@ -493,13 +487,11 @@ rba_ba_httr = function(httr,
       } else {
         parser = NULL
       }
-
     }
     ### remove extra arguments that you don't want in httr function call
     ext_args = ext_args[!grepl("^(?:accept|file_accept|obj_accept|save_to|\\w*parser)$",
                                names(ext_args))]
   } #end of if (length(ext_args...
-
   httr_call = list(call = as.call(append(httr_call, ext_args)),
                    parser = parser)
   return(httr_call)
@@ -550,26 +542,24 @@ rba_ba_api_call = function(input_call,
   ## 3 Decide what to return
   if (class(response) != "response") {
     ## 3.1 errors un-related to server's response
-    err_msg = response
+    error_message = response
     if (skip_error == TRUE) {
-      return(err_msg, call. = diagnostics)
+      return(error_message, call. = diagnostics)
     } else {
-      stop(err_msg, call. = diagnostics)
+      stop(error_message, call. = diagnostics)
     }
   } else if (as.character(response$status_code) != "200") {
     ## 3.2 API call was not successful
-    error_message = rba_ba_error_parser(response, verbose)
+    error_message = rba_ba_error_parser(response = response, verbose = verbose)
     if (skip_error == TRUE) {
       return(error_message)
     } else {
-      stop(error_message,
-           call. = diagnostics)
+      stop(error_message, call. = diagnostics)
     }
   } else {
     ## 3.3 Everything is OK (HTTP status == 200)
     return(response)
   }
-
 }
 
 #' General skeleton for all functions in the package
@@ -648,15 +638,12 @@ rba_ba_args = function(cons = NULL,
   #      )
 
   ### 0 set diagnostics
-  if (exists("diagnostics", envir = parent.frame(1))) {
-    diagnostics = eval(parse(text = "diagnostics"),
-                       envir = parent.frame())
-    if (!is.logical(diagnostics) | is.na(diagnostics)) {
-      diagnostics = getOption("rba_diagnostics")
-    }
-  } else {
+  diagnostics = get0("diagnostics",
+                     envir = parent.frame())
+  if (is.null(diagnostics) || is.na(diagnostics) || !is.logical(diagnostics)) {
     diagnostics = getOption("rba_diagnostics")
   }
+
   ### 1 append extra arguments which occurs in most functions:
   ## all available options to the users
   ext_cons = list(client_timeout = list(arg = "client_timeout",
@@ -689,7 +676,7 @@ rba_ba_args = function(cons = NULL,
                                    len = 1,
                                    min_val = 1))
   rba_opts = getOption("rba_user_options")
-  # stopifnot(setequal(names(rba_opts), names(ext_cons)))
+  stopifnot(setequal(rba_opts, names(ext_cons)))
 
   ## only keep the provided options (e.g. extra arguments)
   exist_opts = rba_opts[which(rba_opts %in% ls(envir = parent.frame(1)))]
@@ -723,17 +710,17 @@ rba_ba_args = function(cons = NULL,
         if (utils::hasName(cons_i, "class") &&
             !class(arg) %in% cons_i[["class"]]) {
           errors = append(errors,
-                          sprintf("Invalid Argument: %s should be of class \"%s\".\r\n\t(Your provided argument is \"%s\".)",
+                          sprintf("Invalid Argument; %s should be of class \"%s\".\r\n\t(Your provided argument is \"%s\".)",
                                   arg_name,
                                   paste0(cons_i[["class"]], collapse = " or "),
                                   class(arg)))
         } else {
-          ## only continue checking if the class is ok!
+          ## only continue checking if the class is correct
           # check for allowed values
           if (utils::hasName(cons_i, "val") &&
               !all(arg %in% cons_i[["val"]])) {
             errors = append(errors,
-                            sprintf("Invalid Argument: %s should be either \"%s\".\r\n\t(Your provided argument is \"%s\".)",
+                            sprintf("Invalid Argument; %s should be either `%s`.\r\n\t(Your provided argument is `%s`.)",
                                     arg_name,
                                     paste0(cons_i[["val"]], collapse = " or "),
                                     arg))
@@ -743,7 +730,7 @@ rba_ba_args = function(cons = NULL,
               !all(arg >= cons_i[["ran"]][[1]] &
                    arg <= cons_i[["ran"]][[2]])) {
             errors = append(errors,
-                            sprintf("Invalid Argument: %s should be \"from %s to %s\".\r\n\t(Your provided argument is \"%s\".)",
+                            sprintf("Invalid Argument; %s should be `from %s to %s`.\r\n\t(Your provided argument is `%s`.)",
                                     arg_name,
                                     cons_i[["ran"]][[1]],
                                     cons_i[["ran"]][[2]],
@@ -753,7 +740,7 @@ rba_ba_args = function(cons = NULL,
           if (utils::hasName(cons_i, "len") &&
               length(arg) != cons_i[["len"]]) {
             errors = append(errors,
-                            sprintf("Invalid Argument: %s should be of length \"%s\".\r\n\t(Your provided argument's length is \"%s\".)",
+                            sprintf("Invalid Argument; %s should be of length `%s`.\r\n\t(Your provided argument's length is `%s`.)",
                                     arg_name,
                                     cons_i[["len"]],
                                     length(arg)))
@@ -762,7 +749,7 @@ rba_ba_args = function(cons = NULL,
           if (utils::hasName(cons_i, "min_len") &&
               length(arg) < cons_i[["min_len"]]) {
             errors = append(errors,
-                            sprintf("Invalid Argument: %s should be of minimum length \"%s\".\r\n\t(Your provided argument's length is \"%s\".)",
+                            sprintf("Invalid Argument; %s should be of minimum length `%s`.\r\n\t(Your provided argument's length is `%s`.)",
                                     arg_name,
                                     cons_i[["min_len"]],
                                     length(arg)))
@@ -771,7 +758,7 @@ rba_ba_args = function(cons = NULL,
           if (utils::hasName(cons_i, "max_len") &&
               length(arg) > cons_i[["max_len"]]) {
             errors = append(errors,
-                            sprintf("Invalid Argument: %s should be of maximum length \"%s\".\r\n\t(Your provided argument's length is \"%s\".)",
+                            sprintf("Invalid Argument: %s should be of maximum length `%s`.\r\n\t(Your provided argument's length is `%s`.)",
                                     arg_name,
                                     cons_i[["max_len"]],
                                     length(arg)))
@@ -780,7 +767,7 @@ rba_ba_args = function(cons = NULL,
           if (utils::hasName(cons_i, "min_val")
               && arg < cons_i[["min_val"]]) {
             errors = append(errors,
-                            sprintf("Invalid Argument: %s should be equal to or greater than \"%s\".\r\n\t(Your provided argument is \"%s\".)",
+                            sprintf("Invalid Argument: %s should be equal to or greater than `%s`.\r\n\t(Your provided argument is `%s`.)",
                                     arg_name,
                                     cons_i[["min_val"]],
                                     arg))
@@ -789,22 +776,21 @@ rba_ba_args = function(cons = NULL,
           if (utils::hasName(cons_i, "max_val")
               && arg > cons_i[["max_val"]]) {
             errors = append(errors,
-                            sprintf("Invalid Argument: %s should be equal to or less than \"%s\".\r\n\t(Your provided argument is \"%s\".)",
+                            sprintf("Invalid Argument: %s should be equal to or less than `%s`.\r\n\t(Your provided argument is `%s`.)",
                                     arg_name,
                                     cons_i[["max_val"]],
                                     arg))
           }
-        }
-
+        } # end of if (utils::hasName(cons_i, "class") &&...
       } # end of if (!all(is.na(arg)) & !all(is.null(arg)))
-    } # end of for (i in seq_along(cons))
-  }
+    } #end of if (class(arg) == "try-error")
+  } # end of for (i in seq_along(cons))
   ## 2.2 take actions for the errors
   if (length(errors) == 1) {
     stop(errors, call. = diagnostics)
   } else if (length(errors) > 1) {
     error_message = paste0("\r\n", 1:length(errors), "- ", errors)
-    stop(sprintf("The following \"%s Errors\" was raised during your provided argument's check:",
+    stop(sprintf("The following `%s Errors` was raised during your provided argument's check:",
                  length(errors)),
          error_message,
          call. = diagnostics)
@@ -812,9 +798,10 @@ rba_ba_args = function(cons = NULL,
 
   ### Check relationship between arguments
   if (!all(is.null(cond))) {
+    cond_errors = c()
     for (i in seq_along(cond)) {
       cond_i = cond[[i]]
-      # 3.1 check if the expression is TRUE
+      # 3.1.1 evaluate the expression
       if (is.call(cond_i[[1]])) {
         cond_i_1 = eval(cond_i[[1]], envir = parent.frame(1))
       } else if (is.character(cond_i[[1]])) {
@@ -823,21 +810,31 @@ rba_ba_args = function(cons = NULL,
         stop("Internal error, the first element in the condition sublist",
              "should be either a charachter or quoted call!", call. = TRUE)
       }
+      # 3.1.2 check if the expression is TRUE
       if (cond_i_1 == TRUE){
-        # 3.2 produce the message
-        if (length(cond_i) > 1) {
-          cond_message = cond_i[[2]]
-        } else {
-          cond_message = sprintf("Argument's conditions are not satisfied:\r\n\t\"%s\" is TRUE.",
-                                 paste(cond_i[[1]], collapse = " "))
-        }
-        # 3.3 stop or warn!
-        if (cond_warning == TRUE) { warning(cond_message, call. = diagnostics)
-        } else { stop(cond_message, call. = diagnostics) }
+        #add the error message if existed
+        cond_i_error = ifelse(length(cond_i) > 1,
+                              yes = cond_i[[2]],
+                              no = sprintf("Argument's conditions are not satisfied; `%s` is TRUE.",
+                                           as.character(cond_i[[1]])))
+        cond_errors = append(cond_errors, cond_i_error)
       }
     } #end of for (i in seq_along(cond))
-  } # end of if (!all(is.null(cond)))
 
+    # 3.2 produce the message
+    if (length(cond_errors) == 1) {
+      cond_message = cond_errors
+    } else if (length(cond_errors) > 1) {
+      cond_message = paste0("\r\n", 1:length(cond_errors), "- ", cond_errors, collapse = "")
+      cond_message = sprintf("The following `%s Conditional Errors` was raised during your provided argument's check:%s",
+                             length(cond_message),
+                             cond_message)
+    }
+    # 3.3 stop or warn!
+    if (cond_warning == TRUE) {
+      warning(cond_message, call. = diagnostics)
+    } else { stop(cond_message, call. = diagnostics) }
+  } # end of if (!all(is.null(cond)))
   invisible()
 }
 
@@ -889,7 +886,6 @@ rba_ba_response_parser = function(parser) {
   # parse the response
   output = eval(parser, envir = parent.frame())
   return(output)
-
 }
 
 #' Try to Parse an appropriate error response
@@ -952,7 +948,7 @@ v_msg = function(msg, ...) {
 }
 
 #### Options ####
-#' Set rbioAPI global options
+#' Set rbioapi global options
 #'
 #' @param client_timeout
 #' @param diagnostics
@@ -1010,18 +1006,20 @@ rba_options = function(client_timeout = NA,
 #' @examples
 rba_ba_ext_args = function(...) {
   ext_args = list(...)
-  # available options for the end-users
-  rba_opts = getOption("rba_user_options")
-  # did the user provided non valid arguments?
-  non_valid = setdiff(names(ext_args), rba_opts)
-  if (any(non_valid == "")) {
-    warning("You provided unnamed extra arguments, thus were ignored.",
-            call. = FALSE)
-    non_valid = non_valid[which(non_valid != "")]
-  }
-  if (length(non_valid) > 0) {
-    warning(non_valid, " are not valid rbioapi options, thus were ignored.\r\n",
-            call. = FALSE)
+  rba_opts = getOption("rba_user_options") # available options for the end-users
+  if (length(ext_args) > 0) {
+    # did the user provided non valid arguments?
+    non_valid = setdiff(names(ext_args), rba_opts)
+    if (is.null(names(ext_args)) | any(non_valid == "")) {
+      warning("You provided unnamed extra arguments, thus were ignored.",
+              call. = FALSE)
+      non_valid = non_valid[which(non_valid != "")]
+    }
+    if (length(non_valid) > 0) {
+      warning(sprintf("`%s` are not valid rbioapi options, thus were ignored.\r\n",
+                      paste(non_valid, collapse = " & "),
+                      call. = FALSE))
+    }
   }
   # create the objects in the calling function's environment
   for (opt in rba_opts) {

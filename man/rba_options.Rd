@@ -2,7 +2,7 @@
 % Please edit documentation in R/basic_functions.R
 \name{rba_options}
 \alias{rba_options}
-\title{Set rbioAPI global options}
+\title{Set rbioapi global options}
 \usage{
 rba_options(
   client_timeout = NA,
@@ -22,5 +22,5 @@ rba_options(
 
 }
 \description{
-Set rbioAPI global options
+Set rbioapi global options
 }
