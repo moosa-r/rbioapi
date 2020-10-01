@@ -81,11 +81,12 @@ rba_ba_net_handle = function(retry_max = 1,
 
   while (net_status != 200 & retry_count < retry_max) {
     retry_count = retry_count + 1
-    if (verbose == TRUE) {message("No internet connection, waiting for ",
-                                  wait_time,
-                                  " seconds and retrying (retry count: ",
-                                  retry_count, "/",
-                                  retry_max, ")")}
+    if (verbose == TRUE) {
+      message(sprintf("No internet connection, waiting for %s seconds and retrying (retry count:  %s/%s)",
+                      wait_time,
+                      retry_count,
+                      retry_max))
+      }
     Sys.sleep(wait_time)
     net_status = try(httr::status_code(httr::HEAD("https://www.google.com/",
                                                   httr::timeout(getOption("rba_client_timeout")),
@@ -309,12 +310,8 @@ rba_ba_file = function(file_ext,
                        save_to = TRUE) {
   if (save_to != FALSE) {
     # 1 file path will be generated unless save_to == FALSE
-    diagnostics = ifelse(exists("diagnostics", envir = parent.frame(1)),
-                         eval(parse(text = "diagnostics"), envir = parent.frame(1)),
-                         getOption("rba_diagnostics"))
-    verbose = ifelse(exists("verbose", envir = parent.frame(1)),
-                     eval(parse(text = "verbose"), envir = parent.frame(1)),
-                     getOption("rba_verbose"))
+    diagnostics = eval(parse(text = "diagnostics"), envir = parent.frame(1))
+    verbose = eval(parse(text = "verbose"), envir = parent.frame(1))
 
     if (is.character(save_to)) {
       # 2 the user provided a file path, just check if it is valid
@@ -351,11 +348,12 @@ rba_ba_file = function(file_ext,
       }
       #set dir name
       dir_name = ifelse(is.na(dir_name),
-                        yes = getOption("rba_dir_name"),
+                        yes = eval(parse(text = "dir_name"),
+                                   envir = parent.frame(1)),
                         no = dir_name)
       #set file path
       save_to = file.path(getwd(), dir_name, file_name)
-      v_msg("Saving to: %s", save_to)
+      if (verbose == TRUE) {message("Saving to: ", save_to)}
     }
     ### 4 create the directory
     dir.create(dirname(save_to),
@@ -422,13 +420,10 @@ rba_ba_httr = function(httr,
                        url = NULL,
                        path = NULL,
                        ...) {
-  ## assign diagnostics and progress_bar
-  diagnostics = ifelse(exists("diagnostics", envir = parent.frame(1)),
-                       eval(parse(text = "diagnostics"), envir = parent.frame(1)),
-                       getOption("rba_diagnostics"))
-  progress_bar = ifelse(exists("progress_bar", envir = parent.frame(1)),
-                        eval(parse(text = "progress_bar"), envir = parent.frame(1)),
-                        getOption("rba_progress_bar"))
+  ## assign global options
+  diagnostics = eval(parse(text = "diagnostics"), envir = parent.frame(1))
+  progress_bar = eval(parse(text = "progress_bar"), envir = parent.frame(1))
+  client_timeout = eval(parse(text = "client_timeout"), envir = parent.frame(1))
 
   ### 1 capture extra arguments
   # possible args: all args supported by httr +
@@ -448,7 +443,7 @@ rba_ba_httr = function(httr,
                    url = as.character(url),
                    path = as.character(path),
                    quote(httr::user_agent(getOption("rba_user_agent"))),
-                   quote(httr::timeout(getOption("rba_client_timeout")))
+                   quote(httr::timeout(client_timeout))
   )
   if (diagnostics == TRUE) {
     httr_call = append(httr_call, quote(httr::verbose()))
@@ -590,20 +585,18 @@ rba_ba_api_call = function(input_call,
 #'
 #' @examples
 rba_ba_skeleton = function(input_call,
-                           response_parser = NULL,
-                           skip_error = FALSE) {
-  ## 0 assign verbose & diagnostics
-  diagnostics = ifelse(exists("diagnostics", envir = parent.frame(1)),
-                       eval(parse(text = "diagnostics"), envir = parent.frame(1)),
-                       getOption("rba_diagnostics"))
-  verbose = ifelse(exists("verbose", envir = parent.frame(1)),
-                   eval(parse(text = "verbose"), envir = parent.frame(1)),
-                   getOption("rba_verbose"))
+                           response_parser = NULL) {
+  ## 0 assign options variables
+  diagnostics = eval(parse(text = "diagnostics"), envir = parent.frame(1))
+  verbose = eval(parse(text = "verbose"), envir = parent.frame(1))
+  max_retries = eval(parse(text = "max_retries"), envir = parent.frame(1))
+  wait_time = eval(parse(text = "wait_time"), envir = parent.frame(1))
+  skip_error = eval(parse(text = "skip_error"), envir = parent.frame(1))
   ## 1 Make API Call
   response = rba_ba_api_call(input_call = input_call$call,
                              skip_error = skip_error,
-                             no_interet_retry_max = getOption("rba_max_retry"),
-                             no_internet_wait_time = getOption("rba_wait_time"),
+                             no_interet_retry_max = max_retries,
+                             no_internet_wait_time = wait_time,
                              verbose = verbose,
                              diagnostics = diagnostics)
   ## 2 Parse the the response if possible
@@ -641,40 +634,68 @@ rba_ba_skeleton = function(input_call,
 rba_ba_args = function(cons = NULL,
                        cond = NULL,
                        cond_warning = FALSE){
-  ## per each argument,the function input "cons" should be a named
+  # per each argument,the function input "cons" should be a named
   # sub-list with one of these members:
   # arg, class, val, range, min_val, max_val, len, min_len, max_len,
-  ## example:
+  # example:
   # list(arg = progress_bar, name = "progress_bar", class = "logical")
 
-  ### "cond" should be sub-list containing an expression to be evaluated
-  ### and an optional error message.
+  # "cond" should be sub-list containing an expression to be evaluated
+  # and an optional error message.
   # example:
   # list(list(quote(genes < background),
   #           "Provided genes length cannot be greater than the background")
   #      )
 
-  ### 1 append extra arguments which occurs in most functions:
+  ### 0 set diagnostics
   if (exists("diagnostics", envir = parent.frame(1))) {
-    cons = append(list(list(arg = "diagnostics",
-                            class = "logical",
-                            len = 1)),
-                  cons)
     diagnostics = eval(parse(text = "diagnostics"),
                        envir = parent.frame())
+    if (!is.logical(diagnostics) | is.na(diagnostics)) {
+      diagnostics = getOption("rba_diagnostics")
+    }
   } else {
     diagnostics = getOption("rba_diagnostics")
   }
-  if (exists("verbose", envir = parent.frame(1))) {
-    cons = append(cons, list(list(arg = "verbose",
-                                  class = "logical",
-                                  len = 1)))
-  }
-  if (exists("progress_bar", envir = parent.frame(1))) {
-    cons = append(cons, list(list(arg = "progress_bar",
-                                  class = "logical",
-                                  len = 1)))
-  }
+  ### 1 append extra arguments which occurs in most functions:
+  ## all available options to the users
+  ext_cons = list(client_timeout = list(arg = "client_timeout",
+                                        class = "numeric",
+                                        len = 1,
+                                        min_val = 0.1),
+                  dir_name = list(arg = "dir_name",
+                                  class = "character",
+                                  len = 1),
+                  diagnostics = list(arg = "diagnostics",
+                                     class = "logical",
+                                     len = 1),
+                  max_retries = list(arg = "max_retries",
+                                     class = "numeric",
+                                     len = 1),
+                  progress_bar = list(arg = "progress_bar",
+                                      class = "logical",
+                                      len = 1),
+                  save_resp_file = list(arg = "save_resp_file",
+                                        class = "logical",
+                                        len = 1),
+                  skip_error = list(arg = "skip_error",
+                                        class = "logical",
+                                        len = 1),
+                  verbose = list(arg = "verbose",
+                                 class = "logical",
+                                 len = 1),
+                  wait_time = list(arg = "wait_time",
+                                   class = "numeric",
+                                   len = 1,
+                                   min_val = 1))
+  rba_opts = getOption("rba_user_options")
+  # stopifnot(setequal(names(rba_opts), names(ext_cons)))
+
+  ## only keep the provided options (e.g. extra arguments)
+  exist_opts = rba_opts[which(rba_opts %in% ls(envir = parent.frame(1)))]
+  ext_cons = unname(ext_cons[exist_opts])
+  ## append
+  cons = append(ext_cons, cons)
 
   ### 2 Check arguments
   errors = c()
@@ -789,7 +810,7 @@ rba_ba_args = function(cons = NULL,
          call. = diagnostics)
   }
 
-  ###   Check relationship between arguments
+  ### Check relationship between arguments
   if (!all(is.null(cond))) {
     for (i in seq_along(cond)) {
       cond_i = cond[[i]]
@@ -933,47 +954,79 @@ v_msg = function(msg, ...) {
 #### Options ####
 #' Set rbioAPI global options
 #'
-#' @param verbose
+#' @param client_timeout
 #' @param diagnostics
-#' @param progress_bar
-#' @param default_dir_name
-#' @param wait_time
+#' @param dir_name
 #' @param max_retries
+#' @param progress_bar
+#' @param skip_error
+#' @param verbose
+#' @param wait_time
 #'
 #' @return
 #' @export
 #'
 #' @examples
-rba_options = function(verbose = NA,
+rba_options = function(client_timeout = NA,
                        diagnostics = NA,
+                       dir_name = NA,
+                       max_retries = NA,
                        progress_bar = NA,
-                       default_dir_name = NA,
-                       client_timeout = NA,
-                       wait_time = NA,
-                       max_retries = NA) {
-  rba_ba_args(cons = list(list(arg = "default_dir_name",
-                               class = "character",
-                               len = 1),
-                          list(arg = "wait_time",
-                               class = "numeric",
-                               len = 1,
-                               min_val = 1),
-                          list(arg = "client_timeout",
-                               class = "numeric",
-                               len = 1,
-                               min_val = 0.1),
-                          list(arg = "max_retries",
-                               class = "numeric",
-                               len = 1)),
-              cond = list(list(quote(!is.na(default_dir_name) &&
-                                       !grepl("\\/?%*:|\"<>", default_dir_name)),
-                               "default_dir_name should be a valid directory name.")))
-  if (!is.na(verbose)) options(rba_verbose = verbose)
-  if (!is.na(diagnostics)) options(rba_diagnostics = diagnostics)
-  if (!is.na(progress_bar)) options(rba_progress_bar = progress_bar)
-  if (!is.na(default_dir_name)) options(rba_dir_name = default_dir_name)
+                       skip_error = NA,
+                       verbose = NA,
+                       wait_time = NA) {
+  rba_ba_args(cond = list(list(quote(!is.na(dir_name) &&
+                                       !grepl("\\/?%*:|\"<>", dir_name)),
+                               "dir_name should be a valid directory name.")))
+  ## if empty function was called, show the available options
+  if (all(sapply(ls(),
+                 function(x) {is.na(eval(parse(text = x)))}))) {
+    cat("Available global options are:\r\n",
+        paste(getOption("rba_user_options"), collapse = ", "))
+  }
+  ## change the provided options
   if (!is.na(client_timeout)) options(rba_client_timeout = client_timeout)
+  if (!is.na(diagnostics)) options(rba_diagnostics = diagnostics)
+  if (!is.na(dir_name)) options(rba_dir_name = dir_name)
+  if (!is.na(max_retries)) options(rba_max_retries = max_retries)
+  if (!is.na(progress_bar)) options(rba_progress_bar = progress_bar)
+  if (!is.na(skip_error)) options(rba_skip_error = skip_error)
+  if (!is.na(verbose)) options(rba_verbose = verbose)
   if (!is.na(wait_time)) options(rba_wait_time = wait_time)
-  if (!is.na(max_retries)) options(rba_max_retry = max_retries)
+
+  invisible()
+}
+
+#' Temporary change a rbioapi option during a function call
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ba_ext_args = function(...) {
+  ext_args = list(...)
+  # available options for the end-users
+  rba_opts = getOption("rba_user_options")
+  # did the user provided non valid arguments?
+  non_valid = setdiff(names(ext_args), rba_opts)
+  if (any(non_valid == "")) {
+    warning("You provided unnamed extra arguments, thus were ignored.",
+            call. = FALSE)
+    non_valid = non_valid[which(non_valid != "")]
+  }
+  if (length(non_valid) > 0) {
+    warning(non_valid, " are not valid rbioapi options, thus were ignored.\r\n",
+            call. = FALSE)
+  }
+  # create the objects in the calling function's environment
+  for (opt in rba_opts) {
+    assign(x = opt,
+           value = ifelse(hasName(ext_args, opt),
+                          yes = ext_args[[opt]],
+                          no = getOption(paste0("rba_", opt))),
+           envir = parent.frame())
+  }
   invisible()
 }

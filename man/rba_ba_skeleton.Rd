@@ -4,7 +4,7 @@
 \alias{rba_ba_skeleton}
 \title{General skeleton for all functions in the package}
 \usage{
-rba_ba_skeleton(input_call, response_parser = NULL, skip_error = FALSE)
+rba_ba_skeleton(input_call, response_parser = NULL)
 }
 \arguments{
 \item{input_call}{}

@@ -5,17 +5,18 @@
 \title{Set rbioAPI global options}
 \usage{
 rba_options(
-  verbose = NA,
-  diagnostics = NA,
-  progress_bar = NA,
-  default_dir_name = NA,
   client_timeout = NA,
-  wait_time = NA,
-  max_retries = NA
+  diagnostics = NA,
+  dir_name = NA,
+  max_retries = NA,
+  progress_bar = NA,
+  skip_error = NA,
+  verbose = NA,
+  wait_time = NA
 )
 }
 \arguments{
-\item{max_retries}{}
+\item{wait_time}{}
 }
 \value{
 
