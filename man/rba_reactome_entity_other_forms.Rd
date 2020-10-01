@@ -7,15 +7,10 @@ These other forms are PhysicalEntities that share the same ReferenceEntity
 identifier, e.g. PTEN H93R R-HSA-2318524 and PTEN C124R R-HSA-2317439
 are two forms of PTEN.}
 \usage{
-rba_reactome_entity_other_forms(
-  entity_id,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_reactome_entity_other_forms(entity_id, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{entity_id}{}
 }
 \value{
 

@@ -40,13 +40,11 @@ rba_ensembl_vep_ids(
   variant_class = FALSE,
   vcf_string = FALSE,
   xref_refseq = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{xref_refseq}{}
 }
 \value{
 

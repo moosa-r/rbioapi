@@ -16,13 +16,11 @@ rba_ensembl_homology_symbol(
   target_species = NA,
   target_taxon = NA,
   type = "all",
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{type}{}
 }
 \value{
 

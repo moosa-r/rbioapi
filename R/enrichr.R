@@ -5,19 +5,17 @@
 #' Nevertheless, rbioapi will do this for you in the background in the first
 #' time you call any function pertinent to Enrichr.
 #'
-#' @param verbose
-#' @param progress_bar
+#' @param ...
 #' @param store_in_options
-#' @param diagnostics
 #'
 #' @return
 #' @export
 #'
 #' @examples
 rba_enrichr_info = function(store_in_options = TRUE,
-                            verbose = TRUE,
-                            progress_bar = FALSE,
-                            diagnostics = FALSE) {
+                            ...){
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "store_in_options",
                                class = "logical")))
@@ -45,10 +43,8 @@ rba_enrichr_info = function(store_in_options = TRUE,
 #' Upload your gene set to Enrichr
 #'
 #' @param description
-#' @param verbose
-#' @param progress_bar
+#' @param ...
 #' @param gene_list
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -56,9 +52,9 @@ rba_enrichr_info = function(store_in_options = TRUE,
 #' @examples
 rba_enrichr_add_list = function(gene_list,
                                 description = NA,
-                                verbose = TRUE,
-                                progress_bar = FALSE,
-                                diagnostics = FALSE){
+                                ...){
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "gene_list",
                                class = "character"),
@@ -91,20 +87,17 @@ rba_enrichr_add_list = function(gene_list,
 
 #' View your uploaded gene list
 #'
-#' @param verbose
-#' @param progress_bar
+#' @param ...
 #' @param user_list_id
-#' @param diagnostics
 #'
 #' @return
 #' @export
 #'
 #' @examples
 rba_enrichr_view_list = function(user_list_id,
-                                 verbose = TRUE,
-                                 progress_bar = FALSE,
-                                 diagnostics = FALSE){
-
+                                 ...){
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "user_list_id",
                                class = c("numeric", "integer"),
@@ -132,11 +125,9 @@ rba_enrichr_view_list = function(user_list_id,
 
 #' Internal function for rba_enrichr_enrich
 #'
-#' @param user_list_id_input
-#' @param gene_set_library_input
-#' @param verbose_input
-#' @param progress_bar_input
-#' @param diagnostics_input
+#' @param user_list_id
+#' @param gene_set_library
+#' @param ...
 #'
 #' @return
 #' @export
@@ -144,9 +135,9 @@ rba_enrichr_view_list = function(user_list_id,
 #' @examples
 rba_enrichr_enrich_internal = function(user_list_id,
                                        gene_set_library,
-                                       verbose = FALSE,
-                                       progress_bar = FALSE,
-                                       diagnostics = FALSE) {
+                                       ...){
+  ## Load user options
+  rba_ba_ext_args(...)
   ## build GET API request's query
   call_query = list("userListId" = user_list_id,
                     "backgroundType" = gene_set_library)
@@ -175,12 +166,10 @@ rba_enrichr_enrich_internal = function(user_list_id,
 #' Get Enrichr enrichment results
 #'
 #' @param user_list_id
-#' @param verbose
 #' @param gene_set_library
 #' @param multi_libs_progress_bar
-#' @param diagnostics
-#' @param progress_bar
 #' @param regex_library_name
+#' @param ...
 #'
 #' @return
 #' @export
@@ -189,19 +178,15 @@ rba_enrichr_enrich_internal = function(user_list_id,
 rba_enrichr_enrich = function(user_list_id,
                               gene_set_library = "all",
                               regex_library_name = FALSE,
-                              verbose = TRUE,
                               multi_libs_progress_bar = TRUE,
-                              progress_bar = FALSE,
-                              diagnostics = FALSE){
-
+                              ...){
+  ## Load user options
+  rba_ba_ext_args(...)
   # get a list of available
   if (is.null(getOption("rba_enrichr_libs"))){
     v_msg("Calling rba_enrichr_info() to get a list of available enricr libraries.")
 
-    invisible(rba_enrichr_info(verbose = FALSE,
-                               progress_bar = FALSE,
-                               store_in_options = TRUE,
-                               diagnostics = FALSE))
+    invisible(rba_enrichr_info(store_in_options = TRUE))
   }
 
   #### handle different gene_set_library input situations
@@ -244,9 +229,7 @@ rba_enrichr_enrich = function(user_list_id,
 
     final_output = rba_enrichr_enrich_internal(user_list_id = user_list_id,
                                                gene_set_library = gene_set_library,
-                                               verbose = verbose,
-                                               progress_bar = progress_bar,
-                                               diagnostics = diagnostics)
+                                               ...)
     return(final_output)
 
   } else if (run_mode == "multiple") {
@@ -254,9 +237,9 @@ rba_enrichr_enrich = function(user_list_id,
           user_list_id)
 
     v_msg(paste0("Note: You have selected %s Enrichr libraries. note that for ",
-    "each library, a seperate call should be send to the Enrichr server. ",
-    "thus, this could take a while depending on the number of selected ",
-    "libraries and your network connection."), length(gene_set_library))
+                 "each library, a seperate call should be send to the Enrichr server. ",
+                 "thus, this could take a while depending on the number of selected ",
+                 "libraries and your network connection."), length(gene_set_library))
 
     final_output = as.list(gene_set_library)
     names(final_output) = gene_set_library
@@ -271,9 +254,7 @@ rba_enrichr_enrich = function(user_list_id,
     final_output = purrr::map(final_output, function(x){
       lib_enrich_res = rba_enrichr_enrich_internal(user_list_id = user_list_id,
                                                    gene_set_library = x,
-                                                   verbose = verbose,
-                                                   progress_bar = progress_bar,
-                                                   diagnostics = diagnostics)
+                                                   ...)
       #advance the progress bar
       if (multi_libs_progress_bar == TRUE) {
         utils::setTxtProgressBar(pb, which(final_output == x))
@@ -289,10 +270,8 @@ rba_enrichr_enrich = function(user_list_id,
 #' Find terms that contain a given gene
 #'
 #' @param gene
+#' @param ...
 #' @param catagorize
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -300,10 +279,9 @@ rba_enrichr_enrich = function(user_list_id,
 #' @examples
 rba_enrichr_gene_map = function(gene,
                                 catagorize = FALSE,
-                                verbose = TRUE,
-                                progress_bar = FALSE,
-                                diagnostics = FALSE){
-
+                                ...){
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "gene",
                                class = "character",
@@ -339,10 +317,8 @@ rba_enrichr_gene_map = function(gene,
 #' @param description
 #' @param gene_set_library
 #' @param regex_library_name
+#' @param ...
 #' @param multi_libs_progress_bar
-#' @param progress_bar
-#' @param verbose
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -351,12 +327,12 @@ rba_enrichr_gene_map = function(gene,
 rba_enrichr = function(gene_list,
                        description = NA,
                        gene_set_library = "all",
-                       regex_library_name = FALSE,
+                       regex_library_name = TRUE,
                        multi_libs_progress_bar = TRUE,
-                       progress_bar = FALSE,
-                       verbose = TRUE,
-                       diagnostics = FALSE) {
-
+                       ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
+  ## Check input arguments
   rba_ba_args(cons = list(list(arg = "gene_list",
                                class = "character"),
                           list(arg = "description",
@@ -365,30 +341,18 @@ rba_enrichr = function(gene_list,
                                class = "logical"),
                           list(arg = "multi_libs_progress_bar",
                                class = "logical")))
-  if (verbose == TRUE){
-    message("--Step 1/3:")
-  }
-  invisible(rba_enrichr_info(verbose = verbose,
-                             progress_bar = progress_bar,
-                             store_in_options = TRUE,
-                             diagnostics = FALSE))
-  if (verbose == TRUE){
-    message("--Step 2/3:")
-  }
+  v_msg("--Step 1/3:")
+  invisible(rba_enrichr_info(store_in_options = TRUE,
+                             ...))
+  v_msg("--Step 2/3:")
   list_id = rba_enrichr_add_list(gene_list = gene_list,
                                  description = description,
-                                 verbose = verbose,
-                                 progress_bar = progress_bar,
-                                 diagnostics = diagnostics)
-  if (verbose == TRUE){
-    message("--Step 3/3:")
-  }
+                                 ...)
+  v_msg("--Step 3/3:")
   enriched = rba_enrichr_enrich(user_list_id = list_id$userListId,
                                 gene_set_library = gene_set_library,
                                 regex_library_name = regex_library_name,
-                                verbose = verbose,
                                 multi_libs_progress_bar = multi_libs_progress_bar,
-                                progress_bar = progress_bar,
-                                diagnostics = diagnostics)
+                                ...)
   return(enriched)
 }

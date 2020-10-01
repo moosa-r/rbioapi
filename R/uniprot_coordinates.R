@@ -6,10 +6,8 @@
 #' @param gene
 #' @param protein
 #' @param taxid
+#' @param ...
 #' @param location
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -22,9 +20,9 @@ rba_uniprot_coordinates_search = function(accession = NA,
                                           protein = NA,
                                           taxid = NA,
                                           location = NA,
-                                          verbose = TRUE,
-                                          progress_bar = FALSE,
-                                          diagnostics = FALSE) {
+                                          ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "accession",
                                class = "character",
@@ -94,10 +92,8 @@ rba_uniprot_coordinates_search = function(accession = NA,
 #' @param accession
 #' @param p_position
 #' @param p_start
+#' @param ...
 #' @param p_end
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -107,9 +103,9 @@ rba_uniprot_coordinates_location = function(accession,
                                             p_position = NA,
                                             p_start = NA,
                                             p_end = NA,
-                                            verbose = TRUE,
-                                            progress_bar = FALSE,
-                                            diagnostics = FALSE) {
+                                            ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "accession",
                                class = "character"),
@@ -153,10 +149,8 @@ rba_uniprot_coordinates_location = function(accession,
 #'
 #' @param accession
 #' @param db_type
+#' @param ...
 #' @param db_id
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -165,9 +159,9 @@ rba_uniprot_coordinates_location = function(accession,
 rba_uniprot_coordinates = function(accession = NA,
                                    db_type = NA,
                                    db_id = NA,
-                                   verbose = TRUE,
-                                   progress_bar = FALSE,
-                                   diagnostics = FALSE) {
+                                   ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "accession",
                                class = "character"),
@@ -211,10 +205,8 @@ rba_uniprot_coordinates = function(accession = NA,
 #' @param taxid
 #' @param locations
 #' @param in_range
+#' @param ...
 #' @param feature
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -224,9 +216,9 @@ rba_uniprot_coordinates_taxonomy = function(taxid,
                                             locations,
                                             in_range = NA,
                                             feature = FALSE,
-                                            verbose = TRUE,
-                                            progress_bar = FALSE,
-                                            diagnostics = FALSE) {
+                                            ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "taxid",
                                class = "numeric"),

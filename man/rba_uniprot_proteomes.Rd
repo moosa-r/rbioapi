@@ -4,17 +4,10 @@
 \alias{rba_uniprot_proteomes}
 \title{Get proteome by proteome/proteins UPID}
 \usage{
-rba_uniprot_proteomes(
-  upid,
-  get_proteins = FALSE,
-  reviewed = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_uniprot_proteomes(upid, get_proteins = FALSE, reviewed = NA, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{reviewed}{}
 }
 \value{
 

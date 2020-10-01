@@ -9,13 +9,11 @@ rba_reactome_analysis_download(
   request,
   save_to = NA,
   resource = "TOTAL",
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{resource}{}
 }
 \value{
 

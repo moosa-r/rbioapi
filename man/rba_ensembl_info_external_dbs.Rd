@@ -4,26 +4,12 @@
 \alias{rba_ensembl_info_external_dbs}
 \title{Lists all available external sources for a species.}
 \usage{
-rba_ensembl_info_external_dbs(
-  species,
-  filter = NA,
-  feature = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_external_dbs(species, filter = NA, feature = NA, ...)
 
-rba_ensembl_info_external_dbs(
-  species,
-  filter = NA,
-  feature = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_external_dbs(species, filter = NA, feature = NA, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{feature}{}
 }
 \value{
 

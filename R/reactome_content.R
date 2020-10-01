@@ -1,17 +1,15 @@
 #### database Endpoints ####
 #' The version number of current database
 #'
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
+#' @param ...
 #'
 #' @return
 #' @export
 #'
 #' @examples
-rba_reactome_version = function(verbose = TRUE,
-                                progress_bar = FALSE,
-                                diagnostics = FALSE) {
+rba_reactome_version = function(...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args()
 
@@ -35,18 +33,17 @@ rba_reactome_version = function(verbose = TRUE,
 #' It retrieves the list of diseases annotated in Reactome OR
 #' list of disease DOIDs annotated in Reactome
 #'
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
+#' @param doid
+#' @param ...
 #'
 #' @return
 #' @export
 #'
 #' @examples
 rba_reactome_diseases = function(doid = FALSE,
-                                 verbose = TRUE,
-                                 progress_bar = FALSE,
-                                 diagnostics = FALSE) {
+                                 ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "doid",
                                class = "logical")))
@@ -86,10 +83,8 @@ rba_reactome_diseases = function(doid = FALSE,
 #' parameter to ‘true’
 #'
 #' @param complex_id
+#' @param ...
 #' @param exclude_structures
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -97,9 +92,9 @@ rba_reactome_diseases = function(doid = FALSE,
 #' @examples
 rba_reactome_complex_subunits = function(complex_id,
                                          exclude_structures = FALSE,
-                                         verbose = TRUE,
-                                         progress_bar = FALSE,
-                                         diagnostics = FALSE) {
+                                         ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "complex_id",
                                class = "character"),
@@ -131,10 +126,8 @@ rba_reactome_complex_subunits = function(complex_id,
 #' The method deconstructs the complexes into all its participants to do so.
 #'
 #' @param id
+#' @param ...
 #' @param resource
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -142,9 +135,9 @@ rba_reactome_complex_subunits = function(complex_id,
 #' @examples
 rba_reactome_complex_list = function(id,
                                      resource,
-                                     verbose = TRUE,
-                                     progress_bar = FALSE,
-                                     diagnostics = FALSE) {
+                                     ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "id",
                                class = "character"),
@@ -173,19 +166,17 @@ rba_reactome_complex_list = function(id,
 #' includes only simplified entries (type, names, ids) and not full
 #' information about each item.
 #'
+#' @param ...
 #' @param entity_id
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
 #'
 #' @examples
 rba_reactome_entity_component_of = function(entity_id,
-                                            verbose = TRUE,
-                                            progress_bar = FALSE,
-                                            diagnostics = FALSE) {
+                                            ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "entity_id",
                                class = "character")))
@@ -210,19 +201,17 @@ rba_reactome_entity_component_of = function(entity_id,
 #' identifier, e.g. PTEN H93R R-HSA-2318524 and PTEN C124R R-HSA-2317439
 #' are two forms of PTEN.
 #'
+#' @param ...
 #' @param entity_id
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
 #'
 #' @examples
 rba_reactome_entity_other_forms = function(entity_id,
-                                           verbose = TRUE,
-                                           progress_bar = FALSE,
-                                           diagnostics = FALSE) {
+                                           ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "entity_id",
                                class = "character")))
@@ -252,19 +241,17 @@ rba_reactome_entity_other_forms = function(entity_id,
 #' Therefore, this method retrieves a list of all possible paths from the
 #' requested event to the top level pathway(s).
 #'
+#' @param ...
 #' @param event_id
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
 #'
 #' @examples
 rba_reactome_event_ancestors = function(event_id,
-                                        verbose = TRUE,
-                                        progress_bar = FALSE,
-                                        diagnostics = FALSE) {
+                                        ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "event_id",
                                class = "character")))
@@ -293,19 +280,17 @@ rba_reactome_event_ancestors = function(event_id,
 #' The latter contains the stable identifier, the name, the species, the url,
 #' the type, and the diagram of the particular event.
 #'
+#' @param ...
 #' @param species
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
 #'
 #' @examples
 rba_reactome_event_hierarchy = function(species,
-                                        verbose = TRUE,
-                                        progress_bar = FALSE,
-                                        diagnostics = FALSE) {
+                                        ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "event_id",
                                class = c("character",
@@ -350,10 +335,8 @@ rba_reactome_event_hierarchy = function(species,
 #' @param token
 #' @param resource
 #' @param analysis_profile
+#' @param ...
 #' @param exp_column
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -374,10 +357,9 @@ rba_reactome_exporter_diagram = function(event_id,
                                          resource = "TOTAL",
                                          analysis_profile = "Standard",
                                          exp_column = NA,
-                                         verbose = TRUE,
-                                         progress_bar = FALSE,
-                                         diagnostics = FALSE){
-
+                                         ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "event_id",
                                class = "character"),
@@ -507,10 +489,8 @@ rba_reactome_exporter_diagram = function(event_id,
 #' @param token
 #' @param resource
 #' @param analysis_profile
+#' @param ...
 #' @param exp_column
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -524,10 +504,9 @@ rba_reactome_exporter_document = function(event_id,
                                           resource = "TOTAL",
                                           analysis_profile = "Standard",
                                           exp_column = NA,
-                                          verbose = TRUE,
-                                          progress_bar = FALSE,
-                                          diagnostics = FALSE){
-
+                                          ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "event_id",
                                class = "character"),
@@ -601,10 +580,8 @@ rba_reactome_exporter_document = function(event_id,
 #'
 #' @param event_id
 #' @param output_format
+#' @param ...
 #' @param save_to
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -613,10 +590,9 @@ rba_reactome_exporter_document = function(event_id,
 rba_reactome_exporter_event = function(event_id,
                                        output_format,
                                        save_to = NA,
-                                       verbose = TRUE,
-                                       progress_bar = FALSE,
-                                       diagnostics = FALSE){
-
+                                       ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "event_id",
                                class = "character"),
@@ -665,10 +641,8 @@ rba_reactome_exporter_event = function(event_id,
 #' @param token
 #' @param resource
 #' @param exp_column
+#' @param ...
 #' @param coverage
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -688,10 +662,9 @@ rba_reactome_exporter_overview = function(species,
                                           resource = "TOTAL",
                                           exp_column = NA,
                                           coverage = FALSE,
-                                          verbose = TRUE,
-                                          progress_bar = FALSE,
-                                          diagnostics = FALSE){
-
+                                          ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "species",
                                class = c("character",
@@ -806,11 +779,9 @@ rba_reactome_exporter_overview = function(species,
 #' by resource.
 #'
 #' @param resource
+#' @param details
+#' @param ...
 #' @param proteins
-#' @param level
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -819,9 +790,9 @@ rba_reactome_exporter_overview = function(species,
 rba_reactome_interactors_psicquic = function(resource,
                                              proteins,
                                              details = "details",
-                                             verbose = TRUE,
-                                             progress_bar = FALSE,
-                                             diagnostics = FALSE) {
+                                             ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "resource",
                                class = "character"),
@@ -861,17 +832,15 @@ rba_reactome_interactors_psicquic = function(resource,
 
 #' Retrieve a list of all Psicquic Registries services
 #'
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
+#' @param ...
 #'
 #' @return
 #' @export
 #'
 #' @examples
-rba_reactome_interactors_resources = function(verbose = TRUE,
-                                              progress_bar = FALSE,
-                                              diagnostics = FALSE) {
+rba_reactome_interactors_resources = function(...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args()
 
@@ -891,11 +860,21 @@ rba_reactome_interactors_resources = function(verbose = TRUE,
   return(final_output)
 }
 
+#' Retrieve a interaction information of a given accession
+#'
+#' @param proteins
+#' @param details
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 rba_reactome_interactors_static = function(proteins,
                                            details = "details",
-                                           verbose = TRUE,
-                                           progress_bar = FALSE,
-                                           diagnostics = FALSE) {
+                                           ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "proteins",
                                class = c("character",
@@ -939,10 +918,8 @@ rba_reactome_interactors_static = function(proteins,
 #'
 #' @param id
 #' @param resource
+#' @param ...
 #' @param species
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -951,9 +928,9 @@ rba_reactome_interactors_static = function(proteins,
 rba_reactome_mapping_pathways = function(id,
                                          resource,
                                          species = NA,
-                                         verbose = TRUE,
-                                         progress_bar = FALSE,
-                                         diagnostics = FALSE) {
+                                         ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "id",
                                class = c("character",
@@ -992,10 +969,8 @@ rba_reactome_mapping_pathways = function(id,
 #'
 #' @param id
 #' @param resource
+#' @param ...
 #' @param species
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -1004,9 +979,9 @@ rba_reactome_mapping_pathways = function(id,
 rba_reactome_mapping_reactions = function(id,
                                           resource,
                                           species = NA,
-                                          verbose = TRUE,
-                                          progress_bar = FALSE,
-                                          diagnostics = FALSE) {
+                                          ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "id",
                                class = c("character",
@@ -1051,10 +1026,8 @@ rba_reactome_mapping_reactions = function(id,
 #' computationally inferred events.
 #'
 #' @param ids
+#' @param ...
 #' @param species_id
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -1062,9 +1035,9 @@ rba_reactome_mapping_reactions = function(id,
 #' @examples
 rba_reactome_orthology = function(ids,
                                   species_id,
-                                  verbose = TRUE,
-                                  progress_bar = FALSE,
-                                  diagnostics = FALSE) {
+                                  ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "ids",
                                class = "character"),
@@ -1100,10 +1073,8 @@ rba_reactome_orthology = function(ids,
 #'
 #' @param id
 #' @param physical_entities
+#' @param ...
 #' @param reference_entities
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -1112,9 +1083,9 @@ rba_reactome_orthology = function(ids,
 rba_reactome_participants = function(id,
                                      physical_entities = FALSE,
                                      reference_entities = FALSE,
-                                     verbose = TRUE,
-                                     progress_bar = FALSE,
-                                     diagnostics = FALSE) {
+                                     ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "id",
                                class = c("character",
@@ -1159,10 +1130,8 @@ rba_reactome_participants = function(id,
 #' attribute for each of the events contained in the given event.
 #'
 #' @param id
+#' @param ...
 #' @param attribute_name
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -1170,9 +1139,9 @@ rba_reactome_participants = function(id,
 #' @examples
 rba_reactome_pathways_participants = function(id,
                                               attribute_name = NA,
-                                              verbose = TRUE,
-                                              progress_bar = FALSE,
-                                              diagnostics = FALSE) {
+                                              ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "id",
                                class = c("character",
@@ -1222,10 +1191,8 @@ rba_reactome_pathways_participants = function(id,
 #' @param entity_id
 #' @param with_diagram
 #' @param all_forms
+#' @param ...
 #' @param species
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -1235,9 +1202,9 @@ rba_reactome_pathways_low = function(entity_id,
                                      with_diagram = FALSE,
                                      all_forms = FALSE,
                                      species = NA,
-                                     verbose = TRUE,
-                                     progress_bar = FALSE,
-                                     diagnostics = FALSE) {
+                                     ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "entity_id",
                                class = "character"),
@@ -1283,19 +1250,17 @@ rba_reactome_pathways_low = function(entity_id,
 
 #' This method retrieves the list of top level pathways for the given species
 #'
+#' @param ...
 #' @param species
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
 #'
 #' @examples
 rba_reactome_pathways_top = function(species,
-                                     verbose = TRUE,
-                                     progress_bar = FALSE,
-                                     diagnostics = FALSE) {
+                                     ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "species",
                                class = c("character",
@@ -1329,10 +1294,8 @@ rba_reactome_pathways_top = function(species,
 #' partly/exactly matching the given string.
 #'
 #' @param person_name
+#' @param ...
 #' @param exact
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -1340,9 +1303,9 @@ rba_reactome_pathways_top = function(species,
 #' @examples
 rba_reactome_people_name = function(person_name,
                                     exact = FALSE,
-                                    verbose = TRUE,
-                                    progress_bar = FALSE,
-                                    diagnostics = FALSE) {
+                                    ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "person_name",
                                class = "character"),
@@ -1372,13 +1335,25 @@ rba_reactome_people_name = function(person_name,
   return(final_output)
 }
 
+#' A person by his identifiers
+#'
+#' @param id
+#' @param authored_pathways
+#' @param publications
+#' @param attribute_name
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 rba_reactome_people_id = function(id,
                                   authored_pathways = FALSE,
                                   publications = FALSE,
                                   attribute_name = NA,
-                                  verbose = TRUE,
-                                  progress_bar = FALSE,
-                                  diagnostics = FALSE) {
+                                  ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "id",
                                class = "character"),
@@ -1429,10 +1404,8 @@ rba_reactome_people_id = function(id,
 #' @param ids
 #' @param enhanced
 #' @param map
-#' @param verbose
+#' @param ...
 #' @param attribute_name
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -1441,10 +1414,10 @@ rba_reactome_people_id = function(id,
 rba_reactome_query = function(ids,
                               enhanced = FALSE,
                               map = FALSE,
-                              verbose = TRUE,
                               attribute_name = NA,
-                              progress_bar = FALSE,
-                              diagnostics = FALSE) {
+                              ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "ids",
                                class = "character",
@@ -1518,19 +1491,17 @@ rba_reactome_query = function(ids,
 
 #' Retrieves a list containing all the reference entities for a given identifier.
 #'
+#' @param ...
 #' @param id
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
 #'
 #' @examples
 rba_reactome_complex_subunits = function(id,
-                                         verbose = TRUE,
-                                         progress_bar = FALSE,
-                                         diagnostics = FALSE) {
+                                         ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "id",
                                class = c("character",
@@ -1560,19 +1531,17 @@ rba_reactome_complex_subunits = function(id,
 #' mentioned that for Reactome, main species are considered those have either
 #' manually curated or computationally inferred pathways.
 #'
+#' @param ...
 #' @param species_type
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
 #'
 #' @examples
 rba_reactome_species = function(species_type = "all",
-                                verbose = TRUE,
-                                progress_bar = FALSE,
-                                diagnostics = FALSE) {
+                                ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "species_type",
                                class = "character",

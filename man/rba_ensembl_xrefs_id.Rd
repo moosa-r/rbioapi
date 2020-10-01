@@ -12,13 +12,11 @@ rba_ensembl_xrefs_id(
   db_type = "core",
   external_db = NA,
   object_type = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{object_type}{}
 }
 \value{
 

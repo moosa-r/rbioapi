@@ -22,13 +22,11 @@ rba_uniprot_variation_search(
   taxid = NA,
   db_type = NA,
   db_id = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{save_peff}{}
 }
 \value{
 

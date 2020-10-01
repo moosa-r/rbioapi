@@ -5,17 +5,10 @@
 \title{Fetch variants by publication using PubMed Central reference number (PMCID)
 or PubMed reference number (PMID)}
 \usage{
-rba_ensembl_variation_pubmed(
-  pmid = NA,
-  pmcid = NA,
-  species,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_variation_pubmed(pmid = NA, pmcid = NA, species, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{species}{}
 }
 \value{
 

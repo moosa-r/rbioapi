@@ -5,17 +5,10 @@
 \title{Entities play different roles in reactions. This method retrieves the
 reactions for which an identifier plays a role .}
 \usage{
-rba_reactome_mapping_reactions(
-  id,
-  resource,
-  species = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_reactome_mapping_reactions(id, resource, species = NA, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{species}{}
 }
 \value{
 

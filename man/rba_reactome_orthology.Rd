@@ -10,16 +10,10 @@ this method retrieves the orthology for any given event or entity in the
 specified species. Here you can find more information about the
 computationally inferred events.}
 \usage{
-rba_reactome_orthology(
-  ids,
-  species_id,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_reactome_orthology(ids, species_id, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{species_id}{}
 }
 \value{
 

@@ -12,13 +12,11 @@ rba_ensembl_phenotype_region(
   include_review_status = FALSE,
   include_submitter = FALSE,
   only_phenotypes = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{only_phenotypes}{}
 }
 \value{
 

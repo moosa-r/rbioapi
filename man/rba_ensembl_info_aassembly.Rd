@@ -5,26 +5,12 @@
 \title{List the currently available assemblies for a species, along with toplevel
 sequences, chromosomes and cytogenetic bands.}
 \usage{
-rba_ensembl_info_aassembly(
-  species,
-  bands = FALSE,
-  synonyms = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_aassembly(species, bands = FALSE, synonyms = FALSE, ...)
 
-rba_ensembl_info_aassembly(
-  species,
-  bands = FALSE,
-  synonyms = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_aassembly(species, bands = FALSE, synonyms = FALSE, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{synonyms}{}
 }
 \value{
 

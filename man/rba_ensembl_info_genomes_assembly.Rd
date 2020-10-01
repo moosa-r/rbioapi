@@ -4,24 +4,12 @@
 \alias{rba_ensembl_info_genomes_assembly}
 \title{Find information about a genome with a specified assembly}
 \usage{
-rba_ensembl_info_genomes_assembly(
-  assembly_id,
-  expand = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_genomes_assembly(assembly_id, expand = FALSE, ...)
 
-rba_ensembl_info_genomes_assembly(
-  assembly_id,
-  expand = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_genomes_assembly(assembly_id, expand = FALSE, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{expand}{}
 }
 \value{
 

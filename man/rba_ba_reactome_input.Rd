@@ -4,16 +4,10 @@
 \alias{rba_ba_reactome_input}
 \title{internal function to feed input to Reactome analysis}
 \usage{
-rba_ba_reactome_input(
-  input,
-  type = NA,
-  handle = TRUE,
-  verbose = TRUE,
-  diagnostics = FALSE
-)
+rba_ba_reactome_input(input, type = NA, handle = TRUE)
 }
 \arguments{
-\item{type}{}
+\item{handle}{}
 }
 \value{
 

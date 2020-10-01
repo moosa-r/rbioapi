@@ -5,17 +5,10 @@
 \title{Convert from protein (translation) coordinates to genomic coordinates.
 Output reflects forward orientation coordinates as returned from the Ensembl API}
 \usage{
-rba_ensembl_map_translation(
-  ensembl_id,
-  region,
-  species = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_map_translation(ensembl_id, region, species = NA, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{species}{}
 }
 \value{
 

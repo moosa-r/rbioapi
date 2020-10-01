@@ -10,13 +10,11 @@ rba_ensembl_family_id(
   compara = "vertebrates",
   member_source = "all",
   sequence = "protein",
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{sequence}{}
 }
 \value{
 

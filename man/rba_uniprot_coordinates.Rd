@@ -5,17 +5,10 @@
 \title{Get genomic coordinates for a UniProt accession Search UniProt entries by
 genomic database cross reference IDs: Ensembl, CCDS, HGNC or RefSeq}
 \usage{
-rba_uniprot_coordinates(
-  accession = NA,
-  db_type = NA,
-  db_id = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_uniprot_coordinates(accession = NA, db_type = NA, db_id = NA, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{db_id}{}
 }
 \value{
 

@@ -11,13 +11,11 @@ rba_ensembl_cafe_genetree_member_id(
   db_type = NA,
   object_type = NA,
   species = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{species}{}
 }
 \value{
 

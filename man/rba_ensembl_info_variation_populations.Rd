@@ -4,24 +4,12 @@
 \alias{rba_ensembl_info_variation_populations}
 \title{List all populations for a species}
 \usage{
-rba_ensembl_info_variation_populations(
-  species,
-  filter = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_variation_populations(species, filter = NA, ...)
 
-rba_ensembl_info_variation_populations(
-  species,
-  filter = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_variation_populations(species, filter = NA, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{filter}{}
 }
 \value{
 

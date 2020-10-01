@@ -4,18 +4,10 @@
 \alias{rba_uniprot_proteins_crossref}
 \title{Get UniProt entries by UniProt cross reference and its ID}
 \usage{
-rba_uniprot_proteins_crossref(
-  db_type,
-  db_id,
-  reviewed = NA,
-  isoform = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_uniprot_proteins_crossref(db_type, db_id, reviewed = NA, isoform = NA, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{isoform}{}
 }
 \value{
 

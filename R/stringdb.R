@@ -12,10 +12,8 @@
 #' @param echo_query (optional) Logical, Insert column with your input identifier. (default = FALSE)
 #' @param limit (optional) limits the number of matches per query identifier (best matches
 #'   come first)
+#' @param ...
 #' @param caller_identity (optional) Character, your identifier for STRING servers.
-#' @param progress_bar Logical, Display Progress bar? (default = FALSE)
-#' @param verbose Should the function print details? (default = FALSE)
-#' @param diagnostics
 #'
 #' @references \url{https://string-db.org/help/api/#mapping-identifiers}
 #' @return
@@ -27,9 +25,9 @@ rba_string_map_ids = function(input,
                               echo_query = FALSE,
                               limit = NA,
                               caller_identity = NA,
-                              verbose = TRUE,
-                              progress_bar = FALSE,
-                              diagnostics = FALSE){
+                              ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "input",
                                class = c("character", "numeric")),
@@ -91,11 +89,9 @@ rba_string_map_ids = function(input,
 #' @param hide_disconnected_nodes
 #' @param block_structure_pics_in_bubbles
 #' @param caller_identity
-#' @param verbose
+#' @param save_file
+#' @param ...
 #' @param output_format
-#' @param save_to
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -113,9 +109,9 @@ rba_string_network_image = function(input,
                                     hide_disconnected_nodes = FALSE,
                                     block_structure_pics_in_bubbles = FALSE,
                                     caller_identity = NA,
-                                    verbose = TRUE,
-                                    progress_bar = FALSE,
-                                    diagnostics = FALSE){
+                                    ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "input",
                                class = c("character", "numeric")),
@@ -219,10 +215,8 @@ rba_string_network_image = function(input,
 #' @param species
 #' @param required_score
 #' @param add_nodes
+#' @param ...
 #' @param caller_identity
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -233,9 +227,9 @@ rba_string_network_interactions = function(input,
                                            required_score = NA,
                                            add_nodes = NA,
                                            caller_identity = NA,
-                                           verbose = TRUE,
-                                           progress_bar = FALSE,
-                                           diagnostics = FALSE){
+                                           ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "input",
                                class = c("character", "numeric")),
@@ -296,10 +290,8 @@ rba_string_network_interactions = function(input,
 #' @param species
 #' @param required_score
 #' @param limit
+#' @param ...
 #' @param caller_identity
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -310,9 +302,9 @@ rba_string_interaction_partners = function(input,
                                            required_score = NA,
                                            limit = NA,
                                            caller_identity = NA,
-                                           verbose = TRUE,
-                                           progress_bar = FALSE,
-                                           diagnostics = FALSE){
+                                           ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "input",
                                class = c("character", "numeric")),
@@ -371,10 +363,8 @@ rba_string_interaction_partners = function(input,
 #'
 #' @param input
 #' @param species
+#' @param ...
 #' @param caller_identity
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -383,10 +373,9 @@ rba_string_interaction_partners = function(input,
 rba_string_homology = function(input,
                                species = NA,
                                caller_identity = NA,
-                               verbose = TRUE,
-                               progress_bar = FALSE,
-                               diagnostics = FALSE){
-
+                               ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "input",
                                class = c("character", "numeric")),
@@ -434,10 +423,8 @@ rba_string_homology = function(input,
 #' @param input
 #' @param species
 #' @param species_b
+#' @param ...
 #' @param caller_identity
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -447,10 +434,9 @@ rba_string_homology_best = function(input,
                                     species = NA,
                                     species_b = NA,
                                     caller_identity = NA,
-                                    verbose = TRUE,
-                                    progress_bar = FALSE,
-                                    diagnostics = FALSE){
-
+                                    ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "input",
                                class = c("character", "numeric")),
@@ -503,10 +489,8 @@ rba_string_homology_best = function(input,
 #' @param input
 #' @param species
 #' @param caller_identity
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #' @param background_string_ids
+#' @param ...
 #'
 #' @return
 #' @export
@@ -516,10 +500,9 @@ rba_string_enrichment = function(input,
                                  species = NA,
                                  background_string_ids = NA,
                                  caller_identity = NA,
-                                 verbose = TRUE,
-                                 progress_bar = FALSE,
-                                 diagnostics = FALSE){
-
+                                 ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg ="input",
                                class = c("character", "numeric")),
@@ -571,10 +554,8 @@ rba_string_enrichment = function(input,
 #' @param input
 #' @param species
 #' @param allow_pubmed
+#' @param ...
 #' @param caller_identity
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -584,10 +565,9 @@ rba_string_functional_annotation = function(input,
                                             species = NA,
                                             allow_pubmed = FALSE,
                                             caller_identity = NA,
-                                            verbose = TRUE,
-                                            progress_bar = FALSE,
-                                            diagnostics = FALSE){
-
+                                            ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "input",
                                class = c("character", "numeric")),
@@ -641,10 +621,8 @@ rba_string_functional_annotation = function(input,
 #' @param input
 #' @param species
 #' @param required_score
+#' @param ...
 #' @param caller_identity
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -654,10 +632,9 @@ rba_string_ppi_enrichment = function(input,
                                      species = NA,
                                      required_score = NA,
                                      caller_identity = NA,
-                                     verbose = TRUE,
-                                     progress_bar = FALSE,
-                                     diagnostics = FALSE){
-
+                                     ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "input",
                                class = c("character", "numeric")),
@@ -708,18 +685,15 @@ rba_string_ppi_enrichment = function(input,
 #'
 #' #' @family STRING
 #'
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
+#' @param ...
 #'
 #' @return
 #' @export
 #'
 #' @examples
-rba_string_version = function(verbose = TRUE,
-                              progress_bar = FALSE,
-                              diagnostics = FALSE){
-
+rba_string_version = function(...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args()
   v_msg("Retrieving Current STRING database version.")
@@ -745,26 +719,21 @@ rba_string_version = function(verbose = TRUE,
 
 #' Get Statistics from STRING database
 #'
-#' @param verbose
-#' @param diagnostics
 #' @param type
+#' @param ...
 #'
 #' @return
 #' @export
 #'
 #' @examples
 rba_string_info = function(type = "statistics",
-                           verbose = TRUE,
-                           diagnostics = FALSE){
-
+                           ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "type",
                                class = "character",
-                               val = c("statistics", "organisms")),
-                          list(arg = "verbose",
-                               class = "logical"),
-                          list(arg = "diagnostics",
-                               class = "logical")))
+                               val = c("statistics", "organisms"))))
 
   if (type == "statistics") {
     v_msg("Retrieving STRNG statistics.")

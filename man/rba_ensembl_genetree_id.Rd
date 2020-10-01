@@ -13,13 +13,11 @@ rba_ensembl_genetree_id(
   prune_species = NA,
   prune_taxon = NA,
   sequence = "protein",
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{sequence}{}
 }
 \value{
 

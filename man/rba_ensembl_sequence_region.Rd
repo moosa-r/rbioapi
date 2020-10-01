@@ -14,13 +14,11 @@ rba_ensembl_sequence_region(
   format = NA,
   mask = NA,
   mask_feature = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{mask_feature}{}
 }
 \value{
 

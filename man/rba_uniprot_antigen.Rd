@@ -4,15 +4,10 @@
 \alias{rba_uniprot_antigen}
 \title{Get antigen by UniProt accession}
 \usage{
-rba_uniprot_antigen(
-  accession,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_uniprot_antigen(accession, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{accession}{}
 }
 \value{
 

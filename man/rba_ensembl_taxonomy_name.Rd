@@ -4,15 +4,10 @@
 \alias{rba_ensembl_taxonomy_name}
 \title{Search for a taxonomic id by a non-scientific name}
 \usage{
-rba_ensembl_taxonomy_name(
-  name,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_taxonomy_name(name, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{name}{}
 }
 \value{
 

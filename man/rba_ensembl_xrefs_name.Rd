@@ -5,18 +5,10 @@
 \title{Performs a lookup based upon the primary accession or display label of an
 external reference and returning the information we hold about the entry}
 \usage{
-rba_ensembl_xrefs_name(
-  name,
-  species,
-  db_type = "core",
-  external_db = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_xrefs_name(name, species, db_type = "core", external_db = NA, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{external_db}{}
 }
 \value{
 

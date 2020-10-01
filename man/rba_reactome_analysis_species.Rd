@@ -15,13 +15,11 @@ rba_reactome_analysis_species(
   p_value = NA,
   min = NA,
   max = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{max}{}
 }
 \value{
 

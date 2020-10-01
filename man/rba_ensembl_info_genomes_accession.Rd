@@ -4,24 +4,12 @@
 \alias{rba_ensembl_info_genomes_accession}
 \title{Find information about genomes containing a specified INSDC accession}
 \usage{
-rba_ensembl_info_genomes_accession(
-  accession,
-  expand = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_genomes_accession(accession, expand = FALSE, ...)
 
-rba_ensembl_info_genomes_accession(
-  accession,
-  expand = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_genomes_accession(accession, expand = FALSE, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{expand}{}
 }
 \value{
 

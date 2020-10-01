@@ -9,9 +9,7 @@ rba_ensembl_info_species(
   hide_strain_info = FALSE,
   strain_collection = NA,
   expand = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 
 rba_ensembl_info_species(
@@ -19,13 +17,11 @@ rba_ensembl_info_species(
   hide_strain_info = FALSE,
   strain_collection = NA,
   expand = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{expand}{}
 }
 \value{
 

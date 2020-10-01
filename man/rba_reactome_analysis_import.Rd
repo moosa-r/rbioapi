@@ -5,16 +5,10 @@
 \title{The accepted format is the same as provided by the method
 /#/download/{token}/result.json. Note: The submitted file can be gzipped.}
 \usage{
-rba_reactome_analysis_import(
-  input,
-  input_type = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_reactome_analysis_import(input, input_type = NA, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{input_type}{}
 }
 \value{
 

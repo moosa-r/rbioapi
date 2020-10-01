@@ -5,15 +5,10 @@
 \title{It retrieves the list of diseases annotated in Reactome OR
 list of disease DOIDs annotated in Reactome}
 \usage{
-rba_reactome_diseases(
-  doid = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_reactome_diseases(doid = FALSE, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{...}{}
 }
 \value{
 

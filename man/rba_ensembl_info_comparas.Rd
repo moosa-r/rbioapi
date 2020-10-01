@@ -4,20 +4,12 @@
 \alias{rba_ensembl_info_comparas}
 \title{Lists all available comparative genomics databases and their data release.}
 \usage{
-rba_ensembl_info_comparas(
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_comparas(...)
 
-rba_ensembl_info_comparas(
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_comparas(...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{...}{}
 }
 \value{
 

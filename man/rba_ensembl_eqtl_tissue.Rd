@@ -4,15 +4,10 @@
 \alias{rba_ensembl_eqtl_tissue}
 \title{Returns all tissues currently available in the DB}
 \usage{
-rba_ensembl_eqtl_tissue(
-  species,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_eqtl_tissue(species, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{species}{}
 }
 \value{
 

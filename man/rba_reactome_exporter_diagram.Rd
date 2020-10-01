@@ -25,13 +25,11 @@ rba_reactome_exporter_diagram(
   resource = "TOTAL",
   analysis_profile = "Standard",
   exp_column = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{exp_column}{}
 }
 \value{
 

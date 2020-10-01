@@ -10,13 +10,11 @@ rba_ensembl_lookup_symbol(
   species,
   expand = FALSE,
   format = "full",
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{format}{}
 }
 \value{
 

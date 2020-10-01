@@ -12,13 +12,11 @@ rba_uniprot_coordinates_search(
   protein = NA,
   taxid = NA,
   location = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{location}{}
 }
 \value{
 

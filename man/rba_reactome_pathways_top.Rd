@@ -4,15 +4,10 @@
 \alias{rba_reactome_pathways_top}
 \title{This method retrieves the list of top level pathways for the given species}
 \usage{
-rba_reactome_pathways_top(
-  species,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_reactome_pathways_top(species, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{species}{}
 }
 \value{
 

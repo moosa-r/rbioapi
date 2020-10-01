@@ -12,13 +12,11 @@ rba_ensembl_variation_id(
   phenotypes = FALSE,
   pops = FALSE,
   population_genotypes = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{population_genotypes}{}
 }
 \value{
 

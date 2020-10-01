@@ -4,10 +4,10 @@
 \alias{rba_string_version}
 \title{Getting current STRING version}
 \usage{
-rba_string_version(verbose = TRUE, progress_bar = FALSE, diagnostics = FALSE)
+rba_string_version(...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{...}{}
 }
 \value{
 

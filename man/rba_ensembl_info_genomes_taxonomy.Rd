@@ -4,24 +4,12 @@
 \alias{rba_ensembl_info_genomes_taxonomy}
 \title{Find information about all genomes beneath a given node of the taxonomy}
 \usage{
-rba_ensembl_info_genomes_taxonomy(
-  taxon_name,
-  expand = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_genomes_taxonomy(taxon_name, expand = FALSE, ...)
 
-rba_ensembl_info_genomes_taxonomy(
-  taxon_name,
-  expand = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_genomes_taxonomy(taxon_name, expand = FALSE, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{expand}{}
 }
 \value{
 

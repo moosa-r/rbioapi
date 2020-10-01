@@ -4,15 +4,10 @@
 \alias{rba_ensembl_microarray_species}
 \title{Returns information about all microarrays available for the given species}
 \usage{
-rba_ensembl_microarray_species(
-  species,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_microarray_species(species, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{species}{}
 }
 \value{
 

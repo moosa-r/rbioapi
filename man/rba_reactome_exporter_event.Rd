@@ -4,17 +4,10 @@
 \alias{rba_reactome_exporter_event}
 \title{Exports a given pathway or reaction to SBGN or SBML}
 \usage{
-rba_reactome_exporter_event(
-  event_id,
-  output_format,
-  save_to = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_reactome_exporter_event(event_id, output_format, save_to = NA, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{save_to}{}
 }
 \value{
 

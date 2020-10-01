@@ -4,17 +4,10 @@
 \alias{rba_uniprot_genecentric_search}
 \title{Search gene centric proteins}
 \usage{
-rba_uniprot_genecentric_search(
-  upid = NA,
-  accession = NA,
-  gene = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_uniprot_genecentric_search(upid = NA, accession = NA, gene = NA, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{gene}{}
 }
 \value{
 

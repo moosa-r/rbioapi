@@ -5,17 +5,10 @@
 \title{Translate a list of variant identifiers, HGVS notations or genomic SPDI
 notations to all possible variant IDs, HGVS and genomic SPDI}
 \usage{
-rba_ensembl_variant_recoder(
-  ids,
-  species,
-  fields = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_variant_recoder(ids, species, fields = NA, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{fields}{}
 }
 \value{
 

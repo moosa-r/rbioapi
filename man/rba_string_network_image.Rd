@@ -17,13 +17,11 @@ rba_string_network_image(
   hide_disconnected_nodes = FALSE,
   block_structure_pics_in_bubbles = FALSE,
   caller_identity = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{output_format}{}
 }
 \value{
 

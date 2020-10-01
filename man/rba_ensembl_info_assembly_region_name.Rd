@@ -10,9 +10,7 @@ rba_ensembl_info_assembly_region_name(
   region_name,
   bands = FALSE,
   synonyms = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 
 rba_ensembl_info_assembly_region_name(
@@ -20,13 +18,11 @@ rba_ensembl_info_assembly_region_name(
   region_name,
   bands = FALSE,
   synonyms = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{synonyms}{}
 }
 \value{
 

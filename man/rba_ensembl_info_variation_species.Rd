@@ -4,24 +4,12 @@
 \alias{rba_ensembl_info_variation_species}
 \title{List the variation sources used in Ensembl for a species.}
 \usage{
-rba_ensembl_info_variation_species(
-  species,
-  filter = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_variation_species(species, filter = NA, ...)
 
-rba_ensembl_info_variation_species(
-  species,
-  filter = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_variation_species(species, filter = NA, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{filter}{}
 }
 \value{
 

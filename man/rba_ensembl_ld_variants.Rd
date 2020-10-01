@@ -14,13 +14,11 @@ rba_ensembl_ld_variants(
   d_prime = NA,
   r2 = NA,
   window_size = 500,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{window_size}{}
 }
 \value{
 

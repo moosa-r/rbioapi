@@ -5,16 +5,10 @@
 \title{Retrieves a list of people in Reactome with either their first or last name
 partly/exactly matching the given string.}
 \usage{
-rba_reactome_people_name(
-  person_name,
-  exact = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_reactome_people_name(person_name, exact = FALSE, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{exact}{}
 }
 \value{
 

@@ -6,17 +6,10 @@
 with the queried taxonomy ID in a specific direction (TOP or BOTTOM) and
 depth level.}
 \usage{
-rba_uniprot_taxonomy_path(
-  id,
-  direction,
-  depth = 5,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_uniprot_taxonomy_path(id, direction, depth = 5, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{depth}{}
 }
 \value{
 

@@ -8,14 +8,12 @@ rba_enrichr_enrich(
   user_list_id,
   gene_set_library = "all",
   regex_library_name = FALSE,
-  verbose = TRUE,
   multi_libs_progress_bar = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{regex_library_name}{}
+\item{...}{}
 }
 \value{
 

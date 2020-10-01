@@ -4,15 +4,10 @@
 \alias{rba_uniprot_genecentric}
 \title{Get gene centric proteins by Uniprot accession}
 \usage{
-rba_uniprot_genecentric(
-  accession,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_uniprot_genecentric(accession, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{accession}{}
 }
 \value{
 

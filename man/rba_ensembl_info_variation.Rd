@@ -11,9 +11,7 @@ rba_ensembl_info_variation(
   populations = FALSE,
   species_filter = NA,
   populations_filter = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 
 rba_ensembl_info_variation(
@@ -23,13 +21,11 @@ rba_ensembl_info_variation(
   populations = FALSE,
   species_filter = NA,
   populations_filter = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{populations_filter}{}
 }
 \value{
 

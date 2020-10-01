@@ -4,15 +4,10 @@
 \alias{rba_ensembl_taxonomy_classification}
 \title{Return the taxonomic classification of a taxon node}
 \usage{
-rba_ensembl_taxonomy_classification(
-  taxon_id,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_taxonomy_classification(taxon_id, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{taxon_id}{}
 }
 \value{
 

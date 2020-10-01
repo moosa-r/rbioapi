@@ -17,13 +17,11 @@ rba_ensembl_overlap_id(
   species = NA,
   species_set = "mammals",
   variant_set = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{variant_set}{}
 }
 \value{
 

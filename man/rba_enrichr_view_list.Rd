@@ -4,15 +4,10 @@
 \alias{rba_enrichr_view_list}
 \title{View your uploaded gene list}
 \usage{
-rba_enrichr_view_list(
-  user_list_id,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_enrichr_view_list(user_list_id, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{user_list_id}{}
 }
 \value{
 

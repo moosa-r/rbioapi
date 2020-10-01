@@ -4,17 +4,10 @@
 \alias{rba_string_homology}
 \title{Retrieving similarity scores of the protein set}
 \usage{
-rba_string_homology(
-  input,
-  species = NA,
-  caller_identity = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_string_homology(input, species = NA, caller_identity = NA, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{caller_identity}{}
 }
 \value{
 

@@ -11,13 +11,11 @@ rba_uniprot_proteomics_search(
   data_source = NA,
   peptide = NA,
   unique = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{unique}{}
 }
 \value{
 

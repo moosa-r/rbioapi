@@ -4,17 +4,10 @@
 \alias{rba_ensembl_ontology_id}
 \title{Search for an ontological term by its namespaced identifier}
 \usage{
-rba_ensembl_ontology_id(
-  term_id,
-  relation = NA,
-  simple = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_ontology_id(term_id, relation = NA, simple = FALSE, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{simple}{}
 }
 \value{
 

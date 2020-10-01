@@ -17,13 +17,11 @@ rba_reactome_analysis(
   include_disease = TRUE,
   min = NA,
   max = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{max}{}
 }
 \value{
 

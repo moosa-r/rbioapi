@@ -4,24 +4,12 @@
 \alias{rba_ensembl_info_genomes_name}
 \title{Find information about a given genome}
 \usage{
-rba_ensembl_info_genomes_name(
-  genome_name,
-  expand = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_genomes_name(genome_name, expand = FALSE, ...)
 
-rba_ensembl_info_genomes_name(
-  genome_name,
-  expand = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_genomes_name(genome_name, expand = FALSE, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{expand}{}
 }
 \value{
 

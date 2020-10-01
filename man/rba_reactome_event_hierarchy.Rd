@@ -10,15 +10,10 @@ Every event in these trees is represented by a PathwayBrowserNode.
 The latter contains the stable identifier, the name, the species, the url,
 the type, and the diagram of the particular event.}
 \usage{
-rba_reactome_event_hierarchy(
-  species,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_reactome_event_hierarchy(species, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{species}{}
 }
 \value{
 

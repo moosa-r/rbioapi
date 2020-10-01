@@ -19,13 +19,11 @@ rba_reactome_exporter_overview(
   resource = "TOTAL",
   exp_column = NA,
   coverage = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{coverage}{}
 }
 \value{
 

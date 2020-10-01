@@ -11,13 +11,11 @@ rba_ensembl_ld_region(
   species,
   d_prime = NA,
   r2 = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{r2}{}
 }
 \value{
 

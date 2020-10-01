@@ -14,10 +14,8 @@
 #' @param taxid
 #' @param pubmed
 #' @param seq_length
+#' @param ...
 #' @param md5
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -37,9 +35,9 @@ rba_uniprot_proteins_search = function(accession = NA,
                                        pubmed = NA,
                                        seq_length = NA,
                                        md5 = NA,
-                                       verbose = TRUE,
-                                       progress_bar = FALSE,
-                                       diagnostics = FALSE) {
+                                       ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "accession",
                                class = "character",
@@ -148,10 +146,8 @@ rba_uniprot_proteins_search = function(accession = NA,
 #'
 #' @param accession
 #' @param interaction
+#' @param ...
 #' @param isoforms
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -160,9 +156,9 @@ rba_uniprot_proteins_search = function(accession = NA,
 rba_uniprot_proteins = function(accession = NA,
                                 interaction = FALSE,
                                 isoforms = FALSE,
-                                verbose = TRUE,
-                                progress_bar = FALSE,
-                                diagnostics = FALSE) {
+                                ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "accession",
                                class = "character")),
@@ -199,10 +195,8 @@ rba_uniprot_proteins = function(accession = NA,
 #' @param db_type
 #' @param db_id
 #' @param reviewed
+#' @param ...
 #' @param isoform
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -212,9 +206,9 @@ rba_uniprot_proteins_crossref = function(db_type,
                                          db_id,
                                          reviewed = NA,
                                          isoform = NA,
-                                         verbose = TRUE,
-                                         progress_bar = FALSE,
-                                         diagnostics = FALSE) {
+                                         ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "db_type",
                                class = "character"),
@@ -266,10 +260,8 @@ rba_uniprot_proteins_crossref = function(db_type,
 #' @param organism
 #' @param taxid
 #' @param categories
+#' @param ...
 #' @param types
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -284,9 +276,9 @@ rba_uniprot_features_search = function(accession = NA,
                                        taxid = NA,
                                        categories = NA,
                                        types = NA,
-                                       verbose = TRUE,
-                                       progress_bar = FALSE,
-                                       diagnostics = FALSE) {
+                                       ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "accession",
                                class = "character",
@@ -421,10 +413,8 @@ rba_uniprot_features_search = function(accession = NA,
 #'
 #' @param terms
 #' @param type
+#' @param ...
 #' @param categories
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -433,9 +423,9 @@ rba_uniprot_features_search = function(accession = NA,
 rba_uniprot_features_type = function(terms,
                                      type,
                                      categories = NA,
-                                     verbose = TRUE,
-                                     progress_bar = FALSE,
-                                     diagnostics = FALSE) {
+                                     ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "terms",
                                class = "character",
@@ -525,11 +515,9 @@ rba_uniprot_features_type = function(terms,
 #' Get UniProt protein sequence features by accession
 #'
 #' @param accession
-#' @param type
+#' @param types
+#' @param ...
 #' @param categories
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -538,9 +526,9 @@ rba_uniprot_features_type = function(terms,
 rba_uniprot_features = function(accession,
                                 types = NA,
                                 categories = NA,
-                                verbose = TRUE,
-                                progress_bar = FALSE,
-                                diagnostics = FALSE) {
+                                ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "accession",
                                class = "character"),
@@ -646,10 +634,8 @@ rba_uniprot_features = function(accession,
 #' @param taxid
 #' @param db_type
 #' @param db_id
+#' @param ...
 #' @param save_peff
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -668,9 +654,9 @@ rba_uniprot_variation_search = function(accession = NA,
                                         taxid = NA,
                                         db_type = NA,
                                         db_id = NA,
-                                        verbose = TRUE,
-                                        progress_bar = FALSE,
-                                        diagnostics = FALSE) {
+                                        ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "accession",
                                class = "character",
@@ -793,10 +779,8 @@ rba_uniprot_variation_search = function(accession = NA,
 #' @param wild_type
 #' @param alternative_sequence
 #' @param location
+#' @param ...
 #' @param save_peff
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -809,9 +793,9 @@ rba_uniprot_variation_dbsnp = function(db_id,
                                        wild_type = NA,
                                        alternative_sequence = NA,
                                        location = NA,
-                                       verbose = TRUE,
-                                       progress_bar = FALSE,
-                                       diagnostics = FALSE) {
+                                       ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "db_id",
                                class = "character"),
@@ -890,10 +874,8 @@ rba_uniprot_variation_dbsnp = function(db_id,
 #' @param wild_type
 #' @param alternative_sequence
 #' @param location
+#' @param ...
 #' @param save_peff
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -906,9 +888,9 @@ rba_uniprot_variation_hgvs = function(hgvs,
                                       wild_type = NA,
                                       alternative_sequence = NA,
                                       location = NA,
-                                      verbose = TRUE,
-                                      progress_bar = FALSE,
-                                      diagnostics = FALSE) {
+                                      ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "hgvs",
                                class = "character"),
@@ -987,10 +969,8 @@ rba_uniprot_variation_hgvs = function(hgvs,
 #' @param alternative_sequence
 #' @param location
 #' @param save_peff
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #' @param accession
+#' @param ...
 #'
 #' @return
 #' @export
@@ -1003,9 +983,9 @@ rba_uniprot_variation_accession = function(accession,
                                            wild_type = NA,
                                            alternative_sequence = NA,
                                            location = NA,
-                                           verbose = TRUE,
-                                           progress_bar = FALSE,
-                                           diagnostics = FALSE) {
+                                           ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "accession",
                                class = "character"),
@@ -1083,10 +1063,8 @@ rba_uniprot_variation_accession = function(accession,
 #' @param upid
 #' @param data_source
 #' @param peptide
+#' @param ...
 #' @param unique
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -1098,9 +1076,9 @@ rba_uniprot_proteomics_search = function(accession = NA,
                                          data_source = NA,
                                          peptide = NA,
                                          unique = NA,
-                                         verbose = TRUE,
-                                         progress_bar = FALSE,
-                                         diagnostics = FALSE) {
+                                         ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "accession",
                                class = "character",
@@ -1167,19 +1145,17 @@ rba_uniprot_proteomics_search = function(accession = NA,
 
 #' Get proteomics peptides mapped to UniProt by accession
 #'
+#' @param ...
 #' @param accession
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
 #'
 #' @examples
 rba_uniprot_proteomics = function(accession,
-                                  verbose = TRUE,
-                                  progress_bar = FALSE,
-                                  diagnostics = FALSE) {
+                                  ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "accession",
                                class = "character",
@@ -1204,15 +1180,12 @@ rba_uniprot_proteomics = function(accession,
 #### Antigen Endpoints ####
 #' Search antigens in UniProt
 #'
+#' @param antigen_sequence
+#' @param antigen_id
+#' @param ensembl_id
+#' @param match_score
+#' @param ...
 #' @param accession
-#' @param taxid
-#' @param upid
-#' @param data_source
-#' @param peptide
-#' @param unique
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -1223,9 +1196,9 @@ rba_uniprot_antigen_search = function(accession = NA,
                                       antigen_id = NA,
                                       ensembl_id = NA,
                                       match_score = NA,
-                                      verbose = TRUE,
-                                      progress_bar = FALSE,
-                                      diagnostics = FALSE) {
+                                      ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "accession",
                                class = "character",
@@ -1279,19 +1252,17 @@ rba_uniprot_antigen_search = function(accession = NA,
 
 #' Get antigen by UniProt accession
 #'
+#' @param ...
 #' @param accession
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
 #'
 #' @examples
 rba_uniprot_antigen = function(accession,
-                               verbose = TRUE,
-                               progress_bar = FALSE,
-                               diagnostics = FALSE) {
+                               ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "accession",
                                class = "character",

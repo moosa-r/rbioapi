@@ -15,13 +15,11 @@ rba_ensembl_familiy_member_symbol(
   member_source = "all",
   object_type = NA,
   sequence = "protein",
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{sequence}{}
 }
 \value{
 

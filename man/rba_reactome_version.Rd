@@ -4,10 +4,10 @@
 \alias{rba_reactome_version}
 \title{The version number of current database}
 \usage{
-rba_reactome_version(verbose = TRUE, progress_bar = FALSE, diagnostics = FALSE)
+rba_reactome_version(...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{...}{}
 }
 \value{
 

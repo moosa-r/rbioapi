@@ -6,22 +6,12 @@
  with a particular species. Useful for restricting the type of
  genes/transcripts retrieved by other endpoints.}
 \usage{
-rba_ensembl_info_biotypes(
-  species,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_biotypes(species, ...)
 
-rba_ensembl_info_biotypes(
-  species,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_biotypes(species, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{species}{}
 }
 \value{
 

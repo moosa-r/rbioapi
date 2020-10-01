@@ -2,19 +2,17 @@
 
 #' This service returns the lowest common ancestor (LCA) of two taxonomy nodes.
 #'
+#' @param ...
 #' @param ids
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
 #'
 #' @examples
 rba_uniprot_taxonomy_ancestor = function(ids,
-                                         verbose = TRUE,
-                                         progress_bar = FALSE,
-                                         diagnostics = FALSE) {
+                                         ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "ids",
                                class = "numeric",
@@ -41,10 +39,8 @@ rba_uniprot_taxonomy_ancestor = function(ids,
 #'
 #' @param ids
 #' @param hierarchy
+#' @param ...
 #' @param node
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -53,9 +49,9 @@ rba_uniprot_taxonomy_ancestor = function(ids,
 rba_uniprot_taxonomy = function(ids,
                                 hierarchy = NA,
                                 node = FALSE,
-                                verbose = TRUE,
-                                progress_bar = FALSE,
-                                diagnostics = FALSE) {
+                                ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "id",
                                class = "numeric"),
@@ -105,19 +101,17 @@ rba_uniprot_taxonomy = function(ids,
 #' lists the nodes as they appear in the taxonomic tree, with the more
 #' specific listed first.
 #'
+#' @param ...
 #' @param id
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
 #'
 #' @examples
 rba_uniprot_taxonomy_ancestor = function(id,
-                                         verbose = TRUE,
-                                         progress_bar = FALSE,
-                                         diagnostics = FALSE) {
+                                         ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "id",
                                class = "numeric")))
@@ -143,10 +137,8 @@ rba_uniprot_taxonomy_ancestor = function(id,
 #'
 #' @param id
 #' @param direction
+#' @param ...
 #' @param depth
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -155,9 +147,9 @@ rba_uniprot_taxonomy_ancestor = function(id,
 rba_uniprot_taxonomy_path = function(id,
                                      direction,
                                      depth = 5,
-                                     verbose = TRUE,
-                                     progress_bar = FALSE,
-                                     diagnostics = FALSE) {
+                                     ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "id",
                                class = "numeric"),
@@ -194,10 +186,8 @@ rba_uniprot_taxonomy_path = function(id,
 #' their relationship
 #'
 #' @param from
+#' @param ...
 #' @param to
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -205,9 +195,9 @@ rba_uniprot_taxonomy_path = function(id,
 #' @examples
 rba_uniprot_taxonomy_relationship = function(from,
                                              to,
-                                             verbose = TRUE,
-                                             progress_bar = FALSE,
-                                             diagnostics = FALSE) {
+                                             ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "from",
                                class = "numeric"),

@@ -10,13 +10,11 @@ rba_string_network_interactions(
   required_score = NA,
   add_nodes = NA,
   caller_identity = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{caller_identity}{}
 }
 \value{
 

@@ -4,16 +4,10 @@
 \alias{rba_enrichr_enrich_internal}
 \title{Internal function for rba_enrichr_enrich}
 \usage{
-rba_enrichr_enrich_internal(
-  user_list_id,
-  gene_set_library,
-  verbose = FALSE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_enrichr_enrich_internal(user_list_id, gene_set_library, ...)
 }
 \arguments{
-\item{diagnostics_input}{}
+\item{...}{}
 }
 \value{
 

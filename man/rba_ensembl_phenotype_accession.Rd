@@ -12,13 +12,11 @@ rba_ensembl_phenotype_accession(
   include_pubmed_id = FALSE,
   include_review_status = FALSE,
   source = "undef",
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{source}{}
 }
 \value{
 

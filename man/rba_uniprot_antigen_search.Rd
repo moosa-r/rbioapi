@@ -10,13 +10,11 @@ rba_uniprot_antigen_search(
   antigen_id = NA,
   ensembl_id = NA,
   match_score = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{accession}{}
 }
 \value{
 

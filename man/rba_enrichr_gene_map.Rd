@@ -4,16 +4,10 @@
 \alias{rba_enrichr_gene_map}
 \title{Find terms that contain a given gene}
 \usage{
-rba_enrichr_gene_map(
-  gene,
-  catagorize = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_enrichr_gene_map(gene, catagorize = FALSE, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{catagorize}{}
 }
 \value{
 

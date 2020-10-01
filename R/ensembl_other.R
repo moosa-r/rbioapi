@@ -2,19 +2,17 @@
 
 #' Retrieve the latest version for a set of identifiers
 #'
-#' @param id
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
+#' @param ids
+#' @param ...
 #'
 #' @return
 #' @export
 #'
 #' @examples
 rba_ensembl_archive = function(ids,
-                               verbose = TRUE,
-                               progress_bar = FALSE,
-                               diagnostics = FALSE) {
+                               ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "ids",
                                class = "character",
@@ -45,10 +43,8 @@ rba_ensembl_archive = function(ids,
 #' Retrieves a cafe tree of the gene tree using the gene tree stable identifier
 #'
 #' @param genetree_id
+#' @param ...
 #' @param compara
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -56,9 +52,9 @@ rba_ensembl_archive = function(ids,
 #' @examples
 rba_ensembl_cafe_genetree  = function(genetree_id,
                                       compara = "vertebrates",
-                                      verbose = TRUE,
-                                      progress_bar = FALSE,
-                                      diagnostics = FALSE) {
+                                      ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "genetree_id",
                                class = "character"),
@@ -88,11 +84,21 @@ rba_ensembl_cafe_genetree  = function(genetree_id,
   return(final_output)
 }
 
+#' Retrieves a cafe tree of the gene tree using the gene tree stable identifier
+#'
+#' @param genetree_id
+#' @param compara
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 rba_ensembl_cafe_genetree_id  = function(genetree_id,
                                          compara = "vertebrates",
-                                         verbose = TRUE,
-                                         progress_bar = FALSE,
-                                         diagnostics = FALSE) {
+                                         ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "genetree_id",
                                class = "character"),
@@ -129,10 +135,8 @@ rba_ensembl_cafe_genetree_id  = function(genetree_id,
 #' @param compara
 #' @param db_type
 #' @param object_type
+#' @param ...
 #' @param species
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -143,9 +147,9 @@ rba_ensembl_cafe_genetree_member_id  = function(ensembl_id,
                                                 db_type = NA,
                                                 object_type = NA,
                                                 species = NA,
-                                                verbose = TRUE,
-                                                progress_bar = FALSE,
-                                                diagnostics = FALSE) {
+                                                ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "ensembl_id",
                                class = "character"),
@@ -199,10 +203,8 @@ rba_ensembl_cafe_genetree_member_id  = function(ensembl_id,
 #' @param compara
 #' @param db_type
 #' @param external_db
+#' @param ...
 #' @param object_type
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -214,9 +216,9 @@ rba_ensembl_cafe_genetree_member_symbol  = function(gene_symbol,
                                                     db_type = "core",
                                                     external_db = NA,
                                                     object_type = NA,
-                                                    verbose = TRUE,
-                                                    progress_bar = FALSE,
-                                                    diagnostics = FALSE) {
+                                                    ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "gene_symbol",
                                class = "character"),
@@ -271,10 +273,8 @@ rba_ensembl_cafe_genetree_member_symbol  = function(gene_symbol,
 #' @param aligned
 #' @param compara
 #' @param member_source
+#' @param ...
 #' @param sequence
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -285,9 +285,9 @@ rba_ensembl_family_id  = function(familiy_id,
                                   compara = "vertebrates",
                                   member_source = "all",
                                   sequence = "protein",
-                                  verbose = TRUE,
-                                  progress_bar = FALSE,
-                                  diagnostics = FALSE) {
+                                  ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "familiy_id",
                                class = "character"),
@@ -341,14 +341,12 @@ rba_ensembl_family_id  = function(familiy_id,
 #' Retrieves the information for all the families that contains the gene /
 #' transcript / translation stable identifier
 #'
-#' @param familiy_id
 #' @param aligned
 #' @param compara
 #' @param member_source
+#' @param ensembl_id
+#' @param ...
 #' @param sequence
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -359,9 +357,9 @@ rba_ensembl_familiy_member_id  = function(ensembl_id,
                                           compara = "vertebrates",
                                           member_source = "all",
                                           sequence = "protein",
-                                          verbose = TRUE,
-                                          progress_bar = FALSE,
-                                          diagnostics = FALSE) {
+                                          ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "ensembl_id",
                                class = "character"),
@@ -423,10 +421,8 @@ rba_ensembl_familiy_member_id  = function(ensembl_id,
 #' @param external_db
 #' @param member_source
 #' @param object_type
+#' @param ...
 #' @param sequence
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -441,9 +437,9 @@ rba_ensembl_familiy_member_symbol  = function(gene_symbol,
                                               member_source = "all",
                                               object_type = NA,
                                               sequence = "protein",
-                                              verbose = TRUE,
-                                              progress_bar = FALSE,
-                                              diagnostics = FALSE) {
+                                              ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "gene_symbol",
                                class = "character"),
@@ -517,10 +513,8 @@ rba_ensembl_familiy_member_symbol  = function(gene_symbol,
 #' @param compara
 #' @param prune_species
 #' @param prune_taxon
+#' @param ...
 #' @param sequence
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -534,9 +528,9 @@ rba_ensembl_genetree_id  = function(genetree_id,
                                     prune_species = NA,
                                     prune_taxon = NA,
                                     sequence = "protein",
-                                    verbose = TRUE,
-                                    progress_bar = FALSE,
-                                    diagnostics = FALSE) {
+                                    ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "genetree_id",
                                class = "character"),
@@ -612,10 +606,8 @@ rba_ensembl_genetree_id  = function(genetree_id,
 #' @param object_type
 #' @param prune_species
 #' @param prune_taxon
+#' @param ...
 #' @param sequence
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -633,9 +625,9 @@ rba_ensembl_genetree_member_symbol  = function(gene_symbol,
                                                prune_species = NA,
                                                prune_taxon = NA,
                                                sequence = "protein",
-                                               verbose = TRUE,
-                                               progress_bar = FALSE,
-                                               diagnostics = FALSE) {
+                                               ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "gene_symbol",
                                class = "character"),
@@ -728,10 +720,8 @@ rba_ensembl_genetree_member_symbol  = function(gene_symbol,
 #' @param mask
 #' @param method
 #' @param species_set
+#' @param ...
 #' @param species_set_group
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -747,9 +737,9 @@ rba_ensembl_alignment_region  = function(region,
                                          method = "EPO",
                                          species_set = NA,
                                          species_set_group = "mammals",
-                                         verbose = TRUE,
-                                         progress_bar = FALSE,
-                                         diagnostics = FALSE) {
+                                         ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "region",
                                class = "character"),
@@ -838,10 +828,8 @@ rba_ensembl_alignment_region  = function(region,
 #' @param sequence
 #' @param target_species
 #' @param target_taxon
+#' @param ...
 #' @param type
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -856,9 +844,9 @@ rba_ensembl_homology_id  = function(ensemble_id,
                                     target_species = NA,
                                     target_taxon = NA,
                                     type = "all",
-                                    verbose = TRUE,
-                                    progress_bar = FALSE,
-                                    diagnostics = FALSE) {
+                                    ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "ensemble_id",
                                class = "character"),
@@ -941,10 +929,8 @@ rba_ensembl_homology_id  = function(ensemble_id,
 #' @param sequence
 #' @param target_species
 #' @param target_taxon
+#' @param ...
 #' @param type
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -961,9 +947,9 @@ rba_ensembl_homology_symbol  = function(gene_symbol,
                                         target_species = NA,
                                         target_taxon = NA,
                                         type = "all",
-                                        verbose = TRUE,
-                                        progress_bar = FALSE,
-                                        diagnostics = FALSE) {
+                                        ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "gene_symbol",
                                class = "character"),
@@ -1058,10 +1044,8 @@ rba_ensembl_homology_symbol  = function(gene_symbol,
 #' @param db_type
 #' @param external_db
 #' @param object_type
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #' @param external_symbol
+#' @param ...
 #'
 #' @return
 #' @export
@@ -1072,9 +1056,9 @@ rba_ensembl_xrefs_symbol = function(external_symbol,
                                     db_type = "core",
                                     external_db = NA,
                                     object_type = NA,
-                                    verbose = TRUE,
-                                    progress_bar = FALSE,
-                                    diagnostics = FALSE) {
+                                    ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "external_symbol",
                                class = c("numeric",
@@ -1129,10 +1113,8 @@ rba_ensembl_xrefs_symbol = function(external_symbol,
 #' @param all_levels
 #' @param db_type
 #' @param external_db
+#' @param ...
 #' @param object_type
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -1144,9 +1126,9 @@ rba_ensembl_xrefs_id = function(ensembl_id,
                                 db_type = "core",
                                 external_db = NA,
                                 object_type = NA,
-                                verbose = TRUE,
-                                progress_bar = FALSE,
-                                diagnostics = FALSE) {
+                                ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "ensembl_id",
                                class = "character",
@@ -1204,13 +1186,9 @@ rba_ensembl_xrefs_id = function(ensembl_id,
 #'
 #' @param name
 #' @param species
-#' @param all_levels
 #' @param db_type
+#' @param ...
 #' @param external_db
-#' @param object_type
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -1220,9 +1198,9 @@ rba_ensembl_xrefs_name = function(name,
                                   species,
                                   db_type = "core",
                                   external_db = NA,
-                                  verbose = TRUE,
-                                  progress_bar = FALSE,
-                                  diagnostics = FALSE) {
+                                  ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "name",
                                class = c("numeric",
@@ -1268,19 +1246,17 @@ rba_ensembl_xrefs_name = function(name,
 
 #' Returns all tissues currently available in the DB
 #'
+#' @param ...
 #' @param species
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
 #'
 #' @examples
 rba_ensembl_eqtl_tissue = function(species,
-                                   verbose = TRUE,
-                                   progress_bar = FALSE,
-                                   diagnostics = FALSE) {
+                                   ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "species",
                                class = c("numeric",
@@ -1304,14 +1280,12 @@ rba_ensembl_eqtl_tissue = function(species,
 
 #' Returns the p-value for each SNP in a given gene
 #'
-#' @param stable_id
 #' @param species
 #' @param statistic
 #' @param tissue
+#' @param gene_id
+#' @param ...
 #' @param variant_name
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -1322,9 +1296,9 @@ rba_ensembl_eqtl_gene = function(gene_id,
                                  statistic = NA,
                                  tissue = NA,
                                  variant_name = NA,
-                                 verbose = TRUE,
-                                 progress_bar = FALSE,
-                                 diagnostics = FALSE) {
+                                 ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "gene_id",
                                class = "character"),
@@ -1373,10 +1347,8 @@ rba_ensembl_eqtl_gene = function(gene_id,
 #' @param species
 #' @param stable_id
 #' @param statistic
+#' @param ...
 #' @param tissue
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -1387,9 +1359,9 @@ rba_ensembl_eqtl_variant = function(variant_name,
                                     stable_id = NA,
                                     statistic = NA,
                                     tissue = NA,
-                                    verbose = TRUE,
-                                    progress_bar = FALSE,
-                                    diagnostics = FALSE) {
+                                    ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "variant_name",
                                class = "character"),
@@ -1444,10 +1416,8 @@ rba_ensembl_eqtl_variant = function(variant_name,
 #' @param attribs
 #' @param d_prime
 #' @param r2
+#' @param ...
 #' @param window_size
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -1460,9 +1430,9 @@ rba_ensembl_ld_variants = function(variant_id,
                                    d_prime = NA,
                                    r2 = NA,
                                    window_size = 500,
-                                   verbose = TRUE,
-                                   progress_bar = FALSE,
-                                   diagnostics = FALSE) {
+                                   ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "variant_id",
                                class = "character"),
@@ -1521,10 +1491,8 @@ rba_ensembl_ld_variants = function(variant_id,
 #' @param species
 #' @param population_name
 #' @param d_prime
+#' @param ...
 #' @param r2
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -1536,9 +1504,9 @@ rba_ensembl_ld_pairwise = function(variant_id_1,
                                    population_name = NA,
                                    d_prime = NA,
                                    r2 = NA,
-                                   verbose = TRUE,
-                                   progress_bar = FALSE,
-                                   diagnostics = FALSE) {
+                                   ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "variant_id_1",
                                class = "character"),
@@ -1592,10 +1560,8 @@ rba_ensembl_ld_pairwise = function(variant_id_1,
 #' @param population_name
 #' @param species
 #' @param d_prime
+#' @param ...
 #' @param r2
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -1606,9 +1572,9 @@ rba_ensembl_ld_region = function(region,
                                  species,
                                  d_prime = NA,
                                  r2 = NA,
-                                 verbose = TRUE,
-                                 progress_bar = FALSE,
-                                 diagnostics = FALSE) {
+                                 ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "region",
                                class = "character"),
@@ -1660,10 +1626,8 @@ rba_ensembl_ld_region = function(region,
 #' @param expand
 #' @param format
 #' @param object_type
+#' @param ...
 #' @param species
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -1675,9 +1639,9 @@ rba_ensembl_lookup_id = function(ids,
                                  format = "full",
                                  object_type = NA,
                                  species = NA,
-                                 verbose = TRUE,
-                                 progress_bar = FALSE,
-                                 diagnostics = FALSE) {
+                                 ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "ids",
                                class = "character",
@@ -1741,10 +1705,8 @@ rba_ensembl_lookup_id = function(ids,
 #' @param symbols
 #' @param species
 #' @param expand
+#' @param ...
 #' @param format
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -1754,9 +1716,9 @@ rba_ensembl_lookup_symbol = function(symbols,
                                      species,
                                      expand = FALSE,
                                      format = "full",
-                                     verbose = TRUE,
-                                     progress_bar = FALSE,
-                                     diagnostics = FALSE) {
+                                     ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "symbols",
                                class = "character",
@@ -1810,10 +1772,8 @@ rba_ensembl_lookup_symbol = function(symbols,
 #' @param ensembl_id
 #' @param region
 #' @param species
+#' @param ...
 #' @param include_original_region
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -1823,9 +1783,9 @@ rba_ensembl_map_cdna = function(ensembl_id,
                                 region,
                                 species = NA,
                                 include_original_region = FALSE,
-                                verbose = TRUE,
-                                progress_bar = FALSE,
-                                diagnostics = FALSE) {
+                                ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "ensembl_id",
                                class = "character"),
@@ -1870,10 +1830,8 @@ rba_ensembl_map_cdna = function(ensembl_id,
 #' @param ensembl_id
 #' @param region
 #' @param species
+#' @param ...
 #' @param include_original_region
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -1883,9 +1841,9 @@ rba_ensembl_map_cds = function(ensembl_id,
                                region,
                                species = NA,
                                include_original_region = FALSE,
-                               verbose = TRUE,
-                               progress_bar = FALSE,
-                               diagnostics = FALSE) {
+                               ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "ensembl_id",
                                class = "character"),
@@ -1931,10 +1889,8 @@ rba_ensembl_map_cds = function(ensembl_id,
 #' @param region
 #' @param species
 #' @param coord_system
+#' @param ...
 #' @param target_coord_system
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -1946,9 +1902,9 @@ rba_ensembl_map_assembly = function(asm_one,
                                     species,
                                     coord_system = "chromosome",
                                     target_coord_system = "chromosome",
-                                    verbose = TRUE,
-                                    progress_bar = FALSE,
-                                    diagnostics = FALSE) {
+                                    ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "asm_one",
                                class = "character"),
@@ -1998,10 +1954,8 @@ rba_ensembl_map_assembly = function(asm_one,
 #'
 #' @param ensembl_id
 #' @param region
+#' @param ...
 #' @param species
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -2010,9 +1964,9 @@ rba_ensembl_map_assembly = function(asm_one,
 rba_ensembl_map_translation = function(ensembl_id,
                                        region,
                                        species = NA,
-                                       verbose = TRUE,
-                                       progress_bar = FALSE,
-                                       diagnostics = FALSE) {
+                                       ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "ensembl_id",
                                class = "character"),
@@ -2052,10 +2006,8 @@ rba_ensembl_map_translation = function(ensembl_id,
 #'
 #' @param term_id
 #' @param chart
+#' @param ...
 #' @param ontology
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -2064,9 +2016,9 @@ rba_ensembl_map_translation = function(ensembl_id,
 rba_ensembl_ontology_ancestors = function(term_id,
                                           chart = FALSE,
                                           ontology = NA,
-                                          verbose = TRUE,
-                                          progress_bar = FALSE,
-                                          diagnostics = FALSE) {
+                                          ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "term_id",
                                class = "character"),
@@ -2114,10 +2066,8 @@ rba_ensembl_ontology_ancestors = function(term_id,
 #' @param closest_term
 #' @param ontology
 #' @param subset
+#' @param ...
 #' @param zero_distance
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -2128,9 +2078,9 @@ rba_ensembl_ontology_descendants = function(term_id,
                                             ontology = NA,
                                             subset = NA,
                                             zero_distance = NA,
-                                            verbose = TRUE,
-                                            progress_bar = FALSE,
-                                            diagnostics = FALSE) {
+                                            ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "term_id",
                                class = "character"),
@@ -2178,10 +2128,8 @@ rba_ensembl_ontology_descendants = function(term_id,
 #'
 #' @param term_id
 #' @param relation
+#' @param ...
 #' @param simple
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -2190,9 +2138,9 @@ rba_ensembl_ontology_descendants = function(term_id,
 rba_ensembl_ontology_id = function(term_id,
                                    relation = NA,
                                    simple = FALSE,
-                                   verbose = TRUE,
-                                   progress_bar = FALSE,
-                                   diagnostics = FALSE) {
+                                   ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "term_id",
                                class = "character"),
@@ -2231,10 +2179,8 @@ rba_ensembl_ontology_id = function(term_id,
 #' @param name
 #' @param ontology
 #' @param relation
+#' @param ...
 #' @param simple
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -2244,9 +2190,9 @@ rba_ensembl_ontology_name = function(name,
                                      ontology = NA,
                                      relation = NA,
                                      simple = FALSE,
-                                     verbose = TRUE,
-                                     progress_bar = FALSE,
-                                     diagnostics = FALSE) {
+                                     ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "name",
                                class = "character"),
@@ -2289,19 +2235,17 @@ rba_ensembl_ontology_name = function(name,
 
 #' Return the taxonomic classification of a taxon node
 #'
+#' @param ...
 #' @param taxon_id
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
 #'
 #' @examples
 rba_ensembl_taxonomy_classification = function(taxon_id,
-                                               verbose = TRUE,
-                                               progress_bar = FALSE,
-                                               diagnostics = FALSE) {
+                                               ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "taxon_id",
                                class = c("numeric",
@@ -2326,10 +2270,8 @@ rba_ensembl_taxonomy_classification = function(taxon_id,
 #' Search for a taxonomic term by its identifier or name
 #'
 #' @param taxon_id
+#' @param ...
 #' @param simple
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -2337,9 +2279,9 @@ rba_ensembl_taxonomy_classification = function(taxon_id,
 #' @examples
 rba_ensembl_taxonomy_id = function(taxon_id,
                                    simple = FALSE,
-                                   verbose = TRUE,
-                                   progress_bar = FALSE,
-                                   diagnostics = FALSE) {
+                                   ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "taxon_id",
                                class = c("numeric",
@@ -2371,19 +2313,17 @@ rba_ensembl_taxonomy_id = function(taxon_id,
 
 #' Search for a taxonomic id by a non-scientific name
 #'
+#' @param ...
 #' @param name
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
 #'
 #' @examples
 rba_ensembl_taxonomy_name = function(name,
-                                     verbose = TRUE,
-                                     progress_bar = FALSE,
-                                     diagnostics = FALSE) {
+                                     ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "name",
                                class = "character")))
@@ -2419,10 +2359,8 @@ rba_ensembl_taxonomy_name = function(name,
 #' @param so_term
 #' @param species
 #' @param species_set
+#' @param ...
 #' @param variant_set
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -2439,9 +2377,9 @@ rba_ensembl_overlap_id = function(ensembl_id,
                                   species = NA,
                                   species_set = "mammals",
                                   variant_set = NA,
-                                  verbose = TRUE,
-                                  progress_bar = FALSE,
-                                  diagnostics = FALSE) {
+                                  ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "ensembl_id",
                                class = "character"),
@@ -2545,10 +2483,8 @@ rba_ensembl_overlap_id = function(ensembl_id,
 #' @param species_set
 #' @param variant_set
 #' @param trim_downstream
+#' @param ...
 #' @param trim_upstream
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -2566,9 +2502,9 @@ rba_ensembl_overlap_region = function(region,
                                       variant_set = NA,
                                       trim_downstream = FALSE,
                                       trim_upstream = FALSE,
-                                      verbose = TRUE,
-                                      progress_bar = FALSE,
-                                      diagnostics = FALSE) {
+                                      ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "region",
                                class = "character"),
@@ -2673,10 +2609,8 @@ rba_ensembl_overlap_region = function(region,
 #' @param feature
 #' @param so_term
 #' @param species
+#' @param ...
 #' @param type
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -2688,9 +2622,9 @@ rba_ensembl_overlap_translation = function(ensembl_id,
                                            so_term = NA,
                                            species = NA,
                                            type = NA,
-                                           verbose = TRUE,
-                                           progress_bar = FALSE,
-                                           diagnostics = FALSE) {
+                                           ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "ensembl_id",
                                class = "character"),
@@ -2757,10 +2691,8 @@ rba_ensembl_overlap_translation = function(ensembl_id,
 #' @param include_children
 #' @param include_pubmed_id
 #' @param include_review_status
+#' @param ...
 #' @param source
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -2772,9 +2704,9 @@ rba_ensembl_phenotype_accession = function(accession,
                                            include_pubmed_id = FALSE,
                                            include_review_status = FALSE,
                                            source = "undef",
-                                           verbose = TRUE,
-                                           progress_bar = FALSE,
-                                           diagnostics = FALSE) {
+                                           ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "accession",
                                class = "character"),
@@ -2831,10 +2763,8 @@ rba_ensembl_phenotype_accession = function(accession,
 #' @param include_overlap
 #' @param include_pubmed_id
 #' @param include_review_status
+#' @param ...
 #' @param include_submitter
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -2847,9 +2777,9 @@ rba_ensembl_phenotype_gene = function(gene,
                                       include_pubmed_id = FALSE,
                                       include_review_status = FALSE,
                                       include_submitter = FALSE,
-                                      verbose = TRUE,
-                                      progress_bar = FALSE,
-                                      diagnostics = FALSE) {
+                                      ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "gene",
                                class = "character"),
@@ -2911,10 +2841,8 @@ rba_ensembl_phenotype_gene = function(gene,
 #' @param include_pubmed_id
 #' @param include_review_status
 #' @param include_submitter
+#' @param ...
 #' @param only_phenotypes
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -2927,9 +2855,9 @@ rba_ensembl_phenotype_region = function(region,
                                         include_review_status = FALSE,
                                         include_submitter = FALSE,
                                         only_phenotypes = FALSE,
-                                        verbose = TRUE,
-                                        progress_bar = FALSE,
-                                        diagnostics = FALSE) {
+                                        ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "region",
                                class = "character"),
@@ -2991,10 +2919,8 @@ rba_ensembl_phenotype_region = function(region,
 #' @param include_children
 #' @param include_pubmed_id
 #' @param include_review_status
+#' @param ...
 #' @param source
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -3006,9 +2932,9 @@ rba_ensembl_phenotype_term = function(term,
                                       include_pubmed_id = FALSE,
                                       include_review_status = FALSE,
                                       source = "undef",
-                                      verbose = TRUE,
-                                      progress_bar = FALSE,
-                                      diagnostics = FALSE) {
+                                      ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "term",
                                class = "character"),
@@ -3064,10 +2990,8 @@ rba_ensembl_phenotype_term = function(term,
 #'
 #' @param microarray
 #' @param vendor
+#' @param ...
 #' @param species
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -3076,9 +3000,9 @@ rba_ensembl_phenotype_term = function(term,
 rba_ensembl_microarray_vendor = function(microarray,
                                          vendor,
                                          species,
-                                         verbose = TRUE,
-                                         progress_bar = FALSE,
-                                         diagnostics = FALSE) {
+                                         ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "microarray",
                                class = "character"),
@@ -3110,19 +3034,17 @@ rba_ensembl_microarray_vendor = function(microarray,
 
 #' Returns information about all microarrays available for the given species
 #'
+#' @param ...
 #' @param species
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
 #'
 #' @examples
 rba_ensembl_microarray_species = function(species,
-                                          verbose = TRUE,
-                                          progress_bar = FALSE,
-                                          diagnostics = FALSE) {
+                                          ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "species",
                                class = c("character",
@@ -3149,10 +3071,8 @@ rba_ensembl_microarray_species = function(species,
 #'
 #' @param microarray
 #' @param probe
+#' @param ...
 #' @param species
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -3161,9 +3081,9 @@ rba_ensembl_microarray_species = function(species,
 rba_ensembl_microarray_probe = function(microarray,
                                         probe,
                                         species,
-                                        verbose = TRUE,
-                                        progress_bar = FALSE,
-                                        diagnostics = FALSE) {
+                                        ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "microarray",
                                class = "character"),
@@ -3197,10 +3117,8 @@ rba_ensembl_microarray_probe = function(microarray,
 #'
 #' @param microarray
 #' @param probe_set
+#' @param ...
 #' @param species
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -3209,9 +3127,9 @@ rba_ensembl_microarray_probe = function(microarray,
 rba_ensembl_microarray_probe_set = function(microarray,
                                             probe_set,
                                             species,
-                                            verbose = TRUE,
-                                            progress_bar = FALSE,
-                                            diagnostics = FALSE) {
+                                            ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "microarray",
                                class = "character"),
@@ -3243,19 +3161,17 @@ rba_ensembl_microarray_probe_set = function(microarray,
 
 #' Returns information about all epigenomes available for the given species
 #'
+#' @param ...
 #' @param species
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
 #'
 #' @examples
 rba_ensembl_microarray_epigenome = function(species,
-                                            verbose = TRUE,
-                                            progress_bar = FALSE,
-                                            diagnostics = FALSE) {
+                                            ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "species",
                                class = c("character",
@@ -3282,10 +3198,8 @@ rba_ensembl_microarray_epigenome = function(species,
 #'
 #' @param binding_matrix_id
 #' @param species
+#' @param ...
 #' @param unit
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -3294,9 +3208,9 @@ rba_ensembl_microarray_epigenome = function(species,
 rba_ensembl_microarray_binding_matrix = function(binding_matrix_id,
                                                  species,
                                                  unit = "frequencies",
-                                                 verbose = TRUE,
-                                                 progress_bar = FALSE,
-                                                 diagnostics = FALSE) {
+                                                 ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "binding_matrix_id",
                                class = "character"),
@@ -3335,10 +3249,8 @@ rba_ensembl_microarray_binding_matrix = function(binding_matrix_id,
 #'
 #' @param regulatory_feature_id
 #' @param species
+#' @param ...
 #' @param activity
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -3347,9 +3259,9 @@ rba_ensembl_microarray_binding_matrix = function(binding_matrix_id,
 rba_ensembl_microarray_regulatory_feature  = function(regulatory_feature_id,
                                                       species,
                                                       activity = FALSE,
-                                                      verbose = TRUE,
-                                                      progress_bar = FALSE,
-                                                      diagnostics = FALSE) {
+                                                      ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "regulatory_feature_id",
                                class = "character"),
@@ -3398,10 +3310,8 @@ rba_ensembl_microarray_regulatory_feature  = function(regulatory_feature_id,
 #' @param mask_feature
 #' @param object_type
 #' @param type
+#' @param ...
 #' @param species
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -3419,9 +3329,9 @@ rba_ensembl_sequence_id = function(ids,
                                    object_type = NA,
                                    type = "genomic",
                                    species = NA,
-                                   verbose = TRUE,
-                                   progress_bar = FALSE,
-                                   diagnostics = FALSE) {
+                                   ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
 
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "ids",
@@ -3523,10 +3433,8 @@ rba_ensembl_sequence_id = function(ids,
 #' @param expand_5prime
 #' @param format
 #' @param mask
+#' @param ...
 #' @param mask_feature
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -3541,9 +3449,9 @@ rba_ensembl_sequence_region = function(regions,
                                        format = NA,
                                        mask = NA,
                                        mask_feature = FALSE,
-                                       verbose = TRUE,
-                                       progress_bar = FALSE,
-                                       diagnostics = FALSE) {
+                                       ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
 
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "region",
@@ -3637,10 +3545,8 @@ rba_ensembl_sequence_region = function(regions,
 #' @param species
 #' @param aligned_sequences
 #' @param samples
+#' @param ...
 #' @param sequence
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -3651,9 +3557,9 @@ rba_ensembl_transcript_haplotypes  = function(transcript_id,
                                               aligned_sequences = FALSE,
                                               samples = FALSE,
                                               sequence = FALSE,
-                                              verbose = TRUE,
-                                              progress_bar = FALSE,
-                                              diagnostics = FALSE) {
+                                              ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "transcript_id",
                                class = "character"),
@@ -3735,10 +3641,8 @@ rba_ensembl_transcript_haplotypes  = function(transcript_id,
 #' @param uniprot
 #' @param variant_class
 #' @param vcf_string
+#' @param ...
 #' @param xref_refseq
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -3779,10 +3683,9 @@ rba_ensembl_vep_hgvs = function(hgvs_notations,
                                 variant_class = FALSE,
                                 vcf_string = FALSE,
                                 xref_refseq = FALSE,
-                                verbose = TRUE,
-                                progress_bar = FALSE,
-                                diagnostics = FALSE) {
-
+                                ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "hgvs_notations",
                                class = "character",
@@ -4018,10 +3921,8 @@ rba_ensembl_vep_hgvs = function(hgvs_notations,
 #' @param uniprot
 #' @param variant_class
 #' @param vcf_string
+#' @param ...
 #' @param xref_refseq
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -4062,10 +3963,9 @@ rba_ensembl_vep_ids = function(ids,
                                variant_class = FALSE,
                                vcf_string = FALSE,
                                xref_refseq = FALSE,
-                               verbose = TRUE,
-                               progress_bar = FALSE,
-                               diagnostics = FALSE) {
-
+                               ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "ids",
                                class = "character",
@@ -4267,7 +4167,6 @@ rba_ensembl_vep_ids = function(ids,
 
 #' Fetch variant consequences for multiple regions
 #'
-#' @param variant
 #' @param species
 #' @param Blosum62
 #' @param CADD
@@ -4301,10 +4200,9 @@ rba_ensembl_vep_ids = function(ids,
 #' @param uniprot
 #' @param variant_class
 #' @param vcf_string
+#' @param variants
+#' @param ...
 #' @param xref_refseq
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -4345,10 +4243,9 @@ rba_ensembl_vep_variant = function(variants,
                                    variant_class = FALSE,
                                    vcf_string = FALSE,
                                    xref_refseq = FALSE,
-                                   verbose = TRUE,
-                                   progress_bar = FALSE,
-                                   diagnostics = FALSE) {
-
+                                   ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "variants",
                                class = "character",
@@ -4585,10 +4482,8 @@ rba_ensembl_vep_variant = function(variants,
 #' @param uniprot
 #' @param variant_class
 #' @param vcf_string
+#' @param ...
 #' @param xref_refseq
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -4630,10 +4525,9 @@ rba_ensembl_vep_allele = function(allele,
                                   variant_class = FALSE,
                                   vcf_string = FALSE,
                                   xref_refseq = FALSE,
-                                  verbose = TRUE,
-                                  progress_bar = FALSE,
-                                  diagnostics = FALSE) {
-
+                                  ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "variants",
                                class = "character"),
@@ -4839,10 +4733,8 @@ rba_ensembl_vep_allele = function(allele,
 #'
 #' @param ids
 #' @param species
+#' @param ...
 #' @param fields
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -4851,9 +4743,9 @@ rba_ensembl_vep_allele = function(allele,
 rba_ensembl_variant_recoder = function(ids,
                                        species,
                                        fields = NA,
-                                       verbose = TRUE,
-                                       progress_bar = FALSE,
-                                       diagnostics = FALSE) {
+                                       ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "ids",
                                class = "character",
@@ -4877,7 +4769,7 @@ rba_ensembl_variant_recoder = function(ids,
                             list("fields",
                                  any(is.na(fields)),
                                  paste(fields, collapse = ","))
-                            )
+  )
 
   ## build POST API request's URL
   call_body = jsonlite::toJSON(list("ids" = as.array(ids)))
@@ -4907,10 +4799,8 @@ rba_ensembl_variant_recoder = function(ids,
 #' @param genotypes
 #' @param phenotypes
 #' @param pops
+#' @param ...
 #' @param population_genotypes
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -4922,9 +4812,9 @@ rba_ensembl_variation_id  = function(ids,
                                      phenotypes = FALSE,
                                      pops = FALSE,
                                      population_genotypes = FALSE,
-                                     verbose = TRUE,
-                                     progress_bar = FALSE,
-                                     diagnostics = FALSE) {
+                                     ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "ids",
                                class = "character",
@@ -4982,10 +4872,8 @@ rba_ensembl_variation_id  = function(ids,
 #'
 #' @param pmid
 #' @param pmcid
+#' @param ...
 #' @param species
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -4994,9 +4882,9 @@ rba_ensembl_variation_id  = function(ids,
 rba_ensembl_variation_pubmed  = function(pmid = NA,
                                          pmcid = NA,
                                          species,
-                                         verbose = TRUE,
-                                         progress_bar = FALSE,
-                                         diagnostics = FALSE) {
+                                         ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "pmid",
                                class = "character"),

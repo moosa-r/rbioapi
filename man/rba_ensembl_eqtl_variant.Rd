@@ -10,13 +10,11 @@ rba_ensembl_eqtl_variant(
   stable_id = NA,
   statistic = NA,
   tissue = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{tissue}{}
 }
 \value{
 

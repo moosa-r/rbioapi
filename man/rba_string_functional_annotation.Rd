@@ -9,13 +9,11 @@ rba_string_functional_annotation(
   species = NA,
   allow_pubmed = FALSE,
   caller_identity = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{caller_identity}{}
 }
 \value{
 

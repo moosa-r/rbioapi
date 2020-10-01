@@ -9,13 +9,11 @@ rba_uniprot_coordinates_taxonomy(
   locations,
   in_range = NA,
   feature = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{feature}{}
 }
 \value{
 

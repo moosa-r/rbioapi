@@ -15,13 +15,11 @@ rba_uniprot_uniparc_bestguess(
   db_id = NA,
   gene = NA,
   taxid = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{taxid}{}
 }
 \value{
 

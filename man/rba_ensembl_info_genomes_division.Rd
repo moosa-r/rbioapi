@@ -4,24 +4,12 @@
 \alias{rba_ensembl_info_genomes_division}
 \title{Find information about all genomes in a given division.}
 \usage{
-rba_ensembl_info_genomes_division(
-  division_name,
-  expand = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_genomes_division(division_name, expand = FALSE, ...)
 
-rba_ensembl_info_genomes_division(
-  division_name,
-  expand = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_genomes_division(division_name, expand = FALSE, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{expand}{}
 }
 \value{
 

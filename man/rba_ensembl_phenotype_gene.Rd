@@ -12,13 +12,11 @@ rba_ensembl_phenotype_gene(
   include_pubmed_id = FALSE,
   include_review_status = FALSE,
   include_submitter = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{include_submitter}{}
 }
 \value{
 

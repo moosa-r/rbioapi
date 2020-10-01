@@ -4,15 +4,10 @@
 \alias{rba_ensembl_microarray_epigenome}
 \title{Returns information about all epigenomes available for the given species}
 \usage{
-rba_ensembl_microarray_epigenome(
-  species,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_microarray_epigenome(species, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{species}{}
 }
 \value{
 

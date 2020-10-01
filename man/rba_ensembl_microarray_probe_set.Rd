@@ -4,17 +4,10 @@
 \alias{rba_ensembl_microarray_probe_set}
 \title{Returns information about a specific probe_set from a microarray}
 \usage{
-rba_ensembl_microarray_probe_set(
-  microarray,
-  probe_set,
-  species,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_microarray_probe_set(microarray, probe_set, species, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{species}{}
 }
 \value{
 

@@ -17,13 +17,11 @@ rba_ensembl_sequence_id(
   object_type = NA,
   type = "genomic",
   species = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{species}{}
 }
 \value{
 

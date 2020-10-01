@@ -13,13 +13,11 @@ rba_uniprot_proteomes_search(
   genome_acc = NA,
   is_ref_proteome = NA,
   is_redundant = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{taxid}{}
 }
 \value{
 

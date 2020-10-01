@@ -9,13 +9,11 @@ rba_reactome_participants(
   id,
   physical_entities = FALSE,
   reference_entities = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{reference_entities}{}
 }
 \value{
 

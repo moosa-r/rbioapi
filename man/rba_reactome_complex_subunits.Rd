@@ -8,22 +8,14 @@ the content returning each contained PhysicalEntity. Contained complexes
 and entity sets can be excluded setting the ‘excludeStructures’ optional
 parameter to ‘true’}
 \usage{
-rba_reactome_complex_subunits(
-  id,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_reactome_complex_subunits(id, ...)
 
-rba_reactome_complex_subunits(
-  id,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_reactome_complex_subunits(id, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{id}{}
+
+\item{exclude_structures}{}
 }
 \value{
 

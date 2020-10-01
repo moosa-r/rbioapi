@@ -5,40 +5,16 @@
 \title{List all compara analyses available (an analysis defines the type of
 comparative data).}
 \usage{
-rba_ensembl_info_compara_methods(
-  method,
-  compara = "vertebrates",
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_compara_methods(method, compara = "vertebrates", ...)
 
-rba_ensembl_info_compara_methods(
-  method,
-  compara = "vertebrates",
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_compara_methods(method, compara = "vertebrates", ...)
 
-rba_ensembl_info_compara_methods(
-  method,
-  compara = "vertebrates",
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_compara_methods(method, compara = "vertebrates", ...)
 
-rba_ensembl_info_compara_methods(
-  method,
-  compara = "vertebrates",
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_compara_methods(method, compara = "vertebrates", ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{compara}{}
 }
 \value{
 

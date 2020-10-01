@@ -12,13 +12,11 @@ rba_uniprot_variation_dbsnp(
   wild_type = NA,
   alternative_sequence = NA,
   location = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{save_peff}{}
 }
 \value{
 

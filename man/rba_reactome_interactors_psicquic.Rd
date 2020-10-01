@@ -5,17 +5,10 @@
 \title{Retrieve clustered interaction, sorted by score, of a given accession(s)
 by resource.}
 \usage{
-rba_reactome_interactors_psicquic(
-  resource,
-  proteins,
-  details = "details",
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_reactome_interactors_psicquic(resource, proteins, details = "details", ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{proteins}{}
 }
 \value{
 

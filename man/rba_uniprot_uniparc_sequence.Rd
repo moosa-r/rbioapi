@@ -10,13 +10,11 @@ rba_uniprot_uniparc_sequence(
   rf_db_id = NA,
   rf_active = NA,
   rf_tax_id = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{rf_tax_id}{}
 }
 \value{
 

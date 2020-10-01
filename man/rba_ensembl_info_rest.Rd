@@ -4,20 +4,12 @@
 \alias{rba_ensembl_info_rest}
 \title{Shows the current version of the Ensembl REST API.}
 \usage{
-rba_ensembl_info_rest(
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_rest(...)
 
-rba_ensembl_info_rest(
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_rest(...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{...}{}
 }
 \value{
 

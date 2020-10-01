@@ -7,17 +7,10 @@ Search for term(s) that appear in feature description for your specified
 feature type. For example, you can search by type=DOMAIN and
 Term=Kinase. Comma separated values}
 \usage{
-rba_uniprot_features_type(
-  terms,
-  type,
-  categories = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_uniprot_features_type(terms, type, categories = NA, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{categories}{}
 }
 \value{
 

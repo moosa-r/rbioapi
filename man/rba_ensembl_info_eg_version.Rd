@@ -4,20 +4,12 @@
 \alias{rba_ensembl_info_eg_version}
 \title{Returns the Ensembl Genomes version of the databases backing this service}
 \usage{
-rba_ensembl_info_eg_version(
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_eg_version(...)
 
-rba_ensembl_info_eg_version(
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_eg_version(...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{...}{}
 }
 \value{
 

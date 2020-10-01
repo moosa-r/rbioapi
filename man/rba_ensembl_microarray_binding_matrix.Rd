@@ -8,13 +8,11 @@ rba_ensembl_microarray_binding_matrix(
   binding_matrix_id,
   species,
   unit = "frequencies",
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{unit}{}
 }
 \value{
 

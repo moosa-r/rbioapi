@@ -7,15 +7,10 @@ given entity as their component. It should be mentioned that the list
 includes only simplified entries (type, names, ids) and not full
 information about each item.}
 \usage{
-rba_reactome_entity_component_of(
-  entity_id,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_reactome_entity_component_of(entity_id, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{entity_id}{}
 }
 \value{
 

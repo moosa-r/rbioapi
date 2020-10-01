@@ -10,13 +10,11 @@ rba_ensembl_transcript_haplotypes(
   aligned_sequences = FALSE,
   samples = FALSE,
   sequence = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{sequence}{}
 }
 \value{
 

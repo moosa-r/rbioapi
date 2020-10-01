@@ -18,13 +18,11 @@ rba_ensembl_overlap_region(
   variant_set = NA,
   trim_downstream = FALSE,
   trim_upstream = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{trim_upstream}{}
 }
 \value{
 

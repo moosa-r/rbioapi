@@ -12,13 +12,11 @@ rba_ensembl_lookup_id(
   format = "full",
   object_type = NA,
   species = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{species}{}
 }
 \value{
 

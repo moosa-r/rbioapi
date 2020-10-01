@@ -9,13 +9,11 @@ rba_ensembl_ontology_name(
   ontology = NA,
   relation = NA,
   simple = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{simple}{}
 }
 \value{
 

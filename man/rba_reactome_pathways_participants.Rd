@@ -8,16 +8,10 @@ contain other events. For example, a pathway can contain smaller pathways
 (subpathways) and reactions. This method recursively retrieves a single
 attribute for each of the events contained in the given event.}
 \usage{
-rba_reactome_pathways_participants(
-  id,
-  attribute_name = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_reactome_pathways_participants(id, attribute_name = NA, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{attribute_name}{}
 }
 \value{
 

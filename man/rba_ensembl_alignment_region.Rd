@@ -15,13 +15,11 @@ rba_ensembl_alignment_region(
   method = "EPO",
   species_set = NA,
   species_set_group = "mammals",
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{species_set_group}{}
 }
 \value{
 

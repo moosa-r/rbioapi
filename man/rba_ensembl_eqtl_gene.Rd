@@ -10,13 +10,11 @@ rba_ensembl_eqtl_gene(
   statistic = NA,
   tissue = NA,
   variant_name = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{variant_name}{}
 }
 \value{
 

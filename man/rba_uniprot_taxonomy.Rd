@@ -5,17 +5,10 @@
 \title{This service returns a list of children/siblings/parent nodes that belongs
 to a taxonomy node with links to its parent, sibling and children nodes.}
 \usage{
-rba_uniprot_taxonomy(
-  ids,
-  hierarchy = NA,
-  node = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_uniprot_taxonomy(ids, hierarchy = NA, node = FALSE, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{node}{}
 }
 \value{
 

@@ -4,17 +4,10 @@
 \alias{rba_uniprot_features}
 \title{Get UniProt protein sequence features by accession}
 \usage{
-rba_uniprot_features(
-  accession,
-  types = NA,
-  categories = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_uniprot_features(accession, types = NA, categories = NA, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{categories}{}
 }
 \value{
 

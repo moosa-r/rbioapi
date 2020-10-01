@@ -10,13 +10,11 @@ rba_ensembl_map_cdna(
   region,
   species = NA,
   include_original_region = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{include_original_region}{}
 }
 \value{
 

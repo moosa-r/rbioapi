@@ -4,15 +4,10 @@
 \alias{rba_ensembl_archive}
 \title{Retrieve the latest version for a set of identifiers}
 \usage{
-rba_ensembl_archive(
-  ids,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_archive(ids, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{...}{}
 }
 \value{
 

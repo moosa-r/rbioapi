@@ -19,13 +19,11 @@ rba_uniprot_proteins_search(
   pubmed = NA,
   seq_length = NA,
   md5 = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{md5}{}
 }
 \value{
 

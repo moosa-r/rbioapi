@@ -5,16 +5,10 @@
 \title{Retrieves the list of complexes that contain a given (identifier, resource).
 The method deconstructs the complexes into all its participants to do so.}
 \usage{
-rba_reactome_complex_list(
-  id,
-  resource,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_reactome_complex_list(id, resource, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{resource}{}
 }
 \value{
 

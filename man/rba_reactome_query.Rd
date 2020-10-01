@@ -8,14 +8,12 @@ rba_reactome_query(
   ids,
   enhanced = FALSE,
   map = FALSE,
-  verbose = TRUE,
   attribute_name = NA,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{attribute_name}{}
 }
 \value{
 

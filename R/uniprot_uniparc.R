@@ -18,10 +18,8 @@
 #' @param rf_db_id
 #' @param rf_active
 #' @param rf_tax_id
+#' @param ...
 #' @param location
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -46,9 +44,9 @@ rba_uniprot_uniparc_search = function(upi = NA,
                                       rf_active = NA,
                                       rf_tax_id = NA,
                                       location = NA,
-                                      verbose = TRUE,
-                                      progress_bar = FALSE,
-                                      diagnostics = FALSE) {
+                                      ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "upi",
                                class = "character",
@@ -184,10 +182,8 @@ rba_uniprot_uniparc_search = function(upi = NA,
 #' @param rf_dd_type
 #' @param rf_db_id
 #' @param rf_active
+#' @param ...
 #' @param rf_tax_id
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -198,9 +194,9 @@ rba_uniprot_uniparc = function(accession = NA,
                                rf_db_id = NA,
                                rf_active = NA,
                                rf_tax_id = NA,
-                               verbose = TRUE,
-                               progress_bar = FALSE,
-                               diagnostics = FALSE) {
+                               ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "accession",
                                class = "character",
@@ -261,10 +257,8 @@ rba_uniprot_uniparc = function(accession = NA,
 #' @param accession
 #' @param db_id
 #' @param gene
+#' @param ...
 #' @param taxid
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -275,9 +269,9 @@ rba_uniprot_uniparc_bestguess = function(upi = NA,
                                          db_id = NA,
                                          gene = NA,
                                          taxid = NA,
-                                         verbose = TRUE,
-                                         progress_bar = FALSE,
-                                         diagnostics = FALSE) {
+                                         ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "upi",
                                class = "character",
@@ -338,10 +332,10 @@ rba_uniprot_uniparc_bestguess = function(upi = NA,
 #' @param rf_dd_type
 #' @param rf_db_id
 #' @param rf_active
+#' @param upid
+#' @param upi
+#' @param ...
 #' @param rf_tax_id
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -354,9 +348,9 @@ rba_uniprot_uniparc_get = function(db_id = NA,
                                    rf_db_id = NA,
                                    rf_active = NA,
                                    rf_tax_id = NA,
-                                   verbose = TRUE,
-                                   progress_bar = FALSE,
-                                   diagnostics = FALSE) {
+                                   ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "db_id",
                                class = "character"),
@@ -430,10 +424,8 @@ rba_uniprot_uniparc_get = function(db_id = NA,
 #' @param rf_dd_type
 #' @param rf_db_id
 #' @param rf_active
+#' @param ...
 #' @param rf_tax_id
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -444,9 +436,9 @@ rba_uniprot_uniparc_sequence = function(sequence,
                                         rf_db_id = NA,
                                         rf_active = NA,
                                         rf_tax_id = NA,
-                                        verbose = TRUE,
-                                        progress_bar = FALSE,
-                                        diagnostics = FALSE) {
+                                        ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "rf_dd_type",
                                class = "character"),

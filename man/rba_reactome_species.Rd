@@ -7,15 +7,10 @@ sorted by name, but having ‘Homo sapiens’ as the first one. It should be
 mentioned that for Reactome, main species are considered those have either
 manually curated or computationally inferred pathways.}
 \usage{
-rba_reactome_species(
-  species_type = "all",
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_reactome_species(species_type = "all", ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{species_type}{}
 }
 \value{
 

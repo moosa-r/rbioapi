@@ -11,13 +11,11 @@ rba_reactome_pathways_low(
   with_diagram = FALSE,
   all_forms = FALSE,
   species = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{species}{}
 }
 \value{
 

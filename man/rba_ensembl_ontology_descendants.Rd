@@ -11,13 +11,11 @@ rba_ensembl_ontology_descendants(
   ontology = NA,
   subset = NA,
   zero_distance = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{zero_distance}{}
 }
 \value{
 

@@ -4,22 +4,14 @@
 \alias{rba_uniprot_taxonomy_ancestor}
 \title{This service returns the lowest common ancestor (LCA) of two taxonomy nodes.}
 \usage{
-rba_uniprot_taxonomy_ancestor(
-  id,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_uniprot_taxonomy_ancestor(id, ...)
 
-rba_uniprot_taxonomy_ancestor(
-  id,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_uniprot_taxonomy_ancestor(id, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{id}{}
+
+\item{ids}{}
 }
 \value{
 

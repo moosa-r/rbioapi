@@ -6,24 +6,12 @@
 :group argument provided, list the properties of biotypes within that group.
 Object type (gene or transcript) can be provided for filtering.}
 \usage{
-rba_ensembl_info_biotypes_groups(
-  group = NA,
-  object_type = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_biotypes_groups(group = NA, object_type = NA, ...)
 
-rba_ensembl_info_biotypes_groups(
-  group = NA,
-  object_type = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_biotypes_groups(group = NA, object_type = NA, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{object_type}{}
 }
 \value{
 

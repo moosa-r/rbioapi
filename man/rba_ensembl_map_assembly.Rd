@@ -11,13 +11,11 @@ rba_ensembl_map_assembly(
   species,
   coord_system = "chromosome",
   target_coord_system = "chromosome",
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{target_coord_system}{}
 }
 \value{
 

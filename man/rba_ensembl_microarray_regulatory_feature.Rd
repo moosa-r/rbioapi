@@ -8,13 +8,11 @@ rba_ensembl_microarray_regulatory_feature(
   regulatory_feature_id,
   species,
   activity = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{activity}{}
 }
 \value{
 

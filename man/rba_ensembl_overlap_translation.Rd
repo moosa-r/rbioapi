@@ -12,13 +12,11 @@ rba_ensembl_overlap_translation(
   so_term = NA,
   species = NA,
   type = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{type}{}
 }
 \value{
 

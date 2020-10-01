@@ -4,16 +4,10 @@
 \alias{rba_enrichr_add_list}
 \title{Upload your gene set to Enrichr}
 \usage{
-rba_enrichr_add_list(
-  gene_list,
-  description = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_enrichr_add_list(gene_list, description = NA, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{gene_list}{}
 }
 \value{
 

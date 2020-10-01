@@ -24,13 +24,11 @@ rba_uniprot_uniparc_search(
   rf_active = NA,
   rf_tax_id = NA,
   location = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{location}{}
 }
 \value{
 

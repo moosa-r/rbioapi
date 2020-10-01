@@ -12,13 +12,11 @@ rba_uniprot_variation_accession(
   wild_type = NA,
   alternative_sequence = NA,
   location = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{accession}{}
+\item{...}{}
 }
 \value{
 

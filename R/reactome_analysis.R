@@ -3,21 +3,17 @@
 #'
 #' @param input
 #' @param type
+#' @param handle
 #'
 #' @return
 #' @export
 #' @examples
 rba_ba_reactome_input = function(input,
                                  type = NA,
-                                 handle = TRUE,
-                                 verbose = TRUE,
-                                 diagnostics = FALSE){
+                                 handle = TRUE){
   diagnostics = ifelse(exists("diagnostics", envir = parent.frame(1)),
                        eval(parse(text = "diagnostics"), envir = parent.frame(1)),
                        getOption("rba_diagnostics"))
-  verbose = ifelse(exists("verbose", envir = parent.frame(1)),
-                   eval(parse(text = "verbose"), envir = parent.frame(1)),
-                   getOption("rba_verbose"))
   ### 1 identify input
   if (is.na(type)) {
     if (is.data.frame(input) |
@@ -95,10 +91,8 @@ rba_ba_reactome_input = function(input,
 #' @param p_value
 #' @param include_disease
 #' @param min
+#' @param ...
 #' @param max
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -116,10 +110,9 @@ rba_reactome_analysis = function(input,
                                  include_disease = TRUE,
                                  min = NA,
                                  max = NA,
-                                 verbose = TRUE,
-                                 progress_bar = FALSE,
-                                 diagnostics = FALSE) {
-
+                                 ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "input",
                                class = c("character",
@@ -259,10 +252,8 @@ rba_reactome_analysis = function(input,
 #' @param resource
 #' @param diagram_profile
 #' @param analysis_profile
+#' @param ...
 #' @param fireworks_profile
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -276,9 +267,9 @@ rba_reactome_analysis_pdf = function(token,
                                      diagram_profile = "Modern",
                                      analysis_profile = "Standard",
                                      fireworks_profile = "Barium Lithium",
-                                     verbose = TRUE,
-                                     progress_bar = FALSE,
-                                     diagnostics = FALSE){
+                                     ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "token",
                                class = "character"),
@@ -371,10 +362,8 @@ rba_reactome_analysis_pdf = function(token,
 #' @param token
 #' @param request
 #' @param save_to
+#' @param ...
 #' @param resource
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -384,9 +373,9 @@ rba_reactome_analysis_download = function(token,
                                           request,
                                           save_to = NA,
                                           resource = "TOTAL",
-                                          verbose = TRUE,
-                                          progress_bar = FALSE,
-                                          diagnostics = FALSE){
+                                          ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "token",
                                class = "character"),
@@ -471,10 +460,8 @@ rba_reactome_analysis_download = function(token,
 #' /#/download/{token}/result.json. Note: The submitted file can be gzipped.
 #'
 #' @param input
+#' @param ...
 #' @param input_type
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -482,10 +469,9 @@ rba_reactome_analysis_download = function(token,
 #' @examples
 rba_reactome_analysis_import = function(input,
                                         input_type = NA,
-                                        verbose = TRUE,
-                                        progress_bar = FALSE,
-                                        diagnostics = FALSE) {
-
+                                        ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "input",
                                class = "character"),
@@ -527,14 +513,25 @@ rba_reactome_analysis_import = function(input,
 }
 
 #### Mapping Endpoints ####
+#' Maps the identifiers over the different species
+#'
+#' @param input
+#' @param input_type
+#' @param projection
+#' @param interactors
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 rba_reactome_analysis_mapping = function(input,
                                          input_type = NA,
                                          projection = FALSE,
                                          interactors = FALSE,
-                                         verbose = TRUE,
-                                         progress_bar = FALSE,
-                                         diagnostics = FALSE) {
-
+                                         ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "input",
                                class = c("character",
@@ -605,10 +602,8 @@ rba_reactome_analysis_mapping = function(input,
 #' @param resource
 #' @param p_value
 #' @param min
+#' @param ...
 #' @param max
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -621,10 +616,9 @@ rba_reactome_analysis_species = function(species_dbid,
                                          p_value = NA,
                                          min = NA,
                                          max = NA,
-                                         verbose = TRUE,
-                                         progress_bar = FALSE,
-                                         diagnostics = FALSE) {
-
+                                         ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "species_dbid",
                                class = "numeric"),
@@ -713,10 +707,8 @@ rba_reactome_analysis_species = function(species_dbid,
 #' @param p_value
 #' @param include_disease
 #' @param min
+#' @param ...
 #' @param max
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -731,10 +723,9 @@ rba_reactome_analysis_token = function(token,
                                        include_disease = TRUE,
                                        min = NA,
                                        max = NA,
-                                       verbose = TRUE,
-                                       progress_bar = FALSE,
-                                       diagnostics = FALSE) {
-
+                                       ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "token",
                                class = "character"),

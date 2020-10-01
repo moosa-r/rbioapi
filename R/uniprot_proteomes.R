@@ -1,23 +1,15 @@
 #### Proteomes Endpoints ####
 #' Search proteomes in UniProt
 #'
-#' @param accession
-#' @param reviewed
-#' @param isoform
-#' @param go_term
 #' @param keyword
-#' @param ec
-#' @param gene
-#' @param exact_gene
-#' @param protein
-#' @param organism
+#' @param upid
+#' @param name
+#' @param xref
+#' @param genome_acc
+#' @param is_ref_proteome
+#' @param is_redundant
+#' @param ...
 #' @param taxid
-#' @param pubmed
-#' @param seq_length
-#' @param md5
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -31,9 +23,9 @@ rba_uniprot_proteomes_search = function(upid = NA,
                                         genome_acc = NA,
                                         is_ref_proteome = NA,
                                         is_redundant = NA,
-                                        verbose = TRUE,
-                                        progress_bar = FALSE,
-                                        diagnostics = FALSE) {
+                                        ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "upid",
                                class = "character",
@@ -105,10 +97,8 @@ rba_uniprot_proteomes_search = function(upid = NA,
 #'
 #' @param upid
 #' @param get_proteins
+#' @param ...
 #' @param reviewed
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -117,9 +107,9 @@ rba_uniprot_proteomes_search = function(upid = NA,
 rba_uniprot_proteomes = function(upid,
                                  get_proteins = FALSE,
                                  reviewed = NA,
-                                 verbose = TRUE,
-                                 progress_bar = FALSE,
-                                 diagnostics = FALSE) {
+                                 ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "upid",
                                class = "character"),
@@ -171,10 +161,8 @@ rba_uniprot_proteomes = function(upid,
 #'
 #' @param upid
 #' @param accession
+#' @param ...
 #' @param gene
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
@@ -183,9 +171,9 @@ rba_uniprot_proteomes = function(upid,
 rba_uniprot_genecentric_search = function(upid = NA,
                                           accession = NA,
                                           gene = NA,
-                                          verbose = TRUE,
-                                          progress_bar = FALSE,
-                                          diagnostics = FALSE) {
+                                          ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "upid",
                                class = "character",
@@ -229,19 +217,17 @@ rba_uniprot_genecentric_search = function(upid = NA,
 
 #' Get gene centric proteins by Uniprot accession
 #'
+#' @param ...
 #' @param accession
-#' @param verbose
-#' @param progress_bar
-#' @param diagnostics
 #'
 #' @return
 #' @export
 #'
 #' @examples
 rba_uniprot_genecentric = function(accession,
-                                   verbose = TRUE,
-                                   progress_bar = FALSE,
-                                   diagnostics = FALSE) {
+                                   ...) {
+  ## Load user options
+  rba_ba_ext_args(...)
   ## Check input arguments
   rba_ba_args(cons = list(list(arg = "accession",
                                class = "character"))

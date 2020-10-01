@@ -4,15 +4,10 @@
 \alias{rba_uniprot_proteomics}
 \title{Get proteomics peptides mapped to UniProt by accession}
 \usage{
-rba_uniprot_proteomics(
-  accession,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_uniprot_proteomics(accession, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{accession}{}
 }
 \value{
 

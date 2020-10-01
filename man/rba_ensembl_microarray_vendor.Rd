@@ -4,17 +4,10 @@
 \alias{rba_ensembl_microarray_vendor}
 \title{Returns information about a specific microarray}
 \usage{
-rba_ensembl_microarray_vendor(
-  microarray,
-  vendor,
-  species,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_microarray_vendor(microarray, vendor, species, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{species}{}
 }
 \value{
 

@@ -9,13 +9,11 @@ rba_uniprot_coordinates_location(
   p_position = NA,
   p_start = NA,
   p_end = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{p_end}{}
 }
 \value{
 

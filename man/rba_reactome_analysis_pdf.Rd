@@ -18,13 +18,11 @@ rba_reactome_analysis_pdf(
   diagram_profile = "Modern",
   analysis_profile = "Standard",
   fireworks_profile = "Barium Lithium",
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{fireworks_profile}{}
 }
 \value{
 

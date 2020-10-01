@@ -5,16 +5,10 @@
 \title{This service returns the shortest path between two taxonomy nodes showing
 their relationship}
 \usage{
-rba_uniprot_taxonomy_relationship(
-  from,
-  to,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_uniprot_taxonomy_relationship(from, to, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{to}{}
 }
 \value{
 

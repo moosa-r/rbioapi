@@ -9,13 +9,11 @@ rba_string_enrichment(
   species = NA,
   background_string_ids = NA,
   caller_identity = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{background_string_ids}{}
+\item{...}{}
 }
 \value{
 

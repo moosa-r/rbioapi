@@ -10,9 +10,7 @@ rba_string_map_ids(
   echo_query = FALSE,
   limit = NA,
   caller_identity = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
@@ -27,12 +25,6 @@ STRING organisms).}
 come first)}
 
 \item{caller_identity}{(optional) Character, your identifier for STRING servers.}
-
-\item{verbose}{Should the function print details? (default = FALSE)}
-
-\item{progress_bar}{Logical, Display Progress bar? (default = FALSE)}
-
-\item{diagnostics}{}
 }
 \value{
 

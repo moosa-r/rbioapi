@@ -4,10 +4,10 @@
 \alias{rba_string_info}
 \title{Get Statistics from STRING database}
 \usage{
-rba_string_info(type = "statistics", verbose = TRUE, diagnostics = FALSE)
+rba_string_info(type = "statistics", ...)
 }
 \arguments{
-\item{type}{}
+\item{...}{}
 }
 \value{
 

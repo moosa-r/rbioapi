@@ -9,15 +9,10 @@ while, in the same way, a sub-pathway can take part in many pathways.
 Therefore, this method retrieves a list of all possible paths from the
 requested event to the top level pathway(s).}
 \usage{
-rba_reactome_event_ancestors(
-  event_id,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_reactome_event_ancestors(event_id, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{event_id}{}
 }
 \value{
 

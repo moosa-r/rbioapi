@@ -14,13 +14,11 @@ rba_uniprot_features_search(
   taxid = NA,
   categories = NA,
   types = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{types}{}
 }
 \value{
 

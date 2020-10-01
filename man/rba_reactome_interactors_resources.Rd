@@ -4,14 +4,10 @@
 \alias{rba_reactome_interactors_resources}
 \title{Retrieve a list of all Psicquic Registries services}
 \usage{
-rba_reactome_interactors_resources(
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_reactome_interactors_resources(...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{...}{}
 }
 \value{
 

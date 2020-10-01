@@ -4,17 +4,10 @@
 \alias{rba_ensembl_ontology_ancestors}
 \title{Reconstruct the entire ancestry of a term from is_a and part_of relationships}
 \usage{
-rba_ensembl_ontology_ancestors(
-  term_id,
-  chart = FALSE,
-  ontology = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_ontology_ancestors(term_id, chart = FALSE, ontology = NA, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{ontology}{}
 }
 \value{
 

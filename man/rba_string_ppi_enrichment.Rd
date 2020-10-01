@@ -9,13 +9,11 @@ rba_string_ppi_enrichment(
   species = NA,
   required_score = NA,
   caller_identity = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{caller_identity}{}
 }
 \value{
 

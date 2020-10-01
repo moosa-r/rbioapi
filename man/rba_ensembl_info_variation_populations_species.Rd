@@ -4,24 +4,12 @@
 \alias{rba_ensembl_info_variation_populations_species}
 \title{List all individuals for a population from a species}
 \usage{
-rba_ensembl_info_variation_populations_species(
-  species,
-  population_name,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_variation_populations_species(species, population_name, ...)
 
-rba_ensembl_info_variation_populations_species(
-  species,
-  population_name,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_ensembl_info_variation_populations_species(species, population_name, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{population_name}{}
 }
 \value{
 

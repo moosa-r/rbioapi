@@ -6,17 +6,10 @@
 conform a pathway. This method retrieves the pathways for which an
 identifier plays a role within one or more of their events.}
 \usage{
-rba_reactome_mapping_pathways(
-  id,
-  resource,
-  species = NA,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
-)
+rba_reactome_mapping_pathways(id, resource, species = NA, ...)
 }
 \arguments{
-\item{diagnostics}{}
+\item{species}{}
 }
 \value{
 

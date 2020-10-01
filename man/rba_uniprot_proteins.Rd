@@ -8,13 +8,11 @@ rba_uniprot_proteins(
   accession = NA,
   interaction = FALSE,
   isoforms = FALSE,
-  verbose = TRUE,
-  progress_bar = FALSE,
-  diagnostics = FALSE
+  ...
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{isoforms}{}
 }
 \value{
 
