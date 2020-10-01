@@ -927,22 +927,23 @@ rba_ba_error_parser = function(response,
 #### Miscellaneous ####
 #' Alternative messaging system
 #'
-#' @param msg
 #' @param ...
+#' @param fmt
+#' @param sprintf
+#' @param cond
+#' @param sep
+#' @param collapse
 #'
 #' @return
 #' @export
 #'
 #' @examples
-v_msg = function(msg, ...) {
-  if (exists("verbose", envir = parent.frame(1)) &&
-      eval(parse(text = "verbose"), envir = parent.frame(1)) == TRUE) {
-    ext = list(...)
-    if (length(ext) == 0) {
-      message(msg, appendLF = TRUE)
-    } else {
-      message(sprintf(msg, ...), appendLF = TRUE)
-    }
+v_msg = function(fmt, ..., sprintf = TRUE, cond = "verbose", sep = "", collapse = NULL) {
+  if (get0(cond, ifnotfound = FALSE) == TRUE) {
+    message(ifelse(sprintf == TRUE && is.character(fmt) && grepl("%s", fmt),
+                   yes = sprintf(fmt, ...),
+                   no = paste(fmt, ..., sep = sep, collapse = collapse)),
+            appendLF = TRUE)
   }
   invisible()
 }

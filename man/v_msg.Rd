@@ -4,10 +4,10 @@
 \alias{v_msg}
 \title{Alternative messaging system}
 \usage{
-v_msg(msg, ...)
+v_msg(fmt, ..., sprintf = TRUE, cond = "verbose", sep = "", collapse = NULL)
 }
 \arguments{
-\item{...}{}
+\item{collapse}{}
 }
 \value{
 
