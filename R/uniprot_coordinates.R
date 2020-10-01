@@ -44,7 +44,7 @@ rba_uniprot_coordinates_search = function(accession = NA,
                           list(arg = "location",
                                class = "character")))
 
-  v_msg(paste("get /coordinates Search genomic coordinates for UniProt entries"))
+  v_msg("get /coordinates Search genomic coordinates for UniProt entries")
   ## build GET API request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("accession",
@@ -122,8 +122,8 @@ rba_uniprot_coordinates_location = function(accession,
                           list(quote(sum(!is.na(p_start), !is.na(p_end)) == 1),
                                "You should provide 'p_start' and 'p_end' togeather.")))
 
-  v_msg(paste("get /coordinates/location/{accession}:{pPosition} Get genome coordinate by protein sequence position",
-              "get /coordinates/location/{accession}:{pStart}-{pEnd} Get genome coordinate by protein sequence position range"))
+  v_msg("get /coordinates/location/{accession}:{pPosition} Get genome coordinate by protein sequence position",
+        "get /coordinates/location/{accession}:{pStart}-{pEnd} Get genome coordinate by protein sequence position range")
 
   ## make function-specific calls
   path_input = sprintf("%scoordinates/location/%s:%s",
@@ -177,8 +177,8 @@ rba_uniprot_coordinates = function(accession = NA,
                                "You should provide 'db_type' and 'db_id' togeather."))
   )
 
-  v_msg(paste("get /coordinates/{accession} Get genomic coordinates for a UniProt accession",
-              "get /coordinates/{dbtype}:{dbid} Search UniProt entries by genomic database cross reference IDs: Ensembl, CCDS, HGNC or RefSeq"))
+  v_msg("get /coordinates/{accession} Get genomic coordinates for a UniProt accession",
+        "get /coordinates/{dbtype}:{dbid} Search UniProt entries by genomic database cross reference IDs: Ensembl, CCDS, HGNC or RefSeq")
   ## build GET API request's query
   call_query = list("size" = "-1")
   ## make function-specific calls
@@ -230,8 +230,8 @@ rba_uniprot_coordinates_taxonomy = function(taxid,
                                class = "logical"))
   )
 
-  v_msg(paste("get /coordinates/{taxonomy}/{locations} Search UniProt entries by taxonomy and genomic coordinates",
-              "get /coordinates/{taxonomy}/{locations}/feature Search UniProt entries by taxonomy and genomic coordinates"))
+  v_msg("get /coordinates/{taxonomy}/{locations} Search UniProt entries by taxonomy and genomic coordinates",
+        "get /coordinates/{taxonomy}/{locations}/feature Search UniProt entries by taxonomy and genomic coordinates")
   ## build GET API request's query
   call_query = list("size" = "-1")
 

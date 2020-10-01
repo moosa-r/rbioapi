@@ -48,8 +48,7 @@ rba_reactome_diseases = function(doid = FALSE,
   rba_ba_args(cons = list(list(arg = "doid",
                                class = "logical")))
 
-  v_msg(paste("GET data/diseases", "\r\n",
-              "/data/diseases/doid"))
+  v_msg("GET data/diseases", "\r\n", "/data/diseases/doid")
 
   ## make function-specific calls
   if (doid == FALSE) {
@@ -101,7 +100,7 @@ rba_reactome_complex_subunits = function(complex_id,
                           list(arg = "exclude_structures",
                                class = "logical")))
 
-  v_msg(paste("GET /data/complex/{id}/subunits"))
+  v_msg("GET /data/complex/{id}/subunits")
   ## build GET API request's query
   call_query = rba_ba_query(init = list(),
                             list("excludeStructures",
@@ -144,7 +143,7 @@ rba_reactome_complex_list = function(id,
                           list(arg = "resource",
                                class = "character")))
 
-  v_msg(paste("GET /data/complexes/{resource}/{identifier}"))
+  v_msg("GET /data/complexes/{resource}/{identifier}")
 
   ## make function-specific calls
   input_call = rba_ba_httr(httr = "get",
@@ -181,8 +180,8 @@ rba_reactome_entity_component_of = function(entity_id,
   rba_ba_args(cons = list(list(arg = "entity_id",
                                class = "character")))
 
-  v_msg(paste("GET/data/entity/{id}/componentOf",
-              "A list of larger structures containing the entity"))
+  v_msg("GET/data/entity/{id}/componentOf",
+        "A list of larger structures containing the entity")
   ## make function-specific calls
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("reactome", "url"),
@@ -216,8 +215,8 @@ rba_reactome_entity_other_forms = function(entity_id,
   rba_ba_args(cons = list(list(arg = "entity_id",
                                class = "character")))
 
-  v_msg(paste("GET data/entity/{id}/otherForms",
-              "All other forms of a PhysicalEntity"))
+  v_msg("GET data/entity/{id}/otherForms",
+        "All other forms of a PhysicalEntity")
   ## make function-specific calls
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("reactome", "url"),
@@ -256,8 +255,8 @@ rba_reactome_event_ancestors = function(event_id,
   rba_ba_args(cons = list(list(arg = "event_id",
                                class = "character")))
 
-  v_msg(paste("GET /data/event/{id}/ancestors",
-              "The ancestors of a given event"))
+  v_msg("GET /data/event/{id}/ancestors",
+        "The ancestors of a given event")
   ## make function-specific calls
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("reactome", "url"),
@@ -296,8 +295,8 @@ rba_reactome_event_hierarchy = function(species,
                                class = c("character",
                                          "numeric"))))
 
-  v_msg(paste("/data/eventsHierarchy/{species}",
-              "The full event hierarchy for a given species"))
+  v_msg("/data/eventsHierarchy/{species}",
+        "The full event hierarchy for a given species")
   ## make function-specific calls
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("reactome", "url"),
@@ -403,8 +402,8 @@ rba_reactome_exporter_diagram = function(event_id,
                           list(arg = "exp_column",
                                class = "character")))
 
-  v_msg(paste("/exporter/diagram/{identifier}.{ext}",
-              "Exports a given pathway diagram to the specified image format"))
+  v_msg("/exporter/diagram/{identifier}.{ext}",
+        "Exports a given pathway diagram to the specified image format")
 
   ## build GET API request's query
   call_query = rba_ba_query(init = list(),
@@ -531,8 +530,8 @@ rba_reactome_exporter_document = function(event_id,
                           list(arg = "exp_column",
                                class = "character")))
 
-  v_msg(paste("/exporter/document/event/{identifier}.pdf",
-              "Exports the content of a given event (pathway or reaction) to a PDF document"))
+  v_msg("/exporter/document/event/{identifier}.pdf",
+        "Exports the content of a given event (pathway or reaction) to a PDF document")
 
   ## build GET API request's query
   call_query = rba_ba_query(init = list(),
@@ -603,8 +602,8 @@ rba_reactome_exporter_event = function(event_id,
                           list(arg = "save_to",
                                class = "character")))
 
-  v_msg(paste("/exporter/event/{identifier}.sbgn",
-              "Exports a given pathway or reaction to SBGN or SBML"))
+  v_msg("/exporter/event/{identifier}.sbgn",
+        "Exports a given pathway or reaction to SBGN or SBML")
   ## make function-specific calls
   # create file_path
   save_to = rba_ba_file(file_ext = output_format,
@@ -706,8 +705,8 @@ rba_reactome_exporter_overview = function(species,
                           list(arg = "coverage",
                                class = "logical")))
 
-  v_msg(paste("/exporter/fireworks/{species}.{ext}",
-              "Exports a given pathway overview to the specified image format"))
+  v_msg("/exporter/fireworks/{species}.{ext}",
+        "Exports a given pathway overview to the specified image format")
 
   ## build GET API request's query
   call_query = rba_ba_query(init = list(),
@@ -805,10 +804,10 @@ rba_reactome_interactors_psicquic = function(resource,
                                val = c("details",
                                        "summary"))))
 
-  v_msg(paste("POST /interactors/psicquic/molecules/{resource}/details",
-              "Retrieve clustered interaction, sorted by score, of a given accession(s) by resource.",
-              "POST/interactors/psicquic/molecules/{resource}/summary",
-              "Retrieve a summary of a given accession list by resource."))
+  v_msg("POST /interactors/psicquic/molecules/{resource}/details",
+        "Retrieve clustered interaction, sorted by score, of a given accession(s) by resource.",
+        "POST/interactors/psicquic/molecules/{resource}/summary",
+        "Retrieve a summary of a given accession list by resource.")
 
   ## build POST API request's URL
   call_body = paste(unique(proteins),collapse = "\n")
@@ -844,8 +843,8 @@ rba_reactome_interactors_resources = function(...) {
   ## Check input arguments
   rba_ba_args()
 
-  v_msg(paste("GET /interactors/psicquic/resources",
-              "Retrieve a list of all Psicquic Registries services"))
+  v_msg("GET /interactors/psicquic/resources",
+        "Retrieve a list of all Psicquic Registries services")
 
   ## make function-specific calls
   input_call = rba_ba_httr(httr = "get",
@@ -885,10 +884,10 @@ rba_reactome_interactors_static = function(proteins,
                                val = c("details",
                                        "summary"))))
 
-  v_msg(paste("POST /interactors/static/molecules/details",
-              "Retrieve a detailed interaction information of a given accession",
-              "POST/interactors/static/molecules/summary",
-              "Retrieve a summary of a given accession list"))
+  v_msg("POST /interactors/static/molecules/details",
+        "Retrieve a detailed interaction information of a given accession",
+        "POST/interactors/static/molecules/summary",
+        "Retrieve a summary of a given accession list")
 
   ## build POST API request's URL
   call_body = paste(unique(proteins),collapse = "\n")
@@ -941,8 +940,8 @@ rba_reactome_mapping_pathways = function(id,
                                class = c("character",
                                          "numeric"))))
 
-  v_msg(paste("GET /data/mapping/{resource}/{identifier}/pathways",
-              "The lower level pathways where an identifier can be mapped to"))
+  v_msg("GET /data/mapping/{resource}/{identifier}/pathways",
+        "The lower level pathways where an identifier can be mapped to")
   ## build GET API request's query
   call_query = rba_ba_query(init = list(),
                             list("species",
@@ -992,8 +991,8 @@ rba_reactome_mapping_reactions = function(id,
                                class = c("character",
                                          "numeric"))))
 
-  v_msg(paste("GET /data/mapping/{resource}/{identifier}/reactions",
-              "The reactions where an identifier can be mapped to"))
+  v_msg("GET /data/mapping/{resource}/{identifier}/reactions",
+        "The reactions where an identifier can be mapped to")
   ## build GET API request's query
   call_query = rba_ba_query(init = list(),
                             list("species",
@@ -1044,8 +1043,8 @@ rba_reactome_orthology = function(ids,
                           list(arg = "species_id",
                                class = "numeric")))
 
-  v_msg(paste("POST /data/orthologies/ids/species/{speciesId}",
-              "The orthologies of a given set of events or entities"))
+  v_msg("POST /data/orthologies/ids/species/{speciesId}",
+        "The orthologies of a given set of events or entities")
 
   ## build POST API request's URL
   call_body = paste(unique(ids),collapse = "\n")
@@ -1097,8 +1096,8 @@ rba_reactome_participants = function(id,
               cond = list(list(quote(sum(physical_entities, reference_entities) == 2),
                                "You can only Request either physical_entities or reference_entities in one function call.")))
 
-  v_msg(paste("GET data/participants/{id}",
-              "A list of participants /participating PhysicalEntities /participating ReferenceEntities for a given event"))
+  v_msg("GET data/participants/{id}",
+        "A list of participants /participating PhysicalEntities /participating ReferenceEntities for a given event")
 
   ## make function-specific calls
   path_input = paste0(rba_ba_stg("reactome", "pth", "content"),
@@ -1149,10 +1148,10 @@ rba_reactome_pathways_participants = function(id,
                           list(arg = "attribute_name",
                                class = "character")))
 
-  v_msg(paste("GET /data/pathway/{id}/containedEvents",
-              "All the events contained in the given event",
-              "GET /data/pathway/{id}/containedEvents/{attributeName}",
-              "A single property for each event contained in the given event"))
+  v_msg("GET /data/pathway/{id}/containedEvents",
+        "All the events contained in the given event",
+        "GET /data/pathway/{id}/containedEvents/{attributeName}",
+        "A single property for each event contained in the given event")
 
   ## make function-specific calls
   path_input = sprintf("%sdata/pathway/%s/containedEvents",
@@ -1216,14 +1215,14 @@ rba_reactome_pathways_low = function(entity_id,
                                class = c("character",
                                          "numeric"))))
 
-  v_msg(paste("GET /data/pathways/low/diagram/entity/{id}",
-              "A list of lower level pathways with diagram containing a given entity or event",
-              "GET /data/pathways/low/diagram/entity/{id}/allForms",
-              "A list of lower level pathways with diagram containing any form of a given entity",
-              "GET /data/pathways/low/entity/{id}",
-              "A list of lower level pathways containing a given entity or event",
-              "GET /data/pathways/low/entity/{id}/allForms",
-              "A list of lower level pathways containing any form of a given entity"))
+  v_msg("GET /data/pathways/low/diagram/entity/{id}",
+        "A list of lower level pathways with diagram containing a given entity or event",
+        "GET /data/pathways/low/diagram/entity/{id}/allForms",
+        "A list of lower level pathways with diagram containing any form of a given entity",
+        "GET /data/pathways/low/entity/{id}",
+        "A list of lower level pathways containing a given entity or event",
+        "GET /data/pathways/low/entity/{id}/allForms",
+        "A list of lower level pathways containing any form of a given entity")
 
   ## make function-specific calls
   path_input = sprintf("%sdata/pathways/%s/%s",
@@ -1266,8 +1265,8 @@ rba_reactome_pathways_top = function(species,
                                class = c("character",
                                          "numeric"))))
 
-  v_msg(paste("GET /data/pathways/top/{species}",
-              "All Reactome top level pathways"))
+  v_msg("GET /data/pathways/top/{species}",
+        "All Reactome top level pathways")
   ## build GET API request's query
   call_query = rba_ba_query(init = list(),
                             list("species",
@@ -1312,10 +1311,10 @@ rba_reactome_people_name = function(person_name,
                           list(arg = "exact",
                                class = "logical")))
 
-  v_msg(paste("/data/people/name/{name}",
-              "A list of people with first or last name partly matching a given string",
-              "/data/people/name/{name}/exact",
-              "A list of people with first AND last name exactly matching a given string"))
+  v_msg("/data/people/name/{name}",
+        "A list of people with first or last name partly matching a given string",
+        "/data/people/name/{name}/exact",
+        "A list of people with first AND last name exactly matching a given string")
 
   ## make function-specific calls
   path_input = paste0(rba_ba_stg("reactome", "pth", "content"),
@@ -1368,8 +1367,8 @@ rba_reactome_people_id = function(id,
                                          publications == TRUE) > 1),
                                "You can only use either attribute_name, authored_pathways or publications function call.")))
 
-  v_msg(paste("GET /data/person/{id}",
-              "A person by his/her identifier"))
+  v_msg("GET /data/person/{id}",
+        "A person by his/her identifier")
 
   ## make function-specific calls
   path_input = paste0(rba_ba_stg("reactome", "pth", "content"),
@@ -1436,8 +1435,8 @@ rba_reactome_query = function(ids,
 
   if (length(ids) > 1) {
     #### use POST
-    v_msg(paste("POST /data/query/ids/map",
-                "A list of entries with their mapping to the provided identifiers"))
+    v_msg("POST /data/query/ids/map",
+          "A list of entries with their mapping to the provided identifiers")
     ## build POST API request's URL
     call_body = paste(unique(ids),collapse = ",")
     path_input = paste0(rba_ba_stg("reactome", "pth", "content"),
@@ -1461,18 +1460,18 @@ rba_reactome_query = function(ids,
     accept_input = "application/json"
     parser_input = "json->list_no_simp"
     if (!is.na(attribute_name)) {
-      v_msg(paste("GET /data/query/{id}/{attributeName}",
-                  "A single property of an entry in Reactome knowledgebase"))
+      v_msg("GET /data/query/{id}/{attributeName}",
+            "A single property of an entry in Reactome knowledgebase")
       path_input = paste0(path_input, "/", attribute_name)
       accept_input = "text/plain"
       parser_input = "text->chr"
     } else if (enhanced == TRUE){
-      v_msg(paste("GET /data/query/enhanced/{id}",
-                  "More information on an entry in Reactome knowledgebase"))
+      v_msg("GET /data/query/enhanced/{id}",
+            "More information on an entry in Reactome knowledgebase")
       path_input = sub("/query/", "/query/enhanced/", path_input)
     } else {
-      v_msg(paste("GET /data/query/{id}",
-                  "An entry in Reactome knowledgebase"))
+      v_msg("GET /data/query/{id}",
+            "An entry in Reactome knowledgebase")
     }
     input_call = rba_ba_httr(httr = "get",
                              url = rba_ba_stg("reactome", "url"),
@@ -1507,8 +1506,8 @@ rba_reactome_complex_subunits = function(id,
                                class = c("character",
                                          "numeric"))))
 
-  v_msg(paste("GET /references/mapping/{identifier}",
-              "All ReferenceEntities for a given identifier"))
+  v_msg("GET /references/mapping/{identifier}",
+        "All ReferenceEntities for a given identifier")
 
   ## make function-specific calls
   input_call = rba_ba_httr(httr = "get",
@@ -1548,10 +1547,10 @@ rba_reactome_species = function(species_type = "all",
                                val = c("all",
                                        "main"))))
 
-  v_msg(paste("GET /data/species/all",
-              "The list of all species in Reactome",
-              "GET /data/species/main",
-              "The list of main species in Reactome"))
+  v_msg("GET /data/species/all",
+        "The list of all species in Reactome",
+        "GET /data/species/main",
+        "The list of main species in Reactome")
 
   ## make function-specific calls
   input_call = rba_ba_httr(httr = "get",

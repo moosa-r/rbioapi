@@ -91,7 +91,7 @@ rba_uniprot_uniparc_search = function(upi = NA,
                                class = "character"))
   )
 
-  v_msg(paste("get /uniparc Search UniParc entries"))
+  v_msg("get /uniparc Search UniParc entries")
   ## build GET API request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("upi",
@@ -211,7 +211,7 @@ rba_uniprot_uniparc = function(accession = NA,
                                class = "character"))
   )
 
-  v_msg(paste("get /uniparc/accession/{accession} Get UniParc entry only by UniProt accession"))
+  v_msg("get /uniparc/accession/{accession} Get UniParc entry only by UniProt accession")
   ## build GET API request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("rfDdtype",
@@ -289,7 +289,7 @@ rba_uniprot_uniparc_bestguess = function(upi = NA,
                                max_len = 20))
   )
 
-  v_msg(paste("get /uniparc/bestguess Get UniParc longest sequence for entries."))
+  v_msg("get /uniparc/bestguess Get UniParc longest sequence for entries.")
   ## build GET API request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("upi",
@@ -370,9 +370,9 @@ rba_uniprot_uniparc_get = function(db_id = NA,
                                "Please provide one of the arguments 'db_id', 'upid' or 'upi'."))
   )
 
-  v_msg(paste("get /uniparc/dbreference/{dbid} Get UniParc entries by all UniParc cross reference accessions",
-              "get /uniparc/proteome/{upid} Get UniParc entries by Proteome UPID",
-              "get /uniparc/upi/{upi} Get UniParc entry by UniParc UPI"))
+  v_msg("get /uniparc/dbreference/{dbid} Get UniParc entries by all UniParc cross reference accessions",
+        "get /uniparc/proteome/{upid} Get UniParc entries by Proteome UPID",
+        "get /uniparc/upi/{upi} Get UniParc entry by UniParc UPI")
   ## build GET API request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("rfDdtype",
@@ -449,7 +449,7 @@ rba_uniprot_uniparc_sequence = function(sequence,
                           list(arg = "rf_tax_id",
                                class = "character")))
 
-  v_msg(paste("post /uniparc/sequence Get UniParc entries by sequence"))
+  v_msg("post /uniparc/sequence Get UniParc entries by sequence")
   ## build GET API request's query
   call_query = rba_ba_query(init = list(),
                             list("rfDdtype",

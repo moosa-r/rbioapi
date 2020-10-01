@@ -19,7 +19,7 @@ rba_uniprot_taxonomy_ancestor = function(ids,
                                min_len = 2))
   )
 
-  v_msg(paste("get /ancestor/{ids} This service returns the lowest common ancestor (LCA) of two taxonomy nodes."))
+  v_msg("get /ancestor/{ids} This service returns the lowest common ancestor (LCA) of two taxonomy nodes.")
   ## make function-specific calls
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("uniprot", "url"),
@@ -66,7 +66,7 @@ rba_uniprot_taxonomy = function(ids,
                                "you cannot specify 'hierarchy' when providing more than 1 ids."))
   )
 
-  v_msg(paste("get /id/{id}/siblings etc"))
+  v_msg("get /id/{id}/siblings etc")
   ## build GET API request's query
   call_query = list("size" = "-1")
 
@@ -116,7 +116,7 @@ rba_uniprot_taxonomy_ancestor = function(id,
   rba_ba_args(cons = list(list(arg = "id",
                                class = "numeric")))
 
-  v_msg(paste("get /lineage/{id} This service returns the taxonomic lineage for a given taxonomy node. It lists the nodes as they appear in the taxonomic tree, with the more specific listed first."))
+  v_msg("get /lineage/{id} This service returns the taxonomic lineage for a given taxonomy node. It lists the nodes as they appear in the taxonomic tree, with the more specific listed first.")
   ## make function-specific calls
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("uniprot", "url"),
@@ -161,7 +161,7 @@ rba_uniprot_taxonomy_path = function(id,
                                class = "numeric",
                                ran = c(1,5))))
 
-  v_msg(paste("get /path This service returns all taxonomic nodes that have a relationship with the queried taxonomy ID in a specific direction (TOP or BOTTOM) and depth level."))
+  v_msg("get /path This service returns all taxonomic nodes that have a relationship with the queried taxonomy ID in a specific direction (TOP or BOTTOM) and depth level.")
 
   ## build GET API request's query
   call_query = list("id" = id,
@@ -205,7 +205,7 @@ rba_uniprot_taxonomy_relationship = function(from,
                                class = "numeric"))
   )
 
-  v_msg(paste("get /relationship This service returns the shortest path between two taxonomy nodes showing their relationship."))
+  v_msg("get /relationship This service returns the shortest path between two taxonomy nodes showing their relationship.")
 
   ## build GET API request's query
   call_query = list("from" = from,

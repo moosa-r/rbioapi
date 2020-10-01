@@ -174,14 +174,14 @@ rba_reactome_analysis = function(input,
                                "You cannot Provide 'species' when 'projection' argument is TRUE"))
   )
 
-  v_msg(paste("POST /identifiers/form",
-              "Analyse the identifiers in the file over the different species",
-              "POST /identifiers/url",
-              "Analyse the identifiers contained in the provided url over the different species",
-              "POST/identifiers/form/projection",
-              "Analyse the identifiers in the file over the different species and projects the result to Homo Sapiens",
-              "POST /identifiers/url/projection",
-              "Analyse the identifiers contained in the provided url over the different species and projects the result to Homo Sapiens"))
+  v_msg("POST /identifiers/form",
+        "Analyse the identifiers in the file over the different species",
+        "POST /identifiers/url",
+        "Analyse the identifiers contained in the provided url over the different species",
+        "POST/identifiers/form/projection",
+        "Analyse the identifiers in the file over the different species and projects the result to Homo Sapiens",
+        "POST /identifiers/url/projection",
+        "Analyse the identifiers contained in the provided url over the different species and projects the result to Homo Sapiens")
 
   ## handle provided input
   input = rba_ba_reactome_input(input = input,
@@ -309,8 +309,8 @@ rba_reactome_analysis_pdf = function(token,
                                        "Barium Lithium",
                                        "calcium salts"))))
 
-  v_msg(paste("GET /report/{token}/{species}/{filename}.pdf",
-              "Downloads a report for a given pathway analysis result"))
+  v_msg("GET /report/{token}/{species}/{filename}.pdf",
+        "Downloads a report for a given pathway analysis result")
 
 
   ## build GET API request's query
@@ -406,8 +406,8 @@ rba_reactome_analysis_download = function(token,
                                  request, " request. ignoring resource."))),
               cond_warning = TRUE)
 
-  v_msg(paste("/exporter/diagram/{identifier}.{ext}",
-              "Exports a given pathway diagram to the specified image format"))
+  v_msg("/exporter/diagram/{identifier}.{ext}",
+        "Exports a given pathway diagram to the specified image format")
 
   ## make function-specific calls
   path_input = sprintf("%sdownload/%s/",
@@ -480,8 +480,8 @@ rba_reactome_analysis_import = function(input,
                                val = c("file",
                                        "url"))))
 
-  v_msg(paste("POST /import/form",
-              "Imports the posted json file into the service"))
+  v_msg("POST /import/form",
+        "Imports the posted json file into the service")
 
   input_type = rba_ba_reactome_input(input = input,
                                      type = input_type,
@@ -549,10 +549,10 @@ rba_reactome_analysis_mapping = function(input,
                           list(arg = "interactors",
                                class = "logical")))
 
-  v_msg(paste("POST /mapping/form",
-              "Maps the identifiers in the file over the different species",
-              "POST /mapping/form/projection",
-              "Maps the identifiers in the file over the different species and projects the result to Homo Sapiens"))
+  v_msg("POST /mapping/form",
+        "Maps the identifiers in the file over the different species",
+        "POST /mapping/form/projection",
+        "Maps the identifiers in the file over the different species and projects the result to Homo Sapiens")
 
 
   ## handle provided input
@@ -659,8 +659,8 @@ rba_reactome_analysis_species = function(species_dbid,
                           list(arg = "max",
                                class = "numeric")))
 
-  v_msg(paste("GET /species/homoSapiens/{species}",
-              "Compares Homo sapiens to the specified species"))
+  v_msg("GET /species/homoSapiens/{species}",
+        "Compares Homo sapiens to the specified species")
 
   ## build POST API request's query
   call_query = list("sortBy" = sort_by,
@@ -771,8 +771,8 @@ rba_reactome_analysis_token = function(token,
                           list(arg = "max",
                                class = "numeric")))
 
-  v_msg(paste("GET /token/{token}",
-              "Returns the result associated with the token"))
+  v_msg("GET /token/{token}",
+        "Returns the result associated with the token")
 
   ## build POST API request's query
   call_query = list("sortBy" = sort_by,

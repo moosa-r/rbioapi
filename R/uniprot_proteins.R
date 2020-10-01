@@ -75,7 +75,7 @@ rba_uniprot_proteins_search = function(accession = NA,
                           list(arg = "md5",
                                class = "character")))
 
-  v_msg(paste("get /proteins"))
+  v_msg("get /proteins")
   ## build GET API request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("accession",
@@ -165,9 +165,9 @@ rba_uniprot_proteins = function(accession = NA,
               cond = list(quote(sum(interaction, isoforms) == 2),
                           "You can only set only one of interaction or isoform as TRUE in one function call."))
 
-  v_msg(paste("get /proteins/{accession} Get UniProt entry by accession",
-              "get /proteins/{accession}/isoforms Get UniProt isoform entries from parent entry accession",
-              "get /proteins/interaction/{accession} Get UniProt interactions by accession"))
+  v_msg("get /proteins/{accession} Get UniProt entry by accession",
+        "get /proteins/{accession}/isoforms Get UniProt isoform entries from parent entry accession",
+        "get /proteins/interaction/{accession} Get UniProt interactions by accession")
 
   ## make function-specific calls
   path_input = sprintf("%s%s/%s",
@@ -221,7 +221,7 @@ rba_uniprot_proteins_crossref = function(db_type,
                                val = c(0,1)))
   )
 
-  v_msg(paste("get /proteins/{dbtype}:{dbid} Get UniProt entries by UniProt cross reference and its ID"))
+  v_msg("get /proteins/{dbtype}:{dbid} Get UniProt entries by UniProt cross reference and its ID")
   ## build GET API request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("reviewed",
@@ -354,7 +354,7 @@ rba_uniprot_features_search = function(accession = NA,
                           ))
   )
 
-  v_msg(paste("get /features Search protein sequence features in UniProt"))
+  v_msg("get /features Search protein sequence features in UniProt")
   ## build GET API request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("accession",
@@ -486,7 +486,7 @@ rba_uniprot_features_type = function(terms,
   )
   )
 
-  v_msg(paste("get /features/type/{type} Search protein sequence features of a given type in UniProt"))
+  v_msg("get /features/type/{type} Search protein sequence features of a given type in UniProt")
   ## build GET API request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("categories",
@@ -588,7 +588,7 @@ rba_uniprot_features = function(accession,
   )
   )
 
-  v_msg(paste("get /features/{accession} Get UniProt protein sequence features by accession"))
+  v_msg("get /features/{accession} Get UniProt protein sequence features by accession")
   ## build GET API request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("categories",
@@ -701,7 +701,7 @@ rba_uniprot_variation_search = function(accession = NA,
                                class = c("logical",
                                          "character"))))
 
-  v_msg(paste("get /variation Search natural variants in UniProt"))
+  v_msg("get /variation Search natural variants in UniProt")
   ## build GET API request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("accession",
@@ -822,7 +822,7 @@ rba_uniprot_variation_dbsnp = function(db_id,
                                class = c("logical",
                                          "character"))))
 
-  v_msg(paste("get /variation/dbsnp/{dbid} Get natural variants in UniProt by NIH-NCBI SNP database identifier"))
+  v_msg("get /variation/dbsnp/{dbid} Get natural variants in UniProt by NIH-NCBI SNP database identifier")
   ## build GET API request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("sourcetype",
@@ -917,7 +917,7 @@ rba_uniprot_variation_hgvs = function(hgvs,
                                class = c("logical",
                                          "character"))))
 
-  v_msg(paste("get /variation/hgvs/{hgvs} Get natural variants in UniProt by HGVS expression"))
+  v_msg("get /variation/hgvs/{hgvs} Get natural variants in UniProt by HGVS expression")
   ## build GET API request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("sourcetype",
@@ -1012,7 +1012,7 @@ rba_uniprot_variation_accession = function(accession,
                                class = c("logical",
                                          "character"))))
 
-  v_msg(paste("get /variation/hgvs/{hgvs} Get natural variants in UniProt by HGVS expression"))
+  v_msg("get /variation/hgvs/{hgvs} Get natural variants in UniProt by HGVS expression")
   ## build GET API request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("sourcetype",
@@ -1103,7 +1103,7 @@ rba_uniprot_proteomics_search = function(accession = NA,
                                class = "logical"))
   )
 
-  v_msg(paste("get /proteomics Search proteomics peptides in UniProt"))
+  v_msg("get /proteomics Search proteomics peptides in UniProt")
   ## build GET API request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("accession",
@@ -1162,7 +1162,7 @@ rba_uniprot_proteomics = function(accession,
                                len = 1))
   )
 
-  v_msg(paste("get /proteomics/{accession} Get proteomics peptides mapped to UniProt by accession"))
+  v_msg("get /proteomics/{accession} Get proteomics peptides mapped to UniProt by accession")
   ## make function-specific calls
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("uniprot", "url"),
@@ -1215,7 +1215,7 @@ rba_uniprot_antigen_search = function(accession = NA,
                                class = "numeric"))
   )
 
-  v_msg(paste("get /antigen Search antigens in UniProt"))
+  v_msg("get /antigen Search antigens in UniProt")
   ## build GET API request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("accession",
@@ -1269,7 +1269,7 @@ rba_uniprot_antigen = function(accession,
                                len = 1))
   )
 
-  v_msg(paste("get /antigen/{accession} Get antigen by UniProt accession"))
+  v_msg("get /antigen/{accession} Get antigen by UniProt accession")
   ## make function-specific calls
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("uniprot", "url"),

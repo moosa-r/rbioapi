@@ -49,7 +49,7 @@ rba_uniprot_proteomes_search = function(upid = NA,
                                class = "logical"))
   )
 
-  v_msg(paste("get /proteomes Search proteomes in UniProt"))
+  v_msg("get /proteomes Search proteomes in UniProt")
   ## build GET API request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("upid",
@@ -122,8 +122,8 @@ rba_uniprot_proteomes = function(upid,
               cond_warning = TRUE
   )
 
-  v_msg(paste("get /proteomes/proteins/{upid} Get proteins by proteome UPID",
-              "get /proteomes/{upid} Get proteome by proteome UPID"))
+  v_msg("get /proteomes/proteins/{upid} Get proteins by proteome UPID",
+        "get /proteomes/{upid} Get proteome by proteome UPID")
   ## make function-specific calls
   if (get_proteins == TRUE) {
     ## build GET API request's query
@@ -186,7 +186,7 @@ rba_uniprot_genecentric_search = function(upid = NA,
                                max_len = 20))
   )
 
-  v_msg(paste("get /genecentric Search gene centric proteins"))
+  v_msg("get /genecentric Search gene centric proteins")
   ## build GET API request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("upid",
@@ -233,7 +233,7 @@ rba_uniprot_genecentric = function(accession,
                                class = "character"))
   )
 
-  v_msg(paste("get /genecentric/{accession} Get gene centric proteins by Uniprot accession"))
+  v_msg("get /genecentric/{accession} Get gene centric proteins by Uniprot accession")
   ## make function-specific calls
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("uniprot", "url"),

@@ -236,7 +236,7 @@ rba_enrichr_enrich = function(user_list_id,
     v_msg("Enriching Gene set %s using multiple Enrichr libraries.",
           user_list_id)
 
-    v_msg(paste0("Note: You have selected %s Enrichr libraries. note that for ",
+    v_msg(paste0("Note: You have selected '%s' Enrichr libraries. note that for ",
                  "each library, a seperate call should be send to the Enrichr server. ",
                  "thus, this could take a while depending on the number of selected ",
                  "libraries and your network connection."), length(gene_set_library))
