@@ -46,15 +46,15 @@ NULL
           rba_user_agent = "rbioapi R package",
           rba_verbose = TRUE,
           rba_wait_time = 10,
-          rba_user_options = c(client_timeout = "client_timeout",
-                               dir_name = "dir_name",
-                               diagnostics = "diagnostics",
-                               max_retries = "max_retries",
-                               progress_bar = "progress_bar",
-                               save_resp_file = "save_resp_file",
-                               skip_error = "skip_error",
-                               verbose = "verbose",
-                               wait_time = "wait_time"))
+          rba_user_options = c(rba_client_timeout = "client_timeout",
+                               rba_dir_name = "dir_name",
+                               rba_diagnostics = "diagnostics",
+                               rba_max_retries = "max_retries",
+                               rba_progress_bar = "progress_bar",
+                               rba_save_resp_file = "save_resp_file",
+                               rba_skip_error = "skip_error",
+                               rba_verbose = "verbose",
+                               rba_wait_time = "wait_time"))
   invisible()
 }
 

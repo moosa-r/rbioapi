@@ -86,7 +86,7 @@ rba_ba_net_handle = function(retry_max = 1,
                       wait_time,
                       retry_count,
                       retry_max))
-      }
+    }
     Sys.sleep(wait_time)
     net_status = try(httr::status_code(httr::HEAD("https://www.google.com/",
                                                   httr::timeout(getOption("rba_client_timeout")),
@@ -462,7 +462,7 @@ rba_ba_httr = function(httr,
       if (ext_args$save_to == FALSE) {
         httr_call = append(httr_call,
                            list(str2lang(sprintf("httr::accept(\"%s\")",
-                                              ext_args$obj_accept))))
+                                                 ext_args$obj_accept))))
         if (utils::hasName(ext_args, "obj_parser")) {parser = ext_args$obj_parser}
       } else {
         httr_call = append(httr_call,
@@ -479,13 +479,13 @@ rba_ba_httr = function(httr,
       if (utils::hasName(ext_args, "accept")) {
         httr_call = append(httr_call,
                            list(str2lang(sprintf("httr::accept(\"%s\")",
-                                              ext_args$accept))))
+                                                 ext_args$accept))))
       }
       # save to file?
       if (utils::hasName(ext_args, "save_to") && ext_args$save_to != FALSE) {
         httr_call = append(httr_call,
                            list(str2lang(sprintf("httr::write_disk(\"%s\", overwrite = TRUE)",
-                                              ext_args$save_to))))
+                                                 ext_args$save_to))))
       }
       # parser?
       if (utils::hasName(ext_args, "parser")) {
@@ -679,8 +679,8 @@ rba_ba_args = function(cons = NULL,
                                         class = "logical",
                                         len = 1),
                   skip_error = list(arg = "skip_error",
-                                        class = "logical",
-                                        len = 1),
+                                    class = "logical",
+                                    len = 1),
                   verbose = list(arg = "verbose",
                                  class = "logical",
                                  len = 1),
@@ -979,22 +979,25 @@ rba_options = function(client_timeout = NA,
                                        !grepl("\\/?%*:|\"<>", dir_name)),
                                "dir_name should be a valid directory name.")))
   ## if empty function was called, show the available options
-  if (all(sapply(ls(),
-                 function(x) {is.na(eval(parse(text = x)))}))) {
-    cat("Available global options are:\r\n",
-        paste(getOption("rba_user_options"), collapse = ", "))
+  changes = sapply(ls(),
+                   function(x) {!is.na(eval(parse(text = x)))})
+  if (!any(changes)) {
+    options_df = data.frame(rbioapi_option = getOption("rba_user_options"),
+                            current_value = sapply(names(getOption("rba_user_options")),
+                                                   function(x) {getOption(x)}),
+                            stringsAsFactors = FALSE,
+                            row.names = NULL)
+    return(options_df)
+  } else {
+    ## change the provided options
+    for (chng in names(changes[changes])) {
+      eval(parse(text = sprintf("options(%s = %s)",
+                                paste0("rba_", chng),
+                                eval(parse(text = chng))
+      )))
+    }
+    invisible()
   }
-  ## change the provided options
-  if (!is.na(client_timeout)) options(rba_client_timeout = client_timeout)
-  if (!is.na(diagnostics)) options(rba_diagnostics = diagnostics)
-  if (!is.na(dir_name)) options(rba_dir_name = dir_name)
-  if (!is.na(max_retries)) options(rba_max_retries = max_retries)
-  if (!is.na(progress_bar)) options(rba_progress_bar = progress_bar)
-  if (!is.na(skip_error)) options(rba_skip_error = skip_error)
-  if (!is.na(verbose)) options(rba_verbose = verbose)
-  if (!is.na(wait_time)) options(rba_wait_time = wait_time)
-
-  invisible()
 }
 
 #' Temporary change a rbioapi option during a function call
