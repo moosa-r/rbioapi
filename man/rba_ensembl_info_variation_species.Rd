@@ -5,19 +5,13 @@
 \title{List the variation sources used in Ensembl for a species.}
 \usage{
 rba_ensembl_info_variation_species(species, filter = NA, ...)
-
-rba_ensembl_info_variation_species(species, filter = NA, ...)
 }
 \arguments{
 \item{filter}{}
 }
 \value{
 
-
-
 }
 \description{
-List the variation sources used in Ensembl for a species.
-
 List the variation sources used in Ensembl for a species.
 }

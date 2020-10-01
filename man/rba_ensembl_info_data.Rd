@@ -6,21 +6,14 @@
 one release (unfrequent non-standard Ensembl configuration).}
 \usage{
 rba_ensembl_info_data(...)
-
-rba_ensembl_info_data(...)
 }
 \arguments{
 \item{...}{}
 }
 \value{
 
-
-
 }
 \description{
-Shows the data releases available on this REST server. May return more than
-one release (unfrequent non-standard Ensembl configuration).
-
 Shows the data releases available on this REST server. May return more than
 one release (unfrequent non-standard Ensembl configuration).
 }

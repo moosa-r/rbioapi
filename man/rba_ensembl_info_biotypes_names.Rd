@@ -6,21 +6,14 @@
 (gene or transcript) can be provided for filtering.}
 \usage{
 rba_ensembl_info_biotypes_names(name, object_type = NA, ...)
-
-rba_ensembl_info_biotypes_names(name, object_type = NA, ...)
 }
 \arguments{
 \item{object_type}{}
 }
 \value{
 
-
-
 }
 \description{
-List the properties of biotypes with a given name. Object type
-(gene or transcript) can be provided for filtering.
-
 List the properties of biotypes with a given name. Object type
 (gene or transcript) can be provided for filtering.
 }

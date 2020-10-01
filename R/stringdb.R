@@ -26,9 +26,9 @@ rba_string_map_ids = function(input,
                               limit = NA,
                               caller_identity = NA,
                               ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "input",
                                class = c("character", "numeric")),
                           list(arg = "species",
@@ -45,7 +45,7 @@ rba_string_map_ids = function(input,
               ))
   v_msg("Mapping %s Input Identifiers to STRING Identifiers.", length(input))
 
-  ## build POST API request's body
+  ## Build POST API Request's body
   call_body = rba_ba_query(init = list("format" = "text",
                                        "identifiers" = paste(unique(input),
                                                              collapse = "%0d")),
@@ -62,7 +62,7 @@ rba_string_map_ids = function(input,
                                 !is.na(caller_identity),
                                 caller_identity))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "post",
                            url = rba_ba_stg("string", "url"),
                            path = paste0(rba_ba_stg("string", "pth"),
@@ -72,7 +72,7 @@ rba_string_map_ids = function(input,
                            accept = "application/json",
                            parser = "json->df")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -110,9 +110,9 @@ rba_string_network_image = function(input,
                                     block_structure_pics_in_bubbles = FALSE,
                                     caller_identity = NA,
                                     ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "input",
                                class = c("character", "numeric")),
                           list(arg = "species",
@@ -147,7 +147,7 @@ rba_string_network_image = function(input,
 
   v_msg("Getting STRING network image of %s Input Identifiers.", length(input))
 
-  ## build POST API request's body
+  ## Build POST API Request's body
   call_body = rba_ba_query(init = list("format" = "text",
                                        "identifiers" = paste(unique(input),
                                                              collapse = "%0d")),
@@ -194,7 +194,7 @@ rba_string_network_image = function(input,
                           file_name = "string_network_image",
                           save_to = save_file)
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "post",
                            url = rba_ba_stg("string", "url"),
                            path = paste0(rba_ba_stg("string", "pth"),
@@ -204,7 +204,7 @@ rba_string_network_image = function(input,
                            body = call_body,
                            save_to = save_file)
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -228,9 +228,9 @@ rba_string_network_interactions = function(input,
                                            add_nodes = NA,
                                            caller_identity = NA,
                                            ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "input",
                                class = c("character", "numeric")),
                           list(arg = "species",
@@ -251,7 +251,7 @@ rba_string_network_interactions = function(input,
 
   v_msg("Getting STRING Network interaction of %s inputs.", length(input))
 
-  ## build POST API request's body
+  ## Build POST API Request's body
   call_body = rba_ba_query(init = list("format" = "text",
                                        "identifiers" = paste(unique(input),
                                                              collapse = "%0d")),
@@ -269,7 +269,7 @@ rba_string_network_interactions = function(input,
                                 caller_identity)
   )
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "post",
                            url = rba_ba_stg("string", "url"),
                            path = paste0(rba_ba_stg("string", "pth"),
@@ -279,7 +279,7 @@ rba_string_network_interactions = function(input,
                            accept = "application/json",
                            parser = "json->df")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -303,9 +303,9 @@ rba_string_interaction_partners = function(input,
                                            limit = NA,
                                            caller_identity = NA,
                                            ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "input",
                                class = c("character", "numeric")),
                           list(arg = "species",
@@ -324,7 +324,7 @@ rba_string_interaction_partners = function(input,
 
   v_msg("Retrieving Interacting partners of ", length(input), " inputs.")
 
-  ## build POST API request's body
+  ## Build POST API Request's body
   call_body = rba_ba_query(init = list("format" = "text",
                                        "identifiers" = paste(unique(input),
                                                              collapse = "%0d")),
@@ -341,7 +341,7 @@ rba_string_interaction_partners = function(input,
                                 !is.na(caller_identity),
                                 caller_identity))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "post",
                            url = rba_ba_stg("string", "url"),
                            path = paste0(rba_ba_stg("string", "pth"),
@@ -351,7 +351,7 @@ rba_string_interaction_partners = function(input,
                            accept = "application/json",
                            parser = "json->df")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -374,9 +374,9 @@ rba_string_homology = function(input,
                                species = NA,
                                caller_identity = NA,
                                ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "input",
                                class = c("character", "numeric")),
                           list(arg = "species",
@@ -390,7 +390,7 @@ rba_string_homology = function(input,
 
   v_msg("Retrieving similarity scores between %s inputs.", length(input))
 
-  ## build POST API request's body
+  ## Build POST API Request's body
   call_body = rba_ba_query(init = list("format" = "text",
                                        "identifiers" = paste(unique(input),
                                                              collapse = "%0d")),
@@ -401,7 +401,7 @@ rba_string_homology = function(input,
                                 !is.na(caller_identity),
                                 caller_identity))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "post",
                            url = rba_ba_stg("string", "url"),
                            path = paste0(rba_ba_stg("string", "pth"),
@@ -411,7 +411,7 @@ rba_string_homology = function(input,
                            accept = "application/json",
                            parser = "json->df")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -435,9 +435,9 @@ rba_string_homology_best = function(input,
                                     species_b = NA,
                                     caller_identity = NA,
                                     ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "input",
                                class = c("character", "numeric")),
                           list(arg = "species",
@@ -452,7 +452,7 @@ rba_string_homology_best = function(input,
               ))
   v_msg("Retrieving similarity scores between %s inputs.", length(input))
 
-  ## build POST API request's body
+  ## Build POST API Request's body
   call_body = rba_ba_query(init = list("format" = "text",
                                        "identifiers" = paste(unique(input),
                                                              collapse = "%0d")),
@@ -466,7 +466,7 @@ rba_string_homology_best = function(input,
                                 !is.na(caller_identity),
                                 caller_identity))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "post",
                            url = rba_ba_stg("string", "url"),
                            path = paste0(rba_ba_stg("string", "pth"),
@@ -476,7 +476,7 @@ rba_string_homology_best = function(input,
                            accept = "application/json",
                            parser = "json->df")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -501,9 +501,9 @@ rba_string_enrichment = function(input,
                                  background_string_ids = NA,
                                  caller_identity = NA,
                                  ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg ="input",
                                class = c("character", "numeric")),
                           list(arg = "species",
@@ -518,7 +518,7 @@ rba_string_enrichment = function(input,
               ))
   v_msg("Retrieving similarity scores between %s inputs.", length(input))
 
-  ## build POST API request's body
+  ## Build POST API Request's body
   call_body = rba_ba_query(init = list("format" = "text",
                                        "identifiers" = paste(unique(input),
                                                              collapse = "%0d")),
@@ -533,7 +533,7 @@ rba_string_enrichment = function(input,
                                 !is.na(caller_identity),
                                 caller_identity))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "post",
                            url = rba_ba_stg("string", "url"),
                            path = paste0(rba_ba_stg("string", "pth"),
@@ -543,7 +543,7 @@ rba_string_enrichment = function(input,
                            accept = "application/json",
                            parser = "json->df")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -566,9 +566,9 @@ rba_string_functional_annotation = function(input,
                                             allow_pubmed = FALSE,
                                             caller_identity = NA,
                                             ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "input",
                                class = c("character", "numeric")),
                           list(arg = "species",
@@ -584,7 +584,7 @@ rba_string_functional_annotation = function(input,
 
   v_msg("Retrieving functional annotations of %s inputs.", length(input))
 
-  ## build POST API request's body
+  ## Build POST API Request's body
   call_body = rba_ba_query(init = list("format" = "text",
                                        "identifiers" = paste(unique(input),
                                                              collapse = "%0d")),
@@ -598,7 +598,7 @@ rba_string_functional_annotation = function(input,
                                 !is.na(caller_identity),
                                 caller_identity))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "post",
                            url = rba_ba_stg("string", "url"),
                            path = paste0(rba_ba_stg("string", "pth"),
@@ -608,7 +608,7 @@ rba_string_functional_annotation = function(input,
                            accept = "application/json",
                            parser = "json->df")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -633,9 +633,9 @@ rba_string_ppi_enrichment = function(input,
                                      required_score = NA,
                                      caller_identity = NA,
                                      ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "input",
                                class = c("character", "numeric")),
                           list(arg = "species",
@@ -653,7 +653,7 @@ rba_string_ppi_enrichment = function(input,
 
   v_msg("Performing PPI Enrichment of %s inputs.", length(input))
 
-  ## build POST API request's body
+  ## Build POST API Request's body
   call_body = rba_ba_query(init = list("format" = "text",
                                        "identifiers" = paste(unique(input),
                                                              collapse = "%0d")),
@@ -667,7 +667,7 @@ rba_string_ppi_enrichment = function(input,
                                 !is.na(caller_identity),
                                 caller_identity))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "post",
                            url = rba_ba_stg("string", "url"),
                            path = paste0(rba_ba_stg("string", "pth"),
@@ -676,7 +676,7 @@ rba_string_ppi_enrichment = function(input,
                            encode = "form",
                            accept = "application/json",
                            parser = "json->df")
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -692,16 +692,16 @@ rba_string_ppi_enrichment = function(input,
 #'
 #' @examples
 rba_string_version = function(...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args()
   v_msg("Retrieving Current STRING database version.")
 
-  ## build POST API request's body
+  ## Build POST API Request's body
   call_query = list("format" = "text")
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("string", "url"),
                            path = paste0(rba_ba_stg("string", "pth"),
@@ -711,7 +711,7 @@ rba_string_version = function(...) {
                            accept = "application/json",
                            parser = "json->list")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -728,9 +728,9 @@ rba_string_version = function(...) {
 #' @examples
 rba_string_info = function(type = "statistics",
                            ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "type",
                                class = "character",
                                val = c("statistics", "organisms"))))

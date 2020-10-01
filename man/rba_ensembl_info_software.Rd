@@ -5,19 +5,13 @@
 \title{Shows the current version of the Ensembl API used by the REST server.}
 \usage{
 rba_ensembl_info_software(...)
-
-rba_ensembl_info_software(...)
 }
 \arguments{
 \item{...}{}
 }
 \value{
 
-
-
 }
 \description{
-Shows the current version of the Ensembl API used by the REST server.
-
 Shows the current version of the Ensembl API used by the REST server.
 }

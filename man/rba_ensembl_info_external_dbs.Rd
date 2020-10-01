@@ -5,19 +5,13 @@
 \title{Lists all available external sources for a species.}
 \usage{
 rba_ensembl_info_external_dbs(species, filter = NA, feature = NA, ...)
-
-rba_ensembl_info_external_dbs(species, filter = NA, feature = NA, ...)
 }
 \arguments{
 \item{feature}{}
 }
 \value{
 
-
-
 }
 \description{
-Lists all available external sources for a species.
-
 Lists all available external sources for a species.
 }

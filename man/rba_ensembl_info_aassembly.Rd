@@ -6,21 +6,14 @@
 sequences, chromosomes and cytogenetic bands.}
 \usage{
 rba_ensembl_info_aassembly(species, bands = FALSE, synonyms = FALSE, ...)
-
-rba_ensembl_info_aassembly(species, bands = FALSE, synonyms = FALSE, ...)
 }
 \arguments{
 \item{synonyms}{}
 }
 \value{
 
-
-
 }
 \description{
-List the currently available assemblies for a species, along with toplevel
-sequences, chromosomes and cytogenetic bands.
-
 List the currently available assemblies for a species, along with toplevel
 sequences, chromosomes and cytogenetic bands.
 }

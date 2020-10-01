@@ -5,19 +5,13 @@
 \title{Returns the Ensembl Genomes version of the databases backing this service}
 \usage{
 rba_ensembl_info_eg_version(...)
-
-rba_ensembl_info_eg_version(...)
 }
 \arguments{
 \item{...}{}
 }
 \value{
 
-
-
 }
 \description{
-Returns the Ensembl Genomes version of the databases backing this service
-
 Returns the Ensembl Genomes version of the databases backing this service
 }

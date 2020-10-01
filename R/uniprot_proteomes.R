@@ -24,9 +24,9 @@ rba_uniprot_proteomes_search = function(upid = NA,
                                         is_ref_proteome = NA,
                                         is_redundant = NA,
                                         ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "upid",
                                class = "character",
                                max_len = 100),
@@ -50,7 +50,7 @@ rba_uniprot_proteomes_search = function(upid = NA,
   )
 
   v_msg("get /proteomes Search proteomes in UniProt")
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("upid",
                                  any(!is.na(upid)),
@@ -79,7 +79,7 @@ rba_uniprot_proteomes_search = function(upid = NA,
                                  ifelse(is_ref_proteome,
                                         "true",
                                         "false")))
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("uniprot", "url"),
                            path = paste0(rba_ba_stg("uniprot", "pth"),
@@ -88,7 +88,7 @@ rba_uniprot_proteomes_search = function(upid = NA,
                            accept = "application/json",
                            parser = "json->list_no_simp")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -108,9 +108,9 @@ rba_uniprot_proteomes = function(upid,
                                  get_proteins = FALSE,
                                  reviewed = NA,
                                  ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "upid",
                                class = "character"),
                           list(arg = "get_proteins",
@@ -124,9 +124,9 @@ rba_uniprot_proteomes = function(upid,
 
   v_msg("get /proteomes/proteins/{upid} Get proteins by proteome UPID",
         "get /proteomes/{upid} Get proteome by proteome UPID")
-  ## make function-specific calls
+  ## Build Function-Specific Call
   if (get_proteins == TRUE) {
-    ## build GET API request's query
+    ## Build GET API Request's query
     call_query = rba_ba_query(init = list(),
                               list("reviewed",
                                    !is.na(reviewed),
@@ -150,7 +150,7 @@ rba_uniprot_proteomes = function(upid,
                            accept = "application/json",
                            parser = "json->list")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -172,9 +172,9 @@ rba_uniprot_genecentric_search = function(upid = NA,
                                           accession = NA,
                                           gene = NA,
                                           ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "upid",
                                class = "character",
                                max_len = 100),
@@ -187,7 +187,7 @@ rba_uniprot_genecentric_search = function(upid = NA,
   )
 
   v_msg("get /genecentric Search gene centric proteins")
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("upid",
                                  any(!is.na(upid)),
@@ -201,7 +201,7 @@ rba_uniprot_genecentric_search = function(upid = NA,
                                  any(!is.na(gene)),
                                  paste0(gene,
                                         collapse = ",")))
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("uniprot", "url"),
                            path = paste0(rba_ba_stg("uniprot", "pth"),
@@ -210,7 +210,7 @@ rba_uniprot_genecentric_search = function(upid = NA,
                            accept = "application/json",
                            parser = "json->list_no_simp")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -226,15 +226,15 @@ rba_uniprot_genecentric_search = function(upid = NA,
 #' @examples
 rba_uniprot_genecentric = function(accession,
                                    ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "accession",
                                class = "character"))
   )
 
   v_msg("get /genecentric/{accession} Get gene centric proteins by Uniprot accession")
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("uniprot", "url"),
                            path = paste0(rba_ba_stg("uniprot", "pth"),
@@ -243,7 +243,7 @@ rba_uniprot_genecentric = function(accession,
                            accept = "application/json",
                            parser = "json->list")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }

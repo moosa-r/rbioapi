@@ -5,19 +5,13 @@
 \title{Find information about genomes containing a specified INSDC accession}
 \usage{
 rba_ensembl_info_genomes_accession(accession, expand = FALSE, ...)
-
-rba_ensembl_info_genomes_accession(accession, expand = FALSE, ...)
 }
 \arguments{
 \item{expand}{}
 }
 \value{
 
-
-
 }
 \description{
-Find information about genomes containing a specified INSDC accession
-
 Find information about genomes containing a specified INSDC accession
 }

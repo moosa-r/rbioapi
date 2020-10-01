@@ -5,19 +5,13 @@
 \title{Find information about all genomes beneath a given node of the taxonomy}
 \usage{
 rba_ensembl_info_genomes_taxonomy(taxon_name, expand = FALSE, ...)
-
-rba_ensembl_info_genomes_taxonomy(taxon_name, expand = FALSE, ...)
 }
 \arguments{
 \item{expand}{}
 }
 \value{
 
-
-
 }
 \description{
-Find information about all genomes beneath a given node of the taxonomy
-
 Find information about all genomes beneath a given node of the taxonomy
 }

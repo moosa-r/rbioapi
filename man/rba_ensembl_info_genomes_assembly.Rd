@@ -5,19 +5,13 @@
 \title{Find information about a genome with a specified assembly}
 \usage{
 rba_ensembl_info_genomes_assembly(assembly_id, expand = FALSE, ...)
-
-rba_ensembl_info_genomes_assembly(assembly_id, expand = FALSE, ...)
 }
 \arguments{
 \item{expand}{}
 }
 \value{
 
-
-
 }
 \description{
-Find information about a genome with a specified assembly
-
 Find information about a genome with a specified assembly
 }

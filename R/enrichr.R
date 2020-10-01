@@ -14,15 +14,15 @@
 #' @examples
 rba_enrichr_info = function(store_in_options = TRUE,
                             ...){
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "store_in_options",
                                class = "logical")))
 
   v_msg("Retrieving List of available libraries and statistics of Enrichr.")
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("enrichr", "url"),
                            path = paste0(rba_ba_stg("enrichr", "pth"),
@@ -30,10 +30,10 @@ rba_enrichr_info = function(store_in_options = TRUE,
                            accept = "application/json",
                            parser = "json->df")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
 
-  ## save library names as global options
+  ## Save Library Names as Global Options
   if (store_in_options == TRUE) {
     options(rba_enrichr_libs = final_output[["statistics.libraryName"]])
   }
@@ -53,9 +53,9 @@ rba_enrichr_info = function(store_in_options = TRUE,
 rba_enrichr_add_list = function(gene_list,
                                 description = NA,
                                 ...){
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "gene_list",
                                class = "character"),
                           list(arg = "description",
@@ -63,7 +63,7 @@ rba_enrichr_add_list = function(gene_list,
 
   v_msg("Uploading %s gene IDs to Enrichr.", length(gene_list))
 
-  ## build POST API request's URL
+  ## Build POST API Request's URL
   call_body = rba_ba_query(init = list("format" = "text",
                                        "list" = paste(unique(gene_list),
                                                       collapse = "\n")),
@@ -71,7 +71,7 @@ rba_enrichr_add_list = function(gene_list,
                                 !is.na(description),
                                 description))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "post",
                            url = rba_ba_stg("enrichr", "url"),
                            path = paste0(rba_ba_stg("enrichr", "pth"),
@@ -80,7 +80,7 @@ rba_enrichr_add_list = function(gene_list,
                            accept = "application/json",
                            parser = "json->list")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -96,9 +96,9 @@ rba_enrichr_add_list = function(gene_list,
 #' @examples
 rba_enrichr_view_list = function(user_list_id,
                                  ...){
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "user_list_id",
                                class = c("numeric", "integer"),
                                len = 1)))
@@ -106,10 +106,10 @@ rba_enrichr_view_list = function(user_list_id,
   v_msg("Retrieving your uploaded gene list under the ID %s.",
         user_list_id)
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = list("userListId" = user_list_id)
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("enrichr", "url"),
                            path = paste0(rba_ba_stg("enrichr", "pth"),
@@ -118,7 +118,7 @@ rba_enrichr_view_list = function(user_list_id,
                            accept = "application/json",
                            parser = "json->list")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -136,13 +136,13 @@ rba_enrichr_view_list = function(user_list_id,
 rba_enrichr_enrich_internal = function(user_list_id,
                                        gene_set_library,
                                        ...){
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = list("userListId" = user_list_id,
                     "backgroundType" = gene_set_library)
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   parser_input = quote(httr::content(response,
                                      as = "text",
                                      type = "text/tab-separated-values",
@@ -156,7 +156,7 @@ rba_enrichr_enrich_internal = function(user_list_id,
                            httr::accept("text/tab-separated-values"),
                            parser = parser_input)
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   final_output = utils::read.delim(textConnection(final_output),
                                    sep = "\t", header = TRUE)
@@ -180,7 +180,7 @@ rba_enrichr_enrich = function(user_list_id,
                               regex_library_name = FALSE,
                               multi_libs_progress_bar = TRUE,
                               ...){
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
   # get a list of available
   if (is.null(getOption("rba_enrichr_libs"))){
@@ -213,7 +213,7 @@ rba_enrichr_enrich = function(user_list_id,
     }
   }
 
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "user_list_id",
                                class = c("numeric", "integer"),
                                len = 1),
@@ -280,9 +280,9 @@ rba_enrichr_enrich = function(user_list_id,
 rba_enrichr_gene_map = function(gene,
                                 catagorize = FALSE,
                                 ...){
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "gene",
                                class = "character",
                                len = 1),
@@ -291,13 +291,13 @@ rba_enrichr_gene_map = function(gene,
 
   v_msg("Finding terms that contain gene: %s", gene)
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list("gene" = gene,
                                         "json" = "true"),
                             list("setup",
                                  catagorize == TRUE,
                                  "true"))
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("enrichr", "url"),
                            path = paste0(rba_ba_stg("enrichr", "pth"),
@@ -306,7 +306,7 @@ rba_enrichr_gene_map = function(gene,
                            accept = "application/json",
                            parser = "json->list")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -330,9 +330,9 @@ rba_enrichr = function(gene_list,
                        regex_library_name = TRUE,
                        multi_libs_progress_bar = TRUE,
                        ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "gene_list",
                                class = "character"),
                           list(arg = "description",

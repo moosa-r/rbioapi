@@ -5,19 +5,13 @@
 \title{Find information about a given genome}
 \usage{
 rba_ensembl_info_genomes_name(genome_name, expand = FALSE, ...)
-
-rba_ensembl_info_genomes_name(genome_name, expand = FALSE, ...)
 }
 \arguments{
 \item{expand}{}
 }
 \value{
 
-
-
 }
 \description{
-Find information about a given genome
-
 Find information about a given genome
 }

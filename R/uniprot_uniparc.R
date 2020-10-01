@@ -45,9 +45,9 @@ rba_uniprot_uniparc_search = function(upi = NA,
                                       rf_tax_id = NA,
                                       location = NA,
                                       ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "upi",
                                class = "character",
                                max_len = 100),
@@ -92,7 +92,7 @@ rba_uniprot_uniparc_search = function(upi = NA,
   )
 
   v_msg("get /uniparc Search UniParc entries")
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("upi",
                                  any(!is.na(upi)),
@@ -162,7 +162,7 @@ rba_uniprot_uniparc_search = function(upi = NA,
                                  any(!is.na(rf_tax_id)),
                                  paste0(rf_tax_id,
                                         collapse = ",")))
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("uniprot", "url"),
                            path = paste0(rba_ba_stg("uniprot", "pth"),
@@ -171,7 +171,7 @@ rba_uniprot_uniparc_search = function(upi = NA,
                            accept = "application/json",
                            parser = "json->list_no_simp")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -195,9 +195,9 @@ rba_uniprot_uniparc = function(accession = NA,
                                rf_active = NA,
                                rf_tax_id = NA,
                                ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "accession",
                                class = "character",
                                max_len = 100),
@@ -212,7 +212,7 @@ rba_uniprot_uniparc = function(accession = NA,
   )
 
   v_msg("get /uniparc/accession/{accession} Get UniParc entry only by UniProt accession")
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("rfDdtype",
                                  any(!is.na(rf_dd_type)),
@@ -231,7 +231,7 @@ rba_uniprot_uniparc = function(accession = NA,
                                  any(!is.na(rf_tax_id)),
                                  paste0(rf_tax_id,
                                         collapse = ",")))
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("uniprot", "url"),
                            path = paste0(rba_ba_stg("uniprot", "pth"),
@@ -241,7 +241,7 @@ rba_uniprot_uniparc = function(accession = NA,
                            accept = "application/json",
                            parser = "json->list")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -270,9 +270,9 @@ rba_uniprot_uniparc_bestguess = function(upi = NA,
                                          gene = NA,
                                          taxid = NA,
                                          ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "upi",
                                class = "character",
                                max_len = 100),
@@ -290,7 +290,7 @@ rba_uniprot_uniparc_bestguess = function(upi = NA,
   )
 
   v_msg("get /uniparc/bestguess Get UniParc longest sequence for entries.")
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("upi",
                                  any(!is.na(upi)),
@@ -312,7 +312,7 @@ rba_uniprot_uniparc_bestguess = function(upi = NA,
                                  any(!is.na(taxid)),
                                  paste0(taxid,
                                         collapse = ",")))
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("uniprot", "url"),
                            path = paste0(rba_ba_stg("uniprot", "pth"),
@@ -321,7 +321,7 @@ rba_uniprot_uniparc_bestguess = function(upi = NA,
                            accept = "application/json",
                            parser = "json->list_no_simp")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -349,9 +349,9 @@ rba_uniprot_uniparc_get = function(db_id = NA,
                                    rf_active = NA,
                                    rf_tax_id = NA,
                                    ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "db_id",
                                class = "character"),
                           list(arg = "upid",
@@ -373,7 +373,7 @@ rba_uniprot_uniparc_get = function(db_id = NA,
   v_msg("get /uniparc/dbreference/{dbid} Get UniParc entries by all UniParc cross reference accessions",
         "get /uniparc/proteome/{upid} Get UniParc entries by Proteome UPID",
         "get /uniparc/upi/{upi} Get UniParc entry by UniParc UPI")
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("rfDdtype",
                                  any(!is.na(rf_dd_type)),
@@ -392,7 +392,7 @@ rba_uniprot_uniparc_get = function(db_id = NA,
                                  any(!is.na(rf_tax_id)),
                                  paste0(rf_tax_id,
                                         collapse = ",")))
-  ## make function-specific calls
+  ## Build Function-Specific Call
   if (!is.na(db_id)) {
     path_input = paste0(rba_ba_stg("uniprot", "pth"),
                         "uniparc/dbreference/",
@@ -413,7 +413,7 @@ rba_uniprot_uniparc_get = function(db_id = NA,
                            accept = "application/json",
                            parser = "json->list_no_simp")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -437,9 +437,9 @@ rba_uniprot_uniparc_sequence = function(sequence,
                                         rf_active = NA,
                                         rf_tax_id = NA,
                                         ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "rf_dd_type",
                                class = "character"),
                           list(arg = "rf_db_id",
@@ -450,7 +450,7 @@ rba_uniprot_uniparc_sequence = function(sequence,
                                class = "character")))
 
   v_msg("post /uniparc/sequence Get UniParc entries by sequence")
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("rfDdtype",
                                  any(!is.na(rf_dd_type)),
@@ -469,8 +469,7 @@ rba_uniprot_uniparc_sequence = function(sequence,
                                  any(!is.na(rf_tax_id)),
                                  paste0(rf_tax_id,
                                         collapse = ",")))
-
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "post",
                            url = rba_ba_stg("uniprot", "url"),
                            path = paste0(rba_ba_stg("uniprot", "pth"),
@@ -480,7 +479,7 @@ rba_uniprot_uniparc_sequence = function(sequence,
                            accept = "application/json",
                            httr::content_type("text/plain"),
                            parser = "json->list")
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }

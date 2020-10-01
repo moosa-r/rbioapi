@@ -11,16 +11,16 @@
 #' @examples
 rba_uniprot_taxonomy_ancestor = function(ids,
                                          ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "ids",
                                class = "numeric",
                                min_len = 2))
   )
 
   v_msg("get /ancestor/{ids} This service returns the lowest common ancestor (LCA) of two taxonomy nodes.")
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("uniprot", "url"),
                            path = paste0(rba_ba_stg("uniprot", "pth"),
@@ -29,7 +29,7 @@ rba_uniprot_taxonomy_ancestor = function(ids,
                            accept = "application/json",
                            parser = "json->list")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -50,9 +50,9 @@ rba_uniprot_taxonomy = function(ids,
                                 hierarchy = NA,
                                 node = FALSE,
                                 ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "id",
                                class = "numeric"),
                           list(arg = "hierarchy",
@@ -67,10 +67,10 @@ rba_uniprot_taxonomy = function(ids,
   )
 
   v_msg("get /id/{id}/siblings etc")
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = list("size" = "-1")
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   path_input = sprintf("%staxonomy/%s/%s",
                        rba_ba_stg("uniprot", "pth"),
                        ifelse(length(ids) > 1,
@@ -92,7 +92,7 @@ rba_uniprot_taxonomy = function(ids,
                            accept = "application/json",
                            parser = "json->list")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -110,14 +110,14 @@ rba_uniprot_taxonomy = function(ids,
 #' @examples
 rba_uniprot_taxonomy_ancestor = function(id,
                                          ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "id",
                                class = "numeric")))
 
   v_msg("get /lineage/{id} This service returns the taxonomic lineage for a given taxonomy node. It lists the nodes as they appear in the taxonomic tree, with the more specific listed first.")
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("uniprot", "url"),
                            path = paste0(rba_ba_stg("uniprot", "pth"),
@@ -126,7 +126,7 @@ rba_uniprot_taxonomy_ancestor = function(id,
                            accept = "application/json",
                            parser = "json->list")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -148,9 +148,9 @@ rba_uniprot_taxonomy_path = function(id,
                                      direction,
                                      depth = 5,
                                      ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "id",
                                class = "numeric"),
                           list(arg = "direction",
@@ -163,12 +163,12 @@ rba_uniprot_taxonomy_path = function(id,
 
   v_msg("get /path This service returns all taxonomic nodes that have a relationship with the queried taxonomy ID in a specific direction (TOP or BOTTOM) and depth level.")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = list("id" = id,
                     "direction" = direction,
                     "depth" = depth)
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("uniprot", "url"),
                            path = paste0(rba_ba_stg("uniprot", "pth"),
@@ -177,7 +177,7 @@ rba_uniprot_taxonomy_path = function(id,
                            accept = "application/json",
                            parser = "json->list_no_simp")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -196,9 +196,9 @@ rba_uniprot_taxonomy_path = function(id,
 rba_uniprot_taxonomy_relationship = function(from,
                                              to,
                                              ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "from",
                                class = "numeric"),
                           list(arg = "to",
@@ -207,11 +207,11 @@ rba_uniprot_taxonomy_relationship = function(from,
 
   v_msg("get /relationship This service returns the shortest path between two taxonomy nodes showing their relationship.")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = list("from" = from,
                     "to" = to)
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("uniprot", "url"),
                            path = paste0(rba_ba_stg("uniprot", "pth"),
@@ -220,7 +220,7 @@ rba_uniprot_taxonomy_relationship = function(from,
                            accept = "application/json",
                            parser = "json->list_no_simp")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }

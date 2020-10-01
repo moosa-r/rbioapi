@@ -5,19 +5,13 @@
 \title{Find information about all genomes in a given division.}
 \usage{
 rba_ensembl_info_genomes_division(division_name, expand = FALSE, ...)
-
-rba_ensembl_info_genomes_division(division_name, expand = FALSE, ...)
 }
 \arguments{
 \item{expand}{}
 }
 \value{
 
-
-
 }
 \description{
-Find information about all genomes in a given division.
-
 Find information about all genomes in a given division.
 }

@@ -11,25 +11,13 @@ rba_ensembl_info_species(
   expand = FALSE,
   ...
 )
-
-rba_ensembl_info_species(
-  division = "EnsemblVertebrates",
-  hide_strain_info = FALSE,
-  strain_collection = NA,
-  expand = FALSE,
-  ...
-)
 }
 \arguments{
 \item{expand}{}
 }
 \value{
 
-
-
 }
 \description{
-Lists all available species, their aliases, available adaptor groups and data release.
-
 Lists all available species, their aliases, available adaptor groups and data release.
 }

@@ -5,19 +5,13 @@
 \title{Get list of all Ensembl divisions for which information is available}
 \usage{
 rba_ensembl_info_divisions(...)
-
-rba_ensembl_info_divisions(...)
 }
 \arguments{
 \item{...}{}
 }
 \value{
 
-
-
 }
 \description{
-Get list of all Ensembl divisions for which information is available
-
 Get list of all Ensembl divisions for which information is available
 }

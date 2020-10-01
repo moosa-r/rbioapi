@@ -111,9 +111,9 @@ rba_reactome_analysis = function(input,
                                  min = NA,
                                  max = NA,
                                  ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "input",
                                class = c("character",
                                          "numeric",
@@ -188,7 +188,7 @@ rba_reactome_analysis = function(input,
                                 type = input_type,
                                 handle = TRUE)
 
-  ## build POST API request's query
+  ## Build POST API Request's query
   call_query = list("interactors" = ifelse(interactors, "true", "false"),
                     "sortBy" = sort_by,
                     "order" = order,
@@ -208,11 +208,11 @@ rba_reactome_analysis = function(input,
                             list("max",
                                  !is.na(max),
                                  max))
-  ## build POST API request's URL
+  ## Build POST API Request's URL
   call_body = list(file = httr::upload_file(path = input$file,
                                             type = "text/plain"))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   path_input = sprintf("%sidentifiers/%s",
                        rba_ba_stg("reactome", "pth", "analysis"),
                        ifelse(input$type == "url",
@@ -231,7 +231,7 @@ rba_reactome_analysis = function(input,
                            accept = "application/json",
                            parser = "json->list")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
 
   return(final_output)
@@ -268,9 +268,9 @@ rba_reactome_analysis_pdf = function(token,
                                      analysis_profile = "Standard",
                                      fireworks_profile = "Barium Lithium",
                                      ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "token",
                                class = "character"),
                           list(arg = "species",
@@ -313,7 +313,7 @@ rba_reactome_analysis_pdf = function(token,
         "Downloads a report for a given pathway analysis result")
 
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("number",
                                  number != 25,
@@ -342,7 +342,7 @@ rba_reactome_analysis_pdf = function(token,
                                          yes = TRUE,
                                          no = save_to))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("reactome", "url"),
                            path = sprintf("%sreport/%s/%s/%s.pdf",
@@ -352,7 +352,7 @@ rba_reactome_analysis_pdf = function(token,
                            accept = "application/pdf",
                            parser = NULL,
                            save_to = save_to)
-  ## call API
+  ## Call API
   invisible(rba_ba_skeleton(input_call))
 }
 
@@ -374,9 +374,9 @@ rba_reactome_analysis_download = function(token,
                                           save_to = NA,
                                           resource = "TOTAL",
                                           ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "token",
                                class = "character"),
                           list(arg = "request",
@@ -409,7 +409,7 @@ rba_reactome_analysis_download = function(token,
   v_msg("/exporter/diagram/{identifier}.{ext}",
         "Exports a given pathway diagram to the specified image format")
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   path_input = sprintf("%sdownload/%s/",
                        rba_ba_stg("reactome", "pth", "analysis"),
                        token)
@@ -451,7 +451,7 @@ rba_reactome_analysis_download = function(token,
                            save_to = save_to,
                            parser = NULL)
 
-  ## call API
+  ## Call API
   invisible(rba_ba_skeleton(input_call))
 }
 
@@ -470,9 +470,9 @@ rba_reactome_analysis_download = function(token,
 rba_reactome_analysis_import = function(input,
                                         input_type = NA,
                                         ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "input",
                                class = "character"),
                           list(arg = "input_type",
@@ -487,8 +487,8 @@ rba_reactome_analysis_import = function(input,
                                      type = input_type,
                                      handle = FALSE)
 
-  ## make function-specific calls
-  ## build POST API request's URL
+  ## Build Function-Specific Call
+  ## Build POST API Request's URL
   if (input_type == "url") {
     path_input = paste0(rba_ba_stg("reactome", "pth", "analysis"),
                         "import/url")
@@ -506,7 +506,7 @@ rba_reactome_analysis_import = function(input,
                            accept = "application/json",
                            parser = "json->list")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
 
   return(final_output)
@@ -530,9 +530,9 @@ rba_reactome_analysis_mapping = function(input,
                                          projection = FALSE,
                                          interactors = FALSE,
                                          ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "input",
                                class = c("character",
                                          "numeric",
@@ -560,14 +560,14 @@ rba_reactome_analysis_mapping = function(input,
                                 type = input_type,
                                 handle = TRUE)
 
-  ## build POST API request's query
+  ## Build POST API Request's query
   call_query = list("interactors" = ifelse(interactors, "true", "false"))
 
-  ## build POST API request's URL
+  ## Build POST API Request's URL
   call_body = list(file = httr::upload_file(path = input$file,
                                             type = "text/plain"))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   path_input = sprintf("%smapping/%s",
                        rba_ba_stg("reactome", "pth", "analysis"),
                        ifelse(input$type == "url",
@@ -585,7 +585,7 @@ rba_reactome_analysis_mapping = function(input,
                            accept = "application/json",
                            parser = "json->list_no_simp")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -617,9 +617,9 @@ rba_reactome_analysis_species = function(species_dbid,
                                          min = NA,
                                          max = NA,
                                          ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "species_dbid",
                                class = "numeric"),
                           list(arg = "sort_by",
@@ -662,7 +662,7 @@ rba_reactome_analysis_species = function(species_dbid,
   v_msg("GET /species/homoSapiens/{species}",
         "Compares Homo sapiens to the specified species")
 
-  ## build POST API request's query
+  ## Build POST API Request's query
   call_query = list("sortBy" = sort_by,
                     "order" = order,
                     "resource" = resource)
@@ -677,7 +677,7 @@ rba_reactome_analysis_species = function(species_dbid,
                             list("max",
                                  !is.na(max),
                                  max))
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("reactome", "url"),
                            path = paste0(rba_ba_stg("reactome", "pth", "analysis"),
@@ -687,7 +687,7 @@ rba_reactome_analysis_species = function(species_dbid,
                            accept = "application/json",
                            parser = "json->list")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -724,9 +724,9 @@ rba_reactome_analysis_token = function(token,
                                        min = NA,
                                        max = NA,
                                        ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "token",
                                class = "character"),
                           list(arg = "species",
@@ -774,7 +774,7 @@ rba_reactome_analysis_token = function(token,
   v_msg("GET /token/{token}",
         "Returns the result associated with the token")
 
-  ## build POST API request's query
+  ## Build POST API Request's query
   call_query = list("sortBy" = sort_by,
                     "order" = order,
                     "resource" = resource,
@@ -791,7 +791,7 @@ rba_reactome_analysis_token = function(token,
                                  !is.na(max),
                                  max))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call =  rba_ba_httr(httr = "get",
                             url = rba_ba_stg("reactome", "url"),
                             path = paste0(rba_ba_stg("reactome", "pth", "analysis"),
@@ -801,7 +801,7 @@ rba_reactome_analysis_token = function(token,
                             accept = "application/json",
                             parser = "json->list")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }

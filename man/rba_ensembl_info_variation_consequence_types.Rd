@@ -5,19 +5,13 @@
 \title{Lists all variant consequence types.}
 \usage{
 rba_ensembl_info_variation_consequence_types(rank = FALSE, ...)
-
-rba_ensembl_info_variation_consequence_types(rank = FALSE, ...)
 }
 \arguments{
 \item{rank}{}
 }
 \value{
 
-
-
 }
 \description{
-Lists all variant consequence types.
-
 Lists all variant consequence types.
 }

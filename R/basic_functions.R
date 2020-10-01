@@ -939,7 +939,7 @@ rba_ba_error_parser = function(response,
 #'
 #' @examples
 v_msg = function(fmt, ..., sprintf = TRUE, cond = "verbose", sep = "", collapse = NULL) {
-  if (get0(cond, ifnotfound = FALSE) == TRUE) {
+  if (get0(cond, envir = parent.frame(1), ifnotfound = FALSE) == TRUE) {
     message(ifelse(sprintf == TRUE && is.character(fmt) && grepl("%s", fmt),
                    yes = sprintf(fmt, ...),
                    no = paste(fmt, ..., sep = sep, collapse = collapse)),
@@ -1025,7 +1025,7 @@ rba_ba_ext_args = function(...) {
   # create the objects in the calling function's environment
   for (opt in rba_opts) {
     assign(x = opt,
-           value = ifelse(hasName(ext_args, opt),
+           value = ifelse(utils::hasName(ext_args, opt),
                           yes = ext_args[[opt]],
                           no = getOption(paste0("rba_", opt))),
            envir = parent.frame())

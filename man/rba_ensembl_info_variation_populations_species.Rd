@@ -5,19 +5,13 @@
 \title{List all individuals for a population from a species}
 \usage{
 rba_ensembl_info_variation_populations_species(species, population_name, ...)
-
-rba_ensembl_info_variation_populations_species(species, population_name, ...)
 }
 \arguments{
 \item{population_name}{}
 }
 \value{
 
-
-
 }
 \description{
-List all individuals for a population from a species
-
 List all individuals for a population from a species
 }

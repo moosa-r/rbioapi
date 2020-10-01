@@ -21,9 +21,9 @@ rba_uniprot_coordinates_search = function(accession = NA,
                                           taxid = NA,
                                           location = NA,
                                           ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "accession",
                                class = "character",
                                max_len = 100),
@@ -45,7 +45,7 @@ rba_uniprot_coordinates_search = function(accession = NA,
                                class = "character")))
 
   v_msg("get /coordinates Search genomic coordinates for UniProt entries")
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("accession",
                                  any(!is.na(accession)),
@@ -73,7 +73,7 @@ rba_uniprot_coordinates_search = function(accession = NA,
                             list("location",
                                  !is.na(location),
                                  location))
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("uniprot", "url"),
                            path = paste0(rba_ba_stg("uniprot", "pth"),
@@ -82,7 +82,7 @@ rba_uniprot_coordinates_search = function(accession = NA,
                            accept = "application/json",
                            parser = "json->list_no_simp")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -104,9 +104,9 @@ rba_uniprot_coordinates_location = function(accession,
                                             p_start = NA,
                                             p_end = NA,
                                             ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "accession",
                                class = "character"),
                           list(arg = "p_position",
@@ -125,7 +125,7 @@ rba_uniprot_coordinates_location = function(accession,
   v_msg("get /coordinates/location/{accession}:{pPosition} Get genome coordinate by protein sequence position",
         "get /coordinates/location/{accession}:{pStart}-{pEnd} Get genome coordinate by protein sequence position range")
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   path_input = sprintf("%scoordinates/location/%s:%s",
                        rba_ba_stg("uniprot", "pth"),
                        accession,
@@ -139,7 +139,7 @@ rba_uniprot_coordinates_location = function(accession,
                            accept = "application/json",
                            parser = "json->list")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -160,9 +160,9 @@ rba_uniprot_coordinates = function(accession = NA,
                                    db_type = NA,
                                    db_id = NA,
                                    ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "accession",
                                class = "character"),
                           list(arg = "db_type",
@@ -179,9 +179,9 @@ rba_uniprot_coordinates = function(accession = NA,
 
   v_msg("get /coordinates/{accession} Get genomic coordinates for a UniProt accession",
         "get /coordinates/{dbtype}:{dbid} Search UniProt entries by genomic database cross reference IDs: Ensembl, CCDS, HGNC or RefSeq")
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = list("size" = "-1")
-  ## make function-specific calls
+  ## Build Function-Specific Call
   path_input = sprintf("%scoordinates/%s",
                        rba_ba_stg("uniprot", "pth"),
                        ifelse(!is.na(accession),
@@ -195,7 +195,7 @@ rba_uniprot_coordinates = function(accession = NA,
                            accept = "application/json",
                            parser = "json->list_no_simp")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
@@ -217,9 +217,9 @@ rba_uniprot_coordinates_taxonomy = function(taxid,
                                             in_range = NA,
                                             feature = FALSE,
                                             ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "taxid",
                                class = "numeric"),
                           list(arg = "locations",
@@ -232,10 +232,10 @@ rba_uniprot_coordinates_taxonomy = function(taxid,
 
   v_msg("get /coordinates/{taxonomy}/{locations} Search UniProt entries by taxonomy and genomic coordinates",
         "get /coordinates/{taxonomy}/{locations}/feature Search UniProt entries by taxonomy and genomic coordinates")
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = list("size" = "-1")
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   path_input = sprintf("%scoordinates/%s/%s",
                        rba_ba_stg("uniprot", "pth"),
                        taxid,
@@ -250,7 +250,7 @@ rba_uniprot_coordinates_taxonomy = function(taxid,
                            accept = "application/json",
                            parser = "json->list_no_simp")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }

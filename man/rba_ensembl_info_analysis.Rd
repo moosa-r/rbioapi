@@ -5,19 +5,13 @@
 \title{List the names of analyses involved in generating Ensembl data}
 \usage{
 rba_ensembl_info_analysis(species, ...)
-
-rba_ensembl_info_analysis(species, ...)
 }
 \arguments{
 \item{species}{}
 }
 \value{
 
-
-
 }
 \description{
-List the names of analyses involved in generating Ensembl data
-
 List the names of analyses involved in generating Ensembl data
 }

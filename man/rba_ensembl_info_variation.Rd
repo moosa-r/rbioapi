@@ -13,27 +13,13 @@ rba_ensembl_info_variation(
   populations_filter = NA,
   ...
 )
-
-rba_ensembl_info_variation(
-  species = NA,
-  consequence_types = FALSE,
-  consequence_rank = FALSE,
-  populations = FALSE,
-  species_filter = NA,
-  populations_filter = NA,
-  ...
-)
 }
 \arguments{
 \item{populations_filter}{}
 }
 \value{
 
-
-
 }
 \description{
-A wrapper around all info/variation/... endpoints
-
 A wrapper around all info/variation/... endpoints
 }

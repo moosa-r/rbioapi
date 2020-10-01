@@ -7,22 +7,14 @@
  genes/transcripts retrieved by other endpoints.}
 \usage{
 rba_ensembl_info_biotypes(species, ...)
-
-rba_ensembl_info_biotypes(species, ...)
 }
 \arguments{
 \item{species}{}
 }
 \value{
 
-
-
 }
 \description{
-List the functional classifications of gene models that Ensembl associates
- with a particular species. Useful for restricting the type of
- genes/transcripts retrieved by other endpoints.
-
 List the functional classifications of gene models that Ensembl associates
  with a particular species. Useful for restricting the type of
  genes/transcripts retrieved by other endpoints.

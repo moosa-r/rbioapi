@@ -12,27 +12,14 @@ rba_ensembl_info_assembly_region_name(
   synonyms = FALSE,
   ...
 )
-
-rba_ensembl_info_assembly_region_name(
-  species,
-  region_name,
-  bands = FALSE,
-  synonyms = FALSE,
-  ...
-)
 }
 \arguments{
 \item{synonyms}{}
 }
 \value{
 
-
-
 }
 \description{
-Returns information about the specified toplevel sequence region for the
-given species.
-
 Returns information about the specified toplevel sequence region for the
 given species.
 }

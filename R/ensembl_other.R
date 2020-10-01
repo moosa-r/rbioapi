@@ -11,19 +11,19 @@
 #' @examples
 rba_ensembl_archive = function(ids,
                                ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "ids",
                                class = "character",
                                max_len = 1000)))
 
   v_msg("POST archive/id")
 
-  ## build POST API request's URL
+  ## Build POST API Request's URL
   call_body = jsonlite::toJSON(list("id" = as.array(ids)))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "post",
                            url = rba_ba_stg("ensembl", "url"),
                            path = "archive/id",
@@ -32,7 +32,7 @@ rba_ensembl_archive = function(ids,
                            httr::content_type("application/json"),
                            parser = "json->df")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
 
   return(final_output)
@@ -53,9 +53,9 @@ rba_ensembl_archive = function(ids,
 rba_ensembl_cafe_genetree  = function(genetree_id,
                                       compara = "vertebrates",
                                       ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "genetree_id",
                                class = "character"),
                           list(arg = "compara",
@@ -63,13 +63,13 @@ rba_ensembl_cafe_genetree  = function(genetree_id,
 
   v_msg("GET cafe/genetree/id/:id")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("compara",
                                  compara != "vertebrates",
                                  compara))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("cafe/genetree/id/",
@@ -97,9 +97,9 @@ rba_ensembl_cafe_genetree  = function(genetree_id,
 rba_ensembl_cafe_genetree_id  = function(genetree_id,
                                          compara = "vertebrates",
                                          ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "genetree_id",
                                class = "character"),
                           list(arg = "compara",
@@ -107,13 +107,13 @@ rba_ensembl_cafe_genetree_id  = function(genetree_id,
 
   v_msg("GET cafe/genetree/id/:id")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("compara",
                                  compara != "vertebrates",
                                  compara))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("cafe/genetree/id/",
@@ -148,9 +148,9 @@ rba_ensembl_cafe_genetree_member_id  = function(ensembl_id,
                                                 object_type = NA,
                                                 species = NA,
                                                 ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "ensembl_id",
                                class = "character"),
                           list(arg = "compara",
@@ -165,7 +165,7 @@ rba_ensembl_cafe_genetree_member_id  = function(ensembl_id,
 
   v_msg("GET cafe/genetree/member/id/:id")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("compara",
                                  compara != "vertebrates",
@@ -180,7 +180,7 @@ rba_ensembl_cafe_genetree_member_id  = function(ensembl_id,
                                  !is.na(species),
                                  species))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("cafe/genetree/member/id/",
@@ -217,9 +217,9 @@ rba_ensembl_cafe_genetree_member_symbol  = function(gene_symbol,
                                                     external_db = NA,
                                                     object_type = NA,
                                                     ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "gene_symbol",
                                class = "character"),
                           list(arg = "species",
@@ -236,7 +236,7 @@ rba_ensembl_cafe_genetree_member_symbol  = function(gene_symbol,
 
   v_msg("GET cafe/genetree/member/symbol/:species/:symbol")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("compara",
                                  compara != "vertebrates",
@@ -251,7 +251,7 @@ rba_ensembl_cafe_genetree_member_symbol  = function(gene_symbol,
                                  !is.na(object_type),
                                  object_type))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("cafe/genetree/member/symbol/",
@@ -286,9 +286,9 @@ rba_ensembl_family_id  = function(familiy_id,
                                   member_source = "all",
                                   sequence = "protein",
                                   ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "familiy_id",
                                class = "character"),
                           list(arg = "aligned",
@@ -308,7 +308,7 @@ rba_ensembl_family_id  = function(familiy_id,
 
   v_msg("GET family/id/:id")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("aligned",
                                  aligned == FALSE,
@@ -323,7 +323,7 @@ rba_ensembl_family_id  = function(familiy_id,
                                  sequence != "protein",
                                  sequence))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("family/id/",
@@ -358,9 +358,9 @@ rba_ensembl_familiy_member_id  = function(ensembl_id,
                                           member_source = "all",
                                           sequence = "protein",
                                           ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "ensembl_id",
                                class = "character"),
                           list(arg = "aligned",
@@ -380,7 +380,7 @@ rba_ensembl_familiy_member_id  = function(ensembl_id,
 
   v_msg("GET family/member/id/:id")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("aligned",
                                  aligned == FALSE,
@@ -395,7 +395,7 @@ rba_ensembl_familiy_member_id  = function(ensembl_id,
                                  sequence != "protein",
                                  sequence))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("family/member/id/",
@@ -438,9 +438,9 @@ rba_ensembl_familiy_member_symbol  = function(gene_symbol,
                                               object_type = NA,
                                               sequence = "protein",
                                               ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "gene_symbol",
                                class = "character"),
                           list(arg = "species",
@@ -467,7 +467,7 @@ rba_ensembl_familiy_member_symbol  = function(gene_symbol,
 
   v_msg("GET family/member/symbol/:species/:symbol")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("aligned",
                                  aligned == FALSE,
@@ -488,7 +488,7 @@ rba_ensembl_familiy_member_symbol  = function(gene_symbol,
                                  sequence != "protein",
                                  sequence))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("family/member/symbol/",
@@ -529,9 +529,9 @@ rba_ensembl_genetree_id  = function(genetree_id,
                                     prune_taxon = NA,
                                     sequence = "protein",
                                     ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "genetree_id",
                                class = "character"),
                           list(arg = "aligned",
@@ -554,7 +554,7 @@ rba_ensembl_genetree_id  = function(genetree_id,
 
   v_msg("GET genetree/id/:id")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("aligned",
                                  aligned == FALSE,
@@ -578,7 +578,7 @@ rba_ensembl_genetree_id  = function(genetree_id,
                                  sequence != "protein",
                                  sequence))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("genetree/id/",
@@ -626,9 +626,9 @@ rba_ensembl_genetree_member_symbol  = function(gene_symbol,
                                                prune_taxon = NA,
                                                sequence = "protein",
                                                ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "gene_symbol",
                                class = "character"),
                           list(arg = "species",
@@ -660,7 +660,7 @@ rba_ensembl_genetree_member_symbol  = function(gene_symbol,
 
   v_msg("GET genetree/member/symbol/:species/:symbol")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("aligned",
                                  aligned == FALSE,
@@ -693,7 +693,7 @@ rba_ensembl_genetree_member_symbol  = function(gene_symbol,
                                  sequence != "protein",
                                  sequence))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("genetree/member/symbol/",
@@ -738,9 +738,9 @@ rba_ensembl_alignment_region  = function(region,
                                          species_set = NA,
                                          species_set_group = "mammals",
                                          ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "region",
                                class = "character"),
                           list(arg = "species",
@@ -775,7 +775,7 @@ rba_ensembl_alignment_region  = function(region,
 
   v_msg("GET alignment/region/:species/:region")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("aligned",
                                  aligned == FALSE,
@@ -802,7 +802,7 @@ rba_ensembl_alignment_region  = function(region,
                                  !is.na(species_set_group),
                                  species_set_group))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("alignment/region/",
@@ -845,9 +845,9 @@ rba_ensembl_homology_id  = function(ensemble_id,
                                     target_taxon = NA,
                                     type = "all",
                                     ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "ensemble_id",
                                class = "character"),
                           list(arg = "aligned",
@@ -878,7 +878,7 @@ rba_ensembl_homology_id  = function(ensemble_id,
 
   v_msg("GET homology/id/:id")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("aligned",
                                  aligned == FALSE,
@@ -902,7 +902,7 @@ rba_ensembl_homology_id  = function(ensemble_id,
                                  type != "all",
                                  type))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("homology/id/",
@@ -948,9 +948,9 @@ rba_ensembl_homology_symbol  = function(gene_symbol,
                                         target_taxon = NA,
                                         type = "all",
                                         ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "gene_symbol",
                                class = "character"),
                           list(arg = "species",
@@ -986,7 +986,7 @@ rba_ensembl_homology_symbol  = function(gene_symbol,
 
   v_msg("GET homology/symbol/:species/:symbol")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("aligned",
                                  aligned == FALSE,
@@ -1016,7 +1016,7 @@ rba_ensembl_homology_symbol  = function(gene_symbol,
                                  type != "all",
                                  type))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("homology/symbol/",
@@ -1057,9 +1057,9 @@ rba_ensembl_xrefs_symbol = function(external_symbol,
                                     external_db = NA,
                                     object_type = NA,
                                     ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "external_symbol",
                                class = c("numeric",
                                          "character"),
@@ -1077,7 +1077,7 @@ rba_ensembl_xrefs_symbol = function(external_symbol,
 
   v_msg("GET xrefs/symbol/:species/:symbol")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("db_type",
                                  db_type != "core",
@@ -1089,7 +1089,7 @@ rba_ensembl_xrefs_symbol = function(external_symbol,
                                  !is.na(object_type),
                                  object_type))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("xrefs/symbol/",
@@ -1127,9 +1127,9 @@ rba_ensembl_xrefs_id = function(ensembl_id,
                                 external_db = NA,
                                 object_type = NA,
                                 ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "ensembl_id",
                                class = "character",
                                len = 1),
@@ -1148,7 +1148,7 @@ rba_ensembl_xrefs_id = function(ensembl_id,
 
   v_msg("GET xrefs/id/:id")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("species",
                                  !is.na(species),
@@ -1166,7 +1166,7 @@ rba_ensembl_xrefs_id = function(ensembl_id,
                                  !is.na(object_type),
                                  object_type))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("xrefs/id/",
@@ -1199,9 +1199,9 @@ rba_ensembl_xrefs_name = function(name,
                                   db_type = "core",
                                   external_db = NA,
                                   ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "name",
                                class = c("numeric",
                                          "character"),
@@ -1217,7 +1217,7 @@ rba_ensembl_xrefs_name = function(name,
 
   v_msg("GET xrefs/name/:species/:name")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("db_type",
                                  db_type != "core",
@@ -1226,7 +1226,7 @@ rba_ensembl_xrefs_name = function(name,
                                  !is.na(external_db),
                                  external_db))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("xrefs/name/",
@@ -1255,16 +1255,16 @@ rba_ensembl_xrefs_name = function(name,
 #' @examples
 rba_ensembl_eqtl_tissue = function(species,
                                    ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "species",
                                class = c("numeric",
                                          "character"))))
 
   v_msg("GET eqtl/tissue/:species/")
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("eqtl/tissue/",
@@ -1297,9 +1297,9 @@ rba_ensembl_eqtl_gene = function(gene_id,
                                  tissue = NA,
                                  variant_name = NA,
                                  ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "gene_id",
                                class = "character"),
                           list(arg = "species",
@@ -1314,7 +1314,7 @@ rba_ensembl_eqtl_gene = function(gene_id,
 
   v_msg("GET eqtl/stable_id/:species/:stable_id")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("statistic",
                                  !is.na(statistic),
@@ -1326,7 +1326,7 @@ rba_ensembl_eqtl_gene = function(gene_id,
                                  !is.na(variant_name),
                                  variant_name))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("eqtl/id/",
@@ -1360,9 +1360,9 @@ rba_ensembl_eqtl_variant = function(variant_name,
                                     statistic = NA,
                                     tissue = NA,
                                     ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "variant_name",
                                class = "character"),
                           list(arg = "species",
@@ -1377,7 +1377,7 @@ rba_ensembl_eqtl_variant = function(variant_name,
 
   v_msg("GET eqtl/variant_name/:species/:variant_name")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("stable_id",
                                  !is.na(stable_id),
@@ -1389,7 +1389,7 @@ rba_ensembl_eqtl_variant = function(variant_name,
                                  !is.na(tissue),
                                  tissue))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("eqtl/variant_name/",
@@ -1431,9 +1431,9 @@ rba_ensembl_ld_variants = function(variant_id,
                                    r2 = NA,
                                    window_size = 500,
                                    ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "variant_id",
                                class = "character"),
                           list(arg = "species",
@@ -1452,7 +1452,7 @@ rba_ensembl_ld_variants = function(variant_id,
 
   v_msg("GET ld/:species/:id/:population_name")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("attribs",
                                  attribs == TRUE,
@@ -1467,7 +1467,7 @@ rba_ensembl_ld_variants = function(variant_id,
                                  window_size != 500,
                                  as.integer(window_size)))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("ld/",
@@ -1505,9 +1505,9 @@ rba_ensembl_ld_pairwise = function(variant_id_1,
                                    d_prime = NA,
                                    r2 = NA,
                                    ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "variant_id_1",
                                class = "character"),
                           list(arg = "variant_id_2",
@@ -1524,7 +1524,7 @@ rba_ensembl_ld_pairwise = function(variant_id_1,
 
   v_msg("GET ld/:species/pairwise/:id1/:id2")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("population_name",
                                  !is.na(population_name),
@@ -1536,7 +1536,7 @@ rba_ensembl_ld_pairwise = function(variant_id_1,
                                  !is.na(r2),
                                  r2))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("ld/",
@@ -1573,9 +1573,9 @@ rba_ensembl_ld_region = function(region,
                                  d_prime = NA,
                                  r2 = NA,
                                  ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "region",
                                class = "character"),
                           list(arg = "population_name",
@@ -1590,7 +1590,7 @@ rba_ensembl_ld_region = function(region,
 
   v_msg("GET ld/:species/region/:region/:population_name")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("d_prime",
                                  !is.na(d_prime),
@@ -1599,7 +1599,7 @@ rba_ensembl_ld_region = function(region,
                                  !is.na(r2),
                                  r2))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("ld/",
@@ -1640,9 +1640,9 @@ rba_ensembl_lookup_id = function(ids,
                                  object_type = NA,
                                  species = NA,
                                  ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "ids",
                                class = "character",
                                max_len = 1000),
@@ -1662,7 +1662,7 @@ rba_ensembl_lookup_id = function(ids,
 
   v_msg("POST lookup/id")
 
-  ## build POST API request's query
+  ## Build POST API Request's query
   call_query = rba_ba_query(init = list(),
                             list("db_type",
                                  !is.na(db_type),
@@ -1680,10 +1680,10 @@ rba_ensembl_lookup_id = function(ids,
                                  !is.na(species),
                                  species))
 
-  ## build POST API request's URL
+  ## Build POST API Request's URL
   call_body = jsonlite::toJSON(list("ids" = as.array(ids)))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "post",
                            url = rba_ba_stg("ensembl", "url"),
                            path = "lookup/id",
@@ -1693,7 +1693,7 @@ rba_ensembl_lookup_id = function(ids,
                            httr::content_type("application/json"),
                            parser = "json->list")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
 
   return(final_output)
@@ -1717,9 +1717,9 @@ rba_ensembl_lookup_symbol = function(symbols,
                                      expand = FALSE,
                                      format = "full",
                                      ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "symbols",
                                class = "character",
                                max_len = 1000),
@@ -1735,7 +1735,7 @@ rba_ensembl_lookup_symbol = function(symbols,
 
   v_msg("POST lookup/symbol/:species/:symbol")
 
-  ## build POST API request's query
+  ## Build POST API Request's query
   call_query = rba_ba_query(init = list(),
                             list("expand",
                                  expand == TRUE,
@@ -1744,10 +1744,10 @@ rba_ensembl_lookup_symbol = function(symbols,
                                  format != "full",
                                  format))
 
-  ## build POST API request's URL
+  ## Build POST API Request's URL
   call_body = jsonlite::toJSON(list("symbols" = as.array(symbols)))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "post",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("/lookup/symbol/",
@@ -1758,7 +1758,7 @@ rba_ensembl_lookup_symbol = function(symbols,
                            httr::content_type("application/json"),
                            parser = "json->list")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
 
   return(final_output)
@@ -1784,9 +1784,9 @@ rba_ensembl_map_cdna = function(ensembl_id,
                                 species = NA,
                                 include_original_region = FALSE,
                                 ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "ensembl_id",
                                class = "character"),
                           list(arg = "region",
@@ -1799,7 +1799,7 @@ rba_ensembl_map_cdna = function(ensembl_id,
 
   v_msg("GET map/cdna/:id/:region")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("species",
                                  !is.na(species),
@@ -1808,7 +1808,7 @@ rba_ensembl_map_cdna = function(ensembl_id,
                                  include_original_region == TRUE,
                                  include_original_region))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("map/cdna/",
@@ -1842,9 +1842,9 @@ rba_ensembl_map_cds = function(ensembl_id,
                                species = NA,
                                include_original_region = FALSE,
                                ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "ensembl_id",
                                class = "character"),
                           list(arg = "region",
@@ -1857,7 +1857,7 @@ rba_ensembl_map_cds = function(ensembl_id,
 
   v_msg("GET map/cds/:id/:region")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("species",
                                  !is.na(species),
@@ -1866,7 +1866,7 @@ rba_ensembl_map_cds = function(ensembl_id,
                                  include_original_region == TRUE,
                                  include_original_region))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("map/cds/",
@@ -1903,9 +1903,9 @@ rba_ensembl_map_assembly = function(asm_one,
                                     coord_system = "chromosome",
                                     target_coord_system = "chromosome",
                                     ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "asm_one",
                                class = "character"),
                           list(arg = "asm_two",
@@ -1922,7 +1922,7 @@ rba_ensembl_map_assembly = function(asm_one,
 
   v_msg("GET map/:species/:asm_one/:region/:asm_two")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("coord_system",
                                  coord_system != "chromosome",
@@ -1931,7 +1931,7 @@ rba_ensembl_map_assembly = function(asm_one,
                                  target_coord_system = TRUE,
                                  target_coord_system))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("map/",
@@ -1965,9 +1965,9 @@ rba_ensembl_map_translation = function(ensembl_id,
                                        region,
                                        species = NA,
                                        ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "ensembl_id",
                                class = "character"),
                           list(arg = "region",
@@ -1978,13 +1978,13 @@ rba_ensembl_map_translation = function(ensembl_id,
 
   v_msg("GET map/translation/:id/:region")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("species",
                                  !is.na(species),
                                  species))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("map/translation/",
@@ -2017,9 +2017,9 @@ rba_ensembl_ontology_ancestors = function(term_id,
                                           chart = FALSE,
                                           ontology = NA,
                                           ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "term_id",
                                class = "character"),
                           list(arg = "chart",
@@ -2030,13 +2030,13 @@ rba_ensembl_ontology_ancestors = function(term_id,
   v_msg("GET ontology/ancestors/chart/:id \r\n",
         "GET ontology/ancestors/:id")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("ontology",
                                  !is.na(ontology),
                                  ontology))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   if (chart == TRUE) {
     path_input = paste0("ontology/ancestors/chart/",
                         term_id)
@@ -2079,9 +2079,9 @@ rba_ensembl_ontology_descendants = function(term_id,
                                             subset = NA,
                                             zero_distance = NA,
                                             ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "term_id",
                                class = "character"),
                           list(arg = "closest_term",
@@ -2095,7 +2095,7 @@ rba_ensembl_ontology_descendants = function(term_id,
 
   v_msg("GET ontology/descendants/:id")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("closest_term",
                                  closest_term = TRUE,
@@ -2109,7 +2109,7 @@ rba_ensembl_ontology_descendants = function(term_id,
                             list("zero_distance",
                                  zero_distance = TRUE,
                                  "1"))
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("ontology/descendants/",
@@ -2139,9 +2139,9 @@ rba_ensembl_ontology_id = function(term_id,
                                    relation = NA,
                                    simple = FALSE,
                                    ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "term_id",
                                class = "character"),
                           list(arg = "relation",
@@ -2151,7 +2151,7 @@ rba_ensembl_ontology_id = function(term_id,
 
   v_msg("GET ontology/id/:id")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("relation",
                                  !is.na(relation),
@@ -2159,7 +2159,7 @@ rba_ensembl_ontology_id = function(term_id,
                             list("simple",
                                  simple = TRUE,
                                  "1"))
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("ontology/id/",
@@ -2191,9 +2191,9 @@ rba_ensembl_ontology_name = function(name,
                                      relation = NA,
                                      simple = FALSE,
                                      ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "name",
                                class = "character"),
                           list(arg = "ontology",
@@ -2205,7 +2205,7 @@ rba_ensembl_ontology_name = function(name,
 
   v_msg("GET ontology/name/:name")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("ontology",
                                  !is.na(ontology),
@@ -2216,7 +2216,7 @@ rba_ensembl_ontology_name = function(name,
                             list("simple",
                                  simple = TRUE,
                                  "1"))
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("ontology/name/",
@@ -2244,16 +2244,16 @@ rba_ensembl_ontology_name = function(name,
 #' @examples
 rba_ensembl_taxonomy_classification = function(taxon_id,
                                                ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "taxon_id",
                                class = c("numeric",
                                          "character"))))
 
   v_msg("GET taxonomy/classification/:id")
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("taxonomy/classification/",
@@ -2280,9 +2280,9 @@ rba_ensembl_taxonomy_classification = function(taxon_id,
 rba_ensembl_taxonomy_id = function(taxon_id,
                                    simple = FALSE,
                                    ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "taxon_id",
                                class = c("numeric",
                                          "character")),
@@ -2291,12 +2291,12 @@ rba_ensembl_taxonomy_id = function(taxon_id,
 
   v_msg("GET taxonomy/id/:id")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("simple",
                                  simple = TRUE,
                                  "1"))
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("taxonomy/id/",
@@ -2322,15 +2322,15 @@ rba_ensembl_taxonomy_id = function(taxon_id,
 #' @examples
 rba_ensembl_taxonomy_name = function(name,
                                      ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "name",
                                class = "character")))
 
   v_msg("GET taxonomy/name/:name")
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("taxonomy/name/",
@@ -2378,9 +2378,9 @@ rba_ensembl_overlap_id = function(ensembl_id,
                                   species_set = "mammals",
                                   variant_set = NA,
                                   ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "ensembl_id",
                                class = "character"),
                           list(arg = "feature",
@@ -2424,7 +2424,7 @@ rba_ensembl_overlap_id = function(ensembl_id,
 
   v_msg("GET overlap/id/:id")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list("feature" = feature),
                             list("biotype",
                                  !is.na(biotype),
@@ -2454,7 +2454,7 @@ rba_ensembl_overlap_id = function(ensembl_id,
                                  !is.na(variant_set),
                                  variant_set))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("overlap/id/",
@@ -2503,9 +2503,9 @@ rba_ensembl_overlap_region = function(region,
                                       trim_downstream = FALSE,
                                       trim_upstream = FALSE,
                                       ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "region",
                                class = "character"),
                           list(arg = "feature",
@@ -2551,7 +2551,7 @@ rba_ensembl_overlap_region = function(region,
 
   v_msg("GET overlap/region/:species/:region")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   ## feature can accept more than 1 argument:
   call_query = as.list(feature)
   names(call_query) = rep("feature", length(call_query))
@@ -2585,7 +2585,7 @@ rba_ensembl_overlap_region = function(region,
                                  trim_upstream = TRUE,
                                  trim_upstream))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("overlap/region/",
@@ -2623,9 +2623,9 @@ rba_ensembl_overlap_translation = function(ensembl_id,
                                            species = NA,
                                            type = NA,
                                            ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "ensembl_id",
                                class = "character"),
                           list(arg = "db_type",
@@ -2648,7 +2648,7 @@ rba_ensembl_overlap_translation = function(ensembl_id,
 
   v_msg("GET overlap/translation/:id")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("db_type",
                                  !is.na(db_type),
@@ -2666,7 +2666,7 @@ rba_ensembl_overlap_translation = function(ensembl_id,
                                  !is.na(type),
                                  type))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("overlap/translation/",
@@ -2705,9 +2705,9 @@ rba_ensembl_phenotype_accession = function(accession,
                                            include_review_status = FALSE,
                                            source = "undef",
                                            ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "accession",
                                class = "character"),
                           list(arg = "species",
@@ -2724,7 +2724,7 @@ rba_ensembl_phenotype_accession = function(accession,
 
   v_msg("GET /phenotype/accession/:species/:accession")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("include_children",
                                  include_children == TRUE,
@@ -2739,7 +2739,7 @@ rba_ensembl_phenotype_accession = function(accession,
                                  source != "undef",
                                  source))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("/phenotype/accession/",
@@ -2778,9 +2778,9 @@ rba_ensembl_phenotype_gene = function(gene,
                                       include_review_status = FALSE,
                                       include_submitter = FALSE,
                                       ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "gene",
                                class = "character"),
                           list(arg = "species",
@@ -2799,7 +2799,7 @@ rba_ensembl_phenotype_gene = function(gene,
 
   v_msg("GET /phenotype/gene/:species/:gene")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("include_associated",
                                  include_associated == TRUE,
@@ -2817,7 +2817,7 @@ rba_ensembl_phenotype_gene = function(gene,
                                  include_submitter == TRUE,
                                  "1"))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("/phenotype/gene/",
@@ -2856,9 +2856,9 @@ rba_ensembl_phenotype_region = function(region,
                                         include_submitter = FALSE,
                                         only_phenotypes = FALSE,
                                         ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "region",
                                class = "character"),
                           list(arg = "species",
@@ -2877,7 +2877,7 @@ rba_ensembl_phenotype_region = function(region,
 
   v_msg("GET /phenotype/region/:species/:region")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("feature_type",
                                  !is.na(feature_type),
@@ -2895,7 +2895,7 @@ rba_ensembl_phenotype_region = function(region,
                                  only_phenotypes == TRUE,
                                  "1"))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("/phenotype/region/",
@@ -2933,9 +2933,9 @@ rba_ensembl_phenotype_term = function(term,
                                       include_review_status = FALSE,
                                       source = "undef",
                                       ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "term",
                                class = "character"),
                           list(arg = "species",
@@ -2952,7 +2952,7 @@ rba_ensembl_phenotype_term = function(term,
 
   v_msg("GET /phenotype/term/:species/:term")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("include_children",
                                  include_children == TRUE,
@@ -2967,7 +2967,7 @@ rba_ensembl_phenotype_term = function(term,
                                  source != "undef",
                                  source))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   term = gsub(" ", "%20", term) #replace 'space' in term to %20
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
@@ -3001,9 +3001,9 @@ rba_ensembl_microarray_vendor = function(microarray,
                                          vendor,
                                          species,
                                          ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "microarray",
                                class = "character"),
                           list(arg = "vendor",
@@ -3014,7 +3014,7 @@ rba_ensembl_microarray_vendor = function(microarray,
 
   v_msg("GET regulatory/species/:species/microarray/:microarray/vendor/:vendor")
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("regulatory/species/",
@@ -3043,16 +3043,16 @@ rba_ensembl_microarray_vendor = function(microarray,
 #' @examples
 rba_ensembl_microarray_species = function(species,
                                           ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "species",
                                class = c("character",
                                          "numeric"))))
 
   v_msg("GET regulatory/species/:species/microarray")
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("regulatory/species/",
@@ -3082,9 +3082,9 @@ rba_ensembl_microarray_probe = function(microarray,
                                         probe,
                                         species,
                                         ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "microarray",
                                class = "character"),
                           list(arg = "probe",
@@ -3095,7 +3095,7 @@ rba_ensembl_microarray_probe = function(microarray,
 
   v_msg("GET regulatory/species/:species/microarray/:microarray/probe/:probe")
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("regulatory/species/",
@@ -3128,9 +3128,9 @@ rba_ensembl_microarray_probe_set = function(microarray,
                                             probe_set,
                                             species,
                                             ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "microarray",
                                class = "character"),
                           list(arg = "probe_set",
@@ -3141,7 +3141,7 @@ rba_ensembl_microarray_probe_set = function(microarray,
 
   v_msg("GET regulatory/species/:species/microarray/:microarray/probe_set/:probe_set")
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("regulatory/species/",
@@ -3170,16 +3170,16 @@ rba_ensembl_microarray_probe_set = function(microarray,
 #' @examples
 rba_ensembl_microarray_epigenome = function(species,
                                             ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "species",
                                class = c("character",
                                          "numeric"))))
 
   v_msg("GET regulatory/species/:species/epigenome")
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("regulatory/species/",
@@ -3209,9 +3209,9 @@ rba_ensembl_microarray_binding_matrix = function(binding_matrix_id,
                                                  species,
                                                  unit = "frequencies",
                                                  ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "binding_matrix_id",
                                class = "character"),
                           list(arg = "species",
@@ -3222,13 +3222,13 @@ rba_ensembl_microarray_binding_matrix = function(binding_matrix_id,
 
   v_msg("GET species/:species/binding_matrix/:binding_matrix_stable_id/")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   additional_pars = list(list(!is.na(unit),
                               list("unit" = unit)))
 
   call_query = rba_ba_query(init = list(),
                             additional_pars = additional_pars)
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("species/",
@@ -3260,9 +3260,9 @@ rba_ensembl_microarray_regulatory_feature  = function(regulatory_feature_id,
                                                       species,
                                                       activity = FALSE,
                                                       ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "regulatory_feature_id",
                                class = "character"),
                           list(arg = "species",
@@ -3273,12 +3273,12 @@ rba_ensembl_microarray_regulatory_feature  = function(regulatory_feature_id,
 
   v_msg("GET regulatory/species/:species/id/:id")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("activity",
                                  activity == TRUE,
                                  "1"))
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("regulatory/species/",
@@ -3330,10 +3330,10 @@ rba_ensembl_sequence_id = function(ids,
                                    type = "genomic",
                                    species = NA,
                                    ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
 
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "ids",
                                class = "character",
                                max_len = 50),
@@ -3369,7 +3369,7 @@ rba_ensembl_sequence_id = function(ids,
 
   v_msg("POST sequence/id")
 
-  ## build POST API request's query
+  ## Build POST API Request's query
   call_query = rba_ba_query(init = list(),
                             list("db_type",
                                  !is.na(db_type),
@@ -3404,10 +3404,10 @@ rba_ensembl_sequence_id = function(ids,
                             list("species",
                                  !is.na(species),
                                  species))
-  ## build POST API request's URL
+  ## Build POST API Request's URL
   call_body = jsonlite::toJSON(list("ids" = as.array(ids)))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "post",
                            url = rba_ba_stg("ensembl", "url"),
                            path = "sequence/id",
@@ -3417,7 +3417,7 @@ rba_ensembl_sequence_id = function(ids,
                            httr::content_type("application/json"),
                            parser = "json->list_no_simp")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
 
   return(final_output)
@@ -3450,10 +3450,10 @@ rba_ensembl_sequence_region = function(regions,
                                        mask = NA,
                                        mask_feature = FALSE,
                                        ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
 
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "region",
                                class = "character",
                                max_len = 50),
@@ -3479,7 +3479,7 @@ rba_ensembl_sequence_region = function(regions,
 
   v_msg("POST sequence/region/:species")
 
-  ## build POST API request's query
+  ## Build POST API Request's query
   additional_pars = list(list(!is.na(coord_system),
                               list("coord_system" = coord_system)),
                          list(!is.na(coord_system_version),
@@ -3517,10 +3517,10 @@ rba_ensembl_sequence_region = function(regions,
                             list("mask_feature",
                                  mask_feature == TRUE,
                                  "1"))
-  ## build POST API request's URL
+  ## Build POST API Request's URL
   call_body = jsonlite::toJSON(list("regions" = as.array(regions)))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "post",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("sequence/region/",
@@ -3531,7 +3531,7 @@ rba_ensembl_sequence_region = function(regions,
                            httr::content_type("application/json"),
                            parser = "json->list_no_simp")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
 
   return(final_output)
@@ -3558,9 +3558,9 @@ rba_ensembl_transcript_haplotypes  = function(transcript_id,
                                               samples = FALSE,
                                               sequence = FALSE,
                                               ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "transcript_id",
                                class = "character"),
                           list(arg = "species",
@@ -3575,7 +3575,7 @@ rba_ensembl_transcript_haplotypes  = function(transcript_id,
 
   v_msg("GET transcript_haplotypes/:species/:id")
 
-  ## build GET API request's query
+  ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("aligned_sequences",
                                  aligned_sequences == TRUE,
@@ -3587,7 +3587,7 @@ rba_ensembl_transcript_haplotypes  = function(transcript_id,
                                  sequence == TRUE,
                                  "1"))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("transcript_haplotypes/",
@@ -3684,9 +3684,9 @@ rba_ensembl_vep_hgvs = function(hgvs_notations,
                                 vcf_string = FALSE,
                                 xref_refseq = FALSE,
                                 ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "hgvs_notations",
                                class = "character",
                                max_len = 200),
@@ -3762,7 +3762,7 @@ rba_ensembl_vep_hgvs = function(hgvs_notations,
 
   v_msg("POST vep/:species/hgvs")
 
-  ## build POST API request's query
+  ## Build POST API Request's query
   call_query = rba_ba_query(init = list(),
                             list("Blosum62",
                                  Blosum62 == TRUE,
@@ -3864,10 +3864,10 @@ rba_ensembl_vep_hgvs = function(hgvs_notations,
                                  xref_refseq == TRUE,
                                  "1"))
 
-  ## build POST API request's URL
+  ## Build POST API Request's URL
   call_body = jsonlite::toJSON(list("hgvs_notations" = as.array(hgvs_notations)))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "post",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("vep/",
@@ -3879,7 +3879,7 @@ rba_ensembl_vep_hgvs = function(hgvs_notations,
                            httr::content_type("application/json"),
                            parser = "json->list_no_simp")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
 
   return(final_output)
@@ -3964,9 +3964,9 @@ rba_ensembl_vep_ids = function(ids,
                                vcf_string = FALSE,
                                xref_refseq = FALSE,
                                ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "ids",
                                class = "character",
                                max_len = 200),
@@ -4042,7 +4042,7 @@ rba_ensembl_vep_ids = function(ids,
 
   v_msg("POST vep/:species/id")
 
-  ## build POST API request's query
+  ## Build POST API Request's query
   call_query = rba_ba_query(init = list(),
                             list("Blosum62",
                                  Blosum62 == TRUE,
@@ -4144,10 +4144,10 @@ rba_ensembl_vep_ids = function(ids,
                                  xref_refseq == TRUE,
                                  "1"))
 
-  ## build POST API request's URL
+  ## Build POST API Request's URL
   call_body = jsonlite::toJSON(list("ids" = as.array(ids)))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "post",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("vep/",
@@ -4159,7 +4159,7 @@ rba_ensembl_vep_ids = function(ids,
                            httr::content_type("application/json"),
                            parser = "json->list_no_simp")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
 
   return(final_output)
@@ -4244,9 +4244,9 @@ rba_ensembl_vep_variant = function(variants,
                                    vcf_string = FALSE,
                                    xref_refseq = FALSE,
                                    ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "variants",
                                class = "character",
                                max_len = 200),
@@ -4322,7 +4322,7 @@ rba_ensembl_vep_variant = function(variants,
 
   v_msg("POST vep/:species/region")
 
-  ## build POST API request's query
+  ## Build POST API Request's query
   call_query = rba_ba_query(init = list(),
                             list("Blosum62",
                                  Blosum62 == TRUE,
@@ -4424,10 +4424,10 @@ rba_ensembl_vep_variant = function(variants,
                                  xref_refseq == TRUE,
                                  "1"))
 
-  ## build POST API request's URL
+  ## Build POST API Request's URL
   call_body = jsonlite::toJSON(list("variants" = as.array(variants)))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "post",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("vep/",
@@ -4439,7 +4439,7 @@ rba_ensembl_vep_variant = function(variants,
                            httr::content_type("application/json"),
                            parser = "json->list_no_simp")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
 
   return(final_output)
@@ -4526,9 +4526,9 @@ rba_ensembl_vep_allele = function(allele,
                                   vcf_string = FALSE,
                                   xref_refseq = FALSE,
                                   ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "variants",
                                class = "character"),
                           list(arg = "variants",
@@ -4605,7 +4605,7 @@ rba_ensembl_vep_allele = function(allele,
 
   v_msg("GET vep/:species/region/:region/:allele/")
 
-  ## build POST API request's query
+  ## Build POST API Request's query
   call_query = rba_ba_query(init = list(),
                             list("Blosum62",
                                  Blosum62 == TRUE,
@@ -4707,7 +4707,7 @@ rba_ensembl_vep_allele = function(allele,
                                  xref_refseq == TRUE,
                                  "1"))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("vep/",
@@ -4720,7 +4720,7 @@ rba_ensembl_vep_allele = function(allele,
                            httr::content_type("application/json"),
                            parser = "json->list")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
 
   return(final_output)
@@ -4744,9 +4744,9 @@ rba_ensembl_variant_recoder = function(ids,
                                        species,
                                        fields = NA,
                                        ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "ids",
                                class = "character",
                                max_len = 200),
@@ -4764,17 +4764,17 @@ rba_ensembl_variant_recoder = function(ids,
 
   v_msg("POST variant_recoder/:species")
 
-  ## build POST API request's query
+  ## Build POST API Request's query
   call_query = rba_ba_query(init = list(),
                             list("fields",
                                  any(is.na(fields)),
                                  paste(fields, collapse = ","))
   )
 
-  ## build POST API request's URL
+  ## Build POST API Request's URL
   call_body = jsonlite::toJSON(list("ids" = as.array(ids)))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "post",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("variant_recoder/",
@@ -4785,7 +4785,7 @@ rba_ensembl_variant_recoder = function(ids,
                            httr::content_type("application/json"),
                            parser = "json->list_no_simp")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
 
   return(final_output)
@@ -4813,9 +4813,9 @@ rba_ensembl_variation_id  = function(ids,
                                      pops = FALSE,
                                      population_genotypes = FALSE,
                                      ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "ids",
                                class = "character",
                                max_len = 200),
@@ -4833,7 +4833,7 @@ rba_ensembl_variation_id  = function(ids,
 
   v_msg("POST variation/:species/")
 
-  ## build POST API request's query
+  ## Build POST API Request's query
   call_query = rba_ba_query(init = list(),
                             list("genotypes",
                                  genotypes == TRUE,
@@ -4847,10 +4847,10 @@ rba_ensembl_variation_id  = function(ids,
                             list("population_genotypes",
                                  population_genotypes == TRUE,
                                  "1"))
-  ## build POST API request's URL
+  ## Build POST API Request's URL
   call_body = jsonlite::toJSON(list("ids" = as.array(ids)))
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "post",
                            url = rba_ba_stg("ensembl", "url"),
                            path = paste0("variation/",
@@ -4861,7 +4861,7 @@ rba_ensembl_variation_id  = function(ids,
                            httr::content_type("application/json"),
                            parser = "json->list_no_simp")
 
-  ## call API
+  ## Call API
   final_output = rba_ba_skeleton(input_call)
 
   return(final_output)
@@ -4883,9 +4883,9 @@ rba_ensembl_variation_pubmed  = function(pmid = NA,
                                          pmcid = NA,
                                          species,
                                          ...) {
-  ## Load user options
+  ## Load Global Options
   rba_ba_ext_args(...)
-  ## Check input arguments
+  ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "pmid",
                                class = "character"),
                           list(arg = "pmcid",
@@ -4907,7 +4907,7 @@ rba_ensembl_variation_pubmed  = function(pmid = NA,
     path_input = paste0("variation/", species, "/pmcid/", pmcid)
   }
 
-  ## make function-specific calls
+  ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("ensembl", "url"),
                            path = path_input,

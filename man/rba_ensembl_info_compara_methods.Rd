@@ -8,10 +8,6 @@ comparative data).}
 rba_ensembl_info_compara_methods(method, compara = "vertebrates", ...)
 
 rba_ensembl_info_compara_methods(method, compara = "vertebrates", ...)
-
-rba_ensembl_info_compara_methods(method, compara = "vertebrates", ...)
-
-rba_ensembl_info_compara_methods(method, compara = "vertebrates", ...)
 }
 \arguments{
 \item{compara}{}
@@ -20,17 +16,8 @@ rba_ensembl_info_compara_methods(method, compara = "vertebrates", ...)
 
 
 
-
-
-
-
 }
 \description{
-List all compara analyses available (an analysis defines the type of
-comparative data).
-
-List all collections of species analysed with the specified compara method.
-
 List all compara analyses available (an analysis defines the type of
 comparative data).
 
