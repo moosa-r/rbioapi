@@ -732,7 +732,7 @@ rba_ba_args = function(cons = NULL,
   if (length(errors) == 1) {
     stop(errors, call. = diagnostics)
   } else if (length(errors) > 1) {
-    error_message = paste0("\r\n", 1:length(errors), "- ", errors)
+    error_message = paste0("\r\n", seq_along(errors), "- ", errors)
     stop(sprintf("The following `%s Errors` was raised during your provided argument's check:",
                  length(errors)),
          error_message,
@@ -769,7 +769,7 @@ rba_ba_args = function(cons = NULL,
       if (length(cond_errors) == 1) {
         cond_message = cond_errors
       } else if (length(cond_errors) > 1) {
-        cond_message = paste0("\r\n", 1:length(cond_errors), "- ", cond_errors, collapse = "")
+        cond_message = paste0("\r\n", seq_along(cond_errors), "- ", cond_errors, collapse = "")
         cond_message = sprintf("The following `%s Conditional Errors` was raised during your provided argument's check:%s",
                                length(cond_message),
                                cond_message)
@@ -1019,14 +1019,15 @@ rba_options = function(client_timeout = NA,
   rba_ba_args(cond = list(list(quote(is.character(save_resp_file)),
                                "As a global option, you can only set save_resp_file as 'logical', not a file path.")))
   ## if empty function was called, show the available options
-  changes = sapply(ls(),
-                   function(x) {!is.na(get(x))})
+  changes = vapply(ls(), function(x) {!is.na(get(x))}, logical(1))
   if (!any(changes)) {
     options_df = data.frame(rbioapi_option = getOption("rba_user_options"),
-                            current_value = sapply(names(getOption("rba_user_options")),
-                                                   function(x) {getOption(x)}),
-                            value_class = sapply(names(getOption("rba_user_options")),
-                                                 function(x) {class(getOption(x))}),
+                            current_value = vapply(names(getOption("rba_user_options")),
+                                                   function(x) {as.character(getOption(x))},
+                                                   character(1)),
+                            value_class = vapply(names(getOption("rba_user_options")),
+                                                 function(x) {class(getOption(x))},
+                                                 character(1)),
                             stringsAsFactors = FALSE,
                             row.names = NULL)
     return(options_df)
