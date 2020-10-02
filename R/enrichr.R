@@ -159,7 +159,8 @@ rba_enrichr_enrich_internal = function(user_list_id,
   ## Call API
   final_output = rba_ba_skeleton(input_call)
   final_output = utils::read.delim(textConnection(final_output),
-                                   sep = "\t", header = TRUE)
+                                   sep = "\t", header = TRUE,
+                                   stringsAsFactors = FALSE)
   return(final_output)
 }
 
@@ -177,19 +178,17 @@ rba_enrichr_enrich_internal = function(user_list_id,
 #' @examples
 rba_enrichr_enrich = function(user_list_id,
                               gene_set_library = "all",
-                              regex_library_name = FALSE,
+                              regex_library_name = TRUE,
                               multi_libs_progress_bar = TRUE,
                               ...){
   ## Load Global Options
   rba_ba_ext_args(...)
-  # get a list of available
+  ## get a list of available libraries
   if (is.null(getOption("rba_enrichr_libs"))){
     v_msg("Calling rba_enrichr_info() to get a list of available enricr libraries.")
-
     invisible(rba_enrichr_info(store_in_options = TRUE))
   }
-
-  #### handle different gene_set_library input situations
+  ## handle different gene_set_library input situations
   if (length(gene_set_library) > 1) {
     run_mode = "multiple"
   } else if (gene_set_library == "all") {
@@ -201,18 +200,18 @@ rba_enrichr_enrich = function(user_list_id,
     } else {
       gene_set_library = grep(gene_set_library,
                               getOption("rba_enrichr_libs"),
-                              ignore.case = TRUE, value = TRUE)
+                              ignore.case = TRUE, value = TRUE, perl = TRUE)
       #check the results of regex
       if (length(gene_set_library) == 0) {
-        stop("Your regex pattern did not match any Enrichr library name.")
+        stop("Your regex pattern did not match any Enrichr library name.",
+             call. = get("diagnostics"))
       } else if (length(gene_set_library) == 1) {
         run_mode = "single"
       } else if (length(gene_set_library) > 1) {
         run_mode = "multiple"
       }
     }
-  }
-
+  } #end of if length(gene_set_library) > 1
   ## Check User-input Arguments
   rba_ba_args(cons = list(list(arg = "user_list_id",
                                class = c("numeric", "integer"),
@@ -226,46 +225,41 @@ rba_enrichr_enrich = function(user_list_id,
   if (run_mode == "single") {
     v_msg("Enriching Gene set %s using Enrichr library: %s.",
           user_list_id, gene_set_library)
-
     final_output = rba_enrichr_enrich_internal(user_list_id = user_list_id,
                                                gene_set_library = gene_set_library,
                                                ...)
     return(final_output)
 
-  } else if (run_mode == "multiple") {
+  } else {
     v_msg("Enriching Gene set %s using multiple Enrichr libraries.",
           user_list_id)
-
     v_msg(paste0("Note: You have selected '%s' Enrichr libraries. note that for ",
                  "each library, a seperate call should be send to the Enrichr server. ",
                  "thus, this could take a while depending on the number of selected ",
                  "libraries and your network connection."), length(gene_set_library))
-
-    final_output = as.list(gene_set_library)
-    names(final_output) = gene_set_library
-
     ## initiate progress bar
     if (multi_libs_progress_bar == TRUE) {
       pb = utils::txtProgressBar(min = 0,
                                  max = length(gene_set_library),
                                  style = 3)
     }
-
-    final_output = purrr::map(final_output, function(x){
-      lib_enrich_res = rba_enrichr_enrich_internal(user_list_id = user_list_id,
-                                                   gene_set_library = x,
-                                                   ...)
-      #advance the progress bar
-      if (multi_libs_progress_bar == TRUE) {
-        utils::setTxtProgressBar(pb, which(final_output == x))
-      }
-      return(lib_enrich_res)
-    })
+    final_output = lapply(gene_set_library,
+                          function(x){
+                            lib_enrich_res = rba_enrichr_enrich_internal(user_list_id = user_list_id,
+                                                                         gene_set_library = x,
+                                                                         ...)
+                            #advance the progress bar
+                            if (multi_libs_progress_bar == TRUE) {
+                              utils::setTxtProgressBar(pb, which(gene_set_library == x))
+                            }
+                            return(lib_enrich_res)
+                          })
     close(pb)
+    names(final_output) = gene_set_library
     return(final_output)
   }
-
 }
+
 
 #' Find terms that contain a given gene
 #'

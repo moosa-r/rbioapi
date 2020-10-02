@@ -7,7 +7,7 @@
 rba_enrichr_enrich(
   user_list_id,
   gene_set_library = "all",
-  regex_library_name = FALSE,
+  regex_library_name = TRUE,
   multi_libs_progress_bar = TRUE,
   ...
 )

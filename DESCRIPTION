@@ -20,7 +20,6 @@ BugReports: https://github.com/moosa-r/rbioapi/issues
 Imports:
   httr,
   jsonlite,
-  purrr,
   rvest,
   utils,
   xml2
