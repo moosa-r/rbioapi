@@ -285,104 +285,6 @@ rba_ba_http_status = function(http_status, verbose = FALSE){
 
 ##### API Calls ##################################################
 
-#' check provided file address or create one
-#'
-#' @param dir_name
-#' @param save_to
-#' @param file
-#'
-#' @return
-#' @export
-#'
-#' @examples
-rba_ba_file = function(file,
-                       save_to = NA,
-                       dir_name = NA) {
-  if (is.na(save_to)) {save_to = get0(x = "save_resp_file",
-                                      ifnotfound = FALSE,
-                                      envir = parent.frame(1))}
-  if (save_to != FALSE) {
-    ## 1 file path will be generated unless save_to == FALSE
-    # set values
-    diagnostics = get0("diagnostics", envir = parent.frame(1),
-                       ifnotfound = getOption("rba_diagnostics"))
-    verbose = get0("verbose", envir = parent.frame(1),
-                   ifnotfound = getOption("rba_verbose"))
-    # set defaults
-    def_file_ext = regmatches(file, regexpr("(?<=\\.)\\w+?$",
-                                            file, perl = TRUE))
-    def_file_name = regmatches(file,
-                               regexpr(sprintf("^.*(?=\\.%s$)", def_file_ext),
-                                       file, perl = TRUE))
-    ## File path is in "save_to", if not in "file = file_name.file_ext"
-    if (is.character(save_to)) {
-      # 2a the user provided a file path, just check if it is valid
-      if (!grepl("^[a-zA-z]:|^\\\\\\w|^/|\\w+\\.\\w+$", save_to)) {
-        ## 2a.1 not a valid file path!
-        warning(sprintf("\"%s\" is not a valid file path. Ignored that.",
-                        save_to))
-        save_to = TRUE
-      } else {
-        ## 2a.2 the provided file path is valid
-        overwrite = TRUE
-        # extract the file name and extension
-        file_ext = regmatches(basename(save_to),
-                              regexpr("(?<=\\.)\\w+?$",
-                                      basename(save_to), perl = TRUE))
-        file_name = regmatches(basename(save_to),
-                               regexpr(sprintf("^.*(?=\\.%s$)", file_ext),
-                                       basename(save_to), perl = TRUE))
-        # 2a.3 Check if the path and extension agree
-        if (!grepl(def_file_ext, file_ext, ignore.case = TRUE)) {
-          warning(sprintf("Your requested file format (\"%s\") does not match your provided file address's extention(\"%s\").",
-                          def_file_ext, basename(save_to)),
-                  call. = diagnostics)
-        }
-      }
-    } else if (save_to == TRUE){
-      ## 2b User didn't provide a file path, use defaults
-      overwrite = FALSE
-      ## 2b.1 extract the default file name and extension
-      file_ext = def_file_ext
-      file_name = def_file_name
-      ## 2b.2 set directory name
-      dir_name = ifelse(is.na(dir_name),
-                        yes = get0("dir_name", envir = parent.frame(1),
-                                   ifnotfound = getOption("rba_dir_name")),
-                        no = dir_name)
-      ## 2b.3 set file path
-      save_to = file.path(getwd(), dir_name, paste0(file_name, ".", file_ext))
-    } # end of if is.character(save_to)
-
-    ## 3 now that you have a file path...
-    ## 3.1 check if a file doesn't exist with this path
-    if (overwrite == FALSE &&
-        file.exists(save_to)) {
-      ## add an incremented file
-      exst_files = list.files(path = dirname(save_to),
-                              pattern = sprintf("(^%s)(_\\d+)*(\\.%s$)",
-                                                file_name, file_ext))
-      incrt = regmatches(exst_files,
-                         regexpr(sprintf("(?<=^%s_)(\\d+)*(?=\\.%s)",
-                                         file_name, file_ext),
-                                 exst_files, perl = TRUE))
-      if (length(incrt) == 0) { incrt = 1
-      } else { incrt = max(as.numeric(incrt)) + 1 }
-      save_to = file.path(getwd(), dir_name,
-                          paste0(file_name, "_", incrt, ".", file_ext))
-    } else {
-      ## 3.2 file doesn't exist. create the directory just in case
-      ### 4 create the directory
-      dir.create(dirname(save_to),
-                 showWarnings = diagnostics,
-                 recursive = TRUE)
-    }
-    if (verbose == TRUE) {message(sprintf("Saving the server response to: \"%s\"",
-                                          save_to))}
-  } # end if save_to != FALSE
-  return(save_to)
-}
-
 #' Add additional parameters to API call's body
 #' @description changed the name from rba_ba_body_add_pars
 #' the format shoud be 1- init which is a named list, followed by optional
@@ -441,10 +343,12 @@ rba_ba_httr = function(httr,
                        path = NULL,
                        ...) {
   ## assign global options
-  diagnostics = eval(parse(text = "diagnostics"), envir = parent.frame(1))
-  progress_bar = eval(parse(text = "progress_bar"), envir = parent.frame(1))
-  client_timeout = eval(parse(text = "client_timeout"), envir = parent.frame(1))
-
+  diagnostics = get0("diagnostics", envir = parent.frame(1),
+                     ifnotfound = getOption("rba_diagnostics"))
+  progress_bar = get0("progress_bar", envir = parent.frame(1),
+                 ifnotfound = getOption("rba_progress_bar"))
+  client_timeout = get0("client_timeout", envir = parent.frame(1),
+                     ifnotfound = getOption("rba_client_timeout"))
   ### 1 capture extra arguments
   # possible args: all args supported by httr +
   # args to this function: [file/obj_]accept, [file/obj_]parser, save_to
@@ -603,11 +507,16 @@ rba_ba_api_call = function(input_call,
 rba_ba_skeleton = function(input_call,
                            response_parser = NULL) {
   ## 0 assign options variables
-  diagnostics = eval(parse(text = "diagnostics"), envir = parent.frame(1))
-  verbose = eval(parse(text = "verbose"), envir = parent.frame(1))
-  max_retries = eval(parse(text = "max_retries"), envir = parent.frame(1))
-  wait_time = eval(parse(text = "wait_time"), envir = parent.frame(1))
-  skip_error = eval(parse(text = "skip_error"), envir = parent.frame(1))
+  diagnostics = get0("diagnostics", envir = parent.frame(1),
+                     ifnotfound = getOption("rba_diagnostics"))
+  verbose = get0("verbose", envir = parent.frame(1),
+                 ifnotfound = getOption("rba_verbose"))
+  max_retries = get0("max_retries", envir = parent.frame(1),
+                     ifnotfound = getOption("rba_max_retries"))
+  wait_time = get0("wait_time", envir = parent.frame(1),
+                   ifnotfound = getOption("rba_wait_time"))
+  skip_error = get0("skip_error", envir = parent.frame(1),
+                    ifnotfound = getOption("rba_skip_error"))
   ## 1 Make API Call
   response = rba_ba_api_call(input_call = input_call$call,
                              skip_error = skip_error,
@@ -920,7 +829,7 @@ rba_ba_response_parser = function(parser) {
     )
   }
   # parse the response
-  output = eval(parser, envir = parent.frame())
+  output = eval(parser, envir = parent.frame(1))
   return(output)
 }
 
@@ -984,6 +893,104 @@ v_msg = function(fmt, ..., sprintf = TRUE, cond = "verbose", sep = "", collapse 
   invisible()
 }
 
+#' check provided file address or create one
+#'
+#' @param dir_name
+#' @param save_to
+#' @param file
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_ba_file = function(file,
+                       save_to = NA,
+                       dir_name = NA) {
+  if (is.na(save_to)) {save_to = get0(x = "save_resp_file",
+                                      ifnotfound = FALSE,
+                                      envir = parent.frame(1))}
+  if (save_to != FALSE) {
+    ## 1 file path will be generated unless save_to == FALSE
+    # set values
+    diagnostics = get0("diagnostics", envir = parent.frame(1),
+                       ifnotfound = getOption("rba_diagnostics"))
+    verbose = get0("verbose", envir = parent.frame(1),
+                   ifnotfound = getOption("rba_verbose"))
+    # set defaults
+    def_file_ext = regmatches(file, regexpr("(?<=\\.)\\w+?$",
+                                            file, perl = TRUE))
+    def_file_name = regmatches(file,
+                               regexpr(sprintf("^.*(?=\\.%s$)", def_file_ext),
+                                       file, perl = TRUE))
+    ## File path is in "save_to", if not in "file = file_name.file_ext"
+    if (is.character(save_to)) {
+      # 2a the user provided a file path, just check if it is valid
+      if (!grepl("^[a-zA-z]:|^\\\\\\w|^/|\\w+\\.\\w+$", save_to)) {
+        ## 2a.1 not a valid file path!
+        warning(sprintf("\"%s\" is not a valid file path. Ignored that.",
+                        save_to))
+        save_to = TRUE
+      } else {
+        ## 2a.2 the provided file path is valid
+        overwrite = TRUE
+        # extract the file name and extension
+        file_ext = regmatches(basename(save_to),
+                              regexpr("(?<=\\.)\\w+?$",
+                                      basename(save_to), perl = TRUE))
+        file_name = regmatches(basename(save_to),
+                               regexpr(sprintf("^.*(?=\\.%s$)", file_ext),
+                                       basename(save_to), perl = TRUE))
+        # 2a.3 Check if the path and extension agree
+        if (!grepl(def_file_ext, file_ext, ignore.case = TRUE)) {
+          warning(sprintf("Your requested file format (\"%s\") does not match your provided file address's extention(\"%s\").",
+                          def_file_ext, basename(save_to)),
+                  call. = diagnostics)
+        }
+      }
+    } else if (save_to == TRUE){
+      ## 2b User didn't provide a file path, use defaults
+      overwrite = FALSE
+      ## 2b.1 extract the default file name and extension
+      file_ext = def_file_ext
+      file_name = def_file_name
+      ## 2b.2 set directory name
+      dir_name = ifelse(is.na(dir_name),
+                        yes = get0("dir_name", envir = parent.frame(1),
+                                   ifnotfound = getOption("rba_dir_name")),
+                        no = dir_name)
+      ## 2b.3 set file path
+      save_to = file.path(getwd(), dir_name, paste0(file_name, ".", file_ext))
+    } # end of if is.character(save_to)
+
+    ## 3 now that you have a file path...
+    ## 3.1 check if a file doesn't exist with this path
+    if (overwrite == FALSE &&
+        file.exists(save_to)) {
+      ## add an incremented file
+      exst_files = list.files(path = dirname(save_to),
+                              pattern = sprintf("(^%s)(_\\d+)*(\\.%s$)",
+                                                file_name, file_ext))
+      incrt = regmatches(exst_files,
+                         regexpr(sprintf("(?<=^%s_)(\\d+)*(?=\\.%s)",
+                                         file_name, file_ext),
+                                 exst_files, perl = TRUE))
+      if (length(incrt) == 0) { incrt = 1
+      } else { incrt = max(as.numeric(incrt)) + 1 }
+      save_to = file.path(getwd(), dir_name,
+                          paste0(file_name, "_", incrt, ".", file_ext))
+    } else {
+      ## 3.2 file doesn't exist. create the directory just in case
+      ### 4 create the directory
+      dir.create(dirname(save_to),
+                 showWarnings = diagnostics,
+                 recursive = TRUE)
+    }
+    if (verbose == TRUE) {message(sprintf("Saving the server response to: \"%s\"",
+                                          save_to))}
+  } # end if save_to != FALSE
+  return(save_to)
+}
+
 #### Options ####
 #' Set rbioapi global options
 #'
@@ -1013,7 +1020,7 @@ rba_options = function(client_timeout = NA,
                                "As a global option, you can only set save_resp_file as 'logical', not a file path.")))
   ## if empty function was called, show the available options
   changes = sapply(ls(),
-                   function(x) {!is.na(eval(parse(text = x)))})
+                   function(x) {!is.na(get(x))})
   if (!any(changes)) {
     options_df = data.frame(rbioapi_option = getOption("rba_user_options"),
                             current_value = sapply(names(getOption("rba_user_options")),
@@ -1026,13 +1033,12 @@ rba_options = function(client_timeout = NA,
   } else {
     ## change the provided options
     for (chng in names(changes[changes])) {
-      chng_content = eval(parse(text = chng))
+      chng_content = get(chng)
       eval(parse(text = sprintf(ifelse(is.character(chng_content),
                                        yes = "options(%s = \"%s\")",
                                        no = "options(%s = %s)"),
                                 paste0("rba_", chng),
-                                eval(parse(text = chng)))
-      ))
+                                chng_content)))
     }
     invisible()
   }
@@ -1069,7 +1075,7 @@ rba_ba_ext_args = function(...) {
            value = ifelse(utils::hasName(ext_args, opt),
                           yes = ext_args[[opt]],
                           no = getOption(paste0("rba_", opt))),
-           envir = parent.frame())
+           envir = parent.frame(1))
   }
   invisible()
 }
