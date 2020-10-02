@@ -285,74 +285,100 @@ rba_ba_http_status = function(http_status, verbose = FALSE){
 
 ##### API Calls ##################################################
 
-#' Create/check provided file address
-#'@description changed name from rba_ba_file_path
+#' check provided file address or create one
 #'
-#' @param file_ext
-#' @param file_name
 #' @param dir_name
 #' @param save_to
+#' @param file
 #'
 #' @return
 #' @export
 #'
 #' @examples
-rba_ba_file = function(file_ext,
-                       file_name = NA,
-                       randomize = TRUE,
-                       dir_name = NA,
-                       save_to = TRUE) {
+rba_ba_file = function(file,
+                       save_to = NA,
+                       dir_name = NA) {
+  if (is.na(save_to)) {save_to = get0(x = "save_resp_file",
+                                      ifnotfound = FALSE,
+                                      envir = parent.frame(1))}
   if (save_to != FALSE) {
-    # 1 file path will be generated unless save_to == FALSE
-    diagnostics = eval(parse(text = "diagnostics"), envir = parent.frame(1))
-    verbose = eval(parse(text = "verbose"), envir = parent.frame(1))
-
+    ## 1 file path will be generated unless save_to == FALSE
+    # set values
+    diagnostics = get0("diagnostics", envir = parent.frame(1),
+                       ifnotfound = getOption("rba_diagnostics"))
+    verbose = get0("verbose", envir = parent.frame(1),
+                   ifnotfound = getOption("rba_verbose"))
+    # set defaults
+    def_file_ext = regmatches(file, regexpr("(?<=\\.)\\w+?$",
+                                            file, perl = TRUE))
+    def_file_name = regmatches(file,
+                               regexpr(sprintf("^.*(?=\\.%s$)", def_file_ext),
+                                       file, perl = TRUE))
+    ## File path is in "save_to", if not in "file = file_name.file_ext"
     if (is.character(save_to)) {
-      # 2 the user provided a file path, just check if it is valid
+      # 2a the user provided a file path, just check if it is valid
       if (!grepl("^[a-zA-z]:|^\\\\\\w|^/|\\w+\\.\\w+$", save_to)) {
-        # 2.1 not a valid file path!
+        ## 2a.1 not a valid file path!
         warning(sprintf("\"%s\" is not a valid file path. Ignored that.",
                         save_to))
         save_to = TRUE
-      } else if (!grepl(pattern = paste0("\\.", file_ext, "$"),
-                        x = save_to, ignore.case = TRUE)) {
-        # 2.2 valid file path, but...
-        warning(sprintf("Your requested file format (\"%s\") does not match your provided file address's extention(\"%s\").",
-                        file_ext, basename(save_to)),
-                call. = diagnostics)
-      }
-    } # end of if (is.character(save_to)...
-
-    if (save_to == TRUE){
-      # 3 the user didn't provide or provided non-valid file path, generate one
-      # a random string to prevent over-writing a file!
-      rndm_str = paste0(sample(999, 1, replace = TRUE),
-                        sample(LETTERS, 1, replace = TRUE),
-                        sample(9, 1, replace = TRUE),
-                        sample(letters, 1, replace = TRUE), collapse = "")
-      # set file name
-      if (is.na(file_name)) {
-        file_name = paste0(rndm_str, ".", file_ext)
       } else {
-        if (randomize == TRUE) {
-          file_name = paste0(file_name, "_", rndm_str, ".", file_ext)
-        } else {
-          file_name = paste0(file_name, ".", file_ext)
+        ## 2a.2 the provided file path is valid
+        overwrite = TRUE
+        # extract the file name and extension
+        file_ext = regmatches(basename(save_to),
+                              regexpr("(?<=\\.)\\w+?$",
+                                      basename(save_to), perl = TRUE))
+        file_name = regmatches(basename(save_to),
+                               regexpr(sprintf("^.*(?=\\.%s$)", file_ext),
+                                       basename(save_to), perl = TRUE))
+        # 2a.3 Check if the path and extension agree
+        if (!grepl(def_file_ext, file_ext, ignore.case = TRUE)) {
+          warning(sprintf("Your requested file format (\"%s\") does not match your provided file address's extention(\"%s\").",
+                          def_file_ext, basename(save_to)),
+                  call. = diagnostics)
         }
       }
-      #set dir name
+    } else if (save_to == TRUE){
+      ## 2b User didn't provide a file path, use defaults
+      overwrite = FALSE
+      ## 2b.1 extract the default file name and extension
+      file_ext = def_file_ext
+      file_name = def_file_name
+      ## 2b.2 set directory name
       dir_name = ifelse(is.na(dir_name),
-                        yes = eval(parse(text = "dir_name"),
-                                   envir = parent.frame(1)),
+                        yes = get0("dir_name", envir = parent.frame(1),
+                                   ifnotfound = getOption("rba_dir_name")),
                         no = dir_name)
-      #set file path
-      save_to = file.path(getwd(), dir_name, file_name)
-      if (verbose == TRUE) {message("Saving to: ", save_to)}
+      ## 2b.3 set file path
+      save_to = file.path(getwd(), dir_name, paste0(file_name, ".", file_ext))
+    } # end of if is.character(save_to)
+
+    ## 3 now that you have a file path...
+    ## 3.1 check if a file doesn't exist with this path
+    if (overwrite == FALSE &&
+        file.exists(save_to)) {
+      ## add an incremented file
+      exst_files = list.files(path = dirname(save_to),
+                              pattern = sprintf("(^%s)(_\\d+)*(\\.%s$)",
+                                                file_name, file_ext))
+      incrt = regmatches(exst_files,
+                         regexpr(sprintf("(?<=^%s_)(\\d+)*(?=\\.%s)",
+                                         file_name, file_ext),
+                                 exst_files, perl = TRUE))
+      if (length(incrt) == 0) { incrt = 1
+      } else { incrt = max(as.numeric(incrt)) + 1 }
+      save_to = file.path(getwd(), dir_name,
+                          paste0(file_name, "_", incrt, ".", file_ext))
+    } else {
+      ## 3.2 file doesn't exist. create the directory just in case
+      ### 4 create the directory
+      dir.create(dirname(save_to),
+                 showWarnings = diagnostics,
+                 recursive = TRUE)
     }
-    ### 4 create the directory
-    dir.create(dirname(save_to),
-               showWarnings = diagnostics,
-               recursive = TRUE)
+    if (verbose == TRUE) {message(sprintf("Saving the server response to: \"%s\"",
+                                          save_to))}
   } # end if save_to != FALSE
   return(save_to)
 }
@@ -680,7 +706,7 @@ rba_ba_args = function(cons = NULL,
                                   "Invalid dir_name. directory name can not include these characters: \\/?%*:|<>"),
                   save_resp_file = list(quote(!is.logical(save_resp_file) &&
                                                 !grepl("^[a-zA-z]:|^\\\\\\w|^/|\\w+\\.\\w+$",
-                                                      save_resp_file)),
+                                                       save_resp_file)),
                                         "Invalid save_resp_file. you should set this argument as logical or a valid file path."))
   rba_opts = getOption("rba_user_options")
   stopifnot(setequal(rba_opts, names(ext_cons)))

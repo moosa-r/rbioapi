@@ -2,22 +2,16 @@
 % Please edit documentation in R/basic_functions.R
 \name{rba_ba_file}
 \alias{rba_ba_file}
-\title{Create/check provided file address}
+\title{check provided file address or create one}
 \usage{
-rba_ba_file(
-  file_ext,
-  file_name = NA,
-  randomize = TRUE,
-  dir_name = NA,
-  save_to = TRUE
-)
+rba_ba_file(file, save_to = NA, dir_name = NA)
 }
 \arguments{
-\item{save_to}{}
+\item{file}{}
 }
 \value{
 
 }
 \description{
-changed name from rba_ba_file_path
+check provided file address or create one
 }
