@@ -663,7 +663,8 @@ rba_ba_args = function(cons = NULL,
                                       class = "logical",
                                       len = 1),
                   save_resp_file = list(arg = "save_resp_file",
-                                        class = "logical",
+                                        class = c("logical",
+                                                  "character"),
                                         len = 1),
                   skip_error = list(arg = "skip_error",
                                     class = "logical",
@@ -675,15 +676,22 @@ rba_ba_args = function(cons = NULL,
                                    class = "numeric",
                                    len = 1,
                                    min_val = 1))
+  ext_cond = list(dir_name = list(quote(grepl("[\\\\/:\"*?<>|]+", dir_name, perl = TRUE)),
+                                  "Invalid dir_name. directory name can not include these characters: \\/?%*:|<>"),
+                  save_resp_file = list(quote(!is.logical(save_resp_file) &&
+                                                !grepl("^[a-zA-z]:|^\\\\\\w|^/|\\w+\\.\\w+$",
+                                                      save_resp_file)),
+                                        "Invalid save_resp_file. you should set this argument as logical or a valid file path."))
   rba_opts = getOption("rba_user_options")
   stopifnot(setequal(rba_opts, names(ext_cons)))
 
   ## only keep the provided options (e.g. extra arguments)
   exist_opts = rba_opts[which(rba_opts %in% ls(envir = parent.frame(1)))]
+  ext_cond = unname(ext_cond[names(ext_cond) %in% exist_opts])
   ext_cons = unname(ext_cons[exist_opts])
   ## append
   cons = append(ext_cons, cons)
-
+  cond = append(ext_cond, cond)
   ### 2 Check arguments
   errors = c()
   ## 2.1 check for errors
@@ -822,18 +830,20 @@ rba_ba_args = function(cons = NULL,
     } #end of for (i in seq_along(cond))
 
     # 3.2 produce the message
-    if (length(cond_errors) == 1) {
-      cond_message = cond_errors
-    } else if (length(cond_errors) > 1) {
-      cond_message = paste0("\r\n", 1:length(cond_errors), "- ", cond_errors, collapse = "")
-      cond_message = sprintf("The following `%s Conditional Errors` was raised during your provided argument's check:%s",
-                             length(cond_message),
-                             cond_message)
+    if (length(cond_errors) > 0) {
+      if (length(cond_errors) == 1) {
+        cond_message = cond_errors
+      } else if (length(cond_errors) > 1) {
+        cond_message = paste0("\r\n", 1:length(cond_errors), "- ", cond_errors, collapse = "")
+        cond_message = sprintf("The following `%s Conditional Errors` was raised during your provided argument's check:%s",
+                               length(cond_message),
+                               cond_message)
+      }
+      # 3.3 stop or warn!
+      if (cond_warning == TRUE) {
+        warning(cond_message, call. = diagnostics)
+      } else { stop(cond_message, call. = diagnostics) }
     }
-    # 3.3 stop or warn!
-    if (cond_warning == TRUE) {
-      warning(cond_message, call. = diagnostics)
-    } else { stop(cond_message, call. = diagnostics) }
   } # end of if (!all(is.null(cond)))
   invisible()
 }
@@ -969,12 +979,12 @@ rba_options = function(client_timeout = NA,
                        dir_name = NA,
                        max_retries = NA,
                        progress_bar = NA,
+                       save_resp_file = NA,
                        skip_error = NA,
                        verbose = NA,
                        wait_time = NA) {
-  rba_ba_args(cond = list(list(quote(!is.na(dir_name) &&
-                                       !grepl("\\/?%*:|\"<>", dir_name)),
-                               "dir_name should be a valid directory name.")))
+  rba_ba_args(cond = list(list(quote(is.character(save_resp_file)),
+                               "As a global option, you can only set save_resp_file as 'logical', not a file path.")))
   ## if empty function was called, show the available options
   changes = sapply(ls(),
                    function(x) {!is.na(eval(parse(text = x)))})
@@ -982,16 +992,21 @@ rba_options = function(client_timeout = NA,
     options_df = data.frame(rbioapi_option = getOption("rba_user_options"),
                             current_value = sapply(names(getOption("rba_user_options")),
                                                    function(x) {getOption(x)}),
+                            value_class = sapply(names(getOption("rba_user_options")),
+                                                 function(x) {class(getOption(x))}),
                             stringsAsFactors = FALSE,
                             row.names = NULL)
     return(options_df)
   } else {
     ## change the provided options
     for (chng in names(changes[changes])) {
-      eval(parse(text = sprintf("options(%s = %s)",
+      chng_content = eval(parse(text = chng))
+      eval(parse(text = sprintf(ifelse(is.character(chng_content),
+                                       yes = "options(%s = \"%s\")",
+                                       no = "options(%s = %s)"),
                                 paste0("rba_", chng),
-                                eval(parse(text = chng))
-      )))
+                                eval(parse(text = chng)))
+      ))
     }
     invisible()
   }

@@ -10,6 +10,7 @@ rba_options(
   dir_name = NA,
   max_retries = NA,
   progress_bar = NA,
+  save_resp_file = NA,
   skip_error = NA,
   verbose = NA,
   wait_time = NA
