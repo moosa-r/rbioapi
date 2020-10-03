@@ -98,3 +98,71 @@ rba_options = function(client_timeout = NA,
     invisible()
   }
 }
+#' What to cite?
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
+rba_citation = function(...) {
+  ## 1 Prepare input
+  input = as.character(substitute(list(...)))
+  cat("-- If you used rbioapi to publish a research paper, kindly cite:\r\n",
+      "---- 1- ", rba_ba_stg("citation", "rbioapi"), "\r\n",
+      "-- Also, rbioapi is an interface between R and Biological databases. \r\n",
+      "-- So, depending on the databases you have used, you will also have to cite R and those databases. \r\n",
+      "   to cite R:\r\n",
+      "---- 2- ", rba_ba_stg("citations", "r"), "\r\n")
+  if (length(input) == 1) {
+    cat("\r\n-- If you are not sure what papers & databases to cite, you could call rba_citation() with:\r\n",
+        "   1- The name of the functions which you have used.\r\n",
+        "   2- The path to your script file[s].\r\n",
+        "   3- Working directory [getwd()] and/or any directories that contains your files.\r\n",
+        "   4- \"rstudio_context\" to scan your active source editor's context (only in Rtudio enviroment).\r\n")
+  } else {
+    ## check if the user provided directory paths
+    input = unique(input)
+    input[input == "getwd()"] = getwd()
+    is_dir = grepl("^[a-zA-z]:|^\\\\\\w|^/",
+                   input, perl = TRUE) & !grepl("\\.\\w+$",
+                                                input, perl = TRUE)
+    if (sum(is_dir) != 0) {
+      read_func = function(x) {
+        tryCatch(list.files(x, full.names = TRUE, recursive = TRUE),
+                 error = function(x){FALSE}, warning = function(x){invisible()})
+      }
+      input = append(input[!is_dir], unlist(lapply(input[is_dir], read_func)))
+    }
+    ## check if the user provided file paths
+    is_file = grepl("\\.\\w+$", input, perl = TRUE)
+    if (sum(is_file) != 0) {
+      read_func = function(x) {
+        tryCatch(unique(scan(x, what = character(), sep = "\n", quiet = TRUE)),
+                 error = function(x){FALSE}, warning = function(x){invisible()})
+      }
+      input = unique(append(input[!is_file],
+                            unlist(lapply(input[is_file], read_func))))
+    }
+    ## check if the user requested to scan rstudio
+    if (Sys.getenv("RSTUDIO") == "1" && any(input == "rstudio_context")) {
+      input = append(input, as.character(rstudioapi::getSourceEditorContext()))}
+    ## 2 Search patterns
+    patt = sprintf("(?<=\\brba_)(%s)(?=_\\w+?\\()",
+                   paste(rba_ba_stg("db"), collapse = "|"))
+    rba_used = lapply(input, function(x){
+      regmatches(x, regexpr(patt, x, perl = TRUE))})
+    rba_used = unique(unlist(rba_used))
+    rba_cites = unlist(lapply(rba_used, function(x){
+      rba_ba_stg("citation", x) }))
+    if (length(rba_used) != 0) {
+      cat(sprintf("-- to cite %s:\r\n---- %s- %s\r\n",
+                  rba_used, seq_along(rba_used) + 2, rba_cites))
+    } else {
+      cat("-- Nothing further was found in your provided arguments.")
+    }
+  }
+  invisible()
+}
+

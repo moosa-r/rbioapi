@@ -10,13 +10,9 @@
 rba_ba_stg = function(...){
   arg = c(...)
   #possible arguments
-  arg_1 = c("db", "options", "enrichr", "ensembl", "reactome", "string", "uniprot")
+  arg_1 = c("db", "enrichr", "ensembl", "reactome", "string", "uniprot", "options", "citations")
   output = switch(match.arg(arg[[1]], arg_1),
                   db = c("enrichr", "ensembl", "reactome", "string", "uniprot"),
-                  options = switch(as.character(length(arg)),
-                                   "1" = options()[grep("^rba_",
-                                                        names(options()))],
-                                   getOption(arg[[2]])),
                   enrichr = switch(arg[[2]],
                                    name = "Enrichr",
                                    url = "https://amp.pharm.mssm.edu",
@@ -50,8 +46,20 @@ rba_ba_stg = function(...){
                                    ptn = "(http.*://)*ebi.ac.uk/proteins/api/\\w+.*",
                                    err = c("400", "404"),
                                    err_prs = "json->list",
-                                   err_fun = function(x) {x[["errorMessage"]][[1]]})
-  )
+                                   err_fun = function(x) {x[["errorMessage"]][[1]]}),
+                  options = switch(as.character(length(arg)),
+                                   "1" = options()[grep("^rba_",
+                                                        names(options()))],
+                                   getOption(arg[[2]])),
+                  citations = switch(arg[[2]],
+                                     rbioapi = "Moosa Rezwani (NA). rbioapi: User-friendly interface from R to Biological Databases' APIs. R package version 0.4.0. https://github.com/moosa-r/rbioapi",
+                                     r = "R Core Team (2020). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.",
+                                     enrichr = "***enrichr api papeer***",
+                                     ensembl = "***ensembl api papeer***",
+                                     reactome = "***reactome api papeer***",
+                                     string = "***string api papeer***",
+                                     uniprot = "***uniprot api papeer***")
+                  )
   return(output)
 }
 
@@ -298,9 +306,9 @@ rba_ba_httr = function(httr,
   diagnostics = get0("diagnostics", envir = parent.frame(1),
                      ifnotfound = getOption("rba_diagnostics"))
   progress_bar = get0("progress_bar", envir = parent.frame(1),
-                 ifnotfound = getOption("rba_progress_bar"))
+                      ifnotfound = getOption("rba_progress_bar"))
   client_timeout = get0("client_timeout", envir = parent.frame(1),
-                     ifnotfound = getOption("rba_client_timeout"))
+                        ifnotfound = getOption("rba_client_timeout"))
   ### 1 capture extra arguments
   # possible args: all args supported by httr +
   # args to this function: [file/obj_]accept, [file/obj_]parser, save_to
