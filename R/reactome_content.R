@@ -21,7 +21,8 @@ rba_reactome_version = function(...) {
                            path = paste0(rba_ba_stg("reactome", "pth", "content"),
                                          "data/database/version"),
                            accpet = "text/plain",
-                           parser = "text->chr")
+                           parser = "text->chr",
+                           save_to = rba_ba_file("reactome_diseases.txt"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -56,17 +57,21 @@ rba_reactome_diseases = function(doid = FALSE,
                         "data/diseases")
     accept_input = "application/json"
     parser_input = "json->df"
+    file_ext = "json"
   } else {
     path_input = paste0(rba_ba_stg("reactome", "pth", "content"),
                         "data/diseases/doid")
     accept_input = "text/plain"
     parser_input = "text->df"
+    file_ext = "txt"
   }
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("reactome", "url"),
                            path = path_input,
                            accpet = accept_input,
-                           parser = parser_input)
+                           parser = parser_input,
+                           save_to = rba_ba_file(paste0("reactome_diseases.",
+                                                        file_ext)))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -114,7 +119,8 @@ rba_reactome_complex_subunits = function(complex_id,
                                           complex_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("reactome_complex_subunits.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -152,7 +158,8 @@ rba_reactome_complex_list = function(id,
                                           rba_ba_stg("reactome", "pth", "content"),
                                           resource, id),
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("reactome_complex_list.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -188,7 +195,8 @@ rba_reactome_entity_component_of = function(entity_id,
                            path = sprintf("%sdata/entity/%s/componentOf",
                                           rba_ba_stg("reactome", "pth", "content"),
                                           entity_id),
-                           accept = "application/json")
+                           accept = "application/json",
+                           save_to = rba_ba_file("reactome_entity_component_of.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -224,7 +232,8 @@ rba_reactome_entity_other_forms = function(entity_id,
                                           rba_ba_stg("reactome", "pth", "content"),
                                           entity_id),
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("reactome_entity_other_forms.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -264,7 +273,8 @@ rba_reactome_event_ancestors = function(event_id,
                                           rba_ba_stg("reactome", "pth", "content"),
                                           event_id),
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("reactome_event_ancestors.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -304,7 +314,8 @@ rba_reactome_event_hierarchy = function(species,
                                           rba_ba_stg("reactome", "pth", "content"),
                                           species),
                            accept = "application/json",
-                           parser = "json->list_no_simp")
+                           parser = "json->list_no_simp",
+                           save_to = rba_ba_file("reactome_event_hierarchy.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -452,13 +463,10 @@ rba_reactome_exporter_diagram = function(event_id,
     accept_input = paste0("image/", output_format)
   }
   # create file_path
-  save_to = rba_ba_file(file_ext = output_format,
-                        file_name = event_id,
-                        randomize = FALSE,
+  save_to = rba_ba_file(file = paste0(event_id, ".", output_format),
                         save_to = ifelse(is.na(save_to),
                                          yes = TRUE,
                                          no = save_to))
-
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("reactome", "url"),
                            path = sprintf("%sexporter/diagram/%s.%s",
@@ -556,9 +564,7 @@ rba_reactome_exporter_document = function(event_id,
 
   ## Build Function-Specific Call
   # create file_path
-  save_to = rba_ba_file(file_ext = "pdf",
-                        file_name = event_id,
-                        randomize = FALSE,
+  save_to = rba_ba_file(file = paste0(event_id, ".pdf"),
                         save_to = ifelse(is.na(save_to),
                                          yes = TRUE,
                                          no = save_to))
@@ -606,9 +612,7 @@ rba_reactome_exporter_event = function(event_id,
         "Exports a given pathway or reaction to SBGN or SBML")
   ## Build Function-Specific Call
   # create file_path
-  save_to = rba_ba_file(file_ext = output_format,
-                        file_name = event_id,
-                        randomize = FALSE,
+  save_to = rba_ba_file(file = paste0(event_id, ".", output_format),
                         save_to = ifelse(is.na(save_to),
                                          yes = TRUE,
                                          no = save_to))
@@ -752,8 +756,7 @@ rba_reactome_exporter_overview = function(species,
   }
 
   # create file_path
-  save_to = rba_ba_file(file_ext = output_format,
-                        file_name = species,
+  save_to = rba_ba_file(file = paste0(species, ".", output_format),
                         save_to = ifelse(is.na(save_to),
                                          yes = TRUE,
                                          no = save_to))
@@ -821,7 +824,8 @@ rba_reactome_interactors_psicquic = function(resource,
                            body = call_body,
                            accept = "application/json",
                            httr::content_type("text/plain"),
-                           parser = "json->list_no_simp")
+                           parser = "json->list_no_simp",
+                           save_to = rba_ba_file("reactome_interactors_psicquic.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -852,7 +856,8 @@ rba_reactome_interactors_resources = function(...) {
                            path = paste0(rba_ba_stg("reactome", "pth", "content"),
                                          "/interactors/psicquic/resources"),
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("reactome_interactors_resources.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -901,7 +906,8 @@ rba_reactome_interactors_static = function(proteins,
                            body = call_body,
                            accept = "application/json",
                            httr::content_type("text/plain"),
-                           parser = "json->list_no_simp")
+                           parser = "json->list_no_simp",
+                           save_to = rba_ba_file("reactome_interactors_static.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -956,7 +962,8 @@ rba_reactome_mapping_pathways = function(id,
                                           id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("reactome_mapping_pathways.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -1007,7 +1014,8 @@ rba_reactome_mapping_reactions = function(id,
                                           id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("reactome_mapping_reactions.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -1058,7 +1066,8 @@ rba_reactome_orthology = function(ids,
                            body = call_body,
                            accept = "application/json",
                            httr::content_type("text/plain"),
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("reactome_orthology.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -1113,7 +1122,8 @@ rba_reactome_participants = function(id,
                            url = rba_ba_stg("reactome", "url"),
                            path = path_input,
                            accept = "application/json",
-                           parser = "json->list_no_simp")
+                           parser = "json->list_no_simp",
+                           save_to = rba_ba_file("reactome_participants.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -1159,6 +1169,7 @@ rba_reactome_pathways_participants = function(id,
                        id)
   accept_input = "application/json"
   parser_input = "json->df"
+  file_ext = "json"
 
   if (!is.na(attribute_name)){
     path_input = paste0(path_input, "/", attribute_name)
@@ -1169,13 +1180,16 @@ rba_reactome_pathways_participants = function(id,
                                                                                  as = "text",
                                                                                  encoding = "UTF-8"))),
                                          split = ", ")))
+    file_ext = "txt"
   }
 
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("reactome", "url"),
                            path = path_input,
                            accpet = accept_input,
-                           parser = parser_input)
+                           parser = parser_input,
+                           save_to = rba_ba_file(paste0(reactome_pathways_participants,
+                                                        ".", file_ext)))
 
 
   ## Call API
@@ -1240,7 +1254,8 @@ rba_reactome_pathways_low = function(entity_id,
                            url = rba_ba_stg("reactome", "url"),
                            path = path_input,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("reactome_pathways_low.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -1280,7 +1295,8 @@ rba_reactome_pathways_top = function(species,
                                          species),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("reactome_pathways_top.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -1327,7 +1343,8 @@ rba_reactome_people_name = function(person_name,
                            url = rba_ba_stg("reactome", "url"),
                            path = path_input,
                            accept = "application/json",
-                           parser = "json->list_no_simp")
+                           parser = "json->list_no_simp",
+                           save_to = rba_ba_file("reactome_people_name.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -1376,6 +1393,8 @@ rba_reactome_people_id = function(id,
                       id)
   accept_input = "application/json"
   parser_type_input = "json->list_no_simp"
+  file_ext = "json"
+
   if (authored_pathways == TRUE) {
     path_input = paste0(path_input, "/authoredPathways")
   } else if (publications == TRUE) {
@@ -1384,12 +1403,16 @@ rba_reactome_people_id = function(id,
     path_input = paste0(path_input, "/", attribute_name)
     accept_input = "text/plain"
     parser_type_input = "text->chr"
+    file_ext = "txt"
   }
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("reactome", "url"),
                            path = path_input,
                            accpet = accept_input,
-                           parser = parser_type_input)
+                           parser = parser_type_input,
+                           save_to = rba_ba_file(paste0(reactome_people_id,
+                                                        ".",
+                                                        file_ext)))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -1450,7 +1473,8 @@ rba_reactome_query = function(ids,
                              body = call_body,
                              parser = "json->list_no_simp",
                              accept = "application/json",
-                             httr::content_type("text/plain"))
+                             httr::content_type("text/plain"),
+                             save_to = rba_ba_file("reactome_query.json"))
   } else {
     #### use GET
     ## Build Function-Specific Call
@@ -1459,12 +1483,14 @@ rba_reactome_query = function(ids,
                         ids)
     accept_input = "application/json"
     parser_input = "json->list_no_simp"
+    file_ext = "json"
     if (!is.na(attribute_name)) {
       v_msg("GET /data/query/{id}/{attributeName}",
             "A single property of an entry in Reactome knowledgebase")
       path_input = paste0(path_input, "/", attribute_name)
       accept_input = "text/plain"
       parser_input = "text->chr"
+      file_ext = "txt"
     } else if (enhanced == TRUE){
       v_msg("GET /data/query/enhanced/{id}",
             "More information on an entry in Reactome knowledgebase")
@@ -1477,7 +1503,9 @@ rba_reactome_query = function(ids,
                              url = rba_ba_stg("reactome", "url"),
                              path = path_input,
                              parser = parser_input,
-                             accept = accept_input)
+                             accept = accept_input,
+                             save_to = rba_ba_file(paste0("reactome_query.",
+                                                          file_ext)))
 
   }
 
@@ -1516,7 +1544,8 @@ rba_reactome_complex_subunits = function(id,
                                          "references/mapping/",
                                          id),
                            accept = "application/json",
-                           parser = "json->list_no_simp")
+                           parser = "json->list_no_simp",
+                           save_to = rba_ba_file("reactome_complex_subunits.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -1559,7 +1588,8 @@ rba_reactome_species = function(species_type = "all",
                                          "data/species/",
                                          species_type),
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("reactome_species.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)

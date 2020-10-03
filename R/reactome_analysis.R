@@ -229,7 +229,8 @@ rba_reactome_analysis = function(input,
                            body = call_body,
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("reactome_analysis.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -335,13 +336,10 @@ rba_reactome_analysis_pdf = function(token,
                                  fireworks_profile))
 
   # create file_path
-  save_to = rba_ba_file(file_ext = "pdf",
-                        file_name = token,
-                        randomize = FALSE,
+  save_to = rba_ba_file(file = paste0(token, ".pdf"),
                         save_to = ifelse(is.na(save_to),
                                          yes = TRUE,
                                          no = save_to))
-
   ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("reactome", "url"),
@@ -437,9 +435,7 @@ rba_reactome_analysis_download = function(token,
   }
 
   # create file_path
-  save_to = rba_ba_file(file_ext = output_format,
-                        file_name = paste0(request, "_", token),
-                        randomize = FALSE,
+  save_to = rba_ba_file(file = paste0(request, "_", token, ".", output_format),
                         save_to = ifelse(is.na(save_to),
                                          yes = TRUE,
                                          no = save_to))
@@ -504,7 +500,8 @@ rba_reactome_analysis_import = function(input,
                            path = path_input,
                            body = call_body,
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("reactome_analysis_import.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -583,7 +580,8 @@ rba_reactome_analysis_mapping = function(input,
                            body = call_body,
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list_no_simp")
+                           parser = "json->list_no_simp",
+                           save_to = rba_ba_file("reactome_analysis_mapping.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -685,7 +683,8 @@ rba_reactome_analysis_species = function(species_dbid,
                                          species_dbid),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("reactome_analysis_species.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -799,7 +798,8 @@ rba_reactome_analysis_token = function(token,
                                           token),
                             query = call_query,
                             accept = "application/json",
-                            parser = "json->list")
+                            parser = "json->list",
+                            save_to = rba_ba_file("reactome_analysis_token.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)

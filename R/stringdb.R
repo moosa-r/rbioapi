@@ -70,7 +70,8 @@ rba_string_map_ids = function(input,
                            body = call_body,
                            encode = "form",
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("string_map_ids.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -190,8 +191,7 @@ rba_string_network_image = function(input,
     parser_input = quote(httr::content(response,
                                        type = "image/png"))
   }
-  save_file = rba_ba_file(file_ext = ext_input,
-                          file_name = "string_network_image",
+  save_file = rba_ba_file(file = paste0("string_network_image.", ext_input),
                           save_to = save_file)
 
   ## Build Function-Specific Call
@@ -277,7 +277,8 @@ rba_string_network_interactions = function(input,
                            body = call_body,
                            encode = "form",
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("string_network_interactions.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -349,7 +350,8 @@ rba_string_interaction_partners = function(input,
                            body = call_body,
                            encode = "form",
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("string_interaction_partners.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -409,7 +411,8 @@ rba_string_homology = function(input,
                            body = call_body,
                            encode = "form",
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("string_homology.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -474,7 +477,8 @@ rba_string_homology_best = function(input,
                            body = call_body,
                            encode = "form",
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("string_homology_best.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -541,7 +545,8 @@ rba_string_enrichment = function(input,
                            body = call_body,
                            encode = "form",
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("string_enrichment.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -606,7 +611,8 @@ rba_string_functional_annotation = function(input,
                            body = call_body,
                            encode = "form",
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("string_functional_annotation.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -675,7 +681,8 @@ rba_string_ppi_enrichment = function(input,
                            body = call_body,
                            encode = "form",
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("string_ppi_enrichment.json"))
   ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
@@ -709,7 +716,8 @@ rba_string_version = function(...) {
                            body = call_query,
                            encode = "form",
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("string_version.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)

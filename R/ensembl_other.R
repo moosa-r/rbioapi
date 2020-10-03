@@ -28,9 +28,10 @@ rba_ensembl_archive = function(ids,
                            url = rba_ba_stg("ensembl", "url"),
                            path = "archive/id",
                            body = call_body,
-                           httr::accept_json(),
+                           accept = "application/json",
                            httr::content_type("application/json"),
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_archive.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -50,9 +51,9 @@ rba_ensembl_archive = function(ids,
 #' @export
 #'
 #' @examples
-rba_ensembl_cafe_genetree  = function(genetree_id,
-                                      compara = "vertebrates",
-                                      ...) {
+rba_ensembl_cafe_genetree = function(genetree_id,
+                                     compara = "vertebrates",
+                                     ...) {
   ## Load Global Options
   rba_ba_ext_args(...)
   ## Check User-input Arguments
@@ -76,51 +77,8 @@ rba_ensembl_cafe_genetree  = function(genetree_id,
                                          genetree_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list")
-
-  ## Call API
-  final_output = rba_ba_skeleton(input_call)
-
-  return(final_output)
-}
-
-#' Retrieves a cafe tree of the gene tree using the gene tree stable identifier
-#'
-#' @param genetree_id
-#' @param compara
-#' @param ...
-#'
-#' @return
-#' @export
-#'
-#' @examples
-rba_ensembl_cafe_genetree_id  = function(genetree_id,
-                                         compara = "vertebrates",
-                                         ...) {
-  ## Load Global Options
-  rba_ba_ext_args(...)
-  ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "genetree_id",
-                               class = "character"),
-                          list(arg = "compara",
-                               class = "character")))
-
-  v_msg("GET cafe/genetree/id/:id")
-
-  ## Build GET API Request's query
-  call_query = rba_ba_query(init = list(),
-                            list("compara",
-                                 compara != "vertebrates",
-                                 compara))
-
-  ## Build Function-Specific Call
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("ensembl", "url"),
-                           path = paste0("cafe/genetree/id/",
-                                         genetree_id),
-                           query = call_query,
-                           accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("ensembl_cafe_genetree.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -142,12 +100,12 @@ rba_ensembl_cafe_genetree_id  = function(genetree_id,
 #' @export
 #'
 #' @examples
-rba_ensembl_cafe_genetree_member_id  = function(ensembl_id,
-                                                compara = "vertebrates",
-                                                db_type = NA,
-                                                object_type = NA,
-                                                species = NA,
-                                                ...) {
+rba_ensembl_cafe_genetree_member_id = function(ensembl_id,
+                                               compara = "vertebrates",
+                                               db_type = NA,
+                                               object_type = NA,
+                                               species = NA,
+                                               ...) {
   ## Load Global Options
   rba_ba_ext_args(...)
   ## Check User-input Arguments
@@ -187,7 +145,8 @@ rba_ensembl_cafe_genetree_member_id  = function(ensembl_id,
                                          ensembl_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("ensembl_cafe_genetree_member_id.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -210,13 +169,13 @@ rba_ensembl_cafe_genetree_member_id  = function(ensembl_id,
 #' @export
 #'
 #' @examples
-rba_ensembl_cafe_genetree_member_symbol  = function(gene_symbol,
-                                                    species,
-                                                    compara = "vertebrates",
-                                                    db_type = "core",
-                                                    external_db = NA,
-                                                    object_type = NA,
-                                                    ...) {
+rba_ensembl_cafe_genetree_member_symbol = function(gene_symbol,
+                                                   species,
+                                                   compara = "vertebrates",
+                                                   db_type = "core",
+                                                   external_db = NA,
+                                                   object_type = NA,
+                                                   ...) {
   ## Load Global Options
   rba_ba_ext_args(...)
   ## Check User-input Arguments
@@ -259,7 +218,8 @@ rba_ensembl_cafe_genetree_member_symbol  = function(gene_symbol,
                                          gene_symbol),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("ensembl_cafe_genetree_member_symbol.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -280,12 +240,12 @@ rba_ensembl_cafe_genetree_member_symbol  = function(gene_symbol,
 #' @export
 #'
 #' @examples
-rba_ensembl_family_id  = function(familiy_id,
-                                  aligned = TRUE,
-                                  compara = "vertebrates",
-                                  member_source = "all",
-                                  sequence = "protein",
-                                  ...) {
+rba_ensembl_family_id = function(familiy_id,
+                                 aligned = TRUE,
+                                 compara = "vertebrates",
+                                 member_source = "all",
+                                 sequence = "protein",
+                                 ...) {
   ## Load Global Options
   rba_ba_ext_args(...)
   ## Check User-input Arguments
@@ -330,7 +290,8 @@ rba_ensembl_family_id  = function(familiy_id,
                                          familiy_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("ensembl_family_id.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -352,12 +313,12 @@ rba_ensembl_family_id  = function(familiy_id,
 #' @export
 #'
 #' @examples
-rba_ensembl_familiy_member_id  = function(ensembl_id,
-                                          aligned = TRUE,
-                                          compara = "vertebrates",
-                                          member_source = "all",
-                                          sequence = "protein",
-                                          ...) {
+rba_ensembl_familiy_member_id = function(ensembl_id,
+                                         aligned = TRUE,
+                                         compara = "vertebrates",
+                                         member_source = "all",
+                                         sequence = "protein",
+                                         ...) {
   ## Load Global Options
   rba_ba_ext_args(...)
   ## Check User-input Arguments
@@ -402,7 +363,8 @@ rba_ensembl_familiy_member_id  = function(ensembl_id,
                                          ensembl_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("ensembl_familiy_member_id.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -428,16 +390,16 @@ rba_ensembl_familiy_member_id  = function(ensembl_id,
 #' @export
 #'
 #' @examples
-rba_ensembl_familiy_member_symbol  = function(gene_symbol,
-                                              species,
-                                              aligned = TRUE,
-                                              compara = "vertebrates",
-                                              db_type = "core",
-                                              external_db = NA,
-                                              member_source = "all",
-                                              object_type = NA,
-                                              sequence = "protein",
-                                              ...) {
+rba_ensembl_familiy_member_symbol = function(gene_symbol,
+                                             species,
+                                             aligned = TRUE,
+                                             compara = "vertebrates",
+                                             db_type = "core",
+                                             external_db = NA,
+                                             member_source = "all",
+                                             object_type = NA,
+                                             sequence = "protein",
+                                             ...) {
   ## Load Global Options
   rba_ba_ext_args(...)
   ## Check User-input Arguments
@@ -496,7 +458,8 @@ rba_ensembl_familiy_member_symbol  = function(gene_symbol,
                                          gene_symbol),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("ensembl_familiy_member_symbol.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -520,15 +483,15 @@ rba_ensembl_familiy_member_symbol  = function(gene_symbol,
 #' @export
 #'
 #' @examples
-rba_ensembl_genetree_id  = function(genetree_id,
-                                    aligned = FALSE,
-                                    cigar_line = FALSE,
-                                    cluterset_id = NA,
-                                    compara = "vertebrates",
-                                    prune_species = NA,
-                                    prune_taxon = NA,
-                                    sequence = "protein",
-                                    ...) {
+rba_ensembl_genetree_id = function(genetree_id,
+                                   aligned = FALSE,
+                                   cigar_line = FALSE,
+                                   cluterset_id = NA,
+                                   compara = "vertebrates",
+                                   prune_species = NA,
+                                   prune_taxon = NA,
+                                   sequence = "protein",
+                                   ...) {
   ## Load Global Options
   rba_ba_ext_args(...)
   ## Check User-input Arguments
@@ -585,7 +548,8 @@ rba_ensembl_genetree_id  = function(genetree_id,
                                          genetree_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("ensembl_genetree_id.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -613,19 +577,19 @@ rba_ensembl_genetree_id  = function(genetree_id,
 #' @export
 #'
 #' @examples
-rba_ensembl_genetree_member_symbol  = function(gene_symbol,
-                                               species,
-                                               aligned = FALSE,
-                                               cigar_line = FALSE,
-                                               cluterset_id = NA,
-                                               compara = "vertebrates",
-                                               db_type = "core",
-                                               external_db = NA,
-                                               object_type = NA,
-                                               prune_species = NA,
-                                               prune_taxon = NA,
-                                               sequence = "protein",
-                                               ...) {
+rba_ensembl_genetree_member_symbol = function(gene_symbol,
+                                              species,
+                                              aligned = FALSE,
+                                              cigar_line = FALSE,
+                                              cluterset_id = NA,
+                                              compara = "vertebrates",
+                                              db_type = "core",
+                                              external_db = NA,
+                                              object_type = NA,
+                                              prune_species = NA,
+                                              prune_taxon = NA,
+                                              sequence = "protein",
+                                              ...) {
   ## Load Global Options
   rba_ba_ext_args(...)
   ## Check User-input Arguments
@@ -701,7 +665,8 @@ rba_ensembl_genetree_member_symbol  = function(gene_symbol,
                                          gene_symbol),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("ensembl_genetree_member_symbol.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -727,17 +692,17 @@ rba_ensembl_genetree_member_symbol  = function(gene_symbol,
 #' @export
 #'
 #' @examples
-rba_ensembl_alignment_region  = function(region,
-                                         species,
-                                         aligned = TRUE,
-                                         compact = TRUE,
-                                         compara = "vertebrates",
-                                         display_species_set = NA,
-                                         mask = NA,
-                                         method = "EPO",
-                                         species_set = NA,
-                                         species_set_group = "mammals",
-                                         ...) {
+rba_ensembl_alignment_region = function(region,
+                                        species,
+                                        aligned = TRUE,
+                                        compact = TRUE,
+                                        compara = "vertebrates",
+                                        display_species_set = NA,
+                                        mask = NA,
+                                        method = "EPO",
+                                        species_set = NA,
+                                        species_set_group = "mammals",
+                                        ...) {
   ## Load Global Options
   rba_ba_ext_args(...)
   ## Check User-input Arguments
@@ -810,7 +775,8 @@ rba_ensembl_alignment_region  = function(region,
                                          region),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("ensembl_alignment_region.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -835,16 +801,16 @@ rba_ensembl_alignment_region  = function(region,
 #' @export
 #'
 #' @examples
-rba_ensembl_homology_id  = function(ensemble_id,
-                                    aligned = TRUE,
-                                    cigar_line = TRUE,
-                                    compara = "vertebrates",
-                                    format = "full",
-                                    sequence = "protein",
-                                    target_species = NA,
-                                    target_taxon = NA,
-                                    type = "all",
-                                    ...) {
+rba_ensembl_homology_id = function(ensemble_id,
+                                   aligned = TRUE,
+                                   cigar_line = TRUE,
+                                   compara = "vertebrates",
+                                   format = "full",
+                                   sequence = "protein",
+                                   target_species = NA,
+                                   target_taxon = NA,
+                                   type = "all",
+                                   ...) {
   ## Load Global Options
   rba_ba_ext_args(...)
   ## Check User-input Arguments
@@ -909,7 +875,8 @@ rba_ensembl_homology_id  = function(ensemble_id,
                                          ensemble_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("ensembl_homology_id.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -936,18 +903,18 @@ rba_ensembl_homology_id  = function(ensemble_id,
 #' @export
 #'
 #' @examples
-rba_ensembl_homology_symbol  = function(gene_symbol,
-                                        species,
-                                        aligned = TRUE,
-                                        cigar_line = TRUE,
-                                        compara = "vertebrates",
-                                        external_db = NA,
-                                        format = "full",
-                                        sequence = "protein",
-                                        target_species = NA,
-                                        target_taxon = NA,
-                                        type = "all",
-                                        ...) {
+rba_ensembl_homology_symbol = function(gene_symbol,
+                                       species,
+                                       aligned = TRUE,
+                                       cigar_line = TRUE,
+                                       compara = "vertebrates",
+                                       external_db = NA,
+                                       format = "full",
+                                       sequence = "protein",
+                                       target_species = NA,
+                                       target_taxon = NA,
+                                       type = "all",
+                                       ...) {
   ## Load Global Options
   rba_ba_ext_args(...)
   ## Check User-input Arguments
@@ -1024,7 +991,8 @@ rba_ensembl_homology_symbol  = function(gene_symbol,
                                          gene_symbol),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("ensembl_homology_symbol.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -1097,7 +1065,8 @@ rba_ensembl_xrefs_symbol = function(external_symbol,
                                          external_symbol),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_xrefs_symbol.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -1173,7 +1142,8 @@ rba_ensembl_xrefs_id = function(ensembl_id,
                                          ensembl_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_xrefs_id.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -1234,7 +1204,8 @@ rba_ensembl_xrefs_name = function(name,
                                          name),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_xrefs_name.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -1270,7 +1241,8 @@ rba_ensembl_eqtl_tissue = function(species,
                            path = paste0("eqtl/tissue/",
                                          species),
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("ensembl_eqtl_tissue.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -1333,7 +1305,8 @@ rba_ensembl_eqtl_gene = function(gene_id,
                                          species, "/", gene_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_eqtl_gene.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -1396,7 +1369,8 @@ rba_ensembl_eqtl_variant = function(variant_name,
                                          species, "/", variant_name),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_eqtl_variant.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -1476,7 +1450,8 @@ rba_ensembl_ld_variants = function(variant_id,
                                          population_name),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_ld_variants.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -1545,7 +1520,8 @@ rba_ensembl_ld_pairwise = function(variant_id_1,
                                          variant_id_2),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_ld_pairwise.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -1608,7 +1584,8 @@ rba_ensembl_ld_region = function(region,
                                          population_name),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_ld_region.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -1689,9 +1666,10 @@ rba_ensembl_lookup_id = function(ids,
                            path = "lookup/id",
                            body = call_body,
                            query = call_query,
-                           httr::accept_json(),
+                           accept = "application/json",
                            httr::content_type("application/json"),
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("ensembl_lookup_id.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -1754,9 +1732,10 @@ rba_ensembl_lookup_symbol = function(symbols,
                                          species),
                            body = call_body,
                            query = call_query,
-                           httr::accept_json(),
+                           accept = "application/json",
                            httr::content_type("application/json"),
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("ensembl_lookup_symbol.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -1816,7 +1795,8 @@ rba_ensembl_map_cdna = function(ensembl_id,
                                          region),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_map_cdna.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -1874,7 +1854,8 @@ rba_ensembl_map_cds = function(ensembl_id,
                                          region),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_map_cds.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -1941,7 +1922,8 @@ rba_ensembl_map_assembly = function(asm_one,
                                          asm_two),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list_no_simp")
+                           parser = "json->list_no_simp",
+                           save_to = rba_ba_file("ensembl_map_assembly.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -1992,7 +1974,8 @@ rba_ensembl_map_translation = function(ensembl_id,
                                          region),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_map_translation.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -2051,7 +2034,8 @@ rba_ensembl_ontology_ancestors = function(term_id,
                            path = path_input,
                            query = call_query,
                            accept = "application/json",
-                           parser = parser_input)
+                           parser = parser_input,
+                           save_to = rba_ba_file("ensembl_ontology_ancestors.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -2116,7 +2100,8 @@ rba_ensembl_ontology_descendants = function(term_id,
                                          term_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_ontology_descendants.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -2166,7 +2151,8 @@ rba_ensembl_ontology_id = function(term_id,
                                          term_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("ensembl_ontology_id.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -2223,7 +2209,8 @@ rba_ensembl_ontology_name = function(name,
                                          name),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_ontology_name.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -2259,7 +2246,8 @@ rba_ensembl_taxonomy_classification = function(taxon_id,
                            path = paste0("taxonomy/classification/",
                                          taxon_id),
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_taxonomy_classification.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -2303,7 +2291,8 @@ rba_ensembl_taxonomy_id = function(taxon_id,
                                          taxon_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_taxonomy_id.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -2336,7 +2325,8 @@ rba_ensembl_taxonomy_name = function(name,
                            path = paste0("taxonomy/name/",
                                          name),
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_taxonomy_name.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -2461,7 +2451,8 @@ rba_ensembl_overlap_id = function(ensembl_id,
                                          ensembl_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_overlap_id.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -2593,7 +2584,8 @@ rba_ensembl_overlap_region = function(region,
                                          region),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_overlap_region.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -2673,7 +2665,8 @@ rba_ensembl_overlap_translation = function(ensembl_id,
                                          ensembl_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_overlap_translation.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -2747,7 +2740,8 @@ rba_ensembl_phenotype_accession = function(accession,
                                          accession),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_phenotype_accession.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -2825,7 +2819,8 @@ rba_ensembl_phenotype_gene = function(gene,
                                          gene),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_phenotype_gene.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -2903,7 +2898,8 @@ rba_ensembl_phenotype_region = function(region,
                                          region),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_phenotype_region.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -2976,7 +2972,8 @@ rba_ensembl_phenotype_term = function(term,
                                          term),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_phenotype_term.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -3024,7 +3021,8 @@ rba_ensembl_microarray_vendor = function(microarray,
                                          "/vendor/",
                                          vendor),
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("ensembl_microarray_vendor.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -3059,7 +3057,8 @@ rba_ensembl_microarray_species = function(species,
                                          species,
                                          "/microarray"),
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_microarray_species.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -3105,7 +3104,8 @@ rba_ensembl_microarray_probe = function(microarray,
                                          "/probe/",
                                          probe),
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("ensembl_microarray_probe.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -3151,7 +3151,8 @@ rba_ensembl_microarray_probe_set = function(microarray,
                                          "/probe_set/",
                                          probe_set),
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("ensembl_microarray_probe_set.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -3186,7 +3187,8 @@ rba_ensembl_microarray_epigenome = function(species,
                                          species,
                                          "/epigenome"),
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_microarray_epigenome.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -3237,7 +3239,8 @@ rba_ensembl_microarray_binding_matrix = function(binding_matrix_id,
                                          binding_matrix_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_microarray_binding_matrix.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -3256,10 +3259,10 @@ rba_ensembl_microarray_binding_matrix = function(binding_matrix_id,
 #' @export
 #'
 #' @examples
-rba_ensembl_microarray_regulatory_feature  = function(regulatory_feature_id,
-                                                      species,
-                                                      activity = FALSE,
-                                                      ...) {
+rba_ensembl_microarray_regulatory_feature = function(regulatory_feature_id,
+                                                     species,
+                                                     activity = FALSE,
+                                                     ...) {
   ## Load Global Options
   rba_ba_ext_args(...)
   ## Check User-input Arguments
@@ -3287,7 +3290,8 @@ rba_ensembl_microarray_regulatory_feature  = function(regulatory_feature_id,
                                          regulatory_feature_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("ensembl_microarray_regulatory_feature.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -3413,9 +3417,10 @@ rba_ensembl_sequence_id = function(ids,
                            path = "sequence/id",
                            body = call_body,
                            query = call_query,
-                           httr::accept_json(),
+                           accept = "application/json",
                            httr::content_type("application/json"),
-                           parser = "json->list_no_simp")
+                           parser = "json->list_no_simp",
+                           save_to = rba_ba_file("ensembl_sequence_id.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -3527,9 +3532,10 @@ rba_ensembl_sequence_region = function(regions,
                                          species),
                            body = call_body,
                            query = call_query,
-                           httr::accept_json(),
+                           accept = "application/json",
                            httr::content_type("application/json"),
-                           parser = "json->list_no_simp")
+                           parser = "json->list_no_simp",
+                           save_to = rba_ba_file("ensembl_sequence_region.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -3552,12 +3558,12 @@ rba_ensembl_sequence_region = function(regions,
 #' @export
 #'
 #' @examples
-rba_ensembl_transcript_haplotypes  = function(transcript_id,
-                                              species,
-                                              aligned_sequences = FALSE,
-                                              samples = FALSE,
-                                              sequence = FALSE,
-                                              ...) {
+rba_ensembl_transcript_haplotypes = function(transcript_id,
+                                             species,
+                                             aligned_sequences = FALSE,
+                                             samples = FALSE,
+                                             sequence = FALSE,
+                                             ...) {
   ## Load Global Options
   rba_ba_ext_args(...)
   ## Check User-input Arguments
@@ -3595,7 +3601,8 @@ rba_ensembl_transcript_haplotypes  = function(transcript_id,
                                          transcript_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("ensembl_transcript_haplotypes.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -3875,9 +3882,10 @@ rba_ensembl_vep_hgvs = function(hgvs_notations,
                                          "/hgvs"),
                            body = call_body,
                            query = call_query,
-                           httr::accept_json(),
+                           accept = "application/json",
                            httr::content_type("application/json"),
-                           parser = "json->list_no_simp")
+                           parser = "json->list_no_simp",
+                           save_to = rba_ba_file("ensembl_vep_hgvs.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -4155,9 +4163,10 @@ rba_ensembl_vep_ids = function(ids,
                                          "/id"),
                            body = call_body,
                            query = call_query,
-                           httr::accept_json(),
+                           accept = "application/json",
                            httr::content_type("application/json"),
-                           parser = "json->list_no_simp")
+                           parser = "json->list_no_simp",
+                           save_to = rba_ba_file("ensembl_vep_ids.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -4435,9 +4444,10 @@ rba_ensembl_vep_variant = function(variants,
                                          "/region"),
                            body = call_body,
                            query = call_query,
-                           httr::accept_json(),
+                           accept = "application/json",
                            httr::content_type("application/json"),
-                           parser = "json->list_no_simp")
+                           parser = "json->list_no_simp",
+                           save_to = rba_ba_file("ensembl_vep_variant.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -4716,9 +4726,9 @@ rba_ensembl_vep_allele = function(allele,
                                          region, "/",
                                          allele),
                            query = call_query,
-                           httr::accept_json(),
-                           httr::content_type("application/json"),
-                           parser = "json->list")
+                           accept = "application/json",
+                           parser = "json->list",
+                           save_to = rba_ba_file("ensembl_vep_allele.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -4781,9 +4791,10 @@ rba_ensembl_variant_recoder = function(ids,
                                          species),
                            body = call_body,
                            query = call_query,
-                           httr::accept_json(),
+                           accept = "application/json",
                            httr::content_type("application/json"),
-                           parser = "json->list_no_simp")
+                           parser = "json->list_no_simp",
+                           save_to = rba_ba_file("ensembl_variant_recoder.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -4806,13 +4817,13 @@ rba_ensembl_variant_recoder = function(ids,
 #' @export
 #'
 #' @examples
-rba_ensembl_variation_id  = function(ids,
-                                     species,
-                                     genotypes = FALSE,
-                                     phenotypes = FALSE,
-                                     pops = FALSE,
-                                     population_genotypes = FALSE,
-                                     ...) {
+rba_ensembl_variation_id = function(ids,
+                                    species,
+                                    genotypes = FALSE,
+                                    phenotypes = FALSE,
+                                    pops = FALSE,
+                                    population_genotypes = FALSE,
+                                    ...) {
   ## Load Global Options
   rba_ba_ext_args(...)
   ## Check User-input Arguments
@@ -4857,9 +4868,10 @@ rba_ensembl_variation_id  = function(ids,
                                          species),
                            body = call_body,
                            query = call_query,
-                           httr::accept_json(),
+                           accept = "application/json",
                            httr::content_type("application/json"),
-                           parser = "json->list_no_simp")
+                           parser = "json->list_no_simp",
+                           save_to = rba_ba_file("ensembl_variation_id.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -4879,10 +4891,10 @@ rba_ensembl_variation_id  = function(ids,
 #' @export
 #'
 #' @examples
-rba_ensembl_variation_pubmed  = function(pmid = NA,
-                                         pmcid = NA,
-                                         species,
-                                         ...) {
+rba_ensembl_variation_pubmed = function(pmid = NA,
+                                        pmcid = NA,
+                                        species,
+                                        ...) {
   ## Load Global Options
   rba_ba_ext_args(...)
   ## Check User-input Arguments
@@ -4912,7 +4924,8 @@ rba_ensembl_variation_pubmed  = function(pmid = NA,
                            url = rba_ba_stg("ensembl", "url"),
                            path = path_input,
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("ensembl_variation_pubmed.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)

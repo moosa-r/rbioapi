@@ -169,7 +169,8 @@ rba_uniprot_uniparc_search = function(upi = NA,
                                          "uniparc"),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list_no_simp")
+                           parser = "json->list_no_simp",
+                           save_to = rba_ba_file("uniprot_uniparc_search.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -239,7 +240,8 @@ rba_uniprot_uniparc = function(accession = NA,
                                          accession),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("uniprot_uniparc.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -319,7 +321,8 @@ rba_uniprot_uniparc_bestguess = function(upi = NA,
                                          "uniparc/bestguess"),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list_no_simp")
+                           parser = "json->list_no_simp",
+                           save_to = rba_ba_file("uniprot_uniparc_bestguess.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -411,7 +414,8 @@ rba_uniprot_uniparc_get = function(db_id = NA,
                            path = path_input,
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list_no_simp")
+                           parser = "json->list_no_simp",
+                           save_to = rba_ba_file("uniprot_uniparc_get.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -478,7 +482,8 @@ rba_uniprot_uniparc_sequence = function(sequence,
                            body = sequence,
                            accept = "application/json",
                            httr::content_type("text/plain"),
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("uniprot_uniparc_sequence.json"))
   ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)

@@ -5,21 +5,15 @@
 \title{List all compara analyses available (an analysis defines the type of
 comparative data).}
 \usage{
-rba_ensembl_info_compara_methods(method, compara = "vertebrates", ...)
-
-rba_ensembl_info_compara_methods(method, compara = "vertebrates", ...)
+rba_ensembl_info_compara_methods(class = NA, compara = "vertebrates", ...)
 }
 \arguments{
 \item{compara}{}
 }
 \value{
 
-
-
 }
 \description{
 List all compara analyses available (an analysis defines the type of
 comparative data).
-
-List all collections of species analysed with the specified compara method.
 }

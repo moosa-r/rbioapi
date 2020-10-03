@@ -4,7 +4,7 @@
 \alias{rba_enrichr_enrich_internal}
 \title{Internal function for rba_enrichr_enrich}
 \usage{
-rba_enrichr_enrich_internal(user_list_id, gene_set_library, ...)
+rba_enrichr_enrich_internal(user_list_id, gene_set_library, save_name, ...)
 }
 \arguments{
 \item{...}{}

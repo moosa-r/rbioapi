@@ -28,7 +28,8 @@ rba_enrichr_info = function(store_in_options = TRUE,
                            path = paste0(rba_ba_stg("enrichr", "pth"),
                                          "datasetStatistics"),
                            accept = "application/json",
-                           parser = "json->df")
+                           parser = "json->df",
+                           save_to = rba_ba_file("enrichr_info.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -78,7 +79,8 @@ rba_enrichr_add_list = function(gene_list,
                                          "addList"),
                            body = call_body,
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("enrichr_add_list.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -116,7 +118,9 @@ rba_enrichr_view_list = function(user_list_id,
                                          "view"),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file(sprintf("enrichr_view_list_%s.json",
+                                                         user_list_id)))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -135,6 +139,7 @@ rba_enrichr_view_list = function(user_list_id,
 #' @examples
 rba_enrichr_enrich_internal = function(user_list_id,
                                        gene_set_library,
+                                       save_name,
                                        ...){
   ## Load Global Options
   rba_ba_ext_args(...)
@@ -154,7 +159,8 @@ rba_enrichr_enrich_internal = function(user_list_id,
                                          "export"),
                            query = call_query,
                            httr::accept("text/tab-separated-values"),
-                           parser = parser_input)
+                           parser = parser_input,
+                           save_to = rba_ba_file(save_name))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -227,6 +233,9 @@ rba_enrichr_enrich = function(user_list_id,
           user_list_id, gene_set_library)
     final_output = rba_enrichr_enrich_internal(user_list_id = user_list_id,
                                                gene_set_library = gene_set_library,
+                                               save_name = sprintf("enrichr_%s_%s.json",
+                                                                   user_list_id,
+                                                                   gene_set_library),
                                                ...)
     return(final_output)
 
@@ -247,6 +256,9 @@ rba_enrichr_enrich = function(user_list_id,
                           function(x){
                             lib_enrich_res = rba_enrichr_enrich_internal(user_list_id = user_list_id,
                                                                          gene_set_library = x,
+                                                                         save_name = sprintf("enrichr_%s_%s.json",
+                                                                                             user_list_id,
+                                                                                             x),
                                                                          ...)
                             #advance the progress bar
                             if (multi_libs_progress_bar == TRUE) {
@@ -298,7 +310,8 @@ rba_enrichr_gene_map = function(gene,
                                          "genemap"),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list")
+                           parser = "json->list",
+                           save_to = rba_ba_file("enrichr_gene_map.json"))
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
