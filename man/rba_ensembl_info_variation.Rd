@@ -8,14 +8,14 @@ rba_ensembl_info_variation(
   species = NA,
   consequence_types = FALSE,
   consequence_rank = FALSE,
-  populations = FALSE,
-  species_filter = NA,
+  populations = NA,
+  variation_source = NA,
   populations_filter = NA,
   ...
 )
 }
 \arguments{
-\item{populations_filter}{}
+\item{variation_source}{}
 }
 \value{
 

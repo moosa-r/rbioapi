@@ -6,10 +6,16 @@
  with a particular species. Useful for restricting the type of
  genes/transcripts retrieved by other endpoints.}
 \usage{
-rba_ensembl_info_biotypes(species, ...)
+rba_ensembl_info_biotypes(
+  species = NA,
+  name = NA,
+  group = NA,
+  object_type = NA,
+  ...
+)
 }
 \arguments{
-\item{species}{}
+\item{object_type}{}
 }
 \value{
 
