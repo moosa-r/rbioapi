@@ -324,8 +324,8 @@ rba_ba_httr = function(httr,
                           "patch" = quote(httr::PATCH),
                           stop("internal error: what verb to use with httr?",
                                call. = TRUE)),
-                   url = as.character(url),
-                   path = as.character(path),
+                   url = utils::URLencode(URL = url, repeated = FALSE),
+                   path = utils::URLencode(URL = path, repeated = FALSE),
                    quote(httr::user_agent(getOption("rba_user_agent"))),
                    quote(httr::timeout(client_timeout))
   )
