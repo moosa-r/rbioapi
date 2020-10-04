@@ -135,7 +135,7 @@ rba_uniprot_proteins_search = function(accession = NA,
                                          "proteins"),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("uniprot_proteins_search.json"))
 
   ## Call API
@@ -184,7 +184,7 @@ rba_uniprot_proteins = function(accession = NA,
                            url = rba_ba_stg("uniprot", "url"),
                            path = path_input,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("uniprot_proteins.json"))
 
   ## Call API
@@ -243,7 +243,7 @@ rba_uniprot_proteins_crossref = function(db_type,
                                           db_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("uniprot_proteins_crossref.json"))
 
   ## Call API
@@ -402,7 +402,7 @@ rba_uniprot_features_search = function(accession = NA,
                                          "features"),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("uniprot_features_search.json"))
 
   ## Call API
@@ -509,7 +509,7 @@ rba_uniprot_features_type = function(terms,
                                          type),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("uniprot_features_type.json"))
 
   ## Call API
@@ -612,7 +612,7 @@ rba_uniprot_features = function(accession,
                                          accession),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("uniprot_features.json"))
 
   ## Call API
@@ -769,7 +769,7 @@ rba_uniprot_variation_search = function(accession = NA,
                            file_accept = "text/x-peff",
                            file_parser = "text->chr",
                            obj_accept = "application/json",
-                           obj_parser = "json->list")
+                           obj_parser = "json->list_simp")
   ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
@@ -861,7 +861,7 @@ rba_uniprot_variation_dbsnp = function(db_id,
                            file_accept = "text/x-peff",
                            file_parser = "text->chr",
                            obj_accept = "application/json",
-                           obj_parser = "json->list")
+                           obj_parser = "json->list_simp")
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -954,7 +954,7 @@ rba_uniprot_variation_hgvs = function(hgvs,
                            file_accept = "text/x-peff",
                            file_parser = "text->chr",
                            obj_accept = "application/json",
-                           obj_parser = "json->list")
+                           obj_parser = "json->list_simp")
 
   ## Call API
   final_output = rba_ba_skeleton(input_call)
@@ -1047,7 +1047,7 @@ rba_uniprot_variation_accession = function(accession,
                            file_accept = "text/x-peff",
                            file_parser = "text->chr",
                            obj_accept = "application/json",
-                           obj_parser = "json->list")
+                           obj_parser = "json->list_simp")
   ## Call API
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
@@ -1134,7 +1134,7 @@ rba_uniprot_proteomics_search = function(accession = NA,
                                          "proteomics"),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("uniprot_proteomics_search.json"))
 
   ## Call API
@@ -1169,7 +1169,7 @@ rba_uniprot_proteomics = function(accession,
                                          "proteomics/",
                                          accession),
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("uniprot_proteomics.json"))
 
   ## Call API
@@ -1243,7 +1243,7 @@ rba_uniprot_antigen_search = function(accession = NA,
                                          "antigen"),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("uniprot_antigen_search.json"))
 
   ## Call API
@@ -1278,7 +1278,7 @@ rba_uniprot_antigen = function(accession,
                                          "antigen/",
                                          accession),
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("uniprot_antigen.json"))
 
   ## Call API

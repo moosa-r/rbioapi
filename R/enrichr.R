@@ -79,7 +79,7 @@ rba_enrichr_add_list = function(gene_list,
                                          "addList"),
                            body = call_body,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("enrichr_add_list.json"))
 
   ## Call API
@@ -118,7 +118,7 @@ rba_enrichr_view_list = function(user_list_id,
                                          "view"),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file(sprintf("enrichr_view_list_%s.json",
                                                          user_list_id)))
 
@@ -310,7 +310,7 @@ rba_enrichr_gene_map = function(gene,
                                          "genemap"),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("enrichr_gene_map.json"))
 
   ## Call API

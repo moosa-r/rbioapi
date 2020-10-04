@@ -716,7 +716,7 @@ rba_string_version = function(...) {
                            body = call_query,
                            encode = "form",
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("string_version.json"))
 
   ## Call API

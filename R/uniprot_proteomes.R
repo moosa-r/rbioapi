@@ -86,7 +86,7 @@ rba_uniprot_proteomes_search = function(upid = NA,
                                          "proteomes"),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("uniprot_proteomes_search.json"))
 
   ## Call API
@@ -149,7 +149,7 @@ rba_uniprot_proteomes = function(upid,
                            path = path_input,
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("uniprot_proteomes.json"))
 
   ## Call API
@@ -210,7 +210,7 @@ rba_uniprot_genecentric_search = function(upid = NA,
                                          "genecentric"),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("uniprot_genecentric_search.json"))
 
   ## Call API
@@ -244,7 +244,7 @@ rba_uniprot_genecentric = function(accession,
                                          "genecentric/",
                                          accession),
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("uniprot_genecentric.json"))
 
   ## Call API

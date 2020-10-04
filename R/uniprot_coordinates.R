@@ -80,7 +80,7 @@ rba_uniprot_coordinates_search = function(accession = NA,
                                          "coordinates"),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("uniprot_coordinates_search.json"))
 
   ## Call API
@@ -138,7 +138,7 @@ rba_uniprot_coordinates_location = function(accession,
                            url = rba_ba_stg("uniprot", "url"),
                            path = path_input,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("uniprot_coordinates_location.json"))
 
   ## Call API
@@ -195,7 +195,7 @@ rba_uniprot_coordinates = function(accession = NA,
                            path = path_input,
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("uniprot_coordinates.json"))
 
   ## Call API
@@ -251,7 +251,7 @@ rba_uniprot_coordinates_taxonomy = function(taxid,
                            path = path_input,
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("uniprot_coordinates_taxonomy.json"))
 
   ## Call API

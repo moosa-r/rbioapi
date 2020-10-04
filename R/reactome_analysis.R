@@ -229,7 +229,7 @@ rba_reactome_analysis = function(input,
                            body = call_body,
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("reactome_analysis.json"))
 
   ## Call API
@@ -500,7 +500,7 @@ rba_reactome_analysis_import = function(input,
                            path = path_input,
                            body = call_body,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("reactome_analysis_import.json"))
 
   ## Call API
@@ -580,7 +580,7 @@ rba_reactome_analysis_mapping = function(input,
                            body = call_body,
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("reactome_analysis_mapping.json"))
 
   ## Call API
@@ -683,7 +683,7 @@ rba_reactome_analysis_species = function(species_dbid,
                                          species_dbid),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("reactome_analysis_species.json"))
 
   ## Call API
@@ -798,7 +798,7 @@ rba_reactome_analysis_token = function(token,
                                           token),
                             query = call_query,
                             accept = "application/json",
-                            parser = "json->list",
+                            parser = "json->list_simp",
                             save_to = rba_ba_file("reactome_analysis_token.json"))
 
   ## Call API

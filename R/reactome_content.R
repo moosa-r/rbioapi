@@ -158,7 +158,7 @@ rba_reactome_complex_list = function(id,
                                           rba_ba_stg("reactome", "pth", "content"),
                                           resource, id),
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("reactome_complex_list.json"))
 
   ## Call API
@@ -314,7 +314,7 @@ rba_reactome_event_hierarchy = function(species,
                                           rba_ba_stg("reactome", "pth", "content"),
                                           species),
                            accept = "application/json",
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("reactome_event_hierarchy.json"))
 
   ## Call API
@@ -824,7 +824,7 @@ rba_reactome_interactors_psicquic = function(resource,
                            body = call_body,
                            accept = "application/json",
                            httr::content_type("text/plain"),
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("reactome_interactors_psicquic.json"))
 
   ## Call API
@@ -906,7 +906,7 @@ rba_reactome_interactors_static = function(proteins,
                            body = call_body,
                            accept = "application/json",
                            httr::content_type("text/plain"),
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("reactome_interactors_static.json"))
 
   ## Call API
@@ -1066,7 +1066,7 @@ rba_reactome_orthology = function(ids,
                            body = call_body,
                            accept = "application/json",
                            httr::content_type("text/plain"),
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("reactome_orthology.json"))
 
   ## Call API
@@ -1122,7 +1122,7 @@ rba_reactome_participants = function(id,
                            url = rba_ba_stg("reactome", "url"),
                            path = path_input,
                            accept = "application/json",
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("reactome_participants.json"))
 
   ## Call API
@@ -1343,7 +1343,7 @@ rba_reactome_people_name = function(person_name,
                            url = rba_ba_stg("reactome", "url"),
                            path = path_input,
                            accept = "application/json",
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("reactome_people_name.json"))
 
   ## Call API
@@ -1392,7 +1392,7 @@ rba_reactome_people_id = function(id,
                       "data/person/",
                       id)
   accept_input = "application/json"
-  parser_type_input = "json->list_no_simp"
+  parser_type_input = "json->list"
   file_ext = "json"
 
   if (authored_pathways == TRUE) {
@@ -1471,7 +1471,7 @@ rba_reactome_query = function(ids,
                              url = rba_ba_stg("reactome", "url"),
                              path = path_input,
                              body = call_body,
-                             parser = "json->list_no_simp",
+                             parser = "json->list",
                              accept = "application/json",
                              httr::content_type("text/plain"),
                              save_to = rba_ba_file("reactome_query.json"))
@@ -1482,7 +1482,7 @@ rba_reactome_query = function(ids,
                         "data/query/",
                         ids)
     accept_input = "application/json"
-    parser_input = "json->list_no_simp"
+    parser_input = "json->list"
     file_ext = "json"
     if (!is.na(attribute_name)) {
       v_msg("GET /data/query/{id}/{attributeName}",
@@ -1544,7 +1544,7 @@ rba_reactome_complex_subunits = function(id,
                                          "references/mapping/",
                                          id),
                            accept = "application/json",
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("reactome_complex_subunits.json"))
 
   ## Call API

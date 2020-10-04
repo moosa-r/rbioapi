@@ -77,7 +77,7 @@ rba_ensembl_cafe_genetree = function(genetree_id,
                                          genetree_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_cafe_genetree.json"))
 
   ## Call API
@@ -145,7 +145,7 @@ rba_ensembl_cafe_genetree_member_id = function(ensembl_id,
                                          ensembl_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_cafe_genetree_member_id.json"))
 
   ## Call API
@@ -218,7 +218,7 @@ rba_ensembl_cafe_genetree_member_symbol = function(gene_symbol,
                                          gene_symbol),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_cafe_genetree_member_symbol.json"))
 
   ## Call API
@@ -290,7 +290,7 @@ rba_ensembl_family_id = function(familiy_id,
                                          familiy_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_family_id.json"))
 
   ## Call API
@@ -363,7 +363,7 @@ rba_ensembl_familiy_member_id = function(ensembl_id,
                                          ensembl_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_familiy_member_id.json"))
 
   ## Call API
@@ -458,7 +458,7 @@ rba_ensembl_familiy_member_symbol = function(gene_symbol,
                                          gene_symbol),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_familiy_member_symbol.json"))
 
   ## Call API
@@ -548,7 +548,7 @@ rba_ensembl_genetree_id = function(genetree_id,
                                          genetree_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_genetree_id.json"))
 
   ## Call API
@@ -665,7 +665,7 @@ rba_ensembl_genetree_member_symbol = function(gene_symbol,
                                          gene_symbol),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_genetree_member_symbol.json"))
 
   ## Call API
@@ -775,7 +775,7 @@ rba_ensembl_alignment_region = function(region,
                                          region),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_alignment_region.json"))
 
   ## Call API
@@ -875,7 +875,7 @@ rba_ensembl_homology_id = function(ensemble_id,
                                          ensemble_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_homology_id.json"))
 
   ## Call API
@@ -991,7 +991,7 @@ rba_ensembl_homology_symbol = function(gene_symbol,
                                          gene_symbol),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_homology_symbol.json"))
 
   ## Call API
@@ -1241,7 +1241,7 @@ rba_ensembl_eqtl_tissue = function(species,
                            path = paste0("eqtl/tissue/",
                                          species),
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_eqtl_tissue.json"))
 
   ## Call API
@@ -1668,7 +1668,7 @@ rba_ensembl_lookup_id = function(ids,
                            query = call_query,
                            accept = "application/json",
                            httr::content_type("application/json"),
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_lookup_id.json"))
 
   ## Call API
@@ -1734,7 +1734,7 @@ rba_ensembl_lookup_symbol = function(symbols,
                            query = call_query,
                            accept = "application/json",
                            httr::content_type("application/json"),
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_lookup_symbol.json"))
 
   ## Call API
@@ -1922,7 +1922,7 @@ rba_ensembl_map_assembly = function(asm_one,
                                          asm_two),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("ensembl_map_assembly.json"))
 
   ## Call API
@@ -2023,7 +2023,7 @@ rba_ensembl_ontology_ancestors = function(term_id,
   if (chart == TRUE) {
     path_input = paste0("ontology/ancestors/chart/",
                         term_id)
-    parser_input = "json->list"
+    parser_input = "json->list_simp"
   } else {
     path_input = paste0("ontology/ancestors/",
                         term_id)
@@ -2151,7 +2151,7 @@ rba_ensembl_ontology_id = function(term_id,
                                          term_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_ontology_id.json"))
 
   ## Call API
@@ -3021,7 +3021,7 @@ rba_ensembl_microarray_vendor = function(microarray,
                                          "/vendor/",
                                          vendor),
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_microarray_vendor.json"))
 
   ## Call API
@@ -3104,7 +3104,7 @@ rba_ensembl_microarray_probe = function(microarray,
                                          "/probe/",
                                          probe),
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_microarray_probe.json"))
 
   ## Call API
@@ -3151,7 +3151,7 @@ rba_ensembl_microarray_probe_set = function(microarray,
                                          "/probe_set/",
                                          probe_set),
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_microarray_probe_set.json"))
 
   ## Call API
@@ -3419,7 +3419,7 @@ rba_ensembl_sequence_id = function(ids,
                            query = call_query,
                            accept = "application/json",
                            httr::content_type("application/json"),
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("ensembl_sequence_id.json"))
 
   ## Call API
@@ -3534,7 +3534,7 @@ rba_ensembl_sequence_region = function(regions,
                            query = call_query,
                            accept = "application/json",
                            httr::content_type("application/json"),
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("ensembl_sequence_region.json"))
 
   ## Call API
@@ -3601,7 +3601,7 @@ rba_ensembl_transcript_haplotypes = function(transcript_id,
                                          transcript_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_transcript_haplotypes.json"))
 
   ## Call API
@@ -3884,7 +3884,7 @@ rba_ensembl_vep_hgvs = function(hgvs_notations,
                            query = call_query,
                            accept = "application/json",
                            httr::content_type("application/json"),
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("ensembl_vep_hgvs.json"))
 
   ## Call API
@@ -4165,7 +4165,7 @@ rba_ensembl_vep_ids = function(ids,
                            query = call_query,
                            accept = "application/json",
                            httr::content_type("application/json"),
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("ensembl_vep_ids.json"))
 
   ## Call API
@@ -4446,7 +4446,7 @@ rba_ensembl_vep_variant = function(variants,
                            query = call_query,
                            accept = "application/json",
                            httr::content_type("application/json"),
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("ensembl_vep_variant.json"))
 
   ## Call API
@@ -4727,7 +4727,7 @@ rba_ensembl_vep_allele = function(allele,
                                          allele),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_vep_allele.json"))
 
   ## Call API
@@ -4793,7 +4793,7 @@ rba_ensembl_variant_recoder = function(ids,
                            query = call_query,
                            accept = "application/json",
                            httr::content_type("application/json"),
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("ensembl_variant_recoder.json"))
 
   ## Call API
@@ -4870,7 +4870,7 @@ rba_ensembl_variation_id = function(ids,
                            query = call_query,
                            accept = "application/json",
                            httr::content_type("application/json"),
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("ensembl_variation_id.json"))
 
   ## Call API
@@ -4924,7 +4924,7 @@ rba_ensembl_variation_pubmed = function(pmid = NA,
                            url = rba_ba_stg("ensembl", "url"),
                            path = path_input,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_variation_pubmed.json"))
 
   ## Call API

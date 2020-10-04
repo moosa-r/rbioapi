@@ -27,7 +27,7 @@ rba_uniprot_taxonomy_ancestor = function(ids,
                                          "taxonomy/ancestor/",
                                          paste0(ids, collapse = ",")),
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("uniprot_taxonomy_ancestor.json"))
 
   ## Call API
@@ -91,7 +91,7 @@ rba_uniprot_taxonomy = function(ids,
                            path = path_input,
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("uniprot_taxonomy.json"))
 
   ## Call API
@@ -126,7 +126,7 @@ rba_uniprot_taxonomy_ancestor = function(id,
                                          "taxonomy/lineage/",
                                          id),
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("uniprot_taxonomy_ancestor.json"))
 
   ## Call API
@@ -178,7 +178,7 @@ rba_uniprot_taxonomy_path = function(id,
                                          "taxonomy/path"),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("uniprot_taxonomy_path.json"))
 
   ## Call API
@@ -222,7 +222,7 @@ rba_uniprot_taxonomy_relationship = function(from,
                                          "taxonomy/relationship"),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list_no_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("uniprot_taxonomy_relationship.json"))
 
   ## Call API

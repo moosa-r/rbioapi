@@ -26,7 +26,7 @@ rba_ensembl_info_analysis = function(species,
                            path = paste0("info/analysis/",
                                          species),
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_info_analysis.json"))
 
   ## Call API
@@ -79,7 +79,7 @@ rba_ensembl_info_aassembly = function(species,
                                          species),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_info_aassembly.json"))
 
   ## Call API
@@ -216,7 +216,7 @@ rba_ensembl_info_biotypes_groups = function(group = NA,
   v_msg("GET info/biotypes/groups/:group/:object_type")
 
   ## Build Function-Specific Call
-  parser_input = "json->list"
+  parser_input = "json->list_simp"
   path_input = "/info/biotypes/groups/"
   if (!is.na(group)){
     parser_input = "json->df"
@@ -322,7 +322,7 @@ rba_ensembl_info_compara_methods = function(class = NA,
                            path = "info/compara/methods/",
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_info_compara_methods.json"))
 
   ## Call API
@@ -367,7 +367,7 @@ rba_ensembl_info_compara_species = function(method,
                                          method),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_info_compara_species.json"))
 
   ## Call API
@@ -424,7 +424,7 @@ rba_ensembl_info_data = function(...) {
                            url = rba_ba_stg("ensembl", "url"),
                            path = "info/data",
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_info_data.json"))
 
   ## Call API
@@ -452,7 +452,7 @@ rba_ensembl_info_eg_version = function(...) {
                            url = rba_ba_stg("ensembl", "url"),
                            path = "info/eg_version",
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_info_eg_version.json"))
 
   ## Call API
@@ -584,7 +584,7 @@ rba_ensembl_info_genomes_name = function(genome_name,
                                          genome_name),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_info_genomes_name.json"))
 
   ## Call API
@@ -629,7 +629,7 @@ rba_ensembl_info_genomes_accession = function(accession,
                                          accession),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_info_genomes_accession.json"))
 
   ## Call API
@@ -673,7 +673,7 @@ rba_ensembl_info_genomes_assembly = function(assembly_id,
                                          assembly_id),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_info_genomes_assembly.json"))
 
   ## Call API
@@ -762,7 +762,7 @@ rba_ensembl_info_genomes_taxonomy = function(taxon_name,
                                          taxon_name),
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("info_genomes_taxonomy.json"))
 
   ## Call API
@@ -789,7 +789,7 @@ rba_ensembl_info_rest = function(...) {
   input_call = rba_ba_httr(httr = "get", url = rba_ba_stg("ensembl", "url"),
                            path = "info/rest",
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_info_rest.json"))
 
   ## Call API
@@ -816,7 +816,7 @@ rba_ensembl_info_software = function(...) {
   input_call = rba_ba_httr(httr = "get", url = rba_ba_stg("ensembl", "url"),
                            path = "info/software",
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_info_software.json"))
 
   ## Call API
@@ -1038,7 +1038,7 @@ rba_ensembl_info_variation_populations_species = function(species,
                                          species, "/",
                                          population_name),
                            accept = "application/json",
-                           parser = "json->list",
+                           parser = "json->list_simp",
                            save_to = rba_ba_file("ensembl_info_variation_populations_species.json"))
 
   ## Call API
