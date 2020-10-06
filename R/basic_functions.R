@@ -24,13 +24,13 @@ rba_ba_stg = function(...){
                   db = c("enrichr", "ensembl", "reactome", "string", "uniprot"),
                   enrichr = switch(arg[[2]],
                                    name = "Enrichr",
-                                   url = "https://amp.pharm.mssm.edu",
+                                   url = "http://maayanlab.cloud",
                                    pth = "Enrichr/",
-                                   ptn = "(http.*://)*amp.pharm.mssm.edu/Enrichr/\\w+.*"),
+                                   ptn = "^(https*://)*maayanlab\\.cloud/Enrichr/"),
                   ensembl = switch(arg[[2]],
                                    name = "Ensembl",
                                    url = "https://rest.ensembl.org",
-                                   ptn = "(http.*://)*rest.ensembl.org/\\w+.*",
+                                   ptn = "^(https*://)*rest\\.ensembl\\.org/",
                                    err = c("400","404"),
                                    err_prs = "json->list_simp",
                                    err_fun = function(x) {x[["error"]][[1]]}),
@@ -42,17 +42,17 @@ rba_ba_stg = function(...){
                                                              "content")),
                                                  analysis = "AnalysisService/",
                                                  content = "ContentService/"),
-                                    ptn = "(http.*://)*reactome.org/(?:AnalysisService|ContentService)/\\w+.*"),
+                                    ptn = "^(https*://)*reactome\\.org/(?:AnalysisService|ContentService)/"),
                   string = switch(arg[[2]],
                                   name = "STRING",
                                   url = "https://string-db.org",
                                   pth = "api/",
-                                  ptn = "(http.*://)*string-db.org/api/\\w+.*"),
+                                  ptn = "^(https*://)*string-db\\.org/api/"),
                   uniprot = switch(arg[[2]],
                                    name = "UniProt",
                                    url = "https://www.ebi.ac.uk",
                                    pth = "proteins/api/",
-                                   ptn = "(http.*://)*ebi.ac.uk/proteins/api/\\w+.*",
+                                   ptn = "^(https*://)*ebi\\.ac\\.uk/proteins/api/",
                                    err = c("400", "404"),
                                    err_prs = "json->list_simp",
                                    err_fun = function(x) {x[["errorMessage"]][[1]]}),
@@ -949,7 +949,8 @@ rba_ba_error_parser = function(response,
   ## detect the database name
   db_found = FALSE
   for (db in rba_ba_stg("db")) {
-    if (grepl(rba_ba_stg(db, "ptn"), response$url)) {
+    if (grepl(rba_ba_stg(db, "ptn"), response$url,
+              perl = TRUE, ignore.case = TRUE)) {
       db_found = TRUE
       break
     }
