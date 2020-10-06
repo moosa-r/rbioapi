@@ -2,16 +2,39 @@
 % Please edit documentation in R/helper_functions.R
 \name{rba_citation}
 \alias{rba_citation}
-\title{What to cite?}
+\title{What to Cite?}
 \usage{
 rba_citation(...)
 }
 \arguments{
-\item{...}{}
-}
-\value{
-
+\item{...}{You can provide one or more of the following:
+\enumerate{
+\item The name of the functions which you have used.
+\item The path to your script file(s).
+\item Working directory ( getwd() ) and/or any directories that contain your
+scripts.
+\item "rstudio_context" to scan your active source editor's context
+(only in Rtudio enviroment).
+}}
 }
 \description{
-What to cite?
+Since rbioapi will ultimately connects you other services, In addition to
+ rbioapi , you should also cite those services if you have used rbioapi
+ to publish a research paper.\cr
+ This function will help you to learn which services you have used and
+ refers you to the appropriate citation policy guide of that services.\cr
+ Please note the Disclaimer in "Details" section!
 }
+\details{
+Important Disclaimer: Please note that this function is only a starting
+ place! To avoid any legal, ethical or professional problems, make sure to
+ review citation policies and term of uses of any service/database/data
+ you have used via rbioapi!
+}
+\seealso{
+Other "Helper functions": 
+\code{\link{rba_connection_test}()},
+\code{\link{rba_options}()}
+}
+\concept{"Helper functions"}
+\keyword{Helper}

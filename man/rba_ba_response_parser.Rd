@@ -7,11 +7,30 @@
 rba_ba_response_parser(parser)
 }
 \arguments{
-\item{parser}{}
+\item{parser}{Either a quoted expression or one of: "json->df",
+"json->list_simp", "json->list", "json->chr", "text->chr", "text->chr",
+"text->df", "tsv->df".}
 }
 \value{
-
+A valid R object, depends on the parser which have been used.
 }
 \description{
-Parse API Response
+Using the input provided as 'parser' argument, this function will parse the
+  response from a REST API into appropriate R objects.\cr
+  important note: server response should be the output of httr function call
+  with the formal class of "response" and it should be associated to a
+  variable named 'response' in the same enviroment which this function is
+  being called from.
 }
+\details{
+The function will be called within rba_ba_skeleton() subsequent of a
+  server response with HTTP status code 200. If a call expression was
+  provided by 'parser' argument, it will be used to parse the content of
+  variable 'response', if not, the 'parser' argument should be a character
+  corresponding to a pre-defined call expression.
+}
+\seealso{
+Other internal_response_parser: 
+\code{\link{rba_ba_error_parser}()}
+}
+\concept{internal_response_parser}

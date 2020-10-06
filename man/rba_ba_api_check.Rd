@@ -7,11 +7,22 @@
 rba_ba_api_check(url, diagnostics = FALSE)
 }
 \arguments{
-\item{url}{}
+\item{url}{A URL to to resource being examined.}
+
+\item{diagnostics}{logical: Generate diagnostics and detailed messages with
+internal information.}
 }
 \value{
-
+An informative message with the result of HEAD request's success or
+  failure.
 }
 \description{
-Test connection with a rest server
+Internal helper function for rba_connection_test(). It will  make HTTP HEAD
+  request to the given resource.
 }
+\seealso{
+Other internal_inernet_connectivity: 
+\code{\link{rba_ba_http_status}()},
+\code{\link{rba_ba_net_handle}()}
+}
+\concept{internal_inernet_connectivity}

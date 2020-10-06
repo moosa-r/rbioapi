@@ -1,12 +1,21 @@
 ##### data containers #######################################################
-#' Data container for supported databases
+#' Internal Data Container for rbioapi
 #'
-#' @param ...
+#' A central way to return information necessary for the internal functions to
+#'   work.
 #'
-#' @return
+#' Consult the source codes to learn about supported arguments and data
+#'   structure. it is straightforward and self-explanatory.
+#'   Currently the first argument can be one of 'db', 'options' or 'citations'
+#'
+#' @param ... A sequence of arguments in which the function will traverse across
+#'    the defined data storage tree. Only the first arguments will be passed
+#'    to match.arg().
+#'
+#' @return Based on the called sequence of arguments, it could be any object
+#'   type. but mostly, it will be of class character.
+#' @family internal_data_container
 #' @export
-#'
-#' @examples
 rba_ba_stg = function(...){
   arg = c(...)
   #possible arguments
@@ -59,22 +68,28 @@ rba_ba_stg = function(...){
                                      reactome = "***reactome api papeer***",
                                      string = "***string api papeer***",
                                      uniprot = "***uniprot api papeer***")
-                  )
+  )
   return(output)
 }
 
 ##### Internet connectivity ##################################################
-#' Handle situations when internet connection is disturbed or http statis 5xx
-#' @description changed name from rba_ba_internet_handler
-#' @param retry_max
-#' @param wait_time
-#' @param verbose
-#' @param diagnostics
+
+#' Handle Situations with Connection or Server Problems
 #'
-#' @return
+#' When called, the function will test the Internet connection. Based on called
+#'   arguments it will try suspend the execution of R codes and retry and test
+#'   if necessary until the device is connected back to the internet.
+#'
+#' @param retry_max numeric: The maximum times to Retry the connection test.
+#' @param wait_time numeric: The value in seconds which will be passed to
+#'   sys.sleep() between each connection test.
+#' @param verbose logical: Generate informative messages.
+#' @param diagnostics logical: Generate diagnostics and detailed messages with
+#'   internal information.
+#'
+#' @return TRUE if connected to the internet, a character string if not.
+#' @family internal_inernet_connectivity
 #' @export
-#'
-#' @examples
 rba_ba_net_handle = function(retry_max = 1,
                              wait_time = 10,
                              verbose = FALSE,
@@ -91,7 +106,7 @@ rba_ba_net_handle = function(retry_max = 1,
   while (net_status != 200 & retry_count < retry_max) {
     retry_count = retry_count + 1
     if (verbose == TRUE) {
-      message(sprintf("No internet connection, waiting for %s seconds and retrying (retry count:  %s/%s)",
+      message(sprintf("No internet connection, waiting for %s seconds and retrying (retry count:  %s/%s).",
                       wait_time,
                       retry_count,
                       retry_max))
@@ -104,7 +119,7 @@ rba_ba_net_handle = function(retry_max = 1,
   if (net_status == 200) {
     if (diagnostics == TRUE) {message("Device is connected to the internet!")}
   } else {
-    stop("No internet connection! Terminating code excutation!",
+    stop("No internet connection; Stopping code execution!",
          call. = diagnostics)
   } #end of if net_test
   return(net_status == 200)
@@ -112,13 +127,17 @@ rba_ba_net_handle = function(retry_max = 1,
 
 #' Test connection with a rest server
 #'
-#' @param name
-#' @param url
+#' Internal helper function for rba_connection_test(). It will  make HTTP HEAD
+#'   request to the given resource.
 #'
-#' @return
+#' @param url A URL to to resource being examined.
+#' @param diagnostics logical: Generate diagnostics and detailed messages with
+#'   internal information.
+#'
+#' @return An informative message with the result of HEAD request's success or
+#'   failure.
+#' @family internal_inernet_connectivity
 #' @export
-#'
-#' @examples
 rba_ba_api_check = function(url, diagnostics = FALSE){
   request = quote(httr::HEAD(url = url,
                              httr::timeout(getOption("rba_client_timeout")),
@@ -141,17 +160,25 @@ rba_ba_api_check = function(url, diagnostics = FALSE){
   }
 }
 
-#' Translate HTTP status code to human readable explanation
-#' @description changed name from rba_ba_translate
-#' @param http_status
-#' @param verbose
+#' Translate HTTP Status Code to Human-Readable Explanation
 #'
-#' @return
+#' It will make HTTP status more informative by trying to translate it to a
+#'   human readable and informative text. this function will be called by
+#'   rba_error_parser().
+#'
+#' @param http_status numeric: A given Standard HTTP status code.
+#' @param verbose logical: Should the function return a sentence case?
+#'
+#' @return Character string. Returns the HTTP status code with it's class and
+#'   possibly it's meaning.
+#'
+#' @references \href{https://www.iana.org/assignments/http-status-codes/}{IANA:
+#'   Hypertext Transfer Protocol (HTTP) Status Code Registry}
+#'
+#' @family internal_inernet_connectivity
 #' @export
-#'
-#' @examples
 rba_ba_http_status = function(http_status, verbose = FALSE){
-  #ref: iana.org/assignments/http-status-codes/http-status-codes.xhtml
+  #ref:
   http_status = as.character(http_status)
   stopifnot(grepl("^[12345]\\d\\d$", http_status))
 
@@ -231,12 +258,11 @@ rba_ba_http_status = function(http_status, verbose = FALSE){
                                          "511" = "Network Authentication Required"))
   )
 
-  output = sprintf("HTTP Status '%s'", http_status)
-  if (!is.null(resp$deff)) {
-    output = paste0(output, sprintf(" (%s: %s)", resp$class, resp$deff))
-  } else {
-    output = paste0(output, sprintf(" (%s class)", resp$class))
-  }
+  output = ifelse(!is.null(resp$deff),
+                  yes = sprintf("HTTP Status '%s' (%s: %s)",
+                                http_status, resp$class, resp$deff),
+                  no = sprintf("HTTP Status '%s' (%s class)",
+                               http_status, resp$class))
   if (verbose == TRUE) {
     output = sprintf("The server returned %s.", output)
   }
@@ -245,18 +271,25 @@ rba_ba_http_status = function(http_status, verbose = FALSE){
 
 ##### API Calls ##################################################
 
-#' Add additional parameters to API call's body
-#' @description changed the name from rba_ba_body_add_pars
-#' the format shoud be 1- init which is a named list, followed by optional
-#' lists with the following order: argument name, a condition which may be TRUE,
-#' a value that should be appended to the list
-#' @param additional_pars
-#' @param call_body
+#' Add Additional Parameters to API-Call's Body
 #'
-#' @return
+#' Evaluate the Expression presented in the input format and Builds a list which
+#'  will serve as a query input for httr request.
+#'
+#' @param init list: initial default query parameters in the format of named
+#'   list. provide list() if it is empty.
+#' @param ... list: Additional queries to evaluate and possibly append to
+#'   the initial parameters. formatted as lists with the following order:\cr
+#'   1- parameter's name based on the API documentation,\cr
+#'   2- An expression to be evaluated to either TRUE or FALSE,\cr
+#'   3- A value that should be appended to the list in case of the expression
+#'   being TRUE.
+#'
+#' @return Named list. with the formal API parameter's names as name and
+#'   corresponding values.
+#'
+#' @family internal_api_calls
 #' @export
-#'
-#' @examples
 rba_ba_query = function(init, ...) {
   ## check the input method
   ext_par = list(...)
@@ -269,15 +302,15 @@ rba_ba_query = function(init, ...) {
     if (length(ext_par[[i]][[2]]) > 1) {
       warning("Internal Query Builder:\r\n",
               ext_par[[i]][[1]], " has more than one element. ",
-              "only the first element will be used.",
-              call. = FALSE, immediate. = TRUE)
+              "Only the first element will be used.",
+              call. = TRUE, immediate. = TRUE)
     }
     # only proceed if the condition is indeed logical
     if (!is.logical(ext_par[[i]][[2]])) {
       warning("Internal Query Builder:\r\n",
-              "The evaluation result of ",
-              ext_par[[i]][[1]], " is not logical, thus skipping that.",
-              call. = FALSE, immediate. = TRUE)
+              "The evaluation output of ",
+              ext_par[[i]][[1]], " is not logical, thus skipping it.",
+              call. = TRUE, immediate. = TRUE)
     } else {
       if (ext_par[[i]][[2]][[1]] == TRUE) {
         init[[ext_par[[i]][[1]]]] = ext_par[[i]][[3]]
@@ -287,17 +320,41 @@ rba_ba_query = function(init, ...) {
   return(init)
 }
 
-#' Build httr HTTP queries
+#' Build httr HTTP Query
 #'
-#' @param httr
-#' @param url
-#' @param path
-#' @param ...
+#' Converts package's exported functions input to a function call understandable
+#'   by httr package.
 #'
-#' @return
+#' This is a convenient interface between rbioapi exported functions and httr
+#'   package. Apart from producing a standard expression compatible with httr,
+#'   it can resolve the case when multiple parsers or HTTP accept parameters are
+#'   possible according to the end-user's inputs. Also, it will append
+#'   'httr::write()', 'httr::progress' and 'httr::vebose()' based on the
+#'   end-user's inputs.\cr
+#'   There are two scenarios with providing accepted response and response
+#'   parser arguments:\cr
+#'   1- If it is pre-defined and end-user's inputs will not affect the accepted
+#'   and parser values, pass them as accept = x and parser = y.\cr
+#'   2- If these values should be chosen according to save_to argument, pass
+#'   them as file_parser, file_accept, obj_parser and obj_accept. In this case,
+#'   if save_to argument is a path or logical TRUE, the response will be saved
+#'   to disk and file parser and accept will be chosen, if not, obj parser and
+#'   accept will be chosen to build httr's function call.
+#'
+#' @param httr A HTTP verb's name. Can be one of 'get', 'post', 'head', 'put',
+#'   'patch' or 'delete'.
+#' @param url A URL to the HTTP resource being called.
+#' @param path A path to the HTTP resource being called.
+#' @param ... Additional arguments. 'save_to', 'accept', 'parser',
+#'   'file_accept', 'obj_accept', 'file_parser' and 'obj_parser' will be
+#'   processed. The rest will be passed to httr function's ... argument.
+#'
+#' @return a list with two elements: call, which is a standard httr function
+#'  call and parser which is a character string that will be used later by other
+#'  rbioapi internal functions.
+#'
+#' @family internal_api_calls
 #' @export
-#'
-#' @examples
 rba_ba_httr = function(httr,
                        url = NULL,
                        path = NULL,
@@ -389,17 +446,39 @@ rba_ba_httr = function(httr,
 
 #' Internal function to make http request
 #'
-#' @param skip_error
-#' @param no_interet_retry_max
-#' @param no_internet_wait_time
-#' @param verbose
-#' @param diagnostics
-#' @param input_call
+#' This function will be called by rba_ba_skeleton() and is the internal
+#'   function which resides between making an httr function call using
+#'   rba_ba_httr and evaluating that call to retrieve a response from the API
+#'   server.
 #'
-#' @return
+#' In case of an error (anything other than status code 200), the function will
+#'   perform extra steps according to the context:\cr
+#'   1- If it was not possible to establish a connection with the server,
+#'   rba_ba_net_handle() will be called to handle the situation.\cr
+#'   2- If the server returned a status code 5xx, calling the server will be
+#'   retried accordingly.\cr
+#'   3- if the server returned status code other than 200 or 5xx, the response
+#'   and status code will be handed to rba_error_parser() to handle the
+#'   situation.
+#'
+#' @param input_call A httr function call made  by rba_ba_httr().
+#' @param skip_error logical: If TRUE, in case of an error HTTP status other
+#'  than 200, instead of halting the code execution, the error message will be
+#'  returned as the function's output.
+#' @param no_interet_retry_max numeric: A value to be passed to
+#'   rba_ba_net_handle() retry_max argument.
+#' @param no_internet_wait_time numeric: A value to be passed to
+#'   rba_ba_net_handle() wait_time argument.
+#' @param verbose should the function generate informative messages?
+#' @param diagnostics logical: Generate diagnostics and detailed messages with
+#'   internal information.
+#'
+#' @return A raw server response in the format of httr's class "response". in
+#'   the case of status code other than 200 and skip_error = TRUE, a character
+#'   string with the pertinent error message.
+#'
+#' @family internal_api_calls
 #' @export
-#'
-#' @examples
 rba_ba_api_call = function(input_call,
                            skip_error = FALSE,
                            no_interet_retry_max = 1,
@@ -424,7 +503,7 @@ rba_ba_api_call = function(input_call,
                      silent = !diagnostics)
     } else {
       ## 2.1.2 net_connection test is not passed
-      stop("No internet connection! Terminating code excutation!",
+      stop("No internet connection; Stopping code execution!",
            call. = diagnostics)
     }
   } # end of step 2
@@ -452,18 +531,31 @@ rba_ba_api_call = function(input_call,
   }
 }
 
-#' General skeleton for all functions in the package
+#' A Wrapper for API Calling and Parsing the Response
 #'
-#' @param no_interet_retry_max
-#' @param no_internet_wait_time
-#' @param response_parser
-#' @param skip_error
-#' @param input_call
+#' This function will be called at the last step of any exported function to
+#'   call the server API using rba_ba_api_call() and parse the response using
+#'   rba_ba_response_parser().
 #'
-#' @return
+#' The function will try to use the parser specified in the 'input_call' object,
+#'   but if a parser value was provided with the 'response_parser' argument,
+#'   it will have priority and will overwrite the input_call's parser input.\cr
+#'   diagnostics, verbose, max_retries, wait_time and skip_error variables will
+#'   be assigned and passed on to the subsequent executed calls.\cr
+#'   note that the function was much longer at the begging of this package
+#'   development, hence the name 'skeleton'.
+#'
+#' @param input_call list: The exact output of rba_ba_httr()
+#' @param response_parser A string vector corresponding to the pre-defined
+#'   parser calls in rba_ba_parser() or an expression to be evaluated by
+#'   rba_ba_parser().
+#'
+#' @return A parsed server Response which may be and R object of any class,
+#'   depending on rba_ba_parser() output. In case of error and 'skip_error =
+#'     TRUE', the output will be the error message as a character string.
+#'
+#' @family internal_api_calls
 #' @export
-#'
-#' @examples
 rba_ba_skeleton = function(input_call,
                            response_parser = NULL) {
   ## 0 assign options variables
@@ -503,19 +595,39 @@ rba_ba_skeleton = function(input_call,
   return(final_output)
 }
 
-
 #### Check Arguments #######
 
-#' Check provided Arguments
+#' Internal user's Arguments Check
 #'
-#' @param cons
-#' @param cond_warning
-#' @param cond
+#' This function provide a flexible, yet powerful and vigorous arguments check
+#'   mechanisms. It can check the many properties of input variables and also,
+#'   check if a condition holds TRUE.
 #'
-#' @return
+#' cons Should be a list, and each element of that list should correspond to one
+#'   input argument and be a lists with the following format:\cr
+#'   list(arg = argument name as character string, constrain name = constrain
+#'   value)\cr
+#'   e.g. list(arg = "species", class = c("character", "numeric"))\cr\cr
+#'   cond should be a list. and each element of that list, should correspond to
+#'   one condition. the condition should be a quoted expression (or a character
+#'   string), which could be evaluated (or parsed and evaluated) to a logical
+#'   TRUE/FALSE object. if that expression is TRUE after the evaluation,
+#'   the code excution will be halted (or warning will be issued if
+#'   cond_warning = TURE), optionally with a pre-defined error message.\cr
+#'   cond's elements format:\cr
+#'   list(quote(conditional expression), "error message")
+#'
+#' @param cons Define Constrains for input arguments. Currently they may be:\cr
+#'   'class', 'val', 'ran', 'min_val', 'max_val', 'len', 'min_len', 'max_len'
+#' @param cond Expression which will be evaluated to TRUE or FALSE.
+#' @param cond_warning Should the function produce warning instead of stopping
+#'   code execution?
+#'
+#' @return NULL. if The arguments check failed, the code excution will be halted
+#'  or a warning will be issued.
+#'
+#' @family internal_arguments_check
 #' @export
-#'
-#' @examples
 rba_ba_args = function(cons = NULL,
                        cond = NULL,
                        cond_warning = FALSE){
@@ -572,11 +684,11 @@ rba_ba_args = function(cons = NULL,
                                    len = 1,
                                    min_val = 1))
   ext_cond = list(dir_name = list(quote(grepl("[\\\\/:\"*?<>|]+", dir_name, perl = TRUE)),
-                                  "Invalid dir_name. directory name can not include these characters: \\/?%*:|<>"),
+                                  "Invalid dir_name. Directory name cannot include these characters: \\/?%*:|<>"),
                   save_resp_file = list(quote(!is.logical(save_resp_file) &&
                                                 !grepl("^[a-zA-z]:|^\\\\\\w|^/|\\w+\\.\\w+$",
                                                        save_resp_file)),
-                                        "Invalid save_resp_file. you should set this argument as logical or a valid file path."))
+                                        "Invalid save_resp_file. You should set it to 'logical' or 'a valid file path'."))
   rba_opts = getOption("rba_user_options")
   stopifnot(setequal(rba_opts, names(ext_cons)))
 
@@ -747,12 +859,27 @@ rba_ba_args = function(cons = NULL,
 
 #' Parse API Response
 #'
-#' @param parser
+#' Using the input provided as 'parser' argument, this function will parse the
+#'   response from a REST API into appropriate R objects.\cr
+#'   important note: server response should be the output of httr function call
+#'   with the formal class of "response" and it should be associated to a
+#'   variable named 'response' in the same enviroment which this function is
+#'   being called from.
 #'
-#' @return
+#' The function will be called within rba_ba_skeleton() subsequent of a
+#'   server response with HTTP status code 200. If a call expression was
+#'   provided by 'parser' argument, it will be used to parse the content of
+#'   variable 'response', if not, the 'parser' argument should be a character
+#'   corresponding to a pre-defined call expression.
+#'
+#' @param parser Either a quoted expression or one of: "json->df",
+#'   "json->list_simp", "json->list", "json->chr", "text->chr", "text->chr",
+#'   "text->df", "tsv->df".
+#'
+#' @return A valid R object, depends on the parser which have been used.
+#'
+#' @family internal_response_parser
 #' @export
-#'
-#' @examples
 rba_ba_response_parser = function(parser) {
   #create a parser if not provided
   if (!is.call(parser)) {
@@ -763,13 +890,13 @@ rba_ba_response_parser = function(parser) {
                                                                      flatten = TRUE),
                                                   stringsAsFactors = FALSE)),
                     "json->list_simp" = quote(as.list(jsonlite::fromJSON(httr::content(response,
+                                                                                       as = "text",
+                                                                                       encoding = "UTF-8"),
+                                                                         simplifyVector = TRUE))),
+                    "json->list" = quote(as.list(jsonlite::fromJSON(httr::content(response,
                                                                                   as = "text",
                                                                                   encoding = "UTF-8"),
-                                                                    simplifyVector = TRUE))),
-                    "json->list" = quote(as.list(jsonlite::fromJSON(httr::content(response,
-                                                                                          as = "text",
-                                                                                          encoding = "UTF-8"),
-                                                                            simplifyVector = FALSE))),
+                                                                    simplifyVector = FALSE))),
                     "json->chr" = quote(as.character(jsonlite::fromJSON(httr::content(response,
                                                                                       as = "text",
                                                                                       encoding = "UTF-8")))),
@@ -785,7 +912,8 @@ rba_ba_response_parser = function(parser) {
                     "tsv->df" = quote(as.character(httr::content(response,
                                                                  as = "text",
                                                                  encoding = "UTF-8"))),
-                    stop("Internal Error: Specify the valid parser expression!", call. = TRUE)
+                    stop("Internal Error: Specify a valid parser expression!",
+                         call. = TRUE)
     )
   }
   # parse the response
@@ -793,15 +921,29 @@ rba_ba_response_parser = function(parser) {
   return(output)
 }
 
-#' Try to Parse an appropriate error response
+#' Parse Appropriate, Server-aware Error Message
 #'
-#' @param response
-#' @param verbose
+#' In case of server response with status code other than 200, this function
+#'   will be called from rba_ba_api_call() and tries to parse the informative
+#'   error message which returned by the server as an error message.
 #'
-#' @return
+#' This function will detect the responded server based on "ptn" values stored
+#'   in rba_ba_stg(). and if that particular servers error format was defined
+#'   under "err", the response will be parsed using "err_prs" argument and will
+#'   be converted to a character string using "err_fun" value. (all in
+#'   rba_ba_stg()). if the server was not identified, or the server was not
+#'   recorded to have a defined error response, this function will only return
+#'   the translation of HTTP status code, using rba_ba_http_status().
+#'
+#' @param response a formal api server response, with the class 'response'
+#'   from httr package.
+#' @param verbose Should the function generate informative messages?
+#'
+#' @return Character string that contains A server-specific error message or if
+#'   not, a human-understandable explanation of the returned HTTP status code.
+#'
+#' @family internal_response_parser
 #' @export
-#'
-#' @examples
 rba_ba_error_parser = function(response,
                                verbose = verbose) {
   ## detect the database name
@@ -817,7 +959,7 @@ rba_ba_error_parser = function(response,
     ## The API server returns an error string for this status code
     server_error = rba_ba_response_parser(rba_ba_stg(db, "err_prs"))
     server_error = rba_ba_stg(db, "err_fun")(server_error)
-    error_message = sprintf("%s server returned \"%s\".\r\n  with this error message:\r\n  \"%s\"",
+    error_message = sprintf("%s server returned \"%s\".\r\n  With this error message:\r\n  \"%s\"",
                             rba_ba_stg(db, "name"),
                             rba_ba_http_status(response$status_code,
                                                verbose = FALSE),
@@ -830,19 +972,31 @@ rba_ba_error_parser = function(response,
   return(error_message)
 }
 #### Miscellaneous ####
-#' Alternative messaging system
+#' Smarter messaging system
 #'
-#' @param ...
-#' @param fmt
-#' @param sprintf
-#' @param cond
-#' @param sep
-#' @param collapse
+#' This function is a more versatile version of message(), and makes the
+#'   package's messaging system more minimal to code.
 #'
-#' @return
+#' By default, the 'fmt' and ... will be passed to sprintf() and the results
+#'   will be issued as a message. but, if 'sprintf = FALSE' or, the 'fmt'
+#'   argument's string input didn't contain "%s", the function will pass the
+#'   the inputs to paste().
+#'
+#'
+#' @param fmt passed to 'fmt' arguments in sprintf() or as the first argument of
+#'   paste(), depending on the situation.
+#' @param sprintf logical: should the 'fmt' and '...' be passed to sprintf if
+#'   possible? set to 'FALSE' to force passing 'fmt' and '...' to paste.
+#' @param cond A variable name to be evaluated, and only produce the message
+#'   if that variable is 'TRUE'. note: the variable should be of class 'logical'.
+#' @param sep,collapse to be passed to paste() if being called.
+#' @param ... will be passed to '...' argument of the function sprintf() or
+#'   paste().
+#'
+#' @return NULL
+#'
+#' @family internal_misc
 #' @export
-#'
-#' @examples
 v_msg = function(fmt, ..., sprintf = TRUE, cond = "verbose", sep = "", collapse = NULL) {
   if (get0(cond, envir = parent.frame(1), ifnotfound = FALSE) == TRUE) {
     message(ifelse(sprintf == TRUE && is.character(fmt) && grepl("%s", fmt),
@@ -853,16 +1007,69 @@ v_msg = function(fmt, ..., sprintf = TRUE, cond = "verbose", sep = "", collapse 
   invisible()
 }
 
-#' check provided file address or create one
+#' Grammatically Correct Pasting
 #'
-#' @param dir_name
-#' @param save_to
-#' @param file
+#' This function will append every element by comma and the last element by
+#'   'and'/'or', just like natural and correct english sentence.
 #'
-#' @return
+#' @param ... words to be appended together.
+#' @param last (default: "AND") The separator between the last two words.
+#' @param sep The separator between every words except the last two.
+#' @param quote Should every word be quoted between a character?
+#' @param quote_all Should the final result be quoted between a character?
+#'
+#' @return A character string of appended words, in a natural english way.
+#'
+#' @family internal_misc
 #' @export
+paste_2 = function(..., last = " and ", sep = ", ",
+                   quote = NA, quote_all = NA) {
+  input = c(...)
+  len = length(input)
+  if (!is.na(quote)) {
+    input = sprintf("%s%s%s", quote, input, quote)
+  }
+  if (len > 1) {
+    input = paste(paste0(input[-len], collapse = sep),
+                  input[len],
+                  sep = last)
+  }
+  if (!is.na(quote_all)) {
+    input = sprintf("%s%s%s", quote_all, input, quote_all)
+  }
+  return(input)
+}
+
+#' Validate the Provided File Path or Create One
 #'
-#' @examples
+#' Based on the 'save_to' argument, this function will handle different
+#'   scenarios for the provided file path. see details for more information.
+#'
+#' 1- If 'save_to = FALSE': the function will return "FALSE" and no path will be
+#'   generated.\cr
+#'   2- If 'save_to = character string': The function will validate the input,
+#'   if it is a valid file path, the content of 'save_to' will be returned.
+#'   Otherwise, if the provided input is not valid, scenario 3 will be
+#'   executed. \cr
+#'   3- If 'save_to = TRUE': A file path will be generated and returned based
+#'   on 'dir_name' and 'file' inputs.\cr
+#'   Also, in scenario 3, the function will check if any file currently exists
+#'   under the generated path. if so, a numeral suffix will be added to the
+#'   generated file name in order to prevent over-writing of existing files.
+#'
+#'
+#' @param file A template for the file name and file extension. in form of a
+#'   character string: "file_name.file_extension"
+#' @param dir_name A directory which will be created in the working environment
+#'   as a parent directory of the file.
+#' @param save_to logical or character: It is the main switch that dictate the
+#'   function's execution. see details.
+#'
+#' @return FALSE if no file path should be generated or a character string
+#'   which is a file path.
+#'
+#' @family internal_misc
+#' @export
 rba_ba_file = function(file,
                        save_to = NA,
                        dir_name = NA) {
@@ -902,7 +1109,7 @@ rba_ba_file = function(file,
                                        basename(save_to), perl = TRUE))
         # 2a.3 Check if the path and extension agree
         if (!grepl(def_file_ext, file_ext, ignore.case = TRUE)) {
-          warning(sprintf("Your requested file format (\"%s\") does not match your provided file address's extention(\"%s\").",
+          warning(sprintf("The Response file's type (\"%s\") does not match the extension of your provided file path(\"%s\").",
                           def_file_ext, basename(save_to)),
                   call. = diagnostics)
         }
@@ -952,14 +1159,25 @@ rba_ba_file = function(file,
 }
 
 #### Options ####
-#' Temporary change a rbioapi option during a function call
+#' Temporary Change rbioapi Options During a Function Call
 #'
+#' The '...' argument of any exported function will be passed to this function.
+#'   It will temporary alter the standard rbioapi options during the caller
+#'   function execution.
+#'
+#' The availabe rbioapi options will be retrieved from
+#'   getOption("rba_user_options"). If the name of parameter in '...' is a
+#'   standrad rbioapi option, the content of that option will be checked and
+#'   in case that the content is valid, the caller function's environment will
+#'   be altered in response to the change.\cr
+#'   Also the function will ignore any arguments which is not standard and
+#'   issues an informative warning for the user.
 #' @param ...
 #'
 #' @return
-#' @export
 #'
-#' @examples
+#' @family internal_options
+#' @export
 rba_ba_ext_args = function(...) {
   ext_args = list(...)
   rba_opts = getOption("rba_user_options") # available options for the end-users
@@ -973,7 +1191,7 @@ rba_ba_ext_args = function(...) {
     }
     if (length(non_valid) > 0) {
       warning(sprintf("`%s` are not valid rbioapi options, thus were ignored.\r\n",
-                      paste(non_valid, collapse = " & "),
+                      paste_2(non_valid),
                       call. = FALSE))
     }
   }

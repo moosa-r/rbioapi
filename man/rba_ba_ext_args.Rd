@@ -2,7 +2,7 @@
 % Please edit documentation in R/basic_functions.R
 \name{rba_ba_ext_args}
 \alias{rba_ba_ext_args}
-\title{Temporary change a rbioapi option during a function call}
+\title{Temporary Change rbioapi Options During a Function Call}
 \usage{
 rba_ba_ext_args(...)
 }
@@ -13,5 +13,17 @@ rba_ba_ext_args(...)
 
 }
 \description{
-Temporary change a rbioapi option during a function call
+The '...' argument of any exported function will be passed to this function.
+  It will temporary alter the standard rbioapi options during the caller
+  function execution.
 }
+\details{
+The availabe rbioapi options will be retrieved from
+  getOption("rba_user_options"). If the name of parameter in '...' is a
+  standrad rbioapi option, the content of that option will be checked and
+  in case that the content is valid, the caller function's environment will
+  be altered in response to the change.\cr
+  Also the function will ignore any arguments which is not standard and
+  issues an informative warning for the user.
+}
+\concept{internal_options}

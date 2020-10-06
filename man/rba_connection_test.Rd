@@ -2,16 +2,31 @@
 % Please edit documentation in R/helper_functions.R
 \name{rba_connection_test}
 \alias{rba_connection_test}
-\title{Test if The supported servers are Responding}
+\title{Test if the Supported Services Are Responding}
 \usage{
 rba_connection_test(diagnostics = FALSE)
 }
 \arguments{
-\item{diagnostics}{}
-}
-\value{
-
+\item{diagnostics}{logical: Generate diagnostics and detailed messages with
+internal information.}
 }
 \description{
-Test if The supported servers are Responding
+Run this function to test the internet connectivity of your device and the
+  current status of the supported Services.
 }
+\details{
+This function attempts to send a simple query to the supported services.
+  If the service successfully responded, you will be informed with a success
+  message; If not, the content of the error will be reported to you.\cr
+  Please run this function if you encounter any errors while using rbioapi.
+  Also, if you need to contact support, kindly call this function with
+  'diagnostic = TRUE' and include the output messages in your support
+  request.
+}
+\seealso{
+Other "Helper functions": 
+\code{\link{rba_citation}()},
+\code{\link{rba_options}()}
+}
+\concept{"Helper functions"}
+\keyword{Helper}

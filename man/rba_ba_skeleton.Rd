@@ -2,16 +2,40 @@
 % Please edit documentation in R/basic_functions.R
 \name{rba_ba_skeleton}
 \alias{rba_ba_skeleton}
-\title{General skeleton for all functions in the package}
+\title{A Wrapper for API Calling and Parsing the Response}
 \usage{
 rba_ba_skeleton(input_call, response_parser = NULL)
 }
 \arguments{
-\item{input_call}{}
+\item{input_call}{list: The exact output of rba_ba_httr()}
+
+\item{response_parser}{A string vector corresponding to the pre-defined
+parser calls in rba_ba_parser() or an expression to be evaluated by
+rba_ba_parser().}
 }
 \value{
-
+A parsed server Response which may be and R object of any class,
+  depending on rba_ba_parser() output. In case of error and 'skip_error =
+    TRUE', the output will be the error message as a character string.
 }
 \description{
-General skeleton for all functions in the package
+This function will be called at the last step of any exported function to
+  call the server API using rba_ba_api_call() and parse the response using
+  rba_ba_response_parser().
 }
+\details{
+The function will try to use the parser specified in the 'input_call' object,
+  but if a parser value was provided with the 'response_parser' argument,
+  it will have priority and will overwrite the input_call's parser input.\cr
+  diagnostics, verbose, max_retries, wait_time and skip_error variables will
+  be assigned and passed on to the subsequent executed calls.\cr
+  note that the function was much longer at the begging of this package
+  development, hence the name 'skeleton'.
+}
+\seealso{
+Other internal_api_calls: 
+\code{\link{rba_ba_api_call}()},
+\code{\link{rba_ba_httr}()},
+\code{\link{rba_ba_query}()}
+}
+\concept{internal_api_calls}

@@ -2,16 +2,31 @@
 % Please edit documentation in R/basic_functions.R
 \name{rba_ba_http_status}
 \alias{rba_ba_http_status}
-\title{Translate HTTP status code to human readable explanation}
+\title{Translate HTTP Status Code to Human-Readable Explanation}
 \usage{
 rba_ba_http_status(http_status, verbose = FALSE)
 }
 \arguments{
-\item{verbose}{}
+\item{http_status}{numeric: A given Standard HTTP status code.}
+
+\item{verbose}{logical: Should the function return a sentence case?}
 }
 \value{
-
+Character string. Returns the HTTP status code with it's class and
+  possibly it's meaning.
 }
 \description{
-changed name from rba_ba_translate
+It will make HTTP status more informative by trying to translate it to a
+  human readable and informative text. this function will be called by
+  rba_error_parser().
 }
+\references{
+\href{https://www.iana.org/assignments/http-status-codes/}{IANA:
+  Hypertext Transfer Protocol (HTTP) Status Code Registry}
+}
+\seealso{
+Other internal_inernet_connectivity: 
+\code{\link{rba_ba_api_check}()},
+\code{\link{rba_ba_net_handle}()}
+}
+\concept{internal_inernet_connectivity}

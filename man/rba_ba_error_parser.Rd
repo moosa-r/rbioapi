@@ -2,16 +2,36 @@
 % Please edit documentation in R/basic_functions.R
 \name{rba_ba_error_parser}
 \alias{rba_ba_error_parser}
-\title{Try to Parse an appropriate error response}
+\title{Parse Appropriate, Server-aware Error Message}
 \usage{
 rba_ba_error_parser(response, verbose = verbose)
 }
 \arguments{
-\item{verbose}{}
+\item{response}{a formal api server response, with the class 'response'
+from httr package.}
+
+\item{verbose}{Should the function generate informative messages?}
 }
 \value{
-
+Character string that contains A server-specific error message or if
+  not, a human-understandable explanation of the returned HTTP status code.
 }
 \description{
-Try to Parse an appropriate error response
+In case of server response with status code other than 200, this function
+  will be called from rba_ba_api_call() and tries to parse the informative
+  error message which returned by the server as an error message.
 }
+\details{
+This function will detect the responded server based on "ptn" values stored
+  in rba_ba_stg(). and if that particular servers error format was defined
+  under "err", the response will be parsed using "err_prs" argument and will
+  be converted to a character string using "err_fun" value. (all in
+  rba_ba_stg()). if the server was not identified, or the server was not
+  recorded to have a defined error response, this function will only return
+  the translation of HTTP status code, using rba_ba_http_status().
+}
+\seealso{
+Other internal_response_parser: 
+\code{\link{rba_ba_response_parser}()}
+}
+\concept{internal_response_parser}

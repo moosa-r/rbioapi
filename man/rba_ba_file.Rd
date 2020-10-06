@@ -2,16 +2,44 @@
 % Please edit documentation in R/basic_functions.R
 \name{rba_ba_file}
 \alias{rba_ba_file}
-\title{check provided file address or create one}
+\title{Validate the Provided File Path or Create One}
 \usage{
 rba_ba_file(file, save_to = NA, dir_name = NA)
 }
 \arguments{
-\item{file}{}
+\item{file}{A template for the file name and file extension. in form of a
+character string: "file_name.file_extension"}
+
+\item{save_to}{logical or character: It is the main switch that dictate the
+function's execution. see details.}
+
+\item{dir_name}{A directory which will be created in the working environment
+as a parent directory of the file.}
 }
 \value{
-
+FALSE if no file path should be generated or a character string
+  which is a file path.
 }
 \description{
-check provided file address or create one
+Based on the 'save_to' argument, this function will handle different
+  scenarios for the provided file path. see details for more information.
 }
+\details{
+1- If 'save_to = FALSE': the function will return "FALSE" and no path will be
+  generated.\cr
+  2- If 'save_to = character string': The function will validate the input,
+  if it is a valid file path, the content of 'save_to' will be returned.
+  Otherwise, if the provided input is not valid, scenario 3 will be
+  executed. \cr
+  3- If 'save_to = TRUE': A file path will be generated and returned based
+  on 'dir_name' and 'file' inputs.\cr
+  Also, in scenario 3, the function will check if any file currently exists
+  under the generated path. if so, a numeral suffix will be added to the
+  generated file name in order to prevent over-writing of existing files.
+}
+\seealso{
+Other internal_misc: 
+\code{\link{paste_2}()},
+\code{\link{v_msg}()}
+}
+\concept{internal_misc}

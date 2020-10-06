@@ -2,16 +2,38 @@
 % Please edit documentation in R/basic_functions.R
 \name{v_msg}
 \alias{v_msg}
-\title{Alternative messaging system}
+\title{Smarter messaging system}
 \usage{
 v_msg(fmt, ..., sprintf = TRUE, cond = "verbose", sep = "", collapse = NULL)
 }
 \arguments{
-\item{collapse}{}
-}
-\value{
+\item{fmt}{passed to 'fmt' arguments in sprintf() or as the first argument of
+paste(), depending on the situation.}
 
+\item{...}{will be passed to '...' argument of the function sprintf() or
+paste().}
+
+\item{sprintf}{logical: should the 'fmt' and '...' be passed to sprintf if
+possible? set to 'FALSE' to force passing 'fmt' and '...' to paste.}
+
+\item{cond}{A variable name to be evaluated, and only produce the message
+if that variable is 'TRUE'. note: the variable should be of class 'logical'.}
+
+\item{sep, collapse}{to be passed to paste() if being called.}
 }
 \description{
-Alternative messaging system
+This function is a more versatile version of message(), and makes the
+  package's messaging system more minimal to code.
 }
+\details{
+By default, the 'fmt' and ... will be passed to sprintf() and the results
+  will be issued as a message. but, if 'sprintf = FALSE' or, the 'fmt'
+  argument's string input didn't contain "%s", the function will pass the
+  the inputs to paste().
+}
+\seealso{
+Other internal_misc: 
+\code{\link{paste_2}()},
+\code{\link{rba_ba_file}()}
+}
+\concept{internal_misc}

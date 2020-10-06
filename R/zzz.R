@@ -1,4 +1,4 @@
-#' rbioapi: User-friendly interface to Biological Databases' APIs
+#' @title rbioapi: User-friendly interface to Biological Databases' APIs
 #'
 #' @description This package provides an easy, user-friendly and unified access
 #' toBiological databases' API. rbioapi tries to provide a unified experience,
@@ -14,7 +14,8 @@
 #'
 #' @docType package
 #' @name rbioapi
-NULL
+#' @keywords internal
+"_PACKAGE"
 
 .onAttach = function(libname, pkgname) {
   packageStartupMessage("Welcome to rbioapi.\r\n",

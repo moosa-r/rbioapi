@@ -2,7 +2,7 @@
 % Please edit documentation in R/basic_functions.R
 \name{rba_ba_net_handle}
 \alias{rba_ba_net_handle}
-\title{Handle situations when internet connection is disturbed or http statis 5xx}
+\title{Handle Situations with Connection or Server Problems}
 \usage{
 rba_ba_net_handle(
   retry_max = 1,
@@ -12,11 +12,27 @@ rba_ba_net_handle(
 )
 }
 \arguments{
-\item{diagnostics}{}
+\item{retry_max}{numeric: The maximum times to Retry the connection test.}
+
+\item{wait_time}{numeric: The value in seconds which will be passed to
+sys.sleep() between each connection test.}
+
+\item{verbose}{logical: Generate informative messages.}
+
+\item{diagnostics}{logical: Generate diagnostics and detailed messages with
+internal information.}
 }
 \value{
-
+TRUE if connected to the internet, a character string if not.
 }
 \description{
-changed name from rba_ba_internet_handler
+When called, the function will test the Internet connection. Based on called
+  arguments it will try suspend the execution of R codes and retry and test
+  if necessary until the device is connected back to the internet.
 }
+\seealso{
+Other internal_inernet_connectivity: 
+\code{\link{rba_ba_api_check}()},
+\code{\link{rba_ba_http_status}()}
+}
+\concept{internal_inernet_connectivity}

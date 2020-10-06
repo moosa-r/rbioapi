@@ -3,6 +3,7 @@
 \docType{package}
 \name{rbioapi}
 \alias{rbioapi}
+\alias{rbioapi-package}
 \title{rbioapi: User-friendly interface to Biological Databases' APIs}
 \description{
 This package provides an easy, user-friendly and unified access
@@ -19,3 +20,16 @@ me and I will try toimplement that database in the future releases.
 map, interactions, image
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/moosa-r/rbioapi}
+  \item Report bugs at \url{https://github.com/moosa-r/rbioapi/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Moosa Rezwani \email{moosa.rezwani@gmail.com} [copyright holder]
+
+}
+\keyword{internal}

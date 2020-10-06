@@ -2,16 +2,26 @@
 % Please edit documentation in R/basic_functions.R
 \name{rba_ba_stg}
 \alias{rba_ba_stg}
-\title{Data container for supported databases}
+\title{Internal Data Container for rbioapi}
 \usage{
 rba_ba_stg(...)
 }
 \arguments{
-\item{...}{}
+\item{...}{A sequence of arguments in which the function will traverse across
+the defined data storage tree. Only the first arguments will be passed
+to match.arg().}
 }
 \value{
-
+Based on the called sequence of arguments, it could be any object
+  type. but mostly, it will be of class character.
 }
 \description{
-Data container for supported databases
+A central way to return information necessary for the internal functions to
+  work.
 }
+\details{
+Consult the source codes to learn about supported arguments and data
+  structure. it is straightforward and self-explanatory.
+  Currently the first argument can be one of 'db', 'options' or 'citations'
+}
+\concept{internal_data_container}

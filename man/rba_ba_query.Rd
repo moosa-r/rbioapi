@@ -2,19 +2,33 @@
 % Please edit documentation in R/basic_functions.R
 \name{rba_ba_query}
 \alias{rba_ba_query}
-\title{Add additional parameters to API call's body}
+\title{Add Additional Parameters to API-Call's Body}
 \usage{
 rba_ba_query(init, ...)
 }
 \arguments{
-\item{call_body}{}
+\item{init}{list: initial default query parameters in the format of named
+list. provide list() if it is empty.}
+
+\item{...}{list: Additional queries to evaluate and possibly append to
+the initial parameters. formatted as lists with the following order:\cr
+1- parameter's name based on the API documentation,\cr
+2- An expression to be evaluated to either TRUE or FALSE,\cr
+3- A value that should be appended to the list in case of the expression
+being TRUE.}
 }
 \value{
-
+Named list. with the formal API parameter's names as name and
+  corresponding values.
 }
 \description{
-changed the name from rba_ba_body_add_pars
-the format shoud be 1- init which is a named list, followed by optional
-lists with the following order: argument name, a condition which may be TRUE,
-a value that should be appended to the list
+Evaluate the Expression presented in the input format and Builds a list which
+ will serve as a query input for httr request.
 }
+\seealso{
+Other internal_api_calls: 
+\code{\link{rba_ba_api_call}()},
+\code{\link{rba_ba_httr}()},
+\code{\link{rba_ba_skeleton}()}
+}
+\concept{internal_api_calls}

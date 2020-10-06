@@ -2,7 +2,7 @@
 % Please edit documentation in R/helper_functions.R
 \name{rba_options}
 \alias{rba_options}
-\title{Set rbioapi global options}
+\title{Set rbioapi Global Options}
 \usage{
 rba_options(
   client_timeout = NA,
@@ -17,11 +17,53 @@ rba_options(
 )
 }
 \arguments{
-\item{wait_time}{}
-}
-\value{
+\item{client_timeout}{numeric: The maximum time in seconds that you are
+willing to wait for a server response before giving up and stopping the
+function execution.}
 
+\item{diagnostics}{logical: Generate diagnostics and detailed messages with
+internal information.}
+
+\item{dir_name}{character: If the package needed to generate a file path to
+save the server's response, a directory with this name will be created in
+your working directory to save your files.}
+
+\item{max_retries}{numeric: How many times should rbioapi retry in case of
+5xx server responses, errors or no internet connectivity?}
+
+\item{progress_bar}{logical: Should a progress bar be displayed?}
+
+\item{skip_error}{logical: If TRUE, the code execution will not be stopped
+in case of errors (anything but HTTP status 200 from the server); Instead
+the error message will be returned as the function's output. Set this
+to 'TRUE' if you are calling rbioapi function in batch batch mode or
+sourcing a script.}
+
+\item{verbose}{logical: Generate informative messages.}
+
+\item{wait_time}{numeric: Time in seconds to wait before each retry in case
+of internet connection lost or server problems.}
 }
 \description{
-Set rbioapi global options
+A Safe way to alter rbioapi's global options. Please refer to the
+  Arguments section for a detailed description of Available options.\cr
+  Alternatively, you can call this function with no arguments [ e.g.
+  rba_options() ] to retrieve a table of available rbioapi options and their
+  current values.\cr
+  Note: Because this function validates your provided changes, Kindly
+  \strong{\emph{only change rbioapi options using this function}} and avoid
+  directly editing them.
 }
+\details{
+Note that you are not limited to changing the options globally, you could
+  include the option names and values in the '...' argument of any rbioapi
+  function to alter the option in that function's call only;
+  e.x, example_function(x, y, diagnostics = TRUE).
+}
+\seealso{
+Other "Helper functions": 
+\code{\link{rba_citation}()},
+\code{\link{rba_connection_test}()}
+}
+\concept{"Helper functions"}
+\keyword{Helper}

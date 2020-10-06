@@ -2,16 +2,52 @@
 % Please edit documentation in R/basic_functions.R
 \name{rba_ba_httr}
 \alias{rba_ba_httr}
-\title{Build httr HTTP queries}
+\title{Build httr HTTP Query}
 \usage{
 rba_ba_httr(httr, url = NULL, path = NULL, ...)
 }
 \arguments{
-\item{...}{}
+\item{httr}{A HTTP verb's name. Can be one of 'get', 'post', 'head', 'put',
+'patch' or 'delete'.}
+
+\item{url}{A URL to the HTTP resource being called.}
+
+\item{path}{A path to the HTTP resource being called.}
+
+\item{...}{Additional arguments. 'save_to', 'accept', 'parser',
+'file_accept', 'obj_accept', 'file_parser' and 'obj_parser' will be
+processed. The rest will be passed to httr function's ... argument.}
 }
 \value{
-
+a list with two elements: call, which is a standard httr function
+ call and parser which is a character string that will be used later by other
+ rbioapi internal functions.
 }
 \description{
-Build httr HTTP queries
+Converts package's exported functions input to a function call understandable
+  by httr package.
 }
+\details{
+This is a convenient interface between rbioapi exported functions and httr
+  package. Apart from producing a standard expression compatible with httr,
+  it can resolve the case when multiple parsers or HTTP accept parameters are
+  possible according to the end-user's inputs. Also, it will append
+  'httr::write()', 'httr::progress' and 'httr::vebose()' based on the
+  end-user's inputs.\cr
+  There are two scenarios with providing accepted response and response
+  parser arguments:\cr
+  1- If it is pre-defined and end-user's inputs will not affect the accepted
+  and parser values, pass them as accept = x and parser = y.\cr
+  2- If these values should be chosen according to save_to argument, pass
+  them as file_parser, file_accept, obj_parser and obj_accept. In this case,
+  if save_to argument is a path or logical TRUE, the response will be saved
+  to disk and file parser and accept will be chosen, if not, obj parser and
+  accept will be chosen to build httr's function call.
+}
+\seealso{
+Other internal_api_calls: 
+\code{\link{rba_ba_api_call}()},
+\code{\link{rba_ba_query}()},
+\code{\link{rba_ba_skeleton}()}
+}
+\concept{internal_api_calls}

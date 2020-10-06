@@ -2,16 +2,41 @@
 % Please edit documentation in R/basic_functions.R
 \name{rba_ba_args}
 \alias{rba_ba_args}
-\title{Check provided Arguments}
+\title{Internal user's Arguments Check}
 \usage{
 rba_ba_args(cons = NULL, cond = NULL, cond_warning = FALSE)
 }
 \arguments{
-\item{cond}{}
+\item{cons}{Define Constrains for input arguments. Currently they may be:\cr
+'class', 'val', 'ran', 'min_val', 'max_val', 'len', 'min_len', 'max_len'}
+
+\item{cond}{Expression which will be evaluated to TRUE or FALSE.}
+
+\item{cond_warning}{Should the function produce warning instead of stopping
+code execution?}
 }
 \value{
-
+NULL. if The arguments check failed, the code excution will be halted
+ or a warning will be issued.
 }
 \description{
-Check provided Arguments
+This function provide a flexible, yet powerful and vigorous arguments check
+  mechanisms. It can check the many properties of input variables and also,
+  check if a condition holds TRUE.
 }
+\details{
+cons Should be a list, and each element of that list should correspond to one
+  input argument and be a lists with the following format:\cr
+  list(arg = argument name as character string, constrain name = constrain
+  value)\cr
+  e.g. list(arg = "species", class = c("character", "numeric"))\cr\cr
+  cond should be a list. and each element of that list, should correspond to
+  one condition. the condition should be a quoted expression (or a character
+  string), which could be evaluated (or parsed and evaluated) to a logical
+  TRUE/FALSE object. if that expression is TRUE after the evaluation,
+  the code excution will be halted (or warning will be issued if
+  cond_warning = TURE), optionally with a pre-defined error message.\cr
+  cond's elements format:\cr
+  list(quote(conditional expression), "error message")
+}
+\concept{internal_arguments_check}
