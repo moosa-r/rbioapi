@@ -1188,7 +1188,7 @@ rba_reactome_pathways_participants = function(id,
                            path = path_input,
                            accpet = accept_input,
                            parser = parser_input,
-                           save_to = rba_ba_file(paste0(reactome_pathways_participants,
+                           save_to = rba_ba_file(paste0("reactome_pathways_participants",
                                                         ".", file_ext)))
 
 
@@ -1410,7 +1410,7 @@ rba_reactome_people_id = function(id,
                            path = path_input,
                            accpet = accept_input,
                            parser = parser_type_input,
-                           save_to = rba_ba_file(paste0(reactome_people_id,
+                           save_to = rba_ba_file(paste0("reactome_people_id",
                                                         ".",
                                                         file_ext)))
 

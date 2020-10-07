@@ -23,4 +23,6 @@ Imports:
   rvest,
   utils,
   xml2
+Suggests:
+  rstudioapi
 RoxygenNote: 7.1.1
