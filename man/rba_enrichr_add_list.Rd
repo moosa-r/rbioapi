@@ -2,16 +2,48 @@
 % Please edit documentation in R/enrichr.R
 \name{rba_enrichr_add_list}
 \alias{rba_enrichr_add_list}
-\title{Upload your gene set to Enrichr}
+\title{Upload Your Gene-List to Enrichr}
 \usage{
 rba_enrichr_add_list(gene_list, description = NA, ...)
 }
 \arguments{
-\item{gene_list}{}
+\item{gene_list}{A vector with Entrez gene symbols.}
+
+\item{description}{(optional) A name or description to be associated to your
+uploaded gene-set to Enrichr servers.}
+
+\item{...}{}
 }
 \value{
-
+A list with two unique IDs for your uploaded gene sets.
 }
 \description{
-Upload your gene set to Enrichr
+Prior to perform enrichment, Enrichr requires you to upload your gene-list
+  and retrieve a 'user list ID'.
 }
+\details{
+Note that using \code{\link{rba_enrichr}} is a more convenient way to
+   automatically perform this and other required function calls to enrich
+   your input gene-set.
+}
+\section{Corresponding API Resources}{
+
+ "http://maayanlab.cloud/Enrichr/addList"
+}
+
+\examples{
+rba_enrichr_add_list(gene_list = c("TP53", "TNF", "EGFR"),
+  description = "tumoral genes")
+
+}
+\seealso{
+[rba_enrichr]
+
+Other "Enrichr API": 
+\code{\link{rba_enrichr_enrich}()},
+\code{\link{rba_enrichr_gene_map}()},
+\code{\link{rba_enrichr_info}()},
+\code{\link{rba_enrichr_view_list}()},
+\code{\link{rba_enrichr}()}
+}
+\concept{"Enrichr API"}

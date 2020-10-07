@@ -7,11 +7,28 @@
 rba_enrichr_enrich_internal(user_list_id, gene_set_library, save_name, ...)
 }
 \arguments{
+\item{user_list_id}{An ID returned to you after uploading a gene
+list using \code{\link{rba_enrichr_add_list}}}
+
+\item{gene_set_library}{a valid gene-set library name existed in the results
+retrieved via \code{\link{rba_enrichr_info}}.}
+
 \item{...}{}
 }
 \value{
-
+A data frame with the enrichment results of the provided user_list_id
+  against the gene_set_library
 }
 \description{
-Internal function for rba_enrichr_enrich
+This is an internal helper function which will retrieve the enrichment
+  results of one_user_list id against one library name
 }
+\details{
+The function will be called within \code{\link{rba_enrichr_enrich}} and will
+handle api requests to the server.
+}
+\section{Corresponding API Resources}{
+
+ "http://maayanlab.cloud/Enrichr/enrich"
+}
+

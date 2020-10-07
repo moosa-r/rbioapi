@@ -2,7 +2,7 @@
 % Please edit documentation in R/enrichr.R
 \name{rba_enrichr}
 \alias{rba_enrichr}
-\title{Gene Set Enrichment Using Enrichr With One Function Call}
+\title{A One-step Wrapper for Gene-list Enrichment Using Enrichr}
 \usage{
 rba_enrichr(
   gene_list,
@@ -14,11 +14,63 @@ rba_enrichr(
 )
 }
 \arguments{
-\item{multi_libs_progress_bar}{}
+\item{gene_list}{A vector with Entrez gene symbols.}
+
+\item{description}{(optional) A name or description to be associated to your
+uploaded gene-set to Enrichr servers.}
+
+\item{gene_set_library}{One of the:
+\enumerate{
+\item "all" to select all of the available Enrichr gene-set libraries.
+\item A gene-set library name existed in the results
+retrieved via \code{\link{rba_enrichr_info}}
+\item If regex_library_name = TRUE, A partially matching name ar a regex
+pattern that correspond to one or more of Enrichr library names.
+}}
+
+\item{regex_library_name}{logical: if TRUE (default) the provided
+gene_set_library will be regarded as a regex or partially matching name. if
+FALSE, gene_set_library will be considered exact match.}
+
+\item{multi_libs_progress_bar}{logical: In case of selecting multiple Enrichr
+libraries, should a progress bar be displayed?}
+
+\item{...}{}
 }
 \value{
-
+A list containing data frames of the enrichment results of your
+  provided gene-list against the selected Enrichr libraries.
 }
 \description{
-Gene Set Enrichment Using Enrichr With One Function Call
+This function is an easy-to-use wrapper for the multiple function calls
+  necessary to enrich a given gene-list using Enrichr. see details section
+  for more information.
 }
+\details{
+This function will call Other rba_enrichr_*** functions with the following
+  order:
+  \enumerate{
+  \item (If neccessary) Call \code{\link{rba_enrichr_info}} to obtain a list
+    of available libraries in Enrichr.
+  \item Call \code{\link{rba_enrichr_add_list}} to upload your gene-list
+    and obtain a 'user list ID'.
+  \item Call \code{\link{rba_enrichr_enrich}} to enrich the gene-list
+    against one or multiple Enrichr libraries
+  }
+}
+\section{Corresponding API Resources}{
+
+ "http://maayanlab.cloud/Enrichr/datasetStatistics"\cr
+ "http://maayanlab.cloud/Enrichr/addList"\cr
+ "http://maayanlab.cloud/Enrichr/enrich"
+}
+
+\seealso{
+Other "Enrichr API": 
+\code{\link{rba_enrichr_add_list}()},
+\code{\link{rba_enrichr_enrich}()},
+\code{\link{rba_enrichr_gene_map}()},
+\code{\link{rba_enrichr_info}()},
+\code{\link{rba_enrichr_view_list}()}
+}
+\concept{"Enrichr API"}

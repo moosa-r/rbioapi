@@ -2,16 +2,38 @@
 % Please edit documentation in R/enrichr.R
 \name{rba_enrichr_view_list}
 \alias{rba_enrichr_view_list}
-\title{View your uploaded gene list}
+\title{View an Uploaded Gene List}
 \usage{
 rba_enrichr_view_list(user_list_id, ...)
 }
 \arguments{
-\item{user_list_id}{}
+\item{user_list_id}{a user_list_id returned to you after uploading a gene
+list using \code{\link{rba_enrichr_add_list}}}
+
+\item{...}{}
 }
 \value{
-
+A list containing the genes and description available under the
+  provided user_list_id
 }
 \description{
-View your uploaded gene list
+Retrieve a list of uploaded genes under a 'user list ID'.
 }
+\section{Corresponding API Resources}{
+
+ "http://maayanlab.cloud/Enrichr/view"
+}
+
+\examples{
+\dontrun{rba_enrichr_view_list(user_list_id = 11111)}
+
+}
+\seealso{
+Other "Enrichr API": 
+\code{\link{rba_enrichr_add_list}()},
+\code{\link{rba_enrichr_enrich}()},
+\code{\link{rba_enrichr_gene_map}()},
+\code{\link{rba_enrichr_info}()},
+\code{\link{rba_enrichr}()}
+}
+\concept{"Enrichr API"}

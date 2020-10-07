@@ -7,15 +7,48 @@
 rba_enrichr_info(store_in_options = TRUE, ...)
 }
 \arguments{
-\item{store_in_options}{}
+\item{store_in_options}{(default = TRUE) Should a list of available Enrichr
+libraries be saved as a global option?}
+
+\item{...}{}
 }
 \value{
-
+A data frame with the names of available library in Enrichr and their
+  statistics.
 }
 \description{
-This function will retrieve a list of available libraries and
-their statistics from Enrichr. You should call this function once per session
-with argument 'store_in_options = TRUE' before querying data from Enrichr.
-Nevertheless, rbioapi will do this for you in the background in the first
-time you call any function pertinent to Enrichr.
+This function will retrieve a list of available libraries in Enrichr with
+  their statistics. And by default, will save those names as a global option
+  ("rba_enrichr_libs") to be available for other Enrichr functions that
+  internally require the names of Enrichr libraries.
 }
+\details{
+You should call this function once per R session with the argument
+  'store_in_options = TRUE' before using \code{\link{rba_enrichr_enrich}}
+  or \code{\link{rba_enrichr}}.\cr
+  Nevertheless, rbioapi will do this for you in the background at the first
+  time you call any function which requires this.\cr
+ Note that using \code{\link{rba_enrichr}} is a more convenient way to
+   automatically perform this and other required function calls to enrich
+   your input gene-set.
+}
+\section{Corresponding API Resources}{
+
+ "http://maayanlab.cloud/Enrichr/datasetStatistics"
+}
+
+\examples{
+rba_enrichr_info()
+
+}
+\seealso{
+[rba_enrichr]
+
+Other "Enrichr API": 
+\code{\link{rba_enrichr_add_list}()},
+\code{\link{rba_enrichr_enrich}()},
+\code{\link{rba_enrichr_gene_map}()},
+\code{\link{rba_enrichr_view_list}()},
+\code{\link{rba_enrichr}()}
+}
+\concept{"Enrichr API"}

@@ -2,16 +2,40 @@
 % Please edit documentation in R/enrichr.R
 \name{rba_enrichr_gene_map}
 \alias{rba_enrichr_gene_map}
-\title{Find terms that contain a given gene}
+\title{Find Enrichr Terms That Contain a Given Gene}
 \usage{
 rba_enrichr_gene_map(gene, catagorize = FALSE, ...)
 }
 \arguments{
-\item{catagorize}{}
+\item{gene}{character: An Entrez gene symbol.}
+
+\item{catagorize}{logical: Should the catagory informations be included?}
+
+\item{...}{}
 }
 \value{
-
+a list containing the search results of your provided gene.
 }
 \description{
-Find terms that contain a given gene
+This function will search your provided gene and retrieve a list of Enrichr
+  Terms that contains that gene.
 }
+\section{Corresponding API Resources}{
+
+ "http://maayanlab.cloud/Enrichr/genemap"
+}
+
+\examples{
+rba_enrichr_gene_map(gene = "p53")
+rba_enrichr_gene_map(gene = "p53", catagorize = TRUE)
+
+}
+\seealso{
+Other "Enrichr API": 
+\code{\link{rba_enrichr_add_list}()},
+\code{\link{rba_enrichr_enrich}()},
+\code{\link{rba_enrichr_info}()},
+\code{\link{rba_enrichr_view_list}()},
+\code{\link{rba_enrichr}()}
+}
+\concept{"Enrichr API"}

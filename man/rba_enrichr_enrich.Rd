@@ -13,11 +13,63 @@ rba_enrichr_enrich(
 )
 }
 \arguments{
+\item{user_list_id}{An ID returned to you after uploading a gene
+list using \code{\link{rba_enrichr_add_list}}}
+
+\item{gene_set_library}{One of the:
+\enumerate{
+\item "all" to select all of the available Enrichr gene-set libraries.
+\item A gene-set library name existed in the results
+retrieved via \code{\link{rba_enrichr_info}}
+\item If regex_library_name = TRUE, A partially matching name ar a regex
+pattern that correspond to one or more of Enrichr library names.
+}}
+
+\item{regex_library_name}{logical: if TRUE (default) the provided
+gene_set_library will be regarded as a regex or partially matching name. if
+FALSE, gene_set_library will be considered exact match.}
+
+\item{multi_libs_progress_bar}{logical: In case of selecting multiple Enrichr
+libraries, should a progress bar be displayed?}
+
 \item{...}{}
 }
 \value{
-
+A list containing data frames of the enrichment results of your
+  provided gene-list against the selected Enrichr libraries.
 }
 \description{
-Get Enrichr enrichment results
+This function which will retrieve the enrichment results of your
+  provided gene-list id against one or multiple Enrichr libraries.
 }
+\details{
+Note that using \code{\link{rba_enrichr}} is a more convenient way to
+  automatically perform this and other required function calls to enrich
+  your input gene-set.
+}
+\section{Corresponding API Resources}{
+
+ "http://maayanlab.cloud/Enrichr/enrich"
+}
+
+\examples{
+\dontrun{rba_enrichr_enrich(user_list_id = "11111")},
+\dontrun{rba_enrichr_enrich(user_list_id = "11111",
+         gene_set_library = "GO_Molecular_Function_2017",
+         regex_library_name = FALSE)}
+\dontrun{rba_enrichr_enrich(user_list_id = "11111",
+         gene_set_library = "go",
+         regex_library_name = TRUE)}
+
+}
+\seealso{
+[rba_enrichr]
+
+Other "Enrichr API": 
+\code{\link{rba_enrichr_add_list}()},
+\code{\link{rba_enrichr_gene_map}()},
+\code{\link{rba_enrichr_info}()},
+\code{\link{rba_enrichr_view_list}()},
+\code{\link{rba_enrichr}()}
+}
+\concept{"Enrichr API"}

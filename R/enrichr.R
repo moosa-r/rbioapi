@@ -1,17 +1,35 @@
 #' Retrieve a List of available libraries from Enrichr
-#' @description This function will retrieve a list of available libraries and
-#' their statistics from Enrichr. You should call this function once per session
-#' with argument 'store_in_options = TRUE' before querying data from Enrichr.
-#' Nevertheless, rbioapi will do this for you in the background in the first
-#' time you call any function pertinent to Enrichr.
 #'
+#' This function will retrieve a list of available libraries in Enrichr with
+#'   their statistics. And by default, will save those names as a global option
+#'   ("rba_enrichr_libs") to be available for other Enrichr functions that
+#'   internally require the names of Enrichr libraries.
+#'
+#' You should call this function once per R session with the argument
+#'   'store_in_options = TRUE' before using \code{\link{rba_enrichr_enrich}}
+#'   or \code{\link{rba_enrichr}}.\cr
+#'   Nevertheless, rbioapi will do this for you in the background at the first
+#'   time you call any function which requires this.\cr
+#'  Note that using \code{\link{rba_enrichr}} is a more convenient way to
+#'    automatically perform this and other required function calls to enrich
+#'    your input gene-set.
+#'
+#' @section Corresponding API Resources:
+#'  "http://maayanlab.cloud/Enrichr/datasetStatistics"
+#'
+#' @param store_in_options (default = TRUE) Should a list of available Enrichr
+#'    libraries be saved as a global option?
 #' @param ...
-#' @param store_in_options
 #'
-#' @return
-#' @export
+#' @return A data frame with the names of available library in Enrichr and their
+#'   statistics.
 #'
 #' @examples
+#' rba_enrichr_info()
+#'
+#' @family "Enrichr API"
+#' @seealso [rba_enrichr]
+#' @export
 rba_enrichr_info = function(store_in_options = TRUE,
                             ...){
   ## Load Global Options
@@ -20,7 +38,7 @@ rba_enrichr_info = function(store_in_options = TRUE,
   rba_ba_args(cons = list(list(arg = "store_in_options",
                                class = "logical")))
 
-  v_msg("Retrieving List of available libraries and statistics of Enrichr.")
+  v_msg("Retrieving List of available libraries and statistics from Enrichr.")
 
   ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
@@ -41,16 +59,32 @@ rba_enrichr_info = function(store_in_options = TRUE,
   return(final_output)
 }
 
-#' Upload your gene set to Enrichr
+#' Upload Your Gene-List to Enrichr
 #'
-#' @param description
+#' Prior to perform enrichment, Enrichr requires you to upload your gene-list
+#'   and retrieve a 'user list ID'.
+#'
+#'  Note that using \code{\link{rba_enrichr}} is a more convenient way to
+#'    automatically perform this and other required function calls to enrich
+#'    your input gene-set.
+#'
+#' @section Corresponding API Resources:
+#'  "http://maayanlab.cloud/Enrichr/addList"
+#'
+#' @param gene_list A vector with Entrez gene symbols.
+#' @param description (optional) A name or description to be associated to your
+#'   uploaded gene-set to Enrichr servers.
 #' @param ...
-#' @param gene_list
 #'
-#' @return
-#' @export
+#' @return A list with two unique IDs for your uploaded gene sets.
 #'
 #' @examples
+#' rba_enrichr_add_list(gene_list = c("TP53", "TNF", "EGFR"),
+#'   description = "tumoral genes")
+#'
+#' @family "Enrichr API"
+#' @seealso [rba_enrichr]
+#' @export
 rba_enrichr_add_list = function(gene_list,
                                 description = NA,
                                 ...){
@@ -62,7 +96,7 @@ rba_enrichr_add_list = function(gene_list,
                           list(arg = "description",
                                class = "character")))
 
-  v_msg("Uploading %s gene IDs to Enrichr.", length(gene_list))
+  v_msg("Uploading %s gene symbols to Enrichr.", length(gene_list))
 
   ## Build POST API Request's URL
   call_body = rba_ba_query(init = list("format" = "text",
@@ -87,15 +121,25 @@ rba_enrichr_add_list = function(gene_list,
   return(final_output)
 }
 
-#' View your uploaded gene list
+#' View an Uploaded Gene List
 #'
+#' Retrieve a list of uploaded genes under a 'user list ID'.
+#'
+#' @section Corresponding API Resources:
+#'  "http://maayanlab.cloud/Enrichr/view"
+#
+#' @param user_list_id a user_list_id returned to you after uploading a gene
+#'   list using \code{\link{rba_enrichr_add_list}}
 #' @param ...
-#' @param user_list_id
 #'
-#' @return
-#' @export
+#' @return A list containing the genes and description available under the
+#'   provided user_list_id
 #'
 #' @examples
+#' \dontrun{rba_enrichr_view_list(user_list_id = 11111)}
+#'
+#' @family "Enrichr API"
+#' @export
 rba_enrichr_view_list = function(user_list_id,
                                  ...){
   ## Load Global Options
@@ -105,8 +149,7 @@ rba_enrichr_view_list = function(user_list_id,
                                class = c("numeric", "integer"),
                                len = 1)))
 
-  v_msg("Retrieving your uploaded gene list under the ID %s.",
-        user_list_id)
+  v_msg("Retrieving the gene list under the ID %s.", user_list_id)
 
   ## Build GET API Request's query
   call_query = list("userListId" = user_list_id)
@@ -129,14 +172,24 @@ rba_enrichr_view_list = function(user_list_id,
 
 #' Internal function for rba_enrichr_enrich
 #'
-#' @param user_list_id
-#' @param gene_set_library
+#' This is an internal helper function which will retrieve the enrichment
+#'   results of one_user_list id against one library name
+#'
+#' The function will be called within \code{\link{rba_enrichr_enrich}} and will
+#' handle api requests to the server.
+#'
+#' @section Corresponding API Resources:
+#'  "http://maayanlab.cloud/Enrichr/enrich"
+#'
+#' @param user_list_id An ID returned to you after uploading a gene
+#'   list using \code{\link{rba_enrichr_add_list}}
+#' @param gene_set_library a valid gene-set library name existed in the results
+#' retrieved via \code{\link{rba_enrichr_info}}.
 #' @param ...
 #'
-#' @return
+#' @return A data frame with the enrichment results of the provided user_list_id
+#'   against the gene_set_library
 #' @export
-#'
-#' @examples
 rba_enrichr_enrich_internal = function(user_list_id,
                                        gene_set_library,
                                        save_name,
@@ -172,16 +225,48 @@ rba_enrichr_enrich_internal = function(user_list_id,
 
 #' Get Enrichr enrichment results
 #'
-#' @param user_list_id
-#' @param gene_set_library
-#' @param multi_libs_progress_bar
-#' @param regex_library_name
+#' This function which will retrieve the enrichment results of your
+#'   provided gene-list id against one or multiple Enrichr libraries.
+#'
+#' Note that using \code{\link{rba_enrichr}} is a more convenient way to
+#'   automatically perform this and other required function calls to enrich
+#'   your input gene-set.
+#'
+#' @section Corresponding API Resources:
+#'  "http://maayanlab.cloud/Enrichr/enrich"
+#'
+#' @param user_list_id An ID returned to you after uploading a gene
+#'   list using \code{\link{rba_enrichr_add_list}}
+#' @param gene_set_library One of the:
+#'   \enumerate{
+#'   \item "all" to select all of the available Enrichr gene-set libraries.
+#'   \item A gene-set library name existed in the results
+#'   retrieved via \code{\link{rba_enrichr_info}}
+#'   \item If regex_library_name = TRUE, A partially matching name ar a regex
+#'   pattern that correspond to one or more of Enrichr library names.
+#'   }
+#' @param regex_library_name logical: if TRUE (default) the provided
+#'   gene_set_library will be regarded as a regex or partially matching name. if
+#'   FALSE, gene_set_library will be considered exact match.
+#' @param multi_libs_progress_bar logical: In case of selecting multiple Enrichr
+#'   libraries, should a progress bar be displayed?
 #' @param ...
 #'
-#' @return
-#' @export
+#' @return A list containing data frames of the enrichment results of your
+#'   provided gene-list against the selected Enrichr libraries.
 #'
 #' @examples
+#' \dontrun{rba_enrichr_enrich(user_list_id = "11111")},
+#' \dontrun{rba_enrichr_enrich(user_list_id = "11111",
+#'          gene_set_library = "GO_Molecular_Function_2017",
+#'          regex_library_name = FALSE)}
+#' \dontrun{rba_enrichr_enrich(user_list_id = "11111",
+#'          gene_set_library = "go",
+#'          regex_library_name = TRUE)}
+#'
+#' @family "Enrichr API"
+#' @seealso [rba_enrichr]
+#' @export
 rba_enrichr_enrich = function(user_list_id,
                               gene_set_library = "all",
                               regex_library_name = TRUE,
@@ -191,7 +276,7 @@ rba_enrichr_enrich = function(user_list_id,
   rba_ba_ext_args(...)
   ## get a list of available libraries
   if (is.null(getOption("rba_enrichr_libs"))){
-    v_msg("Calling rba_enrichr_info() to get a list of available enricr libraries.")
+    v_msg("Calling rba_enrichr_info() to get the names of available Enricr libraries.")
     invisible(rba_enrichr_info(store_in_options = TRUE))
   }
   ## handle different gene_set_library input situations
@@ -229,7 +314,7 @@ rba_enrichr_enrich = function(user_list_id,
                                class = "logical")))
   ## call Enrichr API
   if (run_mode == "single") {
-    v_msg("Enriching Gene set %s using Enrichr library: %s.",
+    v_msg("Enriching gene-list %s against Enrichr library: %s.",
           user_list_id, gene_set_library)
     final_output = rba_enrichr_enrich_internal(user_list_id = user_list_id,
                                                gene_set_library = gene_set_library,
@@ -240,12 +325,13 @@ rba_enrichr_enrich = function(user_list_id,
     return(final_output)
 
   } else {
-    v_msg("Enriching Gene set %s using multiple Enrichr libraries.",
+    v_msg("Enriching gene-list %s using multiple Enrichr libraries.",
           user_list_id)
-    v_msg(paste0("Note: You have selected '%s' Enrichr libraries. note that for ",
-                 "each library, a seperate call should be send to the Enrichr server. ",
-                 "thus, this could take a while depending on the number of selected ",
-                 "libraries and your network connection."), length(gene_set_library))
+    v_msg(paste0("Note: You have selected '%s' Enrichr libraries. Note that for ",
+                 "each library, a separate call should be sent to Enrichr server. ",
+                 "Thus, this could take a while depending on the number of selected ",
+                 "libraries and your network connection."),
+          length(gene_set_library))
     ## initiate progress bar
     if (multi_libs_progress_bar == TRUE) {
       pb = utils::txtProgressBar(min = 0,
@@ -273,16 +359,26 @@ rba_enrichr_enrich = function(user_list_id,
 }
 
 
-#' Find terms that contain a given gene
+#' Find Enrichr Terms That Contain a Given Gene
 #'
-#' @param gene
+#' This function will search your provided gene and retrieve a list of Enrichr
+#'   Terms that contains that gene.
+#'
+#' @section Corresponding API Resources:
+#'  "http://maayanlab.cloud/Enrichr/genemap"
+#'
+#' @param gene character: An Entrez gene symbol.
+#' @param catagorize logical: Should the catagory informations be included?
 #' @param ...
-#' @param catagorize
 #'
-#' @return
-#' @export
+#' @return a list containing the search results of your provided gene.
 #'
 #' @examples
+#' rba_enrichr_gene_map(gene = "p53")
+#' rba_enrichr_gene_map(gene = "p53", catagorize = TRUE)
+#'
+#' @family "Enrichr API"
+#' @export
 rba_enrichr_gene_map = function(gene,
                                 catagorize = FALSE,
                                 ...){
@@ -295,7 +391,7 @@ rba_enrichr_gene_map = function(gene,
                           list(arg = "catagorize",
                                class = "logical")))
 
-  v_msg("Finding terms that contain gene: %s", gene)
+  v_msg("Finding terms that contain gene: %s.", gene)
 
   ## Build GET API Request's query
   call_query = rba_ba_query(init = list("gene" = gene,
@@ -318,19 +414,44 @@ rba_enrichr_gene_map = function(gene,
   return(final_output)
 }
 
-#' Gene Set Enrichment Using Enrichr With One Function Call
+#' A One-step Wrapper for Gene-list Enrichment Using Enrichr
 #'
-#' @param gene_list
-#' @param description
-#' @param gene_set_library
-#' @param regex_library_name
-#' @param ...
-#' @param multi_libs_progress_bar
+#' This function is an easy-to-use wrapper for the multiple function calls
+#'   necessary to enrich a given gene-list using Enrichr. see details section
+#'   for more information.
 #'
-#' @return
-#' @export
+#' This function will call Other rba_enrichr_*** functions with the following
+#'   order:
+#'   \enumerate{
+#'   \item (If neccessary) Call \code{\link{rba_enrichr_info}} to obtain a list
+#'     of available libraries in Enrichr.
+#'   \item Call \code{\link{rba_enrichr_add_list}} to upload your gene-list
+#'     and obtain a 'user list ID'.
+#'   \item Call \code{\link{rba_enrichr_enrich}} to enrich the gene-list
+#'     against one or multiple Enrichr libraries
+#'   }
+#' @section Corresponding API Resources:
+#'  "http://maayanlab.cloud/Enrichr/datasetStatistics"\cr
+#'  "http://maayanlab.cloud/Enrichr/addList"\cr
+#'  "http://maayanlab.cloud/Enrichr/enrich"
+#'
+#' @inheritParams rba_enrichr_add_list
+#' @inheritParams rba_enrichr_enrich
+#'
+#' @return A list containing data frames of the enrichment results of your
+#'   provided gene-list against the selected Enrichr libraries.
 #'
 #' @examples
+#' rba_enrichr_enrich(gene_list = c("TP53", "TNF", "EGFR")),
+#' rba_enrichr_enrich(gene_list = c("TP53", "TNF", "EGFR")",
+#'          gene_set_library = "GO_Molecular_Function_2017",
+#'          regex_library_name = FALSE)
+#' rba_enrichr_enrich(gene_list = c("TP53", "TNF", "EGFR"),
+#'          gene_set_library = "go",
+#'          regex_library_name = TRUE)
+#'
+#' @family "Enrichr API"
+#' @export
 rba_enrichr = function(gene_list,
                        description = NA,
                        gene_set_library = "all",
