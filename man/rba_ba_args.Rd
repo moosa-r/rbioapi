@@ -37,6 +37,6 @@ cons Should be a list, and each element of that list should correspond to one
   the code excution will be halted (or warning will be issued if
   cond_warning = TURE), optionally with a pre-defined error message.\cr
   cond's elements format:\cr
-  list(quote(conditional expression), "error message")
+  list(quote(conditional expression), "error message if exression is TRUE")
 }
 \concept{internal_arguments_check}

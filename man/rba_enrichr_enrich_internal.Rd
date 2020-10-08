@@ -32,3 +32,16 @@ handle api requests to the server.
  "http://maayanlab.cloud/Enrichr/enrich"
 }
 
+\references{
+\itemize{
+  \item Chen EY, Tan CM, Kou Y, Duan Q, Wang Z, Meirelles GV, Clark NR,
+  Ma'ayan A. Enrichr: interactive and collaborative HTML5 gene list
+  enrichment analysis tool. BMC Bioinformatics. 2013;128(14).
+  \item Kuleshov MV, Jones MR, Rouillard AD, Fernandez NF, Duan Q, Wang Z,
+  Koplev S, Jenkins SL, Jagodnik KM, Lachmann A, McDermott MG, Monteiro CD,
+  Gundersen GW, Ma'ayan A. Enrichr: a comprehensive gene set enrichment
+  analysis web server 2016 update. Nucleic Acids Research. 2016; gkw377.
+  \item \href{https://maayanlab.cloud/Enrichr/help#api}{Enrichr API
+  Documentation}
+  }
+}
