@@ -11,7 +11,6 @@
 #' @param ... A sequence of arguments in which the function will traverse across
 #'    the defined data storage tree. Only the first arguments will be passed
 #'    to match.arg().
-#'
 #' @return Based on the called sequence of arguments, it could be any object
 #'   type. but mostly, it will be of class character.
 #' @family internal_data_container
@@ -63,7 +62,8 @@ rba_ba_stg = function(...){
                   citations = switch(arg[[2]],
                                      rbioapi = "Moosa Rezwani (NA). rbioapi: User-friendly interface from R to Biological Databases' APIs. R package version 0.4.0. https://github.com/moosa-r/rbioapi",
                                      r = "R Core Team (2020). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.",
-                                     enrichr = "***enrichr api papeer***",
+                                     enrichr = c("Chen EY, Tan CM, Kou Y, Duan Q, Wang Z, Meirelles GV, Clark NR, Ma'ayan A. Enrichr: interactive and collaborative HTML5 gene list enrichment analysis tool. BMC Bioinformatics. 2013;128(14).",
+                                                 "Kuleshov MV, Jones MR, Rouillard AD, Fernandez NF, Duan Q, Wang Z, Koplev S, Jenkins SL, Jagodnik KM, Lachmann A, McDermott MG, Monteiro CD, Gundersen GW, Ma'ayan A. Enrichr: a comprehensive gene set enrichment analysis web server 2016 update. Nucleic Acids Research. 2016; gkw377 ."),
                                      ensembl = "***ensembl api papeer***",
                                      reactome = "***reactome api papeer***",
                                      string = "***string api papeer***",
@@ -615,7 +615,7 @@ rba_ba_skeleton = function(input_call,
 #'   the code excution will be halted (or warning will be issued if
 #'   cond_warning = TURE), optionally with a pre-defined error message.\cr
 #'   cond's elements format:\cr
-#'   list(quote(conditional expression), "error message")
+#'   list(quote(conditional expression), "error message if exression is TRUE")
 #'
 #' @param cons Define Constrains for input arguments. Currently they may be:\cr
 #'   'class', 'val', 'ran', 'min_val', 'max_val', 'len', 'min_len', 'max_len'
@@ -631,19 +631,6 @@ rba_ba_skeleton = function(input_call,
 rba_ba_args = function(cons = NULL,
                        cond = NULL,
                        cond_warning = FALSE){
-  # per each argument,the function input "cons" should be a named
-  # sub-list with one of these members:
-  # arg, class, val, range, min_val, max_val, len, min_len, max_len,
-  # example:
-  # list(arg = progress_bar, name = "progress_bar", class = "logical")
-
-  # "cond" should be sub-list containing an expression to be evaluated
-  # and an optional error message.
-  # example:
-  # list(list(quote(genes < background),
-  #           "Provided genes length cannot be greater than the background")
-  #      )
-
   ### 0 set diagnostics
   diagnostics = get0("diagnostics",
                      envir = parent.frame())
