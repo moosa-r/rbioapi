@@ -16,7 +16,7 @@ rba_enrichr(
 \arguments{
 \item{gene_list}{A vector with Entrez gene symbols.}
 
-\item{description}{(optional) A name or description to be associated to your
+\item{description}{(optional) A name or description to be associated with your
 uploaded gene-set to Enrichr servers.}
 
 \item{gene_set_library}{One of the:
@@ -24,7 +24,7 @@ uploaded gene-set to Enrichr servers.}
 \item "all" to select all of the available Enrichr gene-set libraries.
 \item A gene-set library name existed in the results
 retrieved via \code{\link{rba_enrichr_info}}
-\item If regex_library_name = TRUE, A partially matching name ar a regex
+\item If regex_library_name = TRUE, A partially-matching name a regex
 pattern that correspond to one or more of Enrichr library names.
 }}
 
@@ -47,7 +47,7 @@ This function is an easy-to-use wrapper for the multiple function calls
   for more information.
 }
 \details{
-This function will call Other rba_enrichr_*** functions with the following
+This function will call other rba_enrichr_*** functions with the following
   order:
   \enumerate{
   \item (If neccessary) Call \code{\link{rba_enrichr_info}} to obtain a list

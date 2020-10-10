@@ -17,8 +17,8 @@
 #' @section Corresponding API Resources:
 #'  "http://maayanlab.cloud/Enrichr/datasetStatistics"
 #'
-#' @param store_in_options (default = TRUE) Should a list of available Enrichr
-#'    libraries be saved as a global option?
+#' @param store_in_options logical: (default = TRUE) Should a list of available
+#' Enrichr libraries be saved as a global option?
 #' @param ...
 #'
 #' @return A data frame with the names of available library in Enrichr and their
@@ -84,7 +84,7 @@ rba_enrichr_info = function(store_in_options = TRUE,
 #'  "http://maayanlab.cloud/Enrichr/addList"
 #'
 #' @param gene_list A vector with Entrez gene symbols.
-#' @param description (optional) A name or description to be associated to your
+#' @param description (optional) A name or description to be associated with your
 #'   uploaded gene-set to Enrichr servers.
 #' @param ...
 #'
@@ -219,8 +219,8 @@ rba_enrichr_view_list = function(user_list_id,
 #'
 #' @param user_list_id An ID returned to you after uploading a gene
 #'   list using \code{\link{rba_enrichr_add_list}}
-#' @param gene_set_library a valid gene-set library name existed in the results
-#' retrieved via \code{\link{rba_enrichr_info}}.
+#' @param gene_set_library a valid gene-set library name which exists
+#' in the results retrieved via \code{\link{rba_enrichr_info}}.
 #' @param ...
 #'
 #' @return A data frame with the enrichment results of the provided user_list_id
@@ -272,7 +272,7 @@ rba_enrichr_enrich_internal = function(user_list_id,
   return(final_output)
 }
 
-#' Get Enrichr enrichment results
+#' Get Enrichr Enrichment Results
 #'
 #' This function which will retrieve the enrichment results of your
 #'   provided gene-list id against one or multiple Enrichr libraries.
@@ -291,7 +291,7 @@ rba_enrichr_enrich_internal = function(user_list_id,
 #'   \item "all" to select all of the available Enrichr gene-set libraries.
 #'   \item A gene-set library name existed in the results
 #'   retrieved via \code{\link{rba_enrichr_info}}
-#'   \item If regex_library_name = TRUE, A partially matching name ar a regex
+#'   \item If regex_library_name = TRUE, A partially-matching name a regex
 #'   pattern that correspond to one or more of Enrichr library names.
 #'   }
 #' @param regex_library_name logical: if TRUE (default) the provided
@@ -493,7 +493,7 @@ rba_enrichr_gene_map = function(gene,
 #'   necessary to enrich a given gene-list using Enrichr. see details section
 #'   for more information.
 #'
-#' This function will call Other rba_enrichr_*** functions with the following
+#' This function will call other rba_enrichr_*** functions with the following
 #'   order:
 #'   \enumerate{
 #'   \item (If neccessary) Call \code{\link{rba_enrichr_info}} to obtain a list

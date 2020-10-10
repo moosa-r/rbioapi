@@ -10,8 +10,8 @@ rba_enrichr_enrich_internal(user_list_id, gene_set_library, save_name, ...)
 \item{user_list_id}{An ID returned to you after uploading a gene
 list using \code{\link{rba_enrichr_add_list}}}
 
-\item{gene_set_library}{a valid gene-set library name existed in the results
-retrieved via \code{\link{rba_enrichr_info}}.}
+\item{gene_set_library}{a valid gene-set library name which exists
+in the results retrieved via \code{\link{rba_enrichr_info}}.}
 
 \item{...}{}
 }

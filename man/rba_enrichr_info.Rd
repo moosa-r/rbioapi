@@ -7,8 +7,8 @@
 rba_enrichr_info(store_in_options = TRUE, ...)
 }
 \arguments{
-\item{store_in_options}{(default = TRUE) Should a list of available Enrichr
-libraries be saved as a global option?}
+\item{store_in_options}{logical: (default = TRUE) Should a list of available
+Enrichr libraries be saved as a global option?}
 
 \item{...}{}
 }

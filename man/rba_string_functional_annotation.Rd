@@ -4,20 +4,73 @@
 \alias{rba_string_functional_annotation}
 \title{Retrieving functional annotation}
 \usage{
-rba_string_functional_annotation(
-  input,
-  species = NA,
-  allow_pubmed = FALSE,
-  caller_identity = NA,
-  ...
-)
+rba_string_functional_annotation(ids, species = NA, allow_pubmed = FALSE, ...)
 }
 \arguments{
-\item{caller_identity}{}
+\item{ids}{Your protein ID(s). It is strongly recommended to provide
+STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
+
+\item{species}{Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
+(Recommended, but optional if your input is less than 100 IDs.)}
+
+\item{allow_pubmed}{logical: (default = FALSE) PubMed usually  assigns a
+large number of reference publications to each protein. In order to reduce
+the output size, PubMed's results will be excluded from the results,
+unless stated otherwise (By setting this argument to TRUE).}
+
+\item{...}{}
 }
 \value{
-
+A data frame which every row is an assigned terms and the columns
+  are the terms category, description, number of genes, and other pertinent
+  information.
 }
 \description{
-Retrieving functional annotation
+STRING cross-reference the proteins with several databases (see "Details"
+  section). By providing your input set o proteins (and optionally
+  background or universe protein set), you can use this function to
+  retrieve full set of terms (annotations) pertinent to your input proteins in
+  each database, among with information for each term.
 }
+\details{
+STRING currently maps to and retrieve enrichment results based on Gene
+  Ontology (GO), KEGG pathways, UniProt Keywords, PubMed publications, Pfam
+  domains, InterPro domains, and SMART domains.\cr
+  Note that this function will return a full list of the terms containing
+  your provided proteins. To perform enrichment and only retrieve a enriched
+  subset of the terms, use \code{\link{rba_string_enrichment}}.
+}
+\section{Corresponding API Resources}{
+
+ "https://string-db.org/api/[output_format]/functional_annotation?
+ identifiers=[your_identifiers]&[optional_parameters]"
+}
+
+\examples{
+rba_string_functional_annotation(ids = "TP53", species = 9606)
+
+}
+\references{
+\itemize{
+  \item Szklarczyk D, Gable AL, Lyon D, Junge A, Wyder S, Huerta-Cepas J,
+  Simonovic M, Doncheva NT, Morris JH, Bork P, Jensen LJ, Mering CV.
+  STRING v11: protein-protein association networks with increased coverage,
+  supporting functional discovery in genome-wide experimental datasets.
+  Nucleic Acids Res. 2019 Jan 8;47(D1):D607-D613. doi: 10.1093/nar/gky1131.
+  PMID: 30476243; PMCID: PMC6323986.
+  \item \href{https://string-db.org/help/api/}{STRING API Documentation}
+  }
+}
+\seealso{
+Other "STRING API": 
+\code{\link{rba_string_enrichment}()},
+\code{\link{rba_string_homology_inter}()},
+\code{\link{rba_string_homology_intra}()},
+\code{\link{rba_string_interaction_partners}()},
+\code{\link{rba_string_interactions_network}()},
+\code{\link{rba_string_map_ids}()},
+\code{\link{rba_string_network_image}()},
+\code{\link{rba_string_ppi_enrichment}()},
+\code{\link{rba_string_version}()}
+}
+\concept{"STRING API"}

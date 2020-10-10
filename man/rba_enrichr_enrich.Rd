@@ -2,7 +2,7 @@
 % Please edit documentation in R/enrichr.R
 \name{rba_enrichr_enrich}
 \alias{rba_enrichr_enrich}
-\title{Get Enrichr enrichment results}
+\title{Get Enrichr Enrichment Results}
 \usage{
 rba_enrichr_enrich(
   user_list_id,
@@ -21,7 +21,7 @@ list using \code{\link{rba_enrichr_add_list}}}
 \item "all" to select all of the available Enrichr gene-set libraries.
 \item A gene-set library name existed in the results
 retrieved via \code{\link{rba_enrichr_info}}
-\item If regex_library_name = TRUE, A partially matching name ar a regex
+\item If regex_library_name = TRUE, A partially-matching name a regex
 pattern that correspond to one or more of Enrichr library names.
 }}
 

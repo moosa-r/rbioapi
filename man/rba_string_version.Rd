@@ -10,8 +10,48 @@ rba_string_version(...)
 \item{...}{}
 }
 \value{
-
+A list with STRING version and stable address.
 }
 \description{
-#' @family STRING
+Get STRING version and stable Address that this package currently uses.
 }
+\details{
+Note that STRING releases new version at approximately 2 years cycle.
+  Nevertheless, to insure reproducibility, STRING dedicates a stable address
+  for each release. Thus you can always reproduce research and results
+  obtained via a certain STRING version. If the version that rbioapi returns
+  is outdated, Kindly contact me.
+}
+\section{Corresponding API Resources}{
+
+ "https://string-db.org/api/[output_format]/version"
+}
+
+\examples{
+rba_string_version()
+
+}
+\references{
+\itemize{
+  \item Szklarczyk D, Gable AL, Lyon D, Junge A, Wyder S, Huerta-Cepas J,
+  Simonovic M, Doncheva NT, Morris JH, Bork P, Jensen LJ, Mering CV.
+  STRING v11: protein-protein association networks with increased coverage,
+  supporting functional discovery in genome-wide experimental datasets.
+  Nucleic Acids Res. 2019 Jan 8;47(D1):D607-D613. doi: 10.1093/nar/gky1131.
+  PMID: 30476243; PMCID: PMC6323986.
+  \item \href{https://string-db.org/help/api/}{STRING API Documentation}
+  }
+}
+\seealso{
+Other "STRING API": 
+\code{\link{rba_string_enrichment}()},
+\code{\link{rba_string_functional_annotation}()},
+\code{\link{rba_string_homology_inter}()},
+\code{\link{rba_string_homology_intra}()},
+\code{\link{rba_string_interaction_partners}()},
+\code{\link{rba_string_interactions_network}()},
+\code{\link{rba_string_map_ids}()},
+\code{\link{rba_string_network_image}()},
+\code{\link{rba_string_ppi_enrichment}()}
+}
+\concept{"STRING API"}

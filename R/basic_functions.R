@@ -44,7 +44,7 @@ rba_ba_stg = function(...){
                                     ptn = "^(https*://)*reactome\\.org/(?:AnalysisService|ContentService)/"),
                   string = switch(arg[[2]],
                                   name = "STRING",
-                                  url = "https://string-db.org",
+                                  url = "https://version-11-0.string-db.org",
                                   pth = "api/",
                                   ptn = "^(https*://)*string-db\\.org/api/"),
                   uniprot = switch(arg[[2]],
@@ -66,7 +66,7 @@ rba_ba_stg = function(...){
                                                  "Kuleshov MV, Jones MR, Rouillard AD, Fernandez NF, Duan Q, Wang Z, Koplev S, Jenkins SL, Jagodnik KM, Lachmann A, McDermott MG, Monteiro CD, Gundersen GW, Ma'ayan A. Enrichr: a comprehensive gene set enrichment analysis web server 2016 update. Nucleic Acids Research. 2016; gkw377 ."),
                                      ensembl = "***ensembl api papeer***",
                                      reactome = "***reactome api papeer***",
-                                     string = "***string api papeer***",
+                                     string = "Szklarczyk D, Gable AL, Lyon D, Junge A, Wyder S, Huerta-Cepas J, Simonovic M, Doncheva NT, Morris JH, Bork P, Jensen LJ, Mering CV. STRING v11: protein-protein association networks with increased coverage, supporting functional discovery in genome-wide experimental datasets. Nucleic Acids Res. 2019 Jan 8;47(D1):D607-D613. doi: 10.1093/nar/gky1131. PMID: 30476243; PMCID: PMC6323986.",
                                      uniprot = "***uniprot api papeer***")
   )
   return(output)

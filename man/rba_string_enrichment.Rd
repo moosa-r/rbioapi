@@ -4,20 +4,74 @@
 \alias{rba_string_enrichment}
 \title{Getting functional enrichment}
 \usage{
-rba_string_enrichment(
-  input,
-  species = NA,
-  background_string_ids = NA,
-  caller_identity = NA,
-  ...
-)
+rba_string_enrichment(ids, species = NA, background_string_ids = NA, ...)
 }
 \arguments{
+\item{ids}{Your protein ID(s). It is strongly recommended to provide
+STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
+
+\item{species}{Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
+(Recommended, but optional if your input is less than 100 IDs.)}
+
+\item{background_string_ids}{character vector: A set of STRING protein IDs
+to be used as the statistical background (or universe) when computing
+P-value for the terms. Only STRING IDs are acceptable. (Refer to
+\code{\link{rba_string_map_ids}} to map your IDs.)}
+
 \item{...}{}
 }
 \value{
-
+A data frame which every row is an enriched terms with p-value
+  smaller than 0.1 and the columns are the terms category, decription,
+  number of genes, p-value, fdr and other pertinent information.
 }
 \description{
-#' @family STRING
+STRING cross-reference the proteins with several databases (see "Details"
+  section). By providing your input set o proteins (and optionally
+  background or universe protein set), you can use this function to
+  perform enrichment test and retrieve a list of enriched terms in each
+  database, among with pertinent information for each term.
 }
+\details{
+STRING currently maps to and retrieve enrichment results based on Gene
+  Ontology (GO), KEGG pathways, UniProt Keywords, PubMed publications, Pfam
+  domains, InterPro domains, and SMART domains.\cr
+  Note that this function will only return the enriched terms pertinent to
+  your proteins that have a p-value lesser than 0.1. To retrieve a full list
+  of the terms -unfiltered by enrichment p-values-, use
+  \code{\link{rba_string_functional_annotation}}.
+}
+\section{Corresponding API Resources}{
+
+ "https://string-db.org/api/[output_format]/enrichment?identifiers=
+ [your_identifiers]&[optional_parameters]"
+}
+
+\examples{
+rba_string_enrichment(ids = c("TP53", "TNF", "EGFR"), species = 9606)
+
+}
+\references{
+\itemize{
+  \item Szklarczyk D, Gable AL, Lyon D, Junge A, Wyder S, Huerta-Cepas J,
+  Simonovic M, Doncheva NT, Morris JH, Bork P, Jensen LJ, Mering CV.
+  STRING v11: protein-protein association networks with increased coverage,
+  supporting functional discovery in genome-wide experimental datasets.
+  Nucleic Acids Res. 2019 Jan 8;47(D1):D607-D613. doi: 10.1093/nar/gky1131.
+  PMID: 30476243; PMCID: PMC6323986.
+  \item \href{https://string-db.org/help/api/}{STRING API Documentation}
+  }
+}
+\seealso{
+Other "STRING API": 
+\code{\link{rba_string_functional_annotation}()},
+\code{\link{rba_string_homology_inter}()},
+\code{\link{rba_string_homology_intra}()},
+\code{\link{rba_string_interaction_partners}()},
+\code{\link{rba_string_interactions_network}()},
+\code{\link{rba_string_map_ids}()},
+\code{\link{rba_string_network_image}()},
+\code{\link{rba_string_ppi_enrichment}()},
+\code{\link{rba_string_version}()}
+}
+\concept{"STRING API"}

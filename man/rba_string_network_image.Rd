@@ -2,30 +2,128 @@
 % Please edit documentation in R/stringdb.R
 \name{rba_string_network_image}
 \alias{rba_string_network_image}
-\title{Getting STRING network image}
+\title{Get STRING Network Image}
 \usage{
 rba_string_network_image(
-  input,
-  output_format = "image",
-  save_file = TRUE,
+  ids,
+  image_format = "image",
+  save_image = TRUE,
   species = NA,
-  add_color_nodes = FALSE,
+  add_color_nodes = NA,
   add_white_nodes = NA,
   required_score = NA,
   network_flavor = "confidence",
+  network_type = "functional",
   hide_node_labels = FALSE,
   hide_disconnected_nodes = FALSE,
-  block_structure_pics_in_bubbles = FALSE,
-  caller_identity = NA,
+  hide_structure_pics = FALSE,
   ...
 )
 }
 \arguments{
-\item{output_format}{}
+\item{ids}{Your protein ID(s). It is strongly recommended to provide
+STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
+
+\item{image_format}{one of:\itemize{
+\item "image": PNG image with normal resolution.
+\item "highres_image": High-resolution PNG image.
+\item "svg": Scalable Vector Graphics image.}}
+
+\item{save_image}{Logical or Character:\itemize{
+\item TRUE: Save the image to an automatically-generated path.
+\item FALSE: Do not save the image, just return it as an R object.
+\item Character string: A valid file path to save the image to.}}
+
+\item{species}{Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
+(Recommended, but optional if your input is less than 100 IDs.)}
+
+\item{add_color_nodes}{Numeric: The number of colored nodes (queried proteins
+and first shell of interactors) to be added.}
+
+\item{add_white_nodes}{Numeric: The number of white nodes (second shell of
+interactors) to be added after colored nodes.}
+
+\item{required_score}{Numeric: A minimum of interaction score for an
+interaction to be included in the image. if not provided, the threshold
+will be applied by STRING Based in the network. (low Confidence = 150,
+Medium Confidence = 400, High Confidence = 700, Highest confidence = 900)}
+
+\item{network_flavor}{The style of network edges, should be one of:\itemize{
+\item "confidence": (default) Line's thickness is an indicator of the
+interaction's confidence score.
+\item "evidence": Line's color is based on the type of evidences that
+support the interaction.
+\item "action": Line's Shape is an indicator of the interaction's predicted
+mode of actions.}}
+
+\item{network_type}{should be one of:\itemize{
+\item "functional": (default) The edge's indicate both physical and
+functional associations.
+\item "physical": The edges indicate that two proteins have a phyical
+interaction or are parts of a complex.}}
+
+\item{hide_node_labels}{Logical: (Default = FALSE) Hide proteins names from
+the image?}
+
+\item{hide_disconnected_nodes}{Logical: (Default = FALSE) Hide proteins that
+are not connected to any other proteins from the image?}
+
+\item{hide_structure_pics}{Logical: (Default = FALSE) Hide protein's
+structure picture from inside the bubbles?}
+
+\item{...}{}
 }
 \value{
-
+A network images which can be PNG or SVG depending on the inputs.
 }
 \description{
-Getting STRING network image
+Depending on that you provided a single protein ID or more than one protein
+  ID, this function will produce a static image of the interaction networks
+  among your input proteins or/and with other proteins. Refer to the
+  "Arguments" section to learn more about how you can modify the network
+  image.
 }
+\section{Corresponding API Resources}{
+
+ "https://string-db.org/api/[output-format]/network?identifiers=
+ [your_identifiers]&[optional_parameters]"
+}
+
+\examples{
+\dontrun{rba_string_network_image(ids = c("9606.ENSP00000269305",
+          "9606.ENSP00000398698",
+          "9606.ENSP00000275493"),
+  network_type = "functional",
+  save_image = FALSE)}
+\dontrun{rba_string_network_image(ids = c("TP53", "TNF", "EGFR"),
+  species = 9606,
+  save_image = TRUE)}
+\dontrun{rba_string_network_image(ids = "9606.ENSP00000269305",
+image_format = "highres_image",
+save_image = file.path(getwd(), "TP53_network.png"))}
+
+}
+\references{
+\itemize{
+  \item Szklarczyk D, Gable AL, Lyon D, Junge A, Wyder S, Huerta-Cepas J,
+  Simonovic M, Doncheva NT, Morris JH, Bork P, Jensen LJ, Mering CV.
+  STRING v11: protein-protein association networks with increased coverage,
+  supporting functional discovery in genome-wide experimental datasets.
+  Nucleic Acids Res. 2019 Jan 8;47(D1):D607-D613. doi: 10.1093/nar/gky1131.
+  PMID: 30476243; PMCID: PMC6323986.
+  \item \href{https://string-db.org/help/api/}{STRING API Documentation}
+  }
+}
+\seealso{
+Other "STRING API": 
+\code{\link{rba_string_enrichment}()},
+\code{\link{rba_string_functional_annotation}()},
+\code{\link{rba_string_homology_inter}()},
+\code{\link{rba_string_homology_intra}()},
+\code{\link{rba_string_interaction_partners}()},
+\code{\link{rba_string_interactions_network}()},
+\code{\link{rba_string_map_ids}()},
+\code{\link{rba_string_ppi_enrichment}()},
+\code{\link{rba_string_version}()}
+}
+\concept{"STRING API"}

@@ -2,41 +2,65 @@
 % Please edit documentation in R/stringdb.R
 \name{rba_string_map_ids}
 \alias{rba_string_map_ids}
-\title{Map a Set of Identifiers to String Identifiers}
+\title{Map a Set of Identifiers to STRING Identifiers}
 \usage{
-rba_string_map_ids(
-  input,
-  species = NA,
-  echo_query = FALSE,
-  limit = NA,
-  caller_identity = NA,
-  ...
-)
+rba_string_map_ids(ids, species = NA, echo_query = FALSE, limit = NA, ...)
 }
 \arguments{
-\item{input}{A character or/and numeric vector containing your desired Identifiers to be mapped}
+\item{ids}{Your Common gene/protein Identifier(s) to be mapped.}
 
-\item{species}{(optional) Numeric, NCBI taxon identifiers (e.g. Human is 9606, see:
-STRING organisms).}
+\item{species}{Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
+(Recommended, but optional if your input is less than 100 IDs.)}
 
-\item{echo_query}{(optional) Logical, Insert column with your input identifier. (default = FALSE)}
+\item{echo_query}{(default = FALSE) Include your input IDs as a column of the
+results.}
 
-\item{limit}{(optional) limits the number of matches per query identifier (best matches
-come first)}
+\item{limit}{(Numeric, Optional) A limit on the number of matches per input ID.}
 
-\item{caller_identity}{(optional) Character, your identifier for STRING servers.}
+\item{...}{}
 }
 \value{
-
+A data frame with the mapped STRING IDs and other pertinent
+  information.
 }
 \description{
-This function Calls String's API to Convert a set of identifiers
-  to String Identifiers. Although You can call STRING with a variety of
-  Identifiers, It is recommended by STRING's documentations that you first
-  map Your Protein/genes Identifiers to STRING Identifiers and then proceed
-  with other STRING API functions. This  function's Documentation is based
-  on: \url{https://string-db.org/help/api/#mapping-identifiers}
+This function Calls STRING's API to Convert a set of identifiers
+  to STRING Identifiers. Although You can call STRING services with a variety
+  of common identifiers, It is recommended by STRING's documentations that
+  you first map Your Protein/genes IDs to STRING IDs and then proceed
+  with other STRING's functions.
+}
+\section{Corresponding API Resources}{
+
+ "https://string-db.org/api/[output-format]/get_string_ids?identifiers=
+ [your_identifiers]&[optional_parameters]"
+}
+
+\examples{
+rba_string_map_ids(ids = c("TP53", "TNF", "EGFR"), species = 9606)
+
 }
 \references{
-\url{https://string-db.org/help/api/#mapping-identifiers}
+\itemize{
+  \item Szklarczyk D, Gable AL, Lyon D, Junge A, Wyder S, Huerta-Cepas J,
+  Simonovic M, Doncheva NT, Morris JH, Bork P, Jensen LJ, Mering CV.
+  STRING v11: protein-protein association networks with increased coverage,
+  supporting functional discovery in genome-wide experimental datasets.
+  Nucleic Acids Res. 2019 Jan 8;47(D1):D607-D613. doi: 10.1093/nar/gky1131.
+  PMID: 30476243; PMCID: PMC6323986.
+  \item \href{https://string-db.org/help/api/}{STRING API Documentation}
+  }
 }
+\seealso{
+Other "STRING API": 
+\code{\link{rba_string_enrichment}()},
+\code{\link{rba_string_functional_annotation}()},
+\code{\link{rba_string_homology_inter}()},
+\code{\link{rba_string_homology_intra}()},
+\code{\link{rba_string_interaction_partners}()},
+\code{\link{rba_string_interactions_network}()},
+\code{\link{rba_string_network_image}()},
+\code{\link{rba_string_ppi_enrichment}()},
+\code{\link{rba_string_version}()}
+}
+\concept{"STRING API"}

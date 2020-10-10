@@ -9,7 +9,7 @@ rba_enrichr_add_list(gene_list, description = NA, ...)
 \arguments{
 \item{gene_list}{A vector with Entrez gene symbols.}
 
-\item{description}{(optional) A name or description to be associated to your
+\item{description}{(optional) A name or description to be associated with your
 uploaded gene-set to Enrichr servers.}
 
 \item{...}{}
