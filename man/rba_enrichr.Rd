@@ -60,9 +60,9 @@ This function will call other rba_enrichr_*** functions with the following
 }
 \section{Corresponding API Resources}{
 
- "http://maayanlab.cloud/Enrichr/datasetStatistics"\cr
- "http://maayanlab.cloud/Enrichr/addList"\cr
- "http://maayanlab.cloud/Enrichr/enrich"
+ "GET http://maayanlab.cloud/Enrichr/datasetStatistics"\cr
+ "POST http://maayanlab.cloud/Enrichr/addList"\cr
+ "GET http://maayanlab.cloud/Enrichr/enrich"
 }
 
 \references{

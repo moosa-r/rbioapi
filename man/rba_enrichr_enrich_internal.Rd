@@ -29,7 +29,7 @@ handle api requests to the server.
 }
 \section{Corresponding API Resources}{
 
- "http://maayanlab.cloud/Enrichr/enrich"
+ "GET http://maayanlab.cloud/Enrichr/enrich"
 }
 
 \references{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/stringdb.R
 \name{rba_string_homology_inter}
 \alias{rba_string_homology_inter}
-\title{Get Similarity Scores Hits of Proteins in diffrerent Species}
+\title{Get Similarity Scores Hits of Proteins in Different Species}
 \usage{
 rba_string_homology_inter(ids, species = NA, species_b = NA, ...)
 }
@@ -24,7 +24,7 @@ A data frame with Your input proteins and it's closest homologous
   proteins among all other (or a defined) STRING species.
 }
 \description{
-Using this function, you can retrieve highest smith-–Waterman bit scores
+Using this function, you can retrieve highest Smith-Waterman bit scores
   among your input proteins and proteins in every other STRING species
   (e.g. the closest homologous protein of your input protein in other
   species).
@@ -42,7 +42,7 @@ Note that this function will return the highest similarity score hits of
 }
 \section{Corresponding API Resources}{
 
- "https://string-db.org/api/[output-format]/homology_best?
+ "POST https://string-db.org/api/[output-format]/homology_best?
  identifiers=[your_identifiers]"
 }
 
@@ -65,6 +65,8 @@ rba_string_homology_inter(ids = "ENSP00000269305", species = 9606)
   }
 }
 \seealso{
+\code{\link{rba_string_map_ids}, \link{rba_string_homology_intra}}
+
 Other "STRING API": 
 \code{\link{rba_string_enrichment}()},
 \code{\link{rba_string_functional_annotation}()},

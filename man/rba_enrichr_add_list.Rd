@@ -28,7 +28,7 @@ Note that using \code{\link{rba_enrichr}} is a more convenient way to
 }
 \section{Corresponding API Resources}{
 
- "http://maayanlab.cloud/Enrichr/addList"
+ "POST http://maayanlab.cloud/Enrichr/addList"
 }
 
 \examples{
@@ -50,7 +50,7 @@ rba_enrichr_add_list(gene_list = c("TP53", "TNF", "EGFR"),
   }
 }
 \seealso{
-[rba_enrichr]
+\code{\link{rba_enrichr}}
 
 Other "Enrichr API": 
 \code{\link{rba_enrichr_enrich}()},

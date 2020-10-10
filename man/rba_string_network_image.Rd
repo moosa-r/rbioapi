@@ -85,7 +85,7 @@ Depending on that you provided a single protein ID or more than one protein
 }
 \section{Corresponding API Resources}{
 
- "https://string-db.org/api/[output-format]/network?identifiers=
+ "POST https://string-db.org/api/[output-format]/network?identifiers=
  [your_identifiers]&[optional_parameters]"
 }
 
@@ -115,6 +115,8 @@ save_image = file.path(getwd(), "TP53_network.png"))}
   }
 }
 \seealso{
+\code{\link{rba_string_map_ids}}
+
 Other "STRING API": 
 \code{\link{rba_string_enrichment}()},
 \code{\link{rba_string_functional_annotation}()},

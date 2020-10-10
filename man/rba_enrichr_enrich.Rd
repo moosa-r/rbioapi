@@ -49,7 +49,7 @@ Note that using \code{\link{rba_enrichr}} is a more convenient way to
 }
 \section{Corresponding API Resources}{
 
- "http://maayanlab.cloud/Enrichr/enrich"
+ "GET http://maayanlab.cloud/Enrichr/enrich"
 }
 
 \examples{
@@ -76,7 +76,7 @@ Note that using \code{\link{rba_enrichr}} is a more convenient way to
   }
 }
 \seealso{
-[rba_enrichr]
+\code{\link{rba_enrichr}}
 
 Other "Enrichr API": 
 \code{\link{rba_enrichr_add_list}()},

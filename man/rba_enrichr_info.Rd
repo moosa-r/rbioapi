@@ -34,7 +34,7 @@ You should call this function once per R session with the argument
 }
 \section{Corresponding API Resources}{
 
- "http://maayanlab.cloud/Enrichr/datasetStatistics"
+ "GET http://maayanlab.cloud/Enrichr/datasetStatistics"
 }
 
 \examples{
@@ -55,7 +55,7 @@ rba_enrichr_info()
   }
 }
 \seealso{
-[rba_enrichr]
+\code{\link{rba_enrichr}}
 
 Other "Enrichr API": 
 \code{\link{rba_enrichr_add_list}()},

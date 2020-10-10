@@ -7,7 +7,7 @@
 #'   with other STRING's functions.
 #'
 #' @section Corresponding API Resources:
-#'  "https://string-db.org/api/[output-format]/get_string_ids?identifiers=
+#'  "POST https://string-db.org/api/[output-format]/get_string_ids?identifiers=
 #'  [your_identifiers]&[optional_parameters]"
 #'
 #' @param ids Your Common gene/protein Identifier(s) to be mapped.
@@ -98,7 +98,7 @@ rba_string_map_ids = function(ids,
 #'   image.
 #'
 #' @section Corresponding API Resources:
-#'  "https://string-db.org/api/[output-format]/network?identifiers=
+#'  "POST https://string-db.org/api/[output-format]/network?identifiers=
 #'  [your_identifiers]&[optional_parameters]"
 #'
 #' @param ids Your protein ID(s). It is strongly recommended to provide
@@ -167,6 +167,7 @@ rba_string_map_ids = function(ids,
 #' save_image = file.path(getwd(), "TP53_network.png"))}
 #'
 #' @family "STRING API"
+#' @seealso \code{\link{rba_string_map_ids}}
 #' @export
 rba_string_network_image = function(ids,
                                     image_format = "image",
@@ -297,7 +298,7 @@ rba_string_network_image = function(ids,
 #'   \code{\link{rba_string_interaction_partners}}.
 #'
 #' @section Corresponding API Resources:
-#'  "https://string-db.org/api/[output-format]/network?identifiers=
+#'  "POST https://string-db.org/api/[output-format]/network?identifiers=
 #'  [your_identifiers]&[optional_parameters]"
 #'
 #' @param ids Your protein IDs. It is strongly recommended to provide
@@ -347,6 +348,8 @@ rba_string_network_image = function(ids,
 #'   add_nodes = 10)
 #'
 #' @family "STRING API"
+#' @seealso
+#'   \code{\link{rba_string_map_ids}, \link{rba_string_interaction_partners}
 #' @export
 rba_string_interactions_network = function(ids,
                                            species = NA,
@@ -428,7 +431,7 @@ rba_string_interactions_network = function(ids,
 #'   \code{\link{rba_string_interactions_network}}.
 #'
 #' @section Corresponding API Resources:
-#'  "https://string-db.org/api/[output-format]/
+#'  "POST https://string-db.org/api/[output-format]/
 #'  interaction_partners?identifiers=[your_identifiers]&[optional_parameters]"
 #'
 #' @param ids Your protein ID(s). It is strongly recommended to provide
@@ -467,6 +470,8 @@ rba_string_interactions_network = function(ids,
 #'   required_score = 700)
 #'
 #' @family "STRING API"
+#' @seealso
+#'   \code{\link{rba_string_map_ids}, \link{rba_string_interactions_network}}
 #' @export
 rba_string_interaction_partners = function(ids,
                                            species = NA,
@@ -535,7 +540,7 @@ rba_string_interaction_partners = function(ids,
 
 #' Get Similarity Scores Hits of Proteins in a Species
 #'
-#' Using this function, you can retrieve the Smith–Waterman bit scores among
+#' Using this function, you can retrieve the Smith-Waterman bit scores among
 #'   proteins of the same species.
 #'   Bit Scores serve as similarity scores between protein sequence;
 #'   And, according to STRING documentations, as a proxy for protein homology.
@@ -549,7 +554,7 @@ rba_string_interaction_partners = function(ids,
 #'   Proteins (SIMAP)}
 #'
 #' @section Corresponding API Resources:
-#'  "https://string-db.org/api/[output-format]/homology?identifiers=
+#'  "POST https://string-db.org/api/[output-format]/homology?identifiers=
 #'  [your_identifiers]"
 #'
 #' @param ids Your protein ID(s). It is strongly recommended to provide
@@ -577,6 +582,8 @@ rba_string_interaction_partners = function(ids,
 #' rba_string_homology_intra(ids = c("CDK1", "CDK2"), species = 9606)
 #'
 #' @family "STRING API"
+#' @seealso
+#'   \code{\link{rba_string_map_ids}, \link{rba_string_homology_inter}}
 #' @export
 rba_string_homology_intra = function(ids,
                                      species = NA,
@@ -621,9 +628,9 @@ rba_string_homology_intra = function(ids,
   return(final_output)
 }
 
-#' Get Similarity Scores Hits of Proteins in diffrerent Species
+#' Get Similarity Scores Hits of Proteins in Different Species
 #'
-#' Using this function, you can retrieve highest smith-–Waterman bit scores
+#' Using this function, you can retrieve highest Smith-Waterman bit scores
 #'   among your input proteins and proteins in every other STRING species
 #'   (e.g. the closest homologous protein of your input protein in other
 #'   species).
@@ -639,7 +646,7 @@ rba_string_homology_intra = function(ids,
 #'   Proteins (SIMAP)}
 #'
 #' @section Corresponding API Resources:
-#'  "https://string-db.org/api/[output-format]/homology_best?
+#'  "POST https://string-db.org/api/[output-format]/homology_best?
 #'  identifiers=[your_identifiers]"
 #'
 #' @param ids Your protein ID(s). It is strongly recommended to provide
@@ -671,6 +678,8 @@ rba_string_homology_intra = function(ids,
 #' rba_string_homology_inter(ids = "ENSP00000269305", species = 9606)
 #'
 #' @family "STRING API"
+#' @seealso
+#'   \code{\link{rba_string_map_ids}, \link{rba_string_homology_intra}}
 #' @export
 rba_string_homology_inter = function(ids,
                                      species = NA,
@@ -721,7 +730,7 @@ rba_string_homology_inter = function(ids,
 }
 
 
-#' Getting functional enrichment
+#' Getting Functional Enrichment
 #'
 #' STRING cross-reference the proteins with several databases (see "Details"
 #'   section). By providing your input set o proteins (and optionally
@@ -738,7 +747,7 @@ rba_string_homology_inter = function(ids,
 #'   \code{\link{rba_string_functional_annotation}}.
 #'
 #' @section Corresponding API Resources:
-#'  "https://string-db.org/api/[output_format]/enrichment?identifiers=
+#'  "POST https://string-db.org/api/[output_format]/enrichment?identifiers=
 #'  [your_identifiers]&[optional_parameters]"
 #'
 #' @param ids Your protein ID(s). It is strongly recommended to provide
@@ -769,6 +778,8 @@ rba_string_homology_inter = function(ids,
 #' rba_string_enrichment(ids = c("TP53", "TNF", "EGFR"), species = 9606)
 #'
 #' @family "STRING API"
+#' @seealso
+#'   \code{\link{rba_string_map_ids}, \link{rba_string_functional_annotation}}
 #' @export
 rba_string_enrichment = function(ids,
                                  species = NA,
@@ -819,7 +830,7 @@ rba_string_enrichment = function(ids,
   return(final_output)
 }
 
-#' Retrieving functional annotation
+#' Retrieving Functional Annotation
 #'
 #' STRING cross-reference the proteins with several databases (see "Details"
 #'   section). By providing your input set o proteins (and optionally
@@ -835,7 +846,7 @@ rba_string_enrichment = function(ids,
 #'   subset of the terms, use \code{\link{rba_string_enrichment}}.
 #'
 #' @section Corresponding API Resources:
-#'  "https://string-db.org/api/[output_format]/functional_annotation?
+#'  "POST https://string-db.org/api/[output_format]/functional_annotation?
 #'  identifiers=[your_identifiers]&[optional_parameters]"
 #'
 #' @param ids Your protein ID(s). It is strongly recommended to provide
@@ -866,6 +877,8 @@ rba_string_enrichment = function(ids,
 #' rba_string_functional_annotation(ids = "TP53", species = 9606)
 #'
 #' @family "STRING API"
+#' @seealso
+#'   \code{\link{rba_string_map_ids}, \link{rba_string_enrichment}}
 #' @export
 rba_string_functional_annotation = function(ids,
                                             species = NA,
@@ -925,7 +938,7 @@ rba_string_functional_annotation = function(ids,
 #'   functionally related.
 #'
 #' @section Corresponding API Resources:
-#'  "https://string-db.org/api/[output_format]/ppi_enrichment?identifiers=
+#'  "POST https://string-db.org/api/[output_format]/ppi_enrichment?identifiers=
 #'  [your_identifiers]&[optional_parameters]"
 #'
 #' @param ids Your protein ID(s). It is strongly recommended to provide
@@ -955,6 +968,7 @@ rba_string_functional_annotation = function(ids,
 #' "CDC42", "CDK1", "KIF23", "PLK1", "RAC2", "RACGAP1"), species = 9606)
 #'
 #' @family "STRING API"
+#' @seealso \code{\link{rba_string_map_ids}}
 #' @export
 rba_string_ppi_enrichment = function(ids,
                                      species = NA,
@@ -1006,7 +1020,7 @@ rba_string_ppi_enrichment = function(ids,
   return(final_output)
 }
 
-#' Getting current STRING version
+#' Get Current STRING Version
 #'
 #' Get STRING version and stable Address that this package currently uses.
 #'
@@ -1017,7 +1031,7 @@ rba_string_ppi_enrichment = function(ids,
 #'   is outdated, Kindly contact me.
 #'
 #' @section Corresponding API Resources:
-#'  "https://string-db.org/api/[output_format]/version"
+#'  "GET https://string-db.org/api/[output_format]/version"
 #'
 #' @param ...
 #'

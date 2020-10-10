@@ -21,7 +21,7 @@ Retrieve a list of uploaded genes under a 'user list ID'.
 }
 \section{Corresponding API Resources}{
 
- "http://maayanlab.cloud/Enrichr/view"
+ "GET http://maayanlab.cloud/Enrichr/view"
 }
 
 \examples{

@@ -60,7 +60,7 @@ Note that this function will return interactions between your set of
 }
 \section{Corresponding API Resources}{
 
- "https://string-db.org/api/[output-format]/network?identifiers=
+ "POST https://string-db.org/api/[output-format]/network?identifiers=
  [your_identifiers]&[optional_parameters]"
 }
 
@@ -88,6 +88,8 @@ rba_string_interactions_network(ids = c("9606.ENSP00000269305",
   }
 }
 \seealso{
+
+
 Other "STRING API": 
 \code{\link{rba_string_enrichment}()},
 \code{\link{rba_string_functional_annotation}()},

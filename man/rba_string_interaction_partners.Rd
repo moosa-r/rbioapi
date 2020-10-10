@@ -51,7 +51,7 @@ Note that this function will retrieve the interactions between your input
 }
 \section{Corresponding API Resources}{
 
- "https://string-db.org/api/[output-format]/
+ "POST https://string-db.org/api/[output-format]/
  interaction_partners?identifiers=[your_identifiers]&[optional_parameters]"
 }
 
@@ -77,6 +77,8 @@ rba_string_interaction_partners(ids = "9606.ENSP00000269305",
   }
 }
 \seealso{
+\code{\link{rba_string_map_ids}, \link{rba_string_interactions_network}}
+
 Other "STRING API": 
 \code{\link{rba_string_enrichment}()},
 \code{\link{rba_string_functional_annotation}()},

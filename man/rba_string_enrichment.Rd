@@ -2,7 +2,7 @@
 % Please edit documentation in R/stringdb.R
 \name{rba_string_enrichment}
 \alias{rba_string_enrichment}
-\title{Getting functional enrichment}
+\title{Getting Functional Enrichment}
 \usage{
 rba_string_enrichment(ids, species = NA, background_string_ids = NA, ...)
 }
@@ -43,7 +43,7 @@ STRING currently maps to and retrieve enrichment results based on Gene
 }
 \section{Corresponding API Resources}{
 
- "https://string-db.org/api/[output_format]/enrichment?identifiers=
+ "POST https://string-db.org/api/[output_format]/enrichment?identifiers=
  [your_identifiers]&[optional_parameters]"
 }
 
@@ -63,6 +63,8 @@ rba_string_enrichment(ids = c("TP53", "TNF", "EGFR"), species = 9606)
   }
 }
 \seealso{
+\code{\link{rba_string_map_ids}, \link{rba_string_functional_annotation}}
+
 Other "STRING API": 
 \code{\link{rba_string_functional_annotation}()},
 \code{\link{rba_string_homology_inter}()},

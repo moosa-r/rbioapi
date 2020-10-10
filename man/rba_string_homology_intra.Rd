@@ -22,7 +22,7 @@ A data frame with bit scores between your provided proteins and
   similarity matrix is symmetrical.
 }
 \description{
-Using this function, you can retrieve the Smith–Waterman bit scores among
+Using this function, you can retrieve the Smith-Waterman bit scores among
   proteins of the same species.
   Bit Scores serve as similarity scores between protein sequence;
   And, according to STRING documentations, as a proxy for protein homology.
@@ -38,7 +38,7 @@ Note that this function will retrieve similarity scores of different
 }
 \section{Corresponding API Resources}{
 
- "https://string-db.org/api/[output-format]/homology?identifiers=
+ "POST https://string-db.org/api/[output-format]/homology?identifiers=
  [your_identifiers]"
 }
 
@@ -58,6 +58,8 @@ rba_string_homology_intra(ids = c("CDK1", "CDK2"), species = 9606)
   }
 }
 \seealso{
+\code{\link{rba_string_map_ids}, \link{rba_string_homology_inter}}
+
 Other "STRING API": 
 \code{\link{rba_string_enrichment}()},
 \code{\link{rba_string_functional_annotation}()},

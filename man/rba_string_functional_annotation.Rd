@@ -2,7 +2,7 @@
 % Please edit documentation in R/stringdb.R
 \name{rba_string_functional_annotation}
 \alias{rba_string_functional_annotation}
-\title{Retrieving functional annotation}
+\title{Retrieving Functional Annotation}
 \usage{
 rba_string_functional_annotation(ids, species = NA, allow_pubmed = FALSE, ...)
 }
@@ -42,7 +42,7 @@ STRING currently maps to and retrieve enrichment results based on Gene
 }
 \section{Corresponding API Resources}{
 
- "https://string-db.org/api/[output_format]/functional_annotation?
+ "POST https://string-db.org/api/[output_format]/functional_annotation?
  identifiers=[your_identifiers]&[optional_parameters]"
 }
 
@@ -62,6 +62,8 @@ rba_string_functional_annotation(ids = "TP53", species = 9606)
   }
 }
 \seealso{
+\code{\link{rba_string_map_ids}, \link{rba_string_enrichment}}
+
 Other "STRING API": 
 \code{\link{rba_string_enrichment}()},
 \code{\link{rba_string_homology_inter}()},

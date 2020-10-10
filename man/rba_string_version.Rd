@@ -2,7 +2,7 @@
 % Please edit documentation in R/stringdb.R
 \name{rba_string_version}
 \alias{rba_string_version}
-\title{Getting current STRING version}
+\title{Get Current STRING Version}
 \usage{
 rba_string_version(...)
 }
@@ -24,7 +24,7 @@ Note that STRING releases new version at approximately 2 years cycle.
 }
 \section{Corresponding API Resources}{
 
- "https://string-db.org/api/[output_format]/version"
+ "GET https://string-db.org/api/[output_format]/version"
 }
 
 \examples{

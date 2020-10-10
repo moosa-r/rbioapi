@@ -31,7 +31,7 @@ Even when there is no annotation for your input proteins, STRING can Compare
 }
 \section{Corresponding API Resources}{
 
- "https://string-db.org/api/[output_format]/ppi_enrichment?identifiers=
+ "POST https://string-db.org/api/[output_format]/ppi_enrichment?identifiers=
  [your_identifiers]&[optional_parameters]"
 }
 
@@ -52,6 +52,8 @@ rba_string_ppi_enrichment(ids = c("p53", "BRCA1", "cdk2", "Q99835",
   }
 }
 \seealso{
+\code{\link{rba_string_map_ids}}
+
 Other "STRING API": 
 \code{\link{rba_string_enrichment}()},
 \code{\link{rba_string_functional_annotation}()},
