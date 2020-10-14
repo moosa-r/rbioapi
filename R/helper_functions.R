@@ -59,19 +59,18 @@ rba_connection_test = function(diagnostics = FALSE) {
 
 #' Set rbioapi Global Options
 #'
-#' A Safe way to alter rbioapi's global options. Please refer to the
-#'   Arguments section for a detailed description of Available options.\cr
+#' A safe way to alter rbioapi's global options.\cr
+#'   Note that you are not limited to changing the options globally, you can
+#'   include the option names and values in the '...' argument of any rbioapi
+#'   function to alter the option(s) only in that function call;
+#'   e.x. example_function(x, y, diagnostics = TRUE).\cr\cr
 #'   Alternatively, you can call this function with no arguments [ e.g.
 #'   rba_options() ] to retrieve a table of available rbioapi options and their
 #'   current values.\cr
-#'   Note: Because this function validates your provided changes, Kindly
+#'
+#'   Because this function validates your provided changes, Kindly
 #'   \strong{\emph{only change rbioapi options using this function}} and avoid
 #'   directly editing them.
-#'
-#' Note that you are not limited to changing the options globally, you could
-#'   include the option names and values in the '...' argument of any rbioapi
-#'   function to alter the option in that function's call only;
-#'   e.x, example_function(x, y, diagnostics = TRUE).
 #'
 #' @param client_timeout numeric: The maximum time in seconds that you are
 #'   willing to wait for a server response before giving up and stopping the
@@ -83,17 +82,32 @@ rba_connection_test = function(diagnostics = FALSE) {
 #'   your working directory to save your files.
 #' @param max_retries numeric: How many times should rbioapi retry in case of
 #'   5xx server responses, errors or no internet connectivity?
-#' @param wait_time numeric: Time in seconds to wait before each retry in case
-#'   of internet connection lost or server problems.
 #' @param progress_bar logical: Should a progress bar be displayed?
+#' @param save_resp_file either:\itemize{
+#'   \item TRUE: in this case, the raw server response will be automatically
+#'   saved to a proper file path. use "dir_name" argument to alter the file's
+#'   parent directory.
+#'   \item FALSE: (default) Do not automatticaly save server response.
+#'   \item Character: (Only when altering the option via "..." argument) A valid
+#'   file path to save the server response to the calling function.}
 #' @param skip_error logical: If TRUE, the code execution will not be stopped
 #'   in case of errors (anything but HTTP status 200 from the server); Instead
 #'   the error message will be returned as the function's output. Set this
-#'   to 'TRUE' if you are calling rbioapi function in batch batch mode or
+#'   to 'TRUE' if you are calling rbioapi functions in batch batch mode or
 #'   sourcing a script.
 #' @param verbose logical: Generate informative messages.
+#' @param wait_time numeric: Time in seconds to wait before each retry in case
+#'   of internet connection lost or server problems.
 #'
-#' @return NULL
+#' @return If called without any argument, Data frame with available options
+#'   and their pertinent information. If Called with an argument, will Return
+#'   NULL but Alters that option globally.
+#'
+#' @examples
+#' rba_options()
+#' rba_options(verbose = FALSE)
+#' rba_options(save_resp_file = TRUE)
+#' rba_options(diagnostics = TRUE, progress_bar = TRUE)
 #' @family "Helper functions"
 #' @keywords Helper
 #' @export
