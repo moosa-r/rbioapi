@@ -2,26 +2,57 @@
 % Please edit documentation in R/reactome_content.R
 \name{rba_reactome_event_ancestors}
 \alias{rba_reactome_event_ancestors}
-\title{The Reactome definition of events includes pathways and reactions. Although
-events are organised in a hierarchical structure, a single event can be in
-more than one location, i.e. a reaction can take part in different pathways
-while, in the same way, a sub-pathway can take part in many pathways.
-Therefore, this method retrieves a list of all possible paths from the
-requested event to the top level pathway(s).}
+\title{Get Reactome Events Ancestors}
 \usage{
 rba_reactome_event_ancestors(event_id, ...)
 }
 \arguments{
-\item{event_id}{}
+\item{event_id}{Reactome event's identifier.}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+List which every element is a Data frame listing your provided
+  event along with it's ancestor events. Because any given event can be
+  part of more than one pathway hierarchy, the list may contain multiple
+  data frames.
 }
 \description{
-The Reactome definition of events includes pathways and reactions. Although
-events are organised in a hierarchical structure, a single event can be in
-more than one location, i.e. a reaction can take part in different pathways
-while, in the same way, a sub-pathway can take part in many pathways.
-Therefore, this method retrieves a list of all possible paths from the
-requested event to the top level pathway(s).
+Along with Reactome's events hierarchy, This function will retrieve all the
+ events beginning from your provided event up to the "Top level Pathway".
+ see "Details section" for more information.
 }
+\details{
+By Reactome's definition, Events are the building blocks of biological
+  processes and could be of two main classes: "Pathway" or
+  "Reaction-like events". The events are organized in a hierarchical
+  structure; and each event could be child or parent to another event; The
+  hierarchy will always begin with a "Top level pathway" event. Also note
+  that a given event could be part of more that one hierarchies.\cr
+}
+\section{Corresponding API Resources}{
+
+ "GET https://reactome.org/ContentService/data/event/{id}/ancestors"
+}
+
+\examples{
+rba_reactome_event_ancestors("R-HSA-5673001")
+}
+\references{
+\itemize{
+  \item Jassal B, Matthews L, Viteri G, Gong C, Lorente P, Fabregat A,
+  Sidiropoulos K, Cook J, Gillespie M, Haw R, Loney F, May B, Milacic M,
+  Rothfels K, Sevilla C, Shamovsky V, Shorser S, Varusai T, Weiser J, Wu G,
+  Stein L, Hermjakob H, D'Eustachio P. The reactome pathway knowledgebase.
+  Nucleic Acids Res. 2020 Jan 8;48(D1):D498-D503. doi: 10.1093/nar/gkz1031.
+  PubMed PMID: 31691815.
+  \item \href{https://reactome.org/ContentService/}{Reactome Content
+  Services API Documentation}
+  }
+}
+\seealso{
+Other "Reactome Content Service, Queries Related to Events": 
+\code{\link{rba_reactome_event_hierarchy}()}
+}
+\concept{"Reactome Content Service, Queries Related to Events"}

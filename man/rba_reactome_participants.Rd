@@ -2,23 +2,127 @@
 % Please edit documentation in R/reactome_content.R
 \name{rba_reactome_participants}
 \alias{rba_reactome_participants}
-\title{Participants contains a PhysicalEntity (dbId, displayName) and a
-collection of ReferenceEntities (dbId, name, identifier, url)}
+\title{Get Complexes That Include a Molecule}
 \usage{
 rba_reactome_participants(
-  id,
-  physical_entities = FALSE,
-  reference_entities = FALSE,
+  event_id,
+  only_physical_entities = FALSE,
+  only_reference_entities = FALSE,
+  ...
+)
+
+rba_reactome_participants(
+  event_id,
+  only_physical_entities = FALSE,
+  only_reference_entities = FALSE,
   ...
 )
 }
 \arguments{
-\item{reference_entities}{}
+\item{event_id}{Reactome event's database ID (DbId) or Stable ID (StId).}
+
+\item{only_physical_entities}{Logical: If TRUe, only participating
+'Physical Entities' will be returned.}
+
+\item{only_reference_entities}{Logical: If TRUe, only participating
+'Reference Entities' will be returned.}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
+
+\item{id}{Molecule's external Identifier}
+
+\item{resource}{What is the resource of your provided ID? see:
+\href{https://reactome.org/content/schema/objects/ReferenceDatabase}{Reactome External
+Identifiers}}
 }
 \value{
+Data frame where each row is a complex containing your provided
+  molecule and columns are pertinent information.
 
+List with the participant of your provided Event ID. A Data frame
+ if only physical or 'Reference Entities' was requested.
 }
 \description{
-Participants contains a PhysicalEntity (dbId, displayName) and a
-collection of ReferenceEntities (dbId, name, identifier, url)
+This function will retrieve a list of complexes that include your provided
+  molecule as a component.
+
+Participating molecules in a Reactome comprises set of 'Physical Entity' and
+  'Reference Entities' class objects. Use this function to retrieve all, only
+  'Physical Entity' or only 'Reference Entities' participants of given event.
 }
+\details{
+A 'Physical Entity' Instance could include an individual molecule,
+ a multi-molecular complex or a set of molecule forming a group based on
+ some characteristics. a single molecule can have different 'Physical Entity'
+ instances based on it's associated attributes. For example, IgK Ig kappa
+ chain, has two 'Physical Entity' instances; one, with ID
+ \href{https://reactome.org/content/schema/instance/browser/R-HSA-197041}{
+ "R-HSA-197041"} refers to the secreted antibody protein to the
+ extra-cellular region; And the second one is with ID
+ \href{https://reactome.org/content/schema/instance/browser/R-HSA-2038819}{
+ "R-HSA-2038819"} and refers to the plasma-membrane-integrated form of
+ the antibody protein.\cr\cr
+ To make it possible to link multiple 'Physical Entity' instances of a
+ molecule, Reactome uses a data class named "'Reference Entities'"
+ which correspond to the invariant attribute of a molecule. for example,
+ both of the above-mentioned 'Physical Entities' refer to a 'Reference Entities'
+ named \href{https://reactome.org/content/schema/instance/browser/57819}{
+ "UniProt:P01834 IGKC}.\cr\cr
+ See \href{https://reactome.org/documentation/data-model}{Reactome
+ Data Model} for more information about the data model and Physical
+ Entities.
+}
+\section{Corresponding API Resources}{
+
+ "GET https://reactome.org/ContentService/data/complexes/{resource}/
+ {identifier}"
+
+
+ "GET https://reactome.org/ContentService/data/participants/{id}"\cr
+ "GET https://reactome.org/ContentService/data/participants/{id}/
+ participatingPhysicalEntities"\cr
+ "GET https://reactome.org/ContentService/data/participants/{id}/
+ referenceEntities"
+}
+
+\examples{
+rba_reactome_participants(id = "3845", resource = "NCBI Gene")
+rba_reactome_participants(id = "P00533", resource = "UniProt")
+rba_reactome_participants(" R-HSA-5682012")
+rba_reactome_participants("R-HSA-5682012", only_physical_entities = TRUE)
+rba_reactome_participants("R-HSA-5682012", only_reference_entities = TRUE)
+}
+\references{
+\itemize{
+  \item Jassal B, Matthews L, Viteri G, Gong C, Lorente P, Fabregat A,
+  Sidiropoulos K, Cook J, Gillespie M, Haw R, Loney F, May B, Milacic M,
+  Rothfels K, Sevilla C, Shamovsky V, Shorser S, Varusai T, Weiser J, Wu G,
+  Stein L, Hermjakob H, D'Eustachio P. The reactome pathway knowledgebase.
+  Nucleic Acids Res. 2020 Jan 8;48(D1):D498-D503. doi: 10.1093/nar/gkz1031.
+  PubMed PMID: 31691815.
+  \item \href{https://reactome.org/ContentService/}{Reactome Content
+  Services API Documentation}
+  }
+
+\itemize{
+  \item Jassal B, Matthews L, Viteri G, Gong C, Lorente P, Fabregat A,
+  Sidiropoulos K, Cook J, Gillespie M, Haw R, Loney F, May B, Milacic M,
+  Rothfels K, Sevilla C, Shamovsky V, Shorser S, Varusai T, Weiser J, Wu G,
+  Stein L, Hermjakob H, D'Eustachio P. The reactome pathway knowledgebase.
+  Nucleic Acids Res. 2020 Jan 8;48(D1):D498-D503. doi: 10.1093/nar/gkz1031.
+  PubMed PMID: 31691815.
+  \item \href{https://reactome.org/ContentService/}{Reactome Content
+  Services API Documentation}
+  }
+}
+\seealso{
+\code{\link{rba_reactome_participant_of}}
+
+Other "Reactome Content Service, Physical Entity Queries": 
+\code{\link{rba_reactome_complex_subunits}()},
+\code{\link{rba_reactome_entity_other_forms}()},
+\code{\link{rba_reactome_participant_of}()}
+}
+\concept{"Reactome Content Service, Physical Entity Queries"}
+\concept{"Reactome Content Service, Queries Related to Participants"}

@@ -2,9 +2,7 @@
 % Please edit documentation in R/reactome_content.R
 \name{rba_reactome_pathways_low}
 \alias{rba_reactome_pathways_low}
-\title{This method traverses the event hierarchy and retrieves the list of all
-lower level pathways that have a diagram and contain the given
-PhysicalEntity or Event.}
+\title{Get lower level pathways Containing a 'Physical Entity' or Event}
 \usage{
 rba_reactome_pathways_low(
   entity_id,
@@ -15,13 +13,65 @@ rba_reactome_pathways_low(
 )
 }
 \arguments{
-\item{species}{}
+\item{entity_id}{The entity that should exist in the pathways.}
+
+\item{with_diagram}{Logical: only include pathways with diagram?}
+
+\item{all_forms}{Logical: should other variants of your provided entity_id
+be considered? (e.g. same molecule but in different compartment,
+secretory form etc.) refer to \code{\link{rba_reactome_participants}}'s
+"Details section" to learn more about how Reactome classifies molecules.}
+
+\item{species}{(optional) Numeric or Character: confine your search to a
+specific species by providing it's NCBI Taxonomy identifier
+(Human Taxonomy ID is 9606) or species name (e.g. "Homo sapiens").
+Refer to \code{\link{rba_reactome_species}} or
+ \href{https://reactome.org/content/schema/objects/Species}{Reactome
+ Data Schema: Entries: Species}.}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+Data frame where each row is a pathway that contains your provided
+  entity and columns are pertinent information.
 }
 \description{
-This method traverses the event hierarchy and retrieves the list of all
-lower level pathways that have a diagram and contain the given
-PhysicalEntity or Event.
+Use this function to search the event hierarcht and retireve a list of
+  all lower level pathways (non TopLevelPathway class) that contain
+  a given 'Physical Entity' or Event. See "Arguments section" on how to
+  modify your search.
 }
+\section{Corresponding API Resources}{
+
+ "GET https://reactome.org/ContentService/data/pathways/low/entity/{id}"\cr
+ "GET https://reactome.org/ContentService/data/pathways/low/diagram/
+ entity/{id}"\cr
+ "GET https://reactome.org/ContentService/data/pathways/low/diagram/
+ entity/{id}/allForms"
+}
+
+\examples{
+rba_reactome_pathways_low(entity_id = "R-HSA-199420")
+rba_reactome_pathways_low(entity_id = "R-HSA-199420", with_diagram = TRUE)
+rba_reactome_pathways_low(entity_id = "R-HSA-199420", with_diagram = TRUE,
+  all_forms = TRUE)
+}
+\references{
+\itemize{
+  \item Jassal B, Matthews L, Viteri G, Gong C, Lorente P, Fabregat A,
+  Sidiropoulos K, Cook J, Gillespie M, Haw R, Loney F, May B, Milacic M,
+  Rothfels K, Sevilla C, Shamovsky V, Shorser S, Varusai T, Weiser J, Wu G,
+  Stein L, Hermjakob H, D'Eustachio P. The reactome pathway knowledgebase.
+  Nucleic Acids Res. 2020 Jan 8;48(D1):D498-D503. doi: 10.1093/nar/gkz1031.
+  PubMed PMID: 31691815.
+  \item \href{https://reactome.org/ContentService/}{Reactome Content
+  Services API Documentation}
+  }
+}
+\seealso{
+Other "Reactome Content Service, Pathway Related Queries": 
+\code{\link{rba_reactome_pathways_events}()},
+\code{\link{rba_reactome_pathways_top}()}
+}
+\concept{"Reactome Content Service, Pathway Related Queries"}

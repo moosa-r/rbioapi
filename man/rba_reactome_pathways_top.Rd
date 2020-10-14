@@ -2,16 +2,60 @@
 % Please edit documentation in R/reactome_content.R
 \name{rba_reactome_pathways_top}
 \alias{rba_reactome_pathways_top}
-\title{This method retrieves the list of top level pathways for the given species}
+\title{Get Top Level Pathways in a Species}
 \usage{
 rba_reactome_pathways_top(species, ...)
 }
 \arguments{
-\item{species}{}
+\item{species}{Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
+ID is 9606.) or species name (e.g. "Homo sapiens"). Refer to
+\code{\link{rba_reactome_species}} or
+\href{https://reactome.org/content/schema/objects/Species}{Reactome
+Data Schema: Entries: Species}.}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+Data frame where each row is a Top Level Pathway and columns are
+  pertinent information.
 }
 \description{
-This method retrieves the list of top level pathways for the given species
+This function will Return a list of all pathways with the class
+  "TopLevelPathway" which are annotated in your provided species.
 }
+\details{
+Reactome's Events hierarchy for any specie will begin with pathways with
+  class "TopLevelPathway" (e.g. "Immune System", "Metabolism of proteins").
+  further down in the event's hierarchy tree, each TopLevelPathway has
+  has other events itself (e.g. "Adaptive immune system", "Innate immune
+  system"). Based on the chosen pathway, the hierarchy tree would typically
+  goes further down.
+}
+\section{Corresponding API Resources}{
+
+ "GET https://reactome.org/ContentService/data/pathways/top/{species}"
+}
+
+\examples{
+rba_reactome_pathways_top(species = 9606)
+rba_reactome_pathways_top(species = "Saccharomyces cerevisiae")
+}
+\references{
+\itemize{
+  \item Jassal B, Matthews L, Viteri G, Gong C, Lorente P, Fabregat A,
+  Sidiropoulos K, Cook J, Gillespie M, Haw R, Loney F, May B, Milacic M,
+  Rothfels K, Sevilla C, Shamovsky V, Shorser S, Varusai T, Weiser J, Wu G,
+  Stein L, Hermjakob H, D'Eustachio P. The reactome pathway knowledgebase.
+  Nucleic Acids Res. 2020 Jan 8;48(D1):D498-D503. doi: 10.1093/nar/gkz1031.
+  PubMed PMID: 31691815.
+  \item \href{https://reactome.org/ContentService/}{Reactome Content
+  Services API Documentation}
+  }
+}
+\seealso{
+Other "Reactome Content Service, Pathway Related Queries": 
+\code{\link{rba_reactome_pathways_events}()},
+\code{\link{rba_reactome_pathways_low}()}
+}
+\concept{"Reactome Content Service, Pathway Related Queries"}

@@ -2,28 +2,61 @@
 % Please edit documentation in R/reactome_content.R
 \name{rba_reactome_event_hierarchy}
 \alias{rba_reactome_event_hierarchy}
-\title{Events (pathways and reactions) in Reactome are organised in a hierarchical
-structure for every species. By following all ‘hasEvent’ relationships,
-this method retrieves the full event hierarchy for any given species.
-The result is a list of tree structures, one for each TopLevelPathway.
-Every event in these trees is represented by a PathwayBrowserNode.
-The latter contains the stable identifier, the name, the species, the url,
-the type, and the diagram of the particular event.}
+\title{Get Full Event Hierarchy of a Species}
 \usage{
 rba_reactome_event_hierarchy(species, ...)
 }
 \arguments{
-\item{species}{}
+\item{species}{Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
+ID is 9606.) or species name (e.g. "Homo sapiens"). Refer to
+\code{\link{rba_reactome_species}} or
+\href{https://reactome.org/content/schema/objects/Species}{Reactome
+Data Schema: Entries: Species}.}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+List which is a representation of the species's events hierarchy
+  described in the "Details section".
 }
 \description{
-Events (pathways and reactions) in Reactome are organised in a hierarchical
-structure for every species. By following all ‘hasEvent’ relationships,
-this method retrieves the full event hierarchy for any given species.
-The result is a list of tree structures, one for each TopLevelPathway.
-Every event in these trees is represented by a PathwayBrowserNode.
-The latter contains the stable identifier, the name, the species, the url,
-the type, and the diagram of the particular event.
+This function will retrieve the full Events hierarchy of your provided
+  species. Directly under each species, each child element is a "top Level
+  Pathway". You can traverse the events tree down by following the "children"
+  element.
 }
+\details{
+By Reactome's definition, Events are the building blocks of biological
+  processes and could be of two main classes: "Pathway" or
+  "Reaction-like events". The events are organized in a hierarchical
+  structure; and each event could be child or parent to another event; The
+  hierarchy will always begin with a "Top level pathway" event. Also note
+  that a given event could be part of more that one hierarchies.
+}
+\section{Corresponding API Resources}{
+
+ "GET https://reactome.org/ContentService/data/eventsHierarchy/{species}"
+}
+
+\examples{
+rba_reactome_event_hierarchy("Homo sapiens")
+rba_reactome_event_hierarchy(9606)
+}
+\references{
+\itemize{
+  \item Jassal B, Matthews L, Viteri G, Gong C, Lorente P, Fabregat A,
+  Sidiropoulos K, Cook J, Gillespie M, Haw R, Loney F, May B, Milacic M,
+  Rothfels K, Sevilla C, Shamovsky V, Shorser S, Varusai T, Weiser J, Wu G,
+  Stein L, Hermjakob H, D'Eustachio P. The reactome pathway knowledgebase.
+  Nucleic Acids Res. 2020 Jan 8;48(D1):D498-D503. doi: 10.1093/nar/gkz1031.
+  PubMed PMID: 31691815.
+  \item \href{https://reactome.org/ContentService/}{Reactome Content
+  Services API Documentation}
+  }
+}
+\seealso{
+Other "Reactome Content Service, Queries Related to Events": 
+\code{\link{rba_reactome_event_ancestors}()}
+}
+\concept{"Reactome Content Service, Queries Related to Events"}

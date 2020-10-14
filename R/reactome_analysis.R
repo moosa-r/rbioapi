@@ -91,7 +91,7 @@ rba_ba_reactome_input = function(input,
 #' @param p_value
 #' @param include_disease
 #' @param min
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param max
 #'
 #' @return
@@ -253,7 +253,7 @@ rba_reactome_analysis = function(input,
 #' @param resource
 #' @param diagram_profile
 #' @param analysis_profile
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param fireworks_profile
 #'
 #' @return
@@ -360,7 +360,7 @@ rba_reactome_analysis_pdf = function(token,
 #' @param token
 #' @param request
 #' @param save_to
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param resource
 #'
 #' @return
@@ -456,7 +456,7 @@ rba_reactome_analysis_download = function(token,
 #' /#/download/{token}/result.json. Note: The submitted file can be gzipped.
 #'
 #' @param input
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param input_type
 #'
 #' @return
@@ -516,7 +516,7 @@ rba_reactome_analysis_import = function(input,
 #' @param input_type
 #' @param projection
 #' @param interactors
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #'
 #' @return
 #' @export
@@ -600,7 +600,7 @@ rba_reactome_analysis_mapping = function(input,
 #' @param resource
 #' @param p_value
 #' @param min
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param max
 #'
 #' @return
@@ -706,7 +706,7 @@ rba_reactome_analysis_species = function(species_dbid,
 #' @param p_value
 #' @param include_disease
 #' @param min
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param max
 #'
 #' @return

@@ -2,18 +2,74 @@
 % Please edit documentation in R/reactome_content.R
 \name{rba_reactome_interactors_psicquic}
 \alias{rba_reactome_interactors_psicquic}
-\title{Retrieve clustered interaction, sorted by score, of a given accession(s)
-by resource.}
+\title{The interface From Reactome to PSICQUIC}
 \usage{
-rba_reactome_interactors_psicquic(resource, proteins, details = "details", ...)
+rba_reactome_interactors_psicquic(
+  proteins = NA,
+  resource = NA,
+  details = TRUE,
+  ...
+)
 }
 \arguments{
-\item{proteins}{}
+\item{proteins}{Proteins to retrieve PSICQUIC interactors.}
+
+\item{resource}{The PSICQUIC resource for yout provided proteins. Call
+rba_reactome_interactors_psicquic() without argument to get the available
+options.}
+
+\item{details}{Logical: If TRUE (default) a detailed list of interactors
+will be returned. If FALSE, only a summary of available interactors will
+be returned.}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+Depending your input, a list containg the detailed or summary of
+  PSICQUIC interactions or a data frame of all regesiterd PSICQUIC
+  resources.
 }
 \description{
-Retrieve clustered interaction, sorted by score, of a given accession(s)
-by resource.
+You can call this function in two scenarios:
+  1- To retrieve information of all available PSICQUIC resources, call the
+  function without providing any argument; i.e
+  rba_reactome_interactors_psicquic().\cr
+  2-To retrieve a list of interactors of specific protein(s), fill out the
+  function's arguments.
 }
+\section{Corresponding API Resources}{
+
+ "POST https://reactome.org/ContentService/interactors/psicquic/molecules/
+   {resource}/details"\cr
+ "POST https://reactome.org/ContentService/interactors/psicquic/molecules/
+   {resource}/summary"\cr
+ "GET https://reactome.org/ContentService/interactors/psicquic/resources"
+}
+
+\examples{
+rba_reactome_interactors_psicquic()
+rba_reactome_interactors_psicquic(proteins = c("TP53", "MYC"),
+  resource = "BioGrid",
+  details = FALSE)
+rba_reactome_interactors_psicquic(proteins = c("TP53", "MYC"),
+  resource = "BioGrid",
+  details = TRUE)
+}
+\references{
+\itemize{
+  \item Jassal B, Matthews L, Viteri G, Gong C, Lorente P, Fabregat A,
+  Sidiropoulos K, Cook J, Gillespie M, Haw R, Loney F, May B, Milacic M,
+  Rothfels K, Sevilla C, Shamovsky V, Shorser S, Varusai T, Weiser J, Wu G,
+  Stein L, Hermjakob H, D'Eustachio P. The reactome pathway knowledgebase.
+  Nucleic Acids Res. 2020 Jan 8;48(D1):D498-D503. doi: 10.1093/nar/gkz1031.
+  PubMed PMID: 31691815.
+  \item \href{https://reactome.org/ContentService/}{Reactome Content
+  Services API Documentation}
+  }
+}
+\seealso{
+Other "Reactome Content Service, Molecule Interactors": 
+\code{\link{rba_reactome_interactors_static}()}
+}
+\concept{"Reactome Content Service, Molecule Interactors"}

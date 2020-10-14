@@ -2,43 +2,152 @@
 % Please edit documentation in R/reactome_content.R
 \name{rba_reactome_exporter_diagram}
 \alias{rba_reactome_exporter_diagram}
-\title{This method accepts identifiers for Event class instances.
-When a diagrammed pathway is provided, the diagram is exported to the
-specified format. When a subpathway is provided, the diagram for
-the parent is exported and the events that are part of the subpathways
-are selected. When a reaction is provided, the diagram containing the
-reaction is exported and the reaction is selected.}
+\title{Get a Reactome Event Diagram}
 \usage{
 rba_reactome_exporter_diagram(
   event_id,
-  output_format = "png",
   save_to = NA,
-  quality = 5,
-  flg = NA,
+  create_document = FALSE,
+  resource = "TOTAL",
+  diagram_profile = "Modern",
+  analysis_profile = "Standard",
+  token = NA,
+  exp_column = NA,
+  document_level = 1,
+  output_format = "png",
+  image_quality = 5,
+  flag_element = NA,
   flg_interactors = TRUE,
   sel = NA,
   title = TRUE,
   margin = 15,
-  ehld = TRUE,
-  diagram_profile = "Modern",
-  token = NA,
-  resource = "TOTAL",
-  analysis_profile = "Standard",
-  exp_column = NA,
+  ehld = FALSE,
   ...
 )
 }
 \arguments{
-\item{exp_column}{}
+\item{event_id}{Reactome event's identifier.}
+
+\item{save_to}{NA or Character:\itemize{
+\item NA: Save the file to an automatically-generated path.
+\item Character string: A valid file path to save the file to.}}
+
+\item{create_document}{logical: Create PDF document instead of image? (
+default = FALSE)}
+
+\item{resource}{The analysis resource for which the results will be
+overlaid on top of the given pathways overview,}
+
+\item{diagram_profile}{Diagram color profile, should be either "Modern"
+(default) or "Standard".}
+
+\item{analysis_profile}{Analysis profile, should be one of: "Standard"
+(default), "Strosobar" or "Copper Plus"}
+
+\item{token}{The analysis Token for which the results will be overlaid on
+top of the given pathways overview.}
+
+\item{exp_column}{numeric: (only if token is provided) Specify the
+expression column for the overlay.}
+
+\item{document_level}{numeric: (Only if "create_document" is TRUE) if 0
+(default) the event's children will not be included in the PDF document.
+ Set this to 1 to include event's children.}
+
+\item{output_format}{(Only if "create_document" is FALSE) Image format
+of the saved diagram. Can be one of: png (default), jpeg, svg or gif.}
+
+\item{image_quality}{Numeric: (Only if "create_document" is FALSE), a number
+ranging from 1 to 10. 1 is the lowest quality and 10 is the highest
+(default = 5).}
+
+\item{flag_element}{(Only if "create_document" is FALSE) gene name, protein
+ID, chemical ID or Reactome ID of a diagram's element to be flagged.}
+
+\item{flg_interactors}{Logical: (Only if "create_document" is FALSE) Should
+the interactor be considered when flagging a diagram element? (default
+= TRUE)}
+
+\item{sel}{(Only if "create_document" is FALSE) CSV line for highlighting
+element(s) selection in the diagram.}
+
+\item{title}{Logical: (Only if "create_document" is FALSE) Should the pathway
+name be displayed below the image? (default = TRUE)}
+
+\item{margin}{Numeric: (Only if "create_document" is FALSE) A number ranging
+from 0 to 20 to set as the image's margin. (default = 15)}
+
+\item{ehld}{logical: (Only if "create_document" is FALSE) Should
+"Enhanced High Level Diagram" be considered?}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+NULL, Based to the inputs, an image or PDF file will be saved to
+  disk.
 }
 \description{
-This method accepts identifiers for Event class instances.
-When a diagrammed pathway is provided, the diagram is exported to the
-specified format. When a subpathway is provided, the diagram for
-the parent is exported and the events that are part of the subpathways
-are selected. When a reaction is provided, the diagram containing the
-reaction is exported and the reaction is selected.
+This function could be called in two scenarios:\cr
+  1- With create_document = FALSE: To retrieve an image of that event's
+  Diagram.\cr
+  2- With create_document = TRUE: To retrieve a PDF document with the
+  event's diagram image and additional information.\cr
+  see "Details section" for more information
 }
+\details{
+If the function is called with create_document = FALSE:\cr
+  The result will be an image with the format provided in "output_format"
+  argument. If the provided event ID refers to a pathway, the image's
+  content will be the that pathways diagram. If the provided event ID refers
+  to a sub-pathway or reaction event, the parent pathway's diagram will be
+  exported, with that reaction or sub-pathway's events highlighted.\cr
+  Note that to export an image of reaction-like event separately, you should
+  use \code{\link{rba_reactome_exporter_reaction}}.\cr\cr
+  If the function is called with create_document = TRUE:\cr
+  A PDF document will contain an image of the event's diagram and the
+  following information of that events: Summation, Literature references,
+  Edit history type, location, compartments and diseases.
+  note that if you call the function with "document level = 1", information
+  of your provided event's children will also be included.
+}
+\section{Corresponding API Resources}{
+
+  "GET https://reactome.org/ContentService/exporter/diagram/{identifier}
+  .{ext}"\cr
+  "GET https://reactome.org/ContentService/exporter/document/event/
+  {identifier}.pdf"
+}
+
+\examples{
+\dontrun{rba_reactome_exporter_diagram(event_id = "R-HSA-177929",
+  create_document = FALSE)}
+\dontrun{rba_reactome_exporter_diagram(event_id = "R-HSA-6787403",
+  create_document = FALSE)}
+\dontrun{rba_reactome_exporter_diagram(event_id = "R-HSA-177929",
+  create_document = TRUE)}
+\dontrun{rba_reactome_exporter_diagram(event_id = "R-HSA-177929",
+  output_format = "svg",
+  save_to = "reactome_event_diagram.svg")}
+}
+\references{
+\itemize{
+  \item Jassal B, Matthews L, Viteri G, Gong C, Lorente P, Fabregat A,
+  Sidiropoulos K, Cook J, Gillespie M, Haw R, Loney F, May B, Milacic M,
+  Rothfels K, Sevilla C, Shamovsky V, Shorser S, Varusai T, Weiser J, Wu G,
+  Stein L, Hermjakob H, D'Eustachio P. The reactome pathway knowledgebase.
+  Nucleic Acids Res. 2020 Jan 8;48(D1):D498-D503. doi: 10.1093/nar/gkz1031.
+  PubMed PMID: 31691815.
+  \item \href{https://reactome.org/ContentService/}{Reactome Content
+  Services API Documentation}
+  }
+}
+\seealso{
+\code{\link{rba_reactome_exporter_reaction}}
+
+Other "Reactome Content Service, Format Exporter": 
+\code{\link{rba_reactome_exporter_event}()},
+\code{\link{rba_reactome_exporter_overview}()},
+\code{\link{rba_reactome_exporter_reaction}()}
+}
+\concept{"Reactome Content Service, Format Exporter"}

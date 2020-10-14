@@ -2,18 +2,51 @@
 % Please edit documentation in R/reactome_content.R
 \name{rba_reactome_people_name}
 \alias{rba_reactome_people_name}
-\title{Retrieves a list of people in Reactome with either their first or last name
-partly/exactly matching the given string.}
+\title{Get Persons Information by Name}
 \usage{
-rba_reactome_people_name(person_name, exact = FALSE, ...)
+rba_reactome_people_name(person_name, exact_match = FALSE, ...)
 }
 \arguments{
-\item{exact}{}
+\item{person_name}{first and last name of the person}
+
+\item{exact_match}{Logical: should the provided name be considered as
+an exact match? (default = FALSE)}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+List where each element is a search hit contains the person's
+  information.
 }
 \description{
-Retrieves a list of people in Reactome with either their first or last name
-partly/exactly matching the given string.
+Using this function you can query peaple by partially matching or exact
+  name and retrieve a list of matching people in Reactome.
 }
+\section{Corresponding API Resources}{
+
+ "GET https://reactome.org/ContentService/data/people/name/{name}"\cr
+ "GET https://reactome.org/ContentService/data/people/name/{name}/exact"
+}
+
+\examples{
+rba_reactome_people_name("Jupe")
+rba_reactome_people_name("Steve Jupe", exact_match = TRUE)
+}
+\references{
+\itemize{
+  \item Jassal B, Matthews L, Viteri G, Gong C, Lorente P, Fabregat A,
+  Sidiropoulos K, Cook J, Gillespie M, Haw R, Loney F, May B, Milacic M,
+  Rothfels K, Sevilla C, Shamovsky V, Shorser S, Varusai T, Weiser J, Wu G,
+  Stein L, Hermjakob H, D'Eustachio P. The reactome pathway knowledgebase.
+  Nucleic Acids Res. 2020 Jan 8;48(D1):D498-D503. doi: 10.1093/nar/gkz1031.
+  PubMed PMID: 31691815.
+  \item \href{https://reactome.org/ContentService/}{Reactome Content
+  Services API Documentation}
+  }
+}
+\seealso{
+Other "Reactome Content Service, Person Queries": 
+\code{\link{rba_reactome_people_id}()}
+}
+\concept{"Reactome Content Service, Person Queries"}

@@ -2,28 +2,59 @@
 % Please edit documentation in R/reactome_content.R
 \name{rba_reactome_orthology}
 \alias{rba_reactome_orthology}
-\title{Reactome uses the set of manually curated human reactions to computationally
-infer reactions in twenty evolutionarily divergent eukaryotic species for
-which high-quality whole-genome sequence data are available, and hence a
-comprehensive and high-quality set of protein predictions exists. Thus,
-this method retrieves the orthology for any given event or entity in the
-specified species. Here you can find more information about the
-computationally inferred events.}
+\title{Get Orthologous (Computationally Inferred) Events}
 \usage{
-rba_reactome_orthology(ids, species_id, ...)
+rba_reactome_orthology(ids, species_dbid, ...)
 }
 \arguments{
-\item{species_id}{}
+\item{ids}{Human Reactome event ID(s) to retrieve their orthologous
+events.}
+
+\item{species_dbid}{Reactome database ID (DbId) of the target species. (e.g
+Mus musculus is 48892). Refer to
+ \code{\link{rba_reactome_species}} or
+ \href{https://reactome.org/content/schema/objects/Species}{Reactome
+ Data Schema: Entries: Species}.}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+List containing found Orthologous event(s) in your provided species
+  and their pertinent information.
 }
 \description{
-Reactome uses the set of manually curated human reactions to computationally
-infer reactions in twenty evolutionarily divergent eukaryotic species for
-which high-quality whole-genome sequence data are available, and hence a
-comprehensive and high-quality set of protein predictions exists. Thus,
-this method retrieves the orthology for any given event or entity in the
-specified species. Here you can find more information about the
-computationally inferred events.
+Reactome Computationally incorporate manually curated human reactions and
+  PANTHER's protein homology data to infer events in other euakaryotic
+  species.
 }
+\details{
+In version 73 (11 June 2020), using an orthology-based approach,
+  Homo sapiens events was projected to 18,654 orthologous pathways (with
+  81,835 orthologous proteins) in 15 non-human species.\cr
+  Refer to \href{https://reactome.org/documentation/inferred-events}{
+  Reactome Computationally Inferred Events} for more information.
+}
+\section{Corresponding API Resources}{
+
+ "POST https://reactome.org/ContentService/data/orthologies/ids/
+   species/{speciesId}"
+}
+
+\examples{
+rba_reactome_orthology(ids = c("R-HSA-6799198", " R-HSA-72764"),
+  species_id = 49633)
+}
+\references{
+\itemize{
+  \item Jassal B, Matthews L, Viteri G, Gong C, Lorente P, Fabregat A,
+  Sidiropoulos K, Cook J, Gillespie M, Haw R, Loney F, May B, Milacic M,
+  Rothfels K, Sevilla C, Shamovsky V, Shorser S, Varusai T, Weiser J, Wu G,
+  Stein L, Hermjakob H, D'Eustachio P. The reactome pathway knowledgebase.
+  Nucleic Acids Res. 2020 Jan 8;48(D1):D498-D503. doi: 10.1093/nar/gkz1031.
+  PubMed PMID: 31691815.
+  \item \href{https://reactome.org/ContentService/}{Reactome Content
+  Services API Documentation}
+  }
+}
+\concept{"Reactome Content Service, Orthology Related Queries"}

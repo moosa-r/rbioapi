@@ -2,16 +2,85 @@
 % Please edit documentation in R/reactome_content.R
 \name{rba_reactome_interactors_static}
 \alias{rba_reactome_interactors_static}
-\title{Retrieve a interaction information of a given accession}
+\title{Get Static(IntAct) Interaction Information of a Protein}
 \usage{
-rba_reactome_interactors_static(proteins, details = "details", ...)
+rba_reactome_interactors_static(
+  proteins,
+  endpoint = "details",
+  only_diagrammed = FALSE,
+  species = NA,
+  ...
+)
 }
 \arguments{
-\item{...}{}
+\item{proteins}{Uniprot proteins accession(s). If endpoint = "pathway",
+only a single protein accession can be provided.}
+
+\item{endpoint}{Can be one of: \enumerate{
+\item "details": To return a detailed information of your provided
+protein(s) accession.
+\item "summary": To return a summary of your provided protein(s) accession
+\item "pathway": To return a list of pathways containg the interacting
+molecules (excluding TopLevelPathway class).}}
+
+\item{only_diagrammed}{Logical: (only when "endpoint = "pathway")
+If TRUE, pathways without diagram will be excluded. (default = FALSE)}
+
+\item{species}{Only when "endpoint = "pathway", The scientific name
+of the species to search for the pathways. Refer to
+ \code{\link{rba_reactome_species}} or
+ \href{https://reactome.org/content/schema/objects/Species}{Reactome
+ Data Schema: Entries: Species}.}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+List which it's content varies based on the  provided "endpoint"
+  argument.
 }
 \description{
-Retrieve a interaction information of a given accession
+Reactome maintain a locally host a version of IntAct(Static) interactions
+  database. Using this funtion, you can retrieve IntAct information of
+  a prtotein(s) in two scenarios:\cr
+  1- If endpoint = "details" or "summary": Retrieve a detailed/summary
+    information of your provided protein accesions(s) from IntAct database.
+  2- If endpoint = "pathway", Retrieve a list of Reactome pathways which
+  include your provided protein accession. Pathways with the class
+  "TopLevelPathway" will be excluded.
 }
+\section{Corresponding API Resources}{
+
+ "POST https://reactome.org/ContentService/interactors/static/
+ molecules/details"\cr
+ "POST https://reactome.org/ContentService/interactors/static/
+ molecules/summary"\cr
+ "GET https://reactome.org/ContentService/interactors/static/
+ molecules/pathways"
+}
+
+\examples{
+rba_reactome_interactors_static(proteins = "Q9BXM7-1",
+  endpoint = "pathways", species = "Homo sapiens")
+rba_reactome_interactors_static(proteins = c("Q9BXM7-1", "Q13501"),
+  endpoint = "details")
+rba_reactome_interactors_static(proteins = c("Q9BXM7-1", "Q13501"),
+  endpoint = "summary")
+}
+\references{
+\itemize{
+  \item Jassal B, Matthews L, Viteri G, Gong C, Lorente P, Fabregat A,
+  Sidiropoulos K, Cook J, Gillespie M, Haw R, Loney F, May B, Milacic M,
+  Rothfels K, Sevilla C, Shamovsky V, Shorser S, Varusai T, Weiser J, Wu G,
+  Stein L, Hermjakob H, D'Eustachio P. The reactome pathway knowledgebase.
+  Nucleic Acids Res. 2020 Jan 8;48(D1):D498-D503. doi: 10.1093/nar/gkz1031.
+  PubMed PMID: 31691815.
+  \item \href{https://reactome.org/ContentService/}{Reactome Content
+  Services API Documentation}
+  }
+}
+\seealso{
+Other "Reactome Content Service, Molecule Interactors": 
+\code{\link{rba_reactome_interactors_psicquic}()}
+}
+\concept{"Reactome Content Service, Molecule Interactors"}

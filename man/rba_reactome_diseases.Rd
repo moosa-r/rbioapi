@@ -2,18 +2,45 @@
 % Please edit documentation in R/reactome_content.R
 \name{rba_reactome_diseases}
 \alias{rba_reactome_diseases}
-\title{It retrieves the list of diseases annotated in Reactome OR
-list of disease DOIDs annotated in Reactome}
+\title{Reactome Diseases}
 \usage{
 rba_reactome_diseases(doid = FALSE, ...)
 }
 \arguments{
-\item{...}{}
+\item{doid}{(logical) Return disease DOIDs instead of diseases?
+(default = FALSE)}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+Data frame containing all the disease annotation available at
+  Reactome. If doid was set to TRUE, DOID info will be returned instead.
 }
 \description{
-It retrieves the list of diseases annotated in Reactome OR
-list of disease DOIDs annotated in Reactome
+This function Retrieve a list of all diseases or disease DOIDs annotated in
+  Reactome.
 }
+\section{Corresponding API Resources}{
+
+ "GET https://reactome.org/ContentService/GET data/diseases"\cr
+ "GET https://reactome.org/ContentService/GET data/diseases/doid"
+}
+
+\examples{
+ rba_reactome_diseases()
+ rba_reactome_diseases(doid = TRUE)
+}
+\references{
+\itemize{
+  \item Jassal B, Matthews L, Viteri G, Gong C, Lorente P, Fabregat A,
+  Sidiropoulos K, Cook J, Gillespie M, Haw R, Loney F, May B, Milacic M,
+  Rothfels K, Sevilla C, Shamovsky V, Shorser S, Varusai T, Weiser J, Wu G,
+  Stein L, Hermjakob H, D'Eustachio P. The reactome pathway knowledgebase.
+  Nucleic Acids Res. 2020 Jan 8;48(D1):D498-D503. doi: 10.1093/nar/gkz1031.
+  PubMed PMID: 31691815.
+  \item \href{https://reactome.org/ContentService/}{Reactome Content
+  Services API Documentation}
+  }
+}
+\concept{"Reactome Content Service, Disease Related Queries"}

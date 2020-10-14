@@ -7,11 +7,33 @@
 rba_reactome_version(...)
 }
 \arguments{
-\item{...}{}
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+Character string containing the version of Reactome database.
 }
 \description{
-The version number of current database
+Returns the current version of Reactome database.
 }
+\section{Corresponding API Resources}{
+
+ "GET https://reactome.org/ContentService/data/database/version"
+}
+
+\examples{
+rba_reactome_version()
+}
+\references{
+\itemize{
+  \item Jassal B, Matthews L, Viteri G, Gong C, Lorente P, Fabregat A,
+  Sidiropoulos K, Cook J, Gillespie M, Haw R, Loney F, May B, Milacic M,
+  Rothfels K, Sevilla C, Shamovsky V, Shorser S, Varusai T, Weiser J, Wu G,
+  Stein L, Hermjakob H, D'Eustachio P. The reactome pathway knowledgebase.
+  Nucleic Acids Res. 2020 Jan 8;48(D1):D498-D503. doi: 10.1093/nar/gkz1031.
+  PubMed PMID: 31691815.
+  \item \href{https://reactome.org/ContentService/}{Reactome Content
+  Services API Documentation}
+  }
+}
+\concept{"Reactome Content Service, Database Info Queries"}

@@ -2,22 +2,53 @@
 % Please edit documentation in R/reactome_content.R
 \name{rba_reactome_entity_other_forms}
 \alias{rba_reactome_entity_other_forms}
-\title{Retrieves a list containing all other forms of the given PhysicalEntity.
-These other forms are PhysicalEntities that share the same ReferenceEntity
-identifier, e.g. PTEN H93R R-HSA-2318524 and PTEN C124R R-HSA-2317439
-are two forms of PTEN.}
+\title{Get Other forms of a Reactome Entity}
 \usage{
 rba_reactome_entity_other_forms(entity_id, ...)
 }
 \arguments{
-\item{entity_id}{}
+\item{entity_id}{Reactome's entity ID.}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+Data frame where each row is other forms of your provided Entity ID
+  and columns are pertinent information.
 }
 \description{
-Retrieves a list containing all other forms of the given PhysicalEntity.
-These other forms are PhysicalEntities that share the same ReferenceEntity
-identifier, e.g. PTEN H93R R-HSA-2318524 and PTEN C124R R-HSA-2317439
-are two forms of PTEN.
+This function retrieve a list containing all other forms of your provided
+  Physical Entity ID.
 }
+\details{
+According to Reactome API documentation,"These other forms are Physical
+  Entities that share the same Reference Entity identifier, e.g. PTEN
+  H93R R-HSA-2318524 and PTEN C124R R-HSA-2317439 are two forms of PTEN."
+}
+\section{Corresponding API Resources}{
+
+ "GET https://reactome.org/ContentService/data/entity/{id}/otherForms"
+}
+
+\examples{
+rba_reactome_entity_other_forms("R-HSA-199420")
+}
+\references{
+\itemize{
+  \item Jassal B, Matthews L, Viteri G, Gong C, Lorente P, Fabregat A,
+  Sidiropoulos K, Cook J, Gillespie M, Haw R, Loney F, May B, Milacic M,
+  Rothfels K, Sevilla C, Shamovsky V, Shorser S, Varusai T, Weiser J, Wu G,
+  Stein L, Hermjakob H, D'Eustachio P. The reactome pathway knowledgebase.
+  Nucleic Acids Res. 2020 Jan 8;48(D1):D498-D503. doi: 10.1093/nar/gkz1031.
+  PubMed PMID: 31691815.
+  \item \href{https://reactome.org/ContentService/}{Reactome Content
+  Services API Documentation}
+  }
+}
+\seealso{
+Other "Reactome Content Service, Physical Entity Queries": 
+\code{\link{rba_reactome_complex_subunits}()},
+\code{\link{rba_reactome_participant_of}()},
+\code{\link{rba_reactome_participants}()}
+}
+\concept{"Reactome Content Service, Physical Entity Queries"}

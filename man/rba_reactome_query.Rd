@@ -2,7 +2,7 @@
 % Please edit documentation in R/reactome_content.R
 \name{rba_reactome_query}
 \alias{rba_reactome_query}
-\title{all in one: query Reactome Data: Common data retrieval}
+\title{Query and Retrieve any Reactome knowledge-base Object}
 \usage{
 rba_reactome_query(
   ids,
@@ -13,11 +13,56 @@ rba_reactome_query(
 )
 }
 \arguments{
-\item{attribute_name}{}
+\item{ids}{A single or Multiple database IDs (DbId), Stable IDs (StId) or
+a mixture of both.}
+
+\item{enhanced}{Logical: (Default = FALSE) If 'TRUE' more information on
+the provided entry will be returned. (You can set this argument to 'TRUE'
+Only when you provide a single ID).}
+
+\item{map}{(Default = FALSE) Should the provided IDs be mapped? This
+  argument will only be considered when you provide multiple IDs.
+(e.g. when you provide previous version of stable identifiers.)}
+
+\item{attribute_name}{(Optional) Only Return an Attribute of the provided
+Database Object. (You can use this argument Only when you
+provide a single ID)}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+List containing your query outputs.
 }
 \description{
-all in one: query Reactome Data: Common data retrieval
+Using this Comprehensive function, You can Retrieve any object from
+  \href{https://reactome.org/content/schema/DatabaseObject}{Reactome
+  knowledge-base}
 }
+\section{Corresponding API Resources}{
+
+ "POST https://reactome.org/ContentService/data/query/ids"\cr
+ "POST https://reactome.org/ContentService/data/query/ids/map"
+ "GET https://reactome.org/ContentService/data/query/{id}"
+ "GET https://reactome.org/ContentService//data/query/enhanced/{id}"
+ "GET https://reactome.org/ContentService/data/query/{id}/{attributeName}"
+}
+
+\examples{
+rba_reactome_query(ids = c("8953958", "11982506", "R-ALL-9649879"))
+rba_reactome_query(ids = "R-HSA-9656256", enhanced = TRUE)
+rba_reactome_query(ids = "8863054", attribute_name = "displayName")
+}
+\references{
+\itemize{
+  \item Jassal B, Matthews L, Viteri G, Gong C, Lorente P, Fabregat A,
+  Sidiropoulos K, Cook J, Gillespie M, Haw R, Loney F, May B, Milacic M,
+  Rothfels K, Sevilla C, Shamovsky V, Shorser S, Varusai T, Weiser J, Wu G,
+  Stein L, Hermjakob H, D'Eustachio P. The reactome pathway knowledgebase.
+  Nucleic Acids Res. 2020 Jan 8;48(D1):D498-D503. doi: 10.1093/nar/gkz1031.
+  PubMed PMID: 31691815.
+  \item \href{https://reactome.org/ContentService/}{Reactome Content
+  Services API Documentation}
+  }
+}
+\concept{"Reactome Content Service, Common Data Retrieval"}

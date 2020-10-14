@@ -5,7 +5,7 @@
 \title{A person by his identifiers}
 \usage{
 rba_reactome_people_id(
-  id,
+  person_id,
   authored_pathways = FALSE,
   publications = FALSE,
   attribute_name = NA,
@@ -13,11 +13,51 @@ rba_reactome_people_id(
 )
 }
 \arguments{
-\item{...}{}
+\item{person_id}{Reactome database ID (DbId) or ORCHID ID}
+
+\item{authored_pathways}{Logical: Only return Pathway list authored by the
+person? (default = FALSE)}
+
+\item{publications}{Logical: Only return publications list authored by the
+person? (Defalt = FALSE)}
+
+\item{attribute_name}{(optional) A Reactome person attribute to retunt only.
+see \href{https://reactome.org/content/schema/Person}{Reactome Data
+Schema: person} for available options.}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+List containging the requested informations of your provided
+  person.
 }
 \description{
 A person by his identifiers
 }
+\section{Corresponding API Resources}{
+
+ "GET https://reactome.org/ContentService"
+}
+
+\examples{
+rba_reactome_people_id("391309")
+rba_reactome_people_id(person_id = "391309", authored_pathways = TRUE)
+}
+\references{
+\itemize{
+  \item Jassal B, Matthews L, Viteri G, Gong C, Lorente P, Fabregat A,
+  Sidiropoulos K, Cook J, Gillespie M, Haw R, Loney F, May B, Milacic M,
+  Rothfels K, Sevilla C, Shamovsky V, Shorser S, Varusai T, Weiser J, Wu G,
+  Stein L, Hermjakob H, D'Eustachio P. The reactome pathway knowledgebase.
+  Nucleic Acids Res. 2020 Jan 8;48(D1):D498-D503. doi: 10.1093/nar/gkz1031.
+  PubMed PMID: 31691815.
+  \item \href{https://reactome.org/ContentService/}{Reactome Content
+  Services API Documentation}
+  }
+}
+\seealso{
+Other "Reactome Content Service, Person Queries": 
+\code{\link{rba_reactome_people_name}()}
+}
+\concept{"Reactome Content Service, Person Queries"}

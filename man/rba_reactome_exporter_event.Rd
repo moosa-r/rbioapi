@@ -2,16 +2,58 @@
 % Please edit documentation in R/reactome_content.R
 \name{rba_reactome_exporter_event}
 \alias{rba_reactome_exporter_event}
-\title{Exports a given pathway or reaction to SBGN or SBML}
+\title{Exports A Reactome Event to SBGN or SBML}
 \usage{
 rba_reactome_exporter_event(event_id, output_format, save_to = NA, ...)
 }
 \arguments{
-\item{save_to}{}
+\item{event_id}{Reactome event's database IDs (DbId) or Stable IDs (StId).}
+
+\item{output_format}{Either "sbgn" or "sbml".}
+
+\item{save_to}{NA or Character:\itemize{
+\item NA: Save the file to an automatically-generated path.
+\item Character string: A valid file path to save the file to.}}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+NULL, According to the inputs, a SBGN or SBML file will be saved to
+  disk.
 }
 \description{
-Exports a given pathway or reaction to SBGN or SBML
+This function will export a provided Reactome Event (Pathway or Reaction)
+  to a SBGN (Systems Biology Graphical Notation) or SBML (Systems Biology
+  Markup Language)
 }
+\section{Corresponding API Resources}{
+
+ "GET https://reactome.org/ContentService//exporter/event/
+ {identifier}.sbgn"\cr
+ "GET https://reactome.org/ContentService//exporter/event/
+ {identifier}.sbml"
+}
+
+\examples{
+
+}
+\references{
+\itemize{
+  \item Jassal B, Matthews L, Viteri G, Gong C, Lorente P, Fabregat A,
+  Sidiropoulos K, Cook J, Gillespie M, Haw R, Loney F, May B, Milacic M,
+  Rothfels K, Sevilla C, Shamovsky V, Shorser S, Varusai T, Weiser J, Wu G,
+  Stein L, Hermjakob H, D'Eustachio P. The reactome pathway knowledgebase.
+  Nucleic Acids Res. 2020 Jan 8;48(D1):D498-D503. doi: 10.1093/nar/gkz1031.
+  PubMed PMID: 31691815.
+  \item \href{https://reactome.org/ContentService/}{Reactome Content
+  Services API Documentation}
+  }
+}
+\seealso{
+Other "Reactome Content Service, Format Exporter": 
+\code{\link{rba_reactome_exporter_diagram}()},
+\code{\link{rba_reactome_exporter_overview}()},
+\code{\link{rba_reactome_exporter_reaction}()}
+}
+\concept{"Reactome Content Service, Format Exporter"}

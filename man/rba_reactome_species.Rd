@@ -2,22 +2,44 @@
 % Please edit documentation in R/reactome_content.R
 \name{rba_reactome_species}
 \alias{rba_reactome_species}
-\title{This method retrieves the list of main species in Reactome knowledgebase,
-sorted by name, but having ‘Homo sapiens’ as the first one. It should be
-mentioned that for Reactome, main species are considered those have either
-manually curated or computationally inferred pathways.}
+\title{Get Reactome Species}
 \usage{
-rba_reactome_species(species_type = "all", ...)
+rba_reactome_species(only_main = FALSE, ...)
 }
 \arguments{
-\item{species_type}{}
+\item{only_main}{Logical: If set to TRUE, will only return species which
+have either manually-curated or computationally inferred pathways.}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+Data frame where each row is a species and columns are pertinent
+  information.
 }
 \description{
-This method retrieves the list of main species in Reactome knowledgebase,
-sorted by name, but having ‘Homo sapiens’ as the first one. It should be
-mentioned that for Reactome, main species are considered those have either
-manually curated or computationally inferred pathways.
+Use this function to retrieve a table of Available species in Reactome.
 }
+\section{Corresponding API Resources}{
+
+ "GET https://reactome.org/ContentService/data/species/all"\cr
+ "GET https://reactome.org/ContentService/data/species/main"
+}
+
+\examples{
+rba_reactome_species()
+rba_reactome_species(only_main = TRUE)
+}
+\references{
+\itemize{
+  \item Jassal B, Matthews L, Viteri G, Gong C, Lorente P, Fabregat A,
+  Sidiropoulos K, Cook J, Gillespie M, Haw R, Loney F, May B, Milacic M,
+  Rothfels K, Sevilla C, Shamovsky V, Shorser S, Varusai T, Weiser J, Wu G,
+  Stein L, Hermjakob H, D'Eustachio P. The reactome pathway knowledgebase.
+  Nucleic Acids Res. 2020 Jan 8;48(D1):D498-D503. doi: 10.1093/nar/gkz1031.
+  PubMed PMID: 31691815.
+  \item \href{https://reactome.org/ContentService/}{Reactome Content
+  Services API Documentation}
+  }
+}
+\concept{"Reactome Content Service, Species Related Queries"}
