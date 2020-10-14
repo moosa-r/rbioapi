@@ -15,6 +15,8 @@ rba_ensembl_transcript_haplotypes(
 }
 \arguments{
 \item{sequence}{}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
 }
 \value{
 

@@ -71,7 +71,8 @@ are not connected to any other proteins from the image?}
 \item{hide_structure_pics}{Logical: (Default = FALSE) Hide protein's
 structure picture from inside the bubbles?}
 
-\item{...}{}
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
 A network images which can be PNG or SVG depending on the inputs.

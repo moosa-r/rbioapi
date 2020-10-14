@@ -14,6 +14,8 @@ rba_ensembl_info_species(
 }
 \arguments{
 \item{expand}{}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
 }
 \value{
 

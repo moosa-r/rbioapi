@@ -10,7 +10,7 @@
 #' @param attribs
 #' @param d_prime
 #' @param r2
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param window_size
 #'
 #' @return
@@ -85,7 +85,7 @@ rba_ensembl_ld_variants = function(variant_id,
 #' @param species
 #' @param population_name
 #' @param d_prime
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param r2
 #'
 #' @return
@@ -154,7 +154,7 @@ rba_ensembl_ld_pairwise = function(variant_id_1,
 #' @param population_name
 #' @param species
 #' @param d_prime
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param r2
 #'
 #' @return

@@ -18,7 +18,8 @@ large number of reference publications to each protein. In order to reduce
 the output size, PubMed's results will be excluded from the results,
 unless stated otherwise (By setting this argument to TRUE).}
 
-\item{...}{}
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
 A data frame which every row is an assigned terms and the columns

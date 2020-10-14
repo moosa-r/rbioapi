@@ -23,6 +23,8 @@ rba_ensembl_overlap_region(
 }
 \arguments{
 \item{trim_upstream}{}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
 }
 \value{
 

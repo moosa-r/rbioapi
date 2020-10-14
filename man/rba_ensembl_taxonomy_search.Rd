@@ -13,6 +13,8 @@ rba_ensembl_taxonomy_search(
 }
 \arguments{
 \item{non_scientific_name}{}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
 }
 \value{
 

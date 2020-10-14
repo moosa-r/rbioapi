@@ -4,7 +4,7 @@
 #'
 #' @param term_id
 #' @param chart
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param ontology
 #'
 #' @return
@@ -64,7 +64,7 @@ rba_ensembl_ontology_ancestors = function(term_id,
 #' @param closest_term
 #' @param ontology
 #' @param subset
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param zero_distance
 #'
 #' @return
@@ -126,7 +126,7 @@ rba_ensembl_ontology_descendants = function(term_id,
 #'
 #' @param term_id
 #' @param relation
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param simple
 #'
 #' @return
@@ -177,7 +177,7 @@ rba_ensembl_ontology_id = function(term_id,
 #' @param name
 #' @param ontology
 #' @param relation
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param simple
 #'
 #' @return

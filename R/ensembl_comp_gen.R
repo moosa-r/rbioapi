@@ -3,7 +3,7 @@
 #' Retrieves a cafe tree of the gene tree using the gene tree stable identifier
 #'
 #' @param genetree_id
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param compara
 #'
 #' @return
@@ -51,7 +51,7 @@ rba_ensembl_cafe_genetree = function(genetree_id,
 #' @param compara
 #' @param db_type
 #' @param object_type
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #'
 #' @return
 #' @export
@@ -134,7 +134,7 @@ rba_ensembl_cafe_genetree_search = function(ensembl_id = NA,
 #' @param aligned
 #' @param compara
 #' @param member_source
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param sequence
 #'
 #' @return
@@ -208,7 +208,7 @@ rba_ensembl_family = function(familiy_id,
 #' @param external_db
 #' @param member_source
 #' @param object_type
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param sequence
 #' @param ensembl_id
 #'
@@ -318,7 +318,7 @@ rba_ensembl_familiy_search = function(ensembl_id = NA,
 #' @param compara
 #' @param prune_species
 #' @param prune_taxon
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param sequence
 #'
 #' @return
@@ -409,7 +409,7 @@ rba_ensembl_genetree = function(genetree_id,
 #' @param object_type
 #' @param prune_species
 #' @param prune_taxon
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param sequence
 #' @param ensembl_id
 #' @param nh_format
@@ -544,7 +544,7 @@ rba_ensembl_genetree_search = function(ensembl_id = NA,
 #' @param mask
 #' @param method
 #' @param species_set
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param species_set_group
 #'
 #' @return
@@ -652,7 +652,7 @@ rba_ensembl_alignment_region = function(region,
 #' @param sequence
 #' @param target_species
 #' @param target_taxon
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param type
 #' @param ensembl_id
 #'

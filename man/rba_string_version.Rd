@@ -7,7 +7,8 @@
 rba_string_version(...)
 }
 \arguments{
-\item{...}{}
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
 A list with STRING version and stable address.

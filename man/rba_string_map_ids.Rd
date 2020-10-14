@@ -15,9 +15,11 @@ rba_string_map_ids(ids, species = NA, echo_query = FALSE, limit = NA, ...)
 \item{echo_query}{(default = FALSE) Include your input IDs as a column of the
 results.}
 
-\item{limit}{(Numeric, Optional) A limit on the number of matches per input ID.}
+\item{limit}{(Numeric, Optional) A limit on the number of matches per input
+ID.}
 
-\item{...}{}
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
 A data frame with the mapped STRING IDs and other pertinent

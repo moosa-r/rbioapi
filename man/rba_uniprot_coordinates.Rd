@@ -9,6 +9,8 @@ rba_uniprot_coordinates(accession = NA, db_type = NA, db_id = NA, ...)
 }
 \arguments{
 \item{db_id}{}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
 }
 \value{
 

@@ -11,6 +11,8 @@ rba_uniprot_features_type(terms, type, categories = NA, ...)
 }
 \arguments{
 \item{categories}{}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
 }
 \value{
 

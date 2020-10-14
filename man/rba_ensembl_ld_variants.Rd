@@ -19,6 +19,8 @@ rba_ensembl_ld_variants(
 }
 \arguments{
 \item{window_size}{}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
 }
 \value{
 

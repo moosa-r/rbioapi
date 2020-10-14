@@ -12,7 +12,7 @@ rba_enrichr_add_list(gene_list, description = NA, ...)
 \item{description}{(optional) A name or description to be associated with your
 uploaded gene-set to Enrichr servers.}
 
-\item{...}{}
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
 }
 \value{
 A list with two unique IDs for your uploaded gene sets.

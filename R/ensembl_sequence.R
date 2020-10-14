@@ -13,7 +13,7 @@
 #' @param mask_feature
 #' @param object_type
 #' @param type
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param species
 #'
 #' @return
@@ -136,7 +136,7 @@ rba_ensembl_sequence_id = function(ids,
 #' @param expand_5prime
 #' @param format
 #' @param mask
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param mask_feature
 #'
 #' @return

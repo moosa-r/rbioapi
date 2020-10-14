@@ -15,8 +15,10 @@
 #'   (Recommended, but optional if your input is less than 100 IDs.)
 #' @param echo_query (default = FALSE) Include your input IDs as a column of the
 #'   results.
-#' @param limit (Numeric, Optional) A limit on the number of matches per input ID.
-#' @param ...
+#' @param limit (Numeric, Optional) A limit on the number of matches per input
+#'   ID.
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
+#'   arguments documentation for more information on available options.
 #'
 #' @return A data frame with the mapped STRING IDs and other pertinent
 #'   information.
@@ -139,7 +141,8 @@ rba_string_map_ids = function(ids,
 #'   are not connected to any other proteins from the image?
 #' @param hide_structure_pics Logical: (Default = FALSE) Hide protein's
 #'   structure picture from inside the bubbles?
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
+#'   arguments documentation for more information on available options.
 #'
 #' @return A network images which can be PNG or SVG depending on the inputs.
 #'
@@ -321,7 +324,8 @@ rba_string_network_image = function(ids,
 #'   functional associations.
 #'   \item "physical": The edges indicate that two proteins have a phyical
 #'   interaction or are parts of a complex.}
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
+#'   arguments documentation for more information on available options.
 #'
 #' @return A data frame which each row is a network interaction and the
 #'   columns contains interactor information and interaction scores.
@@ -445,7 +449,8 @@ rba_string_interactions_network = function(ids,
 #' @param limit Limit the number returned interaction partners per each of
 #'   your input proteins. (e.g. Number of the most confident interaction partner
 #'   to return per each input protein.)
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
+#'   arguments documentation for more information on available options.
 #'
 #' @return A data frame which each row is a network interaction and the
 #'   columns contains interactor information and interaction scores.
@@ -561,7 +566,8 @@ rba_string_interaction_partners = function(ids,
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
 #' @param species Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
 #'   (Recommended, but optional if your input is less than 100 IDs.)
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
+#'   arguments documentation for more information on available options.
 #'
 #' @return A data frame with bit scores between your provided proteins and
 #'   their self-hit. To Reduce the transferred data, STRING returns only one
@@ -656,7 +662,8 @@ rba_string_homology_intra = function(ids,
 #'   less than 100 IDs.)
 #' @param species_b (optional) Numeric: one or more NCBI Taxonomy identifiers
 #'   of species to limit the closets homologous proteins search.
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
+#'   arguments documentation for more information on available options.
 #'
 #' @return A data frame with Your input proteins and it's closest homologous
 #'   proteins among all other (or a defined) STRING species.
@@ -758,7 +765,8 @@ rba_string_homology_inter = function(ids,
 #'   to be used as the statistical background (or universe) when computing
 #'   P-value for the terms. Only STRING IDs are acceptable. (Refer to
 #'   \code{\link{rba_string_map_ids}} to map your IDs.)
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
+#'   arguments documentation for more information on available options.
 #'
 #' @return A data frame which every row is an enriched terms with p-value
 #'   smaller than 0.1 and the columns are the terms category, decription,
@@ -857,7 +865,8 @@ rba_string_enrichment = function(ids,
 #'   large number of reference publications to each protein. In order to reduce
 #'   the output size, PubMed's results will be excluded from the results,
 #'   unless stated otherwise (By setting this argument to TRUE).
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
+#'   arguments documentation for more information on available options.
 #'
 #' @return A data frame which every row is an assigned terms and the columns
 #'   are the terms category, description, number of genes, and other pertinent
@@ -949,7 +958,8 @@ rba_string_functional_annotation = function(ids,
 #'   interaction to be included in the image. if not provided, the threshold
 #'   will be applied by STRING Based in the network. (low Confidence = 150,
 #'   Medium Confidence = 400, High Confidence = 700, Highest confidence = 900)
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
+#'   arguments documentation for more information on available options.
 #'
 #' @return A list with protein-protein interaction enrichment results.
 #'
@@ -1033,7 +1043,8 @@ rba_string_ppi_enrichment = function(ids,
 #' @section Corresponding API Resources:
 #'  "GET https://string-db.org/api/[output_format]/version"
 #'
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
+#'   arguments documentation for more information on available options.
 #'
 #' @return A list with STRING version and stable address.
 #'

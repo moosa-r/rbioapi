@@ -18,7 +18,7 @@
 #' @param rf_db_id
 #' @param rf_active
 #' @param rf_tax_id
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param location
 #'
 #' @return
@@ -183,7 +183,7 @@ rba_uniprot_uniparc_search = function(upi = NA,
 #' @param rf_dd_type
 #' @param rf_db_id
 #' @param rf_active
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param rf_tax_id
 #'
 #' @return
@@ -259,7 +259,7 @@ rba_uniprot_uniparc = function(accession = NA,
 #' @param accession
 #' @param db_id
 #' @param gene
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param taxid
 #'
 #' @return
@@ -337,7 +337,7 @@ rba_uniprot_uniparc_bestguess = function(upi = NA,
 #' @param rf_active
 #' @param upid
 #' @param upi
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param rf_tax_id
 #'
 #' @return
@@ -428,7 +428,7 @@ rba_uniprot_uniparc_get = function(db_id = NA,
 #' @param rf_dd_type
 #' @param rf_db_id
 #' @param rf_active
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param rf_tax_id
 #'
 #' @return

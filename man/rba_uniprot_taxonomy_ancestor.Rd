@@ -11,6 +11,8 @@ rba_uniprot_taxonomy_ancestor(id, ...)
 \arguments{
 \item{id}{}
 
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+
 \item{ids}{}
 }
 \value{

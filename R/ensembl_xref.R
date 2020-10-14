@@ -11,7 +11,7 @@
 #' @param external_db
 #' @param object_type
 #' @param external_symbol
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #'
 #' @return
 #' @export
@@ -79,7 +79,7 @@ rba_ensembl_xrefs_symbol = function(external_symbol,
 #' @param all_levels
 #' @param db_type
 #' @param external_db
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param object_type
 #'
 #' @return
@@ -153,7 +153,7 @@ rba_ensembl_xrefs_id = function(ensembl_id,
 #' @param name
 #' @param species
 #' @param db_type
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param external_db
 #'
 #' @return

@@ -14,7 +14,7 @@
 #' @param taxid
 #' @param pubmed
 #' @param seq_length
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param md5
 #'
 #' @return
@@ -147,7 +147,7 @@ rba_uniprot_proteins_search = function(accession = NA,
 #'
 #' @param accession
 #' @param interaction
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param isoforms
 #'
 #' @return
@@ -197,7 +197,7 @@ rba_uniprot_proteins = function(accession = NA,
 #' @param db_type
 #' @param db_id
 #' @param reviewed
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param isoform
 #'
 #' @return
@@ -263,7 +263,7 @@ rba_uniprot_proteins_crossref = function(db_type,
 #' @param organism
 #' @param taxid
 #' @param categories
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param types
 #'
 #' @return
@@ -417,7 +417,7 @@ rba_uniprot_features_search = function(accession = NA,
 #'
 #' @param terms
 #' @param type
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param categories
 #'
 #' @return
@@ -521,7 +521,7 @@ rba_uniprot_features_type = function(terms,
 #'
 #' @param accession
 #' @param types
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param categories
 #'
 #' @return
@@ -640,7 +640,7 @@ rba_uniprot_features = function(accession,
 #' @param taxid
 #' @param db_type
 #' @param db_id
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param save_peff
 #'
 #' @return
@@ -783,7 +783,7 @@ rba_uniprot_variation_search = function(accession = NA,
 #' @param wild_type
 #' @param alternative_sequence
 #' @param location
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param save_peff
 #'
 #' @return
@@ -876,7 +876,7 @@ rba_uniprot_variation_dbsnp = function(db_id,
 #' @param wild_type
 #' @param alternative_sequence
 #' @param location
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param save_peff
 #'
 #' @return
@@ -970,7 +970,7 @@ rba_uniprot_variation_hgvs = function(hgvs,
 #' @param location
 #' @param save_peff
 #' @param accession
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #'
 #' @return
 #' @export
@@ -1061,7 +1061,7 @@ rba_uniprot_variation_accession = function(accession,
 #' @param upid
 #' @param data_source
 #' @param peptide
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param unique
 #'
 #' @return
@@ -1144,7 +1144,7 @@ rba_uniprot_proteomics_search = function(accession = NA,
 
 #' Get proteomics peptides mapped to UniProt by accession
 #'
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param accession
 #'
 #' @return
@@ -1184,7 +1184,7 @@ rba_uniprot_proteomics = function(accession,
 #' @param antigen_id
 #' @param ensembl_id
 #' @param match_score
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param accession
 #'
 #' @return
@@ -1253,7 +1253,7 @@ rba_uniprot_antigen_search = function(accession = NA,
 
 #' Get antigen by UniProt accession
 #'
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param accession
 #'
 #' @return

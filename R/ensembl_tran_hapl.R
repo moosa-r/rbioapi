@@ -6,7 +6,7 @@
 #' @param species
 #' @param aligned_sequences
 #' @param samples
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param sequence
 #'
 #' @return

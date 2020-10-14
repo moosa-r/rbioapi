@@ -8,7 +8,7 @@
 #' @param expand
 #' @param format
 #' @param object_type
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param species
 #'
 #' @return
@@ -87,7 +87,7 @@ rba_ensembl_lookup_id = function(ids,
 #' @param symbols
 #' @param species
 #' @param expand
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param format
 #'
 #' @return

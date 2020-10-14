@@ -16,6 +16,8 @@ rba_ensembl_ld_region(
 }
 \arguments{
 \item{r2}{}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
 }
 \value{
 

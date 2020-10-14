@@ -15,6 +15,8 @@ rba_ensembl_info_aassembly(
 }
 \arguments{
 \item{region_name}{}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
 }
 \value{
 

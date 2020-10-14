@@ -8,7 +8,7 @@
 #' @param genome_acc
 #' @param is_ref_proteome
 #' @param is_redundant
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param taxid
 #'
 #' @return
@@ -98,7 +98,7 @@ rba_uniprot_proteomes_search = function(upid = NA,
 #'
 #' @param upid
 #' @param get_proteins
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param reviewed
 #'
 #' @return
@@ -163,7 +163,7 @@ rba_uniprot_proteomes = function(upid,
 #'
 #' @param upid
 #' @param accession
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param gene
 #'
 #' @return
@@ -220,7 +220,7 @@ rba_uniprot_genecentric_search = function(upid = NA,
 
 #' Get gene centric proteins by Uniprot accession
 #'
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param accession
 #'
 #' @return

@@ -46,6 +46,8 @@ rba_ensembl_vep_allele(
 }
 \arguments{
 \item{xref_refseq}{}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
 }
 \value{
 

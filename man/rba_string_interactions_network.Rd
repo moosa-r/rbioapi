@@ -39,7 +39,8 @@ functional associations.
 \item "physical": The edges indicate that two proteins have a phyical
 interaction or are parts of a complex.}}
 
-\item{...}{}
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
 A data frame which each row is a network interaction and the

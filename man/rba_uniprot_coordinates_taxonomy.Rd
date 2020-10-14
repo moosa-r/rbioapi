@@ -14,6 +14,8 @@ rba_uniprot_coordinates_taxonomy(
 }
 \arguments{
 \item{feature}{}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
 }
 \value{
 

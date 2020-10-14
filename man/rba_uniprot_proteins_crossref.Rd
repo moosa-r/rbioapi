@@ -8,6 +8,8 @@ rba_uniprot_proteins_crossref(db_type, db_id, reviewed = NA, isoform = NA, ...)
 }
 \arguments{
 \item{isoform}{}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
 }
 \value{
 

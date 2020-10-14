@@ -4,7 +4,7 @@
 #'
 #' @param microarray
 #' @param vendor
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param species
 #'
 #' @return
@@ -48,7 +48,7 @@ rba_ensembl_microarray_vendor = function(microarray,
 
 #' Returns information about all microarrays available for the given species
 #'
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param species
 #'
 #' @return
@@ -85,7 +85,7 @@ rba_ensembl_microarray_species = function(species,
 #'
 #' @param microarray
 #' @param probe
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param species
 #'
 #' @return
@@ -131,7 +131,7 @@ rba_ensembl_microarray_probe = function(microarray,
 #'
 #' @param microarray
 #' @param probe_set
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param species
 #'
 #' @return
@@ -175,7 +175,7 @@ rba_ensembl_microarray_probe_set = function(microarray,
 
 #' Returns information about all epigenomes available for the given species
 #'
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param species
 #'
 #' @return
@@ -212,7 +212,7 @@ rba_ensembl_microarray_epigenome = function(species,
 #'
 #' @param binding_matrix_id
 #' @param species
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param unit
 #'
 #' @return
@@ -263,7 +263,7 @@ rba_ensembl_microarray_binding_matrix = function(binding_matrix_id,
 #'
 #' @param regulatory_feature_id
 #' @param species
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param activity
 #'
 #' @return

@@ -18,7 +18,8 @@ to be used as the statistical background (or universe) when computing
 P-value for the terms. Only STRING IDs are acceptable. (Refer to
 \code{\link{rba_string_map_ids}} to map your IDs.)}
 
-\item{...}{}
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
 A data frame which every row is an enriched terms with p-value

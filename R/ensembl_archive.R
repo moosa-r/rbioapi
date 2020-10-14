@@ -3,7 +3,7 @@
 #' Retrieve the latest version for a set of identifiers
 #'
 #' @param ids
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #'
 #' @return
 #' @export

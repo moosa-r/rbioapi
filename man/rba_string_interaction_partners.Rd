@@ -29,7 +29,8 @@ Medium Confidence = 400, High Confidence = 700, Highest confidence = 900)}
 your input proteins. (e.g. Number of the most confident interaction partner
 to return per each input protein.)}
 
-\item{...}{}
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
 A data frame which each row is a network interaction and the

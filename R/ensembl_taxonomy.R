@@ -2,7 +2,7 @@
 
 #' Return the taxonomic classification of a taxon node
 #'
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param taxon_id
 #'
 #' @return
@@ -36,7 +36,7 @@ rba_ensembl_taxonomy_classification = function(taxon_id,
 
 #' Search for a taxonomic term by its identifier, name or non-scientific name
 #'
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param simple
 #' @param taxon
 #' @param non_scientific_name

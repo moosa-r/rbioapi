@@ -22,6 +22,8 @@ rba_ensembl_sequence_id(
 }
 \arguments{
 \item{species}{}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
 }
 \value{
 

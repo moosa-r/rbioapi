@@ -5,7 +5,7 @@
 #'
 #' @param ids
 #' @param species
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param fields
 #'
 #' @return
@@ -70,7 +70,7 @@ rba_ensembl_variant_recoder = function(ids,
 #' @param genotypes
 #' @param phenotypes
 #' @param pops
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param population_genotypes
 #'
 #' @return
@@ -143,7 +143,7 @@ rba_ensembl_variation_id = function(ids,
 #'
 #' @param pmid
 #' @param pmcid
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param species
 #'
 #' @return

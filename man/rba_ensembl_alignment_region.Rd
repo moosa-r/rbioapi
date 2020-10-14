@@ -20,6 +20,8 @@ rba_ensembl_alignment_region(
 }
 \arguments{
 \item{species_set_group}{}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
 }
 \value{
 

@@ -10,7 +10,7 @@ rba_enrichr_view_list(user_list_id, ...)
 \item{user_list_id}{a user_list_id returned to you after uploading a gene
 list using \code{\link{rba_enrichr_add_list}}}
 
-\item{...}{}
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
 }
 \value{
 A list containing the genes and description available under the

@@ -8,7 +8,7 @@
 #' @param include_children
 #' @param include_pubmed_id
 #' @param include_review_status
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param source
 #'
 #' @return
@@ -80,7 +80,7 @@ rba_ensembl_phenotype_accession = function(accession,
 #' @param include_overlap
 #' @param include_pubmed_id
 #' @param include_review_status
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param include_submitter
 #'
 #' @return
@@ -158,7 +158,7 @@ rba_ensembl_phenotype_gene = function(gene,
 #' @param include_pubmed_id
 #' @param include_review_status
 #' @param include_submitter
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param only_phenotypes
 #'
 #' @return
@@ -236,7 +236,7 @@ rba_ensembl_phenotype_region = function(region,
 #' @param include_children
 #' @param include_pubmed_id
 #' @param include_review_status
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param source
 #'
 #' @return

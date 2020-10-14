@@ -6,7 +6,7 @@
 #' @param gene
 #' @param protein
 #' @param taxid
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param location
 #'
 #' @return
@@ -93,7 +93,7 @@ rba_uniprot_coordinates_search = function(accession = NA,
 #' @param accession
 #' @param p_position
 #' @param p_start
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param p_end
 #'
 #' @return
@@ -151,7 +151,7 @@ rba_uniprot_coordinates_location = function(accession,
 #'
 #' @param accession
 #' @param db_type
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param db_id
 #'
 #' @return
@@ -208,7 +208,7 @@ rba_uniprot_coordinates = function(accession = NA,
 #' @param taxid
 #' @param locations
 #' @param in_range
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param feature
 #'
 #' @return

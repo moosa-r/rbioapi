@@ -8,6 +8,8 @@ rba_ensembl_ontology_ancestors(term_id, chart = FALSE, ontology = NA, ...)
 }
 \arguments{
 \item{ontology}{}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
 }
 \value{
 

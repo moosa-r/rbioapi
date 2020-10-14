@@ -8,6 +8,8 @@ rba_ensembl_cafe_genetree(genetree_id, compara = "vertebrates", ...)
 }
 \arguments{
 \item{compara}{}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
 }
 \value{
 

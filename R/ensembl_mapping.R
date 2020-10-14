@@ -6,7 +6,7 @@
 #' @param ensembl_id
 #' @param region
 #' @param species
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param include_original_region
 #'
 #' @return
@@ -64,7 +64,7 @@ rba_ensembl_map_cdna = function(ensembl_id,
 #' @param ensembl_id
 #' @param region
 #' @param species
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param include_original_region
 #'
 #' @return
@@ -123,7 +123,7 @@ rba_ensembl_map_cds = function(ensembl_id,
 #' @param region
 #' @param species
 #' @param coord_system
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param target_coord_system
 #'
 #' @return
@@ -188,7 +188,7 @@ rba_ensembl_map_assembly = function(asm_one,
 #'
 #' @param ensembl_id
 #' @param region
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param species
 #'
 #' @return

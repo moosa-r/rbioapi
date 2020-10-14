@@ -8,6 +8,8 @@ rba_ensembl_info_external_dbs(species, filter = NA, feature = NA, ...)
 }
 \arguments{
 \item{feature}{}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
 }
 \value{
 

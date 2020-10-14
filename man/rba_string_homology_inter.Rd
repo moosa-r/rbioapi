@@ -17,7 +17,8 @@ less than 100 IDs.)}
 \item{species_b}{(optional) Numeric: one or more NCBI Taxonomy identifiers
 of species to limit the closets homologous proteins search.}
 
-\item{...}{}
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
 A data frame with Your input proteins and it's closest homologous

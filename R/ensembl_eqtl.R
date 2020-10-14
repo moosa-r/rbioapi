@@ -2,7 +2,7 @@
 
 #' Returns all tissues currently available in the DB
 #'
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param species
 #'
 #' @return
@@ -40,7 +40,7 @@ rba_ensembl_eqtl_tissue = function(species,
 #' @param statistic
 #' @param tissue
 #' @param gene_id
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param variant_name
 #'
 #' @return
@@ -103,7 +103,7 @@ rba_ensembl_eqtl_gene = function(gene_id,
 #' @param species
 #' @param stable_id
 #' @param statistic
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param tissue
 #'
 #' @return

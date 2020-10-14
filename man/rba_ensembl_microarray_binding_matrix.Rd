@@ -13,6 +13,8 @@ rba_ensembl_microarray_binding_matrix(
 }
 \arguments{
 \item{unit}{}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
 }
 \value{
 

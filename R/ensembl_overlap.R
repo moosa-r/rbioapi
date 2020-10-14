@@ -13,7 +13,7 @@
 #' @param so_term
 #' @param species
 #' @param species_set
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param variant_set
 #'
 #' @return
@@ -137,7 +137,7 @@ rba_ensembl_overlap_id = function(ensembl_id,
 #' @param species_set
 #' @param variant_set
 #' @param trim_downstream
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param trim_upstream
 #'
 #' @return
@@ -263,7 +263,7 @@ rba_ensembl_overlap_region = function(region,
 #' @param feature
 #' @param so_term
 #' @param species
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param type
 #'
 #' @return

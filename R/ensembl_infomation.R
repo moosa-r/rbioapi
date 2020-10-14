@@ -2,7 +2,7 @@
 
 #' List the names of analyses involved in generating Ensembl data
 #'
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param species
 #'
 #' @return
@@ -39,7 +39,7 @@ rba_ensembl_info_analysis = function(species,
 #'
 #' @param species
 #' @param bands
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param synonyms
 #' @param region_name
 #'
@@ -100,7 +100,7 @@ rba_ensembl_info_aassembly = function(species,
 #'  with a particular species. Useful for restricting the type of
 #'  genes/transcripts retrieved by other endpoints.
 #'
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param species
 #' @param name
 #' @param group
@@ -179,7 +179,7 @@ rba_ensembl_info_biotypes = function(species = NA,
 
 #' Lists all available comparative genomics databases and their data release.
 #'
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param compara
 #' @param methods
 #' @param species_sets
@@ -264,7 +264,7 @@ rba_ensembl_info_compara = function(compara = NA,
 #' @param REST
 #' @param software
 #' @param eg_version
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #'
 #' @return
 #' @export
@@ -311,7 +311,7 @@ rba_ensembl_info_version = function(data = FALSE,
 #'
 #' @param species
 #' @param filter
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param feature
 #'
 #' @return
@@ -365,7 +365,7 @@ rba_ensembl_info_external_dbs = function(species,
 
 #' Get list of all Ensembl divisions for which information is available
 #'
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #'
 #' @return
 #' @export
@@ -394,7 +394,7 @@ rba_ensembl_info_divisions = function(...) {
 #' Find information about a given genome
 #'
 #' @param genome_name
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param expand
 #' @param INSDC_sequence_accession
 #' @param INSDC_assembly_id
@@ -478,7 +478,7 @@ rba_ensembl_info_genomes = function(genome_name = NA,
 #' @param division
 #' @param hide_strain_info
 #' @param strain_collection
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param expand
 #'
 #' @return
@@ -534,7 +534,7 @@ rba_ensembl_info_species = function(division = "EnsemblVertebrates",
 #' @param consequence_types
 #' @param consequence_rank
 #' @param populations
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param populations_filter
 #' @param variation_source
 #'

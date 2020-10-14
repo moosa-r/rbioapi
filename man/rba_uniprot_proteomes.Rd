@@ -8,6 +8,8 @@ rba_uniprot_proteomes(upid, get_proteins = FALSE, reviewed = NA, ...)
 }
 \arguments{
 \item{reviewed}{}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
 }
 \value{
 

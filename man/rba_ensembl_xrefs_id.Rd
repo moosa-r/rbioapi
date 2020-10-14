@@ -17,6 +17,8 @@ rba_ensembl_xrefs_id(
 }
 \arguments{
 \item{object_type}{}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
 }
 \value{
 

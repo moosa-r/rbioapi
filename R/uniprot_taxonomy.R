@@ -2,7 +2,7 @@
 
 #' This service returns the lowest common ancestor (LCA) of two taxonomy nodes.
 #'
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param ids
 #'
 #' @return
@@ -40,7 +40,7 @@ rba_uniprot_taxonomy_ancestor = function(ids,
 #'
 #' @param ids
 #' @param hierarchy
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param node
 #'
 #' @return
@@ -103,7 +103,7 @@ rba_uniprot_taxonomy = function(ids,
 #' lists the nodes as they appear in the taxonomic tree, with the more
 #' specific listed first.
 #'
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param id
 #'
 #' @return
@@ -140,7 +140,7 @@ rba_uniprot_taxonomy_ancestor = function(id,
 #'
 #' @param id
 #' @param direction
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param depth
 #'
 #' @return
@@ -190,7 +190,7 @@ rba_uniprot_taxonomy_path = function(id,
 #' their relationship
 #'
 #' @param from
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param to
 #'
 #' @return

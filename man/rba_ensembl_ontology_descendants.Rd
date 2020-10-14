@@ -16,6 +16,8 @@ rba_ensembl_ontology_descendants(
 }
 \arguments{
 \item{zero_distance}{}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
 }
 \value{
 

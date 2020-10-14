@@ -24,6 +24,8 @@ rba_ensembl_genetree_search(
 }
 \arguments{
 \item{nh_format}{}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
 }
 \value{
 

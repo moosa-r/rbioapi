@@ -36,7 +36,7 @@
 #' @param uniprot
 #' @param variant_class
 #' @param vcf_string
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param xref_refseq
 #'
 #' @return
@@ -316,7 +316,7 @@ rba_ensembl_vep_hgvs = function(hgvs_notations,
 #' @param uniprot
 #' @param variant_class
 #' @param vcf_string
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param xref_refseq
 #'
 #' @return
@@ -596,7 +596,7 @@ rba_ensembl_vep_ids = function(ids,
 #' @param variant_class
 #' @param vcf_string
 #' @param variants
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param xref_refseq
 #'
 #' @return
@@ -877,7 +877,7 @@ rba_ensembl_vep_variant = function(variants,
 #' @param uniprot
 #' @param variant_class
 #' @param vcf_string
-#' @param ...
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
 #' @param xref_refseq
 #'
 #' @return
