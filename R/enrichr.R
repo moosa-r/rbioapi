@@ -42,7 +42,7 @@
 #' @family "Enrichr API"
 #' @seealso \code{\link{rba_enrichr}}
 #' @export
-rba_enrichr_info = function(store_in_options = TRUE,
+rba_enrichr_info = function(store_in_options = FALSE,
                             ...){
   ## Load Global Options
   rba_ba_ext_args(...)

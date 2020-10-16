@@ -1083,7 +1083,7 @@ rba_ba_file = function(file,
     ## File path is in "save_to", if not in "file = file_name.file_ext"
     if (is.character(save_to)) {
       # 2a the user provided a file path, just check if it is valid
-      if (!grepl("^[a-zA-z]:|^\\\\\\w|^/|\\w+\\.\\w+$", save_to)) {
+      if (!grepl("^[a-zA-z]:|^\\\\\\w|^/|^\\w+\\.\\w+$", save_to)) {
         ## 2a.1 not a valid file path!
         warning(sprintf("\"%s\" is not a valid file path. Ignored that.",
                         save_to))
