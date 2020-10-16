@@ -948,13 +948,19 @@ rba_ba_error_parser = function(response,
   if (db_found == TRUE &&
       as.character(response$status_code) %in% rba_ba_stg(db, "err")) {
     ## The API server returns an error string for this status code
-    server_error = rba_ba_response_parser(rba_ba_stg(db, "err_prs"))
-    server_error = rba_ba_stg(db, "err_fun")(server_error)
-    error_message = sprintf("%s server returned \"%s\".\r\n  With this error message:\r\n  \"%s\"",
-                            rba_ba_stg(db, "name"),
-                            rba_ba_http_status(response$status_code,
-                                               verbose = FALSE),
-                            server_error)
+    error_message = tryCatch({
+      sprintf("%s server returned \"%s\".\r\n  With this error message:\r\n  \"%s\"",
+              rba_ba_stg(db, "name"),
+              rba_ba_http_status(response$status_code,
+                                 verbose = FALSE),
+              rba_ba_stg(db,
+                         "err_fun")(rba_ba_response_parser(rba_ba_stg(db,
+                                                                      "err_prs")))
+      )
+    }, error = function(e) {
+      rba_ba_http_status(response$status_code,
+                         verbose = verbose)
+    })
   } else {
     ## The API server returns only status code with no error string
     error_message = rba_ba_http_status(response$status_code,
