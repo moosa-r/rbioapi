@@ -290,7 +290,8 @@ rba_reactome_participants = function(id,
 #' @examples
 #' rba_reactome_participant_of(entity_id = "R-HSA-199420")
 #' @family "Reactome Content Service, Physical Entity Queries"
-#' @seealso \code{\link{rba_reactome_participants}}
+#' @seealso
+#' \code{\link{rba_reactome_participants}}
 #' @export
 rba_reactome_participant_of = function(entity_id,
                                        ...) {
@@ -551,12 +552,13 @@ rba_reactome_event_hierarchy = function(species,
 #'   default = FALSE)
 #' @param resource The analysis resource for which the results will be
 #'   overlaid on top of the given pathways overview,
-#' @param diagram_profile Diagram color profile, should be either "Modern"
+#' @param diagram_profile Color profile of diagrams, should be either "Modern"
 #'   (default) or "Standard".
-#' @param analysis_profile Analysis profile, should be one of: "Standard"
-#' (default), "Strosobar" or "Copper Plus"
+#' @param analysis_profile Color profile of analysis, should be one of:
+#'   "Standard" (default), "Strosobar" or "Copper Plus"
 #' @param token The analysis Token for which the results will be overlaid on
-#'   top of the given pathways overview.
+#'   top of the given pathways overview. see:
+#'   \code{\link{rba_reactome_analysis}}.
 #' @param exp_column numeric: (only if token is provided) Specify the
 #'   expression column for the overlay.
 #' @param document_level numeric: (Only if "create_document" is TRUE) if 0
@@ -608,7 +610,9 @@ rba_reactome_event_hierarchy = function(species,
 #'   output_format = "svg",
 #'   save_to = "reactome_event_diagram.svg")}
 #' @family "Reactome Content Service, Format Exporter"
-#' @seealso \code{\link{rba_reactome_exporter_reaction}}
+#' @seealso
+#' \code{\link{rba_reactome_exporter_reaction}}
+#' \code{\link{rba_reactome_analysis}}
 #' @export
 rba_reactome_exporter_diagram = function(event_id,
                                          save_to = NA,
@@ -863,10 +867,11 @@ rba_reactome_exporter_event = function(event_id,
 #'   (default = TRUE)
 #' @param margin Numeric: A number ranging from 0 to 20 to set as the image's
 #'   margin. (default = 15)
-#' @param diagram_profile Diagram color profile, should be one of "Copper"
+#' @param diagram_profile Color profile of diagrams, should be one of "Copper"
 #'   (default), "Copper Plus", "Barium Lithium" or "calcium salts".
 #' @param token The analysis Token for which the results will be overlaid on
-#'   top of the given pathways overview.
+#'   top of the given pathways overview. see:
+#'   \code{\link{rba_reactome_analysis}}.
 #' @param resource The analysis resource for which the results will be
 #'   overlaid on top of the given pathways overview.
 #' @param exp_column numeric: (only if token is provided) Specify the
@@ -896,6 +901,8 @@ rba_reactome_exporter_event = function(event_id,
 #' \dontrun{rba_reactome_exporter_overview(species = 9606,
 #'   token = 123456789)}
 #' @family "Reactome Content Service, Format Exporter"
+#' @seealso
+#' \code{\link{rba_reactome_analysis}}
 #' @export
 rba_reactome_exporter_overview = function(species,
                                           output_format = "png",
@@ -1055,12 +1062,13 @@ rba_reactome_exporter_overview = function(species,
 #'   (default = TRUE)
 #' @param margin Numeric: A number ranging from 0 to 20 to set as the image's
 #'   margin. (default = 15)
-#' @param diagram_profile Diagram color profile, should be one of "Copper"
+#' @param diagram_profile Color profile of diagrams, should be one of "Copper"
 #'   (default), "Copper Plus", "Barium Lithium" or "calcium salts".
 #' @param token The analysis Token for which the results will be overlaid on
-#'   top of the given pathways overview.
-#' @param analysis_profile Analysis profile, should be one of: "Standard"
-#' (default), "Strosobar" or "Copper Plus".
+#'   top of the given pathways overview. see:
+#'   \code{\link{rba_reactome_analysis}}.
+#' @param analysis_profile Color profile of analysis, should be one of:
+#' "Standard" (default), "Strosobar" or "Copper Plus".
 #' @param resource The analysis resource for which the results will be
 #'   overlaid on top of the given pathways overview.
 #' @param exp_column numeric: (only if token is provided) Specify the
@@ -1090,7 +1098,9 @@ rba_reactome_exporter_overview = function(species,
 #'   output_format = "svg",
 #'   save_to = "reactome_reacion_image.svg")}
 #' @family "Reactome Content Service, Format Exporter"
-#' @seealso \code{\link{rba_reactome_exporter_diagram}}
+#' @seealso
+#' \code{\link{rba_reactome_exporter_diagram}}
+#' \code{\link{rba_reactome_analysis}}
 #' @export
 rba_reactome_exporter_reaction = function(event_id,
                                           save_to = NA,
@@ -1550,8 +1560,8 @@ rba_reactome_mapping = function(id,
 
 #' Get Orthologous (Computationally Inferred) Events
 #'
-#' Reactome Computationally incorporate manually curated human reactions and
-#'   PANTHER's protein homology data to infer events in other euakaryotic
+#' Reactome incorporate manually curated human reactions and PANTHER's
+#'   protein homology data to Computationally infer events in other euakaryotic
 #'   species.
 #'
 #' In version 73 (11 June 2020), using an orthology-based approach,
@@ -1592,6 +1602,8 @@ rba_reactome_mapping = function(id,
 #' rba_reactome_orthology(ids = c("R-HSA-6799198", " R-HSA-72764"),
 #'   species_id = 49633)
 #' @family "Reactome Content Service, Orthology Related Queries"
+#' @seealso
+#' \code{\link{rba_reactome_analysis_species}}
 #' @export
 rba_reactome_orthology = function(ids,
                                   species_dbid,
@@ -1604,7 +1616,7 @@ rba_reactome_orthology = function(ids,
                           list(arg = "species_dbid",
                                class = "numeric")))
 
-  v_msg("Retrieving rthologous Events of '%s' in the specie with DbId '%s'.",
+  v_msg("Retrieving orthologous Events of '%s' in the specie with DbId '%s'.",
         ifelse(length(ids) == 1,
                yes = ids, no = paste0(length(ids), " input events")),
         species_dbid)
@@ -1692,7 +1704,8 @@ rba_reactome_orthology = function(ids,
 #' rba_reactome_participants("R-HSA-5682012", only_physical_entities = TRUE)
 #' rba_reactome_participants("R-HSA-5682012", only_reference_entities = TRUE)
 #' @family "Reactome Content Service, Queries Related to Participants"
-#' @seealso \code{\link{rba_reactome_participant_of}}
+#' @seealso
+#' \code{\link{rba_reactome_participant_of}}
 #' @export
 rba_reactome_participants = function(event_id,
                                      only_physical_entities = FALSE,

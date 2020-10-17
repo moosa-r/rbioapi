@@ -2,33 +2,96 @@
 % Please edit documentation in R/reactome_analysis.R
 \name{rba_reactome_analysis_species}
 \alias{rba_reactome_analysis_species}
-\title{Use page and pageSize to reduce the amount of data retrieved. Use sortBy
-and order to sort the result by your preferred option. The resource field
-will filter the results to show only those corresponding to the preferred
-molecule type (TOTAL includes all the different molecules type)}
+\title{Compare Human Pathways with with Other Species}
 \usage{
 rba_reactome_analysis_species(
   species_dbid,
   sort_by = "ENTITIES_PVALUE",
   order = "ASC",
   resource = "TOTAL",
-  p_value = NA,
+  p_value = 1,
   min = NA,
   max = NA,
   ...
 )
 }
 \arguments{
-\item{max}{}
+\item{species_dbid}{Numeric: Reactome DbId (e.g  Mus musculus is 48892) of
+the species you want to compare with Homo sapiens. Refer to
+ \code{\link{rba_reactome_species}} or
+ \href{https://reactome.org/content/schema/objects/Species}{Reactome
+ Data Schema: Entries: Species}.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{sort_by}{Sort the result based on what column? available choices
+are:\cr "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
+"FOUND_ENTITIES", "FOUND_INTERACTORS", "FOUND_REACTIONS", "ENTITIES_RATIO",
+"ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO"}
+
+\item{order}{Sort Order. Can be either "ASC" (default) or "DESC".}
+
+\item{resource}{Filter results based on the resource. Default is "TOTAL",
+available choices are:\cr "TOTAL", "UNIPROT","ENSEMBL", "CHEBI", "IUPHAR",
+"MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
+"PUBCHEM_COMPOUND".}
+
+\item{p_value}{Set a P value threshold. Only results with P value equal to
+or less than your provided threshold will be returned. (default = 1,
+Meaning no P value filtering)}
+
+\item{min}{(numeric) Minimum number of entities that a pathways should have
+to be included in the results.}
+
+\item{max}{(numeric) Maximum number of entities that a pathways should have
+to be included in the results.}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+List with the results of the comparisson.
 }
 \description{
-Use page and pageSize to reduce the amount of data retrieved. Use sortBy
-and order to sort the result by your preferred option. The resource field
-will filter the results to show only those corresponding to the preferred
-molecule type (TOTAL includes all the different molecules type)
+Use This function to Compare human's manually-curated pathways
+  and computationally inferred pathways (orthologous) in other species.
 }
+\details{
+Reactome incorporate manually curated human reactions and PANTHER's
+  protein homology data to Computationally infer events in other euakaryotic
+  species.\cr\cr
+In version 73 (11 June 2020), using an orthology-based approach,
+  Homo sapiens events was projected to 18,654 orthologous pathways (with
+  81,835 orthologous proteins) in 15 non-human species.\cr
+  Refer to \href{https://reactome.org/documentation/inferred-events}{
+  Reactome Computationally Inferred Events} for more information.
+}
+\section{Corresponding API Resources}{
+
+ "GET https://reactome.org/AnalysisService/species/homoSapiens/{species}"
+}
+
+\examples{
+
+}
+\references{
+\itemize{
+  \item Fabregat A, Sidiropoulos K, Viteri G, Forner O, Marin-Garcia P,
+  Arnau V, D'Eustachio P, Stein L, Hermjakob H. Reactome pathway analysis:
+  a high-performance in-memory approach. BMC bioinformatics. 2017 Mar;18(1)
+  142. doi: 10.1186/s12859-017-1559-2. PubMed PMID: 28249561.
+  PubMed Central PMCID: PMC5333408.
+  \item \href{https://reactome.org/AnalysisService/}{Reactome Analysis
+  Services API Documentation}
+  }
+}
+\seealso{
+\code{\link{rba_reactome_orthology}}
+
+Other "Reactome Analysis Service, ": 
+\code{\link{rba_reactome_analysis_download}()},
+\code{\link{rba_reactome_analysis_import}()},
+\code{\link{rba_reactome_analysis_mapping}()},
+\code{\link{rba_reactome_analysis_pdf}()},
+\code{\link{rba_reactome_analysis_token}()},
+\code{\link{rba_reactome_analysis}()}
+}
+\concept{"Reactome Analysis Service, "}

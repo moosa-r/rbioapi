@@ -36,14 +36,15 @@ svg or gif.}
 \item{resource}{The analysis resource for which the results will be
 overlaid on top of the given pathways overview.}
 
-\item{diagram_profile}{Diagram color profile, should be one of "Copper"
+\item{diagram_profile}{Color profile of diagrams, should be one of "Copper"
 (default), "Copper Plus", "Barium Lithium" or "calcium salts".}
 
-\item{analysis_profile}{Analysis profile, should be one of: "Standard"
-(default), "Strosobar" or "Copper Plus".}
+\item{analysis_profile}{Color profile of analysis, should be one of:
+"Standard" (default), "Strosobar" or "Copper Plus".}
 
 \item{token}{The analysis Token for which the results will be overlaid on
-top of the given pathways overview.}
+top of the given pathways overview. see:
+\code{\link{rba_reactome_analysis}}.}
 
 \item{exp_column}{numeric: (only if token is provided) Specify the
 expression column for the overlay.}
@@ -109,6 +110,7 @@ Note that this function will save Reaction-like event separately and out
 }
 \seealso{
 \code{\link{rba_reactome_exporter_diagram}}
+\code{\link{rba_reactome_analysis}}
 
 Other "Reactome Content Service, Format Exporter": 
 \code{\link{rba_reactome_exporter_diagram}()},

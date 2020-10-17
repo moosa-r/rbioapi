@@ -4,7 +4,7 @@
 \alias{rba_enrichr_info}
 \title{Retrieve a List of available libraries from Enrichr}
 \usage{
-rba_enrichr_info(store_in_options = TRUE, ...)
+rba_enrichr_info(store_in_options = FALSE, ...)
 }
 \arguments{
 \item{store_in_options}{logical: (default = TRUE) Should a list of available

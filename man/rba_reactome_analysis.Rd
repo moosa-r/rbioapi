@@ -2,18 +2,18 @@
 % Please edit documentation in R/reactome_analysis.R
 \name{rba_reactome_analysis}
 \alias{rba_reactome_analysis}
-\title{identifiers Queries for multiple identifiers}
+\title{Reactome Over-Representation or Expression Analysis}
 \usage{
 rba_reactome_analysis(
   input,
-  input_type = NA,
+  input_format = NA,
   projection = FALSE,
   interactors = FALSE,
   species = NA,
   sort_by = "ENTITIES_PVALUE",
   order = "ASC",
   resource = "TOTAL",
-  p_value = NA,
+  p_value = 1,
   include_disease = TRUE,
   min = NA,
   max = NA,
@@ -21,13 +21,139 @@ rba_reactome_analysis(
 )
 }
 \arguments{
-\item{max}{}
+\item{input}{A vector, data frame, matrix or a local file path or URL
+that points to your data. See "Details section" for more information of
+how to organize and provide your input.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{input_format}{(Optional) This function will automatically identify
+your provided input's format. But in case of unexpected issues or if you
+want to be explicit, set this argument to one of:\itemize{
+\item "table": If you provided a data frame or matrix as input.
+\item "vector": If you provided a simple vector (numeric or character) as
+input.
+\item "file": If you provided a local file path pointing to a
+correctly-formatted text file.
+\item "url": If you provided a URL pointing to a correctly-formatted
+text file.}}
+
+\item{projection}{Logical (default = FALSE) Should non-human identifiers
+be projected to their human equivalents? (using Reactome orthology data)}
+
+\item{interactors}{Logical (default = FALSE) Should IntAct interaction data
+be used to increase the analysis background?}
+
+\item{species}{Numeric or Character: NCBI Taxonomy identifier (Human
+is 9606), species name (e.g. "Homo sapiens") or Reactome DbId (e.g
+Homo sapiens is 48887). Refer to
+ \code{\link{rba_reactome_species}} or
+ \href{https://reactome.org/content/schema/objects/Species}{Reactome
+ Data Schema: Entries: Species}.}
+
+\item{sort_by}{Sort the result based on what column? available choices
+are:\cr "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
+"FOUND_ENTITIES", "FOUND_INTERACTORS", "FOUND_REACTIONS", "ENTITIES_RATIO",
+"ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO"}
+
+\item{order}{Sort Order. Can be either "ASC" (default) or "DESC".}
+
+\item{resource}{Filter results based on the resource. Default is "TOTAL",
+available choices are:\cr "TOTAL", "UNIPROT","ENSEMBL", "CHEBI", "IUPHAR",
+"MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
+"PUBCHEM_COMPOUND".}
+
+\item{p_value}{Set a P value threshold. Only results with P value equal to
+or less than your provided threshold will be returned. (default = 1,
+Meaning no P value filtering)}
+
+\item{include_disease}{Logical (default = TRUE) Should the disease pathways
+be included in the results?}
+
+\item{min}{(numeric) Minimum number of entities that a pathways should have
+to be included in the results.}
+
+\item{max}{(numeric) Maximum number of entities that a pathways should have
+to be included in the results.}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+List containing the results and information of your analysis. Note
+  that you can use the token returned in the "summary" sub-list of the
+  results (i.e. results$summary$token) to retrieve your results later or
+  in other Reactome analysis functions.
 }
 \description{
-identifiers Queries for multiple identifiers
+Using this function, you can perform Reactome Analysis In a convieniet way.
+  The Analysis Type will be chosen depending on your provided
+  input:\enumerate{
+  \item If you provide a vector or a single-columned table,
+  "Over-Representation" analysis will be performed.
+  \item If you provide a multi-columend table, with the first column being
+  molecules identifers and the rest being numeral expression values,
+  "Expression" analysis will be performed.}\cr
+  Refer to the details section for the accepted input types and format.
 }
+\details{
+You can provide your table or vector input in numerous formats:\enumerate{
+  \item A R object which can be data frame, matrix or a simple vector.
+  \item A path to a local text file in your device that contains the molecules
+  data. (The file should be formatted correctly, see below.)
+  \item A URL pointing to a text file on the web that contains the molecules
+  data. (The file should be formatted correctly, see below.}\cr\cr
+  If you provide a text file (as a local file path or URL), it should be
+  in TSV (Tab-Separated Values) format; Column names should start with "#"
+  character. Note that if you are providing the file for
+  "Over-Representation" analysis (i.e. Single columned-data) this header
+  line is optional and will be used as your 'Sample Name', otherwise it is
+  required.\cr\cr
+  Also, form the "summary" element in the function's output, you can see
+  how Reactome Interpreted your input and subsequently the type of analysis
+  that has been performed.\cr\cr
+  There is no strict criteria about the type of your molecules Identifiers,
+  Reactome will Map the IDs to it's internal database entities.
+  Nevertheless, You can check if all your identifiers has been found in
+  "identifiersNotFound" element in the function's output.\cr\cr
+  After Any Analysis, Reactome will associate a token to your analysis. It
+  can be later used to in function that requires the token (e.g to retrieve
+  the analysis results, download pdf).\cr\cr
+  Note that Reactome will store your token for only 7 days. You can
+  download your full results with
+  \code{\link{rba_reactome_analysis_download}}, and re-import it anytime to
+  reactome (using \code{\link{rba_reactome_analysis_import}}) to generate
+  a new token.
+}
+\section{Corresponding API Resources}{
+
+ "POST https://reactome.org/AnalysisService/identifiers/form"
+ "POST https://reactome.org/AnalysisService/identifiers/url"
+ "POST https://reactome.org/AnalysisService/identifiers/form/projection"
+ "POST https://reactome.org/AnalysisService/identifiers/url/projection"
+}
+
+\examples{
+rba_reactome_analysis(input = c("p53", "BRCA1", "cdk2", "Q99835", "CDC42"))
+\dontrun{rba_reactome_analysis(input = "c:/rbioapi/genes.txt")}
+\dontrun{rba_reactome_analysis(input = "https://qazwsx.com/genes.txt")}
+}
+\references{
+\itemize{
+  \item Fabregat A, Sidiropoulos K, Viteri G, Forner O, Marin-Garcia P,
+  Arnau V, D'Eustachio P, Stein L, Hermjakob H. Reactome pathway analysis:
+  a high-performance in-memory approach. BMC bioinformatics. 2017 Mar;18(1)
+  142. doi: 10.1186/s12859-017-1559-2. PubMed PMID: 28249561.
+  PubMed Central PMCID: PMC5333408.
+  \item \href{https://reactome.org/AnalysisService/}{Reactome Analysis
+  Services API Documentation}
+  }
+}
+\seealso{
+Other "Reactome Analysis Service, ": 
+\code{\link{rba_reactome_analysis_download}()},
+\code{\link{rba_reactome_analysis_import}()},
+\code{\link{rba_reactome_analysis_mapping}()},
+\code{\link{rba_reactome_analysis_pdf}()},
+\code{\link{rba_reactome_analysis_species}()},
+\code{\link{rba_reactome_analysis_token}()}
+}
+\concept{"Reactome Analysis Service, "}

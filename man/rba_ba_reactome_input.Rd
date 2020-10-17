@@ -2,16 +2,27 @@
 % Please edit documentation in R/reactome_analysis.R
 \name{rba_ba_reactome_input}
 \alias{rba_ba_reactome_input}
-\title{internal function to feed input to Reactome analysis}
+\title{Internal Function to Handle Different inputs of Reactome Analysis}
 \usage{
 rba_ba_reactome_input(input, type = NA, handle = TRUE)
 }
 \arguments{
-\item{handle}{}
+\item{input}{Pass on caller function's input argument to this.}
+
+\item{type}{Pass on caller function's input_format argument to this.
+(default = NA)}
+
+\item{handle}{Logical: If TRUE (default), The input will be -if necessary-
+written to a temp file to facilitate data uploading to Reactome.
+If False, The Input will only be identified.}
 }
 \value{
-
+If handle was FALSE, a single string with the identified file type
+  (one of: "table", "vector", "file" or "url"), else if handle was TRUE,
+  a list containing the file Type and a path to the tempfile containing
+  the data or the user-provided url/file path.
 }
 \description{
-internal function to feed input to Reactome analysis
+This function will be called within any Reactome Analysis service which
+  requires input from the users.
 }

@@ -2,12 +2,7 @@
 % Please edit documentation in R/reactome_analysis.R
 \name{rba_reactome_analysis_pdf}
 \alias{rba_reactome_analysis_pdf}
-\title{This method provides a report for a given pathway analysis result in a PDF
-document. This document contains data about the analysis itself followed by
-the pathways overview and the most significant pathways overlaid with the
-analysis result. Users can download and store this information in a
-convenient format to be checked in the future when the ‘token’ is not
-longer available.}
+\title{Generate PDF file with Reactome Analysis Results}
 \usage{
 rba_reactome_analysis_pdf(
   token,
@@ -22,18 +17,90 @@ rba_reactome_analysis_pdf(
 )
 }
 \arguments{
-\item{fireworks_profile}{}
+\item{token}{A token associated to your previous Reactome analysis.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{species}{Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
+ID is 9606.) or species name (e.g. "Homo sapiens"). Refer to
+\code{\link{rba_reactome_species}} or
+\href{https://reactome.org/content/schema/objects/Species}{Reactome
+Data Schema: Entries: Species}.}
+
+\item{save_to}{NA or Character:\itemize{
+\item NA: Save the file to an automatically-generated path.
+\item Character string: A valid file path to save the file to.}}
+
+\item{number}{Numeric: Maximum number of the reported pathways. Cannot not
+be greater than 50.}
+
+\item{resource}{Filter results based on the resource. Default is "TOTAL",
+available choices are:\cr "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
+"MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
+"PUBCHEM_COMPOUND".}
+
+\item{diagram_profile}{Color profile of diagrams, should be either
+"Modern" (default) or "Standard".}
+
+\item{analysis_profile}{Color profile of analysis, should be one of:
+"Standard" (default), "Strosobar" or "Copper Plus".}
+
+\item{fireworks_profile}{Color profile of overview diagram, should be one of:
+"Copper", "Copper Plus", "Barium Lithium" or "calcium salts".}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+NULL, a PDF file will be saved to disk.
 }
 \description{
-This method provides a report for a given pathway analysis result in a PDF
-document. This document contains data about the analysis itself followed by
-the pathways overview and the most significant pathways overlaid with the
-analysis result. Users can download and store this information in a
-convenient format to be checked in the future when the ‘token’ is not
-longer available.
+Use this function to save a detailed report of your previous analysis (That
+  you have done with \code{\link{rba_reactome_analysis}}). You need
+  to provide a 'token' associated to your previous analysis.
 }
+\details{
+Token is associated to each Reactome analysis results and kept by Reactome
+  for at least 7 days. You can locate it in
+  \code{\link{rba_reactome_analysis}}'s output, under a sub-list named
+  "summary" (i.e. results$summary$token).\cr
+  Note that Reactome will store your token for only 7 days. You can
+  download your full results with
+  \code{\link{rba_reactome_analysis_download}}, and re-import it anytime to
+  reactome (using \code{\link{rba_reactome_analysis_import}}) to generate
+  a new token.
+  Use \code{\link{rba_reactome_analysis_download}} to save your results
+  in other formats.
+}
+\section{Corresponding API Resources}{
+
+ "GET https://reactome.org/AnalysisService/report/{token}/{species}/
+ {filename}.pdf"
+}
+
+\examples{
+\dontrun{rba_reactome_analysis_pdf(token = "MjAyMDEwMTYwMTI3MTNfMjY1MjM\%3D",
+   species = 9606, save_to = "my_analysis.pdf")}
+}
+\references{
+\itemize{
+  \item Fabregat A, Sidiropoulos K, Viteri G, Forner O, Marin-Garcia P,
+  Arnau V, D'Eustachio P, Stein L, Hermjakob H. Reactome pathway analysis:
+  a high-performance in-memory approach. BMC bioinformatics. 2017 Mar;18(1)
+  142. doi: 10.1186/s12859-017-1559-2. PubMed PMID: 28249561.
+  PubMed Central PMCID: PMC5333408.
+  \item \href{https://reactome.org/AnalysisService/}{Reactome Analysis
+  Services API Documentation}
+  }
+}
+\seealso{
+\code{\link{rba_reactome_analysis_download}}
+\code{\link{rba_reactome_analysis}}
+
+Other "Reactome Analysis Service, ": 
+\code{\link{rba_reactome_analysis_download}()},
+\code{\link{rba_reactome_analysis_import}()},
+\code{\link{rba_reactome_analysis_mapping}()},
+\code{\link{rba_reactome_analysis_species}()},
+\code{\link{rba_reactome_analysis_token}()},
+\code{\link{rba_reactome_analysis}()}
+}
+\concept{"Reactome Analysis Service, "}

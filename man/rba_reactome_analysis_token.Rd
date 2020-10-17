@@ -2,11 +2,7 @@
 % Please edit documentation in R/reactome_analysis.R
 \name{rba_reactome_analysis_token}
 \alias{rba_reactome_analysis_token}
-\title{Use page and pageSize to reduce the amount of data retrieved. Use
-sortBy and order to sort the result by your preferred option. The
-resource field will filter the results to show only those corresponding
-to the preferred molecule type (TOTAL includes all the different molecules
-type)}
+\title{Return the Results Asociated with a Token}
 \usage{
 rba_reactome_analysis_token(
   token,
@@ -22,17 +18,89 @@ rba_reactome_analysis_token(
 )
 }
 \arguments{
-\item{max}{}
+\item{token}{A token associated to your previous Reactome analysis.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{species}{Numeric or Character: NCBI Taxonomy identifier (Human
+is 9606), species name (e.g. "Homo sapiens") or Reactome DbId (e.g
+Homo sapiens is 48887). Refer to
+ \code{\link{rba_reactome_species}} or
+ \href{https://reactome.org/content/schema/objects/Species}{Reactome
+ Data Schema: Entries: Species}.}
+
+\item{sort_by}{Sort the result based on what column? available choices
+are:\cr "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
+"FOUND_ENTITIES", "FOUND_INTERACTORS", "FOUND_REACTIONS", "ENTITIES_RATIO",
+"ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO"}
+
+\item{order}{Sort Order. Can be either "ASC" (default) or "DESC".}
+
+\item{resource}{Filter results based on the resource. Default is "TOTAL",
+available choices are:\cr "TOTAL", "UNIPROT","ENSEMBL", "CHEBI", "IUPHAR",
+"MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
+"PUBCHEM_COMPOUND".}
+
+\item{p_value}{Set a P value threshold. Only results with P value equal to
+or less than your provided threshold will be returned. (default = 1,
+Meaning no P value filtering)}
+
+\item{include_disease}{Logical (default = TRUE) Should the disease pathways
+be included in the results?}
+
+\item{min}{(numeric) Minimum number of entities that a pathways should have
+to be included in the results.}
+
+\item{max}{(numeric) Maximum number of entities that a pathways should have
+to be included in the results.}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+List containing the results and information of your analysis.
 }
 \description{
-Use page and pageSize to reduce the amount of data retrieved. Use
-sortBy and order to sort the result by your preferred option. The
-resource field will filter the results to show only those corresponding
-to the preferred molecule type (TOTAL includes all the different molecules
-type)
+Use a token generated After a Reactome analysis
+  (via \code{\link{rba_reactome_analysis}}) to Retrieve the analysis results.
 }
+\details{
+After Any Analysis, Reactome will associate a token to your analysis. It
+  can be later used to in function that requires the token (e.g to retrieve
+  the analysis results, download pdf).\cr\cr
+  Note that Reactome will store your token for only 7 days. You can
+  download your full results with
+  \code{\link{rba_reactome_analysis_download}}, and re-import it anytime to
+  reactome (using \code{\link{rba_reactome_analysis_import}}) to generate
+  a new token.
+}
+\section{Corresponding API Resources}{
+
+ "GET https://reactome.org/AnalysisService/token/{token}"
+}
+
+\examples{
+\dontrun{rba_reactome_analysis_token(token = "MjAyMDEwMTYwMTI3MTNfMjY1MjM",
+  species = 9606)}
+}
+\references{
+\itemize{
+  \item Fabregat A, Sidiropoulos K, Viteri G, Forner O, Marin-Garcia P,
+  Arnau V, D'Eustachio P, Stein L, Hermjakob H. Reactome pathway analysis:
+  a high-performance in-memory approach. BMC bioinformatics. 2017 Mar;18(1)
+  142. doi: 10.1186/s12859-017-1559-2. PubMed PMID: 28249561.
+  PubMed Central PMCID: PMC5333408.
+  \item \href{https://reactome.org/AnalysisService/}{Reactome Analysis
+  Services API Documentation}
+  }
+}
+\seealso{
+\code{\link{rba_reactome_analysis}}
+
+Other "Reactome Analysis Service, ": 
+\code{\link{rba_reactome_analysis_download}()},
+\code{\link{rba_reactome_analysis_import}()},
+\code{\link{rba_reactome_analysis_mapping}()},
+\code{\link{rba_reactome_analysis_pdf}()},
+\code{\link{rba_reactome_analysis_species}()},
+\code{\link{rba_reactome_analysis}()}
+}
+\concept{"Reactome Analysis Service, "}

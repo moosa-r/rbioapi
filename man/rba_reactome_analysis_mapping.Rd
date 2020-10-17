@@ -2,22 +2,78 @@
 % Please edit documentation in R/reactome_analysis.R
 \name{rba_reactome_analysis_mapping}
 \alias{rba_reactome_analysis_mapping}
-\title{Maps the identifiers over the different species}
+\title{Maps Molecule Identifiers}
 \usage{
 rba_reactome_analysis_mapping(
   input,
-  input_type = NA,
+  input_format = NA,
   projection = FALSE,
   interactors = FALSE,
   ...
 )
 }
 \arguments{
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{input}{A vector, local file path or URL that points to your
+identifiers list.}
+
+\item{input_format}{(Optional) This function will automatically identify
+your provided input's format. But in case of unexpected issues or if you
+want to be explicit, set this argument to one of:\itemize{
+\item "vector": If you provided a simple vector (numeric or character) as
+input.
+\item "file": If you provided a local file path pointing to a
+correctly-formatted text file.
+\item "url": If you provided a URL pointing to a correctly-formatted
+text file.}}
+
+\item{projection}{Logical (default = FALSE) Should non-human identifiers
+be projected to their human equivalents? (using Reactome orthology data)}
+
+\item{interactors}{Logical (default = FALSE) Should IntAct interaction data
+be included?}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+List containing your identifiers and the IDS and resources they
+  are mapped to.
 }
 \description{
-Maps the identifiers over the different species
+Use this function to map molecule identifiers of different species to
+  Reactome Identifiers.
 }
+\section{Corresponding API Resources}{
+
+"GET https://reactome.org/AnalysisService/mapping"\cr
+"GET https://reactome.org/AnalysisService/mapping/form"\cr
+"GET https://reactome.org/AnalysisService/mapping/form/projection"\cr
+"GET https://reactome.org/AnalysisService/mapping"\cr
+"GET https://reactome.org/AnalysisService/mapping/url"\cr
+"GET https://reactome.org/AnalysisService/mapping/url/projection"
+}
+
+\examples{
+rba_reactome_analysis_mapping(c("Q8SQ34", "cd40"))
+}
+\references{
+\itemize{
+  \item Fabregat A, Sidiropoulos K, Viteri G, Forner O, Marin-Garcia P,
+  Arnau V, D'Eustachio P, Stein L, Hermjakob H. Reactome pathway analysis:
+  a high-performance in-memory approach. BMC bioinformatics. 2017 Mar;18(1)
+  142. doi: 10.1186/s12859-017-1559-2. PubMed PMID: 28249561.
+  PubMed Central PMCID: PMC5333408.
+  \item \href{https://reactome.org/AnalysisService/}{Reactome Analysis
+  Services API Documentation}
+  }
+}
+\seealso{
+Other "Reactome Analysis Service, ": 
+\code{\link{rba_reactome_analysis_download}()},
+\code{\link{rba_reactome_analysis_import}()},
+\code{\link{rba_reactome_analysis_pdf}()},
+\code{\link{rba_reactome_analysis_species}()},
+\code{\link{rba_reactome_analysis_token}()},
+\code{\link{rba_reactome_analysis}()}
+}
+\concept{"Reactome Analysis Service, "}

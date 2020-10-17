@@ -2,7 +2,7 @@
 % Please edit documentation in R/reactome_analysis.R
 \name{rba_reactome_analysis_download}
 \alias{rba_reactome_analysis_download}
-\title{download Methods to download different views of a result}
+\title{Download Different Reactome Analysis Results}
 \usage{
 rba_reactome_analysis_download(
   token,
@@ -13,13 +13,84 @@ rba_reactome_analysis_download(
 )
 }
 \arguments{
-\item{resource}{}
+\item{token}{A token associated to your previous Reactome analysis.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{request}{What to download? Should be one of:\itemize{
+\item "found_ids": Download a CSV file containing the found user-provided
+identifiers in the analysis associated with your provided token and
+resource.
+\item "not_found_ids"" Download a CSV file containing the user-provided
+Identifiers which has not been found in the analysis associated with your
+provided token.
+\item "pathways": Download a CSV file containing Pathway analysis results
+of the analysis associated with your provided token and resource.
+\item "results": Download a JSON file containing the complete analysis
+results associated with your provided token.
+\item "results_gz" Same as "results", but the output will be compress
+(gzipped).}}
+
+\item{save_to}{NA or Character:\itemize{
+\item NA: Save the file to an automatically-generated path.
+\item Character string: A valid file path to save the file to.}}
+
+\item{resource}{(Only when request is "found_ids" or "pathways")
+Filter results based on the resource. Default is "TOTAL",
+available choices are:\cr "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
+"MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
+"PUBCHEM_COMPOUND".}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+NULL, a CSV,JSON or Gzipped JSON file will be saved to disk
+  based on your input.
 }
 \description{
-download Methods to download different views of a result
+Based on the "request" argument, you can download different analysis
+  results data associated with a given token.
 }
+\details{
+Token is associated to each Reactome analysis results and kept by Reactome
+  for at least 7 days. You can locate it in
+  \code{\link{rba_reactome_analysis}}'s output, under a sub-list named
+  "summary" (i.e. results$summary$token).\cr
+  Use \code{\link{rba_reactome_analysis_pdf}} to save a full report
+  in PDF format.
+}
+\section{Corresponding API Resources}{
+
+GET https://reactome.org/AnalysisService/download/{token}/entities/
+found/{resource}/{filename}.csv"\cr
+GET https://reactome.org/AnalysisService//download/{token}/entities/
+notfound/{filename}.csv"\cr
+GET https://reactome.org/AnalysisService/download/{token}/pathways/
+{resource}/{filename}.csv"\cr
+GET https://reactome.org/AnalysisService/download/{token}/result.json"\cr
+GET https://reactome.org/AnalysisService/download/{token}/result.json.gz"
+}
+
+\references{
+\itemize{
+  \item Fabregat A, Sidiropoulos K, Viteri G, Forner O, Marin-Garcia P,
+  Arnau V, D'Eustachio P, Stein L, Hermjakob H. Reactome pathway analysis:
+  a high-performance in-memory approach. BMC bioinformatics. 2017 Mar;18(1)
+  142. doi: 10.1186/s12859-017-1559-2. PubMed PMID: 28249561.
+  PubMed Central PMCID: PMC5333408.
+  \item \href{https://reactome.org/AnalysisService/}{Reactome Analysis
+  Services API Documentation}
+  }
+}
+\seealso{
+\code{\link{rba_reactome_analysis_pdf}}
+\code{\link{rba_reactome_analysis}}
+
+Other "Reactome Analysis Service, ": 
+\code{\link{rba_reactome_analysis_import}()},
+\code{\link{rba_reactome_analysis_mapping}()},
+\code{\link{rba_reactome_analysis_pdf}()},
+\code{\link{rba_reactome_analysis_species}()},
+\code{\link{rba_reactome_analysis_token}()},
+\code{\link{rba_reactome_analysis}()}
+}
+\concept{"Reactome Analysis Service, "}

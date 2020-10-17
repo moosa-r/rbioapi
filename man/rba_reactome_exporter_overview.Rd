@@ -53,11 +53,12 @@ flagging a diagram element? (default = TRUE)}
 \item{margin}{Numeric: A number ranging from 0 to 20 to set as the image's
 margin. (default = 15)}
 
-\item{diagram_profile}{Diagram color profile, should be one of "Copper"
+\item{diagram_profile}{Color profile of diagrams, should be one of "Copper"
 (default), "Copper Plus", "Barium Lithium" or "calcium salts".}
 
 \item{token}{The analysis Token for which the results will be overlaid on
-top of the given pathways overview.}
+top of the given pathways overview. see:
+\code{\link{rba_reactome_analysis}}.}
 
 \item{resource}{The analysis resource for which the results will be
 overlaid on top of the given pathways overview.}
@@ -103,6 +104,8 @@ This function will Save a Pathway Overview of the provided specie
   }
 }
 \seealso{
+\code{\link{rba_reactome_analysis}}
+
 Other "Reactome Content Service, Format Exporter": 
 \code{\link{rba_reactome_exporter_diagram}()},
 \code{\link{rba_reactome_exporter_event}()},

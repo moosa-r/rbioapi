@@ -24,8 +24,8 @@ List containing found Orthologous event(s) in your provided species
   and their pertinent information.
 }
 \description{
-Reactome Computationally incorporate manually curated human reactions and
-  PANTHER's protein homology data to infer events in other euakaryotic
+Reactome incorporate manually curated human reactions and PANTHER's
+  protein homology data to Computationally infer events in other euakaryotic
   species.
 }
 \details{
@@ -56,5 +56,8 @@ rba_reactome_orthology(ids = c("R-HSA-6799198", " R-HSA-72764"),
   \item \href{https://reactome.org/ContentService/}{Reactome Content
   Services API Documentation}
   }
+}
+\seealso{
+\code{\link{rba_reactome_analysis_species}}
 }
 \concept{"Reactome Content Service, Orthology Related Queries"}
