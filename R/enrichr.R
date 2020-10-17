@@ -336,7 +336,7 @@ rba_enrichr_enrich = function(user_list_id,
   ## Load Global Options
   rba_ba_ext_args(...)
   ## get a list of available libraries
-  if (is.null(getOption("rba_enrichr_libs"))){
+  if (is.null(getOption("rba_enrichr_libs"))) {
     v_msg("Calling rba_enrichr_info() to get the names of available Enricr libraries.")
     invisible(rba_enrichr_info(store_in_options = TRUE))
   }

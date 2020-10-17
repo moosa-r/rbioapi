@@ -796,7 +796,7 @@ rba_string_enrichment = function(ids,
   ## Load Global Options
   rba_ba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg ="ids",
+  rba_ba_args(cons = list(list(arg = "ids",
                                class = c("character", "numeric")),
                           list(arg = "species",
                                class = "numeric"),

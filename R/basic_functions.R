@@ -300,7 +300,7 @@ rba_ba_query = function(init, ...) {
     ext_par = ext_par$extra_pars
   }
   ## evaluate extra parameters
-  for(i in seq_along(ext_par)){
+  for (i in seq_along(ext_par)) {
     # check if the condition has more than 1 element
     if (length(ext_par[[i]][[2]]) > 1) {
       warning("Internal Query Builder:\r\n",
@@ -692,7 +692,7 @@ rba_ba_args = function(cons = NULL,
   ### 2 Check arguments
   errors = c()
   ## 2.1 check for errors
-  for (i in seq_along(cons)){
+  for (i in seq_along(cons)) {
     # evaluate the i'th argument's constrains sub-list
     cons_i = cons[[i]]
     arg_name = cons_i[["arg"]]
@@ -816,7 +816,7 @@ rba_ba_args = function(cons = NULL,
              "should be either a charachter or quoted call!", call. = TRUE)
       }
       # 3.1.2 check if the expression is TRUE
-      if (cond_i_1 == TRUE){
+      if (cond_i_1 == TRUE) {
         #add the error message if existed
         cond_i_error = ifelse(length(cond_i) > 1,
                               yes = cond_i[[2]],
@@ -839,7 +839,7 @@ rba_ba_args = function(cons = NULL,
       # 3.3 stop or warn!
       if (cond_warning == TRUE) {
         warning(cond_message, call. = diagnostics)
-      } else { stop(cond_message, call. = diagnostics) }
+      } else {stop(cond_message, call. = diagnostics)}
     }
   } # end of if (!all(is.null(cond)))
   invisible()
@@ -1111,7 +1111,7 @@ rba_ba_file = function(file,
                   call. = diagnostics)
         }
       }
-    } else if (save_to == TRUE){
+    } else if (save_to == TRUE) {
       ## 2b User didn't provide a file path, use defaults
       overwrite = FALSE
       ## 2b.1 extract the default file name and extension
@@ -1139,14 +1139,14 @@ rba_ba_file = function(file,
                                          file_name, file_ext),
                                  exst_files, perl = TRUE))
       if (length(incrt) == 0) { incrt = 1
-      } else { incrt = max(as.numeric(incrt)) + 1 }
+      } else {incrt = max(as.numeric(incrt)) + 1}
       save_to = file.path(getwd(), dir_name,
                           paste0(file_name, "_", incrt, ".", file_ext))
     } else {
       ## 3.2 file doesn't exist. create the directory just in case
       ### 4 create the directory
       dir.create(dirname(save_to),
-                 showWarnings = diagnostics,
+                 showWarnings = FALSE,
                  recursive = TRUE)
     }
     if (verbose == TRUE) {message(sprintf("Saving the server response to: \"%s\"",
