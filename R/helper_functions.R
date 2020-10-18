@@ -13,7 +13,8 @@
 #' @param diagnostics logical: Generate diagnostics and detailed messages with
 #'   internal information.
 #'
-#' @return NULL
+#' @return NULL, Connection test for the supported servers will be displayed
+#'   in console
 #' @family "Helper functions"
 #' @keywords Helper
 #' @export
@@ -173,7 +174,8 @@ rba_options = function(client_timeout = NA,
 #'   (only in Rtudio enviroment).
 #'   }
 #
-#' @return NULL
+#' @return NULL, messages about regard to neccassary citations will be
+#'   displayed in the console.
 #' @family "Helper functions"
 #' @keywords Helper
 #' @export
@@ -181,7 +183,7 @@ rba_citation = function(...) {
   ## 1 Prepare input
   input = as.character(substitute(list(...)))
   cat(sprintf("\r\n\ \U2022 To cite %s:\r\n \U2022\U2022 %s- %s\r\n",
-              c("rbioapi", "R"), 1:2, c(rba_ba_stg("citation", "rbioapi"),
+              c("rbioapi", "R"), c(1,2), c(rba_ba_stg("citation", "rbioapi"),
                                         rba_ba_stg("citations", "r"))))
   if (length(input) == 1) {
     cat("\U2022 If you are not sure what services or databases to cite, you could call rba_citation() with:\r\n",

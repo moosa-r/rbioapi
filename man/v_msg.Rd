@@ -21,6 +21,9 @@ if that variable is 'TRUE'. note: the variable should be of class 'logical'.}
 
 \item{sep, collapse}{to be passed to paste() if being called.}
 }
+\value{
+NULL, a message will be diplayed if verbose = TRUE
+}
 \description{
 This function is a more versatile version of message(), and makes the
   package's messaging system more minimal to code.

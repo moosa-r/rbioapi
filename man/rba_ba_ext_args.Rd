@@ -10,7 +10,8 @@ rba_ba_ext_args(...)
 \item{...}{}
 }
 \value{
-
+NULL, if arguments check failed, code execution will be stopped.
+  otherwise, nothing will be returned nor displayed.
 }
 \description{
 The '...' argument of any exported function will be passed to this function.

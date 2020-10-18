@@ -17,6 +17,10 @@ scripts.
 (only in Rtudio enviroment).
 }}
 }
+\value{
+NULL, messages about regard to neccassary citations will be
+  displayed in the console.
+}
 \description{
 Since rbioapi will ultimately connects you other services, In addition to
  rbioapi , you should also cite those services if you have used rbioapi

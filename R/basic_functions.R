@@ -990,7 +990,7 @@ rba_ba_error_parser = function(response,
 #' @param ... will be passed to '...' argument of the function sprintf() or
 #'   paste().
 #'
-#' @return NULL
+#' @return NULL, a message will be diplayed if verbose = TRUE
 #'
 #' @family internal_misc
 #' @export
@@ -1186,7 +1186,8 @@ rba_ba_file = function(file,
 #'   issues an informative warning for the user.
 #' @param ...
 #'
-#' @return
+#' @return NULL, if arguments check failed, code execution will be stopped.
+#'   otherwise, nothing will be returned nor displayed.
 #'
 #' @family internal_options
 #' @export

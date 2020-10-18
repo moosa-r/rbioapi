@@ -10,6 +10,10 @@ rba_connection_test(diagnostics = FALSE)
 \item{diagnostics}{logical: Generate diagnostics and detailed messages with
 internal information.}
 }
+\value{
+NULL, Connection test for the supported servers will be displayed
+  in console
+}
 \description{
 Run this function to test the internet connectivity of your device and the
   current status of the supported Services.
