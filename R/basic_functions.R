@@ -1096,22 +1096,36 @@ rba_ba_file = function(file,
         save_to = TRUE
       } else {
         ## 2a.2 the provided file path is valid
-        overwrite = TRUE
-        # extract the file name and extension
-        file_ext = regmatches(basename(save_to),
-                              regexpr("(?<=\\.)\\w+?$",
-                                      basename(save_to), perl = TRUE))
-        file_name = regmatches(basename(save_to),
-                               regexpr(sprintf("^.*(?=\\.%s$)", file_ext),
-                                       basename(save_to), perl = TRUE))
-        # 2a.3 Check if the path and extension agree
-        if (!grepl(def_file_ext, file_ext, ignore.case = TRUE)) {
-          warning(sprintf("The Response file's type (\"%s\") does not match the extension of your provided file path(\"%s\").",
-                          def_file_ext, basename(save_to)),
-                  call. = diagnostics)
+        ## 2a.2.1 Does the path end to a directory or file?
+        if (!grepl("/$", save_to, perl = TRUE) &&
+            grepl("\\S+\\.\\S*", basename(save_to), perl = TRUE)) {
+          # 2a.2.1a it's file!
+          overwrite = TRUE
+          # extract the file name and extension
+          file_ext = regmatches(basename(save_to),
+                                regexpr("(?<=\\.)\\w+?$",
+                                        basename(save_to), perl = TRUE))
+          file_name = regmatches(basename(save_to),
+                                 regexpr(sprintf("^.*(?=\\.%s$)", file_ext),
+                                         basename(save_to), perl = TRUE))
+          # 2a.3 Check if the path and extension agree
+          if (!grepl(def_file_ext, file_ext, ignore.case = TRUE)) {
+            warning(sprintf("The Response file's type (\"%s\") does not match the extension of your provided file path(\"%s\").",
+                            def_file_ext, basename(save_to)),
+                    call. = diagnostics)
+          }
+        } else {
+          #2a.2.1b it's directory
+          overwrite = FALSE
+          ## append the default file name to the direcotry path
+          file_ext = def_file_ext
+          file_name = def_file_name
+          save_to = file.path(sub("/$", "", save_to),
+                              paste0(file_name, ".", file_ext))
         }
       }
-    } else if (save_to == TRUE) {
+    }
+    if (save_to == TRUE) {
       ## 2b User didn't provide a file path, use defaults
       overwrite = FALSE
       ## 2b.1 extract the default file name and extension
@@ -1133,14 +1147,15 @@ rba_ba_file = function(file,
       ## add an incremented file
       exst_files = list.files(path = dirname(save_to),
                               pattern = sprintf("(^%s)(_\\d+)*(\\.%s$)",
-                                                file_name, file_ext))
+                                                file_name, file_ext),
+                              full.names = FALSE)
       incrt = regmatches(exst_files,
                          regexpr(sprintf("(?<=^%s_)(\\d+)*(?=\\.%s)",
                                          file_name, file_ext),
                                  exst_files, perl = TRUE))
       if (length(incrt) == 0) { incrt = 1
       } else {incrt = max(as.numeric(incrt)) + 1}
-      save_to = file.path(getwd(), dir_name,
+      save_to = file.path(dirname(save_to),
                           paste0(file_name, "_", incrt, ".", file_ext))
     } else {
       ## 3.2 file doesn't exist. create the directory just in case
