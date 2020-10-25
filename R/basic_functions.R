@@ -45,7 +45,7 @@ rba_ba_stg = function(...){
                                     err = "404",
                                     err_prs = "json->list_simp",
                                     err_fun = function(x) {x[["messages"]][[1]]},
-                                    ),
+                  ),
                   string = switch(arg[[2]],
                                   name = "STRING",
                                   url = "https://version-11-0.string-db.org",
@@ -97,7 +97,7 @@ rba_ba_net_handle = function(retry_max = 1,
                              wait_time = 10,
                              verbose = FALSE,
                              diagnostics = FALSE) {
-  if (diagnostics == TRUE) {message("Testing the internet connection.")}
+  if (isTRUE(diagnostics)) {message("Testing the internet connection.")}
   test_call = quote(httr::status_code(httr::HEAD("https://www.google.com/",
                                                  httr::timeout(getOption("rba_client_timeout")),
                                                  if (diagnostics) httr::verbose()
@@ -108,7 +108,7 @@ rba_ba_net_handle = function(retry_max = 1,
 
   while (net_status != 200 & retry_count < retry_max) {
     retry_count = retry_count + 1
-    if (verbose == TRUE) {
+    if (isTRUE(verbose)) {
       message(sprintf("No internet connection, waiting for %s seconds and retrying (retry count:  %s/%s).",
                       wait_time,
                       retry_count,
@@ -120,7 +120,7 @@ rba_ba_net_handle = function(retry_max = 1,
   } #end of while
 
   if (net_status == 200) {
-    if (diagnostics == TRUE) {message("Device is connected to the internet!")}
+    if (isTRUE(diagnostics)) {message("Device is connected to the internet!")}
   } else {
     stop("No internet connection; Stopping code execution!",
          call. = diagnostics)
@@ -266,7 +266,7 @@ rba_ba_http_status = function(http_status, verbose = FALSE){
                                 http_status, resp$class, resp$deff),
                   no = sprintf("HTTP Status '%s' (%s class)",
                                http_status, resp$class))
-  if (verbose == TRUE) {
+  if (isTRUE(verbose)) {
     output = sprintf("The server returned %s.", output)
   }
   return(output)
@@ -315,7 +315,7 @@ rba_ba_query = function(init, ...) {
               ext_par[[i]][[1]], " is not logical, thus skipping it.",
               call. = TRUE, immediate. = TRUE)
     } else {
-      if (ext_par[[i]][[2]][[1]] == TRUE) {
+      if (isTRUE(ext_par[[i]][[2]][[1]])) {
         init[[ext_par[[i]][[1]]]] = ext_par[[i]][[3]]
       }
     }
@@ -389,10 +389,10 @@ rba_ba_httr = function(httr,
                    quote(httr::user_agent(getOption("rba_user_agent"))),
                    quote(httr::timeout(client_timeout))
   )
-  if (diagnostics == TRUE) {
+  if (isTRUE(diagnostics)) {
     httr_call = append(httr_call, quote(httr::verbose()))
   }
-  if (progress_bar == TRUE) {
+  if (isTRUE(progress_bar)) {
     httr_call = append(httr_call, quote(httr::progress()))
   }
 
@@ -492,7 +492,7 @@ rba_ba_api_call = function(input_call,
   response = try(eval(input_call, envir = parent.frame(n = 2)),
                  silent = !diagnostics)
   ## 2 check the internet connection & 5xx http status
-  if (class(response) != "response" ||
+  if (!is(response, "response") ||
       substr(response$status_code, 1, 1) == "5") {
     ## 2.1 there is an internet connection or server issue
     # wait for the internet connection
@@ -500,7 +500,7 @@ rba_ba_api_call = function(input_call,
                                       wait_time = no_internet_wait_time,
                                       verbose = verbose,
                                       diagnostics = diagnostics)
-    if (net_connected == TRUE) {
+    if (isTRUE(net_connected)) {
       ## 2.1.1 net_connection test is passed
       response = try(eval(input_call, envir = parent.frame(n = 2)),
                      silent = !diagnostics)
@@ -512,10 +512,10 @@ rba_ba_api_call = function(input_call,
   } # end of step 2
 
   ## 3 Decide what to return
-  if (class(response) != "response") {
+  if (!is(response, "response")) {
     ## 3.1 errors un-related to server's response
     error_message = response
-    if (skip_error == TRUE) {
+    if (isTRUE(skip_error)) {
       return(error_message, call. = diagnostics)
     } else {
       stop(error_message, call. = diagnostics)
@@ -523,7 +523,7 @@ rba_ba_api_call = function(input_call,
   } else if (as.character(response$status_code) != "200") {
     ## 3.2 API call was not successful
     error_message = rba_ba_error_parser(response = response, verbose = verbose)
-    if (skip_error == TRUE) {
+    if (isTRUE(skip_error)) {
       return(error_message)
     } else {
       stop(error_message, call. = diagnostics)
@@ -588,7 +588,7 @@ rba_ba_skeleton = function(input_call,
     parser_input = input_call$parser
   }
 
-  if (class(response) == "response" && !is.null(parser_input)) {
+  if (is(response, "response") && !is.null(parser_input)) {
     final_output = rba_ba_response_parser(parser = parser_input)
   } else {
     final_output = response
@@ -699,7 +699,7 @@ rba_ba_args = function(cons = NULL,
 
     arg = try(eval(parse(text = arg_name), envir = parent.frame(1)),
               silent = TRUE)
-    if (class(arg) == "try-error") {
+    if (is(arg, "try-error")) {
       ## try to prettify the error message
       pretty_error = regmatches(arg,
                                 regexpr("(?<= : (\\\n  ){1}).*(?=\\\n)",
@@ -816,7 +816,7 @@ rba_ba_args = function(cons = NULL,
              "should be either a charachter or quoted call!", call. = TRUE)
       }
       # 3.1.2 check if the expression is TRUE
-      if (cond_i_1 == TRUE) {
+      if (isTRUE(cond_i_1)) {
         #add the error message if existed
         cond_i_error = ifelse(length(cond_i) > 1,
                               yes = cond_i[[2]],
@@ -837,7 +837,7 @@ rba_ba_args = function(cons = NULL,
                                cond_message)
       }
       # 3.3 stop or warn!
-      if (cond_warning == TRUE) {
+      if (isTRUE(cond_warning)) {
         warning(cond_message, call. = diagnostics)
       } else {stop(cond_message, call. = diagnostics)}
     }
@@ -879,6 +879,11 @@ rba_ba_response_parser = function(parser) {
                                                                                    encoding = "UTF-8"),
                                                                      flatten = TRUE),
                                                   stringsAsFactors = FALSE)),
+                    "json->df_no_flat" = quote(data.frame(jsonlite::fromJSON(httr::content(response,
+                                                                                           as = "text",
+                                                                                           encoding = "UTF-8"),
+                                                                             flatten = FALSE),
+                                                          stringsAsFactors = FALSE)),
                     "json->list_simp" = quote(as.list(jsonlite::fromJSON(httr::content(response,
                                                                                        as = "text",
                                                                                        encoding = "UTF-8"),
@@ -945,7 +950,7 @@ rba_ba_error_parser = function(response,
       break
     }
   }
-  if (db_found == TRUE &&
+  if (isTRUE(db_found) &&
       as.character(response$status_code) %in% rba_ba_stg(db, "err")) {
     ## The API server returns an error string for this status code
     error_message = tryCatch({
@@ -995,8 +1000,8 @@ rba_ba_error_parser = function(response,
 #' @family internal_misc
 #' @export
 v_msg = function(fmt, ..., sprintf = TRUE, cond = "verbose", sep = "", collapse = NULL) {
-  if (get0(cond, envir = parent.frame(1), ifnotfound = FALSE) == TRUE) {
-    message(ifelse(sprintf == TRUE && is.character(fmt) && grepl("%s", fmt),
+  if (isTRUE(get0(cond, envir = parent.frame(1), ifnotfound = FALSE))) {
+    message(ifelse(isTRUE(sprintf) && is.character(fmt) && grepl("%s", fmt),
                    yes = sprintf(fmt, ...),
                    no = paste(fmt, ..., sep = sep, collapse = collapse)),
             appendLF = TRUE)
@@ -1125,7 +1130,7 @@ rba_ba_file = function(file,
         }
       }
     }
-    if (save_to == TRUE) {
+    if (isTRUE(save_to)) {
       ## 2b User didn't provide a file path, use defaults
       overwrite = FALSE
       ## 2b.1 extract the default file name and extension
@@ -1164,7 +1169,7 @@ rba_ba_file = function(file,
                  showWarnings = FALSE,
                  recursive = TRUE)
     }
-    if (verbose == TRUE) {message(sprintf("Saving the server response to: \"%s\"",
+    if (isTRUE(verbose)) {message(sprintf("Saving the server response to: \"%s\"",
                                           save_to))}
   } # end if save_to != FALSE
   return(save_to)
