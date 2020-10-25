@@ -1,8 +1,12 @@
 .Rproj.user
+.rproj.user
+.rproj
 .Rhistory
+.rhistory
 .RData
 .Ruserdata
 .Rprofile
+.rprofile
 rbioapi.Rproj
 desktop.ini
 icon.ico
