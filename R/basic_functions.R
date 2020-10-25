@@ -403,7 +403,7 @@ rba_ba_httr = function(httr,
             utils::hasName(ext_args, "file_accept"),
             utils::hasName(ext_args, "obj_accept")) == 3) {
       ## 3.1.a it was up to the  end-user to choose the response type
-      if (ext_args$save_to == FALSE) {
+      if (isFALSE(ext_args$save_to)) {
         httr_call = append(httr_call,
                            list(str2lang(sprintf("httr::accept(\"%s\")",
                                                  ext_args$obj_accept))))
@@ -426,7 +426,7 @@ rba_ba_httr = function(httr,
                                                  ext_args$accept))))
       }
       # save to file?
-      if (utils::hasName(ext_args, "save_to") && ext_args$save_to != FALSE) {
+      if (utils::hasName(ext_args, "save_to") && !isFALSE(ext_args$save_to)) {
         httr_call = append(httr_call,
                            list(str2lang(sprintf("httr::write_disk(\"%s\", overwrite = TRUE)",
                                                  ext_args$save_to))))
@@ -550,12 +550,13 @@ rba_ba_api_call = function(input_call,
 #'
 #' @param input_call list: The exact output of rba_ba_httr()
 #' @param response_parser A string vector corresponding to the pre-defined
-#'   parser calls in rba_ba_parser() or an expression to be evaluated by
-#'   rba_ba_parser().
+#'   parser calls in rba_ba_response_parser() or an expression to be evaluated by
+#'   rba_ba_response_parser().
 #'
 #' @return A parsed server Response which may be and R object of any class,
-#'   depending on rba_ba_parser() output. In case of error and 'skip_error =
-#'     TRUE', the output will be the error message as a character string.
+#'   depending on rba_ba_response_parser() output. In case of error and
+#'   'skip_error = TRUE', the output will be the error message as a character
+#'   string.
 #'
 #' @family internal_api_calls
 #' @export
@@ -1078,7 +1079,7 @@ rba_ba_file = function(file,
   if (is.na(save_to)) {save_to = get0(x = "save_resp_file",
                                       ifnotfound = FALSE,
                                       envir = parent.frame(1))}
-  if (save_to != FALSE) {
+  if (!isFALSE(save_to)) {
     ## 1 file path will be generated unless save_to == FALSE
     # set values
     diagnostics = get0("diagnostics", envir = parent.frame(1),
@@ -1147,8 +1148,7 @@ rba_ba_file = function(file,
 
     ## 3 now that you have a file path...
     ## 3.1 check if a file doesn't exist with this path
-    if (overwrite == FALSE &&
-        file.exists(save_to)) {
+    if (isFALSE(overwrite) && file.exists(save_to)) {
       ## add an incremented file
       exst_files = list.files(path = dirname(save_to),
                               pattern = sprintf("(^%s)(_\\d+)*(\\.%s$)",
@@ -1171,7 +1171,7 @@ rba_ba_file = function(file,
     }
     if (isTRUE(verbose)) {message(sprintf("Saving the server response to: \"%s\"",
                                           save_to))}
-  } # end if save_to != FALSE
+  } # end if !isFALSE(save_to)
   return(save_to)
 }
 

@@ -56,7 +56,7 @@ rba_ba_reactome_input = function(input,
     }
   }
   ### 2 handle input
-  if (handle == FALSE) {
+  if (isFALSE(handle)) {
     return(type)
   } else {
     if (type == "file" |
@@ -323,7 +323,7 @@ rba_reactome_analysis = function(input,
   if (input$type == "url") {
     paste0(path_input, "/url")
   }
-  if (projection == TRUE) {
+  if (isTRUE(projection)) {
     path_input = paste0(path_input, "/projection")
   }
   input_call = rba_ba_httr(httr = "post",
@@ -833,7 +833,7 @@ rba_reactome_analysis_mapping = function(input,
   if (input$type == "url") {
     paste0(path_input, "/url")
   }
-  if (projection == TRUE) {
+  if (isTRUE(projection)) {
     path_input = paste0(path_input, "/projection")
   }
   input_call = rba_ba_httr(httr = "post",

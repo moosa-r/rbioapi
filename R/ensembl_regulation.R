@@ -290,7 +290,7 @@ rba_ensembl_microarray_regulatory_feature = function(regulatory_feature_id,
   ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("activity",
-                                 activity == TRUE,
+                                 activity,
                                  "1"))
   ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",

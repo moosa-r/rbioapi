@@ -107,16 +107,16 @@ rba_ensembl_variation_id = function(ids,
   ## Build POST API Request's query
   call_query = rba_ba_query(init = list(),
                             list("genotypes",
-                                 genotypes == TRUE,
+                                 genotypes,
                                  "1"),
                             list("phenotypes",
-                                 phenotypes == TRUE,
+                                 phenotypes,
                                  "1"),
                             list("pops",
-                                 pops == TRUE,
+                                 pops,
                                  "1"),
                             list("population_genotypes",
-                                 population_genotypes == TRUE,
+                                 population_genotypes,
                                  "1"))
   ## Build POST API Request's URL
   call_body = jsonlite::toJSON(list("ids" = as.array(ids)))

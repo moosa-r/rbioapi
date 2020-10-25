@@ -39,13 +39,13 @@ rba_ensembl_transcript_haplotypes = function(transcript_id,
   ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("aligned_sequences",
-                                 aligned_sequences == TRUE,
+                                 aligned_sequences,
                                  "1"),
                             list("samples",
-                                 samples == TRUE,
+                                 samples,
                                  "1"),
                             list("sequence",
-                                 sequence == TRUE,
+                                 sequence,
                                  "1"))
 
   ## Build Function-Specific Call

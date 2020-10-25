@@ -92,10 +92,10 @@ rba_reactome_diseases = function(doid = FALSE,
                                class = "logical")))
 
   v_msg("Retrieving Reactome's diseases %s.",
-        ifelse(doid == TRUE, yes = "DOID data", no = "annotations"))
+        ifelse(isTRUE(doid), yes = "DOID data", no = "annotations"))
 
   ## Build Function-Specific Call
-  if (doid == FALSE) {
+  if (isFALSE(doid)) {
     path_input = paste0(rba_ba_stg("reactome", "pth", "content"),
                         "data/diseases")
     accept_input = "application/json"
@@ -177,7 +177,7 @@ rba_reactome_complex_subunits = function(complex_id,
   ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("excludeStructures",
-                                 exclude_structures == TRUE,
+                                 exclude_structures,
                                  "true"))
   ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
@@ -682,7 +682,7 @@ rba_reactome_exporter_diagram = function(event_id,
               cond = list(list(quote(!is.na(exp_column) && is.na(token)),
                                "You cannot specify expression column without providing a token.")))
 
-  if (create_document == TRUE) {
+  if (isTRUE(create_document)) {
     v_msg("Retrieving a PDF document of event %s details.", event_id)
     ## Build Function-Specific Call
     call_query = rba_ba_query(init = list(),
@@ -724,19 +724,19 @@ rba_reactome_exporter_diagram = function(event_id,
                                    !is.na(flag_element),
                                    flag_element),
                               list("flgInteractors",
-                                   flg_interactors == FALSE,
+                                   !flg_interactors,
                                    "false"),
                               list("sel",
                                    !is.na(sel),
                                    sel),
                               list("title",
-                                   title == FALSE,
+                                   !title,
                                    "false"),
                               list("margin",
                                    margin != 15,
                                    as.integer(margin)),
                               list("ehld",
-                                   ehld == FALSE,
+                                   !ehld,
                                    "false"))
 
     accept_input = ifelse(output_format == "svg",
@@ -977,13 +977,13 @@ rba_reactome_exporter_overview = function(species,
                                  !is.na(flag_element),
                                  flag_element),
                             list("flgInteractors",
-                                 flg_interactors == FALSE,
+                                 !flg_interactors,
                                  "false"),
                             list("sel",
                                  !is.na(sel),
                                  sel),
                             list("title",
-                                 title == FALSE,
+                                 !title,
                                  "false"),
                             list("margin",
                                  margin != 15,
@@ -1001,7 +1001,7 @@ rba_reactome_exporter_overview = function(species,
                                  !is.na(exp_column),
                                  exp_column),
                             list("coverage",
-                                 coverage == TRUE,
+                                 coverage,
                                  "true"))
 
   ## Build Function-Specific Call
@@ -1174,13 +1174,13 @@ rba_reactome_exporter_reaction = function(event_id,
                                  !is.na(flag_element),
                                  flag_element),
                             list("flgInteractors",
-                                 flg_interactors == FALSE,
+                                 !flg_interactors,
                                  "false"),
                             list("sel",
                                  !is.na(sel),
                                  sel),
                             list("title",
-                                 title == FALSE,
+                                 !title,
                                  "false"),
                             list("margin",
                                  margin != 15,
@@ -1299,7 +1299,7 @@ rba_reactome_interactors_psicquic = function(proteins = NA,
               cond = list(list(quote(sum(!is.na(proteins), !is.na(resource))),
                                "You should provide 'proteins' and 'resource' togeather.")))
   if (any(!is.na(proteins))) {
-    details = ifelse(details == TRUE, yes = "details", no = "summary")
+    details = ifelse(isTRUE(details), yes = "details", no = "summary")
     v_msg("Retrieving %s of clustered interactions of %s ptoteins(s) from %s.",
           details,
           ifelse(length(proteins) == 1,
@@ -1425,7 +1425,7 @@ rba_reactome_interactors_static = function(proteins,
   if (endpoint == "pathways") {
     v_msg("Retrieving pathways with the Static(IntAct) Interactors of protein %s.",
           proteins)
-    call_query = rba_ba_query(init = list("onlyDiagrammed" = ifelse(only_diagrammed == TRUE,
+    call_query = rba_ba_query(init = list("onlyDiagrammed" = ifelse(isTRUE(only_diagrammed),
                                                                     yes = "true",
                                                                     no = "false")),
                               list("species",
@@ -1737,10 +1737,10 @@ rba_reactome_participants = function(event_id,
                       "data/participants/",
                       event_id)
   parser_input = "json->list"
-  if (only_physical_entities == TRUE) {
+  if (isTRUE(only_physical_entities)) {
     path_input = paste0(path_input, "/participatingPhysicalEntities")
     parser_input = "json->df"
-  } else if (only_reference_entities == TRUE) {
+  } else if (isTRUE(only_reference_entities)) {
     path_input = paste0(path_input, "/referenceEntities")
     parser_input = "json->df"
   }
@@ -1928,19 +1928,19 @@ rba_reactome_pathways_low = function(entity_id,
                                          "numeric"))))
 
   v_msg("Retrieving lower-level pathways that include %sentity %s%s.",
-        ifelse(all_forms == TRUE,
+        ifelse(isTRUE(all_forms),
                yes = "any form of ", no = ""),
         entity_id,
-        ifelse(with_diagram == TRUE,
+        ifelse(isTRUE(with_diagram),
                yes = " and have diagram", no = ""))
   ## Build Function-Specific Call
   path_input = sprintf("%sdata/pathways/%s/%s",
                        rba_ba_stg("reactome", "pth", "content"),
-                       ifelse(with_diagram == TRUE,
+                       ifelse(isTRUE(with_diagram),
                               yes = "low/diagram/entity",
                               no = "low/entity"),
                        entity_id)
-  if (all_forms == TRUE) {
+  if (isTRUE(all_forms)) {
     path_input = paste0(path_input,
                         "/allForms")
   }
@@ -2086,7 +2086,7 @@ rba_reactome_people_name = function(person_name,
   path_input = paste0(rba_ba_stg("reactome", "pth", "content"),
                       "data/people/name/",
                       gsub(" ", "%20", person_name))
-  if (exact_match == TRUE) {
+  if (isTRUE(exact_match)) {
     path_input = paste0(path_input, "/exact")
   }
   input_call = rba_ba_httr(httr = "get",
@@ -2153,8 +2153,8 @@ rba_reactome_people_id = function(person_id,
                           list(arg = "attribute_name",
                                class = "character")),
               cond = list(list(quote(sum(!is.na(attribute_name),
-                                         authored_pathways == TRUE,
-                                         publications == TRUE) > 1),
+                                         isTRUE(authored_pathways),
+                                         isTRUE(publications)) > 1),
                                "You can only use either attribute_name, authored_pathways or publications function call.")))
 
   v_msg("Retrieving information of person with id: %s",
@@ -2167,9 +2167,9 @@ rba_reactome_people_id = function(person_id,
   accept_input = "application/json"
   parser_type_input = "json->list"
   file_ext = "json"
-  if (authored_pathways == TRUE) {
+  if (isTRUE(authored_pathways)) {
     path_input = paste0(path_input, "/authoredPathways")
-  } else if (publications == TRUE) {
+  } else if (isTRUE(publications)) {
     path_input = paste0(path_input, "/publications")
   } else if (!is.na(attribute_name)) {
     path_input = paste0(path_input, "/", attribute_name)
@@ -2256,9 +2256,9 @@ rba_reactome_query = function(ids,
                           list(arg = "attribute_name",
                                class = "character")),
               cond = list(list(quote(length(ids) > 1 &&
-                                       (enhanced == TRUE | !is.na(attribute_name))),
+                                       (isTRUE(enhanced) | !is.na(attribute_name))),
                                "You can only use 'enhnaced' or 'attribute_name' with a single ID not multiple IDs."),
-                          list(quote(!is.na(attribute_name) && enhanced == TRUE),
+                          list(quote(!is.na(attribute_name) && isTRUE(enhanced)),
                                "You can only provide 'attribute_name' when enhanced is 'FALSE'.")))
 
   if (length(ids) > 1) {
@@ -2268,7 +2268,7 @@ rba_reactome_query = function(ids,
     ## Build POST API Request's URL
     call_body = paste(unique(ids),collapse = ",")
     path_input = paste0(rba_ba_stg("reactome", "pth", "content"),
-                        ifelse(map == TRUE,
+                        ifelse(isTRUE(map),
                                yes = "data/query/ids/map",
                                no = "data/query/ids"))
     ## Build Function-Specific Call
@@ -2296,7 +2296,7 @@ rba_reactome_query = function(ids,
       accept_input = "text/plain"
       parser_input = "text->chr"
       file_ext = "txt"
-    } else if (enhanced == TRUE) {
+    } else if (isTRUE(enhanced)) {
       v_msg("GET /data/query/enhanced/{id}",
             "More information on an entry in Reactome knowledgebase")
       path_input = sub("/query/", "/query/enhanced/", path_input)
@@ -2432,7 +2432,7 @@ rba_reactome_species = function(only_main = FALSE,
                                class = "logical")))
 
   v_msg("Retrieving %sspecies available in Reactome.",
-        ifelse(only_main == TRUE,
+        ifelse(isTRUE(only_main),
                yes = "main (i.e. with pathways) ",
                no = ""))
 
@@ -2441,7 +2441,7 @@ rba_reactome_species = function(only_main = FALSE,
                            url = rba_ba_stg("reactome", "url"),
                            path = paste0(rba_ba_stg("reactome", "pth", "content"),
                                          "data/species/",
-                                         ifelse(only_main == TRUE,
+                                         ifelse(isTRUE(only_main),
                                                 yes = "main", no = "all")),
                            accept = "application/json",
                            parser = "json->df",

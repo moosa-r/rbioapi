@@ -96,7 +96,7 @@ rba_ensembl_sequence_id = function(ids,
                                  !is.na(mask),
                                  mask),
                             list("mask_feature",
-                                 mask_feature == TRUE,
+                                 mask_feature,
                                  "1"),
                             list("object_type",
                                  !is.na(object_type),
@@ -203,7 +203,7 @@ rba_ensembl_sequence_region = function(regions,
                                  !is.na(mask),
                                  mask),
                             list("mask_feature",
-                                 mask_feature == TRUE,
+                                 mask_feature,
                                  "1"))
   ## Build POST API Request's URL
   call_body = jsonlite::toJSON(list("regions" = as.array(regions)))

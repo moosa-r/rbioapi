@@ -71,10 +71,10 @@ rba_ensembl_info_aassembly = function(species,
   ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("bands",
-                                 bands == TRUE,
+                                 bands,
                                  "1"),
                             list("synonyms",
-                                 synonyms == TRUE,
+                                 synonyms,
                                  "1"))
 
   ## Build Function-Specific Call
@@ -139,7 +139,7 @@ rba_ensembl_info_biotypes = function(species = NA,
                                "when providing 'specie', you can not provide 'name', 'group' or 'object_type'."),
                           list(quote(all(!is.na(name), !is.na(group))),
                                "You can not provide 'name' and 'group' at the same time."),
-                          list(quote(!is.na(group) && any(!is.character(group), group == TRUE)),
+                          list(quote(!is.na(group) && any(!is.character(group), isTRUE(group))),
                                "'group' should be either a 'character string' or 'TRUE'."),
                           list(quote(!is.na(object_type) & all(is.na(group), is.na(name))),
                                "You can not provide 'object_type' without providing either 'name' or 'group'.")
@@ -207,30 +207,30 @@ rba_ensembl_info_compara = function(compara = NA,
                                class = "logical"),
                           list(arg = "methods_class",
                                class = "character")),
-              cond = list(list(quote(!is.na(compara) & all(methods == FALSE, species_sets == FALSE)),
+              cond = list(list(quote(!is.na(compara) & all(isFALSE(methods), isFALSE(species_sets))),
                                "You can not provide 'compara' without using either 'methods' or 'species_sets'."),
-                          list(quote(species_sets == TRUE & !is.na(methods_class)),
+                          list(quote(isTRUE(species_sets) & !is.na(methods_class)),
                                "You can not provide 'methods_class' when using 'species_set."),
-                          list(quote(species_sets == TRUE & !is.character(methods)),
+                          list(quote(isTRUE(species_sets) & !is.character(methods)),
                                "when using 'species_sets', you should provide 'method' as a 'charachter string'."),
-                          list(quote(is.character(methods) && species_sets == FALSE),
+                          list(quote(is.character(methods) && isFALSE(species_sets)),
                                "When using 'methods' alone without 'species_sets', it should 'logical' not a 'charachter string'")
               ))
   v_msg("GET info/comparas")
 
   ## Build GET API Request's query
-  if (all(is.na(compara), methods == FALSE, species_sets == FALSE)) {
+  if (all(is.na(compara), isFALSE(methods), isFALSE(species_sets))) {
     path_input = "info/comparas"
     parser_input = "json->df"
     call_query = NULL
-  } else if (species_sets == TRUE) {
+  } else if (isTRUE(species_sets)) {
     path_input = paste0("info/compara/species_sets/", methods)
     parser_input = "json->list_simp"
     call_query = rba_ba_query(init = list(),
                               list("compara",
                                    !is.na(compara),
                                    compara))
-  } else if (methods == TRUE) {
+  } else if (isTRUE(methods)) {
     path_input = "info/compara/methods/"
     parser_input = "json->list_simp"
     call_query = rba_ba_query(init = list(),
@@ -444,7 +444,7 @@ rba_ensembl_info_genomes = function(genome_name = NA,
   ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("expand",
-                                 expand == TRUE,
+                                 expand,
                                  "1"))
 
   ## Build Function-Specific Call
@@ -457,7 +457,7 @@ rba_ensembl_info_genomes = function(genome_name = NA,
     path_input = paste0("info/genomes/assembly/", INSDC_assembly_id)
   } else if (!is.na(division_name)) {
     path_input = paste0("info/genomes/division/", division_name)
-    if (expand == FALSE) {parser_input = "json->df"}
+    if (isFALSE(expand)) {parser_input = "json->df"}
   } else if (!is.na(taxon_name)) {
     path_input = paste0("info/genomes/taxonomy/", taxon_name)
   }
@@ -509,7 +509,7 @@ rba_ensembl_info_species = function(division = "EnsemblVertebrates",
                                  division != "EnsemblVertebrates",
                                  division),
                             list("hide_strain_info",
-                                 hide_strain_info == TRUE,
+                                 hide_strain_info,
                                  "1"),
                             list("strain_collection",
                                  !is.na(strain_collection),
@@ -572,31 +572,31 @@ rba_ensembl_info_variation = function(species = NA,
                           list(arg = "populations_filter",
                                class = "character",
                                len = 1)),
-              cond = list(list(quote(sum(consequence_types == TRUE, !is.na(species)) != 1),
+              cond = list(list(quote(sum(isTRUE(consequence_types), !is.na(species)) != 1),
                                "You should either set 'consequence_types' to 'TRUE' or provide 'species'."),
                           list(quote(sum(!is.na(species), !is.na(populations)) == 1),
                                "You should either provide both of 'species' and 'population' or none of them."),
-                          list(quote(!is.na(populations_filter) & !is.na(populations) & populations != TRUE),
+                          list(quote(!is.na(populations_filter) & !is.na(populations) & !isTRUE(populations)),
                                "You can not provide 'populations_filter' when 'populations' is not set to 'TRUE'."),
-                          list(quote(!is.na(variation_source) & !is.na(populations) & populations != FALSE),
+                          list(quote(!is.na(variation_source) & !is.na(populations) & !isFALSE(populations)),
                                "You can not provide 'variation_source' when 'populations' is not set to 'FALSE'."))
   )
   ## Decide which function to call
   parser_input = "json->df"
-  if (consequence_types == TRUE) {
+  if (isTRUE(consequence_types)) {
     call_query = rba_ba_query(init = list(),
                               list("consequence_rank",
-                                   consequence_rank == TRUE,
+                                   consequence_rank,
                                    "1"))
     path_input = "info/variation/consequence_types"
   } else if (!is.na(species)) {
-    if (populations == FALSE) {
+    if (isFALSE(populations)) {
       call_query = rba_ba_query(init = list(),
                                 list("filter",
                                      !is.na(variation_source),
                                      variation_source))
       path_input = paste0("info/variation/", species)
-    } else if (populations == TRUE) {
+    } else if (isTRUE(populations)) {
       call_query = rba_ba_query(init = list(),
                                 list("populations_filter",
                                      !is.na(populations_filter),

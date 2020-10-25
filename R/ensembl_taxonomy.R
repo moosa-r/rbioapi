@@ -61,7 +61,7 @@ rba_ensembl_taxonomy_search = function(taxon = NA,
                                class = "logical")),
               cond = list(list(quote(sum(!is.na(taxon), !is.na(non_scientific_name)) != 1),
                                "You shoul provide one of 'taxon' or 'non_scientific_name'."),
-                          list(quote(simple == TRUE && is.na(taxon)),
+                          list(quote(isTRUE(simple) && is.na(taxon)),
                                "You can only set 'simple' to 'TRUE' when providing 'taxon'")))
 
   v_msg("GET taxonomy/id/:id")
@@ -69,7 +69,7 @@ rba_ensembl_taxonomy_search = function(taxon = NA,
   ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("simple",
-                                 simple == TRUE,
+                                 simple,
                                  "1"))
   ## Build Function-Specific Call
   path_input = ifelse(!is.na(taxon),

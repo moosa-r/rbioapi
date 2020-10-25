@@ -49,7 +49,7 @@ rba_ensembl_ld_variants = function(variant_id,
   ## Build GET API Request's query
   call_query = rba_ba_query(init = list(),
                             list("attribs",
-                                 attribs == TRUE,
+                                 attribs,
                                  "1"),
                             list("d_prime",
                                  !is.na(d_prime),

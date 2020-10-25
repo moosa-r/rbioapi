@@ -35,7 +35,7 @@ rba_ensembl_ontology_ancestors = function(term_id,
                                  ontology))
 
   ## Build Function-Specific Call
-  if (chart == TRUE) {
+  if (isTRUE(chart)) {
     path_input = paste0("ontology/ancestors/chart/",
                         term_id)
     parser_input = "json->list_simp"

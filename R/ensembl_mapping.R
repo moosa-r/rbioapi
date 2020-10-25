@@ -39,7 +39,7 @@ rba_ensembl_map_cdna = function(ensembl_id,
                                  !is.na(species),
                                  species),
                             list("include_original_region",
-                                 include_original_region == TRUE,
+                                 include_original_region,
                                  include_original_region))
 
   ## Build Function-Specific Call
@@ -97,7 +97,7 @@ rba_ensembl_map_cds = function(ensembl_id,
                                  !is.na(species),
                                  species),
                             list("include_original_region",
-                                 include_original_region == TRUE,
+                                 include_original_region,
                                  include_original_region))
 
   ## Build Function-Specific Call

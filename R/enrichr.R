@@ -65,7 +65,7 @@ rba_enrichr_info = function(store_in_options = FALSE,
   final_output = rba_ba_skeleton(input_call)
 
   ## Save Library Names as Global Options
-  if (store_in_options == TRUE) {
+  if (isTRUE(store_in_options)) {
     options(rba_enrichr_libs = final_output[["statistics.libraryName"]])
   }
   return(final_output)
@@ -347,7 +347,7 @@ rba_enrichr_enrich = function(user_list_id,
     run_mode = "multiple"
     gene_set_library = getOption("rba_enrichr_libs")
   } else {
-    if (regex_library_name == FALSE) {
+    if (isFALSE(regex_library_name)) {
       run_mode = "single"
     } else {
       gene_set_library = grep(gene_set_library,
@@ -394,7 +394,7 @@ rba_enrichr_enrich = function(user_list_id,
                  "libraries and your network connection."),
           length(gene_set_library))
     ## initiate progress bar
-    if (multi_libs_progress_bar == TRUE) {
+    if (isTRUE(multi_libs_progress_bar)) {
       pb = utils::txtProgressBar(min = 0,
                                  max = length(gene_set_library),
                                  style = 3)
@@ -408,7 +408,7 @@ rba_enrichr_enrich = function(user_list_id,
                                                                                              x),
                                                                          ...)
                             #advance the progress bar
-                            if (multi_libs_progress_bar == TRUE) {
+                            if (isTRUE(multi_libs_progress_bar)) {
                               utils::setTxtProgressBar(pb, which(gene_set_library == x))
                             }
                             return(lib_enrich_res)
@@ -470,7 +470,7 @@ rba_enrichr_gene_map = function(gene,
   call_query = rba_ba_query(init = list("gene" = gene,
                                         "json" = "true"),
                             list("setup",
-                                 catagorize == TRUE,
+                                 isTRUE(catagorize),
                                  "true"))
   ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
