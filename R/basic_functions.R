@@ -985,7 +985,6 @@ rba_ba_error_parser = function(response,
 #'   argument's string input didn't contain "%s", the function will pass the
 #'   the inputs to paste().
 #'
-#'
 #' @param fmt passed to 'fmt' arguments in sprintf() or as the first argument of
 #'   paste(), depending on the situation.
 #' @param sprintf logical: should the 'fmt' and '...' be passed to sprintf if

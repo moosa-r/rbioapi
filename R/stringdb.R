@@ -353,7 +353,7 @@ rba_string_network_image = function(ids,
 #'
 #' @family "STRING API"
 #' @seealso
-#'   \code{\link{rba_string_map_ids}, \link{rba_string_interaction_partners}
+#'   \code{\link{rba_string_map_ids}, \link{rba_string_interaction_partners}}
 #' @export
 rba_string_interactions_network = function(ids,
                                            species = NA,

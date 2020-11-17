@@ -10,13 +10,14 @@ rba_ba_skeleton(input_call, response_parser = NULL)
 \item{input_call}{list: The exact output of rba_ba_httr()}
 
 \item{response_parser}{A string vector corresponding to the pre-defined
-parser calls in rba_ba_parser() or an expression to be evaluated by
-rba_ba_parser().}
+parser calls in rba_ba_response_parser() or an expression to be evaluated by
+rba_ba_response_parser().}
 }
 \value{
 A parsed server Response which may be and R object of any class,
-  depending on rba_ba_parser() output. In case of error and 'skip_error =
-    TRUE', the output will be the error message as a character string.
+  depending on rba_ba_response_parser() output. In case of error and
+  'skip_error = TRUE', the output will be the error message as a character
+  string.
 }
 \description{
 This function will be called at the last step of any exported function to
