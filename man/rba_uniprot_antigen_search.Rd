@@ -2,25 +2,73 @@
 % Please edit documentation in R/uniprot_proteins.R
 \name{rba_uniprot_antigen_search}
 \alias{rba_uniprot_antigen_search}
-\title{Search antigens in UniProt}
+\title{Search Antigens in UniProt}
 \usage{
 rba_uniprot_antigen_search(
   accession = NA,
   antigen_sequence = NA,
-  antigen_id = NA,
+  hpa_id = NA,
   ensembl_id = NA,
   match_score = NA,
   ...
 )
 }
 \arguments{
-\item{accession}{}
+\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+UniProtKB primary or secondary accession}(s). You can provide up to 100
+accession numbers.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{antigen_sequence}{Protein sequence in the antigenic site.}
+
+\item{hpa_id}{Human Protein Atlas (HPA) antigen ID. You can provide up to
+20 IDs.}
+
+\item{ensembl_id}{Ensembl Stable Transcript ID. You can provide up to
+20 IDs.}
+
+\item{match_score}{(Numeric) Minimum alignment score for the antigen
+sequence and the target protein sequence.}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+A list Where each element correspond to a UniProt protein (search
+ hit) and Antigenic features are organized under the "features" sub-list.
 }
 \description{
-Search antigens in UniProt
+UniProt maps Antigenic (Antibody-binding) features from different sources
+  to the proteins' sequences. Using this function, you can search for
+  Antigenic sequences that has been map to UniProt proteins. You may also
+  refine your search with modifiers such as score etc. refer to
+  "Arguments section" for more information.
 }
+\details{
+Note that this is a search function. Thus, you are not required to fill
+  every argument; You may use whatever combinations of arguments you see
+  fit for your query.\cr\cr
+}
+\section{Corresponding API Resources}{
+
+ "GET https://www.ebi.ac.uk/proteins/api/antigen"
+}
+
+\examples{
+rba_uniprot_antigen_search(hpa_id = "HPA001060")
+}
+\references{
+\itemize{
+  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
+  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
+  Turner, Maria Martin, The Proteins API: accessing key integrated protein
+  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
+  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+  Documentation}
+  }
+}
+\seealso{
+Other "UniProt API, Antigen": 
+\code{\link{rba_uniprot_antigen}()}
+}
+\concept{"UniProt API, Antigen"}

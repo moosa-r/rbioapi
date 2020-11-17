@@ -23,13 +23,110 @@ rba_uniprot_proteins_search(
 )
 }
 \arguments{
-\item{md5}{}
+\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+UniProtKB primary or secondary accession}(s). You can provide up to 100
+accession numbers.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{reviewed}{Logical: If TRUE, only return
+"UniProtKB/Swiss-Prot" (reviewed) entries; If FALSE, only return TrEMBL
+(un-reviewed) entries.}
+
+\item{isoform}{Numeric: you have three options:\itemize{
+\item 0: Exclude isoforms.
+\item 1: Return isoforms only.
+\item 2: Return both.}
+see: \href{https://www.uniprot.org/help/alternative_products}{Alternative
+products}}
+
+\item{go_term}{Limit the search to entries associated with your provided GO
+(\href{https://www.uniprot.org/help/gene_ontology}{Gene Ontology}) term.
+You can provide Either GO ID or a character string -partially or fully-
+matching the term. e.g. "GO:0001776" or "leukocyte homeostasis". if You
+provide "leukocyte", any term containing that word will be included,
+e.g "leukocyte chemotaxis", "leukocyte activation".}
+
+\item{keyword}{Limit the search to entries that contain your provided
+keyword. see: \href{https://www.uniprot.org/keywords/}{UniProt Keywords}}
+
+\item{ec}{\href{https://enzyme.expasy.org/}{EC (Enzyme Commission) number(s)}.
+You can provide up to 20 EC numbers.}
+
+\item{gene}{\href{https://www.uniprot.org/help/gene_name}{UniProt gene
+name(s)}. You can provide up to 20 gene names. e.g. if you provide
+"CD40", "CD40 ligand" will also be included.}
+
+\item{exact_gene}{\href{https://www.uniprot.org/help/gene_name}{UniProt
+exact gene name(s)}. You can provide up to 20 exact gene names. e.g.
+if you provide "CD40", "CD40 ligand" will not be included in the results.}
+
+\item{protein}{\href{https://www.uniprot.org/help/protein_names}{UniProt
+protein name}}
+
+\item{organism}{\href{https://www.uniprot.org/taxonomy/}{Organism name}.}
+
+\item{taxid}{NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+You can provide up to 20 taxon IDs.}
+
+\item{pubmed}{Entries which \href{https://www.uniprot.org/citations/}{cite
+to} the article with your provided PubMed ID.}
+
+\item{seq_length}{Refine your search to a exact sequence length (e.g. 150)
+or a range of sequence lengths (e.g. "130-158").}
+
+\item{md5}{Sequence md5 value.}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+List where each element corresponds to one UniProt entity returned
+  by your search query. The element itself is a sub-list containing all
+  information that UniProt has about that entity.
 }
 \description{
-Search UniProt entries
+Using this function, you can search and retrieve UniProt Knowledge-base
+  (UniProtKB) protein entries using variety of options. You may also
+  refine your search with modifiers such as sequence length, reviews status
+  etc. refer to "Arguments" section" for more information.
 }
+\details{
+Note that this is a search function. Thus, you are not required to fill
+  every argument; You may use whatever combinations of arguments you see
+  fit for your query.\cr\cr
+  UniProt Entries are grouped in two sections:\enumerate{
+  \item Reviewed(Swiss-Prot): Manually annotated records with information
+  extracted from literature and curator-evaluated computational analysis.
+  \item Unreviewed (TrEMBL): Computationally analyzed records that await
+  full manual annotation.}
+}
+\section{Corresponding API Resources}{
+
+ "GET https://www.ebi.ac.uk/proteins/api/proteins"
+}
+
+\examples{
+rba_uniprot_proteins_search(accession = "Q99616")
+rba_uniprot_proteins_search(gene = "cd40")
+rba_uniprot_proteins_search(gene = "cd40 ligand")
+rba_uniprot_proteins_search(gene = "cd40",  reviewed = "TRUE")
+rba_uniprot_proteins_search(gene = "cd40",  reviewed = TRUE, isoform = 1)
+rba_uniprot_proteins_search(keyword = "Inhibition of host chemokines by virus")
+rba_uniprot_proteins_search(keyword = "chemokines")
+}
+\references{
+\itemize{
+  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
+  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
+  Turner, Maria Martin, The Proteins API: accessing key integrated protein
+  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
+  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+  Documentation}
+  }
+}
+\seealso{
+Other "UniProt API, Proteins": 
+\code{\link{rba_uniprot_proteins_crossref}()},
+\code{\link{rba_uniprot_proteins}()}
+}
+\concept{"UniProt API, Proteins"}

@@ -2,7 +2,11 @@
 % Please edit documentation in R/uniprot_proteins.R
 \name{rba_uniprot_features_search}
 \alias{rba_uniprot_features_search}
-\title{Search protein sequence features in UniProt}
+\title{UniProt maintains \href{https://www.uniprot.org/help/sequence_annotation}{
+  sequence annotations (features)} that describe regions
+  in the protein sequence. Using this function, you can search and
+  retrieve UniProt proteins' sequence annotations (features). you may also
+  refine your search query with variety of modifiers.}
 \usage{
 rba_uniprot_features_search(
   accession = NA,
@@ -18,13 +22,91 @@ rba_uniprot_features_search(
 )
 }
 \arguments{
-\item{types}{}
+\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+UniProtKB primary or secondary accession}(s). You can provide up to 100
+accession numbers.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{gene}{\href{https://www.uniprot.org/help/gene_name}{UniProt gene
+name(s)}. You can provide up to 20 gene names. e.g. if you provide
+"CD40", "CD40 ligand" will also be included.}
+
+\item{exact_gene}{\href{https://www.uniprot.org/help/gene_name}{UniProt
+exact gene name(s)}. You can provide up to 20 exact gene names. e.g.
+if you provide "CD40", "CD40 ligand" will not be included in the results.}
+
+\item{protein}{\href{https://www.uniprot.org/help/protein_names}{UniProt
+protein name}}
+
+\item{reviewed}{Logical: If TRUE, only return
+"UniProtKB/Swiss-Prot" (reviewed) entries; If FALSE, only return TrEMBL
+(un-reviewed) entries.}
+
+\item{organism}{\href{https://www.uniprot.org/taxonomy/}{Organism name}.}
+
+\item{taxid}{NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+You can provide up to 20 taxon IDs.}
+
+\item{categories}{\href{https://www.uniprot.org/help/sequence_annotation}{
+Sequence annotation (Features)} categories (subsection). accepted values
+are: "MOLECULE_PROCESSING", "TOPOLOGY", "SEQUENCE_INFORMATION",
+"STRUCTURAL", "DOMAINS_AND_SITES", "PTM", "VARIANTS" and/or "MUTAGENESIS".
+You can provide up to 8 categories.}
+
+\item{types}{\href{https://www.uniprot.org/help/sequence_annotation}{
+Sequence annotation (Features)} types. accepted values
+are: "INIT_MET", "SIGNAL", "PROPEP", "TRANSIT", "CHAIN", "PEPTIDE",
+"TOPO_DOM", "TRANSMEM", "DOMAIN", "REPEAT", "CA_BIND", "ZN_FING",
+"DNA_BIND", "NP_BIND", "REGION", "COILED", "MOTIF", "COMPBIAS",
+"ACT_SITE", "METAL", "BINDING", "SITE", "NON_STD", "MOD_RES", "LIPID",
+"CARBOHYD", "DISULFID", "CROSSLNK", "VAR_SEQ", "VARIANT", "MUTAGEN",
+"UNSURE", "CONFLICT", "NON_CONS", "NON_TER", "HELIX", "TURN", "STRAND"
+and/or "INTRAMEM". You can provide up to 20 types.}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+List where each element corresponds to one UniProt entity returned
+  by your search query. The element itself is a sub-list containing all
+  information that UniProt has about that entity.
 }
 \description{
-Search protein sequence features in UniProt
+Note that this is a search function. Thus, you are not required to fill
+  every argument; You may use whatever combinations of arguments you see
+  fit for your query.\cr\cr
+  UniProt Entries are grouped in two sections:\enumerate{
+  \item Reviewed(Swiss-Prot): Manually annotated records with information
+  extracted from literature and curator-evaluated computational analysis.
+  \item Unreviewed (TrEMBL): Computationally analyzed records that await
+  full manual annotation.}
 }
+\section{Corresponding API Resources}{
+
+ "GET https://www.ebi.ac.uk/proteins/api/features"
+}
+
+\examples{
+rba_uniprot_features_search(accession = "Q99616")
+rba_uniprot_features_search(gene = "cd40")
+rba_uniprot_features_search(gene = "cd40 ligand")
+rba_uniprot_features_search(gene = "cd40",  reviewed = "TRUE")
+rba_uniprot_features_search(accession = "Q99616",
+  categories = c(MOLECULE_PROCESSING, TOPOLOGY))
+rba_uniprot_features_search(accession = "Q99616", types = "DISULFID")
+}
+\references{
+\itemize{
+  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
+  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
+  Turner, Maria Martin, The Proteins API: accessing key integrated protein
+  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
+  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+  Documentation}
+  }
+}
+\seealso{
+Other "UniProt API, Features": 
+\code{\link{rba_uniprot_features}()}
+}
+\concept{"UniProt API, Features"}

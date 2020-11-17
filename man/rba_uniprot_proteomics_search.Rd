@@ -2,26 +2,92 @@
 % Please edit documentation in R/uniprot_proteins.R
 \name{rba_uniprot_proteomics_search}
 \alias{rba_uniprot_proteomics_search}
-\title{Search proteomics peptides in UniProt}
+\title{Search Proteomics Peptides in UniProt}
 \usage{
 rba_uniprot_proteomics_search(
   accession = NA,
+  data_source = NA,
   taxid = NA,
   upid = NA,
-  data_source = NA,
   peptide = NA,
   unique = NA,
   ...
 )
 }
 \arguments{
-\item{unique}{}
+\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+UniProtKB primary or secondary accession}(s). You can provide up to 100
+accession numbers.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{data_source}{Proteomics data source. You can choose up to two of:
+\itemize{
+\item \href{https://www.uniprot.org/database/DB-0186}{"MaxQB"}
+\item \href{https://www.uniprot.org/database/DB-0071}{"PeptideAtlas"}
+\item \href{https://www.uniprot.org/database/DB-0205}{"EPD"}
+\item \href{https://www.uniprot.org/database/DB-0229}{"ProteomicsDB"}
+}}
+
+\item{taxid}{NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+You can provide up to 20 taxon IDs.}
+
+\item{upid}{\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
+identifier (UPID)}. You can provide up to 100 UPIDs.}
+
+\item{peptide}{Peptide sequence(s). You can provide up to 20 sequences.}
+
+\item{unique}{Logical: Should the results be filtered based on the
+Peptide's uniqueness (the fact that a peptide maps to only 1 protein). If
+TRUE, Only unique peptides will be returened, if FALSE only un-uniqque
+peptides will be returened; If NA (default) the results will not be
+filtered based on this.}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+A list Where each element correspond to a UniProt protein and
+  proteomics peptides are organized under the "features" sub-list.
 }
 \description{
-Search proteomics peptides in UniProt
+UniProt maps proteomics peptides from different sources to the proteins'
+  sequences. Using this function, you can search for  proteomics
+  peptides that has been map to UniProt proteins. You may also refine your
+  search with modifiers such as data_source, peptide etc. refer to
+  "Arguments section" for more information.
 }
+\details{
+Note that this is a search function. Thus, you are not required to fill
+  every argument; You may use whatever combinations of arguments you see
+  fit for your query.\cr\cr
+  see also: \href{Mass spectrometry-based proteomics data in
+  UniProtKB}{https://www.uniprot.org/help/proteomics}
+}
+\section{Corresponding API Resources}{
+
+ "GET https://www.ebi.ac.uk/proteins/api/proteomics"
+}
+
+\examples{
+rba_uniprot_proteomics_search(peptide = "MEDYTKIEK")
+rba_uniprot_proteomics_search(peptide = "MEDYTKIEK")
+\dontrun{rba_uniprot_proteomics_search(taxid = 9606,
+data_source = "PeptideAtlas", progress_bar = TRUE,
+client_timeout = 999999, unique = TRUE)}
+rba_uniprot_proteomics_search(taxid = 9606, data_source = "PeptideAtlas", progress_bar = TRUE, client_timeout = 999999, unique = TRUE)
+}
+\references{
+\itemize{
+  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
+  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
+  Turner, Maria Martin, The Proteins API: accessing key integrated protein
+  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
+  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+  Documentation}
+  }
+}
+\seealso{
+Other "UniProt API, Proteomics": 
+\code{\link{rba_uniprot_proteomics}()}
+}
+\concept{"UniProt API, Proteomics"}

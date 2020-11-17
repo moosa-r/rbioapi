@@ -2,18 +2,47 @@
 % Please edit documentation in R/uniprot_proteins.R
 \name{rba_uniprot_antigen}
 \alias{rba_uniprot_antigen}
-\title{Get antigen by UniProt accession}
+\title{Get Antigens by UniProt Accession}
 \usage{
 rba_uniprot_antigen(accession, ...)
 }
 \arguments{
-\item{accession}{}
+\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+UniProtKB primary or secondary accession}(s).}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+A list containing the Antigenic features of your provided
+  UniProt protein's sequence.
 }
 \description{
-Get antigen by UniProt accession
+UniProt maps Antigenic features from different sources to the proteins'
+  sequences. Using this function, you can retrieve all the Antigenic
+  features that has been map to a given UniProt protein's sequence.
 }
+\section{Corresponding API Resources}{
+
+ "GET https://www.ebi.ac.uk/proteins/api/antigen/{accession}"
+}
+
+\examples{
+rba_uniprot_antigen("P04626")
+}
+\references{
+\itemize{
+  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
+  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
+  Turner, Maria Martin, The Proteins API: accessing key integrated protein
+  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
+  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+  Documentation}
+  }
+}
+\seealso{
+Other "UniProt API, Antigen": 
+\code{\link{rba_uniprot_antigen_search}()}
+}
+\concept{"UniProt API, Antigen"}

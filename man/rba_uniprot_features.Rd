@@ -7,13 +7,60 @@
 rba_uniprot_features(accession, types = NA, categories = NA, ...)
 }
 \arguments{
-\item{categories}{}
+\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+UniProtKB primary or secondary accession}.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{types}{\href{https://www.uniprot.org/help/sequence_annotation}{
+Sequence annotation (Features)} types. accepted values
+are: "INIT_MET", "SIGNAL", "PROPEP", "TRANSIT", "CHAIN", "PEPTIDE",
+"TOPO_DOM", "TRANSMEM", "DOMAIN", "REPEAT", "CA_BIND", "ZN_FING",
+"DNA_BIND", "NP_BIND", "REGION", "COILED", "MOTIF", "COMPBIAS",
+"ACT_SITE", "METAL", "BINDING", "SITE", "NON_STD", "MOD_RES", "LIPID",
+"CARBOHYD", "DISULFID", "CROSSLNK", "VAR_SEQ", "VARIANT", "MUTAGEN",
+"UNSURE", "CONFLICT", "NON_CONS", "NON_TER", "HELIX", "TURN", "STRAND"
+and/or "INTRAMEM". You can provide up to 20 types.}
+
+\item{categories}{\href{https://www.uniprot.org/help/sequence_annotation}{
+Sequence annotation (Features)} categories (subsection). accepted values
+are: "MOLECULE_PROCESSING", "TOPOLOGY", "SEQUENCE_INFORMATION",
+"STRUCTURAL", "DOMAINS_AND_SITES", "PTM", "VARIANTS" and/or "MUTAGENESIS".
+You can provide up to 8 catagories.}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+A list in which you can find all of your given protein's sequence
+  annotations in a sub-list named "features".
 }
 \description{
-Get UniProt protein sequence features by accession
+Use this function to retrieve
+\href{https://www.uniprot.org/help/sequence_annotation}{sequence annotations
+  (features)} of a protein by it's UniProt accession.
 }
+\section{Corresponding API Resources}{
+
+ "GET https://www.ebi.ac.uk/proteins/api/features/{accession}"
+}
+
+\examples{
+rba_uniprot_features("Q99616")
+rba_uniprot_features(accession = "Q99616", types = "DISULFID")
+
+}
+\references{
+\itemize{
+  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
+  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
+  Turner, Maria Martin, The Proteins API: accessing key integrated protein
+  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
+  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+  Documentation}
+  }
+}
+\seealso{
+Other "UniProt API, Features": 
+\code{\link{rba_uniprot_features_search}()}
+}
+\concept{"UniProt API, Features"}

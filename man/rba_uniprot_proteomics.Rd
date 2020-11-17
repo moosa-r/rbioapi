@@ -2,18 +2,47 @@
 % Please edit documentation in R/uniprot_proteins.R
 \name{rba_uniprot_proteomics}
 \alias{rba_uniprot_proteomics}
-\title{Get proteomics peptides mapped to UniProt by accession}
+\title{Get Proteomics Peptides Mapped to UniProt Protein}
 \usage{
 rba_uniprot_proteomics(accession, ...)
 }
 \arguments{
-\item{accession}{}
+\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+UniProtKB primary or secondary accession}.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+A list containing the proteomics peptides features of your provided
+  UniProt protein's sequence.
 }
 \description{
-Get proteomics peptides mapped to UniProt by accession
+UniProt maps proteomics peptides from different sources to the proteins'
+  sequences. Using this function, you can retrieve all the proteomics
+  peptides features that has been map to a given UniProt protein's sequence.
 }
+\section{Corresponding API Resources}{
+
+ "GET https://www.ebi.ac.uk/proteins/api/proteomics/{accession}"
+}
+
+\examples{
+rba_uniprot_proteomics(accession = "P25942")
+}
+\references{
+\itemize{
+  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
+  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
+  Turner, Maria Martin, The Proteins API: accessing key integrated protein
+  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
+  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+  Documentation}
+  }
+}
+\seealso{
+Other "UniProt API, Proteomics": 
+\code{\link{rba_uniprot_proteomics_search}()}
+}
+\concept{"UniProt API, Proteomics"}

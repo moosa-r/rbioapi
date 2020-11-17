@@ -2,15 +2,10 @@
 % Please edit documentation in R/uniprot_proteins.R
 \name{rba_uniprot_variation_search}
 \alias{rba_uniprot_variation_search}
-\title{Search natural variants in UniProt
-Implementation Notes Among the available response content types, PEFF
-format (PSI Extended FASTA Format from the Human Proteome Organisation -
-Proteomics Standards Initiative, HUPO-PSI) is provided with only variants
-reported in the output.}
+\title{Search UniProt Natural Variants}
 \usage{
 rba_uniprot_variation_search(
   accession = NA,
-  save_peff = FALSE,
   source_type = NA,
   consequence_type = NA,
   wild_type = NA,
@@ -22,21 +17,110 @@ rba_uniprot_variation_search(
   taxid = NA,
   db_type = NA,
   db_id = NA,
+  save_peff = FALSE,
   ...
 )
 }
 \arguments{
-\item{save_peff}{}
+\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+UniProtKB primary or secondary accession}(s). You can provide up to 100
+accession numbers.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{source_type}{Variation's source type. You can choose up to two of:
+"UniProt", "large scale study" and/or "mixed".}
+
+\item{consequence_type}{Variation's consequence type. You can choose up to
+two of: "missense", "stop gained" or "stop lost".}
+
+\item{wild_type}{Wild type amino acid. Accepted values are IUPAC
+single-letter amino acid (e.g. D for    Aspartic acid) and "*" for stop
+codon. You can provide up to 20 values.}
+
+\item{alternative_sequence}{Alternative amino acid. Accepted values are IUPAC
+single-letter amino acid (e.g. D for    Aspartic acid) and "*" for stop codon
+and "-" for deletion. You can provide up to 20 values.}
+
+\item{location}{A valid amino acid range (e.g. 10-25) within the sequence
+range where the variation occurs. You can provide up to 20 values.}
+
+\item{disease}{\href{https://www.uniprot.org/diseases/}{Human disease}
+that are associated with a sequence variation. Accepted values are
+disease name (e.g. Alzheimer disease 18), partial disease name
+(Alzheimer) and/or disease acronym (e.g. AD). You can provide up to
+20 values.}
+
+\item{omim}{\href{https://www.ncbi.nlm.nih.gov/omim}{OMIM} ID that is
+associated with a variation. You can provide up to 20 values.}
+
+\item{evidence}{Pubmed ID of the variation's
+\href{https://www.uniprot.org/citations/}{citation} You can provide up
+to 20 values.}
+
+\item{taxid}{NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+You can provide up to 20 taxon IDs.}
+
+\item{db_type}{cross-reference database of the variation. You can provide
+up to two of the following:\itemize{
+\item "dbSNP": \href{https://www.ncbi.nlm.nih.gov/snp/}{NIH-NCBI dbSNP
+database}.
+\item "cosmic curate": \href{https://cancer.sanger.ac.uk/cosmic/}{COSMIC
+(the Catalogue of Somatic Mutations in Cancer)}
+\item "ClinVar": \href{https://www.ncbi.nlm.nih.gov/clinvar/}{NIH-NCBI
+ClinVar}
+}}
+
+\item{db_id}{The variation ID in a Cross-reference (external) database.
+You can provide up to 20 values.}
+
+\item{save_peff}{Logical or Character:\itemize{
+\item FALSE: (default) Do not save PEFF file, just return as a list object.
+\item TRUE: Save as PEFF file to an automatically-generated path.
+\item Character string: A valid file path to save the PEFF file.}}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+List where each element corresponds to one UniProt entity returned
+  by your search query. The element itself is a sub-list containing all
+  information that UniProt has about that Variation.
 }
 \description{
-Search natural variants in UniProt
-Implementation Notes Among the available response content types, PEFF
-format (PSI Extended FASTA Format from the Human Proteome Organisation -
-Proteomics Standards Initiative, HUPO-PSI) is provided with only variants
-reported in the output.
+Using this function, you can search and retrieve
+  \href{https://www.uniprot.org/help/variant}{Natural variant(s)} that
+  has been annotated in the protein's sequences. You may also refine your
+  search with modifiers such as source type, disease etc. refer to
+  "Arguments section" for more information.
 }
+\details{
+Note that this is a search function. Thus, you are not required to fill
+  every argument; You may use whatever combinations of arguments you see
+  fit for your query.\cr\cr
+}
+\section{Corresponding API Resources}{
+
+ "GET https://www.ebi.ac.uk/proteins/api/variation"
+}
+
+\examples{
+rba_uniprot_variation_search(accession = "P05067")
+rba_uniprot_variation_search(disease = "alzheimer disease, 18")
+rba_uniprot_variation_search(disease = "alzheimer",
+wild_type = "A", alternative_sequence = "T")
+}
+\references{
+\itemize{
+  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
+  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
+  Turner, Maria Martin, The Proteins API: accessing key integrated protein
+  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
+  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+  Documentation}
+  }
+}
+\seealso{
+Other "UniProt API, Variation": 
+\code{\link{rba_uniprot_variation}()}
+}
+\concept{"UniProt API, Variation"}
