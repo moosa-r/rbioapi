@@ -7,13 +7,57 @@
 rba_uniprot_proteomes(upid, get_proteins = FALSE, reviewed = NA, ...)
 }
 \arguments{
-\item{reviewed}{}
+\item{upid}{\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
+identifier (UPID)}. You can provide up to 100 UPIDs.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{get_proteins}{logical: set FALSE (default) to only return information
+of the proteome with provided UPID, set TRUE to also return the proteins
+ of the provided proteome UPID.}
+
+\item{reviewed}{Logical:  Only considered when get_proteins is TRUE.
+If TRUE, only return "UniProtKB/Swiss-Prot" (reviewed) proteins;
+If FALSE, only return TrEMBL (un-reviewed) entries. leave it as NA if you
+do not want to filter proteins based on their review status.}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+a list containing information of the proteome with your provided
+  UPID that can contain the proteomes protein entries based on the value of
+  get_proteins argument.
 }
 \description{
-Get proteome by proteome/proteins UPID
+UniProt collects and annotates proteomes(Protein sets expressed in an
+  organism). Using this function you can search UniProt for available
+  proteomes. see \href{https://www.uniprot.org/help/proteome}{What are
+  proteomes?} for more information.
 }
+\section{Corresponding API Resources}{
+
+ "GET https://ebi.ac.uk/proteins/api/proteomes/proteins/{upid}"
+ "GET https://ebi.ac.uk/proteins/api/proteomes/{upid}"
+}
+
+\examples{
+rba_uniprot_proteomes(upid = "UP000000354")
+rba_uniprot_proteomes(upid = "UP000000354", get_proteins = TRUE)
+}
+\references{
+\itemize{
+  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
+  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
+  Turner, Maria Martin, The Proteins API: accessing key integrated protein
+  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
+  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+  Documentation}
+  }
+}
+\seealso{
+Other "UniProt API, Proteomes": 
+\code{\link{rba_uniprot_genecentric_search}()},
+\code{\link{rba_uniprot_genecentric}()},
+\code{\link{rba_uniprot_proteomes_search}()}
+}
+\concept{"UniProt API, Proteomes"}

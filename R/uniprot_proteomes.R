@@ -1,22 +1,65 @@
 #### Proteomes Endpoints ####
-#' Search proteomes in UniProt
+#' Search Proteomes in UniProt
 #'
-#' @param keyword
-#' @param upid
-#' @param name
-#' @param xref
-#' @param genome_acc
-#' @param is_ref_proteome
-#' @param is_redundant
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
-#' @param taxid
+#' UniProt collects and annotates proteomes (Protein sets expressed in an
+#'   organism). Using this function you can search UniProt for available
+#'   proteomes. see \href{https://www.uniprot.org/help/proteome}{What are
+#'   proteomes?} for more information. You may also
+#'   refine your search with modifiers such as keyword, taxon id etc. refer to
+#'   "Arguments section" for more information.
 #'
-#' @return
-#' @export
+#'   Note that this is a search function. Thus, you are not required to fill
+#'   every argument; You may use whatever combinations of arguments you see
+#'   fit for your query.\cr\cr
+#'
+#' @section Corresponding API Resources:
+#'  "GET https://ebi.ac.uk/proteins/api/proteomes"
+#'
+#' @param name a keyword in proteome's name
+#' @param upid \href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
+#'   identifier (UPID)}. You can provide up to 100 UPIDs.
+#' @param taxid NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+#'   You can provide up to 20 taxon IDs.
+#' @param keyword Limit the search to entries that contain your provided
+#'   keyword. see: \href{https://www.uniprot.org/keywords/}{UniProt Keywords}
+#' @param xref Proteome cross-references such as Genome assembly ID or
+#'   Biosample ID. You can provide up to 20 cross-reference IDs.
+#' @param genome_acc Genome accession associated with the proteome's components.
+#' @param is_ref_proteome (logical) If TRUE, only return reference proteomes; If
+#'   FALSE, only returns non-reference proteomes; If NA (default), the results
+#'   will not be filtered by this criteria see
+#'   \href{https://www.uniprot.org/help/reference_proteome}{'What are reference
+#'   proteomes?'} for more information.
+#' @param is_redundant (logical) If TRUE, only return redundant proteomes; If
+#'   FALSE, only returns non-redundant proteomes; If NA (default), the results
+#'   will not be filtered by redundancy. see
+#'   \href{https://www.uniprot.org/help/proteome_redundancy}{'Reducing proteome
+#'   redundancy'} for more information.
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
+#'   arguments documentation for more information on available options.
+#'
+#' @return A list where each element is a list that corresponds to a single
+#'   proteome (search hit) and contains informations pertinent to that proteome.
+#'
+#' @references \itemize{
+#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
+#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
+#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
+#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
+#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+#'   Documentation}
+#'   }
 #'
 #' @examples
-rba_uniprot_proteomes_search = function(upid = NA,
-                                        name = NA,
+#' rba_uniprot_proteomes_search(name = "SARS-CoV")
+#' rba_uniprot_proteomes_search(name = "SARS-CoV", is_ref_proteome = TRUE)
+#' rba_uniprot_proteomes_search(name = "SARS-CoV", is_ref_proteome = TRUE)
+#' rba_uniprot_proteomes_search(genome_acc = "AY274119")
+#' @family "UniProt API, Proteomes"
+#' @export
+rba_uniprot_proteomes_search = function(name = NA,
+                                        upid = NA,
                                         taxid = NA,
                                         keyword = NA,
                                         xref = NA,
@@ -49,16 +92,16 @@ rba_uniprot_proteomes_search = function(upid = NA,
                                class = "logical"))
   )
 
-  v_msg("get /proteomes Search proteomes in UniProt")
+  v_msg("Searching UniProt and retrieving proteoms that match your provided inputs.")
   ## Build GET API Request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
+                            list("name",
+                                 !is.na(name),
+                                 name),
                             list("upid",
                                  any(!is.na(upid)),
                                  paste0(upid,
                                         collapse = ",")),
-                            list("name",
-                                 !is.na(name),
-                                 name),
                             list("taxid",
                                  any(!is.na(taxid)),
                                  paste0(taxid,
@@ -78,6 +121,11 @@ rba_uniprot_proteomes_search = function(upid = NA,
                                  !is.na(is_ref_proteome),
                                  ifelse(is_ref_proteome,
                                         "true",
+                                        "false")),
+                            list("is_redundant",
+                                 !is.na(is_redundant),
+                                 ifelse(is_redundant,
+                                        "true",
                                         "false")))
   ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
@@ -96,15 +144,46 @@ rba_uniprot_proteomes_search = function(upid = NA,
 
 #' Get proteome by proteome/proteins UPID
 #'
-#' @param upid
-#' @param get_proteins
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
-#' @param reviewed
+#' UniProt collects and annotates proteomes(Protein sets expressed in an
+#'   organism). Using this function you can search UniProt for available
+#'   proteomes. see \href{https://www.uniprot.org/help/proteome}{What are
+#'   proteomes?} for more information.
 #'
-#' @return
-#' @export
+#' @section Corresponding API Resources:
+#'  "GET https://ebi.ac.uk/proteins/api/proteomes/proteins/{upid}"
+#'  "GET https://ebi.ac.uk/proteins/api/proteomes/{upid}"
+#'
+#' @param upid \href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
+#'   identifier (UPID)}. You can provide up to 100 UPIDs.
+#' @param get_proteins logical: set FALSE (default) to only return information
+#'   of the proteome with provided UPID, set TRUE to also return the proteins
+#'    of the provided proteome UPID.
+#' @param reviewed Logical:  Only considered when get_proteins is TRUE.
+#'   If TRUE, only return "UniProtKB/Swiss-Prot" (reviewed) proteins;
+#'   If FALSE, only return TrEMBL (un-reviewed) entries. leave it as NA if you
+#'   do not want to filter proteins based on their review status.
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
+#'   arguments documentation for more information on available options.
+#'
+#' @return a list containing information of the proteome with your provided
+#'   UPID that can contain the proteomes protein entries based on the value of
+#'   get_proteins argument.
+#'
+#' @references \itemize{
+#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
+#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
+#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
+#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
+#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+#'   Documentation}
+#'   }
 #'
 #' @examples
+#' rba_uniprot_proteomes(upid = "UP000000354")
+#' rba_uniprot_proteomes(upid = "UP000000354", get_proteins = TRUE)
+#' @family "UniProt API, Proteomes"
+#' @export
 rba_uniprot_proteomes = function(upid,
                                  get_proteins = FALSE,
                                  reviewed = NA,
@@ -118,15 +197,22 @@ rba_uniprot_proteomes = function(upid,
                                class = "logical"),
                           list(arg = "reviewed",
                                class = "logical")),
-              cond = list(list(quote(get_proteins == FALSE && !is.na(reviewed)),
-                               "'reviewed' argument is ignored because you provided 'get_proteins' as FALSE")),
+              cond = list(list(quote(isFALSE(get_proteins) && !is.na(reviewed)),
+                               "'reviewed' argument is ignored because you provided 'get_proteins' as FALSE.")),
               cond_warning = TRUE
   )
 
-  v_msg("get /proteomes/proteins/{upid} Get proteins by proteome UPID",
-        "get /proteomes/{upid} Get proteome by proteome UPID")
+  v_msg("Retrieving proteome %s (%s).",
+        upid,
+        ifelse(isTRUE(get_proteins),
+               yes = sprintf("With %sproteins",
+                             switch(as.character(reviewed),
+                                    "TRUE" = " - Only UniProtKB/Swiss-Prot",
+                                    "FALSE" = " - Only TrEMBL",
+                                    "NA" = "")),
+               no = "Excluding proteins"))
   ## Build Function-Specific Call
-  if (get_proteins == TRUE) {
+  if (isTRUE(get_proteins)) {
     ## Build GET API Request's query
     call_query = rba_ba_query(init = list(),
                               list("reviewed",
@@ -149,7 +235,7 @@ rba_uniprot_proteomes = function(upid,
                            path = path_input,
                            query = call_query,
                            accept = "application/json",
-                           parser = "json->list_simp",
+                           parser = "json->list",
                            save_to = rba_ba_file("uniprot_proteomes.json"))
 
   ## Call API
@@ -159,17 +245,55 @@ rba_uniprot_proteomes = function(upid,
 
 #### Genecentric Endpoints ####
 
-#' Search gene centric proteins
+#' Search Gene-Centric Proteins
 #'
-#' @param upid
-#' @param accession
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
-#' @param gene
+#' Using this function you can search UniProt for available gene-centrics from
+#'   proteomes. For more information,
+#'   see \href{https://www.uniprot.org/help/proteome}{What are proteomes?} and
+#'   \href{https://www.uniprot.org/help/gene_centric_isoform_mapping}{Automatic
+#'   gene-centric isoform mapping for eukaryotic reference proteome entries.}
+#'   You may also refine your search with modifiers upid, accession and gene.
+#'   refer to "Arguments section" for more information.
 #'
-#' @return
-#' @export
+#'   Note that this is a search function. Thus, you are not required to fill
+#'   every argument; You may use whatever combinations of arguments you see
+#'   fit for your query.\cr\cr
+#'
+#' @section Corresponding API Resources:
+#'  "GET https://ebi.ac.uk/proteins/api/genecentric"
+#'
+#' @param upid \href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
+#'   identifier (UPID)}. You can provide up to 100 UPIDs.
+#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
+#'   UniProtKB primary or secondary accession}(s). You can provide up to 100
+#'   accession numbers.
+#' @param gene unique gene identifier(s) found in MOD,
+#'   \href{https://uswest.ensembl.org/info/genome/genebuild/gene_names.html}{Ensembl},
+#'   Ensembl Genomes, \href{https://www.uniprot.org/help/gene_name}{OLN},
+#'   \href{https://www.uniprot.org/help/gene_name}{ORF} or
+#'   \href{https://www.uniprot.org/help/gene_name}{UniProt Gene Name}.
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
+#'   arguments documentation for more information on available options.
+#'
+#' @return a list containing gene-centric proteins search hits.
+#'
+#' @references \itemize{
+#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
+#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
+#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
+#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
+#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+#'   Documentation}
+#'   }
 #'
 #' @examples
+#' rba_uniprot_genecentric_search(accession = "P59594")
+#' rba_uniprot_genecentric_search(gene = "Spike")
+#' rba_uniprot_genecentric_search(upid = "UP000000354")
+#'
+#' @family "UniProt API, Proteomes"
+#' @export
 rba_uniprot_genecentric_search = function(upid = NA,
                                           accession = NA,
                                           gene = NA,
@@ -188,7 +312,7 @@ rba_uniprot_genecentric_search = function(upid = NA,
                                max_len = 20))
   )
 
-  v_msg("get /genecentric Search gene centric proteins")
+  v_msg("Searching UniProt and retrieving Gene-Centric Proteins that match your provided inputs.")
   ## Build GET API Request's query
   call_query = rba_ba_query(init = list("size" = "-1"),
                             list("upid",
@@ -218,15 +342,38 @@ rba_uniprot_genecentric_search = function(upid = NA,
   return(final_output)
 }
 
-#' Get gene centric proteins by Uniprot accession
+#' Get Gene-Centric proteins by UniProt Accession
 #'
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
-#' @param accession
+#' Using this function you can retrieve gene-centrics data. For more
+#'   information, see \href{https://www.uniprot.org/help/proteome}{What are
+#'   proteomes?} and
+#'   \href{https://www.uniprot.org/help/gene_centric_isoform_mapping}{Automatic
+#'   gene-centric isoform mapping for eukaryotic reference proteome entries.}.
 #'
-#' @return
-#' @export
+#' @section Corresponding API Resources:
+#'  "GET https://ebi.ac.uk/proteins/api/genecentric/{accession}"
+#'
+#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
+#'   UniProtKB primary or secondary accession}.
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
+#'   arguments documentation for more information on available options.
+#'
+#' @return A list containing information of Gene-Centric proteins.
+#'
+#' @references \itemize{
+#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
+#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
+#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
+#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
+#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+#'   Documentation}
+#'   }
 #'
 #' @examples
+#' rba_uniprot_genecentric("P29965")
+#' @family "UniProt API, Proteomes"
+#' @export
 rba_uniprot_genecentric = function(accession,
                                    ...) {
   ## Load Global Options
@@ -236,7 +383,8 @@ rba_uniprot_genecentric = function(accession,
                                class = "character"))
   )
 
-  v_msg("get /genecentric/{accession} Get gene centric proteins by Uniprot accession")
+  v_msg("Retrieving Gene-Centric proteins by UniProt Accession %s.",
+        accession)
   ## Build Function-Specific Call
   input_call = rba_ba_httr(httr = "get",
                            url = rba_ba_stg("uniprot", "url"),

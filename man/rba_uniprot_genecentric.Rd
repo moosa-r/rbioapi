@@ -2,18 +2,50 @@
 % Please edit documentation in R/uniprot_proteomes.R
 \name{rba_uniprot_genecentric}
 \alias{rba_uniprot_genecentric}
-\title{Get gene centric proteins by Uniprot accession}
+\title{Get Gene-Centric proteins by UniProt Accession}
 \usage{
 rba_uniprot_genecentric(accession, ...)
 }
 \arguments{
-\item{accession}{}
+\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+UniProtKB primary or secondary accession}.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+A list containing information of Gene-Centric proteins.
 }
 \description{
-Get gene centric proteins by Uniprot accession
+Using this function you can retrieve gene-centrics data. For more
+  information, see \href{https://www.uniprot.org/help/proteome}{What are
+  proteomes?} and
+  \href{https://www.uniprot.org/help/gene_centric_isoform_mapping}{Automatic
+  gene-centric isoform mapping for eukaryotic reference proteome entries.}.
 }
+\section{Corresponding API Resources}{
+
+ "GET https://ebi.ac.uk/proteins/api/genecentric/{accession}"
+}
+
+\examples{
+rba_uniprot_genecentric("P29965")
+}
+\references{
+\itemize{
+  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
+  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
+  Turner, Maria Martin, The Proteins API: accessing key integrated protein
+  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
+  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+  Documentation}
+  }
+}
+\seealso{
+Other "UniProt API, Proteomes": 
+\code{\link{rba_uniprot_genecentric_search}()},
+\code{\link{rba_uniprot_proteomes_search}()},
+\code{\link{rba_uniprot_proteomes}()}
+}
+\concept{"UniProt API, Proteomes"}
