@@ -1100,8 +1100,10 @@ rba_uniprot_variation_search = function(accession = NA,
 #'   secondary accession}, NIH-NCBI dbSNP ID or HGVS expression.
 #'   \href{https://www.ncbi.nlm.nih.gov/snp/}{NIH-NCBI dbSNP id} or
 #'   \href{https://www.ncbi.nlm.nih.gov/variation/hgvs/}{HGVS Expression}.
-#' @param id_type The type of provided ID argument, one of: "uniprot", "dbsnp"
-#'   or "hgvs".
+#' @param id_type The type of provided ID argument, one of:
+#'   \href{https://www.uniprot.org/help/accession_numbers}{"uniprot"},
+#'   \href{https://www.ncbi.nlm.nih.gov/snp/}{"dbsnp"} or
+#'   \href{https://www.ncbi.nlm.nih.gov/variation/hgvs/}{"hgvs"}
 #' @param source_type Variation's source type. You can choose up to two of:
 #'   "UniProt", "large scale study" and/or "mixed".
 #' @param consequence_type Variation's consequence type. You can choose up to
@@ -1238,7 +1240,6 @@ rba_uniprot_variation = function(id,
   final_output = rba_ba_skeleton(input_call)
   return(final_output)
 }
-
 
 #### Proteomics Endpoints ####
 

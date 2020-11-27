@@ -23,8 +23,10 @@ secondary accession}, NIH-NCBI dbSNP ID or HGVS expression.
 \href{https://www.ncbi.nlm.nih.gov/snp/}{NIH-NCBI dbSNP id} or
 \href{https://www.ncbi.nlm.nih.gov/variation/hgvs/}{HGVS Expression}.}
 
-\item{id_type}{The type of provided ID argument, one of: "uniprot", "dbsnp"
-or "hgvs".}
+\item{id_type}{The type of provided ID argument, one of:
+\href{https://www.uniprot.org/help/accession_numbers}{"uniprot"},
+\href{https://www.ncbi.nlm.nih.gov/snp/}{"dbsnp"} or
+\href{https://www.ncbi.nlm.nih.gov/variation/hgvs/}{"hgvs"}}
 
 \item{source_type}{Variation's source type. You can choose up to two of:
 "UniProt", "large scale study" and/or "mixed".}
