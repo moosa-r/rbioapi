@@ -19,6 +19,8 @@ rba_reactome_mapping(
 \href{https://reactome.org/content/schema/objects/ReferenceDatabase}{Reactome External
 Identifiers}}
 
+\item{map_to}{Either "pathways" or "reactions".}
+
 \item{species}{Numeric or Character: NCBI Taxonomy identifier (Human
 is 9606), species name (e.g. "Homo sapiens") or Reactome DbId (e.g
 Homo sapiens is 48887). Refer to

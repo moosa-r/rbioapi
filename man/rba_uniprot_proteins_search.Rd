@@ -108,7 +108,7 @@ Note that this is a search function. Thus, you are not required to fill
 rba_uniprot_proteins_search(accession = "Q99616")
 rba_uniprot_proteins_search(gene = "cd40")
 rba_uniprot_proteins_search(gene = "cd40 ligand")
-rba_uniprot_proteins_search(gene = "cd40",  reviewed = "TRUE")
+rba_uniprot_proteins_search(gene = "cd40",  reviewed = TRUE)
 rba_uniprot_proteins_search(gene = "cd40",  reviewed = TRUE, isoform = 1)
 rba_uniprot_proteins_search(keyword = "Inhibition of host chemokines by virus")
 rba_uniprot_proteins_search(keyword = "chemokines")

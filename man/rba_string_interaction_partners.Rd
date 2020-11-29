@@ -8,8 +8,8 @@ rba_string_interaction_partners(
   ids,
   species = NA,
   required_score = NA,
-  limit = NA,
   network_type = "functional",
+  limit = NA,
   ...
 )
 }
@@ -24,6 +24,10 @@ STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
 interaction to be included in the image. if not provided, the threshold
 will be applied by STRING Based in the network. (low Confidence = 150,
 Medium Confidence = 400, High Confidence = 700, Highest confidence = 900)}
+
+\item{network_type}{should be one of:\itemize{
+\item "functional": (default) The edge's indicate both physical and
+functional associations.}}
 
 \item{limit}{Limit the number returned interaction partners per each of
 your input proteins. (e.g. Number of the most confident interaction partner

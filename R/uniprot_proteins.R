@@ -78,7 +78,7 @@
 #' rba_uniprot_proteins_search(accession = "Q99616")
 #' rba_uniprot_proteins_search(gene = "cd40")
 #' rba_uniprot_proteins_search(gene = "cd40 ligand")
-#' rba_uniprot_proteins_search(gene = "cd40",  reviewed = "TRUE")
+#' rba_uniprot_proteins_search(gene = "cd40",  reviewed = TRUE)
 #' rba_uniprot_proteins_search(gene = "cd40",  reviewed = TRUE, isoform = 1)
 #' rba_uniprot_proteins_search(keyword = "Inhibition of host chemokines by virus")
 #' rba_uniprot_proteins_search(keyword = "chemokines")
@@ -457,9 +457,9 @@ rba_uniprot_proteins_crossref = function(db_id,
 #' rba_uniprot_features_search(accession = "Q99616")
 #' rba_uniprot_features_search(gene = "cd40")
 #' rba_uniprot_features_search(gene = "cd40 ligand")
-#' rba_uniprot_features_search(gene = "cd40",  reviewed = "TRUE")
+#' rba_uniprot_features_search(gene = "cd40",  reviewed = TRUE)
 #' rba_uniprot_features_search(accession = "Q99616",
-#'   categories = c(MOLECULE_PROCESSING, TOPOLOGY))
+#'   categories = c("MOLECULE_PROCESSING", "TOPOLOGY"))
 #' rba_uniprot_features_search(accession = "Q99616", types = "DISULFID")
 #' @family "UniProt API, Features"
 #' @export
@@ -1254,8 +1254,8 @@ rba_uniprot_variation = function(id,
 #'   Note that this is a search function. Thus, you are not required to fill
 #'   every argument; You may use whatever combinations of arguments you see
 #'   fit for your query.\cr\cr
-#'   see also: \href{Mass spectrometry-based proteomics data in
-#'   UniProtKB}{https://www.uniprot.org/help/proteomics}
+#'   see also: \href{https://www.uniprot.org/help/proteomics}{Mass
+#'   spectrometry-based proteomics data in UniProtKB}
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://www.ebi.ac.uk/proteins/api/proteomics"
@@ -1300,9 +1300,9 @@ rba_uniprot_variation = function(id,
 #' rba_uniprot_proteomics_search(peptide = "MEDYTKIEK")
 #' rba_uniprot_proteomics_search(peptide = "MEDYTKIEK")
 #' \dontrun{rba_uniprot_proteomics_search(taxid = 9606,
-#' data_source = "PeptideAtlas", progress_bar = TRUE,
-#' client_timeout = 999999, unique = TRUE)}
-#' rba_uniprot_proteomics_search(taxid = 9606, data_source = "PeptideAtlas", progress_bar = TRUE, client_timeout = 999999, unique = TRUE)
+#'   data_source = "PeptideAtlas",
+#'   progress_bar = TRUE, client_timeout = 999999, unique = TRUE)}
+#'
 #' @family "UniProt API, Proteomics"
 #' @export
 rba_uniprot_proteomics_search = function(accession = NA,
@@ -1458,7 +1458,7 @@ rba_uniprot_proteomics = function(accession,
 #'   UniProtKB primary or secondary accession}(s). You can provide up to 100
 #'   accession numbers.
 #' @param antigen_sequence Protein sequence in the antigenic site.
-#' @param hpa_id Human Protein Atlas (HPA) antigen ID. You can provide up to
+#' @param antigen_id Human Protein Atlas (HPA) antigen ID. You can provide up to
 #'   20 IDs.
 #' @param ensembl_id Ensembl Stable Transcript ID. You can provide up to
 #'   20 IDs.
@@ -1481,12 +1481,12 @@ rba_uniprot_proteomics = function(accession,
 #'   }
 #'
 #' @examples
-#' rba_uniprot_antigen_search(hpa_id = "HPA001060")
+#' rba_uniprot_antigen_search(antigen_id = "HPA001060")
 #' @family "UniProt API, Antigen"
 #' @export
 rba_uniprot_antigen_search = function(accession = NA,
                                       antigen_sequence = NA,
-                                      hpa_id = NA,
+                                      antigen_id = NA,
                                       ensembl_id = NA,
                                       match_score = NA,
                                       ...) {
@@ -1498,7 +1498,7 @@ rba_uniprot_antigen_search = function(accession = NA,
                                max_len = 100),
                           list(arg = "antigen_sequence",
                                class = "character"),
-                          list(arg = "hpa_id",
+                          list(arg = "antigen_id",
                                class = "character",
                                max_len = 20),
                           list(arg = "ensembl_id",
@@ -1518,9 +1518,9 @@ rba_uniprot_antigen_search = function(accession = NA,
                             list("antigen_sequence",
                                  !is.na(antigen_sequence),
                                  antigen_sequence),
-                            list("hpa_id",
-                                 any(!is.na(hpa_id)),
-                                 paste0(hpa_id,
+                            list("antigen_id",
+                                 any(!is.na(antigen_id)),
+                                 paste0(antigen_id,
                                         collapse = ",")),
                             list("ensembl_id",
                                  any(!is.na(ensembl_id)),

@@ -10,7 +10,8 @@ rba_enrichr_info(store_in_options = FALSE, ...)
 \item{store_in_options}{logical: (default = TRUE) Should a list of available
 Enrichr libraries be saved as a global option?}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
 A data frame with the names of available library in Enrichr and their

@@ -70,6 +70,11 @@ GET https://reactome.org/AnalysisService/download/{token}/result.json"\cr
 GET https://reactome.org/AnalysisService/download/{token}/result.json.gz"
 }
 
+\examples{
+\dontrun{
+  rba_reactome_analysis_download(token = "MjAyMDEwMTYwMTI3MTNfMjY1MjM",
+    request = "found_ids", save_to = "found_ids.csv")}
+}
 \references{
 \itemize{
   \item Fabregat A, Sidiropoulos K, Viteri G, Forner O, Marin-Garcia P,

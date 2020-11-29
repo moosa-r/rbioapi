@@ -89,9 +89,9 @@ Note that this is a search function. Thus, you are not required to fill
 rba_uniprot_features_search(accession = "Q99616")
 rba_uniprot_features_search(gene = "cd40")
 rba_uniprot_features_search(gene = "cd40 ligand")
-rba_uniprot_features_search(gene = "cd40",  reviewed = "TRUE")
+rba_uniprot_features_search(gene = "cd40",  reviewed = TRUE)
 rba_uniprot_features_search(accession = "Q99616",
-  categories = c(MOLECULE_PROCESSING, TOPOLOGY))
+  categories = c("MOLECULE_PROCESSING", "TOPOLOGY"))
 rba_uniprot_features_search(accession = "Q99616", types = "DISULFID")
 }
 \references{

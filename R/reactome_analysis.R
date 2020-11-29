@@ -566,7 +566,7 @@ rba_reactome_analysis_pdf = function(token,
 #' @examples
 #' \dontrun{
 #'   rba_reactome_analysis_download(token = "MjAyMDEwMTYwMTI3MTNfMjY1MjM",
-#'     request = "found_ids", save_to = "found_ids.csv)}
+#'     request = "found_ids", save_to = "found_ids.csv")}
 #' @family "Reactome Analysis Service, "
 #' @seealso
 #' \code{\link{rba_reactome_analysis_pdf}}
@@ -905,7 +905,7 @@ rba_reactome_analysis_mapping = function(input,
 #'   }
 #'
 #' @examples
-#'
+#' rba_reactome_analysis_species(species_dbid = 48892)
 #' @family "Reactome Analysis Service, "
 #' @seealso
 #' \code{\link{rba_reactome_orthology}}

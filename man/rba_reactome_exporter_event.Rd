@@ -36,7 +36,11 @@ This function will export a provided Reactome Event (Pathway or Reaction)
 }
 
 \examples{
-
+\dontrun{rba_reactome_exporter_event(event_id = "R-HSA-177929",
+  output_format = "sbgn",
+  save_to = "R-HSA-177929.sbgn")}
+\dontrun{rba_reactome_exporter_event(event_id = "R-HSA-177929",
+  output_format = "sbgn")}
 }
 \references{
 \itemize{

@@ -492,7 +492,7 @@ rba_ba_api_call = function(input_call,
   response = try(eval(input_call, envir = parent.frame(n = 2)),
                  silent = !diagnostics)
   ## 2 check the internet connection & 5xx http status
-  if (!is(response, "response") ||
+  if (!methods::is(response, "response") ||
       substr(response$status_code, 1, 1) == "5") {
     ## 2.1 there is an internet connection or server issue
     # wait for the internet connection
@@ -512,7 +512,7 @@ rba_ba_api_call = function(input_call,
   } # end of step 2
 
   ## 3 Decide what to return
-  if (!is(response, "response")) {
+  if (!methods::is(response, "response")) {
     ## 3.1 errors un-related to server's response
     error_message = response
     if (isTRUE(skip_error)) {
@@ -589,7 +589,7 @@ rba_ba_skeleton = function(input_call,
     parser_input = input_call$parser
   }
 
-  if (is(response, "response") && !is.null(parser_input)) {
+  if (methods::is(response, "response") && !is.null(parser_input)) {
     final_output = rba_ba_response_parser(parser = parser_input)
   } else {
     final_output = response
@@ -700,7 +700,7 @@ rba_ba_args = function(cons = NULL,
 
     arg = try(eval(parse(text = arg_name), envir = parent.frame(1)),
               silent = TRUE)
-    if (is(arg, "try-error")) {
+    if (methods::is(arg, "try-error")) {
       ## try to prettify the error message
       pretty_error = regmatches(arg,
                                 regexpr("(?<= : (\\\n  ){1}).*(?=\\\n)",
@@ -1188,7 +1188,7 @@ rba_ba_file = function(file,
 #'   be altered in response to the change.\cr
 #'   Also the function will ignore any arguments which is not standard and
 #'   issues an informative warning for the user.
-#' @param ...
+#' @param ... Extra arguments that were provided in the endpoints functions.
 #'
 #' @return NULL, if arguments check failed, code execution will be stopped.
 #'   otherwise, nothing will be returned nor displayed.

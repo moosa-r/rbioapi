@@ -2,7 +2,7 @@
 
 #' Get Lowest Common Ancestor (LCA) of Two Taxonomy Nodes
 #'
-#' Use this function to retrieve \href{}{lowest common ancestor (LCA)} of two
+#' Use this function to retrieve lowest common ancestor (LCA) of two
 #'  taxonomy nodes in
 #'  \href{UniProt Taxonomy database}{https://www.uniprot.org/help/taxonomy}
 #'

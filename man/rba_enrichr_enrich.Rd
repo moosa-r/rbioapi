@@ -32,7 +32,8 @@ FALSE, gene_set_library will be considered exact match.}
 \item{multi_libs_progress_bar}{logical: In case of selecting multiple Enrichr
 libraries, should a progress bar be displayed?}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
 A list containing data frames of the enrichment results of your

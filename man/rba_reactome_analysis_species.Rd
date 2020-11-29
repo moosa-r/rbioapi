@@ -70,7 +70,7 @@ In version 73 (11 June 2020), using an orthology-based approach,
 }
 
 \examples{
-
+rba_reactome_analysis_species(species_dbid = 48892)
 }
 \references{
 \itemize{

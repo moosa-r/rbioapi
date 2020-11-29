@@ -55,6 +55,6 @@ rba_reactome_complex_subunits(complex_id = "R-HSA-109783",
 Other "Reactome Content Service, Physical Entity Queries": 
 \code{\link{rba_reactome_entity_other_forms}()},
 \code{\link{rba_reactome_participant_of}()},
-\code{\link{rba_reactome_participants}()}
+\code{\link{reactome_complex_list}()}
 }
 \concept{"Reactome Content Service, Physical Entity Queries"}

@@ -226,11 +226,11 @@ rba_reactome_complex_subunits = function(complex_id,
 #'   }
 #'
 #' @examples
-#' rba_reactome_participants(id = "3845", resource = "NCBI Gene")
-#' rba_reactome_participants(id = "P00533", resource = "UniProt")
+#' reactome_complex_list(id = "3845", resource = "NCBI Gene")
+#' reactome_complex_list(id = "P00533", resource = "UniProt")
 #' @family "Reactome Content Service, Physical Entity Queries"
 #' @export
-rba_reactome_participants = function(id,
+reactome_complex_list = function(id,
                                      resource,
                                      ...) {
   ## Load Global Options
@@ -798,7 +798,11 @@ rba_reactome_exporter_diagram = function(event_id,
 #'   }
 #'
 #' @examples
-#'
+#' \dontrun{rba_reactome_exporter_event(event_id = "R-HSA-177929",
+#'   output_format = "sbgn",
+#'   save_to = "R-HSA-177929.sbgn")}
+#' \dontrun{rba_reactome_exporter_event(event_id = "R-HSA-177929",
+#'   output_format = "sbgn")}
 #' @family "Reactome Content Service, Format Exporter"
 #' @export
 rba_reactome_exporter_event = function(event_id,
@@ -1044,8 +1048,9 @@ rba_reactome_exporter_overview = function(species,
 #'  "GET https://reactome.org/ContentService//exporter/reaction/
 #'  {identifier}.{ext}"
 #'
-#' @param event_id Reactome \href{https://reactome.org/content/schema/
-#' ReactionLikeEvent}{Reaction-like event}'s identifier.
+#' @param event_id Reactome
+#' \href{https://reactome.org/content/schema/ReactionLikeEvent}{Reaction-like
+#' event}'s identifier.
 #' @param output_format Images format, Can be one of: png (default), jpeg,
 #'   svg or gif.
 #' @param save_to NA or Character:\itemize{
@@ -1488,6 +1493,7 @@ rba_reactome_interactors_static = function(proteins,
 #'    \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
 #'    Data Schema: Entries: Species}.
+#' @param map_to Either "pathways" or "reactions".
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #'   arguments documentation for more information on available options.
 #'
@@ -1600,7 +1606,7 @@ rba_reactome_mapping = function(id,
 #'
 #' @examples
 #' rba_reactome_orthology(ids = c("R-HSA-6799198", " R-HSA-72764"),
-#'   species_id = 49633)
+#'   species_dbid = 49633)
 #' @family "Reactome Content Service, Orthology Related Queries"
 #' @seealso
 #' \code{\link{rba_reactome_analysis_species}}
@@ -1700,7 +1706,7 @@ rba_reactome_orthology = function(ids,
 #'   }
 #'
 #' @examples
-#' rba_reactome_participants(" R-HSA-5682012")
+#' rba_reactome_participants("R-HSA-5682012")
 #' rba_reactome_participants("R-HSA-5682012", only_physical_entities = TRUE)
 #' rba_reactome_participants("R-HSA-5682012", only_reference_entities = TRUE)
 #' @family "Reactome Content Service, Queries Related to Participants"

@@ -23,8 +23,9 @@ rba_reactome_exporter_reaction(
 )
 }
 \arguments{
-\item{event_id}{Reactome \href{https://reactome.org/content/schema/
-ReactionLikeEvent}{Reaction-like event}'s identifier.}
+\item{event_id}{Reactome
+\href{https://reactome.org/content/schema/ReactionLikeEvent}{Reaction-like
+event}'s identifier.}
 
 \item{save_to}{NA or Character:\itemize{
 \item NA: Save the file to an automatically-generated path.

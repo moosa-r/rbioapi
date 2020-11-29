@@ -35,7 +35,8 @@ FALSE, gene_set_library will be considered exact match.}
 \item{multi_libs_progress_bar}{logical: In case of selecting multiple Enrichr
 libraries, should a progress bar be displayed?}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
 A list containing data frames of the enrichment results of your
@@ -65,6 +66,16 @@ This function will call other rba_enrichr_*** functions with the following
  "GET http://maayanlab.cloud/Enrichr/enrich"
 }
 
+\examples{
+\dontrun{rba_enrichr(gene_list = c("TP53", "TNF", "EGFR"))}
+rba_enrichr(gene_list = c("TP53", "TNF", "EGFR"),
+         gene_set_library = "GO_Molecular_Function_2017",
+         regex_library_name = FALSE)
+rba_enrichr(gene_list = c("TP53", "TNF", "EGFR"),
+         gene_set_library = "go",
+         regex_library_name = TRUE)
+
+}
 \references{
 \itemize{
   \item Chen EY, Tan CM, Kou Y, Duan Q, Wang Z, Meirelles GV, Clark NR,

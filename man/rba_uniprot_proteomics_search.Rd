@@ -59,8 +59,8 @@ UniProt maps proteomics peptides from different sources to the proteins'
 Note that this is a search function. Thus, you are not required to fill
   every argument; You may use whatever combinations of arguments you see
   fit for your query.\cr\cr
-  see also: \href{Mass spectrometry-based proteomics data in
-  UniProtKB}{https://www.uniprot.org/help/proteomics}
+  see also: \href{https://www.uniprot.org/help/proteomics}{Mass
+  spectrometry-based proteomics data in UniProtKB}
 }
 \section{Corresponding API Resources}{
 
@@ -71,9 +71,9 @@ Note that this is a search function. Thus, you are not required to fill
 rba_uniprot_proteomics_search(peptide = "MEDYTKIEK")
 rba_uniprot_proteomics_search(peptide = "MEDYTKIEK")
 \dontrun{rba_uniprot_proteomics_search(taxid = 9606,
-data_source = "PeptideAtlas", progress_bar = TRUE,
-client_timeout = 999999, unique = TRUE)}
-rba_uniprot_proteomics_search(taxid = 9606, data_source = "PeptideAtlas", progress_bar = TRUE, client_timeout = 999999, unique = TRUE)
+  data_source = "PeptideAtlas",
+  progress_bar = TRUE, client_timeout = 999999, unique = TRUE)}
+
 }
 \references{
 \itemize{

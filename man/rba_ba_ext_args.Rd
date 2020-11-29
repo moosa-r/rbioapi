@@ -7,7 +7,7 @@
 rba_ba_ext_args(...)
 }
 \arguments{
-\item{...}{}
+\item{...}{Extra arguments that were provided in the endpoints functions.}
 }
 \value{
 NULL, if arguments check failed, code execution will be stopped.

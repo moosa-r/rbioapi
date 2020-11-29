@@ -7,7 +7,7 @@
 rba_uniprot_antigen_search(
   accession = NA,
   antigen_sequence = NA,
-  hpa_id = NA,
+  antigen_id = NA,
   ensembl_id = NA,
   match_score = NA,
   ...
@@ -20,7 +20,7 @@ accession numbers.}
 
 \item{antigen_sequence}{Protein sequence in the antigenic site.}
 
-\item{hpa_id}{Human Protein Atlas (HPA) antigen ID. You can provide up to
+\item{antigen_id}{Human Protein Atlas (HPA) antigen ID. You can provide up to
 20 IDs.}
 
 \item{ensembl_id}{Ensembl Stable Transcript ID. You can provide up to
@@ -54,7 +54,7 @@ Note that this is a search function. Thus, you are not required to fill
 }
 
 \examples{
-rba_uniprot_antigen_search(hpa_id = "HPA001060")
+rba_uniprot_antigen_search(antigen_id = "HPA001060")
 }
 \references{
 \itemize{

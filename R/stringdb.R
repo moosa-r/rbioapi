@@ -446,6 +446,9 @@ rba_string_interactions_network = function(ids,
 #'   interaction to be included in the image. if not provided, the threshold
 #'   will be applied by STRING Based in the network. (low Confidence = 150,
 #'   Medium Confidence = 400, High Confidence = 700, Highest confidence = 900)
+#' @param network_type should be one of:\itemize{
+#'   \item "functional": (default) The edge's indicate both physical and
+#'   functional associations.}
 #' @param limit Limit the number returned interaction partners per each of
 #'   your input proteins. (e.g. Number of the most confident interaction partner
 #'   to return per each input protein.)
@@ -481,8 +484,8 @@ rba_string_interactions_network = function(ids,
 rba_string_interaction_partners = function(ids,
                                            species = NA,
                                            required_score = NA,
-                                           limit = NA,
                                            network_type = "functional",
+                                           limit = NA,
                                            ...) {
   ## Load Global Options
   rba_ba_ext_args(...)
@@ -495,12 +498,12 @@ rba_string_interaction_partners = function(ids,
                                class = "numeric",
                                min_val = 0,
                                max_val = 1000),
-                          list(arg = "limit",
-                               class = "numeric",
-                               min_val = 1),
                           list(arg = "network_type",
                                class = "character",
-                               val = c("functional", "physical"))),
+                               val = c("functional", "physical")),
+                          list(arg = "limit",
+                               class = "numeric",
+                               min_val = 1)),
               cond = list(list(quote(length(ids) > 100 && is.na(species)),
                                sprintf("You provided %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
                                        length(ids)))

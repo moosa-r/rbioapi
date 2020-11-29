@@ -19,7 +19,8 @@
 #'
 #' @param store_in_options logical: (default = TRUE) Should a list of available
 #' Enrichr libraries be saved as a global option?
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
+#'   arguments documentation for more information on available options.
 #'
 #' @return A data frame with the names of available library in Enrichr and their
 #'   statistics.
@@ -86,7 +87,8 @@ rba_enrichr_info = function(store_in_options = FALSE,
 #' @param gene_list A vector with Entrez gene symbols.
 #' @param description (optional) A name or description to be associated with your
 #'   uploaded gene-set to Enrichr servers.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
+#'   arguments documentation for more information on available options.
 #'
 #' @return A list with two unique IDs for your uploaded gene sets.
 #'
@@ -154,7 +156,8 @@ rba_enrichr_add_list = function(gene_list,
 #
 #' @param user_list_id a user_list_id returned to you after uploading a gene
 #'   list using \code{\link{rba_enrichr_add_list}}
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
+#'   arguments documentation for more information on available options.
 #'
 #' @return A list containing the genes and description available under the
 #'   provided user_list_id
@@ -221,7 +224,9 @@ rba_enrichr_view_list = function(user_list_id,
 #'   list using \code{\link{rba_enrichr_add_list}}
 #' @param gene_set_library a valid gene-set library name which exists
 #' in the results retrieved via \code{\link{rba_enrichr_info}}.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
+#' @param save_name default raw file name
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
+#'   arguments documentation for more information on available options.
 #'
 #' @return A data frame with the enrichment results of the provided user_list_id
 #'   against the gene_set_library
@@ -299,7 +304,8 @@ rba_enrichr_enrich_internal = function(user_list_id,
 #'   FALSE, gene_set_library will be considered exact match.
 #' @param multi_libs_progress_bar logical: In case of selecting multiple Enrichr
 #'   libraries, should a progress bar be displayed?
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
+#'   arguments documentation for more information on available options.
 #'
 #' @return A list containing data frames of the enrichment results of your
 #'   provided gene-list against the selected Enrichr libraries.
@@ -430,7 +436,8 @@ rba_enrichr_enrich = function(user_list_id,
 #'
 #' @param gene character: An Entrez gene symbol.
 #' @param catagorize logical: Should the catagory informations be included?
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
+#' arguments documentation for more information on available options.
 #'
 #' @return a list containing the search results of your provided gene.
 #'
@@ -527,11 +534,11 @@ rba_enrichr_gene_map = function(gene,
 #'   }
 #'
 #' @examples
-#' rba_enrichr_enrich(gene_list = c("TP53", "TNF", "EGFR")),
-#' rba_enrichr_enrich(gene_list = c("TP53", "TNF", "EGFR")",
+#' \dontrun{rba_enrichr(gene_list = c("TP53", "TNF", "EGFR"))}
+#' rba_enrichr(gene_list = c("TP53", "TNF", "EGFR"),
 #'          gene_set_library = "GO_Molecular_Function_2017",
 #'          regex_library_name = FALSE)
-#' rba_enrichr_enrich(gene_list = c("TP53", "TNF", "EGFR"),
+#' rba_enrichr(gene_list = c("TP53", "TNF", "EGFR"),
 #'          gene_set_library = "go",
 #'          regex_library_name = TRUE)
 #'

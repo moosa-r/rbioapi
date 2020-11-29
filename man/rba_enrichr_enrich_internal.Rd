@@ -13,7 +13,10 @@ list using \code{\link{rba_enrichr_add_list}}}
 \item{gene_set_library}{a valid gene-set library name which exists
 in the results retrieved via \code{\link{rba_enrichr_info}}.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{save_name}{default raw file name}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
 A data frame with the enrichment results of the provided user_list_id
