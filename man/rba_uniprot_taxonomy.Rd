@@ -2,20 +2,86 @@
 % Please edit documentation in R/uniprot_taxonomy.R
 \name{rba_uniprot_taxonomy}
 \alias{rba_uniprot_taxonomy}
-\title{This service returns a list of children/siblings/parent nodes that belongs
-to a taxonomy node with links to its parent, sibling and children nodes.}
+\title{Get UniProt Taxonomy Nodes}
 \usage{
-rba_uniprot_taxonomy(ids, hierarchy = NA, node = FALSE, ...)
+rba_uniprot_taxonomy(
+  ids,
+  hierarchy = NA,
+  node_only = TRUE,
+  page_size = 200,
+  page_number = 1,
+  ...
+)
 }
 \arguments{
-\item{node}{}
+\item{ids}{(numeric) a single or a numeric vector of
+\href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
+identifier(s)}}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{hierarchy}{Retrieve taxonomic nodes that have specific hierarchical
+relation to your provided taxonomic node. should be one of: "children",
+"parent" or "siblings".}
+
+\item{node_only}{Retrieve only the node(s) information and exclude URL links
+to parents, siblings and children nodes.}
+
+\item{page_size}{(numeric) Only when hierarchy is provided. hierarchy
+information may be very long, thus UniProt API will paginate the results,
+you may use this argument to control the pagination. maximum value is 200.}
+
+\item{page_number}{(numeric) Only when hierarchy is provided. hierarchy
+information may be very long, thus UniProt API will paginate the results,
+you may use this argument to control the pagination.}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+a list containing your provided nodes or their related nodes
+  taxonomic information.
 }
 \description{
-This service returns a list of children/siblings/parent nodes that belongs
-to a taxonomy node with links to its parent, sibling and children nodes.
+Using this function, you can retrieve taxonomic nodes information by
+providing their
+\href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
+  identifiers}. also, you can explicitly retrieve other nodes in relation
+  to your provided node's hierarchy in
+  \href{UniProt Taxonomy database}{https://www.uniprot.org/help/taxonomy}.
 }
+\section{Corresponding API Resources}{
+
+ "GET https://ebi.ac.uk/proteins/api/ids/{ids}"
+ "GET https://ebi.ac.uk/proteins/api/ids//id/{id}/node"
+ "GET https://ebi.ac.uk/proteins/api/id/{id}/node"
+ "GET https://ebi.ac.uk/proteins/api/id/{id}/children"
+ "GET https://ebi.ac.uk/proteins/api/id/{id}/children/node"
+ "GET https://ebi.ac.uk/proteins/api/id/{id}/parent"
+ "GET https://ebi.ac.uk/proteins/api/id/{id}/parent/node"
+ "GET https://ebi.ac.uk/proteins/api/id/{id}/siblings"
+ "GET https://ebi.ac.uk/proteins/api/id/{id}/siblings/node"
+}
+
+\examples{
+rba_uniprot_taxonomy(ids = c(9606, 10090))
+rba_uniprot_taxonomy(ids = 9989, hierarchy = "children")
+}
+\references{
+\itemize{
+  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
+  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
+  Turner, Maria Martin, The Proteins API: accessing key integrated protein
+  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
+  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+  Documentation}
+  }
+}
+\seealso{
+Other "UniProt API, Taxonomy": 
+\code{\link{rba_uniprot_taxonomy_lca}()},
+\code{\link{rba_uniprot_taxonomy_lineage}()},
+\code{\link{rba_uniprot_taxonomy_name}()},
+\code{\link{rba_uniprot_taxonomy_path}()},
+\code{\link{rba_uniprot_taxonomy_relationship}()}
+}
+\concept{"UniProt API, Taxonomy"}

@@ -2,22 +2,58 @@
 % Please edit documentation in R/uniprot_taxonomy.R
 \name{rba_uniprot_taxonomy_path}
 \alias{rba_uniprot_taxonomy_path}
-\title{get /path This service returns all taxonomic nodes that have a relationship
-with the queried taxonomy ID in a specific direction (TOP or BOTTOM) and
-depth level.}
+\title{Traverse UniProt Taxonomic Tree Path}
 \usage{
 rba_uniprot_taxonomy_path(id, direction, depth = 5, ...)
 }
 \arguments{
-\item{depth}{}
+\item{id}{(numeric) a
+\href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
+  identifier}}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{direction}{direction of the taxonomic path, either "TOP" or "BOTTOM".}
+
+\item{depth}{(numeric) How many levels should be traversed on
+the taxonomic tree? (from 1 to 5, default = 5)}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+a nested list containing the node which are in the path specified by
+  your provided argument in the UniProt taxonomic tree.
 }
 \description{
-get /path This service returns all taxonomic nodes that have a relationship
-with the queried taxonomy ID in a specific direction (TOP or BOTTOM) and
-depth level.
+Using this function you can retrieve nodes that are located in the top or
+  the bottom of your provided node in
+  \href{UniProt Taxonomy database tree}{https://www.uniprot.org/help/taxonomy}
 }
+\section{Corresponding API Resources}{
+
+ "GET https://ebi.ac.uk/proteins/api/path"
+}
+
+\examples{
+rba_uniprot_taxonomy_path(id = 9606, direction = "TOP", depth = 3)
+rba_uniprot_taxonomy_path(id = 207598, direction = "BOTTOM", depth = 3)
+}
+\references{
+\itemize{
+  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
+  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
+  Turner, Maria Martin, The Proteins API: accessing key integrated protein
+  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
+  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+  Documentation}
+  }
+}
+\seealso{
+Other "UniProt API, Taxonomy": 
+\code{\link{rba_uniprot_taxonomy_lca}()},
+\code{\link{rba_uniprot_taxonomy_lineage}()},
+\code{\link{rba_uniprot_taxonomy_name}()},
+\code{\link{rba_uniprot_taxonomy_relationship}()},
+\code{\link{rba_uniprot_taxonomy}()}
+}
+\concept{"UniProt API, Taxonomy"}
