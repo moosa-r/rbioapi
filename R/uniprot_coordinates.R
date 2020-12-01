@@ -153,7 +153,7 @@ rba_uniprot_coordinates_search = function(accession = NA,
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #'   arguments documentation for more information on available options.
 #'
-#' @return
+#' @return Genome coordinates of your provided proteins.
 #'
 #' @references \itemize{
 #'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas

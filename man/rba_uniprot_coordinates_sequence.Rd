@@ -26,7 +26,7 @@ UniProtKB primary or secondary accession}.}
 arguments documentation for more information on available options.}
 }
 \value{
-
+Genome coordinates of your provided proteins.
 }
 \description{
 Using this function you can retrieve genome coordinates of a given UniProt

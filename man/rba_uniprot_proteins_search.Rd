@@ -70,8 +70,8 @@ You can provide up to 20 taxon IDs.}
 \item{pubmed}{Entries which \href{https://www.uniprot.org/citations/}{cite
 to} the article with your provided PubMed ID.}
 
-\item{seq_length}{Refine your search to a exact sequence length (e.g. 150)
-or a range of sequence lengths (e.g. "130-158").}
+\item{seq_length}{An exact sequence length (e.g. 150) or a range of sequence
+lengths (e.g. "130-158").}
 
 \item{md5}{Sequence md5 value.}
 
@@ -79,7 +79,7 @@ or a range of sequence lengths (e.g. "130-158").}
 arguments documentation for more information on available options.}
 }
 \value{
-List where each element corresponds to one UniProt entity returned
+A List where each element corresponds to one UniProt entity returned
   by your search query. The element itself is a sub-list containing all
   information that UniProt has about that entity.
 }

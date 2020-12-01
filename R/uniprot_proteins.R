@@ -54,13 +54,13 @@
 #'   You can provide up to 20 taxon IDs.
 #' @param pubmed Entries which \href{https://www.uniprot.org/citations/}{cite
 #'   to} the article with your provided PubMed ID.
-#' @param seq_length Refine your search to a exact sequence length (e.g. 150)
-#' or a range of sequence lengths (e.g. "130-158").
+#' @param seq_length An exact sequence length (e.g. 150) or a range of sequence
+#'   lengths (e.g. "130-158").
 #' @param md5 Sequence md5 value.
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #'   arguments documentation for more information on available options.
 #'
-#' @return List where each element corresponds to one UniProt entity returned
+#' @return A List where each element corresponds to one UniProt entity returned
 #'   by your search query. The element itself is a sub-list containing all
 #'   information that UniProt has about that entity.
 #'
