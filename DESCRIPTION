@@ -1,7 +1,7 @@
 Package: rbioapi
 Type: Package
 Title: User-friendly interface from R to Biological Databases' APIs
-Version: 0.5.0
+Version: 0.6.0
 Authors@R: person("Moosa", "Rezwani", email = "moosa.rezwani@gmail.com",
   role = c("aut", "cre", "cph"))
 Description: This package provides an easy, user-friendly and unified access to
