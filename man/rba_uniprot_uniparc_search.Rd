@@ -2,7 +2,7 @@
 % Please edit documentation in R/uniprot_uniparc.R
 \name{rba_uniprot_uniparc_search}
 \alias{rba_uniprot_uniparc_search}
-\title{Search UniParc entries}
+\title{Search UniParc Entries}
 \usage{
 rba_uniprot_uniparc_search(
   upi = NA,
@@ -15,7 +15,7 @@ rba_uniprot_uniparc_search(
   organism = NA,
   sequence_checksum = NA,
   ipr = NA,
-  signature_type = NA,
+  signature_db = NA,
   signature_id = NA,
   upid = NA,
   seq_length = NA,
@@ -23,18 +23,117 @@ rba_uniprot_uniparc_search(
   rf_db_id = NA,
   rf_active = NA,
   rf_tax_id = NA,
-  location = NA,
   ...
 )
 }
 \arguments{
-\item{location}{}
+\item{upi}{unique UniParc Identifier(s). You can provide up to 100 IDs.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+UniProtKB primary or secondary accession}(s). You can provide up to 100
+accession numbers.}
+
+\item{db_type}{\href{https://www.uniprot.org/database/}{cross-reference}
+(external database) name.}
+
+\item{db_id}{Protein ID in the cross-reference (external) database.
+You can provide up to 100 IDs.}
+
+\item{gene}{\href{https://www.uniprot.org/help/gene_name}{UniProt gene
+name(s)}. You can provide up to 20 gene names.}
+
+\item{protein}{\href{https://www.uniprot.org/help/protein_names}{UniProt
+protein name}.}
+
+\item{taxid}{NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+You can provide up to 20 taxon IDs.}
+
+\item{organism}{\href{https://www.uniprot.org/taxonomy/}{Organism name}.}
+
+\item{sequence_checksum}{Sequence CRC64 checksum.}
+
+\item{ipr}{\href{https://www.ebi.ac.uk/interpro/about/interpro/}{InterPro
+identifier(s)}. You can provide up to 20 IDs.}
+
+\item{signature_db}{InterPro's
+\href{https://interpro-documentation.readthedocs.io/en/latest/databases.html}{signature
+database}. You can provide up to 13 of the following values:\cr
+"CATH", "CDD", "HAMAP", "MobiDB Lite", "Panther", "Pfam", "PIRSF",
+"PRINTS", "Prosite", "SFLD", "SMART", "SUPERFAMILY" and/or "TIGRfams"}
+
+\item{signature_id}{Signature ID in the InterPro's
+\href{https://interpro-documentation.readthedocs.io/en/latest/databases.html}{signature
+database}. You can provide up to 20 IDs.}
+
+\item{upid}{\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
+identifier (UPID)}. You can provide up to 100 UPIDs.}
+
+\item{seq_length}{An exact sequence length (e.g. 150) or a range of sequence
+lengths (e.g. "130-158").}
+
+\item{rf_dd_type}{Filter the content of the each UniParc entry by
+\href{https://www.uniprot.org/database/}{cross-reference} names. You can
+provide multiple values.}
+
+\item{rf_db_id}{Filter the content of the each UniParc entry by protein
+identifiers in any cross-reference database. You can provide multiple
+values.}
+
+\item{rf_active}{(logical ) Filter the content of each UniParc entry based on
+active status on source database:\cr\itemize{
+\item NA: don't filter contents based on active status.
+\item TRUE: only return contents which are still active.
+\item FALSE: Only return contents which are not active.}}
+
+\item{rf_tax_id}{(Numeric) Filter the content of each UniParc entry by
+NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}. You can
+provide multiple values.}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+A List where each element corresponds to one UniParc entry returned
+  by your search query. The element itself is a sub-list containing sequence
+  information and reference entries.
 }
 \description{
-Search UniParc entries
+Use this function to search
+  \href{https://www.uniprot.org/help/uniparc}{UniProt Archive (UniParc)}
+  entries.You may also refine your search with modifiers such as sequence
+  length, taxon id etc. refer to "Arguments section" for more information.
 }
+\details{
+Note that this is a search function. Thus, you are not required to fill
+  every argument; You may use whatever combinations of arguments you see
+  fit for your query.\cr\cr
+}
+\section{Corresponding API Resources}{
+
+ "GET https://ebi.ac.uk/proteins/api/uniparc"
+}
+
+\examples{
+rba_uniprot_uniparc_search(upi = "UPI00000000C9")
+rba_uniprot_uniparc_search(accession = "P30914")
+rba_uniprot_uniparc_search(accession = "P30914", rf_active = TRUE)
+rba_uniprot_uniparc_search(taxid = "694009", protein = "Nucleoprotein")
+}
+\references{
+\itemize{
+  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
+  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
+  Turner, Maria Martin, The Proteins API: accessing key integrated protein
+  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
+  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+  Documentation}
+  }
+}
+\seealso{
+Other "UniProt API, UniParc": 
+\code{\link{rba_uniprot_uniparc_bestguess}()},
+\code{\link{rba_uniprot_uniparc_sequence}()},
+\code{\link{rba_uniprot_uniparc}()}
+}
+\concept{"UniProt API, UniParc"}

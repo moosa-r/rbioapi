@@ -2,12 +2,7 @@
 % Please edit documentation in R/uniprot_uniparc.R
 \name{rba_uniprot_uniparc_bestguess}
 \alias{rba_uniprot_uniparc_bestguess}
-\title{For a given user input (request parameters), Best Guess returns the
-UniParcEntry with a cross-reference to the longest active UniProtKB
-sequence (preferably from Swiss-Prot and if not then TrEMBL). It also
-returns the sequence and related information. If it finds more than one
-longest active UniProtKB sequence it returns 400 (Bad Request) error
-response with the list of cross references found.}
+\title{Get UniParc Longest Sequence for Entries}
 \usage{
 rba_uniprot_uniparc_bestguess(
   upi = NA,
@@ -19,18 +14,58 @@ rba_uniprot_uniparc_bestguess(
 )
 }
 \arguments{
-\item{taxid}{}
+\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+UniProtKB primary or secondary accession}(s). You can provide up to 100
+accession numbers.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{db_id}{Protein ID in the cross-reference (external) database.
+You can provide up to 100 IDs.}
+
+\item{gene}{\href{https://www.uniprot.org/help/gene_name}{UniProt gene
+name(s)}. You can provide up to 20 gene names.}
+
+\item{taxid}{NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+You can provide up to 20 taxon IDs.}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
+
+\item{upid}{\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
+identifier (UPID)}. You can provide up to 100 UPIDs.}
 }
 \value{
-
+A list where each element correspond to a UniParc entry.
 }
 \description{
-For a given user input (request parameters), Best Guess returns the
-UniParcEntry with a cross-reference to the longest active UniProtKB
-sequence (preferably from Swiss-Prot and if not then TrEMBL). It also
-returns the sequence and related information. If it finds more than one
-longest active UniProtKB sequence it returns 400 (Bad Request) error
-response with the list of cross references found.
+This function returns the UniParc Entry with a cross-reference to the
+  longest active UniProtKB sequence (preferably from Swiss-Prot and if not
+  then TrEMBL). If it finds more than one longest active UniProtKB sequence
+  it returns 400 (Bad Request) error response with the list of cross
+  references found.
 }
+\section{Corresponding API Resources}{
+
+ "GET https://ebi.ac.uk/proteins/api/uniparc/bestguess"
+}
+
+\examples{
+rba_uniprot_uniparc_bestguess("UPI00000000C9")
+}
+\references{
+\itemize{
+  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
+  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
+  Turner, Maria Martin, The Proteins API: accessing key integrated protein
+  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
+  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+  Documentation}
+  }
+}
+\seealso{
+Other "UniProt API, UniParc": 
+\code{\link{rba_uniprot_uniparc_search}()},
+\code{\link{rba_uniprot_uniparc_sequence}()},
+\code{\link{rba_uniprot_uniparc}()}
+}
+\concept{"UniProt API, UniParc"}

@@ -2,10 +2,13 @@
 % Please edit documentation in R/uniprot_uniparc.R
 \name{rba_uniprot_uniparc}
 \alias{rba_uniprot_uniparc}
-\title{Get UniParc entry only by UniProt accession}
+\title{Get UniParc entry}
 \usage{
 rba_uniprot_uniparc(
+  upi = NA,
   accession = NA,
+  db_id = NA,
+  upid = NA,
   rf_dd_type = NA,
   rf_db_id = NA,
   rf_active = NA,
@@ -14,13 +17,74 @@ rba_uniprot_uniparc(
 )
 }
 \arguments{
-\item{rf_tax_id}{}
+\item{upi}{unique UniParc Identifier.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+UniProtKB primary or secondary accession}.}
+
+\item{db_id}{Protein ID in the cross-reference (external) database.}
+
+\item{upid}{\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
+identifier (UPID)}. You can provide up to 100 UPIDs.}
+
+\item{rf_dd_type}{Filter the content of the UniParc entry by
+\href{https://www.uniprot.org/database/}{cross-reference} names. You can
+provide multiple values.}
+
+\item{rf_db_id}{Filter the content of the UniParc entry by protein
+identifiers in any cross-reference database. You can provide multiple
+values.}
+
+\item{rf_active}{(logical ) Filter the content of UniParc entry based on
+active status on source database:\cr\itemize{
+\item NA: don't filter contents based on active status.
+\item TRUE: only return contents which are still active.
+\item FALSE: Only return contents which are not active.}}
+
+\item{rf_tax_id}{(Numeric) Filter the content of the UniParc entry by
+NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}. You can
+provide multiple values.}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+A list which correspond to a UniParc entry.
 }
 \description{
-Get UniParc entry only by UniProt accession
+Use this function to retrieve UniParc entries. You can use either -and only
+  one of- UniProt accession, Cross-reference database id, UniParc ID or
+  UniProt Proteome UPID. You can also filter the returned content of
+  the returned UniParc entry. see "Argument" section for more details.
 }
+\section{Corresponding API Resources}{
+
+ "GET https://ebi.ac.uk/proteins/api/uniparc/accession/{accession} "
+ "GET https://ebi.ac.uk/proteins/api/uniparc/dbreference/{dbid}"
+ "GET https://ebi.ac.uk/proteins/api/uniparc/proteome/{upid}"
+ "GET https://ebi.ac.uk/proteins/api/uniparc/upi/{upi}"
+}
+
+\examples{
+rba_uniprot_uniparc(upi = "UPI00000000C9")
+rba_uniprot_uniparc(upi = "UPI00000000C9")
+rba_uniprot_uniparc(upi = "UPI00000000C9", rf_active = FALSE)
+}
+\references{
+\itemize{
+  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
+  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
+  Turner, Maria Martin, The Proteins API: accessing key integrated protein
+  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
+  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+  Documentation}
+  }
+}
+\seealso{
+Other "UniProt API, UniParc": 
+\code{\link{rba_uniprot_uniparc_bestguess}()},
+\code{\link{rba_uniprot_uniparc_search}()},
+\code{\link{rba_uniprot_uniparc_sequence}()}
+}
+\concept{"UniProt API, UniParc"}

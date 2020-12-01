@@ -2,7 +2,7 @@
 % Please edit documentation in R/uniprot_uniparc.R
 \name{rba_uniprot_uniparc_sequence}
 \alias{rba_uniprot_uniparc_sequence}
-\title{Get UniParc entries by sequence}
+\title{Get UniParc Entries by Sequence}
 \usage{
 rba_uniprot_uniparc_sequence(
   sequence,
@@ -14,13 +14,61 @@ rba_uniprot_uniparc_sequence(
 )
 }
 \arguments{
-\item{rf_tax_id}{}
+\item{sequence}{Exact UniParc protein sequence. Partial matches will not be
+accepted.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{rf_dd_type}{Filter the content of the UniParc entry by
+\href{https://www.uniprot.org/database/}{cross-reference} names. You can
+provide multiple values.}
+
+\item{rf_db_id}{Filter the content of the UniParc entry by protein
+identifiers in any cross-reference database. You can provide multiple
+values.}
+
+\item{rf_active}{(logical ) Filter the content of UniParc entry based on
+active status on source database:\cr\itemize{
+\item NA: don't filter contents based on active status.
+\item TRUE: only return contents which are still active.
+\item FALSE: Only return contents which are not active.}}
+
+\item{rf_tax_id}{(Numeric) Filter the content of the UniParc entry by
+NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}. You can
+provide multiple values.}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+A list which correspond to a UniParc entry.
 }
 \description{
-Get UniParc entries by sequence
+Retrieve UniParc Entry by providing an exact sequence. Note that partial
+  matches will not be accepted. You can also filter the returned content of
+  the returned UniParc entry. see "Argument" section for more details.
 }
+\section{Corresponding API Resources}{
+
+ "POST https://ebi.ac.uk/proteins/api/uniparc/sequence"
+}
+
+\examples{
+rba_uniprot_uniparc_sequence("GMRSCPRGCSQRGRCENGRCVCNPGYTGEDC")
+}
+\references{
+\itemize{
+  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
+  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
+  Turner, Maria Martin, The Proteins API: accessing key integrated protein
+  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
+  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+  Documentation}
+  }
+}
+\seealso{
+Other "UniProt API, UniParc": 
+\code{\link{rba_uniprot_uniparc_bestguess}()},
+\code{\link{rba_uniprot_uniparc_search}()},
+\code{\link{rba_uniprot_uniparc}()}
+}
+\concept{"UniProt API, UniParc"}
