@@ -2,20 +2,64 @@
 % Please edit documentation in R/uniprot_coordinates.R
 \name{rba_uniprot_coordinates}
 \alias{rba_uniprot_coordinates}
-\title{Get genomic coordinates for a UniProt accession Search UniProt entries by
-genomic database cross reference IDs: Ensembl, CCDS, HGNC or RefSeq}
+\title{Get Genomic Coordinates of a Protein}
 \usage{
 rba_uniprot_coordinates(accession = NA, db_type = NA, db_id = NA, ...)
 }
 \arguments{
-\item{db_id}{}
+\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+UniProtKB primary or secondary accession}.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s arguments documentation for more information on available options.}
+\item{db_type}{cross-reference database name, Should be one of:
+"Ensembl", "CCDC", "HGNC" or "RefSeq".}
+
+\item{db_id}{Protein's ID in the cross-reference database}
+
+\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
+arguments documentation for more information on available options.}
 }
 \value{
-
+A list with genome coordinates of your provided protein.
 }
 \description{
-Get genomic coordinates for a UniProt accession Search UniProt entries by
-genomic database cross reference IDs: Ensembl, CCDS, HGNC or RefSeq
+Using this function you can retrieve genomic Coordinates of a Protein by
+  either providing the protein's UniProt accession or it's ID in a
+  cross-reference database (Ensembl, CCDC, HGNC or RefSeq). You should
+  provide either 'accession' alone or 'db_type' and 'db_id' together.
 }
+\details{
+For more information about how UniProt imports and calculates genomic
+  coordinates data, see:\cr
+  McGarvey, P. B., Nightingale, A., Luo, J., Huang, H., Martin, M. J.,
+  Wu, C., & UniProt Consortium (2019). UniProt genomic mapping for
+  deciphering functional effects of missense variants. Human mutation,
+  40(6), 694–705. https://doi.org/10.1002/humu.23738
+}
+\section{Corresponding API Resources}{
+
+ "GET https://ebi.ac.uk/proteins/api/coordinates/{accession}"
+ "GET https://ebi.ac.uk/proteins/api/coordinates/{dbtype}:{dbid}"
+}
+
+\examples{
+rba_uniprot_coordinates(accession = "P25942")
+rba_uniprot_coordinates(db_type = "HGNC", db_id = "CD40")
+}
+\references{
+\itemize{
+  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
+  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
+  Turner, Maria Martin, The Proteins API: accessing key integrated protein
+  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
+  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+  Documentation}
+  }
+}
+\seealso{
+Other "UniProt API, Coordinates": 
+\code{\link{rba_uniprot_coordinates_location}()},
+\code{\link{rba_uniprot_coordinates_search}()},
+\code{\link{rba_uniprot_coordinates_sequence}()}
+}
+\concept{"UniProt API, Coordinates"}
