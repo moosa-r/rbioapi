@@ -385,8 +385,7 @@ rba_uniprot_uniparc = function(upi = NA,
 #' @section Corresponding API Resources:
 #'  "GET https://ebi.ac.uk/proteins/api/uniparc/bestguess"
 #'
-#' @param upid \href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
-#'   identifier (UPID)}. You can provide up to 100 UPIDs.
+#' @param upi unique UniParc Identifier.
 #' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}(s). You can provide up to 100
 #'   accession numbers.

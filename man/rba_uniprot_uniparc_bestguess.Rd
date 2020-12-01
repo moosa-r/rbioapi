@@ -14,6 +14,8 @@ rba_uniprot_uniparc_bestguess(
 )
 }
 \arguments{
+\item{upi}{unique UniParc Identifier.}
+
 \item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
 UniProtKB primary or secondary accession}(s). You can provide up to 100
 accession numbers.}
@@ -29,9 +31,6 @@ You can provide up to 20 taxon IDs.}
 
 \item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
 arguments documentation for more information on available options.}
-
-\item{upid}{\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
-identifier (UPID)}. You can provide up to 100 UPIDs.}
 }
 \value{
 A list where each element correspond to a UniParc entry.
