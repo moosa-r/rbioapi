@@ -35,25 +35,25 @@
 rba_uniprot_taxonomy_lca = function(ids,
                                     ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "ids",
-                               class = "numeric",
-                               min_len = 2))
+  .rba_args(cons = list(list(arg = "ids",
+                             class = "numeric",
+                             min_len = 2))
   )
-  v_msg("Retrieving LCA of ", paste_2(ids, sep = ", ", last = " and "))
+  .msg("Retrieving LCA of ", .paste2(ids, sep = ", ", last = " and "))
   ## Build Function-Specific Call
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("uniprot", "url"),
-                           path = paste0(rba_ba_stg("uniprot", "pth"),
-                                         "taxonomy/ancestor/",
-                                         paste0(ids, collapse = ",")),
-                           accept = "application/json",
-                           parser = "json->list_simp",
-                           save_to = rba_ba_file("uniprot_taxonomy_lca.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("uniprot", "url"),
+                         path = paste0(.rba_stg("uniprot", "pth"),
+                                       "taxonomy/ancestor/",
+                                       paste0(ids, collapse = ",")),
+                         accept = "application/json",
+                         parser = "json->list_simp",
+                         save_to = .rba_file("uniprot_taxonomy_lca.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -119,39 +119,39 @@ rba_uniprot_taxonomy = function(ids,
                                 page_number = 1,
                                 ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "ids",
-                               class = "numeric"),
-                          list(arg = "hierarchy",
-                               class = "character",
-                               val = c("children",
-                                       "parent",
-                                       "siblings")),
-                          list(arg = "node_only",
-                               class = "logical"),
-                          list(arg = "page_size",
-                               class = "numeric",
-                               ran = c(1,200)),
-                          list(arg = "page_number",
-                               class = "numeric")),
-              cond = list(list(quote(length(ids) > 1 && !is.na(hierarchy)),
-                               "you cannot specify 'hierarchy' when providing more than 1 ids."),
-                          list(quote(is.na(hierarchy) && (page_size != 200 | page_number != 1)),
-                               "Because hierarchy argument was not provided, page_size and page_number were ignored.",
-                               warn = TRUE))
+  .rba_args(cons = list(list(arg = "ids",
+                             class = "numeric"),
+                        list(arg = "hierarchy",
+                             class = "character",
+                             val = c("children",
+                                     "parent",
+                                     "siblings")),
+                        list(arg = "node_only",
+                             class = "logical"),
+                        list(arg = "page_size",
+                             class = "numeric",
+                             ran = c(1,200)),
+                        list(arg = "page_number",
+                             class = "numeric")),
+            cond = list(list(quote(length(ids) > 1 && !is.na(hierarchy)),
+                             "you cannot specify 'hierarchy' when providing more than 1 ids."),
+                        list(quote(is.na(hierarchy) && (page_size != 200 | page_number != 1)),
+                             "Because hierarchy argument was not provided, page_size and page_number were ignored.",
+                             warn = TRUE))
   )
 
-  v_msg("Retrieving %snodes information of %s.",
+  .msg("Retrieving %snodes information of %s.",
         ifelse(!is.na(hierarchy),
                yes = hierarchy,
                no = ""),
-        paste_2(ids, sep = ", ", last = " and "))
+        .paste2(ids, sep = ", ", last = " and "))
   ## Build GET API Request's query
   call_query = list()
   ## Build Function-Specific Call
   path_input = sprintf("%staxonomy/%s/%s",
-                       rba_ba_stg("uniprot", "pth"),
+                       .rba_stg("uniprot", "pth"),
                        ifelse(length(ids) > 1,
                               yes = "ids",
                               no = "id"),
@@ -170,16 +170,16 @@ rba_uniprot_taxonomy = function(ids,
   parser_input = ifelse(isTRUE(node_only),
                         yes = "json->list_simp",
                         no = "json->list")
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("uniprot", "url"),
-                           path = path_input,
-                           query = call_query,
-                           accept = "application/json",
-                           parser = parser_input,
-                           save_to = rba_ba_file("uniprot_taxonomy.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("uniprot", "url"),
+                         path = path_input,
+                         query = call_query,
+                         accept = "application/json",
+                         parser = parser_input,
+                         save_to = .rba_file("uniprot_taxonomy.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -219,24 +219,24 @@ rba_uniprot_taxonomy = function(ids,
 rba_uniprot_taxonomy_lineage = function(id,
                                         ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "id",
-                               class = "numeric")))
+  .rba_args(cons = list(list(arg = "id",
+                             class = "numeric")))
 
-  v_msg("Retrieving Taxonomic Lineage of node %s.", id)
+  .msg("Retrieving Taxonomic Lineage of node %s.", id)
   ## Build Function-Specific Call
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("uniprot", "url"),
-                           path = paste0(rba_ba_stg("uniprot", "pth"),
-                                         "taxonomy/lineage/",
-                                         id),
-                           accept = "application/json",
-                           parser = "json->list_simp",
-                           save_to = rba_ba_file("rba_uniprot_taxonomy_lineage.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("uniprot", "url"),
+                         path = paste0(.rba_stg("uniprot", "pth"),
+                                       "taxonomy/lineage/",
+                                       id),
+                         accept = "application/json",
+                         parser = "json->list_simp",
+                         save_to = .rba_file("rba_uniprot_taxonomy_lineage.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -294,30 +294,30 @@ rba_uniprot_taxonomy_name = function(name,
                                      page_number = 1,
                                      ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "name",
-                               class = "character"),
-                          list(arg = "field",
-                               class = "character",
-                               val = c("scientific",
-                                       "common",
-                                       "mnemonic")),
-                          list(arg = "search_type",
-                               class = "character",
-                               val = c("equal_to",
-                                       "start_with",
-                                       "end_with",
-                                       "contain")),
-                          list(arg = "node_only",
-                               class = "logical"),
-                          list(arg = "page_size",
-                               class = "numeric",
-                               ran = c(1,200)),
-                          list(arg = "page_number",
-                               class = "numeric")))
+  .rba_args(cons = list(list(arg = "name",
+                             class = "character"),
+                        list(arg = "field",
+                             class = "character",
+                             val = c("scientific",
+                                     "common",
+                                     "mnemonic")),
+                        list(arg = "search_type",
+                             class = "character",
+                             val = c("equal_to",
+                                     "start_with",
+                                     "end_with",
+                                     "contain")),
+                        list(arg = "node_only",
+                             class = "logical"),
+                        list(arg = "page_size",
+                             class = "numeric",
+                             ran = c(1,200)),
+                        list(arg = "page_number",
+                             class = "numeric")))
 
-  v_msg("Retrieving taxonomic nodes that their %s name field %s %s.",
+  .msg("Retrieving taxonomic nodes that their %s name field %s %s.",
         field, search_type, name)
   ## Build GET API Request's query
   call_query = list("name" = name,
@@ -334,7 +334,7 @@ rba_uniprot_taxonomy_name = function(name,
                     pageNumber = page_number)
   ## Build Function-Specific Call
   path_input = sprintf("%staxonomy/name/%s",
-                       rba_ba_stg("uniprot", "pth"),
+                       .rba_stg("uniprot", "pth"),
                        name)
   if (isTRUE(node_only)) {
     path_input = paste0(path_input, "/node")
@@ -343,16 +343,16 @@ rba_uniprot_taxonomy_name = function(name,
                         yes = "json->list_simp",
                         no = "json->list")
 
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("uniprot", "url"),
-                           path = path_input,
-                           query = call_query,
-                           accept = "application/json",
-                           parser = parser_input,
-                           save_to = rba_ba_file("uniprot_taxonomy_name.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("uniprot", "url"),
+                         path = path_input,
+                         query = call_query,
+                         accept = "application/json",
+                         parser = parser_input,
+                         save_to = .rba_file("uniprot_taxonomy_name.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -397,19 +397,19 @@ rba_uniprot_taxonomy_path = function(id,
                                      depth = 5,
                                      ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "id",
-                               class = "numeric"),
-                          list(arg = "direction",
-                               class = "character",
-                               val = c("TOP",
-                                       "BOTTOM")),
-                          list(arg = "depth",
-                               class = "numeric",
-                               ran = c(1,5))))
+  .rba_args(cons = list(list(arg = "id",
+                             class = "numeric"),
+                        list(arg = "direction",
+                             class = "character",
+                             val = c("TOP",
+                                     "BOTTOM")),
+                        list(arg = "depth",
+                             class = "numeric",
+                             ran = c(1,5))))
 
-  v_msg("Retrieving the %s steps of nodes that are in the %s of %s node.",
+  .msg("Retrieving the %s steps of nodes that are in the %s of %s node.",
         depth, direction, id)
 
   ## Build GET API Request's query
@@ -418,17 +418,17 @@ rba_uniprot_taxonomy_path = function(id,
                     "depth" = depth)
 
   ## Build Function-Specific Call
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("uniprot", "url"),
-                           path = paste0(rba_ba_stg("uniprot", "pth"),
-                                         "taxonomy/path"),
-                           query = call_query,
-                           accept = "application/json",
-                           parser = "json->list",
-                           save_to = rba_ba_file("uniprot_taxonomy_path.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("uniprot", "url"),
+                         path = paste0(.rba_stg("uniprot", "pth"),
+                                       "taxonomy/path"),
+                         query = call_query,
+                         accept = "application/json",
+                         parser = "json->list",
+                         save_to = .rba_file("uniprot_taxonomy_path.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -469,15 +469,15 @@ rba_uniprot_taxonomy_relationship = function(from,
                                              to,
                                              ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "from",
-                               class = "numeric"),
-                          list(arg = "to",
-                               class = "numeric"))
+  .rba_args(cons = list(list(arg = "from",
+                             class = "numeric"),
+                        list(arg = "to",
+                             class = "numeric"))
   )
 
-  v_msg("Retrieving the shortest path on the toxonomy tree from node %s to %s.",
+  .msg("Retrieving the shortest path on the toxonomy tree from node %s to %s.",
         from, to)
 
   ## Build GET API Request's query
@@ -485,16 +485,16 @@ rba_uniprot_taxonomy_relationship = function(from,
                     "to" = to)
 
   ## Build Function-Specific Call
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("uniprot", "url"),
-                           path = paste0(rba_ba_stg("uniprot", "pth"),
-                                         "taxonomy/relationship"),
-                           query = call_query,
-                           accept = "application/json",
-                           parser = "json->list",
-                           save_to = rba_ba_file("uniprot_taxonomy_relationship.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("uniprot", "url"),
+                         path = paste0(.rba_stg("uniprot", "pth"),
+                                       "taxonomy/relationship"),
+                         query = call_query,
+                         accept = "application/json",
+                         parser = "json->list",
+                         save_to = .rba_file("uniprot_taxonomy_relationship.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }

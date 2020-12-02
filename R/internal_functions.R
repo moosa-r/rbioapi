@@ -15,7 +15,7 @@
 #'   type. but mostly, it will be of class character.
 #' @family internal_data_container
 #' @export
-rba_ba_stg = function(...){
+.rba_stg = function(...){
   arg = c(...)
   #possible arguments
   arg_1 = c("db", "enrichr", "ensembl", "reactome", "string", "uniprot", "options", "citations")
@@ -93,10 +93,10 @@ rba_ba_stg = function(...){
 #' @return TRUE if connected to the internet, a character string if not.
 #' @family internal_inernet_connectivity
 #' @export
-rba_ba_net_handle = function(retry_max = 1,
-                             wait_time = 10,
-                             verbose = FALSE,
-                             diagnostics = FALSE) {
+.rba_net_handle = function(retry_max = 1,
+                           wait_time = 10,
+                           verbose = FALSE,
+                           diagnostics = FALSE) {
   if (isTRUE(diagnostics)) {message("Testing the internet connection.")}
   test_call = quote(httr::status_code(httr::HEAD("https://www.google.com/",
                                                  httr::timeout(getOption("rba_client_timeout")),
@@ -141,7 +141,7 @@ rba_ba_net_handle = function(retry_max = 1,
 #'   failure.
 #' @family internal_inernet_connectivity
 #' @export
-rba_ba_api_check = function(url, diagnostics = FALSE){
+.rba_api_check = function(url, diagnostics = FALSE){
   request = quote(httr::HEAD(url = url,
                              httr::timeout(getOption("rba_client_timeout")),
                              httr::user_agent(getOption("rba_user_agent")),
@@ -155,8 +155,8 @@ rba_ba_api_check = function(url, diagnostics = FALSE){
       return("\U2705 The Server is Respoding.")
     } else {
       return(paste("\U274C",
-                   rba_ba_http_status(test_result,
-                                      verbose = FALSE)))
+                   .rba_http_status(test_result,
+                                    verbose = FALSE)))
     }
   } else {
     return(paste("\U274C", test_result))
@@ -180,7 +180,7 @@ rba_ba_api_check = function(url, diagnostics = FALSE){
 #'
 #' @family internal_inernet_connectivity
 #' @export
-rba_ba_http_status = function(http_status, verbose = FALSE){
+.rba_http_status = function(http_status, verbose = FALSE){
   #ref:
   http_status = as.character(http_status)
   stopifnot(grepl("^[12345]\\d\\d$", http_status))
@@ -293,7 +293,7 @@ rba_ba_http_status = function(http_status, verbose = FALSE){
 #'
 #' @family internal_api_calls
 #' @export
-rba_ba_query = function(init, ...) {
+.rba_query = function(init, ...) {
   ## check the input method
   ext_par = list(...)
   if (utils::hasName(ext_par, "extra_pars")) {
@@ -366,10 +366,10 @@ rba_ba_query = function(init, ...) {
 #'
 #' @family internal_api_calls
 #' @export
-rba_ba_httr = function(httr,
-                       url = NULL,
-                       path = NULL,
-                       ...) {
+.rba_httr = function(httr,
+                     url = NULL,
+                     path = NULL,
+                     ...) {
   ## assign global options
   diagnostics = get0("diagnostics", envir = parent.frame(1),
                      ifnotfound = getOption("rba_diagnostics"))
@@ -457,29 +457,29 @@ rba_ba_httr = function(httr,
 
 #' Internal function to make http request
 #'
-#' This function will be called by rba_ba_skeleton() and is the internal
+#' This function will be called by .rba_skeleton() and is the internal
 #'   function which resides between making an httr function call using
-#'   rba_ba_httr and evaluating that call to retrieve a response from the API
+#'   .rba_httr and evaluating that call to retrieve a response from the API
 #'   server.
 #'
 #' In case of an error (anything other than status code 200), the function will
 #'   perform extra steps according to the context:\cr
 #'   1- If it was not possible to establish a connection with the server,
-#'   rba_ba_net_handle() will be called to handle the situation.\cr
+#'   .rba_net_handle() will be called to handle the situation.\cr
 #'   2- If the server returned a status code 5xx, calling the server will be
 #'   retried accordingly.\cr
 #'   3- if the server returned status code other than 200 or 5xx, the response
 #'   and status code will be handed to rba_error_parser() to handle the
 #'   situation.
 #'
-#' @param input_call A httr function call made  by rba_ba_httr().
+#' @param input_call A httr function call made  by .rba_httr().
 #' @param skip_error logical: If TRUE, in case of an error HTTP status other
 #'  than 200, instead of halting the code execution, the error message will be
 #'  returned as the function's output.
 #' @param no_interet_retry_max numeric: A value to be passed to
-#'   rba_ba_net_handle() retry_max argument.
+#'   .rba_net_handle() retry_max argument.
 #' @param no_internet_wait_time numeric: A value to be passed to
-#'   rba_ba_net_handle() wait_time argument.
+#'   .rba_net_handle() wait_time argument.
 #' @param verbose should the function generate informative messages?
 #' @param diagnostics logical: Generate diagnostics and detailed messages with
 #'   internal information.
@@ -490,12 +490,12 @@ rba_ba_httr = function(httr,
 #'
 #' @family internal_api_calls
 #' @export
-rba_ba_api_call = function(input_call,
-                           skip_error = FALSE,
-                           no_interet_retry_max = 1,
-                           no_internet_wait_time = 10,
-                           verbose = TRUE,
-                           diagnostics = FALSE) {
+.rba_api_call = function(input_call,
+                         skip_error = FALSE,
+                         no_interet_retry_max = 1,
+                         no_internet_wait_time = 10,
+                         verbose = TRUE,
+                         diagnostics = FALSE) {
   ## 1 call API
   response = try(eval(input_call, envir = parent.frame(n = 2)),
                  silent = !diagnostics)
@@ -504,10 +504,10 @@ rba_ba_api_call = function(input_call,
       substr(response$status_code, 1, 1) == "5") {
     ## 2.1 there is an internet connection or server issue
     # wait for the internet connection
-    net_connected = rba_ba_net_handle(retry_max = no_interet_retry_max,
-                                      wait_time = no_internet_wait_time,
-                                      verbose = verbose,
-                                      diagnostics = diagnostics)
+    net_connected = .rba_net_handle(retry_max = no_interet_retry_max,
+                                    wait_time = no_internet_wait_time,
+                                    verbose = verbose,
+                                    diagnostics = diagnostics)
     if (isTRUE(net_connected)) {
       ## 2.1.1 net_connection test is passed
       response = try(eval(input_call, envir = parent.frame(n = 2)),
@@ -530,7 +530,7 @@ rba_ba_api_call = function(input_call,
     }
   } else if (as.character(response$status_code) != "200") {
     ## 3.2 API call was not successful
-    error_message = rba_ba_error_parser(response = response, verbose = verbose)
+    error_message = .rba_error_parser(response = response, verbose = verbose)
     if (isTRUE(skip_error)) {
       return(error_message)
     } else {
@@ -545,8 +545,8 @@ rba_ba_api_call = function(input_call,
 #' A Wrapper for API Calling and Parsing the Response
 #'
 #' This function will be called at the last step of any exported function to
-#'   call the server API using rba_ba_api_call() and parse the response using
-#'   rba_ba_response_parser().
+#'   call the server API using .rba_api_call() and parse the response using
+#'   .rba_response_parser().
 #'
 #' The function will try to use the parser specified in the 'input_call' object,
 #'   but if a parser value was provided with the 'response_parser' argument,
@@ -556,20 +556,20 @@ rba_ba_api_call = function(input_call,
 #'   note that the function was much longer at the begging of this package
 #'   development, hence the name 'skeleton'.
 #'
-#' @param input_call list: The exact output of rba_ba_httr()
+#' @param input_call list: The exact output of .rba_httr()
 #' @param response_parser A string vector corresponding to the pre-defined
-#'   parser calls in rba_ba_response_parser() or an expression to be evaluated by
-#'   rba_ba_response_parser().
+#'   parser calls in .rba_response_parser() or an expression to be evaluated by
+#'   .rba_response_parser().
 #'
 #' @return A parsed server Response which may be and R object of any class,
-#'   depending on rba_ba_response_parser() output. In case of error and
+#'   depending on .rba_response_parser() output. In case of error and
 #'   'skip_error = TRUE', the output will be the error message as a character
 #'   string.
 #'
 #' @family internal_api_calls
 #' @export
-rba_ba_skeleton = function(input_call,
-                           response_parser = NULL) {
+.rba_skeleton = function(input_call,
+                         response_parser = NULL) {
   ## 0 assign options variables
   diagnostics = get0("diagnostics", envir = parent.frame(1),
                      ifnotfound = getOption("rba_diagnostics"))
@@ -582,14 +582,14 @@ rba_ba_skeleton = function(input_call,
   skip_error = get0("skip_error", envir = parent.frame(1),
                     ifnotfound = getOption("rba_skip_error"))
   ## 1 Make API Call
-  response = rba_ba_api_call(input_call = input_call$call,
-                             skip_error = skip_error,
-                             no_interet_retry_max = max_retries,
-                             no_internet_wait_time = wait_time,
-                             verbose = verbose,
-                             diagnostics = diagnostics)
+  response = .rba_api_call(input_call = input_call$call,
+                           skip_error = skip_error,
+                           no_interet_retry_max = max_retries,
+                           no_internet_wait_time = wait_time,
+                           verbose = verbose,
+                           diagnostics = diagnostics)
   ## 2 Parse the the response if possible
-  # Parser Provided via rba_ba_skeleton's 'response parser' argument will
+  # Parser Provided via .rba_skeleton's 'response parser' argument will
   # override the 'parser' provided in input call
   if (!is.null(response_parser)) {
     parser_input = response_parser
@@ -598,7 +598,7 @@ rba_ba_skeleton = function(input_call,
   }
 
   if (methods::is(response, "response") && !is.null(parser_input)) {
-    final_output = rba_ba_response_parser(response, parser_input)
+    final_output = .rba_response_parser(response, parser_input)
   } else {
     final_output = response
   }
@@ -611,9 +611,9 @@ rba_ba_skeleton = function(input_call,
 
 #' Add rbioapi options to user's Arguments Check
 #'
-#' This function is an internal component of rba_ba_args(). It will
+#' This function is an internal component of .rba_args(). It will
 #'   add user-defiended rbioapi options variables (provided by the "..."
-#'   arguments in the exported function call) to rba_ba_args's cond and cons.
+#'   arguments in the exported function call) to .rba_args's cond and cons.
 #'
 #' The aim of this function is to eliminate the need
 #'   to write explicit options arguments checking when writing the exported
@@ -630,7 +630,7 @@ rba_ba_skeleton = function(input_call,
 #'
 #' @family internal_arguments_check
 #' @export
-rba_ba_args_opts = function(cons = NULL, cond = NULL, what) {
+.rba_args_opts = function(cons = NULL, cond = NULL, what) {
   if (what == "cons") {
     ext_cons = list(client_timeout = list(arg = "client_timeout",
                                           class = "numeric",
@@ -683,19 +683,19 @@ rba_ba_args_opts = function(cons = NULL, cond = NULL, what) {
 
 #' Check If A cons Element Follows A Constrain Type
 #'
-#' This function will take a single element from the rba_ba_args()'s
+#' This function will take a single element from the .rba_args()'s
 #'    cons argument and a single constrain type and checks if it is TRUE.
 #'
-#' @param cons_i element i from rba_ba_args()'s cons argument.
+#' @param cons_i element i from .rba_args()'s cons argument.
 #' @param what what constrain to check? it should be one of the possible cons
-#'  types defined in rba_ba_args()'s documentations.
+#'  types defined in .rba_args()'s documentations.
 #'
 #' @return Logical. TRUE if element i is correct with regard to the constrain
 #'   "what"; FALSE otherwise.
 #'
 #' @family internal_arguments_check
 #' @export
-rba_ba_args_cons_chk = function(cons_i, what) {
+.rba_args_cons_chk = function(cons_i, what) {
   if (any(!is.na(cons_i[["evl_arg"]]))) {
     output = all(switch(what,
                         "class" = class(cons_i[["evl_arg"]]) %in% cons_i[["class"]],
@@ -720,27 +720,27 @@ rba_ba_args_cons_chk = function(cons_i, what) {
 #' Produce Error Message If an Element doesn't Follow a constrain
 #'
 #' In case of Constrain Error (i.e. a FALSE returned by
-#'   rba_ba_args_cons_chk()), this function will produce a related error
+#'   .rba_args_cons_chk()), this function will produce a related error
 #'   message.
 #'
-#' @param cons_i element i from rba_ba_args()'s cons argument.
+#' @param cons_i element i from .rba_args()'s cons argument.
 #' @param what what constrain produced the error? it should be one of the
-#'  possible cons types defined in rba_ba_args()'s documentations.
+#'  possible cons types defined in .rba_args()'s documentations.
 #'
 #' @return A character string.
 #'
 #' @family internal_arguments_check
 #' @export
-rba_ba_args_cons_msg = function(cons_i, what) {
+.rba_args_cons_msg = function(cons_i, what) {
   switch(what,
          "class" = sprintf("Invalid Argument; %s should be of class `%s`.\r\n\t(Your provided argument is \"%s\".)",
                            cons_i[["arg"]],
-                           paste_2(cons_i[["class"]], last = " or ",
+                           .paste2(cons_i[["class"]], last = " or ",
                                    quote = "\""),
                            class(cons_i[["evl_arg"]])),
          "val" = sprintf("Invalid Argument; %s should be either `%s`.\r\n\t(Your provided argument is `%s`.)",
                          cons_i[["arg"]],
-                         paste_2(cons_i[["val"]], last = " or ",
+                         .paste2(cons_i[["val"]], last = " or ",
                                  quote = "\""),
                          cons_i[["evl_arg"]]),
          "ran" = sprintf("Invalid Argument; %s should be `from %s to %s`.\r\n\t(Your provided argument is `%s`.)",
@@ -776,24 +776,24 @@ rba_ba_args_cons_msg = function(cons_i, what) {
 
 #' A wrapper to Iterate Constrain Types on a cons' Element
 #'
-#' Iterates rba_ba_args_cons_chk() on every defined constrain
+#' Iterates .rba_args_cons_chk() on every defined constrain
 #'   for element i of a cons element. and produce an error message if necessary.
 #'
-#' @param cons_i element i from rba_ba_args()'s cons argument.
+#' @param cons_i element i from .rba_args()'s cons argument.
 #'
 #' @return A character vector with containing the error message for failed
 #'   constrains, NA otherwise.
 #'
 #' @family internal_arguments_check
 #' @export
-rba_ba_args_cons_wrp = function(cons_i) {
+.rba_args_cons_wrp = function(cons_i) {
   all_cons = setdiff(names(cons_i), c("arg", "class", "evl_arg"))
   cons_i_errs = lapply(all_cons,
                        function(x){
-                         if (rba_ba_args_cons_chk(cons_i = cons_i, what = x)) {
+                         if (.rba_args_cons_chk(cons_i = cons_i, what = x)) {
                            return(NA)
                          } else {
-                           return(rba_ba_args_cons_msg(cons_i = cons_i, what = x))
+                           return(.rba_args_cons_msg(cons_i = cons_i, what = x))
                          }
                        })
 
@@ -807,20 +807,20 @@ rba_ba_args_cons_wrp = function(cons_i) {
 #' In case of Condition Error (i.e. a TRUE returned by evaluating the
 #'  defined conditions in cond), this function will produce  a list with:
 #'  1- messages that could be used as error or warning, 2- an element named
-#'  "warn" that if FALSE, rba_ba_args() will stop the code
+#'  "warn" that if FALSE, .rba_args() will stop the code
 #'  execution with message as error, or if TRUE, issues a warning with that
 #'  message.
 #'
-#' @param cond_i element i from rba_ba_args()'s cond argument.
+#' @param cond_i element i from .rba_args()'s cond argument.
 #'
 #' @return A list containing the messages and warn element to
-#'   determine the behaviour of rba_ba_args().
+#'   determine the behaviour of .rba_args().
 #'
 #' @family A list containing the messages and warn element to
-#'   determine the behaviour of rba_ba_args().
+#'   determine the behaviour of .rba_args().
 #'
 #' @export
-rba_ba_args_cond = function(cond_i) {
+.rba_args_cond = function(cond_i) {
   if (is.call(cond_i[[1]])) {
     cond_i_1 = eval(cond_i[[1]], envir = parent.frame(3))
   } else if (is.character(cond_i[[1]])) {
@@ -893,17 +893,17 @@ rba_ba_args_cond = function(cond_i) {
 #'
 #' @family internal_arguments_check
 #' @export
-rba_ba_args = function(cons = NULL,
-                       cond = NULL,
-                       cond_warning = FALSE){
+.rba_args = function(cons = NULL,
+                     cond = NULL,
+                     cond_warning = FALSE){
   ### 0 set diagnostics
   diagnostics = get0("diagnostics", envir = parent.frame())
   if (is.null(diagnostics) || is.na(diagnostics) || !is.logical(diagnostics)) {
     diagnostics = getOption("rba_diagnostics")
   }
   ### 1.1 append extra arguments which occurs in most functions:
-  cons = rba_ba_args_opts(cons = cons, what = "cons")
-  cond = rba_ba_args_opts(cond = cond, what = "cond")
+  cons = .rba_args_opts(cons = cons, what = "cons")
+  cond = .rba_args_opts(cond = cond, what = "cond")
 
   ### 2 Check Arguments
   errors = c()
@@ -936,11 +936,11 @@ rba_ba_args = function(cons = NULL,
   ## 2.2 check class
   class_errs = lapply(cons,
                       function(x) {
-                        if (rba_ba_args_cons_chk(cons_i = x, what = "class")) {
+                        if (.rba_args_cons_chk(cons_i = x, what = "class")) {
                           return(NA)
                         } else {
-                          return(rba_ba_args_cons_msg(cons_i = x,
-                                                      what = "class"))
+                          return(.rba_args_cons_msg(cons_i = x,
+                                                    what = "class"))
                         }
                       })
 
@@ -949,7 +949,7 @@ rba_ba_args = function(cons = NULL,
     cons = cons[is.na(class_errs)] # remove elements with wrong class
   }
   ## 2.3 check other constrains if their class is correct
-  other_errs = lapply(cons, rba_ba_args_cons_wrp)
+  other_errs = lapply(cons, .rba_args_cons_wrp)
   if (any(!is.na(other_errs))) {errors = append(errors, unlist(other_errs))}
   ## 2.4 Take actions for the errors
   if (length(errors) == 1) {
@@ -965,7 +965,7 @@ rba_ba_args = function(cons = NULL,
   ### 3 Check relationship between arguments
   if (!is.null(cond)) {
     ## 3.1 check if all conditions are satisfied
-    cond_err = lapply(X = cond, rba_ba_args_cond)
+    cond_err = lapply(X = cond, .rba_args_cond)
     cond_err = cond_err[!is.na(cond_err)]
     if (length(cond_err) > 0) {
       ## 3.2 Generate error message(s) if any
@@ -1006,7 +1006,7 @@ rba_ba_args = function(cons = NULL,
 #' Using the input provided as 'parser' argument, this function will parse the
 #'   response from a REST API into appropriate R objects.\cr
 #'
-#' The function will be called within rba_ba_skeleton subsequent of a
+#' The function will be called within .rba_skeleton subsequent of a
 #'   server response with HTTP status code 200.\cr
 #'   each parser  could be either a single-argument function or
 #'   one of the following character strings that will be internally converted
@@ -1024,7 +1024,7 @@ rba_ba_args = function(cons = NULL,
 #'
 #' @family internal_response_parser
 #' @export
-rba_ba_response_parser = function(response, parsers) {
+.rba_response_parser = function(response, parsers) {
   if (!is.vector(parsers)) { parser = list(parsers)}
   parsers = sapply(X = parsers,
                    FUN = function(parser){
@@ -1097,16 +1097,16 @@ rba_ba_response_parser = function(response, parsers) {
 #' Parse Appropriate, Server-aware Error Message
 #'
 #' In case of server response with status code other than 200, this function
-#'   will be called from rba_ba_api_call() and tries to parse the informative
+#'   will be called from .rba_api_call() and tries to parse the informative
 #'   error message which returned by the server as an error message.
 #'
 #' This function will detect the responded server based on "ptn" values stored
-#'   in rba_ba_stg(). and if that particular servers error format was defined
+#'   in .rba_stg(). and if that particular servers error format was defined
 #'   under "err", the response will be parsed using "err_prs" argument and will
 #'   be converted to a character string using "err_prs2" value. (all in
-#'   rba_ba_stg()). if the server was not identified, or the server was not
+#'   .rba_stg()). if the server was not identified, or the server was not
 #'   recorded to have a defined error response, this function will only return
-#'   the translation of HTTP status code, using rba_ba_http_status().
+#'   the translation of HTTP status code, using .rba_http_status().
 #'
 #' @param response a formal api server response, with the class 'response'
 #'   from httr package.
@@ -1117,37 +1117,37 @@ rba_ba_response_parser = function(response, parsers) {
 #'
 #' @family internal_response_parser
 #' @export
-rba_ba_error_parser = function(response,
-                               verbose = verbose) {
+.rba_error_parser = function(response,
+                             verbose = verbose) {
   ## detect the database name
   db_found = FALSE
-  for (db in rba_ba_stg("db")) {
-    if (grepl(rba_ba_stg(db, "ptn"), response$url,
+  for (db in .rba_stg("db")) {
+    if (grepl(.rba_stg(db, "ptn"), response$url,
               perl = TRUE, ignore.case = TRUE)) {
       db_found = TRUE
       break
     }
   }
   if (isTRUE(db_found) &&
-      as.character(response$status_code) %in% rba_ba_stg(db, "err")) {
+      as.character(response$status_code) %in% .rba_stg(db, "err")) {
     ## The API server returns an error string for this status code
     error_message = tryCatch({
       sprintf("%s server returned \"%s\".\r\n  With this error message:\r\n  \"%s\"",
-              rba_ba_stg(db, "name"),
-              rba_ba_http_status(response$status_code,
-                                 verbose = FALSE),
-              rba_ba_response_parser(response,
-                                     list(rba_ba_stg(db, "err_prs"),
-                                          rba_ba_stg(db,"err_prs2")))
+              .rba_stg(db, "name"),
+              .rba_http_status(response$status_code,
+                               verbose = FALSE),
+              .rba_response_parser(response,
+                                   list(.rba_stg(db, "err_prs"),
+                                        .rba_stg(db,"err_prs2")))
       )
     }, error = function(e) {
-      rba_ba_http_status(response$status_code,
-                         verbose = verbose)
+      .rba_http_status(response$status_code,
+                       verbose = verbose)
     })
   } else {
     ## The API server returns only status code with no error string
-    error_message = rba_ba_http_status(response$status_code,
-                                       verbose = verbose)
+    error_message = .rba_http_status(response$status_code,
+                                     verbose = verbose)
   }
   return(error_message)
 }
@@ -1176,7 +1176,7 @@ rba_ba_error_parser = function(response,
 #'
 #' @family internal_misc
 #' @export
-v_msg = function(fmt, ..., sprintf = TRUE, cond = "verbose", sep = "", collapse = NULL) {
+.msg = function(fmt, ..., sprintf = TRUE, cond = "verbose", sep = "", collapse = NULL) {
   if (isTRUE(get0(cond, envir = parent.frame(1), ifnotfound = FALSE))) {
     message(ifelse(isTRUE(sprintf) && is.character(fmt) && grepl("%s", fmt),
                    yes = sprintf(fmt, ...),
@@ -1201,7 +1201,7 @@ v_msg = function(fmt, ..., sprintf = TRUE, cond = "verbose", sep = "", collapse 
 #'
 #' @family internal_misc
 #' @export
-paste_2 = function(..., last = " and ", sep = ", ",
+.paste2 = function(..., last = " and ", sep = ", ",
                    quote = NA, quote_all = NA) {
   input = c(...)
   len = length(input)
@@ -1249,9 +1249,9 @@ paste_2 = function(..., last = " and ", sep = ", ",
 #'
 #' @family internal_misc
 #' @export
-rba_ba_file = function(file,
-                       save_to = NA,
-                       dir_name = NA) {
+.rba_file = function(file,
+                     save_to = NA,
+                     dir_name = NA) {
   if (is.na(save_to)) {save_to = get0(x = "save_resp_file",
                                       ifnotfound = FALSE,
                                       envir = parent.frame(1))}
@@ -1373,7 +1373,7 @@ rba_ba_file = function(file,
 #'
 #' @family internal_options
 #' @export
-rba_ba_ext_args = function(...) {
+.rba_ext_args = function(...) {
   ext_args = list(...)
   rba_opts = getOption("rba_user_options") # available options for the end-users
   if (length(ext_args) > 0) {
@@ -1386,7 +1386,7 @@ rba_ba_ext_args = function(...) {
     }
     if (length(non_valid) > 0) {
       warning(sprintf("`%s` are not valid rbioapi options, thus were ignored.\r\n",
-                      paste_2(non_valid)),
+                      .paste2(non_valid)),
               call. = FALSE)
     }
   }

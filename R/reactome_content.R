@@ -28,23 +28,23 @@
 #' @export
 rba_reactome_version = function(...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args()
+  .rba_args()
 
-  v_msg("Retrieving Reactome Content Service's database version.")
+  .msg("Retrieving Reactome Content Service's database version.")
 
   ## Build Function-Specific Call
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("reactome", "url"),
-                           path = paste0(rba_ba_stg("reactome", "pth", "content"),
-                                         "data/database/version"),
-                           accpet = "text/plain",
-                           parser = "text->chr",
-                           save_to = rba_ba_file("reactome_diseases.txt"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("reactome", "url"),
+                         path = paste0(.rba_stg("reactome", "pth", "content"),
+                                       "data/database/version"),
+                         accpet = "text/plain",
+                         parser = "text->chr",
+                         save_to = .rba_file("reactome_diseases.txt"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -86,38 +86,38 @@ rba_reactome_version = function(...) {
 rba_reactome_diseases = function(doid = FALSE,
                                  ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "doid",
-                               class = "logical")))
+  .rba_args(cons = list(list(arg = "doid",
+                             class = "logical")))
 
-  v_msg("Retrieving Reactome's diseases %s.",
-        ifelse(isTRUE(doid), yes = "DOID data", no = "annotations"))
+  .msg("Retrieving Reactome's diseases %s.",
+       ifelse(isTRUE(doid), yes = "DOID data", no = "annotations"))
 
   ## Build Function-Specific Call
   if (isFALSE(doid)) {
-    path_input = paste0(rba_ba_stg("reactome", "pth", "content"),
+    path_input = paste0(.rba_stg("reactome", "pth", "content"),
                         "data/diseases")
     accept_input = "application/json"
     parser_input = "json->df"
     file_ext = "json"
   } else {
-    path_input = paste0(rba_ba_stg("reactome", "pth", "content"),
+    path_input = paste0(.rba_stg("reactome", "pth", "content"),
                         "data/diseases/doid")
     accept_input = "text/plain"
     parser_input = "text->df"
     file_ext = "txt"
   }
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("reactome", "url"),
-                           path = path_input,
-                           accpet = accept_input,
-                           parser = parser_input,
-                           save_to = rba_ba_file(paste0("reactome_diseases.",
-                                                        file_ext)))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("reactome", "url"),
+                         path = path_input,
+                         accpet = accept_input,
+                         parser = parser_input,
+                         save_to = .rba_file(paste0("reactome_diseases.",
+                                                    file_ext)))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -166,32 +166,32 @@ rba_reactome_complex_subunits = function(complex_id,
                                          exclude_structures = FALSE,
                                          ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "complex_id",
-                               class = "character"),
-                          list(arg = "exclude_structures",
-                               class = "logical")))
+  .rba_args(cons = list(list(arg = "complex_id",
+                             class = "character"),
+                        list(arg = "exclude_structures",
+                             class = "logical")))
 
-  v_msg("Recursively retrieving subunits of %s complex.", complex_id)
+  .msg("Recursively retrieving subunits of %s complex.", complex_id)
   ## Build GET API Request's query
-  call_query = rba_ba_query(init = list(),
-                            list("excludeStructures",
-                                 exclude_structures,
-                                 "true"))
+  call_query = .rba_query(init = list(),
+                          list("excludeStructures",
+                               exclude_structures,
+                               "true"))
   ## Build Function-Specific Call
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("reactome", "url"),
-                           path = sprintf("%sdata/complex/%s/subunits",
-                                          rba_ba_stg("reactome", "pth", "content"),
-                                          complex_id),
-                           query = call_query,
-                           accept = "application/json",
-                           parser = "json->df",
-                           save_to = rba_ba_file("reactome_complex_subunits.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("reactome", "url"),
+                         path = sprintf("%sdata/complex/%s/subunits",
+                                        .rba_stg("reactome", "pth", "content"),
+                                        complex_id),
+                         query = call_query,
+                         accept = "application/json",
+                         parser = "json->df",
+                         save_to = .rba_file("reactome_complex_subunits.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -231,31 +231,31 @@ rba_reactome_complex_subunits = function(complex_id,
 #' @family "Reactome Content Service, Physical Entity Queries"
 #' @export
 reactome_complex_list = function(id,
-                                     resource,
-                                     ...) {
+                                 resource,
+                                 ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "id",
-                               class = "character"),
-                          list(arg = "resource",
-                               class = "character")))
+  .rba_args(cons = list(list(arg = "id",
+                             class = "character"),
+                        list(arg = "resource",
+                             class = "character")))
 
-  v_msg("Retrieving complexes that contain a molecule with '%s ID: %s'.",
-        resource, id)
+  .msg("Retrieving complexes that contain a molecule with '%s ID: %s'.",
+       resource, id)
 
   ## Build Function-Specific Call
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("reactome", "url"),
-                           path = sprintf("%sdata/complexes/%s/%s",
-                                          rba_ba_stg("reactome", "pth", "content"),
-                                          resource, id),
-                           accept = "application/json",
-                           parser = "json->df",
-                           save_to = rba_ba_file("reactome_complex_list.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("reactome", "url"),
+                         path = sprintf("%sdata/complexes/%s/%s",
+                                        .rba_stg("reactome", "pth", "content"),
+                                        resource, id),
+                         accept = "application/json",
+                         parser = "json->df",
+                         save_to = .rba_file("reactome_complex_list.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
 
   return(final_output)
 }
@@ -296,24 +296,24 @@ reactome_complex_list = function(id,
 rba_reactome_participant_of = function(entity_id,
                                        ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "entity_id",
-                               class = "character")))
+  .rba_args(cons = list(list(arg = "entity_id",
+                             class = "character")))
 
-  v_msg("Retrieving Reactome structures which have %s as a participant.",
-        entity_id)
+  .msg("Retrieving Reactome structures which have %s as a participant.",
+       entity_id)
   ## Build Function-Specific Call
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("reactome", "url"),
-                           path = sprintf("%sdata/entity/%s/componentOf",
-                                          rba_ba_stg("reactome", "pth", "content"),
-                                          entity_id),
-                           accept = "application/json",
-                           parser = "json->list",
-                           save_to = rba_ba_file("rba_reactome_participant_of.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("reactome", "url"),
+                         path = sprintf("%sdata/entity/%s/componentOf",
+                                        .rba_stg("reactome", "pth", "content"),
+                                        entity_id),
+                         accept = "application/json",
+                         parser = "json->list",
+                         save_to = .rba_file("rba_reactome_participant_of.json"))
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -354,24 +354,24 @@ rba_reactome_participant_of = function(entity_id,
 rba_reactome_entity_other_forms = function(entity_id,
                                            ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "entity_id",
-                               class = "character")))
+  .rba_args(cons = list(list(arg = "entity_id",
+                             class = "character")))
 
-  v_msg("Retrieving Other forms of Reactome's entity: %s", entity_id)
+  .msg("Retrieving Other forms of Reactome's entity: %s", entity_id)
   ## Build Function-Specific Call
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("reactome", "url"),
-                           path = sprintf("%sdata/entity/%s/otherForms",
-                                          rba_ba_stg("reactome", "pth", "content"),
-                                          entity_id),
-                           accept = "application/json",
-                           parser = "json->df",
-                           save_to = rba_ba_file("reactome_entity_other_forms.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("reactome", "url"),
+                         path = sprintf("%sdata/entity/%s/otherForms",
+                                        .rba_stg("reactome", "pth", "content"),
+                                        entity_id),
+                         accept = "application/json",
+                         parser = "json->df",
+                         save_to = .rba_file("reactome_entity_other_forms.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -420,25 +420,25 @@ rba_reactome_entity_other_forms = function(entity_id,
 rba_reactome_event_ancestors = function(event_id,
                                         ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "event_id",
-                               class = "character")))
+  .rba_args(cons = list(list(arg = "event_id",
+                             class = "character")))
 
-  v_msg("GET /data/event/{id}/ancestors",
-        "The ancestors of a given event")
+  .msg("GET /data/event/{id}/ancestors",
+       "The ancestors of a given event")
   ## Build Function-Specific Call
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("reactome", "url"),
-                           path = sprintf("%sdata/event/%s/ancestors",
-                                          rba_ba_stg("reactome", "pth", "content"),
-                                          event_id),
-                           accept = "application/json",
-                           parser = "json->list_simp",
-                           save_to = rba_ba_file("reactome_event_ancestors.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("reactome", "url"),
+                         path = sprintf("%sdata/event/%s/ancestors",
+                                        .rba_stg("reactome", "pth", "content"),
+                                        event_id),
+                         accept = "application/json",
+                         parser = "json->list_simp",
+                         save_to = .rba_file("reactome_event_ancestors.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -489,26 +489,26 @@ rba_reactome_event_ancestors = function(event_id,
 rba_reactome_event_hierarchy = function(species,
                                         ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "species",
-                               class = c("character",
-                                         "numeric"))))
+  .rba_args(cons = list(list(arg = "species",
+                             class = c("character",
+                                       "numeric"))))
 
-  v_msg("Retrieving the complete events hierarchy tree of the Specie %s.",
-        species)
+  .msg("Retrieving the complete events hierarchy tree of the Specie %s.",
+       species)
   ## Build Function-Specific Call
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("reactome", "url"),
-                           path = sprintf("%sdata/eventsHierarchy/%s",
-                                          rba_ba_stg("reactome", "pth", "content"),
-                                          species),
-                           accept = "application/json",
-                           parser = "json->list",
-                           save_to = rba_ba_file("reactome_event_hierarchy.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("reactome", "url"),
+                         path = sprintf("%sdata/eventsHierarchy/%s",
+                                        .rba_stg("reactome", "pth", "content"),
+                                        species),
+                         accept = "application/json",
+                         parser = "json->list",
+                         save_to = .rba_file("reactome_event_hierarchy.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -633,134 +633,134 @@ rba_reactome_exporter_diagram = function(event_id,
                                          ehld = FALSE,
                                          ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "event_id",
-                               class = "character"),
-                          list(arg = "save_to",
-                               class = "character"),
-                          list(arg = "document_level",
-                               class = "numeric",
-                               val = c(0,1)),
-                          list(arg = "output_format",
-                               class = "character",
-                               val = c("png",
-                                       "jpeg",
-                                       "svg",
-                                       "gif")),
-                          list(arg = "image_quality",
-                               class = "numeric",
-                               ran = c(1,10)),
-                          list(arg = "flag_element",
-                               class = "character"),
-                          list(arg = "flg_interactors",
-                               class = "logical"),
-                          list(arg = "sel",
-                               class = "character"),
-                          list(arg = "title",
-                               class = "logical"),
-                          list(arg = "margin",
-                               class = "numeric",
-                               ran = c(0,20)),
-                          list(arg = "ehld",
-                               class = "logical"),
-                          list(arg = "diagram_profile",
-                               class = "character",
-                               val = c("Modern",
-                                       "Standard")),
-                          list(arg = "token",
-                               class = "character"),
-                          list(arg = "resource",
-                               class = "character"),
-                          list(arg = "analysis_profile",
-                               class = "character",
-                               val = c("Standard",
-                                       "Strosobar",
-                                       "Copper Plus")),
-                          list(arg = "exp_column",
-                               class = "numeric")),
-              cond = list(list(quote(!is.na(exp_column) && is.na(token)),
-                               "You cannot specify expression column without providing a token.")))
+  .rba_args(cons = list(list(arg = "event_id",
+                             class = "character"),
+                        list(arg = "save_to",
+                             class = "character"),
+                        list(arg = "document_level",
+                             class = "numeric",
+                             val = c(0,1)),
+                        list(arg = "output_format",
+                             class = "character",
+                             val = c("png",
+                                     "jpeg",
+                                     "svg",
+                                     "gif")),
+                        list(arg = "image_quality",
+                             class = "numeric",
+                             ran = c(1,10)),
+                        list(arg = "flag_element",
+                             class = "character"),
+                        list(arg = "flg_interactors",
+                             class = "logical"),
+                        list(arg = "sel",
+                             class = "character"),
+                        list(arg = "title",
+                             class = "logical"),
+                        list(arg = "margin",
+                             class = "numeric",
+                             ran = c(0,20)),
+                        list(arg = "ehld",
+                             class = "logical"),
+                        list(arg = "diagram_profile",
+                             class = "character",
+                             val = c("Modern",
+                                     "Standard")),
+                        list(arg = "token",
+                             class = "character"),
+                        list(arg = "resource",
+                             class = "character"),
+                        list(arg = "analysis_profile",
+                             class = "character",
+                             val = c("Standard",
+                                     "Strosobar",
+                                     "Copper Plus")),
+                        list(arg = "exp_column",
+                             class = "numeric")),
+            cond = list(list(quote(!is.na(exp_column) && is.na(token)),
+                             "You cannot specify expression column without providing a token.")))
 
   if (isTRUE(create_document)) {
-    v_msg("Retrieving a PDF document of event %s details.", event_id)
+    .msg("Retrieving a PDF document of event %s details.", event_id)
     ## Build Function-Specific Call
-    call_query = rba_ba_query(init = list(),
-                              list("resource",
-                                   resource != "TOTAL",
-                                   resource),
-                              list("diagramProfile",
-                                   !is.na(diagram_profile),
-                                   diagram_profile),
-                              list("analysisProfile",
-                                   !is.na(analysis_profile),
-                                   analysis_profile),
-                              list("token",
-                                   !is.na(token),
-                                   token),
-                              list("expColumn",
-                                   !is.na(exp_column),
-                                   exp_column))
+    call_query = .rba_query(init = list(),
+                            list("resource",
+                                 resource != "TOTAL",
+                                 resource),
+                            list("diagramProfile",
+                                 !is.na(diagram_profile),
+                                 diagram_profile),
+                            list("analysisProfile",
+                                 !is.na(analysis_profile),
+                                 analysis_profile),
+                            list("token",
+                                 !is.na(token),
+                                 token),
+                            list("expColumn",
+                                 !is.na(exp_column),
+                                 exp_column))
     ## Build Function-Specific Call
-    call_query = rba_ba_query(init = call_query,
-                              list("level",
-                                   document_level != 1,
-                                   document_level))
+    call_query = .rba_query(init = call_query,
+                            list("level",
+                                 document_level != 1,
+                                 document_level))
 
     accept_input = "application/pdf"
     output_format = "pdf"
     path_input = sprintf("%sexporter/document/event/%s.pdf",
-                         rba_ba_stg("reactome", "pth", "content"),
+                         .rba_stg("reactome", "pth", "content"),
                          event_id)
   } else {
-    v_msg("Retrieving event %s diagram's image in %s format.",
-          event_id, output_format)
+    .msg("Retrieving event %s diagram's image in %s format.",
+         event_id, output_format)
     ## Build Function-Specific Call
-    call_query = rba_ba_query(init = call_query,
-                              list("quality",
-                                   image_quality != 5,
-                                   image_quality),
-                              list("flg",
-                                   !is.na(flag_element),
-                                   flag_element),
-                              list("flgInteractors",
-                                   !flg_interactors,
-                                   "false"),
-                              list("sel",
-                                   !is.na(sel),
-                                   sel),
-                              list("title",
-                                   !title,
-                                   "false"),
-                              list("margin",
-                                   margin != 15,
-                                   as.integer(margin)),
-                              list("ehld",
-                                   !ehld,
-                                   "false"))
+    call_query = .rba_query(init = call_query,
+                            list("quality",
+                                 image_quality != 5,
+                                 image_quality),
+                            list("flg",
+                                 !is.na(flag_element),
+                                 flag_element),
+                            list("flgInteractors",
+                                 !flg_interactors,
+                                 "false"),
+                            list("sel",
+                                 !is.na(sel),
+                                 sel),
+                            list("title",
+                                 !title,
+                                 "false"),
+                            list("margin",
+                                 margin != 15,
+                                 as.integer(margin)),
+                            list("ehld",
+                                 !ehld,
+                                 "false"))
 
     accept_input = ifelse(output_format == "svg",
                           yes = "image/svg+xml",
                           no = paste0("image/", output_format))
     path_input = sprintf("%sexporter/diagram/%s.%s",
-                         rba_ba_stg("reactome", "pth", "content"),
+                         .rba_stg("reactome", "pth", "content"),
                          event_id, output_format)
   }
   # create file_path
-  save_to = rba_ba_file(file = paste0(event_id, ".", output_format),
-                        save_to = ifelse(is.na(save_to),
-                                         yes = TRUE,
-                                         no = save_to))
+  save_to = .rba_file(file = paste0(event_id, ".", output_format),
+                      save_to = ifelse(is.na(save_to),
+                                       yes = TRUE,
+                                       no = save_to))
   ## Build Function-Specific Call
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("reactome", "url"),
-                           path = path_input,
-                           query = call_query,
-                           accpet = accept_input,
-                           save_to = save_to,
-                           parser = NULL)
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("reactome", "url"),
+                         path = path_input,
+                         query = call_query,
+                         accpet = accept_input,
+                         save_to = save_to,
+                         parser = NULL)
   ## Call API
-  invisible(rba_ba_skeleton(input_call))
+  invisible(.rba_skeleton(input_call))
 }
 
 #' Exports A Reactome Event to SBGN or SBML
@@ -810,36 +810,36 @@ rba_reactome_exporter_event = function(event_id,
                                        save_to = NA,
                                        ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "event_id",
-                               class = "character"),
-                          list(arg = "output_format",
-                               class = "character",
-                               val = c("sbgn",
-                                       "sbml")),
-                          list(arg = "save_to",
-                               class = "character")))
+  .rba_args(cons = list(list(arg = "event_id",
+                             class = "character"),
+                        list(arg = "output_format",
+                             class = "character",
+                             val = c("sbgn",
+                                     "sbml")),
+                        list(arg = "save_to",
+                             class = "character")))
 
-  v_msg("Exporting event %s as a %s file.",
-        event_id, output_format)
+  .msg("Exporting event %s as a %s file.",
+       event_id, output_format)
   ## Build Function-Specific Call
   # create file_path
-  save_to = rba_ba_file(file = paste0(event_id, ".", output_format),
-                        save_to = ifelse(is.na(save_to),
-                                         yes = TRUE,
-                                         no = save_to))
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("reactome", "url"),
-                           path = sprintf("%sexporter/event/%s.%s",
-                                          rba_ba_stg("reactome", "pth", "content"),
-                                          event_id,
-                                          output_format),
-                           save_to = save_to,
-                           parser = NULL)
+  save_to = .rba_file(file = paste0(event_id, ".", output_format),
+                      save_to = ifelse(is.na(save_to),
+                                       yes = TRUE,
+                                       no = save_to))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("reactome", "url"),
+                         path = sprintf("%sexporter/event/%s.%s",
+                                        .rba_stg("reactome", "pth", "content"),
+                                        event_id,
+                                        output_format),
+                         save_to = save_to,
+                         parser = NULL)
 
   ## Call API
-  invisible(rba_ba_skeleton(input_call))
+  invisible(.rba_skeleton(input_call))
 }
 
 #' Get a Reactome Pathway Overview
@@ -925,88 +925,88 @@ rba_reactome_exporter_overview = function(species,
                                           ...) {
 
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "species",
-                               class = c("character",
-                                         "numeric")),
-                          list(arg = "output_format",
-                               class = "character",
-                               val = c("png",
-                                       "jpeg",
-                                       "svg",
-                                       "gif")),
-                          list(arg = "save_to",
-                               class = "character"),
-                          list(arg = "quality",
-                               class = "numeric",
-                               ran = c(1,10)),
-                          list(arg = "flg",
-                               class = "character"),
-                          list(arg = "flg_interactors",
-                               class = "logical"),
-                          list(arg = "sel",
-                               class = "character"),
-                          list(arg = "title",
-                               class = "logical"),
-                          list(arg = "margin",
-                               class = "numeric",
-                               ran = c(0,20)),
-                          list(arg = "diagram_profile",
-                               class = "character",
-                               val = c("Copper",
-                                       "Copper Plus",
-                                       "Barium Lithium",
-                                       "calcium salts")),
-                          list(arg = "token",
-                               class = "character"),
-                          list(arg = "resource",
-                               class = "character"),
-                          list(arg = "exp_column",
-                               class = "character"),
-                          list(arg = "coverage",
-                               class = "logical")),
-              cond = list(list(quote(!is.na(exp_column) && is.na(token)),
-                               "You cannot specify expression column without providing a token.")))
+  .rba_args(cons = list(list(arg = "species",
+                             class = c("character",
+                                       "numeric")),
+                        list(arg = "output_format",
+                             class = "character",
+                             val = c("png",
+                                     "jpeg",
+                                     "svg",
+                                     "gif")),
+                        list(arg = "save_to",
+                             class = "character"),
+                        list(arg = "quality",
+                             class = "numeric",
+                             ran = c(1,10)),
+                        list(arg = "flg",
+                             class = "character"),
+                        list(arg = "flg_interactors",
+                             class = "logical"),
+                        list(arg = "sel",
+                             class = "character"),
+                        list(arg = "title",
+                             class = "logical"),
+                        list(arg = "margin",
+                             class = "numeric",
+                             ran = c(0,20)),
+                        list(arg = "diagram_profile",
+                             class = "character",
+                             val = c("Copper",
+                                     "Copper Plus",
+                                     "Barium Lithium",
+                                     "calcium salts")),
+                        list(arg = "token",
+                             class = "character"),
+                        list(arg = "resource",
+                             class = "character"),
+                        list(arg = "exp_column",
+                             class = "character"),
+                        list(arg = "coverage",
+                             class = "logical")),
+            cond = list(list(quote(!is.na(exp_column) && is.na(token)),
+                             "You cannot specify expression column without providing a token.")))
 
-  v_msg("Retrieving specie %s pathway overview image in %s format.",
-        species, output_format)
+  .msg("Retrieving specie %s pathway overview image in %s format.",
+       species, output_format)
 
   ## Build GET API Request's query
-  call_query = rba_ba_query(init = list(),
-                            list("quality",
-                                 image_quality != 5,
-                                 image_quality),
-                            list("flg",
-                                 !is.na(flag_element),
-                                 flag_element),
-                            list("flgInteractors",
-                                 !flg_interactors,
-                                 "false"),
-                            list("sel",
-                                 !is.na(sel),
-                                 sel),
-                            list("title",
-                                 !title,
-                                 "false"),
-                            list("margin",
-                                 margin != 15,
-                                 as.integer(margin)),
-                            list("diagramProfile",
-                                 diagram_profile != "Copper",
-                                 diagram_profile),
-                            list("token",
-                                 !is.na(token),
-                                 token),
-                            list("resource",
-                                 resource != "TOTAL",
-                                 resource),
-                            list("expColumn",
-                                 !is.na(exp_column),
-                                 exp_column),
-                            list("coverage",
-                                 coverage,
-                                 "true"))
+  call_query = .rba_query(init = list(),
+                          list("quality",
+                               image_quality != 5,
+                               image_quality),
+                          list("flg",
+                               !is.na(flag_element),
+                               flag_element),
+                          list("flgInteractors",
+                               !flg_interactors,
+                               "false"),
+                          list("sel",
+                               !is.na(sel),
+                               sel),
+                          list("title",
+                               !title,
+                               "false"),
+                          list("margin",
+                               margin != 15,
+                               as.integer(margin)),
+                          list("diagramProfile",
+                               diagram_profile != "Copper",
+                               diagram_profile),
+                          list("token",
+                               !is.na(token),
+                               token),
+                          list("resource",
+                               resource != "TOTAL",
+                               resource),
+                          list("expColumn",
+                               !is.na(exp_column),
+                               exp_column),
+                          list("coverage",
+                               coverage,
+                               "true"))
 
   ## Build Function-Specific Call
   if (output_format == "svg") {
@@ -1016,23 +1016,23 @@ rba_reactome_exporter_overview = function(species,
   }
 
   # create file_path
-  save_to = rba_ba_file(file = paste0(species, ".", output_format),
-                        save_to = ifelse(is.na(save_to),
-                                         yes = TRUE,
-                                         no = save_to))
+  save_to = .rba_file(file = paste0(species, ".", output_format),
+                      save_to = ifelse(is.na(save_to),
+                                       yes = TRUE,
+                                       no = save_to))
 
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("reactome", "url"),
-                           path = sprintf("%sexporter/fireworks/%s.%s",
-                                          rba_ba_stg("reactome", "pth", "content"),
-                                          gsub(" ", "%20",species),
-                                          output_format),
-                           query = call_query,
-                           accpet = accept_input,
-                           save_to = save_to,
-                           parser = NULL)
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("reactome", "url"),
+                         path = sprintf("%sexporter/fireworks/%s.%s",
+                                        .rba_stg("reactome", "pth", "content"),
+                                        gsub(" ", "%20",species),
+                                        output_format),
+                         query = call_query,
+                         accpet = accept_input,
+                         save_to = save_to,
+                         parser = NULL)
   ## Call API
-  invisible(rba_ba_skeleton(input_call))
+  invisible(.rba_skeleton(input_call))
 }
 
 #' Get a Reactome Reaction Event
@@ -1123,88 +1123,88 @@ rba_reactome_exporter_reaction = function(event_id,
                                           margin = 15,
                                           ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "event_id",
-                               class = "character"),
-                          list(arg = "save_to",
-                               class = "character"),
-                          list(arg = "output_format",
-                               class = "character",
-                               val = c("png",
-                                       "jpeg",
-                                       "svg",
-                                       "gif")),
-                          list(arg = "image_quality",
-                               class = "numeric",
-                               ran = c(1,10)),
-                          list(arg = "flag_element",
-                               class = "character"),
-                          list(arg = "flg_interactors",
-                               class = "logical"),
-                          list(arg = "sel",
-                               class = "character"),
-                          list(arg = "title",
-                               class = "logical"),
-                          list(arg = "margin",
-                               class = "numeric",
-                               ran = c(0,20)),
-                          list(arg = "diagram_profile",
-                               class = "character",
-                               val = c("Modern",
-                                       "Standard")),
-                          list(arg = "token",
-                               class = "character"),
-                          list(arg = "resource",
-                               class = "character"),
-                          list(arg = "analysis_profile",
-                               class = "character",
-                               val = c("Standard",
-                                       "Strosobar",
-                                       "Copper Plus")),
-                          list(arg = "exp_column",
-                               class = "numeric")),
-              cond = list(list(quote(!is.na(exp_column) && is.na(token)),
-                               "You cannot specify expression column without providing a token.")))
+  .rba_args(cons = list(list(arg = "event_id",
+                             class = "character"),
+                        list(arg = "save_to",
+                             class = "character"),
+                        list(arg = "output_format",
+                             class = "character",
+                             val = c("png",
+                                     "jpeg",
+                                     "svg",
+                                     "gif")),
+                        list(arg = "image_quality",
+                             class = "numeric",
+                             ran = c(1,10)),
+                        list(arg = "flag_element",
+                             class = "character"),
+                        list(arg = "flg_interactors",
+                             class = "logical"),
+                        list(arg = "sel",
+                             class = "character"),
+                        list(arg = "title",
+                             class = "logical"),
+                        list(arg = "margin",
+                             class = "numeric",
+                             ran = c(0,20)),
+                        list(arg = "diagram_profile",
+                             class = "character",
+                             val = c("Modern",
+                                     "Standard")),
+                        list(arg = "token",
+                             class = "character"),
+                        list(arg = "resource",
+                             class = "character"),
+                        list(arg = "analysis_profile",
+                             class = "character",
+                             val = c("Standard",
+                                     "Strosobar",
+                                     "Copper Plus")),
+                        list(arg = "exp_column",
+                             class = "numeric")),
+            cond = list(list(quote(!is.na(exp_column) && is.na(token)),
+                             "You cannot specify expression column without providing a token.")))
 
-  v_msg("Retrieving Reaction-like event %s image in %s format.",
-        event_id, output_format)
+  .msg("Retrieving Reaction-like event %s image in %s format.",
+       event_id, output_format)
 
   ## Build GET API Request's query
-  call_query = rba_ba_query(init = list(),
-                            list("quality",
-                                 image_quality != 5,
-                                 image_quality),
-                            list("flg",
-                                 !is.na(flag_element),
-                                 flag_element),
-                            list("flgInteractors",
-                                 !flg_interactors,
-                                 "false"),
-                            list("sel",
-                                 !is.na(sel),
-                                 sel),
-                            list("title",
-                                 !title,
-                                 "false"),
-                            list("margin",
-                                 margin != 15,
-                                 as.integer(margin)),
-                            list("diagramProfile",
-                                 diagram_profile != "Copper",
-                                 diagram_profile),
-                            list("analysisProfile",
-                                 !is.na(analysis_profile),
-                                 analysis_profile),
-                            list("token",
-                                 !is.na(token),
-                                 token),
-                            list("resource",
-                                 resource != "TOTAL",
-                                 resource),
-                            list("expColumn",
-                                 !is.na(exp_column),
-                                 exp_column))
+  call_query = .rba_query(init = list(),
+                          list("quality",
+                               image_quality != 5,
+                               image_quality),
+                          list("flg",
+                               !is.na(flag_element),
+                               flag_element),
+                          list("flgInteractors",
+                               !flg_interactors,
+                               "false"),
+                          list("sel",
+                               !is.na(sel),
+                               sel),
+                          list("title",
+                               !title,
+                               "false"),
+                          list("margin",
+                               margin != 15,
+                               as.integer(margin)),
+                          list("diagramProfile",
+                               diagram_profile != "Copper",
+                               diagram_profile),
+                          list("analysisProfile",
+                               !is.na(analysis_profile),
+                               analysis_profile),
+                          list("token",
+                               !is.na(token),
+                               token),
+                          list("resource",
+                               resource != "TOTAL",
+                               resource),
+                          list("expColumn",
+                               !is.na(exp_column),
+                               exp_column))
 
   ## Build Function-Specific Call
   if (output_format == "svg") {
@@ -1214,23 +1214,23 @@ rba_reactome_exporter_reaction = function(event_id,
   }
 
   # create file_path
-  save_to = rba_ba_file(file = paste0(event_id, ".", output_format),
-                        save_to = ifelse(is.na(save_to),
-                                         yes = TRUE,
-                                         no = save_to))
+  save_to = .rba_file(file = paste0(event_id, ".", output_format),
+                      save_to = ifelse(is.na(save_to),
+                                       yes = TRUE,
+                                       no = save_to))
 
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("reactome", "url"),
-                           path = sprintf("%sexporter/reaction/%s.%s",
-                                          rba_ba_stg("reactome", "pth", "content"),
-                                          event_id,
-                                          output_format),
-                           query = call_query,
-                           accpet = accept_input,
-                           save_to = save_to,
-                           parser = NULL)
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("reactome", "url"),
+                         path = sprintf("%sexporter/reaction/%s.%s",
+                                        .rba_stg("reactome", "pth", "content"),
+                                        event_id,
+                                        output_format),
+                         query = call_query,
+                         accpet = accept_input,
+                         save_to = save_to,
+                         parser = NULL)
   ## Call API
-  invisible(rba_ba_skeleton(input_call))
+  invisible(.rba_skeleton(input_call))
 }
 
 #### Interactors Endpoints ####
@@ -1291,50 +1291,50 @@ rba_reactome_interactors_psicquic = function(proteins = NA,
                                              details = TRUE,
                                              ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "proteins",
-                               class = c("character",
-                                         "numeric"),
-                               max_len = 1000),
-                          list(arg = "resource",
-                               class = "character"),
-                          list(arg = "details",
-                               class = "logical")),
-              cond = list(list(quote(sum(!is.na(proteins), !is.na(resource))),
-                               "You should provide 'proteins' and 'resource' togeather.")))
+  .rba_args(cons = list(list(arg = "proteins",
+                             class = c("character",
+                                       "numeric"),
+                             max_len = 1000),
+                        list(arg = "resource",
+                             class = "character"),
+                        list(arg = "details",
+                             class = "logical")),
+            cond = list(list(quote(sum(!is.na(proteins), !is.na(resource))),
+                             "You should provide 'proteins' and 'resource' togeather.")))
   if (any(!is.na(proteins))) {
     details = ifelse(isTRUE(details), yes = "details", no = "summary")
-    v_msg("Retrieving %s of clustered interactions of %s ptoteins(s) from %s.",
-          details,
-          ifelse(length(proteins) == 1,
-                 yes = proteins, no = length(proteins)),
-          resource)
+    .msg("Retrieving %s of clustered interactions of %s ptoteins(s) from %s.",
+         details,
+         ifelse(length(proteins) == 1,
+                yes = proteins, no = length(proteins)),
+         resource)
     ## Build POST API Request's URL
     call_body = paste(unique(proteins),collapse = "\n")
-    input_call = rba_ba_httr(httr = "post",
-                             url = rba_ba_stg("reactome", "url"),
-                             path = sprintf("%sinteractors/psicquic/molecules/%s/%s",
-                                            rba_ba_stg("reactome", "pth", "content"),
-                                            resource, details),
-                             body = call_body,
-                             accept = "application/json",
-                             httr::content_type("text/plain"),
-                             parser = "json->list",
-                             save_to = rba_ba_file("reactome_interactors_psicquic.json"))
+    input_call = .rba_httr(httr = "post",
+                           url = .rba_stg("reactome", "url"),
+                           path = sprintf("%sinteractors/psicquic/molecules/%s/%s",
+                                          .rba_stg("reactome", "pth", "content"),
+                                          resource, details),
+                           body = call_body,
+                           accept = "application/json",
+                           httr::content_type("text/plain"),
+                           parser = "json->list",
+                           save_to = .rba_file("reactome_interactors_psicquic.json"))
   } else {
-    v_msg("Retrieving a table of all Psicquic Registries services.")
+    .msg("Retrieving a table of all Psicquic Registries services.")
     ## Build Function-Specific Call
-    input_call = rba_ba_httr(httr = "get",
-                             url = rba_ba_stg("reactome", "url"),
-                             path = paste0(rba_ba_stg("reactome", "pth", "content"),
-                                           "/interactors/psicquic/resources"),
-                             accept = "application/json",
-                             parser = "json->df",
-                             save_to = rba_ba_file("reactome_interactors_psicquic.json"))
+    input_call = .rba_httr(httr = "get",
+                           url = .rba_stg("reactome", "url"),
+                           path = paste0(.rba_stg("reactome", "pth", "content"),
+                                         "/interactors/psicquic/resources"),
+                           accept = "application/json",
+                           parser = "json->df",
+                           save_to = .rba_file("reactome_interactors_psicquic.json"))
   }
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
 
   return(final_output)
 }
@@ -1405,68 +1405,68 @@ rba_reactome_interactors_static = function(proteins,
                                            species = NA,
                                            ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "proteins",
-                               class = c("character",
-                                         "numeric"),
-                               max_len = 1000),
-                          list(arg = "endpoint",
-                               class = "character",
-                               val = c("details",
-                                       "summary",
-                                       "pathways")),
-                          list(arg = "only_diagrammed",
-                               class = "logical"),
-                          list(arg = "species",
-                               class = "character")),
-              cond = list(list(quote(endpoint == "pathways" && length(proteins) != 1),
-                               "When 'endpoint = pathways', you can only provide one protein."),
-                          list(quote(sum(!is.na(species), endpoint == "pathways") == 1),
-                               "You should -and can only- provide species when endpoint is 'pathways'.")))
+  .rba_args(cons = list(list(arg = "proteins",
+                             class = c("character",
+                                       "numeric"),
+                             max_len = 1000),
+                        list(arg = "endpoint",
+                             class = "character",
+                             val = c("details",
+                                     "summary",
+                                     "pathways")),
+                        list(arg = "only_diagrammed",
+                             class = "logical"),
+                        list(arg = "species",
+                             class = "character")),
+            cond = list(list(quote(endpoint == "pathways" && length(proteins) != 1),
+                             "When 'endpoint = pathways', you can only provide one protein."),
+                        list(quote(sum(!is.na(species), endpoint == "pathways") == 1),
+                             "You should -and can only- provide species when endpoint is 'pathways'.")))
 
 
 
   if (endpoint == "pathways") {
-    v_msg("Retrieving pathways with the Static(IntAct) Interactors of protein %s.",
-          proteins)
-    call_query = rba_ba_query(init = list("onlyDiagrammed" = ifelse(isTRUE(only_diagrammed),
-                                                                    yes = "true",
-                                                                    no = "false")),
-                              list("species",
-                                   !is.na(species),
-                                   species))
-    input_call = rba_ba_httr(httr = "get",
-                             url = rba_ba_stg("reactome", "url"),
-                             path = sprintf("%sinteractors/static/molecule/%s/pathways",
-                                            rba_ba_stg("reactome", "pth", "content"),
-                                            proteins),
-                             query = call_query,
-                             accept = "application/json",
-                             parser = "json->df",
-                             save_to = rba_ba_file("reactome_interactors_static.json"))
+    .msg("Retrieving pathways with the Static(IntAct) Interactors of protein %s.",
+         proteins)
+    call_query = .rba_query(init = list("onlyDiagrammed" = ifelse(isTRUE(only_diagrammed),
+                                                                  yes = "true",
+                                                                  no = "false")),
+                            list("species",
+                                 !is.na(species),
+                                 species))
+    input_call = .rba_httr(httr = "get",
+                           url = .rba_stg("reactome", "url"),
+                           path = sprintf("%sinteractors/static/molecule/%s/pathways",
+                                          .rba_stg("reactome", "pth", "content"),
+                                          proteins),
+                           query = call_query,
+                           accept = "application/json",
+                           parser = "json->df",
+                           save_to = .rba_file("reactome_interactors_static.json"))
   } else {
     ## Build POST API Request's URL
-    v_msg("Retrieving %s of Static(IntAct) Interactors of protein %s.",
-          endpoint, proteins)
+    .msg("Retrieving %s of Static(IntAct) Interactors of protein %s.",
+         endpoint, proteins)
     call_body = paste(unique(proteins),collapse = "\n")
     ## Build Function-Specific Call
     parser_input = ifelse(endpoint == "details",
                           yes = "json->list", no = "json->list_simp")
-    input_call = rba_ba_httr(httr = "post",
-                             url = rba_ba_stg("reactome", "url"),
-                             path = paste0(rba_ba_stg("reactome", "pth", "content"),
-                                           "interactors/static/molecules/",
-                                           endpoint),
-                             body = call_body,
-                             accept = "application/json",
-                             httr::content_type("text/plain"),
-                             parser = parser_input,
-                             save_to = rba_ba_file("reactome_interactors_static.json"))
+    input_call = .rba_httr(httr = "post",
+                           url = .rba_stg("reactome", "url"),
+                           path = paste0(.rba_stg("reactome", "pth", "content"),
+                                         "interactors/static/molecules/",
+                                         endpoint),
+                           body = call_body,
+                           accept = "application/json",
+                           httr::content_type("text/plain"),
+                           parser = parser_input,
+                           save_to = .rba_file("reactome_interactors_static.json"))
   }
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -1522,43 +1522,43 @@ rba_reactome_mapping = function(id,
                                 species = "Homo sapiens",
                                 ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "id",
-                               class = c("character",
-                                         "numeric")),
-                          list(arg = "resource",
-                               class = "character"),
-                          list(arg = "species",
-                               class = c("character",
-                                         "numeric")),
-                          list(arg = "map_to",
-                               class = "character",
-                               val = c("pathways",
-                                       "reactions"))))
+  .rba_args(cons = list(list(arg = "id",
+                             class = c("character",
+                                       "numeric")),
+                        list(arg = "resource",
+                             class = "character"),
+                        list(arg = "species",
+                             class = c("character",
+                                       "numeric")),
+                        list(arg = "map_to",
+                             class = "character",
+                             val = c("pathways",
+                                     "reactions"))))
 
-  v_msg("Retrieving Reactome %s that contain %s from %s resource.",
-        map_to, id, resource)
+  .msg("Retrieving Reactome %s that contain %s from %s resource.",
+       map_to, id, resource)
   ## Build GET API Request's query
-  call_query = rba_ba_query(init = list(),
-                            list("species",
-                                 !is.na(species),
-                                 species))
+  call_query = .rba_query(init = list(),
+                          list("species",
+                               !is.na(species),
+                               species))
   ## Build Function-Specific Call
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("reactome", "url"),
-                           path = sprintf("%sdata/mapping/%s/%s/%s",
-                                          rba_ba_stg("reactome", "pth", "content"),
-                                          resource,
-                                          id,
-                                          map_to),
-                           query = call_query,
-                           accept = "application/json",
-                           parser = "json->df",
-                           save_to = rba_ba_file("reactome_mapping.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("reactome", "url"),
+                         path = sprintf("%sdata/mapping/%s/%s/%s",
+                                        .rba_stg("reactome", "pth", "content"),
+                                        resource,
+                                        id,
+                                        map_to),
+                         query = call_query,
+                         accept = "application/json",
+                         parser = "json->df",
+                         save_to = .rba_file("reactome_mapping.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -1615,35 +1615,35 @@ rba_reactome_orthology = function(ids,
                                   species_dbid,
                                   ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "ids",
-                               class = "character"),
-                          list(arg = "species_dbid",
-                               class = "numeric")))
+  .rba_args(cons = list(list(arg = "ids",
+                             class = "character"),
+                        list(arg = "species_dbid",
+                             class = "numeric")))
 
-  v_msg("Retrieving orthologous Events of '%s' in the specie with DbId '%s'.",
-        ifelse(length(ids) == 1,
-               yes = ids, no = paste0(length(ids), " input events")),
-        species_dbid)
+  .msg("Retrieving orthologous Events of '%s' in the specie with DbId '%s'.",
+       ifelse(length(ids) == 1,
+              yes = ids, no = paste0(length(ids), " input events")),
+       species_dbid)
 
   ## Build POST API Request's URL
   call_body = paste(unique(ids),collapse = "\n")
 
   ## Build Function-Specific Call
-  input_call = rba_ba_httr(httr = "post",
-                           url = rba_ba_stg("reactome", "url"),
-                           path = paste0(rba_ba_stg("reactome", "pth", "content"),
-                                         "data/orthologies/ids/species/",
-                                         species_dbid),
-                           body = call_body,
-                           accept = "application/json",
-                           httr::content_type("text/plain"),
-                           parser = "json->list_simp",
-                           save_to = rba_ba_file("reactome_orthology.json"))
+  input_call = .rba_httr(httr = "post",
+                         url = .rba_stg("reactome", "url"),
+                         path = paste0(.rba_stg("reactome", "pth", "content"),
+                                       "data/orthologies/ids/species/",
+                                       species_dbid),
+                         body = call_body,
+                         accept = "application/json",
+                         httr::content_type("text/plain"),
+                         parser = "json->list_simp",
+                         save_to = .rba_file("reactome_orthology.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -1718,28 +1718,28 @@ rba_reactome_participants = function(event_id,
                                      only_reference_entities = FALSE,
                                      ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "event_id",
-                               class = c("character",
-                                         "numeric")),
-                          list(arg = "only_physical_entities",
-                               class = "logical"),
-                          list(arg = "only_reference_entities",
-                               class = "logical")),
-              cond = list(list(quote(sum(only_physical_entities, only_reference_entities) == 2),
-                               "You can only set either only_reference_entities or only_reference_entities to TRUE in one function call.")))
+  .rba_args(cons = list(list(arg = "event_id",
+                             class = c("character",
+                                       "numeric")),
+                        list(arg = "only_physical_entities",
+                             class = "logical"),
+                        list(arg = "only_reference_entities",
+                             class = "logical")),
+            cond = list(list(quote(sum(only_physical_entities, only_reference_entities) == 2),
+                             "You can only set either only_reference_entities or only_reference_entities to TRUE in one function call.")))
 
-  v_msg("Retrieving %sParticipants of Reactome event %s.",
-        ifelse(sum(only_physical_entities, only_reference_entities) == 0,
-               yes = "",
-               no = c("'Physical Entities' ",
-                      "'Reference Entities' ")[c(only_physical_entities,
-                                              only_reference_entities)]),
-        event_id)
+  .msg("Retrieving %sParticipants of Reactome event %s.",
+       ifelse(sum(only_physical_entities, only_reference_entities) == 0,
+              yes = "",
+              no = c("'Physical Entities' ",
+                     "'Reference Entities' ")[c(only_physical_entities,
+                                                only_reference_entities)]),
+       event_id)
 
   ## Build Function-Specific Call
-  path_input = paste0(rba_ba_stg("reactome", "pth", "content"),
+  path_input = paste0(.rba_stg("reactome", "pth", "content"),
                       "data/participants/",
                       event_id)
   parser_input = "json->list"
@@ -1751,15 +1751,15 @@ rba_reactome_participants = function(event_id,
     parser_input = "json->df"
   }
 
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("reactome", "url"),
-                           path = path_input,
-                           accept = "application/json",
-                           parser = parser_input,
-                           save_to = rba_ba_file("reactome_participants.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("reactome", "url"),
+                         path = path_input,
+                         accept = "application/json",
+                         parser = parser_input,
+                         save_to = .rba_file("reactome_participants.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -1817,24 +1817,24 @@ rba_reactome_pathways_events = function(event_id,
                                         attribute_name = NA,
                                         ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "event_id",
-                               class = c("numeric",
-                                         "character")),
-                          list(arg = "attribute_name",
-                               class = "character")))
+  .rba_args(cons = list(list(arg = "event_id",
+                             class = c("numeric",
+                                       "character")),
+                        list(arg = "attribute_name",
+                             class = "character")))
 
-  v_msg("Retrieving %s contained events under the event %s.",
-        ifelse(is.na(attribute_name),
-               yes = "all",
-               no = sprintf("attribute '%s' of all",
-                            attribute_name)),
-        event_id)
+  .msg("Retrieving %s contained events under the event %s.",
+       ifelse(is.na(attribute_name),
+              yes = "all",
+              no = sprintf("attribute '%s' of all",
+                           attribute_name)),
+       event_id)
 
   ## Build Function-Specific Call
   path_input = sprintf("%sdata/pathway/%s/containedEvents",
-                       rba_ba_stg("reactome", "pth", "content"),
+                       .rba_stg("reactome", "pth", "content"),
                        event_id)
   accept_input = "application/json"
   parser_input = "json->df"
@@ -1853,17 +1853,17 @@ rba_reactome_pathways_events = function(event_id,
     }
     file_ext = "txt"
   }
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("reactome", "url"),
-                           path = path_input,
-                           accpet = accept_input,
-                           parser = parser_input,
-                           save_to = rba_ba_file(paste0("reactome_pathways_participants",
-                                                        ".", file_ext)))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("reactome", "url"),
+                         path = path_input,
+                         accpet = accept_input,
+                         parser = parser_input,
+                         save_to = .rba_file(paste0("reactome_pathways_participants",
+                                                    ".", file_ext)))
 
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -1923,27 +1923,27 @@ rba_reactome_pathways_low = function(entity_id,
                                      species = NA,
                                      ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "entity_id",
-                               class = "character"),
-                          list(arg = "all_forms",
-                               class = "logical"),
-                          list(arg = "with_diagram",
-                               class = "logical"),
-                          list(arg = "species",
-                               class = c("character",
-                                         "numeric"))))
+  .rba_args(cons = list(list(arg = "entity_id",
+                             class = "character"),
+                        list(arg = "all_forms",
+                             class = "logical"),
+                        list(arg = "with_diagram",
+                             class = "logical"),
+                        list(arg = "species",
+                             class = c("character",
+                                       "numeric"))))
 
-  v_msg("Retrieving lower-level pathways that include %sentity %s%s.",
-        ifelse(isTRUE(all_forms),
-               yes = "any form of ", no = ""),
-        entity_id,
-        ifelse(isTRUE(with_diagram),
-               yes = " and have diagram", no = ""))
+  .msg("Retrieving lower-level pathways that include %sentity %s%s.",
+       ifelse(isTRUE(all_forms),
+              yes = "any form of ", no = ""),
+       entity_id,
+       ifelse(isTRUE(with_diagram),
+              yes = " and have diagram", no = ""))
   ## Build Function-Specific Call
   path_input = sprintf("%sdata/pathways/%s/%s",
-                       rba_ba_stg("reactome", "pth", "content"),
+                       .rba_stg("reactome", "pth", "content"),
                        ifelse(isTRUE(with_diagram),
                               yes = "low/diagram/entity",
                               no = "low/entity"),
@@ -1952,15 +1952,15 @@ rba_reactome_pathways_low = function(entity_id,
     path_input = paste0(path_input,
                         "/allForms")
   }
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("reactome", "url"),
-                           path = path_input,
-                           accept = "application/json",
-                           parser = "json->df",
-                           save_to = rba_ba_file("reactome_pathways_low.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("reactome", "url"),
+                         path = path_input,
+                         accept = "application/json",
+                         parser = "json->df",
+                         save_to = .rba_file("reactome_pathways_low.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -2009,32 +2009,32 @@ rba_reactome_pathways_low = function(entity_id,
 rba_reactome_pathways_top = function(species,
                                      ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "species",
-                               class = c("character",
-                                         "numeric"))))
+  .rba_args(cons = list(list(arg = "species",
+                             class = c("character",
+                                       "numeric"))))
 
-  v_msg("GET /data/pathways/top/{species}",
-        "All Reactome top level pathways")
+  .msg("GET /data/pathways/top/{species}",
+       "All Reactome top level pathways")
   ## Build GET API Request's query
-  call_query = rba_ba_query(init = list(),
-                            list("species",
-                                 !is.na(species),
-                                 species))
+  call_query = .rba_query(init = list(),
+                          list("species",
+                               !is.na(species),
+                               species))
   ## Build Function-Specific Call
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("reactome", "url"),
-                           path = paste0(rba_ba_stg("reactome", "pth", "content"),
-                                         "data/pathways/top/",
-                                         species),
-                           query = call_query,
-                           accept = "application/json",
-                           parser = "json->df",
-                           save_to = rba_ba_file("reactome_pathways_top.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("reactome", "url"),
+                         path = paste0(.rba_stg("reactome", "pth", "content"),
+                                       "data/pathways/top/",
+                                       species),
+                         query = call_query,
+                         accept = "application/json",
+                         parser = "json->df",
+                         save_to = .rba_file("reactome_pathways_top.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -2078,34 +2078,34 @@ rba_reactome_people_name = function(person_name,
                                     exact_match = FALSE,
                                     ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "person_name",
-                               class = "character"),
-                          list(arg = "exact_match",
-                               class = "logical")))
+  .rba_args(cons = list(list(arg = "person_name",
+                             class = "character"),
+                        list(arg = "exact_match",
+                             class = "logical")))
 
-  v_msg("/data/people/name/{name}",
-        "A list of people with first or last name partly matching a given string",
-        "/data/people/name/{name}/exact_match",
-        "A list of people with first AND last name exactly matching a given string")
+  .msg("/data/people/name/{name}",
+       "A list of people with first or last name partly matching a given string",
+       "/data/people/name/{name}/exact_match",
+       "A list of people with first AND last name exactly matching a given string")
 
   ## Build Function-Specific Call
-  path_input = paste0(rba_ba_stg("reactome", "pth", "content"),
+  path_input = paste0(.rba_stg("reactome", "pth", "content"),
                       "data/people/name/",
                       gsub(" ", "%20", person_name))
   if (isTRUE(exact_match)) {
     path_input = paste0(path_input, "/exact")
   }
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("reactome", "url"),
-                           path = path_input,
-                           accept = "application/json",
-                           parser = "json->list",
-                           save_to = rba_ba_file("reactome_people_name.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("reactome", "url"),
+                         path = path_input,
+                         accept = "application/json",
+                         parser = "json->list",
+                         save_to = .rba_file("reactome_people_name.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -2150,26 +2150,26 @@ rba_reactome_people_id = function(person_id,
                                   attribute_name = NA,
                                   ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "person_id",
-                               class = "character"),
-                          list(arg = "authored_pathways",
-                               class = "logical"),
-                          list(arg = "publications",
-                               class = "logical"),
-                          list(arg = "attribute_name",
-                               class = "character")),
-              cond = list(list(quote(sum(!is.na(attribute_name),
-                                         isTRUE(authored_pathways),
-                                         isTRUE(publications)) > 1),
-                               "You can only use either attribute_name, authored_pathways or publications function call.")))
+  .rba_args(cons = list(list(arg = "person_id",
+                             class = "character"),
+                        list(arg = "authored_pathways",
+                             class = "logical"),
+                        list(arg = "publications",
+                             class = "logical"),
+                        list(arg = "attribute_name",
+                             class = "character")),
+            cond = list(list(quote(sum(!is.na(attribute_name),
+                                       isTRUE(authored_pathways),
+                                       isTRUE(publications)) > 1),
+                             "You can only use either attribute_name, authored_pathways or publications function call.")))
 
-  v_msg("Retrieving information of person with id: %s",
-        person_id)
+  .msg("Retrieving information of person with id: %s",
+       person_id)
 
   ## Build Function-Specific Call
-  path_input = paste0(rba_ba_stg("reactome", "pth", "content"),
+  path_input = paste0(.rba_stg("reactome", "pth", "content"),
                       "data/person/",
                       person_id)
   accept_input = "application/json"
@@ -2185,16 +2185,16 @@ rba_reactome_people_id = function(person_id,
     parser_type_input = "text->chr"
     file_ext = "txt"
   }
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("reactome", "url"),
-                           path = path_input,
-                           accpet = accept_input,
-                           parser = parser_type_input,
-                           save_to = rba_ba_file(paste0("reactome_people_id",
-                                                        ".",
-                                                        file_ext)))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("reactome", "url"),
+                         path = path_input,
+                         accpet = accept_input,
+                         parser = parser_type_input,
+                         save_to = .rba_file(paste0("reactome_people_id",
+                                                    ".",
+                                                    file_ext)))
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -2252,78 +2252,78 @@ rba_reactome_query = function(ids,
                               attribute_name = NA,
                               ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "ids",
-                               class = "character",
-                               max_len = 20),
-                          list(arg = "enhanced",
-                               class = "logical"),
-                          list(arg = "map",
-                               class = "logical"),
-                          list(arg = "attribute_name",
-                               class = "character")),
-              cond = list(list(quote(length(ids) > 1 &&
-                                       (isTRUE(enhanced) | !is.na(attribute_name))),
-                               "You can only use 'enhnaced' or 'attribute_name' with a single ID not multiple IDs."),
-                          list(quote(!is.na(attribute_name) && isTRUE(enhanced)),
-                               "You can only provide 'attribute_name' when enhanced is 'FALSE'.")))
+  .rba_args(cons = list(list(arg = "ids",
+                             class = "character",
+                             max_len = 20),
+                        list(arg = "enhanced",
+                             class = "logical"),
+                        list(arg = "map",
+                             class = "logical"),
+                        list(arg = "attribute_name",
+                             class = "character")),
+            cond = list(list(quote(length(ids) > 1 &&
+                                     (isTRUE(enhanced) | !is.na(attribute_name))),
+                             "You can only use 'enhnaced' or 'attribute_name' with a single ID not multiple IDs."),
+                        list(quote(!is.na(attribute_name) && isTRUE(enhanced)),
+                             "You can only provide 'attribute_name' when enhanced is 'FALSE'.")))
 
   if (length(ids) > 1) {
     #### use POST
-    v_msg("POST /data/query/ids/map",
-          "A list of entries with their mapping to the provided identifiers")
+    .msg("POST /data/query/ids/map",
+         "A list of entries with their mapping to the provided identifiers")
     ## Build POST API Request's URL
     call_body = paste(unique(ids),collapse = ",")
-    path_input = paste0(rba_ba_stg("reactome", "pth", "content"),
+    path_input = paste0(.rba_stg("reactome", "pth", "content"),
                         ifelse(isTRUE(map),
                                yes = "data/query/ids/map",
                                no = "data/query/ids"))
     ## Build Function-Specific Call
-    input_call = rba_ba_httr(httr = "post",
-                             url = rba_ba_stg("reactome", "url"),
-                             path = path_input,
-                             body = call_body,
-                             parser = "json->list",
-                             accept = "application/json",
-                             httr::content_type("text/plain"),
-                             save_to = rba_ba_file("reactome_query.json"))
+    input_call = .rba_httr(httr = "post",
+                           url = .rba_stg("reactome", "url"),
+                           path = path_input,
+                           body = call_body,
+                           parser = "json->list",
+                           accept = "application/json",
+                           httr::content_type("text/plain"),
+                           save_to = .rba_file("reactome_query.json"))
   } else {
     #### use GET
     ## Build Function-Specific Call
-    path_input = paste0(rba_ba_stg("reactome", "pth", "content"),
+    path_input = paste0(.rba_stg("reactome", "pth", "content"),
                         "data/query/",
                         ids)
     accept_input = "application/json"
     parser_input = "json->list"
     file_ext = "json"
     if (!is.na(attribute_name)) {
-      v_msg("GET /data/query/{id}/{attributeName}",
-            "A single property of an entry in Reactome knowledgebase")
+      .msg("GET /data/query/{id}/{attributeName}",
+           "A single property of an entry in Reactome knowledgebase")
       path_input = paste0(path_input, "/", attribute_name)
       accept_input = "text/plain"
       parser_input = "text->chr"
       file_ext = "txt"
     } else if (isTRUE(enhanced)) {
-      v_msg("GET /data/query/enhanced/{id}",
-            "More information on an entry in Reactome knowledgebase")
+      .msg("GET /data/query/enhanced/{id}",
+           "More information on an entry in Reactome knowledgebase")
       path_input = sub("/query/", "/query/enhanced/", path_input)
     } else {
-      v_msg("GET /data/query/{id}",
-            "An entry in Reactome knowledgebase")
+      .msg("GET /data/query/{id}",
+           "An entry in Reactome knowledgebase")
     }
-    input_call = rba_ba_httr(httr = "get",
-                             url = rba_ba_stg("reactome", "url"),
-                             path = path_input,
-                             parser = parser_input,
-                             accept = accept_input,
-                             save_to = rba_ba_file(paste0("reactome_query.",
-                                                          file_ext)))
+    input_call = .rba_httr(httr = "get",
+                           url = .rba_stg("reactome", "url"),
+                           path = path_input,
+                           parser = parser_input,
+                           accept = accept_input,
+                           save_to = .rba_file(paste0("reactome_query.",
+                                                      file_ext)))
 
   }
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -2373,27 +2373,27 @@ rba_reactome_query = function(ids,
 rba_reactome_xref = function(xref_id,
                              ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "xref_id",
-                               class = c("character",
-                                         "numeric"))))
+  .rba_args(cons = list(list(arg = "xref_id",
+                             class = c("character",
+                                       "numeric"))))
 
-  v_msg("Retrieving Reactome's ReferenceEntity that have a cross-reference to %s.",
-        xref_id)
+  .msg("Retrieving Reactome's ReferenceEntity that have a cross-reference to %s.",
+       xref_id)
 
   ## Build Function-Specific Call
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("reactome", "url"),
-                           path = paste0(rba_ba_stg("reactome", "pth", "content"),
-                                         "references/mapping/",
-                                         xref_id),
-                           accept = "application/json",
-                           parser = "json->list_simp",
-                           save_to = rba_ba_file("reactome_xref.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("reactome", "url"),
+                         path = paste0(.rba_stg("reactome", "pth", "content"),
+                                       "references/mapping/",
+                                       xref_id),
+                         accept = "application/json",
+                         parser = "json->list_simp",
+                         save_to = .rba_file("reactome_xref.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -2434,28 +2434,28 @@ rba_reactome_xref = function(xref_id,
 rba_reactome_species = function(only_main = FALSE,
                                 ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "only_main",
-                               class = "logical")))
+  .rba_args(cons = list(list(arg = "only_main",
+                             class = "logical")))
 
-  v_msg("Retrieving %sspecies available in Reactome.",
-        ifelse(isTRUE(only_main),
-               yes = "main (i.e. with pathways) ",
-               no = ""))
+  .msg("Retrieving %sspecies available in Reactome.",
+       ifelse(isTRUE(only_main),
+              yes = "main (i.e. with pathways) ",
+              no = ""))
 
   ## Build Function-Specific Call
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("reactome", "url"),
-                           path = paste0(rba_ba_stg("reactome", "pth", "content"),
-                                         "data/species/",
-                                         ifelse(isTRUE(only_main),
-                                                yes = "main", no = "all")),
-                           accept = "application/json",
-                           parser = "json->df",
-                           save_to = rba_ba_file("reactome_species.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("reactome", "url"),
+                         path = paste0(.rba_stg("reactome", "pth", "content"),
+                                       "data/species/",
+                                       ifelse(isTRUE(only_main),
+                                              yes = "main", no = "all")),
+                         accept = "application/json",
+                         parser = "json->df",
+                         save_to = .rba_file("reactome_species.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }

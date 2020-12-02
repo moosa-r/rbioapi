@@ -22,17 +22,17 @@ rba_connection_test = function(diagnostics = FALSE) {
   message("Checking Your connection to the Databases",
           " currently Supported by rbioapi:")
 
-  urls = list("STRING" = paste0(rba_ba_stg("string", "url"),
+  urls = list("STRING" = paste0(.rba_stg("string", "url"),
                                 "/api/json/version"),
-              "Enrichr" = paste0(rba_ba_stg("enrichr", "url"),
+              "Enrichr" = paste0(.rba_stg("enrichr", "url"),
                                  "/Enrichr"),
-              "Ensembl" = paste0(rba_ba_stg("ensembl", "url"),
+              "Ensembl" = paste0(.rba_stg("ensembl", "url"),
                                  "/info/ping"),
-              "Reactome Content Service" = paste0(rba_ba_stg("reactome", "url"),
+              "Reactome Content Service" = paste0(.rba_stg("reactome", "url"),
                                                   "/ContentService/data/database/name"),
-              "Reactome Analysis Service" = paste0(rba_ba_stg("reactome", "url"),
+              "Reactome Analysis Service" = paste0(.rba_stg("reactome", "url"),
                                                    "/AnalysisService/database/name"),
-              "UniProt" = paste0(rba_ba_stg("uniprot", "url"),
+              "UniProt" = paste0(.rba_stg("uniprot", "url"),
                                  "/proteins/api/proteins/P25445")
   )
 
@@ -53,7 +53,7 @@ rba_connection_test = function(diagnostics = FALSE) {
 
   for (i in seq_along(urls)) {
     cat("\U2022", names(urls)[[i]], ":\r\n")
-    cat(rba_ba_api_check(urls[[i]], diagnostics = diagnostics), "\r\n")
+    cat(.rba_api_check(urls[[i]], diagnostics = diagnostics), "\r\n")
   }
   invisible()
 }
@@ -121,8 +121,8 @@ rba_options = function(client_timeout = NA,
                        skip_error = NA,
                        verbose = NA,
                        wait_time = NA) {
-  rba_ba_args(cond = list(list(quote(is.character(save_resp_file)),
-                               "As a global option, you can only set save_resp_file to 'logical', not a file path.")))
+  .rba_args(cond = list(list(quote(is.character(save_resp_file)),
+                             "As a global option, you can only set save_resp_file to 'logical', not a file path.")))
   ## if empty function was called, show the available options
   changes = vapply(ls(), function(x) {!is.na(get(x))}, logical(1))
   if (!any(changes)) {
@@ -183,8 +183,8 @@ rba_citation = function(...) {
   ## 1 Prepare input
   input = as.character(substitute(list(...)))
   cat(sprintf("\r\n\ \U2022 To cite %s:\r\n \U2022\U2022 %s- %s\r\n",
-              c("rbioapi", "R"), c(1,2), c(rba_ba_stg("citation", "rbioapi"),
-                                        rba_ba_stg("citations", "r"))))
+              c("rbioapi", "R"), c(1,2), c(.rba_stg("citation", "rbioapi"),
+                                           .rba_stg("citations", "r"))))
   if (length(input) == 1) {
     cat("\U2022 If you are not sure what services or databases to cite, you could call rba_citation() with:\r\n",
         "   1- The name of the functions which you have used.\r\n",
@@ -220,12 +220,12 @@ rba_citation = function(...) {
       input = append(input, as.character(rstudioapi::getSourceEditorContext()))}
     ## 2 Search patterns
     patt = sprintf("(?<=\\brba_)(%s)(?=_\\w+?\\()",
-                   paste(rba_ba_stg("db"), collapse = "|"))
+                   paste(.rba_stg("db"), collapse = "|"))
     rba_used = lapply(input, function(x){
       regmatches(x, regexpr(patt, x, perl = TRUE))})
     rba_used = unique(unlist(rba_used))
     rba_cites = unlist(lapply(rba_used, function(x){
-      rba_ba_stg("citation", x) }))
+      .rba_stg("citation", x) }))
     if (length(rba_used) != 0) {
       cat(sprintf("\r\n\ \U2022 To cite %s:\r\n \U2022\U2022 %s- %s\r\n",
                   rba_used, seq_along(rba_used) + 2, rba_cites))

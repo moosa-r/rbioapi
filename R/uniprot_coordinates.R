@@ -61,70 +61,70 @@ rba_uniprot_coordinates_search = function(accession = NA,
                                           location = NA,
                                           ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "accession",
-                               class = "character",
-                               max_len = 100),
-                          list(arg = "chromosome",
-                               class = c("character",
-                                         "numeric"),
-                               max_len = 20),
-                          list(arg = "ensembl_id",
-                               class = "character",
-                               max_len = 20),
-                          list(arg = "gene",
-                               class = "character",
-                               max_len = 20),
-                          list(arg = "protein",
-                               class = "character"),
-                          list(arg = "taxid",
-                               class = "numeric",
-                               max_len = 20),
-                          list(arg = "location",
-                               class = "character")))
+  .rba_args(cons = list(list(arg = "accession",
+                             class = "character",
+                             max_len = 100),
+                        list(arg = "chromosome",
+                             class = c("character",
+                                       "numeric"),
+                             max_len = 20),
+                        list(arg = "ensembl_id",
+                             class = "character",
+                             max_len = 20),
+                        list(arg = "gene",
+                             class = "character",
+                             max_len = 20),
+                        list(arg = "protein",
+                             class = "character"),
+                        list(arg = "taxid",
+                             class = "numeric",
+                             max_len = 20),
+                        list(arg = "location",
+                             class = "character")))
 
-  v_msg("Searching UniProt and retrieving Coordinates of proteins that match your provided inputs.")
+  .msg("Searching UniProt and retrieving Coordinates of proteins that match your provided inputs.")
   ## Build GET API Request's query
-  call_query = rba_ba_query(init = list("size" = "-1"),
-                            list("accession",
-                                 any(!is.na(accession)),
-                                 paste0(accession,
-                                        collapse = ",")),
-                            list("chromosome",
-                                 any(!is.na(chromosome)),
-                                 paste0(chromosome,
-                                        collapse = ",")),
-                            list("ensembl_id",
-                                 any(!is.na(ensembl_id)),
-                                 paste0(ensembl_id,
-                                        collapse = ",")),
-                            list("gene",
-                                 any(!is.na(gene)),
-                                 paste0(gene,
-                                        collapse = ",")),
-                            list("protein",
-                                 !is.na(protein),
-                                 protein),
-                            list("taxid",
-                                 any(!is.na(taxid)),
-                                 paste0(taxid,
-                                        collapse = ",")),
-                            list("location",
-                                 !is.na(location),
-                                 location))
+  call_query = .rba_query(init = list("size" = "-1"),
+                          list("accession",
+                               any(!is.na(accession)),
+                               paste0(accession,
+                                      collapse = ",")),
+                          list("chromosome",
+                               any(!is.na(chromosome)),
+                               paste0(chromosome,
+                                      collapse = ",")),
+                          list("ensembl_id",
+                               any(!is.na(ensembl_id)),
+                               paste0(ensembl_id,
+                                      collapse = ",")),
+                          list("gene",
+                               any(!is.na(gene)),
+                               paste0(gene,
+                                      collapse = ",")),
+                          list("protein",
+                               !is.na(protein),
+                               protein),
+                          list("taxid",
+                               any(!is.na(taxid)),
+                               paste0(taxid,
+                                      collapse = ",")),
+                          list("location",
+                               !is.na(location),
+                               location))
   ## Build Function-Specific Call
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("uniprot", "url"),
-                           path = paste0(rba_ba_stg("uniprot", "pth"),
-                                         "coordinates"),
-                           query = call_query,
-                           accept = "application/json",
-                           parser = "json->list",
-                           save_to = rba_ba_file("uniprot_coordinates_search.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("uniprot", "url"),
+                         path = paste0(.rba_stg("uniprot", "pth"),
+                                       "coordinates"),
+                         query = call_query,
+                         accept = "application/json",
+                         parser = "json->list",
+                         save_to = .rba_file("uniprot_coordinates_search.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -176,44 +176,44 @@ rba_uniprot_coordinates_sequence = function(accession,
                                             p_end = NA,
                                             ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "accession",
-                               class = "character"),
-                          list(arg = "p_position",
-                               class = "numeric"),
-                          list(arg = "p_start",
-                               class = "numeric"),
-                          list(arg = "p_end",
-                               class = "numeric")),
-              cond = list(list(quote(any(sum(!is.na(p_position), !is.na(p_start), !is.na(p_end)) == 3,
-                                         sum(!is.na(p_position), !is.na(p_start), !is.na(p_end)) == 0,
-                                         sum(!is.na(p_start), !is.na(p_end)) == 1)),
-                               "You should provide either 'p_position' alone or 'p_start' and 'p_end' together.")
-                          ))
+  .rba_args(cons = list(list(arg = "accession",
+                             class = "character"),
+                        list(arg = "p_position",
+                             class = "numeric"),
+                        list(arg = "p_start",
+                             class = "numeric"),
+                        list(arg = "p_end",
+                             class = "numeric")),
+            cond = list(list(quote(any(sum(!is.na(p_position), !is.na(p_start), !is.na(p_end)) == 3,
+                                       sum(!is.na(p_position), !is.na(p_start), !is.na(p_end)) == 0,
+                                       sum(!is.na(p_start), !is.na(p_end)) == 1)),
+                             "You should provide either 'p_position' alone or 'p_start' and 'p_end' together.")
+            ))
 
-  v_msg("Retrieving genome coordinates of protein %s in sequence position %s.",
-        accession,
-        ifelse(is.na(p_position),
-               yes = paste(p_start, p_end, sep = " to "), no = p_position))
+  .msg("Retrieving genome coordinates of protein %s in sequence position %s.",
+       accession,
+       ifelse(is.na(p_position),
+              yes = paste(p_start, p_end, sep = " to "), no = p_position))
 
   ## Build Function-Specific Call
   path_input = sprintf("%scoordinates/location/%s:%s",
-                       rba_ba_stg("uniprot", "pth"),
+                       .rba_stg("uniprot", "pth"),
                        accession,
                        ifelse(!is.na(p_position),
                               yes = p_position,
                               no = paste0(p_start, "-", p_end)))
 
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("uniprot", "url"),
-                           path = path_input,
-                           accept = "application/json",
-                           parser = "json->list_simp",
-                           save_to = rba_ba_file("uniprot_coordinates_location.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("uniprot", "url"),
+                         path = path_input,
+                         accept = "application/json",
+                         parser = "json->list_simp",
+                         save_to = .rba_file("uniprot_coordinates_location.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -265,47 +265,47 @@ rba_uniprot_coordinates = function(accession = NA,
                                    db_id = NA,
                                    ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "accession",
-                               class = "character"),
-                          list(arg = "db_type",
-                               class = "character",
-                               val = c("Ensembl",
-                                         "CCDC",
-                                         "HGNC",
-                                         "RefSeq")),
-                          list(arg = "db_id",
-                               class = "character")),
-              cond = list(list(quote(any(sum(!is.na(accession), !is.na(db_type), !is.na(db_id)) == 3,
-                                         sum(!is.na(accession), !is.na(db_type), !is.na(db_id)) == 0,
-                                         sum(!is.na(db_type), !is.na(db_id)) == 1)),
-                               "You should provide either 'accession' alone or 'db_type' and 'db_id' together.")
-              ))
+  .rba_args(cons = list(list(arg = "accession",
+                             class = "character"),
+                        list(arg = "db_type",
+                             class = "character",
+                             val = c("Ensembl",
+                                     "CCDC",
+                                     "HGNC",
+                                     "RefSeq")),
+                        list(arg = "db_id",
+                             class = "character")),
+            cond = list(list(quote(any(sum(!is.na(accession), !is.na(db_type), !is.na(db_id)) == 3,
+                                       sum(!is.na(accession), !is.na(db_type), !is.na(db_id)) == 0,
+                                       sum(!is.na(db_type), !is.na(db_id)) == 1)),
+                             "You should provide either 'accession' alone or 'db_type' and 'db_id' together.")
+            ))
 
-  v_msg("Retrieving genome coordinates of protein with ID: %s",
-        ifelse(is.na(accession),
-               yes = sprintf("%s in %s database", db_id, db_type),
-               no = accession))
+  .msg("Retrieving genome coordinates of protein with ID: %s",
+       ifelse(is.na(accession),
+              yes = sprintf("%s in %s database", db_id, db_type),
+              no = accession))
   ## Build GET API Request's query
   call_query = list("size" = "-1")
   ## Build Function-Specific Call
   path_input = sprintf("%scoordinates/%s",
-                       rba_ba_stg("uniprot", "pth"),
+                       .rba_stg("uniprot", "pth"),
                        ifelse(!is.na(accession),
                               yes = accession,
                               no = paste0(db_type, ":", db_id)))
 
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("uniprot", "url"),
-                           path = path_input,
-                           query = call_query,
-                           accept = "application/json",
-                           parser = "json->list",
-                           save_to = rba_ba_file("uniprot_coordinates.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("uniprot", "url"),
+                         path = path_input,
+                         query = call_query,
+                         accept = "application/json",
+                         parser = "json->list",
+                         save_to = .rba_file("uniprot_coordinates.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -357,41 +357,41 @@ rba_uniprot_coordinates_location = function(taxid,
                                             feature = FALSE,
                                             ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "taxid",
-                               class = "numeric"),
-                          list(arg = "locations",
-                               class = "character"),
-                          list(arg = "in_range",
-                               class = "logical"),
-                          list(arg = "feature",
-                               class = "logical"))
+  .rba_args(cons = list(list(arg = "taxid",
+                             class = "numeric"),
+                        list(arg = "locations",
+                             class = "character"),
+                        list(arg = "in_range",
+                             class = "logical"),
+                        list(arg = "feature",
+                             class = "logical"))
   )
 
-  v_msg("Retrieving UniProt entries in location %s of taxon %s.",
-        locations, taxid)
+  .msg("Retrieving UniProt entries in location %s of taxon %s.",
+       locations, taxid)
   ## Build GET API Request's query
   call_query = list("size" = "-1",
                     "in_range" = ifelse(in_range, "true", "false"))
 
   ## Build Function-Specific Call
   path_input = sprintf("%scoordinates/%s/%s",
-                       rba_ba_stg("uniprot", "pth"),
+                       .rba_stg("uniprot", "pth"),
                        taxid,
                        locations)
   if (isTRUE(feature)) {
     path_input = paste0(path_input, "/feature")
   }
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("uniprot", "url"),
-                           path = path_input,
-                           query = call_query,
-                           accept = "application/json",
-                           parser = "json->list",
-                           save_to = rba_ba_file("rba_uniprot_coordinates_location.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("uniprot", "url"),
+                         path = path_input,
+                         query = call_query,
+                         accept = "application/json",
+                         parser = "json->list",
+                         save_to = .rba_file("rba_uniprot_coordinates_location.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }

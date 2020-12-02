@@ -68,77 +68,77 @@ rba_uniprot_proteomes_search = function(name = NA,
                                         is_redundant = NA,
                                         ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "upid",
-                               class = "character",
-                               max_len = 100),
-                          list(arg = "name",
-                               class = "character"),
-                          list(arg = "taxid",
-                               class = "numeric",
-                               max_len = 20),
-                          list(arg = "keyword",
-                               class = "character"),
-                          list(arg = "xref",
-                               class = "character",
-                               max_len = 20),
-                          list(arg = "genome_acc",
-                               class = "character",
-                               max_len = 20),
-                          list(arg = "is_ref_proteome",
-                               class = "logical"),
-                          list(arg = "is_redundant",
-                               class = "logical"))
+  .rba_args(cons = list(list(arg = "upid",
+                             class = "character",
+                             max_len = 100),
+                        list(arg = "name",
+                             class = "character"),
+                        list(arg = "taxid",
+                             class = "numeric",
+                             max_len = 20),
+                        list(arg = "keyword",
+                             class = "character"),
+                        list(arg = "xref",
+                             class = "character",
+                             max_len = 20),
+                        list(arg = "genome_acc",
+                             class = "character",
+                             max_len = 20),
+                        list(arg = "is_ref_proteome",
+                             class = "logical"),
+                        list(arg = "is_redundant",
+                             class = "logical"))
   )
 
-  v_msg("Searching UniProt and retrieving proteoms that match your provided inputs.")
+  .msg("Searching UniProt and retrieving proteoms that match your provided inputs.")
   ## Build GET API Request's query
-  call_query = rba_ba_query(init = list("size" = "-1"),
-                            list("name",
-                                 !is.na(name),
-                                 name),
-                            list("upid",
-                                 any(!is.na(upid)),
-                                 paste0(upid,
-                                        collapse = ",")),
-                            list("taxid",
-                                 any(!is.na(taxid)),
-                                 paste0(taxid,
-                                        collapse = ",")),
-                            list("keyword",
-                                 !is.na(keyword),
-                                 keyword),
-                            list("xref",
-                                 any(!is.na(xref)),
-                                 paste0(xref,
-                                        collapse = ",")),
-                            list("genome_acc",
-                                 any(!is.na(genome_acc)),
-                                 paste0(genome_acc,
-                                        collapse = ",")),
-                            list("is_ref_proteome",
-                                 !is.na(is_ref_proteome),
-                                 ifelse(is_ref_proteome,
-                                        "true",
-                                        "false")),
-                            list("is_redundant",
-                                 !is.na(is_redundant),
-                                 ifelse(is_redundant,
-                                        "true",
-                                        "false")))
+  call_query = .rba_query(init = list("size" = "-1"),
+                          list("name",
+                               !is.na(name),
+                               name),
+                          list("upid",
+                               any(!is.na(upid)),
+                               paste0(upid,
+                                      collapse = ",")),
+                          list("taxid",
+                               any(!is.na(taxid)),
+                               paste0(taxid,
+                                      collapse = ",")),
+                          list("keyword",
+                               !is.na(keyword),
+                               keyword),
+                          list("xref",
+                               any(!is.na(xref)),
+                               paste0(xref,
+                                      collapse = ",")),
+                          list("genome_acc",
+                               any(!is.na(genome_acc)),
+                               paste0(genome_acc,
+                                      collapse = ",")),
+                          list("is_ref_proteome",
+                               !is.na(is_ref_proteome),
+                               ifelse(is_ref_proteome,
+                                      "true",
+                                      "false")),
+                          list("is_redundant",
+                               !is.na(is_redundant),
+                               ifelse(is_redundant,
+                                      "true",
+                                      "false")))
   ## Build Function-Specific Call
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("uniprot", "url"),
-                           path = paste0(rba_ba_stg("uniprot", "pth"),
-                                         "proteomes"),
-                           query = call_query,
-                           accept = "application/json",
-                           parser = "json->list",
-                           save_to = rba_ba_file("uniprot_proteomes_search.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("uniprot", "url"),
+                         path = paste0(.rba_stg("uniprot", "pth"),
+                                       "proteomes"),
+                         query = call_query,
+                         accept = "application/json",
+                         parser = "json->list",
+                         save_to = .rba_file("uniprot_proteomes_search.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -189,20 +189,20 @@ rba_uniprot_proteomes = function(upid,
                                  reviewed = NA,
                                  ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "upid",
-                               class = "character"),
-                          list(arg = "get_proteins",
-                               class = "logical"),
-                          list(arg = "reviewed",
-                               class = "logical")),
-              cond = list(list(quote(isFALSE(get_proteins) && !is.na(reviewed)),
-                               "'reviewed' argument is ignored because you provided 'get_proteins' as FALSE.")),
-              cond_warning = TRUE
+  .rba_args(cons = list(list(arg = "upid",
+                             class = "character"),
+                        list(arg = "get_proteins",
+                             class = "logical"),
+                        list(arg = "reviewed",
+                             class = "logical")),
+            cond = list(list(quote(isFALSE(get_proteins) && !is.na(reviewed)),
+                             "'reviewed' argument is ignored because you provided 'get_proteins' as FALSE.")),
+            cond_warning = TRUE
   )
 
-  v_msg("Retrieving proteome %s (%s).",
+  .msg("Retrieving proteome %s (%s).",
         upid,
         ifelse(isTRUE(get_proteins),
                yes = sprintf("With %sproteins",
@@ -214,32 +214,32 @@ rba_uniprot_proteomes = function(upid,
   ## Build Function-Specific Call
   if (isTRUE(get_proteins)) {
     ## Build GET API Request's query
-    call_query = rba_ba_query(init = list(),
-                              list("reviewed",
-                                   !is.na(reviewed),
-                                   ifelse(reviewed,
-                                          "true",
-                                          "false")))
-    path_input = paste0(rba_ba_stg("uniprot", "pth"),
+    call_query = .rba_query(init = list(),
+                            list("reviewed",
+                                 !is.na(reviewed),
+                                 ifelse(reviewed,
+                                        "true",
+                                        "false")))
+    path_input = paste0(.rba_stg("uniprot", "pth"),
                         "proteomes/proteins/",
                         upid)
   } else {
     call_query = NULL
-    path_input = paste0(rba_ba_stg("uniprot", "pth"),
+    path_input = paste0(.rba_stg("uniprot", "pth"),
                         "proteomes/",
                         upid)
   }
 
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("uniprot", "url"),
-                           path = path_input,
-                           query = call_query,
-                           accept = "application/json",
-                           parser = "json->list",
-                           save_to = rba_ba_file("uniprot_proteomes.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("uniprot", "url"),
+                         path = path_input,
+                         query = call_query,
+                         accept = "application/json",
+                         parser = "json->list",
+                         save_to = .rba_file("uniprot_proteomes.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -299,46 +299,46 @@ rba_uniprot_genecentric_search = function(upid = NA,
                                           gene = NA,
                                           ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "upid",
-                               class = "character",
-                               max_len = 100),
-                          list(arg = "accession",
-                               class = "character",
-                               max_len = 100),
-                          list(arg = "gene",
-                               class = "character",
-                               max_len = 20))
+  .rba_args(cons = list(list(arg = "upid",
+                             class = "character",
+                             max_len = 100),
+                        list(arg = "accession",
+                             class = "character",
+                             max_len = 100),
+                        list(arg = "gene",
+                             class = "character",
+                             max_len = 20))
   )
 
-  v_msg("Searching UniProt and retrieving Gene-Centric Proteins that match your provided inputs.")
+  .msg("Searching UniProt and retrieving Gene-Centric Proteins that match your provided inputs.")
   ## Build GET API Request's query
-  call_query = rba_ba_query(init = list("size" = "-1"),
-                            list("upid",
-                                 any(!is.na(upid)),
-                                 paste0(upid,
-                                        collapse = ",")),
-                            list("accession",
-                                 any(!is.na(accession)),
-                                 paste0(accession,
-                                        collapse = ",")),
-                            list("gene",
-                                 any(!is.na(gene)),
-                                 paste0(gene,
-                                        collapse = ",")))
+  call_query = .rba_query(init = list("size" = "-1"),
+                          list("upid",
+                               any(!is.na(upid)),
+                               paste0(upid,
+                                      collapse = ",")),
+                          list("accession",
+                               any(!is.na(accession)),
+                               paste0(accession,
+                                      collapse = ",")),
+                          list("gene",
+                               any(!is.na(gene)),
+                               paste0(gene,
+                                      collapse = ",")))
   ## Build Function-Specific Call
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("uniprot", "url"),
-                           path = paste0(rba_ba_stg("uniprot", "pth"),
-                                         "genecentric"),
-                           query = call_query,
-                           accept = "application/json",
-                           parser = "json->list",
-                           save_to = rba_ba_file("uniprot_genecentric_search.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("uniprot", "url"),
+                         path = paste0(.rba_stg("uniprot", "pth"),
+                                       "genecentric"),
+                         query = call_query,
+                         accept = "application/json",
+                         parser = "json->list",
+                         save_to = .rba_file("uniprot_genecentric_search.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -377,25 +377,25 @@ rba_uniprot_genecentric_search = function(upid = NA,
 rba_uniprot_genecentric = function(accession,
                                    ...) {
   ## Load Global Options
-  rba_ba_ext_args(...)
+  .rba_ext_args(...)
   ## Check User-input Arguments
-  rba_ba_args(cons = list(list(arg = "accession",
-                               class = "character"))
+  .rba_args(cons = list(list(arg = "accession",
+                             class = "character"))
   )
 
-  v_msg("Retrieving Gene-Centric proteins by UniProt Accession %s.",
+  .msg("Retrieving Gene-Centric proteins by UniProt Accession %s.",
         accession)
   ## Build Function-Specific Call
-  input_call = rba_ba_httr(httr = "get",
-                           url = rba_ba_stg("uniprot", "url"),
-                           path = paste0(rba_ba_stg("uniprot", "pth"),
-                                         "genecentric/",
-                                         accession),
-                           accept = "application/json",
-                           parser = "json->list_simp",
-                           save_to = rba_ba_file("uniprot_genecentric.json"))
+  input_call = .rba_httr(httr = "get",
+                         url = .rba_stg("uniprot", "url"),
+                         path = paste0(.rba_stg("uniprot", "pth"),
+                                       "genecentric/",
+                                       accession),
+                         accept = "application/json",
+                         parser = "json->list_simp",
+                         save_to = .rba_file("uniprot_genecentric.json"))
 
   ## Call API
-  final_output = rba_ba_skeleton(input_call)
+  final_output = .rba_skeleton(input_call)
   return(final_output)
 }
