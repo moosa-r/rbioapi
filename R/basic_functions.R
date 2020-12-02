@@ -300,26 +300,34 @@ rba_ba_query = function(init, ...) {
     ext_par = ext_par$extra_pars
   }
   ## evaluate extra parameters
-  for (i in seq_along(ext_par)) {
-    # check if the condition has more than 1 element
-    if (length(ext_par[[i]][[2]]) > 1) {
-      warning("Internal Query Builder:\r\n",
-              ext_par[[i]][[1]], " has more than one element. ",
-              "Only the first element will be used.",
-              call. = TRUE, immediate. = TRUE)
-    }
-    # only proceed if the condition is indeed logical
-    if (!is.logical(ext_par[[i]][[2]])) {
-      warning("Internal Query Builder:\r\n",
-              "The evaluation output of ",
-              ext_par[[i]][[1]], " is not logical, thus skipping it.",
-              call. = TRUE, immediate. = TRUE)
-    } else {
-      if (isTRUE(ext_par[[i]][[2]][[1]])) {
-        init[[ext_par[[i]][[1]]]] = ext_par[[i]][[3]]
-      }
-    }
-  } # end of for(i ...
+  ext_evl = vapply(X = ext_par,
+                   FUN = function(x) {
+                     if (length(x[[2]]) > 1) {
+                       warning("Internal Query Builder:\r\n",
+                               x[[1]], " has more than one element. Only the first element will be used.",
+                               call. = FALSE, immediate. = FALSE)
+                     }
+                     if (isTRUE(x[[2]][[1]])) {
+                       return(TRUE)
+                     } else if (isFALSE(x[[2]][[1]])) {
+                       return(FALSE)}
+                     else {
+                       warning("Internal Query Builder:\r\n The evaluation result of ",
+                               x[[1]], " is not TRUE or FALSE, thus skipping it.",
+                               call. = FALSE, immediate. = FALSE)
+                       return(FALSE)}
+                   },
+                   FUN.VALUE = logical(1))
+
+  # extract extra parameters where theirs second element was TRUE
+  ext_val = lapply(ext_par[ext_evl], function(x) {x[[3]]})
+  # set names to the extracted parameters
+  if (length(ext_val)  >= 1) {
+    names(ext_val) = vapply(ext_par[ext_evl],
+                            function(x) {x[[1]]},
+                            character(1))
+    init = append(init, ext_val)
+  }
   return(init)
 }
 
