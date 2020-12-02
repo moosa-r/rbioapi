@@ -262,12 +262,11 @@ rba_string_network_image = function(ids,
   if (image_format == "svg") {
     ext_input = "svg"
     accept_input = "image/svg+xml"
-    parser_input = quote(httr::content(response))
+    parser_input = function(x) {httr::content(x)}
   } else {
     ext_input = "png"
     accept_input = "image/png"
-    parser_input = quote(httr::content(response,
-                                       type = "image/png"))
+    parser_input = function(x) {httr::content(x, type = "image/png")}
   }
   save_image = rba_ba_file(file = paste0("string_network_image.", ext_input),
                            save_to = save_image)

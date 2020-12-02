@@ -25,7 +25,7 @@ In case of server response with status code other than 200, this function
 This function will detect the responded server based on "ptn" values stored
   in rba_ba_stg(). and if that particular servers error format was defined
   under "err", the response will be parsed using "err_prs" argument and will
-  be converted to a character string using "err_fun" value. (all in
+  be converted to a character string using "err_prs2" value. (all in
   rba_ba_stg()). if the server was not identified, or the server was not
   recorded to have a defined error response, this function will only return
   the translation of HTTP status code, using rba_ba_http_status().

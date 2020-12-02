@@ -32,7 +32,7 @@ rba_ba_stg = function(...){
                                    ptn = "^(https*://)*rest\\.ensembl\\.org/",
                                    err = c("400","404"),
                                    err_prs = "json->list_simp",
-                                   err_fun = function(x) {x[["error"]][[1]]}),
+                                   err_prs2 = function(x) {x[["error"]][[1]]}),
                   reactome = switch(arg[[2]],
                                     name = "Reactome",
                                     url = "https://reactome.org",
@@ -44,7 +44,7 @@ rba_ba_stg = function(...){
                                     ptn = "^(http.?://).*reactome\\.org/(?:AnalysisService|ContentService)/",
                                     err = "404",
                                     err_prs = "json->list_simp",
-                                    err_fun = function(x) {x[["messages"]][[1]]},
+                                    err_prs2 = function(x) {x[["messages"]][[1]]},
                   ),
                   string = switch(arg[[2]],
                                   name = "STRING",
@@ -58,7 +58,7 @@ rba_ba_stg = function(...){
                                    ptn = "^(http.?://).*ebi\\.ac\\.uk/proteins/api/",
                                    err = c("400", "404"),
                                    err_prs = "json->list_simp",
-                                   err_fun = function(x) {x[["errorMessage"]][[1]]}),
+                                   err_prs2 = function(x) {x[["errorMessage"]][[1]]}),
                   options = switch(as.character(length(arg)),
                                    "1" = options()[grep("^rba_",
                                                         names(options()))],
@@ -598,7 +598,7 @@ rba_ba_skeleton = function(input_call,
   }
 
   if (methods::is(response, "response") && !is.null(parser_input)) {
-    final_output = rba_ba_response_parser(parser = parser_input)
+    final_output = rba_ba_response_parser(response, parser_input)
   } else {
     final_output = response
   }
@@ -1005,69 +1005,93 @@ rba_ba_args = function(cons = NULL,
 #'
 #' Using the input provided as 'parser' argument, this function will parse the
 #'   response from a REST API into appropriate R objects.\cr
-#'   important note: server response should be the output of httr function call
-#'   with the formal class of "response" and it should be associated to a
-#'   variable named 'response' in the same enviroment which this function is
-#'   being called from.
 #'
-#' The function will be called within rba_ba_skeleton() subsequent of a
-#'   server response with HTTP status code 200. If a call expression was
-#'   provided by 'parser' argument, it will be used to parse the content of
-#'   variable 'response', if not, the 'parser' argument should be a character
-#'   corresponding to a pre-defined call expression.
+#' The function will be called within rba_ba_skeleton subsequent of a
+#'   server response with HTTP status code 200.\cr
+#'   each parser  could be either a single-argument function or
+#'   one of the following character strings that will be internally converted
+#'   to a proper function:
+#'   "json->df", "json->df_no_flat", "json->list_simp", "json->list",
+#'   "json->chr", text->chr", "text->df", "tsv->df".\cr
+#'   if you provide more than one parser, the parsers will be sequentially
+#'   applied to the response (i.e. response %>% parser1 %>% parser2 %>% ...)
 #'
-#' @param parser Either a quoted expression or one of: "json->df",
-#'   "json->list_simp", "json->list", "json->chr", "text->chr", "text->chr",
-#'   "text->df", "tsv->df".
+#' @param response An httr response object.
+#' @param parsers Response parsers, a single value or a vector. Each element
+#'   should be either a function with a single argument or a character string.
 #'
-#' @return A valid R object, depends on the parser which have been used.
+#' @return A valid R object, depends on the parsers which have been used.
 #'
 #' @family internal_response_parser
 #' @export
-rba_ba_response_parser = function(parser) {
-  #create a parser if not provided
-  if (!is.call(parser)) {
-    parser = switch(parser,
-                    "json->df" = quote(data.frame(jsonlite::fromJSON(httr::content(response,
-                                                                                   as = "text",
-                                                                                   encoding = "UTF-8"),
-                                                                     flatten = TRUE),
-                                                  stringsAsFactors = FALSE)),
-                    "json->df_no_flat" = quote(data.frame(jsonlite::fromJSON(httr::content(response,
-                                                                                           as = "text",
-                                                                                           encoding = "UTF-8"),
-                                                                             flatten = FALSE),
-                                                          stringsAsFactors = FALSE)),
-                    "json->list_simp" = quote(as.list(jsonlite::fromJSON(httr::content(response,
-                                                                                       as = "text",
-                                                                                       encoding = "UTF-8"),
-                                                                         simplifyVector = TRUE))),
-                    "json->list" = quote(as.list(jsonlite::fromJSON(httr::content(response,
+rba_ba_response_parser = function(response, parsers) {
+  if (!is.vector(parsers)) { parser = list(parsers)}
+  parsers = sapply(X = parsers,
+                   FUN = function(parser){
+                     #create a parser if not provided
+                     if (!is.function(parser)) {
+                       parser = switch(parser,
+                                       "json->df" = function(x) {
+                                         data.frame(jsonlite::fromJSON(httr::content(x,
+                                                                                     as = "text",
+                                                                                     encoding = "UTF-8"),
+                                                                       flatten = TRUE),
+                                                    stringsAsFactors = FALSE)
+                                       },
+                                       "json->df_no_flat" = function(x) {
+                                         data.frame(jsonlite::fromJSON(httr::content(x,
+                                                                                     as = "text",
+                                                                                     encoding = "UTF-8"),
+                                                                       flatten = FALSE),
+                                                    stringsAsFactors = FALSE)
+                                       },
+                                       "json->list_simp" = function(x) {
+                                         as.list(jsonlite::fromJSON(httr::content(x,
                                                                                   as = "text",
                                                                                   encoding = "UTF-8"),
-                                                                    simplifyVector = FALSE))),
-                    "json->chr" = quote(as.character(jsonlite::fromJSON(httr::content(response,
-                                                                                      as = "text",
-                                                                                      encoding = "UTF-8")))),
-                    "text->chr" = quote(as.character(httr::content(response,
-                                                                   as = "text",
-                                                                   encoding = "UTF-8"))),
-                    "text->df" = quote(read.table(text = httr::content(response,
-                                                                       type = "text/plain",
-                                                                       as = "text",
-                                                                       encoding = "UTF-8"),
-                                                  header = FALSE,
-                                                  stringsAsFactors = FALSE)),
-                    "tsv->df" = quote(as.character(httr::content(response,
-                                                                 as = "text",
-                                                                 encoding = "UTF-8"))),
-                    stop("Internal Error: Specify a valid parser expression!",
-                         call. = TRUE)
-    )
+                                                                    simplifyVector = TRUE))
+                                       },
+                                       "json->list" = function(x) {
+                                         as.list(jsonlite::fromJSON(httr::content(x,
+                                                                                  as = "text",
+                                                                                  encoding = "UTF-8"),
+                                                                    simplifyVector = FALSE))
+                                       },
+                                       "json->chr" = function(x) {
+                                         as.character(jsonlite::fromJSON(httr::content(x,
+                                                                                       as = "text",
+                                                                                       encoding = "UTF-8")))
+                                       },
+                                       "text->chr" = function(x) {
+                                         as.character(httr::content(x,
+                                                                    as = "text",
+                                                                    encoding = "UTF-8"))
+                                       },
+                                       "text->df" = function(x) {
+                                         read.table(text = httr::content(x,
+                                                                         type = "text/plain",
+                                                                         as = "text",
+                                                                         encoding = "UTF-8"),
+                                                    header = FALSE,
+                                                    stringsAsFactors = FALSE)
+                                       },
+                                       "tsv->df" = function(x) {
+                                         as.character(httr::content(x,
+                                                                    as = "text",
+                                                                    encoding = "UTF-8"))
+                                       },
+                                       stop("Internal Error: Specify a valid parser name or provide a function!",
+                                            call. = TRUE)
+                       )
+                     }
+                     return(parser)
+                   })
+
+  # sequentially handle the response to the parsers
+  for (parser in seq_along(parsers)) {
+    response = do.call(what = parsers[[parser]], args = list(response))
   }
-  # parse the response
-  output = eval(parser, envir = parent.frame(1))
-  return(output)
+  return(response)
 }
 
 #' Parse Appropriate, Server-aware Error Message
@@ -1079,7 +1103,7 @@ rba_ba_response_parser = function(parser) {
 #' This function will detect the responded server based on "ptn" values stored
 #'   in rba_ba_stg(). and if that particular servers error format was defined
 #'   under "err", the response will be parsed using "err_prs" argument and will
-#'   be converted to a character string using "err_fun" value. (all in
+#'   be converted to a character string using "err_prs2" value. (all in
 #'   rba_ba_stg()). if the server was not identified, or the server was not
 #'   recorded to have a defined error response, this function will only return
 #'   the translation of HTTP status code, using rba_ba_http_status().
@@ -1112,10 +1136,10 @@ rba_ba_error_parser = function(response,
               rba_ba_stg(db, "name"),
               rba_ba_http_status(response$status_code,
                                  verbose = FALSE),
-              rba_ba_stg(db,
-                         "err_fun")(rba_ba_response_parser(rba_ba_stg(db,
-                                                                      "err_prs")))
-      )
+              rba_ba_response_parser(response,
+                                     list(rba_ba_stg(db, "err_prs"),
+                                          rba_ba_stg(db,"err_prs2")))
+              )
     }, error = function(e) {
       rba_ba_http_status(response$status_code,
                          verbose = verbose)

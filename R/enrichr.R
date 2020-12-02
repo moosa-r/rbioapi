@@ -255,10 +255,12 @@ rba_enrichr_enrich_internal = function(user_list_id,
                     "backgroundType" = gene_set_library)
 
   ## Build Function-Specific Call
-  parser_input = quote(httr::content(response,
-                                     as = "text",
-                                     type = "text/tab-separated-values",
-                                     encoding = "UTF-8"))
+  parser_input = function(x) {
+    httr::content(x,
+                  as = "text",
+                  type = "text/tab-separated-values",
+                  encoding = "UTF-8")
+  }
 
   input_call = rba_ba_httr(httr = "get",
                            rba_ba_stg("enrichr", "url"),

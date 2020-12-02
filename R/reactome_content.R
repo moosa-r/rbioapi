@@ -1843,12 +1843,14 @@ rba_reactome_pathways_events = function(event_id,
   if (!is.na(attribute_name)) {
     path_input = paste0(path_input, "/", attribute_name)
     accept_input = "text/plain"
-    parser_input = quote(unlist(strsplit(x = gsub(pattern = "\\[|\\]",
-                                                  replacement = "",
-                                                  x = httr::content(response,
-                                                                    as = "text",
-                                                                    encoding = "UTF-8")),
-                                         split = ", ")))
+    parser_input = function(x) {
+      unlist(strsplit(x = gsub(pattern = "\\[|\\]",
+                               replacement = "",
+                               x = httr::content(x,
+                                                 as = "text",
+                                                 encoding = "UTF-8")),
+                      split = ", "))
+    }
     file_ext = "txt"
   }
   input_call = rba_ba_httr(httr = "get",

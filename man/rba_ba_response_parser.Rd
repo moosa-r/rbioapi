@@ -4,30 +4,31 @@
 \alias{rba_ba_response_parser}
 \title{Parse API Response}
 \usage{
-rba_ba_response_parser(parser)
+rba_ba_response_parser(response, parsers)
 }
 \arguments{
-\item{parser}{Either a quoted expression or one of: "json->df",
-"json->list_simp", "json->list", "json->chr", "text->chr", "text->chr",
-"text->df", "tsv->df".}
+\item{response}{An httr response object.}
+
+\item{parsers}{Response parsers, a single value or a vector. Each element
+should be either a function with a single argument or a character string.}
 }
 \value{
-A valid R object, depends on the parser which have been used.
+A valid R object, depends on the parsers which have been used.
 }
 \description{
 Using the input provided as 'parser' argument, this function will parse the
   response from a REST API into appropriate R objects.\cr
-  important note: server response should be the output of httr function call
-  with the formal class of "response" and it should be associated to a
-  variable named 'response' in the same enviroment which this function is
-  being called from.
 }
 \details{
-The function will be called within rba_ba_skeleton() subsequent of a
-  server response with HTTP status code 200. If a call expression was
-  provided by 'parser' argument, it will be used to parse the content of
-  variable 'response', if not, the 'parser' argument should be a character
-  corresponding to a pre-defined call expression.
+The function will be called within rba_ba_skeleton subsequent of a
+  server response with HTTP status code 200.\cr
+  each parser  could be either a single-argument function or
+  one of the following character strings that will be internally converted
+  to a proper function:
+  "json->df", "json->df_no_flat", "json->list_simp", "json->list",
+  "json->chr", text->chr", "text->df", "tsv->df".\cr
+  if you provide more than one parser, the parsers will be sequentially
+  applied to the response (i.e. response %>% parser1 %>% parser2 %>% ...)
 }
 \seealso{
 Other internal_response_parser: 
