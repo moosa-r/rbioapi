@@ -16,7 +16,7 @@ NULL. If The arguments check failed, the code execution will be
 halted or a warning will be issued.
 }
 \description{
-This function is an internal component of \code{\link{rba_ba_args}}. It will
+This function is an internal component of rba_ba_args(). It will
   add user-defiended rbioapi options variables (provided by the "..."
   arguments in the exported function call) to rba_ba_args's cond and cons.
 }

@@ -138,7 +138,8 @@ rba_uniprot_taxonomy = function(ids,
               cond = list(list(quote(length(ids) > 1 && !is.na(hierarchy)),
                                "you cannot specify 'hierarchy' when providing more than 1 ids."),
                           list(quote(is.na(hierarchy) && (page_size != 200 | page_number != 1)),
-                               "when hierarchy argument is not provided, page_size and page_number will be ignored."))
+                               "Because hierarchy argument was not provided, page_size and page_number were ignored.",
+                               warn = TRUE))
   )
 
   v_msg("Retrieving %snodes information of %s.",

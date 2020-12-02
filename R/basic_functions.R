@@ -305,7 +305,7 @@ rba_ba_query = function(init, ...) {
                      if (length(x[[2]]) > 1) {
                        warning("Internal Query Builder:\r\n",
                                x[[1]], " has more than one element. Only the first element will be used.",
-                               call. = FALSE, immediate. = FALSE)
+                               call. = FALSE)
                      }
                      if (isTRUE(x[[2]][[1]])) {
                        return(TRUE)
@@ -314,7 +314,7 @@ rba_ba_query = function(init, ...) {
                      else {
                        warning("Internal Query Builder:\r\n The evaluation result of ",
                                x[[1]], " is not TRUE or FALSE, thus skipping it.",
-                               call. = FALSE, immediate. = FALSE)
+                               call. = FALSE)
                        return(FALSE)}
                    },
                    FUN.VALUE = logical(1))
@@ -611,7 +611,7 @@ rba_ba_skeleton = function(input_call,
 
 #' Add rbioapi options to user's Arguments Check
 #'
-#' This function is an internal component of \code{\link{rba_ba_args}}. It will
+#' This function is an internal component of rba_ba_args(). It will
 #'   add user-defiended rbioapi options variables (provided by the "..."
 #'   arguments in the exported function call) to rba_ba_args's cond and cons.
 #'
@@ -683,12 +683,12 @@ rba_ba_args_opts = function(cons = NULL, cond = NULL, what) {
 
 #' Check If A cons Element Follows A Constrain Type
 #'
-#' This function will take a single element from the \code{\link{rba_ba_args}}'s
+#' This function will take a single element from the rba_ba_args()'s
 #'    cons argument and a single constrain type and checks if it is TRUE.
 #'
-#' @param cons_i element i from \code{\link{rba_ba_args}}'s cons argument.
+#' @param cons_i element i from rba_ba_args()'s cons argument.
 #' @param what what constrain to check? it should be one of the possible cons
-#'  types defined in \code{\link{rba_ba_args}}'s documentations.
+#'  types defined in rba_ba_args()'s documentations.
 #'
 #' @return Logical. TRUE if element i is correct with regard to the constrain
 #'   "what"; FALSE otherwise.
@@ -720,12 +720,12 @@ rba_ba_args_cons_chk = function(cons_i, what) {
 #' Produce Error Message If an Element doesn't Follow a constrain
 #'
 #' In case of Constrain Error (i.e. a FALSE returned by
-#'   \code{\link{rba_ba_args_cons_chk}}), this function will produce a related error
+#'   rba_ba_args_cons_chk()), this function will produce a related error
 #'   message.
 #'
-#' @param cons_i element i from \code{\link{rba_ba_args}}'s cons argument.
+#' @param cons_i element i from rba_ba_args()'s cons argument.
 #' @param what what constrain produced the error? it should be one of the
-#'  possible cons types defined in \code{\link{rba_ba_args}}'s documentations.
+#'  possible cons types defined in rba_ba_args()'s documentations.
 #'
 #' @return A character string.
 #'
@@ -776,12 +776,12 @@ rba_ba_args_cons_msg = function(cons_i, what) {
 
 #' A wrapper to Iterate Constrain Types on a cons' Element
 #'
-#' Iterates \code{\link{rba_ba_args_cons_chk}}) on every defined constrain
-#'   for element i of a cons element. and produce an error message if neccesary.
+#' Iterates rba_ba_args_cons_chk() on every defined constrain
+#'   for element i of a cons element. and produce an error message if necessary.
 #'
-#' @param cons_i element i from \code{\link{rba_ba_args}}'s cons argument.
+#' @param cons_i element i from rba_ba_args()'s cons argument.
 #'
-#' @return A character vector with containig the error message for failed
+#' @return A character vector with containing the error message for failed
 #'   constrains, NA otherwise.
 #'
 #' @family internal_arguments_check
@@ -807,17 +807,17 @@ rba_ba_args_cons_wrp = function(cons_i) {
 #' In case of Condition Error (i.e. a TRUE returned by evaluating the
 #'  defined conditions in cond), this function will produce  a list with:
 #'  1- messages that could be used as error or warning, 2- an element named
-#'  "warn" that if FALSE, \code{\link{rba_ba_args}} will stop the code
+#'  "warn" that if FALSE, rba_ba_args() will stop the code
 #'  execution with message as error, or if TRUE, issues a warning with that
 #'  message.
 #'
-#' @param cond_i element i from \code{\link{rba_ba_args}}'s cond argument.
+#' @param cond_i element i from rba_ba_args()'s cond argument.
 #'
 #' @return A list containing the messages and warn element to
-#'   determine the behaviour of \code{\link{rba_ba_args}}.
+#'   determine the behaviour of rba_ba_args().
 #'
 #' @family A list containing the messages and warn element to
-#'   determine the behaviour of \code{\link{rba_ba_args}}.
+#'   determine the behaviour of rba_ba_args().
 #'
 #' @export
 rba_ba_args_cond = function(cond_i) {
@@ -1139,7 +1139,7 @@ rba_ba_error_parser = function(response,
               rba_ba_response_parser(response,
                                      list(rba_ba_stg(db, "err_prs"),
                                           rba_ba_stg(db,"err_prs2")))
-              )
+      )
     }, error = function(e) {
       rba_ba_http_status(response$status_code,
                          verbose = verbose)
@@ -1274,7 +1274,8 @@ rba_ba_file = function(file,
       if (!grepl("^[a-zA-z]:|^\\\\\\w|^/|^\\w+\\.\\w+$", save_to)) {
         ## 2a.1 not a valid file path!
         warning(sprintf("\"%s\" is not a valid file path. Ignored that.",
-                        save_to))
+                        save_to),
+                call. = diagnostics)
         save_to = TRUE
       } else {
         ## 2a.2 the provided file path is valid
@@ -1385,8 +1386,8 @@ rba_ba_ext_args = function(...) {
     }
     if (length(non_valid) > 0) {
       warning(sprintf("`%s` are not valid rbioapi options, thus were ignored.\r\n",
-                      paste_2(non_valid),
-                      call. = FALSE))
+                      paste_2(non_valid)),
+              call. = FALSE)
     }
   }
   # create the objects in the calling function's environment

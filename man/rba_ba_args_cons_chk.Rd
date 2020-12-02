@@ -7,17 +7,17 @@
 rba_ba_args_cons_chk(cons_i, what)
 }
 \arguments{
-\item{cons_i}{element i from \code{\link{rba_ba_args}}'s cons argument.}
+\item{cons_i}{element i from rba_ba_args()'s cons argument.}
 
 \item{what}{what constrain to check? it should be one of the possible cons
-types defined in \code{\link{rba_ba_args}}'s documentations.}
+types defined in rba_ba_args()'s documentations.}
 }
 \value{
 Logical. TRUE if element i is correct with regard to the constrain
   "what"; FALSE otherwise.
 }
 \description{
-This function will take a single element from the \code{\link{rba_ba_args}}'s
+This function will take a single element from the rba_ba_args()'s
    cons argument and a single constrain type and checks if it is TRUE.
 }
 \seealso{

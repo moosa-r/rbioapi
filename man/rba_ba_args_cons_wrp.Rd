@@ -7,15 +7,15 @@
 rba_ba_args_cons_wrp(cons_i)
 }
 \arguments{
-\item{cons_i}{element i from \code{\link{rba_ba_args}}'s cons argument.}
+\item{cons_i}{element i from rba_ba_args()'s cons argument.}
 }
 \value{
-A character vector with containig the error message for failed
+A character vector with containing the error message for failed
   constrains, NA otherwise.
 }
 \description{
-Iterates \code{\link{rba_ba_args_cons_chk}}) on every defined constrain
-  for element i of a cons element. and produce an error message if neccesary.
+Iterates rba_ba_args_cons_chk() on every defined constrain
+  for element i of a cons element. and produce an error message if necessary.
 }
 \seealso{
 Other internal_arguments_check: 

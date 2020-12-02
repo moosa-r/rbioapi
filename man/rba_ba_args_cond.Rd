@@ -7,19 +7,19 @@
 rba_ba_args_cond(cond_i)
 }
 \arguments{
-\item{cond_i}{element i from \code{\link{rba_ba_args}}'s cond argument.}
+\item{cond_i}{element i from rba_ba_args()'s cond argument.}
 }
 \value{
 A list containing the messages and warn element to
-  determine the behaviour of \code{\link{rba_ba_args}}.
+  determine the behaviour of rba_ba_args().
 }
 \description{
 In case of Condition Error (i.e. a TRUE returned by evaluating the
  defined conditions in cond), this function will produce  a list with:
  1- messages that could be used as error or warning, 2- an element named
- "warn" that if FALSE, \code{\link{rba_ba_args}} will stop the code
+ "warn" that if FALSE, rba_ba_args() will stop the code
  execution with message as error, or if TRUE, issues a warning with that
  message.
 }
 \concept{A list containing the messages and warn element to
-  determine the behaviour of \code{\link{rba_ba_args}}.}
+  determine the behaviour of rba_ba_args().}

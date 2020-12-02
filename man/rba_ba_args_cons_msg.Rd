@@ -7,17 +7,17 @@
 rba_ba_args_cons_msg(cons_i, what)
 }
 \arguments{
-\item{cons_i}{element i from \code{\link{rba_ba_args}}'s cons argument.}
+\item{cons_i}{element i from rba_ba_args()'s cons argument.}
 
 \item{what}{what constrain produced the error? it should be one of the
-possible cons types defined in \code{\link{rba_ba_args}}'s documentations.}
+possible cons types defined in rba_ba_args()'s documentations.}
 }
 \value{
 A character string.
 }
 \description{
 In case of Constrain Error (i.e. a FALSE returned by
-  \code{\link{rba_ba_args_cons_chk}}), this function will produce a related error
+  rba_ba_args_cons_chk()), this function will produce a related error
   message.
 }
 \seealso{
