@@ -8,35 +8,52 @@ rba_ba_args(cons = NULL, cond = NULL, cond_warning = FALSE)
 }
 \arguments{
 \item{cons}{Define Constrains for input arguments. Currently they may be:\cr
-'class', 'val', 'ran', 'min_val', 'max_val', 'len', 'min_len', 'max_len'}
+'class', 'val', 'ran', 'min_val', 'max_val', 'len', 'min_len', 'max_len'
+and/or 'regex'.}
 
 \item{cond}{Expression which will be evaluated to TRUE or FALSE.}
 
 \item{cond_warning}{Should the function produce warning instead of stopping
-code execution?}
+code execution? alternatively, you could include an element to
+any condition sub-list as "warn = TRUE", to only produce warning message
+for that condition only.}
 }
 \value{
-NULL. if The arguments check failed, the code excution will be halted
- or a warning will be issued.
+NULL. if The arguments check failed, the code execution will be
+ halted or a warning will be issued.
 }
 \description{
 This function provide a flexible, yet powerful and vigorous arguments check
-  mechanisms. It can check the many properties of input variables and also,
+  mechanisms. It can check many properties of input variables and also,
   check if a condition holds TRUE.
 }
 \details{
 cons Should be a list, and each element of that list should correspond to one
   input argument and be a lists with the following format:\cr
-  list(arg = argument name as character string, constrain name = constrain
+  list(arg = argument name as character string, constrain type = constrain
   value)\cr
   e.g. list(arg = "species", class = c("character", "numeric"))\cr\cr
   cond should be a list. and each element of that list, should correspond to
   one condition. the condition should be a quoted expression (or a character
   string), which could be evaluated (or parsed and evaluated) to a logical
-  TRUE/FALSE object. if that expression is TRUE after the evaluation,
-  the code excution will be halted (or warning will be issued if
-  cond_warning = TURE), optionally with a pre-defined error message.\cr
-  cond's elements format:\cr
-  list(quote(conditional expression), "error message if exression is TRUE")
+  TRUE/FALSE object. If that expression is TRUE after the evaluation,
+  the code execution will be halted (or warning will be issued if
+  cond_warning = TURE or the last element of coniditon sub-list is
+  "warn = TRUE ), optionally with a pre-defined error message.\cr\cr
+  cond's elements possible formats: \enumerate{
+  \item list(quote(conditional expression))
+  \item list(quote(conditional expression), "error message if expression
+  is TRUE")
+  \item list(quote(conditional expression), "warning message if expression
+  is TRUE", warn = TRUE)
+  \item list(quote(conditional expression), warn = TRUE)
+  }
+}
+\seealso{
+Other internal_arguments_check: 
+\code{\link{rba_ba_args_cons_chk}()},
+\code{\link{rba_ba_args_cons_msg}()},
+\code{\link{rba_ba_args_cons_wrp}()},
+\code{\link{rba_ba_args_opts}()}
 }
 \concept{internal_arguments_check}

@@ -601,34 +601,287 @@ rba_ba_skeleton = function(input_call,
 
 #### Check Arguments #######
 
+#' Add rbioapi options to user's Arguments Check
+#'
+#' This function is an internal component of \code{\link{rba_ba_args}}. It will
+#'   add user-defiended rbioapi options variables (provided by the "..."
+#'   arguments in the exported function call) to rba_ba_args's cond and cons.
+#'
+#' The aim of this function is to eliminate the need
+#'   to write explicit options arguments checking when writing the exported
+#'   functions. Without this, the developer was forced to repeatably include
+#'   every rbioapi options arguments in argument checking segment of each
+#'   exported function.
+#'
+#' @param cond Conditions to be evaluated.
+#' @param cond Constrains to be evaluated.
+#' @param what what to build? cond or cons?
+#'
+#' @return NULL. If The arguments check failed, the code execution will be
+#' halted or a warning will be issued.
+#'
+#' @family internal_arguments_check
+#' @export
+rba_ba_args_opts = function(cons = NULL, cond = NULL, what) {
+  if (what == "cons") {
+    ext_cons = list(client_timeout = list(arg = "client_timeout",
+                                          class = "numeric",
+                                          len = 1,
+                                          ran = c(0.001, 10000000)),
+                    dir_name = list(arg = "dir_name",
+                                    class = "character",
+                                    len = 1),
+                    diagnostics = list(arg = "diagnostics",
+                                       class = "logical",
+                                       len = 1),
+                    max_retries = list(arg = "max_retries",
+                                       class = "numeric",
+                                       len = 1),
+                    progress_bar = list(arg = "progress_bar",
+                                        class = "logical",
+                                        len = 1),
+                    save_resp_file = list(arg = "save_resp_file",
+                                          class = c("logical",
+                                                    "character"),
+                                          len = 1),
+                    skip_error = list(arg = "skip_error",
+                                      class = "logical",
+                                      len = 1),
+                    verbose = list(arg = "verbose",
+                                   class = "logical",
+                                   len = 1),
+                    wait_time = list(arg = "wait_time",
+                                     class = "numeric",
+                                     len = 1,
+                                     min_val = 1))
+    cons = append(ext_cons[names(ext_cons) %in% ls(envir = parent.frame(2))],
+                  cons)
+    return(cons)
+  } else if (what == "cond") {
+    ext_cond = list(dir_name = list(quote(grepl("[\\\\/:\"*?<>|]+", dir_name, perl = TRUE)),
+                                    "Invalid dir_name. Directory name cannot include these characters: \\/?%*:|<>"),
+                    save_resp_file = list(quote(!xor(isTRUE(save_resp_file),
+                                                     isFALSE(save_resp_file)) &&
+                                                  !grepl("^[a-zA-z]:|^\\\\\\w|^/|\\w+\\.\\w+$",
+                                                         save_resp_file)),
+                                          "Invalid save_resp_file. You should set it to 'logical' or 'a valid file path'."))
+    cond = append(ext_cond[names(ext_cond) %in% ls(envir = parent.frame(2))],
+                  cond)
+    return(cond)
+  } else {
+    stop("Internal error")
+  }
+}
+
+#' Check If A cons Element Follows A Constrain Type
+#'
+#' This function will take a single element from the \code{\link{rba_ba_args}}'s
+#'    cons argument and a single constrain type and checks if it is TRUE.
+#'
+#' @param cons_i element i from \code{\link{rba_ba_args}}'s cons argument.
+#' @param what what constrain to check? it should be one of the possible cons
+#'  types defined in \code{\link{rba_ba_args}}'s documentations.
+#'
+#' @return Logical. TRUE if element i is correct with regard to the constrain
+#'   "what"; FALSE otherwise.
+#'
+#' @family internal_arguments_check
+#' @export
+rba_ba_args_cons_chk = function(cons_i, what) {
+  if (any(!is.na(cons_i[["evl_arg"]]))) {
+    output = all(switch(what,
+                        "class" = class(cons_i[["evl_arg"]]) %in% cons_i[["class"]],
+                        "val" = all(cons_i[["evl_arg"]] %in% cons_i[["val"]]),
+                        "ran" = all(cons_i[["evl_arg"]] >= cons_i[["ran"]][[1]],
+                                    cons_i[["evl_arg"]] <= cons_i[["ran"]][[2]]),
+                        "len" = length(cons_i[["evl_arg"]]) == cons_i[["len"]],
+                        "min_len" = length(cons_i[["evl_arg"]]) >= cons_i[["min_len"]],
+                        "max_len" = length(cons_i[["evl_arg"]]) <= cons_i[["max_len"]],
+                        "min_val" = cons_i[["evl_arg"]] >= cons_i[["min_val"]],
+                        "max_val" = cons_i[["evl_arg"]] <= cons_i[["max_val"]],
+                        "regex" = grepl(pattern = cons_i[["regex"]],
+                                        x = cons_i[["evl_arg"]],
+                                        ignore.case = FALSE, perl = TRUE),
+                        stop("internal Error, constrian is not defiend: ", what)))
+    return(output)
+  } else {
+    return(TRUE)
+  }
+}
+
+#' Produce Error Message If an Element doesn't Follow a constrain
+#'
+#' In case of Constrain Error (i.e. a FALSE returned by
+#'   \code{\link{rba_ba_args_cons_chk}}), this function will produce a related error
+#'   message.
+#'
+#' @param cons_i element i from \code{\link{rba_ba_args}}'s cons argument.
+#' @param what what constrain produced the error? it should be one of the
+#'  possible cons types defined in \code{\link{rba_ba_args}}'s documentations.
+#'
+#' @return A character string.
+#'
+#' @family internal_arguments_check
+#' @export
+rba_ba_args_cons_msg = function(cons_i, what) {
+  switch(what,
+         "class" = sprintf("Invalid Argument; %s should be of class `%s`.\r\n\t(Your provided argument is \"%s\".)",
+                           cons_i[["arg"]],
+                           paste_2(cons_i[["class"]], last = " or ",
+                                   quote = "\""),
+                           class(cons_i[["evl_arg"]])),
+         "val" = sprintf("Invalid Argument; %s should be either `%s`.\r\n\t(Your provided argument is `%s`.)",
+                         cons_i[["arg"]],
+                         paste_2(cons_i[["val"]], last = " or ",
+                                 quote = "\""),
+                         cons_i[["evl_arg"]]),
+         "ran" = sprintf("Invalid Argument; %s should be `from %s to %s`.\r\n\t(Your provided argument is `%s`.)",
+                         cons_i[["arg"]],
+                         cons_i[["ran"]][[1]],
+                         cons_i[["ran"]][[2]],
+                         cons_i[["evl_arg"]]),
+         "len" = sprintf("Invalid Argument; %s should be of length `%s`.\r\n\t(Your provided argument's length is `%s`.)",
+                         cons_i[["arg"]],
+                         cons_i[["len"]],
+                         length(cons_i[["evl_arg"]])),
+         "min_len" = sprintf("Invalid Argument; %s should be of minimum length `%s`.\r\n\t(Your provided argument's length is `%s`.)",
+                             cons_i[["arg"]],
+                             cons_i[["min_len"]],
+                             length(cons_i[["evl_arg"]])),
+         "max_len" = sprintf("Invalid Argument: %s should be of maximum length `%s`.\r\n\t(Your provided argument's length is `%s`.)",
+                             cons_i[["arg"]],
+                             cons_i[["max_len"]],
+                             length(cons_i[["evl_arg"]])),
+         "min_val" = sprintf("Invalid Argument: %s should be equal to or greater than `%s`.\r\n\t(Your provided argument is `%s`.)",
+                             cons_i[["arg"]],
+                             cons_i[["min_val"]],
+                             cons_i[["evl_arg"]]),
+         "max_val" = sprintf("Invalid Argument: %s should be equal to or less than `%s`.\r\n\t(Your provided argument is `%s`.)",
+                             cons_i[["arg"]],
+                             cons_i[["max_val"]],
+                             cons_i[["evl_arg"]]),
+         "regex" = sprintf("Invalid Argument: %s do not have a valid format.\r\n\t(It should match regex pattern: %s ).",
+                           cons_i[["arg"]],
+                           cons_i[["regex"]])
+  )
+}
+
+#' A wrapper to Iterate Constrain Types on a cons' Element
+#'
+#' Iterates \code{\link{rba_ba_args_cons_chk}}) on every defined constrain
+#'   for element i of a cons element. and produce an error message if neccesary.
+#'
+#' @param cons_i element i from \code{\link{rba_ba_args}}'s cons argument.
+#'
+#' @return A character vector with containig the error message for failed
+#'   constrains, NA otherwise.
+#'
+#' @family internal_arguments_check
+#' @export
+rba_ba_args_cons_wrp = function(cons_i) {
+  all_cons = setdiff(names(cons_i), c("arg", "class", "evl_arg"))
+  cons_i_errs = lapply(all_cons,
+                       function(x){
+                         if (rba_ba_args_cons_chk(cons_i = cons_i, what = x)) {
+                           return(NA)
+                         } else {
+                           return(rba_ba_args_cons_msg(cons_i = cons_i, what = x))
+                         }
+                       })
+
+  cons_i_errs = unlist(cons_i_errs[which(!is.na(cons_i_errs))])
+  return(cons_i_errs)
+}
+
+
+#' Produce Error Message If an Element Doesn't Follow a Constrain
+#'
+#' In case of Condition Error (i.e. a TRUE returned by evaluating the
+#'  defined conditions in cond), this function will produce  a list with:
+#'  1- messages that could be used as error or warning, 2- an element named
+#'  "warn" that if FALSE, \code{\link{rba_ba_args}} will stop the code
+#'  execution with message as error, or if TRUE, issues a warning with that
+#'  message.
+#'
+#' @param cond_i element i from \code{\link{rba_ba_args}}'s cond argument.
+#'
+#' @return A list containing the messages and warn element to
+#'   determine the behaviour of \code{\link{rba_ba_args}}.
+#'
+#' @family A list containing the messages and warn element to
+#'   determine the behaviour of \code{\link{rba_ba_args}}.
+#'
+#' @export
+rba_ba_args_cond = function(cond_i) {
+  if (is.call(cond_i[[1]])) {
+    cond_i_1 = eval(cond_i[[1]], envir = parent.frame(3))
+  } else if (is.character(cond_i[[1]])) {
+    cond_i_1 = eval(parse(text = cond_i[[1]]), envir = parent.frame(3))
+  } else {
+    stop("Internal error, the first element in the condition sublist",
+         "should be either a charachter or quoted call!", call. = TRUE)
+  }
+  ## Create an Error message
+  if (isTRUE(cond_i_1)) {
+    err_obj = switch(as.character(length(cond_i)),
+                     "2" = {
+                       if (is.character(cond_i[[2]])) {
+                         list(msg = cond_i[[2]],
+                              warn = FALSE)
+                       } else {
+                         list(msg = sprintf("Argument's conditions are not satisfied; `%s` is TRUE.",
+                                            as.character(enquote(cond_i[[1]]))[[2]]),
+                              warn = isTRUE(cond_i[[2]]))
+                       }},
+                     "3" = list(msg = cond_i[[2]],
+                                warn = isTRUE(cond_i[[3]])),
+                     list(msg = sprintf("Argument's conditions are not satisfied; `%s` is TRUE.",
+                                        as.character(enquote(cond_i[[1]]))[[2]]),
+                          warn = FALSE)
+    )
+    return(err_obj)
+  } else {
+    return(NA)}
+}
+
 #' Internal user's Arguments Check
 #'
 #' This function provide a flexible, yet powerful and vigorous arguments check
-#'   mechanisms. It can check the many properties of input variables and also,
+#'   mechanisms. It can check many properties of input variables and also,
 #'   check if a condition holds TRUE.
 #'
 #' cons Should be a list, and each element of that list should correspond to one
 #'   input argument and be a lists with the following format:\cr
-#'   list(arg = argument name as character string, constrain name = constrain
+#'   list(arg = argument name as character string, constrain type = constrain
 #'   value)\cr
 #'   e.g. list(arg = "species", class = c("character", "numeric"))\cr\cr
 #'   cond should be a list. and each element of that list, should correspond to
 #'   one condition. the condition should be a quoted expression (or a character
 #'   string), which could be evaluated (or parsed and evaluated) to a logical
-#'   TRUE/FALSE object. if that expression is TRUE after the evaluation,
-#'   the code excution will be halted (or warning will be issued if
-#'   cond_warning = TURE), optionally with a pre-defined error message.\cr
-#'   cond's elements format:\cr
-#'   list(quote(conditional expression), "error message if exression is TRUE")
+#'   TRUE/FALSE object. If that expression is TRUE after the evaluation,
+#'   the code execution will be halted (or warning will be issued if
+#'   cond_warning = TURE or the last element of coniditon sub-list is
+#'   "warn = TRUE ), optionally with a pre-defined error message.\cr\cr
+#'   cond's elements possible formats: \enumerate{
+#'   \item list(quote(conditional expression))
+#'   \item list(quote(conditional expression), "error message if expression
+#'   is TRUE")
+#'   \item list(quote(conditional expression), "warning message if expression
+#'   is TRUE", warn = TRUE)
+#'   \item list(quote(conditional expression), warn = TRUE)
+#'   }
 #'
 #' @param cons Define Constrains for input arguments. Currently they may be:\cr
 #'   'class', 'val', 'ran', 'min_val', 'max_val', 'len', 'min_len', 'max_len'
+#'   and/or 'regex'.
 #' @param cond Expression which will be evaluated to TRUE or FALSE.
 #' @param cond_warning Should the function produce warning instead of stopping
-#'   code execution?
+#'   code execution? alternatively, you could include an element to
+#'   any condition sub-list as "warn = TRUE", to only produce warning message
+#'   for that condition only.
 #'
-#' @return NULL. if The arguments check failed, the code excution will be halted
-#'  or a warning will be issued.
+#' @return NULL. if The arguments check failed, the code execution will be
+#'  halted or a warning will be issued.
 #'
 #' @family internal_arguments_check
 #' @export
@@ -636,213 +889,105 @@ rba_ba_args = function(cons = NULL,
                        cond = NULL,
                        cond_warning = FALSE){
   ### 0 set diagnostics
-  diagnostics = get0("diagnostics",
-                     envir = parent.frame())
+  diagnostics = get0("diagnostics", envir = parent.frame())
   if (is.null(diagnostics) || is.na(diagnostics) || !is.logical(diagnostics)) {
     diagnostics = getOption("rba_diagnostics")
   }
+  ### 1.1 append extra arguments which occurs in most functions:
+  cons = rba_ba_args_opts(cons = cons, what = "cons")
+  cond = rba_ba_args_opts(cond = cond, what = "cond")
 
-  ### 1 append extra arguments which occurs in most functions:
-  ## all available options to the users
-  ext_cons = list(client_timeout = list(arg = "client_timeout",
-                                        class = "numeric",
-                                        len = 1,
-                                        min_val = 0.1),
-                  dir_name = list(arg = "dir_name",
-                                  class = "character",
-                                  len = 1),
-                  diagnostics = list(arg = "diagnostics",
-                                     class = "logical",
-                                     len = 1),
-                  max_retries = list(arg = "max_retries",
-                                     class = "numeric",
-                                     len = 1),
-                  progress_bar = list(arg = "progress_bar",
-                                      class = "logical",
-                                      len = 1),
-                  save_resp_file = list(arg = "save_resp_file",
-                                        class = c("logical",
-                                                  "character"),
-                                        len = 1),
-                  skip_error = list(arg = "skip_error",
-                                    class = "logical",
-                                    len = 1),
-                  verbose = list(arg = "verbose",
-                                 class = "logical",
-                                 len = 1),
-                  wait_time = list(arg = "wait_time",
-                                   class = "numeric",
-                                   len = 1,
-                                   min_val = 1))
-  ext_cond = list(dir_name = list(quote(grepl("[\\\\/:\"*?<>|]+", dir_name, perl = TRUE)),
-                                  "Invalid dir_name. Directory name cannot include these characters: \\/?%*:|<>"),
-                  save_resp_file = list(quote(!is.logical(save_resp_file) &&
-                                                !grepl("^[a-zA-z]:|^\\\\\\w|^/|\\w+\\.\\w+$",
-                                                       save_resp_file)),
-                                        "Invalid save_resp_file. You should set it to 'logical' or 'a valid file path'."))
-  rba_opts = getOption("rba_user_options")
-  stopifnot(setequal(rba_opts, names(ext_cons)))
-
-  ## only keep the provided options (e.g. extra arguments)
-  exist_opts = rba_opts[which(rba_opts %in% ls(envir = parent.frame(1)))]
-  ext_cond = unname(ext_cond[names(ext_cond) %in% exist_opts])
-  ext_cons = unname(ext_cons[exist_opts])
-  ## append
-  cons = append(ext_cons, cons)
-  cond = append(ext_cond, cond)
-  ### 2 Check arguments
+  ### 2 Check Arguments
   errors = c()
-  ## 2.1 check for errors
-  for (i in seq_along(cons)) {
-    # evaluate the i'th argument's constrains sub-list
-    cons_i = cons[[i]]
-    arg_name = cons_i[["arg"]]
+  ## 2.1 check if the provided object can be evaluated
+  cons = lapply(X = cons,
+                FUN = function(cons_i){
+                  cons_i[["evl_arg"]] = try(expr = get(x = cons_i[["arg"]],
+                                                       envir = parent.frame(3)),
+                                            silent = TRUE)
+                  return(cons_i)
+                })
+  cons_not_exist = vapply(X = cons,
+                          FUN = function(x) {
+                            is(x[["evl_arg"]], "try-error")
+                          },
+                          FUN.VALUE = logical(1))
 
-    arg = try(eval(parse(text = arg_name), envir = parent.frame(1)),
-              silent = TRUE)
-    if (methods::is(arg, "try-error")) {
-      ## try to prettify the error message
-      pretty_error = regmatches(arg,
-                                regexpr("(?<= : (\\\n  ){1}).*(?=\\\n)",
-                                        arg, perl = TRUE))
-      errors = append(errors,
-                      ifelse(length(pretty_error) == 0, # no regex match!
-                             arg,
-                             pretty_error))
-    } else {
-      # only check if the provided argument is not NA or Null
-      if (!all(is.na(arg)) & !all(is.null(arg))) {
-        # check class
-        if (utils::hasName(cons_i, "class") &&
-            !class(arg) %in% cons_i[["class"]]) {
-          errors = append(errors,
-                          sprintf("Invalid Argument; %s should be of class \"%s\".\r\n\t(Your provided argument is \"%s\".)",
-                                  arg_name,
-                                  paste0(cons_i[["class"]], collapse = " or "),
-                                  class(arg)))
-        } else {
-          ## only continue checking if the class is correct
-          # check for allowed values
-          if (utils::hasName(cons_i, "val") &&
-              !all(arg %in% cons_i[["val"]])) {
-            errors = append(errors,
-                            sprintf("Invalid Argument; %s should be either `%s`.\r\n\t(Your provided argument is `%s`.)",
-                                    arg_name,
-                                    paste0(cons_i[["val"]], collapse = " or "),
-                                    arg))
-          }
-          # check for allowed range
-          if (utils::hasName(cons_i, "ran") &&
-              !all(arg >= cons_i[["ran"]][[1]] &
-                   arg <= cons_i[["ran"]][[2]])) {
-            errors = append(errors,
-                            sprintf("Invalid Argument; %s should be `from %s to %s`.\r\n\t(Your provided argument is `%s`.)",
-                                    arg_name,
-                                    cons_i[["ran"]][[1]],
-                                    cons_i[["ran"]][[2]],
-                                    arg))
-          }
-          # check length
-          if (utils::hasName(cons_i, "len") &&
-              length(arg) != cons_i[["len"]]) {
-            errors = append(errors,
-                            sprintf("Invalid Argument; %s should be of length `%s`.\r\n\t(Your provided argument's length is `%s`.)",
-                                    arg_name,
-                                    cons_i[["len"]],
-                                    length(arg)))
-          }
-          # check minimum length
-          if (utils::hasName(cons_i, "min_len") &&
-              length(arg) < cons_i[["min_len"]]) {
-            errors = append(errors,
-                            sprintf("Invalid Argument; %s should be of minimum length `%s`.\r\n\t(Your provided argument's length is `%s`.)",
-                                    arg_name,
-                                    cons_i[["min_len"]],
-                                    length(arg)))
-          }
-          # check maximum length
-          if (utils::hasName(cons_i, "max_len") &&
-              length(arg) > cons_i[["max_len"]]) {
-            errors = append(errors,
-                            sprintf("Invalid Argument: %s should be of maximum length `%s`.\r\n\t(Your provided argument's length is `%s`.)",
-                                    arg_name,
-                                    cons_i[["max_len"]],
-                                    length(arg)))
-          }
-          # check minimum value
-          if (utils::hasName(cons_i, "min_val")
-              && arg < cons_i[["min_val"]]) {
-            errors = append(errors,
-                            sprintf("Invalid Argument: %s should be equal to or greater than `%s`.\r\n\t(Your provided argument is `%s`.)",
-                                    arg_name,
-                                    cons_i[["min_val"]],
-                                    arg))
-          }
-          # check maximum value
-          if (utils::hasName(cons_i, "max_val")
-              && arg > cons_i[["max_val"]]) {
-            errors = append(errors,
-                            sprintf("Invalid Argument: %s should be equal to or less than `%s`.\r\n\t(Your provided argument is `%s`.)",
-                                    arg_name,
-                                    cons_i[["max_val"]],
-                                    arg))
-          }
-        } # end of if (utils::hasName(cons_i, "class") &&...
-      } # end of if (!all(is.na(arg)) & !all(is.null(arg)))
-    } #end of if (class(arg) == "try-error")
-  } # end of for (i in seq_along(cons))
-  ## 2.2 take actions for the errors
+  if (any(cons_not_exist)) { # some object didn't exist!
+    #generate errors
+    errors = append(errors,
+                    vapply(X = cons[cons_not_exist],
+                           FUN = function(x){
+                             regmatches(x, regexpr("(?<= : (\\\n  ){1}).*(?=\\\n)",
+                                                   x, perl = TRUE))},
+                           FUN.VALUE = character(1)
+                    ))
+    #remove from cons
+    cons = cons[!cons_not_exist]
+  }
+  ## 2.2 check class
+  class_errs = lapply(cons,
+                      function(x) {
+                        if (rba_ba_args_cons_chk(cons_i = x, what = "class")) {
+                          return(NA)
+                        } else {
+                          return(rba_ba_args_cons_msg(cons_i = x,
+                                                      what = "class"))
+                        }
+                      })
+
+  if (any(!is.na(class_errs))) {
+    errors = append(errors, unlist(class_errs[!is.na(class_errs)]))
+    cons = cons[is.na(class_errs)] # remove elements with wrong class
+  }
+  ## 2.3 check other constrains if their class is correct
+  other_errs = lapply(cons, rba_ba_args_cons_wrp)
+  if (any(!is.na(other_errs))) {errors = append(errors, unlist(other_errs))}
+  ## 2.4 Take actions for the errors
   if (length(errors) == 1) {
     stop(errors, call. = diagnostics)
   } else if (length(errors) > 1) {
     error_message = paste0("\r\n", seq_along(errors), "- ", errors)
-    stop(sprintf("The following `%s Errors` was raised during your provided argument's check:",
+    stop(sprintf("The following `%s Errors` was raised during your provided arguments check:",
                  length(errors)),
          error_message,
          call. = diagnostics)
   }
 
-  ### Check relationship between arguments
-  if (!all(is.null(cond))) {
-    cond_errors = c()
-    for (i in seq_along(cond)) {
-      cond_i = cond[[i]]
-      # 3.1.1 evaluate the expression
-      if (is.call(cond_i[[1]])) {
-        cond_i_1 = eval(cond_i[[1]], envir = parent.frame(1))
-      } else if (is.character(cond_i[[1]])) {
-        cond_i_1 = eval(parse(text = cond_i[[1]]), envir = parent.frame(1))
+  ### 3 Check relationship between arguments
+  if (!is.null(cond)) {
+    ## 3.1 check if all conditions are satisfied
+    cond_err = lapply(X = cond, rba_ba_args_cond)
+    cond_err = cond_err[!is.na(cond_err)]
+    if (length(cond_err) > 0) {
+      ## 3.2 Generate error message(s) if any
+      cond_msg = NULL
+      if (length(cond_err) == 1) {
+        cond_msg = cond_err[[1]][["msg"]]
+      } else if (length(cond_err) > 1) {
+        cond_msg = paste0("\r\n", seq_along(cond_err), "- ",
+                          vapply(X = cond_err,
+                                 FUN = function(x){
+                                   x[["msg"]]
+                                 },
+                                 FUN.VALUE = character(1)),
+                          collapse = "")
+        cond_msg = sprintf("The following `%s Conditional issues` were found during your provided arguments check:%s",
+                           length(cond_msg),
+                           cond_msg)
+      }
+      ## 3.3 Take actions for the errors
+      if (cond_warning == TRUE || all(vapply(X = cond_err,
+                                             FUN = function(x){
+                                               x[["warn"]]
+                                             },
+                                             FUN.VALUE = logical(1)))) {
+        warning(cond_msg, call. = diagnostics)
       } else {
-        stop("Internal error, the first element in the condition sublist",
-             "should be either a charachter or quoted call!", call. = TRUE)
-      }
-      # 3.1.2 check if the expression is TRUE
-      if (isTRUE(cond_i_1)) {
-        #add the error message if existed
-        cond_i_error = ifelse(length(cond_i) > 1,
-                              yes = cond_i[[2]],
-                              no = sprintf("Argument's conditions are not satisfied; `%s` is TRUE.",
-                                           as.character(cond_i[[1]])))
-        cond_errors = append(cond_errors, cond_i_error)
-      }
-    } #end of for (i in seq_along(cond))
-
-    # 3.2 produce the message
-    if (length(cond_errors) > 0) {
-      if (length(cond_errors) == 1) {
-        cond_message = cond_errors
-      } else if (length(cond_errors) > 1) {
-        cond_message = paste0("\r\n", seq_along(cond_errors), "- ", cond_errors, collapse = "")
-        cond_message = sprintf("The following `%s Conditional Errors` was raised during your provided argument's check:%s",
-                               length(cond_message),
-                               cond_message)
-      }
-      # 3.3 stop or warn!
-      if (isTRUE(cond_warning)) {
-        warning(cond_message, call. = diagnostics)
-      } else {stop(cond_message, call. = diagnostics)}
+        stop(cond_msg, call. = diagnostics)}
     }
-  } # end of if (!all(is.null(cond)))
+  }
+
   invisible()
 }
 
