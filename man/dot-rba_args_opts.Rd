@@ -7,7 +7,9 @@
 .rba_args_opts(cons = NULL, cond = NULL, what)
 }
 \arguments{
-\item{cond}{Constrains to be evaluated.}
+\item{cons}{Constrains to be evaluated.}
+
+\item{cond}{Conditions to be evaluated.}
 
 \item{what}{what to build? cond or cons?}
 }

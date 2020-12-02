@@ -621,8 +621,8 @@
 #'   every rbioapi options arguments in argument checking segment of each
 #'   exported function.
 #'
+#' @param cons Constrains to be evaluated.
 #' @param cond Conditions to be evaluated.
-#' @param cond Constrains to be evaluated.
 #' @param what what to build? cond or cons?
 #'
 #' @return NULL. If The arguments check failed, the code execution will be
@@ -668,8 +668,7 @@
   } else if (what == "cond") {
     ext_cond = list(dir_name = list(quote(grepl("[\\\\/:\"*?<>|]+", dir_name, perl = TRUE)),
                                     "Invalid dir_name. Directory name cannot include these characters: \\/?%*:|<>"),
-                    save_resp_file = list(quote(!xor(isTRUE(save_resp_file),
-                                                     isFALSE(save_resp_file)) &&
+                    save_resp_file = list(quote(!is.logical(save_resp_file) &&
                                                   !grepl("^[a-zA-z]:|^\\\\\\w|^/|\\w+\\.\\w+$",
                                                          save_resp_file)),
                                           "Invalid save_resp_file. You should set it to 'logical' or 'a valid file path'."))
@@ -917,7 +916,7 @@
                 })
   cons_not_exist = vapply(X = cons,
                           FUN = function(x) {
-                            is(x[["evl_arg"]], "try-error")
+                            methods::is(x[["evl_arg"]], "try-error")
                           },
                           FUN.VALUE = logical(1))
 
@@ -1025,7 +1024,7 @@
 #' @family internal_response_parser
 #' @export
 .rba_response_parser = function(response, parsers) {
-  if (!is.vector(parsers)) { parser = list(parsers)}
+  if (!is.vector(parsers)) { parsers = list(parsers)}
   parsers = sapply(X = parsers,
                    FUN = function(parser){
                      #create a parser if not provided
@@ -1068,12 +1067,12 @@
                                                                     encoding = "UTF-8"))
                                        },
                                        "text->df" = function(x) {
-                                         read.table(text = httr::content(x,
-                                                                         type = "text/plain",
-                                                                         as = "text",
-                                                                         encoding = "UTF-8"),
-                                                    header = FALSE,
-                                                    stringsAsFactors = FALSE)
+                                         utils::read.table(text = httr::content(x,
+                                                                                type = "text/plain",
+                                                                                as = "text",
+                                                                                encoding = "UTF-8"),
+                                                           header = FALSE,
+                                                           stringsAsFactors = FALSE)
                                        },
                                        "tsv->df" = function(x) {
                                          as.character(httr::content(x,
