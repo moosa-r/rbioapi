@@ -102,21 +102,19 @@
                                                  httr::timeout(getOption("rba_client_timeout")),
                                                  if (diagnostics) httr::verbose()
   )))
-  net_status = try(eval(test_call),
-                   silent = TRUE)
+  net_status = try(eval(test_call), silent = TRUE)
   retry_count = 0
 
-  while (net_status != 200 & retry_count < retry_max) {
+  while (net_status != 200 && retry_count < retry_max) {
     retry_count = retry_count + 1
     if (isTRUE(verbose)) {
-      message(sprintf("No internet connection, waiting for %s seconds and retrying (retry count:  %s/%s).",
+      message(sprintf("No internet connection, waiting for %s seconds and retrying (retry count: %s/%s).",
                       wait_time,
                       retry_count,
                       retry_max))
     }
     Sys.sleep(wait_time)
-    net_status = try(eval(test_call),
-                     silent = TRUE)
+    net_status = try(eval(test_call), silent = TRUE)
   } #end of while
 
   if (net_status == 200) {
@@ -154,9 +152,8 @@
     if (test_result == 200) {
       return("\U2705 The Server is Respoding.")
     } else {
-      return(paste("\U274C",
-                   .rba_http_status(test_result,
-                                    verbose = FALSE)))
+      return(paste("\U274C", .rba_http_status(test_result,
+                                              verbose = FALSE)))
     }
   } else {
     return(paste("\U274C", test_result))
@@ -204,7 +201,6 @@
                                          "207" = "Multi-Status",
                                          "208" = "Already Reported",
                                          "226" = "IM Used")),
-
                 "3" = list(class = "Redirection",
                            deff = switch(http_status,
                                          "300" = "Multiple Choices",
@@ -304,7 +300,8 @@
                    FUN = function(x) {
                      if (length(x[[2]]) > 1) {
                        warning("Internal Query Builder:\r\n",
-                               x[[1]], " has more than one element. Only the first element will be used.",
+                               x[[1]],
+                               " has more than one element. Only the first element will be used.",
                                call. = FALSE)
                      }
                      if (isTRUE(x[[2]][[1]])) {
@@ -313,7 +310,8 @@
                        return(FALSE)}
                      else {
                        warning("Internal Query Builder:\r\n The evaluation result of ",
-                               x[[1]], " is not TRUE or FALSE, thus skipping it.",
+                               x[[1]],
+                               " is not TRUE or FALSE, thus skipping it.",
                                call. = FALSE)
                        return(FALSE)}
                    },
@@ -500,7 +498,7 @@
   response = try(eval(input_call, envir = parent.frame(n = 2)),
                  silent = !diagnostics)
   ## 2 check the internet connection & 5xx http status
-  if (!methods::is(response, "response") ||
+  if (!inherits(response, "response") ||
       substr(response$status_code, 1, 1) == "5") {
     ## 2.1 there is an internet connection or server issue
     # wait for the internet connection
@@ -597,7 +595,7 @@
     parser_input = input_call$parser
   }
 
-  if (methods::is(response, "response") && !is.null(parser_input)) {
+  if (inherits(response, "response") && !is.null(parser_input)) {
     final_output = .rba_response_parser(response, parser_input)
   } else {
     final_output = response
@@ -842,9 +840,11 @@
                        }},
                      "3" = list(msg = cond_i[[2]],
                                 warn = isTRUE(cond_i[[3]])),
-                     list(msg = sprintf("Argument's conditions are not satisfied; `%s` is TRUE.",
-                                        as.character(enquote(cond_i[[1]]))[[2]]),
-                          warn = FALSE)
+                     "1" = list(msg = sprintf("Argument's conditions are not satisfied; `%s` is TRUE.",
+                                              as.character(enquote(cond_i[[1]]))[[2]]),
+                                warn = FALSE),
+                     stop("Internal error, invalid condition: ",
+                          enquote(cond_i[[1]])[[2]], call. = FALSE)
     )
     return(err_obj)
   } else {
@@ -916,7 +916,7 @@
                 })
   cons_not_exist = vapply(X = cons,
                           FUN = function(x) {
-                            methods::is(x[["evl_arg"]], "try-error")
+                            inherits(x[["evl_arg"]], "try-error")
                           },
                           FUN.VALUE = logical(1))
 
@@ -1133,19 +1133,19 @@
     error_message = tryCatch({
       sprintf("%s server returned \"%s\".\r\n  With this error message:\r\n  \"%s\"",
               .rba_stg(db, "name"),
-              .rba_http_status(response$status_code,
+              .rba_http_status(http_status = response$status_code,
                                verbose = FALSE),
-              .rba_response_parser(response,
-                                   list(.rba_stg(db, "err_prs"),
-                                        .rba_stg(db,"err_prs2")))
+              .rba_response_parser(response = response,
+                                   parsers = list(.rba_stg(db, "err_prs"),
+                                                  .rba_stg(db,"err_prs2")))
       )
     }, error = function(e) {
-      .rba_http_status(response$status_code,
+      .rba_http_status(http_status = response$status_code,
                        verbose = verbose)
     })
   } else {
     ## The API server returns only status code with no error string
-    error_message = .rba_http_status(response$status_code,
+    error_message = .rba_http_status(http_status = response$status_code,
                                      verbose = verbose)
   }
   return(error_message)
@@ -1177,7 +1177,9 @@
 #' @export
 .msg = function(fmt, ..., sprintf = TRUE, cond = "verbose", sep = "", collapse = NULL) {
   if (isTRUE(get0(cond, envir = parent.frame(1), ifnotfound = FALSE))) {
-    message(ifelse(isTRUE(sprintf) && is.character(fmt) && grepl("%s", fmt),
+    message(ifelse(isTRUE(sprintf) &&
+                     is.character(fmt) &&
+                     grepl("%s", fmt, fixed = TRUE),
                    yes = sprintf(fmt, ...),
                    no = paste(fmt, ..., sep = sep, collapse = collapse)),
             appendLF = TRUE)
@@ -1200,7 +1202,8 @@
 #'
 #' @family internal_misc
 #' @export
-.paste2 = function(..., last = " and ", sep = ", ",
+.paste2 = function(...,
+                   last = " and ", sep = ", ",
                    quote = NA, quote_all = NA) {
   input = c(...)
   len = length(input)
@@ -1251,9 +1254,10 @@
 .rba_file = function(file,
                      save_to = NA,
                      dir_name = NA) {
-  if (is.na(save_to)) {save_to = get0(x = "save_resp_file",
-                                      ifnotfound = FALSE,
-                                      envir = parent.frame(1))}
+  if (is.na(save_to)) {
+    save_to = get0(x = "save_resp_file",
+                   ifnotfound = FALSE,
+                   envir = parent.frame(1))}
   if (!isFALSE(save_to)) {
     ## 1 file path will be generated unless save_to == FALSE
     # set values
@@ -1299,7 +1303,7 @@
         } else {
           #2a.2.1b it's directory
           overwrite = FALSE
-          ## append the default file name to the direcotry path
+          ## append the default file name to the directory path
           file_ext = def_file_ext
           file_name = def_file_name
           save_to = file.path(sub("/$", "", save_to),
@@ -1378,7 +1382,7 @@
   if (length(ext_args) > 0) {
     # did the user provided non valid arguments?
     non_valid = setdiff(names(ext_args), rba_opts)
-    if (is.null(names(ext_args)) | any(non_valid == "")) {
+    if (is.null(names(ext_args)) || any(non_valid == "")) {
       warning("You provided unnamed extra arguments, thus were ignored.",
               call. = FALSE)
       non_valid = non_valid[which(non_valid != "")]

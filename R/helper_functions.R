@@ -106,9 +106,9 @@ rba_connection_test = function(diagnostics = FALSE) {
 #'
 #' @examples
 #' rba_options()
-#' rba_options(verbose = FALSE)
-#' rba_options(save_resp_file = TRUE)
-#' rba_options(diagnostics = TRUE, progress_bar = TRUE)
+#' \dontrun{rba_options(verbose = FALSE)}
+#' \dontrun{rba_options(save_resp_file = TRUE)}
+#' \dontrun{rba_options(diagnostics = TRUE, progress_bar = TRUE)}
 #' @family "Helper functions"
 #' @keywords Helper
 #' @export
@@ -196,7 +196,7 @@ rba_citation = function(...) {
     input = unique(input)
     input[input == "getwd()"] = getwd()
     is_dir = grepl("^[a-zA-z]:|^\\\\\\w|^/",
-                   input, perl = TRUE) & !grepl("\\.\\w+$",
+                   input, perl = TRUE) && !grepl("\\.\\w+$",
                                                 input, perl = TRUE)
     if (sum(is_dir) != 0) {
       read_func = function(x) {
