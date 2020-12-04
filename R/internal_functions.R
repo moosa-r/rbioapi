@@ -520,7 +520,7 @@
   } # end of step 2
 
   ## 3 Decide what to return
-  if (!methods::is(response, "response")) {
+  if (!inherits(response, "response")) {
     ## 3.1 errors un-related to server's response
     error_message = response
     if (isTRUE(skip_error)) {
@@ -528,7 +528,7 @@
     } else {
       stop(error_message, call. = diagnostics)
     }
-  } else if (as.character(response$status_code) != "200") {
+  } else if (substr(response$status_code, 1, 1) != "2") {
     ## 3.2 API call was not successful
     error_message = .rba_error_parser(response = response, verbose = verbose)
     if (isTRUE(skip_error)) {
