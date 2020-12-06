@@ -18,9 +18,8 @@
 .rba_stg = function(...){
   arg = c(...)
   #possible arguments
-  arg_1 = c("db", "enrichr", "ensembl", "reactome", "string", "uniprot", "options", "citations")
-  output = switch(match.arg(arg[[1]], arg_1),
-                  db = c("enrichr", "ensembl", "reactome", "string", "uniprot"),
+  output = switch(arg[[1]],
+                  db = c("enrichr", "ensembl", "mieaa", "reactome", "string", "uniprot"),
                   enrichr = switch(arg[[2]],
                                    name = "Enrichr",
                                    url = "http://maayanlab.cloud",
@@ -33,6 +32,14 @@
                                    err = c("400","404"),
                                    err_prs = "json->list_simp",
                                    err_prs2 = function(x) {x[["error"]][[1]]}),
+                  mieaa = switch(arg[[2]],
+                                 name = "MiEAA",
+                                 url = "https://ccb-compute2.cs.uni-saarland.de",
+                                 pth = "mieaa2/api/v1/",
+                                 ptn = "^(https*://)*ccb-compute2\\.cs\\.uni-saarland\\.de/mieaa2/",
+                                 err = c("400", "404", "429"),
+                                 err_prs = "json->chr",
+                                 err_prs2 = function(x) {x}),
                   reactome = switch(arg[[2]],
                                     name = "Reactome",
                                     url = "https://reactome.org",

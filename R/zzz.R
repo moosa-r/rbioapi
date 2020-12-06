@@ -31,7 +31,8 @@
                         "Enrichr: Aug 04 2020\r\n",
                         "Ensembl: Aug 13 2020\r\n",
                         "Reactome: Aug 26 2020\r\n",
-                        "UniProt: Sep 29 2020")
+                        "UniProt: Sep 29 2020",
+                        "miEAA: Dec 6 2020")
   invisible()
 }
 
