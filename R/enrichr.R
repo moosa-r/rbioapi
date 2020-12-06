@@ -244,7 +244,7 @@ rba_enrichr_view_list = function(user_list_id,
 #'   }
 #'
 #' @export
-rba_enrichr_enrich_internal = function(user_list_id,
+.rba_enrichr_enrich_internal = function(user_list_id,
                                        gene_set_library,
                                        save_name,
                                        ...){
@@ -385,7 +385,7 @@ rba_enrichr_enrich = function(user_list_id,
   if (run_mode == "single") {
     .msg("Enriching gene-list %s against Enrichr library: %s.",
          user_list_id, gene_set_library)
-    final_output = rba_enrichr_enrich_internal(user_list_id = user_list_id,
+    final_output = .rba_enrichr_enrich_internal(user_list_id = user_list_id,
                                                gene_set_library = gene_set_library,
                                                save_name = sprintf("enrichr_%s_%s.json",
                                                                    user_list_id,
@@ -409,7 +409,7 @@ rba_enrichr_enrich = function(user_list_id,
     }
     final_output = lapply(gene_set_library,
                           function(x){
-                            lib_enrich_res = rba_enrichr_enrich_internal(user_list_id = user_list_id,
+                            lib_enrich_res = .rba_enrichr_enrich_internal(user_list_id = user_list_id,
                                                                          gene_set_library = x,
                                                                          save_name = sprintf("enrichr_%s_%s.json",
                                                                                              user_list_id,
