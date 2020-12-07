@@ -61,8 +61,7 @@ rba_string_map_ids = function(ids,
   .msg("Mapping %s Input Identifiers to STRING Identifiers.", length(ids))
 
   ## Build POST API Request's body
-  call_body = .rba_query(init = list("format" = "text",
-                                     "identifiers" = paste(unique(ids),
+  call_body = .rba_query(init = list("identifiers" = paste(unique(ids),
                                                            collapse = "%0d"),
                                      "caller_identity" = getOption("rba_user_agent")),
                          list("species",
@@ -226,8 +225,7 @@ rba_string_network_image = function(ids,
   .msg("Retrieving STRING network image of %s Input Identifiers.", length(ids))
 
   ## Build POST API Request's body
-  call_body = .rba_query(init = list("format" = "text",
-                                     "identifiers" = paste(unique(ids),
+  call_body = .rba_query(init = list("identifiers" = paste(unique(ids),
                                                            collapse = "%0d"),
                                      "caller_identity" = getOption("rba_user_agent")),
                          list("species",
@@ -386,8 +384,7 @@ rba_string_interactions_network = function(ids,
        length(ids))
 
   ## Build POST API Request's body
-  call_body = .rba_query(init = list("format" = "text",
-                                     "identifiers" = paste(unique(ids),
+  call_body = .rba_query(init = list("identifiers" = paste(unique(ids),
                                                            collapse = "%0d"),
                                      "caller_identity" = getOption("rba_user_agent")),
                          list("species",
@@ -512,8 +509,7 @@ rba_string_interaction_partners = function(ids,
        length(ids))
 
   ## Build POST API Request's body
-  call_body = .rba_query(init = list("format" = "text",
-                                     "identifiers" = paste(unique(ids),
+  call_body = .rba_query(init = list("identifiers" = paste(unique(ids),
                                                            collapse = "%0d"),
                                      "caller_identity" = getOption("rba_user_agent")),
                          list("species",
@@ -612,8 +608,7 @@ rba_string_homology_intra = function(ids,
        length(ids))
 
   ## Build POST API Request's body
-  call_body = .rba_query(init = list("format" = "text",
-                                     "identifiers" = paste(unique(ids),
+  call_body = .rba_query(init = list("identifiers" = paste(unique(ids),
                                                            collapse = "%0d"),
                                      "caller_identity" = getOption("rba_user_agent")),
                          list("species",
@@ -711,8 +706,7 @@ rba_string_homology_inter = function(ids,
        length(ids))
 
   ## Build POST API Request's body
-  call_body = .rba_query(init = list("format" = "text",
-                                     "identifiers" = paste(unique(ids),
+  call_body = .rba_query(init = list("identifiers" = paste(unique(ids),
                                                            collapse = "%0d"),
                                      "caller_identity" = getOption("rba_user_agent")),
                          list("species",
@@ -812,8 +806,7 @@ rba_string_enrichment = function(ids,
        length(ids))
 
   ## Build POST API Request's body
-  call_body = .rba_query(init = list("format" = "text",
-                                     "identifiers" = paste(unique(ids),
+  call_body = .rba_query(init = list("identifiers" = paste(unique(ids),
                                                            collapse = "%0d"),
                                      "caller_identity" = getOption("rba_user_agent")),
                          list("species",
@@ -913,8 +906,7 @@ rba_string_functional_annotation = function(ids,
        length(ids))
 
   ## Build POST API Request's body
-  call_body = .rba_query(init = list("format" = "text",
-                                     "identifiers" = paste(unique(ids),
+  call_body = .rba_query(init = list("identifiers" = paste(unique(ids),
                                                            collapse = "%0d"),
                                      "caller_identity" = getOption("rba_user_agent")),
                          list("species",
@@ -1006,8 +998,7 @@ rba_string_ppi_enrichment = function(ids,
        length(ids))
 
   ## Build POST API Request's body
-  call_body = .rba_query(init = list("format" = "text",
-                                     "identifiers" = paste(unique(ids),
+  call_body = .rba_query(init = list("identifiers" = paste(unique(ids),
                                                            collapse = "%0d"),
                                      "caller_identity" = getOption("rba_user_agent")),
                          list("species",

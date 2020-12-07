@@ -61,7 +61,10 @@
                                   url = "https://version-11-0.string-db.org",
                                   pth = "api/",
                                   ptn = "^(http.?://).*string-db\\.org/api/",
-                                  err_ptn = "^4\\d\\d$"),
+                                  err_ptn = "^4\\d\\d$",
+                                  err_prs = list("json->list_simp",
+                                                 function(x) {paste(x, collapse = "\r\n")})
+                                  ),
                   uniprot = switch(arg[[2]],
                                    name = "UniProt",
                                    url = "https://www.ebi.ac.uk",
