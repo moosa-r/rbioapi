@@ -185,7 +185,7 @@ rba_string_network_image = function(ids,
                                     hide_structure_pics = FALSE,
                                     ...) {
   ## Load Global Options
-  .rba_ext_args(...)
+  .rba_ext_args(..., ignore_save = TRUE)
   ## Check User-input Arguments
   .rba_args(cons = list(list(arg = "ids",
                              class = c("character", "numeric")),

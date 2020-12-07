@@ -633,7 +633,7 @@ rba_reactome_exporter_diagram = function(event_id,
                                          ehld = FALSE,
                                          ...) {
   ## Load Global Options
-  .rba_ext_args(...)
+  .rba_ext_args(..., ignore_save = TRUE)
   ## Check User-input Arguments
   .rba_args(cons = list(list(arg = "event_id",
                              class = "character"),
@@ -810,7 +810,7 @@ rba_reactome_exporter_event = function(event_id,
                                        save_to = NA,
                                        ...) {
   ## Load Global Options
-  .rba_ext_args(...)
+  .rba_ext_args(..., ignore_save = TRUE)
   ## Check User-input Arguments
   .rba_args(cons = list(list(arg = "event_id",
                              class = "character"),
@@ -925,7 +925,7 @@ rba_reactome_exporter_overview = function(species,
                                           ...) {
 
   ## Load Global Options
-  .rba_ext_args(...)
+  .rba_ext_args(..., ignore_save = TRUE)
   ## Check User-input Arguments
   .rba_args(cons = list(list(arg = "species",
                              class = c("character",
@@ -1123,7 +1123,7 @@ rba_reactome_exporter_reaction = function(event_id,
                                           margin = 15,
                                           ...) {
   ## Load Global Options
-  .rba_ext_args(...)
+  .rba_ext_args(..., ignore_save = TRUE)
   ## Check User-input Arguments
   .rba_args(cons = list(list(arg = "event_id",
                              class = "character"),

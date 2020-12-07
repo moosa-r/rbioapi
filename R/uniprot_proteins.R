@@ -964,7 +964,7 @@ rba_uniprot_variation_search = function(accession = NA,
                                         save_peff = FALSE,
                                         ...) {
   ## Load Global Options
-  .rba_ext_args(...)
+  .rba_ext_args(..., ignore_save = TRUE)
   ## Check User-input Arguments
   .rba_args(cons = list(list(arg = "accession",
                              class = "character",
@@ -1153,7 +1153,7 @@ rba_uniprot_variation = function(id,
                                  save_peff = FALSE,
                                  ...) {
   ## Load Global Options
-  .rba_ext_args(...)
+  .rba_ext_args(..., ignore_save = TRUE)
   ## Check User-input Arguments
   .rba_args(cons = list(list(arg = "id",
                              class = "character"),

@@ -4,7 +4,7 @@
 \alias{.rba_ext_args}
 \title{Temporary Change rbioapi Options During a Function Call}
 \usage{
-.rba_ext_args(...)
+.rba_ext_args(..., ignore_save = FALSE)
 }
 \arguments{
 \item{...}{Extra arguments that were provided in the endpoints functions.}

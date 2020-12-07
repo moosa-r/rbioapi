@@ -1390,24 +1390,34 @@
 #'
 #' @family internal_options
 #' @export
-.rba_ext_args = function(...) {
+.rba_ext_args = function(..., ignore_save = FALSE) {
   ext_args = list(...)
   rba_opts = getOption("rba_user_options") # available options for the end-users
-  if (length(ext_args) > 0) {
-    # did the user provided non valid arguments?
-    non_valid = setdiff(names(ext_args), rba_opts)
-    if (is.null(names(ext_args)) || any(non_valid == "")) {
-      warning("You provided unnamed extra arguments, thus were ignored.",
-              call. = FALSE)
-      non_valid = non_valid[which(non_valid != "")]
+  if (length(ext_args) > 0) { #user provided something in ...
+    unnamed_args = which(names(ext_args) == "" | is.na(names(ext_args)))
+    invalid_args = setdiff(names(ext_args[-unnamed_args]), rba_opts)
+    if (length(c(unnamed_args, invalid_args)) > 0) {
+      warning(sprintf("invalid rbioapi options were ignored:%s%s",
+                      ifelse(length(unnamed_args) != 0,
+                             yes = sprintf("\r\n- %s unnamed argument(s).",
+                                           length(unnamed_args)),
+                             no = ""),
+                      ifelse(length(invalid_args) != 0,
+                             yes = sprintf("\r\n- %s",
+                                           .paste2(invalid_args,
+                                                   last = " and ",
+                                                   quote = "\"")),
+                             no = "")
+      ), call. = FALSE)
+      ext_args = ext_args[-c(unnamed_args, which(names(ext_args) %in% invalid_args))]
     }
-    if (length(non_valid) > 0) {
-      warning(sprintf("`%s` are not valid rbioapi options, thus were ignored.\r\n",
-                      .paste2(non_valid)),
+    if (isTRUE(ignore_save) || utils::hasName(ext_args, "save_resp_file")) {
+      warning("This function has a dedicted file-savig argument, 'save_resp_file' option was ignored.",
               call. = FALSE)
+      rba_opts = rba_opts[names(rba_opts) != "rba_save_resp_file"]
     }
-  }
-  # create the objects in the calling function's environment
+  } #end of if (length(ext_args) > 0)
+  # create option variables
   for (opt in rba_opts) {
     assign(x = opt,
            value = ifelse(utils::hasName(ext_args, opt),
@@ -1415,5 +1425,6 @@
                           no = getOption(paste0("rba_", opt))),
            envir = parent.frame(1))
   }
+
   invisible()
 }

@@ -418,7 +418,7 @@ rba_reactome_analysis_pdf = function(token,
                                      fireworks_profile = "Barium Lithium",
                                      ...) {
   ## Load Global Options
-  .rba_ext_args(...)
+  .rba_ext_args(..., ignore_save = TRUE)
   ## Check User-input Arguments
   .rba_args(cons = list(list(arg = "token",
                              class = "character"),
@@ -578,7 +578,7 @@ rba_reactome_analysis_download = function(token,
                                           resource = "TOTAL",
                                           ...) {
   ## Load Global Options
-  .rba_ext_args(...)
+  .rba_ext_args(..., ignore_save = TRUE)
   ## Check User-input Arguments
   .rba_args(cons = list(list(arg = "token",
                              class = "character"),
