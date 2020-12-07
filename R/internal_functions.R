@@ -24,22 +24,25 @@
                                    name = "Enrichr",
                                    url = "http://maayanlab.cloud",
                                    pth = "Enrichr/",
-                                   ptn = "^(http.?://).*maayanlab\\.cloud/Enrichr/"),
+                                   ptn = "^(https?://)?(www\\.)?maayanlab\\.cloud/Enrichr/",
+                                   err_ptn = "^$"
+                                   ),
                   ensembl = switch(arg[[2]],
                                    name = "Ensembl",
                                    url = "https://rest.ensembl.org",
-                                   ptn = "^(https*://)*rest\\.ensembl\\.org/",
-                                   err = c("400","404"),
-                                   err_prs = "json->list_simp",
-                                   err_prs2 = function(x) {x[["error"]][[1]]}),
+                                   ptn = "^(https?://)?(www\\.)?rest\\.ensembl\\.org/",
+                                   err_ptn = "^4\\d\\d$",
+                                   err_prs = list("json->list_simp",
+                                                  function(x) {x[["error"]][[1]]})
+                                   ),
                   mieaa = switch(arg[[2]],
                                  name = "MiEAA",
                                  url = "https://ccb-compute2.cs.uni-saarland.de",
                                  pth = "mieaa2/api/v1/",
-                                 ptn = "^(https*://)*ccb-compute2\\.cs\\.uni-saarland\\.de/mieaa2/",
-                                 err = c("400", "404", "429"),
-                                 err_prs = "json->chr",
-                                 err_prs2 = function(x) {x}),
+                                 ptn = "^(https?://)?(www\\.)?ccb-compute2\\.cs\\.uni-saarland\\.de/mieaa2/",
+                                 err_ptn = "^4\\d\\d$",
+                                 err_prs = list("json->chr")
+                                 ),
                   reactome = switch(arg[[2]],
                                     name = "Reactome",
                                     url = "https://reactome.org",
@@ -48,24 +51,26 @@
                                                              "content")),
                                                  analysis = "AnalysisService/",
                                                  content = "ContentService/"),
-                                    ptn = "^(http.?://).*reactome\\.org/(?:AnalysisService|ContentService)/",
-                                    err = "404",
-                                    err_prs = "json->list_simp",
-                                    err_prs2 = function(x) {x[["messages"]][[1]]},
-                  ),
+                                    ptn = "^(https?://)?(www\\.)?reactome\\.org/(?:AnalysisService|ContentService)/",
+                                    err_ptn = "^4\\d\\d$",
+                                    err_prs = list("json->list_simp",
+                                                   function(x) {x[["messages"]][[1]]})
+                                    ),
                   string = switch(arg[[2]],
                                   name = "STRING",
                                   url = "https://version-11-0.string-db.org",
                                   pth = "api/",
-                                  ptn = "^(http.?://).*string-db\\.org/api/"),
+                                  ptn = "^(http.?://).*string-db\\.org/api/",
+                                  err_ptn = "^4\\d\\d$"),
                   uniprot = switch(arg[[2]],
                                    name = "UniProt",
                                    url = "https://www.ebi.ac.uk",
                                    pth = "proteins/api/",
-                                   ptn = "^(http.?://).*ebi\\.ac\\.uk/proteins/api/",
-                                   err = c("400", "404"),
-                                   err_prs = "json->list_simp",
-                                   err_prs2 = function(x) {x[["errorMessage"]][[1]]}),
+                                   ptn = "^(https?://)?(www\\.)?ebi\\.ac\\.uk/proteins/api/",
+                                   err_prs = list("json->list_simp",
+                                                  function(x) {x[["errorMessage"]][[1]]}),
+                                   err_ptn = "^4\\d\\d$"
+                                   ),
                   options = switch(as.character(length(arg)),
                                    "1" = options()[grep("^rba_",
                                                         names(options()))],
@@ -1124,18 +1129,18 @@
 #' @family internal_response_parser
 #' @export
 .rba_error_parser = function(response,
-                             verbose = verbose) {
+                             verbose = FALSE) {
   ## detect the database name
-  db_found = FALSE
-  for (db in .rba_stg("db")) {
-    if (grepl(.rba_stg(db, "ptn"), response$url,
-              perl = TRUE, ignore.case = TRUE)) {
-      db_found = TRUE
-      break
-    }
-  }
-  if (isTRUE(db_found) &&
-      as.character(response$status_code) %in% .rba_stg(db, "err")) {
+  dbs = vapply(X = .rba_stg("db"),
+               FUN = function(db) {
+                 grepl(.rba_stg(db , "ptn"), response$url,
+                       perl = TRUE, ignore.case = TRUE)},
+               FUN.VALUE = logical(1)
+  )
+  db = names(dbs)[dbs]
+  ## parse the error
+  if (length(db) == 1 &&
+      grepl(.rba_stg(db, "err_ptn"), response$status_code)) {
     ## The API server returns an error string for this status code
     error_message = tryCatch({
       sprintf("%s server returned \"%s\".\r\n  With this error message:\r\n  \"%s\"",
@@ -1143,13 +1148,12 @@
               .rba_http_status(http_status = response$status_code,
                                verbose = FALSE),
               .rba_response_parser(response = response,
-                                   parsers = list(.rba_stg(db, "err_prs"),
-                                                  .rba_stg(db,"err_prs2")))
-      )
-    }, error = function(e) {
-      .rba_http_status(http_status = response$status_code,
-                       verbose = verbose)
-    })
+                                   parsers = .rba_stg(db, "err_prs"))
+      )},
+      error = function(e) {
+        .rba_http_status(http_status = response$status_code,
+                         verbose = verbose)
+      })
   } else {
     ## The API server returns only status code with no error string
     error_message = .rba_http_status(http_status = response$status_code,

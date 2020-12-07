@@ -4,7 +4,7 @@
 \alias{.rba_error_parser}
 \title{Parse Appropriate, Server-aware Error Message}
 \usage{
-.rba_error_parser(response, verbose = verbose)
+.rba_error_parser(response, verbose = FALSE)
 }
 \arguments{
 \item{response}{a formal api server response, with the class 'response'
