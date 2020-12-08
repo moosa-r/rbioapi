@@ -1411,7 +1411,7 @@
       ), call. = FALSE)
       ext_args = ext_args[-c(unnamed_args, which(names(ext_args) %in% invalid_args))]
     }
-    if (isTRUE(ignore_save) || utils::hasName(ext_args, "save_resp_file")) {
+    if (isTRUE(ignore_save) && utils::hasName(ext_args, "save_resp_file")) {
       warning("This function has a dedicted file-savig argument, 'save_resp_file' option was ignored.",
               call. = FALSE)
       rba_opts = rba_opts[names(rba_opts) != "rba_save_resp_file"]
