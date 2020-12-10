@@ -102,7 +102,7 @@ Note that using \code{\link{rba_mieaa_enrich}} is a more convenient way to
 
 \examples{
 rba_mieaa_enrich_submit(test_set = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
-  input_type = "mature",
+  mirna_type = "mature",
   test_type = "GSEA",
   species = 9606,
   categories = NA)

@@ -8,6 +8,9 @@
 }
 \arguments{
 \item{...}{Extra arguments that were provided in the endpoints functions.}
+
+\item{ignore_save}{if the function has a dedicated file saving argument,
+set this to TRUE.}
 }
 \value{
 NULL, if arguments check failed, code execution will be stopped.

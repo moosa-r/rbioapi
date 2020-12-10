@@ -185,7 +185,7 @@ rba_mieaa_cats = function(mirna_type, species,...) {
 #'
 #' @examples
 #' rba_mieaa_convert_version(mirna = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
-#' mirna_type = "mature", input_version = 22, output_version =  16)
+#'   mirna_type = "mature", input_version = 22, output_version =  16)
 #'
 #' @family "MiEAA API"
 #' @export
@@ -221,7 +221,7 @@ rba_mieaa_convert_version = function(mirna,
   call_body = list(mirnas = paste(mirna, collapse = "\n"),
                    mirbase_input_version = paste0("v", input_version),
                    mirbase_output_version = paste0("v", output_version),
-                   mirna_type = ifelse(mirna_type == "mature",
+                   input_type = ifelse(mirna_type == "mature",
                                        yes = "mirna", no = "precursor"),
                    output_format = ifelse(isTRUE(simple_output),
                                           yes = "oneline",
@@ -439,7 +439,7 @@ rba_mieaa_convert_type = function(mirna,
 #'
 #' @examples
 #' rba_mieaa_enrich_submit(test_set = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
-#'   input_type = "mature",
+#'   mirna_type = "mature",
 #'   test_type = "GSEA",
 #'   species = 9606,
 #'   categories = NA)

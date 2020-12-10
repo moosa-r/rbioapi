@@ -1392,7 +1392,10 @@
 #'   be altered in response to the change.\cr
 #'   Also the function will ignore any arguments which is not standard and
 #'   issues an informative warning for the user.
+#'
 #' @param ... Extra arguments that were provided in the endpoints functions.
+#' @param ignore_save if the function has a dedicated file saving argument,
+#'   set this to TRUE.
 #'
 #' @return NULL, if arguments check failed, code execution will be stopped.
 #'   otherwise, nothing will be returned nor displayed.

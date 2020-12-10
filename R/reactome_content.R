@@ -2366,8 +2366,6 @@ rba_reactome_query = function(ids,
 #' @examples
 #' rba_reactome_xref("CD40")
 #' rba_reactome_xref("ENSP00000361350")
-#' rba_reactome_xref("HMDBP02803")
-#' rba_reactome_xref("P25942")
 #' @family "Reactome Content Service, ReferenceEntity Queries"
 #' @export
 rba_reactome_xref = function(xref_id,

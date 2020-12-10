@@ -48,7 +48,7 @@ MiEAA works with miRBASE v22 accession. Using This function you can convert
 
 \examples{
 rba_mieaa_convert_version(mirna = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
-mirna_type = "mature", input_version = 22, output_version =  16)
+  mirna_type = "mature", input_version = 22, output_version =  16)
 
 }
 \references{
