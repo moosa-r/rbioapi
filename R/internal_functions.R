@@ -26,7 +26,7 @@
                                    pth = "Enrichr/",
                                    ptn = "^(https?://)?(www\\.)?maayanlab\\.cloud/Enrichr/",
                                    err_ptn = "^$"
-                                   ),
+                  ),
                   ensembl = switch(arg[[2]],
                                    name = "Ensembl",
                                    url = "https://rest.ensembl.org",
@@ -34,7 +34,7 @@
                                    err_ptn = "^4\\d\\d$",
                                    err_prs = list("json->list_simp",
                                                   function(x) {x[["error"]][[1]]})
-                                   ),
+                  ),
                   mieaa = switch(arg[[2]],
                                  name = "MiEAA",
                                  url = "https://ccb-compute2.cs.uni-saarland.de",
@@ -42,7 +42,16 @@
                                  ptn = "^(https?://)?(www\\.)?ccb-compute2\\.cs\\.uni-saarland\\.de/mieaa2/",
                                  err_ptn = "^4\\d\\d$",
                                  err_prs = list("json->chr")
-                                 ),
+                  ),
+                  panther = switch(arg[[2]],
+                                   name = "PANTHER",
+                                   url = "http://www.pantherdb.org",
+                                   pth = "services/oai/pantherdb/",
+                                   ptn = "^(https?://)?(www\\.)?pantherdb\\.org/services/",
+                                   err_ptn = "^4\\d\\d&",
+                                   err_prs = list("json->list_simp",
+                                                  function(x) {x$search$error})
+                  ),
                   reactome = switch(arg[[2]],
                                     name = "Reactome",
                                     url = "https://reactome.org",
@@ -55,7 +64,7 @@
                                     err_ptn = "^4\\d\\d$",
                                     err_prs = list("json->list_simp",
                                                    function(x) {x[["messages"]][[1]]})
-                                    ),
+                  ),
                   string = switch(arg[[2]],
                                   name = "STRING",
                                   url = "https://version-11-0.string-db.org",
@@ -64,7 +73,7 @@
                                   err_ptn = "^4\\d\\d$",
                                   err_prs = list("json->list_simp",
                                                  function(x) {paste(x, collapse = "\r\n")})
-                                  ),
+                  ),
                   uniprot = switch(arg[[2]],
                                    name = "UniProt",
                                    url = "https://www.ebi.ac.uk",
@@ -73,7 +82,7 @@
                                    err_prs = list("json->list_simp",
                                                   function(x) {x[["errorMessage"]][[1]]}),
                                    err_ptn = "^4\\d\\d$"
-                                   ),
+                  ),
                   options = switch(as.character(length(arg)),
                                    "1" = options()[grep("^rba_",
                                                         names(options()))],
