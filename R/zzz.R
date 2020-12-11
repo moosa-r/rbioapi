@@ -37,25 +37,25 @@
 }
 
 .onLoad = function(libname, pkgname){
-  options(rba_client_timeout = 30,
+  options(rba_timeout = 30,
           rba_dir_name = "rbioapi",
           rba_diagnostics = FALSE,
-          rba_max_retries = 1,
-          rba_progress_bar = FALSE,
-          rba_save_resp_file = FALSE,
+          rba_retry_max = 1,
+          rba_progress = FALSE,
+          rba_save_file = FALSE,
           rba_skip_error = FALSE,
           rba_user_agent = "rbioapi R package",
           rba_verbose = TRUE,
-          rba_wait_time = 10,
-          rba_user_options = c(rba_client_timeout = "client_timeout",
+          rba_retry_wait = 10,
+          rba_user_options = c(rba_timeout = "timeout",
                                rba_dir_name = "dir_name",
                                rba_diagnostics = "diagnostics",
-                               rba_max_retries = "max_retries",
-                               rba_progress_bar = "progress_bar",
-                               rba_save_resp_file = "save_resp_file",
+                               rba_retry_max = "retry_max",
+                               rba_progress = "progress",
+                               rba_save_file = "save_file",
                                rba_skip_error = "skip_error",
                                rba_verbose = "verbose",
-                               rba_wait_time = "wait_time"))
+                               rba_retry_wait = "retry_wait"))
   invisible()
 }
 

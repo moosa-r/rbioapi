@@ -9,7 +9,7 @@ rba_enrichr(
   description = NA,
   gene_set_library = "all",
   regex_library_name = TRUE,
-  multi_libs_progress_bar = TRUE,
+  multi_libs_progress = TRUE,
   ...
 )
 }
@@ -32,7 +32,7 @@ pattern that correspond to one or more of Enrichr library names.
 gene_set_library will be regarded as a regex or partially matching name. if
 FALSE, gene_set_library will be considered exact match.}
 
-\item{multi_libs_progress_bar}{logical: In case of selecting multiple Enrichr
+\item{multi_libs_progress}{logical: In case of selecting multiple Enrichr
 libraries, should a progress bar be displayed?}
 
 \item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s

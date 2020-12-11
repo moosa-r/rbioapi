@@ -7,8 +7,8 @@
 .rba_api_call(
   input_call,
   skip_error = FALSE,
-  no_interet_retry_max = 1,
-  no_internet_wait_time = 10,
+  retry_max = 1,
+  retry_wait = 10,
   verbose = TRUE,
   diagnostics = FALSE
 )
@@ -20,11 +20,11 @@
 than 200, instead of halting the code execution, the error message will be
 returned as the function's output.}
 
-\item{no_interet_retry_max}{numeric: A value to be passed to
+\item{retry_max}{numeric: A value to be passed to
 .rba_net_handle() retry_max argument.}
 
-\item{no_internet_wait_time}{numeric: A value to be passed to
-.rba_net_handle() wait_time argument.}
+\item{retry_wait}{numeric: A value to be passed to
+.rba_net_handle() retry_wait argument.}
 
 \item{verbose}{should the function generate informative messages?}
 

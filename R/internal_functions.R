@@ -108,7 +108,7 @@
 #'   if necessary until the device is connected back to the internet.
 #'
 #' @param retry_max numeric: The maximum times to Retry the connection test.
-#' @param wait_time numeric: The value in seconds which will be passed to
+#' @param retry_wait numeric: The value in seconds which will be passed to
 #'   sys.sleep() between each connection test.
 #' @param verbose logical: Generate informative messages.
 #' @param diagnostics logical: Generate diagnostics and detailed messages with
@@ -118,12 +118,12 @@
 #' @family internal_inernet_connectivity
 #' @export
 .rba_net_handle = function(retry_max = 1,
-                           wait_time = 10,
+                           retry_wait = 10,
                            verbose = FALSE,
                            diagnostics = FALSE) {
   if (isTRUE(diagnostics)) {message("Testing the internet connection.")}
   test_call = quote(httr::status_code(httr::HEAD("https://www.google.com/",
-                                                 httr::timeout(getOption("rba_client_timeout")),
+                                                 httr::timeout(getOption("rba_timeout")),
                                                  if (diagnostics) httr::verbose()
   )))
   net_status = try(eval(test_call), silent = TRUE)
@@ -133,11 +133,11 @@
     retry_count = retry_count + 1
     if (isTRUE(verbose)) {
       message(sprintf("No internet connection, waiting for %s seconds and retrying (retry count: %s/%s).",
-                      wait_time,
+                      retry_wait,
                       retry_count,
                       retry_max))
     }
-    Sys.sleep(wait_time)
+    Sys.sleep(retry_wait)
     net_status = try(eval(test_call), silent = TRUE)
   } #end of while
 
@@ -165,7 +165,7 @@
 #' @export
 .rba_api_check = function(url, diagnostics = FALSE){
   request = quote(httr::HEAD(url = url,
-                             httr::timeout(getOption("rba_client_timeout")),
+                             httr::timeout(getOption("rba_timeout")),
                              httr::user_agent(getOption("rba_user_agent")),
                              if (diagnostics) httr::verbose()
   ))
@@ -395,10 +395,10 @@
   ## assign global options
   diagnostics = get0("diagnostics", envir = parent.frame(1),
                      ifnotfound = getOption("rba_diagnostics"))
-  progress_bar = get0("progress_bar", envir = parent.frame(1),
-                      ifnotfound = getOption("rba_progress_bar"))
-  client_timeout = get0("client_timeout", envir = parent.frame(1),
-                        ifnotfound = getOption("rba_client_timeout"))
+  progress = get0("progress", envir = parent.frame(1),
+                      ifnotfound = getOption("rba_progress"))
+  timeout = get0("timeout", envir = parent.frame(1),
+                        ifnotfound = getOption("rba_timeout"))
   ### 1 capture extra arguments
   # possible args: all args supported by httr +
   # args to this function: [file/obj_]accept, [file/obj_]parser, save_to
@@ -417,12 +417,12 @@
                    url = utils::URLencode(URL = url, repeated = FALSE),
                    path = utils::URLencode(URL = path, repeated = FALSE),
                    quote(httr::user_agent(getOption("rba_user_agent"))),
-                   quote(httr::timeout(client_timeout))
+                   quote(httr::timeout(timeout))
   )
   if (isTRUE(diagnostics)) {
     httr_call = append(httr_call, quote(httr::verbose()))
   }
-  if (isTRUE(progress_bar)) {
+  if (isTRUE(progress)) {
     httr_call = append(httr_call, quote(httr::progress()))
   }
 
@@ -498,10 +498,10 @@
 #' @param skip_error logical: If TRUE, in case of an error HTTP status other
 #'  than 200, instead of halting the code execution, the error message will be
 #'  returned as the function's output.
-#' @param no_interet_retry_max numeric: A value to be passed to
+#' @param retry_max numeric: A value to be passed to
 #'   .rba_net_handle() retry_max argument.
-#' @param no_internet_wait_time numeric: A value to be passed to
-#'   .rba_net_handle() wait_time argument.
+#' @param retry_wait numeric: A value to be passed to
+#'   .rba_net_handle() retry_wait argument.
 #' @param verbose should the function generate informative messages?
 #' @param diagnostics logical: Generate diagnostics and detailed messages with
 #'   internal information.
@@ -514,8 +514,8 @@
 #' @export
 .rba_api_call = function(input_call,
                          skip_error = FALSE,
-                         no_interet_retry_max = 1,
-                         no_internet_wait_time = 10,
+                         retry_max = 1,
+                         retry_wait = 10,
                          verbose = TRUE,
                          diagnostics = FALSE) {
   ## 1 call API
@@ -526,8 +526,8 @@
       substr(response$status_code, 1, 1) == "5") {
     ## 2.1 there is an internet connection or server issue
     # wait for the internet connection
-    net_connected = .rba_net_handle(retry_max = no_interet_retry_max,
-                                    wait_time = no_internet_wait_time,
+    net_connected = .rba_net_handle(retry_max = retry_max,
+                                    retry_wait = retry_wait,
                                     verbose = verbose,
                                     diagnostics = diagnostics)
     if (isTRUE(net_connected)) {
@@ -573,7 +573,7 @@
 #' The function will try to use the parser specified in the 'input_call' object,
 #'   but if a parser value was provided with the 'response_parser' argument,
 #'   it will have priority and will overwrite the input_call's parser input.\cr
-#'   diagnostics, verbose, max_retries, wait_time and skip_error variables will
+#'   diagnostics, verbose, retry_max, retry_wait and skip_error variables will
 #'   be assigned and passed on to the subsequent executed calls.\cr
 #'   note that the function was much longer at the begging of this package
 #'   development, hence the name 'skeleton'.
@@ -597,17 +597,17 @@
                      ifnotfound = getOption("rba_diagnostics"))
   verbose = get0("verbose", envir = parent.frame(1),
                  ifnotfound = getOption("rba_verbose"))
-  max_retries = get0("max_retries", envir = parent.frame(1),
-                     ifnotfound = getOption("rba_max_retries"))
-  wait_time = get0("wait_time", envir = parent.frame(1),
-                   ifnotfound = getOption("rba_wait_time"))
+  retry_max = get0("retry_max", envir = parent.frame(1),
+                     ifnotfound = getOption("rba_retry_max"))
+  retry_wait = get0("retry_wait", envir = parent.frame(1),
+                   ifnotfound = getOption("rba_retry_wait"))
   skip_error = get0("skip_error", envir = parent.frame(1),
                     ifnotfound = getOption("rba_skip_error"))
   ## 1 Make API Call
   response = .rba_api_call(input_call = input_call$call,
                            skip_error = skip_error,
-                           no_interet_retry_max = max_retries,
-                           no_internet_wait_time = wait_time,
+                           retry_max = retry_max,
+                           retry_wait = retry_wait,
                            verbose = verbose,
                            diagnostics = diagnostics)
   ## 2 Parse the the response if possible
@@ -654,23 +654,23 @@
 #' @export
 .rba_args_opts = function(cons = NULL, cond = NULL, what) {
   if (what == "cons") {
-    ext_cons = list(client_timeout = list(arg = "client_timeout",
+    ext_cons = list(timeout = list(arg = "timeout",
                                           class = "numeric",
                                           len = 1,
-                                          ran = c(0.001, 10000000)),
+                                          ran = c(0.001, 3600)),
                     dir_name = list(arg = "dir_name",
                                     class = "character",
                                     len = 1),
                     diagnostics = list(arg = "diagnostics",
                                        class = "logical",
                                        len = 1),
-                    max_retries = list(arg = "max_retries",
+                    retry_max = list(arg = "retry_max",
                                        class = "numeric",
                                        len = 1),
-                    progress_bar = list(arg = "progress_bar",
+                    progress = list(arg = "progress",
                                         class = "logical",
                                         len = 1),
-                    save_resp_file = list(arg = "save_resp_file",
+                    save_file = list(arg = "save_file",
                                           class = c("logical",
                                                     "character"),
                                           len = 1),
@@ -680,7 +680,7 @@
                     verbose = list(arg = "verbose",
                                    class = "logical",
                                    len = 1),
-                    wait_time = list(arg = "wait_time",
+                    retry_wait = list(arg = "retry_wait",
                                      class = "numeric",
                                      len = 1,
                                      min_val = 1))
@@ -690,10 +690,10 @@
   } else if (what == "cond") {
     ext_cond = list(dir_name = list(quote(grepl("[\\\\/:\"*?<>|]+", dir_name, perl = TRUE)),
                                     "Invalid dir_name. Directory name cannot include these characters: \\/?%*:|<>"),
-                    save_resp_file = list(quote(!is.logical(save_resp_file) &&
+                    save_file = list(quote(!is.logical(save_file) &&
                                                   !grepl("^[a-zA-z]:|^\\\\\\w|^/|\\w+\\.\\w+$",
-                                                         save_resp_file)),
-                                          "Invalid save_resp_file. You should set it to 'logical' or 'a valid file path'."))
+                                                         save_file)),
+                                          "Invalid save_file. You should set it to 'logical' or 'a valid file path'."))
     cond = append(ext_cond[names(ext_cond) %in% ls(envir = parent.frame(2))],
                   cond)
     return(cond)
@@ -1278,7 +1278,7 @@
                      save_to = NA,
                      dir_name = NA) {
   if (is.na(save_to)) {
-    save_to = get0(x = "save_resp_file",
+    save_to = get0(x = "save_file",
                    ifnotfound = FALSE,
                    envir = parent.frame(1))}
   if (!isFALSE(save_to)) {
@@ -1423,10 +1423,10 @@
       ), call. = FALSE)
       ext_args = ext_args[-c(unnamed_args, which(names(ext_args) %in% invalid_args))]
     }
-    if (isTRUE(ignore_save) && utils::hasName(ext_args, "save_resp_file")) {
-      warning("This function has a dedicted file-savig argument, 'save_resp_file' option was ignored.",
+    if (isTRUE(ignore_save) && utils::hasName(ext_args, "save_file")) {
+      warning("This function has a dedicated file-saving argument, 'save_file' option was ignored.",
               call. = FALSE)
-      rba_opts = rba_opts[names(rba_opts) != "rba_save_resp_file"]
+      rba_opts = rba_opts[names(rba_opts) != "rba_save_file"]
     }
   } #end of if (length(ext_args) > 0)
   # create option variables

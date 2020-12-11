@@ -6,7 +6,7 @@
 \usage{
 .rba_net_handle(
   retry_max = 1,
-  wait_time = 10,
+  retry_wait = 10,
   verbose = FALSE,
   diagnostics = FALSE
 )
@@ -14,7 +14,7 @@
 \arguments{
 \item{retry_max}{numeric: The maximum times to Retry the connection test.}
 
-\item{wait_time}{numeric: The value in seconds which will be passed to
+\item{retry_wait}{numeric: The value in seconds which will be passed to
 sys.sleep() between each connection test.}
 
 \item{verbose}{logical: Generate informative messages.}

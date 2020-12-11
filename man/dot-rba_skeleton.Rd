@@ -28,7 +28,7 @@ This function will be called at the last step of any exported function to
 The function will try to use the parser specified in the 'input_call' object,
   but if a parser value was provided with the 'response_parser' argument,
   it will have priority and will overwrite the input_call's parser input.\cr
-  diagnostics, verbose, max_retries, wait_time and skip_error variables will
+  diagnostics, verbose, retry_max, retry_wait and skip_error variables will
   be assigned and passed on to the subsequent executed calls.\cr
   note that the function was much longer at the begging of this package
   development, hence the name 'skeleton'.

@@ -7,8 +7,8 @@
 rba_connection_test(diagnostics = FALSE)
 }
 \arguments{
-\item{diagnostics}{logical: Generate diagnostics and detailed messages with
-internal information.}
+\item{diagnostics}{(Logical) (default = FALSE) Show diagnostics and
+detailed messages with internal information.}
 }
 \value{
 NULL, Connection test for the supported servers will be displayed

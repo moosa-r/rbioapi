@@ -304,7 +304,7 @@ rba_enrichr_view_list = function(user_list_id,
 #' @param regex_library_name logical: if TRUE (default) the provided
 #'   gene_set_library will be regarded as a regex or partially matching name. if
 #'   FALSE, gene_set_library will be considered exact match.
-#' @param multi_libs_progress_bar logical: In case of selecting multiple Enrichr
+#' @param multi_libs_progress logical: In case of selecting multiple Enrichr
 #'   libraries, should a progress bar be displayed?
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #'   arguments documentation for more information on available options.
@@ -339,7 +339,7 @@ rba_enrichr_view_list = function(user_list_id,
 rba_enrichr_enrich = function(user_list_id,
                               gene_set_library = "all",
                               regex_library_name = TRUE,
-                              multi_libs_progress_bar = TRUE,
+                              multi_libs_progress = TRUE,
                               ...){
   ## Load Global Options
   .rba_ext_args(...)
@@ -379,7 +379,7 @@ rba_enrichr_enrich = function(user_list_id,
                         list(arg = "gene_set_library",
                              class = "character",
                              val = getOption("rba_enrichr_libs")),
-                        list(arg = "multi_libs_progress_bar",
+                        list(arg = "multi_libs_progress",
                              class = "logical")))
   ## call Enrichr API
   if (run_mode == "single") {
@@ -402,7 +402,7 @@ rba_enrichr_enrich = function(user_list_id,
                 "libraries and your network connection."),
          length(gene_set_library))
     ## initiate progress bar
-    if (isTRUE(multi_libs_progress_bar)) {
+    if (isTRUE(multi_libs_progress)) {
       pb = utils::txtProgressBar(min = 0,
                                  max = length(gene_set_library),
                                  style = 3)
@@ -416,7 +416,7 @@ rba_enrichr_enrich = function(user_list_id,
                                                                                              x),
                                                                          ...)
                             #advance the progress bar
-                            if (isTRUE(multi_libs_progress_bar)) {
+                            if (isTRUE(multi_libs_progress)) {
                               utils::setTxtProgressBar(pb, which(gene_set_library == x))
                             }
                             return(lib_enrich_res)
@@ -550,7 +550,7 @@ rba_enrichr = function(gene_list,
                        description = NA,
                        gene_set_library = "all",
                        regex_library_name = TRUE,
-                       multi_libs_progress_bar = TRUE,
+                       multi_libs_progress = TRUE,
                        ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -561,7 +561,7 @@ rba_enrichr = function(gene_list,
                              class = "character"),
                         list(arg = "regex_library_name",
                              class = "logical"),
-                        list(arg = "multi_libs_progress_bar",
+                        list(arg = "multi_libs_progress",
                              class = "logical")))
   .msg("--Step 1/3:")
   invisible(rba_enrichr_info(store_in_options = TRUE,
@@ -574,7 +574,7 @@ rba_enrichr = function(gene_list,
   enriched = rba_enrichr_enrich(user_list_id = list_id$userListId,
                                 gene_set_library = gene_set_library,
                                 regex_library_name = regex_library_name,
-                                multi_libs_progress_bar = multi_libs_progress_bar,
+                                multi_libs_progress = multi_libs_progress,
                                 ...)
   return(enriched)
 }

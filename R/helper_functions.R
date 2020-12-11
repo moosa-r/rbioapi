@@ -10,8 +10,8 @@
 #'   Also, if you need to contact support, kindly call this function with
 #'   'diagnostic = TRUE' and include the output messages in your support
 #'   request.
-#' @param diagnostics logical: Generate diagnostics and detailed messages with
-#'   internal information.
+#' @param diagnostics (Logical) (default = FALSE) Show diagnostics and
+#'   detailed messages with internal information.
 #'
 #' @return NULL, Connection test for the supported servers will be displayed
 #'   in console
@@ -44,7 +44,7 @@ rba_connection_test = function(diagnostics = FALSE) {
   google = try(httr::status_code(httr::HEAD("https://www.google.com/",
                                             if (diagnostics) httr::verbose(),
                                             httr::user_agent(getOption("rba_user_agent")),
-                                            httr::timeout(getOption("rba_client_timeout"))))
+                                            httr::timeout(getOption("rba_timeout"))))
                , silent = TRUE)
 
   if (google == 200) {
@@ -64,69 +64,74 @@ rba_connection_test = function(diagnostics = FALSE) {
 
 #' Set rbioapi Global Options
 #'
-#' A safe way to alter rbioapi's global options.\cr
+#' A safe way to change rbioapi's global options and behavior. see "arguments"
+#'   section for available options.\cr
 #'   Note that you are not limited to changing the options globally, you can
 #'   include the option names and values in the '...' argument of any rbioapi
 #'   function to alter the option(s) only in that function call;
-#'   e.x. example_function(x, y, diagnostics = TRUE).\cr\cr
-#'   Alternatively, you can call this function with no arguments [ e.g.
-#'   rba_options() ] to retrieve a table of available rbioapi options and their
-#'   current values.\cr
+#'   e.g. example_function(x, diagnostics = TRUE, timeout = 300).\cr\cr
+#'   Alternatively, you can call this function with no arguments, i.e.
+#'   rba_options(), to retrieve a data frame of available rbioapi options and
+#'   their current values.\cr
 #'
-#'   Because this function validates your provided changes, Kindly
+#'   Because this function validates your provided changes, please
 #'   \strong{\emph{only change rbioapi options using this function}} and avoid
 #'   directly editing them.
 #'
-#' @param client_timeout numeric: The maximum time in seconds that you are
-#'   willing to wait for a server response before giving up and stopping the
-#'   function execution.
-#' @param diagnostics logical: Generate diagnostics and detailed messages with
-#'   internal information.
-#' @param dir_name character: If the package needed to generate a file path to
-#'   save the server's response, a directory with this name will be created in
-#'   your working directory to save your files.
-#' @param max_retries numeric: How many times should rbioapi retry in case of
-#'   5xx server responses, errors or no internet connectivity?
-#' @param progress_bar logical: Should a progress bar be displayed?
-#' @param save_resp_file either:\itemize{
-#'   \item TRUE: in this case, the raw server response will be automatically
-#'   saved to a proper file path. use "dir_name" argument to alter the file's
-#'   parent directory.
-#'   \item FALSE: (default) Do not automatticaly save server response.
-#'   \item Character: (Only when altering the option via "..." argument) A valid
-#'   file path to save the server response to the calling function.}
-#' @param skip_error logical: If TRUE, the code execution will not be stopped
-#'   in case of errors (anything but HTTP status 200 from the server); Instead
-#'   the error message will be returned as the function's output. Set this
-#'   to 'TRUE' if you are calling rbioapi functions in batch batch mode or
-#'   sourcing a script.
-#' @param verbose logical: Generate informative messages.
-#' @param wait_time numeric: Time in seconds to wait before each retry in case
-#'   of internet connection lost or server problems.
+#' @param diagnostics (Logical) (default = FALSE) Show diagnostics and
+#'   detailed messages with internal information.
+#' @param dir_name (character) (default = "rbioapi") If the package needs to
+#'   generate a file path to save the server's response, a directory with this
+#'   name will be created in your working directory to save your files.
+#' @param retry_max (Numeric) (default = 1) How many times should rbioapi
+#'   retry in case of 5xx server responses, errors un-related to the server
+#'   or no internet connectivity?
+#' @param retry_wait (Numeric) (default = 10) Time in seconds to wait before
+#'   next retry in case of internet connection or server problems.
+#' @param progress (Logical) Should a progress bar be displayed? (default =
+#'   FALSE)
+#' @param save_file (Logical or character) (default = FALSE) Either:\itemize{
+#'   \item TRUE: In this case, the raw server's response file will be
+#'   automatically saved to a proper file path. use "dir_name" argument to
+#'   change the file's parent directory.
+#'   \item FALSE: (default) Do not automatically save server's response file.
+#'   \item Character: (Only when changing the option via "..." argument in
+#'   the exported functions) A valid file path to save the server's response
+#'   file to the function that you are calling.}
+#' @param skip_error (Logical) (default = FALSE) If TRUE, the code execution
+#'   will not be stopped in case of errors (anything but HTTP status 200 from
+#'   the server); Instead the error message will be returned as the function's
+#'   output. Set this to TRUE if you don't want your script be interrupted by
+#'   failed server responses.
+#' @param timeout (Numeric) (default = 30) The maximum time in seconds that
+#'   you are willing to wait for a server response before giving up and
+#'   stopping the function execution.
+#' @param verbose (Logical) (Default = TRUE) Generate short informative
+#'   messages.
 #'
-#' @return If called without any argument, Data frame with available options
-#'   and their pertinent information. If Called with an argument, will Return
+#' @return If called without any argument, a Data frame with available options
+#'   and their information; If Called with an argument, will Return
 #'   NULL but Alters that option globally.
 #'
 #' @examples
 #' rba_options()
 #' \dontrun{rba_options(verbose = FALSE)}
-#' \dontrun{rba_options(save_resp_file = TRUE)}
-#' \dontrun{rba_options(diagnostics = TRUE, progress_bar = TRUE)}
+#' \dontrun{rba_options(save_file = TRUE)}
+#' \dontrun{rba_options(diagnostics = TRUE, progress = TRUE)}
 #' @family "Helper functions"
 #' @keywords Helper
 #' @export
-rba_options = function(client_timeout = NA,
-                       diagnostics = NA,
+rba_options = function(diagnostics = NA,
                        dir_name = NA,
-                       max_retries = NA,
-                       progress_bar = NA,
-                       save_resp_file = NA,
+                       retry_max = NA,
+                       retry_wait = NA,
+                       progress = NA,
+                       save_file = NA,
                        skip_error = NA,
-                       verbose = NA,
-                       wait_time = NA) {
-  .rba_args(cond = list(list(quote(is.character(save_resp_file)),
-                             "As a global option, you can only set save_resp_file to 'logical', not a file path.")))
+                       timeout = NA,
+                       verbose = NA) {
+  .rba_args(cond = list(list(quote(is.character(save_file)),
+                             "As a global option, you can only set save_file to 'logical', not a file path.")))
   ## if empty function was called, show the available options
   changes = vapply(ls(), function(x) {!is.na(get(x))}, logical(1))
   if (!any(changes)) {

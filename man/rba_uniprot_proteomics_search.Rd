@@ -72,7 +72,7 @@ rba_uniprot_proteomics_search(peptide = "MEDYTKIEK")
 rba_uniprot_proteomics_search(peptide = "MEDYTKIEK")
 \dontrun{rba_uniprot_proteomics_search(taxid = 9606,
   data_source = "PeptideAtlas",
-  progress_bar = TRUE, client_timeout = 999999, unique = TRUE)}
+  progress = TRUE, timeout = 999999, unique = TRUE)}
 
 }
 \references{
