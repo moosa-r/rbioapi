@@ -11,7 +11,7 @@
 list using \code{\link{rba_enrichr_add_list}}}
 
 \item{gene_set_library}{a valid gene-set library name which exists
-in the results retrieved via \code{\link{rba_enrichr_info}}.}
+in the results retrieved via \code{\link{rba_enrichr_libs}}.}
 
 \item{save_name}{default raw file name}
 

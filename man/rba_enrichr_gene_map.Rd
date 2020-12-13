@@ -48,8 +48,8 @@ rba_enrichr_gene_map(gene = "p53", catagorize = TRUE)
 Other "Enrichr API": 
 \code{\link{rba_enrichr_add_list}()},
 \code{\link{rba_enrichr_enrich}()},
-\code{\link{rba_enrichr_info}()},
+\code{\link{rba_enrichr_libs}()},
 \code{\link{rba_enrichr_view_list}()},
-\code{\link{rba_enrichr}()}
+\code{\link{rba_enrichr_wrp}()}
 }
 \concept{"Enrichr API"}

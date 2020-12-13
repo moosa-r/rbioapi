@@ -8,7 +8,7 @@ rba_enrichr_enrich(
   user_list_id,
   gene_set_library = "all",
   regex_library_name = TRUE,
-  multi_libs_progress = TRUE,
+  progress_bar = TRUE,
   ...
 )
 }
@@ -20,7 +20,7 @@ list using \code{\link{rba_enrichr_add_list}}}
 \enumerate{
 \item "all" to select all of the available Enrichr gene-set libraries.
 \item A gene-set library name existed in the results
-retrieved via \code{\link{rba_enrichr_info}}
+retrieved via \code{\link{rba_enrichr_libs}}
 \item If regex_library_name = TRUE, A partially-matching name a regex
 pattern that correspond to one or more of Enrichr library names.
 }}
@@ -29,7 +29,7 @@ pattern that correspond to one or more of Enrichr library names.
 gene_set_library will be regarded as a regex or partially matching name. if
 FALSE, gene_set_library will be considered exact match.}
 
-\item{multi_libs_progress}{logical: In case of selecting multiple Enrichr
+\item{progress_bar}{logical: In case of selecting multiple Enrichr
 libraries, should a progress bar be displayed?}
 
 \item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
@@ -82,8 +82,8 @@ Note that using \code{\link{rba_enrichr}} is a more convenient way to
 Other "Enrichr API": 
 \code{\link{rba_enrichr_add_list}()},
 \code{\link{rba_enrichr_gene_map}()},
-\code{\link{rba_enrichr_info}()},
+\code{\link{rba_enrichr_libs}()},
 \code{\link{rba_enrichr_view_list}()},
-\code{\link{rba_enrichr}()}
+\code{\link{rba_enrichr_wrp}()}
 }
 \concept{"Enrichr API"}

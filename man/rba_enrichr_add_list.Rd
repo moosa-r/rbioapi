@@ -56,8 +56,8 @@ rba_enrichr_add_list(gene_list = c("TP53", "TNF", "EGFR"),
 Other "Enrichr API": 
 \code{\link{rba_enrichr_enrich}()},
 \code{\link{rba_enrichr_gene_map}()},
-\code{\link{rba_enrichr_info}()},
+\code{\link{rba_enrichr_libs}()},
 \code{\link{rba_enrichr_view_list}()},
-\code{\link{rba_enrichr}()}
+\code{\link{rba_enrichr_wrp}()}
 }
 \concept{"Enrichr API"}

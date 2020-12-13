@@ -38,12 +38,12 @@
 #'   }
 #'
 #' @examples
-#' rba_enrichr_info()
+#' rba_enrichr_libs()
 #'
 #' @family "Enrichr API"
 #' @seealso \code{\link{rba_enrichr}}
 #' @export
-rba_enrichr_info = function(store_in_options = FALSE,
+rba_enrichr_libs = function(store_in_options = FALSE,
                             ...){
   ## Load Global Options
   .rba_ext_args(...)
@@ -54,12 +54,14 @@ rba_enrichr_info = function(store_in_options = FALSE,
   .msg("Retrieving List of available libraries and statistics from Enrichr.")
 
   ## Build Function-Specific Call
+  parser_input = list("json->list_simp",
+                      function(x) {x[[1]]})
   input_call = .rba_httr(httr = "get",
                          url = .rba_stg("enrichr", "url"),
                          path = paste0(.rba_stg("enrichr", "pth"),
                                        "datasetStatistics"),
                          accept = "application/json",
-                         parser = "json->df",
+                         parser = parser_input,
                          save_to = .rba_file("enrichr_info.json"))
 
   ## Call API
@@ -67,7 +69,7 @@ rba_enrichr_info = function(store_in_options = FALSE,
 
   ## Save Library Names as Global Options
   if (isTRUE(store_in_options)) {
-    options(rba_enrichr_libs = final_output[["statistics.libraryName"]])
+    options(rba_enrichr_libs = final_output[["libraryName"]])
   }
   return(final_output)
 }
@@ -223,7 +225,7 @@ rba_enrichr_view_list = function(user_list_id,
 #' @param user_list_id An ID returned to you after uploading a gene
 #'   list using \code{\link{rba_enrichr_add_list}}
 #' @param gene_set_library a valid gene-set library name which exists
-#' in the results retrieved via \code{\link{rba_enrichr_info}}.
+#' in the results retrieved via \code{\link{rba_enrichr_libs}}.
 #' @param save_name default raw file name
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #'   arguments documentation for more information on available options.
@@ -245,9 +247,9 @@ rba_enrichr_view_list = function(user_list_id,
 #'
 #' @export
 .rba_enrichr_enrich_internal = function(user_list_id,
-                                       gene_set_library,
-                                       save_name,
-                                       ...){
+                                        gene_set_library,
+                                        save_name,
+                                        ...){
   ## Load Global Options
   .rba_ext_args(...)
   ## Build GET API Request's query
@@ -297,14 +299,14 @@ rba_enrichr_view_list = function(user_list_id,
 #'   \enumerate{
 #'   \item "all" to select all of the available Enrichr gene-set libraries.
 #'   \item A gene-set library name existed in the results
-#'   retrieved via \code{\link{rba_enrichr_info}}
+#'   retrieved via \code{\link{rba_enrichr_libs}}
 #'   \item If regex_library_name = TRUE, A partially-matching name a regex
 #'   pattern that correspond to one or more of Enrichr library names.
 #'   }
 #' @param regex_library_name logical: if TRUE (default) the provided
 #'   gene_set_library will be regarded as a regex or partially matching name. if
 #'   FALSE, gene_set_library will be considered exact match.
-#' @param multi_libs_progress logical: In case of selecting multiple Enrichr
+#' @param progress_bar logical: In case of selecting multiple Enrichr
 #'   libraries, should a progress bar be displayed?
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #'   arguments documentation for more information on available options.
@@ -339,14 +341,14 @@ rba_enrichr_view_list = function(user_list_id,
 rba_enrichr_enrich = function(user_list_id,
                               gene_set_library = "all",
                               regex_library_name = TRUE,
-                              multi_libs_progress = TRUE,
+                              progress_bar = TRUE,
                               ...){
   ## Load Global Options
   .rba_ext_args(...)
   ## get a list of available libraries
   if (is.null(getOption("rba_enrichr_libs"))) {
-    .msg("Calling rba_enrichr_info() to get the names of available Enricr libraries.")
-    invisible(rba_enrichr_info(store_in_options = TRUE))
+    .msg("Calling rba_enrichr_libs() to get the names of available Enricr libraries.")
+    invisible(rba_enrichr_libs(store_in_options = TRUE))
   }
   ## handle different gene_set_library input situations
   if (length(gene_set_library) > 1) {
@@ -379,18 +381,18 @@ rba_enrichr_enrich = function(user_list_id,
                         list(arg = "gene_set_library",
                              class = "character",
                              val = getOption("rba_enrichr_libs")),
-                        list(arg = "multi_libs_progress",
+                        list(arg = "progress_bar",
                              class = "logical")))
   ## call Enrichr API
   if (run_mode == "single") {
     .msg("Enriching gene-list %s against Enrichr library: %s.",
          user_list_id, gene_set_library)
     final_output = .rba_enrichr_enrich_internal(user_list_id = user_list_id,
-                                               gene_set_library = gene_set_library,
-                                               save_name = sprintf("enrichr_%s_%s.json",
-                                                                   user_list_id,
-                                                                   gene_set_library),
-                                               ...)
+                                                gene_set_library = gene_set_library,
+                                                save_name = sprintf("enrichr_%s_%s.json",
+                                                                    user_list_id,
+                                                                    gene_set_library),
+                                                ...)
     return(final_output)
 
   } else {
@@ -402,7 +404,7 @@ rba_enrichr_enrich = function(user_list_id,
                 "libraries and your network connection."),
          length(gene_set_library))
     ## initiate progress bar
-    if (isTRUE(multi_libs_progress)) {
+    if (isTRUE(progress_bar)) {
       pb = utils::txtProgressBar(min = 0,
                                  max = length(gene_set_library),
                                  style = 3)
@@ -410,18 +412,18 @@ rba_enrichr_enrich = function(user_list_id,
     final_output = lapply(gene_set_library,
                           function(x){
                             lib_enrich_res = .rba_enrichr_enrich_internal(user_list_id = user_list_id,
-                                                                         gene_set_library = x,
-                                                                         save_name = sprintf("enrichr_%s_%s.json",
-                                                                                             user_list_id,
-                                                                                             x),
-                                                                         ...)
+                                                                          gene_set_library = x,
+                                                                          save_name = sprintf("enrichr_%s_%s.json",
+                                                                                              user_list_id,
+                                                                                              x),
+                                                                          ...)
                             #advance the progress bar
-                            if (isTRUE(multi_libs_progress)) {
+                            if (isTRUE(progress_bar)) {
                               utils::setTxtProgressBar(pb, which(gene_set_library == x))
                             }
                             return(lib_enrich_res)
                           })
-    close(pb)
+    if (isTRUE(progress_bar)) {close(pb)}
     names(final_output) = gene_set_library
     return(final_output)
   }
@@ -505,7 +507,7 @@ rba_enrichr_gene_map = function(gene,
 #' This function will call other rba_enrichr_*** functions with the following
 #'   order:
 #'   \enumerate{
-#'   \item (If neccessary) Call \code{\link{rba_enrichr_info}} to obtain a list
+#'   \item (If neccessary) Call \code{\link{rba_enrichr_libs}} to obtain a list
 #'     of available libraries in Enrichr.
 #'   \item Call \code{\link{rba_enrichr_add_list}} to upload your gene-list
 #'     and obtain a 'user list ID'.
@@ -546,12 +548,12 @@ rba_enrichr_gene_map = function(gene,
 #'
 #' @family "Enrichr API"
 #' @export
-rba_enrichr = function(gene_list,
-                       description = NA,
-                       gene_set_library = "all",
-                       regex_library_name = TRUE,
-                       multi_libs_progress = TRUE,
-                       ...) {
+rba_enrichr_wrp = function(gene_list,
+                           description = NA,
+                           gene_set_library = "all",
+                           regex_library_name = TRUE,
+                           progress_bar = FALSE,
+                           ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -561,10 +563,10 @@ rba_enrichr = function(gene_list,
                              class = "character"),
                         list(arg = "regex_library_name",
                              class = "logical"),
-                        list(arg = "multi_libs_progress",
+                        list(arg = "progress_bar",
                              class = "logical")))
   .msg("--Step 1/3:")
-  invisible(rba_enrichr_info(store_in_options = TRUE,
+  invisible(rba_enrichr_libs(store_in_options = TRUE,
                              ...))
   .msg("--Step 2/3:")
   list_id = rba_enrichr_add_list(gene_list = gene_list,
@@ -574,7 +576,7 @@ rba_enrichr = function(gene_list,
   enriched = rba_enrichr_enrich(user_list_id = list_id$userListId,
                                 gene_set_library = gene_set_library,
                                 regex_library_name = regex_library_name,
-                                multi_libs_progress = multi_libs_progress,
+                                progress_bar = progress_bar,
                                 ...)
   return(enriched)
 }
