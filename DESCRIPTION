@@ -25,6 +25,10 @@ Imports:
   methods,
   utils
 Suggests:
-  rstudioapi,
-  png
+    rstudioapi,
+    png,
+    knitr,
+    DT,
+    rmarkdown
 RoxygenNote: 7.1.1
+VignetteBuilder: knitr

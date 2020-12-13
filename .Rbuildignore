@@ -7,3 +7,5 @@
 ^\.Ruserdata$
 ^desktop\.ini$
 ^icon\.ico$
+^doc$
+^Meta$
