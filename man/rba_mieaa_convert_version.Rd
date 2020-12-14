@@ -37,7 +37,7 @@ Depending on the arguments, a data frame or a character vectors
   containing the miRNA accessions in your output version.
 }
 \description{
-MiEAA works with miRBASE v22 accession. Using This function you can convert
+miEAA works with miRBASE v22 accession. Using This function you can convert
   a set of mature or precursor miRNA accession between two given miRBase
   versions.
 }
@@ -60,12 +60,12 @@ rba_mieaa_convert_version(mirna = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
   management systems, Nucleic Acids Research, Volume 48, Issue W1,
   02 July 2020, Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
   \item
-  \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{MiEAA
+  \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
   browsable API tutorial}
   }
 }
 \seealso{
-Other "MiEAA API": 
+Other "miEAA API": 
 \code{\link{.rba_mieaa_species}()},
 \code{\link{rba_mieaa_cats}()},
 \code{\link{rba_mieaa_convert_type}()},
@@ -74,4 +74,4 @@ Other "MiEAA API":
 \code{\link{rba_mieaa_enrich_submit}()},
 \code{\link{rba_mieaa_enrich}()}
 }
-\concept{"MiEAA API"}
+\concept{"miEAA API"}

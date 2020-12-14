@@ -2,7 +2,7 @@
 % Please edit documentation in R/mieaa.R
 \name{rba_mieaa_enrich_status}
 \alias{rba_mieaa_enrich_status}
-\title{Check Status of a Submitted Enrichment Analysis in MiEAA}
+\title{Check Status of a Submitted Enrichment Analysis in miEAA}
 \usage{
 rba_mieaa_enrich_status(job_id, ...)
 }
@@ -27,7 +27,7 @@ After you have submitted your enrichment analysis (using
 \details{
 Note that using \code{\link{rba_mieaa_enrich}} is a more convenient way to
   automatically perform this and other required function calls to enrich
-  your input miRNA-set using MiEAA.
+  your input miRNA-set using miEAA.
 }
 \section{Corresponding API Resources}{
 
@@ -47,12 +47,12 @@ Note that using \code{\link{rba_mieaa_enrich}} is a more convenient way to
   management systems, Nucleic Acids Research, Volume 48, Issue W1,
   02 July 2020, Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
   \item
-  \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{MiEAA
+  \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
   browsable API tutorial}
   }
 }
 \seealso{
-Other "MiEAA API": 
+Other "miEAA API": 
 \code{\link{.rba_mieaa_species}()},
 \code{\link{rba_mieaa_cats}()},
 \code{\link{rba_mieaa_convert_type}()},
@@ -61,4 +61,4 @@ Other "MiEAA API":
 \code{\link{rba_mieaa_enrich_submit}()},
 \code{\link{rba_mieaa_enrich}()}
 }
-\concept{"MiEAA API"}
+\concept{"miEAA API"}

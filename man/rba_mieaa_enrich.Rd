@@ -2,13 +2,13 @@
 % Please edit documentation in R/mieaa.R
 \name{rba_mieaa_enrich}
 \alias{rba_mieaa_enrich}
-\title{A One-step Wrapper for miRNA Enrichment Using MiEAA}
+\title{A One-step Wrapper for miRNA Enrichment Using miEAA}
 \usage{
 rba_mieaa_enrich(
   test_set,
   mirna_type,
   test_type,
-  species = "hsa",
+  species,
   categories = NA,
   p_adj_method = "fdr",
   independent_p_adj = TRUE,
@@ -95,7 +95,7 @@ A data frame with your enrichment analysis results.
 }
 \description{
 This function is a wrapper for the multiple function calls necessary to
-  enrich a given miRNA list using MiEAA. see details section
+  enrich a given miRNA list using miEAA. see details section
   for more information.
 }
 \details{
@@ -103,7 +103,7 @@ This function will call other rba_mieaa_*** functions with the following
   order:
   \enumerate{
   \item Call \code{\link{rba_mieaa_enrich_submit}} to Submit an enrichment
-    analysis request to MiEAA servers, using your provided miRNA lists and
+    analysis request to miEAA servers, using your provided miRNA lists and
     other arguments.
   \item Once your job was successfully submitted, it will call
     \code{\link{rba_mieaa_enrich_status}} every 5 seconds, to check the
@@ -136,12 +136,12 @@ This function will call other rba_mieaa_*** functions with the following
   management systems, Nucleic Acids Research, Volume 48, Issue W1,
   02 July 2020, Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
   \item
-  \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{MiEAA
+  \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
   browsable API tutorial}
   }
 }
 \seealso{
-Other "MiEAA API": 
+Other "miEAA API": 
 \code{\link{.rba_mieaa_species}()},
 \code{\link{rba_mieaa_cats}()},
 \code{\link{rba_mieaa_convert_type}()},
@@ -150,4 +150,4 @@ Other "MiEAA API":
 \code{\link{rba_mieaa_enrich_status}()},
 \code{\link{rba_mieaa_enrich_submit}()}
 }
-\concept{"MiEAA API"}
+\concept{"miEAA API"}

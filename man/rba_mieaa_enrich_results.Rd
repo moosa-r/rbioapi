@@ -2,7 +2,7 @@
 % Please edit documentation in R/mieaa.R
 \name{rba_mieaa_enrich_results}
 \alias{rba_mieaa_enrich_results}
-\title{Retrieve Results of a finished Enrichment Analysis from MiEAA}
+\title{Retrieve Results of a finished Enrichment Analysis from miEAA}
 \usage{
 rba_mieaa_enrich_results(job_id, sort_by = "p_adjusted", sort_asc = TRUE, ...)
 }
@@ -31,7 +31,7 @@ After your submitted enrichment analysis request has finished (check
 \details{
 Note that using \code{\link{rba_mieaa_enrich}} is a more convenient way to
   automatically perform this and other required function calls to enrich
-  your input miRNA-set using MiEAA.
+  your input miRNA-set using miEAA.
 }
 \section{Corresponding API Resources}{
 
@@ -51,12 +51,12 @@ Note that using \code{\link{rba_mieaa_enrich}} is a more convenient way to
   management systems, Nucleic Acids Research, Volume 48, Issue W1,
   02 July 2020, Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
   \item
-  \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{MiEAA
+  \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
   browsable API tutorial}
   }
 }
 \seealso{
-Other "MiEAA API": 
+Other "miEAA API": 
 \code{\link{.rba_mieaa_species}()},
 \code{\link{rba_mieaa_cats}()},
 \code{\link{rba_mieaa_convert_type}()},
@@ -65,4 +65,4 @@ Other "MiEAA API":
 \code{\link{rba_mieaa_enrich_submit}()},
 \code{\link{rba_mieaa_enrich}()}
 }
-\concept{"MiEAA API"}
+\concept{"miEAA API"}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/mieaa.R
 \name{.rba_mieaa_species}
 \alias{.rba_mieaa_species}
-\title{Handle Species argument input for MiEAA endpoints}
+\title{Handle Species argument input for miEAA endpoints}
 \usage{
 .rba_mieaa_species(sp, to_name = FALSE)
 }
@@ -14,7 +14,7 @@ abbrevation to specie's scientific name.}
 }
 \value{
 If to_name = FALSE, a three-lettered character string of
-  a supported MiEAA species. otherwise, if to_name = TRUE, a character
+  a supported miEAA species. otherwise, if to_name = TRUE, a character
   string with the scientific name of that specie.
 }
 \description{
@@ -28,7 +28,7 @@ This internal function will make it possible for the users to provide
 
 }
 \seealso{
-Other "MiEAA API": 
+Other "miEAA API": 
 \code{\link{rba_mieaa_cats}()},
 \code{\link{rba_mieaa_convert_type}()},
 \code{\link{rba_mieaa_convert_version}()},
@@ -37,4 +37,4 @@ Other "MiEAA API":
 \code{\link{rba_mieaa_enrich_submit}()},
 \code{\link{rba_mieaa_enrich}()}
 }
-\concept{"MiEAA API"}
+\concept{"miEAA API"}

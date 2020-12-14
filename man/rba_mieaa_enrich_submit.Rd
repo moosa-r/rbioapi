@@ -2,7 +2,7 @@
 % Please edit documentation in R/mieaa.R
 \name{rba_mieaa_enrich_submit}
 \alias{rba_mieaa_enrich_submit}
-\title{Submit MiEAA miRNA Enrichment Analysis Request}
+\title{Submit miEAA miRNA Enrichment Analysis Request}
 \usage{
 rba_mieaa_enrich_submit(
   test_set,
@@ -86,14 +86,14 @@ A list that contains your submitted job's ID and a URL to
   manually check for your job status.
 }
 \description{
-Using This function you can submit a request in MiEAA servers to perform
+Using This function you can submit a request in miEAA servers to perform
   Over-representation or GSEA Analysis for a given set of miRNA identifiers.
   see "arguments" section for more information.
 }
 \details{
 Note that using \code{\link{rba_mieaa_enrich}} is a more convenient way to
   automatically perform this and other required function calls to enrich
-  your input miRNA-set using MiEAA.
+  your input miRNA-set using miEAA.
 }
 \section{Corresponding API Resources}{
 
@@ -117,12 +117,12 @@ rba_mieaa_enrich_submit(test_set = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
   management systems, Nucleic Acids Research, Volume 48, Issue W1,
   02 July 2020, Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
   \item
-  \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{MiEAA
+  \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
   browsable API tutorial}
   }
 }
 \seealso{
-Other "MiEAA API": 
+Other "miEAA API": 
 \code{\link{.rba_mieaa_species}()},
 \code{\link{rba_mieaa_cats}()},
 \code{\link{rba_mieaa_convert_type}()},
@@ -131,4 +131,4 @@ Other "MiEAA API":
 \code{\link{rba_mieaa_enrich_status}()},
 \code{\link{rba_mieaa_enrich}()}
 }
-\concept{"MiEAA API"}
+\concept{"miEAA API"}

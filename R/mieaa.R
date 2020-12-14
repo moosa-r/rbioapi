@@ -1,4 +1,4 @@
-#' Handle Species argument input for MiEAA endpoints
+#' Handle Species argument input for miEAA endpoints
 #'
 #' This internal function will make it possible for the users to provide
 #'   variety of specie's name type or if they have enterned a wrongly-formatted
@@ -9,14 +9,14 @@
 #'   abbrevation to specie's scientific name.
 #'
 #' @return If to_name = FALSE, a three-lettered character string of
-#'   a supported MiEAA species. otherwise, if to_name = TRUE, a character
+#'   a supported miEAA species. otherwise, if to_name = TRUE, a character
 #'   string with the scientific name of that specie.
 #'
 #' @examples
 #' .rba_mieaa_species(9606)
 #' .rba_mieaa_species("hsa", to_name = TRUE)
 #'
-#' @family "MiEAA API"
+#' @family "miEAA API"
 #' @export
 .rba_mieaa_species = function(sp, to_name = FALSE) {
   diagnostics = diagnostics = get0("diagnostics", envir = parent.frame(1),
@@ -92,14 +92,14 @@
 #'   management systems, Nucleic Acids Research, Volume 48, Issue W1,
 #'   02 July 2020, Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
 #'   \item
-#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{MiEAA
+#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
 #'   browsable API tutorial}
 #'   }
 #'
 #' @examples
 #' rba_mieaa_cats("mature", "Homo sapiens")
 #'
-#' @family "MiEAA API"
+#' @family "miEAA API"
 #' @export
 rba_mieaa_cats = function(mirna_type, species,...) {
   ## Load Global Options
@@ -148,7 +148,7 @@ rba_mieaa_cats = function(mirna_type, species,...) {
 
 #' Convert miRNA accession Between Different miRBase Versions
 #'
-#' MiEAA works with miRBASE v22 accession. Using This function you can convert
+#' miEAA works with miRBASE v22 accession. Using This function you can convert
 #'   a set of mature or precursor miRNA accession between two given miRBase
 #'   versions.
 #'
@@ -179,7 +179,7 @@ rba_mieaa_cats = function(mirna_type, species,...) {
 #'   management systems, Nucleic Acids Research, Volume 48, Issue W1,
 #'   02 July 2020, Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
 #'   \item
-#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{MiEAA
+#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
 #'   browsable API tutorial}
 #'   }
 #'
@@ -187,7 +187,7 @@ rba_mieaa_cats = function(mirna_type, species,...) {
 #' rba_mieaa_convert_version(mirna = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
 #'   mirna_type = "mature", input_version = 22, output_version =  16)
 #'
-#' @family "MiEAA API"
+#' @family "miEAA API"
 #' @export
 rba_mieaa_convert_version = function(mirna,
                                      mirna_type,
@@ -284,7 +284,7 @@ rba_mieaa_convert_version = function(mirna,
 #'   management systems, Nucleic Acids Research, Volume 48, Issue W1,
 #'   02 July 2020, Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
 #'   \item
-#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{MiEAA
+#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
 #'   browsable API tutorial}
 #'   }
 #'
@@ -292,7 +292,7 @@ rba_mieaa_convert_version = function(mirna,
 #' rba_mieaa_convert_type(mirna = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
 #' input_type = "mature")
 #'
-#' @family "MiEAA API"
+#' @family "miEAA API"
 #' @export
 rba_mieaa_convert_type = function(mirna,
                                   input_type,
@@ -357,15 +357,15 @@ rba_mieaa_convert_type = function(mirna,
   return(final_output)
 }
 
-#' Submit MiEAA miRNA Enrichment Analysis Request
+#' Submit miEAA miRNA Enrichment Analysis Request
 #'
-#' Using This function you can submit a request in MiEAA servers to perform
+#' Using This function you can submit a request in miEAA servers to perform
 #'   Over-representation or GSEA Analysis for a given set of miRNA identifiers.
 #'   see "arguments" section for more information.
 #'
 #' Note that using \code{\link{rba_mieaa_enrich}} is a more convenient way to
 #'   automatically perform this and other required function calls to enrich
-#'   your input miRNA-set using MiEAA.
+#'   your input miRNA-set using miEAA.
 #'
 #' @param test_set a character vector with your mature or precursor miRBase
 #'   miRNA accessions. Note that \enumerate{
@@ -433,7 +433,7 @@ rba_mieaa_convert_type = function(mirna,
 #'   management systems, Nucleic Acids Research, Volume 48, Issue W1,
 #'   02 July 2020, Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
 #'   \item
-#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{MiEAA
+#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
 #'   browsable API tutorial}
 #'   }
 #'
@@ -444,7 +444,7 @@ rba_mieaa_convert_type = function(mirna,
 #'   species = 9606,
 #'   categories = NA)
 #'
-#' @family "MiEAA API"
+#' @family "miEAA API"
 #' @export
 rba_mieaa_enrich_submit = function(test_set,
                                    mirna_type,
@@ -512,7 +512,7 @@ rba_mieaa_enrich_submit = function(test_set,
   }
   names(categories) = rep("categories", length(categories))
 
-  .msg("Submitting %s enrichment request for %s miRNA IDs of species %s to MiEAA servers.",
+  .msg("Submitting %s enrichment request for %s miRNA IDs of species %s to miEAA servers.",
        test_type, length(test_set), .rba_mieaa_species(species, to_name = TRUE))
 
   ## Build POST API Request's body
@@ -548,7 +548,7 @@ rba_mieaa_enrich_submit = function(test_set,
   return(final_output)
 }
 
-#' Check Status of a Submitted Enrichment Analysis in MiEAA
+#' Check Status of a Submitted Enrichment Analysis in miEAA
 #'
 #' After you have submitted your enrichment analysis (using
 #'    \code{\link{rba_mieaa_enrich_submit}}) and retrieved a job-id,
@@ -558,7 +558,7 @@ rba_mieaa_enrich_submit = function(test_set,
 #'
 #' Note that using \code{\link{rba_mieaa_enrich}} is a more convenient way to
 #'   automatically perform this and other required function calls to enrich
-#'   your input miRNA-set using MiEAA.
+#'   your input miRNA-set using miEAA.
 #'
 #' @param job_id The job-id (a character string) of a submitted enrichment
 #'   analysis.
@@ -579,14 +579,14 @@ rba_mieaa_enrich_submit = function(test_set,
 #'   management systems, Nucleic Acids Research, Volume 48, Issue W1,
 #'   02 July 2020, Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
 #'   \item
-#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{MiEAA
+#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
 #'   browsable API tutorial}
 #'   }
 #'
 #' @examples
 #' \dontrun{rba_mieaa_enrich_status("f52d1aef-6d3d-4d51-9020-82e68fe99012")}
 #'
-#' @family "MiEAA API"
+#' @family "miEAA API"
 #' @export
 rba_mieaa_enrich_status = function(job_id,...) {
   ## Load Global Options
@@ -614,7 +614,7 @@ rba_mieaa_enrich_status = function(job_id,...) {
   return(final_output)
 }
 
-#' Retrieve Results of a finished Enrichment Analysis from MiEAA
+#' Retrieve Results of a finished Enrichment Analysis from miEAA
 #'
 #' After your submitted enrichment analysis request has finished (check
 #'   using \code{\link{rba_mieaa_enrich_status}}), you can retrieve the results
@@ -622,7 +622,7 @@ rba_mieaa_enrich_status = function(job_id,...) {
 #'
 #' Note that using \code{\link{rba_mieaa_enrich}} is a more convenient way to
 #'   automatically perform this and other required function calls to enrich
-#'   your input miRNA-set using MiEAA.
+#'   your input miRNA-set using miEAA.
 #'
 #' @param job_id The job-id (a character string) of a submitted enrichment
 #'   analysis.
@@ -647,14 +647,14 @@ rba_mieaa_enrich_status = function(job_id,...) {
 #'   management systems, Nucleic Acids Research, Volume 48, Issue W1,
 #'   02 July 2020, Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
 #'   \item
-#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{MiEAA
+#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
 #'   browsable API tutorial}
 #'   }
 #'
 #' @examples
 #' \dontrun{rba_mieaa_enrich_results("f52d1aef-6d3d-4d51-9020-82e68fe99012")}
 #'
-#' @family "MiEAA API"
+#' @family "miEAA API"
 #' @export
 rba_mieaa_enrich_results = function(job_id,
                                     sort_by = "p_adjusted",
@@ -714,17 +714,17 @@ rba_mieaa_enrich_results = function(job_id,
   return(final_output)
 }
 
-#' A One-step Wrapper for miRNA Enrichment Using MiEAA
+#' A One-step Wrapper for miRNA Enrichment Using miEAA
 #'
 #' This function is a wrapper for the multiple function calls necessary to
-#'   enrich a given miRNA list using MiEAA. see details section
+#'   enrich a given miRNA list using miEAA. see details section
 #'   for more information.
 #'
 #' This function will call other rba_mieaa_*** functions with the following
 #'   order:
 #'   \enumerate{
 #'   \item Call \code{\link{rba_mieaa_enrich_submit}} to Submit an enrichment
-#'     analysis request to MiEAA servers, using your provided miRNA lists and
+#'     analysis request to miEAA servers, using your provided miRNA lists and
 #'     other arguments.
 #'   \item Once your job was successfully submitted, it will call
 #'     \code{\link{rba_mieaa_enrich_status}} every 5 seconds, to check the
@@ -751,7 +751,7 @@ rba_mieaa_enrich_results = function(job_id,
 #'   management systems, Nucleic Acids Research, Volume 48, Issue W1,
 #'   02 July 2020, Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
 #'   \item
-#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{MiEAA
+#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
 #'   browsable API tutorial}
 #'   }
 #'
@@ -762,12 +762,12 @@ rba_mieaa_enrich_results = function(job_id,
 #'   species = 9606,
 #'   categories = NA)}
 #'
-#' @family "MiEAA API"
+#' @family "miEAA API"
 #' @export
 rba_mieaa_enrich = function(test_set,
                             mirna_type,
                             test_type,
-                            species = "hsa",
+                            species,
                             categories = NA,
                             p_adj_method = "fdr",
                             independent_p_adj = TRUE,
