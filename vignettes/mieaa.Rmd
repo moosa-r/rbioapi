@@ -1,0 +1,135 @@
+---
+title: "2.B: miEEA & rbioapi"
+author: "Moosa Rezwani"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_document:
+    theme: flatly
+    highlight: default
+    css: css.css
+    toc: true
+    toc_float: true
+    anchor_sections: true
+
+vignette: >
+  %\VignetteIndexEntry{2A: Enrichr & rbioapi}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r message=FALSE, include=FALSE, results="hide", setup, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      tidy = FALSE,
+                      cache = FALSE,
+                      dev = "png",
+                      collapse = TRUE,
+                      comment = "#>",
+                      eval = TRUE
+)
+library(rbioapi)
+rba_options(timeout = 600)
+```
+
+------------------------------------------------------------------------
+
+## Introduction {#introduction .heading2}
+
+The miRNA Enrichment Analysis and Annotation Tool ([miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "https://ccb-compute2.cs.uni-saarland.de/mieaa2")) is a service provided by [Chair for Clinical Bioinformatics at Saarland University](https://www.ccb.uni-saarland.de/). Basically miEAA is a multi-species microRNA enrichment analysis tools. For more information, see their [website](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "https://ccb-compute2.cs.uni-saarland.de/mieaa2") or [published paper](https://doi.org/10.1093/nar/gkaa309 "miEAA 2.0: integrating multi-species microRNA enrichment analysis and workflow management systems").
+
+------------------------------------------------------------------------
+
+## First, find **enrichment categories**
+
+Before Enriching miRNA set, note that based on your input **miRNA type** (either all mature or precursor, not a mixture of both!) and the **species**, there will be different [sets](https://ccb-compute2.cs.uni-saarland.de/mieaa2/downloads/ "miEEA integrated data sets") of supported **enrichment categories.**
+
+Thus, it is recommended to retrieve a list of possible enrichment categories that you may use:
+
+```{r rba_mieaa_cats, eval=FALSE}
+# A list of available enrichment catagories for:
+## mature human miRNA:
+rba_mieaa_cats(mirna_type = "mature", species = 9606)
+## precursor human miRNA
+rba_mieaa_cats(mirna_type = "mature", species = 9606)
+## precursor zebrafish miRNA
+rba_mieaa_cats(mirna_type = "mature", species = "Danio rerio")
+```
+
+------------------------------------------------------------------------
+
+## Submit Enrichment analysis request in miEAA
+
+There are two approach to do this, we will start with the simpler one.
+
+### Approach 1: Using the Wrapper function {#approach-1-using-the-wrapper-function .heading3}
+
+Just fill the arguments of `rba_enrichr_wrp()` according to the function's manual; As you can see in the function's arguments, you have a lot of controls over your enrichment request, but you need to provide `test_set`, `mirna_type`, `test_type`, and `species`:
+
+```{r rba_mieaa_enrich, message=TRUE}
+# 1 We create a variable with our miRNAs' mature IDs
+mirs <- c("hsa-miR-20b-5p", "hsa-miR-144-5p", "hsa-miR-17-5p", "hsa-miR-20a-5p",
+         "hsa-miR-222-3p", "hsa-miR-106a-5p", "hsa-miR-93-5p", "hsa-miR-126-3p",
+         "hsa-miR-363-3p", "hsa-miR-302c-3p", "hsa-miR-374b-5p", "hsa-miR-18a-5p",
+         "hsa-miR-548d-3p", "hsa-miR-135a-3p", "hsa-miR-558", "hsa-miR-130b-5p",
+         "hsa-miR-148a-3p")
+# 2a We can enrich our miRNA set without limiting the enrichment to any categories
+mieaa_all <- rba_mieaa_enrich(test_set = mirs,
+                             mirna_type = "mature",
+                             test_type = "ORA",
+                             species = 9606)
+# 2b Or, We can limit the enrichment to certain datasets (enrichment catagories)
+mieaa_kegg <- rba_mieaa_enrich(test_set = mirs,
+                              mirna_type = "mature",
+                              test_type = "ORA",
+                              species = 9606,
+                              categories = c("miRWalk_Diseases_mature",
+                                            "miRWalk_Organs_mature")
+                             )
+```
+
+```{r mieaa_kegg_table, echo=FALSE}
+DT::datatable(data = mieaa_kegg,
+              style = "bootstrap4",
+              options = list(scrollX = TRUE, 
+                             paging = TRUE,
+                             fixedHeader = TRUE,
+                             keys = TRUE,
+                             pageLength = 10))
+
+```
+
+### Approach 2: Going step-by-step {#approach-2-going-step-by-step .heading3}
+
+As stated before, `rba_enrichr_wrp()` is a wrapper function, meaning that it executes the following sequence of functions:
+
+```{r rba_meaa_submit/status/results, eval=FALSE}
+# 1 Submit enrichment request to miEAA
+request = rba_mieaa_enrich_submit(test_set = mirs,
+                                  mirna_type = "mature",
+                                  test_type = "ORA",
+                                  species = 9606,
+                                  categories = c("miRWalk_Diseases_mature",
+                                                 "miRWalk_Organs_mature")
+                                  )
+# 2 check for job's running status
+rba_mieaa_enrich_status(job_id = request$job_id)
+
+# 3 If the job has completed, retrieve the results
+results = rba_mieaa_enrich_results(job_id = request$job_id)
+```
+
+------------------------------------------------------------------------
+
+## Convert miRNA accessions {#convert-mirna-accessions .heading2}
+
+miEAA only recognizes miRBASE version 22 accessions. You can use `rba_mieaa_convert_version()` to convert miRNA accession between different miRBASE versions. Also, as stated before, miEAA differentiate between precursor and mature miRNA accessions, to convert between these 2 accession types, use `rba_mieaa_convert_type()` .
+
+------------------------------------------------------------------------
+
+## Session info {#session-info .heading2}
+
+```{r sessionInfo, echo=FALSE}
+sessionInfo()
+```
+
