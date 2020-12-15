@@ -34,7 +34,8 @@
 #'   }
 #'
 #' @examples
-#' rba_panther_mapping
+#' x = rba_panther_mapping(genes = c("Cd40", 7124, "ENSG00000203747", "P33681"),
+#'  organism = 9606)
 #' @family "PANTHER API"
 #' @export
 rba_panther_mapping = function(genes,
@@ -199,7 +200,12 @@ rba_panther_enrich = function(genes,
 
   ## Build Function-Specific Call
   parser_input = list("json->list_simp",
-                      function(x) {x$results})
+                      function(x) {
+                        x = x$results
+                        x$result$term_label = x$result$term[,1]
+                        x$result$term = x$result$term[,2]
+                        return(x)
+                        })
   if (!is.na(cutoff)) {
     if (correction == "FDR") {
       parser_input = append(parser_input,
@@ -304,7 +310,8 @@ rba_panther_info = function(what,
                              "'organism_chr_loc' was ignored because 'what' argument is not 'organisms'.",
                              warn = TRUE)))
   .msg("Retrieving %s%s.",
-       switch("organisms" = "supported organisms in PANTHER",
+       switch(what,
+              "organisms" = "supported organisms in PANTHER",
               "datasets" = "available annotation datasets",
               "families" = "available family IDs",
               "pathways" = "available pathway IDs"),
