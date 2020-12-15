@@ -1,0 +1,168 @@
+---
+title: "1: User-friendly Interface to Biologic API Services"
+author: "Moosa Rezwani"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_document:
+    theme: spacelab
+    highlight: default
+    css: css.css
+    toc: true
+    toc_float: true
+    anchor_sections: true
+
+vignette: >
+  %\VignetteIndexEntry{1: User-friendly Interface to Biologic API Services}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE, setup, echo=FALSE, results="hide"}
+knitr::opts_chunk$set(echo = TRUE,
+                      tidy = FALSE,
+                      cache = FALSE,
+                      dev = "png",
+                      collapse = TRUE,
+                      comment = "#>",
+                      eval = TRUE
+)
+library(rbioapi)
+rba_options(timeout = 600)
+```
+
+------------------------------------------------------------------------
+
+## What does rbioapi do? {#what-does-rbioapi-do .heading2}
+
+rbioapi is basically an interface to insulate the user from technicalities and complications when it come to using API services. With rbioapi, You are not required to have knowledge about HTTP protocols, CURL, REST API, parsing the response etc. **Just fill a function's arguments and the rest is handled for you.**
+
+------------------------------------------------------------------------
+
+## What is supported by rbioapi? {#what-is-supported-by-rbioapi .heading2}
+
+rbioapi is dedicated to **Biological or Medical** databases and web services. Currently, rbioapi fully supports the following (in alphabetical order!):
+
+1.  Enrichr
+2.  MiEAA
+3.  PANTHER
+4.  Reactome
+5.  STRING
+6.  UniProt
+
+**Note That:** rbioapi is an ongoing project. New databases and services will be implemented periodically. Do you see yourself often using a certain database/service? Feel free to suggest any database/service by creating an issue in our github page. I will appreciate any suggestions.
+
+------------------------------------------------------------------------
+
+## Design philosophy of rbioapi {#design-philosophy-of-rbioapi .heading2}
+
+-   The functions' structure should be **unified across all the databases and services**. There should not be any learning effort when using functions from different services.
+
+-   The interface should be a **simple plugging values in function's arguments** and running the code. No function should explicitly demand the user to run another function beforehand.
+
+-   **Beginner** end of users spectrum should conveniently use rbioapi. For example, before any error to happen, user input arguments will be vigorously checked; Or for example, if any service's resource requires particular input conditions, that conditions will be checked during user's input validation.
+
+-   Produce **Informative message**, warnings and error. For example, if a server returns an error in a particular format, convert the server's error response to R error.
+
+-   The functions names and arguments should be as **faithful** as possible to the original API resources. This is to ensure that the users could conveniently connect the dots between rbioapi and the web service.
+
+-   The user should be completely **insulated from any technicalities**.
+
+------------------------------------------------------------------------
+
+## Naming conventions {#naming-conventions .heading2}
+
+To make the namespace more organized, functions has been named with the following pattern:
+
+> rba\_[service_name]\_[resource_name]
+
+For example, `rba_string_version()` will call STRING's version resource.
+
+```{r naming_example, echo=TRUE, message=TRUE}
+rba_string_version()
+```
+
+Thus, to this version, rbioapi function will have one of the following naming schema:
+
+1.  rba_enrichr\_\*
+2.  rba_mieaa\_\*
+3.  rba_panther\_\*
+4.  rba_reactome\_\*
+5.  rba_string\_\*
+6.  rba_uniprot\_\*
+
+There are two exceptions: `rba_options()` and `rba_connection_test()`. more on that later.
+
+------------------------------------------------------------------------
+
+## Changing the options {#changing-the-options .heading2}
+
+To provide more control, multiple options have been implemented. Refer to function `rba_options()'s manual` for a full description of available options. In short, some of the options will govern rbioapi's connection with servers (such as timeout, retry etc.) and some of the options will modify your experience with rbioapi (such as verbose, diagnostics, save_file etc.). There are two ways that you may use to change any option:
+
+### 1. Change the option globally {#changing-the-options-change-the-option-globally .heading3}
+
+Changing an option globally means that for the rest of your R session, any rbioapi function will respect the changed option. To do this, use `rba_options().` Each argument in this function corresponds to a certain option; Thus by running this function with your desired new values, you could globally alter that rbioapi option. for example:
+
+```{r rba_options_global, eval=FALSE}
+rba_options(save_file = TRUE)
+# from now on, any raw server's response file will be saved to your disk.
+rba_options(verbose = FALSE)
+# from now on, the package will be quiet.
+```
+
+### 2. Change the option only within a function call {#changing-the-options-change-the-option-only-within-a-function-call .heading3}
+
+You can pass additional arguments to any rbioapi function using "ellipsis" (the familiar `…` or dot dot dot!). Meaning that you can call any function with additional arguments where each is 'option = value' pair. This way, any changes in options will be confined within that particular function. For example:
+
+```{r rba_options_ellipsis1, eval=FALSE}
+# save the server's raw response file
+x = rba_reactome_species(only_main = TRUE, save_file = "reactome_species.json")
+# also , in the case of connection failure, retry up to 10 times!
+x = rba_reactome_species(only_main = TRUE,
+                         save_file = "reactome_species.json", retry_max = 10)
+
+```
+
+```{r rba_options_ellipsis2, echo=TRUE, message=TRUE}
+## run these codes in your own R session to see the difference.
+# show internal diagnostics boring details
+x = rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC", diangnostics = TRUE)
+# the next function you call, will still use the default rbioapi options
+x = rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC")
+```
+
+------------------------------------------------------------------------
+
+## Connection test {#connection-test .heading2}
+
+The second exception in functions' naming schema is `rba_connection_test()`. Run this simple function to check you connection with the supported services/databases. If you encounter errors when using rbioapi, kindly run this function to make sure that your internet connection or the servers are fine.
+
+```{r rba_connection_test, eval=FALSE, message=TRUE, include=FALSE}
+rba_connection_test()
+```
+
+------------------------------------------------------------------------
+
+## How to cite? {#how-to-cite .heading2}
+
+rbioapi is an interface between you and other databases and services. Thus, if you have used rbioapi in a published research, kindly **in addition to citing rbioapi, cite the databases you have used**. Suggested citations has been added in the functions' manuals, under "references" section; Nevertheless, it is the user's responsibility to check for proper citations and to properly cite the database/services that they have used.
+
+------------------------------------------------------------------------
+
+## Code of conduct {#code-of-conduct .heading2}
+
+When using rbioapi, remember that you are querying data from web services; So please be considerate. Never flood a server with requests, if you need to download *unreasonably* large volumes of data, directly downloading the databases provided in those services may be a better alternative. If you see yourself being rate-limited from any server (HTTP **429 Too Many Requests** response status code), know that you are sending more requests than what the server interpret as normal behaviour, so please seek other methods or use `Sys.sleep()` between your requests.
+
+## What next? {#what-next .heading2}
+
+Each supported service has a dedicated vignette article. Make sure to check those too.
+
+1.  [Enrichr](enrichr.html "Enrichr vignette page")
+2.  [miEAA](mieaa.html "miEAA vignette page")
+
+------------------------------------------------------------------------
+
+## Session info {#session-info .heading2}
+
+```{r sessionInfo, echo=FALSE}
+sessionInfo()
+```
