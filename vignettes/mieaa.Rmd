@@ -6,13 +6,15 @@ output:
   rmarkdown::html_document:
     theme: flatly
     highlight: default
-    css: css.css
+    css: html_files/css.css
     toc: true
     toc_float: true
     anchor_sections: true
+    self_contained: true
+    code_folding: show
 
 vignette: >
-  %\VignetteIndexEntry{2A: Enrichr & rbioapi}
+  %\VignetteIndexEntry{2.B: miEEA & rbioapi}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

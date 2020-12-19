@@ -4,12 +4,14 @@ author: "Moosa Rezwani"
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_document:
-    theme: spacelab
+    theme: flatly
     highlight: default
-    css: css.css
+    css: html_files/css.css
     toc: true
     toc_float: true
     anchor_sections: true
+    self_contained: true
+    code_folding: show
 
 vignette: >
   %\VignetteIndexEntry{1: User-friendly Interface to Biologic API Services}
