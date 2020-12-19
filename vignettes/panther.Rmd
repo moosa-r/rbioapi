@@ -38,19 +38,19 @@ rba_options(timeout = 600)
 
 ## Introduction {#introduction .heading2}
 
-Directly quoting the the latest paper published by PANTHER (Protein ANalysis THrough Evolutionary Relationships) authors:
+Directly quoting the the paper published by PANTHER (Protein ANalysis THrough Evolutionary Relationships) authors:
 
 > The PANTHER classification system (<http://www.pantherdb.org>) a comprehensive system that combines genomes, gene function , pathways and statistical analysis tools to enable to analyze large-scale genome-wide experimental data. The system (PANTHER v.14.0) covers 131 complete genomes organized gene families and subfamilies; evolutionary relationships between are represented in phylogenetic trees, multiple sequence and statistical models (hidden Markov models (HMMs)). The families and subfamilies are annotated with Gene Ontology (GO) terms, sequences are assigned to PANTHER pathways. A suite of tools has built to allow users to browse and query gene functions and analyze-scale experimental data with a number of statistical tests. is widely used by bench scientists, bioinformaticians, computer and systems biologists.
 >
-> (reference: Mi, Huaiyu, et al. "Protocol Update for large-scale genome and gene function analysis with the PANTHER classification system (v. 14.0)." *Nature protocols* 14.3 (2019): 703-721)
+> (source: Mi, Huaiyu, et al. "Protocol Update for large-scale genome and gene function analysis with the PANTHER classification system (v. 14.0)." *Nature protocols* 14.3 (2019): 703-721)
 
-The provided tools in PANTHER's **RESTful API services** can be divided into 3 broad categories: Mapping genes, retrieving information and research tools. Herein, we provided a very short introduction; you can always check functions' manuals for in-depth guide.
+The provided tools in PANTHER's **RESTful API services** can be divided into 3 broad categories: Mapping genes, retrieving information, and research tools. Herein, we provided a very short introduction; you can always check functions' manuals for detailed guides and examples.
 
 ------------------------------------------------------------------------
 
 ## Map genes {#map-genes .heading2}
 
--   `rba_panther_mapping()`: map your gene-set to PANTHER database and retrieve attributes and annotations associated to your genes
+-   `rba_panther_mapping()`: map your gene-set to PANTHER database and retrieve attributes and annotations associated with your genes
 
 -   `rba_panther_ortholog()`: Retrieve Orthologs of your genes
 
@@ -62,7 +62,7 @@ The provided tools in PANTHER's **RESTful API services** can be divided into 3 b
 
 -   `rba_panther_info`(): Retrieve a list of PANTHER's supported organisms, datasets, families, or pathways
 
--   `rba_panther_family`(): Retrieve Orthologs, MSA or Tree topology of a given PANTHER family.
+-   `rba_panther_family`(): Retrieve Orthologs, MSA, or Tree topology of a given PANTHER family.
 
 ------------------------------------------------------------------------
 

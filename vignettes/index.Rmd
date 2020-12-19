@@ -36,7 +36,7 @@ rba_options(timeout = 600)
 
 ## What does rbioapi do? {#what-does-rbioapi-do .heading2}
 
-rbioapi is basically an interface to insulate the user from technicalities and complications when it come to using API services. With rbioapi, You are not required to have knowledge about HTTP protocols, CURL, REST API, parsing the response etc. **Just fill a function's arguments and the rest is handled for you.**
+rbioapi is an interface to insulate the user from technicalities and complications when it comse to using API services. With rbioapi, You are not required to have knowledge about HTTP protocols, CURL, REST API, parsing the response etc. **Just fill a function's arguments and the rest is handled for you.**
 
 ------------------------------------------------------------------------
 
@@ -51,21 +51,21 @@ rbioapi is dedicated to **Biological or Medical** databases and web services. Cu
 5.  STRING
 6.  UniProt
 
-**Note That:** rbioapi is an ongoing project. New databases and services will be implemented periodically. Do you see yourself often using a certain database/service? Feel free to suggest any database/service by creating an issue in our github page. I will appreciate any suggestions.
+**Note That:** rbioapi is an ongoing project. New databases and services will be implemented periodically. Do you see yourself often using a certain database/service? Feel free to suggest any database/service by creating an issue on our GitHub [repository](https://github.com/moosa-r/ "rbioapi GitHub repositry"). I will appreciate any suggestions.
 
 ------------------------------------------------------------------------
 
-## Design philosophy of rbioapi {#design-philosophy-of-rbioapi .heading2}
+## The design philosophy of rbioapi {#design-philosophy-of-rbioapi .heading2}
 
 -   The functions' structure should be **unified across all the databases and services**. There should not be any learning effort when using functions from different services.
 
--   The interface should be a **simple plugging values in function's arguments** and running the code. No function should explicitly demand the user to run another function beforehand.
+-   The interface should be **simple plugging values in a function's arguments** and running the code. No function should explicitly demand the user to run another function beforehand.
 
--   **Beginner** end of users spectrum should conveniently use rbioapi. For example, before any error to happen, user input arguments will be vigorously checked; Or for example, if any service's resource requires particular input conditions, that conditions will be checked during user's input validation.
+-   **Beginner** end of users spectrum should conveniently use rbioapi. For example, before any error happen, user input arguments will be vigorously checked; Or for example, if any service's resource requires particular input conditions, those conditions will be checked during user's input validation.
 
--   Produce **Informative message**, warnings and error. For example, if a server returns an error in a particular format, convert the server's error response to R error.
+-   Produce **Informative messages**, warnings, and error. For example, if a server returns an error in a particular format, convert the server's error response to R error.
 
--   The functions names and arguments should be as **faithful** as possible to the original API resources. This is to ensure that the users could conveniently connect the dots between rbioapi and the web service.
+-   The functions' names and arguments should be as **faithful** as possible to the original API resources. This is to ensure that the users could conveniently connect the dots between rbioapi and the web service.
 
 -   The user should be completely **insulated from any technicalities**.
 
@@ -98,7 +98,7 @@ There are two exceptions: `rba_options()` and `rba_connection_test()`. more on t
 
 ## Changing the options {#changing-the-options .heading2}
 
-To provide more control, multiple options have been implemented. Refer to function `rba_options()'s manual` for a full description of available options. In short, some of the options will govern rbioapi's connection with servers (such as timeout, retry etc.) and some of the options will modify your experience with rbioapi (such as verbose, diagnostics, save_file etc.). There are two ways that you may use to change any option:
+To provide more control, multiple options have been implemented. Refer to function `rba_options()'s manual` for a full description of available options. In short, some of the options will govern rbioapi's connection with servers (e.g. timeout, retry) and some of the options will modify your experience with rbioapi (e.g. verbose, diagnostics, save_file). There are two ways that you may use to change any option:
 
 ### 1. Change the option globally {#changing-the-options-change-the-option-globally .heading3}
 
@@ -136,7 +136,7 @@ x = rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC")
 
 ## Connection test {#connection-test .heading2}
 
-The second exception in functions' naming schema is `rba_connection_test()`. Run this simple function to check you connection with the supported services/databases. If you encounter errors when using rbioapi, kindly run this function to make sure that your internet connection or the servers are fine.
+The second exception in functions' naming schema is `rba_connection_test()`. Run this simple function to check your connection with the supported services/databases. If you encounter errors when using rbioapi, kindly run this function to make sure that your internet connection or the servers are fine.
 
 ```{r rba_connection_test, eval=FALSE, message=TRUE, include=FALSE}
 rba_connection_test()
@@ -146,13 +146,13 @@ rba_connection_test()
 
 ## How to cite? {#how-to-cite .heading2}
 
-rbioapi is an interface between you and other databases and services. Thus, if you have used rbioapi in a published research, kindly **in addition to citing rbioapi, cite the databases you have used**. Suggested citations has been added in the functions' manuals, under "references" section; Nevertheless, it is the user's responsibility to check for proper citations and to properly cite the database/services that they have used.
+rbioapi is an interface between you and other databases and services. Thus, if you have used rbioapi in published research, kindly **in addition to citing rbioapi, cite the databases you have used**. Suggested citations have been added in the functions' manuals, under the "references" section; Nevertheless, it is the user's responsibility to check for proper citations and to properly cite the database/services that they have used.
 
 ------------------------------------------------------------------------
 
 ## Code of conduct {#code-of-conduct .heading2}
 
-When using rbioapi, remember that you are querying data from web services; So please be considerate. Never flood a server with requests, if you need to download *unreasonably* large volumes of data, directly downloading the databases provided in those services may be a better alternative. If you see yourself being rate-limited from any server (HTTP **429 Too Many Requests** response status code), know that you are sending more requests than what the server interpret as normal behaviour, so please seek other methods or use `Sys.sleep()` between your requests.
+When using rbioapi, remember that you are querying data from web services; So please be considerate. Never flood a server with requests, if you need to download *unreasonably* large volumes of data, directly downloading the databases provided in those services may be a better alternative. If you see yourself being rate-limited from any server (HTTP **429 Too Many Requests** response status code), know that you are sending more requests than what the server interprets as normal behavior, so please seek other methods or use `Sys.sleep()` between your requests.
 
 ## What next? {#what-next .heading2}
 
