@@ -61,6 +61,8 @@ List containing the results and information of your analysis.
 \description{
 Use a token generated After a Reactome analysis
   (via \code{\link{rba_reactome_analysis}}) to Retrieve the analysis results.
+  The output format is identical to the returned object of
+  \code{\link{rba_reactome_analysis}}.
 }
 \details{
 After Any Analysis, Reactome will associate a token to your analysis. It

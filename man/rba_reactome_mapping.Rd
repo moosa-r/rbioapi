@@ -4,13 +4,7 @@
 \alias{rba_reactome_mapping}
 \title{Map External ID to Reactome Pathways/Reactions}
 \usage{
-rba_reactome_mapping(
-  id,
-  resource,
-  map_to = "pathways",
-  species = "Homo sapiens",
-  ...
-)
+rba_reactome_mapping(id, resource, map_to, species = "Homo sapiens", ...)
 }
 \arguments{
 \item{id}{Molecule's external Identifier}

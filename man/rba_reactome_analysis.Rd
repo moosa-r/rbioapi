@@ -84,7 +84,7 @@ List containing the results and information of your analysis. Note
   in other Reactome analysis functions.
 }
 \description{
-Using this function, you can perform Reactome Analysis In a convieniet way.
+Using this function, you can perform Reactome Analysis In a convenient way.
   The Analysis Type will be chosen depending on your provided
   input:\enumerate{
   \item If you provide a vector or a single-columned table,

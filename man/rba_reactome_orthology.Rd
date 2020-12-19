@@ -4,10 +4,10 @@
 \alias{rba_reactome_orthology}
 \title{Get Orthologous (Computationally Inferred) Events}
 \usage{
-rba_reactome_orthology(ids, species_dbid, ...)
+rba_reactome_orthology(event_ids, species_dbid, ...)
 }
 \arguments{
-\item{ids}{Human Reactome event ID(s) to retrieve their orthologous
+\item{event_ids}{Human Reactome event ID(s) to retrieve their orthologous
 events.}
 
 \item{species_dbid}{Reactome database ID (DbId) of the target species. (e.g

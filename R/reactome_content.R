@@ -682,25 +682,26 @@ rba_reactome_exporter_diagram = function(event_id,
             cond = list(list(quote(!is.na(exp_column) && is.na(token)),
                              "You cannot specify expression column without providing a token.")))
 
+  ## Build Function-Specific Call
+  call_query = .rba_query(init = list(),
+                          list("resource",
+                               resource != "TOTAL",
+                               resource),
+                          list("diagramProfile",
+                               !is.na(diagram_profile),
+                               diagram_profile),
+                          list("analysisProfile",
+                               !is.na(analysis_profile),
+                               analysis_profile),
+                          list("token",
+                               !is.na(token),
+                               token),
+                          list("expColumn",
+                               !is.na(exp_column),
+                               exp_column))
+
   if (isTRUE(create_document)) {
     .msg("Retrieving a PDF document of event %s details.", event_id)
-    ## Build Function-Specific Call
-    call_query = .rba_query(init = list(),
-                            list("resource",
-                                 resource != "TOTAL",
-                                 resource),
-                            list("diagramProfile",
-                                 !is.na(diagram_profile),
-                                 diagram_profile),
-                            list("analysisProfile",
-                                 !is.na(analysis_profile),
-                                 analysis_profile),
-                            list("token",
-                                 !is.na(token),
-                                 token),
-                            list("expColumn",
-                                 !is.na(exp_column),
-                                 exp_column))
     ## Build Function-Specific Call
     call_query = .rba_query(init = call_query,
                             list("level",
@@ -1518,7 +1519,7 @@ rba_reactome_interactors_static = function(proteins,
 #' @export
 rba_reactome_mapping = function(id,
                                 resource,
-                                map_to = "pathways",
+                                map_to,
                                 species = "Homo sapiens",
                                 ...) {
   ## Load Global Options
@@ -1580,7 +1581,7 @@ rba_reactome_mapping = function(id,
 #'  "POST https://reactome.org/ContentService/data/orthologies/ids/
 #'    species/{speciesId}"
 #'
-#' @param ids Human Reactome event ID(s) to retrieve their orthologous
+#' @param event_ids Human Reactome event ID(s) to retrieve their orthologous
 #'   events.
 #' @param species_dbid Reactome database ID (DbId) of the target species. (e.g
 #'   Mus musculus is 48892). Refer to
@@ -1611,24 +1612,24 @@ rba_reactome_mapping = function(id,
 #' @seealso
 #' \code{\link{rba_reactome_analysis_species}}
 #' @export
-rba_reactome_orthology = function(ids,
+rba_reactome_orthology = function(event_ids,
                                   species_dbid,
                                   ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "ids",
+  .rba_args(cons = list(list(arg = "event_ids",
                              class = "character"),
                         list(arg = "species_dbid",
                              class = "numeric")))
 
   .msg("Retrieving orthologous Events of '%s' in the specie with DbId '%s'.",
-       ifelse(length(ids) == 1,
-              yes = ids, no = paste0(length(ids), " input events")),
+       ifelse(length(event_ids) == 1,
+              yes = event_ids, no = paste0(length(event_ids), " input events")),
        species_dbid)
 
   ## Build POST API Request's URL
-  call_body = paste(unique(ids),collapse = "\n")
+  call_body = paste(unique(event_ids),collapse = "\n")
 
   ## Build Function-Specific Call
   input_call = .rba_httr(httr = "post",
@@ -2255,7 +2256,8 @@ rba_reactome_query = function(ids,
   .rba_ext_args(...)
   ## Check User-input Arguments
   .rba_args(cons = list(list(arg = "ids",
-                             class = "character",
+                             class = c("character",
+                                       "numeric"),
                              max_len = 20),
                         list(arg = "enhanced",
                              class = "logical"),

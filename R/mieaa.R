@@ -697,7 +697,7 @@ rba_mieaa_enrich_results = function(job_id,
                         if (utils::hasName(x, "expected")) {
                           x$expected = as.numeric(x$expected)
                         }
-                        x = x[order(x[[sort_by]], decreasing = !sort_asc)]
+                        x = x[order(x[[sort_by]], decreasing = !sort_asc),]
                         return(x)
                       })
   input_call = .rba_httr(httr = "get",

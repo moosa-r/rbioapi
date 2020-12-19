@@ -98,7 +98,7 @@
 
 #' Reactome Over-Representation or Expression Analysis
 #'
-#' Using this function, you can perform Reactome Analysis In a convieniet way.
+#' Using this function, you can perform Reactome Analysis In a convenient way.
 #'   The Analysis Type will be chosen depending on your provided
 #'   input:\enumerate{
 #'   \item If you provide a vector or a single-columned table,
@@ -996,6 +996,8 @@ rba_reactome_analysis_species = function(species_dbid,
 #'
 #' Use a token generated After a Reactome analysis
 #'   (via \code{\link{rba_reactome_analysis}}) to Retrieve the analysis results.
+#'   The output format is identical to the returned object of
+#'   \code{\link{rba_reactome_analysis}}.
 #'
 #' After Any Analysis, Reactome will associate a token to your analysis. It
 #'   can be later used to in function that requires the token (e.g to retrieve

@@ -34,7 +34,8 @@ Using this function, you can search your genes in PANTHER database and
 }
 
 \examples{
-rba_panther_mapping
+x = rba_panther_mapping(genes = c("Cd40", 7124, "ENSG00000203747", "P33681"),
+ organism = 9606)
 }
 \references{
 \itemize{
