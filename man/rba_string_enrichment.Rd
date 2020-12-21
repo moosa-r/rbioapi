@@ -4,7 +4,13 @@
 \alias{rba_string_enrichment}
 \title{Getting Functional Enrichment}
 \usage{
-rba_string_enrichment(ids, species = NA, background_string_ids = NA, ...)
+rba_string_enrichment(
+  ids,
+  species = NA,
+  background = NA,
+  split_df = FALSE,
+  ...
+)
 }
 \arguments{
 \item{ids}{Your protein ID(s). It is strongly recommended to provide
@@ -13,10 +19,14 @@ STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
 \item{species}{Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
 (Recommended, but optional if your input is less than 100 IDs.)}
 
-\item{background_string_ids}{character vector: A set of STRING protein IDs
+\item{background}{character vector: A set of STRING protein IDs
 to be used as the statistical background (or universe) when computing
 P-value for the terms. Only STRING IDs are acceptable. (Refer to
 \code{\link{rba_string_map_ids}} to map your IDs.)}
+
+\item{split_df}{(logical, default = FALSE), If TRUE, instead of one
+data frame, results from different categories will be splitted into
+multiple data frames based on their 'category'.}
 
 \item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
 arguments documentation for more information on available options.}
@@ -40,7 +50,7 @@ STRING currently maps to and retrieve enrichment results based on Gene
   Note that this function will only return the enriched terms pertinent to
   your proteins that have a p-value lesser than 0.1. To retrieve a full list
   of the terms -unfiltered by enrichment p-values-, use
-  \code{\link{rba_string_functional_annotation}}.
+  \code{\link{rba_string_annotations}}.
 }
 \section{Corresponding API Resources}{
 
@@ -64,17 +74,17 @@ rba_string_enrichment(ids = c("TP53", "TNF", "EGFR"), species = 9606)
   }
 }
 \seealso{
-\code{\link{rba_string_map_ids}, \link{rba_string_functional_annotation}}
+\code{\link{rba_string_map_ids}, \link{rba_string_annotations}}
 
 Other "STRING API": 
-\code{\link{rba_string_functional_annotation}()},
+\code{\link{rba_string_annotations}()},
+\code{\link{rba_string_enrichment_ppi}()},
 \code{\link{rba_string_homology_inter}()},
 \code{\link{rba_string_homology_intra}()},
 \code{\link{rba_string_interaction_partners}()},
 \code{\link{rba_string_interactions_network}()},
 \code{\link{rba_string_map_ids}()},
 \code{\link{rba_string_network_image}()},
-\code{\link{rba_string_ppi_enrichment}()},
 \code{\link{rba_string_version}()}
 }
 \concept{"STRING API"}

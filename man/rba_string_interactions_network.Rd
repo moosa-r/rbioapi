@@ -44,7 +44,20 @@ arguments documentation for more information on available options.}
 }
 \value{
 A data frame which each row is a network interaction and the
-  columns contains interactor information and interaction scores.
+  columns contains interactor information and interaction scores:
+  stringId_A: STRING identifier (protein A)\cr
+  stringId_B:STRING identifier (protein B)\cr
+  preferredName_A: common protein name (protein A)\cr
+  preferredName_B: common protein name (protein B)\cr
+  ncbiTaxonId: NCBI taxon identifier\cr
+  score: combined score\cr
+  nscore: gene neighborhood score\cr
+  fscore: gene fusion score\cr
+  pscore: phylogenetic profile score\cr
+  ascore: coexpression score\cr
+  escore: experimental score\cr
+  dscore: database score\cr
+  tscore: textmining score
 }
 \description{
 This function will retrieve Sting interaction pairs among your input protein
@@ -92,14 +105,14 @@ rba_string_interactions_network(ids = c("9606.ENSP00000269305",
 \code{\link{rba_string_map_ids}, \link{rba_string_interaction_partners}}
 
 Other "STRING API": 
+\code{\link{rba_string_annotations}()},
+\code{\link{rba_string_enrichment_ppi}()},
 \code{\link{rba_string_enrichment}()},
-\code{\link{rba_string_functional_annotation}()},
 \code{\link{rba_string_homology_inter}()},
 \code{\link{rba_string_homology_intra}()},
 \code{\link{rba_string_interaction_partners}()},
 \code{\link{rba_string_map_ids}()},
 \code{\link{rba_string_network_image}()},
-\code{\link{rba_string_ppi_enrichment}()},
 \code{\link{rba_string_version}()}
 }
 \concept{"STRING API"}

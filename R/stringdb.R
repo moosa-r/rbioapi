@@ -325,7 +325,20 @@ rba_string_network_image = function(ids,
 #'   arguments documentation for more information on available options.
 #'
 #' @return A data frame which each row is a network interaction and the
-#'   columns contains interactor information and interaction scores.
+#'   columns contains interactor information and interaction scores:
+#'   stringId_A: STRING identifier (protein A)\cr
+#'   stringId_B:STRING identifier (protein B)\cr
+#'   preferredName_A: common protein name (protein A)\cr
+#'   preferredName_B: common protein name (protein B)\cr
+#'   ncbiTaxonId: NCBI taxon identifier\cr
+#'   score: combined score\cr
+#'   nscore: gene neighborhood score\cr
+#'   fscore: gene fusion score\cr
+#'   pscore: phylogenetic profile score\cr
+#'   ascore: coexpression score\cr
+#'   escore: experimental score\cr
+#'   dscore: database score\cr
+#'   tscore: textmining score
 #'
 #' @references \itemize{
 #'   \item Szklarczyk D, Gable AL, Lyon D, Junge A, Wyder S, Huerta-Cepas J,
@@ -747,7 +760,7 @@ rba_string_homology_inter = function(ids,
 #'   Note that this function will only return the enriched terms pertinent to
 #'   your proteins that have a p-value lesser than 0.1. To retrieve a full list
 #'   of the terms -unfiltered by enrichment p-values-, use
-#'   \code{\link{rba_string_functional_annotation}}.
+#'   \code{\link{rba_string_annotations}}.
 #'
 #' @section Corresponding API Resources:
 #'  "POST https://string-db.org/api/[output_format]/enrichment?identifiers=
@@ -757,10 +770,13 @@ rba_string_homology_inter = function(ids,
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
 #' @param species Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
 #'   (Recommended, but optional if your input is less than 100 IDs.)
-#' @param background_string_ids character vector: A set of STRING protein IDs
+#' @param background character vector: A set of STRING protein IDs
 #'   to be used as the statistical background (or universe) when computing
 #'   P-value for the terms. Only STRING IDs are acceptable. (Refer to
 #'   \code{\link{rba_string_map_ids}} to map your IDs.)
+#' @param split_df (logical, default = FALSE), If TRUE, instead of one
+#'   data frame, results from different categories will be splitted into
+#'   multiple data frames based on their 'category'.
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #'   arguments documentation for more information on available options.
 #'
@@ -783,11 +799,12 @@ rba_string_homology_inter = function(ids,
 #'
 #' @family "STRING API"
 #' @seealso
-#'   \code{\link{rba_string_map_ids}, \link{rba_string_functional_annotation}}
+#'   \code{\link{rba_string_map_ids}, \link{rba_string_annotations}}
 #' @export
 rba_string_enrichment = function(ids,
                                  species = NA,
-                                 background_string_ids = NA,
+                                 background = NA,
+                                 split_df = FALSE,
                                  ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -796,7 +813,7 @@ rba_string_enrichment = function(ids,
                              class = c("character", "numeric")),
                         list(arg = "species",
                              class = "numeric"),
-                        list(arg = "background_string_ids",
+                        list(arg = "background",
                              class = "character")),
             cond = list(list(quote(length(ids) > 100 && is.na(species)),
                              sprintf("You provided %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
@@ -813,11 +830,18 @@ rba_string_enrichment = function(ids,
                               !is.na(species),
                               species),
                          list("background_string_identifiers",
-                              !is.na(background_string_ids),
-                              paste(unique(background_string_ids),
+                              !is.na(background),
+                              paste(unique(background),
                                     collapse = "%0d")))
 
   ## Build Function-Specific Call
+  if (isTRUE(split_df)) {
+    parser_input = list("json->df",
+                        function(x) { split(x, x$category) })
+  } else {
+    parser_input = "json->df"
+  }
+
   input_call = .rba_httr(httr = "post",
                          url = .rba_stg("string", "url"),
                          path = paste0(.rba_stg("string", "pth"),
@@ -825,7 +849,7 @@ rba_string_enrichment = function(ids,
                          body = call_body,
                          encode = "form",
                          accept = "application/json",
-                         parser = "json->df",
+                         parser = parser_input,
                          save_to = .rba_file("string_enrichment.json"))
 
   ## Call API
@@ -878,16 +902,16 @@ rba_string_enrichment = function(ids,
 #'   }
 #'
 #' @examples
-#' rba_string_functional_annotation(ids = "TP53", species = 9606)
+#' rba_string_annotations(ids = "TP53", species = 9606)
 #'
 #' @family "STRING API"
 #' @seealso
 #'   \code{\link{rba_string_map_ids}, \link{rba_string_enrichment}}
 #' @export
-rba_string_functional_annotation = function(ids,
-                                            species = NA,
-                                            allow_pubmed = FALSE,
-                                            ...) {
+rba_string_annotations = function(ids,
+                                  species = NA,
+                                  allow_pubmed = FALSE,
+                                  ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -968,13 +992,13 @@ rba_string_functional_annotation = function(ids,
 #'   }
 #'
 #' @examples
-#' rba_string_ppi_enrichment(ids = c("p53", "BRCA1", "cdk2", "Q99835",
+#' rba_string_enrichment_ppi(ids = c("p53", "BRCA1", "cdk2", "Q99835",
 #' "CDC42", "CDK1", "KIF23", "PLK1", "RAC2", "RACGAP1"), species = 9606)
 #'
 #' @family "STRING API"
 #' @seealso \code{\link{rba_string_map_ids}}
 #' @export
-rba_string_ppi_enrichment = function(ids,
+rba_string_enrichment_ppi = function(ids,
                                      species = NA,
                                      required_score = NA,
                                      ...) {
