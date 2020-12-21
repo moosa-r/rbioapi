@@ -107,7 +107,7 @@ As stated before, `rba_enrichr_wrp()` is a wrapper function, meaning that it exe
 
 ```{r rba_meaa_submit/status/results, eval=FALSE}
 # 1 Submit enrichment request to miEAA
-request = rba_mieaa_enrich_submit(test_set = mirs,
+request <- rba_mieaa_enrich_submit(test_set = mirs,
                                   mirna_type = "mature",
                                   test_type = "ORA",
                                   species = 9606,
@@ -118,7 +118,7 @@ request = rba_mieaa_enrich_submit(test_set = mirs,
 rba_mieaa_enrich_status(job_id = request$job_id)
 
 # 3 If the job has completed, retrieve the results
-results = rba_mieaa_enrich_results(job_id = request$job_id)
+results <- rba_mieaa_enrich_results(job_id = request$job_id)
 ```
 
 ------------------------------------------------------------------------

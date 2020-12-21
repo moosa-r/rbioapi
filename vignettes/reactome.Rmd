@@ -52,15 +52,15 @@ Before continuing reading this article, it is a good idea to read [Reactome Data
 
 ## Reactome analysis services {#reactome-analysis-services .heading2}
 
-This section mostly revolves around `rba_reactome_analysis()` function. So, naturally, we will start with that. As explained in the function's manual, you have considerable freedom in providing the main input for this function; You can provide an R object (as data frame, matrix, or simple vector), a URL, or a local file path. Note that the type of analysis will be decided based on whether your input is 1-dimensional or 2-dimensional. This has been explained in detail in the manual of `rba_reactome_analysis()`, so refer to that for more information.\
+This section mostly revolves around `rba_reactome_analysis()` function. So, naturally, we will start with that. As explained in the function's manual, you have considerable freedom in providing the main input for this function; You can provide an R object (as a data frame, matrix, or simple vector), a URL, or a local file path. Note that the type of analysis will be decided based on whether your input is 1-dimensional or 2-dimensional. This has been explained in detail in the manual of `rba_reactome_analysis()`, so refer to that for more information.\
 `rba_reactome_analysis()` is the API equivalent of Reactome's [analyse gene list](https://reactome.org/PathwayBrowser/#TOOL=AT) tool. You can see that the function's arguments correspond to what would you choose in the webpage's wizard.
 
 ```{r rba_reactome_analysis}
-## 1 we create a simple vector with our genes
-genes = c("p53", "BRCA1", "cdk2", "Q99835", "CDC42", "CDK1", "KIF23", "PLK1", "RAC2", "RACGAP1", "RHOA", "RHOB", "MSL1", "PHF21A", "INSR", "JADE2", "P2RX7", "CCDC101", "PPM1B", "ANAPC16", "CDH8", "HSPA1L", "CUL2", "ZNF302", "CUX1", "CYTH2", "SEC22C", "EIF4E3", "ROBO2", "CXXC1", "LINC01314", "ATP5F1")
+## 1 We create a simple vector with our genes
+genes <- c("p53", "BRCA1", "cdk2", "Q99835", "CDC42", "CDK1", "KIF23", "PLK1", "RAC2", "RACGAP1", "RHOA", "RHOB", "MSL1", "PHF21A", "INSR", "JADE2", "P2RX7", "CCDC101", "PPM1B", "ANAPC16", "CDH8", "HSPA1L", "CUL2", "ZNF302", "CUX1", "CYTH2", "SEC22C", "EIF4E3", "ROBO2", "CXXC1", "LINC01314", "ATP5F1")
 
 ## 2 We call reactome analysis with the default parameters
-analyzed = rba_reactome_analysis(input = genes,
+analyzed <- rba_reactome_analysis(input = genes,
                                  projection = TRUE,
                                  p_value = 0.01)
 
@@ -103,7 +103,7 @@ rba_reactome_analysis_download(token = analyzed$summary$token,
 Your token is only guaranteed to be stored for 7 days. After that, you can upload the JSON file you have downloaded using `rba_reactome_analysis_download` and get a token for that:
 
 ```{r rba_reactome_analysis_import, eval=FALSE}
-re_uploaded = rba_reactome_analysis_import(input = "reactome_results.json")
+re_uploaded <- rba_reactome_analysis_import(input = "reactome_results.json")
 ```
 
 ## See also in Functions' manuals {#analysis_see-also-in-functions-manuals .heading3}
@@ -120,16 +120,16 @@ Some rbioapi Reactome analysis functions were not covered in this vignette, be s
 
 ## Reactome contents services {#reactome-contents-services .heading2}
 
-rbioapi Reactome content services functions are those starting with rba_reactome\_\* but without "\_analysis" infix. These function cover what you can do with objects in Reactome knowledge-base. In simpler terms, most -but not all of them- correspond to what you can find in [Reactome Pathway Browser](https://reactome.org/PathwayBrowser/ "Reactome Pathway Browser") and [search results](https://reactome.org/content/query?q=apoptosis&species=Homo+sapiens "Search results for apoptosis"). (e.g. a [pathway](https://reactome.org/content/detail/R-HSA-109581 "Apoptosis Homo sapiens"), a [reaction](https://reactome.org/content/detail/R-HSA-202939 "Caspase-mediated cleavage of E-Cadherin"), a [physical Entity](https://reactome.org/content/detail/R-HSA-350870 "Caspase-3 [cytosol]"), etc.)
+rbioapi Reactome content services functions are those starting with rba_reactome\_\* but without "\_analysis" infix. These functions cover what you can do with objects in Reactome knowledge-base. In simpler terms, most -but not all of them- correspond to what you can find in [Reactome Pathway Browser](https://reactome.org/PathwayBrowser/ "Reactome Pathway Browser") and [search results](https://reactome.org/content/query?q=apoptosis&species=Homo+sapiens "Search results for apoptosis"). (e.g. a [pathway](https://reactome.org/content/detail/R-HSA-109581 "Apoptosis Homo sapiens"), a [reaction](https://reactome.org/content/detail/R-HSA-202939 "Caspase-mediated cleavage of E-Cadherin"), a [physical Entity](https://reactome.org/content/detail/R-HSA-350870 "Caspase-3 [cytosol]"), etc.)
 
 ### Retrieve any object from Reactome knowledge-base
 
-Using `rba_reactome_query()`, you can retrieve any object from Reactome knowledge-base. In simpler terms, here what I mean by object is roughly anything that Reactome associated and ID to it. This can range from a person's entry to proteins, reactions, pathways, species, and many more! You can explore [Reactome's data schema](https://reactome.org/content/schema/DatabaseObject "Graph Database :: Data Schema") to what Reactome knowledge-base objects are and how they are organized. Here are some examples, note that you are not limited to only one ID per query. You can use a vector of inputs, the only limitation is that when you provide more than one ID, you cannot have `enhanced = TRUE`.
+Using `rba_reactome_query()`, you can retrieve any object from Reactome knowledge-base. In simpler terms, what I mean by the object is roughly anything that Reactome associated an ID to it. This can range from a person's entry to proteins, reactions, pathways, species, and many more! You can explore [Reactome's data schema](https://reactome.org/content/schema/DatabaseObject "Graph Database :: Data Schema") to learn about Reactome knowledge-base objects and their organization. Here are some examples, note that you are not limited to only one ID per query. You can use a vector of inputs, the only limitation is that when you provide more than one ID, you cannot have `enhanced = TRUE`.
 
 ```{r rba_reactome_query_ex1, eval=FALSE}
 
 ## 1 query a pathway Entry
-pathway = rba_reactome_query(ids = "R-HSA-109581", enhanced = TRUE)
+pathway <- rba_reactome_query(ids = "R-HSA-109581", enhanced = TRUE)
 ## 2 As always we use str() to inspect the output's structure
 str(pathway, 2)
 ## 3 You can compare it with the webpage of R-HSA-202939 entry:
@@ -139,7 +139,7 @@ str(pathway, 2)
 ```{r rba_reactome_query_ex2, eval=FALSE}
 
 ## 1 query a protein Entry
-protein = rba_reactome_query(ids = 66247, enhanced = TRUE)
+protein <- rba_reactome_query(ids = 66247, enhanced = TRUE)
 ## 2 As always we use str() to inspect the output's structure
 str(protein, 2)
 ## 3 You can compare it with the webpage of R-HSA-202939 entry:
@@ -154,7 +154,7 @@ As you can see in the second example usage of we used Reactome's dbID `66247` to
 ```{r rba_reactome_xref, eval=FALSE}
 
 # 1 We provide HGNC ID to find what is the corresponding database ID in Reactome
-xref_protein = rba_reactome_xref("CD40")
+xref_protein <- rba_reactome_xref("CD40")
 ## 2 As always use str() to inspect the output's structure
 str(xref_protein, 2)
 ```
@@ -165,7 +165,7 @@ While we are at the cross-reference topic, here is another useful resource. Usin
 
 ```{r xref_mapping}
 ## 1 Again, consider CD40 protein:
-xref_mapping = rba_reactome_mapping(id = "CD40",
+xref_mapping <- rba_reactome_mapping(id = "CD40",
                                     resource = "hgnc",
                                     map_to = "pathways")
 ```
@@ -262,11 +262,10 @@ There are still more rbioapi f Reactome content functions that were not covered 
 
 Below are some example screenshots from different pages in Reactome's website along with corresponding rbioapi function calls.
 
-+:------------------------------------------------------------------------------------------------------------------------------------:+:------------------------------------------------------------------------------------------------------------------------------------------------:+:------------------------------------------------------------------------------------------------------------------------------------:+:----------------------------------------------------------------------------------------------------------------------------:+
-| Complex                                                                                                                              | Pathway/Event                                                                                                                                    | Protein                                                                                                                              | Species overview                                                                                                             |
-+--------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+|                                                                                                                                      |                                                                                                                                                  |                                                                                                                                      |                                                                                                                              |
+|:------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------:|
+|                                                               Complex                                                                |                                                                  Pathway/Event                                                                   |                                                               Protein                                                                |                                                       Species overview                                                       |
 | [![Reactome complex content page](html_files/reactome_complex.png "Reactome complex content page")](html_files/reactome_complex.png) | [![Reactome Pathway/Event content page](html_files/reactome_pathway.png "Reactome Pathway/Event content page")](html_files/reactome_pathway.png) | [![Reactome Protein content page](html_files/reactome_protein.png "Reactome Protein content page")](html_files/reactome_protein.png) | [![Reactome species overview](html_files/reactome_species.png "Reactome species overview")](html_files/reactome_species.png) |
-+--------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
 
 ------------------------------------------------------------------------
 
@@ -275,4 +274,3 @@ Below are some example screenshots from different pages in Reactome's website al
 ```{r sessionInfo, echo=FALSE}
 sessionInfo()
 ```
-
