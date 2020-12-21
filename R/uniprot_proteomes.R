@@ -128,13 +128,23 @@ rba_uniprot_proteomes_search = function(name = NA,
                                       "true",
                                       "false")))
   ## Build Function-Specific Call
+  parser_input = list("json->list",
+                      function(x) {
+                        x_names = vapply(X = x,
+                                         FUN = function(x) {
+                                           x$accession
+                                         },
+                                         FUN.VALUE = character(1))
+                        names(x) = x_names
+                        return(x)})
+
   input_call = .rba_httr(httr = "get",
                          url = .rba_stg("uniprot", "url"),
                          path = paste0(.rba_stg("uniprot", "pth"),
                                        "proteomes"),
                          query = call_query,
                          accept = "application/json",
-                         parser = "json->list",
+                         parser = parser_input,
                          save_to = .rba_file("uniprot_proteomes_search.json"))
 
   ## Call API

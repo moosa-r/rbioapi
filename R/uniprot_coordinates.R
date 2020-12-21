@@ -114,13 +114,16 @@ rba_uniprot_coordinates_search = function(accession = NA,
                                !is.na(location),
                                location))
   ## Build Function-Specific Call
+  parser_input = list("json->list",
+                      .rba_uniprot_search_namer)
+
   input_call = .rba_httr(httr = "get",
                          url = .rba_stg("uniprot", "url"),
                          path = paste0(.rba_stg("uniprot", "pth"),
                                        "coordinates"),
                          query = call_query,
                          accept = "application/json",
-                         parser = "json->list",
+                         parser = parser_input,
                          save_to = .rba_file("uniprot_coordinates_search.json"))
 
   ## Call API

@@ -1,3 +1,24 @@
+#' Name UniProt search hits elements
+#'
+#' Every search hit in uniprot has a character element whitin it, named
+#'   "accession". this function should be used as the second response
+#'   parser in the *_search functions to set the name each search hit to
+#'   it's accession
+#'
+#' @param x object to be parserd
+#'
+#' @return a list with the same structure of the input, only named.
+#'
+#' @export
+.rba_uniprot_search_namer = function(x) {
+  x_names = vapply(X = x,
+                   FUN = function(x) {
+                     x$accession
+                   },
+                   FUN.VALUE = character(1))
+  names(x) = x_names
+  return(x)}
+
 #### Proteins Endpoints ####
 
 #' Search UniProt entries
@@ -193,13 +214,16 @@ rba_uniprot_proteins_search = function(accession = NA,
                                !is.na(md5),
                                md5))
   ## Build Function-Specific Call
+  parser_input = list("json->list",
+                      .rba_uniprot_search_namer)
+
   input_call = .rba_httr(httr = "get",
                          url = .rba_stg("uniprot", "url"),
                          path = paste0(.rba_stg("uniprot", "pth"),
                                        "proteins"),
                          query = call_query,
                          accept = "application/json",
-                         parser = "json->list",
+                         parser = parser_input,
                          save_to = .rba_file("uniprot_proteins_search.json"))
 
   ## Call API
@@ -589,13 +613,16 @@ rba_uniprot_features_search = function(accession = NA,
                                paste0(types,
                                       collapse = ",")))
   ## Build Function-Specific Call
+  parser_input = list("json->list",
+                      .rba_uniprot_search_namer)
+
   input_call = .rba_httr(httr = "get",
                          url = .rba_stg("uniprot", "url"),
                          path = paste0(.rba_stg("uniprot", "pth"),
                                        "features"),
                          query = call_query,
                          accept = "application/json",
-                         parser = "json->list",
+                         parser = parser_input,
                          save_to = .rba_file("uniprot_features_search.json"))
 
   ## Call API
@@ -1069,6 +1096,8 @@ rba_uniprot_variation_search = function(accession = NA,
                    yes = .rba_file(file = "uniprot_variation.json"),
                    no = .rba_file(file = "uniprot_variation.peff",
                                   save_to = save_peff))
+  obj_parser_input = list("json->list",
+                          .rba_uniprot_search_namer)
 
   input_call = .rba_httr(httr = "get",
                          url = .rba_stg("uniprot", "url"),
@@ -1079,7 +1108,7 @@ rba_uniprot_variation_search = function(accession = NA,
                          file_accept = "text/x-peff",
                          file_parser = "text->chr",
                          obj_accept = "application/json",
-                         obj_parser = "json->list")
+                         obj_parser = obj_parser_input)
   ## Call API
   final_output = .rba_skeleton(input_call)
   return(final_output)
@@ -1187,9 +1216,9 @@ rba_uniprot_variation = function(id,
                                        "character"))))
 
   .msg("Retrieving Natural variant of %s.",
-        ifelse(id_type == "uniprot",
-               yes = paste0("UniProt protein ", id),
-               no = paste0(id_type, " id ", id)))
+       ifelse(id_type == "uniprot",
+              yes = paste0("UniProt protein ", id),
+              no = paste0(id_type, " id ", id)))
   ## Build GET API Request's query
   call_query = .rba_query(init = list("size" = "-1"),
                           list("sourcetype",
@@ -1365,13 +1394,15 @@ rba_uniprot_proteomics_search = function(accession = NA,
                                !is.na(unique),
                                ifelse(unique, "true", "false")))
   ## Build Function-Specific Call
+  parser_input = list("json->list",
+                      .rba_uniprot_search_namer)
   input_call = .rba_httr(httr = "get",
                          url = .rba_stg("uniprot", "url"),
                          path = paste0(.rba_stg("uniprot", "pth"),
                                        "proteomics"),
                          query = call_query,
                          accept = "application/json",
-                         parser = "json->list",
+                         parser = parser_input,
                          save_to = .rba_file("uniprot_proteomics_search.json"))
 
   ## Call API
@@ -1421,7 +1452,7 @@ rba_uniprot_proteomics = function(accession,
   )
 
   .msg("Retrieving proteomics peptides features mapped to the sequence of protein %s.",
-        accession)
+       accession)
   ## Build Function-Specific Call
   input_call = .rba_httr(httr = "get",
                          url = .rba_stg("uniprot", "url"),
@@ -1481,15 +1512,15 @@ rba_uniprot_proteomics = function(accession,
 #'   }
 #'
 #' @examples
-#' rba_uniprot_antigen_search(antigen_id = "HPA001060")
+#' rba_uniprot_antigens_search(antigen_id = "HPA001060")
 #' @family "UniProt API, Antigen"
 #' @export
-rba_uniprot_antigen_search = function(accession = NA,
-                                      antigen_sequence = NA,
-                                      antigen_id = NA,
-                                      ensembl_id = NA,
-                                      match_score = NA,
-                                      ...) {
+rba_uniprot_antigens_search = function(accession = NA,
+                                       antigen_sequence = NA,
+                                       antigen_id = NA,
+                                       ensembl_id = NA,
+                                       match_score = NA,
+                                       ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -1530,13 +1561,16 @@ rba_uniprot_antigen_search = function(accession = NA,
                                !is.na(match_score),
                                match_score))
   ## Build Function-Specific Call
+  parser_input = list("json->list",
+                      .rba_uniprot_search_namer)
+
   input_call = .rba_httr(httr = "get",
                          url = .rba_stg("uniprot", "url"),
                          path = paste0(.rba_stg("uniprot", "pth"),
                                        "antigen"),
                          query = call_query,
                          accept = "application/json",
-                         parser = "json->list",
+                         parser = parser_input,
                          save_to = .rba_file("uniprot_antigen_search.json"))
 
   ## Call API
@@ -1572,11 +1606,11 @@ rba_uniprot_antigen_search = function(accession = NA,
 #'   }
 #'
 #' @examples
-#' rba_uniprot_antigen("P04626")
+#' rba_uniprot_antigens("P04626")
 #' @family "UniProt API, Antigen"
 #' @export
-rba_uniprot_antigen = function(accession,
-                               ...) {
+rba_uniprot_antigens = function(accession,
+                                ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -1586,7 +1620,7 @@ rba_uniprot_antigen = function(accession,
   )
 
   .msg("Retrieving Antigenic features mapped to the sequence of protein %s.",
-        accession)
+       accession)
   ## Build Function-Specific Call
   input_call = .rba_httr(httr = "get",
                          url = .rba_stg("uniprot", "url"),
