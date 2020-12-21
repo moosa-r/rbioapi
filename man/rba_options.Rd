@@ -86,7 +86,8 @@ rba_options()
 \seealso{
 Other "Helper functions": 
 \code{\link{rba_citation}()},
-\code{\link{rba_connection_test}()}
+\code{\link{rba_connection_test}()},
+\code{\link{rba_pages}()}
 }
 \concept{"Helper functions"}
 \keyword{Helper}

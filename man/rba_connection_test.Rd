@@ -30,7 +30,8 @@ This function attempts to send a simple query to the supported services.
 \seealso{
 Other "Helper functions": 
 \code{\link{rba_citation}()},
-\code{\link{rba_options}()}
+\code{\link{rba_options}()},
+\code{\link{rba_pages}()}
 }
 \concept{"Helper functions"}
 \keyword{Helper}

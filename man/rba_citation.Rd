@@ -38,7 +38,8 @@ Important Disclaimer: Please note that this function is only a starting
 \seealso{
 Other "Helper functions": 
 \code{\link{rba_connection_test}()},
-\code{\link{rba_options}()}
+\code{\link{rba_options}()},
+\code{\link{rba_pages}()}
 }
 \concept{"Helper functions"}
 \keyword{Helper}
