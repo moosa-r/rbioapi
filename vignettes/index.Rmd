@@ -1,5 +1,5 @@
 ---
-title: "1: User-friendly Interface to Biologic API Services"
+title: "1: User-friendly Interface to Biologic web Services"
 author: "Moosa Rezwani"
 date: "`r Sys.Date()`"
 output:
@@ -14,7 +14,7 @@ output:
     code_folding: show
 
 vignette: >
-  %\VignetteIndexEntry{1: User-friendly Interface to Biologic API Services}
+  %\VignetteIndexEntry{1: User-friendly Interface to Biologic web Services}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -36,7 +36,7 @@ rba_options(timeout = 600)
 
 ## What does rbioapi do? {#what-does-rbioapi-do .heading2}
 
-rbioapi is an interface to insulate the user from technicalities and complications when it comse to using API services. With rbioapi, You are not required to have knowledge about HTTP protocols, CURL, REST API, parsing the response etc. **Just fill a function's arguments and the rest is handled for you.**
+rbioapi is an interface to Biological databases and web services. The goal of rbioapi is to insulate the user from technicalities and complications when it comes to using API services. With rbioapi, You are not required to have knowledge about HTTP protocols, CURL, REST API, parsing the response, etc. **Just fill a function's arguments and the rest is handled for you.**
 
 ------------------------------------------------------------------------
 
@@ -61,7 +61,7 @@ rbioapi is dedicated to **Biological or Medical** databases and web services. Cu
 
 -   The interface should be **simple plugging values in a function's arguments** and running the code. No function should explicitly demand the user to run another function beforehand.
 
--   **Beginner** end of users spectrum should conveniently use rbioapi. For example, before any error happen, user input arguments will be vigorously checked; Or for example, if any service's resource requires particular input conditions, those conditions will be checked during user's input validation.
+-   **Beginner** end of users spectrum should conveniently use rbioapi. For example, to prevent errors, user input arguments will be vigorously checked; Or for example, if any service's resource requires particular input conditions, those conditions will be checked during user's input validation.
 
 -   Produce **Informative messages**, warnings, and error. For example, if a server returns an error in a particular format, convert the server's error response to R error.
 
@@ -92,7 +92,7 @@ Thus, to this version, rbioapi function will have one of the following naming sc
 5.  rba_string\_\*
 6.  rba_uniprot\_\*
 
-There are two exceptions: `rba_options()` and `rba_connection_test()`. more on that later.
+There are three exceptions: `rba_options()`, `rba_connection_test()`, and `rba_pages()`. more on that later.
 
 ------------------------------------------------------------------------
 
@@ -117,9 +117,9 @@ You can pass additional arguments to any rbioapi function using "ellipsis" (the 
 
 ```{r rba_options_ellipsis1, eval=FALSE}
 # save the server's raw response file
-x = rba_reactome_species(only_main = TRUE, save_file = "reactome_species.json")
+x <- rba_reactome_species(only_main = TRUE, save_file = "reactome_species.json")
 # also , in the case of connection failure, retry up to 10 times!
-x = rba_reactome_species(only_main = TRUE,
+x <- rba_reactome_species(only_main = TRUE,
                          save_file = "reactome_species.json", retry_max = 10)
 
 ```
@@ -127,9 +127,9 @@ x = rba_reactome_species(only_main = TRUE,
 ```{r rba_options_ellipsis2, echo=TRUE, message=TRUE}
 ## run these codes in your own R session to see the difference.
 # show internal diagnostics boring details
-x = rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC", diangnostics = TRUE)
+x <- rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC", diangnostics = TRUE)
 # the next function you call, will still use the default rbioapi options
-x = rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC")
+x <- rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC")
 ```
 
 ------------------------------------------------------------------------
@@ -154,12 +154,18 @@ rbioapi is an interface between you and other databases and services. Thus, if y
 
 When using rbioapi, remember that you are querying data from web services; So please be considerate. Never flood a server with requests, if you need to download *unreasonably* large volumes of data, directly downloading the databases provided in those services may be a better alternative. If you see yourself being rate-limited from any server (HTTP **429 Too Many Requests** response status code), know that you are sending more requests than what the server interprets as normal behavior, so please seek other methods or use `Sys.sleep()` between your requests.
 
+------------------------------------------------------------------------
+
 ## What next? {#what-next .heading2}
 
 Each supported service has a dedicated vignette article. Make sure to check those too.
 
-1.  [Enrichr](enrichr.html "Enrichr vignette page")
-2.  [miEAA](mieaa.html "miEAA vignette page")
+1.  [Enrichr](enrichr.html "rbioapi & Enrichr vignette article")
+2.  [miEAA](mieaa.html "rbioapi & miEAA vignette article")
+3.  [PANTHER](panther.html "rbioapi & PANTHER vignette article")
+4.  [Reactome](reactome.html "rbioapi & Reactome vignette article")
+5.  [STRING](string.html "rbioapi & STRING vignette article")
+6.  [UniProt](uniprot.html "rbioapi & UniProt vignette article")
 
 ------------------------------------------------------------------------
 
