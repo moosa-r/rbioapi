@@ -548,7 +548,7 @@ rba_enrichr_gene_map = function(gene,
 #'
 #' @family "Enrichr API"
 #' @export
-rba_enrichr_wrp = function(gene_list,
+rba_enrichr = function(gene_list,
                            description = NA,
                            gene_set_library = "all",
                            regex_library_name = TRUE,

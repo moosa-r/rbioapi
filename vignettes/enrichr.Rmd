@@ -74,7 +74,7 @@ To enrich your gene-set with Enrichr using rbioapi, you can take two approaches.
 
 ### Approach 1: Using the Wrapper function {#approach-1-using-the-wrapper-function .heading3}
 
-Just fill the arguments of `rba_enrichr_wrp` according to the function's manual; Simply provide your gene-set as a character vector and select the libraries.
+Just fill the arguments of `rba_enrichr` according to the function's manual; Simply provide your gene-set as a character vector and select the libraries.
 
 ```{r approach_1}
 # 1 We create a variable with our genes' NCBI IDs
@@ -82,10 +82,10 @@ genes <- c("p53", "BRCA1", "cdk2", "Q99835", "CDC42","CDK1","KIF23","PLK1",
            "RAC2","RACGAP1","RHOA","RHOB", "PHF14", "RBM3", "MSL1")
 
 # 2.a Enrich your genes using "MSigDB_Hallmark_2020" library
-enrichr_msig_hallmark <- rba_enrichr_wrp(gene_list = genes,
+enrichr_msig_hallmark <- rba_enrichr(gene_list = genes,
                                          gene_set_library = "MSigDB_Hallmark_2020")
 # 2.b Maybe you want to enrich using every library that contains the word "msig":
-enrichr_msig <- rba_enrichr_wrp(gene_list = genes,
+enrichr_msig <- rba_enrichr(gene_list = genes,
                                 gene_set_library = "msig",
                                 regex_library_name = TRUE)
 # 2.c Or maybe you want to enrich using every library available at Enrichr:
@@ -107,7 +107,7 @@ str(enrichr_msig, 1)
 
 ### Approach 2: Going step-by-step {#approach-2-going-step-by-step .heading3}
 
-As you can see in `rba_enrichr_wrp()`'s name, it is a wrapper function. It basically executes the following sequence of functions:
+As you can see in `rba_enrichr()`'s name, it is a wrapper function. It basically executes the following sequence of functions:
 
 ```{r approach_2}
 # 1 Get a list of available Enrichr libraries

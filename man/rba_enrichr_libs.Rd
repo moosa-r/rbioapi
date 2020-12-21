@@ -63,6 +63,6 @@ Other "Enrichr API":
 \code{\link{rba_enrichr_enrich}()},
 \code{\link{rba_enrichr_gene_map}()},
 \code{\link{rba_enrichr_view_list}()},
-\code{\link{rba_enrichr_wrp}()}
+\code{\link{rba_enrichr}()}
 }
 \concept{"Enrichr API"}
