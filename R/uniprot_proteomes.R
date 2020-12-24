@@ -132,7 +132,7 @@ rba_uniprot_proteomes_search = function(name = NA,
                       function(x) {
                         x_names = vapply(X = x,
                                          FUN = function(x) {
-                                           x$accession
+                                           x$upid
                                          },
                                          FUN.VALUE = character(1))
                         names(x) = x_names

@@ -226,11 +226,11 @@ rba_reactome_complex_subunits = function(complex_id,
 #'   }
 #'
 #' @examples
-#' reactome_complex_list(id = "3845", resource = "NCBI Gene")
-#' reactome_complex_list(id = "P00533", resource = "UniProt")
+#' rba_reactome_complex_list(id = "3845", resource = "NCBI Gene")
+#' rba_reactome_complex_list(id = "P00533", resource = "UniProt")
 #' @family "Reactome Content Service, Physical Entity Queries"
 #' @export
-reactome_complex_list = function(id,
+rba_reactome_complex_list = function(id,
                                  resource,
                                  ...) {
   ## Load Global Options
@@ -1606,7 +1606,7 @@ rba_reactome_mapping = function(id,
 #'   }
 #'
 #' @examples
-#' rba_reactome_orthology(ids = c("R-HSA-6799198", " R-HSA-72764"),
+#' rba_reactome_orthology(event_ids = c("R-HSA-6799198", " R-HSA-72764"),
 #'   species_dbid = 49633)
 #' @family "Reactome Content Service, Orthology Related Queries"
 #' @seealso

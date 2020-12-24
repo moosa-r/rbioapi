@@ -37,8 +37,7 @@ For more information, see:
 }
 
 \examples{
-rba_panther_tree_grafter(
-"MKVLWAALLVTFLAGCQAKVEQAVETEPEPELRQQTEWQSGQRWELALGRFWDYLRWVQTL")
+rba_panther_tree_grafter("MKVLWAALLVTFLAGCQAKVEQAVETE")
 }
 \references{
 \itemize{

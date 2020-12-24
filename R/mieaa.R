@@ -184,6 +184,7 @@ rba_mieaa_cats = function(mirna_type, species,...) {
 #'   }
 #'
 #' @examples
+#' Sys.sleep(1) # to prevent 429 error during R CMD check
 #' rba_mieaa_convert_version(mirna = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
 #'   mirna_type = "mature", input_version = 22, output_version =  16)
 #'
@@ -289,6 +290,7 @@ rba_mieaa_convert_version = function(mirna,
 #'   }
 #'
 #' @examples
+#' Sys.sleep(1) # to prevent 429 error during R CMD check
 #' rba_mieaa_convert_type(mirna = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
 #' input_type = "mature")
 #'
@@ -438,6 +440,7 @@ rba_mieaa_convert_type = function(mirna,
 #'   }
 #'
 #' @examples
+#' Sys.sleep(1) # to prevent 429 error during R CMD check
 #' rba_mieaa_enrich_submit(test_set = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
 #'   mirna_type = "mature",
 #'   test_type = "GSEA",
@@ -498,7 +501,7 @@ rba_mieaa_enrich_submit = function(test_set,
   species = .rba_mieaa_species(sp = species, to_name = FALSE)
   #categories
   all_cats = rba_mieaa_cats(mirna_type = mirna_type, species = species, verbose = FALSE)
-  if (is.na(categories)) {
+  if (all(is.na(categories))) {
     categories = all_cats
     .msg("No categories were provided, Requesting enrichment using all of the %s available catagories for species '%s'.",
          length(categories),
@@ -584,6 +587,7 @@ rba_mieaa_enrich_submit = function(test_set,
 #'   }
 #'
 #' @examples
+#' Sys.sleep(1) # to prevent 429 error during R CMD check
 #' \dontrun{rba_mieaa_enrich_status("f52d1aef-6d3d-4d51-9020-82e68fe99012")}
 #'
 #' @family "miEAA API"

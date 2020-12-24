@@ -753,8 +753,7 @@ rba_panther_family = function(id,
 #'   }
 #'
 #' @examples
-#' rba_panther_tree_grafter(
-#' "MKVLWAALLVTFLAGCQAKVEQAVETEPEPELRQQTEWQSGQRWELALGRFWDYLRWVQTL")
+#' rba_panther_tree_grafter("MKVLWAALLVTFLAGCQAKVEQAVETE")
 #' @family "PANTHER API"
 #' @export
 rba_panther_tree_grafter = function(protein_seq,
@@ -792,7 +791,7 @@ rba_panther_tree_grafter = function(protein_seq,
                          body = call_body,
                          accept = "application/json",
                          parser = parser_input,
-                         save_to = .rba_file("rba_panther_graft_seq.json"))
+                         save_to = .rba_file("rba_panther_tree_grafter.json"))
 
   ## Call API
   final_output = .rba_skeleton(input_call)
