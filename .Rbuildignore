@@ -9,4 +9,4 @@
 ^icon\.ico$
 ^doc$
 ^Meta$
-^vignettes/html_files$
+^vignettes/libs$

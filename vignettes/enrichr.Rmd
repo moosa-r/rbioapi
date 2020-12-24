@@ -3,15 +3,11 @@ title: "2.A: Enrichr & rbioapi"
 author: "Moosa Rezwani"
 date: "`r Sys.Date()`"
 output:
-  rmarkdown::html_document:
-    theme: flatly
-    highlight: default
-    css: html_files/css.css
+  rmarkdown::html_vignette:
     toc: true
-    toc_float: true
     anchor_sections: true
     self_contained: true
-    code_folding: show
+    dev: png
 
 vignette: >
   %\VignetteIndexEntry{2.A: Enrichr & rbioapi}
@@ -21,15 +17,14 @@ vignette: >
 
 ```{r message=FALSE, include=FALSE, results="hide", setup, echo=FALSE}
 knitr::opts_chunk$set(echo = TRUE,
+                      eval = TRUE,
                       message = FALSE,
                       warning = FALSE,
+                      collapse = TRUE,
                       tidy = FALSE,
                       cache = FALSE,
                       dev = "png",
-                      collapse = TRUE,
-                      comment = "#>",
-                      eval = TRUE
-)
+                      comment = "#>")
 library(rbioapi)
 rba_options(timeout = 600)
 ```
@@ -58,7 +53,6 @@ In the returned data frame, you can find the names of available Enrichr librarie
 
 ```{r enrichr_libs_df, echo=FALSE}
 DT::datatable(data = enrichr_libs,
-              style = "bootstrap4",
               options = list(scrollX = TRUE, 
                              paging = TRUE,
                              fixedHeader = TRUE,

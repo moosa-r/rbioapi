@@ -3,16 +3,12 @@ title: "2.D: Reactome & rbioapi"
 author: "Moosa Rezwani"
 date: "`r Sys.Date()`"
 output:
-  rmarkdown::html_document:
-    theme: flatly
-    highlight: default
-    css: html_files/css.css
+  rmarkdown::html_vignette:
     toc: true
-    toc_float: true
     anchor_sections: true
     self_contained: true
-    code_folding: show
-    
+    dev: png
+
 vignette: >
   %\VignetteIndexEntry{2.D: Reactome & rbioapi}
   %\VignetteEngine{knitr::rmarkdown}
@@ -21,15 +17,14 @@ vignette: >
 
 ```{r message=FALSE, include=FALSE, results="hide", setup, echo=FALSE}
 knitr::opts_chunk$set(echo = TRUE,
+                      eval = TRUE,
                       message = FALSE,
                       warning = FALSE,
+                      collapse = TRUE,
                       tidy = FALSE,
                       cache = FALSE,
                       dev = "png",
-                      collapse = TRUE,
-                      comment = "#>",
-                      eval = TRUE
-)
+                      comment = "#>")
 library(rbioapi)
 rba_options(timeout = 600)
 ```
@@ -77,7 +72,6 @@ str(analyzed$summary)
 
 ```{r analysis_results, echo=FALSE}
 DT::datatable(data = jsonlite::flatten(analyzed$pathways),
-              style = "bootstrap4",
               options = list(scrollX = TRUE, 
                              paging = TRUE,
                              fixedHeader = TRUE,
@@ -86,7 +80,11 @@ DT::datatable(data = jsonlite::flatten(analyzed$pathways),
 
 ```
 
-As mentioned, some of `rba_reactome_analysis()`'s arguments correspond to the wizard of [analyse gene list](https://reactome.org/PathwayBrowser/#TOOL=AT) tool; Other arguments corresponds to the contents of "Filter your results" tab (![Filter your results](html_files/reactome_analysis_args.png "Filter your results"){#reactome_analysis_filter_your_results .img_button width="15"}) in the results page.
+As mentioned, some of `rba_reactome_analysis()`'s arguments correspond to the wizard of [analyse gene list](https://reactome.org/PathwayBrowser/#TOOL=AT) tool; Other arguments corresponds to the contents of "Filter your results" tab (![Filter your results](libs/reactome_analysis_args.png "Filter your results"){#reactome_analysis_filter_your_results .img_button width="15"}) in the results page.
+
+```{r reactome_analysis_args.png, fig.width=15, fig.show=TRUE, echo=FALSE}
+knitr::include_graphics("libs/reactome_analysis_args.png")
+```
 
 Having the analysis's token, you can retrieve the analysis results in many formats using `rba_reactome_analysis_pdf()` and `rba_reactome_analysis_download()`:
 
@@ -172,7 +170,6 @@ xref_mapping <- rba_reactome_mapping(id = "CD40",
 
 ```{r xref_mapping_df, echo=FALSE}
 DT::datatable(data = xref_mapping,
-              style = "bootstrap4",
               options = list(scrollX = TRUE, 
                              paging = TRUE,
                              fixedHeader = TRUE,
@@ -262,12 +259,10 @@ There are still more rbioapi f Reactome content functions that were not covered 
 
 Below are some example screenshots from different pages in Reactome's website along with corresponding rbioapi function calls.
 
-|                                                                                                                                      |                                                                                                                                                  |                                                                                                                                      |                                                                                                                              |
-|:------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------:|
-|                                                               Complex                                                                |                                                                  Pathway/Event                                                                   |                                                               Protein                                                                |                                                       Species overview                                                       |
-| [![Reactome complex content page](html_files/reactome_complex.png "Reactome complex content page")](html_files/reactome_complex.png) | [![Reactome Pathway/Event content page](html_files/reactome_pathway.png "Reactome Pathway/Event content page")](html_files/reactome_pathway.png) | [![Reactome Protein content page](html_files/reactome_protein.png "Reactome Protein content page")](html_files/reactome_protein.png) | [![Reactome species overview](html_files/reactome_species.png "Reactome species overview")](html_files/reactome_species.png) |
-
-------------------------------------------------------------------------
+|                                                                     Pathway                                                                      |                                                                      Complex                                                                       |                                                               Protein                                                                |                                                                Species                                                                 |
+|:------------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------:|
+| [![a Reactome Pathway page (R-HSA-109581)](libs/reactome_pathway_thumb.png "a Reactome Pathway page (R-HSA-109581)")](libs/reactome_pathway.png) | [![a Reactome complex page (R-HSA-2671814)](libs/reactome_complex_thumb.png "a Reactome complex page (R-HSA-2671814)")](libs/reactome_complex.png) | [![a Reactome protein (R-HSA-54639)](libs/reactome_protein_thumb.png "a Reactome protein (R-HSA-54639)")](libs/reactome_protein.png) | [![Reactome species pathway overview](libs/reactome_species_thumb.png "Reactome species pathway overview")](libs/reactome_species.png) |
+|                                  [Page's link](https://reactome.org/content/detail/R-HSA-109581 "R-HSA-109581")                                  |                                  [Page's link](https://reactome.org/content/detail/R-HSA-2671814 "R-HSA-2671814")                                  |                             [Page's link](https://reactome.org/content/detail/R-HSA-54639 "R-HSA-54639")                             |              [Page's link](https://reactome.org/PathwayBrowser/#/SPECIES=9606 "Reactome Pathway Browser - Homo sapiens")               |
 
 ## Session info {#session-info .heading2}
 

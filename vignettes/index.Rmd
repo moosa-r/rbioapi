@@ -1,17 +1,13 @@
 ---
-title: "1: User-friendly Interface to Biologic web Services"
+title: "1: A User-friendly R Interface to Biologic web Services's API"
 author: "Moosa Rezwani"
 date: "`r Sys.Date()`"
 output:
-  rmarkdown::html_document:
-    theme: flatly
-    highlight: default
-    css: html_files/css.css
+  rmarkdown::html_vignette:
     toc: true
-    toc_float: true
     anchor_sections: true
     self_contained: true
-    code_folding: show
+    dev: png
 
 vignette: >
   %\VignetteIndexEntry{1: User-friendly Interface to Biologic web Services}
@@ -21,13 +17,14 @@ vignette: >
 
 ```{r, include = FALSE, setup, echo=FALSE, results="hide"}
 knitr::opts_chunk$set(echo = TRUE,
+                      eval = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      collapse = TRUE,
                       tidy = FALSE,
                       cache = FALSE,
                       dev = "png",
-                      collapse = TRUE,
-                      comment = "#>",
-                      eval = TRUE
-)
+                      comment = "#>")
 library(rbioapi)
 rba_options(timeout = 600)
 ```
@@ -36,7 +33,9 @@ rba_options(timeout = 600)
 
 ## What does rbioapi do? {#what-does-rbioapi-do .heading2}
 
-rbioapi is an interface to Biological databases and web services. The goal of rbioapi is to insulate the user from technicalities and complications when it comes to using API services. With rbioapi, You are not required to have knowledge about HTTP protocols, CURL, REST API, parsing the response, etc. **Just fill a function's arguments and the rest is handled for you.**
+rbioapi is an interface to Biological databases and web services. The goal of rbioapi is to provide a user-friendly and unified interface to biological databases, to insulate the user from technicalities when it comes to using API services and to create a unified, easy-to-learn, and easy-to-implement way to connect to biologic databases.
+
+With rbioapi, You are not required to to have any knowledge about HTTP protocols, CURL, REST API, parsing the response, etc. **Just fill a function's arguments and the rest is handled for you.**
 
 ------------------------------------------------------------------------
 
