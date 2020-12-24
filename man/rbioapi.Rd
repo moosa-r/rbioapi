@@ -4,20 +4,22 @@
 \name{rbioapi}
 \alias{rbioapi}
 \alias{rbioapi-package}
-\title{rbioapi: User-friendly interface to Biological Databases' APIs}
+\title{rbioapi: User-friendly R Interface to Biologic Web-Services' API}
 \description{
-This package provides an easy, user-friendly and unified access
-toBiological databases' API. rbioapi tries to provide a unified experience,
-effortless and of course, user-friendly interface tothe most relevant
-Biological databases. The end user is not expected to haveknowlage about
-curl, api, http requests, etc.This is an on-going project; new databases
-will be implemented periodically.Do you see yourself querying data from a
-certain database which is notsupported by this package? feel free to contact
-me and I will try toimplement that database in the future releases.
+The goal of rbioapi is to provide a user-friendly and unified
+  interface to biological databases, to insulate the user from
+  technicalities when it comes to using API services and to create a
+  unified, easy-to-learn, and easy-to-implement way to connect to biologic
+  databases.\cr
+  With rbioapi, You are not required to have any technical knowledge. Just
+  fill a function's arguments and the rest is handled for you.\cr
+  This an ongoing project. New databases and services will be implemented
+  periodically. Feel free to suggest any databases or services you often use.
 }
-\section{STRING functions}{
+\section{Currently rbioapi fully supports}{
 
-map, interactions, image
+\enumerate{\item Enrichr \item MiEAA \item PANTHER \item Reactome
+  \item STRING \item UniProt}
 }
 
 \seealso{

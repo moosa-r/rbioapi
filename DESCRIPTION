@@ -1,22 +1,21 @@
 Package: rbioapi
 Type: Package
-Title: User-friendly interface from R to Biological Databases' APIs
+Title: User-friendly R Interface to Biologic web Services' API
 Version: 0.6.5
 Authors@R: person("Moosa", "Rezwani", email = "moosa.rezwani@gmail.com",
   role = c("aut", "cre", "cph"))
-Description: This package provides an easy, user-friendly and unified access to
-  Biological databases' API. rbioapi tries to provide a unified experience,
-  effortless and of course, user-friendly interface to
-  the most relevant Biological databases. The end user is not expected to have
-  knowlage about curl, api, http requests, and other technicalities.
-  This is an on-going project; new databases will be implemented periodically.
-  Do you see yourself querying data from a certain database which is not
-  supported by this package? feel free to contact me and I will try to
-  implement that database in the future releases.
+Description: Currently Supports: Enrichr, miEAA, PANTHER, Reactome, STRING,
+  and UniProt.
+  The goal of rbioapi is to provide a user-friendly and unified interface to
+  biological databases, to insulate the user from technicalities when it comes
+  to using API services and to create a unified, easy-to-learn,
+  and easy-to-implement way to connect to biologic databases.\r\n
+  With rbioapi, You are not required to to have any technical knowledge.
+  Just fill a function's arguments and the rest is handled for you.\r\n
+  This an ongoing project. New databases and services will be implemented
+  periodically. Feel free to suggest any databases or services you often use.
 License: GPL-3
 Encoding: UTF-8
-biocViews: Infrastructure, DataImport, ThirdPartyClient, Pathways, Network,
-  Reactome, GenomeAnnotation
 URL: https://github.com/moosa-r/rbioapi
 BugReports: https://github.com/moosa-r/rbioapi/issues
 Imports:
