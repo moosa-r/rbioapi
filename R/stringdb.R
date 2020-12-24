@@ -38,11 +38,11 @@
 #'
 #' @family "STRING API"
 #' @export
-rba_string_map_ids = function(ids,
-                              species = NA,
-                              echo_query = FALSE,
-                              limit = NA,
-                              ...) {
+rba_string_map_ids <- function(ids,
+                               species = NA,
+                               echo_query = FALSE,
+                               limit = NA,
+                               ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -61,32 +61,32 @@ rba_string_map_ids = function(ids,
   .msg("Mapping %s Input Identifiers to STRING Identifiers.", length(ids))
 
   ## Build POST API Request's body
-  call_body = .rba_query(init = list("identifiers" = paste(unique(ids),
-                                                           collapse = "%0d"),
-                                     "caller_identity" = getOption("rba_user_agent")),
-                         list("species",
-                              !is.na(species),
-                              species),
-                         list("echo_query",
-                              echo_query,
-                              "1"),
-                         list("limit",
-                              !is.na(limit),
-                              limit))
+  call_body <- .rba_query(init = list("identifiers" = paste(unique(ids),
+                                                            collapse = "%0d"),
+                                      "caller_identity" = getOption("rba_user_agent")),
+                          list("species",
+                               !is.na(species),
+                               species),
+                          list("echo_query",
+                               echo_query,
+                               "1"),
+                          list("limit",
+                               !is.na(limit),
+                               limit))
 
   ## Build Function-Specific Call
-  input_call = .rba_httr(httr = "post",
-                         url = .rba_stg("string", "url"),
-                         path = paste0(.rba_stg("string", "pth"),
-                                       "json/resolve"),
-                         body = call_body,
-                         encode = "form",
-                         accept = "application/json",
-                         parser = "json->df",
-                         save_to = .rba_file("string_map_ids.json"))
+  input_call <- .rba_httr(httr = "post",
+                          url = .rba_stg("string", "url"),
+                          path = paste0(.rba_stg("string", "pth"),
+                                        "json/resolve"),
+                          body = call_body,
+                          encode = "form",
+                          accept = "application/json",
+                          parser = "json->df",
+                          save_to = .rba_file("string_map_ids.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -171,19 +171,19 @@ rba_string_map_ids = function(ids,
 #' @family "STRING API"
 #' @seealso \code{\link{rba_string_map_ids}}
 #' @export
-rba_string_network_image = function(ids,
-                                    image_format = "image",
-                                    save_image = TRUE,
-                                    species = NA,
-                                    add_color_nodes = NA,
-                                    add_white_nodes = NA,
-                                    required_score = NA,
-                                    network_flavor = "confidence",
-                                    network_type = "functional",
-                                    hide_node_labels = FALSE,
-                                    hide_disconnected_nodes = FALSE,
-                                    hide_structure_pics = FALSE,
-                                    ...) {
+rba_string_network_image <- function(ids,
+                                     image_format = "image",
+                                     save_image = TRUE,
+                                     species = NA,
+                                     add_color_nodes = NA,
+                                     add_white_nodes = NA,
+                                     required_score = NA,
+                                     network_flavor = "confidence",
+                                     network_type = "functional",
+                                     hide_node_labels = FALSE,
+                                     hide_disconnected_nodes = FALSE,
+                                     hide_structure_pics = FALSE,
+                                     ...) {
   ## Load Global Options
   .rba_ext_args(..., ignore_save = TRUE)
   ## Check User-input Arguments
@@ -225,62 +225,62 @@ rba_string_network_image = function(ids,
   .msg("Retrieving STRING network image of %s Input Identifiers.", length(ids))
 
   ## Build POST API Request's body
-  call_body = .rba_query(init = list("identifiers" = paste(unique(ids),
-                                                           collapse = "%0d"),
-                                     "caller_identity" = getOption("rba_user_agent")),
-                         list("species",
-                              !is.na(species),
-                              species),
-                         list("add_color_nodes",
-                              !is.na(add_color_nodes),
-                              add_color_nodes),
-                         list("add_white_nodes",
-                              !is.na(add_white_nodes),
-                              add_white_nodes),
-                         list("required_score",
-                              !is.na(required_score),
-                              required_score),
-                         list("network_flavor",
-                              !is.na(network_flavor),
-                              network_flavor),
-                         list("network_type",
-                              !is.na(network_type),
-                              network_type),
-                         list("hide_node_labels",
-                              hide_node_labels,
-                              "1"),
-                         list("hide_disconnected_nodes",
-                              hide_disconnected_nodes,
-                              "1"),
-                         list("hide_structure_pics",
-                              hide_structure_pics,
-                              "1"))
+  call_body <- .rba_query(init = list("identifiers" = paste(unique(ids),
+                                                            collapse = "%0d"),
+                                      "caller_identity" = getOption("rba_user_agent")),
+                          list("species",
+                               !is.na(species),
+                               species),
+                          list("add_color_nodes",
+                               !is.na(add_color_nodes),
+                               add_color_nodes),
+                          list("add_white_nodes",
+                               !is.na(add_white_nodes),
+                               add_white_nodes),
+                          list("required_score",
+                               !is.na(required_score),
+                               required_score),
+                          list("network_flavor",
+                               !is.na(network_flavor),
+                               network_flavor),
+                          list("network_type",
+                               !is.na(network_type),
+                               network_type),
+                          list("hide_node_labels",
+                               hide_node_labels,
+                               "1"),
+                          list("hide_disconnected_nodes",
+                               hide_disconnected_nodes,
+                               "1"),
+                          list("hide_structure_pics",
+                               hide_structure_pics,
+                               "1"))
 
   ## make file path
   if (image_format == "svg") {
-    ext_input = "svg"
-    accept_input = "image/svg+xml"
-    parser_input = function(x) {httr::content(x)}
+    ext_input <- "svg"
+    accept_input <- "image/svg+xml"
+    parser_input <- function(x) {httr::content(x)}
   } else {
-    ext_input = "png"
-    accept_input = "image/png"
-    parser_input = function(x) {httr::content(x, type = "image/png")}
+    ext_input <- "png"
+    accept_input <- "image/png"
+    parser_input <- function(x) {httr::content(x, type = "image/png")}
   }
-  save_image = .rba_file(file = paste0("string_network_image.", ext_input),
-                         save_to = save_image)
+  save_image <- .rba_file(file = paste0("string_network_image.", ext_input),
+                          save_to = save_image)
 
   ## Build Function-Specific Call
-  input_call = .rba_httr(httr = "post",
-                         url = .rba_stg("string", "url"),
-                         path = paste0(.rba_stg("string", "pth"),
-                                       "image/network"),
-                         accept = accept_input,
-                         parser = parser_input,
-                         body = call_body,
-                         save_to = save_image)
+  input_call <- .rba_httr(httr = "post",
+                          url = .rba_stg("string", "url"),
+                          path = paste0(.rba_stg("string", "pth"),
+                                        "image/network"),
+                          accept = accept_input,
+                          parser = parser_input,
+                          body = call_body,
+                          save_to = save_image)
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -365,12 +365,12 @@ rba_string_network_image = function(ids,
 #' @seealso
 #'   \code{\link{rba_string_map_ids}, \link{rba_string_interaction_partners}}
 #' @export
-rba_string_interactions_network = function(ids,
-                                           species = NA,
-                                           required_score = NA,
-                                           add_nodes = NA,
-                                           network_type = "functional",
-                                           ...) {
+rba_string_interactions_network <- function(ids,
+                                            species = NA,
+                                            required_score = NA,
+                                            add_nodes = NA,
+                                            network_type = "functional",
+                                            ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -397,35 +397,35 @@ rba_string_interactions_network = function(ids,
        length(ids))
 
   ## Build POST API Request's body
-  call_body = .rba_query(init = list("identifiers" = paste(unique(ids),
-                                                           collapse = "%0d"),
-                                     "caller_identity" = getOption("rba_user_agent")),
-                         list("species",
-                              !is.na(species),
-                              species),
-                         list("required_score",
-                              !is.na(required_score),
-                              required_score),
-                         list("add_nodes",
-                              !is.na(add_nodes),
-                              add_nodes),
-                         list("network_type",
-                              !is.na(network_type),
-                              network_type))
+  call_body <- .rba_query(init = list("identifiers" = paste(unique(ids),
+                                                            collapse = "%0d"),
+                                      "caller_identity" = getOption("rba_user_agent")),
+                          list("species",
+                               !is.na(species),
+                               species),
+                          list("required_score",
+                               !is.na(required_score),
+                               required_score),
+                          list("add_nodes",
+                               !is.na(add_nodes),
+                               add_nodes),
+                          list("network_type",
+                               !is.na(network_type),
+                               network_type))
 
   ## Build Function-Specific Call
-  input_call = .rba_httr(httr = "post",
-                         url = .rba_stg("string", "url"),
-                         path = paste0(.rba_stg("string", "pth"),
-                                       "json/network"),
-                         body = call_body,
-                         encode = "form",
-                         accept = "application/json",
-                         parser = "json->df",
-                         save_to = .rba_file("rba_string_interactions_network.json"))
+  input_call <- .rba_httr(httr = "post",
+                          url = .rba_stg("string", "url"),
+                          path = paste0(.rba_stg("string", "pth"),
+                                        "json/network"),
+                          body = call_body,
+                          encode = "form",
+                          accept = "application/json",
+                          parser = "json->df",
+                          save_to = .rba_file("rba_string_interactions_network.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -490,12 +490,12 @@ rba_string_interactions_network = function(ids,
 #' @seealso
 #'   \code{\link{rba_string_map_ids}, \link{rba_string_interactions_network}}
 #' @export
-rba_string_interaction_partners = function(ids,
-                                           species = NA,
-                                           required_score = NA,
-                                           network_type = "functional",
-                                           limit = NA,
-                                           ...) {
+rba_string_interaction_partners <- function(ids,
+                                            species = NA,
+                                            required_score = NA,
+                                            network_type = "functional",
+                                            limit = NA,
+                                            ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -522,35 +522,35 @@ rba_string_interaction_partners = function(ids,
        length(ids))
 
   ## Build POST API Request's body
-  call_body = .rba_query(init = list("identifiers" = paste(unique(ids),
-                                                           collapse = "%0d"),
-                                     "caller_identity" = getOption("rba_user_agent")),
-                         list("species",
-                              !is.na(species),
-                              species),
-                         list("limit",
-                              !is.na(limit),
-                              limit),
-                         list("required_score",
-                              !is.na(required_score),
-                              required_score),
-                         list("network_type",
-                              !is.na(network_type),
-                              network_type))
+  call_body <- .rba_query(init = list("identifiers" = paste(unique(ids),
+                                                            collapse = "%0d"),
+                                      "caller_identity" = getOption("rba_user_agent")),
+                          list("species",
+                               !is.na(species),
+                               species),
+                          list("limit",
+                               !is.na(limit),
+                               limit),
+                          list("required_score",
+                               !is.na(required_score),
+                               required_score),
+                          list("network_type",
+                               !is.na(network_type),
+                               network_type))
 
   ## Build Function-Specific Call
-  input_call = .rba_httr(httr = "post",
-                         url = .rba_stg("string", "url"),
-                         path = paste0(.rba_stg("string", "pth"),
-                                       "/json/interaction_partners"),
-                         body = call_body,
-                         encode = "form",
-                         accept = "application/json",
-                         parser = "json->df",
-                         save_to = .rba_file("string_interaction_partners.json"))
+  input_call <- .rba_httr(httr = "post",
+                          url = .rba_stg("string", "url"),
+                          path = paste0(.rba_stg("string", "pth"),
+                                        "/json/interaction_partners"),
+                          body = call_body,
+                          encode = "form",
+                          accept = "application/json",
+                          parser = "json->df",
+                          save_to = .rba_file("string_interaction_partners.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -602,9 +602,9 @@ rba_string_interaction_partners = function(ids,
 #' @seealso
 #'   \code{\link{rba_string_map_ids}, \link{rba_string_homology_inter}}
 #' @export
-rba_string_homology_intra = function(ids,
-                                     species = NA,
-                                     ...) {
+rba_string_homology_intra <- function(ids,
+                                      species = NA,
+                                      ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -621,26 +621,26 @@ rba_string_homology_intra = function(ids,
        length(ids))
 
   ## Build POST API Request's body
-  call_body = .rba_query(init = list("identifiers" = paste(unique(ids),
-                                                           collapse = "%0d"),
-                                     "caller_identity" = getOption("rba_user_agent")),
-                         list("species",
-                              !is.na(species),
-                              species))
+  call_body <- .rba_query(init = list("identifiers" = paste(unique(ids),
+                                                            collapse = "%0d"),
+                                      "caller_identity" = getOption("rba_user_agent")),
+                          list("species",
+                               !is.na(species),
+                               species))
 
   ## Build Function-Specific Call
-  input_call = .rba_httr(httr = "post",
-                         url = .rba_stg("string", "url"),
-                         path = paste0(.rba_stg("string", "pth"),
-                                       "json/homology"),
-                         body = call_body,
-                         encode = "form",
-                         accept = "application/json",
-                         parser = "json->df",
-                         save_to = .rba_file("string_homology.json"))
+  input_call <- .rba_httr(httr = "post",
+                          url = .rba_stg("string", "url"),
+                          path = paste0(.rba_stg("string", "pth"),
+                                        "json/homology"),
+                          body = call_body,
+                          encode = "form",
+                          accept = "application/json",
+                          parser = "json->df",
+                          save_to = .rba_file("string_homology.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -698,10 +698,10 @@ rba_string_homology_intra = function(ids,
 #' @seealso
 #'   \code{\link{rba_string_map_ids}, \link{rba_string_homology_intra}}
 #' @export
-rba_string_homology_inter = function(ids,
-                                     species = NA,
-                                     species_b = NA,
-                                     ...) {
+rba_string_homology_inter <- function(ids,
+                                      species = NA,
+                                      species_b = NA,
+                                      ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -719,29 +719,29 @@ rba_string_homology_inter = function(ids,
        length(ids))
 
   ## Build POST API Request's body
-  call_body = .rba_query(init = list("identifiers" = paste(unique(ids),
-                                                           collapse = "%0d"),
-                                     "caller_identity" = getOption("rba_user_agent")),
-                         list("species",
-                              !is.na(species),
-                              species),
-                         list("species_b",
-                              !is.na(species_b),
-                              paste(unique(species_b),collapse = "%0d")))
+  call_body <- .rba_query(init = list("identifiers" = paste(unique(ids),
+                                                            collapse = "%0d"),
+                                      "caller_identity" = getOption("rba_user_agent")),
+                          list("species",
+                               !is.na(species),
+                               species),
+                          list("species_b",
+                               !is.na(species_b),
+                               paste(unique(species_b),collapse = "%0d")))
 
   ## Build Function-Specific Call
-  input_call = .rba_httr(httr = "post",
-                         url = .rba_stg("string", "url"),
-                         path = paste0(.rba_stg("string", "pth"),
-                                       "json/homology_best"),
-                         body = call_body,
-                         encode = "form",
-                         accept = "application/json",
-                         parser = "json->df",
-                         save_to = .rba_file("string_homology_best.json"))
+  input_call <- .rba_httr(httr = "post",
+                          url = .rba_stg("string", "url"),
+                          path = paste0(.rba_stg("string", "pth"),
+                                        "json/homology_best"),
+                          body = call_body,
+                          encode = "form",
+                          accept = "application/json",
+                          parser = "json->df",
+                          save_to = .rba_file("string_homology_best.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -801,11 +801,11 @@ rba_string_homology_inter = function(ids,
 #' @seealso
 #'   \code{\link{rba_string_map_ids}, \link{rba_string_annotations}}
 #' @export
-rba_string_enrichment = function(ids,
-                                 species = NA,
-                                 background = NA,
-                                 split_df = FALSE,
-                                 ...) {
+rba_string_enrichment <- function(ids,
+                                  species = NA,
+                                  background = NA,
+                                  split_df = FALSE,
+                                  ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -823,37 +823,37 @@ rba_string_enrichment = function(ids,
        length(ids))
 
   ## Build POST API Request's body
-  call_body = .rba_query(init = list("identifiers" = paste(unique(ids),
-                                                           collapse = "%0d"),
-                                     "caller_identity" = getOption("rba_user_agent")),
-                         list("species",
-                              !is.na(species),
-                              species),
-                         list("background_string_identifiers",
-                              !is.na(background),
-                              paste(unique(background),
-                                    collapse = "%0d")))
+  call_body <- .rba_query(init = list("identifiers" = paste(unique(ids),
+                                                            collapse = "%0d"),
+                                      "caller_identity" = getOption("rba_user_agent")),
+                          list("species",
+                               !is.na(species),
+                               species),
+                          list("background_string_identifiers",
+                               !is.na(background),
+                               paste(unique(background),
+                                     collapse = "%0d")))
 
   ## Build Function-Specific Call
   if (isTRUE(split_df)) {
-    parser_input = list("json->df",
-                        function(x) { split(x, x$category) })
+    parser_input <- list("json->df",
+                         function(x) { split(x, x$category) })
   } else {
-    parser_input = "json->df"
+    parser_input <- "json->df"
   }
 
-  input_call = .rba_httr(httr = "post",
-                         url = .rba_stg("string", "url"),
-                         path = paste0(.rba_stg("string", "pth"),
-                                       "json/enrichment"),
-                         body = call_body,
-                         encode = "form",
-                         accept = "application/json",
-                         parser = parser_input,
-                         save_to = .rba_file("string_enrichment.json"))
+  input_call <- .rba_httr(httr = "post",
+                          url = .rba_stg("string", "url"),
+                          path = paste0(.rba_stg("string", "pth"),
+                                        "json/enrichment"),
+                          body = call_body,
+                          encode = "form",
+                          accept = "application/json",
+                          parser = parser_input,
+                          save_to = .rba_file("string_enrichment.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -908,10 +908,10 @@ rba_string_enrichment = function(ids,
 #' @seealso
 #'   \code{\link{rba_string_map_ids}, \link{rba_string_enrichment}}
 #' @export
-rba_string_annotations = function(ids,
-                                  species = NA,
-                                  allow_pubmed = FALSE,
-                                  ...) {
+rba_string_annotations <- function(ids,
+                                   species = NA,
+                                   allow_pubmed = FALSE,
+                                   ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -930,29 +930,29 @@ rba_string_annotations = function(ids,
        length(ids))
 
   ## Build POST API Request's body
-  call_body = .rba_query(init = list("identifiers" = paste(unique(ids),
-                                                           collapse = "%0d"),
-                                     "caller_identity" = getOption("rba_user_agent")),
-                         list("species",
-                              !is.na(species),
-                              species),
-                         list("allow_pubmed",
-                              allow_pubmed,
-                              1))
+  call_body <- .rba_query(init = list("identifiers" = paste(unique(ids),
+                                                            collapse = "%0d"),
+                                      "caller_identity" = getOption("rba_user_agent")),
+                          list("species",
+                               !is.na(species),
+                               species),
+                          list("allow_pubmed",
+                               allow_pubmed,
+                               1))
 
   ## Build Function-Specific Call
-  input_call = .rba_httr(httr = "post",
-                         url = .rba_stg("string", "url"),
-                         path = paste0(.rba_stg("string", "pth"),
-                                       "json/functional_annotation"),
-                         body = call_body,
-                         encode = "form",
-                         accept = "application/json",
-                         parser = "json->df",
-                         save_to = .rba_file("string_functional_annotation.json"))
+  input_call <- .rba_httr(httr = "post",
+                          url = .rba_stg("string", "url"),
+                          path = paste0(.rba_stg("string", "pth"),
+                                        "json/functional_annotation"),
+                          body = call_body,
+                          encode = "form",
+                          accept = "application/json",
+                          parser = "json->df",
+                          save_to = .rba_file("string_functional_annotation.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -998,10 +998,10 @@ rba_string_annotations = function(ids,
 #' @family "STRING API"
 #' @seealso \code{\link{rba_string_map_ids}}
 #' @export
-rba_string_enrichment_ppi = function(ids,
-                                     species = NA,
-                                     required_score = NA,
-                                     ...) {
+rba_string_enrichment_ppi <- function(ids,
+                                      species = NA,
+                                      required_score = NA,
+                                      ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -1022,28 +1022,28 @@ rba_string_enrichment_ppi = function(ids,
        length(ids))
 
   ## Build POST API Request's body
-  call_body = .rba_query(init = list("identifiers" = paste(unique(ids),
-                                                           collapse = "%0d"),
-                                     "caller_identity" = getOption("rba_user_agent")),
-                         list("species",
-                              !is.na(species),
-                              species),
-                         list("required_score",
-                              !is.na(required_score),
-                              required_score))
+  call_body <- .rba_query(init = list("identifiers" = paste(unique(ids),
+                                                            collapse = "%0d"),
+                                      "caller_identity" = getOption("rba_user_agent")),
+                          list("species",
+                               !is.na(species),
+                               species),
+                          list("required_score",
+                               !is.na(required_score),
+                               required_score))
 
   ## Build Function-Specific Call
-  input_call = .rba_httr(httr = "post",
-                         url = .rba_stg("string", "url"),
-                         path = paste0(.rba_stg("string", "pth"),
-                                       "json/ppi_enrichment"),
-                         body = call_body,
-                         encode = "form",
-                         accept = "application/json",
-                         parser = "json->list_simp",
-                         save_to = .rba_file("string_ppi_enrichment.json"))
+  input_call <- .rba_httr(httr = "post",
+                          url = .rba_stg("string", "url"),
+                          path = paste0(.rba_stg("string", "pth"),
+                                        "json/ppi_enrichment"),
+                          body = call_body,
+                          encode = "form",
+                          accept = "application/json",
+                          parser = "json->list_simp",
+                          save_to = .rba_file("string_ppi_enrichment.json"))
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -1080,7 +1080,7 @@ rba_string_enrichment_ppi = function(ids,
 #'
 #' @family "STRING API"
 #' @export
-rba_string_version = function(...) {
+rba_string_version <- function(...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -1088,20 +1088,20 @@ rba_string_version = function(...) {
   .msg("Retrieving the STRING database version and address used by rbioapi.")
 
   ## Build POST API Request's body
-  call_query = list("format" = "text")
+  call_query <- list("format" = "text")
 
   ## Build Function-Specific Call
-  input_call = .rba_httr(httr = "get",
-                         url = .rba_stg("string", "url"),
-                         path = paste0(.rba_stg("string", "pth"),
-                                       "json/version"),
-                         body = call_query,
-                         encode = "form",
-                         accept = "application/json",
-                         parser = "json->list_simp",
-                         save_to = .rba_file("string_version.json"))
+  input_call <- .rba_httr(httr = "get",
+                          url = .rba_stg("string", "url"),
+                          path = paste0(.rba_stg("string", "pth"),
+                                        "json/version"),
+                          body = call_query,
+                          encode = "form",
+                          accept = "application/json",
+                          parser = "json->list_simp",
+                          save_to = .rba_file("string_version.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }

@@ -80,25 +80,25 @@
 #' rba_uniprot_uniparc_search(taxid = "694009", protein = "Nucleoprotein")
 #' @family "UniProt API, UniParc"
 #' @export
-rba_uniprot_uniparc_search = function(upi = NA,
-                                      accession = NA,
-                                      db_type = NA,
-                                      db_id = NA,
-                                      gene = NA,
-                                      protein = NA,
-                                      taxid = NA,
-                                      organism = NA,
-                                      sequence_checksum= NA,
-                                      ipr = NA,
-                                      signature_db = NA,
-                                      signature_id = NA,
-                                      upid = NA,
-                                      seq_length = NA,
-                                      rf_dd_type = NA,
-                                      rf_db_id = NA,
-                                      rf_active = NA,
-                                      rf_tax_id = NA,
-                                      ...) {
+rba_uniprot_uniparc_search <- function(upi = NA,
+                                       accession = NA,
+                                       db_type = NA,
+                                       db_id = NA,
+                                       gene = NA,
+                                       protein = NA,
+                                       taxid = NA,
+                                       organism = NA,
+                                       sequence_checksum= NA,
+                                       ipr = NA,
+                                       signature_db = NA,
+                                       signature_id = NA,
+                                       upid = NA,
+                                       seq_length = NA,
+                                       rf_dd_type = NA,
+                                       rf_db_id = NA,
+                                       rf_active = NA,
+                                       rf_tax_id = NA,
+                                       ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -148,90 +148,90 @@ rba_uniprot_uniparc_search = function(upi = NA,
 
   .msg("Searching UniParc and retrieving entries that match your provided inputs.")
   ## Build GET API Request's query
-  call_query = .rba_query(init = list("size" = "-1"),
-                          list("upi",
-                               any(!is.na(upi)),
-                               paste0(upi,
-                                      collapse = ",")),
-                          list("accession",
-                               any(!is.na(accession)),
-                               paste0(accession,
-                                      collapse = ",")),
-                          list("dbtype",
-                               !is.na(db_type),
-                               db_type),
-                          list("dbid",
-                               any(!is.na(db_id)),
-                               paste0(db_id,
-                                      collapse = ",")),
-                          list("gene",
-                               any(!is.na(gene)),
-                               paste0(gene,
-                                      collapse = ",")),
-                          list("protein",
-                               !is.na(protein),
-                               protein),
-                          list("taxid",
-                               any(!is.na(taxid)),
-                               paste0(taxid,
-                                      collapse = ",")),
-                          list("organism",
-                               !is.na(organism),
-                               organism),
-                          list("sequencechecksum",
-                               !is.na(sequence_checksum),
-                               sequence_checksum),
-                          list("ipr",
-                               any(!is.na(ipr)),
-                               paste0(ipr,
-                                      collapse = ",")),
-                          list("signaturetype",
-                               any(!is.na(signature_db)),
-                               paste0(signature_db,
-                                      collapse = ",")),
-                          list("signatureid",
-                               any(!is.na(signature_id)),
-                               paste0(signature_id,
-                                      collapse = ",")),
-                          list("upid",
-                               any(!is.na(upid)),
-                               paste0(upid,
-                                      collapse = ",")),
-                          list("seqLength",
-                               !is.na(seq_length),
-                               seq_length),
-                          list("rfDdtype",
-                               any(!is.na(rf_dd_type)),
-                               paste0(rf_dd_type,
-                                      collapse = ",")),
-                          list("rfDbid",
-                               any(!is.na(rf_db_id)),
-                               paste0(rf_db_id,
-                                      collapse = ",")),
-                          list("rfActive",
-                               !is.na(rf_active),
-                               ifelse(rf_active,
-                                      "true",
-                                      "false")),
-                          list("rfTaxId",
-                               any(!is.na(rf_tax_id)),
-                               paste0(rf_tax_id,
-                                      collapse = ",")))
+  call_query <- .rba_query(init = list("size" = "-1"),
+                           list("upi",
+                                any(!is.na(upi)),
+                                paste0(upi,
+                                       collapse = ",")),
+                           list("accession",
+                                any(!is.na(accession)),
+                                paste0(accession,
+                                       collapse = ",")),
+                           list("dbtype",
+                                !is.na(db_type),
+                                db_type),
+                           list("dbid",
+                                any(!is.na(db_id)),
+                                paste0(db_id,
+                                       collapse = ",")),
+                           list("gene",
+                                any(!is.na(gene)),
+                                paste0(gene,
+                                       collapse = ",")),
+                           list("protein",
+                                !is.na(protein),
+                                protein),
+                           list("taxid",
+                                any(!is.na(taxid)),
+                                paste0(taxid,
+                                       collapse = ",")),
+                           list("organism",
+                                !is.na(organism),
+                                organism),
+                           list("sequencechecksum",
+                                !is.na(sequence_checksum),
+                                sequence_checksum),
+                           list("ipr",
+                                any(!is.na(ipr)),
+                                paste0(ipr,
+                                       collapse = ",")),
+                           list("signaturetype",
+                                any(!is.na(signature_db)),
+                                paste0(signature_db,
+                                       collapse = ",")),
+                           list("signatureid",
+                                any(!is.na(signature_id)),
+                                paste0(signature_id,
+                                       collapse = ",")),
+                           list("upid",
+                                any(!is.na(upid)),
+                                paste0(upid,
+                                       collapse = ",")),
+                           list("seqLength",
+                                !is.na(seq_length),
+                                seq_length),
+                           list("rfDdtype",
+                                any(!is.na(rf_dd_type)),
+                                paste0(rf_dd_type,
+                                       collapse = ",")),
+                           list("rfDbid",
+                                any(!is.na(rf_db_id)),
+                                paste0(rf_db_id,
+                                       collapse = ",")),
+                           list("rfActive",
+                                !is.na(rf_active),
+                                ifelse(rf_active,
+                                       "true",
+                                       "false")),
+                           list("rfTaxId",
+                                any(!is.na(rf_tax_id)),
+                                paste0(rf_tax_id,
+                                       collapse = ",")))
   ## Build Function-Specific Call
-  parser_input = list("json->list",
-                      .rba_uniprot_search_namer)
+  parser_input <- list("json->list",
+                       .rba_uniprot_search_namer)
 
-  input_call = .rba_httr(httr = "get",
-                         url = .rba_stg("uniprot", "url"),
-                         path = paste0(.rba_stg("uniprot", "pth"),
-                                       "uniparc"),
-                         query = call_query,
-                         accept = "application/json",
-                         parser = parser_input,
-                         save_to = .rba_file("uniprot_uniparc_search.json"))
+  input_call <- .rba_httr(httr = "get",
+                          url = .rba_stg("uniprot", "url"),
+                          path = paste0(.rba_stg("uniprot", "pth"),
+                                        "uniparc"),
+                          query = call_query,
+                          accept = "application/json",
+                          parser = parser_input,
+                          save_to = .rba_file("uniprot_uniparc_search.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -289,15 +289,15 @@ rba_uniprot_uniparc_search = function(upi = NA,
 #' rba_uniprot_uniparc(upi = "UPI00000000C9", rf_active = FALSE)
 #' @family "UniProt API, UniParc"
 #' @export
-rba_uniprot_uniparc = function(upi = NA,
-                               accession = NA,
-                               db_id = NA,
-                               upid = NA,
-                               rf_dd_type = NA,
-                               rf_db_id = NA,
-                               rf_active = NA,
-                               rf_tax_id = NA,
-                               ...) {
+rba_uniprot_uniparc <- function(upi = NA,
+                                accession = NA,
+                                db_id = NA,
+                                upid = NA,
+                                rf_dd_type = NA,
+                                rf_db_id = NA,
+                                rf_active = NA,
+                                rf_tax_id = NA,
+                                ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -322,58 +322,58 @@ rba_uniprot_uniparc = function(upi = NA,
   )
 
   .msg("Retriving UniParc entry with %s.",
-        if (!is.na(accession)) {paste0("UniProt accession ", accession)
-        } else if (!is.na(db_id)) {
-          path_input = paste0("cross-reference database ID ", accession)
-        } else if (!is.na(upid)) {
-          path_input = paste0("UniProt Proteome ID ", accession)
-        } else if (!is.na(upi)) {
-          path_input = paste0("UniParc ID ", accession)
-        })
+       if (!is.na(accession)) {paste0("UniProt accession ", accession)
+       } else if (!is.na(db_id)) {
+         path_input <- paste0("cross-reference database ID ", accession)
+       } else if (!is.na(upid)) {
+         path_input <- paste0("UniProt Proteome ID ", accession)
+       } else if (!is.na(upi)) {
+         path_input <- paste0("UniParc ID ", accession)
+       })
 
   ## Build GET API Request's query
-  call_query = .rba_query(init = list("size" = "-1"),
-                          list("rfDdtype",
-                               any(!is.na(rf_dd_type)),
-                               paste0(rf_dd_type,
-                                      collapse = ",")),
-                          list("rfDbid",
-                               any(!is.na(rf_db_id)),
-                               paste0(rf_db_id,
-                                      collapse = ",")),
-                          list("rfActive",
-                               !is.na(rf_active),
-                               ifelse(rf_active,
-                                      "true",
-                                      "false")),
-                          list("rfTaxId",
-                               any(!is.na(rf_tax_id)),
-                               paste0(rf_tax_id,
-                                      collapse = ",")))
+  call_query <- .rba_query(init = list("size" = "-1"),
+                           list("rfDdtype",
+                                any(!is.na(rf_dd_type)),
+                                paste0(rf_dd_type,
+                                       collapse = ",")),
+                           list("rfDbid",
+                                any(!is.na(rf_db_id)),
+                                paste0(rf_db_id,
+                                       collapse = ",")),
+                           list("rfActive",
+                                !is.na(rf_active),
+                                ifelse(rf_active,
+                                       "true",
+                                       "false")),
+                           list("rfTaxId",
+                                any(!is.na(rf_tax_id)),
+                                paste0(rf_tax_id,
+                                       collapse = ",")))
   ## Build Function-Specific Call
   if (!is.na(accession)) {
-    path_input = paste0(.rba_stg("uniprot", "pth"),
-                        "uniparc/accession/", accession)
+    path_input <- paste0(.rba_stg("uniprot", "pth"),
+                         "uniparc/accession/", accession)
   } else if (!is.na(db_id)) {
-    path_input = paste0(.rba_stg("uniprot", "pth"),
-                        "uniparc/dbreference/", db_id)
+    path_input <- paste0(.rba_stg("uniprot", "pth"),
+                         "uniparc/dbreference/", db_id)
   } else if (!is.na(upid)) {
-    path_input = paste0(.rba_stg("uniprot", "pth"),
-                        "uniparc/proteome/", upid)
+    path_input <- paste0(.rba_stg("uniprot", "pth"),
+                         "uniparc/proteome/", upid)
   } else if (!is.na(upi)) {
-    path_input = paste0(.rba_stg("uniprot", "pth"),
-                        "uniparc/upi/", upi)
+    path_input <- paste0(.rba_stg("uniprot", "pth"),
+                         "uniparc/upi/", upi)
   }
-  input_call = .rba_httr(httr = "get",
-                         url = .rba_stg("uniprot", "url"),
-                         path = path_input,
-                         query = call_query,
-                         accept = "application/json",
-                         parser = "json->list",
-                         save_to = .rba_file("uniprot_uniparc.json"))
+  input_call <- .rba_httr(httr = "get",
+                          url = .rba_stg("uniprot", "url"),
+                          path = path_input,
+                          query = call_query,
+                          accept = "application/json",
+                          parser = "json->list",
+                          save_to = .rba_file("uniprot_uniparc.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -417,12 +417,12 @@ rba_uniprot_uniparc = function(upi = NA,
 #' rba_uniprot_uniparc_bestguess("UPI00000000C9")
 #' @family "UniProt API, UniParc"
 #' @export
-rba_uniprot_uniparc_bestguess = function(upi = NA,
-                                         accession = NA,
-                                         db_id = NA,
-                                         gene = NA,
-                                         taxid = NA,
-                                         ...) {
+rba_uniprot_uniparc_bestguess <- function(upi = NA,
+                                          accession = NA,
+                                          db_id = NA,
+                                          gene = NA,
+                                          taxid = NA,
+                                          ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -444,39 +444,39 @@ rba_uniprot_uniparc_bestguess = function(upi = NA,
 
   .msg("Retrieving UniParc longest Sequence.")
   ## Build GET API Request's query
-  call_query = .rba_query(init = list("size" = "-1"),
-                          list("upi",
-                               any(!is.na(upi)),
-                               paste0(upi,
-                                      collapse = ",")),
-                          list("accession",
-                               any(!is.na(accession)),
-                               paste0(accession,
-                                      collapse = ",")),
-                          list("dbid",
-                               any(!is.na(db_id)),
-                               paste0(db_id,
-                                      collapse = ",")),
-                          list("gene",
-                               any(!is.na(gene)),
-                               paste0(gene,
-                                      collapse = ",")),
-                          list("taxid",
-                               any(!is.na(taxid)),
-                               paste0(taxid,
-                                      collapse = ",")))
+  call_query <- .rba_query(init = list("size" = "-1"),
+                           list("upi",
+                                any(!is.na(upi)),
+                                paste0(upi,
+                                       collapse = ",")),
+                           list("accession",
+                                any(!is.na(accession)),
+                                paste0(accession,
+                                       collapse = ",")),
+                           list("dbid",
+                                any(!is.na(db_id)),
+                                paste0(db_id,
+                                       collapse = ",")),
+                           list("gene",
+                                any(!is.na(gene)),
+                                paste0(gene,
+                                       collapse = ",")),
+                           list("taxid",
+                                any(!is.na(taxid)),
+                                paste0(taxid,
+                                       collapse = ",")))
   ## Build Function-Specific Call
-  input_call = .rba_httr(httr = "get",
-                         url = .rba_stg("uniprot", "url"),
-                         path = paste0(.rba_stg("uniprot", "pth"),
-                                       "uniparc/bestguess"),
-                         query = call_query,
-                         accept = "application/json",
-                         parser = "json->list",
-                         save_to = .rba_file("uniprot_uniparc_bestguess.json"))
+  input_call <- .rba_httr(httr = "get",
+                          url = .rba_stg("uniprot", "url"),
+                          path = paste0(.rba_stg("uniprot", "pth"),
+                                        "uniparc/bestguess"),
+                          query = call_query,
+                          accept = "application/json",
+                          parser = "json->list",
+                          save_to = .rba_file("uniprot_uniparc_bestguess.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -524,56 +524,56 @@ rba_uniprot_uniparc_bestguess = function(upi = NA,
 #' rba_uniprot_uniparc_sequence("GMRSCPRGCSQRGRCENGRCVCNPGYTGEDC")
 #' @family "UniProt API, UniParc"
 #' @export
-rba_uniprot_uniparc_sequence = function(sequence,
-                                        rf_dd_type = NA,
-                                        rf_db_id = NA,
-                                        rf_active = NA,
-                                        rf_tax_id = NA,
-                                        ...) {
+rba_uniprot_uniparc_sequence <- function(sequence,
+                                         rf_dd_type = NA,
+                                         rf_db_id = NA,
+                                         rf_active = NA,
+                                         rf_tax_id = NA,
+                                         ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
   .rba_args(cons = list(list(arg = "rf_dd_type",
-                               class = "character"),
-                          list(arg = "rf_db_id",
-                               class = "character"),
-                          list(arg = "rf_active",
-                               class = "logical"),
-                          list(arg = "rf_tax_id",
-                               class = "character")))
+                             class = "character"),
+                        list(arg = "rf_db_id",
+                             class = "character"),
+                        list(arg = "rf_active",
+                             class = "logical"),
+                        list(arg = "rf_tax_id",
+                             class = "character")))
 
   .msg("Retrieving UniParc entry that corresspond to your procided sequence.")
   ## Build GET API Request's query
-  call_query = .rba_query(init = list(),
-                            list("rfDdtype",
-                                 any(!is.na(rf_dd_type)),
-                                 paste0(rf_dd_type,
-                                        collapse = ",")),
-                            list("rfDbid",
-                                 any(!is.na(rf_db_id)),
-                                 paste0(rf_db_id,
-                                        collapse = ",")),
-                            list("rfActive",
-                                 !is.na(rf_active),
-                                 ifelse(rf_active,
-                                        "true",
-                                        "false")),
-                            list("rfTaxId",
-                                 any(!is.na(rf_tax_id)),
-                                 paste0(rf_tax_id,
-                                        collapse = ",")))
+  call_query <- .rba_query(init = list(),
+                           list("rfDdtype",
+                                any(!is.na(rf_dd_type)),
+                                paste0(rf_dd_type,
+                                       collapse = ",")),
+                           list("rfDbid",
+                                any(!is.na(rf_db_id)),
+                                paste0(rf_db_id,
+                                       collapse = ",")),
+                           list("rfActive",
+                                !is.na(rf_active),
+                                ifelse(rf_active,
+                                       "true",
+                                       "false")),
+                           list("rfTaxId",
+                                any(!is.na(rf_tax_id)),
+                                paste0(rf_tax_id,
+                                       collapse = ",")))
   ## Build Function-Specific Call
-  input_call = .rba_httr(httr = "post",
-                           url = .rba_stg("uniprot", "url"),
-                           path = paste0(.rba_stg("uniprot", "pth"),
-                                         "uniparc/sequence"),
-                           query = call_query,
-                           body = sequence,
-                           accept = "application/json",
-                           httr::content_type("text/plain"),
-                           parser = "json->list",
-                           save_to = .rba_file("uniprot_uniparc_sequence.json"))
+  input_call <- .rba_httr(httr = "post",
+                          url = .rba_stg("uniprot", "url"),
+                          path = paste0(.rba_stg("uniprot", "pth"),
+                                        "uniparc/sequence"),
+                          query = call_query,
+                          body = sequence,
+                          accept = "application/json",
+                          httr::content_type("text/plain"),
+                          parser = "json->list",
+                          save_to = .rba_file("uniprot_uniparc_sequence.json"))
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }

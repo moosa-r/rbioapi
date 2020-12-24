@@ -43,8 +43,8 @@
 #' @family "Enrichr API"
 #' @seealso \code{\link{rba_enrichr}}
 #' @export
-rba_enrichr_libs = function(store_in_options = FALSE,
-                            ...){
+rba_enrichr_libs <- function(store_in_options = FALSE,
+                             ...){
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -54,18 +54,18 @@ rba_enrichr_libs = function(store_in_options = FALSE,
   .msg("Retrieving List of available libraries and statistics from Enrichr.")
 
   ## Build Function-Specific Call
-  parser_input = list("json->list_simp",
-                      function(x) {x[[1]]})
-  input_call = .rba_httr(httr = "get",
-                         url = .rba_stg("enrichr", "url"),
-                         path = paste0(.rba_stg("enrichr", "pth"),
-                                       "datasetStatistics"),
-                         accept = "application/json",
-                         parser = parser_input,
-                         save_to = .rba_file("enrichr_info.json"))
+  parser_input <- list("json->list_simp",
+                       function(x) {x[[1]]})
+  input_call <- .rba_httr(httr = "get",
+                          url = .rba_stg("enrichr", "url"),
+                          path = paste0(.rba_stg("enrichr", "pth"),
+                                        "datasetStatistics"),
+                          accept = "application/json",
+                          parser = parser_input,
+                          save_to = .rba_file("enrichr_info.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
 
   ## Save Library Names as Global Options
   if (isTRUE(store_in_options)) {
@@ -113,9 +113,9 @@ rba_enrichr_libs = function(store_in_options = FALSE,
 #' @family "Enrichr API"
 #' @seealso \code{\link{rba_enrichr}}
 #' @export
-rba_enrichr_add_list = function(gene_list,
-                                description = NA,
-                                ...){
+rba_enrichr_add_list <- function(gene_list,
+                                 description = NA,
+                                 ...){
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -127,25 +127,25 @@ rba_enrichr_add_list = function(gene_list,
   .msg("Uploading %s gene symbols to Enrichr.", length(gene_list))
 
   ## Build POST API Request's URL
-  call_body = .rba_query(init = list("format" = "text",
-                                     "list" = paste(unique(gene_list),
-                                                    collapse = "\n")),
-                         list("description",
-                              !is.na(description),
-                              description))
+  call_body <- .rba_query(init = list("format" = "text",
+                                      "list" = paste(unique(gene_list),
+                                                     collapse = "\n")),
+                          list("description",
+                               !is.na(description),
+                               description))
 
   ## Build Function-Specific Call
-  input_call = .rba_httr(httr = "post",
-                         url = .rba_stg("enrichr", "url"),
-                         path = paste0(.rba_stg("enrichr", "pth"),
-                                       "addList"),
-                         body = call_body,
-                         accept = "application/json",
-                         parser = "json->list_simp",
-                         save_to = .rba_file("enrichr_add_list.json"))
+  input_call <- .rba_httr(httr = "post",
+                          url = .rba_stg("enrichr", "url"),
+                          path = paste0(.rba_stg("enrichr", "pth"),
+                                        "addList"),
+                          body = call_body,
+                          accept = "application/json",
+                          parser = "json->list_simp",
+                          save_to = .rba_file("enrichr_add_list.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -181,8 +181,8 @@ rba_enrichr_add_list = function(gene_list,
 #'
 #' @family "Enrichr API"
 #' @export
-rba_enrichr_view_list = function(user_list_id,
-                                 ...){
+rba_enrichr_view_list <- function(user_list_id,
+                                  ...){
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -193,21 +193,21 @@ rba_enrichr_view_list = function(user_list_id,
   .msg("Retrieving the gene list under the ID %s.", user_list_id)
 
   ## Build GET API Request's query
-  call_query = list("userListId" = user_list_id)
+  call_query <- list("userListId" = user_list_id)
 
   ## Build Function-Specific Call
-  input_call = .rba_httr(httr = "get",
-                         url = .rba_stg("enrichr", "url"),
-                         path = paste0(.rba_stg("enrichr", "pth"),
-                                       "view"),
-                         query = call_query,
-                         accept = "application/json",
-                         parser = "json->list_simp",
-                         save_to = .rba_file(sprintf("enrichr_view_list_%s.json",
-                                                     user_list_id)))
+  input_call <- .rba_httr(httr = "get",
+                          url = .rba_stg("enrichr", "url"),
+                          path = paste0(.rba_stg("enrichr", "pth"),
+                                        "view"),
+                          query = call_query,
+                          accept = "application/json",
+                          parser = "json->list_simp",
+                          save_to = .rba_file(sprintf("enrichr_view_list_%s.json",
+                                                      user_list_id)))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -246,38 +246,38 @@ rba_enrichr_view_list = function(user_list_id,
 #'   }
 #'
 #' @export
-.rba_enrichr_enrich_internal = function(user_list_id,
-                                        gene_set_library,
-                                        save_name,
-                                        ...){
+.rba_enrichr_enrich_internal <- function(user_list_id,
+                                         gene_set_library,
+                                         save_name,
+                                         ...){
   ## Load Global Options
   .rba_ext_args(...)
   ## Build GET API Request's query
-  call_query = list("userListId" = user_list_id,
-                    "backgroundType" = gene_set_library)
+  call_query <- list("userListId" = user_list_id,
+                     "backgroundType" = gene_set_library)
 
   ## Build Function-Specific Call
-  parser_input = function(x) {
+  parser_input <- function(x) {
     httr::content(x,
                   as = "text",
                   type = "text/tab-separated-values",
                   encoding = "UTF-8")
   }
 
-  input_call = .rba_httr(httr = "get",
-                         .rba_stg("enrichr", "url"),
-                         path = paste0(.rba_stg("enrichr", "pth"),
-                                       "export"),
-                         query = call_query,
-                         httr::accept("text/tab-separated-values"),
-                         parser = parser_input,
-                         save_to = .rba_file(save_name))
+  input_call <- .rba_httr(httr = "get",
+                          .rba_stg("enrichr", "url"),
+                          path = paste0(.rba_stg("enrichr", "pth"),
+                                        "export"),
+                          query = call_query,
+                          httr::accept("text/tab-separated-values"),
+                          parser = parser_input,
+                          save_to = .rba_file(save_name))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
-  final_output = utils::read.delim(textConnection(final_output),
-                                   sep = "\t", header = TRUE,
-                                   stringsAsFactors = FALSE)
+  final_output <- .rba_skeleton(input_call)
+  final_output <- utils::read.delim(textConnection(final_output),
+                                    sep = "\t", header = TRUE,
+                                    stringsAsFactors = FALSE)
   return(final_output)
 }
 
@@ -338,11 +338,11 @@ rba_enrichr_view_list = function(user_list_id,
 #' @family "Enrichr API"
 #' @seealso \code{\link{rba_enrichr}}
 #' @export
-rba_enrichr_enrich = function(user_list_id,
-                              gene_set_library = "all",
-                              regex_library_name = TRUE,
-                              progress_bar = TRUE,
-                              ...){
+rba_enrichr_enrich <- function(user_list_id,
+                               gene_set_library = "all",
+                               regex_library_name = TRUE,
+                               progress_bar = TRUE,
+                               ...){
   ## Load Global Options
   .rba_ext_args(...)
   ## get a list of available libraries
@@ -352,25 +352,25 @@ rba_enrichr_enrich = function(user_list_id,
   }
   ## handle different gene_set_library input situations
   if (length(gene_set_library) > 1) {
-    run_mode = "multiple"
+    run_mode <- "multiple"
   } else if (gene_set_library == "all") {
-    run_mode = "multiple"
-    gene_set_library = getOption("rba_enrichr_libs")
+    run_mode <- "multiple"
+    gene_set_library <- getOption("rba_enrichr_libs")
   } else {
     if (isFALSE(regex_library_name)) {
-      run_mode = "single"
+      run_mode <- "single"
     } else {
-      gene_set_library = grep(gene_set_library,
-                              getOption("rba_enrichr_libs"),
-                              ignore.case = TRUE, value = TRUE, perl = TRUE)
+      gene_set_library <- grep(gene_set_library,
+                               getOption("rba_enrichr_libs"),
+                               ignore.case = TRUE, value = TRUE, perl = TRUE)
       #check the results of regex
       if (length(gene_set_library) == 0) {
         stop("Your regex pattern did not match any Enrichr library name.",
              call. = get("diagnostics"))
       } else if (length(gene_set_library) == 1) {
-        run_mode = "single"
+        run_mode <- "single"
       } else if (length(gene_set_library) > 1) {
-        run_mode = "multiple"
+        run_mode <- "multiple"
       }
     }
   } #end of if length(gene_set_library) > 1
@@ -387,12 +387,12 @@ rba_enrichr_enrich = function(user_list_id,
   if (run_mode == "single") {
     .msg("Enriching gene-list %s against Enrichr library: %s.",
          user_list_id, gene_set_library)
-    final_output = .rba_enrichr_enrich_internal(user_list_id = user_list_id,
-                                                gene_set_library = gene_set_library,
-                                                save_name = sprintf("enrichr_%s_%s.json",
-                                                                    user_list_id,
-                                                                    gene_set_library),
-                                                ...)
+    final_output <- .rba_enrichr_enrich_internal(user_list_id = user_list_id,
+                                                 gene_set_library = gene_set_library,
+                                                 save_name = sprintf("enrichr_%s_%s.json",
+                                                                     user_list_id,
+                                                                     gene_set_library),
+                                                 ...)
     return(final_output)
 
   } else {
@@ -405,26 +405,26 @@ rba_enrichr_enrich = function(user_list_id,
          length(gene_set_library))
     ## initiate progress bar
     if (isTRUE(progress_bar)) {
-      pb = utils::txtProgressBar(min = 0,
-                                 max = length(gene_set_library),
-                                 style = 3)
+      pb <- utils::txtProgressBar(min = 0,
+                                  max = length(gene_set_library),
+                                  style = 3)
     }
-    final_output = lapply(gene_set_library,
-                          function(x){
-                            lib_enrich_res = .rba_enrichr_enrich_internal(user_list_id = user_list_id,
-                                                                          gene_set_library = x,
-                                                                          save_name = sprintf("enrichr_%s_%s.json",
-                                                                                              user_list_id,
-                                                                                              x),
-                                                                          ...)
-                            #advance the progress bar
-                            if (isTRUE(progress_bar)) {
-                              utils::setTxtProgressBar(pb, which(gene_set_library == x))
-                            }
-                            return(lib_enrich_res)
-                          })
+    final_output <- lapply(gene_set_library,
+                           function(x){
+                             lib_enrich_res <- .rba_enrichr_enrich_internal(user_list_id = user_list_id,
+                                                                            gene_set_library = x,
+                                                                            save_name = sprintf("enrichr_%s_%s.json",
+                                                                                                user_list_id,
+                                                                                                x),
+                                                                            ...)
+                             #advance the progress bar
+                             if (isTRUE(progress_bar)) {
+                               utils::setTxtProgressBar(pb, which(gene_set_library == x))
+                             }
+                             return(lib_enrich_res)
+                           })
     if (isTRUE(progress_bar)) {close(pb)}
-    names(final_output) = gene_set_library
+    names(final_output) <- gene_set_library
     return(final_output)
   }
 }
@@ -463,9 +463,9 @@ rba_enrichr_enrich = function(user_list_id,
 #'
 #' @family "Enrichr API"
 #' @export
-rba_enrichr_gene_map = function(gene,
-                                catagorize = FALSE,
-                                ...){
+rba_enrichr_gene_map <- function(gene,
+                                 catagorize = FALSE,
+                                 ...){
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -478,23 +478,23 @@ rba_enrichr_gene_map = function(gene,
   .msg("Finding terms that contain gene: %s.", gene)
 
   ## Build GET API Request's query
-  call_query = .rba_query(init = list("gene" = gene,
-                                      "json" = "true"),
-                          list("setup",
-                               isTRUE(catagorize),
-                               "true"))
+  call_query <- .rba_query(init = list("gene" = gene,
+                                       "json" = "true"),
+                           list("setup",
+                                isTRUE(catagorize),
+                                "true"))
   ## Build Function-Specific Call
-  input_call = .rba_httr(httr = "get",
-                         url = .rba_stg("enrichr", "url"),
-                         path = paste0(.rba_stg("enrichr", "pth"),
-                                       "genemap"),
-                         query = call_query,
-                         accept = "application/json",
-                         parser = "json->list_simp",
-                         save_to = .rba_file("enrichr_gene_map.json"))
+  input_call <- .rba_httr(httr = "get",
+                          url = .rba_stg("enrichr", "url"),
+                          path = paste0(.rba_stg("enrichr", "pth"),
+                                        "genemap"),
+                          query = call_query,
+                          accept = "application/json",
+                          parser = "json->list_simp",
+                          save_to = .rba_file("enrichr_gene_map.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -548,12 +548,12 @@ rba_enrichr_gene_map = function(gene,
 #'
 #' @family "Enrichr API"
 #' @export
-rba_enrichr = function(gene_list,
-                           description = NA,
-                           gene_set_library = "all",
-                           regex_library_name = TRUE,
-                           progress_bar = FALSE,
-                           ...) {
+rba_enrichr <- function(gene_list,
+                        description = NA,
+                        gene_set_library = "all",
+                        regex_library_name = TRUE,
+                        progress_bar = FALSE,
+                        ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -569,14 +569,14 @@ rba_enrichr = function(gene_list,
   invisible(rba_enrichr_libs(store_in_options = TRUE,
                              ...))
   .msg("--Step 2/3:")
-  list_id = rba_enrichr_add_list(gene_list = gene_list,
-                                 description = description,
-                                 ...)
+  list_id <- rba_enrichr_add_list(gene_list = gene_list,
+                                  description = description,
+                                  ...)
   .msg("--Step 3/3:")
-  enriched = rba_enrichr_enrich(user_list_id = list_id$userListId,
-                                gene_set_library = gene_set_library,
-                                regex_library_name = regex_library_name,
-                                progress_bar = progress_bar,
-                                ...)
+  enriched <- rba_enrichr_enrich(user_list_id = list_id$userListId,
+                                 gene_set_library = gene_set_library,
+                                 regex_library_name = regex_library_name,
+                                 progress_bar = progress_bar,
+                                 ...)
   return(enriched)
 }

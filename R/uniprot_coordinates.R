@@ -52,14 +52,14 @@
 #' rba_uniprot_coordinates_search(taxid = 9606, chromosome = "y")
 #' @family "UniProt API, Coordinates"
 #' @export
-rba_uniprot_coordinates_search = function(accession = NA,
-                                          chromosome = NA,
-                                          ensembl_id = NA,
-                                          gene = NA,
-                                          protein = NA,
-                                          taxid = NA,
-                                          location = NA,
-                                          ...) {
+rba_uniprot_coordinates_search <- function(accession = NA,
+                                           chromosome = NA,
+                                           ensembl_id = NA,
+                                           gene = NA,
+                                           protein = NA,
+                                           taxid = NA,
+                                           location = NA,
+                                           ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -86,48 +86,48 @@ rba_uniprot_coordinates_search = function(accession = NA,
 
   .msg("Searching UniProt and retrieving Coordinates of proteins that match your provided inputs.")
   ## Build GET API Request's query
-  call_query = .rba_query(init = list("size" = "-1"),
-                          list("accession",
-                               any(!is.na(accession)),
-                               paste0(accession,
-                                      collapse = ",")),
-                          list("chromosome",
-                               any(!is.na(chromosome)),
-                               paste0(chromosome,
-                                      collapse = ",")),
-                          list("ensembl_id",
-                               any(!is.na(ensembl_id)),
-                               paste0(ensembl_id,
-                                      collapse = ",")),
-                          list("gene",
-                               any(!is.na(gene)),
-                               paste0(gene,
-                                      collapse = ",")),
-                          list("protein",
-                               !is.na(protein),
-                               protein),
-                          list("taxid",
-                               any(!is.na(taxid)),
-                               paste0(taxid,
-                                      collapse = ",")),
-                          list("location",
-                               !is.na(location),
-                               location))
+  call_query <- .rba_query(init = list("size" = "-1"),
+                           list("accession",
+                                any(!is.na(accession)),
+                                paste0(accession,
+                                       collapse = ",")),
+                           list("chromosome",
+                                any(!is.na(chromosome)),
+                                paste0(chromosome,
+                                       collapse = ",")),
+                           list("ensembl_id",
+                                any(!is.na(ensembl_id)),
+                                paste0(ensembl_id,
+                                       collapse = ",")),
+                           list("gene",
+                                any(!is.na(gene)),
+                                paste0(gene,
+                                       collapse = ",")),
+                           list("protein",
+                                !is.na(protein),
+                                protein),
+                           list("taxid",
+                                any(!is.na(taxid)),
+                                paste0(taxid,
+                                       collapse = ",")),
+                           list("location",
+                                !is.na(location),
+                                location))
   ## Build Function-Specific Call
-  parser_input = list("json->list",
-                      .rba_uniprot_search_namer)
+  parser_input <- list("json->list",
+                       .rba_uniprot_search_namer)
 
-  input_call = .rba_httr(httr = "get",
-                         url = .rba_stg("uniprot", "url"),
-                         path = paste0(.rba_stg("uniprot", "pth"),
-                                       "coordinates"),
-                         query = call_query,
-                         accept = "application/json",
-                         parser = parser_input,
-                         save_to = .rba_file("uniprot_coordinates_search.json"))
+  input_call <- .rba_httr(httr = "get",
+                          url = .rba_stg("uniprot", "url"),
+                          path = paste0(.rba_stg("uniprot", "pth"),
+                                        "coordinates"),
+                          query = call_query,
+                          accept = "application/json",
+                          parser = parser_input,
+                          save_to = .rba_file("uniprot_coordinates_search.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -173,11 +173,11 @@ rba_uniprot_coordinates_search = function(accession = NA,
 #' rba_uniprot_coordinates_sequence(accession = "P25942", p_start = 1, p_end = 277)
 #' @family "UniProt API, Coordinates"
 #' @export
-rba_uniprot_coordinates_sequence = function(accession,
-                                            p_position = NA,
-                                            p_start = NA,
-                                            p_end = NA,
-                                            ...) {
+rba_uniprot_coordinates_sequence <- function(accession,
+                                             p_position = NA,
+                                             p_start = NA,
+                                             p_end = NA,
+                                             ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -201,22 +201,22 @@ rba_uniprot_coordinates_sequence = function(accession,
               yes = paste(p_start, p_end, sep = " to "), no = p_position))
 
   ## Build Function-Specific Call
-  path_input = sprintf("%scoordinates/location/%s:%s",
-                       .rba_stg("uniprot", "pth"),
-                       accession,
-                       ifelse(!is.na(p_position),
-                              yes = p_position,
-                              no = paste0(p_start, "-", p_end)))
+  path_input <- sprintf("%scoordinates/location/%s:%s",
+                        .rba_stg("uniprot", "pth"),
+                        accession,
+                        ifelse(!is.na(p_position),
+                               yes = p_position,
+                               no = paste0(p_start, "-", p_end)))
 
-  input_call = .rba_httr(httr = "get",
-                         url = .rba_stg("uniprot", "url"),
-                         path = path_input,
-                         accept = "application/json",
-                         parser = "json->list_simp",
-                         save_to = .rba_file("uniprot_coordinates_location.json"))
+  input_call <- .rba_httr(httr = "get",
+                          url = .rba_stg("uniprot", "url"),
+                          path = path_input,
+                          accept = "application/json",
+                          parser = "json->list_simp",
+                          save_to = .rba_file("uniprot_coordinates_location.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -263,10 +263,10 @@ rba_uniprot_coordinates_sequence = function(accession,
 #' rba_uniprot_coordinates(db_type = "HGNC", db_id = "CD40")
 #' @family "UniProt API, Coordinates"
 #' @export
-rba_uniprot_coordinates = function(accession = NA,
-                                   db_type = NA,
-                                   db_id = NA,
-                                   ...) {
+rba_uniprot_coordinates <- function(accession = NA,
+                                    db_type = NA,
+                                    db_id = NA,
+                                    ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -291,24 +291,24 @@ rba_uniprot_coordinates = function(accession = NA,
               yes = sprintf("%s in %s database", db_id, db_type),
               no = accession))
   ## Build GET API Request's query
-  call_query = list("size" = "-1")
+  call_query <- list("size" = "-1")
   ## Build Function-Specific Call
-  path_input = sprintf("%scoordinates/%s",
-                       .rba_stg("uniprot", "pth"),
-                       ifelse(!is.na(accession),
-                              yes = accession,
-                              no = paste0(db_type, ":", db_id)))
+  path_input <- sprintf("%scoordinates/%s",
+                        .rba_stg("uniprot", "pth"),
+                        ifelse(!is.na(accession),
+                               yes = accession,
+                               no = paste0(db_type, ":", db_id)))
 
-  input_call = .rba_httr(httr = "get",
-                         url = .rba_stg("uniprot", "url"),
-                         path = path_input,
-                         query = call_query,
-                         accept = "application/json",
-                         parser = "json->list",
-                         save_to = .rba_file("uniprot_coordinates.json"))
+  input_call <- .rba_httr(httr = "get",
+                          url = .rba_stg("uniprot", "url"),
+                          path = path_input,
+                          query = call_query,
+                          accept = "application/json",
+                          parser = "json->list",
+                          save_to = .rba_file("uniprot_coordinates.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -354,11 +354,11 @@ rba_uniprot_coordinates = function(accession = NA,
 #'   locations = "20:39000001", in_range = FALSE)
 #' @family "UniProt API, Coordinates"
 #' @export
-rba_uniprot_coordinates_location = function(taxid,
-                                            locations,
-                                            in_range = TRUE,
-                                            feature = FALSE,
-                                            ...) {
+rba_uniprot_coordinates_location <- function(taxid,
+                                             locations,
+                                             in_range = TRUE,
+                                             feature = FALSE,
+                                             ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -375,26 +375,26 @@ rba_uniprot_coordinates_location = function(taxid,
   .msg("Retrieving UniProt entries in location %s of taxon %s.",
        locations, taxid)
   ## Build GET API Request's query
-  call_query = list("size" = "-1",
-                    "in_range" = ifelse(in_range, "true", "false"))
+  call_query <- list("size" = "-1",
+                     "in_range" = ifelse(in_range, "true", "false"))
 
   ## Build Function-Specific Call
-  path_input = sprintf("%scoordinates/%s/%s",
-                       .rba_stg("uniprot", "pth"),
-                       taxid,
-                       locations)
+  path_input <- sprintf("%scoordinates/%s/%s",
+                        .rba_stg("uniprot", "pth"),
+                        taxid,
+                        locations)
   if (isTRUE(feature)) {
-    path_input = paste0(path_input, "/feature")
+    path_input <- paste0(path_input, "/feature")
   }
-  input_call = .rba_httr(httr = "get",
-                         url = .rba_stg("uniprot", "url"),
-                         path = path_input,
-                         query = call_query,
-                         accept = "application/json",
-                         parser = "json->list",
-                         save_to = .rba_file("rba_uniprot_coordinates_location.json"))
+  input_call <- .rba_httr(httr = "get",
+                          url = .rba_stg("uniprot", "url"),
+                          path = path_input,
+                          query = call_query,
+                          accept = "application/json",
+                          parser = "json->list",
+                          save_to = .rba_file("rba_uniprot_coordinates_location.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }

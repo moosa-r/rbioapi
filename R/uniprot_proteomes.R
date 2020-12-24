@@ -58,15 +58,15 @@
 #' rba_uniprot_proteomes_search(genome_acc = "AY274119")
 #' @family "UniProt API, Proteomes"
 #' @export
-rba_uniprot_proteomes_search = function(name = NA,
-                                        upid = NA,
-                                        taxid = NA,
-                                        keyword = NA,
-                                        xref = NA,
-                                        genome_acc = NA,
-                                        is_ref_proteome = NA,
-                                        is_redundant = NA,
-                                        ...) {
+rba_uniprot_proteomes_search <- function(name = NA,
+                                         upid = NA,
+                                         taxid = NA,
+                                         keyword = NA,
+                                         xref = NA,
+                                         genome_acc = NA,
+                                         is_ref_proteome = NA,
+                                         is_redundant = NA,
+                                         ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -94,61 +94,61 @@ rba_uniprot_proteomes_search = function(name = NA,
 
   .msg("Searching UniProt and retrieving proteoms that match your provided inputs.")
   ## Build GET API Request's query
-  call_query = .rba_query(init = list("size" = "-1"),
-                          list("name",
-                               !is.na(name),
-                               name),
-                          list("upid",
-                               any(!is.na(upid)),
-                               paste0(upid,
-                                      collapse = ",")),
-                          list("taxid",
-                               any(!is.na(taxid)),
-                               paste0(taxid,
-                                      collapse = ",")),
-                          list("keyword",
-                               !is.na(keyword),
-                               keyword),
-                          list("xref",
-                               any(!is.na(xref)),
-                               paste0(xref,
-                                      collapse = ",")),
-                          list("genome_acc",
-                               any(!is.na(genome_acc)),
-                               paste0(genome_acc,
-                                      collapse = ",")),
-                          list("is_ref_proteome",
-                               !is.na(is_ref_proteome),
-                               ifelse(is_ref_proteome,
-                                      "true",
-                                      "false")),
-                          list("is_redundant",
-                               !is.na(is_redundant),
-                               ifelse(is_redundant,
-                                      "true",
-                                      "false")))
+  call_query <- .rba_query(init = list("size" = "-1"),
+                           list("name",
+                                !is.na(name),
+                                name),
+                           list("upid",
+                                any(!is.na(upid)),
+                                paste0(upid,
+                                       collapse = ",")),
+                           list("taxid",
+                                any(!is.na(taxid)),
+                                paste0(taxid,
+                                       collapse = ",")),
+                           list("keyword",
+                                !is.na(keyword),
+                                keyword),
+                           list("xref",
+                                any(!is.na(xref)),
+                                paste0(xref,
+                                       collapse = ",")),
+                           list("genome_acc",
+                                any(!is.na(genome_acc)),
+                                paste0(genome_acc,
+                                       collapse = ",")),
+                           list("is_ref_proteome",
+                                !is.na(is_ref_proteome),
+                                ifelse(is_ref_proteome,
+                                       "true",
+                                       "false")),
+                           list("is_redundant",
+                                !is.na(is_redundant),
+                                ifelse(is_redundant,
+                                       "true",
+                                       "false")))
   ## Build Function-Specific Call
-  parser_input = list("json->list",
-                      function(x) {
-                        x_names = vapply(X = x,
-                                         FUN = function(x) {
-                                           x$upid
-                                         },
-                                         FUN.VALUE = character(1))
-                        names(x) = x_names
-                        return(x)})
+  parser_input <- list("json->list",
+                       function(x) {
+                         x_names = vapply(X = x,
+                                          FUN = function(x) {
+                                            x$upid
+                                          },
+                                          FUN.VALUE = character(1))
+                         names(x) = x_names
+                         return(x)})
 
-  input_call = .rba_httr(httr = "get",
-                         url = .rba_stg("uniprot", "url"),
-                         path = paste0(.rba_stg("uniprot", "pth"),
-                                       "proteomes"),
-                         query = call_query,
-                         accept = "application/json",
-                         parser = parser_input,
-                         save_to = .rba_file("uniprot_proteomes_search.json"))
+  input_call <- .rba_httr(httr = "get",
+                          url = .rba_stg("uniprot", "url"),
+                          path = paste0(.rba_stg("uniprot", "pth"),
+                                        "proteomes"),
+                          query = call_query,
+                          accept = "application/json",
+                          parser = parser_input,
+                          save_to = .rba_file("uniprot_proteomes_search.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -194,10 +194,10 @@ rba_uniprot_proteomes_search = function(name = NA,
 #' rba_uniprot_proteomes(upid = "UP000000354", get_proteins = TRUE)
 #' @family "UniProt API, Proteomes"
 #' @export
-rba_uniprot_proteomes = function(upid,
-                                 get_proteins = FALSE,
-                                 reviewed = NA,
-                                 ...) {
+rba_uniprot_proteomes <- function(upid,
+                                  get_proteins = FALSE,
+                                  reviewed = NA,
+                                  ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -213,43 +213,43 @@ rba_uniprot_proteomes = function(upid,
   )
 
   .msg("Retrieving proteome %s (%s).",
-        upid,
-        ifelse(isTRUE(get_proteins),
-               yes = sprintf("With %sproteins",
-                             switch(as.character(reviewed),
-                                    "TRUE" = " - Only UniProtKB/Swiss-Prot",
-                                    "FALSE" = " - Only TrEMBL",
-                                    "NA" = "")),
-               no = "Excluding proteins"))
+       upid,
+       ifelse(isTRUE(get_proteins),
+              yes = sprintf("With %sproteins",
+                            switch(as.character(reviewed),
+                                   "TRUE" = " - Only UniProtKB/Swiss-Prot",
+                                   "FALSE" = " - Only TrEMBL",
+                                   "NA" = "")),
+              no = "Excluding proteins"))
   ## Build Function-Specific Call
   if (isTRUE(get_proteins)) {
     ## Build GET API Request's query
-    call_query = .rba_query(init = list(),
-                            list("reviewed",
-                                 !is.na(reviewed),
-                                 ifelse(reviewed,
-                                        "true",
-                                        "false")))
-    path_input = paste0(.rba_stg("uniprot", "pth"),
-                        "proteomes/proteins/",
-                        upid)
+    call_query <- .rba_query(init = list(),
+                             list("reviewed",
+                                  !is.na(reviewed),
+                                  ifelse(reviewed,
+                                         "true",
+                                         "false")))
+    path_input <- paste0(.rba_stg("uniprot", "pth"),
+                         "proteomes/proteins/",
+                         upid)
   } else {
-    call_query = NULL
-    path_input = paste0(.rba_stg("uniprot", "pth"),
-                        "proteomes/",
-                        upid)
+    call_query <- NULL
+    path_input <- paste0(.rba_stg("uniprot", "pth"),
+                         "proteomes/",
+                         upid)
   }
 
-  input_call = .rba_httr(httr = "get",
-                         url = .rba_stg("uniprot", "url"),
-                         path = path_input,
-                         query = call_query,
-                         accept = "application/json",
-                         parser = "json->list",
-                         save_to = .rba_file("uniprot_proteomes.json"))
+  input_call <- .rba_httr(httr = "get",
+                          url = .rba_stg("uniprot", "url"),
+                          path = path_input,
+                          query = call_query,
+                          accept = "application/json",
+                          parser = "json->list",
+                          save_to = .rba_file("uniprot_proteomes.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -304,10 +304,10 @@ rba_uniprot_proteomes = function(upid,
 #'
 #' @family "UniProt API, Proteomes"
 #' @export
-rba_uniprot_genecentric_search = function(upid = NA,
-                                          accession = NA,
-                                          gene = NA,
-                                          ...) {
+rba_uniprot_genecentric_search <- function(upid = NA,
+                                           accession = NA,
+                                           gene = NA,
+                                           ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -324,31 +324,31 @@ rba_uniprot_genecentric_search = function(upid = NA,
 
   .msg("Searching UniProt and retrieving Gene-Centric Proteins that match your provided inputs.")
   ## Build GET API Request's query
-  call_query = .rba_query(init = list("size" = "-1"),
-                          list("upid",
-                               any(!is.na(upid)),
-                               paste0(upid,
-                                      collapse = ",")),
-                          list("accession",
-                               any(!is.na(accession)),
-                               paste0(accession,
-                                      collapse = ",")),
-                          list("gene",
-                               any(!is.na(gene)),
-                               paste0(gene,
-                                      collapse = ",")))
+  call_query <- .rba_query(init = list("size" = "-1"),
+                           list("upid",
+                                any(!is.na(upid)),
+                                paste0(upid,
+                                       collapse = ",")),
+                           list("accession",
+                                any(!is.na(accession)),
+                                paste0(accession,
+                                       collapse = ",")),
+                           list("gene",
+                                any(!is.na(gene)),
+                                paste0(gene,
+                                       collapse = ",")))
   ## Build Function-Specific Call
-  input_call = .rba_httr(httr = "get",
-                         url = .rba_stg("uniprot", "url"),
-                         path = paste0(.rba_stg("uniprot", "pth"),
-                                       "genecentric"),
-                         query = call_query,
-                         accept = "application/json",
-                         parser = "json->list",
-                         save_to = .rba_file("uniprot_genecentric_search.json"))
+  input_call <- .rba_httr(httr = "get",
+                          url = .rba_stg("uniprot", "url"),
+                          path = paste0(.rba_stg("uniprot", "pth"),
+                                        "genecentric"),
+                          query = call_query,
+                          accept = "application/json",
+                          parser = "json->list",
+                          save_to = .rba_file("uniprot_genecentric_search.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -384,8 +384,8 @@ rba_uniprot_genecentric_search = function(upid = NA,
 #' rba_uniprot_genecentric("P29965")
 #' @family "UniProt API, Proteomes"
 #' @export
-rba_uniprot_genecentric = function(accession,
-                                   ...) {
+rba_uniprot_genecentric <- function(accession,
+                                    ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -394,18 +394,18 @@ rba_uniprot_genecentric = function(accession,
   )
 
   .msg("Retrieving Gene-Centric proteins by UniProt Accession %s.",
-        accession)
+       accession)
   ## Build Function-Specific Call
-  input_call = .rba_httr(httr = "get",
-                         url = .rba_stg("uniprot", "url"),
-                         path = paste0(.rba_stg("uniprot", "pth"),
-                                       "genecentric/",
-                                       accession),
-                         accept = "application/json",
-                         parser = "json->list_simp",
-                         save_to = .rba_file("uniprot_genecentric.json"))
+  input_call <- .rba_httr(httr = "get",
+                          url = .rba_stg("uniprot", "url"),
+                          path = paste0(.rba_stg("uniprot", "pth"),
+                                        "genecentric/",
+                                        accession),
+                          accept = "application/json",
+                          parser = "json->list_simp",
+                          save_to = .rba_file("uniprot_genecentric.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }

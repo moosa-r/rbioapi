@@ -38,9 +38,9 @@
 #'  organism = 9606)
 #' @family "PANTHER API"
 #' @export
-rba_panther_mapping = function(genes,
-                               organism,
-                               ...) {
+rba_panther_mapping <- function(genes,
+                                organism,
+                                ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -55,25 +55,25 @@ rba_panther_mapping = function(genes,
        length(genes), organism)
 
   ## Build POST API Request's body
-  call_body = list(geneInputList =  paste(genes, collapse =  ","),
-                   organism = organism)
+  call_body <- list(geneInputList =  paste(genes, collapse =  ","),
+                    organism = organism)
 
   ## Build Function-Specific Call
-  parser_input = list("json->list",
-                      function(x) {list(unmapped_list = x$search$unmapped_list,
-                                        mapped_genes = x$search$mapped_genes)})
-  input_call = .rba_httr(httr = "post",
-                         url = .rba_stg("panther", "url"),
-                         path = paste0(.rba_stg("panther", "pth"),
-                                       "geneinfo"),
-                         encode = "form",
-                         body = call_body,
-                         accept = "application/json",
-                         parser = parser_input,
-                         save_to = .rba_file("rba_panther_mapping.json"))
+  parser_input <- list("json->list",
+                       function(x) {list(unmapped_list = x$search$unmapped_list,
+                                         mapped_genes = x$search$mapped_genes)})
+  input_call <- .rba_httr(httr = "post",
+                          url = .rba_stg("panther", "url"),
+                          path = paste0(.rba_stg("panther", "pth"),
+                                        "geneinfo"),
+                          encode = "form",
+                          body = call_body,
+                          accept = "application/json",
+                          parser = parser_input,
+                          save_to = .rba_file("rba_panther_mapping.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -137,15 +137,15 @@ rba_panther_mapping = function(genes,
 #'                    cutoff = 0.01)
 #' @family "PANTHER API"
 #' @export
-rba_panther_enrich = function(genes,
-                              organism,
-                              annot_dataset,
-                              test_type = "FISHER",
-                              correction = "FDR",
-                              cutoff = NA,
-                              ref_genes = NA,
-                              ref_organism = NA,
-                              ...) {
+rba_panther_enrich <- function(genes,
+                               organism,
+                               annot_dataset,
+                               test_type = "FISHER",
+                               correction = "FDR",
+                               cutoff = NA,
+                               ref_genes = NA,
+                               ref_organism = NA,
+                               ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -185,55 +185,55 @@ rba_panther_enrich = function(genes,
        length(genes), organism, annot_dataset)
 
   ## Build POST API Request's body
-  call_body = .rba_query(init = list(geneInputList =  paste(genes,
-                                                            collapse =  ","),
-                                     organism = organism,
-                                     annotDataSet = annot_dataset,
-                                     enrichmentTestType = test_type,
-                                     correction = correction),
-                         list("refInputList",
-                              !all(is.na(ref_genes)),
-                              paste(ref_genes, collapse =  ",")),
-                         list("refOrganism",
-                              !is.na(ref_organism),
-                              ref_organism))
+  call_body <- .rba_query(init = list(geneInputList =  paste(genes,
+                                                             collapse =  ","),
+                                      organism = organism,
+                                      annotDataSet = annot_dataset,
+                                      enrichmentTestType = test_type,
+                                      correction = correction),
+                          list("refInputList",
+                               !all(is.na(ref_genes)),
+                               paste(ref_genes, collapse =  ",")),
+                          list("refOrganism",
+                               !is.na(ref_organism),
+                               ref_organism))
 
   ## Build Function-Specific Call
-  parser_input = list("json->list_simp",
-                      function(x) {
-                        x = x$results
-                        x$result$term_label = x$result$term[,1]
-                        x$result$term = x$result$term[,2]
-                        return(x)
-                        })
+  parser_input <- list("json->list_simp",
+                       function(x) {
+                         x <- x$results
+                         x$result$term_label <- x$result$term[,1]
+                         x$result$term <- x$result$term[,2]
+                         return(x)
+                       })
   if (!is.na(cutoff)) {
     if (correction == "FDR") {
-      parser_input = append(parser_input,
-                            list(function(x) {
-                              x$result = x$result[which(x$result$fdr <= cutoff), ]
-                              return(x)
-                            }))
+      parser_input <- append(parser_input,
+                             list(function(x) {
+                               x$result <- x$result[which(x$result$fdr <= cutoff), ]
+                               return(x)
+                             }))
     } else {
-      parser_input = append(parser_input,
-                            list(function(x) {
-                              x$result = x$result[which(x$result$pValue <= cutoff), ]
-                              return(x)
-                            }))
+      parser_input <- append(parser_input,
+                             list(function(x) {
+                               x$result <- x$result[which(x$result$pValue <= cutoff), ]
+                               return(x)
+                             }))
     }
   }
 
-  input_call = .rba_httr(httr = "post",
-                         url = .rba_stg("panther", "url"),
-                         path = paste0(.rba_stg("panther", "pth"),
-                                       "enrich/overrep"),
-                         encode = "form",
-                         body = call_body,
-                         accept = "application/json",
-                         parser = parser_input,
-                         save_to = .rba_file("rba_panther_enrich.json"))
+  input_call <- .rba_httr(httr = "post",
+                          url = .rba_stg("panther", "url"),
+                          path = paste0(.rba_stg("panther", "pth"),
+                                        "enrich/overrep"),
+                          encode = "form",
+                          body = call_body,
+                          accept = "application/json",
+                          parser = parser_input,
+                          save_to = .rba_file("rba_panther_enrich.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -284,10 +284,10 @@ rba_panther_enrich = function(genes,
 #' rba_panther_info(what = "families", families_page = 4)
 #' @family "PANTHER API"
 #' @export
-rba_panther_info = function(what,
-                            organism_chr_loc = FALSE,
-                            families_page = 1,
-                            ...) {
+rba_panther_info <- function(what,
+                             organism_chr_loc = FALSE,
+                             families_page = 1,
+                             ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -320,56 +320,56 @@ rba_panther_info = function(what,
               no = ""))
 
   ## Build GET API Request's query
-  call_query = .rba_query(init = list(),
-                          list("type",
-                               what == "organisms" && isTRUE(organism_chr_loc),
-                               "chrLoc"),
-                          list("startIndex",
-                               what == "families",
-                               (families_page - 1) * 1000 + 1))
+  call_query <- .rba_query(init = list(),
+                           list("type",
+                                what == "organisms" && isTRUE(organism_chr_loc),
+                                "chrLoc"),
+                           list("startIndex",
+                                what == "families",
+                                (families_page - 1) * 1000 + 1))
 
   ## Build Function-Specific Call
   switch(what,
          "organisms" = {
-           path_input = "supportedgenomes"
-           parser_input = list("json->list_simp",
-                               function(x) {x$search$output$genomes$genome})
+           path_input <- "supportedgenomes"
+           parser_input <- list("json->list_simp",
+                                function(x) {x$search$output$genomes$genome})
          },
          "datasets" = {
-           path_input = "supportedannotdatasets"
-           parser_input = list("json->list_simp",
-                               function(x) {x$search$annotation_data_sets$annotation_data_type})
+           path_input <- "supportedannotdatasets"
+           parser_input <- list("json->list_simp",
+                                function(x) {x$search$annotation_data_sets$annotation_data_type})
          },
          "families" = {
-           path_input = "supportedpantherfamilies"
-           parser_input = list("json->list_simp",
-                               function(x) {
-                                 y = list(familiy = x$search$panther_family_subfam_list$family,
-                                          page = families_page,
-                                          pages_count = x$search$number_of_families %/% 1000
-                                 )
-                               })
+           path_input <- "supportedpantherfamilies"
+           parser_input <- list("json->list_simp",
+                                function(x) {
+                                  y <- list(familiy = x$search$panther_family_subfam_list$family,
+                                            page = families_page,
+                                            pages_count = x$search$number_of_families %/% 1000
+                                  )
+                                })
          },
          "pathways" = {
-           path_input = "supportedpantherpathways"
-           parser_input = list("json->list_simp",
-                               function(x) {
-                                 x$search$output$PANTHER_pathway_list$pathway
-                               })
+           path_input <- "supportedpantherpathways"
+           parser_input <- list("json->list_simp",
+                                function(x) {
+                                  x$search$output$PANTHER_pathway_list$pathway
+                                })
          })
 
 
-  input_call = .rba_httr(httr = "get",
-                         url = .rba_stg("panther", "url"),
-                         path = paste0(.rba_stg("panther", "pth"),
-                                       path_input),
-                         query = call_query,
-                         accept = "application/json",
-                         parser = parser_input,
-                         save_to = .rba_file("panther_info.json"))
+  input_call <- .rba_httr(httr = "get",
+                          url = .rba_stg("panther", "url"),
+                          path = paste0(.rba_stg("panther", "pth"),
+                                        path_input),
+                          query = call_query,
+                          accept = "application/json",
+                          parser = parser_input,
+                          save_to = .rba_file("panther_info.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -423,13 +423,13 @@ rba_panther_info = function(what,
 #' rba_panther_ortholog("CD40", organism = 9606, type = "LDO")
 #' @family "PANTHER API"
 #' @export
-rba_panther_ortholog = function(genes,
-                                organism,
-                                type = "all",
-                                target_organisms = NA,
-                                seq_pos = NA,
-                                include_msa = NA,
-                                ...) {
+rba_panther_ortholog <- function(genes,
+                                 organism,
+                                 type = "all",
+                                 target_organisms = NA,
+                                 seq_pos = NA,
+                                 include_msa = NA,
+                                 ...) {
 
   ## Load Global Options
   .rba_ext_args(...)
@@ -463,46 +463,46 @@ rba_panther_ortholog = function(genes,
        type, .paste2(genes, quote_all = "'"))
 
   ## Build POST API Request's body
-  call_body = .rba_query(init = list(organism = organism,
-                                     orthologType = type),
-                         list("geneInputList",
-                              is.na(seq_pos),
-                              paste(genes, collapse =  ",")),
-                         list("gene",
-                              !is.na(seq_pos),
-                              genes),
-                         list("targetOrganism",
-                              !is.na(target_organisms),
-                              paste(target_organisms, collapse =  ",")),
-                         list("pos",
-                              !is.na(seq_pos),
-                              seq_pos),
-                         list("includeMsa",
-                              !is.na(include_msa) && !is.na(seq_pos),
-                              ifelse(isTRUE(include_msa),
-                                     yes = "true", no = "false"))
+  call_body <- .rba_query(init = list(organism = organism,
+                                      orthologType = type),
+                          list("geneInputList",
+                               is.na(seq_pos),
+                               paste(genes, collapse =  ",")),
+                          list("gene",
+                               !is.na(seq_pos),
+                               genes),
+                          list("targetOrganism",
+                               !is.na(target_organisms),
+                               paste(target_organisms, collapse =  ",")),
+                          list("pos",
+                               !is.na(seq_pos),
+                               seq_pos),
+                          list("includeMsa",
+                               !is.na(include_msa) && !is.na(seq_pos),
+                               ifelse(isTRUE(include_msa),
+                                      yes = "true", no = "false"))
   )
 
   ## Build Function-Specific Call
   if (is.na(seq_pos)) {
-    path_input = "matchortho"
+    path_input <- "matchortho"
   } else {
-    path_input = "homologpos"
+    path_input <- "homologpos"
   }
-  parser_input = list("json->list_simp",
-                      function(x) {x$search$mapping$mapped})
-  input_call = .rba_httr(httr = "post",
-                         url = .rba_stg("panther", "url"),
-                         path = paste0(.rba_stg("panther", "pth"),
-                                       "ortholog/", path_input),
-                         encode = "form",
-                         body = call_body,
-                         accept = "application/json",
-                         parser = parser_input,
-                         save_to = .rba_file("rba_panther_ortholog.json"))
+  parser_input <- list("json->list_simp",
+                       function(x) {x$search$mapping$mapped})
+  input_call <- .rba_httr(httr = "post",
+                          url = .rba_stg("panther", "url"),
+                          path = paste0(.rba_stg("panther", "pth"),
+                                        "ortholog/", path_input),
+                          encode = "form",
+                          body = call_body,
+                          accept = "application/json",
+                          parser = parser_input,
+                          save_to = .rba_file("rba_panther_ortholog.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -552,11 +552,11 @@ rba_panther_ortholog = function(genes,
 #'
 #' @family "PANTHER API"
 #' @export
-rba_panther_homolog = function(genes,
-                               organism,
-                               type = "P",
-                               target_organisms = NA,
-                               ...) {
+rba_panther_homolog <- function(genes,
+                                organism,
+                                type = "P",
+                                target_organisms = NA,
+                                ...) {
 
   ## Load Global Options
   .rba_ext_args(...)
@@ -585,31 +585,31 @@ rba_panther_homolog = function(genes,
        type, .paste2(genes, quote_all = "'"))
 
   ## Build POST API Request's body
-  call_body = .rba_query(init = list(geneInputList = paste(genes, collapse =  ","),
-                                     organism = organism,
-                                     homologType = type),
-                         list("targetOrganism",
-                              !is.na(target_organisms),
-                              paste(target_organisms, collapse =  ","))
+  call_body <- .rba_query(init = list(geneInputList = paste(genes, collapse =  ","),
+                                      organism = organism,
+                                      homologType = type),
+                          list("targetOrganism",
+                               !is.na(target_organisms),
+                               paste(target_organisms, collapse =  ","))
   )
 
 
   ## Build Function-Specific Call
-  parser_input = list("json->list_simp",
-                      function(x) {x$search$mapping$mapped})
+  parser_input <- list("json->list_simp",
+                       function(x) {x$search$mapping$mapped})
 
-  input_call = .rba_httr(httr = "post",
-                         url = .rba_stg("panther", "url"),
-                         path = paste0(.rba_stg("panther", "pth"),
-                                       "ortholog/homologOther"),
-                         encode = "form",
-                         body = call_body,
-                         accept = "application/json",
-                         parser = parser_input,
-                         save_to = .rba_file("rba_panther_homolog.json"))
+  input_call <- .rba_httr(httr = "post",
+                          url = .rba_stg("panther", "url"),
+                          path = paste0(.rba_stg("panther", "pth"),
+                                        "ortholog/homologOther"),
+                          encode = "form",
+                          body = call_body,
+                          accept = "application/json",
+                          parser = parser_input,
+                          save_to = .rba_file("rba_panther_homolog.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -656,10 +656,10 @@ rba_panther_homolog = function(genes,
 #' rba_panther_family("PTHR10000", what = "ortholog")
 #' @family "PANTHER API"
 #' @export
-rba_panther_family = function(id,
-                              what,
-                              target_organisms = NA,
-                              ...) {
+rba_panther_family <- function(id,
+                               what,
+                               target_organisms = NA,
+                               ...) {
 
   ## Load Global Options
   .rba_ext_args(...)
@@ -678,39 +678,39 @@ rba_panther_family = function(id,
   .msg( "Retrieving %s information of PANTHER family %s.", what, id)
 
   ## Build POST API Request's body
-  call_body = .rba_query(init = list(family = id),
-                         list("taxonFltr",
-                              !is.na(target_organisms),
-                              paste(target_organisms, collapse =  ","))
+  call_body <- .rba_query(init = list(family = id),
+                          list("taxonFltr",
+                               !is.na(target_organisms),
+                               paste(target_organisms, collapse =  ","))
   )
 
   ## Build Function-Specific Call
   switch(what,
          "ortholog" = {
-           path_input = "familyortholog"
-           parser_input = list("json->list_simp",
-                               function(x) {x$search$ortholog_list$ortholog})
+           path_input <- "familyortholog"
+           parser_input <- list("json->list_simp",
+                                function(x) {x$search$ortholog_list$ortholog})
          },
          "msa" = {
-           path_input = "familymsa"
-           parser_input = list("json->list_simp",
-                               function(x) {x$search$MSA_list$sequence_info})},
+           path_input <- "familymsa"
+           parser_input <- list("json->list_simp",
+                                function(x) {x$search$MSA_list$sequence_info})},
          "tree" = {
-           path_input = "treeinfo"
-           parser_input = list("json->list_simp",
-                               function(x) {x$search$tree_topology})})
-  input_call = .rba_httr(httr = "post",
-                         url = .rba_stg("panther", "url"),
-                         path = paste0(.rba_stg("panther", "pth"),
-                                       path_input),
-                         encode = "form",
-                         body = call_body,
-                         accept = "application/json",
-                         parser = parser_input,
-                         save_to = .rba_file("rba_panther_family.json"))
+           path_input <- "treeinfo"
+           parser_input <- list("json->list_simp",
+                                function(x) {x$search$tree_topology})})
+  input_call <- .rba_httr(httr = "post",
+                          url = .rba_stg("panther", "url"),
+                          path = paste0(.rba_stg("panther", "pth"),
+                                        path_input),
+                          encode = "form",
+                          body = call_body,
+                          accept = "application/json",
+                          parser = parser_input,
+                          save_to = .rba_file("rba_panther_family.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
 
@@ -756,9 +756,9 @@ rba_panther_family = function(id,
 #' rba_panther_tree_grafter("MKVLWAALLVTFLAGCQAKVEQAVETE")
 #' @family "PANTHER API"
 #' @export
-rba_panther_tree_grafter = function(protein_seq,
-                                    target_organisms = NA,
-                                    ...) {
+rba_panther_tree_grafter <- function(protein_seq,
+                                     target_organisms = NA,
+                                     ...) {
 
   ## Load Global Options
   .rba_ext_args(...)
@@ -773,27 +773,27 @@ rba_panther_tree_grafter = function(protein_seq,
   .msg("Retrieving a PANTHER family tree with your input protein grated in it.")
 
   ## Build POST API Request's body
-  call_body = .rba_query(init = list(sequence  = protein_seq),
-                         list("taxonFltr",
-                              !is.na(target_organisms),
-                              paste(target_organisms, collapse =  ","))
+  call_body <- .rba_query(init = list(sequence  = protein_seq),
+                          list("taxonFltr",
+                               !is.na(target_organisms),
+                               paste(target_organisms, collapse =  ","))
   )
 
   ## Build Function-Specific Call
-  parser_input = list("json->list_simp",
-                      function(x) {x$search})
+  parser_input <- list("json->list_simp",
+                       function(x) {x$search})
 
-  input_call = .rba_httr(httr = "post",
-                         url = .rba_stg("panther", "url"),
-                         path = paste0(.rba_stg("panther", "pth"),
-                                       "graftsequence"),
-                         encode = "form",
-                         body = call_body,
-                         accept = "application/json",
-                         parser = parser_input,
-                         save_to = .rba_file("rba_panther_tree_grafter.json"))
+  input_call <- .rba_httr(httr = "post",
+                          url = .rba_stg("panther", "url"),
+                          path = paste0(.rba_stg("panther", "pth"),
+                                        "graftsequence"),
+                          encode = "form",
+                          body = call_body,
+                          accept = "application/json",
+                          parser = parser_input,
+                          save_to = .rba_file("rba_panther_tree_grafter.json"))
 
   ## Call API
-  final_output = .rba_skeleton(input_call)
+  final_output <- .rba_skeleton(input_call)
   return(final_output)
 }

@@ -18,7 +18,7 @@
 #' @family "Helper functions"
 #' @keywords Helper
 #' @export
-rba_connection_test = function(diagnostics = FALSE) {
+rba_connection_test <- function(diagnostics = FALSE) {
   message("Checking Your connection to the Databases",
           " currently Supported by rbioapi:")
 
@@ -29,7 +29,7 @@ rba_connection_test = function(diagnostics = FALSE) {
               "Ensembl" = paste0(.rba_stg("ensembl", "url"),
                                  "/info/ping"),
               "MiEAA" = paste0(.rba_stg("mieaa", "url"),
-                                 "/mieaa2/api/"),
+                               "/mieaa2/api/"),
               "PANTHER" = paste0(.rba_stg("panther", "url"),
                                  "/services/api/panther"),
               "Reactome Content Service" = paste0(.rba_stg("reactome", "url"),
@@ -41,11 +41,11 @@ rba_connection_test = function(diagnostics = FALSE) {
   )
 
   cat("\U2022", "Internet", ":\r\n")
-  google = try(httr::status_code(httr::HEAD("https://www.google.com/",
-                                            if (diagnostics) httr::verbose(),
-                                            httr::user_agent(getOption("rba_user_agent")),
-                                            httr::timeout(getOption("rba_timeout"))))
-               , silent = TRUE)
+  google <- try(httr::status_code(httr::HEAD("https://www.google.com/",
+                                             if (diagnostics) httr::verbose(),
+                                             httr::user_agent(getOption("rba_user_agent")),
+                                             httr::timeout(getOption("rba_timeout"))))
+                , silent = TRUE)
 
   if (google == 200) {
     cat("\U2705 Connected to the Internet.\r\n")
@@ -121,34 +121,34 @@ rba_connection_test = function(diagnostics = FALSE) {
 #' @family "Helper functions"
 #' @keywords Helper
 #' @export
-rba_options = function(diagnostics = NA,
-                       dir_name = NA,
-                       retry_max = NA,
-                       retry_wait = NA,
-                       progress = NA,
-                       save_file = NA,
-                       skip_error = NA,
-                       timeout = NA,
-                       verbose = NA) {
+rba_options <- function(diagnostics = NA,
+                        dir_name = NA,
+                        retry_max = NA,
+                        retry_wait = NA,
+                        progress = NA,
+                        save_file = NA,
+                        skip_error = NA,
+                        timeout = NA,
+                        verbose = NA) {
   .rba_args(cond = list(list(quote(is.character(save_file)),
                              "As a global option, you can only set save_file to 'logical', not a file path.")))
   ## if empty function was called, show the available options
-  changes = vapply(ls(), function(x) {!is.na(get(x))}, logical(1))
+  changes <- vapply(ls(), function(x) {!is.na(get(x))}, logical(1))
   if (!any(changes)) {
-    options_df = data.frame(rbioapi_option = getOption("rba_user_options"),
-                            current_value = vapply(names(getOption("rba_user_options")),
-                                                   function(x) {as.character(getOption(x))},
-                                                   character(1)),
-                            value_class = vapply(names(getOption("rba_user_options")),
-                                                 function(x) {class(getOption(x))},
-                                                 character(1)),
-                            stringsAsFactors = FALSE,
-                            row.names = NULL)
+    options_df <- data.frame(rbioapi_option = getOption("rba_user_options"),
+                             current_value = vapply(names(getOption("rba_user_options")),
+                                                    function(x) {as.character(getOption(x))},
+                                                    character(1)),
+                             value_class = vapply(names(getOption("rba_user_options")),
+                                                  function(x) {class(getOption(x))},
+                                                  character(1)),
+                             stringsAsFactors = FALSE,
+                             row.names = NULL)
     return(options_df)
   } else {
     ## change the provided options
     for (chng in names(changes[changes])) {
-      chng_content = get(chng)
+      chng_content <- get(chng)
       eval(parse(text = sprintf(ifelse(is.character(chng_content),
                                        yes = "options(%s = \"%s\")",
                                        no = "options(%s = %s)"),
@@ -170,27 +170,27 @@ rba_options = function(diagnostics = NA,
 #'
 #' @return The evaluation results of each input call.
 #' @export
-.rba_pages_do = function(input_call, pb_switch) {
+.rba_pages_do <- function(input_call, pb_switch) {
   if (pb_switch) {
     ## initiate progress bar
-    pb = utils::txtProgressBar(min = 0,
-                               max = length(input_call),
-                               style = 3)
-    pb_val = 0
+    pb <- utils::txtProgressBar(min = 0,
+                                max = length(input_call),
+                                style = 3)
+    pb_val <- 0
   }
   #do the calls
-  output = lapply(X = input_call,
-                  FUN = function(x){
-                    Sys.sleep(1)
-                    y = eval(parse(text = x))
-                    if (pb_switch) {
-                      # advance the progress bar
-                      pb_now = get("pb_val", envir = parent.frame(2))
-                      assign("pb_val", pb_now + 1, envir = parent.frame(2))
-                      utils::setTxtProgressBar(pb, pb_now + 1)
-                    }
-                    return(y)
-                  })
+  output <- lapply(X = input_call,
+                   FUN = function(x){
+                     Sys.sleep(1)
+                     y <- eval(parse(text = x))
+                     if (pb_switch) {
+                       # advance the progress bar
+                       pb_now <- get("pb_val", envir = parent.frame(2))
+                       assign("pb_val", pb_now + 1, envir = parent.frame(2))
+                       utils::setTxtProgressBar(pb, pb_now + 1)
+                     }
+                     return(y)
+                   })
   if (pb_switch) {close(pb)}
   return(output)
 }
@@ -235,34 +235,34 @@ rba_options = function(diagnostics = NA,
 #' @family "Helper functions"
 #' @keywords Helper
 #' @export
-rba_pages = function(input_call){
+rba_pages <- function(input_call){
   ## convert the input_call to character
-  input_call = as.character(substitute(input_call))
+  input_call <- as.character(substitute(input_call))
   if (input_call[[1]] != "quote") {
     stop("The call should be wrapped in qoute()",
          call. = getOption("rba_diagnostics"))
   }
-  input_call = input_call[[2]]
+  input_call <- input_call[[2]]
   if (!grepl("^rba_.+\\(", input_call)) {
     stop("You should provide a rbioapi function.",
          call. = getOption("rba_diagnostics"))
   }
 
   ## extract start and end pages
-  start_page = regmatches(input_call,
-                          gregexpr("(?<=\"pages:)\\d+(?=:\\d+\")",
-                                   input_call, perl = TRUE))[[1]]
-  end_page = regmatches(input_call,
-                        gregexpr("(?<=\\d:)\\d+(?=\")",
-                                 input_call, perl = TRUE))[[1]]
+  start_page <- regmatches(input_call,
+                           gregexpr("(?<=\"pages:)\\d+(?=:\\d+\")",
+                                    input_call, perl = TRUE))[[1]]
+  end_page <- regmatches(input_call,
+                         gregexpr("(?<=\\d:)\\d+(?=\")",
+                                  input_call, perl = TRUE))[[1]]
   ## check pages
   if (length(start_page) != 1 | length(end_page) != 1) {
     stop("The variable you want to paginate should be formatted as:",
          "`pages:start:end`.\r\nfor example: \"pages:1:5\".",
          call. = getOption("rba_diagnostics"))
   }
-  start_page = as.integer(start_page)
-  end_page = as.integer(end_page)
+  start_page <- as.integer(start_page)
+  end_page <- as.integer(end_page)
   if (end_page <= start_page) {
     stop("The starting page should be greater than the ending page.",
          call. = getOption("rba_diagnostics"))
@@ -273,34 +273,34 @@ rba_pages = function(input_call){
   }
 
   ## only show progress bar if both verbose and diagnostics are off
-  verbose_on =
+  verbose_on <-
     !grepl(",\\s*verbose\\s*=\\s*FALSE", input_call) &&
     (grepl(",\\s*verbose\\s*=\\s*TRUE", input_call) ||
        isTRUE(getOption("rba_verbose")))
-  diagnostics_on =
+  diagnostics_on <-
     !grepl(",\\s*diagnostics\\s*=\\s*FALSE", input_call) &&
     (grepl(",\\s*diagnostics\\s*=\\s*TRUE", input_call) ||
        isTRUE(getOption("rba_diagnostics")))
-  pb_switch = !(verbose_on || diagnostics_on)
+  pb_switch <- !(verbose_on || diagnostics_on)
 
   ## build the calls
   # add skip_error = TRUE to the calls
-  input_call = gsub(",\\s*skip_error\\s*=\\s*(TRUE|FALSE)", "",
-                    input_call,
-                    perl = TRUE)
-  input_call = sub("\"pages:\\d+:\\d+\"", "%s, skip_error = TRUE",
-                   input_call, perl = TRUE)
+  input_call <- gsub(",\\s*skip_error\\s*=\\s*(TRUE|FALSE)", "",
+                     input_call,
+                     perl = TRUE)
+  input_call <- sub("\"pages:\\d+:\\d+\"", "%s, skip_error = TRUE",
+                    input_call, perl = TRUE)
 
-  input_call = as.list(sprintf(input_call,
-                               seq.int(from = start_page, to = end_page,
-                                       by = 1)))
-  names(input_call) = paste0("page_",
-                             seq.int(from = start_page, to = end_page, by = 1))
+  input_call <- as.list(sprintf(input_call,
+                                seq.int(from = start_page, to = end_page,
+                                        by = 1)))
+  names(input_call) <- paste0("page_",
+                              seq.int(from = start_page, to = end_page, by = 1))
 
   ## Do the calls
   message("Iterating from page ", start_page, " to page ", end_page,".")
-  final_output = .rba_pages_do(input_call,
-                               pb_switch = pb_switch)
+  final_output <- .rba_pages_do(input_call,
+                                pb_switch = pb_switch)
   return(final_output)
 }
 
@@ -333,9 +333,9 @@ rba_pages = function(input_call){
 #' @family "Helper functions"
 #' @keywords Helper
 #' @export
-rba_citation = function(...) {
+rba_citation <- function(...) {
   ## 1 Prepare input
-  input = as.character(substitute(list(...)))
+  input <- as.character(substitute(list(...)))
   cat(sprintf("\r\n\ \U2022 To cite %s:\r\n \U2022\U2022 %s- %s\r\n",
               c("rbioapi", "R"), c(1,2), c(.rba_stg("citation", "rbioapi"),
                                            .rba_stg("citations", "r"))))
@@ -347,38 +347,38 @@ rba_citation = function(...) {
         "   4- \"rstudio_context\" to scan your active source editor's context (only in Rtudio enviroment).\r\n")
   } else {
     ## check if the user provided directory paths
-    input = unique(input)
-    input[input == "getwd()"] = getwd()
-    is_dir = grepl("^[a-zA-z]:|^\\\\\\w|^/",
-                   input, perl = TRUE) && !grepl("\\.\\w+$",
-                                                input, perl = TRUE)
+    input <- unique(input)
+    input[input == "getwd()"] <- getwd()
+    is_dir <- grepl("^[a-zA-z]:|^\\\\\\w|^/",
+                    input, perl = TRUE) && !grepl("\\.\\w+$",
+                                                  input, perl = TRUE)
     if (sum(is_dir) != 0) {
-      read_func = function(x) {
+      read_func <- function(x) {
         tryCatch(list.files(x, full.names = TRUE, recursive = TRUE),
                  error = function(x){FALSE}, warning = function(x){invisible()})
       }
-      input = append(input[!is_dir], unlist(lapply(input[is_dir], read_func)))
+      input <- append(input[!is_dir], unlist(lapply(input[is_dir], read_func)))
     }
     ## check if the user provided file paths
-    is_file = grepl("\\.\\w+$", input, perl = TRUE)
+    is_file <- grepl("\\.\\w+$", input, perl = TRUE)
     if (sum(is_file) != 0) {
-      read_func = function(x) {
+      read_func <- function(x) {
         tryCatch(unique(scan(x, what = character(), sep = "\n", quiet = TRUE)),
                  error = function(x){FALSE}, warning = function(x){invisible()})
       }
-      input = unique(append(input[!is_file],
-                            unlist(lapply(input[is_file], read_func))))
+      input <- unique(append(input[!is_file],
+                             unlist(lapply(input[is_file], read_func))))
     }
     ## check if the user requested to scan rstudio
     if (Sys.getenv("RSTUDIO") == "1" && any(input == "rstudio_context")) {
-      input = append(input, as.character(rstudioapi::getSourceEditorContext()))}
+      input <- append(input, as.character(rstudioapi::getSourceEditorContext()))}
     ## 2 Search patterns
-    patt = sprintf("(?<=\\brba_)(%s)(?=_\\w+?\\()",
-                   paste(.rba_stg("db"), collapse = "|"))
-    rba_used = lapply(input, function(x){
+    patt <- sprintf("(?<=\\brba_)(%s)(?=_\\w+?\\()",
+                    paste(.rba_stg("db"), collapse = "|"))
+    rba_used <- lapply(input, function(x){
       regmatches(x, regexpr(patt, x, perl = TRUE))})
-    rba_used = unique(unlist(rba_used))
-    rba_cites = unlist(lapply(rba_used, function(x){
+    rba_used <- unique(unlist(rba_used))
+    rba_cites <- unlist(lapply(rba_used, function(x){
       .rba_stg("citation", x) }))
     if (length(rba_used) != 0) {
       cat(sprintf("\r\n\ \U2022 To cite %s:\r\n \U2022\U2022 %s- %s\r\n",

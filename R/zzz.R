@@ -19,7 +19,7 @@
 #' @keywords internal
 "_PACKAGE"
 
-.onLoad = function(libname, pkgname){
+.onLoad <- function(libname, pkgname) {
   options(rba_timeout = 30,
           rba_dir_name = "rbioapi",
           rba_diagnostics = FALSE,
@@ -38,6 +38,7 @@
                                rba_save_file = "save_file",
                                rba_skip_error = "skip_error",
                                rba_verbose = "verbose",
-                               rba_retry_wait = "retry_wait"))
+                               rba_retry_wait = "retry_wait")
+  )
   invisible()
 }
