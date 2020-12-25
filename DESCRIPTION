@@ -1,33 +1,36 @@
-Package: rbioapi
 Type: Package
+Package: rbioapi
 Title: User-friendly R Interface to Biologic web Services' API
 Version: 0.6.5
-Authors@R: person("Moosa", "Rezwani", email = "moosa.rezwani@gmail.com",
-  role = c("aut", "cre", "cph"))
-Description: Currently Supports: Enrichr, miEAA, PANTHER, Reactome, STRING,
-  and UniProt.
-  The goal of rbioapi is to provide a user-friendly and unified interface to
-  biological databases, to insulate the user from technicalities when it comes
-  to using API services and to create a unified, easy-to-learn,
-  and easy-to-implement way to connect to biologic databases.\r\n
-  With rbioapi, You are not required to to have any technical knowledge.
-  Just fill a function's arguments and the rest is handled for you.\r\n
-  This an ongoing project. New databases and services will be implemented
-  periodically. Feel free to suggest any databases or services you often use.
+Authors@R: 
+    person(given = "Moosa",
+           family = "Rezwani",
+           role = c("aut", "cre", "cph"),
+           email = "moosa.rezwani@gmail.com")
+Description: Currently Supports: Enrichr, miEAA, PANTHER,
+    Reactome, STRING, and UniProt. The goal of rbioapi is to provide a
+    user-friendly and unified interface to biological databases, to
+    insulate the user from technicalities when it comes to using API
+    services and to create a unified, easy-to-learn, and easy-to-implement
+    way to connect to biologic databases.  With rbioapi, You are not
+    required to to have any technical knowledge.  Just fill a function's
+    arguments and the rest is handled for you.  This an ongoing project.
+    New databases and services will be implemented periodically. Feel free
+    to suggest any databases or services you often use.
 License: GPL-3
-Encoding: UTF-8
 URL: https://github.com/moosa-r/rbioapi
 BugReports: https://github.com/moosa-r/rbioapi/issues
 Imports:
-  httr,
-  jsonlite,
-  methods,
-  utils
+    httr,
+    jsonlite,
+    utils
 Suggests:
-    rstudioapi,
-    png,
-    knitr,
     DT,
-    rmarkdown
+    knitr,
+    png,
+    rmarkdown,
+    rstudioapi
+VignetteBuilder: 
+    knitr
+Encoding: UTF-8
 RoxygenNote: 7.1.1
-VignetteBuilder: knitr

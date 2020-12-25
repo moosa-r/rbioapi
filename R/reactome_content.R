@@ -322,7 +322,7 @@ rba_reactome_participant_of <- function(entity_id,
 #' This function retrieve a list containing all other forms of your provided
 #'   Physical Entity ID.
 #'
-#' According to Reactome API documentation,"These other forms are Physical
+#' According to Reactome API documentation, "These other forms are Physical
 #'   Entities that share the same Reference Entity identifier, e.g. PTEN
 #'   H93R R-HSA-2318524 and PTEN C124R R-HSA-2317439 are two forms of PTEN."
 #'

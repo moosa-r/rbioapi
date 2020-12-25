@@ -171,7 +171,7 @@
 #'   "ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO"
 #' @param order Sort Order. Can be either "ASC" (default) or "DESC".
 #' @param resource Filter results based on the resource. Default is "TOTAL",
-#'   available choices are:\cr "TOTAL", "UNIPROT","ENSEMBL", "CHEBI", "IUPHAR",
+#'   available choices are:\cr "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
 #'   "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
 #'   "PUBCHEM_COMPOUND".
 #' @param p_value Set a P value threshold. Only results with P value equal to
@@ -879,7 +879,7 @@ rba_reactome_analysis_mapping <- function(input,
 #'   "ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO"
 #' @param order Sort Order. Can be either "ASC" (default) or "DESC".
 #' @param resource Filter results based on the resource. Default is "TOTAL",
-#'   available choices are:\cr "TOTAL", "UNIPROT","ENSEMBL", "CHEBI", "IUPHAR",
+#'   available choices are:\cr "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
 #'   "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
 #'   "PUBCHEM_COMPOUND".
 #' @param p_value Set a P value threshold. Only results with P value equal to
@@ -1023,7 +1023,7 @@ rba_reactome_analysis_species <- function(species_dbid,
 #'   "ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO"
 #' @param order Sort Order. Can be either "ASC" (default) or "DESC".
 #' @param resource Filter results based on the resource. Default is "TOTAL",
-#'   available choices are:\cr "TOTAL", "UNIPROT","ENSEMBL", "CHEBI", "IUPHAR",
+#'   available choices are:\cr "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
 #'   "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
 #'   "PUBCHEM_COMPOUND".
 #' @param p_value Set a P value threshold. Only results with P value equal to

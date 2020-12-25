@@ -19,82 +19,92 @@
   arg <- c(...)
   #possible arguments
   output <- switch(arg[[1]],
-                   db = c("enrichr", "ensembl", "mieaa", "reactome", "string", "uniprot"),
-                   enrichr = switch(arg[[2]],
-                                    name = "Enrichr",
-                                    url = "http://maayanlab.cloud",
-                                    pth = "Enrichr/",
-                                    ptn = "^(https?://)?(www\\.)?maayanlab\\.cloud/Enrichr/",
-                                    err_ptn = "^$"
+                   db = c("enrichr", "ensembl", "mieaa", "reactome",
+                          "string", "uniprot"),
+                   enrichr = switch(
+                     arg[[2]],
+                     name = "Enrichr",
+                     url = "http://maayanlab.cloud",
+                     pth = "Enrichr/",
+                     ptn = "^(https?://)?(www\\.)?maayanlab\\.cloud/Enrichr/",
+                     err_ptn = "^$"
                    ),
-                   ensembl = switch(arg[[2]],
-                                    name = "Ensembl",
-                                    url = "https://rest.ensembl.org",
-                                    ptn = "^(https?://)?(www\\.)?rest\\.ensembl\\.org/",
-                                    err_ptn = "^4\\d\\d$",
-                                    err_prs = list("json->list_simp",
-                                                   function(x) {x[["error"]][[1]]})
+                   ensembl = switch(
+                     arg[[2]],
+                     name = "Ensembl",
+                     url = "https://rest.ensembl.org",
+                     ptn = "^(https?://)?(www\\.)?rest\\.ensembl\\.org/",
+                     err_ptn = "^4\\d\\d$",
+                     err_prs = list("json->list_simp",
+                                    function(x) {x[["error"]][[1]]})
                    ),
-                   mieaa = switch(arg[[2]],
-                                  name = "MiEAA",
-                                  url = "https://ccb-compute2.cs.uni-saarland.de",
-                                  pth = "mieaa2/api/v1/",
-                                  ptn = "^(https?://)?(www\\.)?ccb-compute2\\.cs\\.uni-saarland\\.de/mieaa2/",
-                                  err_ptn = "^4\\d\\d$",
-                                  err_prs = list("json->chr")
+                   mieaa = switch(
+                     arg[[2]],
+                     name = "MiEAA",
+                     url = "https://ccb-compute2.cs.uni-saarland.de",
+                     pth = "mieaa2/api/v1/",
+                     ptn = "^(https?://)?(www\\.)?ccb-compute2\\.cs\\.uni-saarland\\.de/mieaa2/",
+                     err_ptn = "^4\\d\\d$",
+                     err_prs = list("json->chr")
                    ),
-                   panther = switch(arg[[2]],
-                                    name = "PANTHER",
-                                    url = "http://www.pantherdb.org",
-                                    pth = "services/oai/pantherdb/",
-                                    ptn = "^(https?://)?(www\\.)?pantherdb\\.org/services/",
-                                    err_ptn = "^4\\d\\d&",
-                                    err_prs = list("json->list_simp",
-                                                   function(x) {x$search$error})
+                   panther = switch(
+                     arg[[2]],
+                     name = "PANTHER",
+                     url = "http://www.pantherdb.org",
+                     pth = "services/oai/pantherdb/",
+                     ptn = "^(https?://)?(www\\.)?pantherdb\\.org/services/",
+                     err_ptn = "^4\\d\\d&",
+                     err_prs = list("json->list_simp",
+                                    function(x) {x$search$error})
                    ),
-                   reactome = switch(arg[[2]],
-                                     name = "Reactome",
-                                     url = "https://reactome.org",
-                                     pth = switch(match.arg(arg[[3]],
-                                                            c("analysis",
-                                                              "content")),
-                                                  analysis = "AnalysisService/",
-                                                  content = "ContentService/"),
-                                     ptn = "^(https?://)?(www\\.)?reactome\\.org/(?:AnalysisService|ContentService)/",
-                                     err_ptn = "^4\\d\\d$",
-                                     err_prs = list("json->list_simp",
-                                                    function(x) {x[["messages"]][[1]]})
+                   reactome = switch(
+                     arg[[2]],
+                     name = "Reactome",
+                     url = "https://reactome.org",
+                     pth = switch(match.arg(arg[[3]],
+                                            c("analysis",
+                                              "content")),
+                                  analysis = "AnalysisService/",
+                                  content = "ContentService/"),
+                     ptn = "^(https?://)?(www\\.)?reactome\\.org/(?:AnalysisService|ContentService)/",
+                     err_ptn = "^4\\d\\d$",
+                     err_prs = list("json->list_simp",
+                                    function(x) {x[["messages"]][[1]]})
                    ),
-                   string = switch(arg[[2]],
-                                   name = "STRING",
-                                   url = "https://version-11-0.string-db.org",
-                                   pth = "api/",
-                                   ptn = "^(http.?://).*string-db\\.org/api/",
-                                   err_ptn = "^4\\d\\d$",
-                                   err_prs = list("json->list_simp",
-                                                  function(x) {paste(x, collapse = "\r\n")})
+                   string = switch(
+                     arg[[2]],
+                     name = "STRING",
+                     url = "https://version-11-0.string-db.org",
+                     pth = "api/",
+                     ptn = "^(http.?://).*string-db\\.org/api/",
+                     err_ptn = "^4\\d\\d$",
+                     err_prs = list("json->list_simp",
+                                    function(x) {paste(x, collapse = "\r\n")})
                    ),
-                   uniprot = switch(arg[[2]],
-                                    name = "UniProt",
-                                    url = "https://www.ebi.ac.uk",
-                                    pth = "proteins/api/",
-                                    ptn = "^(https?://)?(www\\.)?ebi\\.ac\\.uk/proteins/api/",
-                                    err_prs = list("json->list_simp",
-                                                   function(x) {x[["errorMessage"]][[1]]}),
-                                    err_ptn = "^4\\d\\d$"
+                   uniprot = switch(
+                     arg[[2]],
+                     name = "UniProt",
+                     url = "https://www.ebi.ac.uk",
+                     pth = "proteins/api/",
+                     ptn = "^(https?://)?(www\\.)?ebi\\.ac\\.uk/proteins/api/",
+                     err_prs = list("json->list_simp",
+                                    function(x) {x[["errorMessage"]][[1]]}),
+                     err_ptn = "^4\\d\\d$"
                    ),
-                   options = switch(as.character(length(arg)),
-                                    "1" = options()[grep("^rba_",
-                                                         names(options()))],
-                                    getOption(arg[[2]])),
-                   citations = switch(arg[[2]],
-                                      rbioapi = "** rbio api****",
-                                      r = "R Core Team (2020). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.",
-                                      enrichr = "https://maayanlab.cloud/Enrichr/help#terms",
-                                      ensembl = "***ensembl api papeer***",
-                                      reactome = "https://reactome.org/cite",
-                                      string = "Szklarczyk D, Gable AL, Lyon D, Junge A, Wyder S, Huerta-Cepas J, Simonovic M, Doncheva NT, Morris JH, Bork P, Jensen LJ, Mering CV. STRING v11: protein-protein association networks with increased coverage, supporting functional discovery in genome-wide experimental datasets. Nucleic Acids Res. 2019 Jan 8;47(D1):D607-D613. doi: 10.1093/nar/gky1131. PMID: 30476243; PMCID: PMC6323986.",
-                                      uniprot = "***uniprot api papeer***")
+                   options = switch(
+                     as.character(length(arg)),
+                     "1" = options()[grep("^rba_",
+                                          names(options()))],
+                     getOption(arg[[2]])),
+                   citations = switch(
+                     arg[[2]],
+                     rbioapi = "** rbio api****",
+                     r = "R Core Team (2020). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.",
+                     enrichr = "https://maayanlab.cloud/Enrichr/help#terms",
+                     ensembl = "***ensembl api papeer***",
+                     reactome = "https://reactome.org/cite",
+                     string = "Szklarczyk D, Gable AL, Lyon D, Junge A, Wyder S, Huerta-Cepas J, Simonovic M, Doncheva NT, Morris JH, Bork P, Jensen LJ, Mering CV. STRING v11: protein-protein association networks with increased coverage, supporting functional discovery in genome-wide experimental datasets. Nucleic Acids Res. 2019 Jan 8;47(D1):D607-D613. doi: 10.1093/nar/gky1131. PMID: 30476243; PMCID: PMC6323986.",
+                     uniprot = "***uniprot api papeer***")
   )
   return(output)
 }
@@ -122,10 +132,11 @@
                             verbose = FALSE,
                             diagnostics = FALSE) {
   if (isTRUE(diagnostics)) {message("Testing the internet connection.")}
-  test_call <- quote(httr::status_code(httr::HEAD("https://www.google.com/",
-                                                  httr::timeout(getOption("rba_timeout")),
-                                                  if (diagnostics) httr::verbose()
-  )))
+  test_call <- quote(
+    httr::status_code(httr::HEAD("https://www.google.com/",
+                                 httr::timeout(getOption("rba_timeout")),
+                                 if (diagnostics) httr::verbose())
+    ))
   net_status <- try(eval(test_call), silent = TRUE)
   retry_count <- 0
 
@@ -208,77 +219,82 @@
 
   resp <- switch(substr(http_status, 1, 1),
                  "1" = list(class = "Informational",
-                            deff = switch(http_status,
-                                          "100" = "Continue",
-                                          "101" = "Switching Protocols",
-                                          "102" = "Processing",
-                                          "103" = "Early Hints")),
+                            deff = switch(
+                              http_status,
+                              "100" = "Continue",
+                              "101" = "Switching Protocols",
+                              "102" = "Processing",
+                              "103" = "Early Hints")),
                  "2" = list(class = "Success",
-                            deff = switch(http_status,
-                                          "200" = "OK",
-                                          "201" = "Created",
-                                          "202" = "Accepted",
-                                          "203" = "Non-Authoritative Information",
-                                          "204" = "No Content",
-                                          "205" = "Reset Content",
-                                          "206" = "Partial Content",
-                                          "207" = "Multi-Status",
-                                          "208" = "Already Reported",
-                                          "226" = "IM Used")),
+                            deff = switch(
+                              http_status,
+                              "200" = "OK",
+                              "201" = "Created",
+                              "202" = "Accepted",
+                              "203" = "Non-Authoritative Information",
+                              "204" = "No Content",
+                              "205" = "Reset Content",
+                              "206" = "Partial Content",
+                              "207" = "Multi-Status",
+                              "208" = "Already Reported",
+                              "226" = "IM Used")),
                  "3" = list(class = "Redirection",
-                            deff = switch(http_status,
-                                          "300" = "Multiple Choices",
-                                          "301" = "Moved Permanently",
-                                          "302" = "Found",
-                                          "303" = "See Other",
-                                          "304" = "Not Modified",
-                                          "305" = "Use Proxy",
-                                          "306" = "Switch Proxy",
-                                          "307" = "Temporary Redirect",
-                                          "308" = "Permanent Redirect")),
+                            deff = switch(
+                              http_status,
+                              "300" = "Multiple Choices",
+                              "301" = "Moved Permanently",
+                              "302" = "Found",
+                              "303" = "See Other",
+                              "304" = "Not Modified",
+                              "305" = "Use Proxy",
+                              "306" = "Switch Proxy",
+                              "307" = "Temporary Redirect",
+                              "308" = "Permanent Redirect")),
                  "4" = list(class = "Redirection",
-                            deff = switch(http_status,
-                                          "400" = "Bad Request",
-                                          "401" = "Unauthorized",
-                                          "402" = "Payment Required",
-                                          "403" = "Forbidden",
-                                          "404" = "Not Found",
-                                          "405" = "Method Not Allowed",
-                                          "406" = "Not Acceptable",
-                                          "407" = "Proxy Authentication Required",
-                                          "408" = "Request Timeout",
-                                          "409" = "Conflict",
-                                          "410" = "Gone",
-                                          "411" = "Length Required",
-                                          "412" = "Precondition Failed",
-                                          "413" = "Payload Too Large",
-                                          "414" = "URI Too Long",
-                                          "415" = "Unsupported Media Type",
-                                          "416" = "Range Not Satisfiable",
-                                          "417" = "Expectation Failed",
-                                          "421" = "Misdirected Request",
-                                          "422" = "Unprocessable Entity",
-                                          "423" = "Locked",
-                                          "424" = "Failed Dependency",
-                                          "425" = "Too Early",
-                                          "426" = "Upgrade Required",
-                                          "428" = "Precondition Required",
-                                          "429" = "Too Many Requests",
-                                          "431" = "Request Header Fields Too Large",
-                                          "451" = "Unavailable For Legal Reasons")),
+                            deff = switch(
+                              http_status,
+                              "400" = "Bad Request",
+                              "401" = "Unauthorized",
+                              "402" = "Payment Required",
+                              "403" = "Forbidden",
+                              "404" = "Not Found",
+                              "405" = "Method Not Allowed",
+                              "406" = "Not Acceptable",
+                              "407" = "Proxy Authentication Required",
+                              "408" = "Request Timeout",
+                              "409" = "Conflict",
+                              "410" = "Gone",
+                              "411" = "Length Required",
+                              "412" = "Precondition Failed",
+                              "413" = "Payload Too Large",
+                              "414" = "URI Too Long",
+                              "415" = "Unsupported Media Type",
+                              "416" = "Range Not Satisfiable",
+                              "417" = "Expectation Failed",
+                              "421" = "Misdirected Request",
+                              "422" = "Unprocessable Entity",
+                              "423" = "Locked",
+                              "424" = "Failed Dependency",
+                              "425" = "Too Early",
+                              "426" = "Upgrade Required",
+                              "428" = "Precondition Required",
+                              "429" = "Too Many Requests",
+                              "431" = "Request Header Fields Too Large",
+                              "451" = "Unavailable For Legal Reasons")),
                  "5" = list(class = "Redirection",
-                            deff = switch(http_status,
-                                          "500" = "Internal Server Error",
-                                          "501" = "Not Implemented",
-                                          "502" = "Bad Gateway",
-                                          "503" = "Service Unavailable",
-                                          "504" = "Gateway Timeout",
-                                          "505" = "HTTP Version Not Supported",
-                                          "506" = "Variant Also Negotiates",
-                                          "507" = "Insufficient Storage",
-                                          "508" = "Loop Detected",
-                                          "510" = "Not Extended",
-                                          "511" = "Network Authentication Required"))
+                            deff = switch(
+                              http_status,
+                              "500" = "Internal Server Error",
+                              "501" = "Not Implemented",
+                              "502" = "Bad Gateway",
+                              "503" = "Service Unavailable",
+                              "504" = "Gateway Timeout",
+                              "505" = "HTTP Version Not Supported",
+                              "506" = "Variant Also Negotiates",
+                              "507" = "Insufficient Storage",
+                              "508" = "Loop Detected",
+                              "510" = "Not Extended",
+                              "511" = "Network Authentication Required"))
   )
 
   output <- ifelse(!is.null(resp$deff),
@@ -934,8 +950,8 @@
   cons <- lapply(X = cons,
                  FUN = function(cons_i){
                    cons_i[["evl_arg"]] <- try(expr = get(x = cons_i[["arg"]],
-                                                        envir = parent.frame(3)),
-                                             silent = TRUE)
+                                                         envir = parent.frame(3)),
+                                              silent = TRUE)
                    return(cons_i)
                  })
   cons_not_exist <- vapply(X = cons,
@@ -1053,58 +1069,59 @@
                     FUN = function(parser){
                       #create a parser if not provided
                       if (!is.function(parser)) {
-                        parser <- switch(parser,
-                                        "json->df" = function(x) {
-                                          data.frame(jsonlite::fromJSON(httr::content(x,
-                                                                                      as = "text",
-                                                                                      encoding = "UTF-8"),
-                                                                        flatten = TRUE),
-                                                     stringsAsFactors = FALSE)
-                                        },
-                                        "json->df_no_flat" = function(x) {
-                                          data.frame(jsonlite::fromJSON(httr::content(x,
-                                                                                      as = "text",
-                                                                                      encoding = "UTF-8"),
-                                                                        flatten = FALSE),
-                                                     stringsAsFactors = FALSE)
-                                        },
-                                        "json->list_simp" = function(x) {
-                                          as.list(jsonlite::fromJSON(httr::content(x,
-                                                                                   as = "text",
-                                                                                   encoding = "UTF-8"),
-                                                                     simplifyVector = TRUE))
-                                        },
-                                        "json->list" = function(x) {
-                                          as.list(jsonlite::fromJSON(httr::content(x,
-                                                                                   as = "text",
-                                                                                   encoding = "UTF-8"),
-                                                                     simplifyVector = FALSE))
-                                        },
-                                        "json->chr" = function(x) {
-                                          as.character(jsonlite::fromJSON(httr::content(x,
-                                                                                        as = "text",
-                                                                                        encoding = "UTF-8")))
-                                        },
-                                        "text->chr" = function(x) {
-                                          as.character(httr::content(x,
+                        parser <- switch(
+                          parser,
+                          "json->df" = function(x) {
+                            data.frame(jsonlite::fromJSON(httr::content(x,
+                                                                        as = "text",
+                                                                        encoding = "UTF-8"),
+                                                          flatten = TRUE),
+                                       stringsAsFactors = FALSE)
+                          },
+                          "json->df_no_flat" = function(x) {
+                            data.frame(jsonlite::fromJSON(httr::content(x,
+                                                                        as = "text",
+                                                                        encoding = "UTF-8"),
+                                                          flatten = FALSE),
+                                       stringsAsFactors = FALSE)
+                          },
+                          "json->list_simp" = function(x) {
+                            as.list(jsonlite::fromJSON(httr::content(x,
                                                                      as = "text",
-                                                                     encoding = "UTF-8"))
-                                        },
-                                        "text->df" = function(x) {
-                                          utils::read.table(text = httr::content(x,
-                                                                                 type = "text/plain",
-                                                                                 as = "text",
-                                                                                 encoding = "UTF-8"),
-                                                            header = FALSE,
-                                                            stringsAsFactors = FALSE)
-                                        },
-                                        "tsv->df" = function(x) {
-                                          as.character(httr::content(x,
+                                                                     encoding = "UTF-8"),
+                                                       simplifyVector = TRUE))
+                          },
+                          "json->list" = function(x) {
+                            as.list(jsonlite::fromJSON(httr::content(x,
                                                                      as = "text",
-                                                                     encoding = "UTF-8"))
-                                        },
-                                        stop("Internal Error: Specify a valid parser name or provide a function!",
-                                             call. = TRUE)
+                                                                     encoding = "UTF-8"),
+                                                       simplifyVector = FALSE))
+                          },
+                          "json->chr" = function(x) {
+                            as.character(jsonlite::fromJSON(httr::content(x,
+                                                                          as = "text",
+                                                                          encoding = "UTF-8")))
+                          },
+                          "text->chr" = function(x) {
+                            as.character(httr::content(x,
+                                                       as = "text",
+                                                       encoding = "UTF-8"))
+                          },
+                          "text->df" = function(x) {
+                            utils::read.table(text = httr::content(x,
+                                                                   type = "text/plain",
+                                                                   as = "text",
+                                                                   encoding = "UTF-8"),
+                                              header = FALSE,
+                                              stringsAsFactors = FALSE)
+                          },
+                          "tsv->df" = function(x) {
+                            as.character(httr::content(x,
+                                                       as = "text",
+                                                       encoding = "UTF-8"))
+                          },
+                          stop("Internal Error: Specify a valid parser name or provide a function!",
+                               call. = TRUE)
                         )
                       }
                       return(parser)
@@ -1145,7 +1162,7 @@
   ## detect the database name
   dbs <- vapply(X = .rba_stg("db"),
                 FUN = function(db) {
-                  grepl(.rba_stg(db , "ptn"), response$url,
+                  grepl(.rba_stg(db, "ptn"), response$url,
                         perl = TRUE, ignore.case = TRUE)},
                 FUN.VALUE = logical(1)
   )
@@ -1155,12 +1172,13 @@
       grepl(.rba_stg(db, "err_ptn"), response$status_code)) {
     ## The API server returns an error string for this status code
     error_message <- tryCatch({
-      sprintf("%s server returned \"%s\".\r\n  With this error message:\r\n  \"%s\"",
-              .rba_stg(db, "name"),
-              .rba_http_status(http_status = response$status_code,
-                               verbose = FALSE),
-              .rba_response_parser(response = response,
-                                   parsers = .rba_stg(db, "err_prs"))
+      sprintf(
+        "%s server returned \"%s\".\r\n  With this error message:\r\n  \"%s\"",
+        .rba_stg(db, "name"),
+        .rba_http_status(http_status = response$status_code,
+                         verbose = FALSE),
+        .rba_response_parser(response = response,
+                             parsers = .rba_stg(db, "err_prs"))
       )},
       error = function(e) {
         .rba_http_status(http_status = response$status_code,
@@ -1198,7 +1216,8 @@
 #'
 #' @family internal_misc
 #' @export
-.msg <- function(fmt, ..., sprintf = TRUE, cond = "verbose", sep = "", collapse = NULL) {
+.msg <- function(fmt, ..., sprintf = TRUE, cond = "verbose",
+                 sep = "", collapse = NULL) {
   if (isTRUE(get0(cond, envir = parent.frame(1), ifnotfound = FALSE))) {
     message(ifelse(isTRUE(sprintf) &&
                      is.character(fmt) &&
@@ -1280,7 +1299,8 @@
   if (is.na(save_to)) {
     save_to <- get0(x = "save_file",
                     ifnotfound = FALSE,
-                    envir = parent.frame(1))}
+                    envir = parent.frame(1))
+    }
   if (!isFALSE(save_to)) {
     ## 1 file path will be generated unless save_to == FALSE
     # set values
@@ -1373,8 +1393,7 @@
                  showWarnings = FALSE,
                  recursive = TRUE)
     }
-    if (isTRUE(verbose)) {message(sprintf("Saving the server response to: \"%s\"",
-                                          save_to))}
+    .msg("Saving the server response to: \"%s\"", save_to)
   } # end if !isFALSE(save_to)
   return(save_to)
 }
@@ -1405,7 +1424,7 @@
 #' @export
 .rba_ext_args <- function(..., ignore_save = FALSE) {
   ext_args <- list(...)
-  rba_opts <- getOption("rba_user_options") # available options for the end-users
+  rba_opts <- getOption("rba_user_options") #available options for the end-users
   if (length(ext_args) > 0) { #user provided something in ...
     unnamed_args <- which(names(ext_args) == "" | is.na(names(ext_args)))
     invalid_args <- setdiff(names(ext_args[-unnamed_args]), rba_opts)
@@ -1422,10 +1441,12 @@
                                                    quote = "\"")),
                              no = "")
       ), call. = FALSE)
-      ext_args <- ext_args[-c(unnamed_args, which(names(ext_args) %in% invalid_args))]
+      ext_args <- ext_args[-c(unnamed_args,
+                              which(names(ext_args) %in% invalid_args))]
     }
     if (isTRUE(ignore_save) && utils::hasName(ext_args, "save_file")) {
-      warning("This function has a dedicated file-saving argument, 'save_file' option was ignored.",
+      warning("This function has a dedicated file-saving argument, ",
+              "'save_file' option was ignored.",
               call. = FALSE)
       rba_opts <- rba_opts[names(rba_opts) != "rba_save_file"]
     }

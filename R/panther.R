@@ -202,8 +202,8 @@ rba_panther_enrich <- function(genes,
   parser_input <- list("json->list_simp",
                        function(x) {
                          x <- x$results
-                         x$result$term_label <- x$result$term[,1]
-                         x$result$term <- x$result$term[,2]
+                         x$result$term_label <- x$result$term[, 1]
+                         x$result$term <- x$result$term[, 2]
                          return(x)
                        })
   if (!is.na(cutoff)) {

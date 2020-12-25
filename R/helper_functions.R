@@ -219,6 +219,7 @@ rba_options <- function(diagnostics = NA,
 #' @return A named list where each element corresponds to a request's page.
 #'
 #' @examples
+#' \dontrun{
 #' rba_pages(input_call = quote(rba_uniprot_taxonomy(ids = 189831,
 #'                                                      hierarchy = "siblings",
 #'                                                      page_size = 50,
@@ -232,6 +233,7 @@ rba_options <- function(diagnostics = NA,
 #'                                                        verbose = FALSE)))
 #' rba_pages(input_call = quote(rba_panther_info(what = "families",
 #'                                               families_page = "pages:9:11")))
+#' }
 #' @family "Helper functions"
 #' @keywords Helper
 #' @export
@@ -298,7 +300,7 @@ rba_pages <- function(input_call){
                               seq.int(from = start_page, to = end_page, by = 1))
 
   ## Do the calls
-  message("Iterating from page ", start_page, " to page ", end_page,".")
+  message("Iterating from page ", start_page, " to page ", end_page, ".")
   final_output <- .rba_pages_do(input_call,
                                 pb_switch = pb_switch)
   return(final_output)

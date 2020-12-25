@@ -21,27 +21,31 @@
 .rba_mieaa_species <- function(sp, to_name = FALSE) {
   diagnostics <- get0("diagnostics", envir = parent.frame(1),
                       ifnotfound = getOption("rba_diagnostics"))
-  sp_df <- data.frame(abbreviation = c("hsa", "mmu", "rno", "ath", "bta", "cel", "dme", "dre", "gga","ssc"),
-                      ncbi_taxid  = c(9606L, 10090L, 10116L, 3702L, 9913L, 6239L, 7227L, 7955L, 9031L, 9823L),
-                      specie_name = c("Homo sapiens", "Mus musculus",
-                                      "Rattus norvegicus", "Arabidopsis thaliana",
-                                      "Bos taurus", "Caenorhabditis elegans",
-                                      "Drosophila melanogaster", "Danio rerio",
-                                      "Gallus gallus", "Sus scrofa"),
-                      stringsAsFactors = FALSE)
+  sp_df <- data.frame(
+    abbreviation = c("hsa", "mmu", "rno", "ath", "bta",
+                     "cel", "dme", "dre", "gga", "ssc"),
+    ncbi_taxid  = c(9606L, 10090L, 10116L, 3702L, 9913L,
+                    6239L, 7227L, 7955L, 9031L, 9823L),
+    specie_name = c("Homo sapiens", "Mus musculus",
+                    "Rattus norvegicus", "Arabidopsis thaliana",
+                    "Bos taurus", "Caenorhabditis elegans",
+                    "Drosophila melanogaster", "Danio rerio",
+                    "Gallus gallus", "Sus scrofa"),
+    stringsAsFactors = FALSE)
   if (isTRUE(to_name)) {
     return(sp_df$specie_name[[which(sp_df$abbreviation == sp)]])
   } else {
-    sp_table <- c("hsa" = "hsa", "hsa" = 9606L,  "hsa" = "Homo sapiens",
-                  "mmu" = "mmu", "mmu" = 10090L, "mmu" = "Mus musculus",
-                  "rno" = "rno", "rno" = 10116L, "rno" = "Rattus norvegicus",
-                  "ath" = "ath", "ath" = 3702L,  "ath" = "Arabidopsis thaliana",
-                  "bta" = "bta", "bta" = 9913L,  "bta" = "Bos taurus",
-                  "cel" = "cel", "cel" = 6239L,  "cel" = "Caenorhabditis elegans",
-                  "dme" = "dme", "dme" = 7227L,  "dme" = "Drosophila melanogaster",
-                  "dre" = "dre", "dre" = 7955L,  "dre" = "Danio rerio",
-                  "gga" = "gga", "gga" = 9031L,  "gga" = "Gallus gallus",
-                  "ssc" = "ssc", "ssc" = 9823L,  "ssc" = "Sus scrofa")
+    sp_table <- c(
+      "hsa" = "hsa", "hsa" = 9606L,  "hsa" = "Homo sapiens",
+      "mmu" = "mmu", "mmu" = 10090L, "mmu" = "Mus musculus",
+      "rno" = "rno", "rno" = 10116L, "rno" = "Rattus norvegicus",
+      "ath" = "ath", "ath" = 3702L,  "ath" = "Arabidopsis thaliana",
+      "bta" = "bta", "bta" = 9913L,  "bta" = "Bos taurus",
+      "cel" = "cel", "cel" = 6239L,  "cel" = "Caenorhabditis elegans",
+      "dme" = "dme", "dme" = 7227L,  "dme" = "Drosophila melanogaster",
+      "dre" = "dre", "dre" = 7955L,  "dre" = "Danio rerio",
+      "gga" = "gga", "gga" = 9031L,  "gga" = "Gallus gallus",
+      "ssc" = "ssc", "ssc" = 9823L,  "ssc" = "Sus scrofa")
 
     sp_match <- pmatch(x = tolower(sp), table = tolower(sp_table),
                        nomatch = 0, duplicates.ok = FALSE)
@@ -101,7 +105,7 @@
 #'
 #' @family "miEAA API"
 #' @export
-rba_mieaa_cats <- function(mirna_type, species,...) {
+rba_mieaa_cats <- function(mirna_type, species, ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -126,7 +130,7 @@ rba_mieaa_cats <- function(mirna_type, species,...) {
   parser_input <- list("json->df",
                        function(x) {
                          y <- x[[1]]
-                         names(y)<- x[[2]]
+                         names(y) <- x[[2]]
                          return(y)})
 
   input_call <- .rba_httr(httr = "get",
@@ -230,10 +234,10 @@ rba_mieaa_convert_version <- function(mirna,
 
   ## Build Function-Specific Call
   if (isTRUE(simple_output)) {
-    parser_input <- list("text->df", function(x) {x[,1]})
+    parser_input <- list("text->df", function(x) {x[, 1]})
   } else {
     parser_input <- list("text->df", function(x) {
-      colnames(x) <- x[1,]; x <- x[-1,]  })
+      colnames(x) <- x[1, ]; x <- x[-1, ]  })
   }
 
   input_call <- .rba_httr(httr = "post",
@@ -333,13 +337,13 @@ rba_mieaa_convert_type <- function(mirna,
 
   ## Build Function-Specific Call
   if (isTRUE(simple_output)) {
-    parser_input <- list("text->df", function(x) {x[,1]})
+    parser_input <- list("text->df", function(x) {x[, 1]})
   } else {
     parser_input <- list("text->df",
                          function(x) {
                            names(x) <- c(input_type,
-                                        setdiff(c("mature", "precursor"),
-                                                input_type))
+                                         setdiff(c("mature", "precursor"),
+                                                 input_type))
                            return(x)
                          })
   }
@@ -380,9 +384,9 @@ rba_mieaa_convert_type <- function(mirna,
 #' @param mirna_type Type of your provided miRNA accession. either "mature"
 #'   or "precursor".
 #' @param test_type The analysis to perform. can be either "ORA" for 'Over
-#'   Representation Analysis' or "GSEA" for miRNA (Gene) 'Set Enrichment Analysis'.
-#'   Note that in GSEA, your list should be sorted beforehand based on some
-#'   criterion.
+#'   Representation Analysis' or "GSEA" for miRNA (Gene)
+#'   'Set Enrichment Analysis'. Note that in GSEA, your list should be sorted
+#'   beforehand based on some criterion.
 #' @param species Fully or partially matching Scientific name, abbreviation
 #' or NCBI taxon ID of one of the following species: \enumerate{
 #'  \item "Homo sapiens", "hsa" or 9606
@@ -492,7 +496,7 @@ rba_mieaa_enrich_submit <- function(test_set,
                              class = "logical"),
                         list(arg = "sig_level",
                              class = "numeric",
-                             ran = c(0,1)),
+                             ran = c(0, 1)),
                         list(arg = "min_hits",
                              class = "numeric")
   ))
@@ -500,7 +504,9 @@ rba_mieaa_enrich_submit <- function(test_set,
   #species
   species <- .rba_mieaa_species(sp = species, to_name = FALSE)
   #categories
-  all_cats <- rba_mieaa_cats(mirna_type = mirna_type, species = species, verbose = FALSE)
+  all_cats <- rba_mieaa_cats(mirna_type = mirna_type,
+                             species = species,
+                             verbose = FALSE)
   if (all(is.na(categories))) {
     categories <- all_cats
     .msg("No categories were provided, Requesting enrichment using all of the %s available catagories for species '%s'.",
@@ -592,7 +598,7 @@ rba_mieaa_enrich_submit <- function(test_set,
 #'
 #' @family "miEAA API"
 #' @export
-rba_mieaa_enrich_status <- function(job_id,...) {
+rba_mieaa_enrich_status <- function(job_id, ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -693,7 +699,7 @@ rba_mieaa_enrich_results <- function(job_id,
                                                "9" = c("category", "subcategory", "enrichment",
                                                        "p_value", "p_adjusted", "q_value",
                                                        "expected",
-                                                       "observed","mirnas/precursors"))
+                                                       "observed", "mirnas/precursors"))
                          x$p_value <- as.numeric(x$p_value)
                          x$p_adjusted <- as.numeric(x$p_adjusted)
                          x$q_value <- as.numeric(x$q_value)
@@ -701,7 +707,7 @@ rba_mieaa_enrich_results <- function(job_id,
                          if (utils::hasName(x, "expected")) {
                            x$expected <- as.numeric(x$expected)
                          }
-                         x <- x[order(x[[sort_by]], decreasing = !sort_asc),]
+                         x <- x[order(x[[sort_by]], decreasing = !sort_asc), ]
                          return(x)
                        })
   input_call <- .rba_httr(httr = "get",
