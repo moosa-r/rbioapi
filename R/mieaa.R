@@ -125,8 +125,8 @@ rba_mieaa_cats <- function(mirna_type, species,...) {
   ## Build Function-Specific Call
   parser_input <- list("json->df",
                        function(x) {
-                         y = x[[1]]
-                         names(y) = x[[2]]
+                         y <- x[[1]]
+                         names(y)<- x[[2]]
                          return(y)})
 
   input_call <- .rba_httr(httr = "get",
@@ -233,7 +233,7 @@ rba_mieaa_convert_version <- function(mirna,
     parser_input <- list("text->df", function(x) {x[,1]})
   } else {
     parser_input <- list("text->df", function(x) {
-      colnames(x) <- x[1,]; x = x[-1,]  })
+      colnames(x) <- x[1,]; x <- x[-1,]  })
   }
 
   input_call <- .rba_httr(httr = "post",
@@ -337,7 +337,7 @@ rba_mieaa_convert_type <- function(mirna,
   } else {
     parser_input <- list("text->df",
                          function(x) {
-                           names(x) = c(input_type,
+                           names(x) <- c(input_type,
                                         setdiff(c("mature", "precursor"),
                                                 input_type))
                            return(x)
@@ -694,14 +694,14 @@ rba_mieaa_enrich_results <- function(job_id,
                                                        "p_value", "p_adjusted", "q_value",
                                                        "expected",
                                                        "observed","mirnas/precursors"))
-                         x$p_value = as.numeric(x$p_value)
-                         x$p_adjusted = as.numeric(x$p_adjusted)
-                         x$q_value = as.numeric(x$q_value)
-                         x$observed = as.numeric(x$observed)
+                         x$p_value <- as.numeric(x$p_value)
+                         x$p_adjusted <- as.numeric(x$p_adjusted)
+                         x$q_value <- as.numeric(x$q_value)
+                         x$observed <- as.numeric(x$observed)
                          if (utils::hasName(x, "expected")) {
                            x$expected <- as.numeric(x$expected)
                          }
-                         x = x[order(x[[sort_by]], decreasing = !sort_asc),]
+                         x <- [order(x[[sort_by]], decreasing = !sort_asc),]
                          return(x)
                        })
   input_call <- .rba_httr(httr = "get",

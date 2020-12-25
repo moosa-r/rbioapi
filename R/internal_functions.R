@@ -16,7 +16,7 @@
 #' @family internal_data_container
 #' @export
 .rba_stg <- function(...){
-  arg = c(...)
+  arg <- c(...)
   #possible arguments
   output <- switch(arg[[1]],
                    db = c("enrichr", "ensembl", "mieaa", "reactome", "string", "uniprot"),
@@ -933,7 +933,7 @@
   ## 2.1 check if the provided object can be evaluated
   cons <- lapply(X = cons,
                  FUN = function(cons_i){
-                   cons_i[["evl_arg"]] = try(expr = get(x = cons_i[["arg"]],
+                   cons_i[["evl_arg"]] <- try(expr = get(x = cons_i[["arg"]],
                                                         envir = parent.frame(3)),
                                              silent = TRUE)
                    return(cons_i)
@@ -973,7 +973,7 @@
   }
   ## 2.3 check other constrains if their class is correct
   other_errs <- lapply(cons, .rba_args_cons_wrp)
-  if (any(!is.na(other_errs))) {errors = append(errors, unlist(other_errs))}
+  if (any(!is.na(other_errs))) {errors <- append(errors, unlist(other_errs))}
   ## 2.4 Take actions for the errors
   if (length(errors) == 1) {
     stop(errors, call. = diagnostics)
@@ -1048,12 +1048,12 @@
 #' @family internal_response_parser
 #' @export
 .rba_response_parser <- function(response, parsers) {
-  if (!is.vector(parsers)) { parsers = list(parsers)}
+  if (!is.vector(parsers)) { parsers <- list(parsers)}
   parsers <- sapply(X = parsers,
                     FUN = function(parser){
                       #create a parser if not provided
                       if (!is.function(parser)) {
-                        parser = switch(parser,
+                        parser <- switch(parser,
                                         "json->df" = function(x) {
                                           data.frame(jsonlite::fromJSON(httr::content(x,
                                                                                       as = "text",
@@ -1302,7 +1302,7 @@
         warning(sprintf("\"%s\" is not a valid file path. Ignored that.",
                         save_to),
                 call. = diagnostics)
-        save_to = TRUE
+        save_to <- TRUE
       } else {
         ## 2a.2 the provided file path is valid
         ## 2a.2.1 Does the path end to a directory or file?
@@ -1363,7 +1363,7 @@
                                   exst_files, perl = TRUE))
       if (length(incrt) == 0) {
         incrt <- 1
-      } else {incrt = max(as.numeric(incrt)) + 1}
+      } else {incrt <- max(as.numeric(incrt)) + 1}
       save_to <- file.path(dirname(save_to),
                            paste0(file_name, "_", incrt, ".", file_ext))
     } else {

@@ -307,7 +307,7 @@ rba_reactome_analysis <- function(input,
                                 max))
   ## Build POST API Request's URL
   # handle provided input
-  input = .rba_reactome_input(input = input,
+  input <- .rba_reactome_input(input = input,
                               type = input_format,
                               handle = TRUE)
   if (input$type == "file") {

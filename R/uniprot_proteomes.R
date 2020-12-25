@@ -130,12 +130,12 @@ rba_uniprot_proteomes_search <- function(name = NA,
   ## Build Function-Specific Call
   parser_input <- list("json->list",
                        function(x) {
-                         x_names = vapply(X = x,
+                         x_names <- vapply(X = x,
                                           FUN = function(x) {
                                             x$upid
                                           },
                                           FUN.VALUE = character(1))
-                         names(x) = x_names
+                         names(x) <- x_names
                          return(x)})
 
   input_call <- .rba_httr(httr = "get",

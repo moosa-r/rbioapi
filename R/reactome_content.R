@@ -2298,14 +2298,14 @@ rba_reactome_query <- function(ids,
                          ids)
     accept_input <- "application/json"
     parser_input <- "json->list"
-    file_ext = "json"
+    file_ext <- "json"
     if (!is.na(attribute_name)) {
       .msg("GET /data/query/{id}/{attributeName}",
            "A single property of an entry in Reactome knowledgebase")
       path_input <- paste0(path_input, "/", attribute_name)
       accept_input <- "text/plain"
       parser_input <- "text->chr"
-      file_ext = "txt"
+      file_ext <- "txt"
     } else if (isTRUE(enhanced)) {
       .msg("GET /data/query/enhanced/{id}",
            "More information on an entry in Reactome knowledgebase")

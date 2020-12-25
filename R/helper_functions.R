@@ -22,7 +22,7 @@ rba_connection_test <- function(diagnostics = FALSE) {
   message("Checking Your connection to the Databases",
           " currently Supported by rbioapi:")
 
-  urls = list("STRING" = paste0(.rba_stg("string", "url"),
+  urls <- list("STRING" = paste0(.rba_stg("string", "url"),
                                 "/api/json/version"),
               "Enrichr" = paste0(.rba_stg("enrichr", "url"),
                                  "/Enrichr"),
