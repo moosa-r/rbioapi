@@ -327,7 +327,7 @@ rba_enrichr_view_list <- function(user_list_id,
 #'   }
 #'
 #' @examples
-#' \dontrun{rba_enrichr_enrich(user_list_id = "11111")},
+#' \dontrun{rba_enrichr_enrich(user_list_id = "11111")}
 #' \dontrun{rba_enrichr_enrich(user_list_id = "11111",
 #'          gene_set_library = "GO_Molecular_Function_2017",
 #'          regex_library_name = FALSE)}

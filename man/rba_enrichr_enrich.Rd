@@ -54,7 +54,7 @@ Note that using \code{\link{rba_enrichr}} is a more convenient way to
 }
 
 \examples{
-\dontrun{rba_enrichr_enrich(user_list_id = "11111")},
+\dontrun{rba_enrichr_enrich(user_list_id = "11111")}
 \dontrun{rba_enrichr_enrich(user_list_id = "11111",
          gene_set_library = "GO_Molecular_Function_2017",
          regex_library_name = FALSE)}
