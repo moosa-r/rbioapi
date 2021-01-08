@@ -830,7 +830,7 @@ rba_string_enrichment <- function(ids,
                                !is.na(species),
                                species),
                           list("background_string_identifiers",
-                               !is.na(background),
+                               any(!is.na(background)),
                                paste(unique(background),
                                      collapse = "%0d")))
 

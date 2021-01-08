@@ -472,7 +472,7 @@ rba_panther_ortholog <- function(genes,
                                !is.na(seq_pos),
                                genes),
                           list("targetOrganism",
-                               !is.na(target_organisms),
+                               any(!is.na(target_organisms)),
                                paste(target_organisms, collapse =  ",")),
                           list("pos",
                                !is.na(seq_pos),
@@ -589,7 +589,7 @@ rba_panther_homolog <- function(genes,
                                       organism = organism,
                                       homologType = type),
                           list("targetOrganism",
-                               !is.na(target_organisms),
+                               any(!is.na(target_organisms)),
                                paste(target_organisms, collapse =  ","))
   )
 
@@ -680,7 +680,7 @@ rba_panther_family <- function(id,
   ## Build POST API Request's body
   call_body <- .rba_query(init = list(family = id),
                           list("taxonFltr",
-                               !is.na(target_organisms),
+                               any(!is.na(target_organisms)),
                                paste(target_organisms, collapse =  ","))
   )
 
@@ -775,7 +775,7 @@ rba_panther_tree_grafter <- function(protein_seq,
   ## Build POST API Request's body
   call_body <- .rba_query(init = list(sequence  = protein_seq),
                           list("taxonFltr",
-                               !is.na(target_organisms),
+                               any(!is.na(target_organisms)),
                                paste(target_organisms, collapse =  ","))
   )
 
