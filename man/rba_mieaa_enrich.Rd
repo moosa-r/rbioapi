@@ -34,9 +34,9 @@ precursor miRNA accession. A mixture of both is not accepted.
 or "precursor".}
 
 \item{test_type}{The analysis to perform. can be either "ORA" for 'Over
-Representation Analysis' or "GSEA" for miRNA (Gene) 'Set Enrichment Analysis'.
-Note that in GSEA, your list should be sorted beforehand based on some
-criterion.}
+Representation Analysis' or "GSEA" for miRNA (Gene)
+'Set Enrichment Analysis'. Note that in GSEA, your list should be sorted
+beforehand based on some criterion.}
 
 \item{species}{Fully or partially matching Scientific name, abbreviation
 or NCBI taxon ID of one of the following species: \enumerate{

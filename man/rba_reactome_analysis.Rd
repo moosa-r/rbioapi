@@ -57,7 +57,7 @@ are:\cr "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
 \item{order}{Sort Order. Can be either "ASC" (default) or "DESC".}
 
 \item{resource}{Filter results based on the resource. Default is "TOTAL",
-available choices are:\cr "TOTAL", "UNIPROT","ENSEMBL", "CHEBI", "IUPHAR",
+available choices are:\cr "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
 "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
 "PUBCHEM_COMPOUND".}
 

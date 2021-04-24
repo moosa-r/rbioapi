@@ -32,6 +32,7 @@ To prevent flooding the server, there will be a 1 second delay between
   halting function's execution.
 }
 \examples{
+\dontrun{
 rba_pages(input_call = quote(rba_uniprot_taxonomy(ids = 189831,
                                                      hierarchy = "siblings",
                                                      page_size = 50,
@@ -45,6 +46,7 @@ rba_pages(input_call = quote(rba_uniprot_taxonomy_name(name = "adenovirus",
                                                        verbose = FALSE)))
 rba_pages(input_call = quote(rba_panther_info(what = "families",
                                               families_page = "pages:9:11")))
+}
 }
 \seealso{
 Other "Helper functions": 
