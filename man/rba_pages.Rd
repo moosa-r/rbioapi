@@ -50,7 +50,6 @@ rba_pages(input_call = quote(rba_panther_info(what = "families",
 }
 \seealso{
 Other "Helper functions": 
-\code{\link{rba_citation}()},
 \code{\link{rba_connection_test}()},
 \code{\link{rba_options}()}
 }
