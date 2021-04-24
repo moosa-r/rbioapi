@@ -6,7 +6,8 @@
 #'
 #' Consult the source codes to learn about supported arguments and data
 #'   structure. it is straightforward and self-explanatory.
-#'   Currently the first argument can be one of 'db', 'options' or 'citations'
+#'   Currently the first argument can be one of 'db', 'options', 'test',
+#'   'citations' or a service name.
 #'
 #' @param ... A sequence of arguments in which the function will traverse across
 #'    the defined data storage tree. Only the first arguments will be passed
@@ -104,7 +105,7 @@
                      ensembl = "***ensembl api papeer***",
                      reactome = "https://reactome.org/cite",
                      string = "Szklarczyk D, Gable AL, Lyon D, Junge A, Wyder S, Huerta-Cepas J, Simonovic M, Doncheva NT, Morris JH, Bork P, Jensen LJ, Mering CV. STRING v11: protein-protein association networks with increased coverage, supporting functional discovery in genome-wide experimental datasets. Nucleic Acids Res. 2019 Jan 8;47(D1):D607-D613. doi: 10.1093/nar/gky1131. PMID: 30476243; PMCID: PMC6323986.",
-                     uniprot = "***uniprot api papeer***")
+                     uniprot = "***uniprot api papeer***"),
                    tests = list("Enrichr" = paste0(.rba_stg("enrichr", "url"),
                                                    "/Enrichr"),
                                 "Ensembl" = paste0(.rba_stg("ensembl", "url"),

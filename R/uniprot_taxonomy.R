@@ -317,8 +317,8 @@ rba_uniprot_taxonomy_name <- function(name,
                         list(arg = "page_number",
                              class = "numeric")))
 
-  .msg("Retrieving taxonomic nodes that their %s name field %s %s.",
-       field, search_type, name)
+  .msg("Retrieving taxonomic nodes that their %s name field %s %s (page %s).",
+       field, search_type, name, page_number)
   ## Build GET API Request's query
   call_query <- list("name" = name,
                      "fieldName" = switch(field,
