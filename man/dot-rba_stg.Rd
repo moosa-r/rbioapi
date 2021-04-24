@@ -22,6 +22,7 @@ A central way to return information necessary for the internal functions to
 \details{
 Consult the source codes to learn about supported arguments and data
   structure. it is straightforward and self-explanatory.
-  Currently the first argument can be one of 'db', 'options' or 'citations'
+  Currently the first argument can be one of 'db', 'options', 'test',
+  'citations' or a service name.
 }
 \concept{internal_data_container}

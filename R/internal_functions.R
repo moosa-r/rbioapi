@@ -105,6 +105,23 @@
                      reactome = "https://reactome.org/cite",
                      string = "Szklarczyk D, Gable AL, Lyon D, Junge A, Wyder S, Huerta-Cepas J, Simonovic M, Doncheva NT, Morris JH, Bork P, Jensen LJ, Mering CV. STRING v11: protein-protein association networks with increased coverage, supporting functional discovery in genome-wide experimental datasets. Nucleic Acids Res. 2019 Jan 8;47(D1):D607-D613. doi: 10.1093/nar/gky1131. PMID: 30476243; PMCID: PMC6323986.",
                      uniprot = "***uniprot api papeer***")
+                   tests = list("Enrichr" = paste0(.rba_stg("enrichr", "url"),
+                                                   "/Enrichr"),
+                                "Ensembl" = paste0(.rba_stg("ensembl", "url"),
+                                                   "/info/ping"),
+                                "MiEAA" = paste0(.rba_stg("mieaa", "url"),
+                                                 "/mieaa2/api/"),
+                                "PANTHER" = paste0(.rba_stg("panther", "url"),
+                                                   "/services/api/panther"),
+                                "Reactome Content Service" = paste0(.rba_stg("reactome", "url"),
+                                                                    "/ContentService/data/database/name"),
+                                "Reactome Analysis Service" = paste0(.rba_stg("reactome", "url"),
+                                                                     "/AnalysisService/database/name"),
+                                "STRING" = paste0(.rba_stg("string", "url"),
+                                                  "/api/json/version"),
+                                "UniProt" = paste0(.rba_stg("uniprot", "url"),
+                                                   "/proteins/api/proteins/P25445")
+                   )
   )
   return(output)
 }
@@ -159,40 +176,6 @@
          call. = diagnostics)
   } #end of if net_test
   return(net_status == 200)
-}
-
-#' Test connection with a rest server
-#'
-#' Internal helper function for rba_connection_test(). It will  make HTTP HEAD
-#'   request to the given resource.
-#'
-#' @param url A URL to to resource being examined.
-#' @param diagnostics logical: Generate diagnostics and detailed messages with
-#'   internal information.
-#'
-#' @return An informative message with the result of HEAD request's success or
-#'   failure.
-#' @family internal_inernet_connectivity
-#' @export
-.rba_api_check <- function(url, diagnostics = FALSE){
-  request <- quote(httr::HEAD(url = url,
-                              httr::timeout(getOption("rba_timeout")),
-                              httr::user_agent(getOption("rba_user_agent")),
-                              if (diagnostics) httr::verbose()
-  ))
-  test_result <- try(httr::status_code(eval(request)),
-                     silent = !diagnostics)
-
-  if (is.numeric(test_result)) {
-    if (test_result == 200) {
-      return("\U2705 The Server is Respoding.")
-    } else {
-      return(paste("\U274C", .rba_http_status(test_result,
-                                              verbose = FALSE)))
-    }
-  } else {
-    return(paste("\U274C", test_result))
-  }
 }
 
 #' Translate HTTP Status Code to Human-Readable Explanation

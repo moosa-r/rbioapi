@@ -1,3 +1,37 @@
+#' Test connection with a rest server
+#'
+#' Internal helper function for rba_connection_test(). It will  make HTTP HEAD
+#'   request to the given resource.
+#'
+#' @param url A URL to to resource being examined.
+#' @param diagnostics logical: Generate diagnostics and detailed messages with
+#'   internal information.
+#'
+#' @return An informative message with the result of HEAD request's success or
+#'   failure.
+#' @family internal_inernet_connectivity
+#' @export
+.rba_api_check <- function(url, diagnostics = FALSE){
+  request <- quote(httr::HEAD(url = url,
+                              httr::timeout(getOption("rba_timeout")),
+                              httr::user_agent(getOption("rba_user_agent")),
+                              if (diagnostics) httr::verbose()
+  ))
+  test_result <- try(httr::status_code(eval(request)),
+                     silent = !diagnostics)
+
+  if (is.numeric(test_result)) {
+    if (test_result == 200) {
+      return(TRUE)
+    } else {
+      return(.rba_http_status(test_result,
+                              verbose = FALSE))
+    }
+  } else {
+    return(test_result)
+  }
+}
+
 #' Test if the Supported Services Are Responding
 #'
 #' Run this function to test the internet connectivity of your device and the
@@ -19,47 +53,37 @@
 #' @keywords Helper
 #' @export
 rba_connection_test <- function(diagnostics = FALSE) {
-  message("Checking Your connection to the Databases",
-          " currently Supported by rbioapi:")
+  message("Checking Your connection to the Databases currently supported by rbioapi:")
 
-  urls <- list("STRING" = paste0(.rba_stg("string", "url"),
-                                "/api/json/version"),
-              "Enrichr" = paste0(.rba_stg("enrichr", "url"),
-                                 "/Enrichr"),
-              "Ensembl" = paste0(.rba_stg("ensembl", "url"),
-                                 "/info/ping"),
-              "MiEAA" = paste0(.rba_stg("mieaa", "url"),
-                               "/mieaa2/api/"),
-              "PANTHER" = paste0(.rba_stg("panther", "url"),
-                                 "/services/api/panther"),
-              "Reactome Content Service" = paste0(.rba_stg("reactome", "url"),
-                                                  "/ContentService/data/database/name"),
-              "Reactome Analysis Service" = paste0(.rba_stg("reactome", "url"),
-                                                   "/AnalysisService/database/name"),
-              "UniProt" = paste0(.rba_stg("uniprot", "url"),
-                                 "/proteins/api/proteins/P25445")
-  )
+  tests <- .rba_stg("tests")
 
-  cat("\U2022", "Internet", ":\r\n")
-  google <- try(httr::status_code(httr::HEAD("https://www.google.com/",
+  cat("--->>>", "Internet", ":\r\n")
+  google <- try(httr::status_code(httr::HEAD("https://google.com/",
                                              if (diagnostics) httr::verbose(),
                                              httr::user_agent(getOption("rba_user_agent")),
                                              httr::timeout(getOption("rba_timeout"))))
                 , silent = TRUE)
 
   if (google == 200) {
-    cat("\U2705 Connected to the Internet.\r\n")
+    cat("+++ Connected to the Internet.\r\n")
   } else {
-    cat("\U274C No Internet Connection.\r\n")
-    stop("Could not resolve google.com", " . Check Your internet Connection.",
+    cat("!!!! No Internet Connection.\r\n")
+    stop("Could not resolve https://google.com", " . Check Your internet Connection.",
          call. = diagnostics)
   }
+  output <- list()
 
-  for (i in seq_along(urls)) {
-    cat("\U2022", names(urls)[[i]], ":\r\n")
-    cat(.rba_api_check(urls[[i]], diagnostics = diagnostics), "\r\n")
+  for (i in seq_along(tests)) {
+    cat("--->>>", names(tests)[[i]], ":\r\n")
+    output[[names(tests)[[i]]]] <- .rba_api_check(tests[[i]],
+                                                  diagnostics = diagnostics)
+    if (isTRUE(output[[names(tests)[[i]]]])) {
+      cat("+++ The server is responding.\r\n")
+    } else {
+      cat("!!! failed with error:\r\n", output[[names(tests)[[i]]]])
+    }
   }
-  invisible()
+  invisible(output)
 }
 
 #' Set rbioapi Global Options
