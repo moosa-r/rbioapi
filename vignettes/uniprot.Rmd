@@ -6,8 +6,10 @@ output:
   rmarkdown::html_vignette:
     toc: true
     anchor_sections: true
+    number_sections: true
     self_contained: true
     dev: png
+    encoding: 'UTF-8'
 
 vignette: >
   %\VignetteIndexEntry{2.F: UniProt & rbioapi}
@@ -31,7 +33,7 @@ rba_options(timeout = 600)
 
 ------------------------------------------------------------------------
 
-## Introduction {#introduction .heading2}
+# Introduction {#introduction .heading2}
 
 Directly quoting from UniProt:
 
@@ -41,9 +43,9 @@ Directly quoting from UniProt:
 
 ------------------------------------------------------------------------
 
-## Search vs Retrieve {#note-about-species-argument .heading2}
+# Search vs Retrieve {#note-about-species-argument .heading2}
 
-Most of rbioapi UniProt functions have to variants. one to retrieve data using a proper accession, and the second one (which have a `_search` suffix) is to search using any combination of arguments. We first demonstrate this using an example, then provide a list of such functions in rbioapi.
+Most of rbioapi UniProt functions have two variants. one to retrieve data using a proper accession, and the second one (which have a `_search` suffix) is to search using any combination of arguments. We first demonstrate this using an example, then provide a list of such functions in rbioapi.
 
 Suppose we are interested in Human CD40 ligand protein, and we know that it's UniProt accession is "P29965". We can simply do as the following:
 
@@ -109,7 +111,7 @@ multi_prs4 <- rba_uniprot_proteins_search(organism = "SARS-CoV-2",
 str(multi_prs4, 1)
 ```
 
-### Functions with `*_search` variant
+## Functions with `*_search` variant
 
 The search variants are not limited to what we showed above. Here is a list of the function that have both a retrieve and search variants. Refer to their manuals for detailed guides and examples.
 
@@ -131,13 +133,13 @@ The search variants are not limited to what we showed above. Here is a list of t
 
 ------------------------------------------------------------------------
 
-## UniProt functions categories
+# UniProt functions categories
 
 In UniProt RESTful API documentation, the endpoints are organized into 5 group. Here are those categories and rbioapi functions that correspond to each one. Refer to the functions' manuals for more details.
 
-### Proteins
+## Proteins
 
-#### Proteins:
+### Proteins:
 
 -   `rba_uniprot_proteins()`
 
@@ -145,31 +147,31 @@ In UniProt RESTful API documentation, the endpoints are organized into 5 group. 
 
 -   `rba_uniprot_proteins_crossref()`
 
-#### Features
+### Features
 
 -   `rba_uniprot_features()`
 
 -   `rba_uniprot_features_search()`
 
-#### Variation
+### Variation
 
 `rba_uniprot_variation()`
 
 `rba_uniprot_variation_search()`
 
-#### Proteomics
+### Proteomics
 
 -   `rba_uniprot_proteomics()`
 
 -   `rba_uniprot_proteomics_search()`
 
-#### Antigens
+### Antigens
 
 -   `rba_uniprot_antigens()`
 
 -   `rba_uniprot_antigens_search()`
 
-### Proteomes
+## Proteomes
 
 -   `rba_uniprot_proteomes()`
 
@@ -179,7 +181,7 @@ In UniProt RESTful API documentation, the endpoints are organized into 5 group. 
 
 -   `rba_uniprot_genecentric_search()`
 
-### Taxonomy
+## Taxonomy
 
 -   `rba_uniprot_taxonomy()`
 
@@ -193,7 +195,7 @@ In UniProt RESTful API documentation, the endpoints are organized into 5 group. 
 
 -   `rba_uniprot_taxonomy_relationship()`
 
-### Coordinates
+## Coordinates
 
 -   `rba_uniprot_coordinates()`
 
@@ -203,7 +205,7 @@ In UniProt RESTful API documentation, the endpoints are organized into 5 group. 
 
 -   `rba_uniprot_coordinates_sequence()`
 
-### UniParc
+## UniParc
 
 -   `rba_uniprot_uniparc()`
 
@@ -215,7 +217,7 @@ In UniProt RESTful API documentation, the endpoints are organized into 5 group. 
 
 ------------------------------------------------------------------------
 
-## Session info {#session-info .heading2}
+# Session info {#session-info .heading2}
 
 ```{r sessionInfo, echo=FALSE}
 sessionInfo()

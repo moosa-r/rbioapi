@@ -6,8 +6,10 @@ output:
   rmarkdown::html_vignette:
     toc: true
     anchor_sections: true
+    number_sections: true
     self_contained: true
     dev: png
+    encoding: 'UTF-8'
 
 vignette: >
   %\VignetteIndexEntry{2.D: Reactome & rbioapi}
@@ -31,7 +33,7 @@ rba_options(timeout = 600)
 
 ------------------------------------------------------------------------
 
-## Introduction {#introduction .heading2}
+# Introduction {#introduction .heading2}
 
 Directly quoting from Reactome:
 
@@ -45,7 +47,7 @@ Before continuing reading this article, it is a good idea to read [Reactome Data
 
 ------------------------------------------------------------------------
 
-## Reactome analysis services {#reactome-analysis-services .heading2}
+# Reactome analysis services {#reactome-analysis-services .heading2}
 
 This section mostly revolves around `rba_reactome_analysis()` function. So, naturally, we will start with that. As explained in the function's manual, you have considerable freedom in providing the main input for this function; You can provide an R object (as a data frame, matrix, or simple vector), a URL, or a local file path. Note that the type of analysis will be decided based on whether your input is 1-dimensional or 2-dimensional. This has been explained in detail in the manual of `rba_reactome_analysis()`, so refer to that for more information.\
 `rba_reactome_analysis()` is the API equivalent of Reactome's [analyse gene list](https://reactome.org/PathwayBrowser/#TOOL=AT) tool. You can see that the function's arguments correspond to what would you choose in the webpage's wizard.
@@ -112,11 +114,11 @@ Some rbioapi Reactome analysis functions were not covered in this vignette, be s
 
 ------------------------------------------------------------------------
 
-## Reactome contents services {#reactome-contents-services .heading2}
+# Reactome contents services {#reactome-contents-services .heading2}
 
 rbioapi Reactome content services functions are those starting with rba_reactome\_\* but without "\_analysis" infix. These functions cover what you can do with objects in Reactome knowledge-base. In simpler terms, most -but not all of them- correspond to what you can find in [Reactome Pathway Browser](https://reactome.org/PathwayBrowser/ "Reactome Pathway Browser") and [search results](https://reactome.org/content/query?q=apoptosis&species=Homo+sapiens "Search results for apoptosis"). (e.g. a [pathway](https://reactome.org/content/detail/R-HSA-109581 "Apoptosis Homo sapiens"), a [reaction](https://reactome.org/content/detail/R-HSA-202939 "Caspase-mediated cleavage of E-Cadherin"), a [physical Entity](https://reactome.org/content/detail/R-HSA-350870 "Caspase-3 [cytosol]"), etc.)
 
-### Retrieve any object from Reactome knowledge-base
+## Retrieve any object from Reactome knowledge-base
 
 Using `rba_reactome_query()`, you can retrieve any object from Reactome knowledge-base. In simpler terms, what I mean by the object is roughly anything that Reactome associated an ID to it. This can range from a person's entry to proteins, reactions, pathways, species, and many more! You can explore [Reactome's data schema](https://reactome.org/content/schema/DatabaseObject "Graph Database :: Data Schema") to learn about Reactome knowledge-base objects and their organization. Here are some examples, note that you are not limited to only one ID per query. You can use a vector of inputs, the only limitation is that when you provide more than one ID, you cannot have `enhanced = TRUE`.
 
@@ -141,7 +143,7 @@ str(protein, 2)
 
 ```
 
-### Find Cross-Reference IDs in Reactome
+## Find Cross-Reference IDs in Reactome
 
 As you can see in the second example usage of we used Reactome's dbID `66247` to query CD40 protein. How did we obtain that in the first place? You can use `rba_reactome_xref` to map any cross-reference (external) IDs to Reactome IDs.
 
@@ -153,7 +155,7 @@ xref_protein <- rba_reactome_xref("CD40")
 str(xref_protein, 2)
 ```
 
-### Map Cross-Reference IDs to Reactome
+## Map Cross-Reference IDs to Reactome
 
 While we are at the cross-reference topic, here is another useful resource. Using `rba_reactome_mapping` you can find the Reactome pathways or reactions which include your external ID:
 
@@ -251,7 +253,7 @@ There are still more rbioapi f Reactome content functions that were not covered 
 
 ------------------------------------------------------------------------
 
-## Session info {#session-info .heading2}
+# Session info {#session-info .heading2}
 
 ```{r sessionInfo, echo=FALSE}
 sessionInfo()

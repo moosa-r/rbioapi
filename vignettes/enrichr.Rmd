@@ -6,8 +6,10 @@ output:
   rmarkdown::html_vignette:
     toc: true
     anchor_sections: true
+    number_sections: true
     self_contained: true
     dev: png
+    encoding: 'UTF-8'
 
 vignette: >
   %\VignetteIndexEntry{2.A: Enrichr & rbioapi}
@@ -31,11 +33,11 @@ rba_options(timeout = 600)
 
 ------------------------------------------------------------------------
 
-## Introduction {#introduction .heading2}
+# Introduction {#introduction .heading2}
 
 [Enrichr](https://maayanlab.cloud/Enrichr) is a gene-set enrichment analysis tool developed in the [Ma'ayan lab](https://icahn.mssm.edu/research/labs/maayan-laboratory).
 
-## Gene set library concept in Enrichr {#gene-set-library-concept-in-enrichr .heading2}
+# Gene set library concept in Enrichr {#gene-set-library-concept-in-enrichr .heading2}
 
 Directly quoting from Enrichr's help page;
 
@@ -62,11 +64,11 @@ DT::datatable(data = enrichr_libs,
 
 ------------------------------------------------------------------------
 
-## Enrichment analysis using Enrichr {#enrichment-analysis-using-enrichr .heading2}
+# Enrichment analysis using Enrichr {#enrichment-analysis-using-enrichr .heading2}
 
 To enrich your gene-set with Enrichr using rbioapi, you can take two approaches. we will begin with the simple one.
 
-### Approach 1: Using the Wrapper function {#approach-1-using-the-wrapper-function .heading3}
+## Approach 1: Using the Wrapper function {#approach-1-using-the-wrapper-function .heading3}
 
 Just fill the arguments of `rba_enrichr` according to the function's manual; Simply provide your gene-set as a character vector and select the libraries.
 
@@ -99,7 +101,7 @@ But when multiple libraries have been selected, the function's output will be a 
 str(enrichr_msig, 1)
 ```
 
-### Approach 2: Going step-by-step {#approach-2-going-step-by-step .heading3}
+## Approach 2: Going step-by-step {#approach-2-going-step-by-step .heading3}
 
 As you can see in `rba_enrichr()`'s name, it is a wrapper function. It basically executes the following sequence of functions:
 
@@ -118,7 +120,7 @@ enriched <- rba_enrichr_enrich(user_list_id = list_id$userListId,
 str(enriched, 1)
 ```
 
-## See also in Functions' manuals {#see-also-in-functions-manuals .heading2}
+# See also in Functions' manuals {#see-also-in-functions-manuals .heading2}
 
 Some rbioapi Enrichr functions were not covered in this vignette, be sure to check their manuals:
 
@@ -128,7 +130,7 @@ Some rbioapi Enrichr functions were not covered in this vignette, be sure to che
 
 ------------------------------------------------------------------------
 
-## Session info {#session-info .heading2}
+# Session info {#session-info .heading2}
 
 ```{r sessionInfo, echo=FALSE}
 sessionInfo()

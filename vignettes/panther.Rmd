@@ -6,9 +6,11 @@ output:
   rmarkdown::html_vignette:
     toc: true
     anchor_sections: true
+    number_sections: true
     self_contained: true
     dev: png
-
+    encoding: 'UTF-8'
+    
 vignette: >
   %\VignetteIndexEntry{2.C: PANTHER & rbioapi}
   %\VignetteEngine{knitr::rmarkdown}
@@ -31,7 +33,7 @@ rba_options(timeout = 600)
 
 ------------------------------------------------------------------------
 
-## Introduction {#introduction .heading2}
+# Introduction {#introduction .heading2}
 
 Directly quoting the the paper published by PANTHER (Protein ANalysis THrough Evolutionary Relationships) authors:
 
@@ -43,7 +45,7 @@ The provided tools in PANTHER's **RESTful API services** can be divided into 3 b
 
 ------------------------------------------------------------------------
 
-## Map genes {#map-genes .heading2}
+# Map genes {#map-genes .heading2}
 
 -   `rba_panther_mapping()`: map your gene-set to PANTHER database and retrieve attributes and annotations associated with your genes
 
@@ -53,7 +55,7 @@ The provided tools in PANTHER's **RESTful API services** can be divided into 3 b
 
 ------------------------------------------------------------------------
 
-## Get information {#get-information .heading2}
+# Get information {#get-information .heading2}
 
 -   `rba_panther_info`(): Retrieve a list of PANTHER's supported organisms, datasets, families, or pathways
 
@@ -61,9 +63,9 @@ The provided tools in PANTHER's **RESTful API services** can be divided into 3 b
 
 ------------------------------------------------------------------------
 
-## Research tools {#research-tools .heading2}
+# Research tools {#research-tools .heading2}
 
-### Gene List Analysis {#gene-list-analysis .heading3}
+## Gene List Analysis {#gene-list-analysis .heading3}
 
 `rba_panther_enrich()` is an equivalent to [Gene List analysis tool's webpage.](http://www.pantherdb.org/index.jsp "PANTHER Gene List Analysis"). Here is a usage example:
 
@@ -89,13 +91,13 @@ DT::datatable(data = enriched$result,
                              pageLength = 10))
 ```
 
-### Tree grafter {#tree-grafter .heading2}
+## Tree grafter {#tree-grafter .heading2}
 
 `rba_panther_tree_grafter()` is an equivalent to the "[Graft sequence into PANTHER library of trees](http://www.pantherdb.org/tools/sequenceSearchForm.jsp)" tool.
 
 ------------------------------------------------------------------------
 
-## Session info {#session-info .heading2}
+# Session info {#session-info .heading2}
 
 ```{r sessionInfo, echo=FALSE}
 sessionInfo()
