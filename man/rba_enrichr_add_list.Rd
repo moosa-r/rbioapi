@@ -29,7 +29,7 @@ Note that using \code{\link{rba_enrichr}} is a more convenient way to
 }
 \section{Corresponding API Resources}{
 
- "POST http://maayanlab.cloud/Enrichr/addList"
+ "POST https://maayanlab.cloud/Enrichr/addList"
 }
 
 \examples{

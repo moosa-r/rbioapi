@@ -15,7 +15,7 @@
 #'    your input gene-set.
 #'
 #' @section Corresponding API Resources:
-#'  "GET http://maayanlab.cloud/Enrichr/datasetStatistics"
+#'  "GET https://maayanlab.cloud/Enrichr/datasetStatistics"
 #'
 #' @param store_in_options logical: (default = TRUE) Should a list of available
 #' Enrichr libraries be saved as a global option?
@@ -84,7 +84,7 @@ rba_enrichr_libs <- function(store_in_options = FALSE,
 #'    your input gene-set.
 #'
 #' @section Corresponding API Resources:
-#'  "POST http://maayanlab.cloud/Enrichr/addList"
+#'  "POST https://maayanlab.cloud/Enrichr/addList"
 #'
 #' @param gene_list A vector with Entrez gene symbols.
 #' @param description (optional) A name or description to be associated with your
@@ -154,7 +154,7 @@ rba_enrichr_add_list <- function(gene_list,
 #' Retrieve a list of uploaded genes under a 'user list ID'.
 #'
 #' @section Corresponding API Resources:
-#'  "GET http://maayanlab.cloud/Enrichr/view"
+#'  "GET https://maayanlab.cloud/Enrichr/view"
 #
 #' @param user_list_id a user_list_id returned to you after uploading a gene
 #'   list using \code{\link{rba_enrichr_add_list}}
@@ -220,7 +220,7 @@ rba_enrichr_view_list <- function(user_list_id,
 #' handle api requests to the server.
 #'
 #' @section Corresponding API Resources:
-#'  "GET http://maayanlab.cloud/Enrichr/enrich"
+#'  "GET https://maayanlab.cloud/Enrichr/enrich"
 #'
 #' @param user_list_id An ID returned to you after uploading a gene
 #'   list using \code{\link{rba_enrichr_add_list}}
@@ -291,7 +291,7 @@ rba_enrichr_view_list <- function(user_list_id,
 #'   your input gene-set.
 #'
 #' @section Corresponding API Resources:
-#'  "GET http://maayanlab.cloud/Enrichr/enrich"
+#'  "GET https://maayanlab.cloud/Enrichr/enrich"
 #'
 #' @param user_list_id An ID returned to you after uploading a gene
 #'   list using \code{\link{rba_enrichr_add_list}}
@@ -436,7 +436,7 @@ rba_enrichr_enrich <- function(user_list_id,
 #'   Terms that contains that gene.
 #'
 #' @section Corresponding API Resources:
-#'  "GET http://maayanlab.cloud/Enrichr/genemap"
+#'  "GET https://maayanlab.cloud/Enrichr/genemap"
 #'
 #' @param gene character: An Entrez gene symbol.
 #' @param catagorize logical: Should the catagory informations be included?
@@ -515,9 +515,9 @@ rba_enrichr_gene_map <- function(gene,
 #'     against one or multiple Enrichr libraries
 #'   }
 #' @section Corresponding API Resources:
-#'  "GET http://maayanlab.cloud/Enrichr/datasetStatistics"\cr
-#'  "POST http://maayanlab.cloud/Enrichr/addList"\cr
-#'  "GET http://maayanlab.cloud/Enrichr/enrich"
+#'  "GET https://maayanlab.cloud/Enrichr/datasetStatistics"\cr
+#'  "POST https://maayanlab.cloud/Enrichr/addList"\cr
+#'  "GET https://maayanlab.cloud/Enrichr/enrich"
 #'
 #' @inheritParams rba_enrichr_add_list
 #' @inheritParams rba_enrichr_enrich

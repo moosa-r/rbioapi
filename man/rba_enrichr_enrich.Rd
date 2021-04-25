@@ -50,7 +50,7 @@ Note that using \code{\link{rba_enrichr}} is a more convenient way to
 }
 \section{Corresponding API Resources}{
 
- "GET http://maayanlab.cloud/Enrichr/enrich"
+ "GET https://maayanlab.cloud/Enrichr/enrich"
 }
 
 \examples{

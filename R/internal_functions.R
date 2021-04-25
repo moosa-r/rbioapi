@@ -25,7 +25,7 @@
                    enrichr = switch(
                      arg[[2]],
                      name = "Enrichr",
-                     url = "http://maayanlab.cloud",
+                     url = "https://maayanlab.cloud",
                      pth = "Enrichr/",
                      ptn = "^(https?://)?(www\\.)?maayanlab\\.cloud/Enrichr/",
                      err_ptn = "^$"

@@ -32,7 +32,7 @@ handle api requests to the server.
 }
 \section{Corresponding API Resources}{
 
- "GET http://maayanlab.cloud/Enrichr/enrich"
+ "GET https://maayanlab.cloud/Enrichr/enrich"
 }
 
 \references{

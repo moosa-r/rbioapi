@@ -23,7 +23,7 @@ This function will search your provided gene and retrieve a list of Enrichr
 }
 \section{Corresponding API Resources}{
 
- "GET http://maayanlab.cloud/Enrichr/genemap"
+ "GET https://maayanlab.cloud/Enrichr/genemap"
 }
 
 \examples{

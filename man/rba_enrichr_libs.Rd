@@ -35,7 +35,7 @@ You should call this function once per R session with the argument
 }
 \section{Corresponding API Resources}{
 
- "GET http://maayanlab.cloud/Enrichr/datasetStatistics"
+ "GET https://maayanlab.cloud/Enrichr/datasetStatistics"
 }
 
 \examples{
