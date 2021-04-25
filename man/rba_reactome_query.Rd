@@ -49,9 +49,16 @@ Using this Comprehensive function, You can Retrieve any object from
 }
 
 \examples{
+\donttest{
 rba_reactome_query(ids = c("8953958", "11982506", "R-ALL-9649879"))
+}
+\donttest{
 rba_reactome_query(ids = "R-HSA-9656256", enhanced = TRUE)
+}
+\donttest{
 rba_reactome_query(ids = "8863054", attribute_name = "displayName")
+}
+
 }
 \references{
 \itemize{

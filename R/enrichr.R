@@ -38,7 +38,9 @@
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_enrichr_libs()
+#' }
 #'
 #' @family "Enrichr API"
 #' @seealso \code{\link{rba_enrichr}}
@@ -107,8 +109,10 @@ rba_enrichr_libs <- function(store_in_options = FALSE,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_enrichr_add_list(gene_list = c("TP53", "TNF", "EGFR"),
-#'   description = "tumoral genes")
+#'      description = "tumoral genes")
+#' }
 #'
 #' @family "Enrichr API"
 #' @seealso \code{\link{rba_enrichr}}
@@ -177,7 +181,9 @@ rba_enrichr_add_list <- function(gene_list,
 #'   }
 #'
 #' @examples
-#' \dontrun{rba_enrichr_view_list(user_list_id = 11111)}
+#' \dontrun{
+#' rba_enrichr_view_list(user_list_id = 11111)
+#' }
 #'
 #' @family "Enrichr API"
 #' @export
@@ -327,13 +333,19 @@ rba_enrichr_view_list <- function(user_list_id,
 #'   }
 #'
 #' @examples
-#' \dontrun{rba_enrichr_enrich(user_list_id = "11111")}
-#' \dontrun{rba_enrichr_enrich(user_list_id = "11111",
-#'          gene_set_library = "GO_Molecular_Function_2017",
-#'          regex_library_name = FALSE)}
-#' \dontrun{rba_enrichr_enrich(user_list_id = "11111",
-#'          gene_set_library = "go",
-#'          regex_library_name = TRUE)}
+#' \dontrun{
+#' rba_enrichr_enrich(user_list_id = "11111")
+#' }
+#' \dontrun{
+#' rba_enrichr_enrich(user_list_id = "11111",
+#'     gene_set_library = "GO_Molecular_Function_2017",
+#'     regex_library_name = FALSE)
+#' }
+#' \dontrun{
+#' rba_enrichr_enrich(user_list_id = "11111",
+#'     gene_set_library = "go",
+#'     regex_library_name = TRUE)
+#' }
 #'
 #' @family "Enrichr API"
 #' @seealso \code{\link{rba_enrichr}}
@@ -458,8 +470,12 @@ rba_enrichr_enrich <- function(user_list_id,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_enrichr_gene_map(gene = "p53")
+#' }
+#' \donttest{
 #' rba_enrichr_gene_map(gene = "p53", catagorize = TRUE)
+#' }
 #'
 #' @family "Enrichr API"
 #' @export
@@ -538,13 +554,19 @@ rba_enrichr_gene_map <- function(gene,
 #'   }
 #'
 #' @examples
-#' \dontrun{rba_enrichr(gene_list = c("TP53", "TNF", "EGFR"))}
+#' \donttest{
+#' rba_enrichr(gene_list = c("TP53", "TNF", "EGFR"))
+#' }
+#' \donttest{
 #' rba_enrichr(gene_list = c("TP53", "TNF", "EGFR"),
-#'          gene_set_library = "GO_Molecular_Function_2017",
-#'          regex_library_name = FALSE)
+#'     gene_set_library = "GO_Molecular_Function_2017",
+#'     regex_library_name = FALSE)
+#' }
+#' \donttest{
 #' rba_enrichr(gene_list = c("TP53", "TNF", "EGFR"),
-#'          gene_set_library = "go",
-#'          regex_library_name = TRUE)
+#'     gene_set_library = "go",
+#'     regex_library_name = TRUE)
+#' }
 #'
 #' @family "Enrichr API"
 #' @export

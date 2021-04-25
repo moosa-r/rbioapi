@@ -79,9 +79,16 @@ Because this function validates your provided changes, please
 }
 \examples{
 rba_options()
-\dontrun{rba_options(verbose = FALSE)}
-\dontrun{rba_options(save_file = TRUE)}
-\dontrun{rba_options(diagnostics = TRUE, progress = TRUE)}
+\dontrun{
+rba_options(verbose = FALSE)
+}
+\dontrun{
+rba_options(save_file = TRUE)
+}
+\dontrun{
+rba_options(diagnostics = TRUE, progress = TRUE)
+}
+
 }
 \seealso{
 Other "Helper functions": 

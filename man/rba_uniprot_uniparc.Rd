@@ -66,9 +66,16 @@ Use this function to retrieve UniParc entries. You can use either -and only
 }
 
 \examples{
+\donttest{
 rba_uniprot_uniparc(upi = "UPI00000000C9")
+}
+\donttest{
 rba_uniprot_uniparc(upi = "UPI00000000C9")
+}
+\donttest{
 rba_uniprot_uniparc(upi = "UPI00000000C9", rf_active = FALSE)
+}
+
 }
 \references{
 \itemize{

@@ -59,7 +59,9 @@ STRING currently maps to and retrieve enrichment results based on Gene
 }
 
 \examples{
+\donttest{
 rba_string_enrichment(ids = c("TP53", "TNF", "EGFR"), species = 9606)
+}
 
 }
 \references{

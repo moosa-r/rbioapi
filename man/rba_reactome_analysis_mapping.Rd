@@ -54,7 +54,10 @@ Use this function to map molecule identifiers of different species to
 }
 
 \examples{
+\donttest{
 rba_reactome_analysis_mapping(c("Q8SQ34", "cd40"))
+}
+
 }
 \references{
 \itemize{
@@ -68,7 +71,7 @@ rba_reactome_analysis_mapping(c("Q8SQ34", "cd40"))
   }
 }
 \seealso{
-Other "Reactome Analysis Service, ": 
+Other "Reactome Analysis Service": 
 \code{\link{rba_reactome_analysis_download}()},
 \code{\link{rba_reactome_analysis_import}()},
 \code{\link{rba_reactome_analysis_pdf}()},
@@ -76,4 +79,4 @@ Other "Reactome Analysis Service, ":
 \code{\link{rba_reactome_analysis_token}()},
 \code{\link{rba_reactome_analysis}()}
 }
-\concept{"Reactome Analysis Service, "}
+\concept{"Reactome Analysis Service"}

@@ -49,6 +49,10 @@
 #'
 #' @return NULL, Connection test for the supported servers will be displayed
 #'   in console
+#'
+#' @examples
+#' rba_connection_test()
+#'
 #' @family "Helper functions"
 #' @keywords Helper
 #' @export
@@ -139,9 +143,16 @@ rba_connection_test <- function(diagnostics = FALSE) {
 #'
 #' @examples
 #' rba_options()
-#' \dontrun{rba_options(verbose = FALSE)}
-#' \dontrun{rba_options(save_file = TRUE)}
-#' \dontrun{rba_options(diagnostics = TRUE, progress = TRUE)}
+#' \dontrun{
+#' rba_options(verbose = FALSE)
+#' }
+#' \dontrun{
+#' rba_options(save_file = TRUE)
+#' }
+#' \dontrun{
+#' rba_options(diagnostics = TRUE, progress = TRUE)
+#' }
+#'
 #' @family "Helper functions"
 #' @keywords Helper
 #' @export
@@ -243,21 +254,25 @@ rba_options <- function(diagnostics = NA,
 #' @return A named list where each element corresponds to a request's page.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' rba_pages(input_call = quote(rba_uniprot_taxonomy(ids = 189831,
-#'                                                      hierarchy = "siblings",
-#'                                                      page_size = 50,
-#'                                                      page_number = "pages:1:5"
-#'                                                      )))
-#' rba_pages(input_call = quote(rba_uniprot_taxonomy_name(name = "adenovirus",
-#'                                                        field = "scientific",
-#'                                                        search_type = "contain",
-#'                                                        page_size = 200,
-#'                                                        page_number = "pages:1:5",
-#'                                                        verbose = FALSE)))
-#' rba_pages(input_call = quote(rba_panther_info(what = "families",
-#'                                               families_page = "pages:9:11")))
+#'     hierarchy = "siblings",
+#'     page_size = 50,
+#'     page_number = "pages:1:5")))
 #' }
+#' \donttest{
+#' rba_pages(input_call = quote(rba_uniprot_taxonomy_name(name = "adenovirus",
+#'     field = "scientific",
+#'     search_type = "contain",
+#'     page_size = 200,
+#'     page_number = "pages:1:5",
+#'     verbose = FALSE)))
+#' }
+#' \donttest{
+#' rba_pages(input_call = quote(rba_panther_info(what = "families",
+#'     families_page = "pages:9:11")))
+#' }
+#'
 #' @family "Helper functions"
 #' @keywords Helper
 #' @export

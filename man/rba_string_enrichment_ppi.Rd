@@ -37,8 +37,11 @@ Even when there is no annotation for your input proteins, STRING can Compare
 }
 
 \examples{
+\donttest{
 rba_string_enrichment_ppi(ids = c("p53", "BRCA1", "cdk2", "Q99835",
-"CDC42", "CDK1", "KIF23", "PLK1", "RAC2", "RACGAP1"), species = 9606)
+       "CDC42", "CDK1", "KIF23", "PLK1", "RAC2", "RACGAP1"),
+    species = 9606)
+}
 
 }
 \references{

@@ -42,8 +42,11 @@ By providing an external identifier from a given resource, you can retrieve
 }
 
 \examples{
+\donttest{
 rba_reactome_mapping(id = "PTEN", resource =  "UniProt",
-  map_to = "reactions", species = 9606)
+    map_to = "reactions", species = 9606)
+}
+
 }
 \references{
 \itemize{

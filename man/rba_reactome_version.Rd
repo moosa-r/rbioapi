@@ -22,7 +22,10 @@ Returns the current version of Reactome database.
 }
 
 \examples{
+\donttest{
 rba_reactome_version()
+}
+
 }
 \references{
 \itemize{

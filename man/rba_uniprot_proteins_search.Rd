@@ -105,13 +105,28 @@ Note that this is a search function. Thus, you are not required to fill
 }
 
 \examples{
+\donttest{
 rba_uniprot_proteins_search(accession = "Q99616")
+}
+\donttest{
 rba_uniprot_proteins_search(gene = "cd40")
+}
+\donttest{
 rba_uniprot_proteins_search(gene = "cd40 ligand")
+}
+\donttest{
 rba_uniprot_proteins_search(gene = "cd40",  reviewed = TRUE)
+}
+\donttest{
 rba_uniprot_proteins_search(gene = "cd40",  reviewed = TRUE, isoform = 1)
+}
+\donttest{
 rba_uniprot_proteins_search(keyword = "Inhibition of host chemokines by virus")
+}
+\donttest{
 rba_uniprot_proteins_search(keyword = "chemokines")
+}
+
 }
 \references{
 \itemize{

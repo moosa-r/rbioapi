@@ -68,11 +68,18 @@ Note that this is a search function. Thus, you are not required to fill
 }
 
 \examples{
+\donttest{
 rba_uniprot_proteomics_search(peptide = "MEDYTKIEK")
+}
+\donttest{
 rba_uniprot_proteomics_search(peptide = "MEDYTKIEK")
-\dontrun{rba_uniprot_proteomics_search(taxid = 9606,
+}
+\dontrun{
+### this will generate a very large response!
+  rba_uniprot_proteomics_search(taxid = 9606,
   data_source = "PeptideAtlas",
-  progress = TRUE, timeout = 999999, unique = TRUE)}
+  progress = TRUE, timeout = 999999, unique = TRUE)
+}
 
 }
 \references{

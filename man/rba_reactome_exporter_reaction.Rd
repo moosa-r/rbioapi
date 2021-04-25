@@ -89,13 +89,16 @@ Note that this function will save Reaction-like event separately and out
 }
 
 \examples{
-\dontrun{rba_reactome_exporter_diagram(event_id = "R-HSA-6787403",
-  create_document = FALSE)}
-\dontrun{rba_reactome_exporter_diagram(event_id = "R-HSA-177929")
-# this will yield error!}
-\dontrun{rba_reactome_exporter_diagram(event_id = "R-HSA-6787403",
-  output_format = "svg",
-  save_to = "reactome_reacion_image.svg")}
+\dontrun{
+rba_reactome_exporter_diagram(event_id = "R-HSA-6787403",
+    create_document = FALSE)
+}
+\dontrun{
+rba_reactome_exporter_diagram(event_id = "R-HSA-6787403",
+     output_format = "svg",
+     save_to = "reactome_reacion_image.svg")
+}
+
 }
 \references{
 \itemize{

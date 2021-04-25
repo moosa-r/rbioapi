@@ -79,15 +79,19 @@ Note that this function will return interactions between your set of
 }
 
 \examples{
+\donttest{
 rba_string_interactions_network(ids = c("9606.ENSP00000269305",
-          "9606.ENSP00000398698",
-          "9606.ENSP00000275493"),
-  network_type = "functional")
+    "9606.ENSP00000398698",
+    "9606.ENSP00000275493"),
+    network_type = "functional")
+}
+\donttest{
 rba_string_interactions_network(ids = c("9606.ENSP00000269305",
-          "9606.ENSP00000398698",
-          "9606.ENSP00000275493"),
-  species = 9606,
-  add_nodes = 10)
+    "9606.ENSP00000398698",
+    "9606.ENSP00000275493"),
+    species = 9606,
+    add_nodes = 10)
+}
 
 }
 \references{

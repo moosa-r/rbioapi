@@ -48,8 +48,14 @@ For more information about how UniProt imports and calculates genomic
 }
 
 \examples{
+\donttest{
 rba_uniprot_coordinates_sequence(accession = "P25942", p_position = 1)
-rba_uniprot_coordinates_sequence(accession = "P25942", p_start = 1, p_end = 277)
+}
+\donttest{
+rba_uniprot_coordinates_sequence(accession = "P25942",
+    p_start = 1, p_end = 277)
+}
+
 }
 \references{
 \itemize{

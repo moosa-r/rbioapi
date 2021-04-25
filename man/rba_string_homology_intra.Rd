@@ -44,7 +44,9 @@ Note that this function will retrieve similarity scores of different
 }
 
 \examples{
+\donttest{
 rba_string_homology_intra(ids = c("CDK1", "CDK2"), species = 9606)
+}
 
 }
 \references{

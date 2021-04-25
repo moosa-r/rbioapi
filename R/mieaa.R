@@ -13,8 +13,12 @@
 #'   string with the scientific name of that specie.
 #'
 #' @examples
+#' \donttest{
 #' .rba_mieaa_species(9606)
+#' }
+#' \donttest{
 #' .rba_mieaa_species("hsa", to_name = TRUE)
+#' }
 #'
 #' @family "miEAA API"
 #' @export
@@ -101,7 +105,9 @@
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_mieaa_cats("mature", "Homo sapiens")
+#' }
 #'
 #' @family "miEAA API"
 #' @export
@@ -188,9 +194,11 @@ rba_mieaa_cats <- function(mirna_type, species, ...) {
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' Sys.sleep(1) # to prevent 429 error during R CMD check
 #' rba_mieaa_convert_version(mirna = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
-#'   mirna_type = "mature", input_version = 22, output_version =  16)
+#'     mirna_type = "mature", input_version = 22, output_version =  16)
+#' }
 #'
 #' @family "miEAA API"
 #' @export
@@ -294,9 +302,11 @@ rba_mieaa_convert_version <- function(mirna,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' Sys.sleep(1) # to prevent 429 error during R CMD check
 #' rba_mieaa_convert_type(mirna = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
-#' input_type = "mature")
+#'     input_type = "mature")
+#' }
 #'
 #' @family "miEAA API"
 #' @export
@@ -444,12 +454,14 @@ rba_mieaa_convert_type <- function(mirna,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' Sys.sleep(1) # to prevent 429 error during R CMD check
 #' rba_mieaa_enrich_submit(test_set = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
-#'   mirna_type = "mature",
-#'   test_type = "GSEA",
-#'   species = 9606,
-#'   categories = NA)
+#'     mirna_type = "mature",
+#'     test_type = "GSEA",
+#'     species = 9606,
+#'     categories = NA)
+#' }
 #'
 #' @family "miEAA API"
 #' @export
@@ -593,8 +605,10 @@ rba_mieaa_enrich_submit <- function(test_set,
 #'   }
 #'
 #' @examples
+#' \dontrun{
 #' Sys.sleep(1) # to prevent 429 error during R CMD check
-#' \dontrun{rba_mieaa_enrich_status("f52d1aef-6d3d-4d51-9020-82e68fe99012")}
+#' rba_mieaa_enrich_status("f52d1aef-6d3d-4d51-9020-82e68fe99012")
+#' }
 #'
 #' @family "miEAA API"
 #' @export
@@ -662,7 +676,9 @@ rba_mieaa_enrich_status <- function(job_id, ...) {
 #'   }
 #'
 #' @examples
-#' \dontrun{rba_mieaa_enrich_results("f52d1aef-6d3d-4d51-9020-82e68fe99012")}
+#' \dontrun{
+#' rba_mieaa_enrich_results("f52d1aef-6d3d-4d51-9020-82e68fe99012")
+#' }
 #'
 #' @family "miEAA API"
 #' @export
@@ -766,11 +782,13 @@ rba_mieaa_enrich_results <- function(job_id,
 #'   }
 #'
 #' @examples
-#' \dontrun{rba_mieaa_enrich(test_set = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
-#'   input_type = "mature",
-#'   test_type = "GSEA",
-#'   species = 9606,
-#'   categories = NA)}
+#' \dontrun{
+#' rba_mieaa_enrich(test_set = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
+#'      mirna_type = "mature",
+#'      test_type = "GSEA",
+#'      species = 9606,
+#'      categories = NA)
+#' }
 #'
 #' @family "miEAA API"
 #' @export

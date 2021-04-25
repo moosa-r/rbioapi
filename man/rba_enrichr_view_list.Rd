@@ -26,7 +26,9 @@ Retrieve a list of uploaded genes under a 'user list ID'.
 }
 
 \examples{
-\dontrun{rba_enrichr_view_list(user_list_id = 11111)}
+\dontrun{
+rba_enrichr_view_list(user_list_id = 11111)
+}
 
 }
 \references{

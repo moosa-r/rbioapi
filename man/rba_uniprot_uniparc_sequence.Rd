@@ -52,7 +52,10 @@ Retrieve UniParc Entry by providing an exact sequence. Note that partial
 }
 
 \examples{
+\donttest{
 rba_uniprot_uniparc_sequence("GMRSCPRGCSQRGRCENGRCVCNPGYTGEDC")
+}
+
 }
 \references{
 \itemize{

@@ -64,9 +64,16 @@ A 'Physical Entity' Instance could include an individual molecule,
 }
 
 \examples{
+\donttest{
 rba_reactome_participants("R-HSA-5682012")
+}
+\donttest{
 rba_reactome_participants("R-HSA-5682012", only_physical_entities = TRUE)
+}
+\donttest{
 rba_reactome_participants("R-HSA-5682012", only_reference_entities = TRUE)
+}
+
 }
 \references{
 \itemize{

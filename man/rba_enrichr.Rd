@@ -67,13 +67,19 @@ This function will call other rba_enrichr_*** functions with the following
 }
 
 \examples{
-\dontrun{rba_enrichr(gene_list = c("TP53", "TNF", "EGFR"))}
+\donttest{
+rba_enrichr(gene_list = c("TP53", "TNF", "EGFR"))
+}
+\donttest{
 rba_enrichr(gene_list = c("TP53", "TNF", "EGFR"),
-         gene_set_library = "GO_Molecular_Function_2017",
-         regex_library_name = FALSE)
+    gene_set_library = "GO_Molecular_Function_2017",
+    regex_library_name = FALSE)
+}
+\donttest{
 rba_enrichr(gene_list = c("TP53", "TNF", "EGFR"),
-         gene_set_library = "go",
-         regex_library_name = TRUE)
+    gene_set_library = "go",
+    regex_library_name = TRUE)
+}
 
 }
 \references{

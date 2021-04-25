@@ -60,12 +60,19 @@ Reactome maintain a locally host a version of IntAct(Static) interactions
 }
 
 \examples{
+\donttest{
 rba_reactome_interactors_static(proteins = "Q9BXM7-1",
-  endpoint = "pathways", species = "Homo sapiens")
+    endpoint = "pathways", species = "Homo sapiens")
+}
+\donttest{
 rba_reactome_interactors_static(proteins = c("Q9BXM7-1", "Q13501"),
-  endpoint = "details")
+    endpoint = "details")
+}
+\donttest{
 rba_reactome_interactors_static(proteins = c("Q9BXM7-1", "Q13501"),
-  endpoint = "summary")
+    endpoint = "summary")
+}
+
 }
 \references{
 \itemize{

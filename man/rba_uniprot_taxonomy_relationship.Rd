@@ -31,7 +31,10 @@ in the taxonomy tree of
 }
 
 \examples{
+\donttest{
 rba_uniprot_taxonomy_relationship(from = 9606, to = 10090)
+}
+
 }
 \references{
 \itemize{

@@ -29,7 +29,10 @@ Use this function to retrieve lowest common ancestor (LCA) of two
 }
 
 \examples{
+\donttest{
 rba_uniprot_taxonomy_lca(c(9606,10090,9823,7712))
+}
+
 }
 \references{
 \itemize{

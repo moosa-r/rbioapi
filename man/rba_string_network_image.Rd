@@ -91,17 +91,23 @@ Depending on that you provided a single protein ID or more than one protein
 }
 
 \examples{
-\dontrun{rba_string_network_image(ids = c("9606.ENSP00000269305",
-          "9606.ENSP00000398698",
-          "9606.ENSP00000275493"),
-  network_type = "functional",
-  save_image = FALSE)}
-\dontrun{rba_string_network_image(ids = c("TP53", "TNF", "EGFR"),
-  species = 9606,
-  save_image = TRUE)}
-\dontrun{rba_string_network_image(ids = "9606.ENSP00000269305",
-image_format = "highres_image",
-save_image = file.path(getwd(), "TP53_network.png"))}
+\dontrun{
+rba_string_network_image(ids = c("9606.ENSP00000269305",
+    "9606.ENSP00000398698",
+    "9606.ENSP00000275493"),
+    network_type = "functional",
+    save_image = FALSE)
+}
+\dontrun{
+rba_string_network_image(ids = c("TP53", "TNF", "EGFR"),
+    species = 9606,
+    save_image = TRUE)
+}
+\dontrun{
+rba_string_network_image(ids = "9606.ENSP00000269305",
+    image_format = "highres_image",
+    save_image = file.path(getwd(), "TP53_network.png"))
+}
 
 }
 \references{

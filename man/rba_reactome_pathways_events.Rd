@@ -44,9 +44,14 @@ By Reactome's definition, Events are the building blocks of biological
 }
 
 \examples{
+\donttest{
 rba_reactome_pathways_events(event_id = "R-HSA-5673001")
+}
+\donttest{
 rba_reactome_pathways_events(event_id = "R-HSA-5673001",
-  attribute_name = "displayName")
+    attribute_name = "displayName")
+}
+
 }
 \references{
 \itemize{

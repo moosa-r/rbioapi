@@ -62,8 +62,13 @@ providing their
 }
 
 \examples{
+\donttest{
 rba_uniprot_taxonomy(ids = c(9606, 10090))
+}
+\donttest{
 rba_uniprot_taxonomy(ids = 9989, hierarchy = "children")
+}
+
 }
 \references{
 \itemize{

@@ -48,10 +48,14 @@ Note that this function will return the highest similarity score hits of
 }
 
 \examples{
+\donttest{
 rba_string_homology_inter(ids = "p53",
-          species = 9606,
-          species_b = c(6087, 7070))
+    species = 9606,
+    species_b = c(6087, 7070))
+}
+\donttest{
 rba_string_homology_inter(ids = "ENSP00000269305", species = 9606)
+}
 
 }
 \references{

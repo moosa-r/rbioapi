@@ -121,15 +121,24 @@ If the function is called with create_document = FALSE:\cr
 }
 
 \examples{
-\dontrun{rba_reactome_exporter_diagram(event_id = "R-HSA-177929",
-  create_document = FALSE)}
-\dontrun{rba_reactome_exporter_diagram(event_id = "R-HSA-6787403",
-  create_document = FALSE)}
-\dontrun{rba_reactome_exporter_diagram(event_id = "R-HSA-177929",
-  create_document = TRUE)}
-\dontrun{rba_reactome_exporter_diagram(event_id = "R-HSA-177929",
-  output_format = "svg",
-  save_to = "reactome_event_diagram.svg")}
+\dontrun{
+rba_reactome_exporter_diagram(event_id = "R-HSA-177929",
+  create_document = FALSE)
+}
+\dontrun{
+rba_reactome_exporter_diagram(event_id = "R-HSA-6787403",
+    create_document = FALSE)
+}
+\dontrun{
+rba_reactome_exporter_diagram(event_id = "R-HSA-177929",
+    create_document = TRUE)
+}
+\dontrun{
+rba_reactome_exporter_diagram(event_id = "R-HSA-177929",
+    output_format = "svg",
+    save_to = "reactome_event_diagram.svg")
+}
+
 }
 \references{
 \itemize{

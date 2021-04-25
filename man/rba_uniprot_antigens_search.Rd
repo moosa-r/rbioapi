@@ -54,7 +54,10 @@ Note that this is a search function. Thus, you are not required to fill
 }
 
 \examples{
+\donttest{
 rba_uniprot_antigens_search(antigen_id = "HPA001060")
+}
+
 }
 \references{
 \itemize{

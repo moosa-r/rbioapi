@@ -30,7 +30,10 @@ Use this function to retrieve the taxonomic lineage of your provided
 }
 
 \examples{
+\donttest{
 rba_uniprot_taxonomy_lineage(id = 9989)
+}
+
 }
 \references{
 \itemize{

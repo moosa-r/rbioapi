@@ -96,13 +96,28 @@
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_proteins_search(accession = "Q99616")
+#' }
+#' \donttest{
 #' rba_uniprot_proteins_search(gene = "cd40")
+#' }
+#' \donttest{
 #' rba_uniprot_proteins_search(gene = "cd40 ligand")
+#' }
+#' \donttest{
 #' rba_uniprot_proteins_search(gene = "cd40",  reviewed = TRUE)
+#' }
+#' \donttest{
 #' rba_uniprot_proteins_search(gene = "cd40",  reviewed = TRUE, isoform = 1)
+#' }
+#' \donttest{
 #' rba_uniprot_proteins_search(keyword = "Inhibition of host chemokines by virus")
+#' }
+#' \donttest{
 #' rba_uniprot_proteins_search(keyword = "chemokines")
+#' }
+#'
 #' @family "UniProt API, Proteins"
 #' @export
 rba_uniprot_proteins_search <- function(accession = NA,
@@ -269,9 +284,16 @@ rba_uniprot_proteins_search <- function(accession = NA,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_proteins(accession = "P01730")
+#' }
+#' \donttest{
 #' rba_uniprot_proteins(accession = "P01730", interaction = TRUE)
+#' }
+#' \donttest{
 #' rba_uniprot_proteins(accession = "Q29983", isoforms = TRUE)
+#' }
+#'
 #' @family "UniProt API, Proteins"
 #' @export
 rba_uniprot_proteins <- function(accession,
@@ -359,9 +381,16 @@ rba_uniprot_proteins <- function(accession,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_proteins_crossref("cd40", "hgnc")
+#' }
+#' \donttest{
 #' rba_uniprot_proteins_crossref("cd40", "hgnc", reviewed = TRUE)
+#' }
+#' \donttest{
 #' rba_uniprot_proteins_crossref("mica", "hgnc", isoform = 0)
+#' }
+#'
 #' @family "UniProt API, Proteins"
 #' @export
 rba_uniprot_proteins_crossref <- function(db_id,
@@ -478,13 +507,26 @@ rba_uniprot_proteins_crossref <- function(db_id,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_features_search(accession = "Q99616")
+#' }
+#' \donttest{
 #' rba_uniprot_features_search(gene = "cd40")
+#' }
+#' \donttest{
 #' rba_uniprot_features_search(gene = "cd40 ligand")
+#' }
+#' \donttest{
 #' rba_uniprot_features_search(gene = "cd40",  reviewed = TRUE)
+#' }
+#' \donttest{
 #' rba_uniprot_features_search(accession = "Q99616",
-#'   categories = c("MOLECULE_PROCESSING", "TOPOLOGY"))
+#'     categories = c("MOLECULE_PROCESSING", "TOPOLOGY"))
+#' }
+#' \donttest{
 #' rba_uniprot_features_search(accession = "Q99616", types = "DISULFID")
+#' }
+#'
 #' @family "UniProt API, Features"
 #' @export
 rba_uniprot_features_search <- function(accession = NA,
@@ -796,8 +838,12 @@ rba_uniprot_features_search <- function(accession = NA,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_features("Q99616")
+#' }
+#' \donttest{
 #' rba_uniprot_features(accession = "Q99616", types = "DISULFID")
+#' }
 #'
 #' @family "UniProt API, Features"
 #' @export
@@ -970,10 +1016,17 @@ rba_uniprot_features <- function(accession,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_variation_search(accession = "P05067")
+#' }
+#' \donttest{
 #' rba_uniprot_variation_search(disease = "alzheimer disease, 18")
+#' }
+#' \donttest{
 #' rba_uniprot_variation_search(disease = "alzheimer",
-#' wild_type = "A", alternative_sequence = "T")
+#'     wild_type = "A", alternative_sequence = "T")
+#' }
+#'
 #' @family "UniProt API, Variation"
 #' @export
 rba_uniprot_variation_search <- function(accession = NA,
@@ -1166,9 +1219,15 @@ rba_uniprot_variation_search <- function(accession = NA,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_variation(id = "rs121434451", id_type = "dbsnp")
+#' }
+#' \donttest{
 #' rba_uniprot_variation(id = "NC_000008.11:g.22119227C>T", id_type = "hgvs")
+#' }
+#' \donttest{
 #' rba_uniprot_variation(id = "O43593", id_type = "uniprot")
+#' }
 #'
 #' @family "UniProt API, Variation"
 #' @export
@@ -1326,11 +1385,18 @@ rba_uniprot_variation <- function(id,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_proteomics_search(peptide = "MEDYTKIEK")
+#' }
+#' \donttest{
 #' rba_uniprot_proteomics_search(peptide = "MEDYTKIEK")
-#' \dontrun{rba_uniprot_proteomics_search(taxid = 9606,
+#' }
+#' \dontrun{
+#' ### this will generate a very large response!
+#'   rba_uniprot_proteomics_search(taxid = 9606,
 #'   data_source = "PeptideAtlas",
-#'   progress = TRUE, timeout = 999999, unique = TRUE)}
+#'   progress = TRUE, timeout = 999999, unique = TRUE)
+#' }
 #'
 #' @family "UniProt API, Proteomics"
 #' @export
@@ -1438,7 +1504,10 @@ rba_uniprot_proteomics_search <- function(accession = NA,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_proteomics(accession = "P25942")
+#' }
+#'
 #' @family "UniProt API, Proteomics"
 #' @export
 rba_uniprot_proteomics <- function(accession,
@@ -1512,7 +1581,10 @@ rba_uniprot_proteomics <- function(accession,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_antigens_search(antigen_id = "HPA001060")
+#' }
+#'
 #' @family "UniProt API, Antigen"
 #' @export
 rba_uniprot_antigens_search <- function(accession = NA,
@@ -1606,7 +1678,10 @@ rba_uniprot_antigens_search <- function(accession = NA,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_antigens("P04626")
+#' }
+#'
 #' @family "UniProt API, Antigen"
 #' @export
 rba_uniprot_antigens <- function(accession,

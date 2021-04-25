@@ -70,7 +70,10 @@ In version 73 (11 June 2020), using an orthology-based approach,
 }
 
 \examples{
+\donttest{
 rba_reactome_analysis_species(species_dbid = 48892)
+}
+
 }
 \references{
 \itemize{
@@ -86,7 +89,7 @@ rba_reactome_analysis_species(species_dbid = 48892)
 \seealso{
 \code{\link{rba_reactome_orthology}}
 
-Other "Reactome Analysis Service, ": 
+Other "Reactome Analysis Service": 
 \code{\link{rba_reactome_analysis_download}()},
 \code{\link{rba_reactome_analysis_import}()},
 \code{\link{rba_reactome_analysis_mapping}()},
@@ -94,4 +97,4 @@ Other "Reactome Analysis Service, ":
 \code{\link{rba_reactome_analysis_token}()},
 \code{\link{rba_reactome_analysis}()}
 }
-\concept{"Reactome Analysis Service, "}
+\concept{"Reactome Analysis Service"}

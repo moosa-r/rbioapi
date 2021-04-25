@@ -52,10 +52,17 @@ Use this function to search the event hierarcht and retireve a list of
 }
 
 \examples{
+\donttest{
 rba_reactome_pathways_low(entity_id = "R-HSA-199420")
+}
+\donttest{
 rba_reactome_pathways_low(entity_id = "R-HSA-199420", with_diagram = TRUE)
+}
+\donttest{
 rba_reactome_pathways_low(entity_id = "R-HSA-199420", with_diagram = TRUE,
-  all_forms = TRUE)
+    all_forms = TRUE)
+}
+
 }
 \references{
 \itemize{

@@ -48,7 +48,9 @@ STRING currently maps to and retrieve enrichment results based on Gene
 }
 
 \examples{
+\donttest{
 rba_string_annotations(ids = "TP53", species = 9606)
+}
 
 }
 \references{

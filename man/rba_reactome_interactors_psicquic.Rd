@@ -48,13 +48,20 @@ You can call this function in two scenarios:
 }
 
 \examples{
+\donttest{
 rba_reactome_interactors_psicquic()
+}
+\donttest{
 rba_reactome_interactors_psicquic(proteins = c("TP53", "MYC"),
-  resource = "BioGrid",
-  details = FALSE)
+    resource = "BioGrid",
+    details = FALSE)
+}
+\donttest{
 rba_reactome_interactors_psicquic(proteins = c("TP53", "MYC"),
-  resource = "BioGrid",
-  details = TRUE)
+    resource = "BioGrid",
+    details = TRUE)
+}
+
 }
 \references{
 \itemize{

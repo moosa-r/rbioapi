@@ -40,9 +40,16 @@ Use this function to retrieve a UniProt Entry by it's UniProt accession.
 }
 
 \examples{
+\donttest{
 rba_uniprot_proteins(accession = "P01730")
+}
+\donttest{
 rba_uniprot_proteins(accession = "P01730", interaction = TRUE)
+}
+\donttest{
 rba_uniprot_proteins(accession = "Q29983", isoforms = TRUE)
+}
+
 }
 \references{
 \itemize{

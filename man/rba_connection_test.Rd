@@ -27,6 +27,10 @@ This function attempts to send a simple query to the supported services.
   'diagnostic = TRUE' and include the output messages in your support
   request.
 }
+\examples{
+rba_connection_test()
+
+}
 \seealso{
 Other "Helper functions": 
 \code{\link{rba_options}()},

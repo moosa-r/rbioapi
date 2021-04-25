@@ -39,7 +39,9 @@ This function Calls STRING's API to Convert a set of identifiers
 }
 
 \examples{
+\donttest{
 rba_string_map_ids(ids = c("TP53", "TNF", "EGFR"), species = 9606)
+}
 
 }
 \references{

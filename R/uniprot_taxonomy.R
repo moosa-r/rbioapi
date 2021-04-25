@@ -29,7 +29,10 @@
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_taxonomy_lca(c(9606,10090,9823,7712))
+#' }
+#'
 #' @family "UniProt API, Taxonomy"
 #' @export
 rba_uniprot_taxonomy_lca <- function(ids,
@@ -108,8 +111,13 @@ rba_uniprot_taxonomy_lca <- function(ids,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_taxonomy(ids = c(9606, 10090))
+#' }
+#' \donttest{
 #' rba_uniprot_taxonomy(ids = 9989, hierarchy = "children")
+#' }
+#'
 #' @family "UniProt API, Taxonomy"
 #' @export
 rba_uniprot_taxonomy <- function(ids,
@@ -213,7 +221,10 @@ rba_uniprot_taxonomy <- function(ids,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_taxonomy_lineage(id = 9989)
+#' }
+#'
 #' @family "UniProt API, Taxonomy"
 #' @export
 rba_uniprot_taxonomy_lineage <- function(id,
@@ -280,10 +291,15 @@ rba_uniprot_taxonomy_lineage <- function(id,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_taxonomy_name(name = "homo", field = "scientific",
-#'   search_type = "start_with")
+#'     search_type = "start_with")
+#' }
+#' \donttest{
 #' rba_uniprot_taxonomy_name(name = "adenovirus", field = "scientific",
-#'   search_type = "contain", page_size = 200, page_number = 2)
+#'     search_type = "contain", page_size = 200, page_number = 2)
+#' }
+#'
 #' @family "UniProt API, Taxonomy"
 #' @export
 rba_uniprot_taxonomy_name <- function(name,
@@ -388,8 +404,13 @@ rba_uniprot_taxonomy_name <- function(name,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_taxonomy_path(id = 9606, direction = "TOP", depth = 3)
+#' }
+#' \donttest{
 #' rba_uniprot_taxonomy_path(id = 207598, direction = "BOTTOM", depth = 3)
+#' }
+#'
 #' @family "UniProt API, Taxonomy"
 #' @export
 rba_uniprot_taxonomy_path <- function(id,
@@ -462,7 +483,10 @@ rba_uniprot_taxonomy_path <- function(id,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_taxonomy_relationship(from = 9606, to = 10090)
+#' }
+#'
 #' @family "UniProt API, Taxonomy"
 #' @export
 rba_uniprot_taxonomy_relationship <- function(from,

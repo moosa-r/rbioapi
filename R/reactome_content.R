@@ -23,7 +23,10 @@
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_reactome_version()
+#' }
+#'
 #' @family "Reactome Content Service, Database Info Queries"
 #' @export
 rba_reactome_version <- function(...) {
@@ -79,8 +82,13 @@ rba_reactome_version <- function(...) {
 #'   }
 #'
 #' @examples
-#'  rba_reactome_diseases()
-#'  rba_reactome_diseases(doid = TRUE)
+#' \donttest{
+#' rba_reactome_diseases()
+#' }
+#' \donttest{
+#' rba_reactome_diseases(doid = TRUE)
+#' }
+#'
 #' @family "Reactome Content Service, Disease Related Queries"
 #' @export
 rba_reactome_diseases <- function(doid = FALSE,
@@ -156,10 +164,15 @@ rba_reactome_diseases <- function(doid = FALSE,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_reactome_complex_subunits(complex_id = "R-HSA-5674003",
-#'   exclude_structures = FALSE)
+#'     exclude_structures = FALSE)
+#' }
+#' \donttest{
 #' rba_reactome_complex_subunits(complex_id = "R-HSA-109783",
-#'   exclude_structures = TRUE)
+#'     exclude_structures = TRUE)
+#' }
+#'
 #' @family "Reactome Content Service, Physical Entity Queries"
 #' @export
 rba_reactome_complex_subunits <- function(complex_id,
@@ -226,8 +239,13 @@ rba_reactome_complex_subunits <- function(complex_id,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_reactome_complex_list(id = "3845", resource = "NCBI Gene")
+#' }
+#' \donttest{
 #' rba_reactome_complex_list(id = "P00533", resource = "UniProt")
+#' }
+#'
 #' @family "Reactome Content Service, Physical Entity Queries"
 #' @export
 rba_reactome_complex_list <- function(id,
@@ -288,7 +306,10 @@ rba_reactome_complex_list <- function(id,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_reactome_participant_of(entity_id = "R-HSA-199420")
+#' }
+#'
 #' @family "Reactome Content Service, Physical Entity Queries"
 #' @seealso
 #' \code{\link{rba_reactome_participants}}
@@ -348,7 +369,10 @@ rba_reactome_participant_of <- function(entity_id,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_reactome_entity_other_forms("R-HSA-199420")
+#' }
+#'
 #' @family "Reactome Content Service, Physical Entity Queries"
 #' @export
 rba_reactome_entity_other_forms <- function(entity_id,
@@ -414,7 +438,10 @@ rba_reactome_entity_other_forms <- function(entity_id,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_reactome_event_ancestors("R-HSA-5673001")
+#' }
+#'
 #' @family "Reactome Content Service, Queries Related to Events"
 #' @export
 rba_reactome_event_ancestors <- function(event_id,
@@ -482,8 +509,13 @@ rba_reactome_event_ancestors <- function(event_id,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_reactome_event_hierarchy("Homo sapiens")
+#' }
+#' \donttest{
 #' rba_reactome_event_hierarchy(9606)
+#' }
+#'
 #' @family "Reactome Content Service, Queries Related to Events"
 #' @export
 rba_reactome_event_hierarchy <- function(species,
@@ -600,15 +632,24 @@ rba_reactome_event_hierarchy <- function(species,
 #'   }
 #'
 #' @examples
-#' \dontrun{rba_reactome_exporter_diagram(event_id = "R-HSA-177929",
-#'   create_document = FALSE)}
-#' \dontrun{rba_reactome_exporter_diagram(event_id = "R-HSA-6787403",
-#'   create_document = FALSE)}
-#' \dontrun{rba_reactome_exporter_diagram(event_id = "R-HSA-177929",
-#'   create_document = TRUE)}
-#' \dontrun{rba_reactome_exporter_diagram(event_id = "R-HSA-177929",
-#'   output_format = "svg",
-#'   save_to = "reactome_event_diagram.svg")}
+#' \dontrun{
+#' rba_reactome_exporter_diagram(event_id = "R-HSA-177929",
+#'   create_document = FALSE)
+#' }
+#' \dontrun{
+#' rba_reactome_exporter_diagram(event_id = "R-HSA-6787403",
+#'     create_document = FALSE)
+#' }
+#' \dontrun{
+#' rba_reactome_exporter_diagram(event_id = "R-HSA-177929",
+#'     create_document = TRUE)
+#' }
+#' \dontrun{
+#' rba_reactome_exporter_diagram(event_id = "R-HSA-177929",
+#'     output_format = "svg",
+#'     save_to = "reactome_event_diagram.svg")
+#' }
+#'
 #' @family "Reactome Content Service, Format Exporter"
 #' @seealso
 #' \code{\link{rba_reactome_exporter_reaction}}
@@ -799,11 +840,16 @@ rba_reactome_exporter_diagram <- function(event_id,
 #'   }
 #'
 #' @examples
-#' \dontrun{rba_reactome_exporter_event(event_id = "R-HSA-177929",
-#'   output_format = "sbgn",
-#'   save_to = "R-HSA-177929.sbgn")}
-#' \dontrun{rba_reactome_exporter_event(event_id = "R-HSA-177929",
-#'   output_format = "sbgn")}
+#' \dontrun{
+#' rba_reactome_exporter_event(event_id = "R-HSA-177929",
+#'     output_format = "sbgn",
+#'     save_to = "R-HSA-177929.sbgn")
+#' }
+#' \dontrun{
+#' rba_reactome_exporter_event(event_id = "R-HSA-177929",
+#'     output_format = "sbgn")
+#' }
+#'
 #' @family "Reactome Content Service, Format Exporter"
 #' @export
 rba_reactome_exporter_event <- function(event_id,
@@ -900,11 +946,16 @@ rba_reactome_exporter_event <- function(event_id,
 #'   }
 #'
 #' @examples
-#' \dontrun{rba_reactome_exporter_overview(species = 9606,
-#'   output_format = "svg",
-#'   save_to = "human_pathways.svg")}
-#' \dontrun{rba_reactome_exporter_overview(species = 9606,
-#'   token = 123456789)}
+#' \dontrun{
+#' rba_reactome_exporter_overview(species = 9606,
+#'     output_format = "svg",
+#'     save_to = "human_pathways.svg")
+#' }
+#' \dontrun{
+#' rba_reactome_exporter_overview(species = 9606,
+#'     token = 123456789)
+#' }
+#'
 #' @family "Reactome Content Service, Format Exporter"
 #' @seealso
 #' \code{\link{rba_reactome_analysis}}
@@ -1096,13 +1147,16 @@ rba_reactome_exporter_overview <- function(species,
 #'   }
 #'
 #' @examples
-#' \dontrun{rba_reactome_exporter_diagram(event_id = "R-HSA-6787403",
-#'   create_document = FALSE)}
-#' \dontrun{rba_reactome_exporter_diagram(event_id = "R-HSA-177929")
-#' # this will yield error!}
-#' \dontrun{rba_reactome_exporter_diagram(event_id = "R-HSA-6787403",
-#'   output_format = "svg",
-#'   save_to = "reactome_reacion_image.svg")}
+#' \dontrun{
+#' rba_reactome_exporter_diagram(event_id = "R-HSA-6787403",
+#'     create_document = FALSE)
+#' }
+#' \dontrun{
+#' rba_reactome_exporter_diagram(event_id = "R-HSA-6787403",
+#'      output_format = "svg",
+#'      save_to = "reactome_reacion_image.svg")
+#' }
+#'
 #' @family "Reactome Content Service, Format Exporter"
 #' @seealso
 #' \code{\link{rba_reactome_exporter_diagram}}
@@ -1278,13 +1332,20 @@ rba_reactome_exporter_reaction <- function(event_id,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_reactome_interactors_psicquic()
+#' }
+#' \donttest{
 #' rba_reactome_interactors_psicquic(proteins = c("TP53", "MYC"),
-#'   resource = "BioGrid",
-#'   details = FALSE)
+#'     resource = "BioGrid",
+#'     details = FALSE)
+#' }
+#' \donttest{
 #' rba_reactome_interactors_psicquic(proteins = c("TP53", "MYC"),
-#'   resource = "BioGrid",
-#'   details = TRUE)
+#'     resource = "BioGrid",
+#'     details = TRUE)
+#' }
+#'
 #' @family "Reactome Content Service, Molecule Interactors"
 #' @export
 rba_reactome_interactors_psicquic <- function(proteins = NA,
@@ -1392,12 +1453,19 @@ rba_reactome_interactors_psicquic <- function(proteins = NA,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_reactome_interactors_static(proteins = "Q9BXM7-1",
-#'   endpoint = "pathways", species = "Homo sapiens")
+#'     endpoint = "pathways", species = "Homo sapiens")
+#' }
+#' \donttest{
 #' rba_reactome_interactors_static(proteins = c("Q9BXM7-1", "Q13501"),
-#'   endpoint = "details")
+#'     endpoint = "details")
+#' }
+#' \donttest{
 #' rba_reactome_interactors_static(proteins = c("Q9BXM7-1", "Q13501"),
-#'   endpoint = "summary")
+#'     endpoint = "summary")
+#' }
+#'
 #' @family "Reactome Content Service, Molecule Interactors"
 #' @export
 rba_reactome_interactors_static <- function(proteins,
@@ -1513,8 +1581,11 @@ rba_reactome_interactors_static <- function(proteins,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_reactome_mapping(id = "PTEN", resource =  "UniProt",
-#'   map_to = "reactions", species = 9606)
+#'     map_to = "reactions", species = 9606)
+#' }
+#'
 #' @family "Reactome Content Service, Mapping Related Queries"
 #' @export
 rba_reactome_mapping <- function(id,
@@ -1606,8 +1677,11 @@ rba_reactome_mapping <- function(id,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_reactome_orthology(event_ids = c("R-HSA-6799198", " R-HSA-72764"),
-#'   species_dbid = 49633)
+#'     species_dbid = 49633)
+#' }
+#'
 #' @family "Reactome Content Service, Orthology Related Queries"
 #' @seealso
 #' \code{\link{rba_reactome_analysis_species}}
@@ -1707,9 +1781,16 @@ rba_reactome_orthology <- function(event_ids,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_reactome_participants("R-HSA-5682012")
+#' }
+#' \donttest{
 #' rba_reactome_participants("R-HSA-5682012", only_physical_entities = TRUE)
+#' }
+#' \donttest{
 #' rba_reactome_participants("R-HSA-5682012", only_reference_entities = TRUE)
+#' }
+#'
 #' @family "Reactome Content Service, Queries Related to Participants"
 #' @seealso
 #' \code{\link{rba_reactome_participant_of}}
@@ -1809,9 +1890,14 @@ rba_reactome_participants <- function(event_id,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_reactome_pathways_events(event_id = "R-HSA-5673001")
+#' }
+#' \donttest{
 #' rba_reactome_pathways_events(event_id = "R-HSA-5673001",
-#'   attribute_name = "displayName")
+#'     attribute_name = "displayName")
+#' }
+#'
 #' @family "Reactome Content Service, Pathway Related Queries"
 #' @export
 rba_reactome_pathways_events <- function(event_id,
@@ -1912,10 +1998,17 @@ rba_reactome_pathways_events <- function(event_id,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_reactome_pathways_low(entity_id = "R-HSA-199420")
+#' }
+#' \donttest{
 #' rba_reactome_pathways_low(entity_id = "R-HSA-199420", with_diagram = TRUE)
+#' }
+#' \donttest{
 #' rba_reactome_pathways_low(entity_id = "R-HSA-199420", with_diagram = TRUE,
-#'   all_forms = TRUE)
+#'     all_forms = TRUE)
+#' }
+#'
 #' @family "Reactome Content Service, Pathway Related Queries"
 #' @export
 rba_reactome_pathways_low <- function(entity_id,
@@ -2003,8 +2096,13 @@ rba_reactome_pathways_low <- function(entity_id,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_reactome_pathways_top(species = 9606)
+#' }
+#' \donttest{
 #' rba_reactome_pathways_top(species = "Saccharomyces cerevisiae")
+#' }
+#'
 #' @family "Reactome Content Service, Pathway Related Queries"
 #' @export
 rba_reactome_pathways_top <- function(species,
@@ -2071,8 +2169,13 @@ rba_reactome_pathways_top <- function(species,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_reactome_people_name("Jupe")
+#' }
+#' \donttest{
 #' rba_reactome_people_name("Steve Jupe", exact_match = TRUE)
+#' }
+#'
 #' @family "Reactome Content Service, Person Queries"
 #' @export
 rba_reactome_people_name <- function(person_name,
@@ -2141,8 +2244,13 @@ rba_reactome_people_name <- function(person_name,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_reactome_people_id("391309")
+#' }
+#' \donttest{
 #' rba_reactome_people_id(person_id = "391309", authored_pathways = TRUE)
+#' }
+#'
 #' @family "Reactome Content Service, Person Queries"
 #' @export
 rba_reactome_people_id <- function(person_id,
@@ -2242,9 +2350,16 @@ rba_reactome_people_id <- function(person_id,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_reactome_query(ids = c("8953958", "11982506", "R-ALL-9649879"))
+#' }
+#' \donttest{
 #' rba_reactome_query(ids = "R-HSA-9656256", enhanced = TRUE)
+#' }
+#' \donttest{
 #' rba_reactome_query(ids = "8863054", attribute_name = "displayName")
+#' }
+#'
 #' @family "Reactome Content Service, Common Data Retrieval"
 #' @export
 rba_reactome_query <- function(ids,
@@ -2366,8 +2481,13 @@ rba_reactome_query <- function(ids,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_reactome_xref("CD40")
+#' }
+#' \donttest{
 #' rba_reactome_xref("ENSP00000361350")
+#' }
+#'
 #' @family "Reactome Content Service, ReferenceEntity Queries"
 #' @export
 rba_reactome_xref <- function(xref_id,
@@ -2427,8 +2547,13 @@ rba_reactome_xref <- function(xref_id,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_reactome_species()
+#' }
+#' \donttest{
 #' rba_reactome_species(only_main = TRUE)
+#' }
+#'
 #' @family "Reactome Content Service, Species Related Queries"
 #' @export
 rba_reactome_species <- function(only_main = FALSE,

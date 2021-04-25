@@ -34,10 +34,15 @@ Subunits will be returned recursively; Which means that if a subunit was
 }
 
 \examples{
+\donttest{
 rba_reactome_complex_subunits(complex_id = "R-HSA-5674003",
-  exclude_structures = FALSE)
+    exclude_structures = FALSE)
+}
+\donttest{
 rba_reactome_complex_subunits(complex_id = "R-HSA-109783",
-  exclude_structures = TRUE)
+    exclude_structures = TRUE)
+}
+
 }
 \references{
 \itemize{

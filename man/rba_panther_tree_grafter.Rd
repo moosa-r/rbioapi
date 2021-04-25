@@ -37,7 +37,10 @@ For more information, see:
 }
 
 \examples{
+\donttest{
 rba_panther_tree_grafter("MKVLWAALLVTFLAGCQAKVEQAVETE")
+}
+
 }
 \references{
 \itemize{

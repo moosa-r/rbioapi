@@ -42,8 +42,13 @@ For more information about how UniProt imports and calculates genomic
 }
 
 \examples{
+\donttest{
 rba_uniprot_coordinates(accession = "P25942")
+}
+\donttest{
 rba_uniprot_coordinates(db_type = "HGNC", db_id = "CD40")
+}
+
 }
 \references{
 \itemize{

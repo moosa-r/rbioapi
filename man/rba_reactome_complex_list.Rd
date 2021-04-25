@@ -31,8 +31,13 @@ This function will retrieve a list of complexes that include your provided
 }
 
 \examples{
+\donttest{
 rba_reactome_complex_list(id = "3845", resource = "NCBI Gene")
+}
+\donttest{
 rba_reactome_complex_list(id = "P00533", resource = "UniProt")
+}
+
 }
 \references{
 \itemize{

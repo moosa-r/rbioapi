@@ -34,8 +34,13 @@ Using this function you can retrieve nodes that are located in the top or
 }
 
 \examples{
+\donttest{
 rba_uniprot_taxonomy_path(id = 9606, direction = "TOP", depth = 3)
+}
+\donttest{
 rba_uniprot_taxonomy_path(id = 207598, direction = "BOTTOM", depth = 3)
+}
+
 }
 \references{
 \itemize{

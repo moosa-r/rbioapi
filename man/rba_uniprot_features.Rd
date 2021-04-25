@@ -44,8 +44,12 @@ Use this function to retrieve
 }
 
 \examples{
+\donttest{
 rba_uniprot_features("Q99616")
+}
+\donttest{
 rba_uniprot_features(accession = "Q99616", types = "DISULFID")
+}
 
 }
 \references{

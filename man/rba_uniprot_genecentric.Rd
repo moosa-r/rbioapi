@@ -29,7 +29,10 @@ Using this function you can retrieve gene-centrics data. For more
 }
 
 \examples{
+\donttest{
 rba_uniprot_genecentric("P29965")
+}
+
 }
 \references{
 \itemize{

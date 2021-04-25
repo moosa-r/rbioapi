@@ -30,8 +30,13 @@ Using this function you can query peaple by partially matching or exact
 }
 
 \examples{
+\donttest{
 rba_reactome_people_name("Jupe")
+}
+\donttest{
 rba_reactome_people_name("Steve Jupe", exact_match = TRUE)
+}
+
 }
 \references{
 \itemize{

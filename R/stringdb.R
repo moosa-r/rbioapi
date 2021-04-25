@@ -34,7 +34,9 @@
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_string_map_ids(ids = c("TP53", "TNF", "EGFR"), species = 9606)
+#' }
 #'
 #' @family "STRING API"
 #' @export
@@ -156,17 +158,23 @@ rba_string_map_ids <- function(ids,
 #'   }
 #'
 #' @examples
-#' \dontrun{rba_string_network_image(ids = c("9606.ENSP00000269305",
-#'           "9606.ENSP00000398698",
-#'           "9606.ENSP00000275493"),
-#'   network_type = "functional",
-#'   save_image = FALSE)}
-#' \dontrun{rba_string_network_image(ids = c("TP53", "TNF", "EGFR"),
-#'   species = 9606,
-#'   save_image = TRUE)}
-#' \dontrun{rba_string_network_image(ids = "9606.ENSP00000269305",
-#' image_format = "highres_image",
-#' save_image = file.path(getwd(), "TP53_network.png"))}
+#' \dontrun{
+#' rba_string_network_image(ids = c("9606.ENSP00000269305",
+#'     "9606.ENSP00000398698",
+#'     "9606.ENSP00000275493"),
+#'     network_type = "functional",
+#'     save_image = FALSE)
+#' }
+#' \dontrun{
+#' rba_string_network_image(ids = c("TP53", "TNF", "EGFR"),
+#'     species = 9606,
+#'     save_image = TRUE)
+#' }
+#' \dontrun{
+#' rba_string_network_image(ids = "9606.ENSP00000269305",
+#'     image_format = "highres_image",
+#'     save_image = file.path(getwd(), "TP53_network.png"))
+#' }
 #'
 #' @family "STRING API"
 #' @seealso \code{\link{rba_string_map_ids}}
@@ -351,15 +359,19 @@ rba_string_network_image <- function(ids,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_string_interactions_network(ids = c("9606.ENSP00000269305",
-#'           "9606.ENSP00000398698",
-#'           "9606.ENSP00000275493"),
-#'   network_type = "functional")
+#'     "9606.ENSP00000398698",
+#'     "9606.ENSP00000275493"),
+#'     network_type = "functional")
+#' }
+#' \donttest{
 #' rba_string_interactions_network(ids = c("9606.ENSP00000269305",
-#'           "9606.ENSP00000398698",
-#'           "9606.ENSP00000275493"),
-#'   species = 9606,
-#'   add_nodes = 10)
+#'     "9606.ENSP00000398698",
+#'     "9606.ENSP00000275493"),
+#'     species = 9606,
+#'     add_nodes = 10)
+#' }
 #'
 #' @family "STRING API"
 #' @seealso
@@ -478,13 +490,17 @@ rba_string_interactions_network <- function(ids,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_string_interaction_partners(ids = c("9606.ENSP00000269305",
-#'           "9606.ENSP00000398698",
-#'           "9606.ENSP00000275493"),
-#'   network_type = "functional")
-#' rba_string_interaction_partners(ids = "9606.ENSP00000269305",
-#'   species = 9606,
-#'   required_score = 700)
+#'     "9606.ENSP00000398698",
+#'     "9606.ENSP00000275493"),
+#'     network_type = "functional")
+#' }
+#' \donttest{
+#'     rba_string_interaction_partners(ids = "9606.ENSP00000269305",
+#'     species = 9606,
+#'     required_score = 700)
+#' }
 #'
 #' @family "STRING API"
 #' @seealso
@@ -596,7 +612,9 @@ rba_string_interaction_partners <- function(ids,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_string_homology_intra(ids = c("CDK1", "CDK2"), species = 9606)
+#' }
 #'
 #' @family "STRING API"
 #' @seealso
@@ -689,10 +707,14 @@ rba_string_homology_intra <- function(ids,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_string_homology_inter(ids = "p53",
-#'           species = 9606,
-#'           species_b = c(6087, 7070))
+#'     species = 9606,
+#'     species_b = c(6087, 7070))
+#' }
+#' \donttest{
 #' rba_string_homology_inter(ids = "ENSP00000269305", species = 9606)
+#' }
 #'
 #' @family "STRING API"
 #' @seealso
@@ -795,7 +817,9 @@ rba_string_homology_inter <- function(ids,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_string_enrichment(ids = c("TP53", "TNF", "EGFR"), species = 9606)
+#' }
 #'
 #' @family "STRING API"
 #' @seealso
@@ -902,7 +926,9 @@ rba_string_enrichment <- function(ids,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_string_annotations(ids = "TP53", species = 9606)
+#' }
 #'
 #' @family "STRING API"
 #' @seealso
@@ -992,8 +1018,11 @@ rba_string_annotations <- function(ids,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_string_enrichment_ppi(ids = c("p53", "BRCA1", "cdk2", "Q99835",
-#' "CDC42", "CDK1", "KIF23", "PLK1", "RAC2", "RACGAP1"), species = 9606)
+#'        "CDC42", "CDK1", "KIF23", "PLK1", "RAC2", "RACGAP1"),
+#'     species = 9606)
+#' }
 #'
 #' @family "STRING API"
 #' @seealso \code{\link{rba_string_map_ids}}
@@ -1076,7 +1105,9 @@ rba_string_enrichment_ppi <- function(ids,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_string_version()
+#' }
 #'
 #' @family "STRING API"
 #' @export

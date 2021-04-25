@@ -202,10 +202,17 @@
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_reactome_analysis(input = c("p53", "BRCA1", "cdk2", "Q99835", "CDC42"))
-#' \dontrun{rba_reactome_analysis(input = "c:/rbioapi/genes.txt")}
-#' \dontrun{rba_reactome_analysis(input = "https://qazwsx.com/genes.txt")}
-#' @family "Reactome Analysis Service, "
+#' }
+#' \dontrun{
+#' rba_reactome_analysis(input = "c:/rbioapi/genes.txt")
+#' }
+#' \dontrun{
+#' rba_reactome_analysis(input = "https://qazwsx.com/genes.txt")
+#' }
+#'
+#' @family "Reactome Analysis Service"
 #' @export
 rba_reactome_analysis <- function(input,
                                   input_format = NA,
@@ -401,9 +408,12 @@ rba_reactome_analysis <- function(input,
 #'   }
 #'
 #' @examples
-#' \dontrun{rba_reactome_analysis_pdf(token = "MjAyMDEwMTYwMTI3MTNfMjY1MjM%3D",
-#'    species = 9606, save_to = "my_analysis.pdf")}
-#' @family "Reactome Analysis Service, "
+#' \dontrun{
+#' rba_reactome_analysis_pdf(token = "MjAyMDEwMTYwMTI3MTNfMjY1MjM%3D",
+#'     species = 9606, save_to = "my_analysis.pdf")
+#' }
+#'
+#' @family "Reactome Analysis Service"
 #' @seealso
 #' \code{\link{rba_reactome_analysis_download}}
 #' \code{\link{rba_reactome_analysis}}
@@ -565,9 +575,11 @@ rba_reactome_analysis_pdf <- function(token,
 #'
 #' @examples
 #' \dontrun{
-#'   rba_reactome_analysis_download(token = "MjAyMDEwMTYwMTI3MTNfMjY1MjM",
-#'     request = "found_ids", save_to = "found_ids.csv")}
-#' @family "Reactome Analysis Service, "
+#' rba_reactome_analysis_download(token = "MjAyMDEwMTYwMTI3MTNfMjY1MjM",
+#'     request = "found_ids", save_to = "found_ids.csv")
+#' }
+#'
+#' @family "Reactome Analysis Service"
 #' @seealso
 #' \code{\link{rba_reactome_analysis_pdf}}
 #' \code{\link{rba_reactome_analysis}}
@@ -695,9 +707,14 @@ rba_reactome_analysis_download <- function(token,
 #'   }
 #'
 #' @examples
-#' \dontrun{rba_reactome_analysis_import("c:/rbioapi/res.json")}
-#' \dontrun{rba_reactome_analysis_import("https://qaz.com/res.json.gz")}
-#' @family "Reactome Analysis Service, "
+#' \dontrun{
+#' rba_reactome_analysis_import("c:/rbioapi/res.json")
+#' }
+#' \dontrun{
+#' rba_reactome_analysis_import("https://qaz.com/res.json.gz")
+#' }
+#'
+#' @family "Reactome Analysis Service"
 #' @export
 rba_reactome_analysis_import <- function(input,
                                          input_format = NA,
@@ -788,8 +805,11 @@ rba_reactome_analysis_import <- function(input,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_reactome_analysis_mapping(c("Q8SQ34", "cd40"))
-#' @family "Reactome Analysis Service, "
+#' }
+#'
+#' @family "Reactome Analysis Service"
 #' @export
 rba_reactome_analysis_mapping <- function(input,
                                           input_format = NA,
@@ -905,8 +925,11 @@ rba_reactome_analysis_mapping <- function(input,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_reactome_analysis_species(species_dbid = 48892)
-#' @family "Reactome Analysis Service, "
+#' }
+#'
+#' @family "Reactome Analysis Service"
 #' @seealso
 #' \code{\link{rba_reactome_orthology}}
 #' @export
@@ -1051,9 +1074,12 @@ rba_reactome_analysis_species <- function(species_dbid,
 #'   }
 #'
 #' @examples
-#' \dontrun{rba_reactome_analysis_token(token = "MjAyMDEwMTYwMTI3MTNfMjY1MjM",
-#'   species = 9606)}
-#' @family "Reactome Analysis Service, "
+#' \dontrun{
+#' rba_reactome_analysis_token(token = "MjAyMDEwMTYwMTI3MTNfMjY1MjM",
+#'     species = 9606)
+#' }
+#'
+#' @family "Reactome Analysis Service"
 #' @seealso
 #' \code{\link{rba_reactome_analysis}}
 #' @export

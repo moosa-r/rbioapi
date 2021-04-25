@@ -69,9 +69,15 @@ Retrieve natural variant annotations of a sequence using UniProt protein
 }
 
 \examples{
+\donttest{
 rba_uniprot_variation(id = "rs121434451", id_type = "dbsnp")
+}
+\donttest{
 rba_uniprot_variation(id = "NC_000008.11:g.22119227C>T", id_type = "hgvs")
+}
+\donttest{
 rba_uniprot_variation(id = "O43593", id_type = "uniprot")
+}
 
 }
 \references{

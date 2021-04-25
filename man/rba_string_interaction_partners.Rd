@@ -61,13 +61,17 @@ Note that this function will retrieve the interactions between your input
 }
 
 \examples{
+\donttest{
 rba_string_interaction_partners(ids = c("9606.ENSP00000269305",
-          "9606.ENSP00000398698",
-          "9606.ENSP00000275493"),
-  network_type = "functional")
-rba_string_interaction_partners(ids = "9606.ENSP00000269305",
-  species = 9606,
-  required_score = 700)
+    "9606.ENSP00000398698",
+    "9606.ENSP00000275493"),
+    network_type = "functional")
+}
+\donttest{
+    rba_string_interaction_partners(ids = "9606.ENSP00000269305",
+    species = 9606,
+    required_score = 700)
+}
 
 }
 \references{

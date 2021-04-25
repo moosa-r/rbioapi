@@ -67,7 +67,10 @@ Note that this is a search function. Thus, you are not required to fill
 }
 
 \examples{
+\donttest{
 rba_uniprot_coordinates_search(taxid = 9606, chromosome = "y")
+}
+
 }
 \references{
 \itemize{

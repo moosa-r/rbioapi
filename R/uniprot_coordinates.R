@@ -49,7 +49,10 @@
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_coordinates_search(taxid = 9606, chromosome = "y")
+#' }
+#'
 #' @family "UniProt API, Coordinates"
 #' @export
 rba_uniprot_coordinates_search <- function(accession = NA,
@@ -169,8 +172,14 @@ rba_uniprot_coordinates_search <- function(accession = NA,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_coordinates_sequence(accession = "P25942", p_position = 1)
-#' rba_uniprot_coordinates_sequence(accession = "P25942", p_start = 1, p_end = 277)
+#' }
+#' \donttest{
+#' rba_uniprot_coordinates_sequence(accession = "P25942",
+#'     p_start = 1, p_end = 277)
+#' }
+#'
 #' @family "UniProt API, Coordinates"
 #' @export
 rba_uniprot_coordinates_sequence <- function(accession,
@@ -259,8 +268,13 @@ rba_uniprot_coordinates_sequence <- function(accession,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_coordinates(accession = "P25942")
+#' }
+#' \donttest{
 #' rba_uniprot_coordinates(db_type = "HGNC", db_id = "CD40")
+#' }
+#'
 #' @family "UniProt API, Coordinates"
 #' @export
 rba_uniprot_coordinates <- function(accession = NA,
@@ -348,10 +362,15 @@ rba_uniprot_coordinates <- function(accession = NA,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_coordinates_location(taxid = 9606,
-#'   locations = "Y:17100001-19600000", in_range = TRUE)
+#'     locations = "Y:17100001-19600000", in_range = TRUE)
+#' }
+#' \donttest{
 #' rba_uniprot_coordinates_location(taxid = 9606,
-#'   locations = "20:39000001", in_range = FALSE)
+#'     locations = "20:39000001", in_range = FALSE)
+#' }
+#'
 #' @family "UniProt API, Coordinates"
 #' @export
 rba_uniprot_coordinates_location <- function(taxid,

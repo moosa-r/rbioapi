@@ -42,8 +42,13 @@ Using this function you can retrieve a list of available organisms,
 }
 
 \examples{
+\donttest{
 rba_panther_info(what = "organisms")
+}
+\donttest{
 rba_panther_info(what = "families", families_page = 4)
+}
+
 }
 \references{
 \itemize{

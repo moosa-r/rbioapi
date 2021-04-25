@@ -57,7 +57,10 @@ Using this function you can search and retrieve orthologs of given gene(s),
 }
 
 \examples{
+\donttest{
 rba_panther_ortholog("CD40", organism = 9606, type = "LDO")
+}
+
 }
 \references{
 \itemize{

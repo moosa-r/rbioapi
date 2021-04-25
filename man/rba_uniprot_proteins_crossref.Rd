@@ -41,9 +41,16 @@ List which each element is a UniProt entity that correspond to
 }
 
 \examples{
+\donttest{
 rba_uniprot_proteins_crossref("cd40", "hgnc")
+}
+\donttest{
 rba_uniprot_proteins_crossref("cd40", "hgnc", reviewed = TRUE)
+}
+\donttest{
 rba_uniprot_proteins_crossref("mica", "hgnc", isoform = 0)
+}
+
 }
 \references{
 \itemize{

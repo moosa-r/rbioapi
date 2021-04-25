@@ -101,12 +101,14 @@ Note that using \code{\link{rba_mieaa_enrich}} is a more convenient way to
 }
 
 \examples{
+\donttest{
 Sys.sleep(1) # to prevent 429 error during R CMD check
 rba_mieaa_enrich_submit(test_set = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
-  mirna_type = "mature",
-  test_type = "GSEA",
-  species = 9606,
-  categories = NA)
+    mirna_type = "mature",
+    test_type = "GSEA",
+    species = 9606,
+    categories = NA)
+}
 
 }
 \references{

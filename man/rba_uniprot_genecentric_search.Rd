@@ -46,9 +46,15 @@ Note that this is a search function. Thus, you are not required to fill
 }
 
 \examples{
+\donttest{
 rba_uniprot_genecentric_search(accession = "P59594")
+}
+\donttest{
 rba_uniprot_genecentric_search(gene = "Spike")
+}
+\donttest{
 rba_uniprot_genecentric_search(upid = "UP000000354")
+}
 
 }
 \references{

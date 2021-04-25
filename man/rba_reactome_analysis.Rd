@@ -132,9 +132,16 @@ You can provide your table or vector input in numerous formats:\enumerate{
 }
 
 \examples{
+\donttest{
 rba_reactome_analysis(input = c("p53", "BRCA1", "cdk2", "Q99835", "CDC42"))
-\dontrun{rba_reactome_analysis(input = "c:/rbioapi/genes.txt")}
-\dontrun{rba_reactome_analysis(input = "https://qazwsx.com/genes.txt")}
+}
+\dontrun{
+rba_reactome_analysis(input = "c:/rbioapi/genes.txt")
+}
+\dontrun{
+rba_reactome_analysis(input = "https://qazwsx.com/genes.txt")
+}
+
 }
 \references{
 \itemize{
@@ -148,7 +155,7 @@ rba_reactome_analysis(input = c("p53", "BRCA1", "cdk2", "Q99835", "CDC42"))
   }
 }
 \seealso{
-Other "Reactome Analysis Service, ": 
+Other "Reactome Analysis Service": 
 \code{\link{rba_reactome_analysis_download}()},
 \code{\link{rba_reactome_analysis_import}()},
 \code{\link{rba_reactome_analysis_mapping}()},
@@ -156,4 +163,4 @@ Other "Reactome Analysis Service, ":
 \code{\link{rba_reactome_analysis_species}()},
 \code{\link{rba_reactome_analysis_token}()}
 }
-\concept{"Reactome Analysis Service, "}
+\concept{"Reactome Analysis Service"}

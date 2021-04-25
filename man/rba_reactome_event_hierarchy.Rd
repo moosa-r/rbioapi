@@ -40,8 +40,13 @@ By Reactome's definition, Events are the building blocks of biological
 }
 
 \examples{
+\donttest{
 rba_reactome_event_hierarchy("Homo sapiens")
+}
+\donttest{
 rba_reactome_event_hierarchy(9606)
+}
+
 }
 \references{
 \itemize{

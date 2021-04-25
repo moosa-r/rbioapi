@@ -40,8 +40,13 @@ UniProt collects and annotates proteomes(Protein sets expressed in an
 }
 
 \examples{
+\donttest{
 rba_uniprot_proteomes(upid = "UP000000354")
+}
+\donttest{
 rba_uniprot_proteomes(upid = "UP000000354", get_proteins = TRUE)
+}
+
 }
 \references{
 \itemize{

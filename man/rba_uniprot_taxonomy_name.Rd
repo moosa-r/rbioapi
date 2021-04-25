@@ -53,10 +53,15 @@ Using this function, you can search and retrieve taxonomic nodes using
 }
 
 \examples{
+\donttest{
 rba_uniprot_taxonomy_name(name = "homo", field = "scientific",
-  search_type = "start_with")
+    search_type = "start_with")
+}
+\donttest{
 rba_uniprot_taxonomy_name(name = "adenovirus", field = "scientific",
-  search_type = "contain", page_size = 200, page_number = 2)
+    search_type = "contain", page_size = 200, page_number = 2)
+}
+
 }
 \references{
 \itemize{

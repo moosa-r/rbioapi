@@ -52,10 +52,19 @@
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_proteomes_search(name = "SARS-CoV")
+#' }
+#' \donttest{
 #' rba_uniprot_proteomes_search(name = "SARS-CoV", is_ref_proteome = TRUE)
+#' }
+#' \donttest{
 #' rba_uniprot_proteomes_search(name = "SARS-CoV", is_ref_proteome = TRUE)
+#' }
+#' \donttest{
 #' rba_uniprot_proteomes_search(genome_acc = "AY274119")
+#' }
+#'
 #' @family "UniProt API, Proteomes"
 #' @export
 rba_uniprot_proteomes_search <- function(name = NA,
@@ -190,8 +199,13 @@ rba_uniprot_proteomes_search <- function(name = NA,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_proteomes(upid = "UP000000354")
+#' }
+#' \donttest{
 #' rba_uniprot_proteomes(upid = "UP000000354", get_proteins = TRUE)
+#' }
+#'
 #' @family "UniProt API, Proteomes"
 #' @export
 rba_uniprot_proteomes <- function(upid,
@@ -298,9 +312,15 @@ rba_uniprot_proteomes <- function(upid,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_genecentric_search(accession = "P59594")
+#' }
+#' \donttest{
 #' rba_uniprot_genecentric_search(gene = "Spike")
+#' }
+#' \donttest{
 #' rba_uniprot_genecentric_search(upid = "UP000000354")
+#' }
 #'
 #' @family "UniProt API, Proteomes"
 #' @export
@@ -381,7 +401,10 @@ rba_uniprot_genecentric_search <- function(upid = NA,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_genecentric("P29965")
+#' }
+#'
 #' @family "UniProt API, Proteomes"
 #' @export
 rba_uniprot_genecentric <- function(accession,

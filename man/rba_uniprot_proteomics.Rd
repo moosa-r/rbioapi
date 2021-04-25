@@ -28,7 +28,10 @@ UniProt maps proteomics peptides from different sources to the proteins'
 }
 
 \examples{
+\donttest{
 rba_uniprot_proteomics(accession = "P25942")
+}
+
 }
 \references{
 \itemize{

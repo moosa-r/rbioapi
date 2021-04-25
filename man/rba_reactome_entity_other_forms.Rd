@@ -31,7 +31,10 @@ According to Reactome API documentation, "These other forms are Physical
 }
 
 \examples{
+\donttest{
 rba_reactome_entity_other_forms("R-HSA-199420")
+}
+
 }
 \references{
 \itemize{

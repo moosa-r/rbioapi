@@ -27,7 +27,10 @@ This function will retrieve a list of complexes and sets that Your
 }
 
 \examples{
+\donttest{
 rba_reactome_participant_of(entity_id = "R-HSA-199420")
+}
+
 }
 \references{
 \itemize{

@@ -28,8 +28,13 @@ This function Retrieve a list of all diseases or disease DOIDs annotated in
 }
 
 \examples{
- rba_reactome_diseases()
- rba_reactome_diseases(doid = TRUE)
+\donttest{
+rba_reactome_diseases()
+}
+\donttest{
+rba_reactome_diseases(doid = TRUE)
+}
+
 }
 \references{
 \itemize{

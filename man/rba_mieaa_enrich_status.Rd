@@ -35,8 +35,10 @@ Note that using \code{\link{rba_mieaa_enrich}} is a more convenient way to
 }
 
 \examples{
+\dontrun{
 Sys.sleep(1) # to prevent 429 error during R CMD check
-\dontrun{rba_mieaa_enrich_status("f52d1aef-6d3d-4d51-9020-82e68fe99012")}
+rba_mieaa_enrich_status("f52d1aef-6d3d-4d51-9020-82e68fe99012")
+}
 
 }
 \references{

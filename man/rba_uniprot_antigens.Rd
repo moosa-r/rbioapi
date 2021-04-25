@@ -28,7 +28,10 @@ UniProt maps Antigenic features from different sources to the proteins'
 }
 
 \examples{
+\donttest{
 rba_uniprot_antigens("P04626")
+}
+
 }
 \references{
 \itemize{

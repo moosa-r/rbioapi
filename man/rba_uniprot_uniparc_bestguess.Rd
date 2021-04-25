@@ -48,7 +48,10 @@ This function returns the UniParc Entry with a cross-reference to the
 }
 
 \examples{
+\donttest{
 rba_uniprot_uniparc_bestguess("UPI00000000C9")
+}
+
 }
 \references{
 \itemize{

@@ -41,7 +41,9 @@ For each Combination of species and miRNA type, Only a pre-defined
 }
 
 \examples{
+\donttest{
 rba_mieaa_cats("mature", "Homo sapiens")
+}
 
 }
 \references{

@@ -46,9 +46,11 @@ miRBase miRNA accession could refer to either mature or precursor miRNAs.
 }
 
 \examples{
+\donttest{
 Sys.sleep(1) # to prevent 429 error during R CMD check
 rba_mieaa_convert_type(mirna = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
-input_type = "mature")
+    input_type = "mature")
+}
 
 }
 \references{

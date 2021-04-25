@@ -34,8 +34,11 @@
 #'   }
 #'
 #' @examples
-#' x = rba_panther_mapping(genes = c("Cd40", 7124, "ENSG00000203747", "P33681"),
-#'  organism = 9606)
+#' \donttest{
+#' rba_panther_mapping(genes = c("Cd40", 7124, "ENSG00000203747", "P33681"),
+#'     organism = 9606)
+#' }
+#'
 #' @family "PANTHER API"
 #' @export
 rba_panther_mapping <- function(genes,
@@ -131,10 +134,13 @@ rba_panther_mapping <- function(genes,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_panther_enrich(genes = c("p53", "BRCA1", "cdk2", "Q99835", "CDC42",
-#'                              "CDK1", "KIF23", "PLK1", "RAC2", "RACGAP1"),
-#'                    organism = 9606, annot_dataset = "GO:0008150",
-#'                    cutoff = 0.01)
+#'         "CDK1", "KIF23", "PLK1", "RAC2", "RACGAP1"),
+#'     organism = 9606, annot_dataset = "GO:0008150",
+#'     cutoff = 0.01)
+#' }
+#'
 #' @family "PANTHER API"
 #' @export
 rba_panther_enrich <- function(genes,
@@ -280,8 +286,13 @@ rba_panther_enrich <- function(genes,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_panther_info(what = "organisms")
+#' }
+#' \donttest{
 #' rba_panther_info(what = "families", families_page = 4)
+#' }
+#'
 #' @family "PANTHER API"
 #' @export
 rba_panther_info <- function(what,
@@ -420,7 +431,10 @@ rba_panther_info <- function(what,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_panther_ortholog("CD40", organism = 9606, type = "LDO")
+#' }
+#'
 #' @family "PANTHER API"
 #' @export
 rba_panther_ortholog <- function(genes,
@@ -548,7 +562,9 @@ rba_panther_ortholog <- function(genes,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_panther_homolog("OR4F5", organism = 9606, type = "P")
+#' }
 #'
 #' @family "PANTHER API"
 #' @export
@@ -653,7 +669,10 @@ rba_panther_homolog <- function(genes,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_panther_family("PTHR10000", what = "ortholog")
+#' }
+#'
 #' @family "PANTHER API"
 #' @export
 rba_panther_family <- function(id,
@@ -753,7 +772,10 @@ rba_panther_family <- function(id,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_panther_tree_grafter("MKVLWAALLVTFLAGCQAKVEQAVETE")
+#' }
+#'
 #' @family "PANTHER API"
 #' @export
 rba_panther_tree_grafter <- function(protein_seq,

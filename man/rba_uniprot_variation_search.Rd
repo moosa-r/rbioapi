@@ -103,10 +103,17 @@ Note that this is a search function. Thus, you are not required to fill
 }
 
 \examples{
+\donttest{
 rba_uniprot_variation_search(accession = "P05067")
+}
+\donttest{
 rba_uniprot_variation_search(disease = "alzheimer disease, 18")
+}
+\donttest{
 rba_uniprot_variation_search(disease = "alzheimer",
-wild_type = "A", alternative_sequence = "T")
+    wild_type = "A", alternative_sequence = "T")
+}
+
 }
 \references{
 \itemize{

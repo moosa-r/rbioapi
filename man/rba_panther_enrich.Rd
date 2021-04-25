@@ -68,10 +68,13 @@ Using this function you can use PANTHER services to perform
 }
 
 \examples{
+\donttest{
 rba_panther_enrich(genes = c("p53", "BRCA1", "cdk2", "Q99835", "CDC42",
-                             "CDK1", "KIF23", "PLK1", "RAC2", "RACGAP1"),
-                   organism = 9606, annot_dataset = "GO:0008150",
-                   cutoff = 0.01)
+        "CDK1", "KIF23", "PLK1", "RAC2", "RACGAP1"),
+    organism = 9606, annot_dataset = "GO:0008150",
+    cutoff = 0.01)
+}
+
 }
 \references{
 \itemize{

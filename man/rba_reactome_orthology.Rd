@@ -42,8 +42,11 @@ In version 73 (11 June 2020), using an orthology-based approach,
 }
 
 \examples{
+\donttest{
 rba_reactome_orthology(event_ids = c("R-HSA-6799198", " R-HSA-72764"),
-  species_dbid = 49633)
+    species_dbid = 49633)
+}
+
 }
 \references{
 \itemize{

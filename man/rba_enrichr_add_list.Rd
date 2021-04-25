@@ -33,8 +33,10 @@ Note that using \code{\link{rba_enrichr}} is a more convenient way to
 }
 
 \examples{
+\donttest{
 rba_enrichr_add_list(gene_list = c("TP53", "TNF", "EGFR"),
-  description = "tumoral genes")
+     description = "tumoral genes")
+}
 
 }
 \references{

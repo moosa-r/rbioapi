@@ -40,8 +40,13 @@ If you have a JSON file of analysis results (only obtained via
 }
 
 \examples{
-\dontrun{rba_reactome_analysis_import("c:/rbioapi/res.json")}
-\dontrun{rba_reactome_analysis_import("https://qaz.com/res.json.gz")}
+\dontrun{
+rba_reactome_analysis_import("c:/rbioapi/res.json")
+}
+\dontrun{
+rba_reactome_analysis_import("https://qaz.com/res.json.gz")
+}
+
 }
 \references{
 \itemize{
@@ -55,7 +60,7 @@ If you have a JSON file of analysis results (only obtained via
   }
 }
 \seealso{
-Other "Reactome Analysis Service, ": 
+Other "Reactome Analysis Service": 
 \code{\link{rba_reactome_analysis_download}()},
 \code{\link{rba_reactome_analysis_mapping}()},
 \code{\link{rba_reactome_analysis_pdf}()},
@@ -63,4 +68,4 @@ Other "Reactome Analysis Service, ":
 \code{\link{rba_reactome_analysis_token}()},
 \code{\link{rba_reactome_analysis}()}
 }
-\concept{"Reactome Analysis Service, "}
+\concept{"Reactome Analysis Service"}

@@ -23,8 +23,12 @@ This internal function will make it possible for the users to provide
   or not supported species, to produce an informative error message
 }
 \examples{
+\donttest{
 .rba_mieaa_species(9606)
+}
+\donttest{
 .rba_mieaa_species("hsa", to_name = TRUE)
+}
 
 }
 \seealso{

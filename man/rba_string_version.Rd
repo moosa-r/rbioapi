@@ -29,7 +29,9 @@ Note that STRING releases new version at approximately 2 years cycle.
 }
 
 \examples{
+\donttest{
 rba_string_version()
+}
 
 }
 \references{

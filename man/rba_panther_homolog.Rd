@@ -42,7 +42,9 @@ Using this function you can search and retrieve homolog of given gene(s).
 }
 
 \examples{
+\donttest{
 rba_panther_homolog("OR4F5", organism = 9606, type = "P")
+}
 
 }
 \references{

@@ -39,7 +39,9 @@ You should call this function once per R session with the argument
 }
 
 \examples{
+\donttest{
 rba_enrichr_libs()
+}
 
 }
 \references{

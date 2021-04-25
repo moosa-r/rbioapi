@@ -35,8 +35,13 @@ Reactome cross-references external database's identifiers to it's database
 }
 
 \examples{
+\donttest{
 rba_reactome_xref("CD40")
+}
+\donttest{
 rba_reactome_xref("ENSP00000361350")
+}
+
 }
 \references{
 \itemize{

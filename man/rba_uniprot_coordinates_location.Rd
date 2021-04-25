@@ -45,10 +45,15 @@ For more information about how UniProt imports and calculates genomic
 }
 
 \examples{
+\donttest{
 rba_uniprot_coordinates_location(taxid = 9606,
-  locations = "Y:17100001-19600000", in_range = TRUE)
+    locations = "Y:17100001-19600000", in_range = TRUE)
+}
+\donttest{
 rba_uniprot_coordinates_location(taxid = 9606,
-  locations = "20:39000001", in_range = FALSE)
+    locations = "20:39000001", in_range = FALSE)
+}
+
 }
 \references{
 \itemize{

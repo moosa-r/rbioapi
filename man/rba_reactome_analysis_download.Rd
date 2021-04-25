@@ -72,8 +72,10 @@ GET https://reactome.org/AnalysisService/download/{token}/result.json.gz"
 
 \examples{
 \dontrun{
-  rba_reactome_analysis_download(token = "MjAyMDEwMTYwMTI3MTNfMjY1MjM",
-    request = "found_ids", save_to = "found_ids.csv")}
+rba_reactome_analysis_download(token = "MjAyMDEwMTYwMTI3MTNfMjY1MjM",
+    request = "found_ids", save_to = "found_ids.csv")
+}
+
 }
 \references{
 \itemize{
@@ -90,7 +92,7 @@ GET https://reactome.org/AnalysisService/download/{token}/result.json.gz"
 \code{\link{rba_reactome_analysis_pdf}}
 \code{\link{rba_reactome_analysis}}
 
-Other "Reactome Analysis Service, ": 
+Other "Reactome Analysis Service": 
 \code{\link{rba_reactome_analysis_import}()},
 \code{\link{rba_reactome_analysis_mapping}()},
 \code{\link{rba_reactome_analysis_pdf}()},
@@ -98,4 +100,4 @@ Other "Reactome Analysis Service, ":
 \code{\link{rba_reactome_analysis_token}()},
 \code{\link{rba_reactome_analysis}()}
 }
-\concept{"Reactome Analysis Service, "}
+\concept{"Reactome Analysis Service"}

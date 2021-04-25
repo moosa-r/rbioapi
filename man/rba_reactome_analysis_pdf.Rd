@@ -77,8 +77,11 @@ Token is associated to each Reactome analysis results and kept by Reactome
 }
 
 \examples{
-\dontrun{rba_reactome_analysis_pdf(token = "MjAyMDEwMTYwMTI3MTNfMjY1MjM\%3D",
-   species = 9606, save_to = "my_analysis.pdf")}
+\dontrun{
+rba_reactome_analysis_pdf(token = "MjAyMDEwMTYwMTI3MTNfMjY1MjM\%3D",
+    species = 9606, save_to = "my_analysis.pdf")
+}
+
 }
 \references{
 \itemize{
@@ -95,7 +98,7 @@ Token is associated to each Reactome analysis results and kept by Reactome
 \code{\link{rba_reactome_analysis_download}}
 \code{\link{rba_reactome_analysis}}
 
-Other "Reactome Analysis Service, ": 
+Other "Reactome Analysis Service": 
 \code{\link{rba_reactome_analysis_download}()},
 \code{\link{rba_reactome_analysis_import}()},
 \code{\link{rba_reactome_analysis_mapping}()},
@@ -103,4 +106,4 @@ Other "Reactome Analysis Service, ":
 \code{\link{rba_reactome_analysis_token}()},
 \code{\link{rba_reactome_analysis}()}
 }
-\concept{"Reactome Analysis Service, "}
+\concept{"Reactome Analysis Service"}

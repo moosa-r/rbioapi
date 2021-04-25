@@ -80,8 +80,11 @@ After Any Analysis, Reactome will associate a token to your analysis. It
 }
 
 \examples{
-\dontrun{rba_reactome_analysis_token(token = "MjAyMDEwMTYwMTI3MTNfMjY1MjM",
-  species = 9606)}
+\dontrun{
+rba_reactome_analysis_token(token = "MjAyMDEwMTYwMTI3MTNfMjY1MjM",
+    species = 9606)
+}
+
 }
 \references{
 \itemize{
@@ -97,7 +100,7 @@ After Any Analysis, Reactome will associate a token to your analysis. It
 \seealso{
 \code{\link{rba_reactome_analysis}}
 
-Other "Reactome Analysis Service, ": 
+Other "Reactome Analysis Service": 
 \code{\link{rba_reactome_analysis_download}()},
 \code{\link{rba_reactome_analysis_import}()},
 \code{\link{rba_reactome_analysis_mapping}()},
@@ -105,4 +108,4 @@ Other "Reactome Analysis Service, ":
 \code{\link{rba_reactome_analysis_species}()},
 \code{\link{rba_reactome_analysis}()}
 }
-\concept{"Reactome Analysis Service, "}
+\concept{"Reactome Analysis Service"}

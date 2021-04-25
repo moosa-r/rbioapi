@@ -27,8 +27,13 @@ Use this function to retrieve a table of Available species in Reactome.
 }
 
 \examples{
+\donttest{
 rba_reactome_species()
+}
+\donttest{
 rba_reactome_species(only_main = TRUE)
+}
+
 }
 \references{
 \itemize{

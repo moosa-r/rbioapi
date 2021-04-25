@@ -74,10 +74,19 @@
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_uniparc_search(upi = "UPI00000000C9")
+#' }
+#' \donttest{
 #' rba_uniprot_uniparc_search(accession = "P30914")
+#' }
+#' \donttest{
 #' rba_uniprot_uniparc_search(accession = "P30914", rf_active = TRUE)
+#' }
+#' \donttest{
 #' rba_uniprot_uniparc_search(taxid = "694009", protein = "Nucleoprotein")
+#' }
+#'
 #' @family "UniProt API, UniParc"
 #' @export
 rba_uniprot_uniparc_search <- function(upi = NA,
@@ -284,9 +293,16 @@ rba_uniprot_uniparc_search <- function(upi = NA,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_uniparc(upi = "UPI00000000C9")
+#' }
+#' \donttest{
 #' rba_uniprot_uniparc(upi = "UPI00000000C9")
+#' }
+#' \donttest{
 #' rba_uniprot_uniparc(upi = "UPI00000000C9", rf_active = FALSE)
+#' }
+#'
 #' @family "UniProt API, UniParc"
 #' @export
 rba_uniprot_uniparc <- function(upi = NA,
@@ -414,7 +430,10 @@ rba_uniprot_uniparc <- function(upi = NA,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_uniparc_bestguess("UPI00000000C9")
+#' }
+#'
 #' @family "UniProt API, UniParc"
 #' @export
 rba_uniprot_uniparc_bestguess <- function(upi = NA,
@@ -521,7 +540,10 @@ rba_uniprot_uniparc_bestguess <- function(upi = NA,
 #'   }
 #'
 #' @examples
+#' \donttest{
 #' rba_uniprot_uniparc_sequence("GMRSCPRGCSQRGRCENGRCVCNPGYTGEDC")
+#' }
+#'
 #' @family "UniProt API, UniParc"
 #' @export
 rba_uniprot_uniparc_sequence <- function(sequence,

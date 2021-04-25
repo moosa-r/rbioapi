@@ -38,8 +38,13 @@ Reactome's Events hierarchy for any specie will begin with pathways with
 }
 
 \examples{
+\donttest{
 rba_reactome_pathways_top(species = 9606)
+}
+\donttest{
 rba_reactome_pathways_top(species = "Saccharomyces cerevisiae")
+}
+
 }
 \references{
 \itemize{

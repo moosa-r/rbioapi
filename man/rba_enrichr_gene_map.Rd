@@ -27,8 +27,12 @@ This function will search your provided gene and retrieve a list of Enrichr
 }
 
 \examples{
+\donttest{
 rba_enrichr_gene_map(gene = "p53")
+}
+\donttest{
 rba_enrichr_gene_map(gene = "p53", catagorize = TRUE)
+}
 
 }
 \references{

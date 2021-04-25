@@ -39,7 +39,10 @@ Using this function, you can retrieve Orthologs, MSA or Tree topology
 }
 
 \examples{
+\donttest{
 rba_panther_family("PTHR10000", what = "ortholog")
+}
+
 }
 \references{
 \itemize{

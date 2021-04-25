@@ -41,8 +41,13 @@ A person by his identifiers
 }
 
 \examples{
+\donttest{
 rba_reactome_people_id("391309")
+}
+\donttest{
 rba_reactome_people_id(person_id = "391309", authored_pathways = TRUE)
+}
+
 }
 \references{
 \itemize{

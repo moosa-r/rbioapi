@@ -85,11 +85,16 @@ This function will Save a Pathway Overview of the provided specie
 }
 
 \examples{
-\dontrun{rba_reactome_exporter_overview(species = 9606,
-  output_format = "svg",
-  save_to = "human_pathways.svg")}
-\dontrun{rba_reactome_exporter_overview(species = 9606,
-  token = 123456789)}
+\dontrun{
+rba_reactome_exporter_overview(species = 9606,
+    output_format = "svg",
+    save_to = "human_pathways.svg")
+}
+\dontrun{
+rba_reactome_exporter_overview(species = 9606,
+    token = 123456789)
+}
+
 }
 \references{
 \itemize{

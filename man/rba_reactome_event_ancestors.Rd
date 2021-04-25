@@ -37,7 +37,10 @@ By Reactome's definition, Events are the building blocks of biological
 }
 
 \examples{
+\donttest{
 rba_reactome_event_ancestors("R-HSA-5673001")
+}
+
 }
 \references{
 \itemize{

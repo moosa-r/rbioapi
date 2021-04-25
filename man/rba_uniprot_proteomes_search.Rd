@@ -71,10 +71,19 @@ Note that this is a search function. Thus, you are not required to fill
 }
 
 \examples{
+\donttest{
 rba_uniprot_proteomes_search(name = "SARS-CoV")
+}
+\donttest{
 rba_uniprot_proteomes_search(name = "SARS-CoV", is_ref_proteome = TRUE)
+}
+\donttest{
 rba_uniprot_proteomes_search(name = "SARS-CoV", is_ref_proteome = TRUE)
+}
+\donttest{
 rba_uniprot_proteomes_search(genome_acc = "AY274119")
+}
+
 }
 \references{
 \itemize{

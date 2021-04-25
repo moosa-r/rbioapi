@@ -114,10 +114,19 @@ Note that this is a search function. Thus, you are not required to fill
 }
 
 \examples{
+\donttest{
 rba_uniprot_uniparc_search(upi = "UPI00000000C9")
+}
+\donttest{
 rba_uniprot_uniparc_search(accession = "P30914")
+}
+\donttest{
 rba_uniprot_uniparc_search(accession = "P30914", rf_active = TRUE)
+}
+\donttest{
 rba_uniprot_uniparc_search(taxid = "694009", protein = "Nucleoprotein")
+}
+
 }
 \references{
 \itemize{

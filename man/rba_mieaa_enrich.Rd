@@ -120,11 +120,13 @@ This function will call other rba_mieaa_*** functions with the following
 }
 
 \examples{
-\dontrun{rba_mieaa_enrich(test_set = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
-  input_type = "mature",
-  test_type = "GSEA",
-  species = 9606,
-  categories = NA)}
+\dontrun{
+rba_mieaa_enrich(test_set = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
+     mirna_type = "mature",
+     test_type = "GSEA",
+     species = 9606,
+     categories = NA)
+}
 
 }
 \references{
