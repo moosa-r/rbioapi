@@ -63,7 +63,7 @@ There are two approaches to do this, we will start with the simpler one.
 
 ## Approach 1: Using the Wrapper function {#approach-1-using-the-wrapper-function .heading3}
 
-Just fill the arguments of `rba_enrichr_wrp()` according to the function's manual; As you can see in the function's arguments, you have a lot of controls over your enrichment request, but you need to provide `test_set`, `mirna_type`, `test_type`, and `species`:
+Just fill the arguments of `rba_mieaa_enrich()` according to the function's manual; As you can see in the function's arguments, you have a lot of controls over your enrichment request, but you need to provide `test_set`, `mirna_type`, `test_type`, and `species`:
 
 ```{r rba_mieaa_enrich, message=TRUE}
 # 1 We create a variable with our miRNAs' mature IDs
@@ -99,7 +99,7 @@ DT::datatable(data = mieaa_kegg,
 
 ## Approach 2: Going step-by-step {#approach-2-going-step-by-step .heading3}
 
-As stated before, `rba_enrichr_wrp()` is a wrapper function, meaning that it executes the following sequence of functions:
+As stated before, `rba_mieaa_enrich()` is a wrapper function, meaning that it executes the following sequence of functions:
 
 ```{r rba_meaa_submit/status/results, eval=FALSE}
 # 1 Submit enrichment request to miEAA
