@@ -59,7 +59,7 @@ rba_reactome_version <- function(...) {
 #'   Reactome.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/ContentService/GET data/diseases"\cr
+#'  "GET https://reactome.org/ContentService/GET data/diseases"
 #'  "GET https://reactome.org/ContentService/GET data/diseases/doid"
 #'
 #' @param doid (logical) Return disease DOIDs instead of diseases?
@@ -412,7 +412,7 @@ rba_reactome_entity_other_forms <- function(entity_id,
 #'   "Reaction-like events". The events are organized in a hierarchical
 #'   structure; and each event could be child or parent to another event; The
 #'   hierarchy will always begin with a "Top level pathway" event. Also note
-#'   that a given event could be part of more that one hierarchies.\cr
+#'   that a given event could be part of more that one hierarchies.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://reactome.org/ContentService/data/event/{id}/ancestors"
@@ -548,23 +548,23 @@ rba_reactome_event_hierarchy <- function(species,
 
 #' Get a Reactome Event Diagram
 #'
-#' This function could be called in two scenarios:\cr
-#'   1- With create_document = FALSE: To retrieve an image of that event's
-#'   Diagram.\cr
-#'   2- With create_document = TRUE: To retrieve a PDF document with the
-#'   event's diagram image and additional information.\cr
-#'   see "Details section" for more information
+#' This function could be called in two scenarios: \enumerate{
+#'   \item With create_document = FALSE: To retrieve an image of that event's
+#'   Diagram.
+#'   \item With create_document = TRUE: To retrieve a PDF document with the
+#'   event's diagram image and additional information.}
+#'   \cr see "Details section" for more information
 #'
-#' If the function is called with create_document = FALSE:\cr
-#'   The result will be an image with the format provided in "output_format"
+#' If the function is called with create_document = FALSE:
+#'   \cr The result will be an image with the format provided in "output_format"
 #'   argument. If the provided event ID refers to a pathway, the image's
 #'   content will be the that pathways diagram. If the provided event ID refers
 #'   to a sub-pathway or reaction event, the parent pathway's diagram will be
-#'   exported, with that reaction or sub-pathway's events highlighted.\cr
-#'   Note that to export an image of reaction-like event separately, you should
-#'   use \code{\link{rba_reactome_exporter_reaction}}.\cr\cr
-#'   If the function is called with create_document = TRUE:\cr
-#'   A PDF document will contain an image of the event's diagram and the
+#'   exported, with that reaction or sub-pathway's events highlighted.
+#'   \cr Note that to export an image of reaction-like event separately, you
+#'   should use \code{\link{rba_reactome_exporter_reaction}}.
+#'   \cr If the function is called with create_document = TRUE:
+#'   \cr A PDF document will contain an image of the event's diagram and the
 #'   following information of that events: Summation, Literature references,
 #'   Edit history type, location, compartments and diseases.
 #'   note that if you call the function with "document level = 1", information
@@ -572,7 +572,7 @@ rba_reactome_event_hierarchy <- function(species,
 #'
 #' @section Corresponding API Resources:
 #'   "GET https://reactome.org/ContentService/exporter/diagram/{identifier}
-#'   .{ext}"\cr
+#'   .{ext}"
 #'   "GET https://reactome.org/ContentService/exporter/document/event/
 #'   {identifier}.pdf"
 #'
@@ -821,7 +821,7 @@ rba_reactome_exporter_diagram <- function(event_id,
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://reactome.org/ContentService//exporter/event/
-#'  {identifier}.sbgn"\cr
+#'  {identifier}.sbgn"
 #'  "GET https://reactome.org/ContentService//exporter/event/
 #'  {identifier}.sbml"
 #'
@@ -1295,15 +1295,15 @@ rba_reactome_exporter_reaction <- function(event_id,
 #' You can call this function in two scenarios:
 #'   1- To retrieve information of all available PSICQUIC resources, call the
 #'   function without providing any argument; i.e
-#'   rba_reactome_interactors_psicquic().\cr
+#'   rba_reactome_interactors_psicquic().
 #'   2-To retrieve a list of interactors of specific protein(s), fill out the
 #'   function's arguments.
 #'
 #' @section Corresponding API Resources:
 #'  "POST https://reactome.org/ContentService/interactors/psicquic/molecules/
-#'    {resource}/details"\cr
+#'    {resource}/details"
 #'  "POST https://reactome.org/ContentService/interactors/psicquic/molecules/
-#'    {resource}/summary"\cr
+#'    {resource}/summary"
 #'  "GET https://reactome.org/ContentService/interactors/psicquic/resources"
 #'
 #' @param proteins Proteins to retrieve PSICQUIC interactors.
@@ -1405,19 +1405,19 @@ rba_reactome_interactors_psicquic <- function(proteins = NA,
 #'
 #' Reactome maintain a locally host a version of IntAct(Static) interactions
 #'   database. Using this funtion, you can retrieve IntAct information of
-#'   a prtotein(s) in two scenarios:\cr
-#'   1- If endpoint = "details" or "summary": Retrieve a detailed/summary
+#'   a prtotein(s) in two scenarios: \enumerate{
+#'   \item If endpoint = "details" or "summary": Retrieve a detailed/summary
 #'     information of your provided protein accesions(s) from IntAct database.
-#'   2- If endpoint = "pathway", Retrieve a list of Reactome pathways which
+#'   \item If endpoint = "pathway", Retrieve a list of Reactome pathways which
 #'   include your provided protein accession. Pathways with the class
-#'   "TopLevelPathway" will be excluded.
+#'   "TopLevelPathway" will be excluded.}
 #'
 #' @section Corresponding API Resources:
 #'  "POST https://reactome.org/ContentService/interactors/static/
-#'  molecules/details"\cr
-#'  "POST https://reactome.org/ContentService/interactors/static/
-#'  molecules/summary"\cr
-#'  "GET https://reactome.org/ContentService/interactors/static/
+#'  molecules/details"
+#'  \cr "POST https://reactome.org/ContentService/interactors/static/
+#'  molecules/summary"
+#'  \cr "GET https://reactome.org/ContentService/interactors/static/
 #'  molecules/pathways"
 #'
 #' @param proteins Uniprot proteins accession(s). If endpoint = "pathway",
@@ -1548,9 +1548,9 @@ rba_reactome_interactors_static <- function(proteins,
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://reactome.org/ContentService/data/mapping/{resource}/
-#'  {identifier}/pathways"\cr
-#'  "GET https://reactome.org/ContentService/data/mapping/{resource}/
-#'  {identifier}/reactions"\cr
+#'  {identifier}/pathways"
+#'  \cr "GET https://reactome.org/ContentService/data/mapping/{resource}/
+#'  {identifier}/reactions"
 #'
 #' @param id Molecule's external Identifier
 #' @param resource What is the resource of your provided ID? see:
@@ -1644,8 +1644,8 @@ rba_reactome_mapping <- function(id,
 #'
 #' In version 73 (11 June 2020), using an orthology-based approach,
 #'   Homo sapiens events was projected to 18,654 orthologous pathways (with
-#'   81,835 orthologous proteins) in 15 non-human species.\cr
-#'   Refer to \href{https://reactome.org/documentation/inferred-events}{
+#'   81,835 orthologous proteins) in 15 non-human species.
+#'   \cr Refer to \href{https://reactome.org/documentation/inferred-events}{
 #'   Reactome Computationally Inferred Events} for more information.
 #'
 #' @section Corresponding API Resources:
@@ -1740,22 +1740,22 @@ rba_reactome_orthology <- function(event_ids,
 #'  extra-cellular region; And the second one is with ID
 #'  \href{https://reactome.org/content/schema/instance/browser/R-HSA-2038819}{
 #'  "R-HSA-2038819"} and refers to the plasma-membrane-integrated form of
-#'  the antibody protein.\cr\cr
-#'  To make it possible to link multiple 'Physical Entity' instances of a
+#'  the antibody protein.
+#'  \cr To make it possible to link multiple 'Physical Entity' instances of a
 #'  molecule, Reactome uses a data class named "'Reference Entities'"
 #'  which correspond to the invariant attribute of a molecule. for example,
 #'  both of the above-mentioned 'Physical Entities' refer to a 'Reference Entities'
 #'  named \href{https://reactome.org/content/schema/instance/browser/57819}{
-#'  "UniProt:P01834 IGKC}.\cr\cr
-#'  See \href{https://reactome.org/documentation/data-model}{Reactome
+#'  "UniProt:P01834 IGKC}.
+#'  \cr See \href{https://reactome.org/documentation/data-model}{Reactome
 #'  Data Model} for more information about the data model and Physical
 #'  Entities.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/ContentService/data/participants/{id}"\cr
-#'  "GET https://reactome.org/ContentService/data/participants/{id}/
-#'  participatingPhysicalEntities"\cr
-#'  "GET https://reactome.org/ContentService/data/participants/{id}/
+#'  "GET https://reactome.org/ContentService/data/participants/{id}"
+#'  \cr "GET https://reactome.org/ContentService/data/participants/{id}/
+#'  participatingPhysicalEntities"
+#'  \cr "GET https://reactome.org/ContentService/data/participants/{id}/
 #'  referenceEntities"
 #'
 #' @param event_id Reactome event's database ID (DbId) or Stable ID (StId).
@@ -1863,8 +1863,8 @@ rba_reactome_participants <- function(event_id,
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://reactome.org/ContentService/data/pathway/{id}/
-#'  containedEvents"\cr
-#'  "GET https://reactome.org/ContentService/data/pathway/{id}/
+#'  containedEvents"
+#'  \cr "GET https://reactome.org/ContentService/data/pathway/{id}/
 #'  containedEvents/{attributeName}"
 #'
 #' @param event_id Reactome event's database ID (DbId) or Stable ID (StId).
@@ -1962,10 +1962,10 @@ rba_reactome_pathways_events <- function(event_id,
 #'   modify your search.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/ContentService/data/pathways/low/entity/{id}"\cr
-#'  "GET https://reactome.org/ContentService/data/pathways/low/diagram/
-#'  entity/{id}"\cr
-#'  "GET https://reactome.org/ContentService/data/pathways/low/diagram/
+#'  "GET https://reactome.org/ContentService/data/pathways/low/entity/{id}"
+#'  \cr "GET https://reactome.org/ContentService/data/pathways/low/diagram/
+#'  entity/{id}"
+#'  \cr "GET https://reactome.org/ContentService/data/pathways/low/diagram/
 #'  entity/{id}/allForms"
 #'
 #' @param entity_id The entity that should exist in the pathways.
@@ -2145,8 +2145,8 @@ rba_reactome_pathways_top <- function(species,
 #'   name and retrieve a list of matching people in Reactome.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/ContentService/data/people/name/{name}"\cr
-#'  "GET https://reactome.org/ContentService/data/people/name/{name}/exact"
+#'  "GET https://reactome.org/ContentService/data/people/name/{name}"
+#'  \cr "GET https://reactome.org/ContentService/data/people/name/{name}/exact"
 #'
 #' @param person_name first and last name of the person
 #' @param exact_match Logical: should the provided name be considered as
@@ -2316,11 +2316,11 @@ rba_reactome_people_id <- function(person_id,
 #'   knowledge-base}
 #'
 #' @section Corresponding API Resources:
-#'  "POST https://reactome.org/ContentService/data/query/ids"\cr
-#'  "POST https://reactome.org/ContentService/data/query/ids/map"
-#'  "GET https://reactome.org/ContentService/data/query/{id}"
-#'  "GET https://reactome.org/ContentService//data/query/enhanced/{id}"
-#'  "GET https://reactome.org/ContentService/data/query/{id}/{attributeName}"
+#'  "POST https://reactome.org/ContentService/data/query/ids"
+#'  \cr "POST https://reactome.org/ContentService/data/query/ids/map"
+#'  \cr "GET https://reactome.org/ContentService/data/query/{id}"
+#'  \cr s"GET https://reactome.org/ContentService//data/query/enhanced/{id}"
+#'  \cr "GET https://reactome.org/ContentService/data/query/{id}/{attributeName}"
 #'
 #' @param ids A single or Multiple database IDs (DbId), Stable IDs (StId) or
 #'   a mixture of both.
@@ -2455,8 +2455,8 @@ rba_reactome_query <- function(ids,
 #'   Entries named ReferenceEntity, which resembles the invariant aspect of
 #'   a molecule. Thus there is a one-to-many relationship between Reactome's
 #'   ReferenceEntity object and the molecule's ID in external databases,
-#'   which in Reactome's terms is called Cross Reference.\cr
-#'   Refer to \code{\link{rba_reactome_participants}}'s "Details section"
+#'   which in Reactome's terms is called Cross Reference.
+#'   \cr Refer to \code{\link{rba_reactome_participants}}'s "Details section"
 #'   to learn more about how Reactome classifies molecules.
 #'
 #' @section Corresponding API Resources:
@@ -2524,8 +2524,8 @@ rba_reactome_xref <- function(xref_id,
 #' Use this function to retrieve a table of Available species in Reactome.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/ContentService/data/species/all"\cr
-#'  "GET https://reactome.org/ContentService/data/species/main"
+#'  "GET https://reactome.org/ContentService/data/species/all"
+#'  \cr "GET https://reactome.org/ContentService/data/species/main"
 #'
 #' @param only_main Logical: If set to TRUE, will only return species which
 #'   have either manually-curated or computationally inferred pathways.

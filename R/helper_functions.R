@@ -39,10 +39,10 @@
 #'
 #' This function attempts to send a simple query to the supported services.
 #'   If the service successfully responded, you will be informed with a success
-#'   message; If not, the content of the error will be reported to you.\cr
-#'   Please run this function if you encounter any errors while using rbioapi.
-#'   Also, if you need to contact support, kindly call this function with
-#'   'diagnostic = TRUE' and include the output messages in your support
+#'   message; If not, the content of the error will be reported to you.
+#'   \cr Please run this function if you encounter any errors while using
+#'   rbioapi. Also, if you need to contact support, kindly call this function
+#'   with 'diagnostic = TRUE' and include the output messages in your support
 #'   request.
 #' @param diagnostics (Logical) (default = FALSE) Show diagnostics and
 #'   detailed messages with internal information.
@@ -93,14 +93,14 @@ rba_connection_test <- function(diagnostics = FALSE) {
 #' Set rbioapi Global Options
 #'
 #' A safe way to change rbioapi's global options and behavior. see "arguments"
-#'   section for available options.\cr
-#'   Note that you are not limited to changing the options globally, you can
+#'   section for available options.
+#'   \cr Note that you are not limited to changing the options globally, you can
 #'   include the option names and values in the '...' argument of any rbioapi
 #'   function to alter the option(s) only in that function call;
-#'   e.g. example_function(x, diagnostics = TRUE, timeout = 300).\cr\cr
-#'   Alternatively, you can call this function with no arguments, i.e.
+#'   e.g. example_function(x, diagnostics = TRUE, timeout = 300).
+#'   \cr Alternatively, you can call this function with no arguments, i.e.
 #'   rba_options(), to retrieve a data frame of available rbioapi options and
-#'   their current values.\cr
+#'   their current values.
 #'
 #'   Because this function validates your provided changes, please
 #'   \strong{\emph{only change rbioapi options using this function}} and avoid
@@ -248,8 +248,8 @@ rba_options <- function(diagnostics = NA,
 #'   but with two differences:\enumerate{
 #'   \item: Wrap a quote() around it. meaning: quote(rba_example())
 #'   \item: Set the argument that corresponds to the page number to
-#'   "pages:start_page:end_page", for example "pages:1:5".}\cr
-#'   refer to the "examples" section to learn more.
+#'   "pages:start_page:end_page", for example "pages:1:5".}
+#'   \cr refer to the "examples" section to learn more.
 #'
 #' @return A named list where each element corresponds to a request's page.
 #'

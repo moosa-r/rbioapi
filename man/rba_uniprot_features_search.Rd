@@ -73,8 +73,8 @@ List where each element corresponds to one UniProt entity returned
 \description{
 Note that this is a search function. Thus, you are not required to fill
   every argument; You may use whatever combinations of arguments you see
-  fit for your query.\cr\cr
-  UniProt Entries are grouped in two sections:\enumerate{
+  fit for your query.
+  \cr UniProt Entries are grouped in two sections:\enumerate{
   \item Reviewed(Swiss-Prot): Manually annotated records with information
   extracted from literature and curator-evaluated computational analysis.
   \item Unreviewed (TrEMBL): Computationally analyzed records that await

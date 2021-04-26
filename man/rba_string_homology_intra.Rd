@@ -32,8 +32,8 @@ Using this function, you can retrieve the Smith-Waterman bit scores among
 Note that this function will retrieve similarity scores of different
   proteins "within the same species". To Get a similarity scores of a given
   protein and it's closets homologous proteins in other species, refer to
-  \code{\link{rba_string_homology_inter}}.\cr
-  Similarity matrix is imported -by STRING- from:
+  \code{\link{rba_string_homology_inter}}.
+  \cr Similarity matrix is imported -by STRING- from:
   \href{http://cube.univie.ac.at/resources/simap}{Similarity Matrix of
   Proteins (SIMAP)}
 }

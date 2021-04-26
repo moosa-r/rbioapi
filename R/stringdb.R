@@ -333,20 +333,20 @@ rba_string_network_image <- function(ids,
 #'   arguments documentation for more information on available options.
 #'
 #' @return A data frame which each row is a network interaction and the
-#'   columns contains interactor information and interaction scores:
-#'   stringId_A: STRING identifier (protein A)\cr
-#'   stringId_B:STRING identifier (protein B)\cr
-#'   preferredName_A: common protein name (protein A)\cr
-#'   preferredName_B: common protein name (protein B)\cr
-#'   ncbiTaxonId: NCBI taxon identifier\cr
-#'   score: combined score\cr
-#'   nscore: gene neighborhood score\cr
-#'   fscore: gene fusion score\cr
-#'   pscore: phylogenetic profile score\cr
-#'   ascore: coexpression score\cr
-#'   escore: experimental score\cr
-#'   dscore: database score\cr
-#'   tscore: textmining score
+#'   columns contains interactor information and interaction scores: \itemize{
+#'   \item stringId_A: STRING identifier (protein A)
+#'   \item stringId_B:STRING identifier (protein B)
+#'   \item preferredName_A: common protein name (protein A)
+#'   \item preferredName_B: common protein name (protein B)
+#'   \item ncbiTaxonId: NCBI taxon identifier
+#'   \item score: combined score
+#'   \item nscore: gene neighborhood score
+#'   \item fscore: gene fusion score
+#'   \item pscore: phylogenetic profile score
+#'   \item ascore: coexpression score
+#'   \item escore: experimental score
+#'   \item dscore: database score
+#'   \item tscore: textmining score}
 #'
 #' @references \itemize{
 #'   \item Szklarczyk D, Gable AL, Lyon D, Junge A, Wyder S, Huerta-Cepas J,
@@ -445,9 +445,9 @@ rba_string_interactions_network <- function(ids,
 #'
 #' This function will retrieve all the STRING interactions which include your
 #'   proteins as one party of the interaction. (e.g. interaction between your
-#'   proteins and every other STRING proteins.)\cr
-#'   Given the size of STRING database, this function could return a very long
-#'   results. Refer to "Arguments" section for information on how to filter
+#'   proteins and every other STRING proteins.)
+#'   \cr Given the size of STRING database, this function could return a very
+#'   long results. Refer to "Arguments" section for information on how to filter
 #'   the interactions.
 #'
 #' Note that this function will retrieve the interactions between your input
@@ -580,8 +580,8 @@ rba_string_interaction_partners <- function(ids,
 #' Note that this function will retrieve similarity scores of different
 #'   proteins "within the same species". To Get a similarity scores of a given
 #'   protein and it's closets homologous proteins in other species, refer to
-#'   \code{\link{rba_string_homology_inter}}.\cr
-#'   Similarity matrix is imported -by STRING- from:
+#'   \code{\link{rba_string_homology_inter}}.
+#'   \cr Similarity matrix is imported -by STRING- from:
 #'   \href{http://cube.univie.ac.at/resources/simap}{Similarity Matrix of
 #'   Proteins (SIMAP)}
 #'
@@ -674,8 +674,8 @@ rba_string_homology_intra <- function(ids,
 #' Note that this function will return the highest similarity score hits of
 #'   your given protein(s) and their closets homologous proteins in other
 #'   species. to retrieve similarity scores of different proteins within the
-#'   same species refer to \code{\link{rba_string_homology_intra}}.\cr
-#'   Similarity matrix is imported -by STRING- from:
+#'   same species refer to \code{\link{rba_string_homology_intra}}.
+#'   \cr Similarity matrix is imported -by STRING- from:
 #'   \href{http://cube.univie.ac.at/resources/simap}{Similarity Matrix of
 #'   Proteins (SIMAP)}
 #'
@@ -778,10 +778,10 @@ rba_string_homology_inter <- function(ids,
 #'
 #' STRING currently maps to and retrieve enrichment results based on Gene
 #'   Ontology (GO), KEGG pathways, UniProt Keywords, PubMed publications, Pfam
-#'   domains, InterPro domains, and SMART domains.\cr
-#'   Note that this function will only return the enriched terms pertinent to
-#'   your proteins that have a p-value lesser than 0.1. To retrieve a full list
-#'   of the terms -unfiltered by enrichment p-values-, use
+#'   domains, InterPro domains, and SMART domains.
+#'   \cr Note that this function will only return the enriched terms pertinent
+#'   to your proteins that have a p-value lesser than 0.1. To retrieve a full
+#'   list of the terms -unfiltered by enrichment p-values-, use
 #'   \code{\link{rba_string_annotations}}.
 #'
 #' @section Corresponding API Resources:
@@ -891,8 +891,8 @@ rba_string_enrichment <- function(ids,
 #'
 #' STRING currently maps to and retrieve enrichment results based on Gene
 #'   Ontology (GO), KEGG pathways, UniProt Keywords, PubMed publications, Pfam
-#'   domains, InterPro domains, and SMART domains.\cr
-#'   Note that this function will return a full list of the terms containing
+#'   domains, InterPro domains, and SMART domains.
+#'   \cr Note that this function will return a full list of the terms containing
 #'   your provided proteins. To perform enrichment and only retrieve a enriched
 #'   subset of the terms, use \code{\link{rba_string_enrichment}}.
 #'

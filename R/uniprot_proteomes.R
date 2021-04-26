@@ -10,7 +10,7 @@
 #'
 #'   Note that this is a search function. Thus, you are not required to fill
 #'   every argument; You may use whatever combinations of arguments you see
-#'   fit for your query.\cr\cr
+#'   fit for your query.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://ebi.ac.uk/proteins/api/proteomes"
@@ -170,7 +170,7 @@ rba_uniprot_proteomes_search <- function(name = NA,
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://ebi.ac.uk/proteins/api/proteomes/proteins/{upid}"
-#'  "GET https://ebi.ac.uk/proteins/api/proteomes/{upid}"
+#'  \cr "GET https://ebi.ac.uk/proteins/api/proteomes/{upid}"
 #'
 #' @param upid \href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
 #'   identifier (UPID)}. You can provide up to 100 UPIDs.
@@ -281,7 +281,7 @@ rba_uniprot_proteomes <- function(upid,
 #'
 #'   Note that this is a search function. Thus, you are not required to fill
 #'   every argument; You may use whatever combinations of arguments you see
-#'   fit for your query.\cr\cr
+#'   fit for your query.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://ebi.ac.uk/proteins/api/genecentric"

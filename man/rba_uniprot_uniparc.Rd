@@ -36,7 +36,7 @@ identifiers in any cross-reference database. You can provide multiple
 values.}
 
 \item{rf_active}{(logical ) Filter the content of UniParc entry based on
-active status on source database:\cr\itemize{
+active status on source database:\itemize{
 \item NA: don't filter contents based on active status.
 \item TRUE: only return contents which are still active.
 \item FALSE: Only return contents which are not active.}}
@@ -60,9 +60,9 @@ Use this function to retrieve UniParc entries. You can use either -and only
 \section{Corresponding API Resources}{
 
  "GET https://ebi.ac.uk/proteins/api/uniparc/accession/{accession} "
- "GET https://ebi.ac.uk/proteins/api/uniparc/dbreference/{dbid}"
- "GET https://ebi.ac.uk/proteins/api/uniparc/proteome/{upid}"
- "GET https://ebi.ac.uk/proteins/api/uniparc/upi/{upi}"
+ \cr "GET https://ebi.ac.uk/proteins/api/uniparc/dbreference/{dbid}"
+ \cr "GET https://ebi.ac.uk/proteins/api/uniparc/proteome/{upid}"
+ \cr "GET https://ebi.ac.uk/proteins/api/uniparc/upi/{upi}"
 }
 
 \examples{

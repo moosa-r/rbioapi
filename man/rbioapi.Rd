@@ -10,10 +10,10 @@ The goal of rbioapi is to provide a user-friendly and unified
   interface to biological databases, to insulate the user from
   technicalities when it comes to using API services and to create a
   unified, easy-to-learn, and easy-to-implement way to connect to biologic
-  databases.\cr
-  With rbioapi, You are not required to have any technical knowledge. Just
-  fill a function's arguments and the rest is handled for you.\cr
-  This an ongoing project. New databases and services will be implemented
+  databases.
+  \cr With rbioapi, You are not required to have any technical knowledge.
+  Just fill a function's arguments and the rest is handled for you.
+  \cr This an ongoing project. New databases and services will be implemented
   periodically. Feel free to suggest any databases or services you often use.
 }
 \section{Currently rbioapi fully supports}{

@@ -105,32 +105,32 @@
 #'   "Over-Representation" analysis will be performed.
 #'   \item If you provide a multi-columend table, with the first column being
 #'   molecules identifers and the rest being numeral expression values,
-#'   "Expression" analysis will be performed.}\cr
-#'   Refer to the details section for the accepted input types and format.
+#'   "Expression" analysis will be performed.}
+#'   \cr Refer to the details section for the accepted input types and format.
 #'
 #' You can provide your table or vector input in numerous formats:\enumerate{
 #'   \item A R object which can be data frame, matrix or a simple vector.
 #'   \item A path to a local text file in your device that contains the molecules
 #'   data. (The file should be formatted correctly, see below.)
 #'   \item A URL pointing to a text file on the web that contains the molecules
-#'   data. (The file should be formatted correctly, see below.}\cr\cr
-#'   If you provide a text file (as a local file path or URL), it should be
+#'   data. (The file should be formatted correctly, see below.}
+#'   \cr If you provide a text file (as a local file path or URL), it should be
 #'   in TSV (Tab-Separated Values) format; Column names should start with "#"
 #'   character. Note that if you are providing the file for
 #'   "Over-Representation" analysis (i.e. Single columned-data) this header
 #'   line is optional and will be used as your 'Sample Name', otherwise it is
-#'   required.\cr\cr
-#'   Also, form the "summary" element in the function's output, you can see
+#'   required.
+#'   \cr Also, form the "summary" element in the function's output, you can see
 #'   how Reactome Interpreted your input and subsequently the type of analysis
-#'   that has been performed.\cr\cr
-#'   There is no strict criteria about the type of your molecules Identifiers,
+#'   that has been performed.
+#'   \cr There is no strict criteria about the type of your molecules Identifiers,
 #'   Reactome will Map the IDs to it's internal database entities.
 #'   Nevertheless, You can check if all your identifiers has been found in
-#'   "identifiersNotFound" element in the function's output.\cr\cr
-#'   After Any Analysis, Reactome will associate a token to your analysis. It
-#'   can be later used to in function that requires the token (e.g to retrieve
-#'   the analysis results, download pdf).\cr\cr
-#'   Note that Reactome will store your token for only 7 days. You can
+#'   "identifiersNotFound" element in the function's output.
+#'   \cr After Any Analysis, Reactome will associate a token to your analysis.
+#'   It can be later used to in function that requires the token (e.g to retrieve
+#'   the analysis results, download pdf).
+#'   \cr Note that Reactome will store your token for only 7 days. You can
 #'   download your full results with
 #'   \code{\link{rba_reactome_analysis_download}}, and re-import it anytime to
 #'   reactome (using \code{\link{rba_reactome_analysis_import}}) to generate
@@ -138,9 +138,9 @@
 #'
 #' @section Corresponding API Resources:
 #'  "POST https://reactome.org/AnalysisService/identifiers/form"
-#'  "POST https://reactome.org/AnalysisService/identifiers/url"
-#'  "POST https://reactome.org/AnalysisService/identifiers/form/projection"
-#'  "POST https://reactome.org/AnalysisService/identifiers/url/projection"
+#'  \cr "POST https://reactome.org/AnalysisService/identifiers/url"
+#'  \cr "POST https://reactome.org/AnalysisService/identifiers/form/projection"
+#'  \cr "POST https://reactome.org/AnalysisService/identifiers/url/projection"
 #'
 #' @param input A vector, data frame, matrix or a local file path or URL
 #'   that points to your data. See "Details section" for more information of
@@ -166,12 +166,12 @@
 #' @param interactors Logical (default = FALSE) Should IntAct interaction data
 #'   be used to increase the analysis background?
 #' @param sort_by Sort the result based on what column? available choices
-#'   are:\cr "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
+#'   are: "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
 #'   "FOUND_ENTITIES", "FOUND_INTERACTORS", "FOUND_REACTIONS", "ENTITIES_RATIO",
 #'   "ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO"
 #' @param order Sort Order. Can be either "ASC" (default) or "DESC".
 #' @param resource Filter results based on the resource. Default is "TOTAL",
-#'   available choices are:\cr "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
+#'   available choices are: "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
 #'   "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
 #'   "PUBCHEM_COMPOUND".
 #' @param p_value Set a P value threshold. Only results with P value equal to
@@ -358,8 +358,8 @@ rba_reactome_analysis <- function(input,
 #' Token is associated to each Reactome analysis results and kept by Reactome
 #'   for at least 7 days. You can locate it in
 #'   \code{\link{rba_reactome_analysis}}'s output, under a sub-list named
-#'   "summary" (i.e. results$summary$token).\cr
-#'   Note that Reactome will store your token for only 7 days. You can
+#'   "summary" (i.e. results$summary$token).
+#'   \cr Note that Reactome will store your token for only 7 days. You can
 #'   download your full results with
 #'   \code{\link{rba_reactome_analysis_download}}, and re-import it anytime to
 #'   reactome (using \code{\link{rba_reactome_analysis_import}}) to generate
@@ -383,7 +383,7 @@ rba_reactome_analysis <- function(input,
 #' @param number Numeric: Maximum number of the reported pathways. Cannot not
 #'   be greater than 50.
 #' @param resource Filter results based on the resource. Default is "TOTAL",
-#'   available choices are:\cr "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
+#'   available choices are: "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
 #'   "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
 #'   "PUBCHEM_COMPOUND".
 #' @param diagram_profile Color profile of diagrams, should be either
@@ -521,18 +521,18 @@ rba_reactome_analysis_pdf <- function(token,
 #' Token is associated to each Reactome analysis results and kept by Reactome
 #'   for at least 7 days. You can locate it in
 #'   \code{\link{rba_reactome_analysis}}'s output, under a sub-list named
-#'   "summary" (i.e. results$summary$token).\cr
-#'   Use \code{\link{rba_reactome_analysis_pdf}} to save a full report
+#'   "summary" (i.e. results$summary$token).
+#'   \cr Use \code{\link{rba_reactome_analysis_pdf}} to save a full report
 #'   in PDF format.
 #'
 #' @section Corresponding API Resources:
 #' GET https://reactome.org/AnalysisService/download/{token}/entities/
-#' found/{resource}/{filename}.csv"\cr
+#' found/{resource}/{filename}.csv"
 #' GET https://reactome.org/AnalysisService//download/{token}/entities/
-#' notfound/{filename}.csv"\cr
+#' notfound/{filename}.csv"
 #' GET https://reactome.org/AnalysisService/download/{token}/pathways/
-#' {resource}/{filename}.csv"\cr
-#' GET https://reactome.org/AnalysisService/download/{token}/result.json"\cr
+#' {resource}/{filename}.csv"
+#' GET https://reactome.org/AnalysisService/download/{token}/result.json"
 #' GET https://reactome.org/AnalysisService/download/{token}/result.json.gz"
 #'
 #' @param token A token associated to your previous Reactome analysis.
@@ -554,7 +554,7 @@ rba_reactome_analysis_pdf <- function(token,
 #'   \item Character string: A valid file path to save the file to.}
 #' @param resource (Only when request is "found_ids" or "pathways")
 #'   Filter results based on the resource. Default is "TOTAL",
-#'   available choices are:\cr "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
+#'   available choices are:"TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
 #'   "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
 #'   "PUBCHEM_COMPOUND".
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
@@ -673,15 +673,15 @@ rba_reactome_analysis_download <- function(token,
 #' If you have a JSON file of analysis results (only obtained via
 #'   \code{\link{rba_reactome_analysis_download}} with the result argument
 #'   set to "results", or "results_gz"), you can import the results back to
-#'   Reactome and retrieve a token.\cr
-#'   This is useful when you want to use other Reactome services which require
+#'   Reactome and retrieve a token.
+#'   \cr This is useful when you want to use other Reactome services which require
 #'   a token but you do not have a token or your token has been
 #'   expired (i.e. more than 7 days passed from your analysis).
 #'
 #' @section Corresponding API Resources:
-#' "GET https://reactome.org/AnalysisService/import/"\cr
-#' "GET https://reactome.org/AnalysisService/import/form"\cr
-#' "GET https://reactome.org/AnalysisService/import/url"
+#' "GET https://reactome.org/AnalysisService/import/"
+#' \cr "GET https://reactome.org/AnalysisService/import/form"
+#' \cr "GET https://reactome.org/AnalysisService/import/url"
 #'
 #' @param input A local file path or URL that points to your -optionally
 #'   gzipped- JSON file.
@@ -766,12 +766,12 @@ rba_reactome_analysis_import <- function(input,
 #'   Reactome Identifiers.
 #'
 #' @section Corresponding API Resources:
-#' "GET https://reactome.org/AnalysisService/mapping"\cr
-#' "GET https://reactome.org/AnalysisService/mapping/form"\cr
-#' "GET https://reactome.org/AnalysisService/mapping/form/projection"\cr
-#' "GET https://reactome.org/AnalysisService/mapping"\cr
-#' "GET https://reactome.org/AnalysisService/mapping/url"\cr
-#' "GET https://reactome.org/AnalysisService/mapping/url/projection"
+#' "GET https://reactome.org/AnalysisService/mapping"
+#' \cr "GET https://reactome.org/AnalysisService/mapping/form"
+#' \cr "GET https://reactome.org/AnalysisService/mapping/form/projection"
+#' \cr "GET https://reactome.org/AnalysisService/mapping"
+#' \cr "GET https://reactome.org/AnalysisService/mapping/url"
+#' \cr "GET https://reactome.org/AnalysisService/mapping/url/projection"
 #'
 #' @param input A vector, local file path or URL that points to your
 #'   identifiers list.
@@ -876,12 +876,12 @@ rba_reactome_analysis_mapping <- function(input,
 #' Use This function to Compare human's manually-curated pathways
 #'   and computationally inferred pathways (orthologous) in other species.
 #'
-#' Reactome incorporate manually curated human reactions and PANTHER's
+#' \cr Reactome incorporate manually curated human reactions and PANTHER's
 #'   protein homology data to Computationally infer events in other euakaryotic
-#'   species.\cr\cr
-#' In version 73 (11 June 2020), using an orthology-based approach,
+#'   species.
+#' \cr In version 73 (11 June 2020), using an orthology-based approach,
 #'   Homo sapiens events was projected to 18,654 orthologous pathways (with
-#'   81,835 orthologous proteins) in 15 non-human species.\cr
+#'   81,835 orthologous proteins) in 15 non-human species.
 #'   Refer to \href{https://reactome.org/documentation/inferred-events}{
 #'   Reactome Computationally Inferred Events} for more information.
 #'
@@ -894,12 +894,12 @@ rba_reactome_analysis_mapping <- function(input,
 #'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
 #'    Data Schema: Entries: Species}.
 #' @param sort_by Sort the result based on what column? available choices
-#'   are:\cr "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
+#'   are: "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
 #'   "FOUND_ENTITIES", "FOUND_INTERACTORS", "FOUND_REACTIONS", "ENTITIES_RATIO",
 #'   "ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO"
 #' @param order Sort Order. Can be either "ASC" (default) or "DESC".
 #' @param resource Filter results based on the resource. Default is "TOTAL",
-#'   available choices are:\cr "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
+#'   available choices are: "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
 #'   "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
 #'   "PUBCHEM_COMPOUND".
 #' @param p_value Set a P value threshold. Only results with P value equal to
@@ -1024,8 +1024,8 @@ rba_reactome_analysis_species <- function(species_dbid,
 #'
 #' After Any Analysis, Reactome will associate a token to your analysis. It
 #'   can be later used to in function that requires the token (e.g to retrieve
-#'   the analysis results, download pdf).\cr\cr
-#'   Note that Reactome will store your token for only 7 days. You can
+#'   the analysis results, download pdf).
+#'   \cr Note that Reactome will store your token for only 7 days. You can
 #'   download your full results with
 #'   \code{\link{rba_reactome_analysis_download}}, and re-import it anytime to
 #'   reactome (using \code{\link{rba_reactome_analysis_import}}) to generate
@@ -1041,12 +1041,12 @@ rba_reactome_analysis_species <- function(species_dbid,
 #'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
 #'    Data Schema: Entries: Species}.
 #' @param sort_by Sort the result based on what column? available choices
-#'   are:\cr "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
+#'   are: "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
 #'   "FOUND_ENTITIES", "FOUND_INTERACTORS", "FOUND_REACTIONS", "ENTITIES_RATIO",
 #'   "ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO"
 #' @param order Sort Order. Can be either "ASC" (default) or "DESC".
 #' @param resource Filter results based on the resource. Default is "TOTAL",
-#'   available choices are:\cr "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
+#'   available choices are: "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
 #'   "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
 #'   "PUBCHEM_COMPOUND".
 #' @param p_value Set a P value threshold. Only results with P value equal to

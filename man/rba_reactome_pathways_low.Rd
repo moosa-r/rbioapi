@@ -44,10 +44,10 @@ Use this function to search the event hierarcht and retireve a list of
 }
 \section{Corresponding API Resources}{
 
- "GET https://reactome.org/ContentService/data/pathways/low/entity/{id}"\cr
- "GET https://reactome.org/ContentService/data/pathways/low/diagram/
- entity/{id}"\cr
- "GET https://reactome.org/ContentService/data/pathways/low/diagram/
+ "GET https://reactome.org/ContentService/data/pathways/low/entity/{id}"
+ \cr "GET https://reactome.org/ContentService/data/pathways/low/diagram/
+ entity/{id}"
+ \cr "GET https://reactome.org/ContentService/data/pathways/low/diagram/
  entity/{id}/allForms"
 }
 

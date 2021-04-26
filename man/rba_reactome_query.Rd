@@ -41,11 +41,11 @@ Using this Comprehensive function, You can Retrieve any object from
 }
 \section{Corresponding API Resources}{
 
- "POST https://reactome.org/ContentService/data/query/ids"\cr
- "POST https://reactome.org/ContentService/data/query/ids/map"
- "GET https://reactome.org/ContentService/data/query/{id}"
- "GET https://reactome.org/ContentService//data/query/enhanced/{id}"
- "GET https://reactome.org/ContentService/data/query/{id}/{attributeName}"
+ "POST https://reactome.org/ContentService/data/query/ids"
+ \cr "POST https://reactome.org/ContentService/data/query/ids/map"
+ \cr "GET https://reactome.org/ContentService/data/query/{id}"
+ \cr s"GET https://reactome.org/ContentService//data/query/enhanced/{id}"
+ \cr "GET https://reactome.org/ContentService/data/query/{id}/{attributeName}"
 }
 
 \examples{

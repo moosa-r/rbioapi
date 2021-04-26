@@ -63,14 +63,14 @@ If called without any argument, a Data frame with available options
 }
 \description{
 A safe way to change rbioapi's global options and behavior. see "arguments"
-  section for available options.\cr
-  Note that you are not limited to changing the options globally, you can
+  section for available options.
+  \cr Note that you are not limited to changing the options globally, you can
   include the option names and values in the '...' argument of any rbioapi
   function to alter the option(s) only in that function call;
-  e.g. example_function(x, diagnostics = TRUE, timeout = 300).\cr\cr
-  Alternatively, you can call this function with no arguments, i.e.
+  e.g. example_function(x, diagnostics = TRUE, timeout = 300).
+  \cr Alternatively, you can call this function with no arguments, i.e.
   rba_options(), to retrieve a data frame of available rbioapi options and
-  their current values.\cr
+  their current values.
 }
 \details{
 Because this function validates your provided changes, please

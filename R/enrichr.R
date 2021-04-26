@@ -7,10 +7,10 @@
 #'
 #' You should call this function once per R session with the argument
 #'   'store_in_options = TRUE' before using \code{\link{rba_enrichr_enrich}}
-#'   or \code{\link{rba_enrichr}}.\cr
-#'   Nevertheless, rbioapi will do this for you in the background at the first
-#'   time you call any function which requires this.\cr
-#'  Note that using \code{\link{rba_enrichr}} is a more convenient way to
+#'   or \code{\link{rba_enrichr}}.
+#'   \cr Nevertheless, rbioapi will do this for you in the background at the
+#'   first time you call any function which requires this.
+#'  \cr Note that using \code{\link{rba_enrichr}} is a more convenient way to
 #'    automatically perform this and other required function calls to enrich
 #'    your input gene-set.
 #'
@@ -531,9 +531,9 @@ rba_enrichr_gene_map <- function(gene,
 #'     against one or multiple Enrichr libraries
 #'   }
 #' @section Corresponding API Resources:
-#'  "GET https://maayanlab.cloud/Enrichr/datasetStatistics"\cr
-#'  "POST https://maayanlab.cloud/Enrichr/addList"\cr
-#'  "GET https://maayanlab.cloud/Enrichr/enrich"
+#'  "GET https://maayanlab.cloud/Enrichr/datasetStatistics"
+#'  \cr "POST https://maayanlab.cloud/Enrichr/addList"
+#'  \cr "GET https://maayanlab.cloud/Enrichr/enrich"
 #'
 #' @inheritParams rba_enrichr_add_list
 #' @inheritParams rba_enrichr_enrich

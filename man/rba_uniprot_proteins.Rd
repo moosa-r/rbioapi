@@ -34,9 +34,9 @@ Use this function to retrieve a UniProt Entry by it's UniProt accession.
 }
 \section{Corresponding API Resources}{
 
- "GET https://ebi.ac.uk/proteins/api/proteins/{accession}"\cr
- "GET https://ebi.ac.uk/proteins/api/proteins/interaction/{accession}"\cr
- "GET https://ebi.ac.uk/proteins/api/proteins/{accession}/isoforms"
+ "GET https://ebi.ac.uk/proteins/api/proteins/{accession}"
+ \cr "GET https://ebi.ac.uk/proteins/api/proteins/interaction/{accession}"
+ \cr "GET https://ebi.ac.uk/proteins/api/proteins/{accession}/isoforms"
 }
 
 \examples{

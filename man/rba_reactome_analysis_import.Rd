@@ -27,16 +27,16 @@ A list containing the new token and other information of your
 If you have a JSON file of analysis results (only obtained via
   \code{\link{rba_reactome_analysis_download}} with the result argument
   set to "results", or "results_gz"), you can import the results back to
-  Reactome and retrieve a token.\cr
-  This is useful when you want to use other Reactome services which require
+  Reactome and retrieve a token.
+  \cr This is useful when you want to use other Reactome services which require
   a token but you do not have a token or your token has been
   expired (i.e. more than 7 days passed from your analysis).
 }
 \section{Corresponding API Resources}{
 
-"GET https://reactome.org/AnalysisService/import/"\cr
-"GET https://reactome.org/AnalysisService/import/form"\cr
-"GET https://reactome.org/AnalysisService/import/url"
+"GET https://reactome.org/AnalysisService/import/"
+\cr "GET https://reactome.org/AnalysisService/import/form"
+\cr "GET https://reactome.org/AnalysisService/import/url"
 }
 
 \examples{

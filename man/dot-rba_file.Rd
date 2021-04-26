@@ -26,16 +26,16 @@ Based on the 'save_to' argument, this function will handle different
 }
 \details{
 1- If 'save_to = FALSE': the function will return "FALSE" and no path will be
-  generated.\cr
-  2- If 'save_to = character string': The function will validate the input,
-  if it is a valid file path, the content of 'save_to' will be returned.
-  Otherwise, if the provided input is not valid, scenario 3 will be
-  executed. \cr
-  3- If 'save_to = TRUE': A file path will be generated and returned based
-  on 'dir_name' and 'file' inputs.\cr
-  Also, in scenario 3, the function will check if any file currently exists
-  under the generated path. if so, a numeral suffix will be added to the
-  generated file name in order to prevent over-writing of existing files.
+  generated.
+  \cr 2- If 'save_to = character string': The function will validate the
+  input, if it is a valid file path, the content of 'save_to' will be
+  returned. Otherwise, if the provided input is not valid, scenario 3 will be
+  executed.
+  \cr 3- If 'save_to = TRUE': A file path will be generated and returned
+  based on 'dir_name' and 'file' inputs.
+  \cr Also, in scenario 3, the function will check if any file currently
+  exists under the generated path. if so, a numeral suffix will be added to
+  the generated file name in order to prevent over-writing of existing files.
 }
 \seealso{
 Other internal_misc: 

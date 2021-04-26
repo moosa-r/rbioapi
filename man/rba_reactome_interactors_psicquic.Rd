@@ -34,16 +34,16 @@ Depending your input, a list containg the detailed or summary of
 You can call this function in two scenarios:
   1- To retrieve information of all available PSICQUIC resources, call the
   function without providing any argument; i.e
-  rba_reactome_interactors_psicquic().\cr
+  rba_reactome_interactors_psicquic().
   2-To retrieve a list of interactors of specific protein(s), fill out the
   function's arguments.
 }
 \section{Corresponding API Resources}{
 
  "POST https://reactome.org/ContentService/interactors/psicquic/molecules/
-   {resource}/details"\cr
+   {resource}/details"
  "POST https://reactome.org/ContentService/interactors/psicquic/molecules/
-   {resource}/summary"\cr
+   {resource}/summary"
  "GET https://reactome.org/ContentService/interactors/psicquic/resources"
 }
 

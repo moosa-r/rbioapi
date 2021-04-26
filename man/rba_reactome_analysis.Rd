@@ -50,14 +50,14 @@ Homo sapiens is 48887). Refer to
  Data Schema: Entries: Species}.}
 
 \item{sort_by}{Sort the result based on what column? available choices
-are:\cr "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
+are: "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
 "FOUND_ENTITIES", "FOUND_INTERACTORS", "FOUND_REACTIONS", "ENTITIES_RATIO",
 "ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO"}
 
 \item{order}{Sort Order. Can be either "ASC" (default) or "DESC".}
 
 \item{resource}{Filter results based on the resource. Default is "TOTAL",
-available choices are:\cr "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
+available choices are: "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
 "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
 "PUBCHEM_COMPOUND".}
 
@@ -91,8 +91,8 @@ Using this function, you can perform Reactome Analysis In a convenient way.
   "Over-Representation" analysis will be performed.
   \item If you provide a multi-columend table, with the first column being
   molecules identifers and the rest being numeral expression values,
-  "Expression" analysis will be performed.}\cr
-  Refer to the details section for the accepted input types and format.
+  "Expression" analysis will be performed.}
+  \cr Refer to the details section for the accepted input types and format.
 }
 \details{
 You can provide your table or vector input in numerous formats:\enumerate{
@@ -100,24 +100,24 @@ You can provide your table or vector input in numerous formats:\enumerate{
   \item A path to a local text file in your device that contains the molecules
   data. (The file should be formatted correctly, see below.)
   \item A URL pointing to a text file on the web that contains the molecules
-  data. (The file should be formatted correctly, see below.}\cr\cr
-  If you provide a text file (as a local file path or URL), it should be
+  data. (The file should be formatted correctly, see below.}
+  \cr If you provide a text file (as a local file path or URL), it should be
   in TSV (Tab-Separated Values) format; Column names should start with "#"
   character. Note that if you are providing the file for
   "Over-Representation" analysis (i.e. Single columned-data) this header
   line is optional and will be used as your 'Sample Name', otherwise it is
-  required.\cr\cr
-  Also, form the "summary" element in the function's output, you can see
+  required.
+  \cr Also, form the "summary" element in the function's output, you can see
   how Reactome Interpreted your input and subsequently the type of analysis
-  that has been performed.\cr\cr
-  There is no strict criteria about the type of your molecules Identifiers,
+  that has been performed.
+  \cr There is no strict criteria about the type of your molecules Identifiers,
   Reactome will Map the IDs to it's internal database entities.
   Nevertheless, You can check if all your identifiers has been found in
-  "identifiersNotFound" element in the function's output.\cr\cr
-  After Any Analysis, Reactome will associate a token to your analysis. It
-  can be later used to in function that requires the token (e.g to retrieve
-  the analysis results, download pdf).\cr\cr
-  Note that Reactome will store your token for only 7 days. You can
+  "identifiersNotFound" element in the function's output.
+  \cr After Any Analysis, Reactome will associate a token to your analysis.
+  It can be later used to in function that requires the token (e.g to retrieve
+  the analysis results, download pdf).
+  \cr Note that Reactome will store your token for only 7 days. You can
   download your full results with
   \code{\link{rba_reactome_analysis_download}}, and re-import it anytime to
   reactome (using \code{\link{rba_reactome_analysis_import}}) to generate
@@ -126,9 +126,9 @@ You can provide your table or vector input in numerous formats:\enumerate{
 \section{Corresponding API Resources}{
 
  "POST https://reactome.org/AnalysisService/identifiers/form"
- "POST https://reactome.org/AnalysisService/identifiers/url"
- "POST https://reactome.org/AnalysisService/identifiers/form/projection"
- "POST https://reactome.org/AnalysisService/identifiers/url/projection"
+ \cr "POST https://reactome.org/AnalysisService/identifiers/url"
+ \cr "POST https://reactome.org/AnalysisService/identifiers/form/projection"
+ \cr "POST https://reactome.org/AnalysisService/identifiers/url/projection"
 }
 
 \examples{

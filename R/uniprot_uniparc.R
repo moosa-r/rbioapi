@@ -7,7 +7,7 @@
 #'
 #'   Note that this is a search function. Thus, you are not required to fill
 #'   every argument; You may use whatever combinations of arguments you see
-#'   fit for your query.\cr\cr
+#'   fit for your query.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://ebi.ac.uk/proteins/api/uniparc"
@@ -32,8 +32,8 @@
 #'   identifier(s)}. You can provide up to 20 IDs.
 #' @param signature_db InterPro's
 #'   \href{https://interpro-documentation.readthedocs.io/en/latest/databases.html}{signature
-#'   database}. You can provide up to 13 of the following values:\cr
-#'   "CATH", "CDD", "HAMAP", "MobiDB Lite", "Panther", "Pfam", "PIRSF",
+#'   database}. You can provide up to 13 of the following values:
+#'   \cr "CATH", "CDD", "HAMAP", "MobiDB Lite", "Panther", "Pfam", "PIRSF",
 #'   "PRINTS", "Prosite", "SFLD", "SMART", "SUPERFAMILY" and/or "TIGRfams"
 #' @param signature_id Signature ID in the InterPro's
 #'   \href{https://interpro-documentation.readthedocs.io/en/latest/databases.html}{signature
@@ -49,7 +49,7 @@
 #'   identifiers in any cross-reference database. You can provide multiple
 #'   values.
 #' @param rf_active (logical ) Filter the content of each UniParc entry based on
-#'   active status on source database:\cr\itemize{
+#'   active status on source database:\itemize{
 #'   \item NA: don't filter contents based on active status.
 #'   \item TRUE: only return contents which are still active.
 #'   \item FALSE: Only return contents which are not active.}
@@ -253,9 +253,9 @@ rba_uniprot_uniparc_search <- function(upi = NA,
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://ebi.ac.uk/proteins/api/uniparc/accession/{accession} "
-#'  "GET https://ebi.ac.uk/proteins/api/uniparc/dbreference/{dbid}"
-#'  "GET https://ebi.ac.uk/proteins/api/uniparc/proteome/{upid}"
-#'  "GET https://ebi.ac.uk/proteins/api/uniparc/upi/{upi}"
+#'  \cr "GET https://ebi.ac.uk/proteins/api/uniparc/dbreference/{dbid}"
+#'  \cr "GET https://ebi.ac.uk/proteins/api/uniparc/proteome/{upid}"
+#'  \cr "GET https://ebi.ac.uk/proteins/api/uniparc/upi/{upi}"
 #'
 #' @param upi unique UniParc Identifier.
 #' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
@@ -270,7 +270,7 @@ rba_uniprot_uniparc_search <- function(upi = NA,
 #'   identifiers in any cross-reference database. You can provide multiple
 #'   values.
 #' @param rf_active (logical ) Filter the content of UniParc entry based on
-#'   active status on source database:\cr\itemize{
+#'   active status on source database:\itemize{
 #'   \item NA: don't filter contents based on active status.
 #'   \item TRUE: only return contents which are still active.
 #'   \item FALSE: Only return contents which are not active.}
@@ -517,7 +517,7 @@ rba_uniprot_uniparc_bestguess <- function(upi = NA,
 #'   identifiers in any cross-reference database. You can provide multiple
 #'   values.
 #' @param rf_active (logical ) Filter the content of UniParc entry based on
-#'   active status on source database:\cr\itemize{
+#'   active status on source database:\itemize{
 #'   \item NA: don't filter contents based on active status.
 #'   \item TRUE: only return contents which are still active.
 #'   \item FALSE: Only return contents which are not active.}

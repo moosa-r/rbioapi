@@ -44,12 +44,12 @@ This function will be called by .rba_skeleton() and is the internal
 }
 \details{
 In case of an error (anything other than status code 200), the function will
-  perform extra steps according to the context:\cr
-  1- If it was not possible to establish a connection with the server,
-  .rba_net_handle() will be called to handle the situation.\cr
-  2- If the server returned a status code 5xx, calling the server will be
-  retried accordingly.\cr
-  3- if the server returned status code other than 200 or 5xx, the response
+  perform extra steps according to the context:
+  \cr 1- If it was not possible to establish a connection with the server,
+  .rba_net_handle() will be called to handle the situation.
+  \cr 2- If the server returned a status code 5xx, calling the server will be
+  retried accordingly.
+  \cr 3- if the server returned status code other than 200 or 5xx, the response
   and status code will be handed to rba_error_parser() to handle the
   situation.
 }

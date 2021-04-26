@@ -11,11 +11,12 @@
 list. provide list() if it is empty.}
 
 \item{...}{list: Additional queries to evaluate and possibly append to
-the initial parameters. formatted as lists with the following order:\cr
-1- parameter's name based on the API documentation,\cr
-2- An expression to be evaluated to either TRUE or FALSE,\cr
-3- A value that should be appended to the list in case of the expression
-being TRUE.}
+the initial parameters. formatted as lists with the following order:
+\enumerate{
+\item parameter's name based on the API documentation,
+\item An expression to be evaluated to either TRUE or FALSE,
+\item A value that should be appended to the list in case of the expression
+being TRUE.}}
 }
 \value{
 Named list. with the formal API parameter's names as name and

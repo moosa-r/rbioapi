@@ -302,11 +302,12 @@
 #' @param init list: initial default query parameters in the format of named
 #'   list. provide list() if it is empty.
 #' @param ... list: Additional queries to evaluate and possibly append to
-#'   the initial parameters. formatted as lists with the following order:\cr
-#'   1- parameter's name based on the API documentation,\cr
-#'   2- An expression to be evaluated to either TRUE or FALSE,\cr
-#'   3- A value that should be appended to the list in case of the expression
-#'   being TRUE.
+#'   the initial parameters. formatted as lists with the following order:
+#'   \enumerate{
+#'   \item parameter's name based on the API documentation,
+#'   \item An expression to be evaluated to either TRUE or FALSE,
+#'   \item A value that should be appended to the list in case of the expression
+#'   being TRUE.}
 #'
 #' @return Named list. with the formal API parameter's names as name and
 #'   corresponding values.
@@ -363,12 +364,12 @@
 #'   it can resolve the case when multiple parsers or HTTP accept parameters are
 #'   possible according to the end-user's inputs. Also, it will append
 #'   'httr::write()', 'httr::progress' and 'httr::vebose()' based on the
-#'   end-user's inputs.\cr
-#'   There are two scenarios with providing accepted response and response
-#'   parser arguments:\cr
-#'   1- If it is pre-defined and end-user's inputs will not affect the accepted
-#'   and parser values, pass them as accept = x and parser = y.\cr
-#'   2- If these values should be chosen according to save_to argument, pass
+#'   end-user's inputs.
+#'   \cr There are two scenarios with providing accepted response and response
+#'   parser arguments:
+#'   \cr 1- If it is pre-defined and end-user's inputs will not affect the accepted
+#'   and parser values, pass them as accept = x and parser = y.
+#'   \cr 2- If these values should be chosen according to save_to argument, pass
 #'   them as file_parser, file_accept, obj_parser and obj_accept. In this case,
 #'   if save_to argument is a path or logical TRUE, the response will be saved
 #'   to disk and file parser and accept will be chosen, if not, obj parser and
@@ -485,12 +486,12 @@
 #'   server.
 #'
 #' In case of an error (anything other than status code 200), the function will
-#'   perform extra steps according to the context:\cr
-#'   1- If it was not possible to establish a connection with the server,
-#'   .rba_net_handle() will be called to handle the situation.\cr
-#'   2- If the server returned a status code 5xx, calling the server will be
-#'   retried accordingly.\cr
-#'   3- if the server returned status code other than 200 or 5xx, the response
+#'   perform extra steps according to the context:
+#'   \cr 1- If it was not possible to establish a connection with the server,
+#'   .rba_net_handle() will be called to handle the situation.
+#'   \cr 2- If the server returned a status code 5xx, calling the server will be
+#'   retried accordingly.
+#'   \cr 3- if the server returned status code other than 200 or 5xx, the response
 #'   and status code will be handed to rba_error_parser() to handle the
 #'   situation.
 #'
@@ -572,10 +573,10 @@
 #'
 #' The function will try to use the parser specified in the 'input_call' object,
 #'   but if a parser value was provided with the 'response_parser' argument,
-#'   it will have priority and will overwrite the input_call's parser input.\cr
-#'   diagnostics, verbose, retry_max, retry_wait and skip_error variables will
-#'   be assigned and passed on to the subsequent executed calls.\cr
-#'   note that the function was much longer at the begging of this package
+#'   it will have priority and will overwrite the input_call's parser input.
+#'   \cr diagnostics, verbose, retry_max, retry_wait and skip_error variables
+#'   \cr will be assigned and passed on to the subsequent executed calls.s
+#'   \cr note that the function was much longer at the begging of this package
 #'   development, hence the name 'skeleton'.
 #'
 #' @param input_call list: The exact output of .rba_httr()
@@ -882,18 +883,18 @@
 #'   check if a condition holds TRUE.
 #'
 #' cons Should be a list, and each element of that list should correspond to one
-#'   input argument and be a lists with the following format:\cr
-#'   list(arg = argument name as character string, constrain type = constrain
-#'   value)\cr
-#'   e.g. list(arg = "species", class = c("character", "numeric"))\cr\cr
-#'   cond should be a list. and each element of that list, should correspond to
-#'   one condition. the condition should be a quoted expression (or a character
-#'   string), which could be evaluated (or parsed and evaluated) to a logical
-#'   TRUE/FALSE object. If that expression is TRUE after the evaluation,
+#'   input argument and be a lists with the following format:
+#'   \cr list(arg = argument name as character string, constrain type =
+#'   constrain value)
+#'   e.g. list(arg = "species", class = c("character", "numeric"))
+#'   \cr cond should be a list. and each element of that list, should correspond
+#'   to one condition. the condition should be a quoted expression (or a
+#'   character string), which could be evaluated (or parsed and evaluated) to a
+#'   logical TRUE/FALSE object. If that expression is TRUE after the evaluation,
 #'   the code execution will be halted (or warning will be issued if
 #'   cond_warning = TURE or the last element of coniditon sub-list is
-#'   "warn = TRUE ), optionally with a pre-defined error message.\cr\cr
-#'   cond's elements possible formats: \enumerate{
+#'   "warn = TRUE ), optionally with a pre-defined error message.
+#'   \cr cond's elements possible formats: \enumerate{
 #'   \item list(quote(conditional expression))
 #'   \item list(quote(conditional expression), "error message if expression
 #'   is TRUE")
@@ -902,9 +903,9 @@
 #'   \item list(quote(conditional expression), warn = TRUE)
 #'   }
 #'
-#' @param cons Define Constrains for input arguments. Currently they may be:\cr
-#'   'class', 'val', 'ran', 'min_val', 'max_val', 'len', 'min_len', 'max_len'
-#'   and/or 'regex'.
+#' @param cons Define Constrains for input arguments. Currently they may be:
+#'   \cr 'class', 'val', 'ran', 'min_val', 'max_val', 'len', 'min_len',
+#'   'max_len' and/or 'regex'.
 #' @param cond Expression which will be evaluated to TRUE or FALSE.
 #' @param cond_warning Should the function produce warning instead of stopping
 #'   code execution? alternatively, you could include an element to
@@ -1027,16 +1028,16 @@
 #' Parse API Response
 #'
 #' Using the input provided as 'parser' argument, this function will parse the
-#'   response from a REST API into appropriate R objects.\cr
+#'   response from a REST API into appropriate R objects.
 #'
 #' The function will be called within .rba_skeleton subsequent of a
-#'   server response with HTTP status code 200.\cr
-#'   each parser  could be either a single-argument function or
+#'   server response with HTTP status code 200.
+#'   \cr each parser  could be either a single-argument function or
 #'   one of the following character strings that will be internally converted
 #'   to a proper function:
 #'   "json->df", "json->df_no_flat", "json->list_simp", "json->list",
-#'   "json->chr", text->chr", "text->df", "tsv->df".\cr
-#'   if you provide more than one parser, the parsers will be sequentially
+#'   "json->chr", text->chr", "text->df", "tsv->df".
+#'   \cr if you provide more than one parser, the parsers will be sequentially
 #'   applied to the response (i.e. response %>% parser1 %>% parser2 %>% ...)
 #'
 #' @param response An httr response object.
@@ -1253,16 +1254,16 @@
 #'   scenarios for the provided file path. see details for more information.
 #'
 #' 1- If 'save_to = FALSE': the function will return "FALSE" and no path will be
-#'   generated.\cr
-#'   2- If 'save_to = character string': The function will validate the input,
-#'   if it is a valid file path, the content of 'save_to' will be returned.
-#'   Otherwise, if the provided input is not valid, scenario 3 will be
-#'   executed. \cr
-#'   3- If 'save_to = TRUE': A file path will be generated and returned based
-#'   on 'dir_name' and 'file' inputs.\cr
-#'   Also, in scenario 3, the function will check if any file currently exists
-#'   under the generated path. if so, a numeral suffix will be added to the
-#'   generated file name in order to prevent over-writing of existing files.
+#'   generated.
+#'   \cr 2- If 'save_to = character string': The function will validate the
+#'   input, if it is a valid file path, the content of 'save_to' will be
+#'   returned. Otherwise, if the provided input is not valid, scenario 3 will be
+#'   executed.
+#'   \cr 3- If 'save_to = TRUE': A file path will be generated and returned
+#'   based on 'dir_name' and 'file' inputs.
+#'   \cr Also, in scenario 3, the function will check if any file currently
+#'   exists under the generated path. if so, a numeral suffix will be added to
+#'   the generated file name in order to prevent over-writing of existing files.
 #'
 #'
 #' @param file A template for the file name and file extension. in form of a
@@ -1393,8 +1394,8 @@
 #'   getOption("rba_user_options"). If the name of parameter in '...' is a
 #'   standrad rbioapi option, the content of that option will be checked and
 #'   in case that the content is valid, the caller function's environment will
-#'   be altered in response to the change.\cr
-#'   Also the function will ignore any arguments which is not standard and
+#'   be altered in response to the change.
+#'   \cr Also the function will ignore any arguments which is not standard and
 #'   issues an informative warning for the user.
 #'
 #' @param ... Extra arguments that were provided in the endpoints functions.

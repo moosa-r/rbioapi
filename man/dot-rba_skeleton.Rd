@@ -27,10 +27,10 @@ This function will be called at the last step of any exported function to
 \details{
 The function will try to use the parser specified in the 'input_call' object,
   but if a parser value was provided with the 'response_parser' argument,
-  it will have priority and will overwrite the input_call's parser input.\cr
-  diagnostics, verbose, retry_max, retry_wait and skip_error variables will
-  be assigned and passed on to the subsequent executed calls.\cr
-  note that the function was much longer at the begging of this package
+  it will have priority and will overwrite the input_call's parser input.
+  \cr diagnostics, verbose, retry_max, retry_wait and skip_error variables
+  \cr will be assigned and passed on to the subsequent executed calls.s
+  \cr note that the function was much longer at the begging of this package
   development, hence the name 'skeleton'.
 }
 \seealso{

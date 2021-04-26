@@ -43,23 +43,23 @@ A 'Physical Entity' Instance could include an individual molecule,
  extra-cellular region; And the second one is with ID
  \href{https://reactome.org/content/schema/instance/browser/R-HSA-2038819}{
  "R-HSA-2038819"} and refers to the plasma-membrane-integrated form of
- the antibody protein.\cr\cr
- To make it possible to link multiple 'Physical Entity' instances of a
+ the antibody protein.
+ \cr To make it possible to link multiple 'Physical Entity' instances of a
  molecule, Reactome uses a data class named "'Reference Entities'"
  which correspond to the invariant attribute of a molecule. for example,
  both of the above-mentioned 'Physical Entities' refer to a 'Reference Entities'
  named \href{https://reactome.org/content/schema/instance/browser/57819}{
- "UniProt:P01834 IGKC}.\cr\cr
- See \href{https://reactome.org/documentation/data-model}{Reactome
+ "UniProt:P01834 IGKC}.
+ \cr See \href{https://reactome.org/documentation/data-model}{Reactome
  Data Model} for more information about the data model and Physical
  Entities.
 }
 \section{Corresponding API Resources}{
 
- "GET https://reactome.org/ContentService/data/participants/{id}"\cr
- "GET https://reactome.org/ContentService/data/participants/{id}/
- participatingPhysicalEntities"\cr
- "GET https://reactome.org/ContentService/data/participants/{id}/
+ "GET https://reactome.org/ContentService/data/participants/{id}"
+ \cr "GET https://reactome.org/ContentService/data/participants/{id}/
+ participatingPhysicalEntities"
+ \cr "GET https://reactome.org/ContentService/data/participants/{id}/
  referenceEntities"
 }
 

@@ -58,8 +58,8 @@ UniProt maps proteomics peptides from different sources to the proteins'
 \details{
 Note that this is a search function. Thus, you are not required to fill
   every argument; You may use whatever combinations of arguments you see
-  fit for your query.\cr\cr
-  see also: \href{https://www.uniprot.org/help/proteomics}{Mass
+  fit for your query.
+  \cr see also: \href{https://www.uniprot.org/help/proteomics}{Mass
   spectrometry-based proteomics data in UniProtKB}
 }
 \section{Corresponding API Resources}{

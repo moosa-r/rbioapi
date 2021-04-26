@@ -53,7 +53,7 @@ Using this function you can search and retrieve orthologs of given gene(s),
 \section{Corresponding API Resources}{
 
  "POST http://www.pantherdb.org/services/oai/pantherdb/ortholog/matchortho"
- "POST http://www.pantherdb.org/services/oai/pantherdb/ortholog/homologpos"
+ \cr "POST http://www.pantherdb.org/services/oai/pantherdb/ortholog/homologpos"
 }
 
 \examples{

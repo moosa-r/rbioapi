@@ -25,8 +25,8 @@ Using this function you can query peaple by partially matching or exact
 }
 \section{Corresponding API Resources}{
 
- "GET https://reactome.org/ContentService/data/people/name/{name}"\cr
- "GET https://reactome.org/ContentService/data/people/name/{name}/exact"
+ "GET https://reactome.org/ContentService/data/people/name/{name}"
+ \cr "GET https://reactome.org/ContentService/data/people/name/{name}/exact"
 }
 
 \examples{

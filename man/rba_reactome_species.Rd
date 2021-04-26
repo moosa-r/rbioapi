@@ -22,8 +22,8 @@ Use this function to retrieve a table of Available species in Reactome.
 }
 \section{Corresponding API Resources}{
 
- "GET https://reactome.org/ContentService/data/species/all"\cr
- "GET https://reactome.org/ContentService/data/species/main"
+ "GET https://reactome.org/ContentService/data/species/all"
+ \cr "GET https://reactome.org/ContentService/data/species/main"
 }
 
 \examples{

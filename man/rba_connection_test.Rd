@@ -21,10 +21,10 @@ Run this function to test the internet connectivity of your device and the
 \details{
 This function attempts to send a simple query to the supported services.
   If the service successfully responded, you will be informed with a success
-  message; If not, the content of the error will be reported to you.\cr
-  Please run this function if you encounter any errors while using rbioapi.
-  Also, if you need to contact support, kindly call this function with
-  'diagnostic = TRUE' and include the output messages in your support
+  message; If not, the content of the error will be reported to you.
+  \cr Please run this function if you encounter any errors while using
+  rbioapi. Also, if you need to contact support, kindly call this function
+  with 'diagnostic = TRUE' and include the output messages in your support
   request.
 }
 \examples{

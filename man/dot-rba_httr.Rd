@@ -33,12 +33,12 @@ This is a convenient interface between rbioapi exported functions and httr
   it can resolve the case when multiple parsers or HTTP accept parameters are
   possible according to the end-user's inputs. Also, it will append
   'httr::write()', 'httr::progress' and 'httr::vebose()' based on the
-  end-user's inputs.\cr
-  There are two scenarios with providing accepted response and response
-  parser arguments:\cr
-  1- If it is pre-defined and end-user's inputs will not affect the accepted
-  and parser values, pass them as accept = x and parser = y.\cr
-  2- If these values should be chosen according to save_to argument, pass
+  end-user's inputs.
+  \cr There are two scenarios with providing accepted response and response
+  parser arguments:
+  \cr 1- If it is pre-defined and end-user's inputs will not affect the accepted
+  and parser values, pass them as accept = x and parser = y.
+  \cr 2- If these values should be chosen according to save_to argument, pass
   them as file_parser, file_accept, obj_parser and obj_accept. In this case,
   if save_to argument is a path or logical TRUE, the response will be saved
   to disk and file parser and accept will be chosen, if not, obj parser and

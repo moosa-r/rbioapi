@@ -36,8 +36,8 @@ Using this function, you can retrieve highest Smith-Waterman bit scores
 Note that this function will return the highest similarity score hits of
   your given protein(s) and their closets homologous proteins in other
   species. to retrieve similarity scores of different proteins within the
-  same species refer to \code{\link{rba_string_homology_intra}}.\cr
-  Similarity matrix is imported -by STRING- from:
+  same species refer to \code{\link{rba_string_homology_intra}}.
+  \cr Similarity matrix is imported -by STRING- from:
   \href{http://cube.univie.ac.at/resources/simap}{Similarity Matrix of
   Proteins (SIMAP)}
 }

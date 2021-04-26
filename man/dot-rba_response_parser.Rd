@@ -17,17 +17,17 @@ A valid R object, depends on the parsers which have been used.
 }
 \description{
 Using the input provided as 'parser' argument, this function will parse the
-  response from a REST API into appropriate R objects.\cr
+  response from a REST API into appropriate R objects.
 }
 \details{
 The function will be called within .rba_skeleton subsequent of a
-  server response with HTTP status code 200.\cr
-  each parser  could be either a single-argument function or
+  server response with HTTP status code 200.
+  \cr each parser  could be either a single-argument function or
   one of the following character strings that will be internally converted
   to a proper function:
   "json->df", "json->df_no_flat", "json->list_simp", "json->list",
-  "json->chr", text->chr", "text->df", "tsv->df".\cr
-  if you provide more than one parser, the parsers will be sequentially
+  "json->chr", text->chr", "text->df", "tsv->df".
+  \cr if you provide more than one parser, the parsers will be sequentially
   applied to the response (i.e. response %>% parser1 %>% parser2 %>% ...)
 }
 \seealso{

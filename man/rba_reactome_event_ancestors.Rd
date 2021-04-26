@@ -29,7 +29,7 @@ By Reactome's definition, Events are the building blocks of biological
   "Reaction-like events". The events are organized in a hierarchical
   structure; and each event could be child or parent to another event; The
   hierarchy will always begin with a "Top level pathway" event. Also note
-  that a given event could be part of more that one hierarchies.\cr
+  that a given event could be part of more that one hierarchies.
 }
 \section{Corresponding API Resources}{
 

@@ -30,8 +30,8 @@
 #'
 #'   Note that this is a search function. Thus, you are not required to fill
 #'   every argument; You may use whatever combinations of arguments you see
-#'   fit for your query.\cr\cr
-#'   UniProt Entries are grouped in two sections:\enumerate{
+#'   fit for your query.s
+#'   \cr UniProt Entries are grouped in two sections:\enumerate{
 #'   \item Reviewed(Swiss-Prot): Manually annotated records with information
 #'   extracted from literature and curator-evaluated computational analysis.
 #'   \item Unreviewed (TrEMBL): Computationally analyzed records that await
@@ -255,9 +255,9 @@ rba_uniprot_proteins_search <- function(accession = NA,
 #'   TRUE, not both of them.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/proteins/{accession}"\cr
-#'  "GET https://ebi.ac.uk/proteins/api/proteins/interaction/{accession}"\cr
-#'  "GET https://ebi.ac.uk/proteins/api/proteins/{accession}/isoforms"
+#'  "GET https://ebi.ac.uk/proteins/api/proteins/{accession}"
+#'  \cr "GET https://ebi.ac.uk/proteins/api/proteins/interaction/{accession}"
+#'  \cr "GET https://ebi.ac.uk/proteins/api/proteins/{accession}/isoforms"
 #'
 #' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}.
@@ -448,8 +448,8 @@ rba_uniprot_proteins_crossref <- function(db_id,
 #'
 #'   Note that this is a search function. Thus, you are not required to fill
 #'   every argument; You may use whatever combinations of arguments you see
-#'   fit for your query.\cr\cr
-#'   UniProt Entries are grouped in two sections:\enumerate{
+#'   fit for your query.
+#'   \cr UniProt Entries are grouped in two sections:\enumerate{
 #'   \item Reviewed(Swiss-Prot): Manually annotated records with information
 #'   extracted from literature and curator-evaluated computational analysis.
 #'   \item Unreviewed (TrEMBL): Computationally analyzed records that await
@@ -951,7 +951,7 @@ rba_uniprot_features <- function(accession,
 #'
 #'   Note that this is a search function. Thus, you are not required to fill
 #'   every argument; You may use whatever combinations of arguments you see
-#'   fit for your query.\cr\cr
+#'   fit for your query.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://www.ebi.ac.uk/proteins/api/variation"
@@ -1174,8 +1174,8 @@ rba_uniprot_variation_search <- function(accession = NA,
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://www.ebi.ac.uk/proteins/api/variation/dbsnp/{dbid}"
-#'  "GET https://www.ebi.ac.uk/proteins/api/variation/hgvs/{hgvs}"
-#'  "GET https://www.ebi.ac.uk/proteins/api/variation/{accession}"
+#'  \cr "GET https://www.ebi.ac.uk/proteins/api/variation/hgvs/{hgvs}"
+#'  \cr "GET https://www.ebi.ac.uk/proteins/api/variation/{accession}"
 #'
 #' @param id An ID which can be either a
 #'   \href{https://www.uniprot.org/help/accession_numbers}{UniProt primary or
@@ -1341,8 +1341,8 @@ rba_uniprot_variation <- function(id,
 #'
 #'   Note that this is a search function. Thus, you are not required to fill
 #'   every argument; You may use whatever combinations of arguments you see
-#'   fit for your query.\cr\cr
-#'   see also: \href{https://www.uniprot.org/help/proteomics}{Mass
+#'   fit for your query.
+#'   \cr see also: \href{https://www.uniprot.org/help/proteomics}{Mass
 #'   spectrometry-based proteomics data in UniProtKB}
 #'
 #' @section Corresponding API Resources:
@@ -1549,7 +1549,7 @@ rba_uniprot_proteomics <- function(accession,
 #'
 #'   Note that this is a search function. Thus, you are not required to fill
 #'   every argument; You may use whatever combinations of arguments you see
-#'   fit for your query.\cr\cr
+#'   fit for your query.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://www.ebi.ac.uk/proteins/api/antigen"

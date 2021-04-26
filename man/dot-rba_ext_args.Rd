@@ -26,8 +26,8 @@ The availabe rbioapi options will be retrieved from
   getOption("rba_user_options"). If the name of parameter in '...' is a
   standrad rbioapi option, the content of that option will be checked and
   in case that the content is valid, the caller function's environment will
-  be altered in response to the change.\cr
-  Also the function will ignore any arguments which is not standard and
+  be altered in response to the change.
+  \cr Also the function will ignore any arguments which is not standard and
   issues an informative warning for the user.
 }
 \concept{internal_options}

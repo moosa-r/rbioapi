@@ -34,8 +34,8 @@ Using this function, you can retrieve Orthologs, MSA or Tree topology
 \section{Corresponding API Resources}{
 
  "GET http://www.pantherdb.org/services/oai/pantherdb/familyortholog"
- "GET http://www.pantherdb.org/services/oai/pantherdb/familymsa"
- "GET http://www.pantherdb.org/services/oai/pantherdb/treeinfo"
+ \cr "GET http://www.pantherdb.org/services/oai/pantherdb/familymsa"
+ \cr "GET http://www.pantherdb.org/services/oai/pantherdb/treeinfo"
 }
 
 \examples{

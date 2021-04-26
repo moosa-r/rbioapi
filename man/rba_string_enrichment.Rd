@@ -46,10 +46,10 @@ STRING cross-reference the proteins with several databases (see "Details"
 \details{
 STRING currently maps to and retrieve enrichment results based on Gene
   Ontology (GO), KEGG pathways, UniProt Keywords, PubMed publications, Pfam
-  domains, InterPro domains, and SMART domains.\cr
-  Note that this function will only return the enriched terms pertinent to
-  your proteins that have a p-value lesser than 0.1. To retrieve a full list
-  of the terms -unfiltered by enrichment p-values-, use
+  domains, InterPro domains, and SMART domains.
+  \cr Note that this function will only return the enriched terms pertinent
+  to your proteins that have a p-value lesser than 0.1. To retrieve a full
+  list of the terms -unfiltered by enrichment p-values-, use
   \code{\link{rba_string_annotations}}.
 }
 \section{Corresponding API Resources}{

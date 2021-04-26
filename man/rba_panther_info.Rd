@@ -36,9 +36,9 @@ Using this function you can retrieve a list of available organisms,
 \section{Corresponding API Resources}{
 
  "GET http://www.pantherdb.org/services/oai/pantherdb/supportedgenomes"
- "GET http://www.pantherdb.org/services/oai/pantherdb/supportedannotdatasets"
- "GET http://www.pantherdb.org/services/oai/pantherdb/supportedpantherfamilies"
- "GET http://www.pantherdb.org/services/oai/pantherdb/supportedpantherpathways"
+ \cr "GET http://www.pantherdb.org/services/oai/pantherdb/supportedannotdatasets"
+ \cr "GET http://www.pantherdb.org/services/oai/pantherdb/supportedpantherfamilies"
+ \cr "GET http://www.pantherdb.org/services/oai/pantherdb/supportedpantherpathways"
 }
 
 \examples{

@@ -25,8 +25,8 @@ Reactome cross-references external database's identifiers to it's database
   Entries named ReferenceEntity, which resembles the invariant aspect of
   a molecule. Thus there is a one-to-many relationship between Reactome's
   ReferenceEntity object and the molecule's ID in external databases,
-  which in Reactome's terms is called Cross Reference.\cr
-  Refer to \code{\link{rba_reactome_participants}}'s "Details section"
+  which in Reactome's terms is called Cross Reference.
+  \cr Refer to \code{\link{rba_reactome_participants}}'s "Details section"
   to learn more about how Reactome classifies molecules.
 }
 \section{Corresponding API Resources}{

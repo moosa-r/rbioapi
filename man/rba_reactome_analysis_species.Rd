@@ -23,14 +23,14 @@ the species you want to compare with Homo sapiens. Refer to
  Data Schema: Entries: Species}.}
 
 \item{sort_by}{Sort the result based on what column? available choices
-are:\cr "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
+are: "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
 "FOUND_ENTITIES", "FOUND_INTERACTORS", "FOUND_REACTIONS", "ENTITIES_RATIO",
 "ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO"}
 
 \item{order}{Sort Order. Can be either "ASC" (default) or "DESC".}
 
 \item{resource}{Filter results based on the resource. Default is "TOTAL",
-available choices are:\cr "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
+available choices are: "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
 "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
 "PUBCHEM_COMPOUND".}
 
@@ -55,12 +55,12 @@ Use This function to Compare human's manually-curated pathways
   and computationally inferred pathways (orthologous) in other species.
 }
 \details{
-Reactome incorporate manually curated human reactions and PANTHER's
+\cr Reactome incorporate manually curated human reactions and PANTHER's
   protein homology data to Computationally infer events in other euakaryotic
-  species.\cr\cr
-In version 73 (11 June 2020), using an orthology-based approach,
+  species.
+\cr In version 73 (11 June 2020), using an orthology-based approach,
   Homo sapiens events was projected to 18,654 orthologous pathways (with
-  81,835 orthologous proteins) in 15 non-human species.\cr
+  81,835 orthologous proteins) in 15 non-human species.
   Refer to \href{https://reactome.org/documentation/inferred-events}{
   Reactome Computationally Inferred Events} for more information.
 }

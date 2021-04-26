@@ -51,14 +51,14 @@ providing their
 \section{Corresponding API Resources}{
 
  "GET https://ebi.ac.uk/proteins/api/ids/{ids}"
- "GET https://ebi.ac.uk/proteins/api/ids//id/{id}/node"
- "GET https://ebi.ac.uk/proteins/api/id/{id}/node"
- "GET https://ebi.ac.uk/proteins/api/id/{id}/children"
- "GET https://ebi.ac.uk/proteins/api/id/{id}/children/node"
- "GET https://ebi.ac.uk/proteins/api/id/{id}/parent"
- "GET https://ebi.ac.uk/proteins/api/id/{id}/parent/node"
- "GET https://ebi.ac.uk/proteins/api/id/{id}/siblings"
- "GET https://ebi.ac.uk/proteins/api/id/{id}/siblings/node"
+ \cr "GET https://ebi.ac.uk/proteins/api/ids//id/{id}/node"
+ \cr "GET https://ebi.ac.uk/proteins/api/id/{id}/node"
+ \cr "GET https://ebi.ac.uk/proteins/api/id/{id}/children"
+ \cr "GET https://ebi.ac.uk/proteins/api/id/{id}/children/node"
+ \cr "GET https://ebi.ac.uk/proteins/api/id/{id}/parent"
+ \cr "GET https://ebi.ac.uk/proteins/api/id/{id}/parent/node"
+ \cr "GET https://ebi.ac.uk/proteins/api/id/{id}/siblings"
+ \cr "GET https://ebi.ac.uk/proteins/api/id/{id}/siblings/node"
 }
 
 \examples{

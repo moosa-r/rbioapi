@@ -7,9 +7,9 @@
 .rba_args(cons = NULL, cond = NULL, cond_warning = FALSE)
 }
 \arguments{
-\item{cons}{Define Constrains for input arguments. Currently they may be:\cr
-'class', 'val', 'ran', 'min_val', 'max_val', 'len', 'min_len', 'max_len'
-and/or 'regex'.}
+\item{cons}{Define Constrains for input arguments. Currently they may be:
+\cr 'class', 'val', 'ran', 'min_val', 'max_val', 'len', 'min_len',
+'max_len' and/or 'regex'.}
 
 \item{cond}{Expression which will be evaluated to TRUE or FALSE.}
 
@@ -29,18 +29,18 @@ This function provide a flexible, yet powerful and vigorous arguments check
 }
 \details{
 cons Should be a list, and each element of that list should correspond to one
-  input argument and be a lists with the following format:\cr
-  list(arg = argument name as character string, constrain type = constrain
-  value)\cr
-  e.g. list(arg = "species", class = c("character", "numeric"))\cr\cr
-  cond should be a list. and each element of that list, should correspond to
-  one condition. the condition should be a quoted expression (or a character
-  string), which could be evaluated (or parsed and evaluated) to a logical
-  TRUE/FALSE object. If that expression is TRUE after the evaluation,
+  input argument and be a lists with the following format:
+  \cr list(arg = argument name as character string, constrain type =
+  constrain value)
+  e.g. list(arg = "species", class = c("character", "numeric"))
+  \cr cond should be a list. and each element of that list, should correspond
+  to one condition. the condition should be a quoted expression (or a
+  character string), which could be evaluated (or parsed and evaluated) to a
+  logical TRUE/FALSE object. If that expression is TRUE after the evaluation,
   the code execution will be halted (or warning will be issued if
   cond_warning = TURE or the last element of coniditon sub-list is
-  "warn = TRUE ), optionally with a pre-defined error message.\cr\cr
-  cond's elements possible formats: \enumerate{
+  "warn = TRUE ), optionally with a pre-defined error message.
+  \cr cond's elements possible formats: \enumerate{
   \item list(quote(conditional expression))
   \item list(quote(conditional expression), "error message if expression
   is TRUE")

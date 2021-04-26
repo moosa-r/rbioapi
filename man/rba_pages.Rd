@@ -11,8 +11,8 @@ rba_pages(input_call)
 but with two differences:\enumerate{
 \item: Wrap a quote() around it. meaning: quote(rba_example())
 \item: Set the argument that corresponds to the page number to
-"pages:start_page:end_page", for example "pages:1:5".}\cr
-refer to the "examples" section to learn more.}
+"pages:start_page:end_page", for example "pages:1:5".}
+\cr refer to the "examples" section to learn more.}
 }
 \value{
 A named list where each element corresponds to a request's page.

@@ -29,8 +29,8 @@ Using this function you can retrieve genomic Coordinates of a Protein by
 }
 \details{
 For more information about how UniProt imports and calculates genomic
-  coordinates data, see:\cr
-  McGarvey, P. B., Nightingale, A., Luo, J., Huang, H., Martin, M. J.,
+  coordinates data, see:
+  \cr McGarvey, P. B., Nightingale, A., Luo, J., Huang, H., Martin, M. J.,
   Wu, C., & UniProt Consortium (2019). UniProt genomic mapping for
   deciphering functional effects of missense variants. Human mutation,
   40(6), 694–705. https://doi.org/10.1002/humu.23738
@@ -38,7 +38,7 @@ For more information about how UniProt imports and calculates genomic
 \section{Corresponding API Resources}{
 
  "GET https://ebi.ac.uk/proteins/api/coordinates/{accession}"
- "GET https://ebi.ac.uk/proteins/api/coordinates/{dbtype}:{dbid}"
+ \cr "GET https://ebi.ac.uk/proteins/api/coordinates/{dbtype}:{dbid}"
 }
 
 \examples{

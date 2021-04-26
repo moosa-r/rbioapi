@@ -31,8 +31,8 @@ Reactome incorporate manually curated human reactions and PANTHER's
 \details{
 In version 73 (11 June 2020), using an orthology-based approach,
   Homo sapiens events was projected to 18,654 orthologous pathways (with
-  81,835 orthologous proteins) in 15 non-human species.\cr
-  Refer to \href{https://reactome.org/documentation/inferred-events}{
+  81,835 orthologous proteins) in 15 non-human species.
+  \cr Refer to \href{https://reactome.org/documentation/inferred-events}{
   Reactome Computationally Inferred Events} for more information.
 }
 \section{Corresponding API Resources}{

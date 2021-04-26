@@ -38,7 +38,7 @@ Using this function you can search UniProt for available gene-centrics from
 \details{
 Note that this is a search function. Thus, you are not required to fill
   every argument; You may use whatever combinations of arguments you see
-  fit for your query.\cr\cr
+  fit for your query.
 }
 \section{Corresponding API Resources}{
 

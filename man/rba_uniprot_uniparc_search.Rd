@@ -57,8 +57,8 @@ identifier(s)}. You can provide up to 20 IDs.}
 
 \item{signature_db}{InterPro's
 \href{https://interpro-documentation.readthedocs.io/en/latest/databases.html}{signature
-database}. You can provide up to 13 of the following values:\cr
-"CATH", "CDD", "HAMAP", "MobiDB Lite", "Panther", "Pfam", "PIRSF",
+database}. You can provide up to 13 of the following values:
+\cr "CATH", "CDD", "HAMAP", "MobiDB Lite", "Panther", "Pfam", "PIRSF",
 "PRINTS", "Prosite", "SFLD", "SMART", "SUPERFAMILY" and/or "TIGRfams"}
 
 \item{signature_id}{Signature ID in the InterPro's
@@ -80,7 +80,7 @@ identifiers in any cross-reference database. You can provide multiple
 values.}
 
 \item{rf_active}{(logical ) Filter the content of each UniParc entry based on
-active status on source database:\cr\itemize{
+active status on source database:\itemize{
 \item NA: don't filter contents based on active status.
 \item TRUE: only return contents which are still active.
 \item FALSE: Only return contents which are not active.}}
@@ -106,7 +106,7 @@ Use this function to search
 \details{
 Note that this is a search function. Thus, you are not required to fill
   every argument; You may use whatever combinations of arguments you see
-  fit for your query.\cr\cr
+  fit for your query.
 }
 \section{Corresponding API Resources}{
 

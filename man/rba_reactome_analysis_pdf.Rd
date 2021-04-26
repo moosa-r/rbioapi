@@ -33,7 +33,7 @@ Data Schema: Entries: Species}.}
 be greater than 50.}
 
 \item{resource}{Filter results based on the resource. Default is "TOTAL",
-available choices are:\cr "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
+available choices are: "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
 "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
 "PUBCHEM_COMPOUND".}
 
@@ -61,8 +61,8 @@ Use this function to save a detailed report of your previous analysis (That
 Token is associated to each Reactome analysis results and kept by Reactome
   for at least 7 days. You can locate it in
   \code{\link{rba_reactome_analysis}}'s output, under a sub-list named
-  "summary" (i.e. results$summary$token).\cr
-  Note that Reactome will store your token for only 7 days. You can
+  "summary" (i.e. results$summary$token).
+  \cr Note that Reactome will store your token for only 7 days. You can
   download your full results with
   \code{\link{rba_reactome_analysis_download}}, and re-import it anytime to
   reactome (using \code{\link{rba_reactome_analysis_import}}) to generate

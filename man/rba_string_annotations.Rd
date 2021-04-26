@@ -36,8 +36,8 @@ STRING cross-reference the proteins with several databases (see "Details"
 \details{
 STRING currently maps to and retrieve enrichment results based on Gene
   Ontology (GO), KEGG pathways, UniProt Keywords, PubMed publications, Pfam
-  domains, InterPro domains, and SMART domains.\cr
-  Note that this function will return a full list of the terms containing
+  domains, InterPro domains, and SMART domains.
+  \cr Note that this function will return a full list of the terms containing
   your provided proteins. To perform enrichment and only retrieve a enriched
   subset of the terms, use \code{\link{rba_string_enrichment}}.
 }

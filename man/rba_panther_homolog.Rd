@@ -23,8 +23,8 @@ transfer.}
 
 \item{target_organisms}{(numeric) NCBI taxon ID(s) to filter the results.
 run \code{\link{rba_panther_info}} with argument 'what = "organisms"' to
-get a list of PANTHER's supported organisms.\cr
-for Paralog, target organism and organism should be the same; Otherwise,
+get a list of PANTHER's supported organisms.
+\cr For Paralog, target organism and organism should be the same; Otherwise,
 the target organism should be different from the input organism.}
 
 \item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s

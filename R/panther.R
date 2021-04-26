@@ -265,9 +265,9 @@ rba_panther_enrich <- function(genes,
 #'
 #' @section Corresponding API Resources:
 #'  "GET http://www.pantherdb.org/services/oai/pantherdb/supportedgenomes"
-#'  "GET http://www.pantherdb.org/services/oai/pantherdb/supportedannotdatasets"
-#'  "GET http://www.pantherdb.org/services/oai/pantherdb/supportedpantherfamilies"
-#'  "GET http://www.pantherdb.org/services/oai/pantherdb/supportedpantherpathways"
+#'  \cr "GET http://www.pantherdb.org/services/oai/pantherdb/supportedannotdatasets"
+#'  \cr "GET http://www.pantherdb.org/services/oai/pantherdb/supportedpantherfamilies"
+#'  \cr "GET http://www.pantherdb.org/services/oai/pantherdb/supportedpantherpathways"
 #'
 #' @return For families, a list and otherwise a data frame with pertinent
 #'   information.
@@ -413,7 +413,7 @@ rba_panther_info <- function(what,
 #'
 #' @section Corresponding API Resources:
 #'  "POST http://www.pantherdb.org/services/oai/pantherdb/ortholog/matchortho"
-#'  "POST http://www.pantherdb.org/services/oai/pantherdb/ortholog/homologpos"
+#'  \cr "POST http://www.pantherdb.org/services/oai/pantherdb/ortholog/homologpos"
 #'
 #' @return A data frame with Orthologs information.
 #'
@@ -537,8 +537,8 @@ rba_panther_ortholog <- function(genes,
 #'   transfer.
 #' @param target_organisms (numeric) NCBI taxon ID(s) to filter the results.
 #'   run \code{\link{rba_panther_info}} with argument 'what = "organisms"' to
-#'   get a list of PANTHER's supported organisms.\cr
-#'   for Paralog, target organism and organism should be the same; Otherwise,
+#'   get a list of PANTHER's supported organisms.
+#'   \cr For Paralog, target organism and organism should be the same; Otherwise,
 #'   the target organism should be different from the input organism.
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #'   arguments documentation for more information on available options.
@@ -649,8 +649,8 @@ rba_panther_homolog <- function(genes,
 #'
 #' @section Corresponding API Resources:
 #'  "GET http://www.pantherdb.org/services/oai/pantherdb/familyortholog"
-#'  "GET http://www.pantherdb.org/services/oai/pantherdb/familymsa"
-#'  "GET http://www.pantherdb.org/services/oai/pantherdb/treeinfo"
+#'  \cr "GET http://www.pantherdb.org/services/oai/pantherdb/familymsa"
+#'  \cr "GET http://www.pantherdb.org/services/oai/pantherdb/treeinfo"
 #'
 #' @return For trees a list and otherwise a data frame with the requested
 #'   family's information.

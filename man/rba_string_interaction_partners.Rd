@@ -43,9 +43,9 @@ A data frame which each row is a network interaction and the
 \description{
 This function will retrieve all the STRING interactions which include your
   proteins as one party of the interaction. (e.g. interaction between your
-  proteins and every other STRING proteins.)\cr
-  Given the size of STRING database, this function could return a very long
-  results. Refer to "Arguments" section for information on how to filter
+  proteins and every other STRING proteins.)
+  \cr Given the size of STRING database, this function could return a very
+  long results. Refer to "Arguments" section for information on how to filter
   the interactions.
 }
 \details{

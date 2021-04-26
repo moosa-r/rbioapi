@@ -42,20 +42,20 @@ List which it's content varies based on the  provided "endpoint"
 \description{
 Reactome maintain a locally host a version of IntAct(Static) interactions
   database. Using this funtion, you can retrieve IntAct information of
-  a prtotein(s) in two scenarios:\cr
-  1- If endpoint = "details" or "summary": Retrieve a detailed/summary
+  a prtotein(s) in two scenarios: \enumerate{
+  \item If endpoint = "details" or "summary": Retrieve a detailed/summary
     information of your provided protein accesions(s) from IntAct database.
-  2- If endpoint = "pathway", Retrieve a list of Reactome pathways which
+  \item If endpoint = "pathway", Retrieve a list of Reactome pathways which
   include your provided protein accession. Pathways with the class
-  "TopLevelPathway" will be excluded.
+  "TopLevelPathway" will be excluded.}
 }
 \section{Corresponding API Resources}{
 
  "POST https://reactome.org/ContentService/interactors/static/
- molecules/details"\cr
- "POST https://reactome.org/ContentService/interactors/static/
- molecules/summary"\cr
- "GET https://reactome.org/ContentService/interactors/static/
+ molecules/details"
+ \cr "POST https://reactome.org/ContentService/interactors/static/
+ molecules/summary"
+ \cr "GET https://reactome.org/ContentService/interactors/static/
  molecules/pathways"
 }
 

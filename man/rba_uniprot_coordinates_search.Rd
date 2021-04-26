@@ -53,10 +53,10 @@ Use this function to search genomic coordinates of UniProt entries.
 \details{
 Note that this is a search function. Thus, you are not required to fill
   every argument; You may use whatever combinations of arguments you see
-  fit for your query.\cr\cr
-  For more information about how UniProt imports and calculates genomic
-  coordinates data, see:\cr
-  McGarvey, P. B., Nightingale, A., Luo, J., Huang, H., Martin, M. J.,
+  fit for your query.
+  \cr For more information about how UniProt imports and calculates genomic
+  coordinates data, see:
+  \cr McGarvey, P. B., Nightingale, A., Luo, J., Huang, H., Martin, M. J.,
   Wu, C., & UniProt Consortium (2019). UniProt genomic mapping for
   deciphering functional effects of missense variants. Human mutation,
   40(6), 694–705. https://doi.org/10.1002/humu.23738

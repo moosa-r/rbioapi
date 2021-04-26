@@ -28,14 +28,14 @@ Homo sapiens is 48887). Refer to
  Data Schema: Entries: Species}.}
 
 \item{sort_by}{Sort the result based on what column? available choices
-are:\cr "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
+are: "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
 "FOUND_ENTITIES", "FOUND_INTERACTORS", "FOUND_REACTIONS", "ENTITIES_RATIO",
 "ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO"}
 
 \item{order}{Sort Order. Can be either "ASC" (default) or "DESC".}
 
 \item{resource}{Filter results based on the resource. Default is "TOTAL",
-available choices are:\cr "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
+available choices are: "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
 "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
 "PUBCHEM_COMPOUND".}
 
@@ -67,8 +67,8 @@ Use a token generated After a Reactome analysis
 \details{
 After Any Analysis, Reactome will associate a token to your analysis. It
   can be later used to in function that requires the token (e.g to retrieve
-  the analysis results, download pdf).\cr\cr
-  Note that Reactome will store your token for only 7 days. You can
+  the analysis results, download pdf).
+  \cr Note that Reactome will store your token for only 7 days. You can
   download your full results with
   \code{\link{rba_reactome_analysis_download}}, and re-import it anytime to
   reactome (using \code{\link{rba_reactome_analysis_import}}) to generate

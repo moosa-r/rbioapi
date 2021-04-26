@@ -26,7 +26,7 @@ identifiers in any cross-reference database. You can provide multiple
 values.}
 
 \item{rf_active}{(logical ) Filter the content of UniParc entry based on
-active status on source database:\cr\itemize{
+active status on source database:\itemize{
 \item NA: don't filter contents based on active status.
 \item TRUE: only return contents which are still active.
 \item FALSE: Only return contents which are not active.}}

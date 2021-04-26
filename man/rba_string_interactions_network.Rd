@@ -44,20 +44,20 @@ arguments documentation for more information on available options.}
 }
 \value{
 A data frame which each row is a network interaction and the
-  columns contains interactor information and interaction scores:
-  stringId_A: STRING identifier (protein A)\cr
-  stringId_B:STRING identifier (protein B)\cr
-  preferredName_A: common protein name (protein A)\cr
-  preferredName_B: common protein name (protein B)\cr
-  ncbiTaxonId: NCBI taxon identifier\cr
-  score: combined score\cr
-  nscore: gene neighborhood score\cr
-  fscore: gene fusion score\cr
-  pscore: phylogenetic profile score\cr
-  ascore: coexpression score\cr
-  escore: experimental score\cr
-  dscore: database score\cr
-  tscore: textmining score
+  columns contains interactor information and interaction scores: \itemize{
+  \item stringId_A: STRING identifier (protein A)
+  \item stringId_B:STRING identifier (protein B)
+  \item preferredName_A: common protein name (protein A)
+  \item preferredName_B: common protein name (protein B)
+  \item ncbiTaxonId: NCBI taxon identifier
+  \item score: combined score
+  \item nscore: gene neighborhood score
+  \item fscore: gene fusion score
+  \item pscore: phylogenetic profile score
+  \item ascore: coexpression score
+  \item escore: experimental score
+  \item dscore: database score
+  \item tscore: textmining score}
 }
 \description{
 This function will retrieve Sting interaction pairs among your input protein

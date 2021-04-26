@@ -89,24 +89,24 @@ NULL, Based to the inputs, an image or PDF file will be saved to
   disk.
 }
 \description{
-This function could be called in two scenarios:\cr
-  1- With create_document = FALSE: To retrieve an image of that event's
-  Diagram.\cr
-  2- With create_document = TRUE: To retrieve a PDF document with the
-  event's diagram image and additional information.\cr
-  see "Details section" for more information
+This function could be called in two scenarios: \enumerate{
+  \item With create_document = FALSE: To retrieve an image of that event's
+  Diagram.
+  \item With create_document = TRUE: To retrieve a PDF document with the
+  event's diagram image and additional information.}
+  \cr see "Details section" for more information
 }
 \details{
-If the function is called with create_document = FALSE:\cr
-  The result will be an image with the format provided in "output_format"
+If the function is called with create_document = FALSE:
+  \cr The result will be an image with the format provided in "output_format"
   argument. If the provided event ID refers to a pathway, the image's
   content will be the that pathways diagram. If the provided event ID refers
   to a sub-pathway or reaction event, the parent pathway's diagram will be
-  exported, with that reaction or sub-pathway's events highlighted.\cr
-  Note that to export an image of reaction-like event separately, you should
-  use \code{\link{rba_reactome_exporter_reaction}}.\cr\cr
-  If the function is called with create_document = TRUE:\cr
-  A PDF document will contain an image of the event's diagram and the
+  exported, with that reaction or sub-pathway's events highlighted.
+  \cr Note that to export an image of reaction-like event separately, you
+  should use \code{\link{rba_reactome_exporter_reaction}}.
+  \cr If the function is called with create_document = TRUE:
+  \cr A PDF document will contain an image of the event's diagram and the
   following information of that events: Summation, Literature references,
   Edit history type, location, compartments and diseases.
   note that if you call the function with "document level = 1", information
@@ -115,7 +115,7 @@ If the function is called with create_document = FALSE:\cr
 \section{Corresponding API Resources}{
 
   "GET https://reactome.org/ContentService/exporter/diagram/{identifier}
-  .{ext}"\cr
+  .{ext}"
   "GET https://reactome.org/ContentService/exporter/document/event/
   {identifier}.pdf"
 }

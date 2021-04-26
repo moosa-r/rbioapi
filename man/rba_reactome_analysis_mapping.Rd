@@ -45,12 +45,12 @@ Use this function to map molecule identifiers of different species to
 }
 \section{Corresponding API Resources}{
 
-"GET https://reactome.org/AnalysisService/mapping"\cr
-"GET https://reactome.org/AnalysisService/mapping/form"\cr
-"GET https://reactome.org/AnalysisService/mapping/form/projection"\cr
-"GET https://reactome.org/AnalysisService/mapping"\cr
-"GET https://reactome.org/AnalysisService/mapping/url"\cr
-"GET https://reactome.org/AnalysisService/mapping/url/projection"
+"GET https://reactome.org/AnalysisService/mapping"
+\cr "GET https://reactome.org/AnalysisService/mapping/form"
+\cr "GET https://reactome.org/AnalysisService/mapping/form/projection"
+\cr "GET https://reactome.org/AnalysisService/mapping"
+\cr "GET https://reactome.org/AnalysisService/mapping/url"
+\cr "GET https://reactome.org/AnalysisService/mapping/url/projection"
 }
 
 \examples{

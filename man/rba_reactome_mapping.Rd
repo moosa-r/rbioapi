@@ -36,9 +36,9 @@ By providing an external identifier from a given resource, you can retrieve
 \section{Corresponding API Resources}{
 
  "GET https://reactome.org/ContentService/data/mapping/{resource}/
- {identifier}/pathways"\cr
- "GET https://reactome.org/ContentService/data/mapping/{resource}/
- {identifier}/reactions"\cr
+ {identifier}/pathways"
+ \cr "GET https://reactome.org/ContentService/data/mapping/{resource}/
+ {identifier}/reactions"
 }
 
 \examples{

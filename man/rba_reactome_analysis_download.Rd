@@ -35,7 +35,7 @@ results associated with your provided token.
 
 \item{resource}{(Only when request is "found_ids" or "pathways")
 Filter results based on the resource. Default is "TOTAL",
-available choices are:\cr "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
+available choices are:"TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
 "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
 "PUBCHEM_COMPOUND".}
 
@@ -54,19 +54,19 @@ Based on the "request" argument, you can download different analysis
 Token is associated to each Reactome analysis results and kept by Reactome
   for at least 7 days. You can locate it in
   \code{\link{rba_reactome_analysis}}'s output, under a sub-list named
-  "summary" (i.e. results$summary$token).\cr
-  Use \code{\link{rba_reactome_analysis_pdf}} to save a full report
+  "summary" (i.e. results$summary$token).
+  \cr Use \code{\link{rba_reactome_analysis_pdf}} to save a full report
   in PDF format.
 }
 \section{Corresponding API Resources}{
 
 GET https://reactome.org/AnalysisService/download/{token}/entities/
-found/{resource}/{filename}.csv"\cr
+found/{resource}/{filename}.csv"
 GET https://reactome.org/AnalysisService//download/{token}/entities/
-notfound/{filename}.csv"\cr
+notfound/{filename}.csv"
 GET https://reactome.org/AnalysisService/download/{token}/pathways/
-{resource}/{filename}.csv"\cr
-GET https://reactome.org/AnalysisService/download/{token}/result.json"\cr
+{resource}/{filename}.csv"
+GET https://reactome.org/AnalysisService/download/{token}/result.json"
 GET https://reactome.org/AnalysisService/download/{token}/result.json.gz"
 }
 

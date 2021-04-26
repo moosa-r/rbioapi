@@ -64,8 +64,8 @@ Retrieve natural variant annotations of a sequence using UniProt protein
 \section{Corresponding API Resources}{
 
  "GET https://www.ebi.ac.uk/proteins/api/variation/dbsnp/{dbid}"
- "GET https://www.ebi.ac.uk/proteins/api/variation/hgvs/{hgvs}"
- "GET https://www.ebi.ac.uk/proteins/api/variation/{accession}"
+ \cr "GET https://www.ebi.ac.uk/proteins/api/variation/hgvs/{hgvs}"
+ \cr "GET https://www.ebi.ac.uk/proteins/api/variation/{accession}"
 }
 
 \examples{
