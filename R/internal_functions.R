@@ -547,7 +547,7 @@
     ## 3.1 errors un-related to server's response
     error_message <- response
     if (isTRUE(skip_error)) {
-      return(error_message, call. = diagnostics)
+      return(as.character(error_message))
     } else {
       stop(error_message, call. = diagnostics)
     }
