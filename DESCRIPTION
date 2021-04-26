@@ -7,7 +7,7 @@ Authors@R:
            family = "Rezwani",
            role = c("aut", "cre", "cph"),
            email = "moosa.rezwani@gmail.com")
-Description: Currently Supports: Enrichr, miEAA, PANTHER,
+Description: Currently Supports: miEAA, PANTHER,
     Reactome, STRING, and UniProt. The goal of rbioapi is to provide a
     user-friendly and unified interface to biological databases, to
     insulate the user from technicalities when it comes to using API

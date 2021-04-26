@@ -45,12 +45,15 @@ With rbioapi, You are not required to to have any knowledge about HTTP protocols
 
 rbioapi is dedicated to **Biological or Medical** databases and web services. Currently, rbioapi fully supports the following (in alphabetical order!):
 
-1.  Enrichr
-2.  MiEAA
-3.  PANTHER
-4.  Reactome
-5.  STRING
-6.  UniProt
+1.  MiEAA
+
+2.  PANTHER
+
+3.  Reactome
+
+4.  STRING
+
+5.  UniProt
 
 **Note That:** rbioapi is an ongoing project. New databases and services will be implemented periodically. Do you see yourself often using a certain database/service? Feel free to suggest any database/service by creating an issue on our GitHub [repository](https://github.com/moosa-r/ "rbioapi GitHub repositry"). I will appreciate any suggestions.
 
@@ -86,12 +89,11 @@ rba_string_version()
 
 Thus, to this version, rbioapi function will have one of the following naming schema:
 
-1.  rba_enrichr\_\*
-2.  rba_mieaa\_\*
-3.  rba_panther\_\*
-4.  rba_reactome\_\*
-5.  rba_string\_\*
-6.  rba_uniprot\_\*
+1.  rba_mieaa\_\*
+2.  rba_panther\_\*
+3.  rba_reactome\_\*
+4.  rba_string\_\*
+5.  rba_uniprot\_\*
 
 There are three exceptions: `rba_options()`, `rba_connection_test()`, and `rba_pages()`; These are helper functions. More on that later.
 
@@ -198,12 +200,11 @@ When using rbioapi, remember that you are querying data from web services; So pl
 
 Each supported service has a dedicated vignette article. Make sure to check those too.
 
-1.  [Enrichr](enrichr.html "rbioapi & Enrichr vignette article")
-2.  [miEAA](mieaa.html "rbioapi & miEAA vignette article")
-3.  [PANTHER](panther.html "rbioapi & PANTHER vignette article")
-4.  [Reactome](reactome.html "rbioapi & Reactome vignette article")
-5.  [STRING](string.html "rbioapi & STRING vignette article")
-6.  [UniProt](uniprot.html "rbioapi & UniProt vignette article")
+1.  [miEAA](mieaa.html "rbioapi & miEAA vignette article")
+2.  [PANTHER](panther.html "rbioapi & PANTHER vignette article")
+3.  [Reactome](reactome.html "rbioapi & Reactome vignette article")
+4.  [STRING](string.html "rbioapi & STRING vignette article")
+5.  [UniProt](uniprot.html "rbioapi & UniProt vignette article")
 
 ------------------------------------------------------------------------
 
