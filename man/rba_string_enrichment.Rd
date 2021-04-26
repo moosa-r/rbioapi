@@ -25,7 +25,7 @@ P-value for the terms. Only STRING IDs are acceptable. (Refer to
 \code{\link{rba_string_map_ids}} to map your IDs.)}
 
 \item{split_df}{(logical, default = FALSE), If TRUE, instead of one
-data frame, results from different categories will be splitted into
+data frame, results from different categories will be split into
 multiple data frames based on their 'category'.}
 
 \item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s

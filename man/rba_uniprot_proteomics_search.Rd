@@ -37,8 +37,8 @@ identifier (UPID)}. You can provide up to 100 UPIDs.}
 
 \item{unique}{Logical: Should the results be filtered based on the
 Peptide's uniqueness (the fact that a peptide maps to only 1 protein). If
-TRUE, Only unique peptides will be returened, if FALSE only un-uniqque
-peptides will be returened; If NA (default) the results will not be
+TRUE, Only unique peptides will be returned, if FALSE only un-unique
+peptides will be returned; If NA (default) the results will not be
 filtered based on this.}
 
 \item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s

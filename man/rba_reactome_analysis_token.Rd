@@ -2,7 +2,7 @@
 % Please edit documentation in R/reactome_analysis.R
 \name{rba_reactome_analysis_token}
 \alias{rba_reactome_analysis_token}
-\title{Return the Results Asociated with a Token}
+\title{Return the Results Associated with a Token}
 \usage{
 rba_reactome_analysis_token(
   token,

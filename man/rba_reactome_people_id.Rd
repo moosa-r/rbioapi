@@ -21,7 +21,7 @@ person? (default = FALSE)}
 \item{publications}{Logical: Only return publications list authored by the
 person? (Defalt = FALSE)}
 
-\item{attribute_name}{(optional) A Reactome person attribute to retunt only.
+\item{attribute_name}{(optional) A Reactome person attribute to return only.
 see \href{https://reactome.org/content/schema/Person}{Reactome Data
 Schema: person} for available options.}
 
@@ -29,7 +29,7 @@ Schema: person} for available options.}
 arguments documentation for more information on available options.}
 }
 \value{
-List containging the requested informations of your provided
+List containing the requested informations of your provided
   person.
 }
 \description{

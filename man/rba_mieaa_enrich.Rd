@@ -53,7 +53,7 @@ or NCBI taxon ID of one of the following species: \enumerate{
  }}
 
 \item{categories}{one or multiple Category names to be used for miRNA set
-enrichmnet analysis. Note that \itemize{
+enrichment analysis. Note that \itemize{
 \item Available categories varies based on your chosen specie and if
  your provided miRNA type is mature or precursor. Use
  \code{\link{rba_mieaa_cats}} to retrieve a list of available category
@@ -76,7 +76,7 @@ results.}
 \item{min_hits}{(numeric) How many miRNA should a sub-category have from
 your provided test-list to be included in the results? (default is 2)}
 
-\item{ref_set}{(Optional) Only appicable when test_type is "ORA".
+\item{ref_set}{(Optional) Only applicable when test_type is "ORA".
 This character vector will be used as your reference (background or
 universe) set for p-value calculations.}
 

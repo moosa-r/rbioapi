@@ -9,7 +9,7 @@ rba_enrichr_gene_map(gene, catagorize = FALSE, ...)
 \arguments{
 \item{gene}{character: An Entrez gene symbol.}
 
-\item{catagorize}{logical: Should the catagory informations be included?}
+\item{catagorize}{logical: Should the category informations be included?}
 
 \item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
 arguments documentation for more information on available options.}

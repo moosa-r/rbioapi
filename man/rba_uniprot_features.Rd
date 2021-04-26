@@ -24,7 +24,7 @@ and/or "INTRAMEM". You can provide up to 20 types.}
 Sequence annotation (Features)} categories (subsection). accepted values
 are: "MOLECULE_PROCESSING", "TOPOLOGY", "SEQUENCE_INFORMATION",
 "STRUCTURAL", "DOMAINS_AND_SITES", "PTM", "VARIANTS" and/or "MUTAGENESIS".
-You can provide up to 8 catagories.}
+You can provide up to 8 categories.}
 
 \item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
 arguments documentation for more information on available options.}

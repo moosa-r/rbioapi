@@ -21,8 +21,8 @@ Internal helper function for rba_connection_test(). It will  make HTTP HEAD
   request to the given resource.
 }
 \seealso{
-Other internal_inernet_connectivity: 
+Other internal_internet_connectivity: 
 \code{\link{.rba_http_status}()},
 \code{\link{.rba_net_handle}()}
 }
-\concept{internal_inernet_connectivity}
+\concept{internal_internet_connectivity}

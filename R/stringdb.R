@@ -134,7 +134,7 @@ rba_string_map_ids <- function(ids,
 #' @param network_type should be one of:\itemize{
 #'   \item "functional": (default) The edge's indicate both physical and
 #'   functional associations.
-#'   \item "physical": The edges indicate that two proteins have a phyical
+#'   \item "physical": The edges indicate that two proteins have a physical
 #'   interaction or are parts of a complex.}
 #' @param hide_node_labels Logical: (Default = FALSE) Hide proteins names from
 #'   the image?
@@ -301,7 +301,7 @@ rba_string_network_image <- function(ids,
 #'
 #' Note that this function will return interactions between your set of
 #'   provided proteins, or at most, expand the interaction network by the
-#'   given parameters. TO retreive a list of all possible interacting proteins
+#'   given parameters. TO retrieve a list of all possible interacting proteins
 #'   with your given input, refer to
 #'   \code{\link{rba_string_interaction_partners}}.
 #'
@@ -327,7 +327,7 @@ rba_string_network_image <- function(ids,
 #' @param network_type should be one of:\itemize{
 #'   \item "functional": (default) The edge's indicate both physical and
 #'   functional associations.
-#'   \item "physical": The edges indicate that two proteins have a phyical
+#'   \item "physical": The edges indicate that two proteins have a physical
 #'   interaction or are parts of a complex.}
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #'   arguments documentation for more information on available options.
@@ -343,7 +343,7 @@ rba_string_network_image <- function(ids,
 #'   \item nscore: gene neighborhood score
 #'   \item fscore: gene fusion score
 #'   \item pscore: phylogenetic profile score
-#'   \item ascore: coexpression score
+#'   \item ascore: co-expression score
 #'   \item escore: experimental score
 #'   \item dscore: database score
 #'   \item tscore: textmining score}
@@ -797,7 +797,7 @@ rba_string_homology_inter <- function(ids,
 #'   P-value for the terms. Only STRING IDs are acceptable. (Refer to
 #'   \code{\link{rba_string_map_ids}} to map your IDs.)
 #' @param split_df (logical, default = FALSE), If TRUE, instead of one
-#'   data frame, results from different categories will be splitted into
+#'   data frame, results from different categories will be split into
 #'   multiple data frames based on their 'category'.
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #'   arguments documentation for more information on available options.

@@ -25,8 +25,8 @@ It will make HTTP status more informative by trying to translate it to a
   Hypertext Transfer Protocol (HTTP) Status Code Registry}
 }
 \seealso{
-Other internal_inernet_connectivity: 
+Other internal_internet_connectivity: 
 \code{\link{.rba_api_check}()},
 \code{\link{.rba_net_handle}()}
 }
-\concept{internal_inernet_connectivity}
+\concept{internal_internet_connectivity}

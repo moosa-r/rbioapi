@@ -16,6 +16,6 @@ The evaluation results of each input call.
 }
 \description{
 This function accepts a list where each of its elements is a character
-  vector which can be parserd and evaluated. currently, this is only used
+  vector which can be parsed and evaluated. currently, this is only used
   in rba_pages
 }

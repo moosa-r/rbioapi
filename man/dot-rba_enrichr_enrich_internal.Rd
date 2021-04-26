@@ -28,7 +28,7 @@ This is an internal helper function which will retrieve the enrichment
 }
 \details{
 The function will be called within \code{\link{rba_enrichr_enrich}} and will
-handle api requests to the server.
+handle API requests to the server.
 }
 \section{Corresponding API Resources}{
 

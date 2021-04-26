@@ -37,7 +37,7 @@ Data frame where each row is a pathway that contains your provided
   entity and columns are pertinent information.
 }
 \description{
-Use this function to search the event hierarcht and retireve a list of
+Use this function to search the event hierarchy and retrieve a list of
   all lower level pathways (non TopLevelPathway class) that contain
   a given 'Physical Entity' or Event. See "Arguments section" on how to
   modify your search.

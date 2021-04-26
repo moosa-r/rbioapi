@@ -1,12 +1,12 @@
 #' Handle Species argument input for miEAA endpoints
 #'
 #' This internal function will make it possible for the users to provide
-#'   variety of specie's name type or if they have enterned a wrongly-formatted
+#'   variety of specie's name type or if they have entered a wrongly-formatted
 #'   or not supported species, to produce an informative error message
 #'
 #' @param sp specie input.
 #' @param to_name (logical) (default = FALSE) to convert a provided species
-#'   abbrevation to specie's scientific name.
+#'   abbreviation to specie's scientific name.
 #'
 #' @return If to_name = FALSE, a three-lettered character string of
 #'   a supported miEAA species. otherwise, if to_name = TRUE, a character
@@ -126,7 +126,7 @@ rba_mieaa_cats <- function(mirna_type, species, ...) {
   # convert species input to abbreviation
   species <- .rba_mieaa_species(species, to_name = FALSE)
 
-  .msg("Retrieving available enrichment catagories of %s for %s.",
+  .msg("Retrieving available enrichment categories of %s for %s.",
        switch(mirna_type,
               "mature" = "miRNA",
               "precursor" = "miRNA precursor"),
@@ -411,7 +411,7 @@ rba_mieaa_convert_type <- function(mirna,
 #'  \item "Sus scrofa", "ssc" or  9823
 #'  }
 #' @param categories one or multiple Category names to be used for miRNA set
-#'   enrichmnet analysis. Note that \itemize{
+#'   enrichment analysis. Note that \itemize{
 #'   \item Available categories varies based on your chosen specie and if
 #'    your provided miRNA type is mature or precursor. Use
 #'    \code{\link{rba_mieaa_cats}} to retrieve a list of available category
@@ -429,7 +429,7 @@ rba_mieaa_convert_type <- function(mirna,
 #'   results.
 #' @param min_hits (numeric) How many miRNA should a sub-category have from
 #'   your provided test-list to be included in the results? (default is 2)
-#' @param ref_set (Optional) Only appicable when test_type is "ORA".
+#' @param ref_set (Optional) Only applicable when test_type is "ORA".
 #'   This character vector will be used as your reference (background or
 #'   universe) set for p-value calculations.
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
@@ -521,7 +521,7 @@ rba_mieaa_enrich_submit <- function(test_set,
                              verbose = FALSE)
   if (all(is.na(categories))) {
     categories <- all_cats
-    .msg("No categories were provided, Requesting enrichment using all of the %s available catagories for species '%s'.",
+    .msg("No categories were provided, Requesting enrichment using all of the %s available categories for species '%s'.",
          length(categories),
          .rba_mieaa_species(species, to_name = TRUE))
   } else {

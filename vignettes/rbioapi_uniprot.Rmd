@@ -74,7 +74,7 @@ This is the equivalent of '[advanced search](https://www.uniprot.org/help/advanc
 The applications of `*_search` variants are not limited to what the title 'search' implies. These functions will also retrieve the search hits in their response; Thus you can use them for mass-retrieving. If you refer to the "argument" section in the functions' manuals, you would see that many arguments accept a vector of values. consider the following examples:
 
 ```{r rba_uniprot_proteins_search1_2}
-## 1 As the simplest scenario, we can retreive multiple proteins in one call
+## 1 As the simplest scenario, we can retrieve multiple proteins in one call
 multi_prs1 <- rba_uniprot_proteins_search(accession = c("P04637",
                                                        "P38398",
                                                        "P24941",

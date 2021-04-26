@@ -1,11 +1,11 @@
 #' Name UniProt search hits elements
 #'
-#' Every search hit in uniprot has a character element whitin it, named
+#' Every search hit in uniprot has a character element within it, named
 #'   "accession". this function should be used as the second response
 #'   parser in the *_search functions to set the name each search hit to
 #'   it's accession
 #'
-#' @param x object to be parserd
+#' @param x object to be parsed
 #'
 #' @return a list with the same structure of the input, only named.
 #'
@@ -820,7 +820,7 @@ rba_uniprot_features_search <- function(accession = NA,
 #'   Sequence annotation (Features)} categories (subsection). accepted values
 #'   are: "MOLECULE_PROCESSING", "TOPOLOGY", "SEQUENCE_INFORMATION",
 #'   "STRUCTURAL", "DOMAINS_AND_SITES", "PTM", "VARIANTS" and/or "MUTAGENESIS".
-#'   You can provide up to 8 catagories.
+#'   You can provide up to 8 categories.
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #'   arguments documentation for more information on available options.
 #'
@@ -1365,8 +1365,8 @@ rba_uniprot_variation <- function(id,
 #' @param peptide Peptide sequence(s). You can provide up to 20 sequences.
 #' @param unique Logical: Should the results be filtered based on the
 #'   Peptide's uniqueness (the fact that a peptide maps to only 1 protein). If
-#'   TRUE, Only unique peptides will be returened, if FALSE only un-uniqque
-#'   peptides will be returened; If NA (default) the results will not be
+#'   TRUE, Only unique peptides will be returned, if FALSE only un-unique
+#'   peptides will be returned; If NA (default) the results will not be
 #'   filtered based on this.
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #'   arguments documentation for more information on available options.

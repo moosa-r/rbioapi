@@ -36,7 +36,7 @@ interactions between your input proteins.}}
 \item{network_type}{should be one of:\itemize{
 \item "functional": (default) The edge's indicate both physical and
 functional associations.
-\item "physical": The edges indicate that two proteins have a phyical
+\item "physical": The edges indicate that two proteins have a physical
 interaction or are parts of a complex.}}
 
 \item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
@@ -54,7 +54,7 @@ A data frame which each row is a network interaction and the
   \item nscore: gene neighborhood score
   \item fscore: gene fusion score
   \item pscore: phylogenetic profile score
-  \item ascore: coexpression score
+  \item ascore: co-expression score
   \item escore: experimental score
   \item dscore: database score
   \item tscore: textmining score}
@@ -68,7 +68,7 @@ This function will retrieve Sting interaction pairs among your input protein
 \details{
 Note that this function will return interactions between your set of
   provided proteins, or at most, expand the interaction network by the
-  given parameters. TO retreive a list of all possible interacting proteins
+  given parameters. TO retrieve a list of all possible interacting proteins
   with your given input, refer to
   \code{\link{rba_string_interaction_partners}}.
 }

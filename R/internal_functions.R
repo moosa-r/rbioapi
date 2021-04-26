@@ -110,7 +110,7 @@
                                                    "/Enrichr"),
                                 "Ensembl" = paste0(.rba_stg("ensembl", "url"),
                                                    "/info/ping"),
-                                "MiEAA" = paste0(.rba_stg("mieaa", "url"),
+                                "miEAA" = paste0(.rba_stg("mieaa", "url"),
                                                  "/mieaa2/api/"),
                                 "PANTHER" = paste0(.rba_stg("panther", "url"),
                                                    "/services/api/panther"),
@@ -143,7 +143,7 @@
 #'   internal information.
 #'
 #' @return TRUE if connected to the internet, a character string if not.
-#' @family internal_inernet_connectivity
+#' @family internal_internet_connectivity
 #' @export
 .rba_net_handle <- function(retry_max = 1,
                             retry_wait = 10,
@@ -194,7 +194,7 @@
 #' @references \href{https://www.iana.org/assignments/http-status-codes/}{IANA:
 #'   Hypertext Transfer Protocol (HTTP) Status Code Registry}
 #'
-#' @family internal_inernet_connectivity
+#' @family internal_internet_connectivity
 #' @export
 .rba_http_status <- function(http_status, verbose = FALSE){
   #ref:
@@ -363,7 +363,7 @@
 #'   package. Apart from producing a standard expression compatible with httr,
 #'   it can resolve the case when multiple parsers or HTTP accept parameters are
 #'   possible according to the end-user's inputs. Also, it will append
-#'   'httr::write()', 'httr::progress' and 'httr::vebose()' based on the
+#'   'httr::write()', 'httr::progress' and 'httr::verbose()' based on the
 #'   end-user's inputs.
 #'   \cr There are two scenarios with providing accepted response and response
 #'   parser arguments:
@@ -836,7 +836,7 @@
 #' @param cond_i element i from .rba_args()'s cond argument.
 #'
 #' @return A list containing the messages and warn element to
-#'   determine the behaviour of .rba_args().
+#'   determine the behavior of .rba_args().
 #'
 #' @family internal_arguments_check
 #'
@@ -891,7 +891,7 @@
 #'   character string), which could be evaluated (or parsed and evaluated) to a
 #'   logical TRUE/FALSE object. If that expression is TRUE after the evaluation,
 #'   the code execution will be halted (or warning will be issued if
-#'   cond_warning = TURE or the last element of coniditon sub-list is
+#'   cond_warning = TURE or the last element of condition sub-list is
 #'   "warn = TRUE ), optionally with a pre-defined error message.
 #'   \cr cond's elements possible formats: \enumerate{
 #'   \item list(quote(conditional expression))
@@ -1216,7 +1216,7 @@
 #' Grammatically Correct Pasting
 #'
 #' This function will append every element by comma and the last element by
-#'   'and'/'or', just like natural and correct english sentence.
+#'   'and'/'or', just like natural and correct English sentence.
 #'
 #' @param ... words to be appended together.
 #' @param last (default: "AND") The separator between the last two words.
@@ -1224,7 +1224,7 @@
 #' @param quote Should every word be quoted between a character?
 #' @param quote_all Should the final result be quoted between a character?
 #'
-#' @return A character string of appended words, in a natural english way.
+#' @return A character string of appended words, in a natural English way.
 #'
 #' @family internal_misc
 #' @export
@@ -1389,9 +1389,9 @@
 #'   It will temporary alter the standard rbioapi options during the caller
 #'   function execution.
 #'
-#' The availabe rbioapi options will be retrieved from
+#' The available rbioapi options will be retrieved from
 #'   getOption("rba_user_options"). If the name of parameter in '...' is a
-#'   standrad rbioapi option, the content of that option will be checked and
+#'   standard rbioapi option, the content of that option will be checked and
 #'   in case that the content is valid, the caller function's environment will
 #'   be altered in response to the change.
 #'   \cr Also the function will ignore any arguments which is not standard and

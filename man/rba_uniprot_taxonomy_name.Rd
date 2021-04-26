@@ -21,7 +21,7 @@ rba_uniprot_taxonomy_name(
 It should be one of : "scientific" (default), "common" or "mnemonic".}
 
 \item{search_type}{The logical relationship between your provided search
-query and the taxanomic name field. It should be one of "equal_to"
+query and the taxonomic name field. It should be one of "equal_to"
 (default), "start_with", "end_with" or "contain".}
 
 \item{node_only}{(logical) Retrieve only the node(s) information and exclude URL links

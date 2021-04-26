@@ -18,11 +18,11 @@
 \item{quote_all}{Should the final result be quoted between a character?}
 }
 \value{
-A character string of appended words, in a natural english way.
+A character string of appended words, in a natural English way.
 }
 \description{
 This function will append every element by comma and the last element by
-  'and'/'or', just like natural and correct english sentence.
+  'and'/'or', just like natural and correct English sentence.
 }
 \seealso{
 Other internal_misc: 

@@ -31,8 +31,8 @@ When called, the function will test the Internet connection. Based on called
   if necessary until the device is connected back to the internet.
 }
 \seealso{
-Other internal_inernet_connectivity: 
+Other internal_internet_connectivity: 
 \code{\link{.rba_api_check}()},
 \code{\link{.rba_http_status}()}
 }
-\concept{internal_inernet_connectivity}
+\concept{internal_internet_connectivity}

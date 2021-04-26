@@ -59,7 +59,7 @@ mode of actions.}}
 \item{network_type}{should be one of:\itemize{
 \item "functional": (default) The edge's indicate both physical and
 functional associations.
-\item "physical": The edges indicate that two proteins have a phyical
+\item "physical": The edges indicate that two proteins have a physical
 interaction or are parts of a complex.}}
 
 \item{hide_node_labels}{Logical: (Default = FALSE) Hide proteins names from

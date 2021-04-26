@@ -103,8 +103,8 @@
 #'   input:\enumerate{
 #'   \item If you provide a vector or a single-columned table,
 #'   "Over-Representation" analysis will be performed.
-#'   \item If you provide a multi-columend table, with the first column being
-#'   molecules identifers and the rest being numeral expression values,
+#'   \item If you provide a multi-column table, with the first column being
+#'   molecules identifiers and the rest being numeral expression values,
 #'   "Expression" analysis will be performed.}
 #'   Refer to the details section for the accepted input types and format.
 #'
@@ -668,7 +668,7 @@ rba_reactome_analysis_download <- function(token,
 }
 
 #### Import Endpoints ####
-#' Import Saved Analyhsis JSON to Reactome
+#' Import Saved Analysis JSON to Reactome
 #'
 #' If you have a JSON file of analysis results (only obtained via
 #'   \code{\link{rba_reactome_analysis_download}} with the result argument
@@ -877,7 +877,7 @@ rba_reactome_analysis_mapping <- function(input,
 #'   and computationally inferred pathways (orthologous) in other species.
 #'
 #' Reactome incorporate manually curated human reactions and PANTHER's
-#'   protein homology data to Computationally infer events in other euakaryotic
+#'   protein homology data to Computationally infer events in other eukaryotic
 #'   species.
 #' \cr In version 73 (11 June 2020), using an orthology-based approach,
 #'   Homo sapiens events was projected to 18,654 orthologous pathways (with
@@ -912,7 +912,7 @@ rba_reactome_analysis_mapping <- function(input,
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #'   arguments documentation for more information on available options.
 #'
-#' @return List with the results of the comparisson.
+#' @return List with the results of the comparison.
 #'
 #' @references \itemize{
 #'   \item Fabregat A, Sidiropoulos K, Viteri G, Forner O, Marin-Garcia P,
@@ -1015,7 +1015,7 @@ rba_reactome_analysis_species <- function(species_dbid,
 }
 
 #### Token Endpoints ####
-#' Return the Results Asociated with a Token
+#' Return the Results Associated with a Token
 #'
 #' Use a token generated After a Reactome analysis
 #'   (via \code{\link{rba_reactome_analysis}}) to Retrieve the analysis results.

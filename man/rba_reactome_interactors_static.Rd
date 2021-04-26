@@ -20,7 +20,7 @@ only a single protein accession can be provided.}
 \item "details": To return a detailed information of your provided
 protein(s) accession.
 \item "summary": To return a summary of your provided protein(s) accession
-\item "pathway": To return a list of pathways containg the interacting
+\item "pathway": To return a list of pathways containing the interacting
 molecules (excluding TopLevelPathway class).}}
 
 \item{only_diagrammed}{Logical: (only when "endpoint = "pathway")
@@ -41,8 +41,8 @@ List which it's content varies based on the  provided "endpoint"
 }
 \description{
 Reactome maintain a locally host a version of IntAct(Static) interactions
-  database. Using this funtion, you can retrieve IntAct information of
-  a prtotein(s) in two scenarios: \enumerate{
+  database. Using this function, you can retrieve IntAct information of
+  a protein(s) in two scenarios: \enumerate{
   \item If endpoint = "details" or "summary": Retrieve a detailed/summary
     information of your provided protein accession(s) from IntAct database.
   \item If endpoint = "pathway", Retrieve a list of Reactome pathways which

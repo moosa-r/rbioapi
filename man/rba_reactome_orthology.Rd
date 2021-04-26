@@ -25,7 +25,7 @@ List containing found Orthologous event(s) in your provided species
 }
 \description{
 Reactome incorporate manually curated human reactions and PANTHER's
-  protein homology data to Computationally infer events in other euakaryotic
+  protein homology data to Computationally infer events in other eukaryotic
   species.
 }
 \details{

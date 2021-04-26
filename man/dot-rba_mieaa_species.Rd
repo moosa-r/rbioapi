@@ -10,7 +10,7 @@
 \item{sp}{specie input.}
 
 \item{to_name}{(logical) (default = FALSE) to convert a provided species
-abbrevation to specie's scientific name.}
+abbreviation to specie's scientific name.}
 }
 \value{
 If to_name = FALSE, a three-lettered character string of
@@ -19,7 +19,7 @@ If to_name = FALSE, a three-lettered character string of
 }
 \description{
 This internal function will make it possible for the users to provide
-  variety of specie's name type or if they have enterned a wrongly-formatted
+  variety of specie's name type or if they have entered a wrongly-formatted
   or not supported species, to produce an informative error message
 }
 \examples{
@@ -32,7 +32,7 @@ This internal function will make it possible for the users to provide
 
 }
 \seealso{
-Other "miEAA API": 
+Other "miEAA": 
 \code{\link{rba_mieaa_cats}()},
 \code{\link{rba_mieaa_convert_type}()},
 \code{\link{rba_mieaa_convert_version}()},
@@ -41,4 +41,4 @@ Other "miEAA API":
 \code{\link{rba_mieaa_enrich_submit}()},
 \code{\link{rba_mieaa_enrich}()}
 }
-\concept{"miEAA API"}
+\concept{"miEAA"}

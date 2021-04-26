@@ -404,8 +404,8 @@ rba_panther_info <- function(what,
 #'   run \code{\link{rba_panther_info}} with argument 'what = "organisms"' to
 #'   get a list of PANTHER's supported organisms.
 #' @param seq_pos (Numeric) A position in the protein's sequence of the
-#'   provided gene. should be in the range of the protein's lenght.
-#' @param include_msa (Logical) Only if a sequence positon is provided,
+#'   provided gene. should be in the range of the protein's length.
+#' @param include_msa (Logical) Only if a sequence position is provided,
 #'   should MSA (Multiple Sequence Alignment) information be included in the
 #'   results?
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
@@ -632,9 +632,9 @@ rba_panther_homolog <- function(genes,
 #' Get PANTHER Families and Sub-Families
 #'
 #' Using this function, you can retrieve Orthologs, MSA or Tree topology
-#'   information of a given PANTHER familiy.
+#'   information of a given PANTHER family.
 #'
-#' @param id Panther Family id.
+#' @param id Panther family id.
 #' @param what What to retrieve? One of: \itemize{
 #' \item "ortholog": Orthologs ('LDO' for least diverged and 'O' for more
 #'   diverged).
@@ -791,7 +791,7 @@ rba_panther_tree_grafter <- function(protein_seq,
                         list(arg = "target_organisms",
                              class = "numeric")),
             cond = list(list(quote(nchar(protein_seq) > 5000),
-                             "Maximum allowed lenght of protein sequence is 50kb.")))
+                             "Maximum allowed length of protein sequence is 50kb.")))
   .msg("Retrieving a PANTHER family tree with your input protein grated in it.")
 
   ## Build POST API Request's body

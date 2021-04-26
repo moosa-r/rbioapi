@@ -38,7 +38,7 @@ cons Should be a list, and each element of that list should correspond to one
   character string), which could be evaluated (or parsed and evaluated) to a
   logical TRUE/FALSE object. If that expression is TRUE after the evaluation,
   the code execution will be halted (or warning will be issued if
-  cond_warning = TURE or the last element of coniditon sub-list is
+  cond_warning = TURE or the last element of condition sub-list is
   "warn = TRUE ), optionally with a pre-defined error message.
   \cr cond's elements possible formats: \enumerate{
   \item list(quote(conditional expression))

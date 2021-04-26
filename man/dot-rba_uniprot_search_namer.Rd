@@ -7,13 +7,13 @@
 .rba_uniprot_search_namer(x)
 }
 \arguments{
-\item{x}{object to be parserd}
+\item{x}{object to be parsed}
 }
 \value{
 a list with the same structure of the input, only named.
 }
 \description{
-Every search hit in uniprot has a character element whitin it, named
+Every search hit in uniprot has a character element within it, named
   "accession". this function should be used as the second response
   parser in the *_search functions to set the name each search hit to
   it's accession

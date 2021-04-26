@@ -7,7 +7,7 @@
 rba_panther_family(id, what, target_organisms = NA, ...)
 }
 \arguments{
-\item{id}{Panther Family id.}
+\item{id}{Panther family id.}
 
 \item{what}{What to retrieve? One of: \itemize{
 \item "ortholog": Orthologs ('LDO' for least diverged and 'O' for more
@@ -29,7 +29,7 @@ For trees a list and otherwise a data frame with the requested
 }
 \description{
 Using this function, you can retrieve Orthologs, MSA or Tree topology
-  information of a given PANTHER familiy.
+  information of a given PANTHER family.
 }
 \section{Corresponding API Resources}{
 

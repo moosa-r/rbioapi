@@ -20,7 +20,7 @@
 #' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}(s). You can provide up to 100
 #'   accession numbers.
-#' @param chromosome Chromose name, such as "X", "Y", 1, 20, etc. You can
+#' @param chromosome chromosome name, such as "X", "Y", 1, 20, etc. You can
 #' provide up to 20 values.
 #' @param ensembl_id Ensembl Stable gene ID, transcript ID or translation ID.
 #' You can provide up to 20 IDs.

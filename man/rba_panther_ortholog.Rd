@@ -33,9 +33,9 @@ run \code{\link{rba_panther_info}} with argument 'what = "organisms"' to
 get a list of PANTHER's supported organisms.}
 
 \item{seq_pos}{(Numeric) A position in the protein's sequence of the
-provided gene. should be in the range of the protein's lenght.}
+provided gene. should be in the range of the protein's length.}
 
-\item{include_msa}{(Logical) Only if a sequence positon is provided,
+\item{include_msa}{(Logical) Only if a sequence position is provided,
 should MSA (Multiple Sequence Alignment) information be included in the
 results?}
 

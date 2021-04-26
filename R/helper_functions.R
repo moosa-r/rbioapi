@@ -9,7 +9,7 @@
 #'
 #' @return An informative message with the result of HEAD request's success or
 #'   failure.
-#' @family internal_inernet_connectivity
+#' @family internal_internet_connectivity
 #' @export
 .rba_api_check <- function(url, diagnostics = FALSE){
   request <- quote(httr::HEAD(url = url,
@@ -197,7 +197,7 @@ rba_options <- function(diagnostics = NA,
 #' Iterate over function calls
 #'
 #' This function accepts a list where each of its elements is a character
-#'   vector which can be parserd and evaluated. currently, this is only used
+#'   vector which can be parsed and evaluated. currently, this is only used
 #'   in rba_pages
 #'
 #' @param input_call a list that contains the calls.

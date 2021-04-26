@@ -20,7 +20,7 @@ rba_uniprot_coordinates_search(
 UniProtKB primary or secondary accession}(s). You can provide up to 100
 accession numbers.}
 
-\item{chromosome}{Chromose name, such as "X", "Y", 1, 20, etc. You can
+\item{chromosome}{chromosome name, such as "X", "Y", 1, 20, etc. You can
 provide up to 20 values.}
 
 \item{ensembl_id}{Ensembl Stable gene ID, transcript ID or translation ID.

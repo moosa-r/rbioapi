@@ -2,7 +2,7 @@
 % Please edit documentation in R/reactome_analysis.R
 \name{rba_reactome_analysis_import}
 \alias{rba_reactome_analysis_import}
-\title{Import Saved Analyhsis JSON to Reactome}
+\title{Import Saved Analysis JSON to Reactome}
 \usage{
 rba_reactome_analysis_import(input, input_format = NA, ...)
 }

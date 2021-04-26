@@ -89,8 +89,8 @@ Using this function, you can perform Reactome Analysis In a convenient way.
   input:\enumerate{
   \item If you provide a vector or a single-columned table,
   "Over-Representation" analysis will be performed.
-  \item If you provide a multi-columend table, with the first column being
-  molecules identifers and the rest being numeral expression values,
+  \item If you provide a multi-column table, with the first column being
+  molecules identifiers and the rest being numeral expression values,
   "Expression" analysis will be performed.}
   Refer to the details section for the accepted input types and format.
 }

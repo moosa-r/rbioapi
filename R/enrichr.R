@@ -223,7 +223,7 @@ rba_enrichr_view_list <- function(user_list_id,
 #'   results of one_user_list id against one library name
 #'
 #' The function will be called within \code{\link{rba_enrichr_enrich}} and will
-#' handle api requests to the server.
+#' handle API requests to the server.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://maayanlab.cloud/Enrichr/enrich"
@@ -451,7 +451,7 @@ rba_enrichr_enrich <- function(user_list_id,
 #'  "GET https://maayanlab.cloud/Enrichr/genemap"
 #'
 #' @param gene character: An Entrez gene symbol.
-#' @param catagorize logical: Should the catagory informations be included?
+#' @param catagorize logical: Should the category informations be included?
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #' arguments documentation for more information on available options.
 #'

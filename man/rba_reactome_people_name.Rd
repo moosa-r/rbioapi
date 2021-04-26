@@ -20,7 +20,7 @@ List where each element is a search hit contains the person's
   information.
 }
 \description{
-Using this function you can query peaple by partially matching or exact
+Using this function you can query people by partially matching or exact
   name and retrieve a list of matching people in Reactome.
 }
 \section{Corresponding API Resources}{

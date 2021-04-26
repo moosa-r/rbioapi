@@ -32,7 +32,7 @@ This is a convenient interface between rbioapi exported functions and httr
   package. Apart from producing a standard expression compatible with httr,
   it can resolve the case when multiple parsers or HTTP accept parameters are
   possible according to the end-user's inputs. Also, it will append
-  'httr::write()', 'httr::progress' and 'httr::vebose()' based on the
+  'httr::write()', 'httr::progress' and 'httr::verbose()' based on the
   end-user's inputs.
   \cr There are two scenarios with providing accepted response and response
   parser arguments:

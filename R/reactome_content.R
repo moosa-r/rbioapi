@@ -1307,7 +1307,7 @@ rba_reactome_exporter_reaction <- function(event_id,
 #'  "GET https://reactome.org/ContentService/interactors/psicquic/resources"
 #'
 #' @param proteins Proteins to retrieve PSICQUIC interactors.
-#' @param resource The PSICQUIC resource for yout provided proteins. Call
+#' @param resource The PSICQUIC resource for your provided proteins. Call
 #'   rba_reactome_interactors_psicquic() without argument to get the available
 #'   options.
 #' @param details Logical: If TRUE (default) a detailed list of interactors
@@ -1316,8 +1316,8 @@ rba_reactome_exporter_reaction <- function(event_id,
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #'   arguments documentation for more information on available options.
 #'
-#' @return Depending your input, a list containg the detailed or summary of
-#'   PSICQUIC interactions or a data frame of all regesiterd PSICQUIC
+#' @return Depending your input, a list containing the detailed or summary of
+#'   PSICQUIC interactions or a data frame of all registered PSICQUIC
 #'   resources.
 #'
 #' @references \itemize{
@@ -1404,8 +1404,8 @@ rba_reactome_interactors_psicquic <- function(proteins = NA,
 #' Get Static(IntAct) Interaction Information of a Protein
 #'
 #' Reactome maintain a locally host a version of IntAct(Static) interactions
-#'   database. Using this funtion, you can retrieve IntAct information of
-#'   a prtotein(s) in two scenarios: \enumerate{
+#'   database. Using this function, you can retrieve IntAct information of
+#'   a protein(s) in two scenarios: \enumerate{
 #'   \item If endpoint = "details" or "summary": Retrieve a detailed/summary
 #'     information of your provided protein accession(s) from IntAct database.
 #'   \item If endpoint = "pathway", Retrieve a list of Reactome pathways which
@@ -1426,7 +1426,7 @@ rba_reactome_interactors_psicquic <- function(proteins = NA,
 #'   \item "details": To return a detailed information of your provided
 #'   protein(s) accession.
 #'   \item "summary": To return a summary of your provided protein(s) accession
-#'   \item "pathway": To return a list of pathways containg the interacting
+#'   \item "pathway": To return a list of pathways containing the interacting
 #'   molecules (excluding TopLevelPathway class).}
 #' @param only_diagrammed Logical: (only when "endpoint = "pathway")
 #'   If TRUE, pathways without diagram will be excluded. (default = FALSE)
@@ -1639,7 +1639,7 @@ rba_reactome_mapping <- function(id,
 #' Get Orthologous (Computationally Inferred) Events
 #'
 #' Reactome incorporate manually curated human reactions and PANTHER's
-#'   protein homology data to Computationally infer events in other euakaryotic
+#'   protein homology data to Computationally infer events in other eukaryotic
 #'   species.
 #'
 #' In version 73 (11 June 2020), using an orthology-based approach,
@@ -1956,7 +1956,7 @@ rba_reactome_pathways_events <- function(event_id,
 
 #' Get lower level pathways Containing a 'Physical Entity' or Event
 #'
-#' Use this function to search the event hierarcht and retireve a list of
+#' Use this function to search the event hierarchy and retrieve a list of
 #'   all lower level pathways (non TopLevelPathway class) that contain
 #'   a given 'Physical Entity' or Event. See "Arguments section" on how to
 #'   modify your search.
@@ -2141,7 +2141,7 @@ rba_reactome_pathways_top <- function(species,
 
 #' Get Persons Information by Name
 #'
-#' Using this function you can query peaple by partially matching or exact
+#' Using this function you can query people by partially matching or exact
 #'   name and retrieve a list of matching people in Reactome.
 #'
 #' @section Corresponding API Resources:
@@ -2223,13 +2223,13 @@ rba_reactome_people_name <- function(person_name,
 #'   person? (default = FALSE)
 #' @param publications Logical: Only return publications list authored by the
 #'   person? (Defalt = FALSE)
-#' @param attribute_name (optional) A Reactome person attribute to retunt only.
+#' @param attribute_name (optional) A Reactome person attribute to return only.
 #'   see \href{https://reactome.org/content/schema/Person}{Reactome Data
 #'   Schema: person} for available options.
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #'   arguments documentation for more information on available options.
 #'
-#' @return List containging the requested informations of your provided
+#' @return List containing the requested informations of your provided
 #'   person.
 #'
 #' @references \itemize{

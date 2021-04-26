@@ -48,7 +48,7 @@ to be included in the results.}
 arguments documentation for more information on available options.}
 }
 \value{
-List with the results of the comparisson.
+List with the results of the comparison.
 }
 \description{
 Use This function to Compare human's manually-curated pathways
@@ -56,7 +56,7 @@ Use This function to Compare human's manually-curated pathways
 }
 \details{
 Reactome incorporate manually curated human reactions and PANTHER's
-  protein homology data to Computationally infer events in other euakaryotic
+  protein homology data to Computationally infer events in other eukaryotic
   species.
 \cr In version 73 (11 June 2020), using an orthology-based approach,
   Homo sapiens events was projected to 18,654 orthologous pathways (with

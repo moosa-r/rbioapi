@@ -11,7 +11,7 @@
 }
 \value{
 A list containing the messages and warn element to
-  determine the behaviour of .rba_args().
+  determine the behavior of .rba_args().
 }
 \description{
 In case of Condition Error (i.e. a TRUE returned by evaluating the
