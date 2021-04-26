@@ -76,7 +76,7 @@ rba_reactome_interactors_psicquic(proteins = c("TP53", "MYC"),
   }
 }
 \seealso{
-Other "Reactome Content Service, Molecule Interactors": 
+Other "Reactome Content Service - Molecule Interactors": 
 \code{\link{rba_reactome_interactors_static}()}
 }
-\concept{"Reactome Content Service, Molecule Interactors"}
+\concept{"Reactome Content Service - Molecule Interactors"}

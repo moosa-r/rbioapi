@@ -838,8 +838,7 @@
 #' @return A list containing the messages and warn element to
 #'   determine the behaviour of .rba_args().
 #'
-#' @family A list containing the messages and warn element to
-#'   determine the behaviour of .rba_args().
+#' @family internal_arguments_check
 #'
 #' @export
 .rba_args_cond <- function(cond_i) {

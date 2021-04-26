@@ -21,5 +21,12 @@ In case of Condition Error (i.e. a TRUE returned by evaluating the
  execution with message as error, or if TRUE, issues a warning with that
  message.
 }
-\concept{A list containing the messages and warn element to
-  determine the behaviour of .rba_args().}
+\seealso{
+Other internal_arguments_check: 
+\code{\link{.rba_args_cons_chk}()},
+\code{\link{.rba_args_cons_msg}()},
+\code{\link{.rba_args_cons_wrp}()},
+\code{\link{.rba_args_opts}()},
+\code{\link{.rba_args}()}
+}
+\concept{internal_arguments_check}

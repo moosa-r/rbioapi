@@ -44,7 +44,7 @@ Reactome maintain a locally host a version of IntAct(Static) interactions
   database. Using this funtion, you can retrieve IntAct information of
   a prtotein(s) in two scenarios: \enumerate{
   \item If endpoint = "details" or "summary": Retrieve a detailed/summary
-    information of your provided protein accesions(s) from IntAct database.
+    information of your provided protein accession(s) from IntAct database.
   \item If endpoint = "pathway", Retrieve a list of Reactome pathways which
   include your provided protein accession. Pathways with the class
   "TopLevelPathway" will be excluded.}
@@ -87,7 +87,7 @@ rba_reactome_interactors_static(proteins = c("Q9BXM7-1", "Q13501"),
   }
 }
 \seealso{
-Other "Reactome Content Service, Molecule Interactors": 
+Other "Reactome Content Service - Molecule Interactors": 
 \code{\link{rba_reactome_interactors_psicquic}()}
 }
-\concept{"Reactome Content Service, Molecule Interactors"}
+\concept{"Reactome Content Service - Molecule Interactors"}

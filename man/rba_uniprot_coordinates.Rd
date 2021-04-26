@@ -62,9 +62,9 @@ rba_uniprot_coordinates(db_type = "HGNC", db_id = "CD40")
   }
 }
 \seealso{
-Other "UniProt API, Coordinates": 
+Other "UniProt - Coordinates": 
 \code{\link{rba_uniprot_coordinates_location}()},
 \code{\link{rba_uniprot_coordinates_search}()},
 \code{\link{rba_uniprot_coordinates_sequence}()}
 }
-\concept{"UniProt API, Coordinates"}
+\concept{"UniProt - Coordinates"}

@@ -45,7 +45,7 @@ rba_uniprot_antigens("P04626")
   }
 }
 \seealso{
-Other "UniProt API, Antigen": 
+Other "UniProt - Antigen": 
 \code{\link{rba_uniprot_antigens_search}()}
 }
-\concept{"UniProt API, Antigen"}
+\concept{"UniProt - Antigen"}

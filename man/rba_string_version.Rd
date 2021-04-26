@@ -46,7 +46,7 @@ rba_string_version()
   }
 }
 \seealso{
-Other "STRING API": 
+Other "STRING": 
 \code{\link{rba_string_annotations}()},
 \code{\link{rba_string_enrichment_ppi}()},
 \code{\link{rba_string_enrichment}()},
@@ -57,4 +57,4 @@ Other "STRING API":
 \code{\link{rba_string_map_ids}()},
 \code{\link{rba_string_network_image}()}
 }
-\concept{"STRING API"}
+\concept{"STRING"}

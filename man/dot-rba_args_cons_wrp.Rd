@@ -19,6 +19,7 @@ Iterates .rba_args_cons_chk() on every defined constrain
 }
 \seealso{
 Other internal_arguments_check: 
+\code{\link{.rba_args_cond}()},
 \code{\link{.rba_args_cons_chk}()},
 \code{\link{.rba_args_cons_msg}()},
 \code{\link{.rba_args_opts}()},

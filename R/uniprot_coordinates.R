@@ -53,7 +53,7 @@
 #' rba_uniprot_coordinates_search(taxid = 9606, chromosome = "y")
 #' }
 #'
-#' @family "UniProt API, Coordinates"
+#' @family "UniProt - Coordinates"
 #' @export
 rba_uniprot_coordinates_search <- function(accession = NA,
                                            chromosome = NA,
@@ -180,7 +180,7 @@ rba_uniprot_coordinates_search <- function(accession = NA,
 #'     p_start = 1, p_end = 277)
 #' }
 #'
-#' @family "UniProt API, Coordinates"
+#' @family "UniProt - Coordinates"
 #' @export
 rba_uniprot_coordinates_sequence <- function(accession,
                                              p_position = NA,
@@ -275,7 +275,7 @@ rba_uniprot_coordinates_sequence <- function(accession,
 #' rba_uniprot_coordinates(db_type = "HGNC", db_id = "CD40")
 #' }
 #'
-#' @family "UniProt API, Coordinates"
+#' @family "UniProt - Coordinates"
 #' @export
 rba_uniprot_coordinates <- function(accession = NA,
                                     db_type = NA,
@@ -371,7 +371,7 @@ rba_uniprot_coordinates <- function(accession = NA,
 #'     locations = "20:39000001", in_range = FALSE)
 #' }
 #'
-#' @family "UniProt API, Coordinates"
+#' @family "UniProt - Coordinates"
 #' @export
 rba_uniprot_coordinates_location <- function(taxid,
                                              locations,

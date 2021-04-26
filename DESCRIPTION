@@ -1,6 +1,6 @@
 Type: Package
 Package: rbioapi
-Title: User-friendly R Interface to Biologic web Services' API
+Title: User-Friendly R Interface to Biologic Web Services' API
 Version: 0.6.5
 Authors@R: 
     person(given = "Moosa",
@@ -28,8 +28,7 @@ Suggests:
     DT,
     knitr,
     png,
-    rmarkdown,
-    rstudioapi
+    rmarkdown
 VignetteBuilder: 
     knitr
 Encoding: UTF-8

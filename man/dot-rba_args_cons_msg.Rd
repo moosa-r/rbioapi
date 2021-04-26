@@ -22,6 +22,7 @@ In case of Constrain Error (i.e. a FALSE returned by
 }
 \seealso{
 Other internal_arguments_check: 
+\code{\link{.rba_args_cond}()},
 \code{\link{.rba_args_cons_chk}()},
 \code{\link{.rba_args_cons_wrp}()},
 \code{\link{.rba_args_opts}()},

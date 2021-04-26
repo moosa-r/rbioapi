@@ -27,7 +27,7 @@
 #' rba_reactome_version()
 #' }
 #'
-#' @family "Reactome Content Service, Database Info Queries"
+#' @family "Reactome Content Service - Database Info Queries"
 #' @export
 rba_reactome_version <- function(...) {
   ## Load Global Options
@@ -89,7 +89,7 @@ rba_reactome_version <- function(...) {
 #' rba_reactome_diseases(doid = TRUE)
 #' }
 #'
-#' @family "Reactome Content Service, Disease Related Queries"
+#' @family "Reactome Content Service - Disease Related Queries"
 #' @export
 rba_reactome_diseases <- function(doid = FALSE,
                                   ...) {
@@ -173,7 +173,7 @@ rba_reactome_diseases <- function(doid = FALSE,
 #'     exclude_structures = TRUE)
 #' }
 #'
-#' @family "Reactome Content Service, Physical Entity Queries"
+#' @family "Reactome Content Service - Physical Entity Queries"
 #' @export
 rba_reactome_complex_subunits <- function(complex_id,
                                           exclude_structures = FALSE,
@@ -246,7 +246,7 @@ rba_reactome_complex_subunits <- function(complex_id,
 #' rba_reactome_complex_list(id = "P00533", resource = "UniProt")
 #' }
 #'
-#' @family "Reactome Content Service, Physical Entity Queries"
+#' @family "Reactome Content Service - Physical Entity Queries"
 #' @export
 rba_reactome_complex_list <- function(id,
                                       resource,
@@ -310,7 +310,7 @@ rba_reactome_complex_list <- function(id,
 #' rba_reactome_participant_of(entity_id = "R-HSA-199420")
 #' }
 #'
-#' @family "Reactome Content Service, Physical Entity Queries"
+#' @family "Reactome Content Service - Physical Entity Queries"
 #' @seealso
 #' \code{\link{rba_reactome_participants}}
 #' @export
@@ -373,7 +373,7 @@ rba_reactome_participant_of <- function(entity_id,
 #' rba_reactome_entity_other_forms("R-HSA-199420")
 #' }
 #'
-#' @family "Reactome Content Service, Physical Entity Queries"
+#' @family "Reactome Content Service - Physical Entity Queries"
 #' @export
 rba_reactome_entity_other_forms <- function(entity_id,
                                             ...) {
@@ -442,7 +442,7 @@ rba_reactome_entity_other_forms <- function(entity_id,
 #' rba_reactome_event_ancestors("R-HSA-5673001")
 #' }
 #'
-#' @family "Reactome Content Service, Queries Related to Events"
+#' @family "Reactome Content Service - Queries Related to Events"
 #' @export
 rba_reactome_event_ancestors <- function(event_id,
                                          ...) {
@@ -516,7 +516,7 @@ rba_reactome_event_ancestors <- function(event_id,
 #' rba_reactome_event_hierarchy(9606)
 #' }
 #'
-#' @family "Reactome Content Service, Queries Related to Events"
+#' @family "Reactome Content Service - Queries Related to Events"
 #' @export
 rba_reactome_event_hierarchy <- function(species,
                                          ...) {
@@ -553,7 +553,7 @@ rba_reactome_event_hierarchy <- function(species,
 #'   Diagram.
 #'   \item With create_document = TRUE: To retrieve a PDF document with the
 #'   event's diagram image and additional information.}
-#'   \cr see "Details section" for more information
+#'   see "Details section" for more information
 #'
 #' If the function is called with create_document = FALSE:
 #'   \cr The result will be an image with the format provided in "output_format"
@@ -650,7 +650,7 @@ rba_reactome_event_hierarchy <- function(species,
 #'     save_to = "reactome_event_diagram.svg")
 #' }
 #'
-#' @family "Reactome Content Service, Format Exporter"
+#' @family "Reactome Content Service - Format Exporter"
 #' @seealso
 #' \code{\link{rba_reactome_exporter_reaction}}
 #' \code{\link{rba_reactome_analysis}}
@@ -850,7 +850,7 @@ rba_reactome_exporter_diagram <- function(event_id,
 #'     output_format = "sbgn")
 #' }
 #'
-#' @family "Reactome Content Service, Format Exporter"
+#' @family "Reactome Content Service - Format Exporter"
 #' @export
 rba_reactome_exporter_event <- function(event_id,
                                         output_format,
@@ -956,7 +956,7 @@ rba_reactome_exporter_event <- function(event_id,
 #'     token = 123456789)
 #' }
 #'
-#' @family "Reactome Content Service, Format Exporter"
+#' @family "Reactome Content Service - Format Exporter"
 #' @seealso
 #' \code{\link{rba_reactome_analysis}}
 #' @export
@@ -1157,7 +1157,7 @@ rba_reactome_exporter_overview <- function(species,
 #'      save_to = "reactome_reacion_image.svg")
 #' }
 #'
-#' @family "Reactome Content Service, Format Exporter"
+#' @family "Reactome Content Service - Format Exporter"
 #' @seealso
 #' \code{\link{rba_reactome_exporter_diagram}}
 #' \code{\link{rba_reactome_analysis}}
@@ -1346,7 +1346,7 @@ rba_reactome_exporter_reaction <- function(event_id,
 #'     details = TRUE)
 #' }
 #'
-#' @family "Reactome Content Service, Molecule Interactors"
+#' @family "Reactome Content Service - Molecule Interactors"
 #' @export
 rba_reactome_interactors_psicquic <- function(proteins = NA,
                                               resource = NA,
@@ -1407,7 +1407,7 @@ rba_reactome_interactors_psicquic <- function(proteins = NA,
 #'   database. Using this funtion, you can retrieve IntAct information of
 #'   a prtotein(s) in two scenarios: \enumerate{
 #'   \item If endpoint = "details" or "summary": Retrieve a detailed/summary
-#'     information of your provided protein accesions(s) from IntAct database.
+#'     information of your provided protein accession(s) from IntAct database.
 #'   \item If endpoint = "pathway", Retrieve a list of Reactome pathways which
 #'   include your provided protein accession. Pathways with the class
 #'   "TopLevelPathway" will be excluded.}
@@ -1466,7 +1466,7 @@ rba_reactome_interactors_psicquic <- function(proteins = NA,
 #'     endpoint = "summary")
 #' }
 #'
-#' @family "Reactome Content Service, Molecule Interactors"
+#' @family "Reactome Content Service - Molecule Interactors"
 #' @export
 rba_reactome_interactors_static <- function(proteins,
                                             endpoint = "details",
@@ -1586,7 +1586,7 @@ rba_reactome_interactors_static <- function(proteins,
 #'     map_to = "reactions", species = 9606)
 #' }
 #'
-#' @family "Reactome Content Service, Mapping Related Queries"
+#' @family "Reactome Content Service - Mapping Related Queries"
 #' @export
 rba_reactome_mapping <- function(id,
                                  resource,
@@ -1682,7 +1682,7 @@ rba_reactome_mapping <- function(id,
 #'     species_dbid = 49633)
 #' }
 #'
-#' @family "Reactome Content Service, Orthology Related Queries"
+#' @family "Reactome Content Service - Orthology Related Queries"
 #' @seealso
 #' \code{\link{rba_reactome_analysis_species}}
 #' @export
@@ -1791,7 +1791,7 @@ rba_reactome_orthology <- function(event_ids,
 #' rba_reactome_participants("R-HSA-5682012", only_reference_entities = TRUE)
 #' }
 #'
-#' @family "Reactome Content Service, Queries Related to Participants"
+#' @family "Reactome Content Service - Queries Related to Participants"
 #' @seealso
 #' \code{\link{rba_reactome_participant_of}}
 #' @export
@@ -1898,7 +1898,7 @@ rba_reactome_participants <- function(event_id,
 #'     attribute_name = "displayName")
 #' }
 #'
-#' @family "Reactome Content Service, Pathway Related Queries"
+#' @family "Reactome Content Service - Pathway Related Queries"
 #' @export
 rba_reactome_pathways_events <- function(event_id,
                                          attribute_name = NA,
@@ -2009,7 +2009,7 @@ rba_reactome_pathways_events <- function(event_id,
 #'     all_forms = TRUE)
 #' }
 #'
-#' @family "Reactome Content Service, Pathway Related Queries"
+#' @family "Reactome Content Service - Pathway Related Queries"
 #' @export
 rba_reactome_pathways_low <- function(entity_id,
                                       with_diagram = FALSE,
@@ -2103,7 +2103,7 @@ rba_reactome_pathways_low <- function(entity_id,
 #' rba_reactome_pathways_top(species = "Saccharomyces cerevisiae")
 #' }
 #'
-#' @family "Reactome Content Service, Pathway Related Queries"
+#' @family "Reactome Content Service - Pathway Related Queries"
 #' @export
 rba_reactome_pathways_top <- function(species,
                                       ...) {
@@ -2176,7 +2176,7 @@ rba_reactome_pathways_top <- function(species,
 #' rba_reactome_people_name("Steve Jupe", exact_match = TRUE)
 #' }
 #'
-#' @family "Reactome Content Service, Person Queries"
+#' @family "Reactome Content Service - Person Queries"
 #' @export
 rba_reactome_people_name <- function(person_name,
                                      exact_match = FALSE,
@@ -2251,7 +2251,7 @@ rba_reactome_people_name <- function(person_name,
 #' rba_reactome_people_id(person_id = "391309", authored_pathways = TRUE)
 #' }
 #'
-#' @family "Reactome Content Service, Person Queries"
+#' @family "Reactome Content Service - Person Queries"
 #' @export
 rba_reactome_people_id <- function(person_id,
                                    authored_pathways = FALSE,
@@ -2360,7 +2360,7 @@ rba_reactome_people_id <- function(person_id,
 #' rba_reactome_query(ids = "8863054", attribute_name = "displayName")
 #' }
 #'
-#' @family "Reactome Content Service, Common Data Retrieval"
+#' @family "Reactome Content Service - Common Data Retrieval"
 #' @export
 rba_reactome_query <- function(ids,
                                enhanced = FALSE,
@@ -2488,7 +2488,7 @@ rba_reactome_query <- function(ids,
 #' rba_reactome_xref("ENSP00000361350")
 #' }
 #'
-#' @family "Reactome Content Service, ReferenceEntity Queries"
+#' @family "Reactome Content Service - ReferenceEntity Queries"
 #' @export
 rba_reactome_xref <- function(xref_id,
                               ...) {
@@ -2554,7 +2554,7 @@ rba_reactome_xref <- function(xref_id,
 #' rba_reactome_species(only_main = TRUE)
 #' }
 #'
-#' @family "Reactome Content Service, Species Related Queries"
+#' @family "Reactome Content Service - Species Related Queries"
 #' @export
 rba_reactome_species <- function(only_main = FALSE,
                                  ...) {

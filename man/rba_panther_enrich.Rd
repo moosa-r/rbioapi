@@ -91,7 +91,7 @@ rba_panther_enrich(genes = c("p53", "BRCA1", "cdk2", "Q99835", "CDC42",
   }
 }
 \seealso{
-Other "PANTHER API": 
+Other "PANTHER": 
 \code{\link{rba_panther_family}()},
 \code{\link{rba_panther_homolog}()},
 \code{\link{rba_panther_info}()},
@@ -99,4 +99,4 @@ Other "PANTHER API":
 \code{\link{rba_panther_ortholog}()},
 \code{\link{rba_panther_tree_grafter}()}
 }
-\concept{"PANTHER API"}
+\concept{"PANTHER"}

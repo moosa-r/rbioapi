@@ -39,7 +39,7 @@
 #'     organism = 9606)
 #' }
 #'
-#' @family "PANTHER API"
+#' @family "PANTHER"
 #' @export
 rba_panther_mapping <- function(genes,
                                 organism,
@@ -141,7 +141,7 @@ rba_panther_mapping <- function(genes,
 #'     cutoff = 0.01)
 #' }
 #'
-#' @family "PANTHER API"
+#' @family "PANTHER"
 #' @export
 rba_panther_enrich <- function(genes,
                                organism,
@@ -293,7 +293,7 @@ rba_panther_enrich <- function(genes,
 #' rba_panther_info(what = "families", families_page = 4)
 #' }
 #'
-#' @family "PANTHER API"
+#' @family "PANTHER"
 #' @export
 rba_panther_info <- function(what,
                              organism_chr_loc = FALSE,
@@ -435,7 +435,7 @@ rba_panther_info <- function(what,
 #' rba_panther_ortholog("CD40", organism = 9606, type = "LDO")
 #' }
 #'
-#' @family "PANTHER API"
+#' @family "PANTHER"
 #' @export
 rba_panther_ortholog <- function(genes,
                                  organism,
@@ -538,7 +538,7 @@ rba_panther_ortholog <- function(genes,
 #' @param target_organisms (numeric) NCBI taxon ID(s) to filter the results.
 #'   run \code{\link{rba_panther_info}} with argument 'what = "organisms"' to
 #'   get a list of PANTHER's supported organisms.
-#'   \cr For Paralog, target organism and organism should be the same; Otherwise,
+#'   For Paralog, target organism and organism should be the same; Otherwise,
 #'   the target organism should be different from the input organism.
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #'   arguments documentation for more information on available options.
@@ -566,7 +566,7 @@ rba_panther_ortholog <- function(genes,
 #' rba_panther_homolog("OR4F5", organism = 9606, type = "P")
 #' }
 #'
-#' @family "PANTHER API"
+#' @family "PANTHER"
 #' @export
 rba_panther_homolog <- function(genes,
                                 organism,
@@ -673,7 +673,7 @@ rba_panther_homolog <- function(genes,
 #' rba_panther_family("PTHR10000", what = "ortholog")
 #' }
 #'
-#' @family "PANTHER API"
+#' @family "PANTHER"
 #' @export
 rba_panther_family <- function(id,
                                what,
@@ -741,7 +741,7 @@ rba_panther_family <- function(id,
 #' For more information, see:
 #'   \href{www.pantherdb.org/tips/tips_graft_sequence.jsp}{PANTHER Graft
 #'   Sequence Help} and
-#'   \href{https://doi.org/10.1093/bioinformatics/bty625}{TreeGrafter:
+#'   \href{https://academic.oup.com/bioinformatics/article/35/3/518/5056037}{TreeGrafter:
 #'   phylogenetic tree-based annotation of proteins with Gene Ontology terms
 #'   and other annotations}
 #'
@@ -776,7 +776,7 @@ rba_panther_family <- function(id,
 #' rba_panther_tree_grafter("MKVLWAALLVTFLAGCQAKVEQAVETE")
 #' }
 #'
-#' @family "PANTHER API"
+#' @family "PANTHER"
 #' @export
 rba_panther_tree_grafter <- function(protein_seq,
                                      target_organisms = NA,

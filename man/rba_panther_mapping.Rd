@@ -55,7 +55,7 @@ rba_panther_mapping(genes = c("Cd40", 7124, "ENSG00000203747", "P33681"),
   }
 }
 \seealso{
-Other "PANTHER API": 
+Other "PANTHER": 
 \code{\link{rba_panther_enrich}()},
 \code{\link{rba_panther_family}()},
 \code{\link{rba_panther_homolog}()},
@@ -63,4 +63,4 @@ Other "PANTHER API":
 \code{\link{rba_panther_ortholog}()},
 \code{\link{rba_panther_tree_grafter}()}
 }
-\concept{"PANTHER API"}
+\concept{"PANTHER"}

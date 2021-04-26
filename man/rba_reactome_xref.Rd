@@ -55,4 +55,4 @@ rba_reactome_xref("ENSP00000361350")
   Services API Documentation}
   }
 }
-\concept{"Reactome Content Service, ReferenceEntity Queries"}
+\concept{"Reactome Content Service - ReferenceEntity Queries"}

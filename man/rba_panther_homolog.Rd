@@ -24,7 +24,7 @@ transfer.}
 \item{target_organisms}{(numeric) NCBI taxon ID(s) to filter the results.
 run \code{\link{rba_panther_info}} with argument 'what = "organisms"' to
 get a list of PANTHER's supported organisms.
-\cr For Paralog, target organism and organism should be the same; Otherwise,
+For Paralog, target organism and organism should be the same; Otherwise,
 the target organism should be different from the input organism.}
 
 \item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
@@ -62,7 +62,7 @@ rba_panther_homolog("OR4F5", organism = 9606, type = "P")
   }
 }
 \seealso{
-Other "PANTHER API": 
+Other "PANTHER": 
 \code{\link{rba_panther_enrich}()},
 \code{\link{rba_panther_family}()},
 \code{\link{rba_panther_info}()},
@@ -70,4 +70,4 @@ Other "PANTHER API":
 \code{\link{rba_panther_ortholog}()},
 \code{\link{rba_panther_tree_grafter}()}
 }
-\concept{"PANTHER API"}
+\concept{"PANTHER"}

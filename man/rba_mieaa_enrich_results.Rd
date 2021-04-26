@@ -58,7 +58,7 @@ rba_mieaa_enrich_results("f52d1aef-6d3d-4d51-9020-82e68fe99012")
   }
 }
 \seealso{
-Other "miEAA API": 
+Other "miEAA": 
 \code{\link{.rba_mieaa_species}()},
 \code{\link{rba_mieaa_cats}()},
 \code{\link{rba_mieaa_convert_type}()},
@@ -67,4 +67,4 @@ Other "miEAA API":
 \code{\link{rba_mieaa_enrich_submit}()},
 \code{\link{rba_mieaa_enrich}()}
 }
-\concept{"miEAA API"}
+\concept{"miEAA"}

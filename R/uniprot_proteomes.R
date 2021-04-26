@@ -65,7 +65,7 @@
 #' rba_uniprot_proteomes_search(genome_acc = "AY274119")
 #' }
 #'
-#' @family "UniProt API, Proteomes"
+#' @family "UniProt - Proteomes"
 #' @export
 rba_uniprot_proteomes_search <- function(name = NA,
                                          upid = NA,
@@ -206,7 +206,7 @@ rba_uniprot_proteomes_search <- function(name = NA,
 #' rba_uniprot_proteomes(upid = "UP000000354", get_proteins = TRUE)
 #' }
 #'
-#' @family "UniProt API, Proteomes"
+#' @family "UniProt - Proteomes"
 #' @export
 rba_uniprot_proteomes <- function(upid,
                                   get_proteins = FALSE,
@@ -292,7 +292,7 @@ rba_uniprot_proteomes <- function(upid,
 #'   UniProtKB primary or secondary accession}(s). You can provide up to 100
 #'   accession numbers.
 #' @param gene unique gene identifier(s) found in MOD,
-#'   \href{https://uswest.ensembl.org/info/genome/genebuild/gene_names.html}{Ensembl},
+#'   \href{https://ensembl.org/info/genome/genebuild/gene_names.html}{Ensembl},
 #'   Ensembl Genomes, \href{https://www.uniprot.org/help/gene_name}{OLN},
 #'   \href{https://www.uniprot.org/help/gene_name}{ORF} or
 #'   \href{https://www.uniprot.org/help/gene_name}{UniProt Gene Name}.
@@ -322,7 +322,7 @@ rba_uniprot_proteomes <- function(upid,
 #' rba_uniprot_genecentric_search(upid = "UP000000354")
 #' }
 #'
-#' @family "UniProt API, Proteomes"
+#' @family "UniProt - Proteomes"
 #' @export
 rba_uniprot_genecentric_search <- function(upid = NA,
                                            accession = NA,
@@ -405,7 +405,7 @@ rba_uniprot_genecentric_search <- function(upid = NA,
 #' rba_uniprot_genecentric("P29965")
 #' }
 #'
-#' @family "UniProt API, Proteomes"
+#' @family "UniProt - Proteomes"
 #' @export
 rba_uniprot_genecentric <- function(accession,
                                     ...) {

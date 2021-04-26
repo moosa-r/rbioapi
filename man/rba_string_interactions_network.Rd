@@ -108,7 +108,7 @@ rba_string_interactions_network(ids = c("9606.ENSP00000269305",
 \seealso{
 \code{\link{rba_string_map_ids}, \link{rba_string_interaction_partners}}
 
-Other "STRING API": 
+Other "STRING": 
 \code{\link{rba_string_annotations}()},
 \code{\link{rba_string_enrichment_ppi}()},
 \code{\link{rba_string_enrichment}()},
@@ -119,4 +119,4 @@ Other "STRING API":
 \code{\link{rba_string_network_image}()},
 \code{\link{rba_string_version}()}
 }
-\concept{"STRING API"}
+\concept{"STRING"}

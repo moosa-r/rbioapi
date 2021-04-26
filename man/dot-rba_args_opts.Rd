@@ -31,6 +31,7 @@ The aim of this function is to eliminate the need
 }
 \seealso{
 Other internal_arguments_check: 
+\code{\link{.rba_args_cond}()},
 \code{\link{.rba_args_cons_chk}()},
 \code{\link{.rba_args_cons_msg}()},
 \code{\link{.rba_args_cons_wrp}()},

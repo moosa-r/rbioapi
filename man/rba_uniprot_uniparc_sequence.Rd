@@ -69,9 +69,9 @@ rba_uniprot_uniparc_sequence("GMRSCPRGCSQRGRCENGRCVCNPGYTGEDC")
   }
 }
 \seealso{
-Other "UniProt API, UniParc": 
+Other "UniProt - UniParc": 
 \code{\link{rba_uniprot_uniparc_bestguess}()},
 \code{\link{rba_uniprot_uniparc_search}()},
 \code{\link{rba_uniprot_uniparc}()}
 }
-\concept{"UniProt API, UniParc"}
+\concept{"UniProt - UniParc"}

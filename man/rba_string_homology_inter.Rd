@@ -38,7 +38,7 @@ Note that this function will return the highest similarity score hits of
   species. to retrieve similarity scores of different proteins within the
   same species refer to \code{\link{rba_string_homology_intra}}.
   \cr Similarity matrix is imported -by STRING- from:
-  \href{http://cube.univie.ac.at/resources/simap}{Similarity Matrix of
+  \href{https://cube.univie.ac.at/resources/simap}{Similarity Matrix of
   Proteins (SIMAP)}
 }
 \section{Corresponding API Resources}{
@@ -72,7 +72,7 @@ rba_string_homology_inter(ids = "ENSP00000269305", species = 9606)
 \seealso{
 \code{\link{rba_string_map_ids}, \link{rba_string_homology_intra}}
 
-Other "STRING API": 
+Other "STRING": 
 \code{\link{rba_string_annotations}()},
 \code{\link{rba_string_enrichment_ppi}()},
 \code{\link{rba_string_enrichment}()},
@@ -83,4 +83,4 @@ Other "STRING API":
 \code{\link{rba_string_network_image}()},
 \code{\link{rba_string_version}()}
 }
-\concept{"STRING API"}
+\concept{"STRING"}

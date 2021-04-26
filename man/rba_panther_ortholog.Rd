@@ -77,7 +77,7 @@ rba_panther_ortholog("CD40", organism = 9606, type = "LDO")
   }
 }
 \seealso{
-Other "PANTHER API": 
+Other "PANTHER": 
 \code{\link{rba_panther_enrich}()},
 \code{\link{rba_panther_family}()},
 \code{\link{rba_panther_homolog}()},
@@ -85,4 +85,4 @@ Other "PANTHER API":
 \code{\link{rba_panther_mapping}()},
 \code{\link{rba_panther_tree_grafter}()}
 }
-\concept{"PANTHER API"}
+\concept{"PANTHER"}

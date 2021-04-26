@@ -92,7 +92,7 @@ Using this function, you can perform Reactome Analysis In a convenient way.
   \item If you provide a multi-columend table, with the first column being
   molecules identifers and the rest being numeral expression values,
   "Expression" analysis will be performed.}
-  \cr Refer to the details section for the accepted input types and format.
+  Refer to the details section for the accepted input types and format.
 }
 \details{
 You can provide your table or vector input in numerous formats:\enumerate{
@@ -101,7 +101,7 @@ You can provide your table or vector input in numerous formats:\enumerate{
   data. (The file should be formatted correctly, see below.)
   \item A URL pointing to a text file on the web that contains the molecules
   data. (The file should be formatted correctly, see below.}
-  \cr If you provide a text file (as a local file path or URL), it should be
+  If you provide a text file (as a local file path or URL), it should be
   in TSV (Tab-Separated Values) format; Column names should start with "#"
   character. Note that if you are providing the file for
   "Over-Representation" analysis (i.e. Single columned-data) this header

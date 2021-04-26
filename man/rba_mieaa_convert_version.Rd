@@ -68,7 +68,7 @@ rba_mieaa_convert_version(mirna = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
   }
 }
 \seealso{
-Other "miEAA API": 
+Other "miEAA": 
 \code{\link{.rba_mieaa_species}()},
 \code{\link{rba_mieaa_cats}()},
 \code{\link{rba_mieaa_convert_type}()},
@@ -77,4 +77,4 @@ Other "miEAA API":
 \code{\link{rba_mieaa_enrich_submit}()},
 \code{\link{rba_mieaa_enrich}()}
 }
-\concept{"miEAA API"}
+\concept{"miEAA"}

@@ -71,7 +71,7 @@ rba_uniprot_antigens_search(antigen_id = "HPA001060")
   }
 }
 \seealso{
-Other "UniProt API, Antigen": 
+Other "UniProt - Antigen": 
 \code{\link{rba_uniprot_antigens}()}
 }
-\concept{"UniProt API, Antigen"}
+\concept{"UniProt - Antigen"}

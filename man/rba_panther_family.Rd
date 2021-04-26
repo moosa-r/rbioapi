@@ -59,7 +59,7 @@ rba_panther_family("PTHR10000", what = "ortholog")
   }
 }
 \seealso{
-Other "PANTHER API": 
+Other "PANTHER": 
 \code{\link{rba_panther_enrich}()},
 \code{\link{rba_panther_homolog}()},
 \code{\link{rba_panther_info}()},
@@ -67,4 +67,4 @@ Other "PANTHER API":
 \code{\link{rba_panther_ortholog}()},
 \code{\link{rba_panther_tree_grafter}()}
 }
-\concept{"PANTHER API"}
+\concept{"PANTHER"}

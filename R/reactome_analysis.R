@@ -106,7 +106,7 @@
 #'   \item If you provide a multi-columend table, with the first column being
 #'   molecules identifers and the rest being numeral expression values,
 #'   "Expression" analysis will be performed.}
-#'   \cr Refer to the details section for the accepted input types and format.
+#'   Refer to the details section for the accepted input types and format.
 #'
 #' You can provide your table or vector input in numerous formats:\enumerate{
 #'   \item A R object which can be data frame, matrix or a simple vector.
@@ -114,7 +114,7 @@
 #'   data. (The file should be formatted correctly, see below.)
 #'   \item A URL pointing to a text file on the web that contains the molecules
 #'   data. (The file should be formatted correctly, see below.}
-#'   \cr If you provide a text file (as a local file path or URL), it should be
+#'   If you provide a text file (as a local file path or URL), it should be
 #'   in TSV (Tab-Separated Values) format; Column names should start with "#"
 #'   character. Note that if you are providing the file for
 #'   "Over-Representation" analysis (i.e. Single columned-data) this header
@@ -876,7 +876,7 @@ rba_reactome_analysis_mapping <- function(input,
 #' Use This function to Compare human's manually-curated pathways
 #'   and computationally inferred pathways (orthologous) in other species.
 #'
-#' \cr Reactome incorporate manually curated human reactions and PANTHER's
+#' Reactome incorporate manually curated human reactions and PANTHER's
 #'   protein homology data to Computationally infer events in other euakaryotic
 #'   species.
 #' \cr In version 73 (11 June 2020), using an orthology-based approach,

@@ -60,4 +60,4 @@ rba_reactome_mapping(id = "PTEN", resource =  "UniProt",
   Services API Documentation}
   }
 }
-\concept{"Reactome Content Service, Mapping Related Queries"}
+\concept{"Reactome Content Service - Mapping Related Queries"}

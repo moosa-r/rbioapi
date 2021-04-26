@@ -52,9 +52,9 @@ rba_reactome_complex_list(id = "P00533", resource = "UniProt")
   }
 }
 \seealso{
-Other "Reactome Content Service, Physical Entity Queries": 
+Other "Reactome Content Service - Physical Entity Queries": 
 \code{\link{rba_reactome_complex_subunits}()},
 \code{\link{rba_reactome_entity_other_forms}()},
 \code{\link{rba_reactome_participant_of}()}
 }
-\concept{"Reactome Content Service, Physical Entity Queries"}
+\concept{"Reactome Content Service - Physical Entity Queries"}

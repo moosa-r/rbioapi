@@ -55,7 +55,7 @@ Use This function to Compare human's manually-curated pathways
   and computationally inferred pathways (orthologous) in other species.
 }
 \details{
-\cr Reactome incorporate manually curated human reactions and PANTHER's
+Reactome incorporate manually curated human reactions and PANTHER's
   protein homology data to Computationally infer events in other euakaryotic
   species.
 \cr In version 73 (11 June 2020), using an orthology-based approach,

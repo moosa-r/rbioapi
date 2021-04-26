@@ -22,6 +22,7 @@ This function will take a single element from the .rba_args()'s
 }
 \seealso{
 Other internal_arguments_check: 
+\code{\link{.rba_args_cond}()},
 \code{\link{.rba_args_cons_msg}()},
 \code{\link{.rba_args_cons_wrp}()},
 \code{\link{.rba_args_opts}()},

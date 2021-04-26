@@ -42,7 +42,7 @@
 #' rba_enrichr_libs()
 #' }
 #'
-#' @family "Enrichr API"
+#' @family "Enrichr"
 #' @seealso \code{\link{rba_enrichr}}
 #' @export
 rba_enrichr_libs <- function(store_in_options = FALSE,
@@ -114,7 +114,7 @@ rba_enrichr_libs <- function(store_in_options = FALSE,
 #'      description = "tumoral genes")
 #' }
 #'
-#' @family "Enrichr API"
+#' @family "Enrichr"
 #' @seealso \code{\link{rba_enrichr}}
 #' @export
 rba_enrichr_add_list <- function(gene_list,
@@ -185,7 +185,7 @@ rba_enrichr_add_list <- function(gene_list,
 #' rba_enrichr_view_list(user_list_id = 11111)
 #' }
 #'
-#' @family "Enrichr API"
+#' @family "Enrichr"
 #' @export
 rba_enrichr_view_list <- function(user_list_id,
                                   ...){
@@ -347,7 +347,7 @@ rba_enrichr_view_list <- function(user_list_id,
 #'     regex_library_name = TRUE)
 #' }
 #'
-#' @family "Enrichr API"
+#' @family "Enrichr"
 #' @seealso \code{\link{rba_enrichr}}
 #' @export
 rba_enrichr_enrich <- function(user_list_id,
@@ -477,7 +477,7 @@ rba_enrichr_enrich <- function(user_list_id,
 #' rba_enrichr_gene_map(gene = "p53", catagorize = TRUE)
 #' }
 #'
-#' @family "Enrichr API"
+#' @family "Enrichr"
 #' @export
 rba_enrichr_gene_map <- function(gene,
                                  catagorize = FALSE,
@@ -568,7 +568,7 @@ rba_enrichr_gene_map <- function(gene,
 #'     regex_library_name = TRUE)
 #' }
 #'
-#' @family "Enrichr API"
+#' @family "Enrichr"
 #' @export
 rba_enrichr <- function(gene_list,
                         description = NA,

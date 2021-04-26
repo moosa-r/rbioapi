@@ -39,4 +39,4 @@ rba_reactome_version()
   Services API Documentation}
   }
 }
-\concept{"Reactome Content Service, Database Info Queries"}
+\concept{"Reactome Content Service - Database Info Queries"}

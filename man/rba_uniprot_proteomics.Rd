@@ -45,7 +45,7 @@ rba_uniprot_proteomics(accession = "P25942")
   }
 }
 \seealso{
-Other "UniProt API, Proteomics": 
+Other "UniProt - Proteomics": 
 \code{\link{rba_uniprot_proteomics_search}()}
 }
-\concept{"UniProt API, Proteomics"}
+\concept{"UniProt - Proteomics"}

@@ -33,7 +33,7 @@
 #' rba_uniprot_taxonomy_lca(c(9606,10090,9823,7712))
 #' }
 #'
-#' @family "UniProt API, Taxonomy"
+#' @family "UniProt - Taxonomy"
 #' @export
 rba_uniprot_taxonomy_lca <- function(ids,
                                      ...) {
@@ -118,7 +118,7 @@ rba_uniprot_taxonomy_lca <- function(ids,
 #' rba_uniprot_taxonomy(ids = 9989, hierarchy = "children")
 #' }
 #'
-#' @family "UniProt API, Taxonomy"
+#' @family "UniProt - Taxonomy"
 #' @export
 rba_uniprot_taxonomy <- function(ids,
                                  hierarchy = NA,
@@ -225,7 +225,7 @@ rba_uniprot_taxonomy <- function(ids,
 #' rba_uniprot_taxonomy_lineage(id = 9989)
 #' }
 #'
-#' @family "UniProt API, Taxonomy"
+#' @family "UniProt - Taxonomy"
 #' @export
 rba_uniprot_taxonomy_lineage <- function(id,
                                          ...) {
@@ -300,7 +300,7 @@ rba_uniprot_taxonomy_lineage <- function(id,
 #'     search_type = "contain", page_size = 200, page_number = 2)
 #' }
 #'
-#' @family "UniProt API, Taxonomy"
+#' @family "UniProt - Taxonomy"
 #' @export
 rba_uniprot_taxonomy_name <- function(name,
                                       field = "scientific",
@@ -411,7 +411,7 @@ rba_uniprot_taxonomy_name <- function(name,
 #' rba_uniprot_taxonomy_path(id = 207598, direction = "BOTTOM", depth = 3)
 #' }
 #'
-#' @family "UniProt API, Taxonomy"
+#' @family "UniProt - Taxonomy"
 #' @export
 rba_uniprot_taxonomy_path <- function(id,
                                       direction,
@@ -487,7 +487,7 @@ rba_uniprot_taxonomy_path <- function(id,
 #' rba_uniprot_taxonomy_relationship(from = 9606, to = 10090)
 #' }
 #'
-#' @family "UniProt API, Taxonomy"
+#' @family "UniProt - Taxonomy"
 #' @export
 rba_uniprot_taxonomy_relationship <- function(from,
                                               to,

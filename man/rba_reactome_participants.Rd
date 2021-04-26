@@ -90,4 +90,4 @@ rba_reactome_participants("R-HSA-5682012", only_reference_entities = TRUE)
 \seealso{
 \code{\link{rba_reactome_participant_of}}
 }
-\concept{"Reactome Content Service, Queries Related to Participants"}
+\concept{"Reactome Content Service - Queries Related to Participants"}

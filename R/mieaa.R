@@ -20,7 +20,7 @@
 #' .rba_mieaa_species("hsa", to_name = TRUE)
 #' }
 #'
-#' @family "miEAA API"
+#' @family "miEAA"
 #' @export
 .rba_mieaa_species <- function(sp, to_name = FALSE) {
   diagnostics <- get0("diagnostics", envir = parent.frame(1),
@@ -109,7 +109,7 @@
 #' rba_mieaa_cats("mature", "Homo sapiens")
 #' }
 #'
-#' @family "miEAA API"
+#' @family "miEAA"
 #' @export
 rba_mieaa_cats <- function(mirna_type, species, ...) {
   ## Load Global Options
@@ -200,7 +200,7 @@ rba_mieaa_cats <- function(mirna_type, species, ...) {
 #'     mirna_type = "mature", input_version = 22, output_version =  16)
 #' }
 #'
-#' @family "miEAA API"
+#' @family "miEAA"
 #' @export
 rba_mieaa_convert_version <- function(mirna,
                                       mirna_type,
@@ -308,7 +308,7 @@ rba_mieaa_convert_version <- function(mirna,
 #'     input_type = "mature")
 #' }
 #'
-#' @family "miEAA API"
+#' @family "miEAA"
 #' @export
 rba_mieaa_convert_type <- function(mirna,
                                    input_type,
@@ -463,7 +463,7 @@ rba_mieaa_convert_type <- function(mirna,
 #'     categories = NA)
 #' }
 #'
-#' @family "miEAA API"
+#' @family "miEAA"
 #' @export
 rba_mieaa_enrich_submit <- function(test_set,
                                     mirna_type,
@@ -610,7 +610,7 @@ rba_mieaa_enrich_submit <- function(test_set,
 #' rba_mieaa_enrich_status("f52d1aef-6d3d-4d51-9020-82e68fe99012")
 #' }
 #'
-#' @family "miEAA API"
+#' @family "miEAA"
 #' @export
 rba_mieaa_enrich_status <- function(job_id, ...) {
   ## Load Global Options
@@ -680,7 +680,7 @@ rba_mieaa_enrich_status <- function(job_id, ...) {
 #' rba_mieaa_enrich_results("f52d1aef-6d3d-4d51-9020-82e68fe99012")
 #' }
 #'
-#' @family "miEAA API"
+#' @family "miEAA"
 #' @export
 rba_mieaa_enrich_results <- function(job_id,
                                      sort_by = "p_adjusted",
@@ -790,7 +790,7 @@ rba_mieaa_enrich_results <- function(job_id,
 #'      categories = NA)
 #' }
 #'
-#' @family "miEAA API"
+#' @family "miEAA"
 #' @export
 rba_mieaa_enrich <- function(test_set,
                              mirna_type,

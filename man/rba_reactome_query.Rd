@@ -72,4 +72,4 @@ rba_reactome_query(ids = "8863054", attribute_name = "displayName")
   Services API Documentation}
   }
 }
-\concept{"Reactome Content Service, Common Data Retrieval"}
+\concept{"Reactome Content Service - Common Data Retrieval"}

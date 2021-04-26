@@ -75,11 +75,11 @@ rba_uniprot_taxonomy_name(name = "adenovirus", field = "scientific",
   }
 }
 \seealso{
-Other "UniProt API, Taxonomy": 
+Other "UniProt - Taxonomy": 
 \code{\link{rba_uniprot_taxonomy_lca}()},
 \code{\link{rba_uniprot_taxonomy_lineage}()},
 \code{\link{rba_uniprot_taxonomy_path}()},
 \code{\link{rba_uniprot_taxonomy_relationship}()},
 \code{\link{rba_uniprot_taxonomy}()}
 }
-\concept{"UniProt API, Taxonomy"}
+\concept{"UniProt - Taxonomy"}

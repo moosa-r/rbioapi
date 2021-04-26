@@ -59,8 +59,8 @@ rba_reactome_pathways_top(species = "Saccharomyces cerevisiae")
   }
 }
 \seealso{
-Other "Reactome Content Service, Pathway Related Queries": 
+Other "Reactome Content Service - Pathway Related Queries": 
 \code{\link{rba_reactome_pathways_events}()},
 \code{\link{rba_reactome_pathways_low}()}
 }
-\concept{"Reactome Content Service, Pathway Related Queries"}
+\concept{"Reactome Content Service - Pathway Related Queries"}

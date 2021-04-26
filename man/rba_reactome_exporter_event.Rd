@@ -60,9 +60,9 @@ rba_reactome_exporter_event(event_id = "R-HSA-177929",
   }
 }
 \seealso{
-Other "Reactome Content Service, Format Exporter": 
+Other "Reactome Content Service - Format Exporter": 
 \code{\link{rba_reactome_exporter_diagram}()},
 \code{\link{rba_reactome_exporter_overview}()},
 \code{\link{rba_reactome_exporter_reaction}()}
 }
-\concept{"Reactome Content Service, Format Exporter"}
+\concept{"Reactome Content Service - Format Exporter"}

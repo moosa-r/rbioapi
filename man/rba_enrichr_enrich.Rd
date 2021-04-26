@@ -85,11 +85,11 @@ rba_enrichr_enrich(user_list_id = "11111",
 \seealso{
 \code{\link{rba_enrichr}}
 
-Other "Enrichr API": 
+Other "Enrichr": 
 \code{\link{rba_enrichr_add_list}()},
 \code{\link{rba_enrichr_gene_map}()},
 \code{\link{rba_enrichr_libs}()},
 \code{\link{rba_enrichr_view_list}()},
 \code{\link{rba_enrichr}()}
 }
-\concept{"Enrichr API"}
+\concept{"Enrichr"}

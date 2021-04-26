@@ -51,6 +51,7 @@ cons Should be a list, and each element of that list should correspond to one
 }
 \seealso{
 Other internal_arguments_check: 
+\code{\link{.rba_args_cond}()},
 \code{\link{.rba_args_cons_chk}()},
 \code{\link{.rba_args_cons_msg}()},
 \code{\link{.rba_args_cons_wrp}()},

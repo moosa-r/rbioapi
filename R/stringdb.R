@@ -38,7 +38,7 @@
 #' rba_string_map_ids(ids = c("TP53", "TNF", "EGFR"), species = 9606)
 #' }
 #'
-#' @family "STRING API"
+#' @family "STRING"
 #' @export
 rba_string_map_ids <- function(ids,
                                species = NA,
@@ -176,7 +176,7 @@ rba_string_map_ids <- function(ids,
 #'     save_image = file.path(getwd(), "TP53_network.png"))
 #' }
 #'
-#' @family "STRING API"
+#' @family "STRING"
 #' @seealso \code{\link{rba_string_map_ids}}
 #' @export
 rba_string_network_image <- function(ids,
@@ -373,7 +373,7 @@ rba_string_network_image <- function(ids,
 #'     add_nodes = 10)
 #' }
 #'
-#' @family "STRING API"
+#' @family "STRING"
 #' @seealso
 #'   \code{\link{rba_string_map_ids}, \link{rba_string_interaction_partners}}
 #' @export
@@ -502,7 +502,7 @@ rba_string_interactions_network <- function(ids,
 #'     required_score = 700)
 #' }
 #'
-#' @family "STRING API"
+#' @family "STRING"
 #' @seealso
 #'   \code{\link{rba_string_map_ids}, \link{rba_string_interactions_network}}
 #' @export
@@ -582,7 +582,7 @@ rba_string_interaction_partners <- function(ids,
 #'   protein and it's closets homologous proteins in other species, refer to
 #'   \code{\link{rba_string_homology_inter}}.
 #'   \cr Similarity matrix is imported -by STRING- from:
-#'   \href{http://cube.univie.ac.at/resources/simap}{Similarity Matrix of
+#'   \href{https://cube.univie.ac.at/resources/simap}{Similarity Matrix of
 #'   Proteins (SIMAP)}
 #'
 #' @section Corresponding API Resources:
@@ -616,7 +616,7 @@ rba_string_interaction_partners <- function(ids,
 #' rba_string_homology_intra(ids = c("CDK1", "CDK2"), species = 9606)
 #' }
 #'
-#' @family "STRING API"
+#' @family "STRING"
 #' @seealso
 #'   \code{\link{rba_string_map_ids}, \link{rba_string_homology_inter}}
 #' @export
@@ -676,7 +676,7 @@ rba_string_homology_intra <- function(ids,
 #'   species. to retrieve similarity scores of different proteins within the
 #'   same species refer to \code{\link{rba_string_homology_intra}}.
 #'   \cr Similarity matrix is imported -by STRING- from:
-#'   \href{http://cube.univie.ac.at/resources/simap}{Similarity Matrix of
+#'   \href{https://cube.univie.ac.at/resources/simap}{Similarity Matrix of
 #'   Proteins (SIMAP)}
 #'
 #' @section Corresponding API Resources:
@@ -716,7 +716,7 @@ rba_string_homology_intra <- function(ids,
 #' rba_string_homology_inter(ids = "ENSP00000269305", species = 9606)
 #' }
 #'
-#' @family "STRING API"
+#' @family "STRING"
 #' @seealso
 #'   \code{\link{rba_string_map_ids}, \link{rba_string_homology_intra}}
 #' @export
@@ -821,7 +821,7 @@ rba_string_homology_inter <- function(ids,
 #' rba_string_enrichment(ids = c("TP53", "TNF", "EGFR"), species = 9606)
 #' }
 #'
-#' @family "STRING API"
+#' @family "STRING"
 #' @seealso
 #'   \code{\link{rba_string_map_ids}, \link{rba_string_annotations}}
 #' @export
@@ -930,7 +930,7 @@ rba_string_enrichment <- function(ids,
 #' rba_string_annotations(ids = "TP53", species = 9606)
 #' }
 #'
-#' @family "STRING API"
+#' @family "STRING"
 #' @seealso
 #'   \code{\link{rba_string_map_ids}, \link{rba_string_enrichment}}
 #' @export
@@ -1024,7 +1024,7 @@ rba_string_annotations <- function(ids,
 #'     species = 9606)
 #' }
 #'
-#' @family "STRING API"
+#' @family "STRING"
 #' @seealso \code{\link{rba_string_map_ids}}
 #' @export
 rba_string_enrichment_ppi <- function(ids,
@@ -1109,7 +1109,7 @@ rba_string_enrichment_ppi <- function(ids,
 #' rba_string_version()
 #' }
 #'
-#' @family "STRING API"
+#' @family "STRING"
 #' @export
 rba_string_version <- function(...) {
   ## Load Global Options

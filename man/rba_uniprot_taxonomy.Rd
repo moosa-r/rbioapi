@@ -82,11 +82,11 @@ rba_uniprot_taxonomy(ids = 9989, hierarchy = "children")
   }
 }
 \seealso{
-Other "UniProt API, Taxonomy": 
+Other "UniProt - Taxonomy": 
 \code{\link{rba_uniprot_taxonomy_lca}()},
 \code{\link{rba_uniprot_taxonomy_lineage}()},
 \code{\link{rba_uniprot_taxonomy_name}()},
 \code{\link{rba_uniprot_taxonomy_path}()},
 \code{\link{rba_uniprot_taxonomy_relationship}()}
 }
-\concept{"UniProt API, Taxonomy"}
+\concept{"UniProt - Taxonomy"}

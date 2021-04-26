@@ -48,11 +48,11 @@ rba_uniprot_taxonomy_relationship(from = 9606, to = 10090)
   }
 }
 \seealso{
-Other "UniProt API, Taxonomy": 
+Other "UniProt - Taxonomy": 
 \code{\link{rba_uniprot_taxonomy_lca}()},
 \code{\link{rba_uniprot_taxonomy_lineage}()},
 \code{\link{rba_uniprot_taxonomy_name}()},
 \code{\link{rba_uniprot_taxonomy_path}()},
 \code{\link{rba_uniprot_taxonomy}()}
 }
-\concept{"UniProt API, Taxonomy"}
+\concept{"UniProt - Taxonomy"}

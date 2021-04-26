@@ -97,9 +97,9 @@ rba_uniprot_proteomes_search(genome_acc = "AY274119")
   }
 }
 \seealso{
-Other "UniProt API, Proteomes": 
+Other "UniProt - Proteomes": 
 \code{\link{rba_uniprot_genecentric_search}()},
 \code{\link{rba_uniprot_genecentric}()},
 \code{\link{rba_uniprot_proteomes}()}
 }
-\concept{"UniProt API, Proteomes"}
+\concept{"UniProt - Proteomes"}

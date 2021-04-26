@@ -94,7 +94,7 @@ This function could be called in two scenarios: \enumerate{
   Diagram.
   \item With create_document = TRUE: To retrieve a PDF document with the
   event's diagram image and additional information.}
-  \cr see "Details section" for more information
+  see "Details section" for more information
 }
 \details{
 If the function is called with create_document = FALSE:
@@ -156,9 +156,9 @@ rba_reactome_exporter_diagram(event_id = "R-HSA-177929",
 \code{\link{rba_reactome_exporter_reaction}}
 \code{\link{rba_reactome_analysis}}
 
-Other "Reactome Content Service, Format Exporter": 
+Other "Reactome Content Service - Format Exporter": 
 \code{\link{rba_reactome_exporter_event}()},
 \code{\link{rba_reactome_exporter_overview}()},
 \code{\link{rba_reactome_exporter_reaction}()}
 }
-\concept{"Reactome Content Service, Format Exporter"}
+\concept{"Reactome Content Service - Format Exporter"}

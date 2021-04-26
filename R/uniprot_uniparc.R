@@ -87,7 +87,7 @@
 #' rba_uniprot_uniparc_search(taxid = "694009", protein = "Nucleoprotein")
 #' }
 #'
-#' @family "UniProt API, UniParc"
+#' @family "UniProt - UniParc"
 #' @export
 rba_uniprot_uniparc_search <- function(upi = NA,
                                        accession = NA,
@@ -303,7 +303,7 @@ rba_uniprot_uniparc_search <- function(upi = NA,
 #' rba_uniprot_uniparc(upi = "UPI00000000C9", rf_active = FALSE)
 #' }
 #'
-#' @family "UniProt API, UniParc"
+#' @family "UniProt - UniParc"
 #' @export
 rba_uniprot_uniparc <- function(upi = NA,
                                 accession = NA,
@@ -434,7 +434,7 @@ rba_uniprot_uniparc <- function(upi = NA,
 #' rba_uniprot_uniparc_bestguess("UPI00000000C9")
 #' }
 #'
-#' @family "UniProt API, UniParc"
+#' @family "UniProt - UniParc"
 #' @export
 rba_uniprot_uniparc_bestguess <- function(upi = NA,
                                           accession = NA,
@@ -544,7 +544,7 @@ rba_uniprot_uniparc_bestguess <- function(upi = NA,
 #' rba_uniprot_uniparc_sequence("GMRSCPRGCSQRGRCENGRCVCNPGYTGEDC")
 #' }
 #'
-#' @family "UniProt API, UniParc"
+#' @family "UniProt - UniParc"
 #' @export
 rba_uniprot_uniparc_sequence <- function(sequence,
                                          rf_dd_type = NA,

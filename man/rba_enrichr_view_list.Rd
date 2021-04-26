@@ -45,11 +45,11 @@ rba_enrichr_view_list(user_list_id = 11111)
   }
 }
 \seealso{
-Other "Enrichr API": 
+Other "Enrichr": 
 \code{\link{rba_enrichr_add_list}()},
 \code{\link{rba_enrichr_enrich}()},
 \code{\link{rba_enrichr_gene_map}()},
 \code{\link{rba_enrichr_libs}()},
 \code{\link{rba_enrichr}()}
 }
-\concept{"Enrichr API"}
+\concept{"Enrichr"}

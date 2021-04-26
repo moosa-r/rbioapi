@@ -48,4 +48,4 @@ rba_reactome_diseases(doid = TRUE)
   Services API Documentation}
   }
 }
-\concept{"Reactome Content Service, Disease Related Queries"}
+\concept{"Reactome Content Service - Disease Related Queries"}

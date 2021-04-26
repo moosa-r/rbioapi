@@ -15,7 +15,7 @@ UniProtKB primary or secondary accession}(s). You can provide up to 100
 accession numbers.}
 
 \item{gene}{unique gene identifier(s) found in MOD,
-\href{https://uswest.ensembl.org/info/genome/genebuild/gene_names.html}{Ensembl},
+\href{https://ensembl.org/info/genome/genebuild/gene_names.html}{Ensembl},
 Ensembl Genomes, \href{https://www.uniprot.org/help/gene_name}{OLN},
 \href{https://www.uniprot.org/help/gene_name}{ORF} or
 \href{https://www.uniprot.org/help/gene_name}{UniProt Gene Name}.}
@@ -69,9 +69,9 @@ rba_uniprot_genecentric_search(upid = "UP000000354")
   }
 }
 \seealso{
-Other "UniProt API, Proteomes": 
+Other "UniProt - Proteomes": 
 \code{\link{rba_uniprot_genecentric}()},
 \code{\link{rba_uniprot_proteomes_search}()},
 \code{\link{rba_uniprot_proteomes}()}
 }
-\concept{"UniProt API, Proteomes"}
+\concept{"UniProt - Proteomes"}

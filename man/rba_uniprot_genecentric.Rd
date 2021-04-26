@@ -46,9 +46,9 @@ rba_uniprot_genecentric("P29965")
   }
 }
 \seealso{
-Other "UniProt API, Proteomes": 
+Other "UniProt - Proteomes": 
 \code{\link{rba_uniprot_genecentric_search}()},
 \code{\link{rba_uniprot_proteomes_search}()},
 \code{\link{rba_uniprot_proteomes}()}
 }
-\concept{"UniProt API, Proteomes"}
+\concept{"UniProt - Proteomes"}

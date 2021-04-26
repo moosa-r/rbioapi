@@ -47,4 +47,4 @@ rba_reactome_species(only_main = TRUE)
   Services API Documentation}
   }
 }
-\concept{"Reactome Content Service, Species Related Queries"}
+\concept{"Reactome Content Service - Species Related Queries"}

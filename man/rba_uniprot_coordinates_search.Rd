@@ -84,9 +84,9 @@ rba_uniprot_coordinates_search(taxid = 9606, chromosome = "y")
   }
 }
 \seealso{
-Other "UniProt API, Coordinates": 
+Other "UniProt - Coordinates": 
 \code{\link{rba_uniprot_coordinates_location}()},
 \code{\link{rba_uniprot_coordinates_sequence}()},
 \code{\link{rba_uniprot_coordinates}()}
 }
-\concept{"UniProt API, Coordinates"}
+\concept{"UniProt - Coordinates"}

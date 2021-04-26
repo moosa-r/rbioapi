@@ -118,7 +118,7 @@
 #' rba_uniprot_proteins_search(keyword = "chemokines")
 #' }
 #'
-#' @family "UniProt API, Proteins"
+#' @family "UniProt - Proteins"
 #' @export
 rba_uniprot_proteins_search <- function(accession = NA,
                                         reviewed = NA,
@@ -294,7 +294,7 @@ rba_uniprot_proteins_search <- function(accession = NA,
 #' rba_uniprot_proteins(accession = "Q29983", isoforms = TRUE)
 #' }
 #'
-#' @family "UniProt API, Proteins"
+#' @family "UniProt - Proteins"
 #' @export
 rba_uniprot_proteins <- function(accession,
                                  interaction = FALSE,
@@ -391,7 +391,7 @@ rba_uniprot_proteins <- function(accession,
 #' rba_uniprot_proteins_crossref("mica", "hgnc", isoform = 0)
 #' }
 #'
-#' @family "UniProt API, Proteins"
+#' @family "UniProt - Proteins"
 #' @export
 rba_uniprot_proteins_crossref <- function(db_id,
                                           db_name,
@@ -527,7 +527,7 @@ rba_uniprot_proteins_crossref <- function(db_id,
 #' rba_uniprot_features_search(accession = "Q99616", types = "DISULFID")
 #' }
 #'
-#' @family "UniProt API, Features"
+#' @family "UniProt - Features"
 #' @export
 rba_uniprot_features_search <- function(accession = NA,
                                         gene = NA,
@@ -701,7 +701,7 @@ rba_uniprot_features_search <- function(accession = NA,
 # #'
 # # #' @examples
 # #'
-# #' @family "UniProt API, Features"
+# #' @family "UniProt - Features"
 # #' @export
 # rba_uniprot_features_type <- function(terms,
 #                                      type,
@@ -845,7 +845,7 @@ rba_uniprot_features_search <- function(accession = NA,
 #' rba_uniprot_features(accession = "Q99616", types = "DISULFID")
 #' }
 #'
-#' @family "UniProt API, Features"
+#' @family "UniProt - Features"
 #' @export
 rba_uniprot_features <- function(accession,
                                  types = NA,
@@ -1027,7 +1027,7 @@ rba_uniprot_features <- function(accession,
 #'     wild_type = "A", alternative_sequence = "T")
 #' }
 #'
-#' @family "UniProt API, Variation"
+#' @family "UniProt - Variation"
 #' @export
 rba_uniprot_variation_search <- function(accession = NA,
                                          source_type = NA,
@@ -1229,7 +1229,7 @@ rba_uniprot_variation_search <- function(accession = NA,
 #' rba_uniprot_variation(id = "O43593", id_type = "uniprot")
 #' }
 #'
-#' @family "UniProt API, Variation"
+#' @family "UniProt - Variation"
 #' @export
 rba_uniprot_variation <- function(id,
                                   id_type,
@@ -1398,7 +1398,7 @@ rba_uniprot_variation <- function(id,
 #'   progress = TRUE, timeout = 999999, unique = TRUE)
 #' }
 #'
-#' @family "UniProt API, Proteomics"
+#' @family "UniProt - Proteomics"
 #' @export
 rba_uniprot_proteomics_search <- function(accession = NA,
                                           data_source = NA,
@@ -1508,7 +1508,7 @@ rba_uniprot_proteomics_search <- function(accession = NA,
 #' rba_uniprot_proteomics(accession = "P25942")
 #' }
 #'
-#' @family "UniProt API, Proteomics"
+#' @family "UniProt - Proteomics"
 #' @export
 rba_uniprot_proteomics <- function(accession,
                                    ...) {
@@ -1585,7 +1585,7 @@ rba_uniprot_proteomics <- function(accession,
 #' rba_uniprot_antigens_search(antigen_id = "HPA001060")
 #' }
 #'
-#' @family "UniProt API, Antigen"
+#' @family "UniProt - Antigen"
 #' @export
 rba_uniprot_antigens_search <- function(accession = NA,
                                         antigen_sequence = NA,
@@ -1682,7 +1682,7 @@ rba_uniprot_antigens_search <- function(accession = NA,
 #' rba_uniprot_antigens("P04626")
 #' }
 #'
-#' @family "UniProt API, Antigen"
+#' @family "UniProt - Antigen"
 #' @export
 rba_uniprot_antigens <- function(accession,
                                  ...) {

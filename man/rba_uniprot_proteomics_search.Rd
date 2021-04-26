@@ -94,7 +94,7 @@ rba_uniprot_proteomics_search(peptide = "MEDYTKIEK")
   }
 }
 \seealso{
-Other "UniProt API, Proteomics": 
+Other "UniProt - Proteomics": 
 \code{\link{rba_uniprot_proteomics}()}
 }
-\concept{"UniProt API, Proteomics"}
+\concept{"UniProt - Proteomics"}

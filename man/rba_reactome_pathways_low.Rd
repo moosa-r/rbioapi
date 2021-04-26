@@ -77,8 +77,8 @@ rba_reactome_pathways_low(entity_id = "R-HSA-199420", with_diagram = TRUE,
   }
 }
 \seealso{
-Other "Reactome Content Service, Pathway Related Queries": 
+Other "Reactome Content Service - Pathway Related Queries": 
 \code{\link{rba_reactome_pathways_events}()},
 \code{\link{rba_reactome_pathways_top}()}
 }
-\concept{"Reactome Content Service, Pathway Related Queries"}
+\concept{"Reactome Content Service - Pathway Related Queries"}

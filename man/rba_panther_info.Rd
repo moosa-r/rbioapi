@@ -65,7 +65,7 @@ rba_panther_info(what = "families", families_page = 4)
   }
 }
 \seealso{
-Other "PANTHER API": 
+Other "PANTHER": 
 \code{\link{rba_panther_enrich}()},
 \code{\link{rba_panther_family}()},
 \code{\link{rba_panther_homolog}()},
@@ -73,4 +73,4 @@ Other "PANTHER API":
 \code{\link{rba_panther_ortholog}()},
 \code{\link{rba_panther_tree_grafter}()}
 }
-\concept{"PANTHER API"}
+\concept{"PANTHER"}

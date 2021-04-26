@@ -63,4 +63,4 @@ rba_reactome_orthology(event_ids = c("R-HSA-6799198", " R-HSA-72764"),
 \seealso{
 \code{\link{rba_reactome_analysis_species}}
 }
-\concept{"Reactome Content Service, Orthology Related Queries"}
+\concept{"Reactome Content Service - Orthology Related Queries"}

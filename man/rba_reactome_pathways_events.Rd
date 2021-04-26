@@ -66,8 +66,8 @@ rba_reactome_pathways_events(event_id = "R-HSA-5673001",
   }
 }
 \seealso{
-Other "Reactome Content Service, Pathway Related Queries": 
+Other "Reactome Content Service - Pathway Related Queries": 
 \code{\link{rba_reactome_pathways_low}()},
 \code{\link{rba_reactome_pathways_top}()}
 }
-\concept{"Reactome Content Service, Pathway Related Queries"}
+\concept{"Reactome Content Service - Pathway Related Queries"}
