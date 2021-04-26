@@ -15,7 +15,7 @@ UniProtKB primary or secondary accession}(s). You can provide up to 100
 accession numbers.}
 
 \item{gene}{unique gene identifier(s) found in MOD,
-\href{https://ensembl.org/info/genome/genebuild/gene_names.html}{Ensembl},
+\href{https://www.ensembl.org/info/genome/genebuild/gene_names.html}{Ensembl},
 Ensembl Genomes, \href{https://www.uniprot.org/help/gene_name}{OLN},
 \href{https://www.uniprot.org/help/gene_name}{ORF} or
 \href{https://www.uniprot.org/help/gene_name}{UniProt Gene Name}.}
