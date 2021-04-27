@@ -80,7 +80,7 @@
                      ptn = "^(http.?://).*string-db\\.org/api/",
                      err_ptn = "^4\\d\\d$",
                      err_prs = list("json->list_simp",
-                                    function(x) {paste(x, collapse = "\r\n")})
+                                    function(x) {paste(x, collapse = "\n")})
                    ),
                    uniprot = switch(
                      arg[[2]],
@@ -324,7 +324,7 @@
   ext_evl <- vapply(X = ext_par,
                     FUN = function(x) {
                       if (length(x[[2]]) > 1) {
-                        warning("Internal Query Builder:\r\n",
+                        warning("Internal Query Builder:\n",
                                 x[[1]],
                                 " has more than one element. Only the first element will be used.",
                                 call. = FALSE)
@@ -334,7 +334,7 @@
                       } else if (isFALSE(x[[2]][[1]])) {
                         return(FALSE)}
                       else {
-                        warning("Internal Query Builder:\r\n The evaluation result of ",
+                        warning("Internal Query Builder:\n The evaluation result of ",
                                 x[[1]],
                                 " is not TRUE or FALSE, thus skipping it.",
                                 call. = FALSE)
@@ -755,42 +755,42 @@
 #' @export
 .rba_args_cons_msg <- function(cons_i, what) {
   switch(what,
-         "class" = sprintf("Invalid Argument; %s should be of class `%s`.\r\n\t(Your provided argument is \"%s\".)",
+         "class" = sprintf("Invalid Argument; %s should be of class `%s`.\n\t(Your provided argument is \"%s\".)",
                            cons_i[["arg"]],
                            .paste2(cons_i[["class"]], last = " or ",
                                    quote = "\""),
                            class(cons_i[["evl_arg"]])),
-         "val" = sprintf("Invalid Argument; %s should be either `%s`.\r\n\t(Your provided argument is `%s`.)",
+         "val" = sprintf("Invalid Argument; %s should be either `%s`.\n\t(Your provided argument is `%s`.)",
                          cons_i[["arg"]],
                          .paste2(cons_i[["val"]], last = " or ",
                                  quote = "\""),
                          cons_i[["evl_arg"]]),
-         "ran" = sprintf("Invalid Argument; %s should be `from %s to %s`.\r\n\t(Your provided argument is `%s`.)",
+         "ran" = sprintf("Invalid Argument; %s should be `from %s to %s`.\n\t(Your provided argument is `%s`.)",
                          cons_i[["arg"]],
                          cons_i[["ran"]][[1]],
                          cons_i[["ran"]][[2]],
                          cons_i[["evl_arg"]]),
-         "len" = sprintf("Invalid Argument; %s should be of length `%s`.\r\n\t(Your provided argument's length is `%s`.)",
+         "len" = sprintf("Invalid Argument; %s should be of length `%s`.\n\t(Your provided argument's length is `%s`.)",
                          cons_i[["arg"]],
                          cons_i[["len"]],
                          length(cons_i[["evl_arg"]])),
-         "min_len" = sprintf("Invalid Argument; %s should be of minimum length `%s`.\r\n\t(Your provided argument's length is `%s`.)",
+         "min_len" = sprintf("Invalid Argument; %s should be of minimum length `%s`.\n\t(Your provided argument's length is `%s`.)",
                              cons_i[["arg"]],
                              cons_i[["min_len"]],
                              length(cons_i[["evl_arg"]])),
-         "max_len" = sprintf("Invalid Argument: %s should be of maximum length `%s`.\r\n\t(Your provided argument's length is `%s`.)",
+         "max_len" = sprintf("Invalid Argument: %s should be of maximum length `%s`.\n\t(Your provided argument's length is `%s`.)",
                              cons_i[["arg"]],
                              cons_i[["max_len"]],
                              length(cons_i[["evl_arg"]])),
-         "min_val" = sprintf("Invalid Argument: %s should be equal to or greater than `%s`.\r\n\t(Your provided argument is `%s`.)",
+         "min_val" = sprintf("Invalid Argument: %s should be equal to or greater than `%s`.\n\t(Your provided argument is `%s`.)",
                              cons_i[["arg"]],
                              cons_i[["min_val"]],
                              cons_i[["evl_arg"]]),
-         "max_val" = sprintf("Invalid Argument: %s should be equal to or less than `%s`.\r\n\t(Your provided argument is `%s`.)",
+         "max_val" = sprintf("Invalid Argument: %s should be equal to or less than `%s`.\n\t(Your provided argument is `%s`.)",
                              cons_i[["arg"]],
                              cons_i[["max_val"]],
                              cons_i[["evl_arg"]]),
-         "regex" = sprintf("Invalid Argument: %s do not have a valid format.\r\n\t(It should match regex pattern: %s ).",
+         "regex" = sprintf("Invalid Argument: %s do not have a valid format.\n\t(It should match regex pattern: %s ).",
                            cons_i[["arg"]],
                            cons_i[["regex"]])
   )
@@ -978,7 +978,7 @@
   if (length(errors) == 1) {
     stop(errors, call. = diagnostics)
   } else if (length(errors) > 1) {
-    error_message <- paste0("\r\n", seq_along(errors), "- ", errors)
+    error_message <- paste0("\n", seq_along(errors), "- ", errors)
     stop(sprintf("The following `%s Errors` was raised during your provided arguments check:",
                  length(errors)),
          error_message,
@@ -996,7 +996,7 @@
       if (length(cond_err) == 1) {
         cond_msg <- cond_err[[1]][["msg"]]
       } else if (length(cond_err) > 1) {
-        cond_msg <- paste0("\r\n", seq_along(cond_err), "- ",
+        cond_msg <- paste0("\n", seq_along(cond_err), "- ",
                            vapply(X = cond_err,
                                   FUN = function(x){
                                     x[["msg"]]
@@ -1157,7 +1157,7 @@
     ## The API server returns an error string for this status code
     error_message <- tryCatch({
       sprintf(
-        "%s server returned \"%s\".\r\n  With this error message:\r\n  \"%s\"",
+        "%s server returned \"%s\".\n  With this error message:\n  \"%s\"",
         .rba_stg(db, "name"),
         .rba_http_status(http_status = response$status_code,
                          verbose = FALSE),
@@ -1415,11 +1415,11 @@
     if (length(c(unnamed_args, invalid_args)) > 0) {
       warning(sprintf("invalid rbioapi options were ignored:%s%s",
                       ifelse(length(unnamed_args) != 0,
-                             yes = sprintf("\r\n- %s unnamed argument(s).",
+                             yes = sprintf("\n- %s unnamed argument(s).",
                                            length(unnamed_args)),
                              no = ""),
                       ifelse(length(invalid_args) != 0,
-                             yes = sprintf("\r\n- %s",
+                             yes = sprintf("\n- %s",
                                            .paste2(invalid_args,
                                                    last = " and ",
                                                    quote = "\"")),

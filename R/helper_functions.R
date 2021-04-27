@@ -61,7 +61,7 @@ rba_connection_test <- function(diagnostics = FALSE) {
 
   tests <- .rba_stg("tests")
 
-  cat("--->>>", "Internet", ":\r\n")
+  cat("--->>>", "Internet", ":\n")
   google <- try(httr::status_code(httr::HEAD("https://google.com/",
                                              if (diagnostics) httr::verbose(),
                                              httr::user_agent(getOption("rba_user_agent")),
@@ -69,22 +69,22 @@ rba_connection_test <- function(diagnostics = FALSE) {
                 , silent = TRUE)
 
   if (google == 200) {
-    cat("+++ Connected to the Internet.\r\n")
+    cat("+++ Connected to the Internet.\n")
   } else {
-    cat("!!!! No Internet Connection.\r\n")
+    cat("!!!! No Internet Connection.\n")
     stop("Could not resolve https://google.com", " . Check Your internet Connection.",
          call. = diagnostics)
   }
   output <- list()
 
   for (i in seq_along(tests)) {
-    cat("--->>>", names(tests)[[i]], ":\r\n")
+    cat("--->>>", names(tests)[[i]], ":\n")
     output[[names(tests)[[i]]]] <- .rba_api_check(tests[[i]],
                                                   diagnostics = diagnostics)
     if (isTRUE(output[[names(tests)[[i]]]])) {
-      cat("+++ The server is responding.\r\n")
+      cat("+++ The server is responding.\n")
     } else {
-      cat("!!! failed with error:\r\n", output[[names(tests)[[i]]]])
+      cat("!!! failed with error:\n", output[[names(tests)[[i]]]])
     }
   }
   invisible(output)
@@ -299,7 +299,7 @@ rba_pages <- function(input_call){
   ## check pages
   if (length(start_page) != 1 | length(end_page) != 1) {
     stop("The variable you want to paginate should be formatted as:",
-         "`pages:start:end`.\r\nfor example: \"pages:1:5\".",
+         "`pages:start:end`.\nfor example: \"pages:1:5\".",
          call. = getOption("rba_diagnostics"))
   }
   start_page <- as.integer(start_page)

@@ -56,7 +56,7 @@
     if (sp_match != 0) {
       return(names(sp_table)[[sp_match]])
     } else {
-      stop("Species should be or partially match one the following values:\r\n",
+      stop("Species should be or partially match one the following values:\n",
            paste(utils::capture.output(print(sp_df)), collapse = "\n"),
            call. = diagnostics)
     }
@@ -527,7 +527,7 @@ rba_mieaa_enrich_submit <- function(test_set,
   } else {
     cats_dif <- setdiff(categories, all_cats)
     if (length(cats_dif) != 0) {
-      stop("Invalid categories! The following requested categories do not match your provided specie and miRNA type:\r\n",
+      stop("Invalid categories! The following requested categories do not match your provided specie and miRNA type:\n",
            .paste2(cats_dif, last = " and "))
     }
   }
@@ -819,7 +819,7 @@ rba_mieaa_enrich <- function(test_set,
                                    min_hits = min_hits,
                                    ref_set = ref_set,
                                    ...)
-  .msg(" -- Step 2/3: Checking for Submitted enrichment job's status every 5 seconds.\r\n",
+  .msg(" -- Step 2/3: Checking for Submitted enrichment job's status every 5 seconds.\n",
        "    Your submitted job ID is: ", step1$job_id)
   step2 <- 0L
   while (step2 != 100L) {
