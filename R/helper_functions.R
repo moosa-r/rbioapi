@@ -10,7 +10,7 @@
 #' @return An informative message with the result of HEAD request's success or
 #'   failure.
 #' @family internal_internet_connectivity
-#' @export
+#' @noRd
 .rba_api_check <- function(url, diagnostics = FALSE){
   request <- quote(httr::HEAD(url = url,
                               httr::timeout(getOption("rba_timeout")),
@@ -204,7 +204,7 @@ rba_options <- function(diagnostics = NA,
 #' @param pb_switch Display a progress bar?
 #'
 #' @return The evaluation results of each input call.
-#' @export
+#' @noRd
 .rba_pages_do <- function(input_call, pb_switch) {
   if (pb_switch) {
     ## initiate progress bar

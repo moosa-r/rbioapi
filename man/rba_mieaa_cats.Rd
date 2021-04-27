@@ -61,7 +61,6 @@ rba_mieaa_cats("mature", "Homo sapiens")
 }
 \seealso{
 Other "miEAA": 
-\code{\link{.rba_mieaa_species}()},
 \code{\link{rba_mieaa_convert_type}()},
 \code{\link{rba_mieaa_convert_version}()},
 \code{\link{rba_mieaa_enrich_results}()},

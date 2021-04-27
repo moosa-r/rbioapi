@@ -21,7 +21,7 @@
 #' }
 #'
 #' @family "miEAA"
-#' @export
+#' @noRd
 .rba_mieaa_species <- function(sp, to_name = FALSE) {
   diagnostics <- get0("diagnostics", envir = parent.frame(1),
                       ifnotfound = getOption("rba_diagnostics"))

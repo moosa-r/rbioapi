@@ -17,7 +17,7 @@
 #'   a list containing the file Type and a path to the tempfile containing
 #'   the data or the user-provided url/file path.
 #'
-#' @export
+#' @noRd
 .rba_reactome_input <- function(input,
                                 type = NA,
                                 handle = TRUE){

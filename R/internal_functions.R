@@ -15,7 +15,7 @@
 #' @return Based on the called sequence of arguments, it could be any object
 #'   type. but mostly, it will be of class character.
 #' @family internal_data_container
-#' @export
+#' @noRd
 .rba_stg <- function(...){
   arg <- c(...)
   #possible arguments
@@ -144,7 +144,7 @@
 #'
 #' @return TRUE if connected to the internet, a character string if not.
 #' @family internal_internet_connectivity
-#' @export
+#' @noRd
 .rba_net_handle <- function(retry_max = 1,
                             retry_wait = 10,
                             verbose = FALSE,
@@ -195,7 +195,7 @@
 #'   Hypertext Transfer Protocol (HTTP) Status Code Registry}
 #'
 #' @family internal_internet_connectivity
-#' @export
+#' @noRd
 .rba_http_status <- function(http_status, verbose = FALSE){
   #ref:
   http_status <- as.character(http_status)
@@ -313,7 +313,7 @@
 #'   corresponding values.
 #'
 #' @family internal_api_calls
-#' @export
+#' @noRd
 .rba_query <- function(init, ...) {
   ## check the input method
   ext_par <- list(...)
@@ -388,7 +388,7 @@
 #'  rbioapi internal functions.
 #'
 #' @family internal_api_calls
-#' @export
+#' @noRd
 .rba_httr <- function(httr,
                       url = NULL,
                       path = NULL,
@@ -512,7 +512,7 @@
 #'   string with the pertinent error message.
 #'
 #' @family internal_api_calls
-#' @export
+#' @noRd
 .rba_api_call <- function(input_call,
                           skip_error = FALSE,
                           retry_max = 1,
@@ -590,7 +590,7 @@
 #'   string.
 #'
 #' @family internal_api_calls
-#' @export
+#' @noRd
 .rba_skeleton <- function(input_call,
                           response_parser = NULL) {
   ## 0 assign options variables
@@ -652,7 +652,7 @@
 #' halted or a warning will be issued.
 #'
 #' @family internal_arguments_check
-#' @export
+#' @noRd
 .rba_args_opts <- function(cons = NULL, cond = NULL, what) {
   if (what == "cons") {
     ext_cons <- list(timeout = list(arg = "timeout",
@@ -716,7 +716,7 @@
 #'   "what"; FALSE otherwise.
 #'
 #' @family internal_arguments_check
-#' @export
+#' @noRd
 .rba_args_cons_chk <- function(cons_i, what) {
   if (any(!is.na(cons_i[["evl_arg"]]))) {
     output <- all(switch(what,
@@ -752,7 +752,7 @@
 #' @return A character string.
 #'
 #' @family internal_arguments_check
-#' @export
+#' @noRd
 .rba_args_cons_msg <- function(cons_i, what) {
   switch(what,
          "class" = sprintf("Invalid Argument; %s should be of class `%s`.\n\t(Your provided argument is \"%s\".)",
@@ -807,7 +807,7 @@
 #'   constrains, NA otherwise.
 #'
 #' @family internal_arguments_check
-#' @export
+#' @noRd
 .rba_args_cons_wrp <- function(cons_i) {
   all_cons <- setdiff(names(cons_i), c("arg", "class", "evl_arg"))
   cons_i_errs <- lapply(all_cons,
@@ -839,8 +839,7 @@
 #'   determine the behavior of .rba_args().
 #'
 #' @family internal_arguments_check
-#'
-#' @export
+#' @noRd
 .rba_args_cond <- function(cond_i) {
   if (is.call(cond_i[[1]])) {
     cond_i_1 <- eval(cond_i[[1]], envir = parent.frame(3))
@@ -915,7 +914,7 @@
 #'  halted or a warning will be issued.
 #'
 #' @family internal_arguments_check
-#' @export
+#' @noRd
 .rba_args <- function(cons = NULL,
                       cond = NULL,
                       cond_warning = FALSE){
@@ -1046,7 +1045,7 @@
 #' @return A valid R object, depends on the parsers which have been used.
 #'
 #' @family internal_response_parser
-#' @export
+#' @noRd
 .rba_response_parser <- function(response, parsers) {
   if (!is.vector(parsers)) { parsers <- list(parsers)}
   parsers <- sapply(X = parsers,
@@ -1140,7 +1139,7 @@
 #'   not, a human-understandable explanation of the returned HTTP status code.
 #'
 #' @family internal_response_parser
-#' @export
+#' @noRd
 .rba_error_parser <- function(response,
                               verbose = FALSE) {
   ## detect the database name
@@ -1199,7 +1198,7 @@
 #' @return NULL, a message will be diplayed if verbose = TRUE
 #'
 #' @family internal_misc
-#' @export
+#' @noRd
 .msg <- function(fmt, ..., sprintf = TRUE, cond = "verbose",
                  sep = "", collapse = NULL) {
   if (isTRUE(get0(cond, envir = parent.frame(1), ifnotfound = FALSE))) {
@@ -1227,7 +1226,7 @@
 #' @return A character string of appended words, in a natural English way.
 #'
 #' @family internal_misc
-#' @export
+#' @noRd
 .paste2 <- function(...,
                     last = " and ", sep = ", ",
                     quote = NA, quote_all = NA) {
@@ -1276,7 +1275,7 @@
 #'   which is a file path.
 #'
 #' @family internal_misc
-#' @export
+#' @noRd
 .rba_file <- function(file,
                       save_to = NA,
                       dir_name = NA) {
@@ -1405,7 +1404,7 @@
 #'   otherwise, nothing will be returned nor displayed.
 #'
 #' @family internal_options
-#' @export
+#' @noRd
 .rba_ext_args <- function(..., ignore_save = FALSE) {
   ext_args <- list(...)
   rba_opts <- getOption("rba_user_options") #available options for the end-users

@@ -8,8 +8,7 @@
 #' @param x object to be parsed
 #'
 #' @return a list with the same structure of the input, only named.
-#'
-#' @export
+#' @noRd
 .rba_uniprot_search_namer <- function(x) {
   x_names <- vapply(X = x,
                     FUN = function(x) {

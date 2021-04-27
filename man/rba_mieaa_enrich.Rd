@@ -144,7 +144,6 @@ rba_mieaa_enrich(test_set = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
 }
 \seealso{
 Other "miEAA": 
-\code{\link{.rba_mieaa_species}()},
 \code{\link{rba_mieaa_cats}()},
 \code{\link{rba_mieaa_convert_type}()},
 \code{\link{rba_mieaa_convert_version}()},
