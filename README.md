@@ -4,9 +4,6 @@ Moosa Rezwani
 2021-04-27
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-# rbioapi: User-Friendly *R* Interface to *Bio*logic Web Services’ *API*
-
 <!-- badges: start -->
 <!-- badges: end -->
 
@@ -14,7 +11,7 @@ Moosa Rezwani
 
 ## What does rbioapi do?
 
-Currently fully covers miEAA, PANTHER, Reactome, STRING, and UniProt!
+Currently fully supports miEAA, PANTHER, Reactome, STRING, and UniProt!
 
 rbioapi is an interface to Biological databases and web services. The
 goal of rbioapi is to provide a user-friendly and consistent interface
@@ -29,7 +26,7 @@ internally handled for you**.
 
 ------------------------------------------------------------------------
 
-## What is Covered by rbioapi?
+## What is Supported by rbioapi?
 
 rbioapi is dedicated to **Biological or Medical** databases and web
 services. Currently, rbioapi supports and covers every API resources in

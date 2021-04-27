@@ -50,14 +50,14 @@ Thus, it is recommended to retrieve a list of possible enrichment categories tha
 ## mature human miRNA:
 rba_mieaa_cats(mirna_type = "mature", species = 9606)
 ## precursor human miRNA
-rba_mieaa_cats(mirna_type = "mature", species = 9606)
+rba_mieaa_cats(mirna_type = "precursor", species = 9606)
 ## precursor zebrafish miRNA
 rba_mieaa_cats(mirna_type = "mature", species = "Danio rerio")
 ```
 
 ------------------------------------------------------------------------
 
-# Submit Enrichment analysis request in miEAA
+# Submit Enrichment analysis request to miEAA
 
 There are two approaches to do this, we will start with the simpler one.
 

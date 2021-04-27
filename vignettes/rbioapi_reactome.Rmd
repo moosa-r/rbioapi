@@ -35,13 +35,13 @@ rba_options(timeout = 600)
 
 # Introduction {#introduction .heading2}
 
-Directly quoting from Reactome:
+Directly quoting from [Reactome](https://reactome.org/):
 
 > REACTOME is an open-source, open access, manually curated and peer-reviewed pathway database. Our goal is to provide intuitive bioinformatics tools for the visualization, interpretation and analysis of pathway knowledge to support basic and clinical research, genome analysis, modeling, systems biology and education. Founded in 2003, the Reactome project is led by Lincoln Stein of [OICR](http://oicr.on.ca/), Peter D'Eustachio of [NYULMC](http://nyulangone.org/), Henning Hermjakob of [EMBL-EBI](http://www.ebi.ac.uk/), and Guanming Wu of [OHSU](http://www.ohsu.edu/).
 >
 > (source: <https://reactome.org/what-is-reactome>)
 
-Reactome provides two RESTful API services: Reactome content services and Reactome analysis services. In rbioapi, the naming schema is that any function that belongs to analysis services starts with rba_reactome_analysis\* . Other rba_reactome\_\* functions without the 'analysis' infix correspond to content services API.
+Reactome provides two RESTful API services: Reactome content services and Reactome analysis services. In rbioapi, the naming schema is that any function which belongs to analysis services starts with rba_reactome_analysis\* . Other rba_reactome\_\* functions without the 'analysis' infix correspond to content services API.
 
 Before continuing reading this article, it is a good idea to read [Reactome Data Model](https://reactome.org/documentation/data-model) page.
 
@@ -116,7 +116,7 @@ Some rbioapi Reactome analysis functions were not covered in this vignette, be s
 
 # Reactome contents services {#reactome-contents-services .heading2}
 
-rbioapi Reactome content services functions are those starting with rba_reactome\_\* but without "\_analysis" infix. These functions cover what you can do with objects in Reactome knowledge-base. In simpler terms, most -but not all of them- correspond to what you can find in [Reactome Pathway Browser](https://reactome.org/PathwayBrowser/ "Reactome Pathway Browser") and [search results](https://reactome.org/content/query?q=apoptosis&species=Homo+sapiens "Search results for apoptosis"). (e.g. a [pathway](https://reactome.org/content/detail/R-HSA-109581 "Apoptosis Homo sapiens"), a [reaction](https://reactome.org/content/detail/R-HSA-202939 "Caspase-mediated cleavage of E-Cadherin"), a [physical Entity](https://reactome.org/content/detail/R-HSA-350870 "Caspase-3 [cytosol]"), etc.)
+rbioapi functions that correspond to Reactome content services are those starting with rba_reactome\_\* but without "\_analysis" infix. These functions cover what you can do with objects in Reactome knowledge-base. In simpler terms, most -but not all of them- correspond to what you can find in [Reactome Pathway Browser](https://reactome.org/PathwayBrowser/ "Reactome Pathway Browser") and [search results](https://reactome.org/content/query?q=apoptosis&species=Homo+sapiens "Search results for apoptosis"). (e.g. a [pathway](https://reactome.org/content/detail/R-HSA-109581 "Apoptosis Homo sapiens"), a [reaction](https://reactome.org/content/detail/R-HSA-202939 "Caspase-mediated cleavage of E-Cadherin"), a [physical Entity](https://reactome.org/content/detail/R-HSA-350870 "Caspase-3 [cytosol]"), etc.)
 
 ## Retrieve any object from Reactome knowledge-base
 

@@ -1,5 +1,5 @@
 ---
-title: "1: rbioapi: User-friendly Interface to Biologic web Services"
+title: "1: rbioapi: User-Friendly R Interface to Biologic Web Services' API"
 author: "Moosa Rezwani"
 date: "`r Sys.Date()`"
 output:
@@ -12,7 +12,7 @@ output:
     encoding: 'UTF-8'
 
 vignette: >
-  %\VignetteIndexEntry{1: rbioapi: User-friendly Interface to Biologic web Services}
+  %\VignetteIndexEntry{1: rbioapi: User-Friendly R Interface to Biologic Web Services' API}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -35,43 +35,60 @@ rba_options(timeout = 600)
 
 # What does rbioapi do? {#what-does-rbioapi-do .heading2}
 
-rbioapi is an interface to Biological databases and web services. The goal of rbioapi is to provide a user-friendly and unified interface to biological databases, to insulate the user from technicalities when it comes to using API services and to create a unified, easy-to-learn, and easy-to-implement way to use to biologic databases and web services.
+Currently fully supports miEAA, PANTHER, Reactome, STRING, and UniProt!
 
-With rbioapi, You are not required to to have any knowledge about HTTP protocols, CURL, REST API, parsing the response, etc. **Just fill a function's arguments and the rest is internally handled for you.**
+rbioapi is an interface to Biological databases and web services. The goal of rbioapi is to provide a user-friendly and consistent interface to biological databases and services; It is designed in a way that insulates the user from technicalities when it comes to using API services and creates a unified and easy-to-implement tool to connect to biological databases and services.
+
+With rbioapi, You are not required to have any prior technical knowledge. **Just fill in a function's arguments and the rest is internally handled for you**.
 
 ------------------------------------------------------------------------
 
-# What is supported by rbioapi? {#what-is-supported-by-rbioapi .heading2}
+# What is Supported by rbioapi? {#what-is-supported-by-rbioapi .heading2}
 
-rbioapi is dedicated to **Biological or Medical** databases and web services. Currently, rbioapi fully supports the following (in alphabetical order!):
+rbioapi is dedicated to **Biological or Medical** databases and web services. Currently, rbioapi supports and covers every API resources in the following services: (in alphabetical order!):
 
-1.  MiEAA
+1.  [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "miRNA Enrichment Analysis and Annotation Tool (miEAA)") ([rbioapi vignette article](mieaa.html "rbioapi & miEAA vignette article"))
+2.  [PANTHER](http://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)") ([rbioapi vignette article](panther.html "rbioapi & PANTHER vignette article"))
+3.  [Reactome](https://reactome.org/) ([rbioapi vignette article](reactome.html "rbioapi & Reactome vignette article"))
+4.  [STRING](https://string-db.org/ "STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis") ([rbioapi vignette article](string.html "rbioapi & STRING vignette article"))
+5.  [UniProt](https://www.uniprot.org "Universal Protein Resource (UniProt)") ([rbioapi vignette article](uniprot.html "rbioapi & UniProt vignette article"))
 
-2.  PANTHER
+Each of the services has its dedicated vignette article. However, In this article, I will write about the general framework of rbioapi. Make sure to check the vignette article of each service to learn more about how to use them.
 
-3.  Reactome
+**Note That:** rbioapi is an ongoing project. New databases and services will be implemented periodically in order to gradually make the package as comprehensive as possible. Do you see yourself often using a certain database/service? Feel free to suggest any database/service by creating an issue on our GitHub [repository](https://github.com/moosa-r/ "rbioapi GitHub repositry"). I will appreciate any suggestions.
 
-4.  STRING
+------------------------------------------------------------------------
 
-5.  UniProt
+# How to install?
 
-**Note That:** rbioapi is an ongoing project. New databases and services will be implemented periodically. Do you see yourself often using a certain database/service? Feel free to suggest any database/service by creating an issue on our GitHub [repository](https://github.com/moosa-r/ "rbioapi GitHub repositry"). I will appreciate any suggestions.
+You can install the stable released version of rbioapi from [CRAN](https://CRAN.R-project.org) with:
+
+``` {#install_cran .r}
+install.packages("rbioapi")
+```
+
+However, the CRAN version is released at most once every 1-2 months, You can install the development version from [GitHub](https://github.com/) with:
+
+``` {#install_github .r}
+install.packages("devtools")
+devtools::install_github("moosa-r/rbioapi")
+```
 
 ------------------------------------------------------------------------
 
 # Design philosophy of rbioapi {#design-philosophy-of-rbioapi .heading2}
 
--   The functions' structure should be **unified across all the databases and services**. There should not be any learning effort when using functions from different services.
+-   The functions' structure should be **consistent across all the databases and services**. There should not be any learning effort when using functions from different services.
 
 -   The interface should be **simple plugging values in a function's arguments** and running the code. No function should explicitly demand the user to run another function beforehand.
-
--   **Beginner** end of users spectrum should conveniently use rbioapi. For example, to prevent errors, user input arguments will be vigorously checked; Or for example, if any service's resource requires particular input conditions, those conditions will be checked during user's input validation.
-
--   Produce **Informative messages**, warnings, and error. For example, if a server returns an error in a particular format, convert the server's error response to R error.
 
 -   The functions' names and arguments should be as **faithful** as possible to the original API resources. This is to ensure that the users could conveniently connect the dots between rbioapi and the web service.
 
 -   The user should be completely **insulated from any technicalities**.
+
+-   **Beginner** end of users spectrum should conveniently use rbioapi. For example, to prevent errors, user input arguments will be vigorously checked; Or for example, if any service's resource requires particular input conditions, those conditions will be checked during user's input validation.
+
+-   Produce **Informative messages**, warnings, and error. For example, if a server returns an error in a particular format, convert the server's error response to R error.
 
 ------------------------------------------------------------------------
 
@@ -81,7 +98,7 @@ To make the namespace more organized, functions has been named with the followin
 
 > rba\_[service_name]\_[resource_name]
 
-For example, `rba_string_version()` will call STRING's version resource.
+For example, `rba_string_version()` will call [STRING](https://string-db.org/ "STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis")'s version resource.
 
 ```{r naming_example, echo=TRUE, message=TRUE}
 rba_string_version()
@@ -115,21 +132,22 @@ Changing an option globally means that for the rest of your R session, any rbioa
 
 ```{r rba_options_global, eval=FALSE}
 rba_options(save_file = TRUE)
-# from now on, any raw server's response file will be saved to your disk.
+# from now on, the raw file of server's response will be saved to your working directory.
 rba_options(verbose = FALSE)
 # from now on, the package will be quiet.
 ```
 
 ## Change the option only within a function call {#changing-the-options-change-the-option-only-within-a-function-call .heading3}
 
-You can pass additional arguments to any rbioapi function using "ellipsis" (the familiar `…` or dot dot dot!). Meaning that you can call any function with additional arguments where each is 'option = value' pair. This way, any changes in options will be confined within that particular function. For example:
+You can pass additional arguments to any rbioapi function using "ellipsis" (the familiar `…` or dot dot dot!). Meaning that you can call any function with additional arguments where each is 'option = value' pair. This way, any changes in options will be confined within that particular function call. For example:
 
 ```{r rba_options_ellipsis1, eval=FALSE}
-# save the server's raw response file
+# save the server's raw response file:
 x <- rba_reactome_species(only_main = TRUE, save_file = "reactome_species.json")
-# also , in the case of connection failure, retry up to 10 times!
+# also , in the case of connection failure, retry up to 10 times:
 x <- rba_reactome_species(only_main = TRUE,
                          save_file = "reactome_species.json", retry_max = 10)
+# in case of any failure, don't stop the code, just return
 
 ```
 
@@ -157,7 +175,7 @@ rba_connection_test()
 
 Some API resources will return paginated responses. This is particularly common in API resources which return potentially very large responses. In rbioapi, for these cases, there are arguments such as "page_number" (with default value of 1) and -if the API resource allows- "page_size". To save your time, you may use `rba_pages()`. This function will iterate over the pages you have specified.
 
-Take rba_uniprot_taxonomy_name as an example. This function allows you to search taxonomic nodes in UniProt. The response can potentially have a huge size, so UniProt returns a paginated response. For example, if we search for nodes that contain "adenovirus", there is a large number of hits:
+Take rba_uniprot_taxonomy_name as an example. This function allows you to search taxonomic nodes in [UniProt](https://www.uniprot.org "Universal Protein Resource (UniProt)"). The response can potentially have a huge size, so [UniProt](https://www.uniprot.org "Universal Protein Resource (UniProt)") returns a paginated response. For example, if we search for nodes that contain "adenovirus", there is a large number of hits:
 
 ```{r rba_pages1, echo=TRUE}
 adeno <- rba_uniprot_taxonomy_name(name = "adenovirus",

@@ -4,22 +4,28 @@
 \name{rbioapi}
 \alias{rbioapi}
 \alias{rbioapi-package}
-\title{rbioapi: User-friendly R Interface to Biologic Web-Services' API}
+\title{rbioapi: User-Friendly R Interface to Biologic Web Services' API}
 \description{
-The goal of rbioapi is to provide a user-friendly and unified
-  interface to biological databases, to insulate the user from
-  technicalities when it comes to using API services and to create a
-  unified, easy-to-learn, and easy-to-implement way to connect to biologic
-  databases.
-  \cr With rbioapi, You are not required to have any technical knowledge.
-  Just fill a function's arguments and the rest is handled for you.
-  \cr This an ongoing project. New databases and services will be implemented
-  periodically. Feel free to suggest any databases or services you often use.
+Currently fully supports miEAA, PANTHER, Reactome, STRING,
+  and UniProt! The goal of rbioapi is to provide a user-friendly and
+  consistent interface to biological databases and services; It is
+  designed in a way that insulates the user from technicalities when
+  it comes to using API services and creates a unified and
+  easy-to-implement tool to connect to biological databases and services.
+  With rbioapi, You are not required to have any prior technical
+  knowledge. Just fill in a function's arguments and the rest is handled
+  for you. This an ongoing project. New databases and services will be
+  implemented periodically to gradually make rbioapi more comprehensive.
+  Feel free to suggest any databases or services you often use.
 }
-\section{Currently rbioapi fully supports}{
+\section{Currently, rbioapi fully supports and Covers API resources of}{
 
-\enumerate{\item Enrichr \item MiEAA \item PANTHER \item Reactome
-  \item STRING \item UniProt}
+\itemize{
+  \item MiEAA
+  \item PANTHER
+  \item Reactome
+  \item STRING
+  \item UniProt}
 }
 
 \seealso{

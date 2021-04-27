@@ -35,7 +35,7 @@ rba_options(timeout = 600)
 
 # Introduction {#introduction .heading2}
 
-Directly quoting the the paper published by PANTHER (Protein Analysis THrough Evolutionary Relationships) authors:
+Directly quoting the the paper published by [PANTHER](http://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)") (Protein Analysis THrough Evolutionary Relationships) authors:
 
 > The PANTHER classification system (<http://www.pantherdb.org>) a comprehensive system that combines genomes, gene function , pathways and statistical analysis tools to enable to analyze large-scale genome-wide experimental data. The system (PANTHER v.14.0) covers 131 complete genomes organized gene families and subfamilies; evolutionary relationships between are represented in phylogenetic trees, multiple sequence and statistical models (hidden Markov models (HMMs)). The families and subfamilies are annotated with Gene Ontology (GO) terms, sequences are assigned to PANTHER pathways. A suite of tools has built to allow users to browse and query gene functions and analyze-scale experimental data with a number of statistical tests. is widely used by bench scientists, bioinformaticians, computer and systems biologists.
 >
