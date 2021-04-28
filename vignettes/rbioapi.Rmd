@@ -47,11 +47,11 @@ With rbioapi, You are not required to have any prior technical knowledge. **Just
 
 rbioapi is dedicated to **Biological or Medical** databases and web services. Currently, rbioapi supports and covers every API resources in the following services: (in alphabetical order!):
 
-1.  [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "miRNA Enrichment Analysis and Annotation Tool (miEAA)") ([rbioapi vignette article](mieaa.html "rbioapi & miEAA vignette article"))
-2.  [PANTHER](http://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)") ([rbioapi vignette article](panther.html "rbioapi & PANTHER vignette article"))
-3.  [Reactome](https://reactome.org/) ([rbioapi vignette article](reactome.html "rbioapi & Reactome vignette article"))
-4.  [STRING](https://string-db.org/ "STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis") ([rbioapi vignette article](string.html "rbioapi & STRING vignette article"))
-5.  [UniProt](https://www.uniprot.org "Universal Protein Resource (UniProt)") ([rbioapi vignette article](uniprot.html "rbioapi & UniProt vignette article"))
+1.  [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "miRNA Enrichment Analysis and Annotation Tool (miEAA)") ([rbioapi vignette article](rbioapi_mieaa.html "rbioapi & miEAA vignette article"))
+2.  [PANTHER](http://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)") ([rbioapi vignette article](rbioapi_panther.html "rbioapi & PANTHER vignette article"))
+3.  [Reactome](https://reactome.org/) ([rbioapi vignette article](rbioapi_reactome.html "rbioapi & Reactome vignette article"))
+4.  [STRING](https://string-db.org/ "STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis") ([rbioapi vignette article](rbioapi_string.html "rbioapi & STRING vignette article"))
+5.  [UniProt](https://www.uniprot.org "Universal Protein Resource (UniProt)") ([rbioapi vignette article](rbioapi_uniprot.html "rbioapi & UniProt vignette article"))
 
 Each of the services has its dedicated vignette article. However, In this article, I will write about the general framework of rbioapi. Make sure to check the vignette article of each service to learn more about how to use them.
 
@@ -218,11 +218,11 @@ When using rbioapi, remember that you are querying data from web services; So pl
 
 Each supported service has a dedicated vignette article. Make sure to check those too.
 
-1.  [miEAA](mieaa.html "rbioapi & miEAA vignette article")
-2.  [PANTHER](panther.html "rbioapi & PANTHER vignette article")
-3.  [Reactome](reactome.html "rbioapi & Reactome vignette article")
-4.  [STRING](string.html "rbioapi & STRING vignette article")
-5.  [UniProt](uniprot.html "rbioapi & UniProt vignette article")
+1.  [miEAA](rbioapi_mieaa.html "rbioapi & miEAA vignette article")
+2.  [PANTHER](rbioapi_panther.html "rbioapi & PANTHER vignette article")
+3.  [Reactome](rbioapi_reactome.html "rbioapi & Reactome vignette article")
+4.  [STRING](rbioapi_string.html "rbioapi & STRING vignette article")
+5.  [UniProt](rbioapi_uniprot.html "rbioapi & UniProt vignette article")
 
 ------------------------------------------------------------------------
 
