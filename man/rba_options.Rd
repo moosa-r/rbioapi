@@ -31,23 +31,24 @@ or no internet connectivity?}
 \item{retry_wait}{(Numeric) (default = 10) Time in seconds to wait before
 next retry in case of internet connection or server problems.}
 
-\item{progress}{(Logical) Should a progress bar be displayed? (default =
-FALSE)}
+\item{progress}{(Logical) (default = FALSE) Should a progress bar be
+displayed?}
 
 \item{save_file}{(Logical or character) (default = FALSE) Either:\itemize{
 \item TRUE: In this case, the raw server's response file will be
 automatically saved to a proper file path. use "dir_name" argument to
 change the file's parent directory.
 \item FALSE: (default) Do not automatically save server's response file.
-\item Character: (Only when changing the option via "..." argument in
-the exported functions) A valid file path to save the server's response
+\item Character: (Only when changing the option via "..." in
+a functions call) A valid file path to save the server's response
 file to the function that you are calling.}}
 
-\item{skip_error}{(Logical) (default = FALSE) If TRUE, the code execution
-will not be stopped in case of errors (anything but HTTP status 200 from
-the server); Instead the error message will be returned as the function's
-output. Set this to TRUE if you don't want your script be interrupted by
-failed server responses.}
+\item{skip_error}{(Logical) (default = FALSE if R is in the interactive mode,
+TRUE otherwise) If TRUE, the code execution  will not be stopped in case
+of errors (anything but HTTP status 200 from the server); Instead the
+error message will be returned as the function's output. However, if FALSE,
+in case of any error, the code execution will be halted and an error
+message will be issued.}
 
 \item{timeout}{(Numeric) (default = 30) The maximum time in seconds that
 you are willing to wait for a server response before giving up and

@@ -26,13 +26,13 @@
 "_PACKAGE"
 
 .onLoad <- function(libname, pkgname) {
-  options(rba_timeout = 30,
+  options(rba_timeout = 90,
           rba_dir_name = "rbioapi",
           rba_diagnostics = FALSE,
           rba_retry_max = 1,
           rba_progress = FALSE,
           rba_save_file = FALSE,
-          rba_skip_error = FALSE,
+          rba_skip_error = !interactive(),
           rba_user_agent = "rbioapi R package",
           rba_verbose = TRUE,
           rba_retry_wait = 10,
