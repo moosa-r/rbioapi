@@ -28,7 +28,9 @@ This function attempts to send a simple query to the supported services.
   request.
 }
 \examples{
+\donttest{
 rba_connection_test()
+}
 
 }
 \seealso{

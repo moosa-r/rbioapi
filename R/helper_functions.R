@@ -51,7 +51,9 @@
 #'   in console
 #'
 #' @examples
+#' \donttest{
 #' rba_connection_test()
+#' }
 #'
 #' @family "Helper functions"
 #' @keywords Helper
