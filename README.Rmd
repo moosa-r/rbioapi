@@ -27,8 +27,6 @@ rba_options(timeout = 600)
 
 <!-- badges: end -->
 
-------------------------------------------------------------------------
-
 ## What does rbioapi do?
 
 Currently fully supports miEAA, PANTHER, Reactome, STRING, and UniProt!
@@ -37,23 +35,19 @@ rbioapi is an interface to Biological databases and web services. The goal of rb
 
 With rbioapi, You are not required to have any prior technical knowledge. **Just fill in a function's arguments and the rest is internally handled for you**.
 
-------------------------------------------------------------------------
-
 ## What is Supported by rbioapi?
 
 rbioapi is dedicated to **Biological or Medical** databases and web services. Currently, rbioapi supports and covers every API resources in the following services: (in alphabetical order!):
 
-1.  [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "miRNA Enrichment Analysis and Annotation Tool (miEAA)") ([rbioapi vignette article](mieaa.html "rbioapi & miEAA vignette article"))
-2.  [PANTHER](http://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)") ([rbioapi vignette article](panther.html "rbioapi & PANTHER vignette article"))
-3.  [Reactome](https://reactome.org/) ([rbioapi vignette article](reactome.html "rbioapi & Reactome vignette article"))
-4.  [STRING](https://string-db.org/ "STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis") ([rbioapi vignette article](string.html "rbioapi & STRING vignette article"))
-5.  [UniProt](https://www.uniprot.org "Universal Protein Resource (UniProt)") ([rbioapi vignette article](uniprot.html "rbioapi & UniProt vignette article"))
+1.  [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "miRNA Enrichment Analysis and Annotation Tool (miEAA)")
+2.  [PANTHER](http://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)")
+3.  [Reactome](https://reactome.org/)
+4.  [STRING](https://string-db.org/ "STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis")
+5.  [UniProt](https://www.uniprot.org "Universal Protein Resource (UniProt)")
 
 Each of the services has its dedicated vignette article. However, In this article, I will write about the general framework of rbioapi. Make sure to check the vignette article of each service to learn more about how to use them.
 
 **Note That:** rbioapi is an ongoing project. New databases and services will be implemented periodically in order to gradually make the package as comprehensive as possible. Do you see yourself often using a certain database/service? Feel free to suggest any database/service by creating an issue on our GitHub [repository](https://github.com/moosa-r/ "rbioapi GitHub repositry"). I will appreciate any suggestions.
-
-------------------------------------------------------------------------
 
 ## How to install?
 
@@ -70,8 +64,6 @@ install.packages("devtools")
 devtools::install_github("moosa-r/rbioapi")
 ```
 
-------------------------------------------------------------------------
-
 ## Design philosophy of rbioapi
 
 -   The functions' structure should be **consistent across all the databases and services**. There should not be any learning effort when using functions from different services.
@@ -85,8 +77,6 @@ devtools::install_github("moosa-r/rbioapi")
 -   **Beginner** end of users spectrum should conveniently use rbioapi. For example, to prevent errors, user input arguments will be vigorously checked; Or for example, if any service's resource requires particular input conditions, those conditions will be checked during user's input validation.
 
 -   Produce **Informative messages**, warnings, and error. For example, if a server returns an error in a particular format, convert the server's error response to R error.
-
-------------------------------------------------------------------------
 
 # Naming conventions
 
@@ -109,8 +99,6 @@ Thus, to this version, rbioapi function will have one of the following naming sc
 5.  rba_uniprot\_\*
 
 There are three exceptions: `rba_options()`, `rba_connection_test()`, and `rba_pages()`; These are helper functions. More on that later.
-
-------------------------------------------------------------------------
 
 # Changing the options
 
@@ -155,8 +143,6 @@ x <- rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC", diangnostic
 x <- rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC")
 ```
 
-------------------------------------------------------------------------
-
 # Connection test
 
 The second exception in functions' naming schema is `rba_connection_test()`. Run this simple function to check your connection with the supported services/databases. If you encounter errors when using rbioapi, kindly run this function to make sure that your internet connection or the servers are fine.
@@ -164,8 +150,6 @@ The second exception in functions' naming schema is `rba_connection_test()`. Run
 ```{r rba_connection_test, message=TRUE}
 rba_connection_test()
 ```
-
-------------------------------------------------------------------------
 
 # Iterating over paginated results
 
@@ -196,31 +180,23 @@ As you can see, what we have done was:
 
 2.  Replace the argument we want to iterate over it, with a string in this format: "pages:start:end". For example, we provided page_number = "pages:1:3" to get the responses of pages 1 to 3.
 
-------------------------------------------------------------------------
-
 # How and what to cite?
 
 rbioapi is an interface between you and other databases and services. Thus, if you have used rbioapi in published research, kindly **in addition to citing rbioapi, [*make sure to fully and properly cite the databases/services you have used*]{.ul}**. Suggested citations have been added in the functions' manuals, under the "references" section; Nevertheless, it is the user's responsibility to check for proper citations and to properly cite the database/services that they have used.
-
-------------------------------------------------------------------------
 
 # Code of conduct
 
 When using rbioapi, remember that you are querying data from web services; So please be considerate. Never flood a server with requests, if you need to download *unreasonably* large volumes of data, directly downloading the databases provided in those services may be a better alternative. If you see yourself being rate-limited from any server (HTTP **429 Too Many Requests** response status code), know that you are sending more requests than what the server interprets as normal behavior, so please seek other methods or use `Sys.sleep()` between your requests.
 
-------------------------------------------------------------------------
-
 # What next?
 
 Each supported service has a dedicated vignette article. Make sure to check those too.
 
-1.  [miEAA](mieaa.html "rbioapi & miEAA vignette article")
-2.  [PANTHER](panther.html "rbioapi & PANTHER vignette article")
-3.  [Reactome](reactome.html "rbioapi & Reactome vignette article")
-4.  [STRING](string.html "rbioapi & STRING vignette article")
-5.  [UniProt](uniprot.html "rbioapi & UniProt vignette article")
-
-------------------------------------------------------------------------
+1.  miEAA
+2.  PANTHER
+3.  Reactome
+4.  STRING
+5.  UniProt
 
 # Session info
 

@@ -1,13 +1,11 @@
 rbioapi: User-Friendly R Interface to Biologic Web Services’ API
 ================
 Moosa Rezwani
-2021-04-27
+2021-04-29
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
 <!-- badges: end -->
-
-------------------------------------------------------------------------
 
 ## What does rbioapi do?
 
@@ -24,8 +22,6 @@ With rbioapi, You are not required to have any prior technical
 knowledge. **Just fill in a function’s arguments and the rest is
 internally handled for you**.
 
-------------------------------------------------------------------------
-
 ## What is Supported by rbioapi?
 
 rbioapi is dedicated to **Biological or Medical** databases and web
@@ -33,19 +29,10 @@ services. Currently, rbioapi supports and covers every API resources in
 the following services: (in alphabetical order!):
 
 1.  [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "miRNA Enrichment Analysis and Annotation Tool (miEAA)")
-    ([rbioapi vignette
-    article](mieaa.html "rbioapi & miEAA vignette article"))
 2.  [PANTHER](http://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)")
-    ([rbioapi vignette
-    article](panther.html "rbioapi & PANTHER vignette article"))
-3.  [Reactome](https://reactome.org/) ([rbioapi vignette
-    article](reactome.html "rbioapi & Reactome vignette article"))
+3.  [Reactome](https://reactome.org/)
 4.  [STRING](https://string-db.org/ "STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis")
-    ([rbioapi vignette
-    article](string.html "rbioapi & STRING vignette article"))
 5.  [UniProt](https://www.uniprot.org "Universal Protein Resource (UniProt)")
-    ([rbioapi vignette
-    article](uniprot.html "rbioapi & UniProt vignette article"))
 
 Each of the services has its dedicated vignette article. However, In
 this article, I will write about the general framework of rbioapi. Make
@@ -59,8 +46,6 @@ database/service? Feel free to suggest any database/service by creating
 an issue on our GitHub
 [repository](https://github.com/moosa-r/ "rbioapi GitHub repositry"). I
 will appreciate any suggestions.
-
-------------------------------------------------------------------------
 
 ## How to install?
 
@@ -79,8 +64,6 @@ with:
 install.packages("devtools")
 devtools::install_github("moosa-r/rbioapi")
 ```
-
-------------------------------------------------------------------------
 
 ## Design philosophy of rbioapi
 
@@ -108,8 +91,6 @@ devtools::install_github("moosa-r/rbioapi")
 -   Produce **Informative messages**, warnings, and error. For example,
     if a server returns an error in a particular format, convert the
     server’s error response to R error.
-
-------------------------------------------------------------------------
 
 # Naming conventions
 
@@ -144,8 +125,6 @@ naming schema:
 There are three exceptions: `rba_options()`, `rba_connection_test()`,
 and `rba_pages()`; These are helper functions. More on that later.
 
-------------------------------------------------------------------------
-
 # Changing the options
 
 To provide more control, multiple options have been implemented. Refer
@@ -166,7 +145,7 @@ rba_options()
 #> 4      retry_max             1     numeric
 #> 5       progress         FALSE     logical
 #> 6      save_file         FALSE     logical
-#> 7     skip_error         FALSE     logical
+#> 7     skip_error          TRUE     logical
 #> 8        verbose          TRUE     logical
 #> 9     retry_wait            10     numeric
 ```
@@ -215,8 +194,6 @@ x <- rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC")
 #> Retrieving UniProt entities that correspond to ID CD40 in database HGNC.
 ```
 
-------------------------------------------------------------------------
-
 # Connection test
 
 The second exception in functions’ naming schema is
@@ -247,8 +224,6 @@ rba_connection_test()
 #> --->>> UniProt :
 #> +++ The server is responding.
 ```
-
-------------------------------------------------------------------------
 
 # Iterating over paginated results
 
@@ -314,8 +289,6 @@ As you can see, what we have done was:
     this format: “pages:start:end”. For example, we provided
     page\_number = “pages:1:3” to get the responses of pages 1 to 3.
 
-------------------------------------------------------------------------
-
 # How and what to cite?
 
 rbioapi is an interface between you and other databases and services.
@@ -326,8 +299,6 @@ added in the functions’ manuals, under the “references” section;
 Nevertheless, it is the user’s responsibility to check for proper
 citations and to properly cite the database/services that they have
 used.
-
-------------------------------------------------------------------------
 
 # Code of conduct
 
@@ -341,20 +312,16 @@ sending more requests than what the server interprets as normal
 behavior, so please seek other methods or use `Sys.sleep()` between your
 requests.
 
-------------------------------------------------------------------------
-
 # What next?
 
 Each supported service has a dedicated vignette article. Make sure to
 check those too.
 
-1.  [miEAA](mieaa.html "rbioapi & miEAA vignette article")
-2.  [PANTHER](panther.html "rbioapi & PANTHER vignette article")
-3.  [Reactome](reactome.html "rbioapi & Reactome vignette article")
-4.  [STRING](string.html "rbioapi & STRING vignette article")
-5.  [UniProt](uniprot.html "rbioapi & UniProt vignette article")
-
-------------------------------------------------------------------------
+1.  miEAA
+2.  PANTHER
+3.  Reactome
+4.  STRING
+5.  UniProt
 
 # Session info
 
@@ -376,7 +343,7 @@ check those too.
     #> [1] stats     graphics  grDevices utils     datasets  methods   base     
     #> 
     #> other attached packages:
-    #> [1] rbioapi_0.6.5
+    #> [1] rbioapi_0.7.0
     #> 
     #> loaded via a namespace (and not attached):
     #>  [1] digest_0.6.27     R6_2.5.0          jsonlite_1.7.2    magrittr_2.0.1   

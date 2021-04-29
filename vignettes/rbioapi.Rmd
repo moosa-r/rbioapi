@@ -147,8 +147,6 @@ x <- rba_reactome_species(only_main = TRUE, save_file = "reactome_species.json")
 # also , in the case of connection failure, retry up to 10 times:
 x <- rba_reactome_species(only_main = TRUE,
                          save_file = "reactome_species.json", retry_max = 10)
-# in case of any failure, don't stop the code, just return
-
 ```
 
 ```{r rba_options_ellipsis2, echo=TRUE, message=TRUE}
