@@ -23,7 +23,7 @@ a nested list containing the node which are in the shortest path
 \description{
 Use this function to retrieve the shortest path between two nodes
 in the taxonomy tree of
-\href{UniProt Taxonomy database}{https://www.uniprot.org/help/taxonomy}.
+\href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database}.
 }
 \section{Corresponding API Resources}{
 

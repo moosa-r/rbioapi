@@ -21,7 +21,7 @@ A list with UniProt taxonomy information of your provided taxonomy
 \description{
 Use this function to retrieve lowest common ancestor (LCA) of two
  taxonomy nodes in
- \href{UniProt Taxonomy database}{https://www.uniprot.org/help/taxonomy}
+ \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database}
 }
 \section{Corresponding API Resources}{
 

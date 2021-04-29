@@ -60,7 +60,6 @@ str(cd40, 1)
 This is the equivalent of the page that UniProt have on this accession ([UniProtKB - P29965](https://www.uniprot.org/uniprot/P29965 "UniProtKB - P29965 (CD40L_HUMAN)")). But what if we didn't know the UniProt accession? Or simply want to perform a search using certain parameters? We can use the function with `_search` suffix:
 
 ```{r rba_uniprot_proteins_search}
-
 ## 1 From the available arguments, we fill only those which we think is pertinent
 cd40_search <- rba_uniprot_proteins_search(protein = "CD40 ligand",
                                           organism = "human",
@@ -81,7 +80,7 @@ multi_prs1 <- rba_uniprot_proteins_search(accession = c("P04637",
                                                        "P60953",
                                                        "P06493",
                                                        "Q02241"))
-# As always, we use str() to inspect our object's structure
+## As always, we use str() to inspect our object's structure
 str(multi_prs1, 1)
 
 ## 2 Or alternatively, search using Gene names, also we want to exclude isoforms and only retrieve swiss-prot entries

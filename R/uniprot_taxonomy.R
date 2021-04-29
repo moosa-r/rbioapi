@@ -4,7 +4,7 @@
 #'
 #' Use this function to retrieve lowest common ancestor (LCA) of two
 #'  taxonomy nodes in
-#'  \href{UniProt Taxonomy database}{https://www.uniprot.org/help/taxonomy}
+#'  \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database}
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://ebi.ac.uk/proteins/api/ancestor/{ids}"
@@ -67,7 +67,7 @@ rba_uniprot_taxonomy_lca <- function(ids,
 #' \href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
 #'   identifiers}. also, you can explicitly retrieve other nodes in relation
 #'   to your provided node's hierarchy in
-#'   \href{UniProt Taxonomy database}{https://www.uniprot.org/help/taxonomy}.
+#'   \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database}.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://ebi.ac.uk/proteins/api/ids/{ids}"
@@ -255,7 +255,7 @@ rba_uniprot_taxonomy_lineage <- function(id,
 #'
 #' Using this function, you can search and retrieve taxonomic nodes using
 #'   their names from
-#'   \href{UniProt Taxonomy database}{https://www.uniprot.org/help/taxonomy}.
+#'   \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database}.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://ebi.ac.uk/proteins/api/name/{name}"
@@ -376,7 +376,7 @@ rba_uniprot_taxonomy_name <- function(name,
 #'
 #' Using this function you can retrieve nodes that are located in the top or
 #'   the bottom of your provided node in
-#'   \href{UniProt Taxonomy database tree}{https://www.uniprot.org/help/taxonomy}
+#'   \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database tree}
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://ebi.ac.uk/proteins/api/path"
@@ -457,7 +457,7 @@ rba_uniprot_taxonomy_path <- function(id,
 #'
 #' Use this function to retrieve the shortest path between two nodes
 #' in the taxonomy tree of
-#' \href{UniProt Taxonomy database}{https://www.uniprot.org/help/taxonomy}.
+#' \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database}.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://ebi.ac.uk/proteins/api/relationship"

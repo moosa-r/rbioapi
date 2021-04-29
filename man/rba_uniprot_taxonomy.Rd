@@ -46,7 +46,7 @@ providing their
 \href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
   identifiers}. also, you can explicitly retrieve other nodes in relation
   to your provided node's hierarchy in
-  \href{UniProt Taxonomy database}{https://www.uniprot.org/help/taxonomy}.
+  \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database}.
 }
 \section{Corresponding API Resources}{
 

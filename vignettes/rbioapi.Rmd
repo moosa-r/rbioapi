@@ -132,9 +132,9 @@ Changing an option globally means that for the rest of your R session, any rbioa
 
 ```{r rba_options_global, eval=FALSE}
 rba_options(save_file = TRUE)
-# from now on, the raw file of server's response will be saved to your working directory.
+## From now on, the raw file of server's response will be saved to your working directory.
 rba_options(verbose = FALSE)
-# from now on, the package will be quiet.
+## From now on, the package will be quiet.
 ```
 
 ## Change the option only within a function call {#changing-the-options-change-the-option-only-within-a-function-call .heading3}
@@ -142,18 +142,18 @@ rba_options(verbose = FALSE)
 You can pass additional arguments to any rbioapi function using "ellipsis" (the familiar `…` or dot dot dot!). Meaning that you can call any function with additional arguments where each is 'option = value' pair. This way, any changes in options will be confined within that particular function call. For example:
 
 ```{r rba_options_ellipsis1, eval=FALSE}
-# save the server's raw response file:
+## Save the server's raw response file:
 x <- rba_reactome_species(only_main = TRUE, save_file = "reactome_species.json")
-# also , in the case of connection failure, retry up to 10 times:
+## Also, in the case of connection failure, retry up to 10 times:
 x <- rba_reactome_species(only_main = TRUE,
                          save_file = "reactome_species.json", retry_max = 10)
 ```
 
 ```{r rba_options_ellipsis2, echo=TRUE, message=TRUE}
-## run these codes in your own R session to see the difference.
-# show internal diagnostics boring details
+## Run these codes in your own R session to see the difference.
+## show internal diagnostics boring details
 x <- rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC", diangnostics = TRUE)
-# the next function you call, will still use the default rbioapi options
+## The next function you call, will still use the default rbioapi options
 x <- rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC")
 ```
 
@@ -188,7 +188,7 @@ As you can see, the server has returned the first page of the response, to retri
 adeno_pages = rba_pages(quote(rba_uniprot_taxonomy_name(name = "adenovirus",
                                    search_type = "contain",
                                    page_number = "pages:1:3")))
-# You can inspect structure of the response:
+## You can inspect the structure of the response:
 str(adeno_pages, max.level = 2)
 ```
 

@@ -739,8 +739,6 @@ rba_panther_family <- function(id,
 #'   in that tree.
 #'
 #' For more information, see:
-#'   \href{www.pantherdb.org/tips/tips_graft_sequence.jsp}{PANTHER Graft
-#'   Sequence Help} and
 #'   \href{https://academic.oup.com/bioinformatics/article/35/3/518/5056037}{TreeGrafter:
 #'   phylogenetic tree-based annotation of proteins with Gene Ontology terms
 #'   and other annotations}

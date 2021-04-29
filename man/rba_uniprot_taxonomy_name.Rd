@@ -44,7 +44,7 @@ a list containing taxonomic nodes that match your provided inputs.
 \description{
 Using this function, you can search and retrieve taxonomic nodes using
   their names from
-  \href{UniProt Taxonomy database}{https://www.uniprot.org/help/taxonomy}.
+  \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database}.
 }
 \section{Corresponding API Resources}{
 

@@ -26,7 +26,7 @@ a nested list containing the node which are in the path specified by
 \description{
 Using this function you can retrieve nodes that are located in the top or
   the bottom of your provided node in
-  \href{UniProt Taxonomy database tree}{https://www.uniprot.org/help/taxonomy}
+  \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database tree}
 }
 \section{Corresponding API Resources}{
 

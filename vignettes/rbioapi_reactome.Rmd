@@ -37,7 +37,7 @@ rba_options(timeout = 600)
 
 Directly quoting from [Reactome](https://reactome.org/):
 
-> REACTOME is an open-source, open access, manually curated and peer-reviewed pathway database. Our goal is to provide intuitive bioinformatics tools for the visualization, interpretation and analysis of pathway knowledge to support basic and clinical research, genome analysis, modeling, systems biology and education. Founded in 2003, the Reactome project is led by Lincoln Stein of [OICR](http://oicr.on.ca/), Peter D'Eustachio of [NYULMC](http://nyulangone.org/), Henning Hermjakob of [EMBL-EBI](http://www.ebi.ac.uk/), and Guanming Wu of [OHSU](http://www.ohsu.edu/).
+> REACTOME is an open-source, open access, manually curated and peer-reviewed pathway database. Our goal is to provide intuitive bioinformatics tools for the visualization, interpretation and analysis of pathway knowledge to support basic and clinical research, genome analysis, modeling, systems biology and education. Founded in 2003, the Reactome project is led by Lincoln Stein of [OICR](https://oicr.on.ca/), Peter D'Eustachio of [NYULMC](https://nyulangone.org/), Henning Hermjakob of [EMBL-EBI](https://www.ebi.ac.uk/), and Guanming Wu of [OHSU](https://www.ohsu.edu/).
 >
 > (source: <https://reactome.org/what-is-reactome>)
 
@@ -122,22 +122,26 @@ rbioapi functions that correspond to Reactome content services are those startin
 
 Using `rba_reactome_query()`, you can retrieve any object from Reactome knowledge-base. In simpler terms, what I mean by the object is roughly anything that Reactome associated an ID to it. This can range from a person's entry to proteins, reactions, pathways, species, and many more! You can explore [Reactome's data schema](https://reactome.org/content/schema/DatabaseObject "Graph Database :: Data Schema") to learn about Reactome knowledge-base objects and their organization. Here are some examples, note that you are not limited to only one ID per query. You can use a vector of inputs, the only limitation is that when you provide more than one ID, you cannot have `enhanced = TRUE`.
 
-```{r rba_reactome_query_ex1, eval=FALSE}
-
+```{r rba_reactome_query_ex1}
 ## 1 query a pathway Entry
 pathway <- rba_reactome_query(ids = "R-HSA-109581", enhanced = TRUE)
 ## 2 As always we use str() to inspect the output's structure
 str(pathway, 2)
+
+
+
 ## 3 You can compare it with the webpage of R-HSA-202939 entry:
 # https://reactome.org/content/detail/R-HSA-202939
 ```
 
-```{r rba_reactome_query_ex2, eval=FALSE}
-
+```{r rba_reactome_query_ex2}
 ## 1 query a protein Entry
 protein <- rba_reactome_query(ids = 66247, enhanced = TRUE)
 ## 2 As always we use str() to inspect the output's structure
-str(protein, 2)
+str(protein, 1)
+
+
+
 ## 3 You can compare it with the webpage of R-HSA-202939 entry:
 # https://reactome.org/content/detail/R-HSA-202939
 
@@ -147,12 +151,11 @@ str(protein, 2)
 
 As you can see in the second example usage of we used Reactome's dbID `66247` to query CD40 protein. How did we obtain that in the first place? You can use `rba_reactome_xref` to map any cross-reference (external) IDs to Reactome IDs.
 
-```{r rba_reactome_xref, eval=FALSE}
-
-# 1 We provide HGNC ID to find what is the corresponding database ID in Reactome
+```{r rba_reactome_xref}
+## 1 We provide HGNC ID to find what is the corresponding database ID in Reactome
 xref_protein <- rba_reactome_xref("CD40")
 ## 2 As always use str() to inspect the output's structure
-str(xref_protein, 2)
+str(xref_protein, 1)
 ```
 
 ## Map Cross-Reference IDs to Reactome

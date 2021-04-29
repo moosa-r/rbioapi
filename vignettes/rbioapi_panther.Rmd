@@ -70,12 +70,12 @@ The provided tools in PANTHER's **RESTful API services** can be divided into 3 b
 `rba_panther_enrich()` is an equivalent to [Gene List analysis tool's webpage.](http://www.pantherdb.org/index.jsp "PANTHER Gene List Analysis"). Here is a usage example:
 
 ```{r rba_panther_enrich, message=TRUE}
-# 1 We get the available annotation datasets in PANTHER (we need to select one of them to submit an enrichment request)
+## 1 We get the available annotation datasets in PANTHER (we need to select one of them to submit an enrichment request)
 annots <- rba_panther_info(what = "datasets")
-# 2 We create a variable with our genes' IDs
+## 2 We create a variable with our genes' IDs
 genes <- c("p53", "BRCA1", "cdk2", "Q99835", "CDC42","CDK1","KIF23","PLK1",
            "RAC2","RACGAP1","RHOA","RHOB", "PHF14", "RBM3", "MSL1")
-# 3 Now we can submit the enrichment request.
+## 3 Now we can submit the enrichment request.
 enriched <- rba_panther_enrich(genes = genes,
                                organism = 9606,
                                annot_dataset = "ANNOT_TYPE_ID_PANTHER_GO_SLIM_BP",

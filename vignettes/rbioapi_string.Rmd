@@ -45,13 +45,13 @@ STRING is a comprehensive database of protein-protein interactions (PPI) that in
 
 # Note about species argument {#note-about-species-argument .heading2}
 
-You can find an argument named "species" in every rbioapi STRING function. Providing the species argument is not mandatory, but it has been recommended in STRING API's documentation to always specify the species. An exception is when your input proteins' vector length is more than 100; In such cases calling the function without providing the species will produce an ERROR.
+You can find an argument named "species" in every rbioapi STRING function. Providing the species argument is not mandatory, but it has been recommended in STRING API's documentation to always specify the species. An exception is when your input proteins' vector length is more than 100; In such cases, the species argument is required. Otherwise, calling the function without providing the species will produce an ERROR.
 
 ------------------------------------------------------------------------
 
 # Map your IDs to STRING IDs {#map-your-ids-to-string-ids .heading2}
 
-Although STRING API resources will handle recognize and a variety of identifiers, it is recommended that you map your IDs to STRING IDs before using other functions.
+Although STRING API resources will handle and recognize a variety of identifiers, it is recommended that you first map your IDs to STRING IDs before using them in other rbioapi STRING functions.
 
 ```{r rba_string_map_ids}
 ## 1 We create a variable with our genes' NCBI IDs
@@ -71,7 +71,7 @@ proteins_mapped <- proteins_mapped$stringId
 
 # Get interaction network of a protein set {#get-interaction-network-of-a-protein-set .heading2}
 
-You can retrieve a list of interactions the proteins in your set have with each other. STRING annotates each interaction. Two of the annotated attributes can be used in the function call to filter the results (required_score, network_type); Other attributes correspond to the columns which the data frame returns.
+You can retrieve a list of interactions that the proteins in your set have with each other along with the STRING annotations of each interaction. You may filter the results by using required_score and network_type arguments.
 
 Refer to the 'values' section `rba_string_interactions_network` function's manual for information on the returned columns.
 
@@ -83,7 +83,6 @@ int_net <- rba_string_interactions_network(ids = proteins_mapped,
 
 ```{r rba_string_interactions_network_results, echo=FALSE}
 DT::datatable(data = int_net,
-              style = "bootstrap4",
               options = list(scrollX = TRUE, 
                              paging = TRUE,
                              fixedHeader = TRUE,
@@ -100,7 +99,7 @@ In the last example, we only obtained the interaction which our proteins have am
 To do that, we can use `rba_string_interaction_partners`:
 
 ```{r rba_string_interaction_partners}
-# althoug we provide only one protein ID here (CD40 protein), you can provide a vector of proteins as the input
+## Although we provide only one protein ID here (CD40 protein), you can provide a vector of proteins as the input
 int_partners <- rba_string_interaction_partners(ids = "9606.ENSP00000361359",
                                                species = 9606,
                                                required_score = 900)
@@ -108,7 +107,6 @@ int_partners <- rba_string_interaction_partners(ids = "9606.ENSP00000361359",
 
 ```{r rba_string_interaction_partners_restults, echo=FALSE}
 DT::datatable(data = int_partners,
-              style = "bootstrap4",
               options = list(scrollX = TRUE, 
                              paging = TRUE,
                              fixedHeader = TRUE,
@@ -123,7 +121,7 @@ DT::datatable(data = int_partners,
 Let's go back to the interaction network. As you must have seen in the STRING webpages, STRING plots the interaction network of your proteins with many customizations available. You can also do that with STRING API services. `rba_string_network_image` function is very flexible and you have a variety of options; Refer to the function's manual.
 
 ```{r rba_string_network_image_ex1, fig.show='hide'}
-# Example 1:
+## Example 1:
 graph_1 <- rba_string_network_image(ids = proteins_mapped,
                                    image_format = "image",
                                    species = 9606,
@@ -137,7 +135,7 @@ grid::grid.raster(graph_1, just = "center")
 ```
 
 ```{r rba_string_network_image_ex2, fig.show='hide'}
-# Example 2:
+## Example 2:
 graph_2 <- rba_string_network_image(ids = proteins_mapped,
                                    image_format = "image",
                                    species = 9606,
@@ -169,7 +167,6 @@ enriched <- rba_string_enrichment(ids = proteins_mapped,
 
 ```{r rba_string_enrichment_restults, echo=FALSE}
 DT::datatable(data = enriched,
-              style = "bootstrap4",
               options = list(scrollX = TRUE, 
                              paging = TRUE,
                              fixedHeader = TRUE,
@@ -196,7 +193,7 @@ As you have seen above, STRING maps the proteins to multiple annotation sources.
 annotations <- rba_string_annotations(ids = "9606.ENSP00000269305",
                                      species = 9606)
 
-# This function returns large results, so the results was not shown in this vignette.
+## This function returns large results, so the results was not shown in this vignette.
 ```
 
 ------------------------------------------------------------------------
