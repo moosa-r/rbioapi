@@ -10,3 +10,4 @@
 ^Meta$
 ^vignettes/libs$
 ^README\.Rmd$
+^README\.md$
