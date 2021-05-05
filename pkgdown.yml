@@ -1,0 +1,12 @@
+pandoc: 2.7.3
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  rbioapi: rbioapi.html
+  rbioapi_mieaa: rbioapi_mieaa.html
+  rbioapi_panther: rbioapi_panther.html
+  rbioapi_reactome: rbioapi_reactome.html
+  rbioapi_string: rbioapi_string.html
+  rbioapi_uniprot: rbioapi_uniprot.html
+last_built: 2021-05-05T22:50Z
+
