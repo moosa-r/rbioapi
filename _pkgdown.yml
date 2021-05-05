@@ -1,0 +1,163 @@
+template:
+  params:
+    bootswatch: flatly
+    type: inverse
+
+navbar:
+  structure:
+    left:
+    - home
+    - intro
+    - reference
+    - articles
+    - tutorials
+    - news
+    right: github
+  components:
+    home:
+      icon: fas fa-home fa-lg
+      href: index.html
+    reference:
+      text: Functions
+      href: reference/index.html
+    news:
+      text: News
+      href: news/index.html
+    intro:
+      text: Get Started
+      href: articles/rbioapi.html
+    articles:
+      text: Supported Services
+      menu:
+      - text: '1: rbioapi: Get Started'
+        href: articles/rbioapi.html
+      - text: '2.B: miEEA & rbioapi'
+        href: articles/rbioapi_mieaa.html
+      - text: '2.C: PANTHER & rbioapi'
+        href: articles/rbioapi_panther.html
+      - text: '2.D: Reactome & rbioapi'
+        href: articles/rbioapi_reactome.html
+      - text: '2.E: STRING & rbioapi'
+        href: articles/rbioapi_string.html
+      - text: '2.F: UniProt & rbioapi'
+        href: articles/rbioapi_uniprot.html
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/moosa-r/rbioapi/
+
+reference:
+- title: "Helper functions"
+  desc: >
+    As the title implies, these function serve as helpers to the overall
+    exprerince of rbioapi.
+  contents:
+    - rba_options
+    - rba_connection_test
+    - rba_pages
+
+- title: miEAA (rba_mieaa_*)
+  desc: >
+    Functions that connect you to miEAA (miRNA Enrichment Analysis and
+    Annotation Tool) API resources.
+  contents:
+    - starts_with("rba_mieaa")
+
+- title: PANTHER (rba_panther_*)
+  desc: >
+    Functions that connect you to PANTHER (Protein Analysis THrough
+    Evolutionary Relationships) API resources.
+  contents:
+    - starts_with("rba_panther")
+
+- title: Reactome Analysis Services (rba_reactome_*)
+  desc: >
+    Functions that connect you to Reactome Analysis services API resources.
+  contents:
+    - starts_with("rba_reactome_analysis")
+
+- title: Reactome Contents Services (rba_reactome_*)
+  desc: >
+    Functions that connect you to Reactome Contents Services API resources.
+- subtitle: Database Info Queries
+  contents:
+    - rba_reactome_version
+- subtitle: Disease Related Queries
+  contents:
+    - rba_reactome_diseases
+- subtitle: Physical Entity Queries
+  contents:
+    - starts_with("rba_reactome_complex")
+    - rba_reactome_participant_of
+    - rba_reactome_entity_other_forms
+- subtitle: Queries Related to Events
+  contents:
+    - starts_with("rba_reactome_event")
+- subtitle: Format Exporter
+  contents:
+    - starts_with("rba_reactome_exporter")
+- subtitle: Molecule Interactors
+  contents:
+    - starts_with("rba_reactome_interactors")
+- subtitle: Mapping Related Queries
+  contents:
+    - rba_reactome_mapping
+- subtitle: Orthology Related Queries
+  contents:
+    - rba_reactome_orthology
+- subtitle: Queries Related to Participants
+  contents:
+    - rba_reactome_participants
+- subtitle: Pathway Related Queries
+  contents:
+    - starts_with("rba_reactome_pathways")
+- subtitle: Person Queries
+  contents:
+    - starts_with("rba_reactome_people")
+- subtitle: Common Data Retrieval
+  contents:
+    - rba_reactome_query
+- subtitle: ReferenceEntity Queries
+  contents:
+    - rba_reactome_xref
+- subtitle: Species Related Queries
+  contents:
+    - rba_reactome_species
+
+- title: STRING (rba_string_*)
+  desc: >
+    Functions that connect you to STRING (PPI database) API resources.
+  contents:
+    - starts_with("rba_string")
+
+- title: UniProt (rba_uniprot_*)
+  desc: >
+    Functions that connect you to UniProt ( Universal Protein Resource)
+    API resources.
+- subtitle: Coordinates
+  contents:
+    - starts_with("rba_uniprot_coordinates")
+- subtitle: Proteins
+  contents:
+    - starts_with("rba_uniprot_proteins")
+- subtitle: Features
+  contents:
+    - starts_with("rba_uniprot_features")
+- subtitle: Variation
+  contents:
+    - starts_with("rba_uniprot_variation")
+- subtitle: Proteomics
+  contents:
+    - starts_with("rba_uniprot_proteomics")
+- subtitle: Antigens
+  contents:
+    - starts_with("rba_uniprot_antigens")
+- subtitle: Proteomes
+  contents:
+    - starts_with("rba_uniprot_proteomes")
+    - starts_with("rba_uniprot_genecentric")
+- subtitle: Taxonomy
+  contents:
+    - starts_with("rba_uniprot_taxonomy")
+- subtitle: UniParc
+  contents:
+    - starts_with("rba_uniprot_uniparc")

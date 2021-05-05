@@ -1,7 +1,7 @@
 rbioapi: User-Friendly R Interface to Biologic Web Services’ API
 ================
 Moosa Rezwani
-2021-04-29
+2021-05-06
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
@@ -53,7 +53,7 @@ You can install the stable released version of rbioapi from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-# The package has been submitted to CRAN. I will update this part soon! :)
+install.packages("rbioapi")
 ```
 
 However, the CRAN version is released at most once every 1-2 months, You

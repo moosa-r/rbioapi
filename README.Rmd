@@ -54,7 +54,7 @@ Each of the services has its dedicated vignette article. However, In this articl
 You can install the stable released version of rbioapi from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-# The package has been submitted to CRAN. I will update this part soon! :)
+install.packages("rbioapi")
 ```
 
 However, the CRAN version is released at most once every 1-2 months, You can install the development version from [GitHub](https://github.com/) with:
