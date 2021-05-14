@@ -70,8 +70,8 @@ install.packages("rbioapi")
 However, the CRAN version is released at most once every 1-2 months, You can install the development version from [GitHub](https://github.com/) with:
 
 ``` {#install_github .r}
-install.packages("devtools")
-devtools::install_github("moosa-r/rbioapi")
+install.packages("remotes")
+remotes::install_github("moosa-r/rbioapi")
 ```
 
 ------------------------------------------------------------------------
