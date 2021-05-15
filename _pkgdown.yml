@@ -31,6 +31,8 @@ navbar:
       menu:
       - text: '1: rbioapi: Get Started'
         href: articles/rbioapi.html
+      - text: '2.A: Enrichr & rbioapi'
+        href: articles/rbioapi_enrichr.html
       - text: '2.B: miEEA & rbioapi'
         href: articles/rbioapi_mieaa.html
       - text: '2.C: PANTHER & rbioapi'
@@ -54,6 +56,13 @@ reference:
     - rba_options
     - rba_connection_test
     - rba_pages
+
+- title: Enrichr (rba_enrichr_*)
+  desc: >
+    Functions that connect you to miEAA (miRNA Enrichment Analysis and
+    Annotation Tool) API resources.
+  contents:
+    - starts_with("rba_enrichr")
 
 - title: miEAA (rba_mieaa_*)
   desc: >
