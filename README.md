@@ -1,7 +1,7 @@
 rbioapi: User-Friendly R Interface to Biologic Web Services’ API
 ================
 Moosa Rezwani
-2021-05-06
+2021-05-15
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
@@ -9,7 +9,8 @@ Moosa Rezwani
 
 ## What does rbioapi do?
 
-Currently fully supports miEAA, PANTHER, Reactome, STRING, and UniProt!
+Currently fully supports Enrichr, miEAA, PANTHER, Reactome, STRING, and
+UniProt!
 
 rbioapi is an interface to Biological databases and web services. The
 goal of rbioapi is to provide a user-friendly and consistent interface
@@ -28,11 +29,29 @@ rbioapi is dedicated to **Biological or Medical** databases and web
 services. Currently, rbioapi supports and covers every API resources in
 the following services: (in alphabetical order!):
 
+On CRAN (Stable) version: (<https://cran.r-project.org/package=rbioapi>)
+
 1.  [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "miRNA Enrichment Analysis and Annotation Tool (miEAA)")
+    ([rbioapi vignette
+    article](rbioapi_mieaa.html "rbioapi & miEAA vignette article"))
 2.  [PANTHER](http://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)")
-3.  [Reactome](https://reactome.org/)
+    ([rbioapi vignette
+    article](rbioapi_panther.html "rbioapi & PANTHER vignette article"))
+3.  [Reactome](https://reactome.org/) ([rbioapi vignette
+    article](rbioapi_reactome.html "rbioapi & Reactome vignette article"))
 4.  [STRING](https://string-db.org/ "STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis")
+    ([rbioapi vignette
+    article](rbioapi_string.html "rbioapi & STRING vignette article"))
 5.  [UniProt](https://www.uniprot.org "Universal Protein Resource (UniProt)")
+    ([rbioapi vignette
+    article](rbioapi_uniprot.html "rbioapi & UniProt vignette article"))
+
+Only on Github (Developmental) version:
+(<https://github.com/moosa-r/rbioapi/>):
+
+1.  [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr") ([rbioapi
+    vignette
+    article](rbioapi_enrichr.html "rbioapi & Enrichr vignette article"))
 
 Each of the services has its dedicated vignette article. However, In
 this article, I will write about the general framework of rbioapi. Make
@@ -61,8 +80,8 @@ can install the development version from [GitHub](https://github.com/)
 with:
 
 ``` r
-install.packages("devtools")
-devtools::install_github("moosa-r/rbioapi")
+install.packages("remotes")
+remotes::install_github("moosa-r/rbioapi")
 ```
 
 ## Design philosophy of rbioapi
@@ -92,7 +111,7 @@ devtools::install_github("moosa-r/rbioapi")
     if a server returns an error in a particular format, convert the
     server’s error response to R error.
 
-# Naming conventions
+## Naming conventions
 
 To make the namespace more organized, functions has been named with the
 following pattern:
@@ -125,7 +144,7 @@ naming schema:
 There are three exceptions: `rba_options()`, `rba_connection_test()`,
 and `rba_pages()`; These are helper functions. More on that later.
 
-# Changing the options
+## Changing the options
 
 To provide more control, multiple options have been implemented. Refer
 to the manual of `rba_options()` function for a full description of
@@ -152,7 +171,7 @@ rba_options()
 
 Now, let us consider the ways in which we can alter the settings:
 
-## Change the option globally
+### Change the option globally
 
 Changing an option globally means that for the rest of your R session,
 any rbioapi function will respect the changed option. To do this, use
@@ -162,12 +181,12 @@ could globally alter that rbioapi option. for example:
 
 ``` r
 rba_options(save_file = TRUE)
-# from now on, the raw file of server's response will be saved to your working directory.
+## From now on, the raw file of server's response will be saved to your working directory.
 rba_options(verbose = FALSE)
-# from now on, the package will be quiet.
+## From now on, the package will be quiet.
 ```
 
-## Change the option only within a function call
+### Change the option only within a function call
 
 You can pass additional arguments to any rbioapi function using
 “ellipsis” (the familiar `…` or dot dot dot!). Meaning that you can call
@@ -176,25 +195,24 @@ pair. This way, any changes in options will be confined within that
 particular function call. For example:
 
 ``` r
-# save the server's raw response file:
+## Save the server's raw response file:
 x <- rba_reactome_species(only_main = TRUE, save_file = "reactome_species.json")
-# also , in the case of connection failure, retry up to 10 times:
+## Also, in the case of connection failure, retry up to 10 times:
 x <- rba_reactome_species(only_main = TRUE,
                          save_file = "reactome_species.json", retry_max = 10)
-# in case of any failure, don't stop the code, just return
 ```
 
 ``` r
-## run these codes in your own R session to see the difference.
-# show internal diagnostics boring details
+## Run these codes in your own R session to see the difference.
+## show internal diagnostics boring details
 x <- rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC", diangnostics = TRUE)
 #> Retrieving UniProt entities that correspond to ID CD40 in database HGNC.
-# the next function you call, will still use the default rbioapi options
+## The next function you call, will still use the default rbioapi options
 x <- rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC")
 #> Retrieving UniProt entities that correspond to ID CD40 in database HGNC.
 ```
 
-# Connection test
+## Connection test
 
 The second exception in functions’ naming schema is
 `rba_connection_test()`. Run this simple function to check your
@@ -225,7 +243,7 @@ rba_connection_test()
 #> +++ The server is responding.
 ```
 
-# Iterating over paginated results
+## Iterating over paginated results
 
 Some API resources will return paginated responses. This is particularly
 common in API resources which return potentially very large responses.
@@ -266,7 +284,7 @@ the “page\_number” argument within each call, or simply use
 adeno_pages = rba_pages(quote(rba_uniprot_taxonomy_name(name = "adenovirus",
                                    search_type = "contain",
                                    page_number = "pages:1:3")))
-# You can inspect structure of the response:
+## You can inspect the structure of the response:
 str(adeno_pages, max.level = 2)
 #> List of 3
 #>  $ page_1:List of 2
@@ -300,7 +318,7 @@ Nevertheless, it is the user’s responsibility to check for proper
 citations and to properly cite the database/services that they have
 used.
 
-# Code of conduct
+## Code of conduct
 
 When using rbioapi, remember that you are querying data from web
 services; So please be considerate. Never flood a server with requests,
@@ -312,18 +330,24 @@ sending more requests than what the server interprets as normal
 behavior, so please seek other methods or use `Sys.sleep()` between your
 requests.
 
-# What next?
+## What next?
 
 Each supported service has a dedicated vignette article. Make sure to
 check those too.
 
-1.  miEAA
-2.  PANTHER
-3.  Reactome
-4.  STRING
-5.  UniProt
+1.  [Enrichr](https://moosa-r.github.io/rbioapi/articles/rbioapi_enrichr.html "rbioapi & Enrichr vignette")
+2.  [miEAA](https://moosa-r.github.io/rbioapi/articles/rbioapi_mieaa.html "rbioapi & miEAA vignette article")
+3.  [PANTHER](https://moosa-r.github.io/rbioapi/articles/rbioapi_panther.html "rbioapi & PANTHER vignette article")
+4.  [Reactome](https://moosa-r.github.io/rbioapi/articles/rbioapi_reactome.html "rbioapi & Reactome vignette article")
+5.  [STRING](https://moosa-r.github.io/rbioapi/articles/rbioapi_string.html "rbioapi & STRING vignette article")
+6.  [UniProt](https://moosa-r.github.io/rbioapi/articles/rbioapi_uniprot.html "rbioapi & UniProt vignette article")
 
-# Session info
+You can also explore rbioapi [functions’
+manual](https://moosa-r.github.io/rbioapi/reference/index.html) in
+[rbioapi pkgdown
+webpage](https://moosa-r.github.io/rbioapi/index.html "rbioapi website").
+
+## Session info
 
     #> R version 4.0.5 (2021-03-31)
     #> Platform: x86_64-w64-mingw32/x64 (64-bit)
@@ -343,11 +367,11 @@ check those too.
     #> [1] stats     graphics  grDevices utils     datasets  methods   base     
     #> 
     #> other attached packages:
-    #> [1] rbioapi_0.7.0
+    #> [1] rbioapi_0.7.1
     #> 
     #> loaded via a namespace (and not attached):
     #>  [1] digest_0.6.27     R6_2.5.0          jsonlite_1.7.2    magrittr_2.0.1   
-    #>  [5] evaluate_0.14     httr_1.4.2        rlang_0.4.10      stringi_1.5.3    
-    #>  [9] curl_4.3          rmarkdown_2.7     tools_4.0.5       stringr_1.4.0    
+    #>  [5] evaluate_0.14     httr_1.4.2        rlang_0.4.11      stringi_1.6.1    
+    #>  [9] curl_4.3.1        rmarkdown_2.8     tools_4.0.5       stringr_1.4.0    
     #> [13] xfun_0.22         yaml_2.2.1        compiler_4.0.5    htmltools_0.5.1.1
     #> [17] knitr_1.33

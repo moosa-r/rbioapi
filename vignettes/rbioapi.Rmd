@@ -35,7 +35,7 @@ rba_options(timeout = 600)
 
 # What does rbioapi do? {#what-does-rbioapi-do .heading2}
 
-Currently fully supports miEAA, PANTHER, Reactome, STRING, and UniProt!
+Currently fully supports Enrichr, miEAA, PANTHER, Reactome, STRING, and UniProt!
 
 rbioapi is an interface to Biological databases and web services. The goal of rbioapi is to provide a user-friendly and consistent interface to biological databases and services; It is designed in a way that insulates the user from technicalities when it comes to using API services and creates a unified and easy-to-implement tool to connect to biological databases and services.
 
@@ -47,11 +47,17 @@ With rbioapi, You are not required to have any prior technical knowledge. **Just
 
 rbioapi is dedicated to **Biological or Medical** databases and web services. Currently, rbioapi supports and covers every API resources in the following services: (in alphabetical order!):
 
+On CRAN (Stable) version: (<https://cran.r-project.org/package=rbioapi>)
+
 1.  [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "miRNA Enrichment Analysis and Annotation Tool (miEAA)") ([rbioapi vignette article](rbioapi_mieaa.html "rbioapi & miEAA vignette article"))
 2.  [PANTHER](http://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)") ([rbioapi vignette article](rbioapi_panther.html "rbioapi & PANTHER vignette article"))
 3.  [Reactome](https://reactome.org/) ([rbioapi vignette article](rbioapi_reactome.html "rbioapi & Reactome vignette article"))
 4.  [STRING](https://string-db.org/ "STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis") ([rbioapi vignette article](rbioapi_string.html "rbioapi & STRING vignette article"))
 5.  [UniProt](https://www.uniprot.org "Universal Protein Resource (UniProt)") ([rbioapi vignette article](rbioapi_uniprot.html "rbioapi & UniProt vignette article"))
+
+Only on Github (Developmental) version: (<https://github.com/moosa-r/rbioapi/>):
+
+6.  [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr") ([rbioapi vignette article](rbioapi_enrichr.html "rbioapi & Enrichr vignette article"))
 
 Each of the services has its dedicated vignette article. However, In this article, I will write about the general framework of rbioapi. Make sure to check the vignette article of each service to learn more about how to use them.
 
@@ -216,11 +222,14 @@ When using rbioapi, remember that you are querying data from web services; So pl
 
 Each supported service has a dedicated vignette article. Make sure to check those too.
 
-1.  [miEAA](rbioapi_mieaa.html "rbioapi & miEAA vignette article")
-2.  [PANTHER](rbioapi_panther.html "rbioapi & PANTHER vignette article")
-3.  [Reactome](rbioapi_reactome.html "rbioapi & Reactome vignette article")
-4.  [STRING](rbioapi_string.html "rbioapi & STRING vignette article")
-5.  [UniProt](rbioapi_uniprot.html "rbioapi & UniProt vignette article")
+1.  [Enrichr](rbioapi_enrichr.html "rbioapi & Enrichr vignette")
+2.  [miEAA](rbioapi_mieaa.html "rbioapi & miEAA vignette article")
+3.  [PANTHER](rbioapi_panther.html "rbioapi & PANTHER vignette article")
+4.  [Reactome](rbioapi_reactome.html "rbioapi & Reactome vignette article")
+5.  [STRING](rbioapi_string.html "rbioapi & STRING vignette article")
+6.  [UniProt](rbioapi_uniprot.html "rbioapi & UniProt vignette article")
+
+You can also explore rbioapi [functions' manual](https://moosa-r.github.io/rbioapi/reference/index.html) in [rbioapi pkgdown webpage](https://moosa-r.github.io/rbioapi/index.html "rbioapi website").
 
 ------------------------------------------------------------------------
 
@@ -229,3 +238,4 @@ Each supported service has a dedicated vignette article. Make sure to check thos
 ```{r sessionInfo, echo=FALSE}
 sessionInfo()
 ```
+

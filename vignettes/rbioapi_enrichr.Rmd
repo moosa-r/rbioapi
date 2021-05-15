@@ -1,0 +1,137 @@
+---
+title: "2.A: Enrichr & rbioapi"
+author: "Moosa Rezwani"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    anchor_sections: true
+    number_sections: true
+    self_contained: true
+    dev: png
+    encoding: 'UTF-8'
+
+vignette: >
+  %\VignetteIndexEntry{2.A: Enrichr & rbioapi}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r message=FALSE, include=FALSE, results="hide", setup, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      eval = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      collapse = TRUE,
+                      tidy = FALSE,
+                      cache = FALSE,
+                      dev = "png",
+                      comment = "#>")
+library(rbioapi)
+rba_options(timeout = 600)
+```
+
+------------------------------------------------------------------------
+
+# Introduction {#introduction .heading2}
+
+[Enrichr](https://maayanlab.cloud/Enrichr) is a gene-set enrichment analysis tool developed in the [Ma'ayan lab](https://icahn.mssm.edu/research/labs/maayan-laboratory).
+
+# Gene set library concept in Enrichr {#gene-set-library-concept-in-enrichr .heading2}
+
+Directly quoting from Enrichr's help page;
+
+> A *gene set library* is a set of related gene sets or enrichment terms. Each enrichment term in Enrichr's results pages is organized by its gene set library. These libraries have been constructed from many sources such as published studies and major biological and biomedical online databases. Others have been created for and only available through Enrichr. For example, the ChEA 2015 library is a set of functional terms representing transcription factors profiled by ChIP-seq in mammalian cells. Each term is associated with a collection of putative targets inferred from the peaks identified in each ChIP-seq study.
+>
+> (source: <https://maayanlab.cloud/Enrichr/help#background>)
+
+To get a list of available Enrichr libraries, use:
+
+```{r enrichr_libs}
+enrichr_libs <- rba_enrichr_libs()
+```
+
+In the returned data frame, you can find the names of available Enrichr libraries in "libraryName" column:
+
+```{r enrichr_libs_df, echo=FALSE}
+DT::datatable(data = enrichr_libs,
+              options = list(scrollX = TRUE, 
+                             paging = TRUE,
+                             fixedHeader = TRUE,
+                             keys = TRUE,
+                             pageLength = 10))
+```
+
+------------------------------------------------------------------------
+
+# Enrichment analysis using Enrichr {#enrichment-analysis-using-enrichr .heading2}
+
+To enrich your gene-set with Enrichr using rbioapi, you can take two approaches. we will begin with the simple one.
+
+## Approach 1: Using the Wrapper function {#approach-1-using-the-wrapper-function .heading3}
+
+Just fill the arguments of `rba_enrichr` according to the function's manual; Simply provide your gene-set as a character vector and select the libraries.
+
+```{r approach_1}
+# 1 We create a variable with our genes' NCBI IDs
+genes <- c("p53", "BRCA1", "cdk2", "Q99835", "CDC42","CDK1","KIF23","PLK1",
+           "RAC2","RACGAP1","RHOA","RHOB", "PHF14", "RBM3", "MSL1")
+
+# 2.a Enrich your genes using "MSigDB_Hallmark_2020" library
+enrichr_msig_hallmark <- rba_enrichr(gene_list = genes,
+                                         gene_set_library = "MSigDB_Hallmark_2020")
+# 2.b Maybe you want to enrich using every library that contains the word "msig":
+enrichr_msig <- rba_enrichr(gene_list = genes,
+                                gene_set_library = "msig",
+                                regex_library_name = TRUE)
+# 2.c Or maybe you want to enrich using every library available at Enrichr:
+# enrichr_all <- rba_enrichr(gene_list = genes,
+#                            gene_set_library = "all")
+```
+
+Note that when only one Enrichr library is selected, a data frame with enrichment analysis result will be returned:
+
+```{r approach_1_single}
+str(enrichr_msig_hallmark)
+```
+
+But when multiple libraries have been selected, the function's output will be a list where each element is a data frame corresponding to one of the selected libraries:
+
+```{r approach_1_multi}
+str(enrichr_msig, 1)
+```
+
+## Approach 2: Going step-by-step {#approach-2-going-step-by-step .heading3}
+
+As you can see in `rba_enrichr()`'s name, it is a wrapper function. It basically executes the following sequence of functions:
+
+```{r approach_2}
+# 1 Get a list of available Enrichr libraries
+libs <- rba_enrichr_libs(store_in_options = TRUE)
+
+# 2 Submit your gene-set to enrichr
+list_id <- rba_enrichr_add_list(gene_list = genes)
+
+# 3 Perform Enrichment analysis with your uploaded gene-set
+enriched <- rba_enrichr_enrich(user_list_id = list_id$userListId,
+                               gene_set_library = "Table_Mining_of_CRISPR_Studies")
+
+## As always, use str() to see what you have:
+str(enriched, 1)
+```
+
+# See also in Functions' manuals {#see-also-in-functions-manuals .heading2}
+
+Some rbioapi Enrichr functions were not covered in this vignette, be sure to check their manuals:
+
+-   `rba_enrichr_gene_map()`
+
+-   `rba_enrichr_view_list()`
+
+------------------------------------------------------------------------
+
+# Session info {#session-info .heading2}
+
+```{r sessionInfo, echo=FALSE}
+sessionInfo()
+```
