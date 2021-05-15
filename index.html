@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="User-Friendly R Interface to Biologic Web Services' API">
-<meta property="og:description" content="Currently fully supports miEAA, PANTHER, Reactome, STRING,
+<meta property="og:description" content="Currently fully supports Enrichr, miEAA, PANTHER, Reactome, STRING,
     and UniProt! The goal of rbioapi is to provide a user-friendly and
     consistent interface to biological databases and services; It is
     designed in a way that insulates the user from technicalities when it
@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rbioapi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
       </span>
     </div>
 
@@ -114,14 +114,14 @@
 <div id="rbioapi-user-friendly-r-interface-to-biologic-web-services-api" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#rbioapi-user-friendly-r-interface-to-biologic-web-services-api" class="anchor"></a>rbioapi: User-Friendly R Interface to Biologic Web Services’ API</h1></div>
-<p>Moosa Rezwani 2021-05-06</p>
+<p>Moosa Rezwani 2021-05-15</p>
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
 <!-- badges: end -->
 <div id="what-does-rbioapi-do" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-does-rbioapi-do" class="anchor"></a>What does rbioapi do?</h2>
-<p>Currently fully supports miEAA, PANTHER, Reactome, STRING, and UniProt!</p>
+<p>Currently fully supports Enrichr, miEAA, PANTHER, Reactome, STRING, and UniProt!</p>
 <p>rbioapi is an interface to Biological databases and web services. The goal of rbioapi is to provide a user-friendly and consistent interface to biological databases and services; It is designed in a way that insulates the user from technicalities when it comes to using API services and creates a unified and easy-to-implement tool to connect to biological databases and services.</p>
 <p>With rbioapi, You are not required to have any prior technical knowledge. <strong>Just fill in a function’s arguments and the rest is internally handled for you</strong>.</p>
 </div>
@@ -129,12 +129,23 @@
 <h2 class="hasAnchor">
 <a href="#what-is-supported-by-rbioapi" class="anchor"></a>What is Supported by rbioapi?</h2>
 <p>rbioapi is dedicated to <strong>Biological or Medical</strong> databases and web services. Currently, rbioapi supports and covers every API resources in the following services: (in alphabetical order!):</p>
+<p>On CRAN (Stable) version: (<a href="https://cran.r-project.org/package=rbioapi" class="uri">https://cran.r-project.org/package=rbioapi</a>)</p>
 <ol>
-<li><a href="https://ccb-compute2.cs.uni-saarland.de/mieaa2" title="miRNA Enrichment Analysis and Annotation Tool (miEAA)">miEAA</a></li>
-<li><a href="http://www.pantherdb.org" title="Protein Analysis THrough Evolutionary Relationships (PANTHER)">PANTHER</a></li>
-<li><a href="https://reactome.org/">Reactome</a></li>
-<li><a href="https://string-db.org/" title="STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis">STRING</a></li>
-<li><a href="https://www.uniprot.org" title="Universal Protein Resource (UniProt)">UniProt</a></li>
+<li>
+<a href="https://ccb-compute2.cs.uni-saarland.de/mieaa2" title="miRNA Enrichment Analysis and Annotation Tool (miEAA)">miEAA</a> (<a href="rbioapi_mieaa.html" title="rbioapi &amp; miEAA vignette article">rbioapi vignette article</a>)</li>
+<li>
+<a href="http://www.pantherdb.org" title="Protein Analysis THrough Evolutionary Relationships (PANTHER)">PANTHER</a> (<a href="rbioapi_panther.html" title="rbioapi &amp; PANTHER vignette article">rbioapi vignette article</a>)</li>
+<li>
+<a href="https://reactome.org/">Reactome</a> (<a href="rbioapi_reactome.html" title="rbioapi &amp; Reactome vignette article">rbioapi vignette article</a>)</li>
+<li>
+<a href="https://string-db.org/" title="STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis">STRING</a> (<a href="rbioapi_string.html" title="rbioapi &amp; STRING vignette article">rbioapi vignette article</a>)</li>
+<li>
+<a href="https://www.uniprot.org" title="Universal Protein Resource (UniProt)">UniProt</a> (<a href="rbioapi_uniprot.html" title="rbioapi &amp; UniProt vignette article">rbioapi vignette article</a>)</li>
+</ol>
+<p>Only on Github (Developmental) version: (<a href="https://github.com/moosa-r/rbioapi/" class="uri">https://github.com/moosa-r/rbioapi/</a>):</p>
+<ol>
+<li>
+<a href="https://maayanlab.cloud/Enrichr/" title="Enrichr">Enrichr</a> (<a href="rbioapi_enrichr.html" title="rbioapi &amp; Enrichr vignette article">rbioapi vignette article</a>)</li>
 </ol>
 <p>Each of the services has its dedicated vignette article. However, In this article, I will write about the general framework of rbioapi. Make sure to check the vignette article of each service to learn more about how to use them.</p>
 <p><strong>Note That:</strong> rbioapi is an ongoing project. New databases and services will be implemented periodically in order to gradually make the package as comprehensive as possible. Do you see yourself often using a certain database/service? Feel free to suggest any database/service by creating an issue on our GitHub <a href="https://github.com/moosa-r/" title="rbioapi GitHub repositry">repository</a>. I will appreciate any suggestions.</p>
@@ -147,8 +158,8 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"rbioapi"</span><span class="op">)</span></code></pre></div>
 <p>However, the CRAN version is released at most once every 1-2 months, You can install the development version from <a href="https://github.com/">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"moosa-r/rbioapi"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"moosa-r/rbioapi"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="design-philosophy-of-rbioapi" class="section level2">
 <h2 class="hasAnchor">
@@ -162,10 +173,9 @@
 <li><p>Produce <strong>Informative messages</strong>, warnings, and error. For example, if a server returns an error in a particular format, convert the server’s error response to R error.</p></li>
 </ul>
 </div>
-</div>
-<div id="naming-conventions" class="section level1">
-<h1 class="hasAnchor">
-<a href="#naming-conventions" class="anchor"></a>Naming conventions</h1>
+<div id="naming-conventions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#naming-conventions" class="anchor"></a>Naming conventions</h2>
 <p>To make the namespace more organized, functions has been named with the following pattern:</p>
 <blockquote>
 <p>rba_<br><span class="math display"><em>s</em><em>e</em><em>r</em><em>v</em><em>i</em><em>c</em><em>e</em>_<em>n</em><em>a</em><em>m</em><em>e</em></span><br>_<br><span class="math display"><em>r</em><em>e</em><em>s</em><em>o</em><em>u</em><em>r</em><em>c</em><em>e</em>_<em>n</em><em>a</em><em>m</em><em>e</em></span><br></p>
@@ -189,9 +199,9 @@
 </ol>
 <p>There are three exceptions: <code><a href="reference/rba_options.html">rba_options()</a></code>, <code><a href="reference/rba_connection_test.html">rba_connection_test()</a></code>, and <code><a href="reference/rba_pages.html">rba_pages()</a></code>; These are helper functions. More on that later.</p>
 </div>
-<div id="changing-the-options" class="section level1">
-<h1 class="hasAnchor">
-<a href="#changing-the-options" class="anchor"></a>Changing the options</h1>
+<div id="changing-the-options" class="section level2">
+<h2 class="hasAnchor">
+<a href="#changing-the-options" class="anchor"></a>Changing the options</h2>
 <p>To provide more control, multiple options have been implemented. Refer to the manual of <code><a href="reference/rba_options.html">rba_options()</a></code> function for a full description of available options. In short, some of the options will govern rbioapi’s connection with servers (e.g. timeout, retry) and some of the options will modify your experience with rbioapi (e.g. verbose, diagnostics, save_file). There are two ways that you may use to change any option. Also, you can get table of available rbioapi options and their current values by calling <code><a href="reference/rba_options.html">rba_options()</a></code>without any argument:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/rba_options.html">rba_options</a></span><span class="op">(</span><span class="op">)</span>
@@ -206,40 +216,39 @@
 <span class="co">#&gt; 8        verbose          TRUE     logical</span>
 <span class="co">#&gt; 9     retry_wait            10     numeric</span></code></pre></div>
 <p>Now, let us consider the ways in which we can alter the settings:</p>
-<div id="change-the-option-globally" class="section level2">
-<h2 class="hasAnchor">
-<a href="#change-the-option-globally" class="anchor"></a>Change the option globally</h2>
+<div id="change-the-option-globally" class="section level3">
+<h3 class="hasAnchor">
+<a href="#change-the-option-globally" class="anchor"></a>Change the option globally</h3>
 <p>Changing an option globally means that for the rest of your R session, any rbioapi function will respect the changed option. To do this, use <code>rba_options().</code> Each argument in this function corresponds to a certain option; Thus by running this function with your desired new values, you could globally alter that rbioapi option. for example:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/rba_options.html">rba_options</a></span><span class="op">(</span>save_file <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co"># from now on, the raw file of server's response will be saved to your working directory.</span>
+<span class="co">## From now on, the raw file of server's response will be saved to your working directory.</span>
 <span class="fu"><a href="reference/rba_options.html">rba_options</a></span><span class="op">(</span>verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="co"># from now on, the package will be quiet.</span></code></pre></div>
+<span class="co">## From now on, the package will be quiet.</span></code></pre></div>
 </div>
-<div id="change-the-option-only-within-a-function-call" class="section level2">
-<h2 class="hasAnchor">
-<a href="#change-the-option-only-within-a-function-call" class="anchor"></a>Change the option only within a function call</h2>
+<div id="change-the-option-only-within-a-function-call" class="section level3">
+<h3 class="hasAnchor">
+<a href="#change-the-option-only-within-a-function-call" class="anchor"></a>Change the option only within a function call</h3>
 <p>You can pass additional arguments to any rbioapi function using “ellipsis” (the familiar <code>…</code> or dot dot dot!). Meaning that you can call any function with additional arguments where each is ‘option = value’ pair. This way, any changes in options will be confined within that particular function call. For example:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># save the server's raw response file:</span>
+<code class="sourceCode R"><span class="co">## Save the server's raw response file:</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rba_reactome_species.html">rba_reactome_species</a></span><span class="op">(</span>only_main <span class="op">=</span> <span class="cn">TRUE</span>, save_file <span class="op">=</span> <span class="st">"reactome_species.json"</span><span class="op">)</span>
-<span class="co"># also , in the case of connection failure, retry up to 10 times:</span>
+<span class="co">## Also, in the case of connection failure, retry up to 10 times:</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rba_reactome_species.html">rba_reactome_species</a></span><span class="op">(</span>only_main <span class="op">=</span> <span class="cn">TRUE</span>,
-                         save_file <span class="op">=</span> <span class="st">"reactome_species.json"</span>, retry_max <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
-<span class="co"># in case of any failure, don't stop the code, just return</span></code></pre></div>
+                         save_file <span class="op">=</span> <span class="st">"reactome_species.json"</span>, retry_max <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## run these codes in your own R session to see the difference.</span>
-<span class="co"># show internal diagnostics boring details</span>
+<code class="sourceCode R"><span class="co">## Run these codes in your own R session to see the difference.</span>
+<span class="co">## show internal diagnostics boring details</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rba_uniprot_proteins_crossref.html">rba_uniprot_proteins_crossref</a></span><span class="op">(</span>db_id <span class="op">=</span> <span class="st">"CD40"</span>, db_name <span class="op">=</span> <span class="st">"HGNC"</span>, diangnostics <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; Retrieving UniProt entities that correspond to ID CD40 in database HGNC.</span>
-<span class="co"># the next function you call, will still use the default rbioapi options</span>
+<span class="co">## The next function you call, will still use the default rbioapi options</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rba_uniprot_proteins_crossref.html">rba_uniprot_proteins_crossref</a></span><span class="op">(</span>db_id <span class="op">=</span> <span class="st">"CD40"</span>, db_name <span class="op">=</span> <span class="st">"HGNC"</span><span class="op">)</span>
 <span class="co">#&gt; Retrieving UniProt entities that correspond to ID CD40 in database HGNC.</span></code></pre></div>
 </div>
 </div>
-<div id="connection-test" class="section level1">
-<h1 class="hasAnchor">
-<a href="#connection-test" class="anchor"></a>Connection test</h1>
+<div id="connection-test" class="section level2">
+<h2 class="hasAnchor">
+<a href="#connection-test" class="anchor"></a>Connection test</h2>
 <p>The second exception in functions’ naming schema is <code><a href="reference/rba_connection_test.html">rba_connection_test()</a></code>. Run this simple function to check your connection with the supported services/databases. If you encounter errors when using rbioapi, kindly run this function to make sure that your internet connection or the servers are fine.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/rba_connection_test.html">rba_connection_test</a></span><span class="op">(</span><span class="op">)</span>
@@ -263,9 +272,9 @@
 <span class="co">#&gt; ---&gt;&gt;&gt; UniProt :</span>
 <span class="co">#&gt; +++ The server is responding.</span></code></pre></div>
 </div>
-<div id="iterating-over-paginated-results" class="section level1">
-<h1 class="hasAnchor">
-<a href="#iterating-over-paginated-results" class="anchor"></a>Iterating over paginated results</h1>
+<div id="iterating-over-paginated-results" class="section level2">
+<h2 class="hasAnchor">
+<a href="#iterating-over-paginated-results" class="anchor"></a>Iterating over paginated results</h2>
 <p>Some API resources will return paginated responses. This is particularly common in API resources which return potentially very large responses. In rbioapi, for these cases, there are arguments such as “page_number” (with default value of 1) and -if the API resource allows- “page_size”. To save your time, you may use <code><a href="reference/rba_pages.html">rba_pages()</a></code>. This function will iterate over the pages you have specified.</p>
 <p>Take rba_uniprot_taxonomy_name as an example. This function allows you to search taxonomic nodes in <a href="https://www.uniprot.org" title="Universal Protein Resource (UniProt)">UniProt</a>. The response can potentially have a huge size, so <a href="https://www.uniprot.org" title="Universal Protein Resource (UniProt)">UniProt</a> returns a paginated response. For example, if we search for nodes that contain “adenovirus”, there is a large number of hits:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -286,7 +295,7 @@
 <code class="sourceCode R"><span class="va">adeno_pages</span> <span class="op">=</span> <span class="fu"><a href="reference/rba_pages.html">rba_pages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">quote</a></span><span class="op">(</span><span class="fu"><a href="reference/rba_uniprot_taxonomy_name.html">rba_uniprot_taxonomy_name</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"adenovirus"</span>,
                                    search_type <span class="op">=</span> <span class="st">"contain"</span>,
                                    page_number <span class="op">=</span> <span class="st">"pages:1:3"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co"># You can inspect structure of the response:</span>
+<span class="co">## You can inspect the structure of the response:</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">adeno_pages</span>, max.level <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 <span class="co">#&gt; List of 3</span>
 <span class="co">#&gt;  $ page_1:List of 2</span>
@@ -304,31 +313,33 @@
 <li><p>Replace the argument we want to iterate over it, with a string in this format: “pages:start:end”. For example, we provided page_number = “pages:1:3” to get the responses of pages 1 to 3.</p></li>
 </ol>
 </div>
+</div>
 <div id="how-and-what-to-cite" class="section level1">
 <h1 class="hasAnchor">
 <a href="#how-and-what-to-cite" class="anchor"></a>How and what to cite?</h1>
 <p>rbioapi is an interface between you and other databases and services. Thus, if you have used rbioapi in published research, kindly <strong>in addition to citing rbioapi, <u><em>make sure to fully and properly cite the databases/services you have used</em></u></strong>. Suggested citations have been added in the functions’ manuals, under the “references” section; Nevertheless, it is the user’s responsibility to check for proper citations and to properly cite the database/services that they have used.</p>
-</div>
-<div id="code-of-conduct" class="section level1">
-<h1 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor"></a>Code of conduct</h1>
+<div id="code-of-conduct" class="section level2">
+<h2 class="hasAnchor">
+<a href="#code-of-conduct" class="anchor"></a>Code of conduct</h2>
 <p>When using rbioapi, remember that you are querying data from web services; So please be considerate. Never flood a server with requests, if you need to download <em>unreasonably</em> large volumes of data, directly downloading the databases provided in those services may be a better alternative. If you see yourself being rate-limited from any server (HTTP <strong>429 Too Many Requests</strong> response status code), know that you are sending more requests than what the server interprets as normal behavior, so please seek other methods or use <code><a href="https://rdrr.io/r/base/Sys.sleep.html">Sys.sleep()</a></code> between your requests.</p>
 </div>
-<div id="what-next" class="section level1">
-<h1 class="hasAnchor">
-<a href="#what-next" class="anchor"></a>What next?</h1>
+<div id="what-next" class="section level2">
+<h2 class="hasAnchor">
+<a href="#what-next" class="anchor"></a>What next?</h2>
 <p>Each supported service has a dedicated vignette article. Make sure to check those too.</p>
 <ol>
-<li>miEAA</li>
-<li>PANTHER</li>
-<li>Reactome</li>
-<li>STRING</li>
-<li>UniProt</li>
+<li><a href="https://moosa-r.github.io/rbioapi/articles/rbioapi_enrichr.html" title="rbioapi &amp; Enrichr vignette">Enrichr</a></li>
+<li><a href="https://moosa-r.github.io/rbioapi/articles/rbioapi_mieaa.html" title="rbioapi &amp; miEAA vignette article">miEAA</a></li>
+<li><a href="https://moosa-r.github.io/rbioapi/articles/rbioapi_panther.html" title="rbioapi &amp; PANTHER vignette article">PANTHER</a></li>
+<li><a href="https://moosa-r.github.io/rbioapi/articles/rbioapi_reactome.html" title="rbioapi &amp; Reactome vignette article">Reactome</a></li>
+<li><a href="https://moosa-r.github.io/rbioapi/articles/rbioapi_string.html" title="rbioapi &amp; STRING vignette article">STRING</a></li>
+<li><a href="https://moosa-r.github.io/rbioapi/articles/rbioapi_uniprot.html" title="rbioapi &amp; UniProt vignette article">UniProt</a></li>
 </ol>
+<p>You can also explore rbioapi <a href="https://moosa-r.github.io/rbioapi/reference/index.html">functions’ manual</a> in <a href="https://moosa-r.github.io/rbioapi/index.html" title="rbioapi website">rbioapi pkgdown webpage</a>.</p>
 </div>
-<div id="session-info" class="section level1">
-<h1 class="hasAnchor">
-<a href="#session-info" class="anchor"></a>Session info</h1>
+<div id="session-info" class="section level2">
+<h2 class="hasAnchor">
+<a href="#session-info" class="anchor"></a>Session info</h2>
 <div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">#&gt; R version 4.0.5 (2021-03-31)</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
 <span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt; Running under: Windows 10 x64 (build 19043)</span></span>
@@ -347,14 +358,15 @@
 <span id="cb11-16"><a href="#cb11-16"></a><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span id="cb11-17"><a href="#cb11-17"></a><span class="co">#&gt; </span></span>
 <span id="cb11-18"><a href="#cb11-18"></a><span class="co">#&gt; other attached packages:</span></span>
-<span id="cb11-19"><a href="#cb11-19"></a><span class="co">#&gt; [1] rbioapi_0.7.0</span></span>
+<span id="cb11-19"><a href="#cb11-19"></a><span class="co">#&gt; [1] rbioapi_0.7.1</span></span>
 <span id="cb11-20"><a href="#cb11-20"></a><span class="co">#&gt; </span></span>
 <span id="cb11-21"><a href="#cb11-21"></a><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span id="cb11-22"><a href="#cb11-22"></a><span class="co">#&gt;  [1] digest_0.6.27     R6_2.5.0          jsonlite_1.7.2    magrittr_2.0.1   </span></span>
-<span id="cb11-23"><a href="#cb11-23"></a><span class="co">#&gt;  [5] evaluate_0.14     httr_1.4.2        rlang_0.4.10      stringi_1.5.3    </span></span>
-<span id="cb11-24"><a href="#cb11-24"></a><span class="co">#&gt;  [9] curl_4.3          rmarkdown_2.7     tools_4.0.5       stringr_1.4.0    </span></span>
+<span id="cb11-23"><a href="#cb11-23"></a><span class="co">#&gt;  [5] evaluate_0.14     httr_1.4.2        rlang_0.4.11      stringi_1.6.1    </span></span>
+<span id="cb11-24"><a href="#cb11-24"></a><span class="co">#&gt;  [9] curl_4.3.1        rmarkdown_2.8     tools_4.0.5       stringr_1.4.0    </span></span>
 <span id="cb11-25"><a href="#cb11-25"></a><span class="co">#&gt; [13] xfun_0.22         yaml_2.2.1        compiler_4.0.5    htmltools_0.5.1.1</span></span>
 <span id="cb11-26"><a href="#cb11-26"></a><span class="co">#&gt; [17] knitr_1.33</span></span></code></pre></div>
+</div>
 </div>
 
   </div>
