@@ -33,25 +33,25 @@ On CRAN (Stable) version: (<https://cran.r-project.org/package=rbioapi>)
 
 1.  [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "miRNA Enrichment Analysis and Annotation Tool (miEAA)")
     ([rbioapi vignette
-    article](rbioapi_mieaa.html "rbioapi & miEAA vignette article"))
+    article](https://moosa-r.github.io/rbioapi/articles/rbioapi_mieaa.html "rbioapi & miEAA vignette article"))
 2.  [PANTHER](http://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)")
     ([rbioapi vignette
-    article](rbioapi_panther.html "rbioapi & PANTHER vignette article"))
+    article](https://moosa-r.github.io/rbioapi/articles/rbioapi_panther.html "rbioapi & PANTHER vignette article"))
 3.  [Reactome](https://reactome.org/) ([rbioapi vignette
-    article](rbioapi_reactome.html "rbioapi & Reactome vignette article"))
+    article](https://moosa-r.github.io/rbioapi/articles/rbioapi_reactome.html "rbioapi & Reactome vignette article"))
 4.  [STRING](https://string-db.org/ "STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis")
     ([rbioapi vignette
-    article](rbioapi_string.html "rbioapi & STRING vignette article"))
+    article](https://moosa-r.github.io/rbioapi/articles/rbioapi_string.html "rbioapi & STRING vignette article"))
 5.  [UniProt](https://www.uniprot.org "Universal Protein Resource (UniProt)")
     ([rbioapi vignette
-    article](rbioapi_uniprot.html "rbioapi & UniProt vignette article"))
+    article](https://moosa-r.github.io/rbioapi/articles/rbioapi_uniprot.html "rbioapi & UniProt vignette article"))
 
 Only on Github (Developmental) version:
 (<https://github.com/moosa-r/rbioapi/>):
 
 1.  [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr") ([rbioapi
     vignette
-    article](rbioapi_enrichr.html "rbioapi & Enrichr vignette article"))
+    article](https://moosa-r.github.io/rbioapi/articles/rbioapi_enrichr.html "rbioapi & Enrichr vignette article"))
 
 Each of the services has its dedicated vignette article. However, In
 this article, I will write about the general framework of rbioapi. Make
