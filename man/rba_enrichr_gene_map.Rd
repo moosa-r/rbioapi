@@ -4,12 +4,17 @@
 \alias{rba_enrichr_gene_map}
 \title{Find Enrichr Terms That Contain a Given Gene}
 \usage{
-rba_enrichr_gene_map(gene, catagorize = FALSE, ...)
+rba_enrichr_gene_map(gene, catagorize = FALSE, organism = "human", ...)
 }
 \arguments{
 \item{gene}{character: An Entrez gene symbol.}
 
 \item{catagorize}{logical: Should the category informations be included?}
+
+\item{organism}{(default = "human") Which model organism version of Enrichr
+to use? Available options are: "human", (H. sapiens & M. musculus),
+"fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
+and "fish" (D. rerio).}
 
 \item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
 arguments documentation for more information on available options.}

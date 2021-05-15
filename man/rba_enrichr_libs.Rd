@@ -4,11 +4,16 @@
 \alias{rba_enrichr_libs}
 \title{Retrieve a List of available libraries from Enrichr}
 \usage{
-rba_enrichr_libs(store_in_options = FALSE, ...)
+rba_enrichr_libs(store_in_options = FALSE, organism = "human", ...)
 }
 \arguments{
 \item{store_in_options}{logical: (default = TRUE) Should a list of available
 Enrichr libraries be saved as a global option?}
+
+\item{organism}{(default = "human") Which model organism version of Enrichr
+to use? Available options are: "human", (H. sapiens & M. musculus),
+"fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
+and "fish" (D. rerio).}
 
 \item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
 arguments documentation for more information on available options.}

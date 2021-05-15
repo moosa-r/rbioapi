@@ -19,6 +19,10 @@
 #'
 #' @param store_in_options logical: (default = TRUE) Should a list of available
 #' Enrichr libraries be saved as a global option?
+#' @param organism (default = "human") Which model organism version of Enrichr
+#'   to use? Available options are: "human", (H. sapiens & M. musculus),
+#'   "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
+#'   and "fish" (D. rerio).
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #'   arguments documentation for more information on available options.
 #'
@@ -46,21 +50,27 @@
 #' @seealso \code{\link{rba_enrichr}}
 #' @export
 rba_enrichr_libs <- function(store_in_options = FALSE,
+                             organism = "human",
                              ...){
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
   .rba_args(cons = list(list(arg = "store_in_options",
-                             class = "logical")))
+                             class = "logical"),
+                        list(arg = "organism",
+                             class = "character",
+                             val = c("human", "fly", "yeast", "worm", "fish"))
+                        ))
 
-  .msg("Retrieving List of available libraries and statistics from Enrichr.")
+  .msg("Retrieving List of available libraries and statistics from Enrichr %s.",
+       organism)
 
   ## Build Function-Specific Call
   parser_input <- list("json->list_simp",
                        function(x) {x[[1]]})
   input_call <- .rba_httr(httr = "get",
                           url = .rba_stg("enrichr", "url"),
-                          path = paste0(.rba_stg("enrichr", "pth"),
+                          path = paste0(.rba_stg("enrichr", "pth", organism),
                                         "datasetStatistics"),
                           accept = "application/json",
                           parser = parser_input,
@@ -91,6 +101,10 @@ rba_enrichr_libs <- function(store_in_options = FALSE,
 #' @param gene_list A vector with Entrez gene symbols.
 #' @param description (optional) A name or description to be associated with your
 #'   uploaded gene-set to Enrichr servers.
+#' @param organism (default = "human") Which model organism version of Enrichr
+#'   to use? Available options are: "human", (H. sapiens & M. musculus),
+#'   "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
+#'   and "fish" (D. rerio).
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #'   arguments documentation for more information on available options.
 #'
@@ -119,6 +133,7 @@ rba_enrichr_libs <- function(store_in_options = FALSE,
 #' @export
 rba_enrichr_add_list <- function(gene_list,
                                  description = NA,
+                                 organism = "human",
                                  ...){
   ## Load Global Options
   .rba_ext_args(...)
@@ -126,9 +141,14 @@ rba_enrichr_add_list <- function(gene_list,
   .rba_args(cons = list(list(arg = "gene_list",
                              class = "character"),
                         list(arg = "description",
-                             class = "character")))
+                             class = "character"),
+                        list(arg = "organism",
+                             class = "character",
+                             val = c("human", "fly", "yeast", "worm", "fish"))
+                        ))
 
-  .msg("Uploading %s gene symbols to Enrichr.", length(gene_list))
+  .msg("Uploading %s gene symbols to Enrichr %s.",
+       length(gene_list), organism)
 
   ## Build POST API Request's URL
   call_body <- .rba_query(init = list("format" = "text",
@@ -141,7 +161,7 @@ rba_enrichr_add_list <- function(gene_list,
   ## Build Function-Specific Call
   input_call <- .rba_httr(httr = "post",
                           url = .rba_stg("enrichr", "url"),
-                          path = paste0(.rba_stg("enrichr", "pth"),
+                          path = paste0(.rba_stg("enrichr", "pth", organism),
                                         "addList"),
                           body = call_body,
                           accept = "application/json",
@@ -162,6 +182,10 @@ rba_enrichr_add_list <- function(gene_list,
 #
 #' @param user_list_id a user_list_id returned to you after uploading a gene
 #'   list using \code{\link{rba_enrichr_add_list}}
+#' @param organism (default = "human") Which model organism version of Enrichr
+#'   to use? Available options are: "human", (H. sapiens & M. musculus),
+#'   "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
+#'   and "fish" (D. rerio).
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #'   arguments documentation for more information on available options.
 #'
@@ -188,15 +212,21 @@ rba_enrichr_add_list <- function(gene_list,
 #' @family "Enrichr"
 #' @export
 rba_enrichr_view_list <- function(user_list_id,
+                                  organism = "human",
                                   ...){
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
   .rba_args(cons = list(list(arg = "user_list_id",
                              class = c("numeric", "integer"),
-                             len = 1)))
+                             len = 1),
+                        list(arg = "organism",
+                             class = "character",
+                             val = c("human", "fly", "yeast", "worm", "fish"))
+                        ))
 
-  .msg("Retrieving the gene list under the ID %s.", user_list_id)
+  .msg("Retrieving the gene list under the ID %s from Enrichr %s.",
+       user_list_id, organism)
 
   ## Build GET API Request's query
   call_query <- list("userListId" = user_list_id)
@@ -204,7 +234,7 @@ rba_enrichr_view_list <- function(user_list_id,
   ## Build Function-Specific Call
   input_call <- .rba_httr(httr = "get",
                           url = .rba_stg("enrichr", "url"),
-                          path = paste0(.rba_stg("enrichr", "pth"),
+                          path = paste0(.rba_stg("enrichr", "pth", organism),
                                         "view"),
                           query = call_query,
                           accept = "application/json",
@@ -233,6 +263,10 @@ rba_enrichr_view_list <- function(user_list_id,
 #' @param gene_set_library a valid gene-set library name which exists
 #' in the results retrieved via \code{\link{rba_enrichr_libs}}.
 #' @param save_name default raw file name
+#' @param organism (default = "human") Which model organism version of Enrichr
+#'   to use? Available options are: "human", (H. sapiens & M. musculus),
+#'   "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
+#'   and "fish" (D. rerio).
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #'   arguments documentation for more information on available options.
 #'
@@ -255,6 +289,7 @@ rba_enrichr_view_list <- function(user_list_id,
 .rba_enrichr_enrich_internal <- function(user_list_id,
                                          gene_set_library,
                                          save_name,
+                                         organism = "human",
                                          ...){
   ## Load Global Options
   .rba_ext_args(...)
@@ -272,7 +307,7 @@ rba_enrichr_view_list <- function(user_list_id,
 
   input_call <- .rba_httr(httr = "get",
                           .rba_stg("enrichr", "url"),
-                          path = paste0(.rba_stg("enrichr", "pth"),
+                          path = paste0(.rba_stg("enrichr", "pth", organism),
                                         "export"),
                           query = call_query,
                           httr::accept("text/tab-separated-values"),
@@ -312,6 +347,10 @@ rba_enrichr_view_list <- function(user_list_id,
 #' @param regex_library_name logical: if TRUE (default) the provided
 #'   gene_set_library will be regarded as a regex or partially matching name. if
 #'   FALSE, gene_set_library will be considered exact match.
+#' @param organism (default = "human") Which model organism version of Enrichr
+#'   to use? Available options are: "human", (H. sapiens & M. musculus),
+#'   "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
+#'   and "fish" (D. rerio).
 #' @param progress_bar logical: In case of selecting multiple Enrichr
 #'   libraries, should a progress bar be displayed?
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
@@ -353,13 +392,15 @@ rba_enrichr_view_list <- function(user_list_id,
 rba_enrichr_enrich <- function(user_list_id,
                                gene_set_library = "all",
                                regex_library_name = TRUE,
+                               organism = "human",
                                progress_bar = TRUE,
                                ...){
   ## Load Global Options
   .rba_ext_args(...)
   ## get a list of available libraries
   if (is.null(getOption("rba_enrichr_libs"))) {
-    .msg("Calling rba_enrichr_libs() to get the names of available Enricr libraries.")
+    .msg("Calling rba_enrichr_libs() to get the names of available Enricr %s libraries.",
+         organism)
     invisible(rba_enrichr_libs(store_in_options = TRUE))
   }
   ## handle different gene_set_library input situations
@@ -394,11 +435,15 @@ rba_enrichr_enrich <- function(user_list_id,
                              class = "character",
                              val = getOption("rba_enrichr_libs")),
                         list(arg = "progress_bar",
-                             class = "logical")))
+                             class = "logical"),
+                        list(arg = "organism",
+                             class = "character",
+                             val = c("human", "fly", "yeast", "worm", "fish"))
+                        ))
   ## call Enrichr API
   if (run_mode == "single") {
-    .msg("Enriching gene-list %s against Enrichr library: %s.",
-         user_list_id, gene_set_library)
+    .msg("Enriching gene-list %s against Enrichr %s library: %s.",
+         user_list_id, organism, gene_set_library)
     final_output <- .rba_enrichr_enrich_internal(user_list_id = user_list_id,
                                                  gene_set_library = gene_set_library,
                                                  save_name = sprintf("enrichr_%s_%s.json",
@@ -408,13 +453,13 @@ rba_enrichr_enrich <- function(user_list_id,
     return(final_output)
 
   } else {
-    .msg("Enriching gene-list %s using multiple Enrichr libraries.",
-         user_list_id)
-    .msg(paste0("Note: You have selected '%s' Enrichr libraries. Note that for ",
+    .msg("Enriching gene-list %s using multiple Enrichr %s libraries.",
+         user_list_id, organism)
+    .msg(paste0("Note: You have selected '%s' Enrichr %s libraries. Note that for ",
                 "each library, a separate call should be sent to Enrichr server. ",
                 "Thus, this could take a while depending on the number of selected ",
                 "libraries and your network connection."),
-         length(gene_set_library))
+         length(gene_set_library), organism)
     ## initiate progress bar
     if (isTRUE(progress_bar)) {
       pb <- utils::txtProgressBar(min = 0,
@@ -452,6 +497,10 @@ rba_enrichr_enrich <- function(user_list_id,
 #'
 #' @param gene character: An Entrez gene symbol.
 #' @param catagorize logical: Should the category informations be included?
+#' @param organism (default = "human") Which model organism version of Enrichr
+#'   to use? Available options are: "human", (H. sapiens & M. musculus),
+#'   "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
+#'   and "fish" (D. rerio).
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #' arguments documentation for more information on available options.
 #'
@@ -481,6 +530,7 @@ rba_enrichr_enrich <- function(user_list_id,
 #' @export
 rba_enrichr_gene_map <- function(gene,
                                  catagorize = FALSE,
+                                 organism = "human",
                                  ...){
   ## Load Global Options
   .rba_ext_args(...)
@@ -489,9 +539,13 @@ rba_enrichr_gene_map <- function(gene,
                              class = "character",
                              len = 1),
                         list(arg = "catagorize",
-                             class = "logical")))
+                             class = "logical"),
+                        list(arg = "organism",
+                             class = "character",
+                             val = c("human", "fly", "yeast", "worm", "fish"))
+                        ))
 
-  .msg("Finding terms that contain gene: %s.", gene)
+  .msg("Finding terms that contain %s gene: %s.", organism, gene)
 
   ## Build GET API Request's query
   call_query <- .rba_query(init = list("gene" = gene,
@@ -502,7 +556,7 @@ rba_enrichr_gene_map <- function(gene,
   ## Build Function-Specific Call
   input_call <- .rba_httr(httr = "get",
                           url = .rba_stg("enrichr", "url"),
-                          path = paste0(.rba_stg("enrichr", "pth"),
+                          path = paste0(.rba_stg("enrichr", "pth", organism),
                                         "genemap"),
                           query = call_query,
                           accept = "application/json",
@@ -574,6 +628,7 @@ rba_enrichr <- function(gene_list,
                         description = NA,
                         gene_set_library = "all",
                         regex_library_name = TRUE,
+                        organism = "human",
                         progress_bar = FALSE,
                         ...) {
   ## Load Global Options
@@ -586,7 +641,11 @@ rba_enrichr <- function(gene_list,
                         list(arg = "regex_library_name",
                              class = "logical"),
                         list(arg = "progress_bar",
-                             class = "logical")))
+                             class = "logical"),
+                        list(arg = "organism",
+                             class = "character",
+                             val = c("human", "fly", "yeast", "worm", "fish"))
+                        ))
   .msg("--Step 1/3:")
   invisible(rba_enrichr_libs(store_in_options = TRUE,
                              ...))

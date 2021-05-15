@@ -4,11 +4,16 @@
 \alias{rba_enrichr_view_list}
 \title{View an Uploaded Gene List}
 \usage{
-rba_enrichr_view_list(user_list_id, ...)
+rba_enrichr_view_list(user_list_id, organism = "human", ...)
 }
 \arguments{
 \item{user_list_id}{a user_list_id returned to you after uploading a gene
 list using \code{\link{rba_enrichr_add_list}}}
+
+\item{organism}{(default = "human") Which model organism version of Enrichr
+to use? Available options are: "human", (H. sapiens & M. musculus),
+"fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
+and "fish" (D. rerio).}
 
 \item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
 arguments documentation for more information on available options.}

@@ -9,6 +9,7 @@ rba_enrichr(
   description = NA,
   gene_set_library = "all",
   regex_library_name = TRUE,
+  organism = "human",
   progress_bar = FALSE,
   ...
 )
@@ -31,6 +32,11 @@ pattern that correspond to one or more of Enrichr library names.
 \item{regex_library_name}{logical: if TRUE (default) the provided
 gene_set_library will be regarded as a regex or partially matching name. if
 FALSE, gene_set_library will be considered exact match.}
+
+\item{organism}{(default = "human") Which model organism version of Enrichr
+to use? Available options are: "human", (H. sapiens & M. musculus),
+"fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
+and "fish" (D. rerio).}
 
 \item{progress_bar}{logical: In case of selecting multiple Enrichr
 libraries, should a progress bar be displayed?}

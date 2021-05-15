@@ -4,13 +4,18 @@
 \alias{rba_enrichr_add_list}
 \title{Upload Your Gene-List to Enrichr}
 \usage{
-rba_enrichr_add_list(gene_list, description = NA, ...)
+rba_enrichr_add_list(gene_list, description = NA, organism = "human", ...)
 }
 \arguments{
 \item{gene_list}{A vector with Entrez gene symbols.}
 
 \item{description}{(optional) A name or description to be associated with your
 uploaded gene-set to Enrichr servers.}
+
+\item{organism}{(default = "human") Which model organism version of Enrichr
+to use? Available options are: "human", (H. sapiens & M. musculus),
+"fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
+and "fish" (D. rerio).}
 
 \item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
 arguments documentation for more information on available options.}
