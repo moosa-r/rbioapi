@@ -1,13 +1,13 @@
 Type: Package
 Package: rbioapi
 Title: User-Friendly R Interface to Biologic Web Services' API
-Version: 0.7.0
+Version: 0.7.1
 Authors@R: 
     person(given = "Moosa",
            family = "Rezwani",
            role = c("aut", "cre", "cph"),
            email = "moosa.rezwani@gmail.com")
-Description: Currently fully supports miEAA, PANTHER, Reactome, STRING,
+Description: Currently fully supports Enrichr, miEAA, PANTHER, Reactome, STRING,
     and UniProt! The goal of rbioapi is to provide a user-friendly and
     consistent interface to biological databases and services; It is
     designed in a way that insulates the user from technicalities when it
