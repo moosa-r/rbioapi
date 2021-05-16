@@ -2,7 +2,7 @@ template:
   params:
     bootswatch: flatly
     type: inverse
-    ganalytics: UA-197008946-1
+    ganalytics: G-1HHD9Z0414
 
 navbar:
   structure:
