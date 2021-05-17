@@ -1,7 +1,7 @@
 rbioapi: User-Friendly R Interface to Biologic Web Services’ API
 ================
 Moosa Rezwani
-2021-05-15
+2021-05-17
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
@@ -49,7 +49,7 @@ On CRAN (Stable) version: (<https://cran.r-project.org/package=rbioapi>)
 Only on Github (Developmental) version:
 (<https://github.com/moosa-r/rbioapi/>):
 
-1.  [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr") ([rbioapi
+6.  [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr") ([rbioapi
     vignette
     article](https://moosa-r.github.io/rbioapi/articles/rbioapi_enrichr.html "rbioapi & Enrichr vignette article"))
 
@@ -135,11 +135,12 @@ rba_string_version()
 Thus, to this version, rbioapi function will have one of the following
 naming schema:
 
-1.  rba\_mieaa\_\*
-2.  rba\_panther\_\*
-3.  rba\_reactome\_\*
-4.  rba\_string\_\*
-5.  rba\_uniprot\_\*
+1.  rba\_enrichr\_\*
+2.  rba\_mieaa\_\*
+3.  rba\_panther\_\*
+4.  rba\_reactome\_\*
+5.  rba\_string\_\*
+6.  rba\_uniprot\_\*
 
 There are three exceptions: `rba_options()`, `rba_connection_test()`,
 and `rba_pages()`; These are helper functions. More on that later.

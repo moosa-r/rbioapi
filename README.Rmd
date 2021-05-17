@@ -49,7 +49,7 @@ On CRAN (Stable) version: (<https://cran.r-project.org/package=rbioapi>)
 
 Only on Github (Developmental) version: (<https://github.com/moosa-r/rbioapi/>):
 
-1.  [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr") ([rbioapi vignette article](https://moosa-r.github.io/rbioapi/articles/rbioapi_enrichr.html "rbioapi & Enrichr vignette article"))
+6.  [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr") ([rbioapi vignette article](https://moosa-r.github.io/rbioapi/articles/rbioapi_enrichr.html "rbioapi & Enrichr vignette article"))
 
 Each of the services has its dedicated vignette article. However, In this article, I will write about the general framework of rbioapi. Make sure to check the vignette article of each service to learn more about how to use them.
 
@@ -88,7 +88,7 @@ remotes::install_github("moosa-r/rbioapi")
 
 To make the namespace more organized, functions has been named with the following pattern:
 
-> rba\_[service_name]\_[resource_name]
+> rba_[service_name]_[resource_name]
 
 For example, `rba_string_version()` will call [STRING](https://string-db.org/ "STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis")'s version resource.
 
@@ -98,11 +98,12 @@ rba_string_version()
 
 Thus, to this version, rbioapi function will have one of the following naming schema:
 
-1.  rba_mieaa\_\*
-2.  rba_panther\_\*
-3.  rba_reactome\_\*
-4.  rba_string\_\*
-5.  rba_uniprot\_\*
+1.  rba_enrichr\_\*
+2.  rba_mieaa\_\*
+3.  rba_panther\_\*
+4.  rba_reactome\_\*
+5.  rba_string\_\*
+6.  rba_uniprot\_\*
 
 There are three exceptions: `rba_options()`, `rba_connection_test()`, and `rba_pages()`; These are helper functions. More on that later.
 
