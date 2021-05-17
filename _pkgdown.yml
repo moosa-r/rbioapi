@@ -1,7 +1,9 @@
+url: https://moosa-r.github.io/rbioapi
+
 template:
+  bootstrap: 5
   params:
-    bootswatch: flatly
-    type: inverse
+    bootswatch: cosmo
     ganalytics: G-1HHD9Z0414
 
 navbar:
