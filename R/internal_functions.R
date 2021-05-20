@@ -20,7 +20,7 @@
   arg <- c(...)
   #possible arguments
   output <- switch(arg[[1]],
-                   db = c("enrichr", "ensembl", "mieaa", "reactome",
+                   db = c("enrichr", "ensembl","jaspar", "mieaa", "reactome",
                           "string", "uniprot"),
                    enrichr = switch(
                      arg[[2]],
@@ -48,6 +48,14 @@
                      err_ptn = "^4\\d\\d$",
                      err_prs = list("json->list_simp",
                                     function(x) {x[["error"]][[1]]})
+                   ),
+                   jaspar = switch(
+                     arg[[2]],
+                     name = "JASPAR",
+                     url = "http://jaspar.genereg.net",
+                     pth = "api/v1/",
+                     ptn = "^(https?://)?(www\\.)?jaspar\\.genereg\\.net/api/",
+                     err_ptn = "^$"
                    ),
                    mieaa = switch(
                      arg[[2]],
@@ -113,6 +121,7 @@
                      r = "R Core Team (2020). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.",
                      enrichr = "https://maayanlab.cloud/Enrichr/help#terms",
                      ensembl = "***ensembl api papeer***",
+                     jaspar = "Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-access database of transcription factor binding profiles. Nucleic Acids Res. 2019; doi: 10.1093/nar/gkz1001",
                      reactome = "https://reactome.org/cite",
                      string = "Szklarczyk D, Gable AL, Lyon D, Junge A, Wyder S, Huerta-Cepas J, Simonovic M, Doncheva NT, Morris JH, Bork P, Jensen LJ, Mering CV. STRING v11: protein-protein association networks with increased coverage, supporting functional discovery in genome-wide experimental datasets. Nucleic Acids Res. 2019 Jan 8;47(D1):D607-D613. doi: 10.1093/nar/gky1131. PMID: 30476243; PMCID: PMC6323986.",
                      uniprot = "***uniprot api papeer***"),
@@ -120,6 +129,8 @@
                                                    "/Enrichr"),
                                 "Ensembl" = paste0(.rba_stg("ensembl", "url"),
                                                    "/info/ping"),
+                                "JASPAR" = paste0(.rba_stg("jaspar", "url"),
+                                                  "/api/v1/releases/"),
                                 "miEAA" = paste0(.rba_stg("mieaa", "url"),
                                                  "/mieaa2/api/"),
                                 "PANTHER" = paste0(.rba_stg("panther", "url"),
