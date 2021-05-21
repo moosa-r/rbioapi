@@ -4,12 +4,13 @@ pkgdown_sha: ~
 articles:
   rbioapi: rbioapi.html
   rbioapi_enrichr: rbioapi_enrichr.html
+  rbioapi_jaspar: rbioapi_jaspar.html
   rbioapi_mieaa: rbioapi_mieaa.html
   rbioapi_panther: rbioapi_panther.html
   rbioapi_reactome: rbioapi_reactome.html
   rbioapi_string: rbioapi_string.html
   rbioapi_uniprot: rbioapi_uniprot.html
-last_built: 2021-05-17T03:57Z
+last_built: 2021-05-21T11:20Z
 urls:
   reference: https://moosa-r.github.io/rbioapi/reference
   article: https://moosa-r.github.io/rbioapi/articles

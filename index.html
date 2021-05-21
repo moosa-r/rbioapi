@@ -12,18 +12,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="User-Friendly R Interface to Biologic Web Services' API">
-<meta property="og:description" content="Currently fully supports Enrichr, miEAA, PANTHER, Reactome, STRING,
-    and UniProt! The goal of rbioapi is to provide a user-friendly and
-    consistent interface to biological databases and services; It is
-    designed in a way that insulates the user from technicalities when it
-    comes to using API services and creates a unified and
-    easy-to-implement tool to connect to biological databases and
-    services. With rbioapi, You are not required to have any prior
-    technical knowledge. Just fill in a function's arguments and the rest
-    is handled for you. This an ongoing project. New databases and
-    services will be implemented periodically to gradually make rbioapi
-    more comprehensive. Feel free to suggest any databases or services you
-    often use.">
+<meta property="og:description" content="Currently fully supports Enrichr, JASPAR, miEAA, PANTHER,
+    Reactome, STRING, and UniProt! The goal of rbioapi is to provide a
+    user-friendly and consistent interface to biological databases and
+    services: In a way that insulates the user from technicalities of
+    using web services API and creates a unified and easy-to-use interface
+    to biological and medical web services. This an ongoing project; New
+    databases and services will be added periodically. Feel free to
+    suggest any databases or services you often use.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -48,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rbioapi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.2</span>
       </span>
     </div>
 
@@ -123,16 +119,16 @@
 <div id="rbioapi-user-friendly-r-interface-to-biologic-web-services-api" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#rbioapi-user-friendly-r-interface-to-biologic-web-services-api" class="anchor"></a>rbioapi: User-Friendly R Interface to Biologic Web Services’ API</h1></div>
-<p>Moosa Rezwani 2021-05-17</p>
+<p>Moosa Rezwani 2021-05-21</p>
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
 <!-- badges: end -->
 <div id="what-does-rbioapi-do" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-does-rbioapi-do" class="anchor"></a>What does rbioapi do?</h2>
-<p>Currently fully supports Enrichr, miEAA, PANTHER, Reactome, STRING, and UniProt!</p>
-<p>rbioapi is an interface to Biological databases and web services. The goal of rbioapi is to provide a user-friendly and consistent interface to biological databases and services; It is designed in a way that insulates the user from technicalities when it comes to using API services and creates a unified and easy-to-implement tool to connect to biological databases and services.</p>
-<p>With rbioapi, You are not required to have any prior technical knowledge. <strong>Just fill in a function’s arguments and the rest is internally handled for you</strong>.</p>
+<p>Currently fully supports Enrichr, JASPAR, miEAA, PANTHER, Reactome, STRING, and UniProt!</p>
+<p>The goal of rbioapi is to provide a user-friendly and consistent interface to biological databases and services: In a way that insulates the user from technicalities of using web services API and creates a unified and easy-to-use interface to biological and medical web services.</p>
+<p>With rbioapi, you do not need to have technical knowledge about web services API or learn how to work with a new package for every biologic service or database. This an ongoing project; New databases and services will be added periodically. Feel free to <a href="https://github.com/moosa-r/rbioapi/issues" title="Issue section in rbioapi GitHub repository">suggest</a> any databases or services you often use.</p>
 </div>
 <div id="what-is-supported-by-rbioapi" class="section level2">
 <h2 class="hasAnchor">
@@ -155,6 +151,8 @@
 <ol>
 <li>
 <a href="https://maayanlab.cloud/Enrichr/" title="Enrichr">Enrichr</a> (<a href="https://moosa-r.github.io/rbioapi/articles/rbioapi_enrichr.html" title="rbioapi &amp; Enrichr vignette article">rbioapi vignette article</a>)</li>
+<li>
+<a href="http://jaspar.genereg.net/" title="JASPAR - A database of transcription factor binding profiles">JASPAR</a> (<a href="https://moosa-r.github.io/rbioapi/articles/rbioapi_jaspar.html" title="rbioapi &amp; JASPAR vignette article">rbioapi vignette article</a>)</li>
 </ol>
 <p>Each of the services has its dedicated vignette article. However, In this article, I will write about the general framework of rbioapi. Make sure to check the vignette article of each service to learn more about how to use them.</p>
 <p><strong>Note That:</strong> rbioapi is an ongoing project. New databases and services will be implemented periodically in order to gradually make the package as comprehensive as possible. Do you see yourself often using a certain database/service? Feel free to suggest any database/service by creating an issue on our GitHub <a href="https://github.com/moosa-r/" title="rbioapi GitHub repositry">repository</a>. I will appreciate any suggestions.</p>
@@ -206,6 +204,7 @@
 <li>rba_reactome_*</li>
 <li>rba_string_*</li>
 <li>rba_uniprot_*</li>
+<li>rba_jaspar_*</li>
 </ol>
 <p>There are three exceptions: <code><a href="reference/rba_options.html">rba_options()</a></code>, <code><a href="reference/rba_connection_test.html">rba_connection_test()</a></code>, and <code><a href="reference/rba_pages.html">rba_pages()</a></code>; These are helper functions. More on that later.</p>
 </div>
@@ -268,6 +267,8 @@
 <span class="co">#&gt; ---&gt;&gt;&gt; Enrichr :</span>
 <span class="co">#&gt; +++ The server is responding.</span>
 <span class="co">#&gt; ---&gt;&gt;&gt; Ensembl :</span>
+<span class="co">#&gt; +++ The server is responding.</span>
+<span class="co">#&gt; ---&gt;&gt;&gt; JASPAR :</span>
 <span class="co">#&gt; +++ The server is responding.</span>
 <span class="co">#&gt; ---&gt;&gt;&gt; miEAA :</span>
 <span class="co">#&gt; +++ The server is responding.</span>
@@ -344,6 +345,7 @@
 <li><a href="https://moosa-r.github.io/rbioapi/articles/rbioapi_reactome.html" title="rbioapi &amp; Reactome vignette article">Reactome</a></li>
 <li><a href="https://moosa-r.github.io/rbioapi/articles/rbioapi_string.html" title="rbioapi &amp; STRING vignette article">STRING</a></li>
 <li><a href="https://moosa-r.github.io/rbioapi/articles/rbioapi_uniprot.html" title="rbioapi &amp; UniProt vignette article">UniProt</a></li>
+<li><a href="https://moosa-r.github.io/rbioapi/articles/rbioapi_jaspar.html" title="rbioapi &amp; JASPAR vignette article">JASPAR</a></li>
 </ol>
 <p>You can also explore rbioapi <a href="https://moosa-r.github.io/rbioapi/reference/index.html">functions’ manual</a> in <a href="https://moosa-r.github.io/rbioapi/index.html" title="rbioapi website">rbioapi pkgdown webpage</a>.</p>
 </div>
@@ -368,7 +370,7 @@
 <span id="cb11-16"><a href="#cb11-16"></a><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span id="cb11-17"><a href="#cb11-17"></a><span class="co">#&gt; </span></span>
 <span id="cb11-18"><a href="#cb11-18"></a><span class="co">#&gt; other attached packages:</span></span>
-<span id="cb11-19"><a href="#cb11-19"></a><span class="co">#&gt; [1] rbioapi_0.7.1</span></span>
+<span id="cb11-19"><a href="#cb11-19"></a><span class="co">#&gt; [1] rbioapi_0.7.2</span></span>
 <span id="cb11-20"><a href="#cb11-20"></a><span class="co">#&gt; </span></span>
 <span id="cb11-21"><a href="#cb11-21"></a><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span id="cb11-22"><a href="#cb11-22"></a><span class="co">#&gt;  [1] digest_0.6.27     R6_2.5.0          jsonlite_1.7.2    magrittr_2.0.1   </span></span>
