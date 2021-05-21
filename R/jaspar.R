@@ -2,7 +2,7 @@
 
 #' List collections available in JASPAR
 #'
-#' JASPAR organize matrix profiles into collections.
+#' JASPAR organizes matrix profiles into collections.
 #'   Using this function, you can retrieve a list of available collections
 #'   in a JASPAR release.
 #'
@@ -79,7 +79,7 @@ rba_jaspar_collections <- function(release = 2020,
 #' Using this function you can list all matrix profiles
 #' that are available in a collection from a JASPAR release.
 #'
-#' The results are paginated. You can Control the page's size number
+#' The results are paginated. You can control the page's size number
 #'   with the function's arguments. Also, you can use \code{\link{rba_pages}}
 #'   to automatically iterate over multiple pages.
 #'
@@ -222,7 +222,7 @@ rba_jaspar_collections_matrices <- function(collection,
 #' Note that this is a search function. Thus, you are not required to fill
 #'   every argument; You may use whatever combinations of arguments you see
 #'   fit for your query.
-#'   \cr The results are paginated. You can Control the page's size number
+#'   \cr The results are paginated. You can control the page's size number
 #'   with the function's arguments. Also, you can use \code{\link{rba_pages}}
 #'   to automatically iterate over multiple pages.
 #'
@@ -276,9 +276,9 @@ rba_jaspar_collections_matrices <- function(collection,
 #'
 #' @examples
 #' \donttest{
-#' rba_jaspar_matrix_search(term = "p53")
-#' rba_jaspar_matrix_search(tf_name = "TP53")
-#' rba_jaspar_matrix_search(tf_name = "TP53", only_last_version = TRUE)
+#' rba_jaspar_matrix_search(term = "FOX")
+#' rba_jaspar_matrix_search(tf_name = "FOXP3")
+#' rba_jaspar_matrix_search(tf_name = "FOXP3", only_last_version = TRUE)
 #' rba_jaspar_matrix_search(tf_class = "Zipper-Type")
 #' rba_jaspar_matrix_search(tax_group = "insects")
 #' rba_jaspar_matrix_search(page_size = 100)
@@ -403,12 +403,12 @@ rba_jaspar_matrix_search <- function(term = NA,
   return(final_output)
 }
 
-#' List matrix profile versions associated to a base ID
+#' List matrix profile versions associated with a base ID
 #'
 #' Since JASPAR release 2010, the matrix profiles
 #'   are versioned; So, a matrix profile Identifier has "base_id.version"
 #'   naming schema. Using this function you can retrieve a list of matrix
-#'   profiles associated to a base (stable) ID.
+#'   profiles associated with a base (stable) ID.
 #'
 #' @param base_id Character: A base (stable) Identifier. A matrix profile
 #'  identifier has "base_id.version" naming schema
@@ -454,7 +454,9 @@ rba_jaspar_matrix_versions <- function(base_id,
   .rba_args(cons = list( list(arg = "base_id",
                               class = "character"),
                          list(arg = "order",
-                              class = "character"))
+                              class = "character")),
+            cond = list(list(quote(grepl("\\.\\d+" ,base_id)),
+                             "base_id cannot be versioned. "))
   )
 
   .msg("Retrieving a list of matrix profile versions under base ID %s.",
@@ -498,7 +500,7 @@ rba_jaspar_matrix_versions <- function(base_id,
 #'   Identifier. It has "base_id.version" naming schema.
 #' @param file_format Character: Instead of returning a R object, you
 #'   can directly download the profile matrix in file with this format.
-#'   Supported formats are: "yaml", "jaspar", "transfac", and "pfm"
+#'   Supported formats are: "yaml", "jaspar", "transfac", "meme" and "pfm"
 #' @param save_to NA or Character:\itemize{
 #'   \item NA: (only if file_format was provided) Save the file to an
 #'     automatically-generated path.
@@ -531,6 +533,11 @@ rba_jaspar_matrix_versions <- function(base_id,
 #' \donttest{
 #' rba_jaspar_matrix("MA0600.2")
 #' }
+#' \dontrun{
+#' rba_jaspar_matrix(matrix_id = "MA0600.2",
+#'                   file_format = "meme",
+#'                   save_to = "my_matrix.meme")
+#' }
 #'
 #' @family "JASPAR"
 #' @export
@@ -539,7 +546,7 @@ rba_jaspar_matrix <- function(matrix_id,
                               save_to = NA,
                               ...) {
   ## Load Global Options
-  .rba_ext_args(...)
+  .rba_ext_args(..., ignore_save = TRUE)
   ## Check User-input Arguments
   .rba_args(cons = list(list(arg = "matrix_id",
                              class = "character"),
@@ -548,31 +555,39 @@ rba_jaspar_matrix <- function(matrix_id,
                              val = c("yaml",
                                      "jaspar",
                                      "transfac",
-                                     "pfm")),
+                                     "pfm",
+                                     "meme")),
                         list(arg = "save_to",
                              class = "character")
   ))
 
   .msg("Retrieving details of matrix profile with ID %s.", matrix_id)
 
-  ## Build GET API Request's query
-  call_query <- list("format" = ifelse(is.na(file_format),
-                                       "json",
-                                       file_format))
-
   ## Build Function-Specific Call
   if (is.na(file_format)) {
-    parse_input <- list("json->list_simp",
-                        function(x) {
-                          x$pfm <- as.matrix(t(as.data.frame(x$pfm[c("A", "C", "G", "T")])))
-                          return(x)})
+    accept_input <- "application/json"
+
+    parser_input <- list("json->list_simp",
+                         function(x) {
+                           x$pfm <- as.matrix(t(as.data.frame(x$pfm[c("A", "C", "G", "T")])))
+                           return(x)})
+
     save_to_input <- ifelse(!is.na(save_to) || isTRUE(save_to),
                             .rba_file("jaspar_matrix.json",
                                       save_to = save_to),
                             .rba_file("jaspar_matrix.json")
-                            )
+    )
+
   } else {
-    parse_input <- "text->chr"
+    accept_input <- switch(file_format,
+                           "yaml" = "application/yaml",
+                           "jaspar" = "text/jaspar",
+                           "transfac" = "text/transfac",
+                           "pfm" = "text/pfm",
+                           "meme" = "text/meme")
+
+    parser_input <- "text->chr"
+
     save_to_input <- .rba_file(file = sprintf("%s.%s",
                                               matrix_id, file_format),
                                save_to = ifelse(is.na(save_to),
@@ -586,9 +601,8 @@ rba_jaspar_matrix <- function(matrix_id,
                           path = sprintf("%smatrix/%s/",
                                          .rba_stg("jaspar", "pth"),
                                          matrix_id),
-                          query = call_query,
-                          # accept = "application/json",
-                          parser = parse_input,
+                          accept = accept_input,
+                          parser = parser_input,
                           save_to = save_to_input)
 
   ## Call API
@@ -600,7 +614,7 @@ rba_jaspar_matrix <- function(matrix_id,
 
 #' Get information about JASPAR database releases
 #'
-#' If a release number was provided, this function will returns the details
+#' If a release number was provided, this function will return the details
 #'   of that release. Otherwise, if the function was called without "release"
 #'   argument, a list of all JASPAR database releases will be returned.
 #'
@@ -634,7 +648,7 @@ rba_jaspar_matrix <- function(matrix_id,
 #' @examples
 #' \donttest{
 #' rba_jaspar_releases()
-#' rba_jaspar_releases(2020)
+#' rba_jaspar_releases(7)
 #' }
 #'
 #' @family "JASPAR"
@@ -665,19 +679,23 @@ rba_jaspar_releases  <- function(release_number = NA,
                                 1000)
   )
 
-  path_input <- sprintf("%sreleases/%s",
-                        .rba_stg("jaspar", "pth"),
-                        ifelse(is.na(release_number),
-                               yes = "",
-                               no = release_number))
-
   ## Build Function-Specific Call
+  if (is.na(release_number)) {
+    path_input <- paste0(.rba_stg("jaspar", "pth"), "releases/")
+    parser_input <- list("json->list_simp",
+                         function(x) x[["results"]])
+  } else {
+    path_input <- sprintf("%sreleases/%s",
+                          .rba_stg("jaspar", "pth"), release_number)
+
+    parser_input <- "json->list_simp"
+  }
   input_call <- .rba_httr(httr = "get",
                           url = .rba_stg("jaspar", "url"),
                           path = path_input,
                           query = call_query,
                           accept = "application/json",
-                          parser = "json->list_simp",
+                          parser = parser_input,
                           save_to = .rba_file("jaspar_matrix.json"))
 
   ## Call API
@@ -690,7 +708,7 @@ rba_jaspar_releases  <- function(release_number = NA,
 #' Get binding sites of a matrix profile
 #'
 #' Use this function to retrieve a list of transcription factor binding sites
-#'   associated to a matrix profile.
+#'   associated with a matrix profile.
 #'
 #' @param matrix_id Character: A matrix profile
 #'   Identifier. It has "base_id.version" naming schema.
@@ -759,7 +777,7 @@ rba_jaspar_sites <- function(matrix_id,
 
 #' List available species in JASPAR
 #'
-#' JASPAR curates matrix profiles from multiple species
+#' JASPAR organizes matrix profiles from multiple species
 #'   in six taxonomic groups. Use this function to retrieve a list of
 #'   available species in a JASPAR database release.
 #'
@@ -856,7 +874,7 @@ rba_jaspar_species <- function(release = 2020,
 #'   in six taxonomic groups. Using this function you can list all
 #'   matrix profiles that are available in a JASPAR  release from a species.
 #'
-#' The results are paginated. You can Control the page's size number
+#' The results are paginated. You can control the page's size number
 #'   with the function's arguments. Also, you can use \code{\link{rba_pages}}
 #'   to automatically iterate over multiple pages.
 #'
@@ -975,7 +993,7 @@ rba_jaspar_species_matrices <- function(tax_id,
 
 #' List available taxonomic groups in JASPAR
 #'
-#' JASPAR curates matrix profiles from multiple species
+#' JASPAR organizes matrix profiles from multiple species
 #'   in six taxonomic groups. Use this function to retrieve a list of
 #'   available taxonomic groups in a JASPAR database release.
 #'
@@ -1048,12 +1066,12 @@ rba_jaspar_taxons <- function(release = 2020,
 
 #' List matrices available in JASPAR of a taxonomic group
 #'
-#' JASPAR curates matrix profiles from multiple species
+#' JASPAR organizes matrix profiles from multiple species
 #'   in six taxonomic groups. Using this function you can list all
 #'   matrix profiles that are available in a JASPAR release from a
 #'   taxonomic group.
 #'
-#' The results are paginated. You can Control the page's size number
+#' The results are paginated. You can control the page's size number
 #'   with the function's arguments. Also, you can use \code{\link{rba_pages}}
 #'   to automatically iterate over multiple pages.
 #'
@@ -1190,7 +1208,7 @@ rba_jaspar_taxons_matrices <- function(tax_group,
 #' Note that this is a search function. Thus, you are not required to fill
 #'   every argument; You may use whatever combinations of arguments you see
 #'   fit for your query.
-#'   \cr The results are paginated. You can Control the page's size number
+#'   \cr The results are paginated. You can control the page's size number
 #'   with the function's arguments. Also, you can use \code{\link{rba_pages}}
 #'   to automatically iterate over multiple pages.
 #'
@@ -1235,7 +1253,7 @@ rba_jaspar_taxons_matrices <- function(tax_group,
 #'
 #' @examples
 #' \donttest{
-#' rba_jaspar_tffm_search(term = "p53")
+#' rba_jaspar_tffm_search(term = "FOX")
 #' rba_jaspar_tffm_search(tax_group = "insects")
 #' rba_jaspar_tffm_search(page_size = 100)
 #' }

@@ -48,13 +48,13 @@ A list that contains a data frame with information of matrix
   profiles available for the taxonomic group.
 }
 \description{
-JASPAR curates matrix profiles from multiple species
+JASPAR organizes matrix profiles from multiple species
   in six taxonomic groups. Using this function you can list all
   matrix profiles that are available in a JASPAR release from a
   taxonomic group.
 }
 \details{
-The results are paginated. You can Control the page's size number
+The results are paginated. You can control the page's size number
   with the function's arguments. Also, you can use \code{\link{rba_pages}}
   to automatically iterate over multiple pages.
 }

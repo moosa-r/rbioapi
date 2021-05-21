@@ -2,7 +2,7 @@
 % Please edit documentation in R/jaspar.R
 \name{rba_jaspar_matrix_versions}
 \alias{rba_jaspar_matrix_versions}
-\title{List matrix profile versions associated to a base ID}
+\title{List matrix profile versions associated with a base ID}
 \usage{
 rba_jaspar_matrix_versions(base_id, order = NA, ...)
 }
@@ -25,7 +25,7 @@ A data frame of matrix profiles' versions information.
 Since JASPAR release 2010, the matrix profiles
   are versioned; So, a matrix profile Identifier has "base_id.version"
   naming schema. Using this function you can retrieve a list of matrix
-  profiles associated to a base (stable) ID.
+  profiles associated with a base (stable) ID.
 }
 \section{Corresponding API Resources}{
 

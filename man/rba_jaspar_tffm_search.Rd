@@ -56,7 +56,7 @@ You can use this function to list the JASPAR TF flexible models (TFFMs)
 Note that this is a search function. Thus, you are not required to fill
   every argument; You may use whatever combinations of arguments you see
   fit for your query.
-  \cr The results are paginated. You can Control the page's size number
+  \cr The results are paginated. You can control the page's size number
   with the function's arguments. Also, you can use \code{\link{rba_pages}}
   to automatically iterate over multiple pages.
 }
@@ -67,7 +67,7 @@ Note that this is a search function. Thus, you are not required to fill
 
 \examples{
 \donttest{
-rba_jaspar_tffm_search(term = "p53")
+rba_jaspar_tffm_search(term = "FOX")
 rba_jaspar_tffm_search(tax_group = "insects")
 rba_jaspar_tffm_search(page_size = 100)
 }

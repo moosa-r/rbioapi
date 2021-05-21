@@ -12,7 +12,7 @@ Identifier. It has "base_id.version" naming schema.}
 
 \item{file_format}{Character: Instead of returning a R object, you
 can directly download the profile matrix in file with this format.
-Supported formats are: "yaml", "jaspar", "transfac", and "pfm"}
+Supported formats are: "yaml", "jaspar", "transfac", "meme" and "pfm"}
 
 \item{save_to}{NA or Character:\itemize{
 \item NA: (only if file_format was provided) Save the file to an
@@ -41,6 +41,11 @@ Using this function you can retrieve a Position Frequency Matrices (PFM)
 \examples{
 \donttest{
 rba_jaspar_matrix("MA0600.2")
+}
+\dontrun{
+rba_jaspar_matrix(matrix_id = "MA0600.2",
+                  file_format = "meme",
+                  save_to = "my_matrix.meme")
 }
 
 }

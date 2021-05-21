@@ -18,7 +18,7 @@ A list that contains a data frame with binding sites information.
 }
 \description{
 Use this function to retrieve a list of transcription factor binding sites
-  associated to a matrix profile.
+  associated with a matrix profile.
 }
 \section{Corresponding API Resources}{
 

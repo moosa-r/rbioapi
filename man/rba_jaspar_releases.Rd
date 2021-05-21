@@ -19,7 +19,7 @@ A list that contains all JASPAR database releases' information or
   details of a particular release.
 }
 \description{
-If a release number was provided, this function will returns the details
+If a release number was provided, this function will return the details
   of that release. Otherwise, if the function was called without "release"
   argument, a list of all JASPAR database releases will be returned.
 }
@@ -32,7 +32,7 @@ If a release number was provided, this function will returns the details
 \examples{
 \donttest{
 rba_jaspar_releases()
-rba_jaspar_releases(2020)
+rba_jaspar_releases(7)
 }
 
 }

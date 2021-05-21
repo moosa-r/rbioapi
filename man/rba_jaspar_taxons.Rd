@@ -17,7 +17,7 @@ arguments documentation for more information on available options.}
 A data frame with information of available species.
 }
 \description{
-JASPAR curates matrix profiles from multiple species
+JASPAR organizes matrix profiles from multiple species
   in six taxonomic groups. Use this function to retrieve a list of
   available taxonomic groups in a JASPAR database release.
 }

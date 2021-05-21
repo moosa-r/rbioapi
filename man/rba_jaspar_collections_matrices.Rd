@@ -54,7 +54,7 @@ Using this function you can list all matrix profiles
 that are available in a collection from a JASPAR release.
 }
 \details{
-The results are paginated. You can Control the page's size number
+The results are paginated. You can control the page's size number
   with the function's arguments. Also, you can use \code{\link{rba_pages}}
   to automatically iterate over multiple pages.
 }

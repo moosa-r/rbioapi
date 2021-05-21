@@ -17,7 +17,7 @@ arguments documentation for more information on available options.}
 A data frame with collections' names and URLs.
 }
 \description{
-JASPAR organize matrix profiles into collections.
+JASPAR organizes matrix profiles into collections.
   Using this function, you can retrieve a list of available collections
   in a JASPAR release.
 }
