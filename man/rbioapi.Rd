@@ -31,7 +31,7 @@ Currently fully supports Enrichr, JASPAR, miEAA, PANTHER,
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://moosa-r.github.io/rbioapi}
+  \item \url{https://moosa-r.github.io/rbioapi/}
   \item \url{https://github.com/moosa-r/rbioapi}
   \item Report bugs at \url{https://github.com/moosa-r/rbioapi/issues}
 }

@@ -16,7 +16,7 @@ Description: Currently fully supports Enrichr, JASPAR, miEAA, PANTHER,
     databases and services will be added periodically. Feel free to
     suggest any databases or services you often use.
 License: GPL-3
-URL: https://moosa-r.github.io/rbioapi, https://github.com/moosa-r/rbioapi
+URL: https://moosa-r.github.io/rbioapi/, https://github.com/moosa-r/rbioapi
 BugReports: https://github.com/moosa-r/rbioapi/issues
 Imports:
     httr,
