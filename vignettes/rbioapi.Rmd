@@ -58,6 +58,7 @@ On CRAN (Stable) version: (<https://cran.r-project.org/package=rbioapi>)
 Only on Github (Developmental) version: (<https://github.com/moosa-r/rbioapi/>):
 
 6.  [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr") ([rbioapi vignette article](rbioapi_enrichr.html "rbioapi & Enrichr vignette article"))
+7.  [JASPAR](http://jaspar.genereg.net/ "JASPAR - A database of transcription factor binding profiles") ([rbioapi vignette article](rbioapi_jaspar.html "rbioapi & Enrichr vignette article"))
 
 Each of the services has its dedicated vignette article. However, In this article, I will write about the general framework of rbioapi. Make sure to check the vignette article of each service to learn more about how to use them.
 
@@ -228,6 +229,7 @@ Each supported service has a dedicated vignette article. Make sure to check thos
 4.  [Reactome](rbioapi_reactome.html "rbioapi & Reactome vignette article")
 5.  [STRING](rbioapi_string.html "rbioapi & STRING vignette article")
 6.  [UniProt](rbioapi_uniprot.html "rbioapi & UniProt vignette article")
+7.  [JASPAR](rbioapi_jaspar.html "rbioapi & JASPAR vignette article")
 
 You can also explore rbioapi [functions' manual](https://moosa-r.github.io/rbioapi/reference/index.html) in [rbioapi pkgdown webpage](https://moosa-r.github.io/rbioapi/index.html "rbioapi website").
 
@@ -238,4 +240,3 @@ You can also explore rbioapi [functions' manual](https://moosa-r.github.io/rbioa
 ```{r sessionInfo, echo=FALSE}
 sessionInfo()
 ```
-

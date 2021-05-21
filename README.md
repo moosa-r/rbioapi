@@ -1,7 +1,7 @@
 rbioapi: User-Friendly R Interface to Biologic Web Services’ API
 ================
 Moosa Rezwani
-2021-05-17
+2021-05-21
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
@@ -52,6 +52,9 @@ Only on Github (Developmental) version:
 6.  [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr") ([rbioapi
     vignette
     article](https://moosa-r.github.io/rbioapi/articles/rbioapi_enrichr.html "rbioapi & Enrichr vignette article"))
+7.  [JASPAR](http://jaspar.genereg.net/ "JASPAR - A database of transcription factor binding profiles")
+    ([rbioapi vignette
+    article](https://moosa-r.github.io/rbioapi/articles/rbioapi_jaspar.html "rbioapi & JASPAR vignette article"))
 
 Each of the services has its dedicated vignette article. However, In
 this article, I will write about the general framework of rbioapi. Make
@@ -141,6 +144,7 @@ naming schema:
 4.  rba\_reactome\_\*
 5.  rba\_string\_\*
 6.  rba\_uniprot\_\*
+7.  rba\_jaspar\_\*
 
 There are three exceptions: `rba_options()`, `rba_connection_test()`,
 and `rba_pages()`; These are helper functions. More on that later.
@@ -229,6 +233,8 @@ rba_connection_test()
 #> --->>> Enrichr :
 #> +++ The server is responding.
 #> --->>> Ensembl :
+#> +++ The server is responding.
+#> --->>> JASPAR :
 #> +++ The server is responding.
 #> --->>> miEAA :
 #> +++ The server is responding.
@@ -342,6 +348,7 @@ check those too.
 4.  [Reactome](https://moosa-r.github.io/rbioapi/articles/rbioapi_reactome.html "rbioapi & Reactome vignette article")
 5.  [STRING](https://moosa-r.github.io/rbioapi/articles/rbioapi_string.html "rbioapi & STRING vignette article")
 6.  [UniProt](https://moosa-r.github.io/rbioapi/articles/rbioapi_uniprot.html "rbioapi & UniProt vignette article")
+7.  [JASPAR](https://moosa-r.github.io/rbioapi/articles/rbioapi_jaspar.html "rbioapi & JASPAR vignette article")
 
 You can also explore rbioapi [functions’
 manual](https://moosa-r.github.io/rbioapi/reference/index.html) in
@@ -368,7 +375,7 @@ webpage](https://moosa-r.github.io/rbioapi/index.html "rbioapi website").
     #> [1] stats     graphics  grDevices utils     datasets  methods   base     
     #> 
     #> other attached packages:
-    #> [1] rbioapi_0.7.1
+    #> [1] rbioapi_0.7.2
     #> 
     #> loaded via a namespace (and not attached):
     #>  [1] digest_0.6.27     R6_2.5.0          jsonlite_1.7.2    magrittr_2.0.1   
