@@ -1,4 +1,8 @@
-# rbioapi 0.7.1 (Current Github version)
+# rbioapi 0.7.2 (Current Github version)
+
+* JASPAR is supported.
+
+# rbioapi 0.7.1
 
 * Enrichr is supported.
 
