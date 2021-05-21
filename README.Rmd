@@ -29,11 +29,11 @@ rba_options(timeout = 600)
 
 ## What does rbioapi do?
 
-Currently fully supports Enrichr, miEAA, PANTHER, Reactome, STRING, and UniProt!
+Currently fully supports Enrichr, JASPAR, miEAA, PANTHER, Reactome, STRING, and UniProt!
 
-rbioapi is an interface to Biological databases and web services. The goal of rbioapi is to provide a user-friendly and consistent interface to biological databases and services; It is designed in a way that insulates the user from technicalities when it comes to using API services and creates a unified and easy-to-implement tool to connect to biological databases and services.
+The goal of rbioapi is to provide a user-friendly and consistent interface to biological databases and services: In a way that insulates the user from technicalities of using web services API and creates a unified and easy-to-use interface to biological and medical web services.
 
-With rbioapi, You are not required to have any prior technical knowledge. **Just fill in a function's arguments and the rest is internally handled for you**.
+With rbioapi, you do not need to have technical knowledge about web services API or learn how to work with a new package for every biologic service or database. This an ongoing project; New databases and services will be added periodically. Feel free to [suggest](https://github.com/moosa-r/rbioapi/issues "Issue section in rbioapi GitHub repository") any databases or services you often use.
 
 ## What is Supported by rbioapi?
 

@@ -12,7 +12,7 @@ Currently fully supports Enrichr, JASPAR, miEAA, PANTHER,
     services: In a way that insulates the user from technicalities of
     using web services API and creates a unified and easy-to-use interface
     to biological and medical web services. This an ongoing project; New
-    databases and services will be implemented periodically. Feel free to
+    databases and services will be added periodically. Feel free to
     suggest any databases or services you often use.
 }
 \section{Supported Database/Services}{
