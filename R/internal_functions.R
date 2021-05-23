@@ -723,7 +723,7 @@
                    cond)
     return(cond)
   } else {
-    stop("Internal error")
+    stop("Internal Error: `what` should be `cons` or `cond.`", call. = TRUE)
   }
 }
 
@@ -756,7 +756,8 @@
                          "regex" = grepl(pattern = cons_i[["regex"]],
                                          x = cons_i[["evl_arg"]],
                                          ignore.case = FALSE, perl = TRUE),
-                         stop("internal Error, constrian is not defiend: ", what)))
+                         stop("internal Error: constrian is not defiend: ",
+                              what, call. = TRUE)))
     return(output)
   } else {
     return(TRUE)
@@ -870,7 +871,7 @@
   } else if (is.character(cond_i[[1]])) {
     cond_i_1 <- eval(parse(text = cond_i[[1]]), envir = parent.frame(3))
   } else {
-    stop("Internal error, the first element in the condition sublist",
+    stop("Internal error: the first element in the condition sublist",
          "should be either a charachter or quoted call!", call. = TRUE)
   }
   ## Create an Error message
@@ -890,8 +891,8 @@
                       "1" = list(msg = sprintf("Argument's conditions are not satisfied; `%s` is TRUE.",
                                                as.character(enquote(cond_i[[1]]))[[2]]),
                                  warn = FALSE),
-                      stop("Internal error, invalid condition: ",
-                           enquote(cond_i[[1]])[[2]], call. = FALSE)
+                      stop("Internal error: invalid condition: ",
+                           enquote(cond_i[[1]])[[2]], call. = TRUE)
     )
     return(err_obj)
   } else {
