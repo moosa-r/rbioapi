@@ -162,6 +162,9 @@
 #' @param verbose logical: Generate informative messages.
 #' @param diagnostics logical: Generate diagnostics and detailed messages with
 #'   internal information.
+#' @param skip_error logical: If TRUE, in case of an error HTTP status other
+#'  than 200, instead of halting the code execution, the error message will be
+#'  returned as the function's output.
 #'
 #' @return TRUE if connected to the internet, a character string if not.
 #' @family internal_internet_connectivity
@@ -169,7 +172,8 @@
 .rba_net_handle <- function(retry_max = 1,
                             retry_wait = 10,
                             verbose = FALSE,
-                            diagnostics = FALSE) {
+                            diagnostics = FALSE,
+                            skip_error = FALSE) {
   if (isTRUE(diagnostics)) {message("Testing the internet connection.")}
   test_call <- quote(
     httr::status_code(httr::HEAD("https://www.google.com/",
@@ -193,11 +197,11 @@
 
   if (net_status == 200) {
     if (isTRUE(diagnostics)) {message("Device is connected to the internet!")}
+    return(TRUE)
   } else {
-    stop("No internet connection; Stopping code execution!",
-         call. = diagnostics)
+    if (isTRUE(diagnostics)) {message("No internet connection!")}
+    return(FALSE)
   } #end of if net_test
-  return(net_status == 200)
 }
 
 #' Translate HTTP Status Code to Human-Readable Explanation
@@ -551,22 +555,21 @@
     net_connected <- .rba_net_handle(retry_max = retry_max,
                                      retry_wait = retry_wait,
                                      verbose = verbose,
-                                     diagnostics = diagnostics)
+                                     diagnostics = diagnostics,
+                                     skip_error = skip_error)
     if (isTRUE(net_connected)) {
       ## 2.1.1 net_connection test is passed
       response <- try(eval(input_call, envir = parent.frame(n = 2)),
                       silent = !diagnostics)
-    } else {
-      ## 2.1.2 net_connection test is not passed
-      stop("No internet connection; Stopping code execution!",
-           call. = diagnostics)
     }
   } # end of step 2
 
   ## 3 Decide what to return
   if (!inherits(response, "response")) {
     ## 3.1 errors un-related to server's response
-    error_message <- response
+    error_message <- ifelse(test = net_connected,
+                            yes = response,
+                            no = "No internet connection. Stopping code execution!")
     if (isTRUE(skip_error)) {
       return(as.character(error_message))
     } else {
