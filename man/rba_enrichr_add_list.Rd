@@ -4,7 +4,7 @@
 \alias{rba_enrichr_add_list}
 \title{Upload Your Gene-List to Enrichr}
 \usage{
-rba_enrichr_add_list(gene_list, description = NA, organism = "human", ...)
+rba_enrichr_add_list(gene_list, description = NULL, organism = "human", ...)
 }
 \arguments{
 \item{gene_list}{A vector with Entrez gene symbols.}

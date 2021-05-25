@@ -6,7 +6,7 @@
 \usage{
 rba_enrichr(
   gene_list,
-  description = NA,
+  description = NULL,
   gene_set_library = "all",
   regex_library_name = TRUE,
   organism = "human",

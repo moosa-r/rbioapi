@@ -132,7 +132,7 @@ rba_enrichr_libs <- function(store_in_options = FALSE,
 #' @seealso \code{\link{rba_enrichr}}
 #' @export
 rba_enrichr_add_list <- function(gene_list,
-                                 description = NA,
+                                 description = NULL,
                                  organism = "human",
                                  ...){
   ## Load Global Options
@@ -155,7 +155,7 @@ rba_enrichr_add_list <- function(gene_list,
                                       "list" = paste(unique(gene_list),
                                                      collapse = "\n")),
                           list("description",
-                               !is.na(description),
+                               !is.null(description),
                                description))
 
   ## Build Function-Specific Call
@@ -625,7 +625,7 @@ rba_enrichr_gene_map <- function(gene,
 #' @family "Enrichr"
 #' @export
 rba_enrichr <- function(gene_list,
-                        description = NA,
+                        description = NULL,
                         gene_set_library = "all",
                         regex_library_name = TRUE,
                         organism = "human",
