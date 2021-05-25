@@ -8,7 +8,7 @@ rba_reactome_interactors_static(
   proteins,
   endpoint = "details",
   only_diagrammed = FALSE,
-  species = NA,
+  species = NULL,
   ...
 )
 }

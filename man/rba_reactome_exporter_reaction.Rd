@@ -6,17 +6,17 @@
 \usage{
 rba_reactome_exporter_reaction(
   event_id,
-  save_to = NA,
+  save_to = NULL,
   output_format = "png",
   resource = "TOTAL",
   diagram_profile = "Modern",
   analysis_profile = "Standard",
-  token = NA,
-  exp_column = NA,
+  token = NULL,
+  exp_column = NULL,
   image_quality = 5,
-  flag_element = NA,
+  flag_element = NULL,
   flg_interactors = TRUE,
-  sel = NA,
+  sel = NULL,
   title = TRUE,
   margin = 15,
   ...
@@ -27,8 +27,8 @@ rba_reactome_exporter_reaction(
 \href{https://reactome.org/content/schema/ReactionLikeEvent}{Reaction-like
 event}'s identifier.}
 
-\item{save_to}{NA or Character:\itemize{
-\item NA: Save the file to an automatically-generated path.
+\item{save_to}{NULL or Character:\itemize{
+\item NULL: Save the file to an automatically-generated path.
 \item Character string: A valid file path to save the file to.}}
 
 \item{output_format}{Images format, Can be one of: png (default), jpeg,

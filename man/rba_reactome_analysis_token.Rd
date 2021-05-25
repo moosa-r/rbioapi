@@ -10,10 +10,10 @@ rba_reactome_analysis_token(
   sort_by = "ENTITIES_PVALUE",
   order = "ASC",
   resource = "TOTAL",
-  p_value = NA,
+  p_value = NULL,
   include_disease = TRUE,
-  min = NA,
-  max = NA,
+  min = NULL,
+  max = NULL,
   ...
 )
 }

@@ -5,8 +5,8 @@
 \title{The interface From Reactome to PSICQUIC}
 \usage{
 rba_reactome_interactors_psicquic(
-  proteins = NA,
-  resource = NA,
+  proteins = NULL,
+  resource = NULL,
   details = TRUE,
   ...
 )

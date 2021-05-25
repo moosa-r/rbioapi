@@ -8,7 +8,7 @@ rba_reactome_people_id(
   person_id,
   authored_pathways = FALSE,
   publications = FALSE,
-  attribute_name = NA,
+  attribute_name = NULL,
   ...
 )
 }

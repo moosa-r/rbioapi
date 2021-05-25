@@ -10,8 +10,8 @@ rba_reactome_analysis_species(
   order = "ASC",
   resource = "TOTAL",
   p_value = 1,
-  min = NA,
-  max = NA,
+  min = NULL,
+  max = NULL,
   ...
 )
 }

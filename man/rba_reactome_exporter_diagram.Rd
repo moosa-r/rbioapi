@@ -6,19 +6,19 @@
 \usage{
 rba_reactome_exporter_diagram(
   event_id,
-  save_to = NA,
+  save_to = NULL,
   create_document = FALSE,
   resource = "TOTAL",
   diagram_profile = "Modern",
   analysis_profile = "Standard",
-  token = NA,
-  exp_column = NA,
+  token = NULL,
+  exp_column = NULL,
   document_level = 1,
   output_format = "png",
   image_quality = 5,
-  flag_element = NA,
+  flag_element = NULL,
   flg_interactors = TRUE,
-  sel = NA,
+  sel = NULL,
   title = TRUE,
   margin = 15,
   ehld = FALSE,
@@ -28,8 +28,8 @@ rba_reactome_exporter_diagram(
 \arguments{
 \item{event_id}{Reactome event's identifier.}
 
-\item{save_to}{NA or Character:\itemize{
-\item NA: Save the file to an automatically-generated path.
+\item{save_to}{NULL or Character:\itemize{
+\item NULL: Save the file to an automatically-generated path.
 \item Character string: A valid file path to save the file to.}}
 
 \item{create_document}{logical: Create PDF document instead of image? (

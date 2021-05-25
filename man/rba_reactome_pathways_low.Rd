@@ -8,7 +8,7 @@ rba_reactome_pathways_low(
   entity_id,
   with_diagram = FALSE,
   all_forms = FALSE,
-  species = NA,
+  species = NULL,
   ...
 )
 }

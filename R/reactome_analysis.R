@@ -7,7 +7,7 @@
 #'
 #' @param input Pass on caller function's input argument to this.
 #' @param type Pass on caller function's input_format argument to this.
-#'   (default = NA)
+#'   (default = NULL)
 #' @param handle Logical: If TRUE (default), The input will be -if necessary-
 #'   written to a temp file to facilitate data uploading to Reactome.
 #'   If False, The Input will only be identified.
@@ -19,12 +19,12 @@
 #'
 #' @noRd
 .rba_reactome_input <- function(input,
-                                type = NA,
+                                type = NULL,
                                 handle = TRUE){
   diagnostics <- get0("diagnostics", envir = parent.frame(1),
                       ifnotfound = getOption("rba_diagnostics"))
   ### 1 identify input
-  if (is.na(type)) {
+  if (is.null(type)) {
     if (is.data.frame(input) |
         is.matrix(input)) {
       type <- "table"
@@ -215,17 +215,17 @@
 #' @family "Reactome Analysis Service"
 #' @export
 rba_reactome_analysis <- function(input,
-                                  input_format = NA,
+                                  input_format = NULL,
                                   projection = FALSE,
                                   interactors = FALSE,
-                                  species = NA,
+                                  species = NULL,
                                   sort_by = "ENTITIES_PVALUE",
                                   order = "ASC",
                                   resource = "TOTAL",
                                   p_value = 1,
                                   include_disease = TRUE,
-                                  min = NA,
-                                  max = NA,
+                                  min = NULL,
+                                  max = NULL,
                                   ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -286,7 +286,7 @@ rba_reactome_analysis <- function(input,
                              class = "numeric"),
                         list(arg = "max",
                              class = "numeric")),
-            cond = list(list("sum(projection, !is.na(species)) == 2",
+            cond = list(list("sum(projection, !is.null(species)) == 2",
                              "You cannot Provide 'species' when 'projection' argument is TRUE"))
   )
 
@@ -301,16 +301,16 @@ rba_reactome_analysis <- function(input,
 
   call_query <- .rba_query(init = call_query,
                            list("species",
-                                !is.na(species),
+                                !is.null(species),
                                 species),
                            list("pValue",
-                                !is.na(p_value),
+                                !is.null(p_value),
                                 p_value),
                            list("min",
-                                !is.na(min),
+                                !is.null(min),
                                 min),
                            list("max",
-                                !is.na(max),
+                                !is.null(max),
                                 max))
   ## Build POST API Request's URL
   # handle provided input
@@ -377,8 +377,8 @@ rba_reactome_analysis <- function(input,
 #'    \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
 #'    Data Schema: Entries: Species}.
-#' @param save_to NA or Character:\itemize{
-#'   \item NA: Save the file to an automatically-generated path.
+#' @param save_to NULL or Character:\itemize{
+#'   \item NULL: Save the file to an automatically-generated path.
 #'   \item Character string: A valid file path to save the file to.}
 #' @param number Numeric: Maximum number of the reported pathways. Cannot not
 #'   be greater than 50.
@@ -420,7 +420,7 @@ rba_reactome_analysis <- function(input,
 #' @export
 rba_reactome_analysis_pdf <- function(token,
                                       species,
-                                      save_to = NA,
+                                      save_to = NULL,
                                       number  = 25,
                                       resource = "TOTAL",
                                       diagram_profile = "Modern",
@@ -480,7 +480,7 @@ rba_reactome_analysis_pdf <- function(token,
                                 resource != "TOTAL",
                                 resource),
                            list("token",
-                                !is.na(token),
+                                !is.null(token),
                                 token),
                            list("diagramProfile",
                                 diagram_profile != "Modern",
@@ -494,7 +494,7 @@ rba_reactome_analysis_pdf <- function(token,
 
   # create file_path
   save_to <- .rba_file(file = paste0(token, ".pdf"),
-                       save_to = ifelse(is.na(save_to),
+                       save_to = ifelse(is.null(save_to) || is.na(save_to),
                                         yes = TRUE,
                                         no = save_to))
   ## Build Function-Specific Call
@@ -549,8 +549,8 @@ rba_reactome_analysis_pdf <- function(token,
 #'   results associated with your provided token.
 #'   \item "results_gz" Same as "results", but the output will be compress
 #'   (gzipped).}
-#' @param save_to NA or Character:\itemize{
-#'   \item NA: Save the file to an automatically-generated path.
+#' @param save_to NULL or Character:\itemize{
+#'   \item NULL: Save the file to an automatically-generated path.
 #'   \item Character string: A valid file path to save the file to.}
 #' @param resource (Only when request is "found_ids" or "pathways")
 #'   Filter results based on the resource. Default is "TOTAL",
@@ -586,7 +586,7 @@ rba_reactome_analysis_pdf <- function(token,
 #' @export
 rba_reactome_analysis_download <- function(token,
                                            request,
-                                           save_to = NA,
+                                           save_to = NULL,
                                            resource = "TOTAL",
                                            ...) {
   ## Load Global Options
@@ -654,7 +654,7 @@ rba_reactome_analysis_download <- function(token,
   }
   # create file_path
   save_to <- .rba_file(file = paste0(request, "_", token, ".", output_format),
-                       save_to = ifelse(is.na(save_to),
+                       save_to = ifelse(is.null(save_to) || is.na(save_to),
                                         yes = TRUE,
                                         no = save_to))
   input_call <- .rba_httr(httr = "get",
@@ -717,7 +717,7 @@ rba_reactome_analysis_download <- function(token,
 #' @family "Reactome Analysis Service"
 #' @export
 rba_reactome_analysis_import <- function(input,
-                                         input_format = NA,
+                                         input_format = NULL,
                                          ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -812,7 +812,7 @@ rba_reactome_analysis_import <- function(input,
 #' @family "Reactome Analysis Service"
 #' @export
 rba_reactome_analysis_mapping <- function(input,
-                                          input_format = NA,
+                                          input_format = NULL,
                                           projection = FALSE,
                                           interactors = FALSE,
                                           ...) {
@@ -938,8 +938,8 @@ rba_reactome_analysis_species <- function(species_dbid,
                                           order = "ASC",
                                           resource = "TOTAL",
                                           p_value = 1,
-                                          min = NA,
-                                          max = NA,
+                                          min = NULL,
+                                          max = NULL,
                                           ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -991,13 +991,13 @@ rba_reactome_analysis_species <- function(species_dbid,
                      "resource" = resource)
   call_query <- .rba_query(init = call_query,
                            list("pValue",
-                                !is.na(p_value),
+                                !is.null(p_value),
                                 p_value),
                            list("min",
-                                !is.na(min),
+                                !is.null(min),
                                 min),
                            list("max",
-                                !is.na(max),
+                                !is.null(max),
                                 max))
   ## Build Function-Specific Call
   input_call <- .rba_httr(httr = "get",
@@ -1088,10 +1088,10 @@ rba_reactome_analysis_token <- function(token,
                                         sort_by = "ENTITIES_PVALUE",
                                         order = "ASC",
                                         resource = "TOTAL",
-                                        p_value = NA,
+                                        p_value = NULL,
                                         include_disease = TRUE,
-                                        min = NA,
-                                        max = NA,
+                                        min = NULL,
+                                        max = NULL,
                                         ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -1151,13 +1151,13 @@ rba_reactome_analysis_token <- function(token,
 
   call_query <- .rba_query(init = call_query,
                            list("pValue",
-                                !is.na(p_value),
+                                !is.null(p_value),
                                 p_value),
                            list("min",
-                                !is.na(min),
+                                !is.null(min),
                                 min),
                            list("max",
-                                !is.na(max),
+                                !is.null(max),
                                 max))
 
   ## Build Function-Specific Call

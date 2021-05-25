@@ -4,7 +4,7 @@
 \alias{rba_reactome_pathways_events}
 \title{Get Events Contained in an Upstream Events}
 \usage{
-rba_reactome_pathways_events(event_id, attribute_name = NA, ...)
+rba_reactome_pathways_events(event_id, attribute_name = NULL, ...)
 }
 \arguments{
 \item{event_id}{Reactome event's database ID (DbId) or Stable ID (StId).}

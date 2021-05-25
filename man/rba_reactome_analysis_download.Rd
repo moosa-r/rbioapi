@@ -7,7 +7,7 @@
 rba_reactome_analysis_download(
   token,
   request,
-  save_to = NA,
+  save_to = NULL,
   resource = "TOTAL",
   ...
 )
@@ -29,8 +29,8 @@ results associated with your provided token.
 \item "results_gz" Same as "results", but the output will be compress
 (gzipped).}}
 
-\item{save_to}{NA or Character:\itemize{
-\item NA: Save the file to an automatically-generated path.
+\item{save_to}{NULL or Character:\itemize{
+\item NULL: Save the file to an automatically-generated path.
 \item Character string: A valid file path to save the file to.}}
 
 \item{resource}{(Only when request is "found_ids" or "pathways")

@@ -6,7 +6,7 @@
 \usage{
 rba_reactome_analysis_mapping(
   input,
-  input_format = NA,
+  input_format = NULL,
   projection = FALSE,
   interactors = FALSE,
   ...

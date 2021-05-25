@@ -4,7 +4,7 @@
 \alias{rba_reactome_analysis_import}
 \title{Import Saved Analysis JSON to Reactome}
 \usage{
-rba_reactome_analysis_import(input, input_format = NA, ...)
+rba_reactome_analysis_import(input, input_format = NULL, ...)
 }
 \arguments{
 \item{input}{A local file path or URL that points to your -optionally

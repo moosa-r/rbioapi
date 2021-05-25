@@ -8,7 +8,7 @@ rba_reactome_query(
   ids,
   enhanced = FALSE,
   map = FALSE,
-  attribute_name = NA,
+  attribute_name = NULL,
   ...
 )
 }

@@ -7,17 +7,17 @@
 rba_reactome_exporter_overview(
   species,
   output_format = "png",
-  save_to = NA,
+  save_to = NULL,
   image_quality = 5,
-  flag_element = NA,
+  flag_element = NULL,
   flg_interactors = TRUE,
-  sel = NA,
+  sel = NULL,
   title = TRUE,
   margin = 15,
   diagram_profile = "Copper",
-  token = NA,
+  token = NULL,
   resource = "TOTAL",
-  exp_column = NA,
+  exp_column = NULL,
   coverage = FALSE,
   ...
 )
@@ -32,8 +32,8 @@ Data Schema: Entries: Species}.}
 \item{output_format}{Images format, Can be one of: png (default), jpeg,
 svg or gif.}
 
-\item{save_to}{NA or Character:\itemize{
-\item NA: Save the file to an automatically-generated path.
+\item{save_to}{NULL or Character:\itemize{
+\item NULL: Save the file to an automatically-generated path.
 \item Character string: A valid file path to save the file to.}}
 
 \item{image_quality}{Numeric: A number  ranging from 1 to 10. 1 is the

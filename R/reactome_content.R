@@ -577,8 +577,8 @@ rba_reactome_event_hierarchy <- function(species,
 #'   {identifier}.pdf"
 #'
 #' @param event_id Reactome event's identifier.
-#' @param save_to NA or Character:\itemize{
-#'   \item NA: Save the file to an automatically-generated path.
+#' @param save_to NULL or Character:\itemize{
+#'   \item NULL: Save the file to an automatically-generated path.
 #'   \item Character string: A valid file path to save the file to.}
 #' @param create_document logical: Create PDF document instead of image? (
 #'   default = FALSE)
@@ -656,19 +656,19 @@ rba_reactome_event_hierarchy <- function(species,
 #' \code{\link{rba_reactome_analysis}}
 #' @export
 rba_reactome_exporter_diagram <- function(event_id,
-                                          save_to = NA,
+                                          save_to = NULL,
                                           create_document = FALSE,
                                           resource = "TOTAL",
                                           diagram_profile = "Modern",
                                           analysis_profile = "Standard",
-                                          token = NA,
-                                          exp_column = NA,
+                                          token = NULL,
+                                          exp_column = NULL,
                                           document_level  = 1,
                                           output_format = "png",
                                           image_quality = 5,
-                                          flag_element = NA,
+                                          flag_element = NULL,
                                           flg_interactors = TRUE,
-                                          sel = NA,
+                                          sel = NULL,
                                           title = TRUE,
                                           margin = 15,
                                           ehld = FALSE,
@@ -720,7 +720,7 @@ rba_reactome_exporter_diagram <- function(event_id,
                                      "Copper Plus")),
                         list(arg = "exp_column",
                              class = "numeric")),
-            cond = list(list(quote(!is.na(exp_column) && is.na(token)),
+            cond = list(list(quote(!is.null(exp_column) && is.null(token)),
                              "You cannot specify expression column without providing a token.")))
 
   ## Build Function-Specific Call
@@ -729,16 +729,16 @@ rba_reactome_exporter_diagram <- function(event_id,
                                 resource != "TOTAL",
                                 resource),
                            list("diagramProfile",
-                                !is.na(diagram_profile),
+                                !is.null(diagram_profile),
                                 diagram_profile),
                            list("analysisProfile",
-                                !is.na(analysis_profile),
+                                !is.null(analysis_profile),
                                 analysis_profile),
                            list("token",
-                                !is.na(token),
+                                !is.null(token),
                                 token),
                            list("expColumn",
-                                !is.na(exp_column),
+                                !is.null(exp_column),
                                 exp_column))
 
   if (isTRUE(create_document)) {
@@ -763,13 +763,13 @@ rba_reactome_exporter_diagram <- function(event_id,
                                   image_quality != 5,
                                   image_quality),
                              list("flg",
-                                  !is.na(flag_element),
+                                  !is.null(flag_element),
                                   flag_element),
                              list("flgInteractors",
                                   !flg_interactors,
                                   "false"),
                              list("sel",
-                                  !is.na(sel),
+                                  !is.null(sel),
                                   sel),
                              list("title",
                                   !title,
@@ -790,7 +790,7 @@ rba_reactome_exporter_diagram <- function(event_id,
   }
   # create file_path
   save_to <- .rba_file(file = paste0(event_id, ".", output_format),
-                       save_to = ifelse(is.na(save_to),
+                       save_to = ifelse(is.null(save_to) || is.na(save_to),
                                         yes = TRUE,
                                         no = save_to))
   ## Build Function-Specific Call
@@ -813,8 +813,8 @@ rba_reactome_exporter_diagram <- function(event_id,
 #'
 #' @param event_id Reactome event's database IDs (DbId) or Stable IDs (StId).
 #' @param output_format Either "sbgn" or "sbml".
-#' @param save_to NA or Character:\itemize{
-#'   \item NA: Save the file to an automatically-generated path.
+#' @param save_to NULL or Character:\itemize{
+#'   \item NULL: Save the file to an automatically-generated path.
 #'   \item Character string: A valid file path to save the file to.}
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #'   arguments documentation for more information on available options.
@@ -854,7 +854,7 @@ rba_reactome_exporter_diagram <- function(event_id,
 #' @export
 rba_reactome_exporter_event <- function(event_id,
                                         output_format,
-                                        save_to = NA,
+                                        save_to = NULL,
                                         ...) {
   ## Load Global Options
   .rba_ext_args(..., ignore_save = TRUE)
@@ -873,7 +873,7 @@ rba_reactome_exporter_event <- function(event_id,
   ## Build Function-Specific Call
   # create file_path
   save_to <- .rba_file(file = paste0(event_id, ".", output_format),
-                       save_to = ifelse(is.na(save_to),
+                       save_to = ifelse(is.null(save_to) || is.na(save_to),
                                         yes = TRUE,
                                         no = save_to))
   input_call <- .rba_httr(httr = "get",
@@ -904,8 +904,8 @@ rba_reactome_exporter_event <- function(event_id,
 #'    Data Schema: Entries: Species}.
 #' @param output_format Images format, Can be one of: png (default), jpeg,
 #'   svg or gif.
-#' @param save_to NA or Character:\itemize{
-#'   \item NA: Save the file to an automatically-generated path.
+#' @param save_to NULL or Character:\itemize{
+#'   \item NULL: Save the file to an automatically-generated path.
 #'   \item Character string: A valid file path to save the file to.}
 #' @param image_quality Numeric: A number  ranging from 1 to 10. 1 is the
 #'   lowest quality and 10 is the highest (default = 5).
@@ -962,17 +962,17 @@ rba_reactome_exporter_event <- function(event_id,
 #' @export
 rba_reactome_exporter_overview <- function(species,
                                            output_format = "png",
-                                           save_to = NA,
+                                           save_to = NULL,
                                            image_quality = 5,
-                                           flag_element = NA,
+                                           flag_element = NULL,
                                            flg_interactors = TRUE,
-                                           sel = NA,
+                                           sel = NULL,
                                            title = TRUE,
                                            margin = 15,
                                            diagram_profile = "Copper",
-                                           token = NA,
+                                           token = NULL,
                                            resource = "TOTAL",
-                                           exp_column = NA,
+                                           exp_column = NULL,
                                            coverage = FALSE,
                                            ...) {
 
@@ -1018,7 +1018,7 @@ rba_reactome_exporter_overview <- function(species,
                              class = "character"),
                         list(arg = "coverage",
                              class = "logical")),
-            cond = list(list(quote(!is.na(exp_column) && is.na(token)),
+            cond = list(list(quote(!is.null(exp_column) && is.null(token)),
                              "You cannot specify expression column without providing a token.")))
 
   .msg("Retrieving specie %s pathway overview image in %s format.",
@@ -1030,13 +1030,13 @@ rba_reactome_exporter_overview <- function(species,
                                 image_quality != 5,
                                 image_quality),
                            list("flg",
-                                !is.na(flag_element),
+                                !is.null(flag_element),
                                 flag_element),
                            list("flgInteractors",
                                 !flg_interactors,
                                 "false"),
                            list("sel",
-                                !is.na(sel),
+                                !is.null(sel),
                                 sel),
                            list("title",
                                 !title,
@@ -1048,13 +1048,13 @@ rba_reactome_exporter_overview <- function(species,
                                 diagram_profile != "Copper",
                                 diagram_profile),
                            list("token",
-                                !is.na(token),
+                                !is.null(token),
                                 token),
                            list("resource",
                                 resource != "TOTAL",
                                 resource),
                            list("expColumn",
-                                !is.na(exp_column),
+                                !is.null(exp_column),
                                 exp_column),
                            list("coverage",
                                 coverage,
@@ -1069,7 +1069,7 @@ rba_reactome_exporter_overview <- function(species,
 
   # create file_path
   save_to <- .rba_file(file = paste0(species, ".", output_format),
-                       save_to = ifelse(is.na(save_to),
+                       save_to = ifelse(is.null(save_to) || is.na(save_to),
                                         yes = TRUE,
                                         no = save_to))
 
@@ -1105,8 +1105,8 @@ rba_reactome_exporter_overview <- function(species,
 #' event}'s identifier.
 #' @param output_format Images format, Can be one of: png (default), jpeg,
 #'   svg or gif.
-#' @param save_to NA or Character:\itemize{
-#'   \item NA: Save the file to an automatically-generated path.
+#' @param save_to NULL or Character:\itemize{
+#'   \item NULL: Save the file to an automatically-generated path.
 #'   \item Character string: A valid file path to save the file to.}
 #' @param image_quality Numeric: A number  ranging from 1 to 10. 1 is the
 #'   lowest quality and 10 is the highest (default = 5).
@@ -1163,17 +1163,17 @@ rba_reactome_exporter_overview <- function(species,
 #' \code{\link{rba_reactome_analysis}}
 #' @export
 rba_reactome_exporter_reaction <- function(event_id,
-                                           save_to = NA,
+                                           save_to = NULL,
                                            output_format = "png",
                                            resource = "TOTAL",
                                            diagram_profile = "Modern",
                                            analysis_profile = "Standard",
-                                           token = NA,
-                                           exp_column = NA,
+                                           token = NULL,
+                                           exp_column = NULL,
                                            image_quality = 5,
-                                           flag_element = NA,
+                                           flag_element = NULL,
                                            flg_interactors = TRUE,
-                                           sel = NA,
+                                           sel = NULL,
                                            title = TRUE,
                                            margin = 15,
                                            ...) {
@@ -1219,7 +1219,7 @@ rba_reactome_exporter_reaction <- function(event_id,
                                      "Copper Plus")),
                         list(arg = "exp_column",
                              class = "numeric")),
-            cond = list(list(quote(!is.na(exp_column) && is.na(token)),
+            cond = list(list(quote(!is.null(exp_column) && is.null(token)),
                              "You cannot specify expression column without providing a token.")))
 
   .msg("Retrieving Reaction-like event %s image in %s format.",
@@ -1231,13 +1231,13 @@ rba_reactome_exporter_reaction <- function(event_id,
                                 image_quality != 5,
                                 image_quality),
                            list("flg",
-                                !is.na(flag_element),
+                                !is.null(flag_element),
                                 flag_element),
                            list("flgInteractors",
                                 !flg_interactors,
                                 "false"),
                            list("sel",
-                                !is.na(sel),
+                                !is.null(sel),
                                 sel),
                            list("title",
                                 !title,
@@ -1249,16 +1249,16 @@ rba_reactome_exporter_reaction <- function(event_id,
                                 diagram_profile != "Copper",
                                 diagram_profile),
                            list("analysisProfile",
-                                !is.na(analysis_profile),
+                                !is.null(analysis_profile),
                                 analysis_profile),
                            list("token",
-                                !is.na(token),
+                                !is.null(token),
                                 token),
                            list("resource",
                                 resource != "TOTAL",
                                 resource),
                            list("expColumn",
-                                !is.na(exp_column),
+                                !is.null(exp_column),
                                 exp_column))
 
   ## Build Function-Specific Call
@@ -1270,7 +1270,7 @@ rba_reactome_exporter_reaction <- function(event_id,
 
   # create file_path
   save_to <- .rba_file(file = paste0(event_id, ".", output_format),
-                       save_to = ifelse(is.na(save_to),
+                       save_to = ifelse(is.null(save_to) || is.na(save_to),
                                         yes = TRUE,
                                         no = save_to))
 
@@ -1348,8 +1348,8 @@ rba_reactome_exporter_reaction <- function(event_id,
 #'
 #' @family "Reactome Content Service - Molecule Interactors"
 #' @export
-rba_reactome_interactors_psicquic <- function(proteins = NA,
-                                              resource = NA,
+rba_reactome_interactors_psicquic <- function(proteins = NULL,
+                                              resource = NULL,
                                               details = TRUE,
                                               ...) {
   ## Load Global Options
@@ -1363,9 +1363,9 @@ rba_reactome_interactors_psicquic <- function(proteins = NA,
                              class = "character"),
                         list(arg = "details",
                              class = "logical")),
-            cond = list(list(quote(sum(!is.na(proteins), !is.na(resource))),
+            cond = list(list(quote(sum(!is.null(proteins), !is.null(resource))),
                              "You should provide 'proteins' and 'resource' togeather.")))
-  if (any(!is.na(proteins))) {
+  if (!is.null(proteins)) {
     details <- ifelse(isTRUE(details), yes = "details", no = "summary")
     .msg("Retrieving %s of clustered interactions of %s ptoteins(s) from %s.",
          details,
@@ -1471,7 +1471,7 @@ rba_reactome_interactors_psicquic <- function(proteins = NA,
 rba_reactome_interactors_static <- function(proteins,
                                             endpoint = "details",
                                             only_diagrammed = FALSE,
-                                            species = NA,
+                                            species = NULL,
                                             ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -1491,7 +1491,7 @@ rba_reactome_interactors_static <- function(proteins,
                              class = "character")),
             cond = list(list(quote(endpoint == "pathways" && length(proteins) != 1),
                              "When 'endpoint = pathways', you can only provide one protein."),
-                        list(quote(sum(!is.na(species), endpoint == "pathways") == 1),
+                        list(quote(sum(!is.null(species), endpoint == "pathways") == 1),
                              "You should -and can only- provide species when endpoint is 'pathways'.")))
 
 
@@ -1503,7 +1503,7 @@ rba_reactome_interactors_static <- function(proteins,
                                                                    yes = "true",
                                                                    no = "false")),
                              list("species",
-                                  !is.na(species),
+                                  !is.null(species),
                                   species))
     input_call <- .rba_httr(httr = "get",
                             url = .rba_stg("reactome", "url"),
@@ -1614,7 +1614,7 @@ rba_reactome_mapping <- function(id,
   ## Build GET API Request's query
   call_query <- .rba_query(init = list(),
                            list("species",
-                                !is.na(species),
+                                !is.null(species),
                                 species))
   ## Build Function-Specific Call
   input_call <- .rba_httr(httr = "get",
@@ -1901,7 +1901,7 @@ rba_reactome_participants <- function(event_id,
 #' @family "Reactome Content Service - Pathway Related Queries"
 #' @export
 rba_reactome_pathways_events <- function(event_id,
-                                         attribute_name = NA,
+                                         attribute_name = NULL,
                                          ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -1913,7 +1913,7 @@ rba_reactome_pathways_events <- function(event_id,
                              class = "character")))
 
   .msg("Retrieving %s contained events under the event %s.",
-       ifelse(is.na(attribute_name),
+       ifelse(is.null(attribute_name),
               yes = "all",
               no = sprintf("attribute '%s' of all",
                            attribute_name)),
@@ -1927,7 +1927,7 @@ rba_reactome_pathways_events <- function(event_id,
   parser_input <- "json->df"
   file_ext <- "json"
 
-  if (!is.na(attribute_name)) {
+  if (!is.null(attribute_name)) {
     path_input <- paste0(path_input, "/", attribute_name)
     accept_input <- "text/plain"
     parser_input <- function(x) {
@@ -2014,7 +2014,7 @@ rba_reactome_pathways_events <- function(event_id,
 rba_reactome_pathways_low <- function(entity_id,
                                       with_diagram = FALSE,
                                       all_forms = FALSE,
-                                      species = NA,
+                                      species = NULL,
                                       ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -2119,7 +2119,7 @@ rba_reactome_pathways_top <- function(species,
   ## Build GET API Request's query
   call_query <- .rba_query(init = list(),
                            list("species",
-                                !is.na(species),
+                                !is.null(species),
                                 species))
   ## Build Function-Specific Call
   input_call <- .rba_httr(httr = "get",
@@ -2256,7 +2256,7 @@ rba_reactome_people_name <- function(person_name,
 rba_reactome_people_id <- function(person_id,
                                    authored_pathways = FALSE,
                                    publications = FALSE,
-                                   attribute_name = NA,
+                                   attribute_name = NULL,
                                    ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -2269,7 +2269,7 @@ rba_reactome_people_id <- function(person_id,
                              class = "logical"),
                         list(arg = "attribute_name",
                              class = "character")),
-            cond = list(list(quote(sum(!is.na(attribute_name),
+            cond = list(list(quote(sum(!is.null(attribute_name),
                                        isTRUE(authored_pathways),
                                        isTRUE(publications)) > 1),
                              "You can only use either attribute_name, authored_pathways or publications function call.")))
@@ -2288,7 +2288,7 @@ rba_reactome_people_id <- function(person_id,
     path_input <- paste0(path_input, "/authoredPathways")
   } else if (isTRUE(publications)) {
     path_input <- paste0(path_input, "/publications")
-  } else if (!is.na(attribute_name)) {
+  } else if (!is.null(attribute_name)) {
     path_input <- paste0(path_input, "/", attribute_name)
     accept_input <- "text/plain"
     parser_type_input <- "text->chr"
@@ -2365,7 +2365,7 @@ rba_reactome_people_id <- function(person_id,
 rba_reactome_query <- function(ids,
                                enhanced = FALSE,
                                map = FALSE,
-                               attribute_name = NA,
+                               attribute_name = NULL,
                                ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -2381,9 +2381,9 @@ rba_reactome_query <- function(ids,
                         list(arg = "attribute_name",
                              class = "character")),
             cond = list(list(quote(length(ids) > 1 &&
-                                     (isTRUE(enhanced) | !is.na(attribute_name))),
+                                     (isTRUE(enhanced) | !is.null(attribute_name))),
                              "You can only use 'enhnaced' or 'attribute_name' with a single ID not multiple IDs."),
-                        list(quote(!is.na(attribute_name) && isTRUE(enhanced)),
+                        list(quote(!is.null(attribute_name) && isTRUE(enhanced)),
                              "You can only provide 'attribute_name' when enhanced is 'FALSE'.")))
 
   if (length(ids) > 1) {
@@ -2414,7 +2414,7 @@ rba_reactome_query <- function(ids,
     accept_input <- "application/json"
     parser_input <- "json->list"
     file_ext <- "json"
-    if (!is.na(attribute_name)) {
+    if (!is.null(attribute_name)) {
       .msg("GET /data/query/{id}/{attributeName}",
            "A single property of an entry in Reactome knowledgebase")
       path_input <- paste0(path_input, "/", attribute_name)

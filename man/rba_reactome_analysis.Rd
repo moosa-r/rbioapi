@@ -6,17 +6,17 @@
 \usage{
 rba_reactome_analysis(
   input,
-  input_format = NA,
+  input_format = NULL,
   projection = FALSE,
   interactors = FALSE,
-  species = NA,
+  species = NULL,
   sort_by = "ENTITIES_PVALUE",
   order = "ASC",
   resource = "TOTAL",
   p_value = 1,
   include_disease = TRUE,
-  min = NA,
-  max = NA,
+  min = NULL,
+  max = NULL,
   ...
 )
 }
