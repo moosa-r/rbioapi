@@ -148,9 +148,9 @@ rba_panther_enrich <- function(genes,
                                annot_dataset,
                                test_type = "FISHER",
                                correction = "FDR",
-                               cutoff = NA,
-                               ref_genes = NA,
-                               ref_organism = NA,
+                               cutoff = NULL,
+                               ref_genes = NULL,
+                               ref_organism = NULL,
                                ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -184,7 +184,7 @@ rba_panther_enrich <- function(genes,
                         list(arg = "ref_organism",
                              class = "numeric",
                              len = 1)),
-            cond = list(list(quote(!is.na(ref_organism) && is.na(ref_genes)),
+            cond = list(list(quote(!is.null(ref_organism) && is.null(ref_genes)),
                              "'ref_organism' was ignored because no 'ref_genes' was provided.")),
             cond_warning = TRUE)
   .msg("Performing over-representation enrichment analysis of %s input genes of organism %s against %s datasets.",
@@ -198,10 +198,10 @@ rba_panther_enrich <- function(genes,
                                       enrichmentTestType = test_type,
                                       correction = correction),
                           list("refInputList",
-                               !all(is.na(ref_genes)),
+                               !all(is.null(ref_genes)),
                                paste(ref_genes, collapse =  ",")),
                           list("refOrganism",
-                               !is.na(ref_organism),
+                               !is.null(ref_organism),
                                ref_organism))
 
   ## Build Function-Specific Call
@@ -212,7 +212,7 @@ rba_panther_enrich <- function(genes,
                          x$result$term <- x$result$term[, 2]
                          return(x)
                        })
-  if (!is.na(cutoff)) {
+  if (!is.null(cutoff)) {
     if (correction == "FDR") {
       parser_input <- append(parser_input,
                              list(function(x) {
@@ -440,9 +440,9 @@ rba_panther_info <- function(what,
 rba_panther_ortholog <- function(genes,
                                  organism,
                                  type = "all",
-                                 target_organisms = NA,
-                                 seq_pos = NA,
-                                 include_msa = NA,
+                                 target_organisms = NULL,
+                                 seq_pos = NULL,
+                                 include_msa = NULL,
                                  ...) {
 
   ## Load Global Options
@@ -468,9 +468,9 @@ rba_panther_ortholog <- function(genes,
                         list(arg = "include_msa",
                              class = "logical",
                              len = 1)),
-            cond = list(list(quote(!is.na(seq_pos) && length(genes) > 1),
+            cond = list(list(quote(!is.null(seq_pos) && length(genes) > 1),
                              "When 'seq_pos' is provided, 'genes' argument should be a single input."),
-                        list(quote(!is.na(include_msa) && is.na(seq_pos)),
+                        list(quote(!is.null(include_msa) && is.null(seq_pos)),
                              "'include_msa' was ignored because no 'seq_pos' was provided.",
                              warn = TRUE)))
   .msg("Retrieving %s orthologs of genes %s.",
@@ -480,25 +480,25 @@ rba_panther_ortholog <- function(genes,
   call_body <- .rba_query(init = list(organism = organism,
                                       orthologType = type),
                           list("geneInputList",
-                               is.na(seq_pos),
+                               is.null(seq_pos),
                                paste(genes, collapse =  ",")),
                           list("gene",
-                               !is.na(seq_pos),
+                               !is.null(seq_pos),
                                genes),
                           list("targetOrganism",
-                               any(!is.na(target_organisms)),
+                               !is.null(target_organisms),
                                paste(target_organisms, collapse =  ",")),
                           list("pos",
-                               !is.na(seq_pos),
+                               !is.null(seq_pos),
                                seq_pos),
                           list("includeMsa",
-                               !is.na(include_msa) && !is.na(seq_pos),
+                               !is.null(include_msa) && !is.null(seq_pos),
                                ifelse(isTRUE(include_msa),
                                       yes = "true", no = "false"))
   )
 
   ## Build Function-Specific Call
-  if (is.na(seq_pos)) {
+  if (is.null(seq_pos)) {
     path_input <- "matchortho"
   } else {
     path_input <- "homologpos"
@@ -571,7 +571,7 @@ rba_panther_ortholog <- function(genes,
 rba_panther_homolog <- function(genes,
                                 organism,
                                 type = "P",
-                                target_organisms = NA,
+                                target_organisms = NULL,
                                 ...) {
 
   ## Load Global Options
@@ -592,10 +592,10 @@ rba_panther_homolog <- function(genes,
                              len = 1),
                         list(arg = "target_organisms",
                              class = "numeric")),
-            cond = list(list(quote(type == "P" && !is.na(target_organisms)),
+            cond = list(list(quote(type == "P" && !is.null(target_organisms)),
                              "For Paralog, target organism and organism should be the same. thus, 'target_organisms' was ignored.",
                              warn = TRUE),
-                        list(quote(type != "P" && !is.na(target_organisms) && organism %in% target_organisms),
+                        list(quote(type != "P" && !is.null(target_organisms) && organism %in% target_organisms),
                              "For horizontal gene transfers or least diverged horizontal gene transfers, the target organism should be different from the input organism")))
   .msg("Retrieving %s homologs of genes %s.",
        type, .paste2(genes, quote_all = "'"))
@@ -605,7 +605,7 @@ rba_panther_homolog <- function(genes,
                                       organism = organism,
                                       homologType = type),
                           list("targetOrganism",
-                               any(!is.na(target_organisms)),
+                               !is.null(target_organisms),
                                paste(target_organisms, collapse =  ","))
   )
 
@@ -677,7 +677,7 @@ rba_panther_homolog <- function(genes,
 #' @export
 rba_panther_family <- function(id,
                                what,
-                               target_organisms = NA,
+                               target_organisms = NULL,
                                ...) {
 
   ## Load Global Options
@@ -699,7 +699,7 @@ rba_panther_family <- function(id,
   ## Build POST API Request's body
   call_body <- .rba_query(init = list(family = id),
                           list("taxonFltr",
-                               any(!is.na(target_organisms)),
+                               !is.null(target_organisms),
                                paste(target_organisms, collapse =  ","))
   )
 
@@ -777,7 +777,7 @@ rba_panther_family <- function(id,
 #' @family "PANTHER"
 #' @export
 rba_panther_tree_grafter <- function(protein_seq,
-                                     target_organisms = NA,
+                                     target_organisms = NULL,
                                      ...) {
 
   ## Load Global Options
@@ -795,7 +795,7 @@ rba_panther_tree_grafter <- function(protein_seq,
   ## Build POST API Request's body
   call_body <- .rba_query(init = list(sequence  = protein_seq),
                           list("taxonFltr",
-                               any(!is.na(target_organisms)),
+                               !is.null(target_organisms),
                                paste(target_organisms, collapse =  ","))
   )
 

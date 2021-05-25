@@ -10,9 +10,9 @@ rba_panther_enrich(
   annot_dataset,
   test_type = "FISHER",
   correction = "FDR",
-  cutoff = NA,
-  ref_genes = NA,
-  ref_organism = NA,
+  cutoff = NULL,
+  ref_genes = NULL,
+  ref_organism = NULL,
   ...
 )
 }

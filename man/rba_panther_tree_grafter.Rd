@@ -7,7 +7,7 @@ Use this function to retrieve a PANTHER family's tree topology information
   with a node corresponding to your sequence grafted in the best location
   in that tree.}
 \usage{
-rba_panther_tree_grafter(protein_seq, target_organisms = NA, ...)
+rba_panther_tree_grafter(protein_seq, target_organisms = NULL, ...)
 }
 \arguments{
 \item{protein_seq}{A character string with the protein's sequence. Maximum

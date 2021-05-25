@@ -4,7 +4,7 @@
 \alias{rba_panther_family}
 \title{Get PANTHER Families and Sub-Families}
 \usage{
-rba_panther_family(id, what, target_organisms = NA, ...)
+rba_panther_family(id, what, target_organisms = NULL, ...)
 }
 \arguments{
 \item{id}{Panther family id.}

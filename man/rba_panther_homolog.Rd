@@ -4,7 +4,7 @@
 \alias{rba_panther_homolog}
 \title{Search PANTHER for Homologs of Gene(s)}
 \usage{
-rba_panther_homolog(genes, organism, type = "P", target_organisms = NA, ...)
+rba_panther_homolog(genes, organism, type = "P", target_organisms = NULL, ...)
 }
 \arguments{
 \item{genes}{Character vector of genes identifiers with maximum length of

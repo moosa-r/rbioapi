@@ -8,9 +8,9 @@ rba_panther_ortholog(
   genes,
   organism,
   type = "all",
-  target_organisms = NA,
-  seq_pos = NA,
-  include_msa = NA,
+  target_organisms = NULL,
+  seq_pos = NULL,
+  include_msa = NULL,
   ...
 )
 }
