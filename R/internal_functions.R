@@ -353,10 +353,11 @@
                                 x[[1]],
                                 " has more than one element. Only the first element will be used.",
                                 call. = FALSE)
+                        x[[2]] <- x[[2]][[1]]
                       }
-                      if (isTRUE(x[[2]][[1]])) {
+                      if (isTRUE(x[[2]])) {
                         return(TRUE)
-                      } else if (isFALSE(x[[2]][[1]])) {
+                      } else if (isFALSE(x[[2]])) {
                         return(FALSE)}
                       else {
                         warning("Internal Query Builder:\n The evaluation result of ",
@@ -742,7 +743,7 @@
 #' @family internal_arguments_check
 #' @noRd
 .rba_args_cons_chk <- function(cons_i, what) {
-  if (any(!is.na(cons_i[["evl_arg"]]))) {
+  if (!is.null(cons_i[["evl_arg"]])) {
     output <- all(switch(what,
                          "class" = class(cons_i[["evl_arg"]]) %in% cons_i[["class"]],
                          "val" = all(cons_i[["evl_arg"]] %in% cons_i[["val"]]),
@@ -844,8 +845,11 @@
                           }
                         })
 
-  cons_i_errs <- unlist(cons_i_errs[which(!is.na(cons_i_errs))])
-  return(cons_i_errs)
+  if (any(!is.na(cons_i_errs))) {
+    return(unlist(cons_i_errs[which(!is.na(cons_i_errs))]))
+  } else {
+    return(NA)
+  }
 }
 
 
@@ -997,7 +1001,9 @@
   }
   ## 2.3 check other constrains if their class is correct
   other_errs <- lapply(cons, .rba_args_cons_wrp)
-  if (any(!is.na(other_errs))) {errors <- append(errors, unlist(other_errs))}
+  if (any(!is.na(other_errs))) {
+    errors <- append(errors, other_errs[!is.na(other_errs)])
+    }
   ## 2.4 Take actions for the errors
   if (length(errors) == 1) {
     stop(errors, call. = diagnostics)
@@ -1254,10 +1260,10 @@
 #' @noRd
 .paste2 <- function(...,
                     last = " and ", sep = ", ",
-                    quote = NA, quote_all = NA) {
+                    quote = NULL, quote_all = NULL) {
   input <- c(...)
   len <- length(input)
-  if (!is.na(quote)) {
+  if (!is.null(quote)) {
     input <- sprintf("%s%s%s", quote, input, quote)
   }
   if (len > 1) {
@@ -1265,7 +1271,7 @@
                    input[len],
                    sep = last)
   }
-  if (!is.na(quote_all)) {
+  if (!is.null(quote_all)) {
     input <- sprintf("%s%s%s", quote_all, input, quote_all)
   }
   return(input)
@@ -1302,13 +1308,15 @@
 #' @family internal_misc
 #' @noRd
 .rba_file <- function(file,
-                      save_to = NA,
-                      dir_name = NA) {
-  if (is.na(save_to)) {
+                      save_to = NULL,
+                      dir_name = NULL) {
+  if (is.null(save_to)) {
     save_to <- get0(x = "save_file",
                     ifnotfound = FALSE,
                     envir = parent.frame(1))
-    }
+    if (is.na(save_to)) {save_to <- FALSE}
+  }
+
   if (!isFALSE(save_to)) {
     ## 1 file path will be generated unless save_to == FALSE
     # set values
@@ -1369,7 +1377,7 @@
       file_ext <- def_file_ext
       file_name <- def_file_name
       ## 2b.2 set directory name
-      dir_name <- ifelse(is.na(dir_name),
+      dir_name <- ifelse(is.null(dir_name),
                          yes = get0("dir_name", envir = parent.frame(1),
                                     ifnotfound = getOption("rba_dir_name")),
                          no = dir_name)
@@ -1440,7 +1448,7 @@
       unnamed_args <- seq_along(ext_args)
     } else {
       unnamed_args <- which(ext_arg_names == "" | is.na(ext_arg_names))
-      }
+    }
     invalid_args <- which(!ext_arg_names %in% c(rba_opts, ""))
 
     if (length(c(unnamed_args, invalid_args)) > 0) {
@@ -1471,9 +1479,9 @@
   # create option variables
   for (opt in rba_opts) {
     assign(x = opt,
-           value = ifelse(utils::hasName(ext_args, opt),
-                          yes = ext_args[[opt]],
-                          no = getOption(paste0("rba_", opt))),
+           value = ifelse(is.null(ext_args[[opt]]),
+                          yes = getOption(paste0("rba_", opt)),
+                          no = ext_args[[opt]]),
            envir = parent.frame(1))
   }
 
