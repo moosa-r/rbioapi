@@ -159,19 +159,23 @@ rba_connection_test <- function(diagnostics = FALSE) {
 #' @family "Helper functions"
 #' @keywords Helper
 #' @export
-rba_options <- function(diagnostics = NA,
-                        dir_name = NA,
-                        retry_max = NA,
-                        retry_wait = NA,
-                        progress = NA,
-                        save_file = NA,
-                        skip_error = NA,
-                        timeout = NA,
-                        verbose = NA) {
+rba_options <- function(diagnostics = NULL,
+                        dir_name = NULL,
+                        retry_max = NULL,
+                        retry_wait = NULL,
+                        progress = NULL,
+                        save_file = NULL,
+                        skip_error = NULL,
+                        timeout = NULL,
+                        verbose = NULL) {
   .rba_args(cond = list(list(quote(is.character(save_file)),
                              "As a global option, you can only set save_file to 'logical', not a file path.")))
   ## if empty function was called, show the available options
-  changes <- vapply(ls(), function(x) {!is.na(get(x))}, logical(1))
+  changes <- vapply(X = ls(),
+                    function(x) {
+                      x <- get(x)
+                      !(is.null(x) || is.na(x))},
+                    logical(1))
   if (!any(changes)) {
     options_df <- data.frame(rbioapi_option = getOption("rba_user_options"),
                              current_value = vapply(names(getOption("rba_user_options")),

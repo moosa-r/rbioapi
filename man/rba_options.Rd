@@ -5,15 +5,15 @@
 \title{Set rbioapi Global Options}
 \usage{
 rba_options(
-  diagnostics = NA,
-  dir_name = NA,
-  retry_max = NA,
-  retry_wait = NA,
-  progress = NA,
-  save_file = NA,
-  skip_error = NA,
-  timeout = NA,
-  verbose = NA
+  diagnostics = NULL,
+  dir_name = NULL,
+  retry_max = NULL,
+  retry_wait = NULL,
+  progress = NULL,
+  save_file = NULL,
+  skip_error = NULL,
+  timeout = NULL,
+  verbose = NULL
 )
 }
 \arguments{
