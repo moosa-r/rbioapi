@@ -9,12 +9,12 @@ rba_mieaa_enrich(
   mirna_type,
   test_type,
   species,
-  categories = NA,
+  categories = NULL,
   p_adj_method = "fdr",
   independent_p_adj = TRUE,
   sig_level = 0.05,
   min_hits = 2,
-  ref_set = NA,
+  ref_set = NULL,
   sort_by = "p_adjusted",
   sort_asc = TRUE,
   ...
@@ -58,7 +58,7 @@ enrichment analysis. Note that \itemize{
  your provided miRNA type is mature or precursor. Use
  \code{\link{rba_mieaa_cats}} to retrieve a list of available category
  names for a given specie and miRNA type.
-\item If you provide NA, the analysis will be performed on all of the
+\item If you provide NULL, the analysis will be performed on all of the
  available categories.}}
 
 \item{p_adj_method}{P-value adjustment method to be used. Should be one of:
@@ -125,7 +125,7 @@ rba_mieaa_enrich(test_set = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
      mirna_type = "mature",
      test_type = "GSEA",
      species = 9606,
-     categories = NA)
+     categories = NULL)
 }
 
 }

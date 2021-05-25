@@ -416,7 +416,7 @@ rba_mieaa_convert_type <- function(mirna,
 #'    your provided miRNA type is mature or precursor. Use
 #'    \code{\link{rba_mieaa_cats}} to retrieve a list of available category
 #'    names for a given specie and miRNA type.
-#'   \item If you provide NA, the analysis will be performed on all of the
+#'   \item If you provide NULL, the analysis will be performed on all of the
 #'    available categories.}
 #' @param p_adj_method P-value adjustment method to be used. Should be one of:
 #'   "none", "fdr" (default), "bonferroni", "BY", "hochberg", "holm" or "hommel"
@@ -460,7 +460,7 @@ rba_mieaa_convert_type <- function(mirna,
 #'     mirna_type = "mature",
 #'     test_type = "GSEA",
 #'     species = 9606,
-#'     categories = NA)
+#'     categories = NULL)
 #' }
 #'
 #' @family "miEAA"
@@ -469,12 +469,12 @@ rba_mieaa_enrich_submit <- function(test_set,
                                     mirna_type,
                                     test_type,
                                     species = "hsa",
-                                    categories = NA,
+                                    categories = NULL,
                                     p_adj_method = "fdr",
                                     independent_p_adj = TRUE,
                                     sig_level = 0.05,
                                     min_hits = 2,
-                                    ref_set = NA,
+                                    ref_set = NULL,
                                     ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -519,7 +519,7 @@ rba_mieaa_enrich_submit <- function(test_set,
   all_cats <- rba_mieaa_cats(mirna_type = mirna_type,
                              species = species,
                              verbose = FALSE)
-  if (all(is.na(categories))) {
+  if (is.null(categories)) {
     categories <- all_cats
     .msg("No categories were provided, Requesting enrichment using all of the %s available categories for species '%s'.",
          length(categories),
@@ -545,7 +545,7 @@ rba_mieaa_enrich_submit <- function(test_set,
                                       significance_level = sig_level,
                                       threshold_level = min_hits),
                           list("reference_set",
-                               test_type == "ORA" && !is.na(ref_set),
+                               test_type == "ORA" && !is.null(ref_set),
                                paste(ref_set, collapse = "\n")))
   call_body <- append(call_body, categories)
 
@@ -787,7 +787,7 @@ rba_mieaa_enrich_results <- function(job_id,
 #'      mirna_type = "mature",
 #'      test_type = "GSEA",
 #'      species = 9606,
-#'      categories = NA)
+#'      categories = NULL)
 #' }
 #'
 #' @family "miEAA"
@@ -796,12 +796,12 @@ rba_mieaa_enrich <- function(test_set,
                              mirna_type,
                              test_type,
                              species,
-                             categories = NA,
+                             categories = NULL,
                              p_adj_method = "fdr",
                              independent_p_adj = TRUE,
                              sig_level = 0.05,
                              min_hits = 2,
-                             ref_set = NA,
+                             ref_set = NULL,
                              sort_by = "p_adjusted",
                              sort_asc = TRUE,
                              ...) {
