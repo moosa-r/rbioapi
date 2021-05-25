@@ -5,11 +5,11 @@
 \title{Search TF flexible models (TFFMs) available in JASPAR}
 \usage{
 rba_jaspar_tffm_search(
-  term = NA,
+  term = NULL,
   release = 2020,
-  tax_group = NA,
-  search = NA,
-  order = NA,
+  tax_group = NULL,
+  search = NULL,
+  order = NULL,
   page_size = 1000,
   page = 1,
   ...

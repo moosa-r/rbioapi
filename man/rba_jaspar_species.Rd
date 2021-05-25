@@ -4,7 +4,7 @@
 \alias{rba_jaspar_species}
 \title{List available species in JASPAR}
 \usage{
-rba_jaspar_species(release = 2020, search = NA, order = NA, ...)
+rba_jaspar_species(release = 2020, search = NULL, order = NULL, ...)
 }
 \arguments{
 \item{release}{Numeric: (default = 2020) Which JASPAR database release

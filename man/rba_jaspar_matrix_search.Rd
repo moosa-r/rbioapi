@@ -5,17 +5,17 @@
 \title{Search matrix profiles available in JASPAR}
 \usage{
 rba_jaspar_matrix_search(
-  term = NA,
-  tf_name = NA,
-  tf_class = NA,
-  tf_family = NA,
-  tax_group = NA,
-  tax_id = NA,
-  data_type = NA,
-  collection = NA,
+  term = NULL,
+  tf_name = NULL,
+  tf_class = NULL,
+  tf_family = NULL,
+  tax_group = NULL,
+  tax_id = NULL,
+  data_type = NULL,
+  collection = NULL,
   release = 2020,
   only_last_version = FALSE,
-  order = NA,
+  order = NULL,
   page_size = 1000,
   page = 1,
   ...

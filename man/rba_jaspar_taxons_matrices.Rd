@@ -8,8 +8,8 @@ rba_jaspar_taxons_matrices(
   tax_group,
   release = 2020,
   only_last_version = FALSE,
-  search = NA,
-  order = NA,
+  search = NULL,
+  order = NULL,
   page_size = 1000,
   page = 1,
   ...

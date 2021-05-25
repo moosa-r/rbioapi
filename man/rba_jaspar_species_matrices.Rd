@@ -8,8 +8,8 @@ rba_jaspar_species_matrices(
   tax_id,
   release = 2020,
   only_last_version = FALSE,
-  search = NA,
-  order = NA,
+  search = NULL,
+  order = NULL,
   page_size = 1000,
   page = 1,
   ...

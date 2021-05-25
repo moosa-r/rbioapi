@@ -4,7 +4,7 @@
 \alias{rba_jaspar_matrix}
 \title{Get a Position Frequency Matrices (PFM) with annotations}
 \usage{
-rba_jaspar_matrix(matrix_id, file_format = NA, save_to = NA, ...)
+rba_jaspar_matrix(matrix_id, file_format = NULL, save_to = NULL, ...)
 }
 \arguments{
 \item{matrix_id}{Character: A matrix profile
@@ -14,10 +14,10 @@ Identifier. It has "base_id.version" naming schema.}
 can directly download the profile matrix in file with this format.
 Supported formats are: "yaml", "jaspar", "transfac", "meme" and "pfm"}
 
-\item{save_to}{NA or Character:\itemize{
-\item NA: (only if file_format was provided) Save the file to an
+\item{save_to}{NULL or Character:\itemize{
+\item NULL: (only if file_format was provided) Save the file to an
   automatically-generated path.
-\item Character string: A valid file path to save the file to.}}
+\item Character string: A valid file or directory path to save the file to.}}
 
 \item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
 arguments documentation for more information on available options.}

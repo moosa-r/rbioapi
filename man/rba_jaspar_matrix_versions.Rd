@@ -4,7 +4,7 @@
 \alias{rba_jaspar_matrix_versions}
 \title{List matrix profile versions associated with a base ID}
 \usage{
-rba_jaspar_matrix_versions(base_id, order = NA, ...)
+rba_jaspar_matrix_versions(base_id, order = NULL, ...)
 }
 \arguments{
 \item{base_id}{Character: A base (stable) Identifier. A matrix profile

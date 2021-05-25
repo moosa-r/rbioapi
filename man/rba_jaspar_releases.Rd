@@ -4,11 +4,11 @@
 \alias{rba_jaspar_releases}
 \title{Get information about JASPAR database releases}
 \usage{
-rba_jaspar_releases(release_number = NA, ...)
+rba_jaspar_releases(release_number = NULL, ...)
 }
 \arguments{
 \item{release_number}{Numeric: Which JASPAR database release number
-information's to retrieve? If left NA (the default), a list of all
+information's to retrieve? If left NULL (the default), a list of all
 JASPAR database releases will be returned. Available options are 1 to 8.}
 
 \item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s

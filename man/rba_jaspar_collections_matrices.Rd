@@ -8,8 +8,8 @@ rba_jaspar_collections_matrices(
   collection,
   release = 2020,
   only_last_version = FALSE,
-  search = NA,
-  order = NA,
+  search = NULL,
+  order = NULL,
   page_size = 1000,
   page = 1,
   ...

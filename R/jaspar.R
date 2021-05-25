@@ -138,8 +138,8 @@ rba_jaspar_collections <- function(release = 2020,
 rba_jaspar_collections_matrices <- function(collection,
                                             release = 2020,
                                             only_last_version = FALSE,
-                                            search = NA,
-                                            order = NA,
+                                            search = NULL,
+                                            order = NULL,
                                             page_size = 1000,
                                             page = 1,
                                             ...) {
@@ -187,10 +187,10 @@ rba_jaspar_collections_matrices <- function(collection,
                                 isTRUE(only_last_version),
                                 "latest"),
                            list("search",
-                                !is.na(search),
+                                !is.null(search),
                                 search),
                            list("order",
-                                all(!is.na(order)),
+                                !is.null(order),
                                 paste0(order, collapse = ","))
   )
 
@@ -286,17 +286,17 @@ rba_jaspar_collections_matrices <- function(collection,
 #'
 #' @family "JASPAR"
 #' @export
-rba_jaspar_matrix_search <- function(term = NA,
-                                     tf_name = NA,
-                                     tf_class = NA,
-                                     tf_family = NA,
-                                     tax_group = NA,
-                                     tax_id = NA,
-                                     data_type = NA,
-                                     collection = NA,
+rba_jaspar_matrix_search <- function(term = NULL,
+                                     tf_name = NULL,
+                                     tf_class = NULL,
+                                     tf_family = NULL,
+                                     tax_group = NULL,
+                                     tax_id = NULL,
+                                     data_type = NULL,
+                                     collection = NULL,
                                      release = 2020,
                                      only_last_version = FALSE,
-                                     order = NA,
+                                     order = NULL,
                                      page_size = 1000,
                                      page = 1,
                                      ...) {
@@ -352,40 +352,40 @@ rba_jaspar_matrix_search <- function(term = NA,
                                        "page_size" = page_size,
                                        "page" = page),
                            list("search",
-                                !is.na(term),
+                                !is.null(term),
                                 term),
                            list("name",
-                                !is.na(tf_name),
+                                !is.null(tf_name),
                                 tf_name),
                            list("tf_class",
-                                !is.na(tf_class),
+                                !is.null(tf_class),
                                 tf_class),
                            list("tf_family",
-                                !is.na(tf_family),
+                                !is.null(tf_family),
                                 tf_family),
                            list("tax_group",
-                                !is.na(tax_group),
+                                !is.null(tax_group),
                                 tax_group),
                            list("tax_id",
-                                all(!is.na(tax_id)),
+                                !is.null(tax_id),
                                 paste0(tax_id, collapse = ",")),
                            list("data_type",
-                                !is.na(data_type),
+                                !is.null(data_type),
                                 data_type),
                            list("collection",
-                                !is.na(collection),
+                                !is.null(collection),
                                 collection),
                            list("search",
-                                !is.na(term),
+                                !is.null(term),
                                 term),
                            list("search",
-                                !is.na(term),
+                                !is.null(term),
                                 term),
                            list("version",
                                 isTRUE(only_last_version),
                                 "latest"),
                            list("order",
-                                !all(is.na(order)),
+                                !is.null(order),
                                 paste0(order, collapse = ","))
   )
 
@@ -446,7 +446,7 @@ rba_jaspar_matrix_search <- function(term = NA,
 #' @family "JASPAR"
 #' @export
 rba_jaspar_matrix_versions <- function(base_id,
-                                       order = NA,
+                                       order = NULL,
                                        ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -466,7 +466,7 @@ rba_jaspar_matrix_versions <- function(base_id,
   call_query <- .rba_query(init = list("base_id" = base_id,
                                        "page_size" = 1000),
                            list("order",
-                                !all(is.na(order)),
+                                !is.null(order),
                                 paste0(order, collapse = ",")))
 
   ## Build Function-Specific Call
@@ -501,10 +501,10 @@ rba_jaspar_matrix_versions <- function(base_id,
 #' @param file_format Character: Instead of returning a R object, you
 #'   can directly download the profile matrix in file with this format.
 #'   Supported formats are: "yaml", "jaspar", "transfac", "meme" and "pfm"
-#' @param save_to NA or Character:\itemize{
-#'   \item NA: (only if file_format was provided) Save the file to an
+#' @param save_to NULL or Character:\itemize{
+#'   \item NULL: (only if file_format was provided) Save the file to an
 #'     automatically-generated path.
-#'   \item Character string: A valid file path to save the file to.}
+#'   \item Character string: A valid file or directory path to save the file to.}
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #'   arguments documentation for more information on available options.
 #'
@@ -542,8 +542,8 @@ rba_jaspar_matrix_versions <- function(base_id,
 #' @family "JASPAR"
 #' @export
 rba_jaspar_matrix <- function(matrix_id,
-                              file_format = NA,
-                              save_to = NA,
+                              file_format = NULL,
+                              save_to = NULL,
                               ...) {
   ## Load Global Options
   .rba_ext_args(..., ignore_save = TRUE)
@@ -564,7 +564,7 @@ rba_jaspar_matrix <- function(matrix_id,
   .msg("Retrieving details of matrix profile with ID %s.", matrix_id)
 
   ## Build Function-Specific Call
-  if (is.na(file_format)) {
+  if (is.null(file_format)) {
     accept_input <- "application/json"
 
     parser_input <- list("json->list_simp",
@@ -572,7 +572,7 @@ rba_jaspar_matrix <- function(matrix_id,
                            x$pfm <- as.matrix(t(as.data.frame(x$pfm[c("A", "C", "G", "T")])))
                            return(x)})
 
-    save_to_input <- ifelse(!is.na(save_to) || isTRUE(save_to),
+    save_to_input <- ifelse(isTRUE(save_to),
                             .rba_file("jaspar_matrix.json",
                                       save_to = save_to),
                             .rba_file("jaspar_matrix.json")
@@ -590,7 +590,7 @@ rba_jaspar_matrix <- function(matrix_id,
 
     save_to_input <- .rba_file(file = sprintf("%s.%s",
                                               matrix_id, file_format),
-                               save_to = ifelse(is.na(save_to),
+                               save_to = ifelse(is.null(save_to) || is.na(save_to),
                                                 yes = TRUE,
                                                 no = save_to))
   }
@@ -619,7 +619,7 @@ rba_jaspar_matrix <- function(matrix_id,
 #'   argument, a list of all JASPAR database releases will be returned.
 #'
 #' @param release_number Numeric: Which JASPAR database release number
-#'   information's to retrieve? If left NA (the default), a list of all
+#'   information's to retrieve? If left NULL (the default), a list of all
 #'   JASPAR database releases will be returned. Available options are 1 to 8.
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #'   arguments documentation for more information on available options.
@@ -653,7 +653,7 @@ rba_jaspar_matrix <- function(matrix_id,
 #'
 #' @family "JASPAR"
 #' @export
-rba_jaspar_releases  <- function(release_number = NA,
+rba_jaspar_releases  <- function(release_number = NULL,
                                  ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -663,7 +663,7 @@ rba_jaspar_releases  <- function(release_number = NA,
                              ran = c(1,8))
   ))
 
-  .msg(ifelse(is.na(release_number),
+  .msg(ifelse(is.null(release_number),
               yes = "Retrieving a list of all releases of JASPAR database.",
               no = sprintf("Retrieving a details of JASPAR database release number %s.",
                            release_number))
@@ -672,15 +672,15 @@ rba_jaspar_releases  <- function(release_number = NA,
   ## Build GET API Request's query
   call_query <- .rba_query(init = list(),
                            list("release_number",
-                                !is.na(release_number),
+                                !is.null(release_number),
                                 release_number),
                            list("page_size",
-                                is.na(release_number),
+                                is.null(release_number),
                                 1000)
   )
 
   ## Build Function-Specific Call
-  if (is.na(release_number)) {
+  if (is.null(release_number)) {
     path_input <- paste0(.rba_stg("jaspar", "pth"), "releases/")
     parser_input <- list("json->list_simp",
                          function(x) x[["results"]])
@@ -766,7 +766,7 @@ rba_jaspar_sites <- function(matrix_id,
                           query = call_query,
                           accept = "application/json",
                           parser = "json->list_simp",
-                          save_to = .rba_file("jaspar_matrix.json"))
+                          save_to = .rba_file("jaspar_sites.json"))
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -818,8 +818,8 @@ rba_jaspar_sites <- function(matrix_id,
 #' @family "JASPAR"
 #' @export
 rba_jaspar_species <- function(release = 2020,
-                               search = NA,
-                               order = NA,
+                               search = NULL,
+                               order = NULL,
                                ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -841,10 +841,10 @@ rba_jaspar_species <- function(release = 2020,
                                        "page" = 1,
                                        "page_size" = 1000),
                            list("search",
-                                !is.na(search),
+                                !is.null(search),
                                 search),
                            list("order",
-                                all(!is.na(order)),
+                                !is.null(order),
                                 paste0(order, collapse = ","))
   )
 
@@ -927,8 +927,8 @@ rba_jaspar_species <- function(release = 2020,
 rba_jaspar_species_matrices <- function(tax_id,
                                         release = 2020,
                                         only_last_version = FALSE,
-                                        search = NA,
-                                        order = NA,
+                                        search = NULL,
+                                        order = NULL,
                                         page_size = 1000,
                                         page = 1,
                                         ...) {
@@ -966,10 +966,10 @@ rba_jaspar_species_matrices <- function(tax_id,
                                 isTRUE(only_last_version),
                                 "latest"),
                            list("search",
-                                !is.na(search),
+                                !is.null(search),
                                 search),
                            list("order",
-                                all(!is.na(order)),
+                                !is.null(order),
                                 paste0(order, collapse = ","))
   )
 
@@ -1125,8 +1125,8 @@ rba_jaspar_taxons <- function(release = 2020,
 rba_jaspar_taxons_matrices <- function(tax_group,
                                        release = 2020,
                                        only_last_version = FALSE,
-                                       search = NA,
-                                       order = NA,
+                                       search = NULL,
+                                       order = NULL,
                                        page_size = 1000,
                                        page = 1,
                                        ...) {
@@ -1173,10 +1173,10 @@ rba_jaspar_taxons_matrices <- function(tax_group,
                                 isTRUE(only_last_version),
                                 "latest"),
                            list("search",
-                                !is.na(search),
+                                !is.null(search),
                                 search),
                            list("order",
-                                all(!is.na(order)),
+                                !is.null(order),
                                 paste0(order, collapse = ","))
   )
 
@@ -1260,11 +1260,11 @@ rba_jaspar_taxons_matrices <- function(tax_group,
 #'
 #' @family "JASPAR"
 #' @export
-rba_jaspar_tffm_search <- function(term = NA,
+rba_jaspar_tffm_search <- function(term = NULL,
                                    release = 2020,
-                                   tax_group = NA,
-                                   search = NA,
-                                   order = NA,
+                                   tax_group = NULL,
+                                   search = NULL,
+                                   order = NULL,
                                    page_size = 1000,
                                    page = 1,
                                    ...) {
@@ -1307,13 +1307,13 @@ rba_jaspar_tffm_search <- function(term = NA,
                                        "page" = page,
                                        "page_size" = page_size),
                            list("search",
-                                !is.na(term),
+                                !is.null(term),
                                 term),
                            list("tax_group",
-                                !is.na(tax_group),
+                                !is.null(tax_group),
                                 tax_group),
                            list("order",
-                                all(!is.na(order)),
+                                !is.null(order),
                                 paste0(order, collapse = ","))
   )
 
