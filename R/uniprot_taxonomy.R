@@ -143,15 +143,15 @@ rba_uniprot_taxonomy <- function(ids,
                              ran = c(1,200)),
                         list(arg = "page_number",
                              class = "numeric")),
-            cond = list(list(quote(length(ids) > 1 && !is.nulll(hierarchy)),
+            cond = list(list(quote(length(ids) > 1 && !is.null(hierarchy)),
                              "you cannot specify 'hierarchy' when providing more than 1 ids."),
-                        list(quote(is.nulll(hierarchy) && (page_size != 200 | page_number != 1)),
+                        list(quote(is.null(hierarchy) && (page_size != 200 | page_number != 1)),
                              "Because hierarchy argument was not provided, page_size and page_number were ignored.",
                              warn = TRUE))
   )
 
   .msg("Retrieving %snodes information of %s.",
-       ifelse(!is.nulll(hierarchy),
+       ifelse(!is.null(hierarchy),
               yes = hierarchy,
               no = ""),
        .paste2(ids, sep = ", ", last = " and "))
@@ -165,7 +165,7 @@ rba_uniprot_taxonomy <- function(ids,
                                no = "id"),
                         paste0(ids, collapse = ",")
   )
-  if (!is.nulll(hierarchy)) {
+  if (!is.null(hierarchy)) {
     path_input <- paste0(path_input, "/", hierarchy)
     ## Build GET API Request's query
     call_query <- list("pageSize" = page_size,
