@@ -175,12 +175,12 @@
     </div>
 
     <pre class="usage"><span class='fu'>rba_uniprot_proteomics_search</span><span class='op'>(</span>
-  accession <span class='op'>=</span> <span class='cn'>NA</span>,
-  data_source <span class='op'>=</span> <span class='cn'>NA</span>,
-  taxid <span class='op'>=</span> <span class='cn'>NA</span>,
-  upid <span class='op'>=</span> <span class='cn'>NA</span>,
-  peptide <span class='op'>=</span> <span class='cn'>NA</span>,
-  unique <span class='op'>=</span> <span class='cn'>NA</span>,
+  accession <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data_source <span class='op'>=</span> <span class='cn'>NULL</span>,
+  taxid <span class='op'>=</span> <span class='cn'>NULL</span>,
+  upid <span class='op'>=</span> <span class='cn'>NULL</span>,
+  peptide <span class='op'>=</span> <span class='cn'>NULL</span>,
+  unique <span class='op'>=</span> <span class='cn'>NULL</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
@@ -221,7 +221,7 @@ identifier (UPID)</a>. You can provide up to 100 UPIDs.</p></td>
       <td><p>Logical: Should the results be filtered based on the
 Peptide's uniqueness (the fact that a peptide maps to only 1 protein). If
 TRUE, Only unique peptides will be returned, if FALSE only un-unique
-peptides will be returned; If NA (default) the results will not be
+peptides will be returned; If NULL (default) the results will not be
 filtered based on this.</p></td>
     </tr>
     <tr>

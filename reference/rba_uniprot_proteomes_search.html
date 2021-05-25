@@ -177,14 +177,14 @@
     </div>
 
     <pre class="usage"><span class='fu'>rba_uniprot_proteomes_search</span><span class='op'>(</span>
-  name <span class='op'>=</span> <span class='cn'>NA</span>,
-  upid <span class='op'>=</span> <span class='cn'>NA</span>,
-  taxid <span class='op'>=</span> <span class='cn'>NA</span>,
-  keyword <span class='op'>=</span> <span class='cn'>NA</span>,
-  xref <span class='op'>=</span> <span class='cn'>NA</span>,
-  genome_acc <span class='op'>=</span> <span class='cn'>NA</span>,
-  is_ref_proteome <span class='op'>=</span> <span class='cn'>NA</span>,
-  is_redundant <span class='op'>=</span> <span class='cn'>NA</span>,
+  name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  upid <span class='op'>=</span> <span class='cn'>NULL</span>,
+  taxid <span class='op'>=</span> <span class='cn'>NULL</span>,
+  keyword <span class='op'>=</span> <span class='cn'>NULL</span>,
+  xref <span class='op'>=</span> <span class='cn'>NULL</span>,
+  genome_acc <span class='op'>=</span> <span class='cn'>NULL</span>,
+  is_ref_proteome <span class='op'>=</span> <span class='cn'>NULL</span>,
+  is_redundant <span class='op'>=</span> <span class='cn'>NULL</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
@@ -222,7 +222,7 @@ Biosample ID. You can provide up to 20 cross-reference IDs.</p></td>
     <tr>
       <th>is_ref_proteome</th>
       <td><p>(logical) If TRUE, only return reference proteomes; If
-FALSE, only returns non-reference proteomes; If NA (default), the results
+FALSE, only returns non-reference proteomes; If NULL (default), the results
 will not be filtered by this criteria see
 <a href='https://www.uniprot.org/help/reference_proteome'>'What are reference
 proteomes?'</a> for more information.</p></td>
@@ -230,7 +230,7 @@ proteomes?'</a> for more information.</p></td>
     <tr>
       <th>is_redundant</th>
       <td><p>(logical) If TRUE, only return redundant proteomes; If
-FALSE, only returns non-redundant proteomes; If NA (default), the results
+FALSE, only returns non-redundant proteomes; If NULL (default), the results
 will not be filtered by redundancy. see
 <a href='https://www.uniprot.org/help/proteome_redundancy'>'Reducing proteome
 redundancy'</a> for more information.</p></td>

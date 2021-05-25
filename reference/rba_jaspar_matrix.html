@@ -172,7 +172,7 @@
  the latest version will be returned.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rba_jaspar_matrix</span><span class='op'>(</span><span class='va'>matrix_id</span>, file_format <span class='op'>=</span> <span class='cn'>NA</span>, save_to <span class='op'>=</span> <span class='cn'>NA</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>rba_jaspar_matrix</span><span class='op'>(</span><span class='va'>matrix_id</span>, file_format <span class='op'>=</span> <span class='cn'>NULL</span>, save_to <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -190,10 +190,10 @@ Supported formats are: "yaml", "jaspar", "transfac", "meme" and "pfm"</p></td>
     </tr>
     <tr>
       <th>save_to</th>
-      <td><p>NA or Character:</p><ul>
-<li><p>NA: (only if file_format was provided) Save the file to an
+      <td><p>NULL or Character:</p><ul>
+<li><p>NULL: (only if file_format was provided) Save the file to an
   automatically-generated path.</p></li>
-<li><p>Character string: A valid file path to save the file to.</p></li>
+<li><p>Character string: A valid file or directory path to save the file to.</p></li>
 </ul></td>
     </tr>
     <tr>

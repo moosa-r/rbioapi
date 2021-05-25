@@ -172,10 +172,10 @@
 
     <pre class="usage"><span class='fu'>rba_uniprot_uniparc_sequence</span><span class='op'>(</span>
   <span class='va'>sequence</span>,
-  rf_dd_type <span class='op'>=</span> <span class='cn'>NA</span>,
-  rf_db_id <span class='op'>=</span> <span class='cn'>NA</span>,
-  rf_active <span class='op'>=</span> <span class='cn'>NA</span>,
-  rf_tax_id <span class='op'>=</span> <span class='cn'>NA</span>,
+  rf_dd_type <span class='op'>=</span> <span class='cn'>NULL</span>,
+  rf_db_id <span class='op'>=</span> <span class='cn'>NULL</span>,
+  rf_active <span class='op'>=</span> <span class='cn'>NULL</span>,
+  rf_tax_id <span class='op'>=</span> <span class='cn'>NULL</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
@@ -203,7 +203,7 @@ values.</p></td>
       <th>rf_active</th>
       <td><p>(logical ) Filter the content of UniParc entry based on
 active status on source database:</p><ul>
-<li><p>NA: don't filter contents based on active status.</p></li>
+<li><p>NULL: (default) don't filter contents based on active status.</p></li>
 <li><p>TRUE: only return contents which are still active.</p></li>
 <li><p>FALSE: Only return contents which are not active.</p></li>
 </ul></td>

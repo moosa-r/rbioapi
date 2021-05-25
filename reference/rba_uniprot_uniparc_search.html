@@ -173,24 +173,24 @@
     </div>
 
     <pre class="usage"><span class='fu'>rba_uniprot_uniparc_search</span><span class='op'>(</span>
-  upi <span class='op'>=</span> <span class='cn'>NA</span>,
-  accession <span class='op'>=</span> <span class='cn'>NA</span>,
-  db_type <span class='op'>=</span> <span class='cn'>NA</span>,
-  db_id <span class='op'>=</span> <span class='cn'>NA</span>,
-  gene <span class='op'>=</span> <span class='cn'>NA</span>,
-  protein <span class='op'>=</span> <span class='cn'>NA</span>,
-  taxid <span class='op'>=</span> <span class='cn'>NA</span>,
-  organism <span class='op'>=</span> <span class='cn'>NA</span>,
-  sequence_checksum <span class='op'>=</span> <span class='cn'>NA</span>,
-  ipr <span class='op'>=</span> <span class='cn'>NA</span>,
-  signature_db <span class='op'>=</span> <span class='cn'>NA</span>,
-  signature_id <span class='op'>=</span> <span class='cn'>NA</span>,
-  upid <span class='op'>=</span> <span class='cn'>NA</span>,
-  seq_length <span class='op'>=</span> <span class='cn'>NA</span>,
-  rf_dd_type <span class='op'>=</span> <span class='cn'>NA</span>,
-  rf_db_id <span class='op'>=</span> <span class='cn'>NA</span>,
-  rf_active <span class='op'>=</span> <span class='cn'>NA</span>,
-  rf_tax_id <span class='op'>=</span> <span class='cn'>NA</span>,
+  upi <span class='op'>=</span> <span class='cn'>NULL</span>,
+  accession <span class='op'>=</span> <span class='cn'>NULL</span>,
+  db_type <span class='op'>=</span> <span class='cn'>NULL</span>,
+  db_id <span class='op'>=</span> <span class='cn'>NULL</span>,
+  gene <span class='op'>=</span> <span class='cn'>NULL</span>,
+  protein <span class='op'>=</span> <span class='cn'>NULL</span>,
+  taxid <span class='op'>=</span> <span class='cn'>NULL</span>,
+  organism <span class='op'>=</span> <span class='cn'>NULL</span>,
+  sequence_checksum <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ipr <span class='op'>=</span> <span class='cn'>NULL</span>,
+  signature_db <span class='op'>=</span> <span class='cn'>NULL</span>,
+  signature_id <span class='op'>=</span> <span class='cn'>NULL</span>,
+  upid <span class='op'>=</span> <span class='cn'>NULL</span>,
+  seq_length <span class='op'>=</span> <span class='cn'>NULL</span>,
+  rf_dd_type <span class='op'>=</span> <span class='cn'>NULL</span>,
+  rf_db_id <span class='op'>=</span> <span class='cn'>NULL</span>,
+  rf_active <span class='op'>=</span> <span class='cn'>NULL</span>,
+  rf_tax_id <span class='op'>=</span> <span class='cn'>NULL</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
@@ -285,7 +285,7 @@ values.</p></td>
       <th>rf_active</th>
       <td><p>(logical ) Filter the content of each UniParc entry based on
 active status on source database:</p><ul>
-<li><p>NA: don't filter contents based on active status.</p></li>
+<li><p>NULL: (default) don't filter contents based on active status.</p></li>
 <li><p>TRUE: only return contents which are still active.</p></li>
 <li><p>FALSE: Only return contents which are not active.</p></li>
 </ul></td>

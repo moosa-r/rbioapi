@@ -172,7 +172,7 @@
   proteomes?</a> for more information.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rba_uniprot_proteomes</span><span class='op'>(</span><span class='va'>upid</span>, get_proteins <span class='op'>=</span> <span class='cn'>FALSE</span>, reviewed <span class='op'>=</span> <span class='cn'>NA</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>rba_uniprot_proteomes</span><span class='op'>(</span><span class='va'>upid</span>, get_proteins <span class='op'>=</span> <span class='cn'>FALSE</span>, reviewed <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -192,7 +192,7 @@ of the proteome with provided UPID, set TRUE to also return the proteins
       <th>reviewed</th>
       <td><p>Logical:  Only considered when get_proteins is TRUE.
 If TRUE, only return "UniProtKB/Swiss-Prot" (reviewed) proteins;
-If FALSE, only return TrEMBL (un-reviewed) entries. leave it as NA if you
+If FALSE, only return TrEMBL (un-reviewed) entries. leave it as NULL if you
 do not want to filter proteins based on their review status.</p></td>
     </tr>
     <tr>
