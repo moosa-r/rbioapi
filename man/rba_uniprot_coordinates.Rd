@@ -4,7 +4,7 @@
 \alias{rba_uniprot_coordinates}
 \title{Get Genomic Coordinates of a Protein}
 \usage{
-rba_uniprot_coordinates(accession = NA, db_type = NA, db_id = NA, ...)
+rba_uniprot_coordinates(accession = NULL, db_type = NULL, db_id = NULL, ...)
 }
 \arguments{
 \item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{

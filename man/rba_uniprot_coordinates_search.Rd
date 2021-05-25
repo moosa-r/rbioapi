@@ -5,13 +5,13 @@
 \title{Search Genomic Coordinates of UniProt entries}
 \usage{
 rba_uniprot_coordinates_search(
-  accession = NA,
-  chromosome = NA,
-  ensembl_id = NA,
-  gene = NA,
-  protein = NA,
-  taxid = NA,
-  location = NA,
+  accession = NULL,
+  chromosome = NULL,
+  ensembl_id = NULL,
+  gene = NULL,
+  protein = NULL,
+  taxid = NULL,
+  location = NULL,
   ...
 )
 }

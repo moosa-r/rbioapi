@@ -5,11 +5,11 @@
 \title{Search Antigens in UniProt}
 \usage{
 rba_uniprot_antigens_search(
-  accession = NA,
-  antigen_sequence = NA,
-  antigen_id = NA,
-  ensembl_id = NA,
-  match_score = NA,
+  accession = NULL,
+  antigen_sequence = NULL,
+  antigen_id = NULL,
+  ensembl_id = NULL,
+  match_score = NULL,
   ...
 )
 }

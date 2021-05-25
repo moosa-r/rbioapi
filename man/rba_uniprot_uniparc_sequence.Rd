@@ -6,10 +6,10 @@
 \usage{
 rba_uniprot_uniparc_sequence(
   sequence,
-  rf_dd_type = NA,
-  rf_db_id = NA,
-  rf_active = NA,
-  rf_tax_id = NA,
+  rf_dd_type = NULL,
+  rf_db_id = NULL,
+  rf_active = NULL,
+  rf_tax_id = NULL,
   ...
 )
 }
@@ -27,7 +27,7 @@ values.}
 
 \item{rf_active}{(logical ) Filter the content of UniParc entry based on
 active status on source database:\itemize{
-\item NA: don't filter contents based on active status.
+\item NULL: (default) don't filter contents based on active status.
 \item TRUE: only return contents which are still active.
 \item FALSE: Only return contents which are not active.}}
 

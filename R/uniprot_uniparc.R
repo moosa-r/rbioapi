@@ -50,7 +50,7 @@
 #'   values.
 #' @param rf_active (logical ) Filter the content of each UniParc entry based on
 #'   active status on source database:\itemize{
-#'   \item NA: don't filter contents based on active status.
+#'   \item NULL: (default) don't filter contents based on active status.
 #'   \item TRUE: only return contents which are still active.
 #'   \item FALSE: Only return contents which are not active.}
 #' @param rf_tax_id (Numeric) Filter the content of each UniParc entry by
@@ -89,24 +89,24 @@
 #'
 #' @family "UniProt - UniParc"
 #' @export
-rba_uniprot_uniparc_search <- function(upi = NA,
-                                       accession = NA,
-                                       db_type = NA,
-                                       db_id = NA,
-                                       gene = NA,
-                                       protein = NA,
-                                       taxid = NA,
-                                       organism = NA,
-                                       sequence_checksum= NA,
-                                       ipr = NA,
-                                       signature_db = NA,
-                                       signature_id = NA,
-                                       upid = NA,
-                                       seq_length = NA,
-                                       rf_dd_type = NA,
-                                       rf_db_id = NA,
-                                       rf_active = NA,
-                                       rf_tax_id = NA,
+rba_uniprot_uniparc_search <- function(upi = NULL,
+                                       accession = NULL,
+                                       db_type = NULL,
+                                       db_id = NULL,
+                                       gene = NULL,
+                                       protein = NULL,
+                                       taxid = NULL,
+                                       organism = NULL,
+                                       sequence_checksum = NULL,
+                                       ipr = NULL,
+                                       signature_db = NULL,
+                                       signature_id = NULL,
+                                       upid = NULL,
+                                       seq_length = NULL,
+                                       rf_dd_type = NULL,
+                                       rf_db_id = NULL,
+                                       rf_active = NULL,
+                                       rf_tax_id = NULL,
                                        ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -159,71 +159,71 @@ rba_uniprot_uniparc_search <- function(upi = NA,
   ## Build GET API Request's query
   call_query <- .rba_query(init = list("size" = "-1"),
                            list("upi",
-                                any(!is.na(upi)),
+                                !is.null(upi),
                                 paste0(upi,
                                        collapse = ",")),
                            list("accession",
-                                any(!is.na(accession)),
+                                !is.null(accession),
                                 paste0(accession,
                                        collapse = ",")),
                            list("dbtype",
-                                !is.na(db_type),
+                                !is.null(db_type),
                                 db_type),
                            list("dbid",
-                                any(!is.na(db_id)),
+                                !is.null(db_id),
                                 paste0(db_id,
                                        collapse = ",")),
                            list("gene",
-                                any(!is.na(gene)),
+                                !is.null(gene),
                                 paste0(gene,
                                        collapse = ",")),
                            list("protein",
-                                !is.na(protein),
+                                !is.null(protein),
                                 protein),
                            list("taxid",
-                                any(!is.na(taxid)),
+                                !is.null(taxid),
                                 paste0(taxid,
                                        collapse = ",")),
                            list("organism",
-                                !is.na(organism),
+                                !is.null(organism),
                                 organism),
                            list("sequencechecksum",
-                                !is.na(sequence_checksum),
+                                !is.null(sequence_checksum),
                                 sequence_checksum),
                            list("ipr",
-                                any(!is.na(ipr)),
+                                !is.null(ipr),
                                 paste0(ipr,
                                        collapse = ",")),
                            list("signaturetype",
-                                any(!is.na(signature_db)),
+                                !is.null(signature_db),
                                 paste0(signature_db,
                                        collapse = ",")),
                            list("signatureid",
-                                any(!is.na(signature_id)),
+                                !is.null(signature_id),
                                 paste0(signature_id,
                                        collapse = ",")),
                            list("upid",
-                                any(!is.na(upid)),
+                                !is.null(upid),
                                 paste0(upid,
                                        collapse = ",")),
                            list("seqLength",
-                                !is.na(seq_length),
+                                !is.null(seq_length),
                                 seq_length),
                            list("rfDdtype",
-                                any(!is.na(rf_dd_type)),
+                                !is.null(rf_dd_type),
                                 paste0(rf_dd_type,
                                        collapse = ",")),
                            list("rfDbid",
-                                any(!is.na(rf_db_id)),
+                                !is.null(rf_db_id),
                                 paste0(rf_db_id,
                                        collapse = ",")),
                            list("rfActive",
-                                !is.na(rf_active),
+                                !is.null(rf_active),
                                 ifelse(rf_active,
                                        "true",
                                        "false")),
                            list("rfTaxId",
-                                any(!is.na(rf_tax_id)),
+                                !is.null(rf_tax_id),
                                 paste0(rf_tax_id,
                                        collapse = ",")))
   ## Build Function-Specific Call
@@ -271,7 +271,7 @@ rba_uniprot_uniparc_search <- function(upi = NA,
 #'   values.
 #' @param rf_active (logical ) Filter the content of UniParc entry based on
 #'   active status on source database:\itemize{
-#'   \item NA: don't filter contents based on active status.
+#'   \item NULL: (default) don't filter contents based on active status.
 #'   \item TRUE: only return contents which are still active.
 #'   \item FALSE: Only return contents which are not active.}
 #' @param rf_tax_id (Numeric) Filter the content of the UniParc entry by
@@ -305,14 +305,14 @@ rba_uniprot_uniparc_search <- function(upi = NA,
 #'
 #' @family "UniProt - UniParc"
 #' @export
-rba_uniprot_uniparc <- function(upi = NA,
-                                accession = NA,
-                                db_id = NA,
-                                upid = NA,
-                                rf_dd_type = NA,
-                                rf_db_id = NA,
-                                rf_active = NA,
-                                rf_tax_id = NA,
+rba_uniprot_uniparc <- function(upi = NULL,
+                                accession = NULL,
+                                db_id = NULL,
+                                upid = NULL,
+                                rf_dd_type = NULL,
+                                rf_db_id = NULL,
+                                rf_active = NULL,
+                                rf_tax_id = NULL,
                                 ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -333,50 +333,50 @@ rba_uniprot_uniparc <- function(upi = NA,
                              class = "logical"),
                         list(arg = "rf_tax_id",
                              class = "character")),
-            cond = list(list(quote(sum(!is.na(accession), !is.na(db_id), !is.na(upid), !is.na(upi)) != 1),
+            cond = list(list(quote(sum(!is.null(accession), !is.null(db_id), !is.null(upid), !is.null(upi)) != 1),
                              "Please provide -only- one of the arguments 'accession', 'db_id', 'upid' or 'upi'."))
   )
 
   .msg("Retriving UniParc entry with %s.",
-       if (!is.na(accession)) {paste0("UniProt accession ", accession)
-       } else if (!is.na(db_id)) {
+       if (!is.null(accession)) {paste0("UniProt accession ", accession)
+       } else if (!is.null(db_id)) {
          path_input <- paste0("cross-reference database ID ", accession)
-       } else if (!is.na(upid)) {
+       } else if (!is.null(upid)) {
          path_input <- paste0("UniProt Proteome ID ", accession)
-       } else if (!is.na(upi)) {
+       } else if (!is.null(upi)) {
          path_input <- paste0("UniParc ID ", accession)
        })
 
   ## Build GET API Request's query
   call_query <- .rba_query(init = list("size" = "-1"),
                            list("rfDdtype",
-                                any(!is.na(rf_dd_type)),
+                                !is.null(rf_dd_type),
                                 paste0(rf_dd_type,
                                        collapse = ",")),
                            list("rfDbid",
-                                any(!is.na(rf_db_id)),
+                                !is.null(rf_db_id),
                                 paste0(rf_db_id,
                                        collapse = ",")),
                            list("rfActive",
-                                !is.na(rf_active),
+                                !is.null(rf_active),
                                 ifelse(rf_active,
                                        "true",
                                        "false")),
                            list("rfTaxId",
-                                any(!is.na(rf_tax_id)),
+                                !is.null(rf_tax_id),
                                 paste0(rf_tax_id,
                                        collapse = ",")))
   ## Build Function-Specific Call
-  if (!is.na(accession)) {
+  if (!is.null(accession)) {
     path_input <- paste0(.rba_stg("uniprot", "pth"),
                          "uniparc/accession/", accession)
-  } else if (!is.na(db_id)) {
+  } else if (!is.null(db_id)) {
     path_input <- paste0(.rba_stg("uniprot", "pth"),
                          "uniparc/dbreference/", db_id)
-  } else if (!is.na(upid)) {
+  } else if (!is.null(upid)) {
     path_input <- paste0(.rba_stg("uniprot", "pth"),
                          "uniparc/proteome/", upid)
-  } else if (!is.na(upi)) {
+  } else if (!is.null(upi)) {
     path_input <- paste0(.rba_stg("uniprot", "pth"),
                          "uniparc/upi/", upi)
   }
@@ -436,11 +436,11 @@ rba_uniprot_uniparc <- function(upi = NA,
 #'
 #' @family "UniProt - UniParc"
 #' @export
-rba_uniprot_uniparc_bestguess <- function(upi = NA,
-                                          accession = NA,
-                                          db_id = NA,
-                                          gene = NA,
-                                          taxid = NA,
+rba_uniprot_uniparc_bestguess <- function(upi = NULL,
+                                          accession = NULL,
+                                          db_id = NULL,
+                                          gene = NULL,
+                                          taxid = NULL,
                                           ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -465,23 +465,23 @@ rba_uniprot_uniparc_bestguess <- function(upi = NA,
   ## Build GET API Request's query
   call_query <- .rba_query(init = list("size" = "-1"),
                            list("upi",
-                                any(!is.na(upi)),
+                                !is.null(upi),
                                 paste0(upi,
                                        collapse = ",")),
                            list("accession",
-                                any(!is.na(accession)),
+                                !is.null(accession),
                                 paste0(accession,
                                        collapse = ",")),
                            list("dbid",
-                                any(!is.na(db_id)),
+                                !is.null(db_id),
                                 paste0(db_id,
                                        collapse = ",")),
                            list("gene",
-                                any(!is.na(gene)),
+                                !is.null(gene),
                                 paste0(gene,
                                        collapse = ",")),
                            list("taxid",
-                                any(!is.na(taxid)),
+                                !is.null(taxid),
                                 paste0(taxid,
                                        collapse = ",")))
   ## Build Function-Specific Call
@@ -518,7 +518,7 @@ rba_uniprot_uniparc_bestguess <- function(upi = NA,
 #'   values.
 #' @param rf_active (logical ) Filter the content of UniParc entry based on
 #'   active status on source database:\itemize{
-#'   \item NA: don't filter contents based on active status.
+#'   \item NULL: (default) don't filter contents based on active status.
 #'   \item TRUE: only return contents which are still active.
 #'   \item FALSE: Only return contents which are not active.}
 #' @param rf_tax_id (Numeric) Filter the content of the UniParc entry by
@@ -547,10 +547,10 @@ rba_uniprot_uniparc_bestguess <- function(upi = NA,
 #' @family "UniProt - UniParc"
 #' @export
 rba_uniprot_uniparc_sequence <- function(sequence,
-                                         rf_dd_type = NA,
-                                         rf_db_id = NA,
-                                         rf_active = NA,
-                                         rf_tax_id = NA,
+                                         rf_dd_type = NULL,
+                                         rf_db_id = NULL,
+                                         rf_active = NULL,
+                                         rf_tax_id = NULL,
                                          ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -568,20 +568,20 @@ rba_uniprot_uniparc_sequence <- function(sequence,
   ## Build GET API Request's query
   call_query <- .rba_query(init = list(),
                            list("rfDdtype",
-                                any(!is.na(rf_dd_type)),
+                                !is.null(rf_dd_type),
                                 paste0(rf_dd_type,
                                        collapse = ",")),
                            list("rfDbid",
-                                any(!is.na(rf_db_id)),
+                                !is.null(rf_db_id),
                                 paste0(rf_db_id,
                                        collapse = ",")),
                            list("rfActive",
-                                !is.na(rf_active),
+                                !is.null(rf_active),
                                 ifelse(rf_active,
                                        "true",
                                        "false")),
                            list("rfTaxId",
-                                any(!is.na(rf_tax_id)),
+                                !is.null(rf_tax_id),
                                 paste0(rf_tax_id,
                                        collapse = ",")))
   ## Build Function-Specific Call

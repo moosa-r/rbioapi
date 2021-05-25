@@ -5,20 +5,20 @@
 \title{Search UniProt entries}
 \usage{
 rba_uniprot_proteins_search(
-  accession = NA,
-  reviewed = NA,
-  isoform = NA,
-  go_term = NA,
-  keyword = NA,
-  ec = NA,
-  gene = NA,
-  exact_gene = NA,
-  protein = NA,
-  organism = NA,
-  taxid = NA,
-  pubmed = NA,
-  seq_length = NA,
-  md5 = NA,
+  accession = NULL,
+  reviewed = NULL,
+  isoform = NULL,
+  go_term = NULL,
+  keyword = NULL,
+  ec = NULL,
+  gene = NULL,
+  exact_gene = NULL,
+  protein = NULL,
+  organism = NULL,
+  taxid = NULL,
+  pubmed = NULL,
+  seq_length = NULL,
+  md5 = NULL,
   ...
 )
 }

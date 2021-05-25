@@ -5,14 +5,14 @@
 \title{Search Proteomes in UniProt}
 \usage{
 rba_uniprot_proteomes_search(
-  name = NA,
-  upid = NA,
-  taxid = NA,
-  keyword = NA,
-  xref = NA,
-  genome_acc = NA,
-  is_ref_proteome = NA,
-  is_redundant = NA,
+  name = NULL,
+  upid = NULL,
+  taxid = NULL,
+  keyword = NULL,
+  xref = NULL,
+  genome_acc = NULL,
+  is_ref_proteome = NULL,
+  is_redundant = NULL,
   ...
 )
 }
@@ -34,13 +34,13 @@ Biosample ID. You can provide up to 20 cross-reference IDs.}
 \item{genome_acc}{Genome accession associated with the proteome's components.}
 
 \item{is_ref_proteome}{(logical) If TRUE, only return reference proteomes; If
-FALSE, only returns non-reference proteomes; If NA (default), the results
+FALSE, only returns non-reference proteomes; If NULL (default), the results
 will not be filtered by this criteria see
 \href{https://www.uniprot.org/help/reference_proteome}{'What are reference
 proteomes?'} for more information.}
 
 \item{is_redundant}{(logical) If TRUE, only return redundant proteomes; If
-FALSE, only returns non-redundant proteomes; If NA (default), the results
+FALSE, only returns non-redundant proteomes; If NULL (default), the results
 will not be filtered by redundancy. see
 \href{https://www.uniprot.org/help/proteome_redundancy}{'Reducing proteome
 redundancy'} for more information.}

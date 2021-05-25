@@ -4,7 +4,7 @@
 \alias{rba_uniprot_features}
 \title{Get UniProt protein sequence features by accession}
 \usage{
-rba_uniprot_features(accession, types = NA, categories = NA, ...)
+rba_uniprot_features(accession, types = NULL, categories = NULL, ...)
 }
 \arguments{
 \item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{

@@ -5,24 +5,24 @@
 \title{Search UniParc Entries}
 \usage{
 rba_uniprot_uniparc_search(
-  upi = NA,
-  accession = NA,
-  db_type = NA,
-  db_id = NA,
-  gene = NA,
-  protein = NA,
-  taxid = NA,
-  organism = NA,
-  sequence_checksum = NA,
-  ipr = NA,
-  signature_db = NA,
-  signature_id = NA,
-  upid = NA,
-  seq_length = NA,
-  rf_dd_type = NA,
-  rf_db_id = NA,
-  rf_active = NA,
-  rf_tax_id = NA,
+  upi = NULL,
+  accession = NULL,
+  db_type = NULL,
+  db_id = NULL,
+  gene = NULL,
+  protein = NULL,
+  taxid = NULL,
+  organism = NULL,
+  sequence_checksum = NULL,
+  ipr = NULL,
+  signature_db = NULL,
+  signature_id = NULL,
+  upid = NULL,
+  seq_length = NULL,
+  rf_dd_type = NULL,
+  rf_db_id = NULL,
+  rf_active = NULL,
+  rf_tax_id = NULL,
   ...
 )
 }
@@ -81,7 +81,7 @@ values.}
 
 \item{rf_active}{(logical ) Filter the content of each UniParc entry based on
 active status on source database:\itemize{
-\item NA: don't filter contents based on active status.
+\item NULL: (default) don't filter contents based on active status.
 \item TRUE: only return contents which are still active.
 \item FALSE: Only return contents which are not active.}}
 

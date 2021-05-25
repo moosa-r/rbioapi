@@ -26,12 +26,12 @@
 #'   Biosample ID. You can provide up to 20 cross-reference IDs.
 #' @param genome_acc Genome accession associated with the proteome's components.
 #' @param is_ref_proteome (logical) If TRUE, only return reference proteomes; If
-#'   FALSE, only returns non-reference proteomes; If NA (default), the results
+#'   FALSE, only returns non-reference proteomes; If NULL (default), the results
 #'   will not be filtered by this criteria see
 #'   \href{https://www.uniprot.org/help/reference_proteome}{'What are reference
 #'   proteomes?'} for more information.
 #' @param is_redundant (logical) If TRUE, only return redundant proteomes; If
-#'   FALSE, only returns non-redundant proteomes; If NA (default), the results
+#'   FALSE, only returns non-redundant proteomes; If NULL (default), the results
 #'   will not be filtered by redundancy. see
 #'   \href{https://www.uniprot.org/help/proteome_redundancy}{'Reducing proteome
 #'   redundancy'} for more information.
@@ -67,14 +67,14 @@
 #'
 #' @family "UniProt - Proteomes"
 #' @export
-rba_uniprot_proteomes_search <- function(name = NA,
-                                         upid = NA,
-                                         taxid = NA,
-                                         keyword = NA,
-                                         xref = NA,
-                                         genome_acc = NA,
-                                         is_ref_proteome = NA,
-                                         is_redundant = NA,
+rba_uniprot_proteomes_search <- function(name = NULL,
+                                         upid = NULL,
+                                         taxid = NULL,
+                                         keyword = NULL,
+                                         xref = NULL,
+                                         genome_acc = NULL,
+                                         is_ref_proteome = NULL,
+                                         is_redundant = NULL,
                                          ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -105,34 +105,34 @@ rba_uniprot_proteomes_search <- function(name = NA,
   ## Build GET API Request's query
   call_query <- .rba_query(init = list("size" = "-1"),
                            list("name",
-                                !is.na(name),
+                                !is.null(name),
                                 name),
                            list("upid",
-                                any(!is.na(upid)),
+                                !is.null(upid),
                                 paste0(upid,
                                        collapse = ",")),
                            list("taxid",
-                                any(!is.na(taxid)),
+                                !is.null(taxid),
                                 paste0(taxid,
                                        collapse = ",")),
                            list("keyword",
-                                !is.na(keyword),
+                                !is.null(keyword),
                                 keyword),
                            list("xref",
-                                any(!is.na(xref)),
+                                !is.null(xref),
                                 paste0(xref,
                                        collapse = ",")),
                            list("genome_acc",
-                                any(!is.na(genome_acc)),
+                                !is.null(genome_acc),
                                 paste0(genome_acc,
                                        collapse = ",")),
                            list("is_ref_proteome",
-                                !is.na(is_ref_proteome),
+                                !is.null(is_ref_proteome),
                                 ifelse(is_ref_proteome,
                                        "true",
                                        "false")),
                            list("is_redundant",
-                                !is.na(is_redundant),
+                                !is.null(is_redundant),
                                 ifelse(is_redundant,
                                        "true",
                                        "false")))
@@ -179,7 +179,7 @@ rba_uniprot_proteomes_search <- function(name = NA,
 #'    of the provided proteome UPID.
 #' @param reviewed Logical:  Only considered when get_proteins is TRUE.
 #'   If TRUE, only return "UniProtKB/Swiss-Prot" (reviewed) proteins;
-#'   If FALSE, only return TrEMBL (un-reviewed) entries. leave it as NA if you
+#'   If FALSE, only return TrEMBL (un-reviewed) entries. leave it as NULL if you
 #'   do not want to filter proteins based on their review status.
 #' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
 #'   arguments documentation for more information on available options.
@@ -210,7 +210,7 @@ rba_uniprot_proteomes_search <- function(name = NA,
 #' @export
 rba_uniprot_proteomes <- function(upid,
                                   get_proteins = FALSE,
-                                  reviewed = NA,
+                                  reviewed = NULL,
                                   ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -221,7 +221,7 @@ rba_uniprot_proteomes <- function(upid,
                              class = "logical"),
                         list(arg = "reviewed",
                              class = "logical")),
-            cond = list(list(quote(isFALSE(get_proteins) && !is.na(reviewed)),
+            cond = list(list(quote(isFALSE(get_proteins) && !is.null(reviewed)),
                              "'reviewed' argument is ignored because you provided 'get_proteins' as FALSE.")),
             cond_warning = TRUE
   )
@@ -229,18 +229,19 @@ rba_uniprot_proteomes <- function(upid,
   .msg("Retrieving proteome %s (%s).",
        upid,
        ifelse(isTRUE(get_proteins),
-              yes = sprintf("With %sproteins",
-                            switch(as.character(reviewed),
-                                   "TRUE" = " - Only UniProtKB/Swiss-Prot",
-                                   "FALSE" = " - Only TrEMBL",
-                                   "NA" = "")),
+              yes = sprintf("With %s proteins",
+                            ifelse(test = is.null(reviewed),
+                                   yes = "",
+                                   no = ifelse(test = reviewed,
+                                               yes = "only UniProtKB/Swiss-Prot",
+                                               no =  "only TrEMBL"))),
               no = "Excluding proteins"))
   ## Build Function-Specific Call
   if (isTRUE(get_proteins)) {
     ## Build GET API Request's query
     call_query <- .rba_query(init = list(),
                              list("reviewed",
-                                  !is.na(reviewed),
+                                  !is.null(reviewed),
                                   ifelse(reviewed,
                                          "true",
                                          "false")))
@@ -324,9 +325,9 @@ rba_uniprot_proteomes <- function(upid,
 #'
 #' @family "UniProt - Proteomes"
 #' @export
-rba_uniprot_genecentric_search <- function(upid = NA,
-                                           accession = NA,
-                                           gene = NA,
+rba_uniprot_genecentric_search <- function(upid = NULL,
+                                           accession = NULL,
+                                           gene = NULL,
                                            ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -346,15 +347,15 @@ rba_uniprot_genecentric_search <- function(upid = NA,
   ## Build GET API Request's query
   call_query <- .rba_query(init = list("size" = "-1"),
                            list("upid",
-                                any(!is.na(upid)),
+                                !is.null(upid),
                                 paste0(upid,
                                        collapse = ",")),
                            list("accession",
-                                any(!is.na(accession)),
+                                !is.null(accession),
                                 paste0(accession,
                                        collapse = ",")),
                            list("gene",
-                                any(!is.na(gene)),
+                                !is.null(gene),
                                 paste0(gene,
                                        collapse = ",")))
   ## Build Function-Specific Call

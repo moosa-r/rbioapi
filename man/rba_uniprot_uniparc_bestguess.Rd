@@ -5,11 +5,11 @@
 \title{Get UniParc Longest Sequence for Entries}
 \usage{
 rba_uniprot_uniparc_bestguess(
-  upi = NA,
-  accession = NA,
-  db_id = NA,
-  gene = NA,
-  taxid = NA,
+  upi = NULL,
+  accession = NULL,
+  db_id = NULL,
+  gene = NULL,
+  taxid = NULL,
   ...
 )
 }

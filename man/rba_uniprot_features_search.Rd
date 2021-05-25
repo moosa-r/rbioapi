@@ -9,15 +9,15 @@
   refine your search query with variety of modifiers.}
 \usage{
 rba_uniprot_features_search(
-  accession = NA,
-  gene = NA,
-  exact_gene = NA,
-  protein = NA,
-  reviewed = NA,
-  organism = NA,
-  taxid = NA,
-  categories = NA,
-  types = NA,
+  accession = NULL,
+  gene = NULL,
+  exact_gene = NULL,
+  protein = NULL,
+  reviewed = NULL,
+  organism = NULL,
+  taxid = NULL,
+  categories = NULL,
+  types = NULL,
   ...
 )
 }

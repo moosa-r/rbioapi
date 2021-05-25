@@ -5,12 +5,12 @@
 \title{Search Proteomics Peptides in UniProt}
 \usage{
 rba_uniprot_proteomics_search(
-  accession = NA,
-  data_source = NA,
-  taxid = NA,
-  upid = NA,
-  peptide = NA,
-  unique = NA,
+  accession = NULL,
+  data_source = NULL,
+  taxid = NULL,
+  upid = NULL,
+  peptide = NULL,
+  unique = NULL,
   ...
 )
 }
@@ -38,7 +38,7 @@ identifier (UPID)}. You can provide up to 100 UPIDs.}
 \item{unique}{Logical: Should the results be filtered based on the
 Peptide's uniqueness (the fact that a peptide maps to only 1 protein). If
 TRUE, Only unique peptides will be returned, if FALSE only un-unique
-peptides will be returned; If NA (default) the results will not be
+peptides will be returned; If NULL (default) the results will not be
 filtered based on this.}
 
 \item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s

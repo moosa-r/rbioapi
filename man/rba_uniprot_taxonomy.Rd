@@ -6,7 +6,7 @@
 \usage{
 rba_uniprot_taxonomy(
   ids,
-  hierarchy = NA,
+  hierarchy = NULL,
   node_only = TRUE,
   page_size = 200,
   page_number = 1,

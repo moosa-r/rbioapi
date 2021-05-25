@@ -6,9 +6,9 @@
 \usage{
 rba_uniprot_coordinates_sequence(
   accession,
-  p_position = NA,
-  p_start = NA,
-  p_end = NA,
+  p_position = NULL,
+  p_start = NULL,
+  p_end = NULL,
   ...
 )
 }

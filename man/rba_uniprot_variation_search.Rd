@@ -5,18 +5,18 @@
 \title{Search UniProt Natural Variants}
 \usage{
 rba_uniprot_variation_search(
-  accession = NA,
-  source_type = NA,
-  consequence_type = NA,
-  wild_type = NA,
-  alternative_sequence = NA,
-  location = NA,
-  disease = NA,
-  omim = NA,
-  evidence = NA,
-  taxid = NA,
-  db_type = NA,
-  db_id = NA,
+  accession = NULL,
+  source_type = NULL,
+  consequence_type = NULL,
+  wild_type = NULL,
+  alternative_sequence = NULL,
+  location = NULL,
+  disease = NULL,
+  omim = NULL,
+  evidence = NULL,
+  taxid = NULL,
+  db_type = NULL,
+  db_id = NULL,
   save_peff = FALSE,
   ...
 )

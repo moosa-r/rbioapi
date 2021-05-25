@@ -4,7 +4,7 @@
 \alias{rba_uniprot_genecentric_search}
 \title{Search Gene-Centric Proteins}
 \usage{
-rba_uniprot_genecentric_search(upid = NA, accession = NA, gene = NA, ...)
+rba_uniprot_genecentric_search(upid = NULL, accession = NULL, gene = NULL, ...)
 }
 \arguments{
 \item{upid}{\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome

@@ -7,11 +7,11 @@
 rba_uniprot_variation(
   id,
   id_type,
-  source_type = NA,
-  consequence_type = NA,
-  wild_type = NA,
-  alternative_sequence = NA,
-  location = NA,
+  source_type = NULL,
+  consequence_type = NULL,
+  wild_type = NULL,
+  alternative_sequence = NULL,
+  location = NULL,
   save_peff = FALSE,
   ...
 )

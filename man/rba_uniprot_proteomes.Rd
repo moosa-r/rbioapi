@@ -4,7 +4,7 @@
 \alias{rba_uniprot_proteomes}
 \title{Get proteome by proteome/proteins UPID}
 \usage{
-rba_uniprot_proteomes(upid, get_proteins = FALSE, reviewed = NA, ...)
+rba_uniprot_proteomes(upid, get_proteins = FALSE, reviewed = NULL, ...)
 }
 \arguments{
 \item{upid}{\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
@@ -16,7 +16,7 @@ of the proteome with provided UPID, set TRUE to also return the proteins
 
 \item{reviewed}{Logical:  Only considered when get_proteins is TRUE.
 If TRUE, only return "UniProtKB/Swiss-Prot" (reviewed) proteins;
-If FALSE, only return TrEMBL (un-reviewed) entries. leave it as NA if you
+If FALSE, only return TrEMBL (un-reviewed) entries. leave it as NULL if you
 do not want to filter proteins based on their review status.}
 
 \item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
