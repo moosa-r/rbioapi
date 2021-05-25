@@ -1434,23 +1434,32 @@
   ext_args <- list(...)
   rba_opts <- getOption("rba_user_options") #available options for the end-users
   if (length(ext_args) > 0) { #user provided something in ...
-    unnamed_args <- which(names(ext_args) == "" | is.na(names(ext_args)))
-    invalid_args <- setdiff(names(ext_args[-unnamed_args]), rba_opts)
+    ext_arg_names <- names(ext_args)
+
+    if (is.null(ext_arg_names)) {
+      unnamed_args <- seq_along(ext_args)
+    } else {
+      unnamed_args <- which(ext_arg_names == "" | is.na(ext_arg_names))
+      }
+    invalid_args <- which(!ext_arg_names %in% c(rba_opts, ""))
+
     if (length(c(unnamed_args, invalid_args)) > 0) {
       warning(sprintf("invalid rbioapi options were ignored:%s%s",
                       ifelse(length(unnamed_args) != 0,
-                             yes = sprintf("\n- %s unnamed argument(s).",
-                                           length(unnamed_args)),
+                             yes = sprintf("\n- unnamed argument(s): %s",
+                                           .paste2(ext_args[unnamed_args],
+                                                   quote = "`")),
                              no = ""),
                       ifelse(length(invalid_args) != 0,
                              yes = sprintf("\n- %s",
-                                           .paste2(invalid_args,
+                                           .paste2(sprintf("%s = %s",
+                                                           ext_arg_names[invalid_args],
+                                                           ext_args[invalid_args]),
                                                    last = " and ",
-                                                   quote = "\"")),
+                                                   quote = "`")),
                              no = "")
       ), call. = FALSE)
-      ext_args <- ext_args[-c(unnamed_args,
-                              which(names(ext_args) %in% invalid_args))]
+      ext_args <- ext_args[-c(unnamed_args, invalid_args)]
     }
     if (isTRUE(ignore_save) && utils::hasName(ext_args, "save_file")) {
       warning("This function has a dedicated file-saving argument, ",
