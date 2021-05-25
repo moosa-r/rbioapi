@@ -6,9 +6,9 @@
 \usage{
 rba_string_interactions_network(
   ids,
-  species = NA,
-  required_score = NA,
-  add_nodes = NA,
+  species = NULL,
+  required_score = NULL,
+  add_nodes = NULL,
   network_type = "functional",
   ...
 )

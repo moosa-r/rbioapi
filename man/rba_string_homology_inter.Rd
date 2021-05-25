@@ -4,7 +4,7 @@
 \alias{rba_string_homology_inter}
 \title{Get Similarity Scores Hits of Proteins in Different Species}
 \usage{
-rba_string_homology_inter(ids, species = NA, species_b = NA, ...)
+rba_string_homology_inter(ids, species = NULL, species_b = NULL, ...)
 }
 \arguments{
 \item{ids}{Your protein ID(s). It is strongly recommended to provide

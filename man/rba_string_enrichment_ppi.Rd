@@ -4,7 +4,7 @@
 \alias{rba_string_enrichment_ppi}
 \title{Get Protein-Protein Interaction Enrichment}
 \usage{
-rba_string_enrichment_ppi(ids, species = NA, required_score = NA, ...)
+rba_string_enrichment_ppi(ids, species = NULL, required_score = NULL, ...)
 }
 \arguments{
 \item{ids}{Your protein ID(s). It is strongly recommended to provide

@@ -41,9 +41,9 @@
 #' @family "STRING"
 #' @export
 rba_string_map_ids <- function(ids,
-                               species = NA,
+                               species = NULL,
                                echo_query = FALSE,
-                               limit = NA,
+                               limit = NULL,
                                ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -56,7 +56,7 @@ rba_string_map_ids <- function(ids,
                              class = "logical"),
                         list(arg = "limit",
                              class = "numeric")),
-            cond = list(list(quote(length(ids) > 100 && is.na(species)),
+            cond = list(list(quote(length(ids) > 100 && is.null(species)),
                              sprintf("You provided %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
                                      length(ids)))
             ))
@@ -67,13 +67,13 @@ rba_string_map_ids <- function(ids,
                                                             collapse = "%0d"),
                                       "caller_identity" = getOption("rba_user_agent")),
                           list("species",
-                               !is.na(species),
+                               !is.null(species),
                                species),
                           list("echo_query",
                                echo_query,
                                "1"),
                           list("limit",
-                               !is.na(limit),
+                               !is.null(limit),
                                limit))
 
   ## Build Function-Specific Call
@@ -182,10 +182,10 @@ rba_string_map_ids <- function(ids,
 rba_string_network_image <- function(ids,
                                      image_format = "image",
                                      save_image = TRUE,
-                                     species = NA,
-                                     add_color_nodes = NA,
-                                     add_white_nodes = NA,
-                                     required_score = NA,
+                                     species = NULL,
+                                     add_color_nodes = NULL,
+                                     add_white_nodes = NULL,
+                                     required_score = NULL,
                                      network_flavor = "confidence",
                                      network_type = "functional",
                                      hide_node_labels = FALSE,
@@ -225,7 +225,7 @@ rba_string_network_image <- function(ids,
                              class = "logical"),
                         list(arg = "hide_structure_pics",
                              class = "logical")),
-            cond = list(list(quote(length(ids) > 100 && is.na(species)),
+            cond = list(list(quote(length(ids) > 100 && is.null(species)),
                              sprintf("You provided %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
                                      length(ids)))
             ))
@@ -237,22 +237,22 @@ rba_string_network_image <- function(ids,
                                                             collapse = "%0d"),
                                       "caller_identity" = getOption("rba_user_agent")),
                           list("species",
-                               !is.na(species),
+                               !is.null(species),
                                species),
                           list("add_color_nodes",
-                               !is.na(add_color_nodes),
+                               !is.null(add_color_nodes),
                                add_color_nodes),
                           list("add_white_nodes",
-                               !is.na(add_white_nodes),
+                               !is.null(add_white_nodes),
                                add_white_nodes),
                           list("required_score",
-                               !is.na(required_score),
+                               !is.null(required_score),
                                required_score),
                           list("network_flavor",
-                               !is.na(network_flavor),
+                               !is.null(network_flavor),
                                network_flavor),
                           list("network_type",
-                               !is.na(network_type),
+                               !is.null(network_type),
                                network_type),
                           list("hide_node_labels",
                                hide_node_labels,
@@ -378,9 +378,9 @@ rba_string_network_image <- function(ids,
 #'   \code{\link{rba_string_map_ids}, \link{rba_string_interaction_partners}}
 #' @export
 rba_string_interactions_network <- function(ids,
-                                            species = NA,
-                                            required_score = NA,
-                                            add_nodes = NA,
+                                            species = NULL,
+                                            required_score = NULL,
+                                            add_nodes = NULL,
                                             network_type = "functional",
                                             ...) {
   ## Load Global Options
@@ -400,7 +400,7 @@ rba_string_interactions_network <- function(ids,
                         list(arg = "network_type",
                              class = "character",
                              val = c("functional", "physical"))),
-            cond = list(list(quote(length(ids) > 100 && is.na(species)),
+            cond = list(list(quote(length(ids) > 100 && is.null(species)),
                              sprintf("You provided %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
                                      length(ids)))
             ))
@@ -413,16 +413,16 @@ rba_string_interactions_network <- function(ids,
                                                             collapse = "%0d"),
                                       "caller_identity" = getOption("rba_user_agent")),
                           list("species",
-                               !is.na(species),
+                               !is.null(species),
                                species),
                           list("required_score",
-                               !is.na(required_score),
+                               !is.null(required_score),
                                required_score),
                           list("add_nodes",
-                               !is.na(add_nodes),
+                               !is.null(add_nodes),
                                add_nodes),
                           list("network_type",
-                               !is.na(network_type),
+                               !is.null(network_type),
                                network_type))
 
   ## Build Function-Specific Call
@@ -507,10 +507,10 @@ rba_string_interactions_network <- function(ids,
 #'   \code{\link{rba_string_map_ids}, \link{rba_string_interactions_network}}
 #' @export
 rba_string_interaction_partners <- function(ids,
-                                            species = NA,
-                                            required_score = NA,
+                                            species = NULL,
+                                            required_score = NULL,
                                             network_type = "functional",
-                                            limit = NA,
+                                            limit = NULL,
                                             ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -529,7 +529,7 @@ rba_string_interaction_partners <- function(ids,
                         list(arg = "limit",
                              class = "numeric",
                              min_val = 1)),
-            cond = list(list(quote(length(ids) > 100 && is.na(species)),
+            cond = list(list(quote(length(ids) > 100 && is.null(species)),
                              sprintf("You provided %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
                                      length(ids)))
             ))
@@ -542,16 +542,16 @@ rba_string_interaction_partners <- function(ids,
                                                             collapse = "%0d"),
                                       "caller_identity" = getOption("rba_user_agent")),
                           list("species",
-                               !is.na(species),
+                               !is.null(species),
                                species),
                           list("limit",
-                               !is.na(limit),
+                               !is.null(limit),
                                limit),
                           list("required_score",
-                               !is.na(required_score),
+                               !is.null(required_score),
                                required_score),
                           list("network_type",
-                               !is.na(network_type),
+                               !is.null(network_type),
                                network_type))
 
   ## Build Function-Specific Call
@@ -621,7 +621,7 @@ rba_string_interaction_partners <- function(ids,
 #'   \code{\link{rba_string_map_ids}, \link{rba_string_homology_inter}}
 #' @export
 rba_string_homology_intra <- function(ids,
-                                      species = NA,
+                                      species = NULL,
                                       ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -630,7 +630,7 @@ rba_string_homology_intra <- function(ids,
                              class = c("character", "numeric")),
                         list(arg = "species",
                              class = "numeric")),
-            cond = list(list(quote(length(ids) > 100 && is.na(species)),
+            cond = list(list(quote(length(ids) > 100 && is.null(species)),
                              sprintf("You provided %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
                                      length(ids)))
             ))
@@ -643,7 +643,7 @@ rba_string_homology_intra <- function(ids,
                                                             collapse = "%0d"),
                                       "caller_identity" = getOption("rba_user_agent")),
                           list("species",
-                               !is.na(species),
+                               !is.null(species),
                                species))
 
   ## Build Function-Specific Call
@@ -721,8 +721,8 @@ rba_string_homology_intra <- function(ids,
 #'   \code{\link{rba_string_map_ids}, \link{rba_string_homology_intra}}
 #' @export
 rba_string_homology_inter <- function(ids,
-                                      species = NA,
-                                      species_b = NA,
+                                      species = NULL,
+                                      species_b = NULL,
                                       ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -733,7 +733,7 @@ rba_string_homology_inter <- function(ids,
                              class = "numeric"),
                         list(arg = "species_b",
                              class = "numeric")),
-            cond = list(list(quote(length(ids) > 100 && is.na(species)),
+            cond = list(list(quote(length(ids) > 100 && is.null(species)),
                              sprintf("You provided %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
                                      length(ids)))
             ))
@@ -745,10 +745,10 @@ rba_string_homology_inter <- function(ids,
                                                             collapse = "%0d"),
                                       "caller_identity" = getOption("rba_user_agent")),
                           list("species",
-                               !is.na(species),
+                               !is.null(species),
                                species),
                           list("species_b",
-                               !is.na(species_b),
+                               !is.null(species_b),
                                paste(unique(species_b),collapse = "%0d")))
 
   ## Build Function-Specific Call
@@ -826,8 +826,8 @@ rba_string_homology_inter <- function(ids,
 #'   \code{\link{rba_string_map_ids}, \link{rba_string_annotations}}
 #' @export
 rba_string_enrichment <- function(ids,
-                                  species = NA,
-                                  background = NA,
+                                  species = NULL,
+                                  background = NULL,
                                   split_df = FALSE,
                                   ...) {
   ## Load Global Options
@@ -839,7 +839,7 @@ rba_string_enrichment <- function(ids,
                              class = "numeric"),
                         list(arg = "background",
                              class = "character")),
-            cond = list(list(quote(length(ids) > 100 && is.na(species)),
+            cond = list(list(quote(length(ids) > 100 && is.null(species)),
                              sprintf("You provided %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
                                      length(ids)))
             ))
@@ -851,10 +851,10 @@ rba_string_enrichment <- function(ids,
                                                             collapse = "%0d"),
                                       "caller_identity" = getOption("rba_user_agent")),
                           list("species",
-                               !is.na(species),
+                               !is.null(species),
                                species),
                           list("background_string_identifiers",
-                               any(!is.na(background)),
+                               !is.null(background),
                                paste(unique(background),
                                      collapse = "%0d")))
 
@@ -935,7 +935,7 @@ rba_string_enrichment <- function(ids,
 #'   \code{\link{rba_string_map_ids}, \link{rba_string_enrichment}}
 #' @export
 rba_string_annotations <- function(ids,
-                                   species = NA,
+                                   species = NULL,
                                    allow_pubmed = FALSE,
                                    ...) {
   ## Load Global Options
@@ -947,7 +947,7 @@ rba_string_annotations <- function(ids,
                              class = "numeric"),
                         list(arg = "allow_pubmed",
                              class = "logical")),
-            cond = list(list(quote(length(ids) > 100 && is.na(species)),
+            cond = list(list(quote(length(ids) > 100 && is.null(species)),
                              sprintf("You provided %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
                                      length(ids)))
             ))
@@ -960,7 +960,7 @@ rba_string_annotations <- function(ids,
                                                             collapse = "%0d"),
                                       "caller_identity" = getOption("rba_user_agent")),
                           list("species",
-                               !is.na(species),
+                               !is.null(species),
                                species),
                           list("allow_pubmed",
                                allow_pubmed,
@@ -1028,8 +1028,8 @@ rba_string_annotations <- function(ids,
 #' @seealso \code{\link{rba_string_map_ids}}
 #' @export
 rba_string_enrichment_ppi <- function(ids,
-                                      species = NA,
-                                      required_score = NA,
+                                      species = NULL,
+                                      required_score = NULL,
                                       ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -1042,7 +1042,7 @@ rba_string_enrichment_ppi <- function(ids,
                              class = "numeric",
                              min_val = 0,
                              max_val = 1000)),
-            cond = list(list(quote(length(ids) > 100 && is.na(species)),
+            cond = list(list(quote(length(ids) > 100 && is.null(species)),
                              sprintf("You provided %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
                                      length(ids)))
             ))
@@ -1055,10 +1055,10 @@ rba_string_enrichment_ppi <- function(ids,
                                                             collapse = "%0d"),
                                       "caller_identity" = getOption("rba_user_agent")),
                           list("species",
-                               !is.na(species),
+                               !is.null(species),
                                species),
                           list("required_score",
-                               !is.na(required_score),
+                               !is.null(required_score),
                                required_score))
 
   ## Build Function-Specific Call

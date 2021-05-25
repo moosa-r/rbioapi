@@ -6,10 +6,10 @@
 \usage{
 rba_string_interaction_partners(
   ids,
-  species = NA,
-  required_score = NA,
+  species = NULL,
+  required_score = NULL,
   network_type = "functional",
-  limit = NA,
+  limit = NULL,
   ...
 )
 }

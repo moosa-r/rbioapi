@@ -4,7 +4,7 @@
 \alias{rba_string_map_ids}
 \title{Map a Set of Identifiers to STRING Identifiers}
 \usage{
-rba_string_map_ids(ids, species = NA, echo_query = FALSE, limit = NA, ...)
+rba_string_map_ids(ids, species = NULL, echo_query = FALSE, limit = NULL, ...)
 }
 \arguments{
 \item{ids}{Your Common gene/protein Identifier(s) to be mapped.}

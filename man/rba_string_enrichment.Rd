@@ -6,8 +6,8 @@
 \usage{
 rba_string_enrichment(
   ids,
-  species = NA,
-  background = NA,
+  species = NULL,
+  background = NULL,
   split_df = FALSE,
   ...
 )

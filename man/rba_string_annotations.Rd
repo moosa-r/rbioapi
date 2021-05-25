@@ -4,7 +4,7 @@
 \alias{rba_string_annotations}
 \title{Retrieving Functional Annotation}
 \usage{
-rba_string_annotations(ids, species = NA, allow_pubmed = FALSE, ...)
+rba_string_annotations(ids, species = NULL, allow_pubmed = FALSE, ...)
 }
 \arguments{
 \item{ids}{Your protein ID(s). It is strongly recommended to provide
