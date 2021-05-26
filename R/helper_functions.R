@@ -59,6 +59,9 @@
 #' @keywords Helper
 #' @export
 rba_connection_test <- function(diagnostics = FALSE) {
+  if (is.null(diagnostics) || is.na(diagnostics) || !is.logical(diagnostics)) {
+    diagnostics <- getOption("rba_diagnostics")
+  }
   message("Checking Your connection to the Databases currently supported by rbioapi:")
 
   tests <- .rba_stg("tests")

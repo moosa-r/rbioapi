@@ -1292,12 +1292,14 @@
 .msg <- function(fmt, ..., sprintf = TRUE, cond = "verbose",
                  sep = "", collapse = NULL) {
   if (isTRUE(get0(cond, envir = parent.frame(1), ifnotfound = FALSE))) {
-    message(ifelse(isTRUE(sprintf) &&
-                     is.character(fmt) &&
-                     grepl("%s", fmt, fixed = TRUE),
-                   yes = sprintf(fmt, ...),
-                   no = paste(fmt, ..., sep = sep, collapse = collapse)),
-            appendLF = TRUE)
+    m <- ifelse(isTRUE(sprintf) &&
+                  is.character(fmt) &&
+                  grepl("%s", fmt, fixed = TRUE),
+                yes = sprintf(fmt, ...),
+                no = paste(fmt, ..., sep = sep, collapse = collapse))
+    if (!is.na(m)) {
+      message(m, appendLF = TRUE)
+    }
   }
   invisible()
 }
