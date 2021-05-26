@@ -657,6 +657,48 @@
 
 #### Check Arguments #######
 
+#' Detect Required arguments
+#'
+#' This function is an internal component of .rba_args(). It will
+#'   check for required arguments (arguments with no default) in the calling
+#'   function of .rba_args() and automatically add no_null = TRUE to
+#'   the corresponding constrains list.
+#'
+#' The goal here is to make the exported functions more concise, contributers
+#'   only need to explicitly add no_null = TRUE to arguments that have
+#'   defaults but a NULL value will break the function. For example
+#'   arguments that is used to build a URL, arguments used to produce message,
+#'   etc.
+#'
+#' @param cons Constrains input of .rba_args()
+#' @param n Number of frames to go back
+#'
+#' @return List: updated cons.
+#'
+#' @family internal_arguments_check
+#' @noRd
+.rba_args_req <- function(cons, n = 2) {
+  # List required arguments *arguments with no default value
+  f_name <- as.character(sys.calls()[[sys.nframe() - n]])[[1]]
+  f_args <- names(formals(f_name))
+  f <- paste0(deparse(get(f_name)), collapse = "")
+
+  req <- regmatches(f,
+                    regexpr("(?<=^function \\().*?(?=\\)\\s{)",
+                            f, perl = TRUE))
+  req <- f_args[!grepl(pattern = "(=)|(\\.\\.\\.)",
+                       x = unlist(strsplit(req, ",")))]
+  # Add `na_null = TRUE` to the required function
+  cons <- lapply(X = cons,
+                 FUN = function(x) {
+                   if (x[["arg"]] %in% req) {
+                     x[["no_null"]] <- TRUE
+                   }
+                   return(x)
+                 })
+  return(cons)
+}
+
 #' Add rbioapi options to user's Arguments Check
 #'
 #' This function is an internal component of .rba_args(). It will
@@ -781,6 +823,8 @@
 #' @noRd
 .rba_args_cons_msg <- function(cons_i, what) {
   switch(what,
+         "no_null" = sprintf("Invalid Argument; `%s` cannot be NULL.",
+                             cons_i[["arg"]]),
          "class" = sprintf("Invalid Argument; %s should be of class `%s`.\n\t(Your provided argument is \"%s\".)",
                            cons_i[["arg"]],
                            .paste2(cons_i[["class"]], last = " or ",
@@ -835,21 +879,33 @@
 #' @family internal_arguments_check
 #' @noRd
 .rba_args_cons_wrp <- function(cons_i) {
-  all_cons <- setdiff(names(cons_i), c("arg", "class", "evl_arg"))
-  cons_i_errs <- lapply(all_cons,
-                        function(x){
-                          if (.rba_args_cons_chk(cons_i = cons_i, what = x)) {
-                            return(NA)
-                          } else {
-                            return(.rba_args_cons_msg(cons_i = cons_i, what = x))
-                          }
-                        })
-
-  if (any(!is.na(cons_i_errs))) {
-    return(unlist(cons_i_errs[which(!is.na(cons_i_errs))]))
+  if (is.null(cons_i[["evl_arg"]])) {
+    # check if the NULL argument is required or optional
+    if (isTRUE(cons_i[["no_null"]])) {
+      #it is not optional!
+      return(.rba_args_cons_msg(cons_i = cons_i, what = "no_null"))
+    } else {
+      # It is optional, don't run the arguments check.
+      return(NA)
+    }
   } else {
-    return(NA)
-  }
+    #  argument is not NULL (user provided something)
+    all_cons <- setdiff(names(cons_i), c("arg", "class", "evl_arg", "no_null"))
+    cons_i_errs <- lapply(all_cons,
+                          function(x){
+                            if (.rba_args_cons_chk(cons_i = cons_i, what = x)) {
+                              return(NA)
+                            } else {
+                              return(.rba_args_cons_msg(cons_i = cons_i, what = x))
+                            }
+                          })
+
+    if (any(!is.na(cons_i_errs))) {
+      return(unlist(cons_i_errs[which(!is.na(cons_i_errs))]))
+    } else {
+      return(NA)
+    } #end of any(!is.na(cons_i_errs))
+  } #end of if (is.null(cons_i[["evl_arg"]]))
 }
 
 
@@ -931,7 +987,7 @@
 #'   }
 #'
 #' @param cons Define Constrains for input arguments. Currently they may be:
-#'   \cr 'class', 'val', 'ran', 'min_val', 'max_val', 'len', 'min_len',
+#'   \cr "no_null', class', 'val', 'ran', 'min_val', 'max_val', 'len', 'min_len',
 #'   'max_len' and/or 'regex'.
 #' @param cond Expression which will be evaluated to TRUE or FALSE.
 #' @param cond_warning Should the function produce warning instead of stopping
@@ -1000,10 +1056,13 @@
     cons <- cons[is.na(class_errs)] # remove elements with wrong class
   }
   ## 2.3 check other constrains if their class is correct
+  ### Add no_null for arguments with no default value
+  cons <- .rba_args_req(cons = cons, n = 2)
+  ### Check
   other_errs <- lapply(cons, .rba_args_cons_wrp)
   if (any(!is.na(other_errs))) {
     errors <- append(errors, other_errs[!is.na(other_errs)])
-    }
+  }
   ## 2.4 Take actions for the errors
   if (length(errors) == 1) {
     stop(errors, call. = diagnostics)
@@ -1479,7 +1538,7 @@
   # create option variables
   for (opt in rba_opts) {
     assign(x = opt,
-           value = ifelse(is.null(ext_args[[opt]]),
+           value = ifelse(is.null(ext_args[[opt]]) || is.na(ext_args[[opt]]),
                           yes = getOption(paste0("rba_", opt)),
                           no = ext_args[[opt]]),
            envir = parent.frame(1))
