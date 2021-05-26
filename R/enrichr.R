@@ -59,6 +59,7 @@ rba_enrichr_libs <- function(store_in_options = FALSE,
                              class = "logical"),
                         list(arg = "organism",
                              class = "character",
+                             no_null = TRUE,
                              val = c("human", "fly", "yeast", "worm", "fish"))
                         ))
 
@@ -144,6 +145,7 @@ rba_enrichr_add_list <- function(gene_list,
                              class = "character"),
                         list(arg = "organism",
                              class = "character",
+                             no_null = TRUE,
                              val = c("human", "fly", "yeast", "worm", "fish"))
                         ))
 
@@ -222,6 +224,7 @@ rba_enrichr_view_list <- function(user_list_id,
                              len = 1),
                         list(arg = "organism",
                              class = "character",
+                             no_null = TRUE,
                              val = c("human", "fly", "yeast", "worm", "fish"))
                         ))
 
@@ -438,6 +441,7 @@ rba_enrichr_enrich <- function(user_list_id,
                              class = "logical"),
                         list(arg = "organism",
                              class = "character",
+                             no_null = TRUE,
                              val = c("human", "fly", "yeast", "worm", "fish"))
                         ))
   ## call Enrichr API
@@ -542,6 +546,7 @@ rba_enrichr_gene_map <- function(gene,
                              class = "logical"),
                         list(arg = "organism",
                              class = "character",
+                             no_null = TRUE,
                              val = c("human", "fly", "yeast", "worm", "fish"))
                         ))
 
@@ -644,6 +649,7 @@ rba_enrichr <- function(gene_list,
                              class = "logical"),
                         list(arg = "organism",
                              class = "character",
+                             no_null = TRUE,
                              val = c("human", "fly", "yeast", "worm", "fish"))
                         ))
   .msg("--Step 1/3:")

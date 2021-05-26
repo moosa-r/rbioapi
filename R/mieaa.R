@@ -484,14 +484,17 @@ rba_mieaa_enrich_submit <- function(test_set,
                              val = c("GSEA",
                                      "ORA")),
                         list(arg = "test_set",
-                             class = "character"),
+                             class = "character",
+                             no_null = TRUE),
                         list(arg = "mirna_type",
                              class = "character",
+                             no_null = TRUE,
                              val = c("mature",
                                      "precursor")),
                         list(arg = "species",
                              class = c("character",
                                        "numeric"),
+                             no_null = TRUE,
                              len = 1),
                         list(arg = "categories",
                              class = "character"),
@@ -694,6 +697,7 @@ rba_mieaa_enrich_results <- function(job_id,
                              len = 1),
                         list(arg = "sort_by",
                              class = "character",
+                             no_null = TRUE,
                              val = c("category",
                                      "subcategory",
                                      "enrichment",
@@ -723,7 +727,7 @@ rba_mieaa_enrich_results <- function(job_id,
                          if (utils::hasName(x, "expected")) {
                            x$expected <- as.numeric(x$expected)
                          }
-                         x <- x[order(x[[sort_by]], decreasing = !sort_asc), ]
+                         x <- x[order(x[[sort_by]], decreasing = !isTRUE(sort_asc)), ]
                          return(x)
                        })
   input_call <- .rba_httr(httr = "get",
