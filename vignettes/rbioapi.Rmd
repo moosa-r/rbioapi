@@ -156,10 +156,10 @@ x <- rba_reactome_species(only_main = TRUE,
                          save_file = "reactome_species.json", retry_max = 10)
 ```
 
-```{r rba_options_ellipsis2, echo=TRUE, message=TRUE}
+```{r rba_options_ellipsis2, eval=FALSE, echo=TRUE, message=TRUE}
 ## Run these codes in your own R session to see the difference.
 ## show internal diagnostics boring details
-x <- rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC", diangnostics = TRUE)
+x <- rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC", diagnostics = TRUE)
 ## The next function you call, will still use the default rbioapi options
 x <- rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC")
 ```

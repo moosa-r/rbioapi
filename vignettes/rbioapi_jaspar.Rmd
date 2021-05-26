@@ -213,7 +213,7 @@ FOXP3_tffms <- rba_jaspar_tffm_search(term = "FOXP3")
 insects_tffms <- rba_jaspar_tffm_search(tax_group = "insects")
 ```
 
-```{r tffm, eval=FALSE}
+```{r tffm}
 ## Now that you have a TFFM ID, you can retrieve it
 TFFM0056 <- rba_jaspar_tffm("TFFM0056.3")
 str(TFFM0056)

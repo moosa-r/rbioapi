@@ -1,7 +1,7 @@
 rbioapi: User-Friendly R Interface to Biologic Web Services’ API
 ================
 Moosa Rezwani
-2021-05-21
+2021-05-26
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
@@ -212,7 +212,7 @@ x <- rba_reactome_species(only_main = TRUE,
 ``` r
 ## Run these codes in your own R session to see the difference.
 ## show internal diagnostics boring details
-x <- rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC", diangnostics = TRUE)
+x <- rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC", diagnostics = TRUE)
 #> Retrieving UniProt entities that correspond to ID CD40 in database HGNC.
 ## The next function you call, will still use the default rbioapi options
 x <- rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC")
