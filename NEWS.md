@@ -1,4 +1,8 @@
-# rbioapi 0.7.2 (Current Github version)
+# rbioapi 0.7.3 (Current Github version)
+
+* Improved internal functions.
+
+# rbioapi 0.7.2
 
 * JASPAR is supported.
 
