@@ -26,8 +26,10 @@ Suggests:
     DT,
     knitr,
     png,
-    rmarkdown
+    rmarkdown,
+    testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
 RoxygenNote: 7.1.1
+Config/testthat/edition: 3
