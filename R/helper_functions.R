@@ -215,7 +215,7 @@ rba_options <- function(diagnostics = NULL,
 #'
 #' @return The evaluation results of each input call.
 #' @noRd
-.rba_pages_do <- function(input_call, pb_switch) {
+.rba_pages_do <- function(input_call, pb_switch, sleep_time = 1) {
   if (pb_switch) {
     ## initiate progress bar
     pb <- utils::txtProgressBar(min = 0,
@@ -226,7 +226,7 @@ rba_options <- function(diagnostics = NULL,
   #do the calls
   output <- lapply(X = input_call,
                    FUN = function(x){
-                     Sys.sleep(1)
+                     Sys.sleep(sleep_time)
                      y <- eval(parse(text = x))
                      if (pb_switch) {
                        # advance the progress bar
@@ -260,6 +260,7 @@ rba_options <- function(diagnostics = NULL,
 #'   \item: Set the argument that corresponds to the page number to
 #'   "pages:start_page:end_page", for example "pages:1:5".}
 #'   refer to the "examples" section to learn more.
+#' @param ... Experimental internal options.
 #'
 #' @return A named list where each element corresponds to a request's page.
 #'
@@ -286,71 +287,102 @@ rba_options <- function(diagnostics = NULL,
 #' @family "Helper functions"
 #' @keywords Helper
 #' @export
-rba_pages <- function(input_call){
-  ## convert the input_call to character
-  input_call <- as.character(substitute(input_call))
-  if (input_call[[1]] != "quote") {
+rba_pages <- function(input_call, ...){
+  ## Internal options
+  ext_args <- list(...)
+  internal_opts <- list(verbose = TRUE,
+                        sleep_time = 1,
+                        page_check = TRUE,
+                        add_skip_error = TRUE,
+                        list_names = NA,
+                        force_pb = NA)
+  if (length(ext_args) > 0) {
+    internal_opts[names(ext_args)] <- ext_args
+  }
+  verbose <- internal_opts$verbose
+
+  ## Convert the input_call to character
+  if (!inherits(input_call, "call")) {
     stop("The call should be wrapped in qoute()",
          call. = getOption("rba_diagnostics"))
   }
-  input_call <- input_call[[2]]
+
+  input_call <- gsub(pattern = "\\s+",
+                     replacement = " ",
+                     x = paste0(deparse(input_call), collapse = ""))
   if (!grepl("^rba_.+\\(", input_call)) {
-    stop("You should provide a rbioapi function.",
+    stop("You should supply a rbioapi function.",
          call. = getOption("rba_diagnostics"))
   }
 
-  ## extract start and end pages
-  start_page <- regmatches(input_call,
-                           gregexpr("(?<=\"pages:)\\d+(?=:\\d+\")",
-                                    input_call, perl = TRUE))[[1]]
-  end_page <- regmatches(input_call,
-                         gregexpr("(?<=\\d:)\\d+(?=\")",
-                                  input_call, perl = TRUE))[[1]]
-  ## check pages
+  ## Extract start and end pages
+  start_page <- unlist(regmatches(input_call,
+                                  gregexpr("(?<=\"pages:)\\d+(?=:\\d+\")",
+                                           input_call, perl = TRUE)))
+  end_page <- unlist(regmatches(input_call,
+                                gregexpr("(?<=\\d:)\\d+(?=\")",
+                                         input_call, perl = TRUE)))
+  start_page <- as.integer(start_page)
+  end_page <- as.integer(end_page)
+  ## Check pages
   if (length(start_page) != 1 | length(end_page) != 1) {
     stop("The variable you want to paginate should be formatted as:",
          "`pages:start:end`.\nfor example: \"pages:1:5\".",
          call. = getOption("rba_diagnostics"))
   }
-  start_page <- as.integer(start_page)
-  end_page <- as.integer(end_page)
-  if (end_page <= start_page) {
-    stop("The starting page should be greater than the ending page.",
-         call. = getOption("rba_diagnostics"))
-  }
-  if (end_page - start_page > 100) {
+
+  if (isTRUE(internal_opts$page_check) && (end_page - start_page > 100)) {
     stop("The maximum pages you are allowed to iterate are 100 pages.",
          call. = getOption("rba_diagnostics"))
   }
 
-  ## only show progress bar if both verbose and diagnostics are off
-  verbose_on <-
-    !grepl(",\\s*verbose\\s*=\\s*FALSE", input_call) &&
-    (grepl(",\\s*verbose\\s*=\\s*TRUE", input_call) ||
-       isTRUE(getOption("rba_verbose")))
-  diagnostics_on <-
-    !grepl(",\\s*diagnostics\\s*=\\s*FALSE", input_call) &&
-    (grepl(",\\s*diagnostics\\s*=\\s*TRUE", input_call) ||
-       isTRUE(getOption("rba_diagnostics")))
-  pb_switch <- !(verbose_on || diagnostics_on)
+  ## Only show progress bar if verbose, diagnostics and progress bar are off
+  if (is.na(internal_opts$force_pb)) {
+    verbose_on <-
+      !grepl(",\\s*verbose\\s*=\\s*FALSE", input_call) &&
+      (grepl(",\\s*verbose\\s*=\\s*TRUE", input_call) ||
+         isTRUE(getOption("rba_verbose")))
+    diagnostics_on <-
+      !grepl(",\\s*diagnostics\\s*=\\s*FALSE", input_call) &&
+      (grepl(",\\s*diagnostics\\s*=\\s*TRUE", input_call) ||
+         isTRUE(getOption("rba_diagnostics")))
+    progress_on <-
+      !grepl(",\\s*progress\\s*=\\s*FALSE", input_call) &&
+      (grepl(",\\s*progress\\s*=\\s*TRUE", input_call) ||
+         isTRUE(getOption("rba_progress")))
+    pb_switch <- sum(c(verbose_on, diagnostics_on, progress_on)) == 0
+  } else {
+    pb_switch <- isTRUE(internal_opts$force_pb)
+  }
 
-  ## build the calls
-  # add skip_error = TRUE to the calls
+  ## Build the calls
+  elements_seq <- seq.int(from = start_page, to = end_page,
+                          by = ifelse(test = start_page > end_page,
+                                      yes = -1L,
+                                      no = 1L))
+  # Add skip_error = TRUE and page numbers to the calls
   input_call <- gsub(",\\s*skip_error\\s*=\\s*(TRUE|FALSE)", "",
-                     input_call,
-                     perl = TRUE)
-  input_call <- sub("\"pages:\\d+:\\d+\"", "%s, skip_error = TRUE",
-                    input_call, perl = TRUE)
+                     input_call, perl = TRUE)
+  input_call <- sub(pattern = "\"pages:\\d+:\\d+\"",
+                    replacement = ifelse(test = isFALSE(internal_opts$add_skip_error),
+                                         yes = "%s",
+                                         no = "%s, skip_error = TRUE"),
+                    x = input_call,
+                    perl = TRUE)
 
-  input_call <- as.list(sprintf(input_call,
-                                seq.int(from = start_page, to = end_page,
-                                        by = 1)))
-  names(input_call) <- paste0("page_",
-                              seq.int(from = start_page, to = end_page, by = 1))
+  input_call <- as.list(sprintf(input_call, elements_seq))
+
+  # Name the list
+  if (length(internal_opts$list_names) != length(input_call)) {
+    names(input_call) <- paste0("page_", elements_seq)
+  } else {
+    names(input_call) <- internal_opts$list_names
+  }
 
   ## Do the calls
-  message("Iterating from page ", start_page, " to page ", end_page, ".")
+  .msg("Iterating from page %s to page %s.", start_page, end_page)
   final_output <- .rba_pages_do(input_call,
-                                pb_switch = pb_switch)
+                                pb_switch = pb_switch,
+                                sleep_time = internal_opts$sleep_time)
   return(final_output)
 }

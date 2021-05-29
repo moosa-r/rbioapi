@@ -4,7 +4,7 @@
 \alias{rba_pages}
 \title{Get Multiple Pages of a Paginated Resource}
 \usage{
-rba_pages(input_call)
+rba_pages(input_call, ...)
 }
 \arguments{
 \item{input_call}{A quoted call. Provide a regular rbioapi function call,
@@ -13,6 +13,8 @@ but with two differences:\enumerate{
 \item: Set the argument that corresponds to the page number to
 "pages:start_page:end_page", for example "pages:1:5".}
 refer to the "examples" section to learn more.}
+
+\item{...}{Experimental internal options.}
 }
 \value{
 A named list where each element corresponds to a request's page.
