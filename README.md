@@ -1,7 +1,7 @@
 rbioapi: User-Friendly R Interface to Biologic Web Services’ API
 ================
 Moosa Rezwani
-2021-05-26
+2021-05-29
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
@@ -228,7 +228,7 @@ errors when using rbioapi, kindly run this function to make sure that
 your internet connection or the servers are fine.
 
 ``` r
-rba_connection_test()
+rba_connection_test(print_output = TRUE)
 #> Checking Your connection to the Databases currently supported by rbioapi:
 #> --->>> Internet :
 #> +++ Connected to the Internet.
@@ -377,7 +377,7 @@ webpage](https://moosa-r.github.io/rbioapi/index.html "rbioapi website").
     #> [1] stats     graphics  grDevices utils     datasets  methods   base     
     #> 
     #> other attached packages:
-    #> [1] rbioapi_0.7.2
+    #> [1] rbioapi_0.7.3
     #> 
     #> loaded via a namespace (and not attached):
     #>  [1] digest_0.6.27     R6_2.5.0          jsonlite_1.7.2    magrittr_2.0.1   

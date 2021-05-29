@@ -44,6 +44,9 @@
 #'   rbioapi. Also, if you need to contact support, kindly call this function
 #'   with 'diagnostic = TRUE' and include the output messages in your support
 #'   request.
+#'
+#' @param print_output (Logical) (default = TRUE) Send the tests' output
+#'   to the console?
 #' @param diagnostics (Logical) (default = FALSE) Show diagnostics and
 #'   detailed messages with internal information.
 #'
@@ -58,15 +61,20 @@
 #' @family "Helper functions"
 #' @keywords Helper
 #' @export
-rba_connection_test <- function(diagnostics = FALSE) {
+rba_connection_test <- function(print_output = TRUE, diagnostics = FALSE) {
   if (is.null(diagnostics) || is.na(diagnostics) || !is.logical(diagnostics)) {
     diagnostics <- getOption("rba_diagnostics")
   }
-  message("Checking Your connection to the Databases currently supported by rbioapi:")
+
+  cat_if <- ifelse(test = isTRUE(print_output),
+                   yes = function(...) {cat(...)},
+                   no = function(...) {invisible()})
+  .msg("Checking Your connection to the Databases currently supported by rbioapi:",
+       cond = "print_output")
 
   tests <- .rba_stg("tests")
 
-  cat("--->>>", "Internet", ":\n")
+  cat_if("--->>>", "Internet", ":\n")
   google <- try(httr::status_code(httr::HEAD("https://google.com/",
                                              if (diagnostics) httr::verbose(),
                                              httr::user_agent(getOption("rba_user_agent")),
@@ -74,22 +82,22 @@ rba_connection_test <- function(diagnostics = FALSE) {
                 , silent = TRUE)
 
   if (google == 200) {
-    cat("+++ Connected to the Internet.\n")
+    cat_if("+++ Connected to the Internet.\n")
   } else {
-    cat("!!!! No Internet Connection.\n")
+    cat_if("!!!! No Internet Connection.\n")
     stop("Could not resolve https://google.com", " . Check Your internet Connection.",
          call. = diagnostics)
   }
   output <- list()
 
   for (i in seq_along(tests)) {
-    cat("--->>>", names(tests)[[i]], ":\n")
+    cat_if("--->>>", names(tests)[[i]], ":\n")
     output[[names(tests)[[i]]]] <- .rba_api_check(tests[[i]],
                                                   diagnostics = diagnostics)
     if (isTRUE(output[[names(tests)[[i]]]])) {
-      cat("+++ The server is responding.\n")
+      cat_if("+++ The server is responding.\n")
     } else {
-      cat("!!! failed with error:\n", output[[names(tests)[[i]]]])
+      cat_if("!!! failed with error:\n", output[[names(tests)[[i]]]])
     }
   }
   invisible(output)
@@ -386,3 +394,4 @@ rba_pages <- function(input_call, ...){
                                 sleep_time = internal_opts$sleep_time)
   return(final_output)
 }
+

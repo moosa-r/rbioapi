@@ -4,9 +4,12 @@
 \alias{rba_connection_test}
 \title{Test if the Supported Services Are Responding}
 \usage{
-rba_connection_test(diagnostics = FALSE)
+rba_connection_test(print_output = TRUE, diagnostics = FALSE)
 }
 \arguments{
+\item{print_output}{(Logical) (default = TRUE) Send the tests' output
+to the console?}
+
 \item{diagnostics}{(Logical) (default = FALSE) Show diagnostics and
 detailed messages with internal information.}
 }

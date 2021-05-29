@@ -171,7 +171,7 @@ x <- rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC")
 The second exception in functions' naming schema is `rba_connection_test()`. Run this simple function to check your connection with the supported services/databases. If you encounter errors when using rbioapi, kindly run this function to make sure that your internet connection or the servers are fine.
 
 ```{r rba_connection_test, message=TRUE}
-rba_connection_test()
+rba_connection_test(print_output = TRUE)
 ```
 
 ------------------------------------------------------------------------

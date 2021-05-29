@@ -143,7 +143,9 @@
                                                   "/api/json/version"),
                                 "UniProt" = paste0(.rba_stg("uniprot", "url"),
                                                    "/proteins/api/proteins/P25445")
-                   )
+                   ),
+                   stop("Internal Error; .rba_stg was called with wrong parameters:\n",
+                        paste0(arg, collapse = ", "), call. = TRUE)
   )
   return(output)
 }
@@ -417,7 +419,7 @@
 #' @noRd
 .rba_httr <- function(httr,
                       url = NULL,
-                      path = NULL,
+                      path = "",
                       ...) {
   ## assign global options
   diagnostics <- get0("diagnostics", envir = parent.frame(1),
@@ -439,7 +441,7 @@
                            "put" = quote(httr::PUT),
                            "delete" = quote(httr::DELETE),
                            "patch" = quote(httr::PATCH),
-                           stop("internal error: what verb to use with httr?",
+                           stop("Internal Error; what verb to use with httr?",
                                 call. = TRUE)),
                     url = utils::URLencode(URL = url, repeated = FALSE),
                     path = utils::URLencode(URL = path, repeated = FALSE),
@@ -492,12 +494,14 @@
       if (utils::hasName(ext_args, "parser")) {
         parser <- ext_args$parser
       } else {
-        parser <- NULL
+        parser <- function(x) {x}
       }
     }
     ### remove extra arguments that you don't want in httr function call
     ext_args <- ext_args[!grepl("^(?:accept|file_accept|obj_accept|save_to|\\w*parser)$",
                                 names(ext_args))]
+  } else {
+    parser <- function(x) {x}
   } #end of if (length(ext_args...
   httr_call <- list(call = as.call(append(httr_call, ext_args)),
                     parser = parser)
@@ -569,10 +573,18 @@
   if (!inherits(response, "response")) {
     ## 3.1 errors un-related to server's response
     error_message <- ifelse(test = net_connected,
-                            yes = response,
+                            yes = as.character(response),
                             no = "No internet connection. Stopping code execution!")
+
+    if (isFALSE(diagnostics)) {
+      error_message <- gsub(pattern = "(^Error in .*?\\(.*?\\) :\\s*)|(\\s*$)",
+                           replacement = "",
+                           x = error_message,
+                           perl = TRUE)
+    }
+    # stop or return error?
     if (isTRUE(skip_error)) {
-      return(as.character(error_message))
+      return(error_message)
     } else {
       stop(error_message, call. = diagnostics)
     }
@@ -645,14 +657,16 @@
     parser_input <- input_call$parser
   }
 
-  if (inherits(response, "response") && !is.null(parser_input)) {
-    final_output <- .rba_response_parser(response, parser_input)
-  } else {
-    final_output <- response
-  }
-
   ## 3 Return the output
-  return(final_output)
+  if (inherits(response, "response")) {
+    if (!is.null(parser_input)) {
+      return(.rba_response_parser(response, parser_input))
+    } else {
+      return(invisible(NULL))
+    }
+  } else {
+    return(response)
+  }
 }
 
 #### Check Arguments #######
@@ -680,22 +694,25 @@
 .rba_args_req <- function(cons, n = 2) {
   # List required arguments *arguments with no default value
   f_name <- as.character(sys.calls()[[sys.nframe() - n]])[[1]]
-  f_args <- names(formals(f_name))
-  f <- paste0(deparse(get(f_name)), collapse = "")
+  f_args <- try(names(formals(f_name)),
+                silent = TRUE)
+  if (!inherits(f_args, "try-error")) {
+    f <- paste0(deparse(get(f_name)), collapse = "")
+    req <- regmatches(f,
+                      regexpr("(?<=^function \\().*?(?=\\)\\s{)",
+                              f, perl = TRUE))
+    req <- f_args[!grepl(pattern = "(=)|(\\.\\.\\.)",
+                         x = unlist(strsplit(req, ",")))]
+    # Add `na_null = TRUE` to the required function
+    cons <- lapply(X = cons,
+                   FUN = function(x) {
+                     if (x[["arg"]] %in% req) {
+                       x[["no_null"]] <- TRUE
+                     }
+                     return(x)
+                   })
+  }
 
-  req <- regmatches(f,
-                    regexpr("(?<=^function \\().*?(?=\\)\\s{)",
-                            f, perl = TRUE))
-  req <- f_args[!grepl(pattern = "(=)|(\\.\\.\\.)",
-                       x = unlist(strsplit(req, ",")))]
-  # Add `na_null = TRUE` to the required function
-  cons <- lapply(X = cons,
-                 FUN = function(x) {
-                   if (x[["arg"]] %in% req) {
-                     x[["no_null"]] <- TRUE
-                   }
-                   return(x)
-                 })
   return(cons)
 }
 
@@ -766,7 +783,7 @@
                    cond)
     return(cond)
   } else {
-    stop("Internal Error: `what` should be `cons` or `cond.`", call. = TRUE)
+    stop("Internal Error; `what` should be `cons` or `cond.`", call. = TRUE)
   }
 }
 
@@ -799,7 +816,7 @@
                          "regex" = grepl(pattern = cons_i[["regex"]],
                                          x = cons_i[["evl_arg"]],
                                          ignore.case = FALSE, perl = TRUE),
-                         stop("internal Error: constrian is not defiend: ",
+                         stop("Internal Error; constrian is not defiend: ",
                               what, call. = TRUE)))
     return(output)
   } else {
@@ -862,7 +879,9 @@
                              cons_i[["evl_arg"]]),
          "regex" = sprintf("Invalid Argument: %s do not have a valid format.\n\t(It should match regex pattern: %s ).",
                            cons_i[["arg"]],
-                           cons_i[["regex"]])
+                           cons_i[["regex"]]),
+         stop("Internal Error; constrian message is not defiend: ",
+              what, call. = TRUE)
   )
 }
 
@@ -931,7 +950,7 @@
   } else if (is.character(cond_i[[1]])) {
     cond_i_1 <- eval(parse(text = cond_i[[1]]), envir = parent.frame(3))
   } else {
-    stop("Internal error: the first element in the condition sublist",
+    stop("Internal Error; the first element in the condition sublist",
          "should be either a charachter or quoted call!", call. = TRUE)
   }
   ## Create an Error message
@@ -951,7 +970,7 @@
                       "1" = list(msg = sprintf("Argument's conditions are not satisfied; `%s` is TRUE.",
                                                as.character(enquote(cond_i[[1]]))[[2]]),
                                  warn = FALSE),
-                      stop("Internal error: invalid condition: ",
+                      stop("Internal Error; invalid condition: ",
                            enquote(cond_i[[1]])[[2]], call. = TRUE)
     )
     return(err_obj)
@@ -1058,6 +1077,7 @@
   ## 2.3 check other constrains if their class is correct
   ### Add no_null for arguments with no default value
   cons <- .rba_args_req(cons = cons, n = 2)
+
   ### Check
   other_errs <- lapply(cons, .rba_args_cons_wrp)
   if (any(!is.na(other_errs))) {
@@ -1193,7 +1213,7 @@
                                                        as = "text",
                                                        encoding = "UTF-8"))
                           },
-                          stop("Internal Error: Specify a valid parser name or provide a function!",
+                          stop("Internal Error; Specify a valid parser name or provide a function!",
                                call. = TRUE)
                         )
                       }
