@@ -43,13 +43,12 @@ test_that(".rba_api_call works", {
                pattern = "404")
   ## Trims output
   request <- .rba_httr(httr = "head",
-                       url = "https://google.com",
+                       url = "https://googlvjhvjhjvje.com",
                        path = "search")
   expect_regex(obj = rba_api_call_nested(input_call = request$call,
                                          skip_error = TRUE,
                                          verbose = TRUE,
-                                         diagnostics = FALSE,
-                                         timeout_input = 0.1),
+                                         diagnostics = FALSE),
                pattern = "Error in",
                invert = TRUE)
 })
