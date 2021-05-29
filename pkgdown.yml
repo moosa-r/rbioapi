@@ -10,7 +10,7 @@ articles:
   rbioapi_reactome: rbioapi_reactome.html
   rbioapi_string: rbioapi_string.html
   rbioapi_uniprot: rbioapi_uniprot.html
-last_built: 2021-05-29T12:35Z
+last_built: 2021-05-29T13:07Z
 urls:
   reference: https://moosa-r.github.io/rbioapi/reference
   article: https://moosa-r.github.io/rbioapi/articles
