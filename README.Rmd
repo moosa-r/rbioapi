@@ -25,6 +25,8 @@ rba_options(timeout = 600)
 
 <!-- badges: start -->
 
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/rbioapi)](https://cran.r-project.org/package=rbioapi)
+[![R-CMD-check](https://github.com/moosa-r/rbioapi/workflows/R-CMD-check/badge.svg)](https://github.com/moosa-r/rbioapi/actions)
 <!-- badges: end -->
 
 ## What does rbioapi do?

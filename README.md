@@ -5,6 +5,9 @@ Moosa Rezwani
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
+
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/rbioapi)](https://cran.r-project.org/package=rbioapi)
+[![R-CMD-check](https://github.com/moosa-r/rbioapi/workflows/R-CMD-check/badge.svg)](https://github.com/moosa-r/rbioapi/actions)
 <!-- badges: end -->
 
 ## What does rbioapi do?
