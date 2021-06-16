@@ -7,17 +7,17 @@
 rba_string_homology_intra(ids, species = NULL, ...)
 }
 \arguments{
-\item{ids}{Your protein ID(s). It is strongly recommended to provide
+\item{ids}{Your protein ID(s). It is strongly recommended to supply
 STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
 
 \item{species}{Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
 (Recommended, but optional if your input is less than 100 IDs.)}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
-A data frame with bit scores between your provided proteins and
+A data frame with bit scores between your supplied proteins and
   their self-hit. To Reduce the transferred data, STRING returns only one
   half of the similarity matrix; This will not pose a problem because
   similarity matrix is symmetrical.
@@ -31,7 +31,7 @@ Using this function, you can retrieve the Smith-Waterman bit scores among
 \details{
 Note that this function will retrieve similarity scores of different
   proteins "within the same species". To Get a similarity scores of a given
-  protein and it's closets homologous proteins in other species, refer to
+  protein and it's closets homologous proteins in other species, see
   \code{\link{rba_string_homology_inter}}.
   \cr Similarity matrix is imported -by STRING- from:
   \href{https://cube.univie.ac.at/resources/simap}{Similarity Matrix of

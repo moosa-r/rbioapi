@@ -23,7 +23,7 @@ secondary accession}, NIH-NCBI dbSNP ID or HGVS expression.
 \href{https://www.ncbi.nlm.nih.gov/snp/}{NIH-NCBI dbSNP id} or
 \href{https://www.ncbi.nlm.nih.gov/variation/hgvs/}{HGVS Expression}.}
 
-\item{id_type}{The type of provided ID argument, one of:
+\item{id_type}{The type of supplied ID argument, one of:
 \href{https://www.uniprot.org/help/accession_numbers}{"uniprot"},
 \href{https://www.ncbi.nlm.nih.gov/snp/}{"dbsnp"} or
 \href{https://www.ncbi.nlm.nih.gov/variation/hgvs/}{"hgvs"}}
@@ -36,22 +36,22 @@ two of: "missense", "stop gained" or "stop lost".}
 
 \item{wild_type}{Wild type amino acid. Accepted values are IUPAC
 single-letter amino acid (e.g. D for    Aspartic acid) and "*" for stop
-codon. You can provide up to 20 values.}
+codon. You can supply up to 20 values.}
 
 \item{alternative_sequence}{Alternative amino acid. Accepted values are IUPAC
 single-letter amino acid (e.g. D for    Aspartic acid) and "*" for stop codon
-and "-" for deletion. You can provide up to 20 values.}
+and "-" for deletion. You can supply up to 20 values.}
 
 \item{location}{A valid amino acid range (e.g. 10-25) within the sequence
-range where the variation occurs. You can provide up to 20 values.}
+range where the variation occurs. You can supply up to 20 values.}
 
 \item{save_peff}{Logical or Character:\itemize{
 \item FALSE: (default) Do not save PEFF file, just return as a list object.
 \item TRUE: Save as PEFF file to an automatically-generated path.
 \item Character string: A valid file path to save the PEFF file.}}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A list where each element is a list that corresponds to a UniProt

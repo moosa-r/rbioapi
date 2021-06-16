@@ -13,12 +13,12 @@ taxonomic identifier} of your initial node.}
 \item{to}{\href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI
 taxonomic identifier} of your final node.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 a nested list containing the node which are in the shortest path
-  between your provided nodes.
+  between your supplied nodes.
 }
 \description{
 Use this function to retrieve the shortest path between two nodes

@@ -15,22 +15,22 @@ can directly download the profile matrix in file with this format.
 Supported formats are: "yaml", "jaspar", "transfac", "meme" and "pfm"}
 
 \item{save_to}{NULL or Character:\itemize{
-\item NULL: (only if file_format was provided) Save the file to an
+\item NULL: (only if file_format was supplied) Save the file to an
   automatically-generated path.
 \item Character string: A valid file or directory path to save the file to.}}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A list that contains the PFM along with its details and
-  annotations. If file_format was provided, an un-parsed character string
+  annotations. If file_format was supplied, an un-parsed character string
   with the file's content.
 }
 \description{
 Using this function you can retrieve a Position Frequency Matrices (PFM)
  associated with a matrix profile Identifier along with its details and
- annotations. If a base ID (i.e. without version suffix) was provided,
+ annotations. If a base ID (i.e. without version suffix) was supplied,
  the latest version will be returned.
 }
 \section{Corresponding API Resources}{

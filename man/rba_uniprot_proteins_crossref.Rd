@@ -28,12 +28,12 @@ rba_uniprot_proteins_crossref(
 see: \href{https://www.uniprot.org/help/alternative_products}{Alternative
 products}}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 List which each element is a UniProt entity that correspond to
-  your provided cross-reference database name and ID.
+  your supplied cross-reference database name and ID.
 }
 \description{
 \href{https://www.uniprot.org/database/}{UniProt Cross-Reference} links

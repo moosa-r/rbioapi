@@ -9,19 +9,19 @@ rba_reactome_complex_list(id, resource, ...)
 \arguments{
 \item{id}{Molecule's external Identifier}
 
-\item{resource}{What is the resource of your provided ID? see:
+\item{resource}{What is the resource of your supplied ID? see:
 \href{https://reactome.org/content/schema/objects/ReferenceDatabase}{Reactome External
 Identifiers}}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
-Data frame where each row is a complex containing your provided
+Data frame where each row is a complex containing your supplied
   molecule and columns are pertinent information.
 }
 \description{
-This function will retrieve a list of complexes that include your provided
+This function will retrieve a list of complexes that include your supplied
   molecule as a component.
 }
 \section{Corresponding API Resources}{

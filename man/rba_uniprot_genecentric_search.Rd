@@ -8,10 +8,10 @@ rba_uniprot_genecentric_search(upid = NULL, accession = NULL, gene = NULL, ...)
 }
 \arguments{
 \item{upid}{\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
-identifier (UPID)}. You can provide up to 100 UPIDs.}
+identifier (UPID)}. You can supply up to 100 UPIDs.}
 
 \item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
-UniProtKB primary or secondary accession}(s). You can provide up to 100
+UniProtKB primary or secondary accession}(s). You can supply up to 100
 accession numbers.}
 
 \item{gene}{unique gene identifier(s) found in MOD,
@@ -20,8 +20,8 @@ Ensembl Genomes, \href{https://www.uniprot.org/help/gene_name}{OLN},
 \href{https://www.uniprot.org/help/gene_name}{ORF} or
 \href{https://www.uniprot.org/help/gene_name}{UniProt Gene Name}.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 a list containing gene-centric proteins search hits.
@@ -33,7 +33,7 @@ Using this function you can search UniProt for available gene-centrics from
   \href{https://www.uniprot.org/help/gene_centric_isoform_mapping}{Automatic
   gene-centric isoform mapping for eukaryotic reference proteome entries.}
   You may also refine your search with modifiers upid, accession and gene.
-  refer to "Arguments section" for more information.
+  See "Arguments section" for more information.
 }
 \details{
 Note that this is a search function. Thus, you are not required to fill

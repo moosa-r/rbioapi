@@ -15,7 +15,7 @@ rba_mieaa_convert_type(
 \arguments{
 \item{mirna}{A vector of miRNA accessions to be converted.}
 
-\item{input_type}{Type of your provided miRNA accession. either "mature"
+\item{input_type}{Type of your supplied miRNA accession. either "mature"
 or "precursor".}
 
 \item{only_unique}{(logical) miRBase precursor and mature miRNA accessions
@@ -27,8 +27,8 @@ a given accession). set this to TRUE to only retrieve the unique mappings.
 two-columned data frame with your input and output accessions. Otherwise,
 if TRUE, only the output miRNA accessions will be returned.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 Depending on the arguments, a data frame or a character vectors

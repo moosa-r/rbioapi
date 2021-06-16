@@ -9,11 +9,11 @@ rba_reactome_people_name(person_name, exact_match = FALSE, ...)
 \arguments{
 \item{person_name}{first and last name of the person}
 
-\item{exact_match}{Logical: should the provided name be considered as
+\item{exact_match}{Logical: should the supplied name be considered as
 an exact match? (default = FALSE)}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 List where each element is a search hit contains the person's

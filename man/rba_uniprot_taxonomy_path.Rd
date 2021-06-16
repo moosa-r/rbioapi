@@ -16,16 +16,16 @@ rba_uniprot_taxonomy_path(id, direction, depth = 5, ...)
 \item{depth}{(numeric) How many levels should be traversed on
 the taxonomic tree? (from 1 to 5, default = 5)}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 a nested list containing the node which are in the path specified by
-  your provided argument in the UniProt taxonomic tree.
+  your supplied argument in the UniProt taxonomic tree.
 }
 \description{
 Using this function you can retrieve nodes that are located in the top or
-  the bottom of your provided node in
+  the bottom of your supplied node in
   \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database tree}
 }
 \section{Corresponding API Resources}{

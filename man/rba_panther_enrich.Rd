@@ -42,16 +42,16 @@ if correction is "FDR", the threshold will be applied to fdr column's
 values; if otherwise, the threshold will be applied to p value column.}
 
 \item{ref_genes}{(Optional) A set of genes that will be used as the test's
-background (reference/universe) gene set. If no value provided, all of
+background (reference/universe) gene set. If no value supplied, all of
 the genes in specified organism will be used. maximum length and supported
 IDs are the same as 'genes' argument.}
 
 \item{ref_organism}{(Optional) if 'ref_genes' is used, you can specify
-the organisms which correspond to your provided IDs in 'ref_genes'
+the organisms which correspond to your supplied IDs in 'ref_genes'
 argument. see 'organism' argument for supported values.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A list with the prov

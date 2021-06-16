@@ -15,22 +15,22 @@ rba_uniprot_antigens_search(
 }
 \arguments{
 \item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
-UniProtKB primary or secondary accession}(s). You can provide up to 100
+UniProtKB primary or secondary accession}(s). You can supply up to 100
 accession numbers.}
 
 \item{antigen_sequence}{Protein sequence in the antigenic site.}
 
-\item{antigen_id}{Human Protein Atlas (HPA) antigen ID. You can provide up to
+\item{antigen_id}{Human Protein Atlas (HPA) antigen ID. You can supply up to
 20 IDs.}
 
-\item{ensembl_id}{Ensembl Stable Transcript ID. You can provide up to
+\item{ensembl_id}{Ensembl Stable Transcript ID. You can supply up to
 20 IDs.}
 
 \item{match_score}{(Numeric) Minimum alignment score for the antigen
 sequence and the target protein sequence.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A list Where each element correspond to a UniProt protein (search
@@ -40,7 +40,7 @@ A list Where each element correspond to a UniProt protein (search
 UniProt maps Antigenic (Antibody-binding) features from different sources
   to the proteins' sequences. Using this function, you can search for
   Antigenic sequences that has been map to UniProt proteins. You may also
-  refine your search with modifiers such as score etc. refer to
+  refine your search with modifiers such as score etc. See
   "Arguments section" for more information.
 }
 \details{

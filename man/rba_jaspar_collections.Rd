@@ -10,8 +10,8 @@ rba_jaspar_collections(release = 2020, ...)
 \item{release}{Numeric: (default = 2020) Which JASPAR database release
 to use? Available options are: 2014, 2016, 2018, and 2020.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A data frame with collections' names and URLs.

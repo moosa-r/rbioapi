@@ -15,7 +15,7 @@
 #' @return If handle was FALSE, a single string with the identified file type
 #'   (one of: "table", "vector", "file" or "url"), else if handle was TRUE,
 #'   a list containing the file Type and a path to the tempfile containing
-#'   the data or the user-provided url/file path.
+#'   the data or the user-supplied url/file path.
 #'
 #' @noRd
 .rba_reactome_input <- function(input,
@@ -37,9 +37,9 @@
                 x = input)) {
         type <- "file"
         if (!file.exists(input)) {
-          stop("You provided a file path that does not exist or it is not ",
-               "accessible. Please Check your provided input. If you did not ",
-               "provide a file path, kindly set 'input-type = \"file\"' to ",
+          stop("You supplied a file path that does not exist or it is not ",
+               "accessible. Please Check your supplied input. If you did not ",
+               "supply a file path, kindly set 'input-type = \"file\"' to ",
                "an appropriate value and try again.",
                immediate. = TRUE,
                call. = diagnostics)
@@ -99,22 +99,22 @@
 #' Reactome Over-Representation or Expression Analysis
 #'
 #' Using this function, you can perform Reactome Analysis In a convenient way.
-#'   The Analysis Type will be chosen depending on your provided
+#'   The Analysis Type will be chosen depending on your supplied
 #'   input:\enumerate{
-#'   \item If you provide a vector or a single-columned table,
+#'   \item If you supply a vector or a single-columned table,
 #'   "Over-Representation" analysis will be performed.
-#'   \item If you provide a multi-column table, with the first column being
+#'   \item If you supply a multi-column table, with the first column being
 #'   molecules identifiers and the rest being numeral expression values,
 #'   "Expression" analysis will be performed.}
-#'   Refer to the details section for the accepted input types and format.
+#'   See the details section for the accepted input types and format.
 #'
-#' You can provide your table or vector input in numerous formats:\enumerate{
+#' You can supply your table or vector input in numerous formats:\enumerate{
 #'   \item A R object which can be data frame, matrix or a simple vector.
 #'   \item A path to a local text file in your device that contains the molecules
 #'   data. (The file should be formatted correctly, see below.)
 #'   \item A URL pointing to a text file on the web that contains the molecules
 #'   data. (The file should be formatted correctly, see below.}
-#'   If you provide a text file (as a local file path or URL), it should be
+#'   If you supply a text file (as a local file path or URL), it should be
 #'   in TSV (Tab-Separated Values) format; Column names should start with "#"
 #'   character. Note that if you are providing the file for
 #'   "Over-Representation" analysis (i.e. Single columned-data) this header
@@ -144,20 +144,20 @@
 #'
 #' @param input A vector, data frame, matrix or a local file path or URL
 #'   that points to your data. See "Details section" for more information of
-#'   how to organize and provide your input.
+#'   how to organize and supply your input.
 #' @param input_format (Optional) This function will automatically identify
-#'   your provided input's format. But in case of unexpected issues or if you
+#'   your supplied input's format. But in case of unexpected issues or if you
 #'   want to be explicit, set this argument to one of:\itemize{
-#'   \item "table": If you provided a data frame or matrix as input.
-#'   \item "vector": If you provided a simple vector (numeric or character) as
+#'   \item "table": If you supplied a data frame or matrix as input.
+#'   \item "vector": If you supplied a simple vector (numeric or character) as
 #'   input.
-#'   \item "file": If you provided a local file path pointing to a
+#'   \item "file": If you supplied a local file path pointing to a
 #'   correctly-formatted text file.
-#'   \item "url": If you provided a URL pointing to a correctly-formatted
+#'   \item "url": If you supplied a URL pointing to a correctly-formatted
 #'   text file.}
 #' @param species Numeric or Character: NCBI Taxonomy identifier (Human
 #'   is 9606), species name (e.g. "Homo sapiens") or Reactome DbId (e.g
-#'   Homo sapiens is 48887). Refer to
+#'   Homo sapiens is 48887). See
 #'    \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
 #'    Data Schema: Entries: Species}.
@@ -175,7 +175,7 @@
 #'   "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
 #'   "PUBCHEM_COMPOUND".
 #' @param p_value Set a P value threshold. Only results with P value equal to
-#'   or less than your provided threshold will be returned. (default = 1,
+#'   or less than your supplied threshold will be returned. (default = 1,
 #'   Meaning no P value filtering)
 #' @param include_disease Logical (default = TRUE) Should the disease pathways
 #'   be included in the results?
@@ -183,8 +183,8 @@
 #'   to be included in the results.
 #' @param max (numeric) Maximum number of entities that a pathways should have
 #'   to be included in the results.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return List containing the results and information of your analysis. Note
 #'   that you can use the token returned in the "summary" sub-list of the
@@ -287,10 +287,10 @@ rba_reactome_analysis <- function(input,
                         list(arg = "max",
                              class = "numeric")),
             cond = list(list("sum(projection, !is.null(species)) == 2",
-                             "You cannot Provide 'species' when 'projection' argument is TRUE"))
+                             "You cannot supply 'species' when 'projection' argument is TRUE"))
   )
 
-  .msg("Retrieving Reactome Analysis Results of your provided Identifiers.")
+  .msg("Retrieving Reactome Analysis Results of your supplied Identifiers.")
 
   ## Build POST API Request's query
   call_query <- list("interactors" = ifelse(interactors, "true", "false"),
@@ -313,7 +313,7 @@ rba_reactome_analysis <- function(input,
                                 !is.null(max),
                                 max))
   ## Build POST API Request's URL
-  # handle provided input
+  # handle supplied input
   input <- .rba_reactome_input(input = input,
                               type = input_format,
                               handle = TRUE)
@@ -353,7 +353,7 @@ rba_reactome_analysis <- function(input,
 #'
 #' Use this function to save a detailed report of your previous analysis (That
 #'   you have done with \code{\link{rba_reactome_analysis}}). You need
-#'   to provide a 'token' associated to your previous analysis.
+#'   to supply a 'token' associated to your previous analysis.
 #'
 #' Token is associated to each Reactome analysis results and kept by Reactome
 #'   for at least 7 days. You can locate it in
@@ -373,7 +373,7 @@ rba_reactome_analysis <- function(input,
 #'
 #' @param token A token associated to your previous Reactome analysis.
 #' @param species Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
-#'    ID is 9606.) or species name (e.g. "Homo sapiens"). Refer to
+#'    ID is 9606.) or species name (e.g. "Homo sapiens"). See
 #'    \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
 #'    Data Schema: Entries: Species}.
@@ -392,8 +392,8 @@ rba_reactome_analysis <- function(input,
 #'   "Standard" (default), "Strosobar" or "Copper Plus".
 #' @param fireworks_profile Color profile of overview diagram, should be one of:
 #'   "Copper", "Copper Plus", "Barium Lithium" or "calcium salts".
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return NULL, a PDF file will be saved to disk.
 #'
@@ -537,16 +537,16 @@ rba_reactome_analysis_pdf <- function(token,
 #'
 #' @param token A token associated to your previous Reactome analysis.
 #' @param request What to download? Should be one of:\itemize{
-#'   \item "found_ids": Download a CSV file containing the found user-provided
-#'   identifiers in the analysis associated with your provided token and
+#'   \item "found_ids": Download a CSV file containing the found user-supplied
+#'   identifiers in the analysis associated with your supplied token and
 #'   resource.
-#'   \item "not_found_ids"" Download a CSV file containing the user-provided
+#'   \item "not_found_ids"" Download a CSV file containing the user-supplied
 #'   Identifiers which has not been found in the analysis associated with your
-#'   provided token.
+#'   supplied token.
 #'   \item "pathways": Download a CSV file containing Pathway analysis results
-#'   of the analysis associated with your provided token and resource.
+#'   of the analysis associated with your supplied token and resource.
 #'   \item "results": Download a JSON file containing the complete analysis
-#'   results associated with your provided token.
+#'   results associated with your supplied token.
 #'   \item "results_gz" Same as "results", but the output will be compress
 #'   (gzipped).}
 #' @param save_to NULL or Character:\itemize{
@@ -557,8 +557,8 @@ rba_reactome_analysis_pdf <- function(token,
 #'   available choices are:"TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
 #'   "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
 #'   "PUBCHEM_COMPOUND".
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return NULL, a CSV,JSON or Gzipped JSON file will be saved to disk
 #'   based on your input.
@@ -618,7 +618,7 @@ rba_reactome_analysis_download <- function(token,
                                      "ENTITIES_FDR",
                                      "PUBCHEM_COMPOUND"))),
             cond = list(list('grepl("^results|^not_found_ids$", request) & resource != "TOTAL"',
-                             c("You cannot provide 'resource' with ",
+                             c("You cannot supply 'resource' with ",
                                request, " request. ignoring resource."))),
             cond_warning = TRUE)
 
@@ -687,12 +687,12 @@ rba_reactome_analysis_download <- function(token,
 #' @param input A local file path or URL that points to your -optionally
 #'   gzipped- JSON file.
 #' @param input_format (Optional) This function will automatically identify
-#'   your provided input's format. But in case of unexpected issues or if you
+#'   your supplied input's format. But in case of unexpected issues or if you
 #'   want to be explicit, set this argument to one of:\itemize{
-#'   \item "file": If you provided a local file path pointing to the JSON file.
-#'   \item "url": If you provided a URL pointing to the JSON file.}
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#'   \item "file": If you supplied a local file path pointing to the JSON file.
+#'   \item "url": If you supplied a URL pointing to the JSON file.}
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return A list containing the new token and other information of your
 #'   imported results.
@@ -777,20 +777,20 @@ rba_reactome_analysis_import <- function(input,
 #' @param input A vector, local file path or URL that points to your
 #'   identifiers list.
 #' @param input_format (Optional) This function will automatically identify
-#'   your provided input's format. But in case of unexpected issues or if you
+#'   your supplied input's format. But in case of unexpected issues or if you
 #'   want to be explicit, set this argument to one of:\itemize{
-#'   \item "vector": If you provided a simple vector (numeric or character) as
+#'   \item "vector": If you supplied a simple vector (numeric or character) as
 #'   input.
-#'   \item "file": If you provided a local file path pointing to a
+#'   \item "file": If you supplied a local file path pointing to a
 #'   correctly-formatted text file.
-#'   \item "url": If you provided a URL pointing to a correctly-formatted
+#'   \item "url": If you supplied a URL pointing to a correctly-formatted
 #'   text file.}
 #' @param projection Logical (default = FALSE) Should non-human identifiers
 #'   be projected to their human equivalents? (using Reactome orthology data)
 #' @param interactors Logical (default = FALSE) Should IntAct interaction data
 #'   be included?
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return List containing your identifiers and the IDS and resources they
 #'   are mapped to.
@@ -833,12 +833,12 @@ rba_reactome_analysis_mapping <- function(input,
                         list(arg = "interactors",
                              class = "logical")))
 
-  .msg("Mapping your provided input identifiers.")
+  .msg("Mapping your supplied input identifiers.")
 
   ## Build POST API Request's query
   call_query <- list("interactors" = ifelse(interactors, "true", "false"))
   ## Build POST API Request's URL
-  # handle provided input
+  # handle supplied input
   input <- .rba_reactome_input(input = input,
                                type = input_format,
                                handle = TRUE)
@@ -883,14 +883,14 @@ rba_reactome_analysis_mapping <- function(input,
 #' \cr In version 73 (11 June 2020), using an orthology-based approach,
 #'   Homo sapiens events was projected to 18,654 orthologous pathways (with
 #'   81,835 orthologous proteins) in 15 non-human species.
-#'   Refer to \href{https://reactome.org/documentation/inferred-events}{
+#'   See \href{https://reactome.org/documentation/inferred-events}{
 #'   Reactome Computationally Inferred Events} for more information.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://reactome.org/AnalysisService/species/homoSapiens/{species}"
 #'
 #' @param species_dbid Numeric: Reactome DbId (e.g  Mus musculus is 48892) of
-#'   the species you want to compare with Homo sapiens. Refer to
+#'   the species you want to compare with Homo sapiens. See
 #'    \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
 #'    Data Schema: Entries: Species}.
@@ -904,14 +904,14 @@ rba_reactome_analysis_mapping <- function(input,
 #'   "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
 #'   "PUBCHEM_COMPOUND".
 #' @param p_value Set a P value threshold. Only results with P value equal to
-#'   or less than your provided threshold will be returned. (default = 1,
+#'   or less than your supplied threshold will be returned. (default = 1,
 #'   Meaning no P value filtering)
 #' @param min (numeric) Minimum number of entities that a pathways should have
 #'   to be included in the results.
 #' @param max (numeric) Maximum number of entities that a pathways should have
 #'   to be included in the results.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return List with the results of the comparison.
 #'
@@ -1037,7 +1037,7 @@ rba_reactome_analysis_species <- function(species_dbid,
 #' @param token A token associated to your previous Reactome analysis.
 #' @param species Numeric or Character: NCBI Taxonomy identifier (Human
 #'   is 9606), species name (e.g. "Homo sapiens") or Reactome DbId (e.g
-#'   Homo sapiens is 48887). Refer to
+#'   Homo sapiens is 48887). See
 #'    \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
 #'    Data Schema: Entries: Species}.
@@ -1051,7 +1051,7 @@ rba_reactome_analysis_species <- function(species_dbid,
 #'   "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
 #'   "PUBCHEM_COMPOUND".
 #' @param p_value Set a P value threshold. Only results with P value equal to
-#'   or less than your provided threshold will be returned. (default = 1,
+#'   or less than your supplied threshold will be returned. (default = 1,
 #'   Meaning no P value filtering)
 #' @param include_disease Logical (default = TRUE) Should the disease pathways
 #'   be included in the results?
@@ -1059,8 +1059,8 @@ rba_reactome_analysis_species <- function(species_dbid,
 #'   to be included in the results.
 #' @param max (numeric) Maximum number of entities that a pathways should have
 #'   to be included in the results.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return List containing the results and information of your analysis.
 #'

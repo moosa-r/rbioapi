@@ -14,12 +14,12 @@ rba_reactome_interactors_static(
 }
 \arguments{
 \item{proteins}{Uniprot proteins accession(s). If endpoint = "pathway",
-only a single protein accession can be provided.}
+only a single protein accession can be supplied.}
 
 \item{endpoint}{Can be one of: \enumerate{
-\item "details": To return a detailed information of your provided
+\item "details": To return a detailed information of your supplied
 protein(s) accession.
-\item "summary": To return a summary of your provided protein(s) accession
+\item "summary": To return a summary of your supplied protein(s) accession
 \item "pathway": To return a list of pathways containing the interacting
 molecules (excluding TopLevelPathway class).}}
 
@@ -27,16 +27,16 @@ molecules (excluding TopLevelPathway class).}}
 If TRUE, pathways without diagram will be excluded. (default = FALSE)}
 
 \item{species}{Only when "endpoint = "pathway", The scientific name
-of the species to search for the pathways. Refer to
+of the species to search for the pathways. See
  \code{\link{rba_reactome_species}} or
  \href{https://reactome.org/content/schema/objects/Species}{Reactome
  Data Schema: Entries: Species}.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
-List which it's content varies based on the  provided "endpoint"
+List which it's content varies based on the  supplied "endpoint"
   argument.
 }
 \description{
@@ -44,9 +44,9 @@ Reactome maintain a locally host a version of IntAct(Static) interactions
   database. Using this function, you can retrieve IntAct information of
   a protein(s) in two scenarios: \enumerate{
   \item If endpoint = "details" or "summary": Retrieve a detailed/summary
-    information of your provided protein accession(s) from IntAct database.
+    information of your supplied protein accession(s) from IntAct database.
   \item If endpoint = "pathway", Retrieve a list of Reactome pathways which
-  include your provided protein accession. Pathways with the class
+  include your supplied protein accession. Pathways with the class
   "TopLevelPathway" will be excluded.}
 }
 \section{Corresponding API Resources}{

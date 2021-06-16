@@ -23,17 +23,17 @@ rba_reactome_analysis(
 \arguments{
 \item{input}{A vector, data frame, matrix or a local file path or URL
 that points to your data. See "Details section" for more information of
-how to organize and provide your input.}
+how to organize and supply your input.}
 
 \item{input_format}{(Optional) This function will automatically identify
-your provided input's format. But in case of unexpected issues or if you
+your supplied input's format. But in case of unexpected issues or if you
 want to be explicit, set this argument to one of:\itemize{
-\item "table": If you provided a data frame or matrix as input.
-\item "vector": If you provided a simple vector (numeric or character) as
+\item "table": If you supplied a data frame or matrix as input.
+\item "vector": If you supplied a simple vector (numeric or character) as
 input.
-\item "file": If you provided a local file path pointing to a
+\item "file": If you supplied a local file path pointing to a
 correctly-formatted text file.
-\item "url": If you provided a URL pointing to a correctly-formatted
+\item "url": If you supplied a URL pointing to a correctly-formatted
 text file.}}
 
 \item{projection}{Logical (default = FALSE) Should non-human identifiers
@@ -44,7 +44,7 @@ be used to increase the analysis background?}
 
 \item{species}{Numeric or Character: NCBI Taxonomy identifier (Human
 is 9606), species name (e.g. "Homo sapiens") or Reactome DbId (e.g
-Homo sapiens is 48887). Refer to
+Homo sapiens is 48887). See
  \code{\link{rba_reactome_species}} or
  \href{https://reactome.org/content/schema/objects/Species}{Reactome
  Data Schema: Entries: Species}.}
@@ -62,7 +62,7 @@ available choices are: "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
 "PUBCHEM_COMPOUND".}
 
 \item{p_value}{Set a P value threshold. Only results with P value equal to
-or less than your provided threshold will be returned. (default = 1,
+or less than your supplied threshold will be returned. (default = 1,
 Meaning no P value filtering)}
 
 \item{include_disease}{Logical (default = TRUE) Should the disease pathways
@@ -74,8 +74,8 @@ to be included in the results.}
 \item{max}{(numeric) Maximum number of entities that a pathways should have
 to be included in the results.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 List containing the results and information of your analysis. Note
@@ -85,23 +85,23 @@ List containing the results and information of your analysis. Note
 }
 \description{
 Using this function, you can perform Reactome Analysis In a convenient way.
-  The Analysis Type will be chosen depending on your provided
+  The Analysis Type will be chosen depending on your supplied
   input:\enumerate{
-  \item If you provide a vector or a single-columned table,
+  \item If you supply a vector or a single-columned table,
   "Over-Representation" analysis will be performed.
-  \item If you provide a multi-column table, with the first column being
+  \item If you supply a multi-column table, with the first column being
   molecules identifiers and the rest being numeral expression values,
   "Expression" analysis will be performed.}
-  Refer to the details section for the accepted input types and format.
+  See the details section for the accepted input types and format.
 }
 \details{
-You can provide your table or vector input in numerous formats:\enumerate{
+You can supply your table or vector input in numerous formats:\enumerate{
   \item A R object which can be data frame, matrix or a simple vector.
   \item A path to a local text file in your device that contains the molecules
   data. (The file should be formatted correctly, see below.)
   \item A URL pointing to a text file on the web that contains the molecules
   data. (The file should be formatted correctly, see below.}
-  If you provide a text file (as a local file path or URL), it should be
+  If you supply a text file (as a local file path or URL), it should be
   in TSV (Tab-Separated Values) format; Column names should start with "#"
   character. Note that if you are providing the file for
   "Over-Representation" analysis (i.e. Single columned-data) this header

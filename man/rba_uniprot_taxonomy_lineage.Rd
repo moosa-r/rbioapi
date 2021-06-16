@@ -11,16 +11,16 @@ rba_uniprot_taxonomy_lineage(id, ...)
 \href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
   identifier}}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A list with a data frame containing All the nodes that preceded your
-  provided node in the taxonomic tree. with your node as the first row
+  supplied node in the taxonomic tree. with your node as the first row
   and the root node in the last row.
 }
 \description{
-Use this function to retrieve the taxonomic lineage of your provided
+Use this function to retrieve the taxonomic lineage of your supplied
   taxonomy node.
 }
 \section{Corresponding API Resources}{

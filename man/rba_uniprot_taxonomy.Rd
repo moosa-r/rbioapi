@@ -19,25 +19,25 @@ rba_uniprot_taxonomy(
 identifier(s)}}
 
 \item{hierarchy}{Retrieve taxonomic nodes that have specific hierarchical
-relation to your provided taxonomic node. should be one of: "children",
+relation to your supplied taxonomic node. should be one of: "children",
 "parent" or "siblings".}
 
 \item{node_only}{Retrieve only the node(s) information and exclude URL links
 to parents, siblings and children nodes.}
 
-\item{page_size}{(numeric) Only when hierarchy is provided. hierarchy
+\item{page_size}{(numeric) Only when hierarchy is supplied. hierarchy
 information may be very long, thus UniProt API will paginate the results,
 you may use this argument to control the pagination. maximum value is 200.}
 
-\item{page_number}{(numeric) Only when hierarchy is provided. hierarchy
+\item{page_number}{(numeric) Only when hierarchy is supplied. hierarchy
 information may be very long, thus UniProt API will paginate the results,
 you may use this argument to control the pagination.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
-a list containing your provided nodes or their related nodes
+a list containing your supplied nodes or their related nodes
   taxonomic information.
 }
 \description{
@@ -45,7 +45,7 @@ Using this function, you can retrieve taxonomic nodes information by
 providing their
 \href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
   identifiers}. also, you can explicitly retrieve other nodes in relation
-  to your provided node's hierarchy in
+  to your supplied node's hierarchy in
   \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database}.
 }
 \section{Corresponding API Resources}{

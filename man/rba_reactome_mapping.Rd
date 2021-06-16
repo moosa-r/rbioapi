@@ -9,7 +9,7 @@ rba_reactome_mapping(id, resource, map_to, species = "Homo sapiens", ...)
 \arguments{
 \item{id}{Molecule's external Identifier}
 
-\item{resource}{What is the resource of your provided ID? see:
+\item{resource}{What is the resource of your supplied ID? see:
 \href{https://reactome.org/content/schema/objects/ReferenceDatabase}{Reactome External
 Identifiers}}
 
@@ -17,13 +17,13 @@ Identifiers}}
 
 \item{species}{Numeric or Character: NCBI Taxonomy identifier (Human
 is 9606), species name (e.g. "Homo sapiens") or Reactome DbId (e.g
-Homo sapiens is 48887). Refer to
+Homo sapiens is 48887). See
  \code{\link{rba_reactome_species}} or
  \href{https://reactome.org/content/schema/objects/Species}{Reactome
  Data Schema: Entries: Species}.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 Data frame where each row is a pathway/reaction and columns are
@@ -31,7 +31,7 @@ Data frame where each row is a pathway/reaction and columns are
 }
 \description{
 By providing an external identifier from a given resource, you can retrieve
-  a list of pathways/reactions that include your provided ID.
+  a list of pathways/reactions that include your supplied ID.
 }
 \section{Corresponding API Resources}{
 

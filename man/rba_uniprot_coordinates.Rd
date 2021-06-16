@@ -15,17 +15,17 @@ UniProtKB primary or secondary accession}.}
 
 \item{db_id}{Protein's ID in the cross-reference database}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
-A list with genome coordinates of your provided protein.
+A list with genome coordinates of your supplied protein.
 }
 \description{
 Using this function you can retrieve genomic Coordinates of a Protein by
   either providing the protein's UniProt accession or it's ID in a
   cross-reference database (Ensembl, CCDC, HGNC or RefSeq). You should
-  provide either 'accession' alone or 'db_type' and 'db_id' together.
+  supply either 'accession' alone or 'db_type' and 'db_id' together.
 }
 \details{
 For more information about how UniProt imports and calculates genomic

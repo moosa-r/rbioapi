@@ -13,7 +13,7 @@ rba_string_enrichment(
 )
 }
 \arguments{
-\item{ids}{Your protein ID(s). It is strongly recommended to provide
+\item{ids}{Your protein ID(s). It is strongly recommended to supply
 STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
 
 \item{species}{Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
@@ -21,15 +21,15 @@ STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
 
 \item{background}{character vector: A set of STRING protein IDs
 to be used as the statistical background (or universe) when computing
-P-value for the terms. Only STRING IDs are acceptable. (Refer to
+P-value for the terms. Only STRING IDs are acceptable. (See
 \code{\link{rba_string_map_ids}} to map your IDs.)}
 
 \item{split_df}{(logical, default = FALSE), If TRUE, instead of one
 data frame, results from different categories will be split into
 multiple data frames based on their 'category'.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A data frame which every row is an enriched terms with p-value

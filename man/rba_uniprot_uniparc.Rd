@@ -25,14 +25,14 @@ UniProtKB primary or secondary accession}.}
 \item{db_id}{Protein ID in the cross-reference (external) database.}
 
 \item{upid}{\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
-identifier (UPID)}. You can provide up to 100 UPIDs.}
+identifier (UPID)}. You can supply up to 100 UPIDs.}
 
 \item{rf_dd_type}{Filter the content of the UniParc entry by
 \href{https://www.uniprot.org/database/}{cross-reference} names. You can
-provide multiple values.}
+supply multiple values.}
 
 \item{rf_db_id}{Filter the content of the UniParc entry by protein
-identifiers in any cross-reference database. You can provide multiple
+identifiers in any cross-reference database. You can supply multiple
 values.}
 
 \item{rf_active}{(logical ) Filter the content of UniParc entry based on
@@ -43,10 +43,10 @@ active status on source database:\itemize{
 
 \item{rf_tax_id}{(Numeric) Filter the content of the UniParc entry by
 NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}. You can
-provide multiple values.}
+supply multiple values.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A list which correspond to a UniParc entry.

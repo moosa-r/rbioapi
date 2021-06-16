@@ -11,8 +11,8 @@
 #' @param organism (numeric) NCBI taxon ID. run \code{\link{rba_panther_info}}
 #'   with argument 'what = "organisms"' to get a list of PANTHER's
 #'   supported organisms.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
 #'  "GET http://www.pantherdb.org/services/oai/pantherdb/geneinfo"
@@ -106,14 +106,14 @@ rba_panther_mapping <- function(genes,
 #'   if correction is "FDR", the threshold will be applied to fdr column's
 #'   values; if otherwise, the threshold will be applied to p value column.
 #' @param ref_genes (Optional) A set of genes that will be used as the test's
-#'   background (reference/universe) gene set. If no value provided, all of
+#'   background (reference/universe) gene set. If no value supplied, all of
 #'   the genes in specified organism will be used. maximum length and supported
 #'   IDs are the same as 'genes' argument.
 #' @param ref_organism (Optional) if 'ref_genes' is used, you can specify
-#'   the organisms which correspond to your provided IDs in 'ref_genes'
+#'   the organisms which correspond to your supplied IDs in 'ref_genes'
 #'   argument. see 'organism' argument for supported values.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
 #'  "POST http://www.pantherdb.org/services/oai/pantherdb/enrich/overrep"
@@ -185,7 +185,7 @@ rba_panther_enrich <- function(genes,
                              class = "numeric",
                              len = 1)),
             cond = list(list(quote(!is.null(ref_organism) && is.null(ref_genes)),
-                             "'ref_organism' was ignored because no 'ref_genes' was provided.")),
+                             "'ref_organism' was ignored because no 'ref_genes' was supplied.")),
             cond_warning = TRUE)
   .msg("Performing over-representation enrichment analysis of %s input genes of organism %s against %s datasets.",
        length(genes), organism, annot_dataset)
@@ -260,8 +260,8 @@ rba_panther_enrich <- function(genes,
 #' @param families_page (Numeric) (only when 'what = "families"')
 #'   Family information is very long, so results are paginated. Use this
 #'   argument to define the page to retrieve.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
 #'  "GET http://www.pantherdb.org/services/oai/pantherdb/supportedgenomes"
@@ -391,11 +391,11 @@ rba_panther_info <- function(what,
 #'   protein sequences.
 #'
 #' @param genes Character vector of genes identifiers with maximum length of
-#'   10 or only one if seq_pos is provided. Can be any of: Ensemble gene ID,
+#'   10 or only one if seq_pos is supplied. Can be any of: Ensemble gene ID,
 #'   Ensemble protein ID, Ensemble transcript ID, Entrez gene ID, gene symbol,
 #'   NCBI GI, HGNC ID, International protein index ID, NCBI UniGene ID,
 #'   UniProt accession and/or UniProt ID.
-#' @param organism (numeric) NCBI taxon ID of the organism of your provided
+#' @param organism (numeric) NCBI taxon ID of the organism of your supplied
 #'   genes. run \code{\link{rba_panther_info}} with argument
 #'   'what = "organisms"' to get a list of PANTHER's supported organisms.
 #' @param type Ortholog types to return. either "all" (default) or "LDO" to
@@ -404,12 +404,12 @@ rba_panther_info <- function(what,
 #'   run \code{\link{rba_panther_info}} with argument 'what = "organisms"' to
 #'   get a list of PANTHER's supported organisms.
 #' @param seq_pos (Numeric) A position in the protein's sequence of the
-#'   provided gene. should be in the range of the protein's length.
-#' @param include_msa (Logical) Only if a sequence position is provided,
+#'   supplied gene. should be in the range of the protein's length.
+#' @param include_msa (Logical) Only if a sequence position is supplied,
 #'   should MSA (Multiple Sequence Alignment) information be included in the
 #'   results?
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
 #'  "POST http://www.pantherdb.org/services/oai/pantherdb/ortholog/matchortho"
@@ -469,9 +469,9 @@ rba_panther_ortholog <- function(genes,
                              class = "logical",
                              len = 1)),
             cond = list(list(quote(!is.null(seq_pos) && length(genes) > 1),
-                             "When 'seq_pos' is provided, 'genes' argument should be a single input."),
+                             "When 'seq_pos' is supplied, 'genes' argument should be a single input."),
                         list(quote(!is.null(include_msa) && is.null(seq_pos)),
-                             "'include_msa' was ignored because no 'seq_pos' was provided.",
+                             "'include_msa' was ignored because no 'seq_pos' was supplied.",
                              warn = TRUE)))
   .msg("Retrieving %s orthologs of genes %s.",
        type, .paste2(genes, quote_all = "'"))
@@ -525,11 +525,11 @@ rba_panther_ortholog <- function(genes,
 #' Using this function you can search and retrieve homolog of given gene(s).
 #'
 #' @param genes Character vector of genes identifiers with maximum length of
-#'   10 or only one if seq_pos is provided. Can be any of: Ensemble gene ID,
+#'   10 or only one if seq_pos is supplied. Can be any of: Ensemble gene ID,
 #'   Ensemble protein ID, Ensemble transcript ID, Entrez gene ID, gene symbol,
 #'   NCBI GI, HGNC ID, International protein index ID, NCBI UniGene ID,
 #'   UniProt accession and/or UniProt ID.
-#' @param organism (numeric) NCBI taxon ID of the organism of your provided
+#' @param organism (numeric) NCBI taxon ID of the organism of your supplied
 #'   genes. run \code{\link{rba_panther_info}} with argument
 #'   'what = "organisms"' to get a list of PANTHER's supported organisms.
 #' @param type Homolog types to return. either "P" (default) for paralogs,
@@ -540,8 +540,8 @@ rba_panther_ortholog <- function(genes,
 #'   get a list of PANTHER's supported organisms.
 #'   For Paralog, target organism and organism should be the same; Otherwise,
 #'   the target organism should be different from the input organism.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
 #'  "GET http://www.pantherdb.org/services/oai/pantherdb/ortholog/homologOther"
@@ -644,8 +644,8 @@ rba_panther_homolog <- function(genes,
 #' @param target_organisms (numeric) NCBI taxon ID(s) to filter the results.
 #'   run \code{\link{rba_panther_info}} with argument 'what = "organisms"' to
 #'   get a list of PANTHER's supported organisms.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
 #'  "GET http://www.pantherdb.org/services/oai/pantherdb/familyortholog"
@@ -748,8 +748,8 @@ rba_panther_family <- function(id,
 #' @param target_organisms (numeric) NCBI taxon ID(s) to filter the results.
 #'   run \code{\link{rba_panther_info}} with argument 'what = "organisms"' to
 #'   get a list of PANTHER's supported organisms.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
 #'  "GET http://www.pantherdb.org/services/oai/pantherdb/graftsequence"

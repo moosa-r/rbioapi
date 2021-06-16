@@ -17,23 +17,23 @@ rba_reactome_pathways_low(
 
 \item{with_diagram}{Logical: only include pathways with diagram?}
 
-\item{all_forms}{Logical: should other variants of your provided entity_id
+\item{all_forms}{Logical: should other variants of your supplied entity_id
 be considered? (e.g. same molecule but in different compartment,
-secretory form etc.) refer to \code{\link{rba_reactome_participants}}'s
+secretory form etc.) see \code{\link{rba_reactome_participants}}'s
 "Details section" to learn more about how Reactome classifies molecules.}
 
 \item{species}{(optional) Numeric or Character: confine your search to a
 specific species by providing it's NCBI Taxonomy identifier
 (Human Taxonomy ID is 9606) or species name (e.g. "Homo sapiens").
-Refer to \code{\link{rba_reactome_species}} or
+See \code{\link{rba_reactome_species}} or
  \href{https://reactome.org/content/schema/objects/Species}{Reactome
  Data Schema: Entries: Species}.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
-Data frame where each row is a pathway that contains your provided
+Data frame where each row is a pathway that contains your supplied
   entity and columns are pertinent information.
 }
 \description{

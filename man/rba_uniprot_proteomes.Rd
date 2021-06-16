@@ -8,22 +8,22 @@ rba_uniprot_proteomes(upid, get_proteins = FALSE, reviewed = NULL, ...)
 }
 \arguments{
 \item{upid}{\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
-identifier (UPID)}. You can provide up to 100 UPIDs.}
+identifier (UPID)}. You can supply up to 100 UPIDs.}
 
 \item{get_proteins}{logical: set FALSE (default) to only return information
-of the proteome with provided UPID, set TRUE to also return the proteins
- of the provided proteome UPID.}
+of the proteome with supplied UPID, set TRUE to also return the proteins
+ of the supplied proteome UPID.}
 
 \item{reviewed}{Logical:  Only considered when get_proteins is TRUE.
 If TRUE, only return "UniProtKB/Swiss-Prot" (reviewed) proteins;
 If FALSE, only return TrEMBL (un-reviewed) entries. leave it as NULL if you
 do not want to filter proteins based on their review status.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
-a list containing information of the proteome with your provided
+a list containing information of the proteome with your supplied
   UPID that can contain the proteomes protein entries based on the value of
   get_proteins argument.
 }

@@ -9,18 +9,18 @@ rba_reactome_event_ancestors(event_id, ...)
 \arguments{
 \item{event_id}{Reactome event's identifier.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
-List which every element is a Data frame listing your provided
+List which every element is a Data frame listing your supplied
   event along with it's ancestor events. Because any given event can be
   part of more than one pathway hierarchy, the list may contain multiple
   data frames.
 }
 \description{
 Along with Reactome's events hierarchy, This function will retrieve all the
- events beginning from your provided event up to the "Top level Pathway".
+ events beginning from your supplied event up to the "Top level Pathway".
  see "Details section" for more information.
 }
 \details{

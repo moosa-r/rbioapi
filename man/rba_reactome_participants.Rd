@@ -20,11 +20,11 @@ rba_reactome_participants(
 \item{only_reference_entities}{Logical: If TRUe, only participating
 'Reference Entities' will be returned.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
-List with the participant of your provided Event ID. A Data frame
+List with the participant of your supplied Event ID. A Data frame
  if only physical or 'Reference Entities' was requested.
 }
 \description{
@@ -47,7 +47,7 @@ A 'Physical Entity' Instance could include an individual molecule,
  \cr To make it possible to link multiple 'Physical Entity' instances of a
  molecule, Reactome uses a data class named "'Reference Entities'"
  which correspond to the invariant attribute of a molecule. for example,
- both of the above-mentioned 'Physical Entities' refer to a 'Reference Entities'
+ both of the above-mentioned 'Physical Entities' see a 'Reference Entities'
  named \href{https://reactome.org/content/schema/instance/browser/57819}{
  "UniProt:P01834 IGKC}.
  \cr See \href{https://reactome.org/documentation/data-model}{Reactome

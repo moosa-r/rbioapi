@@ -22,16 +22,16 @@ UniProtKB primary or secondary accession}.}
 
 \item{p_end}{(numeric) Protein sequence position end}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
-Genome coordinates of your provided proteins.
+Genome coordinates of your supplied proteins.
 }
 \description{
 Using this function you can retrieve genome coordinates of a given UniProt
   protein by providing protein position or position range. You can either
-  provide 'p_position' alone or provide 'p_start' and 'p_end' together.
+  supply 'p_position' alone or supply 'p_start' and 'p_end' together.
 }
 \details{
 For more information about how UniProt imports and calculates genomic

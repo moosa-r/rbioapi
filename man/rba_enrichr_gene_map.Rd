@@ -16,14 +16,14 @@ to use? Available options are: "human", (H. sapiens & M. musculus),
 "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
 and "fish" (D. rerio).}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
-a list containing the search results of your provided gene.
+a list containing the search results of your supplied gene.
 }
 \description{
-This function will search your provided gene and retrieve a list of Enrichr
+This function will search the gene and retrieve a list of Enrichr
   Terms that contains that gene.
 }
 \section{Corresponding API Resources}{

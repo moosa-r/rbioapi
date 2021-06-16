@@ -10,12 +10,12 @@ rba_mieaa_enrich_status(job_id, ...)
 \item{job_id}{The job-id (a character string) of a submitted enrichment
 analysis.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A list containing the status value for a analysis that corresponds
-  to your provided job-id.
+  to your supplied job-id.
 }
 \description{
 After you have submitted your enrichment analysis (using

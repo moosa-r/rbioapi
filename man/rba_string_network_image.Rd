@@ -21,7 +21,7 @@ rba_string_network_image(
 )
 }
 \arguments{
-\item{ids}{Your protein ID(s). It is strongly recommended to provide
+\item{ids}{Your protein ID(s). It is strongly recommended to supply
 STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
 
 \item{image_format}{one of:\itemize{
@@ -44,7 +44,7 @@ and first shell of interactors) to be added.}
 interactors) to be added after colored nodes.}
 
 \item{required_score}{Numeric: A minimum of interaction score for an
-interaction to be included in the image. if not provided, the threshold
+interaction to be included in the image. if not supplied, the threshold
 will be applied by STRING Based in the network. (low Confidence = 150,
 Medium Confidence = 400, High Confidence = 700, Highest confidence = 900)}
 
@@ -71,16 +71,16 @@ are not connected to any other proteins from the image?}
 \item{hide_structure_pics}{Logical: (Default = FALSE) Hide protein's
 structure picture from inside the bubbles?}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A network images which can be PNG or SVG depending on the inputs.
 }
 \description{
-Depending on that you provided a single protein ID or more than one protein
+Depending on that you supplied a single protein ID or more than one protein
   ID, this function will produce a static image of the interaction networks
-  among your input proteins or/and with other proteins. Refer to the
+  among your input proteins or/and with other proteins. See the
   "Arguments" section to learn more about how you can modify the network
   image.
 }

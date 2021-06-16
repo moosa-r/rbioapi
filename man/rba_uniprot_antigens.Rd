@@ -10,11 +10,11 @@ rba_uniprot_antigens(accession, ...)
 \item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
 UniProtKB primary or secondary accession}(s).}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
-A list containing the Antigenic features of your provided
+A list containing the Antigenic features of your supplied
   UniProt protein's sequence.
 }
 \description{

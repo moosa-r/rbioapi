@@ -12,18 +12,18 @@ UniProtKB primary or secondary accession}.}
 
 \item{interaction}{Logical: (default = FALSE) Only retrieve
 \href{https://www.uniprot.org/help/interaction_section}{interaction}
-information of your provided UniProt entity?}
+information of your supplied UniProt entity?}
 
 \item{isoforms}{Logical: (default = FALSE) Only retrieve
 \href{https://www.uniprot.org/help/alternative_products}{isoforms} of your
-provided UniProt entity?}
+supplied UniProt entity?}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A list that contains UniProt protein informations with your
-  provided accession.
+  supplied accession.
 }
 \description{
 Use this function to retrieve a UniProt Entry by it's UniProt accession.

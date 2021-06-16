@@ -8,12 +8,12 @@ rba_panther_homolog(genes, organism, type = "P", target_organisms = NULL, ...)
 }
 \arguments{
 \item{genes}{Character vector of genes identifiers with maximum length of
-10 or only one if seq_pos is provided. Can be any of: Ensemble gene ID,
+10 or only one if seq_pos is supplied. Can be any of: Ensemble gene ID,
 Ensemble protein ID, Ensemble transcript ID, Entrez gene ID, gene symbol,
 NCBI GI, HGNC ID, International protein index ID, NCBI UniGene ID,
 UniProt accession and/or UniProt ID.}
 
-\item{organism}{(numeric) NCBI taxon ID of the organism of your provided
+\item{organism}{(numeric) NCBI taxon ID of the organism of your supplied
 genes. run \code{\link{rba_panther_info}} with argument
 'what = "organisms"' to get a list of PANTHER's supported organisms.}
 
@@ -27,8 +27,8 @@ get a list of PANTHER's supported organisms.
 For Paralog, target organism and organism should be the same; Otherwise,
 the target organism should be different from the input organism.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A dataframe with homologs information.

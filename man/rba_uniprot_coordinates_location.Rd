@@ -23,11 +23,11 @@ as any chromosome (e.g. "1-10000").}
 
 \item{feature}{(logical) Get features?}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
-a list containing UniProt proteins which match the provided genomic
+a list containing UniProt proteins which match the supplied genomic
   location and taxonomy ID.
 }
 \description{

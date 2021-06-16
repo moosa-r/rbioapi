@@ -16,16 +16,16 @@ rba_reactome_analysis_download(
 \item{token}{A token associated to your previous Reactome analysis.}
 
 \item{request}{What to download? Should be one of:\itemize{
-\item "found_ids": Download a CSV file containing the found user-provided
-identifiers in the analysis associated with your provided token and
+\item "found_ids": Download a CSV file containing the found user-supplied
+identifiers in the analysis associated with your supplied token and
 resource.
-\item "not_found_ids"" Download a CSV file containing the user-provided
+\item "not_found_ids"" Download a CSV file containing the user-supplied
 Identifiers which has not been found in the analysis associated with your
-provided token.
+supplied token.
 \item "pathways": Download a CSV file containing Pathway analysis results
-of the analysis associated with your provided token and resource.
+of the analysis associated with your supplied token and resource.
 \item "results": Download a JSON file containing the complete analysis
-results associated with your provided token.
+results associated with your supplied token.
 \item "results_gz" Same as "results", but the output will be compress
 (gzipped).}}
 
@@ -39,8 +39,8 @@ available choices are:"TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
 "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
 "PUBCHEM_COMPOUND".}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 NULL, a CSV,JSON or Gzipped JSON file will be saved to disk

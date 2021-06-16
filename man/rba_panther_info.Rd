@@ -21,8 +21,8 @@ If FALSE (default) every organisms will be returned.}
 Family information is very long, so results are paginated. Use this
 argument to define the page to retrieve.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 For families, a list and otherwise a data frame with pertinent

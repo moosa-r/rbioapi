@@ -8,13 +8,13 @@ rba_reactome_pathways_top(species, ...)
 }
 \arguments{
 \item{species}{Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
-ID is 9606.) or species name (e.g. "Homo sapiens"). Refer to
+ID is 9606.) or species name (e.g. "Homo sapiens"). See
 \code{\link{rba_reactome_species}} or
 \href{https://reactome.org/content/schema/objects/Species}{Reactome
 Data Schema: Entries: Species}.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 Data frame where each row is a Top Level Pathway and columns are
@@ -22,7 +22,7 @@ Data frame where each row is a Top Level Pathway and columns are
 }
 \description{
 This function will Return a list of all pathways with the class
-  "TopLevelPathway" which are annotated in your provided species.
+  "TopLevelPathway" which are annotated in your supplied species.
 }
 \details{
 Reactome's Events hierarchy for any specie will begin with pathways with

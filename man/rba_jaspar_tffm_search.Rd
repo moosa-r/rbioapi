@@ -39,8 +39,8 @@ per a page? Accepted values are between 1 and 1000.}
 \item{page}{Numeric: Which page of the results to retrieve? The accepted
 values depend on the page size and number of results.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A list that contains a data frame with information of query hits'

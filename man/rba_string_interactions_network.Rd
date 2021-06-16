@@ -14,20 +14,20 @@ rba_string_interactions_network(
 )
 }
 \arguments{
-\item{ids}{Your protein IDs. It is strongly recommended to provide
+\item{ids}{Your protein IDs. It is strongly recommended to supply
 STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
 
 \item{species}{Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
 (Recommended, but optional if your input is less than 100 IDs.)}
 
 \item{required_score}{Numeric: A minimum of interaction score for an
-interaction to be included in the image. if not provided, the threshold
+interaction to be included in the image. if not supplied, the threshold
 will be applied by STRING Based in the network. (low Confidence = 150,
 Medium Confidence = 400, High Confidence = 700, Highest confidence = 900)}
 
 \item{add_nodes}{Numeric: Number of neighboring proteins to be added to the
-network. If none provided by the user, this argument value will depend
-on the number of provided "ids" argument:\enumerate{
+network. If none supplied by the user, this argument value will depend
+on the number of supplied "ids" argument:\enumerate{
 \item Single id: add_node will be set to 10 to retrieve the interaction
 neighborhood  of you input protein.
 \item Multiple ids: add_node will be set to 0, thus the output will be the
@@ -39,8 +39,8 @@ functional associations.
 \item "physical": The edges indicate that two proteins have a physical
 interaction or are parts of a complex.}}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A data frame which each row is a network interaction and the
@@ -67,9 +67,9 @@ This function will retrieve Sting interaction pairs among your input protein
 }
 \details{
 Note that this function will return interactions between your set of
-  provided proteins, or at most, expand the interaction network by the
+  supplied proteins, or at most, expand the interaction network by the
   given parameters. TO retrieve a list of all possible interacting proteins
-  with your given input, refer to
+  with your given input, see
   \code{\link{rba_string_interaction_partners}}.
 }
 \section{Corresponding API Resources}{

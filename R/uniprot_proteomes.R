@@ -5,7 +5,7 @@
 #'   organism). Using this function you can search UniProt for available
 #'   proteomes. see \href{https://www.uniprot.org/help/proteome}{What are
 #'   proteomes?} for more information. You may also
-#'   refine your search with modifiers such as keyword, taxon id etc. refer to
+#'   refine your search with modifiers such as keyword, taxon id etc. See
 #'   "Arguments section" for more information.
 #'
 #'   Note that this is a search function. Thus, you are not required to fill
@@ -17,13 +17,13 @@
 #'
 #' @param name a keyword in proteome's name
 #' @param upid \href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
-#'   identifier (UPID)}. You can provide up to 100 UPIDs.
+#'   identifier (UPID)}. You can supply up to 100 UPIDs.
 #' @param taxid NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
-#'   You can provide up to 20 taxon IDs.
-#' @param keyword Limit the search to entries that contain your provided
+#'   You can supply up to 20 taxon IDs.
+#' @param keyword Limit the search to entries that contain your supplied
 #'   keyword. see: \href{https://www.uniprot.org/keywords/}{UniProt Keywords}
 #' @param xref Proteome cross-references such as Genome assembly ID or
-#'   Biosample ID. You can provide up to 20 cross-reference IDs.
+#'   Biosample ID. You can supply up to 20 cross-reference IDs.
 #' @param genome_acc Genome accession associated with the proteome's components.
 #' @param is_ref_proteome (logical) If TRUE, only return reference proteomes; If
 #'   FALSE, only returns non-reference proteomes; If NULL (default), the results
@@ -35,8 +35,8 @@
 #'   will not be filtered by redundancy. see
 #'   \href{https://www.uniprot.org/help/proteome_redundancy}{'Reducing proteome
 #'   redundancy'} for more information.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return A list where each element is a list that corresponds to a single
 #'   proteome (search hit) and contains informations pertinent to that proteome.
@@ -101,7 +101,7 @@ rba_uniprot_proteomes_search <- function(name = NULL,
                              class = "logical"))
   )
 
-  .msg("Searching UniProt and retrieving proteoms that match your provided inputs.")
+  .msg("Searching UniProt and retrieving proteoms that match your supplied inputs.")
   ## Build GET API Request's query
   call_query <- .rba_query(init = list("size" = "-1"),
                            list("name",
@@ -173,18 +173,18 @@ rba_uniprot_proteomes_search <- function(name = NULL,
 #'  \cr "GET https://ebi.ac.uk/proteins/api/proteomes/{upid}"
 #'
 #' @param upid \href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
-#'   identifier (UPID)}. You can provide up to 100 UPIDs.
+#'   identifier (UPID)}. You can supply up to 100 UPIDs.
 #' @param get_proteins logical: set FALSE (default) to only return information
-#'   of the proteome with provided UPID, set TRUE to also return the proteins
-#'    of the provided proteome UPID.
+#'   of the proteome with supplied UPID, set TRUE to also return the proteins
+#'    of the supplied proteome UPID.
 #' @param reviewed Logical:  Only considered when get_proteins is TRUE.
 #'   If TRUE, only return "UniProtKB/Swiss-Prot" (reviewed) proteins;
 #'   If FALSE, only return TrEMBL (un-reviewed) entries. leave it as NULL if you
 #'   do not want to filter proteins based on their review status.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
-#' @return a list containing information of the proteome with your provided
+#' @return a list containing information of the proteome with your supplied
 #'   UPID that can contain the proteomes protein entries based on the value of
 #'   get_proteins argument.
 #'
@@ -222,7 +222,7 @@ rba_uniprot_proteomes <- function(upid,
                         list(arg = "reviewed",
                              class = "logical")),
             cond = list(list(quote(isFALSE(get_proteins) && !is.null(reviewed)),
-                             "'reviewed' argument is ignored because you provided 'get_proteins' as FALSE.")),
+                             "'reviewed' argument is ignored because you supplied 'get_proteins' as FALSE.")),
             cond_warning = TRUE
   )
 
@@ -278,7 +278,7 @@ rba_uniprot_proteomes <- function(upid,
 #'   \href{https://www.uniprot.org/help/gene_centric_isoform_mapping}{Automatic
 #'   gene-centric isoform mapping for eukaryotic reference proteome entries.}
 #'   You may also refine your search with modifiers upid, accession and gene.
-#'   refer to "Arguments section" for more information.
+#'   See "Arguments section" for more information.
 #'
 #'   Note that this is a search function. Thus, you are not required to fill
 #'   every argument; You may use whatever combinations of arguments you see
@@ -288,17 +288,17 @@ rba_uniprot_proteomes <- function(upid,
 #'  "GET https://ebi.ac.uk/proteins/api/genecentric"
 #'
 #' @param upid \href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
-#'   identifier (UPID)}. You can provide up to 100 UPIDs.
+#'   identifier (UPID)}. You can supply up to 100 UPIDs.
 #' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
-#'   UniProtKB primary or secondary accession}(s). You can provide up to 100
+#'   UniProtKB primary or secondary accession}(s). You can supply up to 100
 #'   accession numbers.
 #' @param gene unique gene identifier(s) found in MOD,
 #'   \href{https://www.ensembl.org/info/genome/genebuild/gene_names.html}{Ensembl},
 #'   Ensembl Genomes, \href{https://www.uniprot.org/help/gene_name}{OLN},
 #'   \href{https://www.uniprot.org/help/gene_name}{ORF} or
 #'   \href{https://www.uniprot.org/help/gene_name}{UniProt Gene Name}.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return a list containing gene-centric proteins search hits.
 #'
@@ -343,7 +343,7 @@ rba_uniprot_genecentric_search <- function(upid = NULL,
                              max_len = 20))
   )
 
-  .msg("Searching UniProt and retrieving Gene-Centric Proteins that match your provided inputs.")
+  .msg("Searching UniProt and retrieving Gene-Centric Proteins that match your supplied inputs.")
   ## Build GET API Request's query
   call_query <- .rba_query(init = list("size" = "-1"),
                            list("upid",
@@ -386,8 +386,8 @@ rba_uniprot_genecentric_search <- function(upid = NULL,
 #'
 #' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return A list containing information of Gene-Centric proteins.
 #'

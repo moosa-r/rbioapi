@@ -14,7 +14,7 @@ rba_reactome_interactors_psicquic(
 \arguments{
 \item{proteins}{Proteins to retrieve PSICQUIC interactors.}
 
-\item{resource}{The PSICQUIC resource for your provided proteins. Call
+\item{resource}{The PSICQUIC resource for your supplied proteins. Call
 rba_reactome_interactors_psicquic() without argument to get the available
 options.}
 
@@ -22,8 +22,8 @@ options.}
 will be returned. If FALSE, only a summary of available interactors will
 be returned.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 Depending your input, a list containing the detailed or summary of

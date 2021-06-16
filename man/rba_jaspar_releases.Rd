@@ -11,15 +11,15 @@ rba_jaspar_releases(release_number = NULL, ...)
 information's to retrieve? If left NULL (the default), a list of all
 JASPAR database releases will be returned. Available options are 1 to 8.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A list that contains all JASPAR database releases' information or
   details of a particular release.
 }
 \description{
-If a release number was provided, this function will return the details
+If a release number was supplied, this function will return the details
   of that release. Otherwise, if the function was called without "release"
   argument, a list of all JASPAR database releases will be returned.
 }

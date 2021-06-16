@@ -12,16 +12,16 @@ rba_reactome_complex_subunits(complex_id, exclude_structures = FALSE, ...)
 \item{exclude_structures}{(logical) Should the contained complexes and
 entity sets be excluded from the results? (default = FALSE)}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
-Data frame which each row is a subunit of your provided complex
+Data frame which each row is a subunit of your supplied complex
 and the columns are pertinent information of that subunit.
 }
 \description{
 This function will return a list of subunits which are participants of
-your provided complex.
+your supplied complex.
 }
 \details{
 Subunits will be returned recursively; Which means that if a subunit was

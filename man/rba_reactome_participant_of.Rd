@@ -9,16 +9,16 @@ rba_reactome_participant_of(entity_id, ...)
 \arguments{
 \item{entity_id}{Reactome's entity ID.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
-List of Reactome database Entities which Your provided ID is a
+List of Reactome database Entities which Your supplied ID is a
   participant in them.
 }
 \description{
 This function will retrieve a list of complexes and sets that Your
-  provided entity ID participates in (e.g. as a complex component,
+  supplied entity ID participates in (e.g. as a complex component,
   reaction output).
 }
 \section{Corresponding API Resources}{

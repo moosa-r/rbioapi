@@ -12,10 +12,10 @@
 #' @param ids (numeric) Numeric vector of
 #'   \href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
 #'   identifiers}, with minimum length of two.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
-#' @return A list with UniProt taxonomy information of your provided taxonomy
+#' @return A list with UniProt taxonomy information of your supplied taxonomy
 #'   elements.
 #'
 #' @references \itemize{
@@ -66,7 +66,7 @@ rba_uniprot_taxonomy_lca <- function(ids,
 #' providing their
 #' \href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
 #'   identifiers}. also, you can explicitly retrieve other nodes in relation
-#'   to your provided node's hierarchy in
+#'   to your supplied node's hierarchy in
 #'   \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database}.
 #'
 #' @section Corresponding API Resources:
@@ -84,20 +84,20 @@ rba_uniprot_taxonomy_lca <- function(ids,
 #'   \href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
 #'   identifier(s)}
 #' @param hierarchy Retrieve taxonomic nodes that have specific hierarchical
-#'   relation to your provided taxonomic node. should be one of: "children",
+#'   relation to your supplied taxonomic node. should be one of: "children",
 #'   "parent" or "siblings".
 #' @param node_only Retrieve only the node(s) information and exclude URL links
 #'  to parents, siblings and children nodes.
-#' @param page_size (numeric) Only when hierarchy is provided. hierarchy
+#' @param page_size (numeric) Only when hierarchy is supplied. hierarchy
 #'  information may be very long, thus UniProt API will paginate the results,
 #'  you may use this argument to control the pagination. maximum value is 200.
-#' @param page_number (numeric) Only when hierarchy is provided. hierarchy
+#' @param page_number (numeric) Only when hierarchy is supplied. hierarchy
 #'  information may be very long, thus UniProt API will paginate the results,
 #'  you may use this argument to control the pagination.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
-#' @return a list containing your provided nodes or their related nodes
+#' @return a list containing your supplied nodes or their related nodes
 #'   taxonomic information.
 #'
 #' @references \itemize{
@@ -146,7 +146,7 @@ rba_uniprot_taxonomy <- function(ids,
             cond = list(list(quote(length(ids) > 1 && !is.null(hierarchy)),
                              "you cannot specify 'hierarchy' when providing more than 1 ids."),
                         list(quote(is.null(hierarchy) && (page_size != 200 | page_number != 1)),
-                             "Because hierarchy argument was not provided, page_size and page_number were ignored.",
+                             "Because hierarchy argument was not supplied, page_size and page_number were ignored.",
                              warn = TRUE))
   )
 
@@ -193,7 +193,7 @@ rba_uniprot_taxonomy <- function(ids,
 
 #' Get Taxonomic Lineage
 #'
-#' Use this function to retrieve the taxonomic lineage of your provided
+#' Use this function to retrieve the taxonomic lineage of your supplied
 #'   taxonomy node.
 #'
 #' @section Corresponding API Resources:
@@ -203,11 +203,11 @@ rba_uniprot_taxonomy <- function(ids,
 #' @param id (numeric) a
 #' \href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
 #'   identifier}
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return A list with a data frame containing All the nodes that preceded your
-#'   provided node in the taxonomic tree. with your node as the first row
+#'   supplied node in the taxonomic tree. with your node as the first row
 #'   and the root node in the last row.
 #'
 #' @references \itemize{
@@ -262,9 +262,9 @@ rba_uniprot_taxonomy_lineage <- function(id,
 #'  \cr "GET https://ebi.ac.uk/proteins/api/name/{name}/node"
 #'
 #' @param name a name to to be used as search query.
-#' @param field Specify the field that your provided name should be searched.
+#' @param field Specify the field that your supplied name should be searched.
 #'   It should be one of : "scientific" (default), "common" or "mnemonic".
-#' @param search_type The logical relationship between your provided search
+#' @param search_type The logical relationship between your supplied search
 #'   query and the taxonomic name field. It should be one of "equal_to"
 #'   (default), "start_with", "end_with" or "contain".
 #' @param node_only (logical) Retrieve only the node(s) information and exclude URL links
@@ -275,10 +275,10 @@ rba_uniprot_taxonomy_lineage <- function(id,
 #' @param page_number (numeric) Your search results may be very long, thus
 #'  UniProt API will paginate the results, you may use this argument to control
 #'  the pagination. maximum value is 200.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
-#' @return a list containing taxonomic nodes that match your provided inputs.
+#' @return a list containing taxonomic nodes that match your supplied inputs.
 #'
 #' @references \itemize{
 #'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
@@ -375,7 +375,7 @@ rba_uniprot_taxonomy_name <- function(name,
 #' Traverse UniProt Taxonomic Tree Path
 #'
 #' Using this function you can retrieve nodes that are located in the top or
-#'   the bottom of your provided node in
+#'   the bottom of your supplied node in
 #'   \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database tree}
 #'
 #' @section Corresponding API Resources:
@@ -387,11 +387,11 @@ rba_uniprot_taxonomy_name <- function(name,
 #' @param direction direction of the taxonomic path, either "TOP" or "BOTTOM".
 #' @param depth (numeric) How many levels should be traversed on
 #' the taxonomic tree? (from 1 to 5, default = 5)
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return a nested list containing the node which are in the path specified by
-#'   your provided argument in the UniProt taxonomic tree.
+#'   your supplied argument in the UniProt taxonomic tree.
 #'
 #' @references \itemize{
 #'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
@@ -466,11 +466,11 @@ rba_uniprot_taxonomy_path <- function(id,
 #' taxonomic identifier} of your initial node.
 #' @param to \href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI
 #' taxonomic identifier} of your final node.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return a nested list containing the node which are in the shortest path
-#'   between your provided nodes.
+#'   between your supplied nodes.
 #'
 #' @references \itemize{
 #'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas

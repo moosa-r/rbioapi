@@ -47,7 +47,7 @@ overlaid on top of the given pathways overview.}
 top of the given pathways overview. see:
 \code{\link{rba_reactome_analysis}}.}
 
-\item{exp_column}{numeric: (only if token is provided) Specify the
+\item{exp_column}{numeric: (only if token is supplied) Specify the
 expression column for the overlay.}
 
 \item{image_quality}{Numeric: A number  ranging from 1 to 10. 1 is the
@@ -67,8 +67,8 @@ flagging a diagram element? (default = TRUE)}
 \item{margin}{Numeric: A number ranging from 0 to 20 to set as the image's
 margin. (default = 15)}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 NULL, Based to the inputs, an image file will be saved to disk.

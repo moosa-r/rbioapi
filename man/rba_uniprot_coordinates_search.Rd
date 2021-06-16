@@ -17,28 +17,28 @@ rba_uniprot_coordinates_search(
 }
 \arguments{
 \item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
-UniProtKB primary or secondary accession}(s). You can provide up to 100
+UniProtKB primary or secondary accession}(s). You can supply up to 100
 accession numbers.}
 
 \item{chromosome}{chromosome name, such as "X", "Y", 1, 20, etc. You can
-provide up to 20 values.}
+supply up to 20 values.}
 
 \item{ensembl_id}{Ensembl Stable gene ID, transcript ID or translation ID.
-You can provide up to 20 IDs.}
+You can supply up to 20 IDs.}
 
 \item{gene}{\href{https://www.uniprot.org/help/gene_name}{UniProt gene
-name(s)}. You can provide up to 20 gene names.}
+name(s)}. You can supply up to 20 gene names.}
 
 \item{protein}{\href{https://www.uniprot.org/help/protein_names}{UniProt
 protein name}}
 
 \item{taxid}{NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
-You can provide up to 20 taxon IDs.}
+You can supply up to 20 taxon IDs.}
 
 \item{location}{Genome location range such as "58205437-58219305"}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 List where each element corresponds to one UniProt entity returned
@@ -48,7 +48,7 @@ List where each element corresponds to one UniProt entity returned
 \description{
 Use this function to search genomic coordinates of UniProt entries.
   You may also refine your search with modifiers such as chromosome, taxon
-  id etc. refer to "Arguments section" for more information.
+  id etc. See "Arguments section" for more information.
 }
 \details{
 Note that this is a search function. Thus, you are not required to fill

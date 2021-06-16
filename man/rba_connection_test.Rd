@@ -14,8 +14,8 @@ to the console?}
 detailed messages with internal information.}
 }
 \value{
-NULL, Connection test for the supported servers will be displayed
-  in console
+Connection test for the supported servers will be displayed
+  in console and the results will be invisibly returned as a list.
 }
 \description{
 Run this function to test the internet connectivity of your device and the

@@ -8,20 +8,20 @@ rba_reactome_event_hierarchy(species, ...)
 }
 \arguments{
 \item{species}{Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
-ID is 9606.) or species name (e.g. "Homo sapiens"). Refer to
+ID is 9606.) or species name (e.g. "Homo sapiens"). See
 \code{\link{rba_reactome_species}} or
 \href{https://reactome.org/content/schema/objects/Species}{Reactome
 Data Schema: Entries: Species}.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 List which is a representation of the species's events hierarchy
   described in the "Details section".
 }
 \description{
-This function will retrieve the full Events hierarchy of your provided
+This function will retrieve the full Events hierarchy of your supplied
   species. Directly under each species, each child element is a "top Level
   Pathway". You can traverse the events tree down by following the "children"
   element.

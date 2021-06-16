@@ -8,8 +8,8 @@
 #'
 #' @param release Numeric: (default = 2020) Which JASPAR database release
 #'   to use? Available options are: 2014, 2016, 2018, and 2020.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
 #'  "GET "http://jaspar.genereg.net/api/v1/collections/"
@@ -103,8 +103,8 @@ rba_jaspar_collections <- function(release = 2020,
 #'   per a page? Accepted values are between 1 and 1000.
 #' @param page Numeric: Which page of the results to retrieve? The accepted
 #'   values depend on the page size and number of results.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
 #'  "GET "http://jaspar.genereg.net/api/v1/collections/{collection}/"
@@ -254,8 +254,8 @@ rba_jaspar_collections_matrices <- function(collection,
 #'   per a page? Accepted values are between 1 and 1000.
 #' @param page Numeric: Which page of the results to retrieve? The accepted
 #'   values depend on the page size and number of results.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
 #'  "GET "http://jaspar.genereg.net/api/v1/api/v1/matrix/"
@@ -419,8 +419,8 @@ rba_jaspar_matrix_search <- function(term = NULL,
 #'   of field names that will be used to order the results.
 #'   \cr Providing multiple field names is supported. You can also use prefix
 #'   "-" before a field name to indicate reverse ordering.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
 #'  "GET "http://jaspar.genereg.net/api/v1/matrix/{base_id}/versions/"
@@ -496,7 +496,7 @@ rba_jaspar_matrix_versions <- function(base_id,
 #'
 #' Using this function you can retrieve a Position Frequency Matrices (PFM)
 #'  associated with a matrix profile Identifier along with its details and
-#'  annotations. If a base ID (i.e. without version suffix) was provided,
+#'  annotations. If a base ID (i.e. without version suffix) was supplied,
 #'  the latest version will be returned.
 #'
 #' @param matrix_id Character: A matrix profile
@@ -505,17 +505,17 @@ rba_jaspar_matrix_versions <- function(base_id,
 #'   can directly download the profile matrix in file with this format.
 #'   Supported formats are: "yaml", "jaspar", "transfac", "meme" and "pfm"
 #' @param save_to NULL or Character:\itemize{
-#'   \item NULL: (only if file_format was provided) Save the file to an
+#'   \item NULL: (only if file_format was supplied) Save the file to an
 #'     automatically-generated path.
 #'   \item Character string: A valid file or directory path to save the file to.}
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
 #'  "GET "http://jaspar.genereg.net/api/v1/matrix/{matrix_id}/"
 #'
 #' @return A list that contains the PFM along with its details and
-#'   annotations. If file_format was provided, an un-parsed character string
+#'   annotations. If file_format was supplied, an un-parsed character string
 #'   with the file's content.
 #'
 #' @references \itemize{
@@ -617,15 +617,15 @@ rba_jaspar_matrix <- function(matrix_id,
 
 #' Get information about JASPAR database releases
 #'
-#' If a release number was provided, this function will return the details
+#' If a release number was supplied, this function will return the details
 #'   of that release. Otherwise, if the function was called without "release"
 #'   argument, a list of all JASPAR database releases will be returned.
 #'
 #' @param release_number Numeric: Which JASPAR database release number
 #'   information's to retrieve? If left NULL (the default), a list of all
 #'   JASPAR database releases will be returned. Available options are 1 to 8.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
 #' "GET "http://jaspar.genereg.net/api/v1/releases/"
@@ -715,8 +715,8 @@ rba_jaspar_releases  <- function(release_number = NULL,
 #'
 #' @param matrix_id Character: A matrix profile
 #'   Identifier. It has "base_id.version" naming schema.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
 #'  "GET "http://jaspar.genereg.net/api/v1/sites/{matrix_id}/"
@@ -791,8 +791,8 @@ rba_jaspar_sites <- function(matrix_id,
 #'   of field names that will be used to order the results.
 #'   \cr Providing multiple field names is supported. You can also use prefix
 #'   "-" before a field name to indicate reverse ordering.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
 #'  "GET "http://jaspar.genereg.net/api/v1/species/"
@@ -898,8 +898,8 @@ rba_jaspar_species <- function(release = 2020,
 #'   per a page? Accepted values are between 1 and 1000.
 #' @param page Numeric: Which page of the results to retrieve? The accepted
 #'   values depend on the page size and number of results.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
 #'  "GET "http://jaspar.genereg.net/api/v1/species/{tax_id}/"
@@ -1004,8 +1004,8 @@ rba_jaspar_species_matrices <- function(tax_id,
 #'
 #' @param release Numeric: (default = 2020) Which JASPAR database release
 #'   to use? Available options are: 2014, 2016, 2018, and 2020.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
 #'  "GET "http://jaspar.genereg.net/api/v1/taxon/"
@@ -1098,8 +1098,8 @@ rba_jaspar_taxons <- function(release = 2020,
 #'   per a page? Accepted values are between 1 and 1000.
 #' @param page Numeric: Which page of the results to retrieve? The accepted
 #'   values depend on the page size and number of results.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
 #'  "GET "http://jaspar.genereg.net/api/v1/taxon/{tax_group}/"
@@ -1235,8 +1235,8 @@ rba_jaspar_taxons_matrices <- function(tax_group,
 #'   per a page? Accepted values are between 1 and 1000.
 #' @param page Numeric: Which page of the results to retrieve? The accepted
 #'   values depend on the page size and number of results.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
 #'  "GET "http://jaspar.genereg.net/api/v1/api/v1/tffm/"
@@ -1344,12 +1344,12 @@ rba_jaspar_tffm_search <- function(term = NULL,
 #'
 #' Using this function you can retrieve details and annotations of
 #'   Transcription Factor flexible models (TFFMs) associated with a TFFM
-#'   ID. If a base ID (i.e. without version suffix) was provided, the latest
+#'   ID. If a base ID (i.e. without version suffix) was supplied, the latest
 #'   version will be returned.
 #'
 #' @param tffm_id Character: A TF flexible model (TFFM) Identifier.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
 #'  "GET "http://jaspar.genereg.net/api/v1/fttm/{tffm_id}/"

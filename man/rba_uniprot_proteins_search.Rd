@@ -24,7 +24,7 @@ rba_uniprot_proteins_search(
 }
 \arguments{
 \item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
-UniProtKB primary or secondary accession}(s). You can provide up to 100
+UniProtKB primary or secondary accession}(s). You can supply up to 100
 accession numbers.}
 
 \item{reviewed}{Logical: If TRUE, only return
@@ -38,26 +38,26 @@ accession numbers.}
 see: \href{https://www.uniprot.org/help/alternative_products}{Alternative
 products}}
 
-\item{go_term}{Limit the search to entries associated with your provided GO
+\item{go_term}{Limit the search to entries associated with your supplied GO
 (\href{https://www.uniprot.org/help/gene_ontology}{Gene Ontology}) term.
-You can provide Either GO ID or a character string -partially or fully-
+You can supply Either GO ID or a character string -partially or fully-
 matching the term. e.g. "GO:0001776" or "leukocyte homeostasis". if You
-provide "leukocyte", any term containing that word will be included,
+supply "leukocyte", any term containing that word will be included,
 e.g "leukocyte chemotaxis", "leukocyte activation".}
 
-\item{keyword}{Limit the search to entries that contain your provided
+\item{keyword}{Limit the search to entries that contain your supplied
 keyword. see: \href{https://www.uniprot.org/keywords/}{UniProt Keywords}}
 
 \item{ec}{\href{https://enzyme.expasy.org/}{EC (Enzyme Commission) number(s)}.
-You can provide up to 20 EC numbers.}
+You can supply up to 20 EC numbers.}
 
 \item{gene}{\href{https://www.uniprot.org/help/gene_name}{UniProt gene
-name(s)}. You can provide up to 20 gene names. e.g. if you provide
+name(s)}. You can supply up to 20 gene names. e.g. if you supply
 "CD40", "CD40 ligand" will also be included.}
 
 \item{exact_gene}{\href{https://www.uniprot.org/help/gene_name}{UniProt
-exact gene name(s)}. You can provide up to 20 exact gene names. e.g.
-if you provide "CD40", "CD40 ligand" will not be included in the results.}
+exact gene name(s)}. You can supply up to 20 exact gene names. e.g.
+if you supply "CD40", "CD40 ligand" will not be included in the results.}
 
 \item{protein}{\href{https://www.uniprot.org/help/protein_names}{UniProt
 protein name}}
@@ -65,18 +65,18 @@ protein name}}
 \item{organism}{\href{https://www.uniprot.org/taxonomy/}{Organism name}.}
 
 \item{taxid}{NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
-You can provide up to 20 taxon IDs.}
+You can supply up to 20 taxon IDs.}
 
 \item{pubmed}{Entries which \href{https://www.uniprot.org/citations/}{cite
-to} the article with your provided PubMed ID.}
+to} the article with your supplied PubMed ID.}
 
 \item{seq_length}{An exact sequence length (e.g. 150) or a range of sequence
 lengths (e.g. "130-158").}
 
 \item{md5}{Sequence md5 value.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A List where each element corresponds to one UniProt entity returned
@@ -86,8 +86,8 @@ A List where each element corresponds to one UniProt entity returned
 \description{
 Using this function, you can search and retrieve UniProt Knowledge-base
   (UniProtKB) protein entries using variety of options. You may also
-  refine your search with modifiers such as sequence length, reviews status
-  etc. refer to "Arguments" section" for more information.
+  refine your search with modifiers such as sequence length, review status
+  etc. See "Arguments" section" for more information.
 }
 \details{
 Note that this is a search function. Thus, you are not required to fill

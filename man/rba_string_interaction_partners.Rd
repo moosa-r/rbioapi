@@ -14,14 +14,14 @@ rba_string_interaction_partners(
 )
 }
 \arguments{
-\item{ids}{Your protein ID(s). It is strongly recommended to provide
+\item{ids}{Your protein ID(s). It is strongly recommended to supply
 STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
 
 \item{species}{Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
 (Recommended, but optional if your input is less than 100 IDs.)}
 
 \item{required_score}{Numeric: A minimum of interaction score for an
-interaction to be included in the image. if not provided, the threshold
+interaction to be included in the image. if not supplied, the threshold
 will be applied by STRING Based in the network. (low Confidence = 150,
 Medium Confidence = 400, High Confidence = 700, Highest confidence = 900)}
 
@@ -33,8 +33,8 @@ functional associations.}}
 your input proteins. (e.g. Number of the most confident interaction partner
 to return per each input protein.)}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A data frame which each row is a network interaction and the
@@ -45,13 +45,13 @@ This function will retrieve all the STRING interactions which include your
   proteins as one party of the interaction. (e.g. interaction between your
   proteins and every other STRING proteins.)
   \cr Given the size of STRING database, this function could return a very
-  long results. Refer to "Arguments" section for information on how to filter
+  long results. See "Arguments" section for information on how to filter
   the interactions.
 }
 \details{
 Note that this function will retrieve the interactions between your input
   proteins and every other STRING proteins. To retrieve the interaction
-  among your input protein-set, refer to
+  among your input protein-set, see
   \code{\link{rba_string_interactions_network}}.
 }
 \section{Corresponding API Resources}{

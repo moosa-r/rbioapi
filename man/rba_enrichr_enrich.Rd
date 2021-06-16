@@ -26,7 +26,7 @@ retrieved via \code{\link{rba_enrichr_libs}}
 pattern that correspond to one or more of Enrichr library names.
 }}
 
-\item{regex_library_name}{logical: if TRUE (default) the provided
+\item{regex_library_name}{logical: if TRUE (default) the supplied
 gene_set_library will be regarded as a regex or partially matching name. if
 FALSE, gene_set_library will be considered exact match.}
 
@@ -38,16 +38,16 @@ and "fish" (D. rerio).}
 \item{progress_bar}{logical: In case of selecting multiple Enrichr
 libraries, should a progress bar be displayed?}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A list containing data frames of the enrichment results of your
-  provided gene-list against the selected Enrichr libraries.
+  supplied gene-list against the selected Enrichr libraries.
 }
 \description{
 This function which will retrieve the enrichment results of your
-  provided gene-list id against one or multiple Enrichr libraries.
+  supplied gene-list id against one or multiple Enrichr libraries.
 }
 \details{
 Note that using \code{\link{rba_enrichr}} is a more convenient way to

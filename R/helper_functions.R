@@ -50,8 +50,8 @@
 #' @param diagnostics (Logical) (default = FALSE) Show diagnostics and
 #'   detailed messages with internal information.
 #'
-#' @return NULL, Connection test for the supported servers will be displayed
-#'   in console
+#' @return Connection test for the supported servers will be displayed
+#'   in console and the results will be invisibly returned as a list.
 #'
 #' @examples
 #' \donttest{
@@ -124,7 +124,7 @@ rba_connection_test <- function(print_output = TRUE, diagnostics = FALSE) {
 #'   rba_options(), to retrieve a data frame of available rbioapi options and
 #'   their current values.
 #'
-#'   Because this function validates your provided changes, please
+#'   Because this function validates your supplied changes, please
 #'   \strong{\emph{only change rbioapi options using this function}} and avoid
 #'   directly editing them.
 #'
@@ -206,7 +206,7 @@ rba_options <- function(diagnostics = NULL,
                              row.names = NULL)
     return(options_df)
   } else {
-    ## change the provided options
+    ## change the supplied options
     for (chng in names(changes[changes])) {
       chng_content <- get(chng)
       eval(parse(text = sprintf(ifelse(is.character(chng_content),
@@ -259,7 +259,7 @@ rba_options <- function(diagnostics = NULL,
 #'
 #' Some resources return paginated results, meaning that you have to make
 #'   separate calls for each page. Using this function, you can iterate over
-#'   up to 100 pages. Just provide your rbioapi function and change to page
+#'   up to 100 pages. Just supply your rbioapi function and change to page
 #'   argument to "pages:start_page:end_page", for example "pages:1:5".
 #'
 #'   To prevent flooding the server, there will be a 1 second delay between
@@ -269,12 +269,12 @@ rba_options <- function(diagnostics = NULL,
 #'   that do not exist) an error message be returned to you instead of
 #'   halting function's execution.
 #'
-#' @param input_call A quoted call. Provide a regular rbioapi function call,
+#' @param input_call A quoted call. supply a regular rbioapi function call,
 #'   but with two differences:\enumerate{
 #'   \item: Wrap a quote() around it. meaning: quote(rba_example())
 #'   \item: Set the argument that corresponds to the page number to
 #'   "pages:start_page:end_page", for example "pages:1:5".}
-#'   refer to the "examples" section to learn more.
+#'   See the "examples" section to learn more.
 #' @param ... Experimental internal options.
 #'
 #' @return A named list where each element corresponds to a request's page.

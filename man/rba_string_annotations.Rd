@@ -7,7 +7,7 @@
 rba_string_annotations(ids, species = NULL, allow_pubmed = FALSE, ...)
 }
 \arguments{
-\item{ids}{Your protein ID(s). It is strongly recommended to provide
+\item{ids}{Your protein ID(s). It is strongly recommended to supply
 STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
 
 \item{species}{Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
@@ -18,8 +18,8 @@ large number of reference publications to each protein. In order to reduce
 the output size, PubMed's results will be excluded from the results,
 unless stated otherwise (By setting this argument to TRUE).}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A data frame which every row is an assigned terms and the columns
@@ -38,7 +38,7 @@ STRING currently maps to and retrieve enrichment results based on Gene
   Ontology (GO), KEGG pathways, UniProt Keywords, PubMed publications, Pfam
   domains, InterPro domains, and SMART domains.
   \cr Note that this function will return a full list of the terms containing
-  your provided proteins. To perform enrichment and only retrieve a enriched
+  your supplied proteins. To perform enrichment and only retrieve a enriched
   subset of the terms, use \code{\link{rba_string_enrichment}}.
 }
 \section{Corresponding API Resources}{

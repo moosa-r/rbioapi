@@ -23,16 +23,16 @@ rba_uniprot_features_search(
 }
 \arguments{
 \item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
-UniProtKB primary or secondary accession}(s). You can provide up to 100
+UniProtKB primary or secondary accession}(s). You can supply up to 100
 accession numbers.}
 
 \item{gene}{\href{https://www.uniprot.org/help/gene_name}{UniProt gene
-name(s)}. You can provide up to 20 gene names. e.g. if you provide
+name(s)}. You can supply up to 20 gene names. e.g. if you supply
 "CD40", "CD40 ligand" will also be included.}
 
 \item{exact_gene}{\href{https://www.uniprot.org/help/gene_name}{UniProt
-exact gene name(s)}. You can provide up to 20 exact gene names. e.g.
-if you provide "CD40", "CD40 ligand" will not be included in the results.}
+exact gene name(s)}. You can supply up to 20 exact gene names. e.g.
+if you supply "CD40", "CD40 ligand" will not be included in the results.}
 
 \item{protein}{\href{https://www.uniprot.org/help/protein_names}{UniProt
 protein name}}
@@ -44,13 +44,13 @@ protein name}}
 \item{organism}{\href{https://www.uniprot.org/taxonomy/}{Organism name}.}
 
 \item{taxid}{NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
-You can provide up to 20 taxon IDs.}
+You can supply up to 20 taxon IDs.}
 
 \item{categories}{\href{https://www.uniprot.org/help/sequence_annotation}{
 Sequence annotation (Features)} categories (subsection). accepted values
 are: "MOLECULE_PROCESSING", "TOPOLOGY", "SEQUENCE_INFORMATION",
 "STRUCTURAL", "DOMAINS_AND_SITES", "PTM", "VARIANTS" and/or "MUTAGENESIS".
-You can provide up to 8 categories.}
+You can supply up to 8 categories.}
 
 \item{types}{\href{https://www.uniprot.org/help/sequence_annotation}{
 Sequence annotation (Features)} types. accepted values
@@ -60,10 +60,10 @@ are: "INIT_MET", "SIGNAL", "PROPEP", "TRANSIT", "CHAIN", "PEPTIDE",
 "ACT_SITE", "METAL", "BINDING", "SITE", "NON_STD", "MOD_RES", "LIPID",
 "CARBOHYD", "DISULFID", "CROSSLNK", "VAR_SEQ", "VARIANT", "MUTAGEN",
 "UNSURE", "CONFLICT", "NON_CONS", "NON_TER", "HELIX", "TURN", "STRAND"
-and/or "INTRAMEM". You can provide up to 20 types.}
+and/or "INTRAMEM". You can supply up to 20 types.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 List where each element corresponds to one UniProt entity returned

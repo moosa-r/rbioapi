@@ -9,16 +9,16 @@ rba_reactome_xref(xref_id, ...)
 \arguments{
 \item{xref_id}{molecule's cross-reference (external) identifier.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 List containing the ReferenceEntity corresponding to your
-  provided cross-reference (external) ID.
+  supplied cross-reference (external) ID.
 }
 \description{
 Use this function To retrieve a list of Reactome ReferenceEntity associated
-  to your provided Cross Reference (i.e. External) ID.
+  to your supplied Cross Reference (i.e. External) ID.
 }
 \details{
 Reactome cross-references external database's identifiers to it's database
@@ -26,7 +26,7 @@ Reactome cross-references external database's identifiers to it's database
   a molecule. Thus there is a one-to-many relationship between Reactome's
   ReferenceEntity object and the molecule's ID in external databases,
   which in Reactome's terms is called Cross Reference.
-  \cr Refer to \code{\link{rba_reactome_participants}}'s "Details section"
+  \cr See \code{\link{rba_reactome_participants}}'s "Details section"
   to learn more about how Reactome classifies molecules.
 }
 \section{Corresponding API Resources}{

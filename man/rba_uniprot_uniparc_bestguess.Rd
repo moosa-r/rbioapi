@@ -17,20 +17,20 @@ rba_uniprot_uniparc_bestguess(
 \item{upi}{unique UniParc Identifier.}
 
 \item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
-UniProtKB primary or secondary accession}(s). You can provide up to 100
+UniProtKB primary or secondary accession}(s). You can supply up to 100
 accession numbers.}
 
 \item{db_id}{Protein ID in the cross-reference (external) database.
-You can provide up to 100 IDs.}
+You can supply up to 100 IDs.}
 
 \item{gene}{\href{https://www.uniprot.org/help/gene_name}{UniProt gene
-name(s)}. You can provide up to 20 gene names.}
+name(s)}. You can supply up to 20 gene names.}
 
 \item{taxid}{NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
-You can provide up to 20 taxon IDs.}
+You can supply up to 20 taxon IDs.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A list where each element correspond to a UniParc entry.

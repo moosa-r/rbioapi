@@ -23,8 +23,8 @@
 #'   to use? Available options are: "human", (H. sapiens & M. musculus),
 #'   "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
 #'   and "fish" (D. rerio).
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return A data frame with the names of available library in Enrichr and their
 #'   statistics.
@@ -106,8 +106,8 @@ rba_enrichr_libs <- function(store_in_options = FALSE,
 #'   to use? Available options are: "human", (H. sapiens & M. musculus),
 #'   "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
 #'   and "fish" (D. rerio).
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return A list with two unique IDs for your uploaded gene sets.
 #'
@@ -188,11 +188,11 @@ rba_enrichr_add_list <- function(gene_list,
 #'   to use? Available options are: "human", (H. sapiens & M. musculus),
 #'   "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
 #'   and "fish" (D. rerio).
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return A list containing the genes and description available under the
-#'   provided user_list_id
+#'   supplied user_list_id
 #'
 #' @references \itemize{
 #'   \item Chen EY, Tan CM, Kou Y, Duan Q, Wang Z, Meirelles GV, Clark NR,
@@ -270,10 +270,10 @@ rba_enrichr_view_list <- function(user_list_id,
 #'   to use? Available options are: "human", (H. sapiens & M. musculus),
 #'   "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
 #'   and "fish" (D. rerio).
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
-#' @return A data frame with the enrichment results of the provided user_list_id
+#' @return A data frame with the enrichment results of the supplied user_list_id
 #'   against the gene_set_library
 #'
 #' @references \itemize{
@@ -328,7 +328,7 @@ rba_enrichr_view_list <- function(user_list_id,
 #' Get Enrichr Enrichment Results
 #'
 #' This function which will retrieve the enrichment results of your
-#'   provided gene-list id against one or multiple Enrichr libraries.
+#'   supplied gene-list id against one or multiple Enrichr libraries.
 #'
 #' Note that using \code{\link{rba_enrichr}} is a more convenient way to
 #'   automatically perform this and other required function calls to enrich
@@ -347,7 +347,7 @@ rba_enrichr_view_list <- function(user_list_id,
 #'   \item If regex_library_name = TRUE, A partially-matching name a regex
 #'   pattern that correspond to one or more of Enrichr library names.
 #'   }
-#' @param regex_library_name logical: if TRUE (default) the provided
+#' @param regex_library_name logical: if TRUE (default) the supplied
 #'   gene_set_library will be regarded as a regex or partially matching name. if
 #'   FALSE, gene_set_library will be considered exact match.
 #' @param organism (default = "human") Which model organism version of Enrichr
@@ -356,11 +356,11 @@ rba_enrichr_view_list <- function(user_list_id,
 #'   and "fish" (D. rerio).
 #' @param progress_bar logical: In case of selecting multiple Enrichr
 #'   libraries, should a progress bar be displayed?
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return A list containing data frames of the enrichment results of your
-#'   provided gene-list against the selected Enrichr libraries.
+#'   supplied gene-list against the selected Enrichr libraries.
 #'
 #' @references \itemize{
 #'   \item Chen EY, Tan CM, Kou Y, Duan Q, Wang Z, Meirelles GV, Clark NR,
@@ -505,7 +505,7 @@ rba_enrichr_enrich <- function(user_list_id,
 
 #' Find Enrichr Terms That Contain a Given Gene
 #'
-#' This function will search your provided gene and retrieve a list of Enrichr
+#' This function will search the gene and retrieve a list of Enrichr
 #'   Terms that contains that gene.
 #'
 #' @section Corresponding API Resources:
@@ -517,10 +517,10 @@ rba_enrichr_enrich <- function(user_list_id,
 #'   to use? Available options are: "human", (H. sapiens & M. musculus),
 #'   "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
 #'   and "fish" (D. rerio).
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#' arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#' arguments manual for more information on available options.
 #'
-#' @return a list containing the search results of your provided gene.
+#' @return a list containing the search results of your supplied gene.
 #'
 #' @references \itemize{
 #'   \item Chen EY, Tan CM, Kou Y, Duan Q, Wang Z, Meirelles GV, Clark NR,
@@ -610,7 +610,7 @@ rba_enrichr_gene_map <- function(gene,
 #' @inheritParams rba_enrichr_enrich
 #'
 #' @return A list containing data frames of the enrichment results of your
-#'   provided gene-list against the selected Enrichr libraries.
+#'   supplied gene-list against the selected Enrichr libraries.
 #'
 #' @references \itemize{
 #'   \item Chen EY, Tan CM, Kou Y, Duan Q, Wang Z, Meirelles GV, Clark NR,

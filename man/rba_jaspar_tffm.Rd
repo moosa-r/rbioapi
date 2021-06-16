@@ -9,8 +9,8 @@ rba_jaspar_tffm(tffm_id, ...)
 \arguments{
 \item{tffm_id}{Character: A TF flexible model (TFFM) Identifier.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A list that contains the TFFM's information and annotations.
@@ -18,7 +18,7 @@ A list that contains the TFFM's information and annotations.
 \description{
 Using this function you can retrieve details and annotations of
   Transcription Factor flexible models (TFFMs) associated with a TFFM
-  ID. If a base ID (i.e. without version suffix) was provided, the latest
+  ID. If a base ID (i.e. without version suffix) was supplied, the latest
   version will be returned.
 }
 \section{Corresponding API Resources}{

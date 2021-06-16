@@ -7,7 +7,7 @@
 rba_string_homology_inter(ids, species = NULL, species_b = NULL, ...)
 }
 \arguments{
-\item{ids}{Your protein ID(s). It is strongly recommended to provide
+\item{ids}{Your protein ID(s). It is strongly recommended to supply
 STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
 
 \item{species}{Numeric: NCBI Taxonomy identifier of your input proteins;
@@ -17,8 +17,8 @@ less than 100 IDs.)}
 \item{species_b}{(optional) Numeric: one or more NCBI Taxonomy identifiers
 of species to limit the closets homologous proteins search.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A data frame with Your input proteins and it's closest homologous
@@ -36,7 +36,7 @@ Using this function, you can retrieve highest Smith-Waterman bit scores
 Note that this function will return the highest similarity score hits of
   your given protein(s) and their closets homologous proteins in other
   species. to retrieve similarity scores of different proteins within the
-  same species refer to \code{\link{rba_string_homology_intra}}.
+  same species see \code{\link{rba_string_homology_intra}}.
   \cr Similarity matrix is imported -by STRING- from:
   \href{https://cube.univie.ac.at/resources/simap}{Similarity Matrix of
   Proteins (SIMAP)}

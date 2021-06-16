@@ -30,7 +30,7 @@ miRBase v22.
 precursor miRNA accession. A mixture of both is not accepted.
 }}
 
-\item{mirna_type}{Type of your provided miRNA accession. either "mature"
+\item{mirna_type}{Type of your supplied miRNA accession. either "mature"
 or "precursor".}
 
 \item{test_type}{The analysis to perform. can be either "ORA" for 'Over
@@ -55,10 +55,10 @@ or NCBI taxon ID of one of the following species: \enumerate{
 \item{categories}{one or multiple Category names to be used for miRNA set
 enrichment analysis. Note that \itemize{
 \item Available categories varies based on your chosen specie and if
- your provided miRNA type is mature or precursor. Use
+ your supplied miRNA type is mature or precursor. Use
  \code{\link{rba_mieaa_cats}} to retrieve a list of available category
  names for a given specie and miRNA type.
-\item If you provide NULL, the analysis will be performed on all of the
+\item If you supply NULL, the analysis will be performed on all of the
  available categories.}}
 
 \item{p_adj_method}{P-value adjustment method to be used. Should be one of:
@@ -74,7 +74,7 @@ values equal to or greater than this threshold will be dropped from the
 results.}
 
 \item{min_hits}{(numeric) How many miRNA should a sub-category have from
-your provided test-list to be included in the results? (default is 2)}
+your supplied test-list to be included in the results? (default is 2)}
 
 \item{ref_set}{(Optional) Only applicable when test_type is "ORA".
 This character vector will be used as your reference (background or
@@ -87,8 +87,8 @@ universe) set for p-value calculations.}
 \item{sort_asc}{(logical) If TRUE, the results will be sorted in ascending
 order. If FALSE, the results will be sorted in descending order.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A data frame with your enrichment analysis results.
@@ -103,7 +103,7 @@ This function will call other rba_mieaa_*** functions with the following
   order:
   \enumerate{
   \item Call \code{\link{rba_mieaa_enrich_submit}} to Submit an enrichment
-    analysis request to miEAA servers, using your provided miRNA lists and
+    analysis request to miEAA servers, using your supplied miRNA lists and
     other arguments.
   \item Once your job was successfully submitted, it will call
     \code{\link{rba_mieaa_enrich_status}} every 5 seconds, to check the
@@ -112,7 +112,7 @@ This function will call other rba_mieaa_*** functions with the following
   \item Call \code{\link{rba_mieaa_enrich_results}} to retrieve the results
     of your enrichment analysis.
   }
-  See each function's documentation for more details.
+  See each function's manual for more details.
 }
 \section{Corresponding API Resources}{
 

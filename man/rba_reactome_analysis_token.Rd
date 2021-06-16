@@ -22,7 +22,7 @@ rba_reactome_analysis_token(
 
 \item{species}{Numeric or Character: NCBI Taxonomy identifier (Human
 is 9606), species name (e.g. "Homo sapiens") or Reactome DbId (e.g
-Homo sapiens is 48887). Refer to
+Homo sapiens is 48887). See
  \code{\link{rba_reactome_species}} or
  \href{https://reactome.org/content/schema/objects/Species}{Reactome
  Data Schema: Entries: Species}.}
@@ -40,7 +40,7 @@ available choices are: "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
 "PUBCHEM_COMPOUND".}
 
 \item{p_value}{Set a P value threshold. Only results with P value equal to
-or less than your provided threshold will be returned. (default = 1,
+or less than your supplied threshold will be returned. (default = 1,
 Meaning no P value filtering)}
 
 \item{include_disease}{Logical (default = TRUE) Should the disease pathways
@@ -52,8 +52,8 @@ to be included in the results.}
 \item{max}{(numeric) Maximum number of entities that a pathways should have
 to be included in the results.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 List containing the results and information of your analysis.

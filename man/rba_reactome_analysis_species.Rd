@@ -17,7 +17,7 @@ rba_reactome_analysis_species(
 }
 \arguments{
 \item{species_dbid}{Numeric: Reactome DbId (e.g  Mus musculus is 48892) of
-the species you want to compare with Homo sapiens. Refer to
+the species you want to compare with Homo sapiens. See
  \code{\link{rba_reactome_species}} or
  \href{https://reactome.org/content/schema/objects/Species}{Reactome
  Data Schema: Entries: Species}.}
@@ -35,7 +35,7 @@ available choices are: "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
 "PUBCHEM_COMPOUND".}
 
 \item{p_value}{Set a P value threshold. Only results with P value equal to
-or less than your provided threshold will be returned. (default = 1,
+or less than your supplied threshold will be returned. (default = 1,
 Meaning no P value filtering)}
 
 \item{min}{(numeric) Minimum number of entities that a pathways should have
@@ -44,8 +44,8 @@ to be included in the results.}
 \item{max}{(numeric) Maximum number of entities that a pathways should have
 to be included in the results.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 List with the results of the comparison.
@@ -61,7 +61,7 @@ Reactome incorporate manually curated human reactions and PANTHER's
 \cr In version 73 (11 June 2020), using an orthology-based approach,
   Homo sapiens events was projected to 18,654 orthologous pathways (with
   81,835 orthologous proteins) in 15 non-human species.
-  Refer to \href{https://reactome.org/documentation/inferred-events}{
+  See \href{https://reactome.org/documentation/inferred-events}{
   Reactome Computationally Inferred Events} for more information.
 }
 \section{Corresponding API Resources}{

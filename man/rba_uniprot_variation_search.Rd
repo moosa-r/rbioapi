@@ -23,7 +23,7 @@ rba_uniprot_variation_search(
 }
 \arguments{
 \item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
-UniProtKB primary or secondary accession}(s). You can provide up to 100
+UniProtKB primary or secondary accession}(s). You can supply up to 100
 accession numbers.}
 
 \item{source_type}{Variation's source type. You can choose up to two of:
@@ -34,32 +34,32 @@ two of: "missense", "stop gained" or "stop lost".}
 
 \item{wild_type}{Wild type amino acid. Accepted values are IUPAC
 single-letter amino acid (e.g. D for    Aspartic acid) and "*" for stop
-codon. You can provide up to 20 values.}
+codon. You can supply up to 20 values.}
 
 \item{alternative_sequence}{Alternative amino acid. Accepted values are IUPAC
 single-letter amino acid (e.g. D for    Aspartic acid) and "*" for stop codon
-and "-" for deletion. You can provide up to 20 values.}
+and "-" for deletion. You can supply up to 20 values.}
 
 \item{location}{A valid amino acid range (e.g. 10-25) within the sequence
-range where the variation occurs. You can provide up to 20 values.}
+range where the variation occurs. You can supply up to 20 values.}
 
 \item{disease}{\href{https://www.uniprot.org/diseases/}{Human disease}
 that are associated with a sequence variation. Accepted values are
 disease name (e.g. Alzheimer disease 18), partial disease name
-(Alzheimer) and/or disease acronym (e.g. AD). You can provide up to
+(Alzheimer) and/or disease acronym (e.g. AD). You can supply up to
 20 values.}
 
 \item{omim}{\href{https://www.ncbi.nlm.nih.gov/omim}{OMIM} ID that is
-associated with a variation. You can provide up to 20 values.}
+associated with a variation. You can supply up to 20 values.}
 
 \item{evidence}{Pubmed ID of the variation's
-\href{https://www.uniprot.org/citations/}{citation} You can provide up
+\href{https://www.uniprot.org/citations/}{citation} You can supply up
 to 20 values.}
 
 \item{taxid}{NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
-You can provide up to 20 taxon IDs.}
+You can supply up to 20 taxon IDs.}
 
-\item{db_type}{cross-reference database of the variation. You can provide
+\item{db_type}{cross-reference database of the variation. You can supply
 up to two of the following:\itemize{
 \item "dbSNP": \href{https://www.ncbi.nlm.nih.gov/snp/}{NIH-NCBI dbSNP
 database}.
@@ -70,15 +70,15 @@ ClinVar}
 }}
 
 \item{db_id}{The variation ID in a Cross-reference (external) database.
-You can provide up to 20 values.}
+You can supply up to 20 values.}
 
 \item{save_peff}{Logical or Character:\itemize{
 \item FALSE: (default) Do not save PEFF file, just return as a list object.
 \item TRUE: Save as PEFF file to an automatically-generated path.
 \item Character string: A valid file path to save the PEFF file.}}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 List where each element corresponds to one UniProt entity returned
@@ -89,7 +89,7 @@ List where each element corresponds to one UniProt entity returned
 Using this function, you can search and retrieve
   \href{https://www.uniprot.org/help/variant}{Natural variant(s)} that
   has been annotated in the protein's sequences. You may also refine your
-  search with modifiers such as source type, disease etc. refer to
+  search with modifiers such as source type, disease etc. See
   "Arguments section" for more information.
 }
 \details{

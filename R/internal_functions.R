@@ -327,7 +327,7 @@
 #'  will serve as a query input for httr request.
 #'
 #' @param init list: initial default query parameters in the format of named
-#'   list. provide list() if it is empty.
+#'   list. supply list() if it is empty.
 #' @param ... list: Additional queries to evaluate and possibly append to
 #'   the initial parameters. formatted as lists with the following order:
 #'   \enumerate{
@@ -609,7 +609,7 @@
 #'   .rba_response_parser().
 #'
 #' The function will try to use the parser specified in the 'input_call' object,
-#'   but if a parser value was provided with the 'response_parser' argument,
+#'   but if a parser value was supplied with the 'response_parser' argument,
 #'   it will have priority and will overwrite the input_call's parser input.
 #'   \cr diagnostics, verbose, retry_max, retry_wait and skip_error variables
 #'   \cr will be assigned and passed on to the subsequent executed calls.s
@@ -649,8 +649,8 @@
                             verbose = verbose,
                             diagnostics = diagnostics)
   ## 2 Parse the the response if possible
-  # Parser Provided via .rba_skeleton's 'response parser' argument will
-  # override the 'parser' provided in input call
+  # Parser supplied via .rba_skeleton's 'response parser' argument will
+  # override the 'parser' supplied in input call
   if (!is.null(response_parser)) {
     parser_input <- response_parser
   } else {
@@ -719,7 +719,7 @@
 #' Add rbioapi options to user's Arguments Check
 #'
 #' This function is an internal component of .rba_args(). It will
-#'   add user-defiended rbioapi options variables (provided by the "..."
+#'   add user-defiended rbioapi options variables (supplied by the "..."
 #'   arguments in the exported function call) to .rba_args's cond and cons.
 #'
 #' The aim of this function is to eliminate the need
@@ -794,7 +794,7 @@
 #'
 #' @param cons_i element i from .rba_args()'s cons argument.
 #' @param what what constrain to check? it should be one of the possible cons
-#'  types defined in .rba_args()'s documentations.
+#'  types defined in .rba_args()'s manual.
 #'
 #' @return Logical. TRUE if element i is correct with regard to the constrain
 #'   "what"; FALSE otherwise.
@@ -832,7 +832,7 @@
 #'
 #' @param cons_i element i from .rba_args()'s cons argument.
 #' @param what what constrain produced the error? it should be one of the
-#'  possible cons types defined in .rba_args()'s documentations.
+#'  possible cons types defined in .rba_args()'s manual.
 #'
 #' @return A character string.
 #'
@@ -842,38 +842,38 @@
   switch(what,
          "no_null" = sprintf("Invalid Argument; `%s` cannot be NULL.",
                              cons_i[["arg"]]),
-         "class" = sprintf("Invalid Argument; %s should be of class `%s`.\n\t(Your provided argument is \"%s\".)",
+         "class" = sprintf("Invalid Argument; %s should be of class `%s`.\n\t(Your supplied argument is \"%s\".)",
                            cons_i[["arg"]],
                            .paste2(cons_i[["class"]], last = " or ",
                                    quote = "\""),
                            class(cons_i[["evl_arg"]])),
-         "val" = sprintf("Invalid Argument; %s should be either `%s`.\n\t(Your provided argument is `%s`.)",
+         "val" = sprintf("Invalid Argument; %s should be either `%s`.\n\t(Your supplied argument is `%s`.)",
                          cons_i[["arg"]],
                          .paste2(cons_i[["val"]], last = " or ",
                                  quote = "\""),
                          cons_i[["evl_arg"]]),
-         "ran" = sprintf("Invalid Argument; %s should be `from %s to %s`.\n\t(Your provided argument is `%s`.)",
+         "ran" = sprintf("Invalid Argument; %s should be `from %s to %s`.\n\t(Your supplied argument is `%s`.)",
                          cons_i[["arg"]],
                          cons_i[["ran"]][[1]],
                          cons_i[["ran"]][[2]],
                          cons_i[["evl_arg"]]),
-         "len" = sprintf("Invalid Argument; %s should be of length `%s`.\n\t(Your provided argument's length is `%s`.)",
+         "len" = sprintf("Invalid Argument; %s should be of length `%s`.\n\t(Your supplied argument's length is `%s`.)",
                          cons_i[["arg"]],
                          cons_i[["len"]],
                          length(cons_i[["evl_arg"]])),
-         "min_len" = sprintf("Invalid Argument; %s should be of minimum length `%s`.\n\t(Your provided argument's length is `%s`.)",
+         "min_len" = sprintf("Invalid Argument; %s should be of minimum length `%s`.\n\t(Your supplied argument's length is `%s`.)",
                              cons_i[["arg"]],
                              cons_i[["min_len"]],
                              length(cons_i[["evl_arg"]])),
-         "max_len" = sprintf("Invalid Argument: %s should be of maximum length `%s`.\n\t(Your provided argument's length is `%s`.)",
+         "max_len" = sprintf("Invalid Argument: %s should be of maximum length `%s`.\n\t(Your supplied argument's length is `%s`.)",
                              cons_i[["arg"]],
                              cons_i[["max_len"]],
                              length(cons_i[["evl_arg"]])),
-         "min_val" = sprintf("Invalid Argument: %s should be equal to or greater than `%s`.\n\t(Your provided argument is `%s`.)",
+         "min_val" = sprintf("Invalid Argument: %s should be equal to or greater than `%s`.\n\t(Your supplied argument is `%s`.)",
                              cons_i[["arg"]],
                              cons_i[["min_val"]],
                              cons_i[["evl_arg"]]),
-         "max_val" = sprintf("Invalid Argument: %s should be equal to or less than `%s`.\n\t(Your provided argument is `%s`.)",
+         "max_val" = sprintf("Invalid Argument: %s should be equal to or less than `%s`.\n\t(Your supplied argument is `%s`.)",
                              cons_i[["arg"]],
                              cons_i[["max_val"]],
                              cons_i[["evl_arg"]]),
@@ -908,7 +908,7 @@
       return(NA)
     }
   } else {
-    #  argument is not NULL (user provided something)
+    #  argument is not NULL (user supplied something)
     all_cons <- setdiff(names(cons_i), c("arg", "class", "evl_arg", "no_null"))
     cons_i_errs <- lapply(all_cons,
                           function(x){
@@ -980,7 +980,7 @@
 
 #' Internal user's Arguments Check
 #'
-#' This function provide a flexible, yet powerful and vigorous arguments check
+#' This function supply a flexible, yet powerful and vigorous arguments check
 #'   mechanisms. It can check many properties of input variables and also,
 #'   check if a condition holds TRUE.
 #'
@@ -1036,7 +1036,7 @@
 
   ### 2 Check Arguments
   errors <- c()
-  ## 2.1 check if the provided object can be evaluated
+  ## 2.1 check if the supplied object can be evaluated
   cons <- lapply(X = cons,
                  FUN = function(cons_i){
                    cons_i[["evl_arg"]] <- try(expr = get(x = cons_i[["arg"]],
@@ -1091,7 +1091,7 @@
     stop(errors, call. = diagnostics)
   } else if (length(errors) > 1) {
     error_message <- paste0("\n", seq_along(errors), "- ", errors)
-    stop(sprintf("The following `%s Errors` was raised during your provided arguments check:",
+    stop(sprintf("The following `%s Errors` was raised during your supplied arguments check:",
                  length(errors)),
          error_message,
          call. = diagnostics)
@@ -1115,7 +1115,7 @@
                                   },
                                   FUN.VALUE = character(1)),
                            collapse = "")
-        cond_msg <- sprintf("The following `%s Conditional issues` were found during your provided arguments check:%s",
+        cond_msg <- sprintf("The following `%s Conditional issues` were found during your supplied arguments check:%s",
                             length(cond_msg),
                             cond_msg)
       }
@@ -1138,7 +1138,7 @@
 
 #' Parse API Response
 #'
-#' Using the input provided as 'parser' argument, this function will parse the
+#' Using the input supplied as 'parser' argument, this function will parse the
 #'   response from a REST API into appropriate R objects.
 #'
 #' The function will be called within .rba_skeleton subsequent of a
@@ -1148,7 +1148,7 @@
 #'   to a proper function:
 #'   "json->df", "json->df_no_flat", "json->list_simp", "json->list",
 #'   "json->chr", text->chr", "text->df", "tsv->df".
-#'   \cr if you provide more than one parser, the parsers will be sequentially
+#'   \cr if you supply more than one parser, the parsers will be sequentially
 #'   applied to the response (i.e. response %>% parser1 %>% parser2 %>% ...)
 #'
 #' @param response An httr response object.
@@ -1163,7 +1163,7 @@
   if (!is.vector(parsers)) { parsers <- list(parsers)}
   parsers <- sapply(X = parsers,
                     FUN = function(parser){
-                      #create a parser if not provided
+                      #create a parser if not supplied
                       if (!is.function(parser)) {
                         parser <- switch(
                           parser,
@@ -1216,7 +1216,7 @@
                                                        as = "text",
                                                        encoding = "UTF-8"))
                           },
-                          stop("Internal Error; Specify a valid parser name or provide a function!",
+                          stop("Internal Error; Specify a valid parser name or supply a function!",
                                call. = TRUE)
                         )
                       }
@@ -1361,16 +1361,16 @@
   return(input)
 }
 
-#' Validate the Provided File Path or Create One
+#' Validate the supplied File Path or Create One
 #'
 #' Based on the 'save_to' argument, this function will handle different
-#'   scenarios for the provided file path. see details for more information.
+#'   scenarios for the supplied file path. see details for more information.
 #'
 #' 1- If 'save_to = FALSE': the function will return "FALSE" and no path will be
 #'   generated.
 #'   \cr 2- If 'save_to = character string': The function will validate the
 #'   input, if it is a valid file path, the content of 'save_to' will be
-#'   returned. Otherwise, if the provided input is not valid, scenario 3 will be
+#'   returned. Otherwise, if the supplied input is not valid, scenario 3 will be
 #'   executed.
 #'   \cr 3- If 'save_to = TRUE': A file path will be generated and returned
 #'   based on 'dir_name' and 'file' inputs.
@@ -1416,7 +1416,7 @@
                                         file, perl = TRUE))
     ## File path is in "save_to", if not in "file = file_name.file_ext"
     if (is.character(save_to)) {
-      # 2a the user provided a file path, just check if it is valid
+      # 2a the user supplied a file path, just check if it is valid
       if (!grepl("^[a-zA-z]:|^\\\\\\w|^/|^\\w+\\.\\w+$", save_to)) {
         ## 2a.1 not a valid file path!
         warning(sprintf("\"%s\" is not a valid file path. Ignored that.",
@@ -1424,7 +1424,7 @@
                 call. = diagnostics)
         save_to <- TRUE
       } else {
-        ## 2a.2 the provided file path is valid
+        ## 2a.2 the supplied file path is valid
         ## 2a.2.1 Does the path end to a directory or file?
         if (!grepl("/$", save_to, perl = TRUE) &&
             grepl("\\S+\\.\\S*", basename(save_to), perl = TRUE)) {
@@ -1439,7 +1439,7 @@
                                           basename(save_to), perl = TRUE))
           # 2a.3 Check if the path and extension agree
           if (!grepl(def_file_ext, file_ext, ignore.case = TRUE)) {
-            warning(sprintf("The Response file's type (\"%s\") does not match the extension of your provided file path(\"%s\").",
+            warning(sprintf("The Response file's type (\"%s\") does not match the extension of your supplied file path(\"%s\").",
                             def_file_ext, basename(save_to)),
                     call. = diagnostics)
           }
@@ -1455,7 +1455,7 @@
       }
     }
     if (isTRUE(save_to)) {
-      ## 2b User didn't provide a file path, use defaults
+      ## 2b User didn't supply a file path, use defaults
       overwrite <- FALSE
       ## 2b.1 extract the default file name and extension
       file_ext <- def_file_ext
@@ -1513,7 +1513,7 @@
 #'   \cr Also the function will ignore any arguments which is not standard and
 #'   issues an informative warning for the user.
 #'
-#' @param ... Extra arguments that were provided in the endpoints functions.
+#' @param ... Extra arguments that were supplied in the endpoints functions.
 #' @param ignore_save if the function has a dedicated file saving argument,
 #'   set this to TRUE.
 #'
@@ -1525,7 +1525,7 @@
 .rba_ext_args <- function(..., ignore_save = FALSE) {
   ext_args <- list(...)
   rba_opts <- getOption("rba_user_options") #available options for the end-users
-  if (length(ext_args) > 0) { #user provided something in ...
+  if (length(ext_args) > 0) { #user supplied something in ...
     ext_arg_names <- names(ext_args)
 
     if (is.null(ext_arg_names)) {

@@ -17,19 +17,19 @@ rba_reactome_query(
 a mixture of both.}
 
 \item{enhanced}{Logical: (Default = FALSE) If 'TRUE' more information on
-the provided entry will be returned. (You can set this argument to 'TRUE'
-Only when you provide a single ID).}
+the supplied entry will be returned. (You can set this argument to 'TRUE'
+Only when you supply a single ID).}
 
-\item{map}{(Default = FALSE) Should the provided IDs be mapped? This
-  argument will only be considered when you provide multiple IDs.
-(e.g. when you provide previous version of stable identifiers.)}
+\item{map}{(Default = FALSE) Should the supplied IDs be mapped? This
+  argument will only be considered when you supply multiple IDs.
+(e.g. when you supply previous version of stable identifiers.)}
 
-\item{attribute_name}{(Optional) Only Return an Attribute of the provided
+\item{attribute_name}{(Optional) Only Return an Attribute of the supplied
 Database Object. (You can use this argument Only when you
-provide a single ID)}
+supply a single ID)}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 List containing your query outputs.

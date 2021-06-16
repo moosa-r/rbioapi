@@ -25,11 +25,11 @@ person? (Defalt = FALSE)}
 see \href{https://reactome.org/content/schema/Person}{Reactome Data
 Schema: person} for available options.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
-List containing the requested informations of your provided
+List containing the requested informations of your supplied
   person.
 }
 \description{

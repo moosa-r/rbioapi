@@ -3,7 +3,7 @@
 #' Use this function to search
 #'   \href{https://www.uniprot.org/help/uniparc}{UniProt Archive (UniParc)}
 #'   entries.You may also refine your search with modifiers such as sequence
-#'   length, taxon id etc. refer to "Arguments section" for more information.
+#'   length, taxon id etc. See "Arguments section" for more information.
 #'
 #'   Note that this is a search function. Thus, you are not required to fill
 #'   every argument; You may use whatever combinations of arguments you see
@@ -12,41 +12,41 @@
 #' @section Corresponding API Resources:
 #'  "GET https://ebi.ac.uk/proteins/api/uniparc"
 #'
-#' @param upi unique UniParc Identifier(s). You can provide up to 100 IDs.
+#' @param upi unique UniParc Identifier(s). You can supply up to 100 IDs.
 #' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
-#'   UniProtKB primary or secondary accession}(s). You can provide up to 100
+#'   UniProtKB primary or secondary accession}(s). You can supply up to 100
 #'   accession numbers.
 #' @param db_type \href{https://www.uniprot.org/database/}{cross-reference}
 #'   (external database) name.
 #' @param db_id Protein ID in the cross-reference (external) database.
-#'   You can provide up to 100 IDs.
+#'   You can supply up to 100 IDs.
 #' @param gene \href{https://www.uniprot.org/help/gene_name}{UniProt gene
-#'   name(s)}. You can provide up to 20 gene names.
+#'   name(s)}. You can supply up to 20 gene names.
 #' @param protein \href{https://www.uniprot.org/help/protein_names}{UniProt
 #'   protein name}.
 #' @param taxid NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
-#'   You can provide up to 20 taxon IDs.
+#'   You can supply up to 20 taxon IDs.
 #' @param organism \href{https://www.uniprot.org/taxonomy/}{Organism name}.
 #' @param sequence_checksum Sequence CRC64 checksum.
 #' @param ipr \href{https://www.ebi.ac.uk/interpro/about/interpro/}{InterPro
-#'   identifier(s)}. You can provide up to 20 IDs.
+#'   identifier(s)}. You can supply up to 20 IDs.
 #' @param signature_db InterPro's
 #'   \href{https://interpro-documentation.readthedocs.io/en/latest/databases.html}{signature
-#'   database}. You can provide up to 13 of the following values:
+#'   database}. You can supply up to 13 of the following values:
 #'   \cr "CATH", "CDD", "HAMAP", "MobiDB Lite", "Panther", "Pfam", "PIRSF",
 #'   "PRINTS", "Prosite", "SFLD", "SMART", "SUPERFAMILY" and/or "TIGRfams"
 #' @param signature_id Signature ID in the InterPro's
 #'   \href{https://interpro-documentation.readthedocs.io/en/latest/databases.html}{signature
-#'   database}. You can provide up to 20 IDs.
+#'   database}. You can supply up to 20 IDs.
 #' @param upid \href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
-#'   identifier (UPID)}. You can provide up to 100 UPIDs.
+#'   identifier (UPID)}. You can supply up to 100 UPIDs.
 #' @param seq_length An exact sequence length (e.g. 150) or a range of sequence
 #'   lengths (e.g. "130-158").
 #' @param rf_dd_type Filter the content of the each UniParc entry by
 #'   \href{https://www.uniprot.org/database/}{cross-reference} names. You can
-#'   provide multiple values.
+#'   supply multiple values.
 #' @param rf_db_id Filter the content of the each UniParc entry by protein
-#'   identifiers in any cross-reference database. You can provide multiple
+#'   identifiers in any cross-reference database. You can supply multiple
 #'   values.
 #' @param rf_active (logical ) Filter the content of each UniParc entry based on
 #'   active status on source database:\itemize{
@@ -55,9 +55,9 @@
 #'   \item FALSE: Only return contents which are not active.}
 #' @param rf_tax_id (Numeric) Filter the content of each UniParc entry by
 #'   NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}. You can
-#'   provide multiple values.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#'   supply multiple values.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return A List where each element corresponds to one UniParc entry returned
 #'   by your search query. The element itself is a sub-list containing sequence
@@ -155,7 +155,7 @@ rba_uniprot_uniparc_search <- function(upi = NULL,
                              class = "character"))
   )
 
-  .msg("Searching UniParc and retrieving entries that match your provided inputs.")
+  .msg("Searching UniParc and retrieving entries that match your supplied inputs.")
   ## Build GET API Request's query
   call_query <- .rba_query(init = list("size" = "-1"),
                            list("upi",
@@ -262,12 +262,12 @@ rba_uniprot_uniparc_search <- function(upi = NULL,
 #'   UniProtKB primary or secondary accession}.
 #' @param db_id Protein ID in the cross-reference (external) database.
 #' @param upid \href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
-#'   identifier (UPID)}. You can provide up to 100 UPIDs.
+#'   identifier (UPID)}. You can supply up to 100 UPIDs.
 #' @param rf_dd_type Filter the content of the UniParc entry by
 #'   \href{https://www.uniprot.org/database/}{cross-reference} names. You can
-#'   provide multiple values.
+#'   supply multiple values.
 #' @param rf_db_id Filter the content of the UniParc entry by protein
-#'   identifiers in any cross-reference database. You can provide multiple
+#'   identifiers in any cross-reference database. You can supply multiple
 #'   values.
 #' @param rf_active (logical ) Filter the content of UniParc entry based on
 #'   active status on source database:\itemize{
@@ -276,9 +276,9 @@ rba_uniprot_uniparc_search <- function(upi = NULL,
 #'   \item FALSE: Only return contents which are not active.}
 #' @param rf_tax_id (Numeric) Filter the content of the UniParc entry by
 #'   NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}. You can
-#'   provide multiple values.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#'   supply multiple values.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return A list which correspond to a UniParc entry.
 #'
@@ -334,7 +334,7 @@ rba_uniprot_uniparc <- function(upi = NULL,
                         list(arg = "rf_tax_id",
                              class = "character")),
             cond = list(list(quote(sum(!is.null(accession), !is.null(db_id), !is.null(upid), !is.null(upi)) != 1),
-                             "Please provide -only- one of the arguments 'accession', 'db_id', 'upid' or 'upi'."))
+                             "Please supply -only- one of the arguments 'accession', 'db_id', 'upid' or 'upi'."))
   )
 
   .msg("Retriving UniParc entry with %s.",
@@ -406,16 +406,16 @@ rba_uniprot_uniparc <- function(upi = NULL,
 #'
 #' @param upi unique UniParc Identifier.
 #' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
-#'   UniProtKB primary or secondary accession}(s). You can provide up to 100
+#'   UniProtKB primary or secondary accession}(s). You can supply up to 100
 #'   accession numbers.
 #' @param db_id Protein ID in the cross-reference (external) database.
-#'   You can provide up to 100 IDs.
+#'   You can supply up to 100 IDs.
 #' @param gene \href{https://www.uniprot.org/help/gene_name}{UniProt gene
-#'   name(s)}. You can provide up to 20 gene names.
+#'   name(s)}. You can supply up to 20 gene names.
 #' @param taxid NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
-#'   You can provide up to 20 taxon IDs.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#'   You can supply up to 20 taxon IDs.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return A list where each element correspond to a UniParc entry.
 #'
@@ -512,9 +512,9 @@ rba_uniprot_uniparc_bestguess <- function(upi = NULL,
 #'   accepted.
 #' @param rf_dd_type Filter the content of the UniParc entry by
 #'   \href{https://www.uniprot.org/database/}{cross-reference} names. You can
-#'   provide multiple values.
+#'   supply multiple values.
 #' @param rf_db_id Filter the content of the UniParc entry by protein
-#'   identifiers in any cross-reference database. You can provide multiple
+#'   identifiers in any cross-reference database. You can supply multiple
 #'   values.
 #' @param rf_active (logical ) Filter the content of UniParc entry based on
 #'   active status on source database:\itemize{
@@ -523,9 +523,9 @@ rba_uniprot_uniparc_bestguess <- function(upi = NULL,
 #'   \item FALSE: Only return contents which are not active.}
 #' @param rf_tax_id (Numeric) Filter the content of the UniParc entry by
 #'   NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}. You can
-#'   provide multiple values.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#'   supply multiple values.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return A list which correspond to a UniParc entry.
 #'

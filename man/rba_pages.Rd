@@ -7,12 +7,12 @@
 rba_pages(input_call, ...)
 }
 \arguments{
-\item{input_call}{A quoted call. Provide a regular rbioapi function call,
+\item{input_call}{A quoted call. supply a regular rbioapi function call,
 but with two differences:\enumerate{
 \item: Wrap a quote() around it. meaning: quote(rba_example())
 \item: Set the argument that corresponds to the page number to
 "pages:start_page:end_page", for example "pages:1:5".}
-refer to the "examples" section to learn more.}
+See the "examples" section to learn more.}
 
 \item{...}{Experimental internal options.}
 }
@@ -22,7 +22,7 @@ A named list where each element corresponds to a request's page.
 \description{
 Some resources return paginated results, meaning that you have to make
   separate calls for each page. Using this function, you can iterate over
-  up to 100 pages. Just provide your rbioapi function and change to page
+  up to 100 pages. Just supply your rbioapi function and change to page
   argument to "pages:start_page:end_page", for example "pages:1:5".
 }
 \details{

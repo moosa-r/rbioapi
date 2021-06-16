@@ -27,56 +27,56 @@ rba_uniprot_uniparc_search(
 )
 }
 \arguments{
-\item{upi}{unique UniParc Identifier(s). You can provide up to 100 IDs.}
+\item{upi}{unique UniParc Identifier(s). You can supply up to 100 IDs.}
 
 \item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
-UniProtKB primary or secondary accession}(s). You can provide up to 100
+UniProtKB primary or secondary accession}(s). You can supply up to 100
 accession numbers.}
 
 \item{db_type}{\href{https://www.uniprot.org/database/}{cross-reference}
 (external database) name.}
 
 \item{db_id}{Protein ID in the cross-reference (external) database.
-You can provide up to 100 IDs.}
+You can supply up to 100 IDs.}
 
 \item{gene}{\href{https://www.uniprot.org/help/gene_name}{UniProt gene
-name(s)}. You can provide up to 20 gene names.}
+name(s)}. You can supply up to 20 gene names.}
 
 \item{protein}{\href{https://www.uniprot.org/help/protein_names}{UniProt
 protein name}.}
 
 \item{taxid}{NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
-You can provide up to 20 taxon IDs.}
+You can supply up to 20 taxon IDs.}
 
 \item{organism}{\href{https://www.uniprot.org/taxonomy/}{Organism name}.}
 
 \item{sequence_checksum}{Sequence CRC64 checksum.}
 
 \item{ipr}{\href{https://www.ebi.ac.uk/interpro/about/interpro/}{InterPro
-identifier(s)}. You can provide up to 20 IDs.}
+identifier(s)}. You can supply up to 20 IDs.}
 
 \item{signature_db}{InterPro's
 \href{https://interpro-documentation.readthedocs.io/en/latest/databases.html}{signature
-database}. You can provide up to 13 of the following values:
+database}. You can supply up to 13 of the following values:
 \cr "CATH", "CDD", "HAMAP", "MobiDB Lite", "Panther", "Pfam", "PIRSF",
 "PRINTS", "Prosite", "SFLD", "SMART", "SUPERFAMILY" and/or "TIGRfams"}
 
 \item{signature_id}{Signature ID in the InterPro's
 \href{https://interpro-documentation.readthedocs.io/en/latest/databases.html}{signature
-database}. You can provide up to 20 IDs.}
+database}. You can supply up to 20 IDs.}
 
 \item{upid}{\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
-identifier (UPID)}. You can provide up to 100 UPIDs.}
+identifier (UPID)}. You can supply up to 100 UPIDs.}
 
 \item{seq_length}{An exact sequence length (e.g. 150) or a range of sequence
 lengths (e.g. "130-158").}
 
 \item{rf_dd_type}{Filter the content of the each UniParc entry by
 \href{https://www.uniprot.org/database/}{cross-reference} names. You can
-provide multiple values.}
+supply multiple values.}
 
 \item{rf_db_id}{Filter the content of the each UniParc entry by protein
-identifiers in any cross-reference database. You can provide multiple
+identifiers in any cross-reference database. You can supply multiple
 values.}
 
 \item{rf_active}{(logical ) Filter the content of each UniParc entry based on
@@ -87,10 +87,10 @@ active status on source database:\itemize{
 
 \item{rf_tax_id}{(Numeric) Filter the content of each UniParc entry by
 NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}. You can
-provide multiple values.}
+supply multiple values.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A List where each element corresponds to one UniParc entry returned
@@ -101,7 +101,7 @@ A List where each element corresponds to one UniParc entry returned
 Use this function to search
   \href{https://www.uniprot.org/help/uniparc}{UniProt Archive (UniParc)}
   entries.You may also refine your search with modifiers such as sequence
-  length, taxon id etc. refer to "Arguments section" for more information.
+  length, taxon id etc. See "Arguments section" for more information.
 }
 \details{
 Note that this is a search function. Thus, you are not required to fill

@@ -24,7 +24,7 @@ rba_reactome_exporter_overview(
 }
 \arguments{
 \item{species}{Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
-ID is 9606.) or species name (e.g. "Homo sapiens"). Refer to
+ID is 9606.) or species name (e.g. "Homo sapiens"). See
 \code{\link{rba_reactome_species}} or
 \href{https://reactome.org/content/schema/objects/Species}{Reactome
 Data Schema: Entries: Species}.}
@@ -63,20 +63,20 @@ top of the given pathways overview. see:
 \item{resource}{The analysis resource for which the results will be
 overlaid on top of the given pathways overview.}
 
-\item{exp_column}{numeric: (only if token is provided) Specify the
+\item{exp_column}{numeric: (only if token is supplied) Specify the
 expression column for the overlay.}
 
 \item{coverage}{Logical: Should the analysis coverage values be overlaid?
 (default = FALSE)}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 NULL, Based to the inputs, an image file will be saved to disk.
 }
 \description{
-This function will Save a Pathway Overview of the provided specie
+This function will Save a Pathway Overview of the supplied specie
   as an image file.
 }
 \section{Corresponding API Resources}{

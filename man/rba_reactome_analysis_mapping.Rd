@@ -17,13 +17,13 @@ rba_reactome_analysis_mapping(
 identifiers list.}
 
 \item{input_format}{(Optional) This function will automatically identify
-your provided input's format. But in case of unexpected issues or if you
+your supplied input's format. But in case of unexpected issues or if you
 want to be explicit, set this argument to one of:\itemize{
-\item "vector": If you provided a simple vector (numeric or character) as
+\item "vector": If you supplied a simple vector (numeric or character) as
 input.
-\item "file": If you provided a local file path pointing to a
+\item "file": If you supplied a local file path pointing to a
 correctly-formatted text file.
-\item "url": If you provided a URL pointing to a correctly-formatted
+\item "url": If you supplied a URL pointing to a correctly-formatted
 text file.}}
 
 \item{projection}{Logical (default = FALSE) Should non-human identifiers
@@ -32,8 +32,8 @@ be projected to their human equivalents? (using Reactome orthology data)}
 \item{interactors}{Logical (default = FALSE) Should IntAct interaction data
 be included?}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 List containing your identifiers and the IDS and resources they

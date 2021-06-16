@@ -74,7 +74,7 @@ A safe way to change rbioapi's global options and behavior. see "arguments"
   their current values.
 }
 \details{
-Because this function validates your provided changes, please
+Because this function validates your supplied changes, please
   \strong{\emph{only change rbioapi options using this function}} and avoid
   directly editing them.
 }

@@ -15,12 +15,12 @@ to use? Available options are: "human", (H. sapiens & M. musculus),
 "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
 and "fish" (D. rerio).}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A list containing the genes and description available under the
-  provided user_list_id
+  supplied user_list_id
 }
 \description{
 Retrieve a list of uploaded genes under a 'user list ID'.

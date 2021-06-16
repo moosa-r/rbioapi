@@ -10,8 +10,8 @@ rba_reactome_species(only_main = FALSE, ...)
 \item{only_main}{Logical: If set to TRUE, will only return species which
 have either manually-curated or computationally inferred pathways.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 Data frame where each row is a species and columns are pertinent

@@ -16,10 +16,10 @@ rba_mieaa_convert_version(
 \arguments{
 \item{mirna}{A vector of miRNA accessions to be converted.}
 
-\item{mirna_type}{Type of your provided miRNA accession. either "mature"
+\item{mirna_type}{Type of your supplied miRNA accession. either "mature"
 or "precursor".}
 
-\item{input_version}{(numeric) miRBase version of your provided miRNA
+\item{input_version}{(numeric) miRBase version of your supplied miRNA
 accessions.}
 
 \item{output_version}{(numeric) To what version should your miRNA accessions
@@ -29,8 +29,8 @@ be converted?}
 two-columned data frame with your input and output accessions. Otherwise,
 if TRUE, only the output miRNA accessions will be returned.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 Depending on the arguments, a data frame or a character vectors

@@ -17,10 +17,10 @@ rba_uniprot_taxonomy_name(
 \arguments{
 \item{name}{a name to to be used as search query.}
 
-\item{field}{Specify the field that your provided name should be searched.
+\item{field}{Specify the field that your supplied name should be searched.
 It should be one of : "scientific" (default), "common" or "mnemonic".}
 
-\item{search_type}{The logical relationship between your provided search
+\item{search_type}{The logical relationship between your supplied search
 query and the taxonomic name field. It should be one of "equal_to"
 (default), "start_with", "end_with" or "contain".}
 
@@ -35,11 +35,11 @@ the pagination. maximum value is 200.}
 UniProt API will paginate the results, you may use this argument to control
 the pagination. maximum value is 200.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
-a list containing taxonomic nodes that match your provided inputs.
+a list containing taxonomic nodes that match your supplied inputs.
 }
 \description{
 Using this function, you can search and retrieve taxonomic nodes using

@@ -6,8 +6,8 @@
 #' @section Corresponding API Resources:
 #'  "GET https://reactome.org/ContentService/data/database/version"
 #'
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return Character string containing the version of Reactome database.
 #'
@@ -64,8 +64,8 @@ rba_reactome_version <- function(...) {
 #'
 #' @param doid (logical) Return disease DOIDs instead of diseases?
 #'   (default = FALSE)
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return Data frame containing all the disease annotation available at
 #'   Reactome. If doid was set to TRUE, DOID info will be returned instead.
@@ -134,7 +134,7 @@ rba_reactome_diseases <- function(doid = FALSE,
 #' Get a Complex's Subunits
 #'
 #' This function will return a list of subunits which are participants of
-#' your provided complex.
+#' your supplied complex.
 #'
 #' Subunits will be returned recursively; Which means that if a subunit was
 #'   itself a complex, subunit of that complex will be also returned in the
@@ -146,10 +146,10 @@ rba_reactome_diseases <- function(doid = FALSE,
 #' @param complex_id Reactome stable Identifier of the complex.
 #' @param exclude_structures (logical) Should the contained complexes and
 #'   entity sets be excluded from the results? (default = FALSE)
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
-#' @return Data frame which each row is a subunit of your provided complex
+#' @return Data frame which each row is a subunit of your supplied complex
 #' and the columns are pertinent information of that subunit.
 #'
 #' @references \itemize{
@@ -210,7 +210,7 @@ rba_reactome_complex_subunits <- function(complex_id,
 
 #' Get Complexes That Include a Molecule
 #'
-#' This function will retrieve a list of complexes that include your provided
+#' This function will retrieve a list of complexes that include your supplied
 #'   molecule as a component.
 #'
 #' @section Corresponding API Resources:
@@ -218,13 +218,13 @@ rba_reactome_complex_subunits <- function(complex_id,
 #'  {identifier}"
 #'
 #' @param id Molecule's external Identifier
-#' @param resource What is the resource of your provided ID? see:
+#' @param resource What is the resource of your supplied ID? see:
 #' \href{https://reactome.org/content/schema/objects/ReferenceDatabase}{Reactome External
 #' Identifiers}
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
-#' @return Data frame where each row is a complex containing your provided
+#' @return Data frame where each row is a complex containing your supplied
 #'   molecule and columns are pertinent information.
 #'
 #' @references \itemize{
@@ -281,17 +281,17 @@ rba_reactome_complex_list <- function(id,
 #' Get Larger Reactome Structures Which Include an Entity
 #'
 #' This function will retrieve a list of complexes and sets that Your
-#'   provided entity ID participates in (e.g. as a complex component,
+#'   supplied entity ID participates in (e.g. as a complex component,
 #'   reaction output).
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://reactome.org/ContentService/data/entity/{id}/componentOf"
 #'
 #' @param entity_id Reactome's entity ID.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
-#' @return List of Reactome database Entities which Your provided ID is a
+#' @return List of Reactome database Entities which Your supplied ID is a
 #'   participant in them.
 #'
 #' @references \itemize{
@@ -340,7 +340,7 @@ rba_reactome_participant_of <- function(entity_id,
 
 #' Get Other forms of a Reactome Entity
 #'
-#' This function retrieve a list containing all other forms of your provided
+#' This function retrieve a list containing all other forms of your supplied
 #'   Physical Entity ID.
 #'
 #' According to Reactome API documentation, "These other forms are Physical
@@ -351,10 +351,10 @@ rba_reactome_participant_of <- function(entity_id,
 #'  "GET https://reactome.org/ContentService/data/entity/{id}/otherForms"
 #'
 #' @param entity_id Reactome's entity ID.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
-#' @return Data frame where each row is other forms of your provided Entity ID
+#' @return Data frame where each row is other forms of your supplied Entity ID
 #'   and columns are pertinent information.
 #'
 #' @references \itemize{
@@ -404,7 +404,7 @@ rba_reactome_entity_other_forms <- function(entity_id,
 #' Get Reactome Events Ancestors
 #'
 #' Along with Reactome's events hierarchy, This function will retrieve all the
-#'  events beginning from your provided event up to the "Top level Pathway".
+#'  events beginning from your supplied event up to the "Top level Pathway".
 #'  see "Details section" for more information.
 #'
 #' By Reactome's definition, Events are the building blocks of biological
@@ -418,10 +418,10 @@ rba_reactome_entity_other_forms <- function(entity_id,
 #'  "GET https://reactome.org/ContentService/data/event/{id}/ancestors"
 #'
 #' @param event_id Reactome event's identifier.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
-#' @return List which every element is a Data frame listing your provided
+#' @return List which every element is a Data frame listing your supplied
 #'   event along with it's ancestor events. Because any given event can be
 #'   part of more than one pathway hierarchy, the list may contain multiple
 #'   data frames.
@@ -471,7 +471,7 @@ rba_reactome_event_ancestors <- function(event_id,
 
 #' Get Full Event Hierarchy of a Species
 #'
-#' This function will retrieve the full Events hierarchy of your provided
+#' This function will retrieve the full Events hierarchy of your supplied
 #'   species. Directly under each species, each child element is a "top Level
 #'   Pathway". You can traverse the events tree down by following the "children"
 #'   element.
@@ -487,12 +487,12 @@ rba_reactome_event_ancestors <- function(event_id,
 #'  "GET https://reactome.org/ContentService/data/eventsHierarchy/{species}"
 #'
 #' @param species Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
-#'    ID is 9606.) or species name (e.g. "Homo sapiens"). Refer to
+#'    ID is 9606.) or species name (e.g. "Homo sapiens"). See
 #'    \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
 #'    Data Schema: Entries: Species}.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return List which is a representation of the species's events hierarchy
 #'   described in the "Details section".
@@ -556,9 +556,9 @@ rba_reactome_event_hierarchy <- function(species,
 #'   see "Details section" for more information
 #'
 #' If the function is called with create_document = FALSE:
-#'   \cr The result will be an image with the format provided in "output_format"
-#'   argument. If the provided event ID refers to a pathway, the image's
-#'   content will be the that pathways diagram. If the provided event ID refers
+#'   \cr The result will be an image with the format supplied in "output_format"
+#'   argument. If the supplied event ID refers to a pathway, the image's
+#'   content will be the that pathways diagram. If the supplied event ID refers
 #'   to a sub-pathway or reaction event, the parent pathway's diagram will be
 #'   exported, with that reaction or sub-pathway's events highlighted.
 #'   \cr Note that to export an image of reaction-like event separately, you
@@ -568,7 +568,7 @@ rba_reactome_event_hierarchy <- function(species,
 #'   following information of that events: Summation, Literature references,
 #'   Edit history type, location, compartments and diseases.
 #'   note that if you call the function with "document level = 1", information
-#'   of your provided event's children will also be included.
+#'   of your supplied event's children will also be included.
 #'
 #' @section Corresponding API Resources:
 #'   "GET https://reactome.org/ContentService/exporter/diagram/{identifier}
@@ -591,7 +591,7 @@ rba_reactome_event_hierarchy <- function(species,
 #' @param token The analysis Token for which the results will be overlaid on
 #'   top of the given pathways overview. see:
 #'   \code{\link{rba_reactome_analysis}}.
-#' @param exp_column numeric: (only if token is provided) Specify the
+#' @param exp_column numeric: (only if token is supplied) Specify the
 #'   expression column for the overlay.
 #' @param document_level numeric: (Only if "create_document" is TRUE) if 0
 #' (default) the event's children will not be included in the PDF document.
@@ -614,8 +614,8 @@ rba_reactome_event_hierarchy <- function(species,
 #'   from 0 to 20 to set as the image's margin. (default = 15)
 #' @param ehld logical: (Only if "create_document" is FALSE) Should
 #'   "Enhanced High Level Diagram" be considered?
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return NULL, Based to the inputs, an image or PDF file will be saved to
 #'   disk.
@@ -807,7 +807,7 @@ rba_reactome_exporter_diagram <- function(event_id,
 
 #' Exports A Reactome Event to SBGN or SBML
 #'
-#' This function will export a provided Reactome Event (Pathway or Reaction)
+#' This function will export a supplied Reactome Event (Pathway or Reaction)
 #'   to a SBGN (Systems Biology Graphical Notation) or SBML (Systems Biology
 #'   Markup Language)
 #'
@@ -816,8 +816,8 @@ rba_reactome_exporter_diagram <- function(event_id,
 #' @param save_to NULL or Character:\itemize{
 #'   \item NULL: Save the file to an automatically-generated path.
 #'   \item Character string: A valid file path to save the file to.}
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://reactome.org/ContentService//exporter/event/
@@ -891,14 +891,14 @@ rba_reactome_exporter_event <- function(event_id,
 
 #' Get a Reactome Pathway Overview
 #'
-#' This function will Save a Pathway Overview of the provided specie
+#' This function will Save a Pathway Overview of the supplied specie
 #'   as an image file.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://reactome.org/ContentService/exporter/fireworks/{species}.{ext}"
 #'
 #' @param species Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
-#'    ID is 9606.) or species name (e.g. "Homo sapiens"). Refer to
+#'    ID is 9606.) or species name (e.g. "Homo sapiens"). See
 #'    \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
 #'    Data Schema: Entries: Species}.
@@ -925,12 +925,12 @@ rba_reactome_exporter_event <- function(event_id,
 #'   \code{\link{rba_reactome_analysis}}.
 #' @param resource The analysis resource for which the results will be
 #'   overlaid on top of the given pathways overview.
-#' @param exp_column numeric: (only if token is provided) Specify the
+#' @param exp_column numeric: (only if token is supplied) Specify the
 #'   expression column for the overlay.
 #' @param coverage Logical: Should the analysis coverage values be overlaid?
 #'   (default = FALSE)
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return NULL, Based to the inputs, an image file will be saved to disk.
 #'
@@ -1129,10 +1129,10 @@ rba_reactome_exporter_overview <- function(species,
 #' "Standard" (default), "Strosobar" or "Copper Plus".
 #' @param resource The analysis resource for which the results will be
 #'   overlaid on top of the given pathways overview.
-#' @param exp_column numeric: (only if token is provided) Specify the
+#' @param exp_column numeric: (only if token is supplied) Specify the
 #'   expression column for the overlay.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return NULL, Based to the inputs, an image file will be saved to disk.
 #'
@@ -1309,14 +1309,14 @@ rba_reactome_exporter_reaction <- function(event_id,
 #'  "GET https://reactome.org/ContentService/interactors/psicquic/resources"
 #'
 #' @param proteins Proteins to retrieve PSICQUIC interactors.
-#' @param resource The PSICQUIC resource for your provided proteins. Call
+#' @param resource The PSICQUIC resource for your supplied proteins. Call
 #'   rba_reactome_interactors_psicquic() without argument to get the available
 #'   options.
 #' @param details Logical: If TRUE (default) a detailed list of interactors
 #'   will be returned. If FALSE, only a summary of available interactors will
 #'   be returned.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return Depending your input, a list containing the detailed or summary of
 #'   PSICQUIC interactions or a data frame of all registered PSICQUIC
@@ -1366,7 +1366,7 @@ rba_reactome_interactors_psicquic <- function(proteins = NULL,
                         list(arg = "details",
                              class = "logical")),
             cond = list(list(quote(sum(!is.null(proteins), !is.null(resource))),
-                             "You should provide 'proteins' and 'resource' togeather.")))
+                             "You should supply 'proteins' and 'resource' togeather.")))
   if (!is.null(proteins)) {
     details <- ifelse(isTRUE(details), yes = "details", no = "summary")
     .msg("Retrieving %s of clustered interactions of %s ptoteins(s) from %s.",
@@ -1409,9 +1409,9 @@ rba_reactome_interactors_psicquic <- function(proteins = NULL,
 #'   database. Using this function, you can retrieve IntAct information of
 #'   a protein(s) in two scenarios: \enumerate{
 #'   \item If endpoint = "details" or "summary": Retrieve a detailed/summary
-#'     information of your provided protein accession(s) from IntAct database.
+#'     information of your supplied protein accession(s) from IntAct database.
 #'   \item If endpoint = "pathway", Retrieve a list of Reactome pathways which
-#'   include your provided protein accession. Pathways with the class
+#'   include your supplied protein accession. Pathways with the class
 #'   "TopLevelPathway" will be excluded.}
 #'
 #' @section Corresponding API Resources:
@@ -1423,24 +1423,24 @@ rba_reactome_interactors_psicquic <- function(proteins = NULL,
 #'  molecules/pathways"
 #'
 #' @param proteins Uniprot proteins accession(s). If endpoint = "pathway",
-#'   only a single protein accession can be provided.
+#'   only a single protein accession can be supplied.
 #' @param endpoint Can be one of: \enumerate{
-#'   \item "details": To return a detailed information of your provided
+#'   \item "details": To return a detailed information of your supplied
 #'   protein(s) accession.
-#'   \item "summary": To return a summary of your provided protein(s) accession
+#'   \item "summary": To return a summary of your supplied protein(s) accession
 #'   \item "pathway": To return a list of pathways containing the interacting
 #'   molecules (excluding TopLevelPathway class).}
 #' @param only_diagrammed Logical: (only when "endpoint = "pathway")
 #'   If TRUE, pathways without diagram will be excluded. (default = FALSE)
 #' @param species Only when "endpoint = "pathway", The scientific name
-#'   of the species to search for the pathways. Refer to
+#'   of the species to search for the pathways. See
 #'    \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
 #'    Data Schema: Entries: Species}.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
-#' @return List which it's content varies based on the  provided "endpoint"
+#' @return List which it's content varies based on the  supplied "endpoint"
 #'   argument.
 #'
 #' @references \itemize{
@@ -1492,9 +1492,9 @@ rba_reactome_interactors_static <- function(proteins,
                         list(arg = "species",
                              class = "character")),
             cond = list(list(quote(endpoint == "pathways" && length(proteins) != 1),
-                             "When 'endpoint = pathways', you can only provide one protein."),
+                             "When 'endpoint = pathways', you can only supply one protein."),
                         list(quote(sum(!is.null(species), endpoint == "pathways") == 1),
-                             "You should -and can only- provide species when endpoint is 'pathways'.")))
+                             "You should -and can only- supply species when endpoint is 'pathways'.")))
 
 
 
@@ -1546,7 +1546,7 @@ rba_reactome_interactors_static <- function(proteins,
 #' Map External ID to Reactome Pathways/Reactions
 #'
 #' By providing an external identifier from a given resource, you can retrieve
-#'   a list of pathways/reactions that include your provided ID.
+#'   a list of pathways/reactions that include your supplied ID.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://reactome.org/ContentService/data/mapping/{resource}/
@@ -1555,18 +1555,18 @@ rba_reactome_interactors_static <- function(proteins,
 #'  {identifier}/reactions"
 #'
 #' @param id Molecule's external Identifier
-#' @param resource What is the resource of your provided ID? see:
+#' @param resource What is the resource of your supplied ID? see:
 #' \href{https://reactome.org/content/schema/objects/ReferenceDatabase}{Reactome External
 #' Identifiers}
 #' @param species Numeric or Character: NCBI Taxonomy identifier (Human
 #'   is 9606), species name (e.g. "Homo sapiens") or Reactome DbId (e.g
-#'   Homo sapiens is 48887). Refer to
+#'   Homo sapiens is 48887). See
 #'    \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
 #'    Data Schema: Entries: Species}.
 #' @param map_to Either "pathways" or "reactions".
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return Data frame where each row is a pathway/reaction and columns are
 #'   pertinent information.
@@ -1647,7 +1647,7 @@ rba_reactome_mapping <- function(id,
 #' In version 73 (11 June 2020), using an orthology-based approach,
 #'   Homo sapiens events was projected to 18,654 orthologous pathways (with
 #'   81,835 orthologous proteins) in 15 non-human species.
-#'   \cr Refer to \href{https://reactome.org/documentation/inferred-events}{
+#'   \cr See \href{https://reactome.org/documentation/inferred-events}{
 #'   Reactome Computationally Inferred Events} for more information.
 #'
 #' @section Corresponding API Resources:
@@ -1657,14 +1657,14 @@ rba_reactome_mapping <- function(id,
 #' @param event_ids Human Reactome event ID(s) to retrieve their orthologous
 #'   events.
 #' @param species_dbid Reactome database ID (DbId) of the target species. (e.g
-#'   Mus musculus is 48892). Refer to
+#'   Mus musculus is 48892). See
 #'    \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
 #'    Data Schema: Entries: Species}.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
-#' @return List containing found Orthologous event(s) in your provided species
+#' @return List containing found Orthologous event(s) in your supplied species
 #'   and their pertinent information.
 #'
 #' @references \itemize{
@@ -1746,7 +1746,7 @@ rba_reactome_orthology <- function(event_ids,
 #'  \cr To make it possible to link multiple 'Physical Entity' instances of a
 #'  molecule, Reactome uses a data class named "'Reference Entities'"
 #'  which correspond to the invariant attribute of a molecule. for example,
-#'  both of the above-mentioned 'Physical Entities' refer to a 'Reference Entities'
+#'  both of the above-mentioned 'Physical Entities' see a 'Reference Entities'
 #'  named \href{https://reactome.org/content/schema/instance/browser/57819}{
 #'  "UniProt:P01834 IGKC}.
 #'  \cr See \href{https://reactome.org/documentation/data-model}{Reactome
@@ -1765,10 +1765,10 @@ rba_reactome_orthology <- function(event_ids,
 #'   'Physical Entities' will be returned.
 #' @param only_reference_entities Logical: If TRUe, only participating
 #'   'Reference Entities' will be returned.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
-#' @return List with the participant of your provided Event ID. A Data frame
+#' @return List with the participant of your supplied Event ID. A Data frame
 #'  if only physical or 'Reference Entities' was requested.
 #'
 #' @references \itemize{
@@ -1853,7 +1853,7 @@ rba_reactome_participants <- function(event_id,
 #'
 #' A Reactome Event could be comprised of other events (meaning, a pathway that
 #'   include other pathways itself). Use this function to recursively return
-#'   all the events which reside downstream of your provided event ID (or
+#'   all the events which reside downstream of your supplied event ID (or
 #'   an attribute of that events).
 #'
 #' By Reactome's definition, Events are the building blocks of biological
@@ -1873,11 +1873,11 @@ rba_reactome_participants <- function(event_id,
 #' @param attribute_name An attribute of the events to be returned instead of
 #'   the whole events. see \href{https://reactome.org/content/schema/Event}{
 #'   Reactome Data Schema: Event} for available options.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return Data frame where each row is a contained event and columns are
-#'   event's attributes. If an "attribute_name" argument was provided, a
+#'   event's attributes. If an "attribute_name" argument was supplied, a
 #'   character vector will be returned.
 #'
 #' @references \itemize{
@@ -1972,20 +1972,20 @@ rba_reactome_pathways_events <- function(event_id,
 #'
 #' @param entity_id The entity that should exist in the pathways.
 #' @param with_diagram Logical: only include pathways with diagram?
-#' @param all_forms Logical: should other variants of your provided entity_id
+#' @param all_forms Logical: should other variants of your supplied entity_id
 #'   be considered? (e.g. same molecule but in different compartment,
-#'   secretory form etc.) refer to \code{\link{rba_reactome_participants}}'s
+#'   secretory form etc.) see \code{\link{rba_reactome_participants}}'s
 #'   "Details section" to learn more about how Reactome classifies molecules.
 #' @param species (optional) Numeric or Character: confine your search to a
 #'   specific species by providing it's NCBI Taxonomy identifier
 #'   (Human Taxonomy ID is 9606) or species name (e.g. "Homo sapiens").
-#'   Refer to \code{\link{rba_reactome_species}} or
+#'   See \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
 #'    Data Schema: Entries: Species}.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
-#' @return Data frame where each row is a pathway that contains your provided
+#' @return Data frame where each row is a pathway that contains your supplied
 #'   entity and columns are pertinent information.
 #'
 #' @references \itemize{
@@ -2063,7 +2063,7 @@ rba_reactome_pathways_low <- function(entity_id,
 #' Get Top Level Pathways in a Species
 #'
 #' This function will Return a list of all pathways with the class
-#'   "TopLevelPathway" which are annotated in your provided species.
+#'   "TopLevelPathway" which are annotated in your supplied species.
 #'
 #' Reactome's Events hierarchy for any specie will begin with pathways with
 #'   class "TopLevelPathway" (e.g. "Immune System", "Metabolism of proteins").
@@ -2076,12 +2076,12 @@ rba_reactome_pathways_low <- function(entity_id,
 #'  "GET https://reactome.org/ContentService/data/pathways/top/{species}"
 #'
 #' @param species Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
-#'    ID is 9606.) or species name (e.g. "Homo sapiens"). Refer to
+#'    ID is 9606.) or species name (e.g. "Homo sapiens"). See
 #'    \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
 #'    Data Schema: Entries: Species}.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return Data frame where each row is a Top Level Pathway and columns are
 #'   pertinent information.
@@ -2151,10 +2151,10 @@ rba_reactome_pathways_top <- function(species,
 #'  \cr "GET https://reactome.org/ContentService/data/people/name/{name}/exact"
 #'
 #' @param person_name first and last name of the person
-#' @param exact_match Logical: should the provided name be considered as
+#' @param exact_match Logical: should the supplied name be considered as
 #'   an exact match? (default = FALSE)
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return List where each element is a search hit contains the person's
 #'   information.
@@ -2228,10 +2228,10 @@ rba_reactome_people_name <- function(person_name,
 #' @param attribute_name (optional) A Reactome person attribute to return only.
 #'   see \href{https://reactome.org/content/schema/Person}{Reactome Data
 #'   Schema: person} for available options.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
-#' @return List containing the requested informations of your provided
+#' @return List containing the requested informations of your supplied
 #'   person.
 #'
 #' @references \itemize{
@@ -2327,16 +2327,16 @@ rba_reactome_people_id <- function(person_id,
 #' @param ids A single or Multiple database IDs (DbId), Stable IDs (StId) or
 #'   a mixture of both.
 #' @param enhanced Logical: (Default = FALSE) If 'TRUE' more information on
-#'   the provided entry will be returned. (You can set this argument to 'TRUE'
-#'   Only when you provide a single ID).
-#' @param map (Default = FALSE) Should the provided IDs be mapped? This
-#'   argument will only be considered when you provide multiple IDs.
-#' (e.g. when you provide previous version of stable identifiers.)
-#' @param attribute_name (Optional) Only Return an Attribute of the provided
+#'   the supplied entry will be returned. (You can set this argument to 'TRUE'
+#'   Only when you supply a single ID).
+#' @param map (Default = FALSE) Should the supplied IDs be mapped? This
+#'   argument will only be considered when you supply multiple IDs.
+#' (e.g. when you supply previous version of stable identifiers.)
+#' @param attribute_name (Optional) Only Return an Attribute of the supplied
 #'   Database Object. (You can use this argument Only when you
-#'   provide a single ID)
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#'   supply a single ID)
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return List containing your query outputs.
 #'
@@ -2386,7 +2386,7 @@ rba_reactome_query <- function(ids,
                                      (isTRUE(enhanced) | !is.null(attribute_name))),
                              "You can only use 'enhnaced' or 'attribute_name' with a single ID not multiple IDs."),
                         list(quote(!is.null(attribute_name) && isTRUE(enhanced)),
-                             "You can only provide 'attribute_name' when enhanced is 'FALSE'.")))
+                             "You can only supply 'attribute_name' when enhanced is 'FALSE'.")))
 
   .msg("Querying Reactome knowledgebase with the supplied ID(s)")
 
@@ -2444,25 +2444,25 @@ rba_reactome_query <- function(ids,
 #' Map Cross References IDs to Reactome ReferenceEntity
 #'
 #' Use this function To retrieve a list of Reactome ReferenceEntity associated
-#'   to your provided Cross Reference (i.e. External) ID.
+#'   to your supplied Cross Reference (i.e. External) ID.
 #'
 #' Reactome cross-references external database's identifiers to it's database
 #'   Entries named ReferenceEntity, which resembles the invariant aspect of
 #'   a molecule. Thus there is a one-to-many relationship between Reactome's
 #'   ReferenceEntity object and the molecule's ID in external databases,
 #'   which in Reactome's terms is called Cross Reference.
-#'   \cr Refer to \code{\link{rba_reactome_participants}}'s "Details section"
+#'   \cr See \code{\link{rba_reactome_participants}}'s "Details section"
 #'   to learn more about how Reactome classifies molecules.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://reactome.org/ContentService/references/mapping/{identifier}"
 #'
 #' @param xref_id molecule's cross-reference (external) identifier.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return List containing the ReferenceEntity corresponding to your
-#'   provided cross-reference (external) ID.
+#'   supplied cross-reference (external) ID.
 #'
 #' @references \itemize{
 #'   \item Jassal B, Matthews L, Viteri G, Gong C, Lorente P, Fabregat A,
@@ -2524,8 +2524,8 @@ rba_reactome_xref <- function(xref_id,
 #'
 #' @param only_main Logical: If set to TRUE, will only return species which
 #'   have either manually-curated or computationally inferred pathways.
-#' @param ... rbioapi option(s). Refer to \code{\link{rba_options}}'s
-#'   arguments documentation for more information on available options.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
 #'
 #' @return Data frame where each row is a species and columns are pertinent
 #'   information.

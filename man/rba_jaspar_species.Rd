@@ -17,8 +17,8 @@ of field names that will be used to order the results.
 \cr Providing multiple field names is supported. You can also use prefix
 "-" before a field name to indicate reverse ordering.}
 
-\item{...}{rbioapi option(s). Refer to \code{\link{rba_options}}'s
-arguments documentation for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
+arguments manual for more information on available options.}
 }
 \value{
 A data frame with information of available species.
