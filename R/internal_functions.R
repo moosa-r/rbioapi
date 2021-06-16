@@ -768,7 +768,7 @@
                      retry_wait = list(arg = "retry_wait",
                                        class = "numeric",
                                        len = 1,
-                                       min_val = 1))
+                                       min_val = 0))
     cons <- append(ext_cons[names(ext_cons) %in% ls(envir = parent.frame(2))],
                    cons)
     return(cons)
@@ -1008,6 +1008,9 @@
 #' @param cons Define Constrains for input arguments. Currently they may be:
 #'   \cr "no_null', class', 'val', 'ran', 'min_val', 'max_val', 'len', 'min_len',
 #'   'max_len' and/or 'regex'.
+#'   \cr note no_null automatically will be added to the function's argument
+#'   with no default value. so you do not need to add no_null for such
+#'   arguments.
 #' @param cond Expression which will be evaluated to TRUE or FALSE.
 #' @param cond_warning Should the function produce warning instead of stopping
 #'   code execution? alternatively, you could include an element to

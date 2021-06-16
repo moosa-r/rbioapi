@@ -2388,10 +2388,10 @@ rba_reactome_query <- function(ids,
                         list(quote(!is.null(attribute_name) && isTRUE(enhanced)),
                              "You can only provide 'attribute_name' when enhanced is 'FALSE'.")))
 
+  .msg("Querying Reactome knowledgebase with the supplied ID(s)")
+
   if (length(ids) > 1) {
     #### use POST
-    .msg("POST /data/query/ids/map",
-         "A list of entries with their mapping to the provided identifiers")
     ## Build POST API Request's URL
     call_body <- paste(unique(ids),collapse = ",")
     path_input <- paste0(.rba_stg("reactome", "pth", "content"),
@@ -2417,20 +2417,14 @@ rba_reactome_query <- function(ids,
     parser_input <- "json->list"
     file_ext <- "json"
     if (!is.null(attribute_name)) {
-      .msg("GET /data/query/{id}/{attributeName}",
-           "A single property of an entry in Reactome knowledgebase")
       path_input <- paste0(path_input, "/", attribute_name)
       accept_input <- "text/plain"
       parser_input <- "text->chr"
       file_ext <- "txt"
     } else if (isTRUE(enhanced)) {
-      .msg("GET /data/query/enhanced/{id}",
-           "More information on an entry in Reactome knowledgebase")
       path_input <- sub("/query/", "/query/enhanced/", path_input)
-    } else {
-      .msg("GET /data/query/{id}",
-           "An entry in Reactome knowledgebase")
     }
+
     input_call <- .rba_httr(httr = "get",
                             url = .rba_stg("reactome", "url"),
                             path = path_input,
@@ -2438,7 +2432,6 @@ rba_reactome_query <- function(ids,
                             accept = accept_input,
                             save_to = .rba_file(paste0("reactome_query.",
                                                        file_ext)))
-
   }
 
   ## Call API

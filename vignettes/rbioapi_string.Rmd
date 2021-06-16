@@ -28,7 +28,7 @@ knitr::opts_chunk$set(echo = TRUE,
                       dev = "png",
                       comment = "#>")
 library(rbioapi)
-rba_options(timeout = 600)
+rba_options(timeout = 600, skip_error = TRUE)
 ```
 
 ------------------------------------------------------------------------
@@ -60,11 +60,21 @@ proteins <- c("p53", "BRCA1", "cdk2", "Q99835", "CDC42","CDK1","KIF23",
 ## 2 Now we map our protein IDs
 proteins_mapped <- rba_string_map_ids(ids = proteins,
                                       species = 9606)
-## 3 Using str(), we inspect what the function returns:
-# str(proteins_mapped)
+## 3 What we need and will use for the rest of this vignette is the `stringId` column
+```
 
-## 4 What we need and will use for the rest of this vignette is the `stringId` column:
-proteins_mapped <- proteins_mapped$stringId
+```{r rba_string_map_ids_results, echo=FALSE}
+if (is.data.frame(proteins_mapped)) {
+  DT::datatable(data = proteins_mapped,
+              options = list(scrollX = TRUE, 
+                             paging = TRUE,
+                             fixedHeader = TRUE,
+                             keys = TRUE,
+                             pageLength = 5))
+  proteins_mapped <- proteins_mapped$stringId
+} else {
+  print("Vignette building failed. It is probably because the web service was down during the building.")
+}
 ```
 
 ------------------------------------------------------------------------
@@ -82,12 +92,16 @@ int_net <- rba_string_interactions_network(ids = proteins_mapped,
 ```
 
 ```{r rba_string_interactions_network_results, echo=FALSE}
-DT::datatable(data = int_net,
+if (is.data.frame(int_net)) {
+  DT::datatable(data = int_net,
               options = list(scrollX = TRUE, 
                              paging = TRUE,
                              fixedHeader = TRUE,
                              keys = TRUE,
                              pageLength = 5))
+} else {
+  print("Vignette building failed. It is probably because the web service was down during the building.")
+}
 ```
 
 ------------------------------------------------------------------------
@@ -106,12 +120,16 @@ int_partners <- rba_string_interaction_partners(ids = "9606.ENSP00000361359",
 ```
 
 ```{r rba_string_interaction_partners_restults, echo=FALSE}
-DT::datatable(data = int_partners,
+if (is.data.frame(int_partners)) {
+  DT::datatable(data = int_partners,
               options = list(scrollX = TRUE, 
                              paging = TRUE,
                              fixedHeader = TRUE,
                              keys = TRUE,
                              pageLength = 5))
+} else {
+  print("Vignette building failed. It is probably because the web service was down during the building.")
+}
 ```
 
 ------------------------------------------------------------------------
@@ -131,7 +149,11 @@ graph_1 <- rba_string_network_image(ids = proteins_mapped,
 ```
 
 ```{r rba_string_network_image_ex1_image, echo=FALSE, fig.cap="Network images - Example 1", fig.align='center'}
-grid::grid.raster(graph_1, just = "center")
+if (is.array(graph_1)) {
+  grid::grid.raster(graph_1, just = "center")
+} else {
+  print("Vignette building failed. It is probably because the web service was down during the building.")
+}
 ```
 
 ```{r rba_string_network_image_ex2, fig.show='hide'}
@@ -147,7 +169,11 @@ graph_2 <- rba_string_network_image(ids = proteins_mapped,
 ```
 
 ```{r rba_string_network_image_ex2_image, echo=FALSE, fig.cap="Network images - Example 2", fig.align='center'}
-grid::grid.raster(graph_2, just = "center")
+if (is.array(graph_2)) {
+  grid::grid.raster(graph_2, just = "center")
+} else {
+  print("Vignette building failed. It is probably because the web service was down during the building.")
+}
 ```
 
 ------------------------------------------------------------------------
@@ -166,12 +192,16 @@ enriched <- rba_string_enrichment(ids = proteins_mapped,
 ```
 
 ```{r rba_string_enrichment_restults, echo=FALSE}
-DT::datatable(data = enriched,
+if (is.data.frame(enriched)) {
+  DT::datatable(data = enriched,
               options = list(scrollX = TRUE, 
                              paging = TRUE,
                              fixedHeader = TRUE,
                              keys = TRUE,
                              pageLength = 5))
+} else {
+  print("Vignette building failed. It is probably because the web service was down during the building.")
+}
 ```
 
 ## Protein-protein interaction enrichment {#protein-protein-interaction-enrichment .heading3}

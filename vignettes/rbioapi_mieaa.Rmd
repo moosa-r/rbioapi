@@ -28,7 +28,7 @@ knitr::opts_chunk$set(echo = TRUE,
                       dev = "png",
                       comment = "#>")
 library(rbioapi)
-rba_options(timeout = 600)
+rba_options(timeout = 600, skip_error = TRUE)
 ```
 
 ------------------------------------------------------------------------
@@ -88,13 +88,17 @@ mieaa_kegg <- rba_mieaa_enrich(test_set = mirs,
 ```
 
 ```{r mieaa_kegg_table, echo=FALSE}
-DT::datatable(data = mieaa_kegg,
+if (is.data.frame(mieaa_kegg)) {
+  DT::datatable(data = mieaa_kegg,
               options = list(scrollX = TRUE, 
                              paging = TRUE,
                              fixedHeader = TRUE,
                              keys = TRUE,
                              pageLength = 10))
 
+} else {
+  print("Vignette building failed. It is probably because the web service was down during the building.")
+}
 ```
 
 ## Approach 2: Going step-by-step {#approach-2-going-step-by-step .heading3}

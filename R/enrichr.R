@@ -61,7 +61,7 @@ rba_enrichr_libs <- function(store_in_options = FALSE,
                              class = "character",
                              no_null = TRUE,
                              val = c("human", "fly", "yeast", "worm", "fish"))
-                        ))
+  ))
 
   .msg("Retrieving List of available libraries and statistics from Enrichr %s.",
        organism)
@@ -81,7 +81,7 @@ rba_enrichr_libs <- function(store_in_options = FALSE,
   final_output <- .rba_skeleton(input_call)
 
   ## Save Library Names as Global Options
-  if (isTRUE(store_in_options)) {
+  if (isTRUE(store_in_options) && utils::hasName(final_output, "libraryName")) {
     options(rba_enrichr_libs = final_output[["libraryName"]])
   }
   return(final_output)
@@ -147,7 +147,7 @@ rba_enrichr_add_list <- function(gene_list,
                              class = "character",
                              no_null = TRUE,
                              val = c("human", "fly", "yeast", "worm", "fish"))
-                        ))
+  ))
 
   .msg("Uploading %s gene symbols to Enrichr %s.",
        length(gene_list), organism)
@@ -226,7 +226,7 @@ rba_enrichr_view_list <- function(user_list_id,
                              class = "character",
                              no_null = TRUE,
                              val = c("human", "fly", "yeast", "worm", "fish"))
-                        ))
+  ))
 
   .msg("Retrieving the gene list under the ID %s from Enrichr %s.",
        user_list_id, organism)
@@ -405,6 +405,14 @@ rba_enrichr_enrich <- function(user_list_id,
     .msg("Calling rba_enrichr_libs() to get the names of available Enricr %s libraries.",
          organism)
     invisible(rba_enrichr_libs(store_in_options = TRUE))
+    if (!length(getOption("rba_enrichr_libs")) > 1) {
+      no_lib_msg <- "Couldn't fetch available Enrichr libraries. Please run manually `rba_enrichr_libs(store_in_options = TRUE)`."
+      if (isTRUE(get("skip_error"))) {
+        return(no_lib_msg)
+      } else {
+        stop(no_lib_msg, call. = get("diagnostics"))
+      }
+    }
   }
   ## handle different gene_set_library input situations
   if (length(gene_set_library) > 1) {
@@ -421,8 +429,12 @@ rba_enrichr_enrich <- function(user_list_id,
                                ignore.case = TRUE, value = TRUE, perl = TRUE)
       #check the results of regex
       if (length(gene_set_library) == 0) {
-        stop("Your regex pattern did not match any Enrichr library name.",
-             call. = get("diagnostics"))
+        if (isTRUE(get("skip_error"))) {
+          return("Your regex pattern did not match any Enrichr library name.")
+        } else {
+          stop("Your regex pattern did not match any Enrichr library name.",
+               call. = get("diagnostics"))
+        }
       } else if (length(gene_set_library) == 1) {
         run_mode <- "single"
       } else if (length(gene_set_library) > 1) {
@@ -443,7 +455,7 @@ rba_enrichr_enrich <- function(user_list_id,
                              class = "character",
                              no_null = TRUE,
                              val = c("human", "fly", "yeast", "worm", "fish"))
-                        ))
+  ))
   ## call Enrichr API
   if (run_mode == "single") {
     .msg("Enriching gene-list %s against Enrichr %s library: %s.",
@@ -548,7 +560,7 @@ rba_enrichr_gene_map <- function(gene,
                              class = "character",
                              no_null = TRUE,
                              val = c("human", "fly", "yeast", "worm", "fish"))
-                        ))
+  ))
 
   .msg("Finding terms that contain %s gene: %s.", organism, gene)
 
@@ -651,19 +663,33 @@ rba_enrichr <- function(gene_list,
                              class = "character",
                              no_null = TRUE,
                              val = c("human", "fly", "yeast", "worm", "fish"))
-                        ))
+  ))
   .msg("--Step 1/3:")
   invisible(rba_enrichr_libs(store_in_options = TRUE,
                              ...))
+  if (is.null(getOption("rba_enrichr_libs"))) {
+    no_lib_msg <- "Couldn't fetch available Enrichr libraries. Please manually run `rba_enrichr_libs(store_in_options = TRUE)`."
+    if (isTRUE(get("skip_error"))) {
+      return(no_lib_msg)
+    } else {
+      stop(no_lib_msg, call. = get("diagnostics"))
+    }
+  }
+
   .msg("--Step 2/3:")
   list_id <- rba_enrichr_add_list(gene_list = gene_list,
                                   description = description,
                                   ...)
   .msg("--Step 3/3:")
-  enriched <- rba_enrichr_enrich(user_list_id = list_id$userListId,
-                                 gene_set_library = gene_set_library,
-                                 regex_library_name = regex_library_name,
-                                 progress_bar = progress_bar,
-                                 ...)
+  if (utils::hasName(list_id, "userListId")) {
+    enriched <- rba_enrichr_enrich(user_list_id = list_id$userListId,
+                                   gene_set_library = gene_set_library,
+                                   regex_library_name = regex_library_name,
+                                   progress_bar = progress_bar,
+                                   ...)
+  } else {
+    return(list_id)
+  }
+
   return(enriched)
 }

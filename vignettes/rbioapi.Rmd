@@ -28,7 +28,7 @@ knitr::opts_chunk$set(echo = TRUE,
                       dev = "png",
                       comment = "#>")
 library(rbioapi)
-rba_options(timeout = 600)
+rba_options(timeout = 1, skip_error = TRUE, retry_max = 0, retry_wait = 0)
 ```
 
 ------------------------------------------------------------------------
@@ -186,7 +186,7 @@ Take rba_uniprot_taxonomy_name as an example. This function allows you to search
 adeno <- rba_uniprot_taxonomy_name(name = "adenovirus",
                                    search_type = "contain",
                                    page_number = 1)
-adeno$pageInfo
+str(adeno, max.level = 2)
 ```
 
 As you can see, the server has returned the first page of the response, to retrieve the other pages, you should make separate calls and change the "page_number" argument within each call, or simply use `rba_pages()` as demonstrated below:

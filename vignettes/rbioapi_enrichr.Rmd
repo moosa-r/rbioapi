@@ -28,7 +28,7 @@ knitr::opts_chunk$set(echo = TRUE,
                       dev = "png",
                       comment = "#>")
 library(rbioapi)
-rba_options(timeout = 600)
+rba_options(timeout = 600, skip_error = TRUE)
 ```
 
 ------------------------------------------------------------------------
@@ -54,12 +54,16 @@ enrichr_libs <- rba_enrichr_libs()
 In the returned data frame, you can find the names of available Enrichr libraries in "libraryName" column:
 
 ```{r enrichr_libs_df, echo=FALSE}
-DT::datatable(data = enrichr_libs,
+if (is.data.frame(enrichr_libs)) {
+  DT::datatable(data = enrichr_libs,
               options = list(scrollX = TRUE, 
                              paging = TRUE,
                              fixedHeader = TRUE,
                              keys = TRUE,
                              pageLength = 10))
+} else {
+  print("Vignette building failed. It is probably because the web service was down during the building.")
+}
 ```
 
 ------------------------------------------------------------------------
@@ -79,11 +83,11 @@ genes <- c("p53", "BRCA1", "cdk2", "Q99835", "CDC42","CDK1","KIF23","PLK1",
 
 # 2.a Enrich your genes using "MSigDB_Hallmark_2020" library
 enrichr_msig_hallmark <- rba_enrichr(gene_list = genes,
-                                         gene_set_library = "MSigDB_Hallmark_2020")
+                                     gene_set_library = "MSigDB_Hallmark_2020")
 # 2.b Maybe you want to enrich using every library that contains the word "msig":
 enrichr_msig <- rba_enrichr(gene_list = genes,
-                                gene_set_library = "msig",
-                                regex_library_name = TRUE)
+                            gene_set_library = "msig",
+                            regex_library_name = TRUE)
 # 2.c Or maybe you want to enrich using every library available at Enrichr:
 # enrichr_all <- rba_enrichr(gene_list = genes,
 #                            gene_set_library = "all")

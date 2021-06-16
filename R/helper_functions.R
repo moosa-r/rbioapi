@@ -62,32 +62,41 @@
 #' @keywords Helper
 #' @export
 rba_connection_test <- function(print_output = TRUE, diagnostics = FALSE) {
+  # Set options
   if (is.null(diagnostics) || is.na(diagnostics) || !is.logical(diagnostics)) {
     diagnostics <- getOption("rba_diagnostics")
   }
+  user_agent <- getOption("rba_user_agent")
+  timeout <- getOption("rba_timeout")
+  skip_error <- getOption("rba_skip_error")
 
   cat_if <- ifelse(test = isTRUE(print_output),
                    yes = function(...) {cat(...)},
                    no = function(...) {invisible()})
+  # start tests
   .msg("Checking Your connection to the Databases currently supported by rbioapi:",
        cond = "print_output")
-
-  tests <- .rba_stg("tests")
 
   cat_if("--->>>", "Internet", ":\n")
   google <- try(httr::status_code(httr::HEAD("https://google.com/",
                                              if (diagnostics) httr::verbose(),
-                                             httr::user_agent(getOption("rba_user_agent")),
-                                             httr::timeout(getOption("rba_timeout"))))
+                                             httr::user_agent(user_agent),
+                                             httr::timeout(timeout)))
                 , silent = TRUE)
 
   if (google == 200) {
     cat_if("+++ Connected to the Internet.\n")
   } else {
     cat_if("!!!! No Internet Connection.\n")
-    stop("Could not resolve https://google.com", " . Check Your internet Connection.",
-         call. = diagnostics)
+    if (isTRUE(skip_error)) {
+      return("Could not resolve `https://google.com`. Check Your internet Connection.")
+    } else {
+      stop("Could not resolve `https://google.com`. Check Your internet Connection.",
+           call. = diagnostics)
+    }
   }
+
+  tests <- .rba_stg("tests")
   output <- list()
 
   for (i in seq_along(tests)) {
@@ -192,9 +201,7 @@ rba_options <- function(diagnostics = NULL,
                              current_value = vapply(names(getOption("rba_user_options")),
                                                     function(x) {as.character(getOption(x))},
                                                     character(1)),
-                             value_class = vapply(names(getOption("rba_user_options")),
-                                                  function(x) {class(getOption(x))},
-                                                  character(1)),
+                             allowed_value = getOption("rba_user_options_allowed"),
                              stringsAsFactors = FALSE,
                              row.names = NULL)
     return(options_df)

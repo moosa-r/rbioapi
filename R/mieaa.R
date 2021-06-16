@@ -524,14 +524,21 @@ rba_mieaa_enrich_submit <- function(test_set,
                              verbose = FALSE)
   if (is.null(categories)) {
     categories <- all_cats
-    .msg("No categories were provided, Requesting enrichment using all of the %s available categories for species '%s'.",
+    .msg("No categories were supplied, Requesting enrichment using all of the %s available categories for species '%s'.",
          length(categories),
          .rba_mieaa_species(species, to_name = TRUE))
   } else {
     cats_dif <- setdiff(categories, all_cats)
     if (length(cats_dif) != 0) {
-      stop("Invalid categories! The following requested categories do not match your provided specie and miRNA type:\n",
-           .paste2(cats_dif, last = " and "))
+      invalid_cats_msg <- sprintf("Invalid categories! The following requested categories do not match your supplied specie and miRNA type:\n%s",
+                                  .paste2(cats_dif, last = " and "))
+      if (isTRUE(get("skip_error"))) {
+        return(invalid_cats_msg)
+      } else {
+        stop(invalid_cats_msg,
+             call. = FALSE)
+      }
+
     }
   }
   names(categories) <- rep("categories", length(categories))
@@ -710,33 +717,13 @@ rba_mieaa_enrich_results <- function(job_id,
        job_id)
 
   ## Build Function-Specific Call
-  parser_input <- list("json->df",
-                       function(x) {
-                         colnames(x) <- switch(as.character(ncol(x)),
-                                               "8" = c("category", "subcategory", "enrichment",
-                                                       "p_value", "p_adjusted", "q_value",
-                                                       "observed", "mirnas/precursors"),
-                                               "9" = c("category", "subcategory", "enrichment",
-                                                       "p_value", "p_adjusted", "q_value",
-                                                       "expected",
-                                                       "observed", "mirnas/precursors"))
-                         x$p_value <- as.numeric(x$p_value)
-                         x$p_adjusted <- as.numeric(x$p_adjusted)
-                         x$q_value <- as.numeric(x$q_value)
-                         x$observed <- as.numeric(x$observed)
-                         if (utils::hasName(x, "expected")) {
-                           x$expected <- as.numeric(x$expected)
-                         }
-                         x <- x[order(x[[sort_by]], decreasing = !isTRUE(sort_asc)), ]
-                         return(x)
-                       })
   input_call <- .rba_httr(httr = "get",
                           url = .rba_stg("mieaa", "url"),
                           path = sprintf("%s/enrichment_analysis/results/%s/",
                                          .rba_stg("mieaa", "pth"),
                                          job_id),
                           accept = "application/json",
-                          parser = parser_input,
+                          parser = "json->df",
                           save_to = .rba_file("rba_mieaa_info.json"))
 
   ## Call API
@@ -823,19 +810,31 @@ rba_mieaa_enrich <- function(test_set,
                                    min_hits = min_hits,
                                    ref_set = ref_set,
                                    ...)
-  .msg(" -- Step 2/3: Checking for Submitted enrichment job's status every 5 seconds.\n",
-       "    Your submitted job ID is: ", step1$job_id)
-  step2 <- 0L
-  while (step2 != 100L) {
-    if (isTRUE(get("verbose"))) { cat(".") }
-    Sys.sleep(5)
-    step2 <- rba_mieaa_enrich_status(job_id = step1$job_id,
-                                     verbose = FALSE, ...)[["status"]]
+  if (utils::hasName(step1, "job_id")) {
+    .msg("\n -- Step 2/3: Checking for Submitted enrichment job's status every 5 seconds.\n",
+         "    Your submitted job ID is: ", step1$job_id)
+    step2 <- 0L
+    while (step2 != 100L) {
+      if (isTRUE(get("verbose"))) { cat(".") }
+      Sys.sleep(5)
+      step2 <- rba_mieaa_enrich_status(job_id = step1$job_id,
+                                       verbose = FALSE, ...)[["status"]]
+    }
+    .msg("\n -- Step 3/3: Retrieving the results of the finished enrichment job.")
+    step3 <- rba_mieaa_enrich_results(job_id = step1$job_id,
+                                      sort_by = sort_by,
+                                      sort_asc = sort_asc,
+                                      ...)
+    return(step3)
+  } else {
+    if (isTRUE(get("skip_error"))) {
+      return(step1)
+    } else {
+      stop("Step 1 returned invalid results, ",
+           "maybe skip_error is TRUE and the connection encontered errors.",
+           "\n Please run this function again or run the steps manually.",
+           call. = get("diagnostics"))
+    }
   }
-  .msg(" -- Step 3/3: Retrieving the results of the finished enrichment job.")
-  step3 <- rba_mieaa_enrich_results(job_id = step1$job_id,
-                                    sort_by = sort_by,
-                                    sort_asc = sort_asc,
-                                    ...)
-  return(step3)
+
 }

@@ -28,7 +28,7 @@ knitr::opts_chunk$set(echo = TRUE,
                       dev = "png",
                       comment = "#>")
 library(rbioapi)
-rba_options(timeout = 600)
+rba_options(timeout = 600, skip_error = TRUE)
 ```
 
 ------------------------------------------------------------------------
@@ -58,27 +58,30 @@ genes <- c("p53", "BRCA1", "cdk2", "Q99835", "CDC42", "CDK1", "KIF23", "PLK1", "
 
 ## 2 We call reactome analysis with the default parameters
 analyzed <- rba_reactome_analysis(input = genes,
-                                 projection = TRUE,
-                                 p_value = 0.01)
+                                  projection = TRUE,
+                                  p_value = 0.01)
 
 ## 3 As always, we use str() to inspect the resutls
 str(analyzed, 1)
 
-## 4 Note that in the summary element:
+## 4 Note that in the summary element: (analyzed$summary)
 ### 4.a because we provided a simple vector, the analysis type was: over-representation
 ### 4.b You need the token for other rba_reactome_analysis_* functions
-str(analyzed$summary)
 
 ## 5 Analsis results are in the pathways data frame:
 ```
 
 ```{r analysis_results, echo=FALSE}
-DT::datatable(data = jsonlite::flatten(analyzed$pathways),
+if (hasName(analyzed, "pathways")) {
+  DT::datatable(data = jsonlite::flatten(analyzed$pathways),
               options = list(scrollX = TRUE, 
                              paging = TRUE,
                              fixedHeader = TRUE,
                              keys = TRUE,
                              pageLength = 5))
+} else {
+  print("Vignette building failed. It is probably because the web service was down during the building.")
+}
 
 ```
 
@@ -170,12 +173,16 @@ xref_mapping <- rba_reactome_mapping(id = "CD40",
 ```
 
 ```{r xref_mapping_df, echo=FALSE}
-DT::datatable(data = xref_mapping,
+if (is.data.frame(xref_mapping)) {
+  DT::datatable(data = xref_mapping,
               options = list(scrollX = TRUE, 
                              paging = TRUE,
                              fixedHeader = TRUE,
                              keys = TRUE,
                              pageLength = 10))
+} else {
+  print("Vignette building failed. It is probably because the web service was down during the building.")
+}
 ```
 
 ------------------------------------------------------------------------

@@ -28,7 +28,7 @@ knitr::opts_chunk$set(echo = TRUE,
                       dev = "png",
                       comment = "#>")
 library(rbioapi)
-rba_options(timeout = 600)
+rba_options(timeout = 600, skip_error = TRUE)
 ```
 
 ------------------------------------------------------------------------
@@ -83,12 +83,16 @@ enriched <- rba_panther_enrich(genes = genes,
 ```
 
 ```{r enriched_df, echo=FALSE}
-DT::datatable(data = enriched$result,
+if (hasName(enriched, "result")) {
+  DT::datatable(data = enriched$result,
               options = list(scrollX = TRUE, 
                              paging = TRUE,
                              fixedHeader = TRUE,
                              keys = TRUE,
                              pageLength = 10))
+} else {
+  print("Vignette building failed. It is probably because the web service was down during the building.")
+}
 ```
 
 ## Tree grafter {#tree-grafter .heading2}

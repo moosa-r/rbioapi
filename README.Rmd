@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = TRUE,
                       out.width = "100%",
                       comment = "#>")
 library(rbioapi)
-rba_options(timeout = 600)
+rba_options(timeout = 600, skip_error = TRUE)
 ```
 
 <!-- badges: start -->
