@@ -1,5 +1,5 @@
 ---
-title: "2.B: miEEA & rbioapi"
+title: "2.C: miEEA & rbioapi"
 author: "Moosa Rezwani"
 date: "`r Sys.Date()`"
 output:
@@ -12,7 +12,7 @@ output:
     encoding: 'UTF-8'
 
 vignette: >
-  %\VignetteIndexEntry{2.B: miEEA & rbioapi}
+  %\VignetteIndexEntry{2.C: miEEA & rbioapi}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -126,6 +126,16 @@ results <- rba_mieaa_enrich_results(job_id = request$job_id)
 # Convert miRNA accessions {#convert-mirna-accessions .heading2}
 
 miEAA only recognizes miRBASE version 22 accessions. You can use `rba_mieaa_convert_version()` to convert miRNA accession between different miRBASE versions. Also, as stated before, miEAA differentiate between precursor and mature miRNA accessions, to convert between these 2 accession types, use `rba_mieaa_convert_type()`.
+
+------------------------------------------------------------------------
+
+# Links {.heading2}
+
+-   [This article in pkgdown website](https://moosa-r.github.io/rbioapi/articles/rbioapi_mieaa.html "2.B: miEEA & rbioapi")
+
+-   [Functions references in pkgdown website](https://moosa-r.github.io/rbioapi/reference/index.html#section-mieaa-rba-mieaa- "rbioapi reference")
+
+-   [rbioapi vignette index](rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API")
 
 ------------------------------------------------------------------------
 

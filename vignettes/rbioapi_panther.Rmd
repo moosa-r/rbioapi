@@ -1,5 +1,5 @@
 ---
-title: "2.C: PANTHER & rbioapi"
+title: "2.D: PANTHER & rbioapi"
 author: "Moosa Rezwani"
 date: "`r Sys.Date()`"
 output:
@@ -12,7 +12,7 @@ output:
     encoding: 'UTF-8'
     
 vignette: >
-  %\VignetteIndexEntry{2.C: PANTHER & rbioapi}
+  %\VignetteIndexEntry{2.D: PANTHER & rbioapi}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -41,7 +41,7 @@ Directly quoting the the paper published by [PANTHER](http://www.pantherdb.org "
 >
 > (source: Mi, Huaiyu, et al. "Protocol Update for large-scale genome and gene function analysis with the PANTHER classification system (v. 14.0)." *Nature protocols* 14.3 (2019): 703-721)
 
-The provided tools in PANTHER's **RESTful API services** can be divided into 3 broad categories: Mapping genes, retrieving information, and research tools. Herein, we provided a very short introduction; you can always check functions' manuals for detailed guides and examples.
+The available tools in PANTHER's **RESTful API services** can be divided into 3 broad categories: Mapping genes, retrieving information, and research tools. Herein, we provide a very short introduction; you can always check functions' manuals for detailed guides and examples.
 
 ------------------------------------------------------------------------
 
@@ -83,7 +83,7 @@ enriched <- rba_panther_enrich(genes = genes,
 ```
 
 ```{r enriched_df, echo=FALSE}
-if (hasName(enriched, "result")) {
+if (utils::hasName(enriched, "result")) {
   DT::datatable(data = enriched$result,
               options = list(scrollX = TRUE, 
                              paging = TRUE,
@@ -98,6 +98,16 @@ if (hasName(enriched, "result")) {
 ## Tree grafter {#tree-grafter .heading2}
 
 `rba_panther_tree_grafter()` is an equivalent to the "[Graft sequence into PANTHER library of trees](http://www.pantherdb.org/tools/sequenceSearchForm.jsp)" tool.
+
+------------------------------------------------------------------------
+
+# Links {.heading2}
+
+-   [This article in pkgdown website](https://moosa-r.github.io/rbioapi/articles/rbioapi_panther.html "2.C: PANTHER & rbioapi")
+
+-   [Functions references in pkgdown website](https://moosa-r.github.io/rbioapi/reference/index.html#section-enrichr-rba-enrichr- "rbioapi reference")
+
+-   [rbioapi vignette index](rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API")
 
 ------------------------------------------------------------------------
 

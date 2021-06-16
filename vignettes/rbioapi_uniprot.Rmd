@@ -1,5 +1,5 @@
 ---
-title: "2.F: UniProt & rbioapi"
+title: "2.G: UniProt & rbioapi"
 author: "Moosa Rezwani"
 date: "`r Sys.Date()`"
 output:
@@ -12,7 +12,7 @@ output:
     encoding: 'UTF-8'
 
 vignette: >
-  %\VignetteIndexEntry{2.F: UniProt & rbioapi}
+  %\VignetteIndexEntry{2.G: UniProt & rbioapi}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -68,9 +68,9 @@ cd40_search <- rba_uniprot_proteins_search(protein = "CD40 ligand",
 str(cd40_search, 2)
 ```
 
-This is the equivalent of '[advanced search](https://www.uniprot.org/help/advanced_search "UniProtKB advanced search options")' in UniProt web portal. Refer to function `rba_uniprot_proteins_search`'s manual for more information. Remember that in `*_search` functions, you are not required to fill every argument, you can use any combination of arguments you see fit to build your search query.
+This is the equivalent of '[advanced search](https://www.uniprot.org/help/advanced_search "UniProtKB advanced search options")' in UniProt web portal. See function `rba_uniprot_proteins_search`'s manual for more information. Remember that in `*_search` functions, you are not required to fill every argument, you can use any combination of arguments you see fit to build your search query.
 
-The applications of `*_search` variants are not limited to what the title 'search' implies. These functions will also retrieve the search hits in their response; Thus you can use them for mass-retrieving. If you refer to the "argument" section in the functions' manuals, you would see that many arguments accept a vector of values. consider the following examples:
+The applications of `*_search` variants are not limited to what the title 'search' implies. These functions will also retrieve the search hits in their response; Thus you can use them for mass-retrieving. If you see the "argument" section in the functions' manuals, you would see that many arguments accept a vector of values. consider the following examples:
 
 ```{r rba_uniprot_proteins_search1_2}
 ## 1 As the simplest scenario, we can retrieve multiple proteins in one call
@@ -112,7 +112,7 @@ str(multi_prs4, 1)
 
 ## Functions with `*_search` variant
 
-The search variants are not limited to what we showed above. Here is a list of the function that have both a retrieve and search variants. Refer to their manuals for detailed guides and examples.
+The search variants are not limited to the above. Here is a list of the function that have both a retrieve and search variants. See their manuals for detailed guides and examples.
 
 1.  `rba_uniprot_proteins()` & `rba_uniprot_proteins_search()`
 
@@ -134,7 +134,7 @@ The search variants are not limited to what we showed above. Here is a list of t
 
 # UniProt functions categories
 
-In UniProt RESTful API documentation, the endpoints are organized into 5 group. Here are those categories and rbioapi functions that correspond to each one. Refer to the functions' manuals for more details.
+In UniProt RESTful API documentation, the endpoints are organized into 5 group. Here are those categories and rbioapi functions that correspond to each one. See the functions' manuals for more details.
 
 ## Proteins
 
@@ -213,6 +213,16 @@ In UniProt RESTful API documentation, the endpoints are organized into 5 group. 
 -   `rba_uniprot_uniparc_bestguess()`
 
 -   `rba_uniprot_uniparc_sequence()`
+
+------------------------------------------------------------------------
+
+# Links {.heading2}
+
+-   [This article in pkgdown website](https://moosa-r.github.io/rbioapi/articles/rbioapi_uniprot.html "2.F: UniProt & rbioapi")
+
+-   [Functions references in pkgdown website](https://moosa-r.github.io/rbioapi/reference/index.html#section-uniprot-rba-uniprot- "rbioapi reference")
+
+-   [rbioapi vignette index](rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API")
 
 ------------------------------------------------------------------------
 

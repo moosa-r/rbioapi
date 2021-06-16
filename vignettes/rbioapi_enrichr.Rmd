@@ -74,7 +74,7 @@ To enrich your gene-set with Enrichr using rbioapi, you can take two approaches.
 
 ## Approach 1: Using the Wrapper function {#approach-1-using-the-wrapper-function .heading3}
 
-Just fill the arguments of `rba_enrichr` according to the function's manual; Simply provide your gene-set as a character vector and select the libraries.
+Just fill the arguments of `rba_enrichr` according to the function's manual; Simply supply your gene-set as a character vector and select the libraries.
 
 ```{r approach_1}
 # 1 We create a variable with our genes' NCBI IDs
@@ -131,6 +131,16 @@ Some rbioapi Enrichr functions were not covered in this vignette, be sure to che
 -   `rba_enrichr_gene_map()`
 
 -   `rba_enrichr_view_list()`
+
+------------------------------------------------------------------------
+
+# Links {.heading2}
+
+-   [This article in pkgdown website](https://moosa-r.github.io/rbioapi/articles/rbioapi_enrichr.html "https://moosa-r.github.io/rbioapi/articles/rbioapi_enrichr.html")
+
+-   [Functions references in pkgdown website](https://moosa-r.github.io/rbioapi/reference/index.html#section-enrichr-rba-enrichr- "rbioapi reference")
+
+-   [rbioapi vignette index](rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API")
 
 ------------------------------------------------------------------------
 

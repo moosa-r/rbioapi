@@ -1,5 +1,5 @@
 ---
-title: "2.G: JASPAR & rbioapi"
+title: "2.B: JASPAR & rbioapi"
 author: "Moosa Rezwani"
 date: "`r Sys.Date()`"
 output:
@@ -12,7 +12,7 @@ output:
     encoding: 'UTF-8'
 
 vignette: >
-  %\VignetteIndexEntry{2.G: JASPAR & rbioapi}
+  %\VignetteIndexEntry{2.B: JASPAR & rbioapi}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -55,7 +55,7 @@ In addition to the latest JASPAR database release (2020), other active releases 
 ```{r release}
 ## Call the function without any arguments to get a list of releases
 releases <- rba_jaspar_releases()
-## Provide a release number for details:
+## Supply a release number for details:
 release_7_info <- rba_jaspar_releases(7)
 ```
 
@@ -157,9 +157,9 @@ JASPAR provides position frequency matrices (PFM) formatted as **Raw PFM**, **JA
 
 2.  The `save_to` argument in this function, and in fact through any rbioapi function can be used in many ways:\
     2.1. save_to = NA: rbioapi will automatically generate a file path under your working directory, save the file in that path , and informs you with a message.\
-    2.2 save_to = file_name without path: rbioapi will save the file with your provided name in your working directory.\
+    2.2 save_to = file_name without path: rbioapi will save the file with your supplied name in your working directory.\
     2.3. save_to = a directory path (without file): rbioapi will save the file with a proper name in that directory.\
-    2.4. save_to = a file path (i.e. ending with .extension): rbioapi will save the file exactly to this path. Make sure that the file extension of the path matches your requested file format. If this was not the case, rbioapi will save the file with the extension provided in the path, but issues a warning to inform you about that.
+    2.4. save_to = a file path (i.e. ending with .extension): rbioapi will save the file exactly to this path. Make sure that the file extension of the path matches your requested file format. If this was not the case, rbioapi will save the file with the extension supplied in the path, but issues a warning to inform you about that.
 
     In any of the aforementioned cases, the file path can be absolute or relative.
 
@@ -218,6 +218,16 @@ insects_tffms <- rba_jaspar_tffm_search(tax_group = "insects")
 TFFM0056 <- rba_jaspar_tffm("TFFM0056.3")
 str(TFFM0056)
 ```
+
+------------------------------------------------------------------------
+
+# Links {.heading2}
+
+-   [This article in pkgdown website](https://moosa-r.github.io/rbioapi/articles/rbioapi_jaspar.html "2.G: JASPAR & rbioapi")
+
+-   [Functions references in pkgdown website](https://moosa-r.github.io/rbioapi/reference/index.html#section-jaspar-rba-jaspar- "rbioapi reference")
+
+-   [rbioapi vignette index](rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API")
 
 ------------------------------------------------------------------------
 

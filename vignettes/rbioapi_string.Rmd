@@ -1,5 +1,5 @@
 ---
-title: "2.E: STRING & rbioapi"
+title: "2.F: STRING & rbioapi"
 author: "Moosa Rezwani"
 date: "`r Sys.Date()`"
 output:
@@ -12,7 +12,7 @@ output:
     encoding: 'UTF-8'
 
 vignette: >
-  %\VignetteIndexEntry{2.E: STRING & rbioapi}
+  %\VignetteIndexEntry{2.F: STRING & rbioapi}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -83,7 +83,7 @@ if (is.data.frame(proteins_mapped)) {
 
 You can retrieve a list of interactions that the proteins in your set have with each other along with the STRING annotations of each interaction. You may filter the results by using required_score and network_type arguments.
 
-Refer to the 'values' section `rba_string_interactions_network` function's manual for information on the returned columns.
+See the 'values' section `rba_string_interactions_network` function's manual for information on the returned columns.
 
 ```{r rba_string_interactions_network}
 int_net <- rba_string_interactions_network(ids = proteins_mapped,
@@ -113,7 +113,7 @@ In the last example, we only obtained the interaction which our proteins have am
 To do that, we can use `rba_string_interaction_partners`:
 
 ```{r rba_string_interaction_partners}
-## Although we provide only one protein ID here (CD40 protein), you can provide a vector of proteins as the input
+## Although we supply only one protein ID here (CD40 protein), you can provide a vector of proteins as the input
 int_partners <- rba_string_interaction_partners(ids = "9606.ENSP00000361359",
                                                species = 9606,
                                                required_score = 900)
@@ -136,7 +136,7 @@ if (is.data.frame(int_partners)) {
 
 # Get network image of a protein set {#get-network-image-of-a-protein-set .heading2}
 
-Let's go back to the interaction network. As you must have seen in the STRING webpages, STRING plots the interaction network of your proteins with many customizations available. You can also do that with STRING API services. `rba_string_network_image` function is very flexible and you have a variety of options; Refer to the function's manual.
+Let's go back to the interaction network. As you must have seen in the STRING webpages, STRING plots the interaction network of your proteins with many customizations available. You can also do that with STRING API services. `rba_string_network_image` function is very flexible and you have a variety of options; see the function's manual.
 
 ```{r rba_string_network_image_ex1, fig.show='hide'}
 ## Example 1:
@@ -180,11 +180,11 @@ if (is.array(graph_2)) {
 
 # Enrichment using STRING {#enrichment-using-string .heading2}
 
-STRING let you perform two types of enrichments. Refer to [STRING's paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3531103/ "STRING v9.1: protein-protein interaction networks, with increased coverage and integration") for more information.
+STRING let you perform two types of enrichments. See [STRING's paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3531103/ "STRING v9.1: protein-protein interaction networks, with increased coverage and integration") for more information.
 
 ## Functional enrichment {#functional-enrichment .heading3}
 
-The first type is the conventional type, which statistically tests your provided gene sets against some sets of annotation. Currently, STRING supports Gene Ontology, KEGG pathways, UniProt Keywords, PubMed publications, Pfam domains, InterPro domains, and SMART domains. ([source](https://version11.string-db.org/help/api/#getting-functional-enrichment "STRING API - Getting functional enrichment")).
+The first type is the conventional type, which statistically tests your supplied gene sets against some sets of annotation. Currently, STRING supports Gene Ontology, KEGG pathways, UniProt Keywords, PubMed publications, Pfam domains, InterPro domains, and SMART domains. ([source](https://version11.string-db.org/help/api/#getting-functional-enrichment "STRING API - Getting functional enrichment")).
 
 ```{r rba_string_enrichment}
 enriched <- rba_string_enrichment(ids = proteins_mapped,
@@ -238,8 +238,19 @@ Some rbioapi STRING functions were not covered in this vignette, please check th
 
 -   `rba_string_version()`
 
+------------------------------------------------------------------------
+
+# Links {.heading2}
+
+-   [This article in pkgdown website](https://moosa-r.github.io/rbioapi/articles/rbioapi_string.html "2.E: STRING & rbioapi")
+
+-   [Functions references in pkgdown website](https://moosa-r.github.io/rbioapi/reference/index.html#section-string-rba-string- "rbioapi reference")
+
+-   [rbioapi vignette index](rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API")
+
 # Session info {#session-info .heading2}
 
 ```{r sessionInfo, echo=FALSE}
 sessionInfo()
 ```
+

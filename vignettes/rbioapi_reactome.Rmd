@@ -1,5 +1,5 @@
 ---
-title: "2.D: Reactome & rbioapi"
+title: "2.E Reactome & rbioapi"
 author: "Moosa Rezwani"
 date: "`r Sys.Date()`"
 output:
@@ -12,7 +12,7 @@ output:
     encoding: 'UTF-8'
 
 vignette: >
-  %\VignetteIndexEntry{2.D: Reactome & rbioapi}
+  %\VignetteIndexEntry{2.E: Reactome & rbioapi}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -49,7 +49,7 @@ Before continuing reading this article, it is a good idea to read [Reactome Data
 
 # Reactome analysis services {#reactome-analysis-services .heading2}
 
-This section mostly revolves around `rba_reactome_analysis()` function. So, naturally, we will start with that. As explained in the function's manual, you have considerable freedom in providing the main input for this function; You can provide an R object (as a data frame, matrix, or simple vector), a URL, or a local file path. Note that the type of analysis will be decided based on whether your input is 1-dimensional or 2-dimensional. This has been explained in detail in the manual of `rba_reactome_analysis()`, so refer to that for more information.\
+This section mostly revolves around `rba_reactome_analysis()` function. So, naturally, we will start with that. As explained in the function's manual, you have considerable freedom in providing the main input for this function; You can supply an R object (as a data frame, matrix, or simple vector), a URL, or a local file path. Note that the type of analysis will be decided based on whether your input is 1-dimensional or 2-dimensional. This has been explained in detail in the manual of `rba_reactome_analysis()`, see that for more information.\
 `rba_reactome_analysis()` is the API equivalent of Reactome's [analyse gene list](https://reactome.org/PathwayBrowser/#TOOL=AT) tool. You can see that the function's arguments correspond to what would you choose in the webpage's wizard.
 
 ```{r rba_reactome_analysis}
@@ -65,14 +65,14 @@ analyzed <- rba_reactome_analysis(input = genes,
 str(analyzed, 1)
 
 ## 4 Note that in the summary element: (analyzed$summary)
-### 4.a because we provided a simple vector, the analysis type was: over-representation
+### 4.a because we supplied a simple vector, the analysis type was: over-representation
 ### 4.b You need the token for other rba_reactome_analysis_* functions
 
 ## 5 Analsis results are in the pathways data frame:
 ```
 
 ```{r analysis_results, echo=FALSE}
-if (hasName(analyzed, "pathways")) {
+if (utils::hasName(analyzed, "pathways")) {
   DT::datatable(data = jsonlite::flatten(analyzed$pathways),
               options = list(scrollX = TRUE, 
                              paging = TRUE,
@@ -123,7 +123,7 @@ rbioapi functions that correspond to Reactome content services are those startin
 
 ## Retrieve any object from Reactome knowledge-base
 
-Using `rba_reactome_query()`, you can retrieve any object from Reactome knowledge-base. In simpler terms, what I mean by the object is roughly anything that Reactome associated an ID to it. This can range from a person's entry to proteins, reactions, pathways, species, and many more! You can explore [Reactome's data schema](https://reactome.org/content/schema/DatabaseObject "Graph Database :: Data Schema") to learn about Reactome knowledge-base objects and their organization. Here are some examples, note that you are not limited to only one ID per query. You can use a vector of inputs, the only limitation is that when you provide more than one ID, you cannot have `enhanced = TRUE`.
+Using `rba_reactome_query()`, you can retrieve any object from Reactome knowledge-base. In simpler terms, what I mean by the object is roughly anything that Reactome associated an ID to it. This can range from a person's entry to proteins, reactions, pathways, species, and many more! You can explore [Reactome's data schema](https://reactome.org/content/schema/DatabaseObject "Graph Database :: Data Schema") to learn about Reactome knowledge-base objects and their organization. Here are some examples, note that you are not limited to only one ID per query. You can use a vector of inputs, the only limitation is that when you supply more than one ID, you cannot have `enhanced = TRUE`.
 
 ```{r rba_reactome_query_ex1}
 ## 1 query a pathway Entry
@@ -155,7 +155,7 @@ str(protein, 1)
 As you can see in the second example usage of we used Reactome's dbID `66247` to query CD40 protein. How did we obtain that in the first place? You can use `rba_reactome_xref` to map any cross-reference (external) IDs to Reactome IDs.
 
 ```{r rba_reactome_xref}
-## 1 We provide HGNC ID to find what is the corresponding database ID in Reactome
+## 1 We Supply HGNC ID to find what is the corresponding database ID in Reactome
 xref_protein <- rba_reactome_xref("CD40")
 ## 2 As always use str() to inspect the output's structure
 str(xref_protein, 1)
@@ -189,7 +189,7 @@ if (is.data.frame(xref_mapping)) {
 
 ## See also in Functions' manuals {#see-also-in-functions-manuals .heading2}
 
-There are still more rbioapi f Reactome content functions that were not covered in this vignette. Here is a brief overview, refer to the functions' manual for detailed guides and examples.
+There are still more rbioapi f Reactome content functions that were not covered in this vignette. Here is a brief overview, see the functions' manual for detailed guides and examples.
 
 ### Retrieve Reactome Database information
 
@@ -260,6 +260,16 @@ There are still more rbioapi f Reactome content functions that were not covered 
 -   `rba_reactome_exporter_reaction()`
 
 -   `rba_reactome_exporter_event()`
+
+------------------------------------------------------------------------
+
+# Links {.heading2}
+
+-   [This article in pkgdown website](https://moosa-r.github.io/rbioapi/articles/rbioapi_reactome.html "2.D: Reactome & rbioapi")
+
+-   [Functions references in pkgdown website](https://moosa-r.github.io/rbioapi/reference/index.html#section-reactome-analysis-services-rba-reactome- "rbioapi reference")
+
+-   [rbioapi vignette index](rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API")
 
 ------------------------------------------------------------------------
 
