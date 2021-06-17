@@ -22,10 +22,10 @@ test_that(".rba_skeleton works", {
                        parser = "json->list")
   skip_error <- TRUE
   expect_regex(obj = .rba_skeleton(input_call = request),
-               pattern = "404")
+               pattern = "HTTP")
   skip_error <- FALSE
   expect_error(obj = .rba_skeleton(input_call = request),
-               regexp = "404")
+               regexp = "HTTP")
 
   # Invisibly returns NULL when the parser is Null
   request <- .rba_httr(httr = "get",
