@@ -63,11 +63,16 @@ Each of the services has its dedicated vignette article. However, In this articl
 
 You can install the stable released version of rbioapi from [CRAN](https://CRAN.R-project.org) with:
 
-`{#install_cran .r} install.packages("rbioapi")`
+```{r install_cran, eval=FALSE}
+install.packages("rbioapi")
+```
 
 However, the CRAN version is released at most once every 1-2 months, You can install the development version from [GitHub](https://github.com/) with:
 
-`{#install_github .r} install.packages("remotes") remotes::install_github("moosa-r/rbioapi")`
+```{r install_github, eval=FALSE}
+install.packages("remotes")
+remotes::install_github("moosa-r/rbioapi")
+```
 
 # Design philosophy of rbioapi
 
@@ -216,3 +221,4 @@ Each supported service has a dedicated vignette article. Make sure to check thos
 ```{r sessionInfo, echo=FALSE}
 sessionInfo()
 ```
+
