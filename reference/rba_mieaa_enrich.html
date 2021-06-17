@@ -202,7 +202,7 @@ precursor miRNA accession. A mixture of both is not accepted.</p></li>
     </tr>
     <tr>
       <th>mirna_type</th>
-      <td><p>Type of your provided miRNA accession. either "mature"
+      <td><p>Type of your supplied miRNA accession. either "mature"
 or "precursor".</p></td>
     </tr>
     <tr>
@@ -233,10 +233,10 @@ or NCBI taxon ID of one of the following species:</p><ol>
       <td><p>one or multiple Category names to be used for miRNA set
 enrichment analysis. Note that</p><ul>
 <li><p>Available categories varies based on your chosen specie and if
- your provided miRNA type is mature or precursor. Use
+ your supplied miRNA type is mature or precursor. Use
  <code><a href='rba_mieaa_cats.html'>rba_mieaa_cats</a></code> to retrieve a list of available category
  names for a given specie and miRNA type.</p></li>
-<li><p>If you provide NULL, the analysis will be performed on all of the
+<li><p>If you supply NULL, the analysis will be performed on all of the
  available categories.</p></li>
 </ul></td>
     </tr>
@@ -261,7 +261,7 @@ results.</p></td>
     <tr>
       <th>min_hits</th>
       <td><p>(numeric) How many miRNA should a sub-category have from
-your provided test-list to be included in the results? (default is 2)</p></td>
+your supplied test-list to be included in the results? (default is 2)</p></td>
     </tr>
     <tr>
       <th>ref_set</th>
@@ -282,8 +282,8 @@ order. If FALSE, the results will be sorted in descending order.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>rbioapi option(s). Refer to <code><a href='rba_options.html'>rba_options</a></code>'s
-arguments documentation for more information on available options.</p></td>
+      <td><p>rbioapi option(s). See <code><a href='rba_options.html'>rba_options</a></code>'s
+arguments manual for more information on available options.</p></td>
     </tr>
     </table>
 
@@ -295,7 +295,7 @@ arguments documentation for more information on available options.</p></td>
     <p>This function will call other rba_mieaa_*** functions with the following
   order:</p><ol>
 <li><p>Call <code><a href='rba_mieaa_enrich_submit.html'>rba_mieaa_enrich_submit</a></code> to Submit an enrichment
-    analysis request to miEAA servers, using your provided miRNA lists and
+    analysis request to miEAA servers, using your supplied miRNA lists and
     other arguments.</p></li>
 <li><p>Once your job was successfully submitted, it will call
     <code><a href='rba_mieaa_enrich_status.html'>rba_mieaa_enrich_status</a></code> every 5 seconds, to check the
@@ -303,7 +303,7 @@ arguments documentation for more information on available options.</p></td>
     finished and the results are available.</p></li>
 <li><p>Call <code><a href='rba_mieaa_enrich_results.html'>rba_mieaa_enrich_results</a></code> to retrieve the results
     of your enrichment analysis.</p></li>
-</ol><p>See each function's documentation for more details.</p>
+</ol><p>See each function's manual for more details.</p>
     <h2 class="hasAnchor" id="corresponding-api-resources"><a class="anchor" href="#corresponding-api-resources"></a>Corresponding API Resources</h2>
 
     

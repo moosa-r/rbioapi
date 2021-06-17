@@ -179,7 +179,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>ids</th>
-      <td><p>Your protein ID(s). It is strongly recommended to provide
+      <td><p>Your protein ID(s). It is strongly recommended to supply
 STRING IDs. See <code><a href='rba_string_map_ids.html'>rba_string_map_ids</a></code> for more information.</p></td>
     </tr>
     <tr>
@@ -189,14 +189,14 @@ STRING IDs. See <code><a href='rba_string_map_ids.html'>rba_string_map_ids</a></
     </tr>
     <tr>
       <th>...</th>
-      <td><p>rbioapi option(s). Refer to <code><a href='rba_options.html'>rba_options</a></code>'s
-arguments documentation for more information on available options.</p></td>
+      <td><p>rbioapi option(s). See <code><a href='rba_options.html'>rba_options</a></code>'s
+arguments manual for more information on available options.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with bit scores between your provided proteins and
+    <p>A data frame with bit scores between your supplied proteins and
   their self-hit. To Reduce the transferred data, STRING returns only one
   half of the similarity matrix; This will not pose a problem because
   similarity matrix is symmetrical.</p>
@@ -204,7 +204,7 @@ arguments documentation for more information on available options.</p></td>
 
     <p>Note that this function will retrieve similarity scores of different
   proteins "within the same species". To Get a similarity scores of a given
-  protein and it's closets homologous proteins in other species, refer to
+  protein and it's closets homologous proteins in other species, see
   <code><a href='rba_string_homology_inter.html'>rba_string_homology_inter</a></code>.
   <br /> Similarity matrix is imported -by STRING- from:
   <a href='https://cube.univie.ac.at/resources/simap'>Similarity Matrix of

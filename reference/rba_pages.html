@@ -42,7 +42,7 @@
 <meta property="og:title" content="Get Multiple Pages of a Paginated Resource — rba_pages" />
 <meta property="og:description" content="Some resources return paginated results, meaning that you have to make
   separate calls for each page. Using this function, you can iterate over
-  up to 100 pages. Just provide your rbioapi function and change to page
+  up to 100 pages. Just supply your rbioapi function and change to page
   argument to &quot;pages:start_page:end_page&quot;, for example &quot;pages:1:5&quot;." />
 
 
@@ -168,7 +168,7 @@
     <div class="ref-description">
     <p>Some resources return paginated results, meaning that you have to make
   separate calls for each page. Using this function, you can iterate over
-  up to 100 pages. Just provide your rbioapi function and change to page
+  up to 100 pages. Just supply your rbioapi function and change to page
   argument to "pages:start_page:end_page", for example "pages:1:5".</p>
     </div>
 
@@ -179,12 +179,12 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>input_call</th>
-      <td><p>A quoted call. Provide a regular rbioapi function call,
+      <td><p>A quoted call. supply a regular rbioapi function call,
 but with two differences:</p><ol>
 <li><p>: Wrap a quote() around it. meaning: quote(rba_example())</p></li>
 <li><p>: Set the argument that corresponds to the page number to
 "pages:start_page:end_page", for example "pages:1:5".</p></li>
-</ol><p>refer to the "examples" section to learn more.</p></td>
+</ol><p>See the "examples" section to learn more.</p></td>
     </tr>
     <tr>
       <th>...</th>

@@ -44,7 +44,7 @@
 providing their
 NCBI taxonomic
   identifiers. also, you can explicitly retrieve other nodes in relation
-  to your provided node's hierarchy in
+  to your supplied node's hierarchy in
   UniProt Taxonomy database." />
 
 
@@ -172,7 +172,7 @@ NCBI taxonomic
 providing their
 <a href='https://www.uniprot.org/help/taxonomic_identifier'>NCBI taxonomic
   identifiers</a>. also, you can explicitly retrieve other nodes in relation
-  to your provided node's hierarchy in
+  to your supplied node's hierarchy in
   <a href='https://www.uniprot.org/help/taxonomy'>UniProt Taxonomy database</a>.</p>
     </div>
 
@@ -197,7 +197,7 @@ identifier(s)</a></p></td>
     <tr>
       <th>hierarchy</th>
       <td><p>Retrieve taxonomic nodes that have specific hierarchical
-relation to your provided taxonomic node. should be one of: "children",
+relation to your supplied taxonomic node. should be one of: "children",
 "parent" or "siblings".</p></td>
     </tr>
     <tr>
@@ -207,26 +207,26 @@ to parents, siblings and children nodes.</p></td>
     </tr>
     <tr>
       <th>page_size</th>
-      <td><p>(numeric) Only when hierarchy is provided. hierarchy
+      <td><p>(numeric) Only when hierarchy is supplied. hierarchy
 information may be very long, thus UniProt API will paginate the results,
 you may use this argument to control the pagination. maximum value is 200.</p></td>
     </tr>
     <tr>
       <th>page_number</th>
-      <td><p>(numeric) Only when hierarchy is provided. hierarchy
+      <td><p>(numeric) Only when hierarchy is supplied. hierarchy
 information may be very long, thus UniProt API will paginate the results,
 you may use this argument to control the pagination.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>rbioapi option(s). Refer to <code><a href='rba_options.html'>rba_options</a></code>'s
-arguments documentation for more information on available options.</p></td>
+      <td><p>rbioapi option(s). See <code><a href='rba_options.html'>rba_options</a></code>'s
+arguments manual for more information on available options.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a list containing your provided nodes or their related nodes
+    <p>a list containing your supplied nodes or their related nodes
   taxonomic information.</p>
     <h2 class="hasAnchor" id="corresponding-api-resources"><a class="anchor" href="#corresponding-api-resources"></a>Corresponding API Resources</h2>
 

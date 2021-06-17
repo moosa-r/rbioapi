@@ -44,9 +44,9 @@
   database. Using this function, you can retrieve IntAct information of
   a protein(s) in two scenarios:
 If endpoint = &quot;details&quot; or &quot;summary&quot;: Retrieve a detailed/summary
-    information of your provided protein accession(s) from IntAct database.
+    information of your supplied protein accession(s) from IntAct database.
 If endpoint = &quot;pathway&quot;, Retrieve a list of Reactome pathways which
-  include your provided protein accession. Pathways with the class
+  include your supplied protein accession. Pathways with the class
   &quot;TopLevelPathway&quot; will be excluded.
 
 " />
@@ -176,9 +176,9 @@ If endpoint = &quot;pathway&quot;, Retrieve a list of Reactome pathways which
   database. Using this function, you can retrieve IntAct information of
   a protein(s) in two scenarios:</p><ol>
 <li><p>If endpoint = "details" or "summary": Retrieve a detailed/summary
-    information of your provided protein accession(s) from IntAct database.</p></li>
+    information of your supplied protein accession(s) from IntAct database.</p></li>
 <li><p>If endpoint = "pathway", Retrieve a list of Reactome pathways which
-  include your provided protein accession. Pathways with the class
+  include your supplied protein accession. Pathways with the class
   "TopLevelPathway" will be excluded.</p></li>
 </ol>
 
@@ -198,14 +198,14 @@ If endpoint = &quot;pathway&quot;, Retrieve a list of Reactome pathways which
     <tr>
       <th>proteins</th>
       <td><p>Uniprot proteins accession(s). If endpoint = "pathway",
-only a single protein accession can be provided.</p></td>
+only a single protein accession can be supplied.</p></td>
     </tr>
     <tr>
       <th>endpoint</th>
       <td><p>Can be one of:</p><ol>
-<li><p>"details": To return a detailed information of your provided
+<li><p>"details": To return a detailed information of your supplied
 protein(s) accession.</p></li>
-<li><p>"summary": To return a summary of your provided protein(s) accession</p></li>
+<li><p>"summary": To return a summary of your supplied protein(s) accession</p></li>
 <li><p>"pathway": To return a list of pathways containing the interacting
 molecules (excluding TopLevelPathway class).</p></li>
 </ol></td>
@@ -218,21 +218,21 @@ If TRUE, pathways without diagram will be excluded. (default = FALSE)</p></td>
     <tr>
       <th>species</th>
       <td><p>Only when "endpoint = "pathway", The scientific name
-of the species to search for the pathways. Refer to
+of the species to search for the pathways. See
  <code><a href='rba_reactome_species.html'>rba_reactome_species</a></code> or
  <a href='https://reactome.org/content/schema/objects/Species'>Reactome
  Data Schema: Entries: Species</a>.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>rbioapi option(s). Refer to <code><a href='rba_options.html'>rba_options</a></code>'s
-arguments documentation for more information on available options.</p></td>
+      <td><p>rbioapi option(s). See <code><a href='rba_options.html'>rba_options</a></code>'s
+arguments manual for more information on available options.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>List which it's content varies based on the  provided "endpoint"
+    <p>List which it's content varies based on the  supplied "endpoint"
   argument.</p>
     <h2 class="hasAnchor" id="corresponding-api-resources"><a class="anchor" href="#corresponding-api-resources"></a>Corresponding API Resources</h2>
 

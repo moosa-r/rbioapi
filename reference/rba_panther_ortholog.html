@@ -186,14 +186,14 @@
     <tr>
       <th>genes</th>
       <td><p>Character vector of genes identifiers with maximum length of
-10 or only one if seq_pos is provided. Can be any of: Ensemble gene ID,
+10 or only one if seq_pos is supplied. Can be any of: Ensemble gene ID,
 Ensemble protein ID, Ensemble transcript ID, Entrez gene ID, gene symbol,
 NCBI GI, HGNC ID, International protein index ID, NCBI UniGene ID,
 UniProt accession and/or UniProt ID.</p></td>
     </tr>
     <tr>
       <th>organism</th>
-      <td><p>(numeric) NCBI taxon ID of the organism of your provided
+      <td><p>(numeric) NCBI taxon ID of the organism of your supplied
 genes. run <code><a href='rba_panther_info.html'>rba_panther_info</a></code> with argument
 'what = "organisms"' to get a list of PANTHER's supported organisms.</p></td>
     </tr>
@@ -211,18 +211,18 @@ get a list of PANTHER's supported organisms.</p></td>
     <tr>
       <th>seq_pos</th>
       <td><p>(Numeric) A position in the protein's sequence of the
-provided gene. should be in the range of the protein's length.</p></td>
+supplied gene. should be in the range of the protein's length.</p></td>
     </tr>
     <tr>
       <th>include_msa</th>
-      <td><p>(Logical) Only if a sequence position is provided,
+      <td><p>(Logical) Only if a sequence position is supplied,
 should MSA (Multiple Sequence Alignment) information be included in the
 results?</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>rbioapi option(s). Refer to <code><a href='rba_options.html'>rba_options</a></code>'s
-arguments documentation for more information on available options.</p></td>
+      <td><p>rbioapi option(s). See <code><a href='rba_options.html'>rba_options</a></code>'s
+arguments manual for more information on available options.</p></td>
     </tr>
     </table>
 
