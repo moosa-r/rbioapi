@@ -122,7 +122,7 @@
 <div id="rbioapi-user-friendly-r-interface-to-biologic-web-services-api" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#rbioapi-user-friendly-r-interface-to-biologic-web-services-api" class="anchor"></a>rbioapi: User-Friendly R Interface to Biologic Web Services’ API</h1></div>
-<p>Moosa Rezwani 2021-06-17</p>
+<p>Moosa Rezwani 2021-06-21</p>
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
 
@@ -142,21 +142,21 @@
 <p>On CRAN (Stable) version: (<a href="https://cran.r-project.org/package=rbioapi" class="uri">https://cran.r-project.org/package=rbioapi</a>)</p>
 <ol>
 <li>
-<a href="https://maayanlab.cloud/Enrichr/" title="Enrichr">Enrichr</a> (<a href="rbioapi_enrichr.html" title="rbioapi &amp; Enrichr vignette article">rbioapi vignette article</a>) <sup>(new)</sup>
+<a href="https://maayanlab.cloud/Enrichr/" title="Enrichr">Enrichr</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html" title="rbioapi &amp; Enrichr vignette article">rbioapi vignette article</a>) <sup>(new)</sup>
 </li>
 <li>
-<a href="http://jaspar.genereg.net/" title="JASPAR - A database of transcription factor binding profiles">JASPAR</a> (<a href="rbioapi_jaspar.html" title="rbioapi &amp; Enrichr vignette article">rbioapi vignette article</a>) <sup>(new)</sup>
+<a href="http://jaspar.genereg.net/" title="JASPAR - A database of transcription factor binding profiles">JASPAR</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html" title="rbioapi &amp; Enrichr vignette article">rbioapi vignette article</a>) <sup>(new)</sup>
 </li>
 <li>
-<a href="https://ccb-compute2.cs.uni-saarland.de/mieaa2" title="miRNA Enrichment Analysis and Annotation Tool (miEAA)">miEAA</a> (<a href="rbioapi_mieaa.html" title="rbioapi &amp; miEAA vignette article">rbioapi vignette article</a>)</li>
+<a href="https://ccb-compute2.cs.uni-saarland.de/mieaa2" title="miRNA Enrichment Analysis and Annotation Tool (miEAA)">miEAA</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html" title="rbioapi &amp; miEAA vignette article">rbioapi vignette article</a>)</li>
 <li>
-<a href="http://www.pantherdb.org" title="Protein Analysis THrough Evolutionary Relationships (PANTHER)">PANTHER</a> (<a href="rbioapi_panther.html" title="rbioapi &amp; PANTHER vignette article">rbioapi vignette article</a>)</li>
+<a href="http://www.pantherdb.org" title="Protein Analysis THrough Evolutionary Relationships (PANTHER)">PANTHER</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_panther.html" title="rbioapi &amp; PANTHER vignette article">rbioapi vignette article</a>)</li>
 <li>
-<a href="https://reactome.org/">Reactome</a> (<a href="rbioapi_reactome.html" title="rbioapi &amp; Reactome vignette article">rbioapi vignette article</a>)</li>
+<a href="https://reactome.org/">Reactome</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_reactome.html" title="rbioapi &amp; Reactome vignette article">rbioapi vignette article</a>)</li>
 <li>
-<a href="https://string-db.org/" title="STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis">STRING</a> (<a href="rbioapi_string.html" title="rbioapi &amp; STRING vignette article">rbioapi vignette article</a>)</li>
+<a href="https://string-db.org/" title="STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis">STRING</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_string.html" title="rbioapi &amp; STRING vignette article">rbioapi vignette article</a>)</li>
 <li>
-<a href="https://www.uniprot.org" title="Universal Protein Resource (UniProt)">UniProt</a> (<a href="rbioapi_uniprot.html" title="rbioapi &amp; UniProt vignette article">rbioapi vignette article</a>)</li>
+<a href="https://www.uniprot.org" title="Universal Protein Resource (UniProt)">UniProt</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html" title="rbioapi &amp; UniProt vignette article">rbioapi vignette article</a>)</li>
 </ol>
 <p>Only on Github (Developmental) version: (<a href="https://github.com/moosa-r/rbioapi/" class="uri">https://github.com/moosa-r/rbioapi/</a>):</p>
 <ol>
@@ -193,7 +193,7 @@
 <a href="#naming-conventions" class="anchor"></a>Naming conventions</h1>
 <p>To make the namespace more organized, functions has been named with the following pattern:</p>
 <blockquote>
-<p>rba_<br><span class="math display"><em>s</em><em>e</em><em>r</em><em>v</em><em>i</em><em>c</em><em>e</em>_<em>n</em><em>a</em><em>m</em><em>e</em></span><br>_<br><span class="math display"><em>r</em><em>e</em><em>s</em><em>o</em><em>u</em><em>r</em><em>c</em><em>e</em>_<em>n</em><em>a</em><em>m</em><em>e</em></span><br></p>
+<p>rba_[service_name]_[resource_name]</p>
 </blockquote>
 <p>For example, <code><a href="reference/rba_string_version.html">rba_string_version()</a></code> will call <a href="https://string-db.org/" title="STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis">STRING</a>’s version resource.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -339,7 +339,7 @@
 <div id="how-and-what-to-cite" class="section level1">
 <h1 class="hasAnchor">
 <a href="#how-and-what-to-cite" class="anchor"></a>How and what to cite?</h1>
-<p>rbioapi is an interface between you and other databases and services. Thus, if you have used rbioapi in published research, kindly <strong>in addition to citing rbioapi, <u><em>make sure to fully and properly cite the databases/services you have used</em></u></strong>. Suggested citations have been added in the functions’ manuals, under the “references” section; Nevertheless, it is the user’s responsibility to check for proper citations and to properly cite the database/services that they have used.</p>
+<p>rbioapi is an interface between you and other databases and services. Thus, if you have used rbioapi in published research, kindly <strong>in addition to citing rbioapi,</strong> <u><em>make sure to fully and properly cite the databases/services you have used</em></u>. Suggested citations have been added in the functions’ manuals, under the “references” section; Nevertheless, it is the user’s responsibility to check for proper citations and to properly cite the database/services that they have used.</p>
 </div>
 <div id="code-of-conduct" class="section level1">
 <h1 class="hasAnchor">
@@ -351,21 +351,21 @@
 <a href="#what-next" class="anchor"></a>What next?</h1>
 <p>Each supported service has a dedicated vignette article. Make sure to check those too.</p>
 <ol>
-<li><a href="https://moosa-r.github.io/rbioapi/articles/rbioapi_enrichr.html" title="rbioapi &amp; Enrichr vignette">Enrichr</a></li>
-<li><a href="https://moosa-r.github.io/rbioapi/articles/rbioapi_jaspar.html" title="rbioapi &amp; JASPAR vignette article">JASPAR</a></li>
-<li><a href="https://moosa-r.github.io/rbioapi/articles/rbioapi_mieaa.html" title="rbioapi &amp; miEAA vignette article">miEAA</a></li>
-<li><a href="https://moosa-r.github.io/rbioapi/articles/rbioapi_panther.html" title="rbioapi &amp; PANTHER vignette article">PANTHER</a></li>
-<li><a href="https://moosa-r.github.io/rbioapi/articles/rbioapi_reactome.html" title="rbioapi &amp; Reactome vignette article">Reactome</a></li>
-<li><a href="https://moosa-r.github.io/rbioapi/articles/rbioapi_string.html" title="rbioapi &amp; STRING vignette article">STRING</a></li>
-<li><a href="https://moosa-r.github.io/rbioapi/articles/rbioapi_uniprot.html" title="rbioapi &amp; UniProt vignette article">UniProt</a></li>
+<li><a href="https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html" title="rbioapi &amp; Enrichr vignette">Enrichr</a></li>
+<li><a href="https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html" title="rbioapi &amp; JASPAR vignette article">JASPAR</a></li>
+<li><a href="https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html" title="rbioapi &amp; miEAA vignette article">miEAA</a></li>
+<li><a href="https://rbioapi.moosa-r.com/articles/rbioapi_panther.html" title="rbioapi &amp; PANTHER vignette article">PANTHER</a></li>
+<li><a href="https://rbioapi.moosa-r.com/articles/rbioapi_reactome.html" title="rbioapi &amp; Reactome vignette article">Reactome</a></li>
+<li><a href="https://rbioapi.moosa-r.com/articles/rbioapi_string.html" title="rbioapi &amp; STRING vignette article">STRING</a></li>
+<li><a href="https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html" title="rbioapi &amp; UniProt vignette article">UniProt</a></li>
 </ol>
 </div>
 <div id="links" class="section level1">
 <h1 class="hasAnchor">
 <a href="#links" class="anchor"></a>Links</h1>
 <ul>
-<li><p><a href="https://moosa-r.github.io/rbioapi/articles/rbioapi.html" title="rbioapi: User-Friendly R Interface to Biologic Web Services' API">This article in pkgdown website</a></p></li>
-<li><p><a href="https://moosa-r.github.io/rbioapi/reference/index.html" title="rbioapi reference">Functions references in pkgdown website</a></p></li>
+<li><p><a href="https://rbioapi.moosa-r.com/articles/rbioapi.html" title="rbioapi: User-Friendly R Interface to Biologic Web Services' API">This article in pkgdown website</a></p></li>
+<li><p><a href="https://rbioapi.moosa-r.com/reference/index.html" title="rbioapi reference">Functions references in pkgdown website</a></p></li>
 </ul>
 <div id="session-info" class="section level2">
 <h2 class="hasAnchor">
@@ -388,7 +388,7 @@
 <span id="cb11-16"><a href="#cb11-16"></a><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span id="cb11-17"><a href="#cb11-17"></a><span class="co">#&gt; </span></span>
 <span id="cb11-18"><a href="#cb11-18"></a><span class="co">#&gt; other attached packages:</span></span>
-<span id="cb11-19"><a href="#cb11-19"></a><span class="co">#&gt; [1] rbioapi_0.7.3</span></span>
+<span id="cb11-19"><a href="#cb11-19"></a><span class="co">#&gt; [1] rbioapi_0.7.4</span></span>
 <span id="cb11-20"><a href="#cb11-20"></a><span class="co">#&gt; </span></span>
 <span id="cb11-21"><a href="#cb11-21"></a><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span id="cb11-22"><a href="#cb11-22"></a><span class="co">#&gt;  [1] digest_0.6.27     R6_2.5.0          jsonlite_1.7.2    magrittr_2.0.1   </span></span>

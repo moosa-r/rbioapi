@@ -1,354 +1,354 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/index.html</loc>
+    <loc>https://rbioapi.moosa-r.com/index.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_connection_test.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_connection_test.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_enrichr.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_enrichr.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_enrichr_add_list.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_enrichr_add_list.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_enrichr_enrich.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_enrichr_enrich.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_enrichr_gene_map.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_enrichr_gene_map.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_enrichr_libs.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_enrichr_libs.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_enrichr_view_list.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_enrichr_view_list.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_jaspar_collections.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_jaspar_collections.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_jaspar_collections_matrices.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_jaspar_collections_matrices.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_jaspar_matrix.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_jaspar_matrix.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_jaspar_matrix_search.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_jaspar_matrix_search.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_jaspar_matrix_versions.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_jaspar_matrix_versions.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_jaspar_releases.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_jaspar_releases.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_jaspar_sites.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_jaspar_sites.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_jaspar_species.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_jaspar_species.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_jaspar_species_matrices.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_jaspar_species_matrices.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_jaspar_taxons.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_jaspar_taxons.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_jaspar_taxons_matrices.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_jaspar_taxons_matrices.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_jaspar_tffm.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_jaspar_tffm.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_jaspar_tffm_search.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_jaspar_tffm_search.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_mieaa_cats.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_mieaa_cats.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_mieaa_convert_type.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_mieaa_convert_type.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_mieaa_convert_version.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_mieaa_convert_version.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_mieaa_enrich.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_mieaa_enrich.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_mieaa_enrich_results.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_mieaa_enrich_results.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_mieaa_enrich_status.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_mieaa_enrich_status.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_mieaa_enrich_submit.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_mieaa_enrich_submit.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_options.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_options.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_pages.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_pages.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_panther_enrich.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_panther_enrich.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_panther_family.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_panther_family.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_panther_homolog.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_panther_homolog.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_panther_info.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_panther_info.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_panther_mapping.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_panther_mapping.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_panther_ortholog.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_panther_ortholog.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_panther_tree_grafter.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_panther_tree_grafter.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_analysis.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_analysis.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_analysis_download.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_analysis_download.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_analysis_import.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_analysis_import.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_analysis_mapping.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_analysis_mapping.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_analysis_pdf.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_analysis_pdf.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_analysis_species.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_analysis_species.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_analysis_token.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_analysis_token.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_complex_list.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_complex_list.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_complex_subunits.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_complex_subunits.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_diseases.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_diseases.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_entity_other_forms.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_entity_other_forms.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_event_ancestors.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_event_ancestors.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_event_hierarchy.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_event_hierarchy.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_exporter_diagram.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_exporter_diagram.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_exporter_event.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_exporter_event.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_exporter_overview.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_exporter_overview.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_exporter_reaction.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_exporter_reaction.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_interactors_psicquic.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_interactors_psicquic.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_interactors_static.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_interactors_static.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_mapping.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_mapping.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_orthology.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_orthology.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_participant_of.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_participant_of.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_participants.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_participants.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_pathways_events.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_pathways_events.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_pathways_low.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_pathways_low.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_pathways_top.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_pathways_top.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_people_id.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_people_id.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_people_name.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_people_name.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_query.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_query.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_species.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_species.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_version.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_version.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_reactome_xref.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_reactome_xref.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_string_annotations.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_string_annotations.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_string_enrichment.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_string_enrichment.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_string_enrichment_ppi.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_string_enrichment_ppi.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_string_homology_inter.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_string_homology_inter.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_string_homology_intra.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_string_homology_intra.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_string_interaction_partners.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_string_interaction_partners.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_string_interactions_network.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_string_interactions_network.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_string_map_ids.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_string_map_ids.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_string_network_image.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_string_network_image.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_string_version.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_string_version.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_antigens.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_antigens.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_antigens_search.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_antigens_search.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_coordinates.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_coordinates.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_coordinates_location.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_coordinates_location.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_coordinates_search.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_coordinates_search.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_coordinates_sequence.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_coordinates_sequence.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_features.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_features.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_features_search.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_features_search.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_genecentric.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_genecentric.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_genecentric_search.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_genecentric_search.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_proteins.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_proteins.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_proteins_crossref.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_proteins_crossref.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_proteins_search.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_proteins_search.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_proteomes.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_proteomes.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_proteomes_search.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_proteomes_search.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_proteomics.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_proteomics.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_proteomics_search.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_proteomics_search.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_taxonomy.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_taxonomy.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_taxonomy_lca.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_taxonomy_lca.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_taxonomy_lineage.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_taxonomy_lineage.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_taxonomy_name.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_taxonomy_name.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_taxonomy_path.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_taxonomy_path.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_taxonomy_relationship.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_taxonomy_relationship.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_uniparc.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_uniparc.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_uniparc_bestguess.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_uniparc_bestguess.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_uniparc_search.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_uniparc_search.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_uniparc_sequence.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_uniparc_sequence.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_variation.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_variation.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rba_uniprot_variation_search.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_variation_search.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/reference/rbioapi.html</loc>
+    <loc>https://rbioapi.moosa-r.com/reference/rbioapi.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/articles/rbioapi.html</loc>
+    <loc>https://rbioapi.moosa-r.com/articles/rbioapi.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/articles/rbioapi_enrichr.html</loc>
+    <loc>https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/articles/rbioapi_jaspar.html</loc>
+    <loc>https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/articles/rbioapi_mieaa.html</loc>
+    <loc>https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/articles/rbioapi_panther.html</loc>
+    <loc>https://rbioapi.moosa-r.com/articles/rbioapi_panther.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/articles/rbioapi_reactome.html</loc>
+    <loc>https://rbioapi.moosa-r.com/articles/rbioapi_reactome.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/articles/rbioapi_string.html</loc>
+    <loc>https://rbioapi.moosa-r.com/articles/rbioapi_string.html</loc>
   </url>
   <url>
-    <loc>https://moosa-r.github.io/rbioapi/articles/rbioapi_uniprot.html</loc>
+    <loc>https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html</loc>
   </url>
 </urlset>
