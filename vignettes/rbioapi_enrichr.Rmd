@@ -136,9 +136,9 @@ Some rbioapi Enrichr functions were not covered in this vignette, be sure to che
 
 # Links {.heading2}
 
--   [This article in pkgdown website](https://moosa-r.github.io/rbioapi/articles/rbioapi_enrichr.html "https://moosa-r.github.io/rbioapi/articles/rbioapi_enrichr.html")
+-   [This article in pkgdown website](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html "https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html")
 
--   [Functions references in pkgdown website](https://moosa-r.github.io/rbioapi/reference/index.html#section-enrichr-rba-enrichr- "rbioapi reference")
+-   [Functions references in pkgdown website](https://rbioapi.moosa-r.com/reference/index.html#section-enrichr-rba-enrichr- "rbioapi reference")
 
 -   [rbioapi vignette index](rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API")
 

@@ -242,9 +242,9 @@ Some rbioapi STRING functions were not covered in this vignette, please check th
 
 # Links {.heading2}
 
--   [This article in pkgdown website](https://moosa-r.github.io/rbioapi/articles/rbioapi_string.html "2.E: STRING & rbioapi")
+-   [This article in pkgdown website](https://rbioapi.moosa-r.com/articles/rbioapi_string.html "2.E: STRING & rbioapi")
 
--   [Functions references in pkgdown website](https://moosa-r.github.io/rbioapi/reference/index.html#section-string-rba-string- "rbioapi reference")
+-   [Functions references in pkgdown website](https://rbioapi.moosa-r.com/reference/index.html#section-string-rba-string- "rbioapi reference")
 
 -   [rbioapi vignette index](rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API")
 

@@ -223,9 +223,9 @@ str(TFFM0056)
 
 # Links {.heading2}
 
--   [This article in pkgdown website](https://moosa-r.github.io/rbioapi/articles/rbioapi_jaspar.html "2.G: JASPAR & rbioapi")
+-   [This article in pkgdown website](https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html "2.G: JASPAR & rbioapi")
 
--   [Functions references in pkgdown website](https://moosa-r.github.io/rbioapi/reference/index.html#section-jaspar-rba-jaspar- "rbioapi reference")
+-   [Functions references in pkgdown website](https://rbioapi.moosa-r.com/reference/index.html#section-jaspar-rba-jaspar- "rbioapi reference")
 
 -   [rbioapi vignette index](rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API")
 

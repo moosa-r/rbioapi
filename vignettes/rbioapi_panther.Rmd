@@ -103,9 +103,9 @@ if (utils::hasName(enriched, "result")) {
 
 # Links {.heading2}
 
--   [This article in pkgdown website](https://moosa-r.github.io/rbioapi/articles/rbioapi_panther.html "2.C: PANTHER & rbioapi")
+-   [This article in pkgdown website](https://rbioapi.moosa-r.com/articles/rbioapi_panther.html "2.C: PANTHER & rbioapi")
 
--   [Functions references in pkgdown website](https://moosa-r.github.io/rbioapi/reference/index.html#section-enrichr-rba-enrichr- "rbioapi reference")
+-   [Functions references in pkgdown website](https://rbioapi.moosa-r.com/reference/index.html#section-enrichr-rba-enrichr- "rbioapi reference")
 
 -   [rbioapi vignette index](rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API")
 
