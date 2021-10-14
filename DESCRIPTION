@@ -1,7 +1,7 @@
 Type: Package
 Package: rbioapi
 Title: User-Friendly R Interface to Biologic Web Services' API
-Version: 0.7.4
+Version: 0.7.5
 Authors@R: 
     person(given = "Moosa",
            family = "Rezwani",
@@ -32,4 +32,4 @@ VignetteBuilder:
     knitr
 Config/testthat/edition: 3
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2

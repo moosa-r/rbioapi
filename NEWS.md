@@ -1,4 +1,8 @@
-# rbioapi 0.7.4 (Current CRAN & GitHub version)
+# rbioapi 0.7.5 (Current GitHub version)
+
+* Moved to STRING database version 11.5
+
+# rbioapi 0.7.4 (Current CRAN version)
 
 * Bug fixes and minor improvements.
 
