@@ -93,7 +93,7 @@
                    string = switch(
                      arg[[2]],
                      name = "STRING",
-                     url = "https://version-11-0.string-db.org",
+                     url = "https://version-11-5.string-db.org",
                      pth = "api/",
                      ptn = "^(http.?://).*string-db\\.org/api/",
                      err_ptn = "^4\\d\\d$",

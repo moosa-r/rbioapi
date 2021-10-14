@@ -4,7 +4,13 @@
 \alias{rba_string_enrichment_ppi}
 \title{Get Protein-Protein Interaction Enrichment}
 \usage{
-rba_string_enrichment_ppi(ids, species = NULL, required_score = NULL, ...)
+rba_string_enrichment_ppi(
+  ids,
+  species = NULL,
+  required_score = NULL,
+  background = NULL,
+  ...
+)
 }
 \arguments{
 \item{ids}{Your protein ID(s). It is strongly recommended to supply
@@ -17,6 +23,10 @@ STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
 interaction to be included in the image. if not supplied, the threshold
 will be applied by STRING Based in the network. (low Confidence = 150,
 Medium Confidence = 400, High Confidence = 700, Highest confidence = 900)}
+
+\item{background}{character vector: A set of STRING protein IDs
+to be used as the background proteome. Only STRING IDs are acceptable.
+(See \code{\link{rba_string_map_ids}} to map your IDs.)}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}

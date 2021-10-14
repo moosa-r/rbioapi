@@ -710,7 +710,7 @@ rba_string_homology_intra <- function(ids,
 #' \donttest{
 #' rba_string_homology_inter(ids = "p53",
 #'     species = 9606,
-#'     species_b = c(6087, 7070))
+#'     species_b = 7070)
 #' }
 #' \donttest{
 #' rba_string_homology_inter(ids = "ENSP00000269305", species = 9606)
@@ -1002,6 +1002,9 @@ rba_string_annotations <- function(ids,
 #'   interaction to be included in the image. if not supplied, the threshold
 #'   will be applied by STRING Based in the network. (low Confidence = 150,
 #'   Medium Confidence = 400, High Confidence = 700, Highest confidence = 900)
+#' @param background character vector: A set of STRING protein IDs
+#'   to be used as the background proteome. Only STRING IDs are acceptable.
+#'   (See \code{\link{rba_string_map_ids}} to map your IDs.)
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -1030,6 +1033,7 @@ rba_string_annotations <- function(ids,
 rba_string_enrichment_ppi <- function(ids,
                                       species = NULL,
                                       required_score = NULL,
+                                      background = NULL,
                                       ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -1041,7 +1045,9 @@ rba_string_enrichment_ppi <- function(ids,
                         list(arg = "required_score",
                              class = "numeric",
                              min_val = 0,
-                             max_val = 1000)),
+                             max_val = 1000),
+                        list(arg = "background",
+                             class = "character")),
             cond = list(list(quote(length(ids) > 100 && is.null(species)),
                              sprintf("You supplied %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
                                      length(ids)))
@@ -1059,7 +1065,11 @@ rba_string_enrichment_ppi <- function(ids,
                                species),
                           list("required_score",
                                !is.null(required_score),
-                               required_score))
+                               required_score),
+                          list("background_string_identifiers",
+                               !is.null(background),
+                               paste(unique(background),
+                                     collapse = "%0d")))
 
   ## Build Function-Specific Call
   input_call <- .rba_httr(httr = "post",
