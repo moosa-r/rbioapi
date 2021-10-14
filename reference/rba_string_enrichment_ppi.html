@@ -85,7 +85,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rbioapi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.5</span>
       </span>
     </div>
 
@@ -172,7 +172,13 @@
   functionally related.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rba_string_enrichment_ppi</span><span class='op'>(</span><span class='va'>ids</span>, species <span class='op'>=</span> <span class='cn'>NULL</span>, required_score <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>rba_string_enrichment_ppi</span><span class='op'>(</span>
+  <span class='va'>ids</span>,
+  species <span class='op'>=</span> <span class='cn'>NULL</span>,
+  required_score <span class='op'>=</span> <span class='cn'>NULL</span>,
+  background <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -193,6 +199,12 @@ STRING IDs. See <code><a href='rba_string_map_ids.html'>rba_string_map_ids</a></
 interaction to be included in the image. if not supplied, the threshold
 will be applied by STRING Based in the network. (low Confidence = 150,
 Medium Confidence = 400, High Confidence = 700, Highest confidence = 900)</p></td>
+    </tr>
+    <tr>
+      <th>background</th>
+      <td><p>character vector: A set of STRING protein IDs
+to be used as the background proteome. Only STRING IDs are acceptable.
+(See <code><a href='rba_string_map_ids.html'>rba_string_map_ids</a></code> to map your IDs.)</p></td>
     </tr>
     <tr>
       <th>...</th>
