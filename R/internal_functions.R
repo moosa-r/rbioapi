@@ -1147,7 +1147,7 @@
 #'   one of the following character strings that will be internally converted
 #'   to a proper function:
 #'   "json->df", "json->df_no_flat", "json->list_simp", "json->list",
-#'   "json->chr", text->chr", "text->df", "tsv->df".
+#'   "json->list_simp_flt_df", "json->chr", text->chr", "text->df", "tsv->df".
 #'   \cr if you supply more than one parser, the parsers will be sequentially
 #'   applied to the response (i.e. response %>% parser1 %>% parser2 %>% ...)
 #'
@@ -1186,6 +1186,20 @@
                                                                      as = "text",
                                                                      encoding = "UTF-8"),
                                                        simplifyVector = TRUE))
+                          },
+                          "json->list_simp_flt_df" = function(x) {
+                            sapply(X = as.list(jsonlite::fromJSON(httr::content(x,
+                                                                                as = "text",
+                                                                                encoding = "UTF-8"),
+                                                                  simplifyVector = TRUE)),
+                                   FUN = function(y){
+                                     if (is.data.frame(y)) {
+                                       jsonlite::flatten(y)
+                                     } else {
+                                       y
+                                     }
+                                   })
+
                           },
                           "json->list" = function(x) {
                             as.list(jsonlite::fromJSON(httr::content(x,
