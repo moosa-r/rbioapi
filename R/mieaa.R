@@ -717,13 +717,33 @@ rba_mieaa_enrich_results <- function(job_id,
        job_id)
 
   ## Build Function-Specific Call
+  parser_input <- list("json->df",
+                       function(x) {
+                         if (ncol(x) == 9) {
+                           colnames(x) <- c("Category", "Subcategory",
+                                            "Enrichment", "P-value",
+                                            "P-adjusted", "Q-value",
+                                            "Expected", "Observed",
+                                            "miRNAs/precursors")
+                         }
+                         if (ncol(x) == 8) {
+                           colnames(x) <- c("Category", "Subcategory",
+                                            "Enrichment", "P-value",
+                                            "P-adjusted", "Q-value",
+                                            "Observed", "miRNAs/precursors")
+
+                         }
+                         return(x)
+                       }
+  )
+
   input_call <- .rba_httr(httr = "get",
                           url = .rba_stg("mieaa", "url"),
                           path = sprintf("%s/enrichment_analysis/results/%s/",
                                          .rba_stg("mieaa", "pth"),
                                          job_id),
                           accept = "application/json",
-                          parser = "json->df",
+                          parser = parser_input,
                           save_to = .rba_file("rba_mieaa_info.json"))
 
   ## Call API
