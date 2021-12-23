@@ -796,14 +796,14 @@ rba_string_homology_inter <- function(ids,
 #'   to be used as the statistical background (or universe) when computing
 #'   P-value for the terms. Only STRING IDs are acceptable. (See
 #'   \code{\link{rba_string_map_ids}} to map your IDs.)
-#' @param split_df (logical, default = FALSE), If TRUE, instead of one
+#' @param split_df (logical, default = TRUE), If TRUE, instead of one
 #'   data frame, results from different categories will be split into
 #'   multiple data frames based on their 'category'.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A data frame which every row is an enriched terms with p-value
-#'   smaller than 0.1 and the columns are the terms category, decription,
+#' @return A list of data frames which every row is an enriched terms with p-value
+#'   smaller than 0.1 and the columns are the terms category, description,
 #'   number of genes, p-value, fdr and other pertinent information.
 #'
 #' @references \itemize{
@@ -828,7 +828,7 @@ rba_string_homology_inter <- function(ids,
 rba_string_enrichment <- function(ids,
                                   species = NULL,
                                   background = NULL,
-                                  split_df = FALSE,
+                                  split_df = TRUE,
                                   ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -838,7 +838,9 @@ rba_string_enrichment <- function(ids,
                         list(arg = "species",
                              class = "numeric"),
                         list(arg = "background",
-                             class = "character")),
+                             class = "character"),
+                        list(arg = "split_df",
+                             class = "logical")),
             cond = list(list(quote(length(ids) > 100 && is.null(species)),
                              sprintf("You supplied %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
                                      length(ids)))

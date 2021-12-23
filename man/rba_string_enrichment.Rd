@@ -8,7 +8,7 @@ rba_string_enrichment(
   ids,
   species = NULL,
   background = NULL,
-  split_df = FALSE,
+  split_df = TRUE,
   ...
 )
 }
@@ -24,7 +24,7 @@ to be used as the statistical background (or universe) when computing
 P-value for the terms. Only STRING IDs are acceptable. (See
 \code{\link{rba_string_map_ids}} to map your IDs.)}
 
-\item{split_df}{(logical, default = FALSE), If TRUE, instead of one
+\item{split_df}{(logical, default = TRUE), If TRUE, instead of one
 data frame, results from different categories will be split into
 multiple data frames based on their 'category'.}
 
@@ -32,8 +32,8 @@ multiple data frames based on their 'category'.}
 arguments manual for more information on available options.}
 }
 \value{
-A data frame which every row is an enriched terms with p-value
-  smaller than 0.1 and the columns are the terms category, decription,
+A list of data frames which every row is an enriched terms with p-value
+  smaller than 0.1 and the columns are the terms category, description,
   number of genes, p-value, fdr and other pertinent information.
 }
 \description{
