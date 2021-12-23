@@ -910,6 +910,9 @@ rba_string_enrichment <- function(ids,
 #'   large number of reference publications to each protein. In order to reduce
 #'   the output size, PubMed's results will be excluded from the results,
 #'   unless stated otherwise (By setting this argument to TRUE).
+#' @param split_df (logical, default = TRUE), If TRUE, instead of one
+#'   data frame, results from different categories will be split into
+#'   multiple data frames based on their 'category'.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -939,6 +942,7 @@ rba_string_enrichment <- function(ids,
 rba_string_annotations <- function(ids,
                                    species = NULL,
                                    allow_pubmed = FALSE,
+                                   split_df = TRUE,
                                    ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -948,6 +952,8 @@ rba_string_annotations <- function(ids,
                         list(arg = "species",
                              class = "numeric"),
                         list(arg = "allow_pubmed",
+                             class = "logical"),
+                        list(arg = "split_df",
                              class = "logical")),
             cond = list(list(quote(length(ids) > 100 && is.null(species)),
                              sprintf("You supplied %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
@@ -969,6 +975,13 @@ rba_string_annotations <- function(ids,
                                1))
 
   ## Build Function-Specific Call
+  if (isTRUE(split_df)) {
+    parser_input <- list("json->df",
+                         function(x) { split(x, x$category) })
+  } else {
+    parser_input <- "json->df"
+  }
+
   input_call <- .rba_httr(httr = "post",
                           url = .rba_stg("string", "url"),
                           path = paste0(.rba_stg("string", "pth"),
@@ -976,7 +989,7 @@ rba_string_annotations <- function(ids,
                           body = call_body,
                           encode = "form",
                           accept = "application/json",
-                          parser = "json->df",
+                          parser = parser_input,
                           save_to = .rba_file("string_functional_annotation.json"))
 
   ## Call API

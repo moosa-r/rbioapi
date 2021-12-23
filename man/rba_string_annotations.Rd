@@ -4,7 +4,13 @@
 \alias{rba_string_annotations}
 \title{Retrieving Functional Annotation}
 \usage{
-rba_string_annotations(ids, species = NULL, allow_pubmed = FALSE, ...)
+rba_string_annotations(
+  ids,
+  species = NULL,
+  allow_pubmed = FALSE,
+  split_df = TRUE,
+  ...
+)
 }
 \arguments{
 \item{ids}{Your protein ID(s). It is strongly recommended to supply
@@ -17,6 +23,10 @@ STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
 large number of reference publications to each protein. In order to reduce
 the output size, PubMed's results will be excluded from the results,
 unless stated otherwise (By setting this argument to TRUE).}
+
+\item{split_df}{(logical, default = TRUE), If TRUE, instead of one
+data frame, results from different categories will be split into
+multiple data frames based on their 'category'.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
