@@ -340,7 +340,7 @@ rba_reactome_analysis <- function(input,
                           query = call_query,
                           httr::content_type("text/plain"),
                           accept = "application/json",
-                          parser = "json->list_simp",
+                          parser = "json->list_simp_flt_df",
                           save_to = .rba_file("reactome_analysis.json"))
   ## Call API
   final_output <- .rba_skeleton(input_call)
