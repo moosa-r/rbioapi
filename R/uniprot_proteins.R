@@ -1709,3 +1709,179 @@ rba_uniprot_antigens <- function(accession,
   final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
+
+#### Mutagenesis Endpoints ####
+
+#' Search Mutagenesis in UniProt
+#'
+#' UniProt describes the effects of mutations in proteins' amino acid
+#'   sequence on the biological properties of the protein, cell or the
+#'   organism. Using this function, you can search for
+#'   \href{https://www.uniprot.org/help/mutagen}{
+#'   mutagenesis description} in UniProt proteins.
+#'   You may also refine your search. See "Arguments section" for more
+#'   information.
+#'
+#'   Note that this is a search function. Thus, you are not required to fill
+#'   every argument; You may use whatever combinations of arguments you see
+#'   fit for your query.
+#'
+#' @section Corresponding API Resources:
+#'  "GET https://www.ebi.ac.uk/proteins/api/mutagenesis"
+#'
+#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
+#'   UniProtKB primary or secondary accession}(s). You can supply up to 100
+#'   accession numbers.
+#' @param taxid NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+#'   You can supply up to 20 taxon IDs.
+#' @param db_id The ID in a Cross-reference (external) database.
+#'    You can supply up to 20 values.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
+#'
+#' @return A list Where each element correspond to a UniProt protein (search
+#'  hit) and mutagenesis description are organized under the
+#'  "features" sub-list.
+#'
+#' @references \itemize{
+#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
+#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
+#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
+#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
+#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+#'   Documentation}
+#'   }
+#'
+#' @examples
+#' \donttest{
+#' #search all mutations in COVID19 proteins
+#' rba_uniprot_mutagenesis_search(taxid = 2697049)
+#' }
+#'
+#' @family "UniProt - Mutagenesis"
+#' @export
+rba_uniprot_mutagenesis_search <- function(accession = NULL,
+                                        taxid = NULL,
+                                        db_id = NULL,
+                                        ...) {
+  ## Load Global Options
+  .rba_ext_args(...)
+  ## Check User-input Arguments
+  .rba_args(cons = list(list(arg = "accession",
+                             class = "character",
+                             max_len = 100),
+                        list(arg = "taxid",
+                             class = "numeric",
+                             max_len = 20),
+                        list(arg = "db_id",
+                             class = "character",
+                             max_len = 20))
+  )
+
+  .msg("Searching UniProt and retrieving mutagenesis description of proteins that match your supplied inputs.")
+  ## Build GET API Request's query
+  call_query <- .rba_query(init = list("size" = "-1"),
+                           list("accession",
+                                !is.null(accession),
+                                paste0(accession,
+                                       collapse = ",")),
+                           list("taxid",
+                                !is.null(taxid),
+                                paste0(taxid,
+                                       collapse = ",")),
+                           list("db_id",
+                                !is.null(db_id),
+                                paste0(db_id,
+                                       collapse = ",")))
+  ## Build Function-Specific Call
+  parser_input <- list("json->list",
+                       .rba_uniprot_search_namer)
+
+  input_call <- .rba_httr(httr = "get",
+                          url = .rba_stg("uniprot", "url"),
+                          path = paste0(.rba_stg("uniprot", "pth"),
+                                        "mutagenesis"),
+                          query = call_query,
+                          accept = "application/json",
+                          parser = parser_input,
+                          save_to = .rba_file("uniprot_mutagenesis_search.json"))
+
+  ## Call API
+  final_output <- .rba_skeleton(input_call)
+  return(final_output)
+}
+
+#' Get Mutagenesis by UniProt Accession
+#'
+#' UniProt describes the effects of mutations in proteins' amino acid
+#'   sequence on the biological properties of the protein, cell or the
+#'   organism. Using this function, you can get the
+#'   \href{https://www.uniprot.org/help/mutagen}{
+#'   Mutagenesis description} that has been mapped to a given UniProt protein.
+#'
+#' @section Corresponding API Resources:
+#'  "GET https://www.ebi.ac.uk/proteins/api/mutagenesis/{accession}"
+#'
+#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
+#'   UniProtKB primary or secondary accession}(s).
+#' @param location A valid amino acid range (e.g. 10-25) within the sequence
+#'   range of the given proein.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
+#'
+#' @return A list containing the mutagenesis description of your supplied
+#'   UniProt protein's sequence.
+#'
+#' @references \itemize{
+#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
+#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
+#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
+#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
+#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+#'   Documentation}
+#'   }
+#'
+#' @examples
+#' \donttest{
+#' rba_uniprot_mutagenesis(accession = "P0DTC2", location = "300-400")
+#' }
+#'
+#' @family "UniProt - Mutagenesis"
+#' @export
+rba_uniprot_mutagenesis <- function(accession,
+                                    location = NULL,
+                                    ...) {
+  ## Load Global Options
+  .rba_ext_args(...)
+  ## Check User-input Arguments
+  .rba_args(cons = list(list(arg = "accession",
+                             class = "character",
+                             len = 1),
+                        list(arg = "location",
+                             class = "character"))
+  )
+
+  .msg("Retrieving mutagenesis description mapped to the sequence of protein %s.",
+       accession)
+  ## Build GET API Request's query
+  call_query <- .rba_query(init = list(),
+                           list("location",
+                                !is.null(location),
+                                location))
+  ## Build Function-Specific Call
+  input_call <- .rba_httr(httr = "get",
+                          url = .rba_stg("uniprot", "url"),
+                          path = paste0(.rba_stg("uniprot", "pth"),
+                                        "mutagenesis/",
+                                        accession),
+                          accept = "application/json",
+                          parser = "json->list",
+                          query = call_query,
+                          save_to = .rba_file("uniprot_mutagenesis.json"))
+
+  ## Call API
+  final_output <- .rba_skeleton(input_call)
+  return(final_output)
+}
