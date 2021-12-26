@@ -10,13 +10,18 @@
 #' @return a list with the same structure of the input, only named.
 #' @noRd
 .rba_uniprot_search_namer <- function(x) {
-  x_names <- vapply(X = x,
-                    FUN = function(x) {
-                      x$accession
-                    },
-                    FUN.VALUE = character(1))
-  names(x) <- x_names
-  return(x)}
+  x_names <- try(expr =  vapply(X = x,
+                                FUN = function(x) {
+                                  x$accession
+                                },
+                                FUN.VALUE = character(1)),
+                 silent = TRUE)
+
+  if (length(x) == length(x_names)) {
+    names(x) <- x_names
+  }
+  return(x)
+}
 
 #### Proteins Endpoints ####
 
