@@ -169,9 +169,15 @@ reference:
 - subtitle: Proteomics
   contents:
     - starts_with("rba_uniprot_proteomics")
+- subtitle: Post-Translational Modification (PTM)
+  contents:
+    - starts_with("rba_uniprot_ptm")
 - subtitle: Antigens
   contents:
     - starts_with("rba_uniprot_antigens")
+- subtitle: Mutagenesis
+  contents:
+    - starts_with("rba_uniprot_mutagenesis")
 - subtitle: Proteomes
   contents:
     - starts_with("rba_uniprot_proteomes")
