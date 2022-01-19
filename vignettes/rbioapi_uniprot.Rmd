@@ -138,7 +138,7 @@ The search variants are not limited to the above. Here is a list of the function
 
 # UniProt functions categories
 
-In UniProt RESTful API documentation, the endpoints are organized into 5 group. Here are those categories and rbioapi functions that correspond to each one. See the functions' manuals for more details.
+The UniProt API endpoints are organized into 5 group. Here are those categories and rbioapi functions that correspond to each one. See the functions' manuals for more details.
 
 ## Proteins
 
@@ -234,9 +234,9 @@ In UniProt RESTful API documentation, the endpoints are organized into 5 group. 
 
 # Links {.heading2}
 
--   [This article in pkgdown website](https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html "2.F: UniProt & rbioapi")
+-   [This article in rbioapi documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html "2.F: UniProt & rbioapi")
 
--   [Functions references in pkgdown website](https://rbioapi.moosa-r.com/reference/index.html#section-uniprot-rba-uniprot- "rbioapi reference")
+-   [Functions references in rbioapi documentation site](https://rbioapi.moosa-r.com/reference/index.html#section-uniprot-rba-uniprot- "rbioapi reference")
 
 -   [rbioapi vignette index](rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API")
 

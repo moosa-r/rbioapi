@@ -131,9 +131,9 @@ miEAA only recognizes miRBASE version 22 accessions. You can use `rba_mieaa_conv
 
 # Links {.heading2}
 
--   [This article in pkgdown website](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html "2.B: miEEA & rbioapi")
+-   [This article in rbioapi documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html "2.B: miEEA & rbioapi")
 
--   [Functions references in pkgdown website](https://rbioapi.moosa-r.com/reference/index.html#section-mieaa-rba-mieaa- "rbioapi reference")
+-   [Functions references in rbioapi documentation site](https://rbioapi.moosa-r.com/reference/index.html#section-mieaa-rba-mieaa- "rbioapi reference")
 
 -   [rbioapi vignette index](rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API")
 

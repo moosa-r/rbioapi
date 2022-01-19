@@ -31,11 +31,9 @@ library(rbioapi)
 rba_options(timeout = 600, skip_error = TRUE)
 ```
 
-------------------------------------------------------------------------
-
 # What does rbioapi do? {#what-does-rbioapi-do .heading2}
 
-Currently fully supports Enrichr, JASPAR, miEAA, PANTHER, Reactome, STRING, and UniProt!
+Currently fully supports **Enrichr**, **JASPAR**, **miEAA**, **PANTHER**, **Reactome**, **STRING**, and **UniProt**!
 
 The goal of rbioapi is to provide a user-friendly and consistent interface to biological databases and services: In a way that insulates the user from technicalities of using web services API and creates a unified and easy-to-use interface to biological and medical web services.
 
@@ -45,7 +43,7 @@ With rbioapi, you do not need to have technical knowledge about web services API
 
 # What is Supported by rbioapi? {#what-is-supported-by-rbioapi .heading2}
 
-rbioapi is dedicated to **Biological or Medical** databases and web services. Currently, rbioapi supports and covers every API resources in the following services: (in alphabetical order!):
+rbioapi is dedicated to **Biological or Medical** databases and web services. Currently, rbioapi supports and covers every API resources in the following services: (in alphabetical order):
 
 On CRAN (Stable) version: (<https://cran.r-project.org/package=rbioapi>)
 
@@ -104,7 +102,7 @@ remotes::install_github("moosa-r/rbioapi")
 
 To make the namespace more organized, functions has been named with the following pattern:
 
-> rba\_[service_name]\_[resource_name]
+    rba_[service_name]_[resource_name]
 
 For example, `rba_string_version()` will call [STRING](https://string-db.org/ "STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis")'s version resource.
 
@@ -226,23 +224,25 @@ When using rbioapi, remember that you are querying data from web services; So pl
 
 Each supported service has a dedicated vignette article. Make sure to check those too.
 
-1.  [Enrichr](rbioapi_enrichr.html "rbioapi & Enrichr vignette") ^([pkgdown website](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html "rbioapi & Enrichr vignette"))^
-2.  [JASPAR](rbioapi_jaspar.html "rbioapi & JASPAR vignette article") ^([pkgdown website](https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html "rbioapi & JASPAR vignette article"))^
-3.  [miEAA](rbioapi_mieaa.html "rbioapi & miEAA vignette article") ^([pkgdown website](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html "rbioapi & miEAA vignette article"))^
-4.  [PANTHER](rbioapi_panther.html "rbioapi & PANTHER vignette article") ^([pkgdown website](https://rbioapi.moosa-r.com/articles/rbioapi_panther.html "rbioapi & PANTHER vignette article"))^
-5.  [Reactome](rbioapi_reactome.html "rbioapi & Reactome vignette article") ^([pkgdown website](https://rbioapi.moosa-r.com/articles/rbioapi_reactome.html "rbioapi & Reactome vignette article"))^
-6.  [STRING](rbioapi_string.html "rbioapi & STRING vignette article") ^([pkgdown website](https://rbioapi.moosa-r.com/articles/rbioapi_string.html "rbioapi & STRING vignette article"))^
-7.  [UniProt](rbioapi_uniprot.html "rbioapi & UniProt vignette article") ^([pkgdown website](https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html "rbioapi & UniProt vignette article"))^
+1.  [Enrichr](rbioapi_enrichr.html "rbioapi & Enrichr vignette") ^([Documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html "rbioapi & Enrichr vignette"))^
+2.  [JASPAR](rbioapi_jaspar.html "rbioapi & JASPAR vignette article") ^([Documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html "rbioapi & JASPAR vignette article"))^
+3.  [miEAA](rbioapi_mieaa.html "rbioapi & miEAA vignette article") ^([Documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html "rbioapi & miEAA vignette article"))^
+4.  [PANTHER](rbioapi_panther.html "rbioapi & PANTHER vignette article") ^([Documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_panther.html "rbioapi & PANTHER vignette article"))^
+5.  [Reactome](rbioapi_reactome.html "rbioapi & Reactome vignette article") ^([Documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_reactome.html "rbioapi & Reactome vignette article"))^
+6.  [STRING](rbioapi_string.html "rbioapi & STRING vignette article") ^([Documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_string.html "rbioapi & STRING vignette article"))^
+7.  [UniProt](rbioapi_uniprot.html "rbioapi & UniProt vignette article") ^([Documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html "rbioapi & UniProt vignette article"))^
 
 We are also adding vignette articles focusing on tasks and workflows:
 
 1.  [Do with rbioapi: Over-Representation (Enrichment) Analysis](rbioapi_do_enrich.html "Do with rbioapi: Over-Representation (Enrichment) Analysis") ^([documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html "rbioapi & UniProt vignette article"))^
 
+------------------------------------------------------------------------
+
 # Links {#links .heading2}
 
--   [This article in pkgdown website](https://rbioapi.moosa-r.com/articles/rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API")
+-   [This article in rbioapi documentation site](https://rbioapi.moosa-r.com/articles/rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API")
 
--   [Functions references in pkgdown website](https://rbioapi.moosa-r.com/reference/index.html "rbioapi reference")
+-   [Functions references in rbioapi documentation site](https://rbioapi.moosa-r.com/reference/index.html "rbioapi reference")
 
 ------------------------------------------------------------------------
 
