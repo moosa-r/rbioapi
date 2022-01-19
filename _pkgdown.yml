@@ -2,11 +2,12 @@ url: https://rbioapi.moosa-r.com
 
 template:
   bootstrap: 5
+  bootswatch: cosmo
   params:
-    bootswatch: cosmo
     ganalytics: G-1HHD9Z0414
 
 navbar:
+  bg: secondary
   structure:
     left:
     - home
@@ -30,7 +31,7 @@ navbar:
       text: Get Started
       href: articles/rbioapi.html
     articles:
-      text: Supported Services
+      text: Supported Services & Articles
       menu:
       - text: '1: rbioapi: Get Started'
         href: articles/rbioapi.html
@@ -57,7 +58,7 @@ navbar:
 reference:
 - title: "Helper functions"
   desc: >
-    As the title implies, these function serve as helpers to the overall
+    These function serve as helpers to the overall
     exprerince of rbioapi.
   contents:
     - rba_options
