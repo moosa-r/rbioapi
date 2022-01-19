@@ -48,6 +48,8 @@ navbar:
         href: articles/rbioapi_uniprot.html
       - text: '2.G: JASPAR & rbioapi'
         href: articles/rbioapi_jaspar.html
+      - text: '3 Do with rbioapi: 1. Over-Representation (Enrichment) Analysis'
+        href: articles/rbioapi_do_enrich.html
     github:
       icon: fab fa-github fa-lg
       href: https://github.com/moosa-r/rbioapi/

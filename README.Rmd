@@ -210,6 +210,10 @@ Each supported service has a dedicated vignette article. Make sure to check thos
 6.  [STRING](https://rbioapi.moosa-r.com/articles/rbioapi_string.html "rbioapi & STRING vignette article")
 7.  [UniProt](https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html "rbioapi & UniProt vignette article")
 
+We are also adding vignette articles focusing on tasks and workflows:
+
+1.  [Do with rbioapi: Over-Representation (Enrichment) Analysis](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html "Do with rbioapi: Over-Representation (Enrichment) Analysis")
+
 # Links
 
 -   [This article in pkgdown website](https://rbioapi.moosa-r.com/articles/rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API")
