@@ -40,7 +40,7 @@ test_that(".rba_api_call works", {
                                          skip_error = TRUE,
                                          verbose = TRUE,
                                          diagnostics = FALSE),
-               pattern = "404")
+               pattern = "Status")
   ## Trims output
   request <- .rba_httr(httr = "head",
                        url = "https://googlvjhvjhjvje.com",
