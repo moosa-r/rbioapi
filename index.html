@@ -4,14 +4,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Currently fully supports Enrichr, JASPAR, miEAA, PANTHER,
+    Reactome, STRING, and UniProt! The goal of rbioapi is to provide a
+    user-friendly and consistent interface to biological databases and
+    services: In a way that insulates the user from technicalities of
+    using web services API and creates a unified and easy-to-use interface
+    to biological and medical web services. This an ongoing project; New
+    databases and services will be added periodically. Feel free to
+    suggest any databases or services you often use.">
 <title>User-Friendly R Interface to Biologic Web Services' API • rbioapi</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
-<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="User-Friendly R Interface to Biologic Web Services' API">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="User-Friendly R Interface to Biologic Web Services' API">
 <meta property="og:description" content="Currently fully supports Enrichr, JASPAR, miEAA, PANTHER,
     Reactome, STRING, and UniProt! The goal of rbioapi is to provide a
     user-friendly and consistent interface to biological databases and
@@ -31,154 +38,130 @@
   gtag('config', 'G-1HHD9Z0414');
 </script>
 </head>
-<body data-spy="scroll" data-target="#toc">
-    <div class="container template-home">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">rbioapi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.5</span>
-      </span>
-    </div>
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+    
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
+    
+    <a class="navbar-brand me-2" href="index.html">rbioapi</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.5</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="active nav-item">
+  <a class="nav-link" href="index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
-<li>
-  <a href="articles/rbioapi.html">Get Started</a>
+<li class="nav-item">
+  <a class="nav-link" href="articles/rbioapi.html">Get Started</a>
 </li>
-<li>
-  <a href="reference/index.html">Functions</a>
+<li class="nav-item">
+  <a class="nav-link" href="reference/index.html">Functions</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Supported Services
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="articles/rbioapi.html">1: rbioapi: Get Started</a>
-    </li>
-    <li>
-      <a href="articles/rbioapi_enrichr.html">2.A: Enrichr &amp; rbioapi</a>
-    </li>
-    <li>
-      <a href="articles/rbioapi_mieaa.html">2.B: miEEA &amp; rbioapi</a>
-    </li>
-    <li>
-      <a href="articles/rbioapi_panther.html">2.C: PANTHER &amp; rbioapi</a>
-    </li>
-    <li>
-      <a href="articles/rbioapi_reactome.html">2.D: Reactome &amp; rbioapi</a>
-    </li>
-    <li>
-      <a href="articles/rbioapi_string.html">2.E: STRING &amp; rbioapi</a>
-    </li>
-    <li>
-      <a href="articles/rbioapi_uniprot.html">2.F: UniProt &amp; rbioapi</a>
-    </li>
-    <li>
-      <a href="articles/rbioapi_jaspar.html">2.G: JASPAR &amp; rbioapi</a>
-    </li>
-  </ul>
-</li>
-<li>
-  <a href="news/index.html">News</a>
-</li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/moosa-r/rbioapi/">
-    <span class="fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
-</div>
-<!--/.nav-collapse -->
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-supported-services">Supported Services</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-supported-services">
+    <a class="dropdown-item" href="articles/rbioapi.html">1: rbioapi: Get Started</a>
+    <a class="dropdown-item" href="articles/rbioapi_enrichr.html">2.A: Enrichr &amp; rbioapi</a>
+    <a class="dropdown-item" href="articles/rbioapi_mieaa.html">2.B: miEEA &amp; rbioapi</a>
+    <a class="dropdown-item" href="articles/rbioapi_panther.html">2.C: PANTHER &amp; rbioapi</a>
+    <a class="dropdown-item" href="articles/rbioapi_reactome.html">2.D: Reactome &amp; rbioapi</a>
+    <a class="dropdown-item" href="articles/rbioapi_string.html">2.E: STRING &amp; rbioapi</a>
+    <a class="dropdown-item" href="articles/rbioapi_uniprot.html">2.F: UniProt &amp; rbioapi</a>
+    <a class="dropdown-item" href="articles/rbioapi_jaspar.html">2.G: JASPAR &amp; rbioapi</a>
   </div>
-<!--/.container -->
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="news/index.html">News</a>
+</li>
+      </ul>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/moosa-r/rbioapi/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
-<!--/.navbar -->
 
-      
-
-      </header><div class="row">
-  <div class="contents col-md-9">
-
-<div id="rbioapi-user-friendly-r-interface-to-biologic-web-services-api" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#rbioapi-user-friendly-r-interface-to-biologic-web-services-api" class="anchor"></a>rbioapi: User-Friendly R Interface to Biologic Web Services’ API</h1></div>
+    
+  </div>
+</nav><div class="container template-home">
+<div class="row">
+  <main id="main" class="col-md-9"><div class="section level1">
+<div class="page-header"><h1 id="rbioapi-user-friendly-r-interface-to-biologic-web-services-api">rbioapi: User-Friendly R Interface to Biologic Web Services’ API<a class="anchor" aria-label="anchor" href="#rbioapi-user-friendly-r-interface-to-biologic-web-services-api"></a>
+</h1></div>
 <p>Moosa Rezwani 2021-06-21</p>
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
 
 <!-- badges: end -->
 </div>
-<div id="what-does-rbioapi-do" class="section level1">
-<h1 class="hasAnchor">
-<a href="#what-does-rbioapi-do" class="anchor"></a>What does rbioapi do?</h1>
+<div class="section level1">
+<h1 id="what-does-rbioapi-do">What does rbioapi do?<a class="anchor" aria-label="anchor" href="#what-does-rbioapi-do"></a>
+</h1>
 <p>Currently fully supports Enrichr, JASPAR, miEAA, PANTHER, Reactome, STRING, and UniProt!</p>
 <p>The goal of rbioapi is to provide a user-friendly and consistent interface to biological databases and services: In a way that insulates the user from technicalities of using web services API and creates a unified and easy-to-use interface to biological and medical web services.</p>
-<p>With rbioapi, you do not need to have technical knowledge about web services API or learn how to work with a new package for every biologic service or database. This an ongoing project; New databases and services will be added periodically. Feel free to <a href="https://github.com/moosa-r/rbioapi/issues" title="Issue section in rbioapi GitHub repository">suggest</a> any databases or services you often use.</p>
+<p>With rbioapi, you do not need to have technical knowledge about web services API or learn how to work with a new package for every biologic service or database. This an ongoing project; New databases and services will be added periodically. Feel free to <a href="https://github.com/moosa-r/rbioapi/issues" title="Issue section in rbioapi GitHub repository" class="external-link">suggest</a> any databases or services you often use.</p>
 </div>
-<div id="what-is-supported-by-rbioapi" class="section level1">
-<h1 class="hasAnchor">
-<a href="#what-is-supported-by-rbioapi" class="anchor"></a>What is Supported by rbioapi?</h1>
+<div class="section level1">
+<h1 id="what-is-supported-by-rbioapi">What is Supported by rbioapi?<a class="anchor" aria-label="anchor" href="#what-is-supported-by-rbioapi"></a>
+</h1>
 <p>rbioapi is dedicated to <strong>Biological or Medical</strong> databases and web services. Currently, rbioapi supports and covers every API resources in the following services: (in alphabetical order!):</p>
-<p>On CRAN (Stable) version: (<a href="https://cran.r-project.org/package=rbioapi" class="uri">https://cran.r-project.org/package=rbioapi</a>)</p>
-<ol>
+<p>On CRAN (Stable) version: (<a href="https://cran.r-project.org/package=rbioapi" class="external-link uri">https://cran.r-project.org/package=rbioapi</a>)</p>
+<ol style="list-style-type: decimal">
 <li>
-<a href="https://maayanlab.cloud/Enrichr/" title="Enrichr">Enrichr</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html" title="rbioapi &amp; Enrichr vignette article">rbioapi vignette article</a>) <sup>(new)</sup>
+<a href="https://maayanlab.cloud/Enrichr/" title="Enrichr" class="external-link">Enrichr</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html" title="rbioapi &amp; Enrichr vignette article">rbioapi vignette article</a>) <sup>(new)</sup>
 </li>
 <li>
-<a href="http://jaspar.genereg.net/" title="JASPAR - A database of transcription factor binding profiles">JASPAR</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html" title="rbioapi &amp; Enrichr vignette article">rbioapi vignette article</a>) <sup>(new)</sup>
+<a href="http://jaspar.genereg.net/" title="JASPAR - A database of transcription factor binding profiles" class="external-link">JASPAR</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html" title="rbioapi &amp; Enrichr vignette article">rbioapi vignette article</a>) <sup>(new)</sup>
 </li>
 <li>
-<a href="https://ccb-compute2.cs.uni-saarland.de/mieaa2" title="miRNA Enrichment Analysis and Annotation Tool (miEAA)">miEAA</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html" title="rbioapi &amp; miEAA vignette article">rbioapi vignette article</a>)</li>
+<a href="https://ccb-compute2.cs.uni-saarland.de/mieaa2" title="miRNA Enrichment Analysis and Annotation Tool (miEAA)" class="external-link">miEAA</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html" title="rbioapi &amp; miEAA vignette article">rbioapi vignette article</a>)</li>
 <li>
-<a href="http://www.pantherdb.org" title="Protein Analysis THrough Evolutionary Relationships (PANTHER)">PANTHER</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_panther.html" title="rbioapi &amp; PANTHER vignette article">rbioapi vignette article</a>)</li>
+<a href="http://www.pantherdb.org" title="Protein Analysis THrough Evolutionary Relationships (PANTHER)" class="external-link">PANTHER</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_panther.html" title="rbioapi &amp; PANTHER vignette article">rbioapi vignette article</a>)</li>
 <li>
-<a href="https://reactome.org/">Reactome</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_reactome.html" title="rbioapi &amp; Reactome vignette article">rbioapi vignette article</a>)</li>
+<a href="https://reactome.org/" class="external-link">Reactome</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_reactome.html" title="rbioapi &amp; Reactome vignette article">rbioapi vignette article</a>)</li>
 <li>
-<a href="https://string-db.org/" title="STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis">STRING</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_string.html" title="rbioapi &amp; STRING vignette article">rbioapi vignette article</a>)</li>
+<a href="https://string-db.org/" title="STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis" class="external-link">STRING</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_string.html" title="rbioapi &amp; STRING vignette article">rbioapi vignette article</a>)</li>
 <li>
-<a href="https://www.uniprot.org" title="Universal Protein Resource (UniProt)">UniProt</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html" title="rbioapi &amp; UniProt vignette article">rbioapi vignette article</a>)</li>
+<a href="https://www.uniprot.org" title="Universal Protein Resource (UniProt)" class="external-link">UniProt</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html" title="rbioapi &amp; UniProt vignette article">rbioapi vignette article</a>)</li>
 </ol>
-<p>Only on Github (Developmental) version: (<a href="https://github.com/moosa-r/rbioapi/" class="uri">https://github.com/moosa-r/rbioapi/</a>):</p>
-<ol>
+<p>Only on Github (Developmental) version: (<a href="https://github.com/moosa-r/rbioapi/" class="external-link uri">https://github.com/moosa-r/rbioapi/</a>):</p>
+<ol style="list-style-type: decimal">
 <li>currently none</li>
 </ol>
 <p>Each of the services has its dedicated vignette article. However, In this article, I will write about the general framework of rbioapi. Make sure to check the vignette article of each service to learn more about how to use them.</p>
-<p><strong>Note That:</strong> rbioapi is an ongoing project. New databases and services will be implemented periodically in order to gradually make the package as comprehensive as possible. Do you see yourself often using a certain database/service? Feel free to suggest any database/service by creating an issue on our GitHub <a href="https://github.com/moosa-r/" title="rbioapi GitHub repositry">repository</a>. I will appreciate any suggestions.</p>
+<p><strong>Note That:</strong> rbioapi is an ongoing project. New databases and services will be implemented periodically in order to gradually make the package as comprehensive as possible. Do you see yourself often using a certain database/service? Feel free to suggest any database/service by creating an issue on our GitHub <a href="https://github.com/moosa-r/" title="rbioapi GitHub repositry" class="external-link">repository</a>. I will appreciate any suggestions.</p>
 </div>
-<div id="how-to-install" class="section level1">
-<h1 class="hasAnchor">
-<a href="#how-to-install" class="anchor"></a>How to install?</h1>
-<p>You can install the stable released version of rbioapi from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
+<div class="section level1">
+<h1 id="how-to-install">How to install?<a class="anchor" aria-label="anchor" href="#how-to-install"></a>
+</h1>
+<p>You can install the stable released version of rbioapi from <a href="https://CRAN.R-project.org" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"rbioapi"</span><span class="op">)</span></code></pre></div>
-<p>However, the CRAN version is released at most once every 1-2 months, You can install the development version from <a href="https://github.com/">GitHub</a> with:</p>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"rbioapi"</span><span class="op">)</span></code></pre></div>
+<p>However, the CRAN version is released at most once every 1-2 months, You can install the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"moosa-r/rbioapi"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"moosa-r/rbioapi"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="design-philosophy-of-rbioapi" class="section level1">
-<h1 class="hasAnchor">
-<a href="#design-philosophy-of-rbioapi" class="anchor"></a>Design philosophy of rbioapi</h1>
+<div class="section level1">
+<h1 id="design-philosophy-of-rbioapi">Design philosophy of rbioapi<a class="anchor" aria-label="anchor" href="#design-philosophy-of-rbioapi"></a>
+</h1>
 <ul>
 <li><p>The functions’ structure should be <strong>consistent</strong> across all databases and services. Meaning that there should not be any learning effort when using functions communicating with dif-ferent web services.</p></li>
 <li><p>The package’s interface should be a simple <strong>plugging of values</strong> in a function’s arguments and running the code.</p></li>
@@ -188,14 +171,14 @@
 <li><p><strong>Beginner users</strong> should conveniently use rbioapi and they should be completely insulated from any technicalities. To name a few examples: To prevent errors, user-input argu-ments should be vigorously checked. Informative messages, warnings, and errors should be produced. If a server returns an error in a particular format, the server’s error response should be parsed. The package should internally and grace-fully handle failure events such as connection loss. Saving files such as raw server’s response should be easy, yet moni-tored by the package. Altering the package options should be readily accessible.</p></li>
 </ul>
 </div>
-<div id="naming-conventions" class="section level1">
-<h1 class="hasAnchor">
-<a href="#naming-conventions" class="anchor"></a>Naming conventions</h1>
+<div class="section level1">
+<h1 id="naming-conventions">Naming conventions<a class="anchor" aria-label="anchor" href="#naming-conventions"></a>
+</h1>
 <p>To make the namespace more organized, functions has been named with the following pattern:</p>
 <blockquote>
 <p>rba_[service_name]_[resource_name]</p>
 </blockquote>
-<p>For example, <code><a href="reference/rba_string_version.html">rba_string_version()</a></code> will call <a href="https://string-db.org/" title="STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis">STRING</a>’s version resource.</p>
+<p>For example, <code><a href="reference/rba_string_version.html">rba_string_version()</a></code> will call <a href="https://string-db.org/" title="STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis" class="external-link">STRING</a>’s version resource.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/rba_string_version.html">rba_string_version</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Retrieving the STRING database version and address used by rbioapi.</span>
@@ -205,7 +188,7 @@
 <span class="co">#&gt; $string_stable_address</span>
 <span class="co">#&gt; [1] "https://version-11-0.string-db.org"</span></code></pre></div>
 <p>Thus, to this version, rbioapi function will have one of the following naming schema:</p>
-<ol>
+<ol style="list-style-type: decimal">
 <li>rba_enrichr_*</li>
 <li>rba_jaspar_*</li>
 <li>rba_mieaa_*</li>
@@ -216,9 +199,9 @@
 </ol>
 <p>There are three exceptions: <code><a href="reference/rba_options.html">rba_options()</a></code>, <code><a href="reference/rba_connection_test.html">rba_connection_test()</a></code>, and <code><a href="reference/rba_pages.html">rba_pages()</a></code>; these are helper functions. More on that later.</p>
 </div>
-<div id="changing-the-options" class="section level1">
-<h1 class="hasAnchor">
-<a href="#changing-the-options" class="anchor"></a>Changing the options</h1>
+<div class="section level1">
+<h1 id="changing-the-options">Changing the options<a class="anchor" aria-label="anchor" href="#changing-the-options"></a>
+</h1>
 <p>To provide more control, multiple options have been implemented. See the manual of <code><a href="reference/rba_options.html">rba_options()</a></code> function for a full description of available options. In short, some of the options will govern rbioapi’s connection with servers (e.g. timeout, retry) and some of the options will modify your experience with rbioapi (e.g. verbose, diagnostics, save_file). There are two ways that you may use to change any option. Also, you can get table of available rbioapi options and their current values by calling <code><a href="reference/rba_options.html">rba_options()</a></code>without any argument:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/rba_options.html">rba_options</a></span><span class="op">(</span><span class="op">)</span>
@@ -233,9 +216,9 @@
 <span class="co">#&gt; 8        timeout           600 Numeric (0.1 or greater)</span>
 <span class="co">#&gt; 9        verbose          TRUE     Logical (TRUE/FALSE)</span></code></pre></div>
 <p>Now, let us consider the ways in which we can alter the settings:</p>
-<div id="change-the-option-globally" class="section level2">
-<h2 class="hasAnchor">
-<a href="#change-the-option-globally" class="anchor"></a>Change the option globally</h2>
+<div class="section level2">
+<h2 id="change-the-option-globally">Change the option globally<a class="anchor" aria-label="anchor" href="#change-the-option-globally"></a>
+</h2>
 <p>Changing an option globally means that for the rest of your R session, any rbioapi function will respect the changed option. To do this, use <code>rba_options().</code> Each argument in this function corresponds to a certain option; Thus by running this function with your desired new values, you could globally alter that rbioapi option. for example:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/rba_options.html">rba_options</a></span><span class="op">(</span>save_file <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
@@ -243,9 +226,9 @@
 <span class="fu"><a href="reference/rba_options.html">rba_options</a></span><span class="op">(</span>verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">## From now on, the package will be quiet.</span></code></pre></div>
 </div>
-<div id="change-the-option-only-within-a-function-call" class="section level2">
-<h2 class="hasAnchor">
-<a href="#change-the-option-only-within-a-function-call" class="anchor"></a>Change the option only within a function call</h2>
+<div class="section level2">
+<h2 id="change-the-option-only-within-a-function-call">Change the option only within a function call<a class="anchor" aria-label="anchor" href="#change-the-option-only-within-a-function-call"></a>
+</h2>
 <p>You can pass additional arguments to any rbioapi function using “ellipsis” (the familiar <code>…</code> or dot dot dot!). Meaning that you can call any function with additional arguments where each is ‘option = value’ pair. This way, any changes in options will be confined within that particular function call. For example:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Save the server's raw response file:</span>
@@ -261,9 +244,9 @@
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rba_uniprot_proteins_crossref.html">rba_uniprot_proteins_crossref</a></span><span class="op">(</span>db_id <span class="op">=</span> <span class="st">"CD40"</span>, db_name <span class="op">=</span> <span class="st">"HGNC"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="connection-test" class="section level1">
-<h1 class="hasAnchor">
-<a href="#connection-test" class="anchor"></a>Connection test</h1>
+<div class="section level1">
+<h1 id="connection-test">Connection test<a class="anchor" aria-label="anchor" href="#connection-test"></a>
+</h1>
 <p>The second exception in functions’ naming schema is <code><a href="reference/rba_connection_test.html">rba_connection_test()</a></code>. Run this simple function to check your connection with the supported services/databases. If you encounter errors when using rbioapi, kindly run this function to make sure that your internet connection or the servers are fine.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/rba_connection_test.html">rba_connection_test</a></span><span class="op">(</span>print_output <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
@@ -289,16 +272,16 @@
 <span class="co">#&gt; ---&gt;&gt;&gt; UniProt :</span>
 <span class="co">#&gt; +++ The server is responding.</span></code></pre></div>
 </div>
-<div id="iterating-over-paginated-results" class="section level1">
-<h1 class="hasAnchor">
-<a href="#iterating-over-paginated-results" class="anchor"></a>Iterating over paginated results</h1>
+<div class="section level1">
+<h1 id="iterating-over-paginated-results">Iterating over paginated results<a class="anchor" aria-label="anchor" href="#iterating-over-paginated-results"></a>
+</h1>
 <p>Some API resources will return paginated responses. This is particularly common in API resources which return potentially very large responses. In rbioapi, for these cases, there are arguments such as “page_number” (with default value of 1) and -if the API resource allows- “page_size”. To save your time, you may use <code><a href="reference/rba_pages.html">rba_pages()</a></code>. This function will iterate over the pages you have specified.</p>
-<p>Take rba_uniprot_taxonomy_name as an example. This function allows you to search taxonomic nodes in <a href="https://www.uniprot.org" title="Universal Protein Resource (UniProt)">UniProt</a>. The response can potentially have a huge size, so <a href="https://www.uniprot.org" title="Universal Protein Resource (UniProt)">UniProt</a> returns a paginated response. For example, if we search for nodes that contain “adenovirus”, there is a large number of hits:</p>
+<p>Take rba_uniprot_taxonomy_name as an example. This function allows you to search taxonomic nodes in <a href="https://www.uniprot.org" title="Universal Protein Resource (UniProt)" class="external-link">UniProt</a>. The response can potentially have a huge size, so <a href="https://www.uniprot.org" title="Universal Protein Resource (UniProt)" class="external-link">UniProt</a> returns a paginated response. For example, if we search for nodes that contain “adenovirus”, there is a large number of hits:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">adeno</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rba_uniprot_taxonomy_name.html">rba_uniprot_taxonomy_name</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"adenovirus"</span>,
                                    search_type <span class="op">=</span> <span class="st">"contain"</span>,
                                    page_number <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">adeno</span>, max.level <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">adeno</span>, max.level <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 <span class="co">#&gt; List of 2</span>
 <span class="co">#&gt;  $ taxonomies:'data.frame':  200 obs. of  8 variables:</span>
 <span class="co">#&gt;   ..$ taxonomyId    : int [1:200] 10509 10510 10511 10512 10513 10514 10515 10519 10521 10522 ...</span>
@@ -315,11 +298,11 @@
 <span class="co">#&gt;   ..$ totalRecords  : int 934</span></code></pre></div>
 <p>As you can see, the server has returned the first page of the response, to retrieve the other pages, you should make separate calls and change the “page_number” argument within each call, or simply use <code><a href="reference/rba_pages.html">rba_pages()</a></code> as demonstrated below:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">adeno_pages</span> <span class="op">=</span> <span class="fu"><a href="reference/rba_pages.html">rba_pages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">quote</a></span><span class="op">(</span><span class="fu"><a href="reference/rba_uniprot_taxonomy_name.html">rba_uniprot_taxonomy_name</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"adenovirus"</span>,
+<code class="sourceCode R"><span class="va">adeno_pages</span> <span class="op">=</span> <span class="fu"><a href="reference/rba_pages.html">rba_pages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html" class="external-link">quote</a></span><span class="op">(</span><span class="fu"><a href="reference/rba_uniprot_taxonomy_name.html">rba_uniprot_taxonomy_name</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"adenovirus"</span>,
                                    search_type <span class="op">=</span> <span class="st">"contain"</span>,
                                    page_number <span class="op">=</span> <span class="st">"pages:1:3"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">## You can inspect the structure of the response:</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">adeno_pages</span>, max.level <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">adeno_pages</span>, max.level <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 <span class="co">#&gt; List of 3</span>
 <span class="co">#&gt;  $ page_1:List of 2</span>
 <span class="co">#&gt;   ..$ taxonomies:'data.frame':   200 obs. of  8 variables:</span>
@@ -331,26 +314,26 @@
 <span class="co">#&gt;   ..$ taxonomies:'data.frame':   200 obs. of  8 variables:</span>
 <span class="co">#&gt;   ..$ pageInfo  :List of 3</span></code></pre></div>
 <p>As you can see, what we have done was:</p>
-<ol>
+<ol style="list-style-type: decimal">
 <li><p>Wrap the function call in <code>qoute()</code> and enter that as the input for <code><a href="reference/rba_pages.html">rba_pages()</a></code>.</p></li>
 <li><p>Replace the argument we want to iterate over it, with a string in this format: “pages:start:end”. For example, we supplied page_number = “pages:1:3” to get the responses of pages 1 to 3.</p></li>
 </ol>
 </div>
-<div id="how-and-what-to-cite" class="section level1">
-<h1 class="hasAnchor">
-<a href="#how-and-what-to-cite" class="anchor"></a>How and what to cite?</h1>
+<div class="section level1">
+<h1 id="how-and-what-to-cite">How and what to cite?<a class="anchor" aria-label="anchor" href="#how-and-what-to-cite"></a>
+</h1>
 <p>rbioapi is an interface between you and other databases and services. Thus, if you have used rbioapi in published research, kindly <strong>in addition to citing rbioapi,</strong> <u><em>make sure to fully and properly cite the databases/services you have used</em></u>. Suggested citations have been added in the functions’ manuals, under the “references” section; Nevertheless, it is the user’s responsibility to check for proper citations and to properly cite the database/services that they have used.</p>
 </div>
-<div id="code-of-conduct" class="section level1">
-<h1 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor"></a>Code of conduct</h1>
-<p>When using rbioapi, remember that you are querying data from web services; So please be considerate. Never flood a server with requests, if you need to download <em>unreasonably</em> large volumes of data, directly downloading the databases supplied in those services may be a better alternative. If you see yourself being rate-limited from any server (HTTP <strong>429 Too Many Requests</strong> response status code), know that you are sending more requests than what the server interprets as normal behavior, so please seek other methods or use <code><a href="https://rdrr.io/r/base/Sys.sleep.html">Sys.sleep()</a></code> between your requests.</p>
+<div class="section level1">
+<h1 id="code-of-conduct">Code of conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
+</h1>
+<p>When using rbioapi, remember that you are querying data from web services; So please be considerate. Never flood a server with requests, if you need to download <em>unreasonably</em> large volumes of data, directly downloading the databases supplied in those services may be a better alternative. If you see yourself being rate-limited from any server (HTTP <strong>429 Too Many Requests</strong> response status code), know that you are sending more requests than what the server interprets as normal behavior, so please seek other methods or use <code><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep()</a></code> between your requests.</p>
 </div>
-<div id="what-next" class="section level1">
-<h1 class="hasAnchor">
-<a href="#what-next" class="anchor"></a>What next?</h1>
+<div class="section level1">
+<h1 id="what-next">What next?<a class="anchor" aria-label="anchor" href="#what-next"></a>
+</h1>
 <p>Each supported service has a dedicated vignette article. Make sure to check those too.</p>
-<ol>
+<ol style="list-style-type: decimal">
 <li><a href="https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html" title="rbioapi &amp; Enrichr vignette">Enrichr</a></li>
 <li><a href="https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html" title="rbioapi &amp; JASPAR vignette article">JASPAR</a></li>
 <li><a href="https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html" title="rbioapi &amp; miEAA vignette article">miEAA</a></li>
@@ -360,16 +343,16 @@
 <li><a href="https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html" title="rbioapi &amp; UniProt vignette article">UniProt</a></li>
 </ol>
 </div>
-<div id="links" class="section level1">
-<h1 class="hasAnchor">
-<a href="#links" class="anchor"></a>Links</h1>
+<div class="section level1">
+<h1 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a>
+</h1>
 <ul>
 <li><p><a href="https://rbioapi.moosa-r.com/articles/rbioapi.html" title="rbioapi: User-Friendly R Interface to Biologic Web Services' API">This article in pkgdown website</a></p></li>
 <li><p><a href="https://rbioapi.moosa-r.com/reference/index.html" title="rbioapi reference">Functions references in pkgdown website</a></p></li>
 </ul>
-<div id="session-info" class="section level2">
-<h2 class="hasAnchor">
-<a href="#session-info" class="anchor"></a>Session info</h2>
+<div class="section level2">
+<h2 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
+</h2>
 <div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">#&gt; R version 4.1.0 (2021-05-18)</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
 <span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt; Running under: Windows 10 x64 (build 19043)</span></span>
@@ -399,58 +382,66 @@
 </div>
 </div>
 
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="links">
-<h2>Links</h2>
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=rbioapi">https://​cloud.r-project.org/​package=rbioapi</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/moosa-r/rbioapi/">https://​github.com/​moosa-r/​rbioapi/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/moosa-r/rbioapi/issues">https://​github.com/​moosa-r/​rbioapi/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=rbioapi" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/moosa-r/rbioapi/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/moosa-r/rbioapi/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></small></li>
+<li><small><a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a></small></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing rbioapi</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Moosa Rezwani <br><small class="roles"> Author, maintainer, copyright holder </small>  </li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://cran.r-project.org/package=rbioapi"><img src="https://www.r-pkg.org/badges/version/rbioapi" alt="CRAN_Status_Badge"></a></li>
-<li><a href="https://github.com/moosa-r/rbioapi/actions"><img src="https://github.com/moosa-r/rbioapi/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://cran.r-project.org/package=rbioapi" class="external-link"><img src="https://www.r-pkg.org/badges/version/rbioapi" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://github.com/moosa-r/rbioapi/actions" class="external-link"><img src="https://github.com/moosa-r/rbioapi/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
-</div>
-</div>
 
-
-      <footer><div class="copyright">
-  <p>Developed by Moosa Rezwani.</p>
+  </aside>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+
+    <footer><div class="pkgdown-footer-left">
+  <p></p>
+<p>Developed by Moosa Rezwani.</p>
 </div>
 
-      </footer>
+<div class="pkgdown-footer-right">
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+</div>
+
+    </footer>
 </div>
 
   
 
+  
 
   </body>
 </html>

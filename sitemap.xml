@@ -1,7 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://rbioapi.moosa-r.com/404.html</loc>
+  </url>
+  <url>
+    <loc>https://rbioapi.moosa-r.com/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://rbioapi.moosa-r.com/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://rbioapi.moosa-r.com/articles/rbioapi.html</loc>
+  </url>
+  <url>
+    <loc>https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html</loc>
+  </url>
+  <url>
+    <loc>https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html</loc>
+  </url>
+  <url>
+    <loc>https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html</loc>
+  </url>
+  <url>
+    <loc>https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html</loc>
+  </url>
+  <url>
+    <loc>https://rbioapi.moosa-r.com/articles/rbioapi_panther.html</loc>
+  </url>
+  <url>
+    <loc>https://rbioapi.moosa-r.com/articles/rbioapi_reactome.html</loc>
+  </url>
+  <url>
+    <loc>https://rbioapi.moosa-r.com/articles/rbioapi_string.html</loc>
+  </url>
+  <url>
+    <loc>https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html</loc>
+  </url>
+  <url>
+    <loc>https://rbioapi.moosa-r.com/authors.html</loc>
+  </url>
+  <url>
     <loc>https://rbioapi.moosa-r.com/index.html</loc>
+  </url>
+  <url>
+    <loc>https://rbioapi.moosa-r.com/news/index.html</loc>
+  </url>
+  <url>
+    <loc>https://rbioapi.moosa-r.com/reference/index.html</loc>
   </url>
   <url>
     <loc>https://rbioapi.moosa-r.com/reference/rba_connection_test.html</loc>
@@ -268,6 +313,12 @@
     <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_genecentric_search.html</loc>
   </url>
   <url>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_mutagenesis.html</loc>
+  </url>
+  <url>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_mutagenesis_search.html</loc>
+  </url>
+  <url>
     <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_proteins.html</loc>
   </url>
   <url>
@@ -287,6 +338,12 @@
   </url>
   <url>
     <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_proteomics_search.html</loc>
+  </url>
+  <url>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_ptm.html</loc>
+  </url>
+  <url>
+    <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_ptm_search.html</loc>
   </url>
   <url>
     <loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_taxonomy.html</loc>
@@ -326,29 +383,5 @@
   </url>
   <url>
     <loc>https://rbioapi.moosa-r.com/reference/rbioapi.html</loc>
-  </url>
-  <url>
-    <loc>https://rbioapi.moosa-r.com/articles/rbioapi.html</loc>
-  </url>
-  <url>
-    <loc>https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html</loc>
-  </url>
-  <url>
-    <loc>https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html</loc>
-  </url>
-  <url>
-    <loc>https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html</loc>
-  </url>
-  <url>
-    <loc>https://rbioapi.moosa-r.com/articles/rbioapi_panther.html</loc>
-  </url>
-  <url>
-    <loc>https://rbioapi.moosa-r.com/articles/rbioapi_reactome.html</loc>
-  </url>
-  <url>
-    <loc>https://rbioapi.moosa-r.com/articles/rbioapi_string.html</loc>
-  </url>
-  <url>
-    <loc>https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html</loc>
   </url>
 </urlset>

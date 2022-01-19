@@ -4,14 +4,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="rbioapi">
 <title>2.E Reactome &amp; rbioapi • rbioapi</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="2.E Reactome &amp; rbioapi">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="2.E Reactome &amp; rbioapi">
 <meta property="og:description" content="rbioapi">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -24,130 +24,109 @@
   gtag('config', 'G-1HHD9Z0414');
 </script>
 </head>
-<body data-spy="scroll" data-target="#toc">
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">rbioapi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.5</span>
-      </span>
-    </div>
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+    
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">rbioapi</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.5</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="../index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
-<li>
-  <a href="../articles/rbioapi.html">Get Started</a>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/rbioapi.html">Get Started</a>
 </li>
-<li>
-  <a href="../reference/index.html">Functions</a>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Functions</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Supported Services
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/rbioapi.html">1: rbioapi: Get Started</a>
-    </li>
-    <li>
-      <a href="../articles/rbioapi_enrichr.html">2.A: Enrichr &amp; rbioapi</a>
-    </li>
-    <li>
-      <a href="../articles/rbioapi_mieaa.html">2.B: miEEA &amp; rbioapi</a>
-    </li>
-    <li>
-      <a href="../articles/rbioapi_panther.html">2.C: PANTHER &amp; rbioapi</a>
-    </li>
-    <li>
-      <a href="../articles/rbioapi_reactome.html">2.D: Reactome &amp; rbioapi</a>
-    </li>
-    <li>
-      <a href="../articles/rbioapi_string.html">2.E: STRING &amp; rbioapi</a>
-    </li>
-    <li>
-      <a href="../articles/rbioapi_uniprot.html">2.F: UniProt &amp; rbioapi</a>
-    </li>
-    <li>
-      <a href="../articles/rbioapi_jaspar.html">2.G: JASPAR &amp; rbioapi</a>
-    </li>
-  </ul>
-</li>
-<li>
-  <a href="../news/index.html">News</a>
-</li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/moosa-r/rbioapi/">
-    <span class="fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
-</div>
-<!--/.nav-collapse -->
+<li class="active nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-supported-services">Supported Services</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-supported-services">
+    <a class="dropdown-item" href="../articles/rbioapi.html">1: rbioapi: Get Started</a>
+    <a class="dropdown-item" href="../articles/rbioapi_enrichr.html">2.A: Enrichr &amp; rbioapi</a>
+    <a class="dropdown-item" href="../articles/rbioapi_mieaa.html">2.B: miEEA &amp; rbioapi</a>
+    <a class="dropdown-item" href="../articles/rbioapi_panther.html">2.C: PANTHER &amp; rbioapi</a>
+    <a class="dropdown-item" href="../articles/rbioapi_reactome.html">2.D: Reactome &amp; rbioapi</a>
+    <a class="dropdown-item" href="../articles/rbioapi_string.html">2.E: STRING &amp; rbioapi</a>
+    <a class="dropdown-item" href="../articles/rbioapi_uniprot.html">2.F: UniProt &amp; rbioapi</a>
+    <a class="dropdown-item" href="../articles/rbioapi_jaspar.html">2.G: JASPAR &amp; rbioapi</a>
   </div>
-<!--/.container -->
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">News</a>
+</li>
+      </ul>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/moosa-r/rbioapi/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
-<!--/.navbar -->
 
-      
+    
+  </div>
+</nav><div class="container template-article">
 
-      </header><script src="rbioapi_reactome_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="rbioapi_reactome_files/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="rbioapi_reactome_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="rbioapi_reactome_files/datatables-binding-0.19/datatables.js"></script><script src="rbioapi_reactome_files/jquery-3.6.0/jquery-3.6.0.min.js"></script><link href="rbioapi_reactome_files/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="rbioapi_reactome_files/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="rbioapi_reactome_files/dt-core-1.10.20/js/jquery.dataTables.min.js"></script><link href="rbioapi_reactome_files/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet">
-<script src="rbioapi_reactome_files/crosstalk-1.1.1/js/crosstalk.min.js"></script><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>2.E Reactome &amp; rbioapi</h1>
-                        <h4 class="author">Moosa Rezwani</h4>
+
+
+<script src="rbioapi_reactome_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="rbioapi_reactome_files/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="rbioapi_reactome_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="rbioapi_reactome_files/datatables-binding-0.20/datatables.js"></script><link href="rbioapi_reactome_files/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="rbioapi_reactome_files/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="rbioapi_reactome_files/dt-core-1.11.3/js/jquery.dataTables.min.js"></script><link href="rbioapi_reactome_files/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="rbioapi_reactome_files/crosstalk-1.2.0/js/crosstalk.min.js"></script><div class="row">
+  <main id="main"><div class="page-header">
+      <img src="" class="logo" alt=""><h1>2.E Reactome &amp; rbioapi</h1>
+                        <h4 data-toc-skip class="author">Moosa Rezwani</h4>
             
-            <h4 class="date">2021-10-14</h4>
+            <h4 data-toc-skip class="date">2022-01-19</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/master/vignettes/rbioapi_reactome.Rmd"><code>vignettes/rbioapi_reactome.Rmd</code></a></small>
-      <div class="hidden name"><code>rbioapi_reactome.Rmd</code></div>
-
+      <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/HEAD/vignettes/rbioapi_reactome.Rmd" class="external-link"><code>vignettes/rbioapi_reactome.Rmd</code></a></small>
+      <div class="d-none name"><code>rbioapi_reactome.Rmd</code></div>
     </div>
 
     
     
 <hr>
-<div id="introduction" class="section level1 heading2">
-<h1 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h1>
-<p>Directly quoting from <a href="https://reactome.org/">Reactome</a>:</p>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
+<p>Directly quoting from <a href="https://reactome.org/" class="external-link">Reactome</a>:</p>
 <blockquote>
-<p>REACTOME is an open-source, open access, manually curated and peer-reviewed pathway database. Our goal is to provide intuitive bioinformatics tools for the visualization, interpretation and analysis of pathway knowledge to support basic and clinical research, genome analysis, modeling, systems biology and education. Founded in 2003, the Reactome project is led by Lincoln Stein of <a href="https://oicr.on.ca/">OICR</a>, Peter D’Eustachio of <a href="https://nyulangone.org/">NYULMC</a>, Henning Hermjakob of <a href="https://www.ebi.ac.uk/">EMBL-EBI</a>, and Guanming Wu of <a href="https://www.ohsu.edu/">OHSU</a>.</p>
-<p>(source: <a href="https://reactome.org/what-is-reactome" class="uri">https://reactome.org/what-is-reactome</a>)</p>
+<p>REACTOME is an open-source, open access, manually curated and peer-reviewed pathway database. Our goal is to provide intuitive bioinformatics tools for the visualization, interpretation and analysis of pathway knowledge to support basic and clinical research, genome analysis, modeling, systems biology and education. Founded in 2003, the Reactome project is led by Lincoln Stein of <a href="https://oicr.on.ca/" class="external-link">OICR</a>, Peter D’Eustachio of <a href="https://nyulangone.org/" class="external-link">NYULMC</a>, Henning Hermjakob of <a href="https://www.ebi.ac.uk/" class="external-link">EMBL-EBI</a>, and Guanming Wu of <a href="https://www.ohsu.edu/" class="external-link">OHSU</a>.</p>
+<p>(source: <a href="https://reactome.org/what-is-reactome" class="external-link uri">https://reactome.org/what-is-reactome</a>)</p>
 </blockquote>
 <p>Reactome provides two RESTful API services: Reactome content services and Reactome analysis services. In rbioapi, the naming schema is that any function which belongs to analysis services starts with rba_reactome_analysis* . Other rba_reactome_* functions without the ‘analysis’ infix correspond to content services API.</p>
-<p>Before continuing reading this article, it is a good idea to read <a href="https://reactome.org/documentation/data-model">Reactome Data Model</a> page.</p>
+<p>Before continuing reading this article, it is a good idea to read <a href="https://reactome.org/documentation/data-model" class="external-link">Reactome Data Model</a> page.</p>
 <hr>
 </div>
-<div id="reactome-analysis-services" class="section level1 heading2">
-<h1 class="hasAnchor">
-<a href="#reactome-analysis-services" class="anchor"></a>Reactome analysis services</h1>
-<p>This section mostly revolves around <code><a href="../reference/rba_reactome_analysis.html">rba_reactome_analysis()</a></code> function. So, naturally, we will start with that. As explained in the function’s manual, you have considerable freedom in providing the main input for this function; You can supply an R object (as a data frame, matrix, or simple vector), a URL, or a local file path. Note that the type of analysis will be decided based on whether your input is 1-dimensional or 2-dimensional. This has been explained in detail in the manual of <code><a href="../reference/rba_reactome_analysis.html">rba_reactome_analysis()</a></code>, see that for more information.<br><code><a href="../reference/rba_reactome_analysis.html">rba_reactome_analysis()</a></code> is the API equivalent of Reactome’s <a href="https://reactome.org/PathwayBrowser/#TOOL=AT">analyse gene list</a> tool. You can see that the function’s arguments correspond to what would you choose in the webpage’s wizard.</p>
+<div class="section level2">
+<h2 id="reactome-analysis-services">Reactome analysis services<a class="anchor" aria-label="anchor" href="#reactome-analysis-services"></a>
+</h2>
+<p>This section mostly revolves around <code><a href="../reference/rba_reactome_analysis.html">rba_reactome_analysis()</a></code> function. So, naturally, we will start with that. As explained in the function’s manual, you have considerable freedom in providing the main input for this function; You can supply an R object (as a data frame, matrix, or simple vector), a URL, or a local file path. Note that the type of analysis will be decided based on whether your input is 1-dimensional or 2-dimensional. This has been explained in detail in the manual of <code><a href="../reference/rba_reactome_analysis.html">rba_reactome_analysis()</a></code>, see that for more information.<br><code><a href="../reference/rba_reactome_analysis.html">rba_reactome_analysis()</a></code> is the API equivalent of Reactome’s <a href="https://reactome.org/PathwayBrowser/#TOOL=AT" class="external-link">analyse gene list</a> tool. You can see that the function’s arguments correspond to what would you choose in the webpage’s wizard.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## 1 We create a simple vector with our genes</span>
-<span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"p53"</span>, <span class="st">"BRCA1"</span>, <span class="st">"cdk2"</span>, <span class="st">"Q99835"</span>, <span class="st">"CDC42"</span>, <span class="st">"CDK1"</span>, <span class="st">"KIF23"</span>, <span class="st">"PLK1"</span>, <span class="st">"RAC2"</span>, <span class="st">"RACGAP1"</span>, <span class="st">"RHOA"</span>, <span class="st">"RHOB"</span>, <span class="st">"MSL1"</span>, <span class="st">"PHF21A"</span>, <span class="st">"INSR"</span>, <span class="st">"JADE2"</span>, <span class="st">"P2RX7"</span>, <span class="st">"CCDC101"</span>, <span class="st">"PPM1B"</span>, <span class="st">"ANAPC16"</span>, <span class="st">"CDH8"</span>, <span class="st">"HSPA1L"</span>, <span class="st">"CUL2"</span>, <span class="st">"ZNF302"</span>, <span class="st">"CUX1"</span>, <span class="st">"CYTH2"</span>, <span class="st">"SEC22C"</span>, <span class="st">"EIF4E3"</span>, <span class="st">"ROBO2"</span>, <span class="st">"CXXC1"</span>, <span class="st">"LINC01314"</span>, <span class="st">"ATP5F1"</span><span class="op">)</span>
+<span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"p53"</span>, <span class="st">"BRCA1"</span>, <span class="st">"cdk2"</span>, <span class="st">"Q99835"</span>, <span class="st">"CDC42"</span>, <span class="st">"CDK1"</span>, <span class="st">"KIF23"</span>, <span class="st">"PLK1"</span>, <span class="st">"RAC2"</span>, <span class="st">"RACGAP1"</span>, <span class="st">"RHOA"</span>, <span class="st">"RHOB"</span>, <span class="st">"MSL1"</span>, <span class="st">"PHF21A"</span>, <span class="st">"INSR"</span>, <span class="st">"JADE2"</span>, <span class="st">"P2RX7"</span>, <span class="st">"CCDC101"</span>, <span class="st">"PPM1B"</span>, <span class="st">"ANAPC16"</span>, <span class="st">"CDH8"</span>, <span class="st">"HSPA1L"</span>, <span class="st">"CUL2"</span>, <span class="st">"ZNF302"</span>, <span class="st">"CUX1"</span>, <span class="st">"CYTH2"</span>, <span class="st">"SEC22C"</span>, <span class="st">"EIF4E3"</span>, <span class="st">"ROBO2"</span>, <span class="st">"CXXC1"</span>, <span class="st">"LINC01314"</span>, <span class="st">"ATP5F1"</span><span class="op">)</span>
 
 <span class="co">## 2 We call reactome analysis with the default parameters</span>
 <span class="va">analyzed</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_analysis.html">rba_reactome_analysis</a></span><span class="op">(</span>input <span class="op">=</span> <span class="va">genes</span>,
@@ -155,13 +134,13 @@
                                   p_value <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span>
 
 <span class="co">## 3 As always, we use str() to inspect the resutls</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">analyzed</span>, <span class="fl">1</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">analyzed</span>, <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; List of 8</span>
 <span class="co">#&gt;  $ summary            :List of 7</span>
 <span class="co">#&gt;  $ expression         :List of 1</span>
 <span class="co">#&gt;  $ identifiersNotFound: int 1</span>
 <span class="co">#&gt;  $ pathwaysFound      : int 67</span>
-<span class="co">#&gt;  $ pathways           :'data.frame': 67 obs. of  8 variables:</span>
+<span class="co">#&gt;  $ pathways           :'data.frame': 67 obs. of  19 variables:</span>
 <span class="co">#&gt;  $ resourceSummary    :'data.frame': 3 obs. of  3 variables:</span>
 <span class="co">#&gt;  $ speciesSummary     :'data.frame': 1 obs. of  5 variables:</span>
 <span class="co">#&gt;  $ warnings           : chr "Missing header. Using a default one."</span>
@@ -171,8 +150,8 @@
 <span class="co">### 4.b You need the token for other rba_reactome_analysis_* functions</span>
 
 <span class="co">## 5 Analsis results are in the pathways data frame:</span></code></pre></div>
-<div id="htmlwidget-1cfbe2856478166e98f1" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1cfbe2856478166e98f1">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67"],["R-HSA-3371568","R-HSA-3371571","R-HSA-3371511","R-HSA-114604","R-HSA-6806003","R-HSA-3371453","R-HSA-983231","R-HSA-176412","R-HSA-3371556","R-HSA-6804754","R-HSA-176408","R-HSA-69273","R-HSA-2262752","R-HSA-109582","R-HSA-6796648","R-HSA-8953897","R-HSA-174143","R-HSA-453276","R-HSA-1538133","R-HSA-5633007","R-HSA-69620","R-HSA-176417","R-HSA-6804757","R-HSA-5689896","R-HSA-2980767","R-HSA-1640170","R-HSA-5666185","R-HSA-8853884","R-HSA-69278","R-HSA-69275","R-HSA-453274","R-HSA-5625970","R-HSA-3700989","R-HSA-376176","R-HSA-68884","R-HSA-6791312","R-HSA-5663220","R-HSA-162658","R-HSA-69481","R-HSA-6804116","R-HSA-1362300","R-HSA-176814","R-HSA-6804114","R-HSA-69473","R-HSA-8852276","R-HSA-5625900","R-HSA-156711","R-HSA-174048","R-HSA-5627117","R-HSA-416572","R-HSA-9723905","R-HSA-9723907","R-HSA-9013404","R-HSA-6804756","R-HSA-195258","R-HSA-400685","R-HSA-6811442","R-HSA-3214847","R-HSA-9687139","R-HSA-9663199","R-HSA-9699150","R-HSA-9675126","R-HSA-397795","R-HSA-69205","R-HSA-3247509","R-HSA-4839726","R-HSA-8953750"],[3371568,3371571,3371511,114604,6806003,3371453,983231,176412,3371556,6804754,176408,69273,2262752,109582,6796648,8953897,174143,453276,1538133,5633007,69620,176417,6804757,5689896,2980767,1640170,5666185,8853884,69278,69275,453274,5625970,3700989,376176,68884,6791312,5663220,162658,69481,6804116,1362300,176814,6804114,69473,8852276,5625900,156711,174048,5627117,416572,9723905,9723907,9013404,6804756,195258,400685,6811442,3214847,9687139,9663199,9699150,9675126,397795,69205,3247509,4839726,8953750],["Attenuation phase","HSF1-dependent transactivation","HSF1 activation","GPVI-mediated activation cascade","Regulation of TP53 Expression and Degradation","Regulation of HSF1-mediated heat shock response","Factors involved in megakaryocyte development and platelet production","Phosphorylation of the APC/C","Cellular response to heat stress","Regulation of TP53 Expression","Regulation of APC/C activators between G1/S and early anaphase","Cyclin A/B1/B2 associated events during G2/M transition","Cellular responses to stress","Hemostasis","TP53 Regulates Transcription of DNA Repair Genes","Cellular responses to stimuli","APC/C-mediated degradation of cell cycle proteins","Regulation of mitotic cell cycle","G0 and Early G1","Regulation of TP53 Activity","Cell Cycle Checkpoints","Phosphorylation of Emi1","Regulation of TP53 Degradation","Ovarian tumor domain proteases","Activation of NIMA Kinases NEK9, NEK6, NEK7","Cell Cycle","RHO GTPases Activate Rhotekin and Rhophilins","Transcriptional Regulation by VENTX","Cell Cycle, Mitotic","G2/M Transition","Mitotic G2-G2/M phases","RHO GTPases activate KTN1","Transcriptional Regulation by TP53","Signaling by ROBO receptors","Mitotic Telophase/Cytokinesis","TP53 Regulates Transcription of Cell Cycle Genes","RHO GTPases Activate Formins","Golgi Cisternae Pericentriolar Stack Reorganization","G2/M Checkpoints","TP53 Regulates Transcription of Genes Involved in G1 Cell Cycle Arrest","Transcription of E2F targets under negative control by p107 (RBL1) and p130 (RBL2) in complex with HDAC1","Activation of APC/C and APC/C:Cdc20 mediated degradation of mitotic proteins","TP53 Regulates Transcription of Genes Involved in G2 Cell Cycle Arrest","G2/M DNA damage checkpoint","The role of GTSE1 in G2/M progression after G2 checkpoint","RHO GTPases activate CIT","Polo-like kinase mediated events","APC/C:Cdc20 mediated degradation of Cyclin B","RHO GTPases Activate ROCKs","Sema4D induced cell migration and growth-cone collapse","Loss of function of TP53 in cancer due to loss of tetramerization ability","Loss of Function of TP53 in Cancer","RAC2 GTPase cycle","Regulation of TP53 Activity through Phosphorylation","RHO GTPase Effectors","Sema4D in semaphorin signaling","Intra-Golgi and retrograde Golgi-to-ER traffic","HATs acetylate histones","Aberrant regulation of mitotic cell cycle due to RB1 defects","Defective DNA double strand break response due to BRCA1 loss of function","Defective DNA double strand break response due to BARD1 loss of function","Diseases of mitotic cell cycle","G-protein beta:gamma signalling","G1/S-Specific Transcription","Chromatin modifying enzymes","Chromatin organization","Transcriptional Regulation by E2F6"],[true,true,true,true,false,true,true,true,false,true,true,true,false,false,true,false,false,false,true,false,false,true,true,true,true,false,true,true,false,false,false,true,false,true,true,false,true,true,true,true,true,false,true,true,true,true,true,true,true,true,true,false,true,true,false,false,false,true,false,true,true,false,false,true,true,false,true],[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,false,false,false,false,false,false,true,true,true,true,false,false,false,false,false],[48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887],["9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606"],["Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens"],["TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL"],[47,59,43,43,46,113,194,20,135,4,83,32,952,803,89,970,92,92,38,178,280,8,43,44,9,734,10,48,596,212,214,12,487,235,15,65,149,17,154,20,20,77,21,81,83,23,23,24,24,25,1,1,92,95,326,31,219,110,36,2,2,38,39,43,256,256,46],[5,5,4,4,4,5,6,3,5,2,4,3,11,10,4,11,4,4,3,5,6,2,3,3,2,9,2,3,8,5,5,2,7,5,2,3,4,2,4,2,2,3,2,3,3,2,2,2,2,2,1,1,3,3,5,2,4,3,2,1,1,2,2,2,4,4,2],[0.00329339219395978,0.00413425828603462,0.0030131034966015,0.0030131034966015,0.00322332001962021,0.00791815570037138,0.0135940018218765,0.0014014434867914,0.00945974353584192,0.000280288697358279,0.00581599047018429,0.00224230957886623,0.0667087099712704,0.0562679559946745,0.00623642351622171,0.0679700091093827,0.00644664003924042,0.00644664003924042,0.00266274262490365,0.0124728470324434,0.0196202088150795,0.000560577394716558,0.0030131034966015,0.00308317567094107,0.000630649569056128,0.0514329759652442,0.000700721743395698,0.00336346436829935,0.0417630159063836,0.0148553009599888,0.0149954453086679,0.000840866092074837,0.0341251489033705,0.0164669609697989,0.00105108261509355,0.00455469133207203,0.0104407539765959,0.00119122696377269,0.0107911148482937,0.0014014434867914,0.0014014434867914,0.00539555742414687,0.00147151566113096,0.00567584612150515,0.00581599047018429,0.0016116600098101,0.0016116600098101,0.00168173218414967,0.00168173218414967,0.00175180435848924,7.00721743395698e-05,7.00721743395698e-05,0.00644664003924042,0.00665685656225913,0.0228435288346997,0.00217223740452666,0.0153458061803658,0.00770793917735267,0.00252259827622451,0.00014014434867914,0.00014014434867914,0.00266274262490365,0.00273281479924322,0.0030131034966015,0.0179384766309299,0.0179384766309299,0.00322332001962021],[4.74589974763795e-07,1.43753550452264e-06,1.21564525041862e-05,1.21564525041862e-05,1.58089294610697e-05,3.25577488428097e-05,3.70749001695758e-05,3.99382141156313e-05,7.51776107369428e-05,8.06459009587979e-05,0.000153621957283523,0.000159221180705993,0.000173978231485461,0.000199147488161966,0.000200257358339062,0.000204930997179109,0.00022705139247492,0.00022705139247492,0.000263046793491983,0.000270330718197487,0.000272478442266744,0.00031994549235137,0.000376877046053714,0.000402879400263179,0.000404101000807344,0.000488821762573255,0.000497867728178059,0.000518361300077097,0.00058166301471585,0.000597329136281854,0.00062305986986666,0.00071399497985114,0.000894939334614708,0.000946310363342251,0.00110877800210374,0.00123895859360112,0.00136692722218013,0.00141834035542254,0.00154172087551574,0.00195107874186728,0.00195107874186728,0.00200490674461329,0.00214666608661007,0.00231303419094142,0.00247750409427794,0.00256450963305999,0.00256450963305999,0.00278665242520859,0.00278665242520859,0.0030175340555002,0.00321824327509468,0.00321824327509468,0.00330664549428938,0.00361641425356918,0.00391359153332616,0.00458321807609974,0.00541770911828177,0.00542894503744562,0.00611814482160278,0.00642635390544999,0.00642635390544999,0.0067890702770369,0.00713652492421646,0.00860506616606949,0.00928119424037477,0.00928119424037477,0.00978767961480065],[0.000190785169855046,0.00028894463640905,0.00121564525041862,0.00121564525041862,0.00126471435688558,0.00199691070578156,0.00199691070578156,0.00199691070578156,0.00322583603835191,0.00322583603835191,0.00499513063444823,0.00499513063444823,0.00499513063444823,0.00499513063444823,0.00499513063444823,0.00499513063444823,0.00499513063444823,0.00499513063444823,0.00517709040306813,0.00517709040306813,0.00517709040306813,0.00575901886232466,0.00640690978291314,0.00644607040421086,0.00646561601291751,0.00697014819449282,0.00697014819449282,0.00725705820107936,0.00747671843839992,0.00747671843839992,0.00747671843839992,0.00856793975821368,0.0104094139967648,0.0104094139967648,0.0121965580231411,0.0136285445296124,0.0136692722218013,0.0141834035542254,0.0154172087551574,0.0175597086768056,0.0175597086768056,0.0180441607015196,0.0193199947794906,0.0198200327542235,0.0198200327542235,0.0205160770644799,0.0205160770644799,0.0222932194016687,0.0222932194016687,0.0225277029256628,0.0225277029256628,0.0225277029256628,0.0231465184600257,0.0253148997749842,0.0273951407332831,0.0320825265326982,0.0325736702246737,0.0325736702246737,0.0367088689296167,0.0385581234326999,0.0385581234326999,0.0407344216622214,0.0428191495452988,0.0516303969964169,0.0544009345985857,0.0544009345985857,0.0544009345985857],[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],["TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL"],[5,8,7,25,35,14,43,2,29,5,14,25,381,334,17,412,40,40,27,98,56,2,30,14,4,449,6,13,350,78,80,2,259,60,4,42,27,6,24,17,8,15,11,12,10,6,15,3,7,7,1,1,10,26,113,13,48,15,3,1,1,5,15,28,85,85,33],[3,4,1,3,17,7,7,2,12,5,7,19,47,12,15,47,32,32,6,64,27,2,12,2,2,183,6,3,156,49,51,2,172,18,2,27,10,4,11,10,2,15,7,5,6,5,7,3,4,4,1,1,10,23,48,5,6,3,2,1,1,2,5,2,5,5,2],[0.000368269868159387,0.00058923178905502,0.000515577815423142,0.00184134934079694,0.00257788907711571,0.00103115563084628,0.00316712086617073,0.000147307947263755,0.00213596523532445,0.000368269868159387,0.00103115563084628,0.00184134934079694,0.0280621639537453,0.0246004271930471,0.00125211755174192,0.0303454371363335,0.0029461589452751,0.0029461589452751,0.00198865728806069,0.00721808941592399,0.00412462252338514,0.000147307947263755,0.00220961920895632,0.00103115563084628,0.00029461589452751,0.033070634160713,0.000441923841791265,0.000957501657214407,0.0257788907711571,0.00574500994328644,0.0058923178905502,0.000147307947263755,0.0190763791706563,0.00441923841791265,0.00029461589452751,0.00309346689253885,0.00198865728806069,0.000441923841791265,0.00176769536716506,0.00125211755174192,0.00058923178905502,0.00110480960447816,0.000810193709950652,0.000883847683582529,0.000736539736318774,0.000441923841791265,0.00110480960447816,0.000220961920895632,0.000515577815423142,0.000515577815423142,7.36539736318774e-05,7.36539736318774e-05,0.000736539736318774,0.00191500331442881,0.00832289902040215,0.000957501657214407,0.00353539073433012,0.00110480960447816,0.000220961920895632,7.36539736318774e-05,7.36539736318774e-05,0.000368269868159387,0.00110480960447816,0.00206231126169257,0.00626058775870958,0.00626058775870958,0.00243058112985196]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>stId<\/th>\n      <th>dbId<\/th>\n      <th>name<\/th>\n      <th>llp<\/th>\n      <th>inDisease<\/th>\n      <th>species.dbId<\/th>\n      <th>species.taxId<\/th>\n      <th>species.name<\/th>\n      <th>entities.resource<\/th>\n      <th>entities.total<\/th>\n      <th>entities.found<\/th>\n      <th>entities.ratio<\/th>\n      <th>entities.pValue<\/th>\n      <th>entities.fdr<\/th>\n      <th>entities.exp<\/th>\n      <th>reactions.resource<\/th>\n      <th>reactions.total<\/th>\n      <th>reactions.found<\/th>\n      <th>reactions.ratio<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":5,"columnDefs":[{"className":"dt-right","targets":[2,6,10,11,12,13,14,17,18,19]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>As mentioned, some of <code><a href="../reference/rba_reactome_analysis.html">rba_reactome_analysis()</a></code>’s arguments correspond to the wizard of <a href="https://reactome.org/PathwayBrowser/#TOOL=AT">analyse gene list</a> tool; Other arguments corresponds to the contents of “Filter your results” tab in the results page.</p>
+<div id="htmlwidget-1d28e3fe6476f9311cfe" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1d28e3fe6476f9311cfe">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67"],["R-HSA-3371568","R-HSA-3371571","R-HSA-3371511","R-HSA-114604","R-HSA-6806003","R-HSA-3371453","R-HSA-983231","R-HSA-176412","R-HSA-3371556","R-HSA-6804754","R-HSA-176408","R-HSA-69273","R-HSA-2262752","R-HSA-109582","R-HSA-6796648","R-HSA-8953897","R-HSA-453276","R-HSA-174143","R-HSA-1538133","R-HSA-5633007","R-HSA-69620","R-HSA-176417","R-HSA-6804757","R-HSA-5689896","R-HSA-2980767","R-HSA-1640170","R-HSA-5666185","R-HSA-8853884","R-HSA-69278","R-HSA-69275","R-HSA-453274","R-HSA-5625970","R-HSA-3700989","R-HSA-376176","R-HSA-68884","R-HSA-6791312","R-HSA-5663220","R-HSA-162658","R-HSA-69481","R-HSA-6804116","R-HSA-1362300","R-HSA-176814","R-HSA-6804114","R-HSA-69473","R-HSA-8852276","R-HSA-5625900","R-HSA-156711","R-HSA-174048","R-HSA-5627117","R-HSA-416572","R-HSA-9723907","R-HSA-9723905","R-HSA-9013404","R-HSA-6804756","R-HSA-195258","R-HSA-400685","R-HSA-6811442","R-HSA-3214847","R-HSA-9687139","R-HSA-9699150","R-HSA-9663199","R-HSA-9675126","R-HSA-397795","R-HSA-69205","R-HSA-3247509","R-HSA-4839726","R-HSA-8953750"],[3371568,3371571,3371511,114604,6806003,3371453,983231,176412,3371556,6804754,176408,69273,2262752,109582,6796648,8953897,453276,174143,1538133,5633007,69620,176417,6804757,5689896,2980767,1640170,5666185,8853884,69278,69275,453274,5625970,3700989,376176,68884,6791312,5663220,162658,69481,6804116,1362300,176814,6804114,69473,8852276,5625900,156711,174048,5627117,416572,9723907,9723905,9013404,6804756,195258,400685,6811442,3214847,9687139,9699150,9663199,9675126,397795,69205,3247509,4839726,8953750],["Attenuation phase","HSF1-dependent transactivation","HSF1 activation","GPVI-mediated activation cascade","Regulation of TP53 Expression and Degradation","Regulation of HSF1-mediated heat shock response","Factors involved in megakaryocyte development and platelet production","Phosphorylation of the APC/C","Cellular response to heat stress","Regulation of TP53 Expression","Regulation of APC/C activators between G1/S and early anaphase","Cyclin A/B1/B2 associated events during G2/M transition","Cellular responses to stress","Hemostasis","TP53 Regulates Transcription of DNA Repair Genes","Cellular responses to stimuli","Regulation of mitotic cell cycle","APC/C-mediated degradation of cell cycle proteins","G0 and Early G1","Regulation of TP53 Activity","Cell Cycle Checkpoints","Phosphorylation of Emi1","Regulation of TP53 Degradation","Ovarian tumor domain proteases","Activation of NIMA Kinases NEK9, NEK6, NEK7","Cell Cycle","RHO GTPases Activate Rhotekin and Rhophilins","Transcriptional Regulation by VENTX","Cell Cycle, Mitotic","G2/M Transition","Mitotic G2-G2/M phases","RHO GTPases activate KTN1","Transcriptional Regulation by TP53","Signaling by ROBO receptors","Mitotic Telophase/Cytokinesis","TP53 Regulates Transcription of Cell Cycle Genes","RHO GTPases Activate Formins","Golgi Cisternae Pericentriolar Stack Reorganization","G2/M Checkpoints","TP53 Regulates Transcription of Genes Involved in G1 Cell Cycle Arrest","Transcription of E2F targets under negative control by p107 (RBL1) and p130 (RBL2) in complex with HDAC1","Activation of APC/C and APC/C:Cdc20 mediated degradation of mitotic proteins","TP53 Regulates Transcription of Genes Involved in G2 Cell Cycle Arrest","G2/M DNA damage checkpoint","The role of GTSE1 in G2/M progression after G2 checkpoint","RHO GTPases activate CIT","Polo-like kinase mediated events","APC/C:Cdc20 mediated degradation of Cyclin B","RHO GTPases Activate ROCKs","Sema4D induced cell migration and growth-cone collapse","Loss of Function of TP53 in Cancer","Loss of function of TP53 in cancer due to loss of tetramerization ability","RAC2 GTPase cycle","Regulation of TP53 Activity through Phosphorylation","RHO GTPase Effectors","Sema4D in semaphorin signaling","Intra-Golgi and retrograde Golgi-to-ER traffic","HATs acetylate histones","Aberrant regulation of mitotic cell cycle due to RB1 defects","Defective DNA double strand break response due to BARD1 loss of function","Defective DNA double strand break response due to BRCA1 loss of function","Diseases of mitotic cell cycle","G-protein beta:gamma signalling","G1/S-Specific Transcription","Chromatin modifying enzymes","Chromatin organization","Transcriptional Regulation by E2F6"],[true,true,true,true,false,true,true,true,false,true,true,true,false,false,true,false,false,false,true,false,false,true,true,true,true,false,true,true,false,false,false,true,false,true,true,false,true,true,true,true,true,false,true,true,true,true,true,true,true,true,false,true,true,true,false,false,false,true,false,true,true,false,false,true,true,false,true],[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,false,false,false,false,false,false,true,true,true,true,false,false,false,false,false],[48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887],["9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606"],["Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens"],["TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL"],[47,59,43,43,46,113,194,20,135,4,83,32,952,803,89,970,92,92,38,178,280,8,43,44,9,734,10,48,596,212,214,12,487,235,15,65,149,17,154,20,20,77,21,81,83,23,23,24,24,25,1,1,92,95,326,31,219,110,36,2,2,38,39,43,256,256,46],[5,5,4,4,4,5,6,3,5,2,4,3,11,10,4,11,4,4,3,5,6,2,3,3,2,9,2,3,8,5,5,2,7,5,2,3,4,2,4,2,2,3,2,3,3,2,2,2,2,2,1,1,3,3,5,2,4,3,2,1,1,2,2,2,4,4,2],[0.00329339219395978,0.00413425828603462,0.0030131034966015,0.0030131034966015,0.00322332001962021,0.00791815570037138,0.0135940018218765,0.0014014434867914,0.00945974353584192,0.000280288697358279,0.00581599047018429,0.00224230957886623,0.0667087099712704,0.0562679559946745,0.00623642351622171,0.0679700091093827,0.00644664003924042,0.00644664003924042,0.00266274262490365,0.0124728470324434,0.0196202088150795,0.000560577394716558,0.0030131034966015,0.00308317567094107,0.000630649569056128,0.0514329759652442,0.000700721743395698,0.00336346436829935,0.0417630159063836,0.0148553009599888,0.0149954453086679,0.000840866092074837,0.0341251489033705,0.0164669609697989,0.00105108261509355,0.00455469133207203,0.0104407539765959,0.00119122696377269,0.0107911148482937,0.0014014434867914,0.0014014434867914,0.00539555742414687,0.00147151566113096,0.00567584612150515,0.00581599047018429,0.0016116600098101,0.0016116600098101,0.00168173218414967,0.00168173218414967,0.00175180435848924,7.00721743395698e-05,7.00721743395698e-05,0.00644664003924042,0.00665685656225913,0.0228435288346997,0.00217223740452666,0.0153458061803658,0.00770793917735267,0.00252259827622451,0.00014014434867914,0.00014014434867914,0.00266274262490365,0.00273281479924322,0.0030131034966015,0.0179384766309299,0.0179384766309299,0.00322332001962021],[4.74589974763795e-07,1.43753550452264e-06,1.21564525041862e-05,1.21564525041862e-05,1.58089294610697e-05,3.25577488428097e-05,3.70749001695758e-05,3.99382141156313e-05,7.51776107369428e-05,8.06459009587979e-05,0.000153621957283523,0.000159221180705993,0.000173978231485461,0.000199147488161966,0.000200257358339062,0.000204930997179109,0.00022705139247492,0.00022705139247492,0.000263046793491983,0.000270330718197487,0.000272478442266744,0.00031994549235137,0.000376877046053714,0.000402879400263179,0.000404101000807344,0.000488821762573255,0.000497867728178059,0.000518361300077097,0.00058166301471585,0.000597329136281854,0.00062305986986666,0.00071399497985114,0.000894939334614708,0.000946310363342251,0.00110877800210374,0.00123895859360112,0.00136692722218013,0.00141834035542254,0.00154172087551574,0.00195107874186728,0.00195107874186728,0.00200490674461329,0.00214666608661007,0.00231303419094142,0.00247750409427794,0.00256450963305999,0.00256450963305999,0.00278665242520859,0.00278665242520859,0.0030175340555002,0.00321824327509468,0.00321824327509468,0.00330664549428938,0.00361641425356918,0.00391359153332616,0.00458321807609974,0.00541770911828177,0.00542894503744562,0.00611814482160278,0.00642635390544999,0.00642635390544999,0.0067890702770369,0.00713652492421646,0.00860506616606949,0.00928119424037477,0.00928119424037477,0.00978767961480065],[0.000190785169855046,0.00028894463640905,0.00121564525041862,0.00121564525041862,0.00126471435688558,0.00199691070578156,0.00199691070578156,0.00199691070578156,0.00322583603835191,0.00322583603835191,0.00499513063444823,0.00499513063444823,0.00499513063444823,0.00499513063444823,0.00499513063444823,0.00499513063444823,0.00499513063444823,0.00499513063444823,0.00517709040306813,0.00517709040306813,0.00517709040306813,0.00575901886232466,0.00640690978291314,0.00644607040421086,0.00646561601291751,0.00697014819449282,0.00697014819449282,0.00725705820107936,0.00747671843839992,0.00747671843839992,0.00747671843839992,0.00856793975821368,0.0104094139967648,0.0104094139967648,0.0121965580231411,0.0136285445296124,0.0136692722218013,0.0141834035542254,0.0154172087551574,0.0175597086768056,0.0175597086768056,0.0180441607015196,0.0193199947794906,0.0198200327542235,0.0198200327542235,0.0205160770644799,0.0205160770644799,0.0222932194016687,0.0222932194016687,0.0225277029256628,0.0225277029256628,0.0225277029256628,0.0231465184600257,0.0253148997749842,0.0273951407332831,0.0320825265326982,0.0325736702246737,0.0325736702246737,0.0367088689296167,0.0385581234326999,0.0385581234326999,0.0407344216622214,0.0428191495452988,0.0516303969964169,0.0544009345985857,0.0544009345985857,0.0544009345985857],[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],["TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL"],[5,8,7,25,35,14,43,2,29,5,14,25,381,334,17,412,40,40,27,98,56,2,30,14,4,449,6,13,350,78,80,2,259,60,4,42,27,6,24,17,8,15,11,12,10,6,15,3,7,7,1,1,10,26,113,13,48,15,3,1,1,5,15,28,85,85,33],[3,4,1,3,17,7,7,2,12,5,7,19,47,12,15,47,32,32,6,64,27,2,12,2,2,183,6,3,156,49,51,2,172,18,2,27,10,4,11,10,2,15,7,5,6,5,7,3,4,4,1,1,10,23,48,5,6,3,2,1,1,2,5,2,5,5,2],[0.000368269868159387,0.00058923178905502,0.000515577815423142,0.00184134934079694,0.00257788907711571,0.00103115563084628,0.00316712086617073,0.000147307947263755,0.00213596523532445,0.000368269868159387,0.00103115563084628,0.00184134934079694,0.0280621639537453,0.0246004271930471,0.00125211755174192,0.0303454371363335,0.0029461589452751,0.0029461589452751,0.00198865728806069,0.00721808941592399,0.00412462252338514,0.000147307947263755,0.00220961920895632,0.00103115563084628,0.00029461589452751,0.033070634160713,0.000441923841791265,0.000957501657214407,0.0257788907711571,0.00574500994328644,0.0058923178905502,0.000147307947263755,0.0190763791706563,0.00441923841791265,0.00029461589452751,0.00309346689253885,0.00198865728806069,0.000441923841791265,0.00176769536716506,0.00125211755174192,0.00058923178905502,0.00110480960447816,0.000810193709950652,0.000883847683582529,0.000736539736318774,0.000441923841791265,0.00110480960447816,0.000220961920895632,0.000515577815423142,0.000515577815423142,7.36539736318774e-05,7.36539736318774e-05,0.000736539736318774,0.00191500331442881,0.00832289902040215,0.000957501657214407,0.00353539073433012,0.00110480960447816,0.000220961920895632,7.36539736318774e-05,7.36539736318774e-05,0.000368269868159387,0.00110480960447816,0.00206231126169257,0.00626058775870958,0.00626058775870958,0.00243058112985196]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>stId<\/th>\n      <th>dbId<\/th>\n      <th>name<\/th>\n      <th>llp<\/th>\n      <th>inDisease<\/th>\n      <th>species.dbId<\/th>\n      <th>species.taxId<\/th>\n      <th>species.name<\/th>\n      <th>entities.resource<\/th>\n      <th>entities.total<\/th>\n      <th>entities.found<\/th>\n      <th>entities.ratio<\/th>\n      <th>entities.pValue<\/th>\n      <th>entities.fdr<\/th>\n      <th>entities.exp<\/th>\n      <th>reactions.resource<\/th>\n      <th>reactions.total<\/th>\n      <th>reactions.found<\/th>\n      <th>reactions.ratio<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":5,"columnDefs":[{"className":"dt-right","targets":[2,6,10,11,12,13,14,17,18,19]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>As mentioned, some of <code><a href="../reference/rba_reactome_analysis.html">rba_reactome_analysis()</a></code>’s arguments correspond to the wizard of <a href="https://reactome.org/PathwayBrowser/#TOOL=AT" class="external-link">analyse gene list</a> tool; Other arguments corresponds to the contents of “Filter your results” tab in the results page.</p>
 <p>Having the analysis’s token, you can retrieve the analysis results in many formats using <code><a href="../reference/rba_reactome_analysis_pdf.html">rba_reactome_analysis_pdf()</a></code> and <code><a href="../reference/rba_reactome_analysis_download.html">rba_reactome_analysis_download()</a></code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># download a full pdf report</span>
@@ -185,9 +164,9 @@
 <p>Your token is only guaranteed to be stored for 7 days. After that, you can upload the JSON file you have downloaded using <code>rba_reactome_analysis_download</code> and get a token for that:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">re_uploaded</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_analysis_import.html">rba_reactome_analysis_import</a></span><span class="op">(</span>input <span class="op">=</span> <span class="st">"reactome_results.json"</span><span class="op">)</span></code></pre></div>
-<div id="analysis_see-also-in-functions-manuals" class="section level2 heading3">
-<h2 class="hasAnchor">
-<a href="#analysis_see-also-in-functions-manuals" class="anchor"></a>See also in Functions’ manuals</h2>
+<div class="section level3">
+<h3 id="analysis_see-also-in-functions-manuals">See also in Functions’ manuals<a class="anchor" aria-label="anchor" href="#analysis_see-also-in-functions-manuals"></a>
+</h3>
 <p>Some rbioapi Reactome analysis functions were not covered in this vignette, be sure to check their manuals:</p>
 <ul>
 <li><p><code><a href="../reference/rba_reactome_analysis_mapping.html">rba_reactome_analysis_mapping()</a></code></p></li>
@@ -197,19 +176,19 @@
 <hr>
 </div>
 </div>
-<div id="reactome-contents-services" class="section level1 heading2">
-<h1 class="hasAnchor">
-<a href="#reactome-contents-services" class="anchor"></a>Reactome contents services</h1>
-<p>rbioapi functions that correspond to Reactome content services are those starting with rba_reactome_* but without “_analysis” infix. These functions cover what you can do with objects in Reactome knowledge-base. In simpler terms, most -but not all of them- correspond to what you can find in <a href="https://reactome.org/PathwayBrowser/" title="Reactome Pathway Browser">Reactome Pathway Browser</a> and <a href="https://reactome.org/content/query?q=apoptosis&amp;species=Homo+sapiens" title="Search results for apoptosis">search results</a>. (e.g. a <a href="https://reactome.org/content/detail/R-HSA-109581" title="Apoptosis Homo sapiens">pathway</a>, a <a href="https://reactome.org/content/detail/R-HSA-202939" title="Caspase-mediated cleavage of E-Cadherin">reaction</a>, a <a href="https://reactome.org/content/detail/R-HSA-350870" title="Caspase-3 [cytosol]">physical Entity</a>, etc.)</p>
-<div id="retrieve-any-object-from-reactome-knowledge-base" class="section level2">
-<h2 class="hasAnchor">
-<a href="#retrieve-any-object-from-reactome-knowledge-base" class="anchor"></a>Retrieve any object from Reactome knowledge-base</h2>
-<p>Using <code><a href="../reference/rba_reactome_query.html">rba_reactome_query()</a></code>, you can retrieve any object from Reactome knowledge-base. In simpler terms, what I mean by the object is roughly anything that Reactome associated an ID to it. This can range from a person’s entry to proteins, reactions, pathways, species, and many more! You can explore <a href="https://reactome.org/content/schema/DatabaseObject" title="Graph Database :: Data Schema">Reactome’s data schema</a> to learn about Reactome knowledge-base objects and their organization. Here are some examples, note that you are not limited to only one ID per query. You can use a vector of inputs, the only limitation is that when you supply more than one ID, you cannot have <code>enhanced = TRUE</code>.</p>
+<div class="section level2">
+<h2 id="reactome-contents-services">Reactome contents services<a class="anchor" aria-label="anchor" href="#reactome-contents-services"></a>
+</h2>
+<p>rbioapi functions that correspond to Reactome content services are those starting with rba_reactome_* but without “_analysis” infix. These functions cover what you can do with objects in Reactome knowledge-base. In simpler terms, most -but not all of them- correspond to what you can find in <a href="https://reactome.org/PathwayBrowser/" title="Reactome Pathway Browser" class="external-link">Reactome Pathway Browser</a> and <a href="https://reactome.org/content/query?q=apoptosis&amp;species=Homo+sapiens" title="Search results for apoptosis" class="external-link">search results</a>. (e.g. a <a href="https://reactome.org/content/detail/R-HSA-109581" title="Apoptosis Homo sapiens" class="external-link">pathway</a>, a <a href="https://reactome.org/content/detail/R-HSA-202939" title="Caspase-mediated cleavage of E-Cadherin" class="external-link">reaction</a>, a <a href="https://reactome.org/content/detail/R-HSA-350870" title="Caspase-3 [cytosol]" class="external-link">physical Entity</a>, etc.)</p>
+<div class="section level3">
+<h3 id="retrieve-any-object-from-reactome-knowledge-base">Retrieve any object from Reactome knowledge-base<a class="anchor" aria-label="anchor" href="#retrieve-any-object-from-reactome-knowledge-base"></a>
+</h3>
+<p>Using <code><a href="../reference/rba_reactome_query.html">rba_reactome_query()</a></code>, you can retrieve any object from Reactome knowledge-base. In simpler terms, what I mean by the object is roughly anything that Reactome associated an ID to it. This can range from a person’s entry to proteins, reactions, pathways, species, and many more! You can explore <a href="https://reactome.org/content/schema/DatabaseObject" title="Graph Database :: Data Schema" class="external-link">Reactome’s data schema</a> to learn about Reactome knowledge-base objects and their organization. Here are some examples, note that you are not limited to only one ID per query. You can use a vector of inputs, the only limitation is that when you supply more than one ID, you cannot have <code>enhanced = TRUE</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## 1 query a pathway Entry</span>
 <span class="va">pathway</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_query.html">rba_reactome_query</a></span><span class="op">(</span>ids <span class="op">=</span> <span class="st">"R-HSA-109581"</span>, enhanced <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">## 2 As always we use str() to inspect the output's structure</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">pathway</span>, <span class="fl">2</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">pathway</span>, <span class="fl">2</span><span class="op">)</span>
 <span class="co">#&gt; List of 25</span>
 <span class="co">#&gt;  $ dbId               : int 109581</span>
 <span class="co">#&gt;  $ displayName        : chr "Apoptosis"</span>
@@ -218,16 +197,16 @@
 <span class="co">#&gt;  $ created            :List of 5</span>
 <span class="co">#&gt;   ..$ dbId       : int 109608</span>
 <span class="co">#&gt;   ..$ displayName: chr "Alnemri, E, Hengartner, Michael, Tschopp, Jürg, Tsujimoto, Yoshihide, Hardwick, JM, 2004-01-16"</span>
-<span class="co">#&gt;   ..$ dateTime   : chr "2004-01-16 21:01:51.0"</span>
-<span class="co">#&gt;   ..$ schemaClass: chr "InstanceEdit"</span>
+<span class="co">#&gt;   ..$ dateTime   : chr "2004-01-16 21:01:51"</span>
 <span class="co">#&gt;   ..$ className  : chr "InstanceEdit"</span>
+<span class="co">#&gt;   ..$ schemaClass: chr "InstanceEdit"</span>
 <span class="co">#&gt;  $ modified           :List of 6</span>
 <span class="co">#&gt;   ..$ dbId       : int 10781591</span>
 <span class="co">#&gt;   ..$ displayName: chr "Weiser, JD, 2021-09-10"</span>
-<span class="co">#&gt;   ..$ dateTime   : chr "2021-09-10 15:17:05.0"</span>
+<span class="co">#&gt;   ..$ dateTime   : chr "2021-09-10 16:17:05"</span>
 <span class="co">#&gt;   ..$ note       : chr "Inserted by org.reactome.orthoinference"</span>
-<span class="co">#&gt;   ..$ schemaClass: chr "InstanceEdit"</span>
 <span class="co">#&gt;   ..$ className  : chr "InstanceEdit"</span>
+<span class="co">#&gt;   ..$ schemaClass: chr "InstanceEdit"</span>
 <span class="co">#&gt;  $ isInDisease        : logi FALSE</span>
 <span class="co">#&gt;  $ isInferred         : logi FALSE</span>
 <span class="co">#&gt;  $ name               :List of 1</span>
@@ -248,8 +227,8 @@
 <span class="co">#&gt;   ..$ definition  : chr "A programmed cell death process which begins when a cell receives an internal (e.g. DNA damage) or external sig"| __truncated__</span>
 <span class="co">#&gt;   ..$ name        : chr "apoptotic process"</span>
 <span class="co">#&gt;   ..$ url         : chr "https://www.ebi.ac.uk/QuickGO/term/GO:0006915"</span>
-<span class="co">#&gt;   ..$ schemaClass : chr "GO_BiologicalProcess"</span>
 <span class="co">#&gt;   ..$ className   : chr "GO_BiologicalProcess"</span>
+<span class="co">#&gt;   ..$ schemaClass : chr "GO_BiologicalProcess"</span>
 <span class="co">#&gt;  $ literatureReference:List of 7</span>
 <span class="co">#&gt;   ..$ :List of 11</span>
 <span class="co">#&gt;   ..$ :List of 11</span>
@@ -286,8 +265,8 @@
 <span class="co">#&gt;   ..$ :List of 16</span>
 <span class="co">#&gt;   ..$ :List of 16</span>
 <span class="co">#&gt;   ..$ :List of 15</span>
-<span class="co">#&gt;  $ schemaClass        : chr "Pathway"</span>
 <span class="co">#&gt;  $ className          : chr "Pathway"</span>
+<span class="co">#&gt;  $ schemaClass        : chr "Pathway"</span>
 
 
 
@@ -297,7 +276,7 @@
 <code class="sourceCode R"><span class="co">## 1 query a protein Entry</span>
 <span class="va">protein</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_query.html">rba_reactome_query</a></span><span class="op">(</span>ids <span class="op">=</span> <span class="fl">66247</span>, enhanced <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">## 2 As always we use str() to inspect the output's structure</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">protein</span>, <span class="fl">1</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">protein</span>, <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; List of 27</span>
 <span class="co">#&gt;  $ dbId               : int 66247</span>
 <span class="co">#&gt;  $ displayName        : chr "UniProt:P25942-1 CD40"</span>
@@ -324,23 +303,23 @@
 <span class="co">#&gt;  $ referenceTranscript:List of 4</span>
 <span class="co">#&gt;  $ variantIdentifier  : chr "P25942-1"</span>
 <span class="co">#&gt;  $ isoformParent      :List of 1</span>
-<span class="co">#&gt;  $ schemaClass        : chr "ReferenceIsoform"</span>
 <span class="co">#&gt;  $ className          : chr "ReferenceIsoform"</span>
+<span class="co">#&gt;  $ schemaClass        : chr "ReferenceIsoform"</span>
 
 
 
 <span class="co">## 3 You can compare it with the webpage of R-HSA-202939 entry:</span>
 <span class="co"># https://reactome.org/content/detail/R-HSA-202939</span></code></pre></div>
 </div>
-<div id="find-cross-reference-ids-in-reactome" class="section level2">
-<h2 class="hasAnchor">
-<a href="#find-cross-reference-ids-in-reactome" class="anchor"></a>Find Cross-Reference IDs in Reactome</h2>
+<div class="section level3">
+<h3 id="find-cross-reference-ids-in-reactome">Find Cross-Reference IDs in Reactome<a class="anchor" aria-label="anchor" href="#find-cross-reference-ids-in-reactome"></a>
+</h3>
 <p>As you can see in the second example usage of we used Reactome’s dbID <code>66247</code> to query CD40 protein. How did we obtain that in the first place? You can use <code>rba_reactome_xref</code> to map any cross-reference (external) IDs to Reactome IDs.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## 1 We Supply HGNC ID to find what is the corresponding database ID in Reactome</span>
 <span class="va">xref_protein</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_xref.html">rba_reactome_xref</a></span><span class="op">(</span><span class="st">"CD40"</span><span class="op">)</span>
 <span class="co">## 2 As always use str() to inspect the output's structure</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">xref_protein</span>, <span class="fl">1</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">xref_protein</span>, <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; List of 19</span>
 <span class="co">#&gt;  $ dbId               : int 66247</span>
 <span class="co">#&gt;  $ displayName        : chr "UniProt:P25942-1 CD40"</span>
@@ -359,46 +338,46 @@
 <span class="co">#&gt;  $ sequenceLength     : int 277</span>
 <span class="co">#&gt;  $ chain              :List of 1</span>
 <span class="co">#&gt;  $ variantIdentifier  : chr "P25942-1"</span>
-<span class="co">#&gt;  $ schemaClass        : chr "ReferenceIsoform"</span>
-<span class="co">#&gt;  $ className          : chr "ReferenceIsoform"</span></code></pre></div>
+<span class="co">#&gt;  $ className          : chr "ReferenceIsoform"</span>
+<span class="co">#&gt;  $ schemaClass        : chr "ReferenceIsoform"</span></code></pre></div>
 </div>
-<div id="map-cross-reference-ids-to-reactome" class="section level2">
-<h2 class="hasAnchor">
-<a href="#map-cross-reference-ids-to-reactome" class="anchor"></a>Map Cross-Reference IDs to Reactome</h2>
+<div class="section level3">
+<h3 id="map-cross-reference-ids-to-reactome">Map Cross-Reference IDs to Reactome<a class="anchor" aria-label="anchor" href="#map-cross-reference-ids-to-reactome"></a>
+</h3>
 <p>While we are at the cross-reference topic, here is another useful resource. Using <code>rba_reactome_mapping</code> you can find the Reactome pathways or reactions which include your external ID:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## 1 Again, consider CD40 protein:</span>
 <span class="va">xref_mapping</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_mapping.html">rba_reactome_mapping</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"CD40"</span>,
                                     resource <span class="op">=</span> <span class="st">"hgnc"</span>,
                                     map_to <span class="op">=</span> <span class="st">"pathways"</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-434fe23567e95062394b" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-434fe23567e95062394b">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],[198933,5668541,5676594],["Immunoregulatory interactions between a Lymphoid and a non-Lymphoid cell","TNFR2 non-canonical NF-kB pathway","TNF receptor superfamily (TNFSF) members mediating non-canonical NF-kB pathway"],["R-HSA-198933","R-HSA-5668541","R-HSA-5676594"],["R-HSA-198933.7","R-HSA-5668541.3","R-HSA-5676594.2"],[false,false,false],[false,false,false],["Immunoregulatory interactions between a Lymphoid and a non-Lymphoid cell",["TNFR2 non-canonical NF-kB pathway","TNFRSF mediated non-canonical NF-kB pathway"],"TNF receptor superfamily (TNFSF) members mediating non-canonical NF-kB pathway"],["2007-08-21","2015-06-17","2015-06-17"],["Homo sapiens","Homo sapiens","Homo sapiens"],["10.3180/r-hsa-198933.2","10.3180/r-hsa-5668541.1",null],[true,true,false],[false,false,false],["Pathway","Pathway","Pathway"],["Pathway","Pathway","Pathway"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>dbId<\/th>\n      <th>displayName<\/th>\n      <th>stId<\/th>\n      <th>stIdVersion<\/th>\n      <th>isInDisease<\/th>\n      <th>isInferred<\/th>\n      <th>name<\/th>\n      <th>releaseDate<\/th>\n      <th>speciesName<\/th>\n      <th>doi<\/th>\n      <th>hasDiagram<\/th>\n      <th>hasEHLD<\/th>\n      <th>schemaClass<\/th>\n      <th>className<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><hr>
+<div id="htmlwidget-16c42e95d7cdf50ab02b" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-16c42e95d7cdf50ab02b">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],[198933,5668541,5676594],["Immunoregulatory interactions between a Lymphoid and a non-Lymphoid cell","TNFR2 non-canonical NF-kB pathway","TNF receptor superfamily (TNFSF) members mediating non-canonical NF-kB pathway"],["R-HSA-198933","R-HSA-5668541","R-HSA-5676594"],["R-HSA-198933.7","R-HSA-5668541.3","R-HSA-5676594.2"],[false,false,false],[false,false,false],["Immunoregulatory interactions between a Lymphoid and a non-Lymphoid cell",["TNFR2 non-canonical NF-kB pathway","TNFRSF mediated non-canonical NF-kB pathway"],"TNF receptor superfamily (TNFSF) members mediating non-canonical NF-kB pathway"],["2007-08-21","2015-06-17","2015-06-17"],["Homo sapiens","Homo sapiens","Homo sapiens"],["10.3180/r-hsa-198933.2","10.3180/r-hsa-5668541.1",null],[true,true,false],[false,false,false],["Pathway","Pathway","Pathway"],["Pathway","Pathway","Pathway"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>dbId<\/th>\n      <th>displayName<\/th>\n      <th>stId<\/th>\n      <th>stIdVersion<\/th>\n      <th>isInDisease<\/th>\n      <th>isInferred<\/th>\n      <th>name<\/th>\n      <th>releaseDate<\/th>\n      <th>speciesName<\/th>\n      <th>doi<\/th>\n      <th>hasDiagram<\/th>\n      <th>hasEHLD<\/th>\n      <th>className<\/th>\n      <th>schemaClass<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><hr>
 </div>
-<div id="see-also-in-functions-manuals" class="section level2 heading2">
-<h2 class="hasAnchor">
-<a href="#see-also-in-functions-manuals" class="anchor"></a>See also in Functions’ manuals</h2>
+<div class="section level3">
+<h3 id="see-also-in-functions-manuals">See also in Functions’ manuals<a class="anchor" aria-label="anchor" href="#see-also-in-functions-manuals"></a>
+</h3>
 <p>There are still more rbioapi f Reactome content functions that were not covered in this vignette. Here is a brief overview, see the functions’ manual for detailed guides and examples.</p>
-<div id="retrieve-reactome-database-information" class="section level3">
-<h3 class="hasAnchor">
-<a href="#retrieve-reactome-database-information" class="anchor"></a>Retrieve Reactome Database information</h3>
+<div class="section level4">
+<h4 id="retrieve-reactome-database-information">Retrieve Reactome Database information<a class="anchor" aria-label="anchor" href="#retrieve-reactome-database-information"></a>
+</h4>
 <ul>
 <li><p><code><a href="../reference/rba_reactome_version.html">rba_reactome_version()</a></code>: Return current Reactome version</p></li>
 <li><p><code><a href="../reference/rba_reactome_diseases.html">rba_reactome_diseases()</a></code>: Retrieve a list of disease annotated in Reactome.</p></li>
 <li><p><code><a href="../reference/rba_reactome_species.html">rba_reactome_species()</a></code>: Retrieve a list of species annotated in Reactome.</p></li>
 </ul>
 </div>
-<div id="general-mappingquerying" class="section level3">
-<h3 class="hasAnchor">
-<a href="#general-mappingquerying" class="anchor"></a>General Mapping/Querying</h3>
+<div class="section level4">
+<h4 id="general-mappingquerying">General Mapping/Querying<a class="anchor" aria-label="anchor" href="#general-mappingquerying"></a>
+</h4>
 <ul>
 <li><p><code><a href="../reference/rba_reactome_query.html">rba_reactome_query()</a></code></p></li>
 <li><p><code><a href="../reference/rba_reactome_mapping.html">rba_reactome_mapping()</a></code></p></li>
 <li><p><code><a href="../reference/rba_reactome_xref.html">rba_reactome_xref()</a></code></p></li>
 </ul>
 </div>
-<div id="things-you-can-do-with-a-entities" class="section level3">
-<h3 class="hasAnchor">
-<a href="#things-you-can-do-with-a-entities" class="anchor"></a>Things you can do with a Entities</h3>
+<div class="section level4">
+<h4 id="things-you-can-do-with-a-entities">Things you can do with a Entities<a class="anchor" aria-label="anchor" href="#things-you-can-do-with-a-entities"></a>
+</h4>
 <ul>
 <li><p><code>reactome_complex_list()</code>: Get a list of complexes that have your molecule in them.</p></li>
 <li><p><code><a href="../reference/rba_reactome_complex_subunits.html">rba_reactome_complex_subunits()</a></code>: Get the list of subunits in your complex</p></li>
@@ -406,9 +385,9 @@
 <li><p><code><a href="../reference/rba_reactome_entity_other_forms.html">rba_reactome_entity_other_forms()</a></code></p></li>
 </ul>
 </div>
-<div id="things-you-can-do-with-events" class="section level3">
-<h3 class="hasAnchor">
-<a href="#things-you-can-do-with-events" class="anchor"></a>Things you can do with Events</h3>
+<div class="section level4">
+<h4 id="things-you-can-do-with-events">Things you can do with Events<a class="anchor" aria-label="anchor" href="#things-you-can-do-with-events"></a>
+</h4>
 <ul>
 <li><p><code><a href="../reference/rba_reactome_event_ancestors.html">rba_reactome_event_ancestors()</a></code></p></li>
 <li><p><code><a href="../reference/rba_reactome_participants.html">rba_reactome_participants()</a></code></p></li>
@@ -418,34 +397,34 @@
 <li><p><code><a href="../reference/rba_reactome_event_hierarchy.html">rba_reactome_event_hierarchy()</a></code>: Retrieve full event hierarchy of an species.</p></li>
 </ul>
 </div>
-<div id="pathways" class="section level3">
-<h3 class="hasAnchor">
-<a href="#pathways" class="anchor"></a>Pathways</h3>
+<div class="section level4">
+<h4 id="pathways">Pathways<a class="anchor" aria-label="anchor" href="#pathways"></a>
+</h4>
 <ul>
 <li><p><code><a href="../reference/rba_reactome_pathways_low.html">rba_reactome_pathways_low()</a></code></p></li>
 <li><p><code><a href="../reference/rba_reactome_pathways_events.html">rba_reactome_pathways_events()</a></code></p></li>
 <li><p><code><a href="../reference/rba_reactome_pathways_top.html">rba_reactome_pathways_top()</a></code></p></li>
 </ul>
 </div>
-<div id="interactors" class="section level3">
-<h3 class="hasAnchor">
-<a href="#interactors" class="anchor"></a>Interactors</h3>
+<div class="section level4">
+<h4 id="interactors">Interactors<a class="anchor" aria-label="anchor" href="#interactors"></a>
+</h4>
 <ul>
 <li><p><code><a href="../reference/rba_reactome_interactors_psicquic.html">rba_reactome_interactors_psicquic()</a></code></p></li>
 <li><p><code><a href="../reference/rba_reactome_interactors_static.html">rba_reactome_interactors_static()</a></code></p></li>
 </ul>
 </div>
-<div id="people" class="section level3">
-<h3 class="hasAnchor">
-<a href="#people" class="anchor"></a>People</h3>
+<div class="section level4">
+<h4 id="people">People<a class="anchor" aria-label="anchor" href="#people"></a>
+</h4>
 <ul>
 <li><p><code><a href="../reference/rba_reactome_people_name.html">rba_reactome_people_name()</a></code></p></li>
 <li><p><code><a href="../reference/rba_reactome_people_id.html">rba_reactome_people_id()</a></code></p></li>
 </ul>
 </div>
-<div id="export-diagrams-and-events" class="section level3">
-<h3 class="hasAnchor">
-<a href="#export-diagrams-and-events" class="anchor"></a>Export diagrams and events</h3>
+<div class="section level4">
+<h4 id="export-diagrams-and-events">Export diagrams and events<a class="anchor" aria-label="anchor" href="#export-diagrams-and-events"></a>
+</h4>
 <ul>
 <li><p><code><a href="../reference/rba_reactome_exporter_diagram.html">rba_reactome_exporter_diagram()</a></code></p></li>
 <li><p><code><a href="../reference/rba_reactome_exporter_overview.html">rba_reactome_exporter_overview()</a></code></p></li>
@@ -456,71 +435,69 @@
 </div>
 </div>
 </div>
-<div id="links" class="section level1 heading2">
-<h1 class="hasAnchor">
-<a href="#links" class="anchor"></a>Links</h1>
+<div class="section level2">
+<h2 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a>
+</h2>
 <ul>
-<li><p><a href="https://rbioapi.moosa-r.com/articles/rbioapi_reactome.html" title="2.D: Reactome &amp; rbioapi">This article in pkgdown website</a></p></li>
-<li><p><a href="https://rbioapi.moosa-r.com/reference/index.html#section-reactome-analysis-services-rba-reactome-" title="rbioapi reference">Functions references in pkgdown website</a></p></li>
+<li><p><a href="https://rbioapi.moosa-r.com/articles/rbioapi_reactome.html" title="2.D: Reactome &amp; rbioapi">This article in rbioapi documentation site</a></p></li>
+<li><p><a href="https://rbioapi.moosa-r.com/reference/index.html#section-reactome-analysis-services-rba-reactome-" title="rbioapi reference">Functions references in rbioapi documentation site</a></p></li>
 <li><p><a href="rbioapi.html" title="rbioapi: User-Friendly R Interface to Biologic Web Services' API">rbioapi vignette index</a></p></li>
 </ul>
 <hr>
 </div>
-<div id="session-info" class="section level1 heading2">
-<h1 class="hasAnchor">
-<a href="#session-info" class="anchor"></a>Session info</h1>
-<pre><code>#&gt; R version 4.1.1 (2021-08-10)
-#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)
-#&gt; Running under: macOS Catalina 10.15.7
-#&gt; 
-#&gt; Matrix products: default
-#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.0.dylib
-#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib
-#&gt; 
-#&gt; locale:
-#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
-#&gt; 
-#&gt; attached base packages:
-#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     
-#&gt; 
-#&gt; other attached packages:
-#&gt; [1] rbioapi_0.7.5
-#&gt; 
-#&gt; loaded via a namespace (and not attached):
-#&gt;  [1] knitr_1.36        magrittr_2.0.1    R6_2.5.1          ragg_1.1.3       
-#&gt;  [5] rlang_0.4.11      fastmap_1.1.0     stringr_1.4.0     httr_1.4.2       
-#&gt;  [9] tools_4.1.1       DT_0.19           xfun_0.26         jquerylib_0.1.4  
-#&gt; [13] crosstalk_1.1.1   htmltools_0.5.2   systemfonts_1.0.2 yaml_2.2.1       
-#&gt; [17] digest_0.6.28     rprojroot_2.0.2   pkgdown_1.6.1     crayon_1.4.1     
-#&gt; [21] textshaping_0.3.5 htmlwidgets_1.5.4 fs_1.5.0          curl_4.3.2       
-#&gt; [25] memoise_2.0.0     cachem_1.0.6      evaluate_0.14     rmarkdown_2.11   
-#&gt; [29] stringi_1.7.5     compiler_4.1.1    desc_1.4.0        jsonlite_1.7.2</code></pre>
+<div class="section level2">
+<h2 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
+</h2>
+<pre><code><span class="co">#&gt; R version 4.1.2 (2021-11-01)</span>
+<span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span>
+<span class="co">#&gt; Running under: macOS Catalina 10.15.7</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Matrix products: default</span>
+<span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.0.dylib</span>
+<span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; locale:</span>
+<span class="co">#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; attached base packages:</span>
+<span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; other attached packages:</span>
+<span class="co">#&gt; [1] rbioapi_0.7.5</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; loaded via a namespace (and not attached):</span>
+<span class="co">#&gt;  [1] knitr_1.37        magrittr_2.0.1    R6_2.5.1          ragg_1.1.3       </span>
+<span class="co">#&gt;  [5] rlang_0.4.12      fastmap_1.1.0     httr_1.4.2        stringr_1.4.0    </span>
+<span class="co">#&gt;  [9] tools_4.1.2       DT_0.20           xfun_0.29         jquerylib_0.1.4  </span>
+<span class="co">#&gt; [13] crosstalk_1.2.0   htmltools_0.5.2   systemfonts_1.0.2 yaml_2.2.1       </span>
+<span class="co">#&gt; [17] digest_0.6.29     rprojroot_2.0.2   pkgdown_2.0.2     crayon_1.4.2     </span>
+<span class="co">#&gt; [21] textshaping_0.3.6 purrr_0.3.4       htmlwidgets_1.5.4 sass_0.4.0       </span>
+<span class="co">#&gt; [25] fs_1.5.2          curl_4.3.2        memoise_2.0.1     cachem_1.0.6     </span>
+<span class="co">#&gt; [29] evaluate_0.14     rmarkdown_2.11    stringi_1.7.6     compiler_4.1.2   </span>
+<span class="co">#&gt; [33] bslib_0.3.1       desc_1.4.0        jsonlite_1.7.3</span></code></pre>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
-  <p>Developed by Moosa Rezwani.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p></p>
+<p>Developed by Moosa Rezwani.</p>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+<div class="pkgdown-footer-right">
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
 
+  
 
   </body>
 </html>

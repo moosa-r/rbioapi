@@ -4,14 +4,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="rbioapi">
 <title>2.C: miEEA &amp; rbioapi • rbioapi</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="2.C: miEEA &amp; rbioapi">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="2.C: miEEA &amp; rbioapi">
 <meta property="og:description" content="rbioapi">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -24,122 +24,100 @@
   gtag('config', 'G-1HHD9Z0414');
 </script>
 </head>
-<body data-spy="scroll" data-target="#toc">
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">rbioapi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.5</span>
-      </span>
-    </div>
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+    
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">rbioapi</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.5</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="../index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
-<li>
-  <a href="../articles/rbioapi.html">Get Started</a>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/rbioapi.html">Get Started</a>
 </li>
-<li>
-  <a href="../reference/index.html">Functions</a>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Functions</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Supported Services
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/rbioapi.html">1: rbioapi: Get Started</a>
-    </li>
-    <li>
-      <a href="../articles/rbioapi_enrichr.html">2.A: Enrichr &amp; rbioapi</a>
-    </li>
-    <li>
-      <a href="../articles/rbioapi_mieaa.html">2.B: miEEA &amp; rbioapi</a>
-    </li>
-    <li>
-      <a href="../articles/rbioapi_panther.html">2.C: PANTHER &amp; rbioapi</a>
-    </li>
-    <li>
-      <a href="../articles/rbioapi_reactome.html">2.D: Reactome &amp; rbioapi</a>
-    </li>
-    <li>
-      <a href="../articles/rbioapi_string.html">2.E: STRING &amp; rbioapi</a>
-    </li>
-    <li>
-      <a href="../articles/rbioapi_uniprot.html">2.F: UniProt &amp; rbioapi</a>
-    </li>
-    <li>
-      <a href="../articles/rbioapi_jaspar.html">2.G: JASPAR &amp; rbioapi</a>
-    </li>
-  </ul>
-</li>
-<li>
-  <a href="../news/index.html">News</a>
-</li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/moosa-r/rbioapi/">
-    <span class="fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
-</div>
-<!--/.nav-collapse -->
+<li class="active nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-supported-services">Supported Services</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-supported-services">
+    <a class="dropdown-item" href="../articles/rbioapi.html">1: rbioapi: Get Started</a>
+    <a class="dropdown-item" href="../articles/rbioapi_enrichr.html">2.A: Enrichr &amp; rbioapi</a>
+    <a class="dropdown-item" href="../articles/rbioapi_mieaa.html">2.B: miEEA &amp; rbioapi</a>
+    <a class="dropdown-item" href="../articles/rbioapi_panther.html">2.C: PANTHER &amp; rbioapi</a>
+    <a class="dropdown-item" href="../articles/rbioapi_reactome.html">2.D: Reactome &amp; rbioapi</a>
+    <a class="dropdown-item" href="../articles/rbioapi_string.html">2.E: STRING &amp; rbioapi</a>
+    <a class="dropdown-item" href="../articles/rbioapi_uniprot.html">2.F: UniProt &amp; rbioapi</a>
+    <a class="dropdown-item" href="../articles/rbioapi_jaspar.html">2.G: JASPAR &amp; rbioapi</a>
   </div>
-<!--/.container -->
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">News</a>
+</li>
+      </ul>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/moosa-r/rbioapi/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
-<!--/.navbar -->
 
-      
+    
+  </div>
+</nav><div class="container template-article">
 
-      </header><script src="rbioapi_mieaa_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="rbioapi_mieaa_files/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="rbioapi_mieaa_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="rbioapi_mieaa_files/datatables-binding-0.19/datatables.js"></script><script src="rbioapi_mieaa_files/jquery-3.6.0/jquery-3.6.0.min.js"></script><link href="rbioapi_mieaa_files/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="rbioapi_mieaa_files/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="rbioapi_mieaa_files/dt-core-1.10.20/js/jquery.dataTables.min.js"></script><link href="rbioapi_mieaa_files/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet">
-<script src="rbioapi_mieaa_files/crosstalk-1.1.1/js/crosstalk.min.js"></script><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>2.C: miEEA &amp; rbioapi</h1>
-                        <h4 class="author">Moosa Rezwani</h4>
+
+
+<script src="rbioapi_mieaa_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="rbioapi_mieaa_files/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="rbioapi_mieaa_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="rbioapi_mieaa_files/datatables-binding-0.20/datatables.js"></script><link href="rbioapi_mieaa_files/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="rbioapi_mieaa_files/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="rbioapi_mieaa_files/dt-core-1.11.3/js/jquery.dataTables.min.js"></script><link href="rbioapi_mieaa_files/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="rbioapi_mieaa_files/crosstalk-1.2.0/js/crosstalk.min.js"></script><div class="row">
+  <main id="main"><div class="page-header">
+      <img src="" class="logo" alt=""><h1>2.C: miEEA &amp; rbioapi</h1>
+                        <h4 data-toc-skip class="author">Moosa Rezwani</h4>
             
-            <h4 class="date">2021-10-14</h4>
+            <h4 data-toc-skip class="date">2022-01-19</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/master/vignettes/rbioapi_mieaa.Rmd"><code>vignettes/rbioapi_mieaa.Rmd</code></a></small>
-      <div class="hidden name"><code>rbioapi_mieaa.Rmd</code></div>
-
+      <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/HEAD/vignettes/rbioapi_mieaa.Rmd" class="external-link"><code>vignettes/rbioapi_mieaa.Rmd</code></a></small>
+      <div class="d-none name"><code>rbioapi_mieaa.Rmd</code></div>
     </div>
 
     
     
 <hr>
-<div id="introduction" class="section level1 heading2">
-<h1 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h1>
-<p>The miRNA Enrichment Analysis and Annotation Tool (<a href="https://ccb-compute2.cs.uni-saarland.de/mieaa2" title="https://ccb-compute2.cs.uni-saarland.de/mieaa2">miEAA</a>) is a service provided by the <a href="https://www.ccb.uni-saarland.de/">Chair for Clinical Bioinformatics at Saarland University</a>. Basically, miEAA is a multi-species microRNA enrichment analysis tool. For more information, see their <a href="https://ccb-compute2.cs.uni-saarland.de/mieaa2" title="https://ccb-compute2.cs.uni-saarland.de/mieaa2">website</a> or <a href="https://doi.org/10.1093/nar/gkaa309" title="miEAA 2.0: integrating multi-species microRNA enrichment analysis and workflow management systems">published paper</a>.</p>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
+<p>The miRNA Enrichment Analysis and Annotation Tool (<a href="https://ccb-compute2.cs.uni-saarland.de/mieaa2" title="https://ccb-compute2.cs.uni-saarland.de/mieaa2" class="external-link">miEAA</a>) is a service provided by the <a href="https://www.ccb.uni-saarland.de/" class="external-link">Chair for Clinical Bioinformatics at Saarland University</a>. Basically, miEAA is a multi-species microRNA enrichment analysis tool. For more information, see their <a href="https://ccb-compute2.cs.uni-saarland.de/mieaa2" title="https://ccb-compute2.cs.uni-saarland.de/mieaa2" class="external-link">website</a> or <a href="https://doi.org/10.1093/nar/gkaa309" title="miEAA 2.0: integrating multi-species microRNA enrichment analysis and workflow management systems" class="external-link">published paper</a>.</p>
 <hr>
 </div>
-<div id="first-find-enrichment-categories" class="section level1">
-<h1 class="hasAnchor">
-<a href="#first-find-enrichment-categories" class="anchor"></a>First, find <strong>enrichment categories</strong>
-</h1>
-<p>Before Enriching miRNA set, note that based on your input <strong>miRNA type</strong> (either all mature or precursor, not a mixture of both!) and the <strong>species</strong>, there will be different <a href="https://ccb-compute2.cs.uni-saarland.de/mieaa2/downloads/" title="miEEA integrated data sets">sets</a> of supported <strong>enrichment categories.</strong></p>
+<div class="section level2">
+<h2 id="first-find-enrichment-categories">First, find <strong>enrichment categories</strong><a class="anchor" aria-label="anchor" href="#first-find-enrichment-categories"></a>
+</h2>
+<p>Before Enriching miRNA set, note that based on your input <strong>miRNA type</strong> (either all mature or precursor, not a mixture of both!) and the <strong>species</strong>, there will be different <a href="https://ccb-compute2.cs.uni-saarland.de/mieaa2/downloads/" title="miEEA integrated data sets" class="external-link">sets</a> of supported <strong>enrichment categories.</strong></p>
 <p>Thus, it is recommended to retrieve a list of possible enrichment categories that you may use:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## A list of available enrichment categories for:</span>
@@ -151,17 +129,17 @@
 <span class="fu"><a href="../reference/rba_mieaa_cats.html">rba_mieaa_cats</a></span><span class="op">(</span>mirna_type <span class="op">=</span> <span class="st">"mature"</span>, species <span class="op">=</span> <span class="st">"Danio rerio"</span><span class="op">)</span></code></pre></div>
 <hr>
 </div>
-<div id="submit-enrichment-analysis-request-to-mieaa" class="section level1">
-<h1 class="hasAnchor">
-<a href="#submit-enrichment-analysis-request-to-mieaa" class="anchor"></a>Submit Enrichment analysis request to miEAA</h1>
+<div class="section level2">
+<h2 id="submit-enrichment-analysis-request-to-mieaa">Submit Enrichment analysis request to miEAA<a class="anchor" aria-label="anchor" href="#submit-enrichment-analysis-request-to-mieaa"></a>
+</h2>
 <p>There are two approaches to do this, we will start with the simpler one.</p>
-<div id="approach-1-using-the-wrapper-function" class="section level2 heading3">
-<h2 class="hasAnchor">
-<a href="#approach-1-using-the-wrapper-function" class="anchor"></a>Approach 1: Using the Wrapper function</h2>
+<div class="section level3">
+<h3 id="approach-1-using-the-wrapper-function">Approach 1: Using the Wrapper function<a class="anchor" aria-label="anchor" href="#approach-1-using-the-wrapper-function"></a>
+</h3>
 <p>Just fill the arguments of <code><a href="../reference/rba_mieaa_enrich.html">rba_mieaa_enrich()</a></code> according to the function’s manual; As you can see in the function’s arguments, you have a lot of controls over your enrichment request, but you need to provide <code>test_set</code>, <code>mirna_type</code>, <code>test_type</code>, and <code>species</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## 1 We create a variable with our miRNAs' mature IDs</span>
-<span class="va">mirs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hsa-miR-20b-5p"</span>, <span class="st">"hsa-miR-144-5p"</span>, <span class="st">"hsa-miR-17-5p"</span>, <span class="st">"hsa-miR-20a-5p"</span>,
+<span class="va">mirs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hsa-miR-20b-5p"</span>, <span class="st">"hsa-miR-144-5p"</span>, <span class="st">"hsa-miR-17-5p"</span>, <span class="st">"hsa-miR-20a-5p"</span>,
          <span class="st">"hsa-miR-222-3p"</span>, <span class="st">"hsa-miR-106a-5p"</span>, <span class="st">"hsa-miR-93-5p"</span>, <span class="st">"hsa-miR-126-3p"</span>,
          <span class="st">"hsa-miR-363-3p"</span>, <span class="st">"hsa-miR-302c-3p"</span>, <span class="st">"hsa-miR-374b-5p"</span>, <span class="st">"hsa-miR-18a-5p"</span>,
          <span class="st">"hsa-miR-548d-3p"</span>, <span class="st">"hsa-miR-135a-3p"</span>, <span class="st">"hsa-miR-558"</span>, <span class="st">"hsa-miR-130b-5p"</span>,
@@ -176,34 +154,34 @@
 <span class="co">#&gt; Submitting ORA enrichment request for 17 miRNA IDs of species Homo sapiens to miEAA servers.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  -- Step 2/3: Checking for Submitted enrichment job's status every 5 seconds.</span>
-<span class="co">#&gt;     Your submitted job ID is: c10e1e82-bcbc-4268-b5ba-b65624e079e2</span>
+<span class="co">#&gt;     Your submitted job ID is: 72a89daa-04c7-46aa-9b19-4d2d66cf2274</span>
 <span class="co">#&gt; ....</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  -- Step 3/3: Retrieving the results of the finished enrichment job.</span>
-<span class="co">#&gt; Retrieving results of submitted enrichment request with ID: c10e1e82-bcbc-4268-b5ba-b65624e079e2</span>
+<span class="co">#&gt; Retrieving results of submitted enrichment request with ID: 72a89daa-04c7-46aa-9b19-4d2d66cf2274</span>
 <span class="co">## 2b Or, We can limit the enrichment to certain datasets (enrichment categories)</span>
 <span class="va">mieaa_kegg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_mieaa_enrich.html">rba_mieaa_enrich</a></span><span class="op">(</span>test_set <span class="op">=</span> <span class="va">mirs</span>,
                               mirna_type <span class="op">=</span> <span class="st">"mature"</span>,
                               test_type <span class="op">=</span> <span class="st">"ORA"</span>,
                               species <span class="op">=</span> <span class="fl">9606</span>,
-                              categories <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"miRWalk_Diseases_mature"</span>,
+                              categories <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"miRWalk_Diseases_mature"</span>,
                                             <span class="st">"miRWalk_Organs_mature"</span><span class="op">)</span>
                              <span class="op">)</span>
 <span class="co">#&gt;  -- Step 1/3: Submitting Enrichment request:</span>
 <span class="co">#&gt; Submitting ORA enrichment request for 17 miRNA IDs of species Homo sapiens to miEAA servers.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  -- Step 2/3: Checking for Submitted enrichment job's status every 5 seconds.</span>
-<span class="co">#&gt;     Your submitted job ID is: 9ff23077-a70e-4cfe-b384-1a0054c27edb</span>
+<span class="co">#&gt;     Your submitted job ID is: c7e94375-6e25-43d2-99d9-b604367d2050</span>
 <span class="co">#&gt; .</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  -- Step 3/3: Retrieving the results of the finished enrichment job.</span>
-<span class="co">#&gt; Retrieving results of submitted enrichment request with ID: 9ff23077-a70e-4cfe-b384-1a0054c27edb</span></code></pre></div>
-<div id="htmlwidget-113246df2f41a2536cd9" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-113246df2f41a2536cd9">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["Diseases (miRWalk)","Diseases (miRWalk)","Organs (miRWalk)","Organs (miRWalk)","Organs (miRWalk)","Organs (miRWalk)"],["Choriocarcinoma","Leukemia T-Cell","Endothelial Cells","Gastrointestinal Tract","T-Lymphocytes","X Chromosome"],["over-represented","over-represented","over-represented","over-represented","over-represented","over-represented"],["0.000513149","0.0013928","0.000703018","0.000411587","1.40287e-05","0.000806102"],["0.0364336","0.0494430","0.0157190","0.0157190","0.0010942","0.0157190"],["0.0364336","0.0494430","0.0157190","0.0157190","0.0010942","0.0157190"],["1.26518","0.268371","1.40078","0.194553","1.16732","0.233463"],["6","3","6","3","7","3"],["hsa-miR-20b-5p; hsa-miR-17-5p; hsa-miR-20a-5p; hsa-miR-106a-5p; hsa-miR-93-5p; hsa-miR-363-3p","hsa-miR-20b-5p; hsa-miR-106a-5p; hsa-miR-93-5p","hsa-miR-17-5p; hsa-miR-20a-5p; hsa-miR-222-3p; hsa-miR-93-5p; hsa-miR-126-3p; hsa-miR-18a-5p","hsa-miR-20b-5p; hsa-miR-17-5p; hsa-miR-20a-5p","hsa-miR-20b-5p; hsa-miR-20a-5p; hsa-miR-222-3p; hsa-miR-106a-5p; hsa-miR-93-5p; hsa-miR-126-3p; hsa-miR-148a-3p","hsa-miR-20b-5p; hsa-miR-222-3p; hsa-miR-106a-5p"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>X1<\/th>\n      <th>X2<\/th>\n      <th>X3<\/th>\n      <th>X4<\/th>\n      <th>X5<\/th>\n      <th>X6<\/th>\n      <th>X7<\/th>\n      <th>X8<\/th>\n      <th>X9<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
+<span class="co">#&gt; Retrieving results of submitted enrichment request with ID: c7e94375-6e25-43d2-99d9-b604367d2050</span></code></pre></div>
+<div id="htmlwidget-f9f11a35107167774917" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f9f11a35107167774917">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["Diseases (miRWalk)","Diseases (miRWalk)","Organs (miRWalk)","Organs (miRWalk)","Organs (miRWalk)","Organs (miRWalk)"],["Choriocarcinoma","Leukemia T-Cell","Endothelial Cells","Gastrointestinal Tract","T-Lymphocytes","X Chromosome"],["over-represented","over-represented","over-represented","over-represented","over-represented","over-represented"],["0.000513149","0.0013928","0.000703018","0.000411587","1.40287e-05","0.000806102"],["0.0364336","0.0494430","0.0157190","0.0157190","0.0010942","0.0157190"],["0.0364336","0.0494430","0.0157190","0.0157190","0.0010942","0.0157190"],["1.26518","0.268371","1.40078","0.194553","1.16732","0.233463"],["6","3","6","3","7","3"],["hsa-miR-20b-5p; hsa-miR-17-5p; hsa-miR-20a-5p; hsa-miR-106a-5p; hsa-miR-93-5p; hsa-miR-363-3p","hsa-miR-20b-5p; hsa-miR-106a-5p; hsa-miR-93-5p","hsa-miR-17-5p; hsa-miR-20a-5p; hsa-miR-222-3p; hsa-miR-93-5p; hsa-miR-126-3p; hsa-miR-18a-5p","hsa-miR-20b-5p; hsa-miR-17-5p; hsa-miR-20a-5p","hsa-miR-20b-5p; hsa-miR-20a-5p; hsa-miR-222-3p; hsa-miR-106a-5p; hsa-miR-93-5p; hsa-miR-126-3p; hsa-miR-148a-3p","hsa-miR-20b-5p; hsa-miR-222-3p; hsa-miR-106a-5p"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Category<\/th>\n      <th>Subcategory<\/th>\n      <th>Enrichment<\/th>\n      <th>P-value<\/th>\n      <th>P-adjusted<\/th>\n      <th>Q-value<\/th>\n      <th>Expected<\/th>\n      <th>Observed<\/th>\n      <th>miRNAs/precursors<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="approach-2-going-step-by-step" class="section level2 heading3">
-<h2 class="hasAnchor">
-<a href="#approach-2-going-step-by-step" class="anchor"></a>Approach 2: Going step-by-step</h2>
+<div class="section level3">
+<h3 id="approach-2-going-step-by-step">Approach 2: Going step-by-step<a class="anchor" aria-label="anchor" href="#approach-2-going-step-by-step"></a>
+</h3>
 <p>As stated before, <code><a href="../reference/rba_mieaa_enrich.html">rba_mieaa_enrich()</a></code> is a wrapper function, meaning that it executes the following sequence of functions:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## 1 Submit enrichment request to miEAA</span>
@@ -211,7 +189,7 @@
                                   mirna_type <span class="op">=</span> <span class="st">"mature"</span>,
                                   test_type <span class="op">=</span> <span class="st">"ORA"</span>,
                                   species <span class="op">=</span> <span class="fl">9606</span>,
-                                  categories <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"miRWalk_Diseases_mature"</span>,
+                                  categories <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"miRWalk_Diseases_mature"</span>,
                                                  <span class="st">"miRWalk_Organs_mature"</span><span class="op">)</span>
                                   <span class="op">)</span>
 <span class="co">## 2 check for job's running status</span>
@@ -222,77 +200,75 @@
 <hr>
 </div>
 </div>
-<div id="convert-mirna-accessions" class="section level1 heading2">
-<h1 class="hasAnchor">
-<a href="#convert-mirna-accessions" class="anchor"></a>Convert miRNA accessions</h1>
+<div class="section level2">
+<h2 id="convert-mirna-accessions">Convert miRNA accessions<a class="anchor" aria-label="anchor" href="#convert-mirna-accessions"></a>
+</h2>
 <p>miEAA only recognizes miRBASE version 22 accessions. You can use <code><a href="../reference/rba_mieaa_convert_version.html">rba_mieaa_convert_version()</a></code> to convert miRNA accession between different miRBASE versions. Also, as stated before, miEAA differentiate between precursor and mature miRNA accessions, to convert between these 2 accession types, use <code><a href="../reference/rba_mieaa_convert_type.html">rba_mieaa_convert_type()</a></code>.</p>
 <hr>
 </div>
-<div id="links" class="section level1 heading2">
-<h1 class="hasAnchor">
-<a href="#links" class="anchor"></a>Links</h1>
+<div class="section level2">
+<h2 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a>
+</h2>
 <ul>
-<li><p><a href="https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html" title="2.B: miEEA &amp; rbioapi">This article in pkgdown website</a></p></li>
-<li><p><a href="https://rbioapi.moosa-r.com/reference/index.html#section-mieaa-rba-mieaa-" title="rbioapi reference">Functions references in pkgdown website</a></p></li>
+<li><p><a href="https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html" title="2.B: miEEA &amp; rbioapi">This article in rbioapi documentation site</a></p></li>
+<li><p><a href="https://rbioapi.moosa-r.com/reference/index.html#section-mieaa-rba-mieaa-" title="rbioapi reference">Functions references in rbioapi documentation site</a></p></li>
 <li><p><a href="rbioapi.html" title="rbioapi: User-Friendly R Interface to Biologic Web Services' API">rbioapi vignette index</a></p></li>
 </ul>
 <hr>
 </div>
-<div id="session-info" class="section level1 heading2">
-<h1 class="hasAnchor">
-<a href="#session-info" class="anchor"></a>Session info</h1>
-<pre><code>#&gt; R version 4.1.1 (2021-08-10)
-#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)
-#&gt; Running under: macOS Catalina 10.15.7
-#&gt; 
-#&gt; Matrix products: default
-#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.0.dylib
-#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib
-#&gt; 
-#&gt; locale:
-#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
-#&gt; 
-#&gt; attached base packages:
-#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     
-#&gt; 
-#&gt; other attached packages:
-#&gt; [1] rbioapi_0.7.5
-#&gt; 
-#&gt; loaded via a namespace (and not attached):
-#&gt;  [1] knitr_1.36        magrittr_2.0.1    R6_2.5.1          ragg_1.1.3       
-#&gt;  [5] rlang_0.4.11      fastmap_1.1.0     stringr_1.4.0     httr_1.4.2       
-#&gt;  [9] tools_4.1.1       DT_0.19           xfun_0.26         jquerylib_0.1.4  
-#&gt; [13] crosstalk_1.1.1   htmltools_0.5.2   systemfonts_1.0.2 yaml_2.2.1       
-#&gt; [17] digest_0.6.28     rprojroot_2.0.2   pkgdown_1.6.1     crayon_1.4.1     
-#&gt; [21] textshaping_0.3.5 htmlwidgets_1.5.4 fs_1.5.0          curl_4.3.2       
-#&gt; [25] memoise_2.0.0     cachem_1.0.6      evaluate_0.14     rmarkdown_2.11   
-#&gt; [29] stringi_1.7.5     compiler_4.1.1    desc_1.4.0        jsonlite_1.7.2</code></pre>
+<div class="section level2">
+<h2 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
+</h2>
+<pre><code><span class="co">#&gt; R version 4.1.2 (2021-11-01)</span>
+<span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span>
+<span class="co">#&gt; Running under: macOS Catalina 10.15.7</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Matrix products: default</span>
+<span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.0.dylib</span>
+<span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; locale:</span>
+<span class="co">#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; attached base packages:</span>
+<span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; other attached packages:</span>
+<span class="co">#&gt; [1] rbioapi_0.7.5</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; loaded via a namespace (and not attached):</span>
+<span class="co">#&gt;  [1] knitr_1.37        magrittr_2.0.1    R6_2.5.1          ragg_1.1.3       </span>
+<span class="co">#&gt;  [5] rlang_0.4.12      fastmap_1.1.0     httr_1.4.2        stringr_1.4.0    </span>
+<span class="co">#&gt;  [9] tools_4.1.2       DT_0.20           xfun_0.29         jquerylib_0.1.4  </span>
+<span class="co">#&gt; [13] crosstalk_1.2.0   htmltools_0.5.2   systemfonts_1.0.2 yaml_2.2.1       </span>
+<span class="co">#&gt; [17] digest_0.6.29     rprojroot_2.0.2   pkgdown_2.0.2     crayon_1.4.2     </span>
+<span class="co">#&gt; [21] textshaping_0.3.6 purrr_0.3.4       htmlwidgets_1.5.4 sass_0.4.0       </span>
+<span class="co">#&gt; [25] fs_1.5.2          curl_4.3.2        memoise_2.0.1     cachem_1.0.6     </span>
+<span class="co">#&gt; [29] evaluate_0.14     rmarkdown_2.11    stringi_1.7.6     compiler_4.1.2   </span>
+<span class="co">#&gt; [33] bslib_0.3.1       desc_1.4.0        jsonlite_1.7.3</span></code></pre>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
-  <p>Developed by Moosa Rezwani.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p></p>
+<p>Developed by Moosa Rezwani.</p>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+<div class="pkgdown-footer-right">
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
 
+  
 
   </body>
 </html>
