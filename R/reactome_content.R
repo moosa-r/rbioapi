@@ -509,10 +509,12 @@ rba_reactome_event_ancestors <- function(event_id,
 #'   }
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
+#' #very large response!
 #' rba_reactome_event_hierarchy("Homo sapiens")
 #' }
-#' \donttest{
+#' \dontrun{
+#' #very large response!
 #' rba_reactome_event_hierarchy(9606)
 #' }
 #'
@@ -536,7 +538,7 @@ rba_reactome_event_hierarchy <- function(species,
                                          .rba_stg("reactome", "pth", "content"),
                                          species),
                           accept = "application/json",
-                          parser = "json->list",
+                          parser = "json->list_simp",
                           save_to = .rba_file("reactome_event_hierarchy.json"))
 
   ## Call API

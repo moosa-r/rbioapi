@@ -40,10 +40,12 @@ By Reactome's definition, Events are the building blocks of biological
 }
 
 \examples{
-\donttest{
+\dontrun{
+#very large response!
 rba_reactome_event_hierarchy("Homo sapiens")
 }
-\donttest{
+\dontrun{
+#very large response!
 rba_reactome_event_hierarchy(9606)
 }
 
