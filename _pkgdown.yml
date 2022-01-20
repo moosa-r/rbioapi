@@ -4,7 +4,7 @@ template:
   bootstrap: 5
   bootswatch: cosmo
   params:
-    ganalytics: G-1HHD9Z0414
+    ganalytics: G-BF9VGFNZ4C
 
 navbar:
   bg: secondary
