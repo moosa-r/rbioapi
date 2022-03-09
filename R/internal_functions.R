@@ -52,7 +52,7 @@
                    jaspar = switch(
                      arg[[2]],
                      name = "JASPAR",
-                     url = "http://jaspar.genereg.net",
+                     url = "https://jaspar.genereg.net",
                      pth = "api/v1/",
                      ptn = "^(https?://)?(www\\.)?jaspar\\.genereg\\.net/api/",
                      err_ptn = "^$"

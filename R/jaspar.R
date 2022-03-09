@@ -6,8 +6,8 @@
 #'   Using this function, you can retrieve a list of available collections
 #'   in a JASPAR release.
 #'
-#' @param release Numeric: (default = 2020) Which JASPAR database release
-#'   to use? Available options are: 2014, 2016, 2018, and 2020.
+#' @param release Numeric: (default = 2022) Which JASPAR database release
+#'   to use? Available options are: 2014, 2016, 2018, 2020, and 2022.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -32,12 +32,12 @@
 #'
 #' @examples
 #' \donttest{
-#' rba_jaspar_collections(release = 2020)
+#' rba_jaspar_collections(release = 2022)
 #' }
 #'
 #' @family "JASPAR"
 #' @export
-rba_jaspar_collections <- function(release = 2020,
+rba_jaspar_collections <- function(release = 2022,
                                    ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -45,7 +45,7 @@ rba_jaspar_collections <- function(release = 2020,
   .rba_args(cons = list(list(arg = "release",
                              class = "numeric",
                              no_null = TRUE,
-                             val = c(2014, 2016, 2018, 2020))
+                             val = c(2014, 2016, 2018, 2020, 2022))
   ))
 
   .msg("Retrieving a list of collections available in JASPAR release %s.",
@@ -89,14 +89,14 @@ rba_jaspar_collections <- function(release = 2020,
 #'   information. The accepted values are: "CORE", "CNE", "PHYLOFACTS",
 #'   "SPLICE", "POLII", "FAM", "PBM", "PBM_HOMEO", "PBM_HLH", and
 #'   "UNVALIDATED".
-#' @param release Numeric: (default = 2020) Which JASPAR database release
-#'   to use? Available options are: 2014, 2016, 2018, and 2020.
+#' @param release Numeric: (default = 2022) Which JASPAR database release
+#'   to use? Available options are: 2014, 2016, 2018, 2020, and 2022.
 #' @param only_last_version Logical: (default = FALSE) If TRUE, only the
 #'   latest version of a matrix profile will be returned.
 #' @param search Character: A search term.
 #' @param order Character: A character string or a vector of character strings
 #'   of field names that will be used to order the results.
-#'   \cr Providing multiple field names is supported. You can also use prefix
+#'   \cr Providing multiple field names is supported. You can alsoa use prefix
 #'   "-" before a field name to indicate reverse ordering.
 #' @param page_size Numeric: (default = 1000) This resource returns paginated
 #'   results. What is the maximum numbers of results that you want to retrieve
@@ -129,7 +129,7 @@ rba_jaspar_collections <- function(release = 2020,
 #' @examples
 #' \donttest{
 #' rba_jaspar_collections_matrices(collection = "CORE",
-#'   release = 2020,
+#'   release = 2022,
 #'   page_size = 100,
 #'   page = 2)
 #' }
@@ -137,7 +137,7 @@ rba_jaspar_collections <- function(release = 2020,
 #' @family "JASPAR"
 #' @export
 rba_jaspar_collections_matrices <- function(collection,
-                                            release = 2020,
+                                            release = 2022,
                                             only_last_version = FALSE,
                                             search = NULL,
                                             order = NULL,
@@ -164,7 +164,7 @@ rba_jaspar_collections_matrices <- function(collection,
                         list(arg = "release",
                              class = "numeric",
                              no_null = TRUE,
-                             val = c(2014, 2016, 2018, 2020)),
+                             val = c(2014, 2016, 2018, 2020, 2022)),
                         list(arg = "search",
                              class = "character"),
                         list(arg = "order",
@@ -241,8 +241,8 @@ rba_jaspar_collections_matrices <- function(collection,
 #'   for matrix construction). For example: "ChIP-seq", "PBM"
 #' @param collection Character: JASPAR matrix profile collection name. USE
 #'   \code{\link{rba_jaspar_collections}} to get a list of collection names.
-#' @param release Numeric: (default = 2020) Which JASPAR database release
-#'   to use? Available options are: 2014, 2016, 2018, and 2020.
+#' @param release Numeric: (default = 2022) Which JASPAR database release
+#'   to use? Available options are: 2014, 2016, 2018, 2020, and 2022.
 #' @param only_last_version Logical: (default = FALSE) If TRUE, only the
 #'   latest version of a matrix profile will be returned.
 #' @param order Character: A character string or a vector of character strings
@@ -296,7 +296,7 @@ rba_jaspar_matrix_search <- function(term = NULL,
                                      tax_id = NULL,
                                      data_type = NULL,
                                      collection = NULL,
-                                     release = 2020,
+                                     release = 2022,
                                      only_last_version = FALSE,
                                      order = NULL,
                                      page_size = 1000,
@@ -334,7 +334,7 @@ rba_jaspar_matrix_search <- function(term = NULL,
                         list(arg = "release",
                              class = "numeric",
                              no_null = TRUE,
-                             val = c(2014, 2016, 2018, 2020)),
+                             val = c(2014, 2016, 2018, 2020, 2022)),
                         list(arg = "order",
                              class = "character"),
                         list(arg = "only_last_version",
@@ -784,8 +784,8 @@ rba_jaspar_sites <- function(matrix_id,
 #'   in six taxonomic groups. Use this function to retrieve a list of
 #'   available species in a JASPAR database release.
 #'
-#' @param release Numeric: (default = 2020) Which JASPAR database release
-#'   to use? Available options are: 2014, 2016, 2018, and 2020.
+#' @param release Numeric: (default = 2022) Which JASPAR database release
+#'   to use? Available options are: 2014, 2016, 2018, 2020, and 2022.
 #' @param search Character: A search term.
 #' @param order Character: A character string or a vector of character strings
 #'   of field names that will be used to order the results.
@@ -815,12 +815,12 @@ rba_jaspar_sites <- function(matrix_id,
 #'
 #' @examples
 #' \donttest{
-#' rba_jaspar_species(release = 2020)
+#' rba_jaspar_species(release = 2022)
 #' }
 #'
 #' @family "JASPAR"
 #' @export
-rba_jaspar_species <- function(release = 2020,
+rba_jaspar_species <- function(release = 2022,
                                search = NULL,
                                order = NULL,
                                ...) {
@@ -830,7 +830,7 @@ rba_jaspar_species <- function(release = 2020,
   .rba_args(cons = list(list(arg = "release",
                              class = "numeric",
                              no_null = TRUE,
-                             val = c(2014, 2016, 2018, 2020)),
+                             val = c(2014, 2016, 2018, 2020, 2022)),
                         list(arg = "search",
                              class = "character"),
                         list(arg = "order",
@@ -884,8 +884,8 @@ rba_jaspar_species <- function(release = 2020,
 #'
 #' @param tax_id Numeric: NCBI taxonomic Identifier of species. Use
 #'   \code{\link{rba_jaspar_species}} to get a list of supported Species.
-#' @param release Numeric: (default = 2020) Which JASPAR database release
-#'   to use? Available options are: 2014, 2016, 2018, and 2020.
+#' @param release Numeric: (default = 2022) Which JASPAR database release
+#'   to use? Available options are: 2014, 2016, 2018, 2020, and 2022.
 #' @param only_last_version Logical: (default = FALSE) If TRUE, only the
 #'   latest version of a matrix profile will be returned.
 #' @param search Character: A search term.
@@ -929,7 +929,7 @@ rba_jaspar_species <- function(release = 2020,
 #' @family "JASPAR"
 #' @export
 rba_jaspar_species_matrices <- function(tax_id,
-                                        release = 2020,
+                                        release = 2022,
                                         only_last_version = FALSE,
                                         search = NULL,
                                         order = NULL,
@@ -944,7 +944,7 @@ rba_jaspar_species_matrices <- function(tax_id,
                         list(arg = "release",
                              class = "numeric",
                              no_null = TRUE,
-                             val = c(2014, 2016, 2018, 2020)),
+                             val = c(2014, 2016, 2018, 2020, 2022)),
                         list(arg = "only_last_version",
                              class = "logical"),
                         list(arg = "search",
@@ -1002,8 +1002,8 @@ rba_jaspar_species_matrices <- function(tax_id,
 #'   in six taxonomic groups. Use this function to retrieve a list of
 #'   available taxonomic groups in a JASPAR database release.
 #'
-#' @param release Numeric: (default = 2020) Which JASPAR database release
-#'   to use? Available options are: 2014, 2016, 2018, and 2020.
+#' @param release Numeric: (default = 2022) Which JASPAR database release
+#'   to use? Available options are: 2014, 2016, 2018, 2020, and 2022.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -1028,12 +1028,12 @@ rba_jaspar_species_matrices <- function(tax_id,
 #'
 #' @examples
 #' \donttest{
-#' rba_jaspar_taxons(release = 2020)
+#' rba_jaspar_taxons(release = 2022)
 #' }
 #'
 #' @family "JASPAR"
 #' @export
-rba_jaspar_taxons <- function(release = 2020,
+rba_jaspar_taxons <- function(release = 2022,
                               ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -1041,7 +1041,7 @@ rba_jaspar_taxons <- function(release = 2020,
   .rba_args(cons = list(list(arg = "release",
                              class = "numeric",
                              no_null = TRUE,
-                             val = c(2014, 2016, 2018, 2020))
+                             val = c(2014, 2016, 2018, 2020, 2022))
   ))
 
   .msg("Retrieving a list of taxonomic groups available in JASPAR release %s.",
@@ -1084,8 +1084,8 @@ rba_jaspar_taxons <- function(release = 2020,
 #' @param tax_group Character: Taxonomic group. Use
 #'   \code{\link{rba_jaspar_taxons}} to get a list of supported Taxonomic
 #'   groups.
-#' @param release Numeric: (default = 2020) Which JASPAR database release
-#'   to use? Available options are: 2014, 2016, 2018, and 2020.
+#' @param release Numeric: (default = 2022) Which JASPAR database release
+#'   to use? Available options are: 2014, 2016, 2018, 2020, and 2022.
 #' @param only_last_version Logical: (default = FALSE) If TRUE, only the
 #'   latest version of a matrix profile will be returned.
 #' @param search Character: A search term.
@@ -1129,7 +1129,7 @@ rba_jaspar_taxons <- function(release = 2020,
 #' @family "JASPAR"
 #' @export
 rba_jaspar_taxons_matrices <- function(tax_group,
-                                       release = 2020,
+                                       release = 2022,
                                        only_last_version = FALSE,
                                        search = NULL,
                                        order = NULL,
@@ -1153,7 +1153,7 @@ rba_jaspar_taxons_matrices <- function(tax_group,
                         list(arg = "release",
                              class = "numeric",
                              no_null = TRUE,
-                             val = c(2014, 2016, 2018, 2020)),
+                             val = c(2014, 2016, 2018, 2020, 2022)),
                         list(arg = "only_last_version",
                              class = "logical"),
                         list(arg = "search",
@@ -1220,8 +1220,8 @@ rba_jaspar_taxons_matrices <- function(tax_group,
 #'   to automatically iterate over multiple pages.
 #'
 #' @param term Character: A search term.
-#' @param release Numeric: (default = 2020) Which JASPAR database release
-#'   to use? Available options are: 2014, 2016, 2018, and 2020.
+#' @param release Numeric: (default = 2022) Which JASPAR database release
+#'   to use? Available options are: 2014, 2016, 2018, 2020, and 2022.
 #' @param tax_group Character: Taxonomic group. Use
 #'   \code{\link{rba_jaspar_taxons}} to get a list of supported Taxonomic
 #'   groups.
@@ -1268,7 +1268,7 @@ rba_jaspar_taxons_matrices <- function(tax_group,
 #' @family "JASPAR"
 #' @export
 rba_jaspar_tffm_search <- function(term = NULL,
-                                   release = 2020,
+                                   release = 2022,
                                    tax_group = NULL,
                                    search = NULL,
                                    order = NULL,
@@ -1283,7 +1283,7 @@ rba_jaspar_tffm_search <- function(term = NULL,
                         list(arg = "release",
                              class = "numeric",
                              no_null = TRUE,
-                             val = c(2014, 2016, 2018, 2020)),
+                             val = c(2014, 2016, 2018, 2020, 2022)),
                         list(arg = "tax_group",
                              class = "character",
                              val = c("plants",
