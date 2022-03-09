@@ -208,25 +208,18 @@ rba_panther_enrich <- function(genes,
   parser_input <- list("json->list_simp",
                        function(x) {
                          x <- x$results
-                         x$result$term_label <- x$result$term[, 1]
-                         x$result$term <- x$result$term[, 2]
+                         x$result <- jsonlite::flatten(x$result)
+
+                         if (!is.null(cutoff)) {
+                           if (correction == "FDR") {
+                             x$result <- x$result[x$result$fdr <= cutoff, ]
+                           } else {
+                             x$result <- x$result[x$result$pValue <= cutoff, ]
+                           }
+                         }
+
                          return(x)
                        })
-  if (!is.null(cutoff)) {
-    if (correction == "FDR") {
-      parser_input <- append(parser_input,
-                             list(function(x) {
-                               x$result <- x$result[which(x$result$fdr <= cutoff), ]
-                               return(x)
-                             }))
-    } else {
-      parser_input <- append(parser_input,
-                             list(function(x) {
-                               x$result <- x$result[which(x$result$pValue <= cutoff), ]
-                               return(x)
-                             }))
-    }
-  }
 
   input_call <- .rba_httr(httr = "post",
                           url = .rba_stg("panther", "url"),
