@@ -96,7 +96,7 @@
       <img src="" class="logo" alt=""><h1>2.G: UniProt &amp; rbioapi</h1>
                         <h4 data-toc-skip class="author">Moosa Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2022-01-20</h4>
+            <h4 data-toc-skip class="date">2022-03-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/HEAD/vignettes/rbioapi_uniprot.Rmd" class="external-link"><code>vignettes/rbioapi_uniprot.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_uniprot.Rmd</code></div>
@@ -136,7 +136,7 @@
 <span class="co">#&gt;  $ gene            :'data.frame':    1 obs. of  2 variables:</span>
 <span class="co">#&gt;  $ comments        :'data.frame':    12 obs. of  10 variables:</span>
 <span class="co">#&gt;  $ features        :'data.frame':    63 obs. of  9 variables:</span>
-<span class="co">#&gt;  $ dbReferences    :'data.frame':    126 obs. of  4 variables:</span>
+<span class="co">#&gt;  $ dbReferences    :'data.frame':    128 obs. of  4 variables:</span>
 <span class="co">#&gt;  $ keywords        :'data.frame':    13 obs. of  1 variable:</span>
 <span class="co">#&gt;  $ references      :'data.frame':    25 obs. of  3 variables:</span>
 <span class="co">#&gt;  $ sequence        :List of 5</span></code></pre></div>
@@ -159,7 +159,7 @@
 <span class="co">#&gt;   ..$ gene            :List of 1</span>
 <span class="co">#&gt;   ..$ comments        :List of 12</span>
 <span class="co">#&gt;   ..$ features        :List of 63</span>
-<span class="co">#&gt;   ..$ dbReferences    :List of 126</span>
+<span class="co">#&gt;   ..$ dbReferences    :List of 128</span>
 <span class="co">#&gt;   ..$ keywords        :List of 13</span>
 <span class="co">#&gt;   ..$ references      :List of 25</span>
 <span class="co">#&gt;   ..$ sequence        :List of 5</span></code></pre></div>
@@ -201,28 +201,28 @@
 <span class="co">#&gt;  $ P04637:List of 14</span>
 <span class="co">#&gt;  $ Q9HCN2:List of 14</span>
 <span class="co">#&gt;  $ A1A5B4:List of 14</span>
+<span class="co">#&gt;  $ Q9NS56:List of 14</span>
 <span class="co">#&gt;  $ Q9Y2B4:List of 13</span>
 <span class="co">#&gt;  $ Q8IXH6:List of 14</span>
 <span class="co">#&gt;  $ Q53FA7:List of 14</span>
-<span class="co">#&gt;  $ Q9NS56:List of 14</span>
 <span class="co">#&gt;  $ Q96A56:List of 14</span>
 <span class="co">#&gt;  $ O14683:List of 14</span>
 <span class="co">#&gt;  $ Q96S44:List of 14</span>
 <span class="co">#&gt;  $ Q8NBR0:List of 14</span>
 <span class="co">#&gt;  $ Q13625:List of 14</span>
 <span class="co">#&gt;  $ Q7L0Q8:List of 14</span>
-<span class="co">#&gt;  $ Q9UKI2:List of 14</span>
-<span class="co">#&gt;  $ Q6NZY7:List of 14</span>
-<span class="co">#&gt;  $ Q6DT37:List of 14</span>
 <span class="co">#&gt;  $ Q5VT25:List of 14</span>
 <span class="co">#&gt;  $ Q00587:List of 14</span>
 <span class="co">#&gt;  $ O14613:List of 14</span>
-<span class="co">#&gt;  $ Q9Y5S2:List of 14</span>
+<span class="co">#&gt;  $ Q6DT37:List of 14</span>
+<span class="co">#&gt;  $ Q9UKI2:List of 14</span>
+<span class="co">#&gt;  $ Q6NZY7:List of 14</span>
 <span class="co">#&gt;  $ Q9H3Q1:List of 14</span>
 <span class="co">#&gt;  $ Q07960:List of 14</span>
-<span class="co">#&gt;  $ P60953:List of 14</span>
+<span class="co">#&gt;  $ Q9Y5S2:List of 14</span>
 <span class="co">#&gt;  $ Q9NRR8:List of 14</span>
-<span class="co">#&gt;  $ Q9NRR3:List of 14</span></code></pre></div>
+<span class="co">#&gt;  $ Q9NRR3:List of 14</span>
+<span class="co">#&gt;  $ P60953:List of 14</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## 3 Search for every proteins with chemokines keyword</span>
 <span class="va">multi_prs3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_uniprot_proteins_search.html">rba_uniprot_proteins_search</a></span><span class="op">(</span>keyword <span class="op">=</span> <span class="st">"chemokines"</span><span class="op">)</span>
@@ -250,22 +250,22 @@
 
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">multi_prs4</span>, <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; List of 16</span>
-<span class="co">#&gt;  $ P0DTD8:List of 14</span>
-<span class="co">#&gt;  $ P0DTF1:List of 13</span>
+<span class="co">#&gt;  $ P0DTD3:List of 14</span>
+<span class="co">#&gt;  $ P0DTC6:List of 14</span>
 <span class="co">#&gt;  $ P0DTG0:List of 13</span>
 <span class="co">#&gt;  $ P0DTC7:List of 14</span>
 <span class="co">#&gt;  $ P0DTC2:List of 14</span>
-<span class="co">#&gt;  $ P0DTD2:List of 14</span>
 <span class="co">#&gt;  $ P0DTC8:List of 14</span>
 <span class="co">#&gt;  $ P0DTC4:List of 14</span>
-<span class="co">#&gt;  $ P0DTD1:List of 14</span>
-<span class="co">#&gt;  $ P0DTC1:List of 13</span>
-<span class="co">#&gt;  $ P0DTD3:List of 14</span>
-<span class="co">#&gt;  $ P0DTC6:List of 14</span>
-<span class="co">#&gt;  $ P0DTG1:List of 13</span>
 <span class="co">#&gt;  $ P0DTC9:List of 14</span>
 <span class="co">#&gt;  $ P0DTC5:List of 14</span>
-<span class="co">#&gt;  $ P0DTC3:List of 14</span></code></pre></div>
+<span class="co">#&gt;  $ P0DTC3:List of 14</span>
+<span class="co">#&gt;  $ P0DTD8:List of 14</span>
+<span class="co">#&gt;  $ P0DTD2:List of 14</span>
+<span class="co">#&gt;  $ P0DTF1:List of 13</span>
+<span class="co">#&gt;  $ P0DTD1:List of 14</span>
+<span class="co">#&gt;  $ P0DTC1:List of 13</span>
+<span class="co">#&gt;  $ P0DTG1:List of 13</span></code></pre></div>
 <div class="section level3">
 <h3 id="functions-with-_search-variant">Functions with <code>*_search</code> variant<a class="anchor" aria-label="anchor" href="#functions-with-_search-variant"></a>
 </h3>
@@ -407,7 +407,7 @@
 </h2>
 <pre><code><span class="co">#&gt; R version 4.1.2 (2021-11-01)</span>
 <span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span>
-<span class="co">#&gt; Running under: macOS Catalina 10.15.7</span>
+<span class="co">#&gt; Running under: macOS Big Sur 10.16</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Matrix products: default</span>
 <span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.0.dylib</span>
@@ -423,14 +423,14 @@
 <span class="co">#&gt; [1] rbioapi_0.7.5</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; loaded via a namespace (and not attached):</span>
-<span class="co">#&gt;  [1] knitr_1.37        magrittr_2.0.1    R6_2.5.1          ragg_1.1.3       </span>
-<span class="co">#&gt;  [5] rlang_0.4.12      fastmap_1.1.0     httr_1.4.2        stringr_1.4.0    </span>
-<span class="co">#&gt;  [9] tools_4.1.2       xfun_0.29         jquerylib_0.1.4   htmltools_0.5.2  </span>
-<span class="co">#&gt; [13] systemfonts_1.0.2 yaml_2.2.1        digest_0.6.29     rprojroot_2.0.2  </span>
-<span class="co">#&gt; [17] pkgdown_2.0.2     crayon_1.4.2      textshaping_0.3.6 purrr_0.3.4      </span>
+<span class="co">#&gt;  [1] knitr_1.37        magrittr_2.0.2    R6_2.5.1          ragg_1.2.2       </span>
+<span class="co">#&gt;  [5] rlang_1.0.2       fastmap_1.1.0     httr_1.4.2        stringr_1.4.0    </span>
+<span class="co">#&gt;  [9] tools_4.1.2       xfun_0.30         cli_3.2.0         jquerylib_0.1.4  </span>
+<span class="co">#&gt; [13] htmltools_0.5.2   systemfonts_1.0.4 yaml_2.3.5        digest_0.6.29    </span>
+<span class="co">#&gt; [17] rprojroot_2.0.2   pkgdown_2.0.2     textshaping_0.3.6 purrr_0.3.4      </span>
 <span class="co">#&gt; [21] sass_0.4.0        fs_1.5.2          curl_4.3.2        memoise_2.0.1    </span>
-<span class="co">#&gt; [25] cachem_1.0.6      evaluate_0.14     rmarkdown_2.11    stringi_1.7.6    </span>
-<span class="co">#&gt; [29] compiler_4.1.2    bslib_0.3.1       desc_1.4.0        jsonlite_1.7.3</span></code></pre>
+<span class="co">#&gt; [25] cachem_1.0.6      evaluate_0.15     rmarkdown_2.12    stringi_1.7.6    </span>
+<span class="co">#&gt; [29] compiler_4.1.2    bslib_0.3.1       desc_1.4.1        jsonlite_1.8.0</span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
