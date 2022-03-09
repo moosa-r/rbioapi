@@ -6,7 +6,7 @@
 \usage{
 rba_jaspar_tffm_search(
   term = NULL,
-  release = 2020,
+  release = 2022,
   tax_group = NULL,
   search = NULL,
   order = NULL,
@@ -18,8 +18,8 @@ rba_jaspar_tffm_search(
 \arguments{
 \item{term}{Character: A search term.}
 
-\item{release}{Numeric: (default = 2020) Which JASPAR database release
-to use? Available options are: 2014, 2016, 2018, and 2020.}
+\item{release}{Numeric: (default = 2022) Which JASPAR database release
+to use? Available options are: 2014, 2016, 2018, 2020, and 2022.}
 
 \item{tax_group}{Character: Taxonomic group. Use
 \code{\link{rba_jaspar_taxons}} to get a list of supported Taxonomic

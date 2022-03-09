@@ -6,7 +6,7 @@
 \usage{
 rba_jaspar_taxons_matrices(
   tax_group,
-  release = 2020,
+  release = 2022,
   only_last_version = FALSE,
   search = NULL,
   order = NULL,
@@ -20,8 +20,8 @@ rba_jaspar_taxons_matrices(
 \code{\link{rba_jaspar_taxons}} to get a list of supported Taxonomic
 groups.}
 
-\item{release}{Numeric: (default = 2020) Which JASPAR database release
-to use? Available options are: 2014, 2016, 2018, and 2020.}
+\item{release}{Numeric: (default = 2022) Which JASPAR database release
+to use? Available options are: 2014, 2016, 2018, 2020, and 2022.}
 
 \item{only_last_version}{Logical: (default = FALSE) If TRUE, only the
 latest version of a matrix profile will be returned.}

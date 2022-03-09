@@ -13,7 +13,7 @@ rba_jaspar_matrix_search(
   tax_id = NULL,
   data_type = NULL,
   collection = NULL,
-  release = 2020,
+  release = 2022,
   only_last_version = FALSE,
   order = NULL,
   page_size = 1000,
@@ -43,8 +43,8 @@ for matrix construction). For example: "ChIP-seq", "PBM"}
 \item{collection}{Character: JASPAR matrix profile collection name. USE
 \code{\link{rba_jaspar_collections}} to get a list of collection names.}
 
-\item{release}{Numeric: (default = 2020) Which JASPAR database release
-to use? Available options are: 2014, 2016, 2018, and 2020.}
+\item{release}{Numeric: (default = 2022) Which JASPAR database release
+to use? Available options are: 2014, 2016, 2018, 2020, and 2022.}
 
 \item{only_last_version}{Logical: (default = FALSE) If TRUE, only the
 latest version of a matrix profile will be returned.}

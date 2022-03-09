@@ -4,11 +4,11 @@
 \alias{rba_jaspar_species}
 \title{List available species in JASPAR}
 \usage{
-rba_jaspar_species(release = 2020, search = NULL, order = NULL, ...)
+rba_jaspar_species(release = 2022, search = NULL, order = NULL, ...)
 }
 \arguments{
-\item{release}{Numeric: (default = 2020) Which JASPAR database release
-to use? Available options are: 2014, 2016, 2018, and 2020.}
+\item{release}{Numeric: (default = 2022) Which JASPAR database release
+to use? Available options are: 2014, 2016, 2018, 2020, and 2022.}
 
 \item{search}{Character: A search term.}
 
@@ -35,7 +35,7 @@ JASPAR organizes matrix profiles from multiple species
 
 \examples{
 \donttest{
-rba_jaspar_species(release = 2020)
+rba_jaspar_species(release = 2022)
 }
 
 }

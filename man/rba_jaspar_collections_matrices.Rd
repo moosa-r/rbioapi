@@ -6,7 +6,7 @@
 \usage{
 rba_jaspar_collections_matrices(
   collection,
-  release = 2020,
+  release = 2022,
   only_last_version = FALSE,
   search = NULL,
   order = NULL,
@@ -22,8 +22,8 @@ information. The accepted values are: "CORE", "CNE", "PHYLOFACTS",
 "SPLICE", "POLII", "FAM", "PBM", "PBM_HOMEO", "PBM_HLH", and
 "UNVALIDATED".}
 
-\item{release}{Numeric: (default = 2020) Which JASPAR database release
-to use? Available options are: 2014, 2016, 2018, and 2020.}
+\item{release}{Numeric: (default = 2022) Which JASPAR database release
+to use? Available options are: 2014, 2016, 2018, 2020, and 2022.}
 
 \item{only_last_version}{Logical: (default = FALSE) If TRUE, only the
 latest version of a matrix profile will be returned.}
@@ -32,7 +32,7 @@ latest version of a matrix profile will be returned.}
 
 \item{order}{Character: A character string or a vector of character strings
 of field names that will be used to order the results.
-\cr Providing multiple field names is supported. You can also use prefix
+\cr Providing multiple field names is supported. You can alsoa use prefix
 "-" before a field name to indicate reverse ordering.}
 
 \item{page_size}{Numeric: (default = 1000) This resource returns paginated
@@ -66,7 +66,7 @@ The results are paginated. You can control the page's size number
 \examples{
 \donttest{
 rba_jaspar_collections_matrices(collection = "CORE",
-  release = 2020,
+  release = 2022,
   page_size = 100,
   page = 2)
 }

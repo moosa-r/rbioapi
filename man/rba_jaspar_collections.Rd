@@ -4,11 +4,11 @@
 \alias{rba_jaspar_collections}
 \title{List collections available in JASPAR}
 \usage{
-rba_jaspar_collections(release = 2020, ...)
+rba_jaspar_collections(release = 2022, ...)
 }
 \arguments{
-\item{release}{Numeric: (default = 2020) Which JASPAR database release
-to use? Available options are: 2014, 2016, 2018, and 2020.}
+\item{release}{Numeric: (default = 2022) Which JASPAR database release
+to use? Available options are: 2014, 2016, 2018, 2020, and 2022.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
@@ -28,7 +28,7 @@ JASPAR organizes matrix profiles into collections.
 
 \examples{
 \donttest{
-rba_jaspar_collections(release = 2020)
+rba_jaspar_collections(release = 2022)
 }
 
 }
