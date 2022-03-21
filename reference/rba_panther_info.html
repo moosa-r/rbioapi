@@ -95,6 +95,7 @@
 <dd><p>what information to retrieve? should be one of:</p><ul><li><p>"organisms": Retrieve supported organisms in PANTHER.</p></li>
 <li><p>"datasets": Retrieve available annotation datasets.</p></li>
 <li><p>"families" Retrieve available family IDs.</p></li>
+<li><p>"species_tree" Retrieve the PANThER's species tree.</p></li>
 <li><p>"pathways" Retrieve available pathway IDs.</p></li>
 </ul></dd>
 <dt>organism_chr_loc</dt>
@@ -111,8 +112,8 @@ arguments manual for more information on available options.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>For families, a list and otherwise a data frame with pertinent
-  information.</p>
+    <p>For families and species tree, a list and otherwise a data frame
+  with pertinent information.</p>
     </div>
     <div class="section level2">
     <h2 id="corresponding-api-resources">Corresponding API Resources<a class="anchor" aria-label="anchor" href="#corresponding-api-resources"></a></h2>
@@ -121,7 +122,8 @@ arguments manual for more information on available options.</p></dd>
 <p>"GET http://www.pantherdb.org/services/oai/pantherdb/supportedgenomes"
  <br> "GET http://www.pantherdb.org/services/oai/pantherdb/supportedannotdatasets"
  <br> "GET http://www.pantherdb.org/services/oai/pantherdb/supportedpantherfamilies"
- <br> "GET http://www.pantherdb.org/services/oai/pantherdb/supportedpantherpathways"</p>
+ <br> "GET http://www.pantherdb.org/services/oai/pantherdb/supportedpantherpathways"
+ <br> "GET http://pantherdb.org/services/oai/pantherdb/speciestree"</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
