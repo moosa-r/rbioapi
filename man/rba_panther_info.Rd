@@ -11,6 +11,7 @@ rba_panther_info(what, organism_chr_loc = FALSE, families_page = 1, ...)
 \item "organisms": Retrieve supported organisms in PANTHER.
 \item "datasets": Retrieve available annotation datasets.
 \item "families" Retrieve available family IDs.
+\item "species_tree" Retrieve the PANThER's species tree.
 \item "pathways" Retrieve available pathway IDs.}}
 
 \item{organism_chr_loc}{(Logical) (only when 'what = "organisms"')
@@ -25,8 +26,8 @@ argument to define the page to retrieve.}
 arguments manual for more information on available options.}
 }
 \value{
-For families, a list and otherwise a data frame with pertinent
-  information.
+For families and species tree, a list and otherwise a data frame
+  with pertinent information.
 }
 \description{
 Using this function you can retrieve a list of available organisms,
@@ -39,6 +40,7 @@ Using this function you can retrieve a list of available organisms,
  \cr "GET http://www.pantherdb.org/services/oai/pantherdb/supportedannotdatasets"
  \cr "GET http://www.pantherdb.org/services/oai/pantherdb/supportedpantherfamilies"
  \cr "GET http://www.pantherdb.org/services/oai/pantherdb/supportedpantherpathways"
+ \cr "GET http://pantherdb.org/services/oai/pantherdb/speciestree"
 }
 
 \examples{

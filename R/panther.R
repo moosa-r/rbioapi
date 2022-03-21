@@ -246,6 +246,7 @@ rba_panther_enrich <- function(genes,
 #' \item "organisms": Retrieve supported organisms in PANTHER.
 #' \item "datasets": Retrieve available annotation datasets.
 #' \item "families" Retrieve available family IDs.
+#' \item "species_tree" Retrieve the PANThER's species tree.
 #' \item "pathways" Retrieve available pathway IDs.}
 #' @param organism_chr_loc (Logical) (only when 'what = "organisms"')
 #'   If TRUE, only organisms with chromosome location will be returned.
@@ -261,9 +262,10 @@ rba_panther_enrich <- function(genes,
 #'  \cr "GET http://www.pantherdb.org/services/oai/pantherdb/supportedannotdatasets"
 #'  \cr "GET http://www.pantherdb.org/services/oai/pantherdb/supportedpantherfamilies"
 #'  \cr "GET http://www.pantherdb.org/services/oai/pantherdb/supportedpantherpathways"
+#'  \cr "GET http://pantherdb.org/services/oai/pantherdb/speciestree"
 #'
-#' @return For families, a list and otherwise a data frame with pertinent
-#'   information.
+#' @return For families and species tree, a list and otherwise a data frame
+#'   with pertinent information.
 #'
 #' @references \itemize{
 #'   \item Mi, H., Muruganujan, A., Ebert, D., Huang, X., & Thomas, P. D.
@@ -300,6 +302,7 @@ rba_panther_info <- function(what,
                              val = c("organisms",
                                      "datasets",
                                      "families",
+                                     "species_tree",
                                      "pathways")),
                         list(arg = "organism_chr_loc",
                              class = "logical",
@@ -318,6 +321,7 @@ rba_panther_info <- function(what,
               "organisms" = "supported organisms in PANTHER",
               "datasets" = "available annotation datasets",
               "families" = "available family IDs",
+              "species_tree" = "phylogenetic tree of PANTHER species",
               "pathways" = "available pathway IDs"),
        ifelse(what == "families",
               yes = sprintf(" (page %s)", families_page),
@@ -353,6 +357,11 @@ rba_panther_info <- function(what,
                                             pages_count = x$search$number_of_families %/% 1000
                                   )
                                 })
+         },
+         "species_tree" = {
+           path_input <- "speciestree"
+           parser_input <- list("json->list",
+                                function(x) {x$species_tree})
          },
          "pathways" = {
            path_input <- "supportedpantherpathways"
