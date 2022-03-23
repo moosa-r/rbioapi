@@ -61,17 +61,19 @@
   <a class="nav-link" href="../reference/index.html">Functions</a>
 </li>
 <li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-supported-services-amp-articles">Supported Services &amp; Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-supported-services-amp-articles">
-    <a class="dropdown-item" href="../articles/rbioapi.html">1: rbioapi: Get Started</a>
-    <a class="dropdown-item" href="../articles/rbioapi_enrichr.html">2.A: Enrichr &amp; rbioapi</a>
-    <a class="dropdown-item" href="../articles/rbioapi_mieaa.html">2.B: miEEA &amp; rbioapi</a>
-    <a class="dropdown-item" href="../articles/rbioapi_panther.html">2.C: PANTHER &amp; rbioapi</a>
-    <a class="dropdown-item" href="../articles/rbioapi_reactome.html">2.D: Reactome &amp; rbioapi</a>
-    <a class="dropdown-item" href="../articles/rbioapi_string.html">2.E: STRING &amp; rbioapi</a>
-    <a class="dropdown-item" href="../articles/rbioapi_uniprot.html">2.F: UniProt &amp; rbioapi</a>
-    <a class="dropdown-item" href="../articles/rbioapi_jaspar.html">2.G: JASPAR &amp; rbioapi</a>
-    <a class="dropdown-item" href="../articles/rbioapi_do_enrich.html">3 Do with rbioapi: 1. Over-Representation (Enrichment) Analysis</a>
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles-amp-supported-services">Articles &amp; Supported Services</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles-amp-supported-services">
+    <a class="dropdown-item" href="../articles/rbioapi.html">rbioapi: Get Started</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/rbioapi_enrichr.html">Enrichr &amp; rbioapi</a>
+    <a class="dropdown-item" href="../articles/rbioapi_jaspar.html">JASPAR &amp; rbioapi</a>
+    <a class="dropdown-item" href="../articles/rbioapi_mieaa.html">miEEA &amp; rbioapi</a>
+    <a class="dropdown-item" href="../articles/rbioapi_panther.html">PANTHER &amp; rbioapi</a>
+    <a class="dropdown-item" href="../articles/rbioapi_reactome.html">Reactome &amp; rbioapi</a>
+    <a class="dropdown-item" href="../articles/rbioapi_string.html">STRING &amp; rbioapi</a>
+    <a class="dropdown-item" href="../articles/rbioapi_uniprot.html">UniProt &amp; rbioapi</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/rbioapi_do_enrich.html">Do with rbioapi: Over-Representation (Enrichment) Analysis</a>
   </div>
 </li>
 <li class="nav-item">
@@ -166,12 +168,13 @@
 <h2 id="design-philosophy-of-rbioapi">Design philosophy of rbioapi<a class="anchor" aria-label="anchor" href="#design-philosophy-of-rbioapi"></a>
 </h2>
 <ul>
-<li><p>The functions’ structure should be <strong>consistent</strong> across all databases and services. Meaning that there should not be any learning effort when using functions communicating with dif-ferent web services.</p></li>
-<li><p>The package’s interface should be a simple <strong>plugging of values</strong> in a function’s arguments and running the code.</p></li>
+<li><p>The structure of functions should be consistent across all data-bases and services. This means that, using functions to communicate with different web services should not require new learning and/or training.</p></li>
+<li><p>Using the package should entail simple plugging of values into a function’s arguments and running the code.</p></li>
 <li><p>No function should explicitly demand the user to run another function beforehand.</p></li>
-<li><p>The functions’ names and arguments should be as <strong>faithful</strong> as possible to the original API resources. This is to ensure that the users could conveniently establish links between rbioapi and the web service. rbioapi should be an interface to the API service, nothing more or less.</p></li>
-<li><p>The package should be easy to <strong>expand and contribute</strong>. To this goal, exported functions should have a template-based structure and the internal functions should have a hierarchical organization with only a subset of them needed by the contributors.</p></li>
-<li><p><strong>Beginner users</strong> should conveniently use rbioapi and they should be completely insulated from any technicalities. To name a few examples: To prevent errors, user-input argu-ments should be vigorously checked. Informative messages, warnings, and errors should be produced. If a server returns an error in a particular format, the server’s error response should be parsed. The package should internally and grace-fully handle failure events such as connection loss. Saving files such as raw server’s response should be easy, yet moni-tored by the package. Altering the package options should be readily accessible.</p></li>
+<li><p>The functions’ organization, names, and arguments should be as faithful as possible to the original API resources.</p></li>
+<li><p>The package should be scalable and easy to collaborate. To this end, exported functions should have a template-based structure and the internal functions should have a hierarchical organization with only a subset of them needed by the contributors.</p></li>
+<li><p>Beginner users should be able to conveniently use rbioapi and be completely insulated from any technicalities.</p></li>
+<li><p>The functions’ documentations should be extensive, self-contained, with working examples, and integrated with the corresponding web services in terms such as citing information or links to guides. In addition to the main vignette article, each supported database or web service should have its own vignette articles.</p></li>
 </ul>
 <hr>
 </div>
@@ -329,6 +332,17 @@
 <h2 id="how-to-cite">How and what to cite?<a class="anchor" aria-label="anchor" href="#how-to-cite"></a>
 </h2>
 <p>rbioapi is an interface between you and other databases and services. Thus, if you have used rbioapi in published research, kindly <strong>in addition to citing rbioapi, <span class="ul"><em>make sure to fully and properly cite the databases/services you have used</em></span></strong>. Suggested citations have been added in the functions’ manuals, under the “references” section; Nevertheless, it is the user’s responsibility to check for proper citations and to properly cite the database/services that they have used.</p>
+<ul>
+<li><p><strong>How to cite rbioapi</strong>:<br>
+Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: User-Friendly R Interface to Biologic Web Services’ API, <em>Bioinformatics</em>, 2022;, btac172, <a href="https://doi.org/10.1093/bioinformatics/btac172" class="external-link uri">https://doi.org/10.1093/bioinformatics/btac172</a></p></li>
+<li><p><a href="rbioapi_enrichr.html#Citations" title="How to cite Enrichr">How to cite Enrichr</a>. (See on <a href="https://maayanlab.cloud/Enrichr/help#terms" class="external-link">Enrichr website</a>)</p></li>
+<li><p><a href="rbioapi_jaspar.html#Citations" title="How to cite JASPAR">How to cite JASPAR</a>. (See on <a href="https://jaspar.genereg.net/faq/" class="external-link">JASPAR website</a>)</p></li>
+<li><p><a href="rbioapi_mieaa.html#Citations" title="How to cite miEAA">How to cite miEAA</a>. (See on <a href="https://ccb-compute2.cs.uni-saarland.de/mieaa2" class="external-link">miEAA website</a>)</p></li>
+<li><p><a href="rbioapi_panther.html#Citations" title="How to cite PANTHER">How to cite PANTHER</a>. (See on <a href="http://www.pantherdb.org/publications.jsp#HowToCitePANTHER" class="external-link">PANTHER website</a>)</p></li>
+<li><p><a href="rbioapi_reactome.html#Citations" title="How to cite Reactome">How to cite Reactome</a>. (See on <a href="https://reactome.org/cite" class="external-link">Reactome website</a>)</p></li>
+<li><p><a href="rbioapi_string.html#Citations" title="How to cite STRING">How to cite STRING</a>. (See on <a href="https://string-db.org/cgi/about?footer_active_subpage=references" class="external-link">STRING website</a>)</p></li>
+<li><p><a href="rbioapi_uniprot.html#Citations" title="How to cite UniProt">How to cite UniProt</a>. (See on <a href="https://www.uniprot.org/help/publications" class="external-link">UniProt website</a>)</p></li>
+</ul>
 <hr>
 </div>
 <div class="section level2">
