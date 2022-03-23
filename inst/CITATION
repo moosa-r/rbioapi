@@ -1,0 +1,45 @@
+citHeader("Please cite rbioapi as");
+
+citEntry(
+  #
+  # BibTeX entry:
+  #
+  entry   = "article",
+  title   = "rbioapi: User-Friendly R Interface to Biologic Web Services' API",
+  author  = personList(
+    as.person("Moosa Rezwani"),
+    as.person("Ali Akbar Pourfathollah"),
+    as.person("Farshid Noorbakhsh")
+    ),
+  journal = "Bioinformatics",
+  year    = "2022",
+  month   = "03",
+  issn    = "1367-4803",
+  doi     = "10.1093/bioinformatics/btac172",
+  url     = "https://doi.org/10.1093/bioinformatics/btac172",
+  note    = "btac172",
+  eprint	= "https://academic.oup.com/bioinformatics/advance-article-pdf/doi/10.1093/bioinformatics/btac172/42972934/btac172.pdf",
+  #
+  # Plain-text citation:
+  #
+  textVersion = paste(
+    sep=" ",
+    "Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh,",
+    "rbioapi: User-Friendly R Interface to Biologic Web Services' API",
+    "Bioinformatics,",
+    "2022;,",
+    "btac172,",
+    "https://doi.org/10.1093/bioinformatics/btac172"
+    )
+)
+
+citFooter(
+  paste(
+  sep=" ",
+  "Important Note:",
+  "rbioapi is an interface to web services API;",
+  "please make sure to fully and properly cite the databases/services you have used.",
+  "Suggested citations have been added to each function manual and the vignette articles.",
+  "Nevertheless, it is the user's responsibility to fully and properly cite the services they have used."
+  )
+)
