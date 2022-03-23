@@ -1,9 +1,12 @@
 rbioapi: User-Friendly R Interface to Biologic Web Services’ API
 ================
 Moosa Rezwani
-2022-01-19
+2022-03-23
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# <img src="man/figures/logo.svg" align="right" alt="" width="200" />
+
 <!-- badges: start -->
 
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/rbioapi)](https://cran.r-project.org/package=rbioapi)
