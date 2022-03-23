@@ -196,6 +196,23 @@ As you can see, what we have done was:
 
 rbioapi is an interface between you and other databases and services. Thus, if you have used rbioapi in published research, kindly **in addition to citing rbioapi, [*make sure to fully and properly cite the databases/services you have used*]{.ul}**. Suggested citations have been added in the functions' manuals, under the "references" section; Nevertheless, it is the user's responsibility to check for proper citations and to properly cite the database/services that they have used.
 
+-   **How to cite rbioapi**:
+    Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: User-Friendly R Interface to Biologic Web Services' API, *Bioinformatics*, 2022;, btac172, <https://doi.org/10.1093/bioinformatics/btac172>
+
+-   [How to cite Enrichr](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html#Citations "How to cite Enrichr"). (See on [Enrichr website](https://maayanlab.cloud/Enrichr/help#terms))
+
+-   [How to cite JASPAR](https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html#Citations "How to cite JASPAR"). (See on [JASPAR website](https://jaspar.genereg.net/faq/))
+
+-   [How to cite miEAA](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html#Citations "How to cite miEAA"). (See on [miEAA website](https://ccb-compute2.cs.uni-saarland.de/mieaa2))
+
+-   [How to cite PANTHER](https://rbioapi.moosa-r.com/articles/rbioapi_panther.html#Citations "How to cite PANTHER"). (See on [PANTHER website](http://www.pantherdb.org/publications.jsp#HowToCitePANTHER))
+
+-   [How to cite Reactome](https://rbioapi.moosa-r.com/articles/rbioapi_reactome.html#Citations "How to cite Reactome"). (See on [Reactome website](https://reactome.org/cite))
+
+-   [How to cite STRING](https://rbioapi.moosa-r.com/articles/rbioapi_string.html#Citations "How to cite STRING"). (See on [STRING website](https://string-db.org/cgi/about?footer_active_subpage=references))
+
+-   [How to cite UniProt](https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html#Citations "How to cite UniProt"). (See on [UniProt website](https://www.uniprot.org/help/publications))
+
 # Code of conduct
 
 When using rbioapi, remember that you are querying data from web services; So please be considerate. Never flood a server with requests, if you need to download *unreasonably* large volumes of data, directly downloading the databases supplied in those services may be a better alternative. If you see yourself being rate-limited from any server (HTTP **429 Too Many Requests** response status code), know that you are sending more requests than what the server interprets as normal behavior, so please seek other methods or use `Sys.sleep()` between your requests.

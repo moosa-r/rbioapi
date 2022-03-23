@@ -405,6 +405,14 @@ if (is.data.frame(mieaa_enrich)) {
 
 ------------------------------------------------------------------------
 
+# How to cite? {#how_to_cite}
+
+rbioapi is an interface between you and other databases and services. Thus, if you have used rbioapi in published research, kindly in addition to citing rbioapi, make sure to fully and properly cite the databases/services you have used. Suggested citations have been added in the functions' manuals, under the "references" section; Nevertheless, it is the user's responsibility to check for proper citations and to properly cite the database/services that they have used.
+
+Please see the [rbioapi's main vignette article](rbioapi.html) for more details.
+
+------------------------------------------------------------------------
+
 # Links {#links .heading2}
 
 -   [This article in rbioapi documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html "Over-Representation Analysis with rbioapi")

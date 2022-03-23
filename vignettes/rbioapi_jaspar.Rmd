@@ -221,6 +221,18 @@ str(TFFM0056)
 
 ------------------------------------------------------------------------
 
+# How to Cite? {#Citations}
+
+To cite JASPAR (Please see <https://jaspar.genereg.net/faq/>):
+
+-   Jaime A Castro-Mondragon, Rafael Riudavets-Puig, Ieva Rauluseviciute, Roza Berhanu Lemma, Laura Turchi, Romain Blanc-Mathieu, Jeremy Lucas, Paul Boddie, Aziz Khan, Nicolás Manosalva Pérez, Oriol Fornes, Tiffany Y Leung, Alejandro Aguirre, Fayrouz Hammal, Daniel Schmelter, Damir Baranasic, Benoit Ballester, Albin Sandelin, Boris Lenhard, Klaas Vandepoele, Wyeth W Wasserman, François Parcy, Anthony Mathelier, JASPAR 2022: the 9th release of the open-access database of transcription factor binding profiles, *Nucleic Acids Research*, Volume 50, Issue D1, 7 January 2022, Pages D165--D173, <https://doi.org/10.1093/nar/gkab1113>
+
+To cite rbioapi:
+
+-   Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: User-Friendly R Interface to Biologic Web Services' API, *Bioinformatics*, 2022;, btac172, <https://doi.org/10.1093/bioinformatics/btac172>
+
+------------------------------------------------------------------------
+
 # Links {.heading2}
 
 -   [This article in rbioapi documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html "2.G: JASPAR & rbioapi")

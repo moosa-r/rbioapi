@@ -101,6 +101,18 @@ if (utils::hasName(enriched, "result")) {
 
 ------------------------------------------------------------------------
 
+# How to Cite? {#Citations}
+
+To cite PANTHER (Please see <http://www.pantherdb.org/publications.jsp#HowToCitePANTHER>):
+
+-   Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills, Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER version 16: a revised family classification, tree-based classification tool, enhancer regions and extensive API, *Nucleic Acids Research*, Volume 49, Issue D1, 8 January 2021, Pages D394--D403, <https://doi.org/10.1093/nar/gkaa1106>
+
+To cite rbioapi:
+
+-   Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: User-Friendly R Interface to Biologic Web Services' API, *Bioinformatics*, 2022;, btac172, <https://doi.org/10.1093/bioinformatics/btac172>
+
+------------------------------------------------------------------------
+
 # Links {.heading2}
 
 -   [This article in rbioapi documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_panther.html "2.C: PANTHER & rbioapi")

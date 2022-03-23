@@ -134,6 +134,22 @@ Some rbioapi Enrichr functions were not covered in this vignette, be sure to che
 
 ------------------------------------------------------------------------
 
+# How to Cite? {#Citations}
+
+To cite Enrichr (Please see <https://maayanlab.cloud/Enrichr/help#terms>):
+
+-   Chen, E.Y., Tan, C.M., Kou, Y. *et al.* Enrichr: interactive and collaborative HTML5 gene list enrichment analysis tool. *Bioinformatics* **14,** 128 (2013). <https://doi.org/10.1186/1471-2105-14-128>
+
+-   Maxim V. Kuleshov, Matthew R. Jones, Andrew D. Rouillard, Nicolas F. Fernandez, Qiaonan Duan, Zichen Wang, Simon Koplev, Sherry L. Jenkins, Kathleen M. Jagodnik, Alexander Lachmann, Michael G. McDermott, Caroline D. Monteiro, Gregory W. Gundersen, Avi Ma'ayan, Enrichr: a comprehensive gene set enrichment analysis web server 2016 update, *Nucleic Acids Research*, Volume 44, Issue W1, 8 July 2016, Pages W90--W97, <https://doi.org/10.1093/nar/gkw377>
+
+-   Xie, Z., Bailey, A., Kuleshov, M. V., Clarke, D. J. B., Evangelista, J. E., Jenkins, S. L., Lachmann, A., Wojciechowicz, M. L., Kropiwnicki, E., Jagodnik, K. M., Jeon, M., & Ma'ayan, A. (2021). Gene set knowledge discovery with Enrichr. *Current Protocols*, 1, e90. doi: <https://doi.org/10.1002/cpz1.90>
+
+To cite rbioapi:
+
+-   Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: User-Friendly R Interface to Biologic Web Services' API, *Bioinformatics*, 2022;, btac172, <https://doi.org/10.1093/bioinformatics/btac172>
+
+------------------------------------------------------------------------
+
 # Links {.heading2}
 
 -   [This article in rbioapi documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html "https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html")

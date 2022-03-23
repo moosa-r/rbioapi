@@ -208,9 +208,26 @@ As you can see, what we have done was:
 
 ------------------------------------------------------------------------
 
-# How and what to cite? {#how-to-cite .heading2}
+# How and what to cite? {#how-to-cite}
 
 rbioapi is an interface between you and other databases and services. Thus, if you have used rbioapi in published research, kindly **in addition to citing rbioapi, [*make sure to fully and properly cite the databases/services you have used*]{.ul}**. Suggested citations have been added in the functions' manuals, under the "references" section; Nevertheless, it is the user's responsibility to check for proper citations and to properly cite the database/services that they have used.
+
+-   **How to cite rbioapi**:\
+    Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: User-Friendly R Interface to Biologic Web Services' API, *Bioinformatics*, 2022;, btac172, <https://doi.org/10.1093/bioinformatics/btac172>
+
+-   [How to cite Enrichr](rbioapi_enrichr.html#Citations "How to cite Enrichr"). (See on [Enrichr website](https://maayanlab.cloud/Enrichr/help#terms))
+
+-   [How to cite JASPAR](rbioapi_jaspar.html#Citations "How to cite JASPAR"). (See on [JASPAR website](https://jaspar.genereg.net/faq/))
+
+-   [How to cite miEAA](rbioapi_mieaa.html#Citations "How to cite miEAA"). (See on [miEAA website](https://ccb-compute2.cs.uni-saarland.de/mieaa2))
+
+-   [How to cite PANTHER](rbioapi_panther.html#Citations "How to cite PANTHER"). (See on [PANTHER website](http://www.pantherdb.org/publications.jsp#HowToCitePANTHER))
+
+-   [How to cite Reactome](rbioapi_reactome.html#Citations "How to cite Reactome"). (See on [Reactome website](https://reactome.org/cite))
+
+-   [How to cite STRING](rbioapi_string.html#Citations "How to cite STRING"). (See on [STRING website](https://string-db.org/cgi/about?footer_active_subpage=references))
+
+-   [How to cite UniProt](rbioapi_uniprot.html#Citations "How to cite UniProt"). (See on [UniProt website](https://www.uniprot.org/help/publications))
 
 ------------------------------------------------------------------------
 
