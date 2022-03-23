@@ -31,25 +31,27 @@ navbar:
       text: Get Started
       href: articles/rbioapi.html
     articles:
-      text: Supported Services & Articles
+      text: Articles & Supported Services
       menu:
-      - text: '1: rbioapi: Get Started'
+      - text: 'rbioapi: Get Started'
         href: articles/rbioapi.html
-      - text: '2.A: Enrichr & rbioapi'
+      - text: ----
+      - text: 'Enrichr & rbioapi'
         href: articles/rbioapi_enrichr.html
-      - text: '2.B: miEEA & rbioapi'
-        href: articles/rbioapi_mieaa.html
-      - text: '2.C: PANTHER & rbioapi'
-        href: articles/rbioapi_panther.html
-      - text: '2.D: Reactome & rbioapi'
-        href: articles/rbioapi_reactome.html
-      - text: '2.E: STRING & rbioapi'
-        href: articles/rbioapi_string.html
-      - text: '2.F: UniProt & rbioapi'
-        href: articles/rbioapi_uniprot.html
-      - text: '2.G: JASPAR & rbioapi'
+      - text: 'JASPAR & rbioapi'
         href: articles/rbioapi_jaspar.html
-      - text: '3 Do with rbioapi: 1. Over-Representation (Enrichment) Analysis'
+      - text: 'miEEA & rbioapi'
+        href: articles/rbioapi_mieaa.html
+      - text: 'PANTHER & rbioapi'
+        href: articles/rbioapi_panther.html
+      - text: 'Reactome & rbioapi'
+        href: articles/rbioapi_reactome.html
+      - text: 'STRING & rbioapi'
+        href: articles/rbioapi_string.html
+      - text: 'UniProt & rbioapi'
+        href: articles/rbioapi_uniprot.html
+      - text: ----
+      - text: 'Do with rbioapi: Over-Representation (Enrichment) Analysis'
         href: articles/rbioapi_do_enrich.html
     github:
       icon: fab fa-github fa-lg

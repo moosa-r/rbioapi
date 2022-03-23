@@ -1,5 +1,5 @@
 ---
-title: "2.E Reactome & rbioapi"
+title: "2.E: Reactome & rbioapi"
 author: "Moosa Rezwani"
 date: "`r Sys.Date()`"
 output:

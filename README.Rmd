@@ -23,7 +23,7 @@ library(rbioapi)
 rba_options(timeout = 600, skip_error = TRUE)
 ```
 
-# <img src="man/figures/logo.svg" align="right" alt="" width="200" />
+# <img src="man/figures/logo.svg" align="right" width="200"/>
 
 <!-- badges: start -->
 
@@ -246,3 +246,4 @@ We are also adding vignette articles focusing on tasks and workflows:
 ```{r sessionInfo, echo=FALSE}
 sessionInfo()
 ```
+

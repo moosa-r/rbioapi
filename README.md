@@ -5,7 +5,7 @@ Moosa Rezwani
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# <img src="man/figures/logo.svg" align="right" alt="" width="200" />
+# <img src="man/figures/logo.svg" align="right" width="200"/>
 
 <!-- badges: start -->
 
@@ -101,38 +101,33 @@ remotes::install_github("moosa-r/rbioapi")
 
 # Design philosophy of rbioapi
 
--   The functions’ structure should be **consistent** across all
-    databases and services. Meaning that there should not be any
-    learning effort when using functions communicating with dif-ferent
-    web services.
+-   The structure of functions should be consistent across all
+    data-bases and services. This means that, using functions to
+    communicate with different web services should not require new
+    learning and/or training.
 
--   The package’s interface should be a simple **plugging of values** in
-    a function’s arguments and running the code.
+-   Using the package should entail simple plugging of values into a
+    function’s arguments and running the code.
 
 -   No function should explicitly demand the user to run another
     function beforehand.
 
--   The functions’ names and arguments should be as **faithful** as
-    possible to the original API resources. This is to ensure that the
-    users could conveniently establish links between rbioapi and the web
-    service. rbioapi should be an interface to the API service, nothing
-    more or less.
+-   The functions’ organization, names, and arguments should be as
+    faithful as possible to the original API resources.
 
--   The package should be easy to **expand and contribute**. To this
-    goal, exported functions should have a template-based structure and
-    the internal functions should have a hierarchical organization with
-    only a subset of them needed by the contributors.
+-   The package should be scalable and easy to collaborate. To this end,
+    exported functions should have a template-based structure and the
+    internal functions should have a hierarchical organization with only
+    a subset of them needed by the contributors.
 
--   **Beginner users** should conveniently use rbioapi and they should
-    be completely insulated from any technicalities. To name a few
-    examples: To prevent errors, user-input argu-ments should be
-    vigorously checked. Informative messages, warnings, and errors
-    should be produced. If a server returns an error in a particular
-    format, the server’s error response should be parsed. The package
-    should internally and grace-fully handle failure events such as
-    connection loss. Saving files such as raw server’s response should
-    be easy, yet moni-tored by the package. Altering the package options
-    should be readily accessible.
+-   Beginner users should be able to conveniently use rbioapi and be
+    completely insulated from any technicalities.
+
+-   The functions’ documentations should be extensive, self-contained,
+    with working examples, and integrated with the corresponding web
+    services in terms such as citing information or links to guides. In
+    addition to the main vignette article, each supported database or
+    web service should have its own vignette articles.
 
 # Naming conventions
 
@@ -149,10 +144,10 @@ version resource.
 rba_string_version()
 #> Retrieving the STRING database version and address used by rbioapi.
 #> $string_version
-#> [1] "11.0"
+#> [1] "11.5"
 #> 
 #> $stable_address
-#> [1] "https://version-11-0.string-db.org"
+#> [1] "https://version-11-5.string-db.org"
 ```
 
 Thus, to this version, rbioapi function will have one of the following
@@ -303,7 +298,7 @@ str(adeno, max.level = 2)
 #>  $ pageInfo  :List of 3
 #>   ..$ resultsPerPage: int 200
 #>   ..$ currentPage   : int 1
-#>   ..$ totalRecords  : int 935
+#>   ..$ totalRecords  : int 951
 ```
 
 As you can see, the server has returned the first page of the response,
@@ -348,6 +343,44 @@ added in the functions’ manuals, under the “references” section;
 Nevertheless, it is the user’s responsibility to check for proper
 citations and to properly cite the database/services that they have
 used.
+
+-   **How to cite rbioapi**: Moosa Rezwani, Ali Akbar Pourfathollah,
+    Farshid Noorbakhsh, rbioapi: User-Friendly R Interface to Biologic
+    Web Services’ API, *Bioinformatics*, 2022;, btac172,
+    <https://doi.org/10.1093/bioinformatics/btac172>
+
+-   [How to cite
+    Enrichr](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html#Citations "How to cite Enrichr").
+    (See on [Enrichr
+    website](https://maayanlab.cloud/Enrichr/help#terms))
+
+-   [How to cite
+    JASPAR](https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html#Citations "How to cite JASPAR").
+    (See on [JASPAR website](https://jaspar.genereg.net/faq/))
+
+-   [How to cite
+    miEAA](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html#Citations "How to cite miEAA").
+    (See on [miEAA
+    website](https://ccb-compute2.cs.uni-saarland.de/mieaa2))
+
+-   [How to cite
+    PANTHER](https://rbioapi.moosa-r.com/articles/rbioapi_panther.html#Citations "How to cite PANTHER").
+    (See on [PANTHER
+    website](http://www.pantherdb.org/publications.jsp#HowToCitePANTHER))
+
+-   [How to cite
+    Reactome](https://rbioapi.moosa-r.com/articles/rbioapi_reactome.html#Citations "How to cite Reactome").
+    (See on [Reactome website](https://reactome.org/cite))
+
+-   [How to cite
+    STRING](https://rbioapi.moosa-r.com/articles/rbioapi_string.html#Citations "How to cite STRING").
+    (See on [STRING
+    website](https://string-db.org/cgi/about?footer_active_subpage=references))
+
+-   [How to cite
+    UniProt](https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html#Citations "How to cite UniProt").
+    (See on [UniProt
+    website](https://www.uniprot.org/help/publications))
 
 # Code of conduct
 
@@ -410,8 +443,8 @@ We are also adding vignette articles focusing on tasks and workflows:
     #> [1] rbioapi_0.7.5
     #> 
     #> loaded via a namespace (and not attached):
-    #>  [1] digest_0.6.29   R6_2.5.1        jsonlite_1.7.2  magrittr_2.0.1 
-    #>  [5] evaluate_0.14   httr_1.4.2      rlang_0.4.12    stringi_1.7.6  
-    #>  [9] curl_4.3.2      rmarkdown_2.11  tools_4.1.2     stringr_1.4.0  
-    #> [13] xfun_0.29       yaml_2.2.1      fastmap_1.1.0   compiler_4.1.2 
-    #> [17] htmltools_0.5.2 knitr_1.37
+    #>  [1] digest_0.6.29   R6_2.5.1        jsonlite_1.8.0  magrittr_2.0.2 
+    #>  [5] evaluate_0.15   httr_1.4.2      rlang_1.0.2     stringi_1.7.6  
+    #>  [9] cli_3.2.0       curl_4.3.2      rmarkdown_2.13  tools_4.1.2    
+    #> [13] stringr_1.4.0   xfun_0.30       yaml_2.3.5      fastmap_1.1.0  
+    #> [17] compiler_4.1.2  htmltools_0.5.2 knitr_1.37

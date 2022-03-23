@@ -1,5 +1,5 @@
 ---
-title: "3 Do with rbioapi: 1. Over-Representation (Enrichment) Analysis"
+title: "3.A: Do with rbioapi: Over-Representation (Enrichment) Analysis"
 author: "Moosa Rezwani"
 date: "`r Sys.Date()`"
 output:
@@ -11,7 +11,7 @@ output:
     dev: png
     encoding: 'UTF-8'
 vignette: >
-  %\VignetteIndexEntry{3 Do with rbioapi: 1. Over-Representation (Enrichment) Analysis}
+  %\VignetteIndexEntry{3.A: Do with rbioapi: Over-Representation (Enrichment) Analysis}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
