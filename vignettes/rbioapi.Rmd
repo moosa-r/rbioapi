@@ -84,17 +84,19 @@ remotes::install_github("moosa-r/rbioapi")
 
 # Design philosophy of rbioapi {#design-philosophy-of-rbioapi .heading2}
 
--   The functions' structure should be **consistent** across all databases and services. Meaning that there should not be any learning effort when using functions communicating with dif-ferent web services.
+-   The structure of functions should be consistent across all data-bases and services. This means that, using functions to communicate with different web services should not require new learning and/or training.
 
--   The package's interface should be a simple **plugging of values** in a function's arguments and running the code.
+-   Using the package should entail simple plugging of values into a function's arguments and running the code.
 
 -   No function should explicitly demand the user to run another function beforehand.
 
--   The functions' names and arguments should be as **faithful** as possible to the original API resources. This is to ensure that the users could conveniently establish links between rbioapi and the web service. rbioapi should be an interface to the API service, nothing more or less.
+-   The functions' organization, names, and arguments should be as faithful as possible to the original API resources.
 
--   The package should be easy to **expand and contribute**. To this goal, exported functions should have a template-based structure and the internal functions should have a hierarchical organization with only a subset of them needed by the contributors.
+-   The package should be scalable and easy to collaborate. To this end, exported functions should have a template-based structure and the internal functions should have a hierarchical organization with only a subset of them needed by the contributors.
 
--   **Beginner users** should conveniently use rbioapi and they should be completely insulated from any technicalities. To name a few examples: To prevent errors, user-input argu-ments should be vigorously checked. Informative messages, warnings, and errors should be produced. If a server returns an error in a particular format, the server's error response should be parsed. The package should internally and grace-fully handle failure events such as connection loss. Saving files such as raw server's response should be easy, yet moni-tored by the package. Altering the package options should be readily accessible.
+-   Beginner users should be able to conveniently use rbioapi and be completely insulated from any technicalities.
+
+-   The functions' documentations should be extensive, self-contained, with working examples, and integrated with the corresponding web services in terms such as citing information or links to guides. In addition to the main vignette article, each supported database or web service should have its own vignette articles.
 
 ------------------------------------------------------------------------
 
