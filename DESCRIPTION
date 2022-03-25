@@ -5,8 +5,10 @@ Version: 0.7.5
 Authors@R: 
     person(given = "Moosa",
            family = "Rezwani",
-           role = c("aut", "cre", "cph"),
-           email = "moosa.rezwani@gmail.com")
+           role = c("aut", "cre"),
+           email = "moosa.rezwani@gmail.com",
+           comment = c(ORCID = "0000-0001-6325-4444")
+           )
 Description: Currently fully supports Enrichr, JASPAR, miEAA, PANTHER,
     Reactome, STRING, and UniProt! The goal of rbioapi is to provide a
     user-friendly and consistent interface to biological databases and

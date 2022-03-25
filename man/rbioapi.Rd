@@ -31,7 +31,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Moosa Rezwani \email{moosa.rezwani@gmail.com} [copyright holder]
+\strong{Maintainer}: Moosa Rezwani \email{moosa.rezwani@gmail.com} (\href{https://orcid.org/0000-0001-6325-4444}{ORCID})
 
 }
 \keyword{internal}
