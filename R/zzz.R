@@ -22,7 +22,7 @@
           rba_progress = FALSE,
           rba_save_file = FALSE,
           rba_skip_error = !interactive(),
-          rba_user_agent = "rbioapi R package",
+          rba_user_agent = "rbioapi_R_package_<https://cran.r-project.org/package=rbioapi>",
           rba_verbose = TRUE,
           rba_retry_wait = 10,
           rba_user_options = c(rba_diagnostics = "diagnostics",
