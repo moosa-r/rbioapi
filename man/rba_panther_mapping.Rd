@@ -42,16 +42,17 @@ rba_panther_mapping(genes = c("Cd40", 7124, "ENSG00000203747", "P33681"),
 }
 \references{
 \itemize{
-  \item Mi, H., Muruganujan, A., Ebert, D., Huang, X., & Thomas, P. D.
-  (2019). PANTHER version 14: more genomes, a new PANTHER GO-slim and
-  improvements in enrichment analysis tools. Nucleic acids research, 47(D1),
-  D419-D426.
-  \item Mi, H., Muruganujan, A., Huang, X., Ebert, D., Mills, C., Guo, X.,
-  & Thomas, P. D. (2019). Protocol Update for large-scale genome and gene
-  function analysis with the PANTHER classification system (v. 14.0).
-  Nature protocols, 14(3), 703-721.
+  \item Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills,
+  Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER
+  version 16: a revised family classification, tree-based classification
+  tool, enhancer regions and extensive API, Nucleic Acids Research,
+  Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
+  https://doi.org/10.1093/nar/gkaa1106
   \item \href{http://www.pantherdb.org/services/details.jsp}{PANTHER
   Services Details}
+  \item
+  \href{http://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
+  note on PANTHER website}
   }
 }
 \seealso{
