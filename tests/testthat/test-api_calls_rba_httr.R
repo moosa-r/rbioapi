@@ -32,8 +32,8 @@ test_that(".rba_httr adds respects global options:", {
   progress = TRUE
   timeout = 9999
   output <- .rba_httr(httr = "get",
-                      url = "http://google.com",
-                      path = "search",
+                      url = "https://httpbin.org",
+                      path = "get",
                       save_to = "save_to_value",
                       accept = "accept_value")
 
@@ -47,8 +47,8 @@ test_that(".rba_httr adds respects global options:", {
 test_that(".rba_httr handles file parser vs object oarsers senario", {
   ### Exported function uses a fixed accept and parser
   output_file <- .rba_httr(httr = "get",
-                           url = "http://google.com",
-                           path = "search",
+                           url = "https://httpbin.org",
+                           path = "get",
                            save_to = getwd(),
                            accept = "accept_value",
                            parser = "parser_value")
@@ -61,8 +61,8 @@ test_that(".rba_httr handles file parser vs object oarsers senario", {
   ### Exported function lets user decided to save file or not:
   ## 1 If user supplied a path...
   output_file <- .rba_httr(httr = "get",
-                           url = "http://google.com",
-                           path = "search",
+                           url = "https://httpbin.org",
+                           path = "get",
                            save_to = getwd(),
                            file_accept = "file_accept_value",
                            obj_accept = "obj_accept_value",
@@ -77,8 +77,8 @@ test_that(".rba_httr handles file parser vs object oarsers senario", {
 
   ## 2 If user didn't supply a path...
   output_obj <- .rba_httr(httr = "get",
-                          url = "http://google.com",
-                          path = "search",
+                          url = "https://httpbin.org",
+                          path = "get",
                           save_to = FALSE,
                           file_accept = "file_accept_value",
                           obj_accept = "obj_accept_value",

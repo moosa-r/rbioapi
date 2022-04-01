@@ -9,8 +9,7 @@ test_that(".rba_api_call works", {
 
   # Output structure is correct
   request <- .rba_httr(httr = "head",
-                       url = "https://google.com",
-                       path = "search")
+                       url = "https://httpbin.org")
   expect_class(obj = rba_api_call_nested(input_call = request$call,
                                          skip_error = FALSE,
                                          verbose = TRUE,
@@ -18,17 +17,17 @@ test_that(".rba_api_call works", {
                expected = "response")
 
   # Properly return error
+  # request <- .rba_httr(httr = "head",
+  #                      url = "http://sdvsdgv.sgsdg",
+  #                      path = "sfs")
+  # expect_error(object = rba_api_call_nested(input_call = request$call,
+  #                                           skip_error = FALSE,
+  #                                           verbose = TRUE,
+  #                                           diagnostics = FALSE),
+  #              regexp = "resolve")
   request <- .rba_httr(httr = "head",
-                       url = "http://sdvsdgv.sgsdg",
-                       path = "sfs")
-  expect_error(object = rba_api_call_nested(input_call = request$call,
-                                            skip_error = FALSE,
-                                            verbose = TRUE,
-                                            diagnostics = FALSE),
-               regexp = "resolve")
-  request <- .rba_httr(httr = "head",
-                       url = "https://api.github.com/",
-                       path = "user/sdfsgsdg")
+                       url = "https://httpbin.org",
+                       path = "not_valid_path02091375")
   expect_error(object = rba_api_call_nested(input_call = request$call,
                                             skip_error = FALSE,
                                             verbose = TRUE,
@@ -40,15 +39,15 @@ test_that(".rba_api_call works", {
                                          skip_error = TRUE,
                                          verbose = TRUE,
                                          diagnostics = FALSE),
-               pattern = "Status")
+               pattern = "404")
   ## Trims output
-  request <- .rba_httr(httr = "head",
-                       url = "https://googlvjhvjhjvje.com",
-                       path = "search")
-  expect_regex(obj = rba_api_call_nested(input_call = request$call,
-                                         skip_error = TRUE,
-                                         verbose = TRUE,
-                                         diagnostics = FALSE),
-               pattern = "Error in",
-               invert = TRUE)
+  # request <- .rba_httr(httr = "head",
+  #                      url = "https://googlvjhvjhjvje.com",
+  #                      path = "search")
+  # expect_regex(obj = rba_api_call_nested(input_call = request$call,
+  #                                        skip_error = TRUE,
+  #                                        verbose = TRUE,
+  #                                        diagnostics = FALSE),
+  #              pattern = "Error in",
+  #              invert = TRUE)
 })

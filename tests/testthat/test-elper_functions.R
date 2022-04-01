@@ -1,6 +1,6 @@
 test_that(".rba_api_check works", {
-  expect_true(object = .rba_api_check("https://google.com"))
-  expect_regex(obj = .rba_api_check("https://google.com/dftgyh"),
+  expect_true(object = .rba_api_check("https://httpbin.org"))
+  expect_regex(obj = .rba_api_check("https://httpbin.org/not_valid_path02091375"),
                pattern = "404")
 })
 

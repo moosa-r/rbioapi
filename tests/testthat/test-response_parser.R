@@ -1,5 +1,5 @@
 test_that(".rba_response_parser works", {
-  resp <- httr::GET(url = "https://api.github.com/users/moosa-r/repos",
+  resp <- httr::GET(url = "https://httpbin.org/json",
                     httr::accept("application/json"))
 
   # One parser
@@ -21,7 +21,7 @@ test_that(".rba_error_parser works", {
                expected = "character")
 
   ## Pass to .rba_http_status for unknown servers
-  resp <- httr::GET(url = "https://api.github.com/users/sdsdfsdfsdgf/",
+  resp <- httr::GET(url = "https://httpbin.org/not_valid_path02091375",
                     httr::accept("application/json"))
   expect_identical(object = .rba_error_parser(response = resp,
                                               verbose = FALSE),
