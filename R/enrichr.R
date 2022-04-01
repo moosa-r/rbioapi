@@ -30,15 +30,25 @@
 #'   statistics.
 #'
 #' @references \itemize{
-#'   \item Chen EY, Tan CM, Kou Y, Duan Q, Wang Z, Meirelles GV, Clark NR,
-#'   Ma'ayan A. Enrichr: interactive and collaborative HTML5 gene list
-#'   enrichment analysis tool. BMC Bioinformatics. 2013;128(14).
-#'   \item Kuleshov MV, Jones MR, Rouillard AD, Fernandez NF, Duan Q, Wang Z,
-#'   Koplev S, Jenkins SL, Jagodnik KM, Lachmann A, McDermott MG, Monteiro CD,
-#'   Gundersen GW, Ma'ayan A. Enrichr: a comprehensive gene set enrichment
-#'   analysis web server 2016 update. Nucleic Acids Research. 2016; gkw377.
+#'   \item Chen, E.Y., Tan, C.M., Kou, Y. et al. Enrichr: interactive and
+#'   collaborative HTML5 gene list enrichment analysis tool. Bioinformatics
+#'   14, 128 (2013). https://doi.org/10.1186/1471-2105-14-128
+#'   \item Maxim V. Kuleshov, Matthew R. Jones, Andrew D. Rouillard, Nicolas
+#'   F. Fernandez, Qiaonan Duan, Zichen Wang, Simon Koplev, Sherry L. Jenkins,
+#'   Kathleen M. Jagodnik, Alexander Lachmann, Michael G. McDermott,
+#'   Caroline D. Monteiro, Gregory W. Gundersen, Avi Ma’ayan, Enrichr: a
+#'   comprehensive gene set enrichment analysis web server 2016 update,
+#'   Nucleic Acids Research, Volume 44, Issue W1, 8 July 2016, Pages W90–W97,
+#'   https://doi.org/10.1093/nar/gkw377
+#'   \item Xie, Z., Bailey, A., Kuleshov, M. V., Clarke, D. J. B.,
+#'   Evangelista, J. E., Jenkins, S. L., Lachmann, A., Wojciechowicz, M. L.,
+#'   Kropiwnicki, E., Jagodnik, K. M., Jeon, M., & Ma’ayan, A. (2021). Gene
+#'   set knowledge discovery with Enrichr. Current Protocols, 1, e90.
+#'   doi: https://doi.org/10.1002/cpz1.90
 #'   \item \href{https://maayanlab.cloud/Enrichr/help#api}{Enrichr API
 #'   Documentation}
+#'   \item \href{https://maayanlab.cloud/Enrichr/help#terms}{Citations note
+#'   on Enrichr website}
 #'   }
 #'
 #' @examples
@@ -112,15 +122,25 @@ rba_enrichr_libs <- function(store_in_options = FALSE,
 #' @return A list with two unique IDs for your uploaded gene sets.
 #'
 #' @references \itemize{
-#'   \item Chen EY, Tan CM, Kou Y, Duan Q, Wang Z, Meirelles GV, Clark NR,
-#'   Ma'ayan A. Enrichr: interactive and collaborative HTML5 gene list
-#'   enrichment analysis tool. BMC Bioinformatics. 2013;128(14).
-#'   \item Kuleshov MV, Jones MR, Rouillard AD, Fernandez NF, Duan Q, Wang Z,
-#'   Koplev S, Jenkins SL, Jagodnik KM, Lachmann A, McDermott MG, Monteiro CD,
-#'   Gundersen GW, Ma'ayan A. Enrichr: a comprehensive gene set enrichment
-#'   analysis web server 2016 update. Nucleic Acids Research. 2016; gkw377.
+#'   \item Chen, E.Y., Tan, C.M., Kou, Y. et al. Enrichr: interactive and
+#'   collaborative HTML5 gene list enrichment analysis tool. Bioinformatics
+#'   14, 128 (2013). https://doi.org/10.1186/1471-2105-14-128
+#'   \item Maxim V. Kuleshov, Matthew R. Jones, Andrew D. Rouillard, Nicolas
+#'   F. Fernandez, Qiaonan Duan, Zichen Wang, Simon Koplev, Sherry L. Jenkins,
+#'   Kathleen M. Jagodnik, Alexander Lachmann, Michael G. McDermott,
+#'   Caroline D. Monteiro, Gregory W. Gundersen, Avi Ma’ayan, Enrichr: a
+#'   comprehensive gene set enrichment analysis web server 2016 update,
+#'   Nucleic Acids Research, Volume 44, Issue W1, 8 July 2016, Pages W90–W97,
+#'   https://doi.org/10.1093/nar/gkw377
+#'   \item Xie, Z., Bailey, A., Kuleshov, M. V., Clarke, D. J. B.,
+#'   Evangelista, J. E., Jenkins, S. L., Lachmann, A., Wojciechowicz, M. L.,
+#'   Kropiwnicki, E., Jagodnik, K. M., Jeon, M., & Ma’ayan, A. (2021). Gene
+#'   set knowledge discovery with Enrichr. Current Protocols, 1, e90.
+#'   doi: https://doi.org/10.1002/cpz1.90
 #'   \item \href{https://maayanlab.cloud/Enrichr/help#api}{Enrichr API
 #'   Documentation}
+#'   \item \href{https://maayanlab.cloud/Enrichr/help#terms}{Citations note
+#'   on Enrichr website}
 #'   }
 #'
 #' @examples
@@ -195,15 +215,25 @@ rba_enrichr_add_list <- function(gene_list,
 #'   supplied user_list_id
 #'
 #' @references \itemize{
-#'   \item Chen EY, Tan CM, Kou Y, Duan Q, Wang Z, Meirelles GV, Clark NR,
-#'   Ma'ayan A. Enrichr: interactive and collaborative HTML5 gene list
-#'   enrichment analysis tool. BMC Bioinformatics. 2013;128(14).
-#'   \item Kuleshov MV, Jones MR, Rouillard AD, Fernandez NF, Duan Q, Wang Z,
-#'   Koplev S, Jenkins SL, Jagodnik KM, Lachmann A, McDermott MG, Monteiro CD,
-#'   Gundersen GW, Ma'ayan A. Enrichr: a comprehensive gene set enrichment
-#'   analysis web server 2016 update. Nucleic Acids Research. 2016; gkw377.
+#'   \item Chen, E.Y., Tan, C.M., Kou, Y. et al. Enrichr: interactive and
+#'   collaborative HTML5 gene list enrichment analysis tool. Bioinformatics
+#'   14, 128 (2013). https://doi.org/10.1186/1471-2105-14-128
+#'   \item Maxim V. Kuleshov, Matthew R. Jones, Andrew D. Rouillard, Nicolas
+#'   F. Fernandez, Qiaonan Duan, Zichen Wang, Simon Koplev, Sherry L. Jenkins,
+#'   Kathleen M. Jagodnik, Alexander Lachmann, Michael G. McDermott,
+#'   Caroline D. Monteiro, Gregory W. Gundersen, Avi Ma’ayan, Enrichr: a
+#'   comprehensive gene set enrichment analysis web server 2016 update,
+#'   Nucleic Acids Research, Volume 44, Issue W1, 8 July 2016, Pages W90–W97,
+#'   https://doi.org/10.1093/nar/gkw377
+#'   \item Xie, Z., Bailey, A., Kuleshov, M. V., Clarke, D. J. B.,
+#'   Evangelista, J. E., Jenkins, S. L., Lachmann, A., Wojciechowicz, M. L.,
+#'   Kropiwnicki, E., Jagodnik, K. M., Jeon, M., & Ma’ayan, A. (2021). Gene
+#'   set knowledge discovery with Enrichr. Current Protocols, 1, e90.
+#'   doi: https://doi.org/10.1002/cpz1.90
 #'   \item \href{https://maayanlab.cloud/Enrichr/help#api}{Enrichr API
 #'   Documentation}
+#'   \item \href{https://maayanlab.cloud/Enrichr/help#terms}{Citations note
+#'   on Enrichr website}
 #'   }
 #'
 #' @examples
@@ -277,15 +307,25 @@ rba_enrichr_view_list <- function(user_list_id,
 #'   against the gene_set_library
 #'
 #' @references \itemize{
-#'   \item Chen EY, Tan CM, Kou Y, Duan Q, Wang Z, Meirelles GV, Clark NR,
-#'   Ma'ayan A. Enrichr: interactive and collaborative HTML5 gene list
-#'   enrichment analysis tool. BMC Bioinformatics. 2013;128(14).
-#'   \item Kuleshov MV, Jones MR, Rouillard AD, Fernandez NF, Duan Q, Wang Z,
-#'   Koplev S, Jenkins SL, Jagodnik KM, Lachmann A, McDermott MG, Monteiro CD,
-#'   Gundersen GW, Ma'ayan A. Enrichr: a comprehensive gene set enrichment
-#'   analysis web server 2016 update. Nucleic Acids Research. 2016; gkw377.
+#'   \item Chen, E.Y., Tan, C.M., Kou, Y. et al. Enrichr: interactive and
+#'   collaborative HTML5 gene list enrichment analysis tool. Bioinformatics
+#'   14, 128 (2013). https://doi.org/10.1186/1471-2105-14-128
+#'   \item Maxim V. Kuleshov, Matthew R. Jones, Andrew D. Rouillard, Nicolas
+#'   F. Fernandez, Qiaonan Duan, Zichen Wang, Simon Koplev, Sherry L. Jenkins,
+#'   Kathleen M. Jagodnik, Alexander Lachmann, Michael G. McDermott,
+#'   Caroline D. Monteiro, Gregory W. Gundersen, Avi Ma’ayan, Enrichr: a
+#'   comprehensive gene set enrichment analysis web server 2016 update,
+#'   Nucleic Acids Research, Volume 44, Issue W1, 8 July 2016, Pages W90–W97,
+#'   https://doi.org/10.1093/nar/gkw377
+#'   \item Xie, Z., Bailey, A., Kuleshov, M. V., Clarke, D. J. B.,
+#'   Evangelista, J. E., Jenkins, S. L., Lachmann, A., Wojciechowicz, M. L.,
+#'   Kropiwnicki, E., Jagodnik, K. M., Jeon, M., & Ma’ayan, A. (2021). Gene
+#'   set knowledge discovery with Enrichr. Current Protocols, 1, e90.
+#'   doi: https://doi.org/10.1002/cpz1.90
 #'   \item \href{https://maayanlab.cloud/Enrichr/help#api}{Enrichr API
 #'   Documentation}
+#'   \item \href{https://maayanlab.cloud/Enrichr/help#terms}{Citations note
+#'   on Enrichr website}
 #'   }
 #'
 #' @noRd
@@ -363,15 +403,25 @@ rba_enrichr_view_list <- function(user_list_id,
 #'   supplied gene-list against the selected Enrichr libraries.
 #'
 #' @references \itemize{
-#'   \item Chen EY, Tan CM, Kou Y, Duan Q, Wang Z, Meirelles GV, Clark NR,
-#'   Ma'ayan A. Enrichr: interactive and collaborative HTML5 gene list
-#'   enrichment analysis tool. BMC Bioinformatics. 2013;128(14).
-#'   \item Kuleshov MV, Jones MR, Rouillard AD, Fernandez NF, Duan Q, Wang Z,
-#'   Koplev S, Jenkins SL, Jagodnik KM, Lachmann A, McDermott MG, Monteiro CD,
-#'   Gundersen GW, Ma'ayan A. Enrichr: a comprehensive gene set enrichment
-#'   analysis web server 2016 update. Nucleic Acids Research. 2016; gkw377.
+#'   \item Chen, E.Y., Tan, C.M., Kou, Y. et al. Enrichr: interactive and
+#'   collaborative HTML5 gene list enrichment analysis tool. Bioinformatics
+#'   14, 128 (2013). https://doi.org/10.1186/1471-2105-14-128
+#'   \item Maxim V. Kuleshov, Matthew R. Jones, Andrew D. Rouillard, Nicolas
+#'   F. Fernandez, Qiaonan Duan, Zichen Wang, Simon Koplev, Sherry L. Jenkins,
+#'   Kathleen M. Jagodnik, Alexander Lachmann, Michael G. McDermott,
+#'   Caroline D. Monteiro, Gregory W. Gundersen, Avi Ma’ayan, Enrichr: a
+#'   comprehensive gene set enrichment analysis web server 2016 update,
+#'   Nucleic Acids Research, Volume 44, Issue W1, 8 July 2016, Pages W90–W97,
+#'   https://doi.org/10.1093/nar/gkw377
+#'   \item Xie, Z., Bailey, A., Kuleshov, M. V., Clarke, D. J. B.,
+#'   Evangelista, J. E., Jenkins, S. L., Lachmann, A., Wojciechowicz, M. L.,
+#'   Kropiwnicki, E., Jagodnik, K. M., Jeon, M., & Ma’ayan, A. (2021). Gene
+#'   set knowledge discovery with Enrichr. Current Protocols, 1, e90.
+#'   doi: https://doi.org/10.1002/cpz1.90
 #'   \item \href{https://maayanlab.cloud/Enrichr/help#api}{Enrichr API
 #'   Documentation}
+#'   \item \href{https://maayanlab.cloud/Enrichr/help#terms}{Citations note
+#'   on Enrichr website}
 #'   }
 #'
 #' @examples
@@ -523,15 +573,25 @@ rba_enrichr_enrich <- function(user_list_id,
 #' @return a list containing the search results of your supplied gene.
 #'
 #' @references \itemize{
-#'   \item Chen EY, Tan CM, Kou Y, Duan Q, Wang Z, Meirelles GV, Clark NR,
-#'   Ma'ayan A. Enrichr: interactive and collaborative HTML5 gene list
-#'   enrichment analysis tool. BMC Bioinformatics. 2013;128(14).
-#'   \item Kuleshov MV, Jones MR, Rouillard AD, Fernandez NF, Duan Q, Wang Z,
-#'   Koplev S, Jenkins SL, Jagodnik KM, Lachmann A, McDermott MG, Monteiro CD,
-#'   Gundersen GW, Ma'ayan A. Enrichr: a comprehensive gene set enrichment
-#'   analysis web server 2016 update. Nucleic Acids Research. 2016; gkw377.
+#'   \item Chen, E.Y., Tan, C.M., Kou, Y. et al. Enrichr: interactive and
+#'   collaborative HTML5 gene list enrichment analysis tool. Bioinformatics
+#'   14, 128 (2013). https://doi.org/10.1186/1471-2105-14-128
+#'   \item Maxim V. Kuleshov, Matthew R. Jones, Andrew D. Rouillard, Nicolas
+#'   F. Fernandez, Qiaonan Duan, Zichen Wang, Simon Koplev, Sherry L. Jenkins,
+#'   Kathleen M. Jagodnik, Alexander Lachmann, Michael G. McDermott,
+#'   Caroline D. Monteiro, Gregory W. Gundersen, Avi Ma’ayan, Enrichr: a
+#'   comprehensive gene set enrichment analysis web server 2016 update,
+#'   Nucleic Acids Research, Volume 44, Issue W1, 8 July 2016, Pages W90–W97,
+#'   https://doi.org/10.1093/nar/gkw377
+#'   \item Xie, Z., Bailey, A., Kuleshov, M. V., Clarke, D. J. B.,
+#'   Evangelista, J. E., Jenkins, S. L., Lachmann, A., Wojciechowicz, M. L.,
+#'   Kropiwnicki, E., Jagodnik, K. M., Jeon, M., & Ma’ayan, A. (2021). Gene
+#'   set knowledge discovery with Enrichr. Current Protocols, 1, e90.
+#'   doi: https://doi.org/10.1002/cpz1.90
 #'   \item \href{https://maayanlab.cloud/Enrichr/help#api}{Enrichr API
 #'   Documentation}
+#'   \item \href{https://maayanlab.cloud/Enrichr/help#terms}{Citations note
+#'   on Enrichr website}
 #'   }
 #'
 #' @examples
@@ -613,15 +673,25 @@ rba_enrichr_gene_map <- function(gene,
 #'   supplied gene-list against the selected Enrichr libraries.
 #'
 #' @references \itemize{
-#'   \item Chen EY, Tan CM, Kou Y, Duan Q, Wang Z, Meirelles GV, Clark NR,
-#'   Ma'ayan A. Enrichr: interactive and collaborative HTML5 gene list
-#'   enrichment analysis tool. BMC Bioinformatics. 2013;128(14).
-#'   \item Kuleshov MV, Jones MR, Rouillard AD, Fernandez NF, Duan Q, Wang Z,
-#'   Koplev S, Jenkins SL, Jagodnik KM, Lachmann A, McDermott MG, Monteiro CD,
-#'   Gundersen GW, Ma'ayan A. Enrichr: a comprehensive gene set enrichment
-#'   analysis web server 2016 update. Nucleic Acids Research. 2016; gkw377.
+#'   \item Chen, E.Y., Tan, C.M., Kou, Y. et al. Enrichr: interactive and
+#'   collaborative HTML5 gene list enrichment analysis tool. Bioinformatics
+#'   14, 128 (2013). https://doi.org/10.1186/1471-2105-14-128
+#'   \item Maxim V. Kuleshov, Matthew R. Jones, Andrew D. Rouillard, Nicolas
+#'   F. Fernandez, Qiaonan Duan, Zichen Wang, Simon Koplev, Sherry L. Jenkins,
+#'   Kathleen M. Jagodnik, Alexander Lachmann, Michael G. McDermott,
+#'   Caroline D. Monteiro, Gregory W. Gundersen, Avi Ma’ayan, Enrichr: a
+#'   comprehensive gene set enrichment analysis web server 2016 update,
+#'   Nucleic Acids Research, Volume 44, Issue W1, 8 July 2016, Pages W90–W97,
+#'   https://doi.org/10.1093/nar/gkw377
+#'   \item Xie, Z., Bailey, A., Kuleshov, M. V., Clarke, D. J. B.,
+#'   Evangelista, J. E., Jenkins, S. L., Lachmann, A., Wojciechowicz, M. L.,
+#'   Kropiwnicki, E., Jagodnik, K. M., Jeon, M., & Ma’ayan, A. (2021). Gene
+#'   set knowledge discovery with Enrichr. Current Protocols, 1, e90.
+#'   doi: https://doi.org/10.1002/cpz1.90
 #'   \item \href{https://maayanlab.cloud/Enrichr/help#api}{Enrichr API
 #'   Documentation}
+#'   \item \href{https://maayanlab.cloud/Enrichr/help#terms}{Citations note
+#'   on Enrichr website}
 #'   }
 #'
 #' @examples
