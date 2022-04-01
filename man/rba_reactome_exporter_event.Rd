@@ -49,14 +49,23 @@ rba_reactome_exporter_event(event_id = "R-HSA-177929",
 }
 \references{
 \itemize{
-  \item Jassal B, Matthews L, Viteri G, Gong C, Lorente P, Fabregat A,
-  Sidiropoulos K, Cook J, Gillespie M, Haw R, Loney F, May B, Milacic M,
-  Rothfels K, Sevilla C, Shamovsky V, Shorser S, Varusai T, Weiser J, Wu G,
-  Stein L, Hermjakob H, D'Eustachio P. The reactome pathway knowledgebase.
-  Nucleic Acids Res. 2020 Jan 8;48(D1):D498-D503. doi: 10.1093/nar/gkz1031.
-  PubMed PMID: 31691815.
+  \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
+  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
+  Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
+  Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
+  Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
+  Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
+  Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
+  Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
+  pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
+  https://doi.org/10.1093/nar/gkab1028
+  \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
+  Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
+  Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
+  PMID: 32907876.
   \item \href{https://reactome.org/ContentService/}{Reactome Content
   Services API Documentation}
+  \item \href{https://reactome.org/cite}{Citations note on Reactome website}
   }
 }
 \seealso{
