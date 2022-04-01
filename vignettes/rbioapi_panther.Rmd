@@ -78,7 +78,7 @@ genes <- c("p53", "BRCA1", "cdk2", "Q99835", "CDC42","CDK1","KIF23","PLK1",
 ## 3 Now we can submit the enrichment request.
 enriched <- rba_panther_enrich(genes = genes,
                                organism = 9606,
-                               annot_dataset = "ANNOT_TYPE_ID_PANTHER_GO_SLIM_BP",
+                               annot_dataset = "ANNOT_TYPE_ID_PANTHER_PATHWAY",
                                cutoff = 0.05)
 ```
 

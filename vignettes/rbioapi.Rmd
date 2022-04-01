@@ -214,7 +214,8 @@ As you can see, what we have done was:
 
 rbioapi is an interface between you and other databases and services. Thus, if you have used rbioapi in published research, kindly **in addition to citing rbioapi, [*make sure to fully and properly cite the databases/services you have used*]{.ul}**. Suggested citations have been added in the functions' manuals, under the "references" section; Nevertheless, it is the user's responsibility to check for proper citations and to properly cite the database/services that they have used.
 
--   **How to cite rbioapi**:\
+-   **How to cite rbioapi**:
+
     Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: User-Friendly R Interface to Biologic Web Services' API, *Bioinformatics*, 2022;, btac172, <https://doi.org/10.1093/bioinformatics/btac172>
 
 -   [How to cite Enrichr](rbioapi_enrichr.html#Citations "How to cite Enrichr"). (See on [Enrichr website](https://maayanlab.cloud/Enrichr/help#terms))

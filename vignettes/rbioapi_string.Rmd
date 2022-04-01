@@ -159,12 +159,12 @@ if (is.array(graph_1)) {
 ```{r rba_string_network_image_ex2, fig.show='hide'}
 ## Example 2:
 graph_2 <- rba_string_network_image(ids = proteins_mapped,
-                                   image_format = "image",
-                                   species = 9606,
-                                   save_image = FALSE,
-                                   required_score = 500,
-                                   add_color_nodes = 5,
-                                   add_white_nodes = 5,
+                                    image_format = "image",
+                                    species = 9606,
+                                    save_image = FALSE,
+                                    required_score = 500,
+                                    add_color_nodes = 5,
+                                    add_white_nodes = 5,
                                    network_flavor = "actions")
 ```
 
@@ -188,12 +188,20 @@ The first type is the conventional type, which statistically tests your supplied
 
 ```{r rba_string_enrichment}
 enriched <- rba_string_enrichment(ids = proteins_mapped,
-                                 species = 9606)
+                                  species = 9606, )
 ```
 
+As usual, we inspect the output using the `str()` function. As you can see below, the enrichment results of each category can be found as the returned list's elements.
+
+```{r rba_string_enrichment_str}
+str(enriched, max.level = 1)
+```
+
+Let us see the "DISEASES" results as an example. Below, we can see which terms of the [Human Disease Ontology](https://disease-ontology.org/ "Human Disease Ontology") were over-represented:
+
 ```{r rba_string_enrichment_restults, echo=FALSE}
-if (is.data.frame(enriched)) {
-  DT::datatable(data = enriched,
+if (is.data.frame(enriched$DISEASES)) {
+  DT::datatable(data = enriched$DISEASES,
               options = list(scrollX = TRUE, 
                              paging = TRUE,
                              fixedHeader = TRUE,
@@ -266,4 +274,3 @@ To cite rbioapi:
 ```{r sessionInfo, echo=FALSE}
 sessionInfo()
 ```
-

@@ -1,7 +1,7 @@
 rbioapi: User-Friendly R Interface to Biologic Web Services’ API
 ================
 Moosa Rezwani
-2022-03-23
+2022-04-01
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -344,10 +344,12 @@ Nevertheless, it is the user’s responsibility to check for proper
 citations and to properly cite the database/services that they have
 used.
 
--   **How to cite rbioapi**: Moosa Rezwani, Ali Akbar Pourfathollah,
-    Farshid Noorbakhsh, rbioapi: User-Friendly R Interface to Biologic
-    Web Services’ API, *Bioinformatics*, 2022;, btac172,
-    <https://doi.org/10.1093/bioinformatics/btac172>
+-   **How to cite rbioapi**:
+
+    Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi:
+    User-Friendly R Interface to Biologic Web Services’ API,
+    Bioinformatics, 2022;, btac172,
+    <https://doi.org/10.1093/bioinformatics/btac17>
 
 -   [How to cite
     Enrichr](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html#Citations "How to cite Enrichr").
@@ -440,7 +442,7 @@ We are also adding vignette articles focusing on tasks and workflows:
     #> [1] stats     graphics  grDevices utils     datasets  methods   base     
     #> 
     #> other attached packages:
-    #> [1] rbioapi_0.7.5
+    #> [1] rbioapi_0.7.6
     #> 
     #> loaded via a namespace (and not attached):
     #>  [1] digest_0.6.29   R6_2.5.1        jsonlite_1.8.0  magrittr_2.0.2 
