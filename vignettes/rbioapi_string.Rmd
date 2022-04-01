@@ -253,7 +253,6 @@ Some rbioapi STRING functions were not covered in this vignette, please check th
 To cite STRING (Please see <https://string-db.org/cgi/about?footer_active_subpage=references>):
 
 -   Damian Szklarczyk, Annika L Gable, Katerina C Nastou, David Lyon, Rebecca Kirsch, Sampo Pyysalo, Nadezhda T Doncheva, Marc Legeay, Tao Fang, Peer Bork, Lars J Jensen, Christian von Mering, The STRING database in 2021: customizable protein--protein networks, and functional characterization of user-uploaded gene/measurement sets, *Nucleic Acids Research*, Volume 49, Issue D1, 8 January 2021, Pages D605--D612, <https://doi.org/10.1093/nar/gkaa1074>
--   Damian Szklarczyk, Annika L Gable, David Lyon, Alexander Junge, Stefan Wyder, Jaime Huerta-Cepas, Milan Simonovic, Nadezhda T Doncheva, John H Morris, Peer Bork, Lars J Jensen, Christian von Mering, STRING v11: protein--protein association networks with increased coverage, supporting functional discovery in genome-wide experimental datasets, *Nucleic Acids Research*, Volume 47, Issue D1, 08 January 2019, Pages D607--D613, <https://doi.org/10.1093/nar/gky1131>
 
 To cite rbioapi:
 

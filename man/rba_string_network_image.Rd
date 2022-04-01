@@ -112,13 +112,17 @@ rba_string_network_image(ids = "9606.ENSP00000269305",
 }
 \references{
 \itemize{
-  \item Szklarczyk D, Gable AL, Lyon D, Junge A, Wyder S, Huerta-Cepas J,
-  Simonovic M, Doncheva NT, Morris JH, Bork P, Jensen LJ, Mering CV.
-  STRING v11: protein-protein association networks with increased coverage,
-  supporting functional discovery in genome-wide experimental datasets.
-  Nucleic Acids Res. 2019 Jan 8;47(D1):D607-D613. doi: 10.1093/nar/gky1131.
-  PMID: 30476243; PMCID: PMC6323986.
+  \item Damian Szklarczyk, Annika L Gable, Katerina C Nastou, David Lyon,
+  Rebecca Kirsch, Sampo Pyysalo, Nadezhda T Doncheva, Marc Legeay, Tao Fang,
+  Peer Bork, Lars J Jensen, Christian von Mering, The STRING database in
+  2021: customizable protein–protein networks, and functional
+  characterization of user-uploaded gene/measurement sets, Nucleic Acids
+  Research, Volume 49, Issue D1, 8 January 2021, Pages D605–D612,
+  https://doi.org/10.1093/nar/gkaa1074
   \item \href{https://string-db.org/help/api/}{STRING API Documentation}
+  \item
+  \href{https://string-db.org/cgi/about?footer_active_subpage=references}{
+  Citations note on STRING website}
   }
 }
 \seealso{
