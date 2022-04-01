@@ -17,17 +17,20 @@
 #' @return A data frame with collections' names and URLs.
 #'
 #' @references \itemize{
-#'   \item Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update
-#'     of the open-access database of transcription factor binding profiles.
-#'     Nucleic Acids Res. 2019; doi: 10.1093/nar/gkz1001
-#'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR
-#'     data from any programming language. Bioinformatics, 2017, doi:
-#'     10.1093/bioinformatics/btx804
-#'   \item Khan, A. et al. JASPAR 2018: update of the open-access database
-#'     of transcription factor binding profiles and its web framework.
-#'     Nucleic Acids Res. 2018; 46:D260–D266, doi: 10.1093/nar/gkx1126
+#'   \item Jaime A Castro-Mondragon, Rafael Riudavets-Puig, Ieva
+#'   Rauluseviciute, Roza Berhanu Lemma, Laura Turchi, Romain Blanc-Mathieu,
+#'   Jeremy Lucas, Paul Boddie, Aziz Khan, Nicolás Manosalva Pérez, Oriol
+#'   Fornes, Tiffany Y Leung, Alejandro Aguirre, Fayrouz Hammal, Daniel
+#'   Schmelter, Damir Baranasic, Benoit Ballester, Albin Sandelin, Boris
+#'   Lenhard, Klaas Vandepoele, Wyeth W Wasserman, François Parcy,
+#'   Anthony Mathelier, JASPAR 2022: the 9th release of the open-access
+#'   database of transcription factor binding profiles, Nucleic Acids
+#'   Research, Volume 50, Issue D1, 7 January 2022, Pages D165–D173,
+#'   https://doi.org/10.1093/nar/gkab1113
 #'   \item
 #'   \href{http://jaspar.genereg.net/api/v1/docs/}{JASPAR API Documentation}
+#'   \item \href{https://jaspar.genereg.net/faq/}{Citations note
+#'   on JASPAR website}
 #'   }
 #'
 #' @examples
@@ -113,17 +116,20 @@ rba_jaspar_collections <- function(release = 2022,
 #'   profiles available in the collection.
 #'
 #' @references \itemize{
-#'   \item Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update
-#'     of the open-access database of transcription factor binding profiles.
-#'     Nucleic Acids Res. 2019; doi: 10.1093/nar/gkz1001
-#'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR
-#'     data from any programming language. Bioinformatics, 2017, doi:
-#'     10.1093/bioinformatics/btx804
-#'   \item Khan, A. et al. JASPAR 2018: update of the open-access database
-#'     of transcription factor binding profiles and its web framework.
-#'     Nucleic Acids Res. 2018; 46:D260–D266, doi: 10.1093/nar/gkx1126
+#'   \item Jaime A Castro-Mondragon, Rafael Riudavets-Puig, Ieva
+#'   Rauluseviciute, Roza Berhanu Lemma, Laura Turchi, Romain Blanc-Mathieu,
+#'   Jeremy Lucas, Paul Boddie, Aziz Khan, Nicolás Manosalva Pérez, Oriol
+#'   Fornes, Tiffany Y Leung, Alejandro Aguirre, Fayrouz Hammal, Daniel
+#'   Schmelter, Damir Baranasic, Benoit Ballester, Albin Sandelin, Boris
+#'   Lenhard, Klaas Vandepoele, Wyeth W Wasserman, François Parcy,
+#'   Anthony Mathelier, JASPAR 2022: the 9th release of the open-access
+#'   database of transcription factor binding profiles, Nucleic Acids
+#'   Research, Volume 50, Issue D1, 7 January 2022, Pages D165–D173,
+#'   https://doi.org/10.1093/nar/gkab1113
 #'   \item
 #'   \href{http://jaspar.genereg.net/api/v1/docs/}{JASPAR API Documentation}
+#'   \item \href{https://jaspar.genereg.net/faq/}{Citations note
+#'   on JASPAR website}
 #'   }
 #'
 #' @examples
@@ -263,17 +269,20 @@ rba_jaspar_collections_matrices <- function(collection,
 #' @return A list that contains a data frame of matrix profiles' information.
 #'
 #' @references \itemize{
-#'   \item Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update
-#'     of the open-access database of transcription factor binding profiles.
-#'     Nucleic Acids Res. 2019; doi: 10.1093/nar/gkz1001
-#'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR
-#'     data from any programming language. Bioinformatics, 2017, doi:
-#'     10.1093/bioinformatics/btx804
-#'   \item Khan, A. et al. JASPAR 2018: update of the open-access database
-#'     of transcription factor binding profiles and its web framework.
-#'     Nucleic Acids Res. 2018; 46:D260–D266, doi: 10.1093/nar/gkx1126
+#'   \item Jaime A Castro-Mondragon, Rafael Riudavets-Puig, Ieva
+#'   Rauluseviciute, Roza Berhanu Lemma, Laura Turchi, Romain Blanc-Mathieu,
+#'   Jeremy Lucas, Paul Boddie, Aziz Khan, Nicolás Manosalva Pérez, Oriol
+#'   Fornes, Tiffany Y Leung, Alejandro Aguirre, Fayrouz Hammal, Daniel
+#'   Schmelter, Damir Baranasic, Benoit Ballester, Albin Sandelin, Boris
+#'   Lenhard, Klaas Vandepoele, Wyeth W Wasserman, François Parcy,
+#'   Anthony Mathelier, JASPAR 2022: the 9th release of the open-access
+#'   database of transcription factor binding profiles, Nucleic Acids
+#'   Research, Volume 50, Issue D1, 7 January 2022, Pages D165–D173,
+#'   https://doi.org/10.1093/nar/gkab1113
 #'   \item
 #'   \href{http://jaspar.genereg.net/api/v1/docs/}{JASPAR API Documentation}
+#'   \item \href{https://jaspar.genereg.net/faq/}{Citations note
+#'   on JASPAR website}
 #'   }
 #'
 #' @examples
@@ -428,17 +437,20 @@ rba_jaspar_matrix_search <- function(term = NULL,
 #' @return A data frame of matrix profiles' versions information.
 #'
 #' @references \itemize{
-#'   \item Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update
-#'     of the open-access database of transcription factor binding profiles.
-#'     Nucleic Acids Res. 2019; doi: 10.1093/nar/gkz1001
-#'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR
-#'     data from any programming language. Bioinformatics, 2017, doi:
-#'     10.1093/bioinformatics/btx804
-#'   \item Khan, A. et al. JASPAR 2018: update of the open-access database
-#'     of transcription factor binding profiles and its web framework.
-#'     Nucleic Acids Res. 2018; 46:D260–D266, doi: 10.1093/nar/gkx1126
+#'   \item Jaime A Castro-Mondragon, Rafael Riudavets-Puig, Ieva
+#'   Rauluseviciute, Roza Berhanu Lemma, Laura Turchi, Romain Blanc-Mathieu,
+#'   Jeremy Lucas, Paul Boddie, Aziz Khan, Nicolás Manosalva Pérez, Oriol
+#'   Fornes, Tiffany Y Leung, Alejandro Aguirre, Fayrouz Hammal, Daniel
+#'   Schmelter, Damir Baranasic, Benoit Ballester, Albin Sandelin, Boris
+#'   Lenhard, Klaas Vandepoele, Wyeth W Wasserman, François Parcy,
+#'   Anthony Mathelier, JASPAR 2022: the 9th release of the open-access
+#'   database of transcription factor binding profiles, Nucleic Acids
+#'   Research, Volume 50, Issue D1, 7 January 2022, Pages D165–D173,
+#'   https://doi.org/10.1093/nar/gkab1113
 #'   \item
 #'   \href{http://jaspar.genereg.net/api/v1/docs/}{JASPAR API Documentation}
+#'   \item \href{https://jaspar.genereg.net/faq/}{Citations note
+#'   on JASPAR website}
 #'   }
 #'
 #' @examples
@@ -519,17 +531,20 @@ rba_jaspar_matrix_versions <- function(base_id,
 #'   with the file's content.
 #'
 #' @references \itemize{
-#'   \item Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update
-#'     of the open-access database of transcription factor binding profiles.
-#'     Nucleic Acids Res. 2019; doi: 10.1093/nar/gkz1001
-#'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR
-#'     data from any programming language. Bioinformatics, 2017, doi:
-#'     10.1093/bioinformatics/btx804
-#'   \item Khan, A. et al. JASPAR 2018: update of the open-access database
-#'     of transcription factor binding profiles and its web framework.
-#'     Nucleic Acids Res. 2018; 46:D260–D266, doi: 10.1093/nar/gkx1126
+#'   \item Jaime A Castro-Mondragon, Rafael Riudavets-Puig, Ieva
+#'   Rauluseviciute, Roza Berhanu Lemma, Laura Turchi, Romain Blanc-Mathieu,
+#'   Jeremy Lucas, Paul Boddie, Aziz Khan, Nicolás Manosalva Pérez, Oriol
+#'   Fornes, Tiffany Y Leung, Alejandro Aguirre, Fayrouz Hammal, Daniel
+#'   Schmelter, Damir Baranasic, Benoit Ballester, Albin Sandelin, Boris
+#'   Lenhard, Klaas Vandepoele, Wyeth W Wasserman, François Parcy,
+#'   Anthony Mathelier, JASPAR 2022: the 9th release of the open-access
+#'   database of transcription factor binding profiles, Nucleic Acids
+#'   Research, Volume 50, Issue D1, 7 January 2022, Pages D165–D173,
+#'   https://doi.org/10.1093/nar/gkab1113
 #'   \item
 #'   \href{http://jaspar.genereg.net/api/v1/docs/}{JASPAR API Documentation}
+#'   \item \href{https://jaspar.genereg.net/faq/}{Citations note
+#'   on JASPAR website}
 #'   }
 #'
 #' @examples
@@ -635,17 +650,20 @@ rba_jaspar_matrix <- function(matrix_id,
 #'   details of a particular release.
 #'
 #' @references \itemize{
-#'   \item Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update
-#'     of the open-access database of transcription factor binding profiles.
-#'     Nucleic Acids Res. 2019; doi: 10.1093/nar/gkz1001
-#'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR
-#'     data from any programming language. Bioinformatics, 2017, doi:
-#'     10.1093/bioinformatics/btx804
-#'   \item Khan, A. et al. JASPAR 2018: update of the open-access database
-#'     of transcription factor binding profiles and its web framework.
-#'     Nucleic Acids Res. 2018; 46:D260–D266, doi: 10.1093/nar/gkx1126
+#'   \item Jaime A Castro-Mondragon, Rafael Riudavets-Puig, Ieva
+#'   Rauluseviciute, Roza Berhanu Lemma, Laura Turchi, Romain Blanc-Mathieu,
+#'   Jeremy Lucas, Paul Boddie, Aziz Khan, Nicolás Manosalva Pérez, Oriol
+#'   Fornes, Tiffany Y Leung, Alejandro Aguirre, Fayrouz Hammal, Daniel
+#'   Schmelter, Damir Baranasic, Benoit Ballester, Albin Sandelin, Boris
+#'   Lenhard, Klaas Vandepoele, Wyeth W Wasserman, François Parcy,
+#'   Anthony Mathelier, JASPAR 2022: the 9th release of the open-access
+#'   database of transcription factor binding profiles, Nucleic Acids
+#'   Research, Volume 50, Issue D1, 7 January 2022, Pages D165–D173,
+#'   https://doi.org/10.1093/nar/gkab1113
 #'   \item
 #'   \href{http://jaspar.genereg.net/api/v1/docs/}{JASPAR API Documentation}
+#'   \item \href{https://jaspar.genereg.net/faq/}{Citations note
+#'   on JASPAR website}
 #'   }
 #'
 #' @examples
@@ -724,17 +742,20 @@ rba_jaspar_releases  <- function(release_number = NULL,
 #' @return A list that contains a data frame with binding sites information.
 #'
 #' @references \itemize{
-#'   \item Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update
-#'     of the open-access database of transcription factor binding profiles.
-#'     Nucleic Acids Res. 2019; doi: 10.1093/nar/gkz1001
-#'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR
-#'     data from any programming language. Bioinformatics, 2017, doi:
-#'     10.1093/bioinformatics/btx804
-#'   \item Khan, A. et al. JASPAR 2018: update of the open-access database
-#'     of transcription factor binding profiles and its web framework.
-#'     Nucleic Acids Res. 2018; 46:D260–D266, doi: 10.1093/nar/gkx1126
+#'   \item Jaime A Castro-Mondragon, Rafael Riudavets-Puig, Ieva
+#'   Rauluseviciute, Roza Berhanu Lemma, Laura Turchi, Romain Blanc-Mathieu,
+#'   Jeremy Lucas, Paul Boddie, Aziz Khan, Nicolás Manosalva Pérez, Oriol
+#'   Fornes, Tiffany Y Leung, Alejandro Aguirre, Fayrouz Hammal, Daniel
+#'   Schmelter, Damir Baranasic, Benoit Ballester, Albin Sandelin, Boris
+#'   Lenhard, Klaas Vandepoele, Wyeth W Wasserman, François Parcy,
+#'   Anthony Mathelier, JASPAR 2022: the 9th release of the open-access
+#'   database of transcription factor binding profiles, Nucleic Acids
+#'   Research, Volume 50, Issue D1, 7 January 2022, Pages D165–D173,
+#'   https://doi.org/10.1093/nar/gkab1113
 #'   \item
 #'   \href{http://jaspar.genereg.net/api/v1/docs/}{JASPAR API Documentation}
+#'   \item \href{https://jaspar.genereg.net/faq/}{Citations note
+#'   on JASPAR website}
 #'   }
 #'
 #' @examples
@@ -800,17 +821,20 @@ rba_jaspar_sites <- function(matrix_id,
 #' @return A data frame with information of available species.
 #'
 #' @references \itemize{
-#'   \item Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update
-#'     of the open-access database of transcription factor binding profiles.
-#'     Nucleic Acids Res. 2019; doi: 10.1093/nar/gkz1001
-#'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR
-#'     data from any programming language. Bioinformatics, 2017, doi:
-#'     10.1093/bioinformatics/btx804
-#'   \item Khan, A. et al. JASPAR 2018: update of the open-access database
-#'     of transcription factor binding profiles and its web framework.
-#'     Nucleic Acids Res. 2018; 46:D260–D266, doi: 10.1093/nar/gkx1126
+#'   \item Jaime A Castro-Mondragon, Rafael Riudavets-Puig, Ieva
+#'   Rauluseviciute, Roza Berhanu Lemma, Laura Turchi, Romain Blanc-Mathieu,
+#'   Jeremy Lucas, Paul Boddie, Aziz Khan, Nicolás Manosalva Pérez, Oriol
+#'   Fornes, Tiffany Y Leung, Alejandro Aguirre, Fayrouz Hammal, Daniel
+#'   Schmelter, Damir Baranasic, Benoit Ballester, Albin Sandelin, Boris
+#'   Lenhard, Klaas Vandepoele, Wyeth W Wasserman, François Parcy,
+#'   Anthony Mathelier, JASPAR 2022: the 9th release of the open-access
+#'   database of transcription factor binding profiles, Nucleic Acids
+#'   Research, Volume 50, Issue D1, 7 January 2022, Pages D165–D173,
+#'   https://doi.org/10.1093/nar/gkab1113
 #'   \item
 #'   \href{http://jaspar.genereg.net/api/v1/docs/}{JASPAR API Documentation}
+#'   \item \href{https://jaspar.genereg.net/faq/}{Citations note
+#'   on JASPAR website}
 #'   }
 #'
 #' @examples
@@ -908,17 +932,20 @@ rba_jaspar_species <- function(release = 2022,
 #'   profiles available for the species.
 #'
 #' @references \itemize{
-#'   \item Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update
-#'     of the open-access database of transcription factor binding profiles.
-#'     Nucleic Acids Res. 2019; doi: 10.1093/nar/gkz1001
-#'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR
-#'     data from any programming language. Bioinformatics, 2017, doi:
-#'     10.1093/bioinformatics/btx804
-#'   \item Khan, A. et al. JASPAR 2018: update of the open-access database
-#'     of transcription factor binding profiles and its web framework.
-#'     Nucleic Acids Res. 2018; 46:D260–D266, doi: 10.1093/nar/gkx1126
+#'   \item Jaime A Castro-Mondragon, Rafael Riudavets-Puig, Ieva
+#'   Rauluseviciute, Roza Berhanu Lemma, Laura Turchi, Romain Blanc-Mathieu,
+#'   Jeremy Lucas, Paul Boddie, Aziz Khan, Nicolás Manosalva Pérez, Oriol
+#'   Fornes, Tiffany Y Leung, Alejandro Aguirre, Fayrouz Hammal, Daniel
+#'   Schmelter, Damir Baranasic, Benoit Ballester, Albin Sandelin, Boris
+#'   Lenhard, Klaas Vandepoele, Wyeth W Wasserman, François Parcy,
+#'   Anthony Mathelier, JASPAR 2022: the 9th release of the open-access
+#'   database of transcription factor binding profiles, Nucleic Acids
+#'   Research, Volume 50, Issue D1, 7 January 2022, Pages D165–D173,
+#'   https://doi.org/10.1093/nar/gkab1113
 #'   \item
 #'   \href{http://jaspar.genereg.net/api/v1/docs/}{JASPAR API Documentation}
+#'   \item \href{https://jaspar.genereg.net/faq/}{Citations note
+#'   on JASPAR website}
 #'   }
 #'
 #' @examples
@@ -1013,17 +1040,20 @@ rba_jaspar_species_matrices <- function(tax_id,
 #' @return A data frame with information of available species.
 #'
 #' @references \itemize{
-#'   \item Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update
-#'     of the open-access database of transcription factor binding profiles.
-#'     Nucleic Acids Res. 2019; doi: 10.1093/nar/gkz1001
-#'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR
-#'     data from any programming language. Bioinformatics, 2017, doi:
-#'     10.1093/bioinformatics/btx804
-#'   \item Khan, A. et al. JASPAR 2018: update of the open-access database
-#'     of transcription factor binding profiles and its web framework.
-#'     Nucleic Acids Res. 2018; 46:D260–D266, doi: 10.1093/nar/gkx1126
+#'   \item Jaime A Castro-Mondragon, Rafael Riudavets-Puig, Ieva
+#'   Rauluseviciute, Roza Berhanu Lemma, Laura Turchi, Romain Blanc-Mathieu,
+#'   Jeremy Lucas, Paul Boddie, Aziz Khan, Nicolás Manosalva Pérez, Oriol
+#'   Fornes, Tiffany Y Leung, Alejandro Aguirre, Fayrouz Hammal, Daniel
+#'   Schmelter, Damir Baranasic, Benoit Ballester, Albin Sandelin, Boris
+#'   Lenhard, Klaas Vandepoele, Wyeth W Wasserman, François Parcy,
+#'   Anthony Mathelier, JASPAR 2022: the 9th release of the open-access
+#'   database of transcription factor binding profiles, Nucleic Acids
+#'   Research, Volume 50, Issue D1, 7 January 2022, Pages D165–D173,
+#'   https://doi.org/10.1093/nar/gkab1113
 #'   \item
 #'   \href{http://jaspar.genereg.net/api/v1/docs/}{JASPAR API Documentation}
+#'   \item \href{https://jaspar.genereg.net/faq/}{Citations note
+#'   on JASPAR website}
 #'   }
 #'
 #' @examples
@@ -1108,17 +1138,20 @@ rba_jaspar_taxons <- function(release = 2022,
 #'   profiles available for the taxonomic group.
 #'
 #' @references \itemize{
-#'   \item Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update
-#'     of the open-access database of transcription factor binding profiles.
-#'     Nucleic Acids Res. 2019; doi: 10.1093/nar/gkz1001
-#'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR
-#'     data from any programming language. Bioinformatics, 2017, doi:
-#'     10.1093/bioinformatics/btx804
-#'   \item Khan, A. et al. JASPAR 2018: update of the open-access database
-#'     of transcription factor binding profiles and its web framework.
-#'     Nucleic Acids Res. 2018; 46:D260–D266, doi: 10.1093/nar/gkx1126
+#'   \item Jaime A Castro-Mondragon, Rafael Riudavets-Puig, Ieva
+#'   Rauluseviciute, Roza Berhanu Lemma, Laura Turchi, Romain Blanc-Mathieu,
+#'   Jeremy Lucas, Paul Boddie, Aziz Khan, Nicolás Manosalva Pérez, Oriol
+#'   Fornes, Tiffany Y Leung, Alejandro Aguirre, Fayrouz Hammal, Daniel
+#'   Schmelter, Damir Baranasic, Benoit Ballester, Albin Sandelin, Boris
+#'   Lenhard, Klaas Vandepoele, Wyeth W Wasserman, François Parcy,
+#'   Anthony Mathelier, JASPAR 2022: the 9th release of the open-access
+#'   database of transcription factor binding profiles, Nucleic Acids
+#'   Research, Volume 50, Issue D1, 7 January 2022, Pages D165–D173,
+#'   https://doi.org/10.1093/nar/gkab1113
 #'   \item
 #'   \href{http://jaspar.genereg.net/api/v1/docs/}{JASPAR API Documentation}
+#'   \item \href{https://jaspar.genereg.net/faq/}{Citations note
+#'   on JASPAR website}
 #'   }
 #'
 #' @examples
@@ -1245,17 +1278,20 @@ rba_jaspar_taxons_matrices <- function(tax_group,
 #'   TFFMs.
 #'
 #' @references \itemize{
-#'   \item Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update
-#'     of the open-access database of transcription factor binding profiles.
-#'     Nucleic Acids Res. 2019; doi: 10.1093/nar/gkz1001
-#'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR
-#'     data from any programming language. Bioinformatics, 2017, doi:
-#'     10.1093/bioinformatics/btx804
-#'   \item Khan, A. et al. JASPAR 2018: update of the open-access database
-#'     of transcription factor binding profiles and its web framework.
-#'     Nucleic Acids Res. 2018; 46:D260–D266, doi: 10.1093/nar/gkx1126
+#'   \item Jaime A Castro-Mondragon, Rafael Riudavets-Puig, Ieva
+#'   Rauluseviciute, Roza Berhanu Lemma, Laura Turchi, Romain Blanc-Mathieu,
+#'   Jeremy Lucas, Paul Boddie, Aziz Khan, Nicolás Manosalva Pérez, Oriol
+#'   Fornes, Tiffany Y Leung, Alejandro Aguirre, Fayrouz Hammal, Daniel
+#'   Schmelter, Damir Baranasic, Benoit Ballester, Albin Sandelin, Boris
+#'   Lenhard, Klaas Vandepoele, Wyeth W Wasserman, François Parcy,
+#'   Anthony Mathelier, JASPAR 2022: the 9th release of the open-access
+#'   database of transcription factor binding profiles, Nucleic Acids
+#'   Research, Volume 50, Issue D1, 7 January 2022, Pages D165–D173,
+#'   https://doi.org/10.1093/nar/gkab1113
 #'   \item
 #'   \href{http://jaspar.genereg.net/api/v1/docs/}{JASPAR API Documentation}
+#'   \item \href{https://jaspar.genereg.net/faq/}{Citations note
+#'   on JASPAR website}
 #'   }
 #'
 #' @examples
@@ -1357,17 +1393,20 @@ rba_jaspar_tffm_search <- function(term = NULL,
 #' @return A list that contains the TFFM's information and annotations.
 #'
 #' @references \itemize{
-#'   \item Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update
-#'     of the open-access database of transcription factor binding profiles.
-#'     Nucleic Acids Res. 2019; doi: 10.1093/nar/gkz1001
-#'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR
-#'     data from any programming language. Bioinformatics, 2017, doi:
-#'     10.1093/bioinformatics/btx804
-#'   \item Khan, A. et al. JASPAR 2018: update of the open-access database
-#'     of transcription factor binding profiles and its web framework.
-#'     Nucleic Acids Res. 2018; 46:D260–D266, doi: 10.1093/nar/gkx1126
+#'   \item Jaime A Castro-Mondragon, Rafael Riudavets-Puig, Ieva
+#'   Rauluseviciute, Roza Berhanu Lemma, Laura Turchi, Romain Blanc-Mathieu,
+#'   Jeremy Lucas, Paul Boddie, Aziz Khan, Nicolás Manosalva Pérez, Oriol
+#'   Fornes, Tiffany Y Leung, Alejandro Aguirre, Fayrouz Hammal, Daniel
+#'   Schmelter, Damir Baranasic, Benoit Ballester, Albin Sandelin, Boris
+#'   Lenhard, Klaas Vandepoele, Wyeth W Wasserman, François Parcy,
+#'   Anthony Mathelier, JASPAR 2022: the 9th release of the open-access
+#'   database of transcription factor binding profiles, Nucleic Acids
+#'   Research, Volume 50, Issue D1, 7 January 2022, Pages D165–D173,
+#'   https://doi.org/10.1093/nar/gkab1113
 #'   \item
 #'   \href{http://jaspar.genereg.net/api/v1/docs/}{JASPAR API Documentation}
+#'   \item \href{https://jaspar.genereg.net/faq/}{Citations note
+#'   on JASPAR website}
 #'   }
 #'
 #' @examples
