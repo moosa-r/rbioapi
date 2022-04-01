@@ -52,6 +52,8 @@ rba_mieaa_enrich_status("f52d1aef-6d3d-4d51-9020-82e68fe99012")
   \item
   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
   browsable API tutorial}
+  \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2}{Citations note
+  on miEAA website}
   }
 }
 \seealso{

@@ -122,6 +122,8 @@ rba_mieaa_enrich_submit(test_set = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
   \item
   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
   browsable API tutorial}
+  \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2}{Citations note
+  on miEAA website}
   }
 }
 \seealso{

@@ -57,6 +57,8 @@ rba_mieaa_cats("mature", "Homo sapiens")
   \item
   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
   browsable API tutorial}
+  \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2}{Citations note
+  on miEAA website}
   }
 }
 \seealso{
