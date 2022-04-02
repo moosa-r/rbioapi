@@ -1,7 +1,7 @@
 Type: Package
 Package: rbioapi
 Title: User-Friendly R Interface to Biologic Web Services' API
-Version: 0.7.5
+Version: 0.7.6
 Authors@R: 
     person(given = "Moosa",
            family = "Rezwani",

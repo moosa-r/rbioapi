@@ -1,8 +1,22 @@
-# rbioapi 0.7.5 (Current GitHub version)
+# rbioapi 0.7.6 (Current CRAN and GitHub version)
+
+* Submitted the paper to Bioinformatics journal (DOI: 10.1093/bioinformatics/btac172).
+
+* Added vignette article: "Over-Representation (Enrichment) Analysis""
+
+* Updated citations information.
+
+* Moved to JASPAR 2022.
+
+* Added new API endpoints of UniProt and PANTHER.
+
+* Minor internal improvements.
+
+# rbioapi 0.7.5
 
 * Moved to STRING database version 11.5
 
-# rbioapi 0.7.4 (Current CRAN version)
+# rbioapi 0.7.4
 
 * Bug fixes and minor improvements.
 
