@@ -117,6 +117,9 @@ rba_uniprot_variation_search(disease = "alzheimer",
 }
 \references{
 \itemize{
+  \item The UniProt Consortium, UniProt: the universal protein
+  knowledgebase in 2021, Nucleic Acids Research, Volume 49, Issue D1,
+  8 January 2021, Pages D480–D489, https://doi.org/10.1093/nar/gkaa1100
   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
   Turner, Maria Martin, The Proteins API: accessing key integrated protein
@@ -124,6 +127,8 @@ rba_uniprot_variation_search(disease = "alzheimer",
   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
   Documentation}
+  \item \href{https://www.uniprot.org/help/publications}{Citations note
+  on UniProt website}
   }
 }
 \seealso{
