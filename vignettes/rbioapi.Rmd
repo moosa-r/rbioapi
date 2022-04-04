@@ -48,7 +48,7 @@ rbioapi is dedicated to **Biological or Medical** databases and web services. Cu
 On CRAN (Stable) version: (<https://cran.r-project.org/package=rbioapi>)
 
 1.  [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr") ([rbioapi vignette article](rbioapi_enrichr.html "rbioapi & Enrichr vignette article")) ^(new)^
-2.  [JASPAR](http://jaspar.genereg.net/ "JASPAR - A database of transcription factor binding profiles") ([rbioapi vignette article](rbioapi_jaspar.html "rbioapi & Enrichr vignette article")) ^(new)^
+2.  [JASPAR](https://jaspar.genereg.net/ "JASPAR - A database of transcription factor binding profiles") ([rbioapi vignette article](rbioapi_jaspar.html "rbioapi & Enrichr vignette article")) ^(new)^
 3.  [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "miRNA Enrichment Analysis and Annotation Tool (miEAA)") ([rbioapi vignette article](rbioapi_mieaa.html "rbioapi & miEAA vignette article"))
 4.  [PANTHER](http://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)") ([rbioapi vignette article](rbioapi_panther.html "rbioapi & PANTHER vignette article"))
 5.  [Reactome](https://reactome.org/) ([rbioapi vignette article](rbioapi_reactome.html "rbioapi & Reactome vignette article"))

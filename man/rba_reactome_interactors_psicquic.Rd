@@ -81,7 +81,7 @@ rba_reactome_interactors_psicquic(proteins = c("TP53", "MYC"),
   PMID: 32907876.
   \item \href{https://reactome.org/ContentService/}{Reactome Content
   Services API Documentation}
-  \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+  \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
   }
 }
 \seealso{

@@ -62,7 +62,7 @@ rba_reactome_complex_subunits(complex_id = "R-HSA-109783",
   PMID: 32907876.
   \item \href{https://reactome.org/ContentService/}{Reactome Content
   Services API Documentation}
-  \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+  \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
   }
 }
 \seealso{

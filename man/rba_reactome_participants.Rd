@@ -50,7 +50,7 @@ A 'Physical Entity' Instance could include an individual molecule,
  both of the above-mentioned 'Physical Entities' see a 'Reference Entities'
  named \href{https://reactome.org/content/schema/instance/browser/57819}{
  "UniProt:P01834 IGKC}.
- \cr See \href{https://reactome.org/documentation/data-model}{Reactome
+ \cr See \href{https://reactome.org/documentation/data-model/}{Reactome
  Data Model} for more information about the data model and Physical
  Entities.
 }
@@ -93,7 +93,7 @@ rba_reactome_participants("R-HSA-5682012", only_reference_entities = TRUE)
   PMID: 32907876.
   \item \href{https://reactome.org/ContentService/}{Reactome Content
   Services API Documentation}
-  \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+  \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
   }
 }
 \seealso{

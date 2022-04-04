@@ -35,7 +35,7 @@ rba_options(timeout = 600, skip_error = TRUE)
 
 # Introduction {#introduction .heading2}
 
-[Enrichr](https://maayanlab.cloud/Enrichr) is a gene-set enrichment analysis tool developed in the [Ma'ayan lab](https://icahn.mssm.edu/research/labs/maayan-laboratory).
+[Enrichr](https://maayanlab.cloud/Enrichr/) is a gene-set enrichment analysis tool developed in the [Ma'ayan lab](https://icahn.mssm.edu/research/labs/maayan-laboratory/).
 
 # Gene set library concept in Enrichr {#gene-set-library-concept-in-enrichr .heading2}
 

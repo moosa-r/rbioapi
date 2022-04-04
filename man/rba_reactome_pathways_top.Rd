@@ -10,7 +10,7 @@ rba_reactome_pathways_top(species, ...)
 \item{species}{Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
 ID is 9606.) or species name (e.g. "Homo sapiens"). See
 \code{\link{rba_reactome_species}} or
-\href{https://reactome.org/content/schema/objects/Species}{Reactome
+\href{https://reactome.org/content/schema/objects/Species/}{Reactome
 Data Schema: Entries: Species}.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
@@ -64,7 +64,7 @@ rba_reactome_pathways_top(species = "Saccharomyces cerevisiae")
   PMID: 32907876.
   \item \href{https://reactome.org/ContentService/}{Reactome Content
   Services API Documentation}
-  \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+  \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
   }
 }
 \seealso{

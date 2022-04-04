@@ -71,7 +71,7 @@ rba_reactome_pathways_events(event_id = "R-HSA-5673001",
   PMID: 32907876.
   \item \href{https://reactome.org/ContentService/}{Reactome Content
   Services API Documentation}
-  \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+  \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
   }
 }
 \seealso{

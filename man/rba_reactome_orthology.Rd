@@ -13,7 +13,7 @@ events.}
 \item{species_dbid}{Reactome database ID (DbId) of the target species. (e.g
 Mus musculus is 48892). See
  \code{\link{rba_reactome_species}} or
- \href{https://reactome.org/content/schema/objects/Species}{Reactome
+ \href{https://reactome.org/content/schema/objects/Species/}{Reactome
  Data Schema: Entries: Species}.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
@@ -32,7 +32,7 @@ Reactome incorporate manually curated human reactions and PANTHER's
 In version 73 (11 June 2020), using an orthology-based approach,
   Homo sapiens events was projected to 18,654 orthologous pathways (with
   81,835 orthologous proteins) in 15 non-human species.
-  \cr See \href{https://reactome.org/documentation/inferred-events}{
+  \cr See \href{https://reactome.org/documentation/inferred-events/}{
   Reactome Computationally Inferred Events} for more information.
 }
 \section{Corresponding API Resources}{
@@ -66,7 +66,7 @@ rba_reactome_orthology(event_ids = c("R-HSA-6799198", " R-HSA-72764"),
   PMID: 32907876.
   \item \href{https://reactome.org/ContentService/}{Reactome Content
   Services API Documentation}
-  \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+  \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
   }
 }
 \seealso{

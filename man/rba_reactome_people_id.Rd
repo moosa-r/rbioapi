@@ -22,7 +22,7 @@ person? (default = FALSE)}
 person? (Defalt = FALSE)}
 
 \item{attribute_name}{(optional) A Reactome person attribute to return only.
-see \href{https://reactome.org/content/schema/Person}{Reactome Data
+see \href{https://reactome.org/content/schema/Person/}{Reactome Data
 Schema: person} for available options.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
@@ -67,7 +67,7 @@ rba_reactome_people_id(person_id = "391309", authored_pathways = TRUE)
   PMID: 32907876.
   \item \href{https://reactome.org/ContentService/}{Reactome Content
   Services API Documentation}
-  \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+  \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
   }
 }
 \seealso{

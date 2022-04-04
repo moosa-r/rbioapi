@@ -36,7 +36,7 @@ List containing your query outputs.
 }
 \description{
 Using this Comprehensive function, You can Retrieve any object from
-  \href{https://reactome.org/content/schema/DatabaseObject}{Reactome
+  \href{https://reactome.org/content/schema/DatabaseObject/}{Reactome
   knowledge-base}
 }
 \section{Corresponding API Resources}{
@@ -78,7 +78,7 @@ rba_reactome_query(ids = "8863054", attribute_name = "displayName")
   PMID: 32907876.
   \item \href{https://reactome.org/ContentService/}{Reactome Content
   Services API Documentation}
-  \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+  \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
   }
 }
 \concept{"Reactome Content Service - Common Data Retrieval"}

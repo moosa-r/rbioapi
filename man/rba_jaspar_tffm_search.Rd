@@ -62,7 +62,7 @@ Note that this is a search function. Thus, you are not required to fill
 }
 \section{Corresponding API Resources}{
 
- "GET "http://jaspar.genereg.net/api/v1/api/v1/tffm/"
+ "GET "https://jaspar.genereg.net/api/v1/api/v1/tffm/"
 }
 
 \examples{
@@ -86,7 +86,7 @@ rba_jaspar_tffm_search(page_size = 100)
   Research, Volume 50, Issue D1, 7 January 2022, Pages D165–D173,
   https://doi.org/10.1093/nar/gkab1113
   \item
-  \href{http://jaspar.genereg.net/api/v1/docs/}{JASPAR API Documentation}
+  \href{https://jaspar.genereg.net/api/v1/docs/}{JASPAR API Documentation}
   \item \href{https://jaspar.genereg.net/faq/}{Citations note
   on JASPAR website}
   }

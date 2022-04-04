@@ -29,7 +29,7 @@ If TRUE, pathways without diagram will be excluded. (default = FALSE)}
 \item{species}{Only when "endpoint = "pathway", The scientific name
 of the species to search for the pathways. See
  \code{\link{rba_reactome_species}} or
- \href{https://reactome.org/content/schema/objects/Species}{Reactome
+ \href{https://reactome.org/content/schema/objects/Species/}{Reactome
  Data Schema: Entries: Species}.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
@@ -92,7 +92,7 @@ rba_reactome_interactors_static(proteins = c("Q9BXM7-1", "Q13501"),
   PMID: 32907876.
   \item \href{https://reactome.org/ContentService/}{Reactome Content
   Services API Documentation}
-  \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+  \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
   }
 }
 \seealso{

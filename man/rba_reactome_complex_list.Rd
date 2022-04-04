@@ -10,7 +10,7 @@ rba_reactome_complex_list(id, resource, ...)
 \item{id}{Molecule's external Identifier}
 
 \item{resource}{What is the resource of your supplied ID? see:
-\href{https://reactome.org/content/schema/objects/ReferenceDatabase}{Reactome External
+\href{https://reactome.org/content/schema/objects/ReferenceDatabase/}{Reactome External
 Identifiers}}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
@@ -57,7 +57,7 @@ rba_reactome_complex_list(id = "P00533", resource = "UniProt")
   PMID: 32907876.
   \item \href{https://reactome.org/ContentService/}{Reactome Content
   Services API Documentation}
-  \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+  \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
   }
 }
 \seealso{

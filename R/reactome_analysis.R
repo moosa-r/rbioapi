@@ -159,7 +159,7 @@
 #'   is 9606), species name (e.g. "Homo sapiens") or Reactome DbId (e.g
 #'   Homo sapiens is 48887). See
 #'    \code{\link{rba_reactome_species}} or
-#'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
+#'    \href{https://reactome.org/content/schema/objects/Species/}{Reactome
 #'    Data Schema: Entries: Species}.
 #' @param projection Logical (default = FALSE) Should non-human identifiers
 #'   be projected to their human equivalents? (using Reactome orthology data)
@@ -385,7 +385,7 @@ rba_reactome_analysis <- function(input,
 #' @param species Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
 #'    ID is 9606.) or species name (e.g. "Homo sapiens"). See
 #'    \code{\link{rba_reactome_species}} or
-#'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
+#'    \href{https://reactome.org/content/schema/objects/Species/}{Reactome
 #'    Data Schema: Entries: Species}.
 #' @param save_to NULL or Character:\itemize{
 #'   \item NULL: Save the file to an automatically-generated path.
@@ -933,7 +933,7 @@ rba_reactome_analysis_mapping <- function(input,
 #' \cr In version 73 (11 June 2020), using an orthology-based approach,
 #'   Homo sapiens events was projected to 18,654 orthologous pathways (with
 #'   81,835 orthologous proteins) in 15 non-human species.
-#'   See \href{https://reactome.org/documentation/inferred-events}{
+#'   See \href{https://reactome.org/documentation/inferred-events/}{
 #'   Reactome Computationally Inferred Events} for more information.
 #'
 #' @section Corresponding API Resources:
@@ -942,7 +942,7 @@ rba_reactome_analysis_mapping <- function(input,
 #' @param species_dbid Numeric: Reactome DbId (e.g  Mus musculus is 48892) of
 #'   the species you want to compare with Homo sapiens. See
 #'    \code{\link{rba_reactome_species}} or
-#'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
+#'    \href{https://reactome.org/content/schema/objects/Species/}{Reactome
 #'    Data Schema: Entries: Species}.
 #' @param sort_by Sort the result based on what column? available choices
 #'   are: "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
@@ -1099,7 +1099,7 @@ rba_reactome_analysis_species <- function(species_dbid,
 #'   is 9606), species name (e.g. "Homo sapiens") or Reactome DbId (e.g
 #'   Homo sapiens is 48887). See
 #'    \code{\link{rba_reactome_species}} or
-#'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
+#'    \href{https://reactome.org/content/schema/objects/Species/}{Reactome
 #'    Data Schema: Entries: Species}.
 #' @param sort_by Sort the result based on what column? available choices
 #'   are: "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",

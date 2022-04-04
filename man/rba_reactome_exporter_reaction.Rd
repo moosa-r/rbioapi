@@ -24,7 +24,7 @@ rba_reactome_exporter_reaction(
 }
 \arguments{
 \item{event_id}{Reactome
-\href{https://reactome.org/content/schema/ReactionLikeEvent}{Reaction-like
+\href{https://reactome.org/content/schema/ReactionLikeEvent/}{Reaction-like
 event}'s identifier.}
 
 \item{save_to}{NULL or Character:\itemize{
@@ -118,7 +118,7 @@ rba_reactome_exporter_diagram(event_id = "R-HSA-6787403",
   PMID: 32907876.
   \item \href{https://reactome.org/ContentService/}{Reactome Content
   Services API Documentation}
-  \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+  \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
   }
 }
 \seealso{

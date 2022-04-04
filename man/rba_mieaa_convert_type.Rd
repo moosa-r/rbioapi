@@ -36,7 +36,7 @@ Depending on the arguments, a data frame or a character vectors
 }
 \description{
 miRBase miRNA accession could refer to either mature or precursor miRNAs.
-  (see: \href{http://www.mirbase.org/help/nomenclature.shtml}{miRNA naming
+  (see: \href{https://mirbase.org/help/nomenclature.shtml}{miRNA naming
   conventions}). Use this function to mature miRNA accession to
   corresponding miRNA accessions or vice versa.
 }
@@ -64,7 +64,7 @@ rba_mieaa_convert_type(mirna = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
   \item
   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
   browsable API tutorial}
-  \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2}{Citations note
+  \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/}{Citations note
   on miEAA website}
   }
 }

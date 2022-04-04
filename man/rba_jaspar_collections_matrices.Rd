@@ -17,7 +17,7 @@ rba_jaspar_collections_matrices(
 }
 \arguments{
 \item{collection}{JASPAR Collection's name. See
-\href{http://jaspar.genereg.net/docs/}{JASPAR Collections} for
+\href{https://jaspar.genereg.net/docs/}{JASPAR Collections} for
 information. The accepted values are: "CORE", "CNE", "PHYLOFACTS",
 "SPLICE", "POLII", "FAM", "PBM", "PBM_HOMEO", "PBM_HLH", and
 "UNVALIDATED".}
@@ -60,7 +60,7 @@ The results are paginated. You can control the page's size number
 }
 \section{Corresponding API Resources}{
 
- "GET "http://jaspar.genereg.net/api/v1/collections/{collection}/"
+ "GET "https://jaspar.genereg.net/api/v1/collections/{collection}/"
 }
 
 \examples{
@@ -85,7 +85,7 @@ rba_jaspar_collections_matrices(collection = "CORE",
   Research, Volume 50, Issue D1, 7 January 2022, Pages D165–D173,
   https://doi.org/10.1093/nar/gkab1113
   \item
-  \href{http://jaspar.genereg.net/api/v1/docs/}{JASPAR API Documentation}
+  \href{https://jaspar.genereg.net/api/v1/docs/}{JASPAR API Documentation}
   \item \href{https://jaspar.genereg.net/faq/}{Citations note
   on JASPAR website}
   }

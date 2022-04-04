@@ -28,7 +28,7 @@
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
-#'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
 #'   }
 #'
 #' @examples
@@ -96,7 +96,7 @@ rba_reactome_version <- function(...) {
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
-#'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
 #'   }
 #'
 #' @examples
@@ -187,7 +187,7 @@ rba_reactome_diseases <- function(doid = FALSE,
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
-#'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
 #'   }
 #'
 #' @examples
@@ -246,7 +246,7 @@ rba_reactome_complex_subunits <- function(complex_id,
 #'
 #' @param id Molecule's external Identifier
 #' @param resource What is the resource of your supplied ID? see:
-#' \href{https://reactome.org/content/schema/objects/ReferenceDatabase}{Reactome External
+#' \href{https://reactome.org/content/schema/objects/ReferenceDatabase/}{Reactome External
 #' Identifiers}
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
@@ -271,7 +271,7 @@ rba_reactome_complex_subunits <- function(complex_id,
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
-#'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
 #'   }
 #'
 #' @examples
@@ -347,7 +347,7 @@ rba_reactome_complex_list <- function(id,
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
-#'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
 #'   }
 #'
 #' @examples
@@ -419,7 +419,7 @@ rba_reactome_participant_of <- function(entity_id,
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
-#'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
 #'   }
 #'
 #' @examples
@@ -497,7 +497,7 @@ rba_reactome_entity_other_forms <- function(entity_id,
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
-#'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
 #'   }
 #'
 #' @examples
@@ -552,7 +552,7 @@ rba_reactome_event_ancestors <- function(event_id,
 #' @param species Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
 #'    ID is 9606.) or species name (e.g. "Homo sapiens"). See
 #'    \code{\link{rba_reactome_species}} or
-#'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
+#'    \href{https://reactome.org/content/schema/objects/Species/}{Reactome
 #'    Data Schema: Entries: Species}.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
@@ -577,7 +577,7 @@ rba_reactome_event_ancestors <- function(event_id,
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
-#'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
 #'   }
 #'
 #' @examples
@@ -711,7 +711,7 @@ rba_reactome_event_hierarchy <- function(species,
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
-#'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
 #'   }
 #'
 #' @examples
@@ -928,7 +928,7 @@ rba_reactome_exporter_diagram <- function(event_id,
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
-#'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
 #'   }
 #'
 #' @examples
@@ -992,7 +992,7 @@ rba_reactome_exporter_event <- function(event_id,
 #' @param species Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
 #'    ID is 9606.) or species name (e.g. "Homo sapiens"). See
 #'    \code{\link{rba_reactome_species}} or
-#'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
+#'    \href{https://reactome.org/content/schema/objects/Species/}{Reactome
 #'    Data Schema: Entries: Species}.
 #' @param output_format Images format, Can be one of: png (default), jpeg,
 #'   svg or gif.
@@ -1043,7 +1043,7 @@ rba_reactome_exporter_event <- function(event_id,
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
-#'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
 #'   }
 #'
 #' @examples
@@ -1203,7 +1203,7 @@ rba_reactome_exporter_overview <- function(species,
 #'  {identifier}.{ext}"
 #'
 #' @param event_id Reactome
-#' \href{https://reactome.org/content/schema/ReactionLikeEvent}{Reaction-like
+#' \href{https://reactome.org/content/schema/ReactionLikeEvent/}{Reaction-like
 #' event}'s identifier.
 #' @param output_format Images format, Can be one of: png (default), jpeg,
 #'   svg or gif.
@@ -1254,7 +1254,7 @@ rba_reactome_exporter_overview <- function(species,
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
-#'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
 #'   }
 #'
 #' @examples
@@ -1449,7 +1449,7 @@ rba_reactome_exporter_reaction <- function(event_id,
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
-#'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
 #'   }
 #'
 #' @examples
@@ -1554,7 +1554,7 @@ rba_reactome_interactors_psicquic <- function(proteins = NULL,
 #' @param species Only when "endpoint = "pathway", The scientific name
 #'   of the species to search for the pathways. See
 #'    \code{\link{rba_reactome_species}} or
-#'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
+#'    \href{https://reactome.org/content/schema/objects/Species/}{Reactome
 #'    Data Schema: Entries: Species}.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
@@ -1579,7 +1579,7 @@ rba_reactome_interactors_psicquic <- function(proteins = NULL,
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
-#'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
 #'   }
 #'
 #' @examples
@@ -1684,13 +1684,13 @@ rba_reactome_interactors_static <- function(proteins,
 #'
 #' @param id Molecule's external Identifier
 #' @param resource What is the resource of your supplied ID? see:
-#' \href{https://reactome.org/content/schema/objects/ReferenceDatabase}{Reactome External
+#' \href{https://reactome.org/content/schema/objects/ReferenceDatabase/}{Reactome External
 #' Identifiers}
 #' @param species Numeric or Character: NCBI Taxonomy identifier (Human
 #'   is 9606), species name (e.g. "Homo sapiens") or Reactome DbId (e.g
 #'   Homo sapiens is 48887). See
 #'    \code{\link{rba_reactome_species}} or
-#'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
+#'    \href{https://reactome.org/content/schema/objects/Species/}{Reactome
 #'    Data Schema: Entries: Species}.
 #' @param map_to Either "pathways" or "reactions".
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -1716,7 +1716,7 @@ rba_reactome_interactors_static <- function(proteins,
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
-#'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
 #'   }
 #'
 #' @examples
@@ -1784,7 +1784,7 @@ rba_reactome_mapping <- function(id,
 #' In version 73 (11 June 2020), using an orthology-based approach,
 #'   Homo sapiens events was projected to 18,654 orthologous pathways (with
 #'   81,835 orthologous proteins) in 15 non-human species.
-#'   \cr See \href{https://reactome.org/documentation/inferred-events}{
+#'   \cr See \href{https://reactome.org/documentation/inferred-events/}{
 #'   Reactome Computationally Inferred Events} for more information.
 #'
 #' @section Corresponding API Resources:
@@ -1796,7 +1796,7 @@ rba_reactome_mapping <- function(id,
 #' @param species_dbid Reactome database ID (DbId) of the target species. (e.g
 #'   Mus musculus is 48892). See
 #'    \code{\link{rba_reactome_species}} or
-#'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
+#'    \href{https://reactome.org/content/schema/objects/Species/}{Reactome
 #'    Data Schema: Entries: Species}.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
@@ -1821,7 +1821,7 @@ rba_reactome_mapping <- function(id,
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
-#'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
 #'   }
 #'
 #' @examples
@@ -1895,7 +1895,7 @@ rba_reactome_orthology <- function(event_ids,
 #'  both of the above-mentioned 'Physical Entities' see a 'Reference Entities'
 #'  named \href{https://reactome.org/content/schema/instance/browser/57819}{
 #'  "UniProt:P01834 IGKC}.
-#'  \cr See \href{https://reactome.org/documentation/data-model}{Reactome
+#'  \cr See \href{https://reactome.org/documentation/data-model/}{Reactome
 #'  Data Model} for more information about the data model and Physical
 #'  Entities.
 #'
@@ -1934,7 +1934,7 @@ rba_reactome_orthology <- function(event_ids,
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
-#'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
 #'   }
 #'
 #' @examples
@@ -2052,7 +2052,7 @@ rba_reactome_participants <- function(event_id,
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
-#'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
 #'   }
 #'
 #' @examples
@@ -2144,7 +2144,7 @@ rba_reactome_pathways_events <- function(event_id,
 #'   specific species by providing it's NCBI Taxonomy identifier
 #'   (Human Taxonomy ID is 9606) or species name (e.g. "Homo sapiens").
 #'   See \code{\link{rba_reactome_species}} or
-#'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
+#'    \href{https://reactome.org/content/schema/objects/Species/}{Reactome
 #'    Data Schema: Entries: Species}.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
@@ -2169,7 +2169,7 @@ rba_reactome_pathways_events <- function(event_id,
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
-#'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
 #'   }
 #'
 #' @examples
@@ -2251,7 +2251,7 @@ rba_reactome_pathways_low <- function(entity_id,
 #' @param species Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
 #'    ID is 9606.) or species name (e.g. "Homo sapiens"). See
 #'    \code{\link{rba_reactome_species}} or
-#'    \href{https://reactome.org/content/schema/objects/Species}{Reactome
+#'    \href{https://reactome.org/content/schema/objects/Species/}{Reactome
 #'    Data Schema: Entries: Species}.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
@@ -2276,7 +2276,7 @@ rba_reactome_pathways_low <- function(entity_id,
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
-#'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
 #'   }
 #'
 #' @examples
@@ -2358,7 +2358,7 @@ rba_reactome_pathways_top <- function(species,
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
-#'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
 #'   }
 #'
 #' @examples
@@ -2417,7 +2417,7 @@ rba_reactome_people_name <- function(person_name,
 #' @param publications Logical: Only return publications list authored by the
 #'   person? (Defalt = FALSE)
 #' @param attribute_name (optional) A Reactome person attribute to return only.
-#'   see \href{https://reactome.org/content/schema/Person}{Reactome Data
+#'   see \href{https://reactome.org/content/schema/Person/}{Reactome Data
 #'   Schema: person} for available options.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
@@ -2442,7 +2442,7 @@ rba_reactome_people_name <- function(person_name,
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
-#'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
 #'   }
 #'
 #' @examples
@@ -2514,7 +2514,7 @@ rba_reactome_people_id <- function(person_id,
 #' Query and Retrieve any Reactome knowledge-base Object
 #'
 #' Using this Comprehensive function, You can Retrieve any object from
-#'   \href{https://reactome.org/content/schema/DatabaseObject}{Reactome
+#'   \href{https://reactome.org/content/schema/DatabaseObject/}{Reactome
 #'   knowledge-base}
 #'
 #' @section Corresponding API Resources:
@@ -2557,7 +2557,7 @@ rba_reactome_people_id <- function(person_id,
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
-#'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
 #'   }
 #'
 #' @examples
@@ -2690,7 +2690,7 @@ rba_reactome_query <- function(ids,
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
-#'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
 #'   }
 #'
 #' @examples
@@ -2765,7 +2765,7 @@ rba_reactome_xref <- function(xref_id,
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
-#'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
 #'   }
 #'
 #' @examples

@@ -24,7 +24,7 @@ rba_reactome_analysis_token(
 is 9606), species name (e.g. "Homo sapiens") or Reactome DbId (e.g
 Homo sapiens is 48887). See
  \code{\link{rba_reactome_species}} or
- \href{https://reactome.org/content/schema/objects/Species}{Reactome
+ \href{https://reactome.org/content/schema/objects/Species/}{Reactome
  Data Schema: Entries: Species}.}
 
 \item{sort_by}{Sort the result based on what column? available choices

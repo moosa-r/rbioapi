@@ -25,8 +25,8 @@ If a release number was supplied, this function will return the details
 }
 \section{Corresponding API Resources}{
 
-"GET "http://jaspar.genereg.net/api/v1/releases/"
- "GET "http://jaspar.genereg.net/api/v1/releases/{release_number}/"
+"GET "https://jaspar.genereg.net/api/v1/releases/"
+ "GET "https://jaspar.genereg.net/api/v1/releases/{release_number}/"
 }
 
 \examples{
@@ -49,7 +49,7 @@ rba_jaspar_releases(7)
   Research, Volume 50, Issue D1, 7 January 2022, Pages D165–D173,
   https://doi.org/10.1093/nar/gkab1113
   \item
-  \href{http://jaspar.genereg.net/api/v1/docs/}{JASPAR API Documentation}
+  \href{https://jaspar.genereg.net/api/v1/docs/}{JASPAR API Documentation}
   \item \href{https://jaspar.genereg.net/faq/}{Citations note
   on JASPAR website}
   }

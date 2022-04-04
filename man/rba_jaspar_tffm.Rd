@@ -23,7 +23,7 @@ Using this function you can retrieve details and annotations of
 }
 \section{Corresponding API Resources}{
 
- "GET "http://jaspar.genereg.net/api/v1/fttm/{tffm_id}/"
+ "GET "https://jaspar.genereg.net/api/v1/fttm/{tffm_id}/"
 }
 
 \examples{
@@ -45,7 +45,7 @@ rba_jaspar_tffm("TFFM0056.3")
   Research, Volume 50, Issue D1, 7 January 2022, Pages D165–D173,
   https://doi.org/10.1093/nar/gkab1113
   \item
-  \href{http://jaspar.genereg.net/api/v1/docs/}{JASPAR API Documentation}
+  \href{https://jaspar.genereg.net/api/v1/docs/}{JASPAR API Documentation}
   \item \href{https://jaspar.genereg.net/faq/}{Citations note
   on JASPAR website}
   }

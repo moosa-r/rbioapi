@@ -10,7 +10,7 @@ rba_reactome_mapping(id, resource, map_to, species = "Homo sapiens", ...)
 \item{id}{Molecule's external Identifier}
 
 \item{resource}{What is the resource of your supplied ID? see:
-\href{https://reactome.org/content/schema/objects/ReferenceDatabase}{Reactome External
+\href{https://reactome.org/content/schema/objects/ReferenceDatabase/}{Reactome External
 Identifiers}}
 
 \item{map_to}{Either "pathways" or "reactions".}
@@ -19,7 +19,7 @@ Identifiers}}
 is 9606), species name (e.g. "Homo sapiens") or Reactome DbId (e.g
 Homo sapiens is 48887). See
  \code{\link{rba_reactome_species}} or
- \href{https://reactome.org/content/schema/objects/Species}{Reactome
+ \href{https://reactome.org/content/schema/objects/Species/}{Reactome
  Data Schema: Entries: Species}.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
@@ -66,7 +66,7 @@ rba_reactome_mapping(id = "PTEN", resource =  "UniProt",
   PMID: 32907876.
   \item \href{https://reactome.org/ContentService/}{Reactome Content
   Services API Documentation}
-  \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+  \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
   }
 }
 \concept{"Reactome Content Service - Mapping Related Queries"}

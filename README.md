@@ -1,7 +1,7 @@
 rbioapi: User-Friendly R Interface to Biologic Web Services’ API
 ================
 Moosa Rezwani
-2022-04-01
+2022-04-04
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -44,7 +44,7 @@ On CRAN (Stable) version: (<https://cran.r-project.org/package=rbioapi>)
     vignette
     article](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html "rbioapi & Enrichr vignette article"))
     <sup>(new)</sup>
-2.  [JASPAR](http://jaspar.genereg.net/ "JASPAR - A database of transcription factor binding profiles")
+2.  [JASPAR](https://jaspar.genereg.net/ "JASPAR - A database of transcription factor binding profiles")
     ([rbioapi vignette
     article](https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html "rbioapi & Enrichr vignette article"))
     <sup>(new)</sup>

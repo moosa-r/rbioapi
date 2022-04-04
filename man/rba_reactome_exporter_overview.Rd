@@ -26,7 +26,7 @@ rba_reactome_exporter_overview(
 \item{species}{Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
 ID is 9606.) or species name (e.g. "Homo sapiens"). See
 \code{\link{rba_reactome_species}} or
-\href{https://reactome.org/content/schema/objects/Species}{Reactome
+\href{https://reactome.org/content/schema/objects/Species/}{Reactome
 Data Schema: Entries: Species}.}
 
 \item{output_format}{Images format, Can be one of: png (default), jpeg,
@@ -114,7 +114,7 @@ rba_reactome_exporter_overview(species = 9606,
   PMID: 32907876.
   \item \href{https://reactome.org/ContentService/}{Reactome Content
   Services API Documentation}
-  \item \href{https://reactome.org/cite}{Citations note on Reactome website}
+  \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
   }
 }
 \seealso{

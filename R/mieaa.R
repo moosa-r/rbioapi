@@ -102,7 +102,7 @@
 #'   \item
 #'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
 #'   browsable API tutorial}
-#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2}{Citations note
+#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/}{Citations note
 #'   on miEAA website}
 #'   }
 #'
@@ -193,7 +193,7 @@ rba_mieaa_cats <- function(mirna_type, species, ...) {
 #'   \item
 #'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
 #'   browsable API tutorial}
-#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2}{Citations note
+#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/}{Citations note
 #'   on miEAA website}
 #'   }
 #'
@@ -270,7 +270,7 @@ rba_mieaa_convert_version <- function(mirna,
 #' Convert Between Mature and precursor miRNA Accession
 #'
 #' miRBase miRNA accession could refer to either mature or precursor miRNAs.
-#'   (see: \href{http://www.mirbase.org/help/nomenclature.shtml}{miRNA naming
+#'   (see: \href{https://mirbase.org/help/nomenclature.shtml}{miRNA naming
 #'   conventions}). Use this function to mature miRNA accession to
 #'   corresponding miRNA accessions or vice versa.
 #'
@@ -303,7 +303,7 @@ rba_mieaa_convert_version <- function(mirna,
 #'   \item
 #'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
 #'   browsable API tutorial}
-#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2}{Citations note
+#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/}{Citations note
 #'   on miEAA website}
 #'   }
 #'
@@ -457,7 +457,7 @@ rba_mieaa_convert_type <- function(mirna,
 #'   \item
 #'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
 #'   browsable API tutorial}
-#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2}{Citations note
+#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/}{Citations note
 #'   on miEAA website}
 #'   }
 #'
@@ -620,7 +620,7 @@ rba_mieaa_enrich_submit <- function(test_set,
 #'   \item
 #'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
 #'   browsable API tutorial}
-#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2}{Citations note
+#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/}{Citations note
 #'   on miEAA website}
 #'   }
 #'
@@ -693,7 +693,7 @@ rba_mieaa_enrich_status <- function(job_id, ...) {
 #'   \item
 #'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
 #'   browsable API tutorial}
-#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2}{Citations note
+#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/}{Citations note
 #'   on miEAA website}
 #'   }
 #'
@@ -802,7 +802,7 @@ rba_mieaa_enrich_results <- function(job_id,
 #'   \item
 #'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
 #'   browsable API tutorial}
-#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2}{Citations note
+#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/}{Citations note
 #'   on miEAA website}
 #'   }
 #'

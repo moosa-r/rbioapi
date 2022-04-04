@@ -133,7 +133,7 @@ miEAA only recognizes miRBASE version 22 accessions. You can use `rba_mieaa_conv
 
 # How to Cite? {#Citations}
 
-To cite miEAA (Please see <https://ccb-compute2.cs.uni-saarland.de/mieaa2>):
+To cite miEAA (Please see <https://ccb-compute2.cs.uni-saarland.de/mieaa2/>):
 
 -   Fabian Kern, Tobias Fehlmann, Jeffrey Solomon, Louisa Schwed, Nadja Grammes, Christina Backes, Kendall Van Keuren-Jensen, David Wesley Craig, Eckart Meese, Andreas Keller, miEAA 2.0: integrating multi-species microRNA enrichment analysis and workflow management systems, Nucleic Acids Research, Volume 48, Issue W1, 02 July 2020, Pages W521--W528, <https://doi.org/10.1093/nar/gkaa309>
 

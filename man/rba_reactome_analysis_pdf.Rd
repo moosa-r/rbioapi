@@ -22,7 +22,7 @@ rba_reactome_analysis_pdf(
 \item{species}{Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
 ID is 9606.) or species name (e.g. "Homo sapiens"). See
 \code{\link{rba_reactome_species}} or
-\href{https://reactome.org/content/schema/objects/Species}{Reactome
+\href{https://reactome.org/content/schema/objects/Species/}{Reactome
 Data Schema: Entries: Species}.}
 
 \item{save_to}{NULL or Character:\itemize{
