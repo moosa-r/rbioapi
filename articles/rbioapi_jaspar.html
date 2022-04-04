@@ -105,7 +105,7 @@
       <img src="../logo.svg" class="logo" alt=""><h1>2.B: JASPAR &amp; rbioapi</h1>
                         <h4 data-toc-skip class="author">Moosa Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2022-04-02</h4>
+            <h4 data-toc-skip class="date">2022-04-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/HEAD/vignettes/rbioapi_jaspar.Rmd" class="external-link"><code>vignettes/rbioapi_jaspar.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_jaspar.Rmd</code></div>
@@ -119,7 +119,7 @@
 </h2>
 <p>Directly quoting from Fornes O, Castro-Mondragon JA, Khan A, et al:</p>
 <blockquote>
-<p>JASPAR (<a href="http://jaspar.genereg.net" class="external-link">http://jaspar.genereg.net)</a> is an open-access database of curated, non-redundant transcription factor (TF)-binding profiles stored as position frequency matrices (PFMs) for TFs across multiple species in six taxonomic groups. In this 8th release of JASPAR, the CORE collection has been expanded with 245 new PFMs (169 for vertebrates, 42 for plants, 17 for nematodes, 10 for insects, and 7 for fungi), and 156 PFMs were updated (125 for vertebrates, 28 for plants and 3 for insects). These new profiles represent an 18% expansion compared to the previous release.</p>
+<p>JASPAR (<a href="https://jaspar.genereg.net" class="external-link">https://jaspar.genereg.net)</a> is an open-access database of curated, non-redundant transcription factor (TF)-binding profiles stored as position frequency matrices (PFMs) for TFs across multiple species in six taxonomic groups. In this 8th release of JASPAR, the CORE collection has been expanded with 245 new PFMs (169 for vertebrates, 42 for plants, 17 for nematodes, 10 for insects, and 7 for fungi), and 156 PFMs were updated (125 for vertebrates, 28 for plants and 3 for insects). These new profiles represent an 18% expansion compared to the previous release.</p>
 <p>source:<br>
 Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-access database of transcription factor binding profiles. <em>Nucleic Acids Res</em>. 2019; doi: <a href="https://doi.org/10.1093/nar/gkz1001" class="external-link">10.1093/nar/gkz1001</a></p>
 </blockquote>
@@ -142,13 +142,13 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 <div class="section level3">
 <h3 id="collections">Collections<a class="anchor" aria-label="anchor" href="#collections"></a>
 </h3>
-<p>Within a release, Matrix profiles are organized into collections, You can use <code><a href="../reference/rba_jaspar_collections.html">rba_jaspar_collections()</a></code> to get a list of available collections, or read “JASPAR Collections” section in <a href="http://jaspar.genereg.net/docs/" title="JASPAR Documentation" class="external-link">documentation page in JASPAR web-site</a> for a thorough review.</p>
+<p>Within a release, Matrix profiles are organized into collections, You can use <code><a href="../reference/rba_jaspar_collections.html">rba_jaspar_collections()</a></code> to get a list of available collections, or read “JASPAR Collections” section in <a href="https://jaspar.genereg.net/docs/" title="JASPAR Documentation" class="external-link">documentation page in JASPAR web-site</a> for a thorough review.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## To get a list of available collection in release 2020:</span>
 <span class="fu"><a href="../reference/rba_jaspar_collections.html">rba_jaspar_collections</a></span><span class="op">(</span>release <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span>
-<span class="co">#&gt;                                                          url        name</span>
-<span class="co">#&gt; 1        https://jaspar.genereg.net/api/v1/collections/CORE/        CORE</span>
-<span class="co">#&gt; 2 https://jaspar.genereg.net/api/v1/collections/UNVALIDATED/ UNVALIDATED</span>
+<span class="co">#&gt;          name                                                        url</span>
+<span class="co">#&gt; 1        CORE        https://jaspar.genereg.net/api/v1/collections/CORE/</span>
+<span class="co">#&gt; 2 UNVALIDATED https://jaspar.genereg.net/api/v1/collections/UNVALIDATED/</span>
 
 
 <span class="co">## You can list information of all matrices available in a collection:</span>
@@ -161,17 +161,17 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## To get a list of taxonomic groups in release 2020:</span>
 <span class="fu"><a href="../reference/rba_jaspar_taxons.html">rba_jaspar_taxons</a></span><span class="op">(</span>release <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span>
-<span class="co">#&gt;                                                       url          name</span>
-<span class="co">#&gt; 1         https://jaspar.genereg.net/api/v1/taxon/plants/        plants</span>
-<span class="co">#&gt; 2    https://jaspar.genereg.net/api/v1/taxon/vertebrates/   vertebrates</span>
-<span class="co">#&gt; 3        https://jaspar.genereg.net/api/v1/taxon/insects/       insects</span>
-<span class="co">#&gt; 4   https://jaspar.genereg.net/api/v1/taxon/urochordates/  urochordates</span>
-<span class="co">#&gt; 5      https://jaspar.genereg.net/api/v1/taxon/nematodes/     nematodes</span>
-<span class="co">#&gt; 6          https://jaspar.genereg.net/api/v1/taxon/fungi/         fungi</span>
-<span class="co">#&gt; 7     https://jaspar.genereg.net/api/v1/taxon/trematodes/    trematodes</span>
-<span class="co">#&gt; 8  https://jaspar.genereg.net/api/v1/taxon/dictyostelium/ dictyostelium</span>
-<span class="co">#&gt; 9       https://jaspar.genereg.net/api/v1/taxon/cnidaria/      cnidaria</span>
-<span class="co">#&gt; 10      https://jaspar.genereg.net/api/v1/taxon/oomycota/      oomycota</span>
+<span class="co">#&gt;             name                                                    url</span>
+<span class="co">#&gt; 1         plants        https://jaspar.genereg.net/api/v1/taxon/plants/</span>
+<span class="co">#&gt; 2    vertebrates   https://jaspar.genereg.net/api/v1/taxon/vertebrates/</span>
+<span class="co">#&gt; 3        insects       https://jaspar.genereg.net/api/v1/taxon/insects/</span>
+<span class="co">#&gt; 4   urochordates  https://jaspar.genereg.net/api/v1/taxon/urochordates/</span>
+<span class="co">#&gt; 5      nematodes     https://jaspar.genereg.net/api/v1/taxon/nematodes/</span>
+<span class="co">#&gt; 6          fungi         https://jaspar.genereg.net/api/v1/taxon/fungi/</span>
+<span class="co">#&gt; 7     trematodes    https://jaspar.genereg.net/api/v1/taxon/trematodes/</span>
+<span class="co">#&gt; 8  dictyostelium https://jaspar.genereg.net/api/v1/taxon/dictyostelium/</span>
+<span class="co">#&gt; 9       cnidaria      https://jaspar.genereg.net/api/v1/taxon/cnidaria/</span>
+<span class="co">#&gt; 10      oomycota      https://jaspar.genereg.net/api/v1/taxon/oomycota/</span>
 
 
 <span class="co">## You can list information of all matrices available in a taxonomic group:</span>
@@ -259,34 +259,34 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 <span class="co">## other elements which correspond to annotations and details</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">pfm_matrix</span><span class="op">)</span>
 <span class="co">#&gt; List of 24</span>
-<span class="co">#&gt;  $ species      :'data.frame':   1 obs. of  2 variables:</span>
-<span class="co">#&gt;   ..$ tax_id: int 9606</span>
-<span class="co">#&gt;   ..$ name  : chr "Homo sapiens"</span>
-<span class="co">#&gt;  $ family       : chr "RFX-related factors"</span>
-<span class="co">#&gt;  $ sites_url    : NULL</span>
+<span class="co">#&gt;  $ versions_url : chr "https://jaspar.genereg.net/api/v1/matrix/MA0600/versions"</span>
 <span class="co">#&gt;  $ tax_group    : chr "vertebrates"</span>
-<span class="co">#&gt;  $ tfe_ids      : list()</span>
+<span class="co">#&gt;  $ sequence_logo: chr "https://jaspar.genereg.net/static/logos/svg/MA0600.2.svg"</span>
+<span class="co">#&gt;  $ tfe_id       : list()</span>
 <span class="co">#&gt;  $ pfm          : num [1:4, 1:16] 1381 5653 4042 2336 270 ...</span>
 <span class="co">#&gt;   ..- attr(*, "dimnames")=List of 2</span>
 <span class="co">#&gt;   .. ..$ : chr [1:4] "A" "C" "G" "T"</span>
 <span class="co">#&gt;   .. ..$ : NULL</span>
-<span class="co">#&gt;  $ versions_url : chr "https://jaspar.genereg.net/api/v1/matrix/MA0600/versions"</span>
-<span class="co">#&gt;  $ pazar_tf_id  : list()</span>
-<span class="co">#&gt;  $ tffm         : NULL</span>
-<span class="co">#&gt;  $ pazar_tf_ids : list()</span>
 <span class="co">#&gt;  $ type         : chr "HT-SELEX"</span>
-<span class="co">#&gt;  $ pubmed_ids   : chr "8754849"</span>
-<span class="co">#&gt;  $ sequence_logo: chr "https://jaspar.genereg.net/static/logos/svg/MA0600.2.svg"</span>
-<span class="co">#&gt;  $ tfe_id       : list()</span>
+<span class="co">#&gt;  $ pazar_tf_ids : list()</span>
 <span class="co">#&gt;  $ source       : chr "23332764"</span>
-<span class="co">#&gt;  $ collection   : chr "CORE"</span>
-<span class="co">#&gt;  $ uniprot_ids  : list()</span>
-<span class="co">#&gt;  $ version      : int 2</span>
-<span class="co">#&gt;  $ class        : chr "Fork head/winged helix factors"</span>
-<span class="co">#&gt;  $ remap_tf_name: chr "RFX2"</span>
-<span class="co">#&gt;  $ name         : chr "RFX2"</span>
-<span class="co">#&gt;  $ matrix_id    : chr "MA0600.2"</span>
+<span class="co">#&gt;  $ sites_url    : NULL</span>
 <span class="co">#&gt;  $ base_id      : chr "MA0600"</span>
+<span class="co">#&gt;  $ tfe_ids      : list()</span>
+<span class="co">#&gt;  $ family       : chr "RFX-related factors"</span>
+<span class="co">#&gt;  $ class        : chr "Fork head/winged helix factors"</span>
+<span class="co">#&gt;  $ collection   : chr "CORE"</span>
+<span class="co">#&gt;  $ matrix_id    : chr "MA0600.2"</span>
+<span class="co">#&gt;  $ species      :'data.frame':   1 obs. of  2 variables:</span>
+<span class="co">#&gt;   ..$ name  : chr "Homo sapiens"</span>
+<span class="co">#&gt;   ..$ tax_id: int 9606</span>
+<span class="co">#&gt;  $ uniprot_ids  : list()</span>
+<span class="co">#&gt;  $ pazar_tf_id  : list()</span>
+<span class="co">#&gt;  $ name         : chr "RFX2"</span>
+<span class="co">#&gt;  $ version      : int 2</span>
+<span class="co">#&gt;  $ pubmed_ids   : chr "8754849"</span>
+<span class="co">#&gt;  $ remap_tf_name: chr "RFX2"</span>
+<span class="co">#&gt;  $ tffm         : NULL</span>
 <span class="co">#&gt;  $ medline      : chr "8754849"</span></code></pre></div>
 </div>
 <div class="section level4">
@@ -408,7 +408,7 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 <span class="co">#&gt;  [5] rlang_1.0.2       fastmap_1.1.0     httr_1.4.2        stringr_1.4.0    </span>
 <span class="co">#&gt;  [9] tools_4.1.3       xfun_0.30         cli_3.2.0         jquerylib_0.1.4  </span>
 <span class="co">#&gt; [13] htmltools_0.5.2   systemfonts_1.0.4 yaml_2.3.5        digest_0.6.29    </span>
-<span class="co">#&gt; [17] rprojroot_2.0.2   pkgdown_2.0.2     textshaping_0.3.6 purrr_0.3.4      </span>
+<span class="co">#&gt; [17] rprojroot_2.0.3   pkgdown_2.0.2     textshaping_0.3.6 purrr_0.3.4      </span>
 <span class="co">#&gt; [21] sass_0.4.1        fs_1.5.2          curl_4.3.2        memoise_2.0.1    </span>
 <span class="co">#&gt; [25] cachem_1.0.6      evaluate_0.15     rmarkdown_2.13    stringi_1.7.6    </span>
 <span class="co">#&gt; [29] compiler_4.1.3    bslib_0.3.1       desc_1.4.1        jsonlite_1.8.0</span></code></pre>
