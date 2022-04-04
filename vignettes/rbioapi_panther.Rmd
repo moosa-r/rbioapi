@@ -95,6 +95,8 @@ if (utils::hasName(enriched, "result")) {
 }
 ```
 
+**Please Note:** Other services supported by rbioapi also provide Over-representation analysis tools. Please see the vignette article [Do with rbioapi: Over-Representation (Enrichment) Analysis](rbioapi_do_enrich.html) ([link to the documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html)) for an in-depth review.
+
 ## Tree grafter {#tree-grafter .heading2}
 
 `rba_panther_tree_grafter()` is an equivalent to the "[Graft sequence into PANTHER library of trees](http://www.pantherdb.org/tools/sequenceSearchForm.jsp)" tool.
@@ -128,3 +130,4 @@ To cite rbioapi:
 ```{r sessionInfo, echo=FALSE}
 sessionInfo()
 ```
+

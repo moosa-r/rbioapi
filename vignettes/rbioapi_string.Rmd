@@ -212,6 +212,8 @@ if (is.data.frame(enriched$DISEASES)) {
 }
 ```
 
+**Please Note:** Other services supported by rbioapi also provide Over-representation analysis tools. Please see the vignette article [Do with rbioapi: Over-Representation (Enrichment) Analysis](rbioapi_do_enrich.html) ([link to the documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html)) for an in-depth review.
+
 ## Protein-protein interaction enrichment {#protein-protein-interaction-enrichment .heading3}
 
 Even without incorporating annotation data, STRING can calculate if your proteins are functionally related. Briefly, STRING accomplishes this by comparing the interactions' distribution in your protein-set to the interactions' distribution in the proteome. Read [STRING's paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3531103/#__sec4title "STRING v9.1: protein-protein interaction networks, with increased coverage and integration") for more information.

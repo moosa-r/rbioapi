@@ -105,6 +105,8 @@ Your token is only guaranteed to be stored for 7 days. After that, you can uploa
 re_uploaded <- rba_reactome_analysis_import(input = "reactome_results.json")
 ```
 
+**Please Note:** Other services supported by rbioapi also provide Over-representation analysis tools. Please see the vignette article [Do with rbioapi: Over-Representation (Enrichment) Analysis](rbioapi_do_enrich.html) ([link to the documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html)) for an in-depth review.
+
 ## See also in Functions' manuals {#analysis_see-also-in-functions-manuals .heading3}
 
 Some rbioapi Reactome analysis functions were not covered in this vignette, be sure to check their manuals:

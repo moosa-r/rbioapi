@@ -121,6 +121,8 @@ rba_mieaa_enrich_status(job_id = request$job_id)
 results <- rba_mieaa_enrich_results(job_id = request$job_id)
 ```
 
+**Please Note:** Other services supported by rbioapi also provide Over-representation analysis tools. Please see the vignette article [Do with rbioapi: Over-Representation (Enrichment) Analysis](rbioapi_do_enrich.html) ([link to the documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html)) for an in-depth review.
+
 ------------------------------------------------------------------------
 
 # Convert miRNA accessions {#convert-mirna-accessions .heading2}
@@ -156,3 +158,4 @@ To cite rbioapi:
 ```{r sessionInfo, echo=FALSE}
 sessionInfo()
 ```
+
