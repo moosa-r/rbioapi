@@ -105,7 +105,7 @@
       <img src="../logo.svg" class="logo" alt=""><h1>2.B: JASPAR &amp; rbioapi</h1>
                         <h4 data-toc-skip class="author">Moosa Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2022-04-04</h4>
+            <h4 data-toc-skip class="date">2022-04-05</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/HEAD/vignettes/rbioapi_jaspar.Rmd" class="external-link"><code>vignettes/rbioapi_jaspar.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_jaspar.Rmd</code></div>
@@ -146,9 +146,9 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## To get a list of available collection in release 2020:</span>
 <span class="fu"><a href="../reference/rba_jaspar_collections.html">rba_jaspar_collections</a></span><span class="op">(</span>release <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span>
-<span class="co">#&gt;          name                                                        url</span>
-<span class="co">#&gt; 1        CORE        https://jaspar.genereg.net/api/v1/collections/CORE/</span>
-<span class="co">#&gt; 2 UNVALIDATED https://jaspar.genereg.net/api/v1/collections/UNVALIDATED/</span>
+<span class="co">#&gt;                                                          url        name</span>
+<span class="co">#&gt; 1        https://jaspar.genereg.net/api/v1/collections/CORE/        CORE</span>
+<span class="co">#&gt; 2 https://jaspar.genereg.net/api/v1/collections/UNVALIDATED/ UNVALIDATED</span>
 
 
 <span class="co">## You can list information of all matrices available in a collection:</span>
@@ -161,17 +161,17 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## To get a list of taxonomic groups in release 2020:</span>
 <span class="fu"><a href="../reference/rba_jaspar_taxons.html">rba_jaspar_taxons</a></span><span class="op">(</span>release <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span>
-<span class="co">#&gt;             name                                                    url</span>
-<span class="co">#&gt; 1         plants        https://jaspar.genereg.net/api/v1/taxon/plants/</span>
-<span class="co">#&gt; 2    vertebrates   https://jaspar.genereg.net/api/v1/taxon/vertebrates/</span>
-<span class="co">#&gt; 3        insects       https://jaspar.genereg.net/api/v1/taxon/insects/</span>
-<span class="co">#&gt; 4   urochordates  https://jaspar.genereg.net/api/v1/taxon/urochordates/</span>
-<span class="co">#&gt; 5      nematodes     https://jaspar.genereg.net/api/v1/taxon/nematodes/</span>
-<span class="co">#&gt; 6          fungi         https://jaspar.genereg.net/api/v1/taxon/fungi/</span>
-<span class="co">#&gt; 7     trematodes    https://jaspar.genereg.net/api/v1/taxon/trematodes/</span>
-<span class="co">#&gt; 8  dictyostelium https://jaspar.genereg.net/api/v1/taxon/dictyostelium/</span>
-<span class="co">#&gt; 9       cnidaria      https://jaspar.genereg.net/api/v1/taxon/cnidaria/</span>
-<span class="co">#&gt; 10      oomycota      https://jaspar.genereg.net/api/v1/taxon/oomycota/</span>
+<span class="co">#&gt;                                                       url          name</span>
+<span class="co">#&gt; 1         https://jaspar.genereg.net/api/v1/taxon/plants/        plants</span>
+<span class="co">#&gt; 2    https://jaspar.genereg.net/api/v1/taxon/vertebrates/   vertebrates</span>
+<span class="co">#&gt; 3        https://jaspar.genereg.net/api/v1/taxon/insects/       insects</span>
+<span class="co">#&gt; 4   https://jaspar.genereg.net/api/v1/taxon/urochordates/  urochordates</span>
+<span class="co">#&gt; 5      https://jaspar.genereg.net/api/v1/taxon/nematodes/     nematodes</span>
+<span class="co">#&gt; 6          https://jaspar.genereg.net/api/v1/taxon/fungi/         fungi</span>
+<span class="co">#&gt; 7     https://jaspar.genereg.net/api/v1/taxon/trematodes/    trematodes</span>
+<span class="co">#&gt; 8  https://jaspar.genereg.net/api/v1/taxon/dictyostelium/ dictyostelium</span>
+<span class="co">#&gt; 9       https://jaspar.genereg.net/api/v1/taxon/cnidaria/      cnidaria</span>
+<span class="co">#&gt; 10      https://jaspar.genereg.net/api/v1/taxon/oomycota/      oomycota</span>
 
 
 <span class="co">## You can list information of all matrices available in a taxonomic group:</span>
@@ -259,35 +259,35 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 <span class="co">## other elements which correspond to annotations and details</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">pfm_matrix</span><span class="op">)</span>
 <span class="co">#&gt; List of 24</span>
+<span class="co">#&gt;  $ uniprot_ids  : list()</span>
 <span class="co">#&gt;  $ versions_url : chr "https://jaspar.genereg.net/api/v1/matrix/MA0600/versions"</span>
-<span class="co">#&gt;  $ tax_group    : chr "vertebrates"</span>
-<span class="co">#&gt;  $ sequence_logo: chr "https://jaspar.genereg.net/static/logos/svg/MA0600.2.svg"</span>
+<span class="co">#&gt;  $ tffm         : NULL</span>
+<span class="co">#&gt;  $ version      : int 2</span>
+<span class="co">#&gt;  $ collection   : chr "CORE"</span>
+<span class="co">#&gt;  $ family       : chr "RFX-related factors"</span>
 <span class="co">#&gt;  $ tfe_id       : list()</span>
+<span class="co">#&gt;  $ medline      : chr "8754849"</span>
+<span class="co">#&gt;  $ pubmed_ids   : chr "8754849"</span>
+<span class="co">#&gt;  $ base_id      : chr "MA0600"</span>
+<span class="co">#&gt;  $ sequence_logo: chr "https://jaspar.genereg.net/static/logos/svg/MA0600.2.svg"</span>
+<span class="co">#&gt;  $ pazar_tf_ids : list()</span>
+<span class="co">#&gt;  $ name         : chr "RFX2"</span>
+<span class="co">#&gt;  $ source       : chr "23332764"</span>
+<span class="co">#&gt;  $ class        : chr "Fork head/winged helix factors"</span>
+<span class="co">#&gt;  $ matrix_id    : chr "MA0600.2"</span>
+<span class="co">#&gt;  $ tfe_ids      : list()</span>
+<span class="co">#&gt;  $ sites_url    : NULL</span>
+<span class="co">#&gt;  $ type         : chr "HT-SELEX"</span>
 <span class="co">#&gt;  $ pfm          : num [1:4, 1:16] 1381 5653 4042 2336 270 ...</span>
 <span class="co">#&gt;   ..- attr(*, "dimnames")=List of 2</span>
 <span class="co">#&gt;   .. ..$ : chr [1:4] "A" "C" "G" "T"</span>
 <span class="co">#&gt;   .. ..$ : NULL</span>
-<span class="co">#&gt;  $ type         : chr "HT-SELEX"</span>
-<span class="co">#&gt;  $ pazar_tf_ids : list()</span>
-<span class="co">#&gt;  $ source       : chr "23332764"</span>
-<span class="co">#&gt;  $ sites_url    : NULL</span>
-<span class="co">#&gt;  $ base_id      : chr "MA0600"</span>
-<span class="co">#&gt;  $ tfe_ids      : list()</span>
-<span class="co">#&gt;  $ family       : chr "RFX-related factors"</span>
-<span class="co">#&gt;  $ class        : chr "Fork head/winged helix factors"</span>
-<span class="co">#&gt;  $ collection   : chr "CORE"</span>
-<span class="co">#&gt;  $ matrix_id    : chr "MA0600.2"</span>
+<span class="co">#&gt;  $ remap_tf_name: chr "RFX2"</span>
+<span class="co">#&gt;  $ tax_group    : chr "vertebrates"</span>
 <span class="co">#&gt;  $ species      :'data.frame':   1 obs. of  2 variables:</span>
 <span class="co">#&gt;   ..$ name  : chr "Homo sapiens"</span>
 <span class="co">#&gt;   ..$ tax_id: int 9606</span>
-<span class="co">#&gt;  $ uniprot_ids  : list()</span>
-<span class="co">#&gt;  $ pazar_tf_id  : list()</span>
-<span class="co">#&gt;  $ name         : chr "RFX2"</span>
-<span class="co">#&gt;  $ version      : int 2</span>
-<span class="co">#&gt;  $ pubmed_ids   : chr "8754849"</span>
-<span class="co">#&gt;  $ remap_tf_name: chr "RFX2"</span>
-<span class="co">#&gt;  $ tffm         : NULL</span>
-<span class="co">#&gt;  $ medline      : chr "8754849"</span></code></pre></div>
+<span class="co">#&gt;  $ pazar_tf_id  : list()</span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="save-a-matrix-a-file-in-specific-format">Save a Matrix a File in Specific Format<a class="anchor" aria-label="anchor" href="#save-a-matrix-a-file-in-specific-format"></a>

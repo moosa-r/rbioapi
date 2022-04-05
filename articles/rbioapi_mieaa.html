@@ -100,16 +100,12 @@
 
 
 
-<script src="rbioapi_mieaa_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="rbioapi_mieaa_files/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="rbioapi_mieaa_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="rbioapi_mieaa_files/datatables-binding-0.22/datatables.js"></script><link href="rbioapi_mieaa_files/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="rbioapi_mieaa_files/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="rbioapi_mieaa_files/dt-core-1.11.3/js/jquery.dataTables.min.js"></script><link href="rbioapi_mieaa_files/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="rbioapi_mieaa_files/crosstalk-1.2.0/js/crosstalk.min.js"></script><div class="row">
+<script src="rbioapi_mieaa_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <main id="main"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>2.C: miEEA &amp; rbioapi</h1>
                         <h4 data-toc-skip class="author">Moosa Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2022-04-04</h4>
+            <h4 data-toc-skip class="date">2022-04-05</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/HEAD/vignettes/rbioapi_mieaa.Rmd" class="external-link"><code>vignettes/rbioapi_mieaa.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_mieaa.Rmd</code></div>
@@ -162,13 +158,6 @@
 <span class="co">#&gt;  -- Step 1/3: Submitting Enrichment request:</span>
 <span class="co">#&gt; No categories were supplied, Requesting enrichment using all of the 28 available categories for species 'Homo sapiens'.</span>
 <span class="co">#&gt; Submitting ORA enrichment request for 17 miRNA IDs of species Homo sapiens to miEAA servers.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  -- Step 2/3: Checking for Submitted enrichment job's status every 5 seconds.</span>
-<span class="co">#&gt;     Your submitted job ID is: f88420ab-54de-4c99-bb42-490bd5d17b32</span>
-<span class="co">#&gt; .....</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  -- Step 3/3: Retrieving the results of the finished enrichment job.</span>
-<span class="co">#&gt; Retrieving results of submitted enrichment request with ID: f88420ab-54de-4c99-bb42-490bd5d17b32</span>
 <span class="co">## 2b Or, We can limit the enrichment to certain datasets (enrichment categories)</span>
 <span class="va">mieaa_kegg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_mieaa_enrich.html">rba_mieaa_enrich</a></span><span class="op">(</span>test_set <span class="op">=</span> <span class="va">mirs</span>,
                               mirna_type <span class="op">=</span> <span class="st">"mature"</span>,
@@ -178,22 +167,14 @@
                                             <span class="st">"miRWalk_Organs_mature"</span><span class="op">)</span>
                              <span class="op">)</span>
 <span class="co">#&gt;  -- Step 1/3: Submitting Enrichment request:</span>
-<span class="co">#&gt; Submitting ORA enrichment request for 17 miRNA IDs of species Homo sapiens to miEAA servers.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  -- Step 2/3: Checking for Submitted enrichment job's status every 5 seconds.</span>
-<span class="co">#&gt;     Your submitted job ID is: 7952bc1e-8f00-4294-af5b-ee3dfa37c2f8</span>
-<span class="co">#&gt; .</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  -- Step 3/3: Retrieving the results of the finished enrichment job.</span>
-<span class="co">#&gt; Retrieving results of submitted enrichment request with ID: 7952bc1e-8f00-4294-af5b-ee3dfa37c2f8</span></code></pre></div>
-<div id="htmlwidget-d75a9e09bdc466394f4a" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d75a9e09bdc466394f4a">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["Diseases (miRWalk)","Diseases (miRWalk)","Organs (miRWalk)","Organs (miRWalk)","Organs (miRWalk)","Organs (miRWalk)"],["Choriocarcinoma","Leukemia T-Cell","Endothelial Cells","Gastrointestinal Tract","T-Lymphocytes","X Chromosome"],["over-represented","over-represented","over-represented","over-represented","over-represented","over-represented"],["0.000513149","0.0013928","0.000703018","0.000411587","1.40287e-05","0.000806102"],["0.0364336","0.0494430","0.0157190","0.0157190","0.0010942","0.0157190"],["0.0364336","0.0494430","0.0157190","0.0157190","0.0010942","0.0157190"],["1.26518","0.268371","1.40078","0.194553","1.16732","0.233463"],["6","3","6","3","7","3"],["hsa-miR-20b-5p; hsa-miR-17-5p; hsa-miR-20a-5p; hsa-miR-106a-5p; hsa-miR-93-5p; hsa-miR-363-3p","hsa-miR-20b-5p; hsa-miR-106a-5p; hsa-miR-93-5p","hsa-miR-17-5p; hsa-miR-20a-5p; hsa-miR-222-3p; hsa-miR-93-5p; hsa-miR-126-3p; hsa-miR-18a-5p","hsa-miR-20b-5p; hsa-miR-17-5p; hsa-miR-20a-5p","hsa-miR-20b-5p; hsa-miR-20a-5p; hsa-miR-222-3p; hsa-miR-106a-5p; hsa-miR-93-5p; hsa-miR-126-3p; hsa-miR-148a-3p","hsa-miR-20b-5p; hsa-miR-222-3p; hsa-miR-106a-5p"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Category<\/th>\n      <th>Subcategory<\/th>\n      <th>Enrichment<\/th>\n      <th>P-value<\/th>\n      <th>P-adjusted<\/th>\n      <th>Q-value<\/th>\n      <th>Expected<\/th>\n      <th>Observed<\/th>\n      <th>miRNAs/precursors<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<span class="co">#&gt; Submitting ORA enrichment request for 17 miRNA IDs of species Homo sapiens to miEAA servers.</span></code></pre></div>
+<pre><code><span class="co">#&gt; [1] "Vignette building failed. It is probably because the web service was down during the building."</span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="approach-2-going-step-by-step">Approach 2: Going step-by-step<a class="anchor" aria-label="anchor" href="#approach-2-going-step-by-step"></a>
 </h3>
 <p>As stated before, <code><a href="../reference/rba_mieaa_enrich.html">rba_mieaa_enrich()</a></code> is a wrapper function, meaning that it executes the following sequence of functions:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## 1 Submit enrichment request to miEAA</span>
 <span class="va">request</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_mieaa_enrich_submit.html">rba_mieaa_enrich_submit</a></span><span class="op">(</span>test_set <span class="op">=</span> <span class="va">mirs</span>,
                                   mirna_type <span class="op">=</span> <span class="st">"mature"</span>,
@@ -207,6 +188,7 @@
 
 <span class="co">## 3 If the job has completed, retrieve the results</span>
 <span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_mieaa_enrich_results.html">rba_mieaa_enrich_results</a></span><span class="op">(</span>job_id <span class="op">=</span> <span class="va">request</span><span class="op">$</span><span class="va">job_id</span><span class="op">)</span></code></pre></div>
+<p><strong>Please Note:</strong> Other services supported by rbioapi also provide Over-representation analysis tools. Please see the vignette article <a href="rbioapi_do_enrich.html">Do with rbioapi: Over-Representation (Enrichment) Analysis</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html">link to the documentation site</a>) for an in-depth review.</p>
 <hr>
 </div>
 </div>
@@ -219,7 +201,7 @@
 <div class="section level2">
 <h2 id="Citations">How to Cite?<a class="anchor" aria-label="anchor" href="#Citations"></a>
 </h2>
-<p>To cite miEAA (Please see <a href="https://ccb-compute2.cs.uni-saarland.de/mieaa2" class="external-link uri">https://ccb-compute2.cs.uni-saarland.de/mieaa2</a>):</p>
+<p>To cite miEAA (Please see <a href="https://ccb-compute2.cs.uni-saarland.de/mieaa2/" class="external-link uri">https://ccb-compute2.cs.uni-saarland.de/mieaa2/</a>):</p>
 <ul>
 <li>Fabian Kern, Tobias Fehlmann, Jeffrey Solomon, Louisa Schwed, Nadja Grammes, Christina Backes, Kendall Van Keuren-Jensen, David Wesley Craig, Eckart Meese, Andreas Keller, miEAA 2.0: integrating multi-species microRNA enrichment analysis and workflow management systems, Nucleic Acids Research, Volume 48, Issue W1, 02 July 2020, Pages W521–W528, <a href="https://doi.org/10.1093/nar/gkaa309" class="external-link uri">https://doi.org/10.1093/nar/gkaa309</a>
 </li>
@@ -264,13 +246,12 @@
 <span class="co">#&gt; loaded via a namespace (and not attached):</span>
 <span class="co">#&gt;  [1] knitr_1.38        magrittr_2.0.3    R6_2.5.1          ragg_1.2.2       </span>
 <span class="co">#&gt;  [5] rlang_1.0.2       fastmap_1.1.0     httr_1.4.2        stringr_1.4.0    </span>
-<span class="co">#&gt;  [9] tools_4.1.3       DT_0.22           xfun_0.30         cli_3.2.0        </span>
-<span class="co">#&gt; [13] jquerylib_0.1.4   crosstalk_1.2.0   htmltools_0.5.2   systemfonts_1.0.4</span>
-<span class="co">#&gt; [17] yaml_2.3.5        digest_0.6.29     rprojroot_2.0.3   pkgdown_2.0.2    </span>
-<span class="co">#&gt; [21] textshaping_0.3.6 purrr_0.3.4       htmlwidgets_1.5.4 sass_0.4.1       </span>
-<span class="co">#&gt; [25] fs_1.5.2          curl_4.3.2        memoise_2.0.1     cachem_1.0.6     </span>
-<span class="co">#&gt; [29] evaluate_0.15     rmarkdown_2.13    stringi_1.7.6     compiler_4.1.3   </span>
-<span class="co">#&gt; [33] bslib_0.3.1       desc_1.4.1        jsonlite_1.8.0</span></code></pre>
+<span class="co">#&gt;  [9] tools_4.1.3       xfun_0.30         cli_3.2.0         jquerylib_0.1.4  </span>
+<span class="co">#&gt; [13] htmltools_0.5.2   systemfonts_1.0.4 yaml_2.3.5        digest_0.6.29    </span>
+<span class="co">#&gt; [17] rprojroot_2.0.3   pkgdown_2.0.2     textshaping_0.3.6 purrr_0.3.4      </span>
+<span class="co">#&gt; [21] sass_0.4.1        fs_1.5.2          curl_4.3.2        memoise_2.0.1    </span>
+<span class="co">#&gt; [25] cachem_1.0.6      evaluate_0.15     rmarkdown_2.13    stringi_1.7.6    </span>
+<span class="co">#&gt; [29] compiler_4.1.3    bslib_0.3.1       desc_1.4.1        jsonlite_1.8.0</span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
