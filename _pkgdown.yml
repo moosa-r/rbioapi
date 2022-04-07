@@ -51,7 +51,7 @@ navbar:
       - text: 'UniProt & rbioapi'
         href: articles/rbioapi_uniprot.html
       - text: ----
-      - text: 'Do with rbioapi: Over-Representation (Enrichment) Analysis'
+      - text: 'Do with rbioapi: Over-Representation (Enrichment) Analysis in R'
         href: articles/rbioapi_do_enrich.html
     github:
       icon: fab fa-github fa-lg

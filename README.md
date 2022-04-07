@@ -1,7 +1,7 @@
 rbioapi: User-Friendly R Interface to Biologic Web Services’ API
 ================
 Moosa Rezwani
-2022-04-04
+2022-04-08
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -411,8 +411,8 @@ check those too.
 
 We are also adding vignette articles focusing on tasks and workflows:
 
-1.  [Do with rbioapi: Over-Representation (Enrichment)
-    Analysis](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html "Do with rbioapi: Over-Representation (Enrichment) Analysis")
+1.  [Do with rbioapi: Over-Representation (Enrichment) Analysis in
+    R](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html "Do with rbioapi: Over-Representation (Enrichment) Analysis in R")
 
 # Links
 

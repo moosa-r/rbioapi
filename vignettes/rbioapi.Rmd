@@ -254,7 +254,7 @@ Each supported service has a dedicated vignette article. Make sure to check thos
 
 We are also adding vignette articles focusing on tasks and workflows:
 
-1.  [Do with rbioapi: Over-Representation (Enrichment) Analysis](rbioapi_do_enrich.html "Do with rbioapi: Over-Representation (Enrichment) Analysis") ^([documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html "rbioapi & UniProt vignette article"))^
+1.  [Do with rbioapi: Over-Representation (Enrichment) Analysis in R](rbioapi_do_enrich.html "Do with rbioapi: Over-Representation (Enrichment) Analysis in R") ^([documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html "rbioapi & UniProt vignette article"))^
 
 ------------------------------------------------------------------------
 
