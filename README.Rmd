@@ -200,7 +200,7 @@ rbioapi is an interface between you and other databases and services. Thus, if y
 
 -   **How to cite rbioapi**:
 
-    Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: User-Friendly R Interface to Biologic Web Services' API, Bioinformatics, 2022;, btac172, <https://doi.org/10.1093/bioinformatics/btac17>
+    Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: User-Friendly R Interface to Biologic Web Services' API, Bioinformatics, 2022;, btac172, <https://doi.org/10.1093/bioinformatics/btac172>
 
 -   [How to cite Enrichr](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html#Citations "How to cite Enrichr"). (See on [Enrichr website](https://maayanlab.cloud/Enrichr/help#terms))
 

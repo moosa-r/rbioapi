@@ -1,7 +1,7 @@
 rbioapi: User-Friendly R Interface to Biologic Web Services’ API
 ================
 Moosa Rezwani
-2022-04-08
+2022-04-15
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -349,7 +349,7 @@ used.
     Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi:
     User-Friendly R Interface to Biologic Web Services’ API,
     Bioinformatics, 2022;, btac172,
-    <https://doi.org/10.1093/bioinformatics/btac17>
+    <https://doi.org/10.1093/bioinformatics/btac172>
 
 -   [How to cite
     Enrichr](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html#Citations "How to cite Enrichr").
