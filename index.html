@@ -5,14 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Currently fully supports Enrichr, JASPAR, miEAA, PANTHER,
-    Reactome, STRING, and UniProt! The goal of rbioapi is to provide a
-    user-friendly and consistent interface to biological databases and
-    services: In a way that insulates the user from technicalities of
-    using web services API and creates a unified and easy-to-use interface
-    to biological and medical web services. This an ongoing project; New
-    databases and services will be added periodically. Feel free to
-    suggest any databases or services you often use.">
+<meta name="description" content="Connect to Enrichr, JASPAR, miEAA, PANTHER, Reactome, STRING, and UniProt in R with rbioapi package.">
 <title>User-Friendly R Interface to Biologic Web Services' API • rbioapi</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -25,14 +18,7 @@
 <script src="deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="User-Friendly R Interface to Biologic Web Services' API">
-<meta property="og:description" content="Currently fully supports Enrichr, JASPAR, miEAA, PANTHER,
-    Reactome, STRING, and UniProt! The goal of rbioapi is to provide a
-    user-friendly and consistent interface to biological databases and
-    services: In a way that insulates the user from technicalities of
-    using web services API and creates a unified and easy-to-use interface
-    to biological and medical web services. This an ongoing project; New
-    databases and services will be added periodically. Feel free to
-    suggest any databases or services you often use.">
+<meta property="og:description" content="Connect to Enrichr, JASPAR, miEAA, PANTHER, Reactome, STRING, and UniProt in R with rbioapi package.">
 <meta property="og:image" content="https://rbioapi.moosa-r.com/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -117,7 +103,7 @@
 <img src="logo.svg" class="logo" alt=""><h1 id="rbioapi-user-friendly-r-interface-to-biologic-web-services-api">rbioapi: User-Friendly R Interface to Biologic Web Services’ API<a class="anchor" aria-label="anchor" href="#rbioapi-user-friendly-r-interface-to-biologic-web-services-api"></a>
 </h1>
 </div>
-<p>Moosa Rezwani 2022-04-08</p>
+<p>Moosa Rezwani 2022-04-17</p>
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 </div>
 <div class="section level1">
@@ -166,10 +152,10 @@
 <div class="section level1">
 <h1 id="how-to-install">How to install?<a class="anchor" aria-label="anchor" href="#how-to-install"></a>
 </h1>
-<p>You can install the stable released version of rbioapi from <a href="https://CRAN.R-project.org" class="external-link">CRAN</a> with:</p>
+<p>You can install the stable release version of <a href="rbioapi.html" title="rbioapi: User-Friendly R Interface to Biologic Web Services' API">rbioapi</a> from <a href="https://cran.r-project.org/package=rbioapi" title="rbioapi page on CRAN (The Comprehensive R Archive Network)" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"rbioapi"</span><span class="op">)</span></code></pre></div>
-<p>However, the CRAN version is released at most once every 1-2 months, You can install the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>However, the CRAN version is released at most once every 1-2 months, You can install the most recent (development) version from <a href="https://github.com/moosa-r/rbioapi/" title="rbioapi repository on GitHub" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"moosa-r/rbioapi"</span><span class="op">)</span></code></pre></div>
@@ -340,7 +326,7 @@
 <ul>
 <li>
 <p><strong>How to cite rbioapi</strong>:</p>
-<p>Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: User-Friendly R Interface to Biologic Web Services’ API, Bioinformatics, 2022;, btac172, <a href="https://doi.org/10.1093/bioinformatics/btac17" class="external-link uri">https://doi.org/10.1093/bioinformatics/btac17</a></p>
+<p>Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: User-Friendly R Interface to Biologic Web Services’ API, Bioinformatics, 2022;, btac172, <a href="https://doi.org/10.1093/bioinformatics/btac172" class="external-link uri">https://doi.org/10.1093/bioinformatics/btac172</a></p>
 </li>
 <li><p><a href="https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html#Citations" title="How to cite Enrichr">How to cite Enrichr</a>. (See on <a href="https://maayanlab.cloud/Enrichr/help#terms" class="external-link">Enrichr website</a>)</p></li>
 <li><p><a href="https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html#Citations" title="How to cite JASPAR">How to cite JASPAR</a>. (See on <a href="https://jaspar.genereg.net/faq/" class="external-link">JASPAR website</a>)</p></li>
