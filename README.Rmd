@@ -1,6 +1,8 @@
 ---
 title: "rbioapi: User-Friendly R Interface to Biologic Web Services' API"
 author: "Moosa Rezwani"
+description: >
+ Connect to Enrichr, JASPAR, miEAA, PANTHER, Reactome, STRING, and UniProt in R with rbioapi package.
 date: "`r Sys.Date()`"
 output: github_document
 ---

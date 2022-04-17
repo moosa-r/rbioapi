@@ -1,5 +1,9 @@
 url: https://rbioapi.moosa-r.com
 
+home:
+  title: "User-Friendly R Interface to Biologic Web Services' API"
+  description: "Connect to Enrichr, JASPAR, miEAA, PANTHER, Reactome, STRING, and UniProt in R with rbioapi package."
+
 template:
   bootstrap: 5
   bootswatch: cosmo

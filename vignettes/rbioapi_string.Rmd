@@ -1,6 +1,8 @@
 ---
 title: "2.F: STRING & rbioapi"
 author: "Moosa Rezwani"
+description: >
+ Connect to STRING in R with rbioapi package.
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:

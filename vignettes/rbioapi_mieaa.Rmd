@@ -1,6 +1,8 @@
 ---
 title: "2.C: miEEA & rbioapi"
 author: "Moosa Rezwani"
+description: >
+ Connect to miEAA in R with rbioapi package. 
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
@@ -158,4 +160,3 @@ To cite rbioapi:
 ```{r sessionInfo, echo=FALSE}
 sessionInfo()
 ```
-

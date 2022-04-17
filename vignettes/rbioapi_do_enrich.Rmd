@@ -1,6 +1,8 @@
 ---
 title: "3.A: Do with rbioapi: Over-Representation (Enrichment) Analysis in R"
 author: "Moosa Rezwani"
+description: >
+ Over-Representation (Enrichment) Analysis in R. Perform enrichment analysis using Enrichr, miEAA, PANTHER, Reactome, and STRING with rbioapi package.
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:

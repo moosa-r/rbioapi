@@ -1,6 +1,8 @@
 ---
 title: "2.E: Reactome & rbioapi"
 author: "Moosa Rezwani"
+description: >
+ Connect to Reactome in R with rbioapi package. 
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
