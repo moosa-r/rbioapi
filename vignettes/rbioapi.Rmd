@@ -67,15 +67,15 @@ Each of the services has its dedicated vignette article. However, In this articl
 
 ------------------------------------------------------------------------
 
-# How to install?
+# How to install? {#How-to-install .heading2}
 
-You can install the stable released version of rbioapi from [CRAN](https://CRAN.R-project.org) with:
+You can install the stable release version of [rbioapi](rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API") from [CRAN](https://cran.r-project.org/package=rbioapi "rbioapi page on CRAN (The Comprehensive R Archive Network)") with:
 
 ```{r install_cran, eval=FALSE}
 install.packages("rbioapi")
 ```
 
-However, the CRAN version is released at most once every 1-2 months, You can install the development version from [GitHub](https://github.com/) with:
+However, the CRAN version is released at most once every 1-2 months, You can install the most recent (development) version from [GitHub](https://github.com/moosa-r/rbioapi/ "rbioapi repository on GitHub") with:
 
 ```{r install_github, eval=FALSE}
 install.packages("remotes")

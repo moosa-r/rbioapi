@@ -38,6 +38,23 @@ Before continuing, note that rbioapi is an interface to the databases and web se
 
 ------------------------------------------------------------------------
 
+# How to install? {#how-to-install .heading2}
+
+You can install the stable release version of [rbioapi](rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API") from [CRAN](https://cran.r-project.org/package=rbioapi "rbioapi page on CRAN (The Comprehensive R Archive Network)") with:
+
+```{r install_cran, eval=FALSE}
+install.packages("rbioapi")
+```
+
+However, the CRAN version is released at most once every 1-2 months, You can install the most recent (development) version from [GitHub](https://github.com/moosa-r/rbioapi/ "rbioapi repository on GitHub") with:
+
+```{r install_github, eval=FALSE}
+install.packages("remotes")
+remotes::install_github("moosa-r/rbioapi")
+```
+
+------------------------------------------------------------------------
+
 # What is Over-representation analysis? {#what-does-rbioapi-do .heading2}
 
 Over-representation (enrichment) analysis is commonly performed when one's analysis yields a list of genes, proteins, or other entities. We will not delve into details here and refer you to [D. W. Huang et al.: Nucleic Acids Res. 37, 1 (2009)](https://doi.org/10.1093/nar/gkn923 "Bioinformatics enrichment tools: paths toward the comprehensive functional analysis of large gene lists") for a thorough review of the subject.
