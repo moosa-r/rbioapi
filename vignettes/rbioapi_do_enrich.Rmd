@@ -1,8 +1,8 @@
 ---
-title: "3.A: Do with rbioapi: Over-Representation (Enrichment) Analysis in R"
+title: "3.A: Do with rbioapi: Enrichment (Over-Representation) Analysis in R"
 author: "Moosa Rezwani"
 description: >
- Over-Representation (Enrichment) Analysis in R. Perform enrichment analysis using Enrichr, miEAA, PANTHER, Reactome, and STRING with rbioapi package.
+ Enrichment (Over-Representation) Analysis in R. Perform enrichment analysis using Enrichr, miEAA, PANTHER, Reactome, and STRING with rbioapi package.
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
@@ -13,7 +13,7 @@ output:
     dev: png
     encoding: 'UTF-8'
 vignette: >
-  %\VignetteIndexEntry{3.A: Do with rbioapi: Over-Representation (Enrichment) Analysis in R}
+  %\VignetteIndexEntry{3.A: Do with rbioapi: Enrichment (Over-Representation) Analysis in R}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -32,7 +32,7 @@ library(rbioapi)
 rba_options(timeout = 600, skip_error = TRUE)
 ```
 
-Among the databases and web services currently supported by rbioapi [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr"), [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "miRNA Enrichment Analysis and Annotation Tool (miEAA)"), [PANTHER](http://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)"), [Reactome](https://reactome.org/), and [STRING](https://string-db.org/ "STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis") offer over-representation (enrichment) analysis API endpoints. In this article, after a brief introduction, we will demonstrate how to perform over-representation (enrichment) analysis in R, consistently and easily, using the package rbioapi.
+Among the databases and web services currently supported by rbioapi [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr"), [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "miRNA Enrichment Analysis and Annotation Tool (miEAA)"), [PANTHER](http://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)"), [Reactome](https://reactome.org/), and [STRING](https://string-db.org/ "STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis") offer Enrichment (Over-Representation) analysis API endpoints. In this article, after a brief introduction, we will demonstrate how to perform Enrichment (Over-Representation) analysis in R, consistently and easily, using the package rbioapi.
 
 Before continuing, note that rbioapi is an interface to the databases and web services. Hence it is the user's responsibility to cite the services they have used. We provide suggested citations in each function's manual. However, it is the user's responsibility to fully and adequately cite the databases or web services used in their published research.
 
@@ -57,7 +57,7 @@ remotes::install_github("moosa-r/rbioapi")
 
 # What is Over-representation analysis? {#what-does-rbioapi-do .heading2}
 
-Over-representation (enrichment) analysis is commonly performed when one's analysis yields a list of genes, proteins, or other entities. We will not delve into details here and refer you to [D. W. Huang et al.: Nucleic Acids Res. 37, 1 (2009)](https://doi.org/10.1093/nar/gkn923 "Bioinformatics enrichment tools: paths toward the comprehensive functional analysis of large gene lists") for a thorough review of the subject.
+Enrichment (Over-Representation) analysis is commonly performed when one's analysis yields a list of genes, proteins, or other entities. We will not delve into details here and refer you to [D. W. Huang et al.: Nucleic Acids Res. 37, 1 (2009)](https://doi.org/10.1093/nar/gkn923 "Bioinformatics enrichment tools: paths toward the comprehensive functional analysis of large gene lists") for a thorough review of the subject.
 
 In short, to perform such analysis, in addition to some algorithms, two data are required:
 
@@ -67,9 +67,9 @@ In short, to perform such analysis, in addition to some algorithms, two data are
 
 With over-representation analysis, you can compare your gene list to find if the member of any gene set are over-represented, meaning that they are present in your list in a manner that can not be explained by chance alone.
 
-# Over-representation (enrichment) analysis in R with rbioapi
+# Enrichment (Over-Representation) analysis in R with rbioapi
 
-Many web services supported by rbioapi provide tools to perform over-representation analysis against the gene sets curated in their databases. Among the databases and web services currently supported by rbioapi, [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr"), [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "miRNA Enrichment Analysis and Annotation Tool (miEAA)"), [PANTHER](http://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)"), [Reactome](https://reactome.org/), and [STRING](https://string-db.org/ "STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis") provide such services. Each service has a dedicated vignette article in rbioapi. Here we will focus on performing over-representation (enrichment) analysis.
+Many web services supported by rbioapi provide tools to perform over-representation analysis against the gene sets curated in their databases. Among the databases and web services currently supported by rbioapi, [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr"), [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "miRNA Enrichment Analysis and Annotation Tool (miEAA)"), [PANTHER](http://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)"), [Reactome](https://reactome.org/), and [STRING](https://string-db.org/ "STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis") provide such services. Each service has a dedicated vignette article in rbioapi. Here we will focus on performing Enrichment (Over-Representation) analysis.
 
 As a demonstration, we will use the results of [Galani et al.: Nat. Immunol. 22, 32 (2021)](https://doi.org/10.1038/s41590-020-00840-x "Untuned antiviral immunity in COVID-19 revealed by temporal type I/III interferon patterns and flu comparison") where they have compared the gene expression of critically ill and non-critically ill COVID patients to healthy individuals. We assign a variable with 1214 differentially expressed genes (DEGs) exclusively induced in critically ill COVID patients. Next, we will see what insights we can extract from this list.
 
