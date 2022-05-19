@@ -107,7 +107,7 @@
       <img src="../logo.svg" class="logo" alt=""><h1>2.B: JASPAR &amp; rbioapi</h1>
                         <h4 data-toc-skip class="author">Moosa Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2022-04-18</h4>
+            <h4 data-toc-skip class="date">2022-05-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/HEAD/vignettes/rbioapi_jaspar.Rmd" class="external-link"><code>vignettes/rbioapi_jaspar.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_jaspar.Rmd</code></div>
@@ -148,9 +148,9 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## To get a list of available collection in release 2020:</span>
 <span class="fu"><a href="../reference/rba_jaspar_collections.html">rba_jaspar_collections</a></span><span class="op">(</span>release <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span>
-<span class="co">#&gt;          name                                                        url</span>
-<span class="co">#&gt; 1        CORE        https://jaspar.genereg.net/api/v1/collections/CORE/</span>
-<span class="co">#&gt; 2 UNVALIDATED https://jaspar.genereg.net/api/v1/collections/UNVALIDATED/</span>
+<span class="co">#&gt;                                                          url        name</span>
+<span class="co">#&gt; 1        https://jaspar.genereg.net/api/v1/collections/CORE/        CORE</span>
+<span class="co">#&gt; 2 https://jaspar.genereg.net/api/v1/collections/UNVALIDATED/ UNVALIDATED</span>
 
 
 <span class="co">## You can list information of all matrices available in a collection:</span>
@@ -163,17 +163,17 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## To get a list of taxonomic groups in release 2020:</span>
 <span class="fu"><a href="../reference/rba_jaspar_taxons.html">rba_jaspar_taxons</a></span><span class="op">(</span>release <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span>
-<span class="co">#&gt;             name                                                    url</span>
-<span class="co">#&gt; 1         plants        https://jaspar.genereg.net/api/v1/taxon/plants/</span>
-<span class="co">#&gt; 2    vertebrates   https://jaspar.genereg.net/api/v1/taxon/vertebrates/</span>
-<span class="co">#&gt; 3        insects       https://jaspar.genereg.net/api/v1/taxon/insects/</span>
-<span class="co">#&gt; 4   urochordates  https://jaspar.genereg.net/api/v1/taxon/urochordates/</span>
-<span class="co">#&gt; 5      nematodes     https://jaspar.genereg.net/api/v1/taxon/nematodes/</span>
-<span class="co">#&gt; 6          fungi         https://jaspar.genereg.net/api/v1/taxon/fungi/</span>
-<span class="co">#&gt; 7     trematodes    https://jaspar.genereg.net/api/v1/taxon/trematodes/</span>
-<span class="co">#&gt; 8  dictyostelium https://jaspar.genereg.net/api/v1/taxon/dictyostelium/</span>
-<span class="co">#&gt; 9       cnidaria      https://jaspar.genereg.net/api/v1/taxon/cnidaria/</span>
-<span class="co">#&gt; 10      oomycota      https://jaspar.genereg.net/api/v1/taxon/oomycota/</span>
+<span class="co">#&gt;                                                       url          name</span>
+<span class="co">#&gt; 1         https://jaspar.genereg.net/api/v1/taxon/plants/        plants</span>
+<span class="co">#&gt; 2    https://jaspar.genereg.net/api/v1/taxon/vertebrates/   vertebrates</span>
+<span class="co">#&gt; 3        https://jaspar.genereg.net/api/v1/taxon/insects/       insects</span>
+<span class="co">#&gt; 4   https://jaspar.genereg.net/api/v1/taxon/urochordates/  urochordates</span>
+<span class="co">#&gt; 5      https://jaspar.genereg.net/api/v1/taxon/nematodes/     nematodes</span>
+<span class="co">#&gt; 6          https://jaspar.genereg.net/api/v1/taxon/fungi/         fungi</span>
+<span class="co">#&gt; 7     https://jaspar.genereg.net/api/v1/taxon/trematodes/    trematodes</span>
+<span class="co">#&gt; 8  https://jaspar.genereg.net/api/v1/taxon/dictyostelium/ dictyostelium</span>
+<span class="co">#&gt; 9       https://jaspar.genereg.net/api/v1/taxon/cnidaria/      cnidaria</span>
+<span class="co">#&gt; 10      https://jaspar.genereg.net/api/v1/taxon/oomycota/      oomycota</span>
 
 
 <span class="co">## You can list information of all matrices available in a taxonomic group:</span>
@@ -261,35 +261,42 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 <span class="co">## other elements which correspond to annotations and details</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">pfm_matrix</span><span class="op">)</span>
 <span class="co">#&gt; List of 24</span>
-<span class="co">#&gt;  $ medline      : chr "8754849"</span>
-<span class="co">#&gt;  $ versions_url : chr "https://jaspar.genereg.net/api/v1/matrix/MA0600/versions"</span>
+<span class="co">#&gt;  $ pazar_tf_ids : list()</span>
+<span class="co">#&gt;  $ uniprot_ids  : chr "P48378"</span>
+<span class="co">#&gt;  $ base_id      : chr "MA0600"</span>
+<span class="co">#&gt;  $ pubmed_ids   : chr "8754849"</span>
 <span class="co">#&gt;  $ source       : chr "23332764"</span>
+<span class="co">#&gt;  $ class        : chr "Fork head/winged helix factors"</span>
+<span class="co">#&gt;  $ type         : chr "HT-SELEX"</span>
+<span class="co">#&gt;  $ family       : chr "RFX-related factors"</span>
+<span class="co">#&gt;  $ species      :'data.frame':   1 obs. of  2 variables:</span>
+<span class="co">#&gt;   ..$ tax_id: int 9606</span>
+<span class="co">#&gt;   ..$ name  : chr "Homo sapiens"</span>
+<span class="co">#&gt;  $ medline      : chr "8754849"</span>
+<span class="co">#&gt;  $ tfe_id       : list()</span>
+<span class="co">#&gt;  $ tfe_ids      : list()</span>
 <span class="co">#&gt;  $ pfm          : num [1:4, 1:16] 1381 5653 4042 2336 270 ...</span>
 <span class="co">#&gt;   ..- attr(*, "dimnames")=List of 2</span>
 <span class="co">#&gt;   .. ..$ : chr [1:4] "A" "C" "G" "T"</span>
 <span class="co">#&gt;   .. ..$ : NULL</span>
-<span class="co">#&gt;  $ pazar_tf_ids : list()</span>
-<span class="co">#&gt;  $ tfe_ids      : list()</span>
-<span class="co">#&gt;  $ base_id      : chr "MA0600"</span>
-<span class="co">#&gt;  $ sites_url    : NULL</span>
-<span class="co">#&gt;  $ class        : chr "Fork head/winged helix factors"</span>
-<span class="co">#&gt;  $ tffm         : NULL</span>
-<span class="co">#&gt;  $ family       : chr "RFX-related factors"</span>
-<span class="co">#&gt;  $ name         : chr "RFX2"</span>
-<span class="co">#&gt;  $ pubmed_ids   : chr "8754849"</span>
-<span class="co">#&gt;  $ tfe_id       : list()</span>
-<span class="co">#&gt;  $ matrix_id    : chr "MA0600.2"</span>
+<span class="co">#&gt;  $ tffm         :List of 7</span>
+<span class="co">#&gt;   ..$ log_p_detailed : num -6660</span>
+<span class="co">#&gt;   ..$ base_id        : chr "TFFM0576"</span>
+<span class="co">#&gt;   ..$ tffm_url       : chr "https://jaspar.genereg.net/api/v1/tffm/TFFM0576.1/"</span>
+<span class="co">#&gt;   ..$ experiment_name: chr "CistromeDB_58298"</span>
+<span class="co">#&gt;   ..$ version        : int 1</span>
+<span class="co">#&gt;   ..$ tffm_id        : chr "TFFM0576.1"</span>
+<span class="co">#&gt;   ..$ log_p_1st_order: num -6275</span>
 <span class="co">#&gt;  $ collection   : chr "CORE"</span>
-<span class="co">#&gt;  $ uniprot_ids  : list()</span>
-<span class="co">#&gt;  $ sequence_logo: chr "https://jaspar.genereg.net/static/logos/svg/MA0600.2.svg"</span>
-<span class="co">#&gt;  $ version      : int 2</span>
-<span class="co">#&gt;  $ tax_group    : chr "vertebrates"</span>
-<span class="co">#&gt;  $ type         : chr "HT-SELEX"</span>
-<span class="co">#&gt;  $ species      :'data.frame':   1 obs. of  2 variables:</span>
-<span class="co">#&gt;   ..$ tax_id: int 9606</span>
-<span class="co">#&gt;   ..$ name  : chr "Homo sapiens"</span>
+<span class="co">#&gt;  $ matrix_id    : chr "MA0600.2"</span>
 <span class="co">#&gt;  $ pazar_tf_id  : list()</span>
-<span class="co">#&gt;  $ remap_tf_name: chr "RFX2"</span></code></pre></div>
+<span class="co">#&gt;  $ remap_tf_name: chr "RFX2"</span>
+<span class="co">#&gt;  $ sequence_logo: chr "https://jaspar.genereg.net/static/logos/svg/MA0600.2.svg"</span>
+<span class="co">#&gt;  $ tax_group    : chr "vertebrates"</span>
+<span class="co">#&gt;  $ sites_url    : NULL</span>
+<span class="co">#&gt;  $ versions_url : chr "https://jaspar.genereg.net/api/v1/matrix/MA0600/versions"</span>
+<span class="co">#&gt;  $ version      : int 2</span>
+<span class="co">#&gt;  $ name         : chr "RFX2"</span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="save-a-matrix-a-file-in-specific-format">Save a Matrix a File in Specific Format<a class="anchor" aria-label="anchor" href="#save-a-matrix-a-file-in-specific-format"></a>
@@ -357,7 +364,27 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 <code class="sourceCode R"><span class="co">## Now that you have a TFFM ID, you can retrieve it</span>
 <span class="va">TFFM0056</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_tffm.html">rba_jaspar_tffm</a></span><span class="op">(</span><span class="st">"TFFM0056.3"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">TFFM0056</span><span class="op">)</span>
-<span class="co">#&gt;  Named list()</span></code></pre></div>
+<span class="co">#&gt; List of 10</span>
+<span class="co">#&gt;  $ matrix_base_id : chr "MA0039"</span>
+<span class="co">#&gt;  $ experiment_name: chr "CistromeDB_33718"</span>
+<span class="co">#&gt;  $ detailed       :List of 5</span>
+<span class="co">#&gt;   ..$ log_p       : num -6854</span>
+<span class="co">#&gt;   ..$ summary_logo: chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_detailed_trained_summary_logo.svg"</span>
+<span class="co">#&gt;   ..$ xml         : chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_detailed_trained.xml"</span>
+<span class="co">#&gt;   ..$ hits        : chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_detailed_trained.hits.svg"</span>
+<span class="co">#&gt;   ..$ dense_logo  : chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_detailed_trained_dense_logo.svg"</span>
+<span class="co">#&gt;  $ matrix_id      : chr "MA0039.4"</span>
+<span class="co">#&gt;  $ base_id        : chr "TFFM0056"</span>
+<span class="co">#&gt;  $ matrix_version : int 4</span>
+<span class="co">#&gt;  $ matrix_url     : chr "https://jaspar.genereg.net/api/v1/matrix/MA0039.4/"</span>
+<span class="co">#&gt;  $ first_order    :List of 5</span>
+<span class="co">#&gt;   ..$ log_p       : num -7420</span>
+<span class="co">#&gt;   ..$ summary_logo: chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_first_order_trained_summary_logo.svg"</span>
+<span class="co">#&gt;   ..$ xml         : chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_first_order_trained.xml"</span>
+<span class="co">#&gt;   ..$ hits        : chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_first_order_trained.hits.svg"</span>
+<span class="co">#&gt;   ..$ dense_logo  : chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_first_order_trained_dense_logo.svg"</span>
+<span class="co">#&gt;  $ version        : int 3</span>
+<span class="co">#&gt;  $ tffm_id        : chr "TFFM0056.3"</span></code></pre></div>
 <hr>
 </div>
 <div class="section level2">
@@ -368,9 +395,9 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 <li>Jaime A Castro-Mondragon, Rafael Riudavets-Puig, Ieva Rauluseviciute, Roza Berhanu Lemma, Laura Turchi, Romain Blanc-Mathieu, Jeremy Lucas, Paul Boddie, Aziz Khan, Nicolás Manosalva Pérez, Oriol Fornes, Tiffany Y Leung, Alejandro Aguirre, Fayrouz Hammal, Daniel Schmelter, Damir Baranasic, Benoit Ballester, Albin Sandelin, Boris Lenhard, Klaas Vandepoele, Wyeth W Wasserman, François Parcy, Anthony Mathelier, JASPAR 2022: the 9th release of the open-access database of transcription factor binding profiles, <em>Nucleic Acids Research</em>, Volume 50, Issue D1, 7 January 2022, Pages D165–D173, <a href="https://doi.org/10.1093/nar/gkab1113" class="external-link uri">https://doi.org/10.1093/nar/gkab1113</a>
 </li>
 </ul>
-<p>To cite rbioapi:</p>
+<p>To cite rbioapi: (<a href="https://academic.oup.com/bioinformatics/article/38/10/2952/6585406?guestAccessKey=1a858639-9e21-4791-8bd9-9f093a4c8b45" title="OUP Bioinformatics, rbioapi: user-friendly R interface to biologic web services’ API" class="external-link">Free access link to the article</a>)</p>
 <ul>
-<li>Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: User-Friendly R Interface to Biologic Web Services’ API, <em>Bioinformatics</em>, 2022;, btac172, <a href="https://doi.org/10.1093/bioinformatics/btac172" class="external-link uri">https://doi.org/10.1093/bioinformatics/btac172</a>
+<li>Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: user-friendly R interface to biologic web services’ API, Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2952–2953, <a href="https://doi.org/10.1093/bioinformatics/btac172" class="external-link uri">https://doi.org/10.1093/bioinformatics/btac172</a>
 </li>
 </ul>
 <hr>
@@ -388,13 +415,13 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 <div class="section level2">
 <h2 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
-<pre><code><span class="co">#&gt; R version 4.1.3 (2022-03-10)</span>
+<pre><code><span class="co">#&gt; R version 4.2.0 (2022-04-22)</span>
 <span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span>
 <span class="co">#&gt; Running under: macOS Big Sur/Monterey 10.16</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Matrix products: default</span>
-<span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.0.dylib</span>
-<span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib</span>
+<span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib</span>
+<span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; locale:</span>
 <span class="co">#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span>
@@ -406,14 +433,14 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 <span class="co">#&gt; [1] rbioapi_0.7.6</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; loaded via a namespace (and not attached):</span>
-<span class="co">#&gt;  [1] knitr_1.38        magrittr_2.0.3    R6_2.5.1          ragg_1.2.2       </span>
-<span class="co">#&gt;  [5] rlang_1.0.2       fastmap_1.1.0     httr_1.4.2        stringr_1.4.0    </span>
-<span class="co">#&gt;  [9] tools_4.1.3       xfun_0.30         cli_3.2.0         jquerylib_0.1.4  </span>
+<span class="co">#&gt;  [1] knitr_1.39        magrittr_2.0.3    R6_2.5.1          ragg_1.2.2       </span>
+<span class="co">#&gt;  [5] rlang_1.0.2       fastmap_1.1.0     httr_1.4.3        stringr_1.4.0    </span>
+<span class="co">#&gt;  [9] tools_4.2.0       xfun_0.31         cli_3.3.0         jquerylib_0.1.4  </span>
 <span class="co">#&gt; [13] htmltools_0.5.2   systemfonts_1.0.4 yaml_2.3.5        digest_0.6.29    </span>
-<span class="co">#&gt; [17] rprojroot_2.0.3   pkgdown_2.0.2     textshaping_0.3.6 purrr_0.3.4      </span>
+<span class="co">#&gt; [17] rprojroot_2.0.3   pkgdown_2.0.3     textshaping_0.3.6 purrr_0.3.4      </span>
 <span class="co">#&gt; [21] sass_0.4.1        fs_1.5.2          curl_4.3.2        memoise_2.0.1    </span>
-<span class="co">#&gt; [25] cachem_1.0.6      evaluate_0.15     rmarkdown_2.13    stringi_1.7.6    </span>
-<span class="co">#&gt; [29] compiler_4.1.3    bslib_0.3.1       desc_1.4.1        jsonlite_1.8.0</span></code></pre>
+<span class="co">#&gt; [25] cachem_1.0.6      evaluate_0.15     rmarkdown_2.14    stringi_1.7.6    </span>
+<span class="co">#&gt; [29] compiler_4.2.0    bslib_0.3.1       desc_1.4.1        jsonlite_1.8.0</span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
@@ -428,7 +455,7 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
     </footer>

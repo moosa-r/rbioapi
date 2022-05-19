@@ -107,7 +107,7 @@
       <img src="../logo.svg" class="logo" alt=""><h1>1: rbioapi: User-Friendly R Interface to Biologic Web Services' API</h1>
                         <h4 data-toc-skip class="author">Moosa Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2022-04-18</h4>
+            <h4 data-toc-skip class="date">2022-05-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/HEAD/vignettes/rbioapi.Rmd" class="external-link"><code>vignettes/rbioapi.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi.Rmd</code></div>
@@ -336,8 +336,8 @@
 <p>rbioapi is an interface between you and other databases and services. Thus, if you have used rbioapi in published research, kindly <strong>in addition to citing rbioapi, <span class="ul"><em>make sure to fully and properly cite the databases/services you have used</em></span></strong>. Suggested citations have been added in the functions’ manuals, under the “references” section; Nevertheless, it is the user’s responsibility to check for proper citations and to properly cite the database/services that they have used.</p>
 <ul>
 <li>
-<p><strong>How to cite rbioapi</strong>:</p>
-<p>Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: User-Friendly R Interface to Biologic Web Services’ API, <em>Bioinformatics</em>, 2022;, btac172, <a href="https://doi.org/10.1093/bioinformatics/btac172" class="external-link uri">https://doi.org/10.1093/bioinformatics/btac172</a></p>
+<p><strong>How to cite rbioapi</strong>: (<a href="https://academic.oup.com/bioinformatics/article/38/10/2952/6585406?guestAccessKey=1a858639-9e21-4791-8bd9-9f093a4c8b45" title="OUP Bioinformatics, rbioapi: user-friendly R interface to biologic web services’ API" class="external-link">Free access link to the article</a>)</p>
+<p>Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: user-friendly R interface to biologic web services’ API, Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2952–2953, <a href="https://doi.org/10.1093/bioinformatics/btac172" class="external-link uri">https://doi.org/10.1093/bioinformatics/btac172</a></p>
 </li>
 <li><p><a href="rbioapi_enrichr.html#Citations" title="How to cite Enrichr">How to cite Enrichr</a>. (See on <a href="https://maayanlab.cloud/Enrichr/help#terms" class="external-link">Enrichr website</a>)</p></li>
 <li><p><a href="rbioapi_jaspar.html#Citations" title="How to cite JASPAR">How to cite JASPAR</a>. (See on <a href="https://jaspar.genereg.net/faq/" class="external-link">JASPAR website</a>)</p></li>
@@ -385,7 +385,7 @@
 <p>We are also adding vignette articles focusing on tasks and workflows:</p>
 <ol style="list-style-type: decimal">
 <li>
-<a href="rbioapi_do_enrich.html" title="Do with rbioapi: Over-Representation (Enrichment) Analysis in R">Do with rbioapi: Over-Representation (Enrichment) Analysis in R</a> <sup>(<a href="https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html" title="rbioapi &amp; UniProt vignette article">documentation site</a>)</sup>
+<a href="rbioapi_do_enrich.html" title="Do with rbioapi: Enrichment (Over-Representation) Analysis in R">Do with rbioapi: Enrichment (Over-Representation) Analysis in R</a> <sup>(<a href="https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html" title="rbioapi &amp; UniProt vignette article">documentation site</a>)</sup>
 </li>
 </ol>
 <hr>
@@ -402,13 +402,13 @@
 <div class="section level2">
 <h2 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
-<pre><code><span class="co">#&gt; R version 4.1.3 (2022-03-10)</span>
+<pre><code><span class="co">#&gt; R version 4.2.0 (2022-04-22)</span>
 <span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span>
 <span class="co">#&gt; Running under: macOS Big Sur/Monterey 10.16</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Matrix products: default</span>
-<span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.0.dylib</span>
-<span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib</span>
+<span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib</span>
+<span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; locale:</span>
 <span class="co">#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span>
@@ -420,14 +420,14 @@
 <span class="co">#&gt; [1] rbioapi_0.7.6</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; loaded via a namespace (and not attached):</span>
-<span class="co">#&gt;  [1] knitr_1.38        magrittr_2.0.3    R6_2.5.1          ragg_1.2.2       </span>
-<span class="co">#&gt;  [5] rlang_1.0.2       fastmap_1.1.0     httr_1.4.2        stringr_1.4.0    </span>
-<span class="co">#&gt;  [9] tools_4.1.3       xfun_0.30         cli_3.2.0         jquerylib_0.1.4  </span>
+<span class="co">#&gt;  [1] knitr_1.39        magrittr_2.0.3    R6_2.5.1          ragg_1.2.2       </span>
+<span class="co">#&gt;  [5] rlang_1.0.2       fastmap_1.1.0     httr_1.4.3        stringr_1.4.0    </span>
+<span class="co">#&gt;  [9] tools_4.2.0       xfun_0.31         cli_3.3.0         jquerylib_0.1.4  </span>
 <span class="co">#&gt; [13] htmltools_0.5.2   systemfonts_1.0.4 yaml_2.3.5        digest_0.6.29    </span>
-<span class="co">#&gt; [17] rprojroot_2.0.3   pkgdown_2.0.2     textshaping_0.3.6 purrr_0.3.4      </span>
+<span class="co">#&gt; [17] rprojroot_2.0.3   pkgdown_2.0.3     textshaping_0.3.6 purrr_0.3.4      </span>
 <span class="co">#&gt; [21] sass_0.4.1        fs_1.5.2          curl_4.3.2        memoise_2.0.1    </span>
-<span class="co">#&gt; [25] cachem_1.0.6      evaluate_0.15     rmarkdown_2.13    stringi_1.7.6    </span>
-<span class="co">#&gt; [29] compiler_4.1.3    bslib_0.3.1       desc_1.4.1        jsonlite_1.8.0</span></code></pre>
+<span class="co">#&gt; [25] cachem_1.0.6      evaluate_0.15     rmarkdown_2.14    stringi_1.7.6    </span>
+<span class="co">#&gt; [29] compiler_4.2.0    bslib_0.3.1       desc_1.4.1        jsonlite_1.8.0</span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
@@ -442,7 +442,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
     </footer>
