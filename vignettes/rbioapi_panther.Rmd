@@ -111,9 +111,9 @@ To cite PANTHER (Please see <http://www.pantherdb.org/publications.jsp#HowToCite
 
 -   Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills, Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER version 16: a revised family classification, tree-based classification tool, enhancer regions and extensive API, *Nucleic Acids Research*, Volume 49, Issue D1, 8 January 2021, Pages D394--D403, <https://doi.org/10.1093/nar/gkaa1106>
 
-To cite rbioapi:
+To cite rbioapi: ([Free access link to the article](https://academic.oup.com/bioinformatics/article/38/10/2952/6585406?guestAccessKey=1a858639-9e21-4791-8bd9-9f093a4c8b45 "OUP Bioinformatics, rbioapi: user-friendly R interface to biologic web services’ API"))
 
--   Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: User-Friendly R Interface to Biologic Web Services' API, *Bioinformatics*, 2022;, btac172, <https://doi.org/10.1093/bioinformatics/btac172>
+-   Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: user-friendly R interface to biologic web services’ API, Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2952–2953, <https://doi.org/10.1093/bioinformatics/btac172>
 
 ------------------------------------------------------------------------
 
