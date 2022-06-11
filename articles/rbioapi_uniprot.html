@@ -93,6 +93,12 @@
      
   </a>
 </li>
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://moosa-r.com/" aria-label="Moosa Rezwani Portfolio Website">
+    <span class="fa fa-solid fa-id-card"></span>
+     
+  </a>
+</li>
       </ul>
 </div>
 
@@ -107,7 +113,7 @@
       <img src="../logo.svg" class="logo" alt=""><h1>2.G: UniProt &amp; rbioapi</h1>
                         <h4 data-toc-skip class="author">Moosa Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2022-05-19</h4>
+            <h4 data-toc-skip class="date">2022-06-11</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/HEAD/vignettes/rbioapi_uniprot.Rmd" class="external-link"><code>vignettes/rbioapi_uniprot.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_uniprot.Rmd</code></div>
@@ -147,7 +153,7 @@
 <span class="co">#&gt;  $ gene            :'data.frame':    1 obs. of  2 variables:</span>
 <span class="co">#&gt;  $ comments        :'data.frame':    12 obs. of  10 variables:</span>
 <span class="co">#&gt;  $ features        :'data.frame':    63 obs. of  9 variables:</span>
-<span class="co">#&gt;  $ dbReferences    :'data.frame':    128 obs. of  4 variables:</span>
+<span class="co">#&gt;  $ dbReferences    :'data.frame':    130 obs. of  4 variables:</span>
 <span class="co">#&gt;  $ keywords        :'data.frame':    13 obs. of  1 variable:</span>
 <span class="co">#&gt;  $ references      :'data.frame':    25 obs. of  3 variables:</span>
 <span class="co">#&gt;  $ sequence        :List of 5</span></code></pre></div>
@@ -170,7 +176,7 @@
 <span class="co">#&gt;   ..$ gene            :List of 1</span>
 <span class="co">#&gt;   ..$ comments        :List of 12</span>
 <span class="co">#&gt;   ..$ features        :List of 63</span>
-<span class="co">#&gt;   ..$ dbReferences    :List of 128</span>
+<span class="co">#&gt;   ..$ dbReferences    :List of 130</span>
 <span class="co">#&gt;   ..$ keywords        :List of 13</span>
 <span class="co">#&gt;   ..$ references      :List of 25</span>
 <span class="co">#&gt;   ..$ sequence        :List of 5</span></code></pre></div>
@@ -231,21 +237,19 @@
 <span class="co">#&gt;  $ Q9H3Q1:List of 14</span>
 <span class="co">#&gt;  $ Q07960:List of 14</span>
 <span class="co">#&gt;  $ Q9Y5S2:List of 14</span>
+<span class="co">#&gt;  $ P60953:List of 14</span>
 <span class="co">#&gt;  $ Q9NRR8:List of 14</span>
-<span class="co">#&gt;  $ Q9NRR3:List of 14</span>
-<span class="co">#&gt;  $ P60953:List of 14</span></code></pre></div>
+<span class="co">#&gt;  $ Q9NRR3:List of 14</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## 3 Search for every proteins with chemokines keyword</span>
 <span class="va">multi_prs3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_uniprot_proteins_search.html">rba_uniprot_proteins_search</a></span><span class="op">(</span>keyword <span class="op">=</span> <span class="st">"chemokines"</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">multi_prs3</span>, <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; List of 14</span>
+<span class="co">#&gt; List of 16</span>
 <span class="co">#&gt;  $ P09703:List of 15</span>
 <span class="co">#&gt;  $ Q6SW98:List of 15</span>
 <span class="co">#&gt;  $ P33854:List of 14</span>
 <span class="co">#&gt;  $ P0DSV7:List of 15</span>
-<span class="co">#&gt;  $ Q98314:List of 15</span>
-<span class="co">#&gt;  $ P07562:List of 14</span>
 <span class="co">#&gt;  $ P19063:List of 14</span>
 <span class="co">#&gt;  $ P16849:List of 15</span>
 <span class="co">#&gt;  $ P69332:List of 15</span>
@@ -253,30 +257,35 @@
 <span class="co">#&gt;  $ P34016:List of 14</span>
 <span class="co">#&gt;  $ P21064:List of 14</span>
 <span class="co">#&gt;  $ P0DSV8:List of 15</span>
-<span class="co">#&gt;  $ F5HBX1:List of 14</span></code></pre></div>
+<span class="co">#&gt;  $ F5HBX1:List of 14</span>
+<span class="co">#&gt;  $ Q98314:List of 15</span>
+<span class="co">#&gt;  $ P69333:List of 15</span>
+<span class="co">#&gt;  $ P07562:List of 14</span>
+<span class="co">#&gt;  $ F5HF62:List of 14</span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## 4 Search for every protein of "SARS-CoV-2" virus in Swiss-Prot</span>
 <span class="va">multi_prs4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_uniprot_proteins_search.html">rba_uniprot_proteins_search</a></span><span class="op">(</span>organism <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>,
                                          reviewed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">multi_prs4</span>, <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; List of 16</span>
-<span class="co">#&gt;  $ P0DTD3:List of 14</span>
-<span class="co">#&gt;  $ P0DTC6:List of 14</span>
-<span class="co">#&gt;  $ P0DTG0:List of 13</span>
-<span class="co">#&gt;  $ P0DTC7:List of 14</span>
-<span class="co">#&gt;  $ P0DTC2:List of 14</span>
-<span class="co">#&gt;  $ P0DTC8:List of 14</span>
-<span class="co">#&gt;  $ P0DTC4:List of 14</span>
-<span class="co">#&gt;  $ P0DTC9:List of 14</span>
-<span class="co">#&gt;  $ P0DTC5:List of 14</span>
-<span class="co">#&gt;  $ P0DTC3:List of 14</span>
-<span class="co">#&gt;  $ P0DTD8:List of 14</span>
-<span class="co">#&gt;  $ P0DTD2:List of 14</span>
-<span class="co">#&gt;  $ P0DTF1:List of 13</span>
-<span class="co">#&gt;  $ P0DTD1:List of 14</span>
-<span class="co">#&gt;  $ P0DTC1:List of 13</span>
-<span class="co">#&gt;  $ P0DTG1:List of 13</span></code></pre></div>
+<span class="co">#&gt; List of 17</span>
+<span class="co">#&gt;  $ P0DTD3    :List of 14</span>
+<span class="co">#&gt;  $ P0DTC6    :List of 14</span>
+<span class="co">#&gt;  $ P0DTG0    :List of 13</span>
+<span class="co">#&gt;  $ P0DTC7    :List of 14</span>
+<span class="co">#&gt;  $ P0DTC2    :List of 14</span>
+<span class="co">#&gt;  $ P0DTC8    :List of 14</span>
+<span class="co">#&gt;  $ P0DTC4    :List of 14</span>
+<span class="co">#&gt;  $ A0A663DJA2:List of 14</span>
+<span class="co">#&gt;  $ P0DTC9    :List of 14</span>
+<span class="co">#&gt;  $ P0DTC5    :List of 14</span>
+<span class="co">#&gt;  $ P0DTC3    :List of 14</span>
+<span class="co">#&gt;  $ P0DTD8    :List of 14</span>
+<span class="co">#&gt;  $ P0DTD2    :List of 14</span>
+<span class="co">#&gt;  $ P0DTF1    :List of 13</span>
+<span class="co">#&gt;  $ P0DTD1    :List of 14</span>
+<span class="co">#&gt;  $ P0DTC1    :List of 13</span>
+<span class="co">#&gt;  $ P0DTG1    :List of 13</span></code></pre></div>
 <div class="section level3">
 <h3 id="functions-with-_search-variant">Functions with <code>*_search</code> variant<a class="anchor" aria-label="anchor" href="#functions-with-_search-variant"></a>
 </h3>
@@ -468,7 +477,7 @@
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Moosa Rezwani.</p>
+<p>Developed by <a href="https://moosa-r.com/" class="external-link">Moosa Rezwani</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
