@@ -10,6 +10,10 @@ template:
   params:
     ganalytics: G-BF9VGFNZ4C
 
+authors:
+  Moosa Rezwani:
+    href: https://moosa-r.com/
+
 navbar:
   bg: secondary
   structure:
@@ -20,7 +24,9 @@ navbar:
     - articles
     - tutorials
     - news
-    right: github
+    right:
+    - github
+    - portfolio
   components:
     home:
       icon: fas fa-home fa-lg
@@ -60,6 +66,10 @@ navbar:
     github:
       icon: fab fa-github fa-lg
       href: https://github.com/moosa-r/rbioapi/
+    portfolio:
+      icon: fa-solid fa-id-card
+      href: https://moosa-r.com/
+      aria-label: Moosa Rezwani Portfolio Website
 
 reference:
 - title: "Helper functions"
