@@ -212,7 +212,7 @@
 #'   }
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' rba_reactome_analysis(input = c("p53", "BRCA1", "cdk2", "Q99835", "CDC42"))
 #' }
 #' \dontrun{
@@ -856,7 +856,7 @@ rba_reactome_analysis_import <- function(input,
 #'   }
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' rba_reactome_analysis_mapping(c("Q8SQ34", "cd40"))
 #' }
 #'

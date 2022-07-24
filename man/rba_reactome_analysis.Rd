@@ -132,7 +132,7 @@ You can supply your table or vector input in numerous formats:\enumerate{
 }
 
 \examples{
-\donttest{
+\dontrun{
 rba_reactome_analysis(input = c("p53", "BRCA1", "cdk2", "Q99835", "CDC42"))
 }
 \dontrun{

@@ -54,7 +54,7 @@ Use this function to map molecule identifiers of different species to
 }
 
 \examples{
-\donttest{
+\dontrun{
 rba_reactome_analysis_mapping(c("Q8SQ34", "cd40"))
 }
 
