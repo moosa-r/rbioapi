@@ -1,4 +1,6 @@
 test_that(".rba_api_call works", {
+  skip_if_not(test_is_online)
+
   rba_api_call_nested <- function(..., timeout_input = 30) {
     timeout <- timeout_input
     rba_api_call_nested2 <- function(...) {

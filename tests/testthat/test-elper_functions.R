@@ -1,10 +1,14 @@
 test_that(".rba_api_check works", {
+  skip_if_not(test_is_online)
+
   expect_true(object = .rba_api_check("https://httpbin.org"))
   expect_regex(obj = .rba_api_check("https://httpbin.org/not_valid_path02091375"),
                pattern = "404")
 })
 
 test_that("rba_connection_test works", {
+  skip_if_not(test_is_online)
+
   expect_named(object = rba_connection_test(print_output = FALSE,
                                             diagnostics = FALSE),
                expected = names(.rba_stg("tests")))

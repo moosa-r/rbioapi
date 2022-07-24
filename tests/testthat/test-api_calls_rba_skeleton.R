@@ -1,4 +1,6 @@
 test_that(".rba_skeleton works", {
+  skip_if_not(test_is_online)
+
   timeout <- 30
   skip_error <- TRUE
   # Output structure is correct

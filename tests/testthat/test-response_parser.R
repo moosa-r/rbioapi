@@ -1,4 +1,6 @@
 test_that(".rba_response_parser works", {
+  skip_if_not(test_is_online)
+
   resp <- httr::GET(url = "https://httpbin.org/json",
                     httr::accept("application/json"))
 
@@ -14,6 +16,8 @@ test_that(".rba_response_parser works", {
 })
 
 test_that(".rba_error_parser works", {
+  skip_if_not(test_is_online)
+
   resp <- httr::GET(url = "https://reactome.org/ContentService/data/complex/hkbkmhbkm/subunits",
                     httr::accept("application/json"))
   # Basics functionality

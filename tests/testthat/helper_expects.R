@@ -1,3 +1,8 @@
+test_is_online <- try(httr::status_code(httr::HEAD("https://httpbin.org",
+                                                   httr::timeout(10))),
+                      silent = TRUE) == 200
+
+
 expect_list_classes <- function(obj, classes) {
   stopifnot(inherits(obj, "list"))
 

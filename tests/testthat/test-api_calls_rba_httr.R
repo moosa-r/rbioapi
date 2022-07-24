@@ -28,6 +28,8 @@ test_that(".rba_httr return output currectly", {
 })
 
 test_that(".rba_httr adds respects global options:", {
+  skip_if_not(test_is_online)
+
   diagnostics = TRUE
   progress = TRUE
   timeout = 9999
@@ -45,6 +47,8 @@ test_that(".rba_httr adds respects global options:", {
 })
 
 test_that(".rba_httr handles file parser vs object oarsers senario", {
+  skip_if_not(test_is_online)
+
   ### Exported function uses a fixed accept and parser
   output_file <- .rba_httr(httr = "get",
                            url = "https://httpbin.org",
