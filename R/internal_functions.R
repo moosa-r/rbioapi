@@ -659,9 +659,31 @@
 
   ## 3 Return the output
   if (inherits(response, "response")) {
+    # There is a HTTP response, not an error message
     if (!is.null(parser_input)) {
-      return(.rba_response_parser(response, parser_input))
+      # A parser is provided for the response
+      parsed_response <- try(.rba_response_parser(response = response,
+                                                  parsers = parser_input),
+                             silent = TRUE)
+
+      if (!inherits(parsed_response, "try-error")) {
+        return(parsed_response)
+      } else {
+        parse_error_msg <- paste("Internal Error:",
+                                 "Failed to parse the server's response.",
+                                 "This is probably because the server has changed the response format.",
+                                 "Please report this bug to us:",
+                                 "\n",
+                                 parsed_response,
+                                 sep = " ")
+        if (isTRUE(skip_error)) {
+          return(parse_error_msg)
+        } else {
+          stop(parse_error_msg, call. = TRUE)
+        }
+      }
     } else {
+      # No parser is provided for the response
       return(invisible(NULL))
     }
   } else {
