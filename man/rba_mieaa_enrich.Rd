@@ -95,8 +95,8 @@ A data frame with your enrichment analysis results.
 }
 \description{
 This function is a wrapper for the multiple function calls necessary to
-  enrich a given miRNA list using miEAA. see details section
-  for more information.
+  perform enrichment analysis on a given miRNA list using miEAA. see details
+  section for more information.
 }
 \details{
 This function will call other rba_mieaa_*** functions with the following

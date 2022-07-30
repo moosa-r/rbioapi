@@ -30,8 +30,8 @@ After your submitted enrichment analysis request has finished (check
 }
 \details{
 Note that using \code{\link{rba_mieaa_enrich}} is a more convenient way to
-  automatically perform this and other required function calls to enrich
-  your input miRNA-set using miEAA.
+  automatically perform this and other required function calls to
+  perform enrichment analysis on your input miRNA-set using miEAA.
 }
 \section{Corresponding API Resources}{
 

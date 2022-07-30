@@ -29,8 +29,8 @@ Prior to perform enrichment, Enrichr requires you to upload your gene-list
 }
 \details{
 Note that using \code{\link{rba_enrichr}} is a more convenient way to
-   automatically perform this and other required function calls to enrich
-   your input gene-set.
+   automatically perform this and other required function calls to
+   perform enrichment analysis on your input gene-set.
 }
 \section{Corresponding API Resources}{
 

@@ -72,7 +72,7 @@ if (is.data.frame(enrichr_libs)) {
 
 # Enrichment analysis using Enrichr {#enrichment-analysis-using-enrichr .heading2}
 
-To enrich your gene-set with Enrichr using rbioapi, you can take two approaches. we will begin with the simple one.
+To perform enrichment analysis on your gene-set with Enrichr using rbioapi, you can take two approaches. we will begin with the simple one.
 
 ## Approach 1: Using the Wrapper function {#approach-1-using-the-wrapper-function .heading3}
 

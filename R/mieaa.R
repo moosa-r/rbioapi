@@ -386,8 +386,8 @@ rba_mieaa_convert_type <- function(mirna,
 #'   see "arguments" section for more information.
 #'
 #' Note that using \code{\link{rba_mieaa_enrich}} is a more convenient way to
-#'   automatically perform this and other required function calls to enrich
-#'   your input miRNA-set using miEAA.
+#'   automatically perform this and other required function calls to
+#'   perform enrichment analysis on your input miRNA-set using miEAA.
 #'
 #' @param test_set a character vector with your mature or precursor miRBase
 #'   miRNA accessions. Note that \enumerate{
@@ -596,8 +596,8 @@ rba_mieaa_enrich_submit <- function(test_set,
 #'   retrieve the results using \code{\link{rba_mieaa_enrich_results}}.
 #'
 #' Note that using \code{\link{rba_mieaa_enrich}} is a more convenient way to
-#'   automatically perform this and other required function calls to enrich
-#'   your input miRNA-set using miEAA.
+#'   automatically perform this and other required function calls to
+#'   perform enrichment analysis on your input miRNA-set using miEAA.
 #'
 #' @param job_id The job-id (a character string) of a submitted enrichment
 #'   analysis.
@@ -665,8 +665,8 @@ rba_mieaa_enrich_status <- function(job_id, ...) {
 #'   using this function.
 #'
 #' Note that using \code{\link{rba_mieaa_enrich}} is a more convenient way to
-#'   automatically perform this and other required function calls to enrich
-#'   your input miRNA-set using miEAA.
+#'   automatically perform this and other required function calls to
+#'   perform enrichment analysis on your input miRNA-set using miEAA.
 #'
 #' @param job_id The job-id (a character string) of a submitted enrichment
 #'   analysis.
@@ -766,8 +766,8 @@ rba_mieaa_enrich_results <- function(job_id,
 #' A One-step Wrapper for miRNA Enrichment Using miEAA
 #'
 #' This function is a wrapper for the multiple function calls necessary to
-#'   enrich a given miRNA list using miEAA. see details section
-#'   for more information.
+#'   perform enrichment analysis on a given miRNA list using miEAA. see details
+#'   section for more information.
 #'
 #' This function will call other rba_mieaa_*** functions with the following
 #'   order:

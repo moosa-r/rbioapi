@@ -61,9 +61,9 @@ Enrichment (Over-Representation) analysis is commonly performed when one's analy
 
 In short, to perform such analysis, in addition to some algorithms, two data are required:
 
-1\) A gene list which is derived from your analysis.
+1) A gene list which is derived from your analysis.
 
-2\) Gene sets, where genes are grouped based on a shared property or concept (such as pathway, role in diseases, physical location, etc.).
+2) Gene sets, where genes are grouped based on a shared property or concept (such as pathway, role in diseases, physical location, etc.).
 
 With over-representation analysis, you can compare your gene list to find if the member of any gene set are over-represented, meaning that they are present in your list in a manner that can not be explained by chance alone.
 

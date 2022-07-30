@@ -43,7 +43,7 @@ The miRNA Enrichment Analysis and Annotation Tool ([miEAA](https://ccb-compute2.
 
 # First, find **enrichment categories**
 
-Before Enriching miRNA set, note that based on your input **miRNA type** (either all mature or precursor, not a mixture of both!) and the **species**, there will be different [sets](https://ccb-compute2.cs.uni-saarland.de/mieaa2/downloads/ "miEEA integrated data sets") of supported **enrichment categories.**
+Before Performing enrichment analysis on a miRNA set, note that based on your input **miRNA type** (either all mature or precursor, not a mixture of both!) and the **species**, there will be different [sets](https://ccb-compute2.cs.uni-saarland.de/mieaa2/downloads/ "miEEA integrated data sets") of supported **enrichment categories.**
 
 Thus, it is recommended to retrieve a list of possible enrichment categories that you may use:
 

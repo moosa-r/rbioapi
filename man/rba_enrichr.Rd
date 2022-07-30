@@ -50,8 +50,8 @@ A list containing data frames of the enrichment results of your
 }
 \description{
 This function is an easy-to-use wrapper for the multiple function calls
-  necessary to enrich a given gene-list using Enrichr. see details section
-  for more information.
+  necessary to perform enrichment analysis on a given gene-list using Enrichr.
+  see details section for more information.
 }
 \details{
 This function will call other rba_enrichr_*** functions with the following
@@ -61,8 +61,8 @@ This function will call other rba_enrichr_*** functions with the following
     of available libraries in Enrichr.
   \item Call \code{\link{rba_enrichr_add_list}} to upload your gene-list
     and obtain a 'user list ID'.
-  \item Call \code{\link{rba_enrichr_enrich}} to enrich the gene-list
-    against one or multiple Enrichr libraries
+  \item Call \code{\link{rba_enrichr_enrich}} to perform enrichment analysis
+    on the gene-list against one or multiple Enrichr libraries
   }
 }
 \section{Corresponding API Resources}{
