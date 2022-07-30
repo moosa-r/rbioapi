@@ -35,7 +35,7 @@ rba_options(timeout = 600, skip_error = TRUE)
 
 ------------------------------------------------------------------------
 
-# Introduction {#introduction .heading2}
+## Introduction {#introduction .heading2}
 
 STRING is a comprehensive database of protein-protein interactions (PPI) that in version 11.0, covers 24,584,628 proteins from 5,090 organisms. Directly quoting from their paper:
 
@@ -45,13 +45,13 @@ STRING is a comprehensive database of protein-protein interactions (PPI) that in
 
 ------------------------------------------------------------------------
 
-# Note about species argument {#note-about-species-argument .heading2}
+## Note about species argument {#note-about-species-argument .heading2}
 
 You can find an argument named "species" in every rbioapi STRING function. Providing the species argument is not mandatory, but it has been recommended in STRING API's documentation to always specify the species. An exception is when your input proteins' vector length is more than 100; In such cases, the species argument is required. Otherwise, calling the function without providing the species will produce an ERROR.
 
 ------------------------------------------------------------------------
 
-# Map your IDs to STRING IDs {#map-your-ids-to-string-ids .heading2}
+## Map your IDs to STRING IDs {#map-your-ids-to-string-ids .heading2}
 
 Although STRING API resources will handle and recognize a variety of identifiers, it is recommended that you first map your IDs to STRING IDs before using them in other rbioapi STRING functions.
 
@@ -81,7 +81,7 @@ if (is.data.frame(proteins_mapped)) {
 
 ------------------------------------------------------------------------
 
-# Get interaction network of a protein set {#get-interaction-network-of-a-protein-set .heading2}
+## Get interaction network of a protein set {#get-interaction-network-of-a-protein-set .heading2}
 
 You can retrieve a list of interactions that the proteins in your set have with each other along with the STRING annotations of each interaction. You may filter the results by using required_score and network_type arguments.
 
@@ -108,7 +108,7 @@ if (is.data.frame(int_net)) {
 
 ------------------------------------------------------------------------
 
-# Get interaction partners of a protein set {#get-interaction-partners-of-a-protein-set .heading2}
+## Get interaction partners of a protein set {#get-interaction-partners-of-a-protein-set .heading2}
 
 In the last example, we only obtained the interaction which our proteins have among themselves, what if we wanted to get a list of every protein which interact with our protein(s)?
 
@@ -136,7 +136,7 @@ if (is.data.frame(int_partners)) {
 
 ------------------------------------------------------------------------
 
-# Get network image of a protein set {#get-network-image-of-a-protein-set .heading2}
+## Get network image of a protein set {#get-network-image-of-a-protein-set .heading2}
 
 Let's go back to the interaction network. As you must have seen in the STRING webpages, STRING plots the interaction network of your proteins with many customizations available. You can also do that with STRING API services. `rba_string_network_image` function is very flexible and you have a variety of options; see the function's manual.
 
@@ -180,11 +180,11 @@ if (is.array(graph_2)) {
 
 ------------------------------------------------------------------------
 
-# Enrichment using STRING {#enrichment-using-string .heading2}
+## Enrichment using STRING {#enrichment-using-string .heading2}
 
 STRING let you perform two types of enrichments. See [STRING's paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3531103/ "STRING v9.1: protein-protein interaction networks, with increased coverage and integration") for more information.
 
-## Functional enrichment {#functional-enrichment .heading3}
+### Functional enrichment {#functional-enrichment .heading3}
 
 The first type is the conventional type, which statistically tests your supplied gene sets against some sets of annotation. Currently, STRING supports Gene Ontology, KEGG pathways, UniProt Keywords, PubMed publications, Pfam domains, InterPro domains, and SMART domains. ([source](https://version11.string-db.org/help/api/#getting-functional-enrichment "STRING API - Getting functional enrichment")).
 
@@ -216,7 +216,7 @@ if (utils::hasName(enriched, "DISEASES") && is.data.frame(enriched$DISEASES)) {
 
 **Please Note:** Other services supported by rbioapi also provide Over-representation analysis tools. Please see the vignette article [Do with rbioapi: Over-Representation (Enrichment) Analysis in R](rbioapi_do_enrich.html) ([link to the documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html)) for an in-depth review.
 
-## Protein-protein interaction enrichment {#protein-protein-interaction-enrichment .heading3}
+### Protein-protein interaction enrichment {#protein-protein-interaction-enrichment .heading3}
 
 Even without incorporating annotation data, STRING can calculate if your proteins are functionally related. Briefly, STRING accomplishes this by comparing the interactions' distribution in your protein-set to the interactions' distribution in the proteome. Read [STRING's paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3531103/#__sec4title "STRING v9.1: protein-protein interaction networks, with increased coverage and integration") for more information.
 
@@ -227,7 +227,7 @@ rba_string_enrichment_ppi(ids = proteins_mapped,
 
 ------------------------------------------------------------------------
 
-# Get functional annotations {#get-functional-annotations .heading2}
+## Get functional annotations {#get-functional-annotations .heading2}
 
 As you have seen above, STRING maps the proteins to multiple annotation sources. You can obtain any annotation associated with your proteins without performing enrichment analysis and retrieving just the significant portion.
 
@@ -240,7 +240,7 @@ annotations <- rba_string_annotations(ids = "9606.ENSP00000269305",
 
 ------------------------------------------------------------------------
 
-# See also in Functions' manuals {#see-also-in-functions-manuals .heading2}
+## See also in Functions' manuals {#see-also-in-functions-manuals .heading2}
 
 Some rbioapi STRING functions were not covered in this vignette, please check their manuals:
 
@@ -252,7 +252,7 @@ Some rbioapi STRING functions were not covered in this vignette, please check th
 
 ------------------------------------------------------------------------
 
-# How to Cite? {#Citations}
+## How to Cite? {#citations .heading2}
 
 To cite STRING (Please see <https://string-db.org/cgi/about?footer_active_subpage=references>):
 
@@ -260,11 +260,11 @@ To cite STRING (Please see <https://string-db.org/cgi/about?footer_active_subpag
 
 To cite rbioapi: ([Free access link to the article](https://academic.oup.com/bioinformatics/article/38/10/2952/6585406?guestAccessKey=1a858639-9e21-4791-8bd9-9f093a4c8b45 "OUP Bioinformatics, rbioapi: user-friendly R interface to biologic web services’ API"))
 
--   Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: user-friendly R interface to biologic web services’ API, Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2952–2953, <https://doi.org/10.1093/bioinformatics/btac172>
+-   Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: user-friendly R interface to biologic web services' API, Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2952--2953, <https://doi.org/10.1093/bioinformatics/btac172>
 
 ------------------------------------------------------------------------
 
-# Links {.heading2}
+# Links {#links .heading2}
 
 -   [This article in rbioapi documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_string.html "2.E: STRING & rbioapi")
 

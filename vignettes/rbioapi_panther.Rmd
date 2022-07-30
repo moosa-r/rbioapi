@@ -35,7 +35,7 @@ rba_options(timeout = 600, skip_error = TRUE)
 
 ------------------------------------------------------------------------
 
-# Introduction {#introduction .heading2}
+## Introduction {#introduction .heading2}
 
 Directly quoting the the paper published by [PANTHER](http://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)") (Protein Analysis THrough Evolutionary Relationships) authors:
 
@@ -47,7 +47,7 @@ The available tools in PANTHER's **RESTful API services** can be divided into 3 
 
 ------------------------------------------------------------------------
 
-# Map genes {#map-genes .heading2}
+## Map genes {#map-genes .heading2}
 
 -   `rba_panther_mapping()`: map your gene-set to PANTHER database and retrieve attributes and annotations associated with your genes
 
@@ -57,7 +57,7 @@ The available tools in PANTHER's **RESTful API services** can be divided into 3 
 
 ------------------------------------------------------------------------
 
-# Get information {#get-information .heading2}
+## Get information {#get-information .heading2}
 
 -   `rba_panther_info`(): Retrieve a list of PANTHER's supported organisms, datasets, families, or pathways
 
@@ -65,9 +65,9 @@ The available tools in PANTHER's **RESTful API services** can be divided into 3 
 
 ------------------------------------------------------------------------
 
-# Research tools {#research-tools .heading2}
+## Research tools {#research-tools .heading2}
 
-## Gene List Analysis {#gene-list-analysis .heading3}
+### Gene List Analysis {#gene-list-analysis .heading3}
 
 `rba_panther_enrich()` is an equivalent to [Gene List analysis tool's webpage.](http://www.pantherdb.org/index.jsp "PANTHER Gene List Analysis"). Here is a usage example:
 
@@ -99,13 +99,13 @@ if (utils::hasName(enriched, "result") && is.data.frame(enriched$result)) {
 
 **Please Note:** Other services supported by rbioapi also provide Over-representation analysis tools. Please see the vignette article [Do with rbioapi: Over-Representation (Enrichment) Analysis in R](rbioapi_do_enrich.html) ([link to the documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html)) for an in-depth review.
 
-## Tree grafter {#tree-grafter .heading2}
+### Tree grafter {#tree-grafter .heading3}
 
 `rba_panther_tree_grafter()` is an equivalent to the "[Graft sequence into PANTHER library of trees](http://www.pantherdb.org/tools/sequenceSearchForm.jsp)" tool.
 
 ------------------------------------------------------------------------
 
-# How to Cite? {#Citations}
+## How to Cite? {#citations .heading2}
 
 To cite PANTHER (Please see <http://www.pantherdb.org/publications.jsp#HowToCitePANTHER>):
 
@@ -113,11 +113,11 @@ To cite PANTHER (Please see <http://www.pantherdb.org/publications.jsp#HowToCite
 
 To cite rbioapi: ([Free access link to the article](https://academic.oup.com/bioinformatics/article/38/10/2952/6585406?guestAccessKey=1a858639-9e21-4791-8bd9-9f093a4c8b45 "OUP Bioinformatics, rbioapi: user-friendly R interface to biologic web services’ API"))
 
--   Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: user-friendly R interface to biologic web services’ API, Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2952–2953, <https://doi.org/10.1093/bioinformatics/btac172>
+-   Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: user-friendly R interface to biologic web services' API, Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2952--2953, <https://doi.org/10.1093/bioinformatics/btac172>
 
 ------------------------------------------------------------------------
 
-# Links {.heading2}
+## Links {#links .heading2}
 
 -   [This article in rbioapi documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_panther.html "2.C: PANTHER & rbioapi")
 
@@ -127,7 +127,7 @@ To cite rbioapi: ([Free access link to the article](https://academic.oup.com/bio
 
 ------------------------------------------------------------------------
 
-# Session info {#session-info .heading2}
+## Session info {#session-info .heading2}
 
 ```{r sessionInfo, echo=FALSE}
 sessionInfo()

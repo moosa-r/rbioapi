@@ -1,7 +1,7 @@
 rbioapi: User-Friendly R Interface to Biologic Web Services’ API
 ================
 Moosa Rezwani
-2022-05-19
+2022-07-30
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -14,7 +14,7 @@ Moosa Rezwani
 
 <!-- badges: end -->
 
-# What does rbioapi do?
+## What does rbioapi do?
 
 Currently fully supports **Enrichr**, **JASPAR**, **miEAA**,
 **PANTHER**, **Reactome**, **STRING**, and **UniProt**!
@@ -32,7 +32,7 @@ will be added periodically. Feel free to
 [suggest](https://github.com/moosa-r/rbioapi/issues "Issue section in rbioapi GitHub repository")
 any databases or services you often use.
 
-# What is Supported by rbioapi?
+## What is Supported by rbioapi?
 
 rbioapi is dedicated to **Biological or Medical** databases and web
 services. Currently, rbioapi supports and covers every API resources in
@@ -81,7 +81,7 @@ an issue on our GitHub
 [repository](https://github.com/moosa-r/ "rbioapi GitHub repositry"). I
 will appreciate any suggestions.
 
-# How to install?
+## How to install?
 
 You can install the stable release version of
 [rbioapi](rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API")
@@ -103,7 +103,7 @@ install.packages("remotes")
 remotes::install_github("moosa-r/rbioapi")
 ```
 
-# Design philosophy of rbioapi
+## Design philosophy of rbioapi
 
 -   The structure of functions should be consistent across all
     data-bases and services. This means that, using functions to
@@ -133,7 +133,7 @@ remotes::install_github("moosa-r/rbioapi")
     addition to the main vignette article, each supported database or
     web service should have its own vignette articles.
 
-# Naming conventions
+## Naming conventions
 
 To make the namespace more organized, functions has been named with the
 following pattern:
@@ -195,7 +195,7 @@ rba_options()
 
 Now, let us consider the ways in which we can alter the settings:
 
-## Change the option globally
+### Change the option globally
 
 Changing an option globally means that for the rest of your R session,
 any rbioapi function will respect the changed option. To do this, use
@@ -210,7 +210,7 @@ rba_options(verbose = FALSE)
 ## From now on, the package will be quiet.
 ```
 
-## Change the option only within a function call
+### Change the option only within a function call
 
 You can pass additional arguments to any rbioapi function using
 “ellipsis” (the familiar `…` or dot dot dot!). Meaning that you can call
@@ -234,7 +234,7 @@ x <- rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC", diagnostics
 x <- rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC")
 ```
 
-# Connection test
+## Connection test
 
 The second exception in functions’ naming schema is
 `rba_connection_test()`. Run this simple function to check your
@@ -267,7 +267,7 @@ rba_connection_test(print_output = TRUE)
 #> +++ The server is responding.
 ```
 
-# Iterating over paginated results
+## Iterating over paginated results
 
 Some API resources will return paginated responses. This is particularly
 common in API resources which return potentially very large responses.
@@ -302,7 +302,7 @@ str(adeno, max.level = 2)
 #>  $ pageInfo  :List of 3
 #>   ..$ resultsPerPage: int 200
 #>   ..$ currentPage   : int 1
-#>   ..$ totalRecords  : int 951
+#>   ..$ totalRecords  : int 955
 ```
 
 As you can see, the server has returned the first page of the response,
@@ -357,39 +357,39 @@ used.
     <https://doi.org/10.1093/bioinformatics/btac172>
 
 -   [How to cite
-    Enrichr](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html#Citations "How to cite Enrichr").
+    Enrichr](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html#citations "How to cite Enrichr").
     (See on [Enrichr
     website](https://maayanlab.cloud/Enrichr/help#terms))
 
 -   [How to cite
-    JASPAR](https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html#Citations "How to cite JASPAR").
+    JASPAR](https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html#citations "How to cite JASPAR").
     (See on [JASPAR website](https://jaspar.genereg.net/faq/))
 
 -   [How to cite
-    miEAA](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html#Citations "How to cite miEAA").
+    miEAA](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html#citations "How to cite miEAA").
     (See on [miEAA
     website](https://ccb-compute2.cs.uni-saarland.de/mieaa2))
 
 -   [How to cite
-    PANTHER](https://rbioapi.moosa-r.com/articles/rbioapi_panther.html#Citations "How to cite PANTHER").
+    PANTHER](https://rbioapi.moosa-r.com/articles/rbioapi_panther.html#citations "How to cite PANTHER").
     (See on [PANTHER
     website](http://www.pantherdb.org/publications.jsp#HowToCitePANTHER))
 
 -   [How to cite
-    Reactome](https://rbioapi.moosa-r.com/articles/rbioapi_reactome.html#Citations "How to cite Reactome").
+    Reactome](https://rbioapi.moosa-r.com/articles/rbioapi_reactome.html#citations "How to cite Reactome").
     (See on [Reactome website](https://reactome.org/cite))
 
 -   [How to cite
-    STRING](https://rbioapi.moosa-r.com/articles/rbioapi_string.html#Citations "How to cite STRING").
+    STRING](https://rbioapi.moosa-r.com/articles/rbioapi_string.html#citations "How to cite STRING").
     (See on [STRING
     website](https://string-db.org/cgi/about?footer_active_subpage=references))
 
 -   [How to cite
-    UniProt](https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html#Citations "How to cite UniProt").
+    UniProt](https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html#citations "How to cite UniProt").
     (See on [UniProt
     website](https://www.uniprot.org/help/publications))
 
-# Code of conduct
+## Code of conduct
 
 When using rbioapi, remember that you are querying data from web
 services; So please be considerate. Never flood a server with requests,
@@ -401,7 +401,7 @@ sending more requests than what the server interprets as normal
 behavior, so please seek other methods or use `Sys.sleep()` between your
 requests.
 
-# What next?
+## What next?
 
 Each supported service has a dedicated vignette article. Make sure to
 check those too.
@@ -419,7 +419,7 @@ We are also adding vignette articles focusing on tasks and workflows:
 1.  [Do with rbioapi: Enrichment (Over-Representation) Analysis in
     R](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html "Do with rbioapi: Enrichment (Over-Representation) Analysis in R")
 
-# Links
+## Links
 
 -   [This article in rbioapi documentation
     site](https://rbioapi.moosa-r.com/articles/rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API")
@@ -429,29 +429,28 @@ We are also adding vignette articles focusing on tasks and workflows:
 
 ## Session info
 
-    #> R version 4.1.2 (2021-11-01)
+    #> R version 4.2.1 (2022-06-23 ucrt)
     #> Platform: x86_64-w64-mingw32/x64 (64-bit)
     #> Running under: Windows 10 x64 (build 19044)
     #> 
     #> Matrix products: default
     #> 
     #> locale:
-    #> [1] LC_COLLATE=English_United States.1252 
-    #> [2] LC_CTYPE=English_United States.1252   
-    #> [3] LC_MONETARY=English_United States.1252
+    #> [1] LC_COLLATE=English_United States.utf8 
+    #> [2] LC_CTYPE=English_United States.utf8   
+    #> [3] LC_MONETARY=English_United States.utf8
     #> [4] LC_NUMERIC=C                          
-    #> [5] LC_TIME=English_United States.1252    
-    #> system code page: 1256
+    #> [5] LC_TIME=English_United States.utf8    
     #> 
     #> attached base packages:
     #> [1] stats     graphics  grDevices utils     datasets  methods   base     
     #> 
     #> other attached packages:
-    #> [1] rbioapi_0.7.6
+    #> [1] rbioapi_0.7.7
     #> 
     #> loaded via a namespace (and not attached):
-    #>  [1] digest_0.6.29   R6_2.5.1        jsonlite_1.8.0  magrittr_2.0.2 
-    #>  [5] evaluate_0.15   httr_1.4.2      rlang_1.0.2     stringi_1.7.6  
-    #>  [9] cli_3.2.0       curl_4.3.2      rmarkdown_2.13  tools_4.1.2    
-    #> [13] stringr_1.4.0   xfun_0.30       yaml_2.3.5      fastmap_1.1.0  
-    #> [17] compiler_4.1.2  htmltools_0.5.2 knitr_1.37
+    #>  [1] digest_0.6.29   R6_2.5.1        jsonlite_1.8.0  magrittr_2.0.3 
+    #>  [5] evaluate_0.15   httr_1.4.3      rlang_1.0.4     stringi_1.7.8  
+    #>  [9] cli_3.3.0       curl_4.3.2      rstudioapi_0.13 rmarkdown_2.14 
+    #> [13] tools_4.2.1     stringr_1.4.0   xfun_0.31       yaml_2.3.5     
+    #> [17] fastmap_1.1.0   compiler_4.2.1  htmltools_0.5.3 knitr_1.39

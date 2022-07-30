@@ -181,7 +181,7 @@ rba_connection_test(print_output = TRUE)
 
 ------------------------------------------------------------------------
 
-# Iterating over paginated results {#multi-pages}
+# Iterating over paginated results {#multi-pages .heading2}
 
 Some API resources will return paginated responses. This is particularly common in API resources which return potentially very large responses. In rbioapi, for these cases, there are arguments such as "page_number" (with default value of 1) and -if the API resource allows- "page_size". To save your time, you may use `rba_pages()`. This function will iterate over the pages you have specified.
 
@@ -212,27 +212,27 @@ As you can see, what we have done was:
 
 ------------------------------------------------------------------------
 
-# How and what to cite? {#how-to-cite}
+# How and what to cite? {#how-to-cite .heading2}
 
-rbioapi is an interface between you and other databases and services. Thus, if you have used rbioapi in published research, kindly **in addition to citing rbioapi, [*make sure to fully and properly cite the databases/services you have used*]{.ul}**. Suggested citations have been added in the functions' manuals, under the "references" section; Nevertheless, it is the user's responsibility to check for proper citations and to properly cite the database/services that they have used.
+rbioapi is an interface between you and other databases and services. Thus, if you have used rbioapi in published research, kindly **in addition to citing rbioapi, [*make sure to fully and properly cite the databases/services you have used*]{.underline}**. Suggested citations have been added in the functions' manuals, under the "references" section; Nevertheless, it is the user's responsibility to check for proper citations and to properly cite the database/services that they have used.
 
 -   **How to cite rbioapi**: ([Free access link to the article](https://academic.oup.com/bioinformatics/article/38/10/2952/6585406?guestAccessKey=1a858639-9e21-4791-8bd9-9f093a4c8b45 "OUP Bioinformatics, rbioapi: user-friendly R interface to biologic web services’ API"))
 
-    Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: user-friendly R interface to biologic web services’ API, Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2952–2953, <https://doi.org/10.1093/bioinformatics/btac172>
-    
--   [How to cite Enrichr](rbioapi_enrichr.html#Citations "How to cite Enrichr"). (See on [Enrichr website](https://maayanlab.cloud/Enrichr/help#terms))
+    Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: user-friendly R interface to biologic web services' API, Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2952--2953, <https://doi.org/10.1093/bioinformatics/btac172>
 
--   [How to cite JASPAR](rbioapi_jaspar.html#Citations "How to cite JASPAR"). (See on [JASPAR website](https://jaspar.genereg.net/faq/))
+-   [How to cite Enrichr](rbioapi_enrichr.html#citations "How to cite Enrichr"). (See on [Enrichr website](https://maayanlab.cloud/Enrichr/help#terms))
 
--   [How to cite miEAA](rbioapi_mieaa.html#Citations "How to cite miEAA"). (See on [miEAA website](https://ccb-compute2.cs.uni-saarland.de/mieaa2))
+-   [How to cite JASPAR](rbioapi_jaspar.html#citations "How to cite JASPAR"). (See on [JASPAR website](https://jaspar.genereg.net/faq/))
 
--   [How to cite PANTHER](rbioapi_panther.html#Citations "How to cite PANTHER"). (See on [PANTHER website](http://www.pantherdb.org/publications.jsp#HowToCitePANTHER))
+-   [How to cite miEAA](rbioapi_mieaa.html#citations "How to cite miEAA"). (See on [miEAA website](https://ccb-compute2.cs.uni-saarland.de/mieaa2))
 
--   [How to cite Reactome](rbioapi_reactome.html#Citations "How to cite Reactome"). (See on [Reactome website](https://reactome.org/cite))
+-   [How to cite PANTHER](rbioapi_panther.html#citations "How to cite PANTHER"). (See on [PANTHER website](http://www.pantherdb.org/publications.jsp#HowToCitePANTHER))
 
--   [How to cite STRING](rbioapi_string.html#Citations "How to cite STRING"). (See on [STRING website](https://string-db.org/cgi/about?footer_active_subpage=references))
+-   [How to cite Reactome](rbioapi_reactome.html#citations "How to cite Reactome"). (See on [Reactome website](https://reactome.org/cite))
 
--   [How to cite UniProt](rbioapi_uniprot.html#Citations "How to cite UniProt"). (See on [UniProt website](https://www.uniprot.org/help/publications))
+-   [How to cite STRING](rbioapi_string.html#citations "How to cite STRING"). (See on [STRING website](https://string-db.org/cgi/about?footer_active_subpage=references))
+
+-   [How to cite UniProt](rbioapi_uniprot.html#citations "How to cite UniProt"). (See on [UniProt website](https://www.uniprot.org/help/publications))
 
 ------------------------------------------------------------------------
 

@@ -35,7 +35,7 @@ rba_options(timeout = 600, skip_error = TRUE)
 
 ------------------------------------------------------------------------
 
-# Introduction {#introduction .heading2}
+## Introduction {#introduction .heading2}
 
 Directly quoting from [UniProt](https://www.uniprot.org "Universal Protein Resource (UniProt)"):
 
@@ -45,7 +45,7 @@ Directly quoting from [UniProt](https://www.uniprot.org "Universal Protein Resou
 
 ------------------------------------------------------------------------
 
-# Search vs Retrieve {#note-about-species-argument .heading2}
+## Search vs Retrieve {#search-vs-retrieve .heading2}
 
 Most of rbioapi UniProt functions have two variants. one to retrieve data using a proper accession, and the second one (which have a `_search` suffix) is to search using any combination of arguments. We first demonstrate this using an example, then provide a list of such functions in rbioapi.
 
@@ -112,7 +112,7 @@ multi_prs4 <- rba_uniprot_proteins_search(organism = "SARS-CoV-2",
 str(multi_prs4, 1)
 ```
 
-## Functions with `*_search` variant
+## Functions with `*_search` variant {#functions-with-star-search-variant .heading2}
 
 The search variants are not limited to the above. Here is a list of the function that have both a retrieve and search variants. See their manuals for detailed guides and examples.
 
@@ -138,13 +138,13 @@ The search variants are not limited to the above. Here is a list of the function
 
 ------------------------------------------------------------------------
 
-# UniProt functions categories
+## UniProt functions categories {#uniprot-functions-categories .heading2}
 
 The UniProt API endpoints are organized into 5 group. Here are those categories and rbioapi functions that correspond to each one. See the functions' manuals for more details.
 
-## Proteins
+### Proteins {#proteins .heading3}
 
-### Proteins:
+#### Proteins: {#proteins-proteins .heading4}
 
 -   `rba_uniprot_proteins()`
 
@@ -152,43 +152,43 @@ The UniProt API endpoints are organized into 5 group. Here are those categories 
 
 -   `rba_uniprot_proteins_crossref()`
 
-### Features
+#### Features {#proteins-features .heading4}
 
 -   `rba_uniprot_features()`
 
 -   `rba_uniprot_features_search()`
 
-### Variation
+#### Variation {#proteins-variation .heading4}
 
 `rba_uniprot_variation()`
 
 `rba_uniprot_variation_search()`
 
-### Proteomics
+#### Proteomics {#proteins-proteomics .heading4}
 
 -   `rba_uniprot_proteomics()`
 
 -   `rba_uniprot_proteomics_search()`
 
-### Post-Translational Modification (PTM)
+### Post-Translational Modification (PTM) {#post-translational-modification-ptm .heading3}
 
 -   `rba_uniprot_ptm()`
 
 -   `rba_uniprot_ptm_search()`
 
-### Antigens
+### Antigens {#antigens .heading3}
 
 -   `rba_uniprot_antigens()`
 
 -   `rba_uniprot_antigens_search()`
 
-### Mutagenesis
+### Mutagenesis {#mutagenesis .heading3}
 
 -   `rba_uniprot_mutagenesis()`
 
 -   `rba_uniprot_mutagenesis_search()`
 
-## Proteomes
+### Proteomes {#proteomes .heading3}
 
 -   `rba_uniprot_proteomes()`
 
@@ -198,7 +198,7 @@ The UniProt API endpoints are organized into 5 group. Here are those categories 
 
 -   `rba_uniprot_genecentric_search()`
 
-## Taxonomy
+### Taxonomy {#taxonomy .heading3}
 
 -   `rba_uniprot_taxonomy()`
 
@@ -212,7 +212,7 @@ The UniProt API endpoints are organized into 5 group. Here are those categories 
 
 -   `rba_uniprot_taxonomy_relationship()`
 
-## Coordinates
+### Coordinates {#coordinates .heading3}
 
 -   `rba_uniprot_coordinates()`
 
@@ -222,7 +222,7 @@ The UniProt API endpoints are organized into 5 group. Here are those categories 
 
 -   `rba_uniprot_coordinates_sequence()`
 
-## UniParc
+### UniParc {#uniparc .heading3}
 
 -   `rba_uniprot_uniparc()`
 
@@ -234,7 +234,7 @@ The UniProt API endpoints are organized into 5 group. Here are those categories 
 
 ------------------------------------------------------------------------
 
-# How to Cite? {#Citations}
+## How to Cite? {#citations .heading2}
 
 To cite UniProt (Please see <https://www.uniprot.org/help/publications>):
 
@@ -243,11 +243,11 @@ To cite UniProt (Please see <https://www.uniprot.org/help/publications>):
 
 To cite rbioapi: ([Free access link to the article](https://academic.oup.com/bioinformatics/article/38/10/2952/6585406?guestAccessKey=1a858639-9e21-4791-8bd9-9f093a4c8b45 "OUP Bioinformatics, rbioapi: user-friendly R interface to biologic web services’ API"))
 
--   Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: user-friendly R interface to biologic web services’ API, Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2952–2953, <https://doi.org/10.1093/bioinformatics/btac172>
+-   Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: user-friendly R interface to biologic web services' API, Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2952--2953, <https://doi.org/10.1093/bioinformatics/btac172>
 
 ------------------------------------------------------------------------
 
-# Links {.heading2}
+# Links {#links .heading2}
 
 -   [This article in rbioapi documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html "2.F: UniProt & rbioapi")
 
