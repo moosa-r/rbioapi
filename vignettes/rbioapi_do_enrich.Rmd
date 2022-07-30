@@ -83,7 +83,7 @@ covid_critical <- c("TXNDC5", "GABRR2", "MGAM2", "LOC200772", "LYPD2", "IFI27", 
 
 ## Enrichr
 
-[Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr") , developed in the [Ma'ayan Lab](https://icahn.mssm.edu/research/labs/maayan-laboratory/ "Ma'ayan Laboratory, Computational Systems Biology"), is a service to perform enrichment analysis against a considerable number of curated gene set libraries across various species.
+[Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr") , developed in the Ma'ayan Lab, is a service to perform enrichment analysis against a considerable number of curated gene set libraries across various species.
 
 We have thoroughly covered performing enrichment analysis with Enrichr in the vignette article [Enrichr & rbioap](rbioapi_enrichr.html "2.A: Enrichr & rbioapi")[i](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html "2.A: Enrichr & rbioapi"). Therefore, we will only provide a brief demonstration here.
 
@@ -222,7 +222,7 @@ rba_reactome_analysis_pdf(token = reactome$summary$token,
 
 ## PANTHER
 
-PANTHER (protein analysis through evolutionary relationships) is a project that provides classification systems of genes and proteins. PANTHER also provides an enrichment service. In fact, the enrichment tool available on the [Gene Ontology (GO) website](https://geneontology.org/ "Gene Ontology Resource - Unifying Biology") is powered by [PANTHER](http://pantherdb.org/). Just like the previous sections, we will only review the enrichment functionality here; for an in-depth review of PANTHER refer to the vignette article "[PANTHER & rbioapi](rbioapi_panther.html "2.D: PANTHER & rbioapi")".
+PANTHER (protein analysis through evolutionary relationships) is a project that provides classification systems of genes and proteins. PANTHER also provides an enrichment service. In fact, the enrichment tool available on the [Gene Ontology (GO) website](http://geneontology.org/ "Gene Ontology Resource - Unifying Biology") is powered by [PANTHER](http://pantherdb.org/). Just like the previous sections, we will only review the enrichment functionality here; for an in-depth review of PANTHER refer to the vignette article "[PANTHER & rbioapi](rbioapi_panther.html "2.D: PANTHER & rbioapi")".
 
 To perform the analysis, first, we need to choose the classifications (i.e., gene sets) that we want to compare our results against it. To retrieve a list of available gene sets, we call the following function:
 

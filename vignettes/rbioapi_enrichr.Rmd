@@ -37,7 +37,7 @@ rba_options(timeout = 600, skip_error = TRUE)
 
 # Introduction {#introduction .heading2}
 
-[Enrichr](https://maayanlab.cloud/Enrichr/) is a gene-set enrichment analysis tool developed in the [Ma'ayan lab](https://icahn.mssm.edu/research/labs/maayan-laboratory/).
+[Enrichr](https://maayanlab.cloud/Enrichr/) is a gene-set enrichment analysis tool developed in the Ma'ayan Lab.
 
 # Gene set library concept in Enrichr {#gene-set-library-concept-in-enrichr .heading2}
 
@@ -146,7 +146,7 @@ To cite Enrichr (Please see <https://maayanlab.cloud/Enrichr/help#terms>):
 
 -   Maxim V. Kuleshov, Matthew R. Jones, Andrew D. Rouillard, Nicolas F. Fernandez, Qiaonan Duan, Zichen Wang, Simon Koplev, Sherry L. Jenkins, Kathleen M. Jagodnik, Alexander Lachmann, Michael G. McDermott, Caroline D. Monteiro, Gregory W. Gundersen, Avi Ma'ayan, Enrichr: a comprehensive gene set enrichment analysis web server 2016 update, *Nucleic Acids Research*, Volume 44, Issue W1, 8 July 2016, Pages W90--W97, <https://doi.org/10.1093/nar/gkw377>
 
--   Xie, Z., Bailey, A., Kuleshov, M. V., Clarke, D. J. B., Evangelista, J. E., Jenkins, S. L., Lachmann, A., Wojciechowicz, M. L., Kropiwnicki, E., Jagodnik, K. M., Jeon, M., & Ma'ayan, A. (2021). Gene set knowledge discovery with Enrichr. *Current Protocols*, 1, e90. doi: <https://doi.org/10.1002/cpz1.90>
+-   Xie, Z., Bailey, A., Kuleshov, M. V., Clarke, D. J. B., Evangelista, J. E., Jenkins, S. L., Lachmann, A., Wojciechowicz, M. L., Kropiwnicki, E., Jagodnik, K. M., Jeon, M., & Ma'ayan, A. (2021). Gene set knowledge discovery with Enrichr. *Current Protocols*, 1, e90. doi: 10.1002/cpz1.90
 
 To cite rbioapi: ([Free access link to the article](https://academic.oup.com/bioinformatics/article/38/10/2952/6585406?guestAccessKey=1a858639-9e21-4791-8bd9-9f093a4c8b45 "OUP Bioinformatics, rbioapi: user-friendly R interface to biologic web services’ API"))
 

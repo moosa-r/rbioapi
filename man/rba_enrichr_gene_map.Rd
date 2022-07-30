@@ -56,7 +56,7 @@ rba_enrichr_gene_map(gene = "p53", catagorize = TRUE)
   Evangelista, J. E., Jenkins, S. L., Lachmann, A., Wojciechowicz, M. L.,
   Kropiwnicki, E., Jagodnik, K. M., Jeon, M., & Ma’ayan, A. (2021). Gene
   set knowledge discovery with Enrichr. Current Protocols, 1, e90.
-  doi: https://doi.org/10.1002/cpz1.90
+  doi: 10.1002/cpz1.90
   \item \href{https://maayanlab.cloud/Enrichr/help#api}{Enrichr API
   Documentation}
   \item \href{https://maayanlab.cloud/Enrichr/help#terms}{Citations note
