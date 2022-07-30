@@ -168,7 +168,7 @@ str(reactome, max.level	= 1)
 The list's element names are self-explanatory. The results are returned as a data frame in the `pathways` element. Note that Reactome will map your provided gene identifiers and some identifiers may not be found. Hence, keep an eye on the `identifiersNotFound` element.
 
 ```{r reactome_df, echo=FALSE}
-if (is.list(reactome) && is.data.frame(reactome$pathways)) {
+if (utils::hasName(reactome, "pathways") && is.data.frame(reactome$pathways)) {
   reactome$pathways <- reactome$pathways[1:min(10,
                                                nrow(reactome$pathways)),]
   DT::datatable(data = reactome$pathways,
@@ -265,7 +265,7 @@ str(panther_enrich)
 The enrichment results are returned as a Data Frame with an element named result:
 
 ```{r panther_enrich_df, echo=FALSE}
-if (is.list(panther_enrich) && is.data.frame(panther_enrich$result)) {
+if (utils::hasName(panther_enrich, "result") && is.data.frame(panther_enrich$result)) {
   panther_enrich$result <- panther_enrich$result[1:min(10,
                                                        nrow(panther_enrich$result)),]
   DT::datatable(data = panther_enrich$result,
@@ -329,7 +329,7 @@ str(string_enrich, max.level = 1)
 In the "PMID" element, we see which PubMed papers are over-represented with our gene list. To keep the table tidy, we are not displaying the `inputGenes` and `preferredNames` columns.
 
 ```{r string_df, echo=FALSE}
-if (is.list(string_enrich) && is.data.frame(string_enrich$PMID)) {
+if (utils::hasName(string_enrich, "PMID") && is.data.frame(string_enrich$PMID)) {
   string_enrich$PMID <- string_enrich$PMID[,                                           !colnames(string_enrich$PMID) %in% c("inputGenes", "preferredNames")]                                             
   string_enrich$PMID <- string_enrich$PMID[1:min(10, 
                                                  nrow(string_enrich$PMID)),]
@@ -361,7 +361,7 @@ str(string_annot, max.level = 1)
 ```
 
 ```{r string_annot_df, echo=FALSE}
-if (is.list(string_annot) && is.data.frame(string_annot$PMID)) {
+if (utils::hasName(string_annot, "PMID") && is.data.frame(string_annot$PMID)) {
   string_annot$PMID <- string_annot$PMID[1:min(10, 
                                                  nrow(string_annot$PMID)),]
   DT::datatable(data = string_annot$PMID,

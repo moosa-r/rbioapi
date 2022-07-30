@@ -74,7 +74,7 @@ str(analyzed, 1)
 ```
 
 ```{r analysis_results, echo=FALSE}
-if (utils::hasName(analyzed, "pathways")) {
+if (utils::hasName(analyzed, "pathways") && is.data.frame(analyzed$pathways)) {
   DT::datatable(data = jsonlite::flatten(analyzed$pathways),
               options = list(scrollX = TRUE, 
                              paging = TRUE,

@@ -202,7 +202,7 @@ str(enriched, max.level = 1)
 Let us see the "DISEASES" results as an example. Below, we can see which terms of the [Human Disease Ontology](https://disease-ontology.org/ "Human Disease Ontology") were over-represented:
 
 ```{r rba_string_enrichment_restults, echo=FALSE}
-if (is.data.frame(enriched$DISEASES)) {
+if (utils::hasName(enriched, "DISEASES") && is.data.frame(enriched$DISEASES)) {
   DT::datatable(data = enriched$DISEASES,
               options = list(scrollX = TRUE, 
                              paging = TRUE,

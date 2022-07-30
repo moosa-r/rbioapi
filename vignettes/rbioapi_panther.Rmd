@@ -85,7 +85,7 @@ enriched <- rba_panther_enrich(genes = genes,
 ```
 
 ```{r enriched_df, echo=FALSE}
-if (utils::hasName(enriched, "result")) {
+if (utils::hasName(enriched, "result") && is.data.frame(enriched$result)) {
   DT::datatable(data = enriched$result,
               options = list(scrollX = TRUE, 
                              paging = TRUE,
