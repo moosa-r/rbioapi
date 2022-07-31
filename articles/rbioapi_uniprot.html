@@ -15,8 +15,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="2.G: UniProt &amp; rbioapi">
 <meta property="og:description" content="Connect to UniProt in R with rbioapi package.
@@ -41,7 +41,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rbioapi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -109,11 +109,11 @@
 
 
 <script src="rbioapi_uniprot_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
-  <main id="main"><div class="page-header">
+  <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>2.G: UniProt &amp; rbioapi</h1>
                         <h4 data-toc-skip class="author">Moosa Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2022-06-11</h4>
+            <h4 data-toc-skip class="date">2022-07-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/HEAD/vignettes/rbioapi_uniprot.Rmd" class="external-link"><code>vignettes/rbioapi_uniprot.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_uniprot.Rmd</code></div>
@@ -122,9 +122,9 @@
     
     
 <hr>
-<div class="section level2">
-<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
-</h2>
+<div class="section level3">
+<h3 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h3>
 <p>Directly quoting from <a href="https://www.uniprot.org" title="Universal Protein Resource (UniProt)" class="external-link">UniProt</a>:</p>
 <blockquote>
 <p>The Universal Protein Resource (UniProt) is a comprehensive resource for protein sequence and annotation data. The UniProt databases are the <a href="https://www.uniprot.org/help/uniprotkb" class="external-link">UniProt Knowledgebase (UniProtKB)</a>, the <a href="https://www.uniprot.org/help/uniref" class="external-link">UniProt Reference Clusters (UniRef)</a>, and the <a href="https://www.uniprot.org/help/uniparc" class="external-link">UniProt Archive (UniParc)</a>. The UniProt consortium and host institutions EMBL-EBI, SIB and PIR are committed to the long-term preservation of the UniProt databases.</p>
@@ -132,162 +132,163 @@
 </blockquote>
 <hr>
 </div>
-<div class="section level2">
-<h2 id="note-about-species-argument">Search vs Retrieve<a class="anchor" aria-label="anchor" href="#note-about-species-argument"></a>
-</h2>
+<div class="section level3">
+<h3 id="search-vs-retrieve">Search vs Retrieve<a class="anchor" aria-label="anchor" href="#search-vs-retrieve"></a>
+</h3>
 <p>Most of rbioapi UniProt functions have two variants. one to retrieve data using a proper accession, and the second one (which have a <code>_search</code> suffix) is to search using any combination of arguments. We first demonstrate this using an example, then provide a list of such functions in rbioapi.</p>
 <p>Suppose we are interested in Human CD40 ligand protein, and we know that it’s UniProt accession is “P29965”. We can simply do as the following:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## 1 We can retrieve CD40 protein's information by qurying it's UniProt accession:</span>
-<span class="va">cd40</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_uniprot_proteins.html">rba_uniprot_proteins</a></span><span class="op">(</span>accession <span class="op">=</span> <span class="st">"P29965"</span><span class="op">)</span>
-
-<span class="co">## 2 We use str() to inspect our object's structure</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">cd40</span>, <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; List of 13</span>
-<span class="co">#&gt;  $ accession       : chr "P29965"</span>
-<span class="co">#&gt;  $ id              : chr "CD40L_HUMAN"</span>
-<span class="co">#&gt;  $ proteinExistence: chr "Evidence at protein level"</span>
-<span class="co">#&gt;  $ info            :List of 4</span>
-<span class="co">#&gt;  $ organism        :List of 3</span>
-<span class="co">#&gt;  $ protein         :List of 4</span>
-<span class="co">#&gt;  $ gene            :'data.frame':    1 obs. of  2 variables:</span>
-<span class="co">#&gt;  $ comments        :'data.frame':    12 obs. of  10 variables:</span>
-<span class="co">#&gt;  $ features        :'data.frame':    63 obs. of  9 variables:</span>
-<span class="co">#&gt;  $ dbReferences    :'data.frame':    130 obs. of  4 variables:</span>
-<span class="co">#&gt;  $ keywords        :'data.frame':    13 obs. of  1 variable:</span>
-<span class="co">#&gt;  $ references      :'data.frame':    25 obs. of  3 variables:</span>
-<span class="co">#&gt;  $ sequence        :List of 5</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## 1 We can retrieve CD40 protein's information by qurying it's UniProt accession:</span></span>
+<span><span class="va">cd40</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_uniprot_proteins.html">rba_uniprot_proteins</a></span><span class="op">(</span>accession <span class="op">=</span> <span class="st">"P29965"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## 2 We use str() to inspect our object's structure</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">cd40</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; List of 13</span></span>
+<span><span class="co">#&gt;  $ accession       : chr "P29965"</span></span>
+<span><span class="co">#&gt;  $ id              : chr "CD40L_HUMAN"</span></span>
+<span><span class="co">#&gt;  $ proteinExistence: chr "Evidence at protein level"</span></span>
+<span><span class="co">#&gt;  $ info            :List of 4</span></span>
+<span><span class="co">#&gt;  $ organism        :List of 3</span></span>
+<span><span class="co">#&gt;  $ protein         :List of 4</span></span>
+<span><span class="co">#&gt;  $ gene            :'data.frame':    1 obs. of  2 variables:</span></span>
+<span><span class="co">#&gt;  $ comments        :'data.frame':    12 obs. of  10 variables:</span></span>
+<span><span class="co">#&gt;  $ features        :'data.frame':    63 obs. of  9 variables:</span></span>
+<span><span class="co">#&gt;  $ dbReferences    :'data.frame':    130 obs. of  4 variables:</span></span>
+<span><span class="co">#&gt;  $ keywords        :'data.frame':    13 obs. of  1 variable:</span></span>
+<span><span class="co">#&gt;  $ references      :'data.frame':    25 obs. of  3 variables:</span></span>
+<span><span class="co">#&gt;  $ sequence        :List of 5</span></span></code></pre></div>
 <p>This is the equivalent of the page that UniProt have on this accession (<a href="https://www.uniprot.org/uniprot/P29965" title="UniProtKB - P29965 (CD40L_HUMAN)" class="external-link">UniProtKB - P29965</a>). But what if we didn’t know the UniProt accession? Or simply want to perform a search using certain parameters? We can use the function with <code>_search</code> suffix:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## 1 From the available arguments, we fill only those which we think is pertinent</span>
-<span class="va">cd40_search</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_uniprot_proteins_search.html">rba_uniprot_proteins_search</a></span><span class="op">(</span>protein <span class="op">=</span> <span class="st">"CD40 ligand"</span>,
-                                          organism <span class="op">=</span> <span class="st">"human"</span>,
-                                          reviewed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">## 2 As always, we use str() to inspect our object's structure</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">cd40_search</span>, <span class="fl">2</span><span class="op">)</span>
-<span class="co">#&gt; List of 1</span>
-<span class="co">#&gt;  $ P29965:List of 13</span>
-<span class="co">#&gt;   ..$ accession       : chr "P29965"</span>
-<span class="co">#&gt;   ..$ id              : chr "CD40L_HUMAN"</span>
-<span class="co">#&gt;   ..$ proteinExistence: chr "Evidence at protein level"</span>
-<span class="co">#&gt;   ..$ info            :List of 4</span>
-<span class="co">#&gt;   ..$ organism        :List of 3</span>
-<span class="co">#&gt;   ..$ protein         :List of 4</span>
-<span class="co">#&gt;   ..$ gene            :List of 1</span>
-<span class="co">#&gt;   ..$ comments        :List of 12</span>
-<span class="co">#&gt;   ..$ features        :List of 63</span>
-<span class="co">#&gt;   ..$ dbReferences    :List of 130</span>
-<span class="co">#&gt;   ..$ keywords        :List of 13</span>
-<span class="co">#&gt;   ..$ references      :List of 25</span>
-<span class="co">#&gt;   ..$ sequence        :List of 5</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## 1 From the available arguments, we fill only those which we think is pertinent</span></span>
+<span><span class="va">cd40_search</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_uniprot_proteins_search.html">rba_uniprot_proteins_search</a></span><span class="op">(</span>protein <span class="op">=</span> <span class="st">"CD40 ligand"</span>,</span>
+<span>                                          organism <span class="op">=</span> <span class="st">"human"</span>,</span>
+<span>                                          reviewed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">## 2 As always, we use str() to inspect our object's structure</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">cd40_search</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="co">#&gt; List of 1</span></span>
+<span><span class="co">#&gt;  $ P29965:List of 13</span></span>
+<span><span class="co">#&gt;   ..$ accession       : chr "P29965"</span></span>
+<span><span class="co">#&gt;   ..$ id              : chr "CD40L_HUMAN"</span></span>
+<span><span class="co">#&gt;   ..$ proteinExistence: chr "Evidence at protein level"</span></span>
+<span><span class="co">#&gt;   ..$ info            :List of 4</span></span>
+<span><span class="co">#&gt;   ..$ organism        :List of 3</span></span>
+<span><span class="co">#&gt;   ..$ protein         :List of 4</span></span>
+<span><span class="co">#&gt;   ..$ gene            :List of 1</span></span>
+<span><span class="co">#&gt;   ..$ comments        :List of 12</span></span>
+<span><span class="co">#&gt;   ..$ features        :List of 63</span></span>
+<span><span class="co">#&gt;   ..$ dbReferences    :List of 130</span></span>
+<span><span class="co">#&gt;   ..$ keywords        :List of 13</span></span>
+<span><span class="co">#&gt;   ..$ references      :List of 25</span></span>
+<span><span class="co">#&gt;   ..$ sequence        :List of 5</span></span></code></pre></div>
 <p>This is the equivalent of ‘<a href="https://www.uniprot.org/help/advanced_search" title="UniProtKB advanced search options" class="external-link">advanced search</a>’ in UniProt web portal. See function <code>rba_uniprot_proteins_search</code>’s manual for more information. Remember that in <code>*_search</code> functions, you are not required to fill every argument, you can use any combination of arguments you see fit to build your search query.</p>
 <p>The applications of <code>*_search</code> variants are not limited to what the title ‘search’ implies. These functions will also retrieve the search hits in their response; Thus you can use them for mass-retrieving. If you see the “argument” section in the functions’ manuals, you would see that many arguments accept a vector of values. consider the following examples:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## 1 As the simplest scenario, we can retrieve multiple proteins in one call</span>
-<span class="va">multi_prs1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_uniprot_proteins_search.html">rba_uniprot_proteins_search</a></span><span class="op">(</span>accession <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"P04637"</span>,
-                                                       <span class="st">"P38398"</span>,
-                                                       <span class="st">"P24941"</span>,
-                                                       <span class="st">"P60953"</span>,
-                                                       <span class="st">"P06493"</span>,
-                                                       <span class="st">"Q02241"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">## As always, we use str() to inspect our object's structure</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">multi_prs1</span>, <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; List of 6</span>
-<span class="co">#&gt;  $ P60953:List of 14</span>
-<span class="co">#&gt;  $ P24941:List of 14</span>
-<span class="co">#&gt;  $ P04637:List of 14</span>
-<span class="co">#&gt;  $ Q02241:List of 14</span>
-<span class="co">#&gt;  $ P38398:List of 14</span>
-<span class="co">#&gt;  $ P06493:List of 14</span>
-
-<span class="co">## 2 Or alternatively, search using Gene names, also we want to exclude isoforms and only retrieve swiss-prot entries</span>
-<span class="va">multi_prs2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_uniprot_proteins_search.html">rba_uniprot_proteins_search</a></span><span class="op">(</span>gene <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"KIF23"</span>,
-                                                  <span class="st">"BRCA1"</span>,
-                                                  <span class="st">"TP53"</span>,
-                                                  <span class="st">"CDC42"</span><span class="op">)</span>,
-                                         reviewed <span class="op">=</span> <span class="cn">TRUE</span>,
-                                         taxid <span class="op">=</span> <span class="fl">9606</span>,
-                                         isoform <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">multi_prs2</span>, <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; List of 29</span>
-<span class="co">#&gt;  $ Q9ULZ0:List of 14</span>
-<span class="co">#&gt;  $ Q02241:List of 14</span>
-<span class="co">#&gt;  $ P38398:List of 14</span>
-<span class="co">#&gt;  $ Q12888:List of 14</span>
-<span class="co">#&gt;  $ P04637:List of 14</span>
-<span class="co">#&gt;  $ Q9HCN2:List of 14</span>
-<span class="co">#&gt;  $ A1A5B4:List of 14</span>
-<span class="co">#&gt;  $ Q9NS56:List of 14</span>
-<span class="co">#&gt;  $ Q9Y2B4:List of 13</span>
-<span class="co">#&gt;  $ Q8IXH6:List of 14</span>
-<span class="co">#&gt;  $ Q53FA7:List of 14</span>
-<span class="co">#&gt;  $ Q96A56:List of 14</span>
-<span class="co">#&gt;  $ O14683:List of 14</span>
-<span class="co">#&gt;  $ Q96S44:List of 14</span>
-<span class="co">#&gt;  $ Q8NBR0:List of 14</span>
-<span class="co">#&gt;  $ Q13625:List of 14</span>
-<span class="co">#&gt;  $ Q7L0Q8:List of 14</span>
-<span class="co">#&gt;  $ Q5VT25:List of 14</span>
-<span class="co">#&gt;  $ Q00587:List of 14</span>
-<span class="co">#&gt;  $ O14613:List of 14</span>
-<span class="co">#&gt;  $ Q6DT37:List of 14</span>
-<span class="co">#&gt;  $ Q9UKI2:List of 14</span>
-<span class="co">#&gt;  $ Q6NZY7:List of 14</span>
-<span class="co">#&gt;  $ Q9H3Q1:List of 14</span>
-<span class="co">#&gt;  $ Q07960:List of 14</span>
-<span class="co">#&gt;  $ Q9Y5S2:List of 14</span>
-<span class="co">#&gt;  $ P60953:List of 14</span>
-<span class="co">#&gt;  $ Q9NRR8:List of 14</span>
-<span class="co">#&gt;  $ Q9NRR3:List of 14</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## 1 As the simplest scenario, we can retrieve multiple proteins in one call</span></span>
+<span><span class="va">multi_prs1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_uniprot_proteins_search.html">rba_uniprot_proteins_search</a></span><span class="op">(</span>accession <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"P04637"</span>,</span>
+<span>                                                       <span class="st">"P38398"</span>,</span>
+<span>                                                       <span class="st">"P24941"</span>,</span>
+<span>                                                       <span class="st">"P60953"</span>,</span>
+<span>                                                       <span class="st">"P06493"</span>,</span>
+<span>                                                       <span class="st">"Q02241"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">## As always, we use str() to inspect our object's structure</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">multi_prs1</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; List of 6</span></span>
+<span><span class="co">#&gt;  $ P60953:List of 14</span></span>
+<span><span class="co">#&gt;  $ P24941:List of 14</span></span>
+<span><span class="co">#&gt;  $ P04637:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q02241:List of 14</span></span>
+<span><span class="co">#&gt;  $ P38398:List of 14</span></span>
+<span><span class="co">#&gt;  $ P06493:List of 14</span></span>
+<span></span>
+<span><span class="co">## 2 Or alternatively, search using Gene names, also we want to exclude isoforms and only retrieve swiss-prot entries</span></span>
+<span><span class="va">multi_prs2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_uniprot_proteins_search.html">rba_uniprot_proteins_search</a></span><span class="op">(</span>gene <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"KIF23"</span>,</span>
+<span>                                                  <span class="st">"BRCA1"</span>,</span>
+<span>                                                  <span class="st">"TP53"</span>,</span>
+<span>                                                  <span class="st">"CDC42"</span><span class="op">)</span>,</span>
+<span>                                         reviewed <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                                         taxid <span class="op">=</span> <span class="fl">9606</span>,</span>
+<span>                                         isoform <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">multi_prs2</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; List of 29</span></span>
+<span><span class="co">#&gt;  $ Q9ULZ0:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q02241:List of 14</span></span>
+<span><span class="co">#&gt;  $ P38398:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q12888:List of 14</span></span>
+<span><span class="co">#&gt;  $ P04637:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q9HCN2:List of 14</span></span>
+<span><span class="co">#&gt;  $ A1A5B4:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q9NS56:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q9Y2B4:List of 13</span></span>
+<span><span class="co">#&gt;  $ Q8IXH6:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q53FA7:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q96A56:List of 14</span></span>
+<span><span class="co">#&gt;  $ O14683:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q96S44:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q8NBR0:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q13625:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q7L0Q8:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q5VT25:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q00587:List of 14</span></span>
+<span><span class="co">#&gt;  $ O14613:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q6DT37:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q9UKI2:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q6NZY7:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q9H3Q1:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q07960:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q9Y5S2:List of 14</span></span>
+<span><span class="co">#&gt;  $ P60953:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q9NRR8:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q9NRR3:List of 14</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## 3 Search for every proteins with chemokines keyword</span>
-<span class="va">multi_prs3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_uniprot_proteins_search.html">rba_uniprot_proteins_search</a></span><span class="op">(</span>keyword <span class="op">=</span> <span class="st">"chemokines"</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">multi_prs3</span>, <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; List of 16</span>
-<span class="co">#&gt;  $ P09703:List of 15</span>
-<span class="co">#&gt;  $ Q6SW98:List of 15</span>
-<span class="co">#&gt;  $ P33854:List of 14</span>
-<span class="co">#&gt;  $ P0DSV7:List of 15</span>
-<span class="co">#&gt;  $ P19063:List of 14</span>
-<span class="co">#&gt;  $ P16849:List of 15</span>
-<span class="co">#&gt;  $ P69332:List of 15</span>
-<span class="co">#&gt;  $ P24766:List of 15</span>
-<span class="co">#&gt;  $ P34016:List of 14</span>
-<span class="co">#&gt;  $ P21064:List of 14</span>
-<span class="co">#&gt;  $ P0DSV8:List of 15</span>
-<span class="co">#&gt;  $ F5HBX1:List of 14</span>
-<span class="co">#&gt;  $ Q98314:List of 15</span>
-<span class="co">#&gt;  $ P69333:List of 15</span>
-<span class="co">#&gt;  $ P07562:List of 14</span>
-<span class="co">#&gt;  $ F5HF62:List of 14</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## 3 Search for every proteins with chemokines keyword</span></span>
+<span><span class="va">multi_prs3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_uniprot_proteins_search.html">rba_uniprot_proteins_search</a></span><span class="op">(</span>keyword <span class="op">=</span> <span class="st">"chemokines"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">multi_prs3</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; List of 16</span></span>
+<span><span class="co">#&gt;  $ P09703:List of 15</span></span>
+<span><span class="co">#&gt;  $ Q6SW98:List of 15</span></span>
+<span><span class="co">#&gt;  $ P33854:List of 14</span></span>
+<span><span class="co">#&gt;  $ P0DSV7:List of 15</span></span>
+<span><span class="co">#&gt;  $ P19063:List of 14</span></span>
+<span><span class="co">#&gt;  $ P16849:List of 15</span></span>
+<span><span class="co">#&gt;  $ P69332:List of 15</span></span>
+<span><span class="co">#&gt;  $ P24766:List of 15</span></span>
+<span><span class="co">#&gt;  $ P34016:List of 14</span></span>
+<span><span class="co">#&gt;  $ P21064:List of 14</span></span>
+<span><span class="co">#&gt;  $ P0DSV8:List of 15</span></span>
+<span><span class="co">#&gt;  $ F5HBX1:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q98314:List of 15</span></span>
+<span><span class="co">#&gt;  $ P69333:List of 15</span></span>
+<span><span class="co">#&gt;  $ P07562:List of 14</span></span>
+<span><span class="co">#&gt;  $ F5HF62:List of 14</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## 4 Search for every protein of "SARS-CoV-2" virus in Swiss-Prot</span>
-<span class="va">multi_prs4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_uniprot_proteins_search.html">rba_uniprot_proteins_search</a></span><span class="op">(</span>organism <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>,
-                                         reviewed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">multi_prs4</span>, <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; List of 17</span>
-<span class="co">#&gt;  $ P0DTD3    :List of 14</span>
-<span class="co">#&gt;  $ P0DTC6    :List of 14</span>
-<span class="co">#&gt;  $ P0DTG0    :List of 13</span>
-<span class="co">#&gt;  $ P0DTC7    :List of 14</span>
-<span class="co">#&gt;  $ P0DTC2    :List of 14</span>
-<span class="co">#&gt;  $ P0DTC8    :List of 14</span>
-<span class="co">#&gt;  $ P0DTC4    :List of 14</span>
-<span class="co">#&gt;  $ A0A663DJA2:List of 14</span>
-<span class="co">#&gt;  $ P0DTC9    :List of 14</span>
-<span class="co">#&gt;  $ P0DTC5    :List of 14</span>
-<span class="co">#&gt;  $ P0DTC3    :List of 14</span>
-<span class="co">#&gt;  $ P0DTD8    :List of 14</span>
-<span class="co">#&gt;  $ P0DTD2    :List of 14</span>
-<span class="co">#&gt;  $ P0DTF1    :List of 13</span>
-<span class="co">#&gt;  $ P0DTD1    :List of 14</span>
-<span class="co">#&gt;  $ P0DTC1    :List of 13</span>
-<span class="co">#&gt;  $ P0DTG1    :List of 13</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## 4 Search for every protein of "SARS-CoV-2" virus in Swiss-Prot</span></span>
+<span><span class="va">multi_prs4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_uniprot_proteins_search.html">rba_uniprot_proteins_search</a></span><span class="op">(</span>organism <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>,</span>
+<span>                                         reviewed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">multi_prs4</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; List of 17</span></span>
+<span><span class="co">#&gt;  $ P0DTD3    :List of 14</span></span>
+<span><span class="co">#&gt;  $ P0DTC6    :List of 14</span></span>
+<span><span class="co">#&gt;  $ P0DTG0    :List of 13</span></span>
+<span><span class="co">#&gt;  $ P0DTC7    :List of 14</span></span>
+<span><span class="co">#&gt;  $ P0DTC2    :List of 14</span></span>
+<span><span class="co">#&gt;  $ P0DTC8    :List of 14</span></span>
+<span><span class="co">#&gt;  $ P0DTC4    :List of 14</span></span>
+<span><span class="co">#&gt;  $ A0A663DJA2:List of 14</span></span>
+<span><span class="co">#&gt;  $ P0DTC9    :List of 14</span></span>
+<span><span class="co">#&gt;  $ P0DTC5    :List of 14</span></span>
+<span><span class="co">#&gt;  $ P0DTC3    :List of 14</span></span>
+<span><span class="co">#&gt;  $ P0DTD8    :List of 14</span></span>
+<span><span class="co">#&gt;  $ P0DTD2    :List of 14</span></span>
+<span><span class="co">#&gt;  $ P0DTF1    :List of 13</span></span>
+<span><span class="co">#&gt;  $ P0DTD1    :List of 14</span></span>
+<span><span class="co">#&gt;  $ P0DTC1    :List of 13</span></span>
+<span><span class="co">#&gt;  $ P0DTG1    :List of 13</span></span></code></pre></div>
+</div>
 <div class="section level3">
-<h3 id="functions-with-_search-variant">Functions with <code>*_search</code> variant<a class="anchor" aria-label="anchor" href="#functions-with-_search-variant"></a>
+<h3 id="functions-with-star-search-variant">Functions with <code>*_search</code> variant<a class="anchor" aria-label="anchor" href="#functions-with-star-search-variant"></a>
 </h3>
 <p>The search variants are not limited to the above. Here is a list of the function that have both a retrieve and search variants. See their manuals for detailed guides and examples.</p>
 <ol style="list-style-type: decimal">
@@ -304,44 +305,44 @@
 </ol>
 <hr>
 </div>
-</div>
-<div class="section level2">
-<h2 id="uniprot-functions-categories">UniProt functions categories<a class="anchor" aria-label="anchor" href="#uniprot-functions-categories"></a>
-</h2>
-<p>The UniProt API endpoints are organized into 5 group. Here are those categories and rbioapi functions that correspond to each one. See the functions’ manuals for more details.</p>
 <div class="section level3">
-<h3 id="proteins">Proteins<a class="anchor" aria-label="anchor" href="#proteins"></a>
+<h3 id="uniprot-functions-categories">UniProt functions categories<a class="anchor" aria-label="anchor" href="#uniprot-functions-categories"></a>
 </h3>
+<p>The UniProt API endpoints are organized into 5 group. Here are those categories and rbioapi functions that correspond to each one. See the functions’ manuals for more details.</p>
 <div class="section level4">
-<h4 id="proteins-1">Proteins:<a class="anchor" aria-label="anchor" href="#proteins-1"></a>
+<h4 id="proteins">Proteins<a class="anchor" aria-label="anchor" href="#proteins"></a>
 </h4>
+<div class="section level5">
+<h5 id="proteins-proteins">Proteins:<a class="anchor" aria-label="anchor" href="#proteins-proteins"></a>
+</h5>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_proteins.html">rba_uniprot_proteins()</a></code></p></li>
 <li><p><code><a href="../reference/rba_uniprot_proteins_search.html">rba_uniprot_proteins_search()</a></code></p></li>
 <li><p><code><a href="../reference/rba_uniprot_proteins_crossref.html">rba_uniprot_proteins_crossref()</a></code></p></li>
 </ul>
 </div>
-<div class="section level4">
-<h4 id="features">Features<a class="anchor" aria-label="anchor" href="#features"></a>
-</h4>
+<div class="section level5">
+<h5 id="proteins-features">Features<a class="anchor" aria-label="anchor" href="#proteins-features"></a>
+</h5>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_features.html">rba_uniprot_features()</a></code></p></li>
 <li><p><code><a href="../reference/rba_uniprot_features_search.html">rba_uniprot_features_search()</a></code></p></li>
 </ul>
 </div>
-<div class="section level4">
-<h4 id="variation">Variation<a class="anchor" aria-label="anchor" href="#variation"></a>
-</h4>
+<div class="section level5">
+<h5 id="proteins-variation">Variation<a class="anchor" aria-label="anchor" href="#proteins-variation"></a>
+</h5>
 <p><code><a href="../reference/rba_uniprot_variation.html">rba_uniprot_variation()</a></code></p>
 <p><code><a href="../reference/rba_uniprot_variation_search.html">rba_uniprot_variation_search()</a></code></p>
 </div>
-<div class="section level4">
-<h4 id="proteomics">Proteomics<a class="anchor" aria-label="anchor" href="#proteomics"></a>
-</h4>
+<div class="section level5">
+<h5 id="proteins-proteomics">Proteomics<a class="anchor" aria-label="anchor" href="#proteins-proteomics"></a>
+</h5>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_proteomics.html">rba_uniprot_proteomics()</a></code></p></li>
 <li><p><code><a href="../reference/rba_uniprot_proteomics_search.html">rba_uniprot_proteomics_search()</a></code></p></li>
 </ul>
+</div>
 </div>
 <div class="section level4">
 <h4 id="post-translational-modification-ptm">Post-Translational Modification (PTM)<a class="anchor" aria-label="anchor" href="#post-translational-modification-ptm"></a>
@@ -367,10 +368,9 @@
 <li><p><code><a href="../reference/rba_uniprot_mutagenesis_search.html">rba_uniprot_mutagenesis_search()</a></code></p></li>
 </ul>
 </div>
-</div>
-<div class="section level3">
-<h3 id="proteomes">Proteomes<a class="anchor" aria-label="anchor" href="#proteomes"></a>
-</h3>
+<div class="section level4">
+<h4 id="proteomes">Proteomes<a class="anchor" aria-label="anchor" href="#proteomes"></a>
+</h4>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_proteomes.html">rba_uniprot_proteomes()</a></code></p></li>
 <li><p><code><a href="../reference/rba_uniprot_proteomes_search.html">rba_uniprot_proteomes_search()</a></code></p></li>
@@ -378,9 +378,9 @@
 <li><p><code><a href="../reference/rba_uniprot_genecentric_search.html">rba_uniprot_genecentric_search()</a></code></p></li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="taxonomy">Taxonomy<a class="anchor" aria-label="anchor" href="#taxonomy"></a>
-</h3>
+<div class="section level4">
+<h4 id="taxonomy">Taxonomy<a class="anchor" aria-label="anchor" href="#taxonomy"></a>
+</h4>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_taxonomy.html">rba_uniprot_taxonomy()</a></code></p></li>
 <li><p><code><a href="../reference/rba_uniprot_taxonomy_lca.html">rba_uniprot_taxonomy_lca()</a></code></p></li>
@@ -390,9 +390,9 @@
 <li><p><code><a href="../reference/rba_uniprot_taxonomy_relationship.html">rba_uniprot_taxonomy_relationship()</a></code></p></li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="coordinates">Coordinates<a class="anchor" aria-label="anchor" href="#coordinates"></a>
-</h3>
+<div class="section level4">
+<h4 id="coordinates">Coordinates<a class="anchor" aria-label="anchor" href="#coordinates"></a>
+</h4>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_coordinates.html">rba_uniprot_coordinates()</a></code></p></li>
 <li><p><code><a href="../reference/rba_uniprot_coordinates_search.html">rba_uniprot_coordinates_search()</a></code></p></li>
@@ -400,9 +400,9 @@
 <li><p><code><a href="../reference/rba_uniprot_coordinates_sequence.html">rba_uniprot_coordinates_sequence()</a></code></p></li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="uniparc">UniParc<a class="anchor" aria-label="anchor" href="#uniparc"></a>
-</h3>
+<div class="section level4">
+<h4 id="uniparc">UniParc<a class="anchor" aria-label="anchor" href="#uniparc"></a>
+</h4>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_uniparc.html">rba_uniprot_uniparc()</a></code></p></li>
 <li><p><code><a href="../reference/rba_uniprot_uniparc_search.html">rba_uniprot_uniparc_search()</a></code></p></li>
@@ -412,9 +412,9 @@
 <hr>
 </div>
 </div>
-<div class="section level2">
-<h2 id="Citations">How to Cite?<a class="anchor" aria-label="anchor" href="#Citations"></a>
-</h2>
+<div class="section level3">
+<h3 id="citations">How to Cite?<a class="anchor" aria-label="anchor" href="#citations"></a>
+</h3>
 <p>To cite UniProt (Please see <a href="https://www.uniprot.org/help/publications" class="external-link uri">https://www.uniprot.org/help/publications</a>):</p>
 <ul>
 <li>The UniProt Consortium, UniProt: the universal protein knowledgebase in 2021, <em>Nucleic Acids Research</em>, Volume 49, Issue D1, 8 January 2021, Pages D480–D489, <a href="https://doi.org/10.1093/nar/gkaa1100" class="external-link uri">https://doi.org/10.1093/nar/gkaa1100</a>
@@ -442,32 +442,32 @@
 <div class="section level2">
 <h2 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
-<pre><code><span class="co">#&gt; R version 4.2.0 (2022-04-22)</span>
-<span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span>
-<span class="co">#&gt; Running under: macOS Big Sur/Monterey 10.16</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Matrix products: default</span>
-<span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib</span>
-<span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; locale:</span>
-<span class="co">#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; attached base packages:</span>
-<span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; other attached packages:</span>
-<span class="co">#&gt; [1] rbioapi_0.7.6</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; loaded via a namespace (and not attached):</span>
-<span class="co">#&gt;  [1] knitr_1.39        magrittr_2.0.3    R6_2.5.1          ragg_1.2.2       </span>
-<span class="co">#&gt;  [5] rlang_1.0.2       fastmap_1.1.0     httr_1.4.3        stringr_1.4.0    </span>
-<span class="co">#&gt;  [9] tools_4.2.0       xfun_0.31         cli_3.3.0         jquerylib_0.1.4  </span>
-<span class="co">#&gt; [13] htmltools_0.5.2   systemfonts_1.0.4 yaml_2.3.5        digest_0.6.29    </span>
-<span class="co">#&gt; [17] rprojroot_2.0.3   pkgdown_2.0.3     textshaping_0.3.6 purrr_0.3.4      </span>
-<span class="co">#&gt; [21] sass_0.4.1        fs_1.5.2          curl_4.3.2        memoise_2.0.1    </span>
-<span class="co">#&gt; [25] cachem_1.0.6      evaluate_0.15     rmarkdown_2.14    stringi_1.7.6    </span>
-<span class="co">#&gt; [29] compiler_4.2.0    bslib_0.3.1       desc_1.4.1        jsonlite_1.8.0</span></code></pre>
+<pre><code><span><span class="co">#&gt; R version 4.2.1 (2022-06-23)</span></span>
+<span><span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span></span>
+<span><span class="co">#&gt; Running under: macOS Big Sur ... 10.16</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Matrix products: default</span></span>
+<span><span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib</span></span>
+<span><span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; locale:</span></span>
+<span><span class="co">#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; attached base packages:</span></span>
+<span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; other attached packages:</span></span>
+<span><span class="co">#&gt; [1] rbioapi_0.7.7</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
+<span><span class="co">#&gt;  [1] knitr_1.39        magrittr_2.0.3    R6_2.5.1          ragg_1.2.2       </span></span>
+<span><span class="co">#&gt;  [5] rlang_1.0.4       fastmap_1.1.0     httr_1.4.3        stringr_1.4.0    </span></span>
+<span><span class="co">#&gt;  [9] tools_4.2.1       xfun_0.31         cli_3.3.0         jquerylib_0.1.4  </span></span>
+<span><span class="co">#&gt; [13] htmltools_0.5.3   systemfonts_1.0.4 yaml_2.3.5        digest_0.6.29    </span></span>
+<span><span class="co">#&gt; [17] rprojroot_2.0.3   pkgdown_2.0.6     textshaping_0.3.6 purrr_0.3.4      </span></span>
+<span><span class="co">#&gt; [21] sass_0.4.2        fs_1.5.2          curl_4.3.2        memoise_2.0.1    </span></span>
+<span><span class="co">#&gt; [25] cachem_1.0.6      evaluate_0.15     rmarkdown_2.14    stringi_1.7.8    </span></span>
+<span><span class="co">#&gt; [29] compiler_4.2.1    bslib_0.4.0       desc_1.4.1        jsonlite_1.8.0</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
@@ -482,7 +482,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer>

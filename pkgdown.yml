@@ -1,5 +1,5 @@
 pandoc: 2.7.3
-pkgdown: 2.0.3
+pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   rbioapi: rbioapi.html
@@ -11,7 +11,7 @@ articles:
   rbioapi_reactome: rbioapi_reactome.html
   rbioapi_string: rbioapi_string.html
   rbioapi_uniprot: rbioapi_uniprot.html
-last_built: 2022-06-11T08:08Z
+last_built: 2022-07-31T16:49Z
 urls:
   reference: https://rbioapi.moosa-r.com/reference
   article: https://rbioapi.moosa-r.com/articles

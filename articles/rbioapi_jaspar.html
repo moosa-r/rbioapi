@@ -15,8 +15,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="2.B: JASPAR &amp; rbioapi">
 <meta property="og:description" content="Connect to JASPAR in R with rbioapi package. 
@@ -41,7 +41,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rbioapi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -109,11 +109,11 @@
 
 
 <script src="rbioapi_jaspar_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
-  <main id="main"><div class="page-header">
+  <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>2.B: JASPAR &amp; rbioapi</h1>
                         <h4 data-toc-skip class="author">Moosa Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2022-06-11</h4>
+            <h4 data-toc-skip class="date">2022-07-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/HEAD/vignettes/rbioapi_jaspar.Rmd" class="external-link"><code>vignettes/rbioapi_jaspar.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_jaspar.Rmd</code></div>
@@ -122,9 +122,9 @@
     
     
 <hr>
-<div class="section level2">
-<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
-</h2>
+<div class="section level3">
+<h3 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h3>
 <p>Directly quoting from Fornes O, Castro-Mondragon JA, Khan A, et al:</p>
 <blockquote>
 <p>JASPAR (<a href="https://jaspar.genereg.net" class="external-link">https://jaspar.genereg.net)</a> is an open-access database of curated, non-redundant transcription factor (TF)-binding profiles stored as position frequency matrices (PFMs) for TFs across multiple species in six taxonomic groups. In this 8th release of JASPAR, the CORE collection has been expanded with 245 new PFMs (169 for vertebrates, 42 for plants, 17 for nematodes, 10 for insects, and 7 for fungi), and 156 PFMs were updated (125 for vertebrates, 28 for plants and 3 for insects). These new profiles represent an 18% expansion compared to the previous release.</p>
@@ -133,180 +133,180 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 </blockquote>
 <hr>
 </div>
-<div class="section level2">
-<h2 id="data-organization-in-jaspar">Data Organization in JASPAR<a class="anchor" aria-label="anchor" href="#data-organization-in-jaspar"></a>
-</h2>
-<p>JASPAR is a database of transcription factor binding matrices with annotations and metadata. These entities are organized in a hierarchical fashion that we will explore next.</p>
 <div class="section level3">
-<h3 id="releases">Releases<a class="anchor" aria-label="anchor" href="#releases"></a>
+<h3 id="data-organization-in-jaspar">Data Organization in JASPAR<a class="anchor" aria-label="anchor" href="#data-organization-in-jaspar"></a>
 </h3>
+<p>JASPAR is a database of transcription factor binding matrices with annotations and metadata. These entities are organized in a hierarchical fashion that we will explore next.</p>
+<div class="section level4">
+<h4 id="releases">Releases<a class="anchor" aria-label="anchor" href="#releases"></a>
+</h4>
 <p>In addition to the latest JASPAR database release (2020), other active releases are also available. Most of the rbioapi JASPAR functions have a <code>release</code> argument that allows you to use other database releases.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Call the function without any arguments to get a list of releases</span>
-<span class="va">releases</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_releases.html">rba_jaspar_releases</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">## Supply a release number for details:</span>
-<span class="va">release_7_info</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_releases.html">rba_jaspar_releases</a></span><span class="op">(</span><span class="fl">7</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## Call the function without any arguments to get a list of releases</span></span>
+<span><span class="va">releases</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_releases.html">rba_jaspar_releases</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">## Supply a release number for details:</span></span>
+<span><span class="va">release_7_info</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_releases.html">rba_jaspar_releases</a></span><span class="op">(</span><span class="fl">7</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="collections">Collections<a class="anchor" aria-label="anchor" href="#collections"></a>
-</h3>
+<div class="section level4">
+<h4 id="collections">Collections<a class="anchor" aria-label="anchor" href="#collections"></a>
+</h4>
 <p>Within a release, Matrix profiles are organized into collections, You can use <code><a href="../reference/rba_jaspar_collections.html">rba_jaspar_collections()</a></code> to get a list of available collections, or read “JASPAR Collections” section in <a href="https://jaspar.genereg.net/docs/" title="JASPAR Documentation" class="external-link">documentation page in JASPAR web-site</a> for a thorough review.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## To get a list of available collection in release 2020:</span>
-<span class="fu"><a href="../reference/rba_jaspar_collections.html">rba_jaspar_collections</a></span><span class="op">(</span>release <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span>
-<span class="co">#&gt;                                                          url        name</span>
-<span class="co">#&gt; 1        https://jaspar.genereg.net/api/v1/collections/CORE/        CORE</span>
-<span class="co">#&gt; 2 https://jaspar.genereg.net/api/v1/collections/UNVALIDATED/ UNVALIDATED</span>
-
-
-<span class="co">## You can list information of all matrices available in a collection:</span>
-<span class="va">mat_in_core_2020</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_collections_matrices.html">rba_jaspar_collections_matrices</a></span><span class="op">(</span>collection <span class="op">=</span> <span class="st">"CORE"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## To get a list of available collection in release 2020:</span></span>
+<span><span class="fu"><a href="../reference/rba_jaspar_collections.html">rba_jaspar_collections</a></span><span class="op">(</span>release <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
+<span><span class="co">#&gt;          name                                                        url</span></span>
+<span><span class="co">#&gt; 1        CORE        https://jaspar.genereg.net/api/v1/collections/CORE/</span></span>
+<span><span class="co">#&gt; 2 UNVALIDATED https://jaspar.genereg.net/api/v1/collections/UNVALIDATED/</span></span>
+<span></span>
+<span></span>
+<span><span class="co">## You can list information of all matrices available in a collection:</span></span>
+<span><span class="va">mat_in_core_2020</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_collections_matrices.html">rba_jaspar_collections_matrices</a></span><span class="op">(</span>collection <span class="op">=</span> <span class="st">"CORE"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="taxonomic-groups">Taxonomic Groups<a class="anchor" aria-label="anchor" href="#taxonomic-groups"></a>
-</h3>
+<div class="section level4">
+<h4 id="taxonomic-groups">Taxonomic Groups<a class="anchor" aria-label="anchor" href="#taxonomic-groups"></a>
+</h4>
 <p>Within each collection, the matrix profiles are organized based on main taxonomic groups:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## To get a list of taxonomic groups in release 2020:</span>
-<span class="fu"><a href="../reference/rba_jaspar_taxons.html">rba_jaspar_taxons</a></span><span class="op">(</span>release <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span>
-<span class="co">#&gt;                                                       url          name</span>
-<span class="co">#&gt; 1         https://jaspar.genereg.net/api/v1/taxon/plants/        plants</span>
-<span class="co">#&gt; 2    https://jaspar.genereg.net/api/v1/taxon/vertebrates/   vertebrates</span>
-<span class="co">#&gt; 3        https://jaspar.genereg.net/api/v1/taxon/insects/       insects</span>
-<span class="co">#&gt; 4   https://jaspar.genereg.net/api/v1/taxon/urochordates/  urochordates</span>
-<span class="co">#&gt; 5      https://jaspar.genereg.net/api/v1/taxon/nematodes/     nematodes</span>
-<span class="co">#&gt; 6          https://jaspar.genereg.net/api/v1/taxon/fungi/         fungi</span>
-<span class="co">#&gt; 7     https://jaspar.genereg.net/api/v1/taxon/trematodes/    trematodes</span>
-<span class="co">#&gt; 8  https://jaspar.genereg.net/api/v1/taxon/dictyostelium/ dictyostelium</span>
-<span class="co">#&gt; 9       https://jaspar.genereg.net/api/v1/taxon/cnidaria/      cnidaria</span>
-<span class="co">#&gt; 10      https://jaspar.genereg.net/api/v1/taxon/oomycota/      oomycota</span>
-
-
-<span class="co">## You can list information of all matrices available in a taxonomic group:</span>
-<span class="va">mat_in_insects</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_taxons_matrices.html">rba_jaspar_taxons_matrices</a></span><span class="op">(</span>tax_group <span class="op">=</span> <span class="st">"insects"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## To get a list of taxonomic groups in release 2020:</span></span>
+<span><span class="fu"><a href="../reference/rba_jaspar_taxons.html">rba_jaspar_taxons</a></span><span class="op">(</span>release <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
+<span><span class="co">#&gt;             name                                                    url</span></span>
+<span><span class="co">#&gt; 1         plants        https://jaspar.genereg.net/api/v1/taxon/plants/</span></span>
+<span><span class="co">#&gt; 2    vertebrates   https://jaspar.genereg.net/api/v1/taxon/vertebrates/</span></span>
+<span><span class="co">#&gt; 3        insects       https://jaspar.genereg.net/api/v1/taxon/insects/</span></span>
+<span><span class="co">#&gt; 4   urochordates  https://jaspar.genereg.net/api/v1/taxon/urochordates/</span></span>
+<span><span class="co">#&gt; 5      nematodes     https://jaspar.genereg.net/api/v1/taxon/nematodes/</span></span>
+<span><span class="co">#&gt; 6          fungi         https://jaspar.genereg.net/api/v1/taxon/fungi/</span></span>
+<span><span class="co">#&gt; 7     trematodes    https://jaspar.genereg.net/api/v1/taxon/trematodes/</span></span>
+<span><span class="co">#&gt; 8  dictyostelium https://jaspar.genereg.net/api/v1/taxon/dictyostelium/</span></span>
+<span><span class="co">#&gt; 9       cnidaria      https://jaspar.genereg.net/api/v1/taxon/cnidaria/</span></span>
+<span><span class="co">#&gt; 10      oomycota      https://jaspar.genereg.net/api/v1/taxon/oomycota/</span></span>
+<span></span>
+<span></span>
+<span><span class="co">## You can list information of all matrices available in a taxonomic group:</span></span>
+<span><span class="va">mat_in_insects</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_taxons_matrices.html">rba_jaspar_taxons_matrices</a></span><span class="op">(</span>tax_group <span class="op">=</span> <span class="st">"insects"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="species">Species<a class="anchor" aria-label="anchor" href="#species"></a>
-</h3>
+<div class="section level4">
+<h4 id="species">Species<a class="anchor" aria-label="anchor" href="#species"></a>
+</h4>
 <p>As we go down in the data organization hierarchy, Each taxonomic group consist of species:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## To get a list of species in release 2020:</span>
-<span class="va">species</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_species.html">rba_jaspar_species</a></span><span class="op">(</span>release <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span>
-<span class="co">#&gt;   tax_id                          species</span>
-<span class="co">#&gt; 1   5037           Ajellomyces capsulatus</span>
-<span class="co">#&gt; 2   4151                Antirrhinum majus</span>
-<span class="co">#&gt; 3  81972 Arabidopsis lyrata subsp. lyrata</span>
-<span class="co">#&gt; 4   3702             Arabidopsis thaliana</span>
-<span class="co">#&gt; 5   9913                       Bos taurus</span>
-<span class="co">#&gt; 6   6238          Caenorhabditis briggsae</span>
-<span class="co">#&gt;                                                url</span>
-<span class="co">#&gt; 1  https://jaspar.genereg.net/api/v1/species/5037/</span>
-<span class="co">#&gt; 2  https://jaspar.genereg.net/api/v1/species/4151/</span>
-<span class="co">#&gt; 3 https://jaspar.genereg.net/api/v1/species/81972/</span>
-<span class="co">#&gt; 4  https://jaspar.genereg.net/api/v1/species/3702/</span>
-<span class="co">#&gt; 5  https://jaspar.genereg.net/api/v1/species/9913/</span>
-<span class="co">#&gt; 6  https://jaspar.genereg.net/api/v1/species/6238/</span>
-<span class="co">#&gt;                                         matrix_url</span>
-<span class="co">#&gt; 1  https://jaspar.genereg.net/api/v1/species/5037/</span>
-<span class="co">#&gt; 2  https://jaspar.genereg.net/api/v1/species/4151/</span>
-<span class="co">#&gt; 3 https://jaspar.genereg.net/api/v1/species/81972/</span>
-<span class="co">#&gt; 4  https://jaspar.genereg.net/api/v1/species/3702/</span>
-<span class="co">#&gt; 5  https://jaspar.genereg.net/api/v1/species/9913/</span>
-<span class="co">#&gt; 6  https://jaspar.genereg.net/api/v1/species/6238/</span>
-
-<span class="co">## You can list information of all matrices available in a specie:</span>
-<span class="va">mat_in_human</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_species_matrices.html">rba_jaspar_species_matrices</a></span><span class="op">(</span>tax_id <span class="op">=</span> <span class="fl">9606</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## To get a list of species in release 2020:</span></span>
+<span><span class="va">species</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_species.html">rba_jaspar_species</a></span><span class="op">(</span>release <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   tax_id                          species</span></span>
+<span><span class="co">#&gt; 1   5037           Ajellomyces capsulatus</span></span>
+<span><span class="co">#&gt; 2   4151                Antirrhinum majus</span></span>
+<span><span class="co">#&gt; 3  81972 Arabidopsis lyrata subsp. lyrata</span></span>
+<span><span class="co">#&gt; 4   3702             Arabidopsis thaliana</span></span>
+<span><span class="co">#&gt; 5   9913                       Bos taurus</span></span>
+<span><span class="co">#&gt; 6   6238          Caenorhabditis briggsae</span></span>
+<span><span class="co">#&gt;                                                url</span></span>
+<span><span class="co">#&gt; 1  https://jaspar.genereg.net/api/v1/species/5037/</span></span>
+<span><span class="co">#&gt; 2  https://jaspar.genereg.net/api/v1/species/4151/</span></span>
+<span><span class="co">#&gt; 3 https://jaspar.genereg.net/api/v1/species/81972/</span></span>
+<span><span class="co">#&gt; 4  https://jaspar.genereg.net/api/v1/species/3702/</span></span>
+<span><span class="co">#&gt; 5  https://jaspar.genereg.net/api/v1/species/9913/</span></span>
+<span><span class="co">#&gt; 6  https://jaspar.genereg.net/api/v1/species/6238/</span></span>
+<span><span class="co">#&gt;                                         matrix_url</span></span>
+<span><span class="co">#&gt; 1  https://jaspar.genereg.net/api/v1/species/5037/</span></span>
+<span><span class="co">#&gt; 2  https://jaspar.genereg.net/api/v1/species/4151/</span></span>
+<span><span class="co">#&gt; 3 https://jaspar.genereg.net/api/v1/species/81972/</span></span>
+<span><span class="co">#&gt; 4  https://jaspar.genereg.net/api/v1/species/3702/</span></span>
+<span><span class="co">#&gt; 5  https://jaspar.genereg.net/api/v1/species/9913/</span></span>
+<span><span class="co">#&gt; 6  https://jaspar.genereg.net/api/v1/species/6238/</span></span>
+<span></span>
+<span><span class="co">## You can list information of all matrices available in a specie:</span></span>
+<span><span class="va">mat_in_human</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_species_matrices.html">rba_jaspar_species_matrices</a></span><span class="op">(</span>tax_id <span class="op">=</span> <span class="fl">9606</span><span class="op">)</span></span></code></pre></div>
 <hr>
 </div>
 </div>
-<div class="section level2">
-<h2 id="matrix-profiles">Matrix Profiles<a class="anchor" aria-label="anchor" href="#matrix-profiles"></a>
-</h2>
 <div class="section level3">
-<h3 id="search-matrix-profiles">Search Matrix Profiles<a class="anchor" aria-label="anchor" href="#search-matrix-profiles"></a>
+<h3 id="matrix-profiles">Matrix Profiles<a class="anchor" aria-label="anchor" href="#matrix-profiles"></a>
 </h3>
+<div class="section level4">
+<h4 id="search-matrix-profiles">Search Matrix Profiles<a class="anchor" aria-label="anchor" href="#search-matrix-profiles"></a>
+</h4>
 <p>Retrieving a list of every matrix available in a given category is not the only option. You can also build a search query using <code>rba_jaspar_matrix_search</code>. Note that this is a search function, you are not required to fill every argument. You may use any combination of arguments you see fit to build your query. You can even call the function without any argument to get a list of all the matrix profiles. For instance:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Get a list of all the available matrix profile:</span>
-<span class="va">all_matrices</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix_search.html">rba_jaspar_matrix_search</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="co">## Search FOX:</span>
-<span class="va">FOX_matrices</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix_search.html">rba_jaspar_matrix_search</a></span><span class="op">(</span>term <span class="op">=</span> <span class="st">"FOX"</span><span class="op">)</span>
-
-<span class="co">## Transcription factors named FOXP3</span>
-<span class="va">FOXP3_matrices</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix_search.html">rba_jaspar_matrix_search</a></span><span class="op">(</span>term <span class="op">=</span> <span class="st">"FOXP3"</span><span class="op">)</span>
-
-<span class="co">## Transcription factors of Zipper-Type Class</span>
-<span class="va">zipper_matrices</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix_search.html">rba_jaspar_matrix_search</a></span><span class="op">(</span>tf_class <span class="op">=</span> <span class="st">"Zipper-Type"</span><span class="op">)</span>
-
-<span class="co">## Transcription factors of Zipper-Type Class in PBM collection</span>
-<span class="va">zipper_pbm_matrices</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix_search.html">rba_jaspar_matrix_search</a></span><span class="op">(</span>tf_class <span class="op">=</span> <span class="st">"Zipper-Type"</span>,
-                                                collection <span class="op">=</span> <span class="st">"PBM"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## Get a list of all the available matrix profile:</span></span>
+<span><span class="va">all_matrices</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix_search.html">rba_jaspar_matrix_search</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Search FOX:</span></span>
+<span><span class="va">FOX_matrices</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix_search.html">rba_jaspar_matrix_search</a></span><span class="op">(</span>term <span class="op">=</span> <span class="st">"FOX"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Transcription factors named FOXP3</span></span>
+<span><span class="va">FOXP3_matrices</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix_search.html">rba_jaspar_matrix_search</a></span><span class="op">(</span>term <span class="op">=</span> <span class="st">"FOXP3"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Transcription factors of Zipper-Type Class</span></span>
+<span><span class="va">zipper_matrices</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix_search.html">rba_jaspar_matrix_search</a></span><span class="op">(</span>tf_class <span class="op">=</span> <span class="st">"Zipper-Type"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Transcription factors of Zipper-Type Class in PBM collection</span></span>
+<span><span class="va">zipper_pbm_matrices</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix_search.html">rba_jaspar_matrix_search</a></span><span class="op">(</span>tf_class <span class="op">=</span> <span class="st">"Zipper-Type"</span>,</span>
+<span>                                                collection <span class="op">=</span> <span class="st">"PBM"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="list-matrix-profiles-associated-to-a-base-identifier">List Matrix Profiles Associated to a Base identifier<a class="anchor" aria-label="anchor" href="#list-matrix-profiles-associated-to-a-base-identifier"></a>
-</h3>
+<div class="section level4">
+<h4 id="list-matrix-profiles-associated-to-a-base-identifier">List Matrix Profiles Associated to a Base identifier<a class="anchor" aria-label="anchor" href="#list-matrix-profiles-associated-to-a-base-identifier"></a>
+</h4>
 <p>Since JASPAR release 2010, the matrix profiles are versioned. A matrix profile Identifier has a “base_id.version” naming schema; for example “MA0600.2” corresponds to the second version of a matrix with base ID MA0600. You can Use <code>rba_jaspar_matrix_versions</code> to get a list of matrix profiles with a given base ID. Also note that some functions, generally those that are used to list available matrices, have an argument called <code>only_last_version</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Get matrix profiles versions associated to a base id</span>
-<span class="va">MA0600_versions</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix_versions.html">rba_jaspar_matrix_versions</a></span><span class="op">(</span><span class="st">"MA0600"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## Get matrix profiles versions associated to a base id</span></span>
+<span><span class="va">MA0600_versions</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix_versions.html">rba_jaspar_matrix_versions</a></span><span class="op">(</span><span class="st">"MA0600"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="get-a-matrix-profile">Get a Matrix Profile<a class="anchor" aria-label="anchor" href="#get-a-matrix-profile"></a>
-</h3>
-<p>Now that you listed or searched for matrix profiles, you can use <code>rba_jaspar_matrix</code> to retrieve matrix profiles. There are two ways in which you can use this function:</p>
 <div class="section level4">
-<h4 id="get-matrix-and-annotations-as-an-r-object">Get Matrix and Annotations as an R Object<a class="anchor" aria-label="anchor" href="#get-matrix-and-annotations-as-an-r-object"></a>
+<h4 id="get-a-matrix-profile">Get a Matrix Profile<a class="anchor" aria-label="anchor" href="#get-a-matrix-profile"></a>
 </h4>
+<p>Now that you listed or searched for matrix profiles, you can use <code>rba_jaspar_matrix</code> to retrieve matrix profiles. There are two ways in which you can use this function:</p>
+<div class="section level5">
+<h5 id="get-matrix-and-annotations-as-an-r-object">Get Matrix and Annotations as an R Object<a class="anchor" aria-label="anchor" href="#get-matrix-and-annotations-as-an-r-object"></a>
+</h5>
 <p>To do that, only fill in the <code>matrix_id</code> argument in <code>rba_jaspar_matrix</code></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pfm_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix.html">rba_jaspar_matrix</a></span><span class="op">(</span>matrix_id <span class="op">=</span> <span class="st">"MA0600.2"</span><span class="op">)</span>
-
-<span class="co">## you can find the matrix in the pfm element along with</span>
-<span class="co">## other elements which correspond to annotations and details</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">pfm_matrix</span><span class="op">)</span>
-<span class="co">#&gt; List of 24</span>
-<span class="co">#&gt;  $ version      : int 2</span>
-<span class="co">#&gt;  $ family       : chr "RFX-related factors"</span>
-<span class="co">#&gt;  $ tfe_ids      : list()</span>
-<span class="co">#&gt;  $ name         : chr "RFX2"</span>
-<span class="co">#&gt;  $ pazar_tf_id  : list()</span>
-<span class="co">#&gt;  $ pubmed_ids   : chr "8754849"</span>
-<span class="co">#&gt;  $ class        : chr "Fork head/winged helix factors"</span>
-<span class="co">#&gt;  $ sequence_logo: chr "https://jaspar.genereg.net/static/logos/svg/MA0600.2.svg"</span>
-<span class="co">#&gt;  $ medline      : chr "8754849"</span>
-<span class="co">#&gt;  $ pfm          : num [1:4, 1:16] 1381 5653 4042 2336 270 ...</span>
-<span class="co">#&gt;   ..- attr(*, "dimnames")=List of 2</span>
-<span class="co">#&gt;   .. ..$ : chr [1:4] "A" "C" "G" "T"</span>
-<span class="co">#&gt;   .. ..$ : NULL</span>
-<span class="co">#&gt;  $ base_id      : chr "MA0600"</span>
-<span class="co">#&gt;  $ tax_group    : chr "vertebrates"</span>
-<span class="co">#&gt;  $ source       : chr "23332764"</span>
-<span class="co">#&gt;  $ tffm         :List of 7</span>
-<span class="co">#&gt;   ..$ version        : int 1</span>
-<span class="co">#&gt;   ..$ tffm_url       : chr "https://jaspar.genereg.net/api/v1/tffm/TFFM0576.1/"</span>
-<span class="co">#&gt;   ..$ base_id        : chr "TFFM0576"</span>
-<span class="co">#&gt;   ..$ tffm_id        : chr "TFFM0576.1"</span>
-<span class="co">#&gt;   ..$ log_p_detailed : num -6660</span>
-<span class="co">#&gt;   ..$ log_p_1st_order: num -6275</span>
-<span class="co">#&gt;   ..$ experiment_name: chr "CistromeDB_58298"</span>
-<span class="co">#&gt;  $ sites_url    : NULL</span>
-<span class="co">#&gt;  $ tfe_id       : list()</span>
-<span class="co">#&gt;  $ type         : chr "HT-SELEX"</span>
-<span class="co">#&gt;  $ matrix_id    : chr "MA0600.2"</span>
-<span class="co">#&gt;  $ versions_url : chr "https://jaspar.genereg.net/api/v1/matrix/MA0600/versions"</span>
-<span class="co">#&gt;  $ species      :'data.frame':   1 obs. of  2 variables:</span>
-<span class="co">#&gt;   ..$ tax_id: int 9606</span>
-<span class="co">#&gt;   ..$ name  : chr "Homo sapiens"</span>
-<span class="co">#&gt;  $ uniprot_ids  : chr "P48378"</span>
-<span class="co">#&gt;  $ pazar_tf_ids : list()</span>
-<span class="co">#&gt;  $ remap_tf_name: chr "RFX2"</span>
-<span class="co">#&gt;  $ collection   : chr "CORE"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">pfm_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix.html">rba_jaspar_matrix</a></span><span class="op">(</span>matrix_id <span class="op">=</span> <span class="st">"MA0600.2"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## you can find the matrix in the pfm element along with</span></span>
+<span><span class="co">## other elements which correspond to annotations and details</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">pfm_matrix</span><span class="op">)</span></span>
+<span><span class="co">#&gt; List of 24</span></span>
+<span><span class="co">#&gt;  $ pazar_tf_id  : list()</span></span>
+<span><span class="co">#&gt;  $ tax_group    : chr "vertebrates"</span></span>
+<span><span class="co">#&gt;  $ remap_tf_name: chr "RFX2"</span></span>
+<span><span class="co">#&gt;  $ tffm         :List of 7</span></span>
+<span><span class="co">#&gt;   ..$ experiment_name: chr "CistromeDB_58298"</span></span>
+<span><span class="co">#&gt;   ..$ log_p_1st_order: num -6275</span></span>
+<span><span class="co">#&gt;   ..$ base_id        : chr "TFFM0576"</span></span>
+<span><span class="co">#&gt;   ..$ tffm_id        : chr "TFFM0576.1"</span></span>
+<span><span class="co">#&gt;   ..$ log_p_detailed : num -6660</span></span>
+<span><span class="co">#&gt;   ..$ tffm_url       : chr "https://jaspar.genereg.net/api/v1/tffm/TFFM0576.1/"</span></span>
+<span><span class="co">#&gt;   ..$ version        : int 1</span></span>
+<span><span class="co">#&gt;  $ version      : int 2</span></span>
+<span><span class="co">#&gt;  $ tfe_id       : list()</span></span>
+<span><span class="co">#&gt;  $ source       : chr "23332764"</span></span>
+<span><span class="co">#&gt;  $ family       : chr "RFX-related factors"</span></span>
+<span><span class="co">#&gt;  $ pubmed_ids   : chr "8754849"</span></span>
+<span><span class="co">#&gt;  $ name         : chr "RFX2"</span></span>
+<span><span class="co">#&gt;  $ sites_url    : NULL</span></span>
+<span><span class="co">#&gt;  $ class        : chr "Fork head/winged helix factors"</span></span>
+<span><span class="co">#&gt;  $ tfe_ids      : list()</span></span>
+<span><span class="co">#&gt;  $ pazar_tf_ids : list()</span></span>
+<span><span class="co">#&gt;  $ medline      : chr "8754849"</span></span>
+<span><span class="co">#&gt;  $ type         : chr "HT-SELEX"</span></span>
+<span><span class="co">#&gt;  $ uniprot_ids  : chr "P48378"</span></span>
+<span><span class="co">#&gt;  $ versions_url : chr "https://jaspar.genereg.net/api/v1/matrix/MA0600/versions"</span></span>
+<span><span class="co">#&gt;  $ collection   : chr "CORE"</span></span>
+<span><span class="co">#&gt;  $ pfm          : num [1:4, 1:16] 1381 5653 4042 2336 270 ...</span></span>
+<span><span class="co">#&gt;   ..- attr(*, "dimnames")=List of 2</span></span>
+<span><span class="co">#&gt;   .. ..$ : chr [1:4] "A" "C" "G" "T"</span></span>
+<span><span class="co">#&gt;   .. ..$ : NULL</span></span>
+<span><span class="co">#&gt;  $ base_id      : chr "MA0600"</span></span>
+<span><span class="co">#&gt;  $ species      :'data.frame':   1 obs. of  2 variables:</span></span>
+<span><span class="co">#&gt;   ..$ tax_id: int 9606</span></span>
+<span><span class="co">#&gt;   ..$ name  : chr "Homo sapiens"</span></span>
+<span><span class="co">#&gt;  $ sequence_logo: chr "https://jaspar.genereg.net/static/logos/svg/MA0600.2.svg"</span></span>
+<span><span class="co">#&gt;  $ matrix_id    : chr "MA0600.2"</span></span></code></pre></div>
 </div>
-<div class="section level4">
-<h4 id="save-a-matrix-a-file-in-specific-format">Save a Matrix a File in Specific Format<a class="anchor" aria-label="anchor" href="#save-a-matrix-a-file-in-specific-format"></a>
-</h4>
+<div class="section level5">
+<h5 id="save-a-matrix-a-file-in-specific-format">Save a Matrix a File in Specific Format<a class="anchor" aria-label="anchor" href="#save-a-matrix-a-file-in-specific-format"></a>
+</h5>
 <p>JASPAR provides position frequency matrices (PFM) formatted as <strong>Raw PFM</strong>, <strong>JASPAR</strong>, <strong>TRANSFAC</strong>, <strong>YAML</strong>, and <strong>MEME</strong>. You can download a matrix profile as a file with any of these formats. To do that, You should use the <code>file_format</code> and <code>save_to</code> arguments available in <code>rba_jaspar_matrix</code>. There are two notes here:</p>
 <ol style="list-style-type: decimal">
 <li><p>In this case, the function will save your matrix as a file and returns the un-parsed content of the file as a character string.</p></li>
@@ -320,82 +320,82 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 </li>
 </ol>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Different wqays in which you can save the matrix file:</span>
-<span class="va">meme_matrix1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix.html">rba_jaspar_matrix</a></span><span class="op">(</span>matrix_id <span class="op">=</span> <span class="st">"MA0600.2"</span>,
-                                  file_format <span class="op">=</span> <span class="st">"meme"</span><span class="op">)</span>
-
-<span class="va">meme_matrix2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix.html">rba_jaspar_matrix</a></span><span class="op">(</span>matrix_id <span class="op">=</span> <span class="st">"MA0600.2"</span>,
-                                  file_format <span class="op">=</span> <span class="st">"meme"</span>,
-                                  save_to <span class="op">=</span> <span class="st">"my_matrix.meme"</span><span class="op">)</span>
-
-<span class="va">meme_matrix3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix.html">rba_jaspar_matrix</a></span><span class="op">(</span>matrix_id <span class="op">=</span> <span class="st">"MA0600.2"</span>,
-                                  file_format <span class="op">=</span> <span class="st">"meme"</span>,
-                                  save_to <span class="op">=</span> <span class="st">"c:/rbioapi"</span><span class="op">)</span>
-
-<span class="va">meme_matrix4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix.html">rba_jaspar_matrix</a></span><span class="op">(</span>matrix_id <span class="op">=</span> <span class="st">"MA0600.2"</span>,
-                                  file_format <span class="op">=</span> <span class="st">"meme"</span>,
-                                  save_to <span class="op">=</span> <span class="st">"c:/rbioapi/my_matrix.meme"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## Different wqays in which you can save the matrix file:</span></span>
+<span><span class="va">meme_matrix1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix.html">rba_jaspar_matrix</a></span><span class="op">(</span>matrix_id <span class="op">=</span> <span class="st">"MA0600.2"</span>,</span>
+<span>                                  file_format <span class="op">=</span> <span class="st">"meme"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">meme_matrix2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix.html">rba_jaspar_matrix</a></span><span class="op">(</span>matrix_id <span class="op">=</span> <span class="st">"MA0600.2"</span>,</span>
+<span>                                  file_format <span class="op">=</span> <span class="st">"meme"</span>,</span>
+<span>                                  save_to <span class="op">=</span> <span class="st">"my_matrix.meme"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">meme_matrix3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix.html">rba_jaspar_matrix</a></span><span class="op">(</span>matrix_id <span class="op">=</span> <span class="st">"MA0600.2"</span>,</span>
+<span>                                  file_format <span class="op">=</span> <span class="st">"meme"</span>,</span>
+<span>                                  save_to <span class="op">=</span> <span class="st">"c:/rbioapi"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">meme_matrix4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix.html">rba_jaspar_matrix</a></span><span class="op">(</span>matrix_id <span class="op">=</span> <span class="st">"MA0600.2"</span>,</span>
+<span>                                  file_format <span class="op">=</span> <span class="st">"meme"</span>,</span>
+<span>                                  save_to <span class="op">=</span> <span class="st">"c:/rbioapi/my_matrix.meme"</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+<div class="section level4">
+<h4 id="get-binding-sites-of-a-matrix-profiles">Get Binding Sites of a Matrix Profiles<a class="anchor" aria-label="anchor" href="#get-binding-sites-of-a-matrix-profiles"></a>
+</h4>
+<p>If available, you can retrieve information on binding sites associated with a matrix profile. The information includes a data frame of genomic coordination of the binding site, URL to FASTA and BED files, along with other annotations.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Get binding site of a matrix profile:</span></span>
+<span><span class="va">binding_sites</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_sites.html">rba_jaspar_sites</a></span><span class="op">(</span>matrix_id <span class="op">=</span> <span class="st">"MA0600.2"</span><span class="op">)</span></span></code></pre></div>
+<hr>
 </div>
 </div>
 <div class="section level3">
-<h3 id="get-binding-sites-of-a-matrix-profiles">Get Binding Sites of a Matrix Profiles<a class="anchor" aria-label="anchor" href="#get-binding-sites-of-a-matrix-profiles"></a>
+<h3 id="tf-flexible-models-tffms">TF flexible models (TFFMs)<a class="anchor" aria-label="anchor" href="#tf-flexible-models-tffms"></a>
 </h3>
-<p>If available, you can retrieve information on binding sites associated with a matrix profile. The information includes a data frame of genomic coordination of the binding site, URL to FASTA and BED files, along with other annotations.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Get binding site of a matrix profile:</span>
-<span class="va">binding_sites</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_sites.html">rba_jaspar_sites</a></span><span class="op">(</span>matrix_id <span class="op">=</span> <span class="st">"MA0600.2"</span><span class="op">)</span></code></pre></div>
-<hr>
-</div>
-</div>
-<div class="section level2">
-<h2 id="tf-flexible-models-tffms">TF flexible models (TFFMs)<a class="anchor" aria-label="anchor" href="#tf-flexible-models-tffms"></a>
-</h2>
 <p>JASPAR also stores and assigns identifiers to TF flexible models (TFFMs). Just like PFM (position frequency matrices), you can search TFFMs or retrieve information and annotations using a TFFM Identifier. TFFM IDs are versioned, meaning that they are in base_id.version format.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Search TFFMs. This is a search function. Thus, what has been presented</span>
-<span class="co">## in `Search Matrix Profiles` section also applies here:</span>
-
-<span class="co">## Get a list of all the available matrix profile:</span>
-<span class="va">all_tffms</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_tffm_search.html">rba_jaspar_tffm_search</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="co">## Search FOX:</span>
-<span class="va">FOX_tffms</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_tffm_search.html">rba_jaspar_tffm_search</a></span><span class="op">(</span>term <span class="op">=</span> <span class="st">"FOX"</span><span class="op">)</span>
-
-<span class="co">## Transcription factors named FOXP3</span>
-<span class="va">FOXP3_tffms</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_tffm_search.html">rba_jaspar_tffm_search</a></span><span class="op">(</span>term <span class="op">=</span> <span class="st">"FOXP3"</span><span class="op">)</span>
-
-<span class="co">## Transcription factors of insects taxonomic group</span>
-<span class="va">insects_tffms</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_tffm_search.html">rba_jaspar_tffm_search</a></span><span class="op">(</span>tax_group <span class="op">=</span> <span class="st">"insects"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## Search TFFMs. This is a search function. Thus, what has been presented</span></span>
+<span><span class="co">## in `Search Matrix Profiles` section also applies here:</span></span>
+<span></span>
+<span><span class="co">## Get a list of all the available matrix profile:</span></span>
+<span><span class="va">all_tffms</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_tffm_search.html">rba_jaspar_tffm_search</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Search FOX:</span></span>
+<span><span class="va">FOX_tffms</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_tffm_search.html">rba_jaspar_tffm_search</a></span><span class="op">(</span>term <span class="op">=</span> <span class="st">"FOX"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Transcription factors named FOXP3</span></span>
+<span><span class="va">FOXP3_tffms</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_tffm_search.html">rba_jaspar_tffm_search</a></span><span class="op">(</span>term <span class="op">=</span> <span class="st">"FOXP3"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Transcription factors of insects taxonomic group</span></span>
+<span><span class="va">insects_tffms</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_tffm_search.html">rba_jaspar_tffm_search</a></span><span class="op">(</span>tax_group <span class="op">=</span> <span class="st">"insects"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Now that you have a TFFM ID, you can retrieve it</span>
-<span class="va">TFFM0056</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_tffm.html">rba_jaspar_tffm</a></span><span class="op">(</span><span class="st">"TFFM0056.3"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">TFFM0056</span><span class="op">)</span>
-<span class="co">#&gt; List of 10</span>
-<span class="co">#&gt;  $ version        : int 3</span>
-<span class="co">#&gt;  $ base_id        : chr "TFFM0056"</span>
-<span class="co">#&gt;  $ tffm_id        : chr "TFFM0056.3"</span>
-<span class="co">#&gt;  $ matrix_id      : chr "MA0039.4"</span>
-<span class="co">#&gt;  $ first_order    :List of 5</span>
-<span class="co">#&gt;   ..$ dense_logo  : chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_first_order_trained_dense_logo.svg"</span>
-<span class="co">#&gt;   ..$ xml         : chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_first_order_trained.xml"</span>
-<span class="co">#&gt;   ..$ summary_logo: chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_first_order_trained_summary_logo.svg"</span>
-<span class="co">#&gt;   ..$ hits        : chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_first_order_trained.hits.svg"</span>
-<span class="co">#&gt;   ..$ log_p       : num -7420</span>
-<span class="co">#&gt;  $ experiment_name: chr "CistromeDB_33718"</span>
-<span class="co">#&gt;  $ detailed       :List of 5</span>
-<span class="co">#&gt;   ..$ dense_logo  : chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_detailed_trained_dense_logo.svg"</span>
-<span class="co">#&gt;   ..$ xml         : chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_detailed_trained.xml"</span>
-<span class="co">#&gt;   ..$ summary_logo: chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_detailed_trained_summary_logo.svg"</span>
-<span class="co">#&gt;   ..$ hits        : chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_detailed_trained.hits.svg"</span>
-<span class="co">#&gt;   ..$ log_p       : num -6854</span>
-<span class="co">#&gt;  $ matrix_base_id : chr "MA0039"</span>
-<span class="co">#&gt;  $ matrix_url     : chr "https://jaspar.genereg.net/api/v1/matrix/MA0039.4/"</span>
-<span class="co">#&gt;  $ matrix_version : int 4</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## Now that you have a TFFM ID, you can retrieve it</span></span>
+<span><span class="va">TFFM0056</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_tffm.html">rba_jaspar_tffm</a></span><span class="op">(</span><span class="st">"TFFM0056.3"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">TFFM0056</span><span class="op">)</span></span>
+<span><span class="co">#&gt; List of 10</span></span>
+<span><span class="co">#&gt;  $ experiment_name: chr "CistromeDB_33718"</span></span>
+<span><span class="co">#&gt;  $ base_id        : chr "TFFM0056"</span></span>
+<span><span class="co">#&gt;  $ matrix_base_id : chr "MA0039"</span></span>
+<span><span class="co">#&gt;  $ tffm_id        : chr "TFFM0056.3"</span></span>
+<span><span class="co">#&gt;  $ matrix_url     : chr "https://jaspar.genereg.net/api/v1/matrix/MA0039.4/"</span></span>
+<span><span class="co">#&gt;  $ first_order    :List of 5</span></span>
+<span><span class="co">#&gt;   ..$ log_p       : num -7420</span></span>
+<span><span class="co">#&gt;   ..$ summary_logo: chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_first_order_trained_summary_logo.svg"</span></span>
+<span><span class="co">#&gt;   ..$ xml         : chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_first_order_trained.xml"</span></span>
+<span><span class="co">#&gt;   ..$ dense_logo  : chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_first_order_trained_dense_logo.svg"</span></span>
+<span><span class="co">#&gt;   ..$ hits        : chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_first_order_trained.hits.svg"</span></span>
+<span><span class="co">#&gt;  $ detailed       :List of 5</span></span>
+<span><span class="co">#&gt;   ..$ log_p       : num -6854</span></span>
+<span><span class="co">#&gt;   ..$ summary_logo: chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_detailed_trained_summary_logo.svg"</span></span>
+<span><span class="co">#&gt;   ..$ xml         : chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_detailed_trained.xml"</span></span>
+<span><span class="co">#&gt;   ..$ dense_logo  : chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_detailed_trained_dense_logo.svg"</span></span>
+<span><span class="co">#&gt;   ..$ hits        : chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_detailed_trained.hits.svg"</span></span>
+<span><span class="co">#&gt;  $ matrix_id      : chr "MA0039.4"</span></span>
+<span><span class="co">#&gt;  $ matrix_version : int 4</span></span>
+<span><span class="co">#&gt;  $ version        : int 3</span></span></code></pre></div>
 <hr>
 </div>
-<div class="section level2">
-<h2 id="Citations">How to Cite?<a class="anchor" aria-label="anchor" href="#Citations"></a>
-</h2>
+<div class="section level3">
+<h3 id="citations">How to Cite?<a class="anchor" aria-label="anchor" href="#citations"></a>
+</h3>
 <p>To cite JASPAR (Please see <a href="https://jaspar.genereg.net/faq/" class="external-link uri">https://jaspar.genereg.net/faq/</a>):</p>
 <ul>
 <li>Jaime A Castro-Mondragon, Rafael Riudavets-Puig, Ieva Rauluseviciute, Roza Berhanu Lemma, Laura Turchi, Romain Blanc-Mathieu, Jeremy Lucas, Paul Boddie, Aziz Khan, Nicolás Manosalva Pérez, Oriol Fornes, Tiffany Y Leung, Alejandro Aguirre, Fayrouz Hammal, Daniel Schmelter, Damir Baranasic, Benoit Ballester, Albin Sandelin, Boris Lenhard, Klaas Vandepoele, Wyeth W Wasserman, François Parcy, Anthony Mathelier, JASPAR 2022: the 9th release of the open-access database of transcription factor binding profiles, <em>Nucleic Acids Research</em>, Volume 50, Issue D1, 7 January 2022, Pages D165–D173, <a href="https://doi.org/10.1093/nar/gkab1113" class="external-link uri">https://doi.org/10.1093/nar/gkab1113</a>
@@ -421,32 +421,32 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 <div class="section level2">
 <h2 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
-<pre><code><span class="co">#&gt; R version 4.2.0 (2022-04-22)</span>
-<span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span>
-<span class="co">#&gt; Running under: macOS Big Sur/Monterey 10.16</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Matrix products: default</span>
-<span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib</span>
-<span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; locale:</span>
-<span class="co">#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; attached base packages:</span>
-<span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; other attached packages:</span>
-<span class="co">#&gt; [1] rbioapi_0.7.6</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; loaded via a namespace (and not attached):</span>
-<span class="co">#&gt;  [1] knitr_1.39        magrittr_2.0.3    R6_2.5.1          ragg_1.2.2       </span>
-<span class="co">#&gt;  [5] rlang_1.0.2       fastmap_1.1.0     httr_1.4.3        stringr_1.4.0    </span>
-<span class="co">#&gt;  [9] tools_4.2.0       xfun_0.31         cli_3.3.0         jquerylib_0.1.4  </span>
-<span class="co">#&gt; [13] htmltools_0.5.2   systemfonts_1.0.4 yaml_2.3.5        digest_0.6.29    </span>
-<span class="co">#&gt; [17] rprojroot_2.0.3   pkgdown_2.0.3     textshaping_0.3.6 purrr_0.3.4      </span>
-<span class="co">#&gt; [21] sass_0.4.1        fs_1.5.2          curl_4.3.2        memoise_2.0.1    </span>
-<span class="co">#&gt; [25] cachem_1.0.6      evaluate_0.15     rmarkdown_2.14    stringi_1.7.6    </span>
-<span class="co">#&gt; [29] compiler_4.2.0    bslib_0.3.1       desc_1.4.1        jsonlite_1.8.0</span></code></pre>
+<pre><code><span><span class="co">#&gt; R version 4.2.1 (2022-06-23)</span></span>
+<span><span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span></span>
+<span><span class="co">#&gt; Running under: macOS Big Sur ... 10.16</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Matrix products: default</span></span>
+<span><span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib</span></span>
+<span><span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; locale:</span></span>
+<span><span class="co">#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; attached base packages:</span></span>
+<span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; other attached packages:</span></span>
+<span><span class="co">#&gt; [1] rbioapi_0.7.7</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
+<span><span class="co">#&gt;  [1] knitr_1.39        magrittr_2.0.3    R6_2.5.1          ragg_1.2.2       </span></span>
+<span><span class="co">#&gt;  [5] rlang_1.0.4       fastmap_1.1.0     httr_1.4.3        stringr_1.4.0    </span></span>
+<span><span class="co">#&gt;  [9] tools_4.2.1       xfun_0.31         cli_3.3.0         jquerylib_0.1.4  </span></span>
+<span><span class="co">#&gt; [13] htmltools_0.5.3   systemfonts_1.0.4 yaml_2.3.5        digest_0.6.29    </span></span>
+<span><span class="co">#&gt; [17] rprojroot_2.0.3   pkgdown_2.0.6     textshaping_0.3.6 purrr_0.3.4      </span></span>
+<span><span class="co">#&gt; [21] sass_0.4.2        fs_1.5.2          curl_4.3.2        memoise_2.0.1    </span></span>
+<span><span class="co">#&gt; [25] cachem_1.0.6      evaluate_0.15     rmarkdown_2.14    stringi_1.7.8    </span></span>
+<span><span class="co">#&gt; [29] compiler_4.2.1    bslib_0.4.0       desc_1.4.1        jsonlite_1.8.0</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
@@ -461,7 +461,7 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer>

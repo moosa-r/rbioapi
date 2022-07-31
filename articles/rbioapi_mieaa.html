@@ -15,8 +15,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="2.C: miEEA &amp; rbioapi">
 <meta property="og:description" content="Connect to miEAA in R with rbioapi package. 
@@ -41,7 +41,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rbioapi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -113,11 +113,11 @@
 <link href="rbioapi_mieaa_files/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
 <script src="rbioapi_mieaa_files/dt-core-1.11.3/js/jquery.dataTables.min.js"></script><link href="rbioapi_mieaa_files/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
 <script src="rbioapi_mieaa_files/crosstalk-1.2.0/js/crosstalk.min.js"></script><div class="row">
-  <main id="main"><div class="page-header">
+  <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>2.C: miEEA &amp; rbioapi</h1>
                         <h4 data-toc-skip class="author">Moosa Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2022-06-11</h4>
+            <h4 data-toc-skip class="date">2022-07-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/HEAD/vignettes/rbioapi_mieaa.Rmd" class="external-link"><code>vignettes/rbioapi_mieaa.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_mieaa.Rmd</code></div>
@@ -126,107 +126,107 @@
     
     
 <hr>
-<div class="section level2">
+<div class="section level2 heading2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p>The miRNA Enrichment Analysis and Annotation Tool (<a href="https://ccb-compute2.cs.uni-saarland.de/mieaa2" title="https://ccb-compute2.cs.uni-saarland.de/mieaa2" class="external-link">miEAA</a>) is a service provided by the <a href="https://www.ccb.uni-saarland.de/" class="external-link">Chair for Clinical Bioinformatics at Saarland University</a>. Basically, miEAA is a multi-species microRNA enrichment analysis tool. For more information, see their <a href="https://ccb-compute2.cs.uni-saarland.de/mieaa2" title="https://ccb-compute2.cs.uni-saarland.de/mieaa2" class="external-link">website</a> or <a href="https://doi.org/10.1093/nar/gkaa309" title="miEAA 2.0: integrating multi-species microRNA enrichment analysis and workflow management systems" class="external-link">published paper</a>.</p>
 <hr>
 </div>
-<div class="section level2">
+<div class="section level2 heading2">
 <h2 id="first-find-enrichment-categories">First, find <strong>enrichment categories</strong><a class="anchor" aria-label="anchor" href="#first-find-enrichment-categories"></a>
 </h2>
-<p>Before Enriching miRNA set, note that based on your input <strong>miRNA type</strong> (either all mature or precursor, not a mixture of both!) and the <strong>species</strong>, there will be different <a href="https://ccb-compute2.cs.uni-saarland.de/mieaa2/downloads/" title="miEEA integrated data sets" class="external-link">sets</a> of supported <strong>enrichment categories.</strong></p>
+<p>Before Performing enrichment analysis on a miRNA set, note that based on your input <strong>miRNA type</strong> (either all mature or precursor, not a mixture of both!) and the <strong>species</strong>, there will be different <a href="https://ccb-compute2.cs.uni-saarland.de/mieaa2/downloads/" title="miEEA integrated data sets" class="external-link">sets</a> of supported <strong>enrichment categories.</strong></p>
 <p>Thus, it is recommended to retrieve a list of possible enrichment categories that you may use:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## A list of available enrichment categories for:</span>
-<span class="co">## mature human miRNA:</span>
-<span class="fu"><a href="../reference/rba_mieaa_cats.html">rba_mieaa_cats</a></span><span class="op">(</span>mirna_type <span class="op">=</span> <span class="st">"mature"</span>, species <span class="op">=</span> <span class="fl">9606</span><span class="op">)</span>
-<span class="co">## precursor human miRNA</span>
-<span class="fu"><a href="../reference/rba_mieaa_cats.html">rba_mieaa_cats</a></span><span class="op">(</span>mirna_type <span class="op">=</span> <span class="st">"precursor"</span>, species <span class="op">=</span> <span class="fl">9606</span><span class="op">)</span>
-<span class="co">## precursor zebrafish miRNA</span>
-<span class="fu"><a href="../reference/rba_mieaa_cats.html">rba_mieaa_cats</a></span><span class="op">(</span>mirna_type <span class="op">=</span> <span class="st">"mature"</span>, species <span class="op">=</span> <span class="st">"Danio rerio"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## A list of available enrichment categories for:</span></span>
+<span><span class="co">## mature human miRNA:</span></span>
+<span><span class="fu"><a href="../reference/rba_mieaa_cats.html">rba_mieaa_cats</a></span><span class="op">(</span>mirna_type <span class="op">=</span> <span class="st">"mature"</span>, species <span class="op">=</span> <span class="fl">9606</span><span class="op">)</span></span>
+<span><span class="co">## precursor human miRNA</span></span>
+<span><span class="fu"><a href="../reference/rba_mieaa_cats.html">rba_mieaa_cats</a></span><span class="op">(</span>mirna_type <span class="op">=</span> <span class="st">"precursor"</span>, species <span class="op">=</span> <span class="fl">9606</span><span class="op">)</span></span>
+<span><span class="co">## precursor zebrafish miRNA</span></span>
+<span><span class="fu"><a href="../reference/rba_mieaa_cats.html">rba_mieaa_cats</a></span><span class="op">(</span>mirna_type <span class="op">=</span> <span class="st">"mature"</span>, species <span class="op">=</span> <span class="st">"Danio rerio"</span><span class="op">)</span></span></code></pre></div>
 <hr>
 </div>
-<div class="section level2">
+<div class="section level2 heading2">
 <h2 id="submit-enrichment-analysis-request-to-mieaa">Submit Enrichment analysis request to miEAA<a class="anchor" aria-label="anchor" href="#submit-enrichment-analysis-request-to-mieaa"></a>
 </h2>
 <p>There are two approaches to do this, we will start with the simpler one.</p>
-<div class="section level3">
+<div class="section level3 heading3">
 <h3 id="approach-1-using-the-wrapper-function">Approach 1: Using the Wrapper function<a class="anchor" aria-label="anchor" href="#approach-1-using-the-wrapper-function"></a>
 </h3>
 <p>Just fill the arguments of <code><a href="../reference/rba_mieaa_enrich.html">rba_mieaa_enrich()</a></code> according to the function’s manual; As you can see in the function’s arguments, you have a lot of controls over your enrichment request, but you need to provide <code>test_set</code>, <code>mirna_type</code>, <code>test_type</code>, and <code>species</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## 1 We create a variable with our miRNAs' mature IDs</span>
-<span class="va">mirs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hsa-miR-20b-5p"</span>, <span class="st">"hsa-miR-144-5p"</span>, <span class="st">"hsa-miR-17-5p"</span>, <span class="st">"hsa-miR-20a-5p"</span>,
-         <span class="st">"hsa-miR-222-3p"</span>, <span class="st">"hsa-miR-106a-5p"</span>, <span class="st">"hsa-miR-93-5p"</span>, <span class="st">"hsa-miR-126-3p"</span>,
-         <span class="st">"hsa-miR-363-3p"</span>, <span class="st">"hsa-miR-302c-3p"</span>, <span class="st">"hsa-miR-374b-5p"</span>, <span class="st">"hsa-miR-18a-5p"</span>,
-         <span class="st">"hsa-miR-548d-3p"</span>, <span class="st">"hsa-miR-135a-3p"</span>, <span class="st">"hsa-miR-558"</span>, <span class="st">"hsa-miR-130b-5p"</span>,
-         <span class="st">"hsa-miR-148a-3p"</span><span class="op">)</span>
-<span class="co">## 2a We can enrich our miRNA set without limiting the enrichment to any categories</span>
-<span class="va">mieaa_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_mieaa_enrich.html">rba_mieaa_enrich</a></span><span class="op">(</span>test_set <span class="op">=</span> <span class="va">mirs</span>,
-                             mirna_type <span class="op">=</span> <span class="st">"mature"</span>,
-                             test_type <span class="op">=</span> <span class="st">"ORA"</span>,
-                             species <span class="op">=</span> <span class="fl">9606</span><span class="op">)</span>
-<span class="co">#&gt;  -- Step 1/3: Submitting Enrichment request:</span>
-<span class="co">#&gt; No categories were supplied, Requesting enrichment using all of the 28 available categories for species 'Homo sapiens'.</span>
-<span class="co">#&gt; Submitting ORA enrichment request for 17 miRNA IDs of species Homo sapiens to miEAA servers.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  -- Step 2/3: Checking for Submitted enrichment job's status every 5 seconds.</span>
-<span class="co">#&gt;     Your submitted job ID is: a8800717-1e35-469b-8816-07bf4df3dbd2</span>
-<span class="co">#&gt; ....</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  -- Step 3/3: Retrieving the results of the finished enrichment job.</span>
-<span class="co">#&gt; Retrieving results of submitted enrichment request with ID: a8800717-1e35-469b-8816-07bf4df3dbd2</span>
-<span class="co">## 2b Or, We can limit the enrichment to certain datasets (enrichment categories)</span>
-<span class="va">mieaa_kegg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_mieaa_enrich.html">rba_mieaa_enrich</a></span><span class="op">(</span>test_set <span class="op">=</span> <span class="va">mirs</span>,
-                              mirna_type <span class="op">=</span> <span class="st">"mature"</span>,
-                              test_type <span class="op">=</span> <span class="st">"ORA"</span>,
-                              species <span class="op">=</span> <span class="fl">9606</span>,
-                              categories <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"miRWalk_Diseases_mature"</span>,
-                                            <span class="st">"miRWalk_Organs_mature"</span><span class="op">)</span>
-                             <span class="op">)</span>
-<span class="co">#&gt;  -- Step 1/3: Submitting Enrichment request:</span>
-<span class="co">#&gt; Submitting ORA enrichment request for 17 miRNA IDs of species Homo sapiens to miEAA servers.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  -- Step 2/3: Checking for Submitted enrichment job's status every 5 seconds.</span>
-<span class="co">#&gt;     Your submitted job ID is: 210cb8dd-e1f4-4b03-8a97-fb2fcb9d7f50</span>
-<span class="co">#&gt; .</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  -- Step 3/3: Retrieving the results of the finished enrichment job.</span>
-<span class="co">#&gt; Retrieving results of submitted enrichment request with ID: 210cb8dd-e1f4-4b03-8a97-fb2fcb9d7f50</span></code></pre></div>
-<div id="htmlwidget-7318812d963aa99d07b0" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7318812d963aa99d07b0">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["Diseases (miRWalk)","Diseases (miRWalk)","Organs (miRWalk)","Organs (miRWalk)","Organs (miRWalk)","Organs (miRWalk)"],["Choriocarcinoma","Leukemia T-Cell","Endothelial Cells","Gastrointestinal Tract","T-Lymphocytes","X Chromosome"],["over-represented","over-represented","over-represented","over-represented","over-represented","over-represented"],["0.000513149","0.0013928","0.000703018","0.000411587","1.40287e-05","0.000806102"],["0.0364336","0.0494430","0.0157190","0.0157190","0.0010942","0.0157190"],["0.0364336","0.0494430","0.0157190","0.0157190","0.0010942","0.0157190"],["1.26518","0.268371","1.40078","0.194553","1.16732","0.233463"],["6","3","6","3","7","3"],["hsa-miR-20b-5p; hsa-miR-17-5p; hsa-miR-20a-5p; hsa-miR-106a-5p; hsa-miR-93-5p; hsa-miR-363-3p","hsa-miR-20b-5p; hsa-miR-106a-5p; hsa-miR-93-5p","hsa-miR-17-5p; hsa-miR-20a-5p; hsa-miR-222-3p; hsa-miR-93-5p; hsa-miR-126-3p; hsa-miR-18a-5p","hsa-miR-20b-5p; hsa-miR-17-5p; hsa-miR-20a-5p","hsa-miR-20b-5p; hsa-miR-20a-5p; hsa-miR-222-3p; hsa-miR-106a-5p; hsa-miR-93-5p; hsa-miR-126-3p; hsa-miR-148a-3p","hsa-miR-20b-5p; hsa-miR-222-3p; hsa-miR-106a-5p"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Category<\/th>\n      <th>Subcategory<\/th>\n      <th>Enrichment<\/th>\n      <th>P-value<\/th>\n      <th>P-adjusted<\/th>\n      <th>Q-value<\/th>\n      <th>Expected<\/th>\n      <th>Observed<\/th>\n      <th>miRNAs/precursors<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<code class="sourceCode R"><span><span class="co">## 1 We create a variable with our miRNAs' mature IDs</span></span>
+<span><span class="va">mirs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hsa-miR-20b-5p"</span>, <span class="st">"hsa-miR-144-5p"</span>, <span class="st">"hsa-miR-17-5p"</span>, <span class="st">"hsa-miR-20a-5p"</span>,</span>
+<span>         <span class="st">"hsa-miR-222-3p"</span>, <span class="st">"hsa-miR-106a-5p"</span>, <span class="st">"hsa-miR-93-5p"</span>, <span class="st">"hsa-miR-126-3p"</span>,</span>
+<span>         <span class="st">"hsa-miR-363-3p"</span>, <span class="st">"hsa-miR-302c-3p"</span>, <span class="st">"hsa-miR-374b-5p"</span>, <span class="st">"hsa-miR-18a-5p"</span>,</span>
+<span>         <span class="st">"hsa-miR-548d-3p"</span>, <span class="st">"hsa-miR-135a-3p"</span>, <span class="st">"hsa-miR-558"</span>, <span class="st">"hsa-miR-130b-5p"</span>,</span>
+<span>         <span class="st">"hsa-miR-148a-3p"</span><span class="op">)</span></span>
+<span><span class="co">## 2a We can perform enrichment analysis on our miRNA set without limiting the analysis to any categories</span></span>
+<span><span class="va">mieaa_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_mieaa_enrich.html">rba_mieaa_enrich</a></span><span class="op">(</span>test_set <span class="op">=</span> <span class="va">mirs</span>,</span>
+<span>                             mirna_type <span class="op">=</span> <span class="st">"mature"</span>,</span>
+<span>                             test_type <span class="op">=</span> <span class="st">"ORA"</span>,</span>
+<span>                             species <span class="op">=</span> <span class="fl">9606</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  -- Step 1/3: Submitting Enrichment request:</span></span>
+<span><span class="co">#&gt; No categories were supplied, Requesting enrichment using all of the 28 available categories for species 'Homo sapiens'.</span></span>
+<span><span class="co">#&gt; Submitting ORA enrichment request for 17 miRNA IDs of species Homo sapiens to miEAA servers.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  -- Step 2/3: Checking for Submitted enrichment job's status every 5 seconds.</span></span>
+<span><span class="co">#&gt;     Your submitted job ID is: 44c6a26c-7aa1-4f20-895f-e0534e85c777</span></span>
+<span><span class="co">#&gt; .....</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  -- Step 3/3: Retrieving the results of the finished enrichment job.</span></span>
+<span><span class="co">#&gt; Retrieving results of submitted enrichment request with ID: 44c6a26c-7aa1-4f20-895f-e0534e85c777</span></span>
+<span><span class="co">## 2b Or, We can limit the enrichment to certain datasets (enrichment categories)</span></span>
+<span><span class="va">mieaa_kegg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_mieaa_enrich.html">rba_mieaa_enrich</a></span><span class="op">(</span>test_set <span class="op">=</span> <span class="va">mirs</span>,</span>
+<span>                              mirna_type <span class="op">=</span> <span class="st">"mature"</span>,</span>
+<span>                              test_type <span class="op">=</span> <span class="st">"ORA"</span>,</span>
+<span>                              species <span class="op">=</span> <span class="fl">9606</span>,</span>
+<span>                              categories <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"miRWalk_Diseases_mature"</span>,</span>
+<span>                                            <span class="st">"miRWalk_Organs_mature"</span><span class="op">)</span></span>
+<span>                             <span class="op">)</span></span>
+<span><span class="co">#&gt;  -- Step 1/3: Submitting Enrichment request:</span></span>
+<span><span class="co">#&gt; Submitting ORA enrichment request for 17 miRNA IDs of species Homo sapiens to miEAA servers.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  -- Step 2/3: Checking for Submitted enrichment job's status every 5 seconds.</span></span>
+<span><span class="co">#&gt;     Your submitted job ID is: d2fa505a-d3b7-41b6-8f03-3d1b2fe5f930</span></span>
+<span><span class="co">#&gt; .</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  -- Step 3/3: Retrieving the results of the finished enrichment job.</span></span>
+<span><span class="co">#&gt; Retrieving results of submitted enrichment request with ID: d2fa505a-d3b7-41b6-8f03-3d1b2fe5f930</span></span></code></pre></div>
+<div id="htmlwidget-b8041284d031c549ce0e" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b8041284d031c549ce0e">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["Diseases (miRWalk)","Diseases (miRWalk)","Organs (miRWalk)","Organs (miRWalk)","Organs (miRWalk)","Organs (miRWalk)"],["Choriocarcinoma","Leukemia T-Cell","Endothelial Cells","Gastrointestinal Tract","T-Lymphocytes","X Chromosome"],["over-represented","over-represented","over-represented","over-represented","over-represented","over-represented"],["0.000513149","0.0013928","0.000703018","0.000411587","1.40287e-05","0.000806102"],["0.0364336","0.0494430","0.0157190","0.0157190","0.0010942","0.0157190"],["0.0364336","0.0494430","0.0157190","0.0157190","0.0010942","0.0157190"],["1.26518","0.268371","1.40078","0.194553","1.16732","0.233463"],["6","3","6","3","7","3"],["hsa-miR-20b-5p; hsa-miR-17-5p; hsa-miR-20a-5p; hsa-miR-106a-5p; hsa-miR-93-5p; hsa-miR-363-3p","hsa-miR-20b-5p; hsa-miR-106a-5p; hsa-miR-93-5p","hsa-miR-17-5p; hsa-miR-20a-5p; hsa-miR-222-3p; hsa-miR-93-5p; hsa-miR-126-3p; hsa-miR-18a-5p","hsa-miR-20b-5p; hsa-miR-17-5p; hsa-miR-20a-5p","hsa-miR-20b-5p; hsa-miR-20a-5p; hsa-miR-222-3p; hsa-miR-106a-5p; hsa-miR-93-5p; hsa-miR-126-3p; hsa-miR-148a-3p","hsa-miR-20b-5p; hsa-miR-222-3p; hsa-miR-106a-5p"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Category<\/th>\n      <th>Subcategory<\/th>\n      <th>Enrichment<\/th>\n      <th>P-value<\/th>\n      <th>P-adjusted<\/th>\n      <th>Q-value<\/th>\n      <th>Expected<\/th>\n      <th>Observed<\/th>\n      <th>miRNAs/precursors<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
-<div class="section level3">
+<div class="section level3 heading3">
 <h3 id="approach-2-going-step-by-step">Approach 2: Going step-by-step<a class="anchor" aria-label="anchor" href="#approach-2-going-step-by-step"></a>
 </h3>
 <p>As stated before, <code><a href="../reference/rba_mieaa_enrich.html">rba_mieaa_enrich()</a></code> is a wrapper function, meaning that it executes the following sequence of functions:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## 1 Submit enrichment request to miEAA</span>
-<span class="va">request</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_mieaa_enrich_submit.html">rba_mieaa_enrich_submit</a></span><span class="op">(</span>test_set <span class="op">=</span> <span class="va">mirs</span>,
-                                  mirna_type <span class="op">=</span> <span class="st">"mature"</span>,
-                                  test_type <span class="op">=</span> <span class="st">"ORA"</span>,
-                                  species <span class="op">=</span> <span class="fl">9606</span>,
-                                  categories <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"miRWalk_Diseases_mature"</span>,
-                                                 <span class="st">"miRWalk_Organs_mature"</span><span class="op">)</span>
-                                  <span class="op">)</span>
-<span class="co">## 2 check for job's running status</span>
-<span class="fu"><a href="../reference/rba_mieaa_enrich_status.html">rba_mieaa_enrich_status</a></span><span class="op">(</span>job_id <span class="op">=</span> <span class="va">request</span><span class="op">$</span><span class="va">job_id</span><span class="op">)</span>
-
-<span class="co">## 3 If the job has completed, retrieve the results</span>
-<span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_mieaa_enrich_results.html">rba_mieaa_enrich_results</a></span><span class="op">(</span>job_id <span class="op">=</span> <span class="va">request</span><span class="op">$</span><span class="va">job_id</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## 1 Submit enrichment request to miEAA</span></span>
+<span><span class="va">request</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_mieaa_enrich_submit.html">rba_mieaa_enrich_submit</a></span><span class="op">(</span>test_set <span class="op">=</span> <span class="va">mirs</span>,</span>
+<span>                                  mirna_type <span class="op">=</span> <span class="st">"mature"</span>,</span>
+<span>                                  test_type <span class="op">=</span> <span class="st">"ORA"</span>,</span>
+<span>                                  species <span class="op">=</span> <span class="fl">9606</span>,</span>
+<span>                                  categories <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"miRWalk_Diseases_mature"</span>,</span>
+<span>                                                 <span class="st">"miRWalk_Organs_mature"</span><span class="op">)</span></span>
+<span>                                  <span class="op">)</span></span>
+<span><span class="co">## 2 check for job's running status</span></span>
+<span><span class="fu"><a href="../reference/rba_mieaa_enrich_status.html">rba_mieaa_enrich_status</a></span><span class="op">(</span>job_id <span class="op">=</span> <span class="va">request</span><span class="op">$</span><span class="va">job_id</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## 3 If the job has completed, retrieve the results</span></span>
+<span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_mieaa_enrich_results.html">rba_mieaa_enrich_results</a></span><span class="op">(</span>job_id <span class="op">=</span> <span class="va">request</span><span class="op">$</span><span class="va">job_id</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Please Note:</strong> Other services supported by rbioapi also provide Over-representation analysis tools. Please see the vignette article <a href="rbioapi_do_enrich.html">Do with rbioapi: Over-Representation (Enrichment) Analysis in R</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html">link to the documentation site</a>) for an in-depth review.</p>
 <hr>
 </div>
 </div>
-<div class="section level2">
+<div class="section level2 heading2">
 <h2 id="convert-mirna-accessions">Convert miRNA accessions<a class="anchor" aria-label="anchor" href="#convert-mirna-accessions"></a>
 </h2>
 <p>miEAA only recognizes miRBASE version 22 accessions. You can use <code><a href="../reference/rba_mieaa_convert_version.html">rba_mieaa_convert_version()</a></code> to convert miRNA accession between different miRBASE versions. Also, as stated before, miEAA differentiate between precursor and mature miRNA accessions, to convert between these 2 accession types, use <code><a href="../reference/rba_mieaa_convert_type.html">rba_mieaa_convert_type()</a></code>.</p>
 <hr>
 </div>
-<div class="section level2">
-<h2 id="Citations">How to Cite?<a class="anchor" aria-label="anchor" href="#Citations"></a>
+<div class="section level2 heading2">
+<h2 id="citations">How to Cite?<a class="anchor" aria-label="anchor" href="#citations"></a>
 </h2>
 <p>To cite miEAA (Please see <a href="https://ccb-compute2.cs.uni-saarland.de/mieaa2/" class="external-link uri">https://ccb-compute2.cs.uni-saarland.de/mieaa2/</a>):</p>
 <ul>
@@ -240,7 +240,7 @@
 </ul>
 <hr>
 </div>
-<div class="section level2">
+<div class="section level2 heading2">
 <h2 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a>
 </h2>
 <ul>
@@ -250,36 +250,36 @@
 </ul>
 <hr>
 </div>
-<div class="section level2">
+<div class="section level2 heading2">
 <h2 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
-<pre><code><span class="co">#&gt; R version 4.2.0 (2022-04-22)</span>
-<span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span>
-<span class="co">#&gt; Running under: macOS Big Sur/Monterey 10.16</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Matrix products: default</span>
-<span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib</span>
-<span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; locale:</span>
-<span class="co">#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; attached base packages:</span>
-<span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; other attached packages:</span>
-<span class="co">#&gt; [1] rbioapi_0.7.6</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; loaded via a namespace (and not attached):</span>
-<span class="co">#&gt;  [1] knitr_1.39        magrittr_2.0.3    R6_2.5.1          ragg_1.2.2       </span>
-<span class="co">#&gt;  [5] rlang_1.0.2       fastmap_1.1.0     httr_1.4.3        stringr_1.4.0    </span>
-<span class="co">#&gt;  [9] tools_4.2.0       DT_0.23           xfun_0.31         cli_3.3.0        </span>
-<span class="co">#&gt; [13] jquerylib_0.1.4   crosstalk_1.2.0   htmltools_0.5.2   systemfonts_1.0.4</span>
-<span class="co">#&gt; [17] yaml_2.3.5        digest_0.6.29     rprojroot_2.0.3   pkgdown_2.0.3    </span>
-<span class="co">#&gt; [21] textshaping_0.3.6 purrr_0.3.4       htmlwidgets_1.5.4 sass_0.4.1       </span>
-<span class="co">#&gt; [25] fs_1.5.2          curl_4.3.2        memoise_2.0.1     cachem_1.0.6     </span>
-<span class="co">#&gt; [29] evaluate_0.15     rmarkdown_2.14    stringi_1.7.6     compiler_4.2.0   </span>
-<span class="co">#&gt; [33] bslib_0.3.1       desc_1.4.1        jsonlite_1.8.0</span></code></pre>
+<pre><code><span><span class="co">#&gt; R version 4.2.1 (2022-06-23)</span></span>
+<span><span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span></span>
+<span><span class="co">#&gt; Running under: macOS Big Sur ... 10.16</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Matrix products: default</span></span>
+<span><span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib</span></span>
+<span><span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; locale:</span></span>
+<span><span class="co">#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; attached base packages:</span></span>
+<span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; other attached packages:</span></span>
+<span><span class="co">#&gt; [1] rbioapi_0.7.7</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
+<span><span class="co">#&gt;  [1] knitr_1.39        magrittr_2.0.3    R6_2.5.1          ragg_1.2.2       </span></span>
+<span><span class="co">#&gt;  [5] rlang_1.0.4       fastmap_1.1.0     httr_1.4.3        stringr_1.4.0    </span></span>
+<span><span class="co">#&gt;  [9] tools_4.2.1       DT_0.23           xfun_0.31         cli_3.3.0        </span></span>
+<span><span class="co">#&gt; [13] jquerylib_0.1.4   crosstalk_1.2.0   htmltools_0.5.3   systemfonts_1.0.4</span></span>
+<span><span class="co">#&gt; [17] yaml_2.3.5        digest_0.6.29     rprojroot_2.0.3   pkgdown_2.0.6    </span></span>
+<span><span class="co">#&gt; [21] textshaping_0.3.6 purrr_0.3.4       htmlwidgets_1.5.4 sass_0.4.2       </span></span>
+<span><span class="co">#&gt; [25] fs_1.5.2          curl_4.3.2        memoise_2.0.1     cachem_1.0.6     </span></span>
+<span><span class="co">#&gt; [29] evaluate_0.15     rmarkdown_2.14    stringi_1.7.8     compiler_4.2.1   </span></span>
+<span><span class="co">#&gt; [33] bslib_0.4.0       desc_1.4.1        jsonlite_1.8.0</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
@@ -294,7 +294,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer>

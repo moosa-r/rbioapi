@@ -7,7 +7,7 @@ If you supply a vector or a single-columned table,
 If you supply a multi-column table, with the first column being
   molecules identifiers and the rest being numeral expression values,
   "Expression" analysis will be performed.
-See the details section for the accepted input types and format.'><title>Reactome Over-Representation or Expression Analysis — rba_reactome_analysis • rbioapi</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Reactome Over-Representation or Expression Analysis — rba_reactome_analysis"><meta property="og:description" content='Using this function, you can perform Reactome Analysis In a convenient way.
+See the details section for the accepted input types and format.'><title>Reactome Over-Representation or Expression Analysis — rba_reactome_analysis • rbioapi</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Reactome Over-Representation or Expression Analysis — rba_reactome_analysis"><meta property="og:description" content='Using this function, you can perform Reactome Analysis In a convenient way.
   The Analysis Type will be chosen depending on your supplied
   input:
 If you supply a vector or a single-columned table,
@@ -32,7 +32,7 @@ See the details section for the accepted input types and format.'><meta property
     
     <a class="navbar-brand me-2" href="../index.html">rbioapi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -111,21 +111,21 @@ See the details section for the accepted input types and format.'><meta property
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rba_reactome_analysis</span><span class="op">(</span>
-  <span class="va">input</span>,
-  input_format <span class="op">=</span> <span class="cn">NULL</span>,
-  projection <span class="op">=</span> <span class="cn">FALSE</span>,
-  interactors <span class="op">=</span> <span class="cn">FALSE</span>,
-  species <span class="op">=</span> <span class="cn">NULL</span>,
-  sort_by <span class="op">=</span> <span class="st">"ENTITIES_PVALUE"</span>,
-  order <span class="op">=</span> <span class="st">"ASC"</span>,
-  resource <span class="op">=</span> <span class="st">"TOTAL"</span>,
-  p_value <span class="op">=</span> <span class="fl">1</span>,
-  include_disease <span class="op">=</span> <span class="cn">TRUE</span>,
-  min <span class="op">=</span> <span class="cn">NULL</span>,
-  max <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rba_reactome_analysis</span><span class="op">(</span></span>
+<span>  <span class="va">input</span>,</span>
+<span>  input_format <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  projection <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  interactors <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  species <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  sort_by <span class="op">=</span> <span class="st">"ENTITIES_PVALUE"</span>,</span>
+<span>  order <span class="op">=</span> <span class="st">"ASC"</span>,</span>
+<span>  resource <span class="op">=</span> <span class="st">"TOTAL"</span>,</span>
+<span>  p_value <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  include_disease <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  min <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  max <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -134,6 +134,8 @@ See the details section for the accepted input types and format.'><meta property
 <dd><p>A vector, data frame, matrix or a local file path or URL
 that points to your data. See "Details section" for more information of
 how to organize and supply your input.</p></dd>
+
+
 <dt>input_format</dt>
 <dd><p>(Optional) This function will automatically identify
 your supplied input's format. But in case of unexpected issues or if you
@@ -145,12 +147,18 @@ correctly-formatted text file.</p></li>
 <li><p>"url": If you supplied a URL pointing to a correctly-formatted
 text file.</p></li>
 </ul></dd>
+
+
 <dt>projection</dt>
 <dd><p>Logical (default = FALSE) Should non-human identifiers
 be projected to their human equivalents? (using Reactome orthology data)</p></dd>
+
+
 <dt>interactors</dt>
 <dd><p>Logical (default = FALSE) Should IntAct interaction data
 be used to increase the analysis background?</p></dd>
+
+
 <dt>species</dt>
 <dd><p>Numeric or Character: NCBI Taxonomy identifier (Human
 is 9606), species name (e.g. "Homo sapiens") or Reactome DbId (e.g
@@ -158,38 +166,57 @@ Homo sapiens is 48887). See
  <code><a href="rba_reactome_species.html">rba_reactome_species</a></code> or
  <a href="https://reactome.org/content/schema/objects/Species/" class="external-link">Reactome
  Data Schema: Entries: Species</a>.</p></dd>
+
+
 <dt>sort_by</dt>
 <dd><p>Sort the result based on what column? available choices
 are: "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
 "FOUND_ENTITIES", "FOUND_INTERACTORS", "FOUND_REACTIONS", "ENTITIES_RATIO",
 "ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO"</p></dd>
+
+
 <dt>order</dt>
 <dd><p>Sort Order. Can be either "ASC" (default) or "DESC".</p></dd>
+
+
 <dt>resource</dt>
 <dd><p>Filter results based on the resource. Default is "TOTAL",
 available choices are: "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
 "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
 "PUBCHEM_COMPOUND".</p></dd>
+
+
 <dt>p_value</dt>
 <dd><p>Set a P value threshold. Only results with P value equal to
 or less than your supplied threshold will be returned. (default = 1,
 Meaning no P value filtering)</p></dd>
+
+
 <dt>include_disease</dt>
 <dd><p>Logical (default = TRUE) Should the disease pathways
 be included in the results?</p></dd>
+
+
 <dt>min</dt>
 <dd><p>(numeric) Minimum number of entities that a pathways should have
 to be included in the results.</p></dd>
+
+
 <dt>max</dt>
 <dd><p>(numeric) Maximum number of entities that a pathways should have
 to be included in the results.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>rbioapi option(s). See <code><a href="rba_options.html">rba_options</a></code>'s
 arguments manual for more information on available options.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>List containing the results and information of your analysis. Note
+    
+
+<p>List containing the results and information of your analysis. Note
   that you can use the token returned in the "summary" sub-list of the
   results (i.e. results$summary$token) to retrieve your results later or
   in other Reactome analysis functions.</p>
@@ -266,17 +293,16 @@ arguments manual for more information on available options.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># \donttest{</span>
-<span class="fu">rba_reactome_analysis</span><span class="op">(</span>input <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"p53"</span>, <span class="st">"BRCA1"</span>, <span class="st">"cdk2"</span>, <span class="st">"Q99835"</span>, <span class="st">"CDC42"</span><span class="op">)</span><span class="op">)</span>
-<span class="co"># }</span>
-<span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span>
-<span class="fu">rba_reactome_analysis</span><span class="op">(</span>input <span class="op">=</span> <span class="st">"c:/rbioapi/genes.txt"</span><span class="op">)</span>
-<span class="op">}</span>
-<span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span>
-<span class="fu">rba_reactome_analysis</span><span class="op">(</span>input <span class="op">=</span> <span class="st">"https://qazwsx.com/genes.txt"</span><span class="op">)</span>
-<span class="op">}</span>
-
-</code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="fu">rba_reactome_analysis</span><span class="op">(</span>input <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"p53"</span>, <span class="st">"BRCA1"</span>, <span class="st">"cdk2"</span>, <span class="st">"Q99835"</span>, <span class="st">"CDC42"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="fu">rba_reactome_analysis</span><span class="op">(</span>input <span class="op">=</span> <span class="st">"c:/rbioapi/genes.txt"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="fu">rba_reactome_analysis</span><span class="op">(</span>input <span class="op">=</span> <span class="st">"https://qazwsx.com/genes.txt"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span></code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
@@ -287,7 +313,7 @@ arguments manual for more information on available options.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer></div>

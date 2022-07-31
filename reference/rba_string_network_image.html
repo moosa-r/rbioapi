@@ -3,7 +3,7 @@
   ID, this function will produce a static image of the interaction networks
   among your input proteins or/and with other proteins. See the
   "Arguments" section to learn more about how you can modify the network
-  image.'><title>Get STRING Network Image — rba_string_network_image • rbioapi</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Get STRING Network Image — rba_string_network_image"><meta property="og:description" content='Depending on that you supplied a single protein ID or more than one protein
+  image.'><title>Get STRING Network Image — rba_string_network_image • rbioapi</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Get STRING Network Image — rba_string_network_image"><meta property="og:description" content='Depending on that you supplied a single protein ID or more than one protein
   ID, this function will produce a static image of the interaction networks
   among your input proteins or/and with other proteins. See the
   "Arguments" section to learn more about how you can modify the network
@@ -24,7 +24,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rbioapi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -100,21 +100,21 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rba_string_network_image</span><span class="op">(</span>
-  <span class="va">ids</span>,
-  image_format <span class="op">=</span> <span class="st">"image"</span>,
-  save_image <span class="op">=</span> <span class="cn">TRUE</span>,
-  species <span class="op">=</span> <span class="cn">NULL</span>,
-  add_color_nodes <span class="op">=</span> <span class="cn">NULL</span>,
-  add_white_nodes <span class="op">=</span> <span class="cn">NULL</span>,
-  required_score <span class="op">=</span> <span class="cn">NULL</span>,
-  network_flavor <span class="op">=</span> <span class="st">"confidence"</span>,
-  network_type <span class="op">=</span> <span class="st">"functional"</span>,
-  hide_node_labels <span class="op">=</span> <span class="cn">FALSE</span>,
-  hide_disconnected_nodes <span class="op">=</span> <span class="cn">FALSE</span>,
-  hide_structure_pics <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rba_string_network_image</span><span class="op">(</span></span>
+<span>  <span class="va">ids</span>,</span>
+<span>  image_format <span class="op">=</span> <span class="st">"image"</span>,</span>
+<span>  save_image <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  species <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  add_color_nodes <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  add_white_nodes <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  required_score <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  network_flavor <span class="op">=</span> <span class="st">"confidence"</span>,</span>
+<span>  network_type <span class="op">=</span> <span class="st">"functional"</span>,</span>
+<span>  hide_node_labels <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  hide_disconnected_nodes <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  hide_structure_pics <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -122,30 +122,44 @@
     <dl><dt>ids</dt>
 <dd><p>Your protein ID(s). It is strongly recommended to supply
 STRING IDs. See <code><a href="rba_string_map_ids.html">rba_string_map_ids</a></code> for more information.</p></dd>
+
+
 <dt>image_format</dt>
 <dd><p>one of:</p><ul><li><p>"image": PNG image with normal resolution.</p></li>
 <li><p>"highres_image": High-resolution PNG image.</p></li>
 <li><p>"svg": Scalable Vector Graphics image.</p></li>
 </ul></dd>
+
+
 <dt>save_image</dt>
 <dd><p>Logical or Character:</p><ul><li><p>TRUE: Save the image to an automatically-generated path.</p></li>
 <li><p>FALSE: Do not save the image, just return it as an R object.</p></li>
 <li><p>Character string: A valid file path to save the image to.</p></li>
 </ul></dd>
+
+
 <dt>species</dt>
 <dd><p>Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
 (Recommended, but optional if your input is less than 100 IDs.)</p></dd>
+
+
 <dt>add_color_nodes</dt>
 <dd><p>Numeric: The number of colored nodes (queried proteins
 and first shell of interactors) to be added.</p></dd>
+
+
 <dt>add_white_nodes</dt>
 <dd><p>Numeric: The number of white nodes (second shell of
 interactors) to be added after colored nodes.</p></dd>
+
+
 <dt>required_score</dt>
 <dd><p>Numeric: A minimum of interaction score for an
 interaction to be included in the image. if not supplied, the threshold
 will be applied by STRING Based in the network. (low Confidence = 150,
 Medium Confidence = 400, High Confidence = 700, Highest confidence = 900)</p></dd>
+
+
 <dt>network_flavor</dt>
 <dd><p>The style of network edges, should be one of:</p><ul><li><p>"confidence": (default) Line's thickness is an indicator of the
 interaction's confidence score.</p></li>
@@ -154,28 +168,41 @@ support the interaction.</p></li>
 <li><p>"action": Line's Shape is an indicator of the interaction's predicted
 mode of actions.</p></li>
 </ul></dd>
+
+
 <dt>network_type</dt>
 <dd><p>should be one of:</p><ul><li><p>"functional": (default) The edge's indicate both physical and
 functional associations.</p></li>
 <li><p>"physical": The edges indicate that two proteins have a physical
 interaction or are parts of a complex.</p></li>
 </ul></dd>
+
+
 <dt>hide_node_labels</dt>
 <dd><p>Logical: (Default = FALSE) Hide proteins names from
 the image?</p></dd>
+
+
 <dt>hide_disconnected_nodes</dt>
 <dd><p>Logical: (Default = FALSE) Hide proteins that
 are not connected to any other proteins from the image?</p></dd>
+
+
 <dt>hide_structure_pics</dt>
 <dd><p>Logical: (Default = FALSE) Hide protein's
 structure picture from inside the bubbles?</p></dd>
+
+
 <dt>...</dt>
 <dd><p>rbioapi option(s). See <code><a href="rba_options.html">rba_options</a></code>'s
 arguments manual for more information on available options.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A network images which can be PNG or SVG depending on the inputs.</p>
+    
+
+<p>A network images which can be PNG or SVG depending on the inputs.</p>
     </div>
     <div class="section level2">
     <h2 id="corresponding-api-resources">Corresponding API Resources<a class="anchor" aria-label="anchor" href="#corresponding-api-resources"></a></h2>
@@ -215,25 +242,24 @@ arguments manual for more information on available options.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span>
-<span class="fu">rba_string_network_image</span><span class="op">(</span>ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"9606.ENSP00000269305"</span>,
-    <span class="st">"9606.ENSP00000398698"</span>,
-    <span class="st">"9606.ENSP00000275493"</span><span class="op">)</span>,
-    network_type <span class="op">=</span> <span class="st">"functional"</span>,
-    save_image <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="op">}</span>
-<span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span>
-<span class="fu">rba_string_network_image</span><span class="op">(</span>ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"TNF"</span>, <span class="st">"EGFR"</span><span class="op">)</span>,
-    species <span class="op">=</span> <span class="fl">9606</span>,
-    save_image <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="op">}</span>
-<span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span>
-<span class="fu">rba_string_network_image</span><span class="op">(</span>ids <span class="op">=</span> <span class="st">"9606.ENSP00000269305"</span>,
-    image_format <span class="op">=</span> <span class="st">"highres_image"</span>,
-    save_image <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"TP53_network.png"</span><span class="op">)</span><span class="op">)</span>
-<span class="op">}</span>
-
-</code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="fu">rba_string_network_image</span><span class="op">(</span>ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"9606.ENSP00000269305"</span>,</span>
+<span>    <span class="st">"9606.ENSP00000398698"</span>,</span>
+<span>    <span class="st">"9606.ENSP00000275493"</span><span class="op">)</span>,</span>
+<span>    network_type <span class="op">=</span> <span class="st">"functional"</span>,</span>
+<span>    save_image <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="fu">rba_string_network_image</span><span class="op">(</span>ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"TNF"</span>, <span class="st">"EGFR"</span><span class="op">)</span>,</span>
+<span>    species <span class="op">=</span> <span class="fl">9606</span>,</span>
+<span>    save_image <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="fu">rba_string_network_image</span><span class="op">(</span>ids <span class="op">=</span> <span class="st">"9606.ENSP00000269305"</span>,</span>
+<span>    image_format <span class="op">=</span> <span class="st">"highres_image"</span>,</span>
+<span>    save_image <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"TP53_network.png"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span></code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
@@ -244,7 +270,7 @@ arguments manual for more information on available options.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer></div>
