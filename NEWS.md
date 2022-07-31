@@ -1,4 +1,8 @@
-# rbioapi 0.7.6 (Current CRAN and GitHub version)
+# rbioapi 0.7.7 (Current CRAN version)
+
+* Bug fixes and minor improvements.
+
+# rbioapi 0.7.6
 
 * Submitted the paper to Bioinformatics journal (DOI: 10.1093/bioinformatics/btac172).
 
