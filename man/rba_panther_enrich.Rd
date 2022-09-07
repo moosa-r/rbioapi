@@ -29,7 +29,9 @@ supported organisms.}
 
 \item{annot_dataset}{A PANTHER dataset ID to test your input against it.
 run \code{\link{rba_panther_info}}with argument 'what = "datasets"' to
-get a list of PANTHER's supported datasets.}
+get a list of PANTHER's supported datasets. Note that you should enter
+the "id" of the dataset, not its label (e.g. entering "biological_process"
+is incorrect, you should rather enter "GO:0008150").}
 
 \item{test_type}{statistical test type to calculate the p values. either
 "FISHER" (default) or "BINOMIAL".}
@@ -54,7 +56,10 @@ argument. see 'organism' argument for supported values.}
 arguments manual for more information on available options.}
 }
 \value{
-A list with the prov
+A list with the parameters and results. If the analysis was
+  successful, the results data frame are returned in the "results" element
+  within the list. Otherwise, an error message will be returned under the
+  "search$error" element in the returned list.
 }
 \description{
 Using this function you can use PANTHER services to perform

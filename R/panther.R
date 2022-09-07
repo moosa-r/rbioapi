@@ -98,7 +98,9 @@ rba_panther_mapping <- function(genes,
 #'   supported organisms.
 #' @param annot_dataset A PANTHER dataset ID to test your input against it.
 #'   run \code{\link{rba_panther_info}}with argument 'what = "datasets"' to
-#'   get a list of PANTHER's supported datasets.
+#'   get a list of PANTHER's supported datasets. Note that you should enter
+#'   the "id" of the dataset, not its label (e.g. entering "biological_process"
+#'   is incorrect, you should rather enter "GO:0008150").
 #' @param test_type statistical test type to calculate the p values. either
 #'   "FISHER" (default) or "BINOMIAL".
 #' @param correction p value correction method. either "FDR" (default),
@@ -119,7 +121,10 @@ rba_panther_mapping <- function(genes,
 #' @section Corresponding API Resources:
 #'  "POST http://www.pantherdb.org/services/oai/pantherdb/enrich/overrep"
 #'
-#' @return A list with the prov
+#' @return A list with the parameters and results. If the analysis was
+#'   successful, the results data frame are returned in the "results" element
+#'   within the list. Otherwise, an error message will be returned under the
+#'   "search$error" element in the returned list.
 #'
 #' @references \itemize{
 #'   \item Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills,

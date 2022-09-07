@@ -61,9 +61,9 @@ Enrichment (Over-Representation) analysis is commonly performed when one's analy
 
 In short, to perform such analysis, in addition to some algorithms, two data are required:
 
-1) A gene list which is derived from your analysis.
+1)  A gene list which is derived from your analysis.
 
-2) Gene sets, where genes are grouped based on a shared property or concept (such as pathway, role in diseases, physical location, etc.).
+2)  Gene sets, where genes are grouped based on a shared property or concept (such as pathway, role in diseases, physical location, etc.).
 
 With over-representation analysis, you can compare your gene list to find if the member of any gene set are over-represented, meaning that they are present in your list in a manner that can not be explained by chance alone.
 
@@ -247,7 +247,7 @@ if (is.data.frame(panther_sets)) {
 
 The Gene Ontology (GO) project is one of the pinnacles of scientists' collective effort in bioinformatics. The GO Consortium provides a comprehensive model of biological systems. In short, GO curates a thoroughly designed directed acyclic graph (DAG) of ontologies. You may think of it as a tree of terms, where as it branches out, the terms become more specific). Each protein may be annotated with one or more terms. The terms are organized in three domains: "Molecular Function," "Biological Process," and "Cellular Component". GO slim datasets refer to subsets which are a cut-down version of GO terms. If you are not familiar with GO, I strongly encourage you to see this page and follow the links it provides: [About the GO resource](http://geneontology.org/docs/introduction-to-go-resource/ "About the GO resource").
 
-Here, we demonstrate the enrichment analysis using the Biological Process domain:
+Here, we demonstrate the enrichment analysis using the Biological Process domain. Note that you should enter the "id" of the datasets, not its label (e.g. entering "biological_process" is incorrect, you should rather enter "GO:0008150").
 
 ```{r panther_enrich, echo=TRUE, message=TRUE}
 panther_enrich <- rba_panther_enrich(genes = covid_critical,
@@ -294,7 +294,7 @@ In addition to proteins interaction data, STRING also curates proteins/genes ann
 
     1.  [Gene Ontology](http://geneontology.org/ "Gene Ontology Resource - Unifying Biology") domains: Molecular Function, Biological Process, and Cellular Component
 
-    2.  [COMPARTMENTS](https://doi.org/10.1093/database/bau012 "Subcellular localization database")
+    2.  [COMPARTMENTS](https://academic.oup.com/database/article/doi/10.1093/database/bau012/2633793 "Subcellular localization database")
 
     3.  [Human Disease Ontology](https://disease-ontology.org/ "Disease Ontology")
 
