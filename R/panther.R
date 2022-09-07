@@ -214,14 +214,16 @@ rba_panther_enrich <- function(genes,
   ## Build Function-Specific Call
   parser_input <- list("json->list_simp",
                        function(x) {
-                         x <- x$results
-                         x$result <- jsonlite::flatten(x$result)
+                         if (hasName(x, "results")) {
+                           x <- x$results
+                           x$result <- jsonlite::flatten(x$result)
 
-                         if (!is.null(cutoff)) {
-                           if (correction == "FDR") {
-                             x$result <- x$result[x$result$fdr <= cutoff, ]
-                           } else {
-                             x$result <- x$result[x$result$pValue <= cutoff, ]
+                           if (!is.null(cutoff)) {
+                             if (correction == "FDR") {
+                               x$result <- x$result[x$result$fdr <= cutoff, ]
+                             } else {
+                               x$result <- x$result[x$result$pValue <= cutoff, ]
+                             }
                            }
                          }
 
