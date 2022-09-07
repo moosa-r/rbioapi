@@ -73,7 +73,7 @@ This function will call other rba_enrichr_*** functions with the following
 }
 
 \examples{
-\donttest{
+\dontrun{
 rba_enrichr(gene_list = c("TP53", "TNF", "EGFR"))
 }
 \donttest{

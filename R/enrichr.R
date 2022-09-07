@@ -695,7 +695,7 @@ rba_enrichr_gene_map <- function(gene,
 #'   }
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' rba_enrichr(gene_list = c("TP53", "TNF", "EGFR"))
 #' }
 #' \donttest{
