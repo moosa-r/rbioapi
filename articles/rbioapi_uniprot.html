@@ -113,7 +113,7 @@
       <img src="../logo.svg" class="logo" alt=""><h1>2.G: UniProt &amp; rbioapi</h1>
                         <h4 data-toc-skip class="author">Moosa Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2022-07-31</h4>
+            <h4 data-toc-skip class="date">2022-09-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/HEAD/vignettes/rbioapi_uniprot.Rmd" class="external-link"><code>vignettes/rbioapi_uniprot.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_uniprot.Rmd</code></div>
@@ -153,7 +153,7 @@
 <span><span class="co">#&gt;  $ gene            :'data.frame':    1 obs. of  2 variables:</span></span>
 <span><span class="co">#&gt;  $ comments        :'data.frame':    12 obs. of  10 variables:</span></span>
 <span><span class="co">#&gt;  $ features        :'data.frame':    63 obs. of  9 variables:</span></span>
-<span><span class="co">#&gt;  $ dbReferences    :'data.frame':    130 obs. of  4 variables:</span></span>
+<span><span class="co">#&gt;  $ dbReferences    :'data.frame':    133 obs. of  4 variables:</span></span>
 <span><span class="co">#&gt;  $ keywords        :'data.frame':    13 obs. of  1 variable:</span></span>
 <span><span class="co">#&gt;  $ references      :'data.frame':    25 obs. of  3 variables:</span></span>
 <span><span class="co">#&gt;  $ sequence        :List of 5</span></span></code></pre></div>
@@ -176,7 +176,7 @@
 <span><span class="co">#&gt;   ..$ gene            :List of 1</span></span>
 <span><span class="co">#&gt;   ..$ comments        :List of 12</span></span>
 <span><span class="co">#&gt;   ..$ features        :List of 63</span></span>
-<span><span class="co">#&gt;   ..$ dbReferences    :List of 130</span></span>
+<span><span class="co">#&gt;   ..$ dbReferences    :List of 133</span></span>
 <span><span class="co">#&gt;   ..$ keywords        :List of 13</span></span>
 <span><span class="co">#&gt;   ..$ references      :List of 25</span></span>
 <span><span class="co">#&gt;   ..$ sequence        :List of 5</span></span></code></pre></div>
@@ -228,18 +228,18 @@
 <span><span class="co">#&gt;  $ Q8NBR0:List of 14</span></span>
 <span><span class="co">#&gt;  $ Q13625:List of 14</span></span>
 <span><span class="co">#&gt;  $ Q7L0Q8:List of 14</span></span>
-<span><span class="co">#&gt;  $ Q5VT25:List of 14</span></span>
 <span><span class="co">#&gt;  $ Q00587:List of 14</span></span>
 <span><span class="co">#&gt;  $ O14613:List of 14</span></span>
-<span><span class="co">#&gt;  $ Q6DT37:List of 14</span></span>
 <span><span class="co">#&gt;  $ Q9UKI2:List of 14</span></span>
 <span><span class="co">#&gt;  $ Q6NZY7:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q5VT25:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q6DT37:List of 14</span></span>
 <span><span class="co">#&gt;  $ Q9H3Q1:List of 14</span></span>
 <span><span class="co">#&gt;  $ Q07960:List of 14</span></span>
-<span><span class="co">#&gt;  $ Q9Y5S2:List of 14</span></span>
-<span><span class="co">#&gt;  $ P60953:List of 14</span></span>
 <span><span class="co">#&gt;  $ Q9NRR8:List of 14</span></span>
-<span><span class="co">#&gt;  $ Q9NRR3:List of 14</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ Q9NRR3:List of 14</span></span>
+<span><span class="co">#&gt;  $ P60953:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q9Y5S2:List of 14</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## 3 Search for every proteins with chemokines keyword</span></span>
 <span><span class="va">multi_prs3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_uniprot_proteins_search.html">rba_uniprot_proteins_search</a></span><span class="op">(</span>keyword <span class="op">=</span> <span class="st">"chemokines"</span><span class="op">)</span></span>
@@ -460,13 +460,13 @@
 <span><span class="co">#&gt; [1] rbioapi_0.7.7</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span><span class="co">#&gt;  [1] knitr_1.39        magrittr_2.0.3    R6_2.5.1          ragg_1.2.2       </span></span>
-<span><span class="co">#&gt;  [5] rlang_1.0.4       fastmap_1.1.0     httr_1.4.3        stringr_1.4.0    </span></span>
-<span><span class="co">#&gt;  [9] tools_4.2.1       xfun_0.31         cli_3.3.0         jquerylib_0.1.4  </span></span>
+<span><span class="co">#&gt;  [1] knitr_1.40        magrittr_2.0.3    R6_2.5.1          ragg_1.2.2       </span></span>
+<span><span class="co">#&gt;  [5] rlang_1.0.5       fastmap_1.1.0     httr_1.4.4        stringr_1.4.1    </span></span>
+<span><span class="co">#&gt;  [9] tools_4.2.1       xfun_0.32         cli_3.3.0         jquerylib_0.1.4  </span></span>
 <span><span class="co">#&gt; [13] htmltools_0.5.3   systemfonts_1.0.4 yaml_2.3.5        digest_0.6.29    </span></span>
 <span><span class="co">#&gt; [17] rprojroot_2.0.3   pkgdown_2.0.6     textshaping_0.3.6 purrr_0.3.4      </span></span>
 <span><span class="co">#&gt; [21] sass_0.4.2        fs_1.5.2          curl_4.3.2        memoise_2.0.1    </span></span>
-<span><span class="co">#&gt; [25] cachem_1.0.6      evaluate_0.15     rmarkdown_2.14    stringi_1.7.8    </span></span>
+<span><span class="co">#&gt; [25] cachem_1.0.6      evaluate_0.16     rmarkdown_2.16    stringi_1.7.8    </span></span>
 <span><span class="co">#&gt; [29] compiler_4.2.1    bslib_0.4.0       desc_1.4.1        jsonlite_1.8.0</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

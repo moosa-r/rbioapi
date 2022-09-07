@@ -109,7 +109,7 @@
 
 
 <script src="rbioapi_mieaa_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="rbioapi_mieaa_files/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="rbioapi_mieaa_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="rbioapi_mieaa_files/datatables-binding-0.23/datatables.js"></script><link href="rbioapi_mieaa_files/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+<script src="rbioapi_mieaa_files/datatables-binding-0.24/datatables.js"></script><link href="rbioapi_mieaa_files/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="rbioapi_mieaa_files/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
 <script src="rbioapi_mieaa_files/dt-core-1.11.3/js/jquery.dataTables.min.js"></script><link href="rbioapi_mieaa_files/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
 <script src="rbioapi_mieaa_files/crosstalk-1.2.0/js/crosstalk.min.js"></script><div class="row">
@@ -117,7 +117,7 @@
       <img src="../logo.svg" class="logo" alt=""><h1>2.C: miEEA &amp; rbioapi</h1>
                         <h4 data-toc-skip class="author">Moosa Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2022-07-31</h4>
+            <h4 data-toc-skip class="date">2022-09-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/HEAD/vignettes/rbioapi_mieaa.Rmd" class="external-link"><code>vignettes/rbioapi_mieaa.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_mieaa.Rmd</code></div>
@@ -172,11 +172,11 @@
 <span><span class="co">#&gt; Submitting ORA enrichment request for 17 miRNA IDs of species Homo sapiens to miEAA servers.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  -- Step 2/3: Checking for Submitted enrichment job's status every 5 seconds.</span></span>
-<span><span class="co">#&gt;     Your submitted job ID is: 44c6a26c-7aa1-4f20-895f-e0534e85c777</span></span>
-<span><span class="co">#&gt; .....</span></span>
+<span><span class="co">#&gt;     Your submitted job ID is: 4bc9ca82-41fc-40a9-9917-d9d15a803162</span></span>
+<span><span class="co">#&gt; ....</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  -- Step 3/3: Retrieving the results of the finished enrichment job.</span></span>
-<span><span class="co">#&gt; Retrieving results of submitted enrichment request with ID: 44c6a26c-7aa1-4f20-895f-e0534e85c777</span></span>
+<span><span class="co">#&gt; Retrieving results of submitted enrichment request with ID: 4bc9ca82-41fc-40a9-9917-d9d15a803162</span></span>
 <span><span class="co">## 2b Or, We can limit the enrichment to certain datasets (enrichment categories)</span></span>
 <span><span class="va">mieaa_kegg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_mieaa_enrich.html">rba_mieaa_enrich</a></span><span class="op">(</span>test_set <span class="op">=</span> <span class="va">mirs</span>,</span>
 <span>                              mirna_type <span class="op">=</span> <span class="st">"mature"</span>,</span>
@@ -189,13 +189,13 @@
 <span><span class="co">#&gt; Submitting ORA enrichment request for 17 miRNA IDs of species Homo sapiens to miEAA servers.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  -- Step 2/3: Checking for Submitted enrichment job's status every 5 seconds.</span></span>
-<span><span class="co">#&gt;     Your submitted job ID is: d2fa505a-d3b7-41b6-8f03-3d1b2fe5f930</span></span>
+<span><span class="co">#&gt;     Your submitted job ID is: 1d84d629-6f97-406b-8008-1f36168d6f65</span></span>
 <span><span class="co">#&gt; .</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  -- Step 3/3: Retrieving the results of the finished enrichment job.</span></span>
-<span><span class="co">#&gt; Retrieving results of submitted enrichment request with ID: d2fa505a-d3b7-41b6-8f03-3d1b2fe5f930</span></span></code></pre></div>
-<div id="htmlwidget-b8041284d031c549ce0e" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b8041284d031c549ce0e">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["Diseases (miRWalk)","Diseases (miRWalk)","Organs (miRWalk)","Organs (miRWalk)","Organs (miRWalk)","Organs (miRWalk)"],["Choriocarcinoma","Leukemia T-Cell","Endothelial Cells","Gastrointestinal Tract","T-Lymphocytes","X Chromosome"],["over-represented","over-represented","over-represented","over-represented","over-represented","over-represented"],["0.000513149","0.0013928","0.000703018","0.000411587","1.40287e-05","0.000806102"],["0.0364336","0.0494430","0.0157190","0.0157190","0.0010942","0.0157190"],["0.0364336","0.0494430","0.0157190","0.0157190","0.0010942","0.0157190"],["1.26518","0.268371","1.40078","0.194553","1.16732","0.233463"],["6","3","6","3","7","3"],["hsa-miR-20b-5p; hsa-miR-17-5p; hsa-miR-20a-5p; hsa-miR-106a-5p; hsa-miR-93-5p; hsa-miR-363-3p","hsa-miR-20b-5p; hsa-miR-106a-5p; hsa-miR-93-5p","hsa-miR-17-5p; hsa-miR-20a-5p; hsa-miR-222-3p; hsa-miR-93-5p; hsa-miR-126-3p; hsa-miR-18a-5p","hsa-miR-20b-5p; hsa-miR-17-5p; hsa-miR-20a-5p","hsa-miR-20b-5p; hsa-miR-20a-5p; hsa-miR-222-3p; hsa-miR-106a-5p; hsa-miR-93-5p; hsa-miR-126-3p; hsa-miR-148a-3p","hsa-miR-20b-5p; hsa-miR-222-3p; hsa-miR-106a-5p"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Category<\/th>\n      <th>Subcategory<\/th>\n      <th>Enrichment<\/th>\n      <th>P-value<\/th>\n      <th>P-adjusted<\/th>\n      <th>Q-value<\/th>\n      <th>Expected<\/th>\n      <th>Observed<\/th>\n      <th>miRNAs/precursors<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<span><span class="co">#&gt; Retrieving results of submitted enrichment request with ID: 1d84d629-6f97-406b-8008-1f36168d6f65</span></span></code></pre></div>
+<div id="htmlwidget-ecd727485c9e280e28b8" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ecd727485c9e280e28b8">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["Organs (miRWalk)","Organs (miRWalk)","Organs (miRWalk)","Organs (miRWalk)","Diseases (miRWalk)","Diseases (miRWalk)"],["Endothelial Cells","Gastrointestinal Tract","T-Lymphocytes","X Chromosome","Choriocarcinoma","Leukemia T-Cell"],["over-represented","over-represented","over-represented","over-represented","over-represented","over-represented"],["0.000703018","0.000411587","1.40287e-05","0.000806102","0.000513149","0.0013928"],["0.0157190","0.0157190","0.0010942","0.0157190","0.0364336","0.0494430"],["0.0157190","0.0157190","0.0010942","0.0157190","0.0364336","0.0494430"],["1.40078","0.194553","1.16732","0.233463","1.26518","0.268371"],["6","3","7","3","6","3"],["hsa-miR-17-5p; hsa-miR-20a-5p; hsa-miR-222-3p; hsa-miR-93-5p; hsa-miR-126-3p; hsa-miR-18a-5p","hsa-miR-20b-5p; hsa-miR-17-5p; hsa-miR-20a-5p","hsa-miR-20b-5p; hsa-miR-20a-5p; hsa-miR-222-3p; hsa-miR-106a-5p; hsa-miR-93-5p; hsa-miR-126-3p; hsa-miR-148a-3p","hsa-miR-20b-5p; hsa-miR-222-3p; hsa-miR-106a-5p","hsa-miR-20b-5p; hsa-miR-17-5p; hsa-miR-20a-5p; hsa-miR-106a-5p; hsa-miR-93-5p; hsa-miR-363-3p","hsa-miR-20b-5p; hsa-miR-106a-5p; hsa-miR-93-5p"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Category<\/th>\n      <th>Subcategory<\/th>\n      <th>Enrichment<\/th>\n      <th>P-value<\/th>\n      <th>P-adjusted<\/th>\n      <th>Q-value<\/th>\n      <th>Expected<\/th>\n      <th>Observed<\/th>\n      <th>miRNAs/precursors<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level3 heading3">
 <h3 id="approach-2-going-step-by-step">Approach 2: Going step-by-step<a class="anchor" aria-label="anchor" href="#approach-2-going-step-by-step"></a>
@@ -271,14 +271,14 @@
 <span><span class="co">#&gt; [1] rbioapi_0.7.7</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span><span class="co">#&gt;  [1] knitr_1.39        magrittr_2.0.3    R6_2.5.1          ragg_1.2.2       </span></span>
-<span><span class="co">#&gt;  [5] rlang_1.0.4       fastmap_1.1.0     httr_1.4.3        stringr_1.4.0    </span></span>
-<span><span class="co">#&gt;  [9] tools_4.2.1       DT_0.23           xfun_0.31         cli_3.3.0        </span></span>
+<span><span class="co">#&gt;  [1] knitr_1.40        magrittr_2.0.3    R6_2.5.1          ragg_1.2.2       </span></span>
+<span><span class="co">#&gt;  [5] rlang_1.0.5       fastmap_1.1.0     httr_1.4.4        stringr_1.4.1    </span></span>
+<span><span class="co">#&gt;  [9] tools_4.2.1       DT_0.24           xfun_0.32         cli_3.3.0        </span></span>
 <span><span class="co">#&gt; [13] jquerylib_0.1.4   crosstalk_1.2.0   htmltools_0.5.3   systemfonts_1.0.4</span></span>
 <span><span class="co">#&gt; [17] yaml_2.3.5        digest_0.6.29     rprojroot_2.0.3   pkgdown_2.0.6    </span></span>
 <span><span class="co">#&gt; [21] textshaping_0.3.6 purrr_0.3.4       htmlwidgets_1.5.4 sass_0.4.2       </span></span>
 <span><span class="co">#&gt; [25] fs_1.5.2          curl_4.3.2        memoise_2.0.1     cachem_1.0.6     </span></span>
-<span><span class="co">#&gt; [29] evaluate_0.15     rmarkdown_2.14    stringi_1.7.8     compiler_4.2.1   </span></span>
+<span><span class="co">#&gt; [29] evaluate_0.16     rmarkdown_2.16    stringi_1.7.8     compiler_4.2.1   </span></span>
 <span><span class="co">#&gt; [33] bslib_0.4.0       desc_1.4.1        jsonlite_1.8.0</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

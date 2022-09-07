@@ -129,7 +129,9 @@ supported organisms.</p></dd>
 <dt>annot_dataset</dt>
 <dd><p>A PANTHER dataset ID to test your input against it.
 run <code><a href="rba_panther_info.html">rba_panther_info</a></code>with argument 'what = "datasets"' to
-get a list of PANTHER's supported datasets.</p></dd>
+get a list of PANTHER's supported datasets. Note that you should enter
+the "id" of the dataset, not its label (e.g. entering "biological_process"
+is incorrect, you should rather enter "GO:0008150").</p></dd>
 
 
 <dt>test_type</dt>
@@ -170,7 +172,10 @@ arguments manual for more information on available options.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A list with the prov</p>
+<p>A list with the parameters and results. If the analysis was
+  successful, the results data frame are returned in the "results" element
+  within the list. Otherwise, an error message will be returned under the
+  "search$error" element in the returned list.</p>
     </div>
     <div class="section level2">
     <h2 id="corresponding-api-resources">Corresponding API Resources<a class="anchor" aria-label="anchor" href="#corresponding-api-resources"></a></h2>
