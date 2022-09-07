@@ -214,7 +214,7 @@ rba_panther_enrich <- function(genes,
   ## Build Function-Specific Call
   parser_input <- list("json->list_simp",
                        function(x) {
-                         if (hasName(x, "results")) {
+                         if (utils::hasName(x, "results")) {
                            x <- x$results
                            x$result <- jsonlite::flatten(x$result)
 
