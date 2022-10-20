@@ -7,7 +7,7 @@
 rba_reactome_analysis_mapping(
   input,
   input_format = NULL,
-  projection = FALSE,
+  projection = TRUE,
   interactors = FALSE,
   ...
 )
@@ -26,7 +26,7 @@ correctly-formatted text file.
 \item "url": If you supplied a URL pointing to a correctly-formatted
 text file.}}
 
-\item{projection}{Logical (default = FALSE) Should non-human identifiers
+\item{projection}{Logical (default = TRUE) Should non-human identifiers
 be projected to their human equivalents? (using Reactome orthology data)}
 
 \item{interactors}{Logical (default = FALSE) Should IntAct interaction data

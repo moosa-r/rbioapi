@@ -160,8 +160,9 @@
 #'   Homo sapiens is 48887). See
 #'    \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species/}{Reactome
-#'    Data Schema: Entries: Species}.
-#' @param projection Logical (default = FALSE) Should non-human identifiers
+#'    Data Schema: Entries: Species}. Note that you cannot supply the species
+#'    parameter when projection parameter is TRUE.
+#' @param projection Logical (default = TRUE) Should non-human identifiers
 #'   be projected to their human equivalents? (using Reactome orthology data)
 #' @param interactors Logical (default = FALSE) Should IntAct interaction data
 #'   be used to increase the analysis background?
@@ -226,7 +227,7 @@
 #' @export
 rba_reactome_analysis <- function(input,
                                   input_format = NULL,
-                                  projection = FALSE,
+                                  projection = TRUE,
                                   interactors = FALSE,
                                   species = NULL,
                                   sort_by = "ENTITIES_PVALUE",
@@ -825,7 +826,7 @@ rba_reactome_analysis_import <- function(input,
 #'   correctly-formatted text file.
 #'   \item "url": If you supplied a URL pointing to a correctly-formatted
 #'   text file.}
-#' @param projection Logical (default = FALSE) Should non-human identifiers
+#' @param projection Logical (default = TRUE) Should non-human identifiers
 #'   be projected to their human equivalents? (using Reactome orthology data)
 #' @param interactors Logical (default = FALSE) Should IntAct interaction data
 #'   be included?
@@ -864,7 +865,7 @@ rba_reactome_analysis_import <- function(input,
 #' @export
 rba_reactome_analysis_mapping <- function(input,
                                           input_format = NULL,
-                                          projection = FALSE,
+                                          projection = TRUE,
                                           interactors = FALSE,
                                           ...) {
   ## Load Global Options

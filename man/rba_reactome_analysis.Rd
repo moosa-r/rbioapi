@@ -7,7 +7,7 @@
 rba_reactome_analysis(
   input,
   input_format = NULL,
-  projection = FALSE,
+  projection = TRUE,
   interactors = FALSE,
   species = NULL,
   sort_by = "ENTITIES_PVALUE",
@@ -36,7 +36,7 @@ correctly-formatted text file.
 \item "url": If you supplied a URL pointing to a correctly-formatted
 text file.}}
 
-\item{projection}{Logical (default = FALSE) Should non-human identifiers
+\item{projection}{Logical (default = TRUE) Should non-human identifiers
 be projected to their human equivalents? (using Reactome orthology data)}
 
 \item{interactors}{Logical (default = FALSE) Should IntAct interaction data
@@ -47,7 +47,8 @@ is 9606), species name (e.g. "Homo sapiens") or Reactome DbId (e.g
 Homo sapiens is 48887). See
  \code{\link{rba_reactome_species}} or
  \href{https://reactome.org/content/schema/objects/Species/}{Reactome
- Data Schema: Entries: Species}.}
+ Data Schema: Entries: Species}. Note that you cannot supply the species
+ parameter when projection parameter is TRUE.}
 
 \item{sort_by}{Sort the result based on what column? available choices
 are: "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
