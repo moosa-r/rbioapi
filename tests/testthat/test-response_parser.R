@@ -15,8 +15,13 @@ test_that(".rba_response_parser works", {
                expected = "list")
 })
 
+reactome_is_online <- try(httr::status_code(httr::HEAD("https://reactome.org",
+                                                       httr::timeout(10))),
+                          silent = TRUE) == 200
+
 test_that(".rba_error_parser works", {
   skip_if_not(test_is_online)
+  skip_if_not(reactome_is_online)
 
   resp <- httr::GET(url = "https://reactome.org/ContentService/data/complex/hkbkmhbkm/subunits",
                     httr::accept("application/json"))
