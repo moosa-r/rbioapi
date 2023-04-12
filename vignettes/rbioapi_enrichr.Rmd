@@ -111,7 +111,7 @@ str(enrichr_msig, 1)
 
 As you can see in `rba_enrichr()`'s name, it is a wrapper function. It basically executes the following sequence of functions:
 
-```{r approach_2}
+```{r approach_2, eval=FALSE}
 # 1 Get a list of available Enrichr libraries
 libs <- rba_enrichr_libs(store_in_options = TRUE)
 
