@@ -115,7 +115,9 @@
 <div class="section level1">
 <h1 id="section"><a class="anchor" aria-label="anchor" href="#section"></a></h1>
 <!-- badges: start -->
-<!-- badges: end --><div class="section level2">
+
+<!-- badges: end -->
+<div class="section level2">
 <h2 id="what-does-rbioapi-do">What does rbioapi do?<a class="anchor" aria-label="anchor" href="#what-does-rbioapi-do"></a>
 </h2>
 <p>Currently fully supports <strong>Enrichr</strong>, <strong>JASPAR</strong>, <strong>miEAA</strong>, <strong>PANTHER</strong>, <strong>Reactome</strong>, <strong>STRING</strong>, and <strong>UniProt</strong>!</p>
@@ -146,7 +148,9 @@
 <a href="https://www.uniprot.org" title="Universal Protein Resource (UniProt)" class="external-link">UniProt</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html" title="rbioapi &amp; UniProt vignette article">rbioapi vignette article</a>)</li>
 </ol>
 <p>Only on Github (Developmental) version: (<a href="https://github.com/moosa-r/rbioapi/" class="external-link uri">https://github.com/moosa-r/rbioapi/</a>):</p>
-<ol style="list-style-type: decimal"><li>currently none</li></ol>
+<ol style="list-style-type: decimal">
+<li>currently none</li>
+</ol>
 <p>Each of the services has its dedicated vignette article. However, In this article, I will write about the general framework of rbioapi. Make sure to check the vignette article of each service to learn more about how to use them.</p>
 <p><strong>Note That:</strong> rbioapi is an ongoing project. New databases and services will be implemented periodically in order to gradually make the package as comprehensive as possible. Do you see yourself often using a certain database/service? Feel free to suggest any database/service by creating an issue on our GitHub <a href="https://github.com/moosa-r/" title="rbioapi GitHub repositry" class="external-link">repository</a>. I will appreciate any suggestions.</p>
 </div>
@@ -159,7 +163,7 @@
 <p>However, the CRAN version is released at most once every 1-2 months, You can install the most recent (development) version from <a href="https://github.com/moosa-r/rbioapi/" title="rbioapi repository on GitHub" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"moosa-r/rbioapi"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"moosa-r/rbioapi"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="design-philosophy-of-rbioapi">Design philosophy of rbioapi<a class="anchor" aria-label="anchor" href="#design-philosophy-of-rbioapi"></a>
@@ -178,7 +182,7 @@
 <h2 id="naming-conventions">Naming conventions<a class="anchor" aria-label="anchor" href="#naming-conventions"></a>
 </h2>
 <p>To make the namespace more organized, functions has been named with the following pattern:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>rba_[service_name]_[resource_name]</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>rba_[service_name]_[resource_name]</span></code></pre></div>
 <p>For example, <code><a href="reference/rba_string_version.html">rba_string_version()</a></code> will call <a href="https://string-db.org/" title="STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis" class="external-link">STRING</a>’s version resource.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/rba_string_version.html">rba_string_version</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -357,7 +361,9 @@
 <li><a href="https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html" title="rbioapi &amp; UniProt vignette article">UniProt</a></li>
 </ol>
 <p>We are also adding vignette articles focusing on tasks and workflows:</p>
-<ol style="list-style-type: decimal"><li><a href="https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html" title="Do with rbioapi: Enrichment (Over-Representation) Analysis in R">Do with rbioapi: Enrichment (Over-Representation) Analysis in R</a></li></ol>
+<ol style="list-style-type: decimal">
+<li><a href="https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html" title="Do with rbioapi: Enrichment (Over-Representation) Analysis in R">Do with rbioapi: Enrichment (Over-Representation) Analysis in R</a></li>
+</ol>
 </div>
 <div class="section level2">
 <h2 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a>
@@ -370,31 +376,31 @@
 <div class="section level2">
 <h2 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
-<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">#&gt; R version 4.2.1 (2022-06-23 ucrt)</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="co">#&gt; Running under: Windows 10 x64 (build 19044)</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="co">#&gt; </span></span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="co">#&gt; Matrix products: default</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="co">#&gt; </span></span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="co">#&gt; locale:</span></span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="co">#&gt; [1] LC_COLLATE=English_United States.utf8 </span></span>
-<span id="cb12-9"><a href="#cb12-9"></a><span class="co">#&gt; [2] LC_CTYPE=English_United States.utf8   </span></span>
-<span id="cb12-10"><a href="#cb12-10"></a><span class="co">#&gt; [3] LC_MONETARY=English_United States.utf8</span></span>
-<span id="cb12-11"><a href="#cb12-11"></a><span class="co">#&gt; [4] LC_NUMERIC=C                          </span></span>
-<span id="cb12-12"><a href="#cb12-12"></a><span class="co">#&gt; [5] LC_TIME=English_United States.utf8    </span></span>
-<span id="cb12-13"><a href="#cb12-13"></a><span class="co">#&gt; </span></span>
-<span id="cb12-14"><a href="#cb12-14"></a><span class="co">#&gt; attached base packages:</span></span>
-<span id="cb12-15"><a href="#cb12-15"></a><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
-<span id="cb12-16"><a href="#cb12-16"></a><span class="co">#&gt; </span></span>
-<span id="cb12-17"><a href="#cb12-17"></a><span class="co">#&gt; other attached packages:</span></span>
-<span id="cb12-18"><a href="#cb12-18"></a><span class="co">#&gt; [1] rbioapi_0.7.7</span></span>
-<span id="cb12-19"><a href="#cb12-19"></a><span class="co">#&gt; </span></span>
-<span id="cb12-20"><a href="#cb12-20"></a><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span id="cb12-21"><a href="#cb12-21"></a><span class="co">#&gt;  [1] digest_0.6.29   R6_2.5.1        jsonlite_1.8.0  magrittr_2.0.3 </span></span>
-<span id="cb12-22"><a href="#cb12-22"></a><span class="co">#&gt;  [5] evaluate_0.15   httr_1.4.3      rlang_1.0.4     stringi_1.7.8  </span></span>
-<span id="cb12-23"><a href="#cb12-23"></a><span class="co">#&gt;  [9] cli_3.3.0       curl_4.3.2      rstudioapi_0.13 rmarkdown_2.14 </span></span>
-<span id="cb12-24"><a href="#cb12-24"></a><span class="co">#&gt; [13] tools_4.2.1     stringr_1.4.0   xfun_0.31       yaml_2.3.5     </span></span>
-<span id="cb12-25"><a href="#cb12-25"></a><span class="co">#&gt; [17] fastmap_1.1.0   compiler_4.2.1  htmltools_0.5.3 knitr_1.39</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; R version 4.2.1 (2022-06-23 ucrt)</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Running under: Windows 10 x64 (build 19044)</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Matrix products: default</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; locale:</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] LC_COLLATE=English_United States.utf8 </span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2] LC_CTYPE=English_United States.utf8   </span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3] LC_MONETARY=English_United States.utf8</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4] LC_NUMERIC=C                          </span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5] LC_TIME=English_United States.utf8    </span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attached base packages:</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; other attached packages:</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] rbioapi_0.7.7</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1] digest_0.6.29   R6_2.5.1        jsonlite_1.8.0  magrittr_2.0.3 </span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [5] evaluate_0.15   httr_1.4.3      rlang_1.0.4     stringi_1.7.8  </span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [9] cli_3.3.0       curl_4.3.2      rstudioapi_0.13 rmarkdown_2.14 </span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [13] tools_4.2.1     stringr_1.4.0   xfun_0.31       yaml_2.3.5     </span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [17] fastmap_1.1.0   compiler_4.2.1  htmltools_0.5.3 knitr_1.39</span></span></code></pre></div>
 </div>
 </div>
 

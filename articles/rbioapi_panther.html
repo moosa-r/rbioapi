@@ -108,14 +108,15 @@
 
 
 
-<script src="rbioapi_panther_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="rbioapi_panther_files/htmlwidgets-1.6.2/htmlwidgets.js"></script><link href="rbioapi_panther_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="rbioapi_panther_files/htmlwidgets-1.6.2/htmlwidgets.js"></script><link href="rbioapi_panther_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
 <script src="rbioapi_panther_files/datatables-binding-0.27/datatables.js"></script><link href="rbioapi_panther_files/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="rbioapi_panther_files/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
 <script src="rbioapi_panther_files/dt-core-1.12.1/js/jquery.dataTables.min.js"></script><link href="rbioapi_panther_files/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
 <script src="rbioapi_panther_files/crosstalk-1.2.0/js/crosstalk.min.js"></script><div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>2.D: PANTHER &amp; rbioapi</h1>
-                        <h4 data-toc-skip class="author">Moosa Rezwani</h4>
+                        <h4 data-toc-skip class="author">Moosa
+Rezwani</h4>
             
             <h4 data-toc-skip class="date">2023-04-12</h4>
       
@@ -127,42 +128,67 @@
     
 <hr>
 <div class="section level2 heading2">
-<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+<h2 class="heading2" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>Directly quoting the the paper published by <a href="http://www.pantherdb.org" title="Protein Analysis THrough Evolutionary Relationships (PANTHER)" class="external-link">PANTHER</a> (Protein Analysis THrough Evolutionary Relationships) authors:</p>
+<p>Directly quoting the the paper published by <a href="http://www.pantherdb.org" title="Protein Analysis THrough Evolutionary Relationships (PANTHER)" class="external-link">PANTHER</a>
+(Protein Analysis THrough Evolutionary Relationships) authors:</p>
 <blockquote>
-<p>The PANTHER classification system (<a href="http://www.pantherdb.org" class="external-link uri">http://www.pantherdb.org</a>) a comprehensive system that combines genomes, gene function , pathways and statistical analysis tools to enable to analyze large-scale genome-wide experimental data. The system (PANTHER v.14.0) covers 131 complete genomes organized gene families and subfamilies; evolutionary relationships between are represented in phylogenetic trees, multiple sequence and statistical models (hidden Markov models (HMMs)). The families and subfamilies are annotated with Gene Ontology (GO) terms, sequences are assigned to PANTHER pathways. A suite of tools has built to allow users to browse and query gene functions and analyze-scale experimental data with a number of statistical tests. is widely used by bench scientists, bioinformaticians, computer and systems biologists.</p>
-<p>(source: Mi, Huaiyu, et al. “Protocol Update for large-scale genome and gene function analysis with the PANTHER classification system (v. 14.0).” <em>Nature protocols</em> 14.3 (2019): 703-721)</p>
+<p>The PANTHER classification system (<a href="http://www.pantherdb.org" class="external-link uri">http://www.pantherdb.org</a>) a comprehensive system that
+combines genomes, gene function , pathways and statistical analysis
+tools to enable to analyze large-scale genome-wide experimental data.
+The system (PANTHER v.14.0) covers 131 complete genomes organized gene
+families and subfamilies; evolutionary relationships between are
+represented in phylogenetic trees, multiple sequence and statistical
+models (hidden Markov models (HMMs)). The families and subfamilies are
+annotated with Gene Ontology (GO) terms, sequences are assigned to
+PANTHER pathways. A suite of tools has built to allow users to browse
+and query gene functions and analyze-scale experimental data with a
+number of statistical tests. is widely used by bench scientists,
+bioinformaticians, computer and systems biologists.</p>
+<p>(source: Mi, Huaiyu, et al. “Protocol Update for large-scale genome
+and gene function analysis with the PANTHER classification system (v.
+14.0).” <em>Nature protocols</em> 14.3 (2019): 703-721)</p>
 </blockquote>
-<p>The available tools in PANTHER’s <strong>RESTful API services</strong> can be divided into 3 broad categories: Mapping genes, retrieving information, and research tools. Herein, we provide a very short introduction; you can always check functions’ manuals for detailed guides and examples.</p>
+<p>The available tools in PANTHER’s <strong>RESTful API
+services</strong> can be divided into 3 broad categories: Mapping genes,
+retrieving information, and research tools. Herein, we provide a very
+short introduction; you can always check functions’ manuals for detailed
+guides and examples.</p>
 <hr>
 </div>
 <div class="section level2 heading2">
-<h2 id="map-genes">Map genes<a class="anchor" aria-label="anchor" href="#map-genes"></a>
+<h2 class="heading2" id="map-genes">Map genes<a class="anchor" aria-label="anchor" href="#map-genes"></a>
 </h2>
 <ul>
-<li><p><code><a href="../reference/rba_panther_mapping.html">rba_panther_mapping()</a></code>: map your gene-set to PANTHER database and retrieve attributes and annotations associated with your genes</p></li>
-<li><p><code><a href="../reference/rba_panther_ortholog.html">rba_panther_ortholog()</a></code>: Retrieve Orthologs of your genes</p></li>
-<li><p><code><a href="../reference/rba_panther_homolog.html">rba_panther_homolog()</a></code>: Retrieve Homologs of your genes</p></li>
+<li><p><code><a href="../reference/rba_panther_mapping.html">rba_panther_mapping()</a></code>: map your gene-set to PANTHER
+database and retrieve attributes and annotations associated with your
+genes</p></li>
+<li><p><code><a href="../reference/rba_panther_ortholog.html">rba_panther_ortholog()</a></code>: Retrieve Orthologs of your
+genes</p></li>
+<li><p><code><a href="../reference/rba_panther_homolog.html">rba_panther_homolog()</a></code>: Retrieve Homologs of your
+genes</p></li>
 </ul>
 <hr>
 </div>
 <div class="section level2 heading2">
-<h2 id="get-information">Get information<a class="anchor" aria-label="anchor" href="#get-information"></a>
+<h2 class="heading2" id="get-information">Get information<a class="anchor" aria-label="anchor" href="#get-information"></a>
 </h2>
 <ul>
-<li><p><code>rba_panther_info</code>(): Retrieve a list of PANTHER’s supported organisms, datasets, families, or pathways</p></li>
-<li><p><code>rba_panther_family</code>(): Retrieve Orthologs, MSA, or Tree topology of a given PANTHER family.</p></li>
+<li><p><code>rba_panther_info</code>(): Retrieve a list of PANTHER’s
+supported organisms, datasets, families, or pathways</p></li>
+<li><p><code>rba_panther_family</code>(): Retrieve Orthologs, MSA, or
+Tree topology of a given PANTHER family.</p></li>
 </ul>
 <hr>
 </div>
 <div class="section level2 heading2">
-<h2 id="research-tools">Research tools<a class="anchor" aria-label="anchor" href="#research-tools"></a>
+<h2 class="heading2" id="research-tools">Research tools<a class="anchor" aria-label="anchor" href="#research-tools"></a>
 </h2>
 <div class="section level3 heading3">
-<h3 id="gene-list-analysis">Gene List Analysis<a class="anchor" aria-label="anchor" href="#gene-list-analysis"></a>
+<h3 class="heading3" id="gene-list-analysis">Gene List Analysis<a class="anchor" aria-label="anchor" href="#gene-list-analysis"></a>
 </h3>
-<p><code><a href="../reference/rba_panther_enrich.html">rba_panther_enrich()</a></code> is an equivalent to <a href="http://www.pantherdb.org/index.jsp" title="PANTHER Gene List Analysis" class="external-link">Gene List analysis tool’s webpage.</a>. Here is a usage example:</p>
+<p><code><a href="../reference/rba_panther_enrich.html">rba_panther_enrich()</a></code> is an equivalent to <a href="http://www.pantherdb.org/index.jsp" title="PANTHER Gene List Analysis" class="external-link">Gene List analysis tool’s
+webpage.</a>. Here is a usage example:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## 1 We get the available annotation datasets in PANTHER (we need to select one of them to submit an enrichment request)</span></span>
 <span><span class="va">annots</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_panther_info.html">rba_panther_info</a></span><span class="op">(</span>what <span class="op">=</span> <span class="st">"datasets"</span><span class="op">)</span></span>
@@ -177,54 +203,72 @@
 <span>                               annot_dataset <span class="op">=</span> <span class="st">"ANNOT_TYPE_ID_PANTHER_PATHWAY"</span>,</span>
 <span>                               cutoff <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Performing over-representation enrichment analysis of 15 input genes of organism 9606 against ANNOT_TYPE_ID_PANTHER_PATHWAY datasets.</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-ee89c50947114ba37985" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-ee89c50947114ba37985">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14"],[4,3,4,3,3,2,3,7,2,2,2,3,2,2],[72.2421052631579,164.712,27.452,47.8813953488372,46.2674157303371,130.72380952381,27.0907894736842,0.53465026987925,78.4342857142857,66.9560975609756,53.8274509803922,15.7770114942529,29.8391304347826,21.9616],[4.45410626460892e-05,8.09208204082397e-05,0.000623633565611843,0.00136566718442141,0.00120654874506168,0.00330818481428414,0.00406368327874385,0.00385164488733462,0.00577158496309621,0.00702514668808674,0.00970505969622764,0.0112571820922484,0.0256032965462438,0.0429195734756196],[0.0553693719947545,0.0182136092088008,0.145708873670407,0.0626548156782748,0.0648404487833309,0.0152994317353927,0.110738743989509,13.0926708436544,0.0254990528923211,0.0298703191024333,0.0371557627859537,0.190150080139881,0.067026081888387,0.0910680460440041],[76,25,200,86,89,21,152,17971,35,41,51,261,92,125],[2.78381641538058e-07,1.011510255103e-06,1.16931293552221e-05,3.41416796105352e-05,3.77046482831776e-05,0.000124056930535655,0.000177786143445043,0.000192582244366731,0.000324651654174162,0.000439071668005421,0.00066722285411565,0.000844288656918627,0.00208026784438231,0.00375546267911671],["+","+","+","+","+","+","+","-","+","+","+","+","+","+"],["P04393","P00008","P00034","P00016","P00059","P00007","P00029",null,"P00009","P05918","P04398","P00031","P00053","P00027"],["Ras Pathway","Axon guidance mediated by Slit/Robo","Integrin signalling pathway","Cytoskeletal regulation by Rho GTPase","p53 pathway","Axon guidance mediated by semaphorins","Huntington disease","UNCLASSIFIED","Axon guidance mediated by netrin","p38 MAPK pathway","p53 pathway feedback loops 2","Inflammation mediated by chemokine and cytokine signaling pathway","T cell activation","Heterotrimeric G-protein signaling pathway-Gq alpha and Go alpha mediated pathway"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>number_in_list<\/th>\n      <th>fold_enrichment<\/th>\n      <th>fdr<\/th>\n      <th>expected<\/th>\n      <th>number_in_reference<\/th>\n      <th>pValue<\/th>\n      <th>plus_minus<\/th>\n      <th>term.id<\/th>\n      <th>term.label<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p><strong>Please Note:</strong> Other services supported by rbioapi also provide Over-representation analysis tools. Please see the vignette article <a href="rbioapi_do_enrich.html">Do with rbioapi: Over-Representation (Enrichment) Analysis in R</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html">link to the documentation site</a>) for an in-depth review.</p>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-7c7ff8f230dd84afe754" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-7c7ff8f230dd84afe754">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14"],[4,3,4,3,3,2,3,7,2,2,2,3,2,2],[72.2421052631579,164.712,27.452,47.8813953488372,46.2674157303371,130.72380952381,27.0907894736842,0.53465026987925,78.4342857142857,66.9560975609756,53.8274509803922,15.7770114942529,29.8391304347826,21.9616],[4.45410626460892e-05,8.09208204082397e-05,0.000623633565611843,0.00136566718442141,0.00120654874506168,0.00330818481428414,0.00406368327874385,0.00385164488733462,0.00577158496309621,0.00702514668808674,0.00970505969622764,0.0112571820922484,0.0256032965462438,0.0429195734756196],[0.0553693719947545,0.0182136092088008,0.145708873670407,0.0626548156782748,0.0648404487833309,0.0152994317353927,0.110738743989509,13.0926708436544,0.0254990528923211,0.0298703191024333,0.0371557627859537,0.190150080139881,0.067026081888387,0.0910680460440041],[76,25,200,86,89,21,152,17971,35,41,51,261,92,125],[2.78381641538058e-07,1.011510255103e-06,1.16931293552221e-05,3.41416796105352e-05,3.77046482831776e-05,0.000124056930535655,0.000177786143445043,0.000192582244366731,0.000324651654174162,0.000439071668005421,0.00066722285411565,0.000844288656918627,0.00208026784438231,0.00375546267911671],["+","+","+","+","+","+","+","-","+","+","+","+","+","+"],["P04393","P00008","P00034","P00016","P00059","P00007","P00029",null,"P00009","P05918","P04398","P00031","P00053","P00027"],["Ras Pathway","Axon guidance mediated by Slit/Robo","Integrin signalling pathway","Cytoskeletal regulation by Rho GTPase","p53 pathway","Axon guidance mediated by semaphorins","Huntington disease","UNCLASSIFIED","Axon guidance mediated by netrin","p38 MAPK pathway","p53 pathway feedback loops 2","Inflammation mediated by chemokine and cytokine signaling pathway","T cell activation","Heterotrimeric G-protein signaling pathway-Gq alpha and Go alpha mediated pathway"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>number_in_list<\/th>\n      <th>fold_enrichment<\/th>\n      <th>fdr<\/th>\n      <th>expected<\/th>\n      <th>number_in_reference<\/th>\n      <th>pValue<\/th>\n      <th>plus_minus<\/th>\n      <th>term.id<\/th>\n      <th>term.label<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p><strong>Please Note:</strong> Other services supported by rbioapi
+also provide Over-representation analysis tools. Please see the vignette
+article <a href="rbioapi_do_enrich.html">Do with rbioapi:
+Over-Representation (Enrichment) Analysis in R</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html">link
+to the documentation site</a>) for an in-depth review.</p>
 </div>
 <div class="section level3 heading3">
-<h3 id="tree-grafter">Tree grafter<a class="anchor" aria-label="anchor" href="#tree-grafter"></a>
+<h3 class="heading3" id="tree-grafter">Tree grafter<a class="anchor" aria-label="anchor" href="#tree-grafter"></a>
 </h3>
-<p><code><a href="../reference/rba_panther_tree_grafter.html">rba_panther_tree_grafter()</a></code> is an equivalent to the “<a href="http://www.pantherdb.org/tools/sequenceSearchForm.jsp" class="external-link">Graft sequence into PANTHER library of trees</a>” tool.</p>
+<p><code><a href="../reference/rba_panther_tree_grafter.html">rba_panther_tree_grafter()</a></code> is an equivalent to the “<a href="http://www.pantherdb.org/tools/sequenceSearchForm.jsp" class="external-link">Graft
+sequence into PANTHER library of trees</a>” tool.</p>
 <hr>
 </div>
 </div>
 <div class="section level2 heading2">
-<h2 id="citations">How to Cite?<a class="anchor" aria-label="anchor" href="#citations"></a>
+<h2 class="heading2" id="citations">How to Cite?<a class="anchor" aria-label="anchor" href="#citations"></a>
 </h2>
 <p>To cite PANTHER (Please see <a href="http://www.pantherdb.org/publications.jsp#HowToCitePANTHER" class="external-link uri">http://www.pantherdb.org/publications.jsp#HowToCitePANTHER</a>):</p>
 <ul>
-<li>Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills, Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER version 16: a revised family classification, tree-based classification tool, enhancer regions and extensive API, <em>Nucleic Acids Research</em>, Volume 49, Issue D1, 8 January 2021, Pages D394–D403, <a href="https://doi.org/10.1093/nar/gkaa1106" class="external-link uri">https://doi.org/10.1093/nar/gkaa1106</a>
+<li>Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills,
+Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER
+version 16: a revised family classification, tree-based classification
+tool, enhancer regions and extensive API, <em>Nucleic Acids
+Research</em>, Volume 49, Issue D1, 8 January 2021, Pages D394–D403, <a href="https://doi.org/10.1093/nar/gkaa1106" class="external-link uri">https://doi.org/10.1093/nar/gkaa1106</a>
 </li>
 </ul>
-<p>To cite rbioapi: (<a href="https://academic.oup.com/bioinformatics/article/38/10/2952/6585406?guestAccessKey=1a858639-9e21-4791-8bd9-9f093a4c8b45" title="OUP Bioinformatics, rbioapi: user-friendly R interface to biologic web services’ API" class="external-link">Free access link to the article</a>)</p>
+<p>To cite rbioapi: (<a href="https://academic.oup.com/bioinformatics/article/38/10/2952/6585406?guestAccessKey=1a858639-9e21-4791-8bd9-9f093a4c8b45" title="OUP Bioinformatics, rbioapi: user-friendly R interface to biologic web services’ API" class="external-link">Free
+access link to the article</a>)</p>
 <ul>
-<li>Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: user-friendly R interface to biologic web services’ API, Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2952–2953, <a href="https://doi.org/10.1093/bioinformatics/btac172" class="external-link uri">https://doi.org/10.1093/bioinformatics/btac172</a>
+<li>Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi:
+user-friendly R interface to biologic web services’ API, Bioinformatics,
+Volume 38, Issue 10, 15 May 2022, Pages 2952–2953, <a href="https://doi.org/10.1093/bioinformatics/btac172" class="external-link uri">https://doi.org/10.1093/bioinformatics/btac172</a>
 </li>
 </ul>
 <hr>
 </div>
 <div class="section level2 heading2">
-<h2 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a>
+<h2 class="heading2" id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a>
 </h2>
 <ul>
-<li><p><a href="https://rbioapi.moosa-r.com/articles/rbioapi_panther.html" title="2.C: PANTHER &amp; rbioapi">This article in rbioapi documentation site</a></p></li>
-<li><p><a href="https://rbioapi.moosa-r.com/reference/index.html#section-enrichr-rba-enrichr-" title="rbioapi reference">Functions references in rbioapi documentation site</a></p></li>
-<li><p><a href="rbioapi.html" title="rbioapi: User-Friendly R Interface to Biologic Web Services' API">rbioapi vignette index</a></p></li>
+<li><p><a href="https://rbioapi.moosa-r.com/articles/rbioapi_panther.html" title="2.C: PANTHER &amp; rbioapi">This article in rbioapi
+documentation site</a></p></li>
+<li><p><a href="https://rbioapi.moosa-r.com/reference/index.html#section-enrichr-rba-enrichr-" title="rbioapi reference">Functions references in rbioapi
+documentation site</a></p></li>
+<li><p><a href="rbioapi.html" title="rbioapi: User-Friendly R Interface to Biologic Web Services' API">rbioapi
+vignette index</a></p></li>
 </ul>
 <hr>
 </div>
 <div class="section level2 heading2">
-<h2 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
+<h2 class="heading2" id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
 <pre><code><span><span class="co">#&gt; R version 4.2.3 (2023-03-15)</span></span>
-<span><span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span></span>
-<span><span class="co">#&gt; Running under: macOS Big Sur ... 10.16</span></span>
+<span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
+<span><span class="co">#&gt; Running under: Ubuntu 22.04.2 LTS</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Matrix products: default</span></span>
-<span><span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib</span></span>
-<span><span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib</span></span>
+<span><span class="co">#&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3</span></span>
+<span><span class="co">#&gt; LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.20.so</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; locale:</span></span>
-<span><span class="co">#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span></span>
+<span><span class="co">#&gt;  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       </span></span>
+<span><span class="co">#&gt;  [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   </span></span>
+<span><span class="co">#&gt;  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          </span></span>
+<span><span class="co">#&gt; [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; attached base packages:</span></span>
 <span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>

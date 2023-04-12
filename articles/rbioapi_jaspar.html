@@ -108,10 +108,12 @@
 
 
 
-<script src="rbioapi_jaspar_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>2.B: JASPAR &amp; rbioapi</h1>
-                        <h4 data-toc-skip class="author">Moosa Rezwani</h4>
+                        <h4 data-toc-skip class="author">Moosa
+Rezwani</h4>
             
             <h4 data-toc-skip class="date">2023-04-12</h4>
       
@@ -123,24 +125,40 @@
     
 <hr>
 <div class="section level3">
-<h3 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+<h3 class="heading2" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h3>
-<p>Directly quoting from Fornes O, Castro-Mondragon JA, Khan A, et al:</p>
+<p>Directly quoting from Fornes O, Castro-Mondragon JA, Khan A, et
+al:</p>
 <blockquote>
-<p>JASPAR (<a href="https://jaspar.genereg.net" class="external-link">https://jaspar.genereg.net)</a> is an open-access database of curated, non-redundant transcription factor (TF)-binding profiles stored as position frequency matrices (PFMs) for TFs across multiple species in six taxonomic groups. In this 8th release of JASPAR, the CORE collection has been expanded with 245 new PFMs (169 for vertebrates, 42 for plants, 17 for nematodes, 10 for insects, and 7 for fungi), and 156 PFMs were updated (125 for vertebrates, 28 for plants and 3 for insects). These new profiles represent an 18% expansion compared to the previous release.</p>
+<p>JASPAR (<a href="https://jaspar.genereg.net" class="external-link">https://jaspar.genereg.net)</a> is an
+open-access database of curated, non-redundant transcription factor
+(TF)-binding profiles stored as position frequency matrices (PFMs) for
+TFs across multiple species in six taxonomic groups. In this 8th release
+of JASPAR, the CORE collection has been expanded with 245 new PFMs (169
+for vertebrates, 42 for plants, 17 for nematodes, 10 for insects, and 7
+for fungi), and 156 PFMs were updated (125 for vertebrates, 28 for
+plants and 3 for insects). These new profiles represent an 18% expansion
+compared to the previous release.</p>
 <p>source:<br>
-Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-access database of transcription factor binding profiles. <em>Nucleic Acids Res</em>. 2019; doi: <a href="https://doi.org/10.1093/nar/gkz1001" class="external-link">10.1093/nar/gkz1001</a></p>
+Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the
+open-access database of transcription factor binding profiles.
+<em>Nucleic Acids Res</em>. 2019; doi: <a href="https://doi.org/10.1093/nar/gkz1001" class="external-link">10.1093/nar/gkz1001</a></p>
 </blockquote>
 <hr>
 </div>
 <div class="section level3">
-<h3 id="data-organization-in-jaspar">Data Organization in JASPAR<a class="anchor" aria-label="anchor" href="#data-organization-in-jaspar"></a>
+<h3 class="heading2" id="data-organization-in-jaspar">Data Organization in JASPAR<a class="anchor" aria-label="anchor" href="#data-organization-in-jaspar"></a>
 </h3>
-<p>JASPAR is a database of transcription factor binding matrices with annotations and metadata. These entities are organized in a hierarchical fashion that we will explore next.</p>
+<p>JASPAR is a database of transcription factor binding matrices with
+annotations and metadata. These entities are organized in a hierarchical
+fashion that we will explore next.</p>
 <div class="section level4">
-<h4 id="releases">Releases<a class="anchor" aria-label="anchor" href="#releases"></a>
+<h4 class="heading3" id="releases">Releases<a class="anchor" aria-label="anchor" href="#releases"></a>
 </h4>
-<p>In addition to the latest JASPAR database release (2020), other active releases are also available. Most of the rbioapi JASPAR functions have a <code>release</code> argument that allows you to use other database releases.</p>
+<p>In addition to the latest JASPAR database release (2020), other
+active releases are also available. Most of the rbioapi JASPAR functions
+have a <code>release</code> argument that allows you to use other
+database releases.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Call the function without any arguments to get a list of releases</span></span>
 <span><span class="va">releases</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_releases.html">rba_jaspar_releases</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -148,9 +166,12 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 <span><span class="va">release_7_info</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_releases.html">rba_jaspar_releases</a></span><span class="op">(</span><span class="fl">7</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
-<h4 id="collections">Collections<a class="anchor" aria-label="anchor" href="#collections"></a>
+<h4 class="heading3" id="collections">Collections<a class="anchor" aria-label="anchor" href="#collections"></a>
 </h4>
-<p>Within a release, Matrix profiles are organized into collections, You can use <code><a href="../reference/rba_jaspar_collections.html">rba_jaspar_collections()</a></code> to get a list of available collections, or read “JASPAR Collections” section in <a href="https://jaspar.genereg.net/docs/" title="JASPAR Documentation" class="external-link">documentation page in JASPAR web-site</a> for a thorough review.</p>
+<p>Within a release, Matrix profiles are organized into collections, You
+can use <code><a href="../reference/rba_jaspar_collections.html">rba_jaspar_collections()</a></code> to get a list of available
+collections, or read “JASPAR Collections” section in <a href="https://jaspar.genereg.net/docs/" title="JASPAR Documentation" class="external-link">documentation page in JASPAR web-site</a>
+for a thorough review.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## To get a list of available collection in release 2020:</span></span>
 <span><span class="fu"><a href="../reference/rba_jaspar_collections.html">rba_jaspar_collections</a></span><span class="op">(</span>release <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
@@ -163,9 +184,10 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 <span><span class="va">mat_in_core_2020</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_collections_matrices.html">rba_jaspar_collections_matrices</a></span><span class="op">(</span>collection <span class="op">=</span> <span class="st">"CORE"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
-<h4 id="taxonomic-groups">Taxonomic Groups<a class="anchor" aria-label="anchor" href="#taxonomic-groups"></a>
+<h4 class="heading3" id="taxonomic-groups">Taxonomic Groups<a class="anchor" aria-label="anchor" href="#taxonomic-groups"></a>
 </h4>
-<p>Within each collection, the matrix profiles are organized based on main taxonomic groups:</p>
+<p>Within each collection, the matrix profiles are organized based on
+main taxonomic groups:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## To get a list of taxonomic groups in release 2020:</span></span>
 <span><span class="fu"><a href="../reference/rba_jaspar_taxons.html">rba_jaspar_taxons</a></span><span class="op">(</span>release <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
@@ -186,9 +208,10 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 <span><span class="va">mat_in_insects</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_taxons_matrices.html">rba_jaspar_taxons_matrices</a></span><span class="op">(</span>tax_group <span class="op">=</span> <span class="st">"insects"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
-<h4 id="species">Species<a class="anchor" aria-label="anchor" href="#species"></a>
+<h4 class="heading3" id="species">Species<a class="anchor" aria-label="anchor" href="#species"></a>
 </h4>
-<p>As we go down in the data organization hierarchy, Each taxonomic group consist of species:</p>
+<p>As we go down in the data organization hierarchy, Each taxonomic
+group consist of species:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## To get a list of species in release 2020:</span></span>
 <span><span class="va">species</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_species.html">rba_jaspar_species</a></span><span class="op">(</span>release <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
@@ -221,12 +244,18 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 </div>
 </div>
 <div class="section level3">
-<h3 id="matrix-profiles">Matrix Profiles<a class="anchor" aria-label="anchor" href="#matrix-profiles"></a>
+<h3 class="heading2" id="matrix-profiles">Matrix Profiles<a class="anchor" aria-label="anchor" href="#matrix-profiles"></a>
 </h3>
 <div class="section level4">
-<h4 id="search-matrix-profiles">Search Matrix Profiles<a class="anchor" aria-label="anchor" href="#search-matrix-profiles"></a>
+<h4 class="heading3" id="search-matrix-profiles">Search Matrix Profiles<a class="anchor" aria-label="anchor" href="#search-matrix-profiles"></a>
 </h4>
-<p>Retrieving a list of every matrix available in a given category is not the only option. You can also build a search query using <code>rba_jaspar_matrix_search</code>. Note that this is a search function, you are not required to fill every argument. You may use any combination of arguments you see fit to build your query. You can even call the function without any argument to get a list of all the matrix profiles. For instance:</p>
+<p>Retrieving a list of every matrix available in a given category is
+not the only option. You can also build a search query using
+<code>rba_jaspar_matrix_search</code>. Note that this is a search
+function, you are not required to fill every argument. You may use any
+combination of arguments you see fit to build your query. You can even
+call the function without any argument to get a list of all the matrix
+profiles. For instance:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Get a list of all the available matrix profile:</span></span>
 <span><span class="va">all_matrices</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix_search.html">rba_jaspar_matrix_search</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -245,21 +274,31 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 <span>                                                collection <span class="op">=</span> <span class="st">"PBM"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
-<h4 id="list-matrix-profiles-associated-to-a-base-identifier">List Matrix Profiles Associated to a Base identifier<a class="anchor" aria-label="anchor" href="#list-matrix-profiles-associated-to-a-base-identifier"></a>
+<h4 class="heading3" id="list-matrix-profiles-associated-to-a-base-identifier">List Matrix Profiles Associated to a Base
+identifier<a class="anchor" aria-label="anchor" href="#list-matrix-profiles-associated-to-a-base-identifier"></a>
 </h4>
-<p>Since JASPAR release 2010, the matrix profiles are versioned. A matrix profile Identifier has a “base_id.version” naming schema; for example “MA0600.2” corresponds to the second version of a matrix with base ID MA0600. You can Use <code>rba_jaspar_matrix_versions</code> to get a list of matrix profiles with a given base ID. Also note that some functions, generally those that are used to list available matrices, have an argument called <code>only_last_version</code>.</p>
+<p>Since JASPAR release 2010, the matrix profiles are versioned. A
+matrix profile Identifier has a “base_id.version” naming schema; for
+example “MA0600.2” corresponds to the second version of a matrix with
+base ID MA0600. You can Use <code>rba_jaspar_matrix_versions</code> to
+get a list of matrix profiles with a given base ID. Also note that some
+functions, generally those that are used to list available matrices,
+have an argument called <code>only_last_version</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Get matrix profiles versions associated to a base id</span></span>
 <span><span class="va">MA0600_versions</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix_versions.html">rba_jaspar_matrix_versions</a></span><span class="op">(</span><span class="st">"MA0600"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
-<h4 id="get-a-matrix-profile">Get a Matrix Profile<a class="anchor" aria-label="anchor" href="#get-a-matrix-profile"></a>
+<h4 class="heading3" id="get-a-matrix-profile">Get a Matrix Profile<a class="anchor" aria-label="anchor" href="#get-a-matrix-profile"></a>
 </h4>
-<p>Now that you listed or searched for matrix profiles, you can use <code>rba_jaspar_matrix</code> to retrieve matrix profiles. There are two ways in which you can use this function:</p>
+<p>Now that you listed or searched for matrix profiles, you can use
+<code>rba_jaspar_matrix</code> to retrieve matrix profiles. There are
+two ways in which you can use this function:</p>
 <div class="section level5">
-<h5 id="get-matrix-and-annotations-as-an-r-object">Get Matrix and Annotations as an R Object<a class="anchor" aria-label="anchor" href="#get-matrix-and-annotations-as-an-r-object"></a>
+<h5 class="heading4" id="get-matrix-and-annotations-as-an-r-object">Get Matrix and Annotations as an R Object<a class="anchor" aria-label="anchor" href="#get-matrix-and-annotations-as-an-r-object"></a>
 </h5>
-<p>To do that, only fill in the <code>matrix_id</code> argument in <code>rba_jaspar_matrix</code></p>
+<p>To do that, only fill in the <code>matrix_id</code> argument in
+<code>rba_jaspar_matrix</code></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pfm_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix.html">rba_jaspar_matrix</a></span><span class="op">(</span>matrix_id <span class="op">=</span> <span class="st">"MA0600.2"</span><span class="op">)</span></span>
 <span></span>
@@ -305,18 +344,36 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 <span><span class="co">#&gt;  $ sequence_logo: chr "https://jaspar.genereg.net/static/logos/svg/MA0600.2.svg"</span></span></code></pre></div>
 </div>
 <div class="section level5">
-<h5 id="save-a-matrix-a-file-in-specific-format">Save a Matrix a File in Specific Format<a class="anchor" aria-label="anchor" href="#save-a-matrix-a-file-in-specific-format"></a>
+<h5 class="heading4" id="save-a-matrix-a-file-in-specific-format">Save a Matrix a File in Specific Format<a class="anchor" aria-label="anchor" href="#save-a-matrix-a-file-in-specific-format"></a>
 </h5>
-<p>JASPAR provides position frequency matrices (PFM) formatted as <strong>Raw PFM</strong>, <strong>JASPAR</strong>, <strong>TRANSFAC</strong>, <strong>YAML</strong>, and <strong>MEME</strong>. You can download a matrix profile as a file with any of these formats. To do that, You should use the <code>file_format</code> and <code>save_to</code> arguments available in <code>rba_jaspar_matrix</code>. There are two notes here:</p>
+<p>JASPAR provides position frequency matrices (PFM) formatted as
+<strong>Raw PFM</strong>, <strong>JASPAR</strong>,
+<strong>TRANSFAC</strong>, <strong>YAML</strong>, and
+<strong>MEME</strong>. You can download a matrix profile as a file with
+any of these formats. To do that, You should use the
+<code>file_format</code> and <code>save_to</code> arguments available in
+<code>rba_jaspar_matrix</code>. There are two notes here:</p>
 <ol style="list-style-type: decimal">
-<li><p>In this case, the function will save your matrix as a file and returns the un-parsed content of the file as a character string.</p></li>
+<li><p>In this case, the function will save your matrix as a file and
+returns the un-parsed content of the file as a character
+string.</p></li>
 <li>
-<p>The <code>save_to</code> argument in this function, and in fact through any rbioapi function can be used in many ways:<br>
-2.1. save_to = NA: rbioapi will automatically generate a file path under your working directory, save the file in that path , and informs you with a message.<br>
-2.2 save_to = file_name without path: rbioapi will save the file with your supplied name in your working directory.<br>
-2.3. save_to = a directory path (without file): rbioapi will save the file with a proper name in that directory.<br>
-2.4. save_to = a file path (i.e. ending with .extension): rbioapi will save the file exactly to this path. Make sure that the file extension of the path matches your requested file format. If this was not the case, rbioapi will save the file with the extension supplied in the path, but issues a warning to inform you about that.</p>
-<p>In any of the aforementioned cases, the file path can be absolute or relative.</p>
+<p>The <code>save_to</code> argument in this function, and in fact
+through any rbioapi function can be used in many ways:<br>
+2.1. save_to = NA: rbioapi will automatically generate a file path under
+your working directory, save the file in that path , and informs you
+with a message.<br>
+2.2 save_to = file_name without path: rbioapi will save the file with
+your supplied name in your working directory.<br>
+2.3. save_to = a directory path (without file): rbioapi will save the
+file with a proper name in that directory.<br>
+2.4. save_to = a file path (i.e. ending with .extension): rbioapi will
+save the file exactly to this path. Make sure that the file extension of
+the path matches your requested file format. If this was not the case,
+rbioapi will save the file with the extension supplied in the path, but
+issues a warning to inform you about that.</p>
+<p>In any of the aforementioned cases, the file path can be absolute or
+relative.</p>
 </li>
 </ol>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -338,9 +395,12 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 </div>
 </div>
 <div class="section level4">
-<h4 id="get-binding-sites-of-a-matrix-profiles">Get Binding Sites of a Matrix Profiles<a class="anchor" aria-label="anchor" href="#get-binding-sites-of-a-matrix-profiles"></a>
+<h4 class="heading3" id="get-binding-sites-of-a-matrix-profiles">Get Binding Sites of a Matrix Profiles<a class="anchor" aria-label="anchor" href="#get-binding-sites-of-a-matrix-profiles"></a>
 </h4>
-<p>If available, you can retrieve information on binding sites associated with a matrix profile. The information includes a data frame of genomic coordination of the binding site, URL to FASTA and BED files, along with other annotations.</p>
+<p>If available, you can retrieve information on binding sites
+associated with a matrix profile. The information includes a data frame
+of genomic coordination of the binding site, URL to FASTA and BED files,
+along with other annotations.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Get binding site of a matrix profile:</span></span>
 <span><span class="va">binding_sites</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_sites.html">rba_jaspar_sites</a></span><span class="op">(</span>matrix_id <span class="op">=</span> <span class="st">"MA0600.2"</span><span class="op">)</span></span></code></pre></div>
@@ -348,9 +408,13 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 </div>
 </div>
 <div class="section level3">
-<h3 id="tf-flexible-models-tffms">TF flexible models (TFFMs)<a class="anchor" aria-label="anchor" href="#tf-flexible-models-tffms"></a>
+<h3 class="heading2" id="tf-flexible-models-tffms">TF flexible models (TFFMs)<a class="anchor" aria-label="anchor" href="#tf-flexible-models-tffms"></a>
 </h3>
-<p>JASPAR also stores and assigns identifiers to TF flexible models (TFFMs). Just like PFM (position frequency matrices), you can search TFFMs or retrieve information and annotations using a TFFM Identifier. TFFM IDs are versioned, meaning that they are in base_id.version format.</p>
+<p>JASPAR also stores and assigns identifiers to TF flexible models
+(TFFMs). Just like PFM (position frequency matrices), you can search
+TFFMs or retrieve information and annotations using a TFFM Identifier.
+TFFM IDs are versioned, meaning that they are in base_id.version
+format.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Search TFFMs. This is a search function. Thus, what has been presented</span></span>
 <span><span class="co">## in `Search Matrix Profiles` section also applies here:</span></span>
@@ -394,43 +458,60 @@ Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-a
 <hr>
 </div>
 <div class="section level3">
-<h3 id="citations">How to Cite?<a class="anchor" aria-label="anchor" href="#citations"></a>
+<h3 class="heading2" id="citations">How to Cite?<a class="anchor" aria-label="anchor" href="#citations"></a>
 </h3>
 <p>To cite JASPAR (Please see <a href="https://jaspar.genereg.net/faq/" class="external-link uri">https://jaspar.genereg.net/faq/</a>):</p>
 <ul>
-<li>Jaime A Castro-Mondragon, Rafael Riudavets-Puig, Ieva Rauluseviciute, Roza Berhanu Lemma, Laura Turchi, Romain Blanc-Mathieu, Jeremy Lucas, Paul Boddie, Aziz Khan, Nicolás Manosalva Pérez, Oriol Fornes, Tiffany Y Leung, Alejandro Aguirre, Fayrouz Hammal, Daniel Schmelter, Damir Baranasic, Benoit Ballester, Albin Sandelin, Boris Lenhard, Klaas Vandepoele, Wyeth W Wasserman, François Parcy, Anthony Mathelier, JASPAR 2022: the 9th release of the open-access database of transcription factor binding profiles, <em>Nucleic Acids Research</em>, Volume 50, Issue D1, 7 January 2022, Pages D165–D173, <a href="https://doi.org/10.1093/nar/gkab1113" class="external-link uri">https://doi.org/10.1093/nar/gkab1113</a>
+<li>Jaime A Castro-Mondragon, Rafael Riudavets-Puig, Ieva
+Rauluseviciute, Roza Berhanu Lemma, Laura Turchi, Romain Blanc-Mathieu,
+Jeremy Lucas, Paul Boddie, Aziz Khan, Nicolás Manosalva Pérez, Oriol
+Fornes, Tiffany Y Leung, Alejandro Aguirre, Fayrouz Hammal, Daniel
+Schmelter, Damir Baranasic, Benoit Ballester, Albin Sandelin, Boris
+Lenhard, Klaas Vandepoele, Wyeth W Wasserman, François Parcy, Anthony
+Mathelier, JASPAR 2022: the 9th release of the open-access database of
+transcription factor binding profiles, <em>Nucleic Acids Research</em>,
+Volume 50, Issue D1, 7 January 2022, Pages D165–D173, <a href="https://doi.org/10.1093/nar/gkab1113" class="external-link uri">https://doi.org/10.1093/nar/gkab1113</a>
 </li>
 </ul>
-<p>To cite rbioapi: (<a href="https://academic.oup.com/bioinformatics/article/38/10/2952/6585406?guestAccessKey=1a858639-9e21-4791-8bd9-9f093a4c8b45" title="OUP Bioinformatics, rbioapi: user-friendly R interface to biologic web services’ API" class="external-link">Free access link to the article</a>)</p>
+<p>To cite rbioapi: (<a href="https://academic.oup.com/bioinformatics/article/38/10/2952/6585406?guestAccessKey=1a858639-9e21-4791-8bd9-9f093a4c8b45" title="OUP Bioinformatics, rbioapi: user-friendly R interface to biologic web services’ API" class="external-link">Free
+access link to the article</a>)</p>
 <ul>
-<li>Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: user-friendly R interface to biologic web services’ API, Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2952–2953, <a href="https://doi.org/10.1093/bioinformatics/btac172" class="external-link uri">https://doi.org/10.1093/bioinformatics/btac172</a>
+<li>Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi:
+user-friendly R interface to biologic web services’ API, Bioinformatics,
+Volume 38, Issue 10, 15 May 2022, Pages 2952–2953, <a href="https://doi.org/10.1093/bioinformatics/btac172" class="external-link uri">https://doi.org/10.1093/bioinformatics/btac172</a>
 </li>
 </ul>
 <hr>
 </div>
 <div class="section level2">
-<h2 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a>
+<h2 class="heading2" id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a>
 </h2>
 <ul>
-<li><p><a href="https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html" title="2.G: JASPAR &amp; rbioapi">This article in rbioapi documentation site</a></p></li>
-<li><p><a href="https://rbioapi.moosa-r.com/reference/index.html#section-jaspar-rba-jaspar-" title="rbioapi reference">Functions references in rbioapi documentation site</a></p></li>
-<li><p><a href="rbioapi.html" title="rbioapi: User-Friendly R Interface to Biologic Web Services' API">rbioapi vignette index</a></p></li>
+<li><p><a href="https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html" title="2.G: JASPAR &amp; rbioapi">This article in rbioapi
+documentation site</a></p></li>
+<li><p><a href="https://rbioapi.moosa-r.com/reference/index.html#section-jaspar-rba-jaspar-" title="rbioapi reference">Functions references in rbioapi
+documentation site</a></p></li>
+<li><p><a href="rbioapi.html" title="rbioapi: User-Friendly R Interface to Biologic Web Services' API">rbioapi
+vignette index</a></p></li>
 </ul>
 <hr>
 </div>
 <div class="section level2">
-<h2 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
+<h2 class="heading2" id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
 <pre><code><span><span class="co">#&gt; R version 4.2.3 (2023-03-15)</span></span>
-<span><span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span></span>
-<span><span class="co">#&gt; Running under: macOS Big Sur ... 10.16</span></span>
+<span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
+<span><span class="co">#&gt; Running under: Ubuntu 22.04.2 LTS</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Matrix products: default</span></span>
-<span><span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib</span></span>
-<span><span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib</span></span>
+<span><span class="co">#&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3</span></span>
+<span><span class="co">#&gt; LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.20.so</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; locale:</span></span>
-<span><span class="co">#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span></span>
+<span><span class="co">#&gt;  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       </span></span>
+<span><span class="co">#&gt;  [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   </span></span>
+<span><span class="co">#&gt;  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          </span></span>
+<span><span class="co">#&gt; [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; attached base packages:</span></span>
 <span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>

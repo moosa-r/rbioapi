@@ -108,10 +108,12 @@
 
 
 
-<script src="rbioapi_uniprot_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>2.G: UniProt &amp; rbioapi</h1>
-                        <h4 data-toc-skip class="author">Moosa Rezwani</h4>
+                        <h4 data-toc-skip class="author">Moosa
+Rezwani</h4>
             
             <h4 data-toc-skip class="date">2023-04-12</h4>
       
@@ -123,20 +125,33 @@
     
 <hr>
 <div class="section level3">
-<h3 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+<h3 class="heading2" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h3>
 <p>Directly quoting from <a href="https://www.uniprot.org" title="Universal Protein Resource (UniProt)" class="external-link">UniProt</a>:</p>
 <blockquote>
-<p>The Universal Protein Resource (UniProt) is a comprehensive resource for protein sequence and annotation data. The UniProt databases are the <a href="https://www.uniprot.org/help/uniprotkb" class="external-link">UniProt Knowledgebase (UniProtKB)</a>, the <a href="https://www.uniprot.org/help/uniref" class="external-link">UniProt Reference Clusters (UniRef)</a>, and the <a href="https://www.uniprot.org/help/uniparc" class="external-link">UniProt Archive (UniParc)</a>. The UniProt consortium and host institutions EMBL-EBI, SIB and PIR are committed to the long-term preservation of the UniProt databases.</p>
+<p>The Universal Protein Resource (UniProt) is a comprehensive resource
+for protein sequence and annotation data. The UniProt databases are the
+<a href="https://www.uniprot.org/help/uniprotkb" class="external-link">UniProt Knowledgebase
+(UniProtKB)</a>, the <a href="https://www.uniprot.org/help/uniref" class="external-link">UniProt Reference Clusters
+(UniRef)</a>, and the <a href="https://www.uniprot.org/help/uniparc" class="external-link">UniProt Archive
+(UniParc)</a>. The UniProt consortium and host institutions EMBL-EBI,
+SIB and PIR are committed to the long-term preservation of the UniProt
+databases.</p>
 <p>(source: <a href="https://www.uniprot.org/help/about" class="external-link uri">https://www.uniprot.org/help/about</a>)</p>
 </blockquote>
 <hr>
 </div>
 <div class="section level3">
-<h3 id="search-vs-retrieve">Search vs Retrieve<a class="anchor" aria-label="anchor" href="#search-vs-retrieve"></a>
+<h3 class="heading2" id="search-vs-retrieve">Search vs Retrieve<a class="anchor" aria-label="anchor" href="#search-vs-retrieve"></a>
 </h3>
-<p>Most of rbioapi UniProt functions have two variants. one to retrieve data using a proper accession, and the second one (which have a <code>_search</code> suffix) is to search using any combination of arguments. We first demonstrate this using an example, then provide a list of such functions in rbioapi.</p>
-<p>Suppose we are interested in Human CD40 ligand protein, and we know that it’s UniProt accession is “P29965”. We can simply do as the following:</p>
+<p>Most of rbioapi UniProt functions have two variants. one to retrieve
+data using a proper accession, and the second one (which have a
+<code>_search</code> suffix) is to search using any combination of
+arguments. We first demonstrate this using an example, then provide a
+list of such functions in rbioapi.</p>
+<p>Suppose we are interested in Human CD40 ligand protein, and we know
+that it’s UniProt accession is “P29965”. We can simply do as the
+following:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## 1 We can retrieve CD40 protein's information by qurying it's UniProt accession:</span></span>
 <span><span class="va">cd40</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_uniprot_proteins.html">rba_uniprot_proteins</a></span><span class="op">(</span>accession <span class="op">=</span> <span class="st">"P29965"</span><span class="op">)</span></span>
@@ -157,7 +172,11 @@
 <span><span class="co">#&gt;  $ keywords        :'data.frame':    13 obs. of  1 variable:</span></span>
 <span><span class="co">#&gt;  $ references      :'data.frame':    25 obs. of  3 variables:</span></span>
 <span><span class="co">#&gt;  $ sequence        :List of 5</span></span></code></pre></div>
-<p>This is the equivalent of the page that UniProt have on this accession (<a href="https://www.uniprot.org/uniprot/P29965" title="UniProtKB - P29965 (CD40L_HUMAN)" class="external-link">UniProtKB - P29965</a>). But what if we didn’t know the UniProt accession? Or simply want to perform a search using certain parameters? We can use the function with <code>_search</code> suffix:</p>
+<p>This is the equivalent of the page that UniProt have on this
+accession (<a href="https://www.uniprot.org/uniprot/P29965" title="UniProtKB - P29965 (CD40L_HUMAN)" class="external-link">UniProtKB - P29965</a>). But
+what if we didn’t know the UniProt accession? Or simply want to perform
+a search using certain parameters? We can use the function with
+<code>_search</code> suffix:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## 1 From the available arguments, we fill only those which we think is pertinent</span></span>
 <span><span class="va">cd40_search</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_uniprot_proteins_search.html">rba_uniprot_proteins_search</a></span><span class="op">(</span>protein <span class="op">=</span> <span class="st">"CD40 ligand"</span>,</span>
@@ -180,8 +199,18 @@
 <span><span class="co">#&gt;   ..$ keywords        :List of 13</span></span>
 <span><span class="co">#&gt;   ..$ references      :List of 25</span></span>
 <span><span class="co">#&gt;   ..$ sequence        :List of 5</span></span></code></pre></div>
-<p>This is the equivalent of ‘<a href="https://www.uniprot.org/help/advanced_search" title="UniProtKB advanced search options" class="external-link">advanced search</a>’ in UniProt web portal. See function <code>rba_uniprot_proteins_search</code>’s manual for more information. Remember that in <code>*_search</code> functions, you are not required to fill every argument, you can use any combination of arguments you see fit to build your search query.</p>
-<p>The applications of <code>*_search</code> variants are not limited to what the title ‘search’ implies. These functions will also retrieve the search hits in their response; Thus you can use them for mass-retrieving. If you see the “argument” section in the functions’ manuals, you would see that many arguments accept a vector of values. consider the following examples:</p>
+<p>This is the equivalent of ‘<a href="https://www.uniprot.org/help/advanced_search" title="UniProtKB advanced search options" class="external-link">advanced search</a>’ in
+UniProt web portal. See function
+<code>rba_uniprot_proteins_search</code>’s manual for more information.
+Remember that in <code>*_search</code> functions, you are not required
+to fill every argument, you can use any combination of arguments you see
+fit to build your search query.</p>
+<p>The applications of <code>*_search</code> variants are not limited to
+what the title ‘search’ implies. These functions will also retrieve the
+search hits in their response; Thus you can use them for
+mass-retrieving. If you see the “argument” section in the functions’
+manuals, you would see that many arguments accept a vector of values.
+consider the following examples:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## 1 As the simplest scenario, we can retrieve multiple proteins in one call</span></span>
 <span><span class="va">multi_prs1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_uniprot_proteins_search.html">rba_uniprot_proteins_search</a></span><span class="op">(</span>accession <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"P04637"</span>,</span>
@@ -289,32 +318,46 @@
 <span><span class="co">#&gt;  $ P0DTG1    :List of 13</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="functions-with-star-search-variant">Functions with <code>*_search</code> variant<a class="anchor" aria-label="anchor" href="#functions-with-star-search-variant"></a>
+<h3 class="heading2" id="functions-with-star-search-variant">Functions with <code>*_search</code> variant<a class="anchor" aria-label="anchor" href="#functions-with-star-search-variant"></a>
 </h3>
-<p>The search variants are not limited to the above. Here is a list of the function that have both a retrieve and search variants. See their manuals for detailed guides and examples.</p>
+<p>The search variants are not limited to the above. Here is a list of
+the function that have both a retrieve and search variants. See their
+manuals for detailed guides and examples.</p>
 <ol style="list-style-type: decimal">
-<li><p><code><a href="../reference/rba_uniprot_proteins.html">rba_uniprot_proteins()</a></code> &amp; <code><a href="../reference/rba_uniprot_proteins_search.html">rba_uniprot_proteins_search()</a></code></p></li>
-<li><p><code><a href="../reference/rba_uniprot_features.html">rba_uniprot_features()</a></code> &amp; <code><a href="../reference/rba_uniprot_features_search.html">rba_uniprot_features_search()</a></code></p></li>
-<li><p><code><a href="../reference/rba_uniprot_variation.html">rba_uniprot_variation()</a></code> &amp; <code><a href="../reference/rba_uniprot_variation_search.html">rba_uniprot_variation_search()</a></code></p></li>
-<li><p><code><a href="../reference/rba_uniprot_proteomics.html">rba_uniprot_proteomics()</a></code> &amp; <code><a href="../reference/rba_uniprot_proteomics_search.html">rba_uniprot_proteomics_search()</a></code></p></li>
-<li><p><code><a href="../reference/rba_uniprot_antigens.html">rba_uniprot_antigens()</a></code> &amp; <code><a href="../reference/rba_uniprot_antigens_search.html">rba_uniprot_antigens_search()</a></code></p></li>
-<li><p><code><a href="../reference/rba_uniprot_proteomes.html">rba_uniprot_proteomes()</a></code> &amp; <code><a href="../reference/rba_uniprot_proteomes_search.html">rba_uniprot_proteomes_search()</a></code></p></li>
-<li><p><code><a href="../reference/rba_uniprot_ptm.html">rba_uniprot_ptm()</a></code> &amp; <code><a href="../reference/rba_uniprot_ptm_search.html">rba_uniprot_ptm_search()</a></code></p></li>
-<li><p><code><a href="../reference/rba_uniprot_mutagenesis.html">rba_uniprot_mutagenesis()</a></code> &amp; <code><a href="../reference/rba_uniprot_mutagenesis_search.html">rba_uniprot_mutagenesis_search()</a></code></p></li>
-<li><p><code><a href="../reference/rba_uniprot_genecentric.html">rba_uniprot_genecentric()</a></code> &amp; <code><a href="../reference/rba_uniprot_genecentric_search.html">rba_uniprot_genecentric_search()</a></code></p></li>
-<li><p><code><a href="../reference/rba_uniprot_uniparc.html">rba_uniprot_uniparc()</a></code> &amp; <code><a href="../reference/rba_uniprot_uniparc_search.html">rba_uniprot_uniparc_search()</a></code></p></li>
+<li><p><code><a href="../reference/rba_uniprot_proteins.html">rba_uniprot_proteins()</a></code> &amp;
+<code><a href="../reference/rba_uniprot_proteins_search.html">rba_uniprot_proteins_search()</a></code></p></li>
+<li><p><code><a href="../reference/rba_uniprot_features.html">rba_uniprot_features()</a></code> &amp;
+<code><a href="../reference/rba_uniprot_features_search.html">rba_uniprot_features_search()</a></code></p></li>
+<li><p><code><a href="../reference/rba_uniprot_variation.html">rba_uniprot_variation()</a></code> &amp;
+<code><a href="../reference/rba_uniprot_variation_search.html">rba_uniprot_variation_search()</a></code></p></li>
+<li><p><code><a href="../reference/rba_uniprot_proteomics.html">rba_uniprot_proteomics()</a></code> &amp;
+<code><a href="../reference/rba_uniprot_proteomics_search.html">rba_uniprot_proteomics_search()</a></code></p></li>
+<li><p><code><a href="../reference/rba_uniprot_antigens.html">rba_uniprot_antigens()</a></code> &amp;
+<code><a href="../reference/rba_uniprot_antigens_search.html">rba_uniprot_antigens_search()</a></code></p></li>
+<li><p><code><a href="../reference/rba_uniprot_proteomes.html">rba_uniprot_proteomes()</a></code> &amp;
+<code><a href="../reference/rba_uniprot_proteomes_search.html">rba_uniprot_proteomes_search()</a></code></p></li>
+<li><p><code><a href="../reference/rba_uniprot_ptm.html">rba_uniprot_ptm()</a></code> &amp;
+<code><a href="../reference/rba_uniprot_ptm_search.html">rba_uniprot_ptm_search()</a></code></p></li>
+<li><p><code><a href="../reference/rba_uniprot_mutagenesis.html">rba_uniprot_mutagenesis()</a></code> &amp;
+<code><a href="../reference/rba_uniprot_mutagenesis_search.html">rba_uniprot_mutagenesis_search()</a></code></p></li>
+<li><p><code><a href="../reference/rba_uniprot_genecentric.html">rba_uniprot_genecentric()</a></code> &amp;
+<code><a href="../reference/rba_uniprot_genecentric_search.html">rba_uniprot_genecentric_search()</a></code></p></li>
+<li><p><code><a href="../reference/rba_uniprot_uniparc.html">rba_uniprot_uniparc()</a></code> &amp;
+<code><a href="../reference/rba_uniprot_uniparc_search.html">rba_uniprot_uniparc_search()</a></code></p></li>
 </ol>
 <hr>
 </div>
 <div class="section level3">
-<h3 id="uniprot-functions-categories">UniProt functions categories<a class="anchor" aria-label="anchor" href="#uniprot-functions-categories"></a>
+<h3 class="heading2" id="uniprot-functions-categories">UniProt functions categories<a class="anchor" aria-label="anchor" href="#uniprot-functions-categories"></a>
 </h3>
-<p>The UniProt API endpoints are organized into 5 group. Here are those categories and rbioapi functions that correspond to each one. See the functions’ manuals for more details.</p>
+<p>The UniProt API endpoints are organized into 5 group. Here are those
+categories and rbioapi functions that correspond to each one. See the
+functions’ manuals for more details.</p>
 <div class="section level4">
-<h4 id="proteins">Proteins<a class="anchor" aria-label="anchor" href="#proteins"></a>
+<h4 class="heading3" id="proteins">Proteins<a class="anchor" aria-label="anchor" href="#proteins"></a>
 </h4>
 <div class="section level5">
-<h5 id="proteins-proteins">Proteins:<a class="anchor" aria-label="anchor" href="#proteins-proteins"></a>
+<h5 class="heading4" id="proteins-proteins">Proteins:<a class="anchor" aria-label="anchor" href="#proteins-proteins"></a>
 </h5>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_proteins.html">rba_uniprot_proteins()</a></code></p></li>
@@ -323,7 +366,7 @@
 </ul>
 </div>
 <div class="section level5">
-<h5 id="proteins-features">Features<a class="anchor" aria-label="anchor" href="#proteins-features"></a>
+<h5 class="heading4" id="proteins-features">Features<a class="anchor" aria-label="anchor" href="#proteins-features"></a>
 </h5>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_features.html">rba_uniprot_features()</a></code></p></li>
@@ -331,13 +374,13 @@
 </ul>
 </div>
 <div class="section level5">
-<h5 id="proteins-variation">Variation<a class="anchor" aria-label="anchor" href="#proteins-variation"></a>
+<h5 class="heading4" id="proteins-variation">Variation<a class="anchor" aria-label="anchor" href="#proteins-variation"></a>
 </h5>
 <p><code><a href="../reference/rba_uniprot_variation.html">rba_uniprot_variation()</a></code></p>
 <p><code><a href="../reference/rba_uniprot_variation_search.html">rba_uniprot_variation_search()</a></code></p>
 </div>
 <div class="section level5">
-<h5 id="proteins-proteomics">Proteomics<a class="anchor" aria-label="anchor" href="#proteins-proteomics"></a>
+<h5 class="heading4" id="proteins-proteomics">Proteomics<a class="anchor" aria-label="anchor" href="#proteins-proteomics"></a>
 </h5>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_proteomics.html">rba_uniprot_proteomics()</a></code></p></li>
@@ -346,7 +389,7 @@
 </div>
 </div>
 <div class="section level4">
-<h4 id="post-translational-modification-ptm">Post-Translational Modification (PTM)<a class="anchor" aria-label="anchor" href="#post-translational-modification-ptm"></a>
+<h4 class="heading3" id="post-translational-modification-ptm">Post-Translational Modification (PTM)<a class="anchor" aria-label="anchor" href="#post-translational-modification-ptm"></a>
 </h4>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_ptm.html">rba_uniprot_ptm()</a></code></p></li>
@@ -354,7 +397,7 @@
 </ul>
 </div>
 <div class="section level4">
-<h4 id="antigens">Antigens<a class="anchor" aria-label="anchor" href="#antigens"></a>
+<h4 class="heading3" id="antigens">Antigens<a class="anchor" aria-label="anchor" href="#antigens"></a>
 </h4>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_antigens.html">rba_uniprot_antigens()</a></code></p></li>
@@ -362,7 +405,7 @@
 </ul>
 </div>
 <div class="section level4">
-<h4 id="mutagenesis">Mutagenesis<a class="anchor" aria-label="anchor" href="#mutagenesis"></a>
+<h4 class="heading3" id="mutagenesis">Mutagenesis<a class="anchor" aria-label="anchor" href="#mutagenesis"></a>
 </h4>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_mutagenesis.html">rba_uniprot_mutagenesis()</a></code></p></li>
@@ -370,7 +413,7 @@
 </ul>
 </div>
 <div class="section level4">
-<h4 id="proteomes">Proteomes<a class="anchor" aria-label="anchor" href="#proteomes"></a>
+<h4 class="heading3" id="proteomes">Proteomes<a class="anchor" aria-label="anchor" href="#proteomes"></a>
 </h4>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_proteomes.html">rba_uniprot_proteomes()</a></code></p></li>
@@ -380,7 +423,7 @@
 </ul>
 </div>
 <div class="section level4">
-<h4 id="taxonomy">Taxonomy<a class="anchor" aria-label="anchor" href="#taxonomy"></a>
+<h4 class="heading3" id="taxonomy">Taxonomy<a class="anchor" aria-label="anchor" href="#taxonomy"></a>
 </h4>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_taxonomy.html">rba_uniprot_taxonomy()</a></code></p></li>
@@ -392,7 +435,7 @@
 </ul>
 </div>
 <div class="section level4">
-<h4 id="coordinates">Coordinates<a class="anchor" aria-label="anchor" href="#coordinates"></a>
+<h4 class="heading3" id="coordinates">Coordinates<a class="anchor" aria-label="anchor" href="#coordinates"></a>
 </h4>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_coordinates.html">rba_uniprot_coordinates()</a></code></p></li>
@@ -402,7 +445,7 @@
 </ul>
 </div>
 <div class="section level4">
-<h4 id="uniparc">UniParc<a class="anchor" aria-label="anchor" href="#uniparc"></a>
+<h4 class="heading3" id="uniparc">UniParc<a class="anchor" aria-label="anchor" href="#uniparc"></a>
 </h4>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_uniparc.html">rba_uniprot_uniparc()</a></code></p></li>
@@ -414,45 +457,60 @@
 </div>
 </div>
 <div class="section level3">
-<h3 id="citations">How to Cite?<a class="anchor" aria-label="anchor" href="#citations"></a>
+<h3 class="heading2" id="citations">How to Cite?<a class="anchor" aria-label="anchor" href="#citations"></a>
 </h3>
 <p>To cite UniProt (Please see <a href="https://www.uniprot.org/help/publications" class="external-link uri">https://www.uniprot.org/help/publications</a>):</p>
 <ul>
-<li>The UniProt Consortium, UniProt: the universal protein knowledgebase in 2021, <em>Nucleic Acids Research</em>, Volume 49, Issue D1, 8 January 2021, Pages D480–D489, <a href="https://doi.org/10.1093/nar/gkaa1100" class="external-link uri">https://doi.org/10.1093/nar/gkaa1100</a>
+<li>The UniProt Consortium, UniProt: the universal protein knowledgebase
+in 2021, <em>Nucleic Acids Research</em>, Volume 49, Issue D1, 8 January
+2021, Pages D480–D489, <a href="https://doi.org/10.1093/nar/gkaa1100" class="external-link uri">https://doi.org/10.1093/nar/gkaa1100</a>
 </li>
-<li>Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd Turner, Maria Martin, The Proteins API: accessing key integrated protein and genome information, <em>Nucleic Acids Research</em>, Volume 45, Issue W1, 3 July 2017, Pages W539–W544, <a href="https://doi.org/10.1093/nar/gkx237" class="external-link uri">https://doi.org/10.1093/nar/gkx237</a>
+<li>Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
+Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
+Turner, Maria Martin, The Proteins API: accessing key integrated protein
+and genome information, <em>Nucleic Acids Research</em>, Volume 45,
+Issue W1, 3 July 2017, Pages W539–W544, <a href="https://doi.org/10.1093/nar/gkx237" class="external-link uri">https://doi.org/10.1093/nar/gkx237</a>
 </li>
 </ul>
-<p>To cite rbioapi: (<a href="https://academic.oup.com/bioinformatics/article/38/10/2952/6585406?guestAccessKey=1a858639-9e21-4791-8bd9-9f093a4c8b45" title="OUP Bioinformatics, rbioapi: user-friendly R interface to biologic web services’ API" class="external-link">Free access link to the article</a>)</p>
+<p>To cite rbioapi: (<a href="https://academic.oup.com/bioinformatics/article/38/10/2952/6585406?guestAccessKey=1a858639-9e21-4791-8bd9-9f093a4c8b45" title="OUP Bioinformatics, rbioapi: user-friendly R interface to biologic web services’ API" class="external-link">Free
+access link to the article</a>)</p>
 <ul>
-<li>Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: user-friendly R interface to biologic web services’ API, Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2952–2953, <a href="https://doi.org/10.1093/bioinformatics/btac172" class="external-link uri">https://doi.org/10.1093/bioinformatics/btac172</a>
+<li>Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi:
+user-friendly R interface to biologic web services’ API, Bioinformatics,
+Volume 38, Issue 10, 15 May 2022, Pages 2952–2953, <a href="https://doi.org/10.1093/bioinformatics/btac172" class="external-link uri">https://doi.org/10.1093/bioinformatics/btac172</a>
 </li>
 </ul>
 <hr>
 </div>
 <div class="section level2">
-<h2 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a>
+<h2 class="heading2" id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a>
 </h2>
 <ul>
-<li><p><a href="https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html" title="2.F: UniProt &amp; rbioapi">This article in rbioapi documentation site</a></p></li>
-<li><p><a href="https://rbioapi.moosa-r.com/reference/index.html#section-uniprot-rba-uniprot-" title="rbioapi reference">Functions references in rbioapi documentation site</a></p></li>
-<li><p><a href="rbioapi.html" title="rbioapi: User-Friendly R Interface to Biologic Web Services' API">rbioapi vignette index</a></p></li>
+<li><p><a href="https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html" title="2.F: UniProt &amp; rbioapi">This article in rbioapi
+documentation site</a></p></li>
+<li><p><a href="https://rbioapi.moosa-r.com/reference/index.html#section-uniprot-rba-uniprot-" title="rbioapi reference">Functions references in rbioapi
+documentation site</a></p></li>
+<li><p><a href="rbioapi.html" title="rbioapi: User-Friendly R Interface to Biologic Web Services' API">rbioapi
+vignette index</a></p></li>
 </ul>
 <hr>
 </div>
 <div class="section level2">
-<h2 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
+<h2 class="heading2" id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
 <pre><code><span><span class="co">#&gt; R version 4.2.3 (2023-03-15)</span></span>
-<span><span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span></span>
-<span><span class="co">#&gt; Running under: macOS Big Sur ... 10.16</span></span>
+<span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
+<span><span class="co">#&gt; Running under: Ubuntu 22.04.2 LTS</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Matrix products: default</span></span>
-<span><span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib</span></span>
-<span><span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib</span></span>
+<span><span class="co">#&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3</span></span>
+<span><span class="co">#&gt; LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.20.so</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; locale:</span></span>
-<span><span class="co">#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span></span>
+<span><span class="co">#&gt;  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       </span></span>
+<span><span class="co">#&gt;  [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   </span></span>
+<span><span class="co">#&gt;  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          </span></span>
+<span><span class="co">#&gt; [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; attached base packages:</span></span>
 <span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
