@@ -891,7 +891,13 @@ rba_string_enrichment <- function(ids,
   ## Build Function-Specific Call
   if (isTRUE(split_df)) {
     parser_input <- list("json->df",
-                         function(x) { split(x, x$category) })
+                         function(x) {
+                           if (utils::hasName(x, "category")) {
+                             split(x, x$category)
+                           } else {
+                             x
+                           }
+                         })
   } else {
     parser_input <- "json->df"
   }

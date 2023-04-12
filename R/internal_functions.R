@@ -98,7 +98,9 @@
                      ptn = "^(http.?://).*string-db\\.org/api/",
                      err_ptn = "^4\\d\\d$",
                      err_prs = list("json->list_simp",
-                                    function(x) {paste(x, collapse = "\n")})
+                                    function(x) {paste(x, collapse = "\n")},
+                                    function(x) {gsub("<.+?>|&nbsp;", "\n", x)},
+                                    function(x) {gsub("(\n)+", "\n", x)})
                    ),
                    uniprot = switch(
                      arg[[2]],
