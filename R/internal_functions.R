@@ -668,6 +668,8 @@
 
       if (!inherits(parsed_response, "try-error")) {
         return(parsed_response)
+      } else if (identical(httr::content(response, as = "text", encoding = "UTF-8"), "")) {
+        return(NULL)
       } else {
         parse_error_msg <- paste("Internal Error:",
                                  "Failed to parse the server's response.",
