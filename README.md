@@ -1,7 +1,7 @@
 rbioapi: User-Friendly R Interface to Biologic Web Services’ API
 ================
 Moosa Rezwani
-2022-07-30
+2023-04-30
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -14,7 +14,7 @@ Moosa Rezwani
 
 <!-- badges: end -->
 
-## What does rbioapi do?
+# What does rbioapi do?
 
 Currently fully supports **Enrichr**, **JASPAR**, **miEAA**,
 **PANTHER**, **Reactome**, **STRING**, and **UniProt**!
@@ -32,7 +32,7 @@ will be added periodically. Feel free to
 [suggest](https://github.com/moosa-r/rbioapi/issues "Issue section in rbioapi GitHub repository")
 any databases or services you often use.
 
-## What is Supported by rbioapi?
+# What is Supported by rbioapi?
 
 rbioapi is dedicated to **Biological or Medical** databases and web
 services. Currently, rbioapi supports and covers every API resources in
@@ -81,7 +81,7 @@ an issue on our GitHub
 [repository](https://github.com/moosa-r/ "rbioapi GitHub repositry"). I
 will appreciate any suggestions.
 
-## How to install?
+# How to install?
 
 You can install the stable release version of
 [rbioapi](rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API")
@@ -103,37 +103,13 @@ install.packages("remotes")
 remotes::install_github("moosa-r/rbioapi")
 ```
 
-## Design philosophy of rbioapi
+Now, we can load the package:
 
--   The structure of functions should be consistent across all
-    data-bases and services. This means that, using functions to
-    communicate with different web services should not require new
-    learning and/or training.
+``` r
+library(rbioapi)
+```
 
--   Using the package should entail simple plugging of values into a
-    function’s arguments and running the code.
-
--   No function should explicitly demand the user to run another
-    function beforehand.
-
--   The functions’ organization, names, and arguments should be as
-    faithful as possible to the original API resources.
-
--   The package should be scalable and easy to collaborate. To this end,
-    exported functions should have a template-based structure and the
-    internal functions should have a hierarchical organization with only
-    a subset of them needed by the contributors.
-
--   Beginner users should be able to conveniently use rbioapi and be
-    completely insulated from any technicalities.
-
--   The functions’ documentations should be extensive, self-contained,
-    with working examples, and integrated with the corresponding web
-    services in terms such as citing information or links to guides. In
-    addition to the main vignette article, each supported database or
-    web service should have its own vignette articles.
-
-## Naming conventions
+# Naming conventions
 
 To make the namespace more organized, functions has been named with the
 following pattern:
@@ -195,7 +171,7 @@ rba_options()
 
 Now, let us consider the ways in which we can alter the settings:
 
-### Change the option globally
+## Change the option globally
 
 Changing an option globally means that for the rest of your R session,
 any rbioapi function will respect the changed option. To do this, use
@@ -210,7 +186,7 @@ rba_options(verbose = FALSE)
 ## From now on, the package will be quiet.
 ```
 
-### Change the option only within a function call
+## Change the option only within a function call
 
 You can pass additional arguments to any rbioapi function using
 “ellipsis” (the familiar `…` or dot dot dot!). Meaning that you can call
@@ -234,7 +210,7 @@ x <- rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC", diagnostics
 x <- rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC")
 ```
 
-## Connection test
+# Connection test
 
 The second exception in functions’ naming schema is
 `rba_connection_test()`. Run this simple function to check your
@@ -267,7 +243,7 @@ rba_connection_test(print_output = TRUE)
 #> +++ The server is responding.
 ```
 
-## Iterating over paginated results
+# Iterating over paginated results
 
 Some API resources will return paginated responses. This is particularly
 common in API resources which return potentially very large responses.
@@ -302,7 +278,7 @@ str(adeno, max.level = 2)
 #>  $ pageInfo  :List of 3
 #>   ..$ resultsPerPage: int 200
 #>   ..$ currentPage   : int 1
-#>   ..$ totalRecords  : int 955
+#>   ..$ totalRecords  : int 979
 ```
 
 As you can see, the server has returned the first page of the response,
@@ -348,46 +324,44 @@ Nevertheless, it is the user’s responsibility to check for proper
 citations and to properly cite the database/services that they have
 used.
 
--   **How to cite rbioapi**: ([Free access link to the
-    article](https://academic.oup.com/bioinformatics/article/38/10/2952/6585406?guestAccessKey=1a858639-9e21-4791-8bd9-9f093a4c8b45 "OUP Bioinformatics, rbioapi: user-friendly R interface to biologic web services’ API"))
+## How to cite rbioapi
 
-    Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi:
-    user-friendly R interface to biologic web services’ API,
-    Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2952–2953,
-    <https://doi.org/10.1093/bioinformatics/btac172>
+- Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi:
+  user-friendly R interface to biologic web services’ API,
+  Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2952–2953,
+  <https://doi.org/10.1093/bioinformatics/btac172>
 
--   [How to cite
-    Enrichr](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html#citations "How to cite Enrichr").
-    (See on [Enrichr
-    website](https://maayanlab.cloud/Enrichr/help#terms))
+## How to cite the databases and web services
 
--   [How to cite
-    JASPAR](https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html#citations "How to cite JASPAR").
-    (See on [JASPAR website](https://jaspar.genereg.net/faq/))
+- [How to cite
+  Enrichr](rbioapi_enrichr.html#citations "How to cite Enrichr"). (See
+  on [Enrichr website](https://maayanlab.cloud/Enrichr/help#terms))
 
--   [How to cite
-    miEAA](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html#citations "How to cite miEAA").
-    (See on [miEAA
-    website](https://ccb-compute2.cs.uni-saarland.de/mieaa2))
+- [How to cite
+  JASPAR](rbioapi_jaspar.html#citations "How to cite JASPAR"). (See on
+  [JASPAR website](https://jaspar.genereg.net/faq/))
 
--   [How to cite
-    PANTHER](https://rbioapi.moosa-r.com/articles/rbioapi_panther.html#citations "How to cite PANTHER").
-    (See on [PANTHER
-    website](http://www.pantherdb.org/publications.jsp#HowToCitePANTHER))
+- [How to cite miEAA](rbioapi_mieaa.html#citations "How to cite miEAA").
+  (See on [miEAA
+  website](https://ccb-compute2.cs.uni-saarland.de/mieaa2))
 
--   [How to cite
-    Reactome](https://rbioapi.moosa-r.com/articles/rbioapi_reactome.html#citations "How to cite Reactome").
-    (See on [Reactome website](https://reactome.org/cite))
+- [How to cite
+  PANTHER](rbioapi_panther.html#citations "How to cite PANTHER"). (See
+  on [PANTHER
+  website](http://www.pantherdb.org/publications.jsp#HowToCitePANTHER))
 
--   [How to cite
-    STRING](https://rbioapi.moosa-r.com/articles/rbioapi_string.html#citations "How to cite STRING").
-    (See on [STRING
-    website](https://string-db.org/cgi/about?footer_active_subpage=references))
+- [How to cite
+  Reactome](rbioapi_reactome.html#citations "How to cite Reactome").
+  (See on [Reactome website](https://reactome.org/cite))
 
--   [How to cite
-    UniProt](https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html#citations "How to cite UniProt").
-    (See on [UniProt
-    website](https://www.uniprot.org/help/publications))
+- [How to cite
+  STRING](rbioapi_string.html#citations "How to cite STRING"). (See on
+  [STRING
+  website](https://string-db.org/cgi/about?footer_active_subpage=references))
+
+- [How to cite
+  UniProt](rbioapi_uniprot.html#citations "How to cite UniProt"). (See
+  on [UniProt website](https://www.uniprot.org/help/publications))
 
 ## Code of conduct
 
@@ -401,7 +375,7 @@ sending more requests than what the server interprets as normal
 behavior, so please seek other methods or use `Sys.sleep()` between your
 requests.
 
-## What next?
+# What next?
 
 Each supported service has a dedicated vignette article. Make sure to
 check those too.
@@ -419,21 +393,30 @@ We are also adding vignette articles focusing on tasks and workflows:
 1.  [Do with rbioapi: Enrichment (Over-Representation) Analysis in
     R](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html "Do with rbioapi: Enrichment (Over-Representation) Analysis in R")
 
-## Links
+# Design philosophy of rbioapi
 
--   [This article in rbioapi documentation
-    site](https://rbioapi.moosa-r.com/articles/rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API")
+To learn more about the design philosophy and the concepts behind
+developing rbioapi, please read our paper in Bioinformatics:
 
--   [Functions references in rbioapi documentation
-    site](https://rbioapi.moosa-r.com/reference/index.html "rbioapi reference")
+[rbioapi: user-friendly R interface to biologic web services’
+API](https://doi.org/10.1093/bioinformatics/btac172 "Rezwani, M., Pourfathollah, A. A., & Noorbakhsh, F. (2022). rbioapi: user-friendly R interface to biologic web services’ API. Bioinformatics, 38(10), 2952–2953. doi: 10.1093/bioinformatics/btac172")
 
-## Session info
+# Links
 
-    #> R version 4.2.1 (2022-06-23 ucrt)
+- [This article in rbioapi documentation
+  site](https://rbioapi.moosa-r.com/articles/rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API")
+
+- [Functions references in rbioapi documentation
+  site](https://rbioapi.moosa-r.com/reference/index.html "rbioapi reference")
+
+# Session info
+
+    #> R version 4.3.0 (2023-04-21 ucrt)
     #> Platform: x86_64-w64-mingw32/x64 (64-bit)
-    #> Running under: Windows 10 x64 (build 19044)
+    #> Running under: Windows 11 x64 (build 22621)
     #> 
     #> Matrix products: default
+    #> 
     #> 
     #> locale:
     #> [1] LC_COLLATE=English_United States.utf8 
@@ -442,6 +425,9 @@ We are also adding vignette articles focusing on tasks and workflows:
     #> [4] LC_NUMERIC=C                          
     #> [5] LC_TIME=English_United States.utf8    
     #> 
+    #> time zone: Europe/Brussels
+    #> tzcode source: internal
+    #> 
     #> attached base packages:
     #> [1] stats     graphics  grDevices utils     datasets  methods   base     
     #> 
@@ -449,8 +435,8 @@ We are also adding vignette articles focusing on tasks and workflows:
     #> [1] rbioapi_0.7.7
     #> 
     #> loaded via a namespace (and not attached):
-    #>  [1] digest_0.6.29   R6_2.5.1        jsonlite_1.8.0  magrittr_2.0.3 
-    #>  [5] evaluate_0.15   httr_1.4.3      rlang_1.0.4     stringi_1.7.8  
-    #>  [9] cli_3.3.0       curl_4.3.2      rstudioapi_0.13 rmarkdown_2.14 
-    #> [13] tools_4.2.1     stringr_1.4.0   xfun_0.31       yaml_2.3.5     
-    #> [17] fastmap_1.1.0   compiler_4.2.1  htmltools_0.5.3 knitr_1.39
+    #>  [1] digest_0.6.31   R6_2.5.1        fastmap_1.1.1   xfun_0.39      
+    #>  [5] knitr_1.42      htmltools_0.5.5 rmarkdown_2.21  cli_3.6.1      
+    #>  [9] compiler_4.3.0  httr_1.4.5      rstudioapi_0.14 tools_4.3.0    
+    #> [13] curl_5.0.0      evaluate_0.20   yaml_2.3.7      rlang_1.1.1    
+    #> [17] jsonlite_1.8.4

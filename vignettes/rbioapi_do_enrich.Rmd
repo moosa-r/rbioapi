@@ -28,8 +28,6 @@ knitr::opts_chunk$set(echo = TRUE,
                       cache = FALSE,
                       dev = "png",
                       comment = "#>")
-library(rbioapi)
-rba_options(timeout = 600, skip_error = TRUE)
 ```
 
 Among the databases and web services currently supported by rbioapi [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr"), [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "miRNA Enrichment Analysis and Annotation Tool (miEAA)"), [PANTHER](http://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)"), [Reactome](https://reactome.org/), and [STRING](https://string-db.org/ "STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis") offer Enrichment (Over-Representation) analysis API endpoints. In this article, after a brief introduction, we will demonstrate how to perform Enrichment (Over-Representation) analysis in R, consistently and easily, using the package rbioapi.
@@ -51,6 +49,16 @@ However, the CRAN version is released at most once every 1-2 months, You can ins
 ```{r install_github, eval=FALSE}
 install.packages("remotes")
 remotes::install_github("moosa-r/rbioapi")
+```
+
+Now, we can load the package:
+
+```{r load_rbioapi, echo=TRUE}
+library(rbioapi)
+```
+
+```{r prevent_vignette_errors, message=FALSE, warning=FALSE, include=FALSE}
+rba_options(timeout = 600, skip_error = TRUE)
 ```
 
 ------------------------------------------------------------------------

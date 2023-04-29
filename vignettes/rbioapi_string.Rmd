@@ -258,7 +258,7 @@ To cite STRING (Please see <https://string-db.org/cgi/about?footer_active_subpag
 
 -   Damian Szklarczyk, Annika L Gable, Katerina C Nastou, David Lyon, Rebecca Kirsch, Sampo Pyysalo, Nadezhda T Doncheva, Marc Legeay, Tao Fang, Peer Bork, Lars J Jensen, Christian von Mering, The STRING database in 2021: customizable protein--protein networks, and functional characterization of user-uploaded gene/measurement sets, *Nucleic Acids Research*, Volume 49, Issue D1, 8 January 2021, Pages D605--D612, <https://doi.org/10.1093/nar/gkaa1074>
 
-To cite rbioapi: ([Free access link to the article](https://academic.oup.com/bioinformatics/article/38/10/2952/6585406?guestAccessKey=1a858639-9e21-4791-8bd9-9f093a4c8b45 "OUP Bioinformatics, rbioapi: user-friendly R interface to biologic web services’ API"))
+To cite rbioapi:
 
 -   Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: user-friendly R interface to biologic web services' API, Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2952--2953, <https://doi.org/10.1093/bioinformatics/btac172>
 

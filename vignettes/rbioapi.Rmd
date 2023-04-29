@@ -29,8 +29,6 @@ knitr::opts_chunk$set(echo = TRUE,
                       cache = FALSE,
                       dev = "png",
                       comment = "#>")
-library(rbioapi)
-rba_options(timeout = 600, skip_error = TRUE)
 ```
 
 # What does rbioapi do? {#what-does-rbioapi-do .heading2}
@@ -82,23 +80,15 @@ install.packages("remotes")
 remotes::install_github("moosa-r/rbioapi")
 ```
 
-------------------------------------------------------------------------
+Now, we can load the package:
 
-# Design philosophy of rbioapi {#design-philosophy-of-rbioapi .heading2}
+```{r load_rbioapi, echo=TRUE}
+library(rbioapi)
+```
 
--   The structure of functions should be consistent across all data-bases and services. This means that, using functions to communicate with different web services should not require new learning and/or training.
-
--   Using the package should entail simple plugging of values into a function's arguments and running the code.
-
--   No function should explicitly demand the user to run another function beforehand.
-
--   The functions' organization, names, and arguments should be as faithful as possible to the original API resources.
-
--   The package should be scalable and easy to collaborate. To this end, exported functions should have a template-based structure and the internal functions should have a hierarchical organization with only a subset of them needed by the contributors.
-
--   Beginner users should be able to conveniently use rbioapi and be completely insulated from any technicalities.
-
--   The functions' documentations should be extensive, self-contained, with working examples, and integrated with the corresponding web services in terms such as citing information or links to guides. In addition to the main vignette article, each supported database or web service should have its own vignette articles.
+```{r prevent_vignette_errors, message=FALSE, warning=FALSE, include=FALSE}
+rba_options(timeout = 600, skip_error = TRUE)
+```
 
 ------------------------------------------------------------------------
 
@@ -106,7 +96,9 @@ remotes::install_github("moosa-r/rbioapi")
 
 To make the namespace more organized, functions has been named with the following pattern:
 
-    rba_[service_name]_[resource_name]
+```         
+rba_[service_name]_[resource_name]
+```
 
 For example, `rba_string_version()` will call [STRING](https://string-db.org/ "STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis")'s version resource.
 
@@ -216,9 +208,11 @@ As you can see, what we have done was:
 
 rbioapi is an interface between you and other databases and services. Thus, if you have used rbioapi in published research, kindly **in addition to citing rbioapi, [*make sure to fully and properly cite the databases/services you have used*]{.underline}**. Suggested citations have been added in the functions' manuals, under the "references" section; Nevertheless, it is the user's responsibility to check for proper citations and to properly cite the database/services that they have used.
 
--   **How to cite rbioapi**: ([Free access link to the article](https://academic.oup.com/bioinformatics/article/38/10/2952/6585406?guestAccessKey=1a858639-9e21-4791-8bd9-9f093a4c8b45 "OUP Bioinformatics, rbioapi: user-friendly R interface to biologic web services’ API"))
+## How to cite rbioapi {#how-to-cite-rbioapi .heading3}
 
-    Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: user-friendly R interface to biologic web services' API, Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2952--2953, <https://doi.org/10.1093/bioinformatics/btac172>
+-   Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: user-friendly R interface to biologic web services' API, Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2952--2953, <https://doi.org/10.1093/bioinformatics/btac172>
+
+## How to cite the databases and web services {#how-to-cite-services .heading3}
 
 -   [How to cite Enrichr](rbioapi_enrichr.html#citations "How to cite Enrichr"). (See on [Enrichr website](https://maayanlab.cloud/Enrichr/help#terms))
 
@@ -257,6 +251,13 @@ Each supported service has a dedicated vignette article. Make sure to check thos
 We are also adding vignette articles focusing on tasks and workflows:
 
 1.  [Do with rbioapi: Enrichment (Over-Representation) Analysis in R](rbioapi_do_enrich.html "Do with rbioapi: Enrichment (Over-Representation) Analysis in R") ^([documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html "rbioapi & UniProt vignette article"))^
+
+------------------------------------------------------------------------
+
+# Design philosophy of rbioapi {#design-philosophy .heading2}
+
+To learn more about the design philosophy and the concepts behind developing rbioapi, please read 
+[our paper in Bioinformatics](https://doi.org/10.1093/bioinformatics/btac172 "Rezwani, M., Pourfathollah, A. A., & Noorbakhsh, F. (2022). rbioapi: user-friendly R interface to biologic web services’ API. Bioinformatics, 38(10), 2952–2953. doi: 10.1093/bioinformatics/btac172").
 
 ------------------------------------------------------------------------
 

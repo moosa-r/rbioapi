@@ -139,7 +139,7 @@ To cite miEAA (Please see <https://ccb-compute2.cs.uni-saarland.de/mieaa2/>):
 
 -   Fabian Kern, Tobias Fehlmann, Jeffrey Solomon, Louisa Schwed, Nadja Grammes, Christina Backes, Kendall Van Keuren-Jensen, David Wesley Craig, Eckart Meese, Andreas Keller, miEAA 2.0: integrating multi-species microRNA enrichment analysis and workflow management systems, Nucleic Acids Research, Volume 48, Issue W1, 02 July 2020, Pages W521--W528, <https://doi.org/10.1093/nar/gkaa309>
 
-To cite rbioapi: ([Free access link to the article](https://academic.oup.com/bioinformatics/article/38/10/2952/6585406?guestAccessKey=1a858639-9e21-4791-8bd9-9f093a4c8b45 "OUP Bioinformatics, rbioapi: user-friendly R interface to biologic web services’ API"))
+To cite rbioapi:
 
 -   Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: user-friendly R interface to biologic web services' API, Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2952--2953, <https://doi.org/10.1093/bioinformatics/btac172>
 

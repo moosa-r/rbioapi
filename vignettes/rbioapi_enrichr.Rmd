@@ -86,10 +86,12 @@ genes <- c("p53", "BRCA1", "cdk2", "Q99835", "CDC42","CDK1","KIF23","PLK1",
 # 2.a Do enrichment analysis on your genes using "MSigDB_Hallmark_2020" library
 enrichr_msig_hallmark <- rba_enrichr(gene_list = genes,
                                      gene_set_library = "MSigDB_Hallmark_2020")
+
 # 2.b Maybe you want to perform enrichment analysis using every library that contains the word "msig":
 enrichr_msig <- rba_enrichr(gene_list = genes,
                             gene_set_library = "msig",
                             regex_library_name = TRUE)
+
 # 2.c Or maybe you want to perform enrichment analysis using every library available at Enrichr:
 # enrichr_all <- rba_enrichr(gene_list = genes,
 #                            gene_set_library = "all")
@@ -148,7 +150,7 @@ To cite Enrichr (Please see <https://maayanlab.cloud/Enrichr/help#terms>):
 
 -   Xie, Z., Bailey, A., Kuleshov, M. V., Clarke, D. J. B., Evangelista, J. E., Jenkins, S. L., Lachmann, A., Wojciechowicz, M. L., Kropiwnicki, E., Jagodnik, K. M., Jeon, M., & Ma'ayan, A. (2021). Gene set knowledge discovery with Enrichr. *Current Protocols*, 1, e90. doi: 10.1002/cpz1.90
 
-To cite rbioapi: ([Free access link to the article](https://academic.oup.com/bioinformatics/article/38/10/2952/6585406?guestAccessKey=1a858639-9e21-4791-8bd9-9f093a4c8b45 "OUP Bioinformatics, rbioapi: user-friendly R interface to biologic web services’ API"))
+To cite rbioapi:
 
 -   Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: user-friendly R interface to biologic web services’ API, Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2952–2953, <https://doi.org/10.1093/bioinformatics/btac172>
 
