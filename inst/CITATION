@@ -1,10 +1,8 @@
-citHeader("Please cite rbioapi as");
-
-citEntry(
+bibentry(
   # BibTeX entry:
-  entry   = "article",
-  title   = "rbioapi: User-Friendly R Interface to Biologic Web Services' API",
-  author  = c("Moosa Rezwani", "Ali Akbar Pourfathollah", "Farshid Noorbakhsh"),
+  bibtype = "article",
+  title = "rbioapi: User-Friendly R Interface to Biologic Web Services' API",
+  author = c("Moosa Rezwani", "Ali Akbar Pourfathollah", "Farshid Noorbakhsh"),
   journal = "Bioinformatics",
   volume = "38",
   number = "10",
@@ -13,12 +11,9 @@ citEntry(
   month = "03",
   issn = "1367-4803",
   doi = "10.1093/bioinformatics/btac172",
-  url = "https://doi.org/10.1093/bioinformatics/btac172",
   # Plain-text citation:
   textVersion =
-    "Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: user-friendly R interface to biologic web services’ API, Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2952–2953, https://doi.org/10.1093/bioinformatics/btac172"
-)
-
-citFooter(
-  "Important Note: rbioapi is an interface to web services API; please make sure to fully and properly cite the databases/services you have used. Suggested citations have been added to each function manual and the vignette articles. Nevertheless, it is the user's responsibility to fully and properly cite the services they have used."
+    "Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: user-friendly R interface to biologic web services’ API, Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2952–2953, https://doi.org/10.1093/bioinformatics/btac172",
+  header = "Please cite rbioapi as",
+  footer = "Important Note: rbioapi is an interface to web services API; please make sure to fully and properly cite the databases/services you have used. Suggested citations have been added to each function manual and the vignette articles. Nevertheless, it is the user's responsibility to fully and properly cite the services they have used."
 )
