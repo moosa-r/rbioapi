@@ -115,7 +115,7 @@
                         <h4 data-toc-skip class="author">Moosa
 Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2023-04-12</h4>
+            <h4 data-toc-skip class="date">2023-04-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/HEAD/vignettes/rbioapi.Rmd" class="external-link"><code>vignettes/rbioapi.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi.Rmd</code></div>
@@ -207,34 +207,9 @@ You can install the most recent (development) version from <a href="https://gith
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"moosa-r/rbioapi"</span><span class="op">)</span></span></code></pre></div>
-<hr>
-</div>
-<div class="section level2">
-<h2 class="heading2" id="design-philosophy-of-rbioapi">Design philosophy of rbioapi<a class="anchor" aria-label="anchor" href="#design-philosophy-of-rbioapi"></a>
-</h2>
-<ul>
-<li><p>The structure of functions should be consistent across all
-data-bases and services. This means that, using functions to communicate
-with different web services should not require new learning and/or
-training.</p></li>
-<li><p>Using the package should entail simple plugging of values into a
-function’s arguments and running the code.</p></li>
-<li><p>No function should explicitly demand the user to run another
-function beforehand.</p></li>
-<li><p>The functions’ organization, names, and arguments should be as
-faithful as possible to the original API resources.</p></li>
-<li><p>The package should be scalable and easy to collaborate. To this
-end, exported functions should have a template-based structure and the
-internal functions should have a hierarchical organization with only a
-subset of them needed by the contributors.</p></li>
-<li><p>Beginner users should be able to conveniently use rbioapi and be
-completely insulated from any technicalities.</p></li>
-<li><p>The functions’ documentations should be extensive,
-self-contained, with working examples, and integrated with the
-corresponding web services in terms such as citing information or links
-to guides. In addition to the main vignette article, each supported
-database or web service should have its own vignette articles.</p></li>
-</ul>
+<p>Now, we can load the package:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rbioapi.moosa-r.com">rbioapi</a></span><span class="op">)</span></span></code></pre></div>
 <hr>
 </div>
 <div class="section level2">
@@ -245,7 +220,7 @@ the following pattern:</p>
 <pre><code>rba_[service_name]_[resource_name]</code></pre>
 <p>For example, <code><a href="../reference/rba_string_version.html">rba_string_version()</a></code> will call <a href="https://string-db.org/" title="STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis" class="external-link">STRING</a>’s
 version resource.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rba_string_version.html">rba_string_version</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Retrieving the STRING database version and address used by rbioapi.</span></span>
 <span><span class="co">#&gt; $string_version</span></span>
@@ -281,7 +256,7 @@ diagnostics, save_file). There are two ways that you may use to change
 any option. Also, you can get table of available rbioapi options and
 their current values by calling <code><a href="../reference/rba_options.html">rba_options()</a></code>without any
 argument:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rba_options.html">rba_options</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   rbioapi_option current_value            allowed_value</span></span>
 <span><span class="co">#&gt; 1    diagnostics         FALSE     Logical (TRUE/FALSE)</span></span>
@@ -303,7 +278,7 @@ this, use <code>rba_options().</code> Each argument in this function
 corresponds to a certain option; Thus by running this function with your
 desired new values, you could globally alter that rbioapi option. for
 example:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rba_options.html">rba_options</a></span><span class="op">(</span>save_file <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">## From now on, the raw file of server's response will be saved to your working directory.</span></span>
 <span><span class="fu"><a href="../reference/rba_options.html">rba_options</a></span><span class="op">(</span>verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -317,13 +292,13 @@ example:</p>
 you can call any function with additional arguments where each is
 ‘option = value’ pair. This way, any changes in options will be confined
 within that particular function call. For example:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Save the server's raw response file:</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_species.html">rba_reactome_species</a></span><span class="op">(</span>only_main <span class="op">=</span> <span class="cn">TRUE</span>, save_file <span class="op">=</span> <span class="st">"reactome_species.json"</span><span class="op">)</span></span>
 <span><span class="co">## Also, in the case of connection failure, retry up to 10 times:</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_species.html">rba_reactome_species</a></span><span class="op">(</span>only_main <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                         save_file <span class="op">=</span> <span class="st">"reactome_species.json"</span>, retry_max <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Run these codes in your own R session to see the difference.</span></span>
 <span><span class="co">## show internal diagnostics boring details</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_uniprot_proteins_crossref.html">rba_uniprot_proteins_crossref</a></span><span class="op">(</span>db_id <span class="op">=</span> <span class="st">"CD40"</span>, db_name <span class="op">=</span> <span class="st">"HGNC"</span>, diagnostics <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -340,7 +315,7 @@ within that particular function call. For example:</p>
 your connection with the supported services/databases. If you encounter
 errors when using rbioapi, kindly run this function to make sure that
 your internet connection or the servers are fine.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rba_connection_test.html">rba_connection_test</a></span><span class="op">(</span>print_output <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Checking Your connection to the Databases currently supported by rbioapi:</span></span>
 <span><span class="co">#&gt; ---&gt;&gt;&gt; Internet :</span></span>
@@ -379,7 +354,7 @@ you to search taxonomic nodes in <a href="https://www.uniprot.org" title="Univer
 can potentially have a huge size, so <a href="https://www.uniprot.org" title="Universal Protein Resource (UniProt)" class="external-link">UniProt</a> returns a
 paginated response. For example, if we search for nodes that contain
 “adenovirus”, there is a large number of hits:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">adeno</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_uniprot_taxonomy_name.html">rba_uniprot_taxonomy_name</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"adenovirus"</span>,</span>
 <span>                                   search_type <span class="op">=</span> <span class="st">"contain"</span>,</span>
 <span>                                   page_number <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
@@ -402,7 +377,7 @@ paginated response. For example, if we search for nodes that contain
 response, to retrieve the other pages, you should make separate calls
 and change the “page_number” argument within each call, or simply use
 <code><a href="../reference/rba_pages.html">rba_pages()</a></code> as demonstrated below:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">adeno_pages</span> <span class="op">=</span> <span class="fu"><a href="../reference/rba_pages.html">rba_pages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html" class="external-link">quote</a></span><span class="op">(</span><span class="fu"><a href="../reference/rba_uniprot_taxonomy_name.html">rba_uniprot_taxonomy_name</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"adenovirus"</span>,</span>
 <span>                                   search_type <span class="op">=</span> <span class="st">"contain"</span>,</span>
 <span>                                   page_number <span class="op">=</span> <span class="st">"pages:1:3"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
@@ -439,14 +414,20 @@ citations have been added in the functions’ manuals, under the
 “references” section; Nevertheless, it is the user’s responsibility to
 check for proper citations and to properly cite the database/services
 that they have used.</p>
+<div class="section level3">
+<h3 class="heading3" id="how-to-cite-rbioapi">How to cite rbioapi<a class="anchor" aria-label="anchor" href="#how-to-cite-rbioapi"></a>
+</h3>
 <ul>
-<li>
-<p><strong>How to cite rbioapi</strong>: (<a href="https://academic.oup.com/bioinformatics/article/38/10/2952/6585406?guestAccessKey=1a858639-9e21-4791-8bd9-9f093a4c8b45" title="OUP Bioinformatics, rbioapi: user-friendly R interface to biologic web services’ API" class="external-link">Free
-access link to the article</a>)</p>
-<p>Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi:
+<li>Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi:
 user-friendly R interface to biologic web services’ API, Bioinformatics,
-Volume 38, Issue 10, 15 May 2022, Pages 2952–2953, <a href="https://doi.org/10.1093/bioinformatics/btac172" class="external-link uri">https://doi.org/10.1093/bioinformatics/btac172</a></p>
+Volume 38, Issue 10, 15 May 2022, Pages 2952–2953, <a href="https://doi.org/10.1093/bioinformatics/btac172" class="external-link uri">https://doi.org/10.1093/bioinformatics/btac172</a>
 </li>
+</ul>
+</div>
+<div class="section level3">
+<h3 class="heading3" id="how-to-cite-services">How to cite the databases and web services<a class="anchor" aria-label="anchor" href="#how-to-cite-services"></a>
+</h3>
+<ul>
 <li><p><a href="rbioapi_enrichr.html#citations" title="How to cite Enrichr">How to cite Enrichr</a>. (See on <a href="https://maayanlab.cloud/Enrichr/help#terms" class="external-link">Enrichr
 website</a>)</p></li>
 <li><p><a href="rbioapi_jaspar.html#citations" title="How to cite JASPAR">How to cite JASPAR</a>. (See on <a href="https://jaspar.genereg.net/faq/" class="external-link">JASPAR website</a>)</p></li>
@@ -461,6 +442,7 @@ website</a>)</p></li>
 website</a>)</p></li>
 </ul>
 <hr>
+</div>
 </div>
 <div class="section level2">
 <h2 class="heading2" id="code-of-conduct">Code of conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
@@ -516,6 +498,14 @@ with rbioapi: Enrichment (Over-Representation) Analysis in R</a>
 <hr>
 </div>
 <div class="section level2">
+<h2 class="heading2" id="design-philosophy">Design philosophy of rbioapi<a class="anchor" aria-label="anchor" href="#design-philosophy"></a>
+</h2>
+<p>To learn more about the design philosophy and the concepts behind
+developing rbioapi, please read <a href="https://doi.org/10.1093/bioinformatics/btac172" title="Rezwani, M., Pourfathollah, A. A., &amp; Noorbakhsh, F. (2022). rbioapi: user-friendly R interface to biologic web services’ API. Bioinformatics, 38(10), 2952–2953. doi: 10.1093/bioinformatics/btac172" class="external-link">our
+paper in Bioinformatics</a>.</p>
+<hr>
+</div>
+<div class="section level2">
 <h2 class="heading2" id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a>
 </h2>
 <ul>
@@ -529,19 +519,22 @@ site</a></p></li>
 <div class="section level2">
 <h2 class="heading2" id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
-<pre><code><span><span class="co">#&gt; R version 4.2.3 (2023-03-15)</span></span>
+<pre><code><span><span class="co">#&gt; R version 4.3.0 (2023-04-21)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
 <span><span class="co">#&gt; Running under: Ubuntu 22.04.2 LTS</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Matrix products: default</span></span>
-<span><span class="co">#&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3</span></span>
-<span><span class="co">#&gt; LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.20.so</span></span>
+<span><span class="co">#&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 </span></span>
+<span><span class="co">#&gt; LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.20.so;  LAPACK version 3.10.0</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; locale:</span></span>
 <span><span class="co">#&gt;  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       </span></span>
 <span><span class="co">#&gt;  [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   </span></span>
 <span><span class="co">#&gt;  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          </span></span>
 <span><span class="co">#&gt; [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; time zone: UTC</span></span>
+<span><span class="co">#&gt; tzcode source: system (glibc)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; attached base packages:</span></span>
 <span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
@@ -550,15 +543,15 @@ site</a></p></li>
 <span><span class="co">#&gt; [1] rbioapi_0.7.7</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span><span class="co">#&gt;  [1] knitr_1.42        magrittr_2.0.3    R6_2.5.1          ragg_1.2.5       </span></span>
-<span><span class="co">#&gt;  [5] rlang_1.1.0       fastmap_1.1.1     httr_1.4.5        stringr_1.5.0    </span></span>
-<span><span class="co">#&gt;  [9] tools_4.2.3       xfun_0.38         cli_3.6.1         jquerylib_0.1.4  </span></span>
-<span><span class="co">#&gt; [13] systemfonts_1.0.4 htmltools_0.5.5   yaml_2.3.7        digest_0.6.31    </span></span>
-<span><span class="co">#&gt; [17] rprojroot_2.0.3   lifecycle_1.0.3   pkgdown_2.0.7     textshaping_0.3.6</span></span>
-<span><span class="co">#&gt; [21] purrr_1.0.1       sass_0.4.5        vctrs_0.6.1       fs_1.6.1         </span></span>
-<span><span class="co">#&gt; [25] curl_5.0.0        memoise_2.0.1     glue_1.6.2        cachem_1.0.7     </span></span>
-<span><span class="co">#&gt; [29] evaluate_0.20     rmarkdown_2.21    stringi_1.7.12    compiler_4.2.3   </span></span>
-<span><span class="co">#&gt; [33] bslib_0.4.2       desc_1.4.2        jsonlite_1.8.4</span></span></code></pre>
+<span><span class="co">#&gt;  [1] vctrs_0.6.2       httr_1.4.5        cli_3.6.1         knitr_1.42       </span></span>
+<span><span class="co">#&gt;  [5] rlang_1.1.0       xfun_0.39         stringi_1.7.12    purrr_1.0.1      </span></span>
+<span><span class="co">#&gt;  [9] textshaping_0.3.6 jsonlite_1.8.4    glue_1.6.2        rprojroot_2.0.3  </span></span>
+<span><span class="co">#&gt; [13] htmltools_0.5.5   ragg_1.2.5        sass_0.4.5        rmarkdown_2.21   </span></span>
+<span><span class="co">#&gt; [17] evaluate_0.20     jquerylib_0.1.4   fastmap_1.1.1     yaml_2.3.7       </span></span>
+<span><span class="co">#&gt; [21] lifecycle_1.0.3   memoise_2.0.1     stringr_1.5.0     compiler_4.3.0   </span></span>
+<span><span class="co">#&gt; [25] fs_1.6.2          systemfonts_1.0.4 digest_0.6.31     R6_2.5.1         </span></span>
+<span><span class="co">#&gt; [29] curl_5.0.0        magrittr_2.0.3    bslib_0.4.2       tools_4.3.0      </span></span>
+<span><span class="co">#&gt; [33] pkgdown_2.0.7     cachem_1.0.7      desc_1.4.2</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
