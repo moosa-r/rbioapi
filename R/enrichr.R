@@ -450,32 +450,41 @@ rba_enrichr_enrich <- function(user_list_id,
                                ...){
   ## Load Global Options
   .rba_ext_args(...)
+
   ## get a list of available libraries
   if (is.null(getOption("rba_enrichr_libs"))) {
     .msg("Calling rba_enrichr_libs() to get the names of available Enricr %s libraries.",
          organism)
-    invisible(rba_enrichr_libs(store_in_options = TRUE))
-    if (!length(getOption("rba_enrichr_libs")) > 1) {
-      no_lib_msg <- "Couldn't fetch available Enrichr libraries. Please run manually `rba_enrichr_libs(store_in_options = TRUE)`."
-      if (isTRUE(get("skip_error"))) {
-        return(no_lib_msg)
-      } else {
-        stop(no_lib_msg, call. = get("diagnostics"))
-      }
+    enrichr_libs <- rba_enrichr_libs(store_in_options = TRUE)
+
+    if (utils::hasName(enrichr_libs, "libraryName")) {
+      enrichr_libs <- enrichr_libs[["libraryName"]]
+    }
+  } else {
+    enrichr_libs <- getOption("rba_enrichr_libs")
+  }
+
+  if (length(enrichr_libs) <= 1) {
+    no_lib_msg <- "Couldn't fetch available Enrichr libraries. Please manually run `rba_enrichr_libs(store_in_options = TRUE)`."
+    if (isTRUE(get("skip_error"))) {
+      return(no_lib_msg)
+    } else {
+      stop(no_lib_msg, call. = get("diagnostics"))
     }
   }
+
   ## handle different gene_set_library input situations
   if (length(gene_set_library) > 1) {
     run_mode <- "multiple"
   } else if (gene_set_library == "all") {
     run_mode <- "multiple"
-    gene_set_library <- getOption("rba_enrichr_libs")
+    gene_set_library <- enrichr_libs
   } else {
     if (isFALSE(regex_library_name)) {
       run_mode <- "single"
     } else {
       gene_set_library <- grep(gene_set_library,
-                               getOption("rba_enrichr_libs"),
+                               enrichr_libs,
                                ignore.case = TRUE, value = TRUE, perl = TRUE)
       #check the results of regex
       if (length(gene_set_library) == 0) {
@@ -498,7 +507,7 @@ rba_enrichr_enrich <- function(user_list_id,
                              len = 1),
                         list(arg = "gene_set_library",
                              class = "character",
-                             val = getOption("rba_enrichr_libs")),
+                             val = enrichr_libs),
                         list(arg = "progress_bar",
                              class = "logical"),
                         list(arg = "organism",
@@ -735,10 +744,14 @@ rba_enrichr <- function(gene_list,
                              val = c("human", "fly", "yeast", "worm", "fish"))
   ))
   .msg("--Step 1/3:")
-  invisible(rba_enrichr_libs(store_in_options = TRUE,
-                             ...))
-  if (is.null(getOption("rba_enrichr_libs"))) {
-    no_lib_msg <- "Couldn't fetch available Enrichr libraries. Please manually run `rba_enrichr_libs(store_in_options = TRUE)`."
+  enrichr_libs <- rba_enrichr_libs(store_in_options = TRUE)
+
+  if (utils::hasName(enrichr_libs, "libraryName")) {
+    enrichr_libs <- enrichr_libs[["libraryName"]]
+  }
+
+  if (length(enrichr_libs) <= 1) {
+    no_lib_msg <- "Couldn't fetch available Enrichr libraries. Please manually run `rba_enrichr_libs(store_in_options = TRUE)`. If the problem is not resolved, kindly report this issue to us."
     if (isTRUE(get("skip_error"))) {
       return(no_lib_msg)
     } else {
