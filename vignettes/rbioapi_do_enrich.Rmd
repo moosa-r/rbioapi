@@ -312,7 +312,7 @@ In addition to proteins interaction data, STRING also curates proteins/genes ann
 
     6.  [UniProt keyword](https://www.uniprot.org/keywords/ "UniProt keyword: a controlled vocabulary with a hierarchical structure")
 
-    7.  [Pfam](https://pfam.xfam.org/ "A large collection of protein families, each represented by multiple sequence alignments and hidden Markov models (HMMs)")
+    7.  [Pfam](https://www.ebi.ac.uk/interpro/ "InterPro: Classification of protein families")
 
     8.  [Reactome pathways](https://reactome.org/PathwayBrowser/ "free, open-source, curated and peer-reviewed pathway database")
 
