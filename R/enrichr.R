@@ -364,7 +364,7 @@ rba_enrichr_view_list <- function(user_list_id,
   final_output <- try(utils::read.delim(textConnection(final_output_raw),
                                         sep = "\t", header = TRUE,
                                         stringsAsFactors = FALSE),
-                      silent = !diagnostics)
+                      silent = !get("diagnostics"))
 
   if (is.data.frame(final_output)) {
     return(final_output)
@@ -374,10 +374,10 @@ rba_enrichr_view_list <- function(user_list_id,
                             "The server's raw response is:",
                             as.character(final_output_raw),
                             collapse = "\n")
-    if (isTRUE(skip_error)) {
+    if (isTRUE(get("skip_error"))) {
       return(error_message)
     } else {
-      stop(error_message, call. = diagnostics)
+      stop(error_message, call. = get("diagnostics"))
     }
   }
 
