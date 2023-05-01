@@ -41,7 +41,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rbioapi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.8</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -189,11 +189,11 @@ provide <code>test_set</code>, <code>mirna_type</code>,
 <span><span class="co">#&gt; Submitting ORA enrichment request for 17 miRNA IDs of species Homo sapiens to miEAA servers.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  -- Step 2/3: Checking for Submitted enrichment job's status every 5 seconds.</span></span>
-<span><span class="co">#&gt;     Your submitted job ID is: cce36dc2-d9cf-4d09-ab0b-d5bb04eeb40e</span></span>
+<span><span class="co">#&gt;     Your submitted job ID is: 83021003-55e1-456c-8234-cc015b6b0364</span></span>
 <span><span class="co">#&gt; ......</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  -- Step 3/3: Retrieving the results of the finished enrichment job.</span></span>
-<span><span class="co">#&gt; Retrieving results of submitted enrichment request with ID: cce36dc2-d9cf-4d09-ab0b-d5bb04eeb40e</span></span>
+<span><span class="co">#&gt; Retrieving results of submitted enrichment request with ID: 83021003-55e1-456c-8234-cc015b6b0364</span></span>
 <span><span class="co">## 2b Or, We can limit the enrichment to certain datasets (enrichment categories)</span></span>
 <span><span class="va">mieaa_kegg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_mieaa_enrich.html">rba_mieaa_enrich</a></span><span class="op">(</span>test_set <span class="op">=</span> <span class="va">mirs</span>,</span>
 <span>                              mirna_type <span class="op">=</span> <span class="st">"mature"</span>,</span>
@@ -206,13 +206,13 @@ provide <code>test_set</code>, <code>mirna_type</code>,
 <span><span class="co">#&gt; Submitting ORA enrichment request for 17 miRNA IDs of species Homo sapiens to miEAA servers.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  -- Step 2/3: Checking for Submitted enrichment job's status every 5 seconds.</span></span>
-<span><span class="co">#&gt;     Your submitted job ID is: 9779eb78-d7cf-4aff-b727-c6678e61a183</span></span>
+<span><span class="co">#&gt;     Your submitted job ID is: 56561678-bcc1-4b13-939f-ad3bae3aef4a</span></span>
 <span><span class="co">#&gt; .</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  -- Step 3/3: Retrieving the results of the finished enrichment job.</span></span>
-<span><span class="co">#&gt; Retrieving results of submitted enrichment request with ID: 9779eb78-d7cf-4aff-b727-c6678e61a183</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-abd3874dc10414d26bcd" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-abd3874dc10414d26bcd">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["Diseases (miRWalk)","Diseases (miRWalk)","Organs (miRWalk)","Organs (miRWalk)","Organs (miRWalk)","Organs (miRWalk)"],["Choriocarcinoma","Leukemia T-Cell","Endothelial Cells","Gastrointestinal Tract","T-Lymphocytes","X Chromosome"],["over-represented","over-represented","over-represented","over-represented","over-represented","over-represented"],["0.000513149","0.0013928","0.000703018","0.000411587","1.40287e-05","0.000806102"],["0.0364336","0.0494430","0.0157190","0.0157190","0.0010942","0.0157190"],["0.0364336","0.0494430","0.0157190","0.0157190","0.0010942","0.0157190"],["1.26518","0.268371","1.40078","0.194553","1.16732","0.233463"],["6","3","6","3","7","3"],["hsa-miR-20b-5p; hsa-miR-17-5p; hsa-miR-20a-5p; hsa-miR-106a-5p; hsa-miR-93-5p; hsa-miR-363-3p","hsa-miR-20b-5p; hsa-miR-106a-5p; hsa-miR-93-5p","hsa-miR-17-5p; hsa-miR-20a-5p; hsa-miR-222-3p; hsa-miR-93-5p; hsa-miR-126-3p; hsa-miR-18a-5p","hsa-miR-20b-5p; hsa-miR-17-5p; hsa-miR-20a-5p","hsa-miR-20b-5p; hsa-miR-20a-5p; hsa-miR-222-3p; hsa-miR-106a-5p; hsa-miR-93-5p; hsa-miR-126-3p; hsa-miR-148a-3p","hsa-miR-20b-5p; hsa-miR-222-3p; hsa-miR-106a-5p"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Category<\/th>\n      <th>Subcategory<\/th>\n      <th>Enrichment<\/th>\n      <th>P-value<\/th>\n      <th>P-adjusted<\/th>\n      <th>Q-value<\/th>\n      <th>Expected<\/th>\n      <th>Observed<\/th>\n      <th>miRNAs/precursors<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<span><span class="co">#&gt; Retrieving results of submitted enrichment request with ID: 56561678-bcc1-4b13-939f-ad3bae3aef4a</span></span></code></pre></div>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-8716009c36fbc608be8f" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-8716009c36fbc608be8f">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["Diseases (miRWalk)","Diseases (miRWalk)","Organs (miRWalk)","Organs (miRWalk)","Organs (miRWalk)","Organs (miRWalk)"],["Choriocarcinoma","Leukemia T-Cell","Endothelial Cells","Gastrointestinal Tract","T-Lymphocytes","X Chromosome"],["over-represented","over-represented","over-represented","over-represented","over-represented","over-represented"],["0.000513149","0.0013928","0.000703018","0.000411587","1.40287e-05","0.000806102"],["0.0364336","0.0494430","0.0157190","0.0157190","0.0010942","0.0157190"],["0.0364336","0.0494430","0.0157190","0.0157190","0.0010942","0.0157190"],["1.26518","0.268371","1.40078","0.194553","1.16732","0.233463"],["6","3","6","3","7","3"],["hsa-miR-20b-5p; hsa-miR-17-5p; hsa-miR-20a-5p; hsa-miR-106a-5p; hsa-miR-93-5p; hsa-miR-363-3p","hsa-miR-20b-5p; hsa-miR-106a-5p; hsa-miR-93-5p","hsa-miR-17-5p; hsa-miR-20a-5p; hsa-miR-222-3p; hsa-miR-93-5p; hsa-miR-126-3p; hsa-miR-18a-5p","hsa-miR-20b-5p; hsa-miR-17-5p; hsa-miR-20a-5p","hsa-miR-20b-5p; hsa-miR-20a-5p; hsa-miR-222-3p; hsa-miR-106a-5p; hsa-miR-93-5p; hsa-miR-126-3p; hsa-miR-148a-3p","hsa-miR-20b-5p; hsa-miR-222-3p; hsa-miR-106a-5p"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Category<\/th>\n      <th>Subcategory<\/th>\n      <th>Enrichment<\/th>\n      <th>P-value<\/th>\n      <th>P-adjusted<\/th>\n      <th>Q-value<\/th>\n      <th>Expected<\/th>\n      <th>Observed<\/th>\n      <th>miRNAs/precursors<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level3 heading3">
 <h3 class="heading3" id="approach-2-going-step-by-step">Approach 2: Going step-by-step<a class="anchor" aria-label="anchor" href="#approach-2-going-step-by-step"></a>
@@ -312,7 +312,7 @@ vignette index</a></p></li>
 <span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; other attached packages:</span></span>
-<span><span class="co">#&gt; [1] rbioapi_0.7.7</span></span>
+<span><span class="co">#&gt; [1] rbioapi_0.7.8</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span><span class="co">#&gt;  [1] vctrs_0.6.2       httr_1.4.5        cli_3.6.1         knitr_1.42       </span></span>
