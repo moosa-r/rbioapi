@@ -37,23 +37,25 @@ rba_options(timeout = 600, skip_error = TRUE)
 
 # Introduction {#introduction .heading2}
 
-[Enrichr](https://maayanlab.cloud/Enrichr/) is a gene-set enrichment analysis tool developed in the Ma'ayan Lab.
+[Enrichr](https://maayanlab.cloud/Enrichr/) is a popular gene-set enrichment analysis tool developed in the Ma'ayan Lab.
+
+------------------------------------------------------------------------
 
 # Gene set library concept in Enrichr {#gene-set-library-concept-in-enrichr .heading2}
 
-Directly quoting from Enrichr's help page;
+Directly quoting from Enrichr's help page:
 
-> A *gene set library* is a set of related gene sets or enrichment terms. Each enrichment term in Enrichr's results pages is organized by its gene set library. These libraries have been constructed from many sources such as published studies and major biological and biomedical online databases. Others have been created for and only available through Enrichr. For example, the ChEA 2015 library is a set of functional terms representing transcription factors profiled by ChIP-seq in mammalian cells. Each term is associated with a collection of putative targets inferred from the peaks identified in each ChIP-seq study.
+> A *gene set library* is a set of related gene sets or enrichment terms [...] These libraries have been constructed from many sources such as published studies and major biological and biomedical online databases. Others have been created for and only available through Enrichr.
 >
 > (source: <https://maayanlab.cloud/Enrichr/help#background>)
 
-To get a list of available Enrichr libraries, use:
+To get a list of the available libraries in Enrichr, use:
 
 ```{r enrichr_libs}
 enrichr_libs <- rba_enrichr_libs()
 ```
 
-In the returned data frame, you can find the names of available Enrichr libraries in "libraryName" column:
+In the returned data frame, you can find the names of available Enrichr libraries in "libraryName" column. As you will see in the following sections, you can use these names to request an enrichment analysis based on the selected library or libraries.
 
 ```{r enrichr_libs_df, echo=FALSE}
 if (is.data.frame(enrichr_libs)) {
@@ -72,63 +74,145 @@ if (is.data.frame(enrichr_libs)) {
 
 # Enrichment analysis using Enrichr {#enrichment-analysis-using-enrichr .heading2}
 
-To perform enrichment analysis on your gene-set with Enrichr using rbioapi, you can take two approaches. we will begin with the simple one.
+To perform enrichment analysis on your gene-set with Enrichr using rbioapi, you can take two approaches. We will begin with the simple one. But first, we create a vector of genes' NCBI IDs to use as the input example in this article.
 
-## Approach 1: Using the Wrapper function {#approach-1-using-the-wrapper-function .heading3}
-
-Just fill the arguments of `rba_enrichr` according to the function's manual; Simply supply your gene-set as a character vector and select the libraries.
-
-```{r approach_1}
-# 1 We create a variable with our genes' NCBI IDs
+```{r input_genes, eval=TRUE}
+# Create a vector with our genes' NCBI IDs
 genes <- c("p53", "BRCA1", "cdk2", "Q99835", "CDC42","CDK1","KIF23","PLK1",
            "RAC2","RACGAP1","RHOA","RHOB", "PHF14", "RBM3", "MSL1")
+```
 
-# 2.a Do enrichment analysis on your genes using "MSigDB_Hallmark_2020" library
-enrichr_msig_hallmark <- rba_enrichr(gene_list = genes,
+## Approach 1: Using the one-step Wrapper function {#approach-1-using-the-wrapper-function .heading3}
+
+The only required input for this function is to simply supply your gene-set as a character vector. Optionally you can also select one or more libraries. Please see `rba_enrichr()` function's manual for more details on the arguments.
+
+```{r approach_1_all, eval=FALSE}
+# Request the enrichment analysis
+results_all <- rba_enrichr(gene_list = genes)
+```
+
+Note that the default value for the argument `gene_set_library` in the rba_enrichr function is "all". This means that if you call the function as above, all of the Enrichr libraries will be used for the enrichment analysis of your uploaded gene list. In this case, you will have a named list, where each of its elements is a dataframe containing your genes' analysis results using that Enrichr library.
+
+Alternatively, you can use the `gene_set_library` argument to specify the library (or libraries) to use. Here we demonstrate using "MSigDB_Hallmark_2020" library:
+```{r waiting1, echo=FALSE}
+#wait 3 seconds to prevent rate limiting
+Sys.sleep(3)
+```
+
+```{r approach_1_select, eval=TRUE}
+# Request the enrichment analysis by a specific library
+results_msig_hallmark <- rba_enrichr(gene_list = genes,
                                      gene_set_library = "MSigDB_Hallmark_2020")
+```
 
-# 2.b Maybe you want to perform enrichment analysis using every library that contains the word "msig":
-enrichr_msig <- rba_enrichr(gene_list = genes,
+```{r approach_1_select_df, echo=FALSE}
+if (is.data.frame(results_msig_hallmark)) {
+  DT::datatable(data = results_msig_hallmark,
+              options = list(scrollX = TRUE, 
+                             paging = TRUE,
+                             fixedHeader = TRUE,
+                             keys = TRUE,
+                             pageLength = 10))
+} else {
+  print("Vignette building failed. It is probably because the web service was down during the building.")
+}
+```
+
+When supplying the `gene_set_library` argument, rbioapi assumes you are entering a regex pattern. You can disable this by setting `regex_library_name` to `FALSE`. However, this feature is useful if you need -for example- partial matches in the library names. Suppose you want to perform the enrichment analysis on every library available in Enrichr that contains the name "MSig". You can do the following:
+
+```{r waiting2, echo=FALSE}
+#wait 3 seconds to prevent rate limiting
+Sys.sleep(3)
+```
+
+```{r approach_1_regex, eval=TRUE}
+# Request the enrichment analysis
+results_msig <- rba_enrichr(gene_list = genes,
                             gene_set_library = "msig",
                             regex_library_name = TRUE)
 
-# 2.c Or maybe you want to perform enrichment analysis using every library available at Enrichr:
-# enrichr_all <- rba_enrichr(gene_list = genes,
-#                            gene_set_library = "all")
+# You can drop `egex_library_name = TRUE`, as it is TRUE by default.
 ```
 
-Note that when only one Enrichr library is selected, a data frame with enrichment analysis result will be returned:
+Note that when only one Enrichr library is selected, a data frame with enrichment analysis result will be returned.
 
-```{r approach_1_single}
-str(enrichr_msig_hallmark)
+```{r approach_1_single, eval=is.data.frame(results_msig_hallmark)}
+str(results_msig_hallmark)
 ```
 
-But when multiple libraries have been selected, the function's output will be a list where each element is a data frame corresponding to one of the selected libraries:
+But when multiple libraries have been selected, the function's output will be a list where each element is a data frame corresponding to one of the selected libraries.
 
-```{r approach_1_multi}
-str(enrichr_msig, 1)
+```{r approach_1_multi, eval=is.list(results_msig)&&is.data.frame(results_msig[[1]])}
+str(results_msig, 1)
 ```
 
 ## Approach 2: Going step-by-step {#approach-2-going-step-by-step .heading3}
 
-As you can see in `rba_enrichr()`'s name, it is a wrapper function. It basically executes the following sequence of functions:
+`rba_enrichr()` is a wrapper function. It internally executes a sequence of functions necessary to run your analysis. Alternatively, you could go step by step. We demonstrate these steps in this section.
 
-```{r approach_2, eval=FALSE}
-# 1 Get a list of available Enrichr libraries
+First, you need to retrieve the list of available Enrichr libraries. This step is optional. You can skip it if you already know the name of your desired libraries or if you want to run the analysis over every available library.
+
+```{r approach_2_libs, eval=FALSE}
+# Get a list of available Enrichr libraries
 libs <- rba_enrichr_libs(store_in_options = TRUE)
-
-# 2 Submit your gene-set to enrichr
-list_id <- rba_enrichr_add_list(gene_list = genes)
-
-# 3 Perform Enrichment analysis with your uploaded gene-set
-enriched <- rba_enrichr_enrich(user_list_id = list_id$userListId,
-                               gene_set_library = "Table_Mining_of_CRISPR_Studies")
-
-## As always, use str() to see what you have:
-str(enriched, 1)
 ```
 
-**Please Note:** Other services supported by rbioapi also provide Over-representation analysis tools. Please see the vignette article [Do with rbioapi: Over-Representation (Enrichment) Analysis in R](rbioapi_do_enrich.html) ([link to the documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html)) for an in-depth review.
+Now, you need to upload your genes list to Enrichr. By this, an identifier will be assigned to your submitted list, which is needed for the next step.
+
+```{r waiting3, echo=FALSE}
+#wait 3 seconds to prevent rate limiting
+Sys.sleep(3)
+```
+
+```{r approach_2_add_list, eval=TRUE}
+# Submit your gene-set to enrichr
+list_id <- rba_enrichr_add_list(gene_list = genes)
+```
+
+From the returned response, we need the numeric ID in the "userListId" element.
+
+```{r approach_2_str_list, eval=utils::hasName(list_id, "userListId")}
+str(list_id)
+```
+
+Finally, we are ready to submit the enrichment analysis request to Enrichr. Same as explained above for the wrapper function `rba_enrichr()`, we can supply the "gene_set_library" argument in different ways. Here we will only select the "Table_Mining_of_CRISPR_Studies" library:
+```{r waiting4, echo=FALSE}
+#wait 3 seconds to prevent rate limiting
+Sys.sleep(3)
+```
+
+```{r approach_2_enrichr_request, eval=utils::hasName(list_id, "userListId")}
+# Request the analysis
+results_crispr <- rba_enrichr_enrich(user_list_id = list_id$userListId,
+                                      gene_set_library = "Table_Mining_of_CRISPR_Studies")
+```
+
+```{r approach_2_enrichr_results, eval=exists("results_crispr")&&is.data.frame(results_crispr), echo=FALSE}
+DT::datatable(data = results_crispr,
+              options = list(scrollX = TRUE, 
+                             paging = TRUE,
+                             fixedHeader = TRUE,
+                             keys = TRUE,
+                             pageLength = 10))
+```
+
+------------------------------------------------------------------------
+
+# Working with Other Species {#other-species .heading2}
+
+Enrichr also provides libraries for model organisms. The following functions have an `organism` argument that allows you to perform the analysis on species other than humans:
+
+1.  `rba_enrichr()`
+
+2.  `rba_enrichr_enrich()`
+
+3.  `rba_enrichr_gene_map()`
+
+4.  `rba_enrichr_libs()`
+
+The available options for the organism argument are human", (H. sapiens & M. musculus), fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans), and "fish" (D. rerio).
+
+------------------------------------------------------------------------
 
 # See also in Functions' manuals {#see-also-in-functions-manuals .heading2}
 
@@ -152,7 +236,13 @@ To cite Enrichr (Please see <https://maayanlab.cloud/Enrichr/help#terms>):
 
 To cite rbioapi:
 
--   Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: user-friendly R interface to biologic web services’ API, Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2952–2953, <https://doi.org/10.1093/bioinformatics/btac172>
+-   Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi: user-friendly R interface to biologic web services' API, Bioinformatics, Volume 38, Issue 10, 15 May 2022, Pages 2952--2953, <https://doi.org/10.1093/bioinformatics/btac172>
+
+------------------------------------------------------------------------
+
+# Over-representation analysis Using Other Services {#other-services .heading2}
+
+Other services supported by rbioapi also provide Over-representation analysis tools. Please see the vignette article [Do with rbioapi: Over-Representation (Enrichment) Analysis in R](rbioapi_do_enrich.html) ([link to the documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html)) for an in-depth review.
 
 ------------------------------------------------------------------------
 
