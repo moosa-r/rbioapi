@@ -131,7 +131,7 @@ results_msig <- rba_enrichr(gene_list = genes,
                             gene_set_library = "msig",
                             regex_library_name = TRUE)
 
-# You can drop `egex_library_name = TRUE`, as it is TRUE by default.
+# You can drop `regex_library_name = TRUE`, as it is TRUE by default.
 ```
 
 Note that when only one Enrichr library is selected, a data frame with enrichment analysis result will be returned.
