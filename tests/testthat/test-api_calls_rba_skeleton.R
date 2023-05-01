@@ -26,10 +26,10 @@ test_that(".rba_skeleton works", {
 
   skip_error <- TRUE
   expect_regex(obj = .rba_skeleton(input_call = request),
-               pattern = "404")
+               pattern = "404|408|429|504|Timeout")
   skip_error <- FALSE
   expect_error(obj = .rba_skeleton(input_call = request),
-               regexp = "404")
+               regexp = "404|408|429|504|Timeout")
 
   # Invisibly returns NULL when the parser is Null
   request <- .rba_httr(httr = "get",

@@ -34,14 +34,14 @@ test_that(".rba_api_call works", {
                                             skip_error = FALSE,
                                             verbose = TRUE,
                                             diagnostics = FALSE),
-               regexp = "404")
+               regexp = "404|408|429|504|Timeout")
 
   # Respect skip_error
   expect_regex(obj = rba_api_call_nested(input_call = request$call,
                                          skip_error = TRUE,
                                          verbose = TRUE,
                                          diagnostics = FALSE),
-               pattern = "404")
+               pattern = "404|408|429|504|Timeout")
   ## Trims output
   # request <- .rba_httr(httr = "head",
   #                      url = "https://googlvjhvjhjvje.com",

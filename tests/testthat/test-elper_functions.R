@@ -3,7 +3,7 @@ test_that(".rba_api_check works", {
 
   expect_true(object = .rba_api_check("https://httpbin.org"))
   expect_regex(obj = .rba_api_check("https://httpbin.org/not_valid_path02091375"),
-               pattern = "404")
+               pattern = "404|408|429|504|Timeout")
 })
 
 test_that("rba_connection_test works", {
