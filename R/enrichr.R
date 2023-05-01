@@ -333,6 +333,7 @@ rba_enrichr_view_list <- function(user_list_id,
                                          gene_set_library,
                                          save_name,
                                          organism = "human",
+                                         sleep_time = 0,
                                          ...){
   ## Load Global Options
   .rba_ext_args(...)
@@ -358,11 +359,28 @@ rba_enrichr_view_list <- function(user_list_id,
                           save_to = .rba_file(save_name))
 
   ## Call API
-  final_output <- .rba_skeleton(input_call)
-  final_output <- utils::read.delim(textConnection(final_output),
-                                    sep = "\t", header = TRUE,
-                                    stringsAsFactors = FALSE)
-  return(final_output)
+  Sys.sleep(sleep_time)
+  final_output_raw <- .rba_skeleton(input_call)
+  final_output <- try(utils::read.delim(textConnection(final_output_raw),
+                                        sep = "\t", header = TRUE,
+                                        stringsAsFactors = FALSE),
+                      silent = !diagnostics)
+
+  if (is.data.frame(final_output)) {
+    return(final_output)
+  } else {
+    error_message <- paste0("Error: Couldn't parse the server response for the requested Enrichr analysis.",
+                            "Please try again. If the problem persists, kindly report the issue to us.",
+                            "The server's raw response is:",
+                            as.character(final_output_raw),
+                            collapse = "\n")
+    if (isTRUE(skip_error)) {
+      return(error_message)
+    } else {
+      stop(error_message, call. = diagnostics)
+    }
+  }
+
 }
 
 #' Get Enrichr Enrichment Results
@@ -548,6 +566,7 @@ rba_enrichr_enrich <- function(user_list_id,
                                                                             save_name = sprintf("enrichr_%s_%s.json",
                                                                                                 user_list_id,
                                                                                                 x),
+                                                                            sleep_time = 0.5,
                                                                             ...)
                              #advance the progress bar
                              if (isTRUE(progress_bar)) {
@@ -751,7 +770,10 @@ rba_enrichr <- function(gene_list,
   }
 
   if (length(enrichr_libs) <= 1) {
-    no_lib_msg <- "Couldn't fetch available Enrichr libraries. Please manually run `rba_enrichr_libs(store_in_options = TRUE)`. If the problem is not resolved, kindly report this issue to us."
+    no_lib_msg <- paste0("Couldn't fetch available Enrichr libraries. Please manually run `rba_enrichr_libs(store_in_options = TRUE)`.",
+                         "If the problem persists, kindly report this issue to us.",
+                         collapse = "\n")
+
     if (isTRUE(get("skip_error"))) {
       return(no_lib_msg)
     } else {
@@ -760,10 +782,12 @@ rba_enrichr <- function(gene_list,
   }
 
   .msg("--Step 2/3:")
+  Sys.sleep(1)
   list_id <- rba_enrichr_add_list(gene_list = gene_list,
                                   description = description,
                                   ...)
   .msg("--Step 3/3:")
+  Sys.sleep(1)
   if (utils::hasName(list_id, "userListId")) {
     enriched <- rba_enrichr_enrich(user_list_id = list_id$userListId,
                                    gene_set_library = gene_set_library,
