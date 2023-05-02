@@ -255,7 +255,7 @@ if (is.data.frame(panther_sets)) {
 
 The Gene Ontology (GO) project is one of the pinnacles of scientists' collective effort in bioinformatics. The GO Consortium provides a comprehensive model of biological systems. In short, GO curates a thoroughly designed directed acyclic graph (DAG) of ontologies. You may think of it as a tree of terms, where as it branches out, the terms become more specific). Each protein may be annotated with one or more terms. The terms are organized in three domains: "Molecular Function," "Biological Process," and "Cellular Component". GO slim datasets refer to subsets which are a cut-down version of GO terms. If you are not familiar with GO, I strongly encourage you to see this page and follow the links it provides: [About the GO resource](http://geneontology.org/docs/introduction-to-go-resource/ "About the GO resource").
 
-Here, we demonstrate the enrichment analysis using the Biological Process domain. Note that you should enter the "id" of the datasets, not its label. For example, entering "biological_process" is incorrect, you should rather enter "GO:0008150".
+Here, we demonstrate the enrichment analysis using the Biological Process domain. Note that you should enter the "id" of the datasets, not its label. For example, entering "biological_process" is incorrect, you should rather enter the following:.
 
 ```{r panther_enrich, echo=TRUE, message=TRUE}
 panther_enrich <- rba_panther_enrich(genes = covid_critical,
