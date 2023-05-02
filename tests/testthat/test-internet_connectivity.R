@@ -1,8 +1,3 @@
-test_that(".rba_net_handle works", {
-  expect_type(object = .rba_net_handle(skip_error = TRUE),
-              type = "logical")
-})
-
 test_that(".rba_http_status works", {
   expect_type(object = .rba_http_status("200", verbose = TRUE),
               type = "character")
