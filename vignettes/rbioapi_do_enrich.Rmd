@@ -123,7 +123,7 @@ enrichr_enrich <- rba_enrichr(gene_list = covid_critical,
 ```
 
 ```{r enrichr_df, echo=FALSE}
-if (is.data.frame(enrichr_enrich)) {
+if (is.data.frame(enrichr_enrich) && hasName(enrichr_enrich, "Adjusted.P.value")) {
   enrichr_enrich <- enrichr_enrich[order(enrichr_enrich$Adjusted.P.value),]
   enrichr_enrich <- enrichr_enrich[1:min(10,
                                          nrow(enrichr_enrich)),]
@@ -152,7 +152,7 @@ enrichr_enrich_kegg <- rba_enrichr(gene_list = covid_critical,
 As you can see below, when than one library is selected, the results will be a list where each of its elements is the enrichment results of one library:
 
 ```{r enrichr_multi_libs_str, echo=TRUE, message=TRUE}
-str(enrichr_enrich_kegg, max.level = 2)
+str(enrichr_enrich_kegg, max.level = 1)
 ```
 
 ## Reactome Analysis services {#reactome-analysis-services .heading2}
@@ -193,14 +193,7 @@ if (utils::hasName(reactome, "pathways") && is.data.frame(reactome$pathways)) {
 
 Naturally, you can alter the analysis parameters using the `rba_reactome_analysis()` function's arguments. The used parameters are returned in the "summary" element.
 
-```{r reactome_summary_dummy, echo=FALSE}
-#### this is to prevent vignetee building failarue in case of service being down.
-if(!is.list(reactome)) {
-  reactome <- list(summary = list(token = "Vignette building failed. It is probably because the web service was down during the building."))
-}
-```
-
-```{r reactome_summary, echo=TRUE, message=TRUE}
+```{r reactome_summary, echo=TRUE, message=TRUE, eval=exists("reactome")&&hasName(reactome, "summary")}
 str(reactome$summary)
 ```
 
@@ -240,7 +233,7 @@ panther_sets <- rba_panther_info(what = "datasets")
 
 ```{r panther_sets_df, echo=FALSE}
 if (is.data.frame(panther_sets)) {
-  panther_sets <- panther_sets[,-which(colnames(panther_sets) == "description")]
+  panther_sets <- panther_sets[,!colnames(panther_sets) %in% c("description")]
   DT::datatable(data = panther_sets,
                 autoHideNavigation = TRUE,
                 options = list(scrollX = TRUE, 
@@ -267,7 +260,7 @@ panther_enrich <- rba_panther_enrich(genes = covid_critical,
 In addition to the enrichment results, PANTHER returns other useful information about your analysis. The names are self-explanatory:
 
 ```{r panther_enrich_str, echo=TRUE, message=TRUE}
-str(panther_enrich)
+str(panther_enrich, 2)
 ```
 
 The enrichment results are returned as a Data Frame with an element named result:

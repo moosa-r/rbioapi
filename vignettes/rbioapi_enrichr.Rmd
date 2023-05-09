@@ -187,13 +187,17 @@ results_crispr <- rba_enrichr_enrich(user_list_id = list_id$userListId,
                                       gene_set_library = "Table_Mining_of_CRISPR_Studies")
 ```
 
-```{r approach_2_enrichr_results, eval=exists("results_crispr")&&is.data.frame(results_crispr), echo=FALSE}
-DT::datatable(data = results_crispr,
+```{r approach_2_enrichr_results, eval=TRUE, echo=FALSE}
+if (exists("results_crispr") && is.data.frame(results_crispr)) {
+  DT::datatable(data = results_crispr,
               options = list(scrollX = TRUE, 
                              paging = TRUE,
                              fixedHeader = TRUE,
                              keys = TRUE,
                              pageLength = 10))
+} else {
+  print("Vignette building failed. It is probably because the web service was down during the building.")
+}
 ```
 
 ------------------------------------------------------------------------
