@@ -173,11 +173,11 @@
 #' @return TRUE if connected to the internet, a character string if not.
 #' @family internal_internet_connectivity
 #' @noRd
-.rba_net_handle <- function(retry_max = 1,
+.rba_net_handle <- function(retry_max = 0,
                             retry_wait = 10,
                             verbose = FALSE,
                             diagnostics = FALSE,
-                            skip_error = FALSE) {
+                            skip_error = TRUE) {
   if (isTRUE(diagnostics)) {message("Testing the internet connection.")}
   test_call <- quote(
     httr::status_code(httr::HEAD("https://www.google.com/",
@@ -546,8 +546,8 @@
 #' @family internal_api_calls
 #' @noRd
 .rba_api_call <- function(input_call,
-                          skip_error = FALSE,
-                          retry_max = 1,
+                          skip_error = TRUE,
+                          retry_max = 0,
                           retry_wait = 10,
                           verbose = TRUE,
                           diagnostics = FALSE) {
@@ -1081,8 +1081,14 @@
     errors <- append(errors,
                      vapply(X = cons[cons_not_exist],
                             FUN = function(x){
-                              regmatches(x, regexpr("(?<= : (\\\n  ){1}).*(?=\\\n)",
-                                                    x, perl = TRUE))},
+                              error_message <- regmatches(x[["evl_arg"]],
+                                                  regexpr("(?<=(Error: )|(Error : )).*?(?=\n)",
+                                                          x[["evl_arg"]], perl = TRUE))
+                              return(ifelse(length(error_message) == 0,
+                                            yes = sub("^Error in.*: +\n", "", x[["evl_arg"]][[1]], perl = TRUE),
+                                            no = error_message
+                                            ))
+                              },
                             FUN.VALUE = character(1)
                      ))
     #remove from cons
