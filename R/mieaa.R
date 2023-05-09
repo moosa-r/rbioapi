@@ -832,7 +832,7 @@ rba_mieaa_enrich <- function(test_set,
                              ...) {
   ## Load Global Options
   .rba_ext_args(...)
-  .msg(" -- Step 1/3: Submitting Enrichment request:")
+  .msg(" -- Step 1/3: Submitting Enrichment analysis request:")
   step1 <- rba_mieaa_enrich_submit(test_set = test_set,
                                    mirna_type = mirna_type,
                                    species = species,
@@ -844,31 +844,63 @@ rba_mieaa_enrich <- function(test_set,
                                    min_hits = min_hits,
                                    ref_set = ref_set,
                                    ...)
-  if (utils::hasName(step1, "job_id")) {
-    .msg("\n -- Step 2/3: Checking for Submitted enrichment job's status every 5 seconds.\n",
+
+  if (utils::hasName(step1, "job_id")) { # Go to step 2
+    .msg("\n -- Step 2/3: Checking for Submitted enrichment analysis's status every 5 seconds.\n",
          "    Your submitted job ID is: ", step1$job_id)
-    step2 <- 0L
-    while (step2 != 100L) {
-      if (isTRUE(get("verbose"))) { cat(".") }
+
+    step2 <- list(status = 0L,
+                  `results-URL` = NULL)
+    tried <- 0
+    try_max <- ifelse(interactive(), Inf, 25)
+
+    while (tried < try_max && !(utils::hasName(step2, "status") && step2$status == 100L)) {
+      cat(".")
+      tried <- tried + 1
       Sys.sleep(5)
       step2 <- rba_mieaa_enrich_status(job_id = step1$job_id,
-                                       verbose = FALSE, ...)[["status"]]
+                                       verbose = FALSE, ...)
     }
-    .msg("\n -- Step 3/3: Retrieving the results of the finished enrichment job.")
-    step3 <- rba_mieaa_enrich_results(job_id = step1$job_id,
-                                      sort_by = sort_by,
-                                      sort_asc = sort_asc,
-                                      ...)
-    return(step3)
-  } else {
+
+    if (utils::hasName(step2, "status") && step2$status == 100L) { # Go to step 3
+      .msg("\n -- Step 3/3: Retrieving the results.")
+      Sys.sleep(1)
+      step3 <- rba_mieaa_enrich_results(job_id = step1$job_id,
+                                        sort_by = sort_by,
+                                        sort_asc = sort_asc,
+                                        ...)
+      return(step3)
+
+    } else { # Halt at step 2
+
+      job_stuck_msg <- paste0("Error: The miEAA server didn't complete the analysis.",
+                              "Please retry or manually run the required steps as demonstrated in the `miEAA & rbioapi` vignette article, section `Approach 2: Going step-by-step`. ",
+                              "If the problem persists, kindly report this issue to us. The error message was: ",
+                              try(step2$status),
+                              collapse = "\n")
+      if (isTRUE(get("skip_error"))) {
+        return(job_stuck_msg)
+      } else {
+        stop(job_stuck_msg,
+             call. = get("diagnostics"))
+      }
+
+    }
+
+  } else { # halt at step 1
+
+    no_job_id_msg <- paste0("Error: Couldn't submit analysis request to miEAA. ",
+                            "Please retry or manually run the required steps as demonstrated in the `miEAA & rbioapi` vignette article, section `Approach 2: Going step-by-step`. ",
+                            "If the problem persists, kindly report this issue to us. The error message was: ",
+                            try(step1),
+                            collapse = "\n")
     if (isTRUE(get("skip_error"))) {
-      return(step1)
+      return(no_job_id_msg)
     } else {
-      stop("Step 1 returned invalid results, ",
-           "maybe skip_error is TRUE and the connection encontered errors.",
-           "\n Please run this function again or run the steps manually.",
+      stop(no_job_id_msg,
            call. = get("diagnostics"))
     }
+
   }
 
 }
