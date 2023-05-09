@@ -24,8 +24,8 @@ detailed messages with internal information.}
 generate a file path to save the server's response, a directory with this
 name will be created in your working directory to save your files.}
 
-\item{retry_max}{(Numeric) (default = 1) How many times should rbioapi
-retry in case of 5xx server responses, errors un-related to the server
+\item{retry_max}{(Numeric) (default = 0) How many times should rbioapi
+retry in case of 5xx server responses, errors related to the server
 or no internet connectivity?}
 
 \item{retry_wait}{(Numeric) (default = 10) Time in seconds to wait before

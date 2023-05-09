@@ -18,7 +18,7 @@
   options(rba_timeout = 90,
           rba_dir_name = "rbioapi",
           rba_diagnostics = FALSE,
-          rba_retry_max = 1,
+          rba_retry_max = 0,
           rba_progress = FALSE,
           rba_save_file = FALSE,
           rba_skip_error = !interactive(),

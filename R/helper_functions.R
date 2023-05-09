@@ -133,8 +133,8 @@ rba_connection_test <- function(print_output = TRUE, diagnostics = FALSE) {
 #' @param dir_name (character) (default = "rbioapi") If the package needs to
 #'   generate a file path to save the server's response, a directory with this
 #'   name will be created in your working directory to save your files.
-#' @param retry_max (Numeric) (default = 1) How many times should rbioapi
-#'   retry in case of 5xx server responses, errors un-related to the server
+#' @param retry_max (Numeric) (default = 0) How many times should rbioapi
+#'   retry in case of 5xx server responses, errors related to the server
 #'   or no internet connectivity?
 #' @param retry_wait (Numeric) (default = 10) Time in seconds to wait before
 #'   next retry in case of internet connection or server problems.
