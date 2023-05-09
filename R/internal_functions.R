@@ -856,28 +856,28 @@
 #' @noRd
 .rba_args_cons_msg <- function(cons_i, what) {
   switch(what,
-         "no_null" = sprintf("Invalid Argument; `%s` cannot be NULL.",
+         "no_null" = sprintf("Invalid Argument: `%s` cannot be NULL.",
                              cons_i[["arg"]]),
-         "class" = sprintf("Invalid Argument; %s should be of class `%s`.\n\t(Your supplied argument is \"%s\".)",
+         "class" = sprintf("Invalid Argument: %s should be of class `%s`.\n\t(Your supplied argument is \"%s\".)",
                            cons_i[["arg"]],
                            .paste2(cons_i[["class"]], last = " or ",
                                    quote = "\""),
                            class(cons_i[["evl_arg"]])),
-         "val" = sprintf("Invalid Argument; %s should be either `%s`.\n\t(Your supplied argument is `%s`.)",
+         "val" = sprintf("Invalid Argument: %s should be either `%s`.\n\t(Your supplied argument is `%s`.)",
                          cons_i[["arg"]],
                          .paste2(cons_i[["val"]], last = " or ",
                                  quote = "\""),
                          cons_i[["evl_arg"]]),
-         "ran" = sprintf("Invalid Argument; %s should be `from %s to %s`.\n\t(Your supplied argument is `%s`.)",
+         "ran" = sprintf("Invalid Argument: %s should be `from %s to %s`.\n\t(Your supplied argument is `%s`.)",
                          cons_i[["arg"]],
                          cons_i[["ran"]][[1]],
                          cons_i[["ran"]][[2]],
                          cons_i[["evl_arg"]]),
-         "len" = sprintf("Invalid Argument; %s should be of length `%s`.\n\t(Your supplied argument's length is `%s`.)",
+         "len" = sprintf("Invalid Argument: %s should be of length `%s`.\n\t(Your supplied argument's length is `%s`.)",
                          cons_i[["arg"]],
                          cons_i[["len"]],
                          length(cons_i[["evl_arg"]])),
-         "min_len" = sprintf("Invalid Argument; %s should be of minimum length `%s`.\n\t(Your supplied argument's length is `%s`.)",
+         "min_len" = sprintf("Invalid Argument: %s should be of minimum length `%s`.\n\t(Your supplied argument's length is `%s`.)",
                              cons_i[["arg"]],
                              cons_i[["min_len"]],
                              length(cons_i[["evl_arg"]])),
@@ -896,7 +896,7 @@
          "regex" = sprintf("Invalid Argument: %s do not have a valid format.\n\t(It should match regex pattern: %s ).",
                            cons_i[["arg"]],
                            cons_i[["regex"]]),
-         stop("Internal Error; constrian message is not defiend: ",
+         stop("Internal Error: constrian message is not defiend: ",
               what, call. = TRUE)
   )
 }
@@ -1113,7 +1113,7 @@
     stop(errors, call. = diagnostics)
   } else if (length(errors) > 1) {
     error_message <- paste0("\n", seq_along(errors), "- ", errors)
-    stop(sprintf("The following `%s Errors` was raised during your supplied arguments check:",
+    stop(sprintf("Your supplied arguments contains the following `%s Errors`.",
                  length(errors)),
          error_message,
          call. = diagnostics)
@@ -1137,7 +1137,7 @@
                                   },
                                   FUN.VALUE = character(1)),
                            collapse = "")
-        cond_msg <- sprintf("The following `%s Conditional issues` were found during your supplied arguments check:%s",
+        cond_msg <- sprintf("Your supplied arguments contains the following `%s Conditional Issues`.:%s",
                             length(cond_msg),
                             cond_msg)
       }
