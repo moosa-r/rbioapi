@@ -483,7 +483,7 @@ rba_enrichr_enrich <- function(user_list_id,
   }
 
   if (length(enrichr_libs) <= 1) {
-    no_lib_msg <- "Couldn't fetch available Enrichr libraries. Please manually run `rba_enrichr_libs(store_in_options = TRUE)`."
+    no_lib_msg <- "Error: Couldn't fetch available Enrichr libraries. Please manually run `rba_enrichr_libs(store_in_options = TRUE)`."
     if (isTRUE(get("skip_error"))) {
       return(no_lib_msg)
     } else {
@@ -769,34 +769,61 @@ rba_enrichr <- function(gene_list,
     enrichr_libs <- enrichr_libs[["libraryName"]]
   }
 
-  if (length(enrichr_libs) <= 1) {
-    no_lib_msg <- paste0("Couldn't fetch available Enrichr libraries. Please manually run `rba_enrichr_libs(store_in_options = TRUE)`.",
-                         "If the problem persists, kindly report this issue to us.",
+  if (exists("enrichr_libs") && length(enrichr_libs) <= 1) { # Halt at step 1
+    no_lib_msg <- paste0("Error: Couldn't fetch available Enrichr libraries. Please manually run `rba_enrichr_libs(store_in_options = TRUE)`.",
+                         "If the problem persists, kindly report this issue to us. The error message was: ",
+                         try(enrichr_libs),
                          collapse = "\n")
 
     if (isTRUE(get("skip_error"))) {
+      .msg(no_lib_msg)
       return(no_lib_msg)
     } else {
       stop(no_lib_msg, call. = get("diagnostics"))
     }
-  }
+  } else { # Proceed to step 2
 
-  .msg("--Step 2/3:")
-  Sys.sleep(1)
-  list_id <- rba_enrichr_add_list(gene_list = gene_list,
-                                  description = description,
-                                  ...)
-  .msg("--Step 3/3:")
-  Sys.sleep(1)
-  if (utils::hasName(list_id, "userListId")) {
-    enriched <- rba_enrichr_enrich(user_list_id = list_id$userListId,
-                                   gene_set_library = gene_set_library,
-                                   regex_library_name = regex_library_name,
-                                   progress_bar = progress_bar,
-                                   ...)
-  } else {
-    return(list_id)
-  }
+    .msg("--Step 2/3:")
+    Sys.sleep(2)
+    list_id <- rba_enrichr_add_list(gene_list = gene_list,
+                                    description = description,
+                                    ...)
 
-  return(enriched)
+    if (exists("list_id") && utils::hasName(list_id, "userListId")) { # proceed to step 3
+      .msg("--Step 3/3:")
+      Sys.sleep(2)
+      enriched <- rba_enrichr_enrich(user_list_id = list_id$userListId,
+                                     gene_set_library = gene_set_library,
+                                     regex_library_name = regex_library_name,
+                                     progress_bar = progress_bar,
+                                     ...)
+      if (exists("enriched") && (is.list(enriched) || is.data.frame(enriched))) { # Finish step 3
+        return(enriched)
+      } else { # Halt at step 3
+        no_enriched_msg <- paste0("Error: Couldn't retrieve the submitted Enrichr analysis request.",
+                                  "Please retry or manually run the required steps as demonstrated in the `Enrichr & rbioapi` vignette article, section `Approach 2: Going step-by-step`",
+                                  "If the problem persists, kindly report this issue to us. The error message was: ",
+                                  try(enriched),
+                                  collapse = "\n")
+        if (isTRUE(get("skip_error"))) {
+          .msg(no_enriched_msg)
+          return(no_enriched_msg)
+        } else {
+          stop(no_enriched_msg, call. = get("diagnostics"))
+        }
+      }
+    } else { # Halt at step 2
+      no_list_msg <- paste0("Error: Couldn't upload your genes list to Enrichr.",
+                            "Please retry or manually run the required steps as demonstrated in the `Enrichr & rbioapi` vignette article, section `Approach 2: Going step-by-step`",
+                            "If the problem persists, kindly report this issue to us. The error message was: ",
+                            try(list_id),
+                            collapse = "\n")
+      if (isTRUE(get("skip_error"))) {
+        .msg(no_list_msg)
+        return(no_list_msg)
+      } else {
+        stop(no_list_msg, call. = get("diagnostics"))
+      }
+    }
+  }
 }
