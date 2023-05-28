@@ -113,6 +113,9 @@
 <span>  hide_node_labels <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  hide_disconnected_nodes <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  hide_structure_pics <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  flat_nodes <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  node_labels_center <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  node_labels_font_size <span class="op">=</span> <span class="fl">12</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -154,10 +157,11 @@ interactors) to be added after colored nodes.</p></dd>
 
 
 <dt>required_score</dt>
-<dd><p>Numeric: A minimum of interaction score for an
-interaction to be included in the image. if not supplied, the threshold
-will be applied by STRING Based in the network. (low Confidence = 150,
-Medium Confidence = 400, High Confidence = 700, Highest confidence = 900)</p></dd>
+<dd><p>Numeric (Between 0 to 1000): A minimum of interaction
+score for an interaction to be included in the image. if not supplied, the
+threshold will be applied by STRING Based in the network. (low Confidence
+ = 150, Medium Confidence = 400, High Confidence = 700, Highest
+ confidence = 900)</p></dd>
 
 
 <dt>network_flavor</dt>
@@ -180,17 +184,32 @@ interaction or are parts of a complex.</p></li>
 
 <dt>hide_node_labels</dt>
 <dd><p>Logical: (Default = FALSE) Hide proteins names from
-the image?</p></dd>
+the image</p></dd>
 
 
 <dt>hide_disconnected_nodes</dt>
 <dd><p>Logical: (Default = FALSE) Hide proteins that
-are not connected to any other proteins from the image?</p></dd>
+are not connected to any other proteins from the image</p></dd>
 
 
 <dt>hide_structure_pics</dt>
 <dd><p>Logical: (Default = FALSE) Hide protein's
-structure picture from inside the bubbles?</p></dd>
+structure picture from inside the bubbles</p></dd>
+
+
+<dt>flat_nodes</dt>
+<dd><p>Logical: (Default = FALSE) Make the nodes design flat
+instead of the default 3D design</p></dd>
+
+
+<dt>node_labels_center</dt>
+<dd><p>Logical: (Default = FALSE) Position the protein
+names labels center aligned on the nodes</p></dd>
+
+
+<dt>node_labels_font_size</dt>
+<dd><p>Numeric (Between 5 to 50, Default = 12) Font
+size of the protein names labels</p></dd>
 
 
 <dt>...</dt>
