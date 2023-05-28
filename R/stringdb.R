@@ -124,10 +124,11 @@ rba_string_map_ids <- function(ids,
 #'   and first shell of interactors) to be added.
 #' @param add_white_nodes Numeric: The number of white nodes (second shell of
 #'   interactors) to be added after colored nodes.
-#' @param required_score Numeric: A minimum of interaction score for an
-#'   interaction to be included in the image. if not supplied, the threshold
-#'   will be applied by STRING Based in the network. (low Confidence = 150,
-#'   Medium Confidence = 400, High Confidence = 700, Highest confidence = 900)
+#' @param required_score Numeric (Between 0 to 1000): A minimum of interaction
+#'   score for an interaction to be included in the image. if not supplied, the
+#'   threshold will be applied by STRING Based in the network. (low Confidence
+#'    = 150, Medium Confidence = 400, High Confidence = 700, Highest
+#'    confidence = 900)
 #' @param network_flavor The style of network edges, should be one of:\itemize{
 #'   \item "confidence": (default) Line's thickness is an indicator of the
 #'   interaction's confidence score.
@@ -141,11 +142,17 @@ rba_string_map_ids <- function(ids,
 #'   \item "physical": The edges indicate that two proteins have a physical
 #'   interaction or are parts of a complex.}
 #' @param hide_node_labels Logical: (Default = FALSE) Hide proteins names from
-#'   the image?
+#'   the image
 #' @param hide_disconnected_nodes Logical: (Default = FALSE) Hide proteins that
-#'   are not connected to any other proteins from the image?
+#'   are not connected to any other proteins from the image
 #' @param hide_structure_pics Logical: (Default = FALSE) Hide protein's
-#'   structure picture from inside the bubbles?
+#'   structure picture from inside the bubbles
+#' @param flat_nodes Logical: (Default = FALSE) Make the nodes design flat
+#'   instead of the default 3D design
+#' @param node_labels_center Logical: (Default = FALSE) Position the protein
+#'   names labels center aligned on the nodes
+#' @param node_labels_font_size Numeric (Between 5 to 50, Default = 12) Font
+#'   size of the protein names labels
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -199,6 +206,9 @@ rba_string_network_image <- function(ids,
                                      hide_node_labels = FALSE,
                                      hide_disconnected_nodes = FALSE,
                                      hide_structure_pics = FALSE,
+                                     flat_nodes = FALSE,
+                                     node_labels_center = FALSE,
+                                     node_labels_font_size = 12,
                                      ...) {
   ## Load Global Options
   .rba_ext_args(..., ignore_save = TRUE)
@@ -232,7 +242,15 @@ rba_string_network_image <- function(ids,
                         list(arg = "hide_disconnected_nodes",
                              class = "logical"),
                         list(arg = "hide_structure_pics",
-                             class = "logical")),
+                             class = "logical"),
+                        list(arg = "flat_nodes",
+                             class = "logical"),
+                        list(arg = "node_labels_center",
+                             class = "logical"),
+                        list(arg = "node_labels_font_size",
+                             class = "numeric",
+                             min_val = 5,
+                             max_val = 50)),
             cond = list(list(quote(length(ids) > 100 && is.null(species)),
                              sprintf("You supplied %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
                                      length(ids)))
@@ -268,9 +286,21 @@ rba_string_network_image <- function(ids,
                           list("hide_disconnected_nodes",
                                hide_disconnected_nodes,
                                "1"),
-                          list("hide_structure_pics",
+                          list("block_structure_pics_in_bubbles",
                                hide_structure_pics,
-                               "1"))
+                               "1"),
+                          list("flat_node_design",
+                               flat_nodes,
+                               "1"),
+                          list("flat_node_design",
+                               flat_nodes,
+                               "1"),
+                          list("center_node_labels",
+                               node_labels_center,
+                               "1"),
+                          list("custom_label_font_size",
+                               node_labels_font_size != 12,
+                               node_labels_font_size))
 
   ## make file path
   if (image_format == "svg") {
@@ -943,7 +973,7 @@ rba_string_enrichment <- function(ids,
 #' @param allow_pubmed logical: (default = FALSE) PubMed usually  assigns a
 #'   large number of reference publications to each protein. In order to reduce
 #'   the output size, PubMed's results will be excluded from the results,
-#'   unless stated otherwise (By setting this argument to TRUE).
+#'   unless stated otherwise by setting this argument to TRUE.
 #' @param split_df (logical, default = TRUE), If TRUE, instead of one
 #'   data frame, results from different categories will be split into
 #'   multiple data frames based on their 'category'.

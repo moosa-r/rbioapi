@@ -22,7 +22,7 @@ STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
 \item{allow_pubmed}{logical: (default = FALSE) PubMed usually  assigns a
 large number of reference publications to each protein. In order to reduce
 the output size, PubMed's results will be excluded from the results,
-unless stated otherwise (By setting this argument to TRUE).}
+unless stated otherwise by setting this argument to TRUE.}
 
 \item{split_df}{(logical, default = TRUE), If TRUE, instead of one
 data frame, results from different categories will be split into

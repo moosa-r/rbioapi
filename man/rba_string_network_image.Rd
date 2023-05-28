@@ -17,6 +17,9 @@ rba_string_network_image(
   hide_node_labels = FALSE,
   hide_disconnected_nodes = FALSE,
   hide_structure_pics = FALSE,
+  flat_nodes = FALSE,
+  node_labels_center = FALSE,
+  node_labels_font_size = 12,
   ...
 )
 }
@@ -43,10 +46,11 @@ and first shell of interactors) to be added.}
 \item{add_white_nodes}{Numeric: The number of white nodes (second shell of
 interactors) to be added after colored nodes.}
 
-\item{required_score}{Numeric: A minimum of interaction score for an
-interaction to be included in the image. if not supplied, the threshold
-will be applied by STRING Based in the network. (low Confidence = 150,
-Medium Confidence = 400, High Confidence = 700, Highest confidence = 900)}
+\item{required_score}{Numeric (Between 0 to 1000): A minimum of interaction
+score for an interaction to be included in the image. if not supplied, the
+threshold will be applied by STRING Based in the network. (low Confidence
+ = 150, Medium Confidence = 400, High Confidence = 700, Highest
+ confidence = 900)}
 
 \item{network_flavor}{The style of network edges, should be one of:\itemize{
 \item "confidence": (default) Line's thickness is an indicator of the
@@ -63,13 +67,22 @@ functional associations.
 interaction or are parts of a complex.}}
 
 \item{hide_node_labels}{Logical: (Default = FALSE) Hide proteins names from
-the image?}
+the image}
 
 \item{hide_disconnected_nodes}{Logical: (Default = FALSE) Hide proteins that
-are not connected to any other proteins from the image?}
+are not connected to any other proteins from the image}
 
 \item{hide_structure_pics}{Logical: (Default = FALSE) Hide protein's
-structure picture from inside the bubbles?}
+structure picture from inside the bubbles}
+
+\item{flat_nodes}{Logical: (Default = FALSE) Make the nodes design flat
+instead of the default 3D design}
+
+\item{node_labels_center}{Logical: (Default = FALSE) Position the protein
+names labels center aligned on the nodes}
+
+\item{node_labels_font_size}{Numeric (Between 5 to 50, Default = 12) Font
+size of the protein names labels}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
