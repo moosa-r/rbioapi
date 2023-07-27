@@ -69,7 +69,7 @@
                    panther = switch(
                      arg[[2]],
                      name = "PANTHER",
-                     url = "http://www.pantherdb.org",
+                     url = "https://www.pantherdb.org",
                      pth = "services/oai/pantherdb/",
                      ptn = "^(https?://)?(www\\.)?pantherdb\\.org/services/",
                      err_ptn = "^4\\d\\d&",
