@@ -143,7 +143,7 @@ rba_mieaa_cats <- function(mirna_type, species, ...) {
 
   input_call <- .rba_httr(httr = "get",
                           url = .rba_stg("mieaa", "url"),
-                          path = sprintf("%senrichment_categories/%s/%s",
+                          path = sprintf("%senrichment_categories/%s/%s/",
                                          .rba_stg("mieaa", "pth"),
                                          species,
                                          switch(mirna_type,

@@ -61,7 +61,7 @@
                      arg[[2]],
                      name = "MiEAA",
                      url = "https://ccb-compute2.cs.uni-saarland.de",
-                     pth = "mieaa2/api/v1/",
+                     pth = "mieaa/api/v1/",
                      ptn = "^(https?://)?(www\\.)?ccb-compute2\\.cs\\.uni-saarland\\.de/mieaa2/",
                      err_ptn = "^4\\d\\d$",
                      err_prs = list("json->chr")
