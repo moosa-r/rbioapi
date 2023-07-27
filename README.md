@@ -1,7 +1,7 @@
 rbioapi: User-Friendly R Interface to Biologic Web Services’ API
 ================
 Moosa Rezwani
-2023-04-30
+2023-07-27
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -161,11 +161,11 @@ rba_options()
 #> 1    diagnostics         FALSE     Logical (TRUE/FALSE)
 #> 2       dir_name       rbioapi                Character
 #> 3       progress         FALSE     Logical (TRUE/FALSE)
-#> 4      retry_max             1   Numeric (0 or greater)
+#> 4      retry_max             0   Numeric (0 or greater)
 #> 5     retry_wait            10   Numeric (0 or greater)
 #> 6      save_file         FALSE     Logical (TRUE/FALSE)
 #> 7     skip_error          TRUE     Logical (TRUE/FALSE)
-#> 8        timeout           600 Numeric (0.1 or greater)
+#> 8        timeout            30 Numeric (0.1 or greater)
 #> 9        verbose          TRUE     Logical (TRUE/FALSE)
 ```
 
@@ -278,7 +278,7 @@ str(adeno, max.level = 2)
 #>  $ pageInfo  :List of 3
 #>   ..$ resultsPerPage: int 200
 #>   ..$ currentPage   : int 1
-#>   ..$ totalRecords  : int 979
+#>   ..$ totalRecords  : int 985
 ```
 
 As you can see, the server has returned the first page of the response,
@@ -316,8 +316,8 @@ As you can see, what we have done was:
 # How and what to cite?
 
 rbioapi is an interface between you and other databases and services.
-Thus, if you have used rbioapi in published research, kindly **in
-addition to citing rbioapi, <u>*make sure to fully and properly cite the
+Thus, if you have used rbioapi in published research, **in addition to
+kindly citing rbioapi, <u>*make sure to fully and properly cite the
 databases/services you have used*</u>**. Suggested citations have been
 added in the functions’ manuals, under the “references” section;
 Nevertheless, it is the user’s responsibility to check for proper
@@ -365,6 +365,12 @@ used.
 
 ## Code of conduct
 
+This package, rbioapi, is an unofficial interface implementation and is
+not associated, endorsed, or officially connected in any way with the
+original databases and web services. The creators and maintainers of
+rbioapi are independent entities and have no official relationship with
+those databases and web services.
+
 When using rbioapi, remember that you are querying data from web
 services; So please be considerate. Never flood a server with requests,
 if you need to download *unreasonably* large volumes of data, directly
@@ -411,7 +417,7 @@ API](https://doi.org/10.1093/bioinformatics/btac172 "Rezwani, M., Pourfathollah,
 
 # Session info
 
-    #> R version 4.3.0 (2023-04-21 ucrt)
+    #> R version 4.3.1 (2023-06-16 ucrt)
     #> Platform: x86_64-w64-mingw32/x64 (64-bit)
     #> Running under: Windows 11 x64 (build 22621)
     #> 
@@ -432,11 +438,11 @@ API](https://doi.org/10.1093/bioinformatics/btac172 "Rezwani, M., Pourfathollah,
     #> [1] stats     graphics  grDevices utils     datasets  methods   base     
     #> 
     #> other attached packages:
-    #> [1] rbioapi_0.7.7
+    #> [1] rbioapi_0.7.9
     #> 
     #> loaded via a namespace (and not attached):
-    #>  [1] digest_0.6.31   R6_2.5.1        fastmap_1.1.1   xfun_0.39      
-    #>  [5] knitr_1.42      htmltools_0.5.5 rmarkdown_2.21  cli_3.6.1      
-    #>  [9] compiler_4.3.0  httr_1.4.5      rstudioapi_0.14 tools_4.3.0    
-    #> [13] curl_5.0.0      evaluate_0.20   yaml_2.3.7      rlang_1.1.1    
-    #> [17] jsonlite_1.8.4
+    #>  [1] digest_0.6.33     R6_2.5.1          fastmap_1.1.1     xfun_0.39        
+    #>  [5] knitr_1.43        htmltools_0.5.5   rmarkdown_2.23    cli_3.6.1        
+    #>  [9] compiler_4.3.1    httr_1.4.6        rstudioapi_0.15.0 tools_4.3.1      
+    #> [13] curl_5.0.1        evaluate_0.21     yaml_2.3.7        rlang_1.1.1      
+    #> [17] jsonlite_1.8.7

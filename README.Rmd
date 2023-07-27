@@ -190,7 +190,7 @@ As you can see, what we have done was:
 
 # How and what to cite?
 
-rbioapi is an interface between you and other databases and services. Thus, if you have used rbioapi in published research, kindly **in addition to citing rbioapi, [*make sure to fully and properly cite the databases/services you have used*]{.underline}**. Suggested citations have been added in the functions' manuals, under the "references" section; Nevertheless, it is the user's responsibility to check for proper citations and to properly cite the database/services that they have used.
+rbioapi is an interface between you and other databases and services. Thus, if you have used rbioapi in published research, **in addition to kindly citing rbioapi, [*make sure to fully and properly cite the databases/services you have used*]{.underline}**. Suggested citations have been added in the functions' manuals, under the "references" section; Nevertheless, it is the user's responsibility to check for proper citations and to properly cite the database/services that they have used.
 
 ## How to cite rbioapi
 
@@ -213,6 +213,7 @@ rbioapi is an interface between you and other databases and services. Thus, if y
 -   [How to cite UniProt](rbioapi_uniprot.html#citations "How to cite UniProt"). (See on [UniProt website](https://www.uniprot.org/help/publications))
 
 ## Code of conduct
+This package, rbioapi, is an unofficial interface implementation and is not associated, endorsed, or officially connected in any way with the original databases and web services. The creators and maintainers of rbioapi are independent entities and have no official relationship with those databases and web services.
 
 When using rbioapi, remember that you are querying data from web services; So please be considerate. Never flood a server with requests, if you need to download *unreasonably* large volumes of data, directly downloading the databases supplied in those services may be a better alternative. If you see yourself being rate-limited from any server (HTTP **429 Too Many Requests** response status code), know that you are sending more requests than what the server interprets as normal behavior, so please seek other methods or use `Sys.sleep()` between your requests.
 
