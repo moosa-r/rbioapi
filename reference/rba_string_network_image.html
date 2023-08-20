@@ -111,11 +111,9 @@
 <span>  network_flavor <span class="op">=</span> <span class="st">"confidence"</span>,</span>
 <span>  network_type <span class="op">=</span> <span class="st">"functional"</span>,</span>
 <span>  hide_node_labels <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  use_query_labels <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  hide_disconnected_nodes <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  hide_structure_pics <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  flat_nodes <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  node_labels_center <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  node_labels_font_size <span class="op">=</span> <span class="fl">12</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -187,6 +185,12 @@ interaction or are parts of a complex.</p></li>
 the image</p></dd>
 
 
+<dt>use_query_labels</dt>
+<dd><p>Logical: (Default = FALSE) Use the names supplied
+with the 'ids' argument as the nodes labels instead on STRING's default
+ones.</p></dd>
+
+
 <dt>hide_disconnected_nodes</dt>
 <dd><p>Logical: (Default = FALSE) Hide proteins that
 are not connected to any other proteins from the image</p></dd>
@@ -195,21 +199,6 @@ are not connected to any other proteins from the image</p></dd>
 <dt>hide_structure_pics</dt>
 <dd><p>Logical: (Default = FALSE) Hide protein's
 structure picture from inside the bubbles</p></dd>
-
-
-<dt>flat_nodes</dt>
-<dd><p>Logical: (Default = FALSE) Make the nodes design flat
-instead of the default 3D design</p></dd>
-
-
-<dt>node_labels_center</dt>
-<dd><p>Logical: (Default = FALSE) Position the protein
-names labels center aligned on the nodes</p></dd>
-
-
-<dt>node_labels_font_size</dt>
-<dd><p>Numeric (Between 5 to 50, Default = 12) Font
-size of the protein names labels</p></dd>
 
 
 <dt>...</dt>
