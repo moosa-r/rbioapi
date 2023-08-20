@@ -16,7 +16,7 @@ rba_string_map_ids(ids, species = NULL, echo_query = FALSE, limit = NULL, ...)
 results.}
 
 \item{limit}{(Numeric, Optional) A limit on the number of matches per input
-ID.}
+ID. The output are sorted to have the best matches first.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}

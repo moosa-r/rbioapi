@@ -15,11 +15,9 @@ rba_string_network_image(
   network_flavor = "confidence",
   network_type = "functional",
   hide_node_labels = FALSE,
+  use_query_labels = FALSE,
   hide_disconnected_nodes = FALSE,
   hide_structure_pics = FALSE,
-  flat_nodes = FALSE,
-  node_labels_center = FALSE,
-  node_labels_font_size = 12,
   ...
 )
 }
@@ -69,20 +67,15 @@ interaction or are parts of a complex.}}
 \item{hide_node_labels}{Logical: (Default = FALSE) Hide proteins names from
 the image}
 
+\item{use_query_labels}{Logical: (Default = FALSE) Use the names supplied
+with the 'ids' argument as the nodes labels instead on STRING's default
+ones.}
+
 \item{hide_disconnected_nodes}{Logical: (Default = FALSE) Hide proteins that
 are not connected to any other proteins from the image}
 
 \item{hide_structure_pics}{Logical: (Default = FALSE) Hide protein's
 structure picture from inside the bubbles}
-
-\item{flat_nodes}{Logical: (Default = FALSE) Make the nodes design flat
-instead of the default 3D design}
-
-\item{node_labels_center}{Logical: (Default = FALSE) Position the protein
-names labels center aligned on the nodes}
-
-\item{node_labels_font_size}{Numeric (Between 5 to 50, Default = 12) Font
-size of the protein names labels}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}

@@ -10,6 +10,7 @@ rba_string_interactions_network(
   required_score = NULL,
   add_nodes = NULL,
   network_type = "functional",
+  use_query_labels = FALSE,
   ...
 )
 }
