@@ -144,7 +144,7 @@ rba_string_map_ids <- function(ids,
 #' @param hide_node_labels Logical: (Default = FALSE) Hide proteins names from
 #'   the image
 #' @param use_query_labels Logical: (Default = FALSE) Use the names supplied
-#'   with the 'ids' argument as the nodes labels instead on STRING's default
+#'   with the 'ids' argument as the nodes labels instead of STRING's default
 #'   ones.
 #' @param hide_disconnected_nodes Logical: (Default = FALSE) Hide proteins that
 #'   are not connected to any other proteins from the image
@@ -347,6 +347,9 @@ rba_string_network_image <- function(ids,
 #'   functional associations.
 #'   \item "physical": The edges indicate that two proteins have a physical
 #'   interaction or are parts of a complex.}
+#' @param use_query_labels Logical: (Default = FALSE) Use the names supplied
+#'   with the 'ids' argument as the nodes labels instead of STRING's default
+#'   ones.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'

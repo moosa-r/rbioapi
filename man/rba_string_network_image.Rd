@@ -68,7 +68,7 @@ interaction or are parts of a complex.}}
 the image}
 
 \item{use_query_labels}{Logical: (Default = FALSE) Use the names supplied
-with the 'ids' argument as the nodes labels instead on STRING's default
+with the 'ids' argument as the nodes labels instead of STRING's default
 ones.}
 
 \item{hide_disconnected_nodes}{Logical: (Default = FALSE) Hide proteins that

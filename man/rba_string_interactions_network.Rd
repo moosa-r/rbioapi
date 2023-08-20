@@ -40,6 +40,10 @@ functional associations.
 \item "physical": The edges indicate that two proteins have a physical
 interaction or are parts of a complex.}}
 
+\item{use_query_labels}{Logical: (Default = FALSE) Use the names supplied
+with the 'ids' argument as the nodes labels instead of STRING's default
+ones.}
+
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }

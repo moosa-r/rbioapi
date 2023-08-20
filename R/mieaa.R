@@ -808,7 +808,8 @@ rba_mieaa_enrich_results <- function(job_id,
 #'
 #' @examples
 #' \dontrun{
-#' rba_mieaa_enrich(test_set = c("hsa-miR-20b-5p", "hsa-miR-144-5p", "hsa-miR-17-5p", "hsa-miR-20a-5p"),
+#' rba_mieaa_enrich(test_set = c("hsa-miR-20b-5p", "hsa-miR-144-5p",
+#'  "hsa-miR-17-5p", "hsa-miR-20a-5p"),
 #'      mirna_type = "mature",
 #'      test_type = "ORA",
 #'      species = 9606,
