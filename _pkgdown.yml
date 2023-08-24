@@ -74,7 +74,7 @@ navbar:
 reference:
 - title: "Helper functions"
   desc: >
-    These function serve as helpers to the overall
+    These functions serve as helpers to the overall
     exprerince of rbioapi.
   contents:
     - rba_options
