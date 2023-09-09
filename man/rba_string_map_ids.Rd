@@ -46,13 +46,13 @@ rba_string_map_ids(ids = c("TP53", "TNF", "EGFR"), species = 9606)
 }
 \references{
 \itemize{
-  \item Damian Szklarczyk, Annika L Gable, Katerina C Nastou, David Lyon,
-  Rebecca Kirsch, Sampo Pyysalo, Nadezhda T Doncheva, Marc Legeay, Tao Fang,
-  Peer Bork, Lars J Jensen, Christian von Mering, The STRING database in
-  2021: customizable protein–protein networks, and functional
-  characterization of user-uploaded gene/measurement sets, Nucleic Acids
-  Research, Volume 49, Issue D1, 8 January 2021, Pages D605–D612,
-  https://doi.org/10.1093/nar/gkaa1074
+  \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
+   Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang,
+   Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian
+   von Mering, The STRING database in 2023: protein–protein association
+   networks and functional enrichment analyses for any sequenced genome of
+   interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023,
+   Pages D638–D646, https://doi.org/10.1093/nar/gkac1000
   \item \href{https://string-db.org/help/api/}{STRING API Documentation}
   \item
   \href{https://string-db.org/cgi/about?footer_active_subpage=references}{
