@@ -150,6 +150,12 @@ rba_string_map_ids <- function(ids,
 #'   are not connected to any other proteins from the image
 #' @param hide_structure_pics Logical: (Default = FALSE) Hide protein's
 #'   structure picture from inside the bubbles
+#' @param flat_nodes Logical: (Default = FALSE) Make the nodes design flat
+#'   instead of the default 3D design
+#' @param node_labels_center Logical: (Default = FALSE) Position the protein
+#'   names labels center aligned on the nodes
+#' @param node_labels_font_size Numeric (Between 5 to 50, Default = 12) Font
+#'   size of the protein nodes labels
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -204,6 +210,9 @@ rba_string_network_image <- function(ids,
                                      use_query_labels = FALSE,
                                      hide_disconnected_nodes = FALSE,
                                      hide_structure_pics = FALSE,
+                                     flat_nodes = FALSE,
+                                     node_labels_center = FALSE,
+                                     node_labels_font_size = 12,
                                      ...) {
   ## Load Global Options
   .rba_ext_args(..., ignore_save = TRUE)
@@ -239,7 +248,15 @@ rba_string_network_image <- function(ids,
                         list(arg = "hide_disconnected_nodes",
                              class = "logical"),
                         list(arg = "hide_structure_pics",
-                             class = "logical")),
+                             class = "logical"),
+                        list(arg = "flat_nodes",
+                             class = "logical"),
+                        list(arg = "node_labels_center",
+                             class = "logical"),
+                        list(arg = "node_labels_font_size",
+                             class = "numeric",
+                             min_val = 5,
+                             max_val = 50)),
             cond = list(list(quote(length(ids) > 100 && is.null(species)),
                              sprintf("You supplied %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
                                      length(ids)))
@@ -280,7 +297,19 @@ rba_string_network_image <- function(ids,
                                "1"),
                           list("block_structure_pics_in_bubbles",
                                hide_structure_pics,
-                               "1"))
+                               "1"),
+                          list("flat_node_design",
+                               flat_nodes,
+                               "1"),
+                          list("flat_node_design",
+                               flat_nodes,
+                               "1"),
+                          list("center_node_labels",
+                               node_labels_center,
+                               "1"),
+                          list("custom_label_font_size",
+                               node_labels_font_size != 12,
+                               node_labels_font_size))
 
   ## make file path
   if (image_format == "svg") {

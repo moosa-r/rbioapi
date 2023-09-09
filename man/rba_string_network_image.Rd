@@ -18,6 +18,9 @@ rba_string_network_image(
   use_query_labels = FALSE,
   hide_disconnected_nodes = FALSE,
   hide_structure_pics = FALSE,
+  flat_nodes = FALSE,
+  node_labels_center = FALSE,
+  node_labels_font_size = 12,
   ...
 )
 }
@@ -76,6 +79,15 @@ are not connected to any other proteins from the image}
 
 \item{hide_structure_pics}{Logical: (Default = FALSE) Hide protein's
 structure picture from inside the bubbles}
+
+\item{flat_nodes}{Logical: (Default = FALSE) Make the nodes design flat
+instead of the default 3D design}
+
+\item{node_labels_center}{Logical: (Default = FALSE) Position the protein
+names labels center aligned on the nodes}
+
+\item{node_labels_font_size}{Numeric (Between 5 to 50, Default = 12) Font
+size of the protein nodes labels}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
