@@ -118,7 +118,7 @@
                         <h4 data-toc-skip class="author">Moosa
 Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2023-09-09</h4>
+            <h4 data-toc-skip class="date">2023-09-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/HEAD/vignettes/rbioapi_panther.Rmd" class="external-link"><code>vignettes/rbioapi_panther.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_panther.Rmd</code></div>
@@ -130,10 +130,10 @@ Rezwani</h4>
 <div class="section level2 heading2">
 <h2 class="heading2" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>Directly quoting the the paper published by <a href="http://www.pantherdb.org" title="Protein Analysis THrough Evolutionary Relationships (PANTHER)" class="external-link">PANTHER</a>
+<p>Directly quoting the the paper published by <a href="https://www.pantherdb.org" title="Protein Analysis THrough Evolutionary Relationships (PANTHER)" class="external-link">PANTHER</a>
 (Protein Analysis THrough Evolutionary Relationships) authors:</p>
 <blockquote>
-<p>The PANTHER classification system (<a href="http://www.pantherdb.org" class="external-link uri">http://www.pantherdb.org</a>) a comprehensive system that
+<p>The PANTHER classification system (<a href="https://www.pantherdb.org" class="external-link uri">https://www.pantherdb.org</a>) a comprehensive system that
 combines genomes, gene function , pathways and statistical analysis
 tools to enable to analyze large-scale genome-wide experimental data.
 The system (PANTHER v.14.0) covers 131 complete genomes organized gene
@@ -187,7 +187,7 @@ Tree topology of a given PANTHER family.</p></li>
 <div class="section level3 heading3">
 <h3 class="heading3" id="gene-list-analysis">Gene List Analysis<a class="anchor" aria-label="anchor" href="#gene-list-analysis"></a>
 </h3>
-<p><code><a href="../reference/rba_panther_enrich.html">rba_panther_enrich()</a></code> is an equivalent to <a href="http://www.pantherdb.org/index.jsp" title="PANTHER Gene List Analysis" class="external-link">Gene List analysis tool’s
+<p><code><a href="../reference/rba_panther_enrich.html">rba_panther_enrich()</a></code> is an equivalent to <a href="https://www.pantherdb.org/index.jsp" title="PANTHER Gene List Analysis" class="external-link">Gene List analysis tool’s
 webpage.</a>. Here is a usage example:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## 1 We get the available annotation datasets in PANTHER (we need to select one of them to submit an enrichment request)</span></span>
@@ -203,8 +203,8 @@ webpage.</a>. Here is a usage example:</p>
 <span>                               annot_dataset <span class="op">=</span> <span class="st">"ANNOT_TYPE_ID_PANTHER_PATHWAY"</span>,</span>
 <span>                               cutoff <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Performing over-representation enrichment analysis of 15 input genes of organism 9606 against ANNOT_TYPE_ID_PANTHER_PATHWAY datasets.</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-beb48b99cdd6848a3d60" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-beb48b99cdd6848a3d60">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14"],[4,3,4,3,3,2,3,7,2,2,2,3,2,2],[72.2421052631579,164.712,27.452,47.88139534883722,46.26741573033708,130.7238095238095,27.09078947368421,0.5346502698792499,78.43428571428572,66.95609756097562,53.82745098039216,15.77701149425287,29.83913043478261,21.9616],[4.454106264608925e-05,8.092082040823969e-05,0.0006236335656118427,0.001365667184421406,0.001206548745061684,0.003308184814284135,0.004063683278743845,0.003851644887334619,0.005771584963096207,0.007025146688086739,0.009705059696227638,0.01125718209224835,0.02560329654624384,0.04291957347561957],[0.05536937199475448,0.01821360920880082,0.1457088736704065,0.0626548156782748,0.0648404487833309,0.01529943173539268,0.110738743989509,13.09267084365438,0.02549905289232114,0.02987031910243334,0.03715576278595367,0.1901500801398805,0.067026081888387,0.09106804604400408],[76,25,200,86,89,21,152,17971,35,41,51,261,92,125],[2.783816415380578e-07,1.011510255102996e-06,1.169312935522205e-05,3.414167961053516e-05,3.770464828317762e-05,0.0001240569305356551,0.0001777861434450432,0.000192582244366731,0.0003246516541741616,0.0004390716680054212,0.0006672228541156501,0.0008442886569186266,0.002080267844382312,0.003755462679116712],["+","+","+","+","+","+","+","-","+","+","+","+","+","+"],["P04393","P00008","P00034","P00016","P00059","P00007","P00029",null,"P00009","P05918","P04398","P00031","P00053","P00027"],["Ras Pathway","Axon guidance mediated by Slit/Robo","Integrin signalling pathway","Cytoskeletal regulation by Rho GTPase","p53 pathway","Axon guidance mediated by semaphorins","Huntington disease","UNCLASSIFIED","Axon guidance mediated by netrin","p38 MAPK pathway","p53 pathway feedback loops 2","Inflammation mediated by chemokine and cytokine signaling pathway","T cell activation","Heterotrimeric G-protein signaling pathway-Gq alpha and Go alpha mediated pathway"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>number_in_list<\/th>\n      <th>fold_enrichment<\/th>\n      <th>fdr<\/th>\n      <th>expected<\/th>\n      <th>number_in_reference<\/th>\n      <th>pValue<\/th>\n      <th>plus_minus<\/th>\n      <th>term.id<\/th>\n      <th>term.label<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p><strong>Please Note:</strong> Other services supported by rbioapi
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-ccdf421ac80919476c1b" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ccdf421ac80919476c1b">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14"],[4,3,4,3,3,2,3,7,2,2,2,3,2,2],[72.2421052631579,164.712,27.452,47.88139534883722,46.26741573033708,130.7238095238095,27.09078947368421,0.5346502698792499,78.43428571428572,66.95609756097562,53.82745098039216,15.77701149425287,29.83913043478261,21.9616],[4.454106264608925e-05,8.092082040823969e-05,0.0006236335656118427,0.001365667184421406,0.001206548745061684,0.003308184814284135,0.004063683278743845,0.003851644887334619,0.005771584963096207,0.007025146688086739,0.009705059696227638,0.01125718209224835,0.02560329654624384,0.04291957347561957],[0.05536937199475448,0.01821360920880082,0.1457088736704065,0.0626548156782748,0.0648404487833309,0.01529943173539268,0.110738743989509,13.09267084365438,0.02549905289232114,0.02987031910243334,0.03715576278595367,0.1901500801398805,0.067026081888387,0.09106804604400408],[76,25,200,86,89,21,152,17971,35,41,51,261,92,125],[2.783816415380578e-07,1.011510255102996e-06,1.169312935522205e-05,3.414167961053516e-05,3.770464828317762e-05,0.0001240569305356551,0.0001777861434450432,0.000192582244366731,0.0003246516541741616,0.0004390716680054212,0.0006672228541156501,0.0008442886569186266,0.002080267844382312,0.003755462679116712],["+","+","+","+","+","+","+","-","+","+","+","+","+","+"],["P04393","P00008","P00034","P00016","P00059","P00007","P00029",null,"P00009","P05918","P04398","P00031","P00053","P00027"],["Ras Pathway","Axon guidance mediated by Slit/Robo","Integrin signalling pathway","Cytoskeletal regulation by Rho GTPase","p53 pathway","Axon guidance mediated by semaphorins","Huntington disease","UNCLASSIFIED","Axon guidance mediated by netrin","p38 MAPK pathway","p53 pathway feedback loops 2","Inflammation mediated by chemokine and cytokine signaling pathway","T cell activation","Heterotrimeric G-protein signaling pathway-Gq alpha and Go alpha mediated pathway"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>number_in_list<\/th>\n      <th>fold_enrichment<\/th>\n      <th>fdr<\/th>\n      <th>expected<\/th>\n      <th>number_in_reference<\/th>\n      <th>pValue<\/th>\n      <th>plus_minus<\/th>\n      <th>term.id<\/th>\n      <th>term.label<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p><strong>Please Note:</strong> Other services supported by rbioapi
 also provide Over-representation analysis tools. Please see the vignette
 article <a href="rbioapi_do_enrich.html">Do with rbioapi:
 Over-Representation (Enrichment) Analysis in R</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html">link
@@ -213,7 +213,7 @@ to the documentation site</a>) for an in-depth review.</p>
 <div class="section level3 heading3">
 <h3 class="heading3" id="tree-grafter">Tree grafter<a class="anchor" aria-label="anchor" href="#tree-grafter"></a>
 </h3>
-<p><code><a href="../reference/rba_panther_tree_grafter.html">rba_panther_tree_grafter()</a></code> is an equivalent to the “<a href="http://www.pantherdb.org/tools/sequenceSearchForm.jsp" class="external-link">Graft
+<p><code><a href="../reference/rba_panther_tree_grafter.html">rba_panther_tree_grafter()</a></code> is an equivalent to the “<a href="https://www.pantherdb.org/tools/sequenceSearchForm.jsp" class="external-link">Graft
 sequence into PANTHER library of trees</a>” tool.</p>
 <hr>
 </div>
@@ -221,7 +221,7 @@ sequence into PANTHER library of trees</a>” tool.</p>
 <div class="section level2 heading2">
 <h2 class="heading2" id="citations">How to Cite?<a class="anchor" aria-label="anchor" href="#citations"></a>
 </h2>
-<p>To cite PANTHER (Please see <a href="http://www.pantherdb.org/publications.jsp#HowToCitePANTHER" class="external-link uri">http://www.pantherdb.org/publications.jsp#HowToCitePANTHER</a>):</p>
+<p>To cite PANTHER (Please see <a href="https://www.pantherdb.org/publications.jsp#HowToCitePANTHER" class="external-link uri">https://www.pantherdb.org/publications.jsp#HowToCitePANTHER</a>):</p>
 <ul>
 <li>Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills,
 Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER
@@ -279,7 +279,7 @@ vignette index</a></p></li>
 <span><span class="co">#&gt; [1] rbioapi_0.7.9</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span><span class="co">#&gt;  [1] vctrs_0.6.3       httr_1.4.7        cli_3.6.1         knitr_1.43       </span></span>
+<span><span class="co">#&gt;  [1] vctrs_0.6.3       httr_1.4.7        cli_3.6.1         knitr_1.44       </span></span>
 <span><span class="co">#&gt;  [5] rlang_1.1.1       xfun_0.40         stringi_1.7.12    purrr_1.0.2      </span></span>
 <span><span class="co">#&gt;  [9] textshaping_0.3.6 jsonlite_1.8.7    glue_1.6.2        DT_0.29          </span></span>
 <span><span class="co">#&gt; [13] rprojroot_2.0.3   htmltools_0.5.6   ragg_1.2.5        sass_0.4.7       </span></span>
