@@ -51,7 +51,7 @@ On CRAN (Stable) version: (<https://cran.r-project.org/package=rbioapi>)
 3.  [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "miRNA Enrichment Analysis and Annotation Tool (miEAA)")
     ([rbioapi vignette
     article](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html "rbioapi & miEAA vignette article"))
-4.  [PANTHER](http://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)")
+4.  [PANTHER](https://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)")
     ([rbioapi vignette
     article](https://rbioapi.moosa-r.com/articles/rbioapi_panther.html "rbioapi & PANTHER vignette article"))
 5.  [Reactome](https://reactome.org/) ([rbioapi vignette
@@ -348,7 +348,7 @@ used.
 - [How to cite
   PANTHER](rbioapi_panther.html#citations "How to cite PANTHER"). (See
   on [PANTHER
-  website](http://www.pantherdb.org/publications.jsp#HowToCitePANTHER))
+  website](https://www.pantherdb.org/publications.jsp#HowToCitePANTHER))
 
 - [How to cite
   Reactome](rbioapi_reactome.html#citations "How to cite Reactome").

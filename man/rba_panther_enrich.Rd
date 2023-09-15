@@ -69,7 +69,7 @@ Using this function you can use PANTHER services to perform
 }
 \section{Corresponding API Resources}{
 
- "POST http://www.pantherdb.org/services/oai/pantherdb/enrich/overrep"
+ "POST https://www.pantherdb.org/services/oai/pantherdb/enrich/overrep"
 }
 
 \examples{
@@ -89,10 +89,10 @@ rba_panther_enrich(genes = c("p53", "BRCA1", "cdk2", "Q99835", "CDC42",
   tool, enhancer regions and extensive API, Nucleic Acids Research,
   Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
   https://doi.org/10.1093/nar/gkaa1106
-  \item \href{http://www.pantherdb.org/services/details.jsp}{PANTHER
+  \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
   Services Details}
   \item
-  \href{http://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
+  \href{https://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
   note on PANTHER website}
   }
 }

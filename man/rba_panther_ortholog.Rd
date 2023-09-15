@@ -52,8 +52,8 @@ Using this function you can search and retrieve orthologs of given gene(s),
 }
 \section{Corresponding API Resources}{
 
- "POST http://www.pantherdb.org/services/oai/pantherdb/ortholog/matchortho"
- \cr "POST http://www.pantherdb.org/services/oai/pantherdb/ortholog/homologpos"
+ "POST https://www.pantherdb.org/services/oai/pantherdb/ortholog/matchortho"
+ \cr "POST https://www.pantherdb.org/services/oai/pantherdb/ortholog/homologpos"
 }
 
 \examples{
@@ -70,10 +70,10 @@ rba_panther_ortholog("CD40", organism = 9606, type = "LDO")
   tool, enhancer regions and extensive API, Nucleic Acids Research,
   Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
   https://doi.org/10.1093/nar/gkaa1106
-  \item \href{http://www.pantherdb.org/services/details.jsp}{PANTHER
+  \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
   Services Details}
   \item
-  \href{http://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
+  \href{https://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
   note on PANTHER website}
   }
 }

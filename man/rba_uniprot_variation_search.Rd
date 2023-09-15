@@ -87,7 +87,7 @@ List where each element corresponds to one UniProt entity returned
 }
 \description{
 Using this function, you can search and retrieve
-  \href{https://legacy.uniprot.org/help/variant}{Natural variant(s)} that
+  \href{https://www.uniprot.org/help/variant}{Natural variant(s)} that
   has been annotated in the protein's sequences. You may also refine your
   search with modifiers such as source type, disease etc. See
   "Arguments section" for more information.

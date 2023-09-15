@@ -48,7 +48,7 @@ On CRAN (Stable) version: (<https://cran.r-project.org/package=rbioapi>)
 1.  [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr") ([rbioapi vignette article](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html "rbioapi & Enrichr vignette article")) ^(new)^
 2.  [JASPAR](https://jaspar.genereg.net/ "JASPAR - A database of transcription factor binding profiles") ([rbioapi vignette article](https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html "rbioapi & Enrichr vignette article")) ^(new)^
 3.  [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "miRNA Enrichment Analysis and Annotation Tool (miEAA)") ([rbioapi vignette article](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html "rbioapi & miEAA vignette article"))
-4.  [PANTHER](http://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)") ([rbioapi vignette article](https://rbioapi.moosa-r.com/articles/rbioapi_panther.html "rbioapi & PANTHER vignette article"))
+4.  [PANTHER](https://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)") ([rbioapi vignette article](https://rbioapi.moosa-r.com/articles/rbioapi_panther.html "rbioapi & PANTHER vignette article"))
 5.  [Reactome](https://reactome.org/) ([rbioapi vignette article](https://rbioapi.moosa-r.com/articles/rbioapi_reactome.html "rbioapi & Reactome vignette article"))
 6.  [STRING](https://string-db.org/ "STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis") ([rbioapi vignette article](https://rbioapi.moosa-r.com/articles/rbioapi_string.html "rbioapi & STRING vignette article"))
 7.  [UniProt](https://www.uniprot.org "Universal Protein Resource (UniProt)") ([rbioapi vignette article](https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html "rbioapi & UniProt vignette article"))
@@ -204,7 +204,7 @@ rbioapi is an interface between you and other databases and services. Thus, if y
 
 -   [How to cite miEAA](rbioapi_mieaa.html#citations "How to cite miEAA"). (See on [miEAA website](https://ccb-compute2.cs.uni-saarland.de/mieaa2))
 
--   [How to cite PANTHER](rbioapi_panther.html#citations "How to cite PANTHER"). (See on [PANTHER website](http://www.pantherdb.org/publications.jsp#HowToCitePANTHER))
+-   [How to cite PANTHER](rbioapi_panther.html#citations "How to cite PANTHER"). (See on [PANTHER website](https://www.pantherdb.org/publications.jsp#HowToCitePANTHER))
 
 -   [How to cite Reactome](rbioapi_reactome.html#citations "How to cite Reactome"). (See on [Reactome website](https://reactome.org/cite))
 

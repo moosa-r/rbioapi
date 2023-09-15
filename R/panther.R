@@ -15,7 +15,7 @@
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET http://www.pantherdb.org/services/oai/pantherdb/geneinfo"
+#'  "GET https://www.pantherdb.org/services/oai/pantherdb/geneinfo"
 #'
 #' @return A list containing your unmapped inputs and mapped genes with
 #'   pertinent information.
@@ -27,10 +27,10 @@
 #'   tool, enhancer regions and extensive API, Nucleic Acids Research,
 #'   Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
 #'   https://doi.org/10.1093/nar/gkaa1106
-#'   \item \href{http://www.pantherdb.org/services/details.jsp}{PANTHER
+#'   \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
 #'   Services Details}
 #'   \item
-#'   \href{http://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
+#'   \href{https://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
 #'   note on PANTHER website}
 #'   }
 #'
@@ -119,7 +119,7 @@ rba_panther_mapping <- function(genes,
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "POST http://www.pantherdb.org/services/oai/pantherdb/enrich/overrep"
+#'  "POST https://www.pantherdb.org/services/oai/pantherdb/enrich/overrep"
 #'
 #' @return A list with the parameters and results. If the analysis was
 #'   successful, the results data frame are returned in the "results" element
@@ -133,10 +133,10 @@ rba_panther_mapping <- function(genes,
 #'   tool, enhancer regions and extensive API, Nucleic Acids Research,
 #'   Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
 #'   https://doi.org/10.1093/nar/gkaa1106
-#'   \item \href{http://www.pantherdb.org/services/details.jsp}{PANTHER
+#'   \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
 #'   Services Details}
 #'   \item
-#'   \href{http://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
+#'   \href{https://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
 #'   note on PANTHER website}
 #'   }
 #'
@@ -267,11 +267,11 @@ rba_panther_enrich <- function(genes,
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET http://www.pantherdb.org/services/oai/pantherdb/supportedgenomes"
-#'  \cr "GET http://www.pantherdb.org/services/oai/pantherdb/supportedannotdatasets"
-#'  \cr "GET http://www.pantherdb.org/services/oai/pantherdb/supportedpantherfamilies"
-#'  \cr "GET http://www.pantherdb.org/services/oai/pantherdb/supportedpantherpathways"
-#'  \cr "GET http://pantherdb.org/services/oai/pantherdb/speciestree"
+#'  "GET https://www.pantherdb.org/services/oai/pantherdb/supportedgenomes"
+#'  \cr "GET https://www.pantherdb.org/services/oai/pantherdb/supportedannotdatasets"
+#'  \cr "GET https://www.pantherdb.org/services/oai/pantherdb/supportedpantherfamilies"
+#'  \cr "GET https://www.pantherdb.org/services/oai/pantherdb/supportedpantherpathways"
+#'  \cr "GET https://www.pantherdb.org/services/oai/pantherdb/speciestree"
 #'
 #' @return For families and species tree, a list and otherwise a data frame
 #'   with pertinent information.
@@ -283,10 +283,10 @@ rba_panther_enrich <- function(genes,
 #'   tool, enhancer regions and extensive API, Nucleic Acids Research,
 #'   Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
 #'   https://doi.org/10.1093/nar/gkaa1106
-#'   \item \href{http://www.pantherdb.org/services/details.jsp}{PANTHER
+#'   \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
 #'   Services Details}
 #'   \item
-#'   \href{http://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
+#'   \href{https://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
 #'   note on PANTHER website}
 #'   }
 #'
@@ -424,8 +424,8 @@ rba_panther_info <- function(what,
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "POST http://www.pantherdb.org/services/oai/pantherdb/ortholog/matchortho"
-#'  \cr "POST http://www.pantherdb.org/services/oai/pantherdb/ortholog/homologpos"
+#'  "POST https://www.pantherdb.org/services/oai/pantherdb/ortholog/matchortho"
+#'  \cr "POST https://www.pantherdb.org/services/oai/pantherdb/ortholog/homologpos"
 #'
 #' @return A data frame with Orthologs information.
 #'
@@ -436,10 +436,10 @@ rba_panther_info <- function(what,
 #'   tool, enhancer regions and extensive API, Nucleic Acids Research,
 #'   Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
 #'   https://doi.org/10.1093/nar/gkaa1106
-#'   \item \href{http://www.pantherdb.org/services/details.jsp}{PANTHER
+#'   \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
 #'   Services Details}
 #'   \item
-#'   \href{http://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
+#'   \href{https://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
 #'   note on PANTHER website}
 #'   }
 #'
@@ -557,7 +557,7 @@ rba_panther_ortholog <- function(genes,
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET http://www.pantherdb.org/services/oai/pantherdb/ortholog/homologOther"
+#'  "GET https://www.pantherdb.org/services/oai/pantherdb/ortholog/homologOther"
 #'
 #' @return A dataframe with homologs information.
 #'
@@ -568,10 +568,10 @@ rba_panther_ortholog <- function(genes,
 #'   tool, enhancer regions and extensive API, Nucleic Acids Research,
 #'   Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
 #'   https://doi.org/10.1093/nar/gkaa1106
-#'   \item \href{http://www.pantherdb.org/services/details.jsp}{PANTHER
+#'   \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
 #'   Services Details}
 #'   \item
-#'   \href{http://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
+#'   \href{https://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
 #'   note on PANTHER website}
 #'   }
 #'
@@ -662,9 +662,9 @@ rba_panther_homolog <- function(genes,
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET http://www.pantherdb.org/services/oai/pantherdb/familyortholog"
-#'  \cr "GET http://www.pantherdb.org/services/oai/pantherdb/familymsa"
-#'  \cr "GET http://www.pantherdb.org/services/oai/pantherdb/treeinfo"
+#'  "GET https://www.pantherdb.org/services/oai/pantherdb/familyortholog"
+#'  \cr "GET https://www.pantherdb.org/services/oai/pantherdb/familymsa"
+#'  \cr "GET https://www.pantherdb.org/services/oai/pantherdb/treeinfo"
 #'
 #' @return For trees a list and otherwise a data frame with the requested
 #'   family's information.
@@ -676,10 +676,10 @@ rba_panther_homolog <- function(genes,
 #'   tool, enhancer regions and extensive API, Nucleic Acids Research,
 #'   Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
 #'   https://doi.org/10.1093/nar/gkaa1106
-#'   \item \href{http://www.pantherdb.org/services/details.jsp}{PANTHER
+#'   \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
 #'   Services Details}
 #'   \item
-#'   \href{http://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
+#'   \href{https://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
 #'   note on PANTHER website}
 #'   }
 #'
@@ -767,7 +767,7 @@ rba_panther_family <- function(id,
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET http://www.pantherdb.org/services/oai/pantherdb/graftsequence"
+#'  "GET https://www.pantherdb.org/services/oai/pantherdb/graftsequence"
 #'
 #' @return A list containing PANTHER tree topology information.
 #'
@@ -778,10 +778,10 @@ rba_panther_family <- function(id,
 #'   tool, enhancer regions and extensive API, Nucleic Acids Research,
 #'   Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
 #'   https://doi.org/10.1093/nar/gkaa1106
-#'   \item \href{http://www.pantherdb.org/services/details.jsp}{PANTHER
+#'   \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
 #'   Services Details}
 #'   \item
-#'   \href{http://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
+#'   \href{https://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
 #'   note on PANTHER website}
 #'   }
 #'

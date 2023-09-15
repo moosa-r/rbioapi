@@ -36,11 +36,11 @@ Using this function you can retrieve a list of available organisms,
 }
 \section{Corresponding API Resources}{
 
- "GET http://www.pantherdb.org/services/oai/pantherdb/supportedgenomes"
- \cr "GET http://www.pantherdb.org/services/oai/pantherdb/supportedannotdatasets"
- \cr "GET http://www.pantherdb.org/services/oai/pantherdb/supportedpantherfamilies"
- \cr "GET http://www.pantherdb.org/services/oai/pantherdb/supportedpantherpathways"
- \cr "GET http://pantherdb.org/services/oai/pantherdb/speciestree"
+ "GET https://www.pantherdb.org/services/oai/pantherdb/supportedgenomes"
+ \cr "GET https://www.pantherdb.org/services/oai/pantherdb/supportedannotdatasets"
+ \cr "GET https://www.pantherdb.org/services/oai/pantherdb/supportedpantherfamilies"
+ \cr "GET https://www.pantherdb.org/services/oai/pantherdb/supportedpantherpathways"
+ \cr "GET https://www.pantherdb.org/services/oai/pantherdb/speciestree"
 }
 
 \examples{
@@ -60,10 +60,10 @@ rba_panther_info(what = "families", families_page = 4)
   tool, enhancer regions and extensive API, Nucleic Acids Research,
   Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
   https://doi.org/10.1093/nar/gkaa1106
-  \item \href{http://www.pantherdb.org/services/details.jsp}{PANTHER
+  \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
   Services Details}
   \item
-  \href{http://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
+  \href{https://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
   note on PANTHER website}
   }
 }

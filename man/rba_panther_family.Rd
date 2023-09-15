@@ -33,9 +33,9 @@ Using this function, you can retrieve Orthologs, MSA or Tree topology
 }
 \section{Corresponding API Resources}{
 
- "GET http://www.pantherdb.org/services/oai/pantherdb/familyortholog"
- \cr "GET http://www.pantherdb.org/services/oai/pantherdb/familymsa"
- \cr "GET http://www.pantherdb.org/services/oai/pantherdb/treeinfo"
+ "GET https://www.pantherdb.org/services/oai/pantherdb/familyortholog"
+ \cr "GET https://www.pantherdb.org/services/oai/pantherdb/familymsa"
+ \cr "GET https://www.pantherdb.org/services/oai/pantherdb/treeinfo"
 }
 
 \examples{
@@ -52,10 +52,10 @@ rba_panther_family("PTHR10000", what = "ortholog")
   tool, enhancer regions and extensive API, Nucleic Acids Research,
   Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
   https://doi.org/10.1093/nar/gkaa1106
-  \item \href{http://www.pantherdb.org/services/details.jsp}{PANTHER
+  \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
   Services Details}
   \item
-  \href{http://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
+  \href{https://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
   note on PANTHER website}
   }
 }

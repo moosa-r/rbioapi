@@ -37,9 +37,9 @@ rba_options(timeout = 30, skip_error = TRUE)
 
 ## Introduction {#introduction .heading2}
 
-Directly quoting the the paper published by [PANTHER](http://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)") (Protein Analysis THrough Evolutionary Relationships) authors:
+Directly quoting the the paper published by [PANTHER](https://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)") (Protein Analysis THrough Evolutionary Relationships) authors:
 
-> The PANTHER classification system (<http://www.pantherdb.org>) a comprehensive system that combines genomes, gene function , pathways and statistical analysis tools to enable to analyze large-scale genome-wide experimental data. The system (PANTHER v.14.0) covers 131 complete genomes organized gene families and subfamilies; evolutionary relationships between are represented in phylogenetic trees, multiple sequence and statistical models (hidden Markov models (HMMs)). The families and subfamilies are annotated with Gene Ontology (GO) terms, sequences are assigned to PANTHER pathways. A suite of tools has built to allow users to browse and query gene functions and analyze-scale experimental data with a number of statistical tests. is widely used by bench scientists, bioinformaticians, computer and systems biologists.
+> The PANTHER classification system (<https://www.pantherdb.org>) a comprehensive system that combines genomes, gene function , pathways and statistical analysis tools to enable to analyze large-scale genome-wide experimental data. The system (PANTHER v.14.0) covers 131 complete genomes organized gene families and subfamilies; evolutionary relationships between are represented in phylogenetic trees, multiple sequence and statistical models (hidden Markov models (HMMs)). The families and subfamilies are annotated with Gene Ontology (GO) terms, sequences are assigned to PANTHER pathways. A suite of tools has built to allow users to browse and query gene functions and analyze-scale experimental data with a number of statistical tests. is widely used by bench scientists, bioinformaticians, computer and systems biologists.
 >
 > (source: Mi, Huaiyu, et al. "Protocol Update for large-scale genome and gene function analysis with the PANTHER classification system (v. 14.0)." *Nature protocols* 14.3 (2019): 703-721)
 
@@ -69,7 +69,7 @@ The available tools in PANTHER's **RESTful API services** can be divided into 3 
 
 ### Gene List Analysis {#gene-list-analysis .heading3}
 
-`rba_panther_enrich()` is an equivalent to [Gene List analysis tool's webpage.](http://www.pantherdb.org/index.jsp "PANTHER Gene List Analysis"). Here is a usage example:
+`rba_panther_enrich()` is an equivalent to [Gene List analysis tool's webpage.](https://www.pantherdb.org/index.jsp "PANTHER Gene List Analysis"). Here is a usage example:
 
 ```{r rba_panther_enrich, message=TRUE}
 ## 1 We get the available annotation datasets in PANTHER (we need to select one of them to submit an enrichment request)
@@ -102,13 +102,13 @@ if (utils::hasName(enriched, "result") && is.data.frame(enriched$result)) {
 
 ### Tree grafter {#tree-grafter .heading3}
 
-`rba_panther_tree_grafter()` is an equivalent to the "[Graft sequence into PANTHER library of trees](http://www.pantherdb.org/tools/sequenceSearchForm.jsp)" tool.
+`rba_panther_tree_grafter()` is an equivalent to the "[Graft sequence into PANTHER library of trees](https://www.pantherdb.org/tools/sequenceSearchForm.jsp)" tool.
 
 ------------------------------------------------------------------------
 
 ## How to Cite? {#citations .heading2}
 
-To cite PANTHER (Please see <http://www.pantherdb.org/publications.jsp#HowToCitePANTHER>):
+To cite PANTHER (Please see <https://www.pantherdb.org/publications.jsp#HowToCitePANTHER>):
 
 -   Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills, Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER version 16: a revised family classification, tree-based classification tool, enhancer regions and extensive API, *Nucleic Acids Research*, Volume 49, Issue D1, 8 January 2021, Pages D394--D403, <https://doi.org/10.1093/nar/gkaa1106>
 

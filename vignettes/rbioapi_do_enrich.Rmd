@@ -77,7 +77,7 @@ With over-representation analysis, you can compare your gene list to find if the
 
 # Enrichment (Over-Representation) analysis in R with rbioapi {#enrichment-analysis-in-R-with-rbioapi .heading2}
 
-Many web services supported by rbioapi provide tools to perform over-representation analysis against the gene sets curated in their databases. Among the databases and web services currently supported by rbioapi, [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr"), [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "miRNA Enrichment Analysis and Annotation Tool (miEAA)"), [PANTHER](http://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)"), [Reactome](https://reactome.org/), and [STRING](https://string-db.org/ "STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis") provide such services. Each service has a dedicated vignette article in rbioapi. Here we will focus on performing Enrichment (Over-Representation) analysis.
+Many web services supported by rbioapi provide tools to perform over-representation analysis against the gene sets curated in their databases. Among the databases and web services currently supported by rbioapi, [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr"), [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "miRNA Enrichment Analysis and Annotation Tool (miEAA)"), [PANTHER](https://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)"), [Reactome](https://reactome.org/), and [STRING](https://string-db.org/ "STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis") provide such services. Each service has a dedicated vignette article in rbioapi. Here we will focus on performing Enrichment (Over-Representation) analysis.
 
 As a demonstration, we will use the results of [Galani et al.: Nat. Immunol. 22, 32 (2021)](https://doi.org/10.1038/s41590-020-00840-x "Untuned antiviral immunity in COVID-19 revealed by temporal type I/III interferon patterns and flu comparison") where they have compared the gene expression of critically ill and non-critically ill COVID patients to healthy individuals. We assign a variable with 1214 differentially expressed genes (DEGs) exclusively induced in critically ill COVID patients. Next, we will see what insights we can extract from this list.
 
@@ -223,7 +223,7 @@ rba_reactome_analysis_pdf(token = reactome$summary$token,
 
 ## PANTHER {#panther .heading2}
 
-PANTHER (protein analysis through evolutionary relationships) is a project that provides classification systems of genes and proteins. PANTHER also provides an enrichment service. In fact, the enrichment tool available on the [Gene Ontology (GO) website](http://geneontology.org/ "Gene Ontology Resource - Unifying Biology") is powered by [PANTHER](http://pantherdb.org/). Just like the previous sections, we will only review the enrichment functionality here; for an in-depth review of PANTHER refer to the vignette article "[PANTHER & rbioapi](rbioapi_panther.html "2.D: PANTHER & rbioapi")".
+PANTHER (protein analysis through evolutionary relationships) is a project that provides classification systems of genes and proteins. PANTHER also provides an enrichment service. In fact, the enrichment tool available on the [Gene Ontology (GO) website](https://geneontology.org/ "Gene Ontology Resource - Unifying Biology") is powered by [PANTHER](https://pantherdb.org/). Just like the previous sections, we will only review the enrichment functionality here; for an in-depth review of PANTHER refer to the vignette article "[PANTHER & rbioapi](rbioapi_panther.html "2.D: PANTHER & rbioapi")".
 
 To perform the analysis, first, we need to choose the classifications (i.e., gene sets) that we want to compare our results against it. To retrieve a list of available gene sets, we call the following function:
 
@@ -246,7 +246,7 @@ if (is.data.frame(panther_sets)) {
 }
 ```
 
-The Gene Ontology (GO) project is one of the pinnacles of scientists' collective effort in bioinformatics. The GO Consortium provides a comprehensive model of biological systems. In short, GO curates a thoroughly designed directed acyclic graph (DAG) of ontologies. You may think of it as a tree of terms, where as it branches out, the terms become more specific). Each protein may be annotated with one or more terms. The terms are organized in three domains: "Molecular Function," "Biological Process," and "Cellular Component". GO slim datasets refer to subsets which are a cut-down version of GO terms. If you are not familiar with GO, I strongly encourage you to see this page and follow the links it provides: [About the GO resource](http://geneontology.org/docs/introduction-to-go-resource/ "About the GO resource").
+The Gene Ontology (GO) project is one of the pinnacles of scientists' collective effort in bioinformatics. The GO Consortium provides a comprehensive model of biological systems. In short, GO curates a thoroughly designed directed acyclic graph (DAG) of ontologies. You may think of it as a tree of terms, where as it branches out, the terms become more specific). Each protein may be annotated with one or more terms. The terms are organized in three domains: "Molecular Function," "Biological Process," and "Cellular Component". GO slim datasets refer to subsets which are a cut-down version of GO terms. If you are not familiar with GO, I strongly encourage you to see this page and follow the links it provides: [About the GO resource](https://geneontology.org/docs/introduction-to-go-resource/ "About the GO resource").
 
 Here, we demonstrate the enrichment analysis using the Biological Process domain. Note that you should enter the "id" of the datasets, not its label. For example, entering "biological_process" is incorrect, you should rather enter the following:.
 
@@ -293,7 +293,7 @@ In addition to proteins interaction data, STRING also curates proteins/genes ann
 
 -   Gene sets also available in other services:
 
-    1.  [Gene Ontology](http://geneontology.org/ "Gene Ontology Resource - Unifying Biology") domains: Molecular Function, Biological Process, and Cellular Component
+    1.  [Gene Ontology](https://geneontology.org/ "Gene Ontology Resource - Unifying Biology") domains: Molecular Function, Biological Process, and Cellular Component
 
     2.  [COMPARTMENTS](https://academic.oup.com/database/article/doi/10.1093/database/bau012/2633793 "Subcellular localization database")
 

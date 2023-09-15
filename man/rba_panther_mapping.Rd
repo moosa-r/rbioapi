@@ -30,7 +30,7 @@ Using this function, you can search your genes in PANTHER database and
 }
 \section{Corresponding API Resources}{
 
- "GET http://www.pantherdb.org/services/oai/pantherdb/geneinfo"
+ "GET https://www.pantherdb.org/services/oai/pantherdb/geneinfo"
 }
 
 \examples{
@@ -48,10 +48,10 @@ rba_panther_mapping(genes = c("Cd40", 7124, "ENSG00000203747", "P33681"),
   tool, enhancer regions and extensive API, Nucleic Acids Research,
   Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
   https://doi.org/10.1093/nar/gkaa1106
-  \item \href{http://www.pantherdb.org/services/details.jsp}{PANTHER
+  \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
   Services Details}
   \item
-  \href{http://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
+  \href{https://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
   note on PANTHER website}
   }
 }

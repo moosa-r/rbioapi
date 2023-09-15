@@ -36,8 +36,8 @@ Depending on the arguments, a data frame or a character vectors
 }
 \description{
 miRBase miRNA accession could refer to either mature or precursor miRNAs.
-  (see: \href{https://mirbase.org/help/nomenclature.shtml}{miRNA naming
-  conventions}). Use this function to mature miRNA accession to
+  (see: \href{https://rnajournal.cshlp.org/content/9/3/277}{A uniform system
+  for microRNA annotation}). Use this function to mature miRNA accession to
   corresponding miRNA accessions or vice versa.
 }
 \section{Corresponding API Resources}{

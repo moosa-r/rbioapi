@@ -270,8 +270,8 @@ rba_mieaa_convert_version <- function(mirna,
 #' Convert Between Mature and precursor miRNA Accession
 #'
 #' miRBase miRNA accession could refer to either mature or precursor miRNAs.
-#'   (see: \href{https://mirbase.org/help/nomenclature.shtml}{miRNA naming
-#'   conventions}). Use this function to mature miRNA accession to
+#'   (see: \href{https://rnajournal.cshlp.org/content/9/3/277}{A uniform system
+#'   for microRNA annotation}). Use this function to mature miRNA accession to
 #'   corresponding miRNA accessions or vice versa.
 #'
 #' @param mirna A vector of miRNA accessions to be converted.
