@@ -74,8 +74,7 @@ navbar:
 reference:
 - title: "Helper functions"
   desc: >
-    These functions serve as helpers to the overall
-    exprerince of rbioapi.
+    Functions that assist you with the overall experience of rbioapi
   contents:
     - rba_options
     - rba_connection_test
@@ -83,41 +82,45 @@ reference:
 
 - title: Enrichr (rba_enrichr_*)
   desc: >
-    Functions that connect you to miEAA (miRNA Enrichment Analysis and
-    Annotation Tool) API resources.
+    Functions that connect you to [Enrichr](https://maayanlab.cloud/Enrichr/)
+    (Gene list enrichment analysis tool) API resources.
+
   contents:
     - starts_with("rba_enrichr")
 
 - title: JASPAR (rba_jaspar_*)
   desc: >
-    Functions that connect you to JASPAR (a database of curated
-    transcription factor binding profiles) API resources.
+    Functions that connect you to [JASPAR](https://jaspar.genereg.net/)
+    (Database of transcription factor binding profiles) API resources.
   contents:
     - starts_with("rba_jaspar")
 
 - title: miEAA (rba_mieaa_*)
   desc: >
-    Functions that connect you to miEAA (miRNA Enrichment Analysis and
-    Annotation Tool) API resources.
+    Functions that connect you to [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2/)
+    (miRNA Enrichment Analysis and Annotation Tool) API resources.
   contents:
     - starts_with("rba_mieaa")
 
 - title: PANTHER (rba_panther_*)
   desc: >
-    Functions that connect you to PANTHER (Protein Analysis THrough
+    Functions that connect you to [PANTHER](https://www.pantherdb.org/)
+    (Protein Analysis THrough
     Evolutionary Relationships) API resources.
   contents:
     - starts_with("rba_panther")
 
 - title: Reactome Analysis Services (rba_reactome_*)
   desc: >
-    Functions that connect you to Reactome Analysis services API resources.
+    Functions that connect you to [Reactome](https://reactome.org/)
+    pathway database's Analysis services API resources.
   contents:
     - starts_with("rba_reactome_analysis")
 
 - title: Reactome Contents Services (rba_reactome_*)
   desc: >
-    Functions that connect you to Reactome Contents Services API resources.
+    Functions that connect you to [Reactome](https://reactome.org/)
+    pathway database's Contents Services API resources.
 - subtitle: Database Info Queries
   contents:
     - rba_reactome_version
@@ -165,13 +168,14 @@ reference:
 
 - title: STRING (rba_string_*)
   desc: >
-    Functions that connect you to STRING (PPI database) API resources.
+    Functions that connect you to [STRING](https://string-db.org/)
+    (Functional protein association networks) API resources.
   contents:
     - starts_with("rba_string")
 
 - title: UniProt (rba_uniprot_*)
   desc: >
-    Functions that connect you to UniProt ( Universal Protein Resource)
+    Functions that connect you to [UniProt](https://www.uniprot.org/) (Universal Protein Resource)
     API resources.
 - subtitle: Coordinates
   contents:
