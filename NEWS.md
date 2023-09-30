@@ -1,4 +1,12 @@
-# rbioapi 0.7.9 (Current CRAN version)
+# rbioapi 0.8.0 (Current CRAN version)
+
+* Move to STRING v12.
+
+* Incorporate the recent changes in PANTHER and MIEAA API.
+
+* Minor improvements and fixes.
+
+# rbioapi 0.7.9
 
 * Stability improvements.
 
