@@ -198,19 +198,19 @@ rbioapi is an interface between you and other databases and services. Thus, if y
 
 ## How to cite the databases and web services
 
--   [How to cite Enrichr](rbioapi_enrichr.html#citations "How to cite Enrichr"). (See on [Enrichr website](https://maayanlab.cloud/Enrichr/help#terms))
+-   [How to cite Enrichr](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html#citations "How to cite Enrichr"). (See on [Enrichr website](https://maayanlab.cloud/Enrichr/help#terms))
 
--   [How to cite JASPAR](rbioapi_jaspar.html#citations "How to cite JASPAR"). (See on [JASPAR website](https://jaspar.genereg.net/faq/))
+-   [How to cite JASPAR](https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html#citations "How to cite JASPAR"). (See on [JASPAR website](https://jaspar.genereg.net/faq/))
 
--   [How to cite miEAA](rbioapi_mieaa.html#citations "How to cite miEAA"). (See on [miEAA website](https://ccb-compute2.cs.uni-saarland.de/mieaa2))
+-   [How to cite miEAA](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html#citations "How to cite miEAA"). (See on [miEAA website](https://ccb-compute2.cs.uni-saarland.de/mieaa2))
 
--   [How to cite PANTHER](rbioapi_panther.html#citations "How to cite PANTHER"). (See on [PANTHER website](https://www.pantherdb.org/publications.jsp#HowToCitePANTHER))
+-   [How to cite PANTHER](https://rbioapi.moosa-r.com/articles/rbioapi_panther.html#citations "How to cite PANTHER"). (See on [PANTHER website](https://www.pantherdb.org/publications.jsp#HowToCitePANTHER))
 
--   [How to cite Reactome](rbioapi_reactome.html#citations "How to cite Reactome"). (See on [Reactome website](https://reactome.org/cite))
+-   [How to cite Reactome](https://rbioapi.moosa-r.com/articles/rbioapi_reactome.html#citations "How to cite Reactome"). (See on [Reactome website](https://reactome.org/cite))
 
--   [How to cite STRING](rbioapi_string.html#citations "How to cite STRING"). (See on [STRING website](https://string-db.org/cgi/about?footer_active_subpage=references))
+-   [How to cite STRING](https://rbioapi.moosa-r.com/articles/rbioapi_string.html#citations "How to cite STRING"). (See on [STRING website](https://string-db.org/cgi/about?footer_active_subpage=references))
 
--   [How to cite UniProt](rbioapi_uniprot.html#citations "How to cite UniProt"). (See on [UniProt website](https://www.uniprot.org/help/publications))
+-   [How to cite UniProt](https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html#citations "How to cite UniProt"). (See on [UniProt website](https://www.uniprot.org/help/publications))
 
 ## Code of conduct
 This package, rbioapi, is an unofficial interface implementation and is not associated, endorsed, or officially connected in any way with the original databases and web services. The creators and maintainers of rbioapi are independent entities and have no official relationship with those databases and web services.

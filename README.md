@@ -334,33 +334,33 @@ used.
 ## How to cite the databases and web services
 
 - [How to cite
-  Enrichr](rbioapi_enrichr.html#citations "How to cite Enrichr"). (See
+  Enrichr](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html#citations "How to cite Enrichr"). (See
   on [Enrichr website](https://maayanlab.cloud/Enrichr/help#terms))
 
 - [How to cite
-  JASPAR](rbioapi_jaspar.html#citations "How to cite JASPAR"). (See on
+  JASPAR](https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html#citations "How to cite JASPAR"). (See on
   [JASPAR website](https://jaspar.genereg.net/faq/))
 
-- [How to cite miEAA](rbioapi_mieaa.html#citations "How to cite miEAA").
+- [How to cite miEAA](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html#citations "How to cite miEAA").
   (See on [miEAA
   website](https://ccb-compute2.cs.uni-saarland.de/mieaa2))
 
 - [How to cite
-  PANTHER](rbioapi_panther.html#citations "How to cite PANTHER"). (See
+  PANTHER](https://rbioapi.moosa-r.com/articles/rbioapi_panther.html#citations "How to cite PANTHER"). (See
   on [PANTHER
   website](https://www.pantherdb.org/publications.jsp#HowToCitePANTHER))
 
 - [How to cite
-  Reactome](rbioapi_reactome.html#citations "How to cite Reactome").
+  Reactome](https://rbioapi.moosa-r.com/articles/rbioapi_reactome.html#citations "How to cite Reactome").
   (See on [Reactome website](https://reactome.org/cite))
 
 - [How to cite
-  STRING](rbioapi_string.html#citations "How to cite STRING"). (See on
+  STRING](https://rbioapi.moosa-r.com/articles/rbioapi_string.html#citations "How to cite STRING"). (See on
   [STRING
   website](https://string-db.org/cgi/about?footer_active_subpage=references))
 
 - [How to cite
-  UniProt](rbioapi_uniprot.html#citations "How to cite UniProt"). (See
+  UniProt](https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html#citations "How to cite UniProt"). (See
   on [UniProt website](https://www.uniprot.org/help/publications))
 
 ## Code of conduct
