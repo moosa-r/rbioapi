@@ -15,8 +15,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="2.D: PANTHER &amp; rbioapi">
 <meta property="og:description" content="Connect to PANTHER in R with rbioapi package. 
@@ -108,17 +108,17 @@
 
 
 
-<script src="rbioapi_panther_files/htmlwidgets-1.6.2/htmlwidgets.js"></script><link href="rbioapi_panther_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="rbioapi_panther_files/datatables-binding-0.29/datatables.js"></script><link href="rbioapi_panther_files/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+<script src="rbioapi_panther_files/htmlwidgets-1.6.3/htmlwidgets.js"></script><link href="rbioapi_panther_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="rbioapi_panther_files/datatables-binding-0.30/datatables.js"></script><link href="rbioapi_panther_files/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="rbioapi_panther_files/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="rbioapi_panther_files/dt-core-1.13.4/js/jquery.dataTables.min.js"></script><link href="rbioapi_panther_files/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="rbioapi_panther_files/crosstalk-1.2.0/js/crosstalk.min.js"></script><div class="row">
+<script src="rbioapi_panther_files/dt-core-1.13.4/js/jquery.dataTables.min.js"></script><link href="rbioapi_panther_files/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="rbioapi_panther_files/crosstalk-1.2.1/js/crosstalk.min.js"></script><div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>2.D: PANTHER &amp; rbioapi</h1>
                         <h4 data-toc-skip class="author">Moosa
 Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2023-09-30</h4>
+            <h4 data-toc-skip class="date">2023-12-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/HEAD/vignettes/rbioapi_panther.Rmd" class="external-link"><code>vignettes/rbioapi_panther.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_panther.Rmd</code></div>
@@ -203,8 +203,8 @@ webpage.</a>. Here is a usage example:</p>
 <span>                               annot_dataset <span class="op">=</span> <span class="st">"ANNOT_TYPE_ID_PANTHER_PATHWAY"</span>,</span>
 <span>                               cutoff <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Performing over-representation enrichment analysis of 15 input genes of organism 9606 against ANNOT_TYPE_ID_PANTHER_PATHWAY datasets.</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-a1971131543aff740020" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-a1971131543aff740020">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"],[4,4,4,3,4,4,3,2,7,2,3,2,2,2,2],[219.648,75.22191780821919,66.15903614457831,117.6685714285714,37.61095890410959,28.74973821989529,46.8,130.7428571428572,0.5340150041678244,52.8,15.71908396946565,38.67042253521127,32.68571428571429,22.3219512195122,19.89565217391304],[6.875105562061481e-07,1.918836737742356e-05,2.095109716265703e-05,0.000104337843838464,0.0001113729865253679,0.000262455848742311,0.0008389335737850242,0.002495922041632314,0.003250018145109793,0.01114755299368631,0.01248809143274361,0.01692450968569281,0.0216094572451677,0.04185624186330583,0.048738657934943],[0.01821095571095571,0.05317599067599067,0.06046037296037297,0.025495337995338,0.1063519813519813,0.1391317016317016,0.06410256410256411,0.0152972027972028,13.10824592074592,0.03787878787878788,0.1908508158508159,0.05171911421911422,0.06118881118881118,0.0895979020979021,0.1005244755244755],[25,73,83,35,146,191,88,21,17995,52,262,71,84,123,138],[4.270251901901541e-09,2.383648121419076e-07,3.903931148321185e-07,2.592244567415254e-06,3.458788401408939e-06,9.78096330716687e-06,3.647537277326192e-05,0.0001240209710127858,0.000181678032956448,0.0006923945958811372,0.0008532236382619858,0.00126145413806406,0.001744863007373789,0.003639673205504854,0.004540868751702764],["+","+","+","+","+","+","+","+","-","+","+","+","+","+","+"],["P00008","P04393","P00016","P00009","P00029","P00034","P00059","P00007",null,"P04398","P00031","P00010","P00053","P00021","P00018"],["Axon guidance mediated by Slit/Robo","Ras Pathway","Cytoskeletal regulation by Rho GTPase","Axon guidance mediated by netrin","Huntington disease","Integrin signalling pathway","p53 pathway","Axon guidance mediated by semaphorins","UNCLASSIFIED","p53 pathway feedback loops 2","Inflammation mediated by chemokine and cytokine signaling pathway","B cell activation","T cell activation","FGF signaling pathway","EGF receptor signaling pathway"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>number_in_list<\/th>\n      <th>fold_enrichment<\/th>\n      <th>fdr<\/th>\n      <th>expected<\/th>\n      <th>number_in_reference<\/th>\n      <th>pValue<\/th>\n      <th>plus_minus<\/th>\n      <th>term.id<\/th>\n      <th>term.label<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p><strong>Please Note:</strong> Other services supported by rbioapi
+<div class="datatables html-widget html-fill-item" id="htmlwidget-2d443b32ee371f42d1b7" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-2d443b32ee371f42d1b7">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"],[4,4,4,3,4,4,3,2,7,2,3,2,2,2,2],[219.648,75.22191780821919,66.15903614457831,117.6685714285714,37.61095890410959,28.74973821989529,46.8,130.7428571428572,0.5340150041678244,52.8,15.71908396946565,38.67042253521127,32.68571428571429,22.3219512195122,19.89565217391304],[6.875105562061481e-07,1.918836737742356e-05,2.095109716265703e-05,0.000104337843838464,0.0001113729865253679,0.000262455848742311,0.0008389335737850242,0.002495922041632314,0.003250018145109793,0.01114755299368631,0.01248809143274361,0.01692450968569281,0.0216094572451677,0.04185624186330583,0.048738657934943],[0.01821095571095571,0.05317599067599067,0.06046037296037297,0.025495337995338,0.1063519813519813,0.1391317016317016,0.06410256410256411,0.0152972027972028,13.10824592074592,0.03787878787878788,0.1908508158508159,0.05171911421911422,0.06118881118881118,0.0895979020979021,0.1005244755244755],[25,73,83,35,146,191,88,21,17995,52,262,71,84,123,138],[4.270251901901541e-09,2.383648121419076e-07,3.903931148321185e-07,2.592244567415254e-06,3.458788401408939e-06,9.78096330716687e-06,3.647537277326192e-05,0.0001240209710127858,0.000181678032956448,0.0006923945958811372,0.0008532236382619858,0.00126145413806406,0.001744863007373789,0.003639673205504854,0.004540868751702764],["+","+","+","+","+","+","+","+","-","+","+","+","+","+","+"],["P00008","P04393","P00016","P00009","P00029","P00034","P00059","P00007",null,"P04398","P00031","P00010","P00053","P00021","P00018"],["Axon guidance mediated by Slit/Robo","Ras Pathway","Cytoskeletal regulation by Rho GTPase","Axon guidance mediated by netrin","Huntington disease","Integrin signalling pathway","p53 pathway","Axon guidance mediated by semaphorins","UNCLASSIFIED","p53 pathway feedback loops 2","Inflammation mediated by chemokine and cytokine signaling pathway","B cell activation","T cell activation","FGF signaling pathway","EGF receptor signaling pathway"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>number_in_list<\/th>\n      <th>fold_enrichment<\/th>\n      <th>fdr<\/th>\n      <th>expected<\/th>\n      <th>number_in_reference<\/th>\n      <th>pValue<\/th>\n      <th>plus_minus<\/th>\n      <th>term.id<\/th>\n      <th>term.label<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p><strong>Please Note:</strong> Other services supported by rbioapi
 also provide Over-representation analysis tools. Please see the vignette
 article <a href="rbioapi_do_enrich.html">Do with rbioapi:
 Over-Representation (Enrichment) Analysis in R</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html">link
@@ -255,7 +255,7 @@ vignette index</a></p></li>
 <div class="section level2 heading2">
 <h2 class="heading2" id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
-<pre><code><span><span class="co">#&gt; R version 4.3.1 (2023-06-16)</span></span>
+<pre><code><span><span class="co">#&gt; R version 4.3.2 (2023-10-31)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
 <span><span class="co">#&gt; Running under: Ubuntu 22.04.3 LTS</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -279,15 +279,15 @@ vignette index</a></p></li>
 <span><span class="co">#&gt; [1] rbioapi_0.8.0</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span><span class="co">#&gt;  [1] vctrs_0.6.3       httr_1.4.7        cli_3.6.1         knitr_1.44       </span></span>
-<span><span class="co">#&gt;  [5] rlang_1.1.1       xfun_0.40         stringi_1.7.12    purrr_1.0.2      </span></span>
-<span><span class="co">#&gt;  [9] textshaping_0.3.6 jsonlite_1.8.7    glue_1.6.2        DT_0.29          </span></span>
-<span><span class="co">#&gt; [13] rprojroot_2.0.3   htmltools_0.5.6   ragg_1.2.5        sass_0.4.7       </span></span>
-<span><span class="co">#&gt; [17] rmarkdown_2.25    crosstalk_1.2.0   evaluate_0.21     jquerylib_0.1.4  </span></span>
-<span><span class="co">#&gt; [21] ellipsis_0.3.2    fastmap_1.1.1     yaml_2.3.7        lifecycle_1.0.3  </span></span>
-<span><span class="co">#&gt; [25] memoise_2.0.1     stringr_1.5.0     compiler_4.3.1    fs_1.6.3         </span></span>
-<span><span class="co">#&gt; [29] htmlwidgets_1.6.2 systemfonts_1.0.4 digest_0.6.33     R6_2.5.1         </span></span>
-<span><span class="co">#&gt; [33] curl_5.0.2        magrittr_2.0.3    bslib_0.5.1       tools_4.3.1      </span></span>
+<span><span class="co">#&gt;  [1] vctrs_0.6.4       httr_1.4.7        cli_3.6.1         knitr_1.45       </span></span>
+<span><span class="co">#&gt;  [5] rlang_1.1.2       xfun_0.41         stringi_1.8.2     purrr_1.0.2      </span></span>
+<span><span class="co">#&gt;  [9] textshaping_0.3.7 jsonlite_1.8.7    glue_1.6.2        DT_0.30          </span></span>
+<span><span class="co">#&gt; [13] rprojroot_2.0.4   htmltools_0.5.7   ragg_1.2.6        sass_0.4.7       </span></span>
+<span><span class="co">#&gt; [17] rmarkdown_2.25    crosstalk_1.2.1   evaluate_0.23     jquerylib_0.1.4  </span></span>
+<span><span class="co">#&gt; [21] ellipsis_0.3.2    fastmap_1.1.1     yaml_2.3.7        lifecycle_1.0.4  </span></span>
+<span><span class="co">#&gt; [25] memoise_2.0.1     stringr_1.5.1     compiler_4.3.2    fs_1.6.3         </span></span>
+<span><span class="co">#&gt; [29] htmlwidgets_1.6.3 systemfonts_1.0.5 digest_0.6.33     R6_2.5.1         </span></span>
+<span><span class="co">#&gt; [33] curl_5.1.0        magrittr_2.0.3    bslib_0.6.1       tools_4.3.2      </span></span>
 <span><span class="co">#&gt; [37] pkgdown_2.0.7     cachem_1.0.8      desc_1.4.2</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

@@ -15,8 +15,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="2.B: JASPAR &amp; rbioapi">
 <meta property="og:description" content="Connect to JASPAR in R with rbioapi package. 
@@ -115,7 +115,7 @@
                         <h4 data-toc-skip class="author">Moosa
 Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2023-09-30</h4>
+            <h4 data-toc-skip class="date">2023-12-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/HEAD/vignettes/rbioapi_jaspar.Rmd" class="external-link"><code>vignettes/rbioapi_jaspar.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_jaspar.Rmd</code></div>
@@ -130,7 +130,7 @@ Rezwani</h4>
 <p>Directly quoting from Fornes O, Castro-Mondragon JA, Khan A, et
 al:</p>
 <blockquote>
-<p>JASPAR (<a href="https://jaspar.genereg.net" class="external-link">https://jaspar.genereg.net)</a> is an
+<p>JASPAR (<a href="https://jaspar.elixir.no" class="external-link">https://jaspar.elixir.no)</a> is an
 open-access database of curated, non-redundant transcription factor
 (TF)-binding profiles stored as position frequency matrices (PFMs) for
 TFs across multiple species in six taxonomic groups. In this 8th release
@@ -170,14 +170,14 @@ database releases.</p>
 </h4>
 <p>Within a release, Matrix profiles are organized into collections, You
 can use <code><a href="../reference/rba_jaspar_collections.html">rba_jaspar_collections()</a></code> to get a list of available
-collections, or read “JASPAR Collections” section in <a href="https://jaspar.genereg.net/docs/" title="JASPAR Documentation" class="external-link">documentation page in JASPAR web-site</a>
+collections, or read “JASPAR Collections” section in <a href="https://jaspar.elixir.no/docs/" title="JASPAR Documentation" class="external-link">documentation page in JASPAR web-site</a>
 for a thorough review.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## To get a list of available collection in release 2020:</span></span>
 <span><span class="fu"><a href="../reference/rba_jaspar_collections.html">rba_jaspar_collections</a></span><span class="op">(</span>release <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
-<span><span class="co">#&gt;          name                                                        url</span></span>
-<span><span class="co">#&gt; 1        CORE        https://jaspar.genereg.net/api/v1/collections/CORE/</span></span>
-<span><span class="co">#&gt; 2 UNVALIDATED https://jaspar.genereg.net/api/v1/collections/UNVALIDATED/</span></span>
+<span><span class="co">#&gt;          name                                                      url</span></span>
+<span><span class="co">#&gt; 1        CORE        https://jaspar.elixir.no/api/v1/collections/CORE/</span></span>
+<span><span class="co">#&gt; 2 UNVALIDATED https://jaspar.elixir.no/api/v1/collections/UNVALIDATED/</span></span>
 <span></span>
 <span></span>
 <span><span class="co">## You can list information of all matrices available in a collection:</span></span>
@@ -191,17 +191,18 @@ main taxonomic groups:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## To get a list of taxonomic groups in release 2020:</span></span>
 <span><span class="fu"><a href="../reference/rba_jaspar_taxons.html">rba_jaspar_taxons</a></span><span class="op">(</span>release <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
-<span><span class="co">#&gt;             name                                                    url</span></span>
-<span><span class="co">#&gt; 1         plants        https://jaspar.genereg.net/api/v1/taxon/plants/</span></span>
-<span><span class="co">#&gt; 2    vertebrates   https://jaspar.genereg.net/api/v1/taxon/vertebrates/</span></span>
-<span><span class="co">#&gt; 3        insects       https://jaspar.genereg.net/api/v1/taxon/insects/</span></span>
-<span><span class="co">#&gt; 4   urochordates  https://jaspar.genereg.net/api/v1/taxon/urochordates/</span></span>
-<span><span class="co">#&gt; 5      nematodes     https://jaspar.genereg.net/api/v1/taxon/nematodes/</span></span>
-<span><span class="co">#&gt; 6          fungi         https://jaspar.genereg.net/api/v1/taxon/fungi/</span></span>
-<span><span class="co">#&gt; 7     trematodes    https://jaspar.genereg.net/api/v1/taxon/trematodes/</span></span>
-<span><span class="co">#&gt; 8  dictyostelium https://jaspar.genereg.net/api/v1/taxon/dictyostelium/</span></span>
-<span><span class="co">#&gt; 9       cnidaria      https://jaspar.genereg.net/api/v1/taxon/cnidaria/</span></span>
-<span><span class="co">#&gt; 10      oomycota      https://jaspar.genereg.net/api/v1/taxon/oomycota/</span></span>
+<span><span class="co">#&gt;             name                                                  url</span></span>
+<span><span class="co">#&gt; 1         plants        https://jaspar.elixir.no/api/v1/taxon/plants/</span></span>
+<span><span class="co">#&gt; 2    vertebrates   https://jaspar.elixir.no/api/v1/taxon/vertebrates/</span></span>
+<span><span class="co">#&gt; 3        insects       https://jaspar.elixir.no/api/v1/taxon/insects/</span></span>
+<span><span class="co">#&gt; 4   urochordates  https://jaspar.elixir.no/api/v1/taxon/urochordates/</span></span>
+<span><span class="co">#&gt; 5      nematodes     https://jaspar.elixir.no/api/v1/taxon/nematodes/</span></span>
+<span><span class="co">#&gt; 6          fungi         https://jaspar.elixir.no/api/v1/taxon/fungi/</span></span>
+<span><span class="co">#&gt; 7        diatoms       https://jaspar.elixir.no/api/v1/taxon/diatoms/</span></span>
+<span><span class="co">#&gt; 8     trematodes    https://jaspar.elixir.no/api/v1/taxon/trematodes/</span></span>
+<span><span class="co">#&gt; 9  dictyostelium https://jaspar.elixir.no/api/v1/taxon/dictyostelium/</span></span>
+<span><span class="co">#&gt; 10      cnidaria      https://jaspar.elixir.no/api/v1/taxon/cnidaria/</span></span>
+<span><span class="co">#&gt; 11      oomycota      https://jaspar.elixir.no/api/v1/taxon/oomycota/</span></span>
 <span></span>
 <span></span>
 <span><span class="co">## You can list information of all matrices available in a taxonomic group:</span></span>
@@ -223,20 +224,20 @@ group consist of species:</p>
 <span><span class="co">#&gt; 4   3702             Arabidopsis thaliana</span></span>
 <span><span class="co">#&gt; 5   9913                       Bos taurus</span></span>
 <span><span class="co">#&gt; 6   6238          Caenorhabditis briggsae</span></span>
-<span><span class="co">#&gt;                                                url</span></span>
-<span><span class="co">#&gt; 1  https://jaspar.genereg.net/api/v1/species/5037/</span></span>
-<span><span class="co">#&gt; 2  https://jaspar.genereg.net/api/v1/species/4151/</span></span>
-<span><span class="co">#&gt; 3 https://jaspar.genereg.net/api/v1/species/81972/</span></span>
-<span><span class="co">#&gt; 4  https://jaspar.genereg.net/api/v1/species/3702/</span></span>
-<span><span class="co">#&gt; 5  https://jaspar.genereg.net/api/v1/species/9913/</span></span>
-<span><span class="co">#&gt; 6  https://jaspar.genereg.net/api/v1/species/6238/</span></span>
-<span><span class="co">#&gt;                                         matrix_url</span></span>
-<span><span class="co">#&gt; 1  https://jaspar.genereg.net/api/v1/species/5037/</span></span>
-<span><span class="co">#&gt; 2  https://jaspar.genereg.net/api/v1/species/4151/</span></span>
-<span><span class="co">#&gt; 3 https://jaspar.genereg.net/api/v1/species/81972/</span></span>
-<span><span class="co">#&gt; 4  https://jaspar.genereg.net/api/v1/species/3702/</span></span>
-<span><span class="co">#&gt; 5  https://jaspar.genereg.net/api/v1/species/9913/</span></span>
-<span><span class="co">#&gt; 6  https://jaspar.genereg.net/api/v1/species/6238/</span></span>
+<span><span class="co">#&gt;                                              url</span></span>
+<span><span class="co">#&gt; 1  https://jaspar.elixir.no/api/v1/species/5037/</span></span>
+<span><span class="co">#&gt; 2  https://jaspar.elixir.no/api/v1/species/4151/</span></span>
+<span><span class="co">#&gt; 3 https://jaspar.elixir.no/api/v1/species/81972/</span></span>
+<span><span class="co">#&gt; 4  https://jaspar.elixir.no/api/v1/species/3702/</span></span>
+<span><span class="co">#&gt; 5  https://jaspar.elixir.no/api/v1/species/9913/</span></span>
+<span><span class="co">#&gt; 6  https://jaspar.elixir.no/api/v1/species/6238/</span></span>
+<span><span class="co">#&gt;                                       matrix_url</span></span>
+<span><span class="co">#&gt; 1  https://jaspar.elixir.no/api/v1/species/5037/</span></span>
+<span><span class="co">#&gt; 2  https://jaspar.elixir.no/api/v1/species/4151/</span></span>
+<span><span class="co">#&gt; 3 https://jaspar.elixir.no/api/v1/species/81972/</span></span>
+<span><span class="co">#&gt; 4  https://jaspar.elixir.no/api/v1/species/3702/</span></span>
+<span><span class="co">#&gt; 5  https://jaspar.elixir.no/api/v1/species/9913/</span></span>
+<span><span class="co">#&gt; 6  https://jaspar.elixir.no/api/v1/species/6238/</span></span>
 <span></span>
 <span><span class="co">## You can list information of all matrices available in a specie:</span></span>
 <span><span class="va">mat_in_human</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_species_matrices.html">rba_jaspar_species_matrices</a></span><span class="op">(</span>tax_id <span class="op">=</span> <span class="fl">9606</span><span class="op">)</span></span></code></pre></div>
@@ -306,42 +307,42 @@ two ways in which you can use this function:</p>
 <span><span class="co">## other elements which correspond to annotations and details</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">pfm_matrix</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 24</span></span>
-<span><span class="co">#&gt;  $ name         : chr "RFX2"</span></span>
 <span><span class="co">#&gt;  $ matrix_id    : chr "MA0600.2"</span></span>
-<span><span class="co">#&gt;  $ class        : chr "Fork head/winged helix factors"</span></span>
-<span><span class="co">#&gt;  $ tax_group    : chr "vertebrates"</span></span>
-<span><span class="co">#&gt;  $ type         : chr "HT-SELEX"</span></span>
-<span><span class="co">#&gt;  $ tfe_ids      : list()</span></span>
-<span><span class="co">#&gt;  $ sites_url    : NULL</span></span>
-<span><span class="co">#&gt;  $ source       : chr "23332764"</span></span>
-<span><span class="co">#&gt;  $ version      : int 2</span></span>
-<span><span class="co">#&gt;  $ pazar_tf_id  : list()</span></span>
-<span><span class="co">#&gt;  $ tfe_id       : list()</span></span>
-<span><span class="co">#&gt;  $ species      :'data.frame':   1 obs. of  2 variables:</span></span>
-<span><span class="co">#&gt;   ..$ tax_id: int 9606</span></span>
-<span><span class="co">#&gt;   ..$ name  : chr "Homo sapiens"</span></span>
+<span><span class="co">#&gt;  $ name         : chr "RFX2"</span></span>
 <span><span class="co">#&gt;  $ base_id      : chr "MA0600"</span></span>
-<span><span class="co">#&gt;  $ tffm         :List of 7</span></span>
-<span><span class="co">#&gt;   ..$ base_id        : chr "TFFM0576"</span></span>
-<span><span class="co">#&gt;   ..$ experiment_name: chr "CistromeDB_58298"</span></span>
-<span><span class="co">#&gt;   ..$ tffm_url       : chr "https://jaspar.genereg.net/api/v1/tffm/TFFM0576.1/"</span></span>
-<span><span class="co">#&gt;   ..$ log_p_detailed : num -6660</span></span>
-<span><span class="co">#&gt;   ..$ version        : int 1</span></span>
-<span><span class="co">#&gt;   ..$ tffm_id        : chr "TFFM0576.1"</span></span>
-<span><span class="co">#&gt;   ..$ log_p_1st_order: num -6275</span></span>
-<span><span class="co">#&gt;  $ versions_url : chr "https://jaspar.genereg.net/api/v1/matrix/MA0600/versions"</span></span>
-<span><span class="co">#&gt;  $ pazar_tf_ids : list()</span></span>
+<span><span class="co">#&gt;  $ version      : int 2</span></span>
 <span><span class="co">#&gt;  $ collection   : chr "CORE"</span></span>
-<span><span class="co">#&gt;  $ pubmed_ids   : chr "8754849"</span></span>
-<span><span class="co">#&gt;  $ medline      : chr "8754849"</span></span>
-<span><span class="co">#&gt;  $ remap_tf_name: chr "RFX2"</span></span>
-<span><span class="co">#&gt;  $ uniprot_ids  : chr "P48378"</span></span>
+<span><span class="co">#&gt;  $ sequence_logo: chr "https://jaspar.elixir.no/static/logos/svg/MA0600.2.svg"</span></span>
+<span><span class="co">#&gt;  $ versions_url : chr "https://jaspar.elixir.no/api/v1/matrix/MA0600/versions"</span></span>
+<span><span class="co">#&gt;  $ sites_url    : NULL</span></span>
 <span><span class="co">#&gt;  $ pfm          : num [1:4, 1:16] 1381 5653 4042 2336 270 ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "dimnames")=List of 2</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:4] "A" "C" "G" "T"</span></span>
 <span><span class="co">#&gt;   .. ..$ : NULL</span></span>
+<span><span class="co">#&gt;  $ class        : chr "Fork head/winged helix factors"</span></span>
 <span><span class="co">#&gt;  $ family       : chr "RFX-related factors"</span></span>
-<span><span class="co">#&gt;  $ sequence_logo: chr "https://jaspar.genereg.net/static/logos/svg/MA0600.2.svg"</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ tfe_id       : list()</span></span>
+<span><span class="co">#&gt;  $ medline      : chr "8754849"</span></span>
+<span><span class="co">#&gt;  $ pazar_tf_id  : list()</span></span>
+<span><span class="co">#&gt;  $ remap_tf_name: chr "RFX2"</span></span>
+<span><span class="co">#&gt;  $ source       : chr "23332764"</span></span>
+<span><span class="co">#&gt;  $ tax_group    : chr "vertebrates"</span></span>
+<span><span class="co">#&gt;  $ type         : chr "HT-SELEX"</span></span>
+<span><span class="co">#&gt;  $ tfe_ids      : list()</span></span>
+<span><span class="co">#&gt;  $ pubmed_ids   : chr "8754849"</span></span>
+<span><span class="co">#&gt;  $ pazar_tf_ids : list()</span></span>
+<span><span class="co">#&gt;  $ uniprot_ids  : chr "P48378"</span></span>
+<span><span class="co">#&gt;  $ species      :'data.frame':   1 obs. of  2 variables:</span></span>
+<span><span class="co">#&gt;   ..$ tax_id: int 9606</span></span>
+<span><span class="co">#&gt;   ..$ name  : chr "Homo sapiens"</span></span>
+<span><span class="co">#&gt;  $ tffm         :List of 7</span></span>
+<span><span class="co">#&gt;   ..$ tffm_id        : chr "TFFM0576.1"</span></span>
+<span><span class="co">#&gt;   ..$ base_id        : chr "TFFM0576"</span></span>
+<span><span class="co">#&gt;   ..$ version        : int 1</span></span>
+<span><span class="co">#&gt;   ..$ log_p_1st_order: num 6275</span></span>
+<span><span class="co">#&gt;   ..$ log_p_detailed : num 6660</span></span>
+<span><span class="co">#&gt;   ..$ experiment_name: chr "CistromeDB_58298"</span></span>
+<span><span class="co">#&gt;   ..$ tffm_url       : chr "https://jaspar.elixir.no/api/v1/tffm/TFFM0576.1/"</span></span></code></pre></div>
 </div>
 <div class="section level5">
 <h5 class="heading4" id="save-a-matrix-a-file-in-specific-format">Save a Matrix a File in Specific Format<a class="anchor" aria-label="anchor" href="#save-a-matrix-a-file-in-specific-format"></a>
@@ -435,42 +436,42 @@ format.</p>
 <span><span class="va">TFFM0056</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_tffm.html">rba_jaspar_tffm</a></span><span class="op">(</span><span class="st">"TFFM0056.3"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">TFFM0056</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 10</span></span>
-<span><span class="co">#&gt;  $ matrix_url     : chr "https://jaspar.genereg.net/api/v1/matrix/MA0039.4/"</span></span>
+<span><span class="co">#&gt;  $ tffm_id        : chr "TFFM0056.3"</span></span>
 <span><span class="co">#&gt;  $ base_id        : chr "TFFM0056"</span></span>
+<span><span class="co">#&gt;  $ version        : int 3</span></span>
+<span><span class="co">#&gt;  $ matrix_base_id : chr "MA0039"</span></span>
+<span><span class="co">#&gt;  $ matrix_id      : chr "MA0039.4"</span></span>
+<span><span class="co">#&gt;  $ matrix_url     : chr "https://jaspar.elixir.no/api/v1/matrix/MA0039.4/"</span></span>
 <span><span class="co">#&gt;  $ matrix_version : int 4</span></span>
 <span><span class="co">#&gt;  $ experiment_name: chr "CistromeDB_33718"</span></span>
-<span><span class="co">#&gt;  $ matrix_id      : chr "MA0039.4"</span></span>
-<span><span class="co">#&gt;  $ version        : int 3</span></span>
 <span><span class="co">#&gt;  $ first_order    :List of 5</span></span>
-<span><span class="co">#&gt;   ..$ log_p       : num -7420</span></span>
-<span><span class="co">#&gt;   ..$ summary_logo: chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_first_order_trained_summary_logo.svg"</span></span>
-<span><span class="co">#&gt;   ..$ hits        : chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_first_order_trained.hits.svg"</span></span>
-<span><span class="co">#&gt;   ..$ dense_logo  : chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_first_order_trained_dense_logo.svg"</span></span>
-<span><span class="co">#&gt;   ..$ xml         : chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_first_order_trained.xml"</span></span>
+<span><span class="co">#&gt;   ..$ log_p       : num 7420</span></span>
+<span><span class="co">#&gt;   ..$ dense_logo  : chr "https://jaspar.elixir.no/static/TFFM/TFFM0056.3/TFFM_first_order_trained_dense_logo.svg"</span></span>
+<span><span class="co">#&gt;   ..$ summary_logo: chr "https://jaspar.elixir.no/static/TFFM/TFFM0056.3/TFFM_first_order_trained_summary_logo.svg"</span></span>
+<span><span class="co">#&gt;   ..$ hits        : chr "https://jaspar.elixir.no/static/TFFM/TFFM0056.3/TFFM_first_order_trained.hits.svg"</span></span>
+<span><span class="co">#&gt;   ..$ xml         : chr "https://jaspar.elixir.no/static/TFFM/TFFM0056.3/TFFM_first_order_trained.xml"</span></span>
 <span><span class="co">#&gt;  $ detailed       :List of 5</span></span>
-<span><span class="co">#&gt;   ..$ log_p       : num -6854</span></span>
-<span><span class="co">#&gt;   ..$ summary_logo: chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_detailed_trained_summary_logo.svg"</span></span>
-<span><span class="co">#&gt;   ..$ hits        : chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_detailed_trained.hits.svg"</span></span>
-<span><span class="co">#&gt;   ..$ dense_logo  : chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_detailed_trained_dense_logo.svg"</span></span>
-<span><span class="co">#&gt;   ..$ xml         : chr "https://jaspar.genereg.net/static/TFFM/TFFM0056.3/TFFM_detailed_trained.xml"</span></span>
-<span><span class="co">#&gt;  $ tffm_id        : chr "TFFM0056.3"</span></span>
-<span><span class="co">#&gt;  $ matrix_base_id : chr "MA0039"</span></span></code></pre></div>
+<span><span class="co">#&gt;   ..$ log_p       : num 6854</span></span>
+<span><span class="co">#&gt;   ..$ dense_logo  : chr "https://jaspar.elixir.no/static/TFFM/TFFM0056.3/TFFM_detailed_trained_dense_logo.svg"</span></span>
+<span><span class="co">#&gt;   ..$ summary_logo: chr "https://jaspar.elixir.no/static/TFFM/TFFM0056.3/TFFM_detailed_trained_summary_logo.svg"</span></span>
+<span><span class="co">#&gt;   ..$ hits        : chr "https://jaspar.elixir.no/static/TFFM/TFFM0056.3/TFFM_detailed_trained.hits.svg"</span></span>
+<span><span class="co">#&gt;   ..$ xml         : chr "https://jaspar.elixir.no/static/TFFM/TFFM0056.3/TFFM_detailed_trained.xml"</span></span></code></pre></div>
 <hr>
 </div>
 <div class="section level3">
 <h3 class="heading2" id="citations">How to Cite?<a class="anchor" aria-label="anchor" href="#citations"></a>
 </h3>
-<p>To cite JASPAR (Please see <a href="https://jaspar.genereg.net/faq/" class="external-link uri">https://jaspar.genereg.net/faq/</a>):</p>
+<p>To cite JASPAR (Please see <a href="https://jaspar.elixir.no/faq/" class="external-link uri">https://jaspar.elixir.no/faq/</a>):</p>
 <ul>
-<li>Jaime A Castro-Mondragon, Rafael Riudavets-Puig, Ieva
-Rauluseviciute, Roza Berhanu Lemma, Laura Turchi, Romain Blanc-Mathieu,
-Jeremy Lucas, Paul Boddie, Aziz Khan, Nicolás Manosalva Pérez, Oriol
-Fornes, Tiffany Y Leung, Alejandro Aguirre, Fayrouz Hammal, Daniel
-Schmelter, Damir Baranasic, Benoit Ballester, Albin Sandelin, Boris
-Lenhard, Klaas Vandepoele, Wyeth W Wasserman, François Parcy, Anthony
-Mathelier, JASPAR 2022: the 9th release of the open-access database of
-transcription factor binding profiles, <em>Nucleic Acids Research</em>,
-Volume 50, Issue D1, 7 January 2022, Pages D165–D173, <a href="https://doi.org/10.1093/nar/gkab1113" class="external-link uri">https://doi.org/10.1093/nar/gkab1113</a>
+<li>Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R,
+Castro-Mondragon JA, Ferenc K, Kumar V, Lemma RB, Lucas J, Chèneby J,
+Baranasic D, Khan A, Fornes O, Gundersen S, Johansen M, Hovig E, Lenhard
+B, Sandelin A, Wasserman WW, Parcy F, Mathelier A <em>JASPAR 2024: 20th
+anniversary of the open-access database of transcription factor binding
+profiles</em> Nucleic Acids Res. in_press; <a href="https://doi.org/10.1093/nar/gkad1059" class="external-link uri">https://doi.org/10.1093/nar/gkad1059</a>
+</li>
+<li>Khan, A. and Mathelier, A. <em>JASPAR RESTful API: accessing JASPAR
+data from any programming language</em>. Bioinformatics, 2017, <a href="https://doi.org/10.1093/bioinformatics/btx804" class="external-link uri">https://doi.org/10.1093/bioinformatics/btx804</a>
 </li>
 </ul>
 <p>To cite rbioapi:</p>
@@ -498,7 +499,7 @@ vignette index</a></p></li>
 <div class="section level2">
 <h2 class="heading2" id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
-<pre><code><span><span class="co">#&gt; R version 4.3.1 (2023-06-16)</span></span>
+<pre><code><span><span class="co">#&gt; R version 4.3.2 (2023-10-31)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
 <span><span class="co">#&gt; Running under: Ubuntu 22.04.3 LTS</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -522,14 +523,14 @@ vignette index</a></p></li>
 <span><span class="co">#&gt; [1] rbioapi_0.8.0</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span><span class="co">#&gt;  [1] vctrs_0.6.3       httr_1.4.7        cli_3.6.1         knitr_1.44       </span></span>
-<span><span class="co">#&gt;  [5] rlang_1.1.1       xfun_0.40         stringi_1.7.12    purrr_1.0.2      </span></span>
-<span><span class="co">#&gt;  [9] textshaping_0.3.6 jsonlite_1.8.7    glue_1.6.2        rprojroot_2.0.3  </span></span>
-<span><span class="co">#&gt; [13] htmltools_0.5.6   ragg_1.2.5        sass_0.4.7        rmarkdown_2.25   </span></span>
-<span><span class="co">#&gt; [17] evaluate_0.21     jquerylib_0.1.4   fastmap_1.1.1     yaml_2.3.7       </span></span>
-<span><span class="co">#&gt; [21] lifecycle_1.0.3   memoise_2.0.1     stringr_1.5.0     compiler_4.3.1   </span></span>
-<span><span class="co">#&gt; [25] fs_1.6.3          systemfonts_1.0.4 digest_0.6.33     R6_2.5.1         </span></span>
-<span><span class="co">#&gt; [29] curl_5.0.2        magrittr_2.0.3    bslib_0.5.1       tools_4.3.1      </span></span>
+<span><span class="co">#&gt;  [1] vctrs_0.6.4       httr_1.4.7        cli_3.6.1         knitr_1.45       </span></span>
+<span><span class="co">#&gt;  [5] rlang_1.1.2       xfun_0.41         stringi_1.8.2     purrr_1.0.2      </span></span>
+<span><span class="co">#&gt;  [9] textshaping_0.3.7 jsonlite_1.8.7    glue_1.6.2        rprojroot_2.0.4  </span></span>
+<span><span class="co">#&gt; [13] htmltools_0.5.7   ragg_1.2.6        sass_0.4.7        rmarkdown_2.25   </span></span>
+<span><span class="co">#&gt; [17] evaluate_0.23     jquerylib_0.1.4   fastmap_1.1.1     yaml_2.3.7       </span></span>
+<span><span class="co">#&gt; [21] lifecycle_1.0.4   memoise_2.0.1     stringr_1.5.1     compiler_4.3.2   </span></span>
+<span><span class="co">#&gt; [25] fs_1.6.3          systemfonts_1.0.5 digest_0.6.33     R6_2.5.1         </span></span>
+<span><span class="co">#&gt; [29] curl_5.1.0        magrittr_2.0.3    bslib_0.6.1       tools_4.3.2      </span></span>
 <span><span class="co">#&gt; [33] pkgdown_2.0.7     cachem_1.0.8      desc_1.4.2</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

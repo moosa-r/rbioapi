@@ -15,8 +15,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="2.G: UniProt &amp; rbioapi">
 <meta property="og:description" content="Connect to UniProt in R with rbioapi package.
@@ -115,7 +115,7 @@
                         <h4 data-toc-skip class="author">Moosa
 Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2023-09-30</h4>
+            <h4 data-toc-skip class="date">2023-12-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/HEAD/vignettes/rbioapi_uniprot.Rmd" class="external-link"><code>vignettes/rbioapi_uniprot.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_uniprot.Rmd</code></div>
@@ -222,9 +222,9 @@ consider the following examples:</p>
 <span><span class="co">## As always, we use str() to inspect our object's structure</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">multi_prs1</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 6</span></span>
+<span><span class="co">#&gt;  $ P60953:List of 14</span></span>
 <span><span class="co">#&gt;  $ P24941:List of 14</span></span>
 <span><span class="co">#&gt;  $ P04637:List of 14</span></span>
-<span><span class="co">#&gt;  $ P60953:List of 14</span></span>
 <span><span class="co">#&gt;  $ Q02241:List of 14</span></span>
 <span><span class="co">#&gt;  $ P38398:List of 14</span></span>
 <span><span class="co">#&gt;  $ P06493:List of 14</span></span>
@@ -257,11 +257,11 @@ consider the following examples:</p>
 <span><span class="co">#&gt;  $ Q8NBR0:List of 14</span></span>
 <span><span class="co">#&gt;  $ Q13625:List of 14</span></span>
 <span><span class="co">#&gt;  $ Q7L0Q8:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q9UKI2:List of 14</span></span>
+<span><span class="co">#&gt;  $ Q6NZY7:List of 14</span></span>
 <span><span class="co">#&gt;  $ Q00587:List of 14</span></span>
 <span><span class="co">#&gt;  $ O14613:List of 14</span></span>
 <span><span class="co">#&gt;  $ Q5VT25:List of 14</span></span>
-<span><span class="co">#&gt;  $ Q9UKI2:List of 14</span></span>
-<span><span class="co">#&gt;  $ Q6NZY7:List of 14</span></span>
 <span><span class="co">#&gt;  $ Q6DT37:List of 14</span></span>
 <span><span class="co">#&gt;  $ Q9H3Q1:List of 14</span></span>
 <span><span class="co">#&gt;  $ Q07960:List of 14</span></span>
@@ -276,8 +276,8 @@ consider the following examples:</p>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">multi_prs3</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 17</span></span>
 <span><span class="co">#&gt;  $ P09703:List of 15</span></span>
-<span><span class="co">#&gt;  $ P0DTM9:List of 14</span></span>
 <span><span class="co">#&gt;  $ Q6SW98:List of 15</span></span>
+<span><span class="co">#&gt;  $ P0DTM9:List of 14</span></span>
 <span><span class="co">#&gt;  $ P33854:List of 14</span></span>
 <span><span class="co">#&gt;  $ P0DSV7:List of 15</span></span>
 <span><span class="co">#&gt;  $ P19063:List of 14</span></span>
@@ -497,7 +497,7 @@ vignette index</a></p></li>
 <div class="section level2">
 <h2 class="heading2" id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
-<pre><code><span><span class="co">#&gt; R version 4.3.1 (2023-06-16)</span></span>
+<pre><code><span><span class="co">#&gt; R version 4.3.2 (2023-10-31)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
 <span><span class="co">#&gt; Running under: Ubuntu 22.04.3 LTS</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -521,14 +521,14 @@ vignette index</a></p></li>
 <span><span class="co">#&gt; [1] rbioapi_0.8.0</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span><span class="co">#&gt;  [1] vctrs_0.6.3       httr_1.4.7        cli_3.6.1         knitr_1.44       </span></span>
-<span><span class="co">#&gt;  [5] rlang_1.1.1       xfun_0.40         stringi_1.7.12    purrr_1.0.2      </span></span>
-<span><span class="co">#&gt;  [9] textshaping_0.3.6 jsonlite_1.8.7    glue_1.6.2        rprojroot_2.0.3  </span></span>
-<span><span class="co">#&gt; [13] htmltools_0.5.6   ragg_1.2.5        sass_0.4.7        rmarkdown_2.25   </span></span>
-<span><span class="co">#&gt; [17] evaluate_0.21     jquerylib_0.1.4   fastmap_1.1.1     yaml_2.3.7       </span></span>
-<span><span class="co">#&gt; [21] lifecycle_1.0.3   memoise_2.0.1     stringr_1.5.0     compiler_4.3.1   </span></span>
-<span><span class="co">#&gt; [25] fs_1.6.3          systemfonts_1.0.4 digest_0.6.33     R6_2.5.1         </span></span>
-<span><span class="co">#&gt; [29] curl_5.0.2        magrittr_2.0.3    bslib_0.5.1       tools_4.3.1      </span></span>
+<span><span class="co">#&gt;  [1] vctrs_0.6.4       httr_1.4.7        cli_3.6.1         knitr_1.45       </span></span>
+<span><span class="co">#&gt;  [5] rlang_1.1.2       xfun_0.41         stringi_1.8.2     purrr_1.0.2      </span></span>
+<span><span class="co">#&gt;  [9] textshaping_0.3.7 jsonlite_1.8.7    glue_1.6.2        rprojroot_2.0.4  </span></span>
+<span><span class="co">#&gt; [13] htmltools_0.5.7   ragg_1.2.6        sass_0.4.7        rmarkdown_2.25   </span></span>
+<span><span class="co">#&gt; [17] evaluate_0.23     jquerylib_0.1.4   fastmap_1.1.1     yaml_2.3.7       </span></span>
+<span><span class="co">#&gt; [21] lifecycle_1.0.4   memoise_2.0.1     stringr_1.5.1     compiler_4.3.2   </span></span>
+<span><span class="co">#&gt; [25] fs_1.6.3          systemfonts_1.0.5 digest_0.6.33     R6_2.5.1         </span></span>
+<span><span class="co">#&gt; [29] curl_5.1.0        magrittr_2.0.3    bslib_0.6.1       tools_4.3.2      </span></span>
 <span><span class="co">#&gt; [33] pkgdown_2.0.7     cachem_1.0.8      desc_1.4.2</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
