@@ -52,9 +52,9 @@
                    jaspar = switch(
                      arg[[2]],
                      name = "JASPAR",
-                     url = "https://jaspar.genereg.net",
+                     url = "https://jaspar.elixir.no/",
                      pth = "api/v1/",
-                     ptn = "^(https?://)?(www\\.)?jaspar\\.genereg\\.net/api/",
+                     ptn = "^(https?://)?(www\\.)?jaspar\\.elixir\\.no/api/",
                      err_ptn = "^$"
                    ),
                    mieaa = switch(

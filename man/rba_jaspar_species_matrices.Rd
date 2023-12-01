@@ -6,7 +6,7 @@
 \usage{
 rba_jaspar_species_matrices(
   tax_id,
-  release = 2022,
+  release = 2024,
   only_last_version = FALSE,
   search = NULL,
   order = NULL,
@@ -19,8 +19,8 @@ rba_jaspar_species_matrices(
 \item{tax_id}{Numeric: NCBI taxonomic Identifier of species. Use
 \code{\link{rba_jaspar_species}} to get a list of supported Species.}
 
-\item{release}{Numeric: (default = 2022) Which JASPAR database release
-to use? Available options are: 2014, 2016, 2018, 2020, and 2022.}
+\item{release}{Numeric: (default = 2024) Which JASPAR database release
+to use? Available options are: 2024, 2022, 2020, 2018, 2016, and 2014.}
 
 \item{only_last_version}{Logical: (default = FALSE) If TRUE, only the
 latest version of a matrix profile will be returned.}
@@ -58,7 +58,7 @@ The results are paginated. You can control the page's size number
 }
 \section{Corresponding API Resources}{
 
- "GET "https://jaspar.genereg.net/api/v1/species/{tax_id}/"
+ "GET "https://jaspar.elixir.no/api/v1/species/{tax_id}/"
 }
 
 \examples{
@@ -69,19 +69,18 @@ rba_jaspar_species_matrices(tax_id = 9606, page_size = 100)
 }
 \references{
 \itemize{
-  \item Jaime A Castro-Mondragon, Rafael Riudavets-Puig, Ieva
-  Rauluseviciute, Roza Berhanu Lemma, Laura Turchi, Romain Blanc-Mathieu,
-  Jeremy Lucas, Paul Boddie, Aziz Khan, Nicolás Manosalva Pérez, Oriol
-  Fornes, Tiffany Y Leung, Alejandro Aguirre, Fayrouz Hammal, Daniel
-  Schmelter, Damir Baranasic, Benoit Ballester, Albin Sandelin, Boris
-  Lenhard, Klaas Vandepoele, Wyeth W Wasserman, François Parcy,
-  Anthony Mathelier, JASPAR 2022: the 9th release of the open-access
-  database of transcription factor binding profiles, Nucleic Acids
-  Research, Volume 50, Issue D1, 7 January 2022, Pages D165–D173,
-  https://doi.org/10.1093/nar/gkab1113
+  \item Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R,
+  Castro-Mondragon JA, Ferenc K, Kumar V, Lemma RB, Lucas J, Chèneby J,
+  Baranasic D, Khan A, Fornes O, Gundersen S, Johansen M, Hovig E, Lenhard
+  B, Sandelin A, Wasserman WW, Parcy F, Mathelier A JASPAR 2024:
+  20th anniversary of the open-access database of transcription factor
+  binding profiles Nucleic Acids Res. in_press; doi: 10.1093/nar/gkad1059
+  \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR data
+  from any programming language. Bioinformatics, 2017,
+  doi: 10.1093/bioinformatics/btx804
   \item
-  \href{https://jaspar.genereg.net/api/v1/docs/}{JASPAR API Documentation}
-  \item \href{https://jaspar.genereg.net/faq/}{Citations note
+  \href{https://jaspar.elixir.no/api/v1/docs/}{JASPAR API Documentation}
+  \item \href{https://jaspar.elixir.no/faq/}{Citations note
   on JASPAR website}
   }
 }

@@ -90,7 +90,7 @@ reference:
 
 - title: JASPAR (rba_jaspar_*)
   desc: >
-    Functions that connect you to [JASPAR](https://jaspar.genereg.net/)
+    Functions that connect you to [JASPAR](https://jaspar.elixir.no/)
     (Database of transcription factor binding profiles) API resources.
   contents:
     - starts_with("rba_jaspar")

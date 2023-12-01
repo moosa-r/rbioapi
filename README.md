@@ -44,7 +44,7 @@ On CRAN (Stable) version: (<https://cran.r-project.org/package=rbioapi>)
     vignette
     article](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html "rbioapi & Enrichr vignette article"))
     <sup>(new)</sup>
-2.  [JASPAR](https://jaspar.genereg.net/ "JASPAR - A database of transcription factor binding profiles")
+2.  [JASPAR](https://jaspar.elixir.no/ "JASPAR - A database of transcription factor binding profiles")
     ([rbioapi vignette
     article](https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html "rbioapi & Enrichr vignette article"))
     <sup>(new)</sup>
@@ -339,7 +339,7 @@ used.
 
 - [How to cite
   JASPAR](https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html#citations "How to cite JASPAR"). (See on
-  [JASPAR website](https://jaspar.genereg.net/faq/))
+  [JASPAR website](https://jaspar.elixir.no/faq/))
 
 - [How to cite miEAA](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html#citations "How to cite miEAA").
   (See on [miEAA

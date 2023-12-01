@@ -48,7 +48,7 @@ rbioapi is dedicated to **Biological or Medical** databases and web services. Cu
 On CRAN (Stable) version: (<https://cran.r-project.org/package=rbioapi>)
 
 1.  [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr") ([rbioapi vignette article](rbioapi_enrichr.html "rbioapi & Enrichr vignette article")) ^(new)^
-2.  [JASPAR](https://jaspar.genereg.net/ "JASPAR - A database of transcription factor binding profiles") ([rbioapi vignette article](rbioapi_jaspar.html "rbioapi & Enrichr vignette article")) ^(new)^
+2.  [JASPAR](https://jaspar.elixir.no/ "JASPAR - A database of transcription factor binding profiles") ([rbioapi vignette article](rbioapi_jaspar.html "rbioapi & Enrichr vignette article")) ^(new)^
 3.  [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "miRNA Enrichment Analysis and Annotation Tool (miEAA)") ([rbioapi vignette article](rbioapi_mieaa.html "rbioapi & miEAA vignette article"))
 4.  [PANTHER](https://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)") ([rbioapi vignette article](rbioapi_panther.html "rbioapi & PANTHER vignette article"))
 5.  [Reactome](https://reactome.org/) ([rbioapi vignette article](rbioapi_reactome.html "rbioapi & Reactome vignette article"))
@@ -216,7 +216,7 @@ rbioapi is an interface between you and other databases and services. Thus, if y
 
 -   [How to cite Enrichr](rbioapi_enrichr.html#citations "How to cite Enrichr"). (See on [Enrichr website](https://maayanlab.cloud/Enrichr/help#terms))
 
--   [How to cite JASPAR](rbioapi_jaspar.html#citations "How to cite JASPAR"). (See on [JASPAR website](https://jaspar.genereg.net/faq/))
+-   [How to cite JASPAR](rbioapi_jaspar.html#citations "How to cite JASPAR"). (See on [JASPAR website](https://jaspar.elixir.no/faq/))
 
 -   [How to cite miEAA](rbioapi_mieaa.html#citations "How to cite miEAA"). (See on [miEAA website](https://ccb-compute2.cs.uni-saarland.de/mieaa2))
 
