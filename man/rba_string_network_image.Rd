@@ -12,7 +12,7 @@ rba_string_network_image(
   add_color_nodes = NULL,
   add_white_nodes = NULL,
   required_score = NULL,
-  network_flavor = "confidence",
+  network_flavor = "evidence",
   network_type = "functional",
   hide_node_labels = FALSE,
   use_query_labels = FALSE,
@@ -54,10 +54,10 @@ threshold will be applied by STRING Based in the network. (low Confidence
  confidence = 900)}
 
 \item{network_flavor}{The style of network edges, should be one of:\itemize{
-\item "confidence": (default) Line's thickness is an indicator of the
-interaction's confidence score.
-\item "evidence": Line's color is based on the type of evidences that
+\item "evidence": (default) Line's color is based on the type of evidences that
 support the interaction.
+\item "confidence": Line's thickness is an indicator of the
+interaction's confidence score.
 \item "action": Line's Shape is an indicator of the interaction's predicted
 mode of actions.}}
 
