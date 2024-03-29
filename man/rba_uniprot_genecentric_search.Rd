@@ -76,7 +76,7 @@ rba_uniprot_genecentric_search(upid = "UP000000354")
 \seealso{
 Other "UniProt - Proteomes": 
 \code{\link{rba_uniprot_genecentric}()},
-\code{\link{rba_uniprot_proteomes_search}()},
-\code{\link{rba_uniprot_proteomes}()}
+\code{\link{rba_uniprot_proteomes}()},
+\code{\link{rba_uniprot_proteomes_search}()}
 }
 \concept{"UniProt - Proteomes"}

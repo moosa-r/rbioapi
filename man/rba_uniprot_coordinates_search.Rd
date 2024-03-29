@@ -90,8 +90,8 @@ rba_uniprot_coordinates_search(taxid = 9606, chromosome = "y")
 }
 \seealso{
 Other "UniProt - Coordinates": 
+\code{\link{rba_uniprot_coordinates}()},
 \code{\link{rba_uniprot_coordinates_location}()},
-\code{\link{rba_uniprot_coordinates_sequence}()},
-\code{\link{rba_uniprot_coordinates}()}
+\code{\link{rba_uniprot_coordinates_sequence}()}
 }
 \concept{"UniProt - Coordinates"}

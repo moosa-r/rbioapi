@@ -52,8 +52,8 @@ rba_string_version()
 \seealso{
 Other "STRING": 
 \code{\link{rba_string_annotations}()},
-\code{\link{rba_string_enrichment_ppi}()},
 \code{\link{rba_string_enrichment}()},
+\code{\link{rba_string_enrichment_ppi}()},
 \code{\link{rba_string_homology_inter}()},
 \code{\link{rba_string_homology_intra}()},
 \code{\link{rba_string_interaction_partners}()},

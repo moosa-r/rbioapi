@@ -60,10 +60,10 @@ rba_uniprot_taxonomy_path(id = 207598, direction = "BOTTOM", depth = 3)
 }
 \seealso{
 Other "UniProt - Taxonomy": 
+\code{\link{rba_uniprot_taxonomy}()},
 \code{\link{rba_uniprot_taxonomy_lca}()},
 \code{\link{rba_uniprot_taxonomy_lineage}()},
 \code{\link{rba_uniprot_taxonomy_name}()},
-\code{\link{rba_uniprot_taxonomy_relationship}()},
-\code{\link{rba_uniprot_taxonomy}()}
+\code{\link{rba_uniprot_taxonomy_relationship}()}
 }
 \concept{"UniProt - Taxonomy"}

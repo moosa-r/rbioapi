@@ -52,10 +52,10 @@ rba_uniprot_taxonomy_lca(c(9606,10090,9823,7712))
 }
 \seealso{
 Other "UniProt - Taxonomy": 
+\code{\link{rba_uniprot_taxonomy}()},
 \code{\link{rba_uniprot_taxonomy_lineage}()},
 \code{\link{rba_uniprot_taxonomy_name}()},
 \code{\link{rba_uniprot_taxonomy_path}()},
-\code{\link{rba_uniprot_taxonomy_relationship}()},
-\code{\link{rba_uniprot_taxonomy}()}
+\code{\link{rba_uniprot_taxonomy_relationship}()}
 }
 \concept{"UniProt - Taxonomy"}

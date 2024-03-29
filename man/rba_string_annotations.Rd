@@ -82,8 +82,8 @@ rba_string_annotations(ids = "TP53", species = 9606)
 \code{\link{rba_string_map_ids}, \link{rba_string_enrichment}}
 
 Other "STRING": 
-\code{\link{rba_string_enrichment_ppi}()},
 \code{\link{rba_string_enrichment}()},
+\code{\link{rba_string_enrichment_ppi}()},
 \code{\link{rba_string_homology_inter}()},
 \code{\link{rba_string_homology_intra}()},
 \code{\link{rba_string_interaction_partners}()},

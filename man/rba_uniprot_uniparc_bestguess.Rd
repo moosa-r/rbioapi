@@ -71,8 +71,8 @@ rba_uniprot_uniparc_bestguess("UPI00000000C9")
 }
 \seealso{
 Other "UniProt - UniParc": 
+\code{\link{rba_uniprot_uniparc}()},
 \code{\link{rba_uniprot_uniparc_search}()},
-\code{\link{rba_uniprot_uniparc_sequence}()},
-\code{\link{rba_uniprot_uniparc}()}
+\code{\link{rba_uniprot_uniparc_sequence}()}
 }
 \concept{"UniProt - UniParc"}

@@ -86,17 +86,17 @@ rba_jaspar_species_matrices(tax_id = 9606, page_size = 100)
 }
 \seealso{
 Other "JASPAR": 
-\code{\link{rba_jaspar_collections_matrices}()},
 \code{\link{rba_jaspar_collections}()},
+\code{\link{rba_jaspar_collections_matrices}()},
+\code{\link{rba_jaspar_matrix}()},
 \code{\link{rba_jaspar_matrix_search}()},
 \code{\link{rba_jaspar_matrix_versions}()},
-\code{\link{rba_jaspar_matrix}()},
 \code{\link{rba_jaspar_releases}()},
 \code{\link{rba_jaspar_sites}()},
 \code{\link{rba_jaspar_species}()},
-\code{\link{rba_jaspar_taxons_matrices}()},
 \code{\link{rba_jaspar_taxons}()},
-\code{\link{rba_jaspar_tffm_search}()},
-\code{\link{rba_jaspar_tffm}()}
+\code{\link{rba_jaspar_taxons_matrices}()},
+\code{\link{rba_jaspar_tffm}()},
+\code{\link{rba_jaspar_tffm_search}()}
 }
 \concept{"JASPAR"}

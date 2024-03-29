@@ -76,10 +76,10 @@ rba_enrichr_libs()
 \code{\link{rba_enrichr}}
 
 Other "Enrichr": 
+\code{\link{rba_enrichr}()},
 \code{\link{rba_enrichr_add_list}()},
 \code{\link{rba_enrichr_enrich}()},
 \code{\link{rba_enrichr_gene_map}()},
-\code{\link{rba_enrichr_view_list}()},
-\code{\link{rba_enrichr}()}
+\code{\link{rba_enrichr_view_list}()}
 }
 \concept{"Enrichr"}

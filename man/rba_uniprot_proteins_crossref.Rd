@@ -76,7 +76,7 @@ rba_uniprot_proteins_crossref("mica", "hgnc", isoform = 0)
 }
 \seealso{
 Other "UniProt - Proteins": 
-\code{\link{rba_uniprot_proteins_search}()},
-\code{\link{rba_uniprot_proteins}()}
+\code{\link{rba_uniprot_proteins}()},
+\code{\link{rba_uniprot_proteins_search}()}
 }
 \concept{"UniProt - Proteins"}

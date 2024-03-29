@@ -146,7 +146,7 @@ rba_uniprot_proteins_search(keyword = "chemokines")
 }
 \seealso{
 Other "UniProt - Proteins": 
-\code{\link{rba_uniprot_proteins_crossref}()},
-\code{\link{rba_uniprot_proteins}()}
+\code{\link{rba_uniprot_proteins}()},
+\code{\link{rba_uniprot_proteins_crossref}()}
 }
 \concept{"UniProt - Proteins"}

@@ -131,8 +131,8 @@ Other "miEAA":
 \code{\link{rba_mieaa_cats}()},
 \code{\link{rba_mieaa_convert_type}()},
 \code{\link{rba_mieaa_convert_version}()},
+\code{\link{rba_mieaa_enrich}()},
 \code{\link{rba_mieaa_enrich_results}()},
-\code{\link{rba_mieaa_enrich_status}()},
-\code{\link{rba_mieaa_enrich}()}
+\code{\link{rba_mieaa_enrich_status}()}
 }
 \concept{"miEAA"}

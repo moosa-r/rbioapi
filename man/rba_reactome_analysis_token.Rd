@@ -111,11 +111,11 @@ rba_reactome_analysis_token(token = "MjAyMDEwMTYwMTI3MTNfMjY1MjM",
 \code{\link{rba_reactome_analysis}}
 
 Other "Reactome Analysis Service": 
+\code{\link{rba_reactome_analysis}()},
 \code{\link{rba_reactome_analysis_download}()},
 \code{\link{rba_reactome_analysis_import}()},
 \code{\link{rba_reactome_analysis_mapping}()},
 \code{\link{rba_reactome_analysis_pdf}()},
-\code{\link{rba_reactome_analysis_species}()},
-\code{\link{rba_reactome_analysis}()}
+\code{\link{rba_reactome_analysis_species}()}
 }
 \concept{"Reactome Analysis Service"}

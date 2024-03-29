@@ -66,8 +66,8 @@ rba_uniprot_proteomes(upid = "UP000000354", get_proteins = TRUE)
 }
 \seealso{
 Other "UniProt - Proteomes": 
-\code{\link{rba_uniprot_genecentric_search}()},
 \code{\link{rba_uniprot_genecentric}()},
+\code{\link{rba_uniprot_genecentric_search}()},
 \code{\link{rba_uniprot_proteomes_search}()}
 }
 \concept{"UniProt - Proteomes"}

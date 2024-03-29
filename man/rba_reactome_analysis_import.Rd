@@ -71,11 +71,11 @@ rba_reactome_analysis_import("https://qaz.com/res.json.gz")
 }
 \seealso{
 Other "Reactome Analysis Service": 
+\code{\link{rba_reactome_analysis}()},
 \code{\link{rba_reactome_analysis_download}()},
 \code{\link{rba_reactome_analysis_mapping}()},
 \code{\link{rba_reactome_analysis_pdf}()},
 \code{\link{rba_reactome_analysis_species}()},
-\code{\link{rba_reactome_analysis_token}()},
-\code{\link{rba_reactome_analysis}()}
+\code{\link{rba_reactome_analysis_token}()}
 }
 \concept{"Reactome Analysis Service"}
