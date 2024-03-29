@@ -60,7 +60,7 @@ The results are paginated. You can control the page's size number
 }
 \section{Corresponding API Resources}{
 
- "GET "https://jaspar.elixir.no/api/v1/collections/{collection}/"
+ "GET https://jaspar.elixir.no/api/v1/collections/\{collection\}/"
 }
 
 \examples{

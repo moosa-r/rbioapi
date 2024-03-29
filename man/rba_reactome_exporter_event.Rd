@@ -29,10 +29,10 @@ This function will export a supplied Reactome Event (Pathway or Reaction)
 }
 \section{Corresponding API Resources}{
 
- "GET https://reactome.org/ContentService//exporter/event/
- {identifier}.sbgn"
- "GET https://reactome.org/ContentService//exporter/event/
- {identifier}.sbml"
+ "GET https://reactome.org/ContentService/exporter/event/
+ \{identifier\}.sbgn"
+ \cr "GET https://reactome.org/ContentService/exporter/event/
+ \{identifier\}.sbml"
 }
 
 \examples{

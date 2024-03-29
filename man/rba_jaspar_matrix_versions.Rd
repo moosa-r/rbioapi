@@ -29,7 +29,7 @@ Since JASPAR release 2010, the matrix profiles
 }
 \section{Corresponding API Resources}{
 
- "GET "https://jaspar.elixir.no/api/v1/matrix/{base_id}/versions/"
+ "GET https://jaspar.elixir.no/api/v1/matrix/\{base_id\}/versions/"
 }
 
 \examples{

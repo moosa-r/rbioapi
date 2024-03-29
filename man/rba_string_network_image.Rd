@@ -104,8 +104,8 @@ Depending on that you supplied a single protein ID or more than one protein
 }
 \section{Corresponding API Resources}{
 
- "POST https://string-db.org/api/[output-format]/network?identifiers=
- [your_identifiers]&[optional_parameters]"
+ "POST https://string-db.org/api/\{output-format\}/network?identifiers=
+ \{your_identifiers\}&\{optional_parameters\}"
 }
 
 \examples{

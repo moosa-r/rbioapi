@@ -83,7 +83,7 @@ Note that this is a search function. Thus, you are not required to fill
 }
 \section{Corresponding API Resources}{
 
- "GET "https://jaspar.elixir.no/api/v1/api/v1/matrix/"
+ "GET https://jaspar.elixir.no/api/v1/api/v1/matrix/"
 }
 
 \examples{

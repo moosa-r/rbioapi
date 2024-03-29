@@ -23,7 +23,7 @@ JASPAR organizes matrix profiles into collections.
 }
 \section{Corresponding API Resources}{
 
- "GET "https://jaspar.elixir.no/api/v1/collections/"
+ "GET https://jaspar.elixir.no/api/v1/collections/"
 }
 
 \examples{

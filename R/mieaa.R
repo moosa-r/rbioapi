@@ -87,7 +87,7 @@
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET  "https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/enrichment_categories/{species}/{mirna_type}/"
+#'  "GET https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/enrichment_categories/\{species\}/\{mirna_type\}/"
 #'
 #' @return a named character vector with the supported categories for
 #'   your supplied input combination.
@@ -442,7 +442,7 @@ rba_mieaa_convert_type <- function(mirna,
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "POST https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/enrichment_analysis/{species}/{type}/{test}/"
+#'  "POST https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/enrichment_analysis/\{species\}/\{type\}/\{test\}/"
 #'
 #' @return A list that contains your submitted job's ID and a URL to
 #'   manually check for your job status.
@@ -605,7 +605,7 @@ rba_mieaa_enrich_submit <- function(test_set,
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/job_status/{job_id}"
+#'  "GET https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/job_status/\{job_id\}"
 #'
 #' @return A list containing the status value for a analysis that corresponds
 #'   to your supplied job-id.
@@ -679,7 +679,7 @@ rba_mieaa_enrich_status <- function(job_id, ...) {
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/results/{job_id}"
+#'  "GET https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/results/\{job_id\}"
 #'
 #' @return A data frame with your enrichment analysis results.
 #'

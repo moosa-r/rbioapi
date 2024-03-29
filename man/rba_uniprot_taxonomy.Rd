@@ -50,15 +50,15 @@ providing their
 }
 \section{Corresponding API Resources}{
 
- "GET https://ebi.ac.uk/proteins/api/ids/{ids}"
- \cr "GET https://ebi.ac.uk/proteins/api/ids//id/{id}/node"
- \cr "GET https://ebi.ac.uk/proteins/api/id/{id}/node"
- \cr "GET https://ebi.ac.uk/proteins/api/id/{id}/children"
- \cr "GET https://ebi.ac.uk/proteins/api/id/{id}/children/node"
- \cr "GET https://ebi.ac.uk/proteins/api/id/{id}/parent"
- \cr "GET https://ebi.ac.uk/proteins/api/id/{id}/parent/node"
- \cr "GET https://ebi.ac.uk/proteins/api/id/{id}/siblings"
- \cr "GET https://ebi.ac.uk/proteins/api/id/{id}/siblings/node"
+ "GET https://ebi.ac.uk/proteins/api/ids/\{ids\}"
+ \cr "GET https://ebi.ac.uk/proteins/api/ids/id/\{id\}/node"
+ \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/node"
+ \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/children"
+ \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/children/node"
+ \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/parent"
+ \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/parent/node"
+ \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/siblings"
+ \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/siblings/node"
 }
 
 \examples{

@@ -379,8 +379,8 @@ rba_reactome_analysis <- function(input,
 #'   in other formats.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/AnalysisService/report/{token}/{species}/
-#'  {filename}.pdf"
+#'  "GET https://reactome.org/AnalysisService/report/\{token\}/\{species\}/
+#'  \{filename\}.pdf"
 #'
 #' @param token A token associated to your previous Reactome analysis.
 #' @param species Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
@@ -547,14 +547,14 @@ rba_reactome_analysis_pdf <- function(token,
 #'   in PDF format.
 #'
 #' @section Corresponding API Resources:
-#' GET https://reactome.org/AnalysisService/download/{token}/entities/
-#' found/{resource}/{filename}.csv"
-#' GET https://reactome.org/AnalysisService//download/{token}/entities/
-#' notfound/{filename}.csv"
-#' GET https://reactome.org/AnalysisService/download/{token}/pathways/
-#' {resource}/{filename}.csv"
-#' GET https://reactome.org/AnalysisService/download/{token}/result.json"
-#' GET https://reactome.org/AnalysisService/download/{token}/result.json.gz"
+#' GET https://reactome.org/AnalysisService/download/\{token\}/entities/
+#' found/\{resource\}/\{filename\}.csv"
+#' \cr GET https://reactome.org/AnalysisService/download/\{token\}/entities/
+#' notfound/\{filename\}.csv"
+#' \cr GET https://reactome.org/AnalysisService/download/\{token\}/pathways/
+#' \{resource\}/\{filename\}.csv"
+#' \cr GET https://reactome.org/AnalysisService/download/\{token\}/result.json"
+#' \cr GET https://reactome.org/AnalysisService/download/\{token\}/result.json.gz"
 #'
 #' @param token A token associated to your previous Reactome analysis.
 #' @param request What to download? Should be one of:\itemize{
@@ -938,7 +938,7 @@ rba_reactome_analysis_mapping <- function(input,
 #'   Reactome Computationally Inferred Events} for more information.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/AnalysisService/species/homoSapiens/{species}"
+#'  "GET https://reactome.org/AnalysisService/species/homoSapiens/\{species\}"
 #'
 #' @param species_dbid Numeric: Reactome DbId (e.g  Mus musculus is 48892) of
 #'   the species you want to compare with Homo sapiens. See
@@ -1093,7 +1093,7 @@ rba_reactome_analysis_species <- function(species_dbid,
 #'   reactome (using \code{\link{rba_reactome_analysis_import}}) to generate
 #'   a new token.
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/AnalysisService/token/{token}"
+#'  "GET https://reactome.org/AnalysisService/token/\{token\}"
 #'
 #' @param token A token associated to your previous Reactome analysis.
 #' @param species Numeric or Character: NCBI Taxonomy identifier (Human

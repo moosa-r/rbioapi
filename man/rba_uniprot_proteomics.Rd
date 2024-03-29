@@ -24,7 +24,7 @@ UniProt maps proteomics peptides from different sources to the proteins'
 }
 \section{Corresponding API Resources}{
 
- "GET https://www.ebi.ac.uk/proteins/api/proteomics/{accession}"
+ "GET https://www.ebi.ac.uk/proteins/api/proteomics/\{accession\}"
 }
 
 \examples{

@@ -25,7 +25,7 @@ Use this function to retrieve lowest common ancestor (LCA) of two
 }
 \section{Corresponding API Resources}{
 
- "GET https://ebi.ac.uk/proteins/api/ancestor/{ids}"
+ "GET https://ebi.ac.uk/proteins/api/ancestor/\{ids\}"
 }
 
 \examples{

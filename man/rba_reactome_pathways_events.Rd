@@ -37,10 +37,10 @@ By Reactome's definition, Events are the building blocks of biological
 }
 \section{Corresponding API Resources}{
 
- "GET https://reactome.org/ContentService/data/pathway/{id}/
+ "GET https://reactome.org/ContentService/data/pathway/\{id\}/
  containedEvents"
- \cr "GET https://reactome.org/ContentService/data/pathway/{id}/
- containedEvents/{attributeName}"
+ \cr "GET https://reactome.org/ContentService/data/pathway/\{id\}/
+ containedEvents/\{attributeName\}"
 }
 
 \examples{

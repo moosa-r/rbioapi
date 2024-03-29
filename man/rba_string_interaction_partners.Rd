@@ -56,8 +56,8 @@ Note that this function will retrieve the interactions between your input
 }
 \section{Corresponding API Resources}{
 
- "POST https://string-db.org/api/[output-format]/
- interaction_partners?identifiers=[your_identifiers]&[optional_parameters]"
+ "POST https://string-db.org/api/\{output-format\}/
+ interaction_partners?identifiers=\{your_identifiers\}&\{optional_parameters\}"
 }
 
 \examples{

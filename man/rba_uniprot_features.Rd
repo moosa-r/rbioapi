@@ -40,7 +40,7 @@ Use this function to retrieve
 }
 \section{Corresponding API Resources}{
 
- "GET https://www.ebi.ac.uk/proteins/api/features/{accession}"
+ "GET https://www.ebi.ac.uk/proteins/api/features/\{accession\}"
 }
 
 \examples{

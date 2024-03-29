@@ -84,8 +84,8 @@ Note that this function will save Reaction-like event separately and out
 }
 \section{Corresponding API Resources}{
 
- "GET https://reactome.org/ContentService//exporter/reaction/
- {identifier}.{ext}"
+ "GET https://reactome.org/ContentService/exporter/reaction/
+ \{identifier\}.\{ext\}"
 }
 
 \examples{

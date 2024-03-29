@@ -34,7 +34,7 @@ Reactome's Events hierarchy for any specie will begin with pathways with
 }
 \section{Corresponding API Resources}{
 
- "GET https://reactome.org/ContentService/data/pathways/top/{species}"
+ "GET https://reactome.org/ContentService/data/pathways/top/\{species\}"
 }
 
 \examples{

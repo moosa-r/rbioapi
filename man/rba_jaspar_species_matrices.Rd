@@ -58,7 +58,7 @@ The results are paginated. You can control the page's size number
 }
 \section{Corresponding API Resources}{
 
- "GET "https://jaspar.elixir.no/api/v1/species/{tax_id}/"
+ "GET https://jaspar.elixir.no/api/v1/species/\{tax_id\}/"
 }
 
 \examples{

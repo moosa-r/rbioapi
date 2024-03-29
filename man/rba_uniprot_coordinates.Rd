@@ -37,8 +37,8 @@ For more information about how UniProt imports and calculates genomic
 }
 \section{Corresponding API Resources}{
 
- "GET https://ebi.ac.uk/proteins/api/coordinates/{accession}"
- \cr "GET https://ebi.ac.uk/proteins/api/coordinates/{dbtype}:{dbid}"
+ "GET https://ebi.ac.uk/proteins/api/coordinates/\{accession\}"
+ \cr "GET https://ebi.ac.uk/proteins/api/coordinates/\{dbtype\}:\{dbid\}"
 }
 
 \examples{

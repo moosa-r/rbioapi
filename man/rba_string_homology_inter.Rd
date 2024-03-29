@@ -43,8 +43,8 @@ Note that this function will return the highest similarity score hits of
 }
 \section{Corresponding API Resources}{
 
- "POST https://string-db.org/api/[output-format]/homology_best?
- identifiers=[your_identifiers]"
+ "POST https://string-db.org/api/\{output-format\}/homology_best?
+ identifiers=\{your_identifiers\}"
 }
 
 \examples{

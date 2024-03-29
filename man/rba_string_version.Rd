@@ -25,7 +25,7 @@ Note that STRING releases new version at approximately 2 years cycle.
 }
 \section{Corresponding API Resources}{
 
- "GET https://string-db.org/api/[output_format]/version"
+ "GET https://string-db.org/api/\{output_format\}/version"
 }
 
 \examples{

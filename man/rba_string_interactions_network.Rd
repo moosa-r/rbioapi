@@ -79,8 +79,8 @@ Note that this function will return interactions between your set of
 }
 \section{Corresponding API Resources}{
 
- "POST https://string-db.org/api/[output-format]/network?identifiers=
- [your_identifiers]&[optional_parameters]"
+ "POST https://string-db.org/api/\{output-format\}/network?identifiers=
+ \{your_identifiers\}&\{optional_parameters\}"
 }
 
 \examples{

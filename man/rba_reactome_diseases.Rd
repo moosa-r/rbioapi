@@ -23,8 +23,8 @@ This function Retrieve a list of all diseases or disease DOIDs annotated in
 }
 \section{Corresponding API Resources}{
 
- "GET https://reactome.org/ContentService/GET data/diseases"
- "GET https://reactome.org/ContentService/GET data/diseases/doid"
+ "GET https://reactome.org/ContentService/data/diseases"
+ \cr "GET https://reactome.org/ContentService/data/diseases/doid"
 }
 
 \examples{

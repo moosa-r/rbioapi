@@ -31,7 +31,7 @@ Note that using \code{\link{rba_mieaa_enrich}} is a more convenient way to
 }
 \section{Corresponding API Resources}{
 
- "GET https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/job_status/{job_id}"
+ "GET https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/job_status/\{job_id\}"
 }
 
 \examples{

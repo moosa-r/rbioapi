@@ -29,7 +29,7 @@ UniProt describes the effects of mutations in proteins' amino acid
 }
 \section{Corresponding API Resources}{
 
- "GET https://www.ebi.ac.uk/proteins/api/mutagenesis/{accession}"
+ "GET https://www.ebi.ac.uk/proteins/api/mutagenesis/\{accession\}"
 }
 
 \examples{

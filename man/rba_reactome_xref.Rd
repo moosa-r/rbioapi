@@ -31,7 +31,7 @@ Reactome cross-references external database's identifiers to it's database
 }
 \section{Corresponding API Resources}{
 
- "GET https://reactome.org/ContentService/references/mapping/{identifier}"
+ "GET https://reactome.org/ContentService/references/mapping/\{identifier\}"
 }
 
 \examples{

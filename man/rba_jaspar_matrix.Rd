@@ -35,7 +35,7 @@ Using this function you can retrieve a Position Frequency Matrices (PFM)
 }
 \section{Corresponding API Resources}{
 
- "GET "https://jaspar.elixir.no/api/v1/matrix/{matrix_id}/"
+ "GET https://jaspar.elixir.no/api/v1/matrix/\{matrix_id\}/"
 }
 
 \examples{

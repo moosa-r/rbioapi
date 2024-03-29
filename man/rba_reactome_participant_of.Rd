@@ -23,7 +23,7 @@ This function will retrieve a list of complexes and sets that Your
 }
 \section{Corresponding API Resources}{
 
- "GET https://reactome.org/ContentService/data/entity/{id}/componentOf"
+ "GET https://reactome.org/ContentService/data/entity/\{id\}/componentOf"
 }
 
 \examples{

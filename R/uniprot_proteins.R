@@ -264,9 +264,9 @@ rba_uniprot_proteins_search <- function(accession = NULL,
 #'   TRUE, not both of them.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/proteins/{accession}"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/proteins/interaction/{accession}"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/proteins/{accession}/isoforms"
+#'  "GET https://ebi.ac.uk/proteins/api/proteins/\{accession\}"
+#'  \cr "GET https://ebi.ac.uk/proteins/api/proteins/interaction/\{accession\}"
+#'  \cr "GET https://ebi.ac.uk/proteins/api/proteins/\{accession\}/isoforms"
 #'
 #' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}.
@@ -365,7 +365,7 @@ rba_uniprot_proteins <- function(accession,
 #'   and protein ID in that database.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://www.ebi.ac.uk/proteins/api/proteins/{dbtype}:{dbid}"
+#'  "GET https://www.ebi.ac.uk/proteins/api/proteins/\{dbtype\}:\{dbid\}"
 #'
 #' @param db_id The protein ID in the cross-reference (external) database.
 #' @param db_name \href{https://www.uniprot.org/database/}{cross-reference}
@@ -832,7 +832,7 @@ rba_uniprot_features_search <- function(accession = NULL,
 #'   (features)} of a protein by it's UniProt accession.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://www.ebi.ac.uk/proteins/api/features/{accession}"
+#'  "GET https://www.ebi.ac.uk/proteins/api/features/\{accession\}"
 #'
 #' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}.
@@ -1212,9 +1212,9 @@ rba_uniprot_variation_search <- function(accession = NULL,
 #'   accession, dbSNP or HGVS expression.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://www.ebi.ac.uk/proteins/api/variation/dbsnp/{dbid}"
-#'  \cr "GET https://www.ebi.ac.uk/proteins/api/variation/hgvs/{hgvs}"
-#'  \cr "GET https://www.ebi.ac.uk/proteins/api/variation/{accession}"
+#'  "GET https://www.ebi.ac.uk/proteins/api/variation/dbsnp/\{dbid\}"
+#'  \cr "GET https://www.ebi.ac.uk/proteins/api/variation/hgvs/\{hgvs\}"
+#'  \cr "GET https://www.ebi.ac.uk/proteins/api/variation/\{accession\}"
 #'
 #' @param id An ID which can be either a
 #'   \href{https://www.uniprot.org/help/accession_numbers}{UniProt primary or
@@ -1532,7 +1532,7 @@ rba_uniprot_proteomics_search <- function(accession = NULL,
 #'   peptides features that has been map to a given UniProt protein's sequence.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://www.ebi.ac.uk/proteins/api/proteomics/{accession}"
+#'  "GET https://www.ebi.ac.uk/proteins/api/proteomics/\{accession\}"
 #'
 #' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}.
@@ -1756,7 +1756,7 @@ rba_uniprot_ptm_search <- function(accession = NULL,
 #'   Processing section in UniProtKB}
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://www.ebi.ac.uk/proteins/api/proteomics-ptm/{accession}"
+#'  "GET https://www.ebi.ac.uk/proteins/api/proteomics-ptm/\{accession\}"
 #'
 #' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}.
@@ -1940,7 +1940,7 @@ rba_uniprot_antigens_search <- function(accession = NULL,
 #'   features that has been map to a given UniProt protein's sequence.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://www.ebi.ac.uk/proteins/api/antigen/{accession}"
+#'  "GET https://www.ebi.ac.uk/proteins/api/antigen/\{accession\}"
 #'
 #' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}(s).
@@ -2115,7 +2115,7 @@ rba_uniprot_mutagenesis_search <- function(accession = NULL,
 #'   Mutagenesis description} that has been mapped to a given UniProt protein.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://www.ebi.ac.uk/proteins/api/mutagenesis/{accession}"
+#'  "GET https://www.ebi.ac.uk/proteins/api/mutagenesis/\{accession\}"
 #'
 #' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}(s).

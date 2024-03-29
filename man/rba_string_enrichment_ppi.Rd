@@ -42,8 +42,8 @@ Even when there is no annotation for your input proteins, STRING can Compare
 }
 \section{Corresponding API Resources}{
 
- "POST https://string-db.org/api/[output_format]/ppi_enrichment?identifiers=
- [your_identifiers]&[optional_parameters]"
+ "POST https://string-db.org/api/\{output_format\}/ppi_enrichment?identifiers=
+ \{your_identifiers\}&\{optional_parameters\}"
 }
 
 \examples{

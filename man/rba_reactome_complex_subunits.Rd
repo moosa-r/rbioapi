@@ -30,7 +30,7 @@ Subunits will be returned recursively; Which means that if a subunit was
 }
 \section{Corresponding API Resources}{
 
- "GET https://reactome.org/ContentService/data/complex/{id}/subunits"
+ "GET https://reactome.org/ContentService/data/complex/\{id\}/subunits"
 }
 
 \examples{

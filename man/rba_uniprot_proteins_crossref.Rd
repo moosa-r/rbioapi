@@ -43,7 +43,7 @@ List which each element is a UniProt entity that correspond to
 }
 \section{Corresponding API Resources}{
 
- "GET https://www.ebi.ac.uk/proteins/api/proteins/{dbtype}:{dbid}"
+ "GET https://www.ebi.ac.uk/proteins/api/proteins/\{dbtype\}:\{dbid\}"
 }
 
 \examples{

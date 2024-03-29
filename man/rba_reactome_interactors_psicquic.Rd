@@ -41,10 +41,10 @@ You can call this function in two scenarios:
 \section{Corresponding API Resources}{
 
  "POST https://reactome.org/ContentService/interactors/psicquic/molecules/
-   {resource}/details"
- "POST https://reactome.org/ContentService/interactors/psicquic/molecules/
-   {resource}/summary"
- "GET https://reactome.org/ContentService/interactors/psicquic/resources"
+   \{resource\}/details"
+ \cr "POST https://reactome.org/ContentService/interactors/psicquic/molecules/
+   \{resource\}/summary"
+ \cr "GET https://reactome.org/ContentService/interactors/psicquic/resources"
 }
 
 \examples{

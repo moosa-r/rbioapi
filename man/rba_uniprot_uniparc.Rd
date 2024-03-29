@@ -59,10 +59,10 @@ Use this function to retrieve UniParc entries. You can use either -and only
 }
 \section{Corresponding API Resources}{
 
- "GET https://ebi.ac.uk/proteins/api/uniparc/accession/{accession} "
- \cr "GET https://ebi.ac.uk/proteins/api/uniparc/dbreference/{dbid}"
- \cr "GET https://ebi.ac.uk/proteins/api/uniparc/proteome/{upid}"
- \cr "GET https://ebi.ac.uk/proteins/api/uniparc/upi/{upi}"
+ "GET https://ebi.ac.uk/proteins/api/uniparc/accession/\{accession\} "
+ \cr "GET https://ebi.ac.uk/proteins/api/uniparc/dbreference/\{dbid\}"
+ \cr "GET https://ebi.ac.uk/proteins/api/uniparc/proteome/\{upid\}"
+ \cr "GET https://ebi.ac.uk/proteins/api/uniparc/upi/\{upi\}"
 }
 
 \examples{

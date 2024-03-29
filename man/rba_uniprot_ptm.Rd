@@ -30,7 +30,7 @@ see also:
 }
 \section{Corresponding API Resources}{
 
- "GET https://www.ebi.ac.uk/proteins/api/proteomics-ptm/{accession}"
+ "GET https://www.ebi.ac.uk/proteins/api/proteomics-ptm/\{accession\}"
 }
 
 \examples{

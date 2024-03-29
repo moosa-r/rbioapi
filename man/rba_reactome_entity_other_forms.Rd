@@ -27,7 +27,7 @@ According to Reactome API documentation, "These other forms are Physical
 }
 \section{Corresponding API Resources}{
 
- "GET https://reactome.org/ContentService/data/entity/{id}/otherForms"
+ "GET https://reactome.org/ContentService/data/entity/\{id\}/otherForms"
 }
 
 \examples{

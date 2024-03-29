@@ -76,7 +76,7 @@ After Any Analysis, Reactome will associate a token to your analysis. It
 }
 \section{Corresponding API Resources}{
 
- "GET https://reactome.org/AnalysisService/token/{token}"
+ "GET https://reactome.org/AnalysisService/token/\{token\}"
 }
 
 \examples{

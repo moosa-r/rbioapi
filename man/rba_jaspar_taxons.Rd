@@ -23,7 +23,7 @@ JASPAR organizes matrix profiles from multiple species
 }
 \section{Corresponding API Resources}{
 
- "GET "https://jaspar.elixir.no/api/v1/taxon/"
+ "GET https://jaspar.elixir.no/api/v1/taxon/"
 }
 
 \examples{

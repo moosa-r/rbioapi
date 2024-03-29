@@ -68,8 +68,8 @@ rba_reactome_version <- function(...) {
 #'   Reactome.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/ContentService/GET data/diseases"
-#'  "GET https://reactome.org/ContentService/GET data/diseases/doid"
+#'  "GET https://reactome.org/ContentService/data/diseases"
+#'  \cr "GET https://reactome.org/ContentService/data/diseases/doid"
 #'
 #' @param doid (logical) Return disease DOIDs instead of diseases?
 #'   (default = FALSE)
@@ -159,7 +159,7 @@ rba_reactome_diseases <- function(doid = FALSE,
 #'   results.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/ContentService/data/complex/{id}/subunits"
+#'  "GET https://reactome.org/ContentService/data/complex/\{id\}/subunits"
 #'
 #' @param complex_id Reactome stable Identifier of the complex.
 #' @param exclude_structures (logical) Should the contained complexes and
@@ -241,8 +241,8 @@ rba_reactome_complex_subunits <- function(complex_id,
 #'   molecule as a component.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/ContentService/data/complexes/{resource}/
-#'  {identifier}"
+#'  "GET https://reactome.org/ContentService/data/complexes/\{resource\}/
+#'  \{identifier\}"
 #'
 #' @param id Molecule's external Identifier
 #' @param resource What is the resource of your supplied ID? see:
@@ -321,7 +321,7 @@ rba_reactome_complex_list <- function(id,
 #'   reaction output).
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/ContentService/data/entity/{id}/componentOf"
+#'  "GET https://reactome.org/ContentService/data/entity/\{id\}/componentOf"
 #'
 #' @param entity_id Reactome's entity ID.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -393,7 +393,7 @@ rba_reactome_participant_of <- function(entity_id,
 #'   H93R R-HSA-2318524 and PTEN C124R R-HSA-2317439 are two forms of PTEN."
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/ContentService/data/entity/{id}/otherForms"
+#'  "GET https://reactome.org/ContentService/data/entity/\{id\}/otherForms"
 #'
 #' @param entity_id Reactome's entity ID.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -469,7 +469,7 @@ rba_reactome_entity_other_forms <- function(entity_id,
 #'   that a given event could be part of more that one hierarchies.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/ContentService/data/event/{id}/ancestors"
+#'  "GET https://reactome.org/ContentService/data/event/\{id\}/ancestors"
 #'
 #' @param event_id Reactome event's identifier.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -547,7 +547,7 @@ rba_reactome_event_ancestors <- function(event_id,
 #'   that a given event could be part of more that one hierarchies.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/ContentService/data/eventsHierarchy/{species}"
+#'  "GET https://reactome.org/ContentService/data/eventsHierarchy/\{species\}"
 #'
 #' @param species Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
 #'    ID is 9606.) or species name (e.g. "Homo sapiens"). See
@@ -645,10 +645,10 @@ rba_reactome_event_hierarchy <- function(species,
 #'   of your supplied event's children will also be included.
 #'
 #' @section Corresponding API Resources:
-#'   "GET https://reactome.org/ContentService/exporter/diagram/{identifier}
-#'   .{ext}"
-#'   "GET https://reactome.org/ContentService/exporter/document/event/
-#'   {identifier}.pdf"
+#'   "GET https://reactome.org/ContentService/exporter/diagram/\{identifier\}
+#'   .\{ext\}"
+#'   \cr "GET https://reactome.org/ContentService/exporter/document/event/
+#'   \{identifier\}.pdf"
 #'
 #' @param event_id Reactome event's identifier.
 #' @param save_to NULL or Character:\itemize{
@@ -903,10 +903,10 @@ rba_reactome_exporter_diagram <- function(event_id,
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/ContentService//exporter/event/
-#'  {identifier}.sbgn"
-#'  "GET https://reactome.org/ContentService//exporter/event/
-#'  {identifier}.sbml"
+#'  "GET https://reactome.org/ContentService/exporter/event/
+#'  \{identifier\}.sbgn"
+#'  \cr "GET https://reactome.org/ContentService/exporter/event/
+#'  \{identifier\}.sbml"
 #'
 #' @return NULL, According to the inputs, a SBGN or SBML file will be saved to
 #'   disk.
@@ -987,7 +987,7 @@ rba_reactome_exporter_event <- function(event_id,
 #'   as an image file.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/ContentService/exporter/fireworks/{species}.{ext}"
+#'  "GET https://reactome.org/ContentService/exporter/fireworks/\{species\}.\{ext\}"
 #'
 #' @param species Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
 #'    ID is 9606.) or species name (e.g. "Homo sapiens"). See
@@ -1199,8 +1199,8 @@ rba_reactome_exporter_overview <- function(species,
 #'   pathway, use \code{\link{rba_reactome_exporter_diagram}}.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/ContentService//exporter/reaction/
-#'  {identifier}.{ext}"
+#'  "GET https://reactome.org/ContentService/exporter/reaction/
+#'  \{identifier\}.\{ext\}"
 #'
 #' @param event_id Reactome
 #' \href{https://reactome.org/content/schema/ReactionLikeEvent/}{Reaction-like
@@ -1413,10 +1413,10 @@ rba_reactome_exporter_reaction <- function(event_id,
 #'
 #' @section Corresponding API Resources:
 #'  "POST https://reactome.org/ContentService/interactors/psicquic/molecules/
-#'    {resource}/details"
-#'  "POST https://reactome.org/ContentService/interactors/psicquic/molecules/
-#'    {resource}/summary"
-#'  "GET https://reactome.org/ContentService/interactors/psicquic/resources"
+#'    \{resource\}/details"
+#'  \cr "POST https://reactome.org/ContentService/interactors/psicquic/molecules/
+#'    \{resource\}/summary"
+#'  \cr "GET https://reactome.org/ContentService/interactors/psicquic/resources"
 #'
 #' @param proteins Proteins to retrieve PSICQUIC interactors.
 #' @param resource The PSICQUIC resource for your supplied proteins. Call
@@ -1677,10 +1677,10 @@ rba_reactome_interactors_static <- function(proteins,
 #'   a list of pathways/reactions that include your supplied ID.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/ContentService/data/mapping/{resource}/
-#'  {identifier}/pathways"
-#'  \cr "GET https://reactome.org/ContentService/data/mapping/{resource}/
-#'  {identifier}/reactions"
+#'  "GET https://reactome.org/ContentService/data/mapping/\{resource\}/
+#'  \{identifier\}/pathways"
+#'  \cr "GET https://reactome.org/ContentService/data/mapping/\{resource\}/
+#'  \{identifier\}/reactions"
 #'
 #' @param id Molecule's external Identifier
 #' @param resource What is the resource of your supplied ID? see:
@@ -1789,7 +1789,7 @@ rba_reactome_mapping <- function(id,
 #'
 #' @section Corresponding API Resources:
 #'  "POST https://reactome.org/ContentService/data/orthologies/ids/
-#'    species/{speciesId}"
+#'    species/\{speciesId\}"
 #'
 #' @param event_ids Human Reactome event ID(s) to retrieve their orthologous
 #'   events.
@@ -1900,10 +1900,10 @@ rba_reactome_orthology <- function(event_ids,
 #'  Entities.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/ContentService/data/participants/{id}"
-#'  \cr "GET https://reactome.org/ContentService/data/participants/{id}/
+#'  "GET https://reactome.org/ContentService/data/participants/\{id\}"
+#'  \cr "GET https://reactome.org/ContentService/data/participants/\{id\}/
 #'  participatingPhysicalEntities"
-#'  \cr "GET https://reactome.org/ContentService/data/participants/{id}/
+#'  \cr "GET https://reactome.org/ContentService/data/participants/\{id\}/
 #'  referenceEntities"
 #'
 #' @param event_id Reactome event's database ID (DbId) or Stable ID (StId).
@@ -2019,10 +2019,10 @@ rba_reactome_participants <- function(event_id,
 #'   that a given event could be part of more that one hierarchies.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/ContentService/data/pathway/{id}/
+#'  "GET https://reactome.org/ContentService/data/pathway/\{id\}/
 #'  containedEvents"
-#'  \cr "GET https://reactome.org/ContentService/data/pathway/{id}/
-#'  containedEvents/{attributeName}"
+#'  \cr "GET https://reactome.org/ContentService/data/pathway/\{id\}/
+#'  containedEvents/\{attributeName\}"
 #'
 #' @param event_id Reactome event's database ID (DbId) or Stable ID (StId).
 #' @param attribute_name An attribute of the events to be returned instead of
@@ -2128,11 +2128,11 @@ rba_reactome_pathways_events <- function(event_id,
 #'   modify your search.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/ContentService/data/pathways/low/entity/{id}"
+#'  "GET https://reactome.org/ContentService/data/pathways/low/entity/\{id\}"
 #'  \cr "GET https://reactome.org/ContentService/data/pathways/low/diagram/
-#'  entity/{id}"
+#'  entity/\{id\}"
 #'  \cr "GET https://reactome.org/ContentService/data/pathways/low/diagram/
-#'  entity/{id}/allForms"
+#'  entity/\{id\}/allForms"
 #'
 #' @param entity_id The entity that should exist in the pathways.
 #' @param with_diagram Logical: only include pathways with diagram?
@@ -2246,7 +2246,7 @@ rba_reactome_pathways_low <- function(entity_id,
 #'   goes further down.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/ContentService/data/pathways/top/{species}"
+#'  "GET https://reactome.org/ContentService/data/pathways/top/\{species\}"
 #'
 #' @param species Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
 #'    ID is 9606.) or species name (e.g. "Homo sapiens"). See
@@ -2329,8 +2329,8 @@ rba_reactome_pathways_top <- function(species,
 #'   name and retrieve a list of matching people in Reactome.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/ContentService/data/people/name/{name}"
-#'  \cr "GET https://reactome.org/ContentService/data/people/name/{name}/exact"
+#'  "GET https://reactome.org/ContentService/data/people/name/\{name\}"
+#'  \cr "GET https://reactome.org/ContentService/data/people/name/\{name\}/exact"
 #'
 #' @param person_name first and last name of the person
 #' @param exact_match Logical: should the supplied name be considered as
@@ -2520,9 +2520,9 @@ rba_reactome_people_id <- function(person_id,
 #' @section Corresponding API Resources:
 #'  "POST https://reactome.org/ContentService/data/query/ids"
 #'  \cr "POST https://reactome.org/ContentService/data/query/ids/map"
-#'  \cr "GET https://reactome.org/ContentService/data/query/{id}"
-#'  \cr s"GET https://reactome.org/ContentService//data/query/enhanced/{id}"
-#'  \cr "GET https://reactome.org/ContentService/data/query/{id}/{attributeName}"
+#'  \cr "GET https://reactome.org/ContentService/data/query/\{id\}"
+#'  \cr "GET https://reactome.org/ContentService/data/query/enhanced/\{id\}"
+#'  \cr "GET https://reactome.org/ContentService/data/query/\{id\}/\{attributeName\}"
 #'
 #' @param ids A single or Multiple database IDs (DbId), Stable IDs (StId) or
 #'   a mixture of both.
@@ -2664,7 +2664,7 @@ rba_reactome_query <- function(ids,
 #'   to learn more about how Reactome classifies molecules.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/ContentService/references/mapping/{identifier}"
+#'  "GET https://reactome.org/ContentService/references/mapping/\{identifier\}"
 #'
 #' @param xref_id molecule's cross-reference (external) identifier.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s

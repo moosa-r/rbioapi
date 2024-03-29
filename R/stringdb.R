@@ -7,8 +7,8 @@
 #'   with other STRING's functions.
 #'
 #' @section Corresponding API Resources:
-#'  "POST https://string-db.org/api/[output-format]/get_string_ids?identifiers=
-#'  [your_identifiers]&[optional_parameters]"
+#'  "POST https://string-db.org/api/\{output-format\}/get_string_ids?identifiers=
+#'  \{your_identifiers\}&\{optional_parameters\}"
 #'
 #' @param ids Your Common gene/protein Identifier(s) to be mapped.
 #' @param species Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
@@ -105,8 +105,8 @@ rba_string_map_ids <- function(ids,
 #'   image.
 #'
 #' @section Corresponding API Resources:
-#'  "POST https://string-db.org/api/[output-format]/network?identifiers=
-#'  [your_identifiers]&[optional_parameters]"
+#'  "POST https://string-db.org/api/\{output-format\}/network?identifiers=
+#'  \{your_identifiers\}&\{optional_parameters\}"
 #'
 #' @param ids Your protein ID(s). It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
@@ -353,8 +353,8 @@ rba_string_network_image <- function(ids,
 #'   \code{\link{rba_string_interaction_partners}}.
 #'
 #' @section Corresponding API Resources:
-#'  "POST https://string-db.org/api/[output-format]/network?identifiers=
-#'  [your_identifiers]&[optional_parameters]"
+#'  "POST https://string-db.org/api/\{output-format\}/network?identifiers=
+#'  \{your_identifiers\}&\{optional_parameters\}"
 #'
 #' @param ids Your protein IDs. It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
@@ -516,8 +516,8 @@ rba_string_interactions_network <- function(ids,
 #'   \code{\link{rba_string_interactions_network}}.
 #'
 #' @section Corresponding API Resources:
-#'  "POST https://string-db.org/api/[output-format]/
-#'  interaction_partners?identifiers=[your_identifiers]&[optional_parameters]"
+#'  "POST https://string-db.org/api/\{output-format\}/
+#'  interaction_partners?identifiers=\{your_identifiers\}&\{optional_parameters\}"
 #'
 #' @param ids Your protein ID(s). It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
@@ -650,8 +650,8 @@ rba_string_interaction_partners <- function(ids,
 #'   Proteins (SIMAP)}
 #'
 #' @section Corresponding API Resources:
-#'  "POST https://string-db.org/api/[output-format]/homology?identifiers=
-#'  [your_identifiers]"
+#'  "POST https://string-db.org/api/\{output-format\}/homology?identifiers=
+#'  \{your_identifiers\}"
 #'
 #' @param ids Your protein ID(s). It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
@@ -748,8 +748,8 @@ rba_string_homology_intra <- function(ids,
 #'   Proteins (SIMAP)}
 #'
 #' @section Corresponding API Resources:
-#'  "POST https://string-db.org/api/[output-format]/homology_best?
-#'  identifiers=[your_identifiers]"
+#'  "POST https://string-db.org/api/\{output-format\}/homology_best?
+#'  identifiers=\{your_identifiers\}"
 #'
 #' @param ids Your protein ID(s). It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
@@ -857,8 +857,8 @@ rba_string_homology_inter <- function(ids,
 #'   \code{\link{rba_string_annotations}}.
 #'
 #' @section Corresponding API Resources:
-#'  "POST https://string-db.org/api/[output_format]/enrichment?identifiers=
-#'  [your_identifiers]&[optional_parameters]"
+#'  "POST https://string-db.org/api/\{output_format\}/enrichment?identifiers=
+#'  \{your_identifiers\}&\{optional_parameters\}"
 #'
 #' @param ids Your protein ID(s). It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
@@ -981,8 +981,8 @@ rba_string_enrichment <- function(ids,
 #'   subset of the terms, use \code{\link{rba_string_enrichment}}.
 #'
 #' @section Corresponding API Resources:
-#'  "POST https://string-db.org/api/[output_format]/functional_annotation?
-#'  identifiers=[your_identifiers]&[optional_parameters]"
+#'  "POST https://string-db.org/api/\{output_format\}/functional_annotation?
+#'  identifiers=\{your_identifiers\}&\{optional_parameters\}"
 #'
 #' @param ids Your protein ID(s). It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
@@ -1092,8 +1092,8 @@ rba_string_annotations <- function(ids,
 #'   functionally related.
 #'
 #' @section Corresponding API Resources:
-#'  "POST https://string-db.org/api/[output_format]/ppi_enrichment?identifiers=
-#'  [your_identifiers]&[optional_parameters]"
+#'  "POST https://string-db.org/api/\{output_format\}/ppi_enrichment?identifiers=
+#'  \{your_identifiers\}&\{optional_parameters\}"
 #'
 #' @param ids Your protein ID(s). It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
@@ -1202,7 +1202,7 @@ rba_string_enrichment_ppi <- function(ids,
 #'   is outdated, Kindly contact me.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://string-db.org/api/[output_format]/version"
+#'  "GET https://string-db.org/api/\{output_format\}/version"
 #'
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.

@@ -38,7 +38,7 @@ In version 73 (11 June 2020), using an orthology-based approach,
 \section{Corresponding API Resources}{
 
  "POST https://reactome.org/ContentService/data/orthologies/ids/
-   species/{speciesId}"
+   species/\{speciesId\}"
 }
 
 \examples{

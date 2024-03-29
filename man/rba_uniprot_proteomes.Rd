@@ -35,8 +35,8 @@ UniProt collects and annotates proteomes(Protein sets expressed in an
 }
 \section{Corresponding API Resources}{
 
- "GET https://ebi.ac.uk/proteins/api/proteomes/proteins/{upid}"
- \cr "GET https://ebi.ac.uk/proteins/api/proteomes/{upid}"
+ "GET https://ebi.ac.uk/proteins/api/proteomes/proteins/\{upid\}"
+ \cr "GET https://ebi.ac.uk/proteins/api/proteomes/\{upid\}"
 }
 
 \examples{

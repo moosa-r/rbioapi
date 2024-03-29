@@ -44,11 +44,11 @@ Use this function to search the event hierarchy and retrieve a list of
 }
 \section{Corresponding API Resources}{
 
- "GET https://reactome.org/ContentService/data/pathways/low/entity/{id}"
+ "GET https://reactome.org/ContentService/data/pathways/low/entity/\{id\}"
  \cr "GET https://reactome.org/ContentService/data/pathways/low/diagram/
- entity/{id}"
+ entity/\{id\}"
  \cr "GET https://reactome.org/ContentService/data/pathways/low/diagram/
- entity/{id}/allForms"
+ entity/\{id\}/allForms"
 }
 
 \examples{

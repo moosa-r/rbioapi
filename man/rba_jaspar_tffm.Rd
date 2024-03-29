@@ -23,7 +23,7 @@ Using this function you can retrieve details and annotations of
 }
 \section{Corresponding API Resources}{
 
- "GET "https://jaspar.elixir.no/api/v1/fttm/{tffm_id}/"
+ "GET https://jaspar.elixir.no/api/v1/fttm/\{tffm_id\}/"
 }
 
 \examples{

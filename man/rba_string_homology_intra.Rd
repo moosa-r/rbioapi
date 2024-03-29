@@ -39,8 +39,8 @@ Note that this function will retrieve similarity scores of different
 }
 \section{Corresponding API Resources}{
 
- "POST https://string-db.org/api/[output-format]/homology?identifiers=
- [your_identifiers]"
+ "POST https://string-db.org/api/\{output-format\}/homology?identifiers=
+ \{your_identifiers\}"
 }
 
 \examples{

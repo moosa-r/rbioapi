@@ -22,7 +22,7 @@ Use this function to retrieve a list of transcription factor binding sites
 }
 \section{Corresponding API Resources}{
 
- "GET "https://jaspar.elixir.no/api/v1/sites/{matrix_id}/"
+ "GET https://jaspar.elixir.no/api/v1/sites/\{matrix_id\}/"
 }
 
 \examples{

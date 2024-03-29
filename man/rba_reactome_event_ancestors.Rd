@@ -33,7 +33,7 @@ By Reactome's definition, Events are the building blocks of biological
 }
 \section{Corresponding API Resources}{
 
- "GET https://reactome.org/ContentService/data/event/{id}/ancestors"
+ "GET https://reactome.org/ContentService/data/event/\{id\}/ancestors"
 }
 
 \examples{

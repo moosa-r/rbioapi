@@ -43,9 +43,9 @@ Using this Comprehensive function, You can Retrieve any object from
 
  "POST https://reactome.org/ContentService/data/query/ids"
  \cr "POST https://reactome.org/ContentService/data/query/ids/map"
- \cr "GET https://reactome.org/ContentService/data/query/{id}"
- \cr s"GET https://reactome.org/ContentService//data/query/enhanced/{id}"
- \cr "GET https://reactome.org/ContentService/data/query/{id}/{attributeName}"
+ \cr "GET https://reactome.org/ContentService/data/query/\{id\}"
+ \cr "GET https://reactome.org/ContentService/data/query/enhanced/\{id\}"
+ \cr "GET https://reactome.org/ContentService/data/query/\{id\}/\{attributeName\}"
 }
 
 \examples{

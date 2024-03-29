@@ -37,7 +37,7 @@ For each Combination of species and miRNA type, Only a pre-defined
 }
 \section{Corresponding API Resources}{
 
- "GET  "https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/enrichment_categories/{species}/{mirna_type}/"
+ "GET https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/enrichment_categories/\{species\}/\{mirna_type\}/"
 }
 
 \examples{

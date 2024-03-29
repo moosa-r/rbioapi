@@ -72,8 +72,8 @@ Token is associated to each Reactome analysis results and kept by Reactome
 }
 \section{Corresponding API Resources}{
 
- "GET https://reactome.org/AnalysisService/report/{token}/{species}/
- {filename}.pdf"
+ "GET https://reactome.org/AnalysisService/report/\{token\}/\{species\}/
+ \{filename\}.pdf"
 }
 
 \examples{

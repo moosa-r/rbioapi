@@ -30,7 +30,7 @@ JASPAR organizes matrix profiles from multiple species
 }
 \section{Corresponding API Resources}{
 
- "GET "https://jaspar.elixir.no/api/v1/species/"
+ "GET https://jaspar.elixir.no/api/v1/species/"
 }
 
 \examples{

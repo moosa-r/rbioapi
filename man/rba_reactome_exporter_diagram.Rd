@@ -114,10 +114,10 @@ If the function is called with create_document = FALSE:
 }
 \section{Corresponding API Resources}{
 
-  "GET https://reactome.org/ContentService/exporter/diagram/{identifier}
-  .{ext}"
-  "GET https://reactome.org/ContentService/exporter/document/event/
-  {identifier}.pdf"
+  "GET https://reactome.org/ContentService/exporter/diagram/\{identifier\}
+  .\{ext\}"
+  \cr "GET https://reactome.org/ContentService/exporter/document/event/
+  \{identifier\}.pdf"
 }
 
 \examples{

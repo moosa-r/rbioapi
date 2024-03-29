@@ -43,8 +43,10 @@ For more information about how UniProt imports and calculates genomic
 }
 \section{Corresponding API Resources}{
 
- "GET https://ebi.ac.uk/proteins/api/coordinates/location/{accession}:{pPosition}"
- \cr "GET https://ebi.ac.uk/proteins/api/coordinates/location/{accession}:{pStart}-{pEnd}"
+ "GET https://ebi.ac.uk/proteins/api/coordinates/location
+ /\{accession\}:\{pPosition\}"
+ \cr "GET https://ebi.ac.uk/proteins/api/coordinates/location
+ /\{accession\}:\{pStart\}-\{pEnd\}"
 }
 
 \examples{

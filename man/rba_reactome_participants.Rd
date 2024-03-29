@@ -56,10 +56,10 @@ A 'Physical Entity' Instance could include an individual molecule,
 }
 \section{Corresponding API Resources}{
 
- "GET https://reactome.org/ContentService/data/participants/{id}"
- \cr "GET https://reactome.org/ContentService/data/participants/{id}/
+ "GET https://reactome.org/ContentService/data/participants/\{id\}"
+ \cr "GET https://reactome.org/ContentService/data/participants/\{id\}/
  participatingPhysicalEntities"
- \cr "GET https://reactome.org/ContentService/data/participants/{id}/
+ \cr "GET https://reactome.org/ContentService/data/participants/\{id\}/
  referenceEntities"
 }
 

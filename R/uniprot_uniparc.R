@@ -257,10 +257,10 @@ rba_uniprot_uniparc_search <- function(upi = NULL,
 #'   the returned UniParc entry. see "Argument" section for more details.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/uniparc/accession/{accession} "
-#'  \cr "GET https://ebi.ac.uk/proteins/api/uniparc/dbreference/{dbid}"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/uniparc/proteome/{upid}"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/uniparc/upi/{upi}"
+#'  "GET https://ebi.ac.uk/proteins/api/uniparc/accession/\{accession\} "
+#'  \cr "GET https://ebi.ac.uk/proteins/api/uniparc/dbreference/\{dbid\}"
+#'  \cr "GET https://ebi.ac.uk/proteins/api/uniparc/proteome/\{upid\}"
+#'  \cr "GET https://ebi.ac.uk/proteins/api/uniparc/upi/\{upi\}"
 #'
 #' @param upi unique UniParc Identifier.
 #' @param accession \href{https://www.uniprot.org/help/accession_numbers}{

@@ -34,8 +34,8 @@ This function Calls STRING's API to Convert a set of identifiers
 }
 \section{Corresponding API Resources}{
 
- "POST https://string-db.org/api/[output-format]/get_string_ids?identifiers=
- [your_identifiers]&[optional_parameters]"
+ "POST https://string-db.org/api/\{output-format\}/get_string_ids?identifiers=
+ \{your_identifiers\}&\{optional_parameters\}"
 }
 
 \examples{

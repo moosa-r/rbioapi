@@ -66,7 +66,7 @@ Reactome incorporate manually curated human reactions and PANTHER's
 }
 \section{Corresponding API Resources}{
 
- "GET https://reactome.org/AnalysisService/species/homoSapiens/{species}"
+ "GET https://reactome.org/AnalysisService/species/homoSapiens/\{species\}"
 }
 
 \examples{

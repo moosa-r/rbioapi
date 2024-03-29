@@ -25,7 +25,7 @@ Using this function you can retrieve gene-centrics data. For more
 }
 \section{Corresponding API Resources}{
 
- "GET https://ebi.ac.uk/proteins/api/genecentric/{accession}"
+ "GET https://ebi.ac.uk/proteins/api/genecentric/\{accession\}"
 }
 
 \examples{

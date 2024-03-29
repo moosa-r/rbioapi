@@ -174,8 +174,8 @@ rba_uniprot_proteomes_search <- function(name = NULL,
 #'   proteomes?} for more information.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/proteomes/proteins/{upid}"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/proteomes/{upid}"
+#'  "GET https://ebi.ac.uk/proteins/api/proteomes/proteins/\{upid\}"
+#'  \cr "GET https://ebi.ac.uk/proteins/api/proteomes/\{upid\}"
 #'
 #' @param upid \href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
 #'   identifier (UPID)}. You can supply up to 100 UPIDs.
@@ -397,7 +397,7 @@ rba_uniprot_genecentric_search <- function(upid = NULL,
 #'   gene-centric isoform mapping for eukaryotic reference proteome entries.}.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/genecentric/{accession}"
+#'  "GET https://ebi.ac.uk/proteins/api/genecentric/\{accession\}"
 #'
 #' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}.

@@ -12,7 +12,7 @@
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET "https://jaspar.elixir.no/api/v1/collections/"
+#'  "GET https://jaspar.elixir.no/api/v1/collections/"
 #'
 #' @return A data frame with collections' names and URLs.
 #'
@@ -109,7 +109,7 @@ rba_jaspar_collections <- function(release = 2024,
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET "https://jaspar.elixir.no/api/v1/collections/{collection}/"
+#'  "GET https://jaspar.elixir.no/api/v1/collections/\{collection\}/"
 #'
 #' @return A list that contains a data frame with information of matrix
 #'   profiles available in the collection.
@@ -262,7 +262,7 @@ rba_jaspar_collections_matrices <- function(collection,
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET "https://jaspar.elixir.no/api/v1/api/v1/matrix/"
+#'  "GET https://jaspar.elixir.no/api/v1/api/v1/matrix/"
 #'
 #' @return A list that contains a data frame of matrix profiles' information.
 #'
@@ -429,7 +429,7 @@ rba_jaspar_matrix_search <- function(term = NULL,
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET "https://jaspar.elixir.no/api/v1/matrix/{base_id}/versions/"
+#'  "GET https://jaspar.elixir.no/api/v1/matrix/\{base_id\}/versions/"
 #'
 #' @return A data frame of matrix profiles' versions information.
 #'
@@ -520,7 +520,7 @@ rba_jaspar_matrix_versions <- function(base_id,
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET "https://jaspar.elixir.no/api/v1/matrix/{matrix_id}/"
+#'  "GET https://jaspar.elixir.no/api/v1/matrix/\{matrix_id\}/"
 #'
 #' @return A list that contains the PFM along with its details and
 #'   annotations. If file_format was supplied, an un-parsed character string
@@ -638,8 +638,8 @@ rba_jaspar_matrix <- function(matrix_id,
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#' "GET "https://jaspar.elixir.no/api/v1/releases/"
-#'  "GET "https://jaspar.elixir.no/api/v1/releases/{release_number}/"
+#'  "GET https://jaspar.elixir.no/api/v1/releases/"
+#'  \cr "GET https://jaspar.elixir.no/api/v1/releases/\{release_number\}/"
 #'
 #' @return A list that contains all JASPAR database releases' information or
 #'   details of a particular release.
@@ -731,7 +731,7 @@ rba_jaspar_releases  <- function(release_number = NULL,
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET "https://jaspar.elixir.no/api/v1/sites/{matrix_id}/"
+#'  "GET https://jaspar.elixir.no/api/v1/sites/\{matrix_id\}/"
 #'
 #' @return A list that contains a data frame with binding sites information.
 #'
@@ -809,7 +809,7 @@ rba_jaspar_sites <- function(matrix_id,
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET "https://jaspar.elixir.no/api/v1/species/"
+#'  "GET https://jaspar.elixir.no/api/v1/species/"
 #'
 #' @return A data frame with information of available species.
 #'
@@ -918,7 +918,7 @@ rba_jaspar_species <- function(release = 2024,
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET "https://jaspar.elixir.no/api/v1/species/{tax_id}/"
+#'  "GET https://jaspar.elixir.no/api/v1/species/\{tax_id\}/"
 #'
 #' @return A list that contains a data frame with information of matrix
 #'   profiles available for the species.
@@ -1026,7 +1026,7 @@ rba_jaspar_species_matrices <- function(tax_id,
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET "https://jaspar.elixir.no/api/v1/taxon/"
+#'  "GET https://jaspar.elixir.no/api/v1/taxon/"
 #'
 #' @return A data frame with information of available species.
 #'
@@ -1122,7 +1122,7 @@ rba_jaspar_taxons <- function(release = 2024,
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET "https://jaspar.elixir.no/api/v1/taxon/{tax_group}/"
+#'  "GET https://jaspar.elixir.no/api/v1/taxon/\{tax_group\}/"
 #'
 #' @return A list that contains a data frame with information of matrix
 #'   profiles available for the taxonomic group.
@@ -1261,7 +1261,7 @@ rba_jaspar_taxons_matrices <- function(tax_group,
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET "https://jaspar.elixir.no/api/v1/api/v1/tffm/"
+#'  "GET https://jaspar.elixir.no/api/v1/api/v1/tffm/"
 #'
 #' @return A list that contains a data frame with information of query hits'
 #'   TFFMs.
@@ -1376,7 +1376,7 @@ rba_jaspar_tffm_search <- function(term = NULL,
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET "https://jaspar.elixir.no/api/v1/fttm/{tffm_id}/"
+#'  "GET https://jaspar.elixir.no/api/v1/fttm/\{tffm_id\}/"
 #'
 #' @return A list that contains the TFFM's information and annotations.
 #'

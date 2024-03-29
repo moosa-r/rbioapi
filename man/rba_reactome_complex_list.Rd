@@ -26,8 +26,8 @@ This function will retrieve a list of complexes that include your supplied
 }
 \section{Corresponding API Resources}{
 
- "GET https://reactome.org/ContentService/data/complexes/{resource}/
- {identifier}"
+ "GET https://reactome.org/ContentService/data/complexes/\{resource\}/
+ \{identifier\}"
 }
 
 \examples{

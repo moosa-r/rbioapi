@@ -25,8 +25,8 @@ If a release number was supplied, this function will return the details
 }
 \section{Corresponding API Resources}{
 
-"GET "https://jaspar.elixir.no/api/v1/releases/"
- "GET "https://jaspar.elixir.no/api/v1/releases/{release_number}/"
+ "GET https://jaspar.elixir.no/api/v1/releases/"
+ \cr "GET https://jaspar.elixir.no/api/v1/releases/\{release_number\}/"
 }
 
 \examples{

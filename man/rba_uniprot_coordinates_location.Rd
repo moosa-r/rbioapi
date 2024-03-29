@@ -40,8 +40,10 @@ For more information about how UniProt imports and calculates genomic
 }
 \section{Corresponding API Resources}{
 
- "GET https://ebi.ac.uk/proteins/api/coordinates/{taxonomy}/{locations}/feature"
- \cr "GET https://ebi.ac.uk/proteins/api/coordinates/{taxonomy}/{locations}"
+ "GET https://ebi.ac.uk/proteins/api/coordinates
+ /\{taxonomy\}/\{locations\}/feature"
+ \cr "GET https://ebi.ac.uk/proteins/api/coordinates
+ /\{taxonomy\}/\{locations\}"
 }
 
 \examples{

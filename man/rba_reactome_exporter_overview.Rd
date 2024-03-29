@@ -81,7 +81,7 @@ This function will Save a Pathway Overview of the supplied specie
 }
 \section{Corresponding API Resources}{
 
- "GET https://reactome.org/ContentService/exporter/fireworks/{species}.{ext}"
+ "GET https://reactome.org/ContentService/exporter/fireworks/\{species\}.\{ext\}"
 }
 
 \examples{

@@ -53,8 +53,8 @@ STRING currently maps to and retrieve enrichment results based on Gene
 }
 \section{Corresponding API Resources}{
 
- "POST https://string-db.org/api/[output_format]/functional_annotation?
- identifiers=[your_identifiers]&[optional_parameters]"
+ "POST https://string-db.org/api/\{output_format\}/functional_annotation?
+ identifiers=\{your_identifiers\}&\{optional_parameters\}"
 }
 
 \examples{

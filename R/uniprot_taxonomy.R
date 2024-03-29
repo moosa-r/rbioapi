@@ -7,7 +7,7 @@
 #'  \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database}
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/ancestor/{ids}"
+#'  "GET https://ebi.ac.uk/proteins/api/ancestor/\{ids\}"
 #'
 #' @param ids (numeric) Numeric vector of
 #'   \href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
@@ -75,15 +75,15 @@ rba_uniprot_taxonomy_lca <- function(ids,
 #'   \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database}.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/ids/{ids}"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/ids//id/{id}/node"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/id/{id}/node"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/id/{id}/children"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/id/{id}/children/node"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/id/{id}/parent"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/id/{id}/parent/node"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/id/{id}/siblings"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/id/{id}/siblings/node"
+#'  "GET https://ebi.ac.uk/proteins/api/ids/\{ids\}"
+#'  \cr "GET https://ebi.ac.uk/proteins/api/ids/id/\{id\}/node"
+#'  \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/node"
+#'  \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/children"
+#'  \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/children/node"
+#'  \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/parent"
+#'  \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/parent/node"
+#'  \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/siblings"
+#'  \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/siblings/node"
 #'
 #' @param ids (numeric) a single or a numeric vector of
 #'   \href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
@@ -207,8 +207,8 @@ rba_uniprot_taxonomy <- function(ids,
 #'   taxonomy node.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/lineage/{id}"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/lineage/{id}"
+#'  "GET https://ebi.ac.uk/proteins/api/lineage/\{id\}"
+#'  \cr "GET https://ebi.ac.uk/proteins/api/lineage/\{id\}"
 #'
 #' @param id (numeric) a
 #' \href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
@@ -273,8 +273,8 @@ rba_uniprot_taxonomy_lineage <- function(id,
 #'   \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database}.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/name/{name}"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/name/{name}/node"
+#'  "GET https://ebi.ac.uk/proteins/api/name/\{name\}"
+#'  \cr "GET https://ebi.ac.uk/proteins/api/name/\{name\}/node"
 #'
 #' @param name a name to to be used as search query.
 #' @param field Specify the field that your supplied name should be searched.

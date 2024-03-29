@@ -24,7 +24,7 @@ UniProt maps Antigenic features from different sources to the proteins'
 }
 \section{Corresponding API Resources}{
 
- "GET https://www.ebi.ac.uk/proteins/api/antigen/{accession}"
+ "GET https://www.ebi.ac.uk/proteins/api/antigen/\{accession\}"
 }
 
 \examples{

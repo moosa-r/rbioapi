@@ -48,8 +48,8 @@ Using this function, you can search and retrieve taxonomic nodes using
 }
 \section{Corresponding API Resources}{
 
- "GET https://ebi.ac.uk/proteins/api/name/{name}"
- \cr "GET https://ebi.ac.uk/proteins/api/name/{name}/node"
+ "GET https://ebi.ac.uk/proteins/api/name/\{name\}"
+ \cr "GET https://ebi.ac.uk/proteins/api/name/\{name\}/node"
 }
 
 \examples{

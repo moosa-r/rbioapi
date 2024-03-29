@@ -153,8 +153,10 @@ rba_uniprot_coordinates_search <- function(accession = NULL,
 #'   40(6), 694–705. https://doi.org/10.1002/humu.23738
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/coordinates/location/{accession}:{pPosition}"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/coordinates/location/{accession}:{pStart}-{pEnd}"
+#'  "GET https://ebi.ac.uk/proteins/api/coordinates/location
+#'  /\{accession\}:\{pPosition\}"
+#'  \cr "GET https://ebi.ac.uk/proteins/api/coordinates/location
+#'  /\{accession\}:\{pStart\}-\{pEnd\}"
 #'
 #' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}.
@@ -254,8 +256,8 @@ rba_uniprot_coordinates_sequence <- function(accession,
 #'   40(6), 694–705. https://doi.org/10.1002/humu.23738
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/coordinates/{accession}"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/coordinates/{dbtype}:{dbid}"
+#'  "GET https://ebi.ac.uk/proteins/api/coordinates/\{accession\}"
+#'  \cr "GET https://ebi.ac.uk/proteins/api/coordinates/\{dbtype\}:\{dbid\}"
 #'
 #' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}.
@@ -351,8 +353,10 @@ rba_uniprot_coordinates <- function(accession = NULL,
 #'   40(6), 694–705. https://doi.org/10.1002/humu.23738
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/coordinates/{taxonomy}/{locations}/feature"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/coordinates/{taxonomy}/{locations}"
+#'  "GET https://ebi.ac.uk/proteins/api/coordinates
+#'  /\{taxonomy\}/\{locations\}/feature"
+#'  \cr "GET https://ebi.ac.uk/proteins/api/coordinates
+#'  /\{taxonomy\}/\{locations\}"
 #'
 #' @param taxid NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
 #' @param locations genomic location formatted as: chromosome:start-end.
