@@ -108,7 +108,7 @@
 <span>  add_color_nodes <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  add_white_nodes <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  required_score <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  network_flavor <span class="op">=</span> <span class="st">"confidence"</span>,</span>
+<span>  network_flavor <span class="op">=</span> <span class="st">"evidence"</span>,</span>
 <span>  network_type <span class="op">=</span> <span class="st">"functional"</span>,</span>
 <span>  hide_node_labels <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  use_query_labels <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -166,10 +166,10 @@ threshold will be applied by STRING Based in the network. (low Confidence
 
 
 <dt>network_flavor</dt>
-<dd><p>The style of network edges, should be one of:</p><ul><li><p>"confidence": (default) Line's thickness is an indicator of the
-interaction's confidence score.</p></li>
-<li><p>"evidence": Line's color is based on the type of evidences that
+<dd><p>The style of network edges, should be one of:</p><ul><li><p>"evidence": (default) Line's color is based on the type of evidences that
 support the interaction.</p></li>
+<li><p>"confidence": Line's thickness is an indicator of the
+interaction's confidence score.</p></li>
 <li><p>"action": Line's Shape is an indicator of the interaction's predicted
 mode of actions.</p></li>
 </ul></dd>
@@ -234,8 +234,8 @@ arguments manual for more information on available options.</p></dd>
     <h2 id="corresponding-api-resources">Corresponding API Resources<a class="anchor" aria-label="anchor" href="#corresponding-api-resources"></a></h2>
     
 
-<p>"POST https://string-db.org/api/[output-format]/network?identifiers=
- [your_identifiers]&amp;[optional_parameters]"</p>
+<p>"POST https://string-db.org/api/{output-format}/network?identifiers=
+ {your_identifiers}&amp;{optional_parameters}"</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
@@ -256,8 +256,8 @@ arguments manual for more information on available options.</p></dd>
     <div class="dont-index"><p><code><a href="rba_string_map_ids.html">rba_string_map_ids</a></code></p>
 <p>Other "STRING": 
 <code><a href="rba_string_annotations.html">rba_string_annotations</a>()</code>,
-<code><a href="rba_string_enrichment_ppi.html">rba_string_enrichment_ppi</a>()</code>,
 <code><a href="rba_string_enrichment.html">rba_string_enrichment</a>()</code>,
+<code><a href="rba_string_enrichment_ppi.html">rba_string_enrichment_ppi</a>()</code>,
 <code><a href="rba_string_homology_inter.html">rba_string_homology_inter</a>()</code>,
 <code><a href="rba_string_homology_intra.html">rba_string_homology_intra</a>()</code>,
 <code><a href="rba_string_interaction_partners.html">rba_string_interaction_partners</a>()</code>,
