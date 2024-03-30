@@ -70,20 +70,21 @@
         input <- as.data.frame(input,
                                stringsAsFactors = FALSE)
         #make sure that every column name starts with #
-        inproper_colnames <- !grepl("^#", colnames(input))
+        inproper_colnames <- !grepl("^#", colnames(input)[[1]])
         if (any(inproper_colnames)) {
-          colnames(input)[inproper_colnames] <- paste0("#",
-                                                       colnames(input)[inproper_colnames])
+          colnames(input)[[1]] <- paste0("#",
+                                         colnames(input)[[1]])
         }
-        utils::write.table(x = as.character(input),
+        utils::write.table(x = input,
                            file = temp_file,
                            sep = "\t",
+                           quote = FALSE,
                            row.names = FALSE,
                            col.names = TRUE)
         return(list(type = "file",
                     file = temp_file))
       } else if (type == "vector") {
-        writeLines(text = input,
+        writeLines(text = c("#Gene names", input),
                    con = temp_file,
                    sep = "\n")
         return(list(type = "file",
