@@ -515,8 +515,7 @@ rba_reactome_event_ancestors <- function(event_id,
   .rba_args(cons = list(list(arg = "event_id",
                              class = "character")))
 
-  .msg("GET /data/event/{id}/ancestors",
-       "The ancestors of a given event")
+  .msg("Retrieving the ancestors of event %s.", event_id)
   ## Build Function-Specific Call
   input_call <- .rba_httr(httr = "get",
                           url = .rba_stg("reactome", "url"),
@@ -2298,8 +2297,7 @@ rba_reactome_pathways_top <- function(species,
                              class = c("character",
                                        "numeric"))))
 
-  .msg("GET /data/pathways/top/{species}",
-       "All Reactome top level pathways")
+  .msg("Retrieving all Reactome top level pathways of species %s.", species)
   ## Build GET API Request's query
   call_query <- .rba_query(init = list(),
                            list("species",
@@ -2382,10 +2380,7 @@ rba_reactome_people_name <- function(person_name,
                         list(arg = "exact_match",
                              class = "logical")))
 
-  .msg("/data/people/name/{name}",
-       "A list of people with first or last name partly matching a given string",
-       "/data/people/name/{name}/exact_match",
-       "A list of people with first AND last name exactly matching a given string")
+  .msg("Retreving the information of %s.", person_name)
 
   ## Build Function-Specific Call
   path_input <- paste0(.rba_stg("reactome", "pth", "content"),
@@ -2476,7 +2471,7 @@ rba_reactome_people_id <- function(person_id,
                                        isTRUE(publications)) > 1),
                              "You can only use either attribute_name, authored_pathways or publications function call.")))
 
-  .msg("Retrieving information of person with id: %s",
+  .msg("Retrieving information of person with id %s.",
        person_id)
 
   ## Build Function-Specific Call

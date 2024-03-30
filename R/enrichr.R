@@ -471,7 +471,7 @@ rba_enrichr_enrich <- function(user_list_id,
 
   ## get a list of available libraries
   if (is.null(getOption("rba_enrichr_libs"))) {
-    .msg("Calling rba_enrichr_libs() to get the names of available Enricr %s libraries.",
+    .msg("Calling rba_enrichr_libs() to get the names of available Enrichr %s libraries.",
          organism)
     enrichr_libs <- rba_enrichr_libs(store_in_options = TRUE)
 

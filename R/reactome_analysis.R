@@ -489,8 +489,8 @@ rba_reactome_analysis_pdf <- function(token,
                                      "Barium Lithium",
                                      "calcium salts"))))
 
-  .msg("GET /report/{token}/{species}/{filename}.pdf",
-       "Downloads a report for a given pathway analysis result")
+  .msg("Downloading a pdf report of Reactome analysis result with token %s.",
+       token)
 
   ## Build GET API Request's query
   call_query <- .rba_query(init = list(),
@@ -770,8 +770,7 @@ rba_reactome_analysis_import <- function(input,
                              class = "character",
                              val = c("file",
                                      "url"))))
-  .msg("POST /import/form",
-       "Imports the posted json file into the service")
+  .msg("Importing the input json file into the Reactome services.")
 
   ## Build Function-Specific Call
   # handling input
@@ -1212,8 +1211,7 @@ rba_reactome_analysis_token <- function(token,
                         list(arg = "max",
                              class = "numeric")))
 
-  .msg("GET /token/{token}",
-       "Returns the result associated with the token")
+  .msg("Retrieving Reactome analysis results with token %s.", token)
 
   ## Build POST API Request's query
   call_query <- list("sortBy" = sort_by,
