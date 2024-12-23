@@ -5,8 +5,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Connect to Reactome in R with rbioapi package. 
-">
 <title>2.E: Reactome &amp; rbioapi • rbioapi</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
@@ -16,16 +14,15 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="2.E: Reactome &amp; rbioapi">
-<meta property="og:description" content="Connect to Reactome in R with rbioapi package. 
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="2.E: Reactome &amp; rbioapi">
+<meta name="description" content="Connect to Reactome in R with rbioapi package.
+">
+<meta property="og:description" content="Connect to Reactome in R with rbioapi package.
 ">
 <meta property="og:image" content="https://rbioapi.moosa-r.com/logo.svg">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-BF9VGFNZ4C"></script><script>
+<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-BF9VGFNZ4C"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -35,82 +32,57 @@
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
 
-    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-secondary"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-secondary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">rbioapi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.1</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../articles/rbioapi.html">Get Started</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Functions</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../index.html"><span class="fa fas fa-home fa-lg"></span></a></li>
+<li class="nav-item"><a class="nav-link" href="../articles/rbioapi.html">Get Started</a></li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Functions</a></li>
 <li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles-amp-supported-services">Articles &amp; Supported Services</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles-amp-supported-services">
-    <a class="dropdown-item" href="../articles/rbioapi.html">rbioapi: Get Started</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="../articles/rbioapi_enrichr.html">Enrichr &amp; rbioapi</a>
-    <a class="dropdown-item" href="../articles/rbioapi_jaspar.html">JASPAR &amp; rbioapi</a>
-    <a class="dropdown-item" href="../articles/rbioapi_mieaa.html">miEEA &amp; rbioapi</a>
-    <a class="dropdown-item" href="../articles/rbioapi_panther.html">PANTHER &amp; rbioapi</a>
-    <a class="dropdown-item" href="../articles/rbioapi_reactome.html">Reactome &amp; rbioapi</a>
-    <a class="dropdown-item" href="../articles/rbioapi_string.html">STRING &amp; rbioapi</a>
-    <a class="dropdown-item" href="../articles/rbioapi_uniprot.html">UniProt &amp; rbioapi</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="../articles/rbioapi_do_enrich.html">Do with rbioapi: Over-Representation (Enrichment) Analysis in R</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles-supported-services" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles &amp; Supported Services</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles-supported-services">
+<li><a class="dropdown-item" href="../articles/rbioapi.html">rbioapi: Get Started</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="../articles/rbioapi_enrichr.html">Enrichr &amp; rbioapi</a></li>
+    <li><a class="dropdown-item" href="../articles/rbioapi_jaspar.html">JASPAR &amp; rbioapi</a></li>
+    <li><a class="dropdown-item" href="../articles/rbioapi_mieaa.html">miEEA &amp; rbioapi</a></li>
+    <li><a class="dropdown-item" href="../articles/rbioapi_panther.html">PANTHER &amp; rbioapi</a></li>
+    <li><a class="dropdown-item" href="../articles/rbioapi_reactome.html">Reactome &amp; rbioapi</a></li>
+    <li><a class="dropdown-item" href="../articles/rbioapi_string.html">STRING &amp; rbioapi</a></li>
+    <li><a class="dropdown-item" href="../articles/rbioapi_uniprot.html">UniProt &amp; rbioapi</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="../articles/rbioapi_do_enrich.html">Do with rbioapi: Over-Representation (Enrichment) Analysis in R</a></li>
+  </ul>
 </li>
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">News</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">News</a></li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/moosa-r/rbioapi/">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://moosa-r.com/" aria-label="Moosa Rezwani Portfolio Website">
-    <span class="fa fa-solid fa-id-card"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/moosa-r/rbioapi/"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://moosa-r.com/" aria-label="Moosa Rezwani Portfolio Website"><span class="fa fa-solid fa-id-card"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-article">
 
 
 
-<link href="rbioapi_reactome_files/htmltools-fill-0.5.8/fill.css" rel="stylesheet">
+<link href="rbioapi_reactome_files/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
 <script src="rbioapi_reactome_files/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="rbioapi_reactome_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="rbioapi_reactome_files/datatables-binding-0.32/datatables.js"></script><link href="rbioapi_reactome_files/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<script src="rbioapi_reactome_files/datatables-binding-0.33/datatables.js"></script><link href="rbioapi_reactome_files/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="rbioapi_reactome_files/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
 <script src="rbioapi_reactome_files/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="rbioapi_reactome_files/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
 <script src="rbioapi_reactome_files/crosstalk-1.2.1/js/crosstalk.min.js"></script><div class="row">
@@ -119,9 +91,9 @@
                         <h4 data-toc-skip class="author">Moosa
 Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2024-03-30</h4>
+            <h4 data-toc-skip class="date">2024-12-23</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/HEAD/vignettes/rbioapi_reactome.Rmd" class="external-link"><code>vignettes/rbioapi_reactome.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/master/vignettes/rbioapi_reactome.Rmd" class="external-link"><code>vignettes/rbioapi_reactome.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_reactome.Rmd</code></div>
     </div>
 
@@ -181,8 +153,8 @@ what would you choose in the webpage’s wizard.</p>
 <span><span class="co">#&gt;  $ summary            :List of 7</span></span>
 <span><span class="co">#&gt;  $ expression         :List of 1</span></span>
 <span><span class="co">#&gt;  $ identifiersNotFound: int 1</span></span>
-<span><span class="co">#&gt;  $ pathwaysFound      : int 79</span></span>
-<span><span class="co">#&gt;  $ pathways           :'data.frame': 79 obs. of  19 variables:</span></span>
+<span><span class="co">#&gt;  $ pathwaysFound      : int 82</span></span>
+<span><span class="co">#&gt;  $ pathways           :'data.frame': 82 obs. of  19 variables:</span></span>
 <span><span class="co">#&gt;  $ resourceSummary    :'data.frame': 3 obs. of  3 variables:</span></span>
 <span><span class="co">#&gt;  $ speciesSummary     :'data.frame': 1 obs. of  5 variables:</span></span>
 <span><span class="co">#&gt;  $ warnings           : list()</span></span>
@@ -192,8 +164,8 @@ what would you choose in the webpage’s wizard.</p>
 <span><span class="co">### 4.b You need the token for other rba_reactome_analysis_* functions</span></span>
 <span></span>
 <span><span class="co">## 5 Analsis results are in the pathways data frame:</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item" id="htmlwidget-267cd33d5145fbe98b53" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-267cd33d5145fbe98b53">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79"],["R-HSA-3371568","R-HSA-9825892","R-HSA-3371571","R-HSA-3371511","R-HSA-114604","R-HSA-6806003","R-HSA-3371453","R-HSA-983231","R-HSA-176412","R-HSA-2262752","R-HSA-3371556","R-HSA-8953897","R-HSA-6804754","R-HSA-376176","R-HSA-176408","R-HSA-69273","R-HSA-109582","R-HSA-6796648","R-HSA-1169410","R-HSA-174143","R-HSA-453276","R-HSA-69620","R-HSA-5633007","R-HSA-1538133","R-HSA-176417","R-HSA-6804757","R-HSA-5689896","R-HSA-1640170","R-HSA-2980767","R-HSA-69278","R-HSA-5666185","R-HSA-8853884","R-HSA-6811438","R-HSA-69275","R-HSA-453274","R-HSA-6811442","R-HSA-5625970","R-HSA-3700989","R-HSA-9856651","R-HSA-68884","R-HSA-6791312","R-HSA-5663220","R-HSA-69481","R-HSA-162658","R-HSA-9730414","R-HSA-176814","R-HSA-6804116","R-HSA-1362300","R-HSA-422475","R-HSA-6804114","R-HSA-69473","R-HSA-8852276","R-HSA-5625900","R-HSA-156711","R-HSA-9010553","R-HSA-174048","R-HSA-5627117","R-HSA-9833482","R-HSA-9675108","R-HSA-416572","R-HSA-9013404","R-HSA-9723907","R-HSA-9723905","R-HSA-6804756","R-HSA-195258","R-HSA-400685","R-HSA-3214847","R-HSA-1266738","R-HSA-9687139","R-HSA-9699150","R-HSA-9663199","R-HSA-9675126","R-HSA-397795","R-HSA-913531","R-HSA-9772755","R-HSA-3247509","R-HSA-4839726","R-HSA-69205","R-HSA-8953750"],[3371568,9825892,3371571,3371511,114604,6806003,3371453,983231,176412,2262752,3371556,8953897,6804754,376176,176408,69273,109582,6796648,1169410,174143,453276,69620,5633007,1538133,176417,6804757,5689896,1640170,2980767,69278,5666185,8853884,6811438,69275,453274,6811442,5625970,3700989,9856651,68884,6791312,5663220,69481,162658,9730414,176814,6804116,1362300,422475,6804114,69473,8852276,5625900,156711,9010553,174048,5627117,9833482,9675108,416572,9013404,9723907,9723905,6804756,195258,400685,3214847,1266738,9687139,9699150,9663199,9675126,397795,913531,9772755,3247509,4839726,69205,8953750],["Attenuation phase","Regulation of MITF-M-dependent genes involved in cell cycle and proliferation","HSF1-dependent transactivation","HSF1 activation","GPVI-mediated activation cascade","Regulation of TP53 Expression and Degradation","Regulation of HSF1-mediated heat shock response","Factors involved in megakaryocyte development and platelet production","Phosphorylation of the APC/C","Cellular responses to stress","Cellular response to heat stress","Cellular responses to stimuli","Regulation of TP53 Expression","Signaling by ROBO receptors","Regulation of APC/C activators between G1/S and early anaphase","Cyclin A/B1/B2 associated events during G2/M transition","Hemostasis","TP53 Regulates Transcription of DNA Repair Genes","Antiviral mechanism by IFN-stimulated genes","APC/C-mediated degradation of cell cycle proteins","Regulation of mitotic cell cycle","Cell Cycle Checkpoints","Regulation of TP53 Activity","G0 and Early G1","Phosphorylation of Emi1","Regulation of TP53 Degradation","Ovarian tumor domain proteases","Cell Cycle","Activation of NIMA Kinases NEK9, NEK6, NEK7","Cell Cycle, Mitotic","RHO GTPases Activate Rhotekin and Rhophilins","Transcriptional Regulation by VENTX","Intra-Golgi traffic","G2/M Transition","Mitotic G2-G2/M phases","Intra-Golgi and retrograde Golgi-to-ER traffic","RHO GTPases activate KTN1","Transcriptional Regulation by TP53","MITF-M-dependent gene expression","Mitotic Telophase/Cytokinesis","TP53 Regulates Transcription of Cell Cycle Genes","RHO GTPases Activate Formins","G2/M Checkpoints","Golgi Cisternae Pericentriolar Stack Reorganization","MITF-M-regulated melanocyte development","Activation of APC/C and APC/C:Cdc20 mediated degradation of mitotic proteins","TP53 Regulates Transcription of Genes Involved in G1 Cell Cycle Arrest","Transcription of E2F targets under negative control by p107 (RBL1) and p130 (RBL2) in complex with HDAC1","Axon guidance","TP53 Regulates Transcription of Genes Involved in G2 Cell Cycle Arrest","G2/M DNA damage checkpoint","The role of GTSE1 in G2/M progression after G2 checkpoint","RHO GTPases activate CIT","Polo-like kinase mediated events","Regulation of expression of SLITs and ROBOs","APC/C:Cdc20 mediated degradation of Cyclin B","RHO GTPases Activate ROCKs","PKR-mediated signaling","Nervous system development","Sema4D induced cell migration and growth-cone collapse","RAC2 GTPase cycle","Loss of Function of TP53 in Cancer","Loss of function of TP53 in cancer due to loss of tetramerization ability","Regulation of TP53 Activity through Phosphorylation","RHO GTPase Effectors","Sema4D in semaphorin signaling","HATs acetylate histones","Developmental Biology","Aberrant regulation of mitotic cell cycle due to RB1 defects","Defective DNA double strand break response due to BARD1 loss of function","Defective DNA double strand break response due to BRCA1 loss of function","Diseases of mitotic cell cycle","G-protein beta:gamma signalling","Interferon Signaling","Formation of WDR5-containing histone-modifying complexes","Chromatin modifying enzymes","Chromatin organization","G1/S-Specific Transcription","Transcriptional Regulation by E2F6"],[true,true,true,true,true,false,true,true,true,false,false,false,true,true,true,true,false,true,false,false,false,false,false,true,true,true,true,false,true,false,true,true,true,false,false,false,true,false,false,true,false,true,true,true,false,false,true,true,false,true,true,true,true,true,true,true,true,true,false,true,true,false,true,true,false,false,true,false,false,true,true,false,false,false,true,true,false,true,true],[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,false,false,false,false,false,true,true,true,true,false,false,false,false,false,false,false],[48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887],["9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606"],["Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens"],["TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL"],[47,22,59,43,43,46,113,194,20,1037,135,1055,4,235,83,32,804,86,172,92,92,279,178,38,8,43,44,734,9,596,10,48,49,212,214,219,12,484,131,15,65,149,153,17,167,77,20,20,579,21,80,83,23,23,183,24,24,88,615,25,92,1,1,95,325,31,110,1716,36,2,2,38,39,397,42,254,254,43,46],[5,4,5,4,4,4,5,6,3,12,5,12,2,6,4,3,10,4,5,4,4,6,5,3,2,3,3,9,2,8,2,3,3,5,5,5,2,7,4,2,3,4,4,2,4,3,2,2,7,2,3,3,2,2,4,2,2,3,7,2,3,1,1,3,5,2,3,12,2,1,1,2,2,5,2,4,4,2,2],[0.003018431699955045,0.001412882923383212,0.003789095112709524,0.002761543895703552,0.002761543895703552,0.002954209748892172,0.007257080470104682,0.01245905850619742,0.001284439021257466,0.0665981632521996,0.008669963393487894,0.06775415837133132,0.0002568878042514932,0.01509215849977522,0.005330421938218483,0.002055102434011945,0.05163444865455012,0.005523087791407103,0.01104617558281421,0.005908419497784343,0.005908419497784343,0.01791792434654165,0.01143150728919145,0.002440434140389185,0.0005137756085029863,0.002761543895703552,0.002825765846766425,0.047138912080149,0.0005779975595658596,0.03827628283347248,0.000642219510628733,0.003082653651017918,0.003146875602080791,0.01361505362532914,0.01374349752745488,0.01406460728276925,0.0007706634127544795,0.03108342431443067,0.008413075589236402,0.0009633292659430993,0.004174426819086764,0.00956907070836812,0.009825958512619613,0.001091773168068846,0.01072506582749984,0.004945090231841243,0.001284439021257466,0.001284439021257466,0.03718450966540363,0.001348660972320339,0.005137756085029864,0.005330421938218483,0.001477104874446086,0.001477104874446086,0.01175261704450581,0.001541326825508959,0.001541326825508959,0.00565153169353285,0.03949649990366708,0.001605548776571832,0.005908419497784343,6.422195106287329e-05,6.422195106287329e-05,0.006101085350972963,0.02087213409543382,0.001990880482949072,0.007064414616916062,0.1102048680238906,0.002311990238263438,0.0001284439021257466,0.0001284439021257466,0.002440434140389185,0.002504656091452058,0.0254961145719607,0.002697321944640678,0.01631237556996981,0.01631237556996981,0.002761543895703552,0.002954209748892172],[3.850584953113412e-07,7.37791600369242e-07,1.16764758950616e-06,1.026898692357836e-05,1.026898692357836e-05,1.335811920599728e-05,2.657866470934245e-05,2.930230023012736e-05,3.509758400277452e-05,5.499207176817844e-05,6.149770360763807e-05,6.493802822005179e-05,7.385435402817997e-05,8.419551743599207e-05,0.0001302570615034915,0.0001400776871697262,0.0001439767130427816,0.0001491242329558773,0.0001896415496752679,0.0001926805966394607,0.0001926805966394607,0.0002129516563782463,0.0002220291602464952,0.0002315477698183743,0.0002931020421438335,0.0003318995601322428,0.0003548312932037945,0.0003611137889575344,0.000370228631863645,0.0004410529225890025,0.0004561747752127587,0.0004567082055727534,0.0004848042042582268,0.0004921626688513259,0.0005134592390662052,0.0005697409001294007,0.0006543149416295968,0.000673688302123221,0.0007255587288772514,0.001016360467293143,0.001093300116698948,0.001166199695426862,0.001284971923490641,0.001300342864029136,0.001767463245169076,0.001771141050560754,0.001789218989544761,0.001789218989544761,0.00189451697235743,0.001968748609854187,0.001973551573321686,0.002189834028937687,0.002352362233445815,0.002352362233445815,0.002458717953724765,0.00255634634562496,0.00255634634562496,0.002582007671016684,0.002658015952889392,0.002768382428661509,0.002925100522927049,0.003078005839340592,0.003078005839340592,0.003200000117913993,0.003216804922993477,0.004206939058036707,0.004810383382653383,0.004974381160530172,0.005618235050760423,0.006146734341161531,0.006146734341161531,0.006235397454217417,0.006555071689929193,0.00742164739302742,0.007557909889886028,0.007785172524504502,0.007785172524504502,0.00790664102744898,0.008995550959749132],[0.0001719054428860334,0.0001719054428860334,0.0001809853763734548,0.0009550157838927875,0.0009550157838927875,0.00102857517886179,0.001699533413347387,0.001699533413347387,0.0017899767841415,0.002467645072361968,0.002467645072361968,0.002467645072361968,0.002584902390986299,0.002778452075387738,0.003728105823896932,0.003728105823896932,0.003728105823896932,0.003728105823896932,0.004238973126068135,0.004238973126068135,0.004238973126068135,0.004399407626549112,0.004399407626549112,0.004399407626549112,0.005275836758589003,0.005642292522248127,0.005777820623320551,0.005777820623320551,0.005923658109818319,0.006393914878018547,0.006393914878018547,0.006393914878018547,0.006398114695067236,0.006398114695067236,0.006674970107860667,0.006836890801552808,0.007851779299555162,0.007981146017649765,0.007981146017649765,0.01117996514022457,0.01202630128368842,0.01282819664969548,0.01284971923490641,0.01300342864029136,0.01610297090590285,0.01610297090590285,0.01610297090590285,0.01610297090590285,0.01705065275121687,0.0175186722315015,0.0175186722315015,0.0175186722315015,0.01860611167022574,0.01860611167022574,0.01860611167022574,0.01860611167022574,0.01860611167022574,0.01860611167022574,0.01860611167022574,0.01937867700063056,0.02047570366048934,0.02154604087538414,0.02154604087538414,0.02240000082539795,0.02251763446095434,0.0288623002959203,0.0288623002959203,0.02984628696318103,0.03370941030456254,0.03688040604696918,0.03688040604696918,0.0374123847253045,0.03933043013957516,0.0395332051372449,0.0395332051372449,0.0395332051372449,0.0395332051372449,0.0395332051372449,0.04497775479874566],[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],["TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL"],[5,17,8,7,25,35,14,43,2,500,29,531,5,60,14,25,342,17,71,40,40,56,97,27,2,30,14,456,4,357,6,13,10,78,80,48,2,258,76,4,42,27,24,6,94,15,17,8,295,11,12,10,6,15,20,3,7,40,321,7,10,1,1,26,113,13,15,889,3,1,1,5,15,119,30,85,85,28,33],[3,4,4,1,3,17,7,7,2,48,12,48,5,19,7,19,12,15,6,32,32,27,64,6,2,12,2,187,2,160,6,3,4,49,51,6,2,172,4,2,27,10,11,4,4,15,10,2,34,7,5,6,5,7,7,3,4,4,34,4,10,1,1,23,48,5,3,48,2,1,1,2,5,6,7,5,5,2,2],[0.0003358409457281032,0.001141859215475551,0.0005373455131649651,0.0004701773240193445,0.001679204728640516,0.002350886620096722,0.0009403546480386889,0.002888232133261687,0.0001343363782912413,0.03358409457281031,0.001947877485222998,0.03566630843632455,0.0003358409457281032,0.004030091348737238,0.0009403546480386889,0.001679204728640516,0.02297152068780226,0.001141859215475551,0.004768941429339065,0.002686727565824825,0.002686727565824825,0.003761418592154756,0.006515314347125201,0.001813541106931757,0.0001343363782912413,0.002015045674368619,0.0009403546480386889,0.03062869425040301,0.0002686727565824826,0.02397904352498657,0.0004030091348737238,0.0008731864588930683,0.0006716818914562063,0.00523911875335841,0.00537345513164965,0.00322407307898979,0.0001343363782912413,0.01732939279957012,0.005104782375067168,0.0002686727565824826,0.002821063944116067,0.001813541106931757,0.001612036539494895,0.0004030091348737238,0.00631380977968834,0.00100752283718431,0.001141859215475551,0.0005373455131649651,0.01981461579795809,0.000738850080601827,0.0008060182697474476,0.0006716818914562063,0.0004030091348737238,0.00100752283718431,0.001343363782912413,0.0002015045674368619,0.0004701773240193445,0.002686727565824825,0.02156098871574422,0.0004701773240193445,0.0006716818914562063,6.716818914562064e-05,6.716818914562064e-05,0.001746372917786137,0.007590005373455132,0.0008731864588930683,0.00100752283718431,0.05971252015045674,0.0002015045674368619,6.716818914562064e-05,6.716818914562064e-05,0.0003358409457281032,0.00100752283718431,0.007993014508328856,0.002015045674368619,0.005709296077377753,0.005709296077377753,0.001880709296077378,0.002216550241805481]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>stId<\/th>\n      <th>dbId<\/th>\n      <th>name<\/th>\n      <th>llp<\/th>\n      <th>inDisease<\/th>\n      <th>species.dbId<\/th>\n      <th>species.taxId<\/th>\n      <th>species.name<\/th>\n      <th>entities.resource<\/th>\n      <th>entities.total<\/th>\n      <th>entities.found<\/th>\n      <th>entities.ratio<\/th>\n      <th>entities.pValue<\/th>\n      <th>entities.fdr<\/th>\n      <th>entities.exp<\/th>\n      <th>reactions.resource<\/th>\n      <th>reactions.total<\/th>\n      <th>reactions.found<\/th>\n      <th>reactions.ratio<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":5,"columnDefs":[{"className":"dt-right","targets":[2,6,10,11,12,13,14,17,18,19]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"stId","targets":1},{"name":"dbId","targets":2},{"name":"name","targets":3},{"name":"llp","targets":4},{"name":"inDisease","targets":5},{"name":"species.dbId","targets":6},{"name":"species.taxId","targets":7},{"name":"species.name","targets":8},{"name":"entities.resource","targets":9},{"name":"entities.total","targets":10},{"name":"entities.found","targets":11},{"name":"entities.ratio","targets":12},{"name":"entities.pValue","targets":13},{"name":"entities.fdr","targets":14},{"name":"entities.exp","targets":15},{"name":"reactions.resource","targets":16},{"name":"reactions.total","targets":17},{"name":"reactions.found","targets":18},{"name":"reactions.ratio","targets":19}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>As mentioned, some of <code><a href="../reference/rba_reactome_analysis.html">rba_reactome_analysis()</a></code>’s
+<div class="datatables html-widget html-fill-item" id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82"],["R-HSA-3371568","R-HSA-3371571","R-HSA-9825892","R-HSA-3371511","R-HSA-114604","R-HSA-9856651","R-HSA-6806003","R-HSA-3371453","R-HSA-983231","R-HSA-8953897","R-HSA-176412","R-HSA-2262752","R-HSA-376176","R-HSA-3371556","R-HSA-176408","R-HSA-6804754","R-HSA-9730414","R-HSA-453276","R-HSA-174143","R-HSA-109582","R-HSA-69273","R-HSA-6796648","R-HSA-69620","R-HSA-1169410","R-HSA-5633007","R-HSA-1538133","R-HSA-176417","R-HSA-1640170","R-HSA-6804757","R-HSA-5689896","R-HSA-69275","R-HSA-69278","R-HSA-2980767","R-HSA-453274","R-HSA-8853884","R-HSA-5666185","R-HSA-6811438","R-HSA-9825895","R-HSA-6811442","R-HSA-5625970","R-HSA-3700989","R-HSA-1266738","R-HSA-69481","R-HSA-68884","R-HSA-176814","R-HSA-6791312","R-HSA-5663220","R-HSA-162658","R-HSA-8852276","R-HSA-422475","R-HSA-6804116","R-HSA-1362300","R-HSA-9010553","R-HSA-69473","R-HSA-6804114","R-HSA-9675108","R-HSA-5625900","R-HSA-156711","R-HSA-9833482","R-HSA-174048","R-HSA-5627117","R-HSA-416572","R-HSA-9013404","R-HSA-9723907","R-HSA-9723905","R-HSA-195258","R-HSA-6804756","R-HSA-400685","R-HSA-3214847","R-HSA-9687139","R-HSA-9663199","R-HSA-9699150","R-HSA-9675126","R-HSA-397795","R-HSA-9772755","R-HSA-3247509","R-HSA-4839726","R-HSA-913531","R-HSA-69205","R-HSA-8953750","R-HSA-69206","R-HSA-5688426"],[3371568,3371571,9825892,3371511,114604,9856651,6806003,3371453,983231,8953897,176412,2262752,376176,3371556,176408,6804754,9730414,453276,174143,109582,69273,6796648,69620,1169410,5633007,1538133,176417,1640170,6804757,5689896,69275,69278,2980767,453274,8853884,5666185,6811438,9825895,6811442,5625970,3700989,1266738,69481,68884,176814,6791312,5663220,162658,8852276,422475,6804116,1362300,9010553,69473,6804114,9675108,5625900,156711,9833482,174048,5627117,416572,9013404,9723907,9723905,195258,6804756,400685,3214847,9687139,9663199,9699150,9675126,397795,9772755,3247509,4839726,913531,69205,8953750,69206,5688426],["Attenuation phase","HSF1-dependent transactivation","Regulation of MITF-M-dependent genes involved in cell cycle and proliferation","HSF1 activation","GPVI-mediated activation cascade","MITF-M-dependent gene expression","Regulation of TP53 Expression and Degradation","Regulation of HSF1-mediated heat shock response","Factors involved in megakaryocyte development and platelet production","Cellular responses to stimuli","Phosphorylation of the APC/C","Cellular responses to stress","Signaling by ROBO receptors","Cellular response to heat stress","Regulation of APC/C activators between G1/S and early anaphase","Regulation of TP53 Expression","MITF-M-regulated melanocyte development","Regulation of mitotic cell cycle","APC/C-mediated degradation of cell cycle proteins","Hemostasis","Cyclin A/B1/B2 associated events during G2/M transition","TP53 Regulates Transcription of DNA Repair Genes","Cell Cycle Checkpoints","Antiviral mechanism by IFN-stimulated genes","Regulation of TP53 Activity","G0 and Early G1","Phosphorylation of Emi1","Cell Cycle","Regulation of TP53 Degradation","Ovarian tumor domain proteases","G2/M Transition","Cell Cycle, Mitotic","Activation of NIMA Kinases NEK9, NEK6, NEK7","Mitotic G2-G2/M phases","Transcriptional Regulation by VENTX","RHO GTPases Activate Rhotekin and Rhophilins","Intra-Golgi traffic","Regulation of MITF-M-dependent genes involved in DNA replication, damage repair and senescence","Intra-Golgi and retrograde Golgi-to-ER traffic","RHO GTPases activate KTN1","Transcriptional Regulation by TP53","Developmental Biology","G2/M Checkpoints","Mitotic Telophase/Cytokinesis","Activation of APC/C and APC/C:Cdc20 mediated degradation of mitotic proteins","TP53 Regulates Transcription of Cell Cycle Genes","RHO GTPases Activate Formins","Golgi Cisternae Pericentriolar Stack Reorganization","The role of GTSE1 in G2/M progression after G2 checkpoint","Axon guidance","TP53 Regulates Transcription of Genes Involved in G1 Cell Cycle Arrest","Transcription of E2F targets under negative control by p107 (RBL1) and p130 (RBL2) in complex with HDAC1","Regulation of expression of SLITs and ROBOs","G2/M DNA damage checkpoint","TP53 Regulates Transcription of Genes Involved in G2 Cell Cycle Arrest","Nervous system development","RHO GTPases activate CIT","Polo-like kinase mediated events","PKR-mediated signaling","APC/C:Cdc20 mediated degradation of Cyclin B","RHO GTPases Activate ROCKs","Sema4D induced cell migration and growth-cone collapse","RAC2 GTPase cycle","Loss of Function of TP53 in Cancer","Loss of function of TP53 in cancer due to loss of tetramerization ability","RHO GTPase Effectors","Regulation of TP53 Activity through Phosphorylation","Sema4D in semaphorin signaling","HATs acetylate histones","Aberrant regulation of mitotic cell cycle due to RB1 defects","Defective DNA double strand break response due to BRCA1 loss of function","Defective DNA double strand break response due to BARD1 loss of function","Diseases of mitotic cell cycle","G-protein beta:gamma signalling","Formation of WDR5-containing histone-modifying complexes","Chromatin modifying enzymes","Chromatin organization","Interferon Signaling","G1/S-Specific Transcription","Transcriptional Regulation by E2F6","G1/S Transition","Deubiquitination"],[true,true,true,true,true,false,false,true,true,false,true,false,true,false,true,true,false,false,false,false,true,true,false,false,false,true,true,false,true,true,false,false,true,false,true,true,true,true,false,true,false,false,true,true,false,false,true,true,true,false,true,true,true,true,true,false,true,true,true,true,true,true,true,false,true,false,true,false,true,false,true,true,false,false,true,true,false,false,true,true,false,false],[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,false,false,false,false,true,true,true,true,false,false,false,false,false,false,false,false,false],[48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887,48887],["9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606"],["Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens"],["TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL"],[47,59,27,43,43,168,46,113,194,1166,20,1039,222,135,70,4,233,79,79,804,32,86,266,172,178,38,8,722,43,44,199,583,9,201,48,10,49,11,219,12,486,1844,140,15,64,65,149,17,70,566,20,20,170,80,21,603,23,23,88,24,24,25,92,1,1,325,95,31,110,36,2,2,38,39,42,254,254,404,43,46,140,275],[5,5,4,4,4,6,4,5,6,13,3,12,6,5,4,2,6,4,4,10,3,4,6,5,5,3,2,9,3,3,5,8,2,5,3,2,3,2,5,2,7,14,4,2,3,3,4,2,3,7,2,2,4,3,2,7,2,2,3,2,2,2,3,1,1,5,3,2,3,2,1,1,2,2,2,4,4,5,2,2,3,4],[0.002980342422320862,0.003741280913126189,0.001712111604311985,0.002726696258719087,0.002726696258719087,0.01065313887127457,0.002916930881420419,0.007165504121750158,0.01230183893468611,0.07393785668991756,0.001268230818008878,0.0658845909955612,0.01407736207989854,0.008560558021559923,0.004438807863031071,0.0002536461636017755,0.01477488902980342,0.005009511731135067,0.005009511731135067,0.05098287888395688,0.002029169308814204,0.005453392517438174,0.01686746987951807,0.01090678503487635,0.01128725428027901,0.002409638554216868,0.000507292327203551,0.04578313253012048,0.002726696258719087,0.002790107799619531,0.01261889663918833,0.03696892834495878,0.0005707038681039949,0.01274571972098922,0.003043753963221306,0.0006341154090044388,0.00310716550412175,0.0006975269499048827,0.01388712745719721,0.0007609384908053266,0.03081800887761573,0.1169308814204185,0.008877615726062143,0.0009511731135066582,0.004058338617628408,0.004121750158528852,0.009448319594166138,0.001077996195307546,0.004438807863031071,0.03589093214965124,0.001268230818008878,0.001268230818008878,0.01077996195307546,0.00507292327203551,0.001331642358909322,0.03823715916296766,0.001458465440710209,0.001458465440710209,0.005580215599239061,0.001521876981610653,0.001521876981610653,0.001585288522511097,0.005833861762840837,6.341154090044388e-05,6.341154090044388e-05,0.02060875079264426,0.006024096385542169,0.00196575776791376,0.006975269499048827,0.00228281547241598,0.0001268230818008878,0.0001268230818008878,0.002409638554216868,0.002473050095117311,0.002663284717818643,0.01610653138871275,0.01610653138871275,0.02561826252377933,0.002726696258719087,0.002916930881420419,0.008877615726062143,0.01743817374762207],[3.618621802203847e-07,1.097689262929968e-06,1.574227675771311e-06,9.772340929359302e-06,9.772340929359302e-06,1.222130959266376e-05,1.271315521866878e-05,2.502535437109987e-05,2.730681664275814e-05,3.216909205805418e-05,3.380405367281458e-05,4.953886989877976e-05,5.751629715111672e-05,5.794052415819539e-05,6.462577453270058e-05,7.200934589501884e-05,7.497073099915763e-05,0.0001027602614350753,0.0001027602614350753,0.0001297807713133148,0.000134959159443615,0.0001420852344244938,0.0001539200107317784,0.0001788633610977364,0.0002094465161562864,0.0002231232365264013,0.0002858081951696567,0.0002915552695369472,0.0003198672733042418,0.0003419769423783636,0.0003487969519747613,0.0003501293791858817,0.0003610244311263999,0.0003650226792570876,0.0004402109284300515,0.0004448448936282823,0.0004673047015243403,0.0005372187754181246,0.0005380888967505548,0.0006380954874736222,0.0006405523474888319,0.0008848919292918644,0.0008850758747256382,0.0009912399714713249,0.001008520483449904,0.00105429251951672,0.001113129327755868,0.001268266060147405,0.001302860203291289,0.001549434794666849,0.001745211766764787,0.001745211766764787,0.001800473550141568,0.001903907546476291,0.001920373053610369,0.002217324793589048,0.00229467368209435,0.00229467368209435,0.002491428065892642,0.002493716749395358,0.002493716749395358,0.002700624482828151,0.002822788138801213,0.003039222655666585,0.003039222655666585,0.003047358066243233,0.003088321139958716,0.00410457667171471,0.004644368411281019,0.005482205341154844,0.006069400299017813,0.006069400299017813,0.006084722838332945,0.006396828854380532,0.007375998973901288,0.007452723856692933,0.007452723856692933,0.007568207046810493,0.007716525010603714,0.008779894825796108,0.008986521373919754,0.009777283915968105],[0.0001697133625233604,0.0002455795174203246,0.0002455795174203246,0.0008517813996508083,0.0008517813996508083,0.0008517813996508083,0.0008517813996508083,0.001419770254258212,0.001419770254258212,0.001419770254258212,0.001419770254258212,0.001912037297220448,0.001912037297220448,0.001912037297220448,0.002003399010513718,0.002024209736977256,0.002024209736977256,0.002466246274441808,0.002466246274441808,0.002969101507759531,0.002969101507759531,0.002983789922914371,0.003078400214635568,0.003398403860856991,0.003770037290813155,0.004016218257475224,0.004664884312591155,0.004664884312591155,0.004745294830342139,0.004745294830342139,0.004745294830342139,0.004745294830342139,0.004745294830342139,0.004745294830342139,0.005607656418292084,0.005607656418292084,0.005607656418292084,0.006446625305017495,0.006457066761006658,0.007019050362209844,0.007046075822377151,0.008850758747256382,0.008850758747256382,0.009912399714713249,0.01001816394980282,0.01001816394980282,0.01001816394980282,0.01141439454132664,0.01172574182962161,0.01394491315200164,0.01440378840113254,0.01440378840113254,0.01440378840113254,0.01523126037181033,0.01536298442888295,0.0174399964612485,0.0174399964612485,0.0174399964612485,0.0174399964612485,0.01745601724576751,0.01745601724576751,0.01890437137979706,0.01975951697160849,0.02127455858966609,0.02127455858966609,0.02133150646370263,0.02161824797971101,0.02462746003028826,0.02786621046768611,0.03289323204692907,0.03641640179410688,0.03641640179410688,0.03650833702999767,0.03838097312628319,0.03858262505301857,0.03858262505301857,0.03858262505301857,0.03858262505301857,0.03858262505301857,0.04389947412898054,0.04493260686959877,0.04888641957984052],[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],["TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL","TOTAL"],[5,8,20,7,25,113,35,14,43,613,2,521,60,29,14,5,150,40,40,342,25,17,56,71,97,27,2,457,30,14,78,357,4,80,13,6,10,10,48,2,258,954,24,4,15,42,27,6,10,295,17,8,20,12,11,322,6,15,40,3,7,7,10,1,1,113,26,13,15,3,1,1,5,15,30,85,85,125,28,33,61,77],[3,4,4,1,3,6,17,7,7,51,2,48,19,12,7,5,6,32,32,12,19,15,27,6,64,6,2,187,12,2,49,160,2,51,3,6,4,2,6,2,172,50,11,2,15,27,10,4,6,34,10,2,7,5,7,34,5,7,4,3,4,4,10,1,1,48,23,5,3,2,1,1,2,5,7,5,5,6,2,2,22,5],[0.000327632527357316,0.0005242120437717057,0.001310530109429264,0.0004586855383002425,0.00163816263678658,0.007404495118275342,0.002293427691501212,0.0009173710766004849,0.002817639735272918,0.04016774785400695,0.0001310530109429264,0.03413930935063233,0.003931590328287792,0.001900268658672433,0.0009173710766004849,0.000327632527357316,0.00982897582071948,0.002621060218858528,0.002621060218858528,0.02241006487124042,0.00163816263678658,0.001113950593014874,0.00366948430640194,0.004652381888473888,0.006356071030731931,0.001769215647729507,0.0001310530109429264,0.02994561300045868,0.001965795164143896,0.0009173710766004849,0.00511106742677413,0.02339296245331236,0.0002621060218858528,0.005242120437717056,0.0008518445711290217,0.0003931590328287793,0.0006552650547146321,0.0006552650547146321,0.003145272262630234,0.0001310530109429264,0.01690583841163751,0.06251228621977591,0.001572636131315117,0.0002621060218858528,0.0009828975820719481,0.002752113229801455,0.001769215647729507,0.0003931590328287793,0.0006552650547146321,0.01933031911408165,0.001113950593014874,0.0005242120437717057,0.001310530109429264,0.0007863180656575585,0.0007207915601860952,0.02109953476181115,0.0003931590328287793,0.0009828975820719481,0.002621060218858528,0.0001965795164143896,0.0004586855383002425,0.0004586855383002425,0.0006552650547146321,6.552650547146321e-05,6.552650547146321e-05,0.007404495118275342,0.001703689142258043,0.0008518445711290217,0.0009828975820719481,0.0001965795164143896,6.552650547146321e-05,6.552650547146321e-05,0.000327632527357316,0.0009828975820719481,0.001965795164143896,0.005569752965074373,0.005569752965074373,0.0081908131839329,0.00183474215320097,0.002162374680558286,0.003997116833759255,0.005045540921302667]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>stId<\/th>\n      <th>dbId<\/th>\n      <th>name<\/th>\n      <th>llp<\/th>\n      <th>inDisease<\/th>\n      <th>species.dbId<\/th>\n      <th>species.taxId<\/th>\n      <th>species.name<\/th>\n      <th>entities.resource<\/th>\n      <th>entities.total<\/th>\n      <th>entities.found<\/th>\n      <th>entities.ratio<\/th>\n      <th>entities.pValue<\/th>\n      <th>entities.fdr<\/th>\n      <th>entities.exp<\/th>\n      <th>reactions.resource<\/th>\n      <th>reactions.total<\/th>\n      <th>reactions.found<\/th>\n      <th>reactions.ratio<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":5,"columnDefs":[{"className":"dt-right","targets":[2,6,10,11,12,13,14,17,18,19]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"stId","targets":1},{"name":"dbId","targets":2},{"name":"name","targets":3},{"name":"llp","targets":4},{"name":"inDisease","targets":5},{"name":"species.dbId","targets":6},{"name":"species.taxId","targets":7},{"name":"species.name","targets":8},{"name":"entities.resource","targets":9},{"name":"entities.total","targets":10},{"name":"entities.found","targets":11},{"name":"entities.ratio","targets":12},{"name":"entities.pValue","targets":13},{"name":"entities.fdr","targets":14},{"name":"entities.exp","targets":15},{"name":"reactions.resource","targets":16},{"name":"reactions.total","targets":17},{"name":"reactions.found","targets":18},{"name":"reactions.ratio","targets":19}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>As mentioned, some of <code><a href="../reference/rba_reactome_analysis.html">rba_reactome_analysis()</a></code>’s
 arguments correspond to the wizard of <a href="https://reactome.org/PathwayBrowser/#TOOL=AT" class="external-link">analyse gene
 list</a> tool; Other arguments corresponds to the contents of “Filter
 your results” tab in the results page.</p>
@@ -259,7 +231,7 @@ you supply more than one ID, you cannot have
 <span><span class="va">pathway</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_query.html">rba_reactome_query</a></span><span class="op">(</span>ids <span class="op">=</span> <span class="st">"R-HSA-109581"</span>, enhanced <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">## 2 As always we use str() to inspect the output's structure</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">pathway</span>, <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="co">#&gt; List of 26</span></span>
+<span><span class="co">#&gt; List of 28</span></span>
 <span><span class="co">#&gt;  $ dbId               : int 109581</span></span>
 <span><span class="co">#&gt;  $ displayName        : chr "Apoptosis"</span></span>
 <span><span class="co">#&gt;  $ stId               : chr "R-HSA-109581"</span></span>
@@ -271,9 +243,9 @@ you supply more than one ID, you cannot have
 <span><span class="co">#&gt;   ..$ className  : chr "InstanceEdit"</span></span>
 <span><span class="co">#&gt;   ..$ schemaClass: chr "InstanceEdit"</span></span>
 <span><span class="co">#&gt;  $ modified           :List of 6</span></span>
-<span><span class="co">#&gt;   ..$ dbId       : int 10931649</span></span>
-<span><span class="co">#&gt;   ..$ displayName: chr "Wright, Adam, 2024-03-08"</span></span>
-<span><span class="co">#&gt;   ..$ dateTime   : chr "2024-03-08 03:53:59"</span></span>
+<span><span class="co">#&gt;   ..$ dbId       : int 11015412</span></span>
+<span><span class="co">#&gt;   ..$ displayName: chr "Weiser, Joel, 2024-11-17"</span></span>
+<span><span class="co">#&gt;   ..$ dateTime   : chr "2024-11-17 16:07:31"</span></span>
 <span><span class="co">#&gt;   ..$ note       : chr "Inserted by org.reactome.orthoinference"</span></span>
 <span><span class="co">#&gt;   ..$ className  : chr "InstanceEdit"</span></span>
 <span><span class="co">#&gt;   ..$ schemaClass: chr "InstanceEdit"</span></span>
@@ -335,15 +307,39 @@ you supply more than one ID, you cannot have
 <span><span class="co">#&gt;   ..$ name       :List of 1</span></span>
 <span><span class="co">#&gt;   ..$ className  : chr "ReviewStatus"</span></span>
 <span><span class="co">#&gt;   ..$ schemaClass: chr "ReviewStatus"</span></span>
+<span><span class="co">#&gt;  $ updateTrackers     :List of 22</span></span>
+<span><span class="co">#&gt;   ..$ :List of 6</span></span>
+<span><span class="co">#&gt;   ..$ :List of 6</span></span>
+<span><span class="co">#&gt;   ..$ :List of 6</span></span>
+<span><span class="co">#&gt;   ..$ :List of 6</span></span>
+<span><span class="co">#&gt;   ..$ :List of 6</span></span>
+<span><span class="co">#&gt;   ..$ :List of 6</span></span>
+<span><span class="co">#&gt;   ..$ :List of 6</span></span>
+<span><span class="co">#&gt;   ..$ :List of 6</span></span>
+<span><span class="co">#&gt;   ..$ :List of 6</span></span>
+<span><span class="co">#&gt;   ..$ :List of 6</span></span>
+<span><span class="co">#&gt;   ..$ :List of 6</span></span>
+<span><span class="co">#&gt;   ..$ :List of 6</span></span>
+<span><span class="co">#&gt;   ..$ :List of 6</span></span>
+<span><span class="co">#&gt;   ..$ :List of 6</span></span>
+<span><span class="co">#&gt;   ..$ :List of 6</span></span>
+<span><span class="co">#&gt;   ..$ :List of 6</span></span>
+<span><span class="co">#&gt;   ..$ :List of 6</span></span>
+<span><span class="co">#&gt;   ..$ :List of 6</span></span>
+<span><span class="co">#&gt;   ..$ :List of 6</span></span>
+<span><span class="co">#&gt;   ..$ :List of 6</span></span>
+<span><span class="co">#&gt;   ..$ :List of 6</span></span>
+<span><span class="co">#&gt;   ..$ :List of 6</span></span>
 <span><span class="co">#&gt;  $ hasDiagram         : logi TRUE</span></span>
 <span><span class="co">#&gt;  $ hasEHLD            : logi TRUE</span></span>
+<span><span class="co">#&gt;  $ lastUpdatedDate    : chr "2022-06-09"</span></span>
 <span><span class="co">#&gt;  $ hasEvent           :List of 4</span></span>
-<span><span class="co">#&gt;   ..$ :List of 15</span></span>
 <span><span class="co">#&gt;   ..$ :List of 16</span></span>
+<span><span class="co">#&gt;   ..$ :List of 17</span></span>
+<span><span class="co">#&gt;   ..$ :List of 17</span></span>
 <span><span class="co">#&gt;   ..$ :List of 16</span></span>
-<span><span class="co">#&gt;   ..$ :List of 15</span></span>
-<span><span class="co">#&gt;  $ className          : chr "Pathway"</span></span>
 <span><span class="co">#&gt;  $ schemaClass        : chr "Pathway"</span></span>
+<span><span class="co">#&gt;  $ className          : chr "Pathway"</span></span>
 <span></span>
 <span></span>
 <span></span>
@@ -361,8 +357,8 @@ you supply more than one ID, you cannot have
 <span><span class="co">#&gt;  $ databaseName       : chr "UniProt"</span></span>
 <span><span class="co">#&gt;  $ identifier         : chr "P25942"</span></span>
 <span><span class="co">#&gt;  $ name               :List of 1</span></span>
-<span><span class="co">#&gt;  $ otherIdentifier    :List of 108</span></span>
-<span><span class="co">#&gt;  $ url                : chr "https://purl.uniprot.org/uniprot/P25942-1"</span></span>
+<span><span class="co">#&gt;  $ otherIdentifier    :List of 119</span></span>
+<span><span class="co">#&gt;  $ url                : chr "http://purl.uniprot.org/uniprot/P25942-1"</span></span>
 <span><span class="co">#&gt;  $ crossReference     :List of 29</span></span>
 <span><span class="co">#&gt;  $ referenceDatabase  :List of 8</span></span>
 <span><span class="co">#&gt;  $ physicalEntity     :List of 1</span></span>
@@ -371,12 +367,12 @@ you supply more than one ID, you cannot have
 <span><span class="co">#&gt;  $ description        :List of 1</span></span>
 <span><span class="co">#&gt;  $ geneName           :List of 2</span></span>
 <span><span class="co">#&gt;  $ isSequenceChanged  : logi FALSE</span></span>
-<span><span class="co">#&gt;  $ keyword            :List of 16</span></span>
+<span><span class="co">#&gt;  $ keyword            :List of 17</span></span>
 <span><span class="co">#&gt;  $ secondaryIdentifier:List of 8</span></span>
 <span><span class="co">#&gt;  $ sequenceLength     : int 277</span></span>
 <span><span class="co">#&gt;  $ species            : int 48887</span></span>
 <span><span class="co">#&gt;  $ chain              :List of 2</span></span>
-<span><span class="co">#&gt;  $ referenceGene      :List of 12</span></span>
+<span><span class="co">#&gt;  $ referenceGene      :List of 11</span></span>
 <span><span class="co">#&gt;  $ referenceTranscript:List of 4</span></span>
 <span><span class="co">#&gt;  $ variantIdentifier  : chr "P25942-1"</span></span>
 <span><span class="co">#&gt;  $ isoformParent      :List of 1</span></span>
@@ -407,7 +403,7 @@ cross-reference (external) IDs to Reactome IDs.</p>
 <span><span class="co">#&gt;  $ identifier         : chr "P25942"</span></span>
 <span><span class="co">#&gt;  $ name               :List of 1</span></span>
 <span><span class="co">#&gt;  $ otherIdentifier    :List of 1</span></span>
-<span><span class="co">#&gt;  $ url                : chr "https://purl.uniprot.org/uniprot/P25942-1"</span></span>
+<span><span class="co">#&gt;  $ url                : chr "http://purl.uniprot.org/uniprot/P25942-1"</span></span>
 <span><span class="co">#&gt;  $ checksum           : chr "BC8776EC2C4A5680"</span></span>
 <span><span class="co">#&gt;  $ comment            :List of 1</span></span>
 <span><span class="co">#&gt;  $ description        :List of 1</span></span>
@@ -432,8 +428,8 @@ Reactome pathways or reactions which include your external ID:</p>
 <span><span class="va">xref_mapping</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_mapping.html">rba_reactome_mapping</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"CD40"</span>,</span>
 <span>                                    resource <span class="op">=</span> <span class="st">"hgnc"</span>,</span>
 <span>                                    map_to <span class="op">=</span> <span class="st">"pathways"</span><span class="op">)</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item" id="htmlwidget-df2335a2fea98a5293e4" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-df2335a2fea98a5293e4">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],[198933,5668541,5676594],["Immunoregulatory interactions between a Lymphoid and a non-Lymphoid cell","TNFR2 non-canonical NF-kB pathway","TNF receptor superfamily (TNFSF) members mediating non-canonical NF-kB pathway"],["R-HSA-198933","R-HSA-5668541","R-HSA-5676594"],["R-HSA-198933.9","R-HSA-5668541.5","R-HSA-5676594.3"],[false,false,false],[false,false,false],[["Immunoregulatory interactions between a Lymphoid and a non-Lymphoid cell"],["TNFR2 non-canonical NF-kB pathway","TNFRSF mediated non-canonical NF-kB pathway"],["TNF receptor superfamily (TNFSF) members mediating non-canonical NF-kB pathway"]],["2007-08-21","2015-06-17","2015-06-17"],["Homo sapiens","Homo sapiens","Homo sapiens"],["10.3180/r-hsa-198933.2","10.3180/r-hsa-5668541.1",null],[true,true,false],[false,false,false],["Pathway","Pathway","Pathway"],["Pathway","Pathway","Pathway"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>dbId<\/th>\n      <th>displayName<\/th>\n      <th>stId<\/th>\n      <th>stIdVersion<\/th>\n      <th>isInDisease<\/th>\n      <th>isInferred<\/th>\n      <th>name<\/th>\n      <th>releaseDate<\/th>\n      <th>speciesName<\/th>\n      <th>doi<\/th>\n      <th>hasDiagram<\/th>\n      <th>hasEHLD<\/th>\n      <th>className<\/th>\n      <th>schemaClass<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"dbId","targets":1},{"name":"displayName","targets":2},{"name":"stId","targets":3},{"name":"stIdVersion","targets":4},{"name":"isInDisease","targets":5},{"name":"isInferred","targets":6},{"name":"name","targets":7},{"name":"releaseDate","targets":8},{"name":"speciesName","targets":9},{"name":"doi","targets":10},{"name":"hasDiagram","targets":11},{"name":"hasEHLD","targets":12},{"name":"className","targets":13},{"name":"schemaClass","targets":14}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><hr>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-e5c8c404fe174e4c81bd" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],[198933,5668541,5676594],["Immunoregulatory interactions between a Lymphoid and a non-Lymphoid cell","TNFR2 non-canonical NF-kB pathway","TNF receptor superfamily (TNFSF) members mediating non-canonical NF-kB pathway"],["R-HSA-198933","R-HSA-5668541","R-HSA-5676594"],["R-HSA-198933.9","R-HSA-5668541.5","R-HSA-5676594.3"],[false,false,false],[false,false,false],[["Immunoregulatory interactions between a Lymphoid and a non-Lymphoid cell"],["TNFR2 non-canonical NF-kB pathway","TNFRSF mediated non-canonical NF-kB pathway"],["TNF receptor superfamily (TNFSF) members mediating non-canonical NF-kB pathway"]],["2007-08-21","2015-06-17","2015-06-17"],["Homo sapiens","Homo sapiens","Homo sapiens"],["10.3180/r-hsa-198933.2","10.3180/r-hsa-5668541.1",null],[true,true,false],[false,false,false],["2020-09-24","2022-09-14",null],["Pathway","Pathway","Pathway"],["Pathway","Pathway","Pathway"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>dbId<\/th>\n      <th>displayName<\/th>\n      <th>stId<\/th>\n      <th>stIdVersion<\/th>\n      <th>isInDisease<\/th>\n      <th>isInferred<\/th>\n      <th>name<\/th>\n      <th>releaseDate<\/th>\n      <th>speciesName<\/th>\n      <th>doi<\/th>\n      <th>hasDiagram<\/th>\n      <th>hasEHLD<\/th>\n      <th>lastUpdatedDate<\/th>\n      <th>schemaClass<\/th>\n      <th>className<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"dbId","targets":1},{"name":"displayName","targets":2},{"name":"stId","targets":3},{"name":"stIdVersion","targets":4},{"name":"isInDisease","targets":5},{"name":"isInferred","targets":6},{"name":"name","targets":7},{"name":"releaseDate","targets":8},{"name":"speciesName","targets":9},{"name":"doi","targets":10},{"name":"hasDiagram","targets":11},{"name":"hasEHLD","targets":12},{"name":"lastUpdatedDate","targets":13},{"name":"schemaClass","targets":14},{"name":"className","targets":15}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><hr>
 </div>
 </div>
 <div class="section level3">
@@ -593,9 +589,9 @@ vignette index</a></p></li>
 <div class="section level2">
 <h2 class="heading2" id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
-<pre><code><span><span class="co">#&gt; R version 4.3.3 (2024-02-29)</span></span>
-<span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
-<span><span class="co">#&gt; Running under: Ubuntu 22.04.4 LTS</span></span>
+<pre><code><span><span class="co">#&gt; R version 4.4.2 (2024-10-31)</span></span>
+<span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu</span></span>
+<span><span class="co">#&gt; Running under: Ubuntu 22.04.5 LTS</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Matrix products: default</span></span>
 <span><span class="co">#&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 </span></span>
@@ -614,41 +610,38 @@ vignette index</a></p></li>
 <span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; other attached packages:</span></span>
-<span><span class="co">#&gt; [1] rbioapi_0.8.0</span></span>
+<span><span class="co">#&gt; [1] rbioapi_0.8.1</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span><span class="co">#&gt;  [1] vctrs_0.6.5       httr_1.4.7        cli_3.6.2         knitr_1.45       </span></span>
-<span><span class="co">#&gt;  [5] rlang_1.1.3       xfun_0.43         purrr_1.0.2       textshaping_0.3.7</span></span>
-<span><span class="co">#&gt;  [9] jsonlite_1.8.8    DT_0.32           htmltools_0.5.8   ragg_1.3.0       </span></span>
-<span><span class="co">#&gt; [13] sass_0.4.9        rmarkdown_2.26    crosstalk_1.2.1   evaluate_0.23    </span></span>
-<span><span class="co">#&gt; [17] jquerylib_0.1.4   fastmap_1.1.1     yaml_2.3.8        lifecycle_1.0.4  </span></span>
-<span><span class="co">#&gt; [21] memoise_2.0.1     compiler_4.3.3    fs_1.6.3          htmlwidgets_1.6.4</span></span>
-<span><span class="co">#&gt; [25] systemfonts_1.0.6 digest_0.6.35     R6_2.5.1          curl_5.2.1       </span></span>
-<span><span class="co">#&gt; [29] magrittr_2.0.3    bslib_0.7.0       tools_4.3.3       pkgdown_2.0.7    </span></span>
-<span><span class="co">#&gt; [33] cachem_1.0.8      desc_1.4.3</span></span></code></pre>
+<span><span class="co">#&gt;  [1] httr_1.4.7        cli_3.6.3         knitr_1.49        rlang_1.1.4      </span></span>
+<span><span class="co">#&gt;  [5] xfun_0.49         textshaping_0.4.1 jsonlite_1.8.9    DT_0.33          </span></span>
+<span><span class="co">#&gt;  [9] htmltools_0.5.8.1 ragg_1.3.3        sass_0.4.9        rmarkdown_2.29   </span></span>
+<span><span class="co">#&gt; [13] crosstalk_1.2.1   evaluate_1.0.1    jquerylib_0.1.4   fastmap_1.2.0    </span></span>
+<span><span class="co">#&gt; [17] yaml_2.3.10       lifecycle_1.0.4   compiler_4.4.2    fs_1.6.5         </span></span>
+<span><span class="co">#&gt; [21] htmlwidgets_1.6.4 systemfonts_1.1.0 digest_0.6.37     R6_2.5.1         </span></span>
+<span><span class="co">#&gt; [25] curl_6.0.1        magrittr_2.0.3    bslib_0.8.0       tools_4.4.2      </span></span>
+<span><span class="co">#&gt; [29] pkgdown_2.1.1     cachem_1.1.0      desc_1.4.3</span></span></code></pre>
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
 
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p>
-<p>Developed by <a href="https://moosa-r.com/" class="external-link">Moosa Rezwani</a>.</p>
+  <p>Developed by <a href="https://moosa-r.com/" class="external-link">Moosa Rezwani</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>

@@ -1,8 +1,7 @@
 pandoc: 3.1.11
-pkgdown: 2.0.7
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
-  rbioapi: rbioapi.html
   rbioapi_do_enrich: rbioapi_do_enrich.html
   rbioapi_enrichr: rbioapi_enrichr.html
   rbioapi_jaspar: rbioapi_jaspar.html
@@ -11,8 +10,8 @@ articles:
   rbioapi_reactome: rbioapi_reactome.html
   rbioapi_string: rbioapi_string.html
   rbioapi_uniprot: rbioapi_uniprot.html
-last_built: 2024-03-30T00:41Z
+  rbioapi: rbioapi.html
+last_built: 2024-12-23T22:58Z
 urls:
   reference: https://rbioapi.moosa-r.com/reference
   article: https://rbioapi.moosa-r.com/articles
-
