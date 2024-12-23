@@ -1,4 +1,10 @@
-# rbioapi 0.8.0 (Current CRAN version)
+# rbioapi 0.8.1 (Current CRAN version)
+
+* Move to JASPAR 2024.
+
+* Minor improvements and fixes.
+
+# rbioapi 0.8.0
 
 * Move to STRING v12.
 
