@@ -80,8 +80,12 @@
 
 
 
-
-<div class="row">
+<link href="rbioapi_panther_files/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="rbioapi_panther_files/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="rbioapi_panther_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="rbioapi_panther_files/datatables-binding-0.33/datatables.js"></script><link href="rbioapi_panther_files/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="rbioapi_panther_files/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="rbioapi_panther_files/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="rbioapi_panther_files/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="rbioapi_panther_files/crosstalk-1.2.1/js/crosstalk.min.js"></script><div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>2.D: PANTHER &amp; rbioapi</h1>
                         <h4 data-toc-skip class="author">Moosa
@@ -172,8 +176,8 @@ webpage.</a>. Here is a usage example:</p>
 <span>                               annot_dataset <span class="op">=</span> <span class="st">"ANNOT_TYPE_ID_PANTHER_PATHWAY"</span>,</span>
 <span>                               cutoff <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Performing over-representation enrichment analysis of 15 input genes of organism 9606 against ANNOT_TYPE_ID_PANTHER_PATHWAY datasets.</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; [1] "Vignette building failed. It is probably because the web service was down during the building."</span></span></code></pre>
-<p><strong>Please Note:</strong> Other services supported by rbioapi
+<div class="datatables html-widget html-fill-item" id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14"],[4,3,4,3,3,2,3,7,2,2,2,3,2,2],[75.17808219178082,164.64,28.58333333333333,49.59036144578313,46.77272727272727,124.7272727272727,28.19178082191781,0.5335555555555556,78.39999999999999,66.92682926829268,54.88,15.70992366412214,32.28235294117647,22.30894308943089],[3.08873635002442e-05,5.708570624979337e-05,0.0004932036099763925,0.001111655684318716,0.00105982213006343,0.003028809791268619,0.00341709084592112,0.003423709368731017,0.005172594475969506,0.006399569898821666,0.008658346912849519,0.01104906209473271,0.02103876340142172,0.04040751310457476],[0.05320699708454811,0.01822157434402332,0.1399416909620991,0.06049562682215744,0.0641399416909621,0.01603498542274052,0.1064139941690962,13.11953352769679,0.02551020408163265,0.02988338192419825,0.03644314868804665,0.1909620991253644,0.0619533527696793,0.08965014577259475],[73,25,192,83,88,22,146,18000,35,41,50,262,85,123],[1.930460218765263e-07,7.135713281224172e-07,9.247567687057361e-06,2.77913921079679e-05,3.311944156448219e-05,0.0001135803671725732,0.000149497724509049,0.0001711854684365508,0.0002909584392732847,0.0003999731186763542,0.0005952613502584045,0.0008286796571049536,0.001709399526365515,0.003535657396650291],["+","+","+","+","+","+","+","-","+","+","+","+","+","+"],["P04393","P00008","P00034","P00016","P00059","P00007","P00029",null,"P00009","P05918","P04398","P00031","P00053","P00027"],["Ras Pathway","Axon guidance mediated by Slit/Robo","Integrin signalling pathway","Cytoskeletal regulation by Rho GTPase","p53 pathway","Axon guidance mediated by semaphorins","Huntington disease","UNCLASSIFIED","Axon guidance mediated by netrin","p38 MAPK pathway","p53 pathway feedback loops 2","Inflammation mediated by chemokine and cytokine signaling pathway","T cell activation","Heterotrimeric G-protein signaling pathway-Gq alpha and Go alpha mediated pathway"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>number_in_list<\/th>\n      <th>fold_enrichment<\/th>\n      <th>fdr<\/th>\n      <th>expected<\/th>\n      <th>number_in_reference<\/th>\n      <th>pValue<\/th>\n      <th>plus_minus<\/th>\n      <th>term.id<\/th>\n      <th>term.label<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"number_in_list","targets":1},{"name":"fold_enrichment","targets":2},{"name":"fdr","targets":3},{"name":"expected","targets":4},{"name":"number_in_reference","targets":5},{"name":"pValue","targets":6},{"name":"plus_minus","targets":7},{"name":"term.id","targets":8},{"name":"term.label","targets":9}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p><strong>Please Note:</strong> Other services supported by rbioapi
 also provide Over-representation analysis tools. Please see the vignette
 article <a href="rbioapi_do_enrich.html">Do with rbioapi:
 Over-Representation (Enrichment) Analysis in R</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html">link
@@ -248,13 +252,14 @@ vignette index</a></p></li>
 <span><span class="co">#&gt; [1] rbioapi_0.8.1</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span><span class="co">#&gt;  [1] digest_0.6.37     desc_1.4.3        R6_2.5.1          fastmap_1.2.0    </span></span>
-<span><span class="co">#&gt;  [5] xfun_0.49         cachem_1.1.0      knitr_1.49        htmltools_0.5.8.1</span></span>
-<span><span class="co">#&gt;  [9] rmarkdown_2.29    lifecycle_1.0.4   cli_3.6.3         sass_0.4.9       </span></span>
-<span><span class="co">#&gt; [13] pkgdown_2.1.1     textshaping_0.4.1 jquerylib_0.1.4   systemfonts_1.1.0</span></span>
-<span><span class="co">#&gt; [17] compiler_4.4.2    httr_1.4.7        tools_4.4.2       ragg_1.3.3       </span></span>
-<span><span class="co">#&gt; [21] curl_6.0.1        evaluate_1.0.1    bslib_0.8.0       yaml_2.3.10      </span></span>
-<span><span class="co">#&gt; [25] jsonlite_1.8.9    rlang_1.1.4       fs_1.6.5          htmlwidgets_1.6.4</span></span></code></pre>
+<span><span class="co">#&gt;  [1] httr_1.4.7        cli_3.6.3         knitr_1.49        rlang_1.1.4      </span></span>
+<span><span class="co">#&gt;  [5] xfun_0.49         textshaping_0.4.1 jsonlite_1.8.9    DT_0.33          </span></span>
+<span><span class="co">#&gt;  [9] htmltools_0.5.8.1 ragg_1.3.3        sass_0.4.9        rmarkdown_2.29   </span></span>
+<span><span class="co">#&gt; [13] crosstalk_1.2.1   evaluate_1.0.1    jquerylib_0.1.4   fastmap_1.2.0    </span></span>
+<span><span class="co">#&gt; [17] yaml_2.3.10       lifecycle_1.0.4   compiler_4.4.2    fs_1.6.5         </span></span>
+<span><span class="co">#&gt; [21] htmlwidgets_1.6.4 systemfonts_1.1.0 digest_0.6.37     R6_2.5.1         </span></span>
+<span><span class="co">#&gt; [25] curl_6.0.1        magrittr_2.0.3    bslib_0.8.0       tools_4.4.2      </span></span>
+<span><span class="co">#&gt; [29] pkgdown_2.1.1     cachem_1.1.0      desc_1.4.3</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
