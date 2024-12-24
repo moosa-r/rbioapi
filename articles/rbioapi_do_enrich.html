@@ -91,7 +91,7 @@
                         <h4 data-toc-skip class="author">Moosa
 Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2024-12-23</h4>
+            <h4 data-toc-skip class="date">2024-12-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/master/vignettes/rbioapi_do_enrich.Rmd" class="external-link"><code>vignettes/rbioapi_do_enrich.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_do_enrich.Rmd</code></div>
@@ -116,7 +116,7 @@ adequately cite the databases or web services used in their published
 research.</p>
 <hr>
 <div class="section level2">
-<h2 class="heading2" id="how-to-install">How to install?<a class="anchor" aria-label="anchor" href="#how-to-install"></a>
+<h2 id="how-to-install">How to install?<a class="anchor" aria-label="anchor" href="#how-to-install"></a>
 </h2>
 <p>You can install the stable release version of <a href="rbioapi.html" title="rbioapi: User-Friendly R Interface to Biologic Web Services' API">rbioapi</a>
 from <a href="https://cran.r-project.org/package=rbioapi" title="rbioapi page on CRAN (The Comprehensive R Archive Network)" class="external-link">CRAN</a>
@@ -134,7 +134,7 @@ You can install the most recent (development) version from <a href="https://gith
 <hr>
 </div>
 <div class="section level2">
-<h2 class="heading2" id="what-is-over-representation-analysis">What is Over-representation analysis?<a class="anchor" aria-label="anchor" href="#what-is-over-representation-analysis"></a>
+<h2 id="what-is-over-representation-analysis">What is Over-representation analysis?<a class="anchor" aria-label="anchor" href="#what-is-over-representation-analysis"></a>
 </h2>
 <p>Enrichment (Over-Representation) analysis is commonly performed when
 one’s analysis yields a list of genes, proteins, or other entities. We
@@ -153,10 +153,10 @@ etc.).</p></li>
 find if the member of any gene set are over-represented, meaning that
 they are present in your list in a manner that can not be explained by
 chance alone.</p>
+<hr>
 </div>
 <div class="section level2">
-<h2 class="heading2" id="enrichment-analysis-in-R-with-rbioapi">Enrichment (Over-Representation) analysis in R with
-rbioapi<a class="anchor" aria-label="anchor" href="#enrichment-analysis-in-R-with-rbioapi"></a>
+<h2 id="setting-up-data">Setting up the data<a class="anchor" aria-label="anchor" href="#setting-up-data"></a>
 </h2>
 <p>Many web services supported by rbioapi provide tools to perform
 over-representation analysis against the gene sets curated in their
@@ -179,9 +179,11 @@ list.</p>
 <p><em><strong>Please Note</strong>: Over-representation services return
 large responses. To reduce the size of this vignette article, we will
 only display the first 10 rows of each Data Frame.</em></p>
-<div class="section level3">
-<h3 class="heading2" id="enrichr">Enrichr<a class="anchor" aria-label="anchor" href="#enrichr"></a>
-</h3>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="enrichr">Enrichr<a class="anchor" aria-label="anchor" href="#enrichr"></a>
+</h2>
 <p><a href="https://maayanlab.cloud/Enrichr/" title="Enrichr" class="external-link">Enrichr</a> , developed in the Ma’ayan Lab, is a service
 to perform enrichment analysis against a considerable number of curated
 gene set libraries across various species.</p>
@@ -208,7 +210,7 @@ only against “KEGG_2021_Human” library.</p>
 <span><span class="co">#&gt; --Step 2/3:</span></span>
 <span><span class="co">#&gt; Uploading 1214 gene symbols to Enrichr human.</span></span>
 <span><span class="co">#&gt; --Step 3/3:</span></span>
-<span><span class="co">#&gt; Performing enrichment analysis on gene-list 86862512 against Enrichr human library: KEGG_2021_Human.</span></span></code></pre></div>
+<span><span class="co">#&gt; Performing enrichment analysis on gene-list 86879989 against Enrichr human library: KEGG_2021_Human.</span></span></code></pre></div>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-e5c8c404fe174e4c81bd" style="width:100%;height:auto;"></div>
 <script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{"filter":"none","vertical":false,"autoHideNavigation":true,"data":[["1","2","3","4","5","6","7","8","9","10"],["Coronavirus disease","Ribosome","Hematopoietic cell lineage","Th1 and Th2 cell differentiation","Th17 cell differentiation","PD-L1 expression and PD-1 checkpoint pathway in cancer","Glycine, serine and threonine metabolism","Cell cycle","Primary immunodeficiency","Inflammatory bowel disease"],["51/232","38/158","18/99","16/92","17/107","15/89","9/40","17/124","7/38","9/65"],[5.457660615844306e-16,1.461442604133301e-13,2.542147408390094e-05,0.0001221586459325963,0.0002377387069538916,0.0002815676772171271,0.000536146158525187,0.00134153930817423,0.007179992090380879,0.01618833319043852],[1.555433275515627e-13,2.082555710889954e-11,0.002415040037970589,0.008703803522697489,0.01337446466781354,0.01337446466781354,0.02182880788281119,0.04779233785370694,0.2273664161953945,0.4326283249122099],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[4.507560462321202,5.026275510204082,3.475473801560758,3.287936033740444,2.95026455026455,3.163447016658026,4.518672199170124,2.479274510263197,3.508699254349627,2.498073503260225],[158.4152430865095,148.5474620954103,36.7702219398494,29.62492831099334,24.61800565105845,25.86161504020705,34.03058914531737,16.39776687159813,17.32054298640066,10.30071733320014],["RPL3;RPL32;RPL34;RPLP1;RPL8;RPL10A;RPL9;RPL7;RPS15;IFIH1;RPS14;RPS16;RPL18A;RPS19;RPS18;C3AR1;RPL36;RPL35;RPLP2;RPL38;RPL39;RPS10;RPS12;RPS8;RPL22;RPL13A;RPSA;RPS3A;ADAM17;OAS1;OAS2;OAS3;RPL37A;HBEGF;RPL13;RPL18;RPS27A;ACE;EIF2AK2;RPL35A;RPL23A;MAPK14;RPS26;NFKBIA;CXCL10;MAPK11;RPS28;RPS27;RPL27A;RPS20;RPS21","RPL3;RPL32;RPL34;RPLP1;RPL10A;RPL8;RPL9;RPL7;RPS15;RPS14;RPS16;RPL18A;RPS19;RPS18;RPL36;RPL35;RPLP2;RPL13;RPL38;RPL18;RPS27A;RPL39;RPS10;RPS12;RPS8;RPL22;RPL13A;RPL35A;RPSA;RPS3A;RPL23A;RPS26;RPS28;RPS27;RPL27A;RPL37A;RPS20;RPS21","CR1;CSF1;IL11RA;IL1R1;ITGA1;FLT3LG;CD1C;CD3E;CD3D;IL4;CD2;CD5;HLA-DPB1;CD38;HLA-DOA;CD24;IL7R;MS4A1","GATA3;CD3E;MAPK14;CD3D;DLL4;IL4;NFKBIA;ZAP70;MAPK11;LCK;STAT4;HLA-DPB1;CD247;HLA-DOA;JAK2;LAT","IL1R1;RORC;GATA3;CD3E;MAPK14;HIF1A;CD3D;IL4;NFKBIA;ZAP70;MAPK11;LCK;HLA-DPB1;CD247;HLA-DOA;JAK2;LAT","BATF2;CD274;CD3E;MAPK14;CD3D;HIF1A;NFKBIA;ZAP70;MAPK11;LCK;CD247;PDCD1;JAK2;LAT;MAP2K6","GAMT;ALAS2;GLDC;MAOA;CBS;SARDH;PIPOX;PHGDH;SDSL","CDKN1C;BUB1B;TTK;CDC6;PKMYT1;CDC25A;CDC20;RBL2;CCNB2;CCNB1;STAG1;CDC45;CCNE2;ESPL1;CDK1;EP300;BUB1","ZAP70;LCK;TAP1;CD3E;IL7R;CD3D;AICDA","IL4;IL18RAP;RORC;STAT4;HLA-DPB1;GATA3;HLA-DOA;TLR5;IL18R1"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Term<\/th>\n      <th>Overlap<\/th>\n      <th>P.value<\/th>\n      <th>Adjusted.P.value<\/th>\n      <th>Old.P.value<\/th>\n      <th>Old.Adjusted.P.value<\/th>\n      <th>Odds.Ratio<\/th>\n      <th>Combined.Score<\/th>\n      <th>Genes<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[3,4,5,6,7,8]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Term","targets":1},{"name":"Overlap","targets":2},{"name":"P.value","targets":3},{"name":"Adjusted.P.value","targets":4},{"name":"Old.P.value","targets":5},{"name":"Old.Adjusted.P.value","targets":6},{"name":"Odds.Ratio","targets":7},{"name":"Combined.Score","targets":8},{"name":"Genes","targets":9}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p>In the <code>gene_set_library</code> parameter, you can also provide
 multiple gene set libraries or leave it as the default parameter
@@ -227,7 +229,7 @@ pattern, so partial matchs will be also selected.</p>
 <span><span class="co">#&gt; --Step 2/3:</span></span>
 <span><span class="co">#&gt; Uploading 1214 gene symbols to Enrichr human.</span></span>
 <span><span class="co">#&gt; --Step 3/3:</span></span>
-<span><span class="co">#&gt; Performing enrichment analysis on gene-list 86862514 using multiple Enrichr human libraries.</span></span>
+<span><span class="co">#&gt; Performing enrichment analysis on gene-list 86879991 using multiple Enrichr human libraries.</span></span>
 <span><span class="co">#&gt; Note: You have selected '6' Enrichr human libraries. Note that for each library, a separate call should be sent to Enrichr server. Thus, this could take a while depending on the number of selected libraries and your network connection.</span></span></code></pre></div>
 <p>As you can see below, when than one library is selected, the results
 will be a list where each of its elements is the enrichment results of
@@ -241,10 +243,11 @@ one library:</p>
 <span><span class="co">#&gt;  $ KEGG_2019_Human:'data.frame': 272 obs. of  9 variables:</span></span>
 <span><span class="co">#&gt;  $ KEGG_2019_Mouse:'data.frame': 267 obs. of  9 variables:</span></span>
 <span><span class="co">#&gt;  $ KEGG_2021_Human:'data.frame': 285 obs. of  9 variables:</span></span></code></pre></div>
+<hr>
 </div>
-<div class="section level3">
-<h3 class="heading2" id="reactome-analysis-services">Reactome Analysis services<a class="anchor" aria-label="anchor" href="#reactome-analysis-services"></a>
-</h3>
+<div class="section level2">
+<h2 id="reactome-analysis-services">Reactome Analysis services<a class="anchor" aria-label="anchor" href="#reactome-analysis-services"></a>
+</h2>
 <p>Reactome curates extensive and top-quality cellular pathways data
 across various species. Given the fact that proteins operate in
 organized units, which are the pathways, analyzing your list against
@@ -313,10 +316,11 @@ make sure to try it:</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rba_reactome_analysis_pdf.html">rba_reactome_analysis_pdf</a></span><span class="op">(</span>token <span class="op">=</span> <span class="va">reactome</span><span class="op">$</span><span class="va">summary</span><span class="op">$</span><span class="va">token</span>,</span>
 <span>                          species <span class="op">=</span> <span class="fl">9606</span>, <span class="co">#Homo sapiens</span></span>
 <span>                          save_to <span class="op">=</span> <span class="st">"my_analysis.pdf"</span><span class="op">)</span></span></code></pre></div>
+<hr>
 </div>
-<div class="section level3">
-<h3 class="heading2" id="panther">PANTHER<a class="anchor" aria-label="anchor" href="#panther"></a>
-</h3>
+<div class="section level2">
+<h2 id="panther">PANTHER<a class="anchor" aria-label="anchor" href="#panther"></a>
+</h2>
 <p>PANTHER (protein analysis through evolutionary relationships) is a
 project that provides classification systems of genes and proteins.
 PANTHER also provides an enrichment service. In fact, the enrichment
@@ -389,11 +393,11 @@ information about your analysis. The names are self-explanatory:</p>
 <p>The enrichment results are returned as a Data Frame with an element
 named result:</p>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-1fb4450895fe099f74a1" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-1fb4450895fe099f74a1">{"x":{"filter":"none","vertical":false,"autoHideNavigation":true,"data":[["1","2","3","4","5","6","7","8","9","10"],[38,108,104,136,195,77,295,143,129,129],[5.568181818181818,2.039987664473684,1.997595776929912,1.79313313959746,1.591439040639574,2.199914483402006,1.401946204577784,1.707358674463937,1.757134914751668,1.753430484151348],[1.862770145614905e-14,1.039770481381756e-08,6.916533618937956e-08,5.892795813782308e-08,6.168168531309196e-08,1.855086612958061e-07,2.786983212696158e-07,3.434933374465966e-07,3.882750183285599e-07,3.767441191999985e-07],[6.824489795918367,52.94149659863946,52.0625850340136,75.84489795918367,122.530612244898,35.00136054421768,210.421768707483,83.75510204081634,73.41496598639455,73.57006802721089],[132,1024,1007,1467,2370,677,4070,1620,1420,1423],[1.239450492790542e-18,1.383685516510422e-12,1.380637491304403e-11,1.568380015645035e-11,2.052088805412601e-11,7.406028130779402e-11,1.298082539681489e-10,1.828429502676674e-10,2.325154810670729e-10,2.506781018031796e-10],["+","+","+","+","+","+","+","+","+","+"],["GO:0002181","GO:0002684","GO:0050776","GO:0009607","GO:0002376","GO:0050778","GO:0048583","GO:0002682","GO:0051707","GO:0043207"],["cytoplasmic translation","positive regulation of immune system process","regulation of immune response","response to biotic stimulus","immune system process","positive regulation of immune response","regulation of response to stimulus","regulation of immune system process","response to other organism","response to external biotic stimulus"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>number_in_list<\/th>\n      <th>fold_enrichment<\/th>\n      <th>fdr<\/th>\n      <th>expected<\/th>\n      <th>number_in_reference<\/th>\n      <th>pValue<\/th>\n      <th>plus_minus<\/th>\n      <th>term.id<\/th>\n      <th>term.label<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"number_in_list","targets":1},{"name":"fold_enrichment","targets":2},{"name":"fdr","targets":3},{"name":"expected","targets":4},{"name":"number_in_reference","targets":5},{"name":"pValue","targets":6},{"name":"plus_minus","targets":7},{"name":"term.id","targets":8},{"name":"term.label","targets":9}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-1fb4450895fe099f74a1">{"x":{"filter":"none","vertical":false,"autoHideNavigation":true,"data":[["1","2","3","4","5","6","7","8","9","10"],[38,108,104,136,195,77,295,143,129,129],[5.568181818181818,2.039987664473684,1.997595776929912,1.79313313959746,1.591439040639574,2.199914483402006,1.401946204577784,1.707358674463937,1.757134914751668,1.753430484151348],[1.862770145614905e-14,1.039770481381756e-08,6.916533618937956e-08,5.892795813782308e-08,6.168168531309196e-08,1.855086612958061e-07,2.786983212696158e-07,3.434933374465966e-07,3.882750183285599e-07,3.767441191999985e-07],[6.824489795918367,52.94149659863946,52.0625850340136,75.84489795918367,122.530612244898,35.00136054421768,210.421768707483,83.75510204081634,73.41496598639455,73.57006802721089],[132,1024,1007,1467,2370,677,4070,1620,1420,1423],[1.239450492790542e-18,1.383685516510422e-12,1.380637491304403e-11,1.568380015645035e-11,2.052088805412601e-11,7.406028130779402e-11,1.298082539681489e-10,1.828429502676674e-10,2.325154810670729e-10,2.506781018031796e-10],["+","+","+","+","+","+","+","+","+","+"],["GO:0002181","GO:0002684","GO:0050776","GO:0009607","GO:0002376","GO:0050778","GO:0048583","GO:0002682","GO:0051707","GO:0043207"],["cytoplasmic translation","positive regulation of immune system process","regulation of immune response","response to biotic stimulus","immune system process","positive regulation of immune response","regulation of response to stimulus","regulation of immune system process","response to other organism","response to external biotic stimulus"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>number_in_list<\/th>\n      <th>fold_enrichment<\/th>\n      <th>fdr<\/th>\n      <th>expected<\/th>\n      <th>number_in_reference<\/th>\n      <th>pValue<\/th>\n      <th>plus_minus<\/th>\n      <th>term.id<\/th>\n      <th>term.label<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"number_in_list","targets":1},{"name":"fold_enrichment","targets":2},{"name":"fdr","targets":3},{"name":"expected","targets":4},{"name":"number_in_reference","targets":5},{"name":"pValue","targets":6},{"name":"plus_minus","targets":7},{"name":"term.id","targets":8},{"name":"term.label","targets":9}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><hr>
 </div>
-<div class="section level3">
-<h3 class="heading2" id="string">STRING<a class="anchor" aria-label="anchor" href="#string"></a>
-</h3>
+<div class="section level2">
+<h2 id="string">STRING<a class="anchor" aria-label="anchor" href="#string"></a>
+</h2>
 <p>In addition to proteins interaction data, STRING also curates
 proteins/genes annotations and provides enrichment analysis services.
 You can perform the analysis against multiple gene sets. Some of the
@@ -497,11 +501,29 @@ Abstract paper terms:</p>
 <span><span class="co">#&gt;  $ RCTM             :'data.frame':   7 obs. of  8 variables:</span></span>
 <span><span class="co">#&gt;  $ TISSUES          :'data.frame':   13 obs. of  8 variables:</span></span></code></pre></div>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-4018eef1a407a0df6b52" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-4018eef1a407a0df6b52">{"x":{"filter":"none","vertical":false,"autoHideNavigation":true,"data":[["211","212","213","214","215","216","217","218","219","220"],["PMID","PMID","PMID","PMID","PMID","PMID","PMID","PMID","PMID","PMID"],["PMID:10349111","PMID:10474090","PMID:10494766","PMID:10536185","PMID:10571272","PMID:10753836","PMID:10864984","PMID:10925144","PMID:10938941","PMID:10980605"],[1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1],[9606,9606,9606,9606,9606,9606,9606,9606,9606,9606],[["CD177"],["CD177"],["CD177"],["CD177"],["CD177"],["CD177"],["CD177"],["CD177"],["CD177"],["CD177"]],[["CD177"],["CD177"],["CD177"],["CD177"],["CD177"],["CD177"],["CD177"],["CD177"],["CD177"],["CD177"]],["(1999) [Bone marrow transplantation in chronic myeloid leukemia].","(1999) Anti-granulocyte antibody screening with extracted granulocyte antigens by a micro-mixed passive hemagglutination method.","(1999) Inhibition of thrombin-induced neuronal cell death by recombinant thrombomodulin and E5510, a synthetic thrombin receptor signaling inhibitor.","(1999) Bovine seminal ribonuclease selectively kills human multidrug-resistant neuroblastoma cells via induction of apoptosis.","(1999) NB1-C16-insulin: site-specific synthesis, purification, and biological activity.","(2000) Cloning of PRV-1, a novel member of the uPAR receptor superfamily, which is overexpressed in polycythemia rubra vera.","(2000) Variations in the expression of granulocyte antigen NB1.","(2000) Pituitary adelylate cyclase-activating peptide is an activator of vasoactive intestinal polypeptide gene transcription in human neuroblastoma cells.","(2000) Molecular genetics of granulocyte polymorphisms.","(2000) Identification and characterization of a 500-kb homozygously deleted region at 1p36.2-p36.3 in a neuroblastoma cell line."]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>category<\/th>\n      <th>term<\/th>\n      <th>number_of_genes<\/th>\n      <th>ratio_in_set<\/th>\n      <th>ncbiTaxonId<\/th>\n      <th>inputGenes<\/th>\n      <th>preferredNames<\/th>\n      <th>description<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[3,4,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"category","targets":1},{"name":"term","targets":2},{"name":"number_of_genes","targets":3},{"name":"ratio_in_set","targets":4},{"name":"ncbiTaxonId","targets":5},{"name":"inputGenes","targets":6},{"name":"preferredNames","targets":7},{"name":"description","targets":8}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-4018eef1a407a0df6b52">{"x":{"filter":"none","vertical":false,"autoHideNavigation":true,"data":[["211","212","213","214","215","216","217","218","219","220"],["PMID","PMID","PMID","PMID","PMID","PMID","PMID","PMID","PMID","PMID"],["PMID:10349111","PMID:10474090","PMID:10494766","PMID:10536185","PMID:10571272","PMID:10753836","PMID:10864984","PMID:10925144","PMID:10938941","PMID:10980605"],[1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1],[9606,9606,9606,9606,9606,9606,9606,9606,9606,9606],[["CD177"],["CD177"],["CD177"],["CD177"],["CD177"],["CD177"],["CD177"],["CD177"],["CD177"],["CD177"]],[["CD177"],["CD177"],["CD177"],["CD177"],["CD177"],["CD177"],["CD177"],["CD177"],["CD177"],["CD177"]],["(1999) [Bone marrow transplantation in chronic myeloid leukemia].","(1999) Anti-granulocyte antibody screening with extracted granulocyte antigens by a micro-mixed passive hemagglutination method.","(1999) Inhibition of thrombin-induced neuronal cell death by recombinant thrombomodulin and E5510, a synthetic thrombin receptor signaling inhibitor.","(1999) Bovine seminal ribonuclease selectively kills human multidrug-resistant neuroblastoma cells via induction of apoptosis.","(1999) NB1-C16-insulin: site-specific synthesis, purification, and biological activity.","(2000) Cloning of PRV-1, a novel member of the uPAR receptor superfamily, which is overexpressed in polycythemia rubra vera.","(2000) Variations in the expression of granulocyte antigen NB1.","(2000) Pituitary adelylate cyclase-activating peptide is an activator of vasoactive intestinal polypeptide gene transcription in human neuroblastoma cells.","(2000) Molecular genetics of granulocyte polymorphisms.","(2000) Identification and characterization of a 500-kb homozygously deleted region at 1p36.2-p36.3 in a neuroblastoma cell line."]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>category<\/th>\n      <th>term<\/th>\n      <th>number_of_genes<\/th>\n      <th>ratio_in_set<\/th>\n      <th>ncbiTaxonId<\/th>\n      <th>inputGenes<\/th>\n      <th>preferredNames<\/th>\n      <th>description<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[3,4,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"category","targets":1},{"name":"term","targets":2},{"name":"number_of_genes","targets":3},{"name":"ratio_in_set","targets":4},{"name":"ncbiTaxonId","targets":5},{"name":"inputGenes","targets":6},{"name":"preferredNames","targets":7},{"name":"description","targets":8}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p>In addition to a data frame, you can also get a plot summarizing the
+enrichment results. This API endpoint supports extensive customization
+of the plot; please refer to the
+<code><a href="../reference/rba_string_enrichment_image.html">rba_string_enrichment_image()</a></code> function’s manual for
+detailed instructions. Here we perform an enrichment analysis against
+the KEGG database, and retrieve a plot of the results.</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">graph_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_string_enrichment_image.html">rba_string_enrichment_image</a></span><span class="op">(</span>ids <span class="op">=</span> <span class="va">covid_critical</span>,</span>
+<span>                                       species <span class="op">=</span> <span class="fl">9606</span>,</span>
+<span>                                       category <span class="op">=</span> <span class="st">"KEGG"</span>,</span>
+<span>                                       image_format <span class="op">=</span> <span class="st">"image"</span>,</span>
+<span>                                       save_image <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                                       group_by_similarity <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="rbioapi_do_enrich_files/figure-html/string_enrichment_plot_image-1.png" alt="Visualization of enrichment analysis results" width="672"><p class="caption">
+Visualization of enrichment analysis results
+</p>
 </div>
-<div class="section level3">
-<h3 class="heading2" id="mieaa">miEAA<a class="anchor" aria-label="anchor" href="#mieaa"></a>
-</h3>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="mieaa">miEAA<a class="anchor" aria-label="anchor" href="#mieaa"></a>
+</h2>
 <p>The miRNA Enrichment Analysis and Annotation Tool (<a href="https://ccb-compute2.cs.uni-saarland.de/mieaa2/" title="https://ccb-compute2.cs.uni-saarland.de/mieaa2" class="external-link">miEAA</a>) is a
 service provided by the <a href="https://www.ccb.uni-saarland.de/" class="external-link">Chair
 for Clinical Bioinformatics at Saarland University</a>. What makes miEAA
@@ -516,11 +538,11 @@ rather use a miRNA list from the paper “<a href="https://doi.org/10.3390/vacci
 Parray et al.: Vaccines 9, 1056 (2021)</a>”. They used microarray to
 find differentially expressed miRNA in the severe versus mild COVID 19
 patients’ blood.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">covid_mirna</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hsa-miR-3609"</span>, <span class="st">"hsa-miR-199a-5p"</span>, <span class="st">"hsa-miR-139-5p"</span>, <span class="st">"hsa-miR-145-5p"</span>,<span class="st">"hsa-miR-3651"</span>, <span class="st">"hsa-miR-1273h-3p"</span>, <span class="st">"hsa-miR-4632-5p"</span>,<span class="st">"hsa-miR-6861-5p"</span>, <span class="st">"hsa-miR-6802-5p"</span>,<span class="st">"hsa-miR-5196-5p"</span>,<span class="st">"hsa-miR-92b-5p"</span>, <span class="st">"hsa-miR-6805-5p"</span>,<span class="st">"hsa-miR-98-5p"</span>,<span class="st">"hsa-miR-3185"</span>, <span class="st">"hsa-miR-572"</span>,<span class="st">"hsa-miR-371b-5p"</span>,<span class="st">"hsa-miR-3180"</span>, <span class="st">"hsa-miR-8073"</span>,<span class="st">"hsa-miR-4750-5p"</span>,<span class="st">"hsa-miR-6075"</span>, <span class="st">"hsa-let-7i-5p"</span>,<span class="st">"hsa-miR-1231"</span>,<span class="st">"hsa-miR-885-3p"</span><span class="op">)</span></span></code></pre></div>
 <p>While not necessary, we can first see what enrichment categories are
 available for our mature human miRNA:</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rba_mieaa_cats.html">rba_mieaa_cats</a></span><span class="op">(</span>mirna_type <span class="op">=</span> <span class="st">"mature"</span>,</span>
 <span>               species <span class="op">=</span> <span class="fl">9606</span> <span class="co">#Homo sapiens</span></span>
 <span><span class="op">)</span></span>
@@ -593,7 +615,7 @@ available for our mature human miRNA:</p>
 necessary steps in one function call. Note that we have supplied the
 categories parameter. If left NULL, the enrichment will be performed
 against every available category.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mieaa_enrich</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_mieaa_enrich.html">rba_mieaa_enrich</a></span><span class="op">(</span>test_set <span class="op">=</span> <span class="va">covid_mirna</span>,</span>
 <span>                                 mirna_type <span class="op">=</span> <span class="st">"mature"</span>,</span>
 <span>                                 test_type <span class="op">=</span> <span class="st">"ORA"</span>,</span>
@@ -603,17 +625,16 @@ against every available category.</p>
 <span><span class="co">#&gt; Submitting ORA enrichment request for 23 miRNA IDs of species Homo sapiens to miEAA servers.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  -- Step 2/3: Checking for Submitted enrichment analysis's status every 5 seconds.</span></span>
-<span><span class="co">#&gt;     Your submitted job ID is: 8ddff9a0-cae3-4665-8c92-662c28a9d754</span></span>
+<span><span class="co">#&gt;     Your submitted job ID is: 5a80a7f8-e84e-4bda-8215-368f5b67cd9a</span></span>
 <span><span class="co">#&gt; .</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  -- Step 3/3: Retrieving the results.</span></span>
-<span><span class="co">#&gt; Retrieving results of submitted enrichment request with ID: 8ddff9a0-cae3-4665-8c92-662c28a9d754</span></span></code></pre></div>
+<span><span class="co">#&gt; Retrieving results of submitted enrichment request with ID: 5a80a7f8-e84e-4bda-8215-368f5b67cd9a</span></span></code></pre></div>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-5b1b2f4ad92281566982" style="width:100%;height:auto;"></div>
 <script type="application/json" data-for="htmlwidget-5b1b2f4ad92281566982">{"x":{"filter":"none","vertical":false,"autoHideNavigation":true,"data":[["1","2","3","4","5","6","7","8","9","10"],["GO Biological process (miRPathDB)","GO Biological process (miRPathDB)","GO Biological process (miRPathDB)","GO Biological process (miRPathDB)","GO Biological process (miRPathDB)","GO Biological process (miRPathDB)","GO Biological process (miRPathDB)","GO Biological process (miRPathDB)","GO Biological process (miRPathDB)","GO Biological process (miRPathDB)"],["B cell proliferation","DNA damage response signal transduction by p53 class mediator","L-serine metabolic process","amyloid-beta clearance","angiotensin-activated signaling pathway","cell-cell adhesion mediated by integrin","cell-cell adhesion via plasma-membrane adhesion molecules","cellular response to calcium ion","cerebral cortex development","chondrocyte differentiation involved in endochondral bone morphogenesis"],["over-represented","over-represented","over-represented","over-represented","over-represented","over-represented","over-represented","over-represented","over-represented","over-represented"],["5.44362e-05","0.000105875","0.000335649","0.000557165","0.000832385","0.000557165","0.000335649","0.0011607","0.0011607","0.000557165"],["0.0294189","0.0331389","0.0415979","0.0415979","0.0452719","0.0415979","0.0415979","0.0490924","0.0490924","0.0415979"],["0.0294189","0.0331389","0.0415979","0.0415979","0.0452719","0.0415979","0.0415979","0.0490924","0.0490924","0.0415979"],["0.0882648","0.609829","0.0320963","0.0401204","0.0481444","0.0401204","0.0320963","0.0561685","0.0561685","0.0401204"],["3","5","2","2","2","2","2","2","2","2"],["hsa-miR-145-5p; hsa-miR-98-5p; hsa-miR-572","hsa-miR-199a-5p; hsa-miR-145-5p; hsa-miR-6805-5p; hsa-miR-98-5p; hsa-miR-572","hsa-miR-145-5p; hsa-miR-6805-5p","hsa-miR-199a-5p; hsa-miR-145-5p","hsa-miR-199a-5p; hsa-miR-145-5p","hsa-miR-199a-5p; hsa-miR-145-5p","hsa-miR-199a-5p; hsa-miR-145-5p","hsa-miR-199a-5p; hsa-miR-139-5p","hsa-miR-199a-5p; hsa-miR-145-5p","hsa-miR-199a-5p; hsa-miR-145-5p"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Category<\/th>\n      <th>Subcategory<\/th>\n      <th>Enrichment<\/th>\n      <th>P-value<\/th>\n      <th>P-adjusted<\/th>\n      <th>Q-value<\/th>\n      <th>Expected<\/th>\n      <th>Observed<\/th>\n      <th>miRNAs/precursors<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Category","targets":1},{"name":"Subcategory","targets":2},{"name":"Enrichment","targets":3},{"name":"P-value","targets":4},{"name":"P-adjusted","targets":5},{"name":"Q-value","targets":6},{"name":"Expected","targets":7},{"name":"Observed","targets":8},{"name":"miRNAs/precursors","targets":9}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><hr>
 </div>
-</div>
 <div class="section level2">
-<h2 class="heading2" id="how-to-cite">How to cite?<a class="anchor" aria-label="anchor" href="#how-to-cite"></a>
+<h2 id="how-to-cite">How to cite?<a class="anchor" aria-label="anchor" href="#how-to-cite"></a>
 </h2>
 <p>rbioapi is an interface between you and other databases and services.
 Thus, if you have used rbioapi in published research, kindly in addition
@@ -627,7 +648,7 @@ vignette article</a> for more details.</p>
 <hr>
 </div>
 <div class="section level2">
-<h2 class="heading2" id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a>
+<h2 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a>
 </h2>
 <ul>
 <li><p><a href="https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html" title="Over-Representation Analysis with rbioapi">This article in
@@ -640,7 +661,7 @@ vignette index</a></p></li>
 <hr>
 </div>
 <div class="section level2">
-<h2 class="heading2" id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
+<h2 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
 <pre><code><span><span class="co">#&gt; R version 4.4.2 (2024-10-31)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu</span></span>
@@ -667,13 +688,14 @@ vignette index</a></p></li>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span><span class="co">#&gt;  [1] httr_1.4.7        cli_3.6.3         knitr_1.49        rlang_1.1.4      </span></span>
-<span><span class="co">#&gt;  [5] xfun_0.49         textshaping_0.4.1 jsonlite_1.8.9    DT_0.33          </span></span>
-<span><span class="co">#&gt;  [9] htmltools_0.5.8.1 ragg_1.3.3        sass_0.4.9        rmarkdown_2.29   </span></span>
-<span><span class="co">#&gt; [13] crosstalk_1.2.1   evaluate_1.0.1    jquerylib_0.1.4   fastmap_1.2.0    </span></span>
-<span><span class="co">#&gt; [17] yaml_2.3.10       lifecycle_1.0.4   compiler_4.4.2    fs_1.6.5         </span></span>
-<span><span class="co">#&gt; [21] htmlwidgets_1.6.4 systemfonts_1.1.0 digest_0.6.37     R6_2.5.1         </span></span>
-<span><span class="co">#&gt; [25] curl_6.0.1        magrittr_2.0.3    bslib_0.8.0       tools_4.4.2      </span></span>
-<span><span class="co">#&gt; [29] pkgdown_2.1.1     cachem_1.1.0      desc_1.4.3</span></span></code></pre>
+<span><span class="co">#&gt;  [5] xfun_0.49         png_0.1-8         textshaping_0.4.1 jsonlite_1.8.9   </span></span>
+<span><span class="co">#&gt;  [9] DT_0.33           htmltools_0.5.8.1 ragg_1.3.3        sass_0.4.9       </span></span>
+<span><span class="co">#&gt; [13] rmarkdown_2.29    grid_4.4.2        crosstalk_1.2.1   evaluate_1.0.1   </span></span>
+<span><span class="co">#&gt; [17] jquerylib_0.1.4   fastmap_1.2.0     yaml_2.3.10       lifecycle_1.0.4  </span></span>
+<span><span class="co">#&gt; [21] compiler_4.4.2    fs_1.6.5          htmlwidgets_1.6.4 systemfonts_1.1.0</span></span>
+<span><span class="co">#&gt; [25] digest_0.6.37     R6_2.5.1          curl_6.0.1        magrittr_2.0.3   </span></span>
+<span><span class="co">#&gt; [29] bslib_0.8.0       tools_4.4.2       pkgdown_2.1.1     cachem_1.1.0     </span></span>
+<span><span class="co">#&gt; [33] desc_1.4.3</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

@@ -3,11 +3,15 @@
   section). By providing your input set o proteins (and optionally
   background or universe protein set), you can use this function to
   perform enrichment test and retrieve a list of enriched terms in each
-  database, among with pertinent information for each term.'><meta property="og:description" content='STRING cross-reference the proteins with several databases (see "Details"
+  database, among with pertinent information for each term.
+  Use rba_string_enrichment_image to retrieve the analysis
+  results as a plot.'><meta property="og:description" content='STRING cross-reference the proteins with several databases (see "Details"
   section). By providing your input set o proteins (and optionally
   background or universe protein set), you can use this function to
   perform enrichment test and retrieve a list of enriched terms in each
-  database, among with pertinent information for each term.'><meta property="og:image" content="https://rbioapi.moosa-r.com/logo.svg"><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-BF9VGFNZ4C"></script><script>
+  database, among with pertinent information for each term.
+  Use rba_string_enrichment_image to retrieve the analysis
+  results as a plot.'><meta property="og:image" content="https://rbioapi.moosa-r.com/logo.svg"><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-BF9VGFNZ4C"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -66,7 +70,9 @@
   section). By providing your input set o proteins (and optionally
   background or universe protein set), you can use this function to
   perform enrichment test and retrieve a list of enriched terms in each
-  database, among with pertinent information for each term.</p>
+  database, among with pertinent information for each term.
+  Use <code><a href="rba_string_enrichment_image.html">rba_string_enrichment_image</a></code> to retrieve the analysis
+  results as a plot.</p>
     </div>
 
     <div class="section level2">
@@ -86,7 +92,9 @@
 
 <dl><dt id="arg-ids">ids<a class="anchor" aria-label="anchor" href="#arg-ids"></a></dt>
 <dd><p>Your protein ID(s). It is strongly recommended to supply
-STRING IDs. See <code><a href="rba_string_map_ids.html">rba_string_map_ids</a></code> for more information.</p></dd>
+STRING IDs. See <code><a href="rba_string_map_ids.html">rba_string_map_ids</a></code> for more information.
+Note that if only one id is supplied, STRING expands the network by 10
+proteins.</p></dd>
 
 
 <dt id="arg-species">species<a class="anchor" aria-label="anchor" href="#arg-species"></a></dt>
@@ -151,9 +159,13 @@ arguments manual for more information on available options.</p></dd>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="rba_string_map_ids.html">rba_string_map_ids</a>, <a href="rba_string_annotations.html">rba_string_annotations</a></code></p>
+    <div class="dont-index"><p><code><a href="rba_string_map_ids.html">rba_string_map_ids</a>,
+  <a href="rba_string_annotations.html">rba_string_annotations</a>,
+  <a href="rba_string_enrichment_image.html">rba_string_enrichment_image</a>
+  </code></p>
 <p>Other "STRING":
 <code><a href="rba_string_annotations.html">rba_string_annotations</a>()</code>,
+<code><a href="rba_string_enrichment_image.html">rba_string_enrichment_image</a>()</code>,
 <code><a href="rba_string_enrichment_ppi.html">rba_string_enrichment_ppi</a>()</code>,
 <code><a href="rba_string_homology_inter.html">rba_string_homology_inter</a>()</code>,
 <code><a href="rba_string_homology_intra.html">rba_string_homology_intra</a>()</code>,

@@ -91,7 +91,7 @@
                         <h4 data-toc-skip class="author">Moosa
 Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2024-12-23</h4>
+            <h4 data-toc-skip class="date">2024-12-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/master/vignettes/rbioapi_string.Rmd" class="external-link"><code>vignettes/rbioapi_string.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_string.Rmd</code></div>
@@ -99,10 +99,9 @@ Rezwani</h4>
 
     
     
-<hr>
-<div class="section level3">
-<h3 class="heading2" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
-</h3>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
 <p>STRING is a comprehensive database of protein-protein interactions
 (PPI) that in version 11.0, covers 24,584,628 proteins from 5,090
 organisms. Directly quoting from their paper:</p>
@@ -119,9 +118,9 @@ research</em> 47.D1 (2019): D607-D613. )</p>
 </blockquote>
 <hr>
 </div>
-<div class="section level3">
-<h3 class="heading2" id="note-about-species-argument">Note about species argument<a class="anchor" aria-label="anchor" href="#note-about-species-argument"></a>
-</h3>
+<div class="section level2">
+<h2 id="note-about-species-argument">Note about species argument<a class="anchor" aria-label="anchor" href="#note-about-species-argument"></a>
+</h2>
 <p>You can find an argument named “species” in every rbioapi STRING
 function. Providing the species argument is not mandatory, but it has
 been recommended in STRING API’s documentation to always specify the
@@ -131,9 +130,9 @@ calling the function without providing the species will produce an
 ERROR.</p>
 <hr>
 </div>
-<div class="section level3">
-<h3 class="heading2" id="map-your-ids-to-string-ids">Map your IDs to STRING IDs<a class="anchor" aria-label="anchor" href="#map-your-ids-to-string-ids"></a>
-</h3>
+<div class="section level2">
+<h2 id="map-your-ids-to-string-ids">Map your IDs to STRING IDs<a class="anchor" aria-label="anchor" href="#map-your-ids-to-string-ids"></a>
+</h2>
 <p>Although STRING API resources will handle and recognize a variety of
 identifiers, it is recommended that you first map your IDs to STRING IDs
 before using them in other rbioapi STRING functions.</p>
@@ -147,9 +146,9 @@ before using them in other rbioapi STRING functions.</p>
 <span><span class="co">## 3 What we need and will use for the rest of this vignette is the `stringId` column</span></span></code></pre></div>
 <hr>
 </div>
-<div class="section level3">
-<h3 class="heading2" id="get-interaction-network-of-a-protein-set">Get interaction network of a protein set<a class="anchor" aria-label="anchor" href="#get-interaction-network-of-a-protein-set"></a>
-</h3>
+<div class="section level2">
+<h2 id="get-interaction-network-of-a-protein-set">Get interaction network of a protein set<a class="anchor" aria-label="anchor" href="#get-interaction-network-of-a-protein-set"></a>
+</h2>
 <p>You can retrieve a list of interactions that the proteins in your set
 have with each other along with the STRING annotations of each
 interaction. You may filter the results by using required_score and
@@ -163,9 +162,9 @@ function’s manual for information on the returned columns.</p>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:100%;height:auto;"></div>
 <script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33"],["9606.ENSP00000249071","9606.ENSP00000249071","9606.ENSP00000249071","9606.ENSP00000249373","9606.ENSP00000260363","9606.ENSP00000260363","9606.ENSP00000260363","9606.ENSP00000260363","9606.ENSP00000260363","9606.ENSP00000266970","9606.ENSP00000266970","9606.ENSP00000266970","9606.ENSP00000266970","9606.ENSP00000266970","9606.ENSP00000269305","9606.ENSP00000269305","9606.ENSP00000269305","9606.ENSP00000269305","9606.ENSP00000269305","9606.ENSP00000272233","9606.ENSP00000272233","9606.ENSP00000272233","9606.ENSP00000300093","9606.ENSP00000300093","9606.ENSP00000300093","9606.ENSP00000300093","9606.ENSP00000378699","9606.ENSP00000378699","9606.ENSP00000378699","9606.ENSP00000400175","9606.ENSP00000400175","9606.ENSP00000404190","9606.ENSP00000404190"],["9606.ENSP00000404190","9606.ENSP00000400175","9606.ENSP00000497733","9606.ENSP00000269305","9606.ENSP00000418960","9606.ENSP00000400175","9606.ENSP00000378699","9606.ENSP00000300093","9606.ENSP00000404190","9606.ENSP00000400175","9606.ENSP00000300093","9606.ENSP00000418960","9606.ENSP00000269305","9606.ENSP00000378699","9606.ENSP00000400175","9606.ENSP00000497733","9606.ENSP00000378699","9606.ENSP00000300093","9606.ENSP00000418960","9606.ENSP00000497733","9606.ENSP00000404190","9606.ENSP00000400175","9606.ENSP00000400175","9606.ENSP00000418960","9606.ENSP00000404190","9606.ENSP00000378699","9606.ENSP00000400175","9606.ENSP00000418960","9606.ENSP00000404190","9606.ENSP00000497733","9606.ENSP00000404190","9606.ENSP00000418960","9606.ENSP00000497733"],["RAC2","RAC2","RAC2","SMO","KIF23","KIF23","KIF23","KIF23","KIF23","CDK2","CDK2","CDK2","CDK2","CDK2","TP53","TP53","TP53","TP53","TP53","RHOB","RHOB","RHOB","PLK1","PLK1","PLK1","PLK1","CDK1","CDK1","CDK1","RHOA","RHOA","RACGAP1","RACGAP1"],["RACGAP1","RHOA","CDC42","TP53","BRCA1","RHOA","CDK1","PLK1","RACGAP1","RHOA","PLK1","BRCA1","TP53","CDK1","RHOA","CDC42","CDK1","PLK1","BRCA1","CDC42","RACGAP1","RHOA","RHOA","BRCA1","RACGAP1","CDK1","RHOA","BRCA1","RACGAP1","CDC42","RACGAP1","BRCA1","CDC42"],["9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606"],[0.819,0.9399999999999999,0.9429999999999999,0.525,0.713,0.714,0.914,0.988,0.999,0.514,0.742,0.984,0.987,0.994,0.662,0.76,0.962,0.981,0.999,0.604,0.62,0.821,0.512,0.96,0.961,0.993,0.516,0.878,0.96,0.955,0.979,0.552,0.979],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0.062,0.055,0,0,0,0,0,0,0,0,0,0,0.056,0,0,0,0,0,0.063,0,0.05,0,0,0,0,0,0,0,0.062,0,0,0],[0.058,0.159,0.218,0,0.41,0.042,0.8080000000000001,0.592,0.828,0.093,0.368,0.194,0.093,0.349,0.091,0.06,0.095,0.073,0.067,0.1,0.052,0.138,0.068,0.235,0.587,0.8139999999999999,0.1,0.402,0.6919999999999999,0.361,0.052,0.289,0.052],[0.07099999999999999,0.295,0.206,0,0.439,0.05,0,0.378,0.995,0.08500000000000001,0.15,0.735,0.778,0.47,0,0.16,0.626,0.737,0.895,0.295,0.114,0.399,0.126,0.781,0.644,0.15,0.08500000000000001,0.51,0.292,0.295,0.806,0.292,0.903],[0.4,0.9,0.9,0,0,0,0,0.75,0.9,0,0,0.5,0.5,0.4,0,0,0,0,0.5,0,0.4,0.5,0,0,0,0.9,0,0,0,0.9,0.4,0,0.4],[0.696,0.091,0.181,0.525,0.202,0.711,0.57,0.836,0.999,0.461,0.5580000000000001,0.872,0.891,0.977,0.644,0.721,0.899,0.93,0.999,0.411,0.336,0.385,0.449,0.783,0.761,0.66,0.459,0.619,0.832,0.103,0.836,0.182,0.671]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>stringId_A<\/th>\n      <th>stringId_B<\/th>\n      <th>preferredName_A<\/th>\n      <th>preferredName_B<\/th>\n      <th>ncbiTaxonId<\/th>\n      <th>score<\/th>\n      <th>nscore<\/th>\n      <th>fscore<\/th>\n      <th>pscore<\/th>\n      <th>ascore<\/th>\n      <th>escore<\/th>\n      <th>dscore<\/th>\n      <th>tscore<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":5,"columnDefs":[{"className":"dt-right","targets":[6,7,8,9,10,11,12,13]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"stringId_A","targets":1},{"name":"stringId_B","targets":2},{"name":"preferredName_A","targets":3},{"name":"preferredName_B","targets":4},{"name":"ncbiTaxonId","targets":5},{"name":"score","targets":6},{"name":"nscore","targets":7},{"name":"fscore","targets":8},{"name":"pscore","targets":9},{"name":"ascore","targets":10},{"name":"escore","targets":11},{"name":"dscore","targets":12},{"name":"tscore","targets":13}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><hr>
 </div>
-<div class="section level3">
-<h3 class="heading2" id="get-interaction-partners-of-a-protein-set">Get interaction partners of a protein set<a class="anchor" aria-label="anchor" href="#get-interaction-partners-of-a-protein-set"></a>
-</h3>
+<div class="section level2">
+<h2 id="get-interaction-partners-of-a-protein-set">Get interaction partners of a protein set<a class="anchor" aria-label="anchor" href="#get-interaction-partners-of-a-protein-set"></a>
+</h2>
 <p>In the last example, we only obtained the interaction which our
 proteins have among themselves, what if we wanted to get a list of every
 protein which interact with our protein(s)?</p>
@@ -179,9 +178,9 @@ protein which interact with our protein(s)?</p>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-e5c8c404fe174e4c81bd" style="width:100%;height:auto;"></div>
 <script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],["9606.ENSP00000361359","9606.ENSP00000361359","9606.ENSP00000361359","9606.ENSP00000361359","9606.ENSP00000361359","9606.ENSP00000361359","9606.ENSP00000361359","9606.ENSP00000361359","9606.ENSP00000361359","9606.ENSP00000361359"],["9606.ENSP00000264246","9606.ENSP00000376500","9606.ENSP00000433623","9606.ENSP00000359663","9606.ENSP00000324890","9606.ENSP00000247668","9606.ENSP00000261464","9606.ENSP00000295025","9606.ENSP00000398698","9606.ENSP00000302961"],["CD40","CD40","CD40","CD40","CD40","CD40","CD40","CD40","CD40","CD40"],["CD80","TRAF3","TRAF6","CD40LG","CD28","TRAF2","TRAF5","REL","TNF","HSPA4"],[9606,9606,9606,9606,9606,9606,9606,9606,9606,9606],[0.999,0.999,0.999,0.999,0.997,0.996,0.993,0.992,0.992,0.991],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0.258,0.122,0,0.058,0.058,0.127,0.08699999999999999,0.089,0.135,0.055],[0,0.991,0.895,0.948,0,0.927,0.845,0,0,0.292],[0,0.9,0.9,0.9,0,0.9,0.54,0,0.5,0],[0.999,0.992,0.996,0.999,0.997,0.5580000000000001,0.906,0.992,0.984,0.988]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>stringId_A<\/th>\n      <th>stringId_B<\/th>\n      <th>preferredName_A<\/th>\n      <th>preferredName_B<\/th>\n      <th>ncbiTaxonId<\/th>\n      <th>score<\/th>\n      <th>nscore<\/th>\n      <th>fscore<\/th>\n      <th>pscore<\/th>\n      <th>ascore<\/th>\n      <th>escore<\/th>\n      <th>dscore<\/th>\n      <th>tscore<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":5,"columnDefs":[{"className":"dt-right","targets":[5,6,7,8,9,10,11,12,13]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"stringId_A","targets":1},{"name":"stringId_B","targets":2},{"name":"preferredName_A","targets":3},{"name":"preferredName_B","targets":4},{"name":"ncbiTaxonId","targets":5},{"name":"score","targets":6},{"name":"nscore","targets":7},{"name":"fscore","targets":8},{"name":"pscore","targets":9},{"name":"ascore","targets":10},{"name":"escore","targets":11},{"name":"dscore","targets":12},{"name":"tscore","targets":13}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><hr>
 </div>
-<div class="section level3">
-<h3 class="heading2" id="get-network-image-of-a-protein-set">Get network image of a protein set<a class="anchor" aria-label="anchor" href="#get-network-image-of-a-protein-set"></a>
-</h3>
+<div class="section level2">
+<h2 id="get-network-image-of-a-protein-set">Get network image of a protein set<a class="anchor" aria-label="anchor" href="#get-network-image-of-a-protein-set"></a>
+</h2>
 <p>Let’s go back to the interaction network. As you must have seen in
 the STRING webpages, STRING plots the interaction network of your
 proteins with many customizations available. You can also do that with
@@ -191,13 +190,13 @@ manual.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Example 1:</span></span>
 <span><span class="va">graph_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_string_network_image.html">rba_string_network_image</a></span><span class="op">(</span>ids <span class="op">=</span> <span class="va">proteins_mapped</span>,</span>
-<span>                                   image_format <span class="op">=</span> <span class="st">"image"</span>,</span>
-<span>                                   species <span class="op">=</span> <span class="fl">9606</span>,</span>
-<span>                                   save_image <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>                                   required_score <span class="op">=</span> <span class="fl">500</span>,</span>
-<span>                                   network_flavor <span class="op">=</span> <span class="st">"confidence"</span><span class="op">)</span></span></code></pre></div>
+<span>                                    image_format <span class="op">=</span> <span class="st">"image"</span>,</span>
+<span>                                    species <span class="op">=</span> <span class="fl">9606</span>,</span>
+<span>                                    save_image <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                                    required_score <span class="op">=</span> <span class="fl">500</span>,</span>
+<span>                                    network_flavor <span class="op">=</span> <span class="st">"confidence"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="rbioapi_string_files/figure-html/rba_string_network_image_ex1_image-1.png" alt="Network images - Example 1" width="700"><p class="caption">
+<img src="rbioapi_string_files/figure-html/rba_string_network_image_ex1_image-1.png" alt="Network images - Example 1" width="672"><p class="caption">
 Network images - Example 1
 </p>
 </div>
@@ -210,29 +209,29 @@ Network images - Example 1
 <span>                                    required_score <span class="op">=</span> <span class="fl">500</span>,</span>
 <span>                                    add_color_nodes <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>                                    add_white_nodes <span class="op">=</span> <span class="fl">5</span>,</span>
-<span>                                   network_flavor <span class="op">=</span> <span class="st">"actions"</span><span class="op">)</span></span></code></pre></div>
+<span>                                    network_flavor <span class="op">=</span> <span class="st">"actions"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="rbioapi_string_files/figure-html/rba_string_network_image_ex2_image-1.png" alt="Network images - Example 2" width="700"><p class="caption">
+<img src="rbioapi_string_files/figure-html/rba_string_network_image_ex2_image-1.png" alt="Network images - Example 2" width="672"><p class="caption">
 Network images - Example 2
 </p>
 </div>
 <hr>
 </div>
-<div class="section level3">
-<h3 class="heading2" id="enrichment-using-string">Enrichment using STRING<a class="anchor" aria-label="anchor" href="#enrichment-using-string"></a>
-</h3>
+<div class="section level2">
+<h2 id="enrichment-using-string">Enrichment using STRING<a class="anchor" aria-label="anchor" href="#enrichment-using-string"></a>
+</h2>
 <p>STRING let you perform two types of enrichments. See <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3531103/" title="STRING v9.1: protein-protein interaction networks, with increased coverage and integration" class="external-link">STRING’s
 paper</a> for more information.</p>
-<div class="section level4">
-<h4 class="heading3" id="functional-enrichment">Functional enrichment<a class="anchor" aria-label="anchor" href="#functional-enrichment"></a>
-</h4>
+<div class="section level3">
+<h3 id="functional-enrichment">Functional enrichment<a class="anchor" aria-label="anchor" href="#functional-enrichment"></a>
+</h3>
 <p>The first type is the conventional type, which statistically tests
 your supplied gene sets against some sets of annotation. Currently,
 STRING supports Gene Ontology, KEGG pathways, UniProt Keywords, PubMed
 publications, Pfam domains, InterPro domains, and SMART domains. (<a href="https://version11.string-db.org/help/api/#getting-functional-enrichment" title="STRING API - Getting functional enrichment" class="external-link">source</a>).</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">enriched</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_string_enrichment.html">rba_string_enrichment</a></span><span class="op">(</span>ids <span class="op">=</span> <span class="va">proteins_mapped</span>,</span>
-<span>                                  species <span class="op">=</span> <span class="fl">9606</span>, <span class="op">)</span></span></code></pre></div>
+<span>                                  species <span class="op">=</span> <span class="fl">9606</span><span class="op">)</span></span></code></pre></div>
 <p>As usual, we inspect the output using the <code><a href="https://rdrr.io/r/utils/str.html" class="external-link">str()</a></code>
 function. As you can see below, the enrichment results of each category
 can be found as the returned list’s elements.</p>
@@ -253,25 +252,47 @@ can be found as the returned list’s elements.</p>
 <span><span class="co">#&gt;  $ SMART            :'data.frame':   1 obs. of  10 variables:</span></span>
 <span><span class="co">#&gt;  $ TISSUES          :'data.frame':   12 obs. of  10 variables:</span></span>
 <span><span class="co">#&gt;  $ WikiPathways     :'data.frame':   46 obs. of  10 variables:</span></span></code></pre></div>
-<p>Let us see the “DISEASES” results as an example. Below, we can see
-which terms of the <a href="https://disease-ontology.org/" title="Human Disease Ontology" class="external-link">Human Disease Ontology</a> were
-over-represented:</p>
+<p>Let us see the “KEGG” results as an example. Below, we can see which
+terms of the <a href="https://www.genome.jp/kegg/pathway.html" class="external-link">KEGG
+pathways database</a> were over-represented:</p>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-36aa3d2a04d42bbc2145" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-36aa3d2a04d42bbc2145">{"x":{"filter":"none","vertical":false,"data":[["215","216","217","218","219","220","221","222","223","224","225"],["DISEASES","DISEASES","DISEASES","DISEASES","DISEASES","DISEASES","DISEASES","DISEASES","DISEASES","DISEASES","DISEASES"],["DOID:0050686","DOID:162","DOID:2513","DOID:3008","DOID:3012","DOID:3093","DOID:3114","DOID:4001","DOID:4706","DOID:768","DOID:8719"],[5,6,2,2,2,3,2,2,2,2,2],[757,978,27,5,6,130,5,16,19,16,13],[9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606],[["9606.ENSP00000249373","9606.ENSP00000266970","9606.ENSP00000269305","9606.ENSP00000272233","9606.ENSP00000418960"],["9606.ENSP00000249373","9606.ENSP00000266970","9606.ENSP00000269305","9606.ENSP00000272233","9606.ENSP00000400175","9606.ENSP00000418960"],["9606.ENSP00000249373","9606.ENSP00000269305"],["9606.ENSP00000269305","9606.ENSP00000418960"],["9606.ENSP00000269305","9606.ENSP00000418960"],["9606.ENSP00000249373","9606.ENSP00000266970","9606.ENSP00000269305"],["9606.ENSP00000269305","9606.ENSP00000418960"],["9606.ENSP00000269305","9606.ENSP00000418960"],["9606.ENSP00000249373","9606.ENSP00000269305"],["9606.ENSP00000266970","9606.ENSP00000269305"],["9606.ENSP00000269305","9606.ENSP00000418960"]],[["SMO","CDK2","TP53","RHOB","BRCA1"],["SMO","CDK2","TP53","RHOB","RHOA","BRCA1"],["SMO","TP53"],["TP53","BRCA1"],["TP53","BRCA1"],["SMO","CDK2","TP53"],["TP53","BRCA1"],["TP53","BRCA1"],["SMO","TP53"],["CDK2","TP53"],["TP53","BRCA1"]],[0.00013,3.24e-05,0.00019,9.819999999999999e-06,1.31e-05,0.0001,9.819999999999999e-06,7.12e-05,9.76e-05,7.12e-05,4.89e-05],[0.0451,0.0451,0.0451,0.0451,0.0451,0.0451,0.0451,0.0451,0.0451,0.0451,0.0451],["Organ system cancer","Cancer","Basal cell carcinoma","Invasive ductal carcinoma","Li-Fraumeni syndrome","Nervous system cancer","Serous cystadenocarcinoma","Ovarian carcinoma","Infratentorial cancer","Retinoblastoma","In situ carcinoma"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>category<\/th>\n      <th>term<\/th>\n      <th>number_of_genes<\/th>\n      <th>number_of_genes_in_background<\/th>\n      <th>ncbiTaxonId<\/th>\n      <th>inputGenes<\/th>\n      <th>preferredNames<\/th>\n      <th>p_value<\/th>\n      <th>fdr<\/th>\n      <th>description<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":5,"columnDefs":[{"className":"dt-right","targets":[3,4,5,8,9]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"category","targets":1},{"name":"term","targets":2},{"name":"number_of_genes","targets":3},{"name":"number_of_genes_in_background","targets":4},{"name":"ncbiTaxonId","targets":5},{"name":"inputGenes","targets":6},{"name":"preferredNames","targets":7},{"name":"p_value","targets":8},{"name":"fdr","targets":9},{"name":"description","targets":10}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p><strong>Please Note:</strong> Other services supported by rbioapi
+<script type="application/json" data-for="htmlwidget-36aa3d2a04d42bbc2145">{"x":{"filter":"none","vertical":false,"data":[["240","241","242","243","244","245","246","247","248","249","250","251","252","253","254","255","256","257","258","259","260","261","262","263","264","265","266","267","268","269","270","271","272","273","274","275","276","277","278","279","280","281","282","283","284"],["KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG","KEGG"],["hsa05203","hsa05200","hsa04110","hsa05206","hsa04360","hsa05205","hsa04115","hsa04520","hsa05212","hsa05210","hsa04914","hsa04071","hsa04670","hsa04722","hsa04114","hsa05135","hsa05418","hsa04218","hsa04310","hsa04062","hsa04510","hsa04015","hsa04810","hsa05132","hsa05131","hsa05163","hsa04014","hsa04370","hsa05217","hsa04010","hsa01524","hsa05100","hsa05165","hsa04151","hsa04666","hsa05222","hsa05215","hsa04660","hsa04068","hsa05162","hsa05224","hsa05226","hsa04530","hsa05160","hsa05161"],[5,6,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,2,2,3,2,2,3,3,2,2,2,2,2,2,2,2,2,2,2],[183,515,120,159,176,194,72,69,71,82,95,116,111,112,121,124,129,150,154,186,195,201,209,209,218,217,225,56,63,286,70,70,324,349,90,92,97,100,126,137,146,146,157,157,158],[9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606],[["9606.ENSP00000266970","9606.ENSP00000269305","9606.ENSP00000378699","9606.ENSP00000400175","9606.ENSP00000497733"],["9606.ENSP00000249071","9606.ENSP00000249373","9606.ENSP00000266970","9606.ENSP00000269305","9606.ENSP00000400175","9606.ENSP00000497733"],["9606.ENSP00000266970","9606.ENSP00000269305","9606.ENSP00000300093","9606.ENSP00000378699"],["9606.ENSP00000260363","9606.ENSP00000269305","9606.ENSP00000400175","9606.ENSP00000418960"],["9606.ENSP00000249071","9606.ENSP00000249373","9606.ENSP00000400175","9606.ENSP00000497733"],["9606.ENSP00000249373","9606.ENSP00000269305","9606.ENSP00000400175","9606.ENSP00000497733"],["9606.ENSP00000266970","9606.ENSP00000269305","9606.ENSP00000378699"],["9606.ENSP00000249071","9606.ENSP00000400175","9606.ENSP00000497733"],["9606.ENSP00000249071","9606.ENSP00000269305","9606.ENSP00000497733"],["9606.ENSP00000249071","9606.ENSP00000269305","9606.ENSP00000400175"],["9606.ENSP00000266970","9606.ENSP00000300093","9606.ENSP00000378699"],["9606.ENSP00000249071","9606.ENSP00000269305","9606.ENSP00000400175"],["9606.ENSP00000249071","9606.ENSP00000400175","9606.ENSP00000497733"],["9606.ENSP00000269305","9606.ENSP00000400175","9606.ENSP00000497733"],["9606.ENSP00000266970","9606.ENSP00000300093","9606.ENSP00000378699"],["9606.ENSP00000249071","9606.ENSP00000400175","9606.ENSP00000497733"],["9606.ENSP00000249071","9606.ENSP00000269305","9606.ENSP00000400175"],["9606.ENSP00000266970","9606.ENSP00000269305","9606.ENSP00000378699"],["9606.ENSP00000249071","9606.ENSP00000269305","9606.ENSP00000400175"],["9606.ENSP00000249071","9606.ENSP00000400175","9606.ENSP00000497733"],["9606.ENSP00000249071","9606.ENSP00000400175","9606.ENSP00000497733"],["9606.ENSP00000249071","9606.ENSP00000400175","9606.ENSP00000497733"],["9606.ENSP00000249071","9606.ENSP00000400175","9606.ENSP00000497733"],["9606.ENSP00000272233","9606.ENSP00000400175","9606.ENSP00000497733"],["9606.ENSP00000269305","9606.ENSP00000400175","9606.ENSP00000497733"],["9606.ENSP00000249071","9606.ENSP00000269305","9606.ENSP00000400175"],["9606.ENSP00000249071","9606.ENSP00000400175","9606.ENSP00000497733"],["9606.ENSP00000249071","9606.ENSP00000497733"],["9606.ENSP00000249373","9606.ENSP00000269305"],["9606.ENSP00000249071","9606.ENSP00000269305","9606.ENSP00000497733"],["9606.ENSP00000269305","9606.ENSP00000418960"],["9606.ENSP00000400175","9606.ENSP00000497733"],["9606.ENSP00000266970","9606.ENSP00000269305","9606.ENSP00000497733"],["9606.ENSP00000266970","9606.ENSP00000269305","9606.ENSP00000418960"],["9606.ENSP00000249071","9606.ENSP00000497733"],["9606.ENSP00000266970","9606.ENSP00000269305"],["9606.ENSP00000266970","9606.ENSP00000269305"],["9606.ENSP00000400175","9606.ENSP00000497733"],["9606.ENSP00000266970","9606.ENSP00000300093"],["9606.ENSP00000266970","9606.ENSP00000269305"],["9606.ENSP00000269305","9606.ENSP00000418960"],["9606.ENSP00000266970","9606.ENSP00000269305"],["9606.ENSP00000400175","9606.ENSP00000497733"],["9606.ENSP00000266970","9606.ENSP00000269305"],["9606.ENSP00000266970","9606.ENSP00000269305"]],[["CDK2","TP53","CDK1","RHOA","CDC42"],["RAC2","SMO","CDK2","TP53","RHOA","CDC42"],["CDK2","TP53","PLK1","CDK1"],["KIF23","TP53","RHOA","BRCA1"],["RAC2","SMO","RHOA","CDC42"],["SMO","TP53","RHOA","CDC42"],["CDK2","TP53","CDK1"],["RAC2","RHOA","CDC42"],["RAC2","TP53","CDC42"],["RAC2","TP53","RHOA"],["CDK2","PLK1","CDK1"],["RAC2","TP53","RHOA"],["RAC2","RHOA","CDC42"],["TP53","RHOA","CDC42"],["CDK2","PLK1","CDK1"],["RAC2","RHOA","CDC42"],["RAC2","TP53","RHOA"],["CDK2","TP53","CDK1"],["RAC2","TP53","RHOA"],["RAC2","RHOA","CDC42"],["RAC2","RHOA","CDC42"],["RAC2","RHOA","CDC42"],["RAC2","RHOA","CDC42"],["RHOB","RHOA","CDC42"],["TP53","RHOA","CDC42"],["RAC2","TP53","RHOA"],["RAC2","RHOA","CDC42"],["RAC2","CDC42"],["SMO","TP53"],["RAC2","TP53","CDC42"],["TP53","BRCA1"],["RHOA","CDC42"],["CDK2","TP53","CDC42"],["CDK2","TP53","BRCA1"],["RAC2","CDC42"],["CDK2","TP53"],["CDK2","TP53"],["RHOA","CDC42"],["CDK2","PLK1"],["CDK2","TP53"],["TP53","BRCA1"],["CDK2","TP53"],["RHOA","CDC42"],["CDK2","TP53"],["CDK2","TP53"]],[1.4e-07,8.3e-07,1.42e-06,4.23e-06,6.27e-06,9.130000000000001e-06,1.87e-05,1.65e-05,1.79e-05,2.72e-05,4.17e-05,7.440000000000001e-05,6.550000000000001e-05,6.719999999999999e-05,8.41e-05,9.02e-05,0.0001,0.00016,0.00017,0.00029,0.00033,0.00037,0.00041,0.00041,0.00046,0.00046,0.00051,0.00076,0.00095,0.001,0.0012,0.0012,0.0014,0.0018,0.0019,0.002,0.0022,0.0023,0.0036,0.0042,0.0048,0.0048,0.0055,0.0055,0.0056],[4.69e-05,0.00014,0.00016,0.00036,0.00042,0.00051,0.00079,0.00079,0.00079,0.00091,0.0013,0.0018,0.0018,0.0018,0.0019,0.0019,0.002,0.0029,0.003,0.0049,0.0054,0.0056,0.006,0.006,0.0061,0.0061,0.0063,0.0091,0.011,0.0113,0.0126,0.0126,0.0146,0.0175,0.0181,0.0184,0.0198,0.0205,0.0312,0.0357,0.0394,0.0394,0.0431,0.0431,0.0431],["Viral carcinogenesis","Pathways in cancer","Cell cycle","MicroRNAs in cancer","Axon guidance","Proteoglycans in cancer","p53 signaling pathway","Adherens junction","Pancreatic cancer","Colorectal cancer","Progesterone-mediated oocyte maturation","Sphingolipid signaling pathway","Leukocyte transendothelial migration","Neurotrophin signaling pathway","Oocyte meiosis","Yersinia infection","Fluid shear stress and atherosclerosis","Cellular senescence","Wnt signaling pathway","Chemokine signaling pathway","Focal adhesion","Rap1 signaling pathway","Regulation of actin cytoskeleton","Salmonella infection","Shigellosis","Human cytomegalovirus infection","Ras signaling pathway","VEGF signaling pathway","Basal cell carcinoma","MAPK signaling pathway","Platinum drug resistance","Bacterial invasion of epithelial cells","Human papillomavirus infection","PI3K-Akt signaling pathway","Fc gamma R-mediated phagocytosis","Small cell lung cancer","Prostate cancer","T cell receptor signaling pathway","FoxO signaling pathway","Measles","Breast cancer","Gastric cancer","Tight junction","Hepatitis C","Hepatitis B"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>category<\/th>\n      <th>term<\/th>\n      <th>number_of_genes<\/th>\n      <th>number_of_genes_in_background<\/th>\n      <th>ncbiTaxonId<\/th>\n      <th>inputGenes<\/th>\n      <th>preferredNames<\/th>\n      <th>p_value<\/th>\n      <th>fdr<\/th>\n      <th>description<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":5,"columnDefs":[{"className":"dt-right","targets":[3,4,5,8,9]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"category","targets":1},{"name":"term","targets":2},{"name":"number_of_genes","targets":3},{"name":"number_of_genes_in_background","targets":4},{"name":"ncbiTaxonId","targets":5},{"name":"inputGenes","targets":6},{"name":"preferredNames","targets":7},{"name":"p_value","targets":8},{"name":"fdr","targets":9},{"name":"description","targets":10}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p><strong>Please Note:</strong> Other services supported by rbioapi
 also provide Over-representation analysis tools. Please see the vignette
 article <a href="rbioapi_do_enrich.html">Do with rbioapi:
 Over-Representation (Enrichment) Analysis in R</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html">link
 to the documentation site</a>) for an in-depth review.</p>
 </div>
-<div class="section level4">
-<h4 class="heading3" id="protein-protein-interaction-enrichment">Protein-protein interaction enrichment<a class="anchor" aria-label="anchor" href="#protein-protein-interaction-enrichment"></a>
-</h4>
+<div class="section level3">
+<h3 id="functional-enrichment-plot">Functional enrichment Plot<a class="anchor" aria-label="anchor" href="#functional-enrichment-plot"></a>
+</h3>
+<p>In addition to a data frame, you can also get a plot summarizing the
+enrichment results. This API endpoint supports extensive customization
+of the plot; please refer to the
+<code><a href="../reference/rba_string_enrichment_image.html">rba_string_enrichment_image()</a></code> function’s manual for
+detailed instructions. Here we perform the exact enrichment analysis
+done above, and retrieve a plot of the results.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">graph_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_string_enrichment_image.html">rba_string_enrichment_image</a></span><span class="op">(</span>ids <span class="op">=</span> <span class="va">proteins_mapped</span>,</span>
+<span>                                       species <span class="op">=</span> <span class="fl">9606</span>,</span>
+<span>                                       category <span class="op">=</span> <span class="st">"KEGG"</span>,</span>
+<span>                                       image_format <span class="op">=</span> <span class="st">"image"</span>,</span>
+<span>                                       save_image <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                                       group_by_similarity <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="rbioapi_string_files/figure-html/rba_string_enrichment_plot_image-1.png" alt="Visualization of enrichment analysis results" width="672"><p class="caption">
+Visualization of enrichment analysis results
+</p>
+</div>
+</div>
+<div class="section level3">
+<h3 id="protein-protein-interaction-enrichment">Protein-protein interaction enrichment<a class="anchor" aria-label="anchor" href="#protein-protein-interaction-enrichment"></a>
+</h3>
 <p>Even without incorporating annotation data, STRING can calculate if
 your proteins are functionally related. Briefly, STRING accomplishes
 this by comparing the interactions’ distribution in your protein-set to
 the interactions’ distribution in the proteome. Read <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3531103/#__sec4title" title="STRING v9.1: protein-protein interaction networks, with increased coverage and integration" class="external-link">STRING’s
 paper</a> for more information.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rba_string_enrichment_ppi.html">rba_string_enrichment_ppi</a></span><span class="op">(</span>ids <span class="op">=</span> <span class="va">proteins_mapped</span>,</span>
 <span>                          species <span class="op">=</span> <span class="fl">9606</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $number_of_nodes</span></span>
@@ -294,23 +315,23 @@ paper</a> for more information.</p>
 <hr>
 </div>
 </div>
-<div class="section level3">
-<h3 class="heading2" id="get-functional-annotations">Get functional annotations<a class="anchor" aria-label="anchor" href="#get-functional-annotations"></a>
-</h3>
+<div class="section level2">
+<h2 id="get-functional-annotations">Get functional annotations<a class="anchor" aria-label="anchor" href="#get-functional-annotations"></a>
+</h2>
 <p>As you have seen above, STRING maps the proteins to multiple
 annotation sources. You can obtain any annotation associated with your
 proteins without performing enrichment analysis and retrieving just the
 significant portion.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">annotations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_string_annotations.html">rba_string_annotations</a></span><span class="op">(</span>ids <span class="op">=</span> <span class="st">"9606.ENSP00000269305"</span>,</span>
 <span>                                     species <span class="op">=</span> <span class="fl">9606</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## This function returns large results, so the results was not shown in this vignette.</span></span></code></pre></div>
 <hr>
 </div>
-<div class="section level3">
-<h3 class="heading2" id="see-also-in-functions-manuals">See also in Functions’ manuals<a class="anchor" aria-label="anchor" href="#see-also-in-functions-manuals"></a>
-</h3>
+<div class="section level2">
+<h2 id="see-also-in-functions-manuals">See also in Functions’ manuals<a class="anchor" aria-label="anchor" href="#see-also-in-functions-manuals"></a>
+</h2>
 <p>Some rbioapi STRING functions were not covered in this vignette,
 please check their manuals:</p>
 <ul>
@@ -320,9 +341,9 @@ please check their manuals:</p>
 </ul>
 <hr>
 </div>
-<div class="section level3">
-<h3 class="heading2" id="citations">How to Cite?<a class="anchor" aria-label="anchor" href="#citations"></a>
-</h3>
+<div class="section level2">
+<h2 id="citations">How to Cite?<a class="anchor" aria-label="anchor" href="#citations"></a>
+</h2>
 <p>To cite STRING (Please see <a href="https://string-db.org/cgi/about?footer_active_subpage=references" class="external-link uri">https://string-db.org/cgi/about?footer_active_subpage=references</a>):</p>
 <ul>
 <li>Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
@@ -344,7 +365,7 @@ Volume 38, Issue 10, 15 May 2022, Pages 2952–2953, <a href="https://doi.org/10
 <hr>
 </div>
 <div class="section level2">
-<h2 class="heading2" id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a>
+<h2 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a>
 </h2>
 <ul>
 <li><p><a href="https://rbioapi.moosa-r.com/articles/rbioapi_string.html" title="2.E: STRING &amp; rbioapi">This article in rbioapi
@@ -354,9 +375,10 @@ documentation site</a></p></li>
 <li><p><a href="rbioapi.html" title="rbioapi: User-Friendly R Interface to Biologic Web Services' API">rbioapi
 vignette index</a></p></li>
 </ul>
+<hr>
 </div>
 <div class="section level2">
-<h2 class="heading2" id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
+<h2 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
 <pre><code><span><span class="co">#&gt; R version 4.4.2 (2024-10-31)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu</span></span>

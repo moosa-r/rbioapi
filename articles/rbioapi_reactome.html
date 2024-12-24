@@ -91,7 +91,7 @@
                         <h4 data-toc-skip class="author">Moosa
 Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2024-12-23</h4>
+            <h4 data-toc-skip class="date">2024-12-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/master/vignettes/rbioapi_reactome.Rmd" class="external-link"><code>vignettes/rbioapi_reactome.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_reactome.Rmd</code></div>
@@ -99,10 +99,9 @@ Rezwani</h4>
 
     
     
-<hr>
-<div class="section level3">
-<h3 class="heading2" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
-</h3>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
 <p>Directly quoting from <a href="https://reactome.org/" class="external-link">Reactome</a>:</p>
 <blockquote>
 <p>REACTOME is an open-source, open access, manually curated and
@@ -122,9 +121,9 @@ rba_reactome_analysis* . Other rba_reactome_* functions without the
 Model</a> page.</p>
 <hr>
 </div>
-<div class="section level3">
-<h3 class="heading2" id="reactome-analysis-services">Reactome analysis services<a class="anchor" aria-label="anchor" href="#reactome-analysis-services"></a>
-</h3>
+<div class="section level2">
+<h2 id="reactome-analysis-services">Reactome analysis services<a class="anchor" aria-label="anchor" href="#reactome-analysis-services"></a>
+</h2>
 <p>This section mostly revolves around
 <code><a href="../reference/rba_reactome_analysis.html">rba_reactome_analysis()</a></code> function. So, naturally, we will
 start with that. As explained in the function’s manual, you have
@@ -191,9 +190,9 @@ also provide Over-representation analysis tools. Please see the vignette
 article <a href="rbioapi_do_enrich.html">Do with rbioapi:
 Over-Representation (Enrichment) Analysis in R</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html">link
 to the documentation site</a>) for an in-depth review.</p>
-<div class="section level4">
-<h4 class="heading3" id="analysis_see-also-in-functions-manuals">See also in Functions’ manuals<a class="anchor" aria-label="anchor" href="#analysis_see-also-in-functions-manuals"></a>
-</h4>
+<div class="section level3">
+<h3 id="analysis_see-also-in-functions-manuals">See also in Functions’ manuals<a class="anchor" aria-label="anchor" href="#analysis_see-also-in-functions-manuals"></a>
+</h3>
 <p>Some rbioapi Reactome analysis functions were not covered in this
 vignette, be sure to check their manuals:</p>
 <ul>
@@ -204,18 +203,17 @@ vignette, be sure to check their manuals:</p>
 <hr>
 </div>
 </div>
-<div class="section level3">
-<h3 class="heading2" id="reactome-contents-services">Reactome contents services<a class="anchor" aria-label="anchor" href="#reactome-contents-services"></a>
-</h3>
+<div class="section level2">
+<h2 id="reactome-contents-services">Reactome contents services<a class="anchor" aria-label="anchor" href="#reactome-contents-services"></a>
+</h2>
 <p>rbioapi functions that correspond to Reactome content services are
 those starting with rba_reactome_* but without “_analysis” infix. These
 functions cover what you can do with objects in Reactome knowledge-base.
 In simpler terms, most -but not all of them- correspond to what you can
 find in <a href="https://reactome.org/PathwayBrowser/" title="Reactome Pathway Browser" class="external-link">Reactome Pathway Browser</a> and <a href="https://reactome.org/content/query?q=apoptosis&amp;species=Homo+sapiens" title="Search results for apoptosis" class="external-link">search results</a>. (e.g. a <a href="https://reactome.org/content/detail/R-HSA-109581" title="Apoptosis Homo sapiens" class="external-link">pathway</a>, a <a href="https://reactome.org/content/detail/R-HSA-202939" title="Caspase-mediated cleavage of E-Cadherin" class="external-link">reaction</a>, a <a href="https://reactome.org/content/detail/R-HSA-350870" title="Caspase-3 [cytosol]" class="external-link">physical Entity</a>, etc.)</p>
-<div class="section level4">
-<h4 class="heading3" id="retrieve-any-object-from-reactome-knowledge-base">Retrieve any object from Reactome
-knowledge-base<a class="anchor" aria-label="anchor" href="#retrieve-any-object-from-reactome-knowledge-base"></a>
-</h4>
+<div class="section level3">
+<h3 id="retrieve-any-object-from-reactome-knowledge-base">Retrieve any object from Reactome knowledge-base<a class="anchor" aria-label="anchor" href="#retrieve-any-object-from-reactome-knowledge-base"></a>
+</h3>
 <p>Using <code><a href="../reference/rba_reactome_query.html">rba_reactome_query()</a></code>, you can retrieve any object
 from Reactome knowledge-base. In simpler terms, what I mean by the
 object is roughly anything that Reactome associated an ID to it. This
@@ -384,9 +382,9 @@ you supply more than one ID, you cannot have
 <span><span class="co">## 3 You can compare it with the webpage of R-HSA-202939 entry:</span></span>
 <span><span class="co"># https://reactome.org/content/detail/R-HSA-202939</span></span></code></pre></div>
 </div>
-<div class="section level4">
-<h4 class="heading3" id="find-cross-reference-ids-in-reactome">Find Cross-Reference IDs in Reactome<a class="anchor" aria-label="anchor" href="#find-cross-reference-ids-in-reactome"></a>
-</h4>
+<div class="section level3">
+<h3 id="find-cross-reference-ids-in-reactome">Find Cross-Reference IDs in Reactome<a class="anchor" aria-label="anchor" href="#find-cross-reference-ids-in-reactome"></a>
+</h3>
 <p>As you can see in the second example usage of we used Reactome’s dbID
 <code>66247</code> to query CD40 protein. How did we obtain that in the
 first place? You can use <code>rba_reactome_xref</code> to map any
@@ -417,9 +415,9 @@ cross-reference (external) IDs to Reactome IDs.</p>
 <span><span class="co">#&gt;  $ className          : chr "ReferenceIsoform"</span></span>
 <span><span class="co">#&gt;  $ schemaClass        : chr "ReferenceIsoform"</span></span></code></pre></div>
 </div>
-<div class="section level4">
-<h4 class="heading3" id="map-cross-reference-ids-to-reactome">Map Cross-Reference IDs to Reactome<a class="anchor" aria-label="anchor" href="#map-cross-reference-ids-to-reactome"></a>
-</h4>
+<div class="section level3">
+<h3 id="map-cross-reference-ids-to-reactome">Map Cross-Reference IDs to Reactome<a class="anchor" aria-label="anchor" href="#map-cross-reference-ids-to-reactome"></a>
+</h3>
 <p>While we are at the cross-reference topic, here is another useful
 resource. Using <code>rba_reactome_mapping</code> you can find the
 Reactome pathways or reactions which include your external ID:</p>
@@ -432,15 +430,15 @@ Reactome pathways or reactions which include your external ID:</p>
 <script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],[198933,5668541,5676594],["Immunoregulatory interactions between a Lymphoid and a non-Lymphoid cell","TNFR2 non-canonical NF-kB pathway","TNF receptor superfamily (TNFSF) members mediating non-canonical NF-kB pathway"],["R-HSA-198933","R-HSA-5668541","R-HSA-5676594"],["R-HSA-198933.9","R-HSA-5668541.5","R-HSA-5676594.3"],[false,false,false],[false,false,false],[["Immunoregulatory interactions between a Lymphoid and a non-Lymphoid cell"],["TNFR2 non-canonical NF-kB pathway","TNFRSF mediated non-canonical NF-kB pathway"],["TNF receptor superfamily (TNFSF) members mediating non-canonical NF-kB pathway"]],["2007-08-21","2015-06-17","2015-06-17"],["Homo sapiens","Homo sapiens","Homo sapiens"],["10.3180/r-hsa-198933.2","10.3180/r-hsa-5668541.1",null],[true,true,false],[false,false,false],["2020-09-24","2022-09-14",null],["Pathway","Pathway","Pathway"],["Pathway","Pathway","Pathway"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>dbId<\/th>\n      <th>displayName<\/th>\n      <th>stId<\/th>\n      <th>stIdVersion<\/th>\n      <th>isInDisease<\/th>\n      <th>isInferred<\/th>\n      <th>name<\/th>\n      <th>releaseDate<\/th>\n      <th>speciesName<\/th>\n      <th>doi<\/th>\n      <th>hasDiagram<\/th>\n      <th>hasEHLD<\/th>\n      <th>lastUpdatedDate<\/th>\n      <th>schemaClass<\/th>\n      <th>className<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"dbId","targets":1},{"name":"displayName","targets":2},{"name":"stId","targets":3},{"name":"stIdVersion","targets":4},{"name":"isInDisease","targets":5},{"name":"isInferred","targets":6},{"name":"name","targets":7},{"name":"releaseDate","targets":8},{"name":"speciesName","targets":9},{"name":"doi","targets":10},{"name":"hasDiagram","targets":11},{"name":"hasEHLD","targets":12},{"name":"lastUpdatedDate","targets":13},{"name":"schemaClass","targets":14},{"name":"className","targets":15}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><hr>
 </div>
 </div>
-<div class="section level3">
-<h3 class="heading2" id="see-also-in-functions-manuals">See also in Functions’ manuals<a class="anchor" aria-label="anchor" href="#see-also-in-functions-manuals"></a>
-</h3>
+<div class="section level2">
+<h2 id="see-also-in-functions-manuals">See also in Functions’ manuals<a class="anchor" aria-label="anchor" href="#see-also-in-functions-manuals"></a>
+</h2>
 <p>There are still more rbioapi f Reactome content functions that were
 not covered in this vignette. Here is a brief overview, see the
 functions’ manual for detailed guides and examples.</p>
-<div class="section level4">
-<h4 class="heading3" id="retrieve-reactome-database-information">Retrieve Reactome Database information<a class="anchor" aria-label="anchor" href="#retrieve-reactome-database-information"></a>
-</h4>
+<div class="section level3">
+<h3 id="retrieve-reactome-database-information">Retrieve Reactome Database information<a class="anchor" aria-label="anchor" href="#retrieve-reactome-database-information"></a>
+</h3>
 <ul>
 <li><p><code><a href="../reference/rba_reactome_version.html">rba_reactome_version()</a></code>: Return current Reactome
 version</p></li>
@@ -450,18 +448,18 @@ annotated in Reactome.</p></li>
 annotated in Reactome.</p></li>
 </ul>
 </div>
-<div class="section level4">
-<h4 class="heading3" id="general-mapping-querying">General Mapping/Querying<a class="anchor" aria-label="anchor" href="#general-mapping-querying"></a>
-</h4>
+<div class="section level3">
+<h3 id="general-mapping-querying">General Mapping/Querying<a class="anchor" aria-label="anchor" href="#general-mapping-querying"></a>
+</h3>
 <ul>
 <li><p><code><a href="../reference/rba_reactome_query.html">rba_reactome_query()</a></code></p></li>
 <li><p><code><a href="../reference/rba_reactome_mapping.html">rba_reactome_mapping()</a></code></p></li>
 <li><p><code><a href="../reference/rba_reactome_xref.html">rba_reactome_xref()</a></code></p></li>
 </ul>
 </div>
-<div class="section level4">
-<h4 class="heading3" id="things-you-can-do-with-a-entities">Things you can do with a Entities<a class="anchor" aria-label="anchor" href="#things-you-can-do-with-a-entities"></a>
-</h4>
+<div class="section level3">
+<h3 id="things-you-can-do-with-a-entities">Things you can do with a Entities<a class="anchor" aria-label="anchor" href="#things-you-can-do-with-a-entities"></a>
+</h3>
 <ul>
 <li><p><code>reactome_complex_list()</code>: Get a list of complexes
 that have your molecule in them.</p></li>
@@ -473,9 +471,9 @@ pathway etc.) is a participant in them.</p></li>
 <li><p><code><a href="../reference/rba_reactome_entity_other_forms.html">rba_reactome_entity_other_forms()</a></code></p></li>
 </ul>
 </div>
-<div class="section level4">
-<h4 class="heading3" id="things-you-can-do-with-events">Things you can do with Events<a class="anchor" aria-label="anchor" href="#things-you-can-do-with-events"></a>
-</h4>
+<div class="section level3">
+<h3 id="things-you-can-do-with-events">Things you can do with Events<a class="anchor" aria-label="anchor" href="#things-you-can-do-with-events"></a>
+</h3>
 <ul>
 <li><p><code><a href="../reference/rba_reactome_event_ancestors.html">rba_reactome_event_ancestors()</a></code></p></li>
 <li><p><code><a href="../reference/rba_reactome_participants.html">rba_reactome_participants()</a></code></p></li>
@@ -486,34 +484,34 @@ pathway etc.) is a participant in them.</p></li>
 hierarchy of an species.</p></li>
 </ul>
 </div>
-<div class="section level4">
-<h4 class="heading3" id="pathways">Pathways<a class="anchor" aria-label="anchor" href="#pathways"></a>
-</h4>
+<div class="section level3">
+<h3 id="pathways">Pathways<a class="anchor" aria-label="anchor" href="#pathways"></a>
+</h3>
 <ul>
 <li><p><code><a href="../reference/rba_reactome_pathways_low.html">rba_reactome_pathways_low()</a></code></p></li>
 <li><p><code><a href="../reference/rba_reactome_pathways_events.html">rba_reactome_pathways_events()</a></code></p></li>
 <li><p><code><a href="../reference/rba_reactome_pathways_top.html">rba_reactome_pathways_top()</a></code></p></li>
 </ul>
 </div>
-<div class="section level4">
-<h4 class="heading3" id="interactors">Interactors<a class="anchor" aria-label="anchor" href="#interactors"></a>
-</h4>
+<div class="section level3">
+<h3 id="interactors">Interactors<a class="anchor" aria-label="anchor" href="#interactors"></a>
+</h3>
 <ul>
 <li><p><code><a href="../reference/rba_reactome_interactors_psicquic.html">rba_reactome_interactors_psicquic()</a></code></p></li>
 <li><p><code><a href="../reference/rba_reactome_interactors_static.html">rba_reactome_interactors_static()</a></code></p></li>
 </ul>
 </div>
-<div class="section level4">
-<h4 class="heading3" id="peaple">People<a class="anchor" aria-label="anchor" href="#peaple"></a>
-</h4>
+<div class="section level3">
+<h3 id="peaple">People<a class="anchor" aria-label="anchor" href="#peaple"></a>
+</h3>
 <ul>
 <li><p><code><a href="../reference/rba_reactome_people_name.html">rba_reactome_people_name()</a></code></p></li>
 <li><p><code><a href="../reference/rba_reactome_people_id.html">rba_reactome_people_id()</a></code></p></li>
 </ul>
 </div>
-<div class="section level4">
-<h4 class="heading3" id="export-diagrams-and-events">Export diagrams and events<a class="anchor" aria-label="anchor" href="#export-diagrams-and-events"></a>
-</h4>
+<div class="section level3">
+<h3 id="export-diagrams-and-events">Export diagrams and events<a class="anchor" aria-label="anchor" href="#export-diagrams-and-events"></a>
+</h3>
 <ul>
 <li><p><code><a href="../reference/rba_reactome_exporter_diagram.html">rba_reactome_exporter_diagram()</a></code></p></li>
 <li><p><code><a href="../reference/rba_reactome_exporter_overview.html">rba_reactome_exporter_overview()</a></code></p></li>
@@ -523,9 +521,9 @@ hierarchy of an species.</p></li>
 <hr>
 </div>
 </div>
-<div class="section level3">
-<h3 class="heading2" id="citations">How to Cite?<a class="anchor" aria-label="anchor" href="#citations"></a>
-</h3>
+<div class="section level2">
+<h2 id="citations">How to Cite?<a class="anchor" aria-label="anchor" href="#citations"></a>
+</h2>
 <p>To cite Reactome (Please see <a href="https://reactome.org/cite" class="external-link uri">https://reactome.org/cite</a>):</p>
 <ul>
 <li>Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
@@ -574,7 +572,7 @@ Volume 38, Issue 10, 15 May 2022, Pages 2952–2953, <a href="https://doi.org/10
 <hr>
 </div>
 <div class="section level2">
-<h2 class="heading2" id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a>
+<h2 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a>
 </h2>
 <ul>
 <li><p><a href="https://rbioapi.moosa-r.com/articles/rbioapi_reactome.html" title="2.D: Reactome &amp; rbioapi">This article in rbioapi
@@ -587,7 +585,7 @@ vignette index</a></p></li>
 <hr>
 </div>
 <div class="section level2">
-<h2 class="heading2" id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
+<h2 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
 <pre><code><span><span class="co">#&gt; R version 4.4.2 (2024-10-31)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu</span></span>

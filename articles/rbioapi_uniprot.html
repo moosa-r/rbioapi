@@ -87,7 +87,7 @@
                         <h4 data-toc-skip class="author">Moosa
 Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2024-12-23</h4>
+            <h4 data-toc-skip class="date">2024-12-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/master/vignettes/rbioapi_uniprot.Rmd" class="external-link"><code>vignettes/rbioapi_uniprot.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_uniprot.Rmd</code></div>
@@ -95,10 +95,9 @@ Rezwani</h4>
 
     
     
-<hr>
-<div class="section level3">
-<h3 class="heading2" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
-</h3>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
 <p>Directly quoting from <a href="https://www.uniprot.org" title="Universal Protein Resource (UniProt)" class="external-link">UniProt</a>:</p>
 <blockquote>
 <p>The Universal Protein Resource (UniProt) is a comprehensive resource
@@ -113,9 +112,9 @@ databases.</p>
 </blockquote>
 <hr>
 </div>
-<div class="section level3">
-<h3 class="heading2" id="search-vs-retrieve">Search vs Retrieve<a class="anchor" aria-label="anchor" href="#search-vs-retrieve"></a>
-</h3>
+<div class="section level2">
+<h2 id="search-vs-retrieve">Search vs Retrieve<a class="anchor" aria-label="anchor" href="#search-vs-retrieve"></a>
+</h2>
 <p>Most of rbioapi UniProt functions have two variants. one to retrieve
 data using a proper accession, and the second one (which have a
 <code>_search</code> suffix) is to search using any combination of
@@ -288,10 +287,11 @@ consider the following examples:</p>
 <span><span class="co">#&gt;  $ P0DTD1    :List of 14</span></span>
 <span><span class="co">#&gt;  $ P0DTC1    :List of 13</span></span>
 <span><span class="co">#&gt;  $ P0DTG1    :List of 13</span></span></code></pre></div>
+<hr>
 </div>
-<div class="section level3">
-<h3 class="heading2" id="functions-with-star-search-variant">Functions with <code>*_search</code> variant<a class="anchor" aria-label="anchor" href="#functions-with-star-search-variant"></a>
-</h3>
+<div class="section level2">
+<h2 id="functions-with-star-search-variant">Functions with <code>*_search</code> variant<a class="anchor" aria-label="anchor" href="#functions-with-star-search-variant"></a>
+</h2>
 <p>The search variants are not limited to the above. Here is a list of
 the function that have both a retrieve and search variants. See their
 manuals for detailed guides and examples.</p>
@@ -319,74 +319,74 @@ manuals for detailed guides and examples.</p>
 </ol>
 <hr>
 </div>
-<div class="section level3">
-<h3 class="heading2" id="uniprot-functions-categories">UniProt functions categories<a class="anchor" aria-label="anchor" href="#uniprot-functions-categories"></a>
-</h3>
+<div class="section level2">
+<h2 id="uniprot-functions-categories">UniProt functions categories<a class="anchor" aria-label="anchor" href="#uniprot-functions-categories"></a>
+</h2>
 <p>The UniProt API endpoints are organized into 5 group. Here are those
 categories and rbioapi functions that correspond to each one. See the
 functions’ manuals for more details.</p>
+<div class="section level3">
+<h3 id="proteins">Proteins<a class="anchor" aria-label="anchor" href="#proteins"></a>
+</h3>
 <div class="section level4">
-<h4 class="heading3" id="proteins">Proteins<a class="anchor" aria-label="anchor" href="#proteins"></a>
+<h4 id="proteins-proteins">Proteins:<a class="anchor" aria-label="anchor" href="#proteins-proteins"></a>
 </h4>
-<div class="section level5">
-<h5 class="heading4" id="proteins-proteins">Proteins:<a class="anchor" aria-label="anchor" href="#proteins-proteins"></a>
-</h5>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_proteins.html">rba_uniprot_proteins()</a></code></p></li>
 <li><p><code><a href="../reference/rba_uniprot_proteins_search.html">rba_uniprot_proteins_search()</a></code></p></li>
 <li><p><code><a href="../reference/rba_uniprot_proteins_crossref.html">rba_uniprot_proteins_crossref()</a></code></p></li>
 </ul>
 </div>
-<div class="section level5">
-<h5 class="heading4" id="proteins-features">Features<a class="anchor" aria-label="anchor" href="#proteins-features"></a>
-</h5>
+<div class="section level4">
+<h4 id="proteins-features">Features<a class="anchor" aria-label="anchor" href="#proteins-features"></a>
+</h4>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_features.html">rba_uniprot_features()</a></code></p></li>
 <li><p><code><a href="../reference/rba_uniprot_features_search.html">rba_uniprot_features_search()</a></code></p></li>
 </ul>
 </div>
-<div class="section level5">
-<h5 class="heading4" id="proteins-variation">Variation<a class="anchor" aria-label="anchor" href="#proteins-variation"></a>
-</h5>
+<div class="section level4">
+<h4 id="proteins-variation">Variation<a class="anchor" aria-label="anchor" href="#proteins-variation"></a>
+</h4>
 <p><code><a href="../reference/rba_uniprot_variation.html">rba_uniprot_variation()</a></code></p>
 <p><code><a href="../reference/rba_uniprot_variation_search.html">rba_uniprot_variation_search()</a></code></p>
 </div>
-<div class="section level5">
-<h5 class="heading4" id="proteins-proteomics">Proteomics<a class="anchor" aria-label="anchor" href="#proteins-proteomics"></a>
-</h5>
+<div class="section level4">
+<h4 id="proteins-proteomics">Proteomics<a class="anchor" aria-label="anchor" href="#proteins-proteomics"></a>
+</h4>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_proteomics.html">rba_uniprot_proteomics()</a></code></p></li>
 <li><p><code><a href="../reference/rba_uniprot_proteomics_search.html">rba_uniprot_proteomics_search()</a></code></p></li>
 </ul>
 </div>
 </div>
-<div class="section level4">
-<h4 class="heading3" id="post-translational-modification-ptm">Post-Translational Modification (PTM)<a class="anchor" aria-label="anchor" href="#post-translational-modification-ptm"></a>
-</h4>
+<div class="section level3">
+<h3 id="post-translational-modification-ptm">Post-Translational Modification (PTM)<a class="anchor" aria-label="anchor" href="#post-translational-modification-ptm"></a>
+</h3>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_ptm.html">rba_uniprot_ptm()</a></code></p></li>
 <li><p><code><a href="../reference/rba_uniprot_ptm_search.html">rba_uniprot_ptm_search()</a></code></p></li>
 </ul>
 </div>
-<div class="section level4">
-<h4 class="heading3" id="antigens">Antigens<a class="anchor" aria-label="anchor" href="#antigens"></a>
-</h4>
+<div class="section level3">
+<h3 id="antigens">Antigens<a class="anchor" aria-label="anchor" href="#antigens"></a>
+</h3>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_antigens.html">rba_uniprot_antigens()</a></code></p></li>
 <li><p><code><a href="../reference/rba_uniprot_antigens_search.html">rba_uniprot_antigens_search()</a></code></p></li>
 </ul>
 </div>
-<div class="section level4">
-<h4 class="heading3" id="mutagenesis">Mutagenesis<a class="anchor" aria-label="anchor" href="#mutagenesis"></a>
-</h4>
+<div class="section level3">
+<h3 id="mutagenesis">Mutagenesis<a class="anchor" aria-label="anchor" href="#mutagenesis"></a>
+</h3>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_mutagenesis.html">rba_uniprot_mutagenesis()</a></code></p></li>
 <li><p><code><a href="../reference/rba_uniprot_mutagenesis_search.html">rba_uniprot_mutagenesis_search()</a></code></p></li>
 </ul>
 </div>
-<div class="section level4">
-<h4 class="heading3" id="proteomes">Proteomes<a class="anchor" aria-label="anchor" href="#proteomes"></a>
-</h4>
+<div class="section level3">
+<h3 id="proteomes">Proteomes<a class="anchor" aria-label="anchor" href="#proteomes"></a>
+</h3>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_proteomes.html">rba_uniprot_proteomes()</a></code></p></li>
 <li><p><code><a href="../reference/rba_uniprot_proteomes_search.html">rba_uniprot_proteomes_search()</a></code></p></li>
@@ -394,9 +394,9 @@ functions’ manuals for more details.</p>
 <li><p><code><a href="../reference/rba_uniprot_genecentric_search.html">rba_uniprot_genecentric_search()</a></code></p></li>
 </ul>
 </div>
-<div class="section level4">
-<h4 class="heading3" id="taxonomy">Taxonomy<a class="anchor" aria-label="anchor" href="#taxonomy"></a>
-</h4>
+<div class="section level3">
+<h3 id="taxonomy">Taxonomy<a class="anchor" aria-label="anchor" href="#taxonomy"></a>
+</h3>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_taxonomy.html">rba_uniprot_taxonomy()</a></code></p></li>
 <li><p><code><a href="../reference/rba_uniprot_taxonomy_lca.html">rba_uniprot_taxonomy_lca()</a></code></p></li>
@@ -406,9 +406,9 @@ functions’ manuals for more details.</p>
 <li><p><code><a href="../reference/rba_uniprot_taxonomy_relationship.html">rba_uniprot_taxonomy_relationship()</a></code></p></li>
 </ul>
 </div>
-<div class="section level4">
-<h4 class="heading3" id="coordinates">Coordinates<a class="anchor" aria-label="anchor" href="#coordinates"></a>
-</h4>
+<div class="section level3">
+<h3 id="coordinates">Coordinates<a class="anchor" aria-label="anchor" href="#coordinates"></a>
+</h3>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_coordinates.html">rba_uniprot_coordinates()</a></code></p></li>
 <li><p><code><a href="../reference/rba_uniprot_coordinates_search.html">rba_uniprot_coordinates_search()</a></code></p></li>
@@ -416,9 +416,9 @@ functions’ manuals for more details.</p>
 <li><p><code><a href="../reference/rba_uniprot_coordinates_sequence.html">rba_uniprot_coordinates_sequence()</a></code></p></li>
 </ul>
 </div>
-<div class="section level4">
-<h4 class="heading3" id="uniparc">UniParc<a class="anchor" aria-label="anchor" href="#uniparc"></a>
-</h4>
+<div class="section level3">
+<h3 id="uniparc">UniParc<a class="anchor" aria-label="anchor" href="#uniparc"></a>
+</h3>
 <ul>
 <li><p><code><a href="../reference/rba_uniprot_uniparc.html">rba_uniprot_uniparc()</a></code></p></li>
 <li><p><code><a href="../reference/rba_uniprot_uniparc_search.html">rba_uniprot_uniparc_search()</a></code></p></li>
@@ -428,9 +428,9 @@ functions’ manuals for more details.</p>
 <hr>
 </div>
 </div>
-<div class="section level3">
-<h3 class="heading2" id="citations">How to Cite?<a class="anchor" aria-label="anchor" href="#citations"></a>
-</h3>
+<div class="section level2">
+<h2 id="citations">How to Cite?<a class="anchor" aria-label="anchor" href="#citations"></a>
+</h2>
 <p>To cite UniProt (Please see <a href="https://www.uniprot.org/help/publications" class="external-link uri">https://www.uniprot.org/help/publications</a>):</p>
 <ul>
 <li>The UniProt Consortium, UniProt: the universal protein knowledgebase
@@ -454,7 +454,7 @@ Volume 38, Issue 10, 15 May 2022, Pages 2952–2953, <a href="https://doi.org/10
 <hr>
 </div>
 <div class="section level2">
-<h2 class="heading2" id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a>
+<h2 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a>
 </h2>
 <ul>
 <li><p><a href="https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html" title="2.F: UniProt &amp; rbioapi">This article in rbioapi
@@ -467,7 +467,7 @@ vignette index</a></p></li>
 <hr>
 </div>
 <div class="section level2">
-<h2 class="heading2" id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
+<h2 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
 <pre><code><span><span class="co">#&gt; R version 4.4.2 (2024-10-31)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu</span></span>

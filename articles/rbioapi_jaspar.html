@@ -87,7 +87,7 @@
                         <h4 data-toc-skip class="author">Moosa
 Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2024-12-23</h4>
+            <h4 data-toc-skip class="date">2024-12-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/master/vignettes/rbioapi_jaspar.Rmd" class="external-link"><code>vignettes/rbioapi_jaspar.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_jaspar.Rmd</code></div>
@@ -95,10 +95,9 @@ Rezwani</h4>
 
     
     
-<hr>
-<div class="section level3">
-<h3 class="heading2" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
-</h3>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
 <p>Directly quoting from Fornes O, Castro-Mondragon JA, Khan A, et
 al:</p>
 <blockquote>
@@ -118,15 +117,15 @@ open-access database of transcription factor binding profiles.
 </blockquote>
 <hr>
 </div>
-<div class="section level3">
-<h3 class="heading2" id="data-organization-in-jaspar">Data Organization in JASPAR<a class="anchor" aria-label="anchor" href="#data-organization-in-jaspar"></a>
-</h3>
+<div class="section level2">
+<h2 id="data-organization-in-jaspar">Data Organization in JASPAR<a class="anchor" aria-label="anchor" href="#data-organization-in-jaspar"></a>
+</h2>
 <p>JASPAR is a database of transcription factor binding matrices with
 annotations and metadata. These entities are organized in a hierarchical
 fashion that we will explore next.</p>
-<div class="section level4">
-<h4 class="heading3" id="releases">Releases<a class="anchor" aria-label="anchor" href="#releases"></a>
-</h4>
+<div class="section level3">
+<h3 id="releases">Releases<a class="anchor" aria-label="anchor" href="#releases"></a>
+</h3>
 <p>In addition to the latest JASPAR database release (2020), other
 active releases are also available. Most of the rbioapi JASPAR functions
 have a <code>release</code> argument that allows you to use other
@@ -137,9 +136,9 @@ database releases.</p>
 <span><span class="co">## Supply a release number for details:</span></span>
 <span><span class="va">release_7_info</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_releases.html">rba_jaspar_releases</a></span><span class="op">(</span><span class="fl">7</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level4">
-<h4 class="heading3" id="collections">Collections<a class="anchor" aria-label="anchor" href="#collections"></a>
-</h4>
+<div class="section level3">
+<h3 id="collections">Collections<a class="anchor" aria-label="anchor" href="#collections"></a>
+</h3>
 <p>Within a release, Matrix profiles are organized into collections, You
 can use <code><a href="../reference/rba_jaspar_collections.html">rba_jaspar_collections()</a></code> to get a list of available
 collections, or read “JASPAR Collections” section in <a href="https://jaspar.elixir.no/docs/" title="JASPAR Documentation" class="external-link">documentation page in JASPAR web-site</a>
@@ -155,9 +154,9 @@ for a thorough review.</p>
 <span><span class="co">## You can list information of all matrices available in a collection:</span></span>
 <span><span class="va">mat_in_core_2020</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_collections_matrices.html">rba_jaspar_collections_matrices</a></span><span class="op">(</span>collection <span class="op">=</span> <span class="st">"CORE"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level4">
-<h4 class="heading3" id="taxonomic-groups">Taxonomic Groups<a class="anchor" aria-label="anchor" href="#taxonomic-groups"></a>
-</h4>
+<div class="section level3">
+<h3 id="taxonomic-groups">Taxonomic Groups<a class="anchor" aria-label="anchor" href="#taxonomic-groups"></a>
+</h3>
 <p>Within each collection, the matrix profiles are organized based on
 main taxonomic groups:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -180,9 +179,9 @@ main taxonomic groups:</p>
 <span><span class="co">## You can list information of all matrices available in a taxonomic group:</span></span>
 <span><span class="va">mat_in_insects</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_taxons_matrices.html">rba_jaspar_taxons_matrices</a></span><span class="op">(</span>tax_group <span class="op">=</span> <span class="st">"insects"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level4">
-<h4 class="heading3" id="species">Species<a class="anchor" aria-label="anchor" href="#species"></a>
-</h4>
+<div class="section level3">
+<h3 id="species">Species<a class="anchor" aria-label="anchor" href="#species"></a>
+</h3>
 <p>As we go down in the data organization hierarchy, Each taxonomic
 group consist of species:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -216,12 +215,12 @@ group consist of species:</p>
 <hr>
 </div>
 </div>
+<div class="section level2">
+<h2 id="matrix-profiles">Matrix Profiles<a class="anchor" aria-label="anchor" href="#matrix-profiles"></a>
+</h2>
 <div class="section level3">
-<h3 class="heading2" id="matrix-profiles">Matrix Profiles<a class="anchor" aria-label="anchor" href="#matrix-profiles"></a>
+<h3 id="search-matrix-profiles">Search Matrix Profiles<a class="anchor" aria-label="anchor" href="#search-matrix-profiles"></a>
 </h3>
-<div class="section level4">
-<h4 class="heading3" id="search-matrix-profiles">Search Matrix Profiles<a class="anchor" aria-label="anchor" href="#search-matrix-profiles"></a>
-</h4>
 <p>Retrieving a list of every matrix available in a given category is
 not the only option. You can also build a search query using
 <code>rba_jaspar_matrix_search</code>. Note that this is a search
@@ -246,10 +245,9 @@ profiles. For instance:</p>
 <span><span class="va">zipper_pbm_matrices</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix_search.html">rba_jaspar_matrix_search</a></span><span class="op">(</span>tf_class <span class="op">=</span> <span class="st">"Zipper-Type"</span>,</span>
 <span>                                                collection <span class="op">=</span> <span class="st">"PBM"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level4">
-<h4 class="heading3" id="list-matrix-profiles-associated-to-a-base-identifier">List Matrix Profiles Associated to a Base
-identifier<a class="anchor" aria-label="anchor" href="#list-matrix-profiles-associated-to-a-base-identifier"></a>
-</h4>
+<div class="section level3">
+<h3 id="list-matrix-profiles-associated-to-a-base-identifier">List Matrix Profiles Associated to a Base identifier<a class="anchor" aria-label="anchor" href="#list-matrix-profiles-associated-to-a-base-identifier"></a>
+</h3>
 <p>Since JASPAR release 2010, the matrix profiles are versioned. A
 matrix profile Identifier has a “base_id.version” naming schema; for
 example “MA0600.2” corresponds to the second version of a matrix with
@@ -261,15 +259,15 @@ have an argument called <code>only_last_version</code>.</p>
 <code class="sourceCode R"><span><span class="co">## Get matrix profiles versions associated to a base id</span></span>
 <span><span class="va">MA0600_versions</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_jaspar_matrix_versions.html">rba_jaspar_matrix_versions</a></span><span class="op">(</span><span class="st">"MA0600"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level4">
-<h4 class="heading3" id="get-a-matrix-profile">Get a Matrix Profile<a class="anchor" aria-label="anchor" href="#get-a-matrix-profile"></a>
-</h4>
+<div class="section level3">
+<h3 id="get-a-matrix-profile">Get a Matrix Profile<a class="anchor" aria-label="anchor" href="#get-a-matrix-profile"></a>
+</h3>
 <p>Now that you listed or searched for matrix profiles, you can use
 <code>rba_jaspar_matrix</code> to retrieve matrix profiles. There are
 two ways in which you can use this function:</p>
-<div class="section level5">
-<h5 class="heading4" id="get-matrix-and-annotations-as-an-r-object">Get Matrix and Annotations as an R Object<a class="anchor" aria-label="anchor" href="#get-matrix-and-annotations-as-an-r-object"></a>
-</h5>
+<div class="section level4">
+<h4 id="get-matrix-and-annotations-as-an-r-object">Get Matrix and Annotations as an R Object<a class="anchor" aria-label="anchor" href="#get-matrix-and-annotations-as-an-r-object"></a>
+</h4>
 <p>To do that, only fill in the <code>matrix_id</code> argument in
 <code>rba_jaspar_matrix</code></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -316,9 +314,9 @@ two ways in which you can use this function:</p>
 <span><span class="co">#&gt;   ..$ experiment_name: chr "CistromeDB_58298"</span></span>
 <span><span class="co">#&gt;   ..$ tffm_url       : chr "https://jaspar.elixir.no/api/v1/tffm/TFFM0576.1/"</span></span></code></pre></div>
 </div>
-<div class="section level5">
-<h5 class="heading4" id="save-a-matrix-a-file-in-specific-format">Save a Matrix a File in Specific Format<a class="anchor" aria-label="anchor" href="#save-a-matrix-a-file-in-specific-format"></a>
-</h5>
+<div class="section level4">
+<h4 id="save-a-matrix-a-file-in-specific-format">Save a Matrix a File in Specific Format<a class="anchor" aria-label="anchor" href="#save-a-matrix-a-file-in-specific-format"></a>
+</h4>
 <p>JASPAR provides position frequency matrices (PFM) formatted as
 <strong>Raw PFM</strong>, <strong>JASPAR</strong>,
 <strong>TRANSFAC</strong>, <strong>YAML</strong>, and
@@ -367,9 +365,9 @@ relative.</p>
 <span>                                  save_to <span class="op">=</span> <span class="st">"c:/rbioapi/my_matrix.meme"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
-<div class="section level4">
-<h4 class="heading3" id="get-binding-sites-of-a-matrix-profiles">Get Binding Sites of a Matrix Profiles<a class="anchor" aria-label="anchor" href="#get-binding-sites-of-a-matrix-profiles"></a>
-</h4>
+<div class="section level3">
+<h3 id="get-binding-sites-of-a-matrix-profiles">Get Binding Sites of a Matrix Profiles<a class="anchor" aria-label="anchor" href="#get-binding-sites-of-a-matrix-profiles"></a>
+</h3>
 <p>If available, you can retrieve information on binding sites
 associated with a matrix profile. The information includes a data frame
 of genomic coordination of the binding site, URL to FASTA and BED files,
@@ -380,9 +378,9 @@ along with other annotations.</p>
 <hr>
 </div>
 </div>
-<div class="section level3">
-<h3 class="heading2" id="tf-flexible-models-tffms">TF flexible models (TFFMs)<a class="anchor" aria-label="anchor" href="#tf-flexible-models-tffms"></a>
-</h3>
+<div class="section level2">
+<h2 id="tf-flexible-models-tffms">TF flexible models (TFFMs)<a class="anchor" aria-label="anchor" href="#tf-flexible-models-tffms"></a>
+</h2>
 <p>JASPAR also stores and assigns identifiers to TF flexible models
 (TFFMs). Just like PFM (position frequency matrices), you can search
 TFFMs or retrieve information and annotations using a TFFM Identifier.
@@ -430,9 +428,9 @@ format.</p>
 <span><span class="co">#&gt;   ..$ xml         : chr "https://jaspar.elixir.no/static/TFFM/TFFM0056.3/TFFM_detailed_trained.xml"</span></span></code></pre></div>
 <hr>
 </div>
-<div class="section level3">
-<h3 class="heading2" id="citations">How to Cite?<a class="anchor" aria-label="anchor" href="#citations"></a>
-</h3>
+<div class="section level2">
+<h2 id="citations">How to Cite?<a class="anchor" aria-label="anchor" href="#citations"></a>
+</h2>
 <p>To cite JASPAR (Please see <a href="https://jaspar.elixir.no/faq/" class="external-link uri">https://jaspar.elixir.no/faq/</a>):</p>
 <ul>
 <li>Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R,
@@ -456,7 +454,7 @@ Volume 38, Issue 10, 15 May 2022, Pages 2952–2953, <a href="https://doi.org/10
 <hr>
 </div>
 <div class="section level2">
-<h2 class="heading2" id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a>
+<h2 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a>
 </h2>
 <ul>
 <li><p><a href="https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html" title="2.G: JASPAR &amp; rbioapi">This article in rbioapi
@@ -469,7 +467,7 @@ vignette index</a></p></li>
 <hr>
 </div>
 <div class="section level2">
-<h2 class="heading2" id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
+<h2 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
 <pre><code><span><span class="co">#&gt; R version 4.4.2 (2024-10-31)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu</span></span>

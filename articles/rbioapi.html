@@ -87,7 +87,7 @@
                         <h4 data-toc-skip class="author">Moosa
 Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2024-12-23</h4>
+            <h4 data-toc-skip class="date">2024-12-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/master/vignettes/rbioapi.Rmd" class="external-link"><code>vignettes/rbioapi.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi.Rmd</code></div>
@@ -96,7 +96,7 @@ Rezwani</h4>
     
     
 <div class="section level2">
-<h2 class="heading2" id="what-does-rbioapi-do">What does rbioapi do?<a class="anchor" aria-label="anchor" href="#what-does-rbioapi-do"></a>
+<h2 id="what-does-rbioapi-do">What does rbioapi do?<a class="anchor" aria-label="anchor" href="#what-does-rbioapi-do"></a>
 </h2>
 <p>Currently fully supports <strong>Enrichr</strong>,
 <strong>JASPAR</strong>, <strong>miEAA</strong>,
@@ -115,7 +115,7 @@ databases or services you often use.</p>
 <hr>
 </div>
 <div class="section level2">
-<h2 class="heading2" id="what-is-supported-by-rbioapi">What is Supported by rbioapi?<a class="anchor" aria-label="anchor" href="#what-is-supported-by-rbioapi"></a>
+<h2 id="what-is-supported-by-rbioapi">What is Supported by rbioapi?<a class="anchor" aria-label="anchor" href="#what-is-supported-by-rbioapi"></a>
 </h2>
 <p>rbioapi is dedicated to <strong>Biological or Medical</strong>
 databases and web services. Currently, rbioapi supports and covers every
@@ -167,7 +167,7 @@ suggestions.</p>
 <hr>
 </div>
 <div class="section level2">
-<h2 class="heading2" id="How-to-install">How to install?<a class="anchor" aria-label="anchor" href="#How-to-install"></a>
+<h2 id="How-to-install">How to install?<a class="anchor" aria-label="anchor" href="#How-to-install"></a>
 </h2>
 <p>You can install the stable release version of <a href="rbioapi.html" title="rbioapi: User-Friendly R Interface to Biologic Web Services' API">rbioapi</a>
 from <a href="https://cran.r-project.org/package=rbioapi" title="rbioapi page on CRAN (The Comprehensive R Archive Network)" class="external-link">CRAN</a>
@@ -185,7 +185,7 @@ You can install the most recent (development) version from <a href="https://gith
 <hr>
 </div>
 <div class="section level2">
-<h2 class="heading2" id="naming-conventions">Naming conventions<a class="anchor" aria-label="anchor" href="#naming-conventions"></a>
+<h2 id="naming-conventions">Naming conventions<a class="anchor" aria-label="anchor" href="#naming-conventions"></a>
 </h2>
 <p>To make the namespace more organized, functions has been named with
 the following pattern:</p>
@@ -217,7 +217,7 @@ are helper functions. More on that later.</p>
 <hr>
 </div>
 <div class="section level2">
-<h2 class="heading2" id="changing-the-options">Changing the options<a class="anchor" aria-label="anchor" href="#changing-the-options"></a>
+<h2 id="changing-the-options">Changing the options<a class="anchor" aria-label="anchor" href="#changing-the-options"></a>
 </h2>
 <p>To provide more control, multiple options have been implemented. See
 the manual of <code><a href="../reference/rba_options.html">rba_options()</a></code> function for a full description
@@ -242,7 +242,7 @@ argument:</p>
 <span><span class="co">#&gt; 9        verbose          TRUE     Logical (TRUE/FALSE)</span></span></code></pre></div>
 <p>Now, let us consider the ways in which we can alter the settings:</p>
 <div class="section level3">
-<h3 class="heading3" id="changing-the-options-change-the-option-globally">Change the option globally<a class="anchor" aria-label="anchor" href="#changing-the-options-change-the-option-globally"></a>
+<h3 id="changing-the-options-change-the-option-globally">Change the option globally<a class="anchor" aria-label="anchor" href="#changing-the-options-change-the-option-globally"></a>
 </h3>
 <p>Changing an option globally means that for the rest of your R
 session, any rbioapi function will respect the changed option. To do
@@ -257,7 +257,7 @@ example:</p>
 <span><span class="co">## From now on, the package will be quiet.</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 class="heading3" id="changing-the-options-change-the-option-only-within-a-function-call">Change the option only within a function call<a class="anchor" aria-label="anchor" href="#changing-the-options-change-the-option-only-within-a-function-call"></a>
+<h3 id="changing-the-options-change-the-option-only-within-a-function-call">Change the option only within a function call<a class="anchor" aria-label="anchor" href="#changing-the-options-change-the-option-only-within-a-function-call"></a>
 </h3>
 <p>You can pass additional arguments to any rbioapi function using
 “ellipsis” (the familiar <code>…</code> or dot dot dot!). Meaning that
@@ -280,7 +280,7 @@ within that particular function call. For example:</p>
 </div>
 </div>
 <div class="section level2">
-<h2 class="heading2" id="connection-test">Connection test<a class="anchor" aria-label="anchor" href="#connection-test"></a>
+<h2 id="connection-test">Connection test<a class="anchor" aria-label="anchor" href="#connection-test"></a>
 </h2>
 <p>The second exception in functions’ naming schema is
 <code><a href="../reference/rba_connection_test.html">rba_connection_test()</a></code>. Run this simple function to check
@@ -313,7 +313,7 @@ your internet connection or the servers are fine.</p>
 <hr>
 </div>
 <div class="section level2">
-<h2 class="heading2" id="multi-pages">Iterating over paginated results<a class="anchor" aria-label="anchor" href="#multi-pages"></a>
+<h2 id="multi-pages">Iterating over paginated results<a class="anchor" aria-label="anchor" href="#multi-pages"></a>
 </h2>
 <p>Some API resources will return paginated responses. This is
 particularly common in API resources which return potentially very large
@@ -376,7 +376,7 @@ this format: “pages:start:end”. For example, we supplied page_number =
 <hr>
 </div>
 <div class="section level2">
-<h2 class="heading2" id="how-to-cite">How and what to cite?<a class="anchor" aria-label="anchor" href="#how-to-cite"></a>
+<h2 id="how-to-cite">How and what to cite?<a class="anchor" aria-label="anchor" href="#how-to-cite"></a>
 </h2>
 <p>rbioapi is an interface between you and other databases and services.
 Thus, if you have used rbioapi in published research, <strong>in
@@ -387,7 +387,7 @@ Suggested citations have been added in the functions’ manuals, under the
 check for proper citations and to properly cite the database/services
 that they have used.</p>
 <div class="section level3">
-<h3 class="heading3" id="how-to-cite-rbioapi">How to cite rbioapi<a class="anchor" aria-label="anchor" href="#how-to-cite-rbioapi"></a>
+<h3 id="how-to-cite-rbioapi">How to cite rbioapi<a class="anchor" aria-label="anchor" href="#how-to-cite-rbioapi"></a>
 </h3>
 <ul>
 <li>Moosa Rezwani, Ali Akbar Pourfathollah, Farshid Noorbakhsh, rbioapi:
@@ -397,7 +397,7 @@ Volume 38, Issue 10, 15 May 2022, Pages 2952–2953, <a href="https://doi.org/10
 </ul>
 </div>
 <div class="section level3">
-<h3 class="heading3" id="how-to-cite-services">How to cite the databases and web services<a class="anchor" aria-label="anchor" href="#how-to-cite-services"></a>
+<h3 id="how-to-cite-services">How to cite the databases and web services<a class="anchor" aria-label="anchor" href="#how-to-cite-services"></a>
 </h3>
 <ul>
 <li><p><a href="rbioapi_enrichr.html#citations" title="How to cite Enrichr">How to cite Enrichr</a>. (See on <a href="https://maayanlab.cloud/Enrichr/help#terms" class="external-link">Enrichr
@@ -417,7 +417,7 @@ website</a>)</p></li>
 </div>
 </div>
 <div class="section level2">
-<h2 class="heading2" id="code-of-conduct">Code of conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
+<h2 id="code-of-conduct">Code of conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
 </h2>
 <p>This package, rbioapi, is an unofficial interface implementation and
 is not associated, endorsed, or officially connected in any way with the
@@ -436,7 +436,7 @@ interprets as normal behavior, so please seek other methods or use
 <hr>
 </div>
 <div class="section level2">
-<h2 class="heading2" id="what-next">What next?<a class="anchor" aria-label="anchor" href="#what-next"></a>
+<h2 id="what-next">What next?<a class="anchor" aria-label="anchor" href="#what-next"></a>
 </h2>
 <p>Each supported service has a dedicated vignette article. Make sure to
 check those too.</p>
@@ -475,7 +475,7 @@ with rbioapi: Enrichment (Over-Representation) Analysis in R</a>
 <hr>
 </div>
 <div class="section level2">
-<h2 class="heading2" id="design-philosophy">Design philosophy of rbioapi<a class="anchor" aria-label="anchor" href="#design-philosophy"></a>
+<h2 id="design-philosophy">Design philosophy of rbioapi<a class="anchor" aria-label="anchor" href="#design-philosophy"></a>
 </h2>
 <p>To learn more about the design philosophy and the concepts behind
 developing rbioapi, please read <a href="https://doi.org/10.1093/bioinformatics/btac172" title="Rezwani, M., Pourfathollah, A. A., &amp; Noorbakhsh, F. (2022). rbioapi: user-friendly R interface to biologic web services’ API. Bioinformatics, 38(10), 2952–2953. doi: 10.1093/bioinformatics/btac172" class="external-link">our
@@ -483,7 +483,7 @@ paper in Bioinformatics</a>.</p>
 <hr>
 </div>
 <div class="section level2">
-<h2 class="heading2" id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a>
+<h2 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a>
 </h2>
 <ul>
 <li><p><a href="https://rbioapi.moosa-r.com/articles/rbioapi.html" title="rbioapi: User-Friendly R Interface to Biologic Web Services' API">This
@@ -494,7 +494,7 @@ site</a></p></li>
 <hr>
 </div>
 <div class="section level2">
-<h2 class="heading2" id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
+<h2 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
 <pre><code><span><span class="co">#&gt; R version 4.4.2 (2024-10-31)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu</span></span>
