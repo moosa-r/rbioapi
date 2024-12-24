@@ -143,14 +143,14 @@ Let's go back to the interaction network. As you must have seen in the STRING we
 ```{r rba_string_network_image_ex1, fig.show='hide'}
 ## Example 1:
 graph_1 <- rba_string_network_image(ids = proteins_mapped,
-                                   image_format = "image",
-                                   species = 9606,
-                                   save_image = FALSE,
-                                   required_score = 500,
-                                   network_flavor = "confidence")
+                                    image_format = "image",
+                                    species = 9606,
+                                    save_image = FALSE,
+                                    required_score = 500,
+                                    network_flavor = "confidence")
 ```
 
-```{r rba_string_network_image_ex1_image, echo=FALSE, fig.cap="Network images - Example 1", fig.align='center'}
+```{r rba_string_network_image_ex1_image, echo=FALSE, fig.cap="Network images - Example 1", fig.align='center', fig.width=7}
 if (is.array(graph_1)) {
   grid::grid.raster(graph_1, just = "center")
 } else {
@@ -167,10 +167,10 @@ graph_2 <- rba_string_network_image(ids = proteins_mapped,
                                     required_score = 500,
                                     add_color_nodes = 5,
                                     add_white_nodes = 5,
-                                   network_flavor = "actions")
+                                    network_flavor = "actions")
 ```
 
-```{r rba_string_network_image_ex2_image, echo=FALSE, fig.cap="Network images - Example 2", fig.align='center'}
+```{r rba_string_network_image_ex2_image, echo=FALSE, fig.cap="Network images - Example 2", fig.align='center', fig.width=7}
 if (is.array(graph_2)) {
   grid::grid.raster(graph_2, just = "center")
 } else {
@@ -190,7 +190,7 @@ The first type is the conventional type, which statistically tests your supplied
 
 ```{r rba_string_enrichment}
 enriched <- rba_string_enrichment(ids = proteins_mapped,
-                                  species = 9606, )
+                                  species = 9606)
 ```
 
 As usual, we inspect the output using the `str()` function. As you can see below, the enrichment results of each category can be found as the returned list's elements.
@@ -199,11 +199,11 @@ As usual, we inspect the output using the `str()` function. As you can see below
 str(enriched, max.level = 1)
 ```
 
-Let us see the "DISEASES" results as an example. Below, we can see which terms of the [Human Disease Ontology](https://disease-ontology.org/ "Human Disease Ontology") were over-represented:
+Let us see the "KEGG" results as an example. Below, we can see which terms of the [KEGG pathways database](https://www.genome.jp/kegg/pathway.html) were over-represented:
 
 ```{r rba_string_enrichment_restults, echo=FALSE}
-if (utils::hasName(enriched, "DISEASES") && is.data.frame(enriched$DISEASES)) {
-  DT::datatable(data = enriched$DISEASES,
+if (utils::hasName(enriched, "KEGG") && is.data.frame(enriched$KEGG)) {
+  DT::datatable(data = enriched$KEGG,
               options = list(scrollX = TRUE, 
                              paging = TRUE,
                              fixedHeader = TRUE,
@@ -215,6 +215,28 @@ if (utils::hasName(enriched, "DISEASES") && is.data.frame(enriched$DISEASES)) {
 ```
 
 **Please Note:** Other services supported by rbioapi also provide Over-representation analysis tools. Please see the vignette article [Do with rbioapi: Over-Representation (Enrichment) Analysis in R](rbioapi_do_enrich.html) ([link to the documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html)) for an in-depth review.
+
+### Functional enrichment Plot {#functional-enrichment-plot .heading3}
+
+In addition to a data frame, you can also get a plot summarizing the enrichment results. This API endpoint supports extensive customization of the plot; please refer to the `rba_string_enrichment_image()` function's manual for detailed instructions. Here we perform the exact enrichment analysis done above, and retrieve a plot of the results.
+
+
+```{r rba_string_enrichment_plot, fig.show='hide'}
+graph_3 <- rba_string_enrichment_image(ids = proteins_mapped,
+                                       species = 9606,
+                                       category = "KEGG",
+                                       image_format = "image",
+                                       save_image = FALSE,
+                                       group_by_similarity = 0.6)
+```
+
+```{r rba_string_enrichment_plot_image, echo=FALSE, fig.cap="Visualization of enrichment analysis results", fig.align='center', fig.width=7}
+if (is.array(graph_3)) {
+  grid::grid.raster(graph_3, just = "center")
+} else {
+  print("Vignette building failed. It is probably because the web service was down during the building.")
+}
+```
 
 ### Protein-protein interaction enrichment {#protein-protein-interaction-enrichment .heading3}
 

@@ -377,6 +377,28 @@ if (utils::hasName(string_annot, "PMID") && is.data.frame(string_annot$PMID)) {
 }
 ```
 
+
+In addition to a data frame, you can also get a plot summarizing the enrichment results. This API endpoint supports extensive customization of the plot; please refer to the `rba_string_enrichment_image()` function's manual for detailed instructions. Here we perform an enrichment analysis against the KEGG database, and retrieve a plot of the results.
+
+
+```{r string_enrichment_plot, fig.show='hide'}
+graph_3 <- rba_string_enrichment_image(ids = covid_critical,
+                                       species = 9606,
+                                       category = "KEGG",
+                                       image_format = "image",
+                                       save_image = FALSE,
+                                       group_by_similarity = 0.6)
+```
+
+```{r string_enrichment_plot_image, echo=FALSE, fig.cap="Visualization of enrichment analysis results", fig.align='center', fig.width=7}
+if (is.array(graph_3)) {
+  grid::grid.raster(graph_3, just = "center")
+} else {
+  print("Vignette building failed. It is probably because the web service was down during the building.")
+}
+```
+
+
 ## miEAA {#mieaa .heading2}
 
 The miRNA Enrichment Analysis and Annotation Tool ([miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2/ "https://ccb-compute2.cs.uni-saarland.de/mieaa2")) is a service provided by the [Chair for Clinical Bioinformatics at Saarland University](https://www.ccb.uni-saarland.de/). What makes miEAA unique among other services presented here is that miEAA curates miRNA sets. Hence you can directly perform miRNA enrichment analysis across various species with the services miEAA provides.
