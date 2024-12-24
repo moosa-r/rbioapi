@@ -30,13 +30,14 @@ knitr::opts_chunk$set(echo = TRUE,
                       comment = "#>")
 ```
 
+
 Among the databases and web services currently supported by rbioapi [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr"), [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "miRNA Enrichment Analysis and Annotation Tool (miEAA)"), [PANTHER](http://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)"), [Reactome](https://reactome.org/), and [STRING](https://string-db.org/ "STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis") offer Enrichment (Over-Representation) analysis API endpoints. In this article, after a brief introduction, we will demonstrate how to perform Enrichment (Over-Representation) analysis in R, consistently and easily, using the package rbioapi.
 
 Before continuing, note that rbioapi is an interface to the databases and web services. Hence it is the user's responsibility to cite the services they have used. We provide suggested citations in each function's manual. However, it is the user's responsibility to fully and adequately cite the databases or web services used in their published research.
 
 ------------------------------------------------------------------------
 
-# How to install? {#how-to-install .heading2}
+# How to install? {#how-to-install}
 
 You can install the stable release version of [rbioapi](rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API") from [CRAN](https://cran.r-project.org/package=rbioapi "rbioapi page on CRAN (The Comprehensive R Archive Network)") with:
 
@@ -63,7 +64,7 @@ rba_options(timeout = 30, skip_error = TRUE)
 
 ------------------------------------------------------------------------
 
-# What is Over-representation analysis? {#what-is-over-representation-analysis .heading2}
+# What is Over-representation analysis? {#what-is-over-representation-analysis}
 
 Enrichment (Over-Representation) analysis is commonly performed when one's analysis yields a list of genes, proteins, or other entities. We will not delve into details here and refer you to [D. W. Huang et al.: Nucleic Acids Res. 37, 1 (2009)](https://doi.org/10.1093/nar/gkn923 "Bioinformatics enrichment tools: paths toward the comprehensive functional analysis of large gene lists") for a thorough review of the subject.
 
@@ -75,7 +76,9 @@ In short, to perform such analysis, in addition to some algorithms, two data are
 
 With over-representation analysis, you can compare your gene list to find if the member of any gene set are over-represented, meaning that they are present in your list in a manner that can not be explained by chance alone.
 
-# Enrichment (Over-Representation) analysis in R with rbioapi {#enrichment-analysis-in-R-with-rbioapi .heading2}
+------------------------------------------------------------------------
+
+# Setting up the data {#setting-up-data}
 
 Many web services supported by rbioapi provide tools to perform over-representation analysis against the gene sets curated in their databases. Among the databases and web services currently supported by rbioapi, [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr"), [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "miRNA Enrichment Analysis and Annotation Tool (miEAA)"), [PANTHER](https://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)"), [Reactome](https://reactome.org/), and [STRING](https://string-db.org/ "STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis") provide such services. Each service has a dedicated vignette article in rbioapi. Here we will focus on performing Enrichment (Over-Representation) analysis.
 
@@ -89,7 +92,9 @@ covid_critical <- c("TXNDC5", "GABRR2", "MGAM2", "LOC200772", "LYPD2", "IFI27", 
 
 ***Please Note**: Over-representation services return large responses. To reduce the size of this vignette article, we will only display the first 10 rows of each Data Frame.*
 
-## Enrichr {#enrichr .heading2}
+------------------------------------------------------------------------
+
+# Enrichr {#enrichr}
 
 [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr") , developed in the Ma'ayan Lab, is a service to perform enrichment analysis against a considerable number of curated gene set libraries across various species.
 
@@ -155,7 +160,9 @@ As you can see below, when than one library is selected, the results will be a l
 str(enrichr_enrich_kegg, max.level = 1)
 ```
 
-## Reactome Analysis services {#reactome-analysis-services .heading2}
+------------------------------------------------------------------------
+
+# Reactome Analysis services {#reactome-analysis-services}
 
 Reactome curates extensive and top-quality cellular pathways data across various species. Given the fact that proteins operate in organized units, which are the pathways, analyzing your list against Reactome pathways gene sets can provide valuable insights into the functional trajectories of your results.
 
@@ -221,7 +228,9 @@ rba_reactome_analysis_pdf(token = reactome$summary$token,
                           save_to = "my_analysis.pdf")
 ```
 
-## PANTHER {#panther .heading2}
+------------------------------------------------------------------------
+
+# PANTHER {#panther}
 
 PANTHER (protein analysis through evolutionary relationships) is a project that provides classification systems of genes and proteins. PANTHER also provides an enrichment service. In fact, the enrichment tool available on the [Gene Ontology (GO) website](https://geneontology.org/ "Gene Ontology Resource - Unifying Biology") is powered by [PANTHER](https://pantherdb.org/). Just like the previous sections, we will only review the enrichment functionality here; for an in-depth review of PANTHER refer to the vignette article "[PANTHER & rbioapi](rbioapi_panther.html "2.D: PANTHER & rbioapi")".
 
@@ -281,7 +290,9 @@ if (utils::hasName(panther_enrich, "result") && is.data.frame(panther_enrich$res
 }
 ```
 
-## STRING {#string .heading2}
+------------------------------------------------------------------------
+
+# STRING {#string}
 
 In addition to proteins interaction data, STRING also curates proteins/genes annotations and provides enrichment analysis services. You can perform the analysis against multiple gene sets. Some of the gene sets can be accessed using other services but two gene sets are exclusive to STRING. See "[D. Szklarczyk et al.: Nucleic Acids Res. 49, D1 (2021)](https://doi.org/10.1093/nar/gkaa1074 "The STRING database in 2021: customizable protein–protein networks, and functional characterization of user-uploaded gene/measurement sets")" for further information. Again. We will only review the enrichment functionality here; for an in-depth review of STRING refer to the vignette article "[STRING & rbioapi](rbioapi_string.html "2.F: STRING & rbioapi")".
 
@@ -398,8 +409,9 @@ if (is.array(graph_3)) {
 }
 ```
 
+------------------------------------------------------------------------
 
-## miEAA {#mieaa .heading2}
+# miEAA {#mieaa}
 
 The miRNA Enrichment Analysis and Annotation Tool ([miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2/ "https://ccb-compute2.cs.uni-saarland.de/mieaa2")) is a service provided by the [Chair for Clinical Bioinformatics at Saarland University](https://www.ccb.uni-saarland.de/). What makes miEAA unique among other services presented here is that miEAA curates miRNA sets. Hence you can directly perform miRNA enrichment analysis across various species with the services miEAA provides.
 
@@ -447,7 +459,7 @@ if (is.data.frame(mieaa_enrich)) {
 
 ------------------------------------------------------------------------
 
-# How to cite? {#how-to-cite .heading2}
+# How to cite? {#how-to-cite}
 
 rbioapi is an interface between you and other databases and services. Thus, if you have used rbioapi in published research, kindly in addition to citing rbioapi, make sure to fully and properly cite the databases/services you have used. Suggested citations have been added in the functions' manuals, under the "references" section; Nevertheless, it is the user's responsibility to check for proper citations and to properly cite the database/services that they have used.
 
@@ -455,7 +467,7 @@ Please see the [rbioapi's main vignette article](rbioapi.html#how-to-cite) for m
 
 ------------------------------------------------------------------------
 
-# Links {#links .heading2}
+# Links {#links}
 
 -   [This article in rbioapi documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html "Over-Representation Analysis with rbioapi")
 
@@ -465,7 +477,7 @@ Please see the [rbioapi's main vignette article](rbioapi.html#how-to-cite) for m
 
 ------------------------------------------------------------------------
 
-# Session info {#session-info .heading2}
+# Session info {#session-info}
 
 ```{r sessionInfo, echo=FALSE}
 sessionInfo()

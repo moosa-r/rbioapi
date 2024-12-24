@@ -33,9 +33,8 @@ library(rbioapi)
 rba_options(timeout = 30, skip_error = TRUE)
 ```
 
-------------------------------------------------------------------------
 
-## Introduction {#introduction .heading2}
+# Introduction {#introduction}
 
 Directly quoting from [UniProt](https://www.uniprot.org "Universal Protein Resource (UniProt)"):
 
@@ -45,7 +44,7 @@ Directly quoting from [UniProt](https://www.uniprot.org "Universal Protein Resou
 
 ------------------------------------------------------------------------
 
-## Search vs Retrieve {#search-vs-retrieve .heading2}
+# Search vs Retrieve {#search-vs-retrieve}
 
 Most of rbioapi UniProt functions have two variants. one to retrieve data using a proper accession, and the second one (which have a `_search` suffix) is to search using any combination of arguments. We first demonstrate this using an example, then provide a list of such functions in rbioapi.
 
@@ -112,7 +111,9 @@ multi_prs4 <- rba_uniprot_proteins_search(organism = "SARS-CoV-2",
 str(multi_prs4, 1)
 ```
 
-## Functions with `*_search` variant {#functions-with-star-search-variant .heading2}
+------------------------------------------------------------------------
+
+# Functions with `*_search` variant {#functions-with-star-search-variant}
 
 The search variants are not limited to the above. Here is a list of the function that have both a retrieve and search variants. See their manuals for detailed guides and examples.
 
@@ -138,13 +139,13 @@ The search variants are not limited to the above. Here is a list of the function
 
 ------------------------------------------------------------------------
 
-## UniProt functions categories {#uniprot-functions-categories .heading2}
+# UniProt functions categories {#uniprot-functions-categories}
 
 The UniProt API endpoints are organized into 5 group. Here are those categories and rbioapi functions that correspond to each one. See the functions' manuals for more details.
 
-### Proteins {#proteins .heading3}
+## Proteins {#proteins}
 
-#### Proteins: {#proteins-proteins .heading4}
+### Proteins: {#proteins-proteins}
 
 -   `rba_uniprot_proteins()`
 
@@ -152,43 +153,43 @@ The UniProt API endpoints are organized into 5 group. Here are those categories 
 
 -   `rba_uniprot_proteins_crossref()`
 
-#### Features {#proteins-features .heading4}
+### Features {#proteins-features}
 
 -   `rba_uniprot_features()`
 
 -   `rba_uniprot_features_search()`
 
-#### Variation {#proteins-variation .heading4}
+### Variation {#proteins-variation}
 
 `rba_uniprot_variation()`
 
 `rba_uniprot_variation_search()`
 
-#### Proteomics {#proteins-proteomics .heading4}
+### Proteomics {#proteins-proteomics}
 
 -   `rba_uniprot_proteomics()`
 
 -   `rba_uniprot_proteomics_search()`
 
-### Post-Translational Modification (PTM) {#post-translational-modification-ptm .heading3}
+## Post-Translational Modification (PTM) {#post-translational-modification-ptm}
 
 -   `rba_uniprot_ptm()`
 
 -   `rba_uniprot_ptm_search()`
 
-### Antigens {#antigens .heading3}
+## Antigens {#antigens}
 
 -   `rba_uniprot_antigens()`
 
 -   `rba_uniprot_antigens_search()`
 
-### Mutagenesis {#mutagenesis .heading3}
+## Mutagenesis {#mutagenesis}
 
 -   `rba_uniprot_mutagenesis()`
 
 -   `rba_uniprot_mutagenesis_search()`
 
-### Proteomes {#proteomes .heading3}
+## Proteomes {#proteomes}
 
 -   `rba_uniprot_proteomes()`
 
@@ -198,7 +199,7 @@ The UniProt API endpoints are organized into 5 group. Here are those categories 
 
 -   `rba_uniprot_genecentric_search()`
 
-### Taxonomy {#taxonomy .heading3}
+## Taxonomy {#taxonomy}
 
 -   `rba_uniprot_taxonomy()`
 
@@ -212,7 +213,7 @@ The UniProt API endpoints are organized into 5 group. Here are those categories 
 
 -   `rba_uniprot_taxonomy_relationship()`
 
-### Coordinates {#coordinates .heading3}
+## Coordinates {#coordinates}
 
 -   `rba_uniprot_coordinates()`
 
@@ -222,7 +223,7 @@ The UniProt API endpoints are organized into 5 group. Here are those categories 
 
 -   `rba_uniprot_coordinates_sequence()`
 
-### UniParc {#uniparc .heading3}
+## UniParc {#uniparc}
 
 -   `rba_uniprot_uniparc()`
 
@@ -234,7 +235,7 @@ The UniProt API endpoints are organized into 5 group. Here are those categories 
 
 ------------------------------------------------------------------------
 
-## How to Cite? {#citations .heading2}
+# How to Cite? {#citations}
 
 To cite UniProt (Please see <https://www.uniprot.org/help/publications>):
 
@@ -247,7 +248,7 @@ To cite rbioapi:
 
 ------------------------------------------------------------------------
 
-# Links {#links .heading2}
+# Links {#links}
 
 -   [This article in rbioapi documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html "2.F: UniProt & rbioapi")
 
@@ -257,7 +258,7 @@ To cite rbioapi:
 
 ------------------------------------------------------------------------
 
-# Session info {#session-info .heading2}
+# Session info {#session-info}
 
 ```{r sessionInfo, echo=FALSE}
 sessionInfo()

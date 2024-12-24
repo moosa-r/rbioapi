@@ -33,9 +33,8 @@ library(rbioapi)
 rba_options(timeout = 30, skip_error = TRUE)
 ```
 
-------------------------------------------------------------------------
 
-## Introduction {#introduction .heading2}
+# Introduction {#introduction}
 
 Directly quoting the the paper published by [PANTHER](https://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)") (Protein Analysis THrough Evolutionary Relationships) authors:
 
@@ -47,7 +46,7 @@ The available tools in PANTHER's **RESTful API services** can be divided into 3 
 
 ------------------------------------------------------------------------
 
-## Map genes {#map-genes .heading2}
+# Map genes {#map-genes}
 
 -   `rba_panther_mapping()`: map your gene-set to PANTHER database and retrieve attributes and annotations associated with your genes
 
@@ -57,7 +56,7 @@ The available tools in PANTHER's **RESTful API services** can be divided into 3 
 
 ------------------------------------------------------------------------
 
-## Get information {#get-information .heading2}
+# Get information {#get-information}
 
 -   `rba_panther_info`(): Retrieve a list of PANTHER's supported organisms, datasets, families, or pathways
 
@@ -65,9 +64,9 @@ The available tools in PANTHER's **RESTful API services** can be divided into 3 
 
 ------------------------------------------------------------------------
 
-## Research tools {#research-tools .heading2}
+# Research tools {#research-tools}
 
-### Gene List Analysis {#gene-list-analysis .heading3}
+## Gene List Analysis {#gene-list-analysis}
 
 `rba_panther_enrich()` is an equivalent to [Gene List analysis tool's webpage.](https://www.pantherdb.org/index.jsp "PANTHER Gene List Analysis"). Here is a usage example:
 
@@ -100,13 +99,13 @@ if (utils::hasName(enriched, "result") && is.data.frame(enriched$result)) {
 
 **Please Note:** Other services supported by rbioapi also provide Over-representation analysis tools. Please see the vignette article [Do with rbioapi: Over-Representation (Enrichment) Analysis in R](rbioapi_do_enrich.html) ([link to the documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html)) for an in-depth review.
 
-### Tree grafter {#tree-grafter .heading3}
+## Tree grafter {#tree-grafter}
 
 `rba_panther_tree_grafter()` is an equivalent to the "[Graft sequence into PANTHER library of trees](https://www.pantherdb.org/tools/sequenceSearchForm.jsp)" tool.
 
 ------------------------------------------------------------------------
 
-## How to Cite? {#citations .heading2}
+# How to Cite? {#citations}
 
 To cite PANTHER (Please see <https://www.pantherdb.org/publications.jsp#HowToCitePANTHER>):
 
@@ -118,7 +117,7 @@ To cite rbioapi:
 
 ------------------------------------------------------------------------
 
-## Links {#links .heading2}
+# Links {#links}
 
 -   [This article in rbioapi documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_panther.html "2.C: PANTHER & rbioapi")
 
@@ -128,7 +127,7 @@ To cite rbioapi:
 
 ------------------------------------------------------------------------
 
-## Session info {#session-info .heading2}
+# Session info {#session-info}
 
 ```{r sessionInfo, echo=FALSE}
 sessionInfo()

@@ -33,15 +33,14 @@ library(rbioapi)
 rba_options(timeout = 30, skip_error = TRUE)
 ```
 
-------------------------------------------------------------------------
 
-# Introduction {#introduction .heading2}
+# Introduction {#introduction}
 
 [Enrichr](https://maayanlab.cloud/Enrichr/) is a popular gene-set enrichment analysis tool developed in the Ma'ayan Lab.
 
 ------------------------------------------------------------------------
 
-# Gene set library concept in Enrichr {#gene-set-library-concept-in-enrichr .heading2}
+# Gene set library concept in Enrichr {#gene-set-library-concept-in-enrichr}
 
 Directly quoting from Enrichr's help page:
 
@@ -72,7 +71,7 @@ if (is.data.frame(enrichr_libs)) {
 
 ------------------------------------------------------------------------
 
-# Enrichment analysis using Enrichr {#enrichment-analysis-using-enrichr .heading2}
+# Enrichment analysis using Enrichr {#enrichment-analysis-using-enrichr}
 
 To perform enrichment analysis on your gene-set with Enrichr using rbioapi, you can take two approaches. We will begin with the simple one. But first, we create a vector of genes' NCBI IDs to use as the input example in this article.
 
@@ -82,7 +81,7 @@ genes <- c("p53", "BRCA1", "cdk2", "Q99835", "CDC42","CDK1","KIF23","PLK1",
            "RAC2","RACGAP1","RHOA","RHOB", "PHF14", "RBM3", "MSL1")
 ```
 
-## Approach 1: Using the one-step Wrapper function {#approach-1-using-the-wrapper-function .heading3}
+## Approach 1: Using the one-step Wrapper function {#approach-1-using-the-wrapper-function}
 
 The only required input for this function is to simply supply your gene-set as a character vector. Optionally you can also select one or more libraries. Please see `rba_enrichr()` function's manual for more details on the arguments.
 
@@ -146,7 +145,7 @@ But when multiple libraries have been selected, the function's output will be a 
 str(results_msig, 1)
 ```
 
-## Approach 2: Going step-by-step {#approach-2-going-step-by-step .heading3}
+## Approach 2: Going step-by-step {#approach-2-going-step-by-step}
 
 `rba_enrichr()` is a wrapper function. It internally executes a sequence of functions necessary to run your analysis. Alternatively, you could go step by step. We demonstrate these steps in this section.
 
@@ -202,7 +201,7 @@ if (exists("results_crispr") && is.data.frame(results_crispr)) {
 
 ------------------------------------------------------------------------
 
-# Working with Other Species {#other-species .heading2}
+# Working with Other Species {#other-species}
 
 Enrichr also provides libraries for model organisms. The following functions have an `organism` argument that allows you to perform the analysis on species other than humans:
 
@@ -218,7 +217,7 @@ The available options for the organism argument are human", (H. sapiens & M. mus
 
 ------------------------------------------------------------------------
 
-# See also in Functions' manuals {#see-also-in-functions-manuals .heading2}
+# See also in Functions' manuals {#see-also-in-functions-manuals}
 
 Some rbioapi Enrichr functions were not covered in this vignette, be sure to check their manuals:
 
@@ -228,7 +227,7 @@ Some rbioapi Enrichr functions were not covered in this vignette, be sure to che
 
 ------------------------------------------------------------------------
 
-# How to Cite? {#citations .heading2}
+# How to Cite? {#citations}
 
 To cite Enrichr (Please see <https://maayanlab.cloud/Enrichr/help#terms>):
 
@@ -244,13 +243,13 @@ To cite rbioapi:
 
 ------------------------------------------------------------------------
 
-# Over-representation analysis Using Other Services {#other-services .heading2}
+# Over-representation analysis Using Other Services {#other-services}
 
 Other services supported by rbioapi also provide Over-representation analysis tools. Please see the vignette article [Do with rbioapi: Over-Representation (Enrichment) Analysis in R](rbioapi_do_enrich.html) ([link to the documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html)) for an in-depth review.
 
 ------------------------------------------------------------------------
 
-# Links {#links .heading2}
+# Links {#links}
 
 -   [This article in rbioapi documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html "https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html")
 
@@ -260,7 +259,7 @@ Other services supported by rbioapi also provide Over-representation analysis to
 
 ------------------------------------------------------------------------
 
-# Session info {#session-info .heading2}
+# Session info {#session-info}
 
 ```{r sessionInfo, echo=FALSE}
 sessionInfo()
