@@ -847,6 +847,8 @@ rba_string_homology_inter <- function(ids,
 #'   background or universe protein set), you can use this function to
 #'   perform enrichment test and retrieve a list of enriched terms in each
 #'   database, among with pertinent information for each term.
+#'   Use \code{\link{rba_string_enrichment_image}} to retrieve the analysis
+#'   results as a plot.
 #'
 #' STRING currently maps to and retrieve enrichment results based on Gene
 #'   Ontology (GO), KEGG pathways, UniProt Keywords, PubMed publications, Pfam
@@ -862,6 +864,8 @@ rba_string_homology_inter <- function(ids,
 #'
 #' @param ids Your protein ID(s). It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
+#'   Note that if only one id is supplied, STRING expands the network by 10
+#'   proteins.
 #' @param species Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
 #'   (Recommended, but optional if your input is less than 100 IDs.)
 #' @param background character vector: A set of STRING protein IDs
@@ -899,7 +903,10 @@ rba_string_homology_inter <- function(ids,
 #'
 #' @family "STRING"
 #' @seealso
-#'   \code{\link{rba_string_map_ids}, \link{rba_string_annotations}}
+#'   \code{\link{rba_string_map_ids},
+#'   \link{rba_string_annotations},
+#'   \link{rba_string_enrichment_image}
+#'   }
 #' @export
 rba_string_enrichment <- function(ids,
                                   species = NULL,
@@ -1023,7 +1030,10 @@ rba_string_enrichment <- function(ids,
 #'
 #' @family "STRING"
 #' @seealso
-#'   \code{\link{rba_string_map_ids}, \link{rba_string_enrichment}}
+#'   \code{\link{rba_string_map_ids},
+#'   \link{rba_string_enrichment},
+#'   \link{rba_string_enrichment_image}
+#'   }
 #' @export
 rba_string_annotations <- function(ids,
                                    species = NULL,
@@ -1255,3 +1265,217 @@ rba_string_version <- function(...) {
   final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
+
+#' Get STRING Enrichment Plot
+#'
+#' In addition to performing enrichment analysis, STRING allows you to also
+#'   visualize the analysis results. Use \code{\link{rba_string_enrichment}}
+#'   to retrieve the analysis results as a data frame.
+#'
+#' Available values for category are as follow. Default value is "Process".
+#'   \itemize{
+#'   \item Process: Biological Process (Gene Ontology)
+#'   \item Function: Molecular Function (Gene Ontology)
+#'   \item Component: Cellular Component (Gene Ontology)
+#'   \item Keyword: Annotated Keywords (UniProt)
+#'   \item KEGG: KEGG Pathways
+#'   \item RCTM: Reactome Pathways
+#'   \item HPO: Human Phenotype (Monarch)
+#'   \item MPO: The Mammalian Phenotype Ontology (Monarch)
+#'   \item DPO: Drosophila Phenotype (Monarch)
+#'   \item WPO: C. elegans Phenotype Ontology (Monarch)
+#'   \item ZPO: Zebrafish Phenotype Ontology (Monarch)
+#'   \item FYPO: Fission Yeast Phenotype Ontology (Monarch)
+#'   \item Pfam: Protein Domains (Pfam)
+#'   \item SMART: Protein Domains (SMART)
+#'   \item InterPro: Protein Domains and Features (InterPro)
+#'   \item PMID: Reference Publications (PubMed)
+#'   \item NetworkNeighborAL: Local Network Cluster (STRING)
+#'   \item COMPARTMENTS: Subcellular Localization (COMPARTMENTS)
+#'   \item TISSUES: Tissue Expression (TISSUES)
+#'   \item DISEASES: Disease-gene Associations (DISEASES)
+#'   \item WikiPathways: WikiPathways}
+#'
+#' @section Corresponding API Resources:
+#'  "POST https://string-db.org/api/\{output_format\}/enrichmentfigure"
+#'
+#' @param ids Your protein ID(s). It is strongly recommended to supply
+#'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
+#'   Note that if only one id is supplied, STRING expands the network by 10
+#'   proteins.
+#' @param species Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
+#' @param category The terms set to use to perform enrichment analysis. valid
+#'   values are (See details for more info):
+#'   "Process" (default), "Function", "Component", "Keyword", "KEGG", "RCTM",
+#'   "HPO", "MPO", "DPO", "WPO", "ZPO", "FYPO", "Pfam", "SMART", "InterPro",
+#'   "PMID", "NetworkNeighborAL", "COMPARTMENTS", "TISSUES", "DISEASES", or
+#'   "WikiPathways"
+#' @param image_format one of:\itemize{
+#'   \item "image": PNG image with normal resolution.
+#'   \item "highres_image": High-resolution PNG image.
+#'   \item "svg": Scalable Vector Graphics image.}
+#' @param save_image Logical or Character:\itemize{
+#'   \item TRUE: Save the image to an automatically-generated path.
+#'   \item FALSE: Do not save the image, just return it as an R object.
+#'   \item Character string: A valid file path to save the image to.}
+#' @param group_by_similarity Jackard index treshold to visually group the
+#'   related terms. Valid values are between 0.1 to 1 with increment of 0.1.
+#'   Default value is NULL (i.e. no grouping).
+#' @param color_palette Color pallet to code FDR values. Valid values are:
+#'   "mint_blue" (default), "lime_emerald", "green_blue", "peach_purple",
+#'   "straw_navy", or "yellow_pink"
+#' @param number_of_term_shown (default: 10) Maximum number of results to
+#'    include in the plot.
+#' @param x_axis The variable to show on the x axis and rank the results based
+#'   on it. Valid values are: "signal" (default), "strength", "FDR", or
+#'   "gene_count"
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
+#'
+#' @return A plot summarizing the enrichment results, which can be PNG or
+#'   SVG depending on the inputs.
+#'
+#' @references \itemize{
+#'   \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
+#'    Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang,
+#'    Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian
+#'    von Mering, The STRING database in 2023: protein–protein association
+#'    networks and functional enrichment analyses for any sequenced genome of
+#'    interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023,
+#'    Pages D638–D646, https://doi.org/10.1093/nar/gkac1000
+#'   \item \href{https://string-db.org/help/api/}{STRING API Documentation}
+#'   \item
+#'   \href{https://string-db.org/cgi/about?footer_active_subpage=references}{
+#'   Citations note on STRING website}
+#'   }
+#'
+#' @examples
+#' \dontrun{
+#'   rba_string_enrichment(
+#'   ids = c("TP53", "TNF", "EGFR"),
+#'   species = 9606)
+#' }
+#' \dontrun{
+#'   rba_string_enrichment(
+#'   ids = c("TP53", "TNF", "EGFR"),
+#'   species = 9606,
+#'   category = "KEGG")
+#' }
+#' \dontrun{
+#'   rba_string_enrichment(
+#'   ids = c("TP53", "TNF", "EGFR"),
+#'   species = 9606,
+#'   x_axis = "strength",
+#'   number_of_term_shown = 20
+#'   )
+#' }
+#' \dontrun{
+#'   rba_string_enrichment(
+#'   ids = c("TP53", "TNF", "EGFR"),
+#'   species = 9606,
+#'   color_palette = "straw_navy"
+#'   )
+#' }
+#'
+#' @family "STRING"
+#' @seealso
+#'   \code{\link{rba_string_map_ids},
+#'   \link{rba_string_enrichment},
+#'   \link{rba_string_annotations}
+#'   }
+#' @export
+rba_string_enrichment_image <- function(ids,
+                                        species,
+                                        category = "Process",
+                                        image_format = "image",
+                                        save_image = TRUE,
+                                        group_by_similarity = NULL,
+                                        color_palette = "mint_blue",
+                                        number_of_term_shown = 10,
+                                        x_axis = "signal",
+                                        ...) {
+  ## Load Global Options
+  .rba_ext_args(..., ignore_save = TRUE)
+  ## Check User-input Arguments
+  .rba_args(cons = list(list(arg = "ids",
+                             class = c("character", "numeric")),
+                        list(arg = "species",
+                             class = "numeric"),
+                        list(arg = "category",
+                             class = "character",
+                             val = c("Process", "Function", "Component",
+                                     "Keyword", "KEGG", "RCTM",
+                                     "HPO", "MPO", "DPO", "WPO", "ZPO", "FYPO",
+                                     "Pfam", "SMART", "InterPro",
+                                     "PMID", "NetworkNeighborAL",
+                                     "COMPARTMENTS", "TISSUES", "DISEASES",
+                                     "WikiPathways")),
+                        list(arg = "image_format",
+                             class = "character",
+                             val = c("image", "highres_image", "svg")),
+                        list(arg = "save_image",
+                             class = c("character",
+                                       "logical")),
+                        list(arg = "group_by_similarity",
+                             class = "numeric",
+                             val = seq(0.1, 1, by = 0.1)),
+                        list(arg = "color_palette",
+                             class = "character",
+                             val = c("mint_blue", "lime_emerald", "green_blue",
+                                     "peach_purple", "straw_navy", "yellow_pink")),
+                        list(arg = "number_of_term_shown",
+                             class = "numeric",
+                             min_val = 1),
+                        list(arg = "x_axis",
+                             class = "character",
+                             val = c("signal", "strength", "FDR", "gene_count"))
+  ))
+
+  .msg("Retrieving STRING enrichment plot of %s input Identifiers.", length(ids))
+
+  ## Build POST API Request's body
+  call_body <- .rba_query(init = list("identifiers" = paste(unique(ids),
+                                                            collapse = "%0d"),
+                                      "species" = species,
+                                      "category" = category,
+                                      "color_palette" = color_palette,
+                                      "caller_identity" = getOption("rba_user_agent")),
+                          list("group_by_similarity",
+                               !is.null(group_by_similarity),
+                               group_by_similarity),
+                          list("number_of_term_shown",
+                               number_of_term_shown != 10,
+                               as.integer(number_of_term_shown)),
+                          list("x_axis",
+                               x_axis != "signal",
+                               x_axis))
+
+  ## make file path
+  if (image_format == "svg") {
+    ext_input <- "svg"
+    accept_input <- "image/svg+xml"
+    parser_input <- function(x) {httr::content(x)}
+  } else {
+    ext_input <- "png"
+    accept_input <- "image/png"
+    parser_input <- function(x) {httr::content(x, type = "image/png")}
+  }
+  save_image <- .rba_file(file = paste0("string_network_image.", ext_input),
+                          save_to = save_image)
+
+  ## Build Function-Specific Call
+  input_call <- .rba_httr(httr = "post",
+                          url = .rba_stg("string", "url"),
+                          path = paste0(.rba_stg("string", "pth"),
+                                        image_format,
+                                        "/enrichmentfigure"),
+                          accept = accept_input,
+                          parser = parser_input,
+                          body = call_body,
+                          save_to = save_image)
+
+  ## Call API
+  final_output <- .rba_skeleton(input_call)
+  return(final_output)
+}
+
