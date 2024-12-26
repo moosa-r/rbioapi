@@ -4,12 +4,18 @@
 \alias{rba_enrichr_add_list}
 \title{Upload Your Gene-List to Enrichr}
 \usage{
-rba_enrichr_add_list(gene_list, description = NULL, organism = "human", ...)
+rba_enrichr_add_list(
+  gene_list,
+  description = NULL,
+  organism = "human",
+  speedrichr = FALSE,
+  ...
+)
 }
 \arguments{
-\item{gene_list}{A vector with Entrez gene symbols.}
+\item{gene_list}{A character vector with Entrez gene symbols of test genes.}
 
-\item{description}{(optional) A name or description to be associated with your
+\item{description}{(optional) A description to be associated with your
 uploaded gene-set to Enrichr servers.}
 
 \item{organism}{(default = "human") Which model organism version of Enrichr
@@ -17,30 +23,50 @@ to use? Available options are: "human", (H. sapiens & M. musculus),
 "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
 and "fish" (D. rerio).}
 
+\item{speedrichr}{logical (default = FALSE) Set to TRUE if you will use this
+gene list with a background list; otherwise, set to FALSE. Only available
+for human libraries. Refer to the details section for more information.}
+
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-A list with two unique IDs for your uploaded gene sets.
+A list with the unique IDs for your uploaded gene list. `userListId`
+  is the ID required for later steps.
 }
 \description{
-Prior to perform enrichment, Enrichr requires you to upload your gene-list
-  and retrieve a 'user list ID'.
+This function uploads your gene list to Enrichr and retrieves a unique
+  'user list ID' required for performing enrichment analysis.
 }
 \details{
-Note that using \code{\link{rba_enrichr}} is a more convenient way to
-   automatically perform this and other required function calls to
-   perform enrichment analysis on your input gene-set.
+Enrichr uses separate APIs for analysis with or without a background gene
+  list. Set `speedrichr = TRUE` if this gene list will be used with a
+  background gene list; otherwise, set it to FALSE. Gene lists submitted with
+  `speedrichr = TRUE` can only be analyzed with a background set, and those
+   submitted with `speedrichr = FALSE` can only be analyzed without one.
+   Currently, background-based enrichment is supported only for human
+   libraries.
+
+Please note that \code{\link{rba_enrichr}} provides a one-step and
+  more convenient way to automatically handle this and other required
+  function calls needed to perform gene set enrichment analysis with Enrichr.
 }
 \section{Corresponding API Resources}{
 
  "POST https://maayanlab.cloud/Enrichr/addList"
+ \cr "POST https://maayanlab.cloud/speedrichr/api/addList"
 }
 
 \examples{
 \donttest{
 rba_enrichr_add_list(gene_list = c("TP53", "TNF", "EGFR"),
-     description = "tumoral genes")
+     description = "tumoral genes",
+     speedrichr = FALSE)
+}
+\donttest{
+rba_enrichr_add_list(gene_list = c("RAG1", "RAG2", "DNTT", "LIG4", "ARTEMIS"),
+     description = "TCR rearrangment",
+     speedrichr = TRUE)
 }
 
 }
@@ -72,6 +98,7 @@ rba_enrichr_add_list(gene_list = c("TP53", "TNF", "EGFR"),
 
 Other "Enrichr": 
 \code{\link{rba_enrichr}()},
+\code{\link{rba_enrichr_add_background}()},
 \code{\link{rba_enrichr_enrich}()},
 \code{\link{rba_enrichr_gene_map}()},
 \code{\link{rba_enrichr_libs}()},

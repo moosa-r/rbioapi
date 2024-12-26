@@ -9,34 +9,41 @@ rba_enrichr_enrich(
   gene_set_library = "all",
   regex_library_name = TRUE,
   organism = "human",
+  background_id = NULL,
   progress_bar = TRUE,
   ...
 )
 }
 \arguments{
-\item{user_list_id}{An ID returned to you after uploading a gene
-list using \code{\link{rba_enrichr_add_list}}}
+\item{user_list_id}{An ID returned after uploading a gene list
+using \code{\link{rba_enrichr_add_list}}, with the `speedrichr` set to
+TRUE or FALSE depending on whether you intend to analyze this gene list
+with or without a background gene list, respectively.}
 
 \item{gene_set_library}{One of the:
 \enumerate{
 \item "all" to select all of the available Enrichr gene-set libraries.
-\item A gene-set library name existed in the results
-retrieved via \code{\link{rba_enrichr_libs}}
+\item A gene-set library name. You can retrieve the available options
+for a given species using \code{\link{rba_enrichr_libs}}.
 \item If regex_library_name = TRUE, A partially-matching name a regex
 pattern that correspond to one or more of Enrichr library names.
 }}
 
 \item{regex_library_name}{logical: if TRUE (default) the supplied
-gene_set_library will be regarded as a regex or partially matching name. if
-FALSE, gene_set_library will be considered exact match.}
+gene_set_library will be considered as a regex pattern.
+If FALSE, gene_set_library will be considered as an exact match.}
 
 \item{organism}{(default = "human") Which model organism version of Enrichr
 to use? Available options are: "human", (H. sapiens & M. musculus),
 "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
-and "fish" (D. rerio).}
+and "fish" (D. rerio). If `background_id` is provided, the only available
+option is "human".}
 
-\item{progress_bar}{logical: In case of selecting multiple Enrichr
-libraries, should a progress bar be displayed?}
+\item{background_id}{An ID returned after uploading a background gene
+list using \code{\link{rba_enrichr_add_background}}}
+
+\item{progress_bar}{logical: (default = TRUE) if multiple Enrichr libraries
+are selected, should a progress bar be displayed?}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
@@ -46,17 +53,24 @@ A list containing data frames of the enrichment results of your
   supplied gene-list against the selected Enrichr libraries.
 }
 \description{
-This function which will retrieve the enrichment results of your
-  supplied gene-list id against one or multiple Enrichr libraries.
+This function retrieves enrichment analysis results for your supplied
+  `user_list_id` against one or multiple Enrichr libraries.
 }
 \details{
-Note that using \code{\link{rba_enrichr}} is a more convenient way to
-  automatically perform this and other required function calls to
-  perform enrichment analysis on your input gene-set.
+If `background_id` is supplied, this function will interact with the
+  speedrichr API. In this case, `user_list_id` must have been obtained
+  from a \code{\link{rba_enrichr_add_list}} call with the `speedrichr`
+  parameter set to `TRUE`. Additionally, this feature is only available
+  for "human" organism.
+
+Please note that \code{\link{rba_enrichr}} provides a one-step and
+  more convenient way to automatically handle this and other required
+  function calls needed to perform gene set enrichment analysis with Enrichr.
 }
 \section{Corresponding API Resources}{
 
  "GET https://maayanlab.cloud/Enrichr/enrich"
+ \cr "POST https://maayanlab.cloud/speedrichr/api/backgroundenrich"
 }
 
 \examples{
@@ -103,6 +117,7 @@ rba_enrichr_enrich(user_list_id = "11111",
 
 Other "Enrichr": 
 \code{\link{rba_enrichr}()},
+\code{\link{rba_enrichr_add_background}()},
 \code{\link{rba_enrichr_add_list}()},
 \code{\link{rba_enrichr_gene_map}()},
 \code{\link{rba_enrichr_libs}()},

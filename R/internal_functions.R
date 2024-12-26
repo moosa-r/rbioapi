@@ -31,13 +31,15 @@
                                               "fly",
                                               "yeast",
                                               "worm",
-                                              "fish")),
+                                              "fish",
+                                              "speedrichr")),
                                   human = "Enrichr/",
                                   fly = "FlyEnrichr/",
                                   yeast = "YeastEnrichr/",
                                   worm = "WormEnrichr/",
-                                  fish = "FishEnrichr/"),
-                     ptn = "^(https?://)?(www\\.)?maayanlab\\.cloud/.*Enrichr/",
+                                  fish = "FishEnrichr/",
+                                  speedrichr = "speedrichr/api/"),
+                     ptn = "^(https?://)?(www\\.)?maayanlab\\.cloud/(.*Enrichr|speedrichr)/",
                      err_ptn = "^$"
                    ),
                    ensembl = switch(

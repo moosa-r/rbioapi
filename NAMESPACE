@@ -2,6 +2,7 @@
 
 export(rba_connection_test)
 export(rba_enrichr)
+export(rba_enrichr_add_background)
 export(rba_enrichr_add_list)
 export(rba_enrichr_enrich)
 export(rba_enrichr_gene_map)

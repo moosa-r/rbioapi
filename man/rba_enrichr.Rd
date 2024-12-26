@@ -10,36 +10,40 @@ rba_enrichr(
   gene_set_library = "all",
   regex_library_name = TRUE,
   organism = "human",
-  progress_bar = FALSE,
+  background_genes = NULL,
+  progress_bar = TRUE,
   ...
 )
 }
 \arguments{
-\item{gene_list}{A vector with Entrez gene symbols.}
+\item{gene_list}{A character vector with Entrez gene symbols of test genes.}
 
-\item{description}{(optional) A name or description to be associated with your
+\item{description}{(optional) A description to be associated with your
 uploaded gene-set to Enrichr servers.}
 
 \item{gene_set_library}{One of the:
 \enumerate{
 \item "all" to select all of the available Enrichr gene-set libraries.
-\item A gene-set library name existed in the results
-retrieved via \code{\link{rba_enrichr_libs}}
+\item A gene-set library name. You can retrieve the available options
+for a given species using \code{\link{rba_enrichr_libs}}.
 \item If regex_library_name = TRUE, A partially-matching name a regex
 pattern that correspond to one or more of Enrichr library names.
 }}
 
 \item{regex_library_name}{logical: if TRUE (default) the supplied
-gene_set_library will be regarded as a regex or partially matching name. if
-FALSE, gene_set_library will be considered exact match.}
+gene_set_library will be considered as a regex pattern.
+If FALSE, gene_set_library will be considered as an exact match.}
 
 \item{organism}{(default = "human") Which model organism version of Enrichr
 to use? Available options are: "human", (H. sapiens & M. musculus),
 "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
 and "fish" (D. rerio).}
 
-\item{progress_bar}{logical: In case of selecting multiple Enrichr
-libraries, should a progress bar be displayed?}
+\item{background_genes}{A character vector of Entrez gene symbols of the
+background genes.}
+
+\item{progress_bar}{logical: (default = TRUE) if multiple Enrichr libraries
+are selected, should a progress bar be displayed?}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
@@ -49,18 +53,21 @@ A list containing data frames of the enrichment results of your
   supplied gene-list against the selected Enrichr libraries.
 }
 \description{
-This function is an easy-to-use wrapper for the multiple function calls
-  necessary to perform enrichment analysis on a given gene-list using Enrichr.
-  see details section for more information.
+This function provides a convenient one-step wrapper for performing
+  enrichment analysis on a given gene list using Enrichr. It simplifies the
+  process by internally calling the necessary functions in the correct order.
+  See the details section for more information.
 }
 \details{
 This function will call other rba_enrichr_*** functions with the following
   order:
   \enumerate{
-  \item (If neccessary) Call \code{\link{rba_enrichr_libs}} to obtain a list
-    of available libraries in Enrichr.
+  \item (If necessary) Call \code{\link{rba_enrichr_libs}} to obtain a list
+    of available libraries in Enrichr for the given organism.
   \item Call \code{\link{rba_enrichr_add_list}} to upload your gene-list
     and obtain a 'user list ID'.
+  \item (If necessary) Call \code{\link{rba_enrichr_add_background}} to
+    upload your background gene-list and obtain a 'background list ID'.
   \item Call \code{\link{rba_enrichr_enrich}} to perform enrichment analysis
     on the gene-list against one or multiple Enrichr libraries
   }
@@ -69,7 +76,10 @@ This function will call other rba_enrichr_*** functions with the following
 
  "GET https://maayanlab.cloud/Enrichr/datasetStatistics"
  \cr "POST https://maayanlab.cloud/Enrichr/addList"
+ \cr "POST https://maayanlab.cloud/speedrichr/api/addList"
+ \cr "POST https://maayanlab.cloud/speedrichr/api/addbackground"
  \cr "GET https://maayanlab.cloud/Enrichr/enrich"
+ \cr "POST https://maayanlab.cloud/speedrichr/api/backgroundenrich"
 }
 
 \examples{
@@ -113,6 +123,7 @@ rba_enrichr(gene_list = c("TP53", "TNF", "EGFR"),
 }
 \seealso{
 Other "Enrichr": 
+\code{\link{rba_enrichr_add_background}()},
 \code{\link{rba_enrichr_add_list}()},
 \code{\link{rba_enrichr_enrich}()},
 \code{\link{rba_enrichr_gene_map}()},

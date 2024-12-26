@@ -4,12 +4,12 @@
 \alias{rba_enrichr_gene_map}
 \title{Find Enrichr Terms That Contain a Given Gene}
 \usage{
-rba_enrichr_gene_map(gene, catagorize = FALSE, organism = "human", ...)
+rba_enrichr_gene_map(gene, categorize = FALSE, organism = "human", ...)
 }
 \arguments{
 \item{gene}{character: An Entrez gene symbol.}
 
-\item{catagorize}{logical: Should the category informations be included?}
+\item{categorize}{logical: Should the category information be included?}
 
 \item{organism}{(default = "human") Which model organism version of Enrichr
 to use? Available options are: "human", (H. sapiens & M. musculus),
@@ -20,7 +20,7 @@ and "fish" (D. rerio).}
 arguments manual for more information on available options.}
 }
 \value{
-a list containing the search results of your supplied gene.
+A nested list containing the search results of your supplied gene.
 }
 \description{
 This function will search the gene and retrieve a list of Enrichr
@@ -36,7 +36,7 @@ This function will search the gene and retrieve a list of Enrichr
 rba_enrichr_gene_map(gene = "p53")
 }
 \donttest{
-rba_enrichr_gene_map(gene = "p53", catagorize = TRUE)
+rba_enrichr_gene_map(gene = "p53", categorize = TRUE)
 }
 
 }
@@ -66,6 +66,7 @@ rba_enrichr_gene_map(gene = "p53", catagorize = TRUE)
 \seealso{
 Other "Enrichr": 
 \code{\link{rba_enrichr}()},
+\code{\link{rba_enrichr_add_background}()},
 \code{\link{rba_enrichr_add_list}()},
 \code{\link{rba_enrichr_enrich}()},
 \code{\link{rba_enrichr_libs}()},

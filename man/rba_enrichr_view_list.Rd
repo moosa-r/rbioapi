@@ -4,10 +4,15 @@
 \alias{rba_enrichr_view_list}
 \title{View an Uploaded Gene List}
 \usage{
-rba_enrichr_view_list(user_list_id, organism = "human", ...)
+rba_enrichr_view_list(
+  user_list_id,
+  organism = "human",
+  speedrichr = FALSE,
+  ...
+)
 }
 \arguments{
-\item{user_list_id}{a user_list_id returned to you after uploading a gene
+\item{user_list_id}{a user list ID returned after uploading a gene
 list using \code{\link{rba_enrichr_add_list}}}
 
 \item{organism}{(default = "human") Which model organism version of Enrichr
@@ -15,15 +20,19 @@ to use? Available options are: "human", (H. sapiens & M. musculus),
 "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
 and "fish" (D. rerio).}
 
+\item{speedrichr}{logical (default = FALSE) Did you upload your gene list
+to speedrichr API? (i.e. did you intend to use this gene list along with
+a background gene list?)}
+
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-A list containing the genes and description available under the
-  supplied user_list_id
+A list containing the genes and description associated to the
+  supplied user_list_id.
 }
 \description{
-Retrieve a list of uploaded genes under a 'user list ID'.
+Retrieve the list of uploaded genes with a given 'user list ID'.
 }
 \section{Corresponding API Resources}{
 
@@ -62,6 +71,7 @@ rba_enrichr_view_list(user_list_id = 11111)
 \seealso{
 Other "Enrichr": 
 \code{\link{rba_enrichr}()},
+\code{\link{rba_enrichr_add_background}()},
 \code{\link{rba_enrichr_add_list}()},
 \code{\link{rba_enrichr_enrich}()},
 \code{\link{rba_enrichr_gene_map}()},
