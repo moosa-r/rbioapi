@@ -91,7 +91,7 @@
                         <h4 data-toc-skip class="author">Moosa
 Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2024-12-24</h4>
+            <h4 data-toc-skip class="date">2024-12-26</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/master/vignettes/rbioapi_enrichr.Rmd" class="external-link"><code>vignettes/rbioapi_enrichr.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_enrichr.Rmd</code></div>
@@ -176,6 +176,7 @@ can do the following:</p>
 <span><span class="va">results_msig</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_enrichr.html">rba_enrichr</a></span><span class="op">(</span>gene_list <span class="op">=</span> <span class="va">genes</span>,</span>
 <span>                            gene_set_library <span class="op">=</span> <span class="st">"msig"</span>,</span>
 <span>                            regex_library_name <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%</span></span>
 <span></span>
 <span><span class="co"># You can drop `regex_library_name = TRUE`, as it is TRUE by default.</span></span></code></pre></div>
 <p>Note that when only one Enrichr library is selected, a data frame
@@ -227,8 +228,8 @@ the next step.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">list_id</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 2</span></span>
-<span><span class="co">#&gt;  $ shortId   : chr "ca8fd9cc5423519f9b7f898cb6465521"</span></span>
-<span><span class="co">#&gt;  $ userListId: int 86880010</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ shortId   : chr "3da5cfcddebb52e9ee9fc0e076f92f4b"</span></span>
+<span><span class="co">#&gt;  $ userListId: int 86891005</span></span></code></pre></div>
 <p>Finally, we are ready to submit the enrichment analysis request to
 Enrichr. Same as explained above for the wrapper function
 <code><a href="../reference/rba_enrichr.html">rba_enrichr()</a></code>, we can supply the “gene_set_library”

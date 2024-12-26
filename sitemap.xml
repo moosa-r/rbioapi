@@ -17,6 +17,7 @@
 <url><loc>https://rbioapi.moosa-r.com/reference/index.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_connection_test.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_enrichr.html</loc></url>
+<url><loc>https://rbioapi.moosa-r.com/reference/rba_enrichr_add_background.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_enrichr_add_list.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_enrichr_enrich.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_enrichr_gene_map.html</loc></url>
