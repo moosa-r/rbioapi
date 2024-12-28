@@ -33,7 +33,6 @@ library(rbioapi)
 rba_options(timeout = 30, skip_error = TRUE)
 ```
 
-
 # Introduction {#introduction}
 
 Directly quoting the the paper published by [PANTHER](https://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)") (Protein Analysis THrough Evolutionary Relationships) authors:
@@ -64,27 +63,66 @@ The available tools in PANTHER's **RESTful API services** can be divided into 3 
 
 ------------------------------------------------------------------------
 
-# Research tools {#research-tools}
+# Gene List Analysis {#gene-list-analysis}
 
-## Gene List Analysis {#gene-list-analysis}
+`rba_panther_enrich()` is equivalent to [Gene List analysis tool's webpage](https://www.pantherdb.org/index.jsp "PANTHER Gene List Analysis"). Depending on the provided input's class, PANTHER will perform either over-representation analysis or statistical enrichment analysis. Below we demonstrate how to perform such analyses.
 
-`rba_panther_enrich()` is an equivalent to [Gene List analysis tool's webpage.](https://www.pantherdb.org/index.jsp "PANTHER Gene List Analysis"). Here is a usage example:
+## Get the available annotation datasets {#analysis-get-available-annotation-datasets}
 
-```{r rba_panther_enrich, message=TRUE}
-## 1 We get the available annotation datasets in PANTHER (we need to select one of them to submit an enrichment request)
+First, we need to select an annotation dataset to conduct the analysis based on it. Each annotation dataset contains a collection of terms, where each term is associated with a group of genes.
+
+To retrieve the list of available annotation datasets in PANTHER, use the following command:
+
+```{r enrich_available_annotations}
 annots <- rba_panther_info(what = "datasets")
-# Note that you should enter the "id" of the datasets, not its label (e.g. entering "biological_process" is incorrect, you should rather enter "GO:0008150").
-## 2 We create a variable with our genes' IDs
-genes <- c("p53", "BRCA1", "cdk2", "Q99835", "CDC42","CDK1","KIF23","PLK1",
-           "RAC2","RACGAP1","RHOA","RHOB", "PHF14", "RBM3", "MSL1")
-## 3 Now we can submit the enrichment request.
-enriched <- rba_panther_enrich(genes = genes,
-                               organism = 9606,
-                               annot_dataset = "ANNOT_TYPE_ID_PANTHER_PATHWAY",
-                               cutoff = 0.05)
 ```
 
-```{r enriched_df, echo=FALSE}
+```{r enrich_available_annotations_results, echo=FALSE}
+if (is.data.frame(annots)) {
+  DT::datatable(data = annots,
+              options = list(scrollX = TRUE, 
+                             paging = TRUE,
+                             fixedHeader = TRUE,
+                             keys = TRUE))
+} else {
+  print("Vignette building failed. It is probably because the web service was down during the building.")
+}
+```
+
+Please note that you should use the ID of the desired annotation dataset, not its label. For example, using `"biological_process"` is incorrect; you should rather use `"GO:0008150"`.
+
+## Submit the analysis request {#submit-the-analysis-request}
+
+Depending on the provided input, PANTHER will conduct two types of analysis:
+
+1.  If a character vector is supplied, over-representation analysis will be performed using either Fisher's exact or binomial test.
+
+2.  If a data frame with gene identifiers and their corresponding expression values is supplied, statistical enrichment test is performed using Mann-Whitney U (Wilcoxon Rank-Sum) test.
+
+rbioapi determines the proper analysis based on the class of the `genes` parameter. Please refer to the details section of `rba_panther_enrich()` function manual for more information.
+
+### Over-representation analysis {#over-representation-analysis}
+
+Now, suppose we want to perform an over-representation analysis against the 'GO biological process' annotation dataset. In this example, we only provide the gene names, thus over-representation analysis will be conducted:
+
+```{r rba_panther_overrep, message=TRUE}
+# Create a variable to store the genes vector
+my_genes_vec <- c("p53", "BRCA1", "cdk2", "Q99835", "CDC42",
+                  "CDK1","KIF23","PLK1", "RAC2","RACGAP1","RHOA",
+                  "RHOB", "PHF14", "RBM3", "MSL1")
+
+# Submit the analysis request.
+enriched <- rba_panther_enrich(genes = my_genes_vec,
+                               organism = 9606,
+                               annot_dataset = "GO:0008150",
+                               cutoff = 0.05)
+
+# Note that we didn't supply the `test_type` parameter.
+# In this case, the function will default to using Fisher's exact test # (i.e. `test_type = "FISHER"`).
+# You may also use binomial test for the over-representation analysis # (i.e. `test_type = "BINOMIAL"`).
+```
+
+```{r rba_panther_overrep_results, echo=FALSE}
 if (utils::hasName(enriched, "result") && is.data.frame(enriched$result)) {
   DT::datatable(data = enriched$result,
               options = list(scrollX = TRUE, 
@@ -97,9 +135,38 @@ if (utils::hasName(enriched, "result") && is.data.frame(enriched$result)) {
 }
 ```
 
+### Statistical enrichment analysis {#statistical-enrichment-analysis}
+
+As you can see in the above example, only a vector of gene names was used. We can also use the corresponding expression values of the genes. In this case, PANTHER will perform a statistical enrichment analysis.
+
+To do so, the only change will be to supply a data frame to the `genes` parameter. Note that in this case, Mann-Whitney U Test will be performed. The data frame should have two columns: the first column should contain the gene identifiers as a character vector; the second column should contain the corresponding expression values as a numeric vector.
+
+```{r rba_panther_enrich, eval=FALSE}
+# Create a variable to store the data frame
+my_genes_df <- data.frame(
+  genes = c("p53", "BRCA1", "cdk2", "Q99835", "CDC42",
+                  "CDK1","KIF23","PLK1", "RAC2","RACGAP1","RHOA",
+                  "RHOB", "PHF14", "RBM3", "MSL1"),
+  ## generate random expression values
+  expression = runif(15, 0, 10) 
+)
+
+# Submit the analysis request.
+enriched <- rba_panther_enrich(genes = my_genes_df,
+                               organism = 9606,
+                               annot_dataset = "GO:0008150",
+                               cutoff = 0.05)
+
+# Note that we didn't supply the `test_type` parameter.
+# In this case, the function will default to Mann-Whitney U Test
+# (i.e. `test_type = "Mann-Whitney"`).
+# This is the only valid value for the statistical enrichment analysis test,
+# thus ommiting or supplying it will not make a difference.
+```
+
 **Please Note:** Other services supported by rbioapi also provide Over-representation analysis tools. Please see the vignette article [Do with rbioapi: Over-Representation (Enrichment) Analysis in R](rbioapi_do_enrich.html) ([link to the documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html)) for an in-depth review.
 
-## Tree grafter {#tree-grafter}
+# Tree grafter {#tree-grafter}
 
 `rba_panther_tree_grafter()` is an equivalent to the "[Graft sequence into PANTHER library of trees](https://www.pantherdb.org/tools/sequenceSearchForm.jsp)" tool.
 

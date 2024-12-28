@@ -237,7 +237,7 @@ rba_reactome_analysis_pdf(token = reactome$summary$token,
 
 PANTHER (protein analysis through evolutionary relationships) is a project that provides classification systems of genes and proteins. PANTHER also provides an enrichment service. In fact, the enrichment tool available on the [Gene Ontology (GO) website](https://geneontology.org/ "Gene Ontology Resource - Unifying Biology") is powered by [PANTHER](https://pantherdb.org/). Just like the previous sections, we will only review the enrichment functionality here; for an in-depth review of PANTHER refer to the vignette article "[PANTHER & rbioapi](rbioapi_panther.html "2.D: PANTHER & rbioapi")".
 
-To perform the analysis, first, we need to choose the classifications (i.e., gene sets) that we want to compare our results against it. To retrieve a list of available gene sets, we call the following function:
+To perform the analysis, first, we need to choose the annotation datasets (i.e. a collection of gene sets) that we want to compare our results against it. To retrieve a list of available annotation datasets, we call the following function:
 
 ```{r panther_sets, echo=TRUE, message=TRUE}
 panther_sets <- rba_panther_info(what = "datasets")
@@ -258,9 +258,19 @@ if (is.data.frame(panther_sets)) {
 }
 ```
 
-The Gene Ontology (GO) project is one of the pinnacles of scientists' collective effort in bioinformatics. The GO Consortium provides a comprehensive model of biological systems. In short, GO curates a thoroughly designed directed acyclic graph (DAG) of ontologies. You may think of it as a tree of terms, where as it branches out, the terms become more specific). Each protein may be annotated with one or more terms. The terms are organized in three domains: "Molecular Function," "Biological Process," and "Cellular Component". GO slim datasets refer to subsets which are a cut-down version of GO terms. If you are not familiar with GO, I strongly encourage you to see this page and follow the links it provides: [About the GO resource](https://geneontology.org/docs/introduction-to-go-resource/ "About the GO resource").
+Note that you should enter the "id" of the datasets, not its label. For example, entering "biological_process" is incorrect, you should rather use "GO:0008150".
 
-Here, we demonstrate the enrichment analysis using the Biological Process domain. Note that you should enter the "id" of the datasets, not its label. For example, entering "biological_process" is incorrect, you should rather enter the following:.
+Here, we demonstrate the enrichment analysis using the Biological Process annotations. The Gene Ontology (GO) project is one of the pinnacles of scientists' collective effort in bioinformatics. The GO Consortium provides a comprehensive model of biological systems. In short, GO curates a thoroughly designed directed acyclic graph (DAG) of ontologies. You may think of it as a tree of terms, where as it branches out, the terms become more specific). Each protein may be annotated with one or more terms. The terms are organized in three domains: "Molecular Function," "Biological Process," and "Cellular Component". GO slim datasets refer to subsets which are a cut-down version of GO terms. If you are not familiar with GO, I strongly encourage you to see this page and follow the links it provides: [About the GO resource](https://geneontology.org/docs/introduction-to-go-resource/ "About the GO resource").
+
+Depending on the provided input, PANTHER will conduct two types of analysis:
+
+1.  If a character vector is supplied, over-representation analysis will be performed using either Fisher's exact or binomial test.
+
+2.  If a data frame with gene identifiers and their corresponding expression values is supplied, statistical enrichment test is performed using Mann-Whitney U (Wilcoxon Rank-Sum) test.
+
+rbioapi determines the proper analysis based on the class of the `genes` parameter. Please refer to the details section of `rba_panther_enrich()` function manual and [rbioapi & PANTHER vignette article](rbioapi_panther.html#submit-the-analysis-request) for more information.
+
+Here, we only demonstrate using a gene list, without the expression values:
 
 ```{r panther_enrich, echo=TRUE, message=TRUE}
 panther_enrich <- rba_panther_enrich(genes = covid_critical,
@@ -269,13 +279,13 @@ panther_enrich <- rba_panther_enrich(genes = covid_critical,
                                      )
 ```
 
-In addition to the enrichment results, PANTHER returns other useful information about your analysis. The names are self-explanatory:
+In addition to the results table, PANTHER returns other useful information about your analysis. The names are self-explanatory:
 
 ```{r panther_enrich_str, echo=TRUE, message=TRUE}
 str(panther_enrich, 2)
 ```
 
-The enrichment results are returned as a Data Frame with an element named result:
+The analysis results are returned as a Data Frame with an element named result:
 
 ```{r panther_enrich_df, echo=FALSE}
 if (utils::hasName(panther_enrich, "result") && is.data.frame(panther_enrich$result)) {
