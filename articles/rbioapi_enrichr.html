@@ -228,8 +228,8 @@ the next step.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">list_id</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 2</span></span>
-<span><span class="co">#&gt;  $ shortId   : chr "ce2f768309d32ec39e64f4492010205b"</span></span>
-<span><span class="co">#&gt;  $ userListId: int 86916548</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ shortId   : chr "1c232cacbf16e279b0e69be2b7b54e5d"</span></span>
+<span><span class="co">#&gt;  $ userListId: int 86919826</span></span></code></pre></div>
 <p>Finally, we are ready to submit the enrichment analysis request to
 Enrichr. Same as explained above for the wrapper function
 <code><a href="../reference/rba_enrichr.html">rba_enrichr()</a></code>, we can supply the “gene_set_library”
@@ -258,6 +258,47 @@ perform the analysis on species other than humans:</p>
 <p>The available options for the organism argument are human”, (H.
 sapiens &amp; M. musculus), fly” (D. melanogaster), “yeast” (S.
 cerevisiae), “worm” (C. elegans), and “fish” (D. rerio).</p>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="background-gene-list">Providing background gene list<a class="anchor" aria-label="anchor" href="#background-gene-list"></a>
+</h2>
+<p>For human and mouse, Enrichr also support the use of background gene
+list. The background gene list will be used to compute the results
+statistics.</p>
+<p>If using the one-step wrapper <code><a href="../reference/rba_enrichr.html">rba_enrichr()</a></code> (<a href="#approach-1-using-the-wrapper-function">Approach 1</a>),
+Everything is handled under the hood; simply supply your background gene
+with the <code>background_genes</code> parameter.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Assume we have the background genes in the variable my_background_genes</span></span>
+<span><span class="va">results_msig</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_enrichr.html">rba_enrichr</a></span><span class="op">(</span>gene_list <span class="op">=</span> <span class="va">genes</span>,</span>
+<span>                            background_genes <span class="op">=</span> <span class="va">my_background_genes</span>,</span>
+<span>                            regex_library_name <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p>If you choose to follow the step-by-step approach, please note that
+Enrichr relies on an API back-end called <a href="https://github.com/MaayanLab/speedrichr" class="external-link">speedrichr</a> to handle
+analysis with a background gene list. Therefore, when performing an
+analysis with background gene list, you must explicitly upload the
+target gene list to speedrichr. . Later steps will automatically
+interact with speedrichr as long as the relevant parameters for the
+background genes are specified.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create a vector with our genes' NCBI IDs</span></span>
+<span><span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"p53"</span>, <span class="st">"BRCA1"</span>, <span class="st">"cdk2"</span>, <span class="st">"Q99835"</span>, <span class="st">"CDC42"</span>,<span class="st">"CDK1"</span>,<span class="st">"KIF23"</span>,<span class="st">"PLK1"</span>,</span>
+<span>           <span class="st">"RAC2"</span>,<span class="st">"RACGAP1"</span>,<span class="st">"RHOA"</span>,<span class="st">"RHOB"</span>, <span class="st">"PHF14"</span>, <span class="st">"RBM3"</span>, <span class="st">"MSL1"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Step 1: Upload the target gene list to speedrichr</span></span>
+<span><span class="co"># Note: Ensure `speedrichr = TRUE` is specified. Otherwise, it will not be </span></span>
+<span><span class="co">#       possible to use the background gene list later.</span></span>
+<span><span class="va">list_id_spdr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_enrichr_add_list.html">rba_enrichr_add_list</a></span><span class="op">(</span>gene_list <span class="op">=</span> <span class="va">genes</span>, speedrichr <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Step 2: Upload the background gene list</span></span>
+<span><span class="co"># Assume we have the background genes in the variable my_background_genes</span></span>
+<span><span class="va">background_id</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_enrichr_add_background.html">rba_enrichr_add_background</a></span><span class="op">(</span>background_genes <span class="op">=</span> <span class="va">my_background_genes</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Step 3: Submit the enrichment analysis and retrieve the results</span></span>
+<span><span class="va">go_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_enrichr_enrich.html">rba_enrichr_enrich</a></span><span class="op">(</span>user_list_id <span class="op">=</span> <span class="va">list_id_spdr</span><span class="op">$</span><span class="va">userListId</span>,</span>
+<span>                                 background_id <span class="op">=</span> <span class="va">background_id</span><span class="op">$</span><span class="va">backgroundid</span>,</span>
+<span>                                 gene_set_library <span class="op">=</span> <span class="st">"GO"</span><span class="op">)</span></span></code></pre></div>
 <hr>
 </div>
 <div class="section level2">
