@@ -2,13 +2,13 @@
 % Please edit documentation in R/panther.R
 \name{rba_panther_enrich}
 \alias{rba_panther_enrich}
-\title{PANTHER Over-Representation Enrichment Analysis}
+\title{PANTHER Over-Representation or Enrichment Analysis}
 \usage{
 rba_panther_enrich(
   genes,
   organism,
   annot_dataset,
-  test_type = "FISHER",
+  test_type = NULL,
   correction = "FDR",
   cutoff = NULL,
   ref_genes = NULL,
@@ -17,24 +17,41 @@ rba_panther_enrich(
 )
 }
 \arguments{
-\item{genes}{Character vector of genes identifiers with maximum length of
-10000. Can be any of: Ensemble gene ID, Ensemble protein ID, Ensemble
-transcript ID, Entrez gene ID, gene symbol, NCBI GI, HGNC ID,
+\item{genes}{Either a character vector or a data frame. Depending on
+this parameter, the analysis type is determined.
+\describe{
+\item{Character vector:}{If a character vector is supplied,
+over-representation analysis will be performed using either Fisher's exact
+test (default), or binomial.}
+\item{Data frame:}{If a data.frame is supplied, statistical enrichment
+test is performed using Mann-Whitney U (Wilcoxon Rank-Sum) test. The
+data frame should have two columns: the first column is a character vector
+with gene identifiers and the second column is a numerical vector with
+expression values.}
+}
+In both cases, maximum of 10000 genes can be supplied.
+The gene identifiers can be any of: Ensemble gene ID, Ensembl protein ID,
+Ensembl transcript ID, Entrez gene ID, gene symbol, NCBI GI, HGNC ID,
 International protein index ID, NCBI UniGene ID, UniProt accession
-and/or UniProt ID.}
+or UniProt ID.}
 
 \item{organism}{(numeric) NCBI taxon ID. run \code{\link{rba_panther_info}}
 with argument 'what = "organisms"' to get a list of PANTHER's
 supported organisms.}
 
 \item{annot_dataset}{A PANTHER dataset ID to test your input against it.
-run \code{\link{rba_panther_info}}with argument 'what = "datasets"' to
+run \code{\link{rba_panther_info}} with argument 'what = "datasets"' to
 get a list of PANTHER's supported datasets. Note that you should enter
 the "id" of the dataset, not its label (e.g. entering "biological_process"
 is incorrect, you should rather enter "GO:0008150").}
 
-\item{test_type}{statistical test type to calculate the p values. either
-"FISHER" (default) or "BINOMIAL".}
+\item{test_type}{statistical test type to calculate the p values.
+\itemize{
+\item If performing over-representation analysis (i.e. `genes` parameter
+is a character vector), valid values are "FISHER" (default) or "BINOMIAL".
+\item If performing statistical enrichment analysis (i.e. `genes`
+parameter is a data.frame), the only valid value is "Mann-Whitney"
+}}
 
 \item{correction}{p value correction method. either "FDR" (default),
 "BONFERRONI" or "NONE".}
@@ -43,14 +60,16 @@ is incorrect, you should rather enter "GO:0008150").}
 if correction is "FDR", the threshold will be applied to fdr column's
 values; if otherwise, the threshold will be applied to p value column.}
 
-\item{ref_genes}{(Optional) A set of genes that will be used as the test's
-background (reference/universe) gene set. If no value supplied, all of
-the genes in specified organism will be used. maximum length and supported
-IDs are the same as 'genes' argument.}
+\item{ref_genes}{(Optional, only valid if genes is a character vector)
+A character vector of genes that will be used as the test's background
+(reference/universe) gene set. If no value supplied, all of the genes in
+specified organism will be used. The maximum length and supported IDs are
+the same as 'genes' argument.}
 
-\item{ref_organism}{(Optional) if 'ref_genes' is used, you can specify
-the organisms which correspond to your supplied IDs in 'ref_genes'
-argument. see 'organism' argument for supported values.}
+\item{ref_organism}{(Optional, only valid if genes is a character vector)
+if 'ref_genes' is used, you can specify the organisms which correspond to
+your supplied IDs in 'ref_genes' argument. see 'organism' argument for
+supported values.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
@@ -62,22 +81,65 @@ A list with the parameters and results. If the analysis was
   "search$error" element in the returned list.
 }
 \description{
-Using this function you can use PANTHER services to perform
-  over-representation enrichment analysis. This statistical test will
-  compare your input genes to a set of defined gene lists to determine
-  if they are over/under-represented.
+Use PANTHER services to perform over-representation enrichment analysis.
+  You can either provide a character vector of gene IDs for
+  over-representation analysis, or a data frame of gene IDs and expression
+  analysis.\cr Please refer to the details section for more information on
+  the statistical analysis.
+}
+\details{
+\strong{Over-representation Test}: It assesses whether specific gene sets are
+  represented in your input gene list differently from what is expected by
+  chance. It uses Fisher's exact test or Binomial test to calculate p-values.
+  Fisher's exact test determines the probability of observing the gene
+  counts in a category based on a hypergeometric distribution; the binomial
+  test compares the observed proportion of genes in a category to the
+  expected proportion based on the reference list. A significant p-value
+  indicates over-representation or under-representation of a gene set.
+
+\strong{Statistical Enrichment Test}: The statistical enrichment test uses the
+  Mann-Whitney U (Wilcoxon Rank-Sum) test to assess if the expression values
+  associated with genes in a specific category differ significantly from the
+  overall distribution in the input list. This non-parametric test first
+  ranks the numerical values and computes whether the expression values
+  were randomly drawn from the overall distribution of values. A small
+  p-value indicates that the numerical values for the genes in the category
+  are significantly different from the background distribution, thus
+  non-random patterns.
+
+Please note that starting from rbioapi version 0.8.2, you can supply a
+  gene expression data frame to perform statistical enrichment analysis.
+  In earlier versions, only a character vector of gene IDs was possible,
+  thus only over-representation analysis.
 }
 \section{Corresponding API Resources}{
 
  "POST https://www.pantherdb.org/services/oai/pantherdb/enrich/overrep"
+ \cr "POST https://www.pantherdb.org/services/oai/pantherdb/enrich/statenrich"
 }
 
 \examples{
 \donttest{
-rba_panther_enrich(genes = c("p53", "BRCA1", "cdk2", "Q99835", "CDC42",
-        "CDK1", "KIF23", "PLK1", "RAC2", "RACGAP1"),
-    organism = 9606, annot_dataset = "GO:0008150",
-    cutoff = 0.01)
+rba_panther_enrich(
+  genes = c("p53", "BRCA1", "cdk2", "Q99835", "CDC42",
+    "CDK1", "KIF23", "PLK1", "RAC2", "RACGAP1"),
+  organism = 9606, annot_dataset = "GO:0008150",
+  cutoff = 0.01
+  )
+}
+
+\donttest{
+expression_df <- data.frame(
+  genes = c("p53", "BRCA1", "cdk2", "Q99835", "CDC42",
+    "CDK1", "KIF23", "PLK1", "RAC2", "RACGAP1"),
+  expr = runif(10, 0, 100)
+  )
+
+rba_panther_enrich(
+  genes = expression_df,
+  organism = 9606,
+  annot_dataset = "GO:0008150"
+  )
 }
 
 }
