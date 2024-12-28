@@ -103,7 +103,7 @@ We have thoroughly covered performing enrichment analysis with Enrichr in the vi
 First, let us retrieve a list of available libraries in Enrichr using the `rba_enrichr_libs()` function. You can find the available Enrichr libraries in the `libraryName` column in the returned data frame.
 
 ```{r enrichr_libs, echo=TRUE, message=TRUE}
-enrichr_libs <- rba_enrichr_libs()
+enrichr_libs <- rba_enrichr_libs(organism = "human")
 ```
 
 ```{r enrichr_libs_df, echo=FALSE}
@@ -124,6 +124,7 @@ While the only required argument of `rba_enrichr()` function is `gene_list`, her
 
 ```{r enrichr, echo=TRUE, message=TRUE}
 enrichr_enrich <- rba_enrichr(gene_list = covid_critical,
+                              organism = "human",
                               gene_set_library = "KEGG_2021_Human")
 ```
 
@@ -159,6 +160,8 @@ As you can see below, when than one library is selected, the results will be a l
 ```{r enrichr_multi_libs_str, echo=TRUE, message=TRUE}
 str(enrichr_enrich_kegg, max.level = 1)
 ```
+
+It is also possible to provide a background gene list for Enrichr analysis. This feature is only supported when the organism is set to "human".
 
 ------------------------------------------------------------------------
 

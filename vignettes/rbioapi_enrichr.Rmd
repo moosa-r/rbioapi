@@ -217,6 +217,45 @@ The available options for the organism argument are human", (H. sapiens & M. mus
 
 ------------------------------------------------------------------------
 
+# Providing background gene list {#background-gene-list}
+
+For human and mouse, Enrichr also support the use of background gene list. The background gene list will be used to compute the results statistics.
+
+If using the one-step wrapper `rba_enrichr()` ([Approach 1](#approach-1-using-the-wrapper-function)), Everything is handled under the hood; simply supply your background gene with the `background_genes` parameter.
+
+```{r background_gene_list_approach1, eval=FALSE}
+# Assume we have the background genes in the variable my_background_genes
+results_msig <- rba_enrichr(gene_list = genes,
+                            background_genes = my_background_genes,
+                            regex_library_name = TRUE)
+```
+
+
+If you choose to follow the step-by-step approach, please note that Enrichr relies on an API back-end called [speedrichr](https://github.com/MaayanLab/speedrichr) to handle analysis with a background gene list. Therefore, when performing an analysis with background gene list, you must explicitly upload the target gene list to speedrichr. . Later steps will automatically interact with speedrichr as long as the relevant parameters for the background genes are specified.
+
+```{r background_gene_list_approach2, eval=FALSE}
+# Create a vector with our genes' NCBI IDs
+genes <- c("p53", "BRCA1", "cdk2", "Q99835", "CDC42","CDK1","KIF23","PLK1",
+           "RAC2","RACGAP1","RHOA","RHOB", "PHF14", "RBM3", "MSL1")
+
+# Step 1: Upload the target gene list to speedrichr
+# Note: Ensure `speedrichr = TRUE` is specified. Otherwise, it will not be 
+#       possible to use the background gene list later.
+list_id_spdr <- rba_enrichr_add_list(gene_list = genes, speedrichr = TRUE)
+
+# Step 2: Upload the background gene list
+# Assume we have the background genes in the variable my_background_genes
+background_id <- rba_enrichr_add_background(background_genes = my_background_genes)
+
+# Step 3: Submit the enrichment analysis and retrieve the results
+go_results <- rba_enrichr_enrich(user_list_id = list_id_spdr$userListId,
+                                 background_id = background_id$backgroundid,
+                                 gene_set_library = "GO")
+
+```
+
+------------------------------------------------------------------------
+
 # See also in Functions' manuals {#see-also-in-functions-manuals}
 
 Some rbioapi Enrichr functions were not covered in this vignette, be sure to check their manuals:
