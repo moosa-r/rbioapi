@@ -177,37 +177,29 @@ reference:
   desc: >
     Functions that connect you to [UniProt](https://www.uniprot.org/) (Universal Protein Resource)
     API resources.
-- subtitle: Coordinates
-  contents:
-    - starts_with("rba_uniprot_coordinates")
-- subtitle: Proteins
-  contents:
-    - starts_with("rba_uniprot_proteins")
-- subtitle: Features
-  contents:
-    - starts_with("rba_uniprot_features")
-- subtitle: Variation
-  contents:
-    - starts_with("rba_uniprot_variation")
-- subtitle: Proteomics
-  contents:
-    - starts_with("rba_uniprot_proteomics")
-- subtitle: Post-Translational Modification (PTM)
-  contents:
-    - starts_with("rba_uniprot_ptm")
-- subtitle: Antigens
+- subtitle: "Proteins - Proteins"
   contents:
     - starts_with("rba_uniprot_antigens")
-- subtitle: Mutagenesis
-  contents:
+    - starts_with("rba_uniprot_epitope")
+    - starts_with("rba_uniprot_features")
     - starts_with("rba_uniprot_mutagenesis")
-- subtitle: Proteomes
+    - starts_with("rba_uniprot_proteins")
+    - starts_with("rba_uniprot_rna_edit")
+    - starts_with("rba_uniprot_variation")
+- subtitle: "Proteomics"
+  contents:
+    - starts_with("rba_uniprot_proteomics")
+- subtitle: "Proteomes"
   contents:
     - starts_with("rba_uniprot_proteomes")
     - starts_with("rba_uniprot_genecentric")
-- subtitle: Taxonomy
+- subtitle: "Taxonomy"
   contents:
     - starts_with("rba_uniprot_taxonomy")
-- subtitle: UniParc
+- subtitle: "Coordinates"
   contents:
-    - starts_with("rba_uniprot_uniparc")
+    - starts_with("rba_uniprot_coordinates")
+- subtitle: "Uniparc"
+  contents:
+    - starts_with("rba_uniprot_coordinates")
+
