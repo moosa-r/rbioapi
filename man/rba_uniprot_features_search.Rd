@@ -2,11 +2,7 @@
 % Please edit documentation in R/uniprot_proteins.R
 \name{rba_uniprot_features_search}
 \alias{rba_uniprot_features_search}
-\title{UniProt maintains \href{https://www.uniprot.org/help/sequence_annotation}{
-  sequence annotations (features)} that describe regions
-  in the protein sequence. Using this function, you can search and
-  retrieve UniProt proteins' sequence annotations (features). you may also
-  refine your search query with variety of modifiers.}
+\title{Search UniProt protein sequence features}
 \usage{
 rba_uniprot_features_search(
   accession = NULL,
@@ -71,6 +67,13 @@ List where each element corresponds to one UniProt entity returned
   information that UniProt has about that entity.
 }
 \description{
+UniProt maintains \href{https://www.uniprot.org/help/sequence_annotation}{
+  sequence annotations (features)} that describe regions
+  in the protein sequence. Using this function, you can search and
+  retrieve UniProt proteins' sequence annotations (features). you may also
+  refine your search query with variety of modifiers.
+}
+\details{
 Note that this is a search function. Thus, you are not required to fill
   every argument; You may use whatever combinations of arguments you see
   fit for your query.

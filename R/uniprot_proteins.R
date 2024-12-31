@@ -459,6 +459,8 @@ rba_uniprot_proteins_crossref <- function(db_id,
 
 #### Features Endpoints ####
 
+#' Search UniProt protein sequence features
+#'
 #' UniProt maintains \href{https://www.uniprot.org/help/sequence_annotation}{
 #'   sequence annotations (features)} that describe regions
 #'   in the protein sequence. Using this function, you can search and
