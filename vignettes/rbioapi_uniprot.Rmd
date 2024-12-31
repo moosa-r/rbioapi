@@ -127,15 +127,25 @@ The search variants are not limited to the above. Here is a list of the function
 
 5.  `rba_uniprot_antigens()` & `rba_uniprot_antigens_search()`
 
-6.  `rba_uniprot_proteomes()` & `rba_uniprot_proteomes_search()`
+6.  `rba_uniprot_epitope()` & `rba_uniprot_epitope_search()`
 
-7.  `rba_uniprot_ptm()` & `rba_uniprot_ptm_search()`
+7.  `rba_uniprot_rna_edit()` & `rba_uniprot_rna_edit_search()`
 
-8.  `rba_uniprot_mutagenesis()` & `rba_uniprot_mutagenesis_search()`
+8.  `rba_uniprot_proteomes()` & `rba_uniprot_proteomes_search()`
 
-9.  `rba_uniprot_genecentric()` & `rba_uniprot_genecentric_search()`
+9.  `rba_uniprot_ptm()` & `rba_uniprot_ptm_search()`
 
-10. `rba_uniprot_uniparc()` & `rba_uniprot_uniparc_search()`
+10.  `rba_uniprot_mutagenesis()` & `rba_uniprot_mutagenesis_search()`
+
+11.  `rba_uniprot_proteomics_hpp()` &  `rba_uniprot_proteomics_hpp_search()`
+ 
+12.  `rba_uniprot_proteomics_non_ptm()` & `rba_uniprot_proteomics_non_ptm_search()`
+ 
+13.  `rba_uniprot_proteomics_ptm()` & `rba_uniprot_proteomics_ptm_search()`
+
+14.  `rba_uniprot_genecentric()` & `rba_uniprot_genecentric_search()`
+
+15.  `rba_uniprot_uniparc()` & `rba_uniprot_uniparc_search()`
 
 ------------------------------------------------------------------------
 
@@ -165,29 +175,45 @@ The UniProt API endpoints are organized into 5 group. Here are those categories 
 
 `rba_uniprot_variation_search()`
 
-### Proteomics {#proteins-proteomics}
-
--   `rba_uniprot_proteomics()`
-
--   `rba_uniprot_proteomics_search()`
-
-## Post-Translational Modification (PTM) {#post-translational-modification-ptm}
-
--   `rba_uniprot_ptm()`
-
--   `rba_uniprot_ptm_search()`
-
-## Antigens {#antigens}
+### Antigens {#antigens}
 
 -   `rba_uniprot_antigens()`
 
 -   `rba_uniprot_antigens_search()`
 
-## Mutagenesis {#mutagenesis}
+### Epitopes {#epitopes}
+
+-   `rba_uniprot_epitope()`
+
+-   `rba_uniprot_epitope_search()`
+
+### Mutagenesis {#mutagenesis}
 
 -   `rba_uniprot_mutagenesis()`
 
 -   `rba_uniprot_mutagenesis_search()`
+
+### RNA-Editing {#rna-editing}
+
+-   `rba_uniprot_rna_edit()`
+
+-   `rba_uniprot_rna_edit_search()`
+
+## Proteomics {#proteomics}
+
+-   `rba_uniprot_proteomics_species()`
+
+-   `rba_uniprot_proteomics_hpp()`
+ 
+-   `rba_uniprot_proteomics_hpp_search()`
+ 
+-   `rba_uniprot_proteomics_non_ptm()`
+ 
+-   `rba_uniprot_proteomics_non_ptm_search()`
+ 
+-   `rba_uniprot_proteomics_ptm()`
+ 
+-   `rba_uniprot_proteomics_ptm_search()`
 
 ## Proteomes {#proteomes}
 
@@ -222,6 +248,8 @@ The UniProt API endpoints are organized into 5 group. Here are those categories 
 -   `rba_uniprot_coordinates_location()`
 
 -   `rba_uniprot_coordinates_sequence()`
+
+-   `rba_uniprot_genome_coordinates_sequence()`
 
 ## UniParc {#uniparc}
 
