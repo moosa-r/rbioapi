@@ -185,20 +185,20 @@ rba_uniprot_coordinates_search <- function(accession = NULL,
 #'
 #' @examples
 #' \donttest{
-#' rba_uniprot_coordinates_sequence(accession = "P25942", p_position = 1)
+#' rba_uniprot_coordinates_location_protein(accession = "P25942", p_position = 1)
 #' }
 #' \donttest{
-#' rba_uniprot_coordinates_sequence(accession = "P25942",
+#' rba_uniprot_coordinates_location_protein(accession = "P25942",
 #'     p_start = 1, p_end = 277)
 #' }
 #'
 #' @family "UniProt - Coordinates"
 #' @export
-rba_uniprot_coordinates_sequence <- function(accession,
-                                             p_position = NULL,
-                                             p_start = NULL,
-                                             p_end = NULL,
-                                             ...) {
+rba_uniprot_coordinates_location_protein <- function(accession,
+                                                     p_position = NULL,
+                                                     p_start = NULL,
+                                                     p_end = NULL,
+                                                     ...) {
   ## Load Global Options
   .rba_ext_args(...)
   ## Check User-input Arguments
@@ -489,13 +489,13 @@ rba_uniprot_coordinates_location <- function(taxid,
 #'
 #' @examples
 #' \donttest{
-#'  rba_uniprot_genome_coordinates_sequence(
+#'  rba_uniprot_coordinates_location_genome(
 #'  taxid = 9606, chromosome = 11, g_position = 36573305)
 #' }
 #'
 #' @family "UniProt - Coordinates"
 #' @export
-rba_uniprot_genome_coordinates_sequence <- function(taxid,
+rba_uniprot_coordinates_location_genome <- function(taxid,
                                                     chromosome,
                                                     g_position = NULL,
                                                     g_start = NULL,

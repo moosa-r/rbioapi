@@ -76,8 +76,8 @@ rba_uniprot_coordinates_location(taxid = 9606,
 \seealso{
 Other "UniProt - Coordinates": 
 \code{\link{rba_uniprot_coordinates}()},
-\code{\link{rba_uniprot_coordinates_search}()},
-\code{\link{rba_uniprot_coordinates_sequence}()},
-\code{\link{rba_uniprot_genome_coordinates_sequence}()}
+\code{\link{rba_uniprot_coordinates_location_genome}()},
+\code{\link{rba_uniprot_coordinates_location_protein}()},
+\code{\link{rba_uniprot_coordinates_search}()}
 }
 \concept{"UniProt - Coordinates"}

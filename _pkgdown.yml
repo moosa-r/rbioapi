@@ -201,5 +201,5 @@ reference:
     - starts_with("rba_uniprot_coordinates")
 - subtitle: "Uniparc"
   contents:
-    - starts_with("rba_uniprot_coordinates")
+    - starts_with("rba_uniprot")
 
