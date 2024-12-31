@@ -208,7 +208,6 @@ rba_uniprot_taxonomy <- function(ids,
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://ebi.ac.uk/proteins/api/lineage/\{id\}"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/lineage/\{id\}"
 #'
 #' @param id (numeric) a
 #' \href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic

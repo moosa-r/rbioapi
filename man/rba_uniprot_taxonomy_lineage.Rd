@@ -26,7 +26,6 @@ Use this function to retrieve the taxonomic lineage of your supplied
 \section{Corresponding API Resources}{
 
  "GET https://ebi.ac.uk/proteins/api/lineage/\{id\}"
- \cr "GET https://ebi.ac.uk/proteins/api/lineage/\{id\}"
 }
 
 \examples{

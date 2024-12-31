@@ -850,6 +850,8 @@ rba_uniprot_features_search <- function(accession = NULL,
 #'   are: "MOLECULE_PROCESSING", "TOPOLOGY", "SEQUENCE_INFORMATION",
 #'   "STRUCTURAL", "DOMAINS_AND_SITES", "PTM", "VARIANTS" and/or "MUTAGENESIS".
 #'   You can supply up to 8 categories.
+#' @param location (character) Filter the features by the amino acid position in the sequence(s).
+#'   Provide the range as a character string with the format "begin-end", e.g. "35-70"
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -884,6 +886,7 @@ rba_uniprot_features_search <- function(accession = NULL,
 rba_uniprot_features <- function(accession,
                                  types = NULL,
                                  categories = NULL,
+                                 location = NULL,
                                  ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -942,7 +945,11 @@ rba_uniprot_features <- function(accession,
                                      "PTM",
                                      "VARIANTS",
                                      "MUTAGENESIS."),
-                             max_len = 8)
+                             max_len = 8),
+                        list(arg = "location",
+                             class = "character",
+                             regex = "^\\d+\\-\\d+$",
+                             len = 1)
   )
   )
 
@@ -956,7 +963,11 @@ rba_uniprot_features <- function(accession,
                            list("types",
                                 !is.null(types),
                                 paste0(types,
-                                       collapse = ",")))
+                                       collapse = ",")),
+                           list("location",
+                                !is.null(location),
+                                location))
+
   ## Build Function-Specific Call
   input_call <- .rba_httr(httr = "get",
                           url = .rba_stg("uniprot", "url"),
@@ -1106,7 +1117,9 @@ rba_uniprot_variation_search <- function(accession = NULL,
                              class = "character",
                              max_len = 20),
                         list(arg = "location",
-                             class = "character"),
+                             class = "character",
+                             regex = "^\\d+\\-\\d+$",
+                             len = 1),
                         list(arg = "disease",
                              class = "character"),
                         list(arg = "omim",
@@ -1373,448 +1386,6 @@ rba_uniprot_variation <- function(id,
   return(final_output)
 }
 
-#### Proteomics Endpoints ####
-
-#' Search Proteomics Peptides in UniProt
-#'
-#' UniProt maps proteomics peptides from different sources to the proteins'
-#'   sequences. Using this function, you can search for  proteomics
-#'   peptides that has been map to UniProt proteins. You may also refine your
-#'   search with modifiers such as data_source, peptide etc. See
-#'   "Arguments section" for more information.
-#'
-#'   Note that this is a search function. Thus, you are not required to fill
-#'   every argument; You may use whatever combinations of arguments you see
-#'   fit for your query.
-#'   \cr see also: \href{https://www.uniprot.org/help/proteomics}{Mass
-#'   spectrometry-based proteomics data in UniProtKB}
-#'
-#' @section Corresponding API Resources:
-#'  "GET https://www.ebi.ac.uk/proteins/api/proteomics"
-#'
-#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
-#'   UniProtKB primary or secondary accession}(s). You can supply up to 100
-#'   accession numbers.
-#' @param data_source  Proteomics data source. You can choose up to two of:
-#'   \itemize{
-#'   \item \href{https://www.uniprot.org/database/DB-0186}{"MaxQB"}
-#'   \item \href{https://www.uniprot.org/database/DB-0071}{"PeptideAtlas"}
-#'   \item \href{https://www.uniprot.org/database/DB-0205}{"EPD"}
-#'   \item \href{https://www.uniprot.org/database/DB-0229}{"ProteomicsDB"}
-#'   }
-#' @param taxid NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
-#'   You can supply up to 20 taxon IDs.
-#' @param upid \href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
-#'   identifier (UPID)}. You can supply up to 100 UPIDs.
-#' @param peptide Peptide sequence(s). You can supply up to 20 sequences.
-#' @param unique Logical: Should the results be filtered based on the
-#'   Peptide's uniqueness (the fact that a peptide maps to only 1 protein). If
-#'   TRUE, Only unique peptides will be returned, if FALSE only un-unique
-#'   peptides will be returned; If NULL (default) the results will not be
-#'   filtered based on this.
-#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
-#'   arguments manual for more information on available options.
-#'
-#' @return A list Where each element correspond to a UniProt protein and
-#'   proteomics peptides are organized under the "features" sub-list.
-#'
-#' @references \itemize{
-#'   \item The UniProt Consortium, UniProt: the universal protein
-#'   knowledgebase in 2021, Nucleic Acids Research, Volume 49, Issue D1,
-#'   8 January 2021, Pages D480–D489, https://doi.org/10.1093/nar/gkaa1100
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
-#'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
-#'   Documentation}
-#'   \item \href{https://www.uniprot.org/help/publications}{Citations note
-#'   on UniProt website}
-#'   }
-#'
-#' @examples
-#' \donttest{
-#' rba_uniprot_proteomics_search(peptide = "MEDYTKIEK")
-#' }
-#' \donttest{
-#' rba_uniprot_proteomics_search(peptide = "MEDYTKIEK")
-#' }
-#' \dontrun{
-#' ### this will generate a very large response!
-#'   rba_uniprot_proteomics_search(taxid = 9606,
-#'   data_source = "PeptideAtlas",
-#'   progress = TRUE, timeout = 999999, unique = TRUE)
-#' }
-#'
-#' @family "UniProt - Proteomics"
-#' @export
-rba_uniprot_proteomics_search <- function(accession = NULL,
-                                          data_source = NULL,
-                                          taxid = NULL,
-                                          upid = NULL,
-                                          peptide = NULL,
-                                          unique = NULL,
-                                          ...) {
-  ## Load Global Options
-  .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "accession",
-                             class = "character",
-                             max_len = 100),
-                        list(arg = "taxid",
-                             class = "numeric",
-                             max_len = 20),
-                        list(arg = "upid",
-                             class = "character",
-                             max_len = 100),
-                        list(arg = "data_source",
-                             class = "character",
-                             max_len = 2,
-                             vals = c("MaxQB",
-                                      "PeptideAtlas",
-                                      "EPD",
-                                      "ProteomicsDB")),
-                        list(arg = "peptide",
-                             class = "character",
-                             max_len = 20),
-                        list(arg = "unique",
-                             class = "logical"))
-  )
-
-  .msg("Searching UniProt and retrieving proteomics peptides features of proteins that match your supplied inputs.")
-  ## Build GET API Request's query
-  call_query <- .rba_query(init = list("size" = "-1"),
-                           list("accession",
-                                !is.null(accession),
-                                paste0(accession,
-                                       collapse = ",")),
-                           list("taxid",
-                                !is.null(taxid),
-                                paste0(taxid,
-                                       collapse = ",")),
-                           list("upid",
-                                !is.null(upid),
-                                paste0(upid,
-                                       collapse = ",")),
-                           list("data_source",
-                                !is.null(data_source),
-                                paste0(data_source,
-                                       collapse = ",")),
-                           list("peptide",
-                                !is.null(peptide),
-                                paste0(peptide,
-                                       collapse = ",")),
-                           list("unique",
-                                !is.null(unique),
-                                ifelse(unique, "true", "false")))
-  ## Build Function-Specific Call
-  parser_input <- list("json->list",
-                       .rba_uniprot_search_namer)
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = paste0(.rba_stg("uniprot", "pth"),
-                                        "proteomics"),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = parser_input,
-                          save_to = .rba_file("uniprot_proteomics_search.json"))
-
-  ## Call API
-  final_output <- .rba_skeleton(input_call)
-  return(final_output)
-}
-
-#' Get Proteomics Peptides Mapped to UniProt Protein
-#'
-#' UniProt maps proteomics peptides from different sources to the proteins'
-#'   sequences. Using this function, you can retrieve all the proteomics
-#'   peptides features that has been map to a given UniProt protein's sequence.
-#'
-#' @section Corresponding API Resources:
-#'  "GET https://www.ebi.ac.uk/proteins/api/proteomics/\{accession\}"
-#'
-#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
-#'   UniProtKB primary or secondary accession}.
-#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
-#'   arguments manual for more information on available options.
-#'
-#' @return A list containing the proteomics peptides features of your supplied
-#'   UniProt protein's sequence.
-#'
-#' @references \itemize{
-#'   \item The UniProt Consortium, UniProt: the universal protein
-#'   knowledgebase in 2021, Nucleic Acids Research, Volume 49, Issue D1,
-#'   8 January 2021, Pages D480–D489, https://doi.org/10.1093/nar/gkaa1100
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
-#'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
-#'   Documentation}
-#'   \item \href{https://www.uniprot.org/help/publications}{Citations note
-#'   on UniProt website}
-#'   }
-#'
-#' @examples
-#' \donttest{
-#' rba_uniprot_proteomics(accession = "P25942")
-#' }
-#'
-#' @family "UniProt - Proteomics"
-#' @export
-rba_uniprot_proteomics <- function(accession,
-                                   ...) {
-  ## Load Global Options
-  .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "accession",
-                             class = "character",
-                             len = 1))
-  )
-
-  .msg("Retrieving proteomics peptides features mapped to the sequence of protein %s.",
-       accession)
-  ## Build Function-Specific Call
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = paste0(.rba_stg("uniprot", "pth"),
-                                        "proteomics/",
-                                        accession),
-                          accept = "application/json",
-                          parser = "json->list",
-                          save_to = .rba_file("uniprot_proteomics.json"))
-
-  ## Call API
-  final_output <- .rba_skeleton(input_call)
-  return(final_output)
-}
-
-#### Proteomics-PTM Endpoints ####
-
-#' Search Post-Translational Modification in UniProt
-#'
-#' UniProt maps proteomics peptides from different sources to the proteins'
-#'   sequences. Using this function, you can search for  proteomics
-#'   peptides that has been map to UniProt proteins. You may also refine your
-#'   search with modifiers such as data_source, peptide etc. See
-#'   "Arguments section" for more information.
-#'
-#'   Note that this is a search function. Thus, you are not required to fill
-#'   every argument; You may use whatever combinations of arguments you see
-#'   fit for your query.
-#'   \cr see also:
-#'   \href{https://www.uniprot.org/help/ptm_processing_section}{PTM /
-#'   Processing section in UniProtKB}
-#'
-#' @section Corresponding API Resources:
-#'  "GET https://www.ebi.ac.uk/proteins/api/proteomics-ptm"
-#'
-#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
-#'   UniProtKB primary or secondary accession}(s). You can supply up to 100
-#'   accession numbers.
-#' @param ptm Post-translational modification name
-#' @param data_source Proteomics data source. You can choose up to two of:
-#'   \itemize{
-#'   \item \href{https://www.uniprot.org/database/DB-0186}{"MaxQB"}
-#'   \item \href{https://www.uniprot.org/database/DB-0071}{"PeptideAtlas"}
-#'   \item \href{https://www.uniprot.org/database/DB-0205}{"EPD"}
-#'   \item \href{https://www.uniprot.org/database/DB-0229}{"ProteomicsDB"}
-#'   }
-#' @param taxid NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
-#'   You can supply up to 20 taxon IDs.
-#' @param upid \href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
-#'   identifier (UPID)}. You can supply up to 100 UPIDs.
-#' @param peptide Peptide sequence(s). You can supply up to 20 sequences.
-#' @param unique Logical: Should the results be filtered based on the
-#'   Peptide's uniqueness (the fact that a peptide maps to only 1 protein). If
-#'   TRUE, Only unique peptides will be returned, if FALSE only un-unique
-#'   peptides will be returned; If NULL (default) the results will not be
-#'   filtered based on this.
-#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
-#'   arguments manual for more information on available options.
-#'
-#' @return A list Where each element correspond to a UniProt protein and
-#'   post-translational modification are organized under the "features"
-#'   sub-list.
-#'
-#' @references \itemize{
-#'   \item The UniProt Consortium, UniProt: the universal protein
-#'   knowledgebase in 2021, Nucleic Acids Research, Volume 49, Issue D1,
-#'   8 January 2021, Pages D480–D489, https://doi.org/10.1093/nar/gkaa1100
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
-#'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
-#'   Documentation}
-#'   \item \href{https://www.uniprot.org/help/publications}{Citations note
-#'   on UniProt website}
-#'   }
-#'
-#' @examples
-#' \donttest{
-#' rba_uniprot_ptm_search(peptide = "NDQVYQPLRDRDDAQYSHLGGNWAR")
-#' }
-#'
-#' @family "UniProt - PTM"
-#' @export
-rba_uniprot_ptm_search <- function(accession = NULL,
-                                   ptm = NULL,
-                                   data_source = NULL,
-                                   taxid = NULL,
-                                   upid = NULL,
-                                   peptide = NULL,
-                                   unique = NULL,
-                                   ...) {
-  ## Load Global Options
-  .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "accession",
-                             class = "character",
-                             max_len = 100),
-                        list(arg = "ptm",
-                             class = "character",
-                             len = 1),
-                        list(arg = "taxid",
-                             class = "numeric",
-                             max_len = 20),
-                        list(arg = "upid",
-                             class = "character",
-                             max_len = 100),
-                        list(arg = "data_source",
-                             class = "character",
-                             max_len = 2,
-                             val = c("MaxQB",
-                                      "PeptideAtlas",
-                                      "EPD",
-                                      "ProteomicsDB")),
-                        list(arg = "peptide",
-                             class = "character",
-                             max_len = 20),
-                        list(arg = "unique",
-                             class = "logical"))
-  )
-
-  .msg("Searching UniProt and retrieving proteomics Post-translational modification features of proteins that match your supplied inputs.")
-  ## Build GET API Request's query
-  call_query <- .rba_query(init = list("size" = "-1"),
-                           list("accession",
-                                !is.null(accession),
-                                paste0(accession,
-                                       collapse = ",")),
-                           list("ptm",
-                                !is.null(ptm),
-                                ptm),
-                           list("taxid",
-                                !is.null(taxid),
-                                paste0(taxid,
-                                       collapse = ",")),
-                           list("upid",
-                                !is.null(upid),
-                                paste0(upid,
-                                       collapse = ",")),
-                           list("data_source",
-                                !is.null(data_source),
-                                paste0(data_source,
-                                       collapse = ",")),
-                           list("peptide",
-                                !is.null(peptide),
-                                paste0(peptide,
-                                       collapse = ",")),
-                           list("unique",
-                                !is.null(unique),
-                                ifelse(unique, "true", "false")))
-  ## Build Function-Specific Call
-  parser_input <- list("json->list",
-                       .rba_uniprot_search_namer)
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = paste0(.rba_stg("uniprot", "pth"),
-                                        "proteomics-ptm"),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = parser_input,
-                          save_to = .rba_file("uniprot_ptm_search.json"))
-
-  ## Call API
-  final_output <- .rba_skeleton(input_call)
-  return(final_output)
-}
-
-#' Get Post-Translational Modification of UniProt Protein
-#'
-#' UniProt maps post-translational modification features from different sources
-#'   to the proteins'  sequences. Using this function, you can retrieve all
-#'   the post-translational modification features that has been map to a given
-#'   UniProt protein's sequence.
-#'
-#'   see also:
-#'   \href{https://www.uniprot.org/help/ptm_processing_section}{PTM /
-#'   Processing section in UniProtKB}
-#'
-#' @section Corresponding API Resources:
-#'  "GET https://www.ebi.ac.uk/proteins/api/proteomics-ptm/\{accession\}"
-#'
-#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
-#'   UniProtKB primary or secondary accession}.
-#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
-#'   arguments manual for more information on available options.
-#'
-#' @return A list containing the post-translational modification features of
-#' your supplied UniProt protein's sequence.
-#'
-#' @references \itemize{
-#'   \item The UniProt Consortium, UniProt: the universal protein
-#'   knowledgebase in 2021, Nucleic Acids Research, Volume 49, Issue D1,
-#'   8 January 2021, Pages D480–D489, https://doi.org/10.1093/nar/gkaa1100
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
-#'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
-#'   Documentation}
-#'   \item \href{https://www.uniprot.org/help/publications}{Citations note
-#'   on UniProt website}
-#'   }
-#'
-#' @examples
-#' \donttest{
-#' rba_uniprot_ptm(accession = "P04234")
-#' }
-#'
-#' @family "UniProt - PTM"
-#' @export
-rba_uniprot_ptm <- function(accession,
-                            ...) {
-  ## Load Global Options
-  .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "accession",
-                             class = "character",
-                             len = 1))
-  )
-
-  .msg("Retrieving proteomics Post-translational modification features mapped to the sequence of protein %s.",
-       accession)
-  ## Build Function-Specific Call
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = paste0(.rba_stg("uniprot", "pth"),
-                                        "proteomics-ptm/",
-                                        accession),
-                          accept = "application/json",
-                          parser = "json->list",
-                          save_to = .rba_file("uniprot_ptm.json"))
-
-  ## Call API
-  final_output <- .rba_skeleton(input_call)
-  return(final_output)
-}
-
 #### Antigen Endpoints ####
 
 #' Search Antigens in UniProt
@@ -1999,6 +1570,141 @@ rba_uniprot_antigens <- function(accession,
   return(final_output)
 }
 
+#### Epitopes Endpoints ####
+
+#' Search UniProt Epitopes
+#'
+#' Use this function to search epitope data associated to UniProt entities,
+#'   using various criteria such as UniProt accession, epitope sequence,
+#'   IEDB ID, and match score.
+#'
+#' @section Corresponding API Resources:
+#'  "GET https://www.ebi.ac.uk/proteins/api/epitope"
+#'
+#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
+#'   UniProtKB primary or secondary accession}(s). You can supply up to 100
+#'   accession numbers.
+#' @param epitope_sequence (Character) Epitope's proteins sequence
+#' @param iedb_id (Numeric) \href{https://www.iedb.org/}{EIDB} epitope
+#'   Identifier(s). You can supply up to 20 accession numbers.
+#' @param match_score Integer: Minimum alignment score for the antigen sequence
+#'   and the target protein sequence.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
+#'
+#' @return A List where each element corresponds to one UniProt entity returned
+#'   by your search query. The element itself is a sub-list containing all
+#'   information that UniProt has about that entity.
+#'
+#' @examples
+#' \donttest{
+#'   rba_uniprot_epitope_search(accession = c("Q84ZX5", "P36222"))
+#' }
+#' \donttest{
+#'   rba_uniprot_epitope_search(epitope_sequence = "DKKCIEWEKAQHGA")
+#' }
+#' \donttest{
+#'   rba_uniprot_epitope_search(iedb_id = 20354)
+#' }
+#'
+#' @family "UniProt - Epitopes"
+#' @export
+rba_uniprot_epitope_search <- function(accession = NULL,
+                                       epitope_sequence = NULL,
+                                       iedb_id = NULL,
+                                       match_score = NULL,
+                                       ...) {
+  ## Load Global Options
+  .rba_ext_args(...)
+
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(arg = "accession", class = "character", max_len = 100),
+      list(arg = "epitope_sequence", class = "character"),
+      list(arg = "iedb_id", class = "numeric", max_len = 20),
+      list(arg = "match_score", class = "numeric")
+    )
+  )
+
+  .msg("Searching UniProt for epitopes matching the supplied criteria.")
+
+  ## Build GET API Request's query
+  call_query <- .rba_query(
+    init = list("size" = "-1"),
+    list("accession", !is.null(accession), paste0(accession, collapse = ",")),
+    list("epitope_sequence", !is.null(epitope_sequence), epitope_sequence),
+    list("iedb_id", !is.null(iedb_id), paste0(iedb_id, collapse = ",")),
+    list("match_score", !is.null(match_score), match_score)
+  )
+
+  ## Build Function-Specific Call
+  parser_input <- list("json->list", .rba_uniprot_search_namer)
+
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(.rba_stg("uniprot", "pth"), "epitope"),
+    query = call_query,
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("uniprot_epitope_search.json")
+  )
+
+  ## Call API
+  final_output <- .rba_skeleton(input_call)
+  return(final_output)
+}
+
+#' Retrieve Epitopes by Accession
+#'
+#' Use this function to retrieve epitope annotations linked to a UniProt entry.
+#'
+#' @section Corresponding API Resources:
+#'  "GET https://www.ebi.ac.uk/proteins/api/epitope/{accession}"
+#'
+#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
+#'   UniProtKB primary or secondary accession}.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
+#'
+#' @return A list containing the UniProt epitope features details for the given
+#'   accession.
+#'
+#' @examples
+#' \donttest{
+#' rba_uniprot_epitope(accession = "P36222")
+#' }
+#'
+#' @family "UniProt - Epitopes"
+#' @export
+rba_uniprot_epitope <- function(accession, ...) {
+  ## Load Global Options
+  .rba_ext_args(...)
+
+  ## Check User-input Arguments
+  .rba_args(cons = list(
+    list(arg = "accession", class = "character", len = 1)
+  ))
+
+  .msg("Retrieving epitope information for accession %s.", accession)
+
+  ## Build Function-Specific Call
+  parser_input <- "json->list"
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(.rba_stg("uniprot", "pth"), "epitope/", accession),
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("uniprot_epitope.json")
+  )
+
+  ## Call API
+  final_output <- .rba_skeleton(input_call)
+  return(final_output)
+}
+
 #### Mutagenesis Endpoints ####
 
 #' Search Mutagenesis in UniProt
@@ -2159,7 +1865,9 @@ rba_uniprot_mutagenesis <- function(accession,
                              class = "character",
                              len = 1),
                         list(arg = "location",
-                             class = "character"))
+                             class = "character",
+                             regex = "^\\d+\\-\\d+$",
+                             len = 1))
   )
 
   .msg("Retrieving mutagenesis description mapped to the sequence of protein %s.",
@@ -2179,6 +1887,132 @@ rba_uniprot_mutagenesis <- function(accession,
                           parser = "json->list",
                           query = call_query,
                           save_to = .rba_file("uniprot_mutagenesis.json"))
+
+  ## Call API
+  final_output <- .rba_skeleton(input_call)
+  return(final_output)
+}
+
+#### RNA-editing ####
+
+#' Search RNA Editing in UniProt
+#'
+#' UniProt Curates \href{https://www.uniprot.org/help/rna_editing}{RNA-editing
+#'   events} (conversion, insertion, deletion of nucleotides). Use this
+#'   function to search RNA editing records in UniProt using various
+#'   criteria such as accession, taxon ID, or variant location.
+#'
+#' @section Corresponding API Resources:
+#'  "GET https://www.ebi.ac.uk/proteins/api/rna-editing"
+#'
+#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
+#'   UniProtKB primary or secondary accession}(s). You can supply up to 100
+#'   accession numbers.
+#' @param taxid (Numeric) NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+#'   You can supply up to 20 taxon IDs.
+#' @param variantlocation Character: RNA editing variant location(s).
+#'   You can supply up to 20 taxon IDs.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
+#'
+#' @return A List where each element corresponds to one UniProt entity returned
+#'   by your search query. The element itself is a sub-list containing all
+#'   information that UniProt has about that entity.
+#'
+#' @examples
+#' \donttest{
+#'   rba_uniprot_rna_edit_search(accession = c("Q16851", "Q16849"))
+#' }
+#'
+#' @family "UniProt - RNA Editing"
+#' @export
+rba_uniprot_rna_edit_search <- function(accession = NULL,
+                                        taxid = NULL,
+                                        variantlocation = NULL,
+                                        ...) {
+  ## Load Global Options
+  .rba_ext_args(...)
+
+  ## Check User-input Arguments
+  .rba_args(cons = list(
+    list(arg = "accession", class = "character", max_len = 100),
+    list(arg = "taxid", class = "numeric", max_len = 20),
+    list(arg = "variantlocation", class = "character", max_len = 4)
+  ))
+
+  .msg("Searching UniProt for RNA editing records matching the supplied criteria.")
+
+  ## Build GET API Request's query
+  call_query <- .rba_query(
+    init = list("size" = "-1"),
+    list("accession", !is.null(accession), paste0(accession, collapse = ",")),
+    list("taxid", !is.null(taxid), paste0(taxid, collapse = ",")),
+    list("variantlocation", !is.null(variantlocation), paste0(variantlocation, collapse = ","))
+  )
+
+  ## Build Function-Specific Call
+  parser_input <- list("json->list", .rba_uniprot_search_namer)
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(.rba_stg("uniprot", "pth"), "rna-editing"),
+    query = call_query,
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("uniprot_rna_editing_search.json")
+  )
+
+  ## Call API
+  final_output <- .rba_skeleton(input_call)
+  return(final_output)
+}
+
+#' Retrieve Epitope by Accession
+#'
+#' Use this function to retrieve
+#'   \href{https://www.uniprot.org/help/rna_editing}{RNA-editing
+#'   events} (conversion, insertion, deletion of nucleotides) annotations
+#'   linked to a UniProt entry.
+#'
+#' @section Corresponding API Resources:
+#'  "GET https://www.ebi.ac.uk/proteins/api/rna-edit/{accession}"
+#'
+#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
+#'   UniProtKB primary or secondary accession}.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
+#'
+#' @return A list containing the UniProt RNA-editing features details for the
+#'   given accession.
+#'
+#' @examples
+#' \donttest{
+#'   rba_uniprot_rna_edit(accession = "Q16851")
+#' }
+#'
+#' @family "UniProt - Epitopes"
+#' @export
+rba_uniprot_rna_edit <- function(accession, ...) {
+  ## Load Global Options
+  .rba_ext_args(...)
+
+  ## Check User-input Arguments
+  .rba_args(cons = list(
+    list(arg = "accession", class = "character", len = 1)
+  ))
+
+  .msg("Retrieving RNA-editing information for accession %s.", accession)
+
+  ## Build Function-Specific Call
+  parser_input <- "json->list"
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(.rba_stg("uniprot", "pth"), "rna-editing/", accession),
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("uniprot_rna_edit.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)

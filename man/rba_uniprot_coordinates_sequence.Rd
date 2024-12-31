@@ -79,6 +79,7 @@ rba_uniprot_coordinates_sequence(accession = "P25942",
 Other "UniProt - Coordinates": 
 \code{\link{rba_uniprot_coordinates}()},
 \code{\link{rba_uniprot_coordinates_location}()},
-\code{\link{rba_uniprot_coordinates_search}()}
+\code{\link{rba_uniprot_coordinates_search}()},
+\code{\link{rba_uniprot_genome_coordinates_sequence}()}
 }
 \concept{"UniProt - Coordinates"}

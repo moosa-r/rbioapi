@@ -4,7 +4,13 @@
 \alias{rba_uniprot_features}
 \title{Get UniProt protein sequence features by accession}
 \usage{
-rba_uniprot_features(accession, types = NULL, categories = NULL, ...)
+rba_uniprot_features(
+  accession,
+  types = NULL,
+  categories = NULL,
+  location = NULL,
+  ...
+)
 }
 \arguments{
 \item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
@@ -25,6 +31,9 @@ Sequence annotation (Features)} categories (subsection). accepted values
 are: "MOLECULE_PROCESSING", "TOPOLOGY", "SEQUENCE_INFORMATION",
 "STRUCTURAL", "DOMAINS_AND_SITES", "PTM", "VARIANTS" and/or "MUTAGENESIS".
 You can supply up to 8 categories.}
+
+\item{location}{(character) Filter the features by the amino acid position in the sequence(s).
+Provide the range as a character string with the format "begin-end", e.g. "35-70"}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}

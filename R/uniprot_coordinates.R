@@ -441,3 +441,107 @@ rba_uniprot_coordinates_location <- function(taxid,
   final_output <- .rba_skeleton(input_call)
   return(final_output)
 }
+
+#' Get Genome coordinate by Gene Sequence position
+#'
+#' Using this function you can retrieve genome coordinates of a given UniProt
+#'   protein by providing Genome location position or range. You can either
+#'   supply 'g_position' alone or supply 'g_start' and 'g_end' together.
+#'
+#'  For more information about how UniProt imports and calculates genomic
+#'   coordinates data, see:
+#'   \cr McGarvey, P. B., Nightingale, A., Luo, J., Huang, H., Martin, M. J.,
+#'   Wu, C., & UniProt Consortium (2019). UniProt genomic mapping for
+#'   deciphering functional effects of missense variants. Human mutation,
+#'   40(6), 694–705. https://doi.org/10.1002/humu.23738
+#'
+#' @section Corresponding API Resources:
+#'  "GET https://ebi.ac.uk/proteins/api/coordinates/glocation
+#'  /\{accession\}:\{pPosition\}"
+#'  \cr "GET https://ebi.ac.uk/proteins/api/coordinates/glocation
+#'  /\{accession\}:\{pStart\}-\{pEnd\}"
+#'
+#' @param taxid NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+#'   You can supply up to 20 taxon IDs.
+#' @param chromosome (Character or Numeric): Chromosome name, e.g. 1, 20, X.
+#' @param g_position (numeric) Genome location position
+#' @param g_start (numeric) Genome location position start
+#' @param g_end (numeric) Genome location position end
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
+#'
+#' @return Genome coordinates of your supplied proteins.
+#'
+#' @references \itemize{
+#'   \item The UniProt Consortium, UniProt: the universal protein
+#'   knowledgebase in 2021, Nucleic Acids Research, Volume 49, Issue D1,
+#'   8 January 2021, Pages D480–D489, https://doi.org/10.1093/nar/gkaa1100
+#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
+#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
+#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
+#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
+#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+#'   Documentation}
+#'   \item \href{https://www.uniprot.org/help/publications}{Citations note
+#'   on UniProt website}
+#'   }
+#'
+#' @examples
+#' \donttest{
+#'  rba_uniprot_genome_coordinates_sequence(
+#'  taxid = 9606, chromosome = 11, g_position = 36573305)
+#' }
+#'
+#' @family "UniProt - Coordinates"
+#' @export
+rba_uniprot_genome_coordinates_sequence <- function(taxid,
+                                                    chromosome,
+                                                    g_position = NULL,
+                                                    g_start = NULL,
+                                                    g_end = NULL,
+                                                    ...) {
+  ## Load Global Options
+  .rba_ext_args(...)
+  ## Check User-input Arguments
+  .rba_args(cons = list(list(arg = "taxid",
+                             class = "numeric"),
+                        list(arg = "chromosome",
+                             class = c("numeric",
+                                       "character")),
+                        list(arg = "g_position",
+                             class = "numeric"),
+                        list(arg = "g_start",
+                             class = "numeric"),
+                        list(arg = "g_end",
+                             class = "numeric")),
+            cond = list(list(quote(any(sum(!is.null(g_position), !is.null(g_start), !is.null(g_end)) == 3,
+                                       sum(!is.null(g_position), !is.null(g_start), !is.null(g_end)) == 0,
+                                       sum(!is.null(g_start), !is.null(g_end)) == 1)),
+                             "You should supply either 'g_position' alone or 'g_start' and 'g_end' together.")
+            ))
+
+  .msg("Retrieving genome coordinates of proteins in taxon %s, Chromosome %s, Genome location %s.",
+       taxid, chromosome,
+       ifelse(is.null(g_position),
+              yes = paste(g_start, g_end, sep = " to "), no = g_position))
+
+  ## Build Function-Specific Call
+  path_input <- sprintf("%scoordinates/glocation/%s/%s:%s",
+                        .rba_stg("uniprot", "pth"),
+                        taxid, chromosome,
+                        ifelse(!is.null(g_position),
+                               yes = g_position,
+                               no = paste0(g_start, "-", g_end)))
+
+  input_call <- .rba_httr(httr = "get",
+                          url = .rba_stg("uniprot", "url"),
+                          path = path_input,
+                          accept = "application/json",
+                          parser = "json->list_simp",
+                          save_to = .rba_file("uniprot_coordinates_glocation.json"))
+
+  ## Call API
+  final_output <- .rba_skeleton(input_call)
+  return(final_output)
+}
