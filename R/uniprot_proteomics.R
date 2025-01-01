@@ -22,9 +22,9 @@
 #'   HPP (Human Proteome Project)
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium, UniProt: the universal protein
-#'   knowledgebase in 2021, Nucleic Acids Research, Volume 49, Issue D1,
-#'   8 January 2021, Pages D480–D489, https://doi.org/10.1093/nar/gkaa1100
+#'   \item The UniProt Consortium , UniProt: the Universal Protein
+#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   https://doi.org/10.1093/nar/gkae1010
 #'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
 #'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
 #'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
@@ -115,10 +115,11 @@ rba_uniprot_proteomics_species <- function(...) {
 #'   proteomics data are organized under the "features"
 #'   sub-list.
 #'
-#' @references \itemize{ \item The UniProt Consortium, UniProt: the universal
-#'   protein knowledgebase in 2021, Nucleic Acids Research, Volume 49, Issue D1,
-#'   8 January 2021, Pages D480–D489, https://doi.org/10.1093/nar/gkaa1100 \item
-#'   Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas Bursteinas,
+#' @references \itemize{
+#'   \item The UniProt Consortium , UniProt: the Universal Protein
+#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   https://doi.org/10.1093/nar/gkae1010
+#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas Bursteinas,
 #'   Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd Turner, Maria
 #'   Martin, The Proteins API: accessing key integrated protein and genome
 #'   information, Nucleic Acids Research, Volume 45, Issue W1, 3 July 2017,
@@ -236,9 +237,9 @@ rba_uniprot_proteomics_non_ptm_search <- function(accession = NULL,
 #' your supplied UniProt protein's sequence.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium, UniProt: the universal protein
-#'   knowledgebase in 2021, Nucleic Acids Research, Volume 49, Issue D1,
-#'   8 January 2021, Pages D480–D489, https://doi.org/10.1093/nar/gkaa1100
+#'   \item The UniProt Consortium , UniProt: the Universal Protein
+#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   https://doi.org/10.1093/nar/gkae1010
 #'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
 #'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
 #'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
@@ -357,10 +358,11 @@ rba_uniprot_proteomics_non_ptm <- function(accession,
 #'   post-translational modification are organized under the "features"
 #'   sub-list.
 #'
-#' @references \itemize{ \item The UniProt Consortium, UniProt: the universal
-#'   protein knowledgebase in 2021, Nucleic Acids Research, Volume 49, Issue D1,
-#'   8 January 2021, Pages D480–D489, https://doi.org/10.1093/nar/gkaa1100 \item
-#'   Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas Bursteinas,
+#' @references \itemize{
+#'   \item The UniProt Consortium , UniProt: the Universal Protein
+#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   https://doi.org/10.1093/nar/gkae1010
+#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas Bursteinas,
 #'   Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd Turner, Maria
 #'   Martin, The Proteins API: accessing key integrated protein and genome
 #'   information, Nucleic Acids Research, Volume 45, Issue W1, 3 July 2017,
@@ -542,9 +544,9 @@ rba_uniprot_proteomics_ptm_search <- function(accession = NULL,
 #' your supplied UniProt protein's sequence.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium, UniProt: the universal protein
-#'   knowledgebase in 2021, Nucleic Acids Research, Volume 49, Issue D1,
-#'   8 January 2021, Pages D480–D489, https://doi.org/10.1093/nar/gkaa1100
+#'   \item The UniProt Consortium , UniProt: the Universal Protein
+#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   https://doi.org/10.1093/nar/gkae1010
 #'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
 #'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
 #'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
@@ -651,10 +653,11 @@ rba_uniprot_proteomics_ptm <- function(accession,
 #'   proteomics data are organized under the "features"
 #'   sub-list.
 #'
-#' @references \itemize{ \item The UniProt Consortium, UniProt: the universal
-#'   protein knowledgebase in 2021, Nucleic Acids Research, Volume 49, Issue D1,
-#'   8 January 2021, Pages D480–D489, https://doi.org/10.1093/nar/gkaa1100 \item
-#'   Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas Bursteinas,
+#' @references \itemize{
+#'   \item The UniProt Consortium , UniProt: the Universal Protein
+#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   https://doi.org/10.1093/nar/gkae1010
+#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas Bursteinas,
 #'   Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd Turner, Maria
 #'   Martin, The Proteins API: accessing key integrated protein and genome
 #'   information, Nucleic Acids Research, Volume 45, Issue W1, 3 July 2017,
@@ -772,9 +775,9 @@ rba_uniprot_proteomics_hpp_search <- function(accession = NULL,
 #' your supplied UniProt protein's sequence.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium, UniProt: the universal protein
-#'   knowledgebase in 2021, Nucleic Acids Research, Volume 49, Issue D1,
-#'   8 January 2021, Pages D480–D489, https://doi.org/10.1093/nar/gkaa1100
+#'   \item The UniProt Consortium , UniProt: the Universal Protein
+#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   https://doi.org/10.1093/nar/gkae1010
 #'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
 #'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
 #'   Turner, Maria Martin, The Proteins API: accessing key integrated protein

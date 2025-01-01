@@ -267,7 +267,7 @@ The UniProt API endpoints are organized into 5 group. Here are those categories 
 
 To cite UniProt (Please see <https://www.uniprot.org/help/publications>):
 
--   The UniProt Consortium, UniProt: the universal protein knowledgebase in 2021, *Nucleic Acids Research*, Volume 49, Issue D1, 8 January 2021, Pages D480--D489, <https://doi.org/10.1093/nar/gkaa1100>
+-   The UniProt Consortium , UniProt: the Universal Protein Knowledgebase in 2025, *Nucleic Acids Research*, 2024;, gkae1010, <https://doi.org/10.1093/nar/gkae1010>
 -   Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd Turner, Maria Martin, The Proteins API: accessing key integrated protein and genome information, *Nucleic Acids Research*, Volume 45, Issue W1, 3 July 2017, Pages W539--W544, <https://doi.org/10.1093/nar/gkx237>
 
 To cite rbioapi:
