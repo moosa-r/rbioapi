@@ -210,6 +210,7 @@ rba_panther_mapping <- function(genes,
 #' }
 #'
 #' @family "PANTHER"
+#' @family "Enrichment/Over-representation"
 #' @export
 rba_panther_enrich <- function(genes,
                                organism,

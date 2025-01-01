@@ -166,5 +166,13 @@ Other "PANTHER":
 \code{\link{rba_panther_mapping}()},
 \code{\link{rba_panther_ortholog}()},
 \code{\link{rba_panther_tree_grafter}()}
+
+Other "Enrichment/Over-representation": 
+\code{\link{rba_enrichr}()},
+\code{\link{rba_mieaa_enrich}()},
+\code{\link{rba_reactome_analysis}()},
+\code{\link{rba_string_enrichment}()},
+\code{\link{rba_string_enrichment_image}()}
 }
+\concept{"Enrichment/Over-representation"}
 \concept{"PANTHER"}

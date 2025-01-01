@@ -153,5 +153,13 @@ Other "miEAA":
 \code{\link{rba_mieaa_enrich_results}()},
 \code{\link{rba_mieaa_enrich_status}()},
 \code{\link{rba_mieaa_enrich_submit}()}
+
+Other "Enrichment/Over-representation": 
+\code{\link{rba_enrichr}()},
+\code{\link{rba_panther_enrich}()},
+\code{\link{rba_reactome_analysis}()},
+\code{\link{rba_string_enrichment}()},
+\code{\link{rba_string_enrichment_image}()}
 }
+\concept{"Enrichment/Over-representation"}
 \concept{"miEAA"}

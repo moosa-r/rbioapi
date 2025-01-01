@@ -817,6 +817,7 @@ rba_mieaa_enrich_results <- function(job_id,
 #' }
 #'
 #' @family "miEAA"
+#' @family "Enrichment/Over-representation"
 #' @export
 rba_mieaa_enrich <- function(test_set,
                              mirna_type,

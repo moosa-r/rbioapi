@@ -225,6 +225,7 @@
 #' }
 #'
 #' @family "Reactome Analysis Service"
+#' @family "Enrichment/Over-representation"
 #' @export
 rba_reactome_analysis <- function(input,
                                   input_format = NULL,

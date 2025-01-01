@@ -173,5 +173,13 @@ Other "Reactome Analysis Service":
 \code{\link{rba_reactome_analysis_pdf}()},
 \code{\link{rba_reactome_analysis_species}()},
 \code{\link{rba_reactome_analysis_token}()}
+
+Other "Enrichment/Over-representation": 
+\code{\link{rba_enrichr}()},
+\code{\link{rba_mieaa_enrich}()},
+\code{\link{rba_panther_enrich}()},
+\code{\link{rba_string_enrichment}()},
+\code{\link{rba_string_enrichment_image}()}
 }
+\concept{"Enrichment/Over-representation"}
 \concept{"Reactome Analysis Service"}

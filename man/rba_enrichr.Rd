@@ -129,5 +129,13 @@ Other "Enrichr":
 \code{\link{rba_enrichr_gene_map}()},
 \code{\link{rba_enrichr_libs}()},
 \code{\link{rba_enrichr_view_list}()}
+
+Other "Enrichment/Over-representation": 
+\code{\link{rba_mieaa_enrich}()},
+\code{\link{rba_panther_enrich}()},
+\code{\link{rba_reactome_analysis}()},
+\code{\link{rba_string_enrichment}()},
+\code{\link{rba_string_enrichment_image}()}
 }
+\concept{"Enrichment/Over-representation"}
 \concept{"Enrichr"}

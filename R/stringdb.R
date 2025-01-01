@@ -902,6 +902,7 @@ rba_string_homology_inter <- function(ids,
 #' }
 #'
 #' @family "STRING"
+#' @family "Enrichment/Over-representation"
 #' @seealso
 #'   \code{\link{rba_string_map_ids},
 #'   \link{rba_string_annotations},
@@ -1378,6 +1379,7 @@ rba_string_version <- function(...) {
 #' }
 #'
 #' @family "STRING"
+#' @family "Enrichment/Over-representation"
 #' @seealso
 #'   \code{\link{rba_string_map_ids},
 #'   \link{rba_string_enrichment},

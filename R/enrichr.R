@@ -963,6 +963,7 @@ rba_enrichr_gene_map <- function(gene,
 #' }
 #'
 #' @family "Enrichr"
+#' @family "Enrichment/Over-representation"
 #' @export
 rba_enrichr <- function(gene_list,
                         description = NULL,
