@@ -1430,7 +1430,10 @@ rba_string_enrichment_image <- function(ids,
                              min_val = 1),
                         list(arg = "x_axis",
                              class = "character",
-                             val = c("signal", "strength", "FDR", "gene_count"))
+                             val = c("signal", "strength", "FDR", "gene_count"))),
+            cond = list(list(quote(length(ids) > 100 && is.null(species)),
+                     sprintf("You supplied %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
+                             length(ids)))
   ))
 
   .msg("Retrieving STRING enrichment plot of %s input Identifiers.", length(ids))
