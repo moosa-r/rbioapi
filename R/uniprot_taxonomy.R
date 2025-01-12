@@ -44,21 +44,27 @@ rba_uniprot_taxonomy_lca <- function(ids,
                                      ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "ids",
-                             class = "numeric",
-                             min_len = 2))
+  .rba_args(
+    cons = list(
+      list(arg = "ids", class = "numeric", min_len = 2)
+    )
   )
-  .msg("Retrieving LCA of ", .paste2(ids, sep = ", ", last = " and "))
+
+  .msg(
+    "Retrieving LCA of ", .paste2(ids, sep = ", ", last = " and ")
+  )
+
   ## Build Function-Specific Call
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = paste0(.rba_stg("uniprot", "pth"),
-                                        "taxonomy/ancestor/",
-                                        paste0(ids, collapse = ",")),
-                          accept = "application/json",
-                          parser = "json->list_simp",
-                          save_to = .rba_file("uniprot_taxonomy_lca.json"))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(.rba_stg("uniprot", "pth"), "taxonomy/ancestor/", paste0(ids, collapse = ",")),
+    accept = "application/json",
+    parser = "json->list_simp",
+    save_to = .rba_file("uniprot_taxonomy_lca.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -138,63 +144,74 @@ rba_uniprot_taxonomy <- function(ids,
                                  ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "ids",
-                             class = "numeric"),
-                        list(arg = "hierarchy",
-                             class = "character",
-                             val = c("children",
-                                     "parent",
-                                     "siblings")),
-                        list(arg = "node_only",
-                             class = "logical"),
-                        list(arg = "page_size",
-                             class = "numeric",
-                             ran = c(1,200)),
-                        list(arg = "page_number",
-                             class = "numeric")),
-            cond = list(list(quote(length(ids) > 1 && !is.null(hierarchy)),
-                             "you cannot specify 'hierarchy' when providing more than 1 ids."),
-                        list(quote(is.null(hierarchy) && (page_size != 200 | page_number != 1)),
-                             "Because hierarchy argument was not supplied, page_size and page_number were ignored.",
-                             warn = TRUE))
+  .rba_args(
+    cons = list(
+      list(arg = "ids", class = "numeric"),
+      list(
+        arg = "hierarchy", class = "character",
+        val = c("children", "parent", "siblings")
+      ),
+      list(arg = "node_only", class = "logical"),
+      list(arg = "page_size", class = "numeric", ran = c(1,200)),
+      list(arg = "page_number", class = "numeric")
+    ),
+    cond = list(
+      list(
+        quote(length(ids) > 1 && !is.null(hierarchy)),
+        "you cannot specify 'hierarchy' when providing more than 1 ids."
+      ),
+      list(
+        quote(is.null(hierarchy) && (page_size != 200 | page_number != 1)),
+        "Because hierarchy argument was not supplied, page_size and page_number were ignored.",
+        warn = TRUE
+      )
+    )
   )
 
-  .msg("Retrieving %snodes information of %s.",
-       ifelse(!is.null(hierarchy),
-              yes = hierarchy,
-              no = ""),
-       .paste2(ids, sep = ", ", last = " and "))
+  .msg(
+    "Retrieving %snodes information of %s.",
+    ifelse(!is.null(hierarchy), yes = hierarchy, no = ""),
+    .paste2(ids, sep = ", ", last = " and ")
+  )
+
   ## Build GET API Request's query
   call_query <- list()
+
   ## Build Function-Specific Call
-  path_input <- sprintf("%staxonomy/%s/%s",
-                        .rba_stg("uniprot", "pth"),
-                        ifelse(length(ids) > 1,
-                               yes = "ids",
-                               no = "id"),
-                        paste0(ids, collapse = ",")
+  path_input <- sprintf(
+    "%staxonomy/%s/%s",
+    .rba_stg("uniprot", "pth"),
+    ifelse(length(ids) > 1, yes = "ids", no = "id"),
+    paste0(ids, collapse = ",")
   )
+
   if (!is.null(hierarchy)) {
     path_input <- paste0(path_input, "/", hierarchy)
     ## Build GET API Request's query
-    call_query <- list("pageSize" = page_size,
-                       "pageNumber" = page_number)
+    call_query <- list("pageSize" = page_size, "pageNumber" = page_number)
   }
+
   if (isTRUE(node_only)) {
     path_input <- paste0(path_input, "/node")
   }
 
-  parser_input <- ifelse(isTRUE(node_only),
-                         yes = "json->list_simp",
-                         no = "json->list")
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = path_input,
-                          query = call_query,
-                          accept = "application/json",
-                          parser = parser_input,
-                          save_to = .rba_file("uniprot_taxonomy.json"))
+  parser_input <- ifelse(
+    isTRUE(node_only),
+    yes = "json->list_simp",
+    no = "json->list"
+  )
+
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = path_input,
+    query = call_query,
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("uniprot_taxonomy.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -245,20 +262,28 @@ rba_uniprot_taxonomy_lineage <- function(id,
                                          ...) {
   ## Load Global Options
   .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "id",
-                             class = "numeric")))
 
-  .msg("Retrieving Taxonomic Lineage of node %s.", id)
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(arg = "id", class = "numeric")
+    )
+  )
+
+  .msg(
+    "Retrieving Taxonomic Lineage of node %s.",
+    id
+  )
+
   ## Build Function-Specific Call
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = paste0(.rba_stg("uniprot", "pth"),
-                                        "taxonomy/lineage/",
-                                        id),
-                          accept = "application/json",
-                          parser = "json->list_simp",
-                          save_to = .rba_file("rba_uniprot_taxonomy_lineage.json"))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(.rba_stg("uniprot", "pth"), "taxonomy/lineage/", id),
+    accept = "application/json",
+    parser = "json->list_simp",
+    save_to = .rba_file("rba_uniprot_taxonomy_lineage.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -330,61 +355,76 @@ rba_uniprot_taxonomy_name <- function(name,
                                       ...) {
   ## Load Global Options
   .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "name",
-                             class = "character"),
-                        list(arg = "field",
-                             class = "character",
-                             val = c("scientific",
-                                     "common",
-                                     "mnemonic")),
-                        list(arg = "search_type",
-                             class = "character",
-                             val = c("equal_to",
-                                     "start_with",
-                                     "end_with",
-                                     "contain")),
-                        list(arg = "node_only",
-                             class = "logical"),
-                        list(arg = "page_size",
-                             class = "numeric",
-                             ran = c(1,200)),
-                        list(arg = "page_number",
-                             class = "numeric")))
 
-  .msg("Retrieving taxonomic nodes that their %s name field %s %s (page %s).",
-       field, search_type, name, page_number)
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(arg = "name", class = "character"),
+      list(
+        arg = "field", class = "character",
+        val = c("scientific", "common", "mnemonic")
+      ),
+      list(
+        arg = "search_type", class = "character",
+        val = c("equal_to", "start_with", "end_with", "contain")
+      ),
+      list(arg = "node_only", class = "logical"),
+      list(arg = "page_size", class = "numeric", ran = c(1,200)),
+      list(arg = "page_number", class = "numeric")
+    )
+  )
+
+  .msg(
+    "Retrieving taxonomic nodes that their %s name field %s %s (page %s).",
+    field, search_type, name, page_number
+  )
+
   ## Build GET API Request's query
-  call_query <- list("name" = name,
-                     "fieldName" = switch(field,
-                                          "scientific" = "SCIENTIFICNAME",
-                                          "common" = "COMMONNAME",
-                                          "mnemonic" = "MNEMONIC"),
-                     "searchType" = switch(search_type,
-                                           "equal_to"  = "EQUALSTO",
-                                           "start_with" = "STARTSWITH",
-                                           "end_with" = "ENDSWITH",
-                                           "contain" = "CONTAINS"),
-                     pageSize = page_size,
-                     pageNumber = page_number)
+  call_query <- list(
+    "name" = name,
+    "fieldName" = switch(
+      field,
+      "scientific" = "SCIENTIFICNAME",
+      "common" = "COMMONNAME",
+      "mnemonic" = "MNEMONIC"
+    ),
+    "searchType" = switch(
+      search_type,
+      "equal_to"  = "EQUALSTO",
+      "start_with" = "STARTSWITH",
+      "end_with" = "ENDSWITH",
+      "contain" = "CONTAINS"
+    ),
+    pageSize = page_size,
+    pageNumber = page_number
+  )
+
   ## Build Function-Specific Call
-  path_input <- sprintf("%staxonomy/name/%s",
-                        .rba_stg("uniprot", "pth"),
-                        name)
+  path_input <- sprintf(
+    "%staxonomy/name/%s",
+    .rba_stg("uniprot", "pth"),
+    name
+  )
+
   if (isTRUE(node_only)) {
     path_input <- paste0(path_input, "/node")
   }
-  parser_input <- ifelse(node_only,
-                         yes = "json->list_simp",
-                         no = "json->list")
 
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = path_input,
-                          query = call_query,
-                          accept = "application/json",
-                          parser = parser_input,
-                          save_to = .rba_file("uniprot_taxonomy_name.json"))
+  parser_input <- ifelse(
+    node_only,
+    yes = "json->list_simp",
+    no = "json->list"
+  )
+
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = path_input,
+    query = call_query,
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("uniprot_taxonomy_name.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -443,34 +483,34 @@ rba_uniprot_taxonomy_path <- function(id,
                                       ...) {
   ## Load Global Options
   .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "id",
-                             class = "numeric"),
-                        list(arg = "direction",
-                             class = "character",
-                             val = c("TOP",
-                                     "BOTTOM")),
-                        list(arg = "depth",
-                             class = "numeric",
-                             ran = c(1,5))))
 
-  .msg("Retrieving the %s steps of nodes that are in the %s of %s node.",
-       depth, direction, id)
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(arg = "id", class = "numeric"),
+      list(arg = "direction", class = "character", val = c("TOP", "BOTTOM")),
+      list(arg = "depth", class = "numeric", ran = c(1,5))
+    )
+  )
+
+  .msg(
+    "Retrieving the %s steps of nodes that are in the %s of %s node.",
+    depth, direction, id
+  )
 
   ## Build GET API Request's query
-  call_query <- list("id" = id,
-                     "direction" = direction,
-                     "depth" = depth)
+  call_query <- list("id" = id, "direction" = direction, "depth" = depth)
 
   ## Build Function-Specific Call
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = paste0(.rba_stg("uniprot", "pth"),
-                                        "taxonomy/path"),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = "json->list",
-                          save_to = .rba_file("uniprot_taxonomy_path.json"))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(.rba_stg("uniprot", "pth"), "taxonomy/path"),
+    query = call_query,
+    accept = "application/json",
+    parser = "json->list",
+    save_to = .rba_file("uniprot_taxonomy_path.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -523,29 +563,33 @@ rba_uniprot_taxonomy_relationship <- function(from,
                                               ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "from",
-                             class = "numeric"),
-                        list(arg = "to",
-                             class = "numeric"))
+  .rba_args(
+    cons = list(
+      list(arg = "from", class = "numeric"),
+      list(arg = "to", class = "numeric")
+    )
   )
 
-  .msg("Retrieving the shortest path on the toxonomy tree from node %s to %s.",
-       from, to)
+  .msg(
+    "Retrieving the shortest path on the toxonomy tree from node %s to %s.",
+    from, to
+  )
 
   ## Build GET API Request's query
-  call_query <- list("from" = from,
-                     "to" = to)
+  call_query <- list("from" = from, "to" = to)
 
   ## Build Function-Specific Call
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = paste0(.rba_stg("uniprot", "pth"),
-                                        "taxonomy/relationship"),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = "json->list",
-                          save_to = .rba_file("uniprot_taxonomy_relationship.json"))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(.rba_stg("uniprot", "pth"), "taxonomy/relationship"),
+    query = call_query,
+    accept = "application/json",
+    parser = "json->list",
+    save_to = .rba_file("uniprot_taxonomy_relationship.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)

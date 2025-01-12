@@ -66,28 +66,37 @@ rba_enrichr_libs <- function(organism = "human",
                              ...){
   ## Load Global Options
   .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "store_in_options",
-                             class = "logical"),
-                        list(arg = "organism",
-                             class = "character",
-                             no_null = TRUE,
-                             val = c("human", "fly", "yeast", "worm", "fish"))
-  ))
 
-  .msg("Retrieving List of available libraries and statistics from Enrichr %s.",
-       organism)
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(arg = "store_in_options", class = "logical"),
+      list(
+        arg = "organism", class = "character", no_null = TRUE,
+        val = c("human", "fly", "yeast", "worm", "fish")
+      )
+    )
+  )
+
+  .msg(
+    "Retrieving List of available libraries and statistics from Enrichr %s.",
+    organism
+  )
 
   ## Build Function-Specific Call
-  parser_input <- list("json->list_simp",
-                       function(x) {x[[1]]})
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("enrichr", "url"),
-                          path = paste0(.rba_stg("enrichr", "pth", organism),
-                                        "datasetStatistics"),
-                          accept = "application/json",
-                          parser = parser_input,
-                          save_to = .rba_file("enrichr_info.json"))
+  parser_input <- list(
+    "json->list_simp",
+    function(x) { x[[1]] }
+  )
+
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("enrichr", "url"),
+    path = paste0(.rba_stg("enrichr", "pth", organism), "datasetStatistics"),
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("enrichr_info.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -100,6 +109,7 @@ rba_enrichr_libs <- function(organism = "human",
     options("rba_enrichr_libs" = enrichr_libs)
 
   }
+
   return(final_output)
 }
 
@@ -184,28 +194,34 @@ rba_enrichr_add_list <- function(gene_list,
                                  ...){
   ## Load Global Options
   .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "gene_list",
-                             class = "character"),
-                        list(arg = "description",
-                             class = "character"),
-                        list(arg = "organism",
-                             class = "character",
-                             no_null = TRUE,
-                             val = c("human", "fly", "yeast", "worm", "fish")),
-                        list(arg = "speedrichr",
-                             class = "logical",
-                             no_null = TRUE)),
-            cond = list(list(quote((isTRUE(speedrichr)) && organism != "human"),
-                             "Using speedrichr (to provide background gene list later) is only availbale for `human`.")))
 
-  .msg("Uploading %s gene symbols to Enrichr %s.",
-       length(gene_list), organism)
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(arg = "gene_list", class = "character"),
+      list(arg = "description", class = "character"),
+      list(
+        arg = "organism", class = "character", no_null = TRUE,
+        val = c("human", "fly", "yeast", "worm", "fish")
+      ),
+      list(arg = "speedrichr", class = "logical", no_null = TRUE)
+    ),
+    cond = list(
+      list(
+        quote((isTRUE(speedrichr)) && organism != "human"),
+        "Using speedrichr (to provide background gene list later) is only availbale for `human`."
+      )
+    )
+  )
+
+  .msg(
+    "Uploading %s gene symbols to Enrichr %s.",
+    length(gene_list), organism
+  )
 
   ## Build POST API Request's URL
   input_path <- paste0(
-    .rba_stg(
-      "enrichr", "pth", ifelse(speedrichr, "speedrichr", organism)),
+    .rba_stg("enrichr", "pth", ifelse(speedrichr, "speedrichr", organism)),
     "addList"
   )
 
@@ -214,22 +230,25 @@ rba_enrichr_add_list <- function(gene_list,
     description = "Submitted to speedrichr"
   }
 
-  call_body <- .rba_query(init = list("format" = "text",
-                                      "list" = paste(unique(gene_list),
-                                                     collapse = "\n")),
-                          list("description",
-                               !is.null(description),
-                               description))
+  call_body <- .rba_query(
+    init = list(
+      "format" = "text",
+      "list" = paste(unique(gene_list), collapse = "\n")
+    ),
+    list("description", !is.null(description), description)
+  )
 
 
   ## Build Function-Specific Call
-  input_call <- .rba_httr(httr = "post",
-                          url = .rba_stg("enrichr", "url"),
-                          path = input_path,
-                          body = call_body,
-                          accept = "application/json",
-                          parser = "json->list_simp",
-                          save_to = .rba_file("enrichr_add_list.json"))
+  input_call <- .rba_httr(
+    httr = "post",
+    url = .rba_stg("enrichr", "url"),
+    path = input_path,
+    body = call_body,
+    accept = "application/json",
+    parser = "json->list_simp",
+    save_to = .rba_file("enrichr_add_list.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -293,37 +312,43 @@ rba_enrichr_view_list <- function(user_list_id,
                                   ...){
   ## Load Global Options
   .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "user_list_id",
-                             class = c("numeric"),
-                             len = 1),
-                        list(arg = "organism",
-                             class = "character",
-                             no_null = TRUE,
-                             val = c("human", "fly", "yeast", "worm", "fish")),
-                        list(arg = "speedrichr",
-                             class = "logical",
-                             no_null = TRUE)),
-                        cond = list(list(quote((isTRUE(speedrichr)) && organism != "human"),
-                                         "Using speedrichr (to provide background gene list later) is only availbale for `human`."))
-                        )
 
-  .msg("Retrieving the gene list under the ID %s from Enrichr %s.",
-       user_list_id, organism)
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(arg = "user_list_id", class = c("numeric"), len = 1),
+      list(
+        arg = "organism", class = "character", no_null = TRUE,
+        val = c("human", "fly", "yeast", "worm", "fish")
+      ),
+      list(arg = "speedrichr", class = "logical", no_null = TRUE)
+    ),
+    cond = list(
+      list(
+        quote((isTRUE(speedrichr)) && organism != "human"),
+        "Using speedrichr (to provide background gene list later) is only availbale for `human`."
+      )
+    )
+  )
+
+  .msg(
+    "Retrieving the gene list under the ID %s from Enrichr %s.",
+    user_list_id, organism
+  )
 
   ## Build GET API Request's query
   call_query <- list("userListId" = user_list_id)
 
   ## Build Function-Specific Call
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("enrichr", "url"),
-                          path = paste0(.rba_stg("enrichr", "pth", organism),
-                                        "view"),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = "json->list_simp",
-                          save_to = .rba_file(sprintf("enrichr_view_list_%s.json",
-                                                      user_list_id)))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("enrichr", "url"),
+    path = paste0(.rba_stg("enrichr", "pth", organism), "view"),
+    query = call_query,
+    accept = "application/json",
+    parser = "json->list_simp",
+    save_to = .rba_file(sprintf("enrichr_view_list_%s.json", user_list_id))
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -394,25 +419,32 @@ rba_enrichr_add_background <- function(background_genes,
                                        ...){
   ## Load Global Options
   .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "background_genes",
-                             class = "character")))
 
-  .msg("Uploading %s background gene symbols to Enrichr.",
-       length(background_genes))
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(arg = "background_genes", class = "character")
+    )
+  )
+
+  .msg(
+    "Uploading %s background gene symbols to Enrichr.",
+    length(background_genes)
+  )
 
   ## Build POST API Request's URL
   call_body <- list(background = paste(background_genes, collapse = "\n"))
 
   ## Build Function-Specific Call
-  input_call <- .rba_httr(httr = "post",
-                          url = .rba_stg("enrichr", "url"),
-                          path = paste0(.rba_stg("enrichr", "pth", "speedrichr"),
-                                        "addbackground"),
-                          body = call_body,
-                          accept = "application/json",
-                          parser = "json->list_simp",
-                          save_to = .rba_file("enrichr_add_background.json"))
+  input_call <- .rba_httr(
+    httr = "post",
+    url = .rba_stg("enrichr", "url"),
+    path = paste0(.rba_stg("enrichr", "pth", "speedrichr"), "addbackground"),
+    body = call_body,
+    accept = "application/json",
+    parser = "json->list_simp",
+    save_to = .rba_file("enrichr_add_background.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -483,54 +515,75 @@ rba_enrichr_add_background <- function(background_genes,
   if (is.null(background_id)) {
     httr_verb <- "get"
     httr_accept <- "text/tab-separated-values"
-    call_query <- list("userListId" = user_list_id,
-                       "backgroundType" = gene_set_library)
+    call_query <- list(
+      "userListId" = user_list_id,
+      "backgroundType" = gene_set_library
+    )
     call_body = NULL
 
-    path_input <- paste0(.rba_stg("enrichr", "pth", organism),
-                         "export")
+    path_input <- paste0(
+      .rba_stg("enrichr", "pth", organism),
+      "export"
+    )
 
     parser_input <- function(httr_response) {
-      parsed_response <- httr::content(httr_response,
-                         as = "text",
-                         type = "text/tab-separated-values",
-                         encoding = "UTF-8")
-      try(utils::read.delim(textConnection(parsed_response),
-                            sep = "\t", header = TRUE,
-                            stringsAsFactors = FALSE),
-          silent = !get("diagnostics"))
+      parsed_response <- httr::content(
+        httr_response,
+        as = "text",
+        type = "text/tab-separated-values",
+        encoding = "UTF-8"
+      )
+
+      try(
+        utils::read.delim(
+          textConnection(parsed_response),
+          sep = "\t",
+          header = TRUE,
+          stringsAsFactors = FALSE),
+        silent = !get("diagnostics")
+      )
     }
 
   } else {
     httr_verb <- "post"
     httr_accept <- "application/json"
     call_query <- NULL
-    call_body <- list("userListId" = user_list_id,
-                      "backgroundid" = background_id,
-                      "backgroundType" = gene_set_library)
+    call_body <- list(
+      "userListId" = user_list_id,
+      "backgroundid" = background_id,
+      "backgroundType" = gene_set_library
+    )
 
-    path_input <- paste0(.rba_stg("enrichr", "pth", "speedrichr"),
-                         "backgroundenrich")
+    path_input <- paste0(
+      .rba_stg("enrichr", "pth", "speedrichr"),
+      "backgroundenrich"
+    )
 
     parser_input <- function(httr_response) {
-      parsed_response <- gsub("Infinity", "\"Inf\"", httr::content(httr_response,
-                                                                   as = "text",
-                                                                   encoding = "UTF-8"))
+      parsed_response <- gsub(
+        "Infinity", "\"Inf\"",
+        httr::content(httr_response,
+                      as = "text",
+                      encoding = "UTF-8")
+      )
+
       # parsed_response <- gsub("NaN", "\"NaN\"", parsed_response)
       parsed_response <- jsonlite::fromJSON(parsed_response)[[1]]
 
-      parsed_response <- lapply(parsed_response, function(response_row) {
-        names(response_row) <- c("Rank", "Term",
-                                 "P.value", "Odds.Ratio",
-                                 "Combined.Score", "Genes",
-                                 "Adjusted.P.value",
-                                 "Old.P.value", "Old.adjusted.P.value")
-        response_row$Overlapping.genes <- paste0(
-          response_row$Overlapping.genes,
-          collapse = ";")
+      parsed_response <- lapply(
+        parsed_response,
+        function(response_row) {
+          names(response_row) <- c("Rank", "Term",
+                                   "P.value", "Odds.Ratio",
+                                   "Combined.Score", "Genes",
+                                   "Adjusted.P.value",
+                                   "Old.P.value", "Old.adjusted.P.value")
+          response_row$Overlapping.genes <- paste0(
+            response_row$Overlapping.genes,
+            collapse = ";")
 
-        return(response_row)
-      })
+          return(response_row)
+        })
 
       if (length(parsed_response) == 0) {
         parsed_response <- data.frame(
@@ -545,10 +598,16 @@ rba_enrichr_add_background <- function(background_genes,
           Old.adjusted.P.value = numeric()
         )
       } else {
-        parsed_response <- do.call(rbind, lapply(parsed_response, function(response_row)
-          {as.data.frame(response_row, stringsAsFactors = FALSE)}
+        parsed_response <- do.call(
+          rbind,
+          lapply(
+            parsed_response,
+            function(response_row) {
+              as.data.frame(response_row, stringsAsFactors = FALSE)
+            }
           )
         )
+
         numeric_cols <- c("Rank", "P.value", "Odds.Ratio", "Combined.Score",
                           "Adjusted.P.value", "Old.P.value", "Old.adjusted.P.value")
         parsed_response[numeric_cols] <- lapply(parsed_response[numeric_cols], as.numeric)
@@ -557,14 +616,16 @@ rba_enrichr_add_background <- function(background_genes,
     }
   }
 
-  input_call <- .rba_httr(httr = httr_verb,
-                          .rba_stg("enrichr", "url"),
-                          path = path_input,
-                          query = call_query,
-                          body = call_body,
-                          httr::accept(httr_accept),
-                          parser = parser_input,
-                          save_to = .rba_file(save_name))
+  input_call <- .rba_httr(
+    httr = httr_verb,
+    url = .rba_stg("enrichr", "url"),
+    path = path_input,
+    query = call_query,
+    body = call_body,
+    httr::accept(httr_accept),
+    parser = parser_input,
+    save_to = .rba_file(save_name)
+  )
 
   ## Call API
   Sys.sleep(sleep_time)
@@ -573,11 +634,13 @@ rba_enrichr_add_background <- function(background_genes,
   if (is.data.frame(final_output)) {
     return(final_output)
   } else {
-    error_message <- paste0("Error: Couldn't parse the server response for the requested Enrichr analysis. ",
-                            "Please try again. If the problem persists, kindly report the issue to us. ",
-                            "The server's raw response was: ",
-                            as.character(final_output),
-                            collapse = "\n")
+    error_message <- paste0(
+      "Error: Couldn't parse the server response for the requested Enrichr analysis. ",
+      "Please try again. If the problem persists, kindly report the issue to us. ",
+      "The server's raw response was: ",
+      as.character(final_output),
+      collapse = "\n"
+    )
     if (isTRUE(get("skip_error"))) {
       return(error_message)
     } else {
@@ -688,10 +751,12 @@ rba_enrichr_enrich <- function(user_list_id,
 
   ## get a list of available libraries
   if (is.null(getOption("rba_enrichr_libs")[[organism]])) {
-    .msg("Calling rba_enrichr_libs() to get the names of available Enrichr %s libraries.",
-         organism)
-    enrichr_libs <- rba_enrichr_libs(organism = organism,
-                                     store_in_options = TRUE)
+    .msg(
+      "Calling rba_enrichr_libs() to get the names of available Enrichr %s libraries.",
+      organism
+    )
+
+    enrichr_libs <- rba_enrichr_libs(organism = organism, store_in_options = TRUE)
 
     if (utils::hasName(enrichr_libs, "libraryName")) {
       enrichr_libs <- enrichr_libs[["libraryName"]]
@@ -711,9 +776,11 @@ rba_enrichr_enrich <- function(user_list_id,
     if (isFALSE(regex_library_name)) {
       run_mode <- "single"
     } else {
-      gene_set_library <- grep(gene_set_library,
-                               enrichr_libs,
-                               ignore.case = TRUE, value = TRUE, perl = TRUE)
+      gene_set_library <- grep(
+        gene_set_library,
+        enrichr_libs,
+        ignore.case = TRUE, value = TRUE, perl = TRUE
+      )
       #check the results of regex
       if (length(gene_set_library) == 0) {
         no_lib_error <- "Error: No Enrichr libraries matched your regex pattern."
@@ -731,67 +798,86 @@ rba_enrichr_enrich <- function(user_list_id,
   } # end of if length(gene_set_library) > 1
 
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "user_list_id",
-                             class = c("numeric", "integer"),
-                             len = 1),
-                        list(arg = "gene_set_library",
-                             class = "character",
-                             val = enrichr_libs),
-                        list(arg = "progress_bar",
-                             class = "logical"),
-                        list(arg = "organism",
-                             class = "character",
-                             no_null = TRUE,
-                             val = c("human", "fly", "yeast", "worm", "fish")),
-                        list(arg = "background_id",
-                             class = "character",
-                             len = 1)),
-            cond = list(list(quote((!is.null(background_id)) && organism != "human"),
-                             "Providing background gene set is only availbale for `human`.")))
+  .rba_args(
+    cons = list(
+      list(arg = "user_list_id", class = c("numeric", "integer"), len = 1),
+      list(arg = "gene_set_library", class = "character", val = enrichr_libs),
+      list(arg = "progress_bar", class = "logical"),
+      list(
+        arg = "organism", class = "character", no_null = TRUE,
+        val = c("human", "fly", "yeast", "worm", "fish")
+      ),
+      list(arg = "background_id", class = "character", len = 1)
+    ),
+    cond = list(
+      list(
+        quote((!is.null(background_id)) && organism != "human"),
+        "Providing background gene set is only availbale for `human`.")
+    )
+  )
 
   ## call Enrichr API
   if (run_mode == "single") {
-    .msg("Performing enrichment analysis on gene-list %s against Enrichr %s library: %s.",
-         user_list_id, organism, gene_set_library)
-    final_output <- .rba_enrichr_enrich_internal(user_list_id = user_list_id,
-                                                 background_id = background_id,
-                                                 gene_set_library = gene_set_library,
-                                                 save_name = sprintf("enrichr_%s_%s.json",
-                                                                     user_list_id,
-                                                                     gene_set_library),
-                                                 ...)
+    .msg(
+      "Performing enrichment analysis on gene-list %s against Enrichr %s library: %s.",
+      user_list_id, organism, gene_set_library
+    )
+
+    final_output <- .rba_enrichr_enrich_internal(
+      user_list_id = user_list_id,
+      background_id = background_id,
+      gene_set_library = gene_set_library,
+      save_name = sprintf("enrichr_%s_%s.json", user_list_id, gene_set_library),
+      ...
+    )
+
     return(final_output)
 
   } else {
-    .msg("Performing enrichment analysis on gene-list %s using multiple Enrichr %s libraries.",
-         user_list_id, organism)
-    .msg(paste0("Note: You have selected '%s' Enrichr %s libraries. Note that for ",
-                "each library, a separate call should be sent to Enrichr server. ",
-                "Thus, this could take a while depending on the number of selected ",
-                "libraries and your network connection."),
-         length(gene_set_library), organism)
+    .msg(
+      "Performing enrichment analysis on gene-list %s using multiple Enrichr %s libraries.",
+      user_list_id,
+      organism
+    )
+
+    .msg(
+      paste0(
+        "Note: You have selected '%s' Enrichr %s libraries. Note that for ",
+        "each library, a separate call should be sent to Enrichr server. ",
+        "Thus, this could take a while depending on the number of selected ",
+        "libraries and your network connection."
+      ),
+      length(gene_set_library),
+      organism
+    )
+
     ## initiate progress bar
     if (isTRUE(progress_bar)) {
-      pb <- utils::txtProgressBar(min = 0,
-                                  max = length(gene_set_library),
-                                  style = 3)
+      pb <- utils::txtProgressBar(
+        min = 0,
+        max = length(gene_set_library),
+        style = 3
+      )
     }
-    final_output <- lapply(gene_set_library,
-                           function(x){
-                             lib_enrich_res <- .rba_enrichr_enrich_internal(user_list_id = user_list_id,
-                                                                            background_id = background_id,
-                                                                            gene_set_library = x,
-                                                                            save_name = sprintf("enrichr_%s_%s.json",
-                                                                                                user_list_id,
-                                                                                                x),
-                                                                            sleep_time = 0.5,
-                                                                            ...)
-                             #advance the progress bar
-                             if (isTRUE(progress_bar)) {
-                               utils::setTxtProgressBar(pb, which(gene_set_library == x))
-                             }
-                             return(lib_enrich_res)
-                           })
+    final_output <- lapply(
+      gene_set_library,
+      function(x){
+        lib_enrich_res <- .rba_enrichr_enrich_internal(
+          user_list_id = user_list_id,
+          background_id = background_id,
+          gene_set_library = x,
+          save_name = sprintf("enrichr_%s_%s.json", user_list_id, x),
+          sleep_time = 0.5,
+          ...
+        )
+        #advance the progress bar
+        if (isTRUE(progress_bar)) {
+          utils::setTxtProgressBar(pb, which(gene_set_library == x))
+        }
+        return(lib_enrich_res)
+      }
+    )
+
     if (isTRUE(progress_bar)) {close(pb)}
     names(final_output) <- gene_set_library
     return(final_output)
@@ -856,35 +942,40 @@ rba_enrichr_gene_map <- function(gene,
                                  ...){
   ## Load Global Options
   .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "gene",
-                             class = "character",
-                             len = 1),
-                        list(arg = "categorize",
-                             class = "logical"),
-                        list(arg = "organism",
-                             class = "character",
-                             no_null = TRUE,
-                             val = c("human", "fly", "yeast", "worm", "fish"))
-  ))
 
-  .msg("Finding terms that contain %s gene: %s.", organism, gene)
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(arg = "gene", class = "character", len = 1),
+      list(arg = "categorize", class = "logical"),
+      list(
+        arg = "organism", class = "character", no_null = TRUE,
+        val = c("human", "fly", "yeast", "worm", "fish")
+      )
+    )
+  )
+
+  .msg(
+    "Finding terms that contain %s gene: %s.",
+    organism, gene
+  )
 
   ## Build GET API Request's query
-  call_query <- .rba_query(init = list("gene" = gene,
-                                       "json" = "true"),
-                           list("setup",
-                                isTRUE(categorize),
-                                "true"))
+  call_query <- .rba_query(
+    init = list("gene" = gene, "json" = "true"),
+    list("setup", isTRUE(categorize), "true")
+  )
+
   ## Build Function-Specific Call
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("enrichr", "url"),
-                          path = paste0(.rba_stg("enrichr", "pth", organism),
-                                        "genemap"),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = "json->list_simp_flt_df",
-                          save_to = .rba_file("enrichr_gene_map.json"))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("enrichr", "url"),
+    path = paste0(.rba_stg("enrichr", "pth", organism), "genemap"),
+    query = call_query,
+    accept = "application/json",
+    parser = "json->list_simp_flt_df",
+    save_to = .rba_file("enrichr_gene_map.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -975,25 +1066,30 @@ rba_enrichr <- function(gene_list,
                         ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "gene_list",
-                             class = "character"),
-                        list(arg = "description",
-                             class = "character"),
-                        list(arg = "regex_library_name",
-                             class = "logical"),
-                        list(arg = "progress_bar",
-                             class = "logical"),
-                        list(arg = "organism",
-                             class = "character",
-                             no_null = TRUE,
-                             val = c("human", "fly", "yeast", "worm", "fish")),
-                        list(arg = "background_genes",
-                             class = "character")),
-            cond = list(list(quote((!is.null(background_genes)) && organism != "human"),
-                             "Providing background gene set is only availbale for `human`."),
-                        list(quote(!is.null(background_genes) && (!all(gene_list %in% background_genes))),
-                             "Some of the gene_list elements are not present in background_genes"))
+  .rba_args(
+    cons = list(
+      list(arg = "gene_list", class = "character"),
+      list(arg = "description", class = "character"),
+      list(arg = "regex_library_name", class = "logical"),
+      list(arg = "progress_bar", class = "logical"),
+      list(
+        arg = "organism", class = "character", no_null = TRUE,
+        val = c("human", "fly", "yeast", "worm", "fish")
+      ),
+      list(arg = "background_genes", class = "character")
+    ),
+    cond = list(
+      list(
+        quote((!is.null(background_genes)) && organism != "human"),
+        "Providing background gene set is only availbale for `human`."
+      ),
+      list(
+        quote(!is.null(background_genes) && (!all(gene_list %in% background_genes))),
+        "Some of the gene_list elements are not present in background_genes"
+      )
+    )
   )
 
   .msg("--Step 1/3:")
@@ -1007,10 +1103,12 @@ rba_enrichr <- function(gene_list,
   step_1_success <- exists("enrichr_libs") && length(enrichr_libs) > 1
 
   if (!step_1_success) { # Halt at step 1
-    no_lib_msg <- paste0("Error: Couldn't fetch available Enrichr libraries. Please manually run `rba_enrichr_libs(store_in_options = TRUE)`. ",
-                         "If the problem persists, kindly report this issue to us. The error message was: ",
-                         try(enrichr_libs),
-                         collapse = "\n")
+    no_lib_msg <- paste0(
+      "Error: Couldn't fetch available Enrichr libraries. Please manually run `rba_enrichr_libs(store_in_options = TRUE)`. ",
+      "If the problem persists, kindly report this issue to us. The error message was: ",
+      try(enrichr_libs),
+      collapse = "\n"
+    )
 
     if (isTRUE(get("skip_error"))) {
       .msg(no_lib_msg)
@@ -1022,11 +1120,13 @@ rba_enrichr <- function(gene_list,
 
     .msg("--Step 2/3:")
     Sys.sleep(2)
-    list_id <- rba_enrichr_add_list(gene_list = gene_list,
-                                    description = description,
-                                    organism = organism,
-                                    speedrichr = !is.null(background_genes),
-                                    ...)
+    list_id <- rba_enrichr_add_list(
+      gene_list = gene_list,
+      description = description,
+      organism = organism,
+      speedrichr = !is.null(background_genes),
+      ...
+    )
 
     step_2_success <- exists("list_id") && utils::hasName(list_id, "userListId")
 
@@ -1045,24 +1145,29 @@ rba_enrichr <- function(gene_list,
     if (step_2_success) { # proceed to step 3
       .msg("--Step 3/3:")
       Sys.sleep(2)
-      enriched <- rba_enrichr_enrich(user_list_id = list_id$userListId,
-                                     gene_set_library = gene_set_library,
-                                     regex_library_name = regex_library_name,
-                                     background_id = background_id,
-                                     organism = organism,
-                                     progress_bar = progress_bar,
-                                     ...)
+      enriched <- rba_enrichr_enrich(
+        user_list_id = list_id$userListId,
+        gene_set_library = gene_set_library,
+        regex_library_name = regex_library_name,
+        background_id = background_id,
+        organism = organism,
+        progress_bar = progress_bar,
+        ...
+      )
 
       step_3_success <- exists("enriched") && (is.list(enriched) || is.data.frame(enriched))
 
       if (step_3_success) { # Finish step 3
         return(enriched)
       } else { # Halt at step 3
-        no_enriched_msg <- paste0("Error: Couldn't retrieve the submitted Enrichr analysis request. ",
-                                  "Please retry or manually run the required steps as demonstrated in the `Enrichr & rbioapi` vignette article, section `Approach 2: Going step-by-step`. ",
-                                  "If the problem persists, kindly report this issue to us. The error message was:",
-                                  try(enriched),
-                                  collapse = "\n")
+        no_enriched_msg <- paste0(
+          "Error: Couldn't retrieve the submitted Enrichr analysis request. ",
+          "Please retry or manually run the required steps as demonstrated in the `Enrichr & rbioapi` vignette article, section `Approach 2: Going step-by-step`. ",
+          "If the problem persists, kindly report this issue to us. The error message was:",
+          try(enriched),
+          collapse = "\n"
+        )
+
         if (isTRUE(get("skip_error"))) {
           .msg(no_enriched_msg)
           return(no_enriched_msg)
@@ -1071,11 +1176,13 @@ rba_enrichr <- function(gene_list,
         }
       }
     } else { # Halt at step 2
-      no_list_msg <- paste0("Error: Couldn't upload your genes list to Enrichr. ",
-                            "Please retry or manually run the required steps as demonstrated in the `Enrichr & rbioapi` vignette article, section `Approach 2: Going step-by-step`. ",
-                            "If the problem persists, kindly report this issue to us. The error message was: ",
-                            try(list_id),
-                            collapse = "\n")
+      no_list_msg <- paste0(
+        "Error: Couldn't upload your genes list to Enrichr. ",
+        "Please retry or manually run the required steps as demonstrated in the `Enrichr & rbioapi` vignette article, section `Approach 2: Going step-by-step`. ",
+        "If the problem persists, kindly report this issue to us. The error message was: ",
+        try(list_id),
+        collapse = "\n"
+      )
       if (isTRUE(get("skip_error"))) {
         .msg(no_list_msg)
         return(no_list_msg)

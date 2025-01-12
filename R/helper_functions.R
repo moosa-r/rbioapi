@@ -12,20 +12,21 @@
 #' @family internal_internet_connectivity
 #' @noRd
 .rba_api_check <- function(url, diagnostics = FALSE){
-  request <- quote(httr::HEAD(url = url,
-                              httr::timeout(getOption("rba_timeout")),
-                              httr::user_agent(getOption("rba_user_agent")),
-                              if (diagnostics) httr::verbose()
-  ))
-  test_result <- try(httr::status_code(eval(request)),
-                     silent = !diagnostics)
+  request <- quote(
+    httr::HEAD(
+      url = url,
+      httr::timeout(getOption("rba_timeout")),
+      httr::user_agent(getOption("rba_user_agent")),
+      if (diagnostics) httr::verbose()
+    )
+  )
+  test_result <- try(httr::status_code(eval(request)), silent = !diagnostics)
 
   if (is.numeric(test_result)) {
     if (test_result == 200) {
       return(TRUE)
     } else {
-      return(.rba_http_status(test_result,
-                              verbose = FALSE))
+      return(.rba_http_status(test_result, verbose = FALSE))
     }
   } else {
     return(test_result)
@@ -70,19 +71,30 @@ rba_connection_test <- function(print_output = TRUE, diagnostics = FALSE) {
   timeout <- getOption("rba_timeout")
   skip_error <- getOption("rba_skip_error")
 
-  cat_if <- ifelse(test = isTRUE(print_output),
-                   yes = function(...) {cat(...)},
-                   no = function(...) {invisible()})
+  cat_if <- ifelse(
+    test = isTRUE(print_output),
+    yes = function(...) { cat(...) },
+    no = function(...) { invisible() }
+  )
+
   # start tests
-  .msg("Checking Your connection to the Databases currently supported by rbioapi:",
-       cond = "print_output")
+  .msg(
+    "Checking Your connection to the Databases currently supported by rbioapi:",
+    cond = "print_output"
+  )
 
   cat_if("--->>>", "Internet", ":\n")
-  google <- try(httr::status_code(httr::HEAD("https://google.com/",
-                                             if (diagnostics) httr::verbose(),
-                                             httr::user_agent(user_agent),
-                                             httr::timeout(timeout)))
-                , silent = TRUE)
+  google <- try(
+    httr::status_code(
+      httr::HEAD(
+        "https://google.com/",
+        if (diagnostics) httr::verbose(),
+        httr::user_agent(user_agent),
+        httr::timeout(timeout)
+      )
+    ),
+    silent = TRUE
+  )
 
   if (google == 200) {
     cat_if("+++ Connected to the Internet.\n")
@@ -91,8 +103,10 @@ rba_connection_test <- function(print_output = TRUE, diagnostics = FALSE) {
     if (isTRUE(skip_error)) {
       return("Could not resolve `https://google.com`. Check Your internet Connection.")
     } else {
-      stop("Could not resolve `https://google.com`. Check Your internet Connection.",
-           call. = diagnostics)
+      stop(
+        "Could not resolve `https://google.com`. Check Your internet Connection.",
+        call. = diagnostics
+      )
     }
   }
 
@@ -188,32 +202,56 @@ rba_options <- function(diagnostics = NULL,
                         skip_error = NULL,
                         timeout = NULL,
                         verbose = NULL) {
-  .rba_args(cond = list(list(quote(is.character(save_file)),
-                             "As a global option, you can only set save_file to 'logical', not a file path.")))
+
+  .rba_args(
+    cond = list(
+      list(
+        quote(is.character(save_file)),
+        "As a global option, you can only set save_file to 'logical', not a file path."
+      )
+    )
+  )
+
   ## if empty function was called, show the available options
-  changes <- vapply(X = ls(),
-                    function(x) {
-                      x <- get(x)
-                      !(is.null(x) || is.na(x))},
-                    logical(1))
+  changes <- vapply(
+    X = ls(),
+    function(x) {
+      x <- get(x)
+      !(is.null(x) || is.na(x))
+    },
+    logical(1)
+  )
+
   if (!any(changes)) {
-    options_df <- data.frame(rbioapi_option = getOption("rba_user_options"),
-                             current_value = vapply(names(getOption("rba_user_options")),
-                                                    function(x) {as.character(getOption(x))},
-                                                    character(1)),
-                             allowed_value = getOption("rba_user_options_allowed"),
-                             stringsAsFactors = FALSE,
-                             row.names = NULL)
+    options_df <- data.frame(
+      rbioapi_option = getOption("rba_user_options"),
+      current_value = vapply(
+        names(getOption("rba_user_options")),
+        function(x) { as.character(getOption(x)) },
+        character(1)
+      ),
+      allowed_value = getOption("rba_user_options_allowed"),
+      stringsAsFactors = FALSE,
+      row.names = NULL
+    )
     return(options_df)
   } else {
     ## change the supplied options
     for (chng in names(changes[changes])) {
       chng_content <- get(chng)
-      eval(parse(text = sprintf(ifelse(is.character(chng_content),
-                                       yes = "options(%s = \"%s\")",
-                                       no = "options(%s = %s)"),
-                                paste0("rba_", chng),
-                                chng_content)))
+      eval(
+        parse(
+          text = sprintf(
+            ifelse(
+              is.character(chng_content),
+              yes = "options(%s = \"%s\")",
+              no = "options(%s = %s)"
+            ),
+            paste0("rba_", chng),
+            chng_content
+          )
+        )
+      )
     }
     invisible()
   }
@@ -233,24 +271,29 @@ rba_options <- function(diagnostics = NULL,
 .rba_pages_do <- function(input_call, pb_switch, sleep_time = 1) {
   if (pb_switch) {
     ## initiate progress bar
-    pb <- utils::txtProgressBar(min = 0,
-                                max = length(input_call),
-                                style = 3)
+    pb <- utils::txtProgressBar(
+      min = 0,
+      max = length(input_call),
+      style = 3
+    )
     pb_val <- 0
   }
   #do the calls
-  output <- lapply(X = input_call,
-                   FUN = function(x){
-                     Sys.sleep(sleep_time)
-                     y <- eval(parse(text = x))
-                     if (pb_switch) {
-                       # advance the progress bar
-                       pb_now <- get("pb_val", envir = parent.frame(2))
-                       assign("pb_val", pb_now + 1, envir = parent.frame(2))
-                       utils::setTxtProgressBar(pb, pb_now + 1)
-                     }
-                     return(y)
-                   })
+  output <- lapply(
+    X = input_call,
+    FUN = function(x){
+      Sys.sleep(sleep_time)
+      y <- eval(parse(text = x))
+      if (pb_switch) {
+        # advance the progress bar
+        pb_now <- get("pb_val", envir = parent.frame(2))
+        assign("pb_val", pb_now + 1, envir = parent.frame(2))
+        utils::setTxtProgressBar(pb, pb_now + 1)
+      }
+      return(y)
+    }
+  )
+
   if (pb_switch) {close(pb)}
   return(output)
 }
@@ -305,12 +348,15 @@ rba_options <- function(diagnostics = NULL,
 rba_pages <- function(input_call, ...){
   ## Internal options
   ext_args <- list(...)
-  internal_opts <- list(verbose = TRUE,
-                        sleep_time = 1,
-                        page_check = TRUE,
-                        add_skip_error = TRUE,
-                        list_names = NA,
-                        force_pb = NA)
+  internal_opts <- list(
+    verbose = TRUE,
+    sleep_time = 1,
+    page_check = TRUE,
+    add_skip_error = TRUE,
+    list_names = NA,
+    force_pb = NA
+  )
+
   if (length(ext_args) > 0) {
     internal_opts[names(ext_args)] <- ext_args
   }
@@ -318,37 +364,57 @@ rba_pages <- function(input_call, ...){
 
   ## Convert the input_call to character
   if (!inherits(input_call, "call")) {
-    stop("The call should be wrapped in qoute()",
-         call. = getOption("rba_diagnostics"))
+    stop(
+      "The call should be wrapped in qoute()",
+      call. = getOption("rba_diagnostics")
+    )
   }
 
-  input_call <- gsub(pattern = "\\s+",
-                     replacement = " ",
-                     x = paste0(deparse(input_call), collapse = ""))
+  input_call <- gsub(
+    pattern = "\\s+",
+    replacement = " ",
+    x = paste0(deparse(input_call), collapse = "")
+  )
+
   if (!grepl("^rba_.+\\(", input_call)) {
-    stop("You should supply a rbioapi function.",
-         call. = getOption("rba_diagnostics"))
+    stop(
+      "You should supply a rbioapi function.",
+      call. = getOption("rba_diagnostics")
+    )
   }
 
   ## Extract start and end pages
-  start_page <- unlist(regmatches(input_call,
-                                  gregexpr("(?<=\"pages:)\\d+(?=:\\d+\")",
-                                           input_call, perl = TRUE)))
-  end_page <- unlist(regmatches(input_call,
-                                gregexpr("(?<=\\d:)\\d+(?=\")",
-                                         input_call, perl = TRUE)))
+  start_page <- unlist(
+    regmatches(
+      input_call,
+      gregexpr("(?<=\"pages:)\\d+(?=:\\d+\")", input_call, perl = TRUE)
+    )
+  )
+
+  end_page <- unlist(
+    regmatches(
+      input_call,
+      gregexpr("(?<=\\d:)\\d+(?=\")", input_call, perl = TRUE)
+    )
+  )
+
   start_page <- as.integer(start_page)
   end_page <- as.integer(end_page)
+
   ## Check pages
   if (length(start_page) != 1 | length(end_page) != 1) {
-    stop("The variable you want to paginate should be formatted as:",
-         "`pages:start:end`.\nfor example: \"pages:1:5\".",
-         call. = getOption("rba_diagnostics"))
+    stop(
+      "The variable you want to paginate should be formatted as:",
+      "`pages:start:end`.\nfor example: \"pages:1:5\".",
+      call. = getOption("rba_diagnostics")
+    )
   }
 
   if (isTRUE(internal_opts$page_check) && (end_page - start_page > 100)) {
-    stop("The maximum pages you are allowed to iterate are 100 pages.",
-         call. = getOption("rba_diagnostics"))
+    stop(
+      "The maximum pages you are allowed to iterate are 100 pages.",
+      call. = getOption("rba_diagnostics")
+    )
   }
 
   ## Only show progress bar if verbose, diagnostics and progress bar are off
@@ -371,19 +437,29 @@ rba_pages <- function(input_call, ...){
   }
 
   ## Build the calls
-  elements_seq <- seq.int(from = start_page, to = end_page,
-                          by = ifelse(test = start_page > end_page,
-                                      yes = -1L,
-                                      no = 1L))
+  elements_seq <- seq.int(
+    from = start_page,
+    to = end_page,
+    by = ifelse(test = start_page > end_page, yes = -1L, no = 1L)
+  )
+
   # Add skip_error = TRUE and page numbers to the calls
-  input_call <- gsub(",\\s*skip_error\\s*=\\s*(TRUE|FALSE)", "",
-                     input_call, perl = TRUE)
-  input_call <- sub(pattern = "\"pages:\\d+:\\d+\"",
-                    replacement = ifelse(test = isFALSE(internal_opts$add_skip_error),
-                                         yes = "%s",
-                                         no = "%s, skip_error = TRUE"),
-                    x = input_call,
-                    perl = TRUE)
+  input_call <- gsub(
+    pattern = ",\\s*skip_error\\s*=\\s*(TRUE|FALSE)",
+    replacement = "",
+    x = input_call,
+    perl = TRUE
+  )
+  input_call <- sub(
+    pattern = "\"pages:\\d+:\\d+\"",
+    replacement = ifelse(
+      test = isFALSE(internal_opts$add_skip_error),
+      yes = "%s",
+      no = "%s, skip_error = TRUE"
+    ),
+    x = input_call,
+    perl = TRUE
+  )
 
   input_call <- as.list(sprintf(input_call, elements_seq))
 
@@ -395,10 +471,17 @@ rba_pages <- function(input_call, ...){
   }
 
   ## Do the calls
-  .msg("Iterating from page %s to page %s.", start_page, end_page)
-  final_output <- .rba_pages_do(input_call,
-                                pb_switch = pb_switch,
-                                sleep_time = internal_opts$sleep_time)
+  .msg(
+    "Iterating from page %s to page %s.",
+    start_page, end_page
+  )
+
+  final_output <- .rba_pages_do(
+    input_call,
+    pb_switch = pb_switch,
+    sleep_time = internal_opts$sleep_time
+  )
+
   return(final_output)
 }
 

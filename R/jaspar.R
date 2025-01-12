@@ -43,33 +43,40 @@ rba_jaspar_collections <- function(release = 2024,
                                    ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "release",
-                             class = "numeric",
-                             no_null = TRUE,
-                             val = c(2014, 2016, 2018, 2020, 2022, 2024))
-  ))
-
-  .msg("Retrieving a list of collections available in JASPAR release %s.",
-       release)
-
-  ## Build GET API Request's query
-  call_query <- list("release" = release,
-                     "page_size" = 1000)
-
-  ## Build Function-Specific Call
-  parser_input <- list("json->list_simp",
-                       function(x) x[["results"]]
+  .rba_args(
+    cons = list(
+      list(
+        arg = "release", class = "numeric", no_null = TRUE,
+        val = c(2014, 2016, 2018, 2020, 2022, 2024)
+      )
+    )
   )
 
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("jaspar", "url"),
-                          path = paste0(.rba_stg("jaspar", "pth"),
-                                        "collections/"),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = parser_input,
-                          save_to = .rba_file("jaspar_collections.json"))
+  .msg(
+    "Retrieving a list of collections available in JASPAR release %s.",
+    release
+  )
+
+  ## Build GET API Request's query
+  call_query <- list("release" = release, "page_size" = 1000)
+
+  ## Build Function-Specific Call
+  parser_input <- list(
+    "json->list_simp",
+    function(x) { x[["results"]] }
+  )
+
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("jaspar", "url"),
+    path = paste0(.rba_stg("jaspar", "pth"), "collections/"),
+    query = call_query,
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("jaspar_collections.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -150,66 +157,63 @@ rba_jaspar_collections_matrices <- function(collection,
                                             ...) {
   ## Load Global Options
   .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "collection",
-                             class = "character",
-                             val = c("CORE",
-                                     "CNE",
-                                     "PHYLOFACTS",
-                                     "SPLICE",
-                                     "POLII",
-                                     "FAM",
-                                     "PBM",
-                                     "PBM_HOMEO",
-                                     "PBM_HLH",
-                                     "UNVALIDATED")),
-                        list(arg = "only_last_version",
-                             class = "logical"),
-                        list(arg = "release",
-                             class = "numeric",
-                             no_null = TRUE,
-                             val = c(2014, 2016, 2018, 2020, 2022, 2024)),
-                        list(arg = "search",
-                             class = "character"),
-                        list(arg = "order",
-                             class = "character"),
-                        list(arg = "page_size",
-                             class = "numeric",
-                             ran = c(1,1000)),
-                        list(arg = "page",
-                             class = "numeric",
-                             min_val = 1)
-  ))
 
-  .msg("Retrieving a list of matrix profiles available in JASPAR %s collection release %s (page %s).",
-       collection, release, page)
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(
+        arg = "collection", class = "character",
+        val = c("CORE",
+                "CNE",
+                "PHYLOFACTS",
+                "SPLICE",
+                "POLII",
+                "FAM",
+                "PBM",
+                "PBM_HOMEO",
+                "PBM_HLH",
+                "UNVALIDATED")
+      ),
+      list(arg = "only_last_version", class = "logical"),
+      list(
+        arg = "release", class = "numeric", no_null = TRUE,
+        val = c(2014, 2016, 2018, 2020, 2022, 2024)
+      ),
+      list(arg = "search", class = "character"),
+      list(arg = "order", class = "character"),
+      list(arg = "page_size", class = "numeric", ran = c(1,1000)),
+      list(arg = "page", class = "numeric", min_val = 1)
+    )
+  )
+
+  .msg(
+    "Retrieving a list of matrix profiles available in JASPAR %s collection release %s (page %s).",
+    collection, release, page
+  )
 
   ## Build GET API Request's query
-  call_query <- .rba_query(init = list("collection" = collection,
-                                       "release" = release,
-                                       "page_size" = page_size,
-                                       "page" = page),
-                           list("version",
-                                isTRUE(only_last_version),
-                                "latest"),
-                           list("search",
-                                !is.null(search),
-                                search),
-                           list("order",
-                                !is.null(order),
-                                paste0(order, collapse = ","))
+  call_query <- .rba_query(
+    init = list(
+      "collection" = collection,
+      "release" = release,
+      "page_size" = page_size,
+      "page" = page
+    ),
+    list("version", isTRUE(only_last_version), "latest"),
+    list("search", !is.null(search), search),
+    list("order",!is.null(order), paste0(order, collapse = ","))
   )
 
   ## Build Function-Specific Call
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("jaspar", "url"),
-                          path = sprintf("%s/collections/%s/",
-                                         .rba_stg("jaspar", "pth"),
-                                         collection),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = "json->list_simp",
-                          save_to = .rba_file("jaspar_collections_profiles.json"))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("jaspar", "url"),
+    path = sprintf("%s/collections/%s/", .rba_stg("jaspar", "pth"), collection),
+    query = call_query,
+    accept = "application/json",
+    parser = "json->list_simp",
+    save_to = .rba_file("jaspar_collections_profiles.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -310,102 +314,73 @@ rba_jaspar_matrix_search <- function(term = NULL,
                                      ...) {
   ## Load Global Options
   .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "term",
-                             class = "character"),
-                        list(arg = "tf_name",
-                             class = "character"),
-                        list(arg = "tf_class",
-                             class = "character"),
-                        list(arg = "tf_family",
-                             class = "character"),
-                        list(arg = "tax_group",
-                             class = "character"),
-                        list(arg = "tax_id",
-                             class = "numeric"),
-                        list(arg = "data_type",
-                             class = "character"),
-                        list(arg = "collection",
-                             class = "character",
-                             val = c("CORE",
-                                     "CNE",
-                                     "PHYLOFACTS",
-                                     "SPLICE",
-                                     "POLII",
-                                     "FAM",
-                                     "PBM",
-                                     "PBM_HOMEO",
-                                     "PBM_HLH",
-                                     "UNVALIDATED")),
-                        list(arg = "release",
-                             class = "numeric",
-                             no_null = TRUE,
-                             val = c(2014, 2016, 2018, 2020, 2022, 2024)),
-                        list(arg = "order",
-                             class = "character"),
-                        list(arg = "only_last_version",
-                             class = "logical"),
-                        list(arg = "page_size",
-                             class = "numeric",
-                             ran = c(1,1000)),
-                        list(arg = "page",
-                             class = "numeric",
-                             min_val = 1)
-  ))
 
-  .msg("Retrieving a list of matrix profiles available in JASPAR release %s based on your search query.",
-       release)
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(arg = "term", class = "character"),
+      list(arg = "tf_name", class = "character"),
+      list(arg = "tf_class", class = "character"),
+      list(arg = "tf_family", class = "character"),
+      list(arg = "tax_group", class = "character"),
+      list(arg = "tax_id", class = "numeric"),
+      list(arg = "data_type", class = "character"),
+      list(
+        arg = "collection", class = "character",
+        val = c("CORE",
+                "CNE",
+                "PHYLOFACTS",
+                "SPLICE",
+                "POLII",
+                "FAM",
+                "PBM",
+                "PBM_HOMEO",
+                "PBM_HLH",
+                "UNVALIDATED")
+      ),
+      list(
+        arg = "release", class = "numeric", no_null = TRUE,
+        val = c(2014, 2016, 2018, 2020, 2022, 2024)
+      ),
+      list(arg = "order", class = "character"),
+      list(arg = "only_last_version", class = "logical"),
+      list(arg = "page_size", class = "numeric", ran = c(1,1000)),
+      list(arg = "page", class = "numeric", min_val = 1)
+    )
+  )
+
+  .msg(
+    "Retrieving a list of matrix profiles available in JASPAR release %s based on your search query.",
+    release
+  )
 
   ## Build GET API Request's query
-  call_query <- .rba_query(init = list("release" = release,
-                                       "page_size" = page_size,
-                                       "page" = page),
-                           list("search",
-                                !is.null(term),
-                                term),
-                           list("name",
-                                !is.null(tf_name),
-                                tf_name),
-                           list("tf_class",
-                                !is.null(tf_class),
-                                tf_class),
-                           list("tf_family",
-                                !is.null(tf_family),
-                                tf_family),
-                           list("tax_group",
-                                !is.null(tax_group),
-                                tax_group),
-                           list("tax_id",
-                                !is.null(tax_id),
-                                paste0(tax_id, collapse = ",")),
-                           list("data_type",
-                                !is.null(data_type),
-                                data_type),
-                           list("collection",
-                                !is.null(collection),
-                                collection),
-                           list("search",
-                                !is.null(term),
-                                term),
-                           list("search",
-                                !is.null(term),
-                                term),
-                           list("version",
-                                isTRUE(only_last_version),
-                                "latest"),
-                           list("order",
-                                !is.null(order),
-                                paste0(order, collapse = ","))
+  call_query <- .rba_query(
+    init = list("release" = release, "page_size" = page_size, "page" = page),
+    list("search", !is.null(term), term),
+    list("name", !is.null(tf_name), tf_name),
+    list("tf_class", !is.null(tf_class), tf_class),
+    list("tf_family", !is.null(tf_family), tf_family),
+    list("tax_group", !is.null(tax_group), tax_group),
+    list("tax_id", !is.null(tax_id), paste0(tax_id, collapse = ",")),
+    list("data_type", !is.null(data_type), data_type),
+    list("collection", !is.null(collection), collection),
+    list("search", !is.null(term), term),
+    list("search", !is.null(term), term),
+    list("version", isTRUE(only_last_version), "latest"),
+    list("order", !is.null(order), paste0(order, collapse = ","))
   )
 
   ## Build Function-Specific Call
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("jaspar", "url"),
-                          path = paste0(.rba_stg("jaspar", "pth"), "matrix/"),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = "json->list_simp",
-                          save_to = .rba_file("jaspar_matrix_search.json"))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("jaspar", "url"),
+    path = paste0(.rba_stg("jaspar", "pth"), "matrix/"),
+    query = call_query,
+    accept = "application/json",
+    parser = "json->list_simp",
+    save_to = .rba_file("jaspar_matrix_search.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -461,39 +436,46 @@ rba_jaspar_matrix_versions <- function(base_id,
                                        ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list( list(arg = "base_id",
-                              class = "character"),
-                         list(arg = "order",
-                              class = "character")),
-            cond = list(list(quote(grepl("\\.\\d+" ,base_id)),
-                             "base_id cannot be versioned. "))
+  .rba_args(
+    cons = list(
+      list(arg = "base_id", class = "character"),
+      list(arg = "order", class = "character")),
+    cond = list(
+      list(
+        quote(grepl("\\.\\d+" ,base_id)),
+        "base_id cannot be versioned."
+      )
+    )
   )
 
-  .msg("Retrieving a list of matrix profile versions under base ID %s.",
-       base_id)
+  .msg(
+    "Retrieving a list of matrix profile versions under base ID %s.",
+    base_id
+  )
 
   ## Build GET API Request's query
-  call_query <- .rba_query(init = list("base_id" = base_id,
-                                       "page_size" = 1000),
-                           list("order",
-                                !is.null(order),
-                                paste0(order, collapse = ",")))
-
-  ## Build Function-Specific Call
-  parser_input <- list("json->list_simp",
-                       function(x) x[["results"]]
+  call_query <- .rba_query(
+    init = list("base_id" = base_id, "page_size" = 1000),
+    list("order", !is.null(order), paste0(order, collapse = ","))
   )
 
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("jaspar", "url"),
-                          path = sprintf("%smatrix/%s/versions/",
-                                         .rba_stg("jaspar", "pth"),
-                                         base_id),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = parser_input,
-                          save_to = .rba_file("jaspar_matrix_versions.json"))
+  ## Build Function-Specific Call
+  parser_input <- list(
+    "json->list_simp",
+    function(x) { x[["results"]] }
+  )
+
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("jaspar", "url"),
+    path = sprintf("%smatrix/%s/versions/", .rba_stg("jaspar", "pth"), base_id),
+    query = call_query,
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("jaspar_matrix_versions.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -561,62 +543,74 @@ rba_jaspar_matrix <- function(matrix_id,
   ## Load Global Options
   .rba_ext_args(..., ignore_save = TRUE)
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "matrix_id",
-                             class = "character"),
-                        list(arg = "file_format",
-                             class = "character",
-                             val = c("yaml",
-                                     "jaspar",
-                                     "transfac",
-                                     "pfm",
-                                     "meme")),
-                        list(arg = "save_to",
-                             class = "character")
-  ))
+  .rba_args(
+    cons = list(
+      list(arg = "matrix_id", class = "character"),
+      list(
+        arg = "file_format", class = "character",
+        val = c("yaml", "jaspar", "transfac", "pfm", "meme")
+      ),
+      list(arg = "save_to", class = "character")
+    )
+  )
 
-  .msg("Retrieving details of matrix profile with ID %s.", matrix_id)
+  .msg(
+    "Retrieving details of matrix profile with ID %s.",
+    matrix_id
+  )
 
   ## Build Function-Specific Call
   if (is.null(file_format)) {
+
     accept_input <- "application/json"
 
-    parser_input <- list("json->list_simp",
-                         function(x) {
-                           x$pfm <- as.matrix(t(as.data.frame(x$pfm[c("A", "C", "G", "T")])))
-                           return(x)})
+    parser_input <- list(
+      "json->list_simp",
+      function(x) {
+        x$pfm <- as.matrix(t(as.data.frame(x$pfm[c("A", "C", "G", "T")])))
+        return(x)
+      }
+    )
 
-    save_to_input <- ifelse(isTRUE(save_to),
-                            .rba_file("jaspar_matrix.json",
-                                      save_to = save_to),
-                            .rba_file("jaspar_matrix.json")
+    save_to_input <- ifelse(
+      isTRUE(save_to),
+      .rba_file("jaspar_matrix.json", save_to = save_to),
+      .rba_file("jaspar_matrix.json")
     )
 
   } else {
-    accept_input <- switch(file_format,
-                           "yaml" = "application/yaml",
-                           "jaspar" = "text/jaspar",
-                           "transfac" = "text/transfac",
-                           "pfm" = "text/pfm",
-                           "meme" = "text/meme")
+
+    accept_input <- switch(
+      file_format,
+      "yaml" = "application/yaml",
+      "jaspar" = "text/jaspar",
+      "transfac" = "text/transfac",
+      "pfm" = "text/pfm",
+      "meme" = "text/meme"
+    )
 
     parser_input <- "text->chr"
 
-    save_to_input <- .rba_file(file = sprintf("%s.%s",
-                                              matrix_id, file_format),
-                               save_to = ifelse(is.null(save_to) || is.na(save_to),
-                                                yes = TRUE,
-                                                no = save_to))
+    save_to_input <- .rba_file(
+      file = sprintf("%s.%s", matrix_id, file_format),
+      save_to = ifelse(
+        is.null(save_to) || is.na(save_to),
+        yes = TRUE,
+        no = save_to
+      )
+    )
+
   }
 
 
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("jaspar", "url"),
-                          path = sprintf("%smatrix/%s/",
-                                         .rba_stg("jaspar", "pth"),
-                                         matrix_id),
-                          accept = accept_input,
-                          parser = parser_input,
-                          save_to = save_to_input)
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("jaspar", "url"),
+    path = sprintf("%smatrix/%s/", .rba_stg("jaspar", "pth"), matrix_id),
+    accept = accept_input,
+    parser = parser_input,
+    save_to = save_to_input
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -672,46 +666,62 @@ rba_jaspar_releases  <- function(release_number = NULL,
                                  ...) {
   ## Load Global Options
   .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "release_number",
-                             class = "numeric",
-                             ran = c(1,8))
-  ))
 
-  .msg(ifelse(is.null(release_number),
-              yes = "Retrieving a list of all releases of JASPAR database.",
-              no = sprintf("Retrieving a details of JASPAR database release number %s.",
-                           release_number))
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(arg = "release_number", class = "numeric", ran = c(1,8))
+    )
+  )
+
+  .msg(
+    ifelse(
+      is.null(release_number),
+      yes = "Retrieving a list of all releases of JASPAR database.",
+      no = sprintf(
+        "Retrieving a details of JASPAR database release number %s.",
+        release_number
+      )
+    )
   )
 
   ## Build GET API Request's query
-  call_query <- .rba_query(init = list(),
-                           list("release_number",
-                                !is.null(release_number),
-                                release_number),
-                           list("page_size",
-                                is.null(release_number),
-                                1000)
+  call_query <- .rba_query(
+    init = list(),
+    list("release_number", !is.null(release_number), release_number),
+    list("page_size", is.null(release_number), 1000)
   )
 
   ## Build Function-Specific Call
   if (is.null(release_number)) {
+
     path_input <- paste0(.rba_stg("jaspar", "pth"), "releases/")
-    parser_input <- list("json->list_simp",
-                         function(x) x[["results"]])
+
+    parser_input <- list(
+      "json->list_simp",
+      function(x) { x[["results"]] }
+    )
+
   } else {
-    path_input <- sprintf("%sreleases/%s",
-                          .rba_stg("jaspar", "pth"), release_number)
+
+    path_input <- sprintf(
+      "%sreleases/%s",
+      .rba_stg("jaspar", "pth"), release_number
+    )
 
     parser_input <- "json->list_simp"
+
   }
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("jaspar", "url"),
-                          path = path_input,
-                          query = call_query,
-                          accept = "application/json",
-                          parser = parser_input,
-                          save_to = .rba_file("jaspar_matrix.json"))
+
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("jaspar", "url"),
+    path = path_input,
+    query = call_query,
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("jaspar_matrix.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -762,28 +772,33 @@ rba_jaspar_sites <- function(matrix_id,
                              ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list( list(arg = "matrix_id",
-                              class = "character"))
+  .rba_args(
+    cons = list(
+      list(arg = "matrix_id", class = "character")
+    )
   )
 
-  .msg("Retrieving binding sites information of matrix profile with ID %s.",
-       matrix_id)
+  .msg(
+    "Retrieving binding sites information of matrix profile with ID %s.",
+    matrix_id
+  )
 
   ## Build GET API Request's query
   call_query <- list("matrix_id" = matrix_id)
 
   ## Build Function-Specific Call
 
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("jaspar", "url"),
-                          path = sprintf("%ssites/%s/",
-                                         .rba_stg("jaspar", "pth"),
-                                         matrix_id),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = "json->list_simp",
-                          save_to = .rba_file("jaspar_sites.json"))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("jaspar", "url"),
+    path = sprintf("%ssites/%s/", .rba_stg("jaspar", "pth"), matrix_id),
+    query = call_query,
+    accept = "application/json",
+    parser = "json->list_simp",
+    save_to = .rba_file("jaspar_sites.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -842,45 +857,46 @@ rba_jaspar_species <- function(release = 2024,
                                ...) {
   ## Load Global Options
   .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "release",
-                             class = "numeric",
-                             no_null = TRUE,
-                             val = c(2014, 2016, 2018, 2020, 2022, 2024)),
-                        list(arg = "search",
-                             class = "character"),
-                        list(arg = "order",
-                             class = "character")
-  ))
 
-  .msg("Retrieving a list of species available in JASPAR release %s.",
-       release)
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(
+        arg = "release", class = "numeric", no_null = TRUE,
+        val = c(2014, 2016, 2018, 2020, 2022, 2024)
+      ),
+      list(arg = "search", class = "character"),
+      list(arg = "order", class = "character")
+    )
+  )
+
+  .msg(
+    "Retrieving a list of species available in JASPAR release %s.",
+    release
+  )
 
   ## Build GET API Request's query
-  call_query <- .rba_query(init = list("release" = release,
-                                       "page" = 1,
-                                       "page_size" = 1000),
-                           list("search",
-                                !is.null(search),
-                                search),
-                           list("order",
-                                !is.null(order),
-                                paste0(order, collapse = ","))
+  call_query <- .rba_query(
+    init = list("release" = release, "page" = 1, "page_size" = 1000),
+    list("search", !is.null(search), search),
+    list("order", !is.null(order), paste0(order, collapse = ","))
   )
 
   ## Build Function-Specific Call
-  parser_input <- list("json->list_simp",
-                       function(x) x[["results"]]
+  parser_input <- list(
+    "json->list_simp",
+    function(x) { x[["results"]] }
   )
 
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("jaspar", "url"),
-                          path = paste0(.rba_stg("jaspar", "pth"),
-                                        "species/"),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = parser_input,
-                          save_to = .rba_file("jaspar_species.json"))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("jaspar", "url"),
+    path = paste0(.rba_stg("jaspar", "pth"), "species/"),
+    query = call_query,
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("jaspar_species.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -956,56 +972,51 @@ rba_jaspar_species_matrices <- function(tax_id,
                                         ...) {
   ## Load Global Options
   .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "tax_id",
-                             class = "numeric"),
-                        list(arg = "release",
-                             class = "numeric",
-                             no_null = TRUE,
-                             val = c(2014, 2016, 2018, 2020, 2022, 2024)),
-                        list(arg = "only_last_version",
-                             class = "logical"),
-                        list(arg = "search",
-                             class = "character"),
-                        list(arg = "order",
-                             class = "character"),
-                        list(arg = "page_size",
-                             class = "numeric",
-                             ran = c(1,1000)),
-                        list(arg = "page",
-                             class = "numeric",
-                             min_val = 1)
-  ))
 
-  .msg("Retrieving a list of matrix profiles of species %s available in JASPAR release %s (page %s).",
-       tax_id, release, page)
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(arg = "tax_id", class = "numeric"),
+      list(
+        arg = "release", class = "numeric", no_null = TRUE,
+        val = c(2014, 2016, 2018, 2020, 2022, 2024)
+      ),
+      list(arg = "only_last_version", class = "logical"),
+      list(arg = "search", class = "character"),
+      list(arg = "order", class = "character"),
+      list(arg = "page_size", class = "numeric", ran = c(1,1000)),
+      list(arg = "page", class = "numeric", min_val = 1)
+    )
+  )
+
+  .msg(
+    "Retrieving a list of matrix profiles of species %s available in JASPAR release %s (page %s).",
+    tax_id, release, page
+  )
 
   ## Build GET API Request's query
-  call_query <- .rba_query(init = list("tax_id" = tax_id,
-                                       "release" = release,
-                                       "page" = page,
-                                       "page_size" = page_size),
-                           list("version",
-                                isTRUE(only_last_version),
-                                "latest"),
-                           list("search",
-                                !is.null(search),
-                                search),
-                           list("order",
-                                !is.null(order),
-                                paste0(order, collapse = ","))
+  call_query <- .rba_query(
+    init = list(
+      "tax_id" = tax_id,
+      "release" = release,
+      "page" = page,
+      "page_size" = page_size
+    ),
+    list("version", isTRUE(only_last_version), "latest"),
+    list("search", !is.null(search), search),
+    list("order", !is.null(order), paste0(order, collapse = ","))
   )
 
   ## Build Function-Specific Call
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("jaspar", "url"),
-                          path = sprintf("%sspecies/%s/",
-                                         .rba_stg("jaspar", "pth"),
-                                         tax_id),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = "json->list_simp",
-                          save_to = .rba_file("jaspar_species_matrices.json"))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("jaspar", "url"),
+    path = sprintf("%sspecies/%s/", .rba_stg("jaspar", "pth"), tax_id),
+    query = call_query,
+    accept = "application/json",
+    parser = "json->list_simp",
+    save_to = .rba_file("jaspar_species_matrices.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -1057,33 +1068,40 @@ rba_jaspar_taxons <- function(release = 2024,
                               ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "release",
-                             class = "numeric",
-                             no_null = TRUE,
-                             val = c(2014, 2016, 2018, 2020, 2022, 2024))
-  ))
-
-  .msg("Retrieving a list of taxonomic groups available in JASPAR release %s.",
-       release)
-
-  ## Build GET API Request's query
-  call_query <- list("release" = release,
-                     "page_size" = 1000)
-
-  ## Build Function-Specific Call
-  parser_input <- list("json->list_simp",
-                       function(x) x[["results"]]
+  .rba_args(
+    cons = list(
+      list(
+        arg = "release", class = "numeric", no_null = TRUE,
+        val = c(2014, 2016, 2018, 2020, 2022, 2024)
+      )
+    )
   )
 
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("jaspar", "url"),
-                          path = paste0(.rba_stg("jaspar", "pth"),
-                                        "taxon/"),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = parser_input,
-                          save_to = .rba_file("jaspar_taxons.json"))
+  .msg(
+    "Retrieving a list of taxonomic groups available in JASPAR release %s.",
+    release
+  )
+
+  ## Build GET API Request's query
+  call_query <- list("release" = release, "page_size" = 1000)
+
+  ## Build Function-Specific Call
+  parser_input <- list(
+    "json->list_simp",
+    function(x) { x[["results"]] }
+  )
+
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("jaspar", "url"),
+    path = paste0(.rba_stg("jaspar", "pth"), "taxon/"),
+    query = call_query,
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("jaspar_taxons.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -1160,65 +1178,62 @@ rba_jaspar_taxons_matrices <- function(tax_group,
                                        ...) {
   ## Load Global Options
   .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "tax_group",
-                             class = "character",
-                             val = c("plants",
-                                     "vertebrates",
-                                     "insects",
-                                     "urochordates",
-                                     "nematodes",
-                                     "fungi",
-                                     "trematodes",
-                                     "protozoa",
-                                     "cnidaria")),
-                        list(arg = "release",
-                             class = "numeric",
-                             no_null = TRUE,
-                             val = c(2014, 2016, 2018, 2020, 2022, 2024)),
-                        list(arg = "only_last_version",
-                             class = "logical"),
-                        list(arg = "search",
-                             class = "character"),
-                        list(arg = "order",
-                             class = "character"),
-                        list(arg = "page_size",
-                             class = "numeric",
-                             ran = c(1,1000)),
-                        list(arg = "page",
-                             class = "numeric",
-                             min_val = 1)
-  ))
 
-  .msg("Retrieving a list of matrix profiles of taxonomic group %s available in JASPAR release %s (page %s).",
-       tax_group, release, page)
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(
+        arg = "tax_group", class = "character",
+        val = c("plants",
+                "vertebrates",
+                "insects",
+                "urochordates",
+                "nematodes",
+                "fungi",
+                "trematodes",
+                "protozoa",
+                "cnidaria")
+      ),
+      list(
+        arg = "release", class = "numeric", no_null = TRUE,
+        val = c(2014, 2016, 2018, 2020, 2022, 2024)
+      ),
+      list(arg = "only_last_version", class = "logical"),
+      list(arg = "search", class = "character"),
+      list(arg = "order", class = "character"),
+      list(arg = "page_size", class = "numeric", ran = c(1,1000)),
+      list(arg = "page", class = "numeric", min_val = 1)
+    )
+  )
+
+  .msg(
+    "Retrieving a list of matrix profiles of taxonomic group %s available in JASPAR release %s (page %s).",
+    tax_group, release, page
+  )
 
   ## Build GET API Request's query
-  call_query <- .rba_query(init = list("tax_group" = tax_group,
-                                       "release" = release,
-                                       "page" = page,
-                                       "page_size" = page_size),
-                           list("version",
-                                isTRUE(only_last_version),
-                                "latest"),
-                           list("search",
-                                !is.null(search),
-                                search),
-                           list("order",
-                                !is.null(order),
-                                paste0(order, collapse = ","))
+  call_query <- .rba_query(
+    init = list(
+      "tax_group" = tax_group,
+      "release" = release,
+      "page" = page,
+      "page_size" = page_size
+    ),
+    list("version", isTRUE(only_last_version), "latest"),
+    list("search", !is.null(search), search),
+    list("order", !is.null(order), paste0(order, collapse = ","))
   )
 
   ## Build Function-Specific Call
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("jaspar", "url"),
-                          path = sprintf("%staxon/%s/",
-                                         .rba_stg("jaspar", "pth"),
-                                         tax_group),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = "json->list_simp",
-                          save_to = .rba_file("jaspar_taxon_matrices.json"))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("jaspar", "url"),
+    path = sprintf("%staxon/%s/", .rba_stg("jaspar", "pth"), tax_group),
+    query = call_query,
+    accept = "application/json",
+    parser = "json->list_simp",
+    save_to = .rba_file("jaspar_taxon_matrices.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -1301,63 +1316,60 @@ rba_jaspar_tffm_search <- function(term = NULL,
                                    ...) {
   ## Load Global Options
   .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "term",
-                             class = "character"),
-                        list(arg = "release",
-                             class = "numeric",
-                             no_null = TRUE,
-                             val = c(2014, 2016, 2018, 2020, 2022, 2024)),
-                        list(arg = "tax_group",
-                             class = "character",
-                             val = c("plants",
-                                     "vertebrates",
-                                     "insects",
-                                     "urochordates",
-                                     "nematodes",
-                                     "fungi",
-                                     "trematodes",
-                                     "protozoa",
-                                     "cnidaria")),
-                        list(arg = "search",
-                             class = "character"),
-                        list(arg = "order",
-                             class = "character"),
-                        list(arg = "page_size",
-                             class = "numeric",
-                             ran = c(1,1000)),
-                        list(arg = "page",
-                             class = "numeric",
-                             min_val = 1)
-  ))
 
-  .msg("Retrieving a list of TFFM profiles available in JASPAR release %s based on your search query.",
-       release)
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(arg = "term", class = "character"),
+      list(
+        arg = "release",
+        class = "numeric",
+        no_null = TRUE,
+        val = c(2014, 2016, 2018, 2020, 2022, 2024)
+      ),
+      list(
+        arg = "tax_group",
+        class = "character",
+        val = c("plants",
+                "vertebrates",
+                "insects",
+                "urochordates",
+                "nematodes",
+                "fungi",
+                "trematodes",
+                "protozoa",
+                "cnidaria")
+      ),
+      list(arg = "search", class = "character"),
+      list(arg = "order", class = "character"),
+      list(arg = "page_size", class = "numeric", ran = c(1,1000)),
+      list(arg = "page", class = "numeric", min_val = 1)
+    )
+  )
+
+  .msg(
+    "Retrieving a list of TFFM profiles available in JASPAR release %s based on your search query.",
+    release
+  )
 
   ## Build GET API Request's query
-  call_query <- .rba_query(init = list("release" = release,
-                                       "page" = page,
-                                       "page_size" = page_size),
-                           list("search",
-                                !is.null(term),
-                                term),
-                           list("tax_group",
-                                !is.null(tax_group),
-                                tax_group),
-                           list("order",
-                                !is.null(order),
-                                paste0(order, collapse = ","))
+  call_query <- .rba_query(
+    init = list("release" = release, "page" = page, "page_size" = page_size),
+    list("search", !is.null(term), term),
+    list("tax_group", !is.null(tax_group), tax_group),
+    list("order", !is.null(order), paste0(order, collapse = ","))
   )
 
   ## Build Function-Specific Call
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("jaspar", "url"),
-                          path = paste0(.rba_stg("jaspar", "pth"),
-                                        "tffm/"),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = "json->list_simp",
-                          save_to = .rba_file("jaspar_tffm_search.json"))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("jaspar", "url"),
+    path = paste0(.rba_stg("jaspar", "pth"), "tffm/"),
+    query = call_query,
+    accept = "application/json",
+    parser = "json->list_simp",
+    save_to = .rba_file("jaspar_tffm_search.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -1407,27 +1419,33 @@ rba_jaspar_tffm <- function(tffm_id,
                             ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list( list(arg = "tffm_id",
-                              class = "character"))
+  .rba_args(
+    cons = list(
+      list(arg = "tffm_id", class = "character")
+    )
   )
 
-  .msg("Retrieving details of TFFM profile with ID %s.", tffm_id)
+  .msg(
+    "Retrieving details of TFFM profile with ID %s.",
+    tffm_id
+  )
 
   ## Build GET API Request's query
   call_query <- list("tffm_id" = tffm_id)
 
   ## Build Function-Specific Call
 
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("jaspar", "url"),
-                          path = sprintf("%stffm/%s/",
-                                         .rba_stg("jaspar", "pth"),
-                                         tffm_id),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = "json->list_simp",
-                          save_to = .rba_file("jaspar_tffm.json"))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("jaspar", "url"),
+    path = sprintf("%stffm/%s/", .rba_stg("jaspar", "pth"), tffm_id),
+    query = call_query,
+    accept = "application/json",
+    parser = "json->list_simp",
+    save_to = .rba_file("jaspar_tffm.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)

@@ -23,8 +23,10 @@
 #' @family "miEAA"
 #' @noRd
 .rba_mieaa_species <- function(sp, to_name = FALSE) {
+
   diagnostics <- get0("diagnostics", envir = parent.frame(1),
                       ifnotfound = getOption("rba_diagnostics"))
+
   sp_df <- data.frame(
     abbreviation = c("hsa", "mmu", "rno", "ath", "bta",
                      "cel", "dme", "dre", "gga", "ssc"),
@@ -35,10 +37,15 @@
                     "Bos taurus", "Caenorhabditis elegans",
                     "Drosophila melanogaster", "Danio rerio",
                     "Gallus gallus", "Sus scrofa"),
-    stringsAsFactors = FALSE)
+    stringsAsFactors = FALSE
+  )
+
   if (isTRUE(to_name)) {
+
     return(sp_df$specie_name[[which(sp_df$abbreviation == sp)]])
+
   } else {
+
     sp_table <- c(
       "hsa" = "hsa", "hsa" = 9606L,  "hsa" = "Homo sapiens",
       "mmu" = "mmu", "mmu" = 10090L, "mmu" = "Mus musculus",
@@ -49,16 +56,27 @@
       "dme" = "dme", "dme" = 7227L,  "dme" = "Drosophila melanogaster",
       "dre" = "dre", "dre" = 7955L,  "dre" = "Danio rerio",
       "gga" = "gga", "gga" = 9031L,  "gga" = "Gallus gallus",
-      "ssc" = "ssc", "ssc" = 9823L,  "ssc" = "Sus scrofa")
+      "ssc" = "ssc", "ssc" = 9823L,  "ssc" = "Sus scrofa"
+    )
 
-    sp_match <- pmatch(x = tolower(sp), table = tolower(sp_table),
-                       nomatch = 0, duplicates.ok = FALSE)
+    sp_match <- pmatch(
+      x = tolower(sp),
+      table = tolower(sp_table),
+      nomatch = 0,
+      duplicates.ok = FALSE
+    )
+
     if (sp_match != 0) {
+
       return(names(sp_table)[[sp_match]])
+
     } else {
-      stop("Species should be or partially match one the following values:\n",
-           paste(utils::capture.output(print(sp_df)), collapse = "\n"),
-           call. = diagnostics)
+
+      stop(
+        "Species should be or partially match one the following values:\n",
+        paste(utils::capture.output(print(sp_df)), collapse = "\n"),
+        call. = diagnostics
+      )
     }
   }
 }
@@ -116,42 +134,55 @@
 rba_mieaa_cats <- function(mirna_type, species, ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "mirna_type",
-                             class = "character",
-                             val = c("mature",
-                                     "precursor")),
-                        list(arg = "species",
-                             class = c("character",
-                                       "numeric"),
-                             len = 1)))
+  .rba_args(
+    cons = list(
+      list(arg = "mirna_type", class = "character", val = c("mature", "precursor")),
+      list(arg = "species", class = c("character", "numeric"), len = 1)
+    )
+  )
+
   # convert species input to abbreviation
   species <- .rba_mieaa_species(species, to_name = FALSE)
 
-  .msg("Retrieving available enrichment categories of %s for %s.",
-       switch(mirna_type,
-              "mature" = "miRNA",
-              "precursor" = "miRNA precursor"),
-       .rba_mieaa_species(species, to_name = TRUE))
+  .msg(
+    "Retrieving available enrichment categories of %s for %s.",
+    switch(
+      mirna_type,
+      "mature" = "miRNA",
+      "precursor" = "miRNA precursor"
+    ),
+    .rba_mieaa_species(species, to_name = TRUE)
+  )
 
   ## Build Function-Specific Call
-  parser_input <- list("json->df",
-                       function(x) {
-                         y <- x[[1]]
-                         names(y) <- x[[2]]
-                         return(y)})
+  parser_input <- list(
+    "json->df",
+    function(x) {
+      y <- x[[1]]
+      names(y) <- x[[2]]
+      return(y)
+    }
+  )
 
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("mieaa", "url"),
-                          path = sprintf("%senrichment_categories/%s/%s/",
-                                         .rba_stg("mieaa", "pth"),
-                                         species,
-                                         switch(mirna_type,
-                                                "mature" = "mirna",
-                                                "precursor" = "precursor")),
-                          accept = "application/json",
-                          parser = parser_input,
-                          save_to = .rba_file("rba_mieaa_cats.json"))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("mieaa", "url"),
+    path = sprintf(
+      "%senrichment_categories/%s/%s/",
+      .rba_stg("mieaa", "pth"),
+      species,
+      switch(
+        mirna_type,
+        "mature" = "mirna",
+        "precursor" = "precursor"
+      )
+    ),
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("rba_mieaa_cats.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -214,53 +245,60 @@ rba_mieaa_convert_version <- function(mirna,
                                       ...) {
   ## Load Global Options
   .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "mirna",
-                             class = "character"),
-                        list(arg = "mirna_type",
-                             class = "character",
-                             val = c("mature",
-                                     "precursor")),
-                        list(arg = "input_version",
-                             class = "numeric",
-                             val = c(9.1, 10, 12:22)),
-                        list(arg = "output_version",
-                             class = "numeric",
-                             val = c(9.1, 10, 12:22)),
-                        list(arg = "simple_output",
-                             class = "logical")))
 
-  .msg("Converting %s %s miRNA IDs from mirbase v%s to v%s.",
-       length(mirna),
-       mirna_type,
-       input_version, output_version)
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(arg = "mirna", class = "character"),
+      list(arg = "mirna_type", class = "character", val = c("mature", "precursor")),
+      list(arg = "input_version", class = "numeric", val = c(9.1, 10, 12:22)),
+      list(arg = "output_version", class = "numeric", val = c(9.1, 10, 12:22)),
+      list(arg = "simple_output", class = "logical"))
+  )
+
+  .msg(
+    "Converting %s %s miRNA IDs from mirbase v%s to v%s.",
+    length(mirna),
+    mirna_type,
+    input_version, output_version
+  )
+
   ## Build POST API Request's body
-  call_body <- list(mirnas = paste(mirna, collapse = "\n"),
-                    mirbase_input_version = paste0("v", input_version),
-                    mirbase_output_version = paste0("v", output_version),
-                    input_type = ifelse(mirna_type == "mature",
-                                        yes = "mirna", no = "precursor"),
-                    output_format = ifelse(isTRUE(simple_output),
-                                           yes = "oneline",
-                                           no = "tabsep"))
+  call_body <- list(
+    mirnas = paste(mirna, collapse = "\n"),
+    mirbase_input_version = paste0("v", input_version),
+    mirbase_output_version = paste0("v", output_version),
+    input_type = ifelse(mirna_type == "mature", yes = "mirna", no = "precursor"),
+    output_format = ifelse(isTRUE(simple_output), yes = "oneline", no = "tabsep")
+  )
 
   ## Build Function-Specific Call
   if (isTRUE(simple_output)) {
-    parser_input <- list("text->df", function(x) {x[, 1]})
+
+    parser_input <- list(
+      "text->df",
+      function(x) { x[, 1] }
+    )
+
   } else {
-    parser_input <- list("text->df", function(x) {
-      colnames(x) <- x[1, ]; x <- x[-1, ]  })
+
+    parser_input <- list(
+      "text->df",
+      function(x) { colnames(x) <- x[1, ]; x <- x[-1, ] }
+    )
+
   }
 
-  input_call <- .rba_httr(httr = "post",
-                          url = .rba_stg("mieaa", "url"),
-                          path = sprintf("%smirbase_converter/",
-                                         .rba_stg("mieaa", "pth")),
-                          encode = "multipart",
-                          body = call_body,
-                          accept = "application/json",
-                          parser = parser_input,
-                          save_to = .rba_file("rba_mieaa_convert_version.json"))
+  input_call <- .rba_httr(
+    httr = "post",
+    url = .rba_stg("mieaa", "url"),
+    path = sprintf("%smirbase_converter/", .rba_stg("mieaa", "pth")),
+    encode = "multipart",
+    body = call_body,
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("rba_mieaa_convert_version.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -323,56 +361,63 @@ rba_mieaa_convert_type <- function(mirna,
                                    ...) {
   ## Load Global Options
   .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "mirna",
-                             class = "character"),
-                        list(arg = "input_type",
-                             class = "character",
-                             val = c("mature",
-                                     "precursor")),
-                        list(arg = "only_unique",
-                             class = "logical"),
-                        list(arg = "simple_output",
-                             class = "logical")))
 
-  .msg("Converting %s %s miRNA IDs to %s IDs.",
-       length(mirna),
-       input_type,
-       ifelse(input_type == "mature",
-              yes = "precursor", no = "mature"))
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(arg = "mirna", class = "character"),
+      list(arg = "input_type", class = "character", val = c("mature", "precursor")),
+      list(arg = "only_unique", class = "logical"),
+      list(arg = "simple_output", class = "logical")
+    )
+  )
+
+  .msg(
+    "Converting %s %s miRNA IDs to %s IDs.",
+    length(mirna),
+    input_type,
+    ifelse(input_type == "mature", yes = "precursor", no = "mature")
+  )
+
   ## Build POST API Request's body
-  call_body <- list(mirnas = paste(mirna, collapse = "\n"),
-                    input_type = ifelse(input_type == "mature",
-                                        yes = "to_precursor", no = "to_mirna"),
-                    output_format = ifelse(isTRUE(simple_output),
-                                           yes = "newline",
-                                           no = "tabsep"),
-                    conversion_type = ifelse(isTRUE(only_unique),
-                                             yes = "unique",
-                                             no = "all"))
+  call_body <- list(
+    mirnas = paste(mirna, collapse = "\n"),
+    input_type = ifelse(input_type == "mature", yes = "to_precursor", no = "to_mirna"),
+    output_format = ifelse(isTRUE(simple_output), yes = "newline", no = "tabsep"),
+    conversion_type = ifelse(isTRUE(only_unique), yes = "unique", no = "all")
+  )
 
   ## Build Function-Specific Call
   if (isTRUE(simple_output)) {
-    parser_input <- list("text->df", function(x) {x[, 1]})
+
+    parser_input <- list(
+      "text->df",
+      function(x) { x[, 1] }
+    )
+
   } else {
-    parser_input <- list("text->df",
-                         function(x) {
-                           names(x) <- c(input_type,
-                                         setdiff(c("mature", "precursor"),
-                                                 input_type))
-                           return(x)
-                         })
+    parser_input <- list(
+      "text->df",
+      function(x) {
+        names(x) <- c(
+          input_type,
+          setdiff(c("mature", "precursor"), input_type)
+        )
+        return(x)
+      }
+    )
   }
 
-  input_call <- .rba_httr(httr = "post",
-                          url = .rba_stg("mieaa", "url"),
-                          path = sprintf("%smirna_precursor_converter/",
-                                         .rba_stg("mieaa", "pth")),
-                          encode = "multipart",
-                          body = call_body,
-                          accept = "application/json",
-                          parser = parser_input,
-                          save_to = .rba_file("rba_mieaa_convert_type.json"))
+  input_call <- .rba_httr(
+    httr = "post",
+    url = .rba_stg("mieaa", "url"),
+    path = sprintf("%smirna_precursor_converter/", .rba_stg("mieaa", "pth")),
+    encode = "multipart",
+    body = call_body,
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("rba_mieaa_convert_type.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -486,102 +531,101 @@ rba_mieaa_enrich_submit <- function(test_set,
                                     ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "test_type",
-                             class = "character",
-                             val = c("GSEA",
-                                     "ORA")),
-                        list(arg = "test_set",
-                             class = "character",
-                             no_null = TRUE),
-                        list(arg = "mirna_type",
-                             class = "character",
-                             no_null = TRUE,
-                             val = c("mature",
-                                     "precursor")),
-                        list(arg = "species",
-                             class = c("character",
-                                       "numeric"),
-                             no_null = TRUE,
-                             len = 1),
-                        list(arg = "categories",
-                             class = "character"),
-                        list(arg = "p_adj_method",
-                             class = "character",
-                             val = c("none",
-                                     "fdr",
-                                     "bonferroni",
-                                     "BY",
-                                     "hochberg",
-                                     "holm",
-                                     "hommel")),
-                        list(arg = "independent_p_adj",
-                             class = "logical"),
-                        list(arg = "sig_level",
-                             class = "numeric",
-                             ran = c(0, 1)),
-                        list(arg = "min_hits",
-                             class = "numeric")
-  ))
+  .rba_args(
+    cons = list(
+      list(arg = "test_type", class = "character", val = c("GSEA", "ORA")),
+      list(arg = "test_set", class = "character", no_null = TRUE),
+      list(
+        arg = "mirna_type", class = "character", no_null = TRUE,
+        val = c("mature", "precursor")
+      ),
+      list(arg = "species", class = c("character", "numeric"), no_null = TRUE, len = 1),
+      list(arg = "categories", class = "character"),
+      list(
+        arg = "p_adj_method", class = "character",
+        val = c("none", "fdr", "bonferroni", "BY", "hochberg", "holm", "hommel")
+      ),
+      list(arg = "independent_p_adj", class = "logical"),
+      list(arg = "sig_level", class = "numeric", ran = c(0, 1)),
+      list(arg = "min_hits", class = "numeric")
+    )
+  )
+
   ## handle function-specific inputs
   #species
   species <- .rba_mieaa_species(sp = species, to_name = FALSE)
   #categories
-  all_cats <- rba_mieaa_cats(mirna_type = mirna_type,
-                             species = species,
-                             verbose = FALSE)
+  all_cats <- rba_mieaa_cats(mirna_type = mirna_type, species = species, verbose = FALSE)
+
   if (is.null(categories)) {
+
     categories <- all_cats
-    .msg("No categories were supplied, Requesting enrichment using all of the %s available categories for species '%s'.",
-         length(categories),
-         .rba_mieaa_species(species, to_name = TRUE))
+    .msg(
+      "No categories were supplied, Requesting enrichment using all of the %s available categories for species '%s'.",
+      length(categories),
+      .rba_mieaa_species(species, to_name = TRUE)
+    )
+
   } else {
+
     cats_dif <- setdiff(categories, all_cats)
     if (length(cats_dif) != 0) {
-      invalid_cats_msg <- sprintf("Invalid categories! The following requested categories do not match your supplied specie and miRNA type:\n%s",
-                                  .paste2(cats_dif, last = " and "))
+      invalid_cats_msg <- sprintf(
+        "Invalid categories! The following requested categories do not match your supplied specie and miRNA type:\n%s",
+        .paste2(cats_dif, last = " and ")
+      )
       if (isTRUE(get("skip_error"))) {
         return(invalid_cats_msg)
       } else {
-        stop(invalid_cats_msg,
-             call. = FALSE)
+        stop(invalid_cats_msg, call. = FALSE)
       }
-
     }
+
   }
+
   names(categories) <- rep("categories", length(categories))
 
-  .msg("Submitting %s enrichment request for %s miRNA IDs of species %s to miEAA servers.",
-       test_type, length(test_set), .rba_mieaa_species(species, to_name = TRUE))
+  .msg(
+    "Submitting %s enrichment request for %s miRNA IDs of species %s to miEAA servers.",
+    test_type,
+    length(test_set),
+    .rba_mieaa_species(species, to_name = TRUE)
+  )
 
   ## Build POST API Request's body
-  call_body <- .rba_query(init = list(testset = paste(test_set, collapse = "\n"),
-                                      p_value_adjustment = p_adj_method,
-                                      independent_p_adjust = ifelse(independent_p_adj,
-                                                                    yes = "True",
-                                                                    no = "False"),
-                                      significance_level = sig_level,
-                                      threshold_level = min_hits),
-                          list("reference_set",
-                               test_type == "ORA" && !is.null(ref_set),
-                               paste(ref_set, collapse = "\n")))
+  call_body <- .rba_query(
+    init = list(
+      testset = paste(test_set, collapse = "\n"),
+      p_value_adjustment = p_adj_method,
+      independent_p_adjust = ifelse(independent_p_adj, yes = "True", no = "False"),
+      significance_level = sig_level,
+      threshold_level = min_hits
+    ),
+    list("reference_set", test_type == "ORA" && !is.null(ref_set), paste(ref_set, collapse = "\n"))
+  )
+
   call_body <- append(call_body, categories)
 
   ## Build Function-Specific Call
-  input_call <- .rba_httr(httr = "post",
-                          url = .rba_stg("mieaa", "url"),
-                          path = sprintf("%senrichment_analysis/%s/%s/%s/",
-                                         .rba_stg("mieaa", "pth"),
-                                         species,
-                                         switch(mirna_type,
-                                                "mature" = "mirna",
-                                                "precursor" = "precursor"),
-                                         test_type),
-                          encode = "multipart",
-                          body = call_body,
-                          accept = "application/json",
-                          parser = "json->list_simp",
-                          save_to = .rba_file("rba_mieaa_info.json"))
+  input_call <- .rba_httr(
+    httr = "post",
+    url = .rba_stg("mieaa", "url"),
+    path = sprintf(
+      "%senrichment_analysis/%s/%s/%s/",
+      .rba_stg("mieaa", "pth"),
+      species,
+      switch(mirna_type, "mature" = "mirna", "precursor" = "precursor"),
+      test_type
+    ),
+    encode = "multipart",
+    body = call_body,
+    accept = "application/json",
+    parser = "json->list_simp",
+    save_to = .rba_file("rba_mieaa_info.json")
+  )
+
   ## Call API
   final_output <- .rba_skeleton(input_call)
   return(final_output)
@@ -635,23 +679,28 @@ rba_mieaa_enrich_submit <- function(test_set,
 rba_mieaa_enrich_status <- function(job_id, ...) {
   ## Load Global Options
   .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "job_id",
-                             class = "character",
-                             len = 1)))
 
-  .msg("Retrieving status of submitted enrichment request with ID: %s",
-       job_id)
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(arg = "job_id", class = "character", len = 1)
+    )
+  )
+
+  .msg(
+    "Retrieving status of submitted enrichment request with ID: %s",
+    job_id
+  )
 
   ## Build Function-Specific Call
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("mieaa", "url"),
-                          path = sprintf("%sjob_status/%s/",
-                                         .rba_stg("mieaa", "pth"),
-                                         job_id),
-                          accept = "application/json",
-                          parser = "json->list_simp",
-                          save_to = .rba_file("rba_mieaa_info.json"))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("mieaa", "url"),
+    path = sprintf("%sjob_status/%s/", .rba_stg("mieaa", "pth"), job_id),
+    accept = "application/json",
+    parser = "json->list_simp",
+    save_to = .rba_file("rba_mieaa_info.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -710,53 +759,59 @@ rba_mieaa_enrich_results <- function(job_id,
                                      ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "job_id",
-                             class = "character",
-                             len = 1),
-                        list(arg = "sort_by",
-                             class = "character",
-                             no_null = TRUE,
-                             val = c("category",
-                                     "subcategory",
-                                     "enrichment",
-                                     "p_value",
-                                     "p_adjusted",
-                                     "q_value",
-                                     "observed"))))
-
-  .msg("Retrieving results of submitted enrichment request with ID: %s",
-       job_id)
-
-  ## Build Function-Specific Call
-  parser_input <- list("json->df",
-                       function(x) {
-                         if (ncol(x) == 9) {
-                           colnames(x) <- c("Category", "Subcategory",
-                                            "Enrichment", "P-value",
-                                            "P-adjusted", "Q-value",
-                                            "Expected", "Observed",
-                                            "miRNAs/precursors")
-                         }
-                         if (ncol(x) == 8) {
-                           colnames(x) <- c("Category", "Subcategory",
-                                            "Enrichment", "P-value",
-                                            "P-adjusted", "Q-value",
-                                            "Observed", "miRNAs/precursors")
-
-                         }
-                         return(x)
-                       }
+  .rba_args(
+    cons = list(
+      list(arg = "job_id", class = "character", len = 1),
+      list(
+        arg = "sort_by", class = "character", no_null = TRUE,
+        val = c("category",
+                "subcategory",
+                "enrichment",
+                "p_value",
+                "p_adjusted",
+                "q_value",
+                "observed")
+      )
+    )
   )
 
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("mieaa", "url"),
-                          path = sprintf("%s/enrichment_analysis/results/%s/",
-                                         .rba_stg("mieaa", "pth"),
-                                         job_id),
-                          accept = "application/json",
-                          parser = parser_input,
-                          save_to = .rba_file("rba_mieaa_info.json"))
+  .msg(
+    "Retrieving results of submitted enrichment request with ID: %s",
+    job_id
+  )
+
+  ## Build Function-Specific Call
+  parser_input <- list(
+    "json->df",
+    function(x) {
+      if (ncol(x) == 9) {
+        colnames(x) <- c("Category", "Subcategory",
+                         "Enrichment", "P-value",
+                         "P-adjusted", "Q-value",
+                         "Expected", "Observed",
+                         "miRNAs/precursors")
+      }
+      if (ncol(x) == 8) {
+        colnames(x) <- c("Category", "Subcategory",
+                         "Enrichment", "P-value",
+                         "P-adjusted", "Q-value",
+                         "Observed", "miRNAs/precursors")
+
+      }
+      return(x)
+    }
+  )
+
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("mieaa", "url"),
+    path = sprintf("%s/enrichment_analysis/results/%s/", .rba_stg("mieaa", "pth"), job_id),
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("rba_mieaa_info.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -834,25 +889,34 @@ rba_mieaa_enrich <- function(test_set,
                              ...) {
   ## Load Global Options
   .rba_ext_args(...)
-  .msg(" -- Step 1/3: Submitting Enrichment analysis request:")
-  step1 <- rba_mieaa_enrich_submit(test_set = test_set,
-                                   mirna_type = mirna_type,
-                                   species = species,
-                                   test_type = test_type,
-                                   categories = categories,
-                                   p_adj_method = p_adj_method,
-                                   independent_p_adj = independent_p_adj,
-                                   sig_level = sig_level,
-                                   min_hits = min_hits,
-                                   ref_set = ref_set,
-                                   ...)
+
+  .msg(
+    " -- Step 1/3: Submitting Enrichment analysis request:"
+  )
+
+  step1 <- rba_mieaa_enrich_submit(
+    test_set = test_set,
+    mirna_type = mirna_type,
+    species = species,
+    test_type = test_type,
+    categories = categories,
+    p_adj_method = p_adj_method,
+    independent_p_adj = independent_p_adj,
+    sig_level = sig_level,
+    min_hits = min_hits,
+    ref_set = ref_set,
+    ...
+  )
 
   if (utils::hasName(step1, "job_id")) { # Go to step 2
-    .msg("\n -- Step 2/3: Checking for Submitted enrichment analysis's status every 5 seconds.\n",
-         "    Your submitted job ID is: ", step1$job_id)
 
-    step2 <- list(status = 0L,
-                  `results-URL` = NULL)
+    .msg(
+      "\n -- Step 2/3: Checking for Submitted enrichment analysis's status every 5 seconds.\n",
+      "    Your submitted job ID is: ",
+      step1$job_id
+    )
+
+    step2 <- list(status = 0L, `results-URL` = NULL)
     tried <- 0
     try_max <- ifelse(interactive(), Inf, 25)
 
@@ -860,47 +924,59 @@ rba_mieaa_enrich <- function(test_set,
       cat(".")
       tried <- tried + 1
       Sys.sleep(5)
-      step2 <- rba_mieaa_enrich_status(job_id = step1$job_id,
-                                       verbose = FALSE, ...)
+      step2 <- rba_mieaa_enrich_status(
+        job_id = step1$job_id,
+        verbose = FALSE,
+        ...
+      )
     }
 
     if (utils::hasName(step2, "status") && step2$status == 100L) { # Go to step 3
-      .msg("\n -- Step 3/3: Retrieving the results.")
+      .msg(
+        "\n -- Step 3/3: Retrieving the results."
+      )
+
       Sys.sleep(1)
-      step3 <- rba_mieaa_enrich_results(job_id = step1$job_id,
-                                        sort_by = sort_by,
-                                        sort_asc = sort_asc,
-                                        ...)
+      step3 <- rba_mieaa_enrich_results(
+        job_id = step1$job_id,
+        sort_by = sort_by,
+        sort_asc = sort_asc,
+        ...
+      )
       return(step3)
 
     } else { # Halt at step 2
 
-      job_stuck_msg <- paste0("Error: The miEAA server didn't complete the analysis.",
-                              "Please retry or manually run the required steps as demonstrated in the `miEAA & rbioapi` vignette article, section `Approach 2: Going step-by-step`. ",
-                              "If the problem persists, kindly report this issue to us. The error message was: ",
-                              try(step2$status),
-                              collapse = "\n")
+      job_stuck_msg <- paste0(
+        "Error: The miEAA server didn't complete the analysis.",
+        "Please retry or manually run the required steps as demonstrated in the `miEAA & rbioapi` vignette article, section `Approach 2: Going step-by-step`. ",
+        "If the problem persists, kindly report this issue to us. The error message was: ",
+        try(step2$status),
+        collapse = "\n"
+      )
+
       if (isTRUE(get("skip_error"))) {
         return(job_stuck_msg)
       } else {
-        stop(job_stuck_msg,
-             call. = get("diagnostics"))
+        stop(job_stuck_msg, call. = get("diagnostics"))
       }
 
     }
 
   } else { # halt at step 1
 
-    no_job_id_msg <- paste0("Error: Couldn't submit analysis request to miEAA. ",
-                            "Please retry or manually run the required steps as demonstrated in the `miEAA & rbioapi` vignette article, section `Approach 2: Going step-by-step`. ",
-                            "If the problem persists, kindly report this issue to us. The error message was: ",
-                            try(step1),
-                            collapse = "\n")
+    no_job_id_msg <- paste0(
+      "Error: Couldn't submit analysis request to miEAA. ",
+      "Please retry or manually run the required steps as demonstrated in the `miEAA & rbioapi` vignette article, section `Approach 2: Going step-by-step`. ",
+      "If the problem persists, kindly report this issue to us. The error message was: ",
+      try(step1),
+      collapse = "\n"
+    )
+
     if (isTRUE(get("skip_error"))) {
       return(no_job_id_msg)
     } else {
-      stop(no_job_id_msg,
-           call. = get("diagnostics"))
+      stop(no_job_id_msg, call. = get("diagnostics"))
     }
 
   }

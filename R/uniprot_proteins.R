@@ -146,109 +146,62 @@ rba_uniprot_proteins_search <- function(accession = NULL,
                                         ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "accession",
-                             class = "character",
-                             max_len = 100),
-                        list(arg = "reviewed",
-                             class = "logical"),
-                        list(arg = "isoform",
-                             class = "numeric",
-                             val = c(0, 1, 2)),
-                        list(arg = "go_term",
-                             class = "character"),
-                        list(arg = "keyword",
-                             class = "character"),
-                        list(arg = "ec",
-                             class = "character",
-                             max_len = 20),
-                        list(arg = "gene",
-                             class = "character",
-                             max_len = 20),
-                        list(arg = "exact_gene",
-                             class = "character",
-                             max_len = 20),
-                        list(arg = "protein",
-                             class = "character"),
-                        list(arg = "organism",
-                             class = "character"),
-                        list(arg = "taxid",
-                             class = "numeric",
-                             max_len = 20),
-                        list(arg = "pubmed",
-                             class = "character",
-                             max_len = 20),
-                        list(arg = "seq_length",
-                             class = c("numeric",
-                                       "character")),
-                        list(arg = "md5",
-                             class = "character")))
+  .rba_args(
+    cons = list(
+      list(arg = "accession", class = "character", max_len = 100),
+      list(arg = "reviewed", class = "logical"),
+      list(arg = "isoform", class = "numeric", val = c(0, 1, 2)),
+      list(arg = "go_term", class = "character"),
+      list(arg = "keyword", class = "character"),
+      list(arg = "ec", class = "character", max_len = 20),
+      list(arg = "gene", class = "character", max_len = 20),
+      list(arg = "exact_gene", class = "character", max_len = 20),
+      list(arg = "protein", class = "character"),
+      list(arg = "organism", class = "character"),
+      list(arg = "taxid", class = "numeric", max_len = 20),
+      list(arg = "pubmed", class = "character", max_len = 20),
+      list(arg = "seq_length", class = c("numeric", "character")),
+      list(arg = "md5", class = "character")
+    )
+  )
 
-  .msg("Searching UniProt and retrieving proteins that match your supplied inputs.")
+  .msg(
+    "Searching UniProt and retrieving proteins that match your supplied inputs."
+  )
+
   ## Build GET API Request's query
-  call_query <- .rba_query(init = list("size" = "-1"),
-                           list("accession",
-                                !is.null(accession),
-                                paste0(accession,
-                                       collapse = ",")),
-                           list("reviewed",
-                                !is.null(reviewed),
-                                ifelse(reviewed,
-                                       "true",
-                                       "false")),
-                           list("isoform",
-                                !is.null(isoform),
-                                isoform),
-                           list("goterms",
-                                !is.null(go_term),
-                                go_term),
-                           list("keywords",
-                                !is.null(keyword),
-                                keyword),
-                           list("ec",
-                                !is.null(ec),
-                                paste0(ec,
-                                       collapse = ",")),
-                           list("gene",
-                                !is.null(gene),
-                                paste0(gene,
-                                       collapse = ",")),
-                           list("exact_gene",
-                                !is.null(exact_gene),
-                                paste0(exact_gene,
-                                       collapse = ",")),
-                           list("protein",
-                                !is.null(protein),
-                                protein),
-                           list("organism",
-                                !is.null(organism),
-                                organism),
-                           list("taxid",
-                                !is.null(taxid),
-                                paste0(taxid,
-                                       collapse = ",")),
-                           list("pubmed",
-                                !is.null(pubmed),
-                                paste0(pubmed,
-                                       collapse = ",")),
-                           list("seq_length",
-                                !is.null(seq_length),
-                                seq_length),
-                           list("md5",
-                                !is.null(md5),
-                                md5))
-  ## Build Function-Specific Call
-  parser_input <- list("json->list",
-                       .rba_uniprot_search_namer)
+  call_query <- .rba_query(
+    init = list("size" = "-1"),
+    list("accession", !is.null(accession), paste0(accession, collapse = ",")),
+    list("reviewed", !is.null(reviewed), ifelse(reviewed, "true", "false")),
+    list("isoform", !is.null(isoform), isoform),
+    list("goterms", !is.null(go_term), go_term),
+    list("keywords", !is.null(keyword), keyword),
+    list("ec", !is.null(ec), paste0(ec, collapse = ",")),
+    list("gene", !is.null(gene), paste0(gene, collapse = ",")),
+    list("exact_gene", !is.null(exact_gene), paste0(exact_gene, collapse = ",")),
+    list("protein", !is.null(protein), protein),
+    list("organism", !is.null(organism), organism),
+    list("taxid", !is.null(taxid), paste0(taxid, collapse = ",")),
+    list("pubmed", !is.null(pubmed), paste0(pubmed, collapse = ",")),
+    list("seq_length", !is.null(seq_length), seq_length),
+    list("md5", !is.null(md5), md5)
+  )
 
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = paste0(.rba_stg("uniprot", "pth"),
-                                        "proteins"),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = parser_input,
-                          save_to = .rba_file("uniprot_proteins_search.json"))
+  ## Build Function-Specific Call
+  parser_input <- list("json->list", .rba_uniprot_search_namer)
+
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(.rba_stg("uniprot", "pth"), "proteins"),
+    query = call_query,
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("uniprot_proteins_search.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -316,41 +269,57 @@ rba_uniprot_proteins <- function(accession,
                                  ...) {
   ## Load Global Options
   .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "accession",
-                             class = "character"),
-                        list(arg = "interaction",
-                             class = "logical"),
-                        list(arg = "isoforms",
-                             class = "logical")),
-            cond = list(list(quote(sum(interaction, isoforms) == 2),
-                             "You can only set only one of interaction or isoform as TRUE in one function call.")))
 
-  .msg("Retrieving %sUniProt Entity with accession number %s.",
-       if (isTRUE(interaction)) {
-         "Interactions of "} else if (isTRUE(isoforms)) {
-           "isoforms of "} else {
-             ""},
-       accession)
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(arg = "accession", class = "character"),
+      list(arg = "interaction", class = "logical"),
+      list(arg = "isoforms", class = "logical")
+    ),
+    cond = list(
+      list(
+        quote(sum(interaction, isoforms) == 2),
+        "You can only set only one of interaction or isoform as TRUE in one function call.")
+    )
+  )
+
+  .msg(
+    "Retrieving %sUniProt Entity with accession number %s.",
+    if (isTRUE(interaction)) {
+      "Interactions of  "
+    } else if (isTRUE(isoforms)) {
+      "isoforms of "
+    } else {
+      ""},
+    accession
+  )
+
   ## Build Function-Specific Call
-  path_input <- sprintf("%s%s/%s",
-                        .rba_stg("uniprot", "pth"),
-                        ifelse(isTRUE(interaction),
-                               yes = "proteins/interaction",
-                               no = "proteins"),
-                        accession)
+  path_input <- sprintf(
+    "%s%s/%s",
+    .rba_stg("uniprot", "pth"),
+    ifelse(isTRUE(interaction), yes = "proteins/interaction", no = "proteins"),
+    accession)
+
   if (isTRUE(isoforms)) {
     path_input <- paste0(path_input, "/isoforms")
   }
-  parser_input <- ifelse(isTRUE(interaction) | isTRUE(isoforms),
-                         yes = "json->list",
-                         no = "json->list_simp")
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = path_input,
-                          accept = "application/json",
-                          parser = parser_input,
-                          save_to = .rba_file("uniprot_proteins.json"))
+
+  parser_input <- ifelse(
+    isTRUE(interaction) | isTRUE(isoforms),
+    yes = "json->list",
+    no = "json->list_simp"
+  )
+
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = path_input,
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("uniprot_proteins.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -419,39 +388,45 @@ rba_uniprot_proteins_crossref <- function(db_id,
                                           ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "db_name",
-                             class = "character"),
-                        list(arg = "db_id",
-                             class = "character"),
-                        list(arg = "reviewed",
-                             class = "logical"),
-                        list(arg = "isoform",
-                             class = "numeric",
-                             val = c(0, 1, 2))))
-  .msg("Retrieving UniProt entities that correspond to ID %s in database %s.",
-       db_id, db_name)
+  .rba_args(
+    cons = list(
+      list(arg = "db_name",
+           class = "character"),
+      list(arg = "db_id",
+           class = "character"),
+      list(arg = "reviewed",
+           class = "logical"),
+      list(arg = "isoform",
+           class = "numeric",
+           val = c(0, 1, 2))
+    )
+  )
+
+  .msg(
+    "Retrieving UniProt entities that correspond to ID %s in database %s.",
+    db_id, db_name
+  )
+
   ## Build GET API Request's query
-  call_query <- .rba_query(init = list("size" = "-1"),
-                           list("reviewed",
-                                !is.null(reviewed),
-                                ifelse(reviewed,
-                                       "true",
-                                       "false")),
-                           list("isoform",
-                                !is.null(isoform),
-                                isoform))
+  call_query <- .rba_query(
+    init = list("size" = "-1"),
+    list("reviewed", !is.null(reviewed), ifelse(reviewed, "true", "false")),
+    list("isoform", !is.null(isoform), isoform)
+  )
+
   ## Build Function-Specific Call
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = sprintf("%sproteins/%s:%s",
-                                         .rba_stg("uniprot", "pth"),
-                                         db_name,
-                                         db_id),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = "json->list",
-                          save_to = .rba_file("uniprot_proteins_crossref.json"))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = sprintf("%sproteins/%s:%s", .rba_stg("uniprot", "pth"), db_name, db_id),
+    query = call_query,
+    accept = "application/json",
+    parser = "json->list",
+    save_to = .rba_file("uniprot_proteins_crossref.json")
+  )
+
   ## Call API
   final_output <- .rba_skeleton(input_call)
   return(final_output)
@@ -567,131 +542,103 @@ rba_uniprot_features_search <- function(accession = NULL,
                                         ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "accession",
-                             class = "character",
-                             max_len = 100),
-                        list(arg = "gene",
-                             class = "character",
-                             max_len = 20),
-                        list(arg = "exact_gene",
-                             class = "character",
-                             max_len = 20),
-                        list(arg = "protein",
-                             class = "character"),
-                        list(arg = "reviewed",
-                             class = "logical"),
-                        list(arg = "organism",
-                             class = "character"),
-                        list(arg = "taxid",
-                             class = "numeric",
-                             max_len = 20),
-                        list(arg = "categories",
-                             class = "character",
-                             val = c("MOLECULE_PROCESSING",
-                                     "TOPOLOGY",
-                                     "SEQUENCE_INFORMATION",
-                                     "STRUCTURAL",
-                                     "DOMAINS_AND_SITES",
-                                     "PTM",
-                                     "VARIANTS",
-                                     "MUTAGENESIS"),
-                             max_len = 8),
-                        list(arg = "types",
-                             class = "character",
-                             max_len = 20,
-                             val = c("INIT_MET",
-                                     "SIGNAL",
-                                     "PROPEP",
-                                     "TRANSIT",
-                                     "CHAIN",
-                                     "PEPTIDE",
-                                     "TOPO_DOM",
-                                     "TRANSMEM",
-                                     "DOMAIN",
-                                     "REPEAT",
-                                     "CA_BIND",
-                                     "ZN_FING",
-                                     "DNA_BIND",
-                                     "NP_BIND",
-                                     "REGION",
-                                     "COILED",
-                                     "MOTIF",
-                                     "COMPBIAS",
-                                     "ACT_SITE",
-                                     "METAL",
-                                     "BINDING",
-                                     "SITE",
-                                     "NON_STD",
-                                     "MOD_RES",
-                                     "LIPID",
-                                     "CARBOHYD",
-                                     "DISULFID",
-                                     "CROSSLNK",
-                                     "VAR_SEQ",
-                                     "VARIANT",
-                                     "MUTAGEN",
-                                     "UNSURE",
-                                     "CONFLICT",
-                                     "NON_CONS",
-                                     "NON_TER",
-                                     "HELIX",
-                                     "TURN",
-                                     "STRAND",
-                                     "INTRAMEM")
-                        ))
+  .rba_args(
+    cons = list(
+      list(arg = "accession", class = "character", max_len = 100),
+      list(arg = "gene", class = "character", max_len = 20),
+      list(arg = "exact_gene", class = "character", max_len = 20),
+      list(arg = "protein", class = "character"),
+      list(arg = "reviewed", class = "logical"),
+      list(arg = "organism", class = "character"),
+      list(arg = "taxid", class = "numeric", max_len = 20),
+      list(
+        arg = "categories", class = "character", max_len = 8,
+        val = c("MOLECULE_PROCESSING",
+                "TOPOLOGY",
+                "SEQUENCE_INFORMATION",
+                "STRUCTURAL",
+                "DOMAINS_AND_SITES",
+                "PTM",
+                "VARIANTS",
+                "MUTAGENESIS")
+      ),
+      list(
+        arg = "types", class = "character", max_len = 20,
+        val = c("INIT_MET",
+                "SIGNAL",
+                "PROPEP",
+                "TRANSIT",
+                "CHAIN",
+                "PEPTIDE",
+                "TOPO_DOM",
+                "TRANSMEM",
+                "DOMAIN",
+                "REPEAT",
+                "CA_BIND",
+                "ZN_FING",
+                "DNA_BIND",
+                "NP_BIND",
+                "REGION",
+                "COILED",
+                "MOTIF",
+                "COMPBIAS",
+                "ACT_SITE",
+                "METAL",
+                "BINDING",
+                "SITE",
+                "NON_STD",
+                "MOD_RES",
+                "LIPID",
+                "CARBOHYD",
+                "DISULFID",
+                "CROSSLNK",
+                "VAR_SEQ",
+                "VARIANT",
+                "MUTAGEN",
+                "UNSURE",
+                "CONFLICT",
+                "NON_CONS",
+                "NON_TER",
+                "HELIX",
+                "TURN",
+                "STRAND",
+                "INTRAMEM")
+      )
+    )
   )
 
-  .msg("Searching UniProt and retrieving sequence annotations (features) of proteins that match your supplied inputs.")
-  ## Build GET API Request's query
-  call_query <- .rba_query(init = list("size" = "-1"),
-                           list("accession",
-                                !is.null(accession),
-                                paste0(accession,
-                                       collapse = ",")),
-                           list("gene",
-                                !is.null(gene),
-                                paste0(gene,
-                                       collapse = ",")),
-                           list("exact_gene",
-                                !is.null(exact_gene),
-                                paste0(exact_gene,
-                                       collapse = ",")),
-                           list("protein",
-                                !is.null(protein),
-                                protein),
-                           list("reviewed",
-                                !is.null(reviewed),
-                                ifelse(reviewed,
-                                       "true",
-                                       "false")),
-                           list("organism",
-                                !is.null(organism),
-                                organism),
-                           list("taxid",
-                                !is.null(taxid),
-                                paste0(taxid,
-                                       collapse = ",")),
-                           list("categories",
-                                !is.null(categories),
-                                paste0(categories,
-                                       collapse = ",")),
-                           list("types",
-                                !is.null(types),
-                                paste0(types,
-                                       collapse = ",")))
-  ## Build Function-Specific Call
-  parser_input <- list("json->list",
-                       .rba_uniprot_search_namer)
+  .msg(
+    "Searching UniProt and retrieving sequence annotations (features) of proteins that match your supplied inputs."
+  )
 
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = paste0(.rba_stg("uniprot", "pth"),
-                                        "features"),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = parser_input,
-                          save_to = .rba_file("uniprot_features_search.json"))
+  ## Build GET API Request's query
+  call_query <- .rba_query(
+    init = list("size" = "-1"),
+    list("accession", !is.null(accession), paste0(accession, collapse = ",")),
+    list("gene", !is.null(gene), paste0(gene, collapse = ",")),
+    list("exact_gene", !is.null(exact_gene), paste0(exact_gene, collapse = ",")),
+    list("protein", !is.null(protein), protein),
+    list("reviewed", !is.null(reviewed), ifelse(reviewed, "true", "false")),
+    list("organism", !is.null(organism), organism),
+    list("taxid", !is.null(taxid), paste0(taxid, collapse = ",")),
+    list("categories", !is.null(categories), paste0(categories, collapse = ",")),
+    list("types", !is.null(types), paste0(types, collapse = ","))
+  )
+
+  ## Build Function-Specific Call
+  parser_input <- list("json->list", .rba_uniprot_search_namer)
+
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(.rba_stg("uniprot", "pth"), "features"),
+    query = call_query,
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("uniprot_features_search.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -735,92 +682,93 @@ rba_uniprot_features_search <- function(accession = NULL,
 # #' @family "UniProt - Features"
 # #' @export
 # rba_uniprot_features_type <- function(terms,
-#                                      type,
-#                                      categories = NULL,
-#                                      ...) {
+#                                       type,
+#                                       categories = NULL,
+#                                       ...) {
 #   ## Load Global Options
 #   .rba_ext_args(...)
+#
 #   ## Check User-input Arguments
-#   .rba_args(cons = list(list(arg = "terms",
-#                                class = "character",
-#                                max_len = 20),
-#                           list(arg = "type",
-#                                class = "character",
-#                                len = 1,
-#                                val = c("INIT_MET",
-#                                        "SIGNAL",
-#                                        "PROPEP",
-#                                        "TRANSIT",
-#                                        "CHAIN",
-#                                        "PEPTIDE",
-#                                        "TOPO_DOM",
-#                                        "TRANSMEM",
-#                                        "DOMAIN",
-#                                        "REPEAT",
-#                                        "CA_BIND",
-#                                        "ZN_FING",
-#                                        "DNA_BIND",
-#                                        "NP_BIND",
-#                                        "REGION",
-#                                        "COILED",
-#                                        "MOTIF",
-#                                        "COMPBIAS",
-#                                        "ACT_SITE",
-#                                        "METAL",
-#                                        "BINDING",
-#                                        "SITE",
-#                                        "NON_STD",
-#                                        "MOD_RES",
-#                                        "LIPID",
-#                                        "CARBOHYD",
-#                                        "DISULFID",
-#                                        "CROSSLNK",
-#                                        "VAR_SEQ",
-#                                        "VARIANT",
-#                                        "MUTAGEN",
-#                                        "UNSURE",
-#                                        "CONFLICT",
-#                                        "NON_CONS",
-#                                        "NON_TER",
-#                                        "HELIX",
-#                                        "TURN",
-#                                        "STRAND",
-#                                        "INTRAMEM")),
-#                           list(arg = "categories",
-#                                class = "character",
-#                                val = c("MOLECULE_PROCESSING",
-#                                        "TOPOLOGY",
-#                                        "SEQUENCE_INFORMATION",
-#                                        "STRUCTURAL",
-#                                        "DOMAINS_AND_SITES",
-#                                        "PTM",
-#                                        "VARIANTS",
-#                                        "MUTAGENESIS."),
-#                                max_len = 8)
-#   )
+#   .rba_args(
+#     cons = list(
+#       list(arg = "terms", class = "character", max_len = 20),
+#       list(
+#         arg = "type", class = "character", len = 1,
+#         val = c("INIT_MET",
+#                 "SIGNAL",
+#                 "PROPEP",
+#                 "TRANSIT",
+#                 "CHAIN",
+#                 "PEPTIDE",
+#                 "TOPO_DOM",
+#                 "TRANSMEM",
+#                 "DOMAIN",
+#                 "REPEAT",
+#                 "CA_BIND",
+#                 "ZN_FING",
+#                 "DNA_BIND",
+#                 "NP_BIND",
+#                 "REGION",
+#                 "COILED",
+#                 "MOTIF",
+#                 "COMPBIAS",
+#                 "ACT_SITE",
+#                 "METAL",
+#                 "BINDING",
+#                 "SITE",
+#                 "NON_STD",
+#                 "MOD_RES",
+#                 "LIPID",
+#                 "CARBOHYD",
+#                 "DISULFID",
+#                 "CROSSLNK",
+#                 "VAR_SEQ",
+#                 "VARIANT",
+#                 "MUTAGEN",
+#                 "UNSURE",
+#                 "CONFLICT",
+#                 "NON_CONS",
+#                 "NON_TER",
+#                 "HELIX",
+#                 "TURN",
+#                 "STRAND",
+#                 "INTRAMEM")
+#       ),
+#       list(
+#         arg = "categories", class = "character", max_len = 8,
+#         val = c("MOLECULE_PROCESSING",
+#                 "TOPOLOGY",
+#                 "SEQUENCE_INFORMATION",
+#                 "STRUCTURAL",
+#                 "DOMAINS_AND_SITES",
+#                 "PTM",
+#                 "VARIANTS",
+#                 "MUTAGENESIS.")
+#       )
+#     )
 #   )
 #
-#   .msg("get /features/type/{type} Search protein sequence features of a given type in UniProt")
+#   .msg(
+#     "get /features/type/{type} Search protein sequence features of a given type in UniProt"
+#   )
+#
 #   ## Build GET API Request's query
-#   call_query <- .rba_query(init = list("size" = "-1"),
-#                             list("categories",
-#                                  !is.null(categories),
-#                                  paste0(categories,
-#                                         collapse = ",")),
-#                             list("terms",
-#                                  !is.null(terms),
-#                                  paste0(terms,
-#                                         collapse = ",")))
+#   call_query <- .rba_query(
+#     init = list("size" = "-1"),
+#     list("categories", !is.null(categories), paste0(categories, collapse = ",")),
+#     list("terms", !is.null(terms), paste0(terms, collapse = ","))
+#   )
+#
 #   ## Build Function-Specific Call
-#   input_call <- .rba_httr(httr = "get",
-#                            url = .rba_stg("uniprot", "url"),
-#                            path = paste0(.rba_stg("uniprot", "pth"),
-#                                          "features/type/",
-#                                          type),
-#                            query = call_query,
-#                            accept = "application/json",
-#                            parser = "json->list",
-#                            save_to = .rba_file("uniprot_features_type.json"))
+#   input_call <- .rba_httr(
+#     httr = "get",
+#     url = .rba_stg("uniprot", "url"),
+#     path = paste0(.rba_stg("uniprot", "pth"), "features/type/", type),
+#     query = call_query,
+#     accept = "application/json",
+#     parser = "json->list",
+#     save_to = .rba_file("uniprot_features_type.json")
+#   )
 #
 #   ## Call API
 #   final_output <- .rba_skeleton(input_call)
@@ -892,94 +840,91 @@ rba_uniprot_features <- function(accession,
                                  ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "accession",
-                             class = "character"),
-                        list(arg = "types",
-                             class = "character",
-                             len = 1,
-                             val = c("INIT_MET",
-                                     "SIGNAL",
-                                     "PROPEP",
-                                     "TRANSIT",
-                                     "CHAIN",
-                                     "PEPTIDE",
-                                     "TOPO_DOM",
-                                     "TRANSMEM",
-                                     "DOMAIN",
-                                     "REPEAT",
-                                     "CA_BIND",
-                                     "ZN_FING",
-                                     "DNA_BIND",
-                                     "NP_BIND",
-                                     "REGION",
-                                     "COILED",
-                                     "MOTIF",
-                                     "COMPBIAS",
-                                     "ACT_SITE",
-                                     "METAL",
-                                     "BINDING",
-                                     "SITE",
-                                     "NON_STD",
-                                     "MOD_RES",
-                                     "LIPID",
-                                     "CARBOHYD",
-                                     "DISULFID",
-                                     "CROSSLNK",
-                                     "VAR_SEQ",
-                                     "VARIANT",
-                                     "MUTAGEN",
-                                     "UNSURE",
-                                     "CONFLICT",
-                                     "NON_CONS",
-                                     "NON_TER",
-                                     "HELIX",
-                                     "TURN",
-                                     "STRAND",
-                                     "INTRAMEM")),
-                        list(arg = "categories",
-                             class = "character",
-                             val = c("MOLECULE_PROCESSING",
-                                     "TOPOLOGY",
-                                     "SEQUENCE_INFORMATION",
-                                     "STRUCTURAL",
-                                     "DOMAINS_AND_SITES",
-                                     "PTM",
-                                     "VARIANTS",
-                                     "MUTAGENESIS."),
-                             max_len = 8),
-                        list(arg = "location",
-                             class = "character",
-                             regex = "^\\d+\\-\\d+$",
-                             len = 1)
-  )
+  .rba_args(
+    cons = list(
+      list(arg = "accession", class = "character"),
+      list(
+        arg = "types", class = "character", len = 1,
+        val = c("INIT_MET",
+                "SIGNAL",
+                "PROPEP",
+                "TRANSIT",
+                "CHAIN",
+                "PEPTIDE",
+                "TOPO_DOM",
+                "TRANSMEM",
+                "DOMAIN",
+                "REPEAT",
+                "CA_BIND",
+                "ZN_FING",
+                "DNA_BIND",
+                "NP_BIND",
+                "REGION",
+                "COILED",
+                "MOTIF",
+                "COMPBIAS",
+                "ACT_SITE",
+                "METAL",
+                "BINDING",
+                "SITE",
+                "NON_STD",
+                "MOD_RES",
+                "LIPID",
+                "CARBOHYD",
+                "DISULFID",
+                "CROSSLNK",
+                "VAR_SEQ",
+                "VARIANT",
+                "MUTAGEN",
+                "UNSURE",
+                "CONFLICT",
+                "NON_CONS",
+                "NON_TER",
+                "HELIX",
+                "TURN",
+                "STRAND",
+                "INTRAMEM")
+      ),
+      list(
+        arg = "categories", class = "character", max_len = 8,
+        val = c("MOLECULE_PROCESSING",
+                "TOPOLOGY",
+                "SEQUENCE_INFORMATION",
+                "STRUCTURAL",
+                "DOMAINS_AND_SITES",
+                "PTM",
+                "VARIANTS",
+                "MUTAGENESIS.")
+      ),
+      list(arg = "location", class = "character", regex = "^\\d+\\-\\d+$", len = 1)
+    )
   )
 
-  .msg("Retrieving sequence annotations (features) of protein %s.", accession)
+  .msg(
+    "Retrieving sequence annotations (features) of protein %s.",
+    accession
+  )
+
   ## Build GET API Request's query
-  call_query <- .rba_query(init = list("size" = "-1"),
-                           list("categories",
-                                !is.null(categories),
-                                paste0(categories,
-                                       collapse = ",")),
-                           list("types",
-                                !is.null(types),
-                                paste0(types,
-                                       collapse = ",")),
-                           list("location",
-                                !is.null(location),
-                                location))
+  call_query <- .rba_query(
+    init = list("size" = "-1"),
+    list("categories", !is.null(categories), paste0(categories, collapse = ",")),
+    list("types", !is.null(types), paste0(types, collapse = ",")),
+    list("location", !is.null(location), location)
+  )
 
   ## Build Function-Specific Call
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = paste0(.rba_stg("uniprot", "pth"),
-                                        "features/",
-                                        accession),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = "json->list",
-                          save_to = .rba_file("uniprot_features.json"))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(.rba_stg("uniprot", "pth"), "features/", accession),
+    query = call_query,
+    accept = "application/json",
+    parser = "json->list",
+    save_to = .rba_file("uniprot_features.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -1097,125 +1042,84 @@ rba_uniprot_variation_search <- function(accession = NULL,
                                          ...) {
   ## Load Global Options
   .rba_ext_args(..., ignore_save = TRUE)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "accession",
-                             class = "character",
-                             max_len = 100),
-                        list(arg = "source_type",
-                             class = "character",
-                             val = c("uniprot",
-                                     "large scale study",
-                                     "mixed"),
-                             max_len = 2),
-                        list(arg = "consequence_type",
-                             class = "character",
-                             val = c("missense",
-                                     "stop gained",
-                                     "stop lost")),
-                        list(arg = "wild_type",
-                             class = "character",
-                             max_len = 20),
-                        list(arg = "alternative_sequence",
-                             class = "character",
-                             max_len = 20),
-                        list(arg = "location",
-                             class = "character",
-                             regex = "^\\d+\\-\\d+$",
-                             len = 1),
-                        list(arg = "disease",
-                             class = "character"),
-                        list(arg = "omim",
-                             class = "character",
-                             max_len = 20),
-                        list(arg = "evidence",
-                             class = "numeric",
-                             max_len = 20),
-                        list(arg = "taxid",
-                             class = "numeric",
-                             max_len = 20),
-                        list(arg = "db_type",
-                             class = "character",
-                             max_len = 2),
-                        list(arg = "db_id",
-                             class = "character",
-                             max_len = 20),
-                        list(arg = "save_peff",
-                             class = c("logical",
-                                       "character"))),
-            cond = list(list(quote(all(is.null(accession), is.null(disease),
-                                       is.null(omim), is.null(evidence),
-                                       is.null(taxid), is.null(db_type),
-                                       is.null(db_id))),
-                             "You should supply at least one of: accession, disease, omim, evidence, taxid, db_type or db_id"))
+  .rba_args(
+    cons = list(
+      list(arg = "accession", class = "character", max_len = 100),
+      list(
+        arg = "source_type", class = "character", max_len = 2,
+        val = c("uniprot", "large scale study", "mixed")
+      ),
+      list(
+        arg = "consequence_type", class = "character",
+        val = c("missense", "stop gained", "stop lost")
+      ),
+      list(arg = "wild_type", class = "character", max_len = 20),
+      list(arg = "alternative_sequence", class = "character", max_len = 20),
+      list(arg = "location", class = "character", regex = "^\\d+\\-\\d+$", len = 1),
+      list(arg = "disease", class = "character"),
+      list(arg = "omim", class = "character", max_len = 20),
+      list(arg = "evidence", class = "numeric", max_len = 20),
+      list(arg = "taxid", class = "numeric", max_len = 20),
+      list(arg = "db_type", class = "character", max_len = 2),
+      list(arg = "db_id", class = "character", max_len = 20),
+      list(arg = "save_peff", class = c("logical", "character"))
+    ),
+    cond = list(
+      list(
+        quote(all(is.null(accession), is.null(disease),
+                  is.null(omim), is.null(evidence),
+                  is.null(taxid), is.null(db_type),
+                  is.null(db_id))),
+        "You should supply at least one of: accession, disease, omim, evidence, taxid, db_type or db_id"
+      )
+    )
   )
 
-  .msg("Searching UniProt and retrieving natural variations of proteins that match your supplied inputs.")
-  ## Build GET API Request's query
-  call_query <- .rba_query(init = list("size" = "-1"),
-                           list("accession",
-                                !is.null(accession),
-                                paste0(accession,
-                                       collapse = ",")),
-                           list("sourcetype",
-                                !is.null(source_type),
-                                paste0(source_type,
-                                       collapse = ",")),
-                           list("consequencetype",
-                                !is.null(consequence_type),
-                                paste0(consequence_type,
-                                       collapse = ",")),
-                           list("wildtype",
-                                !is.null(wild_type),
-                                paste0(wild_type,
-                                       collapse = ",")),
-                           list("alternativesequence",
-                                !is.null(alternative_sequence),
-                                paste0(alternative_sequence,
-                                       collapse = ",")),
-                           list("location",
-                                !is.null(location),
-                                location),
-                           list("disease",
-                                !is.null(disease),
-                                disease),
-                           list("omim",
-                                !is.null(omim),
-                                paste0(omim,
-                                       collapse = ",")),
-                           list("evidence",
-                                !is.null(evidence),
-                                paste0(evidence,
-                                       collapse = ",")),
-                           list("taxid",
-                                !is.null(taxid),
-                                paste0(taxid,
-                                       collapse = ",")),
-                           list("dbtype",
-                                !is.null(db_type),
-                                paste0(db_type,
-                                       collapse = ",")),
-                           list("dbid",
-                                !is.null(db_id),
-                                paste0(db_type,
-                                       collapse = ",")))
-  ## Build Function-Specific Call
-  save_to <- ifelse(isFALSE(save_peff),
-                    yes = .rba_file(file = "uniprot_variation.json"),
-                    no = .rba_file(file = "uniprot_variation.peff",
-                                   save_to = save_peff))
-  obj_parser_input <- list("json->list",
-                           .rba_uniprot_search_namer)
+  .msg(
+    "Searching UniProt and retrieving natural variations of proteins that match your supplied inputs."
+  )
 
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = paste0(.rba_stg("uniprot", "pth"),
-                                        "variation"),
-                          query = call_query,
-                          save_to = save_to,
-                          file_accept = "text/x-peff",
-                          file_parser = "text->chr",
-                          obj_accept = "application/json",
-                          obj_parser = obj_parser_input)
+  ## Build GET API Request's query
+  call_query <- .rba_query(
+    init = list("size" = "-1"),
+    list("accession", !is.null(accession), paste0(accession, collapse = ",")),
+    list("sourcetype", !is.null(source_type), paste0(source_type, collapse = ",")),
+    list("consequencetype", !is.null(consequence_type), paste0(consequence_type, collapse = ",")),
+    list("wildtype", !is.null(wild_type), paste0(wild_type, collapse = ",")),
+    list("alternativesequence", !is.null(alternative_sequence), paste0(alternative_sequence, collapse = ",")),
+    list("location", !is.null(location), location),
+    list("disease", !is.null(disease), disease),
+    list("omim", !is.null(omim), paste0(omim, collapse = ",")),
+    list("evidence", !is.null(evidence), paste0(evidence, collapse = ",")),
+    list("taxid", !is.null(taxid), paste0(taxid, collapse = ",")),
+    list("dbtype", !is.null(db_type), paste0(db_type, collapse = ",")),
+    list("dbid", !is.null(db_id), paste0(db_type, collapse = ","))
+  )
+
+  ## Build Function-Specific Call
+  save_to <- ifelse(
+    isFALSE(save_peff),
+    yes = .rba_file(file = "uniprot_variation.json"),
+    no = .rba_file(file = "uniprot_variation.peff",
+                   save_to = save_peff)
+  )
+
+  obj_parser_input <- list("json->list", .rba_uniprot_search_namer)
+
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(.rba_stg("uniprot", "pth"), "variation"),
+    query = call_query,
+    save_to = save_to,
+    file_accept = "text/x-peff",
+    file_parser = "text->chr",
+    obj_accept = "application/json",
+    obj_parser = obj_parser_input
+  )
+
   ## Call API
   final_output <- .rba_skeleton(input_call)
   return(final_output)
@@ -1301,87 +1205,79 @@ rba_uniprot_variation <- function(id,
                                   ...) {
   ## Load Global Options
   .rba_ext_args(..., ignore_save = TRUE)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "id",
-                             class = "character"),
-                        list(arg = "id_type",
-                             class = "character",
-                             val = c("uniprot",
-                                     "dbsnp",
-                                     "hgvs")),
-                        list(arg = "source_type",
-                             class = "character",
-                             val = c("uniprot",
-                                     "large scale study",
-                                     "mixed"),
-                             max_len = 2),
-                        list(arg = "consequence_type",
-                             class = "character",
-                             val = c("missense",
-                                     "stop gained",
-                                     "stop lost"),
-                             max_len = 2),
-                        list(arg = "wild_type",
-                             class = "character",
-                             max_len = 20),
-                        list(arg = "alternative_sequence",
-                             class = "character",
-                             max_len = 20),
-                        list(arg = "location",
-                             class = "character"),
-                        list(arg = "save_peff",
-                             class = c("logical",
-                                       "character"))))
+  .rba_args(
+    cons = list(
+      list(arg = "id", class = "character"),
+      list(
+        arg = "id_type", class = "character",
+        val = c("uniprot", "dbsnp", "hgvs")
+      ),
+      list(
+        arg = "source_type", class = "character", max_len = 2,
+        val = c("uniprot", "large scale study", "mixed")
+      ),
+      list(
+        arg = "consequence_type", class = "character", max_len = 2,
+        val = c("missense", "stop gained", "stop lost")
+      ),
+      list(arg = "wild_type", class = "character", max_len = 20),
+      list(arg = "alternative_sequence", class = "character", max_len = 20),
+      list(arg = "location", class = "character"),
+      list(arg = "save_peff", class = c("logical", "character"))
+    )
+  )
 
-  .msg("Retrieving Natural variant of %s.",
-       ifelse(id_type == "uniprot",
-              yes = paste0("UniProt protein ", id),
-              no = paste0(id_type, " id ", id)))
+  .msg(
+    "Retrieving Natural variant of %s.",
+    ifelse(
+      id_type == "uniprot",
+      yes = paste0("UniProt protein ", id),
+      no = paste0(id_type, " id ", id)
+    )
+  )
+
   ## Build GET API Request's query
-  call_query <- .rba_query(init = list("size" = "-1"),
-                           list("sourcetype",
-                                !is.null(source_type),
-                                paste0(source_type,
-                                       collapse = ",")),
-                           list("consequencetype",
-                                !is.null(consequence_type),
-                                paste0(consequence_type,
-                                       collapse = ",")),
-                           list("wildtype",
-                                !is.null(wild_type),
-                                paste0(wild_type,
-                                       collapse = ",")),
-                           list("alternativesequence",
-                                !is.null(alternative_sequence),
-                                paste0(alternative_sequence,
-                                       collapse = ",")),
-                           list("location",
-                                !is.null(location),
-                                location))
-  ## Build Function-Specific Call
-  file_name <- sprintf("uniprot_variation_%s.%s",
-                       id_type, ifelse(isFALSE(save_peff), "json", "peff"))
-  save_to <- ifelse(isFALSE(save_peff),
-                    yes = .rba_file(file = file_name),
-                    no = .rba_file(file = file_name,
-                                   save_to = save_peff))
-  path_input <- switch(id_type,
-                       "uniprot" = paste0(.rba_stg("uniprot", "pth"),
-                                          "variation/", id),
-                       "hgvs" = paste0(.rba_stg("uniprot", "pth"),
-                                       "variation/hgvs/", id),
-                       "dbsnp" = paste0(.rba_stg("uniprot", "pth"),
-                                        "variation/dbsnp/", id))
+  call_query <- .rba_query(
+    init = list("size" = "-1"),
+    list("sourcetype", !is.null(source_type), paste0(source_type, collapse = ",")),
+    list("consequencetype", !is.null(consequence_type), paste0(consequence_type, collapse = ",")),
+    list("wildtype", !is.null(wild_type), paste0(wild_type, collapse = ",")),
+    list("alternativesequence", !is.null(alternative_sequence), paste0(alternative_sequence, collapse = ",")),
+    list("location", !is.null(location), location)
+  )
 
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = path_input,
-                          query = call_query,
-                          save_to = save_to,
-                          file_accept = "text/x-peff",
-                          file_parser = "text->chr",
-                          obj_accept = "application/json",
-                          obj_parser = "json->list")
+  ## Build Function-Specific Call
+  file_name <- sprintf(
+    "uniprot_variation_%s.%s",
+    id_type, ifelse(isFALSE(save_peff), "json", "peff")
+  )
+
+  save_to <- ifelse(
+    isFALSE(save_peff),
+    yes = .rba_file(file = file_name),
+    no = .rba_file(file = file_name, save_to = save_peff)
+  )
+
+  path_input <- switch(
+    id_type,
+    "uniprot" = paste0(.rba_stg("uniprot", "pth"), "variation/", id),
+    "hgvs" = paste0(.rba_stg("uniprot", "pth"), "variation/hgvs/", id),
+    "dbsnp" = paste0(.rba_stg("uniprot", "pth"), "variation/dbsnp/", id)
+  )
+
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = path_input,
+    query = call_query,
+    save_to = save_to,
+    file_accept = "text/x-peff",
+    file_parser = "text->chr",
+    obj_accept = "application/json",
+    obj_parser = "json->list"
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -1451,55 +1347,44 @@ rba_uniprot_antigens_search <- function(accession = NULL,
                                         ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "accession",
-                             class = "character",
-                             max_len = 100),
-                        list(arg = "antigen_sequence",
-                             class = "character"),
-                        list(arg = "antigen_id",
-                             class = "character",
-                             max_len = 20),
-                        list(arg = "ensembl_id",
-                             class = "character",
-                             max_len = 20),
-                        list(arg = "match_score",
-                             class = "numeric"))
+  .rba_args(
+    cons = list(
+      list(arg = "accession", class = "character", max_len = 100),
+      list(arg = "antigen_sequence", class = "character"),
+      list(arg = "antigen_id", class = "character", max_len = 20),
+      list(arg = "ensembl_id", class = "character", max_len = 20),
+      list(arg = "match_score", class = "numeric")
+    )
   )
 
-  .msg("Searching UniProt and retrieving antigenic features of proteins that match your supplied inputs.")
-  ## Build GET API Request's query
-  call_query <- .rba_query(init = list("size" = "-1"),
-                           list("accession",
-                                !is.null(accession),
-                                paste0(accession,
-                                       collapse = ",")),
-                           list("antigen_sequence",
-                                !is.null(antigen_sequence),
-                                antigen_sequence),
-                           list("antigen_id",
-                                !is.null(antigen_id),
-                                paste0(antigen_id,
-                                       collapse = ",")),
-                           list("ensembl_id",
-                                !is.null(ensembl_id),
-                                paste0(ensembl_id,
-                                       collapse = ",")),
-                           list("match_score",
-                                !is.null(match_score),
-                                match_score))
-  ## Build Function-Specific Call
-  parser_input <- list("json->list",
-                       .rba_uniprot_search_namer)
+  .msg(
+    "Searching UniProt and retrieving antigenic features of proteins that match your supplied inputs."
+  )
 
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = paste0(.rba_stg("uniprot", "pth"),
-                                        "antigen"),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = parser_input,
-                          save_to = .rba_file("uniprot_antigen_search.json"))
+  ## Build GET API Request's query
+  call_query <- .rba_query(
+    init = list("size" = "-1"),
+    list("accession", !is.null(accession), paste0(accession, collapse = ",")),
+    list("antigen_sequence", !is.null(antigen_sequence), antigen_sequence),
+    list("antigen_id", !is.null(antigen_id), paste0(antigen_id, collapse = ",")),
+    list("ensembl_id", !is.null(ensembl_id), paste0(ensembl_id, collapse = ",")),
+    list("match_score", !is.null(match_score), match_score)
+  )
+
+  ## Build Function-Specific Call
+  parser_input <- list("json->list", .rba_uniprot_search_namer)
+
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(.rba_stg("uniprot", "pth"), "antigen"),
+    query = call_query,
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("uniprot_antigen_search.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -1549,23 +1434,28 @@ rba_uniprot_antigens <- function(accession,
                                  ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "accession",
-                             class = "character",
-                             len = 1))
+  .rba_args(
+    cons = list(
+      list(arg = "accession", class = "character", len = 1)
+    )
   )
 
-  .msg("Retrieving Antigenic features mapped to the sequence of protein %s.",
-       accession)
+  .msg(
+    "Retrieving Antigenic features mapped to the sequence of protein %s.",
+    accession
+  )
+
   ## Build Function-Specific Call
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = paste0(.rba_stg("uniprot", "pth"),
-                                        "antigen/",
-                                        accession),
-                          accept = "application/json",
-                          parser = "json->list",
-                          save_to = .rba_file("uniprot_antigen.json"))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(.rba_stg("uniprot", "pth"), "antigen/", accession),
+    accept = "application/json",
+    parser = "json->list",
+    save_to = .rba_file("uniprot_antigen.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -1629,7 +1519,9 @@ rba_uniprot_epitope_search <- function(accession = NULL,
     )
   )
 
-  .msg("Searching UniProt for epitopes matching the supplied criteria.")
+  .msg(
+    "Searching UniProt for epitopes matching the supplied criteria."
+  )
 
   ## Build GET API Request's query
   call_query <- .rba_query(
@@ -1685,11 +1577,16 @@ rba_uniprot_epitope <- function(accession, ...) {
   .rba_ext_args(...)
 
   ## Check User-input Arguments
-  .rba_args(cons = list(
-    list(arg = "accession", class = "character", len = 1)
-  ))
+  .rba_args(
+    cons = list(
+      list(arg = "accession", class = "character", len = 1)
+    )
+  )
 
-  .msg("Retrieving epitope information for accession %s.", accession)
+  .msg(
+    "Retrieving epitope information for accession %s.",
+    accession
+  )
 
   ## Build Function-Specific Call
   parser_input <- "json->list"
@@ -1764,50 +1661,45 @@ rba_uniprot_epitope <- function(accession, ...) {
 #' @family "UniProt - Mutagenesis"
 #' @export
 rba_uniprot_mutagenesis_search <- function(accession = NULL,
-                                        taxid = NULL,
-                                        db_id = NULL,
-                                        ...) {
+                                           taxid = NULL,
+                                           db_id = NULL,
+                                           ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "accession",
-                             class = "character",
-                             max_len = 100),
-                        list(arg = "taxid",
-                             class = "numeric",
-                             max_len = 20),
-                        list(arg = "db_id",
-                             class = "character",
-                             max_len = 20))
+  .rba_args(
+    cons = list(
+      list(arg = "accession", class = "character", max_len = 100),
+      list(arg = "taxid", class = "numeric", max_len = 20),
+      list(arg = "db_id", class = "character", max_len = 20)
+    )
   )
 
-  .msg("Searching UniProt and retrieving mutagenesis description of proteins that match your supplied inputs.")
-  ## Build GET API Request's query
-  call_query <- .rba_query(init = list("size" = "-1"),
-                           list("accession",
-                                !is.null(accession),
-                                paste0(accession,
-                                       collapse = ",")),
-                           list("taxid",
-                                !is.null(taxid),
-                                paste0(taxid,
-                                       collapse = ",")),
-                           list("db_id",
-                                !is.null(db_id),
-                                paste0(db_id,
-                                       collapse = ",")))
-  ## Build Function-Specific Call
-  parser_input <- list("json->list",
-                       .rba_uniprot_search_namer)
+  .msg(
+    "Searching UniProt and retrieving mutagenesis description of proteins that match your supplied inputs."
+  )
 
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = paste0(.rba_stg("uniprot", "pth"),
-                                        "mutagenesis"),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = parser_input,
-                          save_to = .rba_file("uniprot_mutagenesis_search.json"))
+  ## Build GET API Request's query
+  call_query <- .rba_query(
+    init = list("size" = "-1"),
+    list("accession", !is.null(accession), paste0(accession, collapse = ",")),
+    list("taxid", !is.null(taxid), paste0(taxid, collapse = ",")),
+    list("db_id", !is.null(db_id), paste0(db_id, collapse = ","))
+  )
+
+  ## Build Function-Specific Call
+  parser_input <- list("json->list", .rba_uniprot_search_namer)
+
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(.rba_stg("uniprot", "pth"), "mutagenesis"),
+    query = call_query,
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("uniprot_mutagenesis_search.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -1862,33 +1754,36 @@ rba_uniprot_mutagenesis <- function(accession,
                                     ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "accession",
-                             class = "character",
-                             len = 1),
-                        list(arg = "location",
-                             class = "character",
-                             regex = "^\\d+\\-\\d+$",
-                             len = 1))
+  .rba_args(
+    cons = list(
+      list(arg = "accession", class = "character", len = 1),
+      list(arg = "location", class = "character", regex = "^\\d+\\-\\d+$", len = 1)
+    )
   )
 
-  .msg("Retrieving mutagenesis description mapped to the sequence of protein %s.",
-       accession)
+  .msg(
+    "Retrieving mutagenesis description mapped to the sequence of protein %s.",
+    accession
+  )
+
   ## Build GET API Request's query
-  call_query <- .rba_query(init = list(),
-                           list("location",
-                                !is.null(location),
-                                location))
+  call_query <- .rba_query(
+    init = list(),
+    list("location", !is.null(location), location)
+  )
+
   ## Build Function-Specific Call
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = paste0(.rba_stg("uniprot", "pth"),
-                                        "mutagenesis/",
-                                        accession),
-                          accept = "application/json",
-                          parser = "json->list",
-                          query = call_query,
-                          save_to = .rba_file("uniprot_mutagenesis.json"))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(.rba_stg("uniprot", "pth"), "mutagenesis/", accession),
+    accept = "application/json",
+    parser = "json->list",
+    query = call_query,
+    save_to = .rba_file("uniprot_mutagenesis.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -1936,13 +1831,17 @@ rba_uniprot_rna_edit_search <- function(accession = NULL,
   .rba_ext_args(...)
 
   ## Check User-input Arguments
-  .rba_args(cons = list(
-    list(arg = "accession", class = "character", max_len = 100),
-    list(arg = "taxid", class = "numeric", max_len = 20),
-    list(arg = "variantlocation", class = "character", max_len = 4)
-  ))
+  .rba_args(
+    cons = list(
+      list(arg = "accession", class = "character", max_len = 100),
+      list(arg = "taxid", class = "numeric", max_len = 20),
+      list(arg = "variantlocation", class = "character", max_len = 4)
+    )
+  )
 
-  .msg("Searching UniProt for RNA editing records matching the supplied criteria.")
+  .msg(
+    "Searching UniProt for RNA editing records matching the supplied criteria."
+  )
 
   ## Build GET API Request's query
   call_query <- .rba_query(
@@ -1954,6 +1853,7 @@ rba_uniprot_rna_edit_search <- function(accession = NULL,
 
   ## Build Function-Specific Call
   parser_input <- list("json->list", .rba_uniprot_search_namer)
+
   input_call <- .rba_httr(
     httr = "get",
     url = .rba_stg("uniprot", "url"),
@@ -1999,20 +1899,24 @@ rba_uniprot_rna_edit <- function(accession, ...) {
   .rba_ext_args(...)
 
   ## Check User-input Arguments
-  .rba_args(cons = list(
-    list(arg = "accession", class = "character", len = 1)
-  ))
+  .rba_args(
+    cons = list(
+      list(arg = "accession", class = "character", len = 1)
+    )
+  )
 
-  .msg("Retrieving RNA-editing information for accession %s.", accession)
+  .msg(
+    "Retrieving RNA-editing information for accession %s.",
+    accession
+  )
 
   ## Build Function-Specific Call
-  parser_input <- "json->list"
   input_call <- .rba_httr(
     httr = "get",
     url = .rba_stg("uniprot", "url"),
     path = paste0(.rba_stg("uniprot", "pth"), "rna-editing/", accession),
     accept = "application/json",
-    parser = parser_input,
+    parser = "json->list",
     save_to = .rba_file("uniprot_rna_edit.json")
   )
 

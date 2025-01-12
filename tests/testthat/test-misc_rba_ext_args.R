@@ -1,4 +1,5 @@
 test_that(".rba_ext_args works", {
+
   ## adds option to the environment
   opts <- getOption("rba_user_options")
   expect_false(object = length(setdiff(opts, ls())) == 0)
@@ -19,8 +20,10 @@ test_that(".rba_ext_args works", {
   rm(list = opts)
 
   ## ignore save_file option
-  expect_warning(object = .rba_ext_args(save_file = TRUE,
-                                        ignore_save = TRUE),
-                 regexp = "save_file")
+  expect_warning(
+    object = .rba_ext_args(save_file = TRUE, ignore_save = TRUE),
+    regexp = "save_file"
+  )
   expect_false(object = exists("save_file"))
+
 })

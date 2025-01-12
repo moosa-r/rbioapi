@@ -70,69 +70,48 @@ rba_uniprot_coordinates_search <- function(accession = NULL,
                                            ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "accession",
-                             class = "character",
-                             max_len = 100),
-                        list(arg = "chromosome",
-                             class = c("character",
-                                       "numeric"),
-                             max_len = 20),
-                        list(arg = "ensembl_id",
-                             class = "character",
-                             max_len = 20),
-                        list(arg = "gene",
-                             class = "character",
-                             max_len = 20),
-                        list(arg = "protein",
-                             class = "character"),
-                        list(arg = "taxid",
-                             class = "numeric",
-                             max_len = 20),
-                        list(arg = "location",
-                             class = "character")))
+  .rba_args(
+    cons = list(
+      list(arg = "accession", class = "character", max_len = 100),
+      list(arg = "chromosome", class = c("character", "numeric"), max_len = 20),
+      list(arg = "ensembl_id", class = "character", max_len = 20),
+      list(arg = "gene", class = "character", max_len = 20),
+      list(arg = "protein", class = "character"),
+      list(arg = "taxid", class = "numeric", max_len = 20),
+      list(arg = "location", class = "character")
+    )
+  )
 
-  .msg("Searching UniProt and retrieving Coordinates of proteins that match your supplied inputs.")
+  .msg(
+    "Searching UniProt and retrieving Coordinates of proteins that match your supplied inputs."
+  )
+
   ## Build GET API Request's query
-  call_query <- .rba_query(init = list("size" = "-1"),
-                           list("accession",
-                                !is.null(accession),
-                                paste0(accession,
-                                       collapse = ",")),
-                           list("chromosome",
-                                !is.null(chromosome),
-                                paste0(chromosome,
-                                       collapse = ",")),
-                           list("ensembl_id",
-                                !is.null(ensembl_id),
-                                paste0(ensembl_id,
-                                       collapse = ",")),
-                           list("gene",
-                                !is.null(gene),
-                                paste0(gene,
-                                       collapse = ",")),
-                           list("protein",
-                                !is.null(protein),
-                                protein),
-                           list("taxid",
-                                !is.null(taxid),
-                                paste0(taxid,
-                                       collapse = ",")),
-                           list("location",
-                                !is.null(location),
-                                location))
-  ## Build Function-Specific Call
-  parser_input <- list("json->list",
-                       .rba_uniprot_search_namer)
+  call_query <- .rba_query(
+    init = list("size" = "-1"),
+    list("accession", !is.null(accession), paste0(accession, collapse = ",")),
+    list("chromosome", !is.null(chromosome), paste0(chromosome, collapse = ",")),
+    list("ensembl_id", !is.null(ensembl_id), paste0(ensembl_id, collapse = ",")),
+    list("gene", !is.null(gene), paste0(gene, collapse = ",")),
+    list("protein", !is.null(protein), protein),
+    list("taxid", !is.null(taxid), paste0(taxid, collapse = ",")),
+    list("location", !is.null(location), location)
+  )
 
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = paste0(.rba_stg("uniprot", "pth"),
-                                        "coordinates"),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = parser_input,
-                          save_to = .rba_file("uniprot_coordinates_search.json"))
+  ## Build Function-Specific Call
+  parser_input <- list("json->list", .rba_uniprot_search_namer)
+
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(.rba_stg("uniprot", "pth"), "coordinates"),
+    query = call_query,
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("uniprot_coordinates_search.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -201,40 +180,46 @@ rba_uniprot_coordinates_location_protein <- function(accession,
                                                      ...) {
   ## Load Global Options
   .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "accession",
-                             class = "character"),
-                        list(arg = "p_position",
-                             class = "numeric"),
-                        list(arg = "p_start",
-                             class = "numeric"),
-                        list(arg = "p_end",
-                             class = "numeric")),
-            cond = list(list(quote(any(sum(!is.null(p_position), !is.null(p_start), !is.null(p_end)) == 3,
-                                       sum(!is.null(p_position), !is.null(p_start), !is.null(p_end)) == 0,
-                                       sum(!is.null(p_start), !is.null(p_end)) == 1)),
-                             "You should supply either 'p_position' alone or 'p_start' and 'p_end' together.")
-            ))
 
-  .msg("Retrieving genome coordinates of protein %s in sequence position %s.",
-       accession,
-       ifelse(is.null(p_position),
-              yes = paste(p_start, p_end, sep = " to "), no = p_position))
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(arg = "accession", class = "character"),
+      list(arg = "p_position", class = "numeric"),
+      list(arg = "p_start", class = "numeric"),
+      list(arg = "p_end", class = "numeric")),
+    cond = list(
+      list(
+        quote(any(sum(!is.null(p_position), !is.null(p_start), !is.null(p_end)) == 3,
+                  sum(!is.null(p_position), !is.null(p_start), !is.null(p_end)) == 0,
+                  sum(!is.null(p_start), !is.null(p_end)) == 1)),
+        "You should supply either 'p_position' alone or 'p_start' and 'p_end' together."
+      )
+    )
+  )
+
+  .msg(
+    "Retrieving genome coordinates of protein %s in sequence position %s.",
+    accession,
+    ifelse(is.null(p_position), yes = paste(p_start, p_end, sep = " to "), no = p_position)
+  )
 
   ## Build Function-Specific Call
-  path_input <- sprintf("%scoordinates/location/%s:%s",
-                        .rba_stg("uniprot", "pth"),
-                        accession,
-                        ifelse(!is.null(p_position),
-                               yes = p_position,
-                               no = paste0(p_start, "-", p_end)))
+  path_input <- sprintf(
+    "%scoordinates/location/%s:%s",
+    .rba_stg("uniprot", "pth"),
+    accession,
+    ifelse(!is.null(p_position), yes = p_position, no = paste0(p_start, "-", p_end))
+  )
 
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = path_input,
-                          accept = "application/json",
-                          parser = "json->list_simp",
-                          save_to = .rba_file("uniprot_coordinates_location.json"))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = path_input,
+    accept = "application/json",
+    parser = "json->list_simp",
+    save_to = .rba_file("uniprot_coordinates_location.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -300,43 +285,55 @@ rba_uniprot_coordinates <- function(accession = NULL,
                                     ...) {
   ## Load Global Options
   .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "accession",
-                             class = "character"),
-                        list(arg = "db_type",
-                             class = "character",
-                             val = c("Ensembl",
-                                     "CCDC",
-                                     "HGNC",
-                                     "RefSeq")),
-                        list(arg = "db_id",
-                             class = "character")),
-            cond = list(list(quote(any(sum(!is.null(accession), !is.null(db_type), !is.null(db_id)) == 3,
-                                       sum(!is.null(accession), !is.null(db_type), !is.null(db_id)) == 0,
-                                       sum(!is.null(db_type), !is.null(db_id)) == 1)),
-                             "You should supply either 'accession' alone or 'db_type' and 'db_id' together.")
-            ))
 
-  .msg("Retrieving genome coordinates of protein with ID: %s",
-       ifelse(is.null(accession),
-              yes = sprintf("%s in %s database", db_id, db_type),
-              no = accession))
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(arg = "accession", class = "character"),
+      list(
+        arg = "db_type", class = "character",
+        val = c("Ensembl", "CCDC", "HGNC", "RefSeq")
+      ),
+      list(arg = "db_id", class = "character")
+    ),
+    cond = list(
+      list(
+        quote(any(sum(!is.null(accession), !is.null(db_type), !is.null(db_id)) == 3,
+                  sum(!is.null(accession), !is.null(db_type), !is.null(db_id)) == 0,
+                  sum(!is.null(db_type), !is.null(db_id)) == 1)),
+        "You should supply either 'accession' alone or 'db_type' and 'db_id' together."
+      )
+    )
+  )
+
+  .msg(
+    "Retrieving genome coordinates of protein with ID: %s",
+    ifelse(
+      is.null(accession),
+      yes = sprintf("%s in %s database", db_id, db_type),
+      no = accession
+    )
+  )
+
   ## Build GET API Request's query
   call_query <- list("size" = "-1")
-  ## Build Function-Specific Call
-  path_input <- sprintf("%scoordinates/%s",
-                        .rba_stg("uniprot", "pth"),
-                        ifelse(!is.null(accession),
-                               yes = accession,
-                               no = paste0(db_type, ":", db_id)))
 
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = path_input,
-                          query = call_query,
-                          accept = "application/json",
-                          parser = "json->list",
-                          save_to = .rba_file("uniprot_coordinates.json"))
+  ## Build Function-Specific Call
+  path_input <- sprintf(
+    "%scoordinates/%s",
+    .rba_stg("uniprot", "pth"),
+    ifelse(!is.null(accession), yes = accession, no = paste0(db_type, ":", db_id))
+  )
+
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = path_input,
+    query = call_query,
+    accept = "application/json",
+    parser = "json->list",
+    save_to = .rba_file("uniprot_coordinates.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -404,38 +401,49 @@ rba_uniprot_coordinates_location <- function(taxid,
                                              ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "taxid",
-                             class = "numeric"),
-                        list(arg = "locations",
-                             class = "character"),
-                        list(arg = "in_range",
-                             class = "logical"),
-                        list(arg = "feature",
-                             class = "logical"))
+  .rba_args(
+    cons = list(
+      list(arg = "taxid", class = "numeric"),
+      list(arg = "locations", class = "character"),
+      list(arg = "in_range", class = "logical"),
+      list(arg = "feature", class = "logical")
+    )
   )
 
-  .msg("Retrieving UniProt entries in location %s of taxon %s.",
-       locations, taxid)
+  .msg(
+    "Retrieving UniProt entries in location %s of taxon %s.",
+    locations, taxid
+  )
+
   ## Build GET API Request's query
-  call_query <- list("size" = "-1",
-                     "in_range" = ifelse(in_range, "true", "false"))
+  call_query <- list(
+    "size" = "-1",
+    "in_range" = ifelse(in_range, "true", "false")
+  )
 
   ## Build Function-Specific Call
-  path_input <- sprintf("%scoordinates/%s/%s",
-                        .rba_stg("uniprot", "pth"),
-                        taxid,
-                        locations)
+  path_input <- sprintf(
+    "%scoordinates/%s/%s",
+    .rba_stg("uniprot", "pth"),
+    taxid,
+    locations
+  )
+
   if (isTRUE(feature)) {
     path_input <- paste0(path_input, "/feature")
   }
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = path_input,
-                          query = call_query,
-                          accept = "application/json",
-                          parser = "json->list",
-                          save_to = .rba_file("rba_uniprot_coordinates_location.json"))
+
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = path_input,
+    query = call_query,
+    accept = "application/json",
+    parser = "json->list",
+    save_to = .rba_file("rba_uniprot_coordinates_location.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -503,43 +511,56 @@ rba_uniprot_coordinates_location_genome <- function(taxid,
                                                     ...) {
   ## Load Global Options
   .rba_ext_args(...)
-  ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "taxid",
-                             class = "numeric"),
-                        list(arg = "chromosome",
-                             class = c("numeric",
-                                       "character")),
-                        list(arg = "g_position",
-                             class = "numeric"),
-                        list(arg = "g_start",
-                             class = "numeric"),
-                        list(arg = "g_end",
-                             class = "numeric")),
-            cond = list(list(quote(any(sum(!is.null(g_position), !is.null(g_start), !is.null(g_end)) == 3,
-                                       sum(!is.null(g_position), !is.null(g_start), !is.null(g_end)) == 0,
-                                       sum(!is.null(g_start), !is.null(g_end)) == 1)),
-                             "You should supply either 'g_position' alone or 'g_start' and 'g_end' together.")
-            ))
 
-  .msg("Retrieving genome coordinates of proteins in taxon %s, Chromosome %s, Genome location %s.",
-       taxid, chromosome,
-       ifelse(is.null(g_position),
-              yes = paste(g_start, g_end, sep = " to "), no = g_position))
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(arg = "taxid", class = "numeric"),
+      list(arg = "chromosome", class = c("numeric", "character")),
+      list(arg = "g_position", class = "numeric"),
+      list(arg = "g_start", class = "numeric"),
+      list(arg = "g_end", class = "numeric")
+    ),
+    cond = list(
+      list(
+        quote(any(sum(!is.null(g_position), !is.null(g_start), !is.null(g_end)) == 3,
+                  sum(!is.null(g_position), !is.null(g_start), !is.null(g_end)) == 0,
+                  sum(!is.null(g_start), !is.null(g_end)) == 1)),
+        "You should supply either 'g_position' alone or 'g_start' and 'g_end' together."
+      )
+    )
+  )
+
+  .msg(
+    "Retrieving genome coordinates of proteins in taxon %s, Chromosome %s, Genome location %s.",
+    taxid, chromosome,
+    ifelse(
+      is.null(g_position),
+      yes = paste(g_start, g_end, sep = " to "),
+      no = g_position
+    )
+  )
 
   ## Build Function-Specific Call
-  path_input <- sprintf("%scoordinates/glocation/%s/%s:%s",
-                        .rba_stg("uniprot", "pth"),
-                        taxid, chromosome,
-                        ifelse(!is.null(g_position),
-                               yes = g_position,
-                               no = paste0(g_start, "-", g_end)))
+  path_input <- sprintf(
+    "%scoordinates/glocation/%s/%s:%s",
+    .rba_stg("uniprot", "pth"),
+    taxid, chromosome,
+    ifelse(
+      !is.null(g_position),
+      yes = g_position,
+      no = paste0(g_start, "-", g_end)
+    )
+  )
 
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = path_input,
-                          accept = "application/json",
-                          parser = "json->list_simp",
-                          save_to = .rba_file("uniprot_coordinates_glocation.json"))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = path_input,
+    accept = "application/json",
+    parser = "json->list_simp",
+    save_to = .rba_file("uniprot_coordinates_glocation.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)

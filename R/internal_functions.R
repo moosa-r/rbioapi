@@ -18,129 +18,137 @@
 #' @noRd
 .rba_stg <- function(...){
   arg <- c(...)
-  #possible arguments
-  output <- switch(arg[[1]],
-                   db = c("enrichr", "ensembl","jaspar", "mieaa", "reactome",
-                          "string", "uniprot"),
-                   enrichr = switch(
-                     arg[[2]],
-                     name = "Enrichr",
-                     url = "https://maayanlab.cloud",
-                     pth = switch(match.arg(arg[[3]],
-                                            c("human",
-                                              "fly",
-                                              "yeast",
-                                              "worm",
-                                              "fish",
-                                              "speedrichr")),
-                                  human = "Enrichr/",
-                                  fly = "FlyEnrichr/",
-                                  yeast = "YeastEnrichr/",
-                                  worm = "WormEnrichr/",
-                                  fish = "FishEnrichr/",
-                                  speedrichr = "speedrichr/api/"),
-                     ptn = "^(https?://)?(www\\.)?maayanlab\\.cloud/(.*Enrichr|speedrichr)/",
-                     err_ptn = "^$"
-                   ),
-                   ensembl = switch(
-                     arg[[2]],
-                     name = "Ensembl",
-                     url = "https://rest.ensembl.org",
-                     ptn = "^(https?://)?(www\\.)?rest\\.ensembl\\.org/",
-                     err_ptn = "^4\\d\\d$",
-                     err_prs = list("json->list_simp",
-                                    function(x) {x[["error"]][[1]]})
-                   ),
-                   jaspar = switch(
-                     arg[[2]],
-                     name = "JASPAR",
-                     url = "https://jaspar.elixir.no/",
-                     pth = "api/v1/",
-                     ptn = "^(https?://)?(www\\.)?jaspar\\.elixir\\.no/api/",
-                     err_ptn = "^$"
-                   ),
-                   mieaa = switch(
-                     arg[[2]],
-                     name = "MiEAA",
-                     url = "https://ccb-compute2.cs.uni-saarland.de",
-                     pth = "mieaa/api/v1/",
-                     ptn = "^(https?://)?(www\\.)?ccb-compute2\\.cs\\.uni-saarland\\.de/mieaa2/",
-                     err_ptn = "^4\\d\\d$",
-                     err_prs = list("json->chr")
-                   ),
-                   panther = switch(
-                     arg[[2]],
-                     name = "PANTHER",
-                     url = "https://www.pantherdb.org",
-                     pth = "services/oai/pantherdb/",
-                     ptn = "^(https?://)?(www\\.)?pantherdb\\.org/services/",
-                     err_ptn = "^4\\d\\d&",
-                     err_prs = list("json->list_simp",
-                                    function(x) {x$search$error})
-                   ),
-                   reactome = switch(
-                     arg[[2]],
-                     name = "Reactome",
-                     url = "https://reactome.org",
-                     pth = switch(match.arg(arg[[3]],
-                                            c("analysis",
-                                              "content")),
-                                  analysis = "AnalysisService/",
-                                  content = "ContentService/"),
-                     ptn = "^(https?://)?(www\\.)?reactome\\.org/(?:AnalysisService|ContentService)/",
-                     err_ptn = "^4\\d\\d$",
-                     err_prs = list("json->list_simp",
-                                    function(x) {x[["messages"]][[1]]})
-                   ),
-                   string = switch(
-                     arg[[2]],
-                     name = "STRING",
-                     url = "https://version-12-0.string-db.org",
-                     pth = "api/",
-                     ptn = "^(http.?://).*string-db\\.org/api/",
-                     err_ptn = "^4\\d\\d$",
-                     err_prs = list("json->list_simp",
-                                    function(x) {paste(x, collapse = "\n")},
-                                    function(x) {gsub("<.+?>|&nbsp;", "\n", x)},
-                                    function(x) {gsub("(\n)+", "\n", x)})
-                   ),
-                   uniprot = switch(
-                     arg[[2]],
-                     name = "UniProt",
-                     url = "https://www.ebi.ac.uk",
-                     pth = "proteins/api/",
-                     ptn = "^(https?://)?(www\\.)?ebi\\.ac\\.uk/proteins/api/",
-                     err_prs = list("json->list_simp",
-                                    function(x) {x[["errorMessage"]][[1]]}),
-                     err_ptn = "^4\\d\\d$"
-                   ),
-                   options = switch(
-                     as.character(length(arg)),
-                     "1" = options()[grep("^rba_",
-                                          names(options()))],
-                     getOption(arg[[2]])),
-                   tests = list("Enrichr" = paste0(.rba_stg("enrichr", "url"),
-                                                   "/Enrichr"),
-                                "Ensembl" = paste0(.rba_stg("ensembl", "url"),
-                                                   "/info/ping"),
-                                "JASPAR" = paste0(.rba_stg("jaspar", "url"),
-                                                  "/api/v1/releases/"),
-                                "miEAA" = paste0(.rba_stg("mieaa", "url"),
-                                                 "/mieaa2/api/"),
-                                "PANTHER" = paste0(.rba_stg("panther", "url"),
-                                                   "/services/api/panther"),
-                                "Reactome Content Service" = paste0(.rba_stg("reactome", "url"),
-                                                                    "/ContentService/data/database/name"),
-                                "Reactome Analysis Service" = paste0(.rba_stg("reactome", "url"),
-                                                                     "/AnalysisService/database/name"),
-                                "STRING" = paste0(.rba_stg("string", "url"),
-                                                  "/api/json/version"),
-                                "UniProt" = paste0(.rba_stg("uniprot", "url"),
-                                                   "/proteins/api/proteins/P25445")
-                   ),
-                   stop("Internal Error; .rba_stg was called with wrong parameters:\n",
-                        paste0(arg, collapse = ", "), call. = TRUE)
+
+  # Possible arguments
+  output <- switch(
+    arg[[1]],
+    db = c("enrichr", "ensembl","jaspar", "mieaa", "reactome", "string", "uniprot"),
+    enrichr = switch(
+      arg[[2]],
+      name = "Enrichr",
+      url = "https://maayanlab.cloud",
+      pth = switch(
+        match.arg(
+          arg[[3]],
+          c("human", "fly", "yeast", "worm", "fish", "speedrichr")
+        ),
+        human = "Enrichr/",
+        fly = "FlyEnrichr/",
+        yeast = "YeastEnrichr/",
+        worm = "WormEnrichr/",
+        fish = "FishEnrichr/",
+        speedrichr = "speedrichr/api/"
+      ),
+      ptn = "^(https?://)?(www\\.)?maayanlab\\.cloud/(.*Enrichr|speedrichr)/",
+      err_ptn = "^$"
+    ),
+    ensembl = switch(
+      arg[[2]],
+      name = "Ensembl",
+      url = "https://rest.ensembl.org",
+      ptn = "^(https?://)?(www\\.)?rest\\.ensembl\\.org/",
+      err_ptn = "^4\\d\\d$",
+      err_prs = list(
+        "json->list_simp",
+        function(x) { x[["error"]][[1]] }
+      )
+    ),
+    jaspar = switch(
+      arg[[2]],
+      name = "JASPAR",
+      url = "https://jaspar.elixir.no/",
+      pth = "api/v1/",
+      ptn = "^(https?://)?(www\\.)?jaspar\\.elixir\\.no/api/",
+      err_ptn = "^$"
+    ),
+    mieaa = switch(
+      arg[[2]],
+      name = "MiEAA",
+      url = "https://ccb-compute2.cs.uni-saarland.de",
+      pth = "mieaa/api/v1/",
+      ptn = "^(https?://)?(www\\.)?ccb-compute2\\.cs\\.uni-saarland\\.de/mieaa2/",
+      err_ptn = "^4\\d\\d$",
+      err_prs = list("json->chr")
+    ),
+    panther = switch(
+      arg[[2]],
+      name = "PANTHER",
+      url = "https://www.pantherdb.org",
+      pth = "services/oai/pantherdb/",
+      ptn = "^(https?://)?(www\\.)?pantherdb\\.org/services/",
+      err_ptn = "^4\\d\\d&",
+      err_prs = list(
+        "json->list_simp",
+        function(x) { x$search$error }
+      )
+    ),
+    reactome = switch(
+      arg[[2]],
+      name = "Reactome",
+      url = "https://reactome.org",
+      pth = switch(
+        match.arg(
+          arg[[3]],
+          c("analysis", "content")
+        ),
+        analysis = "AnalysisService/",
+        content = "ContentService/"
+      ),
+      ptn = "^(https?://)?(www\\.)?reactome\\.org/(?:AnalysisService|ContentService)/",
+      err_ptn = "^4\\d\\d$",
+      err_prs = list(
+        "json->list_simp",
+        function(x) { x[["messages"]][[1]] }
+      )
+    ),
+    string = switch(
+      arg[[2]],
+      name = "STRING",
+      url = "https://version-12-0.string-db.org",
+      pth = "api/",
+      ptn = "^(http.?://).*string-db\\.org/api/",
+      err_ptn = "^4\\d\\d$",
+      err_prs = list(
+        "json->list_simp",
+        function(x) { paste(x, collapse = "\n") },
+        function(x) { gsub("<.+?>|&nbsp;", "\n", x) },
+        function(x) { gsub("(\n)+", "\n", x) }
+      )
+    ),
+    uniprot = switch(
+      arg[[2]],
+      name = "UniProt",
+      url = "https://www.ebi.ac.uk",
+      pth = "proteins/api/",
+      ptn = "^(https?://)?(www\\.)?ebi\\.ac\\.uk/proteins/api/",
+      err_prs = list(
+        "json->list_simp",
+        function(x) { x[["errorMessage"]][[1]] }
+      ),
+      err_ptn = "^4\\d\\d$"
+    ),
+    options = switch(
+      as.character(length(arg)),
+      "1" = options()[grep("^rba_", names(options()))],
+      getOption(arg[[2]])
+    ),
+    tests = list(
+      "Enrichr" = paste0(.rba_stg("enrichr", "url"), "/Enrichr"),
+      "Ensembl" = paste0(.rba_stg("ensembl", "url"), "/info/ping"),
+      "JASPAR" = paste0(.rba_stg("jaspar", "url"), "/api/v1/releases/"),
+      "miEAA" = paste0(.rba_stg("mieaa", "url"), "/mieaa2/api/"),
+      "PANTHER" = paste0(.rba_stg("panther", "url"), "/services/api/panther"),
+      "Reactome Content Service" = paste0(.rba_stg("reactome", "url"), "/ContentService/data/database/name"),
+      "Reactome Analysis Service" = paste0(.rba_stg("reactome", "url"), "/AnalysisService/database/name"),
+      "STRING" = paste0(.rba_stg("string", "url"), "/api/json/version"),
+      "UniProt" = paste0(.rba_stg("uniprot", "url"), "/proteins/api/proteins/P25445")
+    ),
+    stop(
+      "Internal Error; .rba_stg was called with wrong parameters:\n",
+      paste0(arg, collapse = ", "), call. = TRUE
+    )
   )
+
   return(output)
 }
 
@@ -171,6 +179,7 @@
                             diagnostics = FALSE,
                             skip_error = TRUE) {
   if (isTRUE(diagnostics)) {message("Testing the internet connection.")}
+
   test_call <- quote(
     httr::status_code(httr::HEAD("https://www.google.com/",
                                  httr::timeout(getOption("rba_timeout")),
@@ -180,6 +189,7 @@
   retry_count <- 0
 
   while (net_status != 200 && retry_count < retry_max) {
+
     retry_count <- retry_count + 1
     if (isTRUE(verbose)) {
       message(sprintf("No internet connection, waiting for %s seconds and retrying (retry count: %s/%s).",
@@ -189,6 +199,7 @@
     }
     Sys.sleep(retry_wait)
     net_status <- try(eval(test_call), silent = TRUE)
+
   } #end of while
 
   if (net_status == 200) {
@@ -222,94 +233,107 @@
   http_status <- as.character(http_status)
   stopifnot(grepl("^[12345]\\d\\d$", http_status))
 
-  resp <- switch(substr(http_status, 1, 1),
-                 "1" = list(class = "Informational",
-                            deff = switch(
-                              http_status,
-                              "100" = "Continue",
-                              "101" = "Switching Protocols",
-                              "102" = "Processing",
-                              "103" = "Early Hints")),
-                 "2" = list(class = "Success",
-                            deff = switch(
-                              http_status,
-                              "200" = "OK",
-                              "201" = "Created",
-                              "202" = "Accepted",
-                              "203" = "Non-Authoritative Information",
-                              "204" = "No Content",
-                              "205" = "Reset Content",
-                              "206" = "Partial Content",
-                              "207" = "Multi-Status",
-                              "208" = "Already Reported",
-                              "226" = "IM Used")),
-                 "3" = list(class = "Redirection",
-                            deff = switch(
-                              http_status,
-                              "300" = "Multiple Choices",
-                              "301" = "Moved Permanently",
-                              "302" = "Found",
-                              "303" = "See Other",
-                              "304" = "Not Modified",
-                              "305" = "Use Proxy",
-                              "306" = "Switch Proxy",
-                              "307" = "Temporary Redirect",
-                              "308" = "Permanent Redirect")),
-                 "4" = list(class = "Redirection",
-                            deff = switch(
-                              http_status,
-                              "400" = "Bad Request",
-                              "401" = "Unauthorized",
-                              "402" = "Payment Required",
-                              "403" = "Forbidden",
-                              "404" = "Not Found",
-                              "405" = "Method Not Allowed",
-                              "406" = "Not Acceptable",
-                              "407" = "Proxy Authentication Required",
-                              "408" = "Request Timeout",
-                              "409" = "Conflict",
-                              "410" = "Gone",
-                              "411" = "Length Required",
-                              "412" = "Precondition Failed",
-                              "413" = "Payload Too Large",
-                              "414" = "URI Too Long",
-                              "415" = "Unsupported Media Type",
-                              "416" = "Range Not Satisfiable",
-                              "417" = "Expectation Failed",
-                              "421" = "Misdirected Request",
-                              "422" = "Unprocessable Entity",
-                              "423" = "Locked",
-                              "424" = "Failed Dependency",
-                              "425" = "Too Early",
-                              "426" = "Upgrade Required",
-                              "428" = "Precondition Required",
-                              "429" = "Too Many Requests",
-                              "431" = "Request Header Fields Too Large",
-                              "451" = "Unavailable For Legal Reasons")),
-                 "5" = list(class = "Redirection",
-                            deff = switch(
-                              http_status,
-                              "500" = "Internal Server Error",
-                              "501" = "Not Implemented",
-                              "502" = "Bad Gateway",
-                              "503" = "Service Unavailable",
-                              "504" = "Gateway Timeout",
-                              "505" = "HTTP Version Not Supported",
-                              "506" = "Variant Also Negotiates",
-                              "507" = "Insufficient Storage",
-                              "508" = "Loop Detected",
-                              "510" = "Not Extended",
-                              "511" = "Network Authentication Required"))
+  resp <- switch(
+    substr(http_status, 1, 1),
+    "1" = list(
+      class = "Informational",
+      deff = switch(
+        http_status,
+        "100" = "Continue",
+        "101" = "Switching Protocols",
+        "102" = "Processing",
+        "103" = "Early Hints")
+    ),
+    "2" = list(
+      class = "Success",
+      deff = switch(
+        http_status,
+        "200" = "OK",
+        "201" = "Created",
+        "202" = "Accepted",
+        "203" = "Non-Authoritative Information",
+        "204" = "No Content",
+        "205" = "Reset Content",
+        "206" = "Partial Content",
+        "207" = "Multi-Status",
+        "208" = "Already Reported",
+        "226" = "IM Used")
+    ),
+    "3" = list(
+      class = "Redirection",
+      deff = switch(
+        http_status,
+        "300" = "Multiple Choices",
+        "301" = "Moved Permanently",
+        "302" = "Found",
+        "303" = "See Other",
+        "304" = "Not Modified",
+        "305" = "Use Proxy",
+        "306" = "Switch Proxy",
+        "307" = "Temporary Redirect",
+        "308" = "Permanent Redirect")
+    ),
+    "4" = list(
+      class = "Redirection",
+      deff = switch(
+        http_status,
+        "400" = "Bad Request",
+        "401" = "Unauthorized",
+        "402" = "Payment Required",
+        "403" = "Forbidden",
+        "404" = "Not Found",
+        "405" = "Method Not Allowed",
+        "406" = "Not Acceptable",
+        "407" = "Proxy Authentication Required",
+        "408" = "Request Timeout",
+        "409" = "Conflict",
+        "410" = "Gone",
+        "411" = "Length Required",
+        "412" = "Precondition Failed",
+        "413" = "Payload Too Large",
+        "414" = "URI Too Long",
+        "415" = "Unsupported Media Type",
+        "416" = "Range Not Satisfiable",
+        "417" = "Expectation Failed",
+        "421" = "Misdirected Request",
+        "422" = "Unprocessable Entity",
+        "423" = "Locked",
+        "424" = "Failed Dependency",
+        "425" = "Too Early",
+        "426" = "Upgrade Required",
+        "428" = "Precondition Required",
+        "429" = "Too Many Requests",
+        "431" = "Request Header Fields Too Large",
+        "451" = "Unavailable For Legal Reasons")
+    ),
+    "5" = list(
+      class = "Redirection",
+      deff = switch(
+        http_status,
+        "500" = "Internal Server Error",
+        "501" = "Not Implemented",
+        "502" = "Bad Gateway",
+        "503" = "Service Unavailable",
+        "504" = "Gateway Timeout",
+        "505" = "HTTP Version Not Supported",
+        "506" = "Variant Also Negotiates",
+        "507" = "Insufficient Storage",
+        "508" = "Loop Detected",
+        "510" = "Not Extended",
+        "511" = "Network Authentication Required")
+    )
   )
 
-  output <- ifelse(!is.null(resp$deff),
-                   yes = sprintf("HTTP Status '%s' (%s: %s)",
-                                 http_status, resp$class, resp$deff),
-                   no = sprintf("HTTP Status '%s' (%s class)",
-                                http_status, resp$class))
+  output <- ifelse(
+    !is.null(resp$deff),
+    yes = sprintf("HTTP Status '%s' (%s: %s)", http_status, resp$class, resp$deff),
+    no = sprintf("HTTP Status '%s' (%s class)", http_status, resp$class)
+  )
+
   if (isTRUE(verbose)) {
     output <- sprintf("The server returned %s.", output)
   }
+
   return(output)
 }
 
@@ -342,35 +366,45 @@
     ext_par <- ext_par$extra_pars
   }
   ## evaluate extra parameters
-  ext_evl <- vapply(X = ext_par,
-                    FUN = function(x) {
-                      if (length(x[[2]]) > 1) {
-                        warning("Internal Query Builder:\n",
-                                x[[1]],
-                                " has more than one element. Only the first element will be used.",
-                                call. = FALSE)
-                        x[[2]] <- x[[2]][[1]]
-                      }
-                      if (isTRUE(x[[2]])) {
-                        return(TRUE)
-                      } else if (isFALSE(x[[2]])) {
-                        return(FALSE)}
-                      else {
-                        warning("Internal Query Builder:\n The evaluation result of ",
-                                x[[1]],
-                                " is not TRUE or FALSE, thus skipping it.",
-                                call. = FALSE)
-                        return(FALSE)}
-                    },
-                    FUN.VALUE = logical(1))
+  ext_evl <- vapply(
+    X = ext_par,
+    FUN = function(x) {
+
+      if (length(x[[2]]) > 1) {
+        warning(
+          "Internal Query Builder:\n",
+          x[[1]],
+          " has more than one element. Only the first element will be used.",
+          call. = FALSE
+        )
+        x[[2]] <- x[[2]][[1]]
+      }
+
+      if (isTRUE(x[[2]])) {
+        return(TRUE)
+      } else if (isFALSE(x[[2]])) {
+        return(FALSE)
+      } else {
+        warning(
+          "Internal Query Builder:\n The evaluation result of ",
+          x[[1]],
+          " is not TRUE or FALSE, thus skipping it.",
+          call. = FALSE
+        )
+        return(FALSE)}
+    },
+    FUN.VALUE = logical(1)
+  )
 
   # extract extra parameters where theirs second element was TRUE
-  ext_val <- lapply(ext_par[ext_evl], function(x) {x[[3]]})
+  ext_val <- lapply(ext_par[ext_evl], function(x) { x[[3]] })
   # set names to the extracted parameters
   if (length(ext_val) >= 1) {
-    names(ext_val) <- vapply(ext_par[ext_evl],
-                             function(x) {x[[1]]},
-                             character(1))
+    names(ext_val) <- vapply(
+      ext_par[ext_evl],
+      function(x) { x[[1]] },
+      character(1)
+    )
     init <- append(init, ext_val)
   }
   return(init)
@@ -416,89 +450,113 @@
                       path = "",
                       ...) {
   ## assign global options
-  diagnostics <- get0("diagnostics", envir = parent.frame(1),
-                      ifnotfound = getOption("rba_diagnostics"))
-  progress <- get0("progress", envir = parent.frame(1),
-                   ifnotfound = getOption("rba_progress"))
-  timeout <- get0("timeout", envir = parent.frame(1),
-                  ifnotfound = getOption("rba_timeout"))
+  diagnostics <- get0("diagnostics", envir = parent.frame(1), ifnotfound = getOption("rba_diagnostics"))
+  progress <- get0("progress", envir = parent.frame(1), ifnotfound = getOption("rba_progress"))
+  timeout <- get0("timeout", envir = parent.frame(1), ifnotfound = getOption("rba_timeout"))
+
   ### 1 capture extra arguments
   # possible args: all args supported by httr +
   # args to this function: [file/obj_]accept, [file/obj_]parser, save_to
   ext_args <- list(...)
 
   ### 2 build main HTTP request (using httr)
-  httr_call <- list(switch(httr,
-                           "get" = quote(httr::GET),
-                           "post" = quote(httr::POST),
-                           "head" = quote(httr::HEAD),
-                           "put" = quote(httr::PUT),
-                           "delete" = quote(httr::DELETE),
-                           "patch" = quote(httr::PATCH),
-                           stop("Internal Error; what verb to use with httr?",
-                                call. = TRUE)),
-                    url = utils::URLencode(URL = url, repeated = FALSE),
-                    path = utils::URLencode(URL = path, repeated = FALSE),
-                    quote(httr::user_agent(getOption("rba_user_agent"))),
-                    quote(httr::timeout(timeout))
+  httr_call <- list(
+    switch(
+      httr,
+      "get" = quote(httr::GET),
+      "post" = quote(httr::POST),
+      "head" = quote(httr::HEAD),
+      "put" = quote(httr::PUT),
+      "delete" = quote(httr::DELETE),
+      "patch" = quote(httr::PATCH),
+      stop("Internal Error; what verb to use with httr?", call. = TRUE)
+    ),
+    url = utils::URLencode(URL = url, repeated = FALSE),
+    path = utils::URLencode(URL = path, repeated = FALSE),
+    quote(httr::user_agent(getOption("rba_user_agent"))),
+    quote(httr::timeout(timeout))
   )
+
   if (isTRUE(diagnostics)) {
     httr_call <- append(httr_call, quote(httr::verbose()))
   }
+
   if (isTRUE(progress)) {
     httr_call <- append(httr_call, quote(httr::progress()))
   }
 
   ###  3 deal with extra arguments
   if (length(ext_args) >= 1) {
+
     ### 3.1 check if there is "save to file vs return R object" scenario
     if (sum(utils::hasName(ext_args, "save_to"),
             utils::hasName(ext_args, "file_accept"),
             utils::hasName(ext_args, "obj_accept")) == 3) {
       ## 3.1.a it was up to the  end-user to choose the response type
       if (isFALSE(ext_args$save_to)) {
-        httr_call <- append(httr_call,
-                            list(str2lang(sprintf("httr::accept(\"%s\")",
-                                                  ext_args$obj_accept))))
+        httr_call <- append(
+          httr_call,
+          list(
+            str2lang(sprintf("httr::accept(\"%s\")", ext_args$obj_accept))
+          )
+        )
         if (utils::hasName(ext_args, "obj_parser")) {parser <- ext_args$obj_parser}
       } else {
-        httr_call <- append(httr_call,
-                            list(str2lang(sprintf("httr::accept(\"%s\")",
-                                                  ext_args$file_accept)),
-                                 str2lang(sprintf("httr::write_disk(\"%s\", overwrite = TRUE)",
-                                                  ext_args$save_to))
-                            ))
+        httr_call <- append(
+          httr_call,
+          list(
+            str2lang(sprintf("httr::accept(\"%s\")", ext_args$file_accept)),
+            str2lang(sprintf("httr::write_disk(\"%s\", overwrite = TRUE)", ext_args$save_to))
+          )
+        )
         if (utils::hasName(ext_args, "file_parser")) {parser <- ext_args$file_parser}
       }
+
     } else {
+
       ## 3.1.b it was a pre-defined response type
       # accept header?
       if (utils::hasName(ext_args, "accept")) {
-        httr_call <- append(httr_call,
-                            list(str2lang(sprintf("httr::accept(\"%s\")",
-                                                  ext_args$accept))))
+        httr_call <- append(
+          httr_call,
+          list(
+            str2lang(sprintf("httr::accept(\"%s\")", ext_args$accept))
+          )
+        )
       }
       # save to file?
       if (utils::hasName(ext_args, "save_to") && !isFALSE(ext_args$save_to)) {
-        httr_call <- append(httr_call,
-                            list(str2lang(sprintf("httr::write_disk(\"%s\", overwrite = TRUE)",
-                                                  ext_args$save_to))))
+        httr_call <- append(
+          httr_call,
+          list(
+            str2lang(sprintf("httr::write_disk(\"%s\", overwrite = TRUE)", ext_args$save_to))
+          )
+        )
       }
       # parser?
       if (utils::hasName(ext_args, "parser")) {
         parser <- ext_args$parser
       } else {
-        parser <- function(x) {x}
+        parser <- function(x) { x }
       }
+
     }
+
     ### remove extra arguments that you don't want in httr function call
     ext_args <- ext_args[!grepl("^(?:accept|file_accept|obj_accept|save_to|\\w*parser)$",
                                 names(ext_args))]
+
   } else {
-    parser <- function(x) {x}
+
+    parser <- function(x) { x }
+
   } #end of if (length(ext_args...
-  httr_call <- list(call = as.call(append(httr_call, ext_args)),
-                    parser = parser)
+
+  httr_call <- list(
+    call = as.call(append(httr_call, ext_args)),
+    parser = parser
+  )
+
   return(httr_call)
 }
 
@@ -544,45 +602,62 @@
                           verbose = TRUE,
                           diagnostics = FALSE) {
   ## 1 call API
-  response <- try(eval(input_call, envir = parent.frame(n = 2)),
-                  silent = !diagnostics)
+  response <- try(
+    eval(input_call, envir = parent.frame(n = 2)),
+    silent = !diagnostics
+  )
+
   ## 2 check the internet connection & 5xx http status
   if (!inherits(response, "response") ||
       substr(response$status_code, 1, 1) == "5") {
+
     ## 2.1 there is an internet connection or server issue
     # wait for the internet connection
-    net_connected <- .rba_net_handle(retry_max = retry_max,
-                                     retry_wait = retry_wait,
-                                     verbose = verbose,
-                                     diagnostics = diagnostics,
-                                     skip_error = skip_error)
+    net_connected <- .rba_net_handle(
+      retry_max = retry_max,
+      retry_wait = retry_wait,
+      verbose = verbose,
+      diagnostics = diagnostics,
+      skip_error = skip_error
+    )
     if (isTRUE(net_connected)) {
       ## 2.1.1 net_connection test is passed
-      response <- try(eval(input_call, envir = parent.frame(n = 2)),
-                      silent = !diagnostics)
+      response <- try(
+        eval(input_call, envir = parent.frame(n = 2)),
+        silent = !diagnostics
+      )
     }
+
   } # end of step 2
 
   ## 3 Decide what to return
   if (!inherits(response, "response")) {
+
     ## 3.1 errors un-related to server's response
-    error_message <- ifelse(test = net_connected,
-                            yes = as.character(response),
-                            no = "No internet connection. Stopping code execution!")
+    error_message <- ifelse(
+      test = net_connected,
+      yes = as.character(response),
+      no = "No internet connection. Stopping code execution!"
+    )
 
     if (isFALSE(diagnostics)) {
-      error_message <- gsub(pattern = "(^Error in .*?\\(.*?\\) :\\s*)|(\\s*$)",
-                           replacement = "",
-                           x = error_message,
-                           perl = TRUE)
+      error_message <- gsub(
+        pattern = "(^Error in .*?\\(.*?\\) :\\s*)|(\\s*$)",
+        replacement = "",
+        x = error_message,
+        perl = TRUE
+      )
     }
+
     # stop or return error?
     if (isTRUE(skip_error)) {
       return(error_message)
     } else {
       stop(error_message, call. = diagnostics)
     }
+
   } else if (substr(response$status_code, 1, 1) != "2") {
+
     ## 3.2 API call was not successful
     error_message <- .rba_error_parser(response = response, verbose = verbose)
     if (isTRUE(skip_error)) {
@@ -590,9 +665,12 @@
     } else {
       stop(error_message, call. = diagnostics)
     }
+
   } else {
+
     ## 3.3 Everything is OK (HTTP status == 200)
     return(response)
+
   }
 }
 
@@ -625,23 +703,22 @@
 .rba_skeleton <- function(input_call,
                           response_parser = NULL) {
   ## 0 assign options variables
-  diagnostics <- get0("diagnostics", envir = parent.frame(1),
-                      ifnotfound = getOption("rba_diagnostics"))
-  verbose <- get0("verbose", envir = parent.frame(1),
-                  ifnotfound = getOption("rba_verbose"))
-  retry_max <- get0("retry_max", envir = parent.frame(1),
-                    ifnotfound = getOption("rba_retry_max"))
-  retry_wait <- get0("retry_wait", envir = parent.frame(1),
-                     ifnotfound = getOption("rba_retry_wait"))
-  skip_error <- get0("skip_error", envir = parent.frame(1),
-                     ifnotfound = getOption("rba_skip_error"))
+  diagnostics <- get0("diagnostics", envir = parent.frame(1), ifnotfound = getOption("rba_diagnostics"))
+  verbose <- get0("verbose", envir = parent.frame(1), ifnotfound = getOption("rba_verbose"))
+  retry_max <- get0("retry_max", envir = parent.frame(1), ifnotfound = getOption("rba_retry_max"))
+  retry_wait <- get0("retry_wait", envir = parent.frame(1), ifnotfound = getOption("rba_retry_wait"))
+  skip_error <- get0("skip_error", envir = parent.frame(1), ifnotfound = getOption("rba_skip_error"))
+
   ## 1 Make API Call
-  response <- .rba_api_call(input_call = input_call$call,
-                            skip_error = skip_error,
-                            retry_max = retry_max,
-                            retry_wait = retry_wait,
-                            verbose = verbose,
-                            diagnostics = diagnostics)
+  response <- .rba_api_call(
+    input_call = input_call$call,
+    skip_error = skip_error,
+    retry_max = retry_max,
+    retry_wait = retry_wait,
+    verbose = verbose,
+    diagnostics = diagnostics
+  )
+
   ## 2 Parse the the response if possible
   # Parser supplied via .rba_skeleton's 'response parser' argument will
   # override the 'parser' supplied in input call
@@ -655,35 +732,45 @@
   if (inherits(response, "response")) {
     # There is a HTTP response, not an error message
     if (!is.null(parser_input)) {
+
       # A parser is provided for the response
-      parsed_response <- try(.rba_response_parser(response = response,
-                                                  parsers = parser_input),
-                             silent = TRUE)
+      parsed_response <- try(
+        .rba_response_parser(response = response, parsers = parser_input),
+        silent = TRUE
+      )
 
       if (!inherits(parsed_response, "try-error")) {
         return(parsed_response)
       } else if (identical(httr::content(response, as = "text", encoding = "UTF-8"), "")) {
         return(NULL)
       } else {
-        parse_error_msg <- paste("Internal Error:",
-                                 "Failed to parse the server's response.",
-                                 "This is probably because the server has changed the response format.",
-                                 "Please report this bug to us:",
-                                 "\n",
-                                 parsed_response,
-                                 sep = " ")
+        parse_error_msg <- paste(
+          "Internal Error:",
+          "Failed to parse the server's response.",
+          "This is probably because the server has changed the response format.",
+          "Please report this bug to us:",
+          "\n",
+          parsed_response,
+          sep = " "
+        )
         if (isTRUE(skip_error)) {
           return(parse_error_msg)
         } else {
           stop(parse_error_msg, call. = TRUE)
         }
       }
+
     } else {
+
       # No parser is provided for the response
       return(invisible(NULL))
+
     }
+
   } else {
+
     return(response)
+
   }
 }
 
@@ -712,23 +799,31 @@
 .rba_args_req <- function(cons, n = 2) {
   # List required arguments *arguments with no default value
   f_name <- as.character(sys.calls()[[sys.nframe() - n]])[[1]]
-  f_args <- try(names(formals(f_name)),
-                silent = TRUE)
+  f_args <- try(
+    names(formals(f_name)),
+    silent = TRUE
+  )
+
   if (!inherits(f_args, "try-error")) {
+
     f <- paste0(deparse(get(f_name)), collapse = "")
-    req <- regmatches(f,
-                      regexpr("(?<=^function \\().*?(?=\\)\\s{)",
-                              f, perl = TRUE))
-    req <- f_args[!grepl(pattern = "(=)|(\\.\\.\\.)",
-                         x = unlist(strsplit(req, ",")))]
+    req <- regmatches(
+      f,
+      regexpr("(?<=^function \\().*?(?=\\)\\s{)",
+              f, perl = TRUE)
+    )
+    req <- f_args[!grepl(pattern = "(=)|(\\.\\.\\.)", x = unlist(strsplit(req, ",")))]
     # Add `na_null = TRUE` to the required function
-    cons <- lapply(X = cons,
-                   FUN = function(x) {
-                     if (x[["arg"]] %in% req) {
-                       x[["no_null"]] <- TRUE
-                     }
-                     return(x)
-                   })
+    cons <- lapply(
+      X = cons,
+      FUN = function(x) {
+        if (x[["arg"]] %in% req) {
+          x[["no_null"]] <- TRUE
+        }
+        return(x)
+      }
+    )
+
   }
 
   return(cons)
@@ -757,51 +852,47 @@
 #' @noRd
 .rba_args_opts <- function(cons = NULL, cond = NULL, what) {
   if (what == "cons") {
-    ext_cons <- list(timeout = list(arg = "timeout",
-                                    class = "numeric",
-                                    len = 1,
-                                    ran = c(0.001, 3600)),
-                     dir_name = list(arg = "dir_name",
-                                     class = "character",
-                                     len = 1),
-                     diagnostics = list(arg = "diagnostics",
-                                        class = "logical",
-                                        len = 1),
-                     retry_max = list(arg = "retry_max",
-                                      class = "numeric",
-                                      len = 1),
-                     progress = list(arg = "progress",
-                                     class = "logical",
-                                     len = 1),
-                     save_file = list(arg = "save_file",
-                                      class = c("logical",
-                                                "character"),
-                                      len = 1),
-                     skip_error = list(arg = "skip_error",
-                                       class = "logical",
-                                       len = 1),
-                     verbose = list(arg = "verbose",
-                                    class = "logical",
-                                    len = 1),
-                     retry_wait = list(arg = "retry_wait",
-                                       class = "numeric",
-                                       len = 1,
-                                       min_val = 0))
-    cons <- append(ext_cons[names(ext_cons) %in% ls(envir = parent.frame(2))],
-                   cons)
+
+    ext_cons <- list(
+      timeout = list(arg = "timeout", class = "numeric", len = 1, ran = c(0.001, 3600)),
+      dir_name = list(arg = "dir_name", class = "character", len = 1),
+      diagnostics = list(arg = "diagnostics", class = "logical", len = 1),
+      retry_max = list(arg = "retry_max", class = "numeric", len = 1),
+      progress = list(arg = "progress", class = "logical", len = 1),
+      save_file = list(arg = "save_file", class = c("logical", "character"), len = 1),
+      skip_error = list(arg = "skip_error", class = "logical", len = 1),
+      verbose = list(arg = "verbose", class = "logical", len = 1),
+      retry_wait = list(arg = "retry_wait", class = "numeric", len = 1, min_val = 0)
+    )
+    cons <- append(
+      ext_cons[names(ext_cons) %in% ls(envir = parent.frame(2))],
+      cons
+    )
     return(cons)
+
   } else if (what == "cond") {
-    ext_cond <- list(dir_name = list(quote(grepl("[\\\\/:\"*?<>|]+", dir_name, perl = TRUE)),
-                                     "Invalid dir_name. Directory name cannot include these characters: \\/?%*:|<>"),
-                     save_file = list(quote(!is.logical(save_file) &&
-                                              !grepl("^[a-zA-z]:|^\\\\\\w|^/|\\w+\\.\\w+$",
-                                                     save_file)),
-                                      "Invalid save_file. You should set it to 'logical' or 'a valid file path'."))
-    cond <- append(ext_cond[names(ext_cond) %in% ls(envir = parent.frame(2))],
-                   cond)
+
+    ext_cond <- list(
+      dir_name = list(
+        quote(grepl("[\\\\/:\"*?<>|]+", dir_name, perl = TRUE)),
+        "Invalid dir_name. Directory name cannot include these characters: \\/?%*:|<>"
+      ),
+      save_file = list(
+        quote(!is.logical(save_file) && !grepl("^[a-zA-z]:|^\\\\\\w|^/|\\w+\\.\\w+$", save_file)),
+        "Invalid save_file. You should set it to 'logical' or 'a valid file path'."
+      )
+    )
+    cond <- append(
+      ext_cond[names(ext_cond) %in% ls(envir = parent.frame(2))],
+      cond
+    )
+
     return(cond)
+
   } else {
+
     stop("Internal Error; `what` should be `cons` or `cond.`", call. = TRUE)
+
   }
 }
 
@@ -821,24 +912,35 @@
 #' @noRd
 .rba_args_cons_chk <- function(cons_i, what) {
   if (!is.null(cons_i[["evl_arg"]])) {
-    output <- all(switch(what,
-                         "class" = class(cons_i[["evl_arg"]]) %in% cons_i[["class"]],
-                         "val" = all(cons_i[["evl_arg"]] %in% cons_i[["val"]]),
-                         "ran" = all(cons_i[["evl_arg"]] >= cons_i[["ran"]][[1]],
-                                     cons_i[["evl_arg"]] <= cons_i[["ran"]][[2]]),
-                         "len" = length(cons_i[["evl_arg"]]) == cons_i[["len"]],
-                         "min_len" = length(cons_i[["evl_arg"]]) >= cons_i[["min_len"]],
-                         "max_len" = length(cons_i[["evl_arg"]]) <= cons_i[["max_len"]],
-                         "min_val" = cons_i[["evl_arg"]] >= cons_i[["min_val"]],
-                         "max_val" = cons_i[["evl_arg"]] <= cons_i[["max_val"]],
-                         "regex" = grepl(pattern = cons_i[["regex"]],
-                                         x = cons_i[["evl_arg"]],
-                                         ignore.case = FALSE, perl = TRUE),
-                         stop("Internal Error; constrian is not defiend: ",
-                              what, call. = TRUE)))
+
+    output <- all(
+      switch(
+        what,
+        "class" = class(cons_i[["evl_arg"]]) %in% cons_i[["class"]],
+        "val" = all(cons_i[["evl_arg"]] %in% cons_i[["val"]]),
+        "ran" = all(
+          cons_i[["evl_arg"]] >= cons_i[["ran"]][[1]],
+          cons_i[["evl_arg"]] <= cons_i[["ran"]][[2]]
+        ),
+        "len" = length(cons_i[["evl_arg"]]) == cons_i[["len"]],
+        "min_len" = length(cons_i[["evl_arg"]]) >= cons_i[["min_len"]],
+        "max_len" = length(cons_i[["evl_arg"]]) <= cons_i[["max_len"]],
+        "min_val" = cons_i[["evl_arg"]] >= cons_i[["min_val"]],
+        "max_val" = cons_i[["evl_arg"]] <= cons_i[["max_val"]],
+        "regex" = grepl(
+          pattern = cons_i[["regex"]],
+          x = cons_i[["evl_arg"]],
+          ignore.case = FALSE, perl = TRUE
+        ),
+        stop("Internal Error; constrian is not defiend: ", what, call. = TRUE)
+      )
+    )
     return(output)
+
   } else {
+
     return(TRUE)
+
   }
 }
 
@@ -857,49 +959,66 @@
 #' @family internal_arguments_check
 #' @noRd
 .rba_args_cons_msg <- function(cons_i, what) {
-  switch(what,
-         "no_null" = sprintf("Invalid Argument: `%s` cannot be NULL.",
-                             cons_i[["arg"]]),
-         "class" = sprintf("Invalid Argument: %s should be of class `%s`.\n\t(Your supplied argument is \"%s\".)",
-                           cons_i[["arg"]],
-                           .paste2(cons_i[["class"]], last = " or ",
-                                   quote = "\""),
-                           class(cons_i[["evl_arg"]])),
-         "val" = sprintf("Invalid Argument: %s should be either `%s`.\n\t(Your supplied argument is `%s`.)",
-                         cons_i[["arg"]],
-                         .paste2(cons_i[["val"]], last = " or ",
-                                 quote = "\""),
-                         cons_i[["evl_arg"]]),
-         "ran" = sprintf("Invalid Argument: %s should be `from %s to %s`.\n\t(Your supplied argument is `%s`.)",
-                         cons_i[["arg"]],
-                         cons_i[["ran"]][[1]],
-                         cons_i[["ran"]][[2]],
-                         cons_i[["evl_arg"]]),
-         "len" = sprintf("Invalid Argument: %s should be of length `%s`.\n\t(Your supplied argument's length is `%s`.)",
-                         cons_i[["arg"]],
-                         cons_i[["len"]],
-                         length(cons_i[["evl_arg"]])),
-         "min_len" = sprintf("Invalid Argument: %s should be of minimum length `%s`.\n\t(Your supplied argument's length is `%s`.)",
-                             cons_i[["arg"]],
-                             cons_i[["min_len"]],
-                             length(cons_i[["evl_arg"]])),
-         "max_len" = sprintf("Invalid Argument: %s should be of maximum length `%s`.\n\t(Your supplied argument's length is `%s`.)",
-                             cons_i[["arg"]],
-                             cons_i[["max_len"]],
-                             length(cons_i[["evl_arg"]])),
-         "min_val" = sprintf("Invalid Argument: %s should be equal to or greater than `%s`.\n\t(Your supplied argument is `%s`.)",
-                             cons_i[["arg"]],
-                             cons_i[["min_val"]],
-                             cons_i[["evl_arg"]]),
-         "max_val" = sprintf("Invalid Argument: %s should be equal to or less than `%s`.\n\t(Your supplied argument is `%s`.)",
-                             cons_i[["arg"]],
-                             cons_i[["max_val"]],
-                             cons_i[["evl_arg"]]),
-         "regex" = sprintf("Invalid Argument: %s do not have a valid format.\n\t(It should match regex pattern: %s ).",
-                           cons_i[["arg"]],
-                           cons_i[["regex"]]),
-         stop("Internal Error: constrian message is not defiend: ",
-              what, call. = TRUE)
+  switch(
+    what,
+    "no_null" = sprintf(
+      "Invalid Argument: `%s` cannot be NULL.", cons_i[["arg"]]
+    ),
+    "class" = sprintf(
+      "Invalid Argument: %s should be of class `%s`.\n\t(Your supplied argument is \"%s\".)",
+      cons_i[["arg"]],
+      .paste2(cons_i[["class"]], last = " or ", quote = "\""),
+      class(cons_i[["evl_arg"]])
+    ),
+    "val" = sprintf(
+      "Invalid Argument: %s should be either `%s`.\n\t(Your supplied argument is `%s`.)",
+      cons_i[["arg"]],
+      .paste2(cons_i[["val"]], last = " or ", quote = "\""),
+      cons_i[["evl_arg"]]
+    ),
+    "ran" = sprintf(
+      "Invalid Argument: %s should be `from %s to %s`.\n\t(Your supplied argument is `%s`.)",
+      cons_i[["arg"]],
+      cons_i[["ran"]][[1]],
+      cons_i[["ran"]][[2]],
+      cons_i[["evl_arg"]]
+    ),
+    "len" = sprintf(
+      "Invalid Argument: %s should be of length `%s`.\n\t(Your supplied argument's length is `%s`.)",
+      cons_i[["arg"]],
+      cons_i[["len"]],
+      length(cons_i[["evl_arg"]])
+    ),
+    "min_len" = sprintf(
+      "Invalid Argument: %s should be of minimum length `%s`.\n\t(Your supplied argument's length is `%s`.)",
+      cons_i[["arg"]],
+      cons_i[["min_len"]],
+      length(cons_i[["evl_arg"]])
+    ),
+    "max_len" = sprintf(
+      "Invalid Argument: %s should be of maximum length `%s`.\n\t(Your supplied argument's length is `%s`.)",
+      cons_i[["arg"]],
+      cons_i[["max_len"]],
+      length(cons_i[["evl_arg"]])
+    ),
+    "min_val" = sprintf(
+      "Invalid Argument: %s should be equal to or greater than `%s`.\n\t(Your supplied argument is `%s`.)",
+      cons_i[["arg"]],
+      cons_i[["min_val"]],
+      cons_i[["evl_arg"]]
+    ),
+    "max_val" = sprintf(
+      "Invalid Argument: %s should be equal to or less than `%s`.\n\t(Your supplied argument is `%s`.)",
+      cons_i[["arg"]],
+      cons_i[["max_val"]],
+      cons_i[["evl_arg"]]
+    ),
+    "regex" = sprintf(
+      "Invalid Argument: %s do not have a valid format.\n\t(It should match regex pattern: %s ).",
+      cons_i[["arg"]],
+      cons_i[["regex"]]
+    ),
+    stop("Internal Error: constrian message is not defiend: ", what, call. = TRUE)
   )
 }
 
@@ -917,6 +1036,7 @@
 #' @noRd
 .rba_args_cons_wrp <- function(cons_i) {
   if (is.null(cons_i[["evl_arg"]])) {
+
     # check if the NULL argument is required or optional
     if (isTRUE(cons_i[["no_null"]])) {
       #it is not optional!
@@ -925,23 +1045,28 @@
       # It is optional, don't run the arguments check.
       return(NA)
     }
+
   } else {
+
     #  argument is not NULL (user supplied something)
     all_cons <- setdiff(names(cons_i), c("arg", "class", "evl_arg", "no_null"))
-    cons_i_errs <- lapply(all_cons,
-                          function(x){
-                            if (.rba_args_cons_chk(cons_i = cons_i, what = x)) {
-                              return(NA)
-                            } else {
-                              return(.rba_args_cons_msg(cons_i = cons_i, what = x))
-                            }
-                          })
+    cons_i_errs <- lapply(
+      all_cons,
+      function(x){
+        if (.rba_args_cons_chk(cons_i = cons_i, what = x)) {
+          return(NA)
+        } else {
+          return(.rba_args_cons_msg(cons_i = cons_i, what = x))
+        }
+      }
+    )
 
     if (any(!is.na(cons_i_errs))) {
       return(unlist(cons_i_errs[which(!is.na(cons_i_errs))]))
     } else {
       return(NA)
     } #end of any(!is.na(cons_i_errs))
+
   } #end of if (is.null(cons_i[["evl_arg"]]))
 }
 
@@ -964,36 +1089,64 @@
 #' @noRd
 .rba_args_cond <- function(cond_i) {
   if (is.call(cond_i[[1]])) {
+
     cond_i_1 <- eval(cond_i[[1]], envir = parent.frame(3))
+
   } else if (is.character(cond_i[[1]])) {
+
     cond_i_1 <- eval(parse(text = cond_i[[1]]), envir = parent.frame(3))
+
   } else {
-    stop("Internal Error; the first element in the condition sublist",
-         "should be either a charachter or quoted call!", call. = TRUE)
+
+    stop(
+      "Internal Error; the first element in the condition sublist",
+      "should be either a charachter or quoted call!",
+      call. = TRUE
+    )
+
   }
+
   ## Create an Error message
   if (isTRUE(cond_i_1)) {
-    err_obj <- switch(as.character(length(cond_i)),
-                      "2" = {
-                        if (is.character(cond_i[[2]])) {
-                          list(msg = cond_i[[2]],
-                               warn = FALSE)
-                        } else {
-                          list(msg = sprintf("Argument's conditions are not satisfied; `%s` is TRUE.",
-                                             as.character(enquote(cond_i[[1]]))[[2]]),
-                               warn = isTRUE(cond_i[[2]]))
-                        }},
-                      "3" = list(msg = cond_i[[2]],
-                                 warn = isTRUE(cond_i[[3]])),
-                      "1" = list(msg = sprintf("Argument's conditions are not satisfied; `%s` is TRUE.",
-                                               as.character(enquote(cond_i[[1]]))[[2]]),
-                                 warn = FALSE),
-                      stop("Internal Error; invalid condition: ",
-                           enquote(cond_i[[1]])[[2]], call. = TRUE)
+
+    err_obj <- switch(
+      as.character(length(cond_i)),
+      "2" = {
+        if (is.character(cond_i[[2]])) {
+          list(
+            msg = cond_i[[2]],
+            warn = FALSE
+          )
+        } else {
+          list(
+            msg = sprintf(
+              "Argument's conditions are not satisfied; `%s` is TRUE.",
+              as.character(enquote(cond_i[[1]]))[[2]]
+            ),
+            warn = isTRUE(cond_i[[2]])
+          )
+        }
+      },
+      "3" = list(
+        msg = cond_i[[2]],
+        warn = isTRUE(cond_i[[3]])
+      ),
+      "1" = list(
+        msg = sprintf(
+          "Argument's conditions are not satisfied; `%s` is TRUE.",
+          as.character(enquote(cond_i[[1]]))[[2]]
+        ),
+        warn = FALSE
+      ),
+      stop("Internal Error; invalid condition: ", enquote(cond_i[[1]])[[2]], call. = TRUE)
     )
     return(err_obj)
+
   } else {
-    return(NA)}
+
+    return(NA)
+
+  }
 }
 
 #' Internal user's Arguments Check
@@ -1055,52 +1208,69 @@
   ### 2 Check Arguments
   errors <- c()
   ## 2.1 check if the supplied object can be evaluated
-  cons <- lapply(X = cons,
-                 FUN = function(cons_i){
-                   cons_i[["evl_arg"]] <- try(expr = get(x = cons_i[["arg"]],
-                                                         envir = parent.frame(3)),
-                                              silent = TRUE)
-                   return(cons_i)
-                 })
-  cons_not_exist <- vapply(X = cons,
-                           FUN = function(x) {
-                             inherits(x[["evl_arg"]], "try-error")
-                           },
-                           FUN.VALUE = logical(1))
+  cons <- lapply(
+    X = cons,
+    FUN = function(cons_i){
+      cons_i[["evl_arg"]] <- try(
+        expr = get(x = cons_i[["arg"]], envir = parent.frame(3)),
+        silent = TRUE
+      )
+      return(cons_i)
+    }
+  )
+  cons_not_exist <- vapply(
+    X = cons,
+    FUN = function(x) {
+      inherits(x[["evl_arg"]], "try-error")
+    },
+    FUN.VALUE = logical(1)
+  )
 
   if (any(cons_not_exist)) { # some object didn't exist!
+
     #generate errors
-    errors <- append(errors,
-                     vapply(X = cons[cons_not_exist],
-                            FUN = function(x){
-                              error_message <- regmatches(x[["evl_arg"]],
-                                                  regexpr("(?<=(Error: )|(Error : )).*?(?=\n)",
-                                                          x[["evl_arg"]], perl = TRUE))
-                              return(ifelse(length(error_message) == 0,
-                                            yes = sub("^Error in.*: +\n", "", x[["evl_arg"]][[1]], perl = TRUE),
-                                            no = error_message
-                                            ))
-                              },
-                            FUN.VALUE = character(1)
-                     ))
+    errors <- append(
+      errors,
+      vapply(
+        X = cons[cons_not_exist],
+        FUN = function(x){
+          error_message <- regmatches(
+            x[["evl_arg"]],
+            regexpr("(?<=(Error: )|(Error : )).*?(?=\n)", x[["evl_arg"]], perl = TRUE)
+          )
+          return(
+            ifelse(
+              length(error_message) == 0,
+              yes = sub("^Error in.*: +\n", "", x[["evl_arg"]][[1]], perl = TRUE),
+              no = error_message
+            )
+          )
+        },
+        FUN.VALUE = character(1)
+      )
+    )
     #remove from cons
     cons <- cons[!cons_not_exist]
+
   }
+
   ## 2.2 check class
-  class_errs <- lapply(cons,
-                       function(x) {
-                         if (.rba_args_cons_chk(cons_i = x, what = "class")) {
-                           return(NA)
-                         } else {
-                           return(.rba_args_cons_msg(cons_i = x,
-                                                     what = "class"))
-                         }
-                       })
+  class_errs <- lapply(
+    cons,
+    function(x) {
+      if (.rba_args_cons_chk(cons_i = x, what = "class")) {
+        return(NA)
+      } else {
+        return(.rba_args_cons_msg(cons_i = x, what = "class"))
+      }
+    }
+  )
 
   if (any(!is.na(class_errs))) {
     errors <- append(errors, unlist(class_errs[!is.na(class_errs)]))
     cons <- cons[is.na(class_errs)] # remove elements with wrong class
   }
+
   ## 2.3 check other constrains if their class is correct
   ### Add no_null for arguments with no default value
   cons <- .rba_args_req(cons = cons, n = 2)
@@ -1110,15 +1280,21 @@
   if (any(!is.na(other_errs))) {
     errors <- append(errors, other_errs[!is.na(other_errs)])
   }
+
   ## 2.4 Take actions for the errors
   if (length(errors) == 1) {
+
     stop(errors, call. = diagnostics)
+
   } else if (length(errors) > 1) {
+
     error_message <- paste0("\n", seq_along(errors), "- ", errors)
-    stop(sprintf("Your supplied arguments contains the following `%s Errors`.",
-                 length(errors)),
-         error_message,
-         call. = diagnostics)
+    stop(
+      sprintf("Your supplied arguments contains the following `%s Errors`.", length(errors)),
+      error_message,
+      call. = diagnostics
+    )
+
   }
 
   ### 3 Check relationship between arguments
@@ -1132,16 +1308,16 @@
       if (length(cond_err) == 1) {
         cond_msg <- cond_err[[1]][["msg"]]
       } else if (length(cond_err) > 1) {
-        cond_msg <- paste0("\n", seq_along(cond_err), "- ",
-                           vapply(X = cond_err,
-                                  FUN = function(x){
-                                    x[["msg"]]
-                                  },
-                                  FUN.VALUE = character(1)),
-                           collapse = "")
-        cond_msg <- sprintf("Your supplied arguments contains the following `%s Conditional Issues`.:%s",
-                            length(cond_msg),
-                            cond_msg)
+        cond_msg <- paste0(
+          "\n", seq_along(cond_err), "- ",
+          vapply(X = cond_err, FUN = function(x) { x[["msg"]] }, FUN.VALUE = character(1)),
+          collapse = ""
+        )
+        cond_msg <- sprintf(
+          "Your supplied arguments contains the following `%s Conditional Issues`.:%s",
+          length(cond_msg),
+          cond_msg
+        )
       }
       ## 3.3 Take actions for the errors
       if (cond_warning == TRUE || all(vapply(X = cond_err,
@@ -1185,81 +1361,95 @@
 #' @noRd
 .rba_response_parser <- function(response, parsers) {
   if (!is.vector(parsers)) { parsers <- list(parsers)}
-  parsers <- sapply(X = parsers,
-                    FUN = function(parser){
-                      #create a parser if not supplied
-                      if (!is.function(parser)) {
-                        parser <- switch(
-                          parser,
-                          "json->df" = function(x) {
-                            data.frame(jsonlite::fromJSON(httr::content(x,
-                                                                        as = "text",
-                                                                        encoding = "UTF-8"),
-                                                          flatten = TRUE),
-                                       stringsAsFactors = FALSE)
-                          },
-                          "json->df_no_flat" = function(x) {
-                            data.frame(jsonlite::fromJSON(httr::content(x,
-                                                                        as = "text",
-                                                                        encoding = "UTF-8"),
-                                                          flatten = FALSE),
-                                       stringsAsFactors = FALSE)
-                          },
-                          "json->list_simp" = function(x) {
-                            as.list(jsonlite::fromJSON(httr::content(x,
-                                                                     as = "text",
-                                                                     encoding = "UTF-8"),
-                                                       simplifyVector = TRUE))
-                          },
-                          "json->list_simp_flt_df" = function(x) {
-                            sapply(X = as.list(jsonlite::fromJSON(httr::content(x,
-                                                                                as = "text",
-                                                                                encoding = "UTF-8"),
-                                                                  simplifyVector = TRUE)),
-                                   FUN = function(y){
-                                     if (is.data.frame(y)) {
-                                       jsonlite::flatten(y)
-                                     } else {
-                                       y
-                                     }
-                                   })
 
-                          },
-                          "json->list" = function(x) {
-                            as.list(jsonlite::fromJSON(httr::content(x,
-                                                                     as = "text",
-                                                                     encoding = "UTF-8"),
-                                                       simplifyVector = FALSE))
-                          },
-                          "json->chr" = function(x) {
-                            as.character(jsonlite::fromJSON(httr::content(x,
-                                                                          as = "text",
-                                                                          encoding = "UTF-8")))
-                          },
-                          "text->chr" = function(x) {
-                            as.character(httr::content(x,
-                                                       as = "text",
-                                                       encoding = "UTF-8"))
-                          },
-                          "text->df" = function(x) {
-                            utils::read.table(text = httr::content(x,
-                                                                   type = "text/plain",
-                                                                   as = "text",
-                                                                   encoding = "UTF-8"),
-                                              header = FALSE,
-                                              stringsAsFactors = FALSE)
-                          },
-                          "tsv->df" = function(x) {
-                            as.character(httr::content(x,
-                                                       as = "text",
-                                                       encoding = "UTF-8"))
-                          },
-                          stop("Internal Error; Specify a valid parser name or supply a function!",
-                               call. = TRUE)
-                        )
-                      }
-                      return(parser)
-                    })
+  parsers <- sapply(
+    X = parsers,
+    FUN = function(parser){
+      #create a parser if not supplied
+      if (!is.function(parser)) {
+        parser <- switch(
+          parser,
+          "json->df" = function(x) {
+            data.frame(
+              jsonlite::fromJSON(
+                httr::content(x, as = "text", encoding = "UTF-8"),
+                flatten = TRUE
+              ),
+              stringsAsFactors = FALSE
+            )
+          },
+          "json->df_no_flat" = function(x) {
+            data.frame(
+              jsonlite::fromJSON(
+                httr::content(x, as = "text", encoding = "UTF-8"),
+                flatten = FALSE
+              ),
+              stringsAsFactors = FALSE
+            )
+          },
+          "json->list_simp" = function(x) {
+            as.list(
+              jsonlite::fromJSON(
+                httr::content(x, as = "text", encoding = "UTF-8"),
+                simplifyVector = TRUE
+              )
+            )
+          },
+          "json->list_simp_flt_df" = function(x) {
+            sapply(
+              X = as.list(
+                jsonlite::fromJSON(
+                  httr::content(x, as = "text", encoding = "UTF-8"),
+                  simplifyVector = TRUE
+                )
+              ),
+              FUN = function(y){
+                if (is.data.frame(y)) {
+                  jsonlite::flatten(y)
+                } else {
+                  y
+                }
+              }
+            )
+          },
+          "json->list" = function(x) {
+            as.list(
+              jsonlite::fromJSON(
+                httr::content(x, as = "text", encoding = "UTF-8"),
+                simplifyVector = FALSE
+              )
+            )
+          },
+          "json->chr" = function(x) {
+            as.character(
+              jsonlite::fromJSON(
+                httr::content(x, as = "text", encoding = "UTF-8")
+              )
+            )
+          },
+          "text->chr" = function(x) {
+            as.character(
+              httr::content(x, as = "text", encoding = "UTF-8")
+            )
+          },
+          "text->df" = function(x) {
+            utils::read.table(
+              text = httr::content(x, type = "text/plain", as = "text", encoding = "UTF-8"),
+              header = FALSE,
+              stringsAsFactors = FALSE
+            )
+          },
+          "tsv->df" = function(x) {
+            as.character(
+              httr::content(x, as = "text", encoding = "UTF-8")
+            )
+          },
+          stop("Internal Error; Specify a valid parser name or supply a function!", call. = TRUE)
+        )
+      }
+      return(parser)
+    }
+  )
 
   # sequentially handle the response to the parsers
   for (parser in seq_along(parsers)) {
@@ -1294,12 +1484,14 @@
 .rba_error_parser <- function(response,
                               verbose = FALSE) {
   ## detect the database name
-  dbs <- vapply(X = .rba_stg("db"),
-                FUN = function(db) {
-                  grepl(.rba_stg(db, "ptn"), response$url,
-                        perl = TRUE, ignore.case = TRUE)},
-                FUN.VALUE = logical(1)
+  dbs <- vapply(
+    X = .rba_stg("db"),
+    FUN = function(db) {
+      grepl(.rba_stg(db, "ptn"), response$url, perl = TRUE, ignore.case = TRUE)
+    },
+    FUN.VALUE = logical(1)
   )
+
   db <- names(dbs)[dbs]
   ## parse the error
   if (length(db) == 1 &&
@@ -1309,19 +1501,15 @@
       sprintf(
         "%s server returned \"%s\".\n  With this error message:\n  \"%s\"",
         .rba_stg(db, "name"),
-        .rba_http_status(http_status = response$status_code,
-                         verbose = FALSE),
-        .rba_response_parser(response = response,
-                             parsers = .rba_stg(db, "err_prs"))
+        .rba_http_status(http_status = response$status_code, verbose = FALSE),
+        .rba_response_parser(response = response, parsers = .rba_stg(db, "err_prs"))
       )},
       error = function(e) {
-        .rba_http_status(http_status = response$status_code,
-                         verbose = verbose)
+        .rba_http_status(http_status = response$status_code, verbose = verbose)
       })
   } else {
     ## The API server returns only status code with no error string
-    error_message <- .rba_http_status(http_status = response$status_code,
-                                      verbose = verbose)
+    error_message <- .rba_http_status(http_status = response$status_code, verbose = verbose)
   }
   return(error_message)
 }
@@ -1350,14 +1538,18 @@
 #'
 #' @family internal_misc
 #' @noRd
-.msg <- function(fmt, ..., sprintf = TRUE, cond = "verbose",
-                 sep = "", collapse = NULL) {
+.msg <- function(fmt,
+                 ...,
+                 sprintf = TRUE,
+                 cond = "verbose",
+                 sep = "",
+                 collapse = NULL) {
   if (isTRUE(get0(cond, envir = parent.frame(1), ifnotfound = FALSE))) {
-    m <- ifelse(isTRUE(sprintf) &&
-                  is.character(fmt) &&
-                  grepl("%s", fmt, fixed = TRUE),
-                yes = sprintf(fmt, ...),
-                no = paste(fmt, ..., sep = sep, collapse = collapse))
+    m <- ifelse(
+      isTRUE(sprintf) && is.character(fmt) && grepl("%s", fmt, fixed = TRUE),
+      yes = sprintf(fmt, ...),
+      no = paste(fmt, ..., sep = sep, collapse = collapse)
+    )
     if (!is.na(m)) {
       message(m, appendLF = TRUE)
     }
@@ -1381,17 +1573,19 @@
 #' @family internal_misc
 #' @noRd
 .paste2 <- function(...,
-                    last = " and ", sep = ", ",
-                    quote = NULL, quote_all = NULL) {
+                    last = " and ",
+                    sep = ", ",
+                    quote = NULL,
+                    quote_all = NULL) {
   input <- c(...)
   len <- length(input)
   if (!is.null(quote)) {
     input <- sprintf("%s%s%s", quote, input, quote)
   }
   if (len > 1) {
-    input <- paste(paste0(input[-len], collapse = sep),
-                   input[len],
-                   sep = last)
+    input <- paste(
+      paste0(input[-len], collapse = sep), input[len], sep = last
+    )
   }
   if (!is.null(quote_all)) {
     input <- sprintf("%s%s%s", quote_all, input, quote_all)
@@ -1433,35 +1627,54 @@
                       save_to = NULL,
                       dir_name = NULL) {
   if (is.null(save_to)) {
-    save_to <- get0(x = "save_file",
-                    ifnotfound = FALSE,
-                    envir = parent.frame(1))
+    save_to <- get0(
+      x = "save_file",
+      ifnotfound = FALSE,
+      envir = parent.frame(1)
+    )
     if (is.na(save_to)) {save_to <- FALSE}
   }
 
   if (!isFALSE(save_to)) {
     ## 1 file path will be generated unless save_to == FALSE
     # set values
-    diagnostics <- get0("diagnostics", envir = parent.frame(1),
-                        ifnotfound = getOption("rba_diagnostics"))
-    verbose <- get0("verbose", envir = parent.frame(1),
-                    ifnotfound = getOption("rba_verbose"))
+    diagnostics <- get0(
+      "diagnostics",
+      envir = parent.frame(1),
+      ifnotfound = getOption("rba_diagnostics")
+    )
+    verbose <- get0(
+      "verbose",
+      envir = parent.frame(1),
+      ifnotfound = getOption("rba_verbose")
+    )
+
     # set defaults
-    def_file_ext <- regmatches(file, regexpr("(?<=\\.)\\w+?$",
-                                             file, perl = TRUE))
-    def_file_name <- regmatches(file,
-                                regexpr(sprintf("^.*(?=\\.%s$)", def_file_ext),
-                                        file, perl = TRUE))
+    def_file_ext <- regmatches(
+      file,
+      regexpr("(?<=\\.)\\w+?$", file, perl = TRUE)
+    )
+
+    def_file_name <- regmatches(
+      file,
+      regexpr(sprintf("^.*(?=\\.%s$)", def_file_ext), file, perl = TRUE)
+    )
+
     ## File path is in "save_to", if not in "file = file_name.file_ext"
     if (is.character(save_to)) {
+
+
       # 2a the user supplied a file path, just check if it is valid
       if (!grepl("^[a-zA-z]:|^\\\\\\w|^/|^\\w+\\.\\w+$", save_to)) {
         ## 2a.1 not a valid file path!
-        warning(sprintf("\"%s\" is not a valid file path. Ignored that.",
-                        save_to),
-                call. = diagnostics)
+        warning(
+          sprintf("\"%s\" is not a valid file path. Ignored that.", save_to),
+          call. = diagnostics
+        )
         save_to <- TRUE
+
       } else {
+
         ## 2a.2 the supplied file path is valid
         ## 2a.2.1 Does the path end to a directory or file?
         if (!grepl("/$", save_to, perl = TRUE) &&
@@ -1469,29 +1682,42 @@
           # 2a.2.1a it's file!
           overwrite <- TRUE
           # extract the file name and extension
-          file_ext <- regmatches(basename(save_to),
-                                 regexpr("(?<=\\.)\\w+?$",
-                                         basename(save_to), perl = TRUE))
-          file_name <- regmatches(basename(save_to),
-                                  regexpr(sprintf("^.*(?=\\.%s$)", file_ext),
-                                          basename(save_to), perl = TRUE))
+          file_ext <- regmatches(
+            basename(save_to),
+            regexpr("(?<=\\.)\\w+?$", basename(save_to), perl = TRUE)
+          )
+          file_name <- regmatches(
+            basename(save_to),
+            regexpr(sprintf("^.*(?=\\.%s$)", file_ext), basename(save_to), perl = TRUE)
+          )
           # 2a.3 Check if the path and extension agree
           if (!grepl(def_file_ext, file_ext, ignore.case = TRUE)) {
-            warning(sprintf("The Response file's type (\"%s\") does not match the extension of your supplied file path(\"%s\").",
-                            def_file_ext, basename(save_to)),
-                    call. = diagnostics)
+            warning(
+              sprintf(
+                "The Response file's type (\"%s\") does not match the extension of your supplied file path(\"%s\").",
+                def_file_ext, basename(save_to)
+              ),
+              call. = diagnostics
+            )
           }
+
         } else {
+
           #2a.2.1b it's directory
           overwrite <- FALSE
           ## append the default file name to the directory path
           file_ext <- def_file_ext
           file_name <- def_file_name
-          save_to <- file.path(sub("/$", "", save_to),
-                               paste0(file_name, ".", file_ext))
+          save_to <- file.path(
+            sub("/$", "", save_to),
+            paste0(file_name, ".", file_ext)
+          )
+
         }
+
       }
     }
+
     if (isTRUE(save_to)) {
       ## 2b User didn't supply a file path, use defaults
       overwrite <- FALSE
@@ -1499,10 +1725,11 @@
       file_ext <- def_file_ext
       file_name <- def_file_name
       ## 2b.2 set directory name
-      dir_name <- ifelse(is.null(dir_name),
-                         yes = get0("dir_name", envir = parent.frame(1),
-                                    ifnotfound = getOption("rba_dir_name")),
-                         no = dir_name)
+      dir_name <- ifelse(
+        is.null(dir_name),
+        yes = get0("dir_name", envir = parent.frame(1), ifnotfound = getOption("rba_dir_name")),
+        no = dir_name
+      )
       ## 2b.3 set file path
       save_to <- file.path(getwd(), dir_name, paste0(file_name, ".", file_ext))
     } # end of if is.character(save_to)
@@ -1510,28 +1737,39 @@
     ## 3 now that you have a file path...
     ## 3.1 check if a file doesn't exist with this path
     if (isFALSE(overwrite) && file.exists(save_to)) {
+
       ## add an incremented file
-      exst_files <- list.files(path = dirname(save_to),
-                               pattern = sprintf("(^%s)(_\\d+)*(\\.%s$)",
-                                                 file_name, file_ext),
-                               full.names = FALSE)
-      incrt <- regmatches(exst_files,
-                          regexpr(sprintf("(?<=^%s_)(\\d+)*(?=\\.%s)",
-                                          file_name, file_ext),
-                                  exst_files, perl = TRUE))
+      exst_files <- list.files(
+        path = dirname(save_to),
+        pattern = sprintf("(^%s)(_\\d+)*(\\.%s$)", file_name, file_ext),
+        full.names = FALSE
+      )
+      incrt <- regmatches(
+        exst_files,
+        regexpr(sprintf("(?<=^%s_)(\\d+)*(?=\\.%s)", file_name, file_ext), exst_files, perl = TRUE)
+      )
       if (length(incrt) == 0) {
         incrt <- 1
       } else {incrt <- max(as.numeric(incrt)) + 1}
-      save_to <- file.path(dirname(save_to),
-                           paste0(file_name, "_", incrt, ".", file_ext))
+
+      save_to <- file.path(
+        dirname(save_to),
+        paste0(file_name, "_", incrt, ".", file_ext)
+      )
+
     } else {
+
       ## 3.2 file doesn't exist. create the directory just in case
       ### 4 create the directory
-      dir.create(dirname(save_to),
-                 showWarnings = FALSE,
-                 recursive = TRUE)
+      dir.create(dirname(save_to), showWarnings = FALSE, recursive = TRUE)
+
     }
-    .msg("Saving the server response to: \"%s\"", save_to)
+
+    .msg(
+      "Saving the server response to: \"%s\"",
+      save_to
+    )
+
   } # end if !isFALSE(save_to)
   return(save_to)
 }
@@ -1563,7 +1801,9 @@
 .rba_ext_args <- function(..., ignore_save = FALSE) {
   ext_args <- list(...)
   rba_opts <- getOption("rba_user_options") #available options for the end-users
+
   if (length(ext_args) > 0) { #user supplied something in ...
+
     ext_arg_names <- names(ext_args)
 
     if (is.null(ext_arg_names)) {
@@ -1574,37 +1814,62 @@
     invalid_args <- which(!ext_arg_names %in% c(rba_opts, ""))
 
     if (length(c(unnamed_args, invalid_args)) > 0) {
-      warning(sprintf("invalid rbioapi options were ignored:%s%s",
-                      ifelse(length(unnamed_args) != 0,
-                             yes = sprintf("\n- unnamed argument(s): %s",
-                                           .paste2(ext_args[unnamed_args],
-                                                   quote = "`")),
-                             no = ""),
-                      ifelse(length(invalid_args) != 0,
-                             yes = sprintf("\n- %s",
-                                           .paste2(sprintf("%s = %s",
-                                                           ext_arg_names[invalid_args],
-                                                           ext_args[invalid_args]),
-                                                   last = " and ",
-                                                   quote = "`")),
-                             no = "")
-      ), call. = FALSE)
+      warning(
+        sprintf(
+          "invalid rbioapi options were ignored:%s%s",
+          ifelse(
+            length(unnamed_args) != 0,
+            yes = sprintf(
+              "\n- unnamed argument(s): %s",
+              .paste2(ext_args[unnamed_args], quote = "`")
+            ),
+            no = ""
+          ),
+          ifelse(
+            length(invalid_args) != 0,
+            yes = sprintf(
+              "\n- %s",
+              .paste2(
+                sprintf(
+                  "%s = %s",
+                  ext_arg_names[invalid_args],
+                  ext_args[invalid_args]),
+                last = " and ",
+                quote = "`"
+              )
+            ),
+            no = ""
+          )
+        ),
+        call. = FALSE
+      )
       ext_args <- ext_args[-c(unnamed_args, invalid_args)]
+
     }
+
     if (isTRUE(ignore_save) && utils::hasName(ext_args, "save_file")) {
-      warning("This function has a dedicated file-saving argument, ",
-              "'save_file' option was ignored.",
-              call. = FALSE)
+
+      warning(
+        "This function has a dedicated file-saving argument, ",
+        "'save_file' option was ignored.",
+        call. = FALSE
+      )
       rba_opts <- rba_opts[names(rba_opts) != "rba_save_file"]
+
     }
   } #end of if (length(ext_args) > 0)
+
   # create option variables
   for (opt in rba_opts) {
-    assign(x = opt,
-           value = ifelse(is.null(ext_args[[opt]]) || is.na(ext_args[[opt]]),
-                          yes = getOption(paste0("rba_", opt)),
-                          no = ext_args[[opt]]),
-           envir = parent.frame(1))
+    assign(
+      x = opt,
+      value = ifelse(
+        is.null(ext_args[[opt]]) || is.na(ext_args[[opt]]),
+        yes = getOption(paste0("rba_", opt)),
+        no = ext_args[[opt]]
+      ),
+      envir = parent.frame(1)
+    )
   }
 
   invisible()

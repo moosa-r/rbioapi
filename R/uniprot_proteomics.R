@@ -46,19 +46,23 @@
 rba_uniprot_proteomics_species <- function(...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
   .rba_args()
 
-  .msg("Retrieving Unipropt Proteomics metadata")
+  .msg(
+    "Retrieving Unipropt Proteomics metadata"
+  )
 
   ## Build Function-Specific Call
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = paste0(.rba_stg("uniprot", "pth"),
-                                        "proteomics/species"),
-                          accept = "application/json",
-                          parser = "json->df",
-                          save_to = .rba_file("uniprot_species.json"))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(.rba_stg("uniprot", "pth"), "proteomics/species"),
+    accept = "application/json",
+    parser = "json->df",
+    save_to = .rba_file("uniprot_species.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -146,67 +150,49 @@ rba_uniprot_proteomics_non_ptm_search <- function(accession = NULL,
                                                   ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "accession",
-                             class = "character",
-                             max_len = 100),
-                        list(arg = "taxid",
-                             class = "numeric",
-                             max_len = 20),
-                        list(arg = "upid",
-                             class = "character",
-                             max_len = 100),
-                        list(arg = "data_source",
-                             class = "character",
-                             max_len = 2,
-                             val = c("MaxQB",
-                                     "PeptideAtlas",
-                                     "EPD",
-                                     "ProteomicsDB")),
-                        list(arg = "peptide",
-                             class = "character",
-                             max_len = 20),
-                        list(arg = "unique",
-                             class = "logical"))
+  .rba_args(
+    cons = list(
+      list(arg = "accession", class = "character", max_len = 100),
+      list(arg = "taxid", class = "numeric", max_len = 20),
+      list(arg = "upid", class = "character", max_len = 100),
+      list(
+        arg = "data_source", class = "character", max_len = 2,
+        val = c("MaxQB", "PeptideAtlas", "EPD", "ProteomicsDB")
+      ),
+      list(arg = "peptide", class = "character", max_len = 20),
+      list(arg = "unique", class = "logical")
+    )
   )
 
-  .msg("Searching UniProt and retrieving proteomics nonPTM features of proteins that match your supplied inputs.")
+  .msg(
+    "Searching UniProt and retrieving proteomics nonPTM features of proteins that match your supplied inputs."
+  )
+
   ## Build GET API Request's query
-  call_query <- .rba_query(init = list("size" = "-1"),
-                           list("accession",
-                                !is.null(accession),
-                                paste0(accession,
-                                       collapse = ",")),
-                           list("taxid",
-                                !is.null(taxid),
-                                paste0(taxid,
-                                       collapse = ",")),
-                           list("upid",
-                                !is.null(upid),
-                                paste0(upid,
-                                       collapse = ",")),
-                           list("data_source",
-                                !is.null(data_source),
-                                paste0(data_source,
-                                       collapse = ",")),
-                           list("peptide",
-                                !is.null(peptide),
-                                paste0(peptide,
-                                       collapse = ",")),
-                           list("unique",
-                                !is.null(unique),
-                                ifelse(unique, "true", "false")))
+  call_query <- .rba_query(
+    init = list("size" = "-1"),
+    list("accession", !is.null(accession), paste0(accession, collapse = ",")),
+    list("taxid", !is.null(taxid), paste0(taxid, collapse = ",")),
+    list("upid", !is.null(upid), paste0(upid, collapse = ",")),
+    list("data_source", !is.null(data_source), paste0(data_source, collapse = ",")),
+    list("peptide", !is.null(peptide), paste0(peptide, collapse = ",")),
+    list("unique", !is.null(unique), ifelse(unique, "true", "false"))
+  )
+
   ## Build Function-Specific Call
-  parser_input <- list("json->list",
-                       .rba_uniprot_search_namer)
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = paste0(.rba_stg("uniprot", "pth"),
-                                        "proteomics/nonPtm"),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = parser_input,
-                          save_to = .rba_file("uniprot_proteomics_non_ptm_search.json"))
+  parser_input <- list("json->list", .rba_uniprot_search_namer)
+
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(.rba_stg("uniprot", "pth"), "proteomics/nonPtm"),
+    query = call_query,
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("uniprot_proteomics_non_ptm_search.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -262,24 +248,28 @@ rba_uniprot_proteomics_non_ptm <- function(accession,
                                            ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "accession",
-                             class = "character",
-                             len = 1))
+  .rba_args(
+    cons = list(
+      list(arg = "accession", class = "character", len = 1)
+    )
   )
 
-  .msg("Retrieving proteomics Proteomics nonPTM features mapped to the sequence of protein %s.",
-       accession)
+  .msg(
+    "Retrieving proteomics Proteomics nonPTM features mapped to the sequence of protein %s.",
+    accession
+  )
 
   ## Build Function-Specific Call
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = paste0(.rba_stg("uniprot", "pth"),
-                                        "proteomics/ptm/",
-                                        accession),
-                          accept = "application/json",
-                          parser = "json->list",
-                          save_to = .rba_file("uniprot_proteomics_non_ptm.json"))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(.rba_stg("uniprot", "pth"), "proteomics/ptm/", accession),
+    accept = "application/json",
+    parser = "json->list",
+    save_to = .rba_file("uniprot_proteomics_non_ptm.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -391,119 +381,97 @@ rba_uniprot_proteomics_ptm_search <- function(accession = NULL,
                                               ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "accession",
-                             class = "character",
-                             max_len = 100),
-                        list(arg = "ptm",
-                             class = "character",
-                             len = 1,
-                             val = c("Acetylation",
-                                     "ADP-ribosylation",
-                                     "Amidation",
-                                     "Autocatalytic cleavage",
-                                     "Bromination",
-                                     "Citrullination",
-                                     "Cleavage on pair of basic residues",
-                                     "Covalent protein-DNA linkage",
-                                     "Covalent protein-RNA linkage",
-                                     "CTQ",
-                                     "D-amino acid",
-                                     "Disulfide bond",
-                                     "Formylation",
-                                     "Gamma-carboxyglutamic acid",
-                                     "Glutathionylation",
-                                     "Glycoprotein",
-                                     "Lipoprotein",
-                                     "Hydroxylation",
-                                     "Hypusine",
-                                     "Iodination",
-                                     "Isopeptide bond",
-                                     "LTQ",
-                                     "Methylation",
-                                     "Nitration",
-                                     "Organic radical",
-                                     "Oxidation",
-                                     "Peptidoglycan-anchor",
-                                     "Phosphopantetheine",
-                                     "Phosphoprotein",
-                                     "Pyrrolidone carboxylic acid",
-                                     "Quinone",
-                                     "S-nitrosylation",
-                                     "Sulfation",
-                                     "Thioester bond",
-                                     "Thioether bond",
-                                     "TPQ",
-                                     "TTQ",
-                                     "Ubl conjugation",
-                                     "Zymogen")),
-                        list(arg = "taxid",
-                             class = "numeric",
-                             max_len = 20),
-                        list(arg = "upid",
-                             class = "character",
-                             max_len = 100),
-                        list(arg = "data_source",
-                             class = "character",
-                             max_len = 2,
-                             val = c("PRIDE",
-                                     "PTMExchange")),
-                        list(arg = "peptide",
-                             class = "character",
-                             max_len = 20),
-                        list(arg = "unique",
-                             class = "logical"),
-                        list(arg = "confidence_score",
-                             class = "character",
-                             max_len = 1,
-                             val = c("Bronze",
-                                     "Silver",
-                                     "Gold")))
+  .rba_args(
+    cons = list(
+      list(arg = "accession", class = "character", max_len = 100),
+      list(
+        arg = "ptm", class = "character", len = 1,
+        val = c("Acetylation",
+                "ADP-ribosylation",
+                "Amidation",
+                "Autocatalytic cleavage",
+                "Bromination",
+                "Citrullination",
+                "Cleavage on pair of basic residues",
+                "Covalent protein-DNA linkage",
+                "Covalent protein-RNA linkage",
+                "CTQ",
+                "D-amino acid",
+                "Disulfide bond",
+                "Formylation",
+                "Gamma-carboxyglutamic acid",
+                "Glutathionylation",
+                "Glycoprotein",
+                "Lipoprotein",
+                "Hydroxylation",
+                "Hypusine",
+                "Iodination",
+                "Isopeptide bond",
+                "LTQ",
+                "Methylation",
+                "Nitration",
+                "Organic radical",
+                "Oxidation",
+                "Peptidoglycan-anchor",
+                "Phosphopantetheine",
+                "Phosphoprotein",
+                "Pyrrolidone carboxylic acid",
+                "Quinone",
+                "S-nitrosylation",
+                "Sulfation",
+                "Thioester bond",
+                "Thioether bond",
+                "TPQ",
+                "TTQ",
+                "Ubl conjugation",
+                "Zymogen")
+      ),
+      list(arg = "taxid", class = "numeric", max_len = 20),
+      list(arg = "upid", class = "character", max_len = 100),
+      list(
+        arg = "data_source", class = "character", max_len = 2,
+        val = c("PRIDE", "PTMExchange")
+      ),
+      list(arg = "peptide", class = "character", max_len = 20),
+      list(arg = "unique", class = "logical"),
+      list(
+        arg = "confidence_score", class = "character", max_len = 1,
+        val = c("Bronze", "Silver", "Gold")
+      )
+    )
   )
 
-  .msg("Searching UniProt and retrieving proteomics Post-translational modification features of proteins that match your supplied inputs.")
+  .msg(
+    "Searching UniProt and retrieving proteomics Post-translational modification features of proteins that match your supplied inputs."
+  )
+
   ## Build GET API Request's query
-  call_query <- .rba_query(init = list("size" = "-1"),
-                           list("accession",
-                                !is.null(accession),
-                                paste0(accession,
-                                       collapse = ",")),
-                           list("ptm",
-                                !is.null(ptm),
-                                ptm),
-                           list("taxid",
-                                !is.null(taxid),
-                                paste0(taxid,
-                                       collapse = ",")),
-                           list("upid",
-                                !is.null(upid),
-                                paste0(upid,
-                                       collapse = ",")),
-                           list("data_source",
-                                !is.null(data_source),
-                                paste0(data_source,
-                                       collapse = ",")),
-                           list("peptide",
-                                !is.null(peptide),
-                                paste0(peptide,
-                                       collapse = ",")),
-                           list("unique",
-                                !is.null(unique),
-                                ifelse(unique, "true", "false")),
-                           list("confidence_score",
-                                !is.null(confidence_score),
-                                confidence_score))
+  call_query <- .rba_query(
+    init = list("size" = "-1"),
+    list("accession", !is.null(accession), paste0(accession, collapse = ",")),
+    list("ptm", !is.null(ptm), ptm),
+    list("taxid", !is.null(taxid), paste0(taxid, collapse = ",")),
+    list("upid", !is.null(upid), paste0(upid, collapse = ",")),
+    list("data_source", !is.null(data_source), paste0(data_source, collapse = ",")),
+    list("peptide", !is.null(peptide), paste0(peptide, collapse = ",")),
+    list("unique", !is.null(unique), ifelse(unique, "true", "false")),
+    list("confidence_score", !is.null(confidence_score), confidence_score)
+  )
+
   ## Build Function-Specific Call
-  parser_input <- list("json->list",
-                       .rba_uniprot_search_namer)
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = paste0(.rba_stg("uniprot", "pth"),
-                                        "proteomics/ptm"),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = parser_input,
-                          save_to = .rba_file("uniprot_proteomics_ptm_search.json"))
+  parser_input <- list("json->list", .rba_uniprot_search_namer)
+
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(.rba_stg("uniprot", "pth"), "proteomics/ptm"),
+    query = call_query,
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("uniprot_proteomics_ptm_search.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -570,36 +538,38 @@ rba_uniprot_proteomics_ptm <- function(accession,
                                        ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "accession",
-                             class = "character",
-                             len = 1))
+  .rba_args(
+    cons = list(
+      list(arg = "accession", class = "character", len = 1)
+    )
   )
 
-  .msg("Retrieving proteomics post-translational modification features mapped to the sequence of protein %s.",
-       accession)
+  .msg(
+    "Retrieving proteomics post-translational modification features mapped to the sequence of protein %s.",
+    accession
+  )
 
   ## Build GET API Request's query
-  call_query <- .rba_query(init = list(),
-                           list("confidence_score",
-                                !is.null(confidence_score),
-                                confidence_score),
-                           list(arg = "confidence_score",
-                                class = "character",
-                                max_len = 1,
-                                val = c("Bronze",
-                                        "Silver",
-                                        "Gold")))
+  call_query <- .rba_query(
+    init = list(),
+    list("confidence_score", !is.null(confidence_score), confidence_score),
+    list(
+      arg = "confidence_score", class = "character", max_len = 1,
+      val = c("Bronze", "Silver", "Gold")
+    )
+  )
 
   ## Build Function-Specific Call
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = paste0(.rba_stg("uniprot", "pth"),
-                                        "proteomics/ptm/",
-                                        accession),
-                          accept = "application/json",
-                          parser = "json->list",
-                          save_to = .rba_file("uniprot_proteomics_ptm.json"))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(.rba_stg("uniprot", "pth"), "proteomics/ptm/", accession),
+    accept = "application/json",
+    parser = "json->list",
+    save_to = .rba_file("uniprot_proteomics_ptm.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -684,67 +654,49 @@ rba_uniprot_proteomics_hpp_search <- function(accession = NULL,
                                               ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "accession",
-                             class = "character",
-                             max_len = 100),
-                        list(arg = "taxid",
-                             class = "numeric",
-                             max_len = 20),
-                        list(arg = "upid",
-                             class = "character",
-                             max_len = 100),
-                        list(arg = "data_source",
-                             class = "character",
-                             max_len = 2,
-                             val = c("MaxQB",
-                                     "PeptideAtlas",
-                                     "EPD",
-                                     "ProteomicsDB")),
-                        list(arg = "peptide",
-                             class = "character",
-                             max_len = 20),
-                        list(arg = "unique",
-                             class = "logical"))
+  .rba_args(
+    cons = list(
+      list(arg = "accession", class = "character", max_len = 100),
+      list(arg = "taxid", class = "numeric", max_len = 20),
+      list(arg = "upid", class = "character", max_len = 100),
+      list(
+        arg = "data_source", class = "character", max_len = 2,
+        val = c("MaxQB", "PeptideAtlas", "EPD", "ProteomicsDB")
+      ),
+      list(arg = "peptide", class = "character", max_len = 20),
+      list(arg = "unique", class = "logical")
+    )
   )
 
-  .msg("Searching UniProt and retrieving proteomics HPP features of proteins that match your supplied inputs.")
+  .msg(
+    "Searching UniProt and retrieving proteomics HPP features of proteins that match your supplied inputs."
+  )
+
   ## Build GET API Request's query
-  call_query <- .rba_query(init = list("size" = "-1"),
-                           list("accession",
-                                !is.null(accession),
-                                paste0(accession,
-                                       collapse = ",")),
-                           list("taxid",
-                                !is.null(taxid),
-                                paste0(taxid,
-                                       collapse = ",")),
-                           list("upid",
-                                !is.null(upid),
-                                paste0(upid,
-                                       collapse = ",")),
-                           list("data_source",
-                                !is.null(data_source),
-                                paste0(data_source,
-                                       collapse = ",")),
-                           list("peptide",
-                                !is.null(peptide),
-                                paste0(peptide,
-                                       collapse = ",")),
-                           list("unique",
-                                !is.null(unique),
-                                ifelse(unique, "true", "false")))
+  call_query <- .rba_query(
+    init = list("size" = "-1"),
+    list("accession", !is.null(accession), paste0(accession, collapse = ",")),
+    list("taxid", !is.null(taxid), paste0(taxid, collapse = ",")),
+    list("upid", !is.null(upid), paste0(upid, collapse = ",")),
+    list("data_source", !is.null(data_source), paste0(data_source, collapse = ",")),
+    list("peptide", !is.null(peptide), paste0(peptide, collapse = ",")),
+    list("unique", !is.null(unique), ifelse(unique, "true", "false"))
+  )
+
   ## Build Function-Specific Call
-  parser_input <- list("json->list",
-                       .rba_uniprot_search_namer)
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = paste0(.rba_stg("uniprot", "pth"),
-                                        "proteomics/hpp"),
-                          query = call_query,
-                          accept = "application/json",
-                          parser = parser_input,
-                          save_to = .rba_file("uniprot_hpp_search.json"))
+  parser_input <- list("json->list", .rba_uniprot_search_namer)
+
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(.rba_stg("uniprot", "pth"), "proteomics/hpp"),
+    query = call_query,
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("uniprot_hpp_search.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
@@ -800,24 +752,28 @@ rba_uniprot_proteomics_hpp <- function(accession,
                                        ...) {
   ## Load Global Options
   .rba_ext_args(...)
+
   ## Check User-input Arguments
-  .rba_args(cons = list(list(arg = "accession",
-                             class = "character",
-                             len = 1))
+  .rba_args(
+    cons = list(
+      list(arg = "accession", class = "character", len = 1)
+    )
   )
 
-  .msg("Retrieving proteomics Proteomics features mapped to the sequence of protein %s.",
-       accession)
+  .msg(
+    "Retrieving proteomics Proteomics features mapped to the sequence of protein %s.",
+    accession
+  )
 
   ## Build Function-Specific Call
-  input_call <- .rba_httr(httr = "get",
-                          url = .rba_stg("uniprot", "url"),
-                          path = paste0(.rba_stg("uniprot", "pth"),
-                                        "proteomics/hpp/",
-                                        accession),
-                          accept = "application/json",
-                          parser = "json->df",
-                          save_to = .rba_file("uniprot_hpp.json"))
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(.rba_stg("uniprot", "pth"), "proteomics/hpp/", accession),
+    accept = "application/json",
+    parser = "json->df",
+    save_to = .rba_file("uniprot_hpp.json")
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
