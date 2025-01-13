@@ -31,7 +31,7 @@ UniProt categorizes proteomics data sources into three main data categories:
 }
 \section{Corresponding API Resources}{
 
- "GET https://www.ebi.ac.uk/proteins/api/proteomics/nonPtm/{accession}"
+ "GET https://www.ebi.ac.uk/proteins/api/proteomics/nonPtm/\{accession\}"
 }
 
 \examples{

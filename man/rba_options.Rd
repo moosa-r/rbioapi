@@ -50,7 +50,7 @@ error message will be returned as the function's output. However, if FALSE,
 in case of any error, the code execution will be halted and an error
 message will be issued.}
 
-\item{timeout}{(Numeric) (default = 30) The maximum time in seconds that
+\item{timeout}{(Numeric) (default = 90) The maximum time in seconds that
 you are willing to wait for a server response before giving up and
 stopping the function execution.}
 

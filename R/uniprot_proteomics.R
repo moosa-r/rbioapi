@@ -212,7 +212,7 @@ rba_uniprot_proteomics_non_ptm_search <- function(accession = NULL,
 #'   functions.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://www.ebi.ac.uk/proteins/api/proteomics/nonPtm/{accession}"
+#'  "GET https://www.ebi.ac.uk/proteins/api/proteomics/nonPtm/\{accession\}"
 #'
 #' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}.
@@ -495,7 +495,7 @@ rba_uniprot_proteomics_ptm_search <- function(accession = NULL,
 #'   functions.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://www.ebi.ac.uk/proteins/api/proteomics/ptm/{accession}"
+#'  "GET https://www.ebi.ac.uk/proteins/api/proteomics/ptm/\{accession\}"
 #'
 #' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}.
@@ -716,7 +716,7 @@ rba_uniprot_proteomics_hpp_search <- function(accession = NULL,
 #'   functions.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://www.ebi.ac.uk/proteins/api/proteomics/nonPtm/{accession}"
+#'  "GET https://www.ebi.ac.uk/proteins/api/proteomics/nonPtm/\{accession\}"
 #'
 #' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}.

@@ -218,10 +218,6 @@ rba_reactome_diseases <- function(doid = FALSE,
 #' rba_reactome_complex_subunits(complex_id = "R-HSA-5674003",
 #'     exclude_structures = FALSE)
 #' }
-#' \donttest{
-#' rba_reactome_complex_subunits(complex_id = "R-HSA-109783",
-#'     exclude_structures = TRUE)
-#' }
 #'
 #' @family "Reactome Content Service - Physical Entity Queries"
 #' @export

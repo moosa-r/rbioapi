@@ -1555,7 +1555,7 @@ rba_uniprot_epitope_search <- function(accession = NULL,
 #' Use this function to retrieve epitope annotations linked to a UniProt entry.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://www.ebi.ac.uk/proteins/api/epitope/{accession}"
+#'  "GET https://www.ebi.ac.uk/proteins/api/epitope/\{accession\}"
 #'
 #' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}.
@@ -1877,7 +1877,7 @@ rba_uniprot_rna_edit_search <- function(accession = NULL,
 #'   linked to a UniProt entry.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://www.ebi.ac.uk/proteins/api/rna-edit/{accession}"
+#'  "GET https://www.ebi.ac.uk/proteins/api/rna-edit/\{accession\}"
 #'
 #' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}.

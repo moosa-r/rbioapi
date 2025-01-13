@@ -1379,18 +1379,14 @@ rba_string_version <- function(...) {
 #'
 #' @examples
 #' \dontrun{
-#'   rba_string_enrichment(
-#'   ids = c("TP53", "TNF", "EGFR"),
-#'   species = 9606)
-#' }
-#' \dontrun{
-#'   rba_string_enrichment(
+#'   rba_string_enrichment_image(
 #'   ids = c("TP53", "TNF", "EGFR"),
 #'   species = 9606,
-#'   category = "KEGG")
+#'   category = "KEGG"
+#'   )
 #' }
 #' \dontrun{
-#'   rba_string_enrichment(
+#'   rba_string_enrichment_image(
 #'   ids = c("TP53", "TNF", "EGFR"),
 #'   species = 9606,
 #'   x_axis = "strength",
@@ -1398,7 +1394,7 @@ rba_string_version <- function(...) {
 #'   )
 #' }
 #' \dontrun{
-#'   rba_string_enrichment(
+#'   rba_string_enrichment_image(
 #'   ids = c("TP53", "TNF", "EGFR"),
 #'   species = 9606,
 #'   color_palette = "straw_navy"

@@ -25,7 +25,7 @@ Use this function to retrieve
 }
 \section{Corresponding API Resources}{
 
- "GET https://www.ebi.ac.uk/proteins/api/rna-edit/{accession}"
+ "GET https://www.ebi.ac.uk/proteins/api/rna-edit/\{accession\}"
 }
 
 \examples{

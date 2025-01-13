@@ -73,6 +73,10 @@ notfound/\{filename\}.csv"
 \examples{
 \dontrun{
 rba_reactome_analysis_download(token = "MjAyMDEwMTYwMTI3MTNfMjY1MjM",
+    request = "pathways", save_to = "found_ids.csv")
+}
+\dontrun{
+rba_reactome_analysis_download(token = "MjAyMDEwMTYwMTI3MTNfMjY1MjM",
     request = "found_ids", save_to = "found_ids.csv")
 }
 

@@ -22,7 +22,7 @@ Use this function to retrieve epitope annotations linked to a UniProt entry.
 }
 \section{Corresponding API Resources}{
 
- "GET https://www.ebi.ac.uk/proteins/api/epitope/{accession}"
+ "GET https://www.ebi.ac.uk/proteins/api/epitope/\{accession\}"
 }
 
 \examples{

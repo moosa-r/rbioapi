@@ -723,15 +723,15 @@ rba_enrichr_add_background <- function(background_genes,
 #'
 #' @examples
 #' \dontrun{
-#' rba_enrichr_enrich(user_list_id = "11111")
+#' rba_enrichr_enrich(user_list_id = 11111)
 #' }
 #' \dontrun{
-#' rba_enrichr_enrich(user_list_id = "11111",
+#' rba_enrichr_enrich(user_list_id = 11111,
 #'     gene_set_library = "GO_Molecular_Function_2017",
 #'     regex_library_name = FALSE)
 #' }
 #' \dontrun{
-#' rba_enrichr_enrich(user_list_id = "11111",
+#' rba_enrichr_enrich(user_list_id = 11111,
 #'     gene_set_library = "go",
 #'     regex_library_name = TRUE)
 #' }
