@@ -2,10 +2,7 @@
 % Please edit documentation in R/panther.R
 \name{rba_panther_tree_grafter}
 \alias{rba_panther_tree_grafter}
-\title{PANTHER Tree Grafter
-Use this function to retrieve a PANTHER family's tree topology information
-  with a node corresponding to your sequence grafted in the best location
-  in that tree.}
+\title{PANTHER Tree Grafter}
 \usage{
 rba_panther_tree_grafter(protein_seq, target_organisms = NULL, ...)
 }
@@ -24,10 +21,16 @@ arguments manual for more information on available options.}
 A list containing PANTHER tree topology information.
 }
 \description{
+Use this function to retrieve a PANTHER family's tree topology information
+  with a node corresponding to your sequence grafted in the best location
+  in that tree.
+}
+\details{
 For more information, see:
-  \href{https://academic.oup.com/bioinformatics/article/35/3/518/5056037}{TreeGrafter:
-  phylogenetic tree-based annotation of proteins with Gene Ontology terms
-  and other annotations}
+  Haiming Tang, Robert D Finn, Paul D Thomas, TreeGrafter: phylogenetic
+  tree-based annotation of proteins with Gene Ontology terms and other
+  annotations, Bioinformatics, Volume 35, Issue 3, February 2019, Pages
+  518–520, \doi{10.1093/bioinformatics/bty625}
 }
 \section{Corresponding API Resources}{
 

@@ -181,7 +181,7 @@ if (is.array(graph_2)) {
 
 # Enrichment using STRING {#enrichment-using-string}
 
-STRING let you perform two types of enrichments. See [STRING's paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3531103/ "STRING v9.1: protein-protein interaction networks, with increased coverage and integration") for more information.
+STRING let you perform two types of enrichments. See [STRING's paper](https://doi.org/10.1093/nar/gks1094 "STRING v9.1: protein-protein interaction networks, with increased coverage and integration") for more information.
 
 ## Functional enrichment {#functional-enrichment}
 
@@ -239,7 +239,7 @@ if (is.array(graph_3)) {
 
 ## Protein-protein interaction enrichment {#protein-protein-interaction-enrichment}
 
-Even without incorporating annotation data, STRING can calculate if your proteins are functionally related. Briefly, STRING accomplishes this by comparing the interactions' distribution in your protein-set to the interactions' distribution in the proteome. Read [STRING's paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3531103/#__sec4title "STRING v9.1: protein-protein interaction networks, with increased coverage and integration") for more information.
+Even without incorporating annotation data, STRING can calculate if your proteins are functionally related. Briefly, STRING accomplishes this by comparing the interactions' distribution in your protein-set to the interactions' distribution in the proteome. Read [STRING's paper](https://doi.org/10.1093/nar/gks1094 "STRING v9.1: protein-protein interaction networks, with increased coverage and integration") for more information.
 
 ```{r rba_string_enrichment_ppi}
 rba_string_enrichment_ppi(ids = proteins_mapped,

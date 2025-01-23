@@ -916,14 +916,16 @@ rba_panther_family <- function(id,
 }
 
 #' PANTHER Tree Grafter
+#'
 #' Use this function to retrieve a PANTHER family's tree topology information
 #'   with a node corresponding to your sequence grafted in the best location
 #'   in that tree.
 #'
 #' For more information, see:
-#'   \href{https://academic.oup.com/bioinformatics/article/35/3/518/5056037}{TreeGrafter:
-#'   phylogenetic tree-based annotation of proteins with Gene Ontology terms
-#'   and other annotations}
+#'   Haiming Tang, Robert D Finn, Paul D Thomas, TreeGrafter: phylogenetic
+#'   tree-based annotation of proteins with Gene Ontology terms and other
+#'   annotations, Bioinformatics, Volume 35, Issue 3, February 2019, Pages
+#'   518–520, \doi{10.1093/bioinformatics/bty625}
 #'
 #' @param protein_seq A character string with the protein's sequence. Maximum
 #'   allowed sequence length is 50kb.
