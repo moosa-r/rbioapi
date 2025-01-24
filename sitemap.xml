@@ -115,13 +115,17 @@
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_proteins_search.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_proteomes.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_proteomes_search.html</loc></url>
+<url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_proteomics.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_proteomics_hpp.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_proteomics_hpp_search.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_proteomics_non_ptm.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_proteomics_non_ptm_search.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_proteomics_ptm.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_proteomics_ptm_search.html</loc></url>
+<url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_proteomics_search.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_proteomics_species.html</loc></url>
+<url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_ptm.html</loc></url>
+<url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_ptm_search.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_rna_edit.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_rna_edit_search.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_taxonomy.html</loc></url>
