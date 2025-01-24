@@ -542,7 +542,11 @@ rba_uniprot_proteomics_ptm <- function(accession,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "accession", class = "character", len = 1)
+      list(arg = "accession", class = "character", len = 1),
+      list(
+        arg = "confidence_score", class = "character", max_len = 1,
+        val = c("Bronze", "Silver", "Gold")
+      )
     )
   )
 
@@ -554,11 +558,7 @@ rba_uniprot_proteomics_ptm <- function(accession,
   ## Build GET API Request's query
   call_query <- .rba_query(
     init = list(),
-    list("confidence_score", !is.null(confidence_score), confidence_score),
-    list(
-      arg = "confidence_score", class = "character", max_len = 1,
-      val = c("Bronze", "Silver", "Gold")
-    )
+    list("confidence_score", !is.null(confidence_score), confidence_score)
   )
 
   ## Build Function-Specific Call
