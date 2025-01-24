@@ -189,6 +189,7 @@ reference:
 - subtitle: "Proteomics"
   contents:
     - starts_with("rba_uniprot_proteomics")
+    - starts_with("rba_uniprot_ptm")
 - subtitle: "Proteomes"
   contents:
     - starts_with("rba_uniprot_proteomes")
