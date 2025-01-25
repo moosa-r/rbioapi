@@ -91,7 +91,7 @@
                         <h4 data-toc-skip class="author">Moosa
 Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2025-01-24</h4>
+            <h4 data-toc-skip class="date">2025-01-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/master/vignettes/rbioapi_reactome.Rmd" class="external-link"><code>vignettes/rbioapi_reactome.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_reactome.Rmd</code></div>
@@ -139,12 +139,19 @@ list</a> tool. You can see that the function’s arguments correspond to
 what would you choose in the webpage’s wizard.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## 1 We create a simple vector with our genes</span></span>
-<span><span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"p53"</span>, <span class="st">"BRCA1"</span>, <span class="st">"cdk2"</span>, <span class="st">"Q99835"</span>, <span class="st">"CDC42"</span>, <span class="st">"CDK1"</span>, <span class="st">"KIF23"</span>, <span class="st">"PLK1"</span>, <span class="st">"RAC2"</span>, <span class="st">"RACGAP1"</span>, <span class="st">"RHOA"</span>, <span class="st">"RHOB"</span>, <span class="st">"MSL1"</span>, <span class="st">"PHF21A"</span>, <span class="st">"INSR"</span>, <span class="st">"JADE2"</span>, <span class="st">"P2RX7"</span>, <span class="st">"CCDC101"</span>, <span class="st">"PPM1B"</span>, <span class="st">"ANAPC16"</span>, <span class="st">"CDH8"</span>, <span class="st">"HSPA1L"</span>, <span class="st">"CUL2"</span>, <span class="st">"ZNF302"</span>, <span class="st">"CUX1"</span>, <span class="st">"CYTH2"</span>, <span class="st">"SEC22C"</span>, <span class="st">"EIF4E3"</span>, <span class="st">"ROBO2"</span>, <span class="st">"CXXC1"</span>, <span class="st">"LINC01314"</span>, <span class="st">"ATP5F1"</span><span class="op">)</span></span>
+<span><span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"p53"</span>, <span class="st">"BRCA1"</span>, <span class="st">"cdk2"</span>, <span class="st">"Q99835"</span>, <span class="st">"CDC42"</span>, <span class="st">"CDK1"</span>, <span class="st">"KIF23"</span>, <span class="st">"PLK1"</span>, <span class="st">"RAC2"</span>,</span>
+<span>  <span class="st">"RACGAP1"</span>, <span class="st">"RHOA"</span>, <span class="st">"RHOB"</span>, <span class="st">"MSL1"</span>, <span class="st">"PHF21A"</span>, <span class="st">"INSR"</span>, <span class="st">"JADE2"</span>, <span class="st">"P2RX7"</span>,</span>
+<span>  <span class="st">"CCDC101"</span>, <span class="st">"PPM1B"</span>, <span class="st">"ANAPC16"</span>, <span class="st">"CDH8"</span>, <span class="st">"HSPA1L"</span>, <span class="st">"CUL2"</span>, <span class="st">"ZNF302"</span>, <span class="st">"CUX1"</span>,</span>
+<span>  <span class="st">"CYTH2"</span>, <span class="st">"SEC22C"</span>, <span class="st">"EIF4E3"</span>, <span class="st">"ROBO2"</span>, <span class="st">"CXXC1"</span>, <span class="st">"LINC01314"</span>, <span class="st">"ATP5F1"</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## 2 We call reactome analysis with the default parameters</span></span>
-<span><span class="va">analyzed</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_analysis.html">rba_reactome_analysis</a></span><span class="op">(</span>input <span class="op">=</span> <span class="va">genes</span>,</span>
-<span>                                  projection <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>                                  p_value <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
+<span><span class="va">analyzed</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_analysis.html">rba_reactome_analysis</a></span><span class="op">(</span></span>
+<span>  input <span class="op">=</span> <span class="va">genes</span>,</span>
+<span>  projection <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  p_value <span class="op">=</span> <span class="fl">0.01</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## 3 As always, we use str() to inspect the resutls</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">analyzed</span>, <span class="fl">1</span><span class="op">)</span></span>
@@ -173,12 +180,17 @@ many formats using <code><a href="../reference/rba_reactome_analysis_pdf.html">r
 <code><a href="../reference/rba_reactome_analysis_download.html">rba_reactome_analysis_download()</a></code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># download a full pdf report</span></span>
-<span><span class="fu"><a href="../reference/rba_reactome_analysis_pdf.html">rba_reactome_analysis_pdf</a></span><span class="op">(</span>token <span class="op">=</span> <span class="va">analyzed</span><span class="op">$</span><span class="va">summary</span><span class="op">$</span><span class="va">token</span>,</span>
-<span>                          species <span class="op">=</span> <span class="fl">9606</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/rba_reactome_analysis_pdf.html">rba_reactome_analysis_pdf</a></span><span class="op">(</span></span>
+<span>  token <span class="op">=</span> <span class="va">analyzed</span><span class="op">$</span><span class="va">summary</span><span class="op">$</span><span class="va">token</span>,</span>
+<span>  species <span class="op">=</span> <span class="fl">9606</span></span>
+<span><span class="op">)</span></span>
+<span></span>
 <span><span class="co"># download the result in compressed json.gz format</span></span>
-<span><span class="fu"><a href="../reference/rba_reactome_analysis_download.html">rba_reactome_analysis_download</a></span><span class="op">(</span>token <span class="op">=</span> <span class="va">analyzed</span><span class="op">$</span><span class="va">summary</span><span class="op">$</span><span class="va">token</span>,</span>
-<span>                               request <span class="op">=</span> <span class="st">"results"</span>,</span>
-<span>                               save_to <span class="op">=</span> <span class="st">"reactome_results.json"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/rba_reactome_analysis_download.html">rba_reactome_analysis_download</a></span><span class="op">(</span></span>
+<span>  token <span class="op">=</span> <span class="va">analyzed</span><span class="op">$</span><span class="va">summary</span><span class="op">$</span><span class="va">token</span>,</span>
+<span>  request <span class="op">=</span> <span class="st">"results"</span>,</span>
+<span>  save_to <span class="op">=</span> <span class="st">"reactome_results.json"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>Your token is only guaranteed to be stored for 7 days. After that,
 you can upload the JSON file you have downloaded using
 <code>rba_reactome_analysis_download</code> and get a token for
@@ -226,7 +238,11 @@ you supply more than one ID, you cannot have
 <code>enhanced = TRUE</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## 1 query a pathway Entry</span></span>
-<span><span class="va">pathway</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_query.html">rba_reactome_query</a></span><span class="op">(</span>ids <span class="op">=</span> <span class="st">"R-HSA-109581"</span>, enhanced <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">pathway</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_query.html">rba_reactome_query</a></span><span class="op">(</span></span>
+<span>  ids <span class="op">=</span> <span class="st">"R-HSA-109581"</span>,</span>
+<span>  enhanced <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
 <span><span class="co">## 2 As always we use str() to inspect the output's structure</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">pathway</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 28</span></span>
@@ -345,7 +361,11 @@ you supply more than one ID, you cannot have
 <span><span class="co"># https://reactome.org/content/detail/R-HSA-202939</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## 1 query a protein Entry</span></span>
-<span><span class="va">protein</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_query.html">rba_reactome_query</a></span><span class="op">(</span>ids <span class="op">=</span> <span class="fl">66247</span>, enhanced <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">protein</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_query.html">rba_reactome_query</a></span><span class="op">(</span></span>
+<span>  ids <span class="op">=</span> <span class="fl">66247</span>,</span>
+<span>  enhanced <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
 <span><span class="co">## 2 As always we use str() to inspect the output's structure</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">protein</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 27</span></span>
@@ -392,6 +412,7 @@ cross-reference (external) IDs to Reactome IDs.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## 1 We Supply HGNC ID to find what is the corresponding database ID in Reactome</span></span>
 <span><span class="va">xref_protein</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_xref.html">rba_reactome_xref</a></span><span class="op">(</span><span class="st">"CD40"</span><span class="op">)</span></span>
+<span></span>
 <span><span class="co">## 2 As always use str() to inspect the output's structure</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">xref_protein</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 19</span></span>
@@ -423,9 +444,11 @@ resource. Using <code>rba_reactome_mapping</code> you can find the
 Reactome pathways or reactions which include your external ID:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## 1 Again, consider CD40 protein:</span></span>
-<span><span class="va">xref_mapping</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_mapping.html">rba_reactome_mapping</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"CD40"</span>,</span>
-<span>                                    resource <span class="op">=</span> <span class="st">"hgnc"</span>,</span>
-<span>                                    map_to <span class="op">=</span> <span class="st">"pathways"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">xref_mapping</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_mapping.html">rba_reactome_mapping</a></span><span class="op">(</span></span>
+<span>  id <span class="op">=</span> <span class="st">"CD40"</span>,</span>
+<span>  resource <span class="op">=</span> <span class="st">"hgnc"</span>,</span>
+<span>  map_to <span class="op">=</span> <span class="st">"pathways"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-e5c8c404fe174e4c81bd" style="width:100%;height:auto;"></div>
 <script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],[198933,5668541,5676594],["Immunoregulatory interactions between a Lymphoid and a non-Lymphoid cell","TNFR2 non-canonical NF-kB pathway","TNF receptor superfamily (TNFSF) members mediating non-canonical NF-kB pathway"],["R-HSA-198933","R-HSA-5668541","R-HSA-5676594"],["R-HSA-198933.9","R-HSA-5668541.5","R-HSA-5676594.3"],[false,false,false],[false,false,false],[["Immunoregulatory interactions between a Lymphoid and a non-Lymphoid cell"],["TNFR2 non-canonical NF-kB pathway","TNFRSF mediated non-canonical NF-kB pathway"],["TNF receptor superfamily (TNFSF) members mediating non-canonical NF-kB pathway"]],["2007-08-21","2015-06-17","2015-06-17"],["Homo sapiens","Homo sapiens","Homo sapiens"],["10.3180/r-hsa-198933.2","10.3180/r-hsa-5668541.1",null],[true,true,false],[false,false,false],["2020-09-24","2022-09-14",null],["Pathway","Pathway","Pathway"],["Pathway","Pathway","Pathway"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>dbId<\/th>\n      <th>displayName<\/th>\n      <th>stId<\/th>\n      <th>stIdVersion<\/th>\n      <th>isInDisease<\/th>\n      <th>isInferred<\/th>\n      <th>name<\/th>\n      <th>releaseDate<\/th>\n      <th>speciesName<\/th>\n      <th>doi<\/th>\n      <th>hasDiagram<\/th>\n      <th>hasEHLD<\/th>\n      <th>lastUpdatedDate<\/th>\n      <th>schemaClass<\/th>\n      <th>className<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"dbId","targets":1},{"name":"displayName","targets":2},{"name":"stId","targets":3},{"name":"stIdVersion","targets":4},{"name":"isInDisease","targets":5},{"name":"isInferred","targets":6},{"name":"name","targets":7},{"name":"releaseDate","targets":8},{"name":"speciesName","targets":9},{"name":"doi","targets":10},{"name":"hasDiagram","targets":11},{"name":"hasEHLD","targets":12},{"name":"lastUpdatedDate","targets":13},{"name":"schemaClass","targets":14},{"name":"className","targets":15}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><hr>
 </div>
@@ -617,7 +640,7 @@ vignette index</a></p></li>
 <span><span class="co">#&gt; [13] crosstalk_1.2.1   evaluate_1.0.3    jquerylib_0.1.4   fastmap_1.2.0    </span></span>
 <span><span class="co">#&gt; [17] yaml_2.3.10       lifecycle_1.0.4   compiler_4.4.2    fs_1.6.5         </span></span>
 <span><span class="co">#&gt; [21] htmlwidgets_1.6.4 systemfonts_1.2.1 digest_0.6.37     R6_2.5.1         </span></span>
-<span><span class="co">#&gt; [25] curl_6.1.0        magrittr_2.0.3    bslib_0.8.0       tools_4.4.2      </span></span>
+<span><span class="co">#&gt; [25] curl_6.2.0        magrittr_2.0.3    bslib_0.8.0       tools_4.4.2      </span></span>
 <span><span class="co">#&gt; [29] pkgdown_2.1.1     cachem_1.1.0      desc_1.4.3</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

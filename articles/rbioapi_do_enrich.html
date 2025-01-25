@@ -91,7 +91,7 @@
                         <h4 data-toc-skip class="author">Moosa
 Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2025-01-24</h4>
+            <h4 data-toc-skip class="date">2025-01-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/master/vignettes/rbioapi_do_enrich.Rmd" class="external-link"><code>vignettes/rbioapi_do_enrich.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_do_enrich.Rmd</code></div>
@@ -123,8 +123,8 @@ from <a href="https://cran.r-project.org/package=rbioapi" title="rbioapi page on
 with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"rbioapi"</span><span class="op">)</span></span></code></pre></div>
-<p>However, the CRAN version is released at most once every 1-2 months,
-You can install the most recent (development) version from <a href="https://github.com/moosa-r/rbioapi/" title="rbioapi repository on GitHub" class="external-link">GitHub</a> with:</p>
+<p>However, the CRAN version is released at longer intervals, You can
+install the most recent -development- version from <a href="https://github.com/moosa-r/rbioapi/" title="rbioapi repository on GitHub" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"moosa-r/rbioapi"</span><span class="op">)</span></span></code></pre></div>
@@ -203,15 +203,17 @@ function is <code>gene_list</code>, here we use
 <code>gene_set_library</code> argument to request an enrichment analysis
 only against “KEGG_2021_Human” library.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">enrichr_enrich</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_enrichr.html">rba_enrichr</a></span><span class="op">(</span>gene_list <span class="op">=</span> <span class="va">covid_critical</span>,</span>
-<span>                              organism <span class="op">=</span> <span class="st">"human"</span>,</span>
-<span>                              gene_set_library <span class="op">=</span> <span class="st">"KEGG_2021_Human"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">enrichr_enrich</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_enrichr.html">rba_enrichr</a></span><span class="op">(</span></span>
+<span>  gene_list <span class="op">=</span> <span class="va">covid_critical</span>,</span>
+<span>  organism <span class="op">=</span> <span class="st">"human"</span>,</span>
+<span>  gene_set_library <span class="op">=</span> <span class="st">"KEGG_2021_Human"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; --Step 1/3:</span></span>
 <span><span class="co">#&gt; Retrieving List of available libraries and statistics from Enrichr human.</span></span>
 <span><span class="co">#&gt; --Step 2/3:</span></span>
 <span><span class="co">#&gt; Uploading 1214 gene symbols to Enrichr human.</span></span>
 <span><span class="co">#&gt; --Step 3/3:</span></span>
-<span><span class="co">#&gt; Performing enrichment analysis on gene-list 87544014 against Enrichr human library: KEGG_2021_Human.</span></span></code></pre></div>
+<span><span class="co">#&gt; Performing enrichment analysis on gene-list 87564870 against Enrichr human library: KEGG_2021_Human.</span></span></code></pre></div>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-e5c8c404fe174e4c81bd" style="width:100%;height:auto;"></div>
 <script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{"filter":"none","vertical":false,"autoHideNavigation":true,"data":[["1","2","3","4","5","6","7","8","9","10"],["Coronavirus disease","Ribosome","Hematopoietic cell lineage","Th1 and Th2 cell differentiation","Th17 cell differentiation","PD-L1 expression and PD-1 checkpoint pathway in cancer","Glycine, serine and threonine metabolism","Cell cycle","Primary immunodeficiency","Inflammatory bowel disease"],["51/232","38/158","18/99","16/92","17/107","15/89","9/40","17/124","7/38","9/65"],[5.457660615844306e-16,1.461442604133301e-13,2.542147408390094e-05,0.0001221586459325963,0.0002377387069538916,0.0002815676772171271,0.000536146158525187,0.00134153930817423,0.007179992090380879,0.01618833319043852],[1.555433275515627e-13,2.082555710889954e-11,0.002415040037970589,0.008703803522697489,0.01337446466781354,0.01337446466781354,0.02182880788281119,0.04779233785370694,0.2273664161953945,0.4326283249122099],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[4.507560462321202,5.026275510204082,3.475473801560758,3.287936033740444,2.95026455026455,3.163447016658026,4.518672199170124,2.479274510263197,3.508699254349627,2.498073503260225],[158.4152430865095,148.5474620954103,36.7702219398494,29.62492831099334,24.61800565105845,25.86161504020705,34.03058914531737,16.39776687159813,17.32054298640066,10.30071733320014],["RPL3;RPL32;RPL34;RPLP1;RPL8;RPL10A;RPL9;RPL7;RPS15;IFIH1;RPS14;RPS16;RPL18A;RPS19;RPS18;C3AR1;RPL36;RPL35;RPLP2;RPL38;RPL39;RPS10;RPS12;RPS8;RPL22;RPL13A;RPSA;RPS3A;ADAM17;OAS1;OAS2;OAS3;RPL37A;HBEGF;RPL13;RPL18;RPS27A;ACE;EIF2AK2;RPL35A;RPL23A;MAPK14;RPS26;NFKBIA;CXCL10;MAPK11;RPS28;RPS27;RPL27A;RPS20;RPS21","RPL3;RPL32;RPL34;RPLP1;RPL10A;RPL8;RPL9;RPL7;RPS15;RPS14;RPS16;RPL18A;RPS19;RPS18;RPL36;RPL35;RPLP2;RPL13;RPL38;RPL18;RPS27A;RPL39;RPS10;RPS12;RPS8;RPL22;RPL13A;RPL35A;RPSA;RPS3A;RPL23A;RPS26;RPS28;RPS27;RPL27A;RPL37A;RPS20;RPS21","CR1;CSF1;IL11RA;IL1R1;ITGA1;FLT3LG;CD1C;CD3E;CD3D;IL4;CD2;CD5;HLA-DPB1;CD38;HLA-DOA;CD24;IL7R;MS4A1","GATA3;CD3E;MAPK14;CD3D;DLL4;IL4;NFKBIA;ZAP70;MAPK11;LCK;STAT4;HLA-DPB1;CD247;HLA-DOA;JAK2;LAT","IL1R1;RORC;GATA3;CD3E;MAPK14;HIF1A;CD3D;IL4;NFKBIA;ZAP70;MAPK11;LCK;HLA-DPB1;CD247;HLA-DOA;JAK2;LAT","BATF2;CD274;CD3E;MAPK14;CD3D;HIF1A;NFKBIA;ZAP70;MAPK11;LCK;CD247;PDCD1;JAK2;LAT;MAP2K6","GAMT;ALAS2;GLDC;MAOA;CBS;SARDH;PIPOX;PHGDH;SDSL","CDKN1C;BUB1B;TTK;CDC6;PKMYT1;CDC25A;CDC20;RBL2;CCNB2;CCNB1;STAG1;CDC45;CCNE2;ESPL1;CDK1;EP300;BUB1","ZAP70;LCK;TAP1;CD3E;IL7R;CD3D;AICDA","IL4;IL18RAP;RORC;STAT4;HLA-DPB1;GATA3;HLA-DOA;TLR5;IL18R1"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Term<\/th>\n      <th>Overlap<\/th>\n      <th>P.value<\/th>\n      <th>Adjusted.P.value<\/th>\n      <th>Old.P.value<\/th>\n      <th>Old.Adjusted.P.value<\/th>\n      <th>Odds.Ratio<\/th>\n      <th>Combined.Score<\/th>\n      <th>Genes<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[3,4,5,6,7,8]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Term","targets":1},{"name":"Overlap","targets":2},{"name":"P.value","targets":3},{"name":"Adjusted.P.value","targets":4},{"name":"Old.P.value","targets":5},{"name":"Old.Adjusted.P.value","targets":6},{"name":"Odds.Ratio","targets":7},{"name":"Combined.Score","targets":8},{"name":"Genes","targets":9}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p>In the <code>gene_set_library</code> parameter, you can also provide
 multiple gene set libraries or leave it as the default parameter
@@ -221,16 +223,17 @@ set library available in Enrichr. Also note that when
 <code>gene_set_library</code> parameter will be considered as a regex
 pattern, so partial matchs will be also selected.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">enrichr_enrich_kegg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_enrichr.html">rba_enrichr</a></span><span class="op">(</span>gene_list <span class="op">=</span> <span class="va">covid_critical</span>,</span>
-<span>                                   gene_set_library <span class="op">=</span> <span class="st">"kegg"</span>,</span>
-<span>                                   regex_library_name <span class="op">=</span> <span class="cn">TRUE</span> <span class="co"># default value</span></span>
+<code class="sourceCode R"><span><span class="va">enrichr_enrich_kegg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_enrichr.html">rba_enrichr</a></span><span class="op">(</span></span>
+<span>  gene_list <span class="op">=</span> <span class="va">covid_critical</span>,</span>
+<span>  gene_set_library <span class="op">=</span> <span class="st">"kegg"</span>,</span>
+<span>  regex_library_name <span class="op">=</span> <span class="cn">TRUE</span> <span class="co"># default value</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; --Step 1/3:</span></span>
 <span><span class="co">#&gt; Retrieving List of available libraries and statistics from Enrichr human.</span></span>
 <span><span class="co">#&gt; --Step 2/3:</span></span>
 <span><span class="co">#&gt; Uploading 1214 gene symbols to Enrichr human.</span></span>
 <span><span class="co">#&gt; --Step 3/3:</span></span>
-<span><span class="co">#&gt; Performing enrichment analysis on gene-list 87544019 using multiple Enrichr human libraries.</span></span>
+<span><span class="co">#&gt; Performing enrichment analysis on gene-list 87564873 using multiple Enrichr human libraries.</span></span>
 <span><span class="co">#&gt; Note: You have selected '6' Enrichr human libraries. Note that for each library, a separate call should be sent to Enrichr server. Thus, this could take a while depending on the number of selected libraries and your network connection.</span></span>
 <span><span class="co">#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |============                                                          |  17%  |                                                                              |=======================                                               |  33%  |                                                                              |===================================                                   |  50%  |                                                                              |===============================================                       |  67%  |                                                                              |==========================================================            |  83%  |                                                                              |======================================================================| 100%</span></span></code></pre></div>
 <p>As you can see below, when than one library is selected, the results
@@ -312,15 +315,19 @@ the <code><a href="../reference/rba_reactome_analysis_download.html">rba_reactom
 more information. Here, we will download a CSV file with the input
 identifiers which has not been found:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/rba_reactome_analysis_download.html">rba_reactome_analysis_download</a></span><span class="op">(</span>token <span class="op">=</span> <span class="va">reactome</span><span class="op">$</span><span class="va">summary</span><span class="op">$</span><span class="va">token</span>,</span>
-<span>                               request <span class="op">=</span> <span class="st">"not_found_ids"</span>,</span>
-<span>                               save_to <span class="op">=</span> <span class="st">"my_analysis.csv"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/rba_reactome_analysis_download.html">rba_reactome_analysis_download</a></span><span class="op">(</span></span>
+<span>  token <span class="op">=</span> <span class="va">reactome</span><span class="op">$</span><span class="va">summary</span><span class="op">$</span><span class="va">token</span>,</span>
+<span>  request <span class="op">=</span> <span class="st">"not_found_ids"</span>,</span>
+<span>  save_to <span class="op">=</span> <span class="st">"my_analysis.csv"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>Reactome also generates a nice report of your analysis in pdf format,
 make sure to try it:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/rba_reactome_analysis_pdf.html">rba_reactome_analysis_pdf</a></span><span class="op">(</span>token <span class="op">=</span> <span class="va">reactome</span><span class="op">$</span><span class="va">summary</span><span class="op">$</span><span class="va">token</span>,</span>
-<span>                          species <span class="op">=</span> <span class="fl">9606</span>, <span class="co">#Homo sapiens</span></span>
-<span>                          save_to <span class="op">=</span> <span class="st">"my_analysis.pdf"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/rba_reactome_analysis_pdf.html">rba_reactome_analysis_pdf</a></span><span class="op">(</span></span>
+<span>  token <span class="op">=</span> <span class="va">reactome</span><span class="op">$</span><span class="va">summary</span><span class="op">$</span><span class="va">token</span>,</span>
+<span>  species <span class="op">=</span> <span class="fl">9606</span>, <span class="co">#Homo sapiens</span></span>
+<span>  save_to <span class="op">=</span> <span class="st">"my_analysis.pdf"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <hr>
 </div>
 <div class="section level2">
@@ -373,10 +380,11 @@ PANTHER vignette article</a> for more information.</p>
 <p>Here, we only demonstrate using a gene list, without the expression
 values:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">panther_enrich</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_panther_enrich.html">rba_panther_enrich</a></span><span class="op">(</span>genes <span class="op">=</span> <span class="va">covid_critical</span>,</span>
-<span>                                     organism <span class="op">=</span> <span class="fl">9606</span>, <span class="co">#Homo sapiens</span></span>
-<span>                                     annot_dataset <span class="op">=</span> <span class="st">"GO:0008150"</span> <span class="co">#Biological Process</span></span>
-<span>                                     <span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">panther_enrich</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_panther_enrich.html">rba_panther_enrich</a></span><span class="op">(</span></span>
+<span>  genes <span class="op">=</span> <span class="va">covid_critical</span>,</span>
+<span>  organism <span class="op">=</span> <span class="fl">9606</span>, <span class="co">#Homo sapiens</span></span>
+<span>  annot_dataset <span class="op">=</span> <span class="st">"GO:0008150"</span> <span class="co">#Biological Process</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; Performing PANTHER over-representation analysis (Fisher's exact test) on 1214 genes from `organism 9606` against `GO:0008150` datasets.</span></span></code></pre></div>
 <p>In addition to the results table, PANTHER returns other useful
 information about your analysis. The names are self-explanatory:</p>
@@ -461,9 +469,10 @@ and Enzyme Source Ontology</a></p></li>
 <p>We can directly supply our <code>covid_critical</code> variable to
 STRING’s enrichment function:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">string_enrich</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_string_enrichment.html">rba_string_enrichment</a></span><span class="op">(</span>ids <span class="op">=</span> <span class="va">covid_critical</span>,</span>
-<span>                                       species <span class="op">=</span> <span class="fl">9606</span> <span class="co">#Homo sapiens</span></span>
-<span>                                       <span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">string_enrich</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_string_enrichment.html">rba_string_enrichment</a></span><span class="op">(</span></span>
+<span>  ids <span class="op">=</span> <span class="va">covid_critical</span>,</span>
+<span>  species <span class="op">=</span> <span class="fl">9606</span> <span class="co">#Homo sapiens</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; Performing functional enrichment of 1214 Input Identifiers.</span></span></code></pre></div>
 <p>As you can see, by default a list is returned where each element is a
 data Frame with enrichment analysis results against one of the gene sets
@@ -496,10 +505,11 @@ Because of potentially unwieldy response, <code>allow_pubmed</code> is
 set fo FALSE by default. Here we set it to TRUE to also retrieve the
 PubMed paper abstracts that include our gene.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">string_annot</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_string_annotations.html">rba_string_annotations</a></span><span class="op">(</span>ids <span class="op">=</span> <span class="st">"CD177"</span>,</span>
-<span>                                       species <span class="op">=</span> <span class="fl">9606</span>, <span class="co">#Homo sapiens</span></span>
-<span>                                       allow_pubmed <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span>                                       <span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">string_annot</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_string_annotations.html">rba_string_annotations</a></span><span class="op">(</span></span>
+<span>  ids <span class="op">=</span> <span class="st">"CD177"</span>,</span>
+<span>  species <span class="op">=</span> <span class="fl">9606</span>, <span class="co">#Homo sapiens</span></span>
+<span>  allow_pubmed <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; Retrieving functional annotations of 1 Input Identifiers.</span></span></code></pre></div>
 <p>As you can see, Our input gene has a large number of annotations. Let
 us take a look at the PMID Data Frame, which contains the PubMed
@@ -528,12 +538,14 @@ of the plot; please refer to the
 detailed instructions. Here we perform an enrichment analysis against
 the KEGG database, and retrieve a plot of the results.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">graph_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_string_enrichment_image.html">rba_string_enrichment_image</a></span><span class="op">(</span>ids <span class="op">=</span> <span class="va">covid_critical</span>,</span>
-<span>                                       species <span class="op">=</span> <span class="fl">9606</span>,</span>
-<span>                                       category <span class="op">=</span> <span class="st">"KEGG"</span>,</span>
-<span>                                       image_format <span class="op">=</span> <span class="st">"image"</span>,</span>
-<span>                                       save_image <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>                                       group_by_similarity <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">graph_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_string_enrichment_image.html">rba_string_enrichment_image</a></span><span class="op">(</span></span>
+<span>  ids <span class="op">=</span> <span class="va">covid_critical</span>,</span>
+<span>  species <span class="op">=</span> <span class="fl">9606</span>,</span>
+<span>  category <span class="op">=</span> <span class="st">"KEGG"</span>,</span>
+<span>  image_format <span class="op">=</span> <span class="st">"image"</span>,</span>
+<span>  save_image <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  group_by_similarity <span class="op">=</span> <span class="fl">0.6</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <img src="rbioapi_do_enrich_files/figure-html/string_enrichment_plot_image-1.png" alt="Visualization of enrichment analysis results" width="672"><p class="caption">
 Visualization of enrichment analysis results
@@ -559,12 +571,20 @@ Parray et al.: Vaccines 9, 1056 (2021)</a>”. They used microarray to
 find differentially expressed miRNA in the severe versus mild COVID 19
 patients’ blood.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">covid_mirna</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hsa-miR-3609"</span>, <span class="st">"hsa-miR-199a-5p"</span>, <span class="st">"hsa-miR-139-5p"</span>, <span class="st">"hsa-miR-145-5p"</span>,<span class="st">"hsa-miR-3651"</span>, <span class="st">"hsa-miR-1273h-3p"</span>, <span class="st">"hsa-miR-4632-5p"</span>,<span class="st">"hsa-miR-6861-5p"</span>, <span class="st">"hsa-miR-6802-5p"</span>,<span class="st">"hsa-miR-5196-5p"</span>,<span class="st">"hsa-miR-92b-5p"</span>, <span class="st">"hsa-miR-6805-5p"</span>,<span class="st">"hsa-miR-98-5p"</span>,<span class="st">"hsa-miR-3185"</span>, <span class="st">"hsa-miR-572"</span>,<span class="st">"hsa-miR-371b-5p"</span>,<span class="st">"hsa-miR-3180"</span>, <span class="st">"hsa-miR-8073"</span>,<span class="st">"hsa-miR-4750-5p"</span>,<span class="st">"hsa-miR-6075"</span>, <span class="st">"hsa-let-7i-5p"</span>,<span class="st">"hsa-miR-1231"</span>,<span class="st">"hsa-miR-885-3p"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">covid_mirna</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"hsa-miR-3609"</span>, <span class="st">"hsa-miR-199a-5p"</span>, <span class="st">"hsa-miR-139-5p"</span>, <span class="st">"hsa-miR-145-5p"</span>,</span>
+<span>  <span class="st">"hsa-miR-3651"</span>, <span class="st">"hsa-miR-1273h-3p"</span>, <span class="st">"hsa-miR-4632-5p"</span>, <span class="st">"hsa-miR-6861-5p"</span>,</span>
+<span>  <span class="st">"hsa-miR-6802-5p"</span>, <span class="st">"hsa-miR-5196-5p"</span>, <span class="st">"hsa-miR-92b-5p"</span>, <span class="st">"hsa-miR-6805-5p"</span>,</span>
+<span>  <span class="st">"hsa-miR-98-5p"</span>, <span class="st">"hsa-miR-3185"</span>, <span class="st">"hsa-miR-572"</span>, <span class="st">"hsa-miR-371b-5p"</span>,</span>
+<span>  <span class="st">"hsa-miR-3180"</span>, <span class="st">"hsa-miR-8073"</span>, <span class="st">"hsa-miR-4750-5p"</span>, <span class="st">"hsa-miR-6075"</span>,</span>
+<span>  <span class="st">"hsa-let-7i-5p"</span>, <span class="st">"hsa-miR-1231"</span>, <span class="st">"hsa-miR-885-3p"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>While not necessary, we can first see what enrichment categories are
 available for our mature human miRNA:</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/rba_mieaa_cats.html">rba_mieaa_cats</a></span><span class="op">(</span>mirna_type <span class="op">=</span> <span class="st">"mature"</span>,</span>
-<span>               species <span class="op">=</span> <span class="fl">9606</span> <span class="co">#Homo sapiens</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/rba_mieaa_cats.html">rba_mieaa_cats</a></span><span class="op">(</span></span>
+<span>  mirna_type <span class="op">=</span> <span class="st">"mature"</span>,</span>
+<span>  species <span class="op">=</span> <span class="fl">9606</span> <span class="co">#Homo sapiens</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Retrieving available enrichment categories of miRNA for Homo sapiens.</span></span>
 <span><span class="co">#&gt; Annotations derived over miRTarBase (Gene Ontology) </span></span>
@@ -636,20 +656,22 @@ necessary steps in one function call. Note that we have supplied the
 categories parameter. If left NULL, the enrichment will be performed
 against every available category.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mieaa_enrich</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_mieaa_enrich.html">rba_mieaa_enrich</a></span><span class="op">(</span>test_set <span class="op">=</span> <span class="va">covid_mirna</span>,</span>
-<span>                                 mirna_type <span class="op">=</span> <span class="st">"mature"</span>,</span>
-<span>                                 test_type <span class="op">=</span> <span class="st">"ORA"</span>,</span>
-<span>                                 species <span class="op">=</span> <span class="fl">9606</span>,</span>
-<span>                                 categories <span class="op">=</span> <span class="st">"miRPathDB_GO_Biological_process_mature"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">mieaa_enrich</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_mieaa_enrich.html">rba_mieaa_enrich</a></span><span class="op">(</span></span>
+<span>  test_set <span class="op">=</span> <span class="va">covid_mirna</span>,</span>
+<span>  mirna_type <span class="op">=</span> <span class="st">"mature"</span>,</span>
+<span>  test_type <span class="op">=</span> <span class="st">"ORA"</span>,</span>
+<span>  species <span class="op">=</span> <span class="fl">9606</span>,</span>
+<span>  categories <span class="op">=</span> <span class="st">"miRPathDB_GO_Biological_process_mature"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt;  -- Step 1/3: Submitting Enrichment analysis request:</span></span>
 <span><span class="co">#&gt; Submitting ORA enrichment request for 23 miRNA IDs of species Homo sapiens to miEAA servers.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  -- Step 2/3: Checking for Submitted enrichment analysis's status every 5 seconds.</span></span>
-<span><span class="co">#&gt;     Your submitted job ID is: 6c2ee823-3c8d-40c1-b31d-29e78d54bfaf</span></span>
+<span><span class="co">#&gt;     Your submitted job ID is: d2270cf5-b325-46ec-b3db-05ac01c189af</span></span>
 <span><span class="co">#&gt; .</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  -- Step 3/3: Retrieving the results.</span></span>
-<span><span class="co">#&gt; Retrieving results of submitted enrichment request with ID: 6c2ee823-3c8d-40c1-b31d-29e78d54bfaf</span></span></code></pre></div>
+<span><span class="co">#&gt; Retrieving results of submitted enrichment request with ID: d2270cf5-b325-46ec-b3db-05ac01c189af</span></span></code></pre></div>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-5b1b2f4ad92281566982" style="width:100%;height:auto;"></div>
 <script type="application/json" data-for="htmlwidget-5b1b2f4ad92281566982">{"x":{"filter":"none","vertical":false,"autoHideNavigation":true,"data":[["1","2","3","4","5","6","7","8","9","10"],["GO Biological process (miRPathDB)","GO Biological process (miRPathDB)","GO Biological process (miRPathDB)","GO Biological process (miRPathDB)","GO Biological process (miRPathDB)","GO Biological process (miRPathDB)","GO Biological process (miRPathDB)","GO Biological process (miRPathDB)","GO Biological process (miRPathDB)","GO Biological process (miRPathDB)"],["B cell proliferation","DNA damage response signal transduction by p53 class mediator","L-serine metabolic process","amyloid-beta clearance","angiotensin-activated signaling pathway","cell-cell adhesion mediated by integrin","cell-cell adhesion via plasma-membrane adhesion molecules","cellular response to calcium ion","cerebral cortex development","chondrocyte differentiation involved in endochondral bone morphogenesis"],["over-represented","over-represented","over-represented","over-represented","over-represented","over-represented","over-represented","over-represented","over-represented","over-represented"],["5.44362e-05","0.000105875","0.000335649","0.000557165","0.000832385","0.000557165","0.000335649","0.0011607","0.0011607","0.000557165"],["0.0294189","0.0331389","0.0415979","0.0415979","0.0452719","0.0415979","0.0415979","0.0490924","0.0490924","0.0415979"],["0.0294189","0.0331389","0.0415979","0.0415979","0.0452719","0.0415979","0.0415979","0.0490924","0.0490924","0.0415979"],["0.0882648","0.609829","0.0320963","0.0401204","0.0481444","0.0401204","0.0320963","0.0561685","0.0561685","0.0401204"],["3","5","2","2","2","2","2","2","2","2"],["hsa-miR-145-5p; hsa-miR-98-5p; hsa-miR-572","hsa-miR-199a-5p; hsa-miR-145-5p; hsa-miR-6805-5p; hsa-miR-98-5p; hsa-miR-572","hsa-miR-145-5p; hsa-miR-6805-5p","hsa-miR-199a-5p; hsa-miR-145-5p","hsa-miR-199a-5p; hsa-miR-145-5p","hsa-miR-199a-5p; hsa-miR-145-5p","hsa-miR-199a-5p; hsa-miR-145-5p","hsa-miR-199a-5p; hsa-miR-139-5p","hsa-miR-199a-5p; hsa-miR-145-5p","hsa-miR-199a-5p; hsa-miR-145-5p"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Category<\/th>\n      <th>Subcategory<\/th>\n      <th>Enrichment<\/th>\n      <th>P-value<\/th>\n      <th>P-adjusted<\/th>\n      <th>Q-value<\/th>\n      <th>Expected<\/th>\n      <th>Observed<\/th>\n      <th>miRNAs/precursors<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Category","targets":1},{"name":"Subcategory","targets":2},{"name":"Enrichment","targets":3},{"name":"P-value","targets":4},{"name":"P-adjusted","targets":5},{"name":"Q-value","targets":6},{"name":"Expected","targets":7},{"name":"Observed","targets":8},{"name":"miRNAs/precursors","targets":9}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><hr>
 </div>
@@ -657,12 +679,13 @@ against every available category.</p>
 <h2 id="how-to-cite">How to cite?<a class="anchor" aria-label="anchor" href="#how-to-cite"></a>
 </h2>
 <p>rbioapi is an interface between you and other databases and services.
-Thus, if you have used rbioapi in published research, kindly in addition
-to citing rbioapi, make sure to fully and properly cite the
-databases/services you have used. Suggested citations have been added in
-the functions’ manuals, under the “references” section; Nevertheless, it
-is the user’s responsibility to check for proper citations and to
-properly cite the database/services that they have used.</p>
+Thus, if you have used rbioapi in published research, <strong>in
+addition to kindly citing rbioapi, <u><em>ensure to fully and properly
+cite the databases/services you have used</em></u></strong>. Suggested
+citations have been added in the functions’ manuals, under the
+“references” section; Nevertheless, it is the user’s responsibility to
+check for proper citations and to properly cite the database/services
+that they have used.</p>
 <p>Please see the <a href="rbioapi.html#how-to-cite">rbioapi’s main
 vignette article</a> for more details.</p>
 <hr>
@@ -713,7 +736,7 @@ vignette index</a></p></li>
 <span><span class="co">#&gt; [13] rmarkdown_2.29    grid_4.4.2        crosstalk_1.2.1   evaluate_1.0.3   </span></span>
 <span><span class="co">#&gt; [17] jquerylib_0.1.4   fastmap_1.2.0     yaml_2.3.10       lifecycle_1.0.4  </span></span>
 <span><span class="co">#&gt; [21] compiler_4.4.2    fs_1.6.5          htmlwidgets_1.6.4 systemfonts_1.2.1</span></span>
-<span><span class="co">#&gt; [25] digest_0.6.37     R6_2.5.1          curl_6.1.0        magrittr_2.0.3   </span></span>
+<span><span class="co">#&gt; [25] digest_0.6.37     R6_2.5.1          curl_6.2.0        magrittr_2.0.3   </span></span>
 <span><span class="co">#&gt; [29] bslib_0.8.0       tools_4.4.2       pkgdown_2.1.1     cachem_1.1.0     </span></span>
 <span><span class="co">#&gt; [33] desc_1.4.3</span></span></code></pre>
 </div>

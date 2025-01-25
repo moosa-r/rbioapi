@@ -91,7 +91,7 @@
                         <h4 data-toc-skip class="author">Moosa
 Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2025-01-24</h4>
+            <h4 data-toc-skip class="date">2025-01-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/master/vignettes/rbioapi_panther.Rmd" class="external-link"><code>vignettes/rbioapi_panther.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_panther.Rmd</code></div>
@@ -201,15 +201,18 @@ we only provide the gene names, thus over-representation analysis will
 be conducted:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create a variable to store the genes vector</span></span>
-<span><span class="va">my_genes_vec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"p53"</span>, <span class="st">"BRCA1"</span>, <span class="st">"cdk2"</span>, <span class="st">"Q99835"</span>, <span class="st">"CDC42"</span>,</span>
-<span>                  <span class="st">"CDK1"</span>,<span class="st">"KIF23"</span>,<span class="st">"PLK1"</span>, <span class="st">"RAC2"</span>,<span class="st">"RACGAP1"</span>,<span class="st">"RHOA"</span>,</span>
-<span>                  <span class="st">"RHOB"</span>, <span class="st">"PHF14"</span>, <span class="st">"RBM3"</span>, <span class="st">"MSL1"</span><span class="op">)</span></span>
+<span><span class="va">my_genes_vec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"p53"</span>, <span class="st">"BRCA1"</span>, <span class="st">"cdk2"</span>, <span class="st">"Q99835"</span>, <span class="st">"CDC42"</span>, <span class="st">"CDK1"</span>,<span class="st">"KIF23"</span>,<span class="st">"PLK1"</span>,</span>
+<span>  <span class="st">"RAC2"</span>,<span class="st">"RACGAP1"</span>,<span class="st">"RHOA"</span>, <span class="st">"RHOB"</span>, <span class="st">"PHF14"</span>, <span class="st">"RBM3"</span>, <span class="st">"MSL1"</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Submit the analysis request.</span></span>
-<span><span class="va">enriched</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_panther_enrich.html">rba_panther_enrich</a></span><span class="op">(</span>genes <span class="op">=</span> <span class="va">my_genes_vec</span>,</span>
-<span>                               organism <span class="op">=</span> <span class="fl">9606</span>,</span>
-<span>                               annot_dataset <span class="op">=</span> <span class="st">"GO:0008150"</span>,</span>
-<span>                               cutoff <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span><span class="va">enriched</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_panther_enrich.html">rba_panther_enrich</a></span><span class="op">(</span></span>
+<span>  genes <span class="op">=</span> <span class="va">my_genes_vec</span>,</span>
+<span>  organism <span class="op">=</span> <span class="fl">9606</span>,</span>
+<span>  annot_dataset <span class="op">=</span> <span class="st">"GO:0008150"</span>,</span>
+<span>  cutoff <span class="op">=</span> <span class="fl">0.05</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; Performing PANTHER over-representation analysis (Fisher's exact test) on 15 genes from `organism 9606` against `GO:0008150` datasets.</span></span>
 <span></span>
 <span><span class="co"># Note that we didn't supply the `test_type` parameter.</span></span>
@@ -234,18 +237,21 @@ a numeric vector.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create a variable to store the data frame</span></span>
 <span><span class="va">my_genes_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"p53"</span>, <span class="st">"BRCA1"</span>, <span class="st">"cdk2"</span>, <span class="st">"Q99835"</span>, <span class="st">"CDC42"</span>,</span>
-<span>                  <span class="st">"CDK1"</span>,<span class="st">"KIF23"</span>,<span class="st">"PLK1"</span>, <span class="st">"RAC2"</span>,<span class="st">"RACGAP1"</span>,<span class="st">"RHOA"</span>,</span>
-<span>                  <span class="st">"RHOB"</span>, <span class="st">"PHF14"</span>, <span class="st">"RBM3"</span>, <span class="st">"MSL1"</span><span class="op">)</span>,</span>
+<span>  genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>    <span class="st">"p53"</span>, <span class="st">"BRCA1"</span>, <span class="st">"cdk2"</span>, <span class="st">"Q99835"</span>, <span class="st">"CDC42"</span>, <span class="st">"CDK1"</span>,<span class="st">"KIF23"</span>,<span class="st">"PLK1"</span>,</span>
+<span>    <span class="st">"RAC2"</span>,<span class="st">"RACGAP1"</span>,<span class="st">"RHOA"</span>, <span class="st">"RHOB"</span>, <span class="st">"PHF14"</span>, <span class="st">"RBM3"</span>, <span class="st">"MSL1"</span></span>
+<span>  <span class="op">)</span>,</span>
 <span>  <span class="co">## generate random expression values</span></span>
 <span>  expression <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">15</span>, <span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span> </span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Submit the analysis request.</span></span>
-<span><span class="va">enriched</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_panther_enrich.html">rba_panther_enrich</a></span><span class="op">(</span>genes <span class="op">=</span> <span class="va">my_genes_df</span>,</span>
-<span>                               organism <span class="op">=</span> <span class="fl">9606</span>,</span>
-<span>                               annot_dataset <span class="op">=</span> <span class="st">"GO:0008150"</span>,</span>
-<span>                               cutoff <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span><span class="va">enriched</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_panther_enrich.html">rba_panther_enrich</a></span><span class="op">(</span></span>
+<span>  genes <span class="op">=</span> <span class="va">my_genes_df</span>,</span>
+<span>  organism <span class="op">=</span> <span class="fl">9606</span>,</span>
+<span>  annot_dataset <span class="op">=</span> <span class="st">"GO:0008150"</span>,</span>
+<span>  cutoff <span class="op">=</span> <span class="fl">0.05</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Note that we didn't supply the `test_type` parameter.</span></span>
 <span><span class="co"># In this case, the function will default to Mann-Whitney U Test</span></span>
@@ -257,6 +263,7 @@ also provide Over-representation analysis tools. Please see the vignette
 article <a href="rbioapi_do_enrich.html">Do with rbioapi:
 Over-Representation (Enrichment) Analysis in R</a> (<a href="https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html">link
 to the documentation site</a>) for an in-depth review.</p>
+<hr>
 </div>
 </div>
 </div>
@@ -334,7 +341,7 @@ vignette index</a></p></li>
 <span><span class="co">#&gt; [13] crosstalk_1.2.1   evaluate_1.0.3    jquerylib_0.1.4   fastmap_1.2.0    </span></span>
 <span><span class="co">#&gt; [17] yaml_2.3.10       lifecycle_1.0.4   compiler_4.4.2    fs_1.6.5         </span></span>
 <span><span class="co">#&gt; [21] htmlwidgets_1.6.4 systemfonts_1.2.1 digest_0.6.37     R6_2.5.1         </span></span>
-<span><span class="co">#&gt; [25] curl_6.1.0        magrittr_2.0.3    bslib_0.8.0       tools_4.4.2      </span></span>
+<span><span class="co">#&gt; [25] curl_6.2.0        magrittr_2.0.3    bslib_0.8.0       tools_4.4.2      </span></span>
 <span><span class="co">#&gt; [29] pkgdown_2.1.1     cachem_1.1.0      desc_1.4.3</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

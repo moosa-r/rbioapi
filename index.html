@@ -81,8 +81,7 @@
 <img src="logo.svg" class="logo" alt=""><h1 id="rbioapi-user-friendly-r-interface-to-biologic-web-services-api">rbioapi: User-Friendly R Interface to Biologic Web Services’ API<a class="anchor" aria-label="anchor" href="#rbioapi-user-friendly-r-interface-to-biologic-web-services-api"></a>
 </h1>
 </div>
-<p>Moosa Rezwani 2023-07-27</p>
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+<p>Moosa Rezwani 2025-01-25</p>
 </div>
 <div class="section level1">
 <h1 id="section"><a class="anchor" aria-label="anchor" href="#section"></a></h1>
@@ -133,7 +132,7 @@
 <p>You can install the stable release version of <a href="rbioapi.html" title="rbioapi: User-Friendly R Interface to Biologic Web Services' API">rbioapi</a> from <a href="https://cran.r-project.org/package=rbioapi" title="rbioapi page on CRAN (The Comprehensive R Archive Network)" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"rbioapi"</span><span class="op">)</span></span></code></pre></div>
-<p>However, the CRAN version is released at most once every 1-2 months, You can install the most recent (development) version from <a href="https://github.com/moosa-r/rbioapi/" title="rbioapi repository on GitHub" class="external-link">GitHub</a> with:</p>
+<p>However, the CRAN version is released at longer intervals, You can install the most recent -development- version from <a href="https://github.com/moosa-r/rbioapi/" title="rbioapi repository on GitHub" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"moosa-r/rbioapi"</span><span class="op">)</span></span></code></pre></div>
@@ -151,10 +150,10 @@
 <code class="sourceCode R"><span><span class="fu"><a href="reference/rba_string_version.html">rba_string_version</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Retrieving the STRING database version and address used by rbioapi.</span></span>
 <span><span class="co">#&gt; $string_version</span></span>
-<span><span class="co">#&gt; [1] "11.5"</span></span>
+<span><span class="co">#&gt; [1] "12.0"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $stable_address</span></span>
-<span><span class="co">#&gt; [1] "https://version-11-5.string-db.org"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "https://version-12-0.string-db.org"</span></span></code></pre></div>
 <p>Thus, to this version, rbioapi function will have one of the following naming schema:</p>
 <ol style="list-style-type: decimal">
 <li>rba_enrichr_*</li>
@@ -170,7 +169,7 @@
 <div class="section level1">
 <h1 id="changing-the-options">Changing the options<a class="anchor" aria-label="anchor" href="#changing-the-options"></a>
 </h1>
-<p>To provide more control, multiple options have been implemented. See the manual of <code><a href="reference/rba_options.html">rba_options()</a></code> function for a full description of available options. In short, some of the options will govern rbioapi’s connection with servers (e.g. timeout, retry) and some of the options will modify your experience with rbioapi (e.g. verbose, diagnostics, save_file). There are two ways that you may use to change any option. Also, you can get table of available rbioapi options and their current values by calling <code><a href="reference/rba_options.html">rba_options()</a></code>without any argument:</p>
+<p>To give users greater control, rbioapi offers multiple configurable options. See the manual of <code><a href="reference/rba_options.html">rba_options()</a></code> function for a full description of available options. In short, some of the options will govern rbioapi’s connection with servers (e.g. timeout, retry) and some of the options will modify your experience with rbioapi (e.g. verbose, diagnostics, save_file). There are two ways that you may use to change any option. Also, you can get table of available rbioapi options and their current values by calling <code><a href="reference/rba_options.html">rba_options()</a></code>without any argument:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/rba_options.html">rba_options</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   rbioapi_option current_value            allowed_value</span></span>
@@ -200,16 +199,30 @@
 <p>You can pass additional arguments to any rbioapi function using “ellipsis” (the familiar <code>…</code> or dot dot dot!). Meaning that you can call any function with additional arguments where each is ‘option = value’ pair. This way, any changes in options will be confined within that particular function call. For example:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Save the server's raw response file:</span></span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rba_reactome_species.html">rba_reactome_species</a></span><span class="op">(</span>only_main <span class="op">=</span> <span class="cn">TRUE</span>, save_file <span class="op">=</span> <span class="st">"reactome_species.json"</span><span class="op">)</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rba_reactome_species.html">rba_reactome_species</a></span><span class="op">(</span></span>
+<span>  only_main <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  save_file <span class="op">=</span> <span class="st">"reactome_species.json"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">## Also, in the case of connection failure, retry up to 10 times:</span></span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rba_reactome_species.html">rba_reactome_species</a></span><span class="op">(</span>only_main <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>                         save_file <span class="op">=</span> <span class="st">"reactome_species.json"</span>, retry_max <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rba_reactome_species.html">rba_reactome_species</a></span><span class="op">(</span></span>
+<span>  only_main <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  save_file <span class="op">=</span> <span class="st">"reactome_species.json"</span>,</span>
+<span>  retry_max <span class="op">=</span> <span class="fl">10</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Run these codes in your own R session to see the difference.</span></span>
 <span><span class="co">## show internal diagnostics boring details</span></span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rba_uniprot_proteins_crossref.html">rba_uniprot_proteins_crossref</a></span><span class="op">(</span>db_id <span class="op">=</span> <span class="st">"CD40"</span>, db_name <span class="op">=</span> <span class="st">"HGNC"</span>, diagnostics <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rba_uniprot_proteins_crossref.html">rba_uniprot_proteins_crossref</a></span><span class="op">(</span></span>
+<span>  db_id <span class="op">=</span> <span class="st">"CD40"</span>,</span>
+<span>  db_name <span class="op">=</span> <span class="st">"HGNC"</span>,</span>
+<span>  diagnostics <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
 <span><span class="co">## The next function you call, will still use the default rbioapi options</span></span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rba_uniprot_proteins_crossref.html">rba_uniprot_proteins_crossref</a></span><span class="op">(</span>db_id <span class="op">=</span> <span class="st">"CD40"</span>, db_name <span class="op">=</span> <span class="st">"HGNC"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rba_uniprot_proteins_crossref.html">rba_uniprot_proteins_crossref</a></span><span class="op">(</span></span>
+<span>  db_id <span class="op">=</span> <span class="st">"CD40"</span>,</span>
+<span>  db_name <span class="op">=</span> <span class="st">"HGNC"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level1">
@@ -246,16 +259,19 @@
 <p>Some API resources will return paginated responses. This is particularly common in API resources which return potentially very large responses. In rbioapi, for these cases, there are arguments such as “page_number” (with default value of 1) and -if the API resource allows- “page_size”. To save your time, you may use <code><a href="reference/rba_pages.html">rba_pages()</a></code>. This function will iterate over the pages you have specified.</p>
 <p>Take rba_uniprot_taxonomy_name as an example. This function allows you to search taxonomic nodes in <a href="https://www.uniprot.org" title="Universal Protein Resource (UniProt)" class="external-link">UniProt</a>. The response can potentially have a huge size, so <a href="https://www.uniprot.org" title="Universal Protein Resource (UniProt)" class="external-link">UniProt</a> returns a paginated response. For example, if we search for nodes that contain “adenovirus”, there is a large number of hits:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">adeno</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rba_uniprot_taxonomy_name.html">rba_uniprot_taxonomy_name</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"adenovirus"</span>,</span>
-<span>                                   search_type <span class="op">=</span> <span class="st">"contain"</span>,</span>
-<span>                                   page_number <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">adeno</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rba_uniprot_taxonomy_name.html">rba_uniprot_taxonomy_name</a></span><span class="op">(</span></span>
+<span>  name <span class="op">=</span> <span class="st">"adenovirus"</span>,</span>
+<span>  search_type <span class="op">=</span> <span class="st">"contain"</span>,</span>
+<span>  page_number <span class="op">=</span> <span class="fl">1</span></span>
+<span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">adeno</span>, max.level <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 2</span></span>
 <span><span class="co">#&gt;  $ taxonomies:'data.frame':  200 obs. of  8 variables:</span></span>
 <span><span class="co">#&gt;   ..$ taxonomyId    : int [1:200] 10509 10510 10511 10512 10513 10514 10515 10519 10521 10522 ...</span></span>
 <span><span class="co">#&gt;   ..$ mnemonic      : chr [1:200] "9ADEN" "ADEB3" "ADEB7" "9ADEN" ...</span></span>
 <span><span class="co">#&gt;   ..$ scientificName: chr [1:200] "Mastadenovirus" "Bovine adenovirus B serotype 3" "Bovine adenovirus 7" "Canine adenovirus 1" ...</span></span>
-<span><span class="co">#&gt;   ..$ rank          : chr [1:200] "genus" "no rank" "no rank" "no rank" ...</span></span>
+<span><span class="co">#&gt;   ..$ rank          : chr [1:200] "genus" "serotype" "serotype" "serotype" ...</span></span>
 <span><span class="co">#&gt;   ..$ superregnum   : chr [1:200] "V" "V" "V" "V" ...</span></span>
 <span><span class="co">#&gt;   ..$ hidden        : logi [1:200] FALSE TRUE TRUE TRUE TRUE TRUE ...</span></span>
 <span><span class="co">#&gt;   ..$ commonName    : chr [1:200] NA "BAdV-3" "BAdV-7" NA ...</span></span>
@@ -263,12 +279,19 @@
 <span><span class="co">#&gt;  $ pageInfo  :List of 3</span></span>
 <span><span class="co">#&gt;   ..$ resultsPerPage: int 200</span></span>
 <span><span class="co">#&gt;   ..$ currentPage   : int 1</span></span>
-<span><span class="co">#&gt;   ..$ totalRecords  : int 985</span></span></code></pre></div>
+<span><span class="co">#&gt;   ..$ totalRecords  : int 1102</span></span></code></pre></div>
 <p>As you can see, the server has returned the first page of the response, to retrieve the other pages, you should make separate calls and change the “page_number” argument within each call, or simply use <code><a href="reference/rba_pages.html">rba_pages()</a></code> as demonstrated below:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">adeno_pages</span> <span class="op">=</span> <span class="fu"><a href="reference/rba_pages.html">rba_pages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html" class="external-link">quote</a></span><span class="op">(</span><span class="fu"><a href="reference/rba_uniprot_taxonomy_name.html">rba_uniprot_taxonomy_name</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"adenovirus"</span>,</span>
-<span>                                   search_type <span class="op">=</span> <span class="st">"contain"</span>,</span>
-<span>                                   page_number <span class="op">=</span> <span class="st">"pages:1:3"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">adeno_pages</span> <span class="op">=</span> <span class="fu"><a href="reference/rba_pages.html">rba_pages</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/substitute.html" class="external-link">quote</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="reference/rba_uniprot_taxonomy_name.html">rba_uniprot_taxonomy_name</a></span><span class="op">(</span></span>
+<span>      name <span class="op">=</span> <span class="st">"adenovirus"</span>,</span>
+<span>      search_type <span class="op">=</span> <span class="st">"contain"</span>,</span>
+<span>      page_number <span class="op">=</span> <span class="st">"pages:1:3"</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
 <span><span class="co">## You can inspect the structure of the response:</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">adeno_pages</span>, max.level <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 3</span></span>
@@ -279,7 +302,7 @@
 <span><span class="co">#&gt;   ..$ taxonomies:'data.frame':   200 obs. of  8 variables:</span></span>
 <span><span class="co">#&gt;   ..$ pageInfo  :List of 3</span></span>
 <span><span class="co">#&gt;  $ page_3:List of 2</span></span>
-<span><span class="co">#&gt;   ..$ taxonomies:'data.frame':   200 obs. of  8 variables:</span></span>
+<span><span class="co">#&gt;   ..$ taxonomies:'data.frame':   200 obs. of  6 variables:</span></span>
 <span><span class="co">#&gt;   ..$ pageInfo  :List of 3</span></span></code></pre></div>
 <p>As you can see, what we have done was:</p>
 <ol style="list-style-type: decimal">
@@ -290,7 +313,7 @@
 <div class="section level1">
 <h1 id="how-and-what-to-cite">How and what to cite?<a class="anchor" aria-label="anchor" href="#how-and-what-to-cite"></a>
 </h1>
-<p>rbioapi is an interface between you and other databases and services. Thus, if you have used rbioapi in published research, <strong>in addition to kindly citing rbioapi, <u><em>make sure to fully and properly cite the databases/services you have used</em></u></strong>. Suggested citations have been added in the functions’ manuals, under the “references” section; Nevertheless, it is the user’s responsibility to check for proper citations and to properly cite the database/services that they have used.</p>
+<p>rbioapi is an interface between you and other databases and services. Thus, if you have used rbioapi in published research, <strong>in addition to kindly citing rbioapi, <u><em>ensure to fully and properly cite the databases/services you have used</em></u></strong>. Suggested citations have been added in the functions’ manuals, under the “references” section; Nevertheless, it is the user’s responsibility to check for proper citations and to properly cite the database/services that they have used.</p>
 <div class="section level2">
 <h2 id="how-to-cite-rbioapi">How to cite rbioapi<a class="anchor" aria-label="anchor" href="#how-to-cite-rbioapi"></a>
 </h2>
@@ -354,9 +377,9 @@
 <div class="section level1">
 <h1 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h1>
-<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co">#&gt; R version 4.3.1 (2023-06-16 ucrt)</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="co">#&gt; Running under: Windows 11 x64 (build 22621)</span></span>
+<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co">#&gt; R version 4.4.2 (2024-10-31 ucrt)</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64</span></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="co">#&gt; Running under: Windows 11 x64 (build 26100)</span></span>
 <span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="co">#&gt; Matrix products: default</span></span>
 <span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -375,14 +398,14 @@
 <span id="cb13-19"><a href="#cb13-19" tabindex="-1"></a><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span id="cb13-20"><a href="#cb13-20" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb13-21"><a href="#cb13-21" tabindex="-1"></a><span class="co">#&gt; other attached packages:</span></span>
-<span id="cb13-22"><a href="#cb13-22" tabindex="-1"></a><span class="co">#&gt; [1] rbioapi_0.7.9</span></span>
+<span id="cb13-22"><a href="#cb13-22" tabindex="-1"></a><span class="co">#&gt; [1] rbioapi_0.8.2</span></span>
 <span id="cb13-23"><a href="#cb13-23" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb13-24"><a href="#cb13-24" tabindex="-1"></a><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span id="cb13-25"><a href="#cb13-25" tabindex="-1"></a><span class="co">#&gt;  [1] digest_0.6.33     R6_2.5.1          fastmap_1.1.1     xfun_0.39        </span></span>
-<span id="cb13-26"><a href="#cb13-26" tabindex="-1"></a><span class="co">#&gt;  [5] knitr_1.43        htmltools_0.5.5   rmarkdown_2.23    cli_3.6.1        </span></span>
-<span id="cb13-27"><a href="#cb13-27" tabindex="-1"></a><span class="co">#&gt;  [9] compiler_4.3.1    httr_1.4.6        rstudioapi_0.15.0 tools_4.3.1      </span></span>
-<span id="cb13-28"><a href="#cb13-28" tabindex="-1"></a><span class="co">#&gt; [13] curl_5.0.1        evaluate_0.21     yaml_2.3.7        rlang_1.1.1      </span></span>
-<span id="cb13-29"><a href="#cb13-29" tabindex="-1"></a><span class="co">#&gt; [17] jsonlite_1.8.7</span></span></code></pre></div>
+<span id="cb13-25"><a href="#cb13-25" tabindex="-1"></a><span class="co">#&gt;  [1] digest_0.6.37     R6_2.5.1          fastmap_1.2.0     xfun_0.50        </span></span>
+<span id="cb13-26"><a href="#cb13-26" tabindex="-1"></a><span class="co">#&gt;  [5] knitr_1.49        htmltools_0.5.8.1 rmarkdown_2.29    cli_3.6.3        </span></span>
+<span id="cb13-27"><a href="#cb13-27" tabindex="-1"></a><span class="co">#&gt;  [9] compiler_4.4.2    httr_1.4.7        rstudioapi_0.17.1 tools_4.4.2      </span></span>
+<span id="cb13-28"><a href="#cb13-28" tabindex="-1"></a><span class="co">#&gt; [13] curl_6.1.0        evaluate_1.0.3    yaml_2.3.10       rlang_1.1.4      </span></span>
+<span id="cb13-29"><a href="#cb13-29" tabindex="-1"></a><span class="co">#&gt; [17] jsonlite_1.8.9</span></span></code></pre></div>
 </div>
 
   </main><aside class="col-md-3"><div class="links">
