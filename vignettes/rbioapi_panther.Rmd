@@ -20,15 +20,17 @@ vignette: >
 ---
 
 ```{r message=FALSE, include=FALSE, results="hide", setup, echo=FALSE}
-knitr::opts_chunk$set(echo = TRUE,
-                      eval = TRUE,
-                      message = FALSE,
-                      warning = FALSE,
-                      collapse = TRUE,
-                      tidy = FALSE,
-                      cache = FALSE,
-                      dev = "png",
-                      comment = "#>")
+knitr::opts_chunk$set(
+  echo = TRUE,
+  eval = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  collapse = TRUE,
+  tidy = FALSE,
+  cache = FALSE,
+  dev = "png",
+  comment = "#>"
+)
 library(rbioapi)
 rba_options(timeout = 30, skip_error = TRUE)
 ```
@@ -79,11 +81,15 @@ annots <- rba_panther_info(what = "datasets")
 
 ```{r enrich_available_annotations_results, echo=FALSE}
 if (is.data.frame(annots)) {
-  DT::datatable(data = annots,
-              options = list(scrollX = TRUE, 
-                             paging = TRUE,
-                             fixedHeader = TRUE,
-                             keys = TRUE))
+  DT::datatable(
+    data = annots,
+    options = list(
+      scrollX = TRUE, 
+      paging = TRUE,
+      fixedHeader = TRUE,
+      keys = TRUE
+    )
+  )
 } else {
   print("Vignette building failed. It is probably because the web service was down during the building.")
 }
@@ -107,15 +113,18 @@ Now, suppose we want to perform an over-representation analysis against the 'GO 
 
 ```{r rba_panther_overrep, message=TRUE}
 # Create a variable to store the genes vector
-my_genes_vec <- c("p53", "BRCA1", "cdk2", "Q99835", "CDC42",
-                  "CDK1","KIF23","PLK1", "RAC2","RACGAP1","RHOA",
-                  "RHOB", "PHF14", "RBM3", "MSL1")
+my_genes_vec <- c(
+  "p53", "BRCA1", "cdk2", "Q99835", "CDC42", "CDK1","KIF23","PLK1",
+  "RAC2","RACGAP1","RHOA", "RHOB", "PHF14", "RBM3", "MSL1"
+)
 
 # Submit the analysis request.
-enriched <- rba_panther_enrich(genes = my_genes_vec,
-                               organism = 9606,
-                               annot_dataset = "GO:0008150",
-                               cutoff = 0.05)
+enriched <- rba_panther_enrich(
+  genes = my_genes_vec,
+  organism = 9606,
+  annot_dataset = "GO:0008150",
+  cutoff = 0.05
+)
 
 # Note that we didn't supply the `test_type` parameter.
 # In this case, the function will default to using Fisher's exact test # (i.e. `test_type = "FISHER"`).
@@ -124,12 +133,16 @@ enriched <- rba_panther_enrich(genes = my_genes_vec,
 
 ```{r rba_panther_overrep_results, echo=FALSE}
 if (utils::hasName(enriched, "result") && is.data.frame(enriched$result)) {
-  DT::datatable(data = enriched$result,
-              options = list(scrollX = TRUE, 
-                             paging = TRUE,
-                             fixedHeader = TRUE,
-                             keys = TRUE,
-                             pageLength = 10))
+  DT::datatable(
+    data = enriched$result,
+    options = list(
+      scrollX = TRUE, 
+      paging = TRUE,
+      fixedHeader = TRUE,
+      keys = TRUE,
+      pageLength = 10
+    )
+  )
 } else {
   print("Vignette building failed. It is probably because the web service was down during the building.")
 }
@@ -144,18 +157,21 @@ To do so, the only change will be to supply a data frame to the `genes` paramete
 ```{r rba_panther_enrich, eval=FALSE}
 # Create a variable to store the data frame
 my_genes_df <- data.frame(
-  genes = c("p53", "BRCA1", "cdk2", "Q99835", "CDC42",
-                  "CDK1","KIF23","PLK1", "RAC2","RACGAP1","RHOA",
-                  "RHOB", "PHF14", "RBM3", "MSL1"),
+  genes = c(
+    "p53", "BRCA1", "cdk2", "Q99835", "CDC42", "CDK1","KIF23","PLK1",
+    "RAC2","RACGAP1","RHOA", "RHOB", "PHF14", "RBM3", "MSL1"
+  ),
   ## generate random expression values
   expression = runif(15, 0, 10) 
 )
 
 # Submit the analysis request.
-enriched <- rba_panther_enrich(genes = my_genes_df,
-                               organism = 9606,
-                               annot_dataset = "GO:0008150",
-                               cutoff = 0.05)
+enriched <- rba_panther_enrich(
+  genes = my_genes_df,
+  organism = 9606,
+  annot_dataset = "GO:0008150",
+  cutoff = 0.05
+)
 
 # Note that we didn't supply the `test_type` parameter.
 # In this case, the function will default to Mann-Whitney U Test
@@ -165,6 +181,8 @@ enriched <- rba_panther_enrich(genes = my_genes_df,
 ```
 
 **Please Note:** Other services supported by rbioapi also provide Over-representation analysis tools. Please see the vignette article [Do with rbioapi: Over-Representation (Enrichment) Analysis in R](rbioapi_do_enrich.html) ([link to the documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html)) for an in-depth review.
+
+------------------------------------------------------------------------
 
 # Tree grafter {#tree-grafter}
 

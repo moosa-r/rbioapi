@@ -20,15 +20,17 @@ vignette: >
 ---
 
 ```{r message=FALSE, include=FALSE, results="hide", setup, echo=FALSE}
-knitr::opts_chunk$set(echo = TRUE,
-                      eval = TRUE,
-                      message = FALSE,
-                      warning = FALSE,
-                      collapse = TRUE,
-                      tidy = FALSE,
-                      cache = FALSE,
-                      dev = "png",
-                      comment = "#>")
+knitr::opts_chunk$set(
+  echo = TRUE,
+  eval = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  collapse = TRUE,
+  tidy = FALSE,
+  cache = FALSE,
+  dev = "png",
+  comment = "#>"
+)
 library(rbioapi)
 rba_options(timeout = 30, skip_error = TRUE)
 ```
@@ -56,6 +58,7 @@ In addition to the latest JASPAR database release (2020), other active releases 
 ```{r release}
 ## Call the function without any arguments to get a list of releases
 releases <- rba_jaspar_releases()
+
 ## Supply a release number for details:
 release_7_info <- rba_jaspar_releases(7)
 ```
@@ -121,8 +124,10 @@ FOXP3_matrices <- rba_jaspar_matrix_search(term = "FOXP3")
 zipper_matrices <- rba_jaspar_matrix_search(tf_class = "Zipper-Type")
 
 ## Transcription factors of Zipper-Type Class in PBM collection
-zipper_pbm_matrices <- rba_jaspar_matrix_search(tf_class = "Zipper-Type",
-                                                collection = "PBM")
+zipper_pbm_matrices <- rba_jaspar_matrix_search(
+  tf_class = "Zipper-Type",
+  collection = "PBM"
+)
 ```
 
 ## List Matrix Profiles Associated to a Base identifier {#list-matrix-profiles-associated-to-a-base-identifier}
@@ -166,20 +171,28 @@ JASPAR provides position frequency matrices (PFM) formatted as **Raw PFM**, **JA
 
 ```{r matrix_save, eval=FALSE}
 ## Different wqays in which you can save the matrix file:
-meme_matrix1 <- rba_jaspar_matrix(matrix_id = "MA0600.2",
-                                  file_format = "meme")
+meme_matrix1 <- rba_jaspar_matrix(
+  matrix_id = "MA0600.2",
+  file_format = "meme"
+)
 
-meme_matrix2 <- rba_jaspar_matrix(matrix_id = "MA0600.2",
-                                  file_format = "meme",
-                                  save_to = "my_matrix.meme")
+meme_matrix2 <- rba_jaspar_matrix(
+  matrix_id = "MA0600.2",
+  file_format = "meme",
+  save_to = "my_matrix.meme"
+)
 
-meme_matrix3 <- rba_jaspar_matrix(matrix_id = "MA0600.2",
-                                  file_format = "meme",
-                                  save_to = "c:/rbioapi")
+meme_matrix3 <- rba_jaspar_matrix(
+  matrix_id = "MA0600.2",
+  file_format = "meme",
+  save_to = "c:/rbioapi"
+)
 
-meme_matrix4 <- rba_jaspar_matrix(matrix_id = "MA0600.2",
-                                  file_format = "meme",
-                                  save_to = "c:/rbioapi/my_matrix.meme")
+meme_matrix4 <- rba_jaspar_matrix(
+  matrix_id = "MA0600.2",
+  file_format = "meme",
+  save_to = "c:/rbioapi/my_matrix.meme"
+)
 ```
 
 ## Get Binding Sites of a Matrix Profiles {#get-binding-sites-of-a-matrix-profiles}
@@ -217,6 +230,7 @@ insects_tffms <- rba_jaspar_tffm_search(tax_group = "insects")
 ```{r tffm}
 ## Now that you have a TFFM ID, you can retrieve it
 TFFM0056 <- rba_jaspar_tffm("TFFM0056.3")
+
 str(TFFM0056)
 ```
 

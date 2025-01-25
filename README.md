@@ -1,9 +1,7 @@
 rbioapi: User-Friendly R Interface to Biologic Web Services’ API
 ================
 Moosa Rezwani
-2023-07-27
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+2025-01-26
 
 # <img src="man/figures/logo.svg" align="right" width="200"/>
 
@@ -68,10 +66,10 @@ Only on Github (Developmental) version:
 
 1.  currently none
 
-Each of the services has its dedicated vignette article. However, In
-this article, I will write about the general framework of rbioapi. Make
-sure to check the vignette article of each service to learn more about
-how to use them.
+Each of the services has its dedicated vignette article. In this
+article, I will write about the general framework of rbioapi. Make sure
+to check the vignette article of each service to learn more about how to
+use them.
 
 **Note That:** rbioapi is an ongoing project. New databases and services
 will be implemented periodically in order to gradually make the package
@@ -83,18 +81,18 @@ will appreciate any suggestions.
 
 # How to install?
 
-You can install the stable release version of
-[rbioapi](rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API")
+You can install the [stable release version of
+rbioapi](https://cran.r-project.org/package=rbioapi "rbioapi: User-Friendly R Interface to Biologic Web Services' API")
 from
-[CRAN](https://cran.r-project.org/package=rbioapi "rbioapi page on CRAN (The Comprehensive R Archive Network)")
+[CRAN](https://cran.r-project.org/ "The Comprehensive R Archive Network")
 with:
 
 ``` r
 install.packages("rbioapi")
 ```
 
-However, the CRAN version is released at most once every 1-2 months, You
-can install the most recent (development) version from
+However, the CRAN version is released at longer intervals, You can
+install the most recent -development- version from
 [GitHub](https://github.com/moosa-r/rbioapi/ "rbioapi repository on GitHub")
 with:
 
@@ -111,8 +109,7 @@ library(rbioapi)
 
 # Naming conventions
 
-To make the namespace more organized, functions has been named with the
-following pattern:
+To keep the namespace organized, functions names follow this pattern:
 
     rba_[service_name]_[resource_name]
 
@@ -124,10 +121,10 @@ version resource.
 rba_string_version()
 #> Retrieving the STRING database version and address used by rbioapi.
 #> $string_version
-#> [1] "11.5"
+#> [1] "12.0"
 #> 
 #> $stable_address
-#> [1] "https://version-11-5.string-db.org"
+#> [1] "https://version-12-0.string-db.org"
 ```
 
 Thus, to this version, rbioapi function will have one of the following
@@ -146,14 +143,14 @@ and `rba_pages()`; these are helper functions. More on that later.
 
 # Changing the options
 
-To provide more control, multiple options have been implemented. See the
-manual of `rba_options()` function for a full description of available
-options. In short, some of the options will govern rbioapi’s connection
-with servers (e.g. timeout, retry) and some of the options will modify
-your experience with rbioapi (e.g. verbose, diagnostics, save_file).
-There are two ways that you may use to change any option. Also, you can
-get table of available rbioapi options and their current values by
-calling `rba_options()`without any argument:
+To give users greater control, rbioapi offers multiple configurable
+options. See the manual of `rba_options()` function for a full
+description of available options. In short, some of the options will
+govern rbioapi’s connection with servers (e.g. timeout, retry) and some
+of the options will modify your experience with rbioapi (e.g. verbose,
+diagnostics, save_file). There are two ways that you may use to change
+any option. Also, you can get table of available rbioapi options and
+their current values by calling `rba_options()`without any argument:
 
 ``` r
 rba_options()
@@ -182,6 +179,7 @@ could globally alter that rbioapi option. for example:
 ``` r
 rba_options(save_file = TRUE)
 ## From now on, the raw file of server's response will be saved to your working directory.
+
 rba_options(verbose = FALSE)
 ## From now on, the package will be quiet.
 ```
@@ -196,18 +194,34 @@ particular function call. For example:
 
 ``` r
 ## Save the server's raw response file:
-x <- rba_reactome_species(only_main = TRUE, save_file = "reactome_species.json")
+x <- rba_reactome_species(
+  only_main = TRUE,
+  save_file = "reactome_species.json"
+)
+
 ## Also, in the case of connection failure, retry up to 10 times:
-x <- rba_reactome_species(only_main = TRUE,
-                         save_file = "reactome_species.json", retry_max = 10)
+x <- rba_reactome_species(
+  only_main = TRUE,
+  save_file = "reactome_species.json",
+  retry_max = 10
+)
 ```
 
 ``` r
-## Run these codes in your own R session to see the difference.
+## Run these codes in your own R session to see the difference:
+
 ## show internal diagnostics boring details
-x <- rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC", diagnostics = TRUE)
+x <- rba_uniprot_proteins_crossref(
+  db_id = "CD40",
+  db_name = "HGNC",
+  diagnostics = TRUE
+)
+
 ## The next function you call, will still use the default rbioapi options
-x <- rba_uniprot_proteins_crossref(db_id = "CD40", db_name = "HGNC")
+x <- rba_uniprot_proteins_crossref(
+  db_id = "CD40",
+  db_name = "HGNC"
+)
 ```
 
 # Connection test
@@ -261,16 +275,19 @@ returns a paginated response. For example, if we search for nodes that
 contain “adenovirus”, there is a large number of hits:
 
 ``` r
-adeno <- rba_uniprot_taxonomy_name(name = "adenovirus",
-                                   search_type = "contain",
-                                   page_number = 1)
+adeno <- rba_uniprot_taxonomy_name(
+  name = "adenovirus",
+  search_type = "contain",
+  page_number = 1
+)
+
 str(adeno, max.level = 2)
 #> List of 2
 #>  $ taxonomies:'data.frame':  200 obs. of  8 variables:
 #>   ..$ taxonomyId    : int [1:200] 10509 10510 10511 10512 10513 10514 10515 10519 10521 10522 ...
 #>   ..$ mnemonic      : chr [1:200] "9ADEN" "ADEB3" "ADEB7" "9ADEN" ...
 #>   ..$ scientificName: chr [1:200] "Mastadenovirus" "Bovine adenovirus B serotype 3" "Bovine adenovirus 7" "Canine adenovirus 1" ...
-#>   ..$ rank          : chr [1:200] "genus" "no rank" "no rank" "no rank" ...
+#>   ..$ rank          : chr [1:200] "genus" "serotype" "serotype" "serotype" ...
 #>   ..$ superregnum   : chr [1:200] "V" "V" "V" "V" ...
 #>   ..$ hidden        : logi [1:200] FALSE TRUE TRUE TRUE TRUE TRUE ...
 #>   ..$ commonName    : chr [1:200] NA "BAdV-3" "BAdV-7" NA ...
@@ -278,7 +295,7 @@ str(adeno, max.level = 2)
 #>  $ pageInfo  :List of 3
 #>   ..$ resultsPerPage: int 200
 #>   ..$ currentPage   : int 1
-#>   ..$ totalRecords  : int 985
+#>   ..$ totalRecords  : int 1102
 ```
 
 As you can see, the server has returned the first page of the response,
@@ -287,9 +304,16 @@ the “page_number” argument within each call, or simply use `rba_pages()`
 as demonstrated below:
 
 ``` r
-adeno_pages = rba_pages(quote(rba_uniprot_taxonomy_name(name = "adenovirus",
-                                   search_type = "contain",
-                                   page_number = "pages:1:3")))
+adeno_pages = rba_pages(
+  quote(
+    rba_uniprot_taxonomy_name(
+      name = "adenovirus",
+      search_type = "contain",
+      page_number = "pages:1:3"
+    )
+  )
+)
+
 ## You can inspect the structure of the response:
 str(adeno_pages, max.level = 2)
 #> List of 3
@@ -300,7 +324,7 @@ str(adeno_pages, max.level = 2)
 #>   ..$ taxonomies:'data.frame':   200 obs. of  8 variables:
 #>   ..$ pageInfo  :List of 3
 #>  $ page_3:List of 2
-#>   ..$ taxonomies:'data.frame':   200 obs. of  8 variables:
+#>   ..$ taxonomies:'data.frame':   200 obs. of  6 variables:
 #>   ..$ pageInfo  :List of 3
 ```
 
@@ -317,7 +341,7 @@ As you can see, what we have done was:
 
 rbioapi is an interface between you and other databases and services.
 Thus, if you have used rbioapi in published research, **in addition to
-kindly citing rbioapi, <u>*make sure to fully and properly cite the
+kindly citing rbioapi, <u>*ensure to fully and properly cite the
 databases/services you have used*</u>**. Suggested citations have been
 added in the functions’ manuals, under the “references” section;
 Nevertheless, it is the user’s responsibility to check for proper
@@ -334,20 +358,21 @@ used.
 ## How to cite the databases and web services
 
 - [How to cite
-  Enrichr](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html#citations "How to cite Enrichr"). (See
-  on [Enrichr website](https://maayanlab.cloud/Enrichr/help#terms))
+  Enrichr](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html#citations "How to cite Enrichr").
+  (See on [Enrichr website](https://maayanlab.cloud/Enrichr/help#terms))
 
 - [How to cite
-  JASPAR](https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html#citations "How to cite JASPAR"). (See on
-  [JASPAR website](https://jaspar.elixir.no/faq/))
+  JASPAR](https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html#citations "How to cite JASPAR").
+  (See on [JASPAR website](https://jaspar.elixir.no/faq/))
 
-- [How to cite miEAA](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html#citations "How to cite miEAA").
+- [How to cite
+  miEAA](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html#citations "How to cite miEAA").
   (See on [miEAA
   website](https://ccb-compute2.cs.uni-saarland.de/mieaa2))
 
 - [How to cite
-  PANTHER](https://rbioapi.moosa-r.com/articles/rbioapi_panther.html#citations "How to cite PANTHER"). (See
-  on [PANTHER
+  PANTHER](https://rbioapi.moosa-r.com/articles/rbioapi_panther.html#citations "How to cite PANTHER").
+  (See on [PANTHER
   website](https://www.pantherdb.org/publications.jsp#HowToCitePANTHER))
 
 - [How to cite
@@ -355,13 +380,13 @@ used.
   (See on [Reactome website](https://reactome.org/cite))
 
 - [How to cite
-  STRING](https://rbioapi.moosa-r.com/articles/rbioapi_string.html#citations "How to cite STRING"). (See on
-  [STRING
+  STRING](https://rbioapi.moosa-r.com/articles/rbioapi_string.html#citations "How to cite STRING").
+  (See on [STRING
   website](https://string-db.org/cgi/about?footer_active_subpage=references))
 
 - [How to cite
-  UniProt](https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html#citations "How to cite UniProt"). (See
-  on [UniProt website](https://www.uniprot.org/help/publications))
+  UniProt](https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html#citations "How to cite UniProt").
+  (See on [UniProt website](https://www.uniprot.org/help/publications))
 
 ## Code of conduct
 
@@ -399,10 +424,10 @@ We are also adding vignette articles focusing on tasks and workflows:
 1.  [Do with rbioapi: Enrichment (Over-Representation) Analysis in
     R](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html "Do with rbioapi: Enrichment (Over-Representation) Analysis in R")
 
-# Design philosophy of rbioapi
+# Design of rbioapi
 
-To learn more about the design philosophy and the concepts behind
-developing rbioapi, please read our paper in Bioinformatics:
+To learn more about the design and concepts behind developing rbioapi,
+please read our paper in Bioinformatics:
 
 [rbioapi: user-friendly R interface to biologic web services’
 API](https://doi.org/10.1093/bioinformatics/btac172 "Rezwani, M., Pourfathollah, A. A., & Noorbakhsh, F. (2022). rbioapi: user-friendly R interface to biologic web services’ API. Bioinformatics, 38(10), 2952–2953. doi: 10.1093/bioinformatics/btac172")
@@ -417,9 +442,9 @@ API](https://doi.org/10.1093/bioinformatics/btac172 "Rezwani, M., Pourfathollah,
 
 # Session info
 
-    #> R version 4.3.1 (2023-06-16 ucrt)
-    #> Platform: x86_64-w64-mingw32/x64 (64-bit)
-    #> Running under: Windows 11 x64 (build 22621)
+    #> R version 4.4.2 (2024-10-31 ucrt)
+    #> Platform: x86_64-w64-mingw32/x64
+    #> Running under: Windows 11 x64 (build 26100)
     #> 
     #> Matrix products: default
     #> 
@@ -438,11 +463,11 @@ API](https://doi.org/10.1093/bioinformatics/btac172 "Rezwani, M., Pourfathollah,
     #> [1] stats     graphics  grDevices utils     datasets  methods   base     
     #> 
     #> other attached packages:
-    #> [1] rbioapi_0.7.9
+    #> [1] rbioapi_0.8.2
     #> 
     #> loaded via a namespace (and not attached):
-    #>  [1] digest_0.6.33     R6_2.5.1          fastmap_1.1.1     xfun_0.39        
-    #>  [5] knitr_1.43        htmltools_0.5.5   rmarkdown_2.23    cli_3.6.1        
-    #>  [9] compiler_4.3.1    httr_1.4.6        rstudioapi_0.15.0 tools_4.3.1      
-    #> [13] curl_5.0.1        evaluate_0.21     yaml_2.3.7        rlang_1.1.1      
-    #> [17] jsonlite_1.8.7
+    #>  [1] digest_0.6.37     R6_2.5.1          fastmap_1.2.0     xfun_0.50        
+    #>  [5] knitr_1.49        htmltools_0.5.8.1 rmarkdown_2.29    cli_3.6.3        
+    #>  [9] compiler_4.4.2    httr_1.4.7        rstudioapi_0.17.1 tools_4.4.2      
+    #> [13] curl_6.1.0        evaluate_1.0.3    yaml_2.3.10       rlang_1.1.4      
+    #> [17] jsonlite_1.8.9

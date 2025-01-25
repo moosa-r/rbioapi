@@ -20,15 +20,17 @@ vignette: >
 ---
 
 ```{r message=FALSE, include=FALSE, results="hide", setup, echo=FALSE}
-knitr::opts_chunk$set(echo = TRUE,
-                      eval = TRUE,
-                      message = FALSE,
-                      warning = FALSE,
-                      collapse = TRUE,
-                      tidy = FALSE,
-                      cache = FALSE,
-                      dev = "png",
-                      comment = "#>")
+knitr::opts_chunk$set(
+  echo = TRUE,
+  eval = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  collapse = TRUE,
+  tidy = FALSE,
+  cache = FALSE,
+  dev = "png",
+  comment = "#>"
+)
 library(rbioapi)
 rba_options(timeout = 30, skip_error = TRUE)
 ```
@@ -56,28 +58,39 @@ Although STRING API resources will handle and recognize a variety of identifiers
 
 ```{r rba_string_map_ids}
 ## 1 We create a variable with our genes' NCBI IDs
-proteins <- c("p53", "BRCA1", "cdk2", "Q99835", "CDC42","CDK1","KIF23",
-              "PLK1","RAC2","RACGAP1","RHOA","RHOB", "PHF14", "RBM3")
+proteins <- c(
+  "p53", "BRCA1", "cdk2", "Q99835", "CDC42","CDK1","KIF23",
+  "PLK1","RAC2","RACGAP1","RHOA","RHOB", "PHF14", "RBM3"
+)
+
 ## 2 Now we map our protein IDs
-proteins_mapped <- rba_string_map_ids(ids = proteins,
-                                      species = 9606)
+proteins_mapped <- rba_string_map_ids(ids = proteins, species = 9606)
+
 ## 3 What we need and will use for the rest of this vignette is the `stringId` column
 ```
 
 ```{r rba_string_map_ids_results, echo=FALSE}
 if (is.data.frame(proteins_mapped)) {
-  DT::datatable(data = proteins_mapped,
-              options = list(scrollX = TRUE, 
-                             paging = TRUE,
-                             fixedHeader = TRUE,
-                             keys = TRUE,
-                             pageLength = 5))
-  proteins_mapped <- proteins_mapped$stringId
+  DT::datatable(
+    data = proteins_mapped,
+    options = list(
+      scrollX = TRUE, 
+      paging = TRUE,
+      fixedHeader = TRUE,
+      keys = TRUE,
+      pageLength = 5
+    )
+  )
 } else {
   print("Vignette building failed. It is probably because the web service was down during the building.")
 }
 ```
 
+```{r rba_string_map_ids2, eval=is.data.frame(proteins_mapped) && hasName(proteins_mapped, "stringId")}
+
+## 3 What we need and will use for the rest of this vignette is the `stringId` column
+proteins_mapped <- proteins_mapped$stringId
+```
 ------------------------------------------------------------------------
 
 # Get interaction network of a protein set {#get-interaction-network-of-a-protein-set}
@@ -87,19 +100,25 @@ You can retrieve a list of interactions that the proteins in your set have with 
 See the 'values' section `rba_string_interactions_network` function's manual for information on the returned columns.
 
 ```{r rba_string_interactions_network}
-int_net <- rba_string_interactions_network(ids = proteins_mapped,
-                                          species = 9606,
-                                          required_score = 500)
+int_net <- rba_string_interactions_network(
+  ids = proteins_mapped,
+  species = 9606,
+  required_score = 500
+)
 ```
 
 ```{r rba_string_interactions_network_results, echo=FALSE}
 if (is.data.frame(int_net)) {
-  DT::datatable(data = int_net,
-              options = list(scrollX = TRUE, 
-                             paging = TRUE,
-                             fixedHeader = TRUE,
-                             keys = TRUE,
-                             pageLength = 5))
+  DT::datatable(
+    data = int_net,
+    options = list(
+      scrollX = TRUE, 
+      paging = TRUE,
+      fixedHeader = TRUE,
+      keys = TRUE,
+      pageLength = 5
+    )
+  )
 } else {
   print("Vignette building failed. It is probably because the web service was down during the building.")
 }
@@ -115,19 +134,25 @@ To do that, we can use `rba_string_interaction_partners`:
 
 ```{r rba_string_interaction_partners}
 ## Although we supply only one protein ID here (CD40 protein), you can provide a vector of proteins as the input
-int_partners <- rba_string_interaction_partners(ids = "9606.ENSP00000361359",
-                                               species = 9606,
-                                               required_score = 900)
+int_partners <- rba_string_interaction_partners(
+  ids = "9606.ENSP00000361359",
+  species = 9606,
+  required_score = 900
+)
 ```
 
 ```{r rba_string_interaction_partners_restults, echo=FALSE}
 if (is.data.frame(int_partners)) {
-  DT::datatable(data = int_partners,
-              options = list(scrollX = TRUE, 
-                             paging = TRUE,
-                             fixedHeader = TRUE,
-                             keys = TRUE,
-                             pageLength = 5))
+  DT::datatable(
+    data = int_partners,
+    options = list(
+      scrollX = TRUE, 
+      paging = TRUE,
+      fixedHeader = TRUE,
+      keys = TRUE,
+      pageLength = 5
+    )
+  )
 } else {
   print("Vignette building failed. It is probably because the web service was down during the building.")
 }
@@ -141,17 +166,19 @@ Let's go back to the interaction network. As you must have seen in the STRING we
 
 ```{r rba_string_network_image_ex1, fig.show='hide'}
 ## Example 1:
-graph_1 <- rba_string_network_image(ids = proteins_mapped,
-                                    image_format = "image",
-                                    species = 9606,
-                                    save_image = FALSE,
-                                    required_score = 500,
-                                    network_flavor = "confidence")
+graph_ppi1 <- rba_string_network_image(
+  ids = proteins_mapped,
+  image_format = "image",
+  species = 9606,
+  save_image = FALSE,
+  required_score = 500,
+  network_flavor = "confidence"
+)
 ```
 
 ```{r rba_string_network_image_ex1_image, echo=FALSE, fig.cap="Network images - Example 1", fig.align='center', fig.width=7}
-if (is.array(graph_1)) {
-  grid::grid.raster(graph_1, just = "center")
+if (is.array(graph_ppi1)) {
+  grid::grid.raster(graph_ppi1, just = "center")
 } else {
   print("Vignette building failed. It is probably because the web service was down during the building.")
 }
@@ -159,19 +186,21 @@ if (is.array(graph_1)) {
 
 ```{r rba_string_network_image_ex2, fig.show='hide'}
 ## Example 2:
-graph_2 <- rba_string_network_image(ids = proteins_mapped,
-                                    image_format = "image",
-                                    species = 9606,
-                                    save_image = FALSE,
-                                    required_score = 500,
-                                    add_color_nodes = 5,
-                                    add_white_nodes = 5,
-                                    network_flavor = "actions")
+graph_ppi2 <- rba_string_network_image(
+  ids = proteins_mapped,
+  image_format = "image",
+  species = 9606,
+  save_image = FALSE,
+  required_score = 500,
+  add_color_nodes = 5,
+  add_white_nodes = 5,
+  network_flavor = "actions"
+)
 ```
 
 ```{r rba_string_network_image_ex2_image, echo=FALSE, fig.cap="Network images - Example 2", fig.align='center', fig.width=7}
-if (is.array(graph_2)) {
-  grid::grid.raster(graph_2, just = "center")
+if (is.array(graph_ppi2)) {
+  grid::grid.raster(graph_ppi2, just = "center")
 } else {
   print("Vignette building failed. It is probably because the web service was down during the building.")
 }
@@ -179,17 +208,19 @@ if (is.array(graph_2)) {
 
 ------------------------------------------------------------------------
 
-# Enrichment using STRING {#enrichment-using-string}
+# Enrichment analysis using STRING {#enrichment-using-string}
 
-STRING let you perform two types of enrichments. See [STRING's paper](https://doi.org/10.1093/nar/gks1094 "STRING v9.1: protein-protein interaction networks, with increased coverage and integration") for more information.
+STRING let you perform two types of enrichment analysis. See [STRING's paper](https://doi.org/10.1093/nar/gks1094 "STRING v9.1: protein-protein interaction networks, with increased coverage and integration") for more information.
 
 ## Functional enrichment {#functional-enrichment}
 
 The first type is the conventional type, which statistically tests your supplied gene sets against some sets of annotation. Currently, STRING supports Gene Ontology, KEGG pathways, UniProt Keywords, PubMed publications, Pfam domains, InterPro domains, and SMART domains. ([source](https://version11.string-db.org/help/api/#getting-functional-enrichment "STRING API - Getting functional enrichment")).
 
 ```{r rba_string_enrichment}
-enriched <- rba_string_enrichment(ids = proteins_mapped,
-                                  species = 9606)
+enriched <- rba_string_enrichment(
+  ids = proteins_mapped,
+  species = 9606
+)
 ```
 
 As usual, we inspect the output using the `str()` function. As you can see below, the enrichment results of each category can be found as the returned list's elements.
@@ -202,12 +233,16 @@ Let us see the "KEGG" results as an example. Below, we can see which terms of th
 
 ```{r rba_string_enrichment_restults, echo=FALSE}
 if (utils::hasName(enriched, "KEGG") && is.data.frame(enriched$KEGG)) {
-  DT::datatable(data = enriched$KEGG,
-              options = list(scrollX = TRUE, 
-                             paging = TRUE,
-                             fixedHeader = TRUE,
-                             keys = TRUE,
-                             pageLength = 5))
+  DT::datatable(
+    data = enriched$KEGG,
+    options = list(
+      scrollX = TRUE, 
+      paging = TRUE,
+      fixedHeader = TRUE,
+      keys = TRUE,
+      pageLength = 5
+    )
+  )
 } else {
   print("Vignette building failed. It is probably because the web service was down during the building.")
 }
@@ -221,17 +256,19 @@ In addition to a data frame, you can also get a plot summarizing the enrichment 
 
 
 ```{r rba_string_enrichment_plot, fig.show='hide'}
-graph_3 <- rba_string_enrichment_image(ids = proteins_mapped,
-                                       species = 9606,
-                                       category = "KEGG",
-                                       image_format = "image",
-                                       save_image = FALSE,
-                                       group_by_similarity = 0.6)
+graph_enrich <- rba_string_enrichment_image(
+  ids = proteins_mapped,
+  species = 9606,
+  category = "KEGG",
+  image_format = "image",
+  save_image = FALSE,
+  group_by_similarity = 0.6
+)
 ```
 
 ```{r rba_string_enrichment_plot_image, echo=FALSE, fig.cap="Visualization of enrichment analysis results", fig.align='center', fig.width=7}
-if (is.array(graph_3)) {
-  grid::grid.raster(graph_3, just = "center")
+if (is.array(graph_enrich)) {
+  grid::grid.raster(graph_enrich, just = "center")
 } else {
   print("Vignette building failed. It is probably because the web service was down during the building.")
 }
@@ -242,8 +279,10 @@ if (is.array(graph_3)) {
 Even without incorporating annotation data, STRING can calculate if your proteins are functionally related. Briefly, STRING accomplishes this by comparing the interactions' distribution in your protein-set to the interactions' distribution in the proteome. Read [STRING's paper](https://doi.org/10.1093/nar/gks1094 "STRING v9.1: protein-protein interaction networks, with increased coverage and integration") for more information.
 
 ```{r rba_string_enrichment_ppi}
-rba_string_enrichment_ppi(ids = proteins_mapped,
-                          species = 9606)
+rba_string_enrichment_ppi(
+  ids = proteins_mapped,
+  species = 9606
+)
 ```
 
 ------------------------------------------------------------------------
@@ -253,10 +292,12 @@ rba_string_enrichment_ppi(ids = proteins_mapped,
 As you have seen above, STRING maps the proteins to multiple annotation sources. You can obtain any annotation associated with your proteins without performing enrichment analysis and retrieving just the significant portion.
 
 ```{r rba_string_annotations, eval=FALSE}
-annotations <- rba_string_annotations(ids = "9606.ENSP00000269305",
-                                     species = 9606)
+annotations <- rba_string_annotations(
+  ids = "9606.ENSP00000269305",
+  species = 9606
+)
 
-## This function returns large results, so the results was not shown in this vignette.
+## This function returns large results, so the results are not shown in this vignette.
 ```
 
 ------------------------------------------------------------------------
