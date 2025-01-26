@@ -234,8 +234,8 @@ the next step.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">list_id</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 2</span></span>
-<span><span class="co">#&gt;  $ shortId   : chr "2adcf6ccda127860ad2fdfc61e9baa2a"</span></span>
-<span><span class="co">#&gt;  $ userListId: int 87575659</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ shortId   : chr "55068a1dd8c3229c01b07cfb9ecdbcd5"</span></span>
+<span><span class="co">#&gt;  $ userListId: int 87577011</span></span></code></pre></div>
 <p>Finally, we are ready to submit the enrichment analysis request to
 Enrichr. Same as explained above for the wrapper function
 <code><a href="../reference/rba_enrichr.html">rba_enrichr()</a></code>, we can supply the “gene_set_library”
@@ -301,7 +301,10 @@ background genes are specified.</p>
 <span><span class="co"># Step 1: Upload the target gene list to speedrichr</span></span>
 <span><span class="co"># Note: Ensure `speedrichr = TRUE` is specified. Otherwise, it will not be </span></span>
 <span><span class="co">#       possible to use the background gene list later.</span></span>
-<span><span class="va">list_id_spdr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_enrichr_add_list.html">rba_enrichr_add_list</a></span><span class="op">(</span>gene_list <span class="op">=</span> <span class="va">genes</span>, speedrichr <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">list_id_spdr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_enrichr_add_list.html">rba_enrichr_add_list</a></span><span class="op">(</span></span>
+<span>  gene_list <span class="op">=</span> <span class="va">genes</span>,</span>
+<span>  speedrichr <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Step 2: Upload the background gene list</span></span>
 <span><span class="co"># Assume we have the background genes in the variable my_background_genes</span></span>
