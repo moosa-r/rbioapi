@@ -1,4 +1,43 @@
-# rbioapi 0.8.1 (Current CRAN version)
+# rbioapi 0.8.2 (Current CRAN version)
+
+* Update functions to the latest corresponding API endpoints:
+
+  * Added STRING function:
+  
+    rba_string_enrichment_image()
+    
+  * Updated Enrichr function:
+  
+    Added option to supply background genes
+    
+  * Updated PANTHER function:
+  
+    added option to supply data frame to the enrichment/over-representation function.
+
+  * Added UniProt functions:
+  
+    rba_uniprot_epitope(), rba_uniprot_epitope_search(),
+    rba_uniprot_coordinates_location_genome(), rba_uniprot_proteomics_hpp(),
+    rba_uniprot_proteomics_hpp_search(), rba_uniprot_proteomics_non_ptm(),
+    rba_uniprot_proteomics_non_ptm_search(), rba_uniprot_proteomics_ptm(),
+    rba_uniprot_proteomics_ptm_search(), rba_uniprot_proteomics_species(),
+    rba_uniprot_rna_edit(), rba_uniprot_rna_edit_search()
+  
+  * Deprecated UniProt functions:
+  
+    rba_uniprot_proteomics(), rba_uniprot_proteomics_search(),
+    rba_uniprot_ptm(), rba_uniprot_ptm_search()
+  
+  * New arguments added to existing UniProt functions:
+  
+    rba_uniprot_features_search(),
+    rba_uniprot_coordinates_location_protein(), rba_uniprot_features()
+
+* All scripts were reformatted to enhance readability.
+
+* Minor improvements and fixes.
+
+# rbioapi 0.8.1
 
 * Move to JASPAR 2024.
 
