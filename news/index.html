@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">rbioapi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +54,39 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.8.1" id="rbioapi-081-current-cran-version">rbioapi 0.8.1 (Current CRAN version)<a class="anchor" aria-label="anchor" href="#rbioapi-081-current-cran-version"></a></h2><p class="text-muted">CRAN release: 2024-03-30</p>
+<h2 class="pkg-version" data-toc-text="0.8.2" id="rbioapi-082-current-cran-version">rbioapi 0.8.2 (Current CRAN version)<a class="anchor" aria-label="anchor" href="#rbioapi-082-current-cran-version"></a></h2>
+<ul><li>
+<p>Update functions to the latest corresponding API endpoints:</p>
+<ul><li>
+<p>Added STRING function:</p>
+<p>rba_string_enrichment_image()</p>
+</li>
+<li>
+<p>Updated Enrichr function:</p>
+<p>Added option to supply background genes</p>
+</li>
+<li>
+<p>Updated PANTHER function:</p>
+<p>added option to supply data frame to the enrichment/over-representation function.</p>
+</li>
+<li>
+<p>Added UniProt functions:</p>
+<p>rba_uniprot_epitope(), rba_uniprot_epitope_search(), rba_uniprot_coordinates_location_genome(), rba_uniprot_proteomics_hpp(), rba_uniprot_proteomics_hpp_search(), rba_uniprot_proteomics_non_ptm(), rba_uniprot_proteomics_non_ptm_search(), rba_uniprot_proteomics_ptm(), rba_uniprot_proteomics_ptm_search(), rba_uniprot_proteomics_species(), rba_uniprot_rna_edit(), rba_uniprot_rna_edit_search()</p>
+</li>
+<li>
+<p>Deprecated UniProt functions:</p>
+<p>rba_uniprot_proteomics(), rba_uniprot_proteomics_search(), rba_uniprot_ptm(), rba_uniprot_ptm_search()</p>
+</li>
+<li>
+<p>New arguments added to existing UniProt functions:</p>
+<p>rba_uniprot_features_search(), rba_uniprot_coordinates_location_protein(), rba_uniprot_features()</p>
+</li>
+</ul></li>
+<li><p>All scripts were reformatted to enhance readability.</p></li>
+<li><p>Minor improvements and fixes.</p></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.8.1" id="rbioapi-081">rbioapi 0.8.1<a class="anchor" aria-label="anchor" href="#rbioapi-081"></a></h2><p class="text-muted">CRAN release: 2024-03-30</p>
 <ul><li><p>Move to JASPAR 2024.</p></li>
 <li><p>Minor improvements and fixes.</p></li>
 </ul></div>
