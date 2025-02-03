@@ -110,7 +110,8 @@ Sys.sleep(3)
 # Request the enrichment analysis by a specific library
 results_msig_hallmark <- rba_enrichr(
   gene_list = genes,
-  gene_set_library = "MSigDB_Hallmark_2020"
+  gene_set_library = "MSigDB_Hallmark_2020",
+  progress_bar = FALSE # to avoid printing issues in the vignette
 )
 ```
 
@@ -143,7 +144,8 @@ Sys.sleep(3)
 results_msig <- rba_enrichr(
   gene_list = genes,
   gene_set_library = "msig",
-  regex_library_name = TRUE
+  regex_library_name = TRUE,
+  progress_bar = FALSE # to avoid printing issues in the vignette
 )
 
 # You can drop `regex_library_name = TRUE`, as it is TRUE by default.
@@ -258,6 +260,9 @@ results_msig <- rba_enrichr(
 If you choose to follow the step-by-step approach, please note that Enrichr relies on an API back-end called [speedrichr](https://github.com/MaayanLab/speedrichr) to handle analysis with a background gene list. Therefore, when performing an analysis with background gene list, you must explicitly upload the target gene list to speedrichr. . Later steps will automatically interact with speedrichr as long as the relevant parameters for the background genes are specified.
 
 ```{r background_gene_list_approach2, eval=FALSE}
+
+# Assume we have the background genes in the variable my_background_genes
+
 # Create a vector with our genes' NCBI IDs
 genes <- c(
   "p53", "BRCA1", "cdk2", "Q99835", "CDC42","CDK1","KIF23","PLK1",

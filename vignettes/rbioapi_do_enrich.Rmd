@@ -131,7 +131,8 @@ While the only required argument of `rba_enrichr()` function is `gene_list`, her
 enrichr_enrich <- rba_enrichr(
   gene_list = covid_critical,
   organism = "human",
-  gene_set_library = "KEGG_2021_Human"
+  gene_set_library = "KEGG_2021_Human",
+  progress_bar = FALSE # to avoid printing issues in the vignette
 )
 ```
 
@@ -162,7 +163,8 @@ In the `gene_set_library` parameter, you can also provide multiple gene set libr
 enrichr_enrich_kegg <- rba_enrichr(
   gene_list = covid_critical,
   gene_set_library = "kegg",
-  regex_library_name = TRUE # default value
+  regex_library_name = TRUE, # default value
+  progress_bar = FALSE # to avoid printing issues in the vignette
 )
 ```
 
@@ -445,7 +447,7 @@ In addition to a data frame, you can also get a plot summarizing the enrichment 
 
 
 ```{r string_enrichment_plot, fig.show='hide'}
-graph_3 <- rba_string_enrichment_image(
+enrich_plot <- rba_string_enrichment_image(
   ids = covid_critical,
   species = 9606,
   category = "KEGG",
@@ -456,8 +458,8 @@ graph_3 <- rba_string_enrichment_image(
 ```
 
 ```{r string_enrichment_plot_image, echo=FALSE, fig.cap="Visualization of enrichment analysis results", fig.align='center', fig.width=7}
-if (is.array(graph_3)) {
-  grid::grid.raster(graph_3, just = "center")
+if (is.array(enrich_plot)) {
+  grid::grid.raster(enrich_plot, just = "center")
 } else {
   print("Vignette building failed. It is probably because the web service was down during the building.")
 }
