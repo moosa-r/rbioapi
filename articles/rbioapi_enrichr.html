@@ -93,7 +93,7 @@
                         <h4 data-toc-skip class="author">Moosa
 Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2025-01-27</h4>
+            <h4 data-toc-skip class="date">2025-02-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/master/vignettes/rbioapi_enrichr.Rmd" class="external-link"><code>vignettes/rbioapi_enrichr.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_enrichr.Rmd</code></div>
@@ -167,7 +167,8 @@ to specify the library (or libraries) to use. Here we demonstrate using
 <code class="sourceCode R"><span><span class="co"># Request the enrichment analysis by a specific library</span></span>
 <span><span class="va">results_msig_hallmark</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_enrichr.html">rba_enrichr</a></span><span class="op">(</span></span>
 <span>  gene_list <span class="op">=</span> <span class="va">genes</span>,</span>
-<span>  gene_set_library <span class="op">=</span> <span class="st">"MSigDB_Hallmark_2020"</span></span>
+<span>  gene_set_library <span class="op">=</span> <span class="st">"MSigDB_Hallmark_2020"</span>,</span>
+<span>  progress_bar <span class="op">=</span> <span class="cn">FALSE</span> <span class="co"># to avoid printing issues in the vignette</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-e5c8c404fe174e4c81bd" style="width:100%;height:auto;"></div>
 <script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18"],["Mitotic Spindle","G2-M Checkpoint","E2F Targets","Apoptosis","PI3K/AKT/mTOR  Signaling","UV Response Up","Apical Surface","TGF-beta Signaling","Myc Targets V2","Spermatogenesis","IL-2/STAT5 Signaling","TNF-alpha Signaling via NF-kB","Glycolysis","Allograft Rejection","Apical Junction","mTORC1 Signaling","Myc Targets V1","Epithelial Mesenchymal Transition"],["5/199","4/200","4/200","3/161","2/105","2/158","1/44","1/54","1/58","1/135","1/199","1/200","1/200","1/200","1/200","1/200","1/200","1/200"],[2.56816489767419e-07,1.215000145553094e-05,1.215000145553094e-05,0.0002169706135589574,0.002741529140779137,0.006086585361302025,0.03250762309645384,0.03975687424498529,0.04264235482763042,0.09663500980086953,0.1393349236139555,0.139986908731619,0.139986908731619,0.139986908731619,0.139986908731619,0.139986908731619,0.139986908731619,0.139986908731619],[4.622696815813541e-06,7.290000873318565e-05,7.290000873318565e-05,0.0009763677610153084,0.009869504906804891,0.01825975608390608,0.08359103081945272,0.08528470965526085,0.08528470965526085,0.139986908731619,0.139986908731619,0.139986908731619,0.139986908731619,0.139986908731619,0.139986908731619,0.139986908731619,0.139986908731619,0.139986908731619],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[51.00773195876289,36.71428571428572,36.71428571428572,31.37183544303797,29.69678864824496,19.55522682445759,33.12624584717608,26.86253369272237,24.97243107769424,10.58155650319829,7.138167388167388,7.101938262742283,7.101938262742283,7.101938262742283,7.101938262742283,7.101938262742283,7.101938262742283,7.101938262742283],[774.0374385221934,415.5389408534144,415.5389408534144,264.644918015469,175.1884666472352,99.76427591098042,113.499815495736,86.63093286520242,78.78570447797571,24.72713131619311,14.06843366455485,13.96387625016532,13.96387625016532,13.96387625016532,13.96387625016532,13.96387625016532,13.96387625016532,13.96387625016532],["CDC42;RACGAP1;PLK1;CDK1;KIF23","RACGAP1;PLK1;CDK1;KIF23","RACGAP1;PLK1;CDK1;BRCA1","CDK2;BRCA1;RHOB","CDK2;CDK1","CDK2;RHOB","BRCA1","RHOA","PLK1","CDK1","RHOB","RHOB","CDK1","BRCA1","RAC2","PLK1","CDK2","RHOB"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Term<\/th>\n      <th>Overlap<\/th>\n      <th>P.value<\/th>\n      <th>Adjusted.P.value<\/th>\n      <th>Old.P.value<\/th>\n      <th>Old.Adjusted.P.value<\/th>\n      <th>Odds.Ratio<\/th>\n      <th>Combined.Score<\/th>\n      <th>Genes<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[3,4,5,6,7,8]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Term","targets":1},{"name":"Overlap","targets":2},{"name":"P.value","targets":3},{"name":"Adjusted.P.value","targets":4},{"name":"Old.P.value","targets":5},{"name":"Old.Adjusted.P.value","targets":6},{"name":"Odds.Ratio","targets":7},{"name":"Combined.Score","targets":8},{"name":"Genes","targets":9}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p>When supplying the <code>gene_set_library</code> argument, rbioapi
@@ -182,9 +183,9 @@ can do the following:</p>
 <span><span class="va">results_msig</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_enrichr.html">rba_enrichr</a></span><span class="op">(</span></span>
 <span>  gene_list <span class="op">=</span> <span class="va">genes</span>,</span>
 <span>  gene_set_library <span class="op">=</span> <span class="st">"msig"</span>,</span>
-<span>  regex_library_name <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  regex_library_name <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  progress_bar <span class="op">=</span> <span class="cn">FALSE</span> <span class="co"># to avoid printing issues in the vignette</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%</span></span>
 <span></span>
 <span><span class="co"># You can drop `regex_library_name = TRUE`, as it is TRUE by default.</span></span></code></pre></div>
 <p>Note that when only one Enrichr library is selected, a data frame
@@ -236,8 +237,8 @@ the next step.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">list_id</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 2</span></span>
-<span><span class="co">#&gt;  $ shortId   : chr "a82306beb5b9ad4580e9bc56a9733d4e"</span></span>
-<span><span class="co">#&gt;  $ userListId: int 87588298</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ shortId   : chr "f2536a9ec5afed0722734f46c832238e"</span></span>
+<span><span class="co">#&gt;  $ userListId: int 87740441</span></span></code></pre></div>
 <p>Finally, we are ready to submit the enrichment analysis request to
 Enrichr. Same as explained above for the wrapper function
 <code><a href="../reference/rba_enrichr.html">rba_enrichr()</a></code>, we can supply the “gene_set_library”
@@ -294,7 +295,10 @@ target gene list to speedrichr. . Later steps will automatically
 interact with speedrichr as long as the relevant parameters for the
 background genes are specified.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Create a vector with our genes' NCBI IDs</span></span>
+<code class="sourceCode R"><span></span>
+<span><span class="co"># Assume we have the background genes in the variable my_background_genes</span></span>
+<span></span>
+<span><span class="co"># Create a vector with our genes' NCBI IDs</span></span>
 <span><span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"p53"</span>, <span class="st">"BRCA1"</span>, <span class="st">"cdk2"</span>, <span class="st">"Q99835"</span>, <span class="st">"CDC42"</span>,<span class="st">"CDK1"</span>,<span class="st">"KIF23"</span>,<span class="st">"PLK1"</span>,</span>
 <span>  <span class="st">"RAC2"</span>,<span class="st">"RACGAP1"</span>,<span class="st">"RHOA"</span>,<span class="st">"RHOB"</span>, <span class="st">"PHF14"</span>, <span class="st">"RBM3"</span>, <span class="st">"MSL1"</span></span>
@@ -416,7 +420,7 @@ vignette index</a></p></li>
 <span><span class="co">#&gt; [13] crosstalk_1.2.1   evaluate_1.0.3    jquerylib_0.1.4   fastmap_1.2.0    </span></span>
 <span><span class="co">#&gt; [17] yaml_2.3.10       lifecycle_1.0.4   compiler_4.4.2    fs_1.6.5         </span></span>
 <span><span class="co">#&gt; [21] htmlwidgets_1.6.4 systemfonts_1.2.1 digest_0.6.37     R6_2.5.1         </span></span>
-<span><span class="co">#&gt; [25] curl_6.2.0        magrittr_2.0.3    bslib_0.8.0       tools_4.4.2      </span></span>
+<span><span class="co">#&gt; [25] curl_6.2.0        magrittr_2.0.3    bslib_0.9.0       tools_4.4.2      </span></span>
 <span><span class="co">#&gt; [29] pkgdown_2.1.1     cachem_1.1.0      desc_1.4.3</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
