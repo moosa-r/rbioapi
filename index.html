@@ -35,7 +35,7 @@
 
     <a class="navbar-brand me-2" href="index.html">rbioapi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,7 +82,7 @@
 <img src="logo.svg" class="logo" alt=""><h1 id="rbioapi-user-friendly-r-interface-to-biologic-web-services-api">rbioapi: User-Friendly R Interface to Biologic Web Services’ API<a class="anchor" aria-label="anchor" href="#rbioapi-user-friendly-r-interface-to-biologic-web-services-api"></a>
 </h1>
 </div>
-<p>Moosa Rezwani 2025-01-26</p>
+<p>Moosa Rezwani 2025-06-28</p>
 </div>
 <div class="section level1">
 <h1 id="section"><a class="anchor" aria-label="anchor" href="#section"></a></h1>
@@ -283,7 +283,7 @@
 <span><span class="co">#&gt;  $ pageInfo  :List of 3</span></span>
 <span><span class="co">#&gt;   ..$ resultsPerPage: int 200</span></span>
 <span><span class="co">#&gt;   ..$ currentPage   : int 1</span></span>
-<span><span class="co">#&gt;   ..$ totalRecords  : int 1102</span></span></code></pre></div>
+<span><span class="co">#&gt;   ..$ totalRecords  : int 1121</span></span></code></pre></div>
 <p>As you can see, the server has returned the first page of the response, to retrieve the other pages, you should make separate calls and change the “page_number” argument within each call, or simply use <code><a href="reference/rba_pages.html">rba_pages()</a></code> as demonstrated below:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">adeno_pages</span> <span class="op">=</span> <span class="fu"><a href="reference/rba_pages.html">rba_pages</a></span><span class="op">(</span></span>
@@ -402,14 +402,14 @@
 <span id="cb13-19"><a href="#cb13-19" tabindex="-1"></a><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span id="cb13-20"><a href="#cb13-20" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb13-21"><a href="#cb13-21" tabindex="-1"></a><span class="co">#&gt; other attached packages:</span></span>
-<span id="cb13-22"><a href="#cb13-22" tabindex="-1"></a><span class="co">#&gt; [1] rbioapi_0.8.2</span></span>
+<span id="cb13-22"><a href="#cb13-22" tabindex="-1"></a><span class="co">#&gt; [1] rbioapi_0.8.3</span></span>
 <span id="cb13-23"><a href="#cb13-23" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb13-24"><a href="#cb13-24" tabindex="-1"></a><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span id="cb13-25"><a href="#cb13-25" tabindex="-1"></a><span class="co">#&gt;  [1] digest_0.6.37     R6_2.5.1          fastmap_1.2.0     xfun_0.50        </span></span>
-<span id="cb13-26"><a href="#cb13-26" tabindex="-1"></a><span class="co">#&gt;  [5] knitr_1.49        htmltools_0.5.8.1 rmarkdown_2.29    cli_3.6.3        </span></span>
+<span id="cb13-25"><a href="#cb13-25" tabindex="-1"></a><span class="co">#&gt;  [1] digest_0.6.37     R6_2.6.1          fastmap_1.2.0     xfun_0.51        </span></span>
+<span id="cb13-26"><a href="#cb13-26" tabindex="-1"></a><span class="co">#&gt;  [5] knitr_1.50        htmltools_0.5.8.1 rmarkdown_2.29    cli_3.6.4        </span></span>
 <span id="cb13-27"><a href="#cb13-27" tabindex="-1"></a><span class="co">#&gt;  [9] compiler_4.4.2    httr_1.4.7        rstudioapi_0.17.1 tools_4.4.2      </span></span>
-<span id="cb13-28"><a href="#cb13-28" tabindex="-1"></a><span class="co">#&gt; [13] curl_6.1.0        evaluate_1.0.3    yaml_2.3.10       rlang_1.1.4      </span></span>
-<span id="cb13-29"><a href="#cb13-29" tabindex="-1"></a><span class="co">#&gt; [17] jsonlite_1.8.9</span></span></code></pre></div>
+<span id="cb13-28"><a href="#cb13-28" tabindex="-1"></a><span class="co">#&gt; [13] curl_6.2.2        evaluate_1.0.3    yaml_2.3.10       rlang_1.1.5      </span></span>
+<span id="cb13-29"><a href="#cb13-29" tabindex="-1"></a><span class="co">#&gt; [17] jsonlite_2.0.0</span></span></code></pre></div>
 </div>
 
   </main><aside class="col-md-3"><div class="links">
