@@ -88,7 +88,7 @@ rba_enrichr(gene_list = c("TP53", "TNF", "EGFR"))
 }
 \donttest{
 rba_enrichr(gene_list = c("TP53", "TNF", "EGFR"),
-    gene_set_library = "GO_Molecular_Function_2017",
+    gene_set_library = "GO_Molecular_Function_2025",
     regex_library_name = FALSE)
 }
 \donttest{

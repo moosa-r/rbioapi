@@ -1,3 +1,91 @@
+#' Internal function to validate rba_enrichr steps
+#'
+#' This is an internal helper function that after each main step of rba_enrichr,
+#'   checks wether the operation sucedded and stops or returns a character
+#'   string based on the skip_error in the parent environment.
+#'
+#' @param assertion logical. A test to vaildate the previous step output.
+#' @param msg_type Character. Chooses which predefined message template to use.
+#'   Valid values:
+#'   - `"no_lib"`: failed to fetch Enrichr libraries
+#'   - `"invalid_lib_regex"`: regex did not match any library names
+#'   - `"invalid_lib_chr"`: one or more explicit library names are invalid
+#'   - `"no_gene_upload"`: failed to upload the gene list
+#'   - `"no_background_upload"`: failed to upload the background list
+#'   - `"no_result"`: failed to retrieve enrichment results
+#' @param msg_detail Character. Additional information to add to the error
+#'   message template.
+#'
+#' @return If
+#'   - `assertion` is `TRUE`: returns `TRUE`
+#'   Otherwise, if
+#'   - `skip_error = FALSE`: invokes `stop()` with a detailed error message
+#'   - `skip_error = TRUE`: calls `.msg()` and returns the message string
+#'
+#' @noRd
+.rba_enrichr_validate <- function(assertion,
+                                  msg_type,
+                                  msg_detail,
+                                  skip_error) {
+
+  if (assertion) {
+    return(TRUE)
+  } else {
+    error_msg <- paste0(
+      switch(
+        msg_type,
+        no_lib = c(
+          "Error: Couldn't fetch available Enrichr libraries. Please retry or manually run `rba_enrichr_libs(store_in_options = TRUE)`. ",
+          "The internal `rba_enrichr_libs()` call did not return a non-empty data.frame with a character column `libraryName`",
+          "The error message was: ",
+          msg_detail
+        ),
+        invalid_lib_regex = c(
+          "Error: ",
+          "Your supplied regex didn't match any Enrichr libraries.",
+          "Please use `rba_enrichr_libs()` to get a list of valid Enrichr libraries. ",
+          "input regex: ",
+          msg_detail
+        ),
+        invalid_lib_chr = c(
+          "Error: ",
+          "The following supplied Enrichr libraries are invalid. ",
+          "Please use `rba_enrichr_libs()` to get a list of valid Enrichr libraries. ",
+          paste0(msg_detail, collapse = ", ")
+        ),
+        no_gene_upload = c(
+          "Error: Couldn't upload your genes list to Enrichr. ",
+          "Please retry or manually run the required steps as demonstrated in the `Enrichr & rbioapi` vignette article, section `Approach 2: Going step-by-step`. ",
+          "If the problem persists, kindly report this issue to us. The error message was: ",
+          msg_detail
+        ),
+        no_background_upload = c(
+          "Error: Couldn't upload your background gene list to Enrichr. ",
+          "Please retry or manually run the required steps as demonstrated in the `Enrichr & rbioapi` vignette article, section `Approach 2: Going step-by-step`. ",
+          "If the problem persists, kindly report this issue to us. The error message was: ",
+          msg_detail
+        ),
+        no_result = c(
+          "Error: Couldn't retrieve the submitted Enrichr analysis request. ",
+          "Please retry or manually run the required steps as demonstrated in the `Enrichr & rbioapi` vignette article, section `Approach 2: Going step-by-step`. ",
+          "If the problem persists, kindly report this issue to us. The error message was:",
+          msg_detail
+        )
+      ),
+      collapse = "\n"
+    )
+
+    if (skip_error) {
+      .msg(error_msg)
+      return(error_msg)
+    } else {
+      stop(error_msg, call. = FALSE)
+    }
+  }
+
+}
+
+
 #' Retrieve a List of available libraries from Enrichr
 #'
 #' This function retrieves a list of libraries available in Enrichr along with
@@ -198,7 +286,7 @@ rba_enrichr_add_list <- function(gene_list,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "gene_list", class = "character"),
+      list(arg = "gene_list", class = "character", min_len = 1),
       list(arg = "description", class = "character"),
       list(
         arg = "organism", class = "character", no_null = TRUE,
@@ -209,7 +297,7 @@ rba_enrichr_add_list <- function(gene_list,
     cond = list(
       list(
         quote((isTRUE(speedrichr)) && organism != "human"),
-        "Using speedrichr (to provide background gene list later) is only availbale for `human`."
+        "Using speedrichr (to provide background gene list later) is only available for `human`."
       )
     )
   )
@@ -326,7 +414,7 @@ rba_enrichr_view_list <- function(user_list_id,
     cond = list(
       list(
         quote((isTRUE(speedrichr)) && organism != "human"),
-        "Using speedrichr (to provide background gene list later) is only availbale for `human`."
+        "Using speedrichr (to provide background gene list later) is only available for `human`."
       )
     )
   )
@@ -423,7 +511,7 @@ rba_enrichr_add_background <- function(background_genes,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "background_genes", class = "character")
+      list(arg = "background_genes", class = "character", min_len = 1)
     )
   )
 
@@ -749,59 +837,12 @@ rba_enrichr_enrich <- function(user_list_id,
   ## Load Global Options
   .rba_ext_args(...)
 
-  ## get a list of available libraries
-  if (is.null(getOption("rba_enrichr_libs")[[organism]])) {
-    .msg(
-      "Calling rba_enrichr_libs() to get the names of available Enrichr %s libraries.",
-      organism
-    )
-
-    enrichr_libs <- rba_enrichr_libs(organism = organism, store_in_options = TRUE)
-
-    if (utils::hasName(enrichr_libs, "libraryName")) {
-      enrichr_libs <- enrichr_libs[["libraryName"]]
-    }
-
-  } else {
-    enrichr_libs <- getOption("rba_enrichr_libs")[[organism]]
-  }
-
-  ## handle different gene_set_library input situations
-  if (length(gene_set_library) > 1) {
-    run_mode <- "multiple"
-  } else if (gene_set_library == "all") {
-    run_mode <- "multiple"
-    gene_set_library <- enrichr_libs
-  } else {
-    if (isFALSE(regex_library_name)) {
-      run_mode <- "single"
-    } else {
-      gene_set_library <- grep(
-        gene_set_library,
-        enrichr_libs,
-        ignore.case = TRUE, value = TRUE, perl = TRUE
-      )
-      #check the results of regex
-      if (length(gene_set_library) == 0) {
-        no_lib_error <- "Error: No Enrichr libraries matched your regex pattern."
-        if (isTRUE(get("skip_error"))) {
-          return(no_lib_error)
-        } else {
-          stop(no_lib_error, call. = get("diagnostics"))
-        }
-      } else if (length(gene_set_library) == 1) {
-        run_mode <- "single"
-      } else if (length(gene_set_library) > 1) {
-        run_mode <- "multiple"
-      }
-    }
-  } # end of if length(gene_set_library) > 1
-
   ## Check User-input Arguments
   .rba_args(
     cons = list(
       list(arg = "user_list_id", class = c("numeric", "integer"), len = 1),
-      list(arg = "gene_set_library", class = "character", val = enrichr_libs),
+      list(arg = "gene_set_library", class = "character", min_len = 1),
+      list(arg = "regex_library_name", class = "logical"),
       list(arg = "progress_bar", class = "logical"),
       list(
         arg = "organism", class = "character", no_null = TRUE,
@@ -812,76 +853,127 @@ rba_enrichr_enrich <- function(user_list_id,
     cond = list(
       list(
         quote((!is.null(background_id)) && organism != "human"),
-        "Providing background gene set is only availbale for `human`.")
+        "Providing background gene set is only available for `human`."
+      ),
+      list(
+        quote(length(gene_set_library) > 1 && "all" %in% gene_set_library),
+        "In `gene_set_library`, `all` cannot be combined with other library names."
+      ),
+      list(
+        quote(isTRUE(regex_library_name) && length(gene_set_library) != 1),
+        "You should supply a character string of length one for `gene_set_library` if `regex_library_name` is `TRUE`."
+      )
     )
   )
 
-  ## call Enrichr API
-  if (run_mode == "single") {
+  ## get a list of available libraries and check user inputs
+  if (is.null(getOption("rba_enrichr_libs")[[organism]])) {
     .msg(
-      "Performing enrichment analysis on gene-list %s against Enrichr %s library: %s.",
-      user_list_id, organism, gene_set_library
-    )
-
-    final_output <- .rba_enrichr_enrich_internal(
-      user_list_id = user_list_id,
-      background_id = background_id,
-      gene_set_library = gene_set_library,
-      save_name = sprintf("enrichr_%s_%s.json", user_list_id, gene_set_library),
-      ...
-    )
-
-    return(final_output)
-
-  } else {
-    .msg(
-      "Performing enrichment analysis on gene-list %s using multiple Enrichr %s libraries.",
-      user_list_id,
+      "Calling rba_enrichr_libs() to get the names of available Enrichr %s libraries.",
       organism
     )
 
+    enrichr_libs <- rba_enrichr_libs(
+      organism = organism,
+      store_in_options = TRUE,
+      ...
+    )
+
+    if (utils::hasName(enrichr_libs, "libraryName")) {
+      enrichr_libs <- enrichr_libs[["libraryName"]]
+    }
+
+  } else {
+    enrichr_libs <- getOption("rba_enrichr_libs")[[organism]]
+  }
+
+  if (isTRUE(regex_library_name)) {
+    valid_lib_check <- .rba_enrichr_validate(
+      assertion = any(
+        grepl(
+          pattern = gene_set_library,
+          x = enrichr_libs,
+          perl = TRUE, ignore.case = TRUE
+        )
+      ),
+      msg_type = "invalid_lib_regex",
+      msg_detail = gene_set_library,
+      skip_error = isTRUE(get("skip_error"))
+    )
+  } else {
+    valid_lib_check <- .rba_enrichr_validate(
+      assertion = all(gene_set_library %in% c("all", enrichr_libs)),
+      msg_type = "invalid_lib_chr",
+      msg_detail = gene_set_library[!gene_set_library %in% c("all", enrichr_libs)],
+      skip_error = isTRUE(get("skip_error"))
+    )
+  }
+
+  if (!isTRUE(valid_lib_check)) {
+    return(valid_lib_check)
+  }
+
+  if (isTRUE(regex_library_name)) {
+    gene_set_library <- grep(
+      pattern = gene_set_library,
+      x = enrichr_libs,
+      value = TRUE, perl = TRUE, ignore.case = TRUE
+    )
+  } else if (identical(gene_set_library, "all")) {
+    gene_set_library <- enrichr_libs
+  }
+
+  is_multi_libs <- length(gene_set_library) > 1
+
+  ## call Enrichr API
+  .msg(
+    "Performing Enrichr analysis on gene-list %s %s Enrichr %s %s.",
+    user_list_id,
+    ifelse(is_multi_libs, yes = "using multiple", no = "against"),
+    organism,
+    ifelse(is_multi_libs, yes = "libraries", no = paste0("library: ", gene_set_library))
+  )
+
+  if (is_multi_libs) {
     .msg(
       paste0(
         "Note: You have selected '%s' Enrichr %s libraries. Note that for ",
         "each library, a separate call should be sent to Enrichr server. ",
         "Thus, this could take a while depending on the number of selected ",
-        "libraries and your network connection."
+        "libraries."
       ),
       length(gene_set_library),
       organism
     )
-
-    ## initiate progress bar
-    if (isTRUE(progress_bar)) {
-      pb <- utils::txtProgressBar(
-        min = 0,
-        max = length(gene_set_library),
-        style = 3
-      )
-    }
-    final_output <- lapply(
-      gene_set_library,
-      function(x){
-        lib_enrich_res <- .rba_enrichr_enrich_internal(
-          user_list_id = user_list_id,
-          background_id = background_id,
-          gene_set_library = x,
-          save_name = sprintf("enrichr_%s_%s.json", user_list_id, x),
-          sleep_time = 0.5,
-          ...
-        )
-        #advance the progress bar
-        if (isTRUE(progress_bar)) {
-          utils::setTxtProgressBar(pb, which(gene_set_library == x))
-        }
-        return(lib_enrich_res)
-      }
-    )
-
-    if (isTRUE(progress_bar)) {close(pb)}
-    names(final_output) <- gene_set_library
-    return(final_output)
   }
+
+  if (is_multi_libs && progress_bar) {
+    pb <- utils::txtProgressBar(min = 0, max = length(gene_set_library), style = 3)
+  }
+
+  final_output <- lapply(
+    seq_along(gene_set_library),
+    function(i) {
+      lib <- gene_set_library[i]
+      out <- .rba_enrichr_enrich_internal(
+        user_list_id = user_list_id,
+        background_id = background_id,
+        gene_set_library = lib,
+        save_name = sprintf("enrichr_%s_%s.json", user_list_id, lib),
+        sleep_time  = if (is_multi_libs) { 1 } else { 0 },
+        ...
+      )
+      if (is_multi_libs && progress_bar) { utils::setTxtProgressBar(pb = pb, value = i) }
+      return(out)
+    }
+  )
+
+  names(final_output) <- gene_set_library
+  if (is_multi_libs && progress_bar) { close(pb) }
+
+
+  if (!is_multi_libs) { final_output <- final_output[[1]] }
+  return(final_output)
 }
 
 
@@ -982,6 +1074,7 @@ rba_enrichr_gene_map <- function(gene,
   return(final_output)
 }
 
+
 #' A One-step Wrapper for Gene-list Enrichment Using Enrichr
 #'
 #' This function provides a convenient one-step wrapper for performing
@@ -1044,7 +1137,7 @@ rba_enrichr_gene_map <- function(gene,
 #' }
 #' \donttest{
 #' rba_enrichr(gene_list = c("TP53", "TNF", "EGFR"),
-#'     gene_set_library = "GO_Molecular_Function_2017",
+#'     gene_set_library = "GO_Molecular_Function_2025",
 #'     regex_library_name = FALSE)
 #' }
 #' \donttest{
@@ -1070,125 +1163,159 @@ rba_enrichr <- function(gene_list,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "gene_list", class = "character"),
+      list(arg = "gene_list", class = "character", min_len = 1),
       list(arg = "description", class = "character"),
+      list(arg = "gene_set_library", class = "character", min_len = 1),
       list(arg = "regex_library_name", class = "logical"),
-      list(arg = "progress_bar", class = "logical"),
       list(
         arg = "organism", class = "character", no_null = TRUE,
         val = c("human", "fly", "yeast", "worm", "fish")
       ),
-      list(arg = "background_genes", class = "character")
+      list(arg = "background_genes", class = "character", min_len = 1),
+      list(arg = "progress_bar", class = "logical")
     ),
     cond = list(
       list(
         quote((!is.null(background_genes)) && organism != "human"),
-        "Providing background gene set is only availbale for `human`."
+        "Providing background gene set is only available for `human`."
+      ),
+      list(
+        quote(length(gene_set_library) > 1 && "all" %in% gene_set_library),
+        "In `gene_set_library`, `all` cannot be combined with other library names."
+      ),
+      list(
+        quote(isTRUE(regex_library_name) && length(gene_set_library) != 1),
+        "You should supply a character string of length one for `gene_set_library` if `regex_library_name` is `TRUE`."
       ),
       list(
         quote(!is.null(background_genes) && (!all(gene_list %in% background_genes))),
-        "Some of the gene_list elements are not present in background_genes"
+        "Some of the `gene_list` elements are not present in `background_genes`."
       )
     )
   )
 
+  # Step 1, Get available Enrichr libraries
   .msg("--Step 1/3:")
-  enrichr_libs <- rba_enrichr_libs(organism = organism,
-                                   store_in_options = TRUE)
+  enrichr_libs <- rba_enrichr_libs(
+    organism = organism,
+    store_in_options = TRUE,
+    ...)
 
-  if (utils::hasName(enrichr_libs, "libraryName")) {
+  get_libs_check <- .rba_enrichr_validate(
+    assertion = utils::hasName(enrichr_libs, "libraryName") &&
+      is.character(enrichr_libs[["libraryName"]]) &&
+      length(enrichr_libs[["libraryName"]]) > 0,
+    msg_type = "no_lib",
+    msg_detail = try(enrichr_libs),
+    skip_error = isTRUE(get("skip_error"))
+  )
+
+
+  if (!isTRUE(get_libs_check)) {
+    return(get_libs_check)
+  } else {
     enrichr_libs <- enrichr_libs[["libraryName"]]
   }
 
-  step_1_success <- exists("enrichr_libs") && length(enrichr_libs) > 1
-
-  if (!step_1_success) { # Halt at step 1
-    no_lib_msg <- paste0(
-      "Error: Couldn't fetch available Enrichr libraries. Please manually run `rba_enrichr_libs(store_in_options = TRUE)`. ",
-      "If the problem persists, kindly report this issue to us. The error message was: ",
-      try(enrichr_libs),
-      collapse = "\n"
+  if (isTRUE(regex_library_name)) {
+    valid_lib_check <- .rba_enrichr_validate(
+      assertion = any(
+        grepl(
+          pattern = gene_set_library,
+          x = enrichr_libs,
+          perl = TRUE, ignore.case = TRUE
+        )
+      ),
+      msg_type = "invalid_lib_regex",
+      msg_detail = gene_set_library,
+      skip_error = isTRUE(get("skip_error"))
     )
+  } else {
+    valid_lib_check <- .rba_enrichr_validate(
+      assertion = all(gene_set_library %in% c("all", enrichr_libs)),
+      msg_type = "invalid_lib_chr",
+      msg_detail = gene_set_library[!gene_set_library %in% c("all", enrichr_libs)],
+      skip_error = isTRUE(get("skip_error"))
+    )
+  }
 
-    if (isTRUE(get("skip_error"))) {
-      .msg(no_lib_msg)
-      return(no_lib_msg)
-    } else {
-      stop(no_lib_msg, call. = get("diagnostics"))
-    }
-  } else { # Proceed to step 2
+  if (!isTRUE(valid_lib_check)) {
+    return(valid_lib_check)
+  }
 
-    .msg("--Step 2/3:")
+  # Step 2.1 Submit gene list to Enrich
+  .msg("--Step 2/3:")
+  Sys.sleep(2)
+
+  list_id <- rba_enrichr_add_list(
+    gene_list = gene_list,
+    description = description,
+    organism = organism,
+    speedrichr = !is.null(background_genes),
+    ...
+  )
+
+  gene_upload_check <- .rba_enrichr_validate(
+    assertion = exists("list_id") && utils::hasName(list_id, "userListId"),
+    msg_type = "no_gene_upload",
+    msg_detail = try(list_id),
+    skip_error = isTRUE(get("skip_error"))
+  )
+
+
+  if (!isTRUE(gene_upload_check)) {
+    return(gene_upload_check)
+  }
+
+  # Step 2.2 Submit background gene list if requested
+  if (!is.null(background_genes)) {
     Sys.sleep(2)
-    list_id <- rba_enrichr_add_list(
-      gene_list = gene_list,
-      description = description,
-      organism = organism,
-      speedrichr = !is.null(background_genes),
+    background_id <- rba_enrichr_add_background(
+      background_genes = background_genes,
       ...
     )
 
-    step_2_success <- exists("list_id") && utils::hasName(list_id, "userListId")
+    background_upload_check <- .rba_enrichr_validate(
+      assertion = utils::hasName(background_id, "backgroundid"),
+      msg_type = "no_background_upload",
+      msg_detail = try(background_id),
+      skip_error = isTRUE(get("skip_error"))
+    )
 
-    if (!is.null(background_genes)) {
-      background_id <- rba_enrichr_add_background(background_genes = background_genes)
-
-      step_2_success <- step_2_success && exists("background_id") && utils::hasName(background_id, "backgroundid")
-      if (step_2_success) {
-        background_id <- background_id$backgroundid
-      }
-
+    if (!isTRUE(background_upload_check)) {
+      return(background_upload_check)
     } else {
-      background_id <- NULL
+      background_id <- background_id$backgroundid
     }
 
-    if (step_2_success) { # proceed to step 3
-      .msg("--Step 3/3:")
-      Sys.sleep(2)
-      enriched <- rba_enrichr_enrich(
-        user_list_id = list_id$userListId,
-        gene_set_library = gene_set_library,
-        regex_library_name = regex_library_name,
-        background_id = background_id,
-        organism = organism,
-        progress_bar = progress_bar,
-        ...
-      )
-
-      step_3_success <- exists("enriched") && (is.list(enriched) || is.data.frame(enriched))
-
-      if (step_3_success) { # Finish step 3
-        return(enriched)
-      } else { # Halt at step 3
-        no_enriched_msg <- paste0(
-          "Error: Couldn't retrieve the submitted Enrichr analysis request. ",
-          "Please retry or manually run the required steps as demonstrated in the `Enrichr & rbioapi` vignette article, section `Approach 2: Going step-by-step`. ",
-          "If the problem persists, kindly report this issue to us. The error message was:",
-          try(enriched),
-          collapse = "\n"
-        )
-
-        if (isTRUE(get("skip_error"))) {
-          .msg(no_enriched_msg)
-          return(no_enriched_msg)
-        } else {
-          stop(no_enriched_msg, call. = get("diagnostics"))
-        }
-      }
-    } else { # Halt at step 2
-      no_list_msg <- paste0(
-        "Error: Couldn't upload your genes list to Enrichr. ",
-        "Please retry or manually run the required steps as demonstrated in the `Enrichr & rbioapi` vignette article, section `Approach 2: Going step-by-step`. ",
-        "If the problem persists, kindly report this issue to us. The error message was: ",
-        try(list_id),
-        collapse = "\n"
-      )
-      if (isTRUE(get("skip_error"))) {
-        .msg(no_list_msg)
-        return(no_list_msg)
-      } else {
-        stop(no_list_msg, call. = get("diagnostics"))
-      }
-    }
+  } else {
+    background_id <- NULL
   }
+
+  # Step 3 Send enrich requests to Enrichr
+  .msg("--Step 3/3:")
+  Sys.sleep(2)
+  enriched <- rba_enrichr_enrich(
+    user_list_id = list_id$userListId,
+    gene_set_library = gene_set_library,
+    regex_library_name = regex_library_name,
+    background_id = background_id,
+    organism = organism,
+    progress_bar = progress_bar,
+    ...
+  )
+
+  results_check <- .rba_enrichr_validate(
+    assertion = is.list(enriched) || is.data.frame(enriched),
+    msg_type = "no_result",
+    msg_detail = try(enriched),
+    skip_error = isTRUE(get("skip_error"))
+  )
+
+  if (!isTRUE(results_check)) {
+    return(results_check)
+  }
+
+  # Return
+  return(enriched)
 }
