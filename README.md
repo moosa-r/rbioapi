@@ -1,7 +1,7 @@
 rbioapi: User-Friendly R Interface to Biologic Web Services’ API
 ================
 Moosa Rezwani
-2025-01-26
+2025-06-29
 
 # <img src="man/figures/logo.svg" align="right" width="200"/>
 
@@ -295,7 +295,7 @@ str(adeno, max.level = 2)
 #>  $ pageInfo  :List of 3
 #>   ..$ resultsPerPage: int 200
 #>   ..$ currentPage   : int 1
-#>   ..$ totalRecords  : int 1102
+#>   ..$ totalRecords  : int 1121
 ```
 
 As you can see, the server has returned the first page of the response,
@@ -442,12 +442,12 @@ API](https://doi.org/10.1093/bioinformatics/btac172 "Rezwani, M., Pourfathollah,
 
 # Session info
 
-    #> R version 4.4.2 (2024-10-31 ucrt)
+    #> R version 4.5.1 (2025-06-13 ucrt)
     #> Platform: x86_64-w64-mingw32/x64
     #> Running under: Windows 11 x64 (build 26100)
     #> 
     #> Matrix products: default
-    #> 
+    #>   LAPACK version 3.12.1
     #> 
     #> locale:
     #> [1] LC_COLLATE=English_United States.utf8 
@@ -463,11 +463,11 @@ API](https://doi.org/10.1093/bioinformatics/btac172 "Rezwani, M., Pourfathollah,
     #> [1] stats     graphics  grDevices utils     datasets  methods   base     
     #> 
     #> other attached packages:
-    #> [1] rbioapi_0.8.2
+    #> [1] rbioapi_0.8.3
     #> 
     #> loaded via a namespace (and not attached):
-    #>  [1] digest_0.6.37     R6_2.5.1          fastmap_1.2.0     xfun_0.50        
-    #>  [5] knitr_1.49        htmltools_0.5.8.1 rmarkdown_2.29    cli_3.6.3        
-    #>  [9] compiler_4.4.2    httr_1.4.7        rstudioapi_0.17.1 tools_4.4.2      
-    #> [13] curl_6.1.0        evaluate_1.0.3    yaml_2.3.10       rlang_1.1.4      
-    #> [17] jsonlite_1.8.9
+    #>  [1] digest_0.6.37     R6_2.6.1          fastmap_1.2.0     xfun_0.52        
+    #>  [5] knitr_1.50        htmltools_0.5.8.1 rmarkdown_2.29    cli_3.6.5        
+    #>  [9] compiler_4.5.1    httr_1.4.7        rstudioapi_0.17.1 tools_4.5.1      
+    #> [13] curl_6.4.0        evaluate_1.0.4    yaml_2.3.10       rlang_1.1.6      
+    #> [17] jsonlite_2.0.0

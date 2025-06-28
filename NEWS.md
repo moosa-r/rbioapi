@@ -1,4 +1,8 @@
-# rbioapi 0.8.2 (Current CRAN version)
+# rbioapi 0.8.3 (Current CRAN version)
+
+* Minor improvements and fixes.
+
+# rbioapi 0.8.2
 
 * Update functions to the latest corresponding API endpoints:
 
