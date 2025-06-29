@@ -236,8 +236,8 @@ the next step.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">list_id</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 2</span></span>
-<span><span class="co">#&gt;  $ shortId   : chr "1e864c6d78bfc8b021e8b7e930a15cf8"</span></span>
-<span><span class="co">#&gt;  $ userListId: int 95844308</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ shortId   : chr "39974a0dd0f336369651dcb0483ce1d7"</span></span>
+<span><span class="co">#&gt;  $ userListId: int 95844487</span></span></code></pre></div>
 <p>Finally, we are ready to submit the enrichment analysis request to
 Enrichr. Same as explained above for the wrapper function
 <code><a href="../reference/rba_enrichr.html">rba_enrichr()</a></code>, we can supply the “gene_set_library”
@@ -287,12 +287,12 @@ with the <code>background_genes</code> parameter.</p>
 <span>  regex_library_name <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>If you choose to follow the step-by-step approach, please note that
-Enrichr relies on an API back-end called <a href="https://github.com/MaayanLab/speedrichr" class="external-link">speedrichr</a> to handle
-analysis with a background gene list. Therefore, when performing an
-analysis with background gene list, you must explicitly upload the
-target gene list to speedrichr. . Later steps will automatically
-interact with speedrichr as long as the relevant parameters for the
-background genes are specified.</p>
+Enrichr relies on an API back-end called speedrichr to handle analysis
+with a background gene list. Therefore, when performing an analysis with
+background gene list, you must explicitly upload the target gene list to
+speedrichr. Later steps will automatically interact with speedrichr as
+long as the relevant parameters for the background genes are
+specified.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Assume we have the background genes in the variable my_background_genes</span></span>
