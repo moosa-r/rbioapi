@@ -64,15 +64,25 @@ proteins <- c(
 )
 
 ## 2 Now we map our protein IDs
-proteins_mapped <- rba_string_map_ids(ids = proteins, species = 9606)
+proteins_mapped_df <- rba_string_map_ids(ids = proteins, species = 9606)
 
 ## 3 What we need and will use for the rest of this vignette is the `stringId` column
 ```
 
 ```{r rba_string_map_ids_results, echo=FALSE}
-if (is.data.frame(proteins_mapped)) {
+if (is.data.frame(proteins_mapped_df)) {
+  proteins_mapped_df$annotation <- 
+    paste0(
+      substr(
+        x = proteins_mapped_df$annotation,
+        start = 1,
+        stop = 50
+      ),
+      "..."
+    )
+  
   DT::datatable(
-    data = proteins_mapped,
+    data = proteins_mapped_df,
     options = list(
       scrollX = TRUE, 
       paging = TRUE,
@@ -86,10 +96,23 @@ if (is.data.frame(proteins_mapped)) {
 }
 ```
 
-```{r rba_string_map_ids2, eval=is.data.frame(proteins_mapped) && hasName(proteins_mapped, "stringId")}
+```{r rba_string_map_ids2, eval=is.data.frame(proteins_mapped_df) && hasName(proteins_mapped_df, "stringId")}
 
 ## 3 What we need and will use for the rest of this vignette is the `stringId` column
-proteins_mapped <- proteins_mapped$stringId
+proteins_mapped <- proteins_mapped_df$stringId
+```
+
+```{r rba_string_map_ids3, eval=!exists("proteins_mapped"), echo=!exists("proteins_mapped")}
+
+# Fallback for vignette building
+# if previous step failed due to communication error
+  proteins_mapped <- c(
+  "9606.ENSP00000269305", "9606.ENSP00000418960", "9606.ENSP00000266970",
+  "9606.ENSP00000249373", "9606.ENSP00000497733", "9606.ENSP00000378699", 
+  "9606.ENSP00000260363", "9606.ENSP00000300093", "9606.ENSP00000249071",
+  "9606.ENSP00000404190", "9606.ENSP00000400175", "9606.ENSP00000272233", 
+  "9606.ENSP00000385795", "9606.ENSP00000365950"
+)
 ```
 ------------------------------------------------------------------------
 
