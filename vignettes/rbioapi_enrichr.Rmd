@@ -257,7 +257,7 @@ results_msig <- rba_enrichr(
 ```
 
 
-If you choose to follow the step-by-step approach, please note that Enrichr relies on an API back-end called [speedrichr](https://github.com/MaayanLab/speedrichr) to handle analysis with a background gene list. Therefore, when performing an analysis with background gene list, you must explicitly upload the target gene list to speedrichr. . Later steps will automatically interact with speedrichr as long as the relevant parameters for the background genes are specified.
+If you choose to follow the step-by-step approach, please note that Enrichr relies on an API back-end called speedrichr to handle analysis with a background gene list. Therefore, when performing an analysis with background gene list, you must explicitly upload the target gene list to speedrichr. Later steps will automatically interact with speedrichr as long as the relevant parameters for the background genes are specified.
 
 ```{r background_gene_list_approach2, eval=FALSE}
 
