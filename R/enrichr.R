@@ -593,7 +593,7 @@ rba_enrichr_add_background <- function(background_genes,
                                          background_id = NULL,
                                          gene_set_library,
                                          save_name,
-                                         organism = "human",
+                                         organism,
                                          sleep_time = 0,
                                          ...){
   ## Load Global Options
@@ -648,14 +648,15 @@ rba_enrichr_add_background <- function(background_genes,
     )
 
     parser_input <- function(httr_response) {
-      parsed_response <- gsub(
-        "Infinity", "\"Inf\"",
-        httr::content(httr_response,
-                      as = "text",
-                      encoding = "UTF-8")
-      )
 
-      # parsed_response <- gsub("NaN", "\"NaN\"", parsed_response)
+      parsed_response <- httr::content(httr_response,
+                                       as = "text",
+                                       encoding = "UTF-8")
+
+      # To prevent possible lexical errors with fromJSON
+      parsed_response <- gsub("Infinity", "\"Inf\"", parsed_response)
+      parsed_response <- gsub("NaN", "\"NaN\"", parsed_response)
+
       parsed_response <- jsonlite::fromJSON(parsed_response)[[1]]
 
       parsed_response <- lapply(
@@ -671,7 +672,8 @@ rba_enrichr_add_background <- function(background_genes,
             collapse = ";")
 
           return(response_row)
-        })
+        }
+      )
 
       if (length(parsed_response) == 0) {
         parsed_response <- data.frame(
@@ -959,6 +961,7 @@ rba_enrichr_enrich <- function(user_list_id,
         user_list_id = user_list_id,
         background_id = background_id,
         gene_set_library = lib,
+        organism = organism,
         save_name = sprintf("enrichr_%s_%s.json", user_list_id, lib),
         sleep_time  = if (is_multi_libs) { 1 } else { 0 },
         ...
