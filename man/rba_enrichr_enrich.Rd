@@ -7,7 +7,7 @@
 rba_enrichr_enrich(
   user_list_id,
   gene_set_library = "all",
-  regex_library_name = TRUE,
+  regex_library_name = FALSE,
   organism = "human",
   background_id = NULL,
   progress_bar = TRUE,
@@ -29,7 +29,7 @@ for a given species using \code{\link{rba_enrichr_libs}}.
 pattern that correspond to one or more of Enrichr library names.
 }}
 
-\item{regex_library_name}{logical: if TRUE (default) the supplied
+\item{regex_library_name}{logical: (default = FALSE) if TRUE the supplied
 gene_set_library will be considered as a regex pattern.
 If FALSE, gene_set_library will be considered as an exact match.}
 

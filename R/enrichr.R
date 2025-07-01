@@ -556,7 +556,7 @@ rba_enrichr_add_background <- function(background_genes,
 #' @param gene_set_library a valid gene-set library name which exists
 #' in the results retrieved via \code{\link{rba_enrichr_libs}}.
 #' @param save_name default raw file name
-#' @param organism (default = "human") Which model organism version of Enrichr
+#' @param organism Which model organism version of Enrichr
 #'   to use? Available options are: "human", (H. sapiens & M. musculus),
 #'   "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
 #'   and "fish" (D. rerio).
@@ -771,7 +771,7 @@ rba_enrichr_add_background <- function(background_genes,
 #'   \item If regex_library_name = TRUE, A partially-matching name a regex
 #'   pattern that correspond to one or more of Enrichr library names.
 #'   }
-#' @param regex_library_name logical: if TRUE (default) the supplied
+#' @param regex_library_name logical: (default = FALSE) if TRUE the supplied
 #'   gene_set_library will be considered as a regex pattern.
 #'   If FALSE, gene_set_library will be considered as an exact match.
 #' @param organism (default = "human") Which model organism version of Enrichr
@@ -829,7 +829,7 @@ rba_enrichr_add_background <- function(background_genes,
 #' @export
 rba_enrichr_enrich <- function(user_list_id,
                                gene_set_library = "all",
-                               regex_library_name = TRUE,
+                               regex_library_name = FALSE,
                                organism = "human",
                                background_id = NULL,
                                progress_bar = TRUE,
@@ -1152,7 +1152,7 @@ rba_enrichr_gene_map <- function(gene,
 rba_enrichr <- function(gene_list,
                         description = NULL,
                         gene_set_library = "all",
-                        regex_library_name = TRUE,
+                        regex_library_name = FALSE,
                         organism = "human",
                         background_genes = NULL,
                         progress_bar = TRUE,
