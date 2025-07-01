@@ -1,5 +1,7 @@
 # rbioapi 0.8.3 (Current CRAN version)
 
+* Improved internal stability of Enrichr functions
+
 * Minor improvements and fixes.
 
 # rbioapi 0.8.2
