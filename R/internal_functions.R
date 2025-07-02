@@ -133,7 +133,7 @@
       getOption(arg[[2]])
     ),
     tests = list(
-      "Enrichr" = paste0(.rba_stg("enrichr", "url"), "/Enrichr"),
+      "Enrichr" = paste0(.rba_stg("enrichr", "url"), "/Enrichr/"),
       "Ensembl" = paste0(.rba_stg("ensembl", "url"), "/info/ping"),
       "JASPAR" = paste0(.rba_stg("jaspar", "url"), "/api/v1/releases/"),
       "miEAA" = paste0(.rba_stg("mieaa", "url"), "/mieaa2/api/"),
