@@ -1,0 +1,71 @@
+# Get Larger Reactome Structures Which Include an Entity
+
+This function will retrieve a list of complexes and sets that Your
+supplied entity ID participates in (e.g. as a complex component,
+reaction output).
+
+## Usage
+
+``` r
+rba_reactome_participant_of(entity_id, ...)
+```
+
+## Arguments
+
+- entity_id:
+
+  Reactome's entity ID.
+
+- ...:
+
+  rbioapi option(s). See
+  [`rba_options`](https://rbioapi.moosa-r.com/reference/rba_options.md)'s
+  arguments manual for more information on available options.
+
+## Value
+
+List of Reactome database Entities which Your supplied ID is a
+participant in them.
+
+## Corresponding API Resources
+
+"GET https://reactome.org/ContentService/data/entity/{id}/componentOf"
+
+## References
+
+- Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
+  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla,
+  Lisa Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot
+  Ragueneau, Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser,
+  Timothy Brunson, Nasim Sanati, Liam Beckman, Xiang Shao, Antonio
+  Fabregat, Konstantinos Sidiropoulos, Julieth Murillo, Guilherme
+  Viteri, Justin Cook, Solomon Shorser, Gary Bader, Emek Demir, Chris
+  Sander, Robin Haw, Guanming Wu, Lincoln Stein, Henning Hermjakob,
+  Peter D’Eustachio, The reactome pathway knowledgebase 2022, Nucleic
+  Acids Research, 2021;, kab1028, https://doi.org/10.1093/nar/gkab1028
+
+- Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A, Hermjakob H.
+  ReactomeGSA - Efficient Multi-Omics Comparative Pathway Analysis. Mol
+  Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed PMID: 32907876.
+
+- [Reactome Content Services API
+  Documentation](https://reactome.org/ContentService/)
+
+- [Citations note on Reactome website](https://reactome.org/cite/)
+
+## See also
+
+[`rba_reactome_participants`](https://rbioapi.moosa-r.com/reference/rba_reactome_participants.md)
+
+Other "Reactome Content Service - Physical Entity Queries":
+[`rba_reactome_complex_list()`](https://rbioapi.moosa-r.com/reference/rba_reactome_complex_list.md),
+[`rba_reactome_complex_subunits()`](https://rbioapi.moosa-r.com/reference/rba_reactome_complex_subunits.md),
+[`rba_reactome_entity_other_forms()`](https://rbioapi.moosa-r.com/reference/rba_reactome_entity_other_forms.md)
+
+## Examples
+
+``` r
+# \donttest{
+rba_reactome_participant_of(entity_id = "R-HSA-199420")
+# }
+```

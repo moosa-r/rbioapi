@@ -1,0 +1,124 @@
+# Upload Your Gene-List to Enrichr
+
+This function uploads your gene list to Enrichr and retrieves a unique
+'user list ID' required for performing enrichment analysis.
+
+## Usage
+
+``` r
+rba_enrichr_add_list(
+  gene_list,
+  description = NULL,
+  organism = "human",
+  speedrichr = FALSE,
+  ...
+)
+```
+
+## Arguments
+
+- gene_list:
+
+  A character vector with Entrez gene symbols of test genes.
+
+- description:
+
+  (optional) A description to be associated with your uploaded gene-set
+  to Enrichr servers.
+
+- organism:
+
+  (default = "human") Which model organism version of Enrichr to use?
+  Available options are: "human", (H. sapiens & M. musculus), "fly" (D.
+  melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans) and "fish"
+  (D. rerio).
+
+- speedrichr:
+
+  logical (default = FALSE) Set to TRUE if you will use this gene list
+  with a background list; otherwise, set to FALSE. Only available for
+  human libraries. Refer to the details section for more information.
+
+- ...:
+
+  rbioapi option(s). See
+  [`rba_options`](https://rbioapi.moosa-r.com/reference/rba_options.md)'s
+  arguments manual for more information on available options.
+
+## Value
+
+A list with the unique IDs for your uploaded gene list. \`userListId\`
+is the ID required for later steps.
+
+## Details
+
+Enrichr uses separate APIs for analysis with or without a background
+gene list. Set \`speedrichr = TRUE\` if this gene list will be used with
+a background gene list; otherwise, set it to FALSE. Gene lists submitted
+with \`speedrichr = TRUE\` can only be analyzed with a background set,
+and those submitted with \`speedrichr = FALSE\` can only be analyzed
+without one. Currently, background-based enrichment is supported only
+for human libraries.
+
+Please note that
+[`rba_enrichr`](https://rbioapi.moosa-r.com/reference/rba_enrichr.md)
+provides a one-step and more convenient way to automatically handle this
+and other required function calls needed to perform gene set enrichment
+analysis with Enrichr.
+
+## Corresponding API Resources
+
+"POST https://maayanlab.cloud/Enrichr/addList"  
+"POST https://maayanlab.cloud/speedrichr/api/addList"
+
+## References
+
+- Chen, E.Y., Tan, C.M., Kou, Y. et al. Enrichr: interactive and
+  collaborative HTML5 gene list enrichment analysis tool. Bioinformatics
+  14, 128 (2013). https://doi.org/10.1186/1471-2105-14-128
+
+- Maxim V. Kuleshov, Matthew R. Jones, Andrew D. Rouillard, Nicolas F.
+  Fernandez, Qiaonan Duan, Zichen Wang, Simon Koplev, Sherry L. Jenkins,
+  Kathleen M. Jagodnik, Alexander Lachmann, Michael G. McDermott,
+  Caroline D. Monteiro, Gregory W. Gundersen, Avi Ma’ayan, Enrichr: a
+  comprehensive gene set enrichment analysis web server 2016 update,
+  Nucleic Acids Research, Volume 44, Issue W1, 8 July 2016, Pages
+  W90–W97, https://doi.org/10.1093/nar/gkw377
+
+- Xie, Z., Bailey, A., Kuleshov, M. V., Clarke, D. J. B.,
+  Evangelista, J. E., Jenkins, S. L., Lachmann, A., Wojciechowicz, M.
+  L., Kropiwnicki, E., Jagodnik, K. M., Jeon, M., & Ma’ayan, A. (2021).
+  Gene set knowledge discovery with Enrichr. Current Protocols, 1, e90.
+  doi: 10.1002/cpz1.90
+
+- [Enrichr API Documentation](https://maayanlab.cloud/Enrichr/help#api)
+
+- [Citations note on Enrichr
+  website](https://maayanlab.cloud/Enrichr/help#terms)
+
+## See also
+
+[`rba_enrichr`](https://rbioapi.moosa-r.com/reference/rba_enrichr.md)
+
+Other "Enrichr":
+[`rba_enrichr()`](https://rbioapi.moosa-r.com/reference/rba_enrichr.md),
+[`rba_enrichr_add_background()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_add_background.md),
+[`rba_enrichr_enrich()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_enrich.md),
+[`rba_enrichr_gene_map()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_gene_map.md),
+[`rba_enrichr_libs()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_libs.md),
+[`rba_enrichr_view_list()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_view_list.md)
+
+## Examples
+
+``` r
+# \donttest{
+rba_enrichr_add_list(gene_list = c("TP53", "TNF", "EGFR"),
+     description = "tumoral genes",
+     speedrichr = FALSE)
+# }
+# \donttest{
+rba_enrichr_add_list(gene_list = c("RAG1", "RAG2", "DNTT", "LIG4", "ARTEMIS"),
+     description = "TCR rearrangment",
+     speedrichr = TRUE)
+# }
+```
