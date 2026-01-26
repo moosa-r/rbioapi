@@ -2231,7 +2231,7 @@ rba_reactome_pathways_events <- function(event_id,
     event_id
   )
   accept_input <- "application/json"
-  parser_input <- "json->df"
+  parser_input <- "json->list"
   file_ext <- "json"
 
   if (!is.null(attribute_name)) {
