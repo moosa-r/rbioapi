@@ -40,12 +40,10 @@ rba_jaspar_matrix_versions("MA0600")
 }
 \references{
 \itemize{
-  \item Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R,
-  Castro-Mondragon JA, Ferenc K, Kumar V, Lemma RB, Lucas J, Chèneby J,
-  Baranasic D, Khan A, Fornes O, Gundersen S, Johansen M, Hovig E, Lenhard
-  B, Sandelin A, Wasserman WW, Parcy F, Mathelier A JASPAR 2024:
-  20th anniversary of the open-access database of transcription factor
-  binding profiles Nucleic Acids Res. in_press; doi: 10.1093/nar/gkad1059
+  \item Baydar Ovek D, et al. JASPAR 2026: expansion of transcription
+  factor binding profiles and integration of deep learning models.
+  Nucleic Acids Res. 2026;54(D1):D184-D193;
+  doi: 10.1093/nar/gkaf1209
   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR data
   from any programming language. Bioinformatics, 2017,
   doi: 10.1093/bioinformatics/btx804

@@ -38,12 +38,9 @@ rba_options(timeout = 30, skip_error = TRUE)
 
 # Introduction {#introduction}
 
-Directly quoting from Fornes O, Castro-Mondragon JA, Khan A, et al:
+[JASPAR](https://jaspar.elixir.no) is an open-access database of curated transcription factor binding profiles. JASPAR 2026 is the 11th release. It expands the CORE and UNVALIDATED position frequency matrix collections and introduces a deep-learning collection containing BPNet models and their interpreted binding profiles.
 
-> JASPAR ([https://jaspar.elixir.no)](https://jaspar.elixir.no) is an open-access database of curated, non-redundant transcription factor (TF)-binding profiles stored as position frequency matrices (PFMs) for TFs across multiple species in six taxonomic groups. In this 8th release of JASPAR, the CORE collection has been expanded with 245 new PFMs (169 for vertebrates, 42 for plants, 17 for nematodes, 10 for insects, and 7 for fungi), and 156 PFMs were updated (125 for vertebrates, 28 for plants and 3 for insects). These new profiles represent an 18% expansion compared to the previous release.
->
-> source:\
-> Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of the open-access database of transcription factor binding profiles. *Nucleic Acids Res*. 2019; doi: [10.1093/nar/gkz1001](https://doi.org/10.1093/nar/gkz1001)
+> Baydar Ovek D, et al. JASPAR 2026: expansion of transcription factor binding profiles and integration of deep learning models. *Nucleic Acids Research*. 2026;54(D1):D184-D193; doi: [10.1093/nar/gkaf1209](https://doi.org/10.1093/nar/gkaf1209)
 
 ------------------------------------------------------------------------
 
@@ -53,14 +50,14 @@ JASPAR is a database of transcription factor binding matrices with annotations a
 
 ## Releases {#releases}
 
-In addition to the latest JASPAR database release (2020), other active releases are also available. Most of the rbioapi JASPAR functions have a `release` argument that allows you to use other database releases.
+In addition to the latest JASPAR database release (2026), other active releases are also available. Most rbioapi JASPAR functions have a `release` argument; they use release 2026 by default.
 
 ```{r release}
 ## Call the function without any arguments to get a list of releases
 releases <- rba_jaspar_releases()
 
 ## Supply a release number for details:
-release_7_info <- rba_jaspar_releases(7)
+release_11_info <- rba_jaspar_releases(11)
 ```
 
 ## Collections {#collections}
@@ -68,12 +65,12 @@ release_7_info <- rba_jaspar_releases(7)
 Within a release, Matrix profiles are organized into collections, You can use `rba_jaspar_collections()` to get a list of available collections, or read "JASPAR Collections" section in [documentation page in JASPAR web-site](https://jaspar.elixir.no/docs/ "JASPAR Documentation") for a thorough review.
 
 ```{r collections}
-## To get a list of available collection in release 2020:
-rba_jaspar_collections(release = 2020)
+## To get a list of available collections in release 2026:
+rba_jaspar_collections(release = 2026)
 
 
 ## You can list information of all matrices available in a collection:
-mat_in_core_2020 <- rba_jaspar_collections_matrices(collection = "CORE")
+mat_in_core_2026 <- rba_jaspar_collections_matrices(collection = "CORE")
 ```
 
 ## Taxonomic Groups {#taxonomic-groups}
@@ -81,8 +78,8 @@ mat_in_core_2020 <- rba_jaspar_collections_matrices(collection = "CORE")
 Within each collection, the matrix profiles are organized based on main taxonomic groups:
 
 ```{r taxons}
-## To get a list of taxonomic groups in release 2020:
-rba_jaspar_taxons(release = 2020)
+## To get a list of taxonomic groups in release 2026:
+rba_jaspar_taxons(release = 2026)
 
 
 ## You can list information of all matrices available in a taxonomic group:
@@ -94,8 +91,8 @@ mat_in_insects <- rba_jaspar_taxons_matrices(tax_group = "insects")
 As we go down in the data organization hierarchy, Each taxonomic group consist of species:
 
 ```{r species}
-## To get a list of species in release 2020:
-species <- rba_jaspar_species(release = 2020)
+## To get a list of species in release 2026:
+species <- rba_jaspar_species(release = 2026)
 head(species)
 
 ## You can list information of all matrices available in a specie:
@@ -240,7 +237,7 @@ str(TFFM0056)
 
 To cite JASPAR (Please see <https://jaspar.elixir.no/faq/>):
 
--   Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R, Castro-Mondragon JA, Ferenc K, Kumar V, Lemma RB, Lucas J, Chèneby J, Baranasic D, Khan A, Fornes O, Gundersen S, Johansen M, Hovig E, Lenhard B, Sandelin A, Wasserman WW, Parcy F, Mathelier A *JASPAR 2024: 20th anniversary of the open-access database of transcription factor binding profiles* Nucleic Acids Res. in_press; <https://doi.org/10.1093/nar/gkad1059>
+-   Baydar Ovek D, et al. *JASPAR 2026: expansion of transcription factor binding profiles and integration of deep learning models*. Nucleic Acids Res. 2026;54(D1):D184-D193; <https://doi.org/10.1093/nar/gkaf1209>
 - Khan, A. and Mathelier, A. *JASPAR RESTful API: accessing JASPAR data from any programming language*. Bioinformatics, 2017, <https://doi.org/10.1093/bioinformatics/btx804> 
 
 

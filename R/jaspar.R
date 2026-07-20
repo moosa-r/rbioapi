@@ -6,8 +6,9 @@
 #'   Using this function, you can retrieve a list of available collections
 #'   in a JASPAR release.
 #'
-#' @param release Numeric: (default = 2024) Which JASPAR database release
-#'   to use? Available options are: 2024, 2022, 2020, 2018, 2016, and 2014.
+#' @param release Numeric: (default = 2026) Which JASPAR database release
+#'   to use? Available options are: 2026, 2024, 2022, 2020, 2018, 2016,
+#'   and 2014.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -17,12 +18,10 @@
 #' @return A data frame with collections' names and URLs.
 #'
 #' @references \itemize{
-#'   \item Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R,
-#'   Castro-Mondragon JA, Ferenc K, Kumar V, Lemma RB, Lucas J, Chèneby J,
-#'   Baranasic D, Khan A, Fornes O, Gundersen S, Johansen M, Hovig E, Lenhard
-#'   B, Sandelin A, Wasserman WW, Parcy F, Mathelier A JASPAR 2024:
-#'   20th anniversary of the open-access database of transcription factor
-#'   binding profiles Nucleic Acids Res. in_press; doi: 10.1093/nar/gkad1059
+#'   \item Baydar Ovek D, et al. JASPAR 2026: expansion of transcription
+#'   factor binding profiles and integration of deep learning models.
+#'   Nucleic Acids Res. 2026;54(D1):D184-D193;
+#'   doi: 10.1093/nar/gkaf1209
 #'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR data
 #'   from any programming language. Bioinformatics, 2017,
 #'   doi: 10.1093/bioinformatics/btx804
@@ -34,12 +33,12 @@
 #'
 #' @examples
 #' \donttest{
-#' rba_jaspar_collections(release = 2024)
+#' rba_jaspar_collections(release = 2026)
 #' }
 #'
 #' @family "JASPAR"
 #' @export
-rba_jaspar_collections <- function(release = 2024,
+rba_jaspar_collections <- function(release = 2026,
                                    ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -49,7 +48,7 @@ rba_jaspar_collections <- function(release = 2024,
     cons = list(
       list(
         arg = "release", class = "numeric", no_null = TRUE,
-        val = c(2014, 2016, 2018, 2020, 2022, 2024)
+        val = c(2014, 2016, 2018, 2020, 2022, 2024, 2026)
       )
     )
   )
@@ -98,8 +97,9 @@ rba_jaspar_collections <- function(release = 2024,
 #'   information. The accepted values are: "CORE", "CNE", "PHYLOFACTS",
 #'   "SPLICE", "POLII", "FAM", "PBM", "PBM_HOMEO", "PBM_HLH", and
 #'   "UNVALIDATED".
-#' @param release Numeric: (default = 2024) Which JASPAR database release
-#'   to use? Available options are: 2024, 2022, 2020, 2018, 2016, and 2014.
+#' @param release Numeric: (default = 2026) Which JASPAR database release
+#'   to use? Available options are: 2026, 2024, 2022, 2020, 2018, 2016,
+#'   and 2014.
 #' @param only_last_version Logical: (default = FALSE) If TRUE, only the
 #'   latest version of a matrix profile will be returned.
 #' @param search Character: A search term.
@@ -122,12 +122,10 @@ rba_jaspar_collections <- function(release = 2024,
 #'   profiles available in the collection.
 #'
 #' @references \itemize{
-#'   \item Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R,
-#'   Castro-Mondragon JA, Ferenc K, Kumar V, Lemma RB, Lucas J, Chèneby J,
-#'   Baranasic D, Khan A, Fornes O, Gundersen S, Johansen M, Hovig E, Lenhard
-#'   B, Sandelin A, Wasserman WW, Parcy F, Mathelier A JASPAR 2024:
-#'   20th anniversary of the open-access database of transcription factor
-#'   binding profiles Nucleic Acids Res. in_press; doi: 10.1093/nar/gkad1059
+#'   \item Baydar Ovek D, et al. JASPAR 2026: expansion of transcription
+#'   factor binding profiles and integration of deep learning models.
+#'   Nucleic Acids Res. 2026;54(D1):D184-D193;
+#'   doi: 10.1093/nar/gkaf1209
 #'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR data
 #'   from any programming language. Bioinformatics, 2017,
 #'   doi: 10.1093/bioinformatics/btx804
@@ -140,7 +138,7 @@ rba_jaspar_collections <- function(release = 2024,
 #' @examples
 #' \donttest{
 #' rba_jaspar_collections_matrices(collection = "CORE",
-#'   release = 2024,
+#'   release = 2026,
 #'   page_size = 100,
 #'   page = 2)
 #' }
@@ -148,7 +146,7 @@ rba_jaspar_collections <- function(release = 2024,
 #' @family "JASPAR"
 #' @export
 rba_jaspar_collections_matrices <- function(collection,
-                                            release = 2024,
+                                            release = 2026,
                                             only_last_version = FALSE,
                                             search = NULL,
                                             order = NULL,
@@ -177,7 +175,7 @@ rba_jaspar_collections_matrices <- function(collection,
       list(arg = "only_last_version", class = "logical"),
       list(
         arg = "release", class = "numeric", no_null = TRUE,
-        val = c(2014, 2016, 2018, 2020, 2022, 2024)
+        val = c(2014, 2016, 2018, 2020, 2022, 2024, 2026)
       ),
       list(arg = "search", class = "character"),
       list(arg = "order", class = "character"),
@@ -249,8 +247,9 @@ rba_jaspar_collections_matrices <- function(collection,
 #'   for matrix construction). For example: "ChIP-seq", "PBM"
 #' @param collection Character: JASPAR matrix profile collection name. USE
 #'   \code{\link{rba_jaspar_collections}} to get a list of collection names.
-#' @param release Numeric: (default = 2024) Which JASPAR database release
-#'   to use? Available options are: 2024, 2022, 2020, 2018, 2016, and 2014.
+#' @param release Numeric: (default = 2026) Which JASPAR database release
+#'   to use? Available options are: 2026, 2024, 2022, 2020, 2018, 2016,
+#'   and 2014.
 #' @param only_last_version Logical: (default = FALSE) If TRUE, only the
 #'   latest version of a matrix profile will be returned.
 #' @param order Character: A character string or a vector of character strings
@@ -271,12 +270,10 @@ rba_jaspar_collections_matrices <- function(collection,
 #' @return A list that contains a data frame of matrix profiles' information.
 #'
 #' @references \itemize{
-#'   \item Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R,
-#'   Castro-Mondragon JA, Ferenc K, Kumar V, Lemma RB, Lucas J, Chèneby J,
-#'   Baranasic D, Khan A, Fornes O, Gundersen S, Johansen M, Hovig E, Lenhard
-#'   B, Sandelin A, Wasserman WW, Parcy F, Mathelier A JASPAR 2024:
-#'   20th anniversary of the open-access database of transcription factor
-#'   binding profiles Nucleic Acids Res. in_press; doi: 10.1093/nar/gkad1059
+#'   \item Baydar Ovek D, et al. JASPAR 2026: expansion of transcription
+#'   factor binding profiles and integration of deep learning models.
+#'   Nucleic Acids Res. 2026;54(D1):D184-D193;
+#'   doi: 10.1093/nar/gkaf1209
 #'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR data
 #'   from any programming language. Bioinformatics, 2017,
 #'   doi: 10.1093/bioinformatics/btx804
@@ -306,7 +303,7 @@ rba_jaspar_matrix_search <- function(term = NULL,
                                      tax_id = NULL,
                                      data_type = NULL,
                                      collection = NULL,
-                                     release = 2024,
+                                     release = 2026,
                                      only_last_version = FALSE,
                                      order = NULL,
                                      page_size = 1000,
@@ -340,7 +337,7 @@ rba_jaspar_matrix_search <- function(term = NULL,
       ),
       list(
         arg = "release", class = "numeric", no_null = TRUE,
-        val = c(2014, 2016, 2018, 2020, 2022, 2024)
+        val = c(2014, 2016, 2018, 2020, 2022, 2024, 2026)
       ),
       list(arg = "order", class = "character"),
       list(arg = "only_last_version", class = "logical"),
@@ -409,12 +406,10 @@ rba_jaspar_matrix_search <- function(term = NULL,
 #' @return A data frame of matrix profiles' versions information.
 #'
 #' @references \itemize{
-#'   \item Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R,
-#'   Castro-Mondragon JA, Ferenc K, Kumar V, Lemma RB, Lucas J, Chèneby J,
-#'   Baranasic D, Khan A, Fornes O, Gundersen S, Johansen M, Hovig E, Lenhard
-#'   B, Sandelin A, Wasserman WW, Parcy F, Mathelier A JASPAR 2024:
-#'   20th anniversary of the open-access database of transcription factor
-#'   binding profiles Nucleic Acids Res. in_press; doi: 10.1093/nar/gkad1059
+#'   \item Baydar Ovek D, et al. JASPAR 2026: expansion of transcription
+#'   factor binding profiles and integration of deep learning models.
+#'   Nucleic Acids Res. 2026;54(D1):D184-D193;
+#'   doi: 10.1093/nar/gkaf1209
 #'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR data
 #'   from any programming language. Bioinformatics, 2017,
 #'   doi: 10.1093/bioinformatics/btx804
@@ -509,12 +504,10 @@ rba_jaspar_matrix_versions <- function(base_id,
 #'   with the file's content.
 #'
 #' @references \itemize{
-#'   \item Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R,
-#'   Castro-Mondragon JA, Ferenc K, Kumar V, Lemma RB, Lucas J, Chèneby J,
-#'   Baranasic D, Khan A, Fornes O, Gundersen S, Johansen M, Hovig E, Lenhard
-#'   B, Sandelin A, Wasserman WW, Parcy F, Mathelier A JASPAR 2024:
-#'   20th anniversary of the open-access database of transcription factor
-#'   binding profiles Nucleic Acids Res. in_press; doi: 10.1093/nar/gkad1059
+#'   \item Baydar Ovek D, et al. JASPAR 2026: expansion of transcription
+#'   factor binding profiles and integration of deep learning models.
+#'   Nucleic Acids Res. 2026;54(D1):D184-D193;
+#'   doi: 10.1093/nar/gkaf1209
 #'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR data
 #'   from any programming language. Bioinformatics, 2017,
 #'   doi: 10.1093/bioinformatics/btx804
@@ -627,7 +620,7 @@ rba_jaspar_matrix <- function(matrix_id,
 #'
 #' @param release_number Numeric: Which JASPAR database release number
 #'   information's to retrieve? If left NULL (the default), a list of all
-#'   JASPAR database releases will be returned. Available options are 1 to 8.
+#'   JASPAR database releases will be returned. Available options are 1 to 11.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -639,12 +632,10 @@ rba_jaspar_matrix <- function(matrix_id,
 #'   details of a particular release.
 #'
 #' @references \itemize{
-#'   \item Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R,
-#'   Castro-Mondragon JA, Ferenc K, Kumar V, Lemma RB, Lucas J, Chèneby J,
-#'   Baranasic D, Khan A, Fornes O, Gundersen S, Johansen M, Hovig E, Lenhard
-#'   B, Sandelin A, Wasserman WW, Parcy F, Mathelier A JASPAR 2024:
-#'   20th anniversary of the open-access database of transcription factor
-#'   binding profiles Nucleic Acids Res. in_press; doi: 10.1093/nar/gkad1059
+#'   \item Baydar Ovek D, et al. JASPAR 2026: expansion of transcription
+#'   factor binding profiles and integration of deep learning models.
+#'   Nucleic Acids Res. 2026;54(D1):D184-D193;
+#'   doi: 10.1093/nar/gkaf1209
 #'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR data
 #'   from any programming language. Bioinformatics, 2017,
 #'   doi: 10.1093/bioinformatics/btx804
@@ -670,7 +661,7 @@ rba_jaspar_releases  <- function(release_number = NULL,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "release_number", class = "numeric", ran = c(1,8))
+      list(arg = "release_number", class = "numeric", ran = c(1,11))
     )
   )
 
@@ -746,12 +737,10 @@ rba_jaspar_releases  <- function(release_number = NULL,
 #' @return A list that contains a data frame with binding sites information.
 #'
 #' @references \itemize{
-#'   \item Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R,
-#'   Castro-Mondragon JA, Ferenc K, Kumar V, Lemma RB, Lucas J, Chèneby J,
-#'   Baranasic D, Khan A, Fornes O, Gundersen S, Johansen M, Hovig E, Lenhard
-#'   B, Sandelin A, Wasserman WW, Parcy F, Mathelier A JASPAR 2024:
-#'   20th anniversary of the open-access database of transcription factor
-#'   binding profiles Nucleic Acids Res. in_press; doi: 10.1093/nar/gkad1059
+#'   \item Baydar Ovek D, et al. JASPAR 2026: expansion of transcription
+#'   factor binding profiles and integration of deep learning models.
+#'   Nucleic Acids Res. 2026;54(D1):D184-D193;
+#'   doi: 10.1093/nar/gkaf1209
 #'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR data
 #'   from any programming language. Bioinformatics, 2017,
 #'   doi: 10.1093/bioinformatics/btx804
@@ -813,8 +802,9 @@ rba_jaspar_sites <- function(matrix_id,
 #'   in six taxonomic groups. Use this function to retrieve a list of
 #'   available species in a JASPAR database release.
 #'
-#' @param release Numeric: (default = 2024) Which JASPAR database release
-#'   to use? Available options are: 2024, 2022, 2020, 2018, 2016, and 2014.
+#' @param release Numeric: (default = 2026) Which JASPAR database release
+#'   to use? Available options are: 2026, 2024, 2022, 2020, 2018, 2016,
+#'   and 2014.
 #' @param search Character: A search term.
 #' @param order Character: A character string or a vector of character strings
 #'   of field names that will be used to order the results.
@@ -829,12 +819,10 @@ rba_jaspar_sites <- function(matrix_id,
 #' @return A data frame with information of available species.
 #'
 #' @references \itemize{
-#'   \item Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R,
-#'   Castro-Mondragon JA, Ferenc K, Kumar V, Lemma RB, Lucas J, Chèneby J,
-#'   Baranasic D, Khan A, Fornes O, Gundersen S, Johansen M, Hovig E, Lenhard
-#'   B, Sandelin A, Wasserman WW, Parcy F, Mathelier A JASPAR 2024:
-#'   20th anniversary of the open-access database of transcription factor
-#'   binding profiles Nucleic Acids Res. in_press; doi: 10.1093/nar/gkad1059
+#'   \item Baydar Ovek D, et al. JASPAR 2026: expansion of transcription
+#'   factor binding profiles and integration of deep learning models.
+#'   Nucleic Acids Res. 2026;54(D1):D184-D193;
+#'   doi: 10.1093/nar/gkaf1209
 #'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR data
 #'   from any programming language. Bioinformatics, 2017,
 #'   doi: 10.1093/bioinformatics/btx804
@@ -846,12 +834,12 @@ rba_jaspar_sites <- function(matrix_id,
 #'
 #' @examples
 #' \donttest{
-#' rba_jaspar_species(release = 2024)
+#' rba_jaspar_species(release = 2026)
 #' }
 #'
 #' @family "JASPAR"
 #' @export
-rba_jaspar_species <- function(release = 2024,
+rba_jaspar_species <- function(release = 2026,
                                search = NULL,
                                order = NULL,
                                ...) {
@@ -863,7 +851,7 @@ rba_jaspar_species <- function(release = 2024,
     cons = list(
       list(
         arg = "release", class = "numeric", no_null = TRUE,
-        val = c(2014, 2016, 2018, 2020, 2022, 2024)
+        val = c(2014, 2016, 2018, 2020, 2022, 2024, 2026)
       ),
       list(arg = "search", class = "character"),
       list(arg = "order", class = "character")
@@ -916,8 +904,9 @@ rba_jaspar_species <- function(release = 2024,
 #'
 #' @param tax_id Numeric: NCBI taxonomic Identifier of species. Use
 #'   \code{\link{rba_jaspar_species}} to get a list of supported Species.
-#' @param release Numeric: (default = 2024) Which JASPAR database release
-#'   to use? Available options are: 2024, 2022, 2020, 2018, 2016, and 2014.
+#' @param release Numeric: (default = 2026) Which JASPAR database release
+#'   to use? Available options are: 2026, 2024, 2022, 2020, 2018, 2016,
+#'   and 2014.
 #' @param only_last_version Logical: (default = FALSE) If TRUE, only the
 #'   latest version of a matrix profile will be returned.
 #' @param search Character: A search term.
@@ -940,12 +929,10 @@ rba_jaspar_species <- function(release = 2024,
 #'   profiles available for the species.
 #'
 #' @references \itemize{
-#'   \item Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R,
-#'   Castro-Mondragon JA, Ferenc K, Kumar V, Lemma RB, Lucas J, Chèneby J,
-#'   Baranasic D, Khan A, Fornes O, Gundersen S, Johansen M, Hovig E, Lenhard
-#'   B, Sandelin A, Wasserman WW, Parcy F, Mathelier A JASPAR 2024:
-#'   20th anniversary of the open-access database of transcription factor
-#'   binding profiles Nucleic Acids Res. in_press; doi: 10.1093/nar/gkad1059
+#'   \item Baydar Ovek D, et al. JASPAR 2026: expansion of transcription
+#'   factor binding profiles and integration of deep learning models.
+#'   Nucleic Acids Res. 2026;54(D1):D184-D193;
+#'   doi: 10.1093/nar/gkaf1209
 #'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR data
 #'   from any programming language. Bioinformatics, 2017,
 #'   doi: 10.1093/bioinformatics/btx804
@@ -963,7 +950,7 @@ rba_jaspar_species <- function(release = 2024,
 #' @family "JASPAR"
 #' @export
 rba_jaspar_species_matrices <- function(tax_id,
-                                        release = 2024,
+                                        release = 2026,
                                         only_last_version = FALSE,
                                         search = NULL,
                                         order = NULL,
@@ -979,7 +966,7 @@ rba_jaspar_species_matrices <- function(tax_id,
       list(arg = "tax_id", class = "numeric"),
       list(
         arg = "release", class = "numeric", no_null = TRUE,
-        val = c(2014, 2016, 2018, 2020, 2022, 2024)
+        val = c(2014, 2016, 2018, 2020, 2022, 2024, 2026)
       ),
       list(arg = "only_last_version", class = "logical"),
       list(arg = "search", class = "character"),
@@ -1031,8 +1018,9 @@ rba_jaspar_species_matrices <- function(tax_id,
 #'   in six taxonomic groups. Use this function to retrieve a list of
 #'   available taxonomic groups in a JASPAR database release.
 #'
-#' @param release Numeric: (default = 2024) Which JASPAR database release
-#'   to use? Available options are: 2024, 2022, 2020, 2018, 2016, and 2014.
+#' @param release Numeric: (default = 2026) Which JASPAR database release
+#'   to use? Available options are: 2026, 2024, 2022, 2020, 2018, 2016,
+#'   and 2014.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -1042,12 +1030,10 @@ rba_jaspar_species_matrices <- function(tax_id,
 #' @return A data frame with information of available species.
 #'
 #' @references \itemize{
-#'   \item Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R,
-#'   Castro-Mondragon JA, Ferenc K, Kumar V, Lemma RB, Lucas J, Chèneby J,
-#'   Baranasic D, Khan A, Fornes O, Gundersen S, Johansen M, Hovig E, Lenhard
-#'   B, Sandelin A, Wasserman WW, Parcy F, Mathelier A JASPAR 2024:
-#'   20th anniversary of the open-access database of transcription factor
-#'   binding profiles Nucleic Acids Res. in_press; doi: 10.1093/nar/gkad1059
+#'   \item Baydar Ovek D, et al. JASPAR 2026: expansion of transcription
+#'   factor binding profiles and integration of deep learning models.
+#'   Nucleic Acids Res. 2026;54(D1):D184-D193;
+#'   doi: 10.1093/nar/gkaf1209
 #'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR data
 #'   from any programming language. Bioinformatics, 2017,
 #'   doi: 10.1093/bioinformatics/btx804
@@ -1059,12 +1045,12 @@ rba_jaspar_species_matrices <- function(tax_id,
 #'
 #' @examples
 #' \donttest{
-#' rba_jaspar_taxons(release = 2024)
+#' rba_jaspar_taxons(release = 2026)
 #' }
 #'
 #' @family "JASPAR"
 #' @export
-rba_jaspar_taxons <- function(release = 2024,
+rba_jaspar_taxons <- function(release = 2026,
                               ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -1074,7 +1060,7 @@ rba_jaspar_taxons <- function(release = 2024,
     cons = list(
       list(
         arg = "release", class = "numeric", no_null = TRUE,
-        val = c(2014, 2016, 2018, 2020, 2022, 2024)
+        val = c(2014, 2016, 2018, 2020, 2022, 2024, 2026)
       )
     )
   )
@@ -1122,8 +1108,9 @@ rba_jaspar_taxons <- function(release = 2024,
 #' @param tax_group Character: Taxonomic group. Use
 #'   \code{\link{rba_jaspar_taxons}} to get a list of supported Taxonomic
 #'   groups.
-#' @param release Numeric: (default = 2024) Which JASPAR database release
-#'   to use? Available options are: 2024, 2022, 2020, 2018, 2016, and 2014.
+#' @param release Numeric: (default = 2026) Which JASPAR database release
+#'   to use? Available options are: 2026, 2024, 2022, 2020, 2018, 2016,
+#'   and 2014.
 #' @param only_last_version Logical: (default = FALSE) If TRUE, only the
 #'   latest version of a matrix profile will be returned.
 #' @param search Character: A search term.
@@ -1146,12 +1133,10 @@ rba_jaspar_taxons <- function(release = 2024,
 #'   profiles available for the taxonomic group.
 #'
 #' @references \itemize{
-#'   \item Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R,
-#'   Castro-Mondragon JA, Ferenc K, Kumar V, Lemma RB, Lucas J, Chèneby J,
-#'   Baranasic D, Khan A, Fornes O, Gundersen S, Johansen M, Hovig E, Lenhard
-#'   B, Sandelin A, Wasserman WW, Parcy F, Mathelier A JASPAR 2024:
-#'   20th anniversary of the open-access database of transcription factor
-#'   binding profiles Nucleic Acids Res. in_press; doi: 10.1093/nar/gkad1059
+#'   \item Baydar Ovek D, et al. JASPAR 2026: expansion of transcription
+#'   factor binding profiles and integration of deep learning models.
+#'   Nucleic Acids Res. 2026;54(D1):D184-D193;
+#'   doi: 10.1093/nar/gkaf1209
 #'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR data
 #'   from any programming language. Bioinformatics, 2017,
 #'   doi: 10.1093/bioinformatics/btx804
@@ -1169,7 +1154,7 @@ rba_jaspar_taxons <- function(release = 2024,
 #' @family "JASPAR"
 #' @export
 rba_jaspar_taxons_matrices <- function(tax_group,
-                                       release = 2024,
+                                       release = 2026,
                                        only_last_version = FALSE,
                                        search = NULL,
                                        order = NULL,
@@ -1196,7 +1181,7 @@ rba_jaspar_taxons_matrices <- function(tax_group,
       ),
       list(
         arg = "release", class = "numeric", no_null = TRUE,
-        val = c(2014, 2016, 2018, 2020, 2022, 2024)
+        val = c(2014, 2016, 2018, 2020, 2022, 2024, 2026)
       ),
       list(arg = "only_last_version", class = "logical"),
       list(arg = "search", class = "character"),
@@ -1257,8 +1242,9 @@ rba_jaspar_taxons_matrices <- function(tax_group,
 #'   to automatically iterate over multiple pages.
 #'
 #' @param term Character: A search term.
-#' @param release Numeric: (default = 2024) Which JASPAR database release
-#'   to use? Available options are: 2024, 2022, 2020, 2018, 2016, and 2014.
+#' @param release Numeric: (default = 2026) Which JASPAR database release
+#'   to use? Available options are: 2026, 2024, 2022, 2020, 2018, 2016,
+#'   and 2014.
 #' @param tax_group Character: Taxonomic group. Use
 #'   \code{\link{rba_jaspar_taxons}} to get a list of supported Taxonomic
 #'   groups.
@@ -1282,12 +1268,10 @@ rba_jaspar_taxons_matrices <- function(tax_group,
 #'   TFFMs.
 #'
 #' @references \itemize{
-#'   \item Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R,
-#'   Castro-Mondragon JA, Ferenc K, Kumar V, Lemma RB, Lucas J, Chèneby J,
-#'   Baranasic D, Khan A, Fornes O, Gundersen S, Johansen M, Hovig E, Lenhard
-#'   B, Sandelin A, Wasserman WW, Parcy F, Mathelier A JASPAR 2024:
-#'   20th anniversary of the open-access database of transcription factor
-#'   binding profiles Nucleic Acids Res. in_press; doi: 10.1093/nar/gkad1059
+#'   \item Baydar Ovek D, et al. JASPAR 2026: expansion of transcription
+#'   factor binding profiles and integration of deep learning models.
+#'   Nucleic Acids Res. 2026;54(D1):D184-D193;
+#'   doi: 10.1093/nar/gkaf1209
 #'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR data
 #'   from any programming language. Bioinformatics, 2017,
 #'   doi: 10.1093/bioinformatics/btx804
@@ -1307,7 +1291,7 @@ rba_jaspar_taxons_matrices <- function(tax_group,
 #' @family "JASPAR"
 #' @export
 rba_jaspar_tffm_search <- function(term = NULL,
-                                   release = 2024,
+                                   release = 2026,
                                    tax_group = NULL,
                                    search = NULL,
                                    order = NULL,
@@ -1325,7 +1309,7 @@ rba_jaspar_tffm_search <- function(term = NULL,
         arg = "release",
         class = "numeric",
         no_null = TRUE,
-        val = c(2014, 2016, 2018, 2020, 2022, 2024)
+        val = c(2014, 2016, 2018, 2020, 2022, 2024, 2026)
       ),
       list(
         arg = "tax_group",
@@ -1393,12 +1377,10 @@ rba_jaspar_tffm_search <- function(term = NULL,
 #' @return A list that contains the TFFM's information and annotations.
 #'
 #' @references \itemize{
-#'   \item Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R,
-#'   Castro-Mondragon JA, Ferenc K, Kumar V, Lemma RB, Lucas J, Chèneby J,
-#'   Baranasic D, Khan A, Fornes O, Gundersen S, Johansen M, Hovig E, Lenhard
-#'   B, Sandelin A, Wasserman WW, Parcy F, Mathelier A JASPAR 2024:
-#'   20th anniversary of the open-access database of transcription factor
-#'   binding profiles Nucleic Acids Res. in_press; doi: 10.1093/nar/gkad1059
+#'   \item Baydar Ovek D, et al. JASPAR 2026: expansion of transcription
+#'   factor binding profiles and integration of deep learning models.
+#'   Nucleic Acids Res. 2026;54(D1):D184-D193;
+#'   doi: 10.1093/nar/gkaf1209
 #'   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR data
 #'   from any programming language. Bioinformatics, 2017,
 #'   doi: 10.1093/bioinformatics/btx804

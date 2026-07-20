@@ -6,7 +6,7 @@
 \usage{
 rba_jaspar_tffm_search(
   term = NULL,
-  release = 2024,
+  release = 2026,
   tax_group = NULL,
   search = NULL,
   order = NULL,
@@ -18,8 +18,9 @@ rba_jaspar_tffm_search(
 \arguments{
 \item{term}{Character: A search term.}
 
-\item{release}{Numeric: (default = 2024) Which JASPAR database release
-to use? Available options are: 2024, 2022, 2020, 2018, 2016, and 2014.}
+\item{release}{Numeric: (default = 2026) Which JASPAR database release
+to use? Available options are: 2026, 2024, 2022, 2020, 2018, 2016,
+and 2014.}
 
 \item{tax_group}{Character: Taxonomic group. Use
 \code{\link{rba_jaspar_taxons}} to get a list of supported Taxonomic
@@ -75,12 +76,10 @@ rba_jaspar_tffm_search(page_size = 100)
 }
 \references{
 \itemize{
-  \item Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R,
-  Castro-Mondragon JA, Ferenc K, Kumar V, Lemma RB, Lucas J, Chèneby J,
-  Baranasic D, Khan A, Fornes O, Gundersen S, Johansen M, Hovig E, Lenhard
-  B, Sandelin A, Wasserman WW, Parcy F, Mathelier A JASPAR 2024:
-  20th anniversary of the open-access database of transcription factor
-  binding profiles Nucleic Acids Res. in_press; doi: 10.1093/nar/gkad1059
+  \item Baydar Ovek D, et al. JASPAR 2026: expansion of transcription
+  factor binding profiles and integration of deep learning models.
+  Nucleic Acids Res. 2026;54(D1):D184-D193;
+  doi: 10.1093/nar/gkaf1209
   \item Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR data
   from any programming language. Bioinformatics, 2017,
   doi: 10.1093/bioinformatics/btx804
