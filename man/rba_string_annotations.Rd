@@ -84,16 +84,16 @@ rba_string_annotations(ids = "TP53", species = 9606)
   \link{rba_string_enrichment_image}
   }
 
-Other "STRING": 
-\code{\link{rba_string_enrichment}()},
-\code{\link{rba_string_enrichment_image}()},
-\code{\link{rba_string_enrichment_ppi}()},
-\code{\link{rba_string_homology_inter}()},
-\code{\link{rba_string_homology_intra}()},
-\code{\link{rba_string_interaction_partners}()},
-\code{\link{rba_string_interactions_network}()},
-\code{\link{rba_string_map_ids}()},
-\code{\link{rba_string_network_image}()},
-\code{\link{rba_string_version}()}
+Other "STRING":
+\code{\link[=rba_string_enrichment]{rba_string_enrichment()}},
+\code{\link[=rba_string_enrichment_image]{rba_string_enrichment_image()}},
+\code{\link[=rba_string_enrichment_ppi]{rba_string_enrichment_ppi()}},
+\code{\link[=rba_string_homology_inter]{rba_string_homology_inter()}},
+\code{\link[=rba_string_homology_intra]{rba_string_homology_intra()}},
+\code{\link[=rba_string_interaction_partners]{rba_string_interaction_partners()}},
+\code{\link[=rba_string_interactions_network]{rba_string_interactions_network()}},
+\code{\link[=rba_string_map_ids]{rba_string_map_ids()}},
+\code{\link[=rba_string_network_image]{rba_string_network_image()}},
+\code{\link[=rba_string_version]{rba_string_version()}}
 }
 \concept{"STRING"}

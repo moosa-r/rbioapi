@@ -77,12 +77,12 @@ rba_enrichr_libs()
 \seealso{
 \code{\link{rba_enrichr}}
 
-Other "Enrichr": 
-\code{\link{rba_enrichr}()},
-\code{\link{rba_enrichr_add_background}()},
-\code{\link{rba_enrichr_add_list}()},
-\code{\link{rba_enrichr_enrich}()},
-\code{\link{rba_enrichr_gene_map}()},
-\code{\link{rba_enrichr_view_list}()}
+Other "Enrichr":
+\code{\link[=rba_enrichr]{rba_enrichr()}},
+\code{\link[=rba_enrichr_add_background]{rba_enrichr_add_background()}},
+\code{\link[=rba_enrichr_add_list]{rba_enrichr_add_list()}},
+\code{\link[=rba_enrichr_enrich]{rba_enrichr_enrich()}},
+\code{\link[=rba_enrichr_gene_map]{rba_enrichr_gene_map()}},
+\code{\link[=rba_enrichr_view_list]{rba_enrichr_view_list()}}
 }
 \concept{"Enrichr"}

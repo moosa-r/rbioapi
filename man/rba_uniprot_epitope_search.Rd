@@ -56,8 +56,8 @@ Use this function to search epitope data associated to UniProt entities,
 
 }
 \seealso{
-Other "UniProt - Epitopes": 
-\code{\link{rba_uniprot_epitope}()},
-\code{\link{rba_uniprot_rna_edit}()}
+Other "UniProt - Epitopes":
+\code{\link[=rba_uniprot_epitope]{rba_uniprot_epitope()}},
+\code{\link[=rba_uniprot_rna_edit]{rba_uniprot_rna_edit()}}
 }
 \concept{"UniProt - Epitopes"}

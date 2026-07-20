@@ -58,9 +58,9 @@ rba_reactome_entity_other_forms("R-HSA-199420")
   }
 }
 \seealso{
-Other "Reactome Content Service - Physical Entity Queries": 
-\code{\link{rba_reactome_complex_list}()},
-\code{\link{rba_reactome_complex_subunits}()},
-\code{\link{rba_reactome_participant_of}()}
+Other "Reactome Content Service - Physical Entity Queries":
+\code{\link[=rba_reactome_complex_list]{rba_reactome_complex_list()}},
+\code{\link[=rba_reactome_complex_subunits]{rba_reactome_complex_subunits()}},
+\code{\link[=rba_reactome_participant_of]{rba_reactome_participant_of()}}
 }
 \concept{"Reactome Content Service - Physical Entity Queries"}

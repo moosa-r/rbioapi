@@ -71,7 +71,7 @@ rba_reactome_people_id(person_id = "391309", authored_pathways = TRUE)
   }
 }
 \seealso{
-Other "Reactome Content Service - Person Queries": 
-\code{\link{rba_reactome_people_name}()}
+Other "Reactome Content Service - Person Queries":
+\code{\link[=rba_reactome_people_name]{rba_reactome_people_name()}}
 }
 \concept{"Reactome Content Service - Person Queries"}

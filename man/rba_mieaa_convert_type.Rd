@@ -69,12 +69,12 @@ rba_mieaa_convert_type(mirna = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
   }
 }
 \seealso{
-Other "miEAA": 
-\code{\link{rba_mieaa_cats}()},
-\code{\link{rba_mieaa_convert_version}()},
-\code{\link{rba_mieaa_enrich}()},
-\code{\link{rba_mieaa_enrich_results}()},
-\code{\link{rba_mieaa_enrich_status}()},
-\code{\link{rba_mieaa_enrich_submit}()}
+Other "miEAA":
+\code{\link[=rba_mieaa_cats]{rba_mieaa_cats()}},
+\code{\link[=rba_mieaa_convert_version]{rba_mieaa_convert_version()}},
+\code{\link[=rba_mieaa_enrich]{rba_mieaa_enrich()}},
+\code{\link[=rba_mieaa_enrich_results]{rba_mieaa_enrich_results()}},
+\code{\link[=rba_mieaa_enrich_status]{rba_mieaa_enrich_status()}},
+\code{\link[=rba_mieaa_enrich_submit]{rba_mieaa_enrich_submit()}}
 }
 \concept{"miEAA"}

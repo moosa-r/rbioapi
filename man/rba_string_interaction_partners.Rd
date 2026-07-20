@@ -92,16 +92,16 @@ rba_string_interaction_partners(ids = c("9606.ENSP00000269305",
 \seealso{
 \code{\link{rba_string_map_ids}, \link{rba_string_interactions_network}}
 
-Other "STRING": 
-\code{\link{rba_string_annotations}()},
-\code{\link{rba_string_enrichment}()},
-\code{\link{rba_string_enrichment_image}()},
-\code{\link{rba_string_enrichment_ppi}()},
-\code{\link{rba_string_homology_inter}()},
-\code{\link{rba_string_homology_intra}()},
-\code{\link{rba_string_interactions_network}()},
-\code{\link{rba_string_map_ids}()},
-\code{\link{rba_string_network_image}()},
-\code{\link{rba_string_version}()}
+Other "STRING":
+\code{\link[=rba_string_annotations]{rba_string_annotations()}},
+\code{\link[=rba_string_enrichment]{rba_string_enrichment()}},
+\code{\link[=rba_string_enrichment_image]{rba_string_enrichment_image()}},
+\code{\link[=rba_string_enrichment_ppi]{rba_string_enrichment_ppi()}},
+\code{\link[=rba_string_homology_inter]{rba_string_homology_inter()}},
+\code{\link[=rba_string_homology_intra]{rba_string_homology_intra()}},
+\code{\link[=rba_string_interactions_network]{rba_string_interactions_network()}},
+\code{\link[=rba_string_map_ids]{rba_string_map_ids()}},
+\code{\link[=rba_string_network_image]{rba_string_network_image()}},
+\code{\link[=rba_string_version]{rba_string_version()}}
 }
 \concept{"STRING"}

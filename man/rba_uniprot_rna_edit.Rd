@@ -35,8 +35,8 @@ Use this function to retrieve
 
 }
 \seealso{
-Other "UniProt - Epitopes": 
-\code{\link{rba_uniprot_epitope}()},
-\code{\link{rba_uniprot_epitope_search}()}
+Other "UniProt - Epitopes":
+\code{\link[=rba_uniprot_epitope]{rba_uniprot_epitope()}},
+\code{\link[=rba_uniprot_epitope_search]{rba_uniprot_epitope_search()}}
 }
 \concept{"UniProt - Epitopes"}

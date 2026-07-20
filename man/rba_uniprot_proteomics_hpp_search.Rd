@@ -92,12 +92,12 @@ UniProt categorizes proteomics data sources into three main data categories:
   }
 }
 \seealso{
-Other "UniProt - Proteomics": 
-\code{\link{rba_uniprot_proteomics_hpp}()},
-\code{\link{rba_uniprot_proteomics_non_ptm}()},
-\code{\link{rba_uniprot_proteomics_non_ptm_search}()},
-\code{\link{rba_uniprot_proteomics_ptm}()},
-\code{\link{rba_uniprot_proteomics_ptm_search}()},
-\code{\link{rba_uniprot_proteomics_species}()}
+Other "UniProt - Proteomics":
+\code{\link[=rba_uniprot_proteomics_hpp]{rba_uniprot_proteomics_hpp()}},
+\code{\link[=rba_uniprot_proteomics_non_ptm]{rba_uniprot_proteomics_non_ptm()}},
+\code{\link[=rba_uniprot_proteomics_non_ptm_search]{rba_uniprot_proteomics_non_ptm_search()}},
+\code{\link[=rba_uniprot_proteomics_ptm]{rba_uniprot_proteomics_ptm()}},
+\code{\link[=rba_uniprot_proteomics_ptm_search]{rba_uniprot_proteomics_ptm_search()}},
+\code{\link[=rba_uniprot_proteomics_species]{rba_uniprot_proteomics_species()}}
 }
 \concept{"UniProt - Proteomics"}

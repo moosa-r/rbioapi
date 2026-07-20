@@ -56,18 +56,18 @@ rba_jaspar_matrix_versions("MA0600")
   }
 }
 \seealso{
-Other "JASPAR": 
-\code{\link{rba_jaspar_collections}()},
-\code{\link{rba_jaspar_collections_matrices}()},
-\code{\link{rba_jaspar_matrix}()},
-\code{\link{rba_jaspar_matrix_search}()},
-\code{\link{rba_jaspar_releases}()},
-\code{\link{rba_jaspar_sites}()},
-\code{\link{rba_jaspar_species}()},
-\code{\link{rba_jaspar_species_matrices}()},
-\code{\link{rba_jaspar_taxons}()},
-\code{\link{rba_jaspar_taxons_matrices}()},
-\code{\link{rba_jaspar_tffm}()},
-\code{\link{rba_jaspar_tffm_search}()}
+Other "JASPAR":
+\code{\link[=rba_jaspar_collections]{rba_jaspar_collections()}},
+\code{\link[=rba_jaspar_collections_matrices]{rba_jaspar_collections_matrices()}},
+\code{\link[=rba_jaspar_matrix]{rba_jaspar_matrix()}},
+\code{\link[=rba_jaspar_matrix_search]{rba_jaspar_matrix_search()}},
+\code{\link[=rba_jaspar_releases]{rba_jaspar_releases()}},
+\code{\link[=rba_jaspar_sites]{rba_jaspar_sites()}},
+\code{\link[=rba_jaspar_species]{rba_jaspar_species()}},
+\code{\link[=rba_jaspar_species_matrices]{rba_jaspar_species_matrices()}},
+\code{\link[=rba_jaspar_taxons]{rba_jaspar_taxons()}},
+\code{\link[=rba_jaspar_taxons_matrices]{rba_jaspar_taxons_matrices()}},
+\code{\link[=rba_jaspar_tffm]{rba_jaspar_tffm()}},
+\code{\link[=rba_jaspar_tffm_search]{rba_jaspar_tffm_search()}}
 }
 \concept{"JASPAR"}

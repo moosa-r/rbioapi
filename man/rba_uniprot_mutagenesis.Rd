@@ -55,7 +55,7 @@ rba_uniprot_mutagenesis(accession = "P0DTC2", location = "300-400")
   }
 }
 \seealso{
-Other "UniProt - Mutagenesis": 
-\code{\link{rba_uniprot_mutagenesis_search}()}
+Other "UniProt - Mutagenesis":
+\code{\link[=rba_uniprot_mutagenesis_search]{rba_uniprot_mutagenesis_search()}}
 }
 \concept{"UniProt - Mutagenesis"}

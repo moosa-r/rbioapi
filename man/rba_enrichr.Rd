@@ -122,20 +122,20 @@ rba_enrichr(gene_list = c("TP53", "TNF", "EGFR"),
   }
 }
 \seealso{
-Other "Enrichr": 
-\code{\link{rba_enrichr_add_background}()},
-\code{\link{rba_enrichr_add_list}()},
-\code{\link{rba_enrichr_enrich}()},
-\code{\link{rba_enrichr_gene_map}()},
-\code{\link{rba_enrichr_libs}()},
-\code{\link{rba_enrichr_view_list}()}
+Other "Enrichr":
+\code{\link[=rba_enrichr_add_background]{rba_enrichr_add_background()}},
+\code{\link[=rba_enrichr_add_list]{rba_enrichr_add_list()}},
+\code{\link[=rba_enrichr_enrich]{rba_enrichr_enrich()}},
+\code{\link[=rba_enrichr_gene_map]{rba_enrichr_gene_map()}},
+\code{\link[=rba_enrichr_libs]{rba_enrichr_libs()}},
+\code{\link[=rba_enrichr_view_list]{rba_enrichr_view_list()}}
 
-Other "Enrichment/Over-representation": 
-\code{\link{rba_mieaa_enrich}()},
-\code{\link{rba_panther_enrich}()},
-\code{\link{rba_reactome_analysis}()},
-\code{\link{rba_string_enrichment}()},
-\code{\link{rba_string_enrichment_image}()}
+Other "Enrichment/Over-representation":
+\code{\link[=rba_mieaa_enrich]{rba_mieaa_enrich()}},
+\code{\link[=rba_panther_enrich]{rba_panther_enrich()}},
+\code{\link[=rba_reactome_analysis]{rba_reactome_analysis()}},
+\code{\link[=rba_string_enrichment]{rba_string_enrichment()}},
+\code{\link[=rba_string_enrichment_image]{rba_string_enrichment_image()}}
 }
 \concept{"Enrichment/Over-representation"}
 \concept{"Enrichr"}

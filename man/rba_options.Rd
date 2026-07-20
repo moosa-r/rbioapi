@@ -92,9 +92,9 @@ rba_options(diagnostics = TRUE, progress = TRUE)
 
 }
 \seealso{
-Other "Helper functions": 
-\code{\link{rba_connection_test}()},
-\code{\link{rba_pages}()}
+Other "Helper functions":
+\code{\link[=rba_connection_test]{rba_connection_test()}},
+\code{\link[=rba_pages]{rba_pages()}}
 }
 \concept{"Helper functions"}
 \keyword{Helper}

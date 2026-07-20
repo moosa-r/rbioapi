@@ -64,7 +64,7 @@ rba_reactome_event_ancestors("R-HSA-5673001")
   }
 }
 \seealso{
-Other "Reactome Content Service - Queries Related to Events": 
-\code{\link{rba_reactome_event_hierarchy}()}
+Other "Reactome Content Service - Queries Related to Events":
+\code{\link[=rba_reactome_event_hierarchy]{rba_reactome_event_hierarchy()}}
 }
 \concept{"Reactome Content Service - Queries Related to Events"}

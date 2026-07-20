@@ -96,7 +96,7 @@ rba_reactome_interactors_static(proteins = c("Q9BXM7-1", "Q13501"),
   }
 }
 \seealso{
-Other "Reactome Content Service - Molecule Interactors": 
-\code{\link{rba_reactome_interactors_psicquic}()}
+Other "Reactome Content Service - Molecule Interactors":
+\code{\link[=rba_reactome_interactors_psicquic]{rba_reactome_interactors_psicquic()}}
 }
 \concept{"Reactome Content Service - Molecule Interactors"}

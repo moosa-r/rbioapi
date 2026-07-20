@@ -37,9 +37,9 @@ rba_connection_test()
 
 }
 \seealso{
-Other "Helper functions": 
-\code{\link{rba_options}()},
-\code{\link{rba_pages}()}
+Other "Helper functions":
+\code{\link[=rba_options]{rba_options()}},
+\code{\link[=rba_pages]{rba_pages()}}
 }
 \concept{"Helper functions"}
 \keyword{Helper}

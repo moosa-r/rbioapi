@@ -97,7 +97,7 @@ rba_uniprot_variation(id = "O43593", id_type = "uniprot")
   }
 }
 \seealso{
-Other "UniProt - Variation": 
-\code{\link{rba_uniprot_variation_search}()}
+Other "UniProt - Variation":
+\code{\link[=rba_uniprot_variation_search]{rba_uniprot_variation_search()}}
 }
 \concept{"UniProt - Variation"}

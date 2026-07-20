@@ -146,20 +146,20 @@ rba_mieaa_enrich(test_set = c("hsa-miR-20b-5p", "hsa-miR-144-5p",
   }
 }
 \seealso{
-Other "miEAA": 
-\code{\link{rba_mieaa_cats}()},
-\code{\link{rba_mieaa_convert_type}()},
-\code{\link{rba_mieaa_convert_version}()},
-\code{\link{rba_mieaa_enrich_results}()},
-\code{\link{rba_mieaa_enrich_status}()},
-\code{\link{rba_mieaa_enrich_submit}()}
+Other "miEAA":
+\code{\link[=rba_mieaa_cats]{rba_mieaa_cats()}},
+\code{\link[=rba_mieaa_convert_type]{rba_mieaa_convert_type()}},
+\code{\link[=rba_mieaa_convert_version]{rba_mieaa_convert_version()}},
+\code{\link[=rba_mieaa_enrich_results]{rba_mieaa_enrich_results()}},
+\code{\link[=rba_mieaa_enrich_status]{rba_mieaa_enrich_status()}},
+\code{\link[=rba_mieaa_enrich_submit]{rba_mieaa_enrich_submit()}}
 
-Other "Enrichment/Over-representation": 
-\code{\link{rba_enrichr}()},
-\code{\link{rba_panther_enrich}()},
-\code{\link{rba_reactome_analysis}()},
-\code{\link{rba_string_enrichment}()},
-\code{\link{rba_string_enrichment_image}()}
+Other "Enrichment/Over-representation":
+\code{\link[=rba_enrichr]{rba_enrichr()}},
+\code{\link[=rba_panther_enrich]{rba_panther_enrich()}},
+\code{\link[=rba_reactome_analysis]{rba_reactome_analysis()}},
+\code{\link[=rba_string_enrichment]{rba_string_enrichment()}},
+\code{\link[=rba_string_enrichment_image]{rba_string_enrichment_image()}}
 }
 \concept{"Enrichment/Over-representation"}
 \concept{"miEAA"}

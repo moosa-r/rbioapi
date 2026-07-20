@@ -89,10 +89,10 @@ rba_uniprot_coordinates_search(taxid = 9606, chromosome = "y")
   }
 }
 \seealso{
-Other "UniProt - Coordinates": 
-\code{\link{rba_uniprot_coordinates}()},
-\code{\link{rba_uniprot_coordinates_location}()},
-\code{\link{rba_uniprot_coordinates_location_genome}()},
-\code{\link{rba_uniprot_coordinates_location_protein}()}
+Other "UniProt - Coordinates":
+\code{\link[=rba_uniprot_coordinates]{rba_uniprot_coordinates()}},
+\code{\link[=rba_uniprot_coordinates_location]{rba_uniprot_coordinates_location()}},
+\code{\link[=rba_uniprot_coordinates_location_genome]{rba_uniprot_coordinates_location_genome()}},
+\code{\link[=rba_uniprot_coordinates_location_protein]{rba_uniprot_coordinates_location_protein()}}
 }
 \concept{"UniProt - Coordinates"}

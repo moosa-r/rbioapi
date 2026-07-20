@@ -165,9 +165,9 @@ rba_reactome_exporter_diagram(event_id = "R-HSA-177929",
 \code{\link{rba_reactome_exporter_reaction}}
 \code{\link{rba_reactome_analysis}}
 
-Other "Reactome Content Service - Format Exporter": 
-\code{\link{rba_reactome_exporter_event}()},
-\code{\link{rba_reactome_exporter_overview}()},
-\code{\link{rba_reactome_exporter_reaction}()}
+Other "Reactome Content Service - Format Exporter":
+\code{\link[=rba_reactome_exporter_event]{rba_reactome_exporter_event()}},
+\code{\link[=rba_reactome_exporter_overview]{rba_reactome_exporter_overview()}},
+\code{\link[=rba_reactome_exporter_reaction]{rba_reactome_exporter_reaction()}}
 }
 \concept{"Reactome Content Service - Format Exporter"}

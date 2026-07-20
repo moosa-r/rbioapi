@@ -73,7 +73,7 @@ rba_uniprot_mutagenesis_search(taxid = 2697049)
   }
 }
 \seealso{
-Other "UniProt - Mutagenesis": 
-\code{\link{rba_uniprot_mutagenesis}()}
+Other "UniProt - Mutagenesis":
+\code{\link[=rba_uniprot_mutagenesis]{rba_uniprot_mutagenesis()}}
 }
 \concept{"UniProt - Mutagenesis"}

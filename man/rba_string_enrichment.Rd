@@ -89,24 +89,24 @@ rba_string_enrichment(ids = c("TP53", "TNF", "EGFR"), species = 9606)
   \link{rba_string_enrichment_image}
   }
 
-Other "STRING": 
-\code{\link{rba_string_annotations}()},
-\code{\link{rba_string_enrichment_image}()},
-\code{\link{rba_string_enrichment_ppi}()},
-\code{\link{rba_string_homology_inter}()},
-\code{\link{rba_string_homology_intra}()},
-\code{\link{rba_string_interaction_partners}()},
-\code{\link{rba_string_interactions_network}()},
-\code{\link{rba_string_map_ids}()},
-\code{\link{rba_string_network_image}()},
-\code{\link{rba_string_version}()}
+Other "STRING":
+\code{\link[=rba_string_annotations]{rba_string_annotations()}},
+\code{\link[=rba_string_enrichment_image]{rba_string_enrichment_image()}},
+\code{\link[=rba_string_enrichment_ppi]{rba_string_enrichment_ppi()}},
+\code{\link[=rba_string_homology_inter]{rba_string_homology_inter()}},
+\code{\link[=rba_string_homology_intra]{rba_string_homology_intra()}},
+\code{\link[=rba_string_interaction_partners]{rba_string_interaction_partners()}},
+\code{\link[=rba_string_interactions_network]{rba_string_interactions_network()}},
+\code{\link[=rba_string_map_ids]{rba_string_map_ids()}},
+\code{\link[=rba_string_network_image]{rba_string_network_image()}},
+\code{\link[=rba_string_version]{rba_string_version()}}
 
-Other "Enrichment/Over-representation": 
-\code{\link{rba_enrichr}()},
-\code{\link{rba_mieaa_enrich}()},
-\code{\link{rba_panther_enrich}()},
-\code{\link{rba_reactome_analysis}()},
-\code{\link{rba_string_enrichment_image}()}
+Other "Enrichment/Over-representation":
+\code{\link[=rba_enrichr]{rba_enrichr()}},
+\code{\link[=rba_mieaa_enrich]{rba_mieaa_enrich()}},
+\code{\link[=rba_panther_enrich]{rba_panther_enrich()}},
+\code{\link[=rba_reactome_analysis]{rba_reactome_analysis()}},
+\code{\link[=rba_string_enrichment_image]{rba_string_enrichment_image()}}
 }
 \concept{"Enrichment/Over-representation"}
 \concept{"STRING"}

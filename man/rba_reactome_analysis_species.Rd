@@ -99,12 +99,12 @@ rba_reactome_analysis_species(species_dbid = 48892)
 \seealso{
 \code{\link{rba_reactome_orthology}}
 
-Other "Reactome Analysis Service": 
-\code{\link{rba_reactome_analysis}()},
-\code{\link{rba_reactome_analysis_download}()},
-\code{\link{rba_reactome_analysis_import}()},
-\code{\link{rba_reactome_analysis_mapping}()},
-\code{\link{rba_reactome_analysis_pdf}()},
-\code{\link{rba_reactome_analysis_token}()}
+Other "Reactome Analysis Service":
+\code{\link[=rba_reactome_analysis]{rba_reactome_analysis()}},
+\code{\link[=rba_reactome_analysis_download]{rba_reactome_analysis_download()}},
+\code{\link[=rba_reactome_analysis_import]{rba_reactome_analysis_import()}},
+\code{\link[=rba_reactome_analysis_mapping]{rba_reactome_analysis_mapping()}},
+\code{\link[=rba_reactome_analysis_pdf]{rba_reactome_analysis_pdf()}},
+\code{\link[=rba_reactome_analysis_token]{rba_reactome_analysis_token()}}
 }
 \concept{"Reactome Analysis Service"}

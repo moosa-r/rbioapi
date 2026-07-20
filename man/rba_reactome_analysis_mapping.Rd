@@ -81,12 +81,12 @@ rba_reactome_analysis_mapping(c("Q8SQ34", "cd40"))
   }
 }
 \seealso{
-Other "Reactome Analysis Service": 
-\code{\link{rba_reactome_analysis}()},
-\code{\link{rba_reactome_analysis_download}()},
-\code{\link{rba_reactome_analysis_import}()},
-\code{\link{rba_reactome_analysis_pdf}()},
-\code{\link{rba_reactome_analysis_species}()},
-\code{\link{rba_reactome_analysis_token}()}
+Other "Reactome Analysis Service":
+\code{\link[=rba_reactome_analysis]{rba_reactome_analysis()}},
+\code{\link[=rba_reactome_analysis_download]{rba_reactome_analysis_download()}},
+\code{\link[=rba_reactome_analysis_import]{rba_reactome_analysis_import()}},
+\code{\link[=rba_reactome_analysis_pdf]{rba_reactome_analysis_pdf()}},
+\code{\link[=rba_reactome_analysis_species]{rba_reactome_analysis_species()}},
+\code{\link[=rba_reactome_analysis_token]{rba_reactome_analysis_token()}}
 }
 \concept{"Reactome Analysis Service"}

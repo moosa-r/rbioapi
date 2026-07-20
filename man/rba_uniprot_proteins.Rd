@@ -68,8 +68,8 @@ rba_uniprot_proteins(accession = "Q29983", isoforms = TRUE)
   }
 }
 \seealso{
-Other "UniProt - Proteins": 
-\code{\link{rba_uniprot_proteins_crossref}()},
-\code{\link{rba_uniprot_proteins_search}()}
+Other "UniProt - Proteins":
+\code{\link[=rba_uniprot_proteins_crossref]{rba_uniprot_proteins_crossref()}},
+\code{\link[=rba_uniprot_proteins_search]{rba_uniprot_proteins_search()}}
 }
 \concept{"UniProt - Proteins"}

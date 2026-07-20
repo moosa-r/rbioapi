@@ -32,8 +32,8 @@ rba_uniprot_epitope(accession = "P36222")
 
 }
 \seealso{
-Other "UniProt - Epitopes": 
-\code{\link{rba_uniprot_epitope_search}()},
-\code{\link{rba_uniprot_rna_edit}()}
+Other "UniProt - Epitopes":
+\code{\link[=rba_uniprot_epitope_search]{rba_uniprot_epitope_search()}},
+\code{\link[=rba_uniprot_rna_edit]{rba_uniprot_rna_edit()}}
 }
 \concept{"UniProt - Epitopes"}

@@ -60,7 +60,7 @@ rba_reactome_people_name("Steve Jupe", exact_match = TRUE)
   }
 }
 \seealso{
-Other "Reactome Content Service - Person Queries": 
-\code{\link{rba_reactome_people_id}()}
+Other "Reactome Content Service - Person Queries":
+\code{\link[=rba_reactome_people_id]{rba_reactome_people_id()}}
 }
 \concept{"Reactome Content Service - Person Queries"}

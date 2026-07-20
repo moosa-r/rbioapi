@@ -159,20 +159,20 @@ rba_panther_enrich(
   }
 }
 \seealso{
-Other "PANTHER": 
-\code{\link{rba_panther_family}()},
-\code{\link{rba_panther_homolog}()},
-\code{\link{rba_panther_info}()},
-\code{\link{rba_panther_mapping}()},
-\code{\link{rba_panther_ortholog}()},
-\code{\link{rba_panther_tree_grafter}()}
+Other "PANTHER":
+\code{\link[=rba_panther_family]{rba_panther_family()}},
+\code{\link[=rba_panther_homolog]{rba_panther_homolog()}},
+\code{\link[=rba_panther_info]{rba_panther_info()}},
+\code{\link[=rba_panther_mapping]{rba_panther_mapping()}},
+\code{\link[=rba_panther_ortholog]{rba_panther_ortholog()}},
+\code{\link[=rba_panther_tree_grafter]{rba_panther_tree_grafter()}}
 
-Other "Enrichment/Over-representation": 
-\code{\link{rba_enrichr}()},
-\code{\link{rba_mieaa_enrich}()},
-\code{\link{rba_reactome_analysis}()},
-\code{\link{rba_string_enrichment}()},
-\code{\link{rba_string_enrichment_image}()}
+Other "Enrichment/Over-representation":
+\code{\link[=rba_enrichr]{rba_enrichr()}},
+\code{\link[=rba_mieaa_enrich]{rba_mieaa_enrich()}},
+\code{\link[=rba_reactome_analysis]{rba_reactome_analysis()}},
+\code{\link[=rba_string_enrichment]{rba_string_enrichment()}},
+\code{\link[=rba_string_enrichment_image]{rba_string_enrichment_image()}}
 }
 \concept{"Enrichment/Over-representation"}
 \concept{"PANTHER"}

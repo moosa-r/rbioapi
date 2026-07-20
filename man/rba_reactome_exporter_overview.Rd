@@ -120,9 +120,9 @@ rba_reactome_exporter_overview(species = 9606,
 \seealso{
 \code{\link{rba_reactome_analysis}}
 
-Other "Reactome Content Service - Format Exporter": 
-\code{\link{rba_reactome_exporter_diagram}()},
-\code{\link{rba_reactome_exporter_event}()},
-\code{\link{rba_reactome_exporter_reaction}()}
+Other "Reactome Content Service - Format Exporter":
+\code{\link[=rba_reactome_exporter_diagram]{rba_reactome_exporter_diagram()}},
+\code{\link[=rba_reactome_exporter_event]{rba_reactome_exporter_event()}},
+\code{\link[=rba_reactome_exporter_reaction]{rba_reactome_exporter_reaction()}}
 }
 \concept{"Reactome Content Service - Format Exporter"}

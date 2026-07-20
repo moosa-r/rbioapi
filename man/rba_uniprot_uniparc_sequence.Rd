@@ -74,9 +74,9 @@ rba_uniprot_uniparc_sequence("GMRSCPRGCSQRGRCENGRCVCNPGYTGEDC")
   }
 }
 \seealso{
-Other "UniProt - UniParc": 
-\code{\link{rba_uniprot_uniparc}()},
-\code{\link{rba_uniprot_uniparc_bestguess}()},
-\code{\link{rba_uniprot_uniparc_search}()}
+Other "UniProt - UniParc":
+\code{\link[=rba_uniprot_uniparc]{rba_uniprot_uniparc()}},
+\code{\link[=rba_uniprot_uniparc_bestguess]{rba_uniprot_uniparc_bestguess()}},
+\code{\link[=rba_uniprot_uniparc_search]{rba_uniprot_uniparc_search()}}
 }
 \concept{"UniProt - UniParc"}

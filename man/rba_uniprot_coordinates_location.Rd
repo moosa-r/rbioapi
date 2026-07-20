@@ -74,10 +74,10 @@ rba_uniprot_coordinates_location(taxid = 9606,
   }
 }
 \seealso{
-Other "UniProt - Coordinates": 
-\code{\link{rba_uniprot_coordinates}()},
-\code{\link{rba_uniprot_coordinates_location_genome}()},
-\code{\link{rba_uniprot_coordinates_location_protein}()},
-\code{\link{rba_uniprot_coordinates_search}()}
+Other "UniProt - Coordinates":
+\code{\link[=rba_uniprot_coordinates]{rba_uniprot_coordinates()}},
+\code{\link[=rba_uniprot_coordinates_location_genome]{rba_uniprot_coordinates_location_genome()}},
+\code{\link[=rba_uniprot_coordinates_location_protein]{rba_uniprot_coordinates_location_protein()}},
+\code{\link[=rba_uniprot_coordinates_search]{rba_uniprot_coordinates_search()}}
 }
 \concept{"UniProt - Coordinates"}

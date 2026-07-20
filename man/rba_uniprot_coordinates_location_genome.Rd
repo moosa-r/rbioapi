@@ -76,10 +76,10 @@ For more information about how UniProt imports and calculates genomic
   }
 }
 \seealso{
-Other "UniProt - Coordinates": 
-\code{\link{rba_uniprot_coordinates}()},
-\code{\link{rba_uniprot_coordinates_location}()},
-\code{\link{rba_uniprot_coordinates_location_protein}()},
-\code{\link{rba_uniprot_coordinates_search}()}
+Other "UniProt - Coordinates":
+\code{\link[=rba_uniprot_coordinates]{rba_uniprot_coordinates()}},
+\code{\link[=rba_uniprot_coordinates_location]{rba_uniprot_coordinates_location()}},
+\code{\link[=rba_uniprot_coordinates_location_protein]{rba_uniprot_coordinates_location_protein()}},
+\code{\link[=rba_uniprot_coordinates_search]{rba_uniprot_coordinates_search()}}
 }
 \concept{"UniProt - Coordinates"}

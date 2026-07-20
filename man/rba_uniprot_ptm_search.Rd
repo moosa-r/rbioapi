@@ -98,9 +98,9 @@ rba_uniprot_ptm_search(peptide = "NDQVYQPLRDRDDAQYSHLGGNWAR")
   }
 }
 \seealso{
-Other "Deprecated functions": 
-\code{\link{rba_uniprot_proteomics}()},
-\code{\link{rba_uniprot_proteomics_search}()},
-\code{\link{rba_uniprot_ptm}()}
+Other "Deprecated functions":
+\code{\link[=rba_uniprot_proteomics]{rba_uniprot_proteomics()}},
+\code{\link[=rba_uniprot_proteomics_search]{rba_uniprot_proteomics_search()}},
+\code{\link[=rba_uniprot_ptm]{rba_uniprot_ptm()}}
 }
 \concept{"Deprecated functions"}

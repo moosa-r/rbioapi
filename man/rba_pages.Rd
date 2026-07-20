@@ -55,9 +55,9 @@ rba_pages(input_call = quote(rba_panther_info(what = "families",
 
 }
 \seealso{
-Other "Helper functions": 
-\code{\link{rba_connection_test}()},
-\code{\link{rba_options}()}
+Other "Helper functions":
+\code{\link[=rba_connection_test]{rba_connection_test()}},
+\code{\link[=rba_options]{rba_options()}}
 }
 \concept{"Helper functions"}
 \keyword{Helper}

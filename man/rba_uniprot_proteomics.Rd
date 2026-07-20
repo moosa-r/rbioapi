@@ -53,9 +53,9 @@ rba_uniprot_proteomics(accession = "P25942")
   }
 }
 \seealso{
-Other "Deprecated functions": 
-\code{\link{rba_uniprot_proteomics_search}()},
-\code{\link{rba_uniprot_ptm}()},
-\code{\link{rba_uniprot_ptm_search}()}
+Other "Deprecated functions":
+\code{\link[=rba_uniprot_proteomics_search]{rba_uniprot_proteomics_search()}},
+\code{\link[=rba_uniprot_ptm]{rba_uniprot_ptm()}},
+\code{\link[=rba_uniprot_ptm_search]{rba_uniprot_ptm_search()}}
 }
 \concept{"Deprecated functions"}

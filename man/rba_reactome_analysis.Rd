@@ -166,20 +166,20 @@ rba_reactome_analysis(input = "https://qazwsx.com/genes.txt")
   }
 }
 \seealso{
-Other "Reactome Analysis Service": 
-\code{\link{rba_reactome_analysis_download}()},
-\code{\link{rba_reactome_analysis_import}()},
-\code{\link{rba_reactome_analysis_mapping}()},
-\code{\link{rba_reactome_analysis_pdf}()},
-\code{\link{rba_reactome_analysis_species}()},
-\code{\link{rba_reactome_analysis_token}()}
+Other "Reactome Analysis Service":
+\code{\link[=rba_reactome_analysis_download]{rba_reactome_analysis_download()}},
+\code{\link[=rba_reactome_analysis_import]{rba_reactome_analysis_import()}},
+\code{\link[=rba_reactome_analysis_mapping]{rba_reactome_analysis_mapping()}},
+\code{\link[=rba_reactome_analysis_pdf]{rba_reactome_analysis_pdf()}},
+\code{\link[=rba_reactome_analysis_species]{rba_reactome_analysis_species()}},
+\code{\link[=rba_reactome_analysis_token]{rba_reactome_analysis_token()}}
 
-Other "Enrichment/Over-representation": 
-\code{\link{rba_enrichr}()},
-\code{\link{rba_mieaa_enrich}()},
-\code{\link{rba_panther_enrich}()},
-\code{\link{rba_string_enrichment}()},
-\code{\link{rba_string_enrichment_image}()}
+Other "Enrichment/Over-representation":
+\code{\link[=rba_enrichr]{rba_enrichr()}},
+\code{\link[=rba_mieaa_enrich]{rba_mieaa_enrich()}},
+\code{\link[=rba_panther_enrich]{rba_panther_enrich()}},
+\code{\link[=rba_string_enrichment]{rba_string_enrichment()}},
+\code{\link[=rba_string_enrichment_image]{rba_string_enrichment_image()}}
 }
 \concept{"Enrichment/Over-representation"}
 \concept{"Reactome Analysis Service"}

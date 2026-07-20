@@ -94,9 +94,9 @@ rba_uniprot_uniparc(upi = "UPI00000000C9", rf_active = FALSE)
   }
 }
 \seealso{
-Other "UniProt - UniParc": 
-\code{\link{rba_uniprot_uniparc_bestguess}()},
-\code{\link{rba_uniprot_uniparc_search}()},
-\code{\link{rba_uniprot_uniparc_sequence}()}
+Other "UniProt - UniParc":
+\code{\link[=rba_uniprot_uniparc_bestguess]{rba_uniprot_uniparc_bestguess()}},
+\code{\link[=rba_uniprot_uniparc_search]{rba_uniprot_uniparc_search()}},
+\code{\link[=rba_uniprot_uniparc_sequence]{rba_uniprot_uniparc_sequence()}}
 }
 \concept{"UniProt - UniParc"}

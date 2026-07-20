@@ -72,7 +72,7 @@ rba_reactome_event_hierarchy(9606)
   }
 }
 \seealso{
-Other "Reactome Content Service - Queries Related to Events": 
-\code{\link{rba_reactome_event_ancestors}()}
+Other "Reactome Content Service - Queries Related to Events":
+\code{\link[=rba_reactome_event_ancestors]{rba_reactome_event_ancestors()}}
 }
 \concept{"Reactome Content Service - Queries Related to Events"}
