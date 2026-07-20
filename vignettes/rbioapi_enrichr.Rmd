@@ -132,7 +132,7 @@ if (is.data.frame(results_msig_hallmark)) {
 }
 ```
 
-When supplying the `gene_set_library` argument, rbioapi assumes you are entering a regex pattern. You can disable this by setting `regex_library_name` to `FALSE`. However, this feature is useful if you need -for example- partial matches in the library names. Suppose you want to perform the enrichment analysis on every library available in Enrichr that contains the name "MSig". You can do the following:
+By default, rbioapi matches the supplied `gene_set_library` exactly. Set `regex_library_name` to `TRUE` to use a regex pattern instead. This is useful if you need, for example, partial matches in library names. Suppose you want to perform the enrichment analysis on every Enrichr library containing "MSig". You can do the following:
 
 ```{r waiting2, echo=FALSE}
 #wait 3 seconds to prevent rate limiting
@@ -148,7 +148,7 @@ results_msig <- rba_enrichr(
   progress_bar = FALSE # to avoid printing issues in the vignette
 )
 
-# You can drop `regex_library_name = TRUE`, as it is TRUE by default.
+# Regex matching must be enabled explicitly.
 ```
 
 Note that when only one Enrichr library is selected, a data frame with enrichment analysis result will be returned.
@@ -237,7 +237,7 @@ Enrichr also provides libraries for model organisms. The following functions hav
 
 4.  `rba_enrichr_libs()`
 
-The available options for the organism argument are human", (H. sapiens & M. musculus), fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans), and "fish" (D. rerio).
+The available options for the organism argument are "human" (H. sapiens & M. musculus), "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans), and "fish" (D. rerio).
 
 ------------------------------------------------------------------------
 
@@ -252,7 +252,7 @@ If using the one-step wrapper `rba_enrichr()` ([Approach 1](#approach-1-using-th
 results_msig <- rba_enrichr(
   gene_list = genes,
   background_genes = my_background_genes,
-  regex_library_name = TRUE
+  gene_set_library = "MSigDB_Hallmark_2020"
 )
 ```
 
@@ -285,7 +285,7 @@ background_id <- rba_enrichr_add_background(background_genes = my_background_gen
 go_results <- rba_enrichr_enrich(
   user_list_id = list_id_spdr$userListId,
   background_id = background_id$backgroundid,
-  gene_set_library = "GO"
+  gene_set_library = "GO_Biological_Process_2025"
 )
 
 ```

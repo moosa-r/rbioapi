@@ -78,7 +78,7 @@ This function will call other rba_enrichr_*** functions with the following
  \cr "POST https://maayanlab.cloud/Enrichr/addList"
  \cr "POST https://maayanlab.cloud/speedrichr/api/addList"
  \cr "POST https://maayanlab.cloud/speedrichr/api/addbackground"
- \cr "GET https://maayanlab.cloud/Enrichr/enrich"
+ \cr "GET https://maayanlab.cloud/Enrichr/export"
  \cr "POST https://maayanlab.cloud/speedrichr/api/backgroundenrich"
 }
 

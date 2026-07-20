@@ -69,7 +69,7 @@ Please note that \code{\link{rba_enrichr}} provides a one-step and
 }
 \section{Corresponding API Resources}{
 
- "GET https://maayanlab.cloud/Enrichr/enrich"
+ "GET https://maayanlab.cloud/Enrichr/export"
  \cr "POST https://maayanlab.cloud/speedrichr/api/backgroundenrich"
 }
 

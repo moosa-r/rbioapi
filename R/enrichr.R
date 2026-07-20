@@ -349,6 +349,7 @@ rba_enrichr_add_list <- function(gene_list,
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://maayanlab.cloud/Enrichr/view"
+#'  \cr "GET https://maayanlab.cloud/speedrichr/api/view"
 #
 #' @param user_list_id a user list ID returned after uploading a gene
 #'   list using \code{\link{rba_enrichr_add_list}}
@@ -404,7 +405,7 @@ rba_enrichr_view_list <- function(user_list_id,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "user_list_id", class = c("numeric"), len = 1),
+      list(arg = "user_list_id", class = c("numeric", "integer"), len = 1),
       list(
         arg = "organism", class = "character", no_null = TRUE,
         val = c("human", "fly", "yeast", "worm", "fish")
@@ -431,7 +432,10 @@ rba_enrichr_view_list <- function(user_list_id,
   input_call <- .rba_httr(
     httr = "get",
     url = .rba_stg("enrichr", "url"),
-    path = paste0(.rba_stg("enrichr", "pth", organism), "view"),
+    path = paste0(
+      .rba_stg("enrichr", "pth", ifelse(speedrichr, "speedrichr", organism)),
+      "view"
+    ),
     query = call_query,
     accept = "application/json",
     parser = "json->list_simp",
@@ -548,7 +552,7 @@ rba_enrichr_add_background <- function(background_genes,
 #' handle API requests to the server.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://maayanlab.cloud/Enrichr/enrich"
+#'  "GET https://maayanlab.cloud/Enrichr/export"
 #'  \cr "POST https://maayanlab.cloud/speedrichr/api/backgroundenrich"
 #'
 #' @param user_list_id An ID returned to you after uploading a gene
@@ -755,7 +759,7 @@ rba_enrichr_add_background <- function(background_genes,
 #'   function calls needed to perform gene set enrichment analysis with Enrichr.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://maayanlab.cloud/Enrichr/enrich"
+#'  "GET https://maayanlab.cloud/Enrichr/export"
 #'  \cr "POST https://maayanlab.cloud/speedrichr/api/backgroundenrich"
 #'
 #' @param user_list_id An ID returned after uploading a gene list
@@ -961,7 +965,10 @@ rba_enrichr_enrich <- function(user_list_id,
         background_id = background_id,
         gene_set_library = lib,
         organism = organism,
-        save_name = sprintf("enrichr_%s_%s.json", user_list_id, lib),
+        save_name = sprintf(
+          "enrichr_%s_%s.%s",
+          user_list_id, lib, ifelse(is.null(background_id), "tsv", "json")
+        ),
         sleep_time  = if (is_multi_libs) { 1 } else { 0 },
         ...
       )
@@ -1101,7 +1108,7 @@ rba_enrichr_gene_map <- function(gene,
 #'  \cr "POST https://maayanlab.cloud/Enrichr/addList"
 #'  \cr "POST https://maayanlab.cloud/speedrichr/api/addList"
 #'  \cr "POST https://maayanlab.cloud/speedrichr/api/addbackground"
-#'  \cr "GET https://maayanlab.cloud/Enrichr/enrich"
+#'  \cr "GET https://maayanlab.cloud/Enrichr/export"
 #'  \cr "POST https://maayanlab.cloud/speedrichr/api/backgroundenrich"
 #'
 #' @inheritParams rba_enrichr_add_list

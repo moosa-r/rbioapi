@@ -157,13 +157,13 @@ if (is.data.frame(enrichr_enrich) && hasName(enrichr_enrich, "Adjusted.P.value")
 }
 ```
 
-In the `gene_set_library` parameter, you can also provide multiple gene set libraries or leave it as the default parameter `NULL` to perform the enrichment analysis using every gene set library available in Enrichr. Also note that when `regex_library_name` parameter is TRUE (the default value), `gene_set_library` parameter will be considered as a regex pattern, so partial matchs will be also selected.
+In the `gene_set_library` parameter, you can provide multiple gene set libraries or leave the default value, `"all"`, to analyze every library available in Enrichr. When `regex_library_name` is `TRUE` (the default is `FALSE`), `gene_set_library` is treated as a regex pattern, so partial matches are also selected.
 
 ```{r enrichr_multi_libs, echo=TRUE, message=TRUE}
 enrichr_enrich_kegg <- rba_enrichr(
   gene_list = covid_critical,
   gene_set_library = "kegg",
-  regex_library_name = TRUE, # default value
+  regex_library_name = TRUE, # enable partial matching
   progress_bar = FALSE # to avoid printing issues in the vignette
 )
 ```
