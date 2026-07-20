@@ -6,32 +6,38 @@
 #'
 #' Consult the source codes to learn about supported arguments and data
 #'   structure. it is straightforward and self-explanatory.
-#'   Currently the first argument can be one of 'db', 'options', 'test',
-#'   'citations' or a service name.
+#'   Currently the first argument can be 'db', 'options', 'tests', or a
+#'   service name.
 #'
-#' @param ... A sequence of arguments in which the function will traverse across
-#'    the defined data storage tree. Only the first arguments will be passed
-#'    to match.arg().
+#' @param ... A sequence of exact keys used to traverse the defined data
+#'   storage tree.
 #' @return Based on the called sequence of arguments, it could be any object
 #'   type. but mostly, it will be of class character.
 #' @family internal_data_container
 #' @noRd
 .rba_stg <- function(...){
-  arg <- c(...)
+
+  supplied_arg <- c(...)
+  arg_n <- length(supplied_arg)
+
+  # Pad a separate dispatch vector for safe indexing
+  arg <- c(
+    supplied_arg,
+    rep(NA_character_, max(0L, 3L - arg_n))
+  )
 
   # Possible arguments
   output <- switch(
     arg[[1]],
-    db = c("enrichr", "ensembl","jaspar", "mieaa", "reactome", "string", "uniprot"),
+
+    db = c("enrichr", "ensembl", "jaspar", "mieaa", "reactome", "panther", "string", "uniprot"),
+
     enrichr = switch(
       arg[[2]],
       name = "Enrichr",
       url = "https://maayanlab.cloud",
       pth = switch(
-        match.arg(
-          arg[[3]],
-          c("human", "fly", "yeast", "worm", "fish", "speedrichr")
-        ),
+        arg[[3]],
         human = "Enrichr/",
         fly = "FlyEnrichr/",
         yeast = "YeastEnrichr/",
@@ -42,6 +48,7 @@
       ptn = "^(https?://)?(www\\.)?maayanlab\\.cloud/(.*Enrichr|speedrichr)/",
       err_ptn = "^$"
     ),
+
     ensembl = switch(
       arg[[2]],
       name = "Ensembl",
@@ -53,6 +60,7 @@
         function(x) { x[["error"]][[1]] }
       )
     ),
+
     jaspar = switch(
       arg[[2]],
       name = "JASPAR",
@@ -61,6 +69,7 @@
       ptn = "^(https?://)?(www\\.)?jaspar\\.elixir\\.no/api/",
       err_ptn = "^$"
     ),
+
     mieaa = switch(
       arg[[2]],
       name = "MiEAA",
@@ -70,27 +79,26 @@
       err_ptn = "^4\\d\\d$",
       err_prs = list("json->chr")
     ),
+
     panther = switch(
       arg[[2]],
       name = "PANTHER",
       url = "https://www.pantherdb.org",
       pth = "services/oai/pantherdb/",
       ptn = "^(https?://)?(www\\.)?pantherdb\\.org/services/",
-      err_ptn = "^4\\d\\d&",
+      err_ptn = "^4\\d\\d$",
       err_prs = list(
         "json->list_simp",
         function(x) { x$search$error }
       )
     ),
+
     reactome = switch(
       arg[[2]],
       name = "Reactome",
       url = "https://reactome.org",
       pth = switch(
-        match.arg(
-          arg[[3]],
-          c("analysis", "content")
-        ),
+        arg[[3]],
         analysis = "AnalysisService/",
         content = "ContentService/"
       ),
@@ -101,6 +109,7 @@
         function(x) { x[["messages"]][[1]] }
       )
     ),
+
     string = switch(
       arg[[2]],
       name = "STRING",
@@ -115,6 +124,7 @@
         function(x) { gsub("(\n)+", "\n", x) }
       )
     ),
+
     uniprot = switch(
       arg[[2]],
       name = "UniProt",
@@ -127,11 +137,13 @@
       ),
       err_ptn = "^4\\d\\d$"
     ),
+
     options = switch(
-      as.character(length(arg)),
-      "1" = options()[grep("^rba_", names(options()))],
+      arg_n,
+      `1` = options()[grep("^rba_", names(options()))],
       getOption(arg[[2]])
     ),
+
     tests = list(
       "Enrichr" = paste0(.rba_stg("enrichr", "url"), "/Enrichr/"),
       "Ensembl" = paste0(.rba_stg("ensembl", "url"), "/info/ping"),
@@ -142,12 +154,22 @@
       "Reactome Analysis Service" = paste0(.rba_stg("reactome", "url"), "/AnalysisService/database/name"),
       "STRING" = paste0(.rba_stg("string", "url"), "/api/json/version"),
       "UniProt" = paste0(.rba_stg("uniprot", "url"), "/proteins/api/proteins/P25445")
-    ),
-    stop(
-      "Internal Error; .rba_stg was called with wrong parameters:\n",
-      paste0(arg, collapse = ", "), call. = TRUE
     )
   )
+
+  if (is.null(output)) {
+    traversal <- if (arg_n == 0L) {
+      "<empty>"
+    } else {
+      paste(sprintf("`%s`", supplied_arg), collapse = " -> ")
+    }
+
+    stop(
+      "Internal Error; .rba_stg was called with wrong parameters.\n",
+      "Traversal: ", traversal,
+      call. = TRUE
+    )
+  }
 
   return(output)
 }

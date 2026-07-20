@@ -16,3 +16,46 @@ test_that(".rba_stg works", {
   )
 
 })
+
+test_that(".rba_stg reports only supplied traversal arguments", {
+
+  expect_error(
+    object = .rba_stg("reactome", "pth"),
+    regexp = "Traversal: `reactome` -> `pth`$"
+  )
+
+})
+
+test_that("an example synthetic 4xx error response parses correctly", {
+
+  response <- structure(
+    list(
+      url = paste0(
+        "https://www.pantherdb.org/services/",
+        "oai/pantherdb/geneinfo"
+      ),
+      status_code = 400L,
+      headers = structure(
+        list("application/json"),
+        names = "content-type"
+      ),
+      content = charToRaw(
+        '{"search":{"error":"Invalid gene identifier"}}'
+      )
+    ),
+    class = "response"
+  )
+
+  error_message <- .rba_error_parser(response)
+
+  expect_match(
+    object = error_message,
+    regexp = "PANTHER server returned"
+  )
+
+  expect_match(
+    object = error_message,
+    regexp = "Invalid gene identifier"
+  )
+
+})
