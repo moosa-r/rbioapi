@@ -667,9 +667,8 @@ rba_enrichr_add_background <- function(background_genes,
                                    "Combined.Score", "Genes",
                                    "Adjusted.P.value",
                                    "Old.P.value", "Old.adjusted.P.value")
-          response_row$Overlapping.genes <- paste0(
-            response_row$Overlapping.genes,
-            collapse = ";")
+
+          response_row$Genes <- paste0(response_row$Genes, collapse = ";")
 
           return(response_row)
         }
