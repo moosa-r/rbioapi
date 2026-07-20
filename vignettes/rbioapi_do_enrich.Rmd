@@ -366,7 +366,7 @@ In addition to proteins interaction data, STRING also curates proteins/genes ann
 
     9.  [BRENDA Tissue and Enzyme Source Ontology](https://bioportal.bioontology.org/ontologies/BTO/)
 
-    10. [SMART](http://smart.embl-heidelberg.de/ "Genetically mobile domains and the analysis of domain architectures")
+    10. [SMART](https://smart.embl.de/ "Genetically mobile domains and the analysis of domain architectures")
 
 We can directly supply our `covid_critical` variable to STRING's enrichment function:
 

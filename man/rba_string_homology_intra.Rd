@@ -34,7 +34,7 @@ Note that this function will retrieve similarity scores of different
   protein and it's closets homologous proteins in other species, see
   \code{\link{rba_string_homology_inter}}.
   \cr Similarity matrix is imported -by STRING- from:
-  \href{https://cube.univie.ac.at/research/software-databases/simap/}{Similarity Matrix of
+  \href{https://pubmed.ncbi.nlm.nih.gov/24165881/}{Similarity Matrix of
   Proteins (SIMAP)}
 }
 \section{Corresponding API Resources}{

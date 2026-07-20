@@ -25,7 +25,7 @@ can supply up to 20 taxon IDs.}
 \item{data_source}{Proteomics data source. In addition to manual curation,
 UniProt also import PTM annotations from the following databases:
 \itemize{
-\item \href{https://hupo.org/human-proteome-project/}{"HPP"}
+\item \href{https://hupo.org/Initiatives/}{"HPP"}
 }
 Please use `rba_uniprot_proteomics_species()` for more information on
 the available data sources for a given species.}
