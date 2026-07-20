@@ -101,6 +101,7 @@ Other "Enrichr":
 \code{\link[=rba_enrichr_add_background]{rba_enrichr_add_background()}},
 \code{\link[=rba_enrichr_enrich]{rba_enrichr_enrich()}},
 \code{\link[=rba_enrichr_gene_map]{rba_enrichr_gene_map()}},
+\code{\link[=rba_enrichr_gene_sets]{rba_enrichr_gene_sets()}},
 \code{\link[=rba_enrichr_libs]{rba_enrichr_libs()}},
 \code{\link[=rba_enrichr_view_list]{rba_enrichr_view_list()}}
 }

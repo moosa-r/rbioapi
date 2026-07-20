@@ -10,6 +10,7 @@
 #'   - `"no_lib"`: failed to fetch Enrichr libraries
 #'   - `"invalid_lib_regex"`: regex did not match any library names
 #'   - `"invalid_lib_chr"`: one or more explicit library names are invalid
+#'   - `"no_gene_sets"`: failed to retrieve gene sets from an Enrichr library
 #'   - `"no_gene_upload"`: failed to upload the gene list
 #'   - `"no_background_upload"`: failed to upload the background list
 #'   - `"no_result"`: failed to retrieve enrichment results
@@ -52,6 +53,12 @@
           "The following supplied Enrichr libraries are invalid. ",
           "Please use `rba_enrichr_libs()` to get a list of valid Enrichr libraries. ",
           paste0(msg_detail, collapse = ", ")
+        ),
+        no_gene_sets = c(
+          "Error: Couldn't retrieve the requested Enrichr gene sets. ",
+          "Please try again. If the problem persists, kindly report this issue to us. ",
+          "The server's response was: ",
+          msg_detail
         ),
         no_gene_upload = c(
           "Error: Couldn't upload your genes list to Enrichr. ",
@@ -96,7 +103,8 @@
 #'   ("rba_enrichr_libs") for other Enrichr functions that internally require
 #'   the names of Enrichr libraries. You should call this function once per
 #'   R session with the argument 'store_in_options = TRUE' before
-#'   using \code{\link{rba_enrichr_enrich}} or \code{\link{rba_enrichr}}.
+#'   using \code{\link{rba_enrichr_gene_sets}},
+#'   \code{\link{rba_enrichr}} or \code{\link{rba_enrichr_enrich}}.
 #'   However, if you do not explicitly call it, rbioapi will automatically
 #'   execute this function in the background the when it is needed.
 #'
@@ -196,6 +204,245 @@ rba_enrichr_libs <- function(organism = "human",
     enrichr_libs[[organism]] <- final_output[["libraryName"]]
     options("rba_enrichr_libs" = enrichr_libs)
 
+  }
+
+  return(final_output)
+}
+
+#' Retrieve Gene Sets From an Enrichr Library
+#'
+#' This function retrieves all gene sets in a given Enrichr library. If a
+#'   term is supplied, only the gene set associated with that term will be
+#'   returned.
+#'
+#' If the available Enrichr library names are not already stored in the
+#'   "rba_enrichr_libs" global option, this function will retrieve and store
+#'   them before validating the supplied library name.
+#'
+#' @section Corresponding API Resources:
+#'  "GET https://maayanlab.cloud/Enrichr/geneSetLibrary"
+#'
+#' @section Saving Gene Sets as a GMT File:
+#'  To save the raw server's response as a GMT file, supply the
+#'  \code{save_file} rbioapi option through \code{...}. Set it to \code{TRUE}
+#'  to automatically generate a proper file path, or supply a character string
+#'  with a valid file or directory path. See \code{\link{rba_options}}'s
+#'  arguments manual for more information on available options. The organism
+#'  will be included in the automatically-generated file name. If a term is
+#'  supplied, its name will also be included.
+#'
+#' @param gene_set_library A valid gene-set library name which exists
+#'   in the results retrieved via \code{\link{rba_enrichr_libs}}.
+#' @param term (optional) An exact Enrichr term name. If left NULL, all gene
+#'   sets in the supplied library will be returned.
+#' @param organism (default = "human") Which model organism version of Enrichr
+#'   to use? Available options are: "human", (H. sapiens & M. musculus),
+#'   "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
+#'   and "fish" (D. rerio).
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
+#'
+#' @return A named list of character vectors. Each element name is an Enrichr
+#'   term and the corresponding character vector contains the genes in that
+#'   gene set. If the \code{save_file} option was set to \code{TRUE} or a valid
+#'   path, the raw GMT file will also be saved to the requested path.
+#'
+#' @references \itemize{
+#'   \item Chen, E.Y., Tan, C.M., Kou, Y. et al. Enrichr: interactive and
+#'   collaborative HTML5 gene list enrichment analysis tool. Bioinformatics
+#'   14, 128 (2013). https://doi.org/10.1186/1471-2105-14-128
+#'   \item Maxim V. Kuleshov, Matthew R. Jones, Andrew D. Rouillard, Nicolas
+#'   F. Fernandez, Qiaonan Duan, Zichen Wang, Simon Koplev, Sherry L. Jenkins,
+#'   Kathleen M. Jagodnik, Alexander Lachmann, Michael G. McDermott,
+#'   Caroline D. Monteiro, Gregory W. Gundersen, Avi Ma’ayan, Enrichr: a
+#'   comprehensive gene set enrichment analysis web server 2016 update,
+#'   Nucleic Acids Research, Volume 44, Issue W1, 8 July 2016, Pages W90–W97,
+#'   https://doi.org/10.1093/nar/gkw377
+#'   \item Xie, Z., Bailey, A., Kuleshov, M. V., Clarke, D. J. B.,
+#'   Evangelista, J. E., Jenkins, S. L., Lachmann, A., Wojciechowicz, M. L.,
+#'   Kropiwnicki, E., Jagodnik, K. M., Jeon, M., & Ma’ayan, A. (2021). Gene
+#'   set knowledge discovery with Enrichr. Current Protocols, 1, e90.
+#'   doi: 10.1002/cpz1.90
+#'   \item \href{https://maayanlab.cloud/Enrichr/help#api}{Enrichr API
+#'   Documentation}
+#'   \item \href{https://maayanlab.cloud/Enrichr/help#terms}{Citations note
+#'   on Enrichr website}
+#'   }
+#'
+#' @examples
+#' \donttest{
+#' rba_enrichr_gene_sets(
+#'     gene_set_library = "Reactome_Pathways_2024",
+#'     term = "Signaling by NOTCH")
+#' }
+#' \donttest{
+#' rba_enrichr_gene_sets(gene_set_library = "Reactome_Pathways_2024")
+#' }
+#' \dontrun{
+#' rba_enrichr_gene_sets(
+#'     gene_set_library = "Reactome_Pathways_2024",
+#'     save_file = "Reactome_Pathways_2024.gmt")
+#' }
+#'
+#' @family "Enrichr"
+#' @seealso \code{\link{rba_enrichr}}
+#' @export
+rba_enrichr_gene_sets <- function(gene_set_library,
+                                  term = NULL,
+                                  organism = "human",
+                                  ...){
+  ## Load Global Options
+  .rba_ext_args(...)
+
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(arg = "gene_set_library", class = "character", len = 1),
+      list(arg = "term", class = "character", len = 1),
+      list(
+        arg = "organism", class = "character", no_null = TRUE,
+        val = c("human", "fly", "yeast", "worm", "fish")
+      )
+    )
+  )
+
+  ## get a list of available libraries and check user inputs
+  if (is.null(getOption("rba_enrichr_libs")[[organism]])) {
+    .msg(
+      "Calling rba_enrichr_libs() to get the names of available Enrichr %s libraries.",
+      organism
+    )
+
+    enrichr_libs <- rba_enrichr_libs(
+      organism = organism,
+      store_in_options = TRUE,
+      ...
+    )
+
+    get_libs_check <- .rba_enrichr_validate(
+      assertion = utils::hasName(enrichr_libs, "libraryName") &&
+        is.character(enrichr_libs[["libraryName"]]) &&
+        length(enrichr_libs[["libraryName"]]) > 0,
+      msg_type = "no_lib",
+      msg_detail = try(enrichr_libs),
+      skip_error = isTRUE(get("skip_error"))
+    )
+
+    if (!isTRUE(get_libs_check)) {
+      return(get_libs_check)
+    } else {
+      enrichr_libs <- enrichr_libs[["libraryName"]]
+    }
+
+  } else {
+    enrichr_libs <- getOption("rba_enrichr_libs")[[organism]]
+  }
+
+  valid_lib_check <- .rba_enrichr_validate(
+    assertion = gene_set_library %in% enrichr_libs,
+    msg_type = "invalid_lib_chr",
+    msg_detail = gene_set_library[!gene_set_library %in% enrichr_libs],
+    skip_error = isTRUE(get("skip_error"))
+  )
+
+  if (!isTRUE(valid_lib_check)) {
+    return(valid_lib_check)
+  }
+
+  .msg(
+    "Retrieving %s from the Enrichr %s library: %s.",
+    ifelse(
+      is.null(term),
+      yes = "all gene sets",
+      no = sprintf("gene set '%s'", term)
+    ),
+    organism, gene_set_library
+  )
+
+  ## Build GET API Request's query
+  call_query <- .rba_query(
+    init = list(
+      "mode" = "text",
+      "libraryName" = gene_set_library
+    ),
+    list("term", !is.null(term), term)
+  )
+
+  ## Build Function-Specific Call
+  file_name <- sprintf(
+    "enrichr_%s_%s.gmt",
+    organism, gene_set_library
+  )
+
+  if (!is.null(term)) {
+    term_file_name <- gsub(
+      pattern = "[^[:alnum:]_-]+",
+      replacement = "_",
+      x = term
+    )
+    term_file_name <- gsub(
+      pattern = "^_+|_+$",
+      replacement = "",
+      x = term_file_name
+    )
+    term_file_name <- substr(term_file_name, start = 1, stop = 100)
+
+    if (!nzchar(term_file_name)) { term_file_name <- "term" }
+
+    file_name <- sprintf(
+      "enrichr_%s_%s_%s.gmt",
+      organism, gene_set_library, term_file_name
+    )
+  }
+
+  parser_input <- function(x) {
+    parsed_response <- httr::content(x, as = "text", encoding = "UTF-8")
+
+    if (!identical(httr::http_type(x), "text/plain")) {
+      return(parsed_response)
+    }
+
+    gene_sets <- strsplit(x = parsed_response, split = "\\r?\\n")[[1]]
+    gene_sets <- gene_sets[nzchar(gene_sets)]
+    gene_sets <- strsplit(x = gene_sets, split = "\t", fixed = TRUE)
+
+    gene_set_names <- vapply(
+      X = gene_sets,
+      FUN = function(gene_set) { gene_set[[1]] },
+      FUN.VALUE = character(1),
+      USE.NAMES = FALSE
+    )
+
+    gene_sets <- lapply(
+      X = gene_sets,
+      FUN = function(gene_set) { gene_set[-c(1, 2)] }
+    )
+    names(gene_sets) <- gene_set_names
+    return(gene_sets)
+  }
+
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("enrichr", "url"),
+    path = paste0(.rba_stg("enrichr", "pth", organism), "geneSetLibrary"),
+    query = call_query,
+    accept = "text/plain",
+    parser = parser_input,
+    save_to = .rba_file(file_name)
+  )
+
+  ## Call API
+  final_output <- .rba_skeleton(input_call)
+
+  results_check <- .rba_enrichr_validate(
+    assertion = is.list(final_output),
+    msg_type = "no_gene_sets",
+    msg_detail = try(final_output),
+    skip_error = isTRUE(get("skip_error"))
+  )
+
+  if (!isTRUE(results_check)) {
+    return(results_check)
   }
 
   return(final_output)

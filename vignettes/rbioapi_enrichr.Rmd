@@ -75,6 +75,36 @@ if (is.data.frame(enrichr_libs)) {
 }
 ```
 
+## Retrieve gene sets from an Enrichr library {#retrieve-gene-sets-from-an-enrichr-library}
+
+To retrieve the gene sets contained in an Enrichr library, use `rba_enrichr_gene_sets()`. You should supply one of the library names returned above in the `gene_set_library` argument. For example:
+
+```{r enrichr_gene_sets, eval=FALSE}
+reactome_gene_sets <- rba_enrichr_gene_sets(
+  gene_set_library = "Reactome_Pathways_2024"
+)
+```
+
+If you only need a particular gene set, you can supply its exact term name in the `term` argument:
+
+```{r enrichr_gene_sets_term, eval=FALSE}
+notch_gene_set <- rba_enrichr_gene_sets(
+  gene_set_library = "Reactome_Pathways_2024",
+  term = "Signaling by NOTCH"
+)
+```
+
+You can also save the raw server's response as a GMT file by supplying the `save_file` rbioapi option through "ellipsis". For example:
+
+```{r enrichr_gene_sets_save, eval=FALSE}
+rba_enrichr_gene_sets(
+  gene_set_library = "Reactome_Pathways_2024",
+  save_file = "Reactome_Pathways_2024.gmt"
+)
+```
+
+Alternatively, set `save_file = TRUE` to let rbioapi automatically generate a proper file path. The organism will be included in the automatically-generated file name. If you have supplied a `term`, its name will also be included. See the manual of `rba_options()` function for more information on saving the server's raw response files.
+
 ------------------------------------------------------------------------
 
 # Enrichment analysis using Enrichr {#enrichment-analysis-using-enrichr}
@@ -235,7 +265,9 @@ Enrichr also provides libraries for model organisms. The following functions hav
 
 3.  `rba_enrichr_gene_map()`
 
-4.  `rba_enrichr_libs()`
+4.  `rba_enrichr_gene_sets()`
+
+5.  `rba_enrichr_libs()`
 
 The available options for the organism argument are "human" (H. sapiens & M. musculus), "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans), and "fish" (D. rerio).
 
