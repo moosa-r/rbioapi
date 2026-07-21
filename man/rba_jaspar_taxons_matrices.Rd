@@ -17,7 +17,7 @@ rba_jaspar_taxons_matrices(
 }
 \arguments{
 \item{tax_group}{Character: Taxonomic group. Use
-\code{\link{rba_jaspar_taxons}} to get a list of supported Taxonomic
+\code{\link{rba_jaspar_taxons}} to get a list of supported taxonomic
 groups.}
 
 \item{release}{Numeric: (default = 2026) Which JASPAR database release
@@ -31,12 +31,12 @@ latest version of a matrix profile will be returned.}
 
 \item{order}{Character: A character string or a vector of character strings
 of field names that will be used to order the results.
-\cr Providing multiple field names is supported. You can also use prefix
+\cr Providing multiple field names is supported. You can also use the prefix
 "-" before a field name to indicate reverse ordering.}
 
 \item{page_size}{Numeric: (default = 1000) This resource returns paginated
-results. What is the maximum numbers of results that you want to retrieve
-per a page? Accepted values are between 1 and 1000.}
+results. What is the maximum number of results that you want to retrieve
+per page? Accepted values are between 1 and 1000.}
 
 \item{page}{Numeric: Which page of the results to retrieve? The accepted
 values depend on the page size and number of results.}
@@ -45,12 +45,12 @@ values depend on the page size and number of results.}
 arguments manual for more information on available options.}
 }
 \value{
-A list that contains a data frame with information of matrix
+A list that contains a data frame with information on matrix
   profiles available for the taxonomic group.
 }
 \description{
 JASPAR organizes matrix profiles from multiple species
-  in six taxonomic groups. Using this function you can list all
+  in multiple taxonomic groups. Using this function you can list all
   matrix profiles that are available in a JASPAR release from a
   taxonomic group.
 }

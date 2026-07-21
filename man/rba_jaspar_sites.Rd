@@ -8,13 +8,13 @@ rba_jaspar_sites(matrix_id, ...)
 }
 \arguments{
 \item{matrix_id}{Character: A matrix profile
-Identifier. It has "base_id.version" naming schema.}
+identifier. It follows a "base_id.version" naming scheme.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-A list that contains a data frame with binding sites information.
+A list containing a data frame with binding-site information.
 }
 \description{
 Use this function to retrieve a list of transcription factor binding sites

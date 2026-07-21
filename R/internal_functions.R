@@ -67,7 +67,17 @@
       url = "https://jaspar.elixir.no/",
       pth = "api/v1/",
       ptn = "^(https?://)?(www\\.)?jaspar\\.elixir\\.no/api/",
-      err_ptn = "^$"
+      err_ptn = "^4\\d\\d$",
+      err_prs = list(
+        "json->list_simp",
+        function(x) {
+          stopifnot(
+            utils::hasName(x, "detail"),
+            length(x[["detail"]]) > 0L
+          )
+          paste(as.character(x[["detail"]]), collapse = "\n")
+        }
+      )
     ),
 
     mieaa = switch(
@@ -147,7 +157,7 @@
     tests = list(
       "Enrichr" = paste0(.rba_stg("enrichr", "url"), "/Enrichr/"),
       "Ensembl" = paste0(.rba_stg("ensembl", "url"), "/info/ping"),
-      "JASPAR" = paste0(.rba_stg("jaspar", "url"), "/api/v1/releases/"),
+      "JASPAR" = paste0(.rba_stg("jaspar", "url"), "api/v1/live-api/"),
       "miEAA" = paste0(.rba_stg("mieaa", "url"), "/mieaa2/api/"),
       "PANTHER" = paste0(.rba_stg("panther", "url"), "/services/api/panther"),
       "Reactome Content Service" = paste0(.rba_stg("reactome", "url"), "/ContentService/data/database/name"),

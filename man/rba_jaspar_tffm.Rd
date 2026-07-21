@@ -2,12 +2,12 @@
 % Please edit documentation in R/jaspar.R
 \name{rba_jaspar_tffm}
 \alias{rba_jaspar_tffm}
-\title{Get a TF flexible models (TFFMs) information}
+\title{Get information about a TF flexible model (TFFM)}
 \usage{
 rba_jaspar_tffm(tffm_id, ...)
 }
 \arguments{
-\item{tffm_id}{Character: A TF flexible model (TFFM) Identifier.}
+\item{tffm_id}{Character: A TF flexible model (TFFM) identifier.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
@@ -16,14 +16,14 @@ arguments manual for more information on available options.}
 A list that contains the TFFM's information and annotations.
 }
 \description{
-Using this function you can retrieve details and annotations of
-  Transcription Factor flexible models (TFFMs) associated with a TFFM
-  ID. If a base ID (i.e. without version suffix) was supplied, the latest
+Using this function, you can retrieve details and annotations for the
+  transcription factor flexible model (TFFM) associated with a TFFM ID.
+  If a base ID (i.e., without a version suffix) is supplied, the latest
   version will be returned.
 }
 \section{Corresponding API Resources}{
 
- "GET https://jaspar.elixir.no/api/v1/fttm/\{tffm_id\}/"
+ "GET https://jaspar.elixir.no/api/v1/tffm/\{tffm_id\}/"
 }
 
 \examples{

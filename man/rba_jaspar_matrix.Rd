@@ -2,17 +2,17 @@
 % Please edit documentation in R/jaspar.R
 \name{rba_jaspar_matrix}
 \alias{rba_jaspar_matrix}
-\title{Get a Position Frequency Matrices (PFM) with annotations}
+\title{Get a position frequency matrix (PFM) with annotations}
 \usage{
 rba_jaspar_matrix(matrix_id, file_format = NULL, save_to = NULL, ...)
 }
 \arguments{
 \item{matrix_id}{Character: A matrix profile
-Identifier. It has "base_id.version" naming schema.}
+identifier. It follows a "base_id.version" naming scheme.}
 
-\item{file_format}{Character: Instead of returning a R object, you
-can directly download the profile matrix in file with this format.
-Supported formats are: "yaml", "jaspar", "transfac", "meme" and "pfm"}
+\item{file_format}{Character: Instead of returning an R object, you
+can directly download the profile matrix as a file in this format.
+Supported formats are "yaml", "jaspar", "transfac", "meme", and "pfm".}
 
 \item{save_to}{NULL or Character:\itemize{
 \item NULL: (only if file_format was supplied) Save the file to an
@@ -23,14 +23,14 @@ Supported formats are: "yaml", "jaspar", "transfac", "meme" and "pfm"}
 arguments manual for more information on available options.}
 }
 \value{
-A list that contains the PFM along with its details and
-  annotations. If file_format was supplied, an un-parsed character string
-  with the file's content.
+A list containing the PFM, details, and annotations. If
+  \code{file_format} is supplied, the function returns the unparsed file
+  content as a character string.
 }
 \description{
-Using this function you can retrieve a Position Frequency Matrices (PFM)
- associated with a matrix profile Identifier along with its details and
- annotations. If a base ID (i.e. without version suffix) was supplied,
+Using this function, you can retrieve the position frequency matrix (PFM)
+  associated with a matrix profile identifier, along with its details and
+  annotations. If a base ID (i.e., without a version suffix) is supplied,
  the latest version will be returned.
 }
 \section{Corresponding API Resources}{

@@ -7,24 +7,24 @@
 rba_jaspar_matrix_versions(base_id, order = NULL, ...)
 }
 \arguments{
-\item{base_id}{Character: A base (stable) Identifier. A matrix profile
-identifier has "base_id.version" naming schema}
+\item{base_id}{Character: A base (stable) identifier. A matrix profile
+identifier follows a "base_id.version" naming scheme.}
 
 \item{order}{Character: A character string or a vector of character strings
 of field names that will be used to order the results.
-\cr Providing multiple field names is supported. You can also use prefix
+\cr Providing multiple field names is supported. You can also use the prefix
 "-" before a field name to indicate reverse ordering.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-A data frame of matrix profiles' versions information.
+A data frame with information on the matrix profile versions.
 }
 \description{
-Since JASPAR release 2010, the matrix profiles
-  are versioned; So, a matrix profile Identifier has "base_id.version"
-  naming schema. Using this function you can retrieve a list of matrix
+Since JASPAR release 2010, matrix profiles have been versioned. A matrix
+  profile identifier follows a "base_id.version" naming scheme. Using this
+  function, you can retrieve a list of matrix
   profiles associated with a base (stable) ID.
 }
 \section{Corresponding API Resources}{

@@ -33,12 +33,12 @@ latest version of a matrix profile will be returned.}
 
 \item{order}{Character: A character string or a vector of character strings
 of field names that will be used to order the results.
-\cr Providing multiple field names is supported. You can alsoa use prefix
+\cr Providing multiple field names is supported. You can also use the prefix
 "-" before a field name to indicate reverse ordering.}
 
 \item{page_size}{Numeric: (default = 1000) This resource returns paginated
-results. What is the maximum numbers of results that you want to retrieve
-per a page? Accepted values are between 1 and 1000.}
+results. What is the maximum number of results that you want to retrieve
+per page? Accepted values are between 1 and 1000.}
 
 \item{page}{Numeric: Which page of the results to retrieve? The accepted
 values depend on the page size and number of results.}
@@ -47,7 +47,7 @@ values depend on the page size and number of results.}
 arguments manual for more information on available options.}
 }
 \value{
-A list that contains a data frame with information of matrix
+A list that contains a data frame with information on matrix
   profiles available in the collection.
 }
 \description{

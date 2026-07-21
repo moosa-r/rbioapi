@@ -105,11 +105,11 @@ rba_jaspar_collections <- function(release = 2026,
 #' @param search Character: A search term.
 #' @param order Character: A character string or a vector of character strings
 #'   of field names that will be used to order the results.
-#'   \cr Providing multiple field names is supported. You can alsoa use prefix
+#'   \cr Providing multiple field names is supported. You can also use the prefix
 #'   "-" before a field name to indicate reverse ordering.
 #' @param page_size Numeric: (default = 1000) This resource returns paginated
-#'   results. What is the maximum numbers of results that you want to retrieve
-#'   per a page? Accepted values are between 1 and 1000.
+#'   results. What is the maximum number of results that you want to retrieve
+#'   per page? Accepted values are between 1 and 1000.
 #' @param page Numeric: Which page of the results to retrieve? The accepted
 #'   values depend on the page size and number of results.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -118,7 +118,7 @@ rba_jaspar_collections <- function(release = 2026,
 #' @section Corresponding API Resources:
 #'  "GET https://jaspar.elixir.no/api/v1/collections/\{collection\}/"
 #'
-#' @return A list that contains a data frame with information of matrix
+#' @return A list that contains a data frame with information on matrix
 #'   profiles available in the collection.
 #'
 #' @references \itemize{
@@ -192,7 +192,6 @@ rba_jaspar_collections_matrices <- function(collection,
   ## Build GET API Request's query
   call_query <- .rba_query(
     init = list(
-      "collection" = collection,
       "release" = release,
       "page_size" = page_size,
       "page" = page
@@ -206,7 +205,7 @@ rba_jaspar_collections_matrices <- function(collection,
   input_call <- .rba_httr(
     httr = "get",
     url = .rba_stg("jaspar", "url"),
-    path = sprintf("%s/collections/%s/", .rba_stg("jaspar", "pth"), collection),
+    path = sprintf("%scollections/%s/", .rba_stg("jaspar", "pth"), collection),
     query = call_query,
     accept = "application/json",
     parser = "json->list_simp",
@@ -228,7 +227,7 @@ rba_jaspar_collections_matrices <- function(collection,
 #'   latest release.
 #'
 #' Note that this is a search function. Thus, you are not required to fill
-#'   every argument; You may use whatever combinations of arguments you see
+#'   every argument; you may use whatever combinations of arguments you see
 #'   fit for your query.
 #'   \cr The results are paginated. You can control the page's size number
 #'   with the function's arguments. Also, you can use \code{\link{rba_pages}}
@@ -239,13 +238,13 @@ rba_jaspar_collections_matrices <- function(collection,
 #' @param tf_class Character: Transcription factor class
 #' @param tf_family Character: Transcription factor family
 #' @param tax_group Character: Taxonomic group. Use
-#'   \code{\link{rba_jaspar_taxons}} to get a list of supported Taxonomic
+#'   \code{\link{rba_jaspar_taxons}} to get a list of supported taxonomic
 #'   groups.
-#' @param tax_id Numeric: NCBI taxonomic Identifier of species. Use
-#'   \code{\link{rba_jaspar_species}} to get a list of supported Species.
-#' @param data_type Character: Type of the data (i.e The Methodology used
+#' @param tax_id Numeric: NCBI taxonomic identifier of a species. Use
+#'   \code{\link{rba_jaspar_species}} to get a list of supported species.
+#' @param data_type Character: Type of data (i.e., the methodology used
 #'   for matrix construction). For example: "ChIP-seq", "PBM"
-#' @param collection Character: JASPAR matrix profile collection name. USE
+#' @param collection Character: JASPAR matrix profile collection name. Use
 #'   \code{\link{rba_jaspar_collections}} to get a list of collection names.
 #' @param release Numeric: (default = 2026) Which JASPAR database release
 #'   to use? Available options are: 2026, 2024, 2022, 2020, 2018, 2016,
@@ -254,18 +253,18 @@ rba_jaspar_collections_matrices <- function(collection,
 #'   latest version of a matrix profile will be returned.
 #' @param order Character: A character string or a vector of character strings
 #'   of field names that will be used to order the results.
-#'   \cr Providing multiple field names is supported. You can also use prefix
+#'   \cr Providing multiple field names is supported. You can also use the prefix
 #'   "-" before a field name to indicate reverse ordering.
 #' @param page_size Numeric: (default = 1000) This resource returns paginated
-#'   results. What is the maximum numbers of results that you want to retrieve
-#'   per a page? Accepted values are between 1 and 1000.
+#'   results. What is the maximum number of results that you want to retrieve
+#'   per page? Accepted values are between 1 and 1000.
 #' @param page Numeric: Which page of the results to retrieve? The accepted
 #'   values depend on the page size and number of results.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://jaspar.elixir.no/api/v1/api/v1/matrix/"
+#'  "GET https://jaspar.elixir.no/api/v1/matrix/"
 #'
 #' @return A list that contains a data frame of matrix profiles' information.
 #'
@@ -362,8 +361,6 @@ rba_jaspar_matrix_search <- function(term = NULL,
     list("tax_id", !is.null(tax_id), paste0(tax_id, collapse = ",")),
     list("data_type", !is.null(data_type), data_type),
     list("collection", !is.null(collection), collection),
-    list("search", !is.null(term), term),
-    list("search", !is.null(term), term),
     list("version", isTRUE(only_last_version), "latest"),
     list("order", !is.null(order), paste0(order, collapse = ","))
   )
@@ -386,16 +383,16 @@ rba_jaspar_matrix_search <- function(term = NULL,
 
 #' List matrix profile versions associated with a base ID
 #'
-#' Since JASPAR release 2010, the matrix profiles
-#'   are versioned; So, a matrix profile Identifier has "base_id.version"
-#'   naming schema. Using this function you can retrieve a list of matrix
+#' Since JASPAR release 2010, matrix profiles have been versioned. A matrix
+#'   profile identifier follows a "base_id.version" naming scheme. Using this
+#'   function, you can retrieve a list of matrix
 #'   profiles associated with a base (stable) ID.
 #'
-#' @param base_id Character: A base (stable) Identifier. A matrix profile
-#'  identifier has "base_id.version" naming schema
+#' @param base_id Character: A base (stable) identifier. A matrix profile
+#'   identifier follows a "base_id.version" naming scheme.
 #' @param order Character: A character string or a vector of character strings
 #'   of field names that will be used to order the results.
-#'   \cr Providing multiple field names is supported. You can also use prefix
+#'   \cr Providing multiple field names is supported. You can also use the prefix
 #'   "-" before a field name to indicate reverse ordering.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
@@ -403,7 +400,7 @@ rba_jaspar_matrix_search <- function(term = NULL,
 #' @section Corresponding API Resources:
 #'  "GET https://jaspar.elixir.no/api/v1/matrix/\{base_id\}/versions/"
 #'
-#' @return A data frame of matrix profiles' versions information.
+#' @return A data frame with information on the matrix profile versions.
 #'
 #' @references \itemize{
 #'   \item Baydar Ovek D, et al. JASPAR 2026: expansion of transcription
@@ -452,7 +449,7 @@ rba_jaspar_matrix_versions <- function(base_id,
 
   ## Build GET API Request's query
   call_query <- .rba_query(
-    init = list("base_id" = base_id, "page_size" = 1000),
+    init = list("page_size" = 1000),
     list("order", !is.null(order), paste0(order, collapse = ","))
   )
 
@@ -477,18 +474,18 @@ rba_jaspar_matrix_versions <- function(base_id,
   return(final_output)
 }
 
-#' Get a Position Frequency Matrices (PFM) with annotations
+#' Get a position frequency matrix (PFM) with annotations
 #'
-#' Using this function you can retrieve a Position Frequency Matrices (PFM)
-#'  associated with a matrix profile Identifier along with its details and
-#'  annotations. If a base ID (i.e. without version suffix) was supplied,
+#' Using this function, you can retrieve the position frequency matrix (PFM)
+#'   associated with a matrix profile identifier, along with its details and
+#'   annotations. If a base ID (i.e., without a version suffix) is supplied,
 #'  the latest version will be returned.
 #'
 #' @param matrix_id Character: A matrix profile
-#'   Identifier. It has "base_id.version" naming schema.
-#' @param file_format Character: Instead of returning a R object, you
-#'   can directly download the profile matrix in file with this format.
-#'   Supported formats are: "yaml", "jaspar", "transfac", "meme" and "pfm"
+#'   identifier. It follows a "base_id.version" naming scheme.
+#' @param file_format Character: Instead of returning an R object, you
+#'   can directly download the profile matrix as a file in this format.
+#'   Supported formats are "yaml", "jaspar", "transfac", "meme", and "pfm".
 #' @param save_to NULL or Character:\itemize{
 #'   \item NULL: (only if file_format was supplied) Save the file to an
 #'     automatically-generated path.
@@ -499,9 +496,9 @@ rba_jaspar_matrix_versions <- function(base_id,
 #' @section Corresponding API Resources:
 #'  "GET https://jaspar.elixir.no/api/v1/matrix/\{matrix_id\}/"
 #'
-#' @return A list that contains the PFM along with its details and
-#'   annotations. If file_format was supplied, an un-parsed character string
-#'   with the file's content.
+#' @return A list containing the PFM, details, and annotations. If
+#'   \code{file_format} is supplied, the function returns the unparsed file
+#'   content as a character string.
 #'
 #' @references \itemize{
 #'   \item Baydar Ovek D, et al. JASPAR 2026: expansion of transcription
@@ -565,11 +562,7 @@ rba_jaspar_matrix <- function(matrix_id,
       }
     )
 
-    save_to_input <- ifelse(
-      isTRUE(save_to),
-      .rba_file("jaspar_matrix.json", save_to = save_to),
-      .rba_file("jaspar_matrix.json")
-    )
+    save_to_input <- .rba_file("jaspar_matrix.json", save_to = save_to)
 
   } else {
 
@@ -614,12 +607,12 @@ rba_jaspar_matrix <- function(matrix_id,
 
 #' Get information about JASPAR database releases
 #'
-#' If a release number was supplied, this function will return the details
-#'   of that release. Otherwise, if the function was called without "release"
-#'   argument, a list of all JASPAR database releases will be returned.
+#' If a release number is supplied, this function returns the details of that
+#'   release. Otherwise, when called without the \code{release_number} argument,
+#'   it returns a list of all JASPAR database releases.
 #'
-#' @param release_number Numeric: Which JASPAR database release number
-#'   information's to retrieve? If left NULL (the default), a list of all
+#' @param release_number Numeric: Which JASPAR database release number should
+#'   be retrieved? If left NULL (the default), a list of all
 #'   JASPAR database releases will be returned. Available options are 1 to 11.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
@@ -648,7 +641,7 @@ rba_jaspar_matrix <- function(matrix_id,
 #' @examples
 #' \donttest{
 #' rba_jaspar_releases()
-#' rba_jaspar_releases(7)
+#' rba_jaspar_releases(11)
 #' }
 #'
 #' @family "JASPAR"
@@ -670,7 +663,7 @@ rba_jaspar_releases  <- function(release_number = NULL,
       is.null(release_number),
       yes = "Retrieving a list of all releases of JASPAR database.",
       no = sprintf(
-        "Retrieving a details of JASPAR database release number %s.",
+        "Retrieving details of JASPAR database release number %s.",
         release_number
       )
     )
@@ -679,7 +672,6 @@ rba_jaspar_releases  <- function(release_number = NULL,
   ## Build GET API Request's query
   call_query <- .rba_query(
     init = list(),
-    list("release_number", !is.null(release_number), release_number),
     list("page_size", is.null(release_number), 1000)
   )
 
@@ -696,7 +688,7 @@ rba_jaspar_releases  <- function(release_number = NULL,
   } else {
 
     path_input <- sprintf(
-      "%sreleases/%s",
+      "%sreleases/%s/",
       .rba_stg("jaspar", "pth"), release_number
     )
 
@@ -711,7 +703,7 @@ rba_jaspar_releases  <- function(release_number = NULL,
     query = call_query,
     accept = "application/json",
     parser = parser_input,
-    save_to = .rba_file("jaspar_matrix.json")
+    save_to = .rba_file("jaspar_releases.json")
   )
 
   ## Call API
@@ -727,14 +719,14 @@ rba_jaspar_releases  <- function(release_number = NULL,
 #'   associated with a matrix profile.
 #'
 #' @param matrix_id Character: A matrix profile
-#'   Identifier. It has "base_id.version" naming schema.
+#'   identifier. It follows a "base_id.version" naming scheme.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://jaspar.elixir.no/api/v1/sites/\{matrix_id\}/"
 #'
-#' @return A list that contains a data frame with binding sites information.
+#' @return A list containing a data frame with binding-site information.
 #'
 #' @references \itemize{
 #'   \item Baydar Ovek D, et al. JASPAR 2026: expansion of transcription
@@ -770,12 +762,12 @@ rba_jaspar_sites <- function(matrix_id,
   )
 
   .msg(
-    "Retrieving binding sites information of matrix profile with ID %s.",
+    "Retrieving binding-site information for matrix profile with ID %s.",
     matrix_id
   )
 
   ## Build GET API Request's query
-  call_query <- list("matrix_id" = matrix_id)
+  call_query <- list()
 
   ## Build Function-Specific Call
 
@@ -799,7 +791,7 @@ rba_jaspar_sites <- function(matrix_id,
 #' List available species in JASPAR
 #'
 #' JASPAR organizes matrix profiles from multiple species
-#'   in six taxonomic groups. Use this function to retrieve a list of
+#'   in multiple taxonomic groups. Use this function to retrieve a list of
 #'   available species in a JASPAR database release.
 #'
 #' @param release Numeric: (default = 2026) Which JASPAR database release
@@ -808,7 +800,7 @@ rba_jaspar_sites <- function(matrix_id,
 #' @param search Character: A search term.
 #' @param order Character: A character string or a vector of character strings
 #'   of field names that will be used to order the results.
-#'   \cr Providing multiple field names is supported. You can also use prefix
+#'   \cr Providing multiple field names is supported. You can also use the prefix
 #'   "-" before a field name to indicate reverse ordering.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
@@ -816,7 +808,7 @@ rba_jaspar_sites <- function(matrix_id,
 #' @section Corresponding API Resources:
 #'  "GET https://jaspar.elixir.no/api/v1/species/"
 #'
-#' @return A data frame with information of available species.
+#' @return A data frame with information on available species.
 #'
 #' @references \itemize{
 #'   \item Baydar Ovek D, et al. JASPAR 2026: expansion of transcription
@@ -895,15 +887,15 @@ rba_jaspar_species <- function(release = 2026,
 #' List matrices available in JASPAR of a species
 #'
 #' JASPAR curates matrix profiles from multiple species
-#'   in six taxonomic groups. Using this function you can list all
-#'   matrix profiles that are available in a JASPAR  release from a species.
+#'   in multiple taxonomic groups. Using this function you can list all
+#'   matrix profiles that are available in a JASPAR release for a species.
 #'
 #' The results are paginated. You can control the page's size number
 #'   with the function's arguments. Also, you can use \code{\link{rba_pages}}
 #'   to automatically iterate over multiple pages.
 #'
-#' @param tax_id Numeric: NCBI taxonomic Identifier of species. Use
-#'   \code{\link{rba_jaspar_species}} to get a list of supported Species.
+#' @param tax_id Numeric: NCBI taxonomic identifier of a species. Use
+#'   \code{\link{rba_jaspar_species}} to get a list of supported species.
 #' @param release Numeric: (default = 2026) Which JASPAR database release
 #'   to use? Available options are: 2026, 2024, 2022, 2020, 2018, 2016,
 #'   and 2014.
@@ -912,11 +904,11 @@ rba_jaspar_species <- function(release = 2026,
 #' @param search Character: A search term.
 #' @param order Character: A character string or a vector of character strings
 #'   of field names that will be used to order the results.
-#'   \cr Providing multiple field names is supported. You can also use prefix
+#'   \cr Providing multiple field names is supported. You can also use the prefix
 #'   "-" before a field name to indicate reverse ordering.
 #' @param page_size Numeric: (default = 1000) This resource returns paginated
-#'   results. What is the maximum numbers of results that you want to retrieve
-#'   per a page? Accepted values are between 1 and 1000.
+#'   results. What is the maximum number of results that you want to retrieve
+#'   per page? Accepted values are between 1 and 1000.
 #' @param page Numeric: Which page of the results to retrieve? The accepted
 #'   values depend on the page size and number of results.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -925,7 +917,7 @@ rba_jaspar_species <- function(release = 2026,
 #' @section Corresponding API Resources:
 #'  "GET https://jaspar.elixir.no/api/v1/species/\{tax_id\}/"
 #'
-#' @return A list that contains a data frame with information of matrix
+#' @return A list that contains a data frame with information on matrix
 #'   profiles available for the species.
 #'
 #' @references \itemize{
@@ -984,7 +976,6 @@ rba_jaspar_species_matrices <- function(tax_id,
   ## Build GET API Request's query
   call_query <- .rba_query(
     init = list(
-      "tax_id" = tax_id,
       "release" = release,
       "page" = page,
       "page_size" = page_size
@@ -1015,7 +1006,7 @@ rba_jaspar_species_matrices <- function(tax_id,
 #' List available taxonomic groups in JASPAR
 #'
 #' JASPAR organizes matrix profiles from multiple species
-#'   in six taxonomic groups. Use this function to retrieve a list of
+#'   in multiple taxonomic groups. Use this function to retrieve a list of
 #'   available taxonomic groups in a JASPAR database release.
 #'
 #' @param release Numeric: (default = 2026) Which JASPAR database release
@@ -1027,7 +1018,7 @@ rba_jaspar_species_matrices <- function(tax_id,
 #' @section Corresponding API Resources:
 #'  "GET https://jaspar.elixir.no/api/v1/taxon/"
 #'
-#' @return A data frame with information of available species.
+#' @return A data frame with information on available taxonomic groups.
 #'
 #' @references \itemize{
 #'   \item Baydar Ovek D, et al. JASPAR 2026: expansion of transcription
@@ -1097,7 +1088,7 @@ rba_jaspar_taxons <- function(release = 2026,
 #' List matrices available in JASPAR of a taxonomic group
 #'
 #' JASPAR organizes matrix profiles from multiple species
-#'   in six taxonomic groups. Using this function you can list all
+#'   in multiple taxonomic groups. Using this function you can list all
 #'   matrix profiles that are available in a JASPAR release from a
 #'   taxonomic group.
 #'
@@ -1106,7 +1097,7 @@ rba_jaspar_taxons <- function(release = 2026,
 #'   to automatically iterate over multiple pages.
 #'
 #' @param tax_group Character: Taxonomic group. Use
-#'   \code{\link{rba_jaspar_taxons}} to get a list of supported Taxonomic
+#'   \code{\link{rba_jaspar_taxons}} to get a list of supported taxonomic
 #'   groups.
 #' @param release Numeric: (default = 2026) Which JASPAR database release
 #'   to use? Available options are: 2026, 2024, 2022, 2020, 2018, 2016,
@@ -1116,11 +1107,11 @@ rba_jaspar_taxons <- function(release = 2026,
 #' @param search Character: A search term.
 #' @param order Character: A character string or a vector of character strings
 #'   of field names that will be used to order the results.
-#'   \cr Providing multiple field names is supported. You can also use prefix
+#'   \cr Providing multiple field names is supported. You can also use the prefix
 #'   "-" before a field name to indicate reverse ordering.
 #' @param page_size Numeric: (default = 1000) This resource returns paginated
-#'   results. What is the maximum numbers of results that you want to retrieve
-#'   per a page? Accepted values are between 1 and 1000.
+#'   results. What is the maximum number of results that you want to retrieve
+#'   per page? Accepted values are between 1 and 1000.
 #' @param page Numeric: Which page of the results to retrieve? The accepted
 #'   values depend on the page size and number of results.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -1129,7 +1120,7 @@ rba_jaspar_taxons <- function(release = 2026,
 #' @section Corresponding API Resources:
 #'  "GET https://jaspar.elixir.no/api/v1/taxon/\{tax_group\}/"
 #'
-#' @return A list that contains a data frame with information of matrix
+#' @return A list that contains a data frame with information on matrix
 #'   profiles available for the taxonomic group.
 #'
 #' @references \itemize{
@@ -1175,9 +1166,11 @@ rba_jaspar_taxons_matrices <- function(tax_group,
                 "urochordates",
                 "nematodes",
                 "fungi",
+                "diatoms",
                 "trematodes",
-                "protozoa",
-                "cnidaria")
+                "dictyostelium",
+                "cnidaria",
+                "oomycota")
       ),
       list(
         arg = "release", class = "numeric", no_null = TRUE,
@@ -1199,7 +1192,6 @@ rba_jaspar_taxons_matrices <- function(tax_group,
   ## Build GET API Request's query
   call_query <- .rba_query(
     init = list(
-      "tax_group" = tax_group,
       "release" = release,
       "page" = page,
       "page_size" = page_size
@@ -1231,11 +1223,11 @@ rba_jaspar_taxons_matrices <- function(tax_group,
 #'
 #' You can use this function to list the JASPAR TF flexible models (TFFMs)
 #'   that match your search query, or run the function without any
-#'   arguments to return a list of every matrix profile available in the
+#'   arguments to return a list of every TFFM profile available in the
 #'   latest release.
 #'
 #' Note that this is a search function. Thus, you are not required to fill
-#'   every argument; You may use whatever combinations of arguments you see
+#'   every argument; you may use whatever combinations of arguments you see
 #'   fit for your query.
 #'   \cr The results are paginated. You can control the page's size number
 #'   with the function's arguments. Also, you can use \code{\link{rba_pages}}
@@ -1246,25 +1238,26 @@ rba_jaspar_taxons_matrices <- function(tax_group,
 #'   to use? Available options are: 2026, 2024, 2022, 2020, 2018, 2016,
 #'   and 2014.
 #' @param tax_group Character: Taxonomic group. Use
-#'   \code{\link{rba_jaspar_taxons}} to get a list of supported Taxonomic
+#'   \code{\link{rba_jaspar_taxons}} to get a list of supported taxonomic
 #'   groups.
-#' @param search Character: A search term.
+#' @param search Character: An alias for \code{term}. If both are supplied,
+#'   they must be identical.
 #' @param order Character: A character string or a vector of character strings
 #'   of field names that will be used to order the results.
-#'   \cr Providing multiple field names is supported. You can also use prefix
+#'   \cr Providing multiple field names is supported. You can also use the prefix
 #'   "-" before a field name to indicate reverse ordering.
 #' @param page_size Numeric: (default = 1000) This resource returns paginated
-#'   results. What is the maximum numbers of results that you want to retrieve
-#'   per a page? Accepted values are between 1 and 1000.
+#'   results. What is the maximum number of results that you want to retrieve
+#'   per page? Accepted values are between 1 and 1000.
 #' @param page Numeric: Which page of the results to retrieve? The accepted
 #'   values depend on the page size and number of results.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://jaspar.elixir.no/api/v1/api/v1/tffm/"
+#'  "GET https://jaspar.elixir.no/api/v1/tffm/"
 #'
-#' @return A list that contains a data frame with information of query hits'
+#' @return A list that contains a data frame with information on matching
 #'   TFFMs.
 #'
 #' @references \itemize{
@@ -1320,16 +1313,26 @@ rba_jaspar_tffm_search <- function(term = NULL,
                 "urochordates",
                 "nematodes",
                 "fungi",
+                "diatoms",
                 "trematodes",
-                "protozoa",
-                "cnidaria")
+                "dictyostelium",
+                "cnidaria",
+                "oomycota")
       ),
       list(arg = "search", class = "character"),
       list(arg = "order", class = "character"),
       list(arg = "page_size", class = "numeric", ran = c(1,1000)),
       list(arg = "page", class = "numeric", min_val = 1)
+    ),
+    cond = list(
+      list(
+        quote(!is.null(term) && !is.null(search) && !identical(term, search)),
+        "term and search cannot contain different values."
+      )
     )
   )
+
+  search_input <- if (is.null(term)) search else term
 
   .msg(
     "Retrieving a list of TFFM profiles available in JASPAR release %s based on your search query.",
@@ -1339,7 +1342,7 @@ rba_jaspar_tffm_search <- function(term = NULL,
   ## Build GET API Request's query
   call_query <- .rba_query(
     init = list("release" = release, "page" = page, "page_size" = page_size),
-    list("search", !is.null(term), term),
+    list("search", !is.null(search_input), search_input),
     list("tax_group", !is.null(tax_group), tax_group),
     list("order", !is.null(order), paste0(order, collapse = ","))
   )
@@ -1360,19 +1363,19 @@ rba_jaspar_tffm_search <- function(term = NULL,
   return(final_output)
 }
 
-#' Get a TF flexible models (TFFMs) information
+#' Get information about a TF flexible model (TFFM)
 #'
-#' Using this function you can retrieve details and annotations of
-#'   Transcription Factor flexible models (TFFMs) associated with a TFFM
-#'   ID. If a base ID (i.e. without version suffix) was supplied, the latest
+#' Using this function, you can retrieve details and annotations for the
+#'   transcription factor flexible model (TFFM) associated with a TFFM ID.
+#'   If a base ID (i.e., without a version suffix) is supplied, the latest
 #'   version will be returned.
 #'
-#' @param tffm_id Character: A TF flexible model (TFFM) Identifier.
+#' @param tffm_id Character: A TF flexible model (TFFM) identifier.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://jaspar.elixir.no/api/v1/fttm/\{tffm_id\}/"
+#'  "GET https://jaspar.elixir.no/api/v1/tffm/\{tffm_id\}/"
 #'
 #' @return A list that contains the TFFM's information and annotations.
 #'
@@ -1415,7 +1418,7 @@ rba_jaspar_tffm <- function(tffm_id,
   )
 
   ## Build GET API Request's query
-  call_query <- list("tffm_id" = tffm_id)
+  call_query <- list()
 
   ## Build Function-Specific Call
 

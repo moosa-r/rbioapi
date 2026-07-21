@@ -15,11 +15,11 @@ and 2014.}
 arguments manual for more information on available options.}
 }
 \value{
-A data frame with information of available species.
+A data frame with information on available taxonomic groups.
 }
 \description{
 JASPAR organizes matrix profiles from multiple species
-  in six taxonomic groups. Use this function to retrieve a list of
+  in multiple taxonomic groups. Use this function to retrieve a list of
   available taxonomic groups in a JASPAR database release.
 }
 \section{Corresponding API Resources}{

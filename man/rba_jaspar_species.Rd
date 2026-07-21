@@ -15,18 +15,18 @@ and 2014.}
 
 \item{order}{Character: A character string or a vector of character strings
 of field names that will be used to order the results.
-\cr Providing multiple field names is supported. You can also use prefix
+\cr Providing multiple field names is supported. You can also use the prefix
 "-" before a field name to indicate reverse ordering.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-A data frame with information of available species.
+A data frame with information on available species.
 }
 \description{
 JASPAR organizes matrix profiles from multiple species
-  in six taxonomic groups. Use this function to retrieve a list of
+  in multiple taxonomic groups. Use this function to retrieve a list of
   available species in a JASPAR database release.
 }
 \section{Corresponding API Resources}{

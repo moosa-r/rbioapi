@@ -7,8 +7,8 @@
 rba_jaspar_releases(release_number = NULL, ...)
 }
 \arguments{
-\item{release_number}{Numeric: Which JASPAR database release number
-information's to retrieve? If left NULL (the default), a list of all
+\item{release_number}{Numeric: Which JASPAR database release number should
+be retrieved? If left NULL (the default), a list of all
 JASPAR database releases will be returned. Available options are 1 to 11.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
@@ -19,9 +19,9 @@ A list that contains all JASPAR database releases' information or
   details of a particular release.
 }
 \description{
-If a release number was supplied, this function will return the details
-  of that release. Otherwise, if the function was called without "release"
-  argument, a list of all JASPAR database releases will be returned.
+If a release number is supplied, this function returns the details of that
+  release. Otherwise, when called without the \code{release_number} argument,
+  it returns a list of all JASPAR database releases.
 }
 \section{Corresponding API Resources}{
 
@@ -32,7 +32,7 @@ If a release number was supplied, this function will return the details
 \examples{
 \donttest{
 rba_jaspar_releases()
-rba_jaspar_releases(7)
+rba_jaspar_releases(11)
 }
 
 }

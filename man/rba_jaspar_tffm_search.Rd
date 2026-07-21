@@ -23,19 +23,20 @@ to use? Available options are: 2026, 2024, 2022, 2020, 2018, 2016,
 and 2014.}
 
 \item{tax_group}{Character: Taxonomic group. Use
-\code{\link{rba_jaspar_taxons}} to get a list of supported Taxonomic
+\code{\link{rba_jaspar_taxons}} to get a list of supported taxonomic
 groups.}
 
-\item{search}{Character: A search term.}
+\item{search}{Character: An alias for \code{term}. If both are supplied,
+they must be identical.}
 
 \item{order}{Character: A character string or a vector of character strings
 of field names that will be used to order the results.
-\cr Providing multiple field names is supported. You can also use prefix
+\cr Providing multiple field names is supported. You can also use the prefix
 "-" before a field name to indicate reverse ordering.}
 
 \item{page_size}{Numeric: (default = 1000) This resource returns paginated
-results. What is the maximum numbers of results that you want to retrieve
-per a page? Accepted values are between 1 and 1000.}
+results. What is the maximum number of results that you want to retrieve
+per page? Accepted values are between 1 and 1000.}
 
 \item{page}{Numeric: Which page of the results to retrieve? The accepted
 values depend on the page size and number of results.}
@@ -44,18 +45,18 @@ values depend on the page size and number of results.}
 arguments manual for more information on available options.}
 }
 \value{
-A list that contains a data frame with information of query hits'
+A list that contains a data frame with information on matching
   TFFMs.
 }
 \description{
 You can use this function to list the JASPAR TF flexible models (TFFMs)
   that match your search query, or run the function without any
-  arguments to return a list of every matrix profile available in the
+  arguments to return a list of every TFFM profile available in the
   latest release.
 }
 \details{
 Note that this is a search function. Thus, you are not required to fill
-  every argument; You may use whatever combinations of arguments you see
+  every argument; you may use whatever combinations of arguments you see
   fit for your query.
   \cr The results are paginated. You can control the page's size number
   with the function's arguments. Also, you can use \code{\link{rba_pages}}
@@ -63,7 +64,7 @@ Note that this is a search function. Thus, you are not required to fill
 }
 \section{Corresponding API Resources}{
 
- "GET https://jaspar.elixir.no/api/v1/api/v1/tffm/"
+ "GET https://jaspar.elixir.no/api/v1/tffm/"
 }
 
 \examples{

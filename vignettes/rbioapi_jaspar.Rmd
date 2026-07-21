@@ -62,14 +62,14 @@ release_11_info <- rba_jaspar_releases(11)
 
 ## Collections {#collections}
 
-Within a release, Matrix profiles are organized into collections, You can use `rba_jaspar_collections()` to get a list of available collections, or read "JASPAR Collections" section in [documentation page in JASPAR web-site](https://jaspar.elixir.no/docs/ "JASPAR Documentation") for a thorough review.
+Within a release, matrix profiles are organized into collections. You can use `rba_jaspar_collections()` to get a list of available collections, or read the "JASPAR Collections" section on the [JASPAR documentation website](https://jaspar.elixir.no/docs/ "JASPAR Documentation") for a thorough review.
 
 ```{r collections}
 ## To get a list of available collections in release 2026:
 rba_jaspar_collections(release = 2026)
 
 
-## You can list information of all matrices available in a collection:
+## You can list information on all matrices available in a collection:
 mat_in_core_2026 <- rba_jaspar_collections_matrices(collection = "CORE")
 ```
 
@@ -82,20 +82,20 @@ Within each collection, the matrix profiles are organized based on main taxonomi
 rba_jaspar_taxons(release = 2026)
 
 
-## You can list information of all matrices available in a taxonomic group:
+## You can list information on all matrices available in a taxonomic group:
 mat_in_insects <- rba_jaspar_taxons_matrices(tax_group = "insects")
 ```
 
 ## Species {#species}
 
-As we go down in the data organization hierarchy, Each taxonomic group consist of species:
+As we go down in the data organization hierarchy, each taxonomic group consists of species:
 
 ```{r species}
 ## To get a list of species in release 2026:
 species <- rba_jaspar_species(release = 2026)
 head(species)
 
-## You can list information of all matrices available in a specie:
+## You can list information on all matrices available for a species:
 mat_in_human <- rba_jaspar_species_matrices(tax_id = 9606)
 ```
 
@@ -129,7 +129,7 @@ zipper_pbm_matrices <- rba_jaspar_matrix_search(
 
 ## List Matrix Profiles Associated to a Base identifier {#list-matrix-profiles-associated-to-a-base-identifier}
 
-Since JASPAR release 2010, the matrix profiles are versioned. A matrix profile Identifier has a "base_id.version" naming schema; for example "MA0600.2" corresponds to the second version of a matrix with base ID MA0600. You can Use `rba_jaspar_matrix_versions` to get a list of matrix profiles with a given base ID. Also note that some functions, generally those that are used to list available matrices, have an argument called `only_last_version`.
+Since JASPAR release 2010, matrix profiles have been versioned. A matrix profile identifier follows a "base_id.version" naming scheme; for example, "MA0600.2" corresponds to the second version of a matrix with base ID MA0600. You can use `rba_jaspar_matrix_versions` to get a list of matrix profiles with a given base ID. Also note that functions used to list available matrices generally have an argument called `only_last_version`.
 
 ```{r versions, eval=FALSE}
 ## Get matrix profiles versions associated to a base id
@@ -152,22 +152,22 @@ pfm_matrix <- rba_jaspar_matrix(matrix_id = "MA0600.2")
 str(pfm_matrix)
 ```
 
-### Save a Matrix a File in Specific Format {#save-a-matrix-a-file-in-specific-format}
+### Save a Matrix as a File in a Specific Format {#save-a-matrix-a-file-in-specific-format}
 
-JASPAR provides position frequency matrices (PFM) formatted as **Raw PFM**, **JASPAR**, **TRANSFAC**, **YAML**, and **MEME**. You can download a matrix profile as a file with any of these formats. To do that, You should use the `file_format` and `save_to` arguments available in `rba_jaspar_matrix`. There are two notes here:
+JASPAR provides position frequency matrices (PFM) formatted as **Raw PFM**, **JASPAR**, **TRANSFAC**, **YAML**, and **MEME**. You can download a matrix profile as a file with any of these formats. To do that, you should use the `file_format` and `save_to` arguments available in `rba_jaspar_matrix`. There are two notes here:
 
-1.  In this case, the function will save your matrix as a file and returns the un-parsed content of the file as a character string.
+1.  In this case, the function saves your matrix as a file and returns the unparsed content as a character string.
 
-2.  The `save_to` argument in this function, and in fact through any rbioapi function can be used in many ways:\
-    2.1. save_to = NA: rbioapi will automatically generate a file path under your working directory, save the file in that path , and informs you with a message.\
-    2.2 save_to = file_name without path: rbioapi will save the file with your supplied name in your working directory.\
-    2.3. save_to = a directory path (without file): rbioapi will save the file with a proper name in that directory.\
-    2.4. save_to = a file path (i.e. ending with .extension): rbioapi will save the file exactly to this path. Make sure that the file extension of the path matches your requested file format. If this was not the case, rbioapi will save the file with the extension supplied in the path, but issues a warning to inform you about that.
+2.  The `save_to` argument in this and other rbioapi functions can be used in several ways:\
+    2.1. `save_to = NA`: rbioapi automatically generates a file path under your working directory, saves the file there, and reports the path in a message.\
+    2.2. `save_to = file_name` without a directory: rbioapi saves the file with the supplied name in your working directory.\
+    2.3. `save_to = directory_path`: rbioapi saves the file with an appropriate name in that directory.\
+    2.4. `save_to = file_path`: rbioapi saves the file to the exact path. Ensure that the path's extension matches the requested file format; otherwise, rbioapi uses the supplied extension and issues a warning.
 
     In any of the aforementioned cases, the file path can be absolute or relative.
 
 ```{r matrix_save, eval=FALSE}
-## Different wqays in which you can save the matrix file:
+## Different ways in which you can save the matrix file:
 meme_matrix1 <- rba_jaspar_matrix(
   matrix_id = "MA0600.2",
   file_format = "meme"
@@ -192,12 +192,12 @@ meme_matrix4 <- rba_jaspar_matrix(
 )
 ```
 
-## Get Binding Sites of a Matrix Profiles {#get-binding-sites-of-a-matrix-profiles}
+## Get Binding Sites for a Matrix Profile {#get-binding-sites-of-a-matrix-profiles}
 
-If available, you can retrieve information on binding sites associated with a matrix profile. The information includes a data frame of genomic coordination of the binding site, URL to FASTA and BED files, along with other annotations.
+If available, you can retrieve information on binding sites associated with a matrix profile. The result includes a data frame of genomic coordinates, URLs to FASTA and BED files, and other annotations.
 
 ```{r sites, eval=FALSE}
-## Get binding site of a matrix profile:
+## Get binding sites for a matrix profile:
 binding_sites <- rba_jaspar_sites(matrix_id = "MA0600.2")
 ```
 
@@ -205,13 +205,13 @@ binding_sites <- rba_jaspar_sites(matrix_id = "MA0600.2")
 
 # TF flexible models (TFFMs) {#tf-flexible-models-tffms}
 
-JASPAR also stores and assigns identifiers to TF flexible models (TFFMs). Just like PFM (position frequency matrices), you can search TFFMs or retrieve information and annotations using a TFFM Identifier. TFFM IDs are versioned, meaning that they are in base_id.version format.
+JASPAR also stores and assigns identifiers to TF flexible models (TFFMs). As with position frequency matrices (PFMs), you can search TFFMs or retrieve information and annotations using a TFFM identifier. TFFM IDs are versioned and follow the `base_id.version` format.
 
 ```{r tffm_search, eval=FALSE}
 ## Search TFFMs. This is a search function. Thus, what has been presented
-## in `Search Matrix Profiles` section also applies here:
+## in the `Search Matrix Profiles` section also applies here:
 
-## Get a list of all the available matrix profile:
+## Get a list of all available TFFM profiles:
 all_tffms <- rba_jaspar_tffm_search()
 
 ## Search FOX:
@@ -220,7 +220,7 @@ FOX_tffms <- rba_jaspar_tffm_search(term = "FOX")
 ## Transcription factors named FOXP3
 FOXP3_tffms <- rba_jaspar_tffm_search(term = "FOXP3")
 
-## Transcription factors of insects taxonomic group
+## Transcription factors in the insects taxonomic group
 insects_tffms <- rba_jaspar_tffm_search(tax_group = "insects")
 ```
 
