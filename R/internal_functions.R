@@ -538,7 +538,13 @@
           httr_call,
           list(
             str2lang(sprintf("httr::accept(\"%s\")", ext_args$file_accept)),
-            str2lang(sprintf("httr::write_disk(\"%s\", overwrite = TRUE)", ext_args$save_to))
+            as.call(
+              list(
+                quote(httr::write_disk),
+                ext_args$save_to,
+                overwrite = TRUE
+              )
+            )
           )
         )
         if (utils::hasName(ext_args, "file_parser")) {parser <- ext_args$file_parser}
@@ -561,7 +567,13 @@
         httr_call <- append(
           httr_call,
           list(
-            str2lang(sprintf("httr::write_disk(\"%s\", overwrite = TRUE)", ext_args$save_to))
+            as.call(
+              list(
+                quote(httr::write_disk),
+                ext_args$save_to,
+                overwrite = TRUE
+              )
+            )
           )
         )
       }
