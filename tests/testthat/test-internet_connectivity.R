@@ -6,7 +6,12 @@ test_that(".rba_http_status works", {
   )
   expect_regex(
     obj = .rba_http_status("599", verbose = TRUE),
-    pattern = "redirection",
+    pattern = "server error",
+    ignore.case = TRUE
+  )
+  expect_regex(
+    obj = .rba_http_status("499", verbose = TRUE),
+    pattern = "client error",
     ignore.case = TRUE
   )
   expect_error(

@@ -306,7 +306,7 @@
         "308" = "Permanent Redirect")
     ),
     "4" = list(
-      class = "Redirection",
+      class = "Client Error",
       deff = switch(
         http_status,
         "400" = "Bad Request",
@@ -339,7 +339,7 @@
         "451" = "Unavailable For Legal Reasons")
     ),
     "5" = list(
-      class = "Redirection",
+      class = "Server Error",
       deff = switch(
         http_status,
         "500" = "Internal Server Error",
