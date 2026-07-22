@@ -8,7 +8,7 @@ rba_panther_tree_grafter(protein_seq, target_organisms = NULL, ...)
 }
 \arguments{
 \item{protein_seq}{A character string with the protein's sequence. Maximum
-allowed sequence length is 50kb.}
+allowed sequence length is 50,000 characters.}
 
 \item{target_organisms}{(numeric) NCBI taxon ID(s) to filter the results.
 run \code{\link{rba_panther_info}} with argument 'what = "organisms"' to
@@ -34,7 +34,7 @@ For more information, see:
 }
 \section{Corresponding API Resources}{
 
- "GET https://www.pantherdb.org/services/oai/pantherdb/graftsequence"
+ "POST https://www.pantherdb.org/services/oai/pantherdb/graftsequence"
 }
 
 \examples{
@@ -45,12 +45,10 @@ rba_panther_tree_grafter("MKVLWAALLVTFLAGCQAKVEQAVETE")
 }
 \references{
 \itemize{
-  \item Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills,
-  Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER
-  version 16: a revised family classification, tree-based classification
-  tool, enhancer regions and extensive API, Nucleic Acids Research,
-  Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
-  https://doi.org/10.1093/nar/gkaa1106
+  \item Thomas PD, Ebert D, Muruganujan A, Mushayahama T, Albou L-P,
+  Mi H. (2022) PANTHER: Making genome-scale phylogenetics accessible to all.
+  Protein Science, 31(1), 8–22.
+  https://doi.org/10.1002/pro.4218
   \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
   Services Details}
   \item

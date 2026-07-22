@@ -37,11 +37,11 @@ rba_options(timeout = 30, skip_error = TRUE)
 
 # Introduction {#introduction}
 
-Directly quoting the the paper published by [PANTHER](https://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)") (Protein Analysis THrough Evolutionary Relationships) authors:
+To describe PANTHER in its authors’ own words, we quote directly from Thomas et al. (2022):
 
-> The PANTHER classification system (<https://www.pantherdb.org>) a comprehensive system that combines genomes, gene function , pathways and statistical analysis tools to enable to analyze large-scale genome-wide experimental data. The system (PANTHER v.14.0) covers 131 complete genomes organized gene families and subfamilies; evolutionary relationships between are represented in phylogenetic trees, multiple sequence and statistical models (hidden Markov models (HMMs)). The families and subfamilies are annotated with Gene Ontology (GO) terms, sequences are assigned to PANTHER pathways. A suite of tools has built to allow users to browse and query gene functions and analyze-scale experimental data with a number of statistical tests. is widely used by bench scientists, bioinformaticians, computer and systems biologists.
+> Phylogenetics is a powerful tool for analyzing protein sequences, by inferring their evolutionary relationships to other proteins. However, phylogenetics analyses can be challenging: they are computationally expensive and must be performed carefully in order to avoid systematic errors and artifacts. Protein Analysis THrough Evolutionary Relationships (PANTHER; http://pantherdb.org) is a publicly available, user-focused knowledgebase that stores the results of an extensive phylogenetic reconstruction pipeline that includes computational and manual processes and quality control steps. [...] The PANTHER knowledgebase can be downloaded or accessed via an extensive API. In addition, PANTHER provides software tools to facilitate the application of the knowledgebase to common protein sequence analysis tasks: exploring an annotated genome by gene function; performing "enrichment analysis" of lists of genes; annotating a single sequence or large batch of sequences by homology; and assessing the likelihood that a genetic variant at a particular site in a protein will have deleterious effects.
 >
-> (source: Mi, Huaiyu, et al. "Protocol Update for large-scale genome and gene function analysis with the PANTHER classification system (v. 14.0)." *Nature protocols* 14.3 (2019): 703-721)
+> (source: Thomas PD, Ebert D, Muruganujan A, Mushayahama T, Albou L-P, Mi H. "PANTHER: Making genome-scale phylogenetics accessible to all." *Protein Science* 31.1 (2022): 8--22. <https://doi.org/10.1002/pro.4218>)
 
 The available tools in PANTHER's **RESTful API services** can be divided into 3 broad categories: Mapping genes, retrieving information, and research tools. Herein, we provide a very short introduction; you can always check functions' manuals for detailed guides and examples.
 
@@ -59,9 +59,9 @@ The available tools in PANTHER's **RESTful API services** can be divided into 3 
 
 # Get information {#get-information}
 
--   `rba_panther_info`(): Retrieve a list of PANTHER's supported organisms, datasets, families, or pathways
+-   `rba_panther_info()`: Retrieve a list of PANTHER's supported organisms, datasets, families, or pathways
 
--   `rba_panther_family`(): Retrieve Orthologs, MSA, or Tree topology of a given PANTHER family.
+-   `rba_panther_family()`: Retrieve Orthologs, MSA, or Tree topology of a given PANTHER family.
 
 ------------------------------------------------------------------------
 
@@ -126,9 +126,11 @@ enriched <- rba_panther_enrich(
   cutoff = 0.05
 )
 
-# Note that we didn't supply the `test_type` parameter.
-# In this case, the function will default to using Fisher's exact test # (i.e. `test_type = "FISHER"`).
-# You may also use binomial test for the over-representation analysis # (i.e. `test_type = "BINOMIAL"`).
+# Note that we did not supply the `test_type` parameter.
+# In this case, the function defaults to Fisher's exact test
+# (`test_type = "FISHER"`).
+# You may also use the binomial test for over-representation analysis
+# (`test_type = "BINOMIAL"`).
 ```
 
 ```{r rba_panther_overrep_results, echo=FALSE}
@@ -173,11 +175,11 @@ enriched <- rba_panther_enrich(
   cutoff = 0.05
 )
 
-# Note that we didn't supply the `test_type` parameter.
-# In this case, the function will default to Mann-Whitney U Test
-# (i.e. `test_type = "Mann-Whitney"`).
-# This is the only valid value for the statistical enrichment analysis test,
-# thus ommiting or supplying it will not make a difference.
+# Note that we did not supply the `test_type` parameter.
+# In this case, the function defaults to the Mann-Whitney U test
+# (`test_type = "Mann-Whitney"`).
+# This is the only valid value for statistical enrichment analysis,
+# so omitting or supplying it makes no difference.
 ```
 
 **Please Note:** Other services supported by rbioapi also provide Over-representation analysis tools. Please see the vignette article [Do with rbioapi: Over-Representation (Enrichment) Analysis in R](rbioapi_do_enrich.html) ([link to the documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html)) for an in-depth review.
@@ -194,7 +196,15 @@ enriched <- rba_panther_enrich(
 
 To cite PANTHER (Please see <https://www.pantherdb.org/publications.jsp#HowToCitePANTHER>):
 
--   Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills, Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER version 16: a revised family classification, tree-based classification tool, enhancer regions and extensive API, *Nucleic Acids Research*, Volume 49, Issue D1, 8 January 2021, Pages D394--D403, <https://doi.org/10.1093/nar/gkaa1106>
+-   Thomas PD, Ebert D, Muruganujan A, Mushayahama T, Albou L-P, Mi H. PANTHER: Making genome-scale phylogenetics accessible to all. *Protein Science*. 2022;31(1):8--22. <https://doi.org/10.1002/pro.4218>
+
+For enrichment and over-representation analyses, also cite:
+
+-   Mi H, Muruganujan A, Huang X, Ebert D, Mills C, Guo X, Thomas PD. Protocol Update for large-scale genome and gene function analysis with the PANTHER classification system (v.14.0). *Nature Protocols*. 2019;14:703--721. <https://doi.org/10.1038/s41596-019-0128-8>
+
+For TreeGrafter, also cite:
+
+-   Tang H, Finn RD, Thomas PD. TreeGrafter: phylogenetic tree-based annotation of proteins with Gene Ontology terms and other annotations. *Bioinformatics*. 2019;35(3):518--520. <https://doi.org/10.1093/bioinformatics/bty625>
 
 To cite rbioapi:
 
@@ -204,9 +214,9 @@ To cite rbioapi:
 
 # Links {#links}
 
--   [This article in rbioapi documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_panther.html "2.C: PANTHER & rbioapi")
+-   [This article in rbioapi documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_panther.html "2.D: PANTHER & rbioapi")
 
--   [Functions references in rbioapi documentation site](https://rbioapi.moosa-r.com/reference/index.html#section-enrichr-rba-enrichr- "rbioapi reference")
+-   [Functions references in rbioapi documentation site](https://rbioapi.moosa-r.com/reference/index.html#section-panther-rba-panther- "rbioapi reference")
 
 -   [rbioapi vignette index](rbioapi.html "rbioapi: User-Friendly R Interface to Biologic Web Services' API")
 

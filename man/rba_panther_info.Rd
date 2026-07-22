@@ -10,24 +10,26 @@ rba_panther_info(what, organism_chr_loc = FALSE, families_page = 1, ...)
 \item{what}{what information to retrieve? should be one of: \itemize{
 \item "organisms": Retrieve supported organisms in PANTHER.
 \item "datasets": Retrieve available annotation datasets.
-\item "families" Retrieve available family IDs.
-\item "species_tree" Retrieve the PANThER's species tree.
+\item "families": Retrieve available family IDs.
+\item "species_tree": Retrieve PANTHER's species tree.
 \item "pathways" Retrieve available pathway IDs.}}
 
 \item{organism_chr_loc}{(Logical) (only when 'what = "organisms"')
 If TRUE, only organisms with chromosome location will be returned.
-If FALSE (default) every organisms will be returned.}
+If FALSE (default), all organisms will be returned.}
 
 \item{families_page}{(Numeric) (only when 'what = "families"')
-Family information is very long, so results are paginated. Use this
-argument to define the page to retrieve.}
+Family information is very long, so results are returned in pages of up
+to 1,000 families. Use a positive whole number to define the page to
+retrieve.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-For families and species tree, a list and otherwise a data frame
-  with pertinent information.
+For families, a list containing family information, the requested
+  page, and the total number of pages. For the species tree, a list; otherwise
+  a data frame with pertinent information.
 }
 \description{
 Using this function you can retrieve a list of available organisms,
@@ -54,12 +56,10 @@ rba_panther_info(what = "families", families_page = 4)
 }
 \references{
 \itemize{
-  \item Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills,
-  Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER
-  version 16: a revised family classification, tree-based classification
-  tool, enhancer regions and extensive API, Nucleic Acids Research,
-  Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
-  https://doi.org/10.1093/nar/gkaa1106
+  \item Thomas PD, Ebert D, Muruganujan A, Mushayahama T, Albou L-P,
+  Mi H. (2022) PANTHER: Making genome-scale phylogenetics accessible to all.
+  Protein Science, 31(1), 8–22.
+  https://doi.org/10.1002/pro.4218
   \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
   Services Details}
   \item

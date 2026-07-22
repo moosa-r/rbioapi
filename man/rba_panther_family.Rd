@@ -33,9 +33,9 @@ Using this function, you can retrieve Orthologs, MSA or Tree topology
 }
 \section{Corresponding API Resources}{
 
- "GET https://www.pantherdb.org/services/oai/pantherdb/familyortholog"
- \cr "GET https://www.pantherdb.org/services/oai/pantherdb/familymsa"
- \cr "GET https://www.pantherdb.org/services/oai/pantherdb/treeinfo"
+ "POST https://www.pantherdb.org/services/oai/pantherdb/familyortholog"
+ \cr "POST https://www.pantherdb.org/services/oai/pantherdb/familymsa"
+ \cr "POST https://www.pantherdb.org/services/oai/pantherdb/treeinfo"
 }
 
 \examples{
@@ -46,12 +46,10 @@ rba_panther_family("PTHR10000", what = "ortholog")
 }
 \references{
 \itemize{
-  \item Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills,
-  Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER
-  version 16: a revised family classification, tree-based classification
-  tool, enhancer regions and extensive API, Nucleic Acids Research,
-  Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
-  https://doi.org/10.1093/nar/gkaa1106
+  \item Thomas PD, Ebert D, Muruganujan A, Mushayahama T, Albou L-P,
+  Mi H. (2022) PANTHER: Making genome-scale phylogenetics accessible to all.
+  Protein Science, 31(1), 8–22.
+  https://doi.org/10.1002/pro.4218
   \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
   Services Details}
   \item

@@ -7,11 +7,11 @@
 rba_panther_mapping(genes, organism, ...)
 }
 \arguments{
-\item{genes}{Character vector of genes identifiers with maximum length of
-1000. Can be any of: Ensemble gene ID, Ensemble protein ID, Ensemble
-transcript ID, Entrez gene ID, gene symbol, NCBI GI, HGNC ID,
-International protein index ID, NCBI UniGene ID, UniProt accession
-and/or UniProt ID.}
+\item{genes}{Character or numeric vector of gene identifiers with maximum
+length of 5,000. Can be any of: Ensembl gene ID, Ensembl protein ID,
+Ensembl transcript ID, Entrez gene ID, gene symbol, NCBI GI, HGNC ID,
+International protein index ID, NCBI UniGene ID, UniProt accession and/or
+UniProt ID.}
 
 \item{organism}{(numeric) NCBI taxon ID. run \code{\link{rba_panther_info}}
 with argument 'what = "organisms"' to get a list of PANTHER's
@@ -30,7 +30,7 @@ Using this function, you can search your genes in PANTHER database and
 }
 \section{Corresponding API Resources}{
 
- "GET https://www.pantherdb.org/services/oai/pantherdb/geneinfo"
+ "POST https://www.pantherdb.org/services/oai/pantherdb/geneinfo"
 }
 
 \examples{
@@ -42,12 +42,10 @@ rba_panther_mapping(genes = c("Cd40", 7124, "ENSG00000203747", "P33681"),
 }
 \references{
 \itemize{
-  \item Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills,
-  Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER
-  version 16: a revised family classification, tree-based classification
-  tool, enhancer regions and extensive API, Nucleic Acids Research,
-  Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
-  https://doi.org/10.1093/nar/gkaa1106
+  \item Thomas PD, Ebert D, Muruganujan A, Mushayahama T, Albou L-P,
+  Mi H. (2022) PANTHER: Making genome-scale phylogenetics accessible to all.
+  Protein Science, 31(1), 8–22.
+  https://doi.org/10.1002/pro.4218
   \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
   Services Details}
   \item

@@ -7,38 +7,39 @@
 rba_panther_homolog(genes, organism, type = "P", target_organisms = NULL, ...)
 }
 \arguments{
-\item{genes}{Character vector of genes identifiers with maximum length of
-10 or only one if seq_pos is supplied. Can be any of: Ensemble gene ID,
-Ensemble protein ID, Ensemble transcript ID, Entrez gene ID, gene symbol,
-NCBI GI, HGNC ID, International protein index ID, NCBI UniGene ID,
-UniProt accession and/or UniProt ID.}
+\item{genes}{Character or numeric vector of gene identifiers with maximum
+length of 10. Can be any of: Ensembl gene ID, Ensembl protein ID, Ensembl
+transcript ID, Entrez gene ID, gene symbol, NCBI GI, HGNC ID,
+International protein index ID, NCBI UniGene ID, UniProt accession and/or
+UniProt ID.}
 
 \item{organism}{(numeric) NCBI taxon ID of the organism of your supplied
 genes. run \code{\link{rba_panther_info}} with argument
 'what = "organisms"' to get a list of PANTHER's supported organisms.}
 
 \item{type}{Homolog types to return. either "P" (default) for paralogs,
-"X" for horizontal gene transfer and "LDX" for diverged horizontal gene
-transfer.}
+"X" for horizontal gene transfer and "LDX" for least diverged horizontal
+gene transfer.}
 
 \item{target_organisms}{(numeric) NCBI taxon ID(s) to filter the results.
 run \code{\link{rba_panther_info}} with argument 'what = "organisms"' to
 get a list of PANTHER's supported organisms.
-For Paralog, target organism and organism should be the same; Otherwise,
-the target organism should be different from the input organism.}
+This argument is ignored for paralogs, which are searched within the input
+organism. For horizontal gene transfers, target organisms should differ
+from the input organism.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-A dataframe with homologs information.
+A data frame with homolog information.
 }
 \description{
 Using this function you can search and retrieve homolog of given gene(s).
 }
 \section{Corresponding API Resources}{
 
- "GET https://www.pantherdb.org/services/oai/pantherdb/ortholog/homologOther"
+ "POST https://www.pantherdb.org/services/oai/pantherdb/ortholog/homologOther"
 }
 
 \examples{
@@ -49,12 +50,10 @@ rba_panther_homolog("OR4F5", organism = 9606, type = "P")
 }
 \references{
 \itemize{
-  \item Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills,
-  Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER
-  version 16: a revised family classification, tree-based classification
-  tool, enhancer regions and extensive API, Nucleic Acids Research,
-  Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
-  https://doi.org/10.1093/nar/gkaa1106
+  \item Thomas PD, Ebert D, Muruganujan A, Mushayahama T, Albou L-P,
+  Mi H. (2022) PANTHER: Making genome-scale phylogenetics accessible to all.
+  Protein Science, 31(1), 8–22.
+  https://doi.org/10.1002/pro.4218
   \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
   Services Details}
   \item

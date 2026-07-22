@@ -15,10 +15,10 @@ rba_panther_ortholog(
 )
 }
 \arguments{
-\item{genes}{Character vector of genes identifiers with maximum length of
-10 or only one if seq_pos is supplied. Can be any of: Ensemble gene ID,
-Ensemble protein ID, Ensemble transcript ID, Entrez gene ID, gene symbol,
-NCBI GI, HGNC ID, International protein index ID, NCBI UniGene ID,
+\item{genes}{Character or numeric vector of gene identifiers with maximum
+length of 10, or only one if \code{seq_pos} is supplied. Can be any of: Ensembl
+gene ID, Ensembl protein ID, Ensembl transcript ID, Entrez gene ID, gene
+symbol, NCBI GI, HGNC ID, International protein index ID, NCBI UniGene ID,
 UniProt accession and/or UniProt ID.}
 
 \item{organism}{(numeric) NCBI taxon ID of the organism of your supplied
@@ -64,12 +64,10 @@ rba_panther_ortholog("CD40", organism = 9606, type = "LDO")
 }
 \references{
 \itemize{
-  \item Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills,
-  Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER
-  version 16: a revised family classification, tree-based classification
-  tool, enhancer regions and extensive API, Nucleic Acids Research,
-  Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
-  https://doi.org/10.1093/nar/gkaa1106
+  \item Thomas PD, Ebert D, Muruganujan A, Mushayahama T, Albou L-P,
+  Mi H. (2022) PANTHER: Making genome-scale phylogenetics accessible to all.
+  Protein Science, 31(1), 8–22.
+  https://doi.org/10.1002/pro.4218
   \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
   Services Details}
   \item

@@ -30,8 +30,8 @@ data frame should have two columns: the first column is a character vector
 with gene identifiers and the second column is a numerical vector with
 expression values.}
 }
-In both cases, maximum of 10000 genes can be supplied.
-The gene identifiers can be any of: Ensemble gene ID, Ensembl protein ID,
+In both cases, a maximum of 100,000 identifiers can be supplied.
+The gene identifiers can be any of: Ensembl gene ID, Ensembl protein ID,
 Ensembl transcript ID, Entrez gene ID, gene symbol, NCBI GI, HGNC ID,
 International protein index ID, NCBI UniGene ID, UniProt accession
 or UniProt ID.}
@@ -46,12 +46,13 @@ get a list of PANTHER's supported datasets. Note that you should enter
 the "id" of the dataset, not its label (e.g. entering "biological_process"
 is incorrect, you should rather enter "GO:0008150").}
 
-\item{test_type}{statistical test type to calculate the p values.
+\item{test_type}{Statistical test type used to calculate p-values.
 \itemize{
-\item If performing over-representation analysis (i.e. `genes` parameter
-is a character vector), valid values are "FISHER" (default) or "BINOMIAL".
-\item If performing statistical enrichment analysis (i.e. `genes`
-parameter is a data.frame), the only valid value is "Mann-Whitney"
+\item If performing over-representation analysis (i.e. `genes` is a
+character vector), valid values are "FISHER" (default if NULL) or
+"BINOMIAL".
+\item If performing statistical enrichment analysis (i.e. `genes` is a
+data frame), the only valid value is "Mann-Whitney" (default if NULL).
 }}
 
 \item{correction}{p value correction method. either "FDR" (default),
@@ -62,10 +63,10 @@ if correction is "FDR", the threshold will be applied to fdr column's
 values; if otherwise, the threshold will be applied to p value column.}
 
 \item{ref_genes}{(Optional, only valid if genes is a character vector)
-A character vector of genes that will be used as the test's background
-(reference/universe) gene set. If no value supplied, all of the genes in
-specified organism will be used. The maximum length and supported IDs are
-the same as 'genes' argument.}
+A character or numeric vector of genes that will be used as the test's
+background (reference/universe) gene set. If no value is supplied, all of
+the genes in the specified organism will be used. The maximum length and
+supported IDs are the same as the 'genes' argument.}
 
 \item{ref_organism}{(Optional, only valid if genes is a character vector)
 if 'ref_genes' is used, you can specify the organisms which correspond to
@@ -154,12 +155,14 @@ rba_panther_enrich(
 }
 \references{
 \itemize{
-  \item Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills,
-  Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER
-  version 16: a revised family classification, tree-based classification
-  tool, enhancer regions and extensive API, Nucleic Acids Research,
-  Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
-  https://doi.org/10.1093/nar/gkaa1106
+  \item Thomas PD, Ebert D, Muruganujan A, Mushayahama T, Albou L-P,
+  Mi H. (2022) PANTHER: Making genome-scale phylogenetics accessible to all.
+  Protein Science, 31(1), 8–22.
+  https://doi.org/10.1002/pro.4218
+  \item Mi H, Muruganujan A, Huang X, Ebert D, Mills C, Guo X, Thomas PD.
+  (2019) Protocol Update for large-scale genome and gene function analysis
+  with the PANTHER classification system (v.14.0). Nature Protocols, 14,
+  703–721. https://doi.org/10.1038/s41596-019-0128-8
   \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
   Services Details}
   \item

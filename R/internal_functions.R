@@ -159,7 +159,7 @@
       "Ensembl" = paste0(.rba_stg("ensembl", "url"), "/info/ping"),
       "JASPAR" = paste0(.rba_stg("jaspar", "url"), "api/v1/live-api/"),
       "miEAA" = paste0(.rba_stg("mieaa", "url"), "/mieaa2/api/"),
-      "PANTHER" = paste0(.rba_stg("panther", "url"), "/services/api/panther"),
+      "PANTHER" = paste0(.rba_stg("panther", "url"), "/services/oai/pantherdb/supportedgenomes"),
       "Reactome Content Service" = paste0(.rba_stg("reactome", "url"), "/ContentService/data/database/name"),
       "Reactome Analysis Service" = paste0(.rba_stg("reactome", "url"), "/AnalysisService/database/name"),
       "STRING" = paste0(.rba_stg("string", "url"), "/api/json/version"),

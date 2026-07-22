@@ -29,11 +29,11 @@
 #' Using this function, you can search your genes in PANTHER database and
 #'   retrieve attributes and annotations associated to your genes.
 #'
-#' @param genes Character vector of genes identifiers with maximum length of
-#'   1000. Can be any of: Ensemble gene ID, Ensemble protein ID, Ensemble
-#'   transcript ID, Entrez gene ID, gene symbol, NCBI GI, HGNC ID,
-#'   International protein index ID, NCBI UniGene ID, UniProt accession
-#'   and/or UniProt ID.
+#' @param genes Character or numeric vector of gene identifiers with maximum
+#'   length of 5,000. Can be any of: Ensembl gene ID, Ensembl protein ID,
+#'   Ensembl transcript ID, Entrez gene ID, gene symbol, NCBI GI, HGNC ID,
+#'   International protein index ID, NCBI UniGene ID, UniProt accession and/or
+#'   UniProt ID.
 #' @param organism (numeric) NCBI taxon ID. run \code{\link{rba_panther_info}}
 #'   with argument 'what = "organisms"' to get a list of PANTHER's
 #'   supported organisms.
@@ -41,18 +41,16 @@
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://www.pantherdb.org/services/oai/pantherdb/geneinfo"
+#'  "POST https://www.pantherdb.org/services/oai/pantherdb/geneinfo"
 #'
 #' @return A list containing your unmapped inputs and mapped genes with
 #'   pertinent information.
 #'
 #' @references \itemize{
-#'   \item Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills,
-#'   Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER
-#'   version 16: a revised family classification, tree-based classification
-#'   tool, enhancer regions and extensive API, Nucleic Acids Research,
-#'   Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
-#'   https://doi.org/10.1093/nar/gkaa1106
+#'   \item Thomas PD, Ebert D, Muruganujan A, Mushayahama T, Albou L-P,
+#'   Mi H. (2022) PANTHER: Making genome-scale phylogenetics accessible to all.
+#'   Protein Science, 31(1), 8–22.
+#'   https://doi.org/10.1002/pro.4218
 #'   \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
 #'   Services Details}
 #'   \item
@@ -77,13 +75,18 @@ rba_panther_mapping <- function(genes,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "genes", class = c("character", "numeric"), max_len = 1000),
-      list(arg = "organism", class = "numeric", len = 1)
+      list(
+        arg = "genes",
+        class = c("character", "numeric", "integer"),
+        min_len = 1L,
+        max_len = 5000L
+      ),
+      list(arg = "organism", class = c("numeric", "integer"), len = 1L)
     )
   )
 
   .msg(
-    "Mapping %s input genes from organims %s to PANTHER databse.",
+    "Mapping %s input genes from organism %s to the PANTHER database.",
     length(genes), organism
   )
 
@@ -165,8 +168,8 @@ rba_panther_mapping <- function(genes,
 #'   with gene identifiers and the second column is a numerical vector with
 #'   expression values.}
 #'   }
-#'   In both cases, maximum of 10000 genes can be supplied.
-#'   The gene identifiers can be any of: Ensemble gene ID, Ensembl protein ID,
+#'   In both cases, a maximum of 100,000 identifiers can be supplied.
+#'   The gene identifiers can be any of: Ensembl gene ID, Ensembl protein ID,
 #'   Ensembl transcript ID, Entrez gene ID, gene symbol, NCBI GI, HGNC ID,
 #'   International protein index ID, NCBI UniGene ID, UniProt accession
 #'   or UniProt ID.
@@ -178,12 +181,13 @@ rba_panther_mapping <- function(genes,
 #'   get a list of PANTHER's supported datasets. Note that you should enter
 #'   the "id" of the dataset, not its label (e.g. entering "biological_process"
 #'   is incorrect, you should rather enter "GO:0008150").
-#' @param test_type statistical test type to calculate the p values.
+#' @param test_type Statistical test type used to calculate p-values.
 #'   \itemize{
-#'   \item If performing over-representation analysis (i.e. `genes` parameter
-#'   is a character vector), valid values are "FISHER" (default) or "BINOMIAL".
-#'   \item If performing statistical enrichment analysis (i.e. `genes`
-#'   parameter is a data.frame), the only valid value is "Mann-Whitney"
+#'   \item If performing over-representation analysis (i.e. `genes` is a
+#'   character vector), valid values are "FISHER" (default if NULL) or
+#'   "BINOMIAL".
+#'   \item If performing statistical enrichment analysis (i.e. `genes` is a
+#'   data frame), the only valid value is "Mann-Whitney" (default if NULL).
 #'   }
 #' @param correction p value correction method. either "FDR" (default),
 #'   "BONFERRONI" or "NONE".
@@ -191,10 +195,10 @@ rba_panther_mapping <- function(genes,
 #'   if correction is "FDR", the threshold will be applied to fdr column's
 #'   values; if otherwise, the threshold will be applied to p value column.
 #' @param ref_genes (Optional, only valid if genes is a character vector)
-#'   A character vector of genes that will be used as the test's background
-#'   (reference/universe) gene set. If no value supplied, all of the genes in
-#'   specified organism will be used. The maximum length and supported IDs are
-#'   the same as 'genes' argument.
+#'   A character or numeric vector of genes that will be used as the test's
+#'   background (reference/universe) gene set. If no value is supplied, all of
+#'   the genes in the specified organism will be used. The maximum length and
+#'   supported IDs are the same as the 'genes' argument.
 #' @param ref_organism (Optional, only valid if genes is a character vector)
 #'   if 'ref_genes' is used, you can specify the organisms which correspond to
 #'   your supplied IDs in 'ref_genes' argument. see 'organism' argument for
@@ -219,12 +223,14 @@ rba_panther_mapping <- function(genes,
 #'   applicable, and PANTHER analysis and release metadata.
 #'
 #' @references \itemize{
-#'   \item Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills,
-#'   Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER
-#'   version 16: a revised family classification, tree-based classification
-#'   tool, enhancer regions and extensive API, Nucleic Acids Research,
-#'   Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
-#'   https://doi.org/10.1093/nar/gkaa1106
+#'   \item Thomas PD, Ebert D, Muruganujan A, Mushayahama T, Albou L-P,
+#'   Mi H. (2022) PANTHER: Making genome-scale phylogenetics accessible to all.
+#'   Protein Science, 31(1), 8–22.
+#'   https://doi.org/10.1002/pro.4218
+#'   \item Mi H, Muruganujan A, Huang X, Ebert D, Mills C, Guo X, Thomas PD.
+#'   (2019) Protocol Update for large-scale genome and gene function analysis
+#'   with the PANTHER classification system (v.14.0). Nature Protocols, 14,
+#'   703–721. https://doi.org/10.1038/s41596-019-0128-8
 #'   \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
 #'   Services Details}
 #'   \item
@@ -275,7 +281,10 @@ rba_panther_enrich <- function(genes,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "genes", class = c("character", "data.frame")),
+      list(
+        arg = "genes", class = c("character", "data.frame"),
+        max_len = 100000L
+      ),
       list(arg = "organism", class = "numeric", len = 1),
       list(arg = "annot_dataset", class = "character", len = 1),
       list(
@@ -287,7 +296,7 @@ rba_panther_enrich <- function(genes,
         val =  c("FDR", "BONFERRONI", "NONE")
       ),
       list(arg = "cutoff", class = "numeric", len = 1, ran = c(0, 1)),
-      list(arg = "ref_genes", class = c("character","numeric"), max_len = 100000),
+      list(arg = "ref_genes", class = c("character","numeric"), max_len = 100000L),
       list(arg = "ref_organism", class = "numeric", len = 1),
       list(
         arg = "request_mapped_genes",
@@ -298,19 +307,23 @@ rba_panther_enrich <- function(genes,
     cond = list(
       list(
         quote(xor(is.null(ref_organism), is.null(ref_genes))),
-        "'ref_organism' and 'ref_genes' should be supplied togeather."
+        "'ref_organism' and 'ref_genes' should be supplied together."
       ),
       list(
-        quote(is.data.frame(genes) && (ncol(genes) != 2 || !inherits(genes[[1]], "character") || !inherits(genes[[2]], "numeric"))),
+        quote(is.data.frame(genes) && (ncol(genes) != 2 || !inherits(genes[[1]], "character") || !is.numeric(genes[[2]]))),
         "If the `genes` parameter is a data frame, statistical enrichment analysis will be performed.\nThe gene parameter should be a data frame with 2 columns, where the first column contains the genes identifiers and the second column contains numerical expression values."
       ),
       list(
+        quote(is.data.frame(genes) && nrow(genes) > 100000L),
+        "The `genes` data frame can contain at most 100,000 identifiers."
+      ),
+      list(
         quote(is.data.frame(genes) && !is.null(test_type) && test_type != "Mann-Whitney"),
-        "If the `genes` parameter is a data frame, statistical enrichment analysis will be performed.\nThus, the only valid parameter for `test_type` is 'Mann-Whitney'."
+        "If `genes` is a data frame, statistical enrichment analysis will be performed.\nThus, the only valid value for `test_type` is 'Mann-Whitney'."
       ),
       list(
         quote(is.character(genes) && !is.null(test_type) && test_type == "Mann-Whitney"),
-        "If the `genes` parameter is a character vector, over-representation analysis will be performed.\nThus, the valid parameters for `test_type` are either 'FISHER' or 'BINOMIAL'."
+        "If `genes` is a character vector, over-representation analysis will be performed.\nThus, valid values for `test_type` are 'FISHER' and 'BINOMIAL'."
       ),
       list(
         quote(is.data.frame(genes) && any(!is.null(ref_genes), !is.null(ref_organism))),
@@ -364,6 +377,7 @@ rba_panther_enrich <- function(genes,
 
     ## Build POST API Request's body
     temp_file <- tempfile(pattern = "rba_", fileext = ".txt")
+    on.exit(unlink(temp_file), add = TRUE)
 
     utils::write.table(
       x = genes,
@@ -430,15 +444,16 @@ rba_panther_enrich <- function(genes,
 #' @param what what information to retrieve? should be one of: \itemize{
 #' \item "organisms": Retrieve supported organisms in PANTHER.
 #' \item "datasets": Retrieve available annotation datasets.
-#' \item "families" Retrieve available family IDs.
-#' \item "species_tree" Retrieve the PANThER's species tree.
+#' \item "families": Retrieve available family IDs.
+#' \item "species_tree": Retrieve PANTHER's species tree.
 #' \item "pathways" Retrieve available pathway IDs.}
 #' @param organism_chr_loc (Logical) (only when 'what = "organisms"')
 #'   If TRUE, only organisms with chromosome location will be returned.
-#'   If FALSE (default) every organisms will be returned.
+#'   If FALSE (default), all organisms will be returned.
 #' @param families_page (Numeric) (only when 'what = "families"')
-#'   Family information is very long, so results are paginated. Use this
-#'   argument to define the page to retrieve.
+#'   Family information is very long, so results are returned in pages of up
+#'   to 1,000 families. Use a positive whole number to define the page to
+#'   retrieve.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -449,16 +464,15 @@ rba_panther_enrich <- function(genes,
 #'  \cr "GET https://www.pantherdb.org/services/oai/pantherdb/supportedpantherpathways"
 #'  \cr "GET https://www.pantherdb.org/services/oai/pantherdb/speciestree"
 #'
-#' @return For families and species tree, a list and otherwise a data frame
-#'   with pertinent information.
+#' @return For families, a list containing family information, the requested
+#'   page, and the total number of pages. For the species tree, a list; otherwise
+#'   a data frame with pertinent information.
 #'
 #' @references \itemize{
-#'   \item Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills,
-#'   Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER
-#'   version 16: a revised family classification, tree-based classification
-#'   tool, enhancer regions and extensive API, Nucleic Acids Research,
-#'   Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
-#'   https://doi.org/10.1093/nar/gkaa1106
+#'   \item Thomas PD, Ebert D, Muruganujan A, Mushayahama T, Albou L-P,
+#'   Mi H. (2022) PANTHER: Making genome-scale phylogenetics accessible to all.
+#'   Protein Science, 31(1), 8–22.
+#'   https://doi.org/10.1002/pro.4218
 #'   \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
 #'   Services Details}
 #'   \item
@@ -487,20 +501,32 @@ rba_panther_info <- function(what,
   .rba_args(
     cons = list(
       list(
-        arg = "what", class = "character",
+        arg = "what", class = "character", len = 1L,
         val = c("organisms", "datasets", "families", "species_tree", "pathways")
       ),
       list(arg = "organism_chr_loc", class = "logical", len = 1),
-      list(arg = "families_page", class = "numeric", len = 1)
+      list(
+        arg = "families_page",
+        class = c("numeric", "integer"),
+        len = 1L
+      )
     ),
     cond = list(
+      list(
+        quote(
+          !is.finite(families_page) ||
+            families_page < 1 ||
+            families_page %% 1 != 0
+        ),
+        "'families_page' should be a positive whole number."
+      ),
       list(
         quote(families_page != 1 && what != "families"),
         "'families_page' was ignored because 'what' argument is not 'families'.",
         warn = TRUE
       ),
       list(
-        quote(isTRUE(organism_chr_loc)),
+        quote(isTRUE(organism_chr_loc) && what != "organisms"),
         "'organism_chr_loc' was ignored because 'what' argument is not 'organisms'.",
         warn = TRUE
       )
@@ -552,10 +578,20 @@ rba_panther_info <- function(what,
         "json->list_simp",
         .rba_panther_check_response,
         function(x) {
+          pages_count <- ceiling(x$search$number_of_families / 1000)
+
+          if (families_page > pages_count) {
+            return(.rba_api_error(sprintf(
+              "Requested family page %s exceeds the available %s pages.",
+              families_page,
+              pages_count
+            )))
+          }
+
           list(
-            familiy = x$search$panther_family_subfam_list$family,
+            family = x$search$panther_family_subfam_list$family,
             page = families_page,
-            pages_count = x$search$number_of_families %/% 1000
+            pages_count = pages_count
           )
         }
       )
@@ -602,10 +638,10 @@ rba_panther_info <- function(what,
 #'   and optionally return the corresponding position in the target organisms'
 #'   protein sequences.
 #'
-#' @param genes Character vector of genes identifiers with maximum length of
-#'   10 or only one if seq_pos is supplied. Can be any of: Ensemble gene ID,
-#'   Ensemble protein ID, Ensemble transcript ID, Entrez gene ID, gene symbol,
-#'   NCBI GI, HGNC ID, International protein index ID, NCBI UniGene ID,
+#' @param genes Character or numeric vector of gene identifiers with maximum
+#'   length of 10, or only one if \code{seq_pos} is supplied. Can be any of: Ensembl
+#'   gene ID, Ensembl protein ID, Ensembl transcript ID, Entrez gene ID, gene
+#'   symbol, NCBI GI, HGNC ID, International protein index ID, NCBI UniGene ID,
 #'   UniProt accession and/or UniProt ID.
 #' @param organism (numeric) NCBI taxon ID of the organism of your supplied
 #'   genes. run \code{\link{rba_panther_info}} with argument
@@ -630,12 +666,10 @@ rba_panther_info <- function(what,
 #' @return A data frame with Orthologs information.
 #'
 #' @references \itemize{
-#'   \item Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills,
-#'   Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER
-#'   version 16: a revised family classification, tree-based classification
-#'   tool, enhancer regions and extensive API, Nucleic Acids Research,
-#'   Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
-#'   https://doi.org/10.1093/nar/gkaa1106
+#'   \item Thomas PD, Ebert D, Muruganujan A, Mushayahama T, Albou L-P,
+#'   Mi H. (2022) PANTHER: Making genome-scale phylogenetics accessible to all.
+#'   Protein Science, 31(1), 8–22.
+#'   https://doi.org/10.1002/pro.4218
 #'   \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
 #'   Services Details}
 #'   \item
@@ -737,37 +771,36 @@ rba_panther_ortholog <- function(genes,
 #'
 #' Using this function you can search and retrieve homolog of given gene(s).
 #'
-#' @param genes Character vector of genes identifiers with maximum length of
-#'   10 or only one if seq_pos is supplied. Can be any of: Ensemble gene ID,
-#'   Ensemble protein ID, Ensemble transcript ID, Entrez gene ID, gene symbol,
-#'   NCBI GI, HGNC ID, International protein index ID, NCBI UniGene ID,
-#'   UniProt accession and/or UniProt ID.
+#' @param genes Character or numeric vector of gene identifiers with maximum
+#'   length of 10. Can be any of: Ensembl gene ID, Ensembl protein ID, Ensembl
+#'   transcript ID, Entrez gene ID, gene symbol, NCBI GI, HGNC ID,
+#'   International protein index ID, NCBI UniGene ID, UniProt accession and/or
+#'   UniProt ID.
 #' @param organism (numeric) NCBI taxon ID of the organism of your supplied
 #'   genes. run \code{\link{rba_panther_info}} with argument
 #'   'what = "organisms"' to get a list of PANTHER's supported organisms.
 #' @param type Homolog types to return. either "P" (default) for paralogs,
-#'   "X" for horizontal gene transfer and "LDX" for diverged horizontal gene
-#'   transfer.
+#'   "X" for horizontal gene transfer and "LDX" for least diverged horizontal
+#'   gene transfer.
 #' @param target_organisms (numeric) NCBI taxon ID(s) to filter the results.
 #'   run \code{\link{rba_panther_info}} with argument 'what = "organisms"' to
 #'   get a list of PANTHER's supported organisms.
-#'   For Paralog, target organism and organism should be the same; Otherwise,
-#'   the target organism should be different from the input organism.
+#'   This argument is ignored for paralogs, which are searched within the input
+#'   organism. For horizontal gene transfers, target organisms should differ
+#'   from the input organism.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://www.pantherdb.org/services/oai/pantherdb/ortholog/homologOther"
+#'  "POST https://www.pantherdb.org/services/oai/pantherdb/ortholog/homologOther"
 #'
-#' @return A dataframe with homologs information.
+#' @return A data frame with homolog information.
 #'
 #' @references \itemize{
-#'   \item Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills,
-#'   Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER
-#'   version 16: a revised family classification, tree-based classification
-#'   tool, enhancer regions and extensive API, Nucleic Acids Research,
-#'   Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
-#'   https://doi.org/10.1093/nar/gkaa1106
+#'   \item Thomas PD, Ebert D, Muruganujan A, Mushayahama T, Albou L-P,
+#'   Mi H. (2022) PANTHER: Making genome-scale phylogenetics accessible to all.
+#'   Protein Science, 31(1), 8–22.
+#'   https://doi.org/10.1002/pro.4218
 #'   \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
 #'   Services Details}
 #'   \item
@@ -802,7 +835,7 @@ rba_panther_homolog <- function(genes,
     cond = list(
       list(
         quote(type == "P" && !is.null(target_organisms)),
-        "For Paralog, target organism and organism should be the same. thus, 'target_organisms' was ignored.",
+        "For paralogs, 'target_organisms' was ignored because PANTHER searches within the input organism.",
         warn = TRUE
       ),
       list(
@@ -824,7 +857,11 @@ rba_panther_homolog <- function(genes,
       organism = organism,
       homologType = type
     ),
-    list("targetOrganism", !is.null(target_organisms), paste(target_organisms, collapse =  ","))
+    list(
+      "targetOrganism",
+      type != "P" && !is.null(target_organisms),
+      paste(target_organisms, collapse =  ",")
+    )
   )
 
 
@@ -870,20 +907,18 @@ rba_panther_homolog <- function(genes,
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://www.pantherdb.org/services/oai/pantherdb/familyortholog"
-#'  \cr "GET https://www.pantherdb.org/services/oai/pantherdb/familymsa"
-#'  \cr "GET https://www.pantherdb.org/services/oai/pantherdb/treeinfo"
+#'  "POST https://www.pantherdb.org/services/oai/pantherdb/familyortholog"
+#'  \cr "POST https://www.pantherdb.org/services/oai/pantherdb/familymsa"
+#'  \cr "POST https://www.pantherdb.org/services/oai/pantherdb/treeinfo"
 #'
 #' @return For trees a list and otherwise a data frame with the requested
 #'   family's information.
 #'
 #' @references \itemize{
-#'   \item Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills,
-#'   Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER
-#'   version 16: a revised family classification, tree-based classification
-#'   tool, enhancer regions and extensive API, Nucleic Acids Research,
-#'   Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
-#'   https://doi.org/10.1093/nar/gkaa1106
+#'   \item Thomas PD, Ebert D, Muruganujan A, Mushayahama T, Albou L-P,
+#'   Mi H. (2022) PANTHER: Making genome-scale phylogenetics accessible to all.
+#'   Protein Science, 31(1), 8–22.
+#'   https://doi.org/10.1002/pro.4218
 #'   \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
 #'   Services Details}
 #'   \item
@@ -987,7 +1022,7 @@ rba_panther_family <- function(id,
 #'   518–520, \doi{10.1093/bioinformatics/bty625}
 #'
 #' @param protein_seq A character string with the protein's sequence. Maximum
-#'   allowed sequence length is 50kb.
+#'   allowed sequence length is 50,000 characters.
 #' @param target_organisms (numeric) NCBI taxon ID(s) to filter the results.
 #'   run \code{\link{rba_panther_info}} with argument 'what = "organisms"' to
 #'   get a list of PANTHER's supported organisms.
@@ -995,17 +1030,15 @@ rba_panther_family <- function(id,
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://www.pantherdb.org/services/oai/pantherdb/graftsequence"
+#'  "POST https://www.pantherdb.org/services/oai/pantherdb/graftsequence"
 #'
 #' @return A list containing PANTHER tree topology information.
 #'
 #' @references \itemize{
-#'   \item Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills,
-#'   Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER
-#'   version 16: a revised family classification, tree-based classification
-#'   tool, enhancer regions and extensive API, Nucleic Acids Research,
-#'   Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
-#'   https://doi.org/10.1093/nar/gkaa1106
+#'   \item Thomas PD, Ebert D, Muruganujan A, Mushayahama T, Albou L-P,
+#'   Mi H. (2022) PANTHER: Making genome-scale phylogenetics accessible to all.
+#'   Protein Science, 31(1), 8–22.
+#'   https://doi.org/10.1002/pro.4218
 #'   \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
 #'   Services Details}
 #'   \item
@@ -1035,13 +1068,13 @@ rba_panther_tree_grafter <- function(protein_seq,
     ),
     cond = list(
       list(
-        quote(nchar(protein_seq) > 5000),
-        "Maximum allowed length of protein sequence is 50kb.")
+        quote(nchar(protein_seq) > 50000L),
+        "Maximum allowed length of protein sequence is 50,000 characters.")
     )
   )
 
   .msg(
-    "Retrieving a PANTHER family tree with your input protein grated in it."
+    "Retrieving a PANTHER family tree with your input protein grafted in it."
   )
 
   ## Build POST API Request's body
