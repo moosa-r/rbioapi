@@ -718,6 +718,34 @@
   }
 }
 
+#' Mark an API Error
+#'
+#' Some APIs include an error message in a successful HTTP response. Response
+#'   parsers use this function to mark the message so remaining parsers are
+#'   skipped and .rba_skeleton() can apply 'skip_error'.
+#'
+#' @param message A single non-missing, non-empty character string.
+#'
+#' @return The message with classes `rba_api_error` and `character`.
+#'
+#' @family internal_response_parser
+#' @noRd
+.rba_api_error <- function(message) {
+  stopifnot(
+    is.character(message),
+    length(message) == 1L,
+    !is.na(message),
+    nzchar(message)
+  )
+
+  return(
+    structure(
+      unname(message),
+      class = c("rba_api_error", "character")
+    )
+  )
+}
+
 #' A Wrapper for API Calling and Parsing the Response
 #'
 #' This function will be called at the last step of any exported function to
@@ -784,10 +812,23 @@
       )
 
       if (!inherits(parsed_response, "try-error")) {
+        if (inherits(parsed_response, "rba_api_error")) {
+          # The API returned an error message with status 2XX
+          error_message <- as.character(parsed_response)
+
+          if (isTRUE(skip_error)) {
+            return(error_message)
+          } else {
+            stop(error_message, call. = diagnostics)
+          }
+        }
+        # The parsed API response seems OK
         return(parsed_response)
       } else if (identical(httr::content(response, as = "text", encoding = "UTF-8"), "")) {
+        # The API returned empty response or the response is empty after parsing
         return(NULL)
       } else {
+        # The parsing raised an error
         parse_error_msg <- paste(
           "Internal Error:",
           "Failed to parse the server's response.",
@@ -1394,6 +1435,8 @@
 #'   "json->list_simp_flt_df", "json->chr", text->chr", "text->df", "tsv->df".
 #'   \cr if you supply more than one parser, the parsers will be sequentially
 #'   applied to the response (i.e. response %>% parser1 %>% parser2 %>% ...)
+#'   unless a parser returns an object created by .rba_api_error(). In that
+#'   case, the remaining parsers are skipped.
 #'
 #' @param response An httr response object.
 #' @param parsers Response parsers, a single value or a vector. Each element
@@ -1498,6 +1541,10 @@
   # sequentially handle the response to the parsers
   for (parser in seq_along(parsers)) {
     response <- do.call(what = parsers[[parser]], args = list(response))
+
+    if (inherits(response, "rba_api_error")) {
+      break
+    }
   }
   return(response)
 }
