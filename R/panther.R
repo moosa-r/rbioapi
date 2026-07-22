@@ -199,6 +199,12 @@ rba_panther_mapping <- function(genes,
 #'   if 'ref_genes' is used, you can specify the organisms which correspond to
 #'   your supplied IDs in 'ref_genes' argument. see 'organism' argument for
 #'   supported values.
+#' @param request_mapped_genes (Character, only used if genes is a character
+#'   vector, hence Over-representation test is requested) Which mapped genes
+#'   should be returned for each result term. One of "input" (default),
+#'   "reference", or "none". Requesting "reference" without supplying
+#'   'ref_genes' may produce a large response because all genes in the
+#'   specified organism are used as the reference list.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -206,10 +212,11 @@ rba_panther_mapping <- function(genes,
 #'  "POST https://www.pantherdb.org/services/oai/pantherdb/enrich/overrep"
 #'  \cr "POST https://www.pantherdb.org/services/oai/pantherdb/enrich/statenrich"
 #'
-#' @return A list with the parameters and results. If the analysis was
-#'   successful, the results data frame are returned in the "results" element
-#'   within the list. Otherwise, an error message will be returned under the
-#'   "search$error" element in the returned list.
+#' @return For a successful analysis, a list. The "result" element is a data
+#'   frame with one row per returned annotation term and columns describing the
+#'   term, observed counts, enrichment direction, and statistical significance.
+#'   The remaining elements contain input and reference mapping summaries, when
+#'   applicable, and PANTHER analysis and release metadata.
 #'
 #' @references \itemize{
 #'   \item Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills,
@@ -260,6 +267,7 @@ rba_panther_enrich <- function(genes,
                                cutoff = NULL,
                                ref_genes = NULL,
                                ref_organism = NULL,
+                               request_mapped_genes = "input",
                                ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -280,7 +288,12 @@ rba_panther_enrich <- function(genes,
       ),
       list(arg = "cutoff", class = "numeric", len = 1, ran = c(0, 1)),
       list(arg = "ref_genes", class = c("character","numeric"), max_len = 100000),
-      list(arg = "ref_organism", class = "numeric", len = 1)
+      list(arg = "ref_organism", class = "numeric", len = 1),
+      list(
+        arg = "request_mapped_genes",
+        class = "character", len = 1, no_null = TRUE,
+        val = c("input", "reference", "none")
+      )
     ),
     cond = list(
       list(
@@ -318,6 +331,13 @@ rba_panther_enrich <- function(genes,
     path_input <- "enrich/overrep"
     encode_input <- "form"
 
+    mapped_info <- switch(
+      request_mapped_genes,
+      input = "COMP_LIST",
+      reference = "REF_LIST",
+      none = "NONE"
+    )
+
     ## Build POST API Request's body
     call_body <- .rba_query(
       init = list(
@@ -325,7 +345,8 @@ rba_panther_enrich <- function(genes,
         organism = organism,
         annotDataSet = annot_dataset,
         enrichmentTestType = test_type,
-        correction = correction
+        correction = correction,
+        mappedInfo = mapped_info
       ),
       list("refInputList", !all(is.null(ref_genes)), paste(ref_genes, collapse =  ",")),
       list("refOrganism", !is.null(ref_organism), ref_organism)

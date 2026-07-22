@@ -13,6 +13,7 @@ rba_panther_enrich(
   cutoff = NULL,
   ref_genes = NULL,
   ref_organism = NULL,
+  request_mapped_genes = "input",
   ...
 )
 }
@@ -71,14 +72,22 @@ if 'ref_genes' is used, you can specify the organisms which correspond to
 your supplied IDs in 'ref_genes' argument. see 'organism' argument for
 supported values.}
 
+\item{request_mapped_genes}{(Character, only used if genes is a character
+vector, hence Over-representation test is requested) Which mapped genes
+should be returned for each result term. One of "input" (default),
+"reference", or "none". Requesting "reference" without supplying
+'ref_genes' may produce a large response because all genes in the
+specified organism are used as the reference list.}
+
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-A list with the parameters and results. If the analysis was
-  successful, the results data frame are returned in the "results" element
-  within the list. Otherwise, an error message will be returned under the
-  "search$error" element in the returned list.
+For a successful analysis, a list. The "result" element is a data
+  frame with one row per returned annotation term and columns describing the
+  term, observed counts, enrichment direction, and statistical significance.
+  The remaining elements contain input and reference mapping summaries, when
+  applicable, and PANTHER analysis and release metadata.
 }
 \description{
 Use PANTHER services to perform over-representation enrichment analysis.
