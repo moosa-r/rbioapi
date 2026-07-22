@@ -1,3 +1,29 @@
+#' Check a PANTHER Response for an Error
+#'
+#' PANTHER can include an error message in a response body while returning
+#'   HTTP status 200. This function checks the decoded response before
+#'   endpoint-specific parsing.
+#'
+#' @param response A decoded PANTHER response.
+#'
+#' @return The response unchanged, or the error message marked by
+#'   .rba_api_error().
+#'
+#' @noRd
+.rba_panther_check_response <- function(response) {
+  if (!is.list(response)) {
+    return(response)
+  }
+
+  search <- response[["search"]]
+
+  if (!is.list(search) || is.null(search[["error"]])) {
+    return(response)
+  }
+
+  return(.rba_api_error(search[["error"]]))
+}
+
 #' Map A Gene-set to PANTHER Database
 #'
 #' Using this function, you can search your genes in PANTHER database and
@@ -70,6 +96,7 @@ rba_panther_mapping <- function(genes,
   ## Build Function-Specific Call
   parser_input <- list(
     "json->list",
+    .rba_panther_check_response,
     function(x) {
       list(
         unmapped_list = x$search$unmapped_list,
@@ -338,6 +365,7 @@ rba_panther_enrich <- function(genes,
   ## Build Function-Specific Call
   parser_input <- list(
     "json->list_simp",
+    .rba_panther_check_response,
     function(x) {
       if (utils::hasName(x, "results")) {
         x <- x$results
@@ -485,6 +513,7 @@ rba_panther_info <- function(what,
       path_input <- "supportedgenomes"
       parser_input <- list(
         "json->list_simp",
+        .rba_panther_check_response,
         function(x) { x$search$output$genomes$genome }
       )
     },
@@ -492,6 +521,7 @@ rba_panther_info <- function(what,
       path_input <- "supportedannotdatasets"
       parser_input <- list(
         "json->list_simp",
+        .rba_panther_check_response,
         function(x) { x$search$annotation_data_sets$annotation_data_type }
       )
     },
@@ -499,6 +529,7 @@ rba_panther_info <- function(what,
       path_input <- "supportedpantherfamilies"
       parser_input <- list(
         "json->list_simp",
+        .rba_panther_check_response,
         function(x) {
           list(
             familiy = x$search$panther_family_subfam_list$family,
@@ -512,6 +543,7 @@ rba_panther_info <- function(what,
       path_input <- "speciestree"
       parser_input <- list(
         "json->list",
+        .rba_panther_check_response,
         function(x) { x$species_tree }
       )
     },
@@ -519,6 +551,7 @@ rba_panther_info <- function(what,
       path_input <- "supportedpantherpathways"
       parser_input <- list(
         "json->list_simp",
+        .rba_panther_check_response,
         function(x) {
           x$search$output$PANTHER_pathway_list$pathway
         }
@@ -659,6 +692,7 @@ rba_panther_ortholog <- function(genes,
 
   parser_input <- list(
     "json->list_simp",
+    .rba_panther_check_response,
     function(x) { x$search$mapping$mapped }
   )
 
@@ -776,6 +810,7 @@ rba_panther_homolog <- function(genes,
   ## Build Function-Specific Call
   parser_input <- list(
     "json->list_simp",
+    .rba_panther_check_response,
     function(x) { x$search$mapping$mapped }
   )
 
@@ -880,6 +915,7 @@ rba_panther_family <- function(id,
       path_input <- "familyortholog"
       parser_input <- list(
         "json->list_simp",
+        .rba_panther_check_response,
         function(x) { x$search$ortholog_list$ortholog }
       )
     },
@@ -887,6 +923,7 @@ rba_panther_family <- function(id,
       path_input <- "familymsa"
       parser_input <- list(
         "json->list_simp",
+        .rba_panther_check_response,
         function(x) { x$search$MSA_list$sequence_info }
       )
     },
@@ -894,6 +931,7 @@ rba_panther_family <- function(id,
       path_input <- "treeinfo"
       parser_input <- list(
         "json->list_simp",
+        .rba_panther_check_response,
         function(x) { x$search$tree_topology }
       )
     }
@@ -994,6 +1032,7 @@ rba_panther_tree_grafter <- function(protein_seq,
   ## Build Function-Specific Call
   parser_input <- list(
     "json->list_simp",
+    .rba_panther_check_response,
     function(x) { x$search }
   )
 
