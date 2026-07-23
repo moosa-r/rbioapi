@@ -24,6 +24,66 @@
   return(.rba_api_error(search[["error"]]))
 }
 
+#' Keep PANTHER Tabular Results Consistent
+#'
+#' PANTHER returns one tabular record as a named object and multiple records as
+#'   a table. This function only makes the outer structure consistent; it does
+#'   not define, rename, reorder, or remove PANTHER fields.
+#'
+#' @param records Decoded PANTHER records.
+#' @param field Optional field containing the records.
+#'
+#' @return A data frame for empty, single-record, and already-tabular results.
+#'   Other structures are returned unchanged.
+#'
+#' @noRd
+.rba_panther_data_frame <- function(records, field = NULL) {
+  # Some endpoints wrap their records in a named result field.
+  if (!is.null(field) && is.list(records)) {
+    records <- records[[field]]
+  }
+
+  # Treat PANTHER's null and empty-string table responses as empty results.
+  if (is.null(records) ||
+      length(records) == 0L ||
+      (is.character(records) &&
+         length(records) == 1L &&
+         !nzchar(records))) {
+    return(data.frame())
+  }
+
+  # Preserve existing tables and structures that are not single named records.
+  if (is.data.frame(records) ||
+      !is.list(records) ||
+      is.null(names(records))) {
+    return(records)
+  }
+
+  # Wrap one named record in a one-row data frame without changing its fields.
+  output <- data.frame(row.names = 1L)
+
+  for (record_name in names(records)) {
+    value <- records[[record_name]]
+
+    if (is.list(value) && !is.null(names(value))) {
+      # Preserve named nested objects as nested data-frame columns.
+      output[[record_name]] <- data.frame(
+        value,
+        check.names = FALSE,
+        stringsAsFactors = FALSE
+      )
+    } else if (is.list(value) || length(value) > 1L) {
+      # Preserve array-valued fields as list-columns rather than expanding rows.
+      output[[record_name]] <- I(list(value))
+    } else {
+      # Preserve scalar fields as returned by PANTHER.
+      output[[record_name]] <- value
+    }
+  }
+
+  return(output)
+}
+
 #' Map A Gene-set to PANTHER Database
 #'
 #' Using this function, you can search your genes in PANTHER database and
@@ -404,9 +464,11 @@ rba_panther_enrich <- function(genes,
     function(x) {
       if (utils::hasName(x, "results")) {
         x <- x$results
-        x$result <- jsonlite::flatten(x$result)
+        x$result <- jsonlite::flatten(
+          .rba_panther_data_frame(x$result)
+        )
 
-        if (!is.null(cutoff)) {
+        if (!is.null(cutoff) && nrow(x$result) > 0L) {
           if (correction == "FDR") {
             x$result <- x$result[x$result$fdr <= cutoff, ]
           } else {
@@ -561,7 +623,7 @@ rba_panther_info <- function(what,
       parser_input <- list(
         "json->list_simp",
         .rba_panther_check_response,
-        function(x) { x$search$output$genomes$genome }
+        function(x) { .rba_panther_data_frame(x$search$output$genomes$genome) }
       )
     },
     "datasets" = {
@@ -569,7 +631,9 @@ rba_panther_info <- function(what,
       parser_input <- list(
         "json->list_simp",
         .rba_panther_check_response,
-        function(x) { x$search$annotation_data_sets$annotation_data_type }
+        function(x) {
+          .rba_panther_data_frame(x$search$annotation_data_sets$annotation_data_type)
+        }
       )
     },
     "families" = {
@@ -589,7 +653,7 @@ rba_panther_info <- function(what,
           }
 
           list(
-            family = x$search$panther_family_subfam_list$family,
+            family = .rba_panther_data_frame(x$search$panther_family_subfam_list$family),
             page = families_page,
             pages_count = pages_count
           )
@@ -610,7 +674,7 @@ rba_panther_info <- function(what,
         "json->list_simp",
         .rba_panther_check_response,
         function(x) {
-          x$search$output$PANTHER_pathway_list$pathway
+          .rba_panther_data_frame(x$search$output$PANTHER_pathway_list$pathway)
         }
       )
     }
@@ -748,7 +812,7 @@ rba_panther_ortholog <- function(genes,
   parser_input <- list(
     "json->list_simp",
     .rba_panther_check_response,
-    function(x) { x$search$mapping$mapped }
+    function(x) { .rba_panther_data_frame(x$search$mapping$mapped) }
   )
 
   input_call <- .rba_httr(
@@ -869,7 +933,7 @@ rba_panther_homolog <- function(genes,
   parser_input <- list(
     "json->list_simp",
     .rba_panther_check_response,
-    function(x) { x$search$mapping$mapped }
+    function(x) { .rba_panther_data_frame(x$search$mapping$mapped) }
   )
 
   input_call <- .rba_httr(
@@ -972,7 +1036,9 @@ rba_panther_family <- function(id,
       parser_input <- list(
         "json->list_simp",
         .rba_panther_check_response,
-        function(x) { x$search$ortholog_list$ortholog }
+        function(x) {
+          .rba_panther_data_frame(x$search$ortholog_list, "ortholog")
+        }
       )
     },
     "msa" = {
@@ -980,7 +1046,9 @@ rba_panther_family <- function(id,
       parser_input <- list(
         "json->list_simp",
         .rba_panther_check_response,
-        function(x) { x$search$MSA_list$sequence_info }
+        function(x) {
+          .rba_panther_data_frame(x$search$MSA_list, "sequence_info")
+        }
       )
     },
     "tree" = {
