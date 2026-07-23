@@ -65,13 +65,12 @@
   for (record_name in names(records)) {
     value <- records[[record_name]]
 
-    if (is.list(value) && !is.null(names(value))) {
-      # Preserve named nested objects as nested data-frame columns.
-      output[[record_name]] <- data.frame(
-        value,
-        check.names = FALSE,
-        stringsAsFactors = FALSE
-      )
+    if (is.data.frame(value) && nrow(value) != 1L) {
+      # Keep a multi-row nested table inside the single parent record.
+      output[[record_name]] <- I(list(value))
+    } else if (is.list(value) && !is.null(names(value))) {
+      # Normalize named nested objects without expanding the parent record.
+      output[[record_name]] <- .rba_panther_data_frame(value)
     } else if (is.list(value) || length(value) > 1L) {
       # Preserve array-valued fields as list-columns rather than expanding rows.
       output[[record_name]] <- I(list(value))
@@ -689,6 +688,134 @@ rba_panther_info <- function(what,
     accept = "application/json",
     parser = parser_input,
     save_to = .rba_file("panther_info.json")
+  )
+
+  ## Call API
+  final_output <- .rba_skeleton(input_call)
+  return(final_output)
+}
+
+#' Retrieve Genes from a PANTHER Genome
+#'
+#' Retrieve one page of genes and their associated information for a genome
+#'   supported by PANTHER. Each page contains up to 1,000 genes.
+#'
+#' @param organism (numeric) NCBI taxon ID. Run
+#'   \code{\link{rba_panther_info}} with argument 'what = "organisms"' to get
+#'   a list of PANTHER's supported organisms.
+#' @param page (numeric) The results page to retrieve. Pages contain up to
+#'   1,000 genes and are numbered starting from 1.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s arguments
+#'   manual for more information on available options.
+#'
+#' @section Corresponding API Resources:
+#'  "POST https://www.pantherdb.org/services/oai/pantherdb/downloadgenome"
+#'
+#' @return A list with the following elements: \describe{
+#'   \item{gene}{A data frame with one row per returned gene. Fields are kept
+#'   as returned by PANTHER, with annotation information in nested columns.}
+#'   \item{page}{The retrieved page.}
+#'   \item{pages_count}{The total number of available pages.}
+#'   \item{number_of_genes_in_genome}{The total number of genes in the genome.}
+#'   \item{product}{PANTHER product source and version information.}
+#'   \item{search_type}{The search type reported by PANTHER.}
+#'   }
+#'
+#' @references \itemize{
+#'   \item Thomas PD, Ebert D, Muruganujan A, Mushayahama T, Albou L-P,
+#'   Mi H. (2022) PANTHER: Making genome-scale phylogenetics accessible to all.
+#'   Protein Science, 31(1), 8–22.
+#'   https://doi.org/10.1002/pro.4218
+#'   \item \href{https://www.pantherdb.org/services/details.jsp}{PANTHER
+#'   Services Details}
+#'   \item
+#'   \href{https://www.pantherdb.org/publications.jsp#HowToCitePANTHER}{Citations
+#'   note on PANTHER website}
+#'   }
+#'
+#' @examples
+#' \donttest{
+#' rba_panther_genome(organism = 9606, page = 1)
+#' }
+#'
+#' @family "PANTHER"
+#' @export
+rba_panther_genome <- function(organism,
+                               page,
+                               ...) {
+  ## Load Global Options
+  .rba_ext_args(...)
+
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(
+        arg = "organism",
+        class = c("numeric", "integer"),
+        len = 1L
+      ),
+      list(
+        arg = "page",
+        class = c("numeric", "integer"),
+        len = 1L,
+        no_null = TRUE
+      )
+    ),
+    cond = list(
+      list(
+        quote(!is.finite(page) || page < 1 || page %% 1 != 0),
+        "'page' should be a positive whole number."
+      )
+    )
+  )
+
+  .msg(
+    "Retrieving page %s of genes for PANTHER organism %s.",
+    page,
+    organism
+  )
+
+  ## Build POST API Request's query
+  call_query <- list(
+    organism = organism,
+    startIndex = (page - 1L) * 1000L + 1L
+  )
+
+  ## Build Function-Specific Call
+  parser_input <- list(
+    "json->list_simp",
+    .rba_panther_check_response,
+    function(x) {
+      genes_count <- x$search$number_of_genes_in_genome
+      pages_count <- ceiling(genes_count / 1000)
+
+      if (page > pages_count) {
+        return(.rba_api_error(sprintf(
+          "Requested genome page %s exceeds the available %s pages.",
+          page,
+          pages_count
+        )))
+      }
+
+      list(
+        gene = .rba_panther_data_frame(x$search$gene_list, "gene"),
+        page = page,
+        pages_count = pages_count,
+        number_of_genes_in_genome = genes_count,
+        product = x$search$product,
+        search_type = x$search$search_type
+      )
+    }
+  )
+
+  input_call <- .rba_httr(
+    httr = "post",
+    url = .rba_stg("panther", "url"),
+    path = paste0(.rba_stg("panther", "pth"), "downloadgenome"),
+    query = call_query,
+    accept = "application/json",
+    parser = parser_input,
+    save_to = .rba_file("rba_panther_genome.json")
   )
 
   ## Call API

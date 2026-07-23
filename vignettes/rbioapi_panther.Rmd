@@ -61,6 +61,8 @@ The available tools in PANTHER's **RESTful API services** can be divided into 3 
 
 -   `rba_panther_info()`: Retrieve a list of PANTHER's supported organisms, datasets, families, or pathways
 
+-   `rba_panther_genome()`: Retrieve genes and their annotations from a PANTHER genome
+
 -   `rba_panther_family()`: Retrieve Orthologs, MSA, or Tree topology of a given PANTHER family.
 
 ------------------------------------------------------------------------

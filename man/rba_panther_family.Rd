@@ -60,6 +60,7 @@ rba_panther_family("PTHR10000", what = "ortholog")
 \seealso{
 Other "PANTHER":
 \code{\link[=rba_panther_enrich]{rba_panther_enrich()}},
+\code{\link[=rba_panther_genome]{rba_panther_genome()}},
 \code{\link[=rba_panther_homolog]{rba_panther_homolog()}},
 \code{\link[=rba_panther_info]{rba_panther_info()}},
 \code{\link[=rba_panther_mapping]{rba_panther_mapping()}},

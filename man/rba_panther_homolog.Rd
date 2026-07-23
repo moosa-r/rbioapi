@@ -65,6 +65,7 @@ rba_panther_homolog("OR4F5", organism = 9606, type = "P")
 Other "PANTHER":
 \code{\link[=rba_panther_enrich]{rba_panther_enrich()}},
 \code{\link[=rba_panther_family]{rba_panther_family()}},
+\code{\link[=rba_panther_genome]{rba_panther_genome()}},
 \code{\link[=rba_panther_info]{rba_panther_info()}},
 \code{\link[=rba_panther_mapping]{rba_panther_mapping()}},
 \code{\link[=rba_panther_ortholog]{rba_panther_ortholog()}},
