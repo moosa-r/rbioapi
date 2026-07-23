@@ -46,7 +46,8 @@ user_list_id.
 
 ## Corresponding API Resources
 
-"GET https://maayanlab.cloud/Enrichr/view"
+"GET https://maayanlab.cloud/Enrichr/view"  
+"GET https://maayanlab.cloud/speedrichr/api/view"
 
 ## References
 
@@ -81,6 +82,7 @@ Other "Enrichr":
 [`rba_enrichr_add_list()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_add_list.md),
 [`rba_enrichr_enrich()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_enrich.md),
 [`rba_enrichr_gene_map()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_gene_map.md),
+[`rba_enrichr_gene_sets()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_gene_sets.md),
 [`rba_enrichr_libs()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_libs.md)
 
 ## Examples

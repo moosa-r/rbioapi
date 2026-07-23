@@ -92,7 +92,7 @@ analysis with Enrichr.
 
 ## Corresponding API Resources
 
-"GET https://maayanlab.cloud/Enrichr/enrich"  
+"GET https://maayanlab.cloud/Enrichr/export"  
 "POST https://maayanlab.cloud/speedrichr/api/backgroundenrich"
 
 ## References
@@ -129,6 +129,7 @@ Other "Enrichr":
 [`rba_enrichr_add_background()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_add_background.md),
 [`rba_enrichr_add_list()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_add_list.md),
 [`rba_enrichr_gene_map()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_gene_map.md),
+[`rba_enrichr_gene_sets()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_gene_sets.md),
 [`rba_enrichr_libs()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_libs.md),
 [`rba_enrichr_view_list()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_view_list.md)
 

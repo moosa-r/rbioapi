@@ -1,9 +1,9 @@
-# Get a Position Frequency Matrices (PFM) with annotations
+# Get a position frequency matrix (PFM) with annotations
 
-Using this function you can retrieve a Position Frequency Matrices (PFM)
-associated with a matrix profile Identifier along with its details and
-annotations. If a base ID (i.e. without version suffix) was supplied,
-the latest version will be returned.
+Using this function, you can retrieve the position frequency matrix
+(PFM) associated with a matrix profile identifier, along with its
+details and annotations. If a base ID (i.e., without a version suffix)
+is supplied, the latest version will be returned.
 
 ## Usage
 
@@ -15,14 +15,14 @@ rba_jaspar_matrix(matrix_id, file_format = NULL, save_to = NULL, ...)
 
 - matrix_id:
 
-  Character: A matrix profile Identifier. It has "base_id.version"
-  naming schema.
+  Character: A matrix profile identifier. It follows a "base_id.version"
+  naming scheme.
 
 - file_format:
 
-  Character: Instead of returning a R object, you can directly download
-  the profile matrix in file with this format. Supported formats are:
-  "yaml", "jaspar", "transfac", "meme" and "pfm"
+  Character: Instead of returning an R object, you can directly download
+  the profile matrix as a file in this format. Supported formats are
+  "yaml", "jaspar", "transfac", "meme", and "pfm".
 
 - save_to:
 
@@ -42,9 +42,9 @@ rba_jaspar_matrix(matrix_id, file_format = NULL, save_to = NULL, ...)
 
 ## Value
 
-A list that contains the PFM along with its details and annotations. If
-file_format was supplied, an un-parsed character string with the file's
-content.
+A list containing the PFM, details, and annotations. If `file_format` is
+supplied, the function returns the unparsed file content as a character
+string.
 
 ## Corresponding API Resources
 
@@ -52,12 +52,9 @@ content.
 
 ## References
 
-- Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R, Castro-Mondragon
-  JA, Ferenc K, Kumar V, Lemma RB, Lucas J, Chèneby J, Baranasic D, Khan
-  A, Fornes O, Gundersen S, Johansen M, Hovig E, Lenhard B, Sandelin A,
-  Wasserman WW, Parcy F, Mathelier A JASPAR 2024: 20th anniversary of
-  the open-access database of transcription factor binding profiles
-  Nucleic Acids Res. in_press; doi: 10.1093/nar/gkad1059
+- Baydar Ovek D, et al. JASPAR 2026: expansion of transcription factor
+  binding profiles and integration of deep learning models. Nucleic
+  Acids Res. 2026;54(D1):D184-D193; doi: 10.1093/nar/gkaf1209
 
 - Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR data
   from any programming language. Bioinformatics, 2017, doi:

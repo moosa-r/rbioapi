@@ -20,23 +20,23 @@ rba_panther_info(what, organism_chr_loc = FALSE, families_page = 1, ...)
 
   - "datasets": Retrieve available annotation datasets.
 
-  - "families" Retrieve available family IDs.
+  - "families": Retrieve available family IDs.
 
-  - "species_tree" Retrieve the PANThER's species tree.
+  - "species_tree": Retrieve PANTHER's species tree.
 
   - "pathways" Retrieve available pathway IDs.
 
 - organism_chr_loc:
 
   (Logical) (only when 'what = "organisms"') If TRUE, only organisms
-  with chromosome location will be returned. If FALSE (default) every
+  with chromosome location will be returned. If FALSE (default), all
   organisms will be returned.
 
 - families_page:
 
   (Numeric) (only when 'what = "families"') Family information is very
-  long, so results are paginated. Use this argument to define the page
-  to retrieve.
+  long, so results are returned in pages of up to 1,000 families. Use a
+  positive whole number to define the page to retrieve.
 
 - ...:
 
@@ -46,8 +46,9 @@ rba_panther_info(what, organism_chr_loc = FALSE, families_page = 1, ...)
 
 ## Value
 
-For families and species tree, a list and otherwise a data frame with
-pertinent information.
+For families, a list containing family information, the requested page,
+and the total number of pages. For the species tree, a list; otherwise a
+data frame with pertinent information.
 
 ## Corresponding API Resources
 
@@ -63,12 +64,9 @@ https://www.pantherdb.org/services/oai/pantherdb/supportedpantherpathways"
 
 ## References
 
-- Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills,
-  Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER
-  version 16: a revised family classification, tree-based classification
-  tool, enhancer regions and extensive API, Nucleic Acids Research,
-  Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
-  https://doi.org/10.1093/nar/gkaa1106
+- Thomas PD, Ebert D, Muruganujan A, Mushayahama T, Albou L-P,
+  Mi H. (2022) PANTHER: Making genome-scale phylogenetics accessible to
+  all. Protein Science, 31(1), 8–22. https://doi.org/10.1002/pro.4218
 
 - [PANTHER Services
   Details](https://www.pantherdb.org/services/details.jsp)
@@ -81,6 +79,7 @@ https://www.pantherdb.org/services/oai/pantherdb/supportedpantherpathways"
 Other "PANTHER":
 [`rba_panther_enrich()`](https://rbioapi.moosa-r.com/reference/rba_panther_enrich.md),
 [`rba_panther_family()`](https://rbioapi.moosa-r.com/reference/rba_panther_family.md),
+[`rba_panther_genome()`](https://rbioapi.moosa-r.com/reference/rba_panther_genome.md),
 [`rba_panther_homolog()`](https://rbioapi.moosa-r.com/reference/rba_panther_homolog.md),
 [`rba_panther_mapping()`](https://rbioapi.moosa-r.com/reference/rba_panther_mapping.md),
 [`rba_panther_ortholog()`](https://rbioapi.moosa-r.com/reference/rba_panther_ortholog.md),

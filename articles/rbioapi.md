@@ -80,6 +80,7 @@ from
 with:
 
 ``` r
+
 install.packages("rbioapi")
 ```
 
@@ -89,6 +90,7 @@ install the most recent -development- version from
 with:
 
 ``` r
+
 install.packages("remotes")
 remotes::install_github("moosa-r/rbioapi")
 ```
@@ -96,6 +98,7 @@ remotes::install_github("moosa-r/rbioapi")
 Now, we can load the package:
 
 ``` r
+
 library(rbioapi)
 ```
 
@@ -114,6 +117,7 @@ will call
 version resource.
 
 ``` r
+
 rba_string_version()
 #> Retrieving the STRING database version and address used by rbioapi.
 #> $string_version
@@ -157,6 +161,7 @@ options and their current values by calling
 any argument:
 
 ``` r
+
 rba_options()
 #>   rbioapi_option current_value            allowed_value
 #> 1    diagnostics         FALSE     Logical (TRUE/FALSE)
@@ -181,6 +186,7 @@ option; Thus by running this function with your desired new values, you
 could globally alter that rbioapi option. for example:
 
 ``` r
+
 rba_options(save_file = TRUE)
 ## From now on, the raw file of server's response will be saved to your working directory.
 
@@ -197,6 +203,7 @@ pair. This way, any changes in options will be confined within that
 particular function call. For example:
 
 ``` r
+
 ## Save the server's raw response file:
 x <- rba_reactome_species(
   only_main = TRUE,
@@ -212,6 +219,7 @@ x <- rba_reactome_species(
 ```
 
 ``` r
+
 ## Run these codes in your own R session to see the difference:
 
 ## show internal diagnostics boring details
@@ -240,6 +248,7 @@ run this function to make sure that your internet connection or the
 servers are fine.
 
 ``` r
+
 rba_connection_test(print_output = TRUE)
 #> Checking Your connection to the Databases currently supported by rbioapi:
 #> --->>> Internet :
@@ -253,10 +262,7 @@ rba_connection_test(print_output = TRUE)
 #> --->>> miEAA :
 #> +++ The server is responding.
 #> --->>> PANTHER :
-#> !!! failed with error:
-#>  Error in curl::curl_fetch_memory(url, handle = handle) : 
-#>   Number of redirects hit maximum amount [www.pantherdb.org]:
-#> Maximum (10) redirects followed
+#> +++ The server is responding.
 #> --->>> Reactome Content Service :
 #> +++ The server is responding.
 #> --->>> Reactome Analysis Service :
@@ -288,6 +294,7 @@ returns a paginated response. For example, if we search for nodes that
 contain “adenovirus”, there is a large number of hits:
 
 ``` r
+
 adeno <- rba_uniprot_taxonomy_name(
   name = "adenovirus",
   search_type = "contain",
@@ -298,17 +305,17 @@ str(adeno, max.level = 2)
 #> List of 2
 #>  $ taxonomies:'data.frame':  200 obs. of  8 variables:
 #>   ..$ taxonomyId    : int [1:200] 10509 10510 10511 10512 10513 10514 10515 10519 10521 10522 ...
-#>   ..$ mnemonic      : chr [1:200] "9ADEN" "ADEB3" "ADEB7" "9ADEN" ...
-#>   ..$ scientificName: chr [1:200] "Mastadenovirus" "Bovine adenovirus B serotype 3" "Bovine adenovirus 7" "Canine adenovirus 1" ...
-#>   ..$ rank          : chr [1:200] "genus" "serotype" "serotype" "serotype" ...
+#>   ..$ mnemonic      : chr [1:200] "9ADEN" "ADEB3" "ADEB7" "ADEC1" ...
+#>   ..$ scientificName: chr [1:200] "Mastadenovirus" "Bovine adenovirus B serotype 3" "Bovine adenovirus 7" "Canine adenovirus serotype 1" ...
+#>   ..$ rank          : chr [1:200] "genus" "no rank" "no rank" "no rank" ...
 #>   ..$ superregnum   : chr [1:200] "V" "V" "V" "V" ...
 #>   ..$ hidden        : logi [1:200] FALSE TRUE TRUE TRUE TRUE TRUE ...
-#>   ..$ commonName    : chr [1:200] NA "BAdV-3" "BAdV-7" NA ...
-#>   ..$ synonym       : chr [1:200] NA "Mastadenovirus bos3" NA NA ...
+#>   ..$ commonName    : chr [1:200] NA "BAdV-3" "BAdV-7" "CAdV-1" ...
+#>   ..$ synonym       : chr [1:200] NA "Mastadenovirus bos3" NA "Canine adenovirus 1" ...
 #>  $ pageInfo  :List of 3
 #>   ..$ resultsPerPage: int 200
 #>   ..$ currentPage   : int 1
-#>   ..$ totalRecords  : int 1138
+#>   ..$ totalRecords  : int 1259
 ```
 
 As you can see, the server has returned the first page of the response,
@@ -318,6 +325,7 @@ the “page_number” argument within each call, or simply use
 demonstrated below:
 
 ``` r
+
 adeno_pages = rba_pages(
   quote(
     rba_uniprot_taxonomy_name(
@@ -357,12 +365,11 @@ As you can see, what we have done was:
 
 rbioapi is an interface between you and other databases and services.
 Thus, if you have used rbioapi in published research, **in addition to
-kindly citing rbioapi, **ensure to fully and properly cite the
-databases/services you have used****. Suggested citations have been
-added in the functions’ manuals, under the “references” section;
-Nevertheless, it is the user’s responsibility to check for proper
-citations and to properly cite the database/services that they have
-used.
+kindly citing rbioapi, ensure to fully and properly cite the
+databases/services you have used**. Suggested citations have been added
+in the functions’ manuals, under the “references” section; Nevertheless,
+it is the user’s responsibility to check for proper citations and to
+properly cite the database/services that they have used.
 
 ### How to cite rbioapi
 
@@ -433,25 +440,25 @@ Each supported service has a dedicated vignette article. Make sure to
 check those too.
 
 1.  [Enrichr](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.md "rbioapi & Enrichr vignette")
-    ^(([Documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html "rbioapi & Enrichr vignette")))
+    ^([Documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html "rbioapi & Enrichr vignette"))^
 2.  [JASPAR](https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.md "rbioapi & JASPAR vignette article")
-    ^(([Documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html "rbioapi & JASPAR vignette article")))
+    ^([Documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html "rbioapi & JASPAR vignette article"))^
 3.  [miEAA](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.md "rbioapi & miEAA vignette article")
-    ^(([Documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html "rbioapi & miEAA vignette article")))
+    ^([Documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html "rbioapi & miEAA vignette article"))^
 4.  [PANTHER](https://rbioapi.moosa-r.com/articles/rbioapi_panther.md "rbioapi & PANTHER vignette article")
-    ^(([Documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_panther.html "rbioapi & PANTHER vignette article")))
+    ^([Documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_panther.html "rbioapi & PANTHER vignette article"))^
 5.  [Reactome](https://rbioapi.moosa-r.com/articles/rbioapi_reactome.md "rbioapi & Reactome vignette article")
-    ^(([Documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_reactome.html "rbioapi & Reactome vignette article")))
+    ^([Documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_reactome.html "rbioapi & Reactome vignette article"))^
 6.  [STRING](https://rbioapi.moosa-r.com/articles/rbioapi_string.md "rbioapi & STRING vignette article")
-    ^(([Documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_string.html "rbioapi & STRING vignette article")))
+    ^([Documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_string.html "rbioapi & STRING vignette article"))^
 7.  [UniProt](https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.md "rbioapi & UniProt vignette article")
-    ^(([Documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html "rbioapi & UniProt vignette article")))
+    ^([Documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html "rbioapi & UniProt vignette article"))^
 
 We are also adding vignette articles focusing on tasks and workflows:
 
 1.  [Do with rbioapi: Enrichment (Over-Representation) Analysis in
     R](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.md "Do with rbioapi: Enrichment (Over-Representation) Analysis in R")
-    ^(([documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html "rbioapi & UniProt vignette article")))
+    ^([documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html "rbioapi & UniProt vignette article"))^
 
 ------------------------------------------------------------------------
 
@@ -475,9 +482,9 @@ Bioinformatics](https://doi.org/10.1093/bioinformatics/btac172 "Rezwani, M., Pou
 
 ## Session info
 
-    #> R version 4.5.2 (2025-10-31)
+    #> R version 4.6.1 (2026-06-24)
     #> Platform: x86_64-pc-linux-gnu
-    #> Running under: Ubuntu 24.04.3 LTS
+    #> Running under: Ubuntu 24.04.4 LTS
     #> 
     #> Matrix products: default
     #> BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -500,10 +507,10 @@ Bioinformatics](https://doi.org/10.1093/bioinformatics/btac172 "Rezwani, M., Pou
     #> 
     #> loaded via a namespace (and not attached):
     #>  [1] digest_0.6.39     desc_1.4.3        R6_2.6.1          fastmap_1.2.0    
-    #>  [5] xfun_0.56         cachem_1.1.0      knitr_1.51        htmltools_0.5.9  
-    #>  [9] rmarkdown_2.30    lifecycle_1.0.5   cli_3.6.5         sass_0.4.10      
-    #> [13] pkgdown_2.2.0     textshaping_1.0.4 jquerylib_0.1.4   systemfonts_1.3.1
-    #> [17] compiler_4.5.2    httr_1.4.7        tools_4.5.2       ragg_1.5.0       
-    #> [21] curl_7.0.0        bslib_0.9.0       evaluate_1.0.5    yaml_2.3.12      
-    #> [25] otel_0.2.0        jsonlite_2.0.0    rlang_1.1.7       fs_1.6.6         
+    #>  [5] xfun_0.60         cachem_1.1.0      knitr_1.51        htmltools_0.5.9  
+    #>  [9] rmarkdown_2.31    lifecycle_1.0.5   cli_3.6.6         sass_0.4.10      
+    #> [13] pkgdown_2.2.1     textshaping_1.0.5 jquerylib_0.1.4   systemfonts_1.3.2
+    #> [17] compiler_4.6.1    httr_1.4.8        tools_4.6.1       ragg_1.5.2       
+    #> [21] curl_7.1.0        bslib_0.11.0      evaluate_1.0.5    yaml_2.3.12      
+    #> [25] otel_0.2.0        jsonlite_2.0.0    rlang_1.3.0       fs_2.1.0         
     #> [29] htmlwidgets_1.6.4

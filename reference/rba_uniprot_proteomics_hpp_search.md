@@ -37,7 +37,7 @@ rba_uniprot_proteomics_hpp_search(
   Proteomics data source. In addition to manual curation, UniProt also
   import PTM annotations from the following databases:
 
-  - ["HPP"](https://hupo.org/human-proteome-project/)
+  - ["HPP"](https://hupo.org/Initiatives/)
 
   Please use \`rba_uniprot_proteomics_species()\` for more information
   on the available data sources for a given species.

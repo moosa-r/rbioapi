@@ -1,15 +1,15 @@
 # List matrices available in JASPAR of a species
 
-JASPAR curates matrix profiles from multiple species in six taxonomic
-groups. Using this function you can list all matrix profiles that are
-available in a JASPAR release from a species.
+JASPAR curates matrix profiles from multiple species in multiple
+taxonomic groups. Using this function you can list all matrix profiles
+that are available in a JASPAR release for a species.
 
 ## Usage
 
 ``` r
 rba_jaspar_species_matrices(
   tax_id,
-  release = 2024,
+  release = 2026,
   only_last_version = FALSE,
   search = NULL,
   order = NULL,
@@ -23,14 +23,14 @@ rba_jaspar_species_matrices(
 
 - tax_id:
 
-  Numeric: NCBI taxonomic Identifier of species. Use
+  Numeric: NCBI taxonomic identifier of a species. Use
   [`rba_jaspar_species`](https://rbioapi.moosa-r.com/reference/rba_jaspar_species.md)
-  to get a list of supported Species.
+  to get a list of supported species.
 
 - release:
 
-  Numeric: (default = 2024) Which JASPAR database release to use?
-  Available options are: 2024, 2022, 2020, 2018, 2016, and 2014.
+  Numeric: (default = 2026) Which JASPAR database release to use?
+  Available options are: 2026, 2024, 2022, 2020, 2018, 2016, and 2014.
 
 - only_last_version:
 
@@ -45,13 +45,13 @@ rba_jaspar_species_matrices(
 
   Character: A character string or a vector of character strings of
   field names that will be used to order the results.  
-  Providing multiple field names is supported. You can also use prefix
-  "-" before a field name to indicate reverse ordering.
+  Providing multiple field names is supported. You can also use the
+  prefix "-" before a field name to indicate reverse ordering.
 
 - page_size:
 
   Numeric: (default = 1000) This resource returns paginated results.
-  What is the maximum numbers of results that you want to retrieve per a
+  What is the maximum number of results that you want to retrieve per
   page? Accepted values are between 1 and 1000.
 
 - page:
@@ -67,7 +67,7 @@ rba_jaspar_species_matrices(
 
 ## Value
 
-A list that contains a data frame with information of matrix profiles
+A list that contains a data frame with information on matrix profiles
 available for the species.
 
 ## Details
@@ -83,12 +83,9 @@ automatically iterate over multiple pages.
 
 ## References
 
-- Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R, Castro-Mondragon
-  JA, Ferenc K, Kumar V, Lemma RB, Lucas J, Chèneby J, Baranasic D, Khan
-  A, Fornes O, Gundersen S, Johansen M, Hovig E, Lenhard B, Sandelin A,
-  Wasserman WW, Parcy F, Mathelier A JASPAR 2024: 20th anniversary of
-  the open-access database of transcription factor binding profiles
-  Nucleic Acids Res. in_press; doi: 10.1093/nar/gkad1059
+- Baydar Ovek D, et al. JASPAR 2026: expansion of transcription factor
+  binding profiles and integration of deep learning models. Nucleic
+  Acids Res. 2026;54(D1):D184-D193; doi: 10.1093/nar/gkaf1209
 
 - Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR data
   from any programming language. Bioinformatics, 2017, doi:

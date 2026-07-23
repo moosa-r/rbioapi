@@ -22,6 +22,7 @@ Directly quoting from Enrichr’s help page:
 To get a list of the available libraries in Enrichr, use:
 
 ``` r
+
 enrichr_libs <- rba_enrichr_libs()
 ```
 
@@ -29,6 +30,49 @@ In the returned data frame, you can find the names of available Enrichr
 libraries in “libraryName” column. As you will see in the following
 sections, you can use these names to request an enrichment analysis
 based on the selected library or libraries.
+
+### Retrieve gene sets from an Enrichr library
+
+To retrieve the gene sets contained in an Enrichr library, use
+[`rba_enrichr_gene_sets()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_gene_sets.md).
+You should supply one of the library names returned above in the
+`gene_set_library` argument. For example:
+
+``` r
+
+reactome_gene_sets <- rba_enrichr_gene_sets(
+  gene_set_library = "Reactome_Pathways_2024"
+)
+```
+
+If you only need a particular gene set, you can supply its exact term
+name in the `term` argument:
+
+``` r
+
+notch_gene_set <- rba_enrichr_gene_sets(
+  gene_set_library = "Reactome_Pathways_2024",
+  term = "Signaling by NOTCH"
+)
+```
+
+You can also save the raw server’s response as a GMT file by supplying
+the `save_file` rbioapi option through “ellipsis”. For example:
+
+``` r
+
+rba_enrichr_gene_sets(
+  gene_set_library = "Reactome_Pathways_2024",
+  save_file = "Reactome_Pathways_2024.gmt"
+)
+```
+
+Alternatively, set `save_file = TRUE` to let rbioapi automatically
+generate a proper file path. The organism will be included in the
+automatically-generated file name. If you have supplied a `term`, its
+name will also be included. See the manual of
+[`rba_options()`](https://rbioapi.moosa-r.com/reference/rba_options.md)
+function for more information on saving the server’s raw response files.
 
 ------------------------------------------------------------------------
 
@@ -40,6 +84,7 @@ But first, we create a vector of genes’ NCBI IDs to use as the input
 example in this article.
 
 ``` r
+
 # Create a vector with our genes' NCBI IDs
 genes <- c(
   "p53", "BRCA1", "cdk2", "Q99835", "CDC42","CDK1","KIF23","PLK1",
@@ -56,6 +101,7 @@ more libraries. Please see
 function’s manual for more details on the arguments.
 
 ``` r
+
 # Request the enrichment analysis
 results_all <- rba_enrichr(gene_list = genes)
 ```
@@ -72,6 +118,7 @@ the library (or libraries) to use. Here we demonstrate using
 “MSigDB_Hallmark_2020” library:
 
 ``` r
+
 # Request the enrichment analysis by a specific library
 results_msig_hallmark <- rba_enrichr(
   gene_list = genes,
@@ -80,14 +127,14 @@ results_msig_hallmark <- rba_enrichr(
 )
 ```
 
-When supplying the `gene_set_library` argument, rbioapi assumes you are
-entering a regex pattern. You can disable this by setting
-`regex_library_name` to `FALSE`. However, this feature is useful if you
-need -for example- partial matches in the library names. Suppose you
-want to perform the enrichment analysis on every library available in
-Enrichr that contains the name “MSig”. You can do the following:
+By default, rbioapi matches the supplied `gene_set_library` exactly. Set
+`regex_library_name` to `TRUE` to use a regex pattern instead. This is
+useful if you need, for example, partial matches in library names.
+Suppose you want to perform the enrichment analysis on every Enrichr
+library containing “MSig”. You can do the following:
 
 ``` r
+
 # Request the enrichment analysis
 results_msig <- rba_enrichr(
   gene_list = genes,
@@ -96,13 +143,14 @@ results_msig <- rba_enrichr(
   progress_bar = FALSE # to avoid printing issues in the vignette
 )
 
-# You can drop `regex_library_name = TRUE`, as it is TRUE by default.
+# Regex matching must be enabled explicitly.
 ```
 
 Note that when only one Enrichr library is selected, a data frame with
 enrichment analysis result will be returned.
 
 ``` r
+
 str(results_msig_hallmark)
 #> 'data.frame':    18 obs. of  9 variables:
 #>  $ Term                : chr  "Mitotic Spindle" "G2-M Checkpoint" "E2F Targets" "Apoptosis" ...
@@ -121,6 +169,7 @@ will be a list where each element is a data frame corresponding to one
 of the selected libraries.
 
 ``` r
+
 str(results_msig, 1)
 #> List of 3
 #>  $ MSigDB_Computational       :'data.frame': 195 obs. of  9 variables:
@@ -141,6 +190,7 @@ your desired libraries or if you want to run the analysis over every
 available library.
 
 ``` r
+
 # Get a list of available Enrichr libraries
 libs <- rba_enrichr_libs(store_in_options = TRUE)
 ```
@@ -150,6 +200,7 @@ identifier will be assigned to your submitted list, which is needed for
 the next step.
 
 ``` r
+
 # Submit your gene-set to enrichr
 list_id <- rba_enrichr_add_list(gene_list = genes)
 ```
@@ -158,10 +209,11 @@ From the returned response, we need the numeric ID in the “userListId”
 element.
 
 ``` r
+
 str(list_id)
 #> List of 2
-#>  $ shortId   : chr "8573026fd7c1fa7eda33a1b8376d9e62"
-#>  $ userListId: int 116121390
+#>  $ shortId   : chr "c6ea2e44cfe846c36d7a9ebd459c29a2"
+#>  $ userListId: int 133363709
 ```
 
 Finally, we are ready to submit the enrichment analysis request to
@@ -171,6 +223,7 @@ we can supply the “gene_set_library” argument in different ways. Here we
 will only select the “Table_Mining_of_CRISPR_Studies” library:
 
 ``` r
+
 # Request the analysis
 results_crispr <- rba_enrichr_enrich(
   user_list_id = list_id$userListId,
@@ -192,10 +245,12 @@ analysis on species other than humans:
 
 3.  [`rba_enrichr_gene_map()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_gene_map.md)
 
-4.  [`rba_enrichr_libs()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_libs.md)
+4.  [`rba_enrichr_gene_sets()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_gene_sets.md)
 
-The available options for the organism argument are human”, (H. sapiens
-& M. musculus), fly” (D. melanogaster), “yeast” (S. cerevisiae), “worm”
+5.  [`rba_enrichr_libs()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_libs.md)
+
+The available options for the organism argument are “human” (H. sapiens
+& M. musculus), “fly” (D. melanogaster), “yeast” (S. cerevisiae), “worm”
 (C. elegans), and “fish” (D. rerio).
 
 ------------------------------------------------------------------------
@@ -213,11 +268,12 @@ handled under the hood; simply supply your background gene with the
 `background_genes` parameter.
 
 ``` r
+
 # Assume we have the background genes in the variable my_background_genes
 results_msig <- rba_enrichr(
   gene_list = genes,
   background_genes = my_background_genes,
-  regex_library_name = TRUE
+  gene_set_library = "MSigDB_Hallmark_2020"
 )
 ```
 
@@ -229,6 +285,7 @@ speedrichr. Later steps will automatically interact with speedrichr as
 long as the relevant parameters for the background genes are specified.
 
 ``` r
+
 
 # Assume we have the background genes in the variable my_background_genes
 
@@ -254,7 +311,7 @@ background_id <- rba_enrichr_add_background(background_genes = my_background_gen
 go_results <- rba_enrichr_enrich(
   user_list_id = list_id_spdr$userListId,
   background_id = background_id$backgroundid,
-  gene_set_library = "GO"
+  gene_set_library = "GO_Biological_Process_2025"
 )
 ```
 
@@ -331,9 +388,9 @@ an in-depth review.
 
 ## Session info
 
-    #> R version 4.5.2 (2025-10-31)
+    #> R version 4.6.1 (2026-06-24)
     #> Platform: x86_64-pc-linux-gnu
-    #> Running under: Ubuntu 24.04.3 LTS
+    #> Running under: Ubuntu 24.04.4 LTS
     #> 
     #> Matrix products: default
     #> BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -355,11 +412,11 @@ an in-depth review.
     #> [1] rbioapi_0.8.3
     #> 
     #> loaded via a namespace (and not attached):
-    #>  [1] httr_1.4.7        cli_3.6.5         knitr_1.51        rlang_1.1.7      
-    #>  [5] xfun_0.56         otel_0.2.0        textshaping_1.0.4 jsonlite_2.0.0   
-    #>  [9] DT_0.34.0         htmltools_0.5.9   ragg_1.5.0        sass_0.4.10      
-    #> [13] rmarkdown_2.30    crosstalk_1.2.2   evaluate_1.0.5    jquerylib_0.1.4  
-    #> [17] fastmap_1.2.0     yaml_2.3.12       lifecycle_1.0.5   compiler_4.5.2   
-    #> [21] fs_1.6.6          htmlwidgets_1.6.4 systemfonts_1.3.1 digest_0.6.39    
-    #> [25] R6_2.6.1          curl_7.0.0        magrittr_2.0.4    bslib_0.9.0      
-    #> [29] tools_4.5.2       pkgdown_2.2.0     cachem_1.1.0      desc_1.4.3
+    #>  [1] httr_1.4.8        cli_3.6.6         knitr_1.51        rlang_1.3.0      
+    #>  [5] xfun_0.60         otel_0.2.0        textshaping_1.0.5 jsonlite_2.0.0   
+    #>  [9] DT_0.34.0         htmltools_0.5.9   ragg_1.5.2        sass_0.4.10      
+    #> [13] rmarkdown_2.31    crosstalk_1.2.2   evaluate_1.0.5    jquerylib_0.1.4  
+    #> [17] fastmap_1.2.0     yaml_2.3.12       lifecycle_1.0.5   compiler_4.6.1   
+    #> [21] fs_2.1.0          htmlwidgets_1.6.4 systemfonts_1.3.2 digest_0.6.39    
+    #> [25] R6_2.6.1          curl_7.1.0        magrittr_2.0.5    bslib_0.11.0     
+    #> [29] tools_4.6.1       pkgdown_2.2.1     cachem_1.1.0      desc_1.4.3

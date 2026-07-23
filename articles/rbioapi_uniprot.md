@@ -30,6 +30,7 @@ Suppose we are interested in Human CD40 ligand protein, and we know that
 it’s UniProt accession is “P29965”. We can simply do as the following:
 
 ``` r
+
 ## 1 We can retrieve CD40 protein's information by qurying it's UniProt accession:
 cd40 <- rba_uniprot_proteins(accession = "P29965")
 
@@ -44,8 +45,8 @@ str(cd40, 1)
 #>  $ protein         :List of 4
 #>  $ gene            :'data.frame':    1 obs. of  2 variables:
 #>  $ comments        :'data.frame':    12 obs. of  10 variables:
-#>  $ features        :'data.frame':    64 obs. of  9 variables:
-#>  $ dbReferences    :'data.frame':    138 obs. of  4 variables:
+#>  $ features        :'data.frame':    65 obs. of  9 variables:
+#>  $ dbReferences    :'data.frame':    135 obs. of  4 variables:
 #>  $ keywords        :'data.frame':    14 obs. of  1 variable:
 #>  $ references      :'data.frame':    25 obs. of  3 variables:
 #>  $ sequence        :List of 5
@@ -59,6 +60,7 @@ perform a search using certain parameters? We can use the function with
 `_search` suffix:
 
 ``` r
+
 ## 1 From the available arguments, we fill only those which we think is pertinent
 cd40_search <- rba_uniprot_proteins_search(
   protein = "CD40 ligand",
@@ -78,8 +80,8 @@ str(cd40_search, 2)
 #>   ..$ protein         :List of 4
 #>   ..$ gene            :List of 1
 #>   ..$ comments        :List of 12
-#>   ..$ features        :List of 64
-#>   ..$ dbReferences    :List of 138
+#>   ..$ features        :List of 65
+#>   ..$ dbReferences    :List of 135
 #>   ..$ keywords        :List of 14
 #>   ..$ references      :List of 25
 #>   ..$ sequence        :List of 5
@@ -100,6 +102,7 @@ that many arguments accept a vector of values. consider the following
 examples:
 
 ``` r
+
 ## 1 As the simplest scenario, we can retrieve multiple proteins in one call
 multi_prs1 <- rba_uniprot_proteins_search(
   accession = c("P04637", "P38398", "P24941", "P60953", "P06493", "Q02241")
@@ -109,8 +112,8 @@ str(multi_prs1, 1)
 #> List of 6
 #>  $ P24941:List of 14
 #>  $ P04637:List of 14
-#>  $ P60953:List of 14
 #>  $ P06493:List of 14
+#>  $ P60953:List of 14
 #>  $ Q02241:List of 14
 #>  $ P38398:List of 14
 
@@ -130,32 +133,33 @@ str(multi_prs2, 1)
 #>  $ Q12888:List of 14
 #>  $ Q9HCN2:List of 14
 #>  $ P04637:List of 14
+#>  $ A1A5B4:List of 14
 #>  $ Q9Y2B4:List of 13
 #>  $ Q8IXH6:List of 14
 #>  $ Q53FA7:List of 14
-#>  $ A1A5B4:List of 14
 #>  $ Q9NS56:List of 14
 #>  $ Q96A56:List of 14
 #>  $ O14683:List of 14
 #>  $ Q96S44:List of 14
 #>  $ Q8NBR0:List of 14
 #>  $ Q13625:List of 14
-#>  $ Q5VT25:List of 14
 #>  $ Q7L0Q8:List of 14
+#>  $ Q5VT25:List of 14
 #>  $ Q00587:List of 14
 #>  $ O14613:List of 14
 #>  $ Q6DT37:List of 14
-#>  $ Q9NRR8:List of 14
-#>  $ Q9NRR3:List of 14
 #>  $ Q9H3Q1:List of 14
 #>  $ Q07960:List of 14
 #>  $ Q9UKI2:List of 14
 #>  $ Q6NZY7:List of 14
-#>  $ Q9Y5S2:List of 14
+#>  $ Q9NRR8:List of 14
+#>  $ Q9NRR3:List of 14
 #>  $ P60953:List of 14
+#>  $ Q9Y5S2:List of 14
 ```
 
 ``` r
+
 ## 3 Search for every proteins with chemokines keyword
 multi_prs3 <- rba_uniprot_proteins_search(
   keyword = "chemokines"
@@ -163,8 +167,8 @@ multi_prs3 <- rba_uniprot_proteins_search(
 
 str(multi_prs3, 1)
 #> List of 17
-#>  $ P09703:List of 15
 #>  $ P0DTM9:List of 14
+#>  $ P09703:List of 15
 #>  $ Q6SW98:List of 15
 #>  $ P19063:List of 14
 #>  $ P16849:List of 15
@@ -172,17 +176,18 @@ str(multi_prs3, 1)
 #>  $ P0DSV7:List of 15
 #>  $ P69332:List of 15
 #>  $ P24766:List of 15
-#>  $ P34016:List of 14
-#>  $ P21064:List of 14
-#>  $ P0DSV8:List of 15
-#>  $ F5HBX1:List of 14
 #>  $ Q98314:List of 15
 #>  $ P69333:List of 15
 #>  $ P07562:List of 14
 #>  $ F5HF62:List of 14
+#>  $ P34016:List of 14
+#>  $ P21064:List of 14
+#>  $ P0DSV8:List of 15
+#>  $ F5HBX1:List of 14
 ```
 
 ``` r
+
 ## 4 Search for every protein of "SARS-CoV-2" virus in Swiss-Prot
 multi_prs4 <- rba_uniprot_proteins_search(
   organism = "SARS-CoV-2",
@@ -191,23 +196,23 @@ multi_prs4 <- rba_uniprot_proteins_search(
 
 str(multi_prs4, 1)
 #> List of 17
-#>  $ P0DTD3    :List of 14
-#>  $ P0DTC6    :List of 14
+#>  $ P0DTG1    :List of 13
+#>  $ P0DTC9    :List of 14
+#>  $ P0DTC5    :List of 14
+#>  $ P0DTC3    :List of 14
+#>  $ P0DTD8    :List of 14
+#>  $ P0DTD1    :List of 14
+#>  $ P0DTC1    :List of 13
 #>  $ P0DTG0    :List of 13
 #>  $ P0DTC7    :List of 14
 #>  $ P0DTC2    :List of 14
 #>  $ P0DTC8    :List of 14
 #>  $ P0DTC4    :List of 14
 #>  $ A0A663DJA2:List of 14
-#>  $ P0DTC9    :List of 14
-#>  $ P0DTC5    :List of 14
-#>  $ P0DTC3    :List of 14
-#>  $ P0DTD8    :List of 14
 #>  $ P0DTD2    :List of 14
+#>  $ P0DTD3    :List of 14
+#>  $ P0DTC6    :List of 14
 #>  $ P0DTF1    :List of 13
-#>  $ P0DTD1    :List of 14
-#>  $ P0DTC1    :List of 13
-#>  $ P0DTG1    :List of 13
 ```
 
 ------------------------------------------------------------------------
@@ -435,9 +440,9 @@ To cite rbioapi:
 
 ## Session info
 
-    #> R version 4.5.2 (2025-10-31)
+    #> R version 4.6.1 (2026-06-24)
     #> Platform: x86_64-pc-linux-gnu
-    #> Running under: Ubuntu 24.04.3 LTS
+    #> Running under: Ubuntu 24.04.4 LTS
     #> 
     #> Matrix products: default
     #> BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -460,10 +465,10 @@ To cite rbioapi:
     #> 
     #> loaded via a namespace (and not attached):
     #>  [1] digest_0.6.39     desc_1.4.3        R6_2.6.1          fastmap_1.2.0    
-    #>  [5] xfun_0.56         cachem_1.1.0      knitr_1.51        htmltools_0.5.9  
-    #>  [9] rmarkdown_2.30    lifecycle_1.0.5   cli_3.6.5         sass_0.4.10      
-    #> [13] pkgdown_2.2.0     textshaping_1.0.4 jquerylib_0.1.4   systemfonts_1.3.1
-    #> [17] compiler_4.5.2    httr_1.4.7        tools_4.5.2       ragg_1.5.0       
-    #> [21] curl_7.0.0        bslib_0.9.0       evaluate_1.0.5    yaml_2.3.12      
-    #> [25] otel_0.2.0        jsonlite_2.0.0    rlang_1.1.7       fs_1.6.6         
+    #>  [5] xfun_0.60         cachem_1.1.0      knitr_1.51        htmltools_0.5.9  
+    #>  [9] rmarkdown_2.31    lifecycle_1.0.5   cli_3.6.6         sass_0.4.10      
+    #> [13] pkgdown_2.2.1     textshaping_1.0.5 jquerylib_0.1.4   systemfonts_1.3.2
+    #> [17] compiler_4.6.1    httr_1.4.8        tools_4.6.1       ragg_1.5.2       
+    #> [21] curl_7.1.0        bslib_0.11.0      evaluate_1.0.5    yaml_2.3.12      
+    #> [25] otel_0.2.0        jsonlite_2.0.0    rlang_1.3.0       fs_2.1.0         
     #> [29] htmlwidgets_1.6.4

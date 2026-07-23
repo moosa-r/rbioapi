@@ -2,23 +2,16 @@
 
 ## Introduction
 
-Directly quoting from Fornes O, Castro-Mondragon JA, Khan A, et al:
+[JASPAR](https://jaspar.elixir.no) is an open-access database of curated
+transcription factor binding profiles. JASPAR 2026 is the 11th release.
+It expands the CORE and UNVALIDATED position frequency matrix
+collections and introduces a deep-learning collection containing BPNet
+models and their interpreted binding profiles.
 
-> JASPAR ([https://jaspar.elixir.no)](https://jaspar.elixir.no) is an
-> open-access database of curated, non-redundant transcription factor
-> (TF)-binding profiles stored as position frequency matrices (PFMs) for
-> TFs across multiple species in six taxonomic groups. In this 8th
-> release of JASPAR, the CORE collection has been expanded with 245 new
-> PFMs (169 for vertebrates, 42 for plants, 17 for nematodes, 10 for
-> insects, and 7 for fungi), and 156 PFMs were updated (125 for
-> vertebrates, 28 for plants and 3 for insects). These new profiles
-> represent an 18% expansion compared to the previous release.
->
-> source:  
-> Fornes O, Castro-Mondragon JA, Khan A, et al. JASPAR 2020: update of
-> the open-access database of transcription factor binding profiles.
-> *Nucleic Acids Res*. 2019; doi:
-> [10.1093/nar/gkz1001](https://doi.org/10.1093/nar/gkz1001)
+> Baydar Ovek D, et al. JASPAR 2026: expansion of transcription factor
+> binding profiles and integration of deep learning models. *Nucleic
+> Acids Research*. 2026;54(D1):D184-D193; doi:
+> [10.1093/nar/gkaf1209](https://doi.org/10.1093/nar/gkaf1209)
 
 ------------------------------------------------------------------------
 
@@ -30,38 +23,40 @@ fashion that we will explore next.
 
 ### Releases
 
-In addition to the latest JASPAR database release (2020), other active
-releases are also available. Most of the rbioapi JASPAR functions have a
-`release` argument that allows you to use other database releases.
+In addition to the latest JASPAR database release (2026), other active
+releases are also available. Most rbioapi JASPAR functions have a
+`release` argument; they use release 2026 by default.
 
 ``` r
+
 ## Call the function without any arguments to get a list of releases
 releases <- rba_jaspar_releases()
 
 ## Supply a release number for details:
-release_7_info <- rba_jaspar_releases(7)
+release_11_info <- rba_jaspar_releases(11)
 ```
 
 ### Collections
 
-Within a release, Matrix profiles are organized into collections, You
+Within a release, matrix profiles are organized into collections. You
 can use
 [`rba_jaspar_collections()`](https://rbioapi.moosa-r.com/reference/rba_jaspar_collections.md)
-to get a list of available collections, or read “JASPAR Collections”
-section in [documentation page in JASPAR
-web-site](https://jaspar.elixir.no/docs/ "JASPAR Documentation") for a
+to get a list of available collections, or read the “JASPAR Collections”
+section on the [JASPAR documentation
+website](https://jaspar.elixir.no/docs/ "JASPAR Documentation") for a
 thorough review.
 
 ``` r
-## To get a list of available collection in release 2020:
-rba_jaspar_collections(release = 2020)
+
+## To get a list of available collections in release 2026:
+rba_jaspar_collections(release = 2026)
 #>          name                                                      url
 #> 1        CORE        https://jaspar.elixir.no/api/v1/collections/CORE/
 #> 2 UNVALIDATED https://jaspar.elixir.no/api/v1/collections/UNVALIDATED/
 
 
-## You can list information of all matrices available in a collection:
-mat_in_core_2020 <- rba_jaspar_collections_matrices(collection = "CORE")
+## You can list information on all matrices available in a collection:
+mat_in_core_2026 <- rba_jaspar_collections_matrices(collection = "CORE")
 ```
 
 ### Taxonomic Groups
@@ -70,8 +65,9 @@ Within each collection, the matrix profiles are organized based on main
 taxonomic groups:
 
 ``` r
-## To get a list of taxonomic groups in release 2020:
-rba_jaspar_taxons(release = 2020)
+
+## To get a list of taxonomic groups in release 2026:
+rba_jaspar_taxons(release = 2026)
 #>             name                                                  url
 #> 1         plants        https://jaspar.elixir.no/api/v1/taxon/plants/
 #> 2    vertebrates   https://jaspar.elixir.no/api/v1/taxon/vertebrates/
@@ -86,22 +82,43 @@ rba_jaspar_taxons(release = 2020)
 #> 11      oomycota      https://jaspar.elixir.no/api/v1/taxon/oomycota/
 
 
-## You can list information of all matrices available in a taxonomic group:
+## You can list information on all matrices available in a taxonomic group:
 mat_in_insects <- rba_jaspar_taxons_matrices(tax_group = "insects")
 ```
 
 ### Species
 
-As we go down in the data organization hierarchy, Each taxonomic group
-consist of species:
+As we go down in the data organization hierarchy, each taxonomic group
+consists of species:
 
 ``` r
-## To get a list of species in release 2020:
-species <- rba_jaspar_species(release = 2020)
-head(species)
-#> [1] "The server returned HTTP Status '500' (Redirection: Internal Server Error)."
 
-## You can list information of all matrices available in a specie:
+## To get a list of species in release 2026:
+species <- rba_jaspar_species(release = 2026)
+head(species)
+#>   tax_id                          species
+#> 1   4151                Antirrhinum majus
+#> 2  81972 Arabidopsis lyrata subsp. lyrata
+#> 3   3702             Arabidopsis thaliana
+#> 4 162425             Aspergillus nidulans
+#> 5   9913                       Bos taurus
+#> 6   6238          Caenorhabditis briggsae
+#>                                               url
+#> 1   https://jaspar.elixir.no/api/v1/species/4151/
+#> 2  https://jaspar.elixir.no/api/v1/species/81972/
+#> 3   https://jaspar.elixir.no/api/v1/species/3702/
+#> 4 https://jaspar.elixir.no/api/v1/species/162425/
+#> 5   https://jaspar.elixir.no/api/v1/species/9913/
+#> 6   https://jaspar.elixir.no/api/v1/species/6238/
+#>                                        matrix_url
+#> 1   https://jaspar.elixir.no/api/v1/species/4151/
+#> 2  https://jaspar.elixir.no/api/v1/species/81972/
+#> 3   https://jaspar.elixir.no/api/v1/species/3702/
+#> 4 https://jaspar.elixir.no/api/v1/species/162425/
+#> 5   https://jaspar.elixir.no/api/v1/species/9913/
+#> 6   https://jaspar.elixir.no/api/v1/species/6238/
+
+## You can list information on all matrices available for a species:
 mat_in_human <- rba_jaspar_species_matrices(tax_id = 9606)
 ```
 
@@ -120,6 +137,7 @@ function without any argument to get a list of all the matrix profiles.
 For instance:
 
 ``` r
+
 ## Get a list of all the available matrix profile:
 all_matrices <- rba_jaspar_matrix_search()
 
@@ -141,15 +159,16 @@ zipper_pbm_matrices <- rba_jaspar_matrix_search(
 
 ### List Matrix Profiles Associated to a Base identifier
 
-Since JASPAR release 2010, the matrix profiles are versioned. A matrix
-profile Identifier has a “base_id.version” naming schema; for example
-“MA0600.2” corresponds to the second version of a matrix with base ID
-MA0600. You can Use `rba_jaspar_matrix_versions` to get a list of matrix
-profiles with a given base ID. Also note that some functions, generally
-those that are used to list available matrices, have an argument called
+Since JASPAR release 2010, matrix profiles have been versioned. A matrix
+profile identifier follows a “base_id.version” naming scheme; for
+example, “MA0600.2” corresponds to the second version of a matrix with
+base ID MA0600. You can use `rba_jaspar_matrix_versions` to get a list
+of matrix profiles with a given base ID. Also note that functions used
+to list available matrices generally have an argument called
 `only_last_version`.
 
 ``` r
+
 ## Get matrix profiles versions associated to a base id
 MA0600_versions <- rba_jaspar_matrix_versions("MA0600")
 ```
@@ -165,6 +184,7 @@ which you can use this function:
 To do that, only fill in the `matrix_id` argument in `rba_jaspar_matrix`
 
 ``` r
+
 pfm_matrix <- rba_jaspar_matrix(matrix_id = "MA0600.2")
 
 ## you can find the matrix in the pfm element along with
@@ -209,37 +229,37 @@ str(pfm_matrix)
 #>   ..$ tffm_url       : chr "https://jaspar.elixir.no/api/v1/tffm/TFFM0576.1/"
 ```
 
-#### Save a Matrix a File in Specific Format
+#### Save a Matrix as a File in a Specific Format
 
 JASPAR provides position frequency matrices (PFM) formatted as **Raw
 PFM**, **JASPAR**, **TRANSFAC**, **YAML**, and **MEME**. You can
 download a matrix profile as a file with any of these formats. To do
-that, You should use the `file_format` and `save_to` arguments available
+that, you should use the `file_format` and `save_to` arguments available
 in `rba_jaspar_matrix`. There are two notes here:
 
-1.  In this case, the function will save your matrix as a file and
-    returns the un-parsed content of the file as a character string.
+1.  In this case, the function saves your matrix as a file and returns
+    the unparsed content as a character string.
 
-2.  The `save_to` argument in this function, and in fact through any
-    rbioapi function can be used in many ways:  
-    2.1. save_to = NA: rbioapi will automatically generate a file path
-    under your working directory, save the file in that path , and
-    informs you with a message.  
-    2.2 save_to = file_name without path: rbioapi will save the file
-    with your supplied name in your working directory.  
-    2.3. save_to = a directory path (without file): rbioapi will save
-    the file with a proper name in that directory.  
-    2.4. save_to = a file path (i.e. ending with .extension): rbioapi
-    will save the file exactly to this path. Make sure that the file
-    extension of the path matches your requested file format. If this
-    was not the case, rbioapi will save the file with the extension
-    supplied in the path, but issues a warning to inform you about that.
+2.  The `save_to` argument in this and other rbioapi functions can be
+    used in several ways:  
+    2.1. `save_to = NA`: rbioapi automatically generates a file path
+    under your working directory, saves the file there, and reports the
+    path in a message.  
+    2.2. `save_to = file_name` without a directory: rbioapi saves the
+    file with the supplied name in your working directory.  
+    2.3. `save_to = directory_path`: rbioapi saves the file with an
+    appropriate name in that directory.  
+    2.4. `save_to = file_path`: rbioapi saves the file to the exact
+    path. Ensure that the path’s extension matches the requested file
+    format; otherwise, rbioapi uses the supplied extension and issues a
+    warning.
 
     In any of the aforementioned cases, the file path can be absolute or
     relative.
 
 ``` r
-## Different wqays in which you can save the matrix file:
+
+## Different ways in which you can save the matrix file:
 meme_matrix1 <- rba_jaspar_matrix(
   matrix_id = "MA0600.2",
   file_format = "meme"
@@ -264,15 +284,15 @@ meme_matrix4 <- rba_jaspar_matrix(
 )
 ```
 
-### Get Binding Sites of a Matrix Profiles
+### Get Binding Sites for a Matrix Profile
 
 If available, you can retrieve information on binding sites associated
-with a matrix profile. The information includes a data frame of genomic
-coordination of the binding site, URL to FASTA and BED files, along with
-other annotations.
+with a matrix profile. The result includes a data frame of genomic
+coordinates, URLs to FASTA and BED files, and other annotations.
 
 ``` r
-## Get binding site of a matrix profile:
+
+## Get binding sites for a matrix profile:
 binding_sites <- rba_jaspar_sites(matrix_id = "MA0600.2")
 ```
 
@@ -281,15 +301,16 @@ binding_sites <- rba_jaspar_sites(matrix_id = "MA0600.2")
 ## TF flexible models (TFFMs)
 
 JASPAR also stores and assigns identifiers to TF flexible models
-(TFFMs). Just like PFM (position frequency matrices), you can search
-TFFMs or retrieve information and annotations using a TFFM Identifier.
-TFFM IDs are versioned, meaning that they are in base_id.version format.
+(TFFMs). As with position frequency matrices (PFMs), you can search
+TFFMs or retrieve information and annotations using a TFFM identifier.
+TFFM IDs are versioned and follow the `base_id.version` format.
 
 ``` r
-## Search TFFMs. This is a search function. Thus, what has been presented
-## in `Search Matrix Profiles` section also applies here:
 
-## Get a list of all the available matrix profile:
+## Search TFFMs. This is a search function. Thus, what has been presented
+## in the `Search Matrix Profiles` section also applies here:
+
+## Get a list of all available TFFM profiles:
 all_tffms <- rba_jaspar_tffm_search()
 
 ## Search FOX:
@@ -298,16 +319,17 @@ FOX_tffms <- rba_jaspar_tffm_search(term = "FOX")
 ## Transcription factors named FOXP3
 FOXP3_tffms <- rba_jaspar_tffm_search(term = "FOXP3")
 
-## Transcription factors of insects taxonomic group
+## Transcription factors in the insects taxonomic group
 insects_tffms <- rba_jaspar_tffm_search(tax_group = "insects")
 ```
 
 ``` r
+
 ## Now that you have a TFFM ID, you can retrieve it
 TFFM0056 <- rba_jaspar_tffm("TFFM0056.3")
 
 str(TFFM0056)
-#>  chr "The server returned HTTP Status '500' (Redirection: Internal Server Error)."
+#>  chr "The server returned HTTP Status '500' (Server Error: Internal Server Error)."
 ```
 
 ------------------------------------------------------------------------
@@ -316,12 +338,10 @@ str(TFFM0056)
 
 To cite JASPAR (Please see <https://jaspar.elixir.no/faq/>):
 
-- Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R, Castro-Mondragon
-  JA, Ferenc K, Kumar V, Lemma RB, Lucas J, Chèneby J, Baranasic D, Khan
-  A, Fornes O, Gundersen S, Johansen M, Hovig E, Lenhard B, Sandelin A,
-  Wasserman WW, Parcy F, Mathelier A *JASPAR 2024: 20th anniversary of
-  the open-access database of transcription factor binding profiles*
-  Nucleic Acids Res. in_press; <https://doi.org/10.1093/nar/gkad1059>
+- Baydar Ovek D, et al. *JASPAR 2026: expansion of transcription factor
+  binding profiles and integration of deep learning models*. Nucleic
+  Acids Res. 2026;54(D1):D184-D193;
+  <https://doi.org/10.1093/nar/gkaf1209>
 - Khan, A. and Mathelier, A. *JASPAR RESTful API: accessing JASPAR data
   from any programming language*. Bioinformatics, 2017,
   <https://doi.org/10.1093/bioinformatics/btx804>
@@ -350,9 +370,9 @@ To cite rbioapi:
 
 ## Session info
 
-    #> R version 4.5.2 (2025-10-31)
+    #> R version 4.6.1 (2026-06-24)
     #> Platform: x86_64-pc-linux-gnu
-    #> Running under: Ubuntu 24.04.3 LTS
+    #> Running under: Ubuntu 24.04.4 LTS
     #> 
     #> Matrix products: default
     #> BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -375,10 +395,10 @@ To cite rbioapi:
     #> 
     #> loaded via a namespace (and not attached):
     #>  [1] digest_0.6.39     desc_1.4.3        R6_2.6.1          fastmap_1.2.0    
-    #>  [5] xfun_0.56         cachem_1.1.0      knitr_1.51        htmltools_0.5.9  
-    #>  [9] rmarkdown_2.30    lifecycle_1.0.5   cli_3.6.5         sass_0.4.10      
-    #> [13] pkgdown_2.2.0     textshaping_1.0.4 jquerylib_0.1.4   systemfonts_1.3.1
-    #> [17] compiler_4.5.2    httr_1.4.7        tools_4.5.2       ragg_1.5.0       
-    #> [21] curl_7.0.0        bslib_0.9.0       evaluate_1.0.5    yaml_2.3.12      
-    #> [25] otel_0.2.0        jsonlite_2.0.0    rlang_1.1.7       fs_1.6.6         
+    #>  [5] xfun_0.60         cachem_1.1.0      knitr_1.51        htmltools_0.5.9  
+    #>  [9] rmarkdown_2.31    lifecycle_1.0.5   cli_3.6.6         sass_0.4.10      
+    #> [13] pkgdown_2.2.1     textshaping_1.0.5 jquerylib_0.1.4   systemfonts_1.3.2
+    #> [17] compiler_4.6.1    httr_1.4.8        tools_4.6.1       ragg_1.5.2       
+    #> [21] curl_7.1.0        bslib_0.11.0      evaluate_1.0.5    yaml_2.3.12      
+    #> [25] otel_0.2.0        jsonlite_2.0.0    rlang_1.3.0       fs_2.1.0         
     #> [29] htmlwidgets_1.6.4

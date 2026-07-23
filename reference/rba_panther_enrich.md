@@ -19,6 +19,7 @@ rba_panther_enrich(
   cutoff = NULL,
   ref_genes = NULL,
   ref_organism = NULL,
+  request_mapped_genes = "input",
   ...
 )
 ```
@@ -44,8 +45,8 @@ rba_panther_enrich(
       vector with gene identifiers and the second column is a numerical
       vector with expression values.
 
-  In both cases, maximum of 10000 genes can be supplied. The gene
-  identifiers can be any of: Ensemble gene ID, Ensembl protein ID,
+  In both cases, a maximum of 100,000 identifiers can be supplied. The
+  gene identifiers can be any of: Ensembl gene ID, Ensembl protein ID,
   Ensembl transcript ID, Entrez gene ID, gene symbol, NCBI GI, HGNC ID,
   International protein index ID, NCBI UniGene ID, UniProt accession or
   UniProt ID.
@@ -68,14 +69,15 @@ rba_panther_enrich(
 
 - test_type:
 
-  statistical test type to calculate the p values.
+  Statistical test type used to calculate p-values.
 
-  - If performing over-representation analysis (i.e. \`genes\` parameter
-    is a character vector), valid values are "FISHER" (default) or
+  - If performing over-representation analysis (i.e. \`genes\` is a
+    character vector), valid values are "FISHER" (default if NULL) or
     "BINOMIAL".
 
-  - If performing statistical enrichment analysis (i.e. \`genes\`
-    parameter is a data.frame), the only valid value is "Mann-Whitney"
+  - If performing statistical enrichment analysis (i.e. \`genes\` is a
+    data frame), the only valid value is "Mann-Whitney" (default if
+    NULL).
 
 - correction:
 
@@ -90,11 +92,11 @@ rba_panther_enrich(
 
 - ref_genes:
 
-  (Optional, only valid if genes is a character vector) A character
-  vector of genes that will be used as the test's background
-  (reference/universe) gene set. If no value supplied, all of the genes
-  in specified organism will be used. The maximum length and supported
-  IDs are the same as 'genes' argument.
+  (Optional, only valid if genes is a character vector) A character or
+  numeric vector of genes that will be used as the test's background
+  (reference/universe) gene set. If no value is supplied, all of the
+  genes in the specified organism will be used. The maximum length and
+  supported IDs are the same as the 'genes' argument.
 
 - ref_organism:
 
@@ -102,6 +104,15 @@ rba_panther_enrich(
   is used, you can specify the organisms which correspond to your
   supplied IDs in 'ref_genes' argument. see 'organism' argument for
   supported values.
+
+- request_mapped_genes:
+
+  (Character, only used if genes is a character vector, hence
+  Over-representation test is requested) Which mapped genes should be
+  returned for each result term. One of "input" (default), "reference",
+  or "none". Requesting "reference" without supplying 'ref_genes' may
+  produce a large response because all genes in the specified organism
+  are used as the reference list.
 
 - ...:
 
@@ -111,10 +122,11 @@ rba_panther_enrich(
 
 ## Value
 
-A list with the parameters and results. If the analysis was successful,
-the results data frame are returned in the "results" element within the
-list. Otherwise, an error message will be returned under the
-"search\$error" element in the returned list.
+For a successful analysis, a list. The "result" element is a data frame
+with one row per returned annotation term and columns describing the
+term, observed counts, enrichment direction, and statistical
+significance. The remaining elements contain input and reference mapping
+summaries, when applicable, and PANTHER analysis and release metadata.
 
 ## Details
 
@@ -151,12 +163,14 @@ https://www.pantherdb.org/services/oai/pantherdb/enrich/statenrich"
 
 ## References
 
-- Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills,
-  Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER
-  version 16: a revised family classification, tree-based classification
-  tool, enhancer regions and extensive API, Nucleic Acids Research,
-  Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
-  https://doi.org/10.1093/nar/gkaa1106
+- Thomas PD, Ebert D, Muruganujan A, Mushayahama T, Albou L-P,
+  Mi H. (2022) PANTHER: Making genome-scale phylogenetics accessible to
+  all. Protein Science, 31(1), 8–22. https://doi.org/10.1002/pro.4218
+
+- Mi H, Muruganujan A, Huang X, Ebert D, Mills C, Guo X, Thomas
+  PD. (2019) Protocol Update for large-scale genome and gene function
+  analysis with the PANTHER classification system (v.14.0). Nature
+  Protocols, 14, 703–721. https://doi.org/10.1038/s41596-019-0128-8
 
 - [PANTHER Services
   Details](https://www.pantherdb.org/services/details.jsp)
@@ -168,6 +182,7 @@ https://www.pantherdb.org/services/oai/pantherdb/enrich/statenrich"
 
 Other "PANTHER":
 [`rba_panther_family()`](https://rbioapi.moosa-r.com/reference/rba_panther_family.md),
+[`rba_panther_genome()`](https://rbioapi.moosa-r.com/reference/rba_panther_genome.md),
 [`rba_panther_homolog()`](https://rbioapi.moosa-r.com/reference/rba_panther_homolog.md),
 [`rba_panther_info()`](https://rbioapi.moosa-r.com/reference/rba_panther_info.md),
 [`rba_panther_mapping()`](https://rbioapi.moosa-r.com/reference/rba_panther_mapping.md),

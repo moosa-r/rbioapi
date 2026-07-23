@@ -41,9 +41,9 @@ By default, this function will save the library names as a global option
 ("rba_enrichr_libs") for other Enrichr functions that internally require
 the names of Enrichr libraries. You should call this function once per R
 session with the argument 'store_in_options = TRUE' before using
-[`rba_enrichr_enrich`](https://rbioapi.moosa-r.com/reference/rba_enrichr_enrich.md)
-or
-[`rba_enrichr`](https://rbioapi.moosa-r.com/reference/rba_enrichr.md).
+[`rba_enrichr_gene_sets`](https://rbioapi.moosa-r.com/reference/rba_enrichr_gene_sets.md),
+[`rba_enrichr`](https://rbioapi.moosa-r.com/reference/rba_enrichr.md) or
+[`rba_enrichr_enrich`](https://rbioapi.moosa-r.com/reference/rba_enrichr_enrich.md).
 However, if you do not explicitly call it, rbioapi will automatically
 execute this function in the background the when it is needed.
 
@@ -92,6 +92,7 @@ Other "Enrichr":
 [`rba_enrichr_add_list()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_add_list.md),
 [`rba_enrichr_enrich()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_enrich.md),
 [`rba_enrichr_gene_map()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_gene_map.md),
+[`rba_enrichr_gene_sets()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_gene_sets.md),
 [`rba_enrichr_view_list()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_view_list.md)
 
 ## Examples

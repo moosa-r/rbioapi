@@ -45,8 +45,7 @@ proteins "within the same species". To Get a similarity scores of a
 given protein and it's closets homologous proteins in other species, see
 [`rba_string_homology_inter`](https://rbioapi.moosa-r.com/reference/rba_string_homology_inter.md).  
 Similarity matrix is imported -by STRING- from: [Similarity Matrix of
-Proteins
-(SIMAP)](https://cube.univie.ac.at/research/software-databases/simap/)
+Proteins (SIMAP)](https://pubmed.ncbi.nlm.nih.gov/24165881/)
 
 ## Corresponding API Resources
 

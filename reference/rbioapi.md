@@ -39,3 +39,8 @@ Useful links:
 
 **Maintainer**: Moosa Rezwani <moosa.rezwani@gmail.com>
 ([ORCID](https://orcid.org/0000-0001-6325-4444))
+
+Authors:
+
+- Moosa Rezwani <moosa.rezwani@gmail.com>
+  ([ORCID](https://orcid.org/0000-0001-6325-4444))

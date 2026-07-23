@@ -80,6 +80,7 @@ from
 with:
 
 ``` r
+
 install.packages("rbioapi")
 ```
 
@@ -89,6 +90,7 @@ install the most recent -development- version from
 with:
 
 ``` r
+
 install.packages("remotes")
 remotes::install_github("moosa-r/rbioapi")
 ```
@@ -96,6 +98,7 @@ remotes::install_github("moosa-r/rbioapi")
 Now, we can load the package:
 
 ``` r
+
 library(rbioapi)
 ```
 
@@ -114,6 +117,7 @@ will call
 version resource.
 
 ``` r
+
 rba_string_version()
 #> Retrieving the STRING database version and address used by rbioapi.
 #> $string_version
@@ -155,6 +159,7 @@ options and their current values by calling
 any argument:
 
 ``` r
+
 rba_options()
 #>   rbioapi_option current_value            allowed_value
 #> 1    diagnostics         FALSE     Logical (TRUE/FALSE)
@@ -179,6 +184,7 @@ option; Thus by running this function with your desired new values, you
 could globally alter that rbioapi option. for example:
 
 ``` r
+
 rba_options(save_file = TRUE)
 ## From now on, the raw file of server's response will be saved to your working directory.
 
@@ -195,6 +201,7 @@ pair. This way, any changes in options will be confined within that
 particular function call. For example:
 
 ``` r
+
 ## Save the server's raw response file:
 x <- rba_reactome_species(
   only_main = TRUE,
@@ -210,6 +217,7 @@ x <- rba_reactome_species(
 ```
 
 ``` r
+
 ## Run these codes in your own R session to see the difference:
 
 ## show internal diagnostics boring details
@@ -236,6 +244,7 @@ run this function to make sure that your internet connection or the
 servers are fine.
 
 ``` r
+
 rba_connection_test(print_output = TRUE)
 #> Checking Your connection to the Databases currently supported by rbioapi:
 #> --->>> Internet :
@@ -279,6 +288,7 @@ returns a paginated response. For example, if we search for nodes that
 contain “adenovirus”, there is a large number of hits:
 
 ``` r
+
 adeno <- rba_uniprot_taxonomy_name(
   name = "adenovirus",
   search_type = "contain",
@@ -309,6 +319,7 @@ the “page_number” argument within each call, or simply use
 demonstrated below:
 
 ``` r
+
 adeno_pages = rba_pages(
   quote(
     rba_uniprot_taxonomy_name(
@@ -346,12 +357,11 @@ As you can see, what we have done was:
 
 rbioapi is an interface between you and other databases and services.
 Thus, if you have used rbioapi in published research, **in addition to
-kindly citing rbioapi, **ensure to fully and properly cite the
-databases/services you have used****. Suggested citations have been
-added in the functions’ manuals, under the “references” section;
-Nevertheless, it is the user’s responsibility to check for proper
-citations and to properly cite the database/services that they have
-used.
+kindly citing rbioapi, ensure to fully and properly cite the
+databases/services you have used**. Suggested citations have been added
+in the functions’ manuals, under the “references” section; Nevertheless,
+it is the user’s responsibility to check for proper citations and to
+properly cite the database/services that they have used.
 
 ## How to cite rbioapi
 

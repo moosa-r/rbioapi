@@ -26,6 +26,7 @@ Thus, it is recommended to retrieve a list of possible enrichment
 categories that you may use:
 
 ``` r
+
 ## A list of available enrichment categories for:
 
 ## mature human miRNA:
@@ -54,6 +55,7 @@ you need to provide `test_set`, `mirna_type`, `test_type`, and
 `species`:
 
 ``` r
+
 ## 1 We create a variable with our miRNAs' mature IDs
 mirs <- c(
   "hsa-miR-20b-5p", "hsa-miR-144-5p", "hsa-miR-17-5p", "hsa-miR-20a-5p",
@@ -75,11 +77,11 @@ mieaa_all <- rba_mieaa_enrich(
 #> Submitting ORA enrichment request for 17 miRNA IDs of species Homo sapiens to miEAA servers.
 #> 
 #>  -- Step 2/3: Checking for Submitted enrichment analysis's status every 5 seconds.
-#>     Your submitted job ID is: c2c5ac59-91e5-45bd-bc73-435fd983cac3
-#> ......
+#>     Your submitted job ID is: ee579e0e-6c80-4226-9bef-6d2c20cbf5bc
+#> ....
 #> 
 #>  -- Step 3/3: Retrieving the results.
-#> Retrieving results of submitted enrichment request with ID: c2c5ac59-91e5-45bd-bc73-435fd983cac3
+#> Retrieving results of submitted enrichment request with ID: ee579e0e-6c80-4226-9bef-6d2c20cbf5bc
 
 ## 2b Or, We can limit the enrichment to certain datasets (enrichment categories)
 mieaa_kegg <- rba_mieaa_enrich(
@@ -93,11 +95,11 @@ mieaa_kegg <- rba_mieaa_enrich(
 #> Submitting ORA enrichment request for 17 miRNA IDs of species Homo sapiens to miEAA servers.
 #> 
 #>  -- Step 2/3: Checking for Submitted enrichment analysis's status every 5 seconds.
-#>     Your submitted job ID is: 74c0c6ac-f6c3-42fd-a47d-f8d7cde0e5bf
+#>     Your submitted job ID is: 7e63e79b-8828-45de-a5c7-04e074e6facc
 #> .
 #> 
 #>  -- Step 3/3: Retrieving the results.
-#> Retrieving results of submitted enrichment request with ID: 74c0c6ac-f6c3-42fd-a47d-f8d7cde0e5bf
+#> Retrieving results of submitted enrichment request with ID: 7e63e79b-8828-45de-a5c7-04e074e6facc
 ```
 
 ### Approach 2: Going step-by-step
@@ -108,6 +110,7 @@ is a wrapper function, meaning that it executes the following sequence
 of functions:
 
 ``` r
+
 ## 1 Submit enrichment request to miEAA
 request <- rba_mieaa_enrich_submit(
   test_set = mirs,
@@ -181,9 +184,9 @@ To cite rbioapi:
 
 ## Session info
 
-    #> R version 4.5.2 (2025-10-31)
+    #> R version 4.6.1 (2026-06-24)
     #> Platform: x86_64-pc-linux-gnu
-    #> Running under: Ubuntu 24.04.3 LTS
+    #> Running under: Ubuntu 24.04.4 LTS
     #> 
     #> Matrix products: default
     #> BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -205,11 +208,11 @@ To cite rbioapi:
     #> [1] rbioapi_0.8.3
     #> 
     #> loaded via a namespace (and not attached):
-    #>  [1] httr_1.4.7        cli_3.6.5         knitr_1.51        rlang_1.1.7      
-    #>  [5] xfun_0.56         otel_0.2.0        textshaping_1.0.4 jsonlite_2.0.0   
-    #>  [9] DT_0.34.0         htmltools_0.5.9   ragg_1.5.0        sass_0.4.10      
-    #> [13] rmarkdown_2.30    crosstalk_1.2.2   evaluate_1.0.5    jquerylib_0.1.4  
-    #> [17] fastmap_1.2.0     yaml_2.3.12       lifecycle_1.0.5   compiler_4.5.2   
-    #> [21] fs_1.6.6          htmlwidgets_1.6.4 systemfonts_1.3.1 digest_0.6.39    
-    #> [25] R6_2.6.1          curl_7.0.0        magrittr_2.0.4    bslib_0.9.0      
-    #> [29] tools_4.5.2       pkgdown_2.2.0     cachem_1.1.0      desc_1.4.3
+    #>  [1] httr_1.4.8        cli_3.6.6         knitr_1.51        rlang_1.3.0      
+    #>  [5] xfun_0.60         otel_0.2.0        textshaping_1.0.5 jsonlite_2.0.0   
+    #>  [9] DT_0.34.0         htmltools_0.5.9   ragg_1.5.2        sass_0.4.10      
+    #> [13] rmarkdown_2.31    crosstalk_1.2.2   evaluate_1.0.5    jquerylib_0.1.4  
+    #> [17] fastmap_1.2.0     yaml_2.3.12       lifecycle_1.0.5   compiler_4.6.1   
+    #> [21] fs_2.1.0          htmlwidgets_1.6.4 systemfonts_1.3.2 digest_0.6.39    
+    #> [25] R6_2.6.1          curl_7.1.0        magrittr_2.0.5    bslib_0.11.0     
+    #> [29] tools_4.6.1       pkgdown_2.2.1     cachem_1.1.0      desc_1.4.3

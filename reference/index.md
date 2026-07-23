@@ -27,6 +27,8 @@ analysis tool) API resources.
   : Get Enrichr Enrichment Results
 - [`rba_enrichr_gene_map()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_gene_map.md)
   : Find Enrichr Terms That Contain a Given Gene
+- [`rba_enrichr_gene_sets()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_gene_sets.md)
+  : Retrieve Gene Sets From an Enrichr Library
 - [`rba_enrichr_libs()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_libs.md)
   : Retrieve a List of available libraries from Enrichr
 - [`rba_enrichr_view_list()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_view_list.md)
@@ -42,7 +44,7 @@ Functions that connect you to [JASPAR](https://jaspar.elixir.no/)
 - [`rba_jaspar_collections_matrices()`](https://rbioapi.moosa-r.com/reference/rba_jaspar_collections_matrices.md)
   : List matrices available in a JASPAR collection
 - [`rba_jaspar_matrix()`](https://rbioapi.moosa-r.com/reference/rba_jaspar_matrix.md)
-  : Get a Position Frequency Matrices (PFM) with annotations
+  : Get a position frequency matrix (PFM) with annotations
 - [`rba_jaspar_matrix_search()`](https://rbioapi.moosa-r.com/reference/rba_jaspar_matrix_search.md)
   : Search matrix profiles available in JASPAR
 - [`rba_jaspar_matrix_versions()`](https://rbioapi.moosa-r.com/reference/rba_jaspar_matrix_versions.md)
@@ -60,7 +62,7 @@ Functions that connect you to [JASPAR](https://jaspar.elixir.no/)
 - [`rba_jaspar_taxons_matrices()`](https://rbioapi.moosa-r.com/reference/rba_jaspar_taxons_matrices.md)
   : List matrices available in JASPAR of a taxonomic group
 - [`rba_jaspar_tffm()`](https://rbioapi.moosa-r.com/reference/rba_jaspar_tffm.md)
-  : Get a TF flexible models (TFFMs) information
+  : Get information about a TF flexible model (TFFM)
 - [`rba_jaspar_tffm_search()`](https://rbioapi.moosa-r.com/reference/rba_jaspar_tffm_search.md)
   : Search TF flexible models (TFFMs) available in JASPAR
 
@@ -94,6 +96,8 @@ Functions that connect you to [PANTHER](https://www.pantherdb.org/)
   : PANTHER Over-Representation or Enrichment Analysis
 - [`rba_panther_family()`](https://rbioapi.moosa-r.com/reference/rba_panther_family.md)
   : Get PANTHER Families and Sub-Families
+- [`rba_panther_genome()`](https://rbioapi.moosa-r.com/reference/rba_panther_genome.md)
+  : Retrieve Genes from a PANTHER Genome
 - [`rba_panther_homolog()`](https://rbioapi.moosa-r.com/reference/rba_panther_homolog.md)
   : Search PANTHER for Homologs of Gene(s)
 - [`rba_panther_info()`](https://rbioapi.moosa-r.com/reference/rba_panther_info.md)

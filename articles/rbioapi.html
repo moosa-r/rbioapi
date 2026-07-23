@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="1: rbioapi: User-Friendly R Interface to Biologic Web Services' API">
 <meta name="description" content="Connect to Enrichr, JASPAR, miEAA, PANTHER, Reactome, STRING, and UniProt in R with rbioapi package.
@@ -88,7 +88,7 @@
                         <h4 data-toc-skip class="author">Moosa
 Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2026-01-26</h4>
+            <h4 data-toc-skip class="date">2026-07-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/master/vignettes/rbioapi.Rmd" class="external-link"><code>vignettes/rbioapi.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi.Rmd</code></div>
@@ -318,10 +318,7 @@ your internet connection or the servers are fine.</p>
 <span><span class="co">#&gt; ---&gt;&gt;&gt; miEAA :</span></span>
 <span><span class="co">#&gt; +++ The server is responding.</span></span>
 <span><span class="co">#&gt; ---&gt;&gt;&gt; PANTHER :</span></span>
-<span><span class="co">#&gt; !!! failed with error:</span></span>
-<span><span class="co">#&gt;  Error in curl::curl_fetch_memory(url, handle = handle) : </span></span>
-<span><span class="co">#&gt;   Number of redirects hit maximum amount [www.pantherdb.org]:</span></span>
-<span><span class="co">#&gt; Maximum (10) redirects followed</span></span>
+<span><span class="co">#&gt; +++ The server is responding.</span></span>
 <span><span class="co">#&gt; ---&gt;&gt;&gt; Reactome Content Service :</span></span>
 <span><span class="co">#&gt; +++ The server is responding.</span></span>
 <span><span class="co">#&gt; ---&gt;&gt;&gt; Reactome Analysis Service :</span></span>
@@ -357,17 +354,17 @@ paginated response. For example, if we search for nodes that contain
 <span><span class="co">#&gt; List of 2</span></span>
 <span><span class="co">#&gt;  $ taxonomies:'data.frame':  200 obs. of  8 variables:</span></span>
 <span><span class="co">#&gt;   ..$ taxonomyId    : int [1:200] 10509 10510 10511 10512 10513 10514 10515 10519 10521 10522 ...</span></span>
-<span><span class="co">#&gt;   ..$ mnemonic      : chr [1:200] "9ADEN" "ADEB3" "ADEB7" "9ADEN" ...</span></span>
-<span><span class="co">#&gt;   ..$ scientificName: chr [1:200] "Mastadenovirus" "Bovine adenovirus B serotype 3" "Bovine adenovirus 7" "Canine adenovirus 1" ...</span></span>
-<span><span class="co">#&gt;   ..$ rank          : chr [1:200] "genus" "serotype" "serotype" "serotype" ...</span></span>
+<span><span class="co">#&gt;   ..$ mnemonic      : chr [1:200] "9ADEN" "ADEB3" "ADEB7" "ADEC1" ...</span></span>
+<span><span class="co">#&gt;   ..$ scientificName: chr [1:200] "Mastadenovirus" "Bovine adenovirus B serotype 3" "Bovine adenovirus 7" "Canine adenovirus serotype 1" ...</span></span>
+<span><span class="co">#&gt;   ..$ rank          : chr [1:200] "genus" "no rank" "no rank" "no rank" ...</span></span>
 <span><span class="co">#&gt;   ..$ superregnum   : chr [1:200] "V" "V" "V" "V" ...</span></span>
 <span><span class="co">#&gt;   ..$ hidden        : logi [1:200] FALSE TRUE TRUE TRUE TRUE TRUE ...</span></span>
-<span><span class="co">#&gt;   ..$ commonName    : chr [1:200] NA "BAdV-3" "BAdV-7" NA ...</span></span>
-<span><span class="co">#&gt;   ..$ synonym       : chr [1:200] NA "Mastadenovirus bos3" NA NA ...</span></span>
+<span><span class="co">#&gt;   ..$ commonName    : chr [1:200] NA "BAdV-3" "BAdV-7" "CAdV-1" ...</span></span>
+<span><span class="co">#&gt;   ..$ synonym       : chr [1:200] NA "Mastadenovirus bos3" NA "Canine adenovirus 1" ...</span></span>
 <span><span class="co">#&gt;  $ pageInfo  :List of 3</span></span>
 <span><span class="co">#&gt;   ..$ resultsPerPage: int 200</span></span>
 <span><span class="co">#&gt;   ..$ currentPage   : int 1</span></span>
-<span><span class="co">#&gt;   ..$ totalRecords  : int 1138</span></span></code></pre></div>
+<span><span class="co">#&gt;   ..$ totalRecords  : int 1259</span></span></code></pre></div>
 <p>As you can see, the server has returned the first page of the
 response, to retrieve the other pages, you should make separate calls
 and change the “page_number” argument within each call, or simply use
@@ -472,35 +469,26 @@ interprets as normal behavior, so please seek other methods or use
 check those too.</p>
 <ol style="list-style-type: decimal">
 <li>
-<a href="rbioapi_enrichr.html" title="rbioapi &amp; Enrichr vignette">Enrichr</a> <sup>(<a href="https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html" title="rbioapi &amp; Enrichr vignette">Documentation site</a>)</sup>
-</li>
+<a href="rbioapi_enrichr.html" title="rbioapi &amp; Enrichr vignette">Enrichr</a> ^(<a href="https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html" title="rbioapi &amp; Enrichr vignette">Documentation site</a>)^</li>
 <li>
-<a href="rbioapi_jaspar.html" title="rbioapi &amp; JASPAR vignette article">JASPAR</a> <sup>(<a href="https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html" title="rbioapi &amp; JASPAR vignette article">Documentation site</a>)</sup>
-</li>
+<a href="rbioapi_jaspar.html" title="rbioapi &amp; JASPAR vignette article">JASPAR</a> ^(<a href="https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html" title="rbioapi &amp; JASPAR vignette article">Documentation site</a>)^</li>
 <li>
-<a href="rbioapi_mieaa.html" title="rbioapi &amp; miEAA vignette article">miEAA</a> <sup>(<a href="https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html" title="rbioapi &amp; miEAA vignette article">Documentation site</a>)</sup>
-</li>
+<a href="rbioapi_mieaa.html" title="rbioapi &amp; miEAA vignette article">miEAA</a> ^(<a href="https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html" title="rbioapi &amp; miEAA vignette article">Documentation site</a>)^</li>
 <li>
-<a href="rbioapi_panther.html" title="rbioapi &amp; PANTHER vignette article">PANTHER</a> <sup>(<a href="https://rbioapi.moosa-r.com/articles/rbioapi_panther.html" title="rbioapi &amp; PANTHER vignette article">Documentation site</a>)</sup>
-</li>
+<a href="rbioapi_panther.html" title="rbioapi &amp; PANTHER vignette article">PANTHER</a> ^(<a href="https://rbioapi.moosa-r.com/articles/rbioapi_panther.html" title="rbioapi &amp; PANTHER vignette article">Documentation site</a>)^</li>
 <li>
-<a href="rbioapi_reactome.html" title="rbioapi &amp; Reactome vignette article">Reactome</a> <sup>(<a href="https://rbioapi.moosa-r.com/articles/rbioapi_reactome.html" title="rbioapi &amp; Reactome vignette article">Documentation site</a>)</sup>
-</li>
+<a href="rbioapi_reactome.html" title="rbioapi &amp; Reactome vignette article">Reactome</a> ^(<a href="https://rbioapi.moosa-r.com/articles/rbioapi_reactome.html" title="rbioapi &amp; Reactome vignette article">Documentation site</a>)^</li>
 <li>
-<a href="rbioapi_string.html" title="rbioapi &amp; STRING vignette article">STRING</a> <sup>(<a href="https://rbioapi.moosa-r.com/articles/rbioapi_string.html" title="rbioapi &amp; STRING vignette article">Documentation site</a>)</sup>
-</li>
+<a href="rbioapi_string.html" title="rbioapi &amp; STRING vignette article">STRING</a> ^(<a href="https://rbioapi.moosa-r.com/articles/rbioapi_string.html" title="rbioapi &amp; STRING vignette article">Documentation site</a>)^</li>
 <li>
-<a href="rbioapi_uniprot.html" title="rbioapi &amp; UniProt vignette article">UniProt</a> <sup>(<a href="https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html" title="rbioapi &amp; UniProt vignette article">Documentation site</a>)</sup>
-</li>
+<a href="rbioapi_uniprot.html" title="rbioapi &amp; UniProt vignette article">UniProt</a> ^(<a href="https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html" title="rbioapi &amp; UniProt vignette article">Documentation site</a>)^</li>
 </ol>
 <p>We are also adding vignette articles focusing on tasks and
 workflows:</p>
 <ol style="list-style-type: decimal">
 <li>
 <a href="rbioapi_do_enrich.html" title="Do with rbioapi: Enrichment (Over-Representation) Analysis in R">Do
-with rbioapi: Enrichment (Over-Representation) Analysis in R</a>
-<sup>(<a href="https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html" title="rbioapi &amp; UniProt vignette article">documentation site</a>)</sup>
-</li>
+with rbioapi: Enrichment (Over-Representation) Analysis in R</a> ^(<a href="https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html" title="rbioapi &amp; UniProt vignette article">documentation site</a>)^</li>
 </ol>
 <hr>
 </div>
@@ -526,9 +514,9 @@ site</a></p></li>
 <div class="section level2">
 <h2 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
-<pre><code><span><span class="co">#&gt; R version 4.5.2 (2025-10-31)</span></span>
+<pre><code><span><span class="co">#&gt; R version 4.6.1 (2026-06-24)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu</span></span>
-<span><span class="co">#&gt; Running under: Ubuntu 24.04.3 LTS</span></span>
+<span><span class="co">#&gt; Running under: Ubuntu 24.04.4 LTS</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Matrix products: default</span></span>
 <span><span class="co">#&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 </span></span>
@@ -551,12 +539,12 @@ site</a></p></li>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span><span class="co">#&gt;  [1] digest_0.6.39     desc_1.4.3        R6_2.6.1          fastmap_1.2.0    </span></span>
-<span><span class="co">#&gt;  [5] xfun_0.56         cachem_1.1.0      knitr_1.51        htmltools_0.5.9  </span></span>
-<span><span class="co">#&gt;  [9] rmarkdown_2.30    lifecycle_1.0.5   cli_3.6.5         sass_0.4.10      </span></span>
-<span><span class="co">#&gt; [13] pkgdown_2.2.0     textshaping_1.0.4 jquerylib_0.1.4   systemfonts_1.3.1</span></span>
-<span><span class="co">#&gt; [17] compiler_4.5.2    httr_1.4.7        tools_4.5.2       ragg_1.5.0       </span></span>
-<span><span class="co">#&gt; [21] curl_7.0.0        bslib_0.9.0       evaluate_1.0.5    yaml_2.3.12      </span></span>
-<span><span class="co">#&gt; [25] otel_0.2.0        jsonlite_2.0.0    rlang_1.1.7       fs_1.6.6         </span></span>
+<span><span class="co">#&gt;  [5] xfun_0.60         cachem_1.1.0      knitr_1.51        htmltools_0.5.9  </span></span>
+<span><span class="co">#&gt;  [9] rmarkdown_2.31    lifecycle_1.0.5   cli_3.6.6         sass_0.4.10      </span></span>
+<span><span class="co">#&gt; [13] pkgdown_2.2.1     textshaping_1.0.5 jquerylib_0.1.4   systemfonts_1.3.2</span></span>
+<span><span class="co">#&gt; [17] compiler_4.6.1    httr_1.4.8        tools_4.6.1       ragg_1.5.2       </span></span>
+<span><span class="co">#&gt; [21] curl_7.1.0        bslib_0.11.0      evaluate_1.0.5    yaml_2.3.12      </span></span>
+<span><span class="co">#&gt; [25] otel_0.2.0        jsonlite_2.0.0    rlang_1.3.0       fs_2.1.0         </span></span>
 <span><span class="co">#&gt; [29] htmlwidgets_1.6.4</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -570,7 +558,7 @@ site</a></p></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

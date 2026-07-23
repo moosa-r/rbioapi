@@ -22,9 +22,9 @@ rba_panther_ortholog(
 
 - genes:
 
-  Character vector of genes identifiers with maximum length of 10 or
-  only one if seq_pos is supplied. Can be any of: Ensemble gene ID,
-  Ensemble protein ID, Ensemble transcript ID, Entrez gene ID, gene
+  Character or numeric vector of gene identifiers with maximum length of
+  10, or only one if `seq_pos` is supplied. Can be any of: Ensembl gene
+  ID, Ensembl protein ID, Ensembl transcript ID, Entrez gene ID, gene
   symbol, NCBI GI, HGNC ID, International protein index ID, NCBI UniGene
   ID, UniProt accession and/or UniProt ID.
 
@@ -76,12 +76,9 @@ https://www.pantherdb.org/services/oai/pantherdb/ortholog/homologpos"
 
 ## References
 
-- Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills,
-  Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER
-  version 16: a revised family classification, tree-based classification
-  tool, enhancer regions and extensive API, Nucleic Acids Research,
-  Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
-  https://doi.org/10.1093/nar/gkaa1106
+- Thomas PD, Ebert D, Muruganujan A, Mushayahama T, Albou L-P,
+  Mi H. (2022) PANTHER: Making genome-scale phylogenetics accessible to
+  all. Protein Science, 31(1), 8–22. https://doi.org/10.1002/pro.4218
 
 - [PANTHER Services
   Details](https://www.pantherdb.org/services/details.jsp)
@@ -94,6 +91,7 @@ https://www.pantherdb.org/services/oai/pantherdb/ortholog/homologpos"
 Other "PANTHER":
 [`rba_panther_enrich()`](https://rbioapi.moosa-r.com/reference/rba_panther_enrich.md),
 [`rba_panther_family()`](https://rbioapi.moosa-r.com/reference/rba_panther_family.md),
+[`rba_panther_genome()`](https://rbioapi.moosa-r.com/reference/rba_panther_genome.md),
 [`rba_panther_homolog()`](https://rbioapi.moosa-r.com/reference/rba_panther_homolog.md),
 [`rba_panther_info()`](https://rbioapi.moosa-r.com/reference/rba_panther_info.md),
 [`rba_panther_mapping()`](https://rbioapi.moosa-r.com/reference/rba_panther_mapping.md),

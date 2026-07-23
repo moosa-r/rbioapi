@@ -21,6 +21,7 @@
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_enrichr_add_list.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_enrichr_enrich.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_enrichr_gene_map.html</loc></url>
+<url><loc>https://rbioapi.moosa-r.com/reference/rba_enrichr_gene_sets.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_enrichr_libs.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_enrichr_view_list.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_jaspar_collections.html</loc></url>
@@ -47,6 +48,7 @@
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_pages.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_panther_enrich.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_panther_family.html</loc></url>
+<url><loc>https://rbioapi.moosa-r.com/reference/rba_panther_genome.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_panther_homolog.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_panther_info.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_panther_mapping.html</loc></url>

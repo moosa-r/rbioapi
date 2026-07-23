@@ -1,9 +1,9 @@
 # List matrix profile versions associated with a base ID
 
-Since JASPAR release 2010, the matrix profiles are versioned; So, a
-matrix profile Identifier has "base_id.version" naming schema. Using
-this function you can retrieve a list of matrix profiles associated with
-a base (stable) ID.
+Since JASPAR release 2010, matrix profiles have been versioned. A matrix
+profile identifier follows a "base_id.version" naming scheme. Using this
+function, you can retrieve a list of matrix profiles associated with a
+base (stable) ID.
 
 ## Usage
 
@@ -15,15 +15,15 @@ rba_jaspar_matrix_versions(base_id, order = NULL, ...)
 
 - base_id:
 
-  Character: A base (stable) Identifier. A matrix profile identifier has
-  "base_id.version" naming schema
+  Character: A base (stable) identifier. A matrix profile identifier
+  follows a "base_id.version" naming scheme.
 
 - order:
 
   Character: A character string or a vector of character strings of
   field names that will be used to order the results.  
-  Providing multiple field names is supported. You can also use prefix
-  "-" before a field name to indicate reverse ordering.
+  Providing multiple field names is supported. You can also use the
+  prefix "-" before a field name to indicate reverse ordering.
 
 - ...:
 
@@ -33,7 +33,7 @@ rba_jaspar_matrix_versions(base_id, order = NULL, ...)
 
 ## Value
 
-A data frame of matrix profiles' versions information.
+A data frame with information on the matrix profile versions.
 
 ## Corresponding API Resources
 
@@ -41,12 +41,9 @@ A data frame of matrix profiles' versions information.
 
 ## References
 
-- Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R, Castro-Mondragon
-  JA, Ferenc K, Kumar V, Lemma RB, Lucas J, Chèneby J, Baranasic D, Khan
-  A, Fornes O, Gundersen S, Johansen M, Hovig E, Lenhard B, Sandelin A,
-  Wasserman WW, Parcy F, Mathelier A JASPAR 2024: 20th anniversary of
-  the open-access database of transcription factor binding profiles
-  Nucleic Acids Res. in_press; doi: 10.1093/nar/gkad1059
+- Baydar Ovek D, et al. JASPAR 2026: expansion of transcription factor
+  binding profiles and integration of deep learning models. Nucleic
+  Acids Res. 2026;54(D1):D184-D193; doi: 10.1093/nar/gkaf1209
 
 - Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR data
   from any programming language. Bioinformatics, 2017, doi:

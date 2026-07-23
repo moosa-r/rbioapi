@@ -1,8 +1,8 @@
-# Get a TF flexible models (TFFMs) information
+# Get information about a TF flexible model (TFFM)
 
-Using this function you can retrieve details and annotations of
-Transcription Factor flexible models (TFFMs) associated with a TFFM ID.
-If a base ID (i.e. without version suffix) was supplied, the latest
+Using this function, you can retrieve details and annotations for the
+transcription factor flexible model (TFFM) associated with a TFFM ID. If
+a base ID (i.e., without a version suffix) is supplied, the latest
 version will be returned.
 
 ## Usage
@@ -15,7 +15,7 @@ rba_jaspar_tffm(tffm_id, ...)
 
 - tffm_id:
 
-  Character: A TF flexible model (TFFM) Identifier.
+  Character: A TF flexible model (TFFM) identifier.
 
 - ...:
 
@@ -29,16 +29,13 @@ A list that contains the TFFM's information and annotations.
 
 ## Corresponding API Resources
 
-"GET https://jaspar.elixir.no/api/v1/fttm/{tffm_id}/"
+"GET https://jaspar.elixir.no/api/v1/tffm/{tffm_id}/"
 
 ## References
 
-- Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R, Castro-Mondragon
-  JA, Ferenc K, Kumar V, Lemma RB, Lucas J, Chèneby J, Baranasic D, Khan
-  A, Fornes O, Gundersen S, Johansen M, Hovig E, Lenhard B, Sandelin A,
-  Wasserman WW, Parcy F, Mathelier A JASPAR 2024: 20th anniversary of
-  the open-access database of transcription factor binding profiles
-  Nucleic Acids Res. in_press; doi: 10.1093/nar/gkad1059
+- Baydar Ovek D, et al. JASPAR 2026: expansion of transcription factor
+  binding profiles and integration of deep learning models. Nucleic
+  Acids Res. 2026;54(D1):D184-D193; doi: 10.1093/nar/gkaf1209
 
 - Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR data
   from any programming language. Bioinformatics, 2017, doi:

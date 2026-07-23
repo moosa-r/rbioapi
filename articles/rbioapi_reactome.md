@@ -49,6 +49,7 @@ that the function’s arguments correspond to what would you choose in the
 webpage’s wizard.
 
 ``` r
+
 ## 1 We create a simple vector with our genes
 genes <- c(
   "p53", "BRCA1", "cdk2", "Q99835", "CDC42", "CDK1", "KIF23", "PLK1", "RAC2",
@@ -70,8 +71,8 @@ str(analyzed, 1)
 #>  $ summary            :List of 7
 #>  $ expression         :List of 1
 #>  $ identifiersNotFound: int 1
-#>  $ pathwaysFound      : int 81
-#>  $ pathways           :'data.frame': 81 obs. of  19 variables:
+#>  $ pathwaysFound      : int 80
+#>  $ pathways           :'data.frame': 80 obs. of  19 variables:
 #>  $ resourceSummary    :'data.frame': 3 obs. of  3 variables:
 #>  $ speciesSummary     :'data.frame': 1 obs. of  5 variables:
 #>  $ warnings           : list()
@@ -97,6 +98,7 @@ and
 [`rba_reactome_analysis_download()`](https://rbioapi.moosa-r.com/reference/rba_reactome_analysis_download.md):
 
 ``` r
+
 # download a full pdf report
 rba_reactome_analysis_pdf(
   token = analyzed$summary$token,
@@ -116,6 +118,7 @@ can upload the JSON file you have downloaded using
 `rba_reactome_analysis_download` and get a token for that:
 
 ``` r
+
 re_uploaded <- rba_reactome_analysis_import(input = "reactome_results.json")
 ```
 
@@ -174,6 +177,7 @@ query. You can use a vector of inputs, the only limitation is that when
 you supply more than one ID, you cannot have `enhanced = TRUE`.
 
 ``` r
+
 ## 1 query a pathway Entry
 pathway <- rba_reactome_query(
   ids = "R-HSA-109581",
@@ -194,9 +198,9 @@ str(pathway, 2)
 #>   ..$ className  : chr "InstanceEdit"
 #>   ..$ schemaClass: chr "InstanceEdit"
 #>  $ modified           :List of 6
-#>   ..$ dbId       : int 11082479
-#>   ..$ displayName: chr "Weiser, Joel, 2025-11-15"
-#>   ..$ dateTime   : chr "2025-11-15 09:17:55"
+#>   ..$ dbId       : int 11116865
+#>   ..$ displayName: chr "Weiser, Joel, 2026-06-12"
+#>   ..$ dateTime   : chr "2026-06-12 07:49:47"
 #>   ..$ note       : chr "Inserted by org.reactome.orthoinference"
 #>   ..$ className  : chr "InstanceEdit"
 #>   ..$ schemaClass: chr "InstanceEdit"
@@ -212,7 +216,7 @@ str(pathway, 2)
 #>  $ edited             :List of 1
 #>   ..$ :List of 5
 #>  $ eventOf            :List of 1
-#>   ..$ :List of 18
+#>   ..$ :List of 19
 #>  $ figure             :List of 1
 #>   ..$ :List of 5
 #>  $ goBiologicalProcess:List of 9
@@ -302,6 +306,7 @@ str(pathway, 2)
 ```
 
 ``` r
+
 ## 1 query a protein Entry
 protein <- rba_reactome_query(
   ids = 66247,
@@ -321,8 +326,8 @@ str(protein, 1)
 #>  $ otherIdentifier    :List of 119
 #>  $ url                : chr "http://purl.uniprot.org/uniprot/P25942-1"
 #>  $ moleculeType       : chr "Protein"
-#>  $ crossReference     :List of 33
-#>  $ referenceDatabase  :List of 8
+#>  $ crossReference     :List of 38
+#>  $ referenceDatabase  :List of 9
 #>  $ physicalEntity     :List of 1
 #>  $ checksum           : chr "BC8776EC2C4A5680"
 #>  $ comment            :List of 1
@@ -355,6 +360,7 @@ place? You can use `rba_reactome_xref` to map any cross-reference
 (external) IDs to Reactome IDs.
 
 ``` r
+
 ## 1 We Supply HGNC ID to find what is the corresponding database ID in Reactome
 xref_protein <- rba_reactome_xref("CD40")
 
@@ -391,6 +397,7 @@ resource. Using `rba_reactome_mapping` you can find the Reactome
 pathways or reactions which include your external ID:
 
 ``` r
+
 ## 1 Again, consider CD40 protein:
 xref_mapping <- rba_reactome_mapping(
   id = "CD40",
@@ -551,9 +558,9 @@ To cite rbioapi:
 
 ## Session info
 
-    #> R version 4.5.2 (2025-10-31)
+    #> R version 4.6.1 (2026-06-24)
     #> Platform: x86_64-pc-linux-gnu
-    #> Running under: Ubuntu 24.04.3 LTS
+    #> Running under: Ubuntu 24.04.4 LTS
     #> 
     #> Matrix products: default
     #> BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -575,11 +582,11 @@ To cite rbioapi:
     #> [1] rbioapi_0.8.3
     #> 
     #> loaded via a namespace (and not attached):
-    #>  [1] httr_1.4.7        cli_3.6.5         knitr_1.51        rlang_1.1.7      
-    #>  [5] xfun_0.56         otel_0.2.0        textshaping_1.0.4 jsonlite_2.0.0   
-    #>  [9] DT_0.34.0         htmltools_0.5.9   ragg_1.5.0        sass_0.4.10      
-    #> [13] rmarkdown_2.30    crosstalk_1.2.2   evaluate_1.0.5    jquerylib_0.1.4  
-    #> [17] fastmap_1.2.0     yaml_2.3.12       lifecycle_1.0.5   compiler_4.5.2   
-    #> [21] fs_1.6.6          htmlwidgets_1.6.4 systemfonts_1.3.1 digest_0.6.39    
-    #> [25] R6_2.6.1          curl_7.0.0        magrittr_2.0.4    bslib_0.9.0      
-    #> [29] tools_4.5.2       pkgdown_2.2.0     cachem_1.1.0      desc_1.4.3
+    #>  [1] httr_1.4.8        cli_3.6.6         knitr_1.51        rlang_1.3.0      
+    #>  [5] xfun_0.60         otel_0.2.0        textshaping_1.0.5 jsonlite_2.0.0   
+    #>  [9] DT_0.34.0         htmltools_0.5.9   ragg_1.5.2        sass_0.4.10      
+    #> [13] rmarkdown_2.31    crosstalk_1.2.2   evaluate_1.0.5    jquerylib_0.1.4  
+    #> [17] fastmap_1.2.0     yaml_2.3.12       lifecycle_1.0.5   compiler_4.6.1   
+    #> [21] fs_2.1.0          htmlwidgets_1.6.4 systemfonts_1.3.2 digest_0.6.39    
+    #> [25] R6_2.6.1          curl_7.1.0        magrittr_2.0.5    bslib_0.11.0     
+    #> [29] tools_4.6.1       pkgdown_2.2.1     cachem_1.1.0      desc_1.4.3

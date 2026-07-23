@@ -38,6 +38,7 @@ identifiers, it is recommended that you first map your IDs to STRING IDs
 before using them in other rbioapi STRING functions.
 
 ``` r
+
 ## 1 We create a variable with our genes' NCBI IDs
 proteins <- c(
   "p53", "BRCA1", "cdk2", "Q99835", "CDC42","CDK1","KIF23",
@@ -51,6 +52,7 @@ proteins_mapped_df <- rba_string_map_ids(ids = proteins, species = 9606)
 ```
 
 ``` r
+
 
 ## 3 What we need and will use for the rest of this vignette is the `stringId` column
 proteins_mapped <- proteins_mapped_df$stringId
@@ -69,6 +71,7 @@ See the ‘values’ section `rba_string_interactions_network` function’s
 manual for information on the returned columns.
 
 ``` r
+
 int_net <- rba_string_interactions_network(
   ids = proteins_mapped,
   species = 9606,
@@ -87,6 +90,7 @@ which interact with our protein(s)?
 To do that, we can use `rba_string_interaction_partners`:
 
 ``` r
+
 ## Although we supply only one protein ID here (CD40 protein), you can provide a vector of proteins as the input
 int_partners <- rba_string_interaction_partners(
   ids = "9606.ENSP00000361359",
@@ -106,6 +110,7 @@ services. `rba_string_network_image` function is very flexible and you
 have a variety of options; see the function’s manual.
 
 ``` r
+
 ## Example 1:
 graph_ppi1 <- rba_string_network_image(
   ids = proteins_mapped,
@@ -123,6 +128,7 @@ graph_ppi1 <- rba_string_network_image(
 Network images - Example 1
 
 ``` r
+
 ## Example 2:
 graph_ppi2 <- rba_string_network_image(
   ids = proteins_mapped,
@@ -158,6 +164,7 @@ publications, Pfam domains, InterPro domains, and SMART domains.
 ([source](https://version11.string-db.org/help/api/#getting-functional-enrichment "STRING API - Getting functional enrichment")).
 
 ``` r
+
 enriched <- rba_string_enrichment(
   ids = proteins_mapped,
   species = 9606
@@ -170,6 +177,7 @@ below, the enrichment results of each category can be found as the
 returned list’s elements.
 
 ``` r
+
 str(enriched, max.level = 1)
 #> List of 14
 #>  $ COMPARTMENTS     :'data.frame':   25 obs. of  10 variables:
@@ -211,6 +219,7 @@ function’s manual for detailed instructions. Here we perform the exact
 enrichment analysis done above, and retrieve a plot of the results.
 
 ``` r
+
 graph_enrich <- rba_string_enrichment_image(
   ids = proteins_mapped,
   species = 9606,
@@ -236,6 +245,7 @@ paper](https://doi.org/10.1093/nar/gks1094 "STRING v9.1: protein-protein interac
 for more information.
 
 ``` r
+
 rba_string_enrichment_ppi(
   ids = proteins_mapped,
   species = 9606
@@ -269,6 +279,7 @@ without performing enrichment analysis and retrieving just the
 significant portion.
 
 ``` r
+
 annotations <- rba_string_annotations(
   ids = "9606.ENSP00000269305",
   species = 9606
@@ -329,9 +340,9 @@ To cite rbioapi:
 
 ## Session info
 
-    #> R version 4.5.2 (2025-10-31)
+    #> R version 4.6.1 (2026-06-24)
     #> Platform: x86_64-pc-linux-gnu
-    #> Running under: Ubuntu 24.04.3 LTS
+    #> Running under: Ubuntu 24.04.4 LTS
     #> 
     #> Matrix products: default
     #> BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -353,12 +364,12 @@ To cite rbioapi:
     #> [1] rbioapi_0.8.3
     #> 
     #> loaded via a namespace (and not attached):
-    #>  [1] httr_1.4.7        cli_3.6.5         knitr_1.51        rlang_1.1.7      
-    #>  [5] xfun_0.56         otel_0.2.0        png_0.1-8         textshaping_1.0.4
-    #>  [9] jsonlite_2.0.0    DT_0.34.0         htmltools_0.5.9   ragg_1.5.0       
-    #> [13] sass_0.4.10       rmarkdown_2.30    grid_4.5.2        crosstalk_1.2.2  
+    #>  [1] httr_1.4.8        cli_3.6.6         knitr_1.51        rlang_1.3.0      
+    #>  [5] xfun_0.60         otel_0.2.0        png_0.1-9         textshaping_1.0.5
+    #>  [9] jsonlite_2.0.0    DT_0.34.0         htmltools_0.5.9   ragg_1.5.2       
+    #> [13] sass_0.4.10       rmarkdown_2.31    grid_4.6.1        crosstalk_1.2.2  
     #> [17] evaluate_1.0.5    jquerylib_0.1.4   fastmap_1.2.0     yaml_2.3.12      
-    #> [21] lifecycle_1.0.5   compiler_4.5.2    fs_1.6.6          htmlwidgets_1.6.4
-    #> [25] systemfonts_1.3.1 digest_0.6.39     R6_2.6.1          curl_7.0.0       
-    #> [29] magrittr_2.0.4    bslib_0.9.0       tools_4.5.2       pkgdown_2.2.0    
+    #> [21] lifecycle_1.0.5   compiler_4.6.1    fs_2.1.0          htmlwidgets_1.6.4
+    #> [25] systemfonts_1.3.2 digest_0.6.39     R6_2.6.1          curl_7.1.0       
+    #> [29] magrittr_2.0.5    bslib_0.11.0      tools_4.6.1       pkgdown_2.2.1    
     #> [33] cachem_1.1.0      desc_1.4.3

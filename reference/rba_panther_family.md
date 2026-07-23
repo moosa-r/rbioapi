@@ -46,18 +46,15 @@ information.
 
 ## Corresponding API Resources
 
-"GET https://www.pantherdb.org/services/oai/pantherdb/familyortholog"  
-"GET https://www.pantherdb.org/services/oai/pantherdb/familymsa"  
-"GET https://www.pantherdb.org/services/oai/pantherdb/treeinfo"
+"POST https://www.pantherdb.org/services/oai/pantherdb/familyortholog"  
+"POST https://www.pantherdb.org/services/oai/pantherdb/familymsa"  
+"POST https://www.pantherdb.org/services/oai/pantherdb/treeinfo"
 
 ## References
 
-- Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills,
-  Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER
-  version 16: a revised family classification, tree-based classification
-  tool, enhancer regions and extensive API, Nucleic Acids Research,
-  Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
-  https://doi.org/10.1093/nar/gkaa1106
+- Thomas PD, Ebert D, Muruganujan A, Mushayahama T, Albou L-P,
+  Mi H. (2022) PANTHER: Making genome-scale phylogenetics accessible to
+  all. Protein Science, 31(1), 8–22. https://doi.org/10.1002/pro.4218
 
 - [PANTHER Services
   Details](https://www.pantherdb.org/services/details.jsp)
@@ -69,6 +66,7 @@ information.
 
 Other "PANTHER":
 [`rba_panther_enrich()`](https://rbioapi.moosa-r.com/reference/rba_panther_enrich.md),
+[`rba_panther_genome()`](https://rbioapi.moosa-r.com/reference/rba_panther_genome.md),
 [`rba_panther_homolog()`](https://rbioapi.moosa-r.com/reference/rba_panther_homolog.md),
 [`rba_panther_info()`](https://rbioapi.moosa-r.com/reference/rba_panther_info.md),
 [`rba_panther_mapping()`](https://rbioapi.moosa-r.com/reference/rba_panther_mapping.md),

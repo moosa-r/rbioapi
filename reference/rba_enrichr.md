@@ -107,7 +107,7 @@ following order:
 "POST https://maayanlab.cloud/Enrichr/addList"  
 "POST https://maayanlab.cloud/speedrichr/api/addList"  
 "POST https://maayanlab.cloud/speedrichr/api/addbackground"  
-"GET https://maayanlab.cloud/Enrichr/enrich"  
+"GET https://maayanlab.cloud/Enrichr/export"  
 "POST https://maayanlab.cloud/speedrichr/api/backgroundenrich"
 
 ## References
@@ -142,6 +142,7 @@ Other "Enrichr":
 [`rba_enrichr_add_list()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_add_list.md),
 [`rba_enrichr_enrich()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_enrich.md),
 [`rba_enrichr_gene_map()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_gene_map.md),
+[`rba_enrichr_gene_sets()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_gene_sets.md),
 [`rba_enrichr_libs()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_libs.md),
 [`rba_enrichr_view_list()`](https://rbioapi.moosa-r.com/reference/rba_enrichr_view_list.md)
 

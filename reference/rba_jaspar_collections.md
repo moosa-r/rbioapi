@@ -6,15 +6,15 @@ you can retrieve a list of available collections in a JASPAR release.
 ## Usage
 
 ``` r
-rba_jaspar_collections(release = 2024, ...)
+rba_jaspar_collections(release = 2026, ...)
 ```
 
 ## Arguments
 
 - release:
 
-  Numeric: (default = 2024) Which JASPAR database release to use?
-  Available options are: 2024, 2022, 2020, 2018, 2016, and 2014.
+  Numeric: (default = 2026) Which JASPAR database release to use?
+  Available options are: 2026, 2024, 2022, 2020, 2018, 2016, and 2014.
 
 - ...:
 
@@ -32,12 +32,9 @@ A data frame with collections' names and URLs.
 
 ## References
 
-- Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R, Castro-Mondragon
-  JA, Ferenc K, Kumar V, Lemma RB, Lucas J, Chèneby J, Baranasic D, Khan
-  A, Fornes O, Gundersen S, Johansen M, Hovig E, Lenhard B, Sandelin A,
-  Wasserman WW, Parcy F, Mathelier A JASPAR 2024: 20th anniversary of
-  the open-access database of transcription factor binding profiles
-  Nucleic Acids Res. in_press; doi: 10.1093/nar/gkad1059
+- Baydar Ovek D, et al. JASPAR 2026: expansion of transcription factor
+  binding profiles and integration of deep learning models. Nucleic
+  Acids Res. 2026;54(D1):D184-D193; doi: 10.1093/nar/gkaf1209
 
 - Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR data
   from any programming language. Bioinformatics, 2017, doi:
@@ -67,6 +64,6 @@ Other "JASPAR":
 
 ``` r
 # \donttest{
-rba_jaspar_collections(release = 2024)
+rba_jaspar_collections(release = 2026)
 # }
 ```

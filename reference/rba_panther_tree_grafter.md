@@ -15,7 +15,7 @@ rba_panther_tree_grafter(protein_seq, target_organisms = NULL, ...)
 - protein_seq:
 
   A character string with the protein's sequence. Maximum allowed
-  sequence length is 50kb.
+  sequence length is 50,000 characters.
 
 - target_organisms:
 
@@ -44,16 +44,13 @@ Ontology terms and other annotations, Bioinformatics, Volume 35, Issue
 
 ## Corresponding API Resources
 
-"GET https://www.pantherdb.org/services/oai/pantherdb/graftsequence"
+"POST https://www.pantherdb.org/services/oai/pantherdb/graftsequence"
 
 ## References
 
-- Huaiyu Mi, Dustin Ebert, Anushya Muruganujan, Caitlin Mills,
-  Laurent-Philippe Albou, Tremayne Mushayamaha, Paul D Thomas, PANTHER
-  version 16: a revised family classification, tree-based classification
-  tool, enhancer regions and extensive API, Nucleic Acids Research,
-  Volume 49, Issue D1, 8 January 2021, Pages D394–D403,
-  https://doi.org/10.1093/nar/gkaa1106
+- Thomas PD, Ebert D, Muruganujan A, Mushayahama T, Albou L-P,
+  Mi H. (2022) PANTHER: Making genome-scale phylogenetics accessible to
+  all. Protein Science, 31(1), 8–22. https://doi.org/10.1002/pro.4218
 
 - [PANTHER Services
   Details](https://www.pantherdb.org/services/details.jsp)
@@ -66,6 +63,7 @@ Ontology terms and other annotations, Bioinformatics, Volume 35, Issue
 Other "PANTHER":
 [`rba_panther_enrich()`](https://rbioapi.moosa-r.com/reference/rba_panther_enrich.md),
 [`rba_panther_family()`](https://rbioapi.moosa-r.com/reference/rba_panther_family.md),
+[`rba_panther_genome()`](https://rbioapi.moosa-r.com/reference/rba_panther_genome.md),
 [`rba_panther_homolog()`](https://rbioapi.moosa-r.com/reference/rba_panther_homolog.md),
 [`rba_panther_info()`](https://rbioapi.moosa-r.com/reference/rba_panther_info.md),
 [`rba_panther_mapping()`](https://rbioapi.moosa-r.com/reference/rba_panther_mapping.md),

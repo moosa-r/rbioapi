@@ -1,8 +1,8 @@
 # Get information about JASPAR database releases
 
-If a release number was supplied, this function will return the details
-of that release. Otherwise, if the function was called without "release"
-argument, a list of all JASPAR database releases will be returned.
+If a release number is supplied, this function returns the details of
+that release. Otherwise, when called without the `release_number`
+argument, it returns a list of all JASPAR database releases.
 
 ## Usage
 
@@ -14,9 +14,9 @@ rba_jaspar_releases(release_number = NULL, ...)
 
 - release_number:
 
-  Numeric: Which JASPAR database release number information's to
-  retrieve? If left NULL (the default), a list of all JASPAR database
-  releases will be returned. Available options are 1 to 8.
+  Numeric: Which JASPAR database release number should be retrieved? If
+  left NULL (the default), a list of all JASPAR database releases will
+  be returned. Available options are 1 to 11.
 
 - ...:
 
@@ -36,12 +36,9 @@ details of a particular release.
 
 ## References
 
-- Rauluseviciute I, Riudavets-Puig R, Blanc-Mathieu R, Castro-Mondragon
-  JA, Ferenc K, Kumar V, Lemma RB, Lucas J, Chèneby J, Baranasic D, Khan
-  A, Fornes O, Gundersen S, Johansen M, Hovig E, Lenhard B, Sandelin A,
-  Wasserman WW, Parcy F, Mathelier A JASPAR 2024: 20th anniversary of
-  the open-access database of transcription factor binding profiles
-  Nucleic Acids Res. in_press; doi: 10.1093/nar/gkad1059
+- Baydar Ovek D, et al. JASPAR 2026: expansion of transcription factor
+  binding profiles and integration of deep learning models. Nucleic
+  Acids Res. 2026;54(D1):D184-D193; doi: 10.1093/nar/gkaf1209
 
 - Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR data
   from any programming language. Bioinformatics, 2017, doi:
@@ -72,6 +69,6 @@ Other "JASPAR":
 ``` r
 # \donttest{
 rba_jaspar_releases()
-rba_jaspar_releases(7)
+rba_jaspar_releases(11)
 # }
 ```
