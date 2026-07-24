@@ -898,11 +898,14 @@
               f, perl = TRUE)
     )
     req <- f_args[!grepl(pattern = "(=)|(\\.\\.\\.)", x = unlist(strsplit(req, ",")))]
-    # Add `na_null = TRUE` to the required function
+    # Add `no_null = TRUE` to required arguments unless explicitly set to `FALSE`
     cons <- lapply(
       X = cons,
       FUN = function(x) {
-        if (x[["arg"]] %in% req) {
+        if (
+          x[["arg"]] %in% req &&
+          !identical(x[["no_null"]], FALSE)
+        ) {
           x[["no_null"]] <- TRUE
         }
         return(x)
