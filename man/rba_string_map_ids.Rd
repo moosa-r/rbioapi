@@ -4,28 +4,32 @@
 \alias{rba_string_map_ids}
 \title{Map a Set of Identifiers to STRING Identifiers}
 \usage{
-rba_string_map_ids(ids, species = NULL, echo_query = FALSE, limit = NULL, ...)
+rba_string_map_ids(ids, species = NULL, echo_query = TRUE, limit = NULL, ...)
 }
 \arguments{
-\item{ids}{Your Common gene/protein Identifier(s) to be mapped.}
+\item{ids}{Your common gene/protein identifier(s) to be mapped.}
 
 \item{species}{Numeric:
 \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
 (Recommended, but optional.)}
 
-\item{echo_query}{(default = \code{FALSE}) Include your input IDs as a column of the
+\item{echo_query}{(default = \code{TRUE}) Include your input IDs as a column of the
 results.}
 
-\item{limit}{Numeric: Maximum number of matches returned per input ID.
-Results are ordered from the best to the worst match.}
+\item{limit}{Deprecated: Retained temporarily for backward compatibility.
+STRING v12 returns only the single best match per input ID, so this
+argument has no effect.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-A data frame with the mapped STRING IDs and other pertinent
-  information.
+A data frame with at most one mapped STRING ID per input ID and
+  other pertinent information. The \code{queryIndex} column contains the
+  zero-based position of each resolved ID in the input vector. Unresolved
+  inputs are omitted; if none can be resolved, a zero-row data frame
+  retaining the response columns is returned.
 }
 \description{
 This function calls STRING's API to map a set of common gene or protein
@@ -35,7 +39,7 @@ This function calls STRING's API to map a set of common gene or protein
 }
 \section{Corresponding API Resources}{
 
- "POST https://string-db.org/api/\{output-format\}/resolve?identifiers=
+ "POST https://string-db.org/api/tsv/get_string_ids?identifiers=
  \{your_identifiers\}&\{optional_parameters\}"
 }
 

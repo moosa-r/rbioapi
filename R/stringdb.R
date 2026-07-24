@@ -6,23 +6,27 @@
 #'   them to STRING identifiers before using other STRING functions.
 #'
 #' @section Corresponding API Resources:
-#'  "POST https://string-db.org/api/\{output-format\}/resolve?identifiers=
+#'  "POST https://string-db.org/api/tsv/get_string_ids?identifiers=
 #'  \{your_identifiers\}&\{optional_parameters\}"
 #'
-#' @param ids Your Common gene/protein Identifier(s) to be mapped.
+#' @param ids Your common gene/protein identifier(s) to be mapped.
 #' @param species Numeric:
 #'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 #'   NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
 #'   (Recommended, but optional.)
-#' @param echo_query (default = \code{FALSE}) Include your input IDs as a column of the
+#' @param echo_query (default = \code{TRUE}) Include your input IDs as a column of the
 #'   results.
-#' @param limit Numeric: Maximum number of matches returned per input ID.
-#'   Results are ordered from the best to the worst match.
+#' @param limit Deprecated: Retained temporarily for backward compatibility.
+#'   STRING v12 returns only the single best match per input ID, so this
+#'   argument has no effect.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A data frame with the mapped STRING IDs and other pertinent
-#'   information.
+#' @return A data frame with at most one mapped STRING ID per input ID and
+#'   other pertinent information. The \code{queryIndex} column contains the
+#'   zero-based position of each resolved ID in the input vector. Unresolved
+#'   inputs are omitted; if none can be resolved, a zero-row data frame
+#'   retaining the response columns is returned.
 #'
 #' @references \itemize{
 #'   \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
@@ -47,7 +51,7 @@
 #' @export
 rba_string_map_ids <- function(ids,
                                species = NULL,
-                               echo_query = FALSE,
+                               echo_query = TRUE,
                                limit = NULL,
                                ...) {
   ## Load Global Options
@@ -58,10 +62,19 @@ rba_string_map_ids <- function(ids,
     cons = list(
       list(arg = "ids", class = c("character", "numeric", "integer"), min_len = 1L),
       list(arg = "species", class = c("numeric", "integer"), len = 1L),
-      list(arg = "echo_query", class = "logical", len = 1L),
-      list(arg = "limit", class = c("numeric", "integer"), len = 1L)
+      list(arg = "echo_query", class = "logical", len = 1L)
     )
   )
+
+  if (!is.null(limit)) {
+    .Deprecated(
+      msg = paste0(
+        "`limit` is deprecated and has no effect because STRING v12 returns ",
+        "only the single best match for each input ID. It will be removed in ",
+        "a future rbioapi release."
+      )
+    )
+  }
 
   .msg(
     "Mapping %s input Identifiers to STRING Identifiers.",
@@ -75,20 +88,41 @@ rba_string_map_ids <- function(ids,
       "caller_identity" = getOption("rba_user_agent")
     ),
     list("species", !is.null(species), species),
-    list("echo_query", echo_query, "1"),
-    list("limit", !is.null(limit), limit)
+    list("echo_query", echo_query, "1")
   )
 
   ## Build Function-Specific Call
+  parser_input <- list(
+    "text->chr",
+    function(parsed_response) {
+      parsed_response <- utils::read.delim(
+        text = parsed_response,
+        header = TRUE,
+        quote = "",
+        comment.char = "",
+        colClasses = "character",
+        na.strings = character(),
+        check.names = FALSE,
+        stringsAsFactors = FALSE
+      )
+
+      if (utils::hasName(parsed_response, "queryIndex")) {
+        parsed_response$queryIndex <- as.integer(parsed_response$queryIndex)
+      }
+
+      return(parsed_response)
+    }
+  )
+
   input_call <- .rba_httr(
     httr = "post",
     url = .rba_stg("string", "url"),
-    path = paste0(.rba_stg("string", "pth"), "json/resolve"),
+    path = paste0(.rba_stg("string", "pth"), "tsv/get_string_ids"),
     body = call_body,
     encode = "form",
-    accept = "application/json",
-    parser = "json->df",
-    save_to = .rba_file("string_map_ids.json")
+    accept = "text/tab-separated-values",
+    parser = parser_input,
+    save_to = .rba_file("string_map_ids.tsv")
   )
 
   ## Call API
