@@ -23,11 +23,11 @@ BugReports: https://github.com/moosa-r/rbioapi/issues
 Imports:
     httr,
     jsonlite,
+    png,
     utils
 Suggests:
     DT,
     knitr,
-    png,
     rmarkdown,
     testthat (>= 3.0.0)
 VignetteBuilder: 
