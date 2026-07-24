@@ -139,13 +139,23 @@ rba_string_map_ids <- function(ids,
 #' @section Corresponding API Resources:
 #'  "POST https://string-db.org/api/\{output-format\}/network?identifiers=
 #'  \{your_identifiers\}&\{optional_parameters\}"
+#'  \cr "POST https://string-db.org/api/\{output-format\}/network?network_term_id=
+#'  \{your_term\}&\{optional_parameters\}"
 #'
 #' @param ids Your protein ID(s). It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
+#'   \cr Alternatively, you can retrieve the network of proteins annotated with
+#'   a STRING functional term by setting \code{ids = NULL} and supplying
+#'   \code{network_term_id}.
+#' @param network_term_id Character: A functional term identifier (e.g. a Gene
+#'   Ontology, KEGG, or Reactome identifier). Instead of using proteins supplied
+#'   through \code{ids}, STRING constructs the network from proteins annotated
+#'   with the specified term. Set \code{ids = NULL} and supply \code{species}.
 #' @param species Numeric:
 #'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 #'   NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
-#'   (Recommended, but required if your input contains more than 10 unique IDs.)
+#'   Required when using \code{network_term_id}; otherwise recommended, but
+#'   required if your input contains more than 10 unique IDs.
 #' @param image_format Character: One of:\itemize{
 #'   \item "image": PNG image with normal resolution.
 #'   \item "highres_image": High-resolution PNG image.
@@ -226,9 +236,18 @@ rba_string_map_ids <- function(ids,
 #'     image_format = "highres_image",
 #'     save_image = file.path(getwd(), "TP53_network.png"))
 #' }
+#' \dontrun{
+#' rba_string_network_image(
+#'     ids = NULL,
+#'     network_term_id = "GO:0050852",
+#'     species = 9606,
+#'     save_image = FALSE
+#' )
+#' }
 #'
 #' @family "STRING"
-#' @seealso \code{\link{rba_string_map_ids}}
+#' @seealso
+#'   \code{\link{rba_string_map_ids}, \link{rba_string_enrichment}}
 #' @export
 rba_string_network_image <- function(ids,
                                      image_format = "image",
@@ -246,6 +265,7 @@ rba_string_network_image <- function(ids,
                                      flat_nodes = FALSE,
                                      node_labels_center = FALSE,
                                      node_labels_font_size = 12,
+                                     network_term_id = NULL,
                                      ...) {
   ## Load Global Options
   .rba_ext_args(..., ignore_save = TRUE)
@@ -253,7 +273,13 @@ rba_string_network_image <- function(ids,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "ids", class = c("character", "numeric", "integer"), min_len = 1L),
+      list(
+        arg = "ids",
+        class = c("character", "numeric", "integer"),
+        min_len = 1L,
+        no_null = FALSE
+      ),
+      list(arg = "network_term_id", class = "character", len = 1L),
       list(arg = "species", class = c("numeric", "integer"), len = 1L),
       list(
         arg = "image_format", class = "character",
@@ -301,7 +327,31 @@ rba_string_network_image <- function(ids,
         "`save_image` cannot be `NA`."
       ),
       list(
-        quote(length(unique(ids)) > 10 && is.null(species)),
+        quote(!is.null(ids) && !is.null(network_term_id)),
+        paste0(
+          "`ids` and `network_term_id` cannot be supplied together. ",
+          "Set `ids = NULL` when using `network_term_id`."
+        )
+      ),
+      list(
+        quote(is.null(ids) && is.null(network_term_id)),
+        "`network_term_id` must be supplied when `ids = NULL`."
+      ),
+      list(
+        quote(
+          is.null(ids) &&
+            !is.null(network_term_id) &&
+            is.null(species)
+        ),
+        "`species` must be supplied when using `network_term_id`."
+      ),
+      list(
+        quote(
+          !is.null(ids) &&
+            is.null(network_term_id) &&
+            length(unique(ids)) > 10 &&
+            is.null(species)
+        ),
         sprintf(
           "You supplied %s unique IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
           length(unique(ids))
@@ -310,17 +360,25 @@ rba_string_network_image <- function(ids,
     )
   )
 
-  .msg(
-    "Retrieving STRING network image of %s unique input Identifiers.",
-    length(unique(ids))
-  )
+  if (is.null(ids)) {
+    .msg(
+      "Retrieving STRING network image for functional term %s.",
+      network_term_id
+    )
+  } else {
+    .msg(
+      "Retrieving STRING network image of %s unique input Identifiers.",
+      length(unique(ids))
+    )
+  }
 
   ## Build POST API Request's body
   call_body <- .rba_query(
     init = list(
-      "identifiers" = paste(unique(ids), collapse = "%0d"),
       "caller_identity" = getOption("rba_user_agent")
     ),
+    list("identifiers", !is.null(ids), paste(unique(ids), collapse = "%0d")),
+    list("network_term_id", !is.null(network_term_id), network_term_id),
     list("species", !is.null(species), species),
     list("add_color_nodes", !is.null(add_color_nodes), add_color_nodes),
     list("add_white_nodes", !is.null(add_white_nodes), add_white_nodes),
@@ -390,21 +448,31 @@ rba_string_network_image <- function(ids,
 #' @section Corresponding API Resources:
 #'  "POST https://string-db.org/api/\{output-format\}/network?identifiers=
 #'  \{your_identifiers\}&\{optional_parameters\}"
+#'  \cr "POST https://string-db.org/api/\{output-format\}/network?network_term_id=
+#'  \{your_term\}&\{optional_parameters\}"
 #'
 #' @param ids Your protein IDs. It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
+#'   \cr Alternatively, you can retrieve interactions among proteins annotated
+#'   with a STRING functional term by setting \code{ids = NULL} and supplying
+#'   \code{network_term_id}.
+#' @param network_term_id Character: A functional term identifier (e.g. a Gene
+#'   Ontology, KEGG, or Reactome identifier). Instead of using proteins supplied
+#'   through \code{ids}, STRING constructs the network from proteins annotated
+#'   with the specified term. Set \code{ids = NULL} and supply \code{species}.
 #' @param species Numeric:
 #'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 #'   NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
-#'   (Recommended, but required if your input contains more than 10 unique IDs.)
+#'   Required when using \code{network_term_id}; otherwise recommended, but
+#'   required if your input contains more than 10 unique IDs.
 #' @param required_score Numeric (between 0 and 1000): Minimum interaction
 #'   score required for an interaction to be included in the returned network.
 #'   If omitted, STRING applies a network-dependent threshold. Common
 #'   confidence thresholds are 150 (low), 400 (medium), 700 (high), and 900
 #'   (highest).
 #' @param add_nodes Numeric: Number of neighboring proteins to add to the
-#'   network. If omitted, STRING determines the value from the number of input
-#'   IDs:\enumerate{
+#'   network. For identifier-based requests, if omitted, STRING determines the
+#'   value from the number of input IDs:\enumerate{
 #'   \item One ID: STRING adds 10 proteins to retrieve its interaction
 #'   neighborhood.
 #'   \item Multiple IDs: STRING adds no proteins, so only interactions among the
@@ -463,10 +531,19 @@ rba_string_network_image <- function(ids,
 #'     species = 9606,
 #'     add_nodes = 10)
 #' }
+#' \donttest{
+#' rba_string_interactions_network(
+#'     ids = NULL,
+#'     network_term_id = "GO:0050852",
+#'     species = 9606,
+#'     required_score = 900
+#' )
+#' }
 #'
 #' @family "STRING"
 #' @seealso
-#'   \code{\link{rba_string_map_ids}, \link{rba_string_interaction_partners}}
+#'   \code{\link{rba_string_map_ids}, \link{rba_string_interaction_partners},
+#'   \link{rba_string_enrichment}}
 #' @export
 rba_string_interactions_network <- function(ids,
                                             species = NULL,
@@ -474,14 +551,21 @@ rba_string_interactions_network <- function(ids,
                                             add_nodes = NULL,
                                             network_type = "functional",
                                             use_query_labels = FALSE,
-                                            ...) {
+                                            network_term_id = NULL,
+                                             ...) {
   ## Load Global Options
   .rba_ext_args(...)
 
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "ids", class = c("character", "numeric", "integer"), min_len = 1L),
+      list(
+        arg = "ids",
+        class = c("character", "numeric", "integer"),
+        min_len = 1L,
+        no_null = FALSE
+      ),
+      list(arg = "network_term_id", class = "character", len = 1L),
       list(arg = "species", class = c("numeric", "integer"), len = 1L),
       list(
         arg = "required_score",
@@ -506,7 +590,31 @@ rba_string_interactions_network <- function(ids,
     ),
     cond = list(
       list(
-        quote(length(unique(ids)) > 10 && is.null(species)),
+        quote(!is.null(ids) && !is.null(network_term_id)),
+        paste0(
+          "`ids` and `network_term_id` cannot be supplied together. ",
+          "Set `ids = NULL` when using `network_term_id`."
+        )
+      ),
+      list(
+        quote(is.null(ids) && is.null(network_term_id)),
+        "`network_term_id` must be supplied when `ids = NULL`."
+      ),
+      list(
+        quote(
+          is.null(ids) &&
+            !is.null(network_term_id) &&
+            is.null(species)
+        ),
+        "`species` must be supplied when using `network_term_id`."
+      ),
+      list(
+        quote(
+          !is.null(ids) &&
+            is.null(network_term_id) &&
+            length(unique(ids)) > 10 &&
+            is.null(species)
+        ),
         sprintf(
           "You supplied %s unique IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
           length(unique(ids))
@@ -515,17 +623,25 @@ rba_string_interactions_network <- function(ids,
     )
   )
 
-  .msg(
-    "Retrieving STRING Network interaction of %s unique input Identifiers.",
-    length(unique(ids))
-  )
+  if (is.null(ids)) {
+    .msg(
+      "Retrieving STRING network interactions for functional term %s.",
+      network_term_id
+    )
+  } else {
+    .msg(
+      "Retrieving STRING Network interaction of %s unique input Identifiers.",
+      length(unique(ids))
+    )
+  }
 
   ## Build POST API Request's body
   call_body <- .rba_query(
     init = list(
-      "identifiers" = paste(unique(ids), collapse = "%0d"),
       "caller_identity" = getOption("rba_user_agent")
     ),
+    list("identifiers", !is.null(ids), paste(unique(ids), collapse = "%0d")),
+    list("network_term_id", !is.null(network_term_id), network_term_id),
     list("species", !is.null(species), species),
     list("required_score", !is.null(required_score), required_score),
     list("add_nodes", !is.null(add_nodes), add_nodes),
@@ -1084,16 +1200,21 @@ rba_string_enrichment <- function(ids,
 #'   (Recommended, but optional.)
 #' @param allow_pubmed Logical (default = \code{FALSE}): Include PubMed
 #'   annotations. These annotations are excluded by default because many
-#'   publications may be assigned to each protein.
+#'   publications may be assigned to each protein. This argument is ignored
+#'   when \code{only_pubmed = TRUE}.
 #' @param split_df Logical: (default = \code{TRUE}) Split results into a list
 #'   of data frames by \code{category}; otherwise, return one data frame.
+#' @param only_pubmed Logical (default = \code{FALSE}): Return only PubMed
+#'   annotations. This takes precedence over \code{allow_pubmed}.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
 #' @return A data frame in which every row is an assigned term and the columns
 #'   contain the term category, description, number of genes, and other
 #'   pertinent information. If \code{split_df = TRUE}, a list of data frames
-#'   split by category is returned.
+#'   split by category is returned. With \code{only_pubmed = TRUE}, a
+#'   one-element list named \code{PMID} is returned when PubMed annotations are
+#'   available.
 #'
 #' @references \itemize{
 #'   \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
@@ -1113,6 +1234,13 @@ rba_string_enrichment <- function(ids,
 #' \donttest{
 #' rba_string_annotations(ids = "TP53", species = 9606)
 #' }
+#' \dontrun{
+#' rba_string_annotations(
+#'     ids = "TP53",
+#'     species = 9606,
+#'     only_pubmed = TRUE
+#' )
+#' }
 #'
 #' @family "STRING"
 #' @seealso
@@ -1125,6 +1253,7 @@ rba_string_annotations <- function(ids,
                                    species = NULL,
                                    allow_pubmed = FALSE,
                                    split_df = TRUE,
+                                   only_pubmed = FALSE,
                                    ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -1135,7 +1264,22 @@ rba_string_annotations <- function(ids,
       list(arg = "ids", class = c("character", "numeric", "integer"), min_len = 1L),
       list(arg = "species", class = c("numeric", "integer"), len = 1L),
       list(arg = "allow_pubmed", class = "logical", len = 1L),
-      list(arg = "split_df", class = "logical", len = 1L)
+      list(arg = "split_df", class = "logical", len = 1L),
+      list(arg = "only_pubmed", class = "logical", len = 1L)
+    ),
+    cond = list(
+      list(
+        quote(anyNA(c(allow_pubmed, only_pubmed))),
+        "`allow_pubmed` and `only_pubmed` cannot be `NA`."
+      ),
+      list(
+        quote(isTRUE(allow_pubmed) && isTRUE(only_pubmed)),
+        paste0(
+          "`allow_pubmed` is ignored when `only_pubmed = TRUE`; ",
+          "only PubMed annotations will be returned."
+        ),
+        warn = TRUE
+      )
     )
   )
 
@@ -1151,7 +1295,8 @@ rba_string_annotations <- function(ids,
       "caller_identity" = getOption("rba_user_agent")
     ),
     list("species", !is.null(species), species),
-    list("allow_pubmed", allow_pubmed, 1)
+    list("allow_pubmed", allow_pubmed && !only_pubmed, 1),
+    list("only_pubmed", only_pubmed, 1)
   )
 
   ## Build Function-Specific Call

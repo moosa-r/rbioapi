@@ -161,6 +161,24 @@ if (is.data.frame(int_net)) {
 }
 ```
 
+Instead of supplying protein identifiers, you can retrieve the network formed
+by proteins annotated with a STRING functional term. In this mode, set
+`ids = NULL` and supply both `network_term_id` and `species`. For example,
+`GO:0050852` identifies the GO term "T cell receptor signaling pathway":
+
+```{r rba_string_interactions_network_term, eval=FALSE}
+term_net <- rba_string_interactions_network(
+  ids = NULL,
+  network_term_id = "GO:0050852",
+  species = 9606,
+  required_score = 900
+)
+```
+
+Term identifiers can also be obtained from the `term` column returned by
+`rba_string_enrichment()`. The `ids` and `network_term_id` input modes cannot
+be combined.
+
 ------------------------------------------------------------------------
 
 # Get interaction partners of a protein set {#get-interaction-partners-of-a-protein-set}
@@ -201,7 +219,8 @@ if (is.data.frame(int_partners)) {
 
 STRING can render the interaction network as a static image. The
 `rba_string_network_image()` function supports several options for controlling
-the network contents and appearance; see the function manual for details.
+the network contents and appearance; see the function manual for details. It
+also supports the same `network_term_id` input mode described above.
 
 ```{r rba_string_network_image_ex1, fig.show='hide'}
 ## Example 1:
@@ -212,6 +231,18 @@ graph_ppi1 <- rba_string_network_image(
   save_image = FALSE,
   required_score = 500,
   network_flavor = "confidence"
+)
+```
+
+For example, the network for a functional term can be rendered with:
+
+```{r rba_string_network_image_term, eval=FALSE}
+term_image <- rba_string_network_image(
+  ids = NULL,
+  network_term_id = "GO:0050852",
+  species = 9606,
+  required_score = 900,
+  save_image = FALSE
 )
 ```
 
@@ -356,6 +387,18 @@ annotations <- rba_string_annotations(
 )
 
 ## Annotation responses can be large, so the result is not shown here
+```
+
+Set `allow_pubmed = TRUE` to include PubMed annotations with the other
+categories, or set `only_pubmed = TRUE` to retrieve only PubMed annotations.
+`only_pubmed` takes precedence if both arguments are `TRUE`.
+
+```{r rba_string_annotations_pubmed, eval=FALSE}
+pubmed_annotations <- rba_string_annotations(
+  ids = "9606.ENSP00000269305",
+  species = 9606,
+  only_pubmed = TRUE
+)
 ```
 
 ------------------------------------------------------------------------

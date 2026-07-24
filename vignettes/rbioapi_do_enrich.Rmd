@@ -406,7 +406,7 @@ if (utils::hasName(string_enrich, "PMID") && is.data.frame(string_enrich$PMID)) 
 }
 ```
 
-You can retrieve the annotations associated with your input protein(s). The difference here is that no statistical analysis will be performed and the full annotations of your input gene will be returned. Because of potentially unwieldy response, `allow_pubmed` is set fo FALSE by default. Here we set it to TRUE to also retrieve the PubMed paper abstracts that include our gene.
+You can retrieve the annotations associated with your input protein(s). The difference here is that no statistical analysis will be performed and the full annotations of your input gene will be returned. Because of the potentially unwieldy response, `allow_pubmed` is `FALSE` by default. Here we set it to `TRUE` to also retrieve the PubMed publication annotations associated with our gene. To retrieve only PubMed annotations, use `only_pubmed = TRUE`; it takes precedence if both arguments are `TRUE`.
 
 ```{r string_annot, echo=TRUE, message=TRUE}
 string_annot <- rba_string_annotations(
@@ -416,7 +416,7 @@ string_annot <- rba_string_annotations(
 )
 ```
 
-As you can see, Our input gene has a large number of annotations. Let us take a look at the PMID Data Frame, which contains the PubMed Abstract paper terms:
+As you can see, our input gene has a large number of annotations. Let us take a look at the PMID data frame, which contains the PubMed publication annotations:
 
 ```{r string_annot_str, echo=TRUE, message=TRUE}
 str(string_annot, max.level = 1)

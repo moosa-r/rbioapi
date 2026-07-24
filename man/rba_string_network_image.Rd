@@ -21,12 +21,16 @@ rba_string_network_image(
   flat_nodes = FALSE,
   node_labels_center = FALSE,
   node_labels_font_size = 12,
+  network_term_id = NULL,
   ...
 )
 }
 \arguments{
 \item{ids}{Your protein ID(s). It is strongly recommended to supply
-STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
+STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
+\cr Alternatively, you can retrieve the network of proteins annotated with
+a STRING functional term by setting \code{ids = NULL} and supplying
+\code{network_term_id}.}
 
 \item{image_format}{Character: One of:\itemize{
 \item "image": PNG image with normal resolution.
@@ -41,7 +45,8 @@ STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
 \item{species}{Numeric:
 \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
-(Recommended, but required if your input contains more than 10 unique IDs.)}
+Required when using \code{network_term_id}; otherwise recommended, but
+required if your input contains more than 10 unique IDs.}
 
 \item{add_color_nodes}{Numeric: The number of colored nodes (queried proteins
 and first shell of interactors) to be added.}
@@ -89,6 +94,11 @@ on the nodes.}
 \item{node_labels_font_size}{Numeric (between 5 and 50; default = 12):
 Font size of the protein node labels.}
 
+\item{network_term_id}{Character: A functional term identifier (e.g. a Gene
+Ontology, KEGG, or Reactome identifier). Instead of using proteins supplied
+through \code{ids}, STRING constructs the network from proteins annotated
+with the specified term. Set \code{ids = NULL} and supply \code{species}.}
+
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
@@ -105,6 +115,8 @@ This function retrieves a static image of the interaction network among your
 
  "POST https://string-db.org/api/\{output-format\}/network?identifiers=
  \{your_identifiers\}&\{optional_parameters\}"
+ \cr "POST https://string-db.org/api/\{output-format\}/network?network_term_id=
+ \{your_term\}&\{optional_parameters\}"
 }
 
 \examples{
@@ -125,6 +137,14 @@ rba_string_network_image(ids = "9606.ENSP00000269305",
     image_format = "highres_image",
     save_image = file.path(getwd(), "TP53_network.png"))
 }
+\dontrun{
+rba_string_network_image(
+    ids = NULL,
+    network_term_id = "GO:0050852",
+    species = 9606,
+    save_image = FALSE
+)
+}
 
 }
 \references{
@@ -143,7 +163,7 @@ rba_string_network_image(ids = "9606.ENSP00000269305",
   }
 }
 \seealso{
-\code{\link{rba_string_map_ids}}
+\code{\link{rba_string_map_ids}, \link{rba_string_enrichment}}
 
 Other "STRING":
 \code{\link[=rba_string_annotations]{rba_string_annotations()}},

@@ -9,6 +9,7 @@ rba_string_annotations(
   species = NULL,
   allow_pubmed = FALSE,
   split_df = TRUE,
+  only_pubmed = FALSE,
   ...
 )
 }
@@ -23,10 +24,14 @@ NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
 
 \item{allow_pubmed}{Logical (default = \code{FALSE}): Include PubMed
 annotations. These annotations are excluded by default because many
-publications may be assigned to each protein.}
+publications may be assigned to each protein. This argument is ignored
+when \code{only_pubmed = TRUE}.}
 
 \item{split_df}{Logical: (default = \code{TRUE}) Split results into a list
 of data frames by \code{category}; otherwise, return one data frame.}
+
+\item{only_pubmed}{Logical (default = \code{FALSE}): Return only PubMed
+annotations. This takes precedence over \code{allow_pubmed}.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
@@ -35,7 +40,9 @@ arguments manual for more information on available options.}
 A data frame in which every row is an assigned term and the columns
   contain the term category, description, number of genes, and other
   pertinent information. If \code{split_df = TRUE}, a list of data frames
-  split by category is returned.
+  split by category is returned. With \code{only_pubmed = TRUE}, a
+  one-element list named \code{PMID} is returned when PubMed annotations are
+  available.
 }
 \description{
 STRING cross-references proteins with several annotation resources. This
@@ -60,6 +67,13 @@ STRING currently retrieves annotations based on Gene Ontology (GO), UniProt
 \examples{
 \donttest{
 rba_string_annotations(ids = "TP53", species = 9606)
+}
+\dontrun{
+rba_string_annotations(
+    ids = "TP53",
+    species = 9606,
+    only_pubmed = TRUE
+)
 }
 
 }

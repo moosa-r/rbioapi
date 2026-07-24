@@ -11,17 +11,22 @@ rba_string_interactions_network(
   add_nodes = NULL,
   network_type = "functional",
   use_query_labels = FALSE,
+  network_term_id = NULL,
   ...
 )
 }
 \arguments{
 \item{ids}{Your protein IDs. It is strongly recommended to supply
-STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
+STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
+\cr Alternatively, you can retrieve interactions among proteins annotated
+with a STRING functional term by setting \code{ids = NULL} and supplying
+\code{network_term_id}.}
 
 \item{species}{Numeric:
 \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
-(Recommended, but required if your input contains more than 10 unique IDs.)}
+Required when using \code{network_term_id}; otherwise recommended, but
+required if your input contains more than 10 unique IDs.}
 
 \item{required_score}{Numeric (between 0 and 1000): Minimum interaction
 score required for an interaction to be included in the returned network.
@@ -30,8 +35,8 @@ confidence thresholds are 150 (low), 400 (medium), 700 (high), and 900
 (highest).}
 
 \item{add_nodes}{Numeric: Number of neighboring proteins to add to the
-network. If omitted, STRING determines the value from the number of input
-IDs:\enumerate{
+network. For identifier-based requests, if omitted, STRING determines the
+value from the number of input IDs:\enumerate{
 \item One ID: STRING adds 10 proteins to retrieve its interaction
 neighborhood.
 \item Multiple IDs: STRING adds no proteins, so only interactions among the
@@ -45,6 +50,11 @@ interaction or are parts of a complex.}}
 
 \item{use_query_labels}{Logical: (default = \code{FALSE}) Use the names supplied
 in \code{ids} as node labels instead of STRING's default labels.}
+
+\item{network_term_id}{Character: A functional term identifier (e.g. a Gene
+Ontology, KEGG, or Reactome identifier). Instead of using proteins supplied
+through \code{ids}, STRING constructs the network from proteins annotated
+with the specified term. Set \code{ids = NULL} and supply \code{species}.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
@@ -82,6 +92,8 @@ This function returns interactions among the supplied proteins and any
 
  "POST https://string-db.org/api/\{output-format\}/network?identifiers=
  \{your_identifiers\}&\{optional_parameters\}"
+ \cr "POST https://string-db.org/api/\{output-format\}/network?network_term_id=
+ \{your_term\}&\{optional_parameters\}"
 }
 
 \examples{
@@ -97,6 +109,14 @@ rba_string_interactions_network(ids = c("9606.ENSP00000269305",
     "9606.ENSP00000275493"),
     species = 9606,
     add_nodes = 10)
+}
+\donttest{
+rba_string_interactions_network(
+    ids = NULL,
+    network_term_id = "GO:0050852",
+    species = 9606,
+    required_score = 900
+)
 }
 
 }
@@ -116,7 +136,8 @@ rba_string_interactions_network(ids = c("9606.ENSP00000269305",
   }
 }
 \seealso{
-\code{\link{rba_string_map_ids}, \link{rba_string_interaction_partners}}
+\code{\link{rba_string_map_ids}, \link{rba_string_interaction_partners},
+  \link{rba_string_enrichment}}
 
 Other "STRING":
 \code{\link[=rba_string_annotations]{rba_string_annotations()}},
