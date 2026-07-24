@@ -247,7 +247,12 @@ rba_string_map_ids <- function(ids,
 #'
 #' @family "STRING"
 #' @seealso
-#'   \code{\link{rba_string_map_ids}, \link{rba_string_enrichment}}
+#'   \code{
+#'   \link{rba_string_map_ids},
+#'   \link{rba_string_interactions_network},
+#'   \link{rba_string_interaction_partners},
+#'   \link{rba_string_enrichment_ppi}
+#'   }
 #' @export
 rba_string_network_image <- function(ids,
                                      image_format = "image",
@@ -542,8 +547,12 @@ rba_string_network_image <- function(ids,
 #'
 #' @family "STRING"
 #' @seealso
-#'   \code{\link{rba_string_map_ids}, \link{rba_string_interaction_partners},
-#'   \link{rba_string_enrichment}}
+#'   \code{
+#'   \link{rba_string_map_ids},
+#'   \link{rba_string_interaction_partners},
+#'   \link{rba_string_network_image},
+#'   \link{rba_string_enrichment_ppi}
+#'   }
 #' @export
 rba_string_interactions_network <- function(ids,
                                             species = NULL,
@@ -552,7 +561,7 @@ rba_string_interactions_network <- function(ids,
                                             network_type = "functional",
                                             use_query_labels = FALSE,
                                             network_term_id = NULL,
-                                             ...) {
+                                            ...) {
   ## Load Global Options
   .rba_ext_args(...)
 
@@ -734,7 +743,12 @@ rba_string_interactions_network <- function(ids,
 #'
 #' @family "STRING"
 #' @seealso
-#'   \code{\link{rba_string_map_ids}, \link{rba_string_interactions_network}}
+#'   \code{
+#'   \link{rba_string_map_ids},
+#'   \link{rba_string_interactions_network},
+#'   \link{rba_string_network_image},
+#'   \link{rba_string_enrichment_ppi}
+#'   }
 #' @export
 rba_string_interaction_partners <- function(ids,
                                             species = NULL,
@@ -867,7 +881,10 @@ rba_string_interaction_partners <- function(ids,
 #'
 #' @family "STRING"
 #' @seealso
-#'   \code{\link{rba_string_map_ids}, \link{rba_string_homology_inter}}
+#'   \code{
+#'   \link{rba_string_map_ids},
+#'   \link{rba_string_homology_inter}
+#'   }
 #' @export
 rba_string_homology_intra <- function(ids,
                                       species = NULL,
@@ -984,7 +1001,10 @@ rba_string_homology_intra <- function(ids,
 #'
 #' @family "STRING"
 #' @seealso
-#'   \code{\link{rba_string_map_ids}, \link{rba_string_homology_intra}}
+#'   \code{
+#'   \link{rba_string_map_ids},
+#'   \link{rba_string_homology_intra}
+#'   }
 #' @export
 rba_string_homology_inter <- function(ids,
                                       species = NULL,
@@ -1108,9 +1128,11 @@ rba_string_homology_inter <- function(ids,
 #' @family "STRING"
 #' @family "Enrichment/Over-representation"
 #' @seealso
-#'   \code{\link{rba_string_map_ids},
+#'   \code{
+#'   \link{rba_string_map_ids},
 #'   \link{rba_string_annotations},
-#'   \link{rba_string_enrichment_image}
+#'   \link{rba_string_enrichment_image},
+#'   \link{rba_string_functional_terms}
 #'   }
 #' @export
 rba_string_enrichment <- function(ids,
@@ -1244,9 +1266,11 @@ rba_string_enrichment <- function(ids,
 #'
 #' @family "STRING"
 #' @seealso
-#'   \code{\link{rba_string_map_ids},
+#'   \code{
+#'   \link{rba_string_map_ids},
 #'   \link{rba_string_enrichment},
-#'   \link{rba_string_enrichment_image}
+#'   \link{rba_string_enrichment_image},
+#'   \link{rba_string_functional_terms}
 #'   }
 #' @export
 rba_string_annotations <- function(ids,
@@ -1325,6 +1349,108 @@ rba_string_annotations <- function(ids,
   return(final_output)
 }
 
+#' Search STRING Functional Terms
+#'
+#' STRING maps several functional annotation resources onto its proteins. This
+#'   function searches for functional terms using an identifier or descriptive
+#'   text and retrieves the matching terms and their annotated proteins.
+#'
+#' This endpoint supports only one species per query. If multiple functional
+#'   terms match \code{term_text}, STRING returns them in order of relevance,
+#'   with the best match first.
+#'   \cr The complete number of annotated proteins is reported in
+#'   \code{proteinCount}.
+#'
+#' @section Corresponding API Resources:
+#'  "POST https://string-db.org/api/\{output-format\}/functional_terms?term_text=
+#'  \{your_term\}&\{optional_parameters\}"
+#'
+#' @param term_text Character: A functional term identifier or descriptive text
+#'   used to match one or more functional terms.
+#' @param species Numeric:
+#'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
+#'   NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
+#'
+#' @return A data frame in which every row is a matching functional term and
+#'   the columns contain the term category, identifier, description, number of
+#'   annotated proteins, preferred protein names, and STRING protein IDs.
+#'   \code{preferredNames} and \code{stringIds} are returned as list-columns.
+#'
+#' @references \itemize{
+#'   \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
+#'    Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang,
+#'    Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian
+#'    von Mering, The STRING database in 2023: protein–protein association
+#'    networks and functional enrichment analyses for any sequenced genome of
+#'    interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023,
+#'    Pages D638–D646, https://doi.org/10.1093/nar/gkac1000
+#'   \item \href{https://string-db.org/help/api/}{STRING API Documentation}
+#'   \item
+#'   \href{https://string-db.org/cgi/about?footer_active_subpage=references}{
+#'   Citations note on STRING website}
+#'   }
+#'
+#' @examples
+#' \donttest{
+#' rba_string_functional_terms(
+#'     term_text = "T cell receptor signaling pathway",
+#'     species = 9606
+#' )
+#' }
+#'
+#' @family "STRING"
+#' @seealso
+#'   \code{
+#'   \link{rba_string_annotations},
+#'   \link{rba_string_enrichment},
+#'   \link{rba_string_enrichment_image}
+#'   }
+#' @export
+rba_string_functional_terms <- function(term_text,
+                                        species,
+                                        ...) {
+  ## Load Global Options
+  .rba_ext_args(...)
+
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(arg = "term_text", class = "character", len = 1L),
+      list(arg = "species", class = c("numeric", "integer"), len = 1L)
+    )
+  )
+
+  .msg(
+    "Retrieving STRING functional terms matching '%s'.",
+    term_text
+  )
+
+  ## Build POST API Request's body
+  call_body <- list(
+    "term_text" = term_text,
+    "species" = species,
+    "caller_identity" = getOption("rba_user_agent")
+  )
+
+  ## Build Function-Specific Call
+  input_call <- .rba_httr(
+    httr = "post",
+    url = .rba_stg("string", "url"),
+    path = paste0(.rba_stg("string", "pth"), "json/functional_terms"),
+    body = call_body,
+    encode = "form",
+    accept = "application/json",
+    parser = "json->df",
+    save_to = .rba_file("string_functional_terms.json")
+  )
+
+  ## Call API
+  final_output <- .rba_skeleton(input_call)
+  return(final_output)
+}
+
 
 #' Get Protein-Protein Interaction Enrichment
 #'
@@ -1377,7 +1503,13 @@ rba_string_annotations <- function(ids,
 #' }
 #'
 #' @family "STRING"
-#' @seealso \code{\link{rba_string_map_ids}}
+#' @seealso
+#'   \code{
+#'   \link{rba_string_map_ids},
+#'   \link{rba_string_interactions_network},
+#'   \link{rba_string_interaction_partners},
+#'   \link{rba_string_network_image}
+#'   }
 #' @export
 rba_string_enrichment_ppi <- function(ids,
                                       species = NULL,
@@ -1628,9 +1760,11 @@ rba_string_version <- function(...) {
 #' @family "STRING"
 #' @family "Enrichment/Over-representation"
 #' @seealso
-#'   \code{\link{rba_string_map_ids},
+#'   \code{
+#'   \link{rba_string_map_ids},
 #'   \link{rba_string_enrichment},
-#'   \link{rba_string_annotations}
+#'   \link{rba_string_annotations},
+#'   \link{rba_string_functional_terms}
 #'   }
 #' @export
 rba_string_enrichment_image <- function(ids,

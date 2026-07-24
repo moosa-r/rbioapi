@@ -163,8 +163,19 @@ if (is.data.frame(int_net)) {
 
 Instead of supplying protein identifiers, you can retrieve the network formed
 by proteins annotated with a STRING functional term. In this mode, set
-`ids = NULL` and supply both `network_term_id` and `species`. For example,
-`GO:0050852` identifies the GO term "T cell receptor signaling pathway":
+`ids = NULL` and supply both `network_term_id` and `species`.
+`rba_string_functional_terms()` can search for functional terms using either
+an identifier or descriptive text:
+
+```{r rba_string_functional_terms, eval=FALSE}
+tcr_terms <- rba_string_functional_terms(
+  term_text = "T cell receptor signaling pathway",
+  species = 9606
+)
+```
+
+The first match for this search is `GO:0050852`, which identifies the GO term
+"T cell receptor signaling pathway":
 
 ```{r rba_string_interactions_network_term, eval=FALSE}
 term_net <- rba_string_interactions_network(
@@ -175,9 +186,9 @@ term_net <- rba_string_interactions_network(
 )
 ```
 
-Term identifiers can also be obtained from the `term` column returned by
-`rba_string_enrichment()`. The `ids` and `network_term_id` input modes cannot
-be combined.
+The `proteinCount` column contains the complete number of proteins annotated
+with each term, while `preferredNames` and `stringIds` are returned as
+list-columns. The `ids` and `network_term_id` input modes cannot be combined.
 
 ------------------------------------------------------------------------
 

@@ -145,15 +145,18 @@ Available \code{category} values are listed below. The default is "Process".
   }
 }
 \seealso{
-\code{\link{rba_string_map_ids},
+\code{
+  \link{rba_string_map_ids},
   \link{rba_string_enrichment},
-  \link{rba_string_annotations}
+  \link{rba_string_annotations},
+  \link{rba_string_functional_terms}
   }
 
 Other "STRING":
 \code{\link[=rba_string_annotations]{rba_string_annotations()}},
 \code{\link[=rba_string_enrichment]{rba_string_enrichment()}},
 \code{\link[=rba_string_enrichment_ppi]{rba_string_enrichment_ppi()}},
+\code{\link[=rba_string_functional_terms]{rba_string_functional_terms()}},
 \code{\link[=rba_string_homology_inter]{rba_string_homology_inter()}},
 \code{\link[=rba_string_homology_intra]{rba_string_homology_intra()}},
 \code{\link[=rba_string_interaction_partners]{rba_string_interaction_partners()}},
