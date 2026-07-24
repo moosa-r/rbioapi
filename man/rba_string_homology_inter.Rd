@@ -2,7 +2,7 @@
 % Please edit documentation in R/stringdb.R
 \name{rba_string_homology_inter}
 \alias{rba_string_homology_inter}
-\title{Get Similarity Scores Hits of Proteins in Different Species}
+\title{Get Best Protein Similarity Hits Across Species}
 \usage{
 rba_string_homology_inter(ids, species = NULL, species_b = NULL, ...)
 }
@@ -10,41 +10,42 @@ rba_string_homology_inter(ids, species = NULL, species_b = NULL, ...)
 \item{ids}{Your protein ID(s). It is strongly recommended to supply
 STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
 
-\item{species}{Numeric: NCBI Taxonomy identifier of your input proteins;
-Human Taxonomy ID is 9606. (Recommended, but optional if your input is
-less than 100 IDs.)}
+\item{species}{Numeric:
+\href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
+NCBI Taxonomy identifier} of your input proteins; Human Taxonomy ID is
+9606. (Recommended, but required if your input contains more than 10
+unique IDs.)}
 
-\item{species_b}{(optional) Numeric: one or more NCBI Taxonomy identifiers
-of species to limit the closets homologous proteins search.}
+\item{species_b}{Numeric: One or more
+\href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
+NCBI Taxonomy identifiers} used to restrict the search for closest
+homologs. The default is \code{NULL}, which searches all STRING species.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-A data frame with Your input proteins and it's closest homologous
-  proteins among all other (or a defined) STRING species.
+A data frame containing each input protein and its closest homolog
+  in every other STRING species, or in the species selected by
+  \code{species_b}.
 }
 \description{
-Using this function, you can retrieve highest Smith-Waterman bit scores
-  among your input proteins and proteins in every other STRING species
-  (e.g. the closest homologous protein of your input protein in other
-  species).
-  Bit Scores serve as similarity scores between protein sequence;
-  And, according to STRING documentations, as a proxy for protein homology.
+Retrieve the highest Smith-Waterman bit-score hit between each input protein
+  and proteins in every other STRING species. STRING uses these
+  sequence-similarity scores as a proxy for protein homology.
 }
 \details{
-Note that this function will return the highest similarity score hits of
-  your given protein(s) and their closets homologous proteins in other
-  species. to retrieve similarity scores of different proteins within the
-  same species see \code{\link{rba_string_homology_intra}}.
-  \cr Similarity matrix is imported -by STRING- from:
+To retrieve pairwise similarity scores among input proteins within one
+  species, see \code{\link{rba_string_homology_intra}}.
+
+STRING imports the similarity matrix from the
   \href{https://pubmed.ncbi.nlm.nih.gov/24165881/}{Similarity Matrix of
-  Proteins (SIMAP)}
+  Proteins (SIMAP)} project.
 }
 \section{Corresponding API Resources}{
 
  "POST https://string-db.org/api/\{output-format\}/homology_best?
- identifiers=\{your_identifiers\}"
+ identifiers=\{your_identifiers\}&\{optional_parameters\}"
 }
 
 \examples{

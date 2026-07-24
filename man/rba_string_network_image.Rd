@@ -28,7 +28,7 @@ rba_string_network_image(
 \item{ids}{Your protein ID(s). It is strongly recommended to supply
 STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
 
-\item{image_format}{one of:\itemize{
+\item{image_format}{Character: One of:\itemize{
 \item "image": PNG image with normal resolution.
 \item "highres_image": High-resolution PNG image.
 \item "svg": Scalable Vector Graphics image.}}
@@ -38,8 +38,10 @@ STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
 \item FALSE: Do not save the image, just return it as an R object.
 \item Character string: A valid file path to save the image to.}}
 
-\item{species}{Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
-(Recommended, but optional if your input is less than 100 IDs.)}
+\item{species}{Numeric:
+\href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
+NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
+(Recommended, but required if your input contains more than 10 unique IDs.)}
 
 \item{add_color_nodes}{Numeric: The number of colored nodes (queried proteins
 and first shell of interactors) to be added.}
@@ -47,60 +49,57 @@ and first shell of interactors) to be added.}
 \item{add_white_nodes}{Numeric: The number of white nodes (second shell of
 interactors) to be added after colored nodes.}
 
-\item{required_score}{Numeric (Between 0 to 1000): A minimum of interaction
-score for an interaction to be included in the image. if not supplied, the
-threshold will be applied by STRING Based in the network. (low Confidence
- = 150, Medium Confidence = 400, High Confidence = 700, Highest
- confidence = 900)}
+\item{required_score}{Numeric (between 0 and 1000): Minimum interaction
+score required for an interaction to be included in the image. If omitted,
+STRING applies a network-dependent threshold. Common
+confidence thresholds are 150 (low), 400 (medium), 700 (high), and 900
+(highest).}
 
-\item{network_flavor}{The style of network edges, should be one of:\itemize{
-\item "evidence": (default) Line's color is based on the type of evidences that
-support the interaction.
-\item "confidence": Line's thickness is an indicator of the
-interaction's confidence score.
-\item "action": Line's Shape is an indicator of the interaction's predicted
-mode of actions.}}
+\item{network_flavor}{Character: The network-edge style. One of:\itemize{
+\item "evidence": (default) Edge colors indicate the types of evidence
+supporting each interaction.
+\item "confidence": Edge thickness indicates the interaction confidence
+score.
+\item "actions": Edge shape indicates the predicted mode of action.}}
 
-\item{network_type}{should be one of:\itemize{
-\item "functional": (default) The edge's indicate both physical and
+\item{network_type}{Character: One of:\itemize{
+\item "functional": (default) Edges indicate both physical and
 functional associations.
-\item "physical": The edges indicate that two proteins have a physical
+\item "physical": Edges indicate that two proteins have a physical
 interaction or are parts of a complex.}}
 
-\item{hide_node_labels}{Logical: (Default = FALSE) Hide proteins names from
-the image}
+\item{hide_node_labels}{Logical: (default = \code{FALSE}) Hide protein names from
+the image.}
 
-\item{use_query_labels}{Logical: (Default = FALSE) Use the names supplied
-with the 'ids' argument as the nodes labels instead of STRING's default
-ones.}
+\item{use_query_labels}{Logical: (default = \code{FALSE}) Use the names supplied
+in \code{ids} as node labels instead of STRING's default labels.}
 
-\item{hide_disconnected_nodes}{Logical: (Default = FALSE) Hide proteins that
-are not connected to any other proteins from the image}
+\item{hide_disconnected_nodes}{Logical: (default = \code{FALSE}) Hide proteins
+that are not connected to any other protein.}
 
-\item{hide_structure_pics}{Logical: (Default = FALSE) Hide protein's
-structure picture from inside the bubbles}
+\item{hide_structure_pics}{Logical: (default = \code{FALSE}) Hide protein structure
+images inside the nodes.}
 
-\item{flat_nodes}{Logical: (Default = FALSE) Make the nodes design flat
-instead of the default 3D design}
+\item{flat_nodes}{Logical: (default = \code{FALSE}) Use a flat node design
+instead of the default 3D design.}
 
-\item{node_labels_center}{Logical: (Default = FALSE) Position the protein
-names labels center aligned on the nodes}
+\item{node_labels_center}{Logical: (default = \code{FALSE}) Center protein labels
+on the nodes.}
 
-\item{node_labels_font_size}{Numeric (Between 5 to 50, Default = 12) Font
-size of the protein nodes labels}
+\item{node_labels_font_size}{Numeric (between 5 and 50; default = 12):
+Font size of the protein node labels.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-A network images which can be PNG or SVG depending on the inputs.
+A PNG image array or raw SVG content, depending on
+  \code{image_format}.
 }
 \description{
-Depending on that you supplied a single protein ID or more than one protein
-  ID, this function will produce a static image of the interaction networks
-  among your input proteins or/and with other proteins. See the
-  "Arguments" section to learn more about how you can modify the network
-  image.
+This function retrieves a static image of the interaction network among your
+  input proteins and, where applicable, additional interactors. The available
+  arguments control the network contents and appearance.
 }
 \section{Corresponding API Resources}{
 

@@ -1,22 +1,23 @@
 #' Map a Set of Identifiers to STRING Identifiers
 #'
-#' This function Calls STRING's API to Convert a set of identifiers
-#'   to STRING Identifiers. Although You can call STRING services with a variety
-#'   of common identifiers, It is recommended by STRING's documentations that
-#'   you first map Your Protein/genes IDs to STRING IDs and then proceed
-#'   with other STRING's functions.
+#' This function calls STRING's API to map a set of common gene or protein
+#'   identifiers to STRING identifiers. Although STRING services accept a
+#'   variety of identifiers, the STRING API documentation recommends mapping
+#'   them to STRING identifiers before using other STRING functions.
 #'
 #' @section Corresponding API Resources:
-#'  "POST https://string-db.org/api/\{output-format\}/get_string_ids?identifiers=
+#'  "POST https://string-db.org/api/\{output-format\}/resolve?identifiers=
 #'  \{your_identifiers\}&\{optional_parameters\}"
 #'
 #' @param ids Your Common gene/protein Identifier(s) to be mapped.
-#' @param species Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
-#'   (Recommended, but optional if your input is less than 100 IDs.)
-#' @param echo_query (default = FALSE) Include your input IDs as a column of the
+#' @param species Numeric:
+#'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
+#'   NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
+#'   (Recommended, but optional.)
+#' @param echo_query (default = \code{FALSE}) Include your input IDs as a column of the
 #'   results.
-#' @param limit (Numeric, Optional) A limit on the number of matches per input
-#'   ID. The output are sorted to have the best matches first.
+#' @param limit Numeric: Maximum number of matches returned per input ID.
+#'   Results are ordered from the best to the worst match.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -55,34 +56,25 @@ rba_string_map_ids <- function(ids,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "ids", class = c("character", "numeric")),
-      list(arg = "species", class = "numeric"),
-      list(arg = "echo_query", class = "logical"),
-      list(arg = "limit", class = "numeric")
-    ),
-    cond = list(
-      list(
-        quote(length(ids) > 100 && is.null(species)),
-        sprintf(
-          "You supplied %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
-          length(ids)
-        )
-      )
+      list(arg = "ids", class = c("character", "numeric", "integer"), min_len = 1L),
+      list(arg = "species", class = c("numeric", "integer"), len = 1L),
+      list(arg = "echo_query", class = "logical", len = 1L),
+      list(arg = "limit", class = c("numeric", "integer"), len = 1L)
     )
   )
 
   .msg(
-    "Mapping %s Input Identifiers to STRING Identifiers.",
+    "Mapping %s input Identifiers to STRING Identifiers.",
     length(ids)
   )
 
   ## Build POST API Request's body
   call_body <- .rba_query(
     init = list(
-      "identifiers" = paste(unique(ids), collapse = "%0d"),
+      "identifiers" = paste(ids, collapse = "%0d"),
       "caller_identity" = getOption("rba_user_agent")
     ),
-    list("species", !is.null(species),species),
+    list("species", !is.null(species), species),
     list("echo_query", echo_query, "1"),
     list("limit", !is.null(limit), limit)
   )
@@ -106,11 +98,9 @@ rba_string_map_ids <- function(ids,
 
 #' Get STRING Network Image
 #'
-#' Depending on that you supplied a single protein ID or more than one protein
-#'   ID, this function will produce a static image of the interaction networks
-#'   among your input proteins or/and with other proteins. See the
-#'   "Arguments" section to learn more about how you can modify the network
-#'   image.
+#' This function retrieves a static image of the interaction network among your
+#'   input proteins and, where applicable, additional interactors. The available
+#'   arguments control the network contents and appearance.
 #'
 #' @section Corresponding API Resources:
 #'  "POST https://string-db.org/api/\{output-format\}/network?identifiers=
@@ -118,9 +108,11 @@ rba_string_map_ids <- function(ids,
 #'
 #' @param ids Your protein ID(s). It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
-#' @param species Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
-#'   (Recommended, but optional if your input is less than 100 IDs.)
-#' @param image_format one of:\itemize{
+#' @param species Numeric:
+#'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
+#'   NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
+#'   (Recommended, but required if your input contains more than 10 unique IDs.)
+#' @param image_format Character: One of:\itemize{
 #'   \item "image": PNG image with normal resolution.
 #'   \item "highres_image": High-resolution PNG image.
 #'   \item "svg": Scalable Vector Graphics image.}
@@ -132,42 +124,41 @@ rba_string_map_ids <- function(ids,
 #'   and first shell of interactors) to be added.
 #' @param add_white_nodes Numeric: The number of white nodes (second shell of
 #'   interactors) to be added after colored nodes.
-#' @param required_score Numeric (Between 0 to 1000): A minimum of interaction
-#'   score for an interaction to be included in the image. if not supplied, the
-#'   threshold will be applied by STRING Based in the network. (low Confidence
-#'    = 150, Medium Confidence = 400, High Confidence = 700, Highest
-#'    confidence = 900)
-#' @param network_flavor The style of network edges, should be one of:\itemize{
-#'   \item "evidence": (default) Line's color is based on the type of evidences that
-#'   support the interaction.
-#'   \item "confidence": Line's thickness is an indicator of the
-#'   interaction's confidence score.
-#'   \item "action": Line's Shape is an indicator of the interaction's predicted
-#'   mode of actions.}
-#' @param network_type should be one of:\itemize{
-#'   \item "functional": (default) The edge's indicate both physical and
+#' @param required_score Numeric (between 0 and 1000): Minimum interaction
+#'   score required for an interaction to be included in the image. If omitted,
+#'   STRING applies a network-dependent threshold. Common
+#'   confidence thresholds are 150 (low), 400 (medium), 700 (high), and 900
+#'   (highest).
+#' @param network_flavor Character: The network-edge style. One of:\itemize{
+#'   \item "evidence": (default) Edge colors indicate the types of evidence
+#'   supporting each interaction.
+#'   \item "confidence": Edge thickness indicates the interaction confidence
+#'   score.
+#'   \item "actions": Edge shape indicates the predicted mode of action.}
+#' @param network_type Character: One of:\itemize{
+#'   \item "functional": (default) Edges indicate both physical and
 #'   functional associations.
-#'   \item "physical": The edges indicate that two proteins have a physical
+#'   \item "physical": Edges indicate that two proteins have a physical
 #'   interaction or are parts of a complex.}
-#' @param hide_node_labels Logical: (Default = FALSE) Hide proteins names from
-#'   the image
-#' @param use_query_labels Logical: (Default = FALSE) Use the names supplied
-#'   with the 'ids' argument as the nodes labels instead of STRING's default
-#'   ones.
-#' @param hide_disconnected_nodes Logical: (Default = FALSE) Hide proteins that
-#'   are not connected to any other proteins from the image
-#' @param hide_structure_pics Logical: (Default = FALSE) Hide protein's
-#'   structure picture from inside the bubbles
-#' @param flat_nodes Logical: (Default = FALSE) Make the nodes design flat
-#'   instead of the default 3D design
-#' @param node_labels_center Logical: (Default = FALSE) Position the protein
-#'   names labels center aligned on the nodes
-#' @param node_labels_font_size Numeric (Between 5 to 50, Default = 12) Font
-#'   size of the protein nodes labels
+#' @param hide_node_labels Logical: (default = \code{FALSE}) Hide protein names from
+#'   the image.
+#' @param use_query_labels Logical: (default = \code{FALSE}) Use the names supplied
+#'   in \code{ids} as node labels instead of STRING's default labels.
+#' @param hide_disconnected_nodes Logical: (default = \code{FALSE}) Hide proteins
+#'   that are not connected to any other protein.
+#' @param hide_structure_pics Logical: (default = \code{FALSE}) Hide protein structure
+#'   images inside the nodes.
+#' @param flat_nodes Logical: (default = \code{FALSE}) Use a flat node design
+#'   instead of the default 3D design.
+#' @param node_labels_center Logical: (default = \code{FALSE}) Center protein labels
+#'   on the nodes.
+#' @param node_labels_font_size Numeric (between 5 and 50; default = 12):
+#'   Font size of the protein node labels.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A network images which can be PNG or SVG depending on the inputs.
+#' @return A PNG image array or raw SVG content, depending on
+#'   \code{image_format}.
 #'
 #' @references \itemize{
 #'   \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
@@ -228,43 +219,66 @@ rba_string_network_image <- function(ids,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "ids", class = c("character", "numeric")),
-      list(arg = "species", class = "numeric"),
+      list(arg = "ids", class = c("character", "numeric", "integer"), min_len = 1L),
+      list(arg = "species", class = c("numeric", "integer"), len = 1L),
       list(
         arg = "image_format", class = "character",
-        val = c("image", "highres_image", "svg")
+        val = c("image", "highres_image", "svg"),
+        len = 1L
       ),
-      list(arg = "save_image", class = c("character", "logical")),
-      list(arg = "add_color_nodes", class = "numeric"),
-      list(arg = "add_white_nodes", class = "numeric"),
-      list(arg = "required_score", class = "numeric", min_val = 0, max_val = 1000),
+      list(arg = "save_image", class = c("character", "logical"), len = 1L),
+      list(arg = "add_color_nodes", class = c("numeric", "integer"), len = 1L),
+      list(arg = "add_white_nodes", class = c("numeric", "integer"), len = 1L),
+      list(
+        arg = "required_score",
+        class = c("numeric", "integer"),
+        min_val = 0,
+        max_val = 1000,
+        len = 1L
+      ),
       list(
         arg = "network_flavor", class = "character",
-        val = c("evidence", "confidence", "actions")
+        val = c("evidence", "confidence", "actions"),
+        len = 1L
       ),
-      list(arg = "network_type", class = "character", val = c("functional", "physical")),
-      list(arg = "hide_node_labels", class = "logical"),
-      list(arg = "use_query_labels", class = "logical"),
-      list(arg = "hide_disconnected_nodes", class = "logical"),
-      list(arg = "hide_structure_pics", class = "logical"),
-      list(arg = "flat_nodes", class = "logical"),
-      list(arg = "node_labels_center", class = "logical"),
-      list(arg = "node_labels_font_size", class = "numeric", min_val = 5, max_val = 50)
+      list(
+        arg = "network_type",
+        class = "character",
+        val = c("functional", "physical"),
+        len = 1L
+      ),
+      list(arg = "hide_node_labels", class = "logical", len = 1L),
+      list(arg = "use_query_labels", class = "logical", len = 1L),
+      list(arg = "hide_disconnected_nodes", class = "logical", len = 1L),
+      list(arg = "hide_structure_pics", class = "logical", len = 1L),
+      list(arg = "flat_nodes", class = "logical", len = 1L),
+      list(arg = "node_labels_center", class = "logical", len = 1L),
+      list(
+        arg = "node_labels_font_size",
+        class = c("numeric", "integer"),
+        min_val = 5,
+        max_val = 50,
+        len = 1L
+      )
     ),
     cond = list(
       list(
-        quote(length(ids) > 100 && is.null(species)),
+        quote(anyNA(save_image)),
+        "`save_image` cannot be `NA`."
+      ),
+      list(
+        quote(length(unique(ids)) > 10 && is.null(species)),
         sprintf(
-          "You supplied %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
-          length(ids)
+          "You supplied %s unique IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
+          length(unique(ids))
         )
       )
     )
   )
 
   .msg(
-    "Retrieving STRING network image of %s Input Identifiers.",
-    length(ids)
+    "Retrieving STRING network image of %s unique input Identifiers.",
+    length(unique(ids))
   )
 
   ## Build POST API Request's body
@@ -284,7 +298,6 @@ rba_string_network_image <- function(ids,
     list("hide_disconnected_nodes", hide_disconnected_nodes, "1"),
     list("block_structure_pics_in_bubbles", hide_structure_pics, "1"),
     list("flat_node_design", flat_nodes, "1"),
-    list("flat_node_design", flat_nodes, "1"),
     list("center_node_labels", node_labels_center, "1"),
     list("custom_label_font_size", node_labels_font_size != 12, node_labels_font_size)
   )
@@ -294,13 +307,15 @@ rba_string_network_image <- function(ids,
 
     ext_input <- "svg"
     accept_input <- "image/svg+xml"
-    parser_input <- function(x) { httr::content(x) }
+    parser_input <- function(x) { httr::content(x, as = "raw") }
 
   } else {
 
     ext_input <- "png"
     accept_input <- "image/png"
-    parser_input <- function(x) { httr::content(x, type = "image/png") }
+    parser_input <- function(x) {
+      png::readPNG(httr::content(x, as = "raw"))
+    }
 
   }
 
@@ -313,10 +328,11 @@ rba_string_network_image <- function(ids,
   input_call <- .rba_httr(
     httr = "post",
     url = .rba_stg("string", "url"),
-    path = paste0(.rba_stg("string", "pth"), "image/network"),
+    path = paste0(.rba_stg("string", "pth"), image_format, "/network"),
     accept = accept_input,
     parser = parser_input,
     body = call_body,
+    encode = "form",
     save_to = save_image
   )
 
@@ -327,15 +343,14 @@ rba_string_network_image <- function(ids,
 
 #' Get STRING Network Interactions
 #'
-#' This function will retrieve Sting interaction pairs among your input protein
-#'   ids, with the combined score and separate score for each STRING score
-#'   channels. You can further expand your network to a defined size by
-#'   providing "add_node" parameter.
+#' This function retrieves STRING interaction pairs among the input proteins,
+#'   including the combined score and separate scores for each evidence
+#'   channel. You can expand the network using the \code{add_nodes} parameter.
 #'
-#' Note that this function will return interactions between your set of
-#'   supplied proteins, or at most, expand the interaction network by the
-#'   given parameters. TO retrieve a list of all possible interacting proteins
-#'   with your given input, see
+#' This function returns interactions among the supplied proteins and any
+#'   neighboring proteins added through \code{add_nodes}. To retrieve
+#'   interactions between your input proteins and all their STRING interaction
+#'   partners, see
 #'   \code{\link{rba_string_interaction_partners}}.
 #'
 #' @section Corresponding API Resources:
@@ -344,34 +359,36 @@ rba_string_network_image <- function(ids,
 #'
 #' @param ids Your protein IDs. It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
-#' @param species Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
-#'   (Recommended, but optional if your input is less than 100 IDs.)
-#' @param required_score Numeric: A minimum of interaction score for an
-#'   interaction to be included in the image. if not supplied, the threshold
-#'   will be applied by STRING Based in the network. (low Confidence = 150,
-#'   Medium Confidence = 400, High Confidence = 700, Highest confidence = 900)
-#' @param add_nodes Numeric: Number of neighboring proteins to be added to the
-#'   network. If none supplied by the user, this argument value will depend
-#'   on the number of supplied "ids" argument:\enumerate{
-#'   \item Single id: add_node will be set to 10 to retrieve the interaction
-#'   neighborhood  of you input protein.
-#'   \item Multiple ids: add_node will be set to 0, thus the output will be the
-#'   interactions between your input proteins.}
-#' @param network_type should be one of:\itemize{
-#'   \item "functional": (default) The edge's indicate both physical and
+#' @param species Numeric:
+#'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
+#'   NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
+#'   (Recommended, but required if your input contains more than 10 unique IDs.)
+#' @param required_score Numeric (between 0 and 1000): Minimum interaction
+#'   score required for an interaction to be included in the returned network.
+#'   If omitted, STRING applies a network-dependent threshold. Common
+#'   confidence thresholds are 150 (low), 400 (medium), 700 (high), and 900
+#'   (highest).
+#' @param add_nodes Numeric: Number of neighboring proteins to add to the
+#'   network. If omitted, STRING determines the value from the number of input
+#'   IDs:\enumerate{
+#'   \item One ID: STRING adds 10 proteins to retrieve its interaction
+#'   neighborhood.
+#'   \item Multiple IDs: STRING adds no proteins, so only interactions among the
+#'   input proteins are returned.}
+#' @param network_type Character: One of:\itemize{
+#'   \item "functional": (default) Edges indicate both physical and
 #'   functional associations.
-#'   \item "physical": The edges indicate that two proteins have a physical
+#'   \item "physical": Edges indicate that two proteins have a physical
 #'   interaction or are parts of a complex.}
-#' @param use_query_labels Logical: (Default = FALSE) Use the names supplied
-#'   with the 'ids' argument as the nodes labels instead of STRING's default
-#'   ones.
+#' @param use_query_labels Logical: (default = \code{FALSE}) Use the names supplied
+#'   in \code{ids} as node labels instead of STRING's default labels.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A data frame which each row is a network interaction and the
-#'   columns contains interactor information and interaction scores: \itemize{
+#' @return A data frame in which each row is a network interaction and the
+#'   columns contain interactor information and interaction scores: \itemize{
 #'   \item stringId_A: STRING identifier (protein A)
-#'   \item stringId_B:STRING identifier (protein B)
+#'   \item stringId_B: STRING identifier (protein B)
 #'   \item preferredName_A: common protein name (protein A)
 #'   \item preferredName_B: common protein name (protein B)
 #'   \item ncbiTaxonId: NCBI taxon identifier
@@ -430,26 +447,43 @@ rba_string_interactions_network <- function(ids,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "ids", class = c("character", "numeric")),
-      list(arg = "species", class = "numeric"),
-      list(arg = "required_score", class = "numeric", min_val = 0, max_val = 1000),
-      list(arg = "add_nodes", class = "numeric", min_val = 0),
-      list(arg = "network_type", class = "character", val = c("functional", "physical")),
-      list(arg = "use_query_labels", class = "logical")),
+      list(arg = "ids", class = c("character", "numeric", "integer"), min_len = 1L),
+      list(arg = "species", class = c("numeric", "integer"), len = 1L),
+      list(
+        arg = "required_score",
+        class = c("numeric", "integer"),
+        min_val = 0,
+        max_val = 1000,
+        len = 1L
+      ),
+      list(
+        arg = "add_nodes",
+        class = c("numeric", "integer"),
+        min_val = 0,
+        len = 1L
+      ),
+      list(
+        arg = "network_type",
+        class = "character",
+        val = c("functional", "physical"),
+        len = 1L
+      ),
+      list(arg = "use_query_labels", class = "logical", len = 1L)
+    ),
     cond = list(
       list(
-        quote(length(ids) > 100 && is.null(species)),
+        quote(length(unique(ids)) > 10 && is.null(species)),
         sprintf(
-          "You supplied %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
-          length(ids)
+          "You supplied %s unique IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
+          length(unique(ids))
         )
       )
     )
   )
 
   .msg(
-    "Retrieving STRING Network interaction of %s Input Identifiers.",
-    length(ids)
+    "Retrieving STRING Network interaction of %s unique input Identifiers.",
+    length(unique(ids))
   )
 
   ## Build POST API Request's body
@@ -484,41 +518,42 @@ rba_string_interactions_network <- function(ids,
 
 #' Get All STRING Interaction Partners
 #'
-#' This function will retrieve all the STRING interactions which include your
-#'   proteins as one party of the interaction. (e.g. interaction between your
-#'   proteins and every other STRING proteins.)
-#'   \cr Given the size of STRING database, this function could return a very
-#'   long results. See "Arguments" section for information on how to filter
-#'   the interactions.
+#' This function retrieves STRING interactions involving any of your input
+#'   proteins as one party of the interaction, including interactions with
+#'   proteins outside the input set.
+#'   \cr Given the size of the STRING database, this function can return many
+#'   interactions. Use the filtering arguments to limit the results.
 #'
-#' Note that this function will retrieve the interactions between your input
-#'   proteins and every other STRING proteins. To retrieve the interaction
-#'   among your input protein-set, see
+#' To retrieve only interactions among the input proteins, see
 #'   \code{\link{rba_string_interactions_network}}.
 #'
 #' @section Corresponding API Resources:
-#'  "POST https://string-db.org/api/\{output-format\}/
-#'  interaction_partners?identifiers=\{your_identifiers\}&\{optional_parameters\}"
+#'  "POST https://string-db.org/api/\{output-format\}/interaction_partners?
+#'  identifiers=\{your_identifiers\}&\{optional_parameters\}"
 #'
 #' @param ids Your protein ID(s). It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
-#' @param species Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
-#'   (Recommended, but optional if your input is less than 100 IDs.)
-#' @param required_score Numeric: A minimum of interaction score for an
-#'   interaction to be included in the image. if not supplied, the threshold
-#'   will be applied by STRING Based in the network. (low Confidence = 150,
-#'   Medium Confidence = 400, High Confidence = 700, Highest confidence = 900)
-#' @param network_type should be one of:\itemize{
-#'   \item "functional": (default) The edge's indicate both physical and
-#'   functional associations.}
-#' @param limit Limit the number returned interaction partners per each of
-#'   your input proteins. (e.g. Number of the most confident interaction partner
-#'   to return per each input protein.)
+#' @param species Numeric:
+#'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
+#'   NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
+#'   (Recommended, but required if your input contains more than 10 unique IDs.)
+#' @param required_score Numeric (between 0 and 1000): Minimum interaction
+#'   score required for an interaction to be included in the returned
+#'   interactions. If omitted, STRING applies a network-dependent threshold.
+#'   Common confidence thresholds are 150 (low), 400 (medium), 700 (high), and
+#'   900 (highest).
+#' @param network_type Character: One of:\itemize{
+#'   \item "functional": (default) Edges indicate both physical and
+#'   functional associations.
+#'   \item "physical": Edges indicate that two proteins have a physical
+#'   interaction or are parts of a complex.}
+#' @param limit Numeric: Maximum number of interaction partners returned for
+#'   each input protein, ordered by confidence.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A data frame which each row is a network interaction and the
-#'   columns contains interactor information and interaction scores.
+#' @return A data frame in which each row is a network interaction and the
+#'   columns contain interactor information and interaction scores.
 #'
 #' @references \itemize{
 #'   \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
@@ -563,26 +598,42 @@ rba_string_interaction_partners <- function(ids,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "ids", class = c("character", "numeric")),
-      list(arg = "species", class = "numeric"),
-      list(arg = "required_score", class = "numeric", min_val = 0, max_val = 1000),
-      list(arg = "network_type", class = "character", val = c("functional", "physical")),
-      list(arg = "limit", class = "numeric", min_val = 1)
+      list(arg = "ids", class = c("character", "numeric", "integer"), min_len = 1L),
+      list(arg = "species", class = c("numeric", "integer"), len = 1L),
+      list(
+        arg = "required_score",
+        class = c("numeric", "integer"),
+        min_val = 0,
+        max_val = 1000,
+        len = 1L
+      ),
+      list(
+        arg = "network_type",
+        class = "character",
+        val = c("functional", "physical"),
+        len = 1L
+      ),
+      list(
+        arg = "limit",
+        class = c("numeric", "integer"),
+        min_val = 1,
+        len = 1L
+      )
     ),
     cond = list(
       list(
-        quote(length(ids) > 100 && is.null(species)),
+        quote(length(unique(ids)) > 10 && is.null(species)),
         sprintf(
-          "You supplied %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
-          length(ids)
+          "You supplied %s unique IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
+          length(unique(ids))
         )
       )
     )
   )
 
   .msg(
-    "Retrieving Interacting partners of %s Input Identifiers.",
-    length(ids)
+    "Retrieving Interacting partners of %s unique input Identifiers.",
+    length(unique(ids))
   )
 
   ## Build POST API Request's body
@@ -601,7 +652,7 @@ rba_string_interaction_partners <- function(ids,
   input_call <- .rba_httr(
     httr = "post",
     url = .rba_stg("string", "url"),
-    path = paste0(.rba_stg("string", "pth"), "/json/interaction_partners"),
+    path = paste0(.rba_stg("string", "pth"), "json/interaction_partners"),
     body = call_body,
     encode = "form",
     accept = "application/json",
@@ -614,36 +665,36 @@ rba_string_interaction_partners <- function(ids,
   return(final_output)
 }
 
-#' Get Similarity Scores Hits of Proteins in a Species
+#' Get Protein Similarity Scores Within a Species
 #'
-#' Using this function, you can retrieve the Smith-Waterman bit scores among
-#'   proteins of the same species.
-#'   Bit Scores serve as similarity scores between protein sequence;
-#'   And, according to STRING documentations, as a proxy for protein homology.
+#' Retrieve Smith-Waterman bit scores among proteins from the same species.
+#'   STRING uses these sequence-similarity scores as a proxy for protein
+#'   homology.
 #'
-#' Note that this function will retrieve similarity scores of different
-#'   proteins "within the same species". To Get a similarity scores of a given
-#'   protein and it's closets homologous proteins in other species, see
+#' To retrieve the best similarity hit for each input protein in other STRING
+#'   species, see
 #'   \code{\link{rba_string_homology_inter}}.
-#'   \cr Similarity matrix is imported -by STRING- from:
+#'
+#' STRING imports the similarity matrix from the
 #'   \href{https://pubmed.ncbi.nlm.nih.gov/24165881/}{Similarity Matrix of
-#'   Proteins (SIMAP)}
+#'   Proteins (SIMAP)} project.
 #'
 #' @section Corresponding API Resources:
 #'  "POST https://string-db.org/api/\{output-format\}/homology?identifiers=
-#'  \{your_identifiers\}"
+#'  \{your_identifiers\}&\{optional_parameters\}"
 #'
 #' @param ids Your protein ID(s). It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
-#' @param species Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
-#'   (Recommended, but optional if your input is less than 100 IDs.)
+#' @param species Numeric:
+#'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
+#'   NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
+#'   (Recommended, but required if your input contains more than 10 unique IDs.)
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A data frame with bit scores between your supplied proteins and
-#'   their self-hit. To Reduce the transferred data, STRING returns only one
-#'   half of the similarity matrix; This will not pose a problem because
-#'   similarity matrix is symmetrical.
+#' @return A data frame containing pairwise bit scores and self-hits for the
+#'   supplied proteins. STRING returns only one half of the symmetric similarity
+#'   matrix to reduce data transfer.
 #'
 #' @references \itemize{
 #'   \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
@@ -677,23 +728,23 @@ rba_string_homology_intra <- function(ids,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "ids", class = c("character", "numeric")),
-      list(arg = "species", class = "numeric")
+      list(arg = "ids", class = c("character", "numeric", "integer"), min_len = 1L),
+      list(arg = "species", class = c("numeric", "integer"), len = 1L)
     ),
     cond = list(
       list(
-        quote(length(ids) > 100 && is.null(species)),
+        quote(length(unique(ids)) > 10 && is.null(species)),
         sprintf(
-          "You supplied %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
-          length(ids)
+          "You supplied %s unique IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
+          length(unique(ids))
         )
       )
     )
   )
 
   .msg(
-    "Retrieving similarity scores of %s Input Identifiers.",
-    length(ids)
+    "Retrieving similarity scores of %s unique input Identifiers.",
+    length(unique(ids))
   )
 
   ## Build POST API Request's body
@@ -722,39 +773,40 @@ rba_string_homology_intra <- function(ids,
   return(final_output)
 }
 
-#' Get Similarity Scores Hits of Proteins in Different Species
+#' Get Best Protein Similarity Hits Across Species
 #'
-#' Using this function, you can retrieve highest Smith-Waterman bit scores
-#'   among your input proteins and proteins in every other STRING species
-#'   (e.g. the closest homologous protein of your input protein in other
-#'   species).
-#'   Bit Scores serve as similarity scores between protein sequence;
-#'   And, according to STRING documentations, as a proxy for protein homology.
+#' Retrieve the highest Smith-Waterman bit-score hit between each input protein
+#'   and proteins in every other STRING species. STRING uses these
+#'   sequence-similarity scores as a proxy for protein homology.
 #'
-#' Note that this function will return the highest similarity score hits of
-#'   your given protein(s) and their closets homologous proteins in other
-#'   species. to retrieve similarity scores of different proteins within the
-#'   same species see \code{\link{rba_string_homology_intra}}.
-#'   \cr Similarity matrix is imported -by STRING- from:
+#' To retrieve pairwise similarity scores among input proteins within one
+#'   species, see \code{\link{rba_string_homology_intra}}.
+#'
+#' STRING imports the similarity matrix from the
 #'   \href{https://pubmed.ncbi.nlm.nih.gov/24165881/}{Similarity Matrix of
-#'   Proteins (SIMAP)}
+#'   Proteins (SIMAP)} project.
 #'
 #' @section Corresponding API Resources:
 #'  "POST https://string-db.org/api/\{output-format\}/homology_best?
-#'  identifiers=\{your_identifiers\}"
+#'  identifiers=\{your_identifiers\}&\{optional_parameters\}"
 #'
 #' @param ids Your protein ID(s). It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
-#' @param species Numeric: NCBI Taxonomy identifier of your input proteins;
-#'   Human Taxonomy ID is 9606. (Recommended, but optional if your input is
-#'   less than 100 IDs.)
-#' @param species_b (optional) Numeric: one or more NCBI Taxonomy identifiers
-#'   of species to limit the closets homologous proteins search.
+#' @param species Numeric:
+#'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
+#'   NCBI Taxonomy identifier} of your input proteins; Human Taxonomy ID is
+#'   9606. (Recommended, but required if your input contains more than 10
+#'   unique IDs.)
+#' @param species_b Numeric: One or more
+#'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
+#'   NCBI Taxonomy identifiers} used to restrict the search for closest
+#'   homologs. The default is \code{NULL}, which searches all STRING species.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A data frame with Your input proteins and it's closest homologous
-#'   proteins among all other (or a defined) STRING species.
+#' @return A data frame containing each input protein and its closest homolog
+#'   in every other STRING species, or in the species selected by
+#'   \code{species_b}.
 #'
 #' @references \itemize{
 #'   \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
@@ -794,24 +846,24 @@ rba_string_homology_inter <- function(ids,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "ids", class = c("character", "numeric")),
-      list(arg = "species", class = "numeric"),
-      list(arg = "species_b", class = "numeric")
+      list(arg = "ids", class = c("character", "numeric", "integer"), min_len = 1L),
+      list(arg = "species", class = c("numeric", "integer"), len = 1L),
+      list(arg = "species_b", class = c("numeric", "integer"), min_len = 1L)
     ),
     cond = list(
       list(
-        quote(length(ids) > 100 && is.null(species)),
+        quote(length(unique(ids)) > 10 && is.null(species)),
         sprintf(
-          "You supplied %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
-          length(ids)
+          "You supplied %s unique IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
+          length(unique(ids))
         )
       )
     )
   )
 
   .msg(
-    "Retrieving Best similarity scores hits of %s Input Identifiers.",
-    length(ids)
+    "Retrieving Best similarity scores hits of %s unique input Identifiers.",
+    length(unique(ids))
   )
 
   ## Build POST API Request's body
@@ -821,7 +873,7 @@ rba_string_homology_inter <- function(ids,
       "caller_identity" = getOption("rba_user_agent")
     ),
     list("species", !is.null(species), species),
-    list("species_b", !is.null(species_b), paste(unique(species_b),collapse = "%0d"))
+    list("species_b", !is.null(species_b), paste(unique(species_b), collapse = "%0d"))
   )
 
   ## Build Function-Specific Call
@@ -842,47 +894,47 @@ rba_string_homology_inter <- function(ids,
 }
 
 
-#' Getting Functional Enrichment
+#' Get Functional Enrichment
 #'
-#' STRING cross-reference the proteins with several databases (see "Details"
-#'   section). By providing your input set o proteins (and optionally
-#'   background or universe protein set), you can use this function to
-#'   perform enrichment test and retrieve a list of enriched terms in each
-#'   database, among with pertinent information for each term.
+#' STRING cross-references proteins with several annotation resources. (See
+#'   'Details' section). Provide an input protein set and, optionally, a
+#'   background protein set to perform an enrichment test and retrieve
+#'   enriched terms with their associated statistics.
 #'   Use \code{\link{rba_string_enrichment_image}} to retrieve the analysis
 #'   results as a plot.
 #'
-#' STRING currently maps to and retrieve enrichment results based on Gene
+#' STRING currently returns enrichment results from Gene
 #'   Ontology (GO), KEGG pathways, UniProt Keywords, PubMed publications, Pfam
 #'   domains, InterPro domains, and SMART domains.
-#'   \cr Note that this function will only return the enriched terms pertinent
-#'   to your proteins that have a p-value lesser than 0.1. To retrieve a full
-#'   list of the terms -unfiltered by enrichment p-values-, use
+#'   \cr STRING returns only terms with a raw p-value below 0.1. To retrieve
+#'   annotations without filtering by enrichment p-value, use
 #'   \code{\link{rba_string_annotations}}.
 #'
 #' @section Corresponding API Resources:
-#'  "POST https://string-db.org/api/\{output_format\}/enrichment?identifiers=
+#'  "POST https://string-db.org/api/\{output-format\}/enrichment?identifiers=
 #'  \{your_identifiers\}&\{optional_parameters\}"
 #'
 #' @param ids Your protein ID(s). It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
-#'   Note that if only one id is supplied, STRING expands the network by 10
+#'   Note that if only one ID is supplied, STRING expands the network by 10
 #'   proteins.
-#' @param species Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
-#'   (Recommended, but optional if your input is less than 100 IDs.)
-#' @param background character vector: A set of STRING protein IDs
+#' @param species Numeric:
+#'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
+#'   NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
+#'   (Recommended, but optional.)
+#' @param background Character vector: A set of STRING protein IDs
 #'   to be used as the statistical background (or universe) when computing
-#'   P-value for the terms. Only STRING IDs are acceptable. (See
-#'   \code{\link{rba_string_map_ids}} to map your IDs.)
-#' @param split_df (logical, default = TRUE), If TRUE, instead of one
-#'   data frame, results from different categories will be split into
-#'   multiple data frames based on their 'category'.
+#'   term p-values. Only STRING IDs are accepted. See
+#'   \code{\link{rba_string_map_ids}} to map your IDs.
+#' @param split_df Logical: (default = \code{TRUE}) Split results into a list
+#'   of data frames by \code{category}; otherwise, return one data frame.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A list of data frames which every row is an enriched terms with p-value
-#'   smaller than 0.1 and the columns are the terms category, description,
-#'   number of genes, p-value, fdr and other pertinent information.
+#' @return A data frame in which each row is an enriched term with a raw p-value
+#'   below 0.1 and the columns contain the term category, description, gene
+#'   counts, p-value, FDR, and other pertinent information. If
+#'   \code{split_df = TRUE}, a list of data frames split by category is returned.
 #'
 #' @references \itemize{
 #'   \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
@@ -922,25 +974,16 @@ rba_string_enrichment <- function(ids,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "ids", class = c("character", "numeric")),
-      list(arg = "species", class = "numeric"),
-      list(arg = "background", class = "character"),
-      list(arg = "split_df", class = "logical")
-    ),
-    cond = list(
-      list(
-        quote(length(ids) > 100 && is.null(species)),
-        sprintf(
-          "You supplied %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
-          length(ids)
-        )
-      )
+      list(arg = "ids", class = c("character", "numeric", "integer"), min_len = 1L),
+      list(arg = "species", class = c("numeric", "integer"), len = 1L),
+      list(arg = "background", class = "character", min_len = 1L),
+      list(arg = "split_df", class = "logical", len = 1L)
     )
   )
 
   .msg(
-    "Performing functional enrichment of %s Input Identifiers.",
-    length(ids)
+    "Performing functional enrichment of %s unique input Identifiers.",
+    length(unique(ids))
   )
 
   ## Build POST API Request's body
@@ -981,42 +1024,42 @@ rba_string_enrichment <- function(ids,
   return(final_output)
 }
 
-#' Retrieving Functional Annotation
+#' Get Functional Annotations
 #'
-#' STRING cross-reference the proteins with several databases (see "Details"
-#'   section). By providing your input set o proteins (and optionally
-#'   background or universe protein set), you can use this function to
-#'   retrieve full set of terms (annotations) pertinent to your input proteins in
-#'   each database, among with information for each term.
+#' STRING cross-references proteins with several annotation resources. This
+#'   function retrieves the complete set of annotations assigned to the input
+#'   proteins, together with information about each term.
 #'
-#' STRING currently maps to and retrieve enrichment results based on Gene
-#'   Ontology (GO), KEGG pathways, UniProt Keywords, PubMed publications, Pfam
-#'   domains, InterPro domains, and SMART domains.
-#'   \cr Note that this function will return a full list of the terms containing
-#'   your supplied proteins. To perform enrichment and only retrieve a enriched
-#'   subset of the terms, use \code{\link{rba_string_enrichment}}.
+#' STRING currently retrieves annotations based on Gene Ontology (GO), UniProt
+#'   Keywords, PubMed publications, Pfam domains, InterPro domains, and SMART
+#'   domains. KEGG annotations are unavailable from this endpoint because of
+#'   KEGG licensing restrictions.
+#'   \cr This function returns annotations without enrichment filtering. To
+#'   perform enrichment and retrieve only enriched terms, use
+#'   \code{\link{rba_string_enrichment}}.
 #'
 #' @section Corresponding API Resources:
-#'  "POST https://string-db.org/api/\{output_format\}/functional_annotation?
+#'  "POST https://string-db.org/api/\{output-format\}/functional_annotation?
 #'  identifiers=\{your_identifiers\}&\{optional_parameters\}"
 #'
 #' @param ids Your protein ID(s). It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
-#' @param species Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
-#'   (Recommended, but optional if your input is less than 100 IDs.)
-#' @param allow_pubmed logical: (default = FALSE) PubMed usually  assigns a
-#'   large number of reference publications to each protein. In order to reduce
-#'   the output size, PubMed's results will be excluded from the results,
-#'   unless stated otherwise by setting this argument to TRUE.
-#' @param split_df (logical, default = TRUE), If TRUE, instead of one
-#'   data frame, results from different categories will be split into
-#'   multiple data frames based on their 'category'.
+#' @param species Numeric:
+#'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
+#'   NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
+#'   (Recommended, but optional.)
+#' @param allow_pubmed Logical (default = \code{FALSE}): Include PubMed
+#'   annotations. These annotations are excluded by default because many
+#'   publications may be assigned to each protein.
+#' @param split_df Logical: (default = \code{TRUE}) Split results into a list
+#'   of data frames by \code{category}; otherwise, return one data frame.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A data frame which every row is an assigned terms and the columns
-#'   are the terms category, description, number of genes, and other pertinent
-#'   information.
+#' @return A data frame in which every row is an assigned term and the columns
+#'   contain the term category, description, number of genes, and other
+#'   pertinent information. If \code{split_df = TRUE}, a list of data frames
+#'   split by category is returned.
 #'
 #' @references \itemize{
 #'   \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
@@ -1055,25 +1098,16 @@ rba_string_annotations <- function(ids,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "ids", class = c("character", "numeric")),
-      list(arg = "species", class = "numeric"),
-      list(arg = "allow_pubmed", class = "logical"),
-      list(arg = "split_df", class = "logical")
-    ),
-    cond = list(
-      list(
-        quote(length(ids) > 100 && is.null(species)),
-        sprintf(
-          "You supplied %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
-          length(ids)
-        )
-      )
+      list(arg = "ids", class = c("character", "numeric", "integer"), min_len = 1L),
+      list(arg = "species", class = c("numeric", "integer"), len = 1L),
+      list(arg = "allow_pubmed", class = "logical", len = 1L),
+      list(arg = "split_df", class = "logical", len = 1L)
     )
   )
 
   .msg(
-    "Retrieving functional annotations of %s Input Identifiers.",
-    length(ids)
+    "Retrieving functional annotations of %s unique input Identifiers.",
+    length(unique(ids))
   )
 
   ## Build POST API Request's body
@@ -1115,26 +1149,28 @@ rba_string_annotations <- function(ids,
 
 #' Get Protein-Protein Interaction Enrichment
 #'
-#' Even when there is no annotation for your input proteins, STRING can Compare
-#'   your Given proteins interactions pattern with the background proteome-wide
-#'   interaction distribution to determine if your given set of proteins are
-#'   functionally related.
+#' STRING compares the interaction pattern of your input proteins with the
+#'   proteome-wide background interaction distribution to determine whether
+#'   the protein set contains more interactions than expected.
 #'
 #' @section Corresponding API Resources:
-#'  "POST https://string-db.org/api/\{output_format\}/ppi_enrichment?identifiers=
+#'  "POST https://string-db.org/api/\{output-format\}/ppi_enrichment?identifiers=
 #'  \{your_identifiers\}&\{optional_parameters\}"
 #'
 #' @param ids Your protein ID(s). It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
-#' @param species Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
-#'   (Recommended, but optional if your input is less than 100 IDs.)
-#' @param required_score Numeric: A minimum of interaction score for an
-#'   interaction to be included in the image. if not supplied, the threshold
-#'   will be applied by STRING Based in the network. (low Confidence = 150,
-#'   Medium Confidence = 400, High Confidence = 700, Highest confidence = 900)
-#' @param background character vector: A set of STRING protein IDs
+#' @param species Numeric:
+#'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
+#'   NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
+#'   (Recommended, but required if your input contains more than 10 unique IDs.)
+#' @param required_score Numeric (between 0 and 1000): Minimum interaction
+#'   score used when calculating PPI enrichment. If omitted, STRING applies a
+#'   network-dependent threshold. Common
+#'   confidence thresholds are 150 (low), 400 (medium), 700 (high), and 900
+#'   (highest).
+#' @param background Character vector: A set of STRING protein IDs
 #'   to be used as the background proteome. Only STRING IDs are acceptable.
-#'   (See \code{\link{rba_string_map_ids}} to map your IDs.)
+#'   See \code{\link{rba_string_map_ids}} to map your IDs.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -1175,25 +1211,31 @@ rba_string_enrichment_ppi <- function(ids,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "ids", class = c("character", "numeric")),
-      list(arg = "species", class = "numeric"),
-      list(arg = "required_score", class = "numeric", min_val = 0, max_val = 1000),
-      list(arg = "background", class = "character")
+      list(arg = "ids", class = c("character", "numeric", "integer"), min_len = 1L),
+      list(arg = "species", class = c("numeric", "integer"), len = 1L),
+      list(
+        arg = "required_score",
+        class = c("numeric", "integer"),
+        min_val = 0,
+        max_val = 1000,
+        len = 1L
+      ),
+      list(arg = "background", class = "character", min_len = 1L)
     ),
     cond = list(
       list(
-        quote(length(ids) > 100 && is.null(species)),
+        quote(length(unique(ids)) > 10 && is.null(species)),
         sprintf(
-          "You supplied %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
-          length(ids)
+          "You supplied %s unique IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
+          length(unique(ids))
         )
       )
     )
   )
 
   .msg(
-    "Performing PPI Enrichment of %s Input Identifiers.",
-    length(ids)
+    "Performing PPI Enrichment of %s unique input Identifiers.",
+    length(unique(ids))
   )
 
   ## Build POST API Request's body
@@ -1226,16 +1268,14 @@ rba_string_enrichment_ppi <- function(ids,
 
 #' Get Current STRING Version
 #'
-#' Get STRING version and stable Address that this package currently uses.
+#' Get the STRING version and stable address currently used by this package.
 #'
-#' Note that STRING releases new version at approximately 2 years cycle.
-#'   Nevertheless, to insure reproducibility, STRING dedicates a stable address
-#'   for each release. Thus you can always reproduce research and results
-#'   obtained via a certain STRING version. If the version that rbioapi returns
-#'   is outdated, Kindly contact me.
+#' STRING releases a new version approximately every two years. To support
+#'   reproducibility, each release has a stable address that remains available
+#'   after newer versions are released.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://string-db.org/api/\{output_format\}/version"
+#'  "GET https://string-db.org/api/\{output-format\}/version"
 #'
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
@@ -1296,11 +1336,11 @@ rba_string_version <- function(...) {
 
 #' Get STRING Enrichment Plot
 #'
-#' In addition to performing enrichment analysis, STRING allows you to also
-#'   visualize the analysis results. Use \code{\link{rba_string_enrichment}}
-#'   to retrieve the analysis results as a data frame.
+#' Retrieve a plot that summarizes STRING functional-enrichment results. Use
+#'   \code{\link{rba_string_enrichment}} to retrieve the results as a data
+#'   frame.
 #'
-#' Available values for category are as follow. Default value is "Process".
+#' Available \code{category} values are listed below. The default is "Process".
 #'   \itemize{
 #'   \item Process: Biological Process (Gene Ontology)
 #'   \item Function: Molecular Function (Gene Ontology)
@@ -1325,20 +1365,24 @@ rba_string_version <- function(...) {
 #'   \item WikiPathways: WikiPathways}
 #'
 #' @section Corresponding API Resources:
-#'  "POST https://string-db.org/api/\{output_format\}/enrichmentfigure"
+#'  "POST https://string-db.org/api/\{output-format\}/enrichmentfigure?
+#'  identifiers=\{your_identifiers\}&\{optional_parameters\}"
 #'
 #' @param ids Your protein ID(s). It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
-#'   Note that if only one id is supplied, STRING expands the network by 10
+#'   If only one ID is supplied, STRING expands the network by 10
 #'   proteins.
-#' @param species Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
-#' @param category The terms set to use to perform enrichment analysis. valid
-#'   values are (See details for more info):
+#' @param species Numeric:
+#'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
+#'   NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
+#'   (Recommended, but required if your input contains more than 10 unique IDs.)
+#' @param category Character: The term set to use for enrichment analysis.
+#'   Valid values are:
 #'   "Process" (default), "Function", "Component", "Keyword", "KEGG", "RCTM",
 #'   "HPO", "MPO", "DPO", "WPO", "ZPO", "FYPO", "Pfam", "SMART", "InterPro",
 #'   "PMID", "NetworkNeighborAL", "COMPARTMENTS", "TISSUES", "DISEASES", or
-#'   "WikiPathways"
-#' @param image_format one of:\itemize{
+#'   "WikiPathways". See Details for descriptions.
+#' @param image_format Character: One of:\itemize{
 #'   \item "image": PNG image with normal resolution.
 #'   \item "highres_image": High-resolution PNG image.
 #'   \item "svg": Scalable Vector Graphics image.}
@@ -1346,22 +1390,23 @@ rba_string_version <- function(...) {
 #'   \item TRUE: Save the image to an automatically-generated path.
 #'   \item FALSE: Do not save the image, just return it as an R object.
 #'   \item Character string: A valid file path to save the image to.}
-#' @param group_by_similarity Jackard index treshold to visually group the
-#'   related terms. Valid values are between 0.1 to 1 with increment of 0.1.
-#'   Default value is NULL (i.e. no grouping).
-#' @param color_palette Color pallet to code FDR values. Valid values are:
+#' @param group_by_similarity Numeric: Jaccard-index threshold used to group
+#'   related terms visually. Valid values range from 0.1 to 1 in increments of
+#'   0.1. The default is \code{NULL}, which disables grouping.
+#' @param color_palette Character: Color palette used to represent FDR values.
+#'   Valid values are
 #'   "mint_blue" (default), "lime_emerald", "green_blue", "peach_purple",
-#'   "straw_navy", or "yellow_pink"
-#' @param number_of_term_shown (default: 10) Maximum number of results to
-#'    include in the plot.
-#' @param x_axis The variable to show on the x axis and rank the results based
-#'   on it. Valid values are: "signal" (default), "strength", "FDR", or
-#'   "gene_count"
+#'   "straw_navy", or "yellow_pink".
+#' @param number_of_term_shown Numeric: (default = 10) Maximum number of terms
+#'   to include in the plot.
+#' @param x_axis Character: Variable displayed on the x-axis and used to rank
+#'   the results. Valid values are "signal" (default), "strength", "FDR", and
+#'   "gene_count".
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A plot summarizing the enrichment results, which can be PNG or
-#'   SVG depending on the inputs.
+#' @return A PNG image array or raw SVG content, depending on
+#'   \code{image_format}.
 #'
 #' @references \itemize{
 #'   \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
@@ -1410,7 +1455,7 @@ rba_string_version <- function(...) {
 #'   }
 #' @export
 rba_string_enrichment_image <- function(ids,
-                                        species,
+                                        species = NULL,
                                         category = "Process",
                                         image_format = "image",
                                         save_image = TRUE,
@@ -1425,8 +1470,8 @@ rba_string_enrichment_image <- function(ids,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "ids", class = c("character", "numeric")),
-      list(arg = "species", class = "numeric"),
+      list(arg = "ids", class = c("character", "numeric", "integer"), min_len = 1L),
+      list(arg = "species", class = c("numeric", "integer"), len = 1L),
       list(
         arg = "category", class = "character",
         val = c("Process", "Function", "Component",
@@ -1435,48 +1480,68 @@ rba_string_enrichment_image <- function(ids,
                 "Pfam", "SMART", "InterPro",
                 "PMID", "NetworkNeighborAL",
                 "COMPARTMENTS", "TISSUES", "DISEASES",
-                "WikiPathways")
+                "WikiPathways"),
+        len = 1L
       ),
       list(
         arg = "image_format", class = "character",
-        val = c("image", "highres_image", "svg")
+        val = c("image", "highres_image", "svg"),
+        len = 1L
       ),
-      list(arg = "save_image", class = c("character", "logical")),
-      list(arg = "group_by_similarity", class = "numeric", val = seq(0.1, 1, by = 0.1)),
+      list(arg = "save_image", class = c("character", "logical"), len = 1L),
+      list(
+        arg = "group_by_similarity",
+        class = c("numeric", "integer"),
+        val = seq(0.1, 1, by = 0.1),
+        len = 1L
+      ),
       list(
         arg = "color_palette", class = "character",
-        val = c("mint_blue", "lime_emerald", "green_blue", "peach_purple", "straw_navy", "yellow_pink")
+        val = c("mint_blue", "lime_emerald", "green_blue", "peach_purple", "straw_navy", "yellow_pink"),
+        len = 1L
       ),
-      list(arg = "number_of_term_shown", class = "numeric", min_val = 1),
       list(
-        arg = "x_axis", class = "character", val = c("signal", "strength", "FDR", "gene_count")
+        arg = "number_of_term_shown",
+        class = c("numeric", "integer"),
+        min_val = 1,
+        len = 1L
+      ),
+      list(
+        arg = "x_axis",
+        class = "character",
+        val = c("signal", "strength", "FDR", "gene_count"),
+        len = 1L
       )
     ),
     cond = list(
       list(
-        quote(length(ids) > 100 && is.null(species)),
+        quote(anyNA(save_image)),
+        "`save_image` cannot be `NA`."
+      ),
+      list(
+        quote(length(unique(ids)) > 10 && is.null(species)),
         sprintf(
-          "You supplied %s IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
-          length(ids)
+          "You supplied %s unique IDs. Please Specify the species (Homo Sapiens NCBI taxonomy ID is 9606).",
+          length(unique(ids))
         )
       )
     )
   )
 
   .msg(
-    "Retrieving STRING enrichment plot of %s input Identifiers.",
-    length(ids)
+    "Retrieving STRING enrichment plot of %s unique input Identifiers.",
+    length(unique(ids))
   )
 
   ## Build POST API Request's body
   call_body <- .rba_query(
     init = list(
       "identifiers" = paste(unique(ids), collapse = "%0d"),
-      "species" = species,
       "category" = category,
       "color_palette" = color_palette,
       "caller_identity" = getOption("rba_user_agent")
     ),
+    list("species", !is.null(species), species),
     list("group_by_similarity", !is.null(group_by_similarity), group_by_similarity),
     list("number_of_term_shown", number_of_term_shown != 10, as.integer(number_of_term_shown)),
     list("x_axis", x_axis != "signal", x_axis)
@@ -1487,18 +1552,20 @@ rba_string_enrichment_image <- function(ids,
 
     ext_input <- "svg"
     accept_input <- "image/svg+xml"
-    parser_input <- function(x) { httr::content(x) }
+    parser_input <- function(x) { httr::content(x, as = "raw") }
 
   } else {
 
     ext_input <- "png"
     accept_input <- "image/png"
-    parser_input <- function(x) { httr::content(x, type = "image/png") }
+    parser_input <- function(x) {
+      png::readPNG(httr::content(x, as = "raw"))
+    }
 
   }
 
   save_image <- .rba_file(
-    file = paste0("string_network_image.", ext_input),
+    file = paste0("string_enrichment_image.", ext_input),
     save_to = save_image
   )
 
@@ -1510,7 +1577,9 @@ rba_string_enrichment_image <- function(ids,
     accept = accept_input,
     parser = parser_input,
     body = call_body,
-    save_to = save_image)
+    encode = "form",
+    save_to = save_image
+  )
 
   ## Call API
   final_output <- .rba_skeleton(input_call)

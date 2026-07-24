@@ -9,14 +9,16 @@ rba_string_map_ids(ids, species = NULL, echo_query = FALSE, limit = NULL, ...)
 \arguments{
 \item{ids}{Your Common gene/protein Identifier(s) to be mapped.}
 
-\item{species}{Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
-(Recommended, but optional if your input is less than 100 IDs.)}
+\item{species}{Numeric:
+\href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
+NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
+(Recommended, but optional.)}
 
-\item{echo_query}{(default = FALSE) Include your input IDs as a column of the
+\item{echo_query}{(default = \code{FALSE}) Include your input IDs as a column of the
 results.}
 
-\item{limit}{(Numeric, Optional) A limit on the number of matches per input
-ID. The output are sorted to have the best matches first.}
+\item{limit}{Numeric: Maximum number of matches returned per input ID.
+Results are ordered from the best to the worst match.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
@@ -26,15 +28,14 @@ A data frame with the mapped STRING IDs and other pertinent
   information.
 }
 \description{
-This function Calls STRING's API to Convert a set of identifiers
-  to STRING Identifiers. Although You can call STRING services with a variety
-  of common identifiers, It is recommended by STRING's documentations that
-  you first map Your Protein/genes IDs to STRING IDs and then proceed
-  with other STRING's functions.
+This function calls STRING's API to map a set of common gene or protein
+  identifiers to STRING identifiers. Although STRING services accept a
+  variety of identifiers, the STRING API documentation recommends mapping
+  them to STRING identifiers before using other STRING functions.
 }
 \section{Corresponding API Resources}{
 
- "POST https://string-db.org/api/\{output-format\}/get_string_ids?identifiers=
+ "POST https://string-db.org/api/\{output-format\}/resolve?identifiers=
  \{your_identifiers\}&\{optional_parameters\}"
 }
 

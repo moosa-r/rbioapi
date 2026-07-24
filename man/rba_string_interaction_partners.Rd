@@ -17,47 +17,48 @@ rba_string_interaction_partners(
 \item{ids}{Your protein ID(s). It is strongly recommended to supply
 STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
 
-\item{species}{Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
-(Recommended, but optional if your input is less than 100 IDs.)}
+\item{species}{Numeric:
+\href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
+NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
+(Recommended, but required if your input contains more than 10 unique IDs.)}
 
-\item{required_score}{Numeric: A minimum of interaction score for an
-interaction to be included in the image. if not supplied, the threshold
-will be applied by STRING Based in the network. (low Confidence = 150,
-Medium Confidence = 400, High Confidence = 700, Highest confidence = 900)}
+\item{required_score}{Numeric (between 0 and 1000): Minimum interaction
+score required for an interaction to be included in the returned
+interactions. If omitted, STRING applies a network-dependent threshold.
+Common confidence thresholds are 150 (low), 400 (medium), 700 (high), and
+900 (highest).}
 
-\item{network_type}{should be one of:\itemize{
-\item "functional": (default) The edge's indicate both physical and
-functional associations.}}
+\item{network_type}{Character: One of:\itemize{
+\item "functional": (default) Edges indicate both physical and
+functional associations.
+\item "physical": Edges indicate that two proteins have a physical
+interaction or are parts of a complex.}}
 
-\item{limit}{Limit the number returned interaction partners per each of
-your input proteins. (e.g. Number of the most confident interaction partner
-to return per each input protein.)}
+\item{limit}{Numeric: Maximum number of interaction partners returned for
+each input protein, ordered by confidence.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-A data frame which each row is a network interaction and the
-  columns contains interactor information and interaction scores.
+A data frame in which each row is a network interaction and the
+  columns contain interactor information and interaction scores.
 }
 \description{
-This function will retrieve all the STRING interactions which include your
-  proteins as one party of the interaction. (e.g. interaction between your
-  proteins and every other STRING proteins.)
-  \cr Given the size of STRING database, this function could return a very
-  long results. See "Arguments" section for information on how to filter
-  the interactions.
+This function retrieves STRING interactions involving any of your input
+  proteins as one party of the interaction, including interactions with
+  proteins outside the input set.
+  \cr Given the size of the STRING database, this function can return many
+  interactions. Use the filtering arguments to limit the results.
 }
 \details{
-Note that this function will retrieve the interactions between your input
-  proteins and every other STRING proteins. To retrieve the interaction
-  among your input protein-set, see
+To retrieve only interactions among the input proteins, see
   \code{\link{rba_string_interactions_network}}.
 }
 \section{Corresponding API Resources}{
 
- "POST https://string-db.org/api/\{output-format\}/
- interaction_partners?identifiers=\{your_identifiers\}&\{optional_parameters\}"
+ "POST https://string-db.org/api/\{output-format\}/interaction_partners?
+ identifiers=\{your_identifiers\}&\{optional_parameters\}"
 }
 
 \examples{

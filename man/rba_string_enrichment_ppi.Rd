@@ -16,17 +16,20 @@ rba_string_enrichment_ppi(
 \item{ids}{Your protein ID(s). It is strongly recommended to supply
 STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
 
-\item{species}{Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
-(Recommended, but optional if your input is less than 100 IDs.)}
+\item{species}{Numeric:
+\href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
+NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
+(Recommended, but required if your input contains more than 10 unique IDs.)}
 
-\item{required_score}{Numeric: A minimum of interaction score for an
-interaction to be included in the image. if not supplied, the threshold
-will be applied by STRING Based in the network. (low Confidence = 150,
-Medium Confidence = 400, High Confidence = 700, Highest confidence = 900)}
+\item{required_score}{Numeric (between 0 and 1000): Minimum interaction
+score used when calculating PPI enrichment. If omitted, STRING applies a
+network-dependent threshold. Common
+confidence thresholds are 150 (low), 400 (medium), 700 (high), and 900
+(highest).}
 
-\item{background}{character vector: A set of STRING protein IDs
+\item{background}{Character vector: A set of STRING protein IDs
 to be used as the background proteome. Only STRING IDs are acceptable.
-(See \code{\link{rba_string_map_ids}} to map your IDs.)}
+See \code{\link{rba_string_map_ids}} to map your IDs.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
@@ -35,14 +38,13 @@ arguments manual for more information on available options.}
 A list with protein-protein interaction enrichment results.
 }
 \description{
-Even when there is no annotation for your input proteins, STRING can Compare
-  your Given proteins interactions pattern with the background proteome-wide
-  interaction distribution to determine if your given set of proteins are
-  functionally related.
+STRING compares the interaction pattern of your input proteins with the
+  proteome-wide background interaction distribution to determine whether
+  the protein set contains more interactions than expected.
 }
 \section{Corresponding API Resources}{
 
- "POST https://string-db.org/api/\{output_format\}/ppi_enrichment?identifiers=
+ "POST https://string-db.org/api/\{output-format\}/ppi_enrichment?identifiers=
  \{your_identifiers\}&\{optional_parameters\}"
 }
 

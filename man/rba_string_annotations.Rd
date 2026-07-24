@@ -2,7 +2,7 @@
 % Please edit documentation in R/stringdb.R
 \name{rba_string_annotations}
 \alias{rba_string_annotations}
-\title{Retrieving Functional Annotation}
+\title{Get Functional Annotations}
 \usage{
 rba_string_annotations(
   ids,
@@ -16,44 +16,44 @@ rba_string_annotations(
 \item{ids}{Your protein ID(s). It is strongly recommended to supply
 STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
 
-\item{species}{Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
-(Recommended, but optional if your input is less than 100 IDs.)}
+\item{species}{Numeric:
+\href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
+NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
+(Recommended, but optional.)}
 
-\item{allow_pubmed}{logical: (default = FALSE) PubMed usually  assigns a
-large number of reference publications to each protein. In order to reduce
-the output size, PubMed's results will be excluded from the results,
-unless stated otherwise by setting this argument to TRUE.}
+\item{allow_pubmed}{Logical (default = \code{FALSE}): Include PubMed
+annotations. These annotations are excluded by default because many
+publications may be assigned to each protein.}
 
-\item{split_df}{(logical, default = TRUE), If TRUE, instead of one
-data frame, results from different categories will be split into
-multiple data frames based on their 'category'.}
+\item{split_df}{Logical: (default = \code{TRUE}) Split results into a list
+of data frames by \code{category}; otherwise, return one data frame.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-A data frame which every row is an assigned terms and the columns
-  are the terms category, description, number of genes, and other pertinent
-  information.
+A data frame in which every row is an assigned term and the columns
+  contain the term category, description, number of genes, and other
+  pertinent information. If \code{split_df = TRUE}, a list of data frames
+  split by category is returned.
 }
 \description{
-STRING cross-reference the proteins with several databases (see "Details"
-  section). By providing your input set o proteins (and optionally
-  background or universe protein set), you can use this function to
-  retrieve full set of terms (annotations) pertinent to your input proteins in
-  each database, among with information for each term.
+STRING cross-references proteins with several annotation resources. This
+  function retrieves the complete set of annotations assigned to the input
+  proteins, together with information about each term.
 }
 \details{
-STRING currently maps to and retrieve enrichment results based on Gene
-  Ontology (GO), KEGG pathways, UniProt Keywords, PubMed publications, Pfam
-  domains, InterPro domains, and SMART domains.
-  \cr Note that this function will return a full list of the terms containing
-  your supplied proteins. To perform enrichment and only retrieve a enriched
-  subset of the terms, use \code{\link{rba_string_enrichment}}.
+STRING currently retrieves annotations based on Gene Ontology (GO), UniProt
+  Keywords, PubMed publications, Pfam domains, InterPro domains, and SMART
+  domains. KEGG annotations are unavailable from this endpoint because of
+  KEGG licensing restrictions.
+  \cr This function returns annotations without enrichment filtering. To
+  perform enrichment and retrieve only enriched terms, use
+  \code{\link{rba_string_enrichment}}.
 }
 \section{Corresponding API Resources}{
 
- "POST https://string-db.org/api/\{output_format\}/functional_annotation?
+ "POST https://string-db.org/api/\{output-format\}/functional_annotation?
  identifiers=\{your_identifiers\}&\{optional_parameters\}"
 }
 

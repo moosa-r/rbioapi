@@ -14,18 +14,16 @@ arguments manual for more information on available options.}
 A list with STRING version and stable address.
 }
 \description{
-Get STRING version and stable Address that this package currently uses.
+Get the STRING version and stable address currently used by this package.
 }
 \details{
-Note that STRING releases new version at approximately 2 years cycle.
-  Nevertheless, to insure reproducibility, STRING dedicates a stable address
-  for each release. Thus you can always reproduce research and results
-  obtained via a certain STRING version. If the version that rbioapi returns
-  is outdated, Kindly contact me.
+STRING releases a new version approximately every two years. To support
+  reproducibility, each release has a stable address that remains available
+  after newer versions are released.
 }
 \section{Corresponding API Resources}{
 
- "GET https://string-db.org/api/\{output_format\}/version"
+ "GET https://string-db.org/api/\{output-format\}/version"
 }
 
 \examples{

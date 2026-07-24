@@ -2,7 +2,7 @@
 % Please edit documentation in R/stringdb.R
 \name{rba_string_homology_intra}
 \alias{rba_string_homology_intra}
-\title{Get Similarity Scores Hits of Proteins in a Species}
+\title{Get Protein Similarity Scores Within a Species}
 \usage{
 rba_string_homology_intra(ids, species = NULL, ...)
 }
@@ -10,37 +10,37 @@ rba_string_homology_intra(ids, species = NULL, ...)
 \item{ids}{Your protein ID(s). It is strongly recommended to supply
 STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
 
-\item{species}{Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
-(Recommended, but optional if your input is less than 100 IDs.)}
+\item{species}{Numeric:
+\href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
+NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
+(Recommended, but required if your input contains more than 10 unique IDs.)}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-A data frame with bit scores between your supplied proteins and
-  their self-hit. To Reduce the transferred data, STRING returns only one
-  half of the similarity matrix; This will not pose a problem because
-  similarity matrix is symmetrical.
+A data frame containing pairwise bit scores and self-hits for the
+  supplied proteins. STRING returns only one half of the symmetric similarity
+  matrix to reduce data transfer.
 }
 \description{
-Using this function, you can retrieve the Smith-Waterman bit scores among
-  proteins of the same species.
-  Bit Scores serve as similarity scores between protein sequence;
-  And, according to STRING documentations, as a proxy for protein homology.
+Retrieve Smith-Waterman bit scores among proteins from the same species.
+  STRING uses these sequence-similarity scores as a proxy for protein
+  homology.
 }
 \details{
-Note that this function will retrieve similarity scores of different
-  proteins "within the same species". To Get a similarity scores of a given
-  protein and it's closets homologous proteins in other species, see
+To retrieve the best similarity hit for each input protein in other STRING
+  species, see
   \code{\link{rba_string_homology_inter}}.
-  \cr Similarity matrix is imported -by STRING- from:
+
+STRING imports the similarity matrix from the
   \href{https://pubmed.ncbi.nlm.nih.gov/24165881/}{Similarity Matrix of
-  Proteins (SIMAP)}
+  Proteins (SIMAP)} project.
 }
 \section{Corresponding API Resources}{
 
  "POST https://string-db.org/api/\{output-format\}/homology?identifiers=
- \{your_identifiers\}"
+ \{your_identifiers\}&\{optional_parameters\}"
 }
 
 \examples{
