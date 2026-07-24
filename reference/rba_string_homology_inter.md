@@ -1,11 +1,8 @@
-# Get Similarity Scores Hits of Proteins in Different Species
+# Get Best Protein Similarity Hits Across Species
 
-Using this function, you can retrieve highest Smith-Waterman bit scores
-among your input proteins and proteins in every other STRING species
-(e.g. the closest homologous protein of your input protein in other
-species). Bit Scores serve as similarity scores between protein
-sequence; And, according to STRING documentations, as a proxy for
-protein homology.
+Retrieve the highest Smith-Waterman bit-score hit between each input
+protein and proteins in every other STRING species. STRING uses these
+sequence-similarity scores as a proxy for protein homology.
 
 ## Usage
 
@@ -24,14 +21,17 @@ rba_string_homology_inter(ids, species = NULL, species_b = NULL, ...)
 
 - species:
 
-  Numeric: NCBI Taxonomy identifier of your input proteins; Human
-  Taxonomy ID is 9606. (Recommended, but optional if your input is less
-  than 100 IDs.)
+  Numeric: [NCBI Taxonomy
+  identifier](https://www.ncbi.nlm.nih.gov/taxonomy/) of your input
+  proteins; Human Taxonomy ID is 9606. (Recommended, but required if
+  your input contains more than 10 unique IDs.)
 
 - species_b:
 
-  (optional) Numeric: one or more NCBI Taxonomy identifiers of species
-  to limit the closets homologous proteins search.
+  Numeric: One or more [NCBI Taxonomy
+  identifiers](https://www.ncbi.nlm.nih.gov/taxonomy/) used to restrict
+  the search for closest homologs. The default is `NULL`, which searches
+  all STRING species.
 
 - ...:
 
@@ -41,23 +41,22 @@ rba_string_homology_inter(ids, species = NULL, species_b = NULL, ...)
 
 ## Value
 
-A data frame with Your input proteins and it's closest homologous
-proteins among all other (or a defined) STRING species.
+A data frame containing each input protein and its closest homolog in
+every other STRING species, or in the species selected by `species_b`.
 
 ## Details
 
-Note that this function will return the highest similarity score hits of
-your given protein(s) and their closets homologous proteins in other
-species. to retrieve similarity scores of different proteins within the
-same species see
-[`rba_string_homology_intra`](https://rbioapi.moosa-r.com/reference/rba_string_homology_intra.md).  
-Similarity matrix is imported -by STRING- from: [Similarity Matrix of
-Proteins (SIMAP)](https://pubmed.ncbi.nlm.nih.gov/24165881/)
+To retrieve pairwise similarity scores among input proteins within one
+species, see
+[`rba_string_homology_intra`](https://rbioapi.moosa-r.com/reference/rba_string_homology_intra.md).
+
+STRING imports the similarity matrix from the [Similarity Matrix of
+Proteins (SIMAP)](https://pubmed.ncbi.nlm.nih.gov/24165881/) project.
 
 ## Corresponding API Resources
 
 "POST https://string-db.org/api/{output-format}/homology_best?
-identifiers={your_identifiers}"
+identifiers={your_identifiers}&{optional_parameters}"
 
 ## References
 
@@ -76,13 +75,14 @@ identifiers={your_identifiers}"
 
 ## See also
 
-[`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)`, `[`rba_string_homology_intra`](https://rbioapi.moosa-r.com/reference/rba_string_homology_intra.md)
+` `[`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)`, `[`rba_string_homology_intra`](https://rbioapi.moosa-r.com/reference/rba_string_homology_intra.md)` `
 
 Other "STRING":
 [`rba_string_annotations()`](https://rbioapi.moosa-r.com/reference/rba_string_annotations.md),
 [`rba_string_enrichment()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment.md),
 [`rba_string_enrichment_image()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_image.md),
 [`rba_string_enrichment_ppi()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_ppi.md),
+[`rba_string_functional_terms()`](https://rbioapi.moosa-r.com/reference/rba_string_functional_terms.md),
 [`rba_string_homology_intra()`](https://rbioapi.moosa-r.com/reference/rba_string_homology_intra.md),
 [`rba_string_interaction_partners()`](https://rbioapi.moosa-r.com/reference/rba_string_interaction_partners.md),
 [`rba_string_interactions_network()`](https://rbioapi.moosa-r.com/reference/rba_string_interactions_network.md),

@@ -1,10 +1,8 @@
 # Get STRING Network Image
 
-Depending on that you supplied a single protein ID or more than one
-protein ID, this function will produce a static image of the interaction
-networks among your input proteins or/and with other proteins. See the
-"Arguments" section to learn more about how you can modify the network
-image.
+This function retrieves a static image of the interaction network among
+your input proteins and, where applicable, additional interactors. The
+available arguments control the network contents and appearance.
 
 ## Usage
 
@@ -26,6 +24,7 @@ rba_string_network_image(
   flat_nodes = FALSE,
   node_labels_center = FALSE,
   node_labels_font_size = 12,
+  network_term_id = NULL,
   ...
 )
 ```
@@ -37,11 +36,14 @@ rba_string_network_image(
   Your protein ID(s). It is strongly recommended to supply STRING IDs.
   See
   [`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)
-  for more information.
+  for more information.  
+  Alternatively, you can retrieve the network of proteins annotated with
+  a STRING functional term by setting `ids = NULL` and supplying
+  `network_term_id`.
 
 - image_format:
 
-  one of:
+  Character: One of:
 
   - "image": PNG image with normal resolution.
 
@@ -61,8 +63,10 @@ rba_string_network_image(
 
 - species:
 
-  Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
-  (Recommended, but optional if your input is less than 100 IDs.)
+  Numeric: [NCBI Taxonomy
+  identifier](https://www.ncbi.nlm.nih.gov/taxonomy/); Human Taxonomy ID
+  is 9606. Required when using `network_term_id`; otherwise recommended,
+  but required if your input contains more than 10 unique IDs.
 
 - add_color_nodes:
 
@@ -76,68 +80,72 @@ rba_string_network_image(
 
 - required_score:
 
-  Numeric (Between 0 to 1000): A minimum of interaction score for an
-  interaction to be included in the image. if not supplied, the
-  threshold will be applied by STRING Based in the network. (low
-  Confidence = 150, Medium Confidence = 400, High Confidence = 700,
-  Highest confidence = 900)
+  Numeric (between 0 and 1000): Minimum interaction score required for
+  an interaction to be included in the image. If omitted, STRING applies
+  a network-dependent threshold. Common confidence thresholds are 150
+  (low), 400 (medium), 700 (high), and 900 (highest).
 
 - network_flavor:
 
-  The style of network edges, should be one of:
+  Character: The network-edge style. One of:
 
-  - "evidence": (default) Line's color is based on the type of evidences
-    that support the interaction.
+  - "evidence": (default) Edge colors indicate the types of evidence
+    supporting each interaction.
 
-  - "confidence": Line's thickness is an indicator of the interaction's
-    confidence score.
+  - "confidence": Edge thickness indicates the interaction confidence
+    score.
 
-  - "action": Line's Shape is an indicator of the interaction's
-    predicted mode of actions.
+  - "actions": Edge shape indicates the predicted mode of action.
 
 - network_type:
 
-  should be one of:
+  Character: One of:
 
-  - "functional": (default) The edge's indicate both physical and
-    functional associations.
+  - "functional": (default) Edges indicate both physical and functional
+    associations.
 
-  - "physical": The edges indicate that two proteins have a physical
+  - "physical": Edges indicate that two proteins have a physical
     interaction or are parts of a complex.
 
 - hide_node_labels:
 
-  Logical: (Default = FALSE) Hide proteins names from the image
+  Logical: (default = `FALSE`) Hide protein names from the image.
 
 - use_query_labels:
 
-  Logical: (Default = FALSE) Use the names supplied with the 'ids'
-  argument as the nodes labels instead of STRING's default ones.
+  Logical: (default = `FALSE`) Use the names supplied in `ids` as node
+  labels instead of STRING's default labels.
 
 - hide_disconnected_nodes:
 
-  Logical: (Default = FALSE) Hide proteins that are not connected to any
-  other proteins from the image
+  Logical: (default = `FALSE`) Hide proteins that are not connected to
+  any other protein.
 
 - hide_structure_pics:
 
-  Logical: (Default = FALSE) Hide protein's structure picture from
-  inside the bubbles
+  Logical: (default = `FALSE`) Hide protein structure images inside the
+  nodes.
 
 - flat_nodes:
 
-  Logical: (Default = FALSE) Make the nodes design flat instead of the
-  default 3D design
+  Logical: (default = `FALSE`) Use a flat node design instead of the
+  default 3D design.
 
 - node_labels_center:
 
-  Logical: (Default = FALSE) Position the protein names labels center
-  aligned on the nodes
+  Logical: (default = `FALSE`) Center protein labels on the nodes.
 
 - node_labels_font_size:
 
-  Numeric (Between 5 to 50, Default = 12) Font size of the protein nodes
-  labels
+  Numeric (between 5 and 50; default = 12): Font size of the protein
+  node labels.
+
+- network_term_id:
+
+  Character: A functional term identifier (e.g. a Gene Ontology, KEGG,
+  or Reactome identifier). Instead of using proteins supplied through
+  `ids`, STRING constructs the network from proteins annotated with the
+  specified term. Set `ids = NULL` and supply `species`.
 
 - ...:
 
@@ -147,12 +155,14 @@ rba_string_network_image(
 
 ## Value
 
-A network images which can be PNG or SVG depending on the inputs.
+A PNG image array or raw SVG content, depending on `image_format`.
 
 ## Corresponding API Resources
 
 "POST https://string-db.org/api/{output-format}/network?identifiers=
-{your_identifiers}&{optional_parameters}"
+{your_identifiers}&{optional_parameters}"  
+"POST https://string-db.org/api/{output-format}/network?network_term_id=
+{your_term}&{optional_parameters}"
 
 ## References
 
@@ -171,13 +181,14 @@ A network images which can be PNG or SVG depending on the inputs.
 
 ## See also
 
-[`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)
+` `[`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)`, `[`rba_string_interactions_network`](https://rbioapi.moosa-r.com/reference/rba_string_interactions_network.md)`, `[`rba_string_interaction_partners`](https://rbioapi.moosa-r.com/reference/rba_string_interaction_partners.md)`, `[`rba_string_enrichment_ppi`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_ppi.md)` `
 
 Other "STRING":
 [`rba_string_annotations()`](https://rbioapi.moosa-r.com/reference/rba_string_annotations.md),
 [`rba_string_enrichment()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment.md),
 [`rba_string_enrichment_image()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_image.md),
 [`rba_string_enrichment_ppi()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_ppi.md),
+[`rba_string_functional_terms()`](https://rbioapi.moosa-r.com/reference/rba_string_functional_terms.md),
 [`rba_string_homology_inter()`](https://rbioapi.moosa-r.com/reference/rba_string_homology_inter.md),
 [`rba_string_homology_intra()`](https://rbioapi.moosa-r.com/reference/rba_string_homology_intra.md),
 [`rba_string_interaction_partners()`](https://rbioapi.moosa-r.com/reference/rba_string_interaction_partners.md),
@@ -204,5 +215,13 @@ if (FALSE) { # \dontrun{
 rba_string_network_image(ids = "9606.ENSP00000269305",
     image_format = "highres_image",
     save_image = file.path(getwd(), "TP53_network.png"))
+} # }
+if (FALSE) { # \dontrun{
+rba_string_network_image(
+    ids = NULL,
+    network_term_id = "GO:0050852",
+    species = 9606,
+    save_image = FALSE
+)
 } # }
 ```

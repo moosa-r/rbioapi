@@ -1,9 +1,8 @@
-# Get Similarity Scores Hits of Proteins in a Species
+# Get Protein Similarity Scores Within a Species
 
-Using this function, you can retrieve the Smith-Waterman bit scores
-among proteins of the same species. Bit Scores serve as similarity
-scores between protein sequence; And, according to STRING
-documentations, as a proxy for protein homology.
+Retrieve Smith-Waterman bit scores among proteins from the same species.
+STRING uses these sequence-similarity scores as a proxy for protein
+homology.
 
 ## Usage
 
@@ -22,8 +21,10 @@ rba_string_homology_intra(ids, species = NULL, ...)
 
 - species:
 
-  Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
-  (Recommended, but optional if your input is less than 100 IDs.)
+  Numeric: [NCBI Taxonomy
+  identifier](https://www.ncbi.nlm.nih.gov/taxonomy/); Human Taxonomy ID
+  is 9606. (Recommended, but required if your input contains more than
+  10 unique IDs.)
 
 - ...:
 
@@ -33,24 +34,23 @@ rba_string_homology_intra(ids, species = NULL, ...)
 
 ## Value
 
-A data frame with bit scores between your supplied proteins and their
-self-hit. To Reduce the transferred data, STRING returns only one half
-of the similarity matrix; This will not pose a problem because
-similarity matrix is symmetrical.
+A data frame containing pairwise bit scores and self-hits for the
+supplied proteins. STRING returns only one half of the symmetric
+similarity matrix to reduce data transfer.
 
 ## Details
 
-Note that this function will retrieve similarity scores of different
-proteins "within the same species". To Get a similarity scores of a
-given protein and it's closets homologous proteins in other species, see
-[`rba_string_homology_inter`](https://rbioapi.moosa-r.com/reference/rba_string_homology_inter.md).  
-Similarity matrix is imported -by STRING- from: [Similarity Matrix of
-Proteins (SIMAP)](https://pubmed.ncbi.nlm.nih.gov/24165881/)
+To retrieve the best similarity hit for each input protein in other
+STRING species, see
+[`rba_string_homology_inter`](https://rbioapi.moosa-r.com/reference/rba_string_homology_inter.md).
+
+STRING imports the similarity matrix from the [Similarity Matrix of
+Proteins (SIMAP)](https://pubmed.ncbi.nlm.nih.gov/24165881/) project.
 
 ## Corresponding API Resources
 
 "POST https://string-db.org/api/{output-format}/homology?identifiers=
-{your_identifiers}"
+{your_identifiers}&{optional_parameters}"
 
 ## References
 
@@ -69,13 +69,14 @@ Proteins (SIMAP)](https://pubmed.ncbi.nlm.nih.gov/24165881/)
 
 ## See also
 
-[`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)`, `[`rba_string_homology_inter`](https://rbioapi.moosa-r.com/reference/rba_string_homology_inter.md)
+` `[`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)`, `[`rba_string_homology_inter`](https://rbioapi.moosa-r.com/reference/rba_string_homology_inter.md)` `
 
 Other "STRING":
 [`rba_string_annotations()`](https://rbioapi.moosa-r.com/reference/rba_string_annotations.md),
 [`rba_string_enrichment()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment.md),
 [`rba_string_enrichment_image()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_image.md),
 [`rba_string_enrichment_ppi()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_ppi.md),
+[`rba_string_functional_terms()`](https://rbioapi.moosa-r.com/reference/rba_string_functional_terms.md),
 [`rba_string_homology_inter()`](https://rbioapi.moosa-r.com/reference/rba_string_homology_inter.md),
 [`rba_string_interaction_partners()`](https://rbioapi.moosa-r.com/reference/rba_string_interaction_partners.md),
 [`rba_string_interactions_network()`](https://rbioapi.moosa-r.com/reference/rba_string_interactions_network.md),

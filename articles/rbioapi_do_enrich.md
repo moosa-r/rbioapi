@@ -154,7 +154,7 @@ enrichr_enrich <- rba_enrichr(
 #> --Step 2/3:
 #> Uploading 1214 gene symbols to Enrichr human.
 #> --Step 3/3:
-#> Performing Enrichr analysis on gene-list 133363661 against Enrichr human library: KEGG_2021_Human.
+#> Performing Enrichr analysis on gene-list 133582908 against Enrichr human library: KEGG_2021_Human.
 ```
 
 In the `gene_set_library` parameter, you can provide multiple gene set
@@ -176,7 +176,7 @@ enrichr_enrich_kegg <- rba_enrichr(
 #> --Step 2/3:
 #> Uploading 1214 gene symbols to Enrichr human.
 #> --Step 3/3:
-#> Performing Enrichr analysis on gene-list 133363669 using multiple Enrichr human libraries.
+#> Performing Enrichr analysis on gene-list 133582920 using multiple Enrichr human libraries.
 #> Note: You have selected '7' Enrichr human libraries. Note that for each library, a separate call should be sent to Enrichr server. Thus, this could take a while depending on the number of selected libraries.
 ```
 
@@ -484,7 +484,7 @@ string_enrich <- rba_string_enrichment(
   ids = covid_critical,
   species = 9606 #Homo sapiens
 )
-#> Performing functional enrichment of 1214 Input Identifiers.
+#> Performing functional enrichment of 1214 unique input Identifiers.
 ```
 
 As you can see, by default a list is returned where each element is a
@@ -517,9 +517,11 @@ with our gene list. To keep the table tidy, we are not displaying the
 You can retrieve the annotations associated with your input protein(s).
 The difference here is that no statistical analysis will be performed
 and the full annotations of your input gene will be returned. Because of
-potentially unwieldy response, `allow_pubmed` is set fo FALSE by
-default. Here we set it to TRUE to also retrieve the PubMed paper
-abstracts that include our gene.
+the potentially unwieldy response, `allow_pubmed` is `FALSE` by default.
+Here we set it to `TRUE` to also retrieve the PubMed publication
+annotations associated with our gene. To retrieve only PubMed
+annotations, use `only_pubmed = TRUE`; it takes precedence if both
+arguments are `TRUE`.
 
 ``` r
 
@@ -528,12 +530,12 @@ string_annot <- rba_string_annotations(
   species = 9606, #Homo sapiens
   allow_pubmed = TRUE
 )
-#> Retrieving functional annotations of 1 Input Identifiers.
+#> Retrieving functional annotations of 1 unique input Identifiers.
 ```
 
-As you can see, Our input gene has a large number of annotations. Let us
-take a look at the PMID Data Frame, which contains the PubMed Abstract
-paper terms:
+As you can see, our input gene has a large number of annotations. Let us
+take a look at the PMID data frame, which contains the PubMed
+publication annotations:
 
 ``` r
 
@@ -708,11 +710,11 @@ mieaa_enrich <- rba_mieaa_enrich(
 #> Submitting ORA enrichment request for 23 miRNA IDs of species Homo sapiens to miEAA servers.
 #> 
 #>  -- Step 2/3: Checking for Submitted enrichment analysis's status every 5 seconds.
-#>     Your submitted job ID is: c3475977-1789-4a79-8ed3-ee8d5dca036e
+#>     Your submitted job ID is: 85979e61-60b3-4a4e-940f-cdbb8fa8d677
 #> .
 #> 
 #>  -- Step 3/3: Retrieving the results.
-#> Retrieving results of submitted enrichment request with ID: c3475977-1789-4a79-8ed3-ee8d5dca036e
+#> Retrieving results of submitted enrichment request with ID: 85979e61-60b3-4a4e-940f-cdbb8fa8d677
 ```
 
 ------------------------------------------------------------------------

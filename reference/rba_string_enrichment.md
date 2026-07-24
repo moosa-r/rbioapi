@@ -1,11 +1,9 @@
-# Getting Functional Enrichment
+# Get Functional Enrichment
 
-STRING cross-reference the proteins with several databases (see
-"Details" section). By providing your input set o proteins (and
-optionally background or universe protein set), you can use this
-function to perform enrichment test and retrieve a list of enriched
-terms in each database, among with pertinent information for each term.
-Use
+STRING cross-references proteins with several annotation resources. (See
+'Details' section). Provide an input protein set and, optionally, a
+background protein set to perform an enrichment test and retrieve
+enriched terms with their associated statistics. Use
 [`rba_string_enrichment_image`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_image.md)
 to retrieve the analysis results as a plot.
 
@@ -28,27 +26,27 @@ rba_string_enrichment(
   Your protein ID(s). It is strongly recommended to supply STRING IDs.
   See
   [`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)
-  for more information. Note that if only one id is supplied, STRING
+  for more information. Note that if only one ID is supplied, STRING
   expands the network by 10 proteins.
 
 - species:
 
-  Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
-  (Recommended, but optional if your input is less than 100 IDs.)
+  Numeric: [NCBI Taxonomy
+  identifier](https://www.ncbi.nlm.nih.gov/taxonomy/); Human Taxonomy ID
+  is 9606. (Recommended, but optional.)
 
 - background:
 
-  character vector: A set of STRING protein IDs to be used as the
-  statistical background (or universe) when computing P-value for the
-  terms. Only STRING IDs are acceptable. (See
+  Character vector: A set of STRING protein IDs to be used as the
+  statistical background (or universe) when computing term p-values.
+  Only STRING IDs are accepted. See
   [`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)
-  to map your IDs.)
+  to map your IDs.
 
 - split_df:
 
-  (logical, default = TRUE), If TRUE, instead of one data frame, results
-  from different categories will be split into multiple data frames
-  based on their 'category'.
+  Logical: (default = `TRUE`) Split results into a list of data frames
+  by `category`; otherwise, return one data frame.
 
 - ...:
 
@@ -58,23 +56,23 @@ rba_string_enrichment(
 
 ## Value
 
-A list of data frames which every row is an enriched terms with p-value
-smaller than 0.1 and the columns are the terms category, description,
-number of genes, p-value, fdr and other pertinent information.
+A data frame in which each row is an enriched term with a raw p-value
+below 0.1 and the columns contain the term category, description, gene
+counts, p-value, FDR, and other pertinent information. If
+`split_df = TRUE`, a list of data frames split by category is returned.
 
 ## Details
 
-STRING currently maps to and retrieve enrichment results based on Gene
-Ontology (GO), KEGG pathways, UniProt Keywords, PubMed publications,
-Pfam domains, InterPro domains, and SMART domains.  
-Note that this function will only return the enriched terms pertinent to
-your proteins that have a p-value lesser than 0.1. To retrieve a full
-list of the terms -unfiltered by enrichment p-values-, use
+STRING currently returns enrichment results from Gene Ontology (GO),
+KEGG pathways, UniProt Keywords, PubMed publications, Pfam domains,
+InterPro domains, and SMART domains.  
+STRING returns only terms with a raw p-value below 0.1. To retrieve
+annotations without filtering by enrichment p-value, use
 [`rba_string_annotations`](https://rbioapi.moosa-r.com/reference/rba_string_annotations.md).
 
 ## Corresponding API Resources
 
-"POST https://string-db.org/api/{output_format}/enrichment?identifiers=
+"POST https://string-db.org/api/{output-format}/enrichment?identifiers=
 {your_identifiers}&{optional_parameters}"
 
 ## References
@@ -94,12 +92,13 @@ list of the terms -unfiltered by enrichment p-values-, use
 
 ## See also
 
-[`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)`, `[`rba_string_annotations`](https://rbioapi.moosa-r.com/reference/rba_string_annotations.md)`, `[`rba_string_enrichment_image`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_image.md)` `
+` `[`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)`, `[`rba_string_annotations`](https://rbioapi.moosa-r.com/reference/rba_string_annotations.md)`, `[`rba_string_enrichment_image`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_image.md)`, `[`rba_string_functional_terms`](https://rbioapi.moosa-r.com/reference/rba_string_functional_terms.md)` `
 
 Other "STRING":
 [`rba_string_annotations()`](https://rbioapi.moosa-r.com/reference/rba_string_annotations.md),
 [`rba_string_enrichment_image()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_image.md),
 [`rba_string_enrichment_ppi()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_ppi.md),
+[`rba_string_functional_terms()`](https://rbioapi.moosa-r.com/reference/rba_string_functional_terms.md),
 [`rba_string_homology_inter()`](https://rbioapi.moosa-r.com/reference/rba_string_homology_inter.md),
 [`rba_string_homology_intra()`](https://rbioapi.moosa-r.com/reference/rba_string_homology_intra.md),
 [`rba_string_interaction_partners()`](https://rbioapi.moosa-r.com/reference/rba_string_interaction_partners.md),

@@ -232,17 +232,19 @@ Functions that connect you to [STRING](https://string-db.org/)
 (Functional protein association networks) API resources.
 
 - [`rba_string_annotations()`](https://rbioapi.moosa-r.com/reference/rba_string_annotations.md)
-  : Retrieving Functional Annotation
+  : Get Functional Annotations
 - [`rba_string_enrichment()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment.md)
-  : Getting Functional Enrichment
+  : Get Functional Enrichment
 - [`rba_string_enrichment_image()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_image.md)
   : Get STRING Enrichment Plot
 - [`rba_string_enrichment_ppi()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_ppi.md)
   : Get Protein-Protein Interaction Enrichment
+- [`rba_string_functional_terms()`](https://rbioapi.moosa-r.com/reference/rba_string_functional_terms.md)
+  : Search STRING Functional Terms
 - [`rba_string_homology_inter()`](https://rbioapi.moosa-r.com/reference/rba_string_homology_inter.md)
-  : Get Similarity Scores Hits of Proteins in Different Species
+  : Get Best Protein Similarity Hits Across Species
 - [`rba_string_homology_intra()`](https://rbioapi.moosa-r.com/reference/rba_string_homology_intra.md)
-  : Get Similarity Scores Hits of Proteins in a Species
+  : Get Protein Similarity Scores Within a Species
 - [`rba_string_interaction_partners()`](https://rbioapi.moosa-r.com/reference/rba_string_interaction_partners.md)
   : Get All STRING Interaction Partners
 - [`rba_string_interactions_network()`](https://rbioapi.moosa-r.com/reference/rba_string_interactions_network.md)

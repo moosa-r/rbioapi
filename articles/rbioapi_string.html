@@ -92,7 +92,7 @@
                         <h4 data-toc-skip class="author">Moosa
 Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2026-07-23</h4>
+            <h4 data-toc-skip class="date">2026-07-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/master/vignettes/rbioapi_string.Rmd" class="external-link"><code>vignettes/rbioapi_string.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_string.Rmd</code></div>
@@ -103,67 +103,62 @@ Rezwani</h4>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>STRING is a comprehensive database of protein-protein interactions
-(PPI) that in version 11.0, covers 24,584,628 proteins from 5,090
-organisms. Directly quoting from their paper:</p>
-<blockquote>
-<p>The STRING database aims to collect, score and integrate all publicly
-available sources of protein–protein interaction information, and to
-complement these with computational predictions. Its goal is to achieve
-a comprehensive and objective global network, including direct
-(physical) as well as indirect (functional) interactions.</p>
-<p>(source: Szklarczyk, Damian, et al. “STRING v11: protein–protein
-association networks with increased coverage, supporting functional
-discovery in genome-wide experimental datasets.” <em>Nucleic acids
-research</em> 47.D1 (2019): D607-D613. )</p>
-</blockquote>
+<p>STRING is a comprehensive database of known and predicted
+protein-protein associations. It integrates direct physical interactions
+and indirect functional associations from experimental evidence, curated
+databases, text mining, co-expression, and computational predictions.
+rbioapi provides a consistent R interface to STRING’s mapping, network,
+homology, annotation, and enrichment API resources.</p>
 <hr>
 </div>
 <div class="section level2">
-<h2 id="note-about-species-argument">Note about species argument<a class="anchor" aria-label="anchor" href="#note-about-species-argument"></a>
+<h2 id="note-about-species-argument">The <code>species</code> argument<a class="anchor" aria-label="anchor" href="#note-about-species-argument"></a>
 </h2>
-<p>You can find an argument named “species” in every rbioapi STRING
-function. Providing the species argument is not mandatory, but it has
-been recommended in STRING API’s documentation to always specify the
-species. An exception is when your input proteins’ vector length is more
-than 100; In such cases, the species argument is required. Otherwise,
-calling the function without providing the species will produce an
-ERROR.</p>
+<p>Most rbioapi STRING functions accept a <code>species</code> argument
+containing an <a href="https://www.ncbi.nlm.nih.gov/taxonomy/" class="external-link">NCBI
+Taxonomy identifier</a>, such as 9606 for human. Supplying it is
+recommended because it helps STRING resolve ambiguous identifiers.</p>
+<p>For the network, interaction-partner, homology, PPI-enrichment,
+network-image, and enrichment-image functions, <code>species</code> is
+required when the input contains more than 10 unique IDs. Mapping,
+functional-enrichment, and functional-annotation requests do not have
+this local restriction. The limit is based on unique IDs rather than the
+length of the original vector.</p>
 <hr>
 </div>
 <div class="section level2">
 <h2 id="map-your-ids-to-string-ids">Map your IDs to STRING IDs<a class="anchor" aria-label="anchor" href="#map-your-ids-to-string-ids"></a>
 </h2>
-<p>Although STRING API resources will handle and recognize a variety of
-identifiers, it is recommended that you first map your IDs to STRING IDs
-before using them in other rbioapi STRING functions.</p>
+<p>Although STRING recognizes a variety of identifiers, mapping them to
+STRING IDs before using other rbioapi STRING functions makes subsequent
+requests faster and less ambiguous.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## 1 We create a variable with our genes' NCBI IDs</span></span>
+<code class="sourceCode R"><span><span class="co">## 1. Create a vector of protein identifiers</span></span>
 <span><span class="va">proteins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>  <span class="st">"p53"</span>, <span class="st">"BRCA1"</span>, <span class="st">"cdk2"</span>, <span class="st">"Q99835"</span>, <span class="st">"CDC42"</span>,<span class="st">"CDK1"</span>,<span class="st">"KIF23"</span>,</span>
-<span>  <span class="st">"PLK1"</span>,<span class="st">"RAC2"</span>,<span class="st">"RACGAP1"</span>,<span class="st">"RHOA"</span>,<span class="st">"RHOB"</span>, <span class="st">"PHF14"</span>, <span class="st">"RBM3"</span></span>
+<span>  <span class="st">"p53"</span>, <span class="st">"BRCA1"</span>, <span class="st">"cdk2"</span>, <span class="st">"Q99835"</span>, <span class="st">"CDC42"</span>, <span class="st">"CDK1"</span>, <span class="st">"KIF23"</span>,</span>
+<span>  <span class="st">"PLK1"</span>, <span class="st">"RAC2"</span>, <span class="st">"RACGAP1"</span>, <span class="st">"RHOA"</span>, <span class="st">"RHOB"</span>, <span class="st">"PHF14"</span>, <span class="st">"RBM3"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">## 2 Now we map our protein IDs</span></span>
-<span><span class="va">proteins_mapped_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_string_map_ids.html">rba_string_map_ids</a></span><span class="op">(</span>ids <span class="op">=</span> <span class="va">proteins</span>, species <span class="op">=</span> <span class="fl">9606</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## 3 What we need and will use for the rest of this vignette is the `stringId` column</span></span></code></pre></div>
+<span><span class="co">## 2. Map the protein identifiers</span></span>
+<span><span class="va">proteins_mapped_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_string_map_ids.html">rba_string_map_ids</a></span><span class="op">(</span>ids <span class="op">=</span> <span class="va">proteins</span>, species <span class="op">=</span> <span class="fl">9606</span><span class="op">)</span></span></code></pre></div>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14"],[0,1,2,3,4,5,6,7,8,9,10,11,12,13],["p53","BRCA1","cdk2","Q99835","CDC42","CDK1","KIF23","PLK1","RAC2","RACGAP1","RHOA","RHOB","PHF14","RBM3"],["9606.ENSP00000269305","9606.ENSP00000418960","9606.ENSP00000266970","9606.ENSP00000249373","9606.ENSP00000497733","9606.ENSP00000378699","9606.ENSP00000260363","9606.ENSP00000300093","9606.ENSP00000249071","9606.ENSP00000404190","9606.ENSP00000400175","9606.ENSP00000272233","9606.ENSP00000385795","9606.ENSP00000365950"],[9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606,9606],["Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens"],["TP53","BRCA1","CDK2","SMO","CDC42","CDK1","KIF23","PLK1","RAC2","RACGAP1","RHOA","RHOB","PHF14","RBM3"],["Cellular tumor antigen p53; Acts as a tumor suppre...","Breast cancer type 1 susceptibility protein; E3 ub...","Cyclin-dependent kinase 2; Serine/threonine-protei...","Smoothened homolog; G protein-coupled receptor tha...","Cell division control protein 42 homolog; Plasma m...","Cyclin-dependent kinase 1; Plays a key role in the...","Kinesin-like protein KIF23; Component of the centr...","Serine/threonine-protein kinase PLK1; Serine/threo...","Ras-related C3 botulinum toxin substrate 2; Plasma...","Rac GTPase-activating protein 1; Component of the ...","Transforming protein RhoA; Small GTPase which cycl...","Rho-related GTP-binding protein RhoB; Mediates apo...","PHD finger protein 14....","RNA-binding protein 3; Cold-inducible mRNA binding..."]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>queryIndex<\/th>\n      <th>queryItem<\/th>\n      <th>stringId<\/th>\n      <th>ncbiTaxonId<\/th>\n      <th>taxonName<\/th>\n      <th>preferredName<\/th>\n      <th>annotation<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":5,"columnDefs":[{"className":"dt-right","targets":[1,4]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"queryIndex","targets":1},{"name":"queryItem","targets":2},{"name":"stringId","targets":3},{"name":"ncbiTaxonId","targets":4},{"name":"taxonName","targets":5},{"name":"preferredName","targets":6},{"name":"annotation","targets":7}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14"],["p53","BRCA1","cdk2","Q99835","CDC42","CDK1","KIF23","PLK1","RAC2","RACGAP1","RHOA","RHOB","PHF14","RBM3"],[0,1,2,3,4,5,6,7,8,9,10,11,12,13],["9606.ENSP00000269305","9606.ENSP00000418960","9606.ENSP00000266970","9606.ENSP00000249373","9606.ENSP00000497733","9606.ENSP00000378699","9606.ENSP00000260363","9606.ENSP00000300093","9606.ENSP00000249071","9606.ENSP00000404190","9606.ENSP00000400175","9606.ENSP00000272233","9606.ENSP00000385795","9606.ENSP00000365950"],["9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606"],["Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens"],["TP53","BRCA1","CDK2","SMO","CDC42","CDK1","KIF23","PLK1","RAC2","RACGAP1","RHOA","RHOB","PHF14","RBM3"],["Cellular tumor antigen p53; Acts as a tumor suppre...","Breast cancer type 1 susceptibility protein; E3 ub...","Cyclin-dependent kinase 2; Serine/threonine-protei...","Smoothened homolog; G protein-coupled receptor tha...","Cell division control protein 42 homolog; Plasma m...","Cyclin-dependent kinase 1; Plays a key role in the...","Kinesin-like protein KIF23; Component of the centr...","Serine/threonine-protein kinase PLK1; Serine/threo...","Ras-related C3 botulinum toxin substrate 2; Plasma...","Rac GTPase-activating protein 1; Component of the ...","Transforming protein RhoA; Small GTPase which cycl...","Rho-related GTP-binding protein RhoB; Mediates apo...","PHD finger protein 14....","RNA-binding protein 3; Cold-inducible mRNA binding..."]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>queryItem<\/th>\n      <th>queryIndex<\/th>\n      <th>stringId<\/th>\n      <th>ncbiTaxonId<\/th>\n      <th>taxonName<\/th>\n      <th>preferredName<\/th>\n      <th>annotation<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":5,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"queryItem","targets":1},{"name":"queryIndex","targets":2},{"name":"stringId","targets":3},{"name":"ncbiTaxonId","targets":4},{"name":"taxonName","targets":5},{"name":"preferredName","targets":6},{"name":"annotation","targets":7}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="co">## 3 What we need and will use for the rest of this vignette is the `stringId` column</span></span>
+<span><span class="co">## 3. Use the mapped STRING IDs in the remaining examples</span></span>
 <span><span class="va">proteins_mapped</span> <span class="op">&lt;-</span> <span class="va">proteins_mapped_df</span><span class="op">$</span><span class="va">stringId</span></span></code></pre></div>
 <hr>
 </div>
 <div class="section level2">
 <h2 id="get-interaction-network-of-a-protein-set">Get interaction network of a protein set<a class="anchor" aria-label="anchor" href="#get-interaction-network-of-a-protein-set"></a>
 </h2>
-<p>You can retrieve a list of interactions that the proteins in your set
-have with each other along with the STRING annotations of each
-interaction. You may filter the results by using required_score and
-network_type arguments.</p>
-<p>See the ‘values’ section <code>rba_string_interactions_network</code>
-function’s manual for information on the returned columns.</p>
+<p>You can retrieve interactions among the proteins in your set,
+together with the scores for each STRING evidence channel. Use
+<code>required_score</code> to set the minimum interaction score and
+<code>network_type</code> to select functional or physical
+associations.</p>
+<p>See the Value section of the
+<code><a href="../reference/rba_string_interactions_network.html">rba_string_interactions_network()</a></code> manual for descriptions
+of the returned columns.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">int_net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_string_interactions_network.html">rba_string_interactions_network</a></span><span class="op">(</span></span>
 <span>  ids <span class="op">=</span> <span class="va">proteins_mapped</span>,</span>
@@ -171,18 +166,42 @@ function’s manual for information on the returned columns.</p>
 <span>  required_score <span class="op">=</span> <span class="fl">500</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="datatables html-widget html-fill-item" id="htmlwidget-e5c8c404fe174e4c81bd" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33"],["9606.ENSP00000249071","9606.ENSP00000249071","9606.ENSP00000249071","9606.ENSP00000249373","9606.ENSP00000260363","9606.ENSP00000260363","9606.ENSP00000260363","9606.ENSP00000260363","9606.ENSP00000260363","9606.ENSP00000266970","9606.ENSP00000266970","9606.ENSP00000266970","9606.ENSP00000266970","9606.ENSP00000266970","9606.ENSP00000269305","9606.ENSP00000269305","9606.ENSP00000269305","9606.ENSP00000269305","9606.ENSP00000269305","9606.ENSP00000272233","9606.ENSP00000272233","9606.ENSP00000272233","9606.ENSP00000300093","9606.ENSP00000300093","9606.ENSP00000300093","9606.ENSP00000300093","9606.ENSP00000378699","9606.ENSP00000378699","9606.ENSP00000378699","9606.ENSP00000400175","9606.ENSP00000400175","9606.ENSP00000404190","9606.ENSP00000404190"],["9606.ENSP00000404190","9606.ENSP00000400175","9606.ENSP00000497733","9606.ENSP00000269305","9606.ENSP00000418960","9606.ENSP00000400175","9606.ENSP00000378699","9606.ENSP00000300093","9606.ENSP00000404190","9606.ENSP00000400175","9606.ENSP00000300093","9606.ENSP00000418960","9606.ENSP00000269305","9606.ENSP00000378699","9606.ENSP00000400175","9606.ENSP00000497733","9606.ENSP00000378699","9606.ENSP00000300093","9606.ENSP00000418960","9606.ENSP00000497733","9606.ENSP00000404190","9606.ENSP00000400175","9606.ENSP00000400175","9606.ENSP00000418960","9606.ENSP00000404190","9606.ENSP00000378699","9606.ENSP00000400175","9606.ENSP00000418960","9606.ENSP00000404190","9606.ENSP00000497733","9606.ENSP00000404190","9606.ENSP00000418960","9606.ENSP00000497733"],["RAC2","RAC2","RAC2","SMO","KIF23","KIF23","KIF23","KIF23","KIF23","CDK2","CDK2","CDK2","CDK2","CDK2","TP53","TP53","TP53","TP53","TP53","RHOB","RHOB","RHOB","PLK1","PLK1","PLK1","PLK1","CDK1","CDK1","CDK1","RHOA","RHOA","RACGAP1","RACGAP1"],["RACGAP1","RHOA","CDC42","TP53","BRCA1","RHOA","CDK1","PLK1","RACGAP1","RHOA","PLK1","BRCA1","TP53","CDK1","RHOA","CDC42","CDK1","PLK1","BRCA1","CDC42","RACGAP1","RHOA","RHOA","BRCA1","RACGAP1","CDK1","RHOA","BRCA1","RACGAP1","CDC42","RACGAP1","BRCA1","CDC42"],["9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606"],[0.819,0.9399999999999999,0.9429999999999999,0.525,0.713,0.714,0.914,0.988,0.999,0.514,0.742,0.984,0.987,0.994,0.662,0.76,0.962,0.981,0.999,0.604,0.62,0.821,0.512,0.96,0.961,0.993,0.516,0.878,0.96,0.955,0.979,0.552,0.979],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0.062,0.055,0,0,0,0,0,0,0,0,0,0,0.056,0,0,0,0,0,0.063,0,0.05,0,0,0,0,0,0,0,0.062,0,0,0],[0.058,0.159,0.218,0,0.41,0.042,0.8080000000000001,0.592,0.828,0.093,0.368,0.194,0.093,0.349,0.091,0.06,0.095,0.073,0.067,0.1,0.052,0.138,0.068,0.235,0.587,0.8139999999999999,0.1,0.402,0.6919999999999999,0.361,0.052,0.289,0.052],[0.07099999999999999,0.295,0.206,0,0.439,0.05,0,0.378,0.995,0.08500000000000001,0.15,0.735,0.778,0.47,0,0.16,0.626,0.737,0.895,0.295,0.114,0.399,0.126,0.781,0.644,0.15,0.08500000000000001,0.51,0.292,0.295,0.806,0.292,0.903],[0.4,0.9,0.9,0,0,0,0,0.75,0.9,0,0,0.5,0.5,0.4,0,0,0,0,0.5,0,0.4,0.5,0,0,0,0.9,0,0,0,0.9,0.4,0,0.4],[0.696,0.091,0.181,0.525,0.202,0.711,0.57,0.836,0.999,0.461,0.5580000000000001,0.872,0.891,0.977,0.644,0.721,0.899,0.93,0.999,0.411,0.336,0.385,0.449,0.783,0.761,0.66,0.459,0.619,0.832,0.103,0.836,0.182,0.671]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>stringId_A<\/th>\n      <th>stringId_B<\/th>\n      <th>preferredName_A<\/th>\n      <th>preferredName_B<\/th>\n      <th>ncbiTaxonId<\/th>\n      <th>score<\/th>\n      <th>nscore<\/th>\n      <th>fscore<\/th>\n      <th>pscore<\/th>\n      <th>ascore<\/th>\n      <th>escore<\/th>\n      <th>dscore<\/th>\n      <th>tscore<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":5,"columnDefs":[{"className":"dt-right","targets":[6,7,8,9,10,11,12,13]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"stringId_A","targets":1},{"name":"stringId_B","targets":2},{"name":"preferredName_A","targets":3},{"name":"preferredName_B","targets":4},{"name":"ncbiTaxonId","targets":5},{"name":"score","targets":6},{"name":"nscore","targets":7},{"name":"fscore","targets":8},{"name":"pscore","targets":9},{"name":"ascore","targets":10},{"name":"escore","targets":11},{"name":"dscore","targets":12},{"name":"tscore","targets":13}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><hr>
+<script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33"],["9606.ENSP00000249071","9606.ENSP00000249071","9606.ENSP00000249071","9606.ENSP00000249373","9606.ENSP00000260363","9606.ENSP00000260363","9606.ENSP00000260363","9606.ENSP00000260363","9606.ENSP00000260363","9606.ENSP00000266970","9606.ENSP00000266970","9606.ENSP00000266970","9606.ENSP00000266970","9606.ENSP00000266970","9606.ENSP00000269305","9606.ENSP00000269305","9606.ENSP00000269305","9606.ENSP00000269305","9606.ENSP00000269305","9606.ENSP00000272233","9606.ENSP00000272233","9606.ENSP00000272233","9606.ENSP00000300093","9606.ENSP00000300093","9606.ENSP00000300093","9606.ENSP00000300093","9606.ENSP00000378699","9606.ENSP00000378699","9606.ENSP00000378699","9606.ENSP00000400175","9606.ENSP00000400175","9606.ENSP00000404190","9606.ENSP00000404190"],["9606.ENSP00000404190","9606.ENSP00000400175","9606.ENSP00000497733","9606.ENSP00000269305","9606.ENSP00000418960","9606.ENSP00000400175","9606.ENSP00000378699","9606.ENSP00000300093","9606.ENSP00000404190","9606.ENSP00000400175","9606.ENSP00000300093","9606.ENSP00000418960","9606.ENSP00000269305","9606.ENSP00000378699","9606.ENSP00000400175","9606.ENSP00000497733","9606.ENSP00000378699","9606.ENSP00000300093","9606.ENSP00000418960","9606.ENSP00000497733","9606.ENSP00000404190","9606.ENSP00000400175","9606.ENSP00000400175","9606.ENSP00000418960","9606.ENSP00000404190","9606.ENSP00000378699","9606.ENSP00000400175","9606.ENSP00000418960","9606.ENSP00000404190","9606.ENSP00000497733","9606.ENSP00000404190","9606.ENSP00000418960","9606.ENSP00000497733"],["RAC2","RAC2","RAC2","SMO","KIF23","KIF23","KIF23","KIF23","KIF23","CDK2","CDK2","CDK2","CDK2","CDK2","TP53","TP53","TP53","TP53","TP53","RHOB","RHOB","RHOB","PLK1","PLK1","PLK1","PLK1","CDK1","CDK1","CDK1","RHOA","RHOA","RACGAP1","RACGAP1"],["RACGAP1","RHOA","CDC42","TP53","BRCA1","RHOA","CDK1","PLK1","RACGAP1","RHOA","PLK1","BRCA1","TP53","CDK1","RHOA","CDC42","CDK1","PLK1","BRCA1","CDC42","RACGAP1","RHOA","RHOA","BRCA1","RACGAP1","CDK1","RHOA","BRCA1","RACGAP1","CDC42","RACGAP1","BRCA1","CDC42"],["9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606","9606"],[0.819,0.9399999999999999,0.9429999999999999,0.525,0.713,0.714,0.914,0.988,0.999,0.514,0.742,0.984,0.987,0.994,0.662,0.76,0.962,0.981,0.999,0.604,0.62,0.821,0.512,0.96,0.961,0.993,0.516,0.878,0.96,0.955,0.979,0.552,0.979],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0.062,0.055,0,0,0,0,0,0,0,0,0,0,0.056,0,0,0,0,0,0.063,0,0.05,0,0,0,0,0,0,0,0.062,0,0,0],[0.058,0.159,0.218,0,0.41,0.042,0.8080000000000001,0.592,0.828,0.093,0.368,0.194,0.093,0.349,0.091,0.06,0.095,0.073,0.067,0.1,0.052,0.138,0.068,0.235,0.587,0.8139999999999999,0.1,0.402,0.6919999999999999,0.361,0.052,0.289,0.052],[0.07099999999999999,0.295,0.206,0,0.439,0.05,0,0.378,0.995,0.08500000000000001,0.15,0.735,0.778,0.47,0,0.16,0.626,0.737,0.895,0.295,0.114,0.399,0.126,0.781,0.644,0.15,0.08500000000000001,0.51,0.292,0.295,0.806,0.292,0.903],[0.4,0.9,0.9,0,0,0,0,0.75,0.9,0,0,0.5,0.5,0.4,0,0,0,0,0.5,0,0.4,0.5,0,0,0,0.9,0,0,0,0.9,0.4,0,0.4],[0.696,0.091,0.181,0.525,0.202,0.711,0.57,0.836,0.999,0.461,0.5580000000000001,0.872,0.891,0.977,0.644,0.721,0.899,0.93,0.999,0.411,0.336,0.385,0.449,0.783,0.761,0.66,0.459,0.619,0.832,0.103,0.836,0.182,0.671]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>stringId_A<\/th>\n      <th>stringId_B<\/th>\n      <th>preferredName_A<\/th>\n      <th>preferredName_B<\/th>\n      <th>ncbiTaxonId<\/th>\n      <th>score<\/th>\n      <th>nscore<\/th>\n      <th>fscore<\/th>\n      <th>pscore<\/th>\n      <th>ascore<\/th>\n      <th>escore<\/th>\n      <th>dscore<\/th>\n      <th>tscore<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":5,"columnDefs":[{"className":"dt-right","targets":[6,7,8,9,10,11,12,13]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"stringId_A","targets":1},{"name":"stringId_B","targets":2},{"name":"preferredName_A","targets":3},{"name":"preferredName_B","targets":4},{"name":"ncbiTaxonId","targets":5},{"name":"score","targets":6},{"name":"nscore","targets":7},{"name":"fscore","targets":8},{"name":"pscore","targets":9},{"name":"ascore","targets":10},{"name":"escore","targets":11},{"name":"dscore","targets":12},{"name":"tscore","targets":13}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Instead of supplying protein identifiers, you can retrieve the
+network formed by proteins annotated with a STRING functional term. In
+this mode, set <code>ids = NULL</code> and supply both
+<code>network_term_id</code> and <code>species</code>.
+<code><a href="../reference/rba_string_functional_terms.html">rba_string_functional_terms()</a></code> can search for functional
+terms using either an identifier or descriptive text:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tcr_terms</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_string_functional_terms.html">rba_string_functional_terms</a></span><span class="op">(</span></span>
+<span>  term_text <span class="op">=</span> <span class="st">"T cell receptor signaling pathway"</span>,</span>
+<span>  species <span class="op">=</span> <span class="fl">9606</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>The first match for this search is <code>GO:0050852</code>, which
+identifies the GO term “T cell receptor signaling pathway”:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">term_net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_string_interactions_network.html">rba_string_interactions_network</a></span><span class="op">(</span></span>
+<span>  ids <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  network_term_id <span class="op">=</span> <span class="st">"GO:0050852"</span>,</span>
+<span>  species <span class="op">=</span> <span class="fl">9606</span>,</span>
+<span>  required_score <span class="op">=</span> <span class="fl">900</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>The <code>proteinCount</code> column contains the complete number of
+proteins annotated with each term, while <code>preferredNames</code> and
+<code>stringIds</code> are returned as list-columns. The
+<code>ids</code> and <code>network_term_id</code> input modes cannot be
+combined.</p>
+<hr>
 </div>
 <div class="section level2">
 <h2 id="get-interaction-partners-of-a-protein-set">Get interaction partners of a protein set<a class="anchor" aria-label="anchor" href="#get-interaction-partners-of-a-protein-set"></a>
 </h2>
-<p>In the last example, we only obtained the interaction which our
-proteins have among themselves, what if we wanted to get a list of every
-protein which interact with our protein(s)?</p>
-<p>To do that, we can use
-<code>rba_string_interaction_partners</code>:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## Although we supply only one protein ID here (CD40 protein), you can provide a vector of proteins as the input</span></span>
+<p>The previous example returned interactions among the input proteins.
+To retrieve proteins that interact with one or more input proteins,
+including proteins outside the input set, use
+<code><a href="../reference/rba_string_interaction_partners.html">rba_string_interaction_partners()</a></code>:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## This example uses one protein (CD40), but `ids` can contain multiple proteins</span></span>
 <span><span class="va">int_partners</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_string_interaction_partners.html">rba_string_interaction_partners</a></span><span class="op">(</span></span>
 <span>  ids <span class="op">=</span> <span class="st">"9606.ENSP00000361359"</span>,</span>
 <span>  species <span class="op">=</span> <span class="fl">9606</span>,</span>
@@ -194,13 +213,12 @@ protein which interact with our protein(s)?</p>
 <div class="section level2">
 <h2 id="get-network-image-of-a-protein-set">Get network image of a protein set<a class="anchor" aria-label="anchor" href="#get-network-image-of-a-protein-set"></a>
 </h2>
-<p>Let’s go back to the interaction network. As you must have seen in
-the STRING webpages, STRING plots the interaction network of your
-proteins with many customizations available. You can also do that with
-STRING API services. <code>rba_string_network_image</code> function is
-very flexible and you have a variety of options; see the function’s
-manual.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<p>STRING can render the interaction network as a static image. The
+<code><a href="../reference/rba_string_network_image.html">rba_string_network_image()</a></code> function supports several
+options for controlling the network contents and appearance; see the
+function manual for details. It also supports the same
+<code>network_term_id</code> input mode described above.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Example 1:</span></span>
 <span><span class="va">graph_ppi1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_string_network_image.html">rba_string_network_image</a></span><span class="op">(</span></span>
 <span>  ids <span class="op">=</span> <span class="va">proteins_mapped</span>,</span>
@@ -210,12 +228,22 @@ manual.</p>
 <span>  required_score <span class="op">=</span> <span class="fl">500</span>,</span>
 <span>  network_flavor <span class="op">=</span> <span class="st">"confidence"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
+<p>For example, the network for a functional term can be rendered
+with:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">term_image</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_string_network_image.html">rba_string_network_image</a></span><span class="op">(</span></span>
+<span>  ids <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  network_term_id <span class="op">=</span> <span class="st">"GO:0050852"</span>,</span>
+<span>  species <span class="op">=</span> <span class="fl">9606</span>,</span>
+<span>  required_score <span class="op">=</span> <span class="fl">900</span>,</span>
+<span>  save_image <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <img src="rbioapi_string_files/figure-html/rba_string_network_image_ex1_image-1.png" class="r-plt" alt="Network images - Example 1" width="672"><p class="caption">
 Network images - Example 1
 </p>
 </div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Example 2:</span></span>
 <span><span class="va">graph_ppi2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_string_network_image.html">rba_string_network_image</a></span><span class="op">(</span></span>
 <span>  ids <span class="op">=</span> <span class="va">proteins_mapped</span>,</span>
@@ -237,24 +265,26 @@ Network images - Example 2
 <div class="section level2">
 <h2 id="enrichment-using-string">Enrichment analysis using STRING<a class="anchor" aria-label="anchor" href="#enrichment-using-string"></a>
 </h2>
-<p>STRING let you perform two types of enrichment analysis. See <a href="https://doi.org/10.1093/nar/gks1094" title="STRING v9.1: protein-protein interaction networks, with increased coverage and integration" class="external-link">STRING’s
-paper</a> for more information.</p>
+<p>STRING supports two complementary enrichment analyses: functional
+enrichment and protein-protein interaction enrichment. See the <a href="https://doi.org/10.1093/nar/gkac1000" class="external-link">STRING publication</a> for
+methodological details.</p>
 <div class="section level3">
 <h3 id="functional-enrichment">Functional enrichment<a class="anchor" aria-label="anchor" href="#functional-enrichment"></a>
 </h3>
-<p>The first type is the conventional type, which statistically tests
-your supplied gene sets against some sets of annotation. Currently,
-STRING supports Gene Ontology, KEGG pathways, UniProt Keywords, PubMed
-publications, Pfam domains, InterPro domains, and SMART domains. (<a href="https://version11.string-db.org/help/api/#getting-functional-enrichment" title="STRING API - Getting functional enrichment" class="external-link">source</a>).</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<p>Functional enrichment tests the supplied protein set against
+annotation resources including Gene Ontology, KEGG pathways, UniProt
+Keywords, PubMed publications, Pfam domains, InterPro domains, and SMART
+domains. The results include raw p-values and false discovery rates. See
+the <a href="https://string-db.org/help/api/#getting-functional-enrichment" class="external-link">current
+STRING API documentation</a> for details.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">enriched</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_string_enrichment.html">rba_string_enrichment</a></span><span class="op">(</span></span>
 <span>  ids <span class="op">=</span> <span class="va">proteins_mapped</span>,</span>
 <span>  species <span class="op">=</span> <span class="fl">9606</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>As usual, we inspect the output using the <code><a href="https://rdrr.io/r/utils/str.html" class="external-link">str()</a></code>
-function. As you can see below, the enrichment results of each category
-can be found as the returned list’s elements.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<p>By default, results are split by category into a list of data frames.
+We can inspect that structure with <code><a href="https://rdrr.io/r/utils/str.html" class="external-link">str()</a></code>:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">enriched</span>, max.level <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 14</span></span>
 <span><span class="co">#&gt;  $ COMPARTMENTS     :'data.frame':   25 obs. of  10 variables:</span></span>
@@ -282,15 +312,14 @@ Over-Representation (Enrichment) Analysis in R</a> (<a href="https://rbioapi.mo
 to the documentation site</a>) for an in-depth review.</p>
 </div>
 <div class="section level3">
-<h3 id="functional-enrichment-plot">Functional enrichment Plot<a class="anchor" aria-label="anchor" href="#functional-enrichment-plot"></a>
+<h3 id="functional-enrichment-plot">Functional enrichment plot<a class="anchor" aria-label="anchor" href="#functional-enrichment-plot"></a>
 </h3>
-<p>In addition to a data frame, you can also get a plot summarizing the
-enrichment results. This API endpoint supports extensive customization
-of the plot; please refer to the
-<code><a href="../reference/rba_string_enrichment_image.html">rba_string_enrichment_image()</a></code> function’s manual for
-detailed instructions. Here we perform the exact enrichment analysis
-done above, and retrieve a plot of the results.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<p>The enrichment-figure endpoint summarizes one enrichment category as
+a plot. Use <code><a href="../reference/rba_string_enrichment_image.html">rba_string_enrichment_image()</a></code> to control the
+category, grouping, palette, ranking variable, output format, and number
+of displayed terms. This example visualizes the KEGG enrichment for the
+same protein set:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">graph_enrich</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_string_enrichment_image.html">rba_string_enrichment_image</a></span><span class="op">(</span></span>
 <span>  ids <span class="op">=</span> <span class="va">proteins_mapped</span>,</span>
 <span>  species <span class="op">=</span> <span class="fl">9606</span>,</span>
@@ -308,12 +337,11 @@ Visualization of enrichment analysis results
 <div class="section level3">
 <h3 id="protein-protein-interaction-enrichment">Protein-protein interaction enrichment<a class="anchor" aria-label="anchor" href="#protein-protein-interaction-enrichment"></a>
 </h3>
-<p>Even without incorporating annotation data, STRING can calculate if
-your proteins are functionally related. Briefly, STRING accomplishes
-this by comparing the interactions’ distribution in your protein-set to
-the interactions’ distribution in the proteome. Read <a href="https://doi.org/10.1093/nar/gks1094" title="STRING v9.1: protein-protein interaction networks, with increased coverage and integration" class="external-link">STRING’s
-paper</a> for more information.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<p>PPI enrichment tests whether the input network contains more
+interactions than expected for a similarly sized protein set drawn from
+the background proteome. It can therefore identify evidence of
+functional relatedness without relying on annotation enrichment.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rba_string_enrichment_ppi.html">rba_string_enrichment_ppi</a></span><span class="op">(</span></span>
 <span>  ids <span class="op">=</span> <span class="va">proteins_mapped</span>,</span>
 <span>  species <span class="op">=</span> <span class="fl">9606</span></span>
@@ -341,17 +369,28 @@ paper</a> for more information.</p>
 <div class="section level2">
 <h2 id="get-functional-annotations">Get functional annotations<a class="anchor" aria-label="anchor" href="#get-functional-annotations"></a>
 </h2>
-<p>As you have seen above, STRING maps the proteins to multiple
-annotation sources. You can obtain any annotation associated with your
-proteins without performing enrichment analysis and retrieving just the
-significant portion.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<p>STRING maps proteins to multiple annotation resources. Use
+<code><a href="../reference/rba_string_annotations.html">rba_string_annotations()</a></code> to retrieve all annotations
+assigned to the input proteins rather than only the subset returned by
+enrichment analysis. PubMed annotations are excluded by default because
+they can make the response very large.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">annotations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_string_annotations.html">rba_string_annotations</a></span><span class="op">(</span></span>
 <span>  ids <span class="op">=</span> <span class="st">"9606.ENSP00000269305"</span>,</span>
 <span>  species <span class="op">=</span> <span class="fl">9606</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">## This function returns large results, so the results are not shown in this vignette.</span></span></code></pre></div>
+<span><span class="co">## Annotation responses can be large, so the result is not shown here</span></span></code></pre></div>
+<p>Set <code>allow_pubmed = TRUE</code> to include PubMed annotations
+with the other categories, or set <code>only_pubmed = TRUE</code> to
+retrieve only PubMed annotations. <code>only_pubmed</code> takes
+precedence if both arguments are <code>TRUE</code>.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pubmed_annotations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_string_annotations.html">rba_string_annotations</a></span><span class="op">(</span></span>
+<span>  ids <span class="op">=</span> <span class="st">"9606.ENSP00000269305"</span>,</span>
+<span>  species <span class="op">=</span> <span class="fl">9606</span>,</span>
+<span>  only_pubmed <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <hr>
 </div>
 <div class="section level2">
@@ -367,7 +406,7 @@ please check their manuals:</p>
 <hr>
 </div>
 <div class="section level2">
-<h2 id="citations">How to Cite?<a class="anchor" aria-label="anchor" href="#citations"></a>
+<h2 id="citations">How to cite<a class="anchor" aria-label="anchor" href="#citations"></a>
 </h2>
 <p>To cite STRING (Please see <a href="https://string-db.org/cgi/about?footer_active_subpage=references" class="external-link uri">https://string-db.org/cgi/about?footer_active_subpage=references</a>):</p>
 <ul>

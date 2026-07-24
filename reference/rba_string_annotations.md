@@ -1,10 +1,8 @@
-# Retrieving Functional Annotation
+# Get Functional Annotations
 
-STRING cross-reference the proteins with several databases (see
-"Details" section). By providing your input set o proteins (and
-optionally background or universe protein set), you can use this
-function to retrieve full set of terms (annotations) pertinent to your
-input proteins in each database, among with information for each term.
+STRING cross-references proteins with several annotation resources. This
+function retrieves the complete set of annotations assigned to the input
+proteins, together with information about each term.
 
 ## Usage
 
@@ -14,6 +12,7 @@ rba_string_annotations(
   species = NULL,
   allow_pubmed = FALSE,
   split_df = TRUE,
+  only_pubmed = FALSE,
   ...
 )
 ```
@@ -29,21 +28,26 @@ rba_string_annotations(
 
 - species:
 
-  Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
-  (Recommended, but optional if your input is less than 100 IDs.)
+  Numeric: [NCBI Taxonomy
+  identifier](https://www.ncbi.nlm.nih.gov/taxonomy/); Human Taxonomy ID
+  is 9606. (Recommended, but optional.)
 
 - allow_pubmed:
 
-  logical: (default = FALSE) PubMed usually assigns a large number of
-  reference publications to each protein. In order to reduce the output
-  size, PubMed's results will be excluded from the results, unless
-  stated otherwise by setting this argument to TRUE.
+  Logical (default = `FALSE`): Include PubMed annotations. These
+  annotations are excluded by default because many publications may be
+  assigned to each protein. This argument is ignored when
+  `only_pubmed = TRUE`.
 
 - split_df:
 
-  (logical, default = TRUE), If TRUE, instead of one data frame, results
-  from different categories will be split into multiple data frames
-  based on their 'category'.
+  Logical: (default = `TRUE`) Split results into a list of data frames
+  by `category`; otherwise, return one data frame.
+
+- only_pubmed:
+
+  Logical (default = `FALSE`): Return only PubMed annotations. This
+  takes precedence over `allow_pubmed`.
 
 - ...:
 
@@ -53,23 +57,25 @@ rba_string_annotations(
 
 ## Value
 
-A data frame which every row is an assigned terms and the columns are
-the terms category, description, number of genes, and other pertinent
-information.
+A data frame in which every row is an assigned term and the columns
+contain the term category, description, number of genes, and other
+pertinent information. If `split_df = TRUE`, a list of data frames split
+by category is returned. With `only_pubmed = TRUE`, a one-element list
+named `PMID` is returned when PubMed annotations are available.
 
 ## Details
 
-STRING currently maps to and retrieve enrichment results based on Gene
-Ontology (GO), KEGG pathways, UniProt Keywords, PubMed publications,
-Pfam domains, InterPro domains, and SMART domains.  
-Note that this function will return a full list of the terms containing
-your supplied proteins. To perform enrichment and only retrieve a
-enriched subset of the terms, use
+STRING currently retrieves annotations based on Gene Ontology (GO),
+UniProt Keywords, PubMed publications, Pfam domains, InterPro domains,
+and SMART domains. KEGG annotations are unavailable from this endpoint
+because of KEGG licensing restrictions.  
+This function returns annotations without enrichment filtering. To
+perform enrichment and retrieve only enriched terms, use
 [`rba_string_enrichment`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment.md).
 
 ## Corresponding API Resources
 
-"POST https://string-db.org/api/{output_format}/functional_annotation?
+"POST https://string-db.org/api/{output-format}/functional_annotation?
 identifiers={your_identifiers}&{optional_parameters}"
 
 ## References
@@ -89,12 +95,13 @@ identifiers={your_identifiers}&{optional_parameters}"
 
 ## See also
 
-[`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)`, `[`rba_string_enrichment`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment.md)`, `[`rba_string_enrichment_image`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_image.md)` `
+` `[`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)`, `[`rba_string_enrichment`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment.md)`, `[`rba_string_enrichment_image`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_image.md)`, `[`rba_string_functional_terms`](https://rbioapi.moosa-r.com/reference/rba_string_functional_terms.md)` `
 
 Other "STRING":
 [`rba_string_enrichment()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment.md),
 [`rba_string_enrichment_image()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_image.md),
 [`rba_string_enrichment_ppi()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_ppi.md),
+[`rba_string_functional_terms()`](https://rbioapi.moosa-r.com/reference/rba_string_functional_terms.md),
 [`rba_string_homology_inter()`](https://rbioapi.moosa-r.com/reference/rba_string_homology_inter.md),
 [`rba_string_homology_intra()`](https://rbioapi.moosa-r.com/reference/rba_string_homology_intra.md),
 [`rba_string_interaction_partners()`](https://rbioapi.moosa-r.com/reference/rba_string_interaction_partners.md),
@@ -109,4 +116,11 @@ Other "STRING":
 # \donttest{
 rba_string_annotations(ids = "TP53", species = 9606)
 # }
+if (FALSE) { # \dontrun{
+rba_string_annotations(
+    ids = "TP53",
+    species = 9606,
+    only_pubmed = TRUE
+)
+} # }
 ```

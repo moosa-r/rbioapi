@@ -1,9 +1,8 @@
 # Get Protein-Protein Interaction Enrichment
 
-Even when there is no annotation for your input proteins, STRING can
-Compare your Given proteins interactions pattern with the background
-proteome-wide interaction distribution to determine if your given set of
-proteins are functionally related.
+STRING compares the interaction pattern of your input proteins with the
+proteome-wide background interaction distribution to determine whether
+the protein set contains more interactions than expected.
 
 ## Usage
 
@@ -28,22 +27,24 @@ rba_string_enrichment_ppi(
 
 - species:
 
-  Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
-  (Recommended, but optional if your input is less than 100 IDs.)
+  Numeric: [NCBI Taxonomy
+  identifier](https://www.ncbi.nlm.nih.gov/taxonomy/); Human Taxonomy ID
+  is 9606. (Recommended, but required if your input contains more than
+  10 unique IDs.)
 
 - required_score:
 
-  Numeric: A minimum of interaction score for an interaction to be
-  included in the image. if not supplied, the threshold will be applied
-  by STRING Based in the network. (low Confidence = 150, Medium
-  Confidence = 400, High Confidence = 700, Highest confidence = 900)
+  Numeric (between 0 and 1000): Minimum interaction score used when
+  calculating PPI enrichment. If omitted, STRING applies a
+  network-dependent threshold. Common confidence thresholds are 150
+  (low), 400 (medium), 700 (high), and 900 (highest).
 
 - background:
 
-  character vector: A set of STRING protein IDs to be used as the
-  background proteome. Only STRING IDs are acceptable. (See
+  Character vector: A set of STRING protein IDs to be used as the
+  background proteome. Only STRING IDs are acceptable. See
   [`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)
-  to map your IDs.)
+  to map your IDs.
 
 - ...:
 
@@ -58,7 +59,7 @@ A list with protein-protein interaction enrichment results.
 ## Corresponding API Resources
 
 "POST
-https://string-db.org/api/{output_format}/ppi_enrichment?identifiers=
+https://string-db.org/api/{output-format}/ppi_enrichment?identifiers=
 {your_identifiers}&{optional_parameters}"
 
 ## References
@@ -78,12 +79,13 @@ https://string-db.org/api/{output_format}/ppi_enrichment?identifiers=
 
 ## See also
 
-[`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)
+` `[`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)`, `[`rba_string_interactions_network`](https://rbioapi.moosa-r.com/reference/rba_string_interactions_network.md)`, `[`rba_string_interaction_partners`](https://rbioapi.moosa-r.com/reference/rba_string_interaction_partners.md)`, `[`rba_string_network_image`](https://rbioapi.moosa-r.com/reference/rba_string_network_image.md)` `
 
 Other "STRING":
 [`rba_string_annotations()`](https://rbioapi.moosa-r.com/reference/rba_string_annotations.md),
 [`rba_string_enrichment()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment.md),
 [`rba_string_enrichment_image()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_image.md),
+[`rba_string_functional_terms()`](https://rbioapi.moosa-r.com/reference/rba_string_functional_terms.md),
 [`rba_string_homology_inter()`](https://rbioapi.moosa-r.com/reference/rba_string_homology_inter.md),
 [`rba_string_homology_intra()`](https://rbioapi.moosa-r.com/reference/rba_string_homology_intra.md),
 [`rba_string_interaction_partners()`](https://rbioapi.moosa-r.com/reference/rba_string_interaction_partners.md),

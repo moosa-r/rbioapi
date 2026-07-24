@@ -1,9 +1,9 @@
 # Get STRING Network Interactions
 
-This function will retrieve Sting interaction pairs among your input
-protein ids, with the combined score and separate score for each STRING
-score channels. You can further expand your network to a defined size by
-providing "add_node" parameter.
+This function retrieves STRING interaction pairs among the input
+proteins, including the combined score and separate scores for each
+evidence channel. You can expand the network using the `add_nodes`
+parameter.
 
 ## Usage
 
@@ -15,6 +15,7 @@ rba_string_interactions_network(
   add_nodes = NULL,
   network_type = "functional",
   use_query_labels = FALSE,
+  network_term_id = NULL,
   ...
 )
 ```
@@ -25,46 +26,58 @@ rba_string_interactions_network(
 
   Your protein IDs. It is strongly recommended to supply STRING IDs. See
   [`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)
-  for more information.
+  for more information.  
+  Alternatively, you can retrieve interactions among proteins annotated
+  with a STRING functional term by setting `ids = NULL` and supplying
+  `network_term_id`.
 
 - species:
 
-  Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
-  (Recommended, but optional if your input is less than 100 IDs.)
+  Numeric: [NCBI Taxonomy
+  identifier](https://www.ncbi.nlm.nih.gov/taxonomy/); Human Taxonomy ID
+  is 9606. Required when using `network_term_id`; otherwise recommended,
+  but required if your input contains more than 10 unique IDs.
 
 - required_score:
 
-  Numeric: A minimum of interaction score for an interaction to be
-  included in the image. if not supplied, the threshold will be applied
-  by STRING Based in the network. (low Confidence = 150, Medium
-  Confidence = 400, High Confidence = 700, Highest confidence = 900)
+  Numeric (between 0 and 1000): Minimum interaction score required for
+  an interaction to be included in the returned network. If omitted,
+  STRING applies a network-dependent threshold. Common confidence
+  thresholds are 150 (low), 400 (medium), 700 (high), and 900 (highest).
 
 - add_nodes:
 
-  Numeric: Number of neighboring proteins to be added to the network. If
-  none supplied by the user, this argument value will depend on the
-  number of supplied "ids" argument:
+  Numeric: Number of neighboring proteins to add to the network. For
+  identifier-based requests, if omitted, STRING determines the value
+  from the number of input IDs:
 
-  1.  Single id: add_node will be set to 10 to retrieve the interaction
-      neighborhood of you input protein.
+  1.  One ID: STRING adds 10 proteins to retrieve its interaction
+      neighborhood.
 
-  2.  Multiple ids: add_node will be set to 0, thus the output will be
-      the interactions between your input proteins.
+  2.  Multiple IDs: STRING adds no proteins, so only interactions among
+      the input proteins are returned.
 
 - network_type:
 
-  should be one of:
+  Character: One of:
 
-  - "functional": (default) The edge's indicate both physical and
-    functional associations.
+  - "functional": (default) Edges indicate both physical and functional
+    associations.
 
-  - "physical": The edges indicate that two proteins have a physical
+  - "physical": Edges indicate that two proteins have a physical
     interaction or are parts of a complex.
 
 - use_query_labels:
 
-  Logical: (Default = FALSE) Use the names supplied with the 'ids'
-  argument as the nodes labels instead of STRING's default ones.
+  Logical: (default = `FALSE`) Use the names supplied in `ids` as node
+  labels instead of STRING's default labels.
+
+- network_term_id:
+
+  Character: A functional term identifier (e.g. a Gene Ontology, KEGG,
+  or Reactome identifier). Instead of using proteins supplied through
+  `ids`, STRING constructs the network from proteins annotated with the
+  specified term. Set `ids = NULL` and supply `species`.
 
 - ...:
 
@@ -74,12 +87,12 @@ rba_string_interactions_network(
 
 ## Value
 
-A data frame which each row is a network interaction and the columns
-contains interactor information and interaction scores:
+A data frame in which each row is a network interaction and the columns
+contain interactor information and interaction scores:
 
 - stringId_A: STRING identifier (protein A)
 
-- stringId_B:STRING identifier (protein B)
+- stringId_B: STRING identifier (protein B)
 
 - preferredName_A: common protein name (protein A)
 
@@ -105,16 +118,18 @@ contains interactor information and interaction scores:
 
 ## Details
 
-Note that this function will return interactions between your set of
-supplied proteins, or at most, expand the interaction network by the
-given parameters. TO retrieve a list of all possible interacting
-proteins with your given input, see
+This function returns interactions among the supplied proteins and any
+neighboring proteins added through `add_nodes`. To retrieve interactions
+between your input proteins and all their STRING interaction partners,
+see
 [`rba_string_interaction_partners`](https://rbioapi.moosa-r.com/reference/rba_string_interaction_partners.md).
 
 ## Corresponding API Resources
 
 "POST https://string-db.org/api/{output-format}/network?identifiers=
-{your_identifiers}&{optional_parameters}"
+{your_identifiers}&{optional_parameters}"  
+"POST https://string-db.org/api/{output-format}/network?network_term_id=
+{your_term}&{optional_parameters}"
 
 ## References
 
@@ -133,13 +148,14 @@ proteins with your given input, see
 
 ## See also
 
-[`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)`, `[`rba_string_interaction_partners`](https://rbioapi.moosa-r.com/reference/rba_string_interaction_partners.md)
+` `[`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)`, `[`rba_string_interaction_partners`](https://rbioapi.moosa-r.com/reference/rba_string_interaction_partners.md)`, `[`rba_string_network_image`](https://rbioapi.moosa-r.com/reference/rba_string_network_image.md)`, `[`rba_string_enrichment_ppi`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_ppi.md)` `
 
 Other "STRING":
 [`rba_string_annotations()`](https://rbioapi.moosa-r.com/reference/rba_string_annotations.md),
 [`rba_string_enrichment()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment.md),
 [`rba_string_enrichment_image()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_image.md),
 [`rba_string_enrichment_ppi()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_ppi.md),
+[`rba_string_functional_terms()`](https://rbioapi.moosa-r.com/reference/rba_string_functional_terms.md),
 [`rba_string_homology_inter()`](https://rbioapi.moosa-r.com/reference/rba_string_homology_inter.md),
 [`rba_string_homology_intra()`](https://rbioapi.moosa-r.com/reference/rba_string_homology_intra.md),
 [`rba_string_interaction_partners()`](https://rbioapi.moosa-r.com/reference/rba_string_interaction_partners.md),
@@ -162,5 +178,13 @@ rba_string_interactions_network(ids = c("9606.ENSP00000269305",
     "9606.ENSP00000275493"),
     species = 9606,
     add_nodes = 10)
+# }
+# \donttest{
+rba_string_interactions_network(
+    ids = NULL,
+    network_term_id = "GO:0050852",
+    species = 9606,
+    required_score = 900
+)
 # }
 ```

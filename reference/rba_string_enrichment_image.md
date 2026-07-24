@@ -1,16 +1,16 @@
 # Get STRING Enrichment Plot
 
-In addition to performing enrichment analysis, STRING allows you to also
-visualize the analysis results. Use
+Retrieve a plot that summarizes STRING functional-enrichment results.
+Use
 [`rba_string_enrichment`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment.md)
-to retrieve the analysis results as a data frame.
+to retrieve the results as a data frame.
 
 ## Usage
 
 ``` r
 rba_string_enrichment_image(
   ids,
-  species,
+  species = NULL,
   category = "Process",
   image_format = "image",
   save_image = TRUE,
@@ -29,25 +29,27 @@ rba_string_enrichment_image(
   Your protein ID(s). It is strongly recommended to supply STRING IDs.
   See
   [`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)
-  for more information. Note that if only one id is supplied, STRING
-  expands the network by 10 proteins.
+  for more information. If only one ID is supplied, STRING expands the
+  network by 10 proteins.
 
 - species:
 
-  Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
+  Numeric: [NCBI Taxonomy
+  identifier](https://www.ncbi.nlm.nih.gov/taxonomy/); Human Taxonomy ID
+  is 9606. (Recommended, but required if your input contains more than
+  10 unique IDs.)
 
 - category:
 
-  The terms set to use to perform enrichment analysis. valid values are
-  (See details for more info): "Process" (default), "Function",
-  "Component", "Keyword", "KEGG", "RCTM", "HPO", "MPO", "DPO", "WPO",
-  "ZPO", "FYPO", "Pfam", "SMART", "InterPro", "PMID",
-  "NetworkNeighborAL", "COMPARTMENTS", "TISSUES", "DISEASES", or
-  "WikiPathways"
+  Character: The term set to use for enrichment analysis. Valid values
+  are: "Process" (default), "Function", "Component", "Keyword", "KEGG",
+  "RCTM", "HPO", "MPO", "DPO", "WPO", "ZPO", "FYPO", "Pfam", "SMART",
+  "InterPro", "PMID", "NetworkNeighborAL", "COMPARTMENTS", "TISSUES",
+  "DISEASES", or "WikiPathways". See Details for descriptions.
 
 - image_format:
 
-  one of:
+  Character: One of:
 
   - "image": PNG image with normal resolution.
 
@@ -67,25 +69,26 @@ rba_string_enrichment_image(
 
 - group_by_similarity:
 
-  Jackard index treshold to visually group the related terms. Valid
-  values are between 0.1 to 1 with increment of 0.1. Default value is
-  NULL (i.e. no grouping).
+  Numeric: Jaccard-index threshold used to group related terms visually.
+  Valid values range from 0.1 to 1 in increments of 0.1. The default is
+  `NULL`, which disables grouping.
 
 - color_palette:
 
-  Color pallet to code FDR values. Valid values are: "mint_blue"
-  (default), "lime_emerald", "green_blue", "peach_purple", "straw_navy",
-  or "yellow_pink"
+  Character: Color palette used to represent FDR values. Valid values
+  are "mint_blue" (default), "lime_emerald", "green_blue",
+  "peach_purple", "straw_navy", or "yellow_pink".
 
 - number_of_term_shown:
 
-  (default: 10) Maximum number of results to include in the plot.
+  Numeric: (default = 10) Maximum number of terms to include in the
+  plot.
 
 - x_axis:
 
-  The variable to show on the x axis and rank the results based on it.
-  Valid values are: "signal" (default), "strength", "FDR", or
-  "gene_count"
+  Character: Variable displayed on the x-axis and used to rank the
+  results. Valid values are "signal" (default), "strength", "FDR", and
+  "gene_count".
 
 - ...:
 
@@ -95,12 +98,11 @@ rba_string_enrichment_image(
 
 ## Value
 
-A plot summarizing the enrichment results, which can be PNG or SVG
-depending on the inputs.
+A PNG image array or raw SVG content, depending on `image_format`.
 
 ## Details
 
-Available values for category are as follow. Default value is "Process".
+Available `category` values are listed below. The default is "Process".
 
 - Process: Biological Process (Gene Ontology)
 
@@ -146,7 +148,8 @@ Available values for category are as follow. Default value is "Process".
 
 ## Corresponding API Resources
 
-"POST https://string-db.org/api/{output_format}/enrichmentfigure"
+"POST https://string-db.org/api/{output-format}/enrichmentfigure?
+identifiers={your_identifiers}&{optional_parameters}"
 
 ## References
 
@@ -165,12 +168,13 @@ Available values for category are as follow. Default value is "Process".
 
 ## See also
 
-[`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)`, `[`rba_string_enrichment`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment.md)`, `[`rba_string_annotations`](https://rbioapi.moosa-r.com/reference/rba_string_annotations.md)` `
+` `[`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)`, `[`rba_string_enrichment`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment.md)`, `[`rba_string_annotations`](https://rbioapi.moosa-r.com/reference/rba_string_annotations.md)`, `[`rba_string_functional_terms`](https://rbioapi.moosa-r.com/reference/rba_string_functional_terms.md)` `
 
 Other "STRING":
 [`rba_string_annotations()`](https://rbioapi.moosa-r.com/reference/rba_string_annotations.md),
 [`rba_string_enrichment()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment.md),
 [`rba_string_enrichment_ppi()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_ppi.md),
+[`rba_string_functional_terms()`](https://rbioapi.moosa-r.com/reference/rba_string_functional_terms.md),
 [`rba_string_homology_inter()`](https://rbioapi.moosa-r.com/reference/rba_string_homology_inter.md),
 [`rba_string_homology_intra()`](https://rbioapi.moosa-r.com/reference/rba_string_homology_intra.md),
 [`rba_string_interaction_partners()`](https://rbioapi.moosa-r.com/reference/rba_string_interaction_partners.md),

@@ -1,11 +1,10 @@
 # Get All STRING Interaction Partners
 
-This function will retrieve all the STRING interactions which include
-your proteins as one party of the interaction. (e.g. interaction between
-your proteins and every other STRING proteins.)  
-Given the size of STRING database, this function could return a very
-long results. See "Arguments" section for information on how to filter
-the interactions.
+This function retrieves STRING interactions involving any of your input
+proteins as one party of the interaction, including interactions with
+proteins outside the input set.  
+Given the size of the STRING database, this function can return many
+interactions. Use the filtering arguments to limit the results.
 
 ## Usage
 
@@ -31,28 +30,33 @@ rba_string_interaction_partners(
 
 - species:
 
-  Numeric: NCBI Taxonomy identifier; Human Taxonomy ID is 9606.
-  (Recommended, but optional if your input is less than 100 IDs.)
+  Numeric: [NCBI Taxonomy
+  identifier](https://www.ncbi.nlm.nih.gov/taxonomy/); Human Taxonomy ID
+  is 9606. (Recommended, but required if your input contains more than
+  10 unique IDs.)
 
 - required_score:
 
-  Numeric: A minimum of interaction score for an interaction to be
-  included in the image. if not supplied, the threshold will be applied
-  by STRING Based in the network. (low Confidence = 150, Medium
-  Confidence = 400, High Confidence = 700, Highest confidence = 900)
+  Numeric (between 0 and 1000): Minimum interaction score required for
+  an interaction to be included in the returned interactions. If
+  omitted, STRING applies a network-dependent threshold. Common
+  confidence thresholds are 150 (low), 400 (medium), 700 (high), and 900
+  (highest).
 
 - network_type:
 
-  should be one of:
+  Character: One of:
 
-  - "functional": (default) The edge's indicate both physical and
-    functional associations.
+  - "functional": (default) Edges indicate both physical and functional
+    associations.
+
+  - "physical": Edges indicate that two proteins have a physical
+    interaction or are parts of a complex.
 
 - limit:
 
-  Limit the number returned interaction partners per each of your input
-  proteins. (e.g. Number of the most confident interaction partner to
-  return per each input protein.)
+  Numeric: Maximum number of interaction partners returned for each
+  input protein, ordered by confidence.
 
 - ...:
 
@@ -62,20 +66,18 @@ rba_string_interaction_partners(
 
 ## Value
 
-A data frame which each row is a network interaction and the columns
-contains interactor information and interaction scores.
+A data frame in which each row is a network interaction and the columns
+contain interactor information and interaction scores.
 
 ## Details
 
-Note that this function will retrieve the interactions between your
-input proteins and every other STRING proteins. To retrieve the
-interaction among your input protein-set, see
+To retrieve only interactions among the input proteins, see
 [`rba_string_interactions_network`](https://rbioapi.moosa-r.com/reference/rba_string_interactions_network.md).
 
 ## Corresponding API Resources
 
-"POST https://string-db.org/api/{output-format}/
-interaction_partners?identifiers={your_identifiers}&{optional_parameters}"
+"POST https://string-db.org/api/{output-format}/interaction_partners?
+identifiers={your_identifiers}&{optional_parameters}"
 
 ## References
 
@@ -94,13 +96,14 @@ interaction_partners?identifiers={your_identifiers}&{optional_parameters}"
 
 ## See also
 
-[`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)`, `[`rba_string_interactions_network`](https://rbioapi.moosa-r.com/reference/rba_string_interactions_network.md)
+` `[`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)`, `[`rba_string_interactions_network`](https://rbioapi.moosa-r.com/reference/rba_string_interactions_network.md)`, `[`rba_string_network_image`](https://rbioapi.moosa-r.com/reference/rba_string_network_image.md)`, `[`rba_string_enrichment_ppi`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_ppi.md)` `
 
 Other "STRING":
 [`rba_string_annotations()`](https://rbioapi.moosa-r.com/reference/rba_string_annotations.md),
 [`rba_string_enrichment()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment.md),
 [`rba_string_enrichment_image()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_image.md),
 [`rba_string_enrichment_ppi()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_ppi.md),
+[`rba_string_functional_terms()`](https://rbioapi.moosa-r.com/reference/rba_string_functional_terms.md),
 [`rba_string_homology_inter()`](https://rbioapi.moosa-r.com/reference/rba_string_homology_inter.md),
 [`rba_string_homology_intra()`](https://rbioapi.moosa-r.com/reference/rba_string_homology_intra.md),
 [`rba_string_interactions_network()`](https://rbioapi.moosa-r.com/reference/rba_string_interactions_network.md),

@@ -1,37 +1,28 @@
-# Map a Set of Identifiers to STRING Identifiers
+# Search STRING Functional Terms
 
-This function calls STRING's API to map a set of common gene or protein
-identifiers to STRING identifiers. Although STRING services accept a
-variety of identifiers, the STRING API documentation recommends mapping
-them to STRING identifiers before using other STRING functions.
+STRING maps several functional annotation resources onto its proteins.
+This function searches for functional terms using an identifier or
+descriptive text and retrieves the matching terms and their annotated
+proteins.
 
 ## Usage
 
 ``` r
-rba_string_map_ids(ids, species = NULL, echo_query = TRUE, limit = NULL, ...)
+rba_string_functional_terms(term_text, species, ...)
 ```
 
 ## Arguments
 
-- ids:
+- term_text:
 
-  Your common gene/protein identifier(s) to be mapped.
+  Character: A functional term identifier or descriptive text used to
+  match one or more functional terms.
 
 - species:
 
   Numeric: [NCBI Taxonomy
   identifier](https://www.ncbi.nlm.nih.gov/taxonomy/); Human Taxonomy ID
-  is 9606. (Recommended, but optional.)
-
-- echo_query:
-
-  (default = `TRUE`) Include your input IDs as a column of the results.
-
-- limit:
-
-  Deprecated: Retained temporarily for backward compatibility. STRING
-  v12 returns only the single best match per input ID, so this argument
-  has no effect.
+  is 9606.
 
 - ...:
 
@@ -41,16 +32,23 @@ rba_string_map_ids(ids, species = NULL, echo_query = TRUE, limit = NULL, ...)
 
 ## Value
 
-A data frame with at most one mapped STRING ID per input ID and other
-pertinent information. The `queryIndex` column contains the zero-based
-position of each resolved ID in the input vector. Unresolved inputs are
-omitted; if none can be resolved, a zero-row data frame retaining the
-response columns is returned.
+A data frame in which every row is a matching functional term and the
+columns contain the term category, identifier, description, number of
+annotated proteins, preferred protein names, and STRING protein IDs.
+`preferredNames` and `stringIds` are returned as list-columns.
+
+## Details
+
+This endpoint supports only one species per query. If multiple
+functional terms match `term_text`, STRING returns them in order of
+relevance, with the best match first.  
+The complete number of annotated proteins is reported in `proteinCount`.
 
 ## Corresponding API Resources
 
-"POST https://string-db.org/api/tsv/get_string_ids?identifiers=
-{your_identifiers}&{optional_parameters}"
+"POST
+https://string-db.org/api/{output-format}/functional_terms?term_text=
+{your_term}&{optional_parameters}"
 
 ## References
 
@@ -69,16 +67,18 @@ response columns is returned.
 
 ## See also
 
+` `[`rba_string_annotations`](https://rbioapi.moosa-r.com/reference/rba_string_annotations.md)`, `[`rba_string_enrichment`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment.md)`, `[`rba_string_enrichment_image`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_image.md)` `
+
 Other "STRING":
 [`rba_string_annotations()`](https://rbioapi.moosa-r.com/reference/rba_string_annotations.md),
 [`rba_string_enrichment()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment.md),
 [`rba_string_enrichment_image()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_image.md),
 [`rba_string_enrichment_ppi()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_ppi.md),
-[`rba_string_functional_terms()`](https://rbioapi.moosa-r.com/reference/rba_string_functional_terms.md),
 [`rba_string_homology_inter()`](https://rbioapi.moosa-r.com/reference/rba_string_homology_inter.md),
 [`rba_string_homology_intra()`](https://rbioapi.moosa-r.com/reference/rba_string_homology_intra.md),
 [`rba_string_interaction_partners()`](https://rbioapi.moosa-r.com/reference/rba_string_interaction_partners.md),
 [`rba_string_interactions_network()`](https://rbioapi.moosa-r.com/reference/rba_string_interactions_network.md),
+[`rba_string_map_ids()`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md),
 [`rba_string_network_image()`](https://rbioapi.moosa-r.com/reference/rba_string_network_image.md),
 [`rba_string_version()`](https://rbioapi.moosa-r.com/reference/rba_string_version.md)
 
@@ -86,6 +86,9 @@ Other "STRING":
 
 ``` r
 # \donttest{
-rba_string_map_ids(ids = c("TP53", "TNF", "EGFR"), species = 9606)
+rba_string_functional_terms(
+    term_text = "T cell receptor signaling pathway",
+    species = 9606
+)
 # }
 ```

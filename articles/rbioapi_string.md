@@ -2,59 +2,53 @@
 
 ## Introduction
 
-STRING is a comprehensive database of protein-protein interactions (PPI)
-that in version 11.0, covers 24,584,628 proteins from 5,090 organisms.
-Directly quoting from their paper:
-
-> The STRING database aims to collect, score and integrate all publicly
-> available sources of protein–protein interaction information, and to
-> complement these with computational predictions. Its goal is to
-> achieve a comprehensive and objective global network, including direct
-> (physical) as well as indirect (functional) interactions.
->
-> (source: Szklarczyk, Damian, et al. “STRING v11: protein–protein
-> association networks with increased coverage, supporting functional
-> discovery in genome-wide experimental datasets.” *Nucleic acids
-> research* 47.D1 (2019): D607-D613. )
+STRING is a comprehensive database of known and predicted
+protein-protein associations. It integrates direct physical interactions
+and indirect functional associations from experimental evidence, curated
+databases, text mining, co-expression, and computational predictions.
+rbioapi provides a consistent R interface to STRING’s mapping, network,
+homology, annotation, and enrichment API resources.
 
 ------------------------------------------------------------------------
 
-## Note about species argument
+## The `species` argument
 
-You can find an argument named “species” in every rbioapi STRING
-function. Providing the species argument is not mandatory, but it has
-been recommended in STRING API’s documentation to always specify the
-species. An exception is when your input proteins’ vector length is more
-than 100; In such cases, the species argument is required. Otherwise,
-calling the function without providing the species will produce an
-ERROR.
+Most rbioapi STRING functions accept a `species` argument containing an
+[NCBI Taxonomy identifier](https://www.ncbi.nlm.nih.gov/taxonomy/), such
+as 9606 for human. Supplying it is recommended because it helps STRING
+resolve ambiguous identifiers.
+
+For the network, interaction-partner, homology, PPI-enrichment,
+network-image, and enrichment-image functions, `species` is required
+when the input contains more than 10 unique IDs. Mapping,
+functional-enrichment, and functional-annotation requests do not have
+this local restriction. The limit is based on unique IDs rather than the
+length of the original vector.
 
 ------------------------------------------------------------------------
 
 ## Map your IDs to STRING IDs
 
-Although STRING API resources will handle and recognize a variety of
-identifiers, it is recommended that you first map your IDs to STRING IDs
-before using them in other rbioapi STRING functions.
+Although STRING recognizes a variety of identifiers, mapping them to
+STRING IDs before using other rbioapi STRING functions makes subsequent
+requests faster and less ambiguous.
 
 ``` r
 
-## 1 We create a variable with our genes' NCBI IDs
+## 1. Create a vector of protein identifiers
 proteins <- c(
-  "p53", "BRCA1", "cdk2", "Q99835", "CDC42","CDK1","KIF23",
-  "PLK1","RAC2","RACGAP1","RHOA","RHOB", "PHF14", "RBM3"
+  "p53", "BRCA1", "cdk2", "Q99835", "CDC42", "CDK1", "KIF23",
+  "PLK1", "RAC2", "RACGAP1", "RHOA", "RHOB", "PHF14", "RBM3"
 )
 
-## 2 Now we map our protein IDs
+## 2. Map the protein identifiers
 proteins_mapped_df <- rba_string_map_ids(ids = proteins, species = 9606)
-
-## 3 What we need and will use for the rest of this vignette is the `stringId` column
 ```
 
 ``` r
 
 
-## 3 What we need and will use for the rest of this vignette is the `stringId` column
+## 3. Use the mapped STRING IDs in the remaining examples
 proteins_mapped <- proteins_mapped_df$stringId
 ```
 
@@ -62,13 +56,14 @@ proteins_mapped <- proteins_mapped_df$stringId
 
 ## Get interaction network of a protein set
 
-You can retrieve a list of interactions that the proteins in your set
-have with each other along with the STRING annotations of each
-interaction. You may filter the results by using required_score and
-network_type arguments.
+You can retrieve interactions among the proteins in your set, together
+with the scores for each STRING evidence channel. Use `required_score`
+to set the minimum interaction score and `network_type` to select
+functional or physical associations.
 
-See the ‘values’ section `rba_string_interactions_network` function’s
-manual for information on the returned columns.
+See the Value section of the
+[`rba_string_interactions_network()`](https://rbioapi.moosa-r.com/reference/rba_string_interactions_network.md)
+manual for descriptions of the returned columns.
 
 ``` r
 
@@ -79,19 +74,51 @@ int_net <- rba_string_interactions_network(
 )
 ```
 
+Instead of supplying protein identifiers, you can retrieve the network
+formed by proteins annotated with a STRING functional term. In this
+mode, set `ids = NULL` and supply both `network_term_id` and `species`.
+[`rba_string_functional_terms()`](https://rbioapi.moosa-r.com/reference/rba_string_functional_terms.md)
+can search for functional terms using either an identifier or
+descriptive text:
+
+``` r
+
+tcr_terms <- rba_string_functional_terms(
+  term_text = "T cell receptor signaling pathway",
+  species = 9606
+)
+```
+
+The first match for this search is `GO:0050852`, which identifies the GO
+term “T cell receptor signaling pathway”:
+
+``` r
+
+term_net <- rba_string_interactions_network(
+  ids = NULL,
+  network_term_id = "GO:0050852",
+  species = 9606,
+  required_score = 900
+)
+```
+
+The `proteinCount` column contains the complete number of proteins
+annotated with each term, while `preferredNames` and `stringIds` are
+returned as list-columns. The `ids` and `network_term_id` input modes
+cannot be combined.
+
 ------------------------------------------------------------------------
 
 ## Get interaction partners of a protein set
 
-In the last example, we only obtained the interaction which our proteins
-have among themselves, what if we wanted to get a list of every protein
-which interact with our protein(s)?
-
-To do that, we can use `rba_string_interaction_partners`:
+The previous example returned interactions among the input proteins. To
+retrieve proteins that interact with one or more input proteins,
+including proteins outside the input set, use
+[`rba_string_interaction_partners()`](https://rbioapi.moosa-r.com/reference/rba_string_interaction_partners.md):
 
 ``` r
 
-## Although we supply only one protein ID here (CD40 protein), you can provide a vector of proteins as the input
+## This example uses one protein (CD40), but `ids` can contain multiple proteins
 int_partners <- rba_string_interaction_partners(
   ids = "9606.ENSP00000361359",
   species = 9606,
@@ -103,11 +130,11 @@ int_partners <- rba_string_interaction_partners(
 
 ## Get network image of a protein set
 
-Let’s go back to the interaction network. As you must have seen in the
-STRING webpages, STRING plots the interaction network of your proteins
-with many customizations available. You can also do that with STRING API
-services. `rba_string_network_image` function is very flexible and you
-have a variety of options; see the function’s manual.
+STRING can render the interaction network as a static image. The
+[`rba_string_network_image()`](https://rbioapi.moosa-r.com/reference/rba_string_network_image.md)
+function supports several options for controlling the network contents
+and appearance; see the function manual for details. It also supports
+the same `network_term_id` input mode described above.
 
 ``` r
 
@@ -119,6 +146,19 @@ graph_ppi1 <- rba_string_network_image(
   save_image = FALSE,
   required_score = 500,
   network_flavor = "confidence"
+)
+```
+
+For example, the network for a functional term can be rendered with:
+
+``` r
+
+term_image <- rba_string_network_image(
+  ids = NULL,
+  network_term_id = "GO:0050852",
+  species = 9606,
+  required_score = 900,
+  save_image = FALSE
 )
 ```
 
@@ -151,17 +191,20 @@ Network images - Example 2
 
 ## Enrichment analysis using STRING
 
-STRING let you perform two types of enrichment analysis. See [STRING’s
-paper](https://doi.org/10.1093/nar/gks1094 "STRING v9.1: protein-protein interaction networks, with increased coverage and integration")
-for more information.
+STRING supports two complementary enrichment analyses: functional
+enrichment and protein-protein interaction enrichment. See the [STRING
+publication](https://doi.org/10.1093/nar/gkac1000) for methodological
+details.
 
 ### Functional enrichment
 
-The first type is the conventional type, which statistically tests your
-supplied gene sets against some sets of annotation. Currently, STRING
-supports Gene Ontology, KEGG pathways, UniProt Keywords, PubMed
-publications, Pfam domains, InterPro domains, and SMART domains.
-([source](https://version11.string-db.org/help/api/#getting-functional-enrichment "STRING API - Getting functional enrichment")).
+Functional enrichment tests the supplied protein set against annotation
+resources including Gene Ontology, KEGG pathways, UniProt Keywords,
+PubMed publications, Pfam domains, InterPro domains, and SMART domains.
+The results include raw p-values and false discovery rates. See the
+[current STRING API
+documentation](https://string-db.org/help/api/#getting-functional-enrichment)
+for details.
 
 ``` r
 
@@ -171,10 +214,9 @@ enriched <- rba_string_enrichment(
 )
 ```
 
-As usual, we inspect the output using the
-[`str()`](https://rdrr.io/r/utils/str.html) function. As you can see
-below, the enrichment results of each category can be found as the
-returned list’s elements.
+By default, results are split by category into a list of data frames. We
+can inspect that structure with
+[`str()`](https://rdrr.io/r/utils/str.html):
 
 ``` r
 
@@ -209,14 +251,14 @@ the documentation
 site](https://rbioapi.moosa-r.com/articles/rbioapi_do_enrich.html)) for
 an in-depth review.
 
-### Functional enrichment Plot
+### Functional enrichment plot
 
-In addition to a data frame, you can also get a plot summarizing the
-enrichment results. This API endpoint supports extensive customization
-of the plot; please refer to the
+The enrichment-figure endpoint summarizes one enrichment category as a
+plot. Use
 [`rba_string_enrichment_image()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_image.md)
-function’s manual for detailed instructions. Here we perform the exact
-enrichment analysis done above, and retrieve a plot of the results.
+to control the category, grouping, palette, ranking variable, output
+format, and number of displayed terms. This example visualizes the KEGG
+enrichment for the same protein set:
 
 ``` r
 
@@ -237,12 +279,10 @@ Visualization of enrichment analysis results
 
 ### Protein-protein interaction enrichment
 
-Even without incorporating annotation data, STRING can calculate if your
-proteins are functionally related. Briefly, STRING accomplishes this by
-comparing the interactions’ distribution in your protein-set to the
-interactions’ distribution in the proteome. Read [STRING’s
-paper](https://doi.org/10.1093/nar/gks1094 "STRING v9.1: protein-protein interaction networks, with increased coverage and integration")
-for more information.
+PPI enrichment tests whether the input network contains more
+interactions than expected for a similarly sized protein set drawn from
+the background proteome. It can therefore identify evidence of
+functional relatedness without relying on annotation enrichment.
 
 ``` r
 
@@ -273,10 +313,11 @@ rba_string_enrichment_ppi(
 
 ## Get functional annotations
 
-As you have seen above, STRING maps the proteins to multiple annotation
-sources. You can obtain any annotation associated with your proteins
-without performing enrichment analysis and retrieving just the
-significant portion.
+STRING maps proteins to multiple annotation resources. Use
+[`rba_string_annotations()`](https://rbioapi.moosa-r.com/reference/rba_string_annotations.md)
+to retrieve all annotations assigned to the input proteins rather than
+only the subset returned by enrichment analysis. PubMed annotations are
+excluded by default because they can make the response very large.
 
 ``` r
 
@@ -285,7 +326,21 @@ annotations <- rba_string_annotations(
   species = 9606
 )
 
-## This function returns large results, so the results are not shown in this vignette.
+## Annotation responses can be large, so the result is not shown here
+```
+
+Set `allow_pubmed = TRUE` to include PubMed annotations with the other
+categories, or set `only_pubmed = TRUE` to retrieve only PubMed
+annotations. `only_pubmed` takes precedence if both arguments are
+`TRUE`.
+
+``` r
+
+pubmed_annotations <- rba_string_annotations(
+  ids = "9606.ENSP00000269305",
+  species = 9606,
+  only_pubmed = TRUE
+)
 ```
 
 ------------------------------------------------------------------------
@@ -303,7 +358,7 @@ check their manuals:
 
 ------------------------------------------------------------------------
 
-## How to Cite?
+## How to cite
 
 To cite STRING (Please see
 <https://string-db.org/cgi/about?footer_active_subpage=references>):

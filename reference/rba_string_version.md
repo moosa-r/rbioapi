@@ -1,6 +1,7 @@
 # Get Current STRING Version
 
-Get STRING version and stable Address that this package currently uses.
+Get the STRING version and stable address currently used by this
+package.
 
 ## Usage
 
@@ -22,15 +23,13 @@ A list with STRING version and stable address.
 
 ## Details
 
-Note that STRING releases new version at approximately 2 years cycle.
-Nevertheless, to insure reproducibility, STRING dedicates a stable
-address for each release. Thus you can always reproduce research and
-results obtained via a certain STRING version. If the version that
-rbioapi returns is outdated, Kindly contact me.
+STRING releases a new version approximately every two years. To support
+reproducibility, each release has a stable address that remains
+available after newer versions are released.
 
 ## Corresponding API Resources
 
-"GET https://string-db.org/api/{output_format}/version"
+"GET https://string-db.org/api/{output-format}/version"
 
 ## References
 
@@ -54,6 +53,7 @@ Other "STRING":
 [`rba_string_enrichment()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment.md),
 [`rba_string_enrichment_image()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_image.md),
 [`rba_string_enrichment_ppi()`](https://rbioapi.moosa-r.com/reference/rba_string_enrichment_ppi.md),
+[`rba_string_functional_terms()`](https://rbioapi.moosa-r.com/reference/rba_string_functional_terms.md),
 [`rba_string_homology_inter()`](https://rbioapi.moosa-r.com/reference/rba_string_homology_inter.md),
 [`rba_string_homology_intra()`](https://rbioapi.moosa-r.com/reference/rba_string_homology_intra.md),
 [`rba_string_interaction_partners()`](https://rbioapi.moosa-r.com/reference/rba_string_interaction_partners.md),
