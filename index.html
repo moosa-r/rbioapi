@@ -82,7 +82,7 @@
 <img src="logo.svg" class="logo" alt=""><h1 id="rbioapi-user-friendly-r-interface-to-biologic-web-services-api">rbioapi: User-Friendly R Interface to Biologic Web Services’ API<a class="anchor" aria-label="anchor" href="#rbioapi-user-friendly-r-interface-to-biologic-web-services-api"></a>
 </h1>
 </div>
-<p>Moosa Rezwani 2025-06-29</p>
+<p>Moosa Rezwani 2026-07-25</p>
 </div>
 <div class="section level1">
 <h1 id="section"><a class="anchor" aria-label="anchor" href="#section"></a></h1>
@@ -273,17 +273,17 @@
 <span><span class="co">#&gt; List of 2</span></span>
 <span><span class="co">#&gt;  $ taxonomies:'data.frame':  200 obs. of  8 variables:</span></span>
 <span><span class="co">#&gt;   ..$ taxonomyId    : int [1:200] 10509 10510 10511 10512 10513 10514 10515 10519 10521 10522 ...</span></span>
-<span><span class="co">#&gt;   ..$ mnemonic      : chr [1:200] "9ADEN" "ADEB3" "ADEB7" "9ADEN" ...</span></span>
-<span><span class="co">#&gt;   ..$ scientificName: chr [1:200] "Mastadenovirus" "Bovine adenovirus B serotype 3" "Bovine adenovirus 7" "Canine adenovirus 1" ...</span></span>
-<span><span class="co">#&gt;   ..$ rank          : chr [1:200] "genus" "serotype" "serotype" "serotype" ...</span></span>
+<span><span class="co">#&gt;   ..$ mnemonic      : chr [1:200] "9ADEN" "ADEB3" "ADEB7" "ADEC1" ...</span></span>
+<span><span class="co">#&gt;   ..$ scientificName: chr [1:200] "Mastadenovirus" "Bovine adenovirus B serotype 3" "Bovine adenovirus 7" "Canine adenovirus serotype 1" ...</span></span>
+<span><span class="co">#&gt;   ..$ rank          : chr [1:200] "genus" "no rank" "no rank" "no rank" ...</span></span>
 <span><span class="co">#&gt;   ..$ superregnum   : chr [1:200] "V" "V" "V" "V" ...</span></span>
 <span><span class="co">#&gt;   ..$ hidden        : logi [1:200] FALSE TRUE TRUE TRUE TRUE TRUE ...</span></span>
-<span><span class="co">#&gt;   ..$ commonName    : chr [1:200] NA "BAdV-3" "BAdV-7" NA ...</span></span>
-<span><span class="co">#&gt;   ..$ synonym       : chr [1:200] NA "Mastadenovirus bos3" NA NA ...</span></span>
+<span><span class="co">#&gt;   ..$ commonName    : chr [1:200] NA "BAdV-3" "BAdV-7" "CAdV-1" ...</span></span>
+<span><span class="co">#&gt;   ..$ synonym       : chr [1:200] NA "Mastadenovirus bos3" NA "Canine adenovirus 1" ...</span></span>
 <span><span class="co">#&gt;  $ pageInfo  :List of 3</span></span>
 <span><span class="co">#&gt;   ..$ resultsPerPage: int 200</span></span>
 <span><span class="co">#&gt;   ..$ currentPage   : int 1</span></span>
-<span><span class="co">#&gt;   ..$ totalRecords  : int 1121</span></span></code></pre></div>
+<span><span class="co">#&gt;   ..$ totalRecords  : int 1259</span></span></code></pre></div>
 <p>As you can see, the server has returned the first page of the response, to retrieve the other pages, you should make separate calls and change the “page_number” argument within each call, or simply use <code><a href="reference/rba_pages.html">rba_pages()</a></code> as demonstrated below:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">adeno_pages</span> <span class="op">=</span> <span class="fu"><a href="reference/rba_pages.html">rba_pages</a></span><span class="op">(</span></span>
@@ -381,9 +381,9 @@
 <div class="section level1">
 <h1 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h1>
-<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co">#&gt; R version 4.5.1 (2025-06-13 ucrt)</span></span>
+<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co">#&gt; R version 4.6.0 (2026-04-24 ucrt)</span></span>
 <span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64</span></span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="co">#&gt; Running under: Windows 11 x64 (build 26100)</span></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="co">#&gt; Running under: Windows 11 x64 (build 26200)</span></span>
 <span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="co">#&gt; Matrix products: default</span></span>
 <span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="co">#&gt;   LAPACK version 3.12.1</span></span>
@@ -405,11 +405,11 @@
 <span id="cb13-22"><a href="#cb13-22" tabindex="-1"></a><span class="co">#&gt; [1] rbioapi_0.8.3</span></span>
 <span id="cb13-23"><a href="#cb13-23" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb13-24"><a href="#cb13-24" tabindex="-1"></a><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span id="cb13-25"><a href="#cb13-25" tabindex="-1"></a><span class="co">#&gt;  [1] digest_0.6.37     R6_2.6.1          fastmap_1.2.0     xfun_0.52        </span></span>
-<span id="cb13-26"><a href="#cb13-26" tabindex="-1"></a><span class="co">#&gt;  [5] knitr_1.50        htmltools_0.5.8.1 rmarkdown_2.29    cli_3.6.5        </span></span>
-<span id="cb13-27"><a href="#cb13-27" tabindex="-1"></a><span class="co">#&gt;  [9] compiler_4.5.1    httr_1.4.7        rstudioapi_0.17.1 tools_4.5.1      </span></span>
-<span id="cb13-28"><a href="#cb13-28" tabindex="-1"></a><span class="co">#&gt; [13] curl_6.4.0        evaluate_1.0.4    yaml_2.3.10       rlang_1.1.6      </span></span>
-<span id="cb13-29"><a href="#cb13-29" tabindex="-1"></a><span class="co">#&gt; [17] jsonlite_2.0.0</span></span></code></pre></div>
+<span id="cb13-25"><a href="#cb13-25" tabindex="-1"></a><span class="co">#&gt;  [1] digest_0.6.39     R6_2.6.1          fastmap_1.2.0     xfun_0.60        </span></span>
+<span id="cb13-26"><a href="#cb13-26" tabindex="-1"></a><span class="co">#&gt;  [5] knitr_1.51        htmltools_0.5.9   rmarkdown_2.31    cli_3.6.6        </span></span>
+<span id="cb13-27"><a href="#cb13-27" tabindex="-1"></a><span class="co">#&gt;  [9] compiler_4.6.0    httr_1.4.8        rstudioapi_0.19.0 tools_4.6.0      </span></span>
+<span id="cb13-28"><a href="#cb13-28" tabindex="-1"></a><span class="co">#&gt; [13] curl_7.1.0        evaluate_1.0.5    yaml_2.3.12       otel_0.2.0       </span></span>
+<span id="cb13-29"><a href="#cb13-29" tabindex="-1"></a><span class="co">#&gt; [17] jsonlite_2.0.0    rlang_1.3.0</span></span></code></pre></div>
 </div>
 
   </main><aside class="col-md-3"><div class="links">
@@ -448,8 +448,8 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://cran.r-project.org/package=rbioapi" class="external-link"><img src="https://www.r-pkg.org/badges/version/rbioapi" alt="CRAN_Status_Badge"></a></li>
-<li><a href="https://github.com/moosa-r/rbioapi/actions" class="external-link"><img src="https://github.com/moosa-r/rbioapi/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://cran.r-project.org/package=rbioapi" class="external-link"><img src="https://www.r-pkg.org/badges/version/rbioapi" alt="CRAN version"></a></li>
+<li><a href="https://github.com/moosa-r/rbioapi/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://img.shields.io/github/actions/workflow/status/moosa-r/rbioapi/R-CMD-check.yaml?branch=master&amp;event=push&amp;label=R-CMD-check&amp;logo=R" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 
