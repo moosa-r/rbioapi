@@ -473,7 +473,7 @@ rba_reactome_analysis_pdf <- function(token,
     cons = list(
       list(arg = "token", class = "character"),
       list(arg = "species", class = c("character", "numeric")),
-      list(arg = "save_to", class = "character"),
+      list(arg = "save_to", class = "character", len = 1L, no_na = FALSE),
       list(arg = "number", class = "numeric"),
       list(
         arg = "resource", class = "character",
@@ -651,7 +651,7 @@ rba_reactome_analysis_download <- function(token,
         arg = "request", class = "character",
         val = c("found_ids", "not_found_ids", "pathways", "results", "results_gz")
       ),
-      list(arg = "save_to", class = "character"),
+      list(arg = "save_to", class = "character", len = 1L, no_na = FALSE),
       list(
         arg = "resource", class = "character", no_null = TRUE,
         val = c("TOTAL",

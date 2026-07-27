@@ -11,6 +11,12 @@ test_that(".rba_ext_args works", {
   .rba_ext_args(verbose = 123)
   expect_true(object = (verbose != getOption("rba_verbose")))
   rm(list = opts)
+  .rba_ext_args(verbose = NA)
+  expect_true(object = is.na(verbose))
+  rm(list = opts)
+  .rba_ext_args(timeout = c(1, 2))
+  expect_equal(object = timeout, expected = c(1, 2))
+  rm(list = opts)
 
   ## detects invalid args
   expect_warning(object = .rba_ext_args(qwerty = 123),

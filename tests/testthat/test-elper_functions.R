@@ -9,6 +9,9 @@ test_that("rba_options works", {
 
   # Checks arguments
   expect_error(object = rba_options(verbose = 123), regexp = "logical")
+  verbose_before <- getOption("rba_verbose")
+  expect_error(object = rba_options(verbose = NA), regexp = "verbose.*NA")
+  expect_identical(object = getOption("rba_verbose"), expected = verbose_before)
   expect_error(object = rba_options(save_file = "test.txt"), regexp = "logical")
 
 })

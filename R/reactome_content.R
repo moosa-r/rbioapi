@@ -846,7 +846,8 @@ rba_reactome_exporter_diagram <- function(event_id,
   .rba_args(
     cons = list(
       list(arg = "event_id", class = "character"),
-      list(arg = "save_to", class = "character"),
+      list(arg = "save_to", class = "character", len = 1L, no_na = FALSE),
+      list(arg = "create_document", class = "logical", len = 1L),
       list(arg = "document_level", class = "numeric", val = c(0,1)),
       list(
         arg = "output_format",
@@ -1033,7 +1034,7 @@ rba_reactome_exporter_event <- function(event_id,
     cons = list(
       list(arg = "event_id", class = "character"),
       list(arg = "output_format", class = "character", val = c("sbgn", "sbml")),
-      list(arg = "save_to", class = "character"))
+      list(arg = "save_to", class = "character", len = 1L, no_na = FALSE))
   )
 
   .msg(
@@ -1176,7 +1177,7 @@ rba_reactome_exporter_overview <- function(species,
                 "svg",
                 "gif")
       ),
-      list(arg = "save_to", class = "character"),
+      list(arg = "save_to", class = "character", len = 1L, no_na = FALSE),
       list(arg = "image_quality", class = "numeric", ran = c(1,10)),
       list(arg = "flag_element", class = "character"),
       list(arg = "flg_interactors", class = "logical"),
@@ -1363,7 +1364,7 @@ rba_reactome_exporter_reaction <- function(event_id,
   .rba_args(
     cons = list(
       list(arg = "event_id", class = "character"),
-      list(arg = "save_to", class = "character"),
+      list(arg = "save_to", class = "character", len = 1L, no_na = FALSE),
       list(
         arg = "output_format", no_null = TRUE, class = "character",
         val = c("png", "jpeg", "svg", "gif")

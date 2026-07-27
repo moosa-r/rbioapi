@@ -861,18 +861,19 @@
 
 #### Check Arguments #######
 
-#' Detect Required arguments
+#' Detect Required Arguments
 #'
 #' This function is an internal component of .rba_args(). It will
-#'   check for required arguments (arguments with no default) in the calling
-#'   function of .rba_args() and automatically add no_null = TRUE to
-#'   the corresponding constrains list.
+#'   detect required arguments (arguments without a default value) in the
+#'   function calling .rba_args(). For the corresponding constraints,
+#'   \code{no_null = TRUE} is automatically added unless
+#'   \code{no_null = FALSE} was explicitly supplied.
 #'
-#' The goal here is to make the exported functions more concise, contributers
-#'   only need to explicitly add no_null = TRUE to arguments that have
-#'   defaults but a NULL value will break the function. For example
-#'   arguments that is used to build a URL, arguments used to produce message,
-#'   etc.
+#' Constraints for arguments with default values are not modified. Therefore,
+#'   contributors only need to explicitly add \code{no_null = TRUE} when an
+#'   argument has a default value but its downstream use cannot accept
+#'   \code{NULL}. Conversely, \code{no_null = FALSE} allows a required
+#'   argument to accept \code{NULL}.
 #'
 #' @param cons Constrains input of .rba_args()
 #' @param n Number of frames to go back
@@ -1001,23 +1002,43 @@
 .rba_args_cons_chk <- function(cons_i, what) {
   if (!is.null(cons_i[["evl_arg"]])) {
 
+    # Keep the original object for class and length checks.
+    evl_arg <- cons_i[["evl_arg"]]
+    value_arg <- evl_arg
+
+    # Remove allowed missing values only from value-based checks.
+    if (
+      identical(cons_i[["no_na"]], FALSE) &&
+      anyNA(value_arg, recursive = TRUE)
+    ) {
+      if (!is.atomic(value_arg)) {
+        value_arg <- unlist(
+          value_arg,
+          recursive = TRUE,
+          use.names = FALSE
+        )
+      }
+      value_arg <- value_arg[!is.na(value_arg)]
+    }
+
+    # Run the requested constraint against the appropriate representation.
     output <- all(
       switch(
         what,
-        "class" = class(cons_i[["evl_arg"]]) %in% cons_i[["class"]],
-        "val" = all(cons_i[["evl_arg"]] %in% cons_i[["val"]]),
+        "class" = inherits(evl_arg, cons_i[["class"]]),
+        "val" = all(value_arg %in% cons_i[["val"]]),
         "ran" = all(
-          cons_i[["evl_arg"]] >= cons_i[["ran"]][[1]],
-          cons_i[["evl_arg"]] <= cons_i[["ran"]][[2]]
+          value_arg >= cons_i[["ran"]][[1]],
+          value_arg <= cons_i[["ran"]][[2]]
         ),
-        "len" = length(cons_i[["evl_arg"]]) == cons_i[["len"]],
-        "min_len" = length(cons_i[["evl_arg"]]) >= cons_i[["min_len"]],
-        "max_len" = length(cons_i[["evl_arg"]]) <= cons_i[["max_len"]],
-        "min_val" = cons_i[["evl_arg"]] >= cons_i[["min_val"]],
-        "max_val" = cons_i[["evl_arg"]] <= cons_i[["max_val"]],
+        "len" = length(evl_arg) == cons_i[["len"]],
+        "min_len" = length(evl_arg) >= cons_i[["min_len"]],
+        "max_len" = length(evl_arg) <= cons_i[["max_len"]],
+        "min_val" = value_arg >= cons_i[["min_val"]],
+        "max_val" = value_arg <= cons_i[["max_val"]],
         "regex" = grepl(
           pattern = cons_i[["regex"]],
-          x = cons_i[["evl_arg"]],
+          x = value_arg,
           ignore.case = FALSE, perl = TRUE
         ),
         stop("Internal Error; constrian is not defiend: ", what, call. = TRUE)
@@ -1052,11 +1073,15 @@
     "no_null" = sprintf(
       "Invalid Argument: `%s` cannot be NULL.", cons_i[["arg"]]
     ),
+    "no_na" = sprintf(
+      "Invalid Argument: `%s` cannot contain `NA` or `NaN` values.",
+      cons_i[["arg"]]
+    ),
     "class" = sprintf(
       "Invalid Argument: %s should be of class `%s`.\n\t(Your supplied argument is \"%s\".)",
       cons_i[["arg"]],
       .paste2(cons_i[["class"]], last = " or ", quote = "\""),
-      class(cons_i[["evl_arg"]])
+      .paste2(class(cons_i[["evl_arg"]]), last = " and ")
     ),
     "val" = sprintf(
       "Invalid Argument: %s should be either `%s`.\n\t(Your supplied argument is `%s`.)",
@@ -1123,21 +1148,29 @@
 #' @family internal_arguments_check
 #' @noRd
 .rba_args_cons_wrp <- function(cons_i) {
+  # Handle NULL policy before any other constraint.
   if (is.null(cons_i[["evl_arg"]])) {
 
-    # check if the NULL argument is required or optional
     if (isTRUE(cons_i[["no_null"]])) {
-      #it is not optional!
       return(.rba_args_cons_msg(cons_i = cons_i, what = "no_null"))
     } else {
-      # It is optional, don't run the arguments check.
       return(NA)
     }
 
   } else {
 
-    #  argument is not NULL (user supplied something)
-    all_cons <- setdiff(names(cons_i), c("arg", "class", "evl_arg", "no_null"))
+    # Enforce missing-value policy before the remaining constraints.
+    has_na <- anyNA(cons_i[["evl_arg"]], recursive = TRUE)
+
+    if (has_na && !identical(cons_i[["no_na"]], FALSE)) {
+      return(.rba_args_cons_msg(cons_i = cons_i, what = "no_na"))
+    }
+
+    # Run each remaining constraint and collect its failure message.
+    all_cons <- setdiff(
+      names(cons_i),
+      c("arg", "class", "evl_arg", "no_null", "no_na")
+    )
     cons_i_errs <- lapply(
       all_cons,
       function(x){
@@ -1265,11 +1298,16 @@
 #'   }
 #'
 #' @param cons Define Constrains for input arguments. Currently they may be:
-#'   \cr "no_null', class', 'val', 'ran', 'min_val', 'max_val', 'len', 'min_len',
-#'   'max_len' and/or 'regex'.
-#'   \cr note no_null automatically will be added to the function's argument
-#'   with no default value. so you do not need to add no_null for such
-#'   arguments.
+#'   \cr "no_null", "no_na", "class", "val", "ran", "min_val", "max_val",
+#'   "len", "min_len", "max_len" and/or "regex".
+#'   \cr \code{no_null = TRUE} rejects \code{NULL}. When \code{no_null} is
+#'   omitted, it is automatically set to \code{TRUE} only for function
+#'   arguments without default values. Arguments with defaults continue to
+#'   accept \code{NULL} unless \code{no_null = TRUE} is explicitly supplied.
+#'   Set \code{no_null = FALSE} to allow a required argument to accept
+#'   \code{NULL}.
+#'   By default, all non-\code{NULL} arguments reject missing values. Set
+#'   \code{no_na = FALSE} for arguments that intentionally accept \code{NA}.
 #' @param cond Expression which will be evaluated to TRUE or FALSE.
 #' @param cond_warning Should the function produce warning instead of stopping
 #'   code execution? alternatively, you could include an element to
@@ -1286,7 +1324,12 @@
                       cond_warning = FALSE){
   ### 0 set diagnostics
   diagnostics <- get0("diagnostics", envir = parent.frame())
-  if (is.null(diagnostics) || is.na(diagnostics) || !is.logical(diagnostics)) {
+  if (
+    is.null(diagnostics) ||
+    length(diagnostics) != 1L ||
+    !is.logical(diagnostics) ||
+    is.na(diagnostics)
+  ) {
     diagnostics <- getOption("rba_diagnostics")
   }
   ### 1.1 append extra arguments which occurs in most functions:
@@ -1342,11 +1385,30 @@
 
   }
 
-  ## 2.2 check class
+  ## 2.2 check missing values and class
   class_errs <- lapply(
     cons,
     function(x) {
-      if (.rba_args_cons_chk(cons_i = x, what = "class")) {
+      evl_arg <- x[["evl_arg"]]
+      has_na <- anyNA(evl_arg, recursive = TRUE)
+
+      if (has_na && !identical(x[["no_na"]], FALSE)) {
+        return(.rba_args_cons_msg(cons_i = x, what = "no_na"))
+      }
+
+      all_na <- FALSE
+      if (has_na) {
+        if (!is.atomic(evl_arg)) {
+          evl_arg <- unlist(
+            evl_arg,
+            recursive = TRUE,
+            use.names = FALSE
+          )
+        }
+        all_na <- length(evl_arg[!is.na(evl_arg)]) == 0L
+      }
+
+      if (all_na || .rba_args_cons_chk(cons_i = x, what = "class")) {
         return(NA)
       } else {
         return(.rba_args_cons_msg(cons_i = x, what = "class"))
@@ -1957,11 +2019,11 @@
   for (opt in rba_opts) {
     assign(
       x = opt,
-      value = ifelse(
-        is.null(ext_args[[opt]]) || is.na(ext_args[[opt]]),
-        yes = getOption(paste0("rba_", opt)),
-        no = ext_args[[opt]]
-      ),
+      value = if (is.null(ext_args[[opt]])) {
+        getOption(paste0("rba_", opt))
+      } else {
+        ext_args[[opt]]
+      },
       envir = parent.frame(1)
     )
   }

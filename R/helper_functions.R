@@ -63,8 +63,15 @@
 #' @keywords Helper
 #' @export
 rba_connection_test <- function(print_output = TRUE, diagnostics = FALSE) {
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(arg = "print_output", class = "logical", len = 1L)
+    )
+  )
+
   # Set options
-  if (is.null(diagnostics) || is.na(diagnostics) || !is.logical(diagnostics)) {
+  if (is.null(diagnostics)) {
     diagnostics <- getOption("rba_diagnostics")
   }
   user_agent <- getOption("rba_user_agent")
@@ -348,13 +355,22 @@ rba_options <- function(diagnostics = NULL,
 rba_pages <- function(input_call, ...){
   ## Internal options
   ext_args <- list(...)
+
+  if (anyNA(ext_args, recursive = TRUE)) {
+    stop(
+      "Invalid Argument: internal options supplied through `...` cannot ",
+      "contain `NA` or `NaN` values.",
+      call. = getOption("rba_diagnostics")
+    )
+  }
+
   internal_opts <- list(
     verbose = TRUE,
     sleep_time = 1,
     page_check = TRUE,
     add_skip_error = TRUE,
-    list_names = NA,
-    force_pb = NA
+    list_names = NULL,
+    force_pb = NULL
   )
 
   if (length(ext_args) > 0) {
@@ -418,7 +434,7 @@ rba_pages <- function(input_call, ...){
   }
 
   ## Only show progress bar if verbose, diagnostics and progress bar are off
-  if (is.na(internal_opts$force_pb)) {
+  if (is.null(internal_opts$force_pb)) {
     verbose_on <-
       !grepl(",\\s*verbose\\s*=\\s*FALSE", input_call) &&
       (grepl(",\\s*verbose\\s*=\\s*TRUE", input_call) ||
@@ -484,4 +500,3 @@ rba_pages <- function(input_call, ...){
 
   return(final_output)
 }
-

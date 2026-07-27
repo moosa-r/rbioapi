@@ -328,10 +328,6 @@ rba_string_network_image <- function(ids,
     ),
     cond = list(
       list(
-        quote(anyNA(save_image)),
-        "`save_image` cannot be `NA`."
-      ),
-      list(
         quote(!is.null(ids) && !is.null(network_term_id)),
         paste0(
           "`ids` and `network_term_id` cannot be supplied together. ",
@@ -1293,10 +1289,6 @@ rba_string_annotations <- function(ids,
     ),
     cond = list(
       list(
-        quote(anyNA(c(allow_pubmed, only_pubmed))),
-        "`allow_pubmed` and `only_pubmed` cannot be `NA`."
-      ),
-      list(
         quote(isTRUE(allow_pubmed) && isTRUE(only_pubmed)),
         paste0(
           "`allow_pubmed` is ignored when `only_pubmed = TRUE`; ",
@@ -1827,10 +1819,6 @@ rba_string_enrichment_image <- function(ids,
       )
     ),
     cond = list(
-      list(
-        quote(anyNA(save_image)),
-        "`save_image` cannot be `NA`."
-      ),
       list(
         quote(length(unique(ids)) > 10 && is.null(species)),
         sprintf(

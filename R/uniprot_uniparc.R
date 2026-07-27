@@ -130,6 +130,7 @@ rba_uniprot_uniparc_search <- function(upi = NULL,
       list(arg = "sequence_checksum", class = "character"),
       list(arg = "ipr", class = "character", max_len = 100),
       list(arg = "signature_db", class = "character", max_len = 13),
+      list(arg = "signature_id", class = "character"),
       list(arg = "upid", class = "character", max_len = 100),
       list(arg = "seq_length", class = "character"),
       list(arg = "rf_dd_type", class = "character"),
@@ -491,6 +492,7 @@ rba_uniprot_uniparc_sequence <- function(sequence,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
+      list(arg = "sequence", class = "character", len = 1L),
       list(arg = "rf_dd_type", class = "character"),
       list(arg = "rf_db_id", class = "character"),
       list(arg = "rf_active", class = "logical"),

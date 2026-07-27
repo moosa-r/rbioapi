@@ -540,7 +540,7 @@ rba_jaspar_matrix <- function(matrix_id,
         arg = "file_format", class = "character",
         val = c("yaml", "jaspar", "transfac", "pfm", "meme")
       ),
-      list(arg = "save_to", class = "character")
+      list(arg = "save_to", class = "character", len = 1L, no_na = FALSE)
     )
   )
 
