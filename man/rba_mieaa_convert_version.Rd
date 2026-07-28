@@ -2,7 +2,7 @@
 % Please edit documentation in R/mieaa.R
 \name{rba_mieaa_convert_version}
 \alias{rba_mieaa_convert_version}
-\title{Convert miRNA accession Between Different miRBase Versions}
+\title{Convert miRNA Identifiers Between Different miRBase Versions}
 \usage{
 rba_mieaa_convert_version(
   mirna,
@@ -14,36 +14,34 @@ rba_mieaa_convert_version(
 )
 }
 \arguments{
-\item{mirna}{A vector of miRNA accessions to be converted.}
+\item{mirna}{Character vector: miRNA identifiers to convert.}
 
-\item{mirna_type}{Type of your supplied miRNA accession. either "mature"
-or "precursor".}
+\item{mirna_type}{Character: Type of the supplied miRNA identifiers; either
+"mature" or "precursor".}
 
-\item{input_version}{(numeric) miRBase version of your supplied miRNA
-accessions.}
+\item{input_version}{Numeric: miRBase version of the supplied identifiers.}
 
-\item{output_version}{(numeric) To what version should your miRNA accessions
-be converted?}
+\item{output_version}{Numeric: miRBase version to which the identifiers
+should be converted.}
 
-\item{simple_output}{(logical) If FALSE (default), the result will be a
-two-columned data frame with your input and output accessions. Otherwise,
-if TRUE, only the output miRNA accessions will be returned.}
+\item{simple_output}{Logical: (default = \code{FALSE}) If \code{FALSE},
+return a two-column data frame containing the input and output identifiers.
+If \code{TRUE}, return only the converted identifiers.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-Depending on the arguments, a data frame or a character vectors
-  containing the miRNA accessions in your output version.
+Depending on \code{simple_output}, a data frame or character vector
+  containing the converted miRNA identifiers.
 }
 \description{
-miEAA works with miRBASE v22 accession. Using This function you can convert
-  a set of mature or precursor miRNA accession between two given miRBase
-  versions.
+miEAA uses miRBase v22 identifiers. This function converts a set of mature
+  or precursor miRNA identifiers between two supported miRBase versions.
 }
 \section{Corresponding API Resources}{
 
- "POST https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/mirbase_converter/"
+ "POST https://ccb-compute2.cs.uni-saarland.de/mieaa/api/v1/mirbase_converter/"
 }
 
 \examples{
@@ -56,16 +54,15 @@ rba_mieaa_convert_version(mirna = c("hsa-miR-20b-5p", "hsa-miR-144-5p"),
 }
 \references{
 \itemize{
-  \item Fabian Kern, Tobias Fehlmann, Jeffrey Solomon, Louisa Schwed,
-  Nadja Grammes, Christina Backes, Kendall Van Keuren-Jensen,
-  David Wesley Craig,Eckart Meese, Andreas Keller, miEAA 2.0:
-  integrating multi-species microRNA enrichment analysis and workflow
-  management systems, Nucleic Acids Research, Volume 48, Issue W1,
-  02 July 2020, Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
+  \item Ernesto Aparicio-Puerta, Pascal Hirsch, Georges P. Schmartz,
+  Fabian Kern, Tobias Fehlmann, Andreas Keller, miEAA 2023: updates,
+  new functional microRNA sets and improved enrichment visualizations,
+  Nucleic Acids Research, Volume 51, Issue W1, 5 July 2023,
+  Pages W319–W325, https://doi.org/10.1093/nar/gkad392
   \item
-  \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
+  \href{https://ccb-compute2.cs.uni-saarland.de/mieaa/tutorial/api/}{miEAA
   browsable API tutorial}
-  \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/}{Citations note
+  \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa/}{Citation note
   on miEAA website}
   }
 }

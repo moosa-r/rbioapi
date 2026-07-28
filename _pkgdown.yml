@@ -48,7 +48,7 @@ navbar:
         href: articles/rbioapi_enrichr.html
       - text: 'JASPAR & rbioapi'
         href: articles/rbioapi_jaspar.html
-      - text: 'miEEA & rbioapi'
+      - text: 'miEAA & rbioapi'
         href: articles/rbioapi_mieaa.html
       - text: 'PANTHER & rbioapi'
         href: articles/rbioapi_panther.html
@@ -96,7 +96,7 @@ reference:
 
 - title: miEAA (rba_mieaa_*)
   desc: >
-    Functions that connect you to [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2/)
+    Functions that connect you to [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa/)
     (miRNA Enrichment Analysis and Annotation Tool) API resources.
   contents:
     - starts_with("rba_mieaa")

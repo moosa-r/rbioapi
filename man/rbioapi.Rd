@@ -15,7 +15,7 @@ Currently fully supports Enrichr, JASPAR, miEAA, PANTHER, Reactome, STRING, and 
 \itemize{
   \item Enrichr
   \item JASPAR
-  \item MiEAA
+  \item miEAA
   \item PANTHER
   \item Reactome
   \item STRING

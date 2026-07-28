@@ -2,7 +2,7 @@
 #' \itemize{
 #'   \item Enrichr
 #'   \item JASPAR
-#'   \item MiEAA
+#'   \item miEAA
 #'   \item PANTHER
 #'   \item Reactome
 #'   \item STRING

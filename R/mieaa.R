@@ -1,16 +1,16 @@
 #' Handle Species argument input for miEAA endpoints
 #'
-#' This internal function will make it possible for the users to supply
-#'   variety of specie's name type or if they have entered a wrongly-formatted
-#'   or not supported species, to produce an informative error message
+#' This internal function allows users to supply a supported species as an
+#'   abbreviation, NCBI taxonomy identifier, or scientific name. Invalid or
+#'   unsupported values produce an informative error message.
 #'
-#' @param sp specie input.
-#' @param to_name (logical) (default = FALSE) to convert a supplied species
-#'   abbreviation to specie's scientific name.
+#' @param sp Character or Numeric: A supported species abbreviation, NCBI
+#'   taxonomy identifier, or scientific name.
+#' @param to_name Logical: (default = \code{FALSE}) Convert a supplied species
+#'   abbreviation to its scientific name.
 #'
-#' @return If to_name = FALSE, a three-lettered character string of
-#'   a supported miEAA species. otherwise, if to_name = TRUE, a character
-#'   string with the scientific name of that specie.
+#' @return If \code{to_name = FALSE}, a three-letter abbreviation for a
+#'   supported miEAA species. Otherwise, the corresponding scientific name.
 #'
 #' @examples
 #' \donttest{
@@ -32,17 +32,17 @@
                      "cel", "dme", "dre", "gga", "ssc"),
     ncbi_taxid  = c(9606L, 10090L, 10116L, 3702L, 9913L,
                     6239L, 7227L, 7955L, 9031L, 9823L),
-    specie_name = c("Homo sapiens", "Mus musculus",
-                    "Rattus norvegicus", "Arabidopsis thaliana",
-                    "Bos taurus", "Caenorhabditis elegans",
-                    "Drosophila melanogaster", "Danio rerio",
-                    "Gallus gallus", "Sus scrofa"),
+    species_name = c("Homo sapiens", "Mus musculus",
+                     "Rattus norvegicus", "Arabidopsis thaliana",
+                     "Bos taurus", "Caenorhabditis elegans",
+                     "Drosophila melanogaster", "Danio rerio",
+                     "Gallus gallus", "Sus scrofa"),
     stringsAsFactors = FALSE
   )
 
   if (isTRUE(to_name)) {
 
-    return(sp_df$specie_name[[which(sp_df$abbreviation == sp)]])
+    return(sp_df$species_name[[which(sp_df$abbreviation == sp)]])
 
   } else {
 
@@ -59,21 +59,20 @@
       "ssc" = "ssc", "ssc" = 9823L,  "ssc" = "Sus scrofa"
     )
 
-    sp_match <- pmatch(
+    sp_match <- match(
       x = tolower(sp),
       table = tolower(sp_table),
-      nomatch = 0,
-      duplicates.ok = FALSE
+      nomatch = 0L
     )
 
-    if (sp_match != 0) {
+    if (sp_match != 0L) {
 
       return(names(sp_table)[[sp_match]])
 
     } else {
 
       stop(
-        "Species should be or partially match one the following values:\n",
+        "Species should be one of the following values:\n",
         paste(utils::capture.output(print(sp_df)), collapse = "\n"),
         call. = diagnostics
       )
@@ -83,14 +82,14 @@
 
 #' Get Supported Enrichment Categories for a Species and miRNA Type
 #'
-#' For each Combination of species and miRNA type, Only a pre-defined
-#'   categories groups are supported. Use this function to retrieve a list
-#'   of supported categories for a given combination of Species and miRNA type.
+#' Each combination of species and miRNA type supports a predefined set of
+#'   enrichment categories. This function retrieves the categories available
+#'   for a given combination.
 #'
-#' @param mirna_type Type of your miRNA accession. either "mature" or
-#'   "precursor".
-#' @param species Fully or partially matching Scientific name, abbreviation
-#'   or NCBI taxon ID of one of the following species: \enumerate{
+#' @param mirna_type Character: Type of the miRNA identifiers; either "mature"
+#'   or "precursor".
+#' @param species Character or Numeric: Scientific name, abbreviation, or NCBI
+#'   taxon ID of one of the following species: \enumerate{
 #'   \item "Homo sapiens", "hsa" or 9606
 #'   \item "Mus musculus", "mmu" or 10090
 #'   \item "Rattus norvegicus", "rno" or 10116
@@ -105,22 +104,21 @@
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/enrichment_categories/\{species\}/\{mirna_type\}/"
+#'  "GET https://ccb-compute2.cs.uni-saarland.de/mieaa/api/v1/enrichment_categories/\{species\}/\{mirna_type\}/"
 #'
-#' @return a named character vector with the supported categories for
-#'   your supplied input combination.
+#' @return A named character vector containing the supported categories for
+#'   the supplied species and miRNA type.
 #'
 #' @references \itemize{
-#'   \item Fabian Kern, Tobias Fehlmann, Jeffrey Solomon, Louisa Schwed,
-#'   Nadja Grammes, Christina Backes, Kendall Van Keuren-Jensen,
-#'   David Wesley Craig,Eckart Meese, Andreas Keller, miEAA 2.0:
-#'   integrating multi-species microRNA enrichment analysis and workflow
-#'   management systems, Nucleic Acids Research, Volume 48, Issue W1,
-#'   02 July 2020, Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
+#'   \item Ernesto Aparicio-Puerta, Pascal Hirsch, Georges P. Schmartz,
+#'   Fabian Kern, Tobias Fehlmann, Andreas Keller, miEAA 2023: updates,
+#'   new functional microRNA sets and improved enrichment visualizations,
+#'   Nucleic Acids Research, Volume 51, Issue W1, 5 July 2023,
+#'   Pages W319–W325, https://doi.org/10.1093/nar/gkad392
 #'   \item
-#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
+#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa/tutorial/api/}{miEAA
 #'   browsable API tutorial}
-#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/}{Citations note
+#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa/}{Citation note
 #'   on miEAA website}
 #'   }
 #'
@@ -138,8 +136,17 @@ rba_mieaa_cats <- function(mirna_type, species, ...) {
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "mirna_type", class = "character", val = c("mature", "precursor")),
-      list(arg = "species", class = c("character", "numeric"), len = 1)
+      list(
+        arg = "mirna_type",
+        class = "character",
+        val = c("mature", "precursor"),
+        len = 1L
+      ),
+      list(
+        arg = "species",
+        class = c("character", "numeric", "integer"),
+        len = 1L
+      )
     )
   )
 
@@ -189,42 +196,39 @@ rba_mieaa_cats <- function(mirna_type, species, ...) {
   return(final_output)
 }
 
-#' Convert miRNA accession Between Different miRBase Versions
+#' Convert miRNA Identifiers Between Different miRBase Versions
 #'
-#' miEAA works with miRBASE v22 accession. Using This function you can convert
-#'   a set of mature or precursor miRNA accession between two given miRBase
-#'   versions.
+#' miEAA uses miRBase v22 identifiers. This function converts a set of mature
+#'   or precursor miRNA identifiers between two supported miRBase versions.
 #'
-#' @param mirna A vector of miRNA accessions to be converted.
-#' @param mirna_type Type of your supplied miRNA accession. either "mature"
-#'   or "precursor".
-#' @param input_version (numeric) miRBase version of your supplied miRNA
-#'   accessions.
-#' @param output_version (numeric) To what version should your miRNA accessions
-#'   be converted?
-#' @param simple_output (logical) If FALSE (default), the result will be a
-#'   two-columned data frame with your input and output accessions. Otherwise,
-#'   if TRUE, only the output miRNA accessions will be returned.
+#' @param mirna Character vector: miRNA identifiers to convert.
+#' @param mirna_type Character: Type of the supplied miRNA identifiers; either
+#'   "mature" or "precursor".
+#' @param input_version Numeric: miRBase version of the supplied identifiers.
+#' @param output_version Numeric: miRBase version to which the identifiers
+#'   should be converted.
+#' @param simple_output Logical: (default = \code{FALSE}) If \code{FALSE},
+#'   return a two-column data frame containing the input and output identifiers.
+#'   If \code{TRUE}, return only the converted identifiers.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "POST https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/mirbase_converter/"
+#'  "POST https://ccb-compute2.cs.uni-saarland.de/mieaa/api/v1/mirbase_converter/"
 #'
-#' @return Depending on the arguments, a data frame or a character vectors
-#'   containing the miRNA accessions in your output version.
+#' @return Depending on \code{simple_output}, a data frame or character vector
+#'   containing the converted miRNA identifiers.
 #'
 #' @references \itemize{
-#'   \item Fabian Kern, Tobias Fehlmann, Jeffrey Solomon, Louisa Schwed,
-#'   Nadja Grammes, Christina Backes, Kendall Van Keuren-Jensen,
-#'   David Wesley Craig,Eckart Meese, Andreas Keller, miEAA 2.0:
-#'   integrating multi-species microRNA enrichment analysis and workflow
-#'   management systems, Nucleic Acids Research, Volume 48, Issue W1,
-#'   02 July 2020, Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
+#'   \item Ernesto Aparicio-Puerta, Pascal Hirsch, Georges P. Schmartz,
+#'   Fabian Kern, Tobias Fehlmann, Andreas Keller, miEAA 2023: updates,
+#'   new functional microRNA sets and improved enrichment visualizations,
+#'   Nucleic Acids Research, Volume 51, Issue W1, 5 July 2023,
+#'   Pages W319–W325, https://doi.org/10.1093/nar/gkad392
 #'   \item
-#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
+#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa/tutorial/api/}{miEAA
 #'   browsable API tutorial}
-#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/}{Citations note
+#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa/}{Citation note
 #'   on miEAA website}
 #'   }
 #'
@@ -249,15 +253,36 @@ rba_mieaa_convert_version <- function(mirna,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "mirna", class = "character"),
-      list(arg = "mirna_type", class = "character", val = c("mature", "precursor")),
-      list(arg = "input_version", class = "numeric", val = c(9.1, 10, 12:22)),
-      list(arg = "output_version", class = "numeric", val = c(9.1, 10, 12:22)),
-      list(arg = "simple_output", class = "logical"))
+      list(arg = "mirna", class = "character", min_len = 1L),
+      list(
+        arg = "mirna_type",
+        class = "character",
+        val = c("mature", "precursor"),
+        len = 1L
+      ),
+      list(
+        arg = "input_version",
+        class = c("numeric", "integer"),
+        val = c(9.1, 10, 12:22),
+        len = 1L
+      ),
+      list(
+        arg = "output_version",
+        class = c("numeric", "integer"),
+        val = c(9.1, 10, 12:22),
+        len = 1L
+      ),
+      list(
+        arg = "simple_output",
+        class = "logical",
+        len = 1L,
+        no_null = TRUE
+      )
+    )
   )
 
   .msg(
-    "Converting %s %s miRNA IDs from mirbase v%s to v%s.",
+    "Converting %s %s miRNA IDs from miRBase v%s to v%s.",
     length(mirna),
     mirna_type,
     input_version, output_version
@@ -279,6 +304,7 @@ rba_mieaa_convert_version <- function(mirna,
       "text->df",
       function(x) { x[, 1] }
     )
+    file_extension <- "txt"
 
   } else {
 
@@ -286,6 +312,7 @@ rba_mieaa_convert_version <- function(mirna,
       "text->df",
       function(x) { colnames(x) <- x[1, ]; x <- x[-1, ] }
     )
+    file_extension <- "tsv"
 
   }
 
@@ -297,7 +324,7 @@ rba_mieaa_convert_version <- function(mirna,
     body = call_body,
     accept = "application/json",
     parser = parser_input,
-    save_to = .rba_file("rba_mieaa_convert_version.json")
+    save_to = .rba_file(sprintf("rba_mieaa_convert_version.%s", file_extension))
   )
 
   ## Call API
@@ -305,43 +332,41 @@ rba_mieaa_convert_version <- function(mirna,
   return(final_output)
 }
 
-#' Convert Between Mature and precursor miRNA Accession
+#' Convert Between Mature and Precursor miRNA Identifiers
 #'
-#' miRBase miRNA accession could refer to either mature or precursor miRNAs.
+#' miRBase identifiers can refer to either mature or precursor miRNAs.
 #'   (see: \href{https://rnajournal.cshlp.org/content/9/3/277}{A uniform system
-#'   for microRNA annotation}). Use this function to mature miRNA accession to
-#'   corresponding miRNA accessions or vice versa.
+#'   for microRNA annotation}). Use this function to convert mature miRNA
+#'   identifiers to precursor identifiers or vice versa.
 #'
-#' @param mirna A vector of miRNA accessions to be converted.
-#' @param input_type Type of your supplied miRNA accession. either "mature"
-#'   or "precursor".
-#' @param only_unique (logical) miRBase precursor and mature miRNA accessions
-#'   are not uniquely mapped. (i.e. you may get more than one results for
-#'   a given accession). set this to TRUE to only retrieve the unique mappings.
-#'   (default = FALSE)
-#' @param simple_output (logical) If FALSE (default), the result will be a
-#'   two-columned data frame with your input and output accessions. Otherwise,
-#'   if TRUE, only the output miRNA accessions will be returned.
+#' @param mirna Character vector: miRNA identifiers to convert.
+#' @param input_type Character: Type of the supplied miRNA identifiers; either
+#'   "mature" or "precursor".
+#' @param only_unique Logical: (default = \code{FALSE}) Mature and precursor
+#'   miRNA identifiers do not always map uniquely. If \code{TRUE}, return only
+#'   unique mappings.
+#' @param simple_output Logical: (default = \code{FALSE}) If \code{FALSE},
+#'   return a two-column data frame containing the input and output identifiers.
+#'   If \code{TRUE}, return only the converted identifiers.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "POST https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/mirna_precursor_converter/"
+#'  "POST https://ccb-compute2.cs.uni-saarland.de/mieaa/api/v1/mirna_precursor_converter/"
 #'
-#' @return Depending on the arguments, a data frame or a character vectors
-#'   containing the miRNA accessions in your output version.
+#' @return Depending on \code{simple_output}, a data frame or character vector
+#'   containing the converted miRNA identifiers.
 #'
 #' @references \itemize{
-#'   \item Fabian Kern, Tobias Fehlmann, Jeffrey Solomon, Louisa Schwed,
-#'   Nadja Grammes, Christina Backes, Kendall Van Keuren-Jensen,
-#'   David Wesley Craig,Eckart Meese, Andreas Keller, miEAA 2.0:
-#'   integrating multi-species microRNA enrichment analysis and workflow
-#'   management systems, Nucleic Acids Research, Volume 48, Issue W1,
-#'   02 July 2020, Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
+#'   \item Ernesto Aparicio-Puerta, Pascal Hirsch, Georges P. Schmartz,
+#'   Fabian Kern, Tobias Fehlmann, Andreas Keller, miEAA 2023: updates,
+#'   new functional microRNA sets and improved enrichment visualizations,
+#'   Nucleic Acids Research, Volume 51, Issue W1, 5 July 2023,
+#'   Pages W319–W325, https://doi.org/10.1093/nar/gkad392
 #'   \item
-#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
+#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa/tutorial/api/}{miEAA
 #'   browsable API tutorial}
-#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/}{Citations note
+#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa/}{Citation note
 #'   on miEAA website}
 #'   }
 #'
@@ -365,10 +390,25 @@ rba_mieaa_convert_type <- function(mirna,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "mirna", class = "character"),
-      list(arg = "input_type", class = "character", val = c("mature", "precursor")),
-      list(arg = "only_unique", class = "logical"),
-      list(arg = "simple_output", class = "logical")
+      list(arg = "mirna", class = "character", min_len = 1L),
+      list(
+        arg = "input_type",
+        class = "character",
+        val = c("mature", "precursor"),
+        len = 1L
+      ),
+      list(
+        arg = "only_unique",
+        class = "logical",
+        len = 1L,
+        no_null = TRUE
+      ),
+      list(
+        arg = "simple_output",
+        class = "logical",
+        len = 1L,
+        no_null = TRUE
+      )
     )
   )
 
@@ -394,6 +434,7 @@ rba_mieaa_convert_type <- function(mirna,
       "text->df",
       function(x) { x[, 1] }
     )
+    file_extension <- "txt"
 
   } else {
     parser_input <- list(
@@ -406,6 +447,7 @@ rba_mieaa_convert_type <- function(mirna,
         return(x)
       }
     )
+    file_extension <- "tsv"
   }
 
   input_call <- .rba_httr(
@@ -416,7 +458,7 @@ rba_mieaa_convert_type <- function(mirna,
     body = call_body,
     accept = "application/json",
     parser = parser_input,
-    save_to = .rba_file("rba_mieaa_convert_type.json")
+    save_to = .rba_file(sprintf("rba_mieaa_convert_type.%s", file_extension))
   )
 
   ## Call API
@@ -426,30 +468,30 @@ rba_mieaa_convert_type <- function(mirna,
 
 #' Submit miEAA miRNA Enrichment Analysis Request
 #'
-#' Using This function you can submit a request in miEAA servers to perform
-#'   Over-representation or GSEA Analysis for a given set of miRNA identifiers.
-#'   see "arguments" section for more information.
+#' Submit a request to the miEAA server to perform over-representation analysis
+#'   or gene set enrichment analysis for a set of miRNA identifiers.
 #'
 #' Note that using \code{\link{rba_mieaa_enrich}} is a more convenient way to
 #'   automatically perform this and other required function calls to
 #'   perform enrichment analysis on your input miRNA-set using miEAA.
 #'
-#' @param test_set a character vector with your mature or precursor miRBase
-#'   miRNA accessions. Note that \enumerate{
-#'   \item Only miRBase v22 miRNA accession are accepted. You can use
-#'   \code{\link{rba_mieaa_convert_version}} to convert your accessions to
+#' @param test_set Character vector: Mature or precursor miRBase miRNA
+#'   identifiers. Note that \enumerate{
+#'   \item Only miRBase v22 identifiers are accepted. You can use
+#'   \code{\link{rba_mieaa_convert_version}} to convert older identifiers to
 #'   miRBase v22.
-#'   \item Your list should be entirely consisted of either mature or
-#'   precursor miRNA accession. A mixture of both is not accepted.
+#'   \item The list must contain either mature or precursor miRNA identifiers,
+#'   not a mixture of both.
 #'   }
-#' @param mirna_type Type of your supplied miRNA accession. either "mature"
-#'   or "precursor".
-#' @param test_type The analysis to perform. can be either "ORA" for 'Over
-#'   Representation Analysis' or "GSEA" for miRNA (Gene)
-#'   'Set Enrichment Analysis'. Note that in GSEA, your list should be sorted
-#'   beforehand based on some criterion.
-#' @param species Fully or partially matching Scientific name, abbreviation
-#' or NCBI taxon ID of one of the following species: \enumerate{
+#' @param mirna_type Character: Type of the supplied miRNA identifiers; either
+#'   "mature" or "precursor".
+#' @param test_type Character: Analysis to perform; either "ORA" for
+#'   over-representation analysis or "GSEA" for miRNA gene set enrichment
+#'   analysis. For GSEA, the input list must already be ranked by an appropriate
+#'   criterion.
+#' @param species Character or Numeric: Scientific name, abbreviation, or NCBI
+#'   taxon ID of one of the following species:
+#'   \enumerate{
 #'  \item "Homo sapiens", "hsa" or 9606
 #'  \item "Mus musculus", "mmu" or 10090
 #'  \item "Rattus norvegicus", "rno" or 10116
@@ -461,48 +503,50 @@ rba_mieaa_convert_type <- function(mirna,
 #'  \item "Gallus gallus", "gga" or 9031
 #'  \item "Sus scrofa", "ssc" or  9823
 #'  }
-#' @param categories one or multiple Category names to be used for miRNA set
-#'   enrichment analysis. Note that \itemize{
-#'   \item Available categories varies based on your chosen specie and if
-#'    your supplied miRNA type is mature or precursor. Use
+#' @param categories Character vector: (default = \code{NULL}) One or more
+#'   category names to use for miRNA set enrichment analysis. Note that
+#'   \itemize{
+#'   \item Available categories vary with the selected species and whether
+#'    the supplied miRNAs are mature or precursor. Use
 #'    \code{\link{rba_mieaa_cats}} to retrieve a list of available category
-#'    names for a given specie and miRNA type.
-#'   \item If you supply NULL, the analysis will be performed on all of the
-#'    available categories.}
-#' @param p_adj_method P-value adjustment method to be used. Should be one of:
-#'   "none", "fdr" (default), "bonferroni", "BY", "hochberg", "holm" or "hommel"
-#' @param independent_p_adj (logical) The scope and level of p-value adjustment;
-#'   if TRUE (default), the categories will be considered independent from
-#'   each other and the p-value will be adjusted separately for each category.
-#'   if FALSE, the p-value will be adjusted collectively over all categories.
-#' @param sig_level (numeric) The significance threshold of adjusted P-value.
-#'   values equal to or greater than this threshold will be dropped from the
-#'   results.
-#' @param min_hits (numeric) How many miRNA should a sub-category have from
-#'   your supplied test-list to be included in the results? (default is 2)
-#' @param ref_set (Optional) Only applicable when test_type is "ORA".
-#'   This character vector will be used as your reference (background or
+#'    names for a given species and miRNA type.
+#'   \item If \code{NULL}, the analysis is performed using all available
+#'    categories.}
+#' @param p_adj_method Character: (default = \code{"fdr"}) P-value adjustment
+#'   method to use. One of: "none", "fdr", "bonferroni", "BY", "hochberg",
+#'   "holm", or "hommel".
+#' @param independent_p_adj Logical: (default = \code{TRUE}) The scope of
+#'   p-value adjustment. If \code{TRUE}, p-values are adjusted separately
+#'   within each category. If \code{FALSE}, p-values are adjusted collectively
+#'   over all categories.
+#' @param sig_level Numeric: (default = \code{0.05}) Significance threshold for
+#'   adjusted p-values. Values equal to or greater than this threshold are
+#'   omitted from the results.
+#' @param min_hits Numeric: (default = \code{2}) Minimum number of miRNAs from
+#'   the test set that a subcategory must contain to be included in the
+#'   results. Must be a positive integer.
+#' @param ref_set Character vector: (default = \code{NULL}) Only applicable
+#'   when \code{test_type = "ORA"}. Used as the reference (background or
 #'   universe) set for p-value calculations.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "POST https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/enrichment_analysis/\{species\}/\{type\}/\{test\}/"
+#'  "POST https://ccb-compute2.cs.uni-saarland.de/mieaa/api/v1/enrichment_analysis/\{species\}/\{type\}/\{test\}/"
 #'
 #' @return A list that contains your submitted job's ID and a URL to
 #'   manually check for your job status.
 #'
 #' @references \itemize{
-#'   \item Fabian Kern, Tobias Fehlmann, Jeffrey Solomon, Louisa Schwed,
-#'   Nadja Grammes, Christina Backes, Kendall Van Keuren-Jensen,
-#'   David Wesley Craig,Eckart Meese, Andreas Keller, miEAA 2.0:
-#'   integrating multi-species microRNA enrichment analysis and workflow
-#'   management systems, Nucleic Acids Research, Volume 48, Issue W1,
-#'   02 July 2020, Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
+#'   \item Ernesto Aparicio-Puerta, Pascal Hirsch, Georges P. Schmartz,
+#'   Fabian Kern, Tobias Fehlmann, Andreas Keller, miEAA 2023: updates,
+#'   new functional microRNA sets and improved enrichment visualizations,
+#'   Nucleic Acids Research, Volume 51, Issue W1, 5 July 2023,
+#'   Pages W319–W325, https://doi.org/10.1093/nar/gkad392
 #'   \item
-#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
+#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa/tutorial/api/}{miEAA
 #'   browsable API tutorial}
-#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/}{Citations note
+#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa/}{Citation note
 #'   on miEAA website}
 #'   }
 #'
@@ -521,7 +565,7 @@ rba_mieaa_convert_type <- function(mirna,
 rba_mieaa_enrich_submit <- function(test_set,
                                     mirna_type,
                                     test_type,
-                                    species = "hsa",
+                                    species,
                                     categories = NULL,
                                     p_adj_method = "fdr",
                                     independent_p_adj = TRUE,
@@ -535,21 +579,61 @@ rba_mieaa_enrich_submit <- function(test_set,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "test_type", class = "character", val = c("GSEA", "ORA")),
-      list(arg = "test_set", class = "character", no_null = TRUE),
       list(
-        arg = "mirna_type", class = "character", no_null = TRUE,
-        val = c("mature", "precursor")
+        arg = "test_type",
+        class = "character",
+        val = c("GSEA", "ORA"),
+        len = 1L
       ),
-      list(arg = "species", class = c("character", "numeric"), no_null = TRUE, len = 1),
-      list(arg = "categories", class = "character"),
+      list(arg = "test_set", class = "character", min_len = 1L),
+      list(
+        arg = "mirna_type",
+        class = "character",
+        val = c("mature", "precursor"),
+        len = 1L
+      ),
+      list(
+        arg = "species",
+        class = c("character", "numeric", "integer"),
+        len = 1L,
+        no_null = TRUE
+      ),
+      list(arg = "categories", class = "character", min_len = 1L),
       list(
         arg = "p_adj_method", class = "character",
-        val = c("none", "fdr", "bonferroni", "BY", "hochberg", "holm", "hommel")
+        val = c("none", "fdr", "bonferroni", "BY", "hochberg", "holm", "hommel"),
+        len = 1L,
+        no_null = TRUE
       ),
-      list(arg = "independent_p_adj", class = "logical"),
-      list(arg = "sig_level", class = "numeric", ran = c(0, 1)),
-      list(arg = "min_hits", class = "numeric")
+      list(
+        arg = "independent_p_adj",
+        class = "logical",
+        len = 1L,
+        no_null = TRUE
+      ),
+      list(
+        arg = "sig_level",
+        class = c("numeric", "integer"),
+        len = 1L,
+        no_null = TRUE
+      ),
+      list(
+        arg = "min_hits",
+        class = c("numeric", "integer"),
+        len = 1L,
+        no_null = TRUE
+      ),
+      list(arg = "ref_set", class = "character", min_len = 1L)
+    ),
+    cond = list(
+      list(
+        quote(sig_level < 0 || sig_level > 1),
+        "`sig_level` must be between 0 and 1."
+      ),
+      list(
+        quote(!is.finite(min_hits) || min_hits < 1 || min_hits != floor(min_hits)),
+        "`min_hits` must be a positive integer."
+      )
     )
   )
 
@@ -557,7 +641,33 @@ rba_mieaa_enrich_submit <- function(test_set,
   #species
   species <- .rba_mieaa_species(sp = species, to_name = FALSE)
   #categories
-  all_cats <- rba_mieaa_cats(mirna_type = mirna_type, species = species, verbose = FALSE)
+  all_cats <- rba_mieaa_cats(
+    mirna_type = mirna_type,
+    species = species,
+    verbose = FALSE,
+    skip_error = get("skip_error")
+  )
+
+  if (
+    !is.character(all_cats) ||
+    length(all_cats) == 0L ||
+    is.null(names(all_cats)) ||
+    anyNA(all_cats)
+  ) {
+    categories_error <- paste0(
+      "Could not retrieve the supported miEAA categories before submitting ",
+      "the enrichment request. The response was: ",
+      paste(all_cats, collapse = "\n")
+    )
+
+    if (isTRUE(get("skip_error"))) {
+      return(categories_error)
+    } else {
+      stop(categories_error, call. = get("diagnostics"))
+    }
+  }
+
+  all_cats <- unique(all_cats)
 
   if (is.null(categories)) {
 
@@ -570,10 +680,11 @@ rba_mieaa_enrich_submit <- function(test_set,
 
   } else {
 
+    categories <- unique(categories)
     cats_dif <- setdiff(categories, all_cats)
     if (length(cats_dif) != 0) {
       invalid_cats_msg <- sprintf(
-        "Invalid categories! The following requested categories do not match your supplied specie and miRNA type:\n%s",
+        "Invalid categories! The following requested categories do not match your supplied species and miRNA type:\n%s",
         .paste2(cats_dif, last = " and ")
       )
       if (isTRUE(get("skip_error"))) {
@@ -631,40 +742,38 @@ rba_mieaa_enrich_submit <- function(test_set,
   return(final_output)
 }
 
-#' Check Status of a Submitted Enrichment Analysis in miEAA
+#' Check the Status of a Submitted miEAA Enrichment Analysis
 #'
 #' After you have submitted your enrichment analysis (using
 #'    \code{\link{rba_mieaa_enrich_submit}}) and retrieved a job-id,
-#'   you can use this function to check the status of your job. Status value
-#'   equal to 100 means that your requested analysis has finished and you may
+#'   you can use this function to check the status of the job. A status value
+#'   equal to 100 means that the requested analysis has finished and you may
 #'   retrieve the results using \code{\link{rba_mieaa_enrich_results}}.
 #'
 #' Note that using \code{\link{rba_mieaa_enrich}} is a more convenient way to
 #'   automatically perform this and other required function calls to
 #'   perform enrichment analysis on your input miRNA-set using miEAA.
 #'
-#' @param job_id The job-id (a character string) of a submitted enrichment
-#'   analysis.
+#' @param job_id Character: Job ID of a submitted enrichment analysis.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/job_status/\{job_id\}"
+#'  "GET https://ccb-compute2.cs.uni-saarland.de/mieaa/api/v1/job_status/\{job_id\}/"
 #'
-#' @return A list containing the status value for a analysis that corresponds
-#'   to your supplied job-id.
+#' @return A list containing the status of the analysis corresponding to the
+#'   supplied job ID.
 #'
 #' @references \itemize{
-#'   \item Fabian Kern, Tobias Fehlmann, Jeffrey Solomon, Louisa Schwed,
-#'   Nadja Grammes, Christina Backes, Kendall Van Keuren-Jensen,
-#'   David Wesley Craig,Eckart Meese, Andreas Keller, miEAA 2.0:
-#'   integrating multi-species microRNA enrichment analysis and workflow
-#'   management systems, Nucleic Acids Research, Volume 48, Issue W1,
-#'   02 July 2020, Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
+#'   \item Ernesto Aparicio-Puerta, Pascal Hirsch, Georges P. Schmartz,
+#'   Fabian Kern, Tobias Fehlmann, Andreas Keller, miEAA 2023: updates,
+#'   new functional microRNA sets and improved enrichment visualizations,
+#'   Nucleic Acids Research, Volume 51, Issue W1, 5 July 2023,
+#'   Pages W319–W325, https://doi.org/10.1093/nar/gkad392
 #'   \item
-#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
+#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa/tutorial/api/}{miEAA
 #'   browsable API tutorial}
-#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/}{Citations note
+#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa/}{Citation note
 #'   on miEAA website}
 #'   }
 #'
@@ -683,7 +792,7 @@ rba_mieaa_enrich_status <- function(job_id, ...) {
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "job_id", class = "character", len = 1)
+      list(arg = "job_id", class = "character", len = 1L)
     )
   )
 
@@ -707,7 +816,7 @@ rba_mieaa_enrich_status <- function(job_id, ...) {
   return(final_output)
 }
 
-#' Retrieve Results of a finished Enrichment Analysis from miEAA
+#' Retrieve the Results of a Finished miEAA Enrichment Analysis
 #'
 #' After your submitted enrichment analysis request has finished (check
 #'   using \code{\link{rba_mieaa_enrich_status}}), you can retrieve the results
@@ -717,32 +826,30 @@ rba_mieaa_enrich_status <- function(job_id, ...) {
 #'   automatically perform this and other required function calls to
 #'   perform enrichment analysis on your input miRNA-set using miEAA.
 #'
-#' @param job_id The job-id (a character string) of a submitted enrichment
-#'   analysis.
-#' @param sort_by A column name to the result's table based on that. one of:
-#'   "category", "subcategory", "enrichment", "p_value", "p_adjusted" (default),
-#'   "q_value" or "observed" .
-#' @param sort_asc (logical) If TRUE, the results will be sorted in ascending
-#'   order. If FALSE, the results will be sorted in descending order.
+#' @param job_id Character: Job ID of a submitted enrichment analysis.
+#' @param sort_by Character: (default = \code{"p_adjusted"}) Result column to
+#'   sort by. One of: "category", "subcategory", "enrichment", "p_value",
+#'   "p_adjusted", "q_value", or "observed".
+#' @param sort_asc Logical: (default = \code{TRUE}) If \code{TRUE}, sort the
+#'   results in ascending order. If \code{FALSE}, sort them in descending order.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/results/\{job_id\}"
+#'  "GET https://ccb-compute2.cs.uni-saarland.de/mieaa/api/v1/enrichment_analysis/results/\{job_id\}/"
 #'
 #' @return A data frame with your enrichment analysis results.
 #'
 #' @references \itemize{
-#'   \item Fabian Kern, Tobias Fehlmann, Jeffrey Solomon, Louisa Schwed,
-#'   Nadja Grammes, Christina Backes, Kendall Van Keuren-Jensen,
-#'   David Wesley Craig,Eckart Meese, Andreas Keller, miEAA 2.0:
-#'   integrating multi-species microRNA enrichment analysis and workflow
-#'   management systems, Nucleic Acids Research, Volume 48, Issue W1,
-#'   02 July 2020, Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
+#'   \item Ernesto Aparicio-Puerta, Pascal Hirsch, Georges P. Schmartz,
+#'   Fabian Kern, Tobias Fehlmann, Andreas Keller, miEAA 2023: updates,
+#'   new functional microRNA sets and improved enrichment visualizations,
+#'   Nucleic Acids Research, Volume 51, Issue W1, 5 July 2023,
+#'   Pages W319–W325, https://doi.org/10.1093/nar/gkad392
 #'   \item
-#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
+#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa/tutorial/api/}{miEAA
 #'   browsable API tutorial}
-#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/}{Citations note
+#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa/}{Citation note
 #'   on miEAA website}
 #'   }
 #'
@@ -763,7 +870,7 @@ rba_mieaa_enrich_results <- function(job_id,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "job_id", class = "character", len = 1),
+      list(arg = "job_id", class = "character", len = 1L),
       list(
         arg = "sort_by", class = "character", no_null = TRUE,
         val = c("category",
@@ -772,7 +879,14 @@ rba_mieaa_enrich_results <- function(job_id,
                 "p_value",
                 "p_adjusted",
                 "q_value",
-                "observed")
+                "observed"),
+        len = 1L
+      ),
+      list(
+        arg = "sort_asc",
+        class = "logical",
+        len = 1L,
+        no_null = TRUE
       )
     )
   )
@@ -783,23 +897,57 @@ rba_mieaa_enrich_results <- function(job_id,
   )
 
   ## Build Function-Specific Call
+  sort_column <- switch(
+    sort_by,
+    category = "Category",
+    subcategory = "Subcategory",
+    enrichment = "Enrichment",
+    p_value = "P-value",
+    p_adjusted = "P-adjusted",
+    q_value = "Q-value",
+    observed = "Observed"
+  )
+
   parser_input <- list(
     "json->df",
     function(x) {
-      if (ncol(x) == 9) {
+      if (ncol(x) == 0L) {
+        return(x)
+      } else if (ncol(x) == 9L) {
         colnames(x) <- c("Category", "Subcategory",
                          "Enrichment", "P-value",
                          "P-adjusted", "Q-value",
                          "Expected", "Observed",
                          "miRNAs/precursors")
-      }
-      if (ncol(x) == 8) {
+      } else if (ncol(x) == 8L) {
         colnames(x) <- c("Category", "Subcategory",
                          "Enrichment", "P-value",
                          "P-adjusted", "Q-value",
                          "Observed", "miRNAs/precursors")
-
+      } else {
+        stop(
+          "Unexpected miEAA results format: expected 8 or 9 columns.",
+          call. = FALSE
+        )
       }
+
+      sort_value <- x[[sort_column]]
+
+      if (sort_by %in% c("p_value", "p_adjusted", "q_value", "observed")) {
+        sort_value <- suppressWarnings(as.numeric(sort_value))
+      }
+
+      x <- x[
+        order(
+          sort_value,
+          decreasing = !isTRUE(sort_asc),
+          na.last = TRUE
+        ),
+        ,
+        drop = FALSE
+      ]
+      rownames(x) <- NULL
+
       return(x)
     }
   )
@@ -807,7 +955,11 @@ rba_mieaa_enrich_results <- function(job_id,
   input_call <- .rba_httr(
     httr = "get",
     url = .rba_stg("mieaa", "url"),
-    path = sprintf("%s/enrichment_analysis/results/%s/", .rba_stg("mieaa", "pth"), job_id),
+    path = sprintf(
+      "%senrichment_analysis/results/%s/",
+      .rba_stg("mieaa", "pth"),
+      job_id
+    ),
     accept = "application/json",
     parser = parser_input,
     save_to = .rba_file("rba_mieaa_info.json")
@@ -821,19 +973,18 @@ rba_mieaa_enrich_results <- function(job_id,
 #' A One-step Wrapper for miRNA Enrichment Using miEAA
 #'
 #' This function is a wrapper for the multiple function calls necessary to
-#'   perform enrichment analysis on a given miRNA list using miEAA. see details
+#'   perform enrichment analysis on a given miRNA list using miEAA. See Details
 #'   section for more information.
 #'
 #' This function will call other rba_mieaa_*** functions with the following
 #'   order:
 #'   \enumerate{
-#'   \item Call \code{\link{rba_mieaa_enrich_submit}} to Submit an enrichment
-#'     analysis request to miEAA servers, using your supplied miRNA lists and
+#'   \item Call \code{\link{rba_mieaa_enrich_submit}} to submit an enrichment
+#'     analysis request to the miEAA server using the supplied miRNA list and
 #'     other arguments.
-#'   \item Once your job was successfully submitted, it will call
-#'     \code{\link{rba_mieaa_enrich_status}} every 5 seconds, to check the
-#'     status of your running server-side job and whether your analysis job is
-#'     finished and the results are available.
+#'   \item Once the job is successfully submitted, call
+#'     \code{\link{rba_mieaa_enrich_status}} every five seconds to check
+#'     whether the server-side analysis has finished.
 #'   \item Call \code{\link{rba_mieaa_enrich_results}} to retrieve the results
 #'     of your enrichment analysis.
 #'   }
@@ -843,21 +994,20 @@ rba_mieaa_enrich_results <- function(job_id,
 #' @inheritParams rba_mieaa_enrich_results
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/"
+#'  "https://ccb-compute2.cs.uni-saarland.de/mieaa/api/"
 #'
 #' @return A data frame with your enrichment analysis results.
 #'
 #' @references \itemize{
-#'   \item Fabian Kern, Tobias Fehlmann, Jeffrey Solomon, Louisa Schwed,
-#'   Nadja Grammes, Christina Backes, Kendall Van Keuren-Jensen,
-#'   David Wesley Craig,Eckart Meese, Andreas Keller, miEAA 2.0:
-#'   integrating multi-species microRNA enrichment analysis and workflow
-#'   management systems, Nucleic Acids Research, Volume 48, Issue W1,
-#'   02 July 2020, Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
+#'   \item Ernesto Aparicio-Puerta, Pascal Hirsch, Georges P. Schmartz,
+#'   Fabian Kern, Tobias Fehlmann, Andreas Keller, miEAA 2023: updates,
+#'   new functional microRNA sets and improved enrichment visualizations,
+#'   Nucleic Acids Research, Volume 51, Issue W1, 5 July 2023,
+#'   Pages W319–W325, https://doi.org/10.1093/nar/gkad392
 #'   \item
-#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
+#'   \href{https://ccb-compute2.cs.uni-saarland.de/mieaa/tutorial/api/}{miEAA
 #'   browsable API tutorial}
-#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/}{Citations note
+#'   \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa/}{Citation note
 #'   on miEAA website}
 #'   }
 #'
@@ -920,8 +1070,19 @@ rba_mieaa_enrich <- function(test_set,
     tried <- 0
     try_max <- ifelse(interactive(), Inf, 25)
 
-    while (tried < try_max && !(utils::hasName(step2, "status") && step2$status == 100L)) {
-      cat(".")
+    while (
+      tried < try_max &&
+      !(
+        utils::hasName(step2, "status") &&
+        (
+          isTRUE(step2$status == 100L) ||
+          identical(step2$status, "FAILED")
+        )
+      )
+    ) {
+      if (isTRUE(get("verbose"))) {
+        cat(".")
+      }
       tried <- tried + 1
       Sys.sleep(5)
       step2 <- rba_mieaa_enrich_status(
@@ -931,7 +1092,10 @@ rba_mieaa_enrich <- function(test_set,
       )
     }
 
-    if (utils::hasName(step2, "status") && step2$status == 100L) { # Go to step 3
+    if (
+      utils::hasName(step2, "status") &&
+      isTRUE(step2$status == 100L)
+    ) { # Go to step 3
       .msg(
         "\n -- Step 3/3: Retrieving the results."
       )
@@ -948,7 +1112,7 @@ rba_mieaa_enrich <- function(test_set,
     } else { # Halt at step 2
 
       job_stuck_msg <- paste0(
-        "Error: The miEAA server didn't complete the analysis.",
+        "Error: The miEAA server didn't complete the analysis. ",
         "Please retry or manually run the required steps as demonstrated in the `miEAA & rbioapi` vignette article, section `Approach 2: Going step-by-step`. ",
         "If the problem persists, kindly report this issue to us. The error message was: ",
         try(step2$status),

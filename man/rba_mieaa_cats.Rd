@@ -7,11 +7,11 @@
 rba_mieaa_cats(mirna_type, species, ...)
 }
 \arguments{
-\item{mirna_type}{Type of your miRNA accession. either "mature" or
-"precursor".}
+\item{mirna_type}{Character: Type of the miRNA identifiers; either "mature"
+or "precursor".}
 
-\item{species}{Fully or partially matching Scientific name, abbreviation
-or NCBI taxon ID of one of the following species: \enumerate{
+\item{species}{Character or Numeric: Scientific name, abbreviation, or NCBI
+taxon ID of one of the following species: \enumerate{
 \item "Homo sapiens", "hsa" or 9606
 \item "Mus musculus", "mmu" or 10090
 \item "Rattus norvegicus", "rno" or 10116
@@ -27,17 +27,17 @@ or NCBI taxon ID of one of the following species: \enumerate{
 arguments manual for more information on available options.}
 }
 \value{
-a named character vector with the supported categories for
-  your supplied input combination.
+A named character vector containing the supported categories for
+  the supplied species and miRNA type.
 }
 \description{
-For each Combination of species and miRNA type, Only a pre-defined
-  categories groups are supported. Use this function to retrieve a list
-  of supported categories for a given combination of Species and miRNA type.
+Each combination of species and miRNA type supports a predefined set of
+  enrichment categories. This function retrieves the categories available
+  for a given combination.
 }
 \section{Corresponding API Resources}{
 
- "GET https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/enrichment_categories/\{species\}/\{mirna_type\}/"
+ "GET https://ccb-compute2.cs.uni-saarland.de/mieaa/api/v1/enrichment_categories/\{species\}/\{mirna_type\}/"
 }
 
 \examples{
@@ -48,16 +48,15 @@ rba_mieaa_cats("mature", "Homo sapiens")
 }
 \references{
 \itemize{
-  \item Fabian Kern, Tobias Fehlmann, Jeffrey Solomon, Louisa Schwed,
-  Nadja Grammes, Christina Backes, Kendall Van Keuren-Jensen,
-  David Wesley Craig,Eckart Meese, Andreas Keller, miEAA 2.0:
-  integrating multi-species microRNA enrichment analysis and workflow
-  management systems, Nucleic Acids Research, Volume 48, Issue W1,
-  02 July 2020, Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
+  \item Ernesto Aparicio-Puerta, Pascal Hirsch, Georges P. Schmartz,
+  Fabian Kern, Tobias Fehlmann, Andreas Keller, miEAA 2023: updates,
+  new functional microRNA sets and improved enrichment visualizations,
+  Nucleic Acids Research, Volume 51, Issue W1, 5 July 2023,
+  Pages W319–W325, https://doi.org/10.1093/nar/gkad392
   \item
-  \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
+  \href{https://ccb-compute2.cs.uni-saarland.de/mieaa/tutorial/api/}{miEAA
   browsable API tutorial}
-  \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/}{Citations note
+  \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa/}{Citation note
   on miEAA website}
   }
 }

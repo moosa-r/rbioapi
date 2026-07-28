@@ -2,20 +2,19 @@
 % Please edit documentation in R/mieaa.R
 \name{rba_mieaa_enrich_results}
 \alias{rba_mieaa_enrich_results}
-\title{Retrieve Results of a finished Enrichment Analysis from miEAA}
+\title{Retrieve the Results of a Finished miEAA Enrichment Analysis}
 \usage{
 rba_mieaa_enrich_results(job_id, sort_by = "p_adjusted", sort_asc = TRUE, ...)
 }
 \arguments{
-\item{job_id}{The job-id (a character string) of a submitted enrichment
-analysis.}
+\item{job_id}{Character: Job ID of a submitted enrichment analysis.}
 
-\item{sort_by}{A column name to the result's table based on that. one of:
-"category", "subcategory", "enrichment", "p_value", "p_adjusted" (default),
-"q_value" or "observed" .}
+\item{sort_by}{Character: (default = \code{"p_adjusted"}) Result column to
+sort by. One of: "category", "subcategory", "enrichment", "p_value",
+"p_adjusted", "q_value", or "observed".}
 
-\item{sort_asc}{(logical) If TRUE, the results will be sorted in ascending
-order. If FALSE, the results will be sorted in descending order.}
+\item{sort_asc}{Logical: (default = \code{TRUE}) If \code{TRUE}, sort the
+results in ascending order. If \code{FALSE}, sort them in descending order.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
@@ -35,7 +34,7 @@ Note that using \code{\link{rba_mieaa_enrich}} is a more convenient way to
 }
 \section{Corresponding API Resources}{
 
- "GET https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/results/\{job_id\}"
+ "GET https://ccb-compute2.cs.uni-saarland.de/mieaa/api/v1/enrichment_analysis/results/\{job_id\}/"
 }
 
 \examples{
@@ -46,16 +45,15 @@ rba_mieaa_enrich_results("f52d1aef-6d3d-4d51-9020-82e68fe99012")
 }
 \references{
 \itemize{
-  \item Fabian Kern, Tobias Fehlmann, Jeffrey Solomon, Louisa Schwed,
-  Nadja Grammes, Christina Backes, Kendall Van Keuren-Jensen,
-  David Wesley Craig,Eckart Meese, Andreas Keller, miEAA 2.0:
-  integrating multi-species microRNA enrichment analysis and workflow
-  management systems, Nucleic Acids Research, Volume 48, Issue W1,
-  02 July 2020, Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
+  \item Ernesto Aparicio-Puerta, Pascal Hirsch, Georges P. Schmartz,
+  Fabian Kern, Tobias Fehlmann, Andreas Keller, miEAA 2023: updates,
+  new functional microRNA sets and improved enrichment visualizations,
+  Nucleic Acids Research, Volume 51, Issue W1, 5 July 2023,
+  Pages W319–W325, https://doi.org/10.1093/nar/gkad392
   \item
-  \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
+  \href{https://ccb-compute2.cs.uni-saarland.de/mieaa/tutorial/api/}{miEAA
   browsable API tutorial}
-  \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/}{Citations note
+  \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa/}{Citation note
   on miEAA website}
   }
 }

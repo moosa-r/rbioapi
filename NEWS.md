@@ -53,7 +53,7 @@
 
 * Move to STRING v12.
 
-* Incorporate the recent changes in PANTHER and MIEAA API.
+* Incorporate the recent changes in PANTHER and miEAA API.
 
 * Minor improvements and fixes.
 

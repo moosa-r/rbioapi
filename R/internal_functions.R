@@ -82,10 +82,10 @@
 
     mieaa = switch(
       arg[[2]],
-      name = "MiEAA",
+      name = "miEAA",
       url = "https://ccb-compute2.cs.uni-saarland.de",
       pth = "mieaa/api/v1/",
-      ptn = "^(https?://)?(www\\.)?ccb-compute2\\.cs\\.uni-saarland\\.de/mieaa2/",
+      ptn = "^(https?://)?(www\\.)?ccb-compute2\\.cs\\.uni-saarland\\.de/mieaa/",
       err_ptn = "^4\\d\\d$",
       err_prs = list("json->chr")
     ),
@@ -158,7 +158,7 @@
       "Enrichr" = paste0(.rba_stg("enrichr", "url"), "/Enrichr/"),
       "Ensembl" = paste0(.rba_stg("ensembl", "url"), "/info/ping"),
       "JASPAR" = paste0(.rba_stg("jaspar", "url"), "api/v1/live-api/"),
-      "miEAA" = paste0(.rba_stg("mieaa", "url"), "/mieaa2/api/"),
+      "miEAA" = paste0(.rba_stg("mieaa", "url"), "/mieaa/api/"),
       "PANTHER" = paste0(.rba_stg("panther", "url"), "/services/oai/pantherdb/supportedgenomes"),
       "Reactome Content Service" = paste0(.rba_stg("reactome", "url"), "/ContentService/data/database/name"),
       "Reactome Analysis Service" = paste0(.rba_stg("reactome", "url"), "/AnalysisService/database/name"),

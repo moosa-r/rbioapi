@@ -21,71 +21,75 @@ rba_mieaa_enrich(
 )
 }
 \arguments{
-\item{test_set}{a character vector with your mature or precursor miRBase
-miRNA accessions. Note that \enumerate{
-\item Only miRBase v22 miRNA accession are accepted. You can use
-\code{\link{rba_mieaa_convert_version}} to convert your accessions to
+\item{test_set}{Character vector: Mature or precursor miRBase miRNA
+identifiers. Note that \enumerate{
+\item Only miRBase v22 identifiers are accepted. You can use
+\code{\link{rba_mieaa_convert_version}} to convert older identifiers to
 miRBase v22.
-\item Your list should be entirely consisted of either mature or
-precursor miRNA accession. A mixture of both is not accepted.
+\item The list must contain either mature or precursor miRNA identifiers,
+not a mixture of both.
 }}
 
-\item{mirna_type}{Type of your supplied miRNA accession. either "mature"
-or "precursor".}
+\item{mirna_type}{Character: Type of the supplied miRNA identifiers; either
+"mature" or "precursor".}
 
-\item{test_type}{The analysis to perform. can be either "ORA" for 'Over
-Representation Analysis' or "GSEA" for miRNA (Gene)
-'Set Enrichment Analysis'. Note that in GSEA, your list should be sorted
-beforehand based on some criterion.}
+\item{test_type}{Character: Analysis to perform; either "ORA" for
+over-representation analysis or "GSEA" for miRNA gene set enrichment
+analysis. For GSEA, the input list must already be ranked by an appropriate
+criterion.}
 
-\item{species}{Fully or partially matching Scientific name, abbreviation
-or NCBI taxon ID of one of the following species: \enumerate{
- \item "Homo sapiens", "hsa" or 9606
- \item "Mus musculus", "mmu" or 10090
- \item "Rattus norvegicus", "rno" or 10116
- \item "Arabidopsis thaliana", "ath" or 3702
- \item "Bos taurus", "bta" or 9913
- \item "Caenorhabditis elegans", "cel" or 6239
- \item "Drosophila melanogaster", "dme" or 7227
- \item "Danio rerio", "dre" or 7955
- \item "Gallus gallus", "gga" or 9031
- \item "Sus scrofa", "ssc" or  9823
- }}
+\item{species}{Character or Numeric: Scientific name, abbreviation, or NCBI
+ taxon ID of one of the following species:
+ \enumerate{
+\item "Homo sapiens", "hsa" or 9606
+\item "Mus musculus", "mmu" or 10090
+\item "Rattus norvegicus", "rno" or 10116
+\item "Arabidopsis thaliana", "ath" or 3702
+\item "Bos taurus", "bta" or 9913
+\item "Caenorhabditis elegans", "cel" or 6239
+\item "Drosophila melanogaster", "dme" or 7227
+\item "Danio rerio", "dre" or 7955
+\item "Gallus gallus", "gga" or 9031
+\item "Sus scrofa", "ssc" or  9823
+}}
 
-\item{categories}{one or multiple Category names to be used for miRNA set
-enrichment analysis. Note that \itemize{
-\item Available categories varies based on your chosen specie and if
- your supplied miRNA type is mature or precursor. Use
+\item{categories}{Character vector: (default = \code{NULL}) One or more
+category names to use for miRNA set enrichment analysis. Note that
+\itemize{
+\item Available categories vary with the selected species and whether
+ the supplied miRNAs are mature or precursor. Use
  \code{\link{rba_mieaa_cats}} to retrieve a list of available category
- names for a given specie and miRNA type.
-\item If you supply NULL, the analysis will be performed on all of the
- available categories.}}
+ names for a given species and miRNA type.
+\item If \code{NULL}, the analysis is performed using all available
+ categories.}}
 
-\item{p_adj_method}{P-value adjustment method to be used. Should be one of:
-"none", "fdr" (default), "bonferroni", "BY", "hochberg", "holm" or "hommel"}
+\item{p_adj_method}{Character: (default = \code{"fdr"}) P-value adjustment
+method to use. One of: "none", "fdr", "bonferroni", "BY", "hochberg",
+"holm", or "hommel".}
 
-\item{independent_p_adj}{(logical) The scope and level of p-value adjustment;
-if TRUE (default), the categories will be considered independent from
-each other and the p-value will be adjusted separately for each category.
-if FALSE, the p-value will be adjusted collectively over all categories.}
+\item{independent_p_adj}{Logical: (default = \code{TRUE}) The scope of
+p-value adjustment. If \code{TRUE}, p-values are adjusted separately
+within each category. If \code{FALSE}, p-values are adjusted collectively
+over all categories.}
 
-\item{sig_level}{(numeric) The significance threshold of adjusted P-value.
-values equal to or greater than this threshold will be dropped from the
-results.}
+\item{sig_level}{Numeric: (default = \code{0.05}) Significance threshold for
+adjusted p-values. Values equal to or greater than this threshold are
+omitted from the results.}
 
-\item{min_hits}{(numeric) How many miRNA should a sub-category have from
-your supplied test-list to be included in the results? (default is 2)}
+\item{min_hits}{Numeric: (default = \code{2}) Minimum number of miRNAs from
+the test set that a subcategory must contain to be included in the
+results. Must be a positive integer.}
 
-\item{ref_set}{(Optional) Only applicable when test_type is "ORA".
-This character vector will be used as your reference (background or
+\item{ref_set}{Character vector: (default = \code{NULL}) Only applicable
+when \code{test_type = "ORA"}. Used as the reference (background or
 universe) set for p-value calculations.}
 
-\item{sort_by}{A column name to the result's table based on that. one of:
-"category", "subcategory", "enrichment", "p_value", "p_adjusted" (default),
-"q_value" or "observed" .}
+\item{sort_by}{Character: (default = \code{"p_adjusted"}) Result column to
+sort by. One of: "category", "subcategory", "enrichment", "p_value",
+"p_adjusted", "q_value", or "observed".}
 
-\item{sort_asc}{(logical) If TRUE, the results will be sorted in ascending
-order. If FALSE, the results will be sorted in descending order.}
+\item{sort_asc}{Logical: (default = \code{TRUE}) If \code{TRUE}, sort the
+results in ascending order. If \code{FALSE}, sort them in descending order.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
@@ -95,20 +99,19 @@ A data frame with your enrichment analysis results.
 }
 \description{
 This function is a wrapper for the multiple function calls necessary to
-  perform enrichment analysis on a given miRNA list using miEAA. see details
+  perform enrichment analysis on a given miRNA list using miEAA. See Details
   section for more information.
 }
 \details{
 This function will call other rba_mieaa_*** functions with the following
   order:
   \enumerate{
-  \item Call \code{\link{rba_mieaa_enrich_submit}} to Submit an enrichment
-    analysis request to miEAA servers, using your supplied miRNA lists and
+  \item Call \code{\link{rba_mieaa_enrich_submit}} to submit an enrichment
+    analysis request to the miEAA server using the supplied miRNA list and
     other arguments.
-  \item Once your job was successfully submitted, it will call
-    \code{\link{rba_mieaa_enrich_status}} every 5 seconds, to check the
-    status of your running server-side job and whether your analysis job is
-    finished and the results are available.
+  \item Once the job is successfully submitted, call
+    \code{\link{rba_mieaa_enrich_status}} every five seconds to check
+    whether the server-side analysis has finished.
   \item Call \code{\link{rba_mieaa_enrich_results}} to retrieve the results
     of your enrichment analysis.
   }
@@ -116,7 +119,7 @@ This function will call other rba_mieaa_*** functions with the following
 }
 \section{Corresponding API Resources}{
 
- "GET https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/"
+ "https://ccb-compute2.cs.uni-saarland.de/mieaa/api/"
 }
 
 \examples{
@@ -132,16 +135,15 @@ rba_mieaa_enrich(test_set = c("hsa-miR-20b-5p", "hsa-miR-144-5p",
 }
 \references{
 \itemize{
-  \item Fabian Kern, Tobias Fehlmann, Jeffrey Solomon, Louisa Schwed,
-  Nadja Grammes, Christina Backes, Kendall Van Keuren-Jensen,
-  David Wesley Craig,Eckart Meese, Andreas Keller, miEAA 2.0:
-  integrating multi-species microRNA enrichment analysis and workflow
-  management systems, Nucleic Acids Research, Volume 48, Issue W1,
-  02 July 2020, Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
+  \item Ernesto Aparicio-Puerta, Pascal Hirsch, Georges P. Schmartz,
+  Fabian Kern, Tobias Fehlmann, Andreas Keller, miEAA 2023: updates,
+  new functional microRNA sets and improved enrichment visualizations,
+  Nucleic Acids Research, Volume 51, Issue W1, 5 July 2023,
+  Pages W319–W325, https://doi.org/10.1093/nar/gkad392
   \item
-  \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/}{miEAA
+  \href{https://ccb-compute2.cs.uni-saarland.de/mieaa/tutorial/api/}{miEAA
   browsable API tutorial}
-  \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa2/}{Citations note
+  \item \href{https://ccb-compute2.cs.uni-saarland.de/mieaa/}{Citation note
   on miEAA website}
   }
 }
