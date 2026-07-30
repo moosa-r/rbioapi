@@ -32,9 +32,9 @@ categories.}
 arguments manual for more information on available options.}
 }
 \value{
-A named character vector containing the supported categories for
-  the supplied species, miRNA type, and mode. If the selected subset has no
-  categories, returns \code{character(0)}.
+A named character vector whose values are the supported category
+  identifiers and whose names are their descriptions. If the selected subset
+  has no categories, returns \code{character(0)}.
 }
 \description{
 Each combination of species and miRNA type supports a predefined set of

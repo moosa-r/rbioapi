@@ -56,12 +56,12 @@ criterion.}
 }}
 
 \item{categories}{Character vector: (default = \code{NULL}) One or more
-category names to use for miRNA set enrichment analysis. Note that
+category identifiers to use for miRNA set enrichment analysis. Note that
 \itemize{
 \item Available categories vary with the selected species and whether
  the supplied miRNAs are mature or precursor. Use
  \code{\link{rba_mieaa_cats}} to retrieve a list of available category
- names for a given species and miRNA type.
+ identifiers for a given species and miRNA type.
 \item If \code{NULL}, the analysis is performed using all available
  categories.}}
 
@@ -76,7 +76,7 @@ over all categories.}
 
 \item{sig_level}{Numeric: (default = \code{0.05}) Significance threshold for
 adjusted p-values. Values equal to or greater than this threshold are
-omitted from the results.}
+omitted from the results. Must be greater than 0 and at most 1.}
 
 \item{min_hits}{Numeric: (default = \code{2}) Minimum number of miRNAs from
 the test set that a subcategory must contain to be included in the

@@ -19,19 +19,24 @@ rba_mieaa_convert_type(
 "mature" or "precursor".}
 
 \item{only_unique}{Logical: (default = \code{FALSE}) Mature and precursor
-miRNA identifiers do not always map uniquely. If \code{TRUE}, return only
-unique mappings.}
+miRNA identifiers do not always map uniquely. If \code{TRUE}, do not
+return mappings for inputs with multiple matches. In tabular output, these
+inputs remain as rows with \code{"-"} in the output column.}
 
 \item{simple_output}{Logical: (default = \code{FALSE}) If \code{FALSE},
-return a two-column data frame containing the input and output identifiers.
-If \code{TRUE}, return only the converted identifiers.}
+return a two-column data frame containing the input and output identifier
+mappings; multiple output identifiers are separated by semicolons. If
+\code{TRUE}, expand one-to-many mappings into a flat character vector of
+converted identifiers without their association with the supplied
+identifiers.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
 Depending on \code{simple_output}, a data frame or character vector
-  containing the converted miRNA identifiers.
+  containing the mappings returned by miEAA. Unrecognized or unmapped
+  supplied identifiers can be omitted from the output.
 }
 \description{
 miRBase identifiers can refer to either mature or precursor miRNAs.

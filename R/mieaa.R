@@ -110,9 +110,9 @@
 #' @section Corresponding API Resources:
 #'  "GET https://ccb-compute2.cs.uni-saarland.de/mieaa/api/v1/enrichment_categories/\{species\}/\{mirna_type\}/\{mode\}"
 #'
-#' @return A named character vector containing the supported categories for
-#'   the supplied species, miRNA type, and mode. If the selected subset has no
-#'   categories, returns \code{character(0)}.
+#' @return A named character vector whose values are the supported category
+#'   identifiers and whose names are their descriptions. If the selected subset
+#'   has no categories, returns \code{character(0)}.
 #'
 #' @references \itemize{
 #'   \item Ernesto Aparicio-Puerta, Pascal Hirsch, Georges P. Schmartz,
@@ -224,8 +224,9 @@ rba_mieaa_cats <- function(mirna_type, species, mode = "all", ...) {
 #' @param output_version Numeric: miRBase version to which the identifiers
 #'   should be converted.
 #' @param simple_output Logical: (default = \code{FALSE}) If \code{FALSE},
-#'   return a two-column data frame containing the input and output identifiers.
-#'   If \code{TRUE}, return only the converted identifiers.
+#'   return a two-column data frame containing the input and output identifier
+#'   mappings. If \code{TRUE}, return only the converted identifiers without
+#'   their association with the supplied identifiers.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -233,7 +234,8 @@ rba_mieaa_cats <- function(mirna_type, species, mode = "all", ...) {
 #'  "POST https://ccb-compute2.cs.uni-saarland.de/mieaa/api/v1/mirbase_converter/"
 #'
 #' @return Depending on \code{simple_output}, a data frame or character vector
-#'   containing the converted miRNA identifiers.
+#'   containing the mappings returned by miEAA. Unrecognized or unmapped
+#'   supplied identifiers can be omitted from the output.
 #'
 #' @references \itemize{
 #'   \item Ernesto Aparicio-Puerta, Pascal Hirsch, Georges P. Schmartz,
@@ -326,7 +328,12 @@ rba_mieaa_convert_version <- function(mirna,
 
     parser_input <- list(
       "text->df",
-      function(x) { colnames(x) <- x[1, ]; x <- x[-1, ] }
+      function(x) {
+        colnames(x) <- x[1, ]
+        x <- x[-1, , drop = FALSE]
+        rownames(x) <- NULL
+        return(x)
+      }
     )
     file_extension <- "tsv"
 
@@ -359,11 +366,15 @@ rba_mieaa_convert_version <- function(mirna,
 #' @param input_type Character: Type of the supplied miRNA identifiers; either
 #'   "mature" or "precursor".
 #' @param only_unique Logical: (default = \code{FALSE}) Mature and precursor
-#'   miRNA identifiers do not always map uniquely. If \code{TRUE}, return only
-#'   unique mappings.
+#'   miRNA identifiers do not always map uniquely. If \code{TRUE}, do not
+#'   return mappings for inputs with multiple matches. In tabular output, these
+#'   inputs remain as rows with \code{"-"} in the output column.
 #' @param simple_output Logical: (default = \code{FALSE}) If \code{FALSE},
-#'   return a two-column data frame containing the input and output identifiers.
-#'   If \code{TRUE}, return only the converted identifiers.
+#'   return a two-column data frame containing the input and output identifier
+#'   mappings; multiple output identifiers are separated by semicolons. If
+#'   \code{TRUE}, expand one-to-many mappings into a flat character vector of
+#'   converted identifiers without their association with the supplied
+#'   identifiers.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -371,7 +382,8 @@ rba_mieaa_convert_version <- function(mirna,
 #'  "POST https://ccb-compute2.cs.uni-saarland.de/mieaa/api/v1/mirna_precursor_converter/"
 #'
 #' @return Depending on \code{simple_output}, a data frame or character vector
-#'   containing the converted miRNA identifiers.
+#'   containing the mappings returned by miEAA. Unrecognized or unmapped
+#'   supplied identifiers can be omitted from the output.
 #'
 #' @references \itemize{
 #'   \item Ernesto Aparicio-Puerta, Pascal Hirsch, Georges P. Schmartz,
@@ -520,12 +532,12 @@ rba_mieaa_convert_type <- function(mirna,
 #'  \item "Sus scrofa", "ssc" or  9823
 #'  }
 #' @param categories Character vector: (default = \code{NULL}) One or more
-#'   category names to use for miRNA set enrichment analysis. Note that
+#'   category identifiers to use for miRNA set enrichment analysis. Note that
 #'   \itemize{
 #'   \item Available categories vary with the selected species and whether
 #'    the supplied miRNAs are mature or precursor. Use
 #'    \code{\link{rba_mieaa_cats}} to retrieve a list of available category
-#'    names for a given species and miRNA type.
+#'    identifiers for a given species and miRNA type.
 #'   \item If \code{NULL}, the analysis is performed using all available
 #'    categories.}
 #' @param p_adj_method Character: (default = \code{"fdr"}) P-value adjustment
@@ -537,7 +549,7 @@ rba_mieaa_convert_type <- function(mirna,
 #'   over all categories.
 #' @param sig_level Numeric: (default = \code{0.05}) Significance threshold for
 #'   adjusted p-values. Values equal to or greater than this threshold are
-#'   omitted from the results.
+#'   omitted from the results. Must be greater than 0 and at most 1.
 #' @param min_hits Numeric: (default = \code{2}) Minimum number of miRNAs from
 #'   the test set that a subcategory must contain to be included in the
 #'   results. Must be a positive integer.
@@ -643,8 +655,8 @@ rba_mieaa_enrich_submit <- function(test_set,
     ),
     cond = list(
       list(
-        quote(sig_level < 0 || sig_level > 1),
-        "`sig_level` must be between 0 and 1."
+        quote(sig_level <= 0 || sig_level > 1),
+        "`sig_level` must be greater than 0 and at most 1."
       ),
       list(
         quote(!is.finite(min_hits) || min_hits < 1 || min_hits != floor(min_hits)),
@@ -764,7 +776,8 @@ rba_mieaa_enrich_submit <- function(test_set,
 #'
 #' After you have submitted your enrichment analysis (using
 #'    \code{\link{rba_mieaa_enrich_submit}}) and retrieved a job-id,
-#'   you can use this function to check the status of the job. A status value
+#'   you can use this function to check the status of the job. The status is
+#'   either a numeric completion percentage or \code{"FAILED"}. A status value
 #'   equal to 100 means that the requested analysis has finished and you may
 #'   retrieve the results using \code{\link{rba_mieaa_enrich_results}}.
 #'
@@ -779,8 +792,9 @@ rba_mieaa_enrich_submit <- function(test_set,
 #' @section Corresponding API Resources:
 #'  "GET https://ccb-compute2.cs.uni-saarland.de/mieaa/api/v1/job_status/\{job_id\}/"
 #'
-#' @return A list containing the status of the analysis corresponding to the
-#'   supplied job ID.
+#' @return A list containing a \code{status} element with either the numeric
+#'   completion percentage or \code{"FAILED"} for the supplied job ID. A
+#'   completed job also includes its results URL.
 #'
 #' @references \itemize{
 #'   \item Ernesto Aparicio-Puerta, Pascal Hirsch, Georges P. Schmartz,

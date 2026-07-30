@@ -13,13 +13,15 @@ rba_mieaa_enrich_status(job_id, ...)
 arguments manual for more information on available options.}
 }
 \value{
-A list containing the status of the analysis corresponding to the
-  supplied job ID.
+A list containing a \code{status} element with either the numeric
+  completion percentage or \code{"FAILED"} for the supplied job ID. A
+  completed job also includes its results URL.
 }
 \description{
 After you have submitted your enrichment analysis (using
    \code{\link{rba_mieaa_enrich_submit}}) and retrieved a job-id,
-  you can use this function to check the status of the job. A status value
+  you can use this function to check the status of the job. The status is
+  either a numeric completion percentage or \code{"FAILED"}. A status value
   equal to 100 means that the requested analysis has finished and you may
   retrieve the results using \code{\link{rba_mieaa_enrich_results}}.
 }

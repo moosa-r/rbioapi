@@ -25,15 +25,17 @@ rba_mieaa_convert_version(
 should be converted.}
 
 \item{simple_output}{Logical: (default = \code{FALSE}) If \code{FALSE},
-return a two-column data frame containing the input and output identifiers.
-If \code{TRUE}, return only the converted identifiers.}
+return a two-column data frame containing the input and output identifier
+mappings. If \code{TRUE}, return only the converted identifiers without
+their association with the supplied identifiers.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
 Depending on \code{simple_output}, a data frame or character vector
-  containing the converted miRNA identifiers.
+  containing the mappings returned by miEAA. Unrecognized or unmapped
+  supplied identifiers can be omitted from the output.
 }
 \description{
 miEAA uses miRBase v22 identifiers. This function converts a set of mature
