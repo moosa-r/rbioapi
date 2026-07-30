@@ -645,7 +645,8 @@ rba_mieaa_enrich_submit <- function(test_set,
     mirna_type = mirna_type,
     species = species,
     verbose = FALSE,
-    skip_error = get("skip_error")
+    save_file = FALSE,
+    ...
   )
 
   if (
@@ -983,15 +984,22 @@ rba_mieaa_enrich_results <- function(job_id,
 #'     analysis request to the miEAA server using the supplied miRNA list and
 #'     other arguments.
 #'   \item Once the job is successfully submitted, call
-#'     \code{\link{rba_mieaa_enrich_status}} every five seconds to check
-#'     whether the server-side analysis has finished.
+#'     \code{\link{rba_mieaa_enrich_status}} at the selected polling interval
+#'     to check whether the server-side analysis has finished.
 #'   \item Call \code{\link{rba_mieaa_enrich_results}} to retrieve the results
 #'     of your enrichment analysis.
 #'   }
 #'   See each function's manual for more details.
+#'   The \code{save_file} rbioapi option applies only to the final enrichment
+#'   results and not to the intermediate submission or status responses.
 #'
 #' @inheritParams rba_mieaa_enrich_submit
 #' @inheritParams rba_mieaa_enrich_results
+#' @param poll_interval Numeric: (default = \code{5}) Number of seconds to wait
+#'   between job-status requests; must be between 5 and 300 seconds.
+#' @param poll_timeout Numeric: (default = \code{300}) Maximum number of seconds
+#'   to wait for the enrichment analysis to finish. Use \code{Inf} to wait
+#'   without a time limit.
 #'
 #' @section Corresponding API Resources:
 #'  "https://ccb-compute2.cs.uni-saarland.de/mieaa/api/"
@@ -1036,10 +1044,36 @@ rba_mieaa_enrich <- function(test_set,
                              ref_set = NULL,
                              sort_by = "p_adjusted",
                              sort_asc = TRUE,
+                             poll_interval = 5,
+                             poll_timeout = 300,
                              ...) {
   ## Load Global Options
   .rba_ext_args(...)
 
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(
+        arg = "poll_interval", class = c("numeric", "integer"),
+        len = 1L, min_val = 5, max_val = 300
+      ),
+      list(
+        arg = "poll_timeout", class = c("numeric", "integer"),
+        len = 1L, min_val = 1
+      )
+    ),
+    cond = list(
+      list(
+        quote(!is.finite(poll_interval)), "`poll_interval` must be finite."
+      ),
+      list(
+        quote(poll_timeout < poll_interval),
+        "`poll_timeout` must be equal to or greater than `poll_interval`."
+      )
+    )
+  )
+
+  ## 1 Submit Enrichment Request
   .msg(
     " -- Step 1/3: Submitting Enrichment analysis request:"
   )
@@ -1055,80 +1089,12 @@ rba_mieaa_enrich <- function(test_set,
     sig_level = sig_level,
     min_hits = min_hits,
     ref_set = ref_set,
+    save_file = FALSE,
     ...
   )
 
-  if (utils::hasName(step1, "job_id")) { # Go to step 2
-
-    .msg(
-      "\n -- Step 2/3: Checking for Submitted enrichment analysis's status every 5 seconds.\n",
-      "    Your submitted job ID is: ",
-      step1$job_id
-    )
-
-    step2 <- list(status = 0L, `results-URL` = NULL)
-    tried <- 0
-    try_max <- ifelse(interactive(), Inf, 25)
-
-    while (
-      tried < try_max &&
-      !(
-        utils::hasName(step2, "status") &&
-        (
-          isTRUE(step2$status == 100L) ||
-          identical(step2$status, "FAILED")
-        )
-      )
-    ) {
-      if (isTRUE(get("verbose"))) {
-        cat(".")
-      }
-      tried <- tried + 1
-      Sys.sleep(5)
-      step2 <- rba_mieaa_enrich_status(
-        job_id = step1$job_id,
-        verbose = FALSE,
-        ...
-      )
-    }
-
-    if (
-      utils::hasName(step2, "status") &&
-      isTRUE(step2$status == 100L)
-    ) { # Go to step 3
-      .msg(
-        "\n -- Step 3/3: Retrieving the results."
-      )
-
-      Sys.sleep(1)
-      step3 <- rba_mieaa_enrich_results(
-        job_id = step1$job_id,
-        sort_by = sort_by,
-        sort_asc = sort_asc,
-        ...
-      )
-      return(step3)
-
-    } else { # Halt at step 2
-
-      job_stuck_msg <- paste0(
-        "Error: The miEAA server didn't complete the analysis. ",
-        "Please retry or manually run the required steps as demonstrated in the `miEAA & rbioapi` vignette article, section `Approach 2: Going step-by-step`. ",
-        "If the problem persists, kindly report this issue to us. The error message was: ",
-        try(step2$status),
-        collapse = "\n"
-      )
-
-      if (isTRUE(get("skip_error"))) {
-        return(job_stuck_msg)
-      } else {
-        stop(job_stuck_msg, call. = get("diagnostics"))
-      }
-
-    }
-
-  } else { # halt at step 1
-
+  ### 1.1 Check Submission Response
+  if (!utils::hasName(step1, "job_id")) {
     no_job_id_msg <- paste0(
       "Error: Couldn't submit analysis request to miEAA. ",
       "Please retry or manually run the required steps as demonstrated in the `miEAA & rbioapi` vignette article, section `Approach 2: Going step-by-step`. ",
@@ -1142,7 +1108,136 @@ rba_mieaa_enrich <- function(test_set,
     } else {
       stop(no_job_id_msg, call. = get("diagnostics"))
     }
-
   }
+
+  .msg(
+    paste0(
+      "\n -- Step 2/3: Checking for Submitted enrichment analysis's status ",
+      "every %s seconds.\n",
+      "    Your submitted job ID is: %s"
+    ),
+    poll_interval,
+    step1$job_id
+  )
+
+  ## 2 Poll Job Status
+  poll_state <- "pending"
+  step2 <- list(status = 0L, `results-URL` = NULL)
+  poll_started <- Sys.time()
+
+  repeat {
+    Sys.sleep(poll_interval)
+
+    if (isTRUE(get("verbose"))) {
+      cat(".")
+    }
+    step2 <- rba_mieaa_enrich_status(
+      job_id = step1$job_id,
+      verbose = FALSE,
+      save_file = FALSE,
+      ...
+    )
+
+    ### 2.1 Classify Polling Response
+    if (
+      !is.list(step2) ||
+      !utils::hasName(step2, "status") ||
+      !is.atomic(step2$status) ||
+      length(step2$status) != 1L
+    ) {
+      poll_state <- "invalid"
+      break
+    }
+
+    if (identical(step2$status, "FAILED")) {
+      poll_state <- "failed"
+      break
+    }
+
+    if (
+      !is.numeric(step2$status) ||
+      !is.finite(step2$status) ||
+      step2$status < 0
+    ) {
+      poll_state <- "invalid"
+      break
+    }
+
+    if (
+      isTRUE(step2$status >= 100L)
+    ) {
+      poll_state <- "completed"
+      break
+    }
+
+    if (
+      as.numeric(difftime(Sys.time(), poll_started, units = "secs")) >=
+      poll_timeout
+    ) {
+      poll_state <- "timeout"
+      break
+    }
+  }
+
+  ### 2.2 Handle Polling Failure
+  if (!identical(poll_state, "completed")) {
+    step2_error <- if (is.list(step2)) {
+      if (utils::hasName(step2, "status")) {
+        step2$status
+      } else {
+        "No valid job status was returned."
+      }
+    } else {
+      step2
+    }
+    if (length(step2_error) == 0L || anyNA(step2_error)) {
+      step2_error <- "No valid job status was returned."
+    } else {
+      step2_error <- paste(step2_error, collapse = "\n")
+    }
+
+    poll_error_msg <- switch(
+      poll_state,
+      failed = "The miEAA server reported that the analysis failed",
+      timeout = sprintf(
+        "The miEAA server did not complete the analysis within %s seconds",
+        poll_timeout
+      ),
+      invalid = "The miEAA server returned an invalid job-status response",
+      "The miEAA server did not complete the analysis"
+    )
+
+    job_stuck_msg <- paste0(
+      "Error: ",
+      poll_error_msg,
+      " for job ID `",
+      step1$job_id,
+      "`. ",
+      "Please retry or manually run the required steps as demonstrated in the `miEAA & rbioapi` vignette article, section `Approach 2: Going step-by-step`. ",
+      "If the problem persists, kindly report this issue to us. The last status response was: ",
+      step2_error
+    )
+
+    if (isTRUE(get("skip_error"))) {
+      return(job_stuck_msg)
+    } else {
+      stop(job_stuck_msg, call. = get("diagnostics"))
+    }
+  }
+
+  ## 3 Retrieve Enrichment Results
+  .msg(
+    "\n -- Step 3/3: Retrieving the results."
+  )
+
+  Sys.sleep(1)
+
+  step3 <- rba_mieaa_enrich_results(
+    job_id = step1$job_id,
+    sort_by = sort_by,
+    sort_asc = sort_asc,
+    ...
+  )
+  return(step3)
 
 }

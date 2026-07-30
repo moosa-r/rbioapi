@@ -17,6 +17,8 @@ rba_mieaa_enrich(
   ref_set = NULL,
   sort_by = "p_adjusted",
   sort_asc = TRUE,
+  poll_interval = 5,
+  poll_timeout = 300,
   ...
 )
 }
@@ -91,6 +93,13 @@ sort by. One of: "category", "subcategory", "enrichment", "p_value",
 \item{sort_asc}{Logical: (default = \code{TRUE}) If \code{TRUE}, sort the
 results in ascending order. If \code{FALSE}, sort them in descending order.}
 
+\item{poll_interval}{Numeric: (default = \code{5}) Number of seconds to wait
+between job-status requests; must be between 5 and 300 seconds.}
+
+\item{poll_timeout}{Numeric: (default = \code{300}) Maximum number of seconds
+to wait for the enrichment analysis to finish. Use \code{Inf} to wait
+without a time limit.}
+
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
@@ -110,12 +119,14 @@ This function will call other rba_mieaa_*** functions with the following
     analysis request to the miEAA server using the supplied miRNA list and
     other arguments.
   \item Once the job is successfully submitted, call
-    \code{\link{rba_mieaa_enrich_status}} every five seconds to check
-    whether the server-side analysis has finished.
+    \code{\link{rba_mieaa_enrich_status}} at the selected polling interval
+    to check whether the server-side analysis has finished.
   \item Call \code{\link{rba_mieaa_enrich_results}} to retrieve the results
     of your enrichment analysis.
   }
   See each function's manual for more details.
+  The \code{save_file} rbioapi option applies only to the final enrichment
+  results and not to the intermediate submission or status responses.
 }
 \section{Corresponding API Resources}{
 
