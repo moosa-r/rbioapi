@@ -100,14 +100,19 @@
 #'   \item "Danio rerio", "dre" or 7955
 #'   \item "Gallus gallus", "gga" or 9031
 #'   \item "Sus scrofa", "ssc" or  9823}
+#' @param mode Character: (default = \code{"all"}) Category subset to retrieve.
+#'   One of: "all" to include default and expert categories, "default" to
+#'   include only default categories, or "expert" to include only expert
+#'   categories.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ccb-compute2.cs.uni-saarland.de/mieaa/api/v1/enrichment_categories/\{species\}/\{mirna_type\}/"
+#'  "GET https://ccb-compute2.cs.uni-saarland.de/mieaa/api/v1/enrichment_categories/\{species\}/\{mirna_type\}/\{mode\}"
 #'
 #' @return A named character vector containing the supported categories for
-#'   the supplied species and miRNA type.
+#'   the supplied species, miRNA type, and mode. If the selected subset has no
+#'   categories, returns \code{character(0)}.
 #'
 #' @references \itemize{
 #'   \item Ernesto Aparicio-Puerta, Pascal Hirsch, Georges P. Schmartz,
@@ -129,7 +134,7 @@
 #'
 #' @family "miEAA"
 #' @export
-rba_mieaa_cats <- function(mirna_type, species, ...) {
+rba_mieaa_cats <- function(mirna_type, species, mode = "all", ...) {
   ## Load Global Options
   .rba_ext_args(...)
 
@@ -146,6 +151,13 @@ rba_mieaa_cats <- function(mirna_type, species, ...) {
         arg = "species",
         class = c("character", "numeric", "integer"),
         len = 1L
+      ),
+      list(
+        arg = "mode",
+        class = "character",
+        val = c("all", "default", "expert"),
+        len = 1L,
+        no_null = TRUE
       )
     )
   )
@@ -154,7 +166,8 @@ rba_mieaa_cats <- function(mirna_type, species, ...) {
   species <- .rba_mieaa_species(species, to_name = FALSE)
 
   .msg(
-    "Retrieving available enrichment categories of %s for %s.",
+    "Retrieving %s enrichment categories of %s for %s.",
+    mode,
     switch(
       mirna_type,
       "mature" = "miRNA",
@@ -167,9 +180,11 @@ rba_mieaa_cats <- function(mirna_type, species, ...) {
   parser_input <- list(
     "json->df",
     function(x) {
-      y <- x[[1]]
-      names(y) <- x[[2]]
-      return(y)
+      if (nrow(x) == 0L) {
+        return(character())
+      }
+
+      return(stats::setNames(x[[1]], x[[2]]))
     }
   )
 
@@ -177,14 +192,15 @@ rba_mieaa_cats <- function(mirna_type, species, ...) {
     httr = "get",
     url = .rba_stg("mieaa", "url"),
     path = sprintf(
-      "%senrichment_categories/%s/%s/",
+      "%senrichment_categories/%s/%s/%s",
       .rba_stg("mieaa", "pth"),
       species,
       switch(
         mirna_type,
         "mature" = "mirna",
         "precursor" = "precursor"
-      )
+      ),
+      mode
     ),
     accept = "application/json",
     parser = parser_input,
@@ -644,6 +660,7 @@ rba_mieaa_enrich_submit <- function(test_set,
   all_cats <- rba_mieaa_cats(
     mirna_type = mirna_type,
     species = species,
+    mode = "all",
     verbose = FALSE,
     save_file = FALSE,
     ...

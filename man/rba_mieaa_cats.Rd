@@ -4,7 +4,7 @@
 \alias{rba_mieaa_cats}
 \title{Get Supported Enrichment Categories for a Species and miRNA Type}
 \usage{
-rba_mieaa_cats(mirna_type, species, ...)
+rba_mieaa_cats(mirna_type, species, mode = "all", ...)
 }
 \arguments{
 \item{mirna_type}{Character: Type of the miRNA identifiers; either "mature"
@@ -23,12 +23,18 @@ taxon ID of one of the following species: \enumerate{
 \item "Gallus gallus", "gga" or 9031
 \item "Sus scrofa", "ssc" or  9823}}
 
+\item{mode}{Character: (default = \code{"all"}) Category subset to retrieve.
+One of: "all" to include default and expert categories, "default" to
+include only default categories, or "expert" to include only expert
+categories.}
+
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
 A named character vector containing the supported categories for
-  the supplied species and miRNA type.
+  the supplied species, miRNA type, and mode. If the selected subset has no
+  categories, returns \code{character(0)}.
 }
 \description{
 Each combination of species and miRNA type supports a predefined set of
@@ -37,7 +43,7 @@ Each combination of species and miRNA type supports a predefined set of
 }
 \section{Corresponding API Resources}{
 
- "GET https://ccb-compute2.cs.uni-saarland.de/mieaa/api/v1/enrichment_categories/\{species\}/\{mirna_type\}/"
+ "GET https://ccb-compute2.cs.uni-saarland.de/mieaa/api/v1/enrichment_categories/\{species\}/\{mirna_type\}/\{mode\}"
 }
 
 \examples{
