@@ -1,8 +1,8 @@
-# Convert miRNA accession Between Different miRBase Versions
+# Convert miRNA Identifiers Between Different miRBase Versions
 
-miEAA works with miRBASE v22 accession. Using This function you can
-convert a set of mature or precursor miRNA accession between two given
-miRBase versions.
+miEAA uses miRBase v22 identifiers. This function converts a set of
+mature or precursor miRNA identifiers between two supported miRBase
+versions.
 
 ## Usage
 
@@ -21,25 +21,27 @@ rba_mieaa_convert_version(
 
 - mirna:
 
-  A vector of miRNA accessions to be converted.
+  Character vector: miRNA identifiers to convert.
 
 - mirna_type:
 
-  Type of your supplied miRNA accession. either "mature" or "precursor".
+  Character: Type of the supplied miRNA identifiers; either "mature" or
+  "precursor".
 
 - input_version:
 
-  (numeric) miRBase version of your supplied miRNA accessions.
+  Numeric: miRBase version of the supplied identifiers.
 
 - output_version:
 
-  (numeric) To what version should your miRNA accessions be converted?
+  Numeric: miRBase version to which the identifiers should be converted.
 
 - simple_output:
 
-  (logical) If FALSE (default), the result will be a two-columned data
-  frame with your input and output accessions. Otherwise, if TRUE, only
-  the output miRNA accessions will be returned.
+  Logical: (default = `FALSE`) If `FALSE`, return a two-column data
+  frame containing the input and output identifier mappings. If `TRUE`,
+  return only the converted identifiers without their association with
+  the supplied identifiers.
 
 - ...:
 
@@ -49,28 +51,28 @@ rba_mieaa_convert_version(
 
 ## Value
 
-Depending on the arguments, a data frame or a character vectors
-containing the miRNA accessions in your output version.
+Depending on `simple_output`, a data frame or character vector
+containing the mappings returned by miEAA. Unrecognized or unmapped
+supplied identifiers can be omitted from the output.
 
 ## Corresponding API Resources
 
 "POST
-https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/mirbase_converter/"
+https://ccb-compute2.cs.uni-saarland.de/mieaa/api/v1/mirbase_converter/"
 
 ## References
 
-- Fabian Kern, Tobias Fehlmann, Jeffrey Solomon, Louisa Schwed, Nadja
-  Grammes, Christina Backes, Kendall Van Keuren-Jensen, David Wesley
-  Craig,Eckart Meese, Andreas Keller, miEAA 2.0: integrating
-  multi-species microRNA enrichment analysis and workflow management
-  systems, Nucleic Acids Research, Volume 48, Issue W1, 02 July 2020,
-  Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
+- Ernesto Aparicio-Puerta, Pascal Hirsch, Georges P. Schmartz, Fabian
+  Kern, Tobias Fehlmann, Andreas Keller, miEAA 2023: updates, new
+  functional microRNA sets and improved enrichment visualizations,
+  Nucleic Acids Research, Volume 51, Issue W1, 5 July 2023, Pages
+  W319–W325, https://doi.org/10.1093/nar/gkad392
 
 - [miEAA browsable API
-  tutorial](https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/)
+  tutorial](https://ccb-compute2.cs.uni-saarland.de/mieaa/tutorial/api/)
 
-- [Citations note on miEAA
-  website](https://ccb-compute2.cs.uni-saarland.de/mieaa2/)
+- [Citation note on miEAA
+  website](https://ccb-compute2.cs.uni-saarland.de/mieaa/)
 
 ## See also
 

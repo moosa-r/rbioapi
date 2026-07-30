@@ -1,8 +1,7 @@
 # Submit miEAA miRNA Enrichment Analysis Request
 
-Using This function you can submit a request in miEAA servers to perform
-Over-representation or GSEA Analysis for a given set of miRNA
-identifiers. see "arguments" section for more information.
+Submit a request to the miEAA server to perform over-representation
+analysis or gene set enrichment analysis for a set of miRNA identifiers.
 
 ## Usage
 
@@ -11,7 +10,7 @@ rba_mieaa_enrich_submit(
   test_set,
   mirna_type,
   test_type,
-  species = "hsa",
+  species,
   categories = NULL,
   p_adj_method = "fdr",
   independent_p_adj = TRUE,
@@ -26,31 +25,31 @@ rba_mieaa_enrich_submit(
 
 - test_set:
 
-  a character vector with your mature or precursor miRBase miRNA
-  accessions. Note that
+  Character vector: Mature or precursor miRBase miRNA identifiers. Note
+  that
 
-  1.  Only miRBase v22 miRNA accession are accepted. You can use
+  1.  Only miRBase v22 identifiers are accepted. You can use
       [`rba_mieaa_convert_version`](https://rbioapi.moosa-r.com/reference/rba_mieaa_convert_version.md)
-      to convert your accessions to miRBase v22.
+      to convert older identifiers to miRBase v22.
 
-  2.  Your list should be entirely consisted of either mature or
-      precursor miRNA accession. A mixture of both is not accepted.
+  2.  The list must contain either mature or precursor miRNA
+      identifiers, not a mixture of both.
 
 - mirna_type:
 
-  Type of your supplied miRNA accession. either "mature" or "precursor".
+  Character: Type of the supplied miRNA identifiers; either "mature" or
+  "precursor".
 
 - test_type:
 
-  The analysis to perform. can be either "ORA" for 'Over Representation
-  Analysis' or "GSEA" for miRNA (Gene) 'Set Enrichment Analysis'. Note
-  that in GSEA, your list should be sorted beforehand based on some
-  criterion.
+  Character: Analysis to perform; either "ORA" for over-representation
+  analysis or "GSEA" for miRNA gene set enrichment analysis. For GSEA,
+  the input list must already be ranked by an appropriate criterion.
 
 - species:
 
-  Fully or partially matching Scientific name, abbreviation or NCBI
-  taxon ID of one of the following species:
+  Character or Numeric: Scientific name, abbreviation, or NCBI taxon ID
+  of one of the following species:
 
   1.  "Homo sapiens", "hsa" or 9606
 
@@ -74,46 +73,46 @@ rba_mieaa_enrich_submit(
 
 - categories:
 
-  one or multiple Category names to be used for miRNA set enrichment
-  analysis. Note that
+  Character vector: (default = `NULL`) One or more category identifiers
+  to use for miRNA set enrichment analysis. Note that
 
-  - Available categories varies based on your chosen specie and if your
-    supplied miRNA type is mature or precursor. Use
+  - Available categories vary with the selected species and whether the
+    supplied miRNAs are mature or precursor. Use
     [`rba_mieaa_cats`](https://rbioapi.moosa-r.com/reference/rba_mieaa_cats.md)
-    to retrieve a list of available category names for a given specie
-    and miRNA type.
+    to retrieve a list of available category identifiers for a given
+    species and miRNA type.
 
-  - If you supply NULL, the analysis will be performed on all of the
-    available categories.
+  - If `NULL`, the analysis is performed using all available categories.
 
 - p_adj_method:
 
-  P-value adjustment method to be used. Should be one of: "none", "fdr"
-  (default), "bonferroni", "BY", "hochberg", "holm" or "hommel"
+  Character: (default = `"fdr"`) P-value adjustment method to use. One
+  of: "none", "fdr", "bonferroni", "BY", "hochberg", "holm", or
+  "hommel".
 
 - independent_p_adj:
 
-  (logical) The scope and level of p-value adjustment; if TRUE
-  (default), the categories will be considered independent from each
-  other and the p-value will be adjusted separately for each category.
-  if FALSE, the p-value will be adjusted collectively over all
-  categories.
+  Logical: (default = `TRUE`) The scope of p-value adjustment. If
+  `TRUE`, p-values are adjusted separately within each category. If
+  `FALSE`, p-values are adjusted collectively over all categories.
 
 - sig_level:
 
-  (numeric) The significance threshold of adjusted P-value. values equal
-  to or greater than this threshold will be dropped from the results.
+  Numeric: (default = `0.05`) Significance threshold for adjusted
+  p-values. Values equal to or greater than this threshold are omitted
+  from the results. Must be greater than 0 and at most 1.
 
 - min_hits:
 
-  (numeric) How many miRNA should a sub-category have from your supplied
-  test-list to be included in the results? (default is 2)
+  Numeric: (default = `2`) Minimum number of miRNAs from the test set
+  that a subcategory must contain to be included in the results. Must be
+  a positive integer.
 
 - ref_set:
 
-  (Optional) Only applicable when test_type is "ORA". This character
-  vector will be used as your reference (background or universe) set for
-  p-value calculations.
+  Character vector: (default = `NULL`) Only applicable when
+  `test_type = "ORA"`. Used as the reference (background or universe)
+  set for p-value calculations.
 
 - ...:
 
@@ -137,22 +136,21 @@ miRNA-set using miEAA.
 ## Corresponding API Resources
 
 "POST
-https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/enrichment_analysis/{species}/{type}/{test}/"
+https://ccb-compute2.cs.uni-saarland.de/mieaa/api/v1/enrichment_analysis/{species}/{type}/{test}/"
 
 ## References
 
-- Fabian Kern, Tobias Fehlmann, Jeffrey Solomon, Louisa Schwed, Nadja
-  Grammes, Christina Backes, Kendall Van Keuren-Jensen, David Wesley
-  Craig,Eckart Meese, Andreas Keller, miEAA 2.0: integrating
-  multi-species microRNA enrichment analysis and workflow management
-  systems, Nucleic Acids Research, Volume 48, Issue W1, 02 July 2020,
-  Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
+- Ernesto Aparicio-Puerta, Pascal Hirsch, Georges P. Schmartz, Fabian
+  Kern, Tobias Fehlmann, Andreas Keller, miEAA 2023: updates, new
+  functional microRNA sets and improved enrichment visualizations,
+  Nucleic Acids Research, Volume 51, Issue W1, 5 July 2023, Pages
+  W319–W325, https://doi.org/10.1093/nar/gkad392
 
 - [miEAA browsable API
-  tutorial](https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/)
+  tutorial](https://ccb-compute2.cs.uni-saarland.de/mieaa/tutorial/api/)
 
-- [Citations note on miEAA
-  website](https://ccb-compute2.cs.uni-saarland.de/mieaa2/)
+- [Citation note on miEAA
+  website](https://ccb-compute2.cs.uni-saarland.de/mieaa/)
 
 ## See also
 

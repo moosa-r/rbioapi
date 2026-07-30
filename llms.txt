@@ -38,7 +38,7 @@ On CRAN (Stable) version: (<https://cran.r-project.org/package=rbioapi>)
     ([rbioapi vignette
     article](https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html "rbioapi & Enrichr vignette article"))
     ^((new))
-3.  [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "miRNA Enrichment Analysis and Annotation Tool (miEAA)")
+3.  [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa/ "miRNA Enrichment Analysis and Annotation Tool (miEAA)")
     ([rbioapi vignette
     article](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html "rbioapi & miEAA vignette article"))
 4.  [PANTHER](https://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)")
@@ -382,8 +382,8 @@ properly cite the database/services that they have used.
 
 - [How to cite
   miEAA](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html#citations "How to cite miEAA").
-  (See on [miEAA
-  website](https://ccb-compute2.cs.uni-saarland.de/mieaa2))
+  (See the [miEAA
+  website](https://ccb-compute2.cs.uni-saarland.de/mieaa/).)
 
 - [How to cite
   PANTHER](https://rbioapi.moosa-r.com/articles/rbioapi_panther.html#citations "How to cite PANTHER").
@@ -561,21 +561,21 @@ Functions that connect you to [JASPAR](https://jaspar.elixir.no/)
 ## miEAA (rba_mieaa\_\*)
 
 Functions that connect you to
-[miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2/) (miRNA
+[miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa/) (miRNA
 Enrichment Analysis and Annotation Tool) API resources.
 
 - [`rba_mieaa_cats()`](https://rbioapi.moosa-r.com/reference/rba_mieaa_cats.md)
   : Get Supported Enrichment Categories for a Species and miRNA Type
 - [`rba_mieaa_convert_type()`](https://rbioapi.moosa-r.com/reference/rba_mieaa_convert_type.md)
-  : Convert Between Mature and precursor miRNA Accession
+  : Convert Between Mature and Precursor miRNA Identifiers
 - [`rba_mieaa_convert_version()`](https://rbioapi.moosa-r.com/reference/rba_mieaa_convert_version.md)
-  : Convert miRNA accession Between Different miRBase Versions
+  : Convert miRNA Identifiers Between Different miRBase Versions
 - [`rba_mieaa_enrich()`](https://rbioapi.moosa-r.com/reference/rba_mieaa_enrich.md)
   : A One-step Wrapper for miRNA Enrichment Using miEAA
 - [`rba_mieaa_enrich_results()`](https://rbioapi.moosa-r.com/reference/rba_mieaa_enrich_results.md)
-  : Retrieve Results of a finished Enrichment Analysis from miEAA
+  : Retrieve the Results of a Finished miEAA Enrichment Analysis
 - [`rba_mieaa_enrich_status()`](https://rbioapi.moosa-r.com/reference/rba_mieaa_enrich_status.md)
-  : Check Status of a Submitted Enrichment Analysis in miEAA
+  : Check the Status of a Submitted miEAA Enrichment Analysis
 - [`rba_mieaa_enrich_submit()`](https://rbioapi.moosa-r.com/reference/rba_mieaa_enrich_submit.md)
   : Submit miEAA miRNA Enrichment Analysis Request
 
@@ -882,7 +882,7 @@ Functions that connect you to [UniProt](https://www.uniprot.org/)
 
   Connect to JASPAR in R with rbioapi package.
 
-- [2.C: miEEA &
+- [2.C: miEAA &
   rbioapi](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.md):
 
   Connect to miEAA in R with rbioapi package.

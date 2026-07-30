@@ -1,25 +1,26 @@
 # Get Supported Enrichment Categories for a Species and miRNA Type
 
-For each Combination of species and miRNA type, Only a pre-defined
-categories groups are supported. Use this function to retrieve a list of
-supported categories for a given combination of Species and miRNA type.
+Each combination of species and miRNA type supports a predefined set of
+enrichment categories. This function retrieves the categories available
+for a given combination.
 
 ## Usage
 
 ``` r
-rba_mieaa_cats(mirna_type, species, ...)
+rba_mieaa_cats(mirna_type, species, mode = "all", ...)
 ```
 
 ## Arguments
 
 - mirna_type:
 
-  Type of your miRNA accession. either "mature" or "precursor".
+  Character: Type of the miRNA identifiers; either "mature" or
+  "precursor".
 
 - species:
 
-  Fully or partially matching Scientific name, abbreviation or NCBI
-  taxon ID of one of the following species:
+  Character or Numeric: Scientific name, abbreviation, or NCBI taxon ID
+  of one of the following species:
 
   1.  "Homo sapiens", "hsa" or 9606
 
@@ -41,6 +42,13 @@ rba_mieaa_cats(mirna_type, species, ...)
 
   10. "Sus scrofa", "ssc" or 9823
 
+- mode:
+
+  Character: (default = `"all"`) Category subset to retrieve. One of:
+  "all" to include default and expert categories, "default" to include
+  only default categories, or "expert" to include only expert
+  categories.
+
 - ...:
 
   rbioapi option(s). See
@@ -49,28 +57,28 @@ rba_mieaa_cats(mirna_type, species, ...)
 
 ## Value
 
-a named character vector with the supported categories for your supplied
-input combination.
+A named character vector whose values are the supported category
+identifiers and whose names are their descriptions. If the selected
+subset has no categories, returns `character(0)`.
 
 ## Corresponding API Resources
 
 "GET
-https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/enrichment_categories/{species}/{mirna_type}/"
+https://ccb-compute2.cs.uni-saarland.de/mieaa/api/v1/enrichment_categories/{species}/{mirna_type}/{mode}"
 
 ## References
 
-- Fabian Kern, Tobias Fehlmann, Jeffrey Solomon, Louisa Schwed, Nadja
-  Grammes, Christina Backes, Kendall Van Keuren-Jensen, David Wesley
-  Craig,Eckart Meese, Andreas Keller, miEAA 2.0: integrating
-  multi-species microRNA enrichment analysis and workflow management
-  systems, Nucleic Acids Research, Volume 48, Issue W1, 02 July 2020,
-  Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
+- Ernesto Aparicio-Puerta, Pascal Hirsch, Georges P. Schmartz, Fabian
+  Kern, Tobias Fehlmann, Andreas Keller, miEAA 2023: updates, new
+  functional microRNA sets and improved enrichment visualizations,
+  Nucleic Acids Research, Volume 51, Issue W1, 5 July 2023, Pages
+  W319–W325, https://doi.org/10.1093/nar/gkad392
 
 - [miEAA browsable API
-  tutorial](https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/)
+  tutorial](https://ccb-compute2.cs.uni-saarland.de/mieaa/tutorial/api/)
 
-- [Citations note on miEAA
-  website](https://ccb-compute2.cs.uni-saarland.de/mieaa2/)
+- [Citation note on miEAA
+  website](https://ccb-compute2.cs.uni-saarland.de/mieaa/)
 
 ## See also
 

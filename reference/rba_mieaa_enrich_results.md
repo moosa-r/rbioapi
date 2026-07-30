@@ -1,4 +1,4 @@
-# Retrieve Results of a finished Enrichment Analysis from miEAA
+# Retrieve the Results of a Finished miEAA Enrichment Analysis
 
 After your submitted enrichment analysis request has finished (check
 using
@@ -15,18 +15,18 @@ rba_mieaa_enrich_results(job_id, sort_by = "p_adjusted", sort_asc = TRUE, ...)
 
 - job_id:
 
-  The job-id (a character string) of a submitted enrichment analysis.
+  Character: Job ID of a submitted enrichment analysis.
 
 - sort_by:
 
-  A column name to the result's table based on that. one of: "category",
-  "subcategory", "enrichment", "p_value", "p_adjusted" (default),
-  "q_value" or "observed" .
+  Character: (default = `"p_adjusted"`) Result column to sort by. One
+  of: "category", "subcategory", "enrichment", "p_value", "p_adjusted",
+  "q_value", or "observed".
 
 - sort_asc:
 
-  (logical) If TRUE, the results will be sorted in ascending order. If
-  FALSE, the results will be sorted in descending order.
+  Logical: (default = `TRUE`) If `TRUE`, sort the results in ascending
+  order. If `FALSE`, sort them in descending order.
 
 - ...:
 
@@ -49,22 +49,21 @@ miRNA-set using miEAA.
 ## Corresponding API Resources
 
 "GET
-https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/results/{job_id}"
+https://ccb-compute2.cs.uni-saarland.de/mieaa/api/v1/enrichment_analysis/results/{job_id}/"
 
 ## References
 
-- Fabian Kern, Tobias Fehlmann, Jeffrey Solomon, Louisa Schwed, Nadja
-  Grammes, Christina Backes, Kendall Van Keuren-Jensen, David Wesley
-  Craig,Eckart Meese, Andreas Keller, miEAA 2.0: integrating
-  multi-species microRNA enrichment analysis and workflow management
-  systems, Nucleic Acids Research, Volume 48, Issue W1, 02 July 2020,
-  Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
+- Ernesto Aparicio-Puerta, Pascal Hirsch, Georges P. Schmartz, Fabian
+  Kern, Tobias Fehlmann, Andreas Keller, miEAA 2023: updates, new
+  functional microRNA sets and improved enrichment visualizations,
+  Nucleic Acids Research, Volume 51, Issue W1, 5 July 2023, Pages
+  W319–W325, https://doi.org/10.1093/nar/gkad392
 
 - [miEAA browsable API
-  tutorial](https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/)
+  tutorial](https://ccb-compute2.cs.uni-saarland.de/mieaa/tutorial/api/)
 
-- [Citations note on miEAA
-  website](https://ccb-compute2.cs.uni-saarland.de/mieaa2/)
+- [Citation note on miEAA
+  website](https://ccb-compute2.cs.uni-saarland.de/mieaa/)
 
 ## See also
 

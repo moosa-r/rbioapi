@@ -19,7 +19,7 @@
 
   Connect to JASPAR in R with rbioapi package.
 
-- [2.C: miEEA &
+- [2.C: miEAA &
   rbioapi](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.md):
 
   Connect to miEAA in R with rbioapi package.

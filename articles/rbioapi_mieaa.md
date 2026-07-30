@@ -1,26 +1,26 @@
-# 2.C: miEEA & rbioapi
+# 2.C: miEAA & rbioapi
 
 ## Introduction
 
 The miRNA Enrichment Analysis and Annotation Tool
-([miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "https://ccb-compute2.cs.uni-saarland.de/mieaa2"))
-is a service provided by the [Chair for Clinical Bioinformatics at
-Saarland University](https://www.ccb.uni-saarland.de/). Basically, miEAA
-is a multi-species microRNA enrichment analysis tool. For more
-information, see their
-[website](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "https://ccb-compute2.cs.uni-saarland.de/mieaa2")
-or [published
-paper](https://doi.org/10.1093/nar/gkaa309 "miEAA 2.0: integrating multi-species microRNA enrichment analysis and workflow management systems").
+([miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa/ "miRNA Enrichment Analysis and Annotation Tool"))
+is a multi-species microRNA enrichment-analysis service provided by the
+[Chair for Clinical Bioinformatics at Saarland
+University](https://www.ccb.uni-saarland.de/). For more information, see
+the miEAA [website](https://ccb-compute2.cs.uni-saarland.de/mieaa/) or
+its [latest
+publication](https://doi.org/10.1093/nar/gkad392 "miEAA 2023: updates, new functional microRNA sets and improved enrichment visualizations").
 
 ------------------------------------------------------------------------
 
 ## First, find **enrichment categories**
 
-Before Performing enrichment analysis on a miRNA set, note that based on
-your input **miRNA type** (either all mature or precursor, not a mixture
-of both!) and the **species**, there will be different
-[sets](https://ccb-compute2.cs.uni-saarland.de/mieaa2/downloads/ "miEEA integrated data sets")
-of supported **enrichment categories.**
+Before performing enrichment analysis on a miRNA set, note that the
+supported **enrichment categories** depend on both the **miRNA type**
+(mature or precursor, without mixing the two) and the **species**. See
+the [miEAA integrated data
+sets](https://ccb-compute2.cs.uni-saarland.de/mieaa/downloads/) for
+details.
 
 Thus, it is recommended to retrieve a list of possible enrichment
 categories that you may use:
@@ -36,23 +36,21 @@ rba_mieaa_cats(mirna_type = "mature", species = 9606)
 rba_mieaa_cats(mirna_type = "precursor", species = 9606)
 
 ## precursor zebrafish miRNA
-rba_mieaa_cats(mirna_type = "mature", species = "Danio rerio")
+rba_mieaa_cats(mirna_type = "precursor", species = "Danio rerio")
 ```
 
 ------------------------------------------------------------------------
 
-## Submit Enrichment analysis request to miEAA
+## Submit an enrichment-analysis request to miEAA
 
 There are two approaches to do this, we will start with the simpler one.
 
-### Approach 1: Using the Wrapper function
+### Approach 1: Using the wrapper function
 
-Just fill the arguments of
+Supply the arguments of
 [`rba_mieaa_enrich()`](https://rbioapi.moosa-r.com/reference/rba_mieaa_enrich.md)
-according to the function’s manual; As you can see in the function’s
-arguments, you have a lot of controls over your enrichment request, but
-you need to provide `test_set`, `mirna_type`, `test_type`, and
-`species`:
+as described in its manual. You must provide `test_set`, `mirna_type`,
+`test_type`, and `species`:
 
 ``` r
 
@@ -65,7 +63,7 @@ mirs <- c(
   "hsa-miR-148a-3p"
 )
 
-## 2a We can perform enrichment analysis on our miRNA set without limiting the analysis to any categories
+## 2a Perform enrichment analysis without limiting it to selected categories
 mieaa_all <- rba_mieaa_enrich(
   test_set = mirs,
   mirna_type = "mature",
@@ -77,13 +75,13 @@ mieaa_all <- rba_mieaa_enrich(
 #> Submitting ORA enrichment request for 17 miRNA IDs of species Homo sapiens to miEAA servers.
 #> 
 #>  -- Step 2/3: Checking for Submitted enrichment analysis's status every 5 seconds.
-#>     Your submitted job ID is: 72de58a8-596a-49d8-9e12-18b226905b84
-#> ....
+#>     Your submitted job ID is: 3949d1d9-9150-498a-b271-fcc6697c48a8
+#> .....
 #> 
 #>  -- Step 3/3: Retrieving the results.
-#> Retrieving results of submitted enrichment request with ID: 72de58a8-596a-49d8-9e12-18b226905b84
+#> Retrieving results of submitted enrichment request with ID: 3949d1d9-9150-498a-b271-fcc6697c48a8
 
-## 2b Or, We can limit the enrichment to certain datasets (enrichment categories)
+## 2b Limit the enrichment to selected data sets (enrichment categories)
 mieaa_kegg <- rba_mieaa_enrich(
   test_set = mirs,
   mirna_type = "mature",
@@ -95,11 +93,11 @@ mieaa_kegg <- rba_mieaa_enrich(
 #> Submitting ORA enrichment request for 17 miRNA IDs of species Homo sapiens to miEAA servers.
 #> 
 #>  -- Step 2/3: Checking for Submitted enrichment analysis's status every 5 seconds.
-#>     Your submitted job ID is: 29f97aed-d182-4b8f-a365-29ad95a7a0a2
+#>     Your submitted job ID is: 56aa456f-8cb3-434b-bbcf-fa45c4d8693d
 #> .
 #> 
 #>  -- Step 3/3: Retrieving the results.
-#> Retrieving results of submitted enrichment request with ID: 29f97aed-d182-4b8f-a365-29ad95a7a0a2
+#> Retrieving results of submitted enrichment request with ID: 56aa456f-8cb3-434b-bbcf-fa45c4d8693d
 ```
 
 ### Approach 2: Going step-by-step
@@ -137,28 +135,26 @@ an in-depth review.
 
 ------------------------------------------------------------------------
 
-## Convert miRNA accessions
+## Convert miRNA identifiers
 
-miEAA only recognizes miRBASE version 22 accessions. You can use
+miEAA uses miRBase version 22 identifiers. Use
 [`rba_mieaa_convert_version()`](https://rbioapi.moosa-r.com/reference/rba_mieaa_convert_version.md)
-to convert miRNA accession between different miRBASE versions. Also, as
-stated before, miEAA differentiate between precursor and mature miRNA
-accessions, to convert between these 2 accession types, use
-[`rba_mieaa_convert_type()`](https://rbioapi.moosa-r.com/reference/rba_mieaa_convert_type.md).
+to convert miRNA identifiers between supported miRBase versions. miEAA
+also distinguishes mature and precursor miRNA identifiers; use
+[`rba_mieaa_convert_type()`](https://rbioapi.moosa-r.com/reference/rba_mieaa_convert_type.md)
+to convert between these identifier types.
 
 ------------------------------------------------------------------------
 
 ## How to Cite?
 
-To cite miEAA (Please see
-<https://ccb-compute2.cs.uni-saarland.de/mieaa2/>):
+To cite miEAA (see <https://ccb-compute2.cs.uni-saarland.de/mieaa/>):
 
-- Fabian Kern, Tobias Fehlmann, Jeffrey Solomon, Louisa Schwed, Nadja
-  Grammes, Christina Backes, Kendall Van Keuren-Jensen, David Wesley
-  Craig, Eckart Meese, Andreas Keller, miEAA 2.0: integrating
-  multi-species microRNA enrichment analysis and workflow management
-  systems, Nucleic Acids Research, Volume 48, Issue W1, 02 July 2020,
-  Pages W521–W528, <https://doi.org/10.1093/nar/gkaa309>
+- Ernesto Aparicio-Puerta, Pascal Hirsch, Georges P. Schmartz, Fabian
+  Kern, Tobias Fehlmann, Andreas Keller, miEAA 2023: updates, new
+  functional microRNA sets and improved enrichment visualizations,
+  Nucleic Acids Research, Volume 51, Issue W1, 5 July 2023, Pages
+  W319–W325, <https://doi.org/10.1093/nar/gkad392>
 
 To cite rbioapi:
 
@@ -171,11 +167,11 @@ To cite rbioapi:
 
 ## Links
 
-- [This article in rbioapi
-  documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html "2.B: miEEA & rbioapi")
+- [This article on the rbioapi documentation
+  site](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html "2.C: miEAA & rbioapi")
 
-- [Functions references in rbioapi
-  documentation site](https://rbioapi.moosa-r.com/reference/index.html#section-mieaa-rba-mieaa- "rbioapi reference")
+- [Function references on the rbioapi documentation
+  site](https://rbioapi.moosa-r.com/reference/index.html#section-mieaa-rba-mieaa- "rbioapi reference")
 
 - [rbioapi vignette
   index](https://rbioapi.moosa-r.com/articles/rbioapi.md "rbioapi: User-Friendly R Interface to Biologic Web Services' API")

@@ -69,21 +69,21 @@ Functions that connect you to [JASPAR](https://jaspar.elixir.no/)
 ## miEAA (rba_mieaa\_\*)
 
 Functions that connect you to
-[miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2/) (miRNA
+[miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa/) (miRNA
 Enrichment Analysis and Annotation Tool) API resources.
 
 - [`rba_mieaa_cats()`](https://rbioapi.moosa-r.com/reference/rba_mieaa_cats.md)
   : Get Supported Enrichment Categories for a Species and miRNA Type
 - [`rba_mieaa_convert_type()`](https://rbioapi.moosa-r.com/reference/rba_mieaa_convert_type.md)
-  : Convert Between Mature and precursor miRNA Accession
+  : Convert Between Mature and Precursor miRNA Identifiers
 - [`rba_mieaa_convert_version()`](https://rbioapi.moosa-r.com/reference/rba_mieaa_convert_version.md)
-  : Convert miRNA accession Between Different miRBase Versions
+  : Convert miRNA Identifiers Between Different miRBase Versions
 - [`rba_mieaa_enrich()`](https://rbioapi.moosa-r.com/reference/rba_mieaa_enrich.md)
   : A One-step Wrapper for miRNA Enrichment Using miEAA
 - [`rba_mieaa_enrich_results()`](https://rbioapi.moosa-r.com/reference/rba_mieaa_enrich_results.md)
-  : Retrieve Results of a finished Enrichment Analysis from miEAA
+  : Retrieve the Results of a Finished miEAA Enrichment Analysis
 - [`rba_mieaa_enrich_status()`](https://rbioapi.moosa-r.com/reference/rba_mieaa_enrich_status.md)
-  : Check Status of a Submitted Enrichment Analysis in miEAA
+  : Check the Status of a Submitted miEAA Enrichment Analysis
 - [`rba_mieaa_enrich_submit()`](https://rbioapi.moosa-r.com/reference/rba_mieaa_enrich_submit.md)
   : Submit miEAA miRNA Enrichment Analysis Request
 

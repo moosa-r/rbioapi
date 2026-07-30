@@ -2,7 +2,7 @@
 
 Among the databases and web services currently supported by rbioapi
 [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr"),
-[miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "miRNA Enrichment Analysis and Annotation Tool (miEAA)"),
+[miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa/ "miRNA Enrichment Analysis and Annotation Tool (miEAA)"),
 [PANTHER](http://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)"),
 [Reactome](https://reactome.org/), and
 [STRING](https://string-db.org/ "STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis")
@@ -84,7 +84,7 @@ Many web services supported by rbioapi provide tools to perform
 over-representation analysis against the gene sets curated in their
 databases. Among the databases and web services currently supported by
 rbioapi, [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr"),
-[miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2 "miRNA Enrichment Analysis and Annotation Tool (miEAA)"),
+[miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa/ "miRNA Enrichment Analysis and Annotation Tool (miEAA)"),
 [PANTHER](https://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)"),
 [Reactome](https://reactome.org/), and
 [STRING](https://string-db.org/ "STRING: Protein-Protein Interaction Networks Functional Enrichment Analysis")
@@ -154,7 +154,7 @@ enrichr_enrich <- rba_enrichr(
 #> --Step 2/3:
 #> Uploading 1214 gene symbols to Enrichr human.
 #> --Step 3/3:
-#> Performing Enrichr analysis on gene-list 134113353 against Enrichr human library: KEGG_2021_Human.
+#> Performing Enrichr analysis on gene-list 134160891 against Enrichr human library: KEGG_2021_Human.
 ```
 
 In the `gene_set_library` parameter, you can provide multiple gene set
@@ -176,7 +176,7 @@ enrichr_enrich_kegg <- rba_enrichr(
 #> --Step 2/3:
 #> Uploading 1214 gene symbols to Enrichr human.
 #> --Step 3/3:
-#> Performing Enrichr analysis on gene-list 134113359 using multiple Enrichr human libraries.
+#> Performing Enrichr analysis on gene-list 134160902 using multiple Enrichr human libraries.
 #> Note: You have selected '7' Enrichr human libraries. Note that for each library, a separate call should be sent to Enrichr server. Thus, this could take a while depending on the number of selected libraries.
 ```
 
@@ -586,17 +586,19 @@ Visualization of enrichment analysis results
 ## miEAA
 
 The miRNA Enrichment Analysis and Annotation Tool
-([miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa2/ "https://ccb-compute2.cs.uni-saarland.de/mieaa2"))
+([miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa/ "miRNA Enrichment Analysis and Annotation Tool"))
 is a service provided by the [Chair for Clinical Bioinformatics at
 Saarland University](https://www.ccb.uni-saarland.de/). What makes miEAA
 unique among other services presented here is that miEAA curates miRNA
 sets. Hence you can directly perform miRNA enrichment analysis across
 various species with the services miEAA provides.
 
-We have in-depth covered performing enrichment analysis with miEAA in
-the vignette article “[miEEA &
-rbioapi](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.md "2.C: miEEA & rbioapi")[i](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html "2.A: Enrichr & rbioapi")”.
-Therefore, we will only provide a brief demonstration here.
+Performing enrichment analysis with miEAA is covered in depth in the
+vignette article [miEAA &
+rbioapi](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.md "2.C: miEAA & rbioapi")
+([documentation-site
+version](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html)).
+Therefore, we provide only a brief demonstration here.
 
 We can not use our `covid_critical` gene list here. We rather use a
 miRNA list from the paper “[A. Parray et al.: Vaccines 9, 1056
@@ -625,7 +627,7 @@ rba_mieaa_cats(
   mirna_type = "mature",
   species = 9606 #Homo sapiens
 )
-#> Retrieving available enrichment categories of miRNA for Homo sapiens.
+#> Retrieving all enrichment categories of miRNA for Homo sapiens.
 #> Annotations derived over miRTarBase (Gene Ontology) 
 #>                    "GO_Annotations_indirect_mature" 
 #>                          Annotation (Gene Ontology) 
@@ -710,11 +712,11 @@ mieaa_enrich <- rba_mieaa_enrich(
 #> Submitting ORA enrichment request for 23 miRNA IDs of species Homo sapiens to miEAA servers.
 #> 
 #>  -- Step 2/3: Checking for Submitted enrichment analysis's status every 5 seconds.
-#>     Your submitted job ID is: 13b4fba0-b9ad-4727-a773-4c774071da1b
+#>     Your submitted job ID is: d8d16f19-2fcf-4687-afcd-81d18096bc77
 #> .
 #> 
 #>  -- Step 3/3: Retrieving the results.
-#> Retrieving results of submitted enrichment request with ID: 13b4fba0-b9ad-4727-a773-4c774071da1b
+#> Retrieving results of submitted enrichment request with ID: d8d16f19-2fcf-4687-afcd-81d18096bc77
 ```
 
 ------------------------------------------------------------------------

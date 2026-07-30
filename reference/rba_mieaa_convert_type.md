@@ -1,9 +1,9 @@
-# Convert Between Mature and precursor miRNA Accession
+# Convert Between Mature and Precursor miRNA Identifiers
 
-miRBase miRNA accession could refer to either mature or precursor
-miRNAs. (see: [A uniform system for microRNA
+miRBase identifiers can refer to either mature or precursor miRNAs.
+(see: [A uniform system for microRNA
 annotation](https://rnajournal.cshlp.org/content/9/3/277)). Use this
-function to mature miRNA accession to corresponding miRNA accessions or
+function to convert mature miRNA identifiers to precursor identifiers or
 vice versa.
 
 ## Usage
@@ -22,24 +22,27 @@ rba_mieaa_convert_type(
 
 - mirna:
 
-  A vector of miRNA accessions to be converted.
+  Character vector: miRNA identifiers to convert.
 
 - input_type:
 
-  Type of your supplied miRNA accession. either "mature" or "precursor".
+  Character: Type of the supplied miRNA identifiers; either "mature" or
+  "precursor".
 
 - only_unique:
 
-  (logical) miRBase precursor and mature miRNA accessions are not
-  uniquely mapped. (i.e. you may get more than one results for a given
-  accession). set this to TRUE to only retrieve the unique mappings.
-  (default = FALSE)
+  Logical: (default = `FALSE`) Mature and precursor miRNA identifiers do
+  not always map uniquely. If `TRUE`, do not return mappings for inputs
+  with multiple matches. In tabular output, these inputs remain as rows
+  with `"-"` in the output column.
 
 - simple_output:
 
-  (logical) If FALSE (default), the result will be a two-columned data
-  frame with your input and output accessions. Otherwise, if TRUE, only
-  the output miRNA accessions will be returned.
+  Logical: (default = `FALSE`) If `FALSE`, return a two-column data
+  frame containing the input and output identifier mappings; multiple
+  output identifiers are separated by semicolons. If `TRUE`, expand
+  one-to-many mappings into a flat character vector of converted
+  identifiers without their association with the supplied identifiers.
 
 - ...:
 
@@ -49,28 +52,28 @@ rba_mieaa_convert_type(
 
 ## Value
 
-Depending on the arguments, a data frame or a character vectors
-containing the miRNA accessions in your output version.
+Depending on `simple_output`, a data frame or character vector
+containing the mappings returned by miEAA. Unrecognized or unmapped
+supplied identifiers can be omitted from the output.
 
 ## Corresponding API Resources
 
 "POST
-https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/mirna_precursor_converter/"
+https://ccb-compute2.cs.uni-saarland.de/mieaa/api/v1/mirna_precursor_converter/"
 
 ## References
 
-- Fabian Kern, Tobias Fehlmann, Jeffrey Solomon, Louisa Schwed, Nadja
-  Grammes, Christina Backes, Kendall Van Keuren-Jensen, David Wesley
-  Craig,Eckart Meese, Andreas Keller, miEAA 2.0: integrating
-  multi-species microRNA enrichment analysis and workflow management
-  systems, Nucleic Acids Research, Volume 48, Issue W1, 02 July 2020,
-  Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
+- Ernesto Aparicio-Puerta, Pascal Hirsch, Georges P. Schmartz, Fabian
+  Kern, Tobias Fehlmann, Andreas Keller, miEAA 2023: updates, new
+  functional microRNA sets and improved enrichment visualizations,
+  Nucleic Acids Research, Volume 51, Issue W1, 5 July 2023, Pages
+  W319–W325, https://doi.org/10.1093/nar/gkad392
 
 - [miEAA browsable API
-  tutorial](https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/)
+  tutorial](https://ccb-compute2.cs.uni-saarland.de/mieaa/tutorial/api/)
 
-- [Citations note on miEAA
-  website](https://ccb-compute2.cs.uni-saarland.de/mieaa2/)
+- [Citation note on miEAA
+  website](https://ccb-compute2.cs.uni-saarland.de/mieaa/)
 
 ## See also
 

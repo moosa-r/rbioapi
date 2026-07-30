@@ -1,10 +1,11 @@
-# Check Status of a Submitted Enrichment Analysis in miEAA
+# Check the Status of a Submitted miEAA Enrichment Analysis
 
 After you have submitted your enrichment analysis (using
 [`rba_mieaa_enrich_submit`](https://rbioapi.moosa-r.com/reference/rba_mieaa_enrich_submit.md))
 and retrieved a job-id, you can use this function to check the status of
-your job. Status value equal to 100 means that your requested analysis
-has finished and you may retrieve the results using
+the job. The status is either a numeric completion percentage or
+`"FAILED"`. A status value equal to 100 means that the requested
+analysis has finished and you may retrieve the results using
 [`rba_mieaa_enrich_results`](https://rbioapi.moosa-r.com/reference/rba_mieaa_enrich_results.md).
 
 ## Usage
@@ -17,7 +18,7 @@ rba_mieaa_enrich_status(job_id, ...)
 
 - job_id:
 
-  The job-id (a character string) of a submitted enrichment analysis.
+  Character: Job ID of a submitted enrichment analysis.
 
 - ...:
 
@@ -27,8 +28,9 @@ rba_mieaa_enrich_status(job_id, ...)
 
 ## Value
 
-A list containing the status value for a analysis that corresponds to
-your supplied job-id.
+A list containing a `status` element with either the numeric completion
+percentage or `"FAILED"` for the supplied job ID. A completed job also
+includes its results URL.
 
 ## Details
 
@@ -41,22 +43,21 @@ miRNA-set using miEAA.
 ## Corresponding API Resources
 
 "GET
-https://ccb-compute2.cs.uni-saarland.de/mieaa2/api/v1/job_status/{job_id}"
+https://ccb-compute2.cs.uni-saarland.de/mieaa/api/v1/job_status/{job_id}/"
 
 ## References
 
-- Fabian Kern, Tobias Fehlmann, Jeffrey Solomon, Louisa Schwed, Nadja
-  Grammes, Christina Backes, Kendall Van Keuren-Jensen, David Wesley
-  Craig,Eckart Meese, Andreas Keller, miEAA 2.0: integrating
-  multi-species microRNA enrichment analysis and workflow management
-  systems, Nucleic Acids Research, Volume 48, Issue W1, 02 July 2020,
-  Pages W521–W528, https://doi.org/10.1093/nar/gkaa309
+- Ernesto Aparicio-Puerta, Pascal Hirsch, Georges P. Schmartz, Fabian
+  Kern, Tobias Fehlmann, Andreas Keller, miEAA 2023: updates, new
+  functional microRNA sets and improved enrichment visualizations,
+  Nucleic Acids Research, Volume 51, Issue W1, 5 July 2023, Pages
+  W319–W325, https://doi.org/10.1093/nar/gkad392
 
 - [miEAA browsable API
-  tutorial](https://ccb-compute2.cs.uni-saarland.de/mieaa2/tutorial/api/)
+  tutorial](https://ccb-compute2.cs.uni-saarland.de/mieaa/tutorial/api/)
 
-- [Citations note on miEAA
-  website](https://ccb-compute2.cs.uni-saarland.de/mieaa2/)
+- [Citation note on miEAA
+  website](https://ccb-compute2.cs.uni-saarland.de/mieaa/)
 
 ## See also
 

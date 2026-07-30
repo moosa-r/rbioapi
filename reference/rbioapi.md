@@ -15,7 +15,7 @@ or services you often use.
 
 - JASPAR
 
-- MiEAA
+- miEAA
 
 - PANTHER
 
