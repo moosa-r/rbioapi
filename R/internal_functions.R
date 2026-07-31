@@ -262,8 +262,19 @@
 #' @noRd
 .rba_http_status <- function(http_status, verbose = FALSE){
   #ref:
+  if (
+    !is.atomic(http_status) ||
+    length(http_status) != 1L ||
+    is.na(http_status) ||
+    !grepl("^[12345]\\d\\d$", http_status)
+  ) {
+    stop(
+      "Internal Error; `http_status` should be a single three-digit ",
+      "HTTP status code.",
+      call. = TRUE
+    )
+  }
   http_status <- as.character(http_status)
-  stopifnot(grepl("^[12345]\\d\\d$", http_status))
 
   resp <- switch(
     substr(http_status, 1, 1),
@@ -946,7 +957,7 @@
       timeout = list(arg = "timeout", class = "numeric", len = 1, ran = c(0.001, 3600)),
       dir_name = list(arg = "dir_name", class = "character", len = 1),
       diagnostics = list(arg = "diagnostics", class = "logical", len = 1),
-      retry_max = list(arg = "retry_max", class = "numeric", len = 1),
+      retry_max = list(arg = "retry_max", class = "numeric", len = 1, min_val = 0),
       progress = list(arg = "progress", class = "logical", len = 1),
       save_file = list(arg = "save_file", class = c("logical", "character"), len = 1),
       skip_error = list(arg = "skip_error", class = "logical", len = 1),
@@ -963,11 +974,26 @@
 
     ext_cond <- list(
       dir_name = list(
-        quote(grepl("[\\\\/:\"*?<>|]+", dir_name, perl = TRUE)),
+        quote(
+          !is.null(dir_name) &&
+            grepl("[\\\\/:\"*?<>|]+", dir_name, perl = TRUE)
+        ),
         "Invalid dir_name. Directory name cannot include these characters: \\/?%*:|<>"
       ),
+      retry_max = list(
+        quote(!is.null(retry_max) && !is.finite(retry_max)),
+        "Invalid retry_max. It should be a finite, non-negative numeric scalar."
+      ),
+      retry_wait = list(
+        quote(!is.null(retry_wait) && !is.finite(retry_wait)),
+        "Invalid retry_wait. It should be a finite, non-negative numeric scalar."
+      ),
       save_file = list(
-        quote(!is.logical(save_file) && !grepl("^[a-zA-z]:|^\\\\\\w|^/|\\w+\\.\\w+$", save_file)),
+        quote(
+          !is.null(save_file) &&
+            !is.logical(save_file) &&
+            !grepl("^[a-zA-z]:|^\\\\\\w|^/|\\w+\\.\\w+$", save_file)
+        ),
         "Invalid save_file. You should set it to 'logical' or 'a valid file path'."
       )
     )
@@ -1209,65 +1235,72 @@
 #' @family internal_arguments_check
 #' @noRd
 .rba_args_cond <- function(cond_i) {
-  if (is.call(cond_i[[1]])) {
+  cond_n <- length(cond_i)
 
-    cond_i_1 <- eval(cond_i[[1]], envir = parent.frame(3))
-
-  } else if (is.character(cond_i[[1]])) {
-
-    cond_i_1 <- eval(parse(text = cond_i[[1]]), envir = parent.frame(3))
-
-  } else {
-
+  ## Validate the condition construct
+  if (!is.list(cond_i) || !(cond_n %in% 1:3)) {
     stop(
-      "Internal Error; the first element in the condition sublist",
-      "should be either a charachter or quoted call!",
+      "Internal Error; invalid condition definition.",
       call. = TRUE
     )
+  }
 
+  cond_expr <- cond_i[[1]]
+  cond_chr <- is.character(cond_expr) &&
+    length(cond_expr) == 1L &&
+    !is.na(cond_expr)
+
+  if (!is.call(cond_expr) && !cond_chr) {
+    stop(
+      "Internal Error; the first element in the condition sublist ",
+      "should be either a character scalar or quoted call.",
+      call. = TRUE
+    )
+  }
+
+  if (cond_chr) {
+    cond_expr <- parse(text = cond_expr)
+  }
+  cond_i_1 <- eval(cond_expr, envir = parent.frame(3))
+
+  if (
+    !is.logical(cond_i_1) ||
+    length(cond_i_1) != 1L ||
+    is.na(cond_i_1)
+  ) {
+    stop(
+      "Internal Error; an evaluated condition should return one ",
+      "non-missing logical value.",
+      call. = TRUE
+    )
+  }
+
+  if (!isTRUE(cond_i_1)) {
+    return(NA)
   }
 
   ## Create an Error message
-  if (isTRUE(cond_i_1)) {
-
-    err_obj <- switch(
-      as.character(length(cond_i)),
-      "2" = {
-        if (is.character(cond_i[[2]])) {
-          list(
-            msg = cond_i[[2]],
-            warn = FALSE
-          )
-        } else {
-          list(
-            msg = sprintf(
-              "Argument's conditions are not satisfied; `%s` is TRUE.",
-              as.character(enquote(cond_i[[1]]))[[2]]
-            ),
-            warn = isTRUE(cond_i[[2]])
-          )
-        }
-      },
-      "3" = list(
-        msg = cond_i[[2]],
-        warn = isTRUE(cond_i[[3]])
-      ),
-      "1" = list(
-        msg = sprintf(
-          "Argument's conditions are not satisfied; `%s` is TRUE.",
-          as.character(enquote(cond_i[[1]]))[[2]]
-        ),
-        warn = FALSE
-      ),
-      stop("Internal Error; invalid condition: ", enquote(cond_i[[1]])[[2]], call. = TRUE)
+  if (cond_n == 3L) {
+    err_obj <- list(
+      msg = cond_i[[2]],
+      warn = isTRUE(cond_i[[3]])
     )
-    return(err_obj)
-
+  } else if (cond_n == 2L && is.character(cond_i[[2]])) {
+    err_obj <- list(
+      msg = cond_i[[2]],
+      warn = FALSE
+    )
   } else {
-
-    return(NA)
-
+    err_obj <- list(
+      msg = sprintf(
+        "Argument's conditions are not satisfied; `%s` is TRUE.",
+        as.character(enquote(cond_i[[1]]))[[2]]
+      ),
+      warn = cond_n == 2L && isTRUE(cond_i[[2]])
+    )
   }
+
+  return(err_obj)
 }
 
 #' Internal user's Arguments Check
@@ -1343,7 +1376,11 @@
     X = cons,
     FUN = function(cons_i){
       cons_i[["evl_arg"]] <- try(
-        expr = get(x = cons_i[["arg"]], envir = parent.frame(3)),
+        expr = get(
+          x = cons_i[["arg"]],
+          envir = parent.frame(3),
+          inherits = FALSE
+        ),
         silent = TRUE
       )
       return(cons_i)
@@ -1465,16 +1502,16 @@
         )
         cond_msg <- sprintf(
           "Your supplied arguments contains the following `%s Conditional Issues`.:%s",
-          length(cond_msg),
+          length(cond_err),
           cond_msg
         )
       }
       ## 3.3 Take actions for the errors
-      if (cond_warning == TRUE || all(vapply(X = cond_err,
-                                             FUN = function(x){
-                                               x[["warn"]]
-                                             },
-                                             FUN.VALUE = logical(1)))) {
+      if (isTRUE(cond_warning) || all(vapply(X = cond_err,
+                                            FUN = function(x){
+                                              x[["warn"]]
+                                            },
+                                            FUN.VALUE = logical(1)))) {
         warning(cond_msg, call. = diagnostics)
       } else {
         stop(cond_msg, call. = diagnostics)}

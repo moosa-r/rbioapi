@@ -1533,7 +1533,7 @@ rba_reactome_interactors_psicquic <- function(proteins = NULL,
     ),
     cond = list(
       list(
-        quote(sum(!is.null(proteins), !is.null(resource))),
+        quote(sum(!is.null(proteins), !is.null(resource)) == 1),
         "You should supply 'proteins' and 'resource' togeather."
       )
     )

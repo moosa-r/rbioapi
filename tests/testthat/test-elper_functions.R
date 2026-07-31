@@ -14,6 +14,19 @@ test_that("rba_options works", {
   expect_identical(object = getOption("rba_verbose"), expected = verbose_before)
   expect_error(object = rba_options(save_file = "test.txt"), regexp = "logical")
 
+  retry_before <- options("rba_retry_max", "rba_retry_wait")
+  on.exit(options(retry_before), add = TRUE)
+
+  expect_error(object = rba_options(retry_max = -1), regexp = "retry_max")
+  expect_error2(
+    obj = rba_options(retry_max = Inf, retry_wait = Inf),
+    pattern = c("retry_max", "retry_wait")
+  )
+  expect_identical(
+    object = options("rba_retry_max", "rba_retry_wait"),
+    expected = retry_before
+  )
+
 })
 
 test_that("rba_pages works", {

@@ -71,6 +71,17 @@ test_that(".rba_args works", {
     regexp = "arg22"
   )
 
+  # A stale value outside the caller must not satisfy a missing local argument
+  stale_limit <- 10
+  expect_error(
+    object = .rba_args_nested(
+      cons = list(
+        list(arg = "stale_limit", class = "numeric")
+      )
+    ),
+    regexp = "stale_limit"
+  )
+
   # Drops the argument if class is not correct
   expect_error2(
     obj = .rba_args_nested(
@@ -115,5 +126,35 @@ test_that(".rba_args works", {
   expect_warning(
     object = .rba_args_nested(cond = cond_input, bg = 1, sml = 2)
     )
+
+  # A vectorized condition must not silently pass because its result is not TRUE
+  expect_error(
+    object = .rba_args_nested(
+      cond = list(
+        list(quote(values < threshold), "values should meet the threshold")
+      ),
+      values = c(2, 0),
+      threshold = 1
+    ),
+    regexp = "one non-missing logical"
+  )
+
+  # Aggregated failures retain every message and report the correct count
+  expect_error2(
+    obj = .rba_args_nested(
+      cond = list(
+        list(quote(minimum > maximum), "minimum exceeds maximum"),
+        list(quote(value < minimum), "value is below minimum")
+      ),
+      value = 0,
+      minimum = 2,
+      maximum = 1
+    ),
+    pattern = c(
+      "2 Conditional Issues",
+      "minimum exceeds maximum",
+      "value is below minimum"
+    )
+  )
 
 })

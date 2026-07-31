@@ -15,7 +15,8 @@ test_that(".rba_http_status works", {
     ignore.case = TRUE
   )
   expect_error(
-    object = .rba_http_status("999999", verbose = TRUE)
+    object = .rba_http_status("999999", verbose = TRUE),
+    regexp = "single three-digit HTTP status code"
   )
 
 })
