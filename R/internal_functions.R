@@ -1468,6 +1468,7 @@
   }
 
   ## 2.4 Take actions for the errors
+  errors <- unlist(errors, recursive = TRUE, use.names = FALSE)
   if (length(errors) == 1) {
 
     stop(errors, call. = diagnostics)
@@ -1824,7 +1825,14 @@
       ifnotfound = FALSE,
       envir = parent.frame(1)
     )
-    if (is.na(save_to)) {save_to <- FALSE}
+  }
+
+  if (
+    is.atomic(save_to) &&
+    length(save_to) == 1L &&
+    is.na(save_to)
+  ) {
+    save_to <- FALSE
   }
 
   if (!isFALSE(save_to)) {
