@@ -13,22 +13,23 @@ rba_reactome_interactors_static(
 )
 }
 \arguments{
-\item{proteins}{Uniprot proteins accession(s). If endpoint = "pathway",
-only a single protein accession can be supplied.}
+\item{proteins}{Character or Numeric vector: UniProt protein accession(s). If
+\code{endpoint = "pathways"}, only a single protein accession can be
+supplied.}
 
-\item{endpoint}{Can be one of: \enumerate{
-\item "details": To return a detailed information of your supplied
-protein(s) accession.
-\item "summary": To return a summary of your supplied protein(s) accession
-\item "pathway": To return a list of pathways containing the interacting
-molecules (excluding TopLevelPathway class).}}
+\item{endpoint}{Character: (default = \code{"details"}) Can be one of:
+\enumerate{ \item "details": Return detailed information for the supplied
+accessions. \item "summary": Return summary information for the supplied
+accessions. \item "pathways": Return pathways containing the interacting
+molecules (excluding the TopLevelPathway class).}}
 
-\item{only_diagrammed}{Logical: (only when "endpoint = "pathway")
-If TRUE, pathways without diagram will be excluded. (default = FALSE)}
+\item{only_diagrammed}{Logical: (default = \code{FALSE}) (only when
+\code{endpoint = "pathways"}) If TRUE, pathways without diagram will be
+excluded.}
 
-\item{species}{Only when "endpoint = "pathway", The scientific name
-of the species to search for the pathways. See
- \code{\link{rba_reactome_species}} or
+\item{species}{Character: (optional) (only when \code{endpoint = "pathways"})
+The scientific name of the species to search for pathways. See
+\code{\link{rba_reactome_species}} or
  \href{https://reactome.org/content/schema/objects/Species/}{Reactome
  Data Schema: Entries: Species}.}
 
@@ -40,14 +41,16 @@ List which it's content varies based on the  supplied "endpoint"
   argument.
 }
 \description{
-Reactome maintain a locally host a version of IntAct(Static) interactions
-  database. Using this function, you can retrieve IntAct information of
-  a protein(s) in two scenarios: \enumerate{
-  \item If endpoint = "details" or "summary": Retrieve a detailed/summary
-    information of your supplied protein accession(s) from IntAct database.
-  \item If endpoint = "pathway", Retrieve a list of Reactome pathways which
+Reactome maintains a locally hosted snapshot of the IntAct interactions
+  database. Using this function, you can retrieve IntAct information for
+  one or more proteins in two scenarios: \enumerate{
+  \item If \code{endpoint = "details"} or \code{endpoint = "summary"},
+    retrieve detailed or summary information for the supplied accessions.
+  \item If \code{endpoint = "pathways"}, retrieve Reactome pathways which
   include your supplied protein accession. Pathways with the class
   "TopLevelPathway" will be excluded.}
+  Results depend on Reactome's current static interaction snapshot; a valid
+  accession can therefore have no mapped pathways.
 }
 \section{Corresponding API Resources}{
 
@@ -55,12 +58,12 @@ Reactome maintain a locally host a version of IntAct(Static) interactions
  molecules/details"
  \cr "POST https://reactome.org/ContentService/interactors/static/
  molecules/summary"
- \cr "GET https://reactome.org/ContentService/interactors/static/
- molecules/pathways"
+ \cr "GET https://reactome.org/ContentService/interactors/static/molecule/
+ \{identifier\}/pathways"
 }
 
 \examples{
-\donttest{
+\dontrun{
 rba_reactome_interactors_static(proteins = "Q9BXM7-1",
     endpoint = "pathways", species = "Homo sapiens")
 }
@@ -76,16 +79,9 @@ rba_reactome_interactors_static(proteins = c("Q9BXM7-1", "Q13501"),
 }
 \references{
 \itemize{
-  \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-  Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-  Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-  Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-  Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-  Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-  Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-  pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-  https://doi.org/10.1093/nar/gkab1028
+  \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+  Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+  Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed

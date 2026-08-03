@@ -22,27 +22,29 @@ the species you want to compare with Homo sapiens. See
  \href{https://reactome.org/content/schema/objects/Species/}{Reactome
  Data Schema: Entries: Species}.}
 
-\item{sort_by}{Sort the result based on what column? available choices
-are: "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
-"FOUND_ENTITIES", "FOUND_INTERACTORS", "FOUND_REACTIONS", "ENTITIES_RATIO",
-"ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO"}
+\item{sort_by}{Character: (default = \code{"ENTITIES_PVALUE"}) Sort the
+result based on what column? Available choices are: "NAME",
+"TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS", "FOUND_ENTITIES",
+"FOUND_INTERACTORS", "FOUND_REACTIONS", "ENTITIES_RATIO",
+"ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO".}
 
-\item{order}{Sort Order. Can be either "ASC" (default) or "DESC".}
+\item{order}{Character: (default = \code{"ASC"}) Sort Order. Can be either
+"ASC" or "DESC".}
 
-\item{resource}{Filter results based on the resource. Default is "TOTAL",
-available choices are: "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
-"MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
+\item{resource}{Character: (default = \code{"TOTAL"}) Filter results based on
+the resource. Available choices are: "TOTAL", "UNIPROT", "ENSEMBL",
+"CHEBI", "IUPHAR", "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND" or
 "PUBCHEM_COMPOUND".}
 
-\item{p_value}{Set a P value threshold. Only results with P value equal to
-or less than your supplied threshold will be returned. (default = 1,
-Meaning no P value filtering)}
+\item{p_value}{Numeric: (default = \code{1}) Set a P value threshold. Only
+results with P value equal to or less than your supplied threshold will be
+returned (1 means no P value filtering).}
 
-\item{min}{(numeric) Minimum number of entities that a pathways should have
-to be included in the results.}
+\item{min}{Numeric: (optional) Minimum number of entities that a pathways
+should have to be included in the results.}
 
-\item{max}{(numeric) Maximum number of entities that a pathways should have
-to be included in the results.}
+\item{max}{Numeric: (optional) Maximum number of entities that a pathways
+should have to be included in the results.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
@@ -58,10 +60,9 @@ Use This function to Compare human's manually-curated pathways
 Reactome incorporate manually curated human reactions and PANTHER's
   protein homology data to Computationally infer events in other eukaryotic
   species.
-\cr In version 73 (11 June 2020), using an orthology-based approach,
-  Homo sapiens events was projected to 18,654 orthologous pathways (with
-  81,835 orthologous proteins) in 15 non-human species.
-  See \href{https://reactome.org/documentation/inferred-events/}{
+\cr Reactome uses an orthology-based approach to project curated human
+  events to supported non-human species. See
+  \href{https://reactome.org/documentation/inferred-events/}{
   Reactome Computationally Inferred Events} for more information.
 }
 \section{Corresponding API Resources}{
@@ -77,16 +78,9 @@ rba_reactome_analysis_species(species_dbid = 48892)
 }
 \references{
 \itemize{
-  \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-  Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-  Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-  Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-  Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-  Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-  Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-  pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-  https://doi.org/10.1093/nar/gkab1028
+  \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+  Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+  Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed

@@ -13,10 +13,10 @@ rba_reactome_analysis_mapping(
 )
 }
 \arguments{
-\item{input}{A vector, local file path or URL that points to your
-identifiers list.}
+\item{input}{Character or Numeric vector: A vector, local file path or URL
+that points to your identifiers list.}
 
-\item{input_format}{(Optional) This function will automatically identify
+\item{input_format}{Character: (optional) This function will automatically identify
 your supplied input's format. But in case of unexpected issues or if you
 want to be explicit, set this argument to one of:\itemize{
 \item "vector": If you supplied a simple vector (numeric or character) as
@@ -26,10 +26,10 @@ correctly-formatted text file.
 \item "url": If you supplied a URL pointing to a correctly-formatted
 text file.}}
 
-\item{projection}{Logical (default = TRUE) Should non-human identifiers
+\item{projection}{Logical: (default = \code{TRUE}) Should non-human identifiers
 be projected to their human equivalents? (using Reactome orthology data)}
 
-\item{interactors}{Logical (default = FALSE) Should IntAct interaction data
+\item{interactors}{Logical: (default = \code{FALSE}) Should IntAct interaction data
 be included?}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
@@ -45,12 +45,10 @@ Use this function to map molecule identifiers of different species to
 }
 \section{Corresponding API Resources}{
 
-"GET https://reactome.org/AnalysisService/mapping"
-\cr "GET https://reactome.org/AnalysisService/mapping/form"
-\cr "GET https://reactome.org/AnalysisService/mapping/form/projection"
-\cr "GET https://reactome.org/AnalysisService/mapping"
-\cr "GET https://reactome.org/AnalysisService/mapping/url"
-\cr "GET https://reactome.org/AnalysisService/mapping/url/projection"
+"POST https://reactome.org/AnalysisService/mapping"
+\cr "POST https://reactome.org/AnalysisService/mapping/projection"
+\cr "POST https://reactome.org/AnalysisService/mapping/url"
+\cr "POST https://reactome.org/AnalysisService/mapping/url/projection"
 }
 
 \examples{
@@ -61,16 +59,9 @@ rba_reactome_analysis_mapping(c("Q8SQ34", "cd40"))
 }
 \references{
 \itemize{
-  \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-  Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-  Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-  Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-  Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-  Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-  Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-  pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-  https://doi.org/10.1093/nar/gkab1028
+  \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+  Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+  Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed

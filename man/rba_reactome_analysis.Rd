@@ -21,13 +21,14 @@ rba_reactome_analysis(
 )
 }
 \arguments{
-\item{input}{A vector, data frame, matrix or a local file path or URL
-that points to your data. See "Details section" for more information of
-how to organize and supply your input.}
+\item{input}{Character or Numeric vector, Data frame, or Matrix: A vector,
+data frame, matrix or a local file path or URL that points to your data.
+See "Details section" for more information of how to organize and supply
+your input.}
 
-\item{input_format}{(Optional) This function will automatically identify
-your supplied input's format. But in case of unexpected issues or if you
-want to be explicit, set this argument to one of:\itemize{
+\item{input_format}{Character: (optional) This function will automatically
+identify your supplied input's format. But in case of unexpected issues or
+if you want to be explicit, set this argument to one of:\itemize{
 \item "table": If you supplied a data frame or matrix as input.
 \item "vector": If you supplied a simple vector (numeric or character) as
 input.
@@ -36,64 +37,66 @@ correctly-formatted text file.
 \item "url": If you supplied a URL pointing to a correctly-formatted
 text file.}}
 
-\item{projection}{Logical (default = TRUE) Should non-human identifiers
-be projected to their human equivalents? (using Reactome orthology data)}
+\item{projection}{Logical: (default = \code{TRUE}) Should non-human
+identifiers be projected to their human equivalents? (using Reactome
+orthology data)}
 
-\item{interactors}{Logical (default = FALSE) Should IntAct interaction data
-be used to increase the analysis background?}
+\item{interactors}{Logical: (default = \code{FALSE}) Should IntAct
+interaction data be used to increase the analysis background?}
 
-\item{species}{Numeric or Character: NCBI Taxonomy identifier (Human
-is 9606), species name (e.g. "Homo sapiens") or Reactome DbId (e.g
-Homo sapiens is 48887). See
- \code{\link{rba_reactome_species}} or
+\item{species}{Character or Numeric: (optional) NCBI Taxonomy identifier
+(Human is 9606), species name (e.g. "Homo sapiens") or Reactome DbId (e.g
+Homo sapiens is 48887). See \code{\link{rba_reactome_species}} or
  \href{https://reactome.org/content/schema/objects/Species/}{Reactome
  Data Schema: Entries: Species}. Note that you cannot supply the species
- parameter when projection parameter is TRUE.}
+parameter when projection parameter is TRUE.}
 
-\item{sort_by}{Sort the result based on what column? available choices
-are: "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
-"FOUND_ENTITIES", "FOUND_INTERACTORS", "FOUND_REACTIONS", "ENTITIES_RATIO",
+\item{sort_by}{Character: (default = \code{"ENTITIES_PVALUE"}) Sort the
+result based on what column? Available choices are: "NAME",
+"TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS", "FOUND_ENTITIES",
+"FOUND_INTERACTORS", "FOUND_REACTIONS", "ENTITIES_RATIO",
 "ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO"}
 
-\item{order}{Sort Order. Can be either "ASC" (default) or "DESC".}
+\item{order}{Character: (default = \code{"ASC"}) Sort Order. Can be either
+"ASC" or "DESC".}
 
-\item{resource}{Filter results based on the resource. Default is "TOTAL",
-available choices are: "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
-"MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
+\item{resource}{Character: (default = \code{"TOTAL"}) Filter results based on
+the resource. Available choices are: "TOTAL", "UNIPROT", "ENSEMBL",
+"CHEBI", "IUPHAR", "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND" or
 "PUBCHEM_COMPOUND".}
 
-\item{p_value}{Set a P value threshold. Only results with P value equal to
-or less than your supplied threshold will be returned. (default = 1,
-Meaning no P value filtering)}
+\item{p_value}{Numeric: (default = \code{1}) Set a P value threshold. Only
+results with P value equal to or less than your supplied threshold will be
+returned (1 means no P value filtering).}
 
-\item{include_disease}{Logical (default = TRUE) Should the disease pathways
-be included in the results?}
+\item{include_disease}{Logical: (default = \code{TRUE}) Should the disease
+pathways be included in the results?}
 
-\item{min}{(numeric) Minimum number of entities that a pathways should have
-to be included in the results.}
+\item{min}{Numeric: (optional) Minimum number of entities that a pathways
+should have to be included in the results.}
 
-\item{max}{(numeric) Maximum number of entities that a pathways should have
-to be included in the results.}
+\item{max}{Numeric: (optional) Maximum number of entities that a pathways
+should have to be included in the results.}
 
-\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
-arguments manual for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s arguments
+manual for more information on available options.}
 }
 \value{
 List containing the results and information of your analysis. Note
   that you can use the token returned in the "summary" sub-list of the
-  results (i.e. results$summary$token) to retrieve your results later or
-  in other Reactome analysis functions.
+  results (i.e. results$summary$token) to retrieve your results later or in
+  other Reactome analysis functions.
 }
 \description{
 Using this function, you can perform Reactome Analysis In a convenient way.
-  The Analysis Type will be chosen depending on your supplied
+The Analysis Type will be chosen depending on your supplied
   input:\enumerate{
   \item If you supply a vector or a single-columned table,
   "Over-Representation" analysis will be performed.
   \item If you supply a multi-column table, with the first column being
   molecules identifiers and the rest being numeral expression values,
   "Expression" analysis will be performed.}
-  See the details section for the accepted input types and format.
+See the details section for the accepted input types and format.
 }
 \details{
 You can supply your table or vector input in numerous formats:\enumerate{
@@ -102,34 +105,30 @@ You can supply your table or vector input in numerous formats:\enumerate{
   data. (The file should be formatted correctly, see below.)
   \item A URL pointing to a text file on the web that contains the molecules
   data. (The file should be formatted correctly, see below.}
-  If you supply a text file (as a local file path or URL), it should be
-  in TSV (Tab-Separated Values) format; Column names should start with "#"
-  character. Note that if you are providing the file for
-  "Over-Representation" analysis (i.e. Single columned-data) this header
-  line is optional and will be used as your 'Sample Name', otherwise it is
-  required.
-  \cr Also, form the "summary" element in the function's output, you can see
-  how Reactome Interpreted your input and subsequently the type of analysis
-  that has been performed.
-  \cr There is no strict criteria about the type of your molecules Identifiers,
-  Reactome will Map the IDs to it's internal database entities.
-  Nevertheless, You can check if all your identifiers has been found in
-  "identifiersNotFound" element in the function's output.
-  \cr After Any Analysis, Reactome will associate a token to your analysis.
-  It can be later used to in function that requires the token (e.g to retrieve
-  the analysis results, download pdf).
-  \cr Note that Reactome will store your token for only 7 days. You can
-  download your full results with
-  \code{\link{rba_reactome_analysis_download}}, and re-import it anytime to
-  reactome (using \code{\link{rba_reactome_analysis_import}}) to generate
-  a new token.
+If you supply a text file (as a local file path or URL), it should be in TSV
+(Tab-Separated Values) format; Column names should start with "#" character.
+Note that if you are providing the file for "Over-Representation" analysis
+(i.e. Single columned-data) this header line is optional and will be used as
+your 'Sample Name', otherwise it is required. \cr Also, form the "summary"
+element in the function's output, you can see how Reactome Interpreted your
+input and subsequently the type of analysis that has been performed. \cr
+There is no strict criteria about the type of your molecules Identifiers,
+Reactome will Map the IDs to it's internal database entities. Nevertheless,
+You can check if all your identifiers has been found in "identifiersNotFound"
+element in the function's output. \cr After any analysis, Reactome will
+associate a token with your analysis. It can later be used in functions that
+require the token (e.g. to retrieve the analysis results, download pdf). \cr
+Note that Reactome will store your token for only 7 days. You can download
+your full results with \code{\link{rba_reactome_analysis_download}}, and
+re-import it anytime to reactome (using
+\code{\link{rba_reactome_analysis_import}}) to generate a new token.
 }
 \section{Corresponding API Resources}{
-
- "POST https://reactome.org/AnalysisService/identifiers/form"
- \cr "POST https://reactome.org/AnalysisService/identifiers/url"
- \cr "POST https://reactome.org/AnalysisService/identifiers/form/projection"
- \cr "POST https://reactome.org/AnalysisService/identifiers/url/projection"
+ "POST
+  https://reactome.org/AnalysisService/identifiers/" \cr "POST
+  https://reactome.org/AnalysisService/identifiers/projection" \cr "POST
+  https://reactome.org/AnalysisService/identifiers/url" \cr "POST
+  https://reactome.org/AnalysisService/identifiers/url/projection"
 }
 
 \examples{
@@ -145,20 +144,12 @@ rba_reactome_analysis(input = "https://qazwsx.com/genes.txt")
 
 }
 \references{
-\itemize{
-  \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-  Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-  Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-  Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-  Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-  Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-  Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-  pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-  https://doi.org/10.1093/nar/gkab1028
-  \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-  Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-  Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
+\itemize{ \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla,
+  C., Beavers, D., Grentner, A., ... D’Eustachio, P. (2026). The Reactome
+  Knowledgebase 2026. Nucleic Acids Res., 54(D1), D673–D681. doi:
+  10.1093/nar/gkaf1223 \item Griss J, Viteri G, Sidiropoulos K, Nguyen V,
+  Fabregat A, Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative
+  Pathway Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
   PMID: 32907876.
   \item \href{https://reactome.org/AnalysisService/}{Reactome Analysis
   Services API Documentation}

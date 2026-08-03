@@ -13,16 +13,18 @@ rba_reactome_pathways_low(
 )
 }
 \arguments{
-\item{entity_id}{The entity that should exist in the pathways.}
+\item{entity_id}{Character: The entity that should exist in the pathways.}
 
-\item{with_diagram}{Logical: only include pathways with diagram?}
+\item{with_diagram}{Logical: (default = \code{FALSE}) only include pathways
+with diagram?}
 
-\item{all_forms}{Logical: should other variants of your supplied entity_id
-be considered? (e.g. same molecule but in different compartment,
-secretory form etc.) see \code{\link{rba_reactome_participants}}'s
-"Details section" to learn more about how Reactome classifies molecules.}
+\item{all_forms}{Logical: (default = \code{FALSE}) should other variants of
+your supplied entity_id be considered? (e.g. same molecule but in different
+compartment, secretory form etc.) see
+\code{\link{rba_reactome_participants}}'s "Details section" to learn more
+about how Reactome classifies molecules.}
 
-\item{species}{(optional) Numeric or Character: confine your search to a
+\item{species}{Character or Numeric: (optional) confine your search to a
 specific species by providing it's NCBI Taxonomy identifier
 (Human Taxonomy ID is 9606) or species name (e.g. "Homo sapiens").
 See \code{\link{rba_reactome_species}} or
@@ -66,16 +68,9 @@ rba_reactome_pathways_low(entity_id = "R-HSA-199420", with_diagram = TRUE,
 }
 \references{
 \itemize{
-  \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-  Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-  Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-  Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-  Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-  Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-  Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-  pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-  https://doi.org/10.1093/nar/gkab1028
+  \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+  Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+  Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed

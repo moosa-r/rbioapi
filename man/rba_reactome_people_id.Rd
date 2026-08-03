@@ -2,7 +2,7 @@
 % Please edit documentation in R/reactome_content.R
 \name{rba_reactome_people_id}
 \alias{rba_reactome_people_id}
-\title{A person by his identifiers}
+\title{Get a Person by Identifier}
 \usage{
 rba_reactome_people_id(
   person_id,
@@ -13,15 +13,16 @@ rba_reactome_people_id(
 )
 }
 \arguments{
-\item{person_id}{Reactome database ID (DbId) or ORCHID ID}
+\item{person_id}{Character: Reactome database ID (DbId) or ORCID identifier.}
 
-\item{authored_pathways}{Logical: Only return Pathway list authored by the
-person? (default = FALSE)}
+\item{authored_pathways}{Logical: (default = \code{FALSE}) Only return
+Pathway list authored by the person?}
 
-\item{publications}{Logical: Only return publications list authored by the
-person? (Defalt = FALSE)}
+\item{publications}{Logical: (default = \code{FALSE}) Only return
+publications list authored by the person?}
 
-\item{attribute_name}{(optional) A Reactome person attribute to return only.
+\item{attribute_name}{Character: (optional) A Reactome person attribute to
+return only.
 see \href{https://reactome.org/content/schema/Person/}{Reactome Data
 Schema: person} for available options.}
 
@@ -33,11 +34,16 @@ List containing the requested informations of your supplied
   person.
 }
 \description{
-A person by his identifiers
+Get a Person by Identifier
 }
 \section{Corresponding API Resources}{
 
- "GET https://reactome.org/ContentService"
+ "GET https://reactome.org/ContentService/data/person/\{id\}"
+ \cr "GET https://reactome.org/ContentService/data/person/\{id\}/
+ authoredPathways"
+ \cr "GET https://reactome.org/ContentService/data/person/\{id\}/publications"
+ \cr "GET https://reactome.org/ContentService/data/person/\{id\}/
+ \{attributeName\}"
 }
 
 \examples{
@@ -51,16 +57,9 @@ rba_reactome_people_id(person_id = "391309", authored_pathways = TRUE)
 }
 \references{
 \itemize{
-  \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-  Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-  Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-  Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-  Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-  Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-  Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-  pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-  https://doi.org/10.1093/nar/gkab1028
+  \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+  Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+  Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed

@@ -21,65 +21,69 @@ rba_reactome_exporter_diagram(
   sel = NULL,
   title = TRUE,
   margin = 15,
-  ehld = FALSE,
+  ehld = TRUE,
   ...
 )
 }
 \arguments{
-\item{event_id}{Reactome event's identifier.}
+\item{event_id}{Character: Reactome event's identifier.}
 
-\item{save_to}{NULL or Character:\itemize{
+\item{save_to}{NULL or Character: (default = \code{NULL}) \itemize{
 \item NULL: Save the file to an automatically-generated path.
 \item Character string: A valid file path to save the file to.}}
 
-\item{create_document}{logical: Create PDF document instead of image? (
-default = FALSE)}
+\item{create_document}{Logical: (default = \code{FALSE}) Create PDF document
+instead of image?}
 
-\item{resource}{The analysis resource for which the results will be
-overlaid on top of the given pathways overview,}
+\item{resource}{Character: (default = \code{"TOTAL"}) The analysis resource
+for which the results will be overlaid on top of the given pathways
+overview.}
 
-\item{diagram_profile}{Color profile of diagrams, should be either "Modern"
-(default) or "Standard".}
+\item{diagram_profile}{Character: (default = \code{"Modern"}) Color profile
+of diagrams, should be either "Modern" or "Standard".}
 
-\item{analysis_profile}{Color profile of analysis, should be one of:
-"Standard" (default), "Strosobar" or "Copper Plus"}
+\item{analysis_profile}{Character: (default = \code{"Standard"}) Color
+profile of analysis, should be one of: "Standard", "Strosobar" or "Copper
+Plus".}
 
-\item{token}{The analysis Token for which the results will be overlaid on
-top of the given pathways overview. see:
+\item{token}{Character: (optional) The analysis Token for which the results
+will be overlaid on top of the given pathways overview. see:
 \code{\link{rba_reactome_analysis}}.}
 
-\item{exp_column}{numeric: (only if token is supplied) Specify the
+\item{exp_column}{Numeric: (optional) (only if token is supplied) Specify the
 expression column for the overlay.}
 
-\item{document_level}{numeric: (Only if "create_document" is TRUE) if 0
-(default) the event's children will not be included in the PDF document.
- Set this to 1 to include event's children.}
+\item{document_level}{Numeric: (default = \code{1}) (Only if
+"create_document" is TRUE) use 0 to exclude the event's children or 1 to
+include them.}
 
-\item{output_format}{(Only if "create_document" is FALSE) Image format
-of the saved diagram. Can be one of: png (default), jpeg, svg or gif.}
+\item{output_format}{Character: (default = \code{"png"}) (Only if
+"create_document" is FALSE) Image format of the saved diagram. Can be one
+of: png, jpg, jpeg, svg or gif.}
 
-\item{image_quality}{Numeric: (Only if "create_document" is FALSE), a number
-ranging from 1 to 10. 1 is the lowest quality and 10 is the highest
-(default = 5).}
+\item{image_quality}{Numeric: (default = \code{5}) (Only if "create_document"
+is FALSE), a number ranging from 1 to 10. 1 is the lowest quality and 10 is
+the highest.}
 
-\item{flag_element}{(Only if "create_document" is FALSE) gene name, protein
-ID, chemical ID or Reactome ID of a diagram's element to be flagged.}
+\item{flag_element}{Character: (optional) (Only if "create_document" is
+FALSE) gene name, protein ID, chemical ID or Reactome ID of a diagram's
+element to be flagged.}
 
-\item{flg_interactors}{Logical: (Only if "create_document" is FALSE) Should
-the interactor be considered when flagging a diagram element? (default
-= TRUE)}
+\item{flg_interactors}{Logical: (default = \code{TRUE}) (Only if
+"create_document" is FALSE) Should the interactor be considered when
+flagging a diagram element?}
 
-\item{sel}{(Only if "create_document" is FALSE) CSV line for highlighting
-element(s) selection in the diagram.}
+\item{sel}{Character vector: (optional) (Only if "create_document" is FALSE)
+CSV line for highlighting element(s) selection in the diagram.}
 
-\item{title}{Logical: (Only if "create_document" is FALSE) Should the pathway
-name be displayed below the image? (default = TRUE)}
+\item{title}{Logical: (default = \code{TRUE}) (Only if "create_document" is
+FALSE) Should the pathway name be displayed below the image?}
 
-\item{margin}{Numeric: (Only if "create_document" is FALSE) A number ranging
-from 0 to 20 to set as the image's margin. (default = 15)}
+\item{margin}{Numeric: (default = \code{15}) (Only if "create_document" is
+FALSE) A number ranging from 0 to 20 to set as the image's margin.}
 
-\item{ehld}{logical: (Only if "create_document" is FALSE) Should
-"Enhanced High Level Diagram" be considered?}
+\item{ehld}{Logical: (default = \code{TRUE}) (Only if "create_document" is
+FALSE) Should Enhanced High Level Diagrams be considered?}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
@@ -142,16 +146,9 @@ rba_reactome_exporter_diagram(event_id = "R-HSA-177929",
 }
 \references{
 \itemize{
-  \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-  Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-  Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-  Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-  Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-  Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-  Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-  pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-  https://doi.org/10.1093/nar/gkab1028
+  \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+  Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+  Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed

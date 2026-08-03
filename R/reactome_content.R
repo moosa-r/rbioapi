@@ -12,16 +12,9 @@
 #' @return Character string containing the version of Reactome database.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -57,9 +50,9 @@ rba_reactome_version <- function(...) {
       .rba_stg("reactome", "pth", "content"),
       "data/database/version"
     ),
-    accpet = "text/plain",
+    accept = "text/plain",
     parser = "text->chr",
-    save_to = .rba_file("reactome_diseases.txt")
+    save_to = .rba_file("reactome_version.txt")
   )
 
   ## Call API
@@ -78,8 +71,8 @@ rba_reactome_version <- function(...) {
 #'  "GET https://reactome.org/ContentService/data/diseases"
 #'  \cr "GET https://reactome.org/ContentService/data/diseases/doid"
 #'
-#' @param doid (logical) Return disease DOIDs instead of diseases?
-#'   (default = FALSE)
+#' @param doid Logical: (default = \code{FALSE}) Return disease DOIDs instead of
+#'   diseases?
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -87,16 +80,9 @@ rba_reactome_version <- function(...) {
 #'   Reactome. If doid was set to TRUE, DOID info will be returned instead.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -124,7 +110,7 @@ rba_reactome_diseases <- function(doid = FALSE,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "doid", class = "logical")
+      list(arg = "doid", class = "logical", len = 1L)
     )
   )
 
@@ -160,7 +146,7 @@ rba_reactome_diseases <- function(doid = FALSE,
     httr = "get",
     url = .rba_stg("reactome", "url"),
     path = path_input,
-    accpet = accept_input,
+    accept = accept_input,
     parser = parser_input,
     save_to = .rba_file(paste0("reactome_diseases.", file_ext))
   )
@@ -184,9 +170,9 @@ rba_reactome_diseases <- function(doid = FALSE,
 #' @section Corresponding API Resources:
 #'  "GET https://reactome.org/ContentService/data/complex/\{id\}/subunits"
 #'
-#' @param complex_id Reactome stable Identifier of the complex.
-#' @param exclude_structures (logical) Should the contained complexes and
-#'   entity sets be excluded from the results? (default = FALSE)
+#' @param complex_id Character: Reactome stable Identifier of the complex.
+#' @param exclude_structures Logical: (default = \code{FALSE}) Should the
+#'   contained complexes and entity sets be excluded from the results?
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -194,16 +180,9 @@ rba_reactome_diseases <- function(doid = FALSE,
 #' and the columns are pertinent information of that subunit.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -230,8 +209,8 @@ rba_reactome_complex_subunits <- function(complex_id,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "complex_id", class = "character"),
-      list(arg = "exclude_structures", class = "logical")
+      list(arg = "complex_id", class = "character", len = 1L),
+      list(arg = "exclude_structures", class = "logical", len = 1L)
     )
   )
 
@@ -274,8 +253,8 @@ rba_reactome_complex_subunits <- function(complex_id,
 #'  "GET https://reactome.org/ContentService/data/complexes/\{resource\}/
 #'  \{identifier\}"
 #'
-#' @param id Molecule's external Identifier
-#' @param resource What is the resource of your supplied ID? see:
+#' @param id Character: Molecule's external Identifier
+#' @param resource Character: What is the resource of your supplied ID? see:
 #' \href{https://reactome.org/content/schema/objects/ReferenceDatabase/}{Reactome External
 #' Identifiers}
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -285,16 +264,9 @@ rba_reactome_complex_subunits <- function(complex_id,
 #'   molecule and columns are pertinent information.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -323,8 +295,8 @@ rba_reactome_complex_list <- function(id,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "id", class = "character"),
-      list(arg = "resource", class = "character")
+      list(arg = "id", class = "character", len = 1L),
+      list(arg = "resource", class = "character", len = 1L)
     )
   )
 
@@ -361,7 +333,7 @@ rba_reactome_complex_list <- function(id,
 #' @section Corresponding API Resources:
 #'  "GET https://reactome.org/ContentService/data/entity/\{id\}/componentOf"
 #'
-#' @param entity_id Reactome's entity ID.
+#' @param entity_id Character: Reactome's entity ID.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -369,16 +341,9 @@ rba_reactome_complex_list <- function(id,
 #'   participant in them.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -405,7 +370,7 @@ rba_reactome_participant_of <- function(entity_id,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "entity_id", class = "character")
+      list(arg = "entity_id", class = "character", len = 1L)
     )
   )
 
@@ -445,7 +410,7 @@ rba_reactome_participant_of <- function(entity_id,
 #' @section Corresponding API Resources:
 #'  "GET https://reactome.org/ContentService/data/entity/\{id\}/otherForms"
 #'
-#' @param entity_id Reactome's entity ID.
+#' @param entity_id Character: Reactome's entity ID.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -453,16 +418,9 @@ rba_reactome_participant_of <- function(entity_id,
 #'   and columns are pertinent information.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -487,7 +445,7 @@ rba_reactome_entity_other_forms <- function(entity_id,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "entity_id", class = "character")
+      list(arg = "entity_id", class = "character", len = 1L)
     )
   )
 
@@ -533,7 +491,7 @@ rba_reactome_entity_other_forms <- function(entity_id,
 #' @section Corresponding API Resources:
 #'  "GET https://reactome.org/ContentService/data/event/\{id\}/ancestors"
 #'
-#' @param event_id Reactome event's identifier.
+#' @param event_id Character: Reactome event's identifier.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -543,16 +501,9 @@ rba_reactome_entity_other_forms <- function(entity_id,
 #'   data frames.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -577,7 +528,7 @@ rba_reactome_event_ancestors <- function(event_id,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "event_id", class = "character")
+      list(arg = "event_id", class = "character", len = 1L)
     )
   )
 
@@ -622,7 +573,7 @@ rba_reactome_event_ancestors <- function(event_id,
 #' @section Corresponding API Resources:
 #'  "GET https://reactome.org/ContentService/data/eventsHierarchy/\{species\}"
 #'
-#' @param species Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
+#' @param species Character or Numeric: NCBI Taxonomy identifier (Human Taxonomy
 #'    ID is 9606.) or species name (e.g. "Homo sapiens"). See
 #'    \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species/}{Reactome
@@ -634,16 +585,9 @@ rba_reactome_event_ancestors <- function(event_id,
 #'   described in the "Details section".
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -673,12 +617,12 @@ rba_reactome_event_hierarchy <- function(species,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "species", class = c("character", "numeric"))
+      list(arg = "species", class = c("character", "numeric", "integer"), len = 1L)
     )
   )
 
   .msg(
-    "Retrieving the complete events hierarchy tree of the Specie %s.",
+    "Retrieving the complete events hierarchy tree of species %s.",
     species
   )
 
@@ -733,44 +677,48 @@ rba_reactome_event_hierarchy <- function(species,
 #'   \cr "GET https://reactome.org/ContentService/exporter/document/event/
 #'   \{identifier\}.pdf"
 #'
-#' @param event_id Reactome event's identifier.
-#' @param save_to NULL or Character:\itemize{
+#' @param event_id Character: Reactome event's identifier.
+#' @param save_to NULL or Character: (default = \code{NULL}) \itemize{
 #'   \item NULL: Save the file to an automatically-generated path.
 #'   \item Character string: A valid file path to save the file to.}
-#' @param create_document logical: Create PDF document instead of image? (
-#'   default = FALSE)
-#' @param resource The analysis resource for which the results will be
-#'   overlaid on top of the given pathways overview,
-#' @param diagram_profile Color profile of diagrams, should be either "Modern"
-#'   (default) or "Standard".
-#' @param analysis_profile Color profile of analysis, should be one of:
-#'   "Standard" (default), "Strosobar" or "Copper Plus"
-#' @param token The analysis Token for which the results will be overlaid on
-#'   top of the given pathways overview. see:
+#' @param create_document Logical: (default = \code{FALSE}) Create PDF document
+#'   instead of image?
+#' @param resource Character: (default = \code{"TOTAL"}) The analysis resource
+#'   for which the results will be overlaid on top of the given pathways
+#'   overview.
+#' @param diagram_profile Character: (default = \code{"Modern"}) Color profile
+#'   of diagrams, should be either "Modern" or "Standard".
+#' @param analysis_profile Character: (default = \code{"Standard"}) Color
+#'   profile of analysis, should be one of: "Standard", "Strosobar" or "Copper
+#'   Plus".
+#' @param token Character: (optional) The analysis Token for which the results
+#'   will be overlaid on top of the given pathways overview. see:
 #'   \code{\link{rba_reactome_analysis}}.
-#' @param exp_column numeric: (only if token is supplied) Specify the
+#' @param exp_column Numeric: (optional) (only if token is supplied) Specify the
 #'   expression column for the overlay.
-#' @param document_level numeric: (Only if "create_document" is TRUE) if 0
-#' (default) the event's children will not be included in the PDF document.
-#'  Set this to 1 to include event's children.
-#' @param output_format (Only if "create_document" is FALSE) Image format
-#'   of the saved diagram. Can be one of: png (default), jpeg, svg or gif.
-#' @param image_quality Numeric: (Only if "create_document" is FALSE), a number
-#'   ranging from 1 to 10. 1 is the lowest quality and 10 is the highest
-#'   (default = 5).
-#' @param flag_element (Only if "create_document" is FALSE) gene name, protein
-#'   ID, chemical ID or Reactome ID of a diagram's element to be flagged.
-#' @param flg_interactors Logical: (Only if "create_document" is FALSE) Should
-#'   the interactor be considered when flagging a diagram element? (default
-#'   = TRUE)
-#' @param sel (Only if "create_document" is FALSE) CSV line for highlighting
-#'   element(s) selection in the diagram.
-#' @param title Logical: (Only if "create_document" is FALSE) Should the pathway
-#'  name be displayed below the image? (default = TRUE)
-#' @param margin Numeric: (Only if "create_document" is FALSE) A number ranging
-#'   from 0 to 20 to set as the image's margin. (default = 15)
-#' @param ehld logical: (Only if "create_document" is FALSE) Should
-#'   "Enhanced High Level Diagram" be considered?
+#' @param document_level Numeric: (default = \code{1}) (Only if
+#'   "create_document" is TRUE) use 0 to exclude the event's children or 1 to
+#'   include them.
+#' @param output_format Character: (default = \code{"png"}) (Only if
+#'   "create_document" is FALSE) Image format of the saved diagram. Can be one
+#'   of: png, jpg, jpeg, svg or gif.
+#' @param image_quality Numeric: (default = \code{5}) (Only if "create_document"
+#'   is FALSE), a number ranging from 1 to 10. 1 is the lowest quality and 10 is
+#'   the highest.
+#' @param flag_element Character: (optional) (Only if "create_document" is
+#'   FALSE) gene name, protein ID, chemical ID or Reactome ID of a diagram's
+#'   element to be flagged.
+#' @param flg_interactors Logical: (default = \code{TRUE}) (Only if
+#'   "create_document" is FALSE) Should the interactor be considered when
+#'   flagging a diagram element?
+#' @param sel Character vector: (optional) (Only if "create_document" is FALSE)
+#'   CSV line for highlighting element(s) selection in the diagram.
+#' @param title Logical: (default = \code{TRUE}) (Only if "create_document" is
+#'   FALSE) Should the pathway name be displayed below the image?
+#' @param margin Numeric: (default = \code{15}) (Only if "create_document" is
+#'   FALSE) A number ranging from 0 to 20 to set as the image's margin.
+#' @param ehld Logical: (default = \code{TRUE}) (Only if "create_document" is
+#'   FALSE) Should Enhanced High Level Diagrams be considered?
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -778,16 +726,9 @@ rba_reactome_event_hierarchy <- function(species,
 #'   disk.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -837,7 +778,7 @@ rba_reactome_exporter_diagram <- function(event_id,
                                           sel = NULL,
                                           title = TRUE,
                                           margin = 15,
-                                          ehld = FALSE,
+                                          ehld = TRUE,
                                           ...) {
   ## Load Global Options
   .rba_ext_args(..., ignore_save = TRUE)
@@ -845,38 +786,65 @@ rba_reactome_exporter_diagram <- function(event_id,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "event_id", class = "character"),
+      list(arg = "event_id", class = "character", len = 1L),
       list(arg = "save_to", class = "character", len = 1L, no_na = FALSE),
       list(arg = "create_document", class = "logical", len = 1L),
-      list(arg = "document_level", class = "numeric", val = c(0,1)),
+      list(
+        arg = "document_level", class = c("numeric", "integer"),
+        len = 1L, val = c(0, 1)
+      ),
       list(
         arg = "output_format",
-        class = "character",
-        val = c("png", "jpeg", "svg", "gif")
+        class = "character", len = 1L,
+        val = c("png", "jpg", "jpeg", "svg", "gif")
       ),
-      list(arg = "image_quality", class = "numeric", ran = c(1,10)),
-      list(arg = "flag_element", class = "character"),
-      list(arg = "flg_interactors", class = "logical"),
-      list(arg = "sel", class = "character"),
-      list(arg = "title", class = "logical"),
-      list(arg = "margin", class = "numeric", ran = c(0,20)),
-      list(arg = "ehld", class = "logical"),
       list(
-        arg = "diagram_profile", class = "character",
+        arg = "image_quality", class = c("numeric", "integer"),
+        len = 1L, ran = c(1, 10)
+      ),
+      list(arg = "flag_element", class = "character", len = 1L),
+      list(arg = "flg_interactors", class = "logical", len = 1L),
+      list(arg = "sel", class = "character", min_len = 1L),
+      list(arg = "title", class = "logical", len = 1L),
+      list(
+        arg = "margin", class = c("numeric", "integer"),
+        len = 1L, ran = c(0, 20)
+      ),
+      list(arg = "ehld", class = "logical", len = 1L),
+      list(
+        arg = "diagram_profile", class = "character", len = 1L,
         val = c("Modern", "Standard")
       ),
-      list(arg = "token", class = "character"),
-      list(arg = "resource", class = "character"),
+      list(arg = "token", class = "character", len = 1L),
       list(
-        arg = "analysis_profile", class = "character",
+        arg = "resource", class = "character", len = 1L,
+        val = c(
+          "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR", "MIRBASE",
+          "NCBI_PROTEIN", "EMBL", "COMPOUND", "PUBCHEM_COMPOUND"
+        )
+      ),
+      list(
+        arg = "analysis_profile", class = "character", len = 1L,
         val = c("Standard", "Strosobar", "Copper Plus")
       ),
-      list(arg = "exp_column", class = "numeric")
+      list(arg = "exp_column", class = c("numeric", "integer"), len = 1L)
     ),
     cond = list(
       list(
         quote(!is.null(exp_column) && is.null(token)),
         "You cannot specify expression column without providing a token."
+      ),
+      list(
+        quote(!is.finite(image_quality) || image_quality != floor(image_quality)),
+        "`image_quality` should be a finite integer from 1 to 10."
+      ),
+      list(
+        quote(!is.finite(margin) || margin != floor(margin)),
+        "`margin` should be a finite integer from 0 to 20."
+      ),
+      list(
+        quote(!is.null(exp_column) && (!is.finite(exp_column) || exp_column != floor(exp_column))),
+        "`exp_column` should be a finite integer."
       )
     )
   )
@@ -885,8 +853,8 @@ rba_reactome_exporter_diagram <- function(event_id,
   call_query <- .rba_query(
     init = list(),
     list("resource", resource != "TOTAL", resource),
-    list("diagramProfile", !is.null(diagram_profile), diagram_profile),
-    list("analysisProfile", !is.null(analysis_profile), analysis_profile),
+    list("diagramProfile", diagram_profile != "Modern", diagram_profile),
+    list("analysisProfile", analysis_profile != "Standard", analysis_profile),
     list("token", !is.null(token), token),
     list("expColumn", !is.null(exp_column), exp_column)
   )
@@ -929,10 +897,12 @@ rba_reactome_exporter_diagram <- function(event_id,
       list("ehld", !ehld, "false")
     )
 
-    accept_input <- ifelse(
-      output_format == "svg",
-      yes = "image/svg+xml",
-      no = paste0("image/", output_format)
+    accept_input <- switch(
+      output_format,
+      "svg" = "image/svg+xml",
+      "jpg" = "image/jpeg",
+      "jpeg" = "image/jpeg",
+      paste0("image/", output_format)
     )
 
     path_input <- sprintf(
@@ -957,7 +927,7 @@ rba_reactome_exporter_diagram <- function(event_id,
     url = .rba_stg("reactome", "url"),
     path = path_input,
     query = call_query,
-    accpet = accept_input,
+    accept = accept_input,
     save_to = save_to,
     parser = NULL
   )
@@ -972,9 +942,10 @@ rba_reactome_exporter_diagram <- function(event_id,
 #'   to a SBGN (Systems Biology Graphical Notation) or SBML (Systems Biology
 #'   Markup Language)
 #'
-#' @param event_id Reactome event's database IDs (DbId) or Stable IDs (StId).
-#' @param output_format Either "sbgn" or "sbml".
-#' @param save_to NULL or Character:\itemize{
+#' @param event_id Character: Reactome event's database IDs (DbId) or Stable IDs
+#'   (StId).
+#' @param output_format Character: Either "sbgn" or "sbml".
+#' @param save_to NULL or Character: (default = \code{NULL}) \itemize{
 #'   \item NULL: Save the file to an automatically-generated path.
 #'   \item Character string: A valid file path to save the file to.}
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -990,16 +961,9 @@ rba_reactome_exporter_diagram <- function(event_id,
 #'   disk.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -1032,8 +996,11 @@ rba_reactome_exporter_event <- function(event_id,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "event_id", class = "character"),
-      list(arg = "output_format", class = "character", val = c("sbgn", "sbml")),
+      list(arg = "event_id", class = "character", len = 1L),
+      list(
+        arg = "output_format", class = "character", len = 1L,
+        val = c("sbgn", "sbml")
+      ),
       list(arg = "save_to", class = "character", len = 1L, no_na = FALSE))
   )
 
@@ -1069,60 +1036,56 @@ rba_reactome_exporter_event <- function(event_id,
 
 #' Get a Reactome Pathway Overview
 #'
-#' This function will Save a Pathway Overview of the supplied specie
+#' This function will save a pathway overview of the supplied species
 #'   as an image file.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://reactome.org/ContentService/exporter/fireworks/\{species\}.\{ext\}"
 #'
-#' @param species Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
+#' @param species Character or Numeric: NCBI Taxonomy identifier (Human Taxonomy
 #'    ID is 9606.) or species name (e.g. "Homo sapiens"). See
 #'    \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species/}{Reactome
 #'    Data Schema: Entries: Species}.
-#' @param output_format Images format, Can be one of: png (default), jpeg,
-#'   svg or gif.
-#' @param save_to NULL or Character:\itemize{
+#' @param output_format Character: (default = \code{"png"}) Image format, can be
+#'   one of: png, jpg, jpeg, svg or gif.
+#' @param save_to NULL or Character: (default = \code{NULL}) \itemize{
 #'   \item NULL: Save the file to an automatically-generated path.
 #'   \item Character string: A valid file path to save the file to.}
-#' @param image_quality Numeric: A number  ranging from 1 to 10. 1 is the
-#'   lowest quality and 10 is the highest (default = 5).
-#' @param flag_element Gene name, protein ID, chemical ID or Reactome ID of a
-#'   diagram's element to be flagged.
-#' @param flg_interactors Logical: Should the interactor be considered when
-#'   flagging a diagram element? (default = TRUE)
-#' @param sel CSV line for highlighting element(s) selection in the diagram.
-#' @param title Logical: Should the pathway name be displayed below the image?
-#'   (default = TRUE)
-#' @param margin Numeric: A number ranging from 0 to 20 to set as the image's
-#'   margin. (default = 15)
-#' @param diagram_profile Color profile of diagrams, should be one of "Copper"
-#'   (default), "Copper Plus", "Barium Lithium" or "calcium salts".
-#' @param token The analysis Token for which the results will be overlaid on
-#'   top of the given pathways overview. see:
+#' @param image_quality Numeric: (default = \code{5}) A number  ranging from 1
+#'   to 10. 1 is the lowest quality and 10 is the highest.
+#' @param flag_element Character: (optional) Gene name, protein ID, chemical ID
+#'   or Reactome ID of a diagram's element to be flagged.
+#' @param flg_interactors Logical: (default = \code{TRUE}) Should the interactor
+#'   be considered when flagging a diagram element?
+#' @param sel Character vector: (optional) CSV line for highlighting element(s)
+#'   selection in the diagram.
+#' @param title Logical: (default = \code{TRUE}) Should the pathway name be
+#'   displayed below the image?
+#' @param margin Numeric: (default = \code{15}) A number ranging from 0 to 20 to
+#'   set as the image's margin.
+#' @param diagram_profile Character: (default = \code{"Copper"}) Color profile
+#'   of the overview, should be one of "Copper", "Copper plus", "Barium Lithium"
+#'   or "Calcium Salts".
+#' @param token Character: (optional) The analysis Token for which the results
+#'   will be overlaid on top of the given pathways overview. see:
 #'   \code{\link{rba_reactome_analysis}}.
-#' @param resource The analysis resource for which the results will be
-#'   overlaid on top of the given pathways overview.
-#' @param exp_column numeric: (only if token is supplied) Specify the
+#' @param resource Character: (default = \code{"TOTAL"}) The analysis resource
+#'   for which the results will be overlaid on top of the given pathways
+#'   overview.
+#' @param exp_column Numeric: (optional) (only if token is supplied) Specify the
 #'   expression column for the overlay.
-#' @param coverage Logical: Should the analysis coverage values be overlaid?
-#'   (default = FALSE)
+#' @param coverage Logical: (default = \code{FALSE}) Should the analysis
+#'   coverage values be overlaid?
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
 #' @return NULL, Based to the inputs, an image file will be saved to disk.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -1169,43 +1132,68 @@ rba_reactome_exporter_overview <- function(species,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "species", class = c("character", "numeric")),
+      list(arg = "species", class = c("character", "numeric", "integer"), len = 1L),
       list(
-        arg = "output_format", class = "character", no_null = TRUE,
+        arg = "output_format", class = "character", len = 1L, no_null = TRUE,
         val = c("png",
+                "jpg",
                 "jpeg",
                 "svg",
                 "gif")
       ),
       list(arg = "save_to", class = "character", len = 1L, no_na = FALSE),
-      list(arg = "image_quality", class = "numeric", ran = c(1,10)),
-      list(arg = "flag_element", class = "character"),
-      list(arg = "flg_interactors", class = "logical"),
-      list(arg = "sel", class = "character"),
-      list(arg = "title", class = "logical"),
-      list(arg = "margin", class = "numeric", ran = c(0,20)),
       list(
-        arg = "diagram_profile", class = "character",
-        val = c("Copper",
-                "Copper Plus",
-                "Barium Lithium",
-                "calcium salts")
+        arg = "image_quality", class = c("numeric", "integer"),
+        len = 1L, ran = c(1, 10)
       ),
-      list(arg = "token", class = "character"),
-      list(arg = "resource", class = "character"),
-      list(arg = "exp_column", class = "character"),
-      list(arg = "coverage", class = "logical")
+      list(arg = "flag_element", class = "character", len = 1L),
+      list(arg = "flg_interactors", class = "logical", len = 1L),
+      list(arg = "sel", class = "character", min_len = 1L),
+      list(arg = "title", class = "logical", len = 1L),
+      list(
+        arg = "margin", class = c("numeric", "integer"),
+        len = 1L, ran = c(0, 20)
+      ),
+      list(
+        arg = "diagram_profile", class = "character", len = 1L,
+        val = c("Copper",
+                "Copper plus",
+                "Barium Lithium",
+                "Calcium Salts")
+      ),
+      list(arg = "token", class = "character", len = 1L),
+      list(
+        arg = "resource", class = "character", len = 1L,
+        val = c(
+          "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR", "MIRBASE",
+          "NCBI_PROTEIN", "EMBL", "COMPOUND", "PUBCHEM_COMPOUND"
+        )
+      ),
+      list(arg = "exp_column", class = c("numeric", "integer"), len = 1L),
+      list(arg = "coverage", class = "logical", len = 1L)
     ),
     cond = list(
       list(
         quote(!is.null(exp_column) && is.null(token)),
         "You cannot specify expression column without providing a token."
+      ),
+      list(
+        quote(!is.finite(image_quality) || image_quality != floor(image_quality)),
+        "`image_quality` should be a finite integer from 1 to 10."
+      ),
+      list(
+        quote(!is.finite(margin) || margin != floor(margin)),
+        "`margin` should be a finite integer from 0 to 20."
+      ),
+      list(
+        quote(!is.null(exp_column) && (!is.finite(exp_column) || exp_column != floor(exp_column))),
+        "`exp_column` should be a finite integer."
       )
     )
   )
 
   .msg(
-    "Retrieving specie %s pathway overview image in %s format.",
+    "Retrieving species %s pathway overview image in %s format.",
     species, output_format
   )
 
@@ -1226,11 +1214,13 @@ rba_reactome_exporter_overview <- function(species,
   )
 
   ## Build Function-Specific Call
-  if (output_format == "svg") {
-    accept_input <- "image/svg+xml"
-  } else {
-    accept_input <- paste0("image/", output_format)
-  }
+  accept_input <- switch(
+    output_format,
+    "svg" = "image/svg+xml",
+    "jpg" = "image/jpeg",
+    "jpeg" = "image/jpeg",
+    paste0("image/", output_format)
+  )
 
   # create file_path
   save_to <- .rba_file(
@@ -1249,7 +1239,7 @@ rba_reactome_exporter_overview <- function(species,
       .rba_stg("reactome", "pth", "content"), gsub(" ", "%20",species), output_format
     ),
     query = call_query,
-    accpet = accept_input,
+    accept = accept_input,
     save_to = save_to,
     parser = NULL
   )
@@ -1271,35 +1261,38 @@ rba_reactome_exporter_overview <- function(species,
 #'  "GET https://reactome.org/ContentService/exporter/reaction/
 #'  \{identifier\}.\{ext\}"
 #'
-#' @param event_id Reactome
+#' @param event_id Character: Reactome
 #' \href{https://reactome.org/content/schema/ReactionLikeEvent/}{Reaction-like
 #' event}'s identifier.
-#' @param output_format Images format, Can be one of: png (default), jpeg,
-#'   svg or gif.
-#' @param save_to NULL or Character:\itemize{
+#' @param output_format Character: (default = \code{"png"}) Image format, can be
+#'   one of: png, jpg, jpeg, svg or gif.
+#' @param save_to NULL or Character: (default = \code{NULL}) \itemize{
 #'   \item NULL: Save the file to an automatically-generated path.
 #'   \item Character string: A valid file path to save the file to.}
-#' @param image_quality Numeric: A number  ranging from 1 to 10. 1 is the
-#'   lowest quality and 10 is the highest (default = 5).
-#' @param flag_element Gene name, protein ID, chemical ID or Reactome ID of a
-#'   diagram's element to be flagged.
-#' @param flg_interactors Logical: Should the interactor be considered when
-#'   flagging a diagram element? (default = TRUE)
-#' @param sel CSV line for highlighting element(s) selection in the diagram.
-#' @param title Logical: Should the pathway name be displayed below the image?
-#'   (default = TRUE)
-#' @param margin Numeric: A number ranging from 0 to 20 to set as the image's
-#'   margin. (default = 15)
-#' @param diagram_profile Color profile of diagrams, should be one of "Copper"
-#'   (default), "Copper Plus", "Barium Lithium" or "calcium salts".
-#' @param token The analysis Token for which the results will be overlaid on
-#'   top of the given pathways overview. see:
+#' @param image_quality Numeric: (default = \code{5}) A number  ranging from 1
+#'   to 10. 1 is the lowest quality and 10 is the highest.
+#' @param flag_element Character: (optional) Gene name, protein ID, chemical ID
+#'   or Reactome ID of a diagram's element to be flagged.
+#' @param flg_interactors Logical: (default = \code{TRUE}) Should the interactor
+#'   be considered when flagging a diagram element?
+#' @param sel Character vector: (optional) CSV line for highlighting element(s)
+#'   selection in the diagram.
+#' @param title Logical: (default = \code{TRUE}) Should the pathway name be
+#'   displayed below the image?
+#' @param margin Numeric: (default = \code{15}) A number ranging from 0 to 20 to
+#'   set as the image's margin.
+#' @param diagram_profile Character: (default = \code{"Modern"}) Color profile
+#'   of diagrams, should be either "Modern" or "Standard".
+#' @param token Character: (optional) The analysis Token for which the results
+#'   will be overlaid on top of the given pathways overview. see:
 #'   \code{\link{rba_reactome_analysis}}.
-#' @param analysis_profile Color profile of analysis, should be one of:
-#' "Standard" (default), "Strosobar" or "Copper Plus".
-#' @param resource The analysis resource for which the results will be
-#'   overlaid on top of the given pathways overview.
-#' @param exp_column numeric: (only if token is supplied) Specify the
+#' @param analysis_profile Character: (default = \code{"Standard"}) Color
+#'   profile of analysis, should be one of: "Standard", "Strosobar" or "Copper
+#'   Plus".
+#' @param resource Character: (default = \code{"TOTAL"}) The analysis resource
+#'   for which the results will be overlaid on top of the given pathways
+#'   overview.
+#' @param exp_column Numeric: (optional) (only if token is supplied) Specify the
 #'   expression column for the overlay.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
@@ -1307,16 +1300,9 @@ rba_reactome_exporter_overview <- function(species,
 #' @return NULL, Based to the inputs, an image file will be saved to disk.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -1363,33 +1349,57 @@ rba_reactome_exporter_reaction <- function(event_id,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "event_id", class = "character"),
+      list(arg = "event_id", class = "character", len = 1L),
       list(arg = "save_to", class = "character", len = 1L, no_na = FALSE),
       list(
-        arg = "output_format", no_null = TRUE, class = "character",
-        val = c("png", "jpeg", "svg", "gif")
+        arg = "output_format", no_null = TRUE, class = "character", len = 1L,
+        val = c("png", "jpg", "jpeg", "svg", "gif")
       ),
-      list(arg = "image_quality", class = "numeric", ran = c(1,10)),
-      list(arg = "flag_element", class = "character"),
-      list(arg = "flg_interactors", class = "logical"),
-      list(arg = "sel", class = "character"),
-      list(arg = "title", class = "logical"),
-      list(arg = "margin", class = "numeric", ran = c(0,20)),
       list(
-        arg = "diagram_profile", class = "character",
+        arg = "image_quality", class = c("numeric", "integer"),
+        len = 1L, ran = c(1, 10)
+      ),
+      list(arg = "flag_element", class = "character", len = 1L),
+      list(arg = "flg_interactors", class = "logical", len = 1L),
+      list(arg = "sel", class = "character", min_len = 1L),
+      list(arg = "title", class = "logical", len = 1L),
+      list(
+        arg = "margin", class = c("numeric", "integer"),
+        len = 1L, ran = c(0, 20)
+      ),
+      list(
+        arg = "diagram_profile", class = "character", len = 1L,
         val = c("Modern", "Standard")
       ),
-      list(arg = "token", class = "character"),
-      list(arg = "resource", class = "character"),
+      list(arg = "token", class = "character", len = 1L),
       list(
-        arg = "analysis_profile", class = "character",
+        arg = "resource", class = "character", len = 1L,
+        val = c(
+          "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR", "MIRBASE",
+          "NCBI_PROTEIN", "EMBL", "COMPOUND", "PUBCHEM_COMPOUND"
+        )
+      ),
+      list(
+        arg = "analysis_profile", class = "character", len = 1L,
         val = c("Standard", "Strosobar", "Copper Plus")),
-      list(arg = "exp_column", class = "numeric")
+      list(arg = "exp_column", class = c("numeric", "integer"), len = 1L)
     ),
     cond = list(
       list(
         quote(!is.null(exp_column) && is.null(token)),
         "You cannot specify expression column without providing a token."
+      ),
+      list(
+        quote(!is.finite(image_quality) || image_quality != floor(image_quality)),
+        "`image_quality` should be a finite integer from 1 to 10."
+      ),
+      list(
+        quote(!is.finite(margin) || margin != floor(margin)),
+        "`margin` should be a finite integer from 0 to 20."
+      ),
+      list(
+        quote(!is.null(exp_column) && (!is.finite(exp_column) || exp_column != floor(exp_column))),
+        "`exp_column` should be a finite integer."
       )
     )
   )
@@ -1408,19 +1418,21 @@ rba_reactome_exporter_reaction <- function(event_id,
     list("sel", !is.null(sel), sel),
     list("title", !title, "false"),
     list("margin", margin != 15, as.integer(margin)),
-    list("diagramProfile", diagram_profile != "Copper", diagram_profile),
-    list("analysisProfile", !is.null(analysis_profile), analysis_profile),
+    list("diagramProfile", diagram_profile != "Modern", diagram_profile),
+    list("analysisProfile", analysis_profile != "Standard", analysis_profile),
     list("token", !is.null(token), token),
     list("resource", resource != "TOTAL", resource),
     list("expColumn", !is.null(exp_column), exp_column)
   )
 
   ## Build Function-Specific Call
-  if (output_format == "svg") {
-    accept_input <- "image/svg+xml"
-  } else {
-    accept_input <- paste0("image/", output_format)
-  }
+  accept_input <- switch(
+    output_format,
+    "svg" = "image/svg+xml",
+    "jpg" = "image/jpeg",
+    "jpeg" = "image/jpeg",
+    paste0("image/", output_format)
+  )
 
   # create file_path
   save_to <- .rba_file(
@@ -1440,7 +1452,7 @@ rba_reactome_exporter_reaction <- function(event_id,
       .rba_stg("reactome", "pth", "content"), event_id, output_format
     ),
     query = call_query,
-    accpet = accept_input,
+    accept = accept_input,
     save_to = save_to,
     parser = NULL)
 
@@ -1466,13 +1478,14 @@ rba_reactome_exporter_reaction <- function(event_id,
 #'    \{resource\}/summary"
 #'  \cr "GET https://reactome.org/ContentService/interactors/psicquic/resources"
 #'
-#' @param proteins Proteins to retrieve PSICQUIC interactors.
-#' @param resource The PSICQUIC resource for your supplied proteins. Call
-#'   rba_reactome_interactors_psicquic() without argument to get the available
-#'   options.
-#' @param details Logical: If TRUE (default) a detailed list of interactors
-#'   will be returned. If FALSE, only a summary of available interactors will
-#'   be returned.
+#' @param proteins Character or Numeric vector: (optional) Proteins to retrieve
+#'   PSICQUIC interactors.
+#' @param resource Character: (optional) The PSICQUIC resource for your supplied
+#'   proteins. Call rba_reactome_interactors_psicquic() without argument to get
+#'   the available options.
+#' @param details Logical: (default = \code{TRUE}) If TRUE a detailed list of
+#'   interactors will be returned. If FALSE, only a summary of available
+#'   interactors will be returned.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -1481,16 +1494,9 @@ rba_reactome_exporter_reaction <- function(event_id,
 #'   resources.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -1527,14 +1533,17 @@ rba_reactome_interactors_psicquic <- function(proteins = NULL,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "proteins", class = c("character", "numeric"), max_len = 1000),
-      list(arg = "resource", class = "character"),
-      list(arg = "details", class = "logical")
+      list(
+        arg = "proteins", class = c("character", "numeric", "integer"),
+        min_len = 1L, max_len = 1000
+      ),
+      list(arg = "resource", class = "character", len = 1L),
+      list(arg = "details", class = "logical", len = 1L)
     ),
     cond = list(
       list(
         quote(sum(!is.null(proteins), !is.null(resource)) == 1),
-        "You should supply 'proteins' and 'resource' togeather."
+        "You should supply `proteins` and `resource` together."
       )
     )
   )
@@ -1544,7 +1553,7 @@ rba_reactome_interactors_psicquic <- function(proteins = NULL,
     details <- ifelse(isTRUE(details), yes = "details", no = "summary")
 
     .msg(
-      "Retrieving %s of clustered interactions of %s ptoteins(s) from %s.",
+      "Retrieving %s of clustered interactions of %s protein(s) from %s.",
       details,
       ifelse(length(proteins) == 1, yes = proteins, no = length(proteins)),
       resource
@@ -1578,7 +1587,7 @@ rba_reactome_interactors_psicquic <- function(proteins = NULL,
       url = .rba_stg("reactome", "url"),
       path = paste0(
         .rba_stg("reactome", "pth", "content"),
-        "/interactors/psicquic/resources"
+        "interactors/psicquic/resources"
       ),
       accept = "application/json",
       parser = "json->df",
@@ -1595,36 +1604,39 @@ rba_reactome_interactors_psicquic <- function(proteins = NULL,
 
 #' Get Static(IntAct) Interaction Information of a Protein
 #'
-#' Reactome maintain a locally host a version of IntAct(Static) interactions
-#'   database. Using this function, you can retrieve IntAct information of
-#'   a protein(s) in two scenarios: \enumerate{
-#'   \item If endpoint = "details" or "summary": Retrieve a detailed/summary
-#'     information of your supplied protein accession(s) from IntAct database.
-#'   \item If endpoint = "pathway", Retrieve a list of Reactome pathways which
+#' Reactome maintains a locally hosted snapshot of the IntAct interactions
+#'   database. Using this function, you can retrieve IntAct information for
+#'   one or more proteins in two scenarios: \enumerate{
+#'   \item If \code{endpoint = "details"} or \code{endpoint = "summary"},
+#'     retrieve detailed or summary information for the supplied accessions.
+#'   \item If \code{endpoint = "pathways"}, retrieve Reactome pathways which
 #'   include your supplied protein accession. Pathways with the class
 #'   "TopLevelPathway" will be excluded.}
+#'   Results depend on Reactome's current static interaction snapshot; a valid
+#'   accession can therefore have no mapped pathways.
 #'
 #' @section Corresponding API Resources:
 #'  "POST https://reactome.org/ContentService/interactors/static/
 #'  molecules/details"
 #'  \cr "POST https://reactome.org/ContentService/interactors/static/
 #'  molecules/summary"
-#'  \cr "GET https://reactome.org/ContentService/interactors/static/
-#'  molecules/pathways"
+#'  \cr "GET https://reactome.org/ContentService/interactors/static/molecule/
+#'  \{identifier\}/pathways"
 #'
-#' @param proteins Uniprot proteins accession(s). If endpoint = "pathway",
-#'   only a single protein accession can be supplied.
-#' @param endpoint Can be one of: \enumerate{
-#'   \item "details": To return a detailed information of your supplied
-#'   protein(s) accession.
-#'   \item "summary": To return a summary of your supplied protein(s) accession
-#'   \item "pathway": To return a list of pathways containing the interacting
-#'   molecules (excluding TopLevelPathway class).}
-#' @param only_diagrammed Logical: (only when "endpoint = "pathway")
-#'   If TRUE, pathways without diagram will be excluded. (default = FALSE)
-#' @param species Only when "endpoint = "pathway", The scientific name
-#'   of the species to search for the pathways. See
-#'    \code{\link{rba_reactome_species}} or
+#' @param proteins Character or Numeric vector: UniProt protein accession(s). If
+#'   \code{endpoint = "pathways"}, only a single protein accession can be
+#'   supplied.
+#' @param endpoint Character: (default = \code{"details"}) Can be one of:
+#'   \enumerate{ \item "details": Return detailed information for the supplied
+#'   accessions. \item "summary": Return summary information for the supplied
+#'   accessions. \item "pathways": Return pathways containing the interacting
+#'   molecules (excluding the TopLevelPathway class).}
+#' @param only_diagrammed Logical: (default = \code{FALSE}) (only when
+#'   \code{endpoint = "pathways"}) If TRUE, pathways without diagram will be
+#'   excluded.
+#' @param species Character: (optional) (only when \code{endpoint = "pathways"})
+#'   The scientific name of the species to search for pathways. See
+#'   \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species/}{Reactome
 #'    Data Schema: Entries: Species}.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -1634,16 +1646,9 @@ rba_reactome_interactors_psicquic <- function(proteins = NULL,
 #'   argument.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -1654,7 +1659,7 @@ rba_reactome_interactors_psicquic <- function(proteins = NULL,
 #'   }
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' rba_reactome_interactors_static(proteins = "Q9BXM7-1",
 #'     endpoint = "pathways", species = "Homo sapiens")
 #' }
@@ -1680,15 +1685,18 @@ rba_reactome_interactors_static <- function(proteins,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "proteins", class = c("character", "numeric"), max_len = 1000),
       list(
-        arg = "endpoint", class = "character",
+        arg = "proteins", class = c("character", "numeric", "integer"),
+        min_len = 1L, max_len = 1000
+      ),
+      list(
+        arg = "endpoint", class = "character", len = 1L,
         val = c("details",
                 "summary",
                 "pathways")
       ),
-      list(arg = "only_diagrammed", class = "logical"),
-      list(arg = "species", class = "character")
+      list(arg = "only_diagrammed", class = "logical", len = 1L),
+      list(arg = "species", class = "character", len = 1L)
     ),
     cond = list(
       list(
@@ -1696,8 +1704,8 @@ rba_reactome_interactors_static <- function(proteins,
         "When 'endpoint = pathways', you can only supply one protein."
       ),
       list(
-        quote(sum(!is.null(species), endpoint == "pathways") == 1),
-        "You should -and can only- supply species when endpoint is 'pathways'."
+        quote(!is.null(species) && endpoint != "pathways"),
+        "You can only supply `species` when `endpoint = \"pathways\"`."
       )
     )
   )
@@ -1783,17 +1791,17 @@ rba_reactome_interactors_static <- function(proteins,
 #'  \cr "GET https://reactome.org/ContentService/data/mapping/\{resource\}/
 #'  \{identifier\}/reactions"
 #'
-#' @param id Molecule's external Identifier
-#' @param resource What is the resource of your supplied ID? see:
+#' @param id Character or Numeric: Molecule's external Identifier
+#' @param resource Character: What is the resource of your supplied ID? see:
 #' \href{https://reactome.org/content/schema/objects/ReferenceDatabase/}{Reactome External
 #' Identifiers}
-#' @param species Numeric or Character: NCBI Taxonomy identifier (Human
-#'   is 9606), species name (e.g. "Homo sapiens") or Reactome DbId (e.g
-#'   Homo sapiens is 48887). See
-#'    \code{\link{rba_reactome_species}} or
+#' @param species Character or Numeric: (default = \code{"Homo sapiens"}) NCBI
+#'   Taxonomy identifier (Human is 9606), species name (e.g. "Homo sapiens") or
+#'   Reactome DbId (e.g Homo sapiens is 48887). See
+#'   \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species/}{Reactome
 #'    Data Schema: Entries: Species}.
-#' @param map_to Either "pathways" or "reactions".
+#' @param map_to Character: Either "pathways" or "reactions".
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -1801,16 +1809,9 @@ rba_reactome_interactors_static <- function(proteins,
 #'   pertinent information.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -1839,10 +1840,13 @@ rba_reactome_mapping <- function(id,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "id", class = c("character", "numeric")),
-      list(arg = "resource", class = "character"),
-      list(arg = "species", class = c("character", "numeric")),
-      list(arg = "map_to", class = "character", val = c("pathways", "reactions"))
+      list(arg = "id", class = c("character", "numeric", "integer"), len = 1L),
+      list(arg = "resource", class = "character", len = 1L),
+      list(arg = "species", class = c("character", "numeric", "integer"), len = 1L),
+      list(
+        arg = "map_to", class = "character", len = 1L,
+        val = c("pathways", "reactions")
+      )
     )
   )
 
@@ -1885,21 +1889,20 @@ rba_reactome_mapping <- function(id,
 #'   protein homology data to Computationally infer events in other eukaryotic
 #'   species.
 #'
-#' In version 73 (11 June 2020), using an orthology-based approach,
-#'   Homo sapiens events was projected to 18,654 orthologous pathways (with
-#'   81,835 orthologous proteins) in 15 non-human species.
-#'   \cr See \href{https://reactome.org/documentation/inferred-events/}{
+#' Reactome uses an orthology-based approach to project curated human events
+#'   to supported non-human species. See
+#'   \href{https://reactome.org/documentation/inferred-events/}{
 #'   Reactome Computationally Inferred Events} for more information.
 #'
 #' @section Corresponding API Resources:
 #'  "POST https://reactome.org/ContentService/data/orthologies/ids/
 #'    species/\{speciesId\}"
 #'
-#' @param event_ids Human Reactome event ID(s) to retrieve their orthologous
-#'   events.
-#' @param species_dbid Reactome database ID (DbId) of the target species. (e.g
-#'   Mus musculus is 48892). See
-#'    \code{\link{rba_reactome_species}} or
+#' @param event_ids Character vector: Human Reactome event ID(s) to retrieve
+#'   their orthologous events.
+#' @param species_dbid Numeric: Reactome database ID (DbId) of the target
+#'   species. (e.g Mus musculus is 48892). See
+#'   \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species/}{Reactome
 #'    Data Schema: Entries: Species}.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -1909,16 +1912,9 @@ rba_reactome_mapping <- function(id,
 #'   and their pertinent information.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -1947,13 +1943,22 @@ rba_reactome_orthology <- function(event_ids,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "event_ids", class = "character"),
-      list(arg = "species_dbid", class = "numeric")
+      list(arg = "event_ids", class = "character", min_len = 1L),
+      list(
+        arg = "species_dbid", class = c("numeric", "integer"),
+        len = 1L, min_val = 0
+      )
+    ),
+    cond = list(
+      list(
+        quote(!is.finite(species_dbid) || species_dbid != floor(species_dbid)),
+        "`species_dbid` should be a finite, non-negative integer."
+      )
     )
   )
 
   .msg(
-    "Retrieving orthologous Events of '%s' in the specie with DbId '%s'.",
+    "Retrieving orthologous events of '%s' in the species with DbId '%s'.",
     ifelse(
       length(event_ids) == 1,
       yes = event_ids,
@@ -2022,11 +2027,12 @@ rba_reactome_orthology <- function(event_ids,
 #'  \cr "GET https://reactome.org/ContentService/data/participants/\{id\}/
 #'  referenceEntities"
 #'
-#' @param event_id Reactome event's database ID (DbId) or Stable ID (StId).
-#' @param only_physical_entities Logical: If TRUe, only participating
-#'   'Physical Entities' will be returned.
-#' @param only_reference_entities Logical: If TRUe, only participating
-#'   'Reference Entities' will be returned.
+#' @param event_id Character or Numeric: Reactome event's database ID (DbId) or
+#'   Stable ID (StId).
+#' @param only_physical_entities Logical: (default = \code{FALSE}) If TRUE, only
+#'   participating 'Physical Entities' will be returned.
+#' @param only_reference_entities Logical: (default = \code{FALSE}) If TRUE,
+#'   only participating 'Reference Entities' will be returned.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -2034,16 +2040,9 @@ rba_reactome_orthology <- function(event_ids,
 #'  if only physical or 'Reference Entities' was requested.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -2078,14 +2077,14 @@ rba_reactome_participants <- function(event_id,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "event_id", class = c("character", "numeric")),
-      list(arg = "only_physical_entities", class = "logical"),
-      list(arg = "only_reference_entities", class = "logical")
+      list(arg = "event_id", class = c("character", "numeric", "integer"), len = 1L),
+      list(arg = "only_physical_entities", class = "logical", len = 1L),
+      list(arg = "only_reference_entities", class = "logical", len = 1L)
     ),
     cond = list(
       list(
         quote(sum(only_physical_entities, only_reference_entities) == 2),
-        "You can only set either only_reference_entities or only_reference_entities to TRUE in one function call."
+        "You can only set one of `only_physical_entities` or `only_reference_entities` to TRUE."
       )
     )
   )
@@ -2159,8 +2158,10 @@ rba_reactome_participants <- function(event_id,
 #'  \cr "GET https://reactome.org/ContentService/data/pathway/\{id\}/
 #'  containedEvents/\{attributeName\}"
 #'
-#' @param event_id Reactome event's database ID (DbId) or Stable ID (StId).
-#' @param attribute_name An attribute of the events to be returned instead of
+#' @param event_id Character or Numeric: Reactome event's database ID (DbId) or
+#'   Stable ID (StId).
+#' @param attribute_name Character: (optional) An attribute of the events to be
+#'   returned instead of
 #'   the whole events. see \href{https://reactome.org/content/schema/Event}{
 #'   Reactome Data Schema: Event} for available options.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -2171,16 +2172,9 @@ rba_reactome_participants <- function(event_id,
 #'   character vector will be returned.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -2210,8 +2204,8 @@ rba_reactome_pathways_events <- function(event_id,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "event_id", class = c("numeric", "character")),
-      list(arg = "attribute_name", class = "character")
+      list(arg = "event_id", class = c("numeric", "integer", "character"), len = 1L),
+      list(arg = "attribute_name", class = "character", len = 1L)
     )
   )
 
@@ -2259,9 +2253,9 @@ rba_reactome_pathways_events <- function(event_id,
     httr = "get",
     url = .rba_stg("reactome", "url"),
     path = path_input,
-    accpet = accept_input,
+    accept = accept_input,
     parser = parser_input,
-    save_to = .rba_file(paste0("reactome_pathways_participants", ".", file_ext))
+    save_to = .rba_file(paste0("reactome_pathways_events", ".", file_ext))
   )
 
   ## Call API
@@ -2283,13 +2277,15 @@ rba_reactome_pathways_events <- function(event_id,
 #'  \cr "GET https://reactome.org/ContentService/data/pathways/low/diagram/
 #'  entity/\{id\}/allForms"
 #'
-#' @param entity_id The entity that should exist in the pathways.
-#' @param with_diagram Logical: only include pathways with diagram?
-#' @param all_forms Logical: should other variants of your supplied entity_id
-#'   be considered? (e.g. same molecule but in different compartment,
-#'   secretory form etc.) see \code{\link{rba_reactome_participants}}'s
-#'   "Details section" to learn more about how Reactome classifies molecules.
-#' @param species (optional) Numeric or Character: confine your search to a
+#' @param entity_id Character: The entity that should exist in the pathways.
+#' @param with_diagram Logical: (default = \code{FALSE}) only include pathways
+#'   with diagram?
+#' @param all_forms Logical: (default = \code{FALSE}) should other variants of
+#'   your supplied entity_id be considered? (e.g. same molecule but in different
+#'   compartment, secretory form etc.) see
+#'   \code{\link{rba_reactome_participants}}'s "Details section" to learn more
+#'   about how Reactome classifies molecules.
+#' @param species Character or Numeric: (optional) confine your search to a
 #'   specific species by providing it's NCBI Taxonomy identifier
 #'   (Human Taxonomy ID is 9606) or species name (e.g. "Homo sapiens").
 #'   See \code{\link{rba_reactome_species}} or
@@ -2302,16 +2298,9 @@ rba_reactome_pathways_events <- function(event_id,
 #'   entity and columns are pertinent information.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -2346,10 +2335,10 @@ rba_reactome_pathways_low <- function(entity_id,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "entity_id", class = "character"),
-      list(arg = "all_forms", class = "logical"),
-      list(arg = "with_diagram", class = "logical"),
-      list(arg = "species", class = c("character", "numeric"))
+      list(arg = "entity_id", class = "character", len = 1L),
+      list(arg = "all_forms", class = "logical", len = 1L),
+      list(arg = "with_diagram", class = "logical", len = 1L),
+      list(arg = "species", class = c("character", "numeric", "integer"), len = 1L)
     )
   )
 
@@ -2375,6 +2364,10 @@ rba_reactome_pathways_low <- function(entity_id,
     httr = "get",
     url = .rba_stg("reactome", "url"),
     path = path_input,
+    query = .rba_query(
+      init = list(),
+      list("species", !is.null(species), species)
+    ),
     accept = "application/json",
     parser = "json->df",
     save_to = .rba_file("reactome_pathways_low.json")
@@ -2390,7 +2383,7 @@ rba_reactome_pathways_low <- function(entity_id,
 #' This function will Return a list of all pathways with the class
 #'   "TopLevelPathway" which are annotated in your supplied species.
 #'
-#' Reactome's Events hierarchy for any specie will begin with pathways with
+#' Reactome's events hierarchy for any species begins with pathways with
 #'   class "TopLevelPathway" (e.g. "Immune System", "Metabolism of proteins").
 #'   further down in the event's hierarchy tree, each TopLevelPathway has
 #'   has other events itself (e.g. "Adaptive immune system", "Innate immune
@@ -2400,9 +2393,9 @@ rba_reactome_pathways_low <- function(entity_id,
 #' @section Corresponding API Resources:
 #'  "GET https://reactome.org/ContentService/data/pathways/top/\{species\}"
 #'
-#' @param species Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
-#'    ID is 9606.) or species name (e.g. "Homo sapiens"). See
-#'    \code{\link{rba_reactome_species}} or
+#' @param species Character or Numeric: NCBI Taxonomy identifier (Human Taxonomy
+#'   ID is 9606.) or species name (e.g. "Homo sapiens"). See
+#'   \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species/}{Reactome
 #'    Data Schema: Entries: Species}.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -2412,16 +2405,9 @@ rba_reactome_pathways_low <- function(entity_id,
 #'   pertinent information.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -2449,19 +2435,13 @@ rba_reactome_pathways_top <- function(species,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "species", class = c("character", "numeric"))
+      list(arg = "species", class = c("character", "numeric", "integer"), len = 1L)
     )
   )
 
   .msg(
     "Retrieving all Reactome top level pathways of species %s.",
     species
-  )
-
-  ## Build GET API Request's query
-  call_query <- .rba_query(
-    init = list(),
-    list("species", !is.null(species), species)
   )
 
   ## Build Function-Specific Call
@@ -2473,7 +2453,6 @@ rba_reactome_pathways_top <- function(species,
       "data/pathways/top/",
       species
     ),
-    query = call_query,
     accept = "application/json",
     parser = "json->df",
     save_to = .rba_file("reactome_pathways_top.json")
@@ -2495,9 +2474,9 @@ rba_reactome_pathways_top <- function(species,
 #'  "GET https://reactome.org/ContentService/data/people/name/\{name\}"
 #'  \cr "GET https://reactome.org/ContentService/data/people/name/\{name\}/exact"
 #'
-#' @param person_name first and last name of the person
-#' @param exact_match Logical: should the supplied name be considered as
-#'   an exact match? (default = FALSE)
+#' @param person_name Character: first and last name of the person
+#' @param exact_match Logical: (default = \code{FALSE}) should the supplied name
+#'   be considered as an exact match?
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -2505,16 +2484,9 @@ rba_reactome_pathways_top <- function(species,
 #'   information.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -2543,13 +2515,13 @@ rba_reactome_people_name <- function(person_name,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "person_name", class = "character"),
-      list(arg = "exact_match", class = "logical")
+      list(arg = "person_name", class = "character", len = 1L),
+      list(arg = "exact_match", class = "logical", len = 1L)
     )
   )
 
   .msg(
-    "Retreving the information of %s.",
+    "Retrieving the information of %s.",
     person_name
   )
 
@@ -2578,17 +2550,23 @@ rba_reactome_people_name <- function(person_name,
   return(final_output)
 }
 
-#' A person by his identifiers
+#' Get a Person by Identifier
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://reactome.org/ContentService"
+#'  "GET https://reactome.org/ContentService/data/person/\{id\}"
+#'  \cr "GET https://reactome.org/ContentService/data/person/\{id\}/
+#'  authoredPathways"
+#'  \cr "GET https://reactome.org/ContentService/data/person/\{id\}/publications"
+#'  \cr "GET https://reactome.org/ContentService/data/person/\{id\}/
+#'  \{attributeName\}"
 #'
-#' @param person_id Reactome database ID (DbId) or ORCHID ID
-#' @param authored_pathways Logical: Only return Pathway list authored by the
-#'   person? (default = FALSE)
-#' @param publications Logical: Only return publications list authored by the
-#'   person? (Defalt = FALSE)
-#' @param attribute_name (optional) A Reactome person attribute to return only.
+#' @param person_id Character: Reactome database ID (DbId) or ORCID identifier.
+#' @param authored_pathways Logical: (default = \code{FALSE}) Only return
+#'   Pathway list authored by the person?
+#' @param publications Logical: (default = \code{FALSE}) Only return
+#'   publications list authored by the person?
+#' @param attribute_name Character: (optional) A Reactome person attribute to
+#'   return only.
 #'   see \href{https://reactome.org/content/schema/Person/}{Reactome Data
 #'   Schema: person} for available options.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -2598,16 +2576,9 @@ rba_reactome_people_name <- function(person_name,
 #'   person.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -2638,10 +2609,10 @@ rba_reactome_people_id <- function(person_id,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "person_id", class = "character"),
-      list(arg = "authored_pathways", class = "logical"),
-      list(arg = "publications", class = "logical"),
-      list(arg = "attribute_name", class = "character")
+      list(arg = "person_id", class = "character", len = 1L),
+      list(arg = "authored_pathways", class = "logical", len = 1L),
+      list(arg = "publications", class = "logical", len = 1L),
+      list(arg = "attribute_name", class = "character", len = 1L)
     ),
     cond = list(
       list(
@@ -2688,7 +2659,7 @@ rba_reactome_people_id <- function(person_id,
     httr = "get",
     url = .rba_stg("reactome", "url"),
     path = path_input,
-    accpet = accept_input,
+    accept = accept_input,
     parser = parser_type_input,
     save_to = .rba_file(paste0("reactome_people_id", ".", file_ext))
   )
@@ -2713,33 +2684,26 @@ rba_reactome_people_id <- function(person_id,
 #'  \cr "GET https://reactome.org/ContentService/data/query/enhanced/\{id\}"
 #'  \cr "GET https://reactome.org/ContentService/data/query/\{id\}/\{attributeName\}"
 #'
-#' @param ids A single or Multiple database IDs (DbId), Stable IDs (StId) or
-#'   a mixture of both.
-#' @param enhanced Logical: (Default = FALSE) If 'TRUE' more information on
-#'   the supplied entry will be returned. (You can set this argument to 'TRUE'
-#'   Only when you supply a single ID).
-#' @param map (Default = FALSE) Should the supplied IDs be mapped? This
-#'   argument will only be considered when you supply multiple IDs.
-#' (e.g. when you supply previous version of stable identifiers.)
-#' @param attribute_name (Optional) Only Return an Attribute of the supplied
-#'   Database Object. (You can use this argument Only when you
-#'   supply a single ID)
+#' @param ids Character or Numeric vector: A single or Multiple database IDs
+#'   (DbId), Stable IDs (StId) or a mixture of both.
+#' @param enhanced Logical: (default = \code{FALSE}) If 'TRUE' more information
+#'   on the supplied entry will be returned. (You can set this argument to
+#'   'TRUE' Only when you supply a single ID).
+#' @param map Logical: (default = \code{FALSE}) Should the supplied IDs be
+#'   mapped? This argument will only be considered when you supply multiple IDs.
+#'   (e.g. when you supply previous version of stable identifiers.)
+#' @param attribute_name Character: (optional) Only Return an Attribute of the
+#'   supplied Database Object. (You can use this argument Only when you supply a
+#'   single ID)
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
 #' @return List containing your query outputs.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -2773,15 +2737,18 @@ rba_reactome_query <- function(ids,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "ids", class = c("character", "numeric"), max_len = 20),
-      list(arg = "enhanced", class = "logical"),
-      list(arg = "map", class = "logical"),
-      list(arg = "attribute_name", class = "character")
+      list(
+        arg = "ids", class = c("character", "numeric", "integer"),
+        min_len = 1L, max_len = 20
+      ),
+      list(arg = "enhanced", class = "logical", len = 1L),
+      list(arg = "map", class = "logical", len = 1L),
+      list(arg = "attribute_name", class = "character", len = 1L)
     ),
     cond = list(
       list(
         quote(length(ids) > 1 && (isTRUE(enhanced) | !is.null(attribute_name))),
-        "You can only use 'enhnaced' or 'attribute_name' with a single ID not multiple IDs."
+        "You can only use `enhanced` or `attribute_name` with a single ID."
       ),
       list(
         quote(!is.null(attribute_name) && isTRUE(enhanced)),
@@ -2875,7 +2842,8 @@ rba_reactome_query <- function(ids,
 #' @section Corresponding API Resources:
 #'  "GET https://reactome.org/ContentService/references/mapping/\{identifier\}"
 #'
-#' @param xref_id molecule's cross-reference (external) identifier.
+#' @param xref_id Character or Numeric: molecule's cross-reference (external)
+#'   identifier.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -2883,16 +2851,9 @@ rba_reactome_query <- function(ids,
 #'   supplied cross-reference (external) ID.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -2920,7 +2881,7 @@ rba_reactome_xref <- function(xref_id,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "xref_id", class = c("character", "numeric"))
+      list(arg = "xref_id", class = c("character", "numeric", "integer"), len = 1L)
     )
   )
 
@@ -2958,8 +2919,9 @@ rba_reactome_xref <- function(xref_id,
 #'  "GET https://reactome.org/ContentService/data/species/all"
 #'  \cr "GET https://reactome.org/ContentService/data/species/main"
 #'
-#' @param only_main Logical: If set to TRUE, will only return species which
-#'   have either manually-curated or computationally inferred pathways.
+#' @param only_main Logical: (default = \code{FALSE}) If set to TRUE, will only
+#'   return species which have either manually-curated or computationally
+#'   inferred pathways.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -2967,16 +2929,9 @@ rba_reactome_xref <- function(xref_id,
 #'   information.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -3004,7 +2959,7 @@ rba_reactome_species <- function(only_main = FALSE,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "only_main", class = "logical")
+      list(arg = "only_main", class = "logical", len = 1L)
     )
   )
 

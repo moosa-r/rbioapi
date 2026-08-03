@@ -17,63 +17,64 @@ rba_reactome_analysis_pdf(
 )
 }
 \arguments{
-\item{token}{A token associated to your previous Reactome analysis.}
+\item{token}{Character: A token associated to your previous Reactome
+analysis.}
 
-\item{species}{Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
+\item{species}{Character or Numeric: NCBI Taxonomy identifier (Human Taxonomy
 ID is 9606.) or species name (e.g. "Homo sapiens"). See
 \code{\link{rba_reactome_species}} or
-\href{https://reactome.org/content/schema/objects/Species/}{Reactome
-Data Schema: Entries: Species}.}
+ \href{https://reactome.org/content/schema/objects/Species/}{Reactome
+ Data Schema: Entries: Species}.}
 
-\item{save_to}{NULL or Character:\itemize{
-\item NULL: Save the file to an automatically-generated path.
-\item Character string: A valid file path to save the file to.}}
+\item{save_to}{NULL or Character: (optional) \itemize{ \item NULL: Save the
+file to an automatically-generated path. \item Character string: A valid
+file path to save the file to.}}
 
-\item{number}{Numeric: Maximum number of the reported pathways. Cannot not
-be greater than 50.}
+\item{number}{Numeric: (default = \code{25}) Positive integer giving the
+maximum number of pathways to include in the report.}
 
-\item{resource}{Filter results based on the resource. Default is "TOTAL",
-available choices are: "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
-"MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
+\item{resource}{Character: (default = \code{"TOTAL"}) Filter results based on
+the resource. Available choices are: "TOTAL", "UNIPROT", "ENSEMBL",
+"CHEBI", "IUPHAR", "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND" or
 "PUBCHEM_COMPOUND".}
 
-\item{diagram_profile}{Color profile of diagrams, should be either
-"Modern" (default) or "Standard".}
+\item{diagram_profile}{Character: (default = \code{"Modern"}) Color profile
+of diagrams, should be either "Modern" or "Standard".}
 
-\item{analysis_profile}{Color profile of analysis, should be one of:
-"Standard" (default), "Strosobar" or "Copper Plus".}
+\item{analysis_profile}{Character: (default = \code{"Standard"}) Color
+profile of analysis, should be one of: "Standard", "Strosobar" or "Copper
+Plus".}
 
-\item{fireworks_profile}{Color profile of overview diagram, should be one of:
-"Copper", "Copper Plus", "Barium Lithium" or "calcium salts".}
+\item{fireworks_profile}{Character: (default = \code{"Barium Lithium"}) Color
+profile of the overview diagram, should be one of: "Cooper", "Cooper Plus",
+"Barium Lithium" or "Calcium Salts".}
 
-\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
-arguments manual for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s arguments
+manual for more information on available options.}
 }
 \value{
 NULL, a PDF file will be saved to disk.
 }
 \description{
 Use this function to save a detailed report of your previous analysis (That
-  you have done with \code{\link{rba_reactome_analysis}}). You need
-  to supply a 'token' associated to your previous analysis.
+you have done with \code{\link{rba_reactome_analysis}}). You need to supply a
+'token' associated to your previous analysis.
 }
 \details{
 Token is associated to each Reactome analysis results and kept by Reactome
-  for at least 7 days. You can locate it in
-  \code{\link{rba_reactome_analysis}}'s output, under a sub-list named
-  "summary" (i.e. results$summary$token).
-  \cr Note that Reactome will store your token for only 7 days. You can
-  download your full results with
-  \code{\link{rba_reactome_analysis_download}}, and re-import it anytime to
-  reactome (using \code{\link{rba_reactome_analysis_import}}) to generate
-  a new token.
-  Use \code{\link{rba_reactome_analysis_download}} to save your results
-  in other formats.
+for at least 7 days. You can locate it in
+\code{\link{rba_reactome_analysis}}'s output, under a sub-list named
+"summary" (i.e. results$summary$token). \cr Note that Reactome will store
+your token for only 7 days. You can download your full results with
+\code{\link{rba_reactome_analysis_download}}, and re-import it anytime to
+reactome (using \code{\link{rba_reactome_analysis_import}}) to generate a new
+token. Use \code{\link{rba_reactome_analysis_download}} to save your results
+in other formats.
 }
 \section{Corresponding API Resources}{
-
- "GET https://reactome.org/AnalysisService/report/\{token\}/\{species\}/
- \{filename\}.pdf"
+ "GET
+  https://reactome.org/AnalysisService/report/\{token\}/\{species\}/
+  \{filename\}.pdf"
 }
 
 \examples{
@@ -84,20 +85,12 @@ rba_reactome_analysis_pdf(token = "MjAyMDEwMTYwMTI3MTNfMjY1MjM\%3D",
 
 }
 \references{
-\itemize{
-  \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-  Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-  Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-  Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-  Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-  Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-  Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-  pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-  https://doi.org/10.1093/nar/gkab1028
-  \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-  Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-  Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
+\itemize{ \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla,
+  C., Beavers, D., Grentner, A., ... D’Eustachio, P. (2026). The Reactome
+  Knowledgebase 2026. Nucleic Acids Res., 54(D1), D673–D681. doi:
+  10.1093/nar/gkaf1223 \item Griss J, Viteri G, Sidiropoulos K, Nguyen V,
+  Fabregat A, Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative
+  Pathway Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
   PMID: 32907876.
   \item \href{https://reactome.org/AnalysisService/}{Reactome Analysis
   Services API Documentation}

@@ -5,11 +5,12 @@
 #' This function will be called within any Reactome Analysis service which
 #'   requires input from the users.
 #'
-#' @param input Pass on caller function's input argument to this.
-#' @param type Pass on caller function's input_format argument to this.
-#'   (default = NULL)
-#' @param handle Logical: If TRUE (default), The input will be -if necessary-
-#'   written to a temp file to facilitate data uploading to Reactome.
+#' @param input Character or Numeric vector, Data frame, or Matrix: Pass on
+#'   caller function's input argument to this.
+#' @param type Character: (optional) Pass on caller function's input_format
+#'   argument to this.
+#' @param handle Logical: (default = \code{TRUE}) If TRUE, The input will be -if
+#'   necessary- written to a temp file to facilitate data uploading to Reactome.
 #'   If False, The Input will only be identified.
 #'
 #' @return If handle was FALSE, a single string with the identified file type
@@ -108,14 +109,14 @@
 #' Reactome Over-Representation or Expression Analysis
 #'
 #' Using this function, you can perform Reactome Analysis In a convenient way.
-#'   The Analysis Type will be chosen depending on your supplied
+#' The Analysis Type will be chosen depending on your supplied
 #'   input:\enumerate{
 #'   \item If you supply a vector or a single-columned table,
 #'   "Over-Representation" analysis will be performed.
 #'   \item If you supply a multi-column table, with the first column being
 #'   molecules identifiers and the rest being numeral expression values,
 #'   "Expression" analysis will be performed.}
-#'   See the details section for the accepted input types and format.
+#' See the details section for the accepted input types and format.
 #'
 #' You can supply your table or vector input in numerous formats:\enumerate{
 #'   \item A R object which can be data frame, matrix or a simple vector.
@@ -123,40 +124,37 @@
 #'   data. (The file should be formatted correctly, see below.)
 #'   \item A URL pointing to a text file on the web that contains the molecules
 #'   data. (The file should be formatted correctly, see below.}
-#'   If you supply a text file (as a local file path or URL), it should be
-#'   in TSV (Tab-Separated Values) format; Column names should start with "#"
-#'   character. Note that if you are providing the file for
-#'   "Over-Representation" analysis (i.e. Single columned-data) this header
-#'   line is optional and will be used as your 'Sample Name', otherwise it is
-#'   required.
-#'   \cr Also, form the "summary" element in the function's output, you can see
-#'   how Reactome Interpreted your input and subsequently the type of analysis
-#'   that has been performed.
-#'   \cr There is no strict criteria about the type of your molecules Identifiers,
-#'   Reactome will Map the IDs to it's internal database entities.
-#'   Nevertheless, You can check if all your identifiers has been found in
-#'   "identifiersNotFound" element in the function's output.
-#'   \cr After Any Analysis, Reactome will associate a token to your analysis.
-#'   It can be later used to in function that requires the token (e.g to retrieve
-#'   the analysis results, download pdf).
-#'   \cr Note that Reactome will store your token for only 7 days. You can
-#'   download your full results with
-#'   \code{\link{rba_reactome_analysis_download}}, and re-import it anytime to
-#'   reactome (using \code{\link{rba_reactome_analysis_import}}) to generate
-#'   a new token.
+#' If you supply a text file (as a local file path or URL), it should be in TSV
+#' (Tab-Separated Values) format; Column names should start with "#" character.
+#' Note that if you are providing the file for "Over-Representation" analysis
+#' (i.e. Single columned-data) this header line is optional and will be used as
+#' your 'Sample Name', otherwise it is required. \cr Also, form the "summary"
+#' element in the function's output, you can see how Reactome Interpreted your
+#' input and subsequently the type of analysis that has been performed. \cr
+#' There is no strict criteria about the type of your molecules Identifiers,
+#' Reactome will Map the IDs to it's internal database entities. Nevertheless,
+#' You can check if all your identifiers has been found in "identifiersNotFound"
+#' element in the function's output. \cr After any analysis, Reactome will
+#' associate a token with your analysis. It can later be used in functions that
+#' require the token (e.g. to retrieve the analysis results, download pdf). \cr
+#' Note that Reactome will store your token for only 7 days. You can download
+#' your full results with \code{\link{rba_reactome_analysis_download}}, and
+#' re-import it anytime to reactome (using
+#' \code{\link{rba_reactome_analysis_import}}) to generate a new token.
 #'
-#' @section Corresponding API Resources:
-#'  "POST https://reactome.org/AnalysisService/identifiers/form"
-#'  \cr "POST https://reactome.org/AnalysisService/identifiers/url"
-#'  \cr "POST https://reactome.org/AnalysisService/identifiers/form/projection"
-#'  \cr "POST https://reactome.org/AnalysisService/identifiers/url/projection"
+#' @section Corresponding API Resources: "POST
+#'   https://reactome.org/AnalysisService/identifiers/" \cr "POST
+#'   https://reactome.org/AnalysisService/identifiers/projection" \cr "POST
+#'   https://reactome.org/AnalysisService/identifiers/url" \cr "POST
+#'   https://reactome.org/AnalysisService/identifiers/url/projection"
 #'
-#' @param input A vector, data frame, matrix or a local file path or URL
-#'   that points to your data. See "Details section" for more information of
-#'   how to organize and supply your input.
-#' @param input_format (Optional) This function will automatically identify
-#'   your supplied input's format. But in case of unexpected issues or if you
-#'   want to be explicit, set this argument to one of:\itemize{
+#' @param input Character or Numeric vector, Data frame, or Matrix: A vector,
+#'   data frame, matrix or a local file path or URL that points to your data.
+#'   See "Details section" for more information of how to organize and supply
+#'   your input.
+#' @param input_format Character: (optional) This function will automatically
+#'   identify your supplied input's format. But in case of unexpected issues or
+#'   if you want to be explicit, set this argument to one of:\itemize{
 #'   \item "table": If you supplied a data frame or matrix as input.
 #'   \item "vector": If you supplied a simple vector (numeric or character) as
 #'   input.
@@ -164,57 +162,51 @@
 #'   correctly-formatted text file.
 #'   \item "url": If you supplied a URL pointing to a correctly-formatted
 #'   text file.}
-#' @param species Numeric or Character: NCBI Taxonomy identifier (Human
-#'   is 9606), species name (e.g. "Homo sapiens") or Reactome DbId (e.g
-#'   Homo sapiens is 48887). See
-#'    \code{\link{rba_reactome_species}} or
+#' @param species Character or Numeric: (optional) NCBI Taxonomy identifier
+#'   (Human is 9606), species name (e.g. "Homo sapiens") or Reactome DbId (e.g
+#'   Homo sapiens is 48887). See \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species/}{Reactome
 #'    Data Schema: Entries: Species}. Note that you cannot supply the species
-#'    parameter when projection parameter is TRUE.
-#' @param projection Logical (default = TRUE) Should non-human identifiers
-#'   be projected to their human equivalents? (using Reactome orthology data)
-#' @param interactors Logical (default = FALSE) Should IntAct interaction data
-#'   be used to increase the analysis background?
-#' @param sort_by Sort the result based on what column? available choices
-#'   are: "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
-#'   "FOUND_ENTITIES", "FOUND_INTERACTORS", "FOUND_REACTIONS", "ENTITIES_RATIO",
+#'   parameter when projection parameter is TRUE.
+#' @param projection Logical: (default = \code{TRUE}) Should non-human
+#'   identifiers be projected to their human equivalents? (using Reactome
+#'   orthology data)
+#' @param interactors Logical: (default = \code{FALSE}) Should IntAct
+#'   interaction data be used to increase the analysis background?
+#' @param sort_by Character: (default = \code{"ENTITIES_PVALUE"}) Sort the
+#'   result based on what column? Available choices are: "NAME",
+#'   "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS", "FOUND_ENTITIES",
+#'   "FOUND_INTERACTORS", "FOUND_REACTIONS", "ENTITIES_RATIO",
 #'   "ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO"
-#' @param order Sort Order. Can be either "ASC" (default) or "DESC".
-#' @param resource Filter results based on the resource. Default is "TOTAL",
-#'   available choices are: "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
-#'   "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
+#' @param order Character: (default = \code{"ASC"}) Sort Order. Can be either
+#'   "ASC" or "DESC".
+#' @param resource Character: (default = \code{"TOTAL"}) Filter results based on
+#'   the resource. Available choices are: "TOTAL", "UNIPROT", "ENSEMBL",
+#'   "CHEBI", "IUPHAR", "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND" or
 #'   "PUBCHEM_COMPOUND".
-#' @param p_value Set a P value threshold. Only results with P value equal to
-#'   or less than your supplied threshold will be returned. (default = 1,
-#'   Meaning no P value filtering)
-#' @param include_disease Logical (default = TRUE) Should the disease pathways
-#'   be included in the results?
-#' @param min (numeric) Minimum number of entities that a pathways should have
-#'   to be included in the results.
-#' @param max (numeric) Maximum number of entities that a pathways should have
-#'   to be included in the results.
-#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
-#'   arguments manual for more information on available options.
+#' @param p_value Numeric: (default = \code{1}) Set a P value threshold. Only
+#'   results with P value equal to or less than your supplied threshold will be
+#'   returned (1 means no P value filtering).
+#' @param include_disease Logical: (default = \code{TRUE}) Should the disease
+#'   pathways be included in the results?
+#' @param min Numeric: (optional) Minimum number of entities that a pathways
+#'   should have to be included in the results.
+#' @param max Numeric: (optional) Maximum number of entities that a pathways
+#'   should have to be included in the results.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s arguments
+#'   manual for more information on available options.
 #'
 #' @return List containing the results and information of your analysis. Note
 #'   that you can use the token returned in the "summary" sub-list of the
-#'   results (i.e. results$summary$token) to retrieve your results later or
-#'   in other Reactome analysis functions.
+#'   results (i.e. results$summary$token) to retrieve your results later or in
+#'   other Reactome analysis functions.
 #'
-#' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
+#' @references \itemize{ \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla,
+#'   C., Beavers, D., Grentner, A., ... D’Eustachio, P. (2026). The Reactome
+#'   Knowledgebase 2026. Nucleic Acids Res., 54(D1), D673–D681. doi:
+#'   10.1093/nar/gkaf1223 \item Griss J, Viteri G, Sidiropoulos K, Nguyen V,
+#'   Fabregat A, Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/AnalysisService/}{Reactome Analysis
 #'   Services API Documentation}
@@ -256,20 +248,21 @@ rba_reactome_analysis <- function(input,
     cons = list(
       list(
         arg = "input",
-        class = c("character", "numeric", "data.frame", "matrix")
+        class = c("character", "numeric", "integer", "data.frame", "matrix")
       ),
       list(
         arg = "input_format", class = "character",
+        len = 1L,
         val = c("table",
                 "vector",
                 "file",
                 "url")
       ),
-      list(arg = "projection", class = "logical"),
-      list(arg = "interactors", class = "logical"),
-      list(arg = "species", class = c("character", "numeric")),
+      list(arg = "projection", class = "logical", len = 1L),
+      list(arg = "interactors", class = "logical", len = 1L),
+      list(arg = "species", class = c("character", "numeric", "integer"), len = 1L),
       list(
-        arg = "sort_by", class = "character",
+        arg = "sort_by", class = "character", len = 1L,
         val = c("NAME",
                 "TOTAL_ENTITIES",
                 "TOTAL_INTERACTORS",
@@ -282,9 +275,9 @@ rba_reactome_analysis <- function(input,
                 "ENTITIES_FDR",
                 "REACTIONS_RATIO")
       ),
-      list(arg = "order", class = "character", val = c("ASC", "DESC")),
+      list(arg = "order", class = "character", len = 1L, val = c("ASC", "DESC")),
       list(
-        arg = "resource",  class = "character",
+        arg = "resource", class = "character", len = 1L,
         val = c("TOTAL",
                 "UNIPROT",
                 "ENSEMBL",
@@ -294,18 +287,29 @@ rba_reactome_analysis <- function(input,
                 "NCBI_PROTEIN",
                 "EMBL",
                 "COMPOUND",
-                "ENTITIES_FDR",
                 "PUBCHEM_COMPOUND")
       ),
-      list(arg = "p_value", class = "numeric"),
-      list(arg = "include_disease", class = "logical"),
-      list(arg = "min", class = "numeric"),
-      list(arg = "max", class = "numeric")
+      list(arg = "p_value", class = c("numeric", "integer"), len = 1L, ran = c(0, 1)),
+      list(arg = "include_disease", class = "logical", len = 1L),
+      list(arg = "min", class = c("numeric", "integer"), len = 1L, min_val = 0),
+      list(arg = "max", class = c("numeric", "integer"), len = 1L, min_val = 0)
     ),
     cond = list(
       list(
-        "sum(projection, !is.null(species)) == 2",
+        quote(isTRUE(projection) && !is.null(species)),
         "You cannot supply 'species' when 'projection' argument is TRUE"
+      ),
+      list(
+        quote(!is.null(min) && (!is.finite(min) || min != floor(min))),
+        "`min` should be a finite, non-negative integer."
+      ),
+      list(
+        quote(!is.null(max) && (!is.finite(max) || max != floor(max))),
+        "`max` should be a finite, non-negative integer."
+      ),
+      list(
+        quote(!is.null(min) && !is.null(max) && min > max),
+        "`min` cannot be greater than `max`."
       )
     )
   )
@@ -351,11 +355,15 @@ rba_reactome_analysis <- function(input,
   )
 
   if (input$type == "url") {
-    path_input <- paste0(path_input, "/url")
+    path_input <- paste0(path_input, "url")
   }
 
   if (isTRUE(projection)) {
-    path_input <- paste0(path_input, "/projection")
+    path_input <- paste0(
+      path_input,
+      ifelse(input$type == "url", "/", ""),
+      "projection"
+    )
   }
 
   input_call <- .rba_httr(
@@ -380,65 +388,58 @@ rba_reactome_analysis <- function(input,
 #' Generate PDF file with Reactome Analysis Results
 #'
 #' Use this function to save a detailed report of your previous analysis (That
-#'   you have done with \code{\link{rba_reactome_analysis}}). You need
-#'   to supply a 'token' associated to your previous analysis.
+#' you have done with \code{\link{rba_reactome_analysis}}). You need to supply a
+#' 'token' associated to your previous analysis.
 #'
 #' Token is associated to each Reactome analysis results and kept by Reactome
-#'   for at least 7 days. You can locate it in
-#'   \code{\link{rba_reactome_analysis}}'s output, under a sub-list named
-#'   "summary" (i.e. results$summary$token).
-#'   \cr Note that Reactome will store your token for only 7 days. You can
-#'   download your full results with
-#'   \code{\link{rba_reactome_analysis_download}}, and re-import it anytime to
-#'   reactome (using \code{\link{rba_reactome_analysis_import}}) to generate
-#'   a new token.
-#'   Use \code{\link{rba_reactome_analysis_download}} to save your results
-#'   in other formats.
+#' for at least 7 days. You can locate it in
+#' \code{\link{rba_reactome_analysis}}'s output, under a sub-list named
+#' "summary" (i.e. results$summary$token). \cr Note that Reactome will store
+#' your token for only 7 days. You can download your full results with
+#' \code{\link{rba_reactome_analysis_download}}, and re-import it anytime to
+#' reactome (using \code{\link{rba_reactome_analysis_import}}) to generate a new
+#' token. Use \code{\link{rba_reactome_analysis_download}} to save your results
+#' in other formats.
 #'
-#' @section Corresponding API Resources:
-#'  "GET https://reactome.org/AnalysisService/report/\{token\}/\{species\}/
-#'  \{filename\}.pdf"
+#' @section Corresponding API Resources: "GET
+#'   https://reactome.org/AnalysisService/report/\{token\}/\{species\}/
+#'   \{filename\}.pdf"
 #'
-#' @param token A token associated to your previous Reactome analysis.
-#' @param species Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy
-#'    ID is 9606.) or species name (e.g. "Homo sapiens"). See
-#'    \code{\link{rba_reactome_species}} or
+#' @param token Character: A token associated to your previous Reactome
+#'   analysis.
+#' @param species Character or Numeric: NCBI Taxonomy identifier (Human Taxonomy
+#'   ID is 9606.) or species name (e.g. "Homo sapiens"). See
+#'   \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species/}{Reactome
 #'    Data Schema: Entries: Species}.
-#' @param save_to NULL or Character:\itemize{
-#'   \item NULL: Save the file to an automatically-generated path.
-#'   \item Character string: A valid file path to save the file to.}
-#' @param number Numeric: Maximum number of the reported pathways. Cannot not
-#'   be greater than 50.
-#' @param resource Filter results based on the resource. Default is "TOTAL",
-#'   available choices are: "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
-#'   "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
+#' @param save_to NULL or Character: (optional) \itemize{ \item NULL: Save the
+#'   file to an automatically-generated path. \item Character string: A valid
+#'   file path to save the file to.}
+#' @param number Numeric: (default = \code{25}) Positive integer giving the
+#'   maximum number of pathways to include in the report.
+#' @param resource Character: (default = \code{"TOTAL"}) Filter results based on
+#'   the resource. Available choices are: "TOTAL", "UNIPROT", "ENSEMBL",
+#'   "CHEBI", "IUPHAR", "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND" or
 #'   "PUBCHEM_COMPOUND".
-#' @param diagram_profile Color profile of diagrams, should be either
-#'   "Modern" (default) or "Standard".
-#' @param analysis_profile Color profile of analysis, should be one of:
-#'   "Standard" (default), "Strosobar" or "Copper Plus".
-#' @param fireworks_profile Color profile of overview diagram, should be one of:
-#'   "Copper", "Copper Plus", "Barium Lithium" or "calcium salts".
-#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
-#'   arguments manual for more information on available options.
+#' @param diagram_profile Character: (default = \code{"Modern"}) Color profile
+#'   of diagrams, should be either "Modern" or "Standard".
+#' @param analysis_profile Character: (default = \code{"Standard"}) Color
+#'   profile of analysis, should be one of: "Standard", "Strosobar" or "Copper
+#'   Plus".
+#' @param fireworks_profile Character: (default = \code{"Barium Lithium"}) Color
+#'   profile of the overview diagram, should be one of: "Cooper", "Cooper Plus",
+#'   "Barium Lithium" or "Calcium Salts".
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s arguments
+#'   manual for more information on available options.
 #'
 #' @return NULL, a PDF file will be saved to disk.
 #'
-#' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
+#' @references \itemize{ \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla,
+#'   C., Beavers, D., Grentner, A., ... D’Eustachio, P. (2026). The Reactome
+#'   Knowledgebase 2026. Nucleic Acids Res., 54(D1), D673–D681. doi:
+#'   10.1093/nar/gkaf1223 \item Griss J, Viteri G, Sidiropoulos K, Nguyen V,
+#'   Fabregat A, Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/AnalysisService/}{Reactome Analysis
 #'   Services API Documentation}
@@ -452,8 +453,7 @@ rba_reactome_analysis <- function(input,
 #' }
 #'
 #' @family "Reactome Analysis Service"
-#' @seealso
-#' \code{\link{rba_reactome_analysis_download}}
+#' @seealso \code{\link{rba_reactome_analysis_download}}
 #' \code{\link{rba_reactome_analysis}}
 #' @export
 rba_reactome_analysis_pdf <- function(token,
@@ -471,12 +471,12 @@ rba_reactome_analysis_pdf <- function(token,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "token", class = "character"),
-      list(arg = "species", class = c("character", "numeric")),
+      list(arg = "token", class = "character", len = 1L),
+      list(arg = "species", class = c("character", "numeric", "integer"), len = 1L),
       list(arg = "save_to", class = "character", len = 1L, no_na = FALSE),
-      list(arg = "number", class = "numeric"),
+      list(arg = "number", class = c("numeric", "integer"), len = 1L, min_val = 1),
       list(
-        arg = "resource", class = "character",
+        arg = "resource", class = "character", len = 1L,
         val = c("TOTAL",
                 "UNIPROT",
                 "ENSEMBL",
@@ -486,20 +486,25 @@ rba_reactome_analysis_pdf <- function(token,
                 "NCBI_PROTEIN",
                 "EMBL",
                 "COMPOUND",
-                "ENTITIES_FDR",
                 "PUBCHEM_COMPOUND")
       ),
       list(
-        arg = "diagram_profile", class = "character",
+        arg = "diagram_profile", class = "character", len = 1L,
         val = c("Modern", "Standard")
       ),
       list(
-        arg = "analysis_profile", class = "character",
+        arg = "analysis_profile", class = "character", len = 1L,
         val = c("Standard", "Strosobar", "Copper Plus")
       ),
       list(
-        arg = "fireworks_profile", class = "character",
-        val = c("Copper", "Copper Plus", "Barium Lithium", "calcium salts")
+        arg = "fireworks_profile", class = "character", len = 1L,
+        val = c("Cooper", "Cooper Plus", "Barium Lithium", "Calcium Salts")
+      )
+    ),
+    cond = list(
+      list(
+        quote(!is.finite(number) || number != floor(number)),
+        "`number` should be a finite, positive integer."
       )
     )
   )
@@ -514,7 +519,6 @@ rba_reactome_analysis_pdf <- function(token,
     init = list(),
     list("number", number != 25, number),
     list("resource", resource != "TOTAL", resource),
-    list("token", !is.null(token), token),
     list("diagramProfile", diagram_profile != "Modern", diagram_profile),
     list("analysisProfile", analysis_profile != "Standard", analysis_profile),
     list("fireworksProfile", fireworks_profile != "Barium Lithium", fireworks_profile)
@@ -552,68 +556,57 @@ rba_reactome_analysis_pdf <- function(token,
 
 #' Download Different Reactome Analysis Results
 #'
-#' Based on the "request" argument, you can download different analysis
-#'   results data associated with a given token.
+#' Based on the "request" argument, you can download different analysis results
+#' data associated with a given token.
 #'
 #' Token is associated to each Reactome analysis results and kept by Reactome
-#'   for at least 7 days. You can locate it in
-#'   \code{\link{rba_reactome_analysis}}'s output, under a sub-list named
-#'   "summary" (i.e. results$summary$token).
-#'   \cr Use \code{\link{rba_reactome_analysis_pdf}} to save a full report
-#'   in PDF format.
+#' for at least 7 days. You can locate it in
+#' \code{\link{rba_reactome_analysis}}'s output, under a sub-list named
+#' "summary" (i.e. results$summary$token). \cr Use
+#' \code{\link{rba_reactome_analysis_pdf}} to save a full report in PDF format.
 #'
-#' @section Corresponding API Resources:
-#' GET https://reactome.org/AnalysisService/download/\{token\}/entities/
-#' found/\{resource\}/\{filename\}.csv"
-#' \cr GET https://reactome.org/AnalysisService/download/\{token\}/entities/
-#' notfound/\{filename\}.csv"
-#' \cr GET https://reactome.org/AnalysisService/download/\{token\}/pathways/
-#' \{resource\}/\{filename\}.csv"
-#' \cr GET https://reactome.org/AnalysisService/download/\{token\}/result.json"
-#' \cr GET https://reactome.org/AnalysisService/download/\{token\}/result.json.gz"
+#' @section Corresponding API Resources: GET
+#'   https://reactome.org/AnalysisService/download/\{token\}/entities/
+#'   found/\{resource\}/\{filename\}.csv" \cr GET
+#'   https://reactome.org/AnalysisService/download/\{token\}/entities/
+#'   notfound/\{filename\}.csv" \cr GET
+#'   https://reactome.org/AnalysisService/download/\{token\}/pathways/
+#'   \{resource\}/\{filename\}.csv" \cr GET
+#'   https://reactome.org/AnalysisService/download/\{token\}/result.json" \cr
+#'   GET https://reactome.org/AnalysisService/download/\{token\}/result.json.gz"
 #'
-#' @param token A token associated to your previous Reactome analysis.
-#' @param request What to download? Should be one of:\itemize{
-#'   \item "found_ids": Download a CSV file containing the found user-supplied
+#' @param token Character: A token associated to your previous Reactome
+#'   analysis.
+#' @param request Character: What to download? Should be one of:\itemize{ \item
+#'   "found_ids": Download a CSV file containing the found user-supplied
 #'   identifiers in the analysis associated with your supplied token and
-#'   resource.
-#'   \item "not_found_ids"" Download a CSV file containing the user-supplied
-#'   Identifiers which has not been found in the analysis associated with your
-#'   supplied token.
-#'   \item "pathways": Download a CSV file containing Pathway analysis results
-#'   of the analysis associated with your supplied token and resource.
-#'   \item "results": Download a JSON file containing the complete analysis
-#'   results associated with your supplied token.
-#'   \item "results_gz" Same as "results", but the output will be compress
-#'   (gzipped).}
-#' @param save_to NULL or Character:\itemize{
-#'   \item NULL: Save the file to an automatically-generated path.
-#'   \item Character string: A valid file path to save the file to.}
-#' @param resource (Only when request is "found_ids" or "pathways")
-#'   Filter results based on the resource. Default is "TOTAL",
-#'   available choices are:"TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
-#'   "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
-#'   "PUBCHEM_COMPOUND".
-#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
-#'   arguments manual for more information on available options.
+#'   resource. \item "not_found_ids"" Download a CSV file containing the
+#'   user-supplied Identifiers which has not been found in the analysis
+#'   associated with your supplied token. \item "pathways": Download a CSV file
+#'   containing Pathway analysis results of the analysis associated with your
+#'   supplied token and resource. \item "results": Download a JSON file
+#'   containing the complete analysis results associated with your supplied
+#'   token. \item "results_gz" Same as "results", but the output will be
+#'   compress (gzipped).}
+#' @param save_to NULL or Character: (optional) \itemize{ \item NULL: Save the
+#'   file to an automatically-generated path. \item Character string: A valid
+#'   file path to save the file to.}
+#' @param resource Character: (default = \code{"TOTAL"}) (Only when request is
+#'   "found_ids" or "pathways") Filter results based on the resource. Available
+#'   choices are:"TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR", "MIRBASE",
+#'   "NCBI_PROTEIN", "EMBL", "COMPOUND" or "PUBCHEM_COMPOUND".
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s arguments
+#'   manual for more information on available options.
 #'
-#' @return NULL, a CSV,JSON or Gzipped JSON file will be saved to disk
-#'   based on your input.
+#' @return NULL, a CSV,JSON or Gzipped JSON file will be saved to disk based on
+#'   your input.
 #'
-#' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
+#' @references \itemize{ \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla,
+#'   C., Beavers, D., Grentner, A., ... D’Eustachio, P. (2026). The Reactome
+#'   Knowledgebase 2026. Nucleic Acids Res., 54(D1), D673–D681. doi:
+#'   10.1093/nar/gkaf1223 \item Griss J, Viteri G, Sidiropoulos K, Nguyen V,
+#'   Fabregat A, Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
 #'   PMID: 32907876.
 #'   \item \href{https://reactome.org/AnalysisService/}{Reactome Analysis
 #'   Services API Documentation}
@@ -631,8 +624,7 @@ rba_reactome_analysis_pdf <- function(token,
 #' }
 #'
 #' @family "Reactome Analysis Service"
-#' @seealso
-#' \code{\link{rba_reactome_analysis_pdf}}
+#' @seealso \code{\link{rba_reactome_analysis_pdf}}
 #' \code{\link{rba_reactome_analysis}}
 #' @export
 rba_reactome_analysis_download <- function(token,
@@ -646,14 +638,14 @@ rba_reactome_analysis_download <- function(token,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "token", class = "character"),
+      list(arg = "token", class = "character", len = 1L),
       list(
-        arg = "request", class = "character",
+        arg = "request", class = "character", len = 1L,
         val = c("found_ids", "not_found_ids", "pathways", "results", "results_gz")
       ),
       list(arg = "save_to", class = "character", len = 1L, no_na = FALSE),
       list(
-        arg = "resource", class = "character", no_null = TRUE,
+        arg = "resource", class = "character", len = 1L, no_null = TRUE,
         val = c("TOTAL",
                 "UNIPROT",
                 "ENSEMBL",
@@ -663,13 +655,12 @@ rba_reactome_analysis_download <- function(token,
                 "NCBI_PROTEIN",
                 "EMBL",
                 "COMPOUND",
-                "ENTITIES_FDR",
                 "PUBCHEM_COMPOUND")
       )
     ),
     cond = list(
       list(
-        'grepl("^results|^not_found_ids$", request) & resource != "TOTAL"',
+        quote(request %in% c("not_found_ids", "results", "results_gz") && resource != "TOTAL"),
         c("You cannot supply 'resource' with ", request, " request. ignoring resource.")
       )
     ),
@@ -677,7 +668,7 @@ rba_reactome_analysis_download <- function(token,
   )
 
   .msg(
-    "Saving %s of the Reactome Analysis asociated with token: %s",
+    "Saving %s of the Reactome analysis associated with token: %s",
     switch(
       request,
       "found_ids" = "found identifiers",
@@ -699,7 +690,7 @@ rba_reactome_analysis_download <- function(token,
     request,
     "found_ids" = sprintf("%sentities/found/%s/%s.csv", path_input, resource, token),
     "not_found_ids" = sprintf("%sentities/notfound/%s.csv", path_input, token),
-    "pathways" = sprintf("%sentities/pathways/%s/%s.csv", path_input, resource, token),
+    "pathways" = sprintf("%spathways/%s/%s.csv", path_input, resource, token),
     "results" = paste0(path_input, "result.json"),
     "results_gz" = paste0(path_input, "result.json.gz")
   )
@@ -744,20 +735,19 @@ rba_reactome_analysis_download <- function(token,
 #'   \code{\link{rba_reactome_analysis_download}} with the result argument
 #'   set to "results", or "results_gz"), you can import the results back to
 #'   Reactome and retrieve a token.
-#'   \cr This is useful when you want to use other Reactome services which require
-#'   a token but you do not have a token or your token has been
+#'   \cr This is useful when you want to use other Reactome services which
+#'   require a token but you do not have a token or your token has been
 #'   expired (i.e. more than 7 days passed from your analysis).
 #'
 #' @section Corresponding API Resources:
-#' "GET https://reactome.org/AnalysisService/import/"
-#' \cr "GET https://reactome.org/AnalysisService/import/form"
-#' \cr "GET https://reactome.org/AnalysisService/import/url"
+#' "POST https://reactome.org/AnalysisService/import/"
+#' \cr "POST https://reactome.org/AnalysisService/import/url"
 #'
-#' @param input A local file path or URL that points to your -optionally
-#'   gzipped- JSON file.
-#' @param input_format (Optional) This function will automatically identify
-#'   your supplied input's format. But in case of unexpected issues or if you
-#'   want to be explicit, set this argument to one of:\itemize{
+#' @param input Character: A local file path or URL that points to your
+#'   -optionally gzipped- JSON file.
+#' @param input_format Character: (optional) This function will automatically
+#'  identify your supplied input's format. But in case of unexpected issues or
+#'  if you want to be explicit, set this argument to one of:\itemize{
 #'   \item "file": If you supplied a local file path pointing to the JSON file.
 #'   \item "url": If you supplied a URL pointing to the JSON file.}
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -767,16 +757,9 @@ rba_reactome_analysis_download <- function(token,
 #'   imported results.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -805,8 +788,11 @@ rba_reactome_analysis_import <- function(input,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "input", class = "character"),
-      list(arg = "input_format", class = "character", val = c("file", "url"))
+      list(arg = "input", class = "character", len = 1L),
+      list(
+        arg = "input_format", class = "character", len = 1L,
+        val = c("file", "url")
+      )
     )
   )
 
@@ -863,16 +849,14 @@ rba_reactome_analysis_import <- function(input,
 #'   Reactome Identifiers.
 #'
 #' @section Corresponding API Resources:
-#' "GET https://reactome.org/AnalysisService/mapping"
-#' \cr "GET https://reactome.org/AnalysisService/mapping/form"
-#' \cr "GET https://reactome.org/AnalysisService/mapping/form/projection"
-#' \cr "GET https://reactome.org/AnalysisService/mapping"
-#' \cr "GET https://reactome.org/AnalysisService/mapping/url"
-#' \cr "GET https://reactome.org/AnalysisService/mapping/url/projection"
+#' "POST https://reactome.org/AnalysisService/mapping"
+#' \cr "POST https://reactome.org/AnalysisService/mapping/projection"
+#' \cr "POST https://reactome.org/AnalysisService/mapping/url"
+#' \cr "POST https://reactome.org/AnalysisService/mapping/url/projection"
 #'
-#' @param input A vector, local file path or URL that points to your
-#'   identifiers list.
-#' @param input_format (Optional) This function will automatically identify
+#' @param input Character or Numeric vector: A vector, local file path or URL
+#'   that points to your identifiers list.
+#' @param input_format Character: (optional) This function will automatically identify
 #'   your supplied input's format. But in case of unexpected issues or if you
 #'   want to be explicit, set this argument to one of:\itemize{
 #'   \item "vector": If you supplied a simple vector (numeric or character) as
@@ -881,9 +865,9 @@ rba_reactome_analysis_import <- function(input,
 #'   correctly-formatted text file.
 #'   \item "url": If you supplied a URL pointing to a correctly-formatted
 #'   text file.}
-#' @param projection Logical (default = TRUE) Should non-human identifiers
+#' @param projection Logical: (default = \code{TRUE}) Should non-human identifiers
 #'   be projected to their human equivalents? (using Reactome orthology data)
-#' @param interactors Logical (default = FALSE) Should IntAct interaction data
+#' @param interactors Logical: (default = \code{FALSE}) Should IntAct interaction data
 #'   be included?
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
@@ -892,16 +876,9 @@ rba_reactome_analysis_import <- function(input,
 #'   are mapped to.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -929,13 +906,17 @@ rba_reactome_analysis_mapping <- function(input,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "input", class = c("character", "numeric")),
+      list(
+        arg = "input", class = c("character", "numeric", "integer"),
+        min_len = 1L
+      ),
       list(
         arg = "input_format", class = "character",
+        len = 1L,
         val = c("vector", "file", "url")
       ),
-      list(arg = "projection", class = "logical"),
-      list(arg = "interactors", class = "logical")
+      list(arg = "projection", class = "logical", len = 1L),
+      list(arg = "interactors", class = "logical", len = 1L)
     )
   )
 
@@ -964,11 +945,15 @@ rba_reactome_analysis_mapping <- function(input,
   path_input <- paste0(.rba_stg("reactome", "pth", "analysis"), "mapping/")
 
   if (input$type == "url") {
-    path_input <- paste0(path_input, "/url")
+    path_input <- paste0(path_input, "url")
   }
 
   if (isTRUE(projection)) {
-    path_input <- paste0(path_input, "/projection")
+    path_input <- paste0(
+      path_input,
+      ifelse(input$type == "url", "/", ""),
+      "projection"
+    )
   }
 
   input_call <- .rba_httr(
@@ -997,10 +982,9 @@ rba_reactome_analysis_mapping <- function(input,
 #' Reactome incorporate manually curated human reactions and PANTHER's
 #'   protein homology data to Computationally infer events in other eukaryotic
 #'   species.
-#' \cr In version 73 (11 June 2020), using an orthology-based approach,
-#'   Homo sapiens events was projected to 18,654 orthologous pathways (with
-#'   81,835 orthologous proteins) in 15 non-human species.
-#'   See \href{https://reactome.org/documentation/inferred-events/}{
+#' \cr Reactome uses an orthology-based approach to project curated human
+#'   events to supported non-human species. See
+#'   \href{https://reactome.org/documentation/inferred-events/}{
 #'   Reactome Computationally Inferred Events} for more information.
 #'
 #' @section Corresponding API Resources:
@@ -1011,38 +995,33 @@ rba_reactome_analysis_mapping <- function(input,
 #'    \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species/}{Reactome
 #'    Data Schema: Entries: Species}.
-#' @param sort_by Sort the result based on what column? available choices
-#'   are: "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
-#'   "FOUND_ENTITIES", "FOUND_INTERACTORS", "FOUND_REACTIONS", "ENTITIES_RATIO",
-#'   "ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO"
-#' @param order Sort Order. Can be either "ASC" (default) or "DESC".
-#' @param resource Filter results based on the resource. Default is "TOTAL",
-#'   available choices are: "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
-#'   "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
+#' @param sort_by Character: (default = \code{"ENTITIES_PVALUE"}) Sort the
+#'   result based on what column? Available choices are: "NAME",
+#'   "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS", "FOUND_ENTITIES",
+#'   "FOUND_INTERACTORS", "FOUND_REACTIONS", "ENTITIES_RATIO",
+#'   "ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO".
+#' @param order Character: (default = \code{"ASC"}) Sort Order. Can be either
+#'   "ASC" or "DESC".
+#' @param resource Character: (default = \code{"TOTAL"}) Filter results based on
+#'   the resource. Available choices are: "TOTAL", "UNIPROT", "ENSEMBL",
+#'   "CHEBI", "IUPHAR", "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND" or
 #'   "PUBCHEM_COMPOUND".
-#' @param p_value Set a P value threshold. Only results with P value equal to
-#'   or less than your supplied threshold will be returned. (default = 1,
-#'   Meaning no P value filtering)
-#' @param min (numeric) Minimum number of entities that a pathways should have
-#'   to be included in the results.
-#' @param max (numeric) Maximum number of entities that a pathways should have
-#'   to be included in the results.
+#' @param p_value Numeric: (default = \code{1}) Set a P value threshold. Only
+#'   results with P value equal to or less than your supplied threshold will be
+#'   returned (1 means no P value filtering).
+#' @param min Numeric: (optional) Minimum number of entities that a pathways
+#'   should have to be included in the results.
+#' @param max Numeric: (optional) Maximum number of entities that a pathways
+#'   should have to be included in the results.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
 #' @return List with the results of the comparison.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -1075,10 +1054,13 @@ rba_reactome_analysis_species <- function(species_dbid,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "species_dbid", class = "numeric"),
+      list(
+        arg = "species_dbid", class = c("numeric", "integer"),
+        len = 1L, min_val = 0
+      ),
       list(
         arg = "sort_by",
-        class = "character",
+        class = "character", len = 1L,
         val = c("NAME",
                 "TOTAL_ENTITIES",
                 "TOTAL_INTERACTORS",
@@ -1091,10 +1073,10 @@ rba_reactome_analysis_species <- function(species_dbid,
                 "ENTITIES_FDR",
                 "REACTIONS_RATIO")
       ),
-      list(arg = "order", class = "character", val = c("ASC", "DESC")),
+      list(arg = "order", class = "character", len = 1L, val = c("ASC", "DESC")),
       list(
         arg = "resource",
-        class = "character",
+        class = "character", len = 1L,
         val = c("TOTAL",
                 "UNIPROT",
                 "ENSEMBL",
@@ -1104,17 +1086,26 @@ rba_reactome_analysis_species <- function(species_dbid,
                 "NCBI_PROTEIN",
                 "EMBL",
                 "COMPOUND",
-                "ENTITIES_FDR",
                 "PUBCHEM_COMPOUND")
       ),
-      list(arg = "p_value", class = "numeric"),
-      list(arg = "min", class = "numeric"),
-      list(arg = "max", class = "numeric")
+      list(arg = "p_value", class = c("numeric", "integer"), len = 1L, ran = c(0, 1)),
+      list(arg = "min", class = c("numeric", "integer"), len = 1L, min_val = 0),
+      list(arg = "max", class = c("numeric", "integer"), len = 1L, min_val = 0)
+    ),
+    cond = list(
+      list(
+        quote(!is.finite(species_dbid) || species_dbid != floor(species_dbid)),
+        "`species_dbid` should be a finite, non-negative integer."
+      ),
+      list(
+        quote(!is.null(min) && !is.null(max) && min > max),
+        "`min` cannot be greater than `max`."
+      )
     )
   )
 
   .msg(
-    "Comparing human's pathways and computationally inferred pathways of specie %s.",
+    "Comparing human pathways and computationally inferred pathways of species %s.",
     species_dbid
   )
 
@@ -1154,8 +1145,8 @@ rba_reactome_analysis_species <- function(species_dbid,
 #'   The output format is identical to the returned object of
 #'   \code{\link{rba_reactome_analysis}}.
 #'
-#' After Any Analysis, Reactome will associate a token to your analysis. It
-#'   can be later used to in function that requires the token (e.g to retrieve
+#' After any analysis, Reactome will associate a token with your analysis. It
+#'   can later be used in functions that require the token (e.g. to retrieve
 #'   the analysis results, download pdf).
 #'   \cr Note that Reactome will store your token for only 7 days. You can
 #'   download your full results with
@@ -1165,47 +1156,42 @@ rba_reactome_analysis_species <- function(species_dbid,
 #' @section Corresponding API Resources:
 #'  "GET https://reactome.org/AnalysisService/token/\{token\}"
 #'
-#' @param token A token associated to your previous Reactome analysis.
-#' @param species Numeric or Character: NCBI Taxonomy identifier (Human
-#'   is 9606), species name (e.g. "Homo sapiens") or Reactome DbId (e.g
-#'   Homo sapiens is 48887). See
+#' @param token Character: A token associated to your previous Reactome analysis.
+#' @param species Character or Numeric: (optional) NCBI Taxonomy identifier
+#'   (Human is 9606), species name (e.g. "Homo sapiens") or Reactome DbId
+#'   (e.g. Homo sapiens is 48887). See
 #'    \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species/}{Reactome
 #'    Data Schema: Entries: Species}.
-#' @param sort_by Sort the result based on what column? available choices
-#'   are: "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
-#'   "FOUND_ENTITIES", "FOUND_INTERACTORS", "FOUND_REACTIONS", "ENTITIES_RATIO",
-#'   "ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO"
-#' @param order Sort Order. Can be either "ASC" (default) or "DESC".
-#' @param resource Filter results based on the resource. Default is "TOTAL",
-#'   available choices are: "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
-#'   "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
+#' @param sort_by Character: (default = \code{"ENTITIES_PVALUE"}) Sort the
+#'   result based on what column? Available choices are: "NAME",
+#'   "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS", "FOUND_ENTITIES",
+#'   "FOUND_INTERACTORS", "FOUND_REACTIONS", "ENTITIES_RATIO",
+#'   "ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO".
+#' @param order Character: (default = \code{"ASC"}) Sort Order. Can be either
+#'   "ASC" or "DESC".
+#' @param resource Character: (default = \code{"TOTAL"}) Filter results based on
+#'   the resource. Available choices are: "TOTAL", "UNIPROT", "ENSEMBL",
+#'   "CHEBI", "IUPHAR", "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND" or
 #'   "PUBCHEM_COMPOUND".
-#' @param p_value Set a P value threshold. Only results with P value equal to
-#'   or less than your supplied threshold will be returned. (default = 1,
-#'   Meaning no P value filtering)
-#' @param include_disease Logical (default = TRUE) Should the disease pathways
-#'   be included in the results?
-#' @param min (numeric) Minimum number of entities that a pathways should have
-#'   to be included in the results.
-#' @param max (numeric) Maximum number of entities that a pathways should have
-#'   to be included in the results.
+#' @param p_value Numeric: (default = \code{1}) Set a P value threshold. Only
+#'   results with P value equal to or less than your supplied threshold will be
+#'   returned (1 means no P value filtering).
+#' @param include_disease Logical: (default = \code{TRUE}) Should the disease
+#'   pathways be included in the results?
+#' @param min Numeric: (optional) Minimum number of entities that a pathways
+#'   should have to be included in the results.
+#' @param max Numeric: (optional) Maximum number of entities that a pathways
+#'   should have to be included in the results.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
 #' @return List containing the results and information of your analysis.
 #'
 #' @references \itemize{
-#'   \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-#'   Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-#'   Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-#'   Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-#'   Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-#'   Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-#'   Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-#'   Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-#'   pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-#'   https://doi.org/10.1093/nar/gkab1028
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
 #'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
 #'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
 #'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
@@ -1226,11 +1212,11 @@ rba_reactome_analysis_species <- function(species_dbid,
 #' \code{\link{rba_reactome_analysis}}
 #' @export
 rba_reactome_analysis_token <- function(token,
-                                        species,
+                                        species = NULL,
                                         sort_by = "ENTITIES_PVALUE",
                                         order = "ASC",
                                         resource = "TOTAL",
-                                        p_value = NULL,
+                                        p_value = 1,
                                         include_disease = TRUE,
                                         min = NULL,
                                         max = NULL,
@@ -1241,11 +1227,11 @@ rba_reactome_analysis_token <- function(token,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "token", class = "character"),
-      list(arg = "species", class = c("character", "numeric")),
+      list(arg = "token", class = "character", len = 1L),
+      list(arg = "species", class = c("character", "numeric", "integer"), len = 1L),
       list(
         arg = "sort_by",
-        class = "character",
+        class = "character", len = 1L,
         val = c("NAME",
                 "TOTAL_ENTITIES",
                 "TOTAL_INTERACTORS",
@@ -1258,10 +1244,10 @@ rba_reactome_analysis_token <- function(token,
                 "ENTITIES_FDR",
                 "REACTIONS_RATIO")
       ),
-      list(arg = "order", class = "character", val = c("ASC", "DESC")),
+      list(arg = "order", class = "character", len = 1L, val = c("ASC", "DESC")),
       list(
         arg = "resource",
-        class = "character",
+        class = "character", len = 1L,
         val = c("TOTAL",
                 "UNIPROT",
                 "ENSEMBL",
@@ -1271,13 +1257,18 @@ rba_reactome_analysis_token <- function(token,
                 "NCBI_PROTEIN",
                 "EMBL",
                 "COMPOUND",
-                "ENTITIES_FDR",
                 "PUBCHEM_COMPOUND")
       ),
-      list(arg = "p_value", class = "numeric"),
-      list(arg = "include_disease", class = "logical"),
-      list(arg = "min", class = "numeric"),
-      list(arg = "max", class = "numeric")
+      list(arg = "p_value", class = c("numeric", "integer"), len = 1L, ran = c(0, 1)),
+      list(arg = "include_disease", class = "logical", len = 1L),
+      list(arg = "min", class = c("numeric", "integer"), len = 1L, min_val = 0),
+      list(arg = "max", class = c("numeric", "integer"), len = 1L, min_val = 0)
+    ),
+    cond = list(
+      list(
+        quote(!is.null(min) && !is.null(max) && min > max),
+        "`min` cannot be greater than `max`."
+      )
     )
   )
 
@@ -1294,6 +1285,7 @@ rba_reactome_analysis_token <- function(token,
       "resource" = resource,
       "includeDisease" = ifelse(include_disease, "true", "false")
     ),
+    list("species", !is.null(species), species),
     list("pValue", !is.null(p_value), p_value),
     list("min", !is.null(min), min),
     list("max", !is.null(max), max)

@@ -182,7 +182,7 @@ It is also possible to provide a background gene list for Enrichr analysis. This
 
 Reactome curates extensive and top-quality cellular pathways data across various species. Given the fact that proteins operate in organized units, which are the pathways, analyzing your list against Reactome pathways gene sets can provide valuable insights into the functional trajectories of your results.
 
-You can refer to [Reactome & rbioapi](rbioapi_enrichr.html "2.E: Reactome & rbioapi") article for in-depth coverage of Reactome services. Here we will only demonstrate the over-representation functionality
+You can refer to [Reactome & rbioapi](rbioapi_reactome.html "2.E: Reactome & rbioapi") article for in-depth coverage of Reactome services. Here we will only demonstrate the over-representation functionality.
 
 The function `rba_reactome_analysis()` accepts gene lists or a table as input. If a table is supplied, the first column should consist of identifiers, and the next column should be numerical gene expression values. Refer to `rba_reactome_analysis()` function's manual for details. Here, we will use our gene list of critical COVID:
 

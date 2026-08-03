@@ -6,11 +6,11 @@
 \usage{
 rba_reactome_analysis_token(
   token,
-  species,
+  species = NULL,
   sort_by = "ENTITIES_PVALUE",
   order = "ASC",
   resource = "TOTAL",
-  p_value = NULL,
+  p_value = 1,
   include_disease = TRUE,
   min = NULL,
   max = NULL,
@@ -18,39 +18,41 @@ rba_reactome_analysis_token(
 )
 }
 \arguments{
-\item{token}{A token associated to your previous Reactome analysis.}
+\item{token}{Character: A token associated to your previous Reactome analysis.}
 
-\item{species}{Numeric or Character: NCBI Taxonomy identifier (Human
-is 9606), species name (e.g. "Homo sapiens") or Reactome DbId (e.g
-Homo sapiens is 48887). See
+\item{species}{Character or Numeric: (optional) NCBI Taxonomy identifier
+(Human is 9606), species name (e.g. "Homo sapiens") or Reactome DbId
+(e.g. Homo sapiens is 48887). See
  \code{\link{rba_reactome_species}} or
  \href{https://reactome.org/content/schema/objects/Species/}{Reactome
  Data Schema: Entries: Species}.}
 
-\item{sort_by}{Sort the result based on what column? available choices
-are: "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
-"FOUND_ENTITIES", "FOUND_INTERACTORS", "FOUND_REACTIONS", "ENTITIES_RATIO",
-"ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO"}
+\item{sort_by}{Character: (default = \code{"ENTITIES_PVALUE"}) Sort the
+result based on what column? Available choices are: "NAME",
+"TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS", "FOUND_ENTITIES",
+"FOUND_INTERACTORS", "FOUND_REACTIONS", "ENTITIES_RATIO",
+"ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO".}
 
-\item{order}{Sort Order. Can be either "ASC" (default) or "DESC".}
+\item{order}{Character: (default = \code{"ASC"}) Sort Order. Can be either
+"ASC" or "DESC".}
 
-\item{resource}{Filter results based on the resource. Default is "TOTAL",
-available choices are: "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
-"MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
+\item{resource}{Character: (default = \code{"TOTAL"}) Filter results based on
+the resource. Available choices are: "TOTAL", "UNIPROT", "ENSEMBL",
+"CHEBI", "IUPHAR", "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND" or
 "PUBCHEM_COMPOUND".}
 
-\item{p_value}{Set a P value threshold. Only results with P value equal to
-or less than your supplied threshold will be returned. (default = 1,
-Meaning no P value filtering)}
+\item{p_value}{Numeric: (default = \code{1}) Set a P value threshold. Only
+results with P value equal to or less than your supplied threshold will be
+returned (1 means no P value filtering).}
 
-\item{include_disease}{Logical (default = TRUE) Should the disease pathways
-be included in the results?}
+\item{include_disease}{Logical: (default = \code{TRUE}) Should the disease
+pathways be included in the results?}
 
-\item{min}{(numeric) Minimum number of entities that a pathways should have
-to be included in the results.}
+\item{min}{Numeric: (optional) Minimum number of entities that a pathways
+should have to be included in the results.}
 
-\item{max}{(numeric) Maximum number of entities that a pathways should have
-to be included in the results.}
+\item{max}{Numeric: (optional) Maximum number of entities that a pathways
+should have to be included in the results.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
@@ -65,8 +67,8 @@ Use a token generated After a Reactome analysis
   \code{\link{rba_reactome_analysis}}.
 }
 \details{
-After Any Analysis, Reactome will associate a token to your analysis. It
-  can be later used to in function that requires the token (e.g to retrieve
+After any analysis, Reactome will associate a token with your analysis. It
+  can later be used in functions that require the token (e.g. to retrieve
   the analysis results, download pdf).
   \cr Note that Reactome will store your token for only 7 days. You can
   download your full results with
@@ -88,16 +90,9 @@ rba_reactome_analysis_token(token = "MjAyMDEwMTYwMTI3MTNfMjY1MjM",
 }
 \references{
 \itemize{
-  \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-  Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-  Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-  Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-  Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-  Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-  Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-  pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-  https://doi.org/10.1093/nar/gkab1028
+  \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+  Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+  Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed

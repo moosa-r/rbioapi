@@ -13,61 +13,58 @@ rba_reactome_analysis_download(
 )
 }
 \arguments{
-\item{token}{A token associated to your previous Reactome analysis.}
+\item{token}{Character: A token associated to your previous Reactome
+analysis.}
 
-\item{request}{What to download? Should be one of:\itemize{
-\item "found_ids": Download a CSV file containing the found user-supplied
+\item{request}{Character: What to download? Should be one of:\itemize{ \item
+"found_ids": Download a CSV file containing the found user-supplied
 identifiers in the analysis associated with your supplied token and
-resource.
-\item "not_found_ids"" Download a CSV file containing the user-supplied
-Identifiers which has not been found in the analysis associated with your
-supplied token.
-\item "pathways": Download a CSV file containing Pathway analysis results
-of the analysis associated with your supplied token and resource.
-\item "results": Download a JSON file containing the complete analysis
-results associated with your supplied token.
-\item "results_gz" Same as "results", but the output will be compress
-(gzipped).}}
+resource. \item "not_found_ids"" Download a CSV file containing the
+user-supplied Identifiers which has not been found in the analysis
+associated with your supplied token. \item "pathways": Download a CSV file
+containing Pathway analysis results of the analysis associated with your
+supplied token and resource. \item "results": Download a JSON file
+containing the complete analysis results associated with your supplied
+token. \item "results_gz" Same as "results", but the output will be
+compress (gzipped).}}
 
-\item{save_to}{NULL or Character:\itemize{
-\item NULL: Save the file to an automatically-generated path.
-\item Character string: A valid file path to save the file to.}}
+\item{save_to}{NULL or Character: (optional) \itemize{ \item NULL: Save the
+file to an automatically-generated path. \item Character string: A valid
+file path to save the file to.}}
 
-\item{resource}{(Only when request is "found_ids" or "pathways")
-Filter results based on the resource. Default is "TOTAL",
-available choices are:"TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
-"MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
-"PUBCHEM_COMPOUND".}
+\item{resource}{Character: (default = \code{"TOTAL"}) (Only when request is
+"found_ids" or "pathways") Filter results based on the resource. Available
+choices are:"TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR", "MIRBASE",
+"NCBI_PROTEIN", "EMBL", "COMPOUND" or "PUBCHEM_COMPOUND".}
 
-\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
-arguments manual for more information on available options.}
+\item{...}{rbioapi option(s). See \code{\link{rba_options}}'s arguments
+manual for more information on available options.}
 }
 \value{
-NULL, a CSV,JSON or Gzipped JSON file will be saved to disk
-  based on your input.
+NULL, a CSV,JSON or Gzipped JSON file will be saved to disk based on
+  your input.
 }
 \description{
-Based on the "request" argument, you can download different analysis
-  results data associated with a given token.
+Based on the "request" argument, you can download different analysis results
+data associated with a given token.
 }
 \details{
 Token is associated to each Reactome analysis results and kept by Reactome
-  for at least 7 days. You can locate it in
-  \code{\link{rba_reactome_analysis}}'s output, under a sub-list named
-  "summary" (i.e. results$summary$token).
-  \cr Use \code{\link{rba_reactome_analysis_pdf}} to save a full report
-  in PDF format.
+for at least 7 days. You can locate it in
+\code{\link{rba_reactome_analysis}}'s output, under a sub-list named
+"summary" (i.e. results$summary$token). \cr Use
+\code{\link{rba_reactome_analysis_pdf}} to save a full report in PDF format.
 }
 \section{Corresponding API Resources}{
-
-GET https://reactome.org/AnalysisService/download/\{token\}/entities/
-found/\{resource\}/\{filename\}.csv"
-\cr GET https://reactome.org/AnalysisService/download/\{token\}/entities/
-notfound/\{filename\}.csv"
-\cr GET https://reactome.org/AnalysisService/download/\{token\}/pathways/
-\{resource\}/\{filename\}.csv"
-\cr GET https://reactome.org/AnalysisService/download/\{token\}/result.json"
-\cr GET https://reactome.org/AnalysisService/download/\{token\}/result.json.gz"
+ GET
+  https://reactome.org/AnalysisService/download/\{token\}/entities/
+  found/\{resource\}/\{filename\}.csv" \cr GET
+  https://reactome.org/AnalysisService/download/\{token\}/entities/
+  notfound/\{filename\}.csv" \cr GET
+  https://reactome.org/AnalysisService/download/\{token\}/pathways/
+  \{resource\}/\{filename\}.csv" \cr GET
+  https://reactome.org/AnalysisService/download/\{token\}/result.json" \cr
+  GET https://reactome.org/AnalysisService/download/\{token\}/result.json.gz"
 }
 
 \examples{
@@ -82,20 +79,12 @@ rba_reactome_analysis_download(token = "MjAyMDEwMTYwMTI3MTNfMjY1MjM",
 
 }
 \references{
-\itemize{
-  \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-  Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-  Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-  Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-  Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-  Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-  Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-  pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-  https://doi.org/10.1093/nar/gkab1028
-  \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-  Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-  Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
+\itemize{ \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla,
+  C., Beavers, D., Grentner, A., ... D’Eustachio, P. (2026). The Reactome
+  Knowledgebase 2026. Nucleic Acids Res., 54(D1), D673–D681. doi:
+  10.1093/nar/gkaf1223 \item Griss J, Viteri G, Sidiropoulos K, Nguyen V,
+  Fabregat A, Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative
+  Pathway Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
   PMID: 32907876.
   \item \href{https://reactome.org/AnalysisService/}{Reactome Analysis
   Services API Documentation}

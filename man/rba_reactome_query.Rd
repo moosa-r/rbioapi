@@ -13,20 +13,20 @@ rba_reactome_query(
 )
 }
 \arguments{
-\item{ids}{A single or Multiple database IDs (DbId), Stable IDs (StId) or
-a mixture of both.}
+\item{ids}{Character or Numeric vector: A single or Multiple database IDs
+(DbId), Stable IDs (StId) or a mixture of both.}
 
-\item{enhanced}{Logical: (Default = FALSE) If 'TRUE' more information on
-the supplied entry will be returned. (You can set this argument to 'TRUE'
-Only when you supply a single ID).}
+\item{enhanced}{Logical: (default = \code{FALSE}) If 'TRUE' more information
+on the supplied entry will be returned. (You can set this argument to
+'TRUE' Only when you supply a single ID).}
 
-\item{map}{(Default = FALSE) Should the supplied IDs be mapped? This
-  argument will only be considered when you supply multiple IDs.
+\item{map}{Logical: (default = \code{FALSE}) Should the supplied IDs be
+mapped? This argument will only be considered when you supply multiple IDs.
 (e.g. when you supply previous version of stable identifiers.)}
 
-\item{attribute_name}{(Optional) Only Return an Attribute of the supplied
-Database Object. (You can use this argument Only when you
-supply a single ID)}
+\item{attribute_name}{Character: (optional) Only Return an Attribute of the
+supplied Database Object. (You can use this argument Only when you supply a
+single ID)}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
@@ -62,16 +62,9 @@ rba_reactome_query(ids = "8863054", attribute_name = "displayName")
 }
 \references{
 \itemize{
-  \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-  Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-  Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-  Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-  Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-  Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-  Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-  pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-  https://doi.org/10.1093/nar/gkab1028
+  \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+  Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+  Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed

@@ -23,49 +23,52 @@ rba_reactome_exporter_reaction(
 )
 }
 \arguments{
-\item{event_id}{Reactome
+\item{event_id}{Character: Reactome
 \href{https://reactome.org/content/schema/ReactionLikeEvent/}{Reaction-like
 event}'s identifier.}
 
-\item{save_to}{NULL or Character:\itemize{
+\item{save_to}{NULL or Character: (default = \code{NULL}) \itemize{
 \item NULL: Save the file to an automatically-generated path.
 \item Character string: A valid file path to save the file to.}}
 
-\item{output_format}{Images format, Can be one of: png (default), jpeg,
-svg or gif.}
+\item{output_format}{Character: (default = \code{"png"}) Image format, can be
+one of: png, jpg, jpeg, svg or gif.}
 
-\item{resource}{The analysis resource for which the results will be
-overlaid on top of the given pathways overview.}
+\item{resource}{Character: (default = \code{"TOTAL"}) The analysis resource
+for which the results will be overlaid on top of the given pathways
+overview.}
 
-\item{diagram_profile}{Color profile of diagrams, should be one of "Copper"
-(default), "Copper Plus", "Barium Lithium" or "calcium salts".}
+\item{diagram_profile}{Character: (default = \code{"Modern"}) Color profile
+of diagrams, should be either "Modern" or "Standard".}
 
-\item{analysis_profile}{Color profile of analysis, should be one of:
-"Standard" (default), "Strosobar" or "Copper Plus".}
+\item{analysis_profile}{Character: (default = \code{"Standard"}) Color
+profile of analysis, should be one of: "Standard", "Strosobar" or "Copper
+Plus".}
 
-\item{token}{The analysis Token for which the results will be overlaid on
-top of the given pathways overview. see:
+\item{token}{Character: (optional) The analysis Token for which the results
+will be overlaid on top of the given pathways overview. see:
 \code{\link{rba_reactome_analysis}}.}
 
-\item{exp_column}{numeric: (only if token is supplied) Specify the
+\item{exp_column}{Numeric: (optional) (only if token is supplied) Specify the
 expression column for the overlay.}
 
-\item{image_quality}{Numeric: A number  ranging from 1 to 10. 1 is the
-lowest quality and 10 is the highest (default = 5).}
+\item{image_quality}{Numeric: (default = \code{5}) A number  ranging from 1
+to 10. 1 is the lowest quality and 10 is the highest.}
 
-\item{flag_element}{Gene name, protein ID, chemical ID or Reactome ID of a
-diagram's element to be flagged.}
+\item{flag_element}{Character: (optional) Gene name, protein ID, chemical ID
+or Reactome ID of a diagram's element to be flagged.}
 
-\item{flg_interactors}{Logical: Should the interactor be considered when
-flagging a diagram element? (default = TRUE)}
+\item{flg_interactors}{Logical: (default = \code{TRUE}) Should the interactor
+be considered when flagging a diagram element?}
 
-\item{sel}{CSV line for highlighting element(s) selection in the diagram.}
+\item{sel}{Character vector: (optional) CSV line for highlighting element(s)
+selection in the diagram.}
 
-\item{title}{Logical: Should the pathway name be displayed below the image?
-(default = TRUE)}
+\item{title}{Logical: (default = \code{TRUE}) Should the pathway name be
+displayed below the image?}
 
-\item{margin}{Numeric: A number ranging from 0 to 20 to set as the image's
-margin. (default = 15)}
+\item{margin}{Numeric: (default = \code{15}) A number ranging from 0 to 20 to
+set as the image's margin.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
@@ -102,16 +105,9 @@ rba_reactome_exporter_diagram(event_id = "R-HSA-6787403",
 }
 \references{
 \itemize{
-  \item Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-  Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-  Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-  Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-  Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-  Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-  Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-  pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-  https://doi.org/10.1093/nar/gkab1028
+  \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+  Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+  Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
