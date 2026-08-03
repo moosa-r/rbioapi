@@ -212,8 +212,8 @@ element.
 
 str(list_id)
 #> List of 2
-#>  $ shortId   : chr "e5bc3b7639d029135c7dd88a645044b4"
-#>  $ userListId: int 134160995
+#>  $ shortId   : chr "20c7146cc18154f3b7c3a213d93cd562"
+#>  $ userListId: int 134419728
 ```
 
 Finally, we are ready to submit the enrichment analysis request to
