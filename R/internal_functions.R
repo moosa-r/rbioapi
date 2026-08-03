@@ -540,7 +540,7 @@
         httr_call <- append(
           httr_call,
           list(
-            str2lang(sprintf("httr::accept(\"%s\")", ext_args$obj_accept))
+            as.call(list(quote(httr::accept), ext_args$obj_accept))
           )
         )
         if (utils::hasName(ext_args, "obj_parser")) {parser <- ext_args$obj_parser}
@@ -548,7 +548,8 @@
         httr_call <- append(
           httr_call,
           list(
-            str2lang(sprintf("httr::accept(\"%s\")", ext_args$file_accept)),
+            as.call(list(quote(httr::accept), ext_args$file_accept)
+            ),
             as.call(
               list(
                 quote(httr::write_disk),
@@ -569,7 +570,8 @@
         httr_call <- append(
           httr_call,
           list(
-            str2lang(sprintf("httr::accept(\"%s\")", ext_args$accept))
+            as.call(list(quote(httr::accept), ext_args$accept)
+            )
           )
         )
       }
@@ -895,21 +897,18 @@
 #' @noRd
 .rba_args_req <- function(cons, n = 2) {
   # List required arguments *arguments with no default value
-  f_name <- as.character(sys.calls()[[sys.nframe() - n]])[[1]]
-  f_args <- try(
-    names(formals(f_name)),
-    silent = TRUE
-  )
+  f <- sys.function(sys.parent(n))
 
-  if (!inherits(f_args, "try-error")) {
+  if (is.function(f)) {
 
-    f <- paste0(deparse(get(f_name)), collapse = "")
-    req <- regmatches(
-      f,
-      regexpr("(?<=^function \\().*?(?=\\)\\s{)",
-              f, perl = TRUE)
-    )
-    req <- f_args[!grepl(pattern = "(=)|(\\.\\.\\.)", x = unlist(strsplit(req, ",")))]
+    f_args <- formals(f)
+    req <- names(f_args)[vapply(
+      X = names(f_args),
+      FUN = function(x) {
+        x != "..." && identical(f_args[[x]], quote(expr = ))
+      },
+      FUN.VALUE = logical(1)
+    )]
     # Add `no_null = TRUE` to required arguments unless explicitly set to `FALSE`
     cons <- lapply(
       X = cons,

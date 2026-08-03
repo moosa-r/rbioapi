@@ -71,6 +71,36 @@ test_that(".rba_args works", {
     regexp = "arg22"
   )
 
+  # Required NULL values are rejected while optional NULL values remain valid
+  .rba_args_required <- function(required,
+                                 optional = NULL,
+                                 allow_required_null = FALSE) {
+    required_cons <- list(arg = "required", class = "numeric")
+    if (isTRUE(allow_required_null)) {
+      required_cons[["no_null"]] <- FALSE
+    }
+    .rba_args(
+      cons = list(
+        required_cons,
+        list(arg = "optional", class = "numeric")
+      )
+    )
+  }
+
+  expect_error(
+    object = .rba_args_required(required = NULL),
+    regexp = "`required` cannot be NULL"
+  )
+  expect_invisible(
+    call = .rba_args_required(required = 1, optional = NULL)
+  )
+  expect_invisible(
+    call = .rba_args_required(
+      required = NULL,
+      allow_required_null = TRUE
+    )
+  )
+
   # A stale value outside the caller must not satisfy a missing local argument
   stale_limit <- 10
   expect_error(
