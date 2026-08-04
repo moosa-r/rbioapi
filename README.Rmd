@@ -32,6 +32,11 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
+> **Development version**
+> The project documentation reflects the current development version of rbioapi and may differ from the latest CRAN release. For documentation matching the CRAN version, see the CRAN reference manual or the help pages installed with the package.
+
+
+
 # What does rbioapi do?
 
 Currently fully supports **Enrichr**, **JASPAR**, **miEAA**, **PANTHER**, **Reactome**, **STRING**, and **UniProt**!
@@ -46,8 +51,8 @@ rbioapi is dedicated to **Biological or Medical** databases and web services. Cu
 
 On CRAN (Stable) version: (<https://cran.r-project.org/package=rbioapi>)
 
-1.  [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr") ([rbioapi vignette article](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html "rbioapi & Enrichr vignette article")) ^(new)^
-2.  [JASPAR](https://jaspar.elixir.no/ "JASPAR - A database of transcription factor binding profiles") ([rbioapi vignette article](https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html "rbioapi & Enrichr vignette article")) ^(new)^
+1.  [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr") ([rbioapi vignette article](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html "rbioapi & Enrichr vignette article"))
+2.  [JASPAR](https://jaspar.elixir.no/ "JASPAR - A database of transcription factor binding profiles") ([rbioapi vignette article](https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html "rbioapi & Enrichr vignette article"))
 3.  [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa/ "miRNA Enrichment Analysis and Annotation Tool (miEAA)") ([rbioapi vignette article](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html "rbioapi & miEAA vignette article"))
 4.  [PANTHER](https://www.pantherdb.org "Protein Analysis THrough Evolutionary Relationships (PANTHER)") ([rbioapi vignette article](https://rbioapi.moosa-r.com/articles/rbioapi_panther.html "rbioapi & PANTHER vignette article"))
 5.  [Reactome](https://reactome.org/) ([rbioapi vignette article](https://rbioapi.moosa-r.com/articles/rbioapi_reactome.html "rbioapi & Reactome vignette article"))
