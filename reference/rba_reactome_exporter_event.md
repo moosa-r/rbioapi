@@ -14,15 +14,15 @@ rba_reactome_exporter_event(event_id, output_format, save_to = NULL, ...)
 
 - event_id:
 
-  Reactome event's database IDs (DbId) or Stable IDs (StId).
+  Character: Reactome event's database IDs (DbId) or Stable IDs (StId).
 
 - output_format:
 
-  Either "sbgn" or "sbml".
+  Character: Either "sbgn" or "sbml".
 
 - save_to:
 
-  NULL or Character:
+  NULL or Character: (default = `NULL`)
 
   - NULL: Save the file to an automatically-generated path.
 
@@ -48,16 +48,10 @@ disk.
 
 ## References
 
-- Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla,
-  Lisa Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot
-  Ragueneau, Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser,
-  Timothy Brunson, Nasim Sanati, Liam Beckman, Xiang Shao, Antonio
-  Fabregat, Konstantinos Sidiropoulos, Julieth Murillo, Guilherme
-  Viteri, Justin Cook, Solomon Shorser, Gary Bader, Emek Demir, Chris
-  Sander, Robin Haw, Guanming Wu, Lincoln Stein, Henning Hermjakob,
-  Peter D’Eustachio, The reactome pathway knowledgebase 2022, Nucleic
-  Acids Research, 2021;, kab1028, https://doi.org/10.1093/nar/gkab1028
+- Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+  Grentner, A., ... D’Eustachio, P. (2026). The Reactome
+  Knowledgebase 2026. Nucleic Acids Res., 54(D1), D673–D681. doi:
+  10.1093/nar/gkaf1223
 
 - Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A, Hermjakob H.
   ReactomeGSA - Efficient Multi-Omics Comparative Pathway Analysis. Mol

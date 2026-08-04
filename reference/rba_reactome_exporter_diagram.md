@@ -30,7 +30,7 @@ rba_reactome_exporter_diagram(
   sel = NULL,
   title = TRUE,
   margin = 15,
-  ehld = FALSE,
+  ehld = TRUE,
   ...
 )
 ```
@@ -39,11 +39,11 @@ rba_reactome_exporter_diagram(
 
 - event_id:
 
-  Reactome event's identifier.
+  Character: Reactome event's identifier.
 
 - save_to:
 
-  NULL or Character:
+  NULL or Character: (default = `NULL`)
 
   - NULL: Save the file to an automatically-generated path.
 
@@ -51,79 +51,81 @@ rba_reactome_exporter_diagram(
 
 - create_document:
 
-  logical: Create PDF document instead of image? ( default = FALSE)
+  Logical: (default = `FALSE`) Create PDF document instead of image?
 
 - resource:
 
-  The analysis resource for which the results will be overlaid on top of
-  the given pathways overview,
+  Character: (default = `"TOTAL"`) The analysis resource for which the
+  results will be overlaid on top of the given pathways overview.
 
 - diagram_profile:
 
-  Color profile of diagrams, should be either "Modern" (default) or
-  "Standard".
+  Character: (default = `"Modern"`) Color profile of diagrams, should be
+  either "Modern" or "Standard".
 
 - analysis_profile:
 
-  Color profile of analysis, should be one of: "Standard" (default),
-  "Strosobar" or "Copper Plus"
+  Character: (default = `"Standard"`) Color profile of analysis, should
+  be one of: "Standard", "Strosobar" or "Copper Plus".
 
 - token:
 
-  The analysis Token for which the results will be overlaid on top of
-  the given pathways overview. see:
+  Character: (optional) The analysis Token for which the results will be
+  overlaid on top of the given pathways overview. see:
   [`rba_reactome_analysis`](https://rbioapi.moosa-r.com/reference/rba_reactome_analysis.md).
 
 - exp_column:
 
-  numeric: (only if token is supplied) Specify the expression column for
-  the overlay.
+  Numeric: (optional) (only if token is supplied) Specify the expression
+  column for the overlay.
 
 - document_level:
 
-  numeric: (Only if "create_document" is TRUE) if 0 (default) the
-  event's children will not be included in the PDF document. Set this to
-  1 to include event's children.
+  Numeric: (default = `1`) (Only if "create_document" is TRUE) use 0 to
+  exclude the event's children or 1 to include them.
 
 - output_format:
 
-  (Only if "create_document" is FALSE) Image format of the saved
-  diagram. Can be one of: png (default), jpeg, svg or gif.
+  Character: (default = `"png"`) (Only if "create_document" is FALSE)
+  Image format of the saved diagram. Can be one of: png, jpg, jpeg, svg
+  or gif.
 
 - image_quality:
 
-  Numeric: (Only if "create_document" is FALSE), a number ranging from 1
-  to 10. 1 is the lowest quality and 10 is the highest (default = 5).
+  Numeric: (default = `5`) (Only if "create_document" is FALSE), a
+  number ranging from 1 to 10. 1 is the lowest quality and 10 is the
+  highest.
 
 - flag_element:
 
-  (Only if "create_document" is FALSE) gene name, protein ID, chemical
-  ID or Reactome ID of a diagram's element to be flagged.
+  Character: (optional) (Only if "create_document" is FALSE) gene name,
+  protein ID, chemical ID or Reactome ID of a diagram's element to be
+  flagged.
 
 - flg_interactors:
 
-  Logical: (Only if "create_document" is FALSE) Should the interactor be
-  considered when flagging a diagram element? (default = TRUE)
+  Logical: (default = `TRUE`) (Only if "create_document" is FALSE)
+  Should the interactor be considered when flagging a diagram element?
 
 - sel:
 
-  (Only if "create_document" is FALSE) CSV line for highlighting
-  element(s) selection in the diagram.
+  Character vector: (optional) (Only if "create_document" is FALSE) CSV
+  line for highlighting element(s) selection in the diagram.
 
 - title:
 
-  Logical: (Only if "create_document" is FALSE) Should the pathway name
-  be displayed below the image? (default = TRUE)
+  Logical: (default = `TRUE`) (Only if "create_document" is FALSE)
+  Should the pathway name be displayed below the image?
 
 - margin:
 
-  Numeric: (Only if "create_document" is FALSE) A number ranging from 0
-  to 20 to set as the image's margin. (default = 15)
+  Numeric: (default = `15`) (Only if "create_document" is FALSE) A
+  number ranging from 0 to 20 to set as the image's margin.
 
 - ehld:
 
-  logical: (Only if "create_document" is FALSE) Should "Enhanced High
-  Level Diagram" be considered?
+  Logical: (default = `TRUE`) (Only if "create_document" is FALSE)
+  Should Enhanced High Level Diagrams be considered?
 
 - ...:
 
@@ -163,16 +165,10 @@ supplied event's children will also be included.
 
 ## References
 
-- Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla,
-  Lisa Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot
-  Ragueneau, Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser,
-  Timothy Brunson, Nasim Sanati, Liam Beckman, Xiang Shao, Antonio
-  Fabregat, Konstantinos Sidiropoulos, Julieth Murillo, Guilherme
-  Viteri, Justin Cook, Solomon Shorser, Gary Bader, Emek Demir, Chris
-  Sander, Robin Haw, Guanming Wu, Lincoln Stein, Henning Hermjakob,
-  Peter D’Eustachio, The reactome pathway knowledgebase 2022, Nucleic
-  Acids Research, 2021;, kab1028, https://doi.org/10.1093/nar/gkab1028
+- Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+  Grentner, A., ... D’Eustachio, P. (2026). The Reactome
+  Knowledgebase 2026. Nucleic Acids Res., 54(D1), D673–D681. doi:
+  10.1093/nar/gkaf1223
 
 - Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A, Hermjakob H.
   ReactomeGSA - Efficient Multi-Omics Comparative Pathway Analysis. Mol

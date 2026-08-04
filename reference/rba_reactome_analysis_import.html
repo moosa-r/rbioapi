@@ -3,14 +3,14 @@
   rba_reactome_analysis_download with the result argument
   set to "results", or "results_gz"), you can import the results back to
   Reactome and retrieve a token.
-   This is useful when you want to use other Reactome services which require
-  a token but you do not have a token or your token has been
+   This is useful when you want to use other Reactome services which
+  require a token but you do not have a token or your token has been
   expired (i.e. more than 7 days passed from your analysis).'><meta property="og:description" content='If you have a JSON file of analysis results (only obtained via
   rba_reactome_analysis_download with the result argument
   set to "results", or "results_gz"), you can import the results back to
   Reactome and retrieve a token.
-   This is useful when you want to use other Reactome services which require
-  a token but you do not have a token or your token has been
+   This is useful when you want to use other Reactome services which
+  require a token but you do not have a token or your token has been
   expired (i.e. more than 7 days passed from your analysis).'><meta property="og:image" content="https://rbioapi.moosa-r.com/logo.svg"><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-BF9VGFNZ4C"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -71,8 +71,8 @@
   <code><a href="rba_reactome_analysis_download.html">rba_reactome_analysis_download</a></code> with the result argument
   set to "results", or "results_gz"), you can import the results back to
   Reactome and retrieve a token.
-  <br> This is useful when you want to use other Reactome services which require
-  a token but you do not have a token or your token has been
+  <br> This is useful when you want to use other Reactome services which
+  require a token but you do not have a token or your token has been
   expired (i.e. more than 7 days passed from your analysis).</p>
     </div>
 
@@ -86,14 +86,14 @@
 
 
 <dl><dt id="arg-input">input<a class="anchor" aria-label="anchor" href="#arg-input"></a></dt>
-<dd><p>A local file path or URL that points to your -optionally
-gzipped- JSON file.</p></dd>
+<dd><p>Character: A local file path or URL that points to your
+-optionally gzipped- JSON file.</p></dd>
 
 
 <dt id="arg-input-format">input_format<a class="anchor" aria-label="anchor" href="#arg-input-format"></a></dt>
-<dd><p>(Optional) This function will automatically identify
-your supplied input's format. But in case of unexpected issues or if you
-want to be explicit, set this argument to one of:</p><ul><li><p>"file": If you supplied a local file path pointing to the JSON file.</p></li>
+<dd><p>Character: (optional) This function will automatically
+identify your supplied input's format. But in case of unexpected issues or
+if you want to be explicit, set this argument to one of:</p><ul><li><p>"file": If you supplied a local file path pointing to the JSON file.</p></li>
 <li><p>"url": If you supplied a URL pointing to the JSON file.</p></li>
 </ul></dd>
 
@@ -112,23 +112,15 @@ arguments manual for more information on available options.</p></dd>
     <h2 id="corresponding-api-resources">Corresponding API Resources<a class="anchor" aria-label="anchor" href="#corresponding-api-resources"></a></h2>
 
 
-<p>"GET https://reactome.org/AnalysisService/import/"
-<br> "GET https://reactome.org/AnalysisService/import/form"
-<br> "GET https://reactome.org/AnalysisService/import/url"</p>
+<p>"POST https://reactome.org/AnalysisService/import/"
+<br> "POST https://reactome.org/AnalysisService/import/url"</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
 
-<ul><li><p>Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-  Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-  Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-  Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-  Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-  Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-  Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-  pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-  https://doi.org/10.1093/nar/gkab1028</p></li>
+<ul><li><p>Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+  Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+  Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223</p></li>
 <li><p>Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed

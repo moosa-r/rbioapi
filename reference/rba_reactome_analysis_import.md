@@ -18,14 +18,14 @@ rba_reactome_analysis_import(input, input_format = NULL, ...)
 
 - input:
 
-  A local file path or URL that points to your -optionally gzipped- JSON
-  file.
+  Character: A local file path or URL that points to your -optionally
+  gzipped- JSON file.
 
 - input_format:
 
-  (Optional) This function will automatically identify your supplied
-  input's format. But in case of unexpected issues or if you want to be
-  explicit, set this argument to one of:
+  Character: (optional) This function will automatically identify your
+  supplied input's format. But in case of unexpected issues or if you
+  want to be explicit, set this argument to one of:
 
   - "file": If you supplied a local file path pointing to the JSON file.
 
@@ -44,22 +44,15 @@ results.
 
 ## Corresponding API Resources
 
-"GET https://reactome.org/AnalysisService/import/"  
-"GET https://reactome.org/AnalysisService/import/form"  
-"GET https://reactome.org/AnalysisService/import/url"
+"POST https://reactome.org/AnalysisService/import/"  
+"POST https://reactome.org/AnalysisService/import/url"
 
 ## References
 
-- Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla,
-  Lisa Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot
-  Ragueneau, Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser,
-  Timothy Brunson, Nasim Sanati, Liam Beckman, Xiang Shao, Antonio
-  Fabregat, Konstantinos Sidiropoulos, Julieth Murillo, Guilherme
-  Viteri, Justin Cook, Solomon Shorser, Gary Bader, Emek Demir, Chris
-  Sander, Robin Haw, Guanming Wu, Lincoln Stein, Henning Hermjakob,
-  Peter D’Eustachio, The reactome pathway knowledgebase 2022, Nucleic
-  Acids Research, 2021;, kab1028, https://doi.org/10.1093/nar/gkab1028
+- Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+  Grentner, A., ... D’Eustachio, P. (2026). The Reactome
+  Knowledgebase 2026. Nucleic Acids Res., 54(D1), D673–D681. doi:
+  10.1093/nar/gkaf1223
 
 - Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A, Hermjakob H.
   ReactomeGSA - Efficient Multi-Omics Comparative Pathway Analysis. Mol

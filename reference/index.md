@@ -207,7 +207,7 @@ database’s Contents Services API resources.
 ### Person Queries
 
 - [`rba_reactome_people_id()`](https://rbioapi.moosa-r.com/reference/rba_reactome_people_id.md)
-  : A person by his identifiers
+  : Get a Person by Identifier
 - [`rba_reactome_people_name()`](https://rbioapi.moosa-r.com/reference/rba_reactome_people_name.md)
   : Get Persons Information by Name
 

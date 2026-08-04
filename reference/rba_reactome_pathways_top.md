@@ -13,7 +13,7 @@ rba_reactome_pathways_top(species, ...)
 
 - species:
 
-  Numeric or Character: NCBI Taxonomy identifier (Human Taxonomy ID is
+  Character or Numeric: NCBI Taxonomy identifier (Human Taxonomy ID is
   9606.) or species name (e.g. "Homo sapiens"). See
   [`rba_reactome_species`](https://rbioapi.moosa-r.com/reference/rba_reactome_species.md)
   or [Reactome Data Schema: Entries:
@@ -32,7 +32,7 @@ pertinent information.
 
 ## Details
 
-Reactome's Events hierarchy for any specie will begin with pathways with
+Reactome's events hierarchy for any species begins with pathways with
 class "TopLevelPathway" (e.g. "Immune System", "Metabolism of
 proteins"). further down in the event's hierarchy tree, each
 TopLevelPathway has has other events itself (e.g. "Adaptive immune
@@ -45,16 +45,10 @@ hierarchy tree would typically goes further down.
 
 ## References
 
-- Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla,
-  Lisa Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot
-  Ragueneau, Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser,
-  Timothy Brunson, Nasim Sanati, Liam Beckman, Xiang Shao, Antonio
-  Fabregat, Konstantinos Sidiropoulos, Julieth Murillo, Guilherme
-  Viteri, Justin Cook, Solomon Shorser, Gary Bader, Emek Demir, Chris
-  Sander, Robin Haw, Guanming Wu, Lincoln Stein, Henning Hermjakob,
-  Peter D’Eustachio, The reactome pathway knowledgebase 2022, Nucleic
-  Acids Research, 2021;, kab1028, https://doi.org/10.1093/nar/gkab1028
+- Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+  Grentner, A., ... D’Eustachio, P. (2026). The Reactome
+  Knowledgebase 2026. Nucleic Acids Res., 54(D1), D673–D681. doi:
+  10.1093/nar/gkaf1223
 
 - Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A, Hermjakob H.
   ReactomeGSA - Efficient Multi-Omics Comparative Pathway Analysis. Mol

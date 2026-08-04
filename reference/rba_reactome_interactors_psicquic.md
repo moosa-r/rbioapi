@@ -21,19 +21,20 @@ rba_reactome_interactors_psicquic(
 
 - proteins:
 
-  Proteins to retrieve PSICQUIC interactors.
+  Character or Numeric vector: (optional) Proteins to retrieve PSICQUIC
+  interactors.
 
 - resource:
 
-  The PSICQUIC resource for your supplied proteins. Call
-  rba_reactome_interactors_psicquic() without argument to get the
-  available options.
+  Character: (optional) The PSICQUIC resource for your supplied
+  proteins. Call rba_reactome_interactors_psicquic() without argument to
+  get the available options.
 
 - details:
 
-  Logical: If TRUE (default) a detailed list of interactors will be
-  returned. If FALSE, only a summary of available interactors will be
-  returned.
+  Logical: (default = `TRUE`) If TRUE a detailed list of interactors
+  will be returned. If FALSE, only a summary of available interactors
+  will be returned.
 
 - ...:
 
@@ -59,16 +60,10 @@ https://reactome.org/ContentService/interactors/psicquic/molecules/
 
 ## References
 
-- Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla,
-  Lisa Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot
-  Ragueneau, Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser,
-  Timothy Brunson, Nasim Sanati, Liam Beckman, Xiang Shao, Antonio
-  Fabregat, Konstantinos Sidiropoulos, Julieth Murillo, Guilherme
-  Viteri, Justin Cook, Solomon Shorser, Gary Bader, Emek Demir, Chris
-  Sander, Robin Haw, Guanming Wu, Lincoln Stein, Henning Hermjakob,
-  Peter D’Eustachio, The reactome pathway knowledgebase 2022, Nucleic
-  Acids Research, 2021;, kab1028, https://doi.org/10.1093/nar/gkab1028
+- Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+  Grentner, A., ... D’Eustachio, P. (2026). The Reactome
+  Knowledgebase 2026. Nucleic Acids Res., 54(D1), D673–D681. doi:
+  10.1093/nar/gkaf1223
 
 - Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A, Hermjakob H.
   ReactomeGSA - Efficient Multi-Omics Comparative Pathway Analysis. Mol

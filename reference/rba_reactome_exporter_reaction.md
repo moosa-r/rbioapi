@@ -29,13 +29,13 @@ rba_reactome_exporter_reaction(
 
 - event_id:
 
-  Reactome [Reaction-like
+  Character: Reactome [Reaction-like
   event](https://reactome.org/content/schema/ReactionLikeEvent/)'s
   identifier.
 
 - save_to:
 
-  NULL or Character:
+  NULL or Character: (default = `NULL`)
 
   - NULL: Save the file to an automatically-generated path.
 
@@ -43,62 +43,64 @@ rba_reactome_exporter_reaction(
 
 - output_format:
 
-  Images format, Can be one of: png (default), jpeg, svg or gif.
+  Character: (default = `"png"`) Image format, can be one of: png, jpg,
+  jpeg, svg or gif.
 
 - resource:
 
-  The analysis resource for which the results will be overlaid on top of
-  the given pathways overview.
+  Character: (default = `"TOTAL"`) The analysis resource for which the
+  results will be overlaid on top of the given pathways overview.
 
 - diagram_profile:
 
-  Color profile of diagrams, should be one of "Copper" (default),
-  "Copper Plus", "Barium Lithium" or "calcium salts".
+  Character: (default = `"Modern"`) Color profile of diagrams, should be
+  either "Modern" or "Standard".
 
 - analysis_profile:
 
-  Color profile of analysis, should be one of: "Standard" (default),
-  "Strosobar" or "Copper Plus".
+  Character: (default = `"Standard"`) Color profile of analysis, should
+  be one of: "Standard", "Strosobar" or "Copper Plus".
 
 - token:
 
-  The analysis Token for which the results will be overlaid on top of
-  the given pathways overview. see:
+  Character: (optional) The analysis Token for which the results will be
+  overlaid on top of the given pathways overview. see:
   [`rba_reactome_analysis`](https://rbioapi.moosa-r.com/reference/rba_reactome_analysis.md).
 
 - exp_column:
 
-  numeric: (only if token is supplied) Specify the expression column for
-  the overlay.
+  Numeric: (optional) (only if token is supplied) Specify the expression
+  column for the overlay.
 
 - image_quality:
 
-  Numeric: A number ranging from 1 to 10. 1 is the lowest quality and 10
-  is the highest (default = 5).
+  Numeric: (default = `5`) A number ranging from 1 to 10. 1 is the
+  lowest quality and 10 is the highest.
 
 - flag_element:
 
-  Gene name, protein ID, chemical ID or Reactome ID of a diagram's
-  element to be flagged.
+  Character: (optional) Gene name, protein ID, chemical ID or Reactome
+  ID of a diagram's element to be flagged.
 
 - flg_interactors:
 
-  Logical: Should the interactor be considered when flagging a diagram
-  element? (default = TRUE)
+  Logical: (default = `TRUE`) Should the interactor be considered when
+  flagging a diagram element?
 
 - sel:
 
-  CSV line for highlighting element(s) selection in the diagram.
+  Character vector: (optional) CSV line for highlighting element(s)
+  selection in the diagram.
 
 - title:
 
-  Logical: Should the pathway name be displayed below the image?
-  (default = TRUE)
+  Logical: (default = `TRUE`) Should the pathway name be displayed below
+  the image?
 
 - margin:
 
-  Numeric: A number ranging from 0 to 20 to set as the image's margin.
-  (default = 15)
+  Numeric: (default = `15`) A number ranging from 0 to 20 to set as the
+  image's margin.
 
 - ...:
 
@@ -124,16 +126,10 @@ pathway, use
 
 ## References
 
-- Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla,
-  Lisa Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot
-  Ragueneau, Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser,
-  Timothy Brunson, Nasim Sanati, Liam Beckman, Xiang Shao, Antonio
-  Fabregat, Konstantinos Sidiropoulos, Julieth Murillo, Guilherme
-  Viteri, Justin Cook, Solomon Shorser, Gary Bader, Emek Demir, Chris
-  Sander, Robin Haw, Guanming Wu, Lincoln Stein, Henning Hermjakob,
-  Peter D’Eustachio, The reactome pathway knowledgebase 2022, Nucleic
-  Acids Research, 2021;, kab1028, https://doi.org/10.1093/nar/gkab1028
+- Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+  Grentner, A., ... D’Eustachio, P. (2026). The Reactome
+  Knowledgebase 2026. Nucleic Acids Res., 54(D1), D673–D681. doi:
+  10.1093/nar/gkaf1223
 
 - Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A, Hermjakob H.
   ReactomeGSA - Efficient Multi-Omics Comparative Pathway Analysis. Mol

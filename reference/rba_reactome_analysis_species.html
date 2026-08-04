@@ -88,37 +88,39 @@ the species you want to compare with Homo sapiens. See
 
 
 <dt id="arg-sort-by">sort_by<a class="anchor" aria-label="anchor" href="#arg-sort-by"></a></dt>
-<dd><p>Sort the result based on what column? available choices
-are: "NAME", "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
-"FOUND_ENTITIES", "FOUND_INTERACTORS", "FOUND_REACTIONS", "ENTITIES_RATIO",
-"ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO"</p></dd>
+<dd><p>Character: (default = <code>"ENTITIES_PVALUE"</code>) Sort the
+result based on what column? Available choices are: "NAME",
+"TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS", "FOUND_ENTITIES",
+"FOUND_INTERACTORS", "FOUND_REACTIONS", "ENTITIES_RATIO",
+"ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO".</p></dd>
 
 
 <dt id="arg-order">order<a class="anchor" aria-label="anchor" href="#arg-order"></a></dt>
-<dd><p>Sort Order. Can be either "ASC" (default) or "DESC".</p></dd>
+<dd><p>Character: (default = <code>"ASC"</code>) Sort Order. Can be either
+"ASC" or "DESC".</p></dd>
 
 
 <dt id="arg-resource">resource<a class="anchor" aria-label="anchor" href="#arg-resource"></a></dt>
-<dd><p>Filter results based on the resource. Default is "TOTAL",
-available choices are: "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
-"MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
+<dd><p>Character: (default = <code>"TOTAL"</code>) Filter results based on
+the resource. Available choices are: "TOTAL", "UNIPROT", "ENSEMBL",
+"CHEBI", "IUPHAR", "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND" or
 "PUBCHEM_COMPOUND".</p></dd>
 
 
 <dt id="arg-p-value">p_value<a class="anchor" aria-label="anchor" href="#arg-p-value"></a></dt>
-<dd><p>Set a P value threshold. Only results with P value equal to
-or less than your supplied threshold will be returned. (default = 1,
-Meaning no P value filtering)</p></dd>
+<dd><p>Numeric: (default = <code>1</code>) Set a P value threshold. Only
+results with P value equal to or less than your supplied threshold will be
+returned (1 means no P value filtering).</p></dd>
 
 
 <dt id="arg-min">min<a class="anchor" aria-label="anchor" href="#arg-min"></a></dt>
-<dd><p>(numeric) Minimum number of entities that a pathways should have
-to be included in the results.</p></dd>
+<dd><p>Numeric: (optional) Minimum number of entities that a pathways
+should have to be included in the results.</p></dd>
 
 
 <dt id="arg-max">max<a class="anchor" aria-label="anchor" href="#arg-max"></a></dt>
-<dd><p>(numeric) Maximum number of entities that a pathways should have
-to be included in the results.</p></dd>
+<dd><p>Numeric: (optional) Maximum number of entities that a pathways
+should have to be included in the results.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -135,10 +137,9 @@ arguments manual for more information on available options.</p></dd>
     <p>Reactome incorporate manually curated human reactions and PANTHER's
   protein homology data to Computationally infer events in other eukaryotic
   species.
-<br> In version 73 (11 June 2020), using an orthology-based approach,
-  Homo sapiens events was projected to 18,654 orthologous pathways (with
-  81,835 orthologous proteins) in 15 non-human species.
-  See <a href="https://reactome.org/documentation/inferred-events/" class="external-link">
+<br> Reactome uses an orthology-based approach to project curated human
+  events to supported non-human species. See
+  <a href="https://reactome.org/documentation/inferred-events/" class="external-link">
   Reactome Computationally Inferred Events</a> for more information.</p>
     </div>
     <div class="section level2">
@@ -150,16 +151,9 @@ arguments manual for more information on available options.</p></dd>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
 
-<ul><li><p>Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-  Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-  Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-  Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-  Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-  Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-  Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-  pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-  https://doi.org/10.1093/nar/gkab1028</p></li>
+<ul><li><p>Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+  Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+  Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223</p></li>
 <li><p>Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed

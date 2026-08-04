@@ -19,11 +19,11 @@ rba_reactome_analysis_download(
 
 - token:
 
-  A token associated to your previous Reactome analysis.
+  Character: A token associated to your previous Reactome analysis.
 
 - request:
 
-  What to download? Should be one of:
+  Character: What to download? Should be one of:
 
   - "found_ids": Download a CSV file containing the found user-supplied
     identifiers in the analysis associated with your supplied token and
@@ -44,7 +44,7 @@ rba_reactome_analysis_download(
 
 - save_to:
 
-  NULL or Character:
+  NULL or Character: (optional)
 
   - NULL: Save the file to an automatically-generated path.
 
@@ -52,10 +52,10 @@ rba_reactome_analysis_download(
 
 - resource:
 
-  (Only when request is "found_ids" or "pathways") Filter results based
-  on the resource. Default is "TOTAL", available choices are:"TOTAL",
-  "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR", "MIRBASE", "NCBI_PROTEIN",
-  "EMBL", "COMPOUND", "ENTITIES_FDR" or "PUBCHEM_COMPOUND".
+  Character: (default = `"TOTAL"`) (Only when request is "found_ids" or
+  "pathways") Filter results based on the resource. Available choices
+  are:"TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR", "MIRBASE",
+  "NCBI_PROTEIN", "EMBL", "COMPOUND" or "PUBCHEM_COMPOUND".
 
 - ...:
 
@@ -93,16 +93,10 @@ https://reactome.org/AnalysisService/download/{token}/result.json.gz"
 
 ## References
 
-- Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla,
-  Lisa Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot
-  Ragueneau, Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser,
-  Timothy Brunson, Nasim Sanati, Liam Beckman, Xiang Shao, Antonio
-  Fabregat, Konstantinos Sidiropoulos, Julieth Murillo, Guilherme
-  Viteri, Justin Cook, Solomon Shorser, Gary Bader, Emek Demir, Chris
-  Sander, Robin Haw, Guanming Wu, Lincoln Stein, Henning Hermjakob,
-  Peter D’Eustachio, The reactome pathway knowledgebase 2022, Nucleic
-  Acids Research, 2021;, kab1028, https://doi.org/10.1093/nar/gkab1028
+- Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+  Grentner, A., ... D’Eustachio, P. (2026). The Reactome
+  Knowledgebase 2026. Nucleic Acids Res., 54(D1), D673–D681. doi:
+  10.1093/nar/gkaf1223
 
 - Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A, Hermjakob H.
   ReactomeGSA - Efficient Multi-Omics Comparative Pathway Analysis. Mol

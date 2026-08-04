@@ -83,22 +83,24 @@
 
 
 <dl><dt id="arg-entity-id">entity_id<a class="anchor" aria-label="anchor" href="#arg-entity-id"></a></dt>
-<dd><p>The entity that should exist in the pathways.</p></dd>
+<dd><p>Character: The entity that should exist in the pathways.</p></dd>
 
 
 <dt id="arg-with-diagram">with_diagram<a class="anchor" aria-label="anchor" href="#arg-with-diagram"></a></dt>
-<dd><p>Logical: only include pathways with diagram?</p></dd>
+<dd><p>Logical: (default = <code>FALSE</code>) only include pathways
+with diagram?</p></dd>
 
 
 <dt id="arg-all-forms">all_forms<a class="anchor" aria-label="anchor" href="#arg-all-forms"></a></dt>
-<dd><p>Logical: should other variants of your supplied entity_id
-be considered? (e.g. same molecule but in different compartment,
-secretory form etc.) see <code><a href="rba_reactome_participants.html">rba_reactome_participants</a></code>'s
-"Details section" to learn more about how Reactome classifies molecules.</p></dd>
+<dd><p>Logical: (default = <code>FALSE</code>) should other variants of
+your supplied entity_id be considered? (e.g. same molecule but in different
+compartment, secretory form etc.) see
+<code><a href="rba_reactome_participants.html">rba_reactome_participants</a></code>'s "Details section" to learn more
+about how Reactome classifies molecules.</p></dd>
 
 
 <dt id="arg-species">species<a class="anchor" aria-label="anchor" href="#arg-species"></a></dt>
-<dd><p>(optional) Numeric or Character: confine your search to a
+<dd><p>Character or Numeric: (optional) confine your search to a
 specific species by providing it's NCBI Taxonomy identifier
 (Human Taxonomy ID is 9606) or species name (e.g. "Homo sapiens").
 See <code><a href="rba_reactome_species.html">rba_reactome_species</a></code> or
@@ -129,16 +131,9 @@ arguments manual for more information on available options.</p></dd>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
 
-<ul><li><p>Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-  Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-  Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-  Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-  Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-  Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-  Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-  pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-  https://doi.org/10.1093/nar/gkab1028</p></li>
+<ul><li><p>Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+  Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+  Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223</p></li>
 <li><p>Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed

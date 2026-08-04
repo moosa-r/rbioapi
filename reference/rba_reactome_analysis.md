@@ -36,15 +36,16 @@ rba_reactome_analysis(
 
 - input:
 
-  A vector, data frame, matrix or a local file path or URL that points
-  to your data. See "Details section" for more information of how to
-  organize and supply your input.
+  Character or Numeric vector, Data frame, or Matrix: A vector, data
+  frame, matrix or a local file path or URL that points to your data.
+  See "Details section" for more information of how to organize and
+  supply your input.
 
 - input_format:
 
-  (Optional) This function will automatically identify your supplied
-  input's format. But in case of unexpected issues or if you want to be
-  explicit, set this argument to one of:
+  Character: (optional) This function will automatically identify your
+  supplied input's format. But in case of unexpected issues or if you
+  want to be explicit, set this argument to one of:
 
   - "table": If you supplied a data frame or matrix as input.
 
@@ -59,19 +60,19 @@ rba_reactome_analysis(
 
 - projection:
 
-  Logical (default = TRUE) Should non-human identifiers be projected to
-  their human equivalents? (using Reactome orthology data)
+  Logical: (default = `TRUE`) Should non-human identifiers be projected
+  to their human equivalents? (using Reactome orthology data)
 
 - interactors:
 
-  Logical (default = FALSE) Should IntAct interaction data be used to
+  Logical: (default = `FALSE`) Should IntAct interaction data be used to
   increase the analysis background?
 
 - species:
 
-  Numeric or Character: NCBI Taxonomy identifier (Human is 9606),
-  species name (e.g. "Homo sapiens") or Reactome DbId (e.g Homo sapiens
-  is 48887). See
+  Character or Numeric: (optional) NCBI Taxonomy identifier (Human is
+  9606), species name (e.g. "Homo sapiens") or Reactome DbId (e.g Homo
+  sapiens is 48887). See
   [`rba_reactome_species`](https://rbioapi.moosa-r.com/reference/rba_reactome_species.md)
   or [Reactome Data Schema: Entries:
   Species](https://reactome.org/content/schema/objects/Species/). Note
@@ -80,43 +81,44 @@ rba_reactome_analysis(
 
 - sort_by:
 
-  Sort the result based on what column? available choices are: "NAME",
-  "TOTAL_ENTITIES", "TOTAL_INTERACTORS", "TOTAL_REACTIONS",
-  "FOUND_ENTITIES", "FOUND_INTERACTORS", "FOUND_REACTIONS",
-  "ENTITIES_RATIO", "ENTITIES_PVALUE", "ENTITIES_FDR" or
-  "REACTIONS_RATIO"
+  Character: (default = `"ENTITIES_PVALUE"`) Sort the result based on
+  what column? Available choices are: "NAME", "TOTAL_ENTITIES",
+  "TOTAL_INTERACTORS", "TOTAL_REACTIONS", "FOUND_ENTITIES",
+  "FOUND_INTERACTORS", "FOUND_REACTIONS", "ENTITIES_RATIO",
+  "ENTITIES_PVALUE", "ENTITIES_FDR" or "REACTIONS_RATIO"
 
 - order:
 
-  Sort Order. Can be either "ASC" (default) or "DESC".
+  Character: (default = `"ASC"`) Sort Order. Can be either "ASC" or
+  "DESC".
 
 - resource:
 
-  Filter results based on the resource. Default is "TOTAL", available
-  choices are: "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR",
-  "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND", "ENTITIES_FDR" or
+  Character: (default = `"TOTAL"`) Filter results based on the resource.
+  Available choices are: "TOTAL", "UNIPROT", "ENSEMBL", "CHEBI",
+  "IUPHAR", "MIRBASE", "NCBI_PROTEIN", "EMBL", "COMPOUND" or
   "PUBCHEM_COMPOUND".
 
 - p_value:
 
-  Set a P value threshold. Only results with P value equal to or less
-  than your supplied threshold will be returned. (default = 1, Meaning
-  no P value filtering)
+  Numeric: (default = `1`) Set a P value threshold. Only results with P
+  value equal to or less than your supplied threshold will be returned
+  (1 means no P value filtering).
 
 - include_disease:
 
-  Logical (default = TRUE) Should the disease pathways be included in
+  Logical: (default = `TRUE`) Should the disease pathways be included in
   the results?
 
 - min:
 
-  (numeric) Minimum number of entities that a pathways should have to be
-  included in the results.
+  Numeric: (optional) Minimum number of entities that a pathways should
+  have to be included in the results.
 
 - max:
 
-  (numeric) Maximum number of entities that a pathways should have to be
-  included in the results.
+  Numeric: (optional) Maximum number of entities that a pathways should
+  have to be included in the results.
 
 - ...:
 
@@ -156,8 +158,8 @@ There is no strict criteria about the type of your molecules
 Identifiers, Reactome will Map the IDs to it's internal database
 entities. Nevertheless, You can check if all your identifiers has been
 found in "identifiersNotFound" element in the function's output.  
-After Any Analysis, Reactome will associate a token to your analysis. It
-can be later used to in function that requires the token (e.g to
+After any analysis, Reactome will associate a token with your analysis.
+It can later be used in functions that require the token (e.g. to
 retrieve the analysis results, download pdf).  
 Note that Reactome will store your token for only 7 days. You can
 download your full results with
@@ -168,24 +170,17 @@ to generate a new token.
 
 ## Corresponding API Resources
 
-"POST https://reactome.org/AnalysisService/identifiers/form"  
+"POST https://reactome.org/AnalysisService/identifiers/"  
+"POST https://reactome.org/AnalysisService/identifiers/projection"  
 "POST https://reactome.org/AnalysisService/identifiers/url"  
-"POST
-https://reactome.org/AnalysisService/identifiers/form/projection"  
 "POST https://reactome.org/AnalysisService/identifiers/url/projection"
 
 ## References
 
-- Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla,
-  Lisa Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot
-  Ragueneau, Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser,
-  Timothy Brunson, Nasim Sanati, Liam Beckman, Xiang Shao, Antonio
-  Fabregat, Konstantinos Sidiropoulos, Julieth Murillo, Guilherme
-  Viteri, Justin Cook, Solomon Shorser, Gary Bader, Emek Demir, Chris
-  Sander, Robin Haw, Guanming Wu, Lincoln Stein, Henning Hermjakob,
-  Peter D’Eustachio, The reactome pathway knowledgebase 2022, Nucleic
-  Acids Research, 2021;, kab1028, https://doi.org/10.1093/nar/gkab1028
+- Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+  Grentner, A., ... D’Eustachio, P. (2026). The Reactome
+  Knowledgebase 2026. Nucleic Acids Res., 54(D1), D673–D681. doi:
+  10.1093/nar/gkaf1223
 
 - Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A, Hermjakob H.
   ReactomeGSA - Efficient Multi-Omics Comparative Pathway Analysis. Mol

@@ -1,16 +1,18 @@
 # Get Static(IntAct) Interaction Information of a Protein
 
-Reactome maintain a locally host a version of IntAct(Static)
-interactions database. Using this function, you can retrieve IntAct
-information of a protein(s) in two scenarios:
+Reactome maintains a locally hosted snapshot of the IntAct interactions
+database. Using this function, you can retrieve IntAct information for
+one or more proteins in two scenarios:
 
-1.  If endpoint = "details" or "summary": Retrieve a detailed/summary
-    information of your supplied protein accession(s) from IntAct
-    database.
+1.  If `endpoint = "details"` or `endpoint = "summary"`, retrieve
+    detailed or summary information for the supplied accessions.
 
-2.  If endpoint = "pathway", Retrieve a list of Reactome pathways which
-    include your supplied protein accession. Pathways with the class
+2.  If `endpoint = "pathways"`, retrieve Reactome pathways which include
+    your supplied protein accession. Pathways with the class
     "TopLevelPathway" will be excluded.
+
+Results depend on Reactome's current static interaction snapshot; a
+valid accession can therefore have no mapped pathways.
 
 ## Usage
 
@@ -28,31 +30,31 @@ rba_reactome_interactors_static(
 
 - proteins:
 
-  Uniprot proteins accession(s). If endpoint = "pathway", only a single
-  protein accession can be supplied.
+  Character or Numeric vector: UniProt protein accession(s). If
+  `endpoint = "pathways"`, only a single protein accession can be
+  supplied.
 
 - endpoint:
 
-  Can be one of:
+  Character: (default = `"details"`) Can be one of:
 
-  1.  "details": To return a detailed information of your supplied
-      protein(s) accession.
+  1.  "details": Return detailed information for the supplied
+      accessions.
 
-  2.  "summary": To return a summary of your supplied protein(s)
-      accession
+  2.  "summary": Return summary information for the supplied accessions.
 
-  3.  "pathway": To return a list of pathways containing the interacting
-      molecules (excluding TopLevelPathway class).
+  3.  "pathways": Return pathways containing the interacting molecules
+      (excluding the TopLevelPathway class).
 
 - only_diagrammed:
 
-  Logical: (only when "endpoint = "pathway") If TRUE, pathways without
-  diagram will be excluded. (default = FALSE)
+  Logical: (default = `FALSE`) (only when `endpoint = "pathways"`) If
+  TRUE, pathways without diagram will be excluded.
 
 - species:
 
-  Only when "endpoint = "pathway", The scientific name of the species to
-  search for the pathways. See
+  Character: (optional) (only when `endpoint = "pathways"`) The
+  scientific name of the species to search for pathways. See
   [`rba_reactome_species`](https://rbioapi.moosa-r.com/reference/rba_reactome_species.md)
   or [Reactome Data Schema: Entries:
   Species](https://reactome.org/content/schema/objects/Species/).
@@ -74,21 +76,15 @@ argument.
 molecules/details"  
 "POST https://reactome.org/ContentService/interactors/static/
 molecules/summary"  
-"GET https://reactome.org/ContentService/interactors/static/
-molecules/pathways"
+"GET https://reactome.org/ContentService/interactors/static/molecule/
+{identifier}/pathways"
 
 ## References
 
-- Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla,
-  Lisa Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot
-  Ragueneau, Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser,
-  Timothy Brunson, Nasim Sanati, Liam Beckman, Xiang Shao, Antonio
-  Fabregat, Konstantinos Sidiropoulos, Julieth Murillo, Guilherme
-  Viteri, Justin Cook, Solomon Shorser, Gary Bader, Emek Demir, Chris
-  Sander, Robin Haw, Guanming Wu, Lincoln Stein, Henning Hermjakob,
-  Peter D’Eustachio, The reactome pathway knowledgebase 2022, Nucleic
-  Acids Research, 2021;, kab1028, https://doi.org/10.1093/nar/gkab1028
+- Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+  Grentner, A., ... D’Eustachio, P. (2026). The Reactome
+  Knowledgebase 2026. Nucleic Acids Res., 54(D1), D673–D681. doi:
+  10.1093/nar/gkaf1223
 
 - Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A, Hermjakob H.
   ReactomeGSA - Efficient Multi-Omics Comparative Pathway Analysis. Mol
@@ -107,10 +103,10 @@ Other "Reactome Content Service - Molecule Interactors":
 ## Examples
 
 ``` r
-# \donttest{
+if (FALSE) { # \dontrun{
 rba_reactome_interactors_static(proteins = "Q9BXM7-1",
     endpoint = "pathways", species = "Homo sapiens")
-# }
+} # }
 # \donttest{
 rba_reactome_interactors_static(proteins = c("Q9BXM7-1", "Q13501"),
     endpoint = "details")

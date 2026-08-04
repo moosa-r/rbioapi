@@ -21,24 +21,24 @@ rba_reactome_pathways_low(
 
 - entity_id:
 
-  The entity that should exist in the pathways.
+  Character: The entity that should exist in the pathways.
 
 - with_diagram:
 
-  Logical: only include pathways with diagram?
+  Logical: (default = `FALSE`) only include pathways with diagram?
 
 - all_forms:
 
-  Logical: should other variants of your supplied entity_id be
-  considered? (e.g. same molecule but in different compartment,
-  secretory form etc.) see
+  Logical: (default = `FALSE`) should other variants of your supplied
+  entity_id be considered? (e.g. same molecule but in different
+  compartment, secretory form etc.) see
   [`rba_reactome_participants`](https://rbioapi.moosa-r.com/reference/rba_reactome_participants.md)'s
   "Details section" to learn more about how Reactome classifies
   molecules.
 
 - species:
 
-  (optional) Numeric or Character: confine your search to a specific
+  Character or Numeric: (optional) confine your search to a specific
   species by providing it's NCBI Taxonomy identifier (Human Taxonomy ID
   is 9606) or species name (e.g. "Homo sapiens"). See
   [`rba_reactome_species`](https://rbioapi.moosa-r.com/reference/rba_reactome_species.md)
@@ -67,16 +67,10 @@ entity/{id}/allForms"
 
 ## References
 
-- Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla,
-  Lisa Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot
-  Ragueneau, Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser,
-  Timothy Brunson, Nasim Sanati, Liam Beckman, Xiang Shao, Antonio
-  Fabregat, Konstantinos Sidiropoulos, Julieth Murillo, Guilherme
-  Viteri, Justin Cook, Solomon Shorser, Gary Bader, Emek Demir, Chris
-  Sander, Robin Haw, Guanming Wu, Lincoln Stein, Henning Hermjakob,
-  Peter D’Eustachio, The reactome pathway knowledgebase 2022, Nucleic
-  Acids Research, 2021;, kab1028, https://doi.org/10.1093/nar/gkab1028
+- Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+  Grentner, A., ... D’Eustachio, P. (2026). The Reactome
+  Knowledgebase 2026. Nucleic Acids Res., 54(D1), D673–D681. doi:
+  10.1093/nar/gkaf1223
 
 - Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A, Hermjakob H.
   ReactomeGSA - Efficient Multi-Omics Comparative Pathway Analysis. Mol

@@ -74,14 +74,14 @@
 
 
 <dl><dt id="arg-event-ids">event_ids<a class="anchor" aria-label="anchor" href="#arg-event-ids"></a></dt>
-<dd><p>Human Reactome event ID(s) to retrieve their orthologous
-events.</p></dd>
+<dd><p>Character vector: Human Reactome event ID(s) to retrieve
+their orthologous events.</p></dd>
 
 
 <dt id="arg-species-dbid">species_dbid<a class="anchor" aria-label="anchor" href="#arg-species-dbid"></a></dt>
-<dd><p>Reactome database ID (DbId) of the target species. (e.g
-Mus musculus is 48892). See
- <code><a href="rba_reactome_species.html">rba_reactome_species</a></code> or
+<dd><p>Numeric: Reactome database ID (DbId) of the target
+species. (e.g Mus musculus is 48892). See
+<code><a href="rba_reactome_species.html">rba_reactome_species</a></code> or
  <a href="https://reactome.org/content/schema/objects/Species/" class="external-link">Reactome
  Data Schema: Entries: Species</a>.</p></dd>
 
@@ -98,10 +98,9 @@ arguments manual for more information on available options.</p></dd>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>In version 73 (11 June 2020), using an orthology-based approach,
-  Homo sapiens events was projected to 18,654 orthologous pathways (with
-  81,835 orthologous proteins) in 15 non-human species.
-  <br> See <a href="https://reactome.org/documentation/inferred-events/" class="external-link">
+    <p>Reactome uses an orthology-based approach to project curated human events
+  to supported non-human species. See
+  <a href="https://reactome.org/documentation/inferred-events/" class="external-link">
   Reactome Computationally Inferred Events</a> for more information.</p>
     </div>
     <div class="section level2">
@@ -114,16 +113,9 @@ arguments manual for more information on available options.</p></dd>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
 
-<ul><li><p>Marc Gillespie, Bijay Jassal, Ralf Stephan, Marija Milacic, Karen
-  Rothfels, Andrea Senff-Ribeiro, Johannes Griss, Cristoffer Sevilla, Lisa
-  Matthews, Chuqiao Gong, Chuan Deng, Thawfeek Varusai, Eliot Ragueneau,
-  Yusra Haider, Bruce May, Veronica Shamovsky, Joel Weiser, Timothy Brunson,
-  Nasim Sanati, Liam Beckman, Xiang Shao, Antonio Fabregat, Konstantinos
-  Sidiropoulos, Julieth Murillo, Guilherme Viteri, Justin Cook, Solomon
-  Shorser, Gary Bader, Emek Demir, Chris Sander, Robin Haw, Guanming Wu,
-  Lincoln Stein, Henning Hermjakob, Peter D’Eustachio, The reactome
-  pathway knowledgebase 2022, Nucleic Acids Research, 2021;, kab1028,
-  https://doi.org/10.1093/nar/gkab1028</p></li>
+<ul><li><p>Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+  Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+  Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223</p></li>
 <li><p>Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
