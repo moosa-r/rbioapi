@@ -1,5 +1,9 @@
 # Changelog
 
+## rbioapi (development version)
+
+- The next release is currently under development.
+
 ## rbioapi 0.8.3 (Current CRAN version)
 
 CRAN release: 2025-07-03

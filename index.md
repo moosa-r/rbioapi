@@ -1,8 +1,13 @@
 # rbioapi: User-Friendly R Interface to Biologic Web Services’ API
 
-Moosa Rezwani 2026-07-25
+Moosa Rezwani 2026-08-04
 
 # 
+
+> **Development version** The project documentation reflects the current
+> development version of rbioapi and may differ from the latest CRAN
+> release. For documentation matching the CRAN version, see the CRAN
+> reference manual or the help pages installed with the package.
 
 # What does rbioapi do?
 
@@ -33,11 +38,9 @@ On CRAN (Stable) version: (<https://cran.r-project.org/package=rbioapi>)
 1.  [Enrichr](https://maayanlab.cloud/Enrichr/ "Enrichr") ([rbioapi
     vignette
     article](https://rbioapi.moosa-r.com/articles/rbioapi_enrichr.html "rbioapi & Enrichr vignette article"))
-    ^((new))
 2.  [JASPAR](https://jaspar.elixir.no/ "JASPAR - A database of transcription factor binding profiles")
     ([rbioapi vignette
     article](https://rbioapi.moosa-r.com/articles/rbioapi_jaspar.html "rbioapi & Enrichr vignette article"))
-    ^((new))
 3.  [miEAA](https://ccb-compute2.cs.uni-saarland.de/mieaa/ "miRNA Enrichment Analysis and Annotation Tool (miEAA)")
     ([rbioapi vignette
     article](https://rbioapi.moosa-r.com/articles/rbioapi_mieaa.html "rbioapi & miEAA vignette article"))
@@ -480,7 +483,7 @@ API](https://doi.org/10.1093/bioinformatics/btac172 "Rezwani, M., Pourfathollah,
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
 #> 
 #> other attached packages:
-#> [1] rbioapi_0.8.3
+#> [1] rbioapi_0.8.3.9000
 #> 
 #> loaded via a namespace (and not attached):
 #>  [1] digest_0.6.39     R6_2.6.1          fastmap_1.2.0     xfun_0.60        

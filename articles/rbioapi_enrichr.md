@@ -212,8 +212,8 @@ element.
 
 str(list_id)
 #> List of 2
-#>  $ shortId   : chr "71cb3850e552efe45161a0f96a24b486"
-#>  $ userListId: int 134488659
+#>  $ shortId   : chr "556457d604b2ea7f8bd72b6729743860"
+#>  $ userListId: int 134489387
 ```
 
 Finally, we are ready to submit the enrichment analysis request to
@@ -409,7 +409,7 @@ an in-depth review.
     #> [1] stats     graphics  grDevices utils     datasets  methods   base     
     #> 
     #> other attached packages:
-    #> [1] rbioapi_0.8.3
+    #> [1] rbioapi_0.8.3.9000
     #> 
     #> loaded via a namespace (and not attached):
     #>  [1] httr_1.4.8        cli_3.6.6         knitr_1.51        rlang_1.3.0      

@@ -416,7 +416,7 @@ To cite rbioapi:
     #> [1] stats     graphics  grDevices utils     datasets  methods   base     
     #> 
     #> other attached packages:
-    #> [1] rbioapi_0.8.3
+    #> [1] rbioapi_0.8.3.9000
     #> 
     #> loaded via a namespace (and not attached):
     #>  [1] httr_1.4.8        cli_3.6.6         knitr_1.51        rlang_1.3.0      
