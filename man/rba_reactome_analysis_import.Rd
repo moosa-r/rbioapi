@@ -7,14 +7,18 @@
 rba_reactome_analysis_import(input, input_format = NULL, ...)
 }
 \arguments{
-\item{input}{Character: A local file path or URL that points to your
--optionally gzipped- JSON file.}
+\item{input}{Character: A local file path or HTTP or HTTPS URL that points
+to plain or gzipped saved analysis results.}
 
 \item{input_format}{Character: (optional) This function will automatically
-identify your supplied input's format. But in case of unexpected issues or
-if you want to be explicit, set this argument to one of:\itemize{
- \item "file": If you supplied a local file path pointing to the JSON file.
- \item "url": If you supplied a URL pointing to the JSON file.}}
+identify your supplied input's format. To be explicit, set this argument to
+one of:\itemize{
+ \item "file": If you supplied a local file path pointing to the saved
+ results file.
+ \item "url": If you supplied an HTTP or HTTPS URL pointing to the saved
+ results file.}
+ An explicit value takes precedence. Otherwise, HTTP and HTTPS addresses
+ are identified before existing local files. Other inputs are rejected.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
@@ -34,7 +38,7 @@ If you have a JSON file of analysis results (only obtained via
 }
 \section{Corresponding API Resources}{
 
-"POST https://reactome.org/AnalysisService/import/"
+"POST https://reactome.org/AnalysisService/import/form"
 \cr "POST https://reactome.org/AnalysisService/import/url"
 }
 

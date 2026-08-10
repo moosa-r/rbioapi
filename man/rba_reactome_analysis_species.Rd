@@ -50,7 +50,9 @@ should have to be included in the results.}
 arguments manual for more information on available options.}
 }
 \value{
-List with the results of the comparison.
+A list containing the comparison results. The \code{pathways}
+  element is a data frame with information about each pathway expanded into
+  columns; it is an empty data frame when no pathways match.
 }
 \description{
 Use This function to Compare human's manually-curated pathways

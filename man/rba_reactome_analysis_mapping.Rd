@@ -17,14 +17,17 @@ rba_reactome_analysis_mapping(
 that points to your identifiers list.}
 
 \item{input_format}{Character: (optional) This function will automatically identify
-your supplied input's format. But in case of unexpected issues or if you
-want to be explicit, set this argument to one of:\itemize{
+your supplied input's format. To be explicit, set this argument to one
+of:\itemize{
 \item "vector": If you supplied a simple vector (numeric or character) as
 input.
 \item "file": If you supplied a local file path pointing to a
 correctly-formatted text file.
-\item "url": If you supplied a URL pointing to a correctly-formatted
-text file.}}
+\item "url": If you supplied an HTTP or HTTPS URL pointing to a
+correctly-formatted text file.}
+An explicit value takes precedence. Otherwise, HTTP and HTTPS addresses
+are identified first, followed by existing local files, and then other
+non-empty character or numeric inputs as identifier vectors.}
 
 \item{projection}{Logical: (default = \code{TRUE}) Should non-human identifiers
 be projected to their human equivalents? (using Reactome orthology data)}
@@ -45,8 +48,8 @@ Use this function to map molecule identifiers of different species to
 }
 \section{Corresponding API Resources}{
 
-"POST https://reactome.org/AnalysisService/mapping"
-\cr "POST https://reactome.org/AnalysisService/mapping/projection"
+"POST https://reactome.org/AnalysisService/mapping/form"
+\cr "POST https://reactome.org/AnalysisService/mapping/form/projection"
 \cr "POST https://reactome.org/AnalysisService/mapping/url"
 \cr "POST https://reactome.org/AnalysisService/mapping/url/projection"
 }

@@ -9,19 +9,18 @@
 #'   caller function's input argument to this.
 #' @param type Character: (optional) Pass on caller function's input_format
 #'   argument to this.
-#' @param handle Logical: (default = \code{TRUE}) If TRUE, The input will be -if
-#'   necessary- written to a temp file to facilitate data uploading to Reactome.
-#'   If False, The Input will only be identified.
+#' @param prepare_upload Logical: (default = \code{TRUE}) If TRUE, the input
+#'   will be written to a temporary file when necessary to facilitate uploading
+#'   to Reactome. If FALSE, the input will only be identified.
 #'
-#' @return If handle was FALSE, a single string with the identified file type
-#'   (one of: "table", "vector", "file" or "url"), else if handle was TRUE,
-#'   a list containing the file Type and a path to the tempfile containing
-#'   the data or the user-supplied url/file path.
+#' @return If \code{prepare_upload} is FALSE, one of "table", "vector", "file", or
+#'   "url". Otherwise, a list containing the handled type and the temporary or
+#'   user-supplied file location.
 #'
 #' @noRd
 .rba_reactome_input <- function(input,
                                 type = NULL,
-                                handle = TRUE){
+                                prepare_upload = TRUE){
 
   diagnostics <- get0(
     "diagnostics",
@@ -29,80 +28,138 @@
     ifnotfound = getOption("rba_diagnostics")
   )
 
-  ### 1 identify input
-  if (is.null(type)) {
+  ### 1 Identify Input
+  input_validity <- c(
+    "url" = is.character(input) &&
+      length(input) == 1L &&
+      isTRUE(grepl("^https?://", input, ignore.case = TRUE)),
+    "file" = is.character(input) &&
+      length(input) == 1L &&
+      file.exists(input) &&
+      !dir.exists(input),
+    "table" = is.data.frame(input) || is.matrix(input),
+    "vector" = is.atomic(input) &&
+      is.null(dim(input)) &&
+      (is.character(input) || is.numeric(input)) &&
+      length(input) > 0L
+  )
 
-    if (is.data.frame(input) | is.matrix(input)) {
-      type <- "table"
-    } else if (is.vector(input) && length(input) > 1) {
-      type <- "vector"
-    } else if (is.character(input) && length(input) == 1) {
-      if (grepl(pattern = "^[a-zA-z]:|^\\\\\\w|^/|^\\w+\\.\\w+$", x = input)) {
-        type <- "file"
-        if (!file.exists(input)) {
-          stop("You supplied a file path that does not exist or it is not ",
-               "accessible. Please Check your supplied input. If you did not ",
-               "supply a file path, kindly set 'input-type = \"file\"' to ",
-               "an appropriate value and try again.",
-               immediate. = TRUE,
-               call. = diagnostics)
-        }
-      } else if (grepl(pattern = "^http\\:|^https\\:|^ftp\\:|^ftps\\:|^(\\w+)(\\.\\w+)+/\\w",
-                       x = input)) {
-        type <- "url"
-      } else {
-        type <- "vector"
-      }
-    } else {
+  if (is.null(type)) {
+    type_index <- match(TRUE, input_validity)
+
+    if (is.na(type_index)) {
       stop(
         "Could not identify your input format. Please specify it using 'input_format' argument.",
         call. = diagnostics
       )
     }
 
+    type <- names(input_validity)[[type_index]]
   }
 
-  ### 2 handle input
-  if (isFALSE(handle)) {
+  ### 2 Validate Identified Input
+  if (!isTRUE(input_validity[type])) {
+    input_requirement <- switch(
+      type,
+      "file" = "a single path to an existing local file",
+      "url" = "a single HTTP or HTTPS URL",
+      "table" = "a data frame or matrix",
+      "vector" = "a non-empty character or numeric vector",
+      "compatible with a supported input format"
+    )
+
+    stop(
+      sprintf(
+        "`input` must be %s when `input_format = \"%s\"`.",
+        input_requirement,
+        type
+      ),
+      call. = diagnostics
+    )
+  }
+
+  ### 3 Handle Input
+  if (isFALSE(prepare_upload)) {
 
     return(type)
 
-  } else {
-
-    if (type == "file" | type == "url") {
-      return(list(type = type, file = input))
-    } else {
-      temp_file <- tempfile(pattern = "rba", fileext = ".txt")
-
-      if (type == "table") {
-        input <- as.data.frame(input, stringsAsFactors = FALSE)
-        # make sure that every column name starts with #
-        inproper_colnames <- !grepl("^#", colnames(input)[[1]])
-        if (any(inproper_colnames)) {
-          colnames(input)[[1]] <- paste0("#", colnames(input)[[1]])
-        }
-        utils::write.table(
-          x = input,
-          file = temp_file,
-          sep = "\t",
-          quote = FALSE,
-          row.names = FALSE,
-          col.names = TRUE
-        )
-        return(list(type = "file", file = temp_file))
-      } else if (type == "vector") {
-        writeLines(
-          text = c("#Gene names", input),
-          con = temp_file,
-          sep = "\n"
-        )
-        return(list(type = "file", file = temp_file))
-      } else {
-        stop("Internal error!", call. = TRUE)
-      }
-    }
-
   }
+
+  output <- list(type = type, file = input)
+
+  if (type %in% c("table", "vector")) {
+    output$type <- "file"
+    output$file <- tempfile(pattern = "rba", fileext = ".txt")
+
+    if (type == "table") {
+      input <- as.data.frame(input, stringsAsFactors = FALSE)
+
+      # Make sure that the first column name starts with #.
+      if (!startsWith(colnames(input)[[1L]], "#")) {
+        colnames(input)[[1L]] <- paste0("#", colnames(input)[[1L]])
+      }
+      utils::write.table(
+        x = input,
+        file = output$file,
+        sep = "\t",
+        quote = FALSE,
+        row.names = FALSE,
+        col.names = TRUE
+      )
+    } else {
+      writeLines(
+        text = c("#Gene names", input),
+        con = output$file,
+        sep = "\n"
+      )
+    }
+  }
+
+  return(output)
+}
+
+#' Keep Reactome Analysis Results Consistent
+#'
+#' Reactome's analysis, token, and species-comparison resources return the same
+#'   pathway result structure. This function applies the same table handling to
+#'   each response without defining, renaming, reordering, or removing Reactome
+#'   fields.
+#'
+#' @param result A parsed Reactome Analysis response.
+#'
+#' @return The result with information within tables expanded into columns and
+#'   an empty pathways result represented by an empty data frame. Other
+#'   structures are returned unchanged.
+#'
+#' @noRd
+.rba_reactome_analysis_result <- function(result) {
+  # Preserve responses outside the expected result structure.
+  if (!is.list(result)) {
+    return(result)
+  }
+
+  output <- lapply(
+    X = result,
+    FUN = function(field) {
+      # Expand information stored within a table.
+      if (is.data.frame(field)) {
+        field <- jsonlite::flatten(field)
+      }
+
+      return(field)
+    }
+  )
+
+  # Standardize an empty pathways result.
+  if (
+    utils::hasName(output, "pathways") &&
+    is.list(output$pathways) &&
+    length(output$pathways) == 0L
+  ) {
+    output$pathways <- data.frame()
+  }
+
+  return(output)
 }
 #### Identifiers Endpoints ####
 
@@ -119,13 +176,13 @@
 #' See the details section for the accepted input types and format.
 #'
 #' You can supply your table or vector input in numerous formats:\enumerate{
-#'   \item A R object which can be data frame, matrix or a simple vector.
+#'   \item An R object which can be a data frame, matrix, or simple vector.
 #'   \item A path to a local text file in your device that contains the molecules
 #'   data. (The file should be formatted correctly, see below.)
-#'   \item A URL pointing to a text file on the web that contains the molecules
-#'   data. (The file should be formatted correctly, see below.}
+#'   \item An HTTP or HTTPS URL pointing to a text file on the web that contains
+#'   the molecules data. (The file should be formatted correctly, see below.)}
 #' If you supply a text file (as a local file path or URL), it should be in TSV
-#' (Tab-Separated Values) format; Column names should start with "#" character.
+#' (Tab-Separated Values) format; the first column name should start with "#".
 #' Note that if you are providing the file for "Over-Representation" analysis
 #' (i.e. Single columned-data) this header line is optional and will be used as
 #' your 'Sample Name', otherwise it is required. \cr Also, form the "summary"
@@ -143,8 +200,8 @@
 #' \code{\link{rba_reactome_analysis_import}}) to generate a new token.
 #'
 #' @section Corresponding API Resources: "POST
-#'   https://reactome.org/AnalysisService/identifiers/" \cr "POST
-#'   https://reactome.org/AnalysisService/identifiers/projection" \cr "POST
+#'   https://reactome.org/AnalysisService/identifiers/form" \cr "POST
+#'   https://reactome.org/AnalysisService/identifiers/form/projection" \cr "POST
 #'   https://reactome.org/AnalysisService/identifiers/url" \cr "POST
 #'   https://reactome.org/AnalysisService/identifiers/url/projection"
 #'
@@ -160,8 +217,11 @@
 #'   input.
 #'   \item "file": If you supplied a local file path pointing to a
 #'   correctly-formatted text file.
-#'   \item "url": If you supplied a URL pointing to a correctly-formatted
-#'   text file.}
+#'   \item "url": If you supplied an HTTP or HTTPS URL pointing to a
+#'   correctly-formatted text file.}
+#'   An explicit value takes precedence. Otherwise, HTTP and HTTPS addresses
+#'   are identified first, followed by existing local files, tables, and then
+#'   other non-empty character or numeric inputs as identifier vectors.
 #' @param species Character or Numeric: (optional) NCBI Taxonomy identifier
 #'   (Human is 9606), species name (e.g. "Homo sapiens") or Reactome DbId (e.g
 #'   Homo sapiens is 48887). See \code{\link{rba_reactome_species}} or
@@ -196,10 +256,11 @@
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s arguments
 #'   manual for more information on available options.
 #'
-#' @return List containing the results and information of your analysis. Note
-#'   that you can use the token returned in the "summary" sub-list of the
-#'   results (i.e. results$summary$token) to retrieve your results later or in
-#'   other Reactome analysis functions.
+#' @return A list containing the results and information about the analysis.
+#'   The \code{pathways} element is a data frame with information about each
+#'   pathway expanded into columns; it is an empty data frame when no pathways
+#'   match. The token in \code{results$summary$token} can be used to retrieve
+#'   the results later or in other Reactome analysis functions.
 #'
 #' @references \itemize{ \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla,
 #'   C., Beavers, D., Grentner, A., ... D’Eustachio, P. (2026). The Reactome
@@ -248,7 +309,8 @@ rba_reactome_analysis <- function(input,
     cons = list(
       list(
         arg = "input",
-        class = c("character", "numeric", "integer", "data.frame", "matrix")
+        class = c("character", "numeric", "integer", "data.frame", "matrix"),
+        min_len = 1L
       ),
       list(
         arg = "input_format", class = "character",
@@ -335,36 +397,39 @@ rba_reactome_analysis <- function(input,
   )
 
   ## Build POST API Request's URL
-  # handle supplied input
+  # Handle supplied input
   input <- .rba_reactome_input(
     input = input,
-    type = input_format,
-    handle = TRUE
+    type = input_format
   )
 
   if (input$type == "file") {
-    call_body <- httr::upload_file(path = input$file, type = "text/plain")
-  } else if (input$type == "url") {
+    call_body <- list(
+      file = httr::upload_file(path = input$file)
+    )
+    submission_type <- "form"
+    content_type_input <- NULL
+  } else {
     call_body <- input$file
+    submission_type <- "url"
+    content_type_input <- httr::content_type("text/plain")
   }
 
   ## Build Function-Specific Call
   path_input <- paste0(
     .rba_stg("reactome", "pth", "analysis"),
-    "identifiers/"
+    "identifiers/",
+    submission_type
   )
 
-  if (input$type == "url") {
-    path_input <- paste0(path_input, "url")
+  if (isTRUE(projection)) {
+    path_input <- paste0(path_input, "/projection")
   }
 
-  if (isTRUE(projection)) {
-    path_input <- paste0(
-      path_input,
-      ifelse(input$type == "url", "/", ""),
-      "projection"
-    )
-  }
+  parser_input <- list(
+    "json->list_simp",
+    .rba_reactome_analysis_result
+  )
 
   input_call <- .rba_httr(
     httr = "post",
@@ -372,9 +437,9 @@ rba_reactome_analysis <- function(input,
     path = path_input,
     body = call_body,
     query = call_query,
-    httr::content_type("text/plain"),
+    content_type_input,
     accept = "application/json",
-    parser = "json->list_simp_flt_df",
+    parser = parser_input,
     save_to = .rba_file("reactome_analysis.json")
   )
 
@@ -740,16 +805,20 @@ rba_reactome_analysis_download <- function(token,
 #'   expired (i.e. more than 7 days passed from your analysis).
 #'
 #' @section Corresponding API Resources:
-#' "POST https://reactome.org/AnalysisService/import/"
+#' "POST https://reactome.org/AnalysisService/import/form"
 #' \cr "POST https://reactome.org/AnalysisService/import/url"
 #'
-#' @param input Character: A local file path or URL that points to your
-#'   -optionally gzipped- JSON file.
+#' @param input Character: A local file path or HTTP or HTTPS URL that points
+#'   to plain or gzipped saved analysis results.
 #' @param input_format Character: (optional) This function will automatically
-#'  identify your supplied input's format. But in case of unexpected issues or
-#'  if you want to be explicit, set this argument to one of:\itemize{
-#'   \item "file": If you supplied a local file path pointing to the JSON file.
-#'   \item "url": If you supplied a URL pointing to the JSON file.}
+#'  identify your supplied input's format. To be explicit, set this argument to
+#'  one of:\itemize{
+#'   \item "file": If you supplied a local file path pointing to the saved
+#'   results file.
+#'   \item "url": If you supplied an HTTP or HTTPS URL pointing to the saved
+#'   results file.}
+#'   An explicit value takes precedence. Otherwise, HTTP and HTTPS addresses
+#'   are identified before existing local files. Other inputs are rejected.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -797,16 +866,25 @@ rba_reactome_analysis_import <- function(input,
   )
 
   .msg(
-    "Importing the input json file into the Reactome services."
+    "Importing saved Reactome analysis results."
   )
 
   ## Build Function-Specific Call
-  # handling input
-  input <- .rba_reactome_input(
+  # Handle supplied input
+  input_type <- .rba_reactome_input(
     input = input,
     type = input_format,
-    handle = TRUE
+    prepare_upload = FALSE
   )
+
+  if (!input_type %in% c("file", "url")) {
+    stop(
+      "`input` must be an existing local file or an HTTP or HTTPS URL.",
+      call. = get("diagnostics")
+    )
+  }
+
+  input <- list(type = input_type, file = input)
 
   if (input$type == "url") {
 
@@ -815,14 +893,18 @@ rba_reactome_analysis_import <- function(input,
       "import/url"
     )
     call_body <- input$file
+    content_type_input <- httr::content_type("text/plain")
 
   } else {
 
     path_input <- paste0(
       .rba_stg("reactome", "pth", "analysis"),
-      "import/"
+      "import/form"
     )
-    call_body <- httr::upload_file(path = input$file, type = "application/json")
+    call_body <- list(
+      file = httr::upload_file(path = input$file)
+    )
+    content_type_input <- NULL
 
   }
 
@@ -831,7 +913,7 @@ rba_reactome_analysis_import <- function(input,
     url = .rba_stg("reactome", "url"),
     path = path_input,
     body = call_body,
-    httr::content_type("text/plain"),
+    content_type_input,
     accept = "application/json",
     parser = "json->list_simp",
     save_to = .rba_file("reactome_analysis_import.json")
@@ -849,22 +931,25 @@ rba_reactome_analysis_import <- function(input,
 #'   Reactome Identifiers.
 #'
 #' @section Corresponding API Resources:
-#' "POST https://reactome.org/AnalysisService/mapping"
-#' \cr "POST https://reactome.org/AnalysisService/mapping/projection"
+#' "POST https://reactome.org/AnalysisService/mapping/form"
+#' \cr "POST https://reactome.org/AnalysisService/mapping/form/projection"
 #' \cr "POST https://reactome.org/AnalysisService/mapping/url"
 #' \cr "POST https://reactome.org/AnalysisService/mapping/url/projection"
 #'
 #' @param input Character or Numeric vector: A vector, local file path or URL
 #'   that points to your identifiers list.
 #' @param input_format Character: (optional) This function will automatically identify
-#'   your supplied input's format. But in case of unexpected issues or if you
-#'   want to be explicit, set this argument to one of:\itemize{
+#'   your supplied input's format. To be explicit, set this argument to one
+#'   of:\itemize{
 #'   \item "vector": If you supplied a simple vector (numeric or character) as
 #'   input.
 #'   \item "file": If you supplied a local file path pointing to a
 #'   correctly-formatted text file.
-#'   \item "url": If you supplied a URL pointing to a correctly-formatted
-#'   text file.}
+#'   \item "url": If you supplied an HTTP or HTTPS URL pointing to a
+#'   correctly-formatted text file.}
+#'   An explicit value takes precedence. Otherwise, HTTP and HTTPS addresses
+#'   are identified first, followed by existing local files, and then other
+#'   non-empty character or numeric inputs as identifier vectors.
 #' @param projection Logical: (default = \code{TRUE}) Should non-human identifiers
 #'   be projected to their human equivalents? (using Reactome orthology data)
 #' @param interactors Logical: (default = \code{FALSE}) Should IntAct interaction data
@@ -928,32 +1013,33 @@ rba_reactome_analysis_mapping <- function(input,
   call_query <- list("interactors" = ifelse(interactors, "true", "false"))
 
   ## Build POST API Request's URL
-  # handle supplied input
+  # Handle supplied input
   input <- .rba_reactome_input(
     input = input,
-    type = input_format,
-    handle = TRUE
+    type = input_format
   )
 
   if (input$type == "file") {
-    call_body <- httr::upload_file(path = input$file, type = "text/plain")
-  } else if (input$type == "url") {
+    call_body <- list(
+      file = httr::upload_file(path = input$file)
+    )
+    submission_type <- "form"
+    content_type_input <- NULL
+  } else {
     call_body <- input$file
+    submission_type <- "url"
+    content_type_input <- httr::content_type("text/plain")
   }
 
   ## Build Function-Specific Call
-  path_input <- paste0(.rba_stg("reactome", "pth", "analysis"), "mapping/")
-
-  if (input$type == "url") {
-    path_input <- paste0(path_input, "url")
-  }
+  path_input <- paste0(
+    .rba_stg("reactome", "pth", "analysis"),
+    "mapping/",
+    submission_type
+  )
 
   if (isTRUE(projection)) {
-    path_input <- paste0(
-      path_input,
-      ifelse(input$type == "url", "/", ""),
-      "projection"
-    )
+    path_input <- paste0(path_input, "/projection")
   }
 
   input_call <- .rba_httr(
@@ -962,7 +1048,7 @@ rba_reactome_analysis_mapping <- function(input,
     path = path_input,
     body = call_body,
     query = call_query,
-    httr::content_type("text/plain"),
+    content_type_input,
     accept = "application/json",
     parser = "json->list",
     save_to = .rba_file("reactome_analysis_mapping.json")
@@ -1016,7 +1102,9 @@ rba_reactome_analysis_mapping <- function(input,
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return List with the results of the comparison.
+#' @return A list containing the comparison results. The \code{pathways}
+#'   element is a data frame with information about each pathway expanded into
+#'   columns; it is an empty data frame when no pathways match.
 #'
 #' @references \itemize{
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
@@ -1118,6 +1206,11 @@ rba_reactome_analysis_species <- function(species_dbid,
   )
 
   ## Build Function-Specific Call
+  parser_input <- list(
+    "json->list_simp",
+    .rba_reactome_analysis_result
+  )
+
   input_call <- .rba_httr(
     httr = "get",
     url = .rba_stg("reactome", "url"),
@@ -1128,7 +1221,7 @@ rba_reactome_analysis_species <- function(species_dbid,
     ),
     query = call_query,
     accept = "application/json",
-    parser = "json->list_simp",
+    parser = parser_input,
     save_to = .rba_file("reactome_analysis_species.json")
   )
 
@@ -1186,7 +1279,11 @@ rba_reactome_analysis_species <- function(species_dbid,
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return List containing the results and information of your analysis.
+#' @return A list containing the results and information about the analysis.
+#'   The \code{pathways} element is a data frame with information about each
+#'   pathway expanded into columns; it is an empty data frame when no pathways
+#'   match. Its structure is the same as the output from
+#'   \code{\link{rba_reactome_analysis}}.
 #'
 #' @references \itemize{
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
@@ -1292,13 +1389,18 @@ rba_reactome_analysis_token <- function(token,
   )
 
   ## Build Function-Specific Call
+  parser_input <- list(
+    "json->list_simp",
+    .rba_reactome_analysis_result
+  )
+
   input_call <- .rba_httr(
     httr = "get",
     url = .rba_stg("reactome", "url"),
     path = paste0(.rba_stg("reactome", "pth", "analysis"), "token/", token),
     query = call_query,
     accept = "application/json",
-    parser = "json->list_simp",
+    parser = parser_input,
     save_to = .rba_file("reactome_analysis_token.json")
   )
 

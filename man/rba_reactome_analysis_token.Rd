@@ -58,7 +58,11 @@ should have to be included in the results.}
 arguments manual for more information on available options.}
 }
 \value{
-List containing the results and information of your analysis.
+A list containing the results and information about the analysis.
+  The \code{pathways} element is a data frame with information about each
+  pathway expanded into columns; it is an empty data frame when no pathways
+  match. Its structure is the same as the output from
+  \code{\link{rba_reactome_analysis}}.
 }
 \description{
 Use a token generated After a Reactome analysis

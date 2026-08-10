@@ -34,8 +34,11 @@ if you want to be explicit, set this argument to one of:\itemize{
 input.
 \item "file": If you supplied a local file path pointing to a
 correctly-formatted text file.
-\item "url": If you supplied a URL pointing to a correctly-formatted
-text file.}}
+\item "url": If you supplied an HTTP or HTTPS URL pointing to a
+correctly-formatted text file.}
+An explicit value takes precedence. Otherwise, HTTP and HTTPS addresses
+are identified first, followed by existing local files, tables, and then
+other non-empty character or numeric inputs as identifier vectors.}
 
 \item{projection}{Logical: (default = \code{TRUE}) Should non-human
 identifiers be projected to their human equivalents? (using Reactome
@@ -82,10 +85,11 @@ should have to be included in the results.}
 manual for more information on available options.}
 }
 \value{
-List containing the results and information of your analysis. Note
-  that you can use the token returned in the "summary" sub-list of the
-  results (i.e. results$summary$token) to retrieve your results later or in
-  other Reactome analysis functions.
+A list containing the results and information about the analysis.
+  The \code{pathways} element is a data frame with information about each
+  pathway expanded into columns; it is an empty data frame when no pathways
+  match. The token in \code{results$summary$token} can be used to retrieve
+  the results later or in other Reactome analysis functions.
 }
 \description{
 Using this function, you can perform Reactome Analysis In a convenient way.
@@ -100,13 +104,13 @@ See the details section for the accepted input types and format.
 }
 \details{
 You can supply your table or vector input in numerous formats:\enumerate{
-  \item A R object which can be data frame, matrix or a simple vector.
+  \item An R object which can be a data frame, matrix, or simple vector.
   \item A path to a local text file in your device that contains the molecules
   data. (The file should be formatted correctly, see below.)
-  \item A URL pointing to a text file on the web that contains the molecules
-  data. (The file should be formatted correctly, see below.}
+  \item An HTTP or HTTPS URL pointing to a text file on the web that contains
+  the molecules data. (The file should be formatted correctly, see below.)}
 If you supply a text file (as a local file path or URL), it should be in TSV
-(Tab-Separated Values) format; Column names should start with "#" character.
+(Tab-Separated Values) format; the first column name should start with "#".
 Note that if you are providing the file for "Over-Representation" analysis
 (i.e. Single columned-data) this header line is optional and will be used as
 your 'Sample Name', otherwise it is required. \cr Also, form the "summary"
@@ -125,8 +129,8 @@ re-import it anytime to reactome (using
 }
 \section{Corresponding API Resources}{
  "POST
-  https://reactome.org/AnalysisService/identifiers/" \cr "POST
-  https://reactome.org/AnalysisService/identifiers/projection" \cr "POST
+  https://reactome.org/AnalysisService/identifiers/form" \cr "POST
+  https://reactome.org/AnalysisService/identifiers/form/projection" \cr "POST
   https://reactome.org/AnalysisService/identifiers/url" \cr "POST
   https://reactome.org/AnalysisService/identifiers/url/projection"
 }
