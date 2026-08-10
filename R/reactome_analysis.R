@@ -265,10 +265,11 @@
 #' @references \itemize{ \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla,
 #'   C., Beavers, D., Grentner, A., ... D’Eustachio, P. (2026). The Reactome
 #'   Knowledgebase 2026. Nucleic Acids Res., 54(D1), D673–D681. doi:
-#'   10.1093/nar/gkaf1223 \item Griss J, Viteri G, Sidiropoulos K, Nguyen V,
-#'   Fabregat A, Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative
-#'   Pathway Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   10.1093/nar/gkaf1223
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/AnalysisService/}{Reactome Analysis
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
@@ -282,7 +283,7 @@
 #' rba_reactome_analysis(input = "c:/rbioapi/genes.txt")
 #' }
 #' \dontrun{
-#' rba_reactome_analysis(input = "https://qazwsx.com/genes.txt")
+#' rba_reactome_analysis(input = "https://example.com/genes.txt")
 #' }
 #'
 #' @family "Reactome Analysis Service"
@@ -502,10 +503,11 @@ rba_reactome_analysis <- function(input,
 #' @references \itemize{ \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla,
 #'   C., Beavers, D., Grentner, A., ... D’Eustachio, P. (2026). The Reactome
 #'   Knowledgebase 2026. Nucleic Acids Res., 54(D1), D673–D681. doi:
-#'   10.1093/nar/gkaf1223 \item Griss J, Viteri G, Sidiropoulos K, Nguyen V,
-#'   Fabregat A, Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative
-#'   Pathway Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   10.1093/nar/gkaf1223
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/AnalysisService/}{Reactome Analysis
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
@@ -669,10 +671,11 @@ rba_reactome_analysis_pdf <- function(token,
 #' @references \itemize{ \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla,
 #'   C., Beavers, D., Grentner, A., ... D’Eustachio, P. (2026). The Reactome
 #'   Knowledgebase 2026. Nucleic Acids Res., 54(D1), D673–D681. doi:
-#'   10.1093/nar/gkaf1223 \item Griss J, Viteri G, Sidiropoulos K, Nguyen V,
-#'   Fabregat A, Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative
-#'   Pathway Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   10.1093/nar/gkaf1223
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/AnalysisService/}{Reactome Analysis
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
@@ -829,10 +832,10 @@ rba_reactome_analysis_download <- function(token,
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/AnalysisService/}{Reactome Analysis
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
@@ -964,10 +967,10 @@ rba_reactome_analysis_import <- function(input,
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/AnalysisService/}{Reactome Analysis
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
@@ -1110,10 +1113,10 @@ rba_reactome_analysis_mapping <- function(input,
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/AnalysisService/}{Reactome Analysis
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
@@ -1184,6 +1187,14 @@ rba_reactome_analysis_species <- function(species_dbid,
       list(
         quote(!is.finite(species_dbid) || species_dbid != floor(species_dbid)),
         "`species_dbid` should be a finite, non-negative integer."
+      ),
+      list(
+        quote(!is.null(min) && (!is.finite(min) || min != floor(min))),
+        "`min` should be a finite, non-negative integer."
+      ),
+      list(
+        quote(!is.null(max) && (!is.finite(max) || max != floor(max))),
+        "`max` should be a finite, non-negative integer."
       ),
       list(
         quote(!is.null(min) && !is.null(max) && min > max),
@@ -1289,10 +1300,10 @@ rba_reactome_analysis_species <- function(species_dbid,
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/AnalysisService/}{Reactome Analysis
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite}{Citations note on Reactome website}
@@ -1362,6 +1373,14 @@ rba_reactome_analysis_token <- function(token,
       list(arg = "max", class = c("numeric", "integer"), len = 1L, min_val = 0)
     ),
     cond = list(
+      list(
+        quote(!is.null(min) && (!is.finite(min) || min != floor(min))),
+        "`min` should be a finite, non-negative integer."
+      ),
+      list(
+        quote(!is.null(max) && (!is.finite(max) || max != floor(max))),
+        "`max` should be a finite, non-negative integer."
+      ),
       list(
         quote(!is.null(min) && !is.null(max) && min > max),
         "`min` cannot be greater than `max`."

@@ -15,10 +15,10 @@
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
@@ -83,10 +83,10 @@ rba_reactome_version <- function(...) {
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
@@ -183,10 +183,10 @@ rba_reactome_diseases <- function(doid = FALSE,
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
@@ -267,10 +267,10 @@ rba_reactome_complex_subunits <- function(complex_id,
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
@@ -344,10 +344,10 @@ rba_reactome_complex_list <- function(id,
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
@@ -421,10 +421,10 @@ rba_reactome_participant_of <- function(entity_id,
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
@@ -504,10 +504,10 @@ rba_reactome_entity_other_forms <- function(entity_id,
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
@@ -556,19 +556,17 @@ rba_reactome_event_ancestors <- function(event_id,
   return(final_output)
 }
 
-#' Get Full Event Hierarchy of a Species
+#' Retrieve the Reactome Event Hierarchy of a Species
 #'
-#' This function will retrieve the full Events hierarchy of your supplied
-#'   species. Directly under each species, each child element is a "top Level
-#'   Pathway". You can traverse the events tree down by following the "children"
-#'   element.
+#' Retrieve the full hierarchy of pathways and reaction-like events for a
+#'   species, or restrict the hierarchy to pathways. The hierarchy begins with
+#'   top-level pathways and can be traversed through the \code{children} field.
+#'   Because an event can participate in more than one biological process, it
+#'   may occur in more than one place in the hierarchy.
 #'
-#' By Reactome's definition, Events are the building blocks of biological
-#'   processes and could be of two main classes: "Pathway" or
-#'   "Reaction-like events". The events are organized in a hierarchical
-#'   structure; and each event could be child or parent to another event; The
-#'   hierarchy will always begin with a "Top level pathway" event. Also note
-#'   that a given event could be part of more that one hierarchies.
+#' An analysis token can be supplied to add the corresponding analysis results
+#'   to the hierarchy. The analysis resource can then be selected, and
+#'   interactors or only importable resources can optionally be included.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://reactome.org/ContentService/data/eventsHierarchy/\{species\}"
@@ -578,20 +576,35 @@ rba_reactome_event_ancestors <- function(event_id,
 #'    \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species/}{Reactome
 #'    Data Schema: Entries: Species}.
+#' @param pathways_only Logical: (default = \code{FALSE}) Should reaction-like
+#'   events be omitted from the hierarchy?
+#' @param token Character: (optional) Reactome analysis token whose results
+#'   should be added to the hierarchy. See
+#'   \code{\link{rba_reactome_analysis}}.
+#' @param resource Character: (default = \code{"TOTAL"}) Analysis resource to
+#'   add when a \code{token} is supplied. Available choices are: "TOTAL",
+#'   "UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR", "MIRBASE", "NCBI_PROTEIN",
+#'   "EMBL", "COMPOUND", or "PUBCHEM_COMPOUND".
+#' @param interactors Logical: (default = \code{FALSE}) When a \code{token} is
+#'   supplied, should interactor results be included?
+#' @param importable_only Logical: (default = \code{FALSE}) When a \code{token}
+#'   is supplied, should the analysis results be restricted to importable
+#'   resources?
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return List which is a representation of the species's events hierarchy
-#'   described in the "Details section".
+#' @return A nested list representing the species's event hierarchy. When an
+#'   analysis token is supplied, the corresponding analysis information is
+#'   included with the pathway entries.
 #'
 #' @references \itemize{
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
@@ -599,17 +612,22 @@ rba_reactome_event_ancestors <- function(event_id,
 #'
 #' @examples
 #' \dontrun{
-#' #very large response!
+#' # Very large response
 #' rba_reactome_event_hierarchy("Homo sapiens")
 #' }
 #' \dontrun{
-#' #very large response!
-#' rba_reactome_event_hierarchy(9606)
+#' # Restrict the hierarchy to pathways
+#' rba_reactome_event_hierarchy(9606, pathways_only = TRUE)
 #' }
 #'
 #' @family "Reactome Content Service - Queries Related to Events"
 #' @export
 rba_reactome_event_hierarchy <- function(species,
+                                         pathways_only = FALSE,
+                                         token = NULL,
+                                         resource = "TOTAL",
+                                         interactors = FALSE,
+                                         importable_only = FALSE,
                                          ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -617,13 +635,77 @@ rba_reactome_event_hierarchy <- function(species,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "species", class = c("character", "numeric", "integer"), len = 1L)
+      list(
+        arg = "species", class = c("character", "numeric", "integer"),
+        len = 1L
+      ),
+      list(
+        arg = "pathways_only", class = "logical", len = 1L,
+        no_null = TRUE
+      ),
+      list(arg = "token", class = "character", len = 1L),
+      list(
+        arg = "resource", class = "character", len = 1L,
+        no_null = TRUE,
+        val = c("TOTAL",
+                "UNIPROT",
+                "ENSEMBL",
+                "CHEBI",
+                "IUPHAR",
+                "MIRBASE",
+                "NCBI_PROTEIN",
+                "EMBL",
+                "COMPOUND",
+                "PUBCHEM_COMPOUND")
+      ),
+      list(
+        arg = "interactors", class = "logical", len = 1L,
+        no_null = TRUE
+      ),
+      list(
+        arg = "importable_only", class = "logical", len = 1L,
+        no_null = TRUE
+      )
+    ),
+    cond = list(
+      list(
+        quote(
+          is.character(species) &&
+            !nzchar(trimws(species))
+        ),
+        "`species` should contain at least one non-whitespace character."
+      ),
+      list(
+        quote(!is.null(token) && !nzchar(trimws(token))),
+        "`token` should contain at least one non-whitespace character."
+      ),
+      list(
+        quote(
+          is.null(token) &&
+            (
+              resource != "TOTAL" ||
+                isTRUE(interactors) ||
+                isTRUE(importable_only)
+            )
+        ),
+        "Analysis options can only be changed when a `token` is supplied."
+      )
     )
   )
 
   .msg(
-    "Retrieving the complete events hierarchy tree of species %s.",
+    "Retrieving the event hierarchy of species %s.",
     species
+  )
+
+  ## Build GET API Request's query
+  call_query <- .rba_query(
+    init = list(),
+    list("pathwaysOnly", isTRUE(pathways_only), "true"),
+    list("token", !is.null(token), token),
+    list("resource", resource != "TOTAL", resource),
+    list("interactors", isTRUE(interactors), "true"),
+    list("importableOnly", isTRUE(importable_only), "true")
   )
 
   ## Build Function-Specific Call
@@ -635,6 +717,7 @@ rba_reactome_event_hierarchy <- function(species,
       .rba_stg("reactome", "pth", "content"),
       species
     ),
+    query = call_query,
     accept = "application/json",
     parser = "json->list_simp",
     save_to = .rba_file("reactome_event_hierarchy.json")
@@ -729,10 +812,10 @@ rba_reactome_event_hierarchy <- function(species,
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
@@ -869,7 +952,7 @@ rba_reactome_exporter_diagram <- function(event_id,
     ## Build Function-Specific Call
     call_query <- .rba_query(
       init = call_query,
-      list("level", document_level != 1, document_level)
+      list("level [0 - 1]", document_level != 1, document_level)
     )
 
     accept_input <- "application/pdf"
@@ -964,10 +1047,10 @@ rba_reactome_exporter_diagram <- function(event_id,
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
@@ -1086,10 +1169,10 @@ rba_reactome_exporter_event <- function(event_id,
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
@@ -1303,10 +1386,10 @@ rba_reactome_exporter_overview <- function(species,
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
@@ -1497,10 +1580,10 @@ rba_reactome_exporter_reaction <- function(event_id,
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
@@ -1602,7 +1685,7 @@ rba_reactome_interactors_psicquic <- function(proteins = NULL,
   return(final_output)
 }
 
-#' Get Static(IntAct) Interaction Information of a Protein
+#' Get Static (IntAct) Interaction Information of a Protein
 #'
 #' Reactome maintains a locally hosted snapshot of the IntAct interactions
 #'   database. Using this function, you can retrieve IntAct information for
@@ -1642,17 +1725,18 @@ rba_reactome_interactors_psicquic <- function(proteins = NULL,
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return List which it's content varies based on the  supplied "endpoint"
-#'   argument.
+#' @return An R object containing the requested interaction information.
+#'   Detailed and summary queries return information for each supplied protein;
+#'   pathway queries return a data frame of matching Reactome pathways.
 #'
 #' @references \itemize{
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
@@ -1675,10 +1759,10 @@ rba_reactome_interactors_psicquic <- function(proteins = NULL,
 #' @family "Reactome Content Service - Molecule Interactors"
 #' @export
 rba_reactome_interactors_static <- function(proteins,
-                                            endpoint = "details",
-                                            only_diagrammed = FALSE,
-                                            species = NULL,
-                                            ...) {
+                                             endpoint = "details",
+                                             only_diagrammed = FALSE,
+                                             species = NULL,
+                                             ...) {
   ## Load Global Options
   .rba_ext_args(...)
 
@@ -1691,6 +1775,7 @@ rba_reactome_interactors_static <- function(proteins,
       ),
       list(
         arg = "endpoint", class = "character", len = 1L,
+        no_null = TRUE,
         val = c("details",
                 "summary",
                 "pathways")
@@ -1700,12 +1785,23 @@ rba_reactome_interactors_static <- function(proteins,
     ),
     cond = list(
       list(
+        quote(any(!nzchar(trimws(as.character(proteins))))),
+        "`proteins` cannot contain empty character strings."
+      ),
+      list(
         quote(endpoint == "pathways" && length(proteins) != 1),
-        "When 'endpoint = pathways', you can only supply one protein."
+        "You can only supply one protein when `endpoint = \"pathways\"`."
       ),
       list(
         quote(!is.null(species) && endpoint != "pathways"),
         "You can only supply `species` when `endpoint = \"pathways\"`."
+      ),
+      list(
+        quote(isTRUE(only_diagrammed) && endpoint != "pathways"),
+        paste0(
+          "You can only set `only_diagrammed = TRUE` when ",
+          "`endpoint = \"pathways\"`."
+        )
       )
     )
   )
@@ -1747,7 +1843,7 @@ rba_reactome_interactors_static <- function(proteins,
       endpoint, proteins
     )
 
-    call_body <- paste(unique(proteins),collapse = "\n")
+    call_body <- paste(unique(proteins), collapse = "\n")
 
     ## Build Function-Specific Call
     parser_input <- ifelse(
@@ -1812,10 +1908,10 @@ rba_reactome_interactors_static <- function(proteins,
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
@@ -1898,8 +1994,8 @@ rba_reactome_mapping <- function(id,
 #'  "POST https://reactome.org/ContentService/data/orthologies/ids/
 #'    species/\{speciesId\}"
 #'
-#' @param event_ids Character vector: Human Reactome event ID(s) to retrieve
-#'   their orthologous events.
+#' @param event_ids Character vector: Up to 20 human Reactome event IDs to
+#'   retrieve their orthologous events.
 #' @param species_dbid Numeric: Reactome database ID (DbId) of the target
 #'   species. (e.g Mus musculus is 48892). See
 #'   \code{\link{rba_reactome_species}} or
@@ -1915,10 +2011,10 @@ rba_reactome_mapping <- function(id,
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
@@ -1943,7 +2039,10 @@ rba_reactome_orthology <- function(event_ids,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "event_ids", class = "character", min_len = 1L),
+      list(
+        arg = "event_ids", class = "character",
+        min_len = 1L, max_len = 20
+      ),
       list(
         arg = "species_dbid", class = c("numeric", "integer"),
         len = 1L, min_val = 0
@@ -2043,10 +2142,10 @@ rba_reactome_orthology <- function(event_ids,
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
@@ -2181,10 +2280,10 @@ rba_reactome_participants <- function(event_id,
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
@@ -2443,10 +2542,10 @@ rba_reactome_pathways_events <- function(event_id,
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
@@ -2550,10 +2649,10 @@ rba_reactome_pathways_low <- function(entity_id,
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
@@ -2629,10 +2728,10 @@ rba_reactome_pathways_top <- function(species,
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
@@ -2721,10 +2820,10 @@ rba_reactome_people_name <- function(person_name,
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
@@ -2813,43 +2912,59 @@ rba_reactome_people_id <- function(person_id,
 
 #### Query Endpoints ####
 
-#' Query and Retrieve any Reactome knowledge-base Object
+#' Retrieve Reactome Knowledgebase Objects
 #'
-#' Using this Comprehensive function, You can Retrieve any object from
-#'   \href{https://reactome.org/content/schema/DatabaseObject/}{Reactome
-#'   knowledge-base}
+#' Retrieve one or more Reactome objects by database or stable identifier.
+#'   A single object can be returned with additional related information or
+#'   reduced to one of its attributes. Multiple identifiers can optionally be
+#'   mapped to the corresponding current Reactome objects.
+#'
+#' With \code{enhanced = TRUE}, Reactome also retrieves second-level
+#'   relationships involving regulations and catalysts. The enhanced query can
+#'   include incoming relationships and disease-specific information. When the
+#'   queried object is a ReferenceEntity, its physical forms can instead be
+#'   represented by a summary.
 #'
 #' @section Corresponding API Resources:
 #'  "POST https://reactome.org/ContentService/data/query/ids"
 #'  \cr "POST https://reactome.org/ContentService/data/query/ids/map"
 #'  \cr "GET https://reactome.org/ContentService/data/query/\{id\}"
-#'  \cr "GET https://reactome.org/ContentService/data/query/enhanced/\{id\}"
+#'  \cr "GET https://reactome.org/ContentService/data/query/enhanced/v2/\{id\}"
 #'  \cr "GET https://reactome.org/ContentService/data/query/\{id\}/\{attributeName\}"
 #'
-#' @param ids Character or Numeric vector: A single or Multiple database IDs
-#'   (DbId), Stable IDs (StId) or a mixture of both.
-#' @param enhanced Logical: (default = \code{FALSE}) If 'TRUE' more information
-#'   on the supplied entry will be returned. (You can set this argument to
-#'   'TRUE' Only when you supply a single ID).
-#' @param map Logical: (default = \code{FALSE}) Should the supplied IDs be
-#'   mapped? This argument will only be considered when you supply multiple IDs.
-#'   (e.g. when you supply previous version of stable identifiers.)
-#' @param attribute_name Character: (optional) Only Return an Attribute of the
-#'   supplied Database Object. (You can use this argument Only when you supply a
-#'   single ID)
+#' @param ids Character or Numeric vector: One or more database identifiers
+#'   (DbIds), stable identifiers (StIds), or a mixture of both. At most 20
+#'   identifiers can be supplied.
+#' @param enhanced Logical: (default = \code{FALSE}) Should additional related
+#'   information be retrieved? This can only be used with one identifier.
+#' @param map Logical: (default = \code{FALSE}) When multiple identifiers are
+#'   supplied, should each input identifier be mapped to its current Reactome
+#'   object? This is useful for previous versions of stable identifiers.
+#' @param attribute_name Character: (optional) Return only this attribute of a
+#'   single Reactome object. This cannot be combined with \code{enhanced = TRUE}.
+#' @param fetch_incoming_relationships Logical: (default = \code{TRUE}) When
+#'   \code{enhanced = TRUE}, should incoming relationships be included where
+#'   they are relevant to the queried object?
+#' @param summarize_reference_entity Logical: (default = \code{FALSE}) When
+#'   \code{enhanced = TRUE} and the queried object is a ReferenceEntity, should
+#'   its physical forms be represented by a summary?
+#' @param include_disease Logical: (default = \code{TRUE}) When
+#'   \code{enhanced = TRUE}, should disease-specific information be included?
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return List containing your query outputs.
+#' @return An R object containing the requested Reactome object or objects.
+#'   The returned fields depend on the type of each object. Mapped multiple-ID
+#'   queries return a named list, and attribute queries return character values.
 #'
 #' @references \itemize{
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
@@ -2863,6 +2978,13 @@ rba_reactome_people_id <- function(person_id,
 #' rba_reactome_query(ids = "R-HSA-9656256", enhanced = TRUE)
 #' }
 #' \donttest{
+#' rba_reactome_query(
+#'   ids = 66247,
+#'   enhanced = TRUE,
+#'   summarize_reference_entity = TRUE
+#' )
+#' }
+#' \donttest{
 #' rba_reactome_query(ids = "8863054", attribute_name = "displayName")
 #' }
 #'
@@ -2872,6 +2994,9 @@ rba_reactome_query <- function(ids,
                                enhanced = FALSE,
                                map = FALSE,
                                attribute_name = NULL,
+                               fetch_incoming_relationships = TRUE,
+                               summarize_reference_entity = FALSE,
+                               include_disease = TRUE,
                                ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -2885,16 +3010,55 @@ rba_reactome_query <- function(ids,
       ),
       list(arg = "enhanced", class = "logical", len = 1L),
       list(arg = "map", class = "logical", len = 1L),
-      list(arg = "attribute_name", class = "character", len = 1L)
+      list(arg = "attribute_name", class = "character", len = 1L),
+      list(
+        arg = "fetch_incoming_relationships", class = "logical",
+        len = 1L, no_null = TRUE
+      ),
+      list(
+        arg = "summarize_reference_entity", class = "logical",
+        len = 1L, no_null = TRUE
+      ),
+      list(
+        arg = "include_disease", class = "logical", len = 1L,
+        no_null = TRUE
+      )
     ),
     cond = list(
+      list(
+        quote(any(!nzchar(trimws(as.character(ids))))),
+        "`ids` cannot contain empty character strings."
+      ),
+      list(
+        quote(is.numeric(ids) && any(!is.finite(ids) | ids <= 0 | ids != floor(ids))),
+        "Numeric `ids` should be finite, positive whole numbers."
+      ),
+      list(
+        quote(!is.null(attribute_name) && !nzchar(trimws(attribute_name))),
+        "`attribute_name` should contain at least one non-whitespace character."
+      ),
       list(
         quote(length(ids) > 1 && (isTRUE(enhanced) | !is.null(attribute_name))),
         "You can only use `enhanced` or `attribute_name` with a single ID."
       ),
       list(
         quote(!is.null(attribute_name) && isTRUE(enhanced)),
-        "You can only supply 'attribute_name' when enhanced is 'FALSE'."
+        "You can only supply `attribute_name` when `enhanced = FALSE`."
+      ),
+      list(
+        quote(length(ids) == 1L && isTRUE(map)),
+        "You can only set `map = TRUE` when supplying multiple IDs."
+      ),
+      list(
+        quote(
+          !isTRUE(enhanced) &&
+            (
+              !isTRUE(fetch_incoming_relationships) ||
+                isTRUE(summarize_reference_entity) ||
+                !isTRUE(include_disease)
+            )
+        ),
+        "Enhanced-query options can only be changed when `enhanced = TRUE`."
       )
     )
   )
@@ -2907,7 +3071,7 @@ rba_reactome_query <- function(ids,
 
     #### use POST
     ## Build POST API Request's URL
-    call_body <- paste(unique(ids),collapse = ",")
+    call_body <- paste(unique(ids), collapse = ",")
     path_input <- paste0(
       .rba_stg("reactome", "pth", "content"),
       ifelse(isTRUE(map), yes = "data/query/ids/map", no = "data/query/ids")
@@ -2937,6 +3101,7 @@ rba_reactome_query <- function(ids,
     accept_input <- "application/json"
     parser_input <- "json->list"
     file_ext <- "json"
+    call_query <- list()
 
     if (!is.null(attribute_name)) {
 
@@ -2947,7 +3112,18 @@ rba_reactome_query <- function(ids,
 
     } else if (isTRUE(enhanced)) {
 
-      path_input <- sub("/query/", "/query/enhanced/", path_input)
+      path_input <- sub("/query/", "/query/enhanced/v2/", path_input)
+      call_query <- list(
+        "fetchIncomingRelationships" = ifelse(
+          isTRUE(fetch_incoming_relationships), yes = "true", no = "false"
+        ),
+        "summariseReferenceEntity" = ifelse(
+          isTRUE(summarize_reference_entity), yes = "true", no = "false"
+        ),
+        "includeDisease" = ifelse(
+          isTRUE(include_disease), yes = "true", no = "false"
+        )
+      )
 
     }
 
@@ -2955,6 +3131,7 @@ rba_reactome_query <- function(ids,
       httr = "get",
       url = .rba_stg("reactome", "url"),
       path = path_input,
+      query = call_query,
       parser = parser_input,
       accept = accept_input,
       save_to = .rba_file(paste0("reactome_query.", file_ext))
@@ -3032,10 +3209,10 @@ rba_reactome_query <- function(ids,
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
@@ -3174,38 +3351,51 @@ rba_reactome_search <- function(query,
 
 #### References Endpoints ####
 
-#' Map Cross References IDs to Reactome ReferenceEntity
+#' Map Cross-Reference Identifiers to Reactome
 #'
-#' Use this function To retrieve a list of Reactome ReferenceEntity associated
-#'   to your supplied Cross Reference (i.e. External) ID.
+#' Retrieve the Reactome reference entities associated with an identifier from
+#'   an external database. With \code{expanded = TRUE}, also retrieve the other
+#'   external identifiers associated with each reference entity and the stable
+#'   identifiers of its physical forms in Reactome.
 #'
-#' Reactome cross-references external database's identifiers to it's database
-#'   Entries named ReferenceEntity, which resembles the invariant aspect of
-#'   a molecule. Thus there is a one-to-many relationship between Reactome's
-#'   ReferenceEntity object and the molecule's ID in external databases,
-#'   which in Reactome's terms is called Cross Reference.
-#'   \cr See \code{\link{rba_reactome_participants}}'s "Details section"
-#'   to learn more about how Reactome classifies molecules.
+#' Multiple identifiers can be supplied for an expanded query. Reactome
+#'   processes these identifiers in pages, while a standard query accepts one
+#'   identifier. See \code{\link{rba_reactome_participants}} for more
+#'   information about how Reactome represents molecules.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://reactome.org/ContentService/references/mapping/\{identifier\}"
+#'  \cr "POST https://reactome.org/ContentService/references/mapping/xrefs"
 #'
-#' @param xref_id Character or Numeric: molecule's cross-reference (external)
-#'   identifier.
+#' @param xref_id Character or Numeric vector: One or more cross-reference
+#'   identifiers from external databases. Multiple identifiers can only be
+#'   supplied when \code{expanded = TRUE}.
+#' @param expanded Logical: (default = \code{FALSE}) Should other external
+#'   identifiers and associated Reactome physical forms also be retrieved?
+#' @param db_filter Character: (optional) When \code{expanded = TRUE}, restrict
+#'   the returned cross-references to this external database name as used by
+#'   Reactome, e.g. \code{"ENSEMBL"}.
+#' @param page_size Numeric: (default = \code{100}) For an expanded query with
+#'   multiple identifiers, the number of supplied identifiers to process per
+#'   page.
+#' @param page Numeric: (default = \code{1}) For an expanded query with multiple
+#'   identifiers, the one-based page to retrieve.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return List containing the ReferenceEntity corresponding to your
-#'   supplied cross-reference (external) ID.
+#' @return An R object containing the corresponding Reactome reference
+#'   entities. Expanded results also contain associated cross-references and
+#'   stable identifiers of physical entities. Expanded queries with multiple
+#'   identifiers additionally contain pagination information.
 #'
 #' @references \itemize{
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
@@ -3218,10 +3408,28 @@ rba_reactome_search <- function(query,
 #' \donttest{
 #' rba_reactome_xref("ENSP00000361350")
 #' }
+#' \donttest{
+#' rba_reactome_xref("P36897", expanded = TRUE, db_filter = "ENSEMBL")
+#' }
+#' \donttest{
+#' rba_reactome_xref(
+#'   c("P36897", "Q5S007"),
+#'   expanded = TRUE,
+#'   db_filter = "ENSEMBL",
+#'   page_size = 2,
+#'   page = 1
+#' )
+#' }
 #'
 #' @family "Reactome Content Service - ReferenceEntity Queries"
+#' @seealso
+#' \code{\link{rba_pages}}
 #' @export
 rba_reactome_xref <- function(xref_id,
+                              expanded = FALSE,
+                              db_filter = NULL,
+                              page_size = 100,
+                              page = 1,
                               ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -3229,26 +3437,121 @@ rba_reactome_xref <- function(xref_id,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "xref_id", class = c("character", "numeric", "integer"), len = 1L)
+      list(
+        arg = "xref_id", class = c("character", "numeric", "integer"),
+        min_len = 1L
+      ),
+      list(
+        arg = "expanded", class = "logical", len = 1L,
+        no_null = TRUE
+      ),
+      list(arg = "db_filter", class = "character", len = 1L),
+      list(
+        arg = "page_size", class = c("numeric", "integer"), len = 1L,
+        min_val = 1, no_null = TRUE
+      ),
+      list(
+        arg = "page", class = c("numeric", "integer"), len = 1L,
+        min_val = 1, no_null = TRUE
+      )
+    ),
+    cond = list(
+      list(
+        quote(is.numeric(xref_id) && any(!is.finite(xref_id))),
+        "Numeric `xref_id` values should be finite."
+      ),
+      list(
+        quote(length(xref_id) > 1L && !isTRUE(expanded)),
+        "Multiple `xref_id` values require `expanded = TRUE`."
+      ),
+      list(
+        quote(!is.null(db_filter) && !nzchar(trimws(db_filter))),
+        "`db_filter` should contain at least one non-whitespace character."
+      ),
+      list(
+        quote(!is.null(db_filter) && !isTRUE(expanded)),
+        "You can only supply `db_filter` when `expanded = TRUE`."
+      ),
+      list(
+        quote(!is.finite(page_size) || page_size != floor(page_size)),
+        "`page_size` should be a finite, positive whole number."
+      ),
+      list(
+        quote(!is.finite(page) || page != floor(page)),
+        "`page` should be a finite, positive whole number."
+      ),
+      list(
+        quote(
+          (page != 1 || page_size != 100) &&
+            (!isTRUE(expanded) || length(xref_id) == 1L)
+        ),
+        "`page` and `page_size` can only be changed for an expanded query with multiple identifiers."
+      )
     )
   )
 
   .msg(
-    "Retrieving Reactome's ReferenceEntity that have a cross-reference to %s.",
-    xref_id
+    "Retrieving Reactome cross-reference information for %s.",
+    ifelse(
+      length(xref_id) == 1L,
+      yes = xref_id,
+      no = sprintf("%s identifiers", length(xref_id))
+    )
   )
+
+  ## Build API Request's query
+  call_query <- .rba_query(
+    init = if (length(xref_id) > 1L) {
+      list("page" = page - 1L, "pageSize" = page_size)
+    } else {
+      list()
+    },
+    list("dbFilter", !is.null(db_filter), db_filter)
+  )
+
+  path_input <- paste0(
+    .rba_stg("reactome", "pth", "content"),
+    "references/mapping"
+  )
+
+  if (isTRUE(expanded)) {
+    httr_input <- "post"
+    path_input <- paste0(path_input, "/xrefs")
+    call_body <- paste(xref_id, collapse = "\n")
+    content_type_input <- httr::content_type("text/plain")
+    parser_input <- "json->list"
+
+    if (length(xref_id) == 1L) {
+      single_xref_parser <- function(parsed_response) {
+        result_name <- trimws(as.character(xref_id))
+        result_group <- parsed_response[["content"]][[1L]]
+        parsed_output <- result_group[[result_name]]
+        return(parsed_output)
+      }
+
+      parser_input <- list(
+        parser_input,
+        single_xref_parser
+      )
+    }
+  } else {
+    httr_input <- "get"
+    path_input <- paste0(path_input, "/", xref_id)
+    call_body <- NULL
+    content_type_input <- NULL
+    parser_input <- "json->list_simp"
+  }
 
   ## Build Function-Specific Call
   input_call <- .rba_httr(
-    httr = "get",
+    httr = httr_input,
     url = .rba_stg("reactome", "url"),
-    path = paste0(
-      .rba_stg("reactome", "pth", "content"),
-      "references/mapping/",
-      xref_id
-    ),
+    path = path_input,
+    query = call_query,
+    body = call_body,
     accept = "application/json",
-    parser = "json->list_simp",
+    content_type_input,
+    parser = parser_input,
     save_to = .rba_file("reactome_xref.json")
   )
 
@@ -3280,10 +3583,10 @@ rba_reactome_xref <- function(xref_id,
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
 #'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
 #'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-#'   PMID: 32907876.
+#'   \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+#'   & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+#'   Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+#'   doi: 10.1074/mcp.TIR120.002155
 #'   \item \href{https://reactome.org/ContentService/}{Reactome Content
 #'   Services API Documentation}
 #'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}

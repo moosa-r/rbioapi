@@ -195,10 +195,10 @@ if (
 
 ## Retrieve any object from Reactome knowledge-base {#retrieve-any-object-from-reactome-knowledge-base}
 
-Using `rba_reactome_query()`, you can retrieve any object from Reactome knowledge-base. In simpler terms, what I mean by the object is roughly anything that Reactome associated an ID to it. This can range from a person's entry to proteins, reactions, pathways, species, and many more! You can explore [Reactome's data schema](https://reactome.org/content/schema/DatabaseObject "Graph Database :: Data Schema") to learn about Reactome knowledge-base objects and their organization. Here are some examples, note that you are not limited to only one ID per query. You can use a vector of inputs, the only limitation is that when you supply more than one ID, you cannot have `enhanced = TRUE`.
+Using `rba_reactome_query()`, you can retrieve any object to which Reactome has assigned a database or stable identifier. This includes proteins, reactions, pathways, species, people, and many other entries described in [Reactome's data schema](https://reactome.org/content/schema/DatabaseObject "Graph Database :: Data Schema"). A standard query accepts one or more identifiers. An enhanced query accepts one identifier and adds related regulations and catalysts; it also lets you control incoming relationships and disease-specific information, or request a shorter summary for a reference entity.
 
 ```{r rba_reactome_query_ex1}
-## 1 query a pathway Entry
+## 1 Query a pathway entry
 pathway <- rba_reactome_query(
   ids = "R-HSA-109581",
   enhanced = TRUE
@@ -209,15 +209,16 @@ str(pathway, 2)
 
 
 
-## 3 You can compare it with the webpage of R-HSA-202939 entry:
-# https://reactome.org/content/detail/R-HSA-202939
+## 3 Compare the result with the pathway's Reactome page
+# https://reactome.org/content/detail/R-HSA-109581
 ```
 
 ```{r rba_reactome_query_ex2}
-## 1 query a protein Entry
+## 1 Query a reference entity and summarize its physical forms
 protein <- rba_reactome_query(
   ids = 66247,
-  enhanced = TRUE
+  enhanced = TRUE,
+  summarize_reference_entity = TRUE
 )
 
 ## 2 As always we use str() to inspect the output's structure
@@ -225,21 +226,34 @@ str(protein, 1)
 
 
 
-## 3 You can compare it with the webpage of R-HSA-202939 entry:
-# https://reactome.org/content/detail/R-HSA-202939
+## 3 Compare the result with the entry's Reactome page
+# https://reactome.org/content/detail/66247
 
 ```
 
 ## Find Cross-Reference IDs in Reactome {#find-cross-reference-ids-in-reactome}
 
-As you can see in the second example usage of we used Reactome's dbID `66247` to query CD40 protein. How did we obtain that in the first place? You can use `rba_reactome_xref` to map any cross-reference (external) IDs to Reactome IDs.
+In the second example, we used Reactome's database identifier `66247` to query the CD40 reference entity. `rba_reactome_xref()` can map an external identifier, such as a gene symbol, to the corresponding Reactome reference entity.
 
 ```{r rba_reactome_xref}
-## 1 We Supply HGNC ID to find what is the corresponding database ID in Reactome
+## 1 Supply an HGNC symbol to find the corresponding Reactome database ID
 xref_protein <- rba_reactome_xref("CD40")
 
-## 2 As always use str() to inspect the output's structure
+## 2 As always, use str() to inspect the output's structure
 str(xref_protein, 1)
+```
+
+Set `expanded = TRUE` to also retrieve other external identifiers associated with the reference entity and the stable identifiers of its physical forms. Expanded queries can accept a vector of identifiers; `page` and `page_size` select which supplied identifiers Reactome processes in each call. The optional database filter uses Reactome's database names.
+
+```{r rba_reactome_xref_expanded}
+## Retrieve the ENSEMBL cross-references and associated physical forms
+xref_details <- rba_reactome_xref(
+  "P36897",
+  expanded = TRUE,
+  db_filter = "ENSEMBL"
+)
+
+str(xref_details, 2)
 ```
 
 ## Map Cross-Reference IDs to Reactome {#map-cross-reference-ids-to-reactome}
@@ -274,11 +288,11 @@ if (is.data.frame(xref_mapping)) {
 
 ------------------------------------------------------------------------
 
-# See also in Functions' manuals {#see-also-in-functions-manuals}
+# See also in function manuals {#see-also-in-functions-manuals}
 
-There are still more rbioapi f Reactome content functions that were not covered in this vignette. Here is a brief overview, see the functions' manual for detailed guides and examples.
+Several rbioapi Reactome content functions are not covered in this vignette. The following overview links them by purpose; see each function's manual for details and examples.
 
-## Retrieve Reactome Database information {#retrieve-reactome-database-information}
+## Retrieve Reactome database information {#retrieve-reactome-database-information}
 
 -   `rba_reactome_version()`: Return current Reactome version
 
@@ -290,13 +304,13 @@ There are still more rbioapi f Reactome content functions that were not covered 
 
 -   `rba_reactome_search()`: Search Reactome entries by text and optional filters.
 
--   `rba_reactome_query()`
+-   `rba_reactome_query()`: Retrieve Reactome objects, optionally with enhanced relationships or a selected attribute.
 
 -   `rba_reactome_mapping()`
 
--   `rba_reactome_xref()`
+-   `rba_reactome_xref()`: Map external identifiers to Reactome reference entities and, optionally, their other cross-references and physical forms.
 
-## Things you can do with a Entities {#things-you-can-do-with-a-entities}
+## Things you can do with entities {#things-you-can-do-with-a-entities}
 
 -   `rba_reactome_complex_list()`: Get a list of complexes that have your molecule in them.
 
@@ -318,7 +332,7 @@ There are still more rbioapi f Reactome content functions that were not covered 
 
 -   `rba_reactome_orthology()`
 
--   `rba_reactome_event_hierarchy()`: Retrieve full event hierarchy of an species.
+-   `rba_reactome_event_hierarchy()`: Retrieve a species's event or pathway hierarchy, optionally with analysis results added.
 
 ## Pathways {#pathways}
 
@@ -332,7 +346,7 @@ There are still more rbioapi f Reactome content functions that were not covered 
 
 -   `rba_reactome_interactors_psicquic()`
 
--   `rba_reactome_interactors_static()`
+-   `rba_reactome_interactors_static()`: Retrieve Reactome's static IntAct interaction details, summaries, or associated pathways.
 
 ## People {#peaple}
 

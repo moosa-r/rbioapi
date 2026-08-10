@@ -2,7 +2,7 @@
 % Please edit documentation in R/reactome_content.R
 \name{rba_reactome_interactors_static}
 \alias{rba_reactome_interactors_static}
-\title{Get Static(IntAct) Interaction Information of a Protein}
+\title{Get Static (IntAct) Interaction Information of a Protein}
 \usage{
 rba_reactome_interactors_static(
   proteins,
@@ -37,8 +37,9 @@ The scientific name of the species to search for pathways. See
 arguments manual for more information on available options.}
 }
 \value{
-List which it's content varies based on the  supplied "endpoint"
-  argument.
+An R object containing the requested interaction information.
+  Detailed and summary queries return information for each supplied protein;
+  pathway queries return a data frame of matching Reactome pathways.
 }
 \description{
 Reactome maintains a locally hosted snapshot of the IntAct interactions
@@ -82,10 +83,10 @@ rba_reactome_interactors_static(proteins = c("Q9BXM7-1", "Q13501"),
   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-  \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-  Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-  Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-  PMID: 32907876.
+  \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+  & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+  Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+  doi: 10.1074/mcp.TIR120.002155
   \item \href{https://reactome.org/ContentService/}{Reactome Content
   Services API Documentation}
   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}

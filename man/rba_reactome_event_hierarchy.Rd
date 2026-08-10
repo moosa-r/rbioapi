@@ -2,9 +2,17 @@
 % Please edit documentation in R/reactome_content.R
 \name{rba_reactome_event_hierarchy}
 \alias{rba_reactome_event_hierarchy}
-\title{Get Full Event Hierarchy of a Species}
+\title{Retrieve the Reactome Event Hierarchy of a Species}
 \usage{
-rba_reactome_event_hierarchy(species, ...)
+rba_reactome_event_hierarchy(
+  species,
+  pathways_only = FALSE,
+  token = NULL,
+  resource = "TOTAL",
+  interactors = FALSE,
+  importable_only = FALSE,
+  ...
+)
 }
 \arguments{
 \item{species}{Character or Numeric: NCBI Taxonomy identifier (Human Taxonomy
@@ -13,26 +21,44 @@ ID is 9606.) or species name (e.g. "Homo sapiens"). See
 \href{https://reactome.org/content/schema/objects/Species/}{Reactome
 Data Schema: Entries: Species}.}
 
+\item{pathways_only}{Logical: (default = \code{FALSE}) Should reaction-like
+events be omitted from the hierarchy?}
+
+\item{token}{Character: (optional) Reactome analysis token whose results
+should be added to the hierarchy. See
+\code{\link{rba_reactome_analysis}}.}
+
+\item{resource}{Character: (default = \code{"TOTAL"}) Analysis resource to
+add when a \code{token} is supplied. Available choices are: "TOTAL",
+"UNIPROT", "ENSEMBL", "CHEBI", "IUPHAR", "MIRBASE", "NCBI_PROTEIN",
+"EMBL", "COMPOUND", or "PUBCHEM_COMPOUND".}
+
+\item{interactors}{Logical: (default = \code{FALSE}) When a \code{token} is
+supplied, should interactor results be included?}
+
+\item{importable_only}{Logical: (default = \code{FALSE}) When a \code{token}
+is supplied, should the analysis results be restricted to importable
+resources?}
+
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-List which is a representation of the species's events hierarchy
-  described in the "Details section".
+A nested list representing the species's event hierarchy. When an
+  analysis token is supplied, the corresponding analysis information is
+  included with the pathway entries.
 }
 \description{
-This function will retrieve the full Events hierarchy of your supplied
-  species. Directly under each species, each child element is a "top Level
-  Pathway". You can traverse the events tree down by following the "children"
-  element.
+Retrieve the full hierarchy of pathways and reaction-like events for a
+  species, or restrict the hierarchy to pathways. The hierarchy begins with
+  top-level pathways and can be traversed through the \code{children} field.
+  Because an event can participate in more than one biological process, it
+  may occur in more than one place in the hierarchy.
 }
 \details{
-By Reactome's definition, Events are the building blocks of biological
-  processes and could be of two main classes: "Pathway" or
-  "Reaction-like events". The events are organized in a hierarchical
-  structure; and each event could be child or parent to another event; The
-  hierarchy will always begin with a "Top level pathway" event. Also note
-  that a given event could be part of more that one hierarchies.
+An analysis token can be supplied to add the corresponding analysis results
+  to the hierarchy. The analysis resource can then be selected, and
+  interactors or only importable resources can optionally be included.
 }
 \section{Corresponding API Resources}{
 
@@ -41,12 +67,12 @@ By Reactome's definition, Events are the building blocks of biological
 
 \examples{
 \dontrun{
-#very large response!
+# Very large response
 rba_reactome_event_hierarchy("Homo sapiens")
 }
 \dontrun{
-#very large response!
-rba_reactome_event_hierarchy(9606)
+# Restrict the hierarchy to pathways
+rba_reactome_event_hierarchy(9606, pathways_only = TRUE)
 }
 
 }
@@ -55,10 +81,10 @@ rba_reactome_event_hierarchy(9606)
   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-  \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-  Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-  Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-  PMID: 32907876.
+  \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+  & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+  Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+  doi: 10.1074/mcp.TIR120.002155
   \item \href{https://reactome.org/ContentService/}{Reactome Content
   Services API Documentation}
   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}

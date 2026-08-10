@@ -2,37 +2,61 @@
 % Please edit documentation in R/reactome_content.R
 \name{rba_reactome_xref}
 \alias{rba_reactome_xref}
-\title{Map Cross References IDs to Reactome ReferenceEntity}
+\title{Map Cross-Reference Identifiers to Reactome}
 \usage{
-rba_reactome_xref(xref_id, ...)
+rba_reactome_xref(
+  xref_id,
+  expanded = FALSE,
+  db_filter = NULL,
+  page_size = 100,
+  page = 1,
+  ...
+)
 }
 \arguments{
-\item{xref_id}{Character or Numeric: molecule's cross-reference (external)
-identifier.}
+\item{xref_id}{Character or Numeric vector: One or more cross-reference
+identifiers from external databases. Multiple identifiers can only be
+supplied when \code{expanded = TRUE}.}
+
+\item{expanded}{Logical: (default = \code{FALSE}) Should other external
+identifiers and associated Reactome physical forms also be retrieved?}
+
+\item{db_filter}{Character: (optional) When \code{expanded = TRUE}, restrict
+the returned cross-references to this external database name as used by
+Reactome, e.g. \code{"ENSEMBL"}.}
+
+\item{page_size}{Numeric: (default = \code{100}) For an expanded query with
+multiple identifiers, the number of supplied identifiers to process per
+page.}
+
+\item{page}{Numeric: (default = \code{1}) For an expanded query with multiple
+identifiers, the one-based page to retrieve.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-List containing the ReferenceEntity corresponding to your
-  supplied cross-reference (external) ID.
+An R object containing the corresponding Reactome reference
+  entities. Expanded results also contain associated cross-references and
+  stable identifiers of physical entities. Expanded queries with multiple
+  identifiers additionally contain pagination information.
 }
 \description{
-Use this function To retrieve a list of Reactome ReferenceEntity associated
-  to your supplied Cross Reference (i.e. External) ID.
+Retrieve the Reactome reference entities associated with an identifier from
+  an external database. With \code{expanded = TRUE}, also retrieve the other
+  external identifiers associated with each reference entity and the stable
+  identifiers of its physical forms in Reactome.
 }
 \details{
-Reactome cross-references external database's identifiers to it's database
-  Entries named ReferenceEntity, which resembles the invariant aspect of
-  a molecule. Thus there is a one-to-many relationship between Reactome's
-  ReferenceEntity object and the molecule's ID in external databases,
-  which in Reactome's terms is called Cross Reference.
-  \cr See \code{\link{rba_reactome_participants}}'s "Details section"
-  to learn more about how Reactome classifies molecules.
+Multiple identifiers can be supplied for an expanded query. Reactome
+  processes these identifiers in pages, while a standard query accepts one
+  identifier. See \code{\link{rba_reactome_participants}} for more
+  information about how Reactome represents molecules.
 }
 \section{Corresponding API Resources}{
 
  "GET https://reactome.org/ContentService/references/mapping/\{identifier\}"
+ \cr "POST https://reactome.org/ContentService/references/mapping/xrefs"
 }
 
 \examples{
@@ -42,6 +66,18 @@ rba_reactome_xref("CD40")
 \donttest{
 rba_reactome_xref("ENSP00000361350")
 }
+\donttest{
+rba_reactome_xref("P36897", expanded = TRUE, db_filter = "ENSEMBL")
+}
+\donttest{
+rba_reactome_xref(
+  c("P36897", "Q5S007"),
+  expanded = TRUE,
+  db_filter = "ENSEMBL",
+  page_size = 2,
+  page = 1
+)
+}
 
 }
 \references{
@@ -49,13 +85,16 @@ rba_reactome_xref("ENSP00000361350")
   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
-  \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-  Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-  Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-  PMID: 32907876.
+  \item Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+  & Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+  Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+  doi: 10.1074/mcp.TIR120.002155
   \item \href{https://reactome.org/ContentService/}{Reactome Content
   Services API Documentation}
   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
   }
+}
+\seealso{
+\code{\link{rba_pages}}
 }
 \concept{"Reactome Content Service - ReferenceEntity Queries"}
