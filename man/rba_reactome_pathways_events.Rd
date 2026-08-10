@@ -2,7 +2,7 @@
 % Please edit documentation in R/reactome_content.R
 \name{rba_reactome_pathways_events}
 \alias{rba_reactome_pathways_events}
-\title{Get Events Contained in an Upstream Events}
+\title{Get Events Contained in an Upstream Event}
 \usage{
 rba_reactome_pathways_events(event_id, attribute_name = NULL, ...)
 }
@@ -10,32 +10,38 @@ rba_reactome_pathways_events(event_id, attribute_name = NULL, ...)
 \item{event_id}{Character or Numeric: Reactome event's database ID (DbId) or
 Stable ID (StId).}
 
-\item{attribute_name}{Character: (optional) An attribute of the events to be
-returned instead of
-the whole events. see \href{https://reactome.org/content/schema/Event}{
-Reactome Data Schema: Event} for available options.}
+\item{attribute_name}{Character: Optional event attribute to return instead
+of complete event records. See
+\href{https://reactome.org/content/schema/Event}{Reactome Data Schema:
+Event} for available options.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-Data frame where each row is a contained event and columns are
-  event's attributes. If an "attribute_name" argument was supplied, a
-  character vector will be returned.
+A list with information about the contained events. If
+  \code{attribute_name} is supplied, one value for each contained event is
+  returned. If the individual values cannot be identified reliably, the
+  complete result is returned as a single value.
 }
 \description{
-A Reactome Event could be comprised of other events (meaning, a pathway that
-  include other pathways itself). Use this function to recursively return
-  all the events which reside downstream of your supplied event ID (or
-  an attribute of that events).
+Reactome events can contain other events; for example, a pathway can contain
+  smaller pathways and reactions. This function recursively retrieves all
+  events downstream of the supplied event, or one attribute of those events.
 }
 \details{
-By Reactome's definition, Events are the building blocks of biological
-  processes and could be of two main classes: "Pathway" or
-  "Reaction-like events". The events are organized in a hierarchical
-  structure; and each event could be child or parent to another event; The
-  hierarchy will always begin with a "Top level pathway" event. Also note
-  that a given event could be part of more that one hierarchies.
+Reactome defines events as the building blocks of biological processes.
+  Events can be pathways or reaction-like events and are organized
+  hierarchically. An event can be a child or parent of another event, each
+  hierarchy begins with a top-level pathway, and an event can belong to more
+  than one hierarchy.
+
+When \code{attribute_name} is supplied, the function returns one value for
+  each contained event whenever the individual values can be identified
+  reliably. Empty values and line breaks within a value are preserved.
+  Otherwise, the complete result is returned unchanged with a warning. When
+  \code{save_file} is used, the saved file always contains the result exactly
+  as supplied by Reactome.
 }
 \section{Corresponding API Resources}{
 
@@ -51,7 +57,7 @@ rba_reactome_pathways_events(event_id = "R-HSA-5673001")
 }
 \donttest{
 rba_reactome_pathways_events(event_id = "R-HSA-5673001",
-    attribute_name = "displayName")
+    attribute_name = "stId")
 }
 
 }

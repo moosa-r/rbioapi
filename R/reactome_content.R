@@ -2138,19 +2138,24 @@ rba_reactome_participants <- function(event_id,
 
 #### Pathways Endpoints ####
 
-#' Get Events Contained in an Upstream Events
+#' Get Events Contained in an Upstream Event
 #'
-#' A Reactome Event could be comprised of other events (meaning, a pathway that
-#'   include other pathways itself). Use this function to recursively return
-#'   all the events which reside downstream of your supplied event ID (or
-#'   an attribute of that events).
+#' Reactome events can contain other events; for example, a pathway can contain
+#'   smaller pathways and reactions. This function recursively retrieves all
+#'   events downstream of the supplied event, or one attribute of those events.
 #'
-#' By Reactome's definition, Events are the building blocks of biological
-#'   processes and could be of two main classes: "Pathway" or
-#'   "Reaction-like events". The events are organized in a hierarchical
-#'   structure; and each event could be child or parent to another event; The
-#'   hierarchy will always begin with a "Top level pathway" event. Also note
-#'   that a given event could be part of more that one hierarchies.
+#' Reactome defines events as the building blocks of biological processes.
+#'   Events can be pathways or reaction-like events and are organized
+#'   hierarchically. An event can be a child or parent of another event, each
+#'   hierarchy begins with a top-level pathway, and an event can belong to more
+#'   than one hierarchy.
+#'
+#' When \code{attribute_name} is supplied, the function returns one value for
+#'   each contained event whenever the individual values can be identified
+#'   reliably. Empty values and line breaks within a value are preserved.
+#'   Otherwise, the complete result is returned unchanged with a warning. When
+#'   \code{save_file} is used, the saved file always contains the result exactly
+#'   as supplied by Reactome.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://reactome.org/ContentService/data/pathway/\{id\}/
@@ -2160,16 +2165,17 @@ rba_reactome_participants <- function(event_id,
 #'
 #' @param event_id Character or Numeric: Reactome event's database ID (DbId) or
 #'   Stable ID (StId).
-#' @param attribute_name Character: (optional) An attribute of the events to be
-#'   returned instead of
-#'   the whole events. see \href{https://reactome.org/content/schema/Event}{
-#'   Reactome Data Schema: Event} for available options.
+#' @param attribute_name Character: Optional event attribute to return instead
+#'   of complete event records. See
+#'   \href{https://reactome.org/content/schema/Event}{Reactome Data Schema:
+#'   Event} for available options.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return Data frame where each row is a contained event and columns are
-#'   event's attributes. If an "attribute_name" argument was supplied, a
-#'   character vector will be returned.
+#' @return A list with information about the contained events. If
+#'   \code{attribute_name} is supplied, one value for each contained event is
+#'   returned. If the individual values cannot be identified reliably, the
+#'   complete result is returned as a single value.
 #'
 #' @references \itemize{
 #'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
@@ -2190,7 +2196,7 @@ rba_reactome_participants <- function(event_id,
 #' }
 #' \donttest{
 #' rba_reactome_pathways_events(event_id = "R-HSA-5673001",
-#'     attribute_name = "displayName")
+#'     attribute_name = "stId")
 #' }
 #'
 #' @family "Reactome Content Service - Pathway Related Queries"
@@ -2231,20 +2237,156 @@ rba_reactome_pathways_events <- function(event_id,
 
   if (!is.null(attribute_name)) {
 
-    path_input <- paste0(path_input, "/", attribute_name)
     accept_input <- "text/plain"
-    parser_input <- function(x) {
-      unlist(
-        strsplit(
-          x = gsub(
-            pattern = "\\[|\\]",
-            replacement = "",
-            x = httr::content(x, as = "text", encoding = "UTF-8")
-          ),
-          split = ", "
-        )
+    attribute_is_db_id <- identical(tolower(attribute_name), "dbid")
+
+    ## Retrieve Contained-Event Count
+    if (!attribute_is_db_id) {
+      input_call <- .rba_httr(
+        httr = "get",
+        url = .rba_stg("reactome", "url"),
+        path = paste0(path_input, "/dbId"),
+        accept = "text/plain",
+        parser = "text->chr",
+        save_to = FALSE
       )
+      contained_event_ids <- .rba_skeleton(input_call)
     }
+    path_input <- paste0(path_input, "/", attribute_name)
+
+    parser_input <- list(
+      "text->chr",
+      function(parsed_response) {
+        ## Select Event-Count Source
+        event_ids <- if (attribute_is_db_id) {
+          parsed_response
+        } else {
+          contained_event_ids
+        }
+
+        valid_response <- length(parsed_response) == 1L &&
+          !is.na(parsed_response) &&
+          startsWith(parsed_response, "[") &&
+          endsWith(parsed_response, "]") &&
+          is.character(event_ids) &&
+          length(event_ids) == 1L &&
+          !is.na(event_ids) &&
+          startsWith(event_ids, "[") &&
+          endsWith(event_ids, "]")
+
+        ## Parse Valid Responses
+        if (valid_response) {
+          event_ids <- substr(event_ids, 2L, nchar(event_ids) - 1L)
+
+          ## Count Contained Events
+          event_count <- if (nzchar(event_ids)) {
+            length(strsplit(event_ids, split = ", ", fixed = TRUE)[[1L]])
+          } else {
+            0L
+          }
+          response_body <- substr(
+            parsed_response,
+            2L,
+            nchar(parsed_response) - 1L
+          )
+
+          ## Return an Empty Result
+          if (event_count == 0L && !nzchar(response_body)) {
+            return(character())
+          }
+
+          ## Return a Single Value
+          if (event_count == 1L) {
+            return(response_body)
+          }
+
+          ## Parse Multiple Values
+          if (event_count > 1L) {
+            response_parts <- strsplit(
+              response_body,
+              split = ", ",
+              fixed = TRUE
+            )[[1L]]
+
+            ## Preserve a Trailing Empty Value
+            if (endsWith(response_body, ", ")) {
+              response_parts <- c(response_parts, "")
+            }
+
+            ## Return Plain Values
+            if (length(response_parts) == event_count) {
+              return(response_parts)
+            }
+
+            ## Locate Collection Boundaries
+            group_ends <- which(
+              !nzchar(response_parts) | endsWith(response_parts, "\n")
+            )
+
+            ## Locate Database-Object Boundaries
+            if (
+              length(group_ends) != event_count ||
+              group_ends[[event_count]] != length(response_parts)
+            ) {
+              tab_counts <- lengths(regmatches(
+                response_parts,
+                gregexpr("\t", response_parts, fixed = TRUE)
+              ))
+              total_tabs <- sum(tab_counts)
+              group_ends <- integer()
+
+              ## Use Consistent Tab Counts
+              if (
+                total_tabs >= event_count &&
+                total_tabs %% event_count == 0L
+              ) {
+                tabs_per_event <- total_tabs %/% event_count
+                cumulative_tabs <- cumsum(tab_counts)
+                target_tabs <- seq_len(event_count) * tabs_per_event
+                unique_boundaries <- !duplicated(cumulative_tabs) &
+                  !duplicated(cumulative_tabs, fromLast = TRUE)
+                group_ends <- which(
+                  unique_boundaries & cumulative_tabs %in% target_tabs
+                )
+              }
+            }
+
+            ## Return Grouped Values
+            if (
+              length(group_ends) == event_count &&
+              group_ends[[event_count]] == length(response_parts)
+            ) {
+              group_starts <- c(1L, group_ends[-event_count] + 1L)
+              parsed_output <- vapply(
+                X = seq_len(event_count),
+                FUN = function(group) {
+                  paste(
+                    response_parts[group_starts[[group]]:group_ends[[group]]],
+                    collapse = ", "
+                  )
+                },
+                FUN.VALUE = character(1),
+                USE.NAMES = FALSE
+              )
+              return(parsed_output)
+            }
+          }
+        }
+
+        ## Return the Unseparated Response
+        warning(
+          sprintf(
+            paste0(
+              "Reactome's '%s' response could not be separated ",
+              "unambiguously; returning the unmodified response."
+            ),
+            attribute_name
+          ),
+          call. = get("diagnostics")
+        )
+        return(parsed_response)
+      }
+    )
     file_ext <- "txt"
 
   }
