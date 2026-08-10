@@ -142,6 +142,57 @@ Some rbioapi Reactome analysis functions were not covered in this vignette, be s
 
 rbioapi functions that correspond to Reactome content services are those starting with rba_reactome\_\* but without "\_analysis" infix. These functions cover what you can do with objects in Reactome knowledge-base. In simpler terms, most -but not all of them- correspond to what you can find in [Reactome Pathway Browser](https://reactome.org/PathwayBrowser/ "Reactome Pathway Browser") and [search results](https://reactome.org/content/query?q=apoptosis&species=Homo+sapiens "Search results for apoptosis"). (e.g. a [pathway](https://reactome.org/content/detail/R-HSA-109581 "Apoptosis Homo sapiens"), a [reaction](https://reactome.org/content/detail/R-HSA-202939 "Caspase-mediated cleavage of E-Cadherin"), a [physical Entity](https://reactome.org/content/detail/R-HSA-350870 "Caspase-3 [cytosol]"), etc.)
 
+## Search the Reactome knowledge-base {#search-the-reactome-knowledge-base}
+
+If you do not already know the Reactome identifier of an entry, use `rba_reactome_search()` to search by name or descriptive text. The results can be limited by species, entry type, cellular compartment, and keyword. By default, matches are grouped by their result type. In the following example, we search for TP53 across four representative human entry types and request one match from each group.
+
+```{r rba_reactome_search}
+search_results <- rba_reactome_search(
+  query = "TP53",
+  species = "Homo sapiens",
+  types = c("Protein", "Complex", "Reaction", "Pathway"),
+  page_size = 1,
+  force_filters = TRUE
+)
+
+str(search_results, 2)
+```
+
+The matching entries are stored in the `entries` column of the returned result groups. Below, we combine the four groups and display selected fields:
+
+```{r rba_reactome_search_results, echo=FALSE}
+if (
+  is.list(search_results) &&
+  utils::hasName(search_results, "results") &&
+  is.data.frame(search_results$results) &&
+  utils::hasName(search_results$results, "entries") &&
+  length(search_results$results$entries) > 0
+) {
+  search_entries <- do.call(
+    rbind,
+    lapply(
+      search_results$results$entries,
+      function(entries) {
+        entries[, c("id", "name", "type"), drop = FALSE]
+      }
+    )
+  )
+  search_entries$name <- gsub("<[^>]+>", "", search_entries$name)
+
+  DT::datatable(
+    data = search_entries,
+    rownames = FALSE,
+    options = list(
+      dom = "t",
+      paging = FALSE,
+      ordering = FALSE
+    )
+  )
+} else {
+  print("Vignette building failed. It is probably because the web service was down during the building.")
+}
+```
+
 ## Retrieve any object from Reactome knowledge-base {#retrieve-any-object-from-reactome-knowledge-base}
 
 Using `rba_reactome_query()`, you can retrieve any object from Reactome knowledge-base. In simpler terms, what I mean by the object is roughly anything that Reactome associated an ID to it. This can range from a person's entry to proteins, reactions, pathways, species, and many more! You can explore [Reactome's data schema](https://reactome.org/content/schema/DatabaseObject "Graph Database :: Data Schema") to learn about Reactome knowledge-base objects and their organization. Here are some examples, note that you are not limited to only one ID per query. You can use a vector of inputs, the only limitation is that when you supply more than one ID, you cannot have `enhanced = TRUE`.
@@ -236,6 +287,8 @@ There are still more rbioapi f Reactome content functions that were not covered 
 -   `rba_reactome_species()`: Retrieve a list of species annotated in Reactome.
 
 ## General Mapping/Querying {#general-mapping-querying}
+
+-   `rba_reactome_search()`: Search Reactome entries by text and optional filters.
 
 -   `rba_reactome_query()`
 

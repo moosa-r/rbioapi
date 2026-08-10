@@ -2966,6 +2966,212 @@ rba_reactome_query <- function(ids,
   return(final_output)
 }
 
+#### Search Endpoints ####
+
+#' Search the Reactome Knowledgebase
+#'
+#' Search Reactome for entries that match a text query. The search can be
+#'   limited by species, result type, cellular compartment, and keyword.
+#'
+#' By default, matches are separated into groups such as proteins, pathways,
+#'   and reactions. In this case, \code{page_size} is applied separately to
+#'   each group. If \code{cluster = FALSE}, matches are returned in one group
+#'   and \code{page_size} applies to that group.
+#'
+#' Reactome normally removes supplied filters when they produce no matches.
+#'   Set \code{force_filters = TRUE} to require all supplied filters, so that a
+#'   search with no filtered matches is reported instead of being broadened.
+#'   Reactome also marks matching text in some returned names and descriptions;
+#'   rbioapi leaves these highlighting markers unchanged.
+#'
+#' @section Corresponding API Resources:
+#'  "GET https://reactome.org/ContentService/search/query"
+#'
+#' @param query Character: Text to search for in the Reactome knowledgebase.
+#' @param species Character vector: (optional) Scientific species name(s) used
+#'   to filter the results, e.g. \code{"Homo sapiens"}. See
+#'   \code{\link{rba_reactome_species}} for species available in Reactome.
+#' @param types Character vector: (optional) Result type(s) used to filter the
+#'   search, e.g. \code{"Protein"}, \code{"Pathway"}, or \code{"Reaction"}.
+#' @param compartments Character vector: (optional) Cellular compartment
+#'   name(s) used to filter the results.
+#' @param keywords Character vector: (optional) Reactome search keyword(s) used
+#'   to filter the results.
+#' @param cluster Logical: (default = \code{TRUE}) Should matches be separated
+#'   into groups according to their result type? If FALSE, matches are returned
+#'   in one ranked group.
+#' @param page_size Numeric: (default = \code{10}) Maximum number of matches to
+#'   return from each result group on a page. If \code{cluster = FALSE}, this is
+#'   the maximum number returned from the single combined group.
+#' @param page Numeric: (default = \code{1}) One-based results page to retrieve.
+#' @param scope Character: (default = \code{"PHYSICAL_ENTITY"}) Which form of
+#'   matching entities should be returned? Can be one of: \itemize{
+#'   \item "PHYSICAL_ENTITY": Return specific physical forms annotated in
+#'     Reactome.
+#'   \item "REFERENCE_ENTITY": Group applicable physical forms by their
+#'     underlying reference molecule; entries without a reference molecule are
+#'     retained as physical entities.
+#'   \item "BOTH": Return both representations.}
+#' @param force_filters Logical: (default = \code{FALSE}) Should Reactome keep
+#'   all supplied filters when they produce no matches? If FALSE, Reactome may
+#'   remove the filters and return results from a broader search.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s arguments
+#'   manual for more information on available options.
+#'
+#' @return A list with the following elements: \describe{
+#'   \item{results}{A data frame with one row per returned result group. The
+#'   \code{entries} column contains data frames of matching Reactome entries;
+#'   their fields vary according to result type.}
+#'   \item{rowCount}{Number of matching entries returned on the requested page.}
+#'   \item{numberOfGroups}{Number of matching result groups reported by
+#'   Reactome.}
+#'   \item{numberOfMatches}{Total number of matches reported by Reactome.}
+#'   }
+#'
+#' @references \itemize{
+#'   \item Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
+#'   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
+#'   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223
+#'   \item Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
+#'   Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
+#'   Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
+#'   PMID: 32907876.
+#'   \item \href{https://reactome.org/ContentService/}{Reactome Content
+#'   Services API Documentation}
+#'   \item \href{https://reactome.org/cite/}{Citations note on Reactome website}
+#'   }
+#'
+#' @examples
+#' \donttest{
+#' rba_reactome_search(
+#'   query = "TP53",
+#'   species = "Homo sapiens",
+#'   types = c("Protein", "Pathway")
+#' )
+#' }
+#' \donttest{
+#' rba_reactome_search(
+#'   query = "apoptosis",
+#'   cluster = FALSE,
+#'   page_size = 20
+#' )
+#' }
+#'
+#' @family "Reactome Content Service - Search"
+#' @seealso
+#' \code{\link{rba_reactome_query}}
+#' \code{\link{rba_reactome_species}}
+#' \code{\link{rba_pages}}
+#' @export
+rba_reactome_search <- function(query,
+                                species = NULL,
+                                types = NULL,
+                                compartments = NULL,
+                                keywords = NULL,
+                                cluster = TRUE,
+                                page_size = 10,
+                                page = 1,
+                                scope = "PHYSICAL_ENTITY",
+                                force_filters = FALSE,
+                                ...) {
+  ## Load Global Options
+  .rba_ext_args(...)
+
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(arg = "query", class = "character", len = 1L),
+      list(arg = "species", class = "character", min_len = 1L),
+      list(arg = "types", class = "character", min_len = 1L),
+      list(arg = "compartments", class = "character", min_len = 1L),
+      list(arg = "keywords", class = "character", min_len = 1L),
+      list(arg = "cluster", class = "logical", len = 1L, no_null = TRUE),
+      list(
+        arg = "page_size", class = c("numeric", "integer"),
+        len = 1L, min_val = 1, no_null = TRUE
+      ),
+      list(
+        arg = "page", class = c("numeric", "integer"),
+        len = 1L, min_val = 1, no_null = TRUE
+      ),
+      list(
+        arg = "scope", class = "character", len = 1L, no_null = TRUE,
+        val = c("REFERENCE_ENTITY", "PHYSICAL_ENTITY", "BOTH")
+      ),
+      list(
+        arg = "force_filters", class = "logical", len = 1L,
+        no_null = TRUE
+      )
+    ),
+    cond = list(
+      list(
+        quote(!nzchar(trimws(query))),
+        "`query` should contain at least one non-whitespace character."
+      ),
+      list(
+        quote(any(!nzchar(trimws(c(species, types, compartments, keywords))))),
+        "Search filters cannot contain empty character strings."
+      ),
+      list(
+        quote(!is.finite(page_size) || page_size != floor(page_size)),
+        "`page_size` should be a finite, positive whole number."
+      ),
+      list(
+        quote(!is.finite(page) || page != floor(page)),
+        "`page` should be a finite, positive whole number."
+      )
+    )
+  )
+
+  .msg(
+    "Searching the Reactome knowledgebase for '%s'.",
+    query
+  )
+
+  ## Build GET API Request's query
+  start_row <- (page - 1) * page_size
+  call_query <- .rba_query(
+    init = list(
+      "query" = query,
+      "cluster" = ifelse(isTRUE(cluster), yes = "true", no = "false"),
+      "Start row" = start_row,
+      "rows" = page_size,
+      "scope" = scope,
+      "Force filters" = ifelse(
+        isTRUE(force_filters), yes = "true", no = "false"
+      )
+    ),
+    list("species", !is.null(species), species),
+    list("types", !is.null(types), types),
+    list("compartments", !is.null(compartments), compartments),
+    list("keywords", !is.null(keywords), keywords)
+  )
+
+  ## Expand vector filters into possibly repeated Reactome query parameters
+  ## (species, types, compartments, and keywords)
+  query_names <- rep(names(call_query), lengths(call_query))
+  call_query <- as.list(unlist(call_query, use.names = FALSE))
+  names(call_query) <- query_names
+
+  ## Build Function-Specific Call
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("reactome", "url"),
+    path = paste0(
+      .rba_stg("reactome", "pth", "content"),
+      "search/query"
+    ),
+    query = call_query,
+    accept = "application/json",
+    parser = "json->list_simp",
+    save_to = .rba_file("reactome_search.json")
+  )
+
+  ## Call API
+  final_output <- .rba_skeleton(input_call)
+  return(final_output)
+}
+
 #### References Endpoints ####
 
 #' Map Cross References IDs to Reactome ReferenceEntity
