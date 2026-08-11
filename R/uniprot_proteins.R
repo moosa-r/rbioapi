@@ -756,6 +756,216 @@ rba_uniprot_features_search <- function(accession = NULL,
   return(final_output)
 }
 
+#' Search UniProt protein sequence features by description
+#'
+#' Search for terms in the descriptions of one specified
+#'   \href{https://www.uniprot.org/help/sequence_annotation}{UniProt sequence
+#'   annotation (feature)} type. The function returns protein entries with at
+#'   least one feature of that type whose description matches a supplied term.
+#'
+#' The \code{type} and \code{terms} arguments determine which protein entries
+#'   match the search. The optional \code{categories} and \code{types}
+#'   arguments only select the annotations included in each returned entry;
+#'   they do not change which entries match.
+#'
+#' @section Corresponding API Resources:
+#'  "GET https://www.ebi.ac.uk/proteins/api/features/type/\{type\}"
+#'
+#' @param terms Character: Terms to find in feature descriptions. You can
+#'   supply up to 20 terms.
+#' @param type Character:
+#'   \href{https://www.uniprot.org/help/sequence_annotation}{Sequence
+#'   annotation (feature)} type whose descriptions are searched. One of:
+#'   "INIT_MET", "SIGNAL", "PROPEP", "TRANSIT", "CHAIN", "PEPTIDE",
+#'   "TOPO_DOM", "TRANSMEM", "DOMAIN", "REPEAT", "ZN_FING", "DNA_BIND",
+#'   "REGION", "COILED", "MOTIF", "COMPBIAS", "ACT_SITE", "BINDING",
+#'   "SITE", "NON_STD", "MOD_RES", "LIPID", "CARBOHYD", "DISULFID",
+#'   "CROSSLNK", "VAR_SEQ", "VARIANT", "MUTAGEN", "UNSURE", "CONFLICT",
+#'   "NON_CONS", "NON_TER", "HELIX", "TURN", "STRAND", or "INTRAMEM".
+#' @param categories Character: (optional)
+#'   \href{https://www.uniprot.org/help/sequence_annotation}{Sequence
+#'   annotation (feature)} categories to include in each returned entry.
+#'   Accepted values are: "MOLECULE_PROCESSING", "TOPOLOGY",
+#'   "SEQUENCE_INFORMATION", "STRUCTURAL", "DOMAINS_AND_SITES", "PTM",
+#'   "VARIANTS" and/or "MUTAGENESIS". You can supply up to 20 categories.
+#' @param types Character: (optional)
+#'   \href{https://www.uniprot.org/help/sequence_annotation}{Sequence
+#'   annotation (feature)} types to include in each returned entry. Accepted
+#'   values are the same as for \code{type}. You can supply up to 20 types.
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
+#'
+#' @return A list named by UniProt accession. Each element contains the entry
+#'   metadata, sequence, and the annotations selected by \code{categories} and
+#'   \code{types} in its \code{features} element. Without those optional
+#'   filters, all annotations of each matching entry are returned.
+#'
+#' @references \itemize{
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
+#'   https://doi.org/10.1093/nar/gkae1010
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
+#'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+#'   Documentation}
+#'   \item \href{https://www.uniprot.org/help/publications}{Citations note
+#'   on UniProt website}
+#'   }
+#'
+#' @examples
+#' \donttest{
+#' rba_uniprot_features_type(
+#'     terms = "Alzheimer", type = "VARIANT", types = "VARIANT")
+#' }
+#'
+#' @family "UniProt - Features"
+#' @export
+rba_uniprot_features_type <- function(terms,
+                                      type,
+                                      categories = NULL,
+                                      types = NULL,
+                                      ...) {
+  ## Load Global Options
+  .rba_ext_args(...)
+
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(
+        arg = "terms", class = "character", min_len = 1L,
+        max_len = 20
+      ),
+      list(
+        arg = "type", class = "character", len = 1L,
+        val = c("INIT_MET",
+                "SIGNAL",
+                "PROPEP",
+                "TRANSIT",
+                "CHAIN",
+                "PEPTIDE",
+                "TOPO_DOM",
+                "TRANSMEM",
+                "DOMAIN",
+                "REPEAT",
+                "ZN_FING",
+                "DNA_BIND",
+                "REGION",
+                "COILED",
+                "MOTIF",
+                "COMPBIAS",
+                "ACT_SITE",
+                "BINDING",
+                "SITE",
+                "NON_STD",
+                "MOD_RES",
+                "LIPID",
+                "CARBOHYD",
+                "DISULFID",
+                "CROSSLNK",
+                "VAR_SEQ",
+                "VARIANT",
+                "MUTAGEN",
+                "UNSURE",
+                "CONFLICT",
+                "NON_CONS",
+                "NON_TER",
+                "HELIX",
+                "TURN",
+                "STRAND",
+                "INTRAMEM")
+      ),
+      list(
+        arg = "categories", class = "character", min_len = 1L,
+        max_len = 20,
+        val = c("MOLECULE_PROCESSING",
+                "TOPOLOGY",
+                "SEQUENCE_INFORMATION",
+                "STRUCTURAL",
+                "DOMAINS_AND_SITES",
+                "PTM",
+                "VARIANTS",
+                "MUTAGENESIS")
+      ),
+      list(
+        arg = "types", class = "character", min_len = 1L,
+        max_len = 20,
+        val = c("INIT_MET",
+                "SIGNAL",
+                "PROPEP",
+                "TRANSIT",
+                "CHAIN",
+                "PEPTIDE",
+                "TOPO_DOM",
+                "TRANSMEM",
+                "DOMAIN",
+                "REPEAT",
+                "ZN_FING",
+                "DNA_BIND",
+                "REGION",
+                "COILED",
+                "MOTIF",
+                "COMPBIAS",
+                "ACT_SITE",
+                "BINDING",
+                "SITE",
+                "NON_STD",
+                "MOD_RES",
+                "LIPID",
+                "CARBOHYD",
+                "DISULFID",
+                "CROSSLNK",
+                "VAR_SEQ",
+                "VARIANT",
+                "MUTAGEN",
+                "UNSURE",
+                "CONFLICT",
+                "NON_CONS",
+                "NON_TER",
+                "HELIX",
+                "TURN",
+                "STRAND",
+                "INTRAMEM")
+      )
+    )
+  )
+
+  .msg(
+    "Searching UniProt for %s features with descriptions matching the supplied terms.",
+    type
+  )
+
+  ## Build GET API Request's query
+  call_query <- .rba_query(
+    init = list(
+      "size" = "-1",
+      "terms" = paste0(terms, collapse = ",")
+    ),
+    list(
+      "categories", !is.null(categories),
+      paste0(categories, collapse = ",")
+    ),
+    list("types", !is.null(types), paste0(types, collapse = ","))
+  )
+
+  ## Build Function-Specific Call
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(.rba_stg("uniprot", "pth"), "features/type/", type),
+    query = call_query,
+    accept = "application/json",
+    parser = list("json->list", .rba_uniprot_search_namer),
+    save_to = .rba_file("uniprot_features_type.json")
+  )
+
+  ## Call API
+  final_output <- .rba_skeleton(input_call)
+  return(final_output)
+}
+
 #' Get UniProt protein sequence features by accession
 #'
 #' \href{https://www.uniprot.org/help/sequence_annotation}{UniProt sequence

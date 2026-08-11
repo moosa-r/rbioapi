@@ -128,6 +128,7 @@ rba_uniprot_features_search(accession = "Q99616", types = "DISULFID")
 }
 \seealso{
 Other "UniProt - Features":
-\code{\link[=rba_uniprot_features]{rba_uniprot_features()}}
+\code{\link[=rba_uniprot_features]{rba_uniprot_features()}},
+\code{\link[=rba_uniprot_features_type]{rba_uniprot_features_type()}}
 }
 \concept{"UniProt - Features"}
