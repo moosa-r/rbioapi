@@ -1168,6 +1168,156 @@ rba_uniprot_variation_search <- function(accession = NULL,
   return(final_output)
 }
 
+#' Retrieve UniProt Natural Variants by Sequence Position
+#'
+#' Retrieve natural variants annotated at specified amino-acid positions in
+#'   UniProt protein sequences. Each supplied accession is paired with the
+#'   corresponding element of \code{locations}.
+#'
+#' A \code{locations} element can specify one position or several
+#'   comma-separated positions. The returned records are grouped by UniProt
+#'   accession and include the protein sequence and variant annotations found
+#'   at the requested positions.
+#'
+#' @section Corresponding API Resources:
+#'  "GET https://www.ebi.ac.uk/proteins/api/variation/accession_locations/\{accession_locations\}"
+#'
+#' @param accession Character:
+#'   \href{https://www.uniprot.org/help/accession_numbers}{UniProtKB
+#'   accession}(s). You can supply up to 100 accessions. Each accession is
+#'   paired with the corresponding element of \code{locations}.
+#' @param locations Character or Numeric: Amino-acid position(s) within each
+#'   protein sequence. Each element should be a positive whole number or a
+#'   character string of comma-separated positions, such as \code{"5,7"}.
+#'   You can supply up to 100 elements, and their number should equal the
+#'   number of supplied accessions.
+#' @param save_peff Logical or Character: (default = \code{FALSE}) \itemize{
+#'   \item FALSE: Return the parsed JSON response.
+#'   \item TRUE: Save the PEFF response to an automatically generated path.
+#'   \item Character string: A valid file path to save the PEFF file.}
+#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
+#'   arguments manual for more information on available options.
+#'
+#' @return With \code{save_peff = FALSE}, a list named by UniProt
+#'   accession. Each element contains entry metadata, the protein sequence,
+#'   and matching variants in its \code{features} element. Repeated groups
+#'   for the same accession are combined by the API, and \code{features}
+#'   can be empty when no variant is annotated at the requested positions.
+#'   Otherwise, the PEFF response is written to disk and returned as a
+#'   character string.
+#'
+#' @references \itemize{
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
+#'   https://doi.org/10.1093/nar/gkae1010
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
+#'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+#'   Documentation}
+#'   \item \href{https://www.uniprot.org/help/publications}{Citations note
+#'   on UniProt website}
+#'   }
+#'
+#' @examples
+#' \donttest{
+#' rba_uniprot_variation_locations(
+#'     accession = c("P05067", "Q99616"),
+#'     locations = c("5,7", "5,29"))
+#' }
+#'
+#' @family "UniProt - Variation"
+#' @export
+rba_uniprot_variation_locations <- function(accession,
+                                            locations,
+                                            save_peff = FALSE,
+                                            ...) {
+  ## Load Global Options
+  .rba_ext_args(..., ignore_save = TRUE)
+
+  ## Check User-input Arguments
+  .rba_args(
+    cons = list(
+      list(
+        arg = "accession", class = "character", min_len = 1L,
+        max_len = 100
+      ),
+      list(
+        arg = "locations", class = c("character", "numeric", "integer"),
+        min_len = 1L, max_len = 100
+      ),
+      list(
+        arg = "save_peff", class = c("logical", "character"), len = 1L,
+        no_null = TRUE
+      )
+    ),
+    cond = list(
+      list(
+        quote(length(accession) != length(locations)),
+        "`accession` and `locations` should have the same length."
+      ),
+      list(
+        quote(
+          switch(
+            typeof(locations),
+            character = any(!grepl("^[1-9]\\d*(?:,[1-9]\\d*)*$", locations, perl = TRUE)),
+            any(!is.finite(locations) | locations < 1 | locations %% 1 != 0)
+          )
+        ),
+        "`locations` should be positive whole-number positions, optionally comma-separated."
+      )
+    )
+  )
+
+  .msg(
+    "Retrieving natural variants for the supplied UniProt accession-location pairs."
+  )
+
+  if (is.numeric(locations)) {
+    locations <- format(
+      locations,
+      scientific = FALSE,
+      trim = TRUE
+    )
+  }
+
+  ## Build Function-Specific Call
+  if (isFALSE(save_peff)) {
+    save_to <- .rba_file(file = "uniprot_variation_locations.json")
+  } else {
+    save_to <- .rba_file(
+      file = "uniprot_variation_locations.peff",
+      save_to = save_peff
+    )
+  }
+
+  input_call <- .rba_httr(
+    httr = "get",
+    url = .rba_stg("uniprot", "url"),
+    path = paste0(
+      .rba_stg("uniprot", "pth"),
+      "variation/accession_locations/",
+      paste(
+        toupper(accession),
+        locations,
+        sep = ":",
+        collapse = "|"
+      )
+    ),
+    save_to = save_to,
+    file_accept = "text/x-peff",
+    file_parser = "text->chr",
+    obj_accept = "application/json",
+    obj_parser = list("json->list", .rba_uniprot_search_namer)
+  )
+
+  ## Call API
+  final_output <- .rba_skeleton(input_call)
+  return(final_output)
+}
+
 #' Retrieve UniProt Natural Variants by Identifier
 #'
 #' Retrieve natural variant annotations by UniProt accession, dbSNP identifier,

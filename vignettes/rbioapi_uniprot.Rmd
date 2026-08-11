@@ -174,6 +174,8 @@ The Proteins API endpoints implemented by rbioapi are organized into six groups.
 
 -   `rba_uniprot_variation()`
 
+-   `rba_uniprot_variation_locations()`
+
 -   `rba_uniprot_variation_search()`
 
 ### Antigens {#antigens}

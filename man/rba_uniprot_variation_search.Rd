@@ -138,6 +138,7 @@ rba_uniprot_variation_search(disease = "alzheimer",
 }
 \seealso{
 Other "UniProt - Variation":
-\code{\link[=rba_uniprot_variation]{rba_uniprot_variation()}}
+\code{\link[=rba_uniprot_variation]{rba_uniprot_variation()}},
+\code{\link[=rba_uniprot_variation_locations]{rba_uniprot_variation_locations()}}
 }
 \concept{"UniProt - Variation"}
