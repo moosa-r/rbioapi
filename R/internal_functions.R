@@ -167,7 +167,7 @@
       url = "https://www.ebi.ac.uk",
       pth = "proteins/api/",
       ptn = "^(https?://)?(www\\.)?ebi\\.ac\\.uk/proteins/api/",
-      err_ptn = "^4\\d\\d$",
+      err_ptn = "^[45]\\d\\d$",
       err_prs = list(
         "json->list_simp",
         function(x) { paste(x[["errorMessage"]], collapse = "\n") }
