@@ -1,55 +1,56 @@
 #### Proteomes Endpoints ####
 #' Search Proteomes in UniProt
 #'
-#' UniProt collects and annotates proteomes (Protein sets expressed in an
-#'   organism). Using this function you can search UniProt for available
-#'   proteomes. see \href{https://www.uniprot.org/help/proteome}{What are
-#'   proteomes?} for more information. You may also
-#'   refine your search with modifiers such as keyword, taxon id etc. See
-#'   "Arguments section" for more information.
+#' UniProt collects and annotates proteomes (protein sets expressed in an
+#'   organism). Search available proteomes by name, identifier, taxonomy,
+#'   keyword, cross-reference, genome accession, or status. See
+#'   \href{https://www.uniprot.org/help/proteome}{What are proteomes?} for
+#'   more information.
 #'
-#'   Note that this is a search function. Thus, you are not required to fill
-#'   every argument; You may use whatever combinations of arguments you see
-#'   fit for your query.
+#' At least one search criterion is required.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/proteomes"
+#'  "GET https://www.ebi.ac.uk/proteins/api/proteomes"
 #'
-#' @param name a keyword in proteome's name
-#' @param upid \href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
+#' @param name Character: (optional) A term in the proteome name.
+#' @param upid Character: (optional)
+#'   \href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
 #'   identifier (UPID)}. You can supply up to 100 UPIDs.
-#' @param taxid NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+#' @param taxid Numeric: (optional) NIH-NCBI
+#'   \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
 #'   You can supply up to 20 taxon IDs.
-#' @param keyword Limit the search to entries that contain your supplied
-#'   keyword. see: \href{https://www.uniprot.org/keywords/}{UniProt Keywords}
-#' @param xref Proteome cross-references such as Genome assembly ID or
+#' @param keyword Character: (optional) Limit the search to entries containing
+#'   the keyword. See \href{https://www.uniprot.org/keywords/}{UniProt Keywords}.
+#' @param xref Character: (optional) Proteome cross-references such as genome
+#'   assembly ID or
 #'   Biosample ID. You can supply up to 20 cross-reference IDs.
-#' @param genome_acc Genome accession associated with the proteome's components.
-#' @param is_ref_proteome (logical) If TRUE, only return reference proteomes; If
-#'   FALSE, only returns non-reference proteomes; If NULL (default), the results
-#'   will not be filtered by this criteria see
+#' @param genome_acc Character: (optional) Genome accession associated with the
+#'   proteome's components. You can supply up to 20 accessions.
+#' @param is_ref_proteome Logical: (optional) If \code{TRUE}, return only
+#'   reference proteomes; if \code{FALSE}, return only non-reference proteomes;
+#'   if \code{NULL}, do not filter by this criterion. See
 #'   \href{https://www.uniprot.org/help/reference_proteome}{'What are reference
 #'   proteomes?'} for more information.
-#' @param is_redundant (logical) If TRUE, only return redundant proteomes; If
-#'   FALSE, only returns non-redundant proteomes; If NULL (default), the results
-#'   will not be filtered by redundancy. see
+#' @param is_redundant Logical: (optional) If \code{TRUE}, return only redundant
+#'   proteomes; if \code{FALSE}, return only non-redundant proteomes; if
+#'   \code{NULL}, do not filter by redundancy. See
 #'   \href{https://www.uniprot.org/help/proteome_redundancy}{'Reducing proteome
 #'   redundancy'} for more information.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A list where each element is a list that corresponds to a single
-#'   proteome (search hit) and contains informations pertinent to that proteome.
+#' @return A list named by UPID. Each element contains one matching proteome's
+#'   metadata.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium , UniProt: the Universal Protein
-#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
 #'   https://doi.org/10.1093/nar/gkae1010
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
 #'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
 #'   Documentation}
 #'   \item \href{https://www.uniprot.org/help/publications}{Citations note
@@ -59,12 +60,6 @@
 #' @examples
 #' \donttest{
 #' rba_uniprot_proteomes_search(name = "SARS-CoV")
-#' }
-#' \donttest{
-#' rba_uniprot_proteomes_search(name = "SARS-CoV", is_ref_proteome = TRUE)
-#' }
-#' \donttest{
-#' rba_uniprot_proteomes_search(name = "SARS-CoV", is_ref_proteome = TRUE)
 #' }
 #' \donttest{
 #' rba_uniprot_proteomes_search(genome_acc = "AY274119")
@@ -88,18 +83,35 @@ rba_uniprot_proteomes_search <- function(name = NULL,
   .rba_args(
     cons = list(
       list(arg = "upid", class = "character", max_len = 100),
-      list(arg = "name", class = "character"),
-      list(arg = "taxid", class = "numeric", max_len = 20),
-      list(arg = "keyword", class = "character"),
+      list(arg = "name", class = "character", len = 1L),
+      list(
+        arg = "taxid", class = c("numeric", "integer"),
+        max_len = 20, min_val = 1
+      ),
+      list(arg = "keyword", class = "character", len = 1L),
       list(arg = "xref", class = "character", max_len = 20),
       list(arg = "genome_acc", class = "character", max_len = 20),
-      list(arg = "is_ref_proteome", class = "logical"),
-      list(arg = "is_redundant", class = "logical")
+      list(arg = "is_ref_proteome", class = "logical", len = 1L),
+      list(arg = "is_redundant", class = "logical", len = 1L)
+    ),
+    cond = list(
+      list(
+        quote(all(
+          is.null(name), is.null(upid), is.null(taxid), is.null(keyword),
+          is.null(xref), is.null(genome_acc), is.null(is_ref_proteome),
+          is.null(is_redundant)
+        )),
+        "Supply at least one proteome search criterion."
+      ),
+      list(
+        quote(!is.null(taxid) && any(!is.finite(taxid) | taxid %% 1 != 0)),
+        "`taxid` values should be finite, positive whole numbers."
+      )
     )
   )
 
   .msg(
-    "Searching UniProt and retrieving proteoms that match your supplied inputs."
+    "Searching UniProt and retrieving proteomes that match your supplied inputs."
   )
 
   ## Build GET API Request's query
@@ -119,13 +131,7 @@ rba_uniprot_proteomes_search <- function(name = NULL,
   parser_input <- list(
     "json->list",
     function(x) {
-      x_names <- vapply(X = x,
-                        FUN = function(x) {
-                          x$upid
-                        },
-                        FUN.VALUE = character(1))
-      names(x) <- x_names
-      return(x)
+      .rba_uniprot_search_namer(x, field = "upid")
     }
   )
 
@@ -144,42 +150,44 @@ rba_uniprot_proteomes_search <- function(name = NULL,
   return(final_output)
 }
 
-#' Get proteome by proteome/proteins UPID
+#' Get a Proteome by UPID
 #'
-#' UniProt collects and annotates proteomes(Protein sets expressed in an
-#'   organism). Using this function you can search UniProt for available
-#'   proteomes. see \href{https://www.uniprot.org/help/proteome}{What are
-#'   proteomes?} for more information.
+#' UniProt collects and annotates proteomes (protein sets expressed in an
+#'   organism). Retrieve a proteome's metadata by UPID, optionally including
+#'   its proteins. When proteins are requested, they can be filtered by
+#'   UniProtKB review status. See
+#'   \href{https://www.uniprot.org/help/proteome}{What are proteomes?} for
+#'   more information.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/proteomes/proteins/\{upid\}"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/proteomes/\{upid\}"
+#'  "GET https://www.ebi.ac.uk/proteins/api/proteomes/proteins/\{upid\}"
+#'  \cr "GET https://www.ebi.ac.uk/proteins/api/proteomes/\{upid\}"
 #'
-#' @param upid \href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
-#'   identifier (UPID)}. You can supply up to 100 UPIDs.
-#' @param get_proteins logical: set FALSE (default) to only return information
-#'   of the proteome with supplied UPID, set TRUE to also return the proteins
-#'    of the supplied proteome UPID.
-#' @param reviewed Logical:  Only considered when get_proteins is TRUE.
-#'   If TRUE, only return "UniProtKB/Swiss-Prot" (reviewed) proteins;
-#'   If FALSE, only return TrEMBL (un-reviewed) entries. leave it as NULL if you
-#'   do not want to filter proteins based on their review status.
+#' @param upid Character:
+#'   \href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
+#'   identifier (UPID)}.
+#' @param get_proteins Logical: (default = \code{FALSE}) If \code{TRUE}, embed
+#'   the proteins belonging to the supplied proteome in its genome components.
+#' @param reviewed Logical: (optional) Used only when \code{get_proteins} is
+#'   \code{TRUE}. If \code{TRUE}, return only reviewed UniProtKB/Swiss-Prot
+#'   proteins; if \code{FALSE}, return only unreviewed UniProtKB/TrEMBL entries;
+#'   if \code{NULL}, do not filter by review status.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return a list containing information of the proteome with your supplied
-#'   UPID that can contain the proteomes protein entries based on the value of
-#'   get_proteins argument.
+#' @return A list containing the requested proteome. With
+#'   \code{get_proteins = TRUE}, protein entries are included under each
+#'   element of \code{component}.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium , UniProt: the Universal Protein
-#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
 #'   https://doi.org/10.1093/nar/gkae1010
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
 #'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
 #'   Documentation}
 #'   \item \href{https://www.uniprot.org/help/publications}{Citations note
@@ -206,36 +214,34 @@ rba_uniprot_proteomes <- function(upid,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
+      list(arg = "upid", class = "character", len = 1L),
       list(
-        arg = "upid", class = "character"),
-      list(arg = "get_proteins", class = "logical"),
-      list(arg = "reviewed", class = "logical")
+        arg = "get_proteins", class = "logical", len = 1L,
+        no_null = TRUE
+      ),
+      list(arg = "reviewed", class = "logical", len = 1L)
     ),
     cond = list(
       list(
         quote(isFALSE(get_proteins) && !is.null(reviewed)),
-        "'reviewed' argument is ignored because you supplied 'get_proteins' as FALSE."
+        "`reviewed` is ignored because `get_proteins` is FALSE."
       )
     ),
     cond_warning = TRUE
   )
 
   .msg(
-    "Retrieving proteome %s (%s).",
+    "Retrieving proteome %s %s.",
     upid,
-    ifelse(
-      isTRUE(get_proteins),
-      yes = sprintf("With %s proteins",
-                    ifelse(
-                      test = is.null(reviewed),
-                      yes = "",
-                      no = ifelse(
-                        test = reviewed,
-                        yes = "only UniProtKB/Swiss-Prot",
-                        no =  "only TrEMBL")
-                    )
-      ),
-      no = "Excluding proteins")
+    if (!isTRUE(get_proteins)) {
+      "without proteins"
+    } else if (is.null(reviewed)) {
+      "with all proteins"
+    } else if (isTRUE(reviewed)) {
+      "with only reviewed UniProtKB/Swiss-Prot proteins"
+    } else {
+      "with only unreviewed UniProtKB/TrEMBL proteins"
+    }
   )
 
   ## Build Function-Specific Call
@@ -275,27 +281,26 @@ rba_uniprot_proteomes <- function(upid,
 
 #' Search Gene-Centric Proteins
 #'
-#' Using this function you can search UniProt for available gene-centrics from
-#'   proteomes. For more information,
-#'   see \href{https://www.uniprot.org/help/proteome}{What are proteomes?} and
+#' UniProt gene-centric protein groups organize related protein entries from a
+#'   proteome by gene. Search these groups by proteome, accession, or gene
+#'   identifier. For more information, see
+#'   \href{https://www.uniprot.org/help/proteome}{What are proteomes?} and
 #'   \href{https://www.uniprot.org/help/gene_centric_isoform_mapping}{Automatic
 #'   gene-centric isoform mapping for eukaryotic reference proteome entries.}
-#'   You may also refine your search with modifiers upid, accession and gene.
-#'   See "Arguments section" for more information.
 #'
-#'   Note that this is a search function. Thus, you are not required to fill
-#'   every argument; You may use whatever combinations of arguments you see
-#'   fit for your query.
+#' At least one search criterion is required.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/genecentric"
+#'  "GET https://www.ebi.ac.uk/proteins/api/genecentric"
 #'
-#' @param upid \href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
+#' @param upid Character: (optional)
+#'   \href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
 #'   identifier (UPID)}. You can supply up to 100 UPIDs.
-#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
+#' @param accession Character: (optional)
+#'   \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}(s). You can supply up to 100
 #'   accession numbers.
-#' @param gene unique gene identifier(s) found in MOD,
+#' @param gene Character: (optional) Unique gene identifier(s) found in MOD,
 #'   \href{https://www.ensembl.org/info/genome/genebuild/gene_names.html}{Ensembl},
 #'   Ensembl Genomes, \href{https://www.uniprot.org/help/gene_name}{OLN},
 #'   \href{https://www.uniprot.org/help/gene_name}{ORF} or
@@ -303,17 +308,17 @@ rba_uniprot_proteomes <- function(upid,
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return a list containing gene-centric proteins search hits.
+#' @return A list containing matching gene-centric protein groups.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium , UniProt: the Universal Protein
-#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
 #'   https://doi.org/10.1093/nar/gkae1010
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
 #'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
 #'   Documentation}
 #'   \item \href{https://www.uniprot.org/help/publications}{Citations note
@@ -346,6 +351,12 @@ rba_uniprot_genecentric_search <- function(upid = NULL,
       list(arg = "upid", class = "character", max_len = 100),
       list(arg = "accession", class = "character", max_len = 100),
       list(arg = "gene", class = "character", max_len = 20)
+    ),
+    cond = list(
+      list(
+        quote(all(is.null(upid), is.null(accession), is.null(gene))),
+        "Supply at least one search criterion: upid, accession, or gene."
+      )
     )
   )
 
@@ -386,24 +397,25 @@ rba_uniprot_genecentric_search <- function(upid = NULL,
 #'   gene-centric isoform mapping for eukaryotic reference proteome entries.}.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/genecentric/\{accession\}"
+#'  "GET https://www.ebi.ac.uk/proteins/api/genecentric/\{accession\}"
 #'
-#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
+#' @param accession Character:
+#'   \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A list containing information of Gene-Centric proteins.
+#' @return A list containing the requested gene-centric protein group.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium , UniProt: the Universal Protein
-#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
 #'   https://doi.org/10.1093/nar/gkae1010
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
 #'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
 #'   Documentation}
 #'   \item \href{https://www.uniprot.org/help/publications}{Citations note
@@ -424,7 +436,7 @@ rba_uniprot_genecentric <- function(accession,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "accession", class = "character")
+      list(arg = "accession", class = "character", len = 1L)
     )
   )
 

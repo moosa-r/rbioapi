@@ -17,31 +17,35 @@ rba_uniprot_proteomes_search(
 )
 }
 \arguments{
-\item{name}{a keyword in proteome's name}
+\item{name}{Character: (optional) A term in the proteome name.}
 
-\item{upid}{\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
+\item{upid}{Character: (optional)
+\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
 identifier (UPID)}. You can supply up to 100 UPIDs.}
 
-\item{taxid}{NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+\item{taxid}{Numeric: (optional) NIH-NCBI
+\href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
 You can supply up to 20 taxon IDs.}
 
-\item{keyword}{Limit the search to entries that contain your supplied
-keyword. see: \href{https://www.uniprot.org/keywords/}{UniProt Keywords}}
+\item{keyword}{Character: (optional) Limit the search to entries containing
+the keyword. See \href{https://www.uniprot.org/keywords/}{UniProt Keywords}.}
 
-\item{xref}{Proteome cross-references such as Genome assembly ID or
+\item{xref}{Character: (optional) Proteome cross-references such as genome
+assembly ID or
 Biosample ID. You can supply up to 20 cross-reference IDs.}
 
-\item{genome_acc}{Genome accession associated with the proteome's components.}
+\item{genome_acc}{Character: (optional) Genome accession associated with the
+proteome's components. You can supply up to 20 accessions.}
 
-\item{is_ref_proteome}{(logical) If TRUE, only return reference proteomes; If
-FALSE, only returns non-reference proteomes; If NULL (default), the results
-will not be filtered by this criteria see
+\item{is_ref_proteome}{Logical: (optional) If \code{TRUE}, return only
+reference proteomes; if \code{FALSE}, return only non-reference proteomes;
+if \code{NULL}, do not filter by this criterion. See
 \href{https://www.uniprot.org/help/reference_proteome}{'What are reference
 proteomes?'} for more information.}
 
-\item{is_redundant}{(logical) If TRUE, only return redundant proteomes; If
-FALSE, only returns non-redundant proteomes; If NULL (default), the results
-will not be filtered by redundancy. see
+\item{is_redundant}{Logical: (optional) If \code{TRUE}, return only redundant
+proteomes; if \code{FALSE}, return only non-redundant proteomes; if
+\code{NULL}, do not filter by redundancy. See
 \href{https://www.uniprot.org/help/proteome_redundancy}{'Reducing proteome
 redundancy'} for more information.}
 
@@ -49,36 +53,27 @@ redundancy'} for more information.}
 arguments manual for more information on available options.}
 }
 \value{
-A list where each element is a list that corresponds to a single
-  proteome (search hit) and contains informations pertinent to that proteome.
+A list named by UPID. Each element contains one matching proteome's
+  metadata.
 }
 \description{
-UniProt collects and annotates proteomes (Protein sets expressed in an
-  organism). Using this function you can search UniProt for available
-  proteomes. see \href{https://www.uniprot.org/help/proteome}{What are
-  proteomes?} for more information. You may also
-  refine your search with modifiers such as keyword, taxon id etc. See
-  "Arguments section" for more information.
+UniProt collects and annotates proteomes (protein sets expressed in an
+  organism). Search available proteomes by name, identifier, taxonomy,
+  keyword, cross-reference, genome accession, or status. See
+  \href{https://www.uniprot.org/help/proteome}{What are proteomes?} for
+  more information.
 }
 \details{
-Note that this is a search function. Thus, you are not required to fill
-  every argument; You may use whatever combinations of arguments you see
-  fit for your query.
+At least one search criterion is required.
 }
 \section{Corresponding API Resources}{
 
- "GET https://ebi.ac.uk/proteins/api/proteomes"
+ "GET https://www.ebi.ac.uk/proteins/api/proteomes"
 }
 
 \examples{
 \donttest{
 rba_uniprot_proteomes_search(name = "SARS-CoV")
-}
-\donttest{
-rba_uniprot_proteomes_search(name = "SARS-CoV", is_ref_proteome = TRUE)
-}
-\donttest{
-rba_uniprot_proteomes_search(name = "SARS-CoV", is_ref_proteome = TRUE)
 }
 \donttest{
 rba_uniprot_proteomes_search(genome_acc = "AY274119")
@@ -87,14 +82,14 @@ rba_uniprot_proteomes_search(genome_acc = "AY274119")
 }
 \references{
 \itemize{
-  \item The UniProt Consortium , UniProt: the Universal Protein
-  Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+  \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
-  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated protein
-  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237
   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
   Documentation}
   \item \href{https://www.uniprot.org/help/publications}{Citations note

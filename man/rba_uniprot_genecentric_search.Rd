@@ -7,14 +7,16 @@
 rba_uniprot_genecentric_search(upid = NULL, accession = NULL, gene = NULL, ...)
 }
 \arguments{
-\item{upid}{\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
+\item{upid}{Character: (optional)
+\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
 identifier (UPID)}. You can supply up to 100 UPIDs.}
 
-\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+\item{accession}{Character: (optional)
+\href{https://www.uniprot.org/help/accession_numbers}{
 UniProtKB primary or secondary accession}(s). You can supply up to 100
 accession numbers.}
 
-\item{gene}{unique gene identifier(s) found in MOD,
+\item{gene}{Character: (optional) Unique gene identifier(s) found in MOD,
 \href{https://www.ensembl.org/info/genome/genebuild/gene_names.html}{Ensembl},
 Ensembl Genomes, \href{https://www.uniprot.org/help/gene_name}{OLN},
 \href{https://www.uniprot.org/help/gene_name}{ORF} or
@@ -24,25 +26,22 @@ Ensembl Genomes, \href{https://www.uniprot.org/help/gene_name}{OLN},
 arguments manual for more information on available options.}
 }
 \value{
-a list containing gene-centric proteins search hits.
+A list containing matching gene-centric protein groups.
 }
 \description{
-Using this function you can search UniProt for available gene-centrics from
-  proteomes. For more information,
-  see \href{https://www.uniprot.org/help/proteome}{What are proteomes?} and
+UniProt gene-centric protein groups organize related protein entries from a
+  proteome by gene. Search these groups by proteome, accession, or gene
+  identifier. For more information, see
+  \href{https://www.uniprot.org/help/proteome}{What are proteomes?} and
   \href{https://www.uniprot.org/help/gene_centric_isoform_mapping}{Automatic
   gene-centric isoform mapping for eukaryotic reference proteome entries.}
-  You may also refine your search with modifiers upid, accession and gene.
-  See "Arguments section" for more information.
 }
 \details{
-Note that this is a search function. Thus, you are not required to fill
-  every argument; You may use whatever combinations of arguments you see
-  fit for your query.
+At least one search criterion is required.
 }
 \section{Corresponding API Resources}{
 
- "GET https://ebi.ac.uk/proteins/api/genecentric"
+ "GET https://www.ebi.ac.uk/proteins/api/genecentric"
 }
 
 \examples{
@@ -59,14 +58,14 @@ rba_uniprot_genecentric_search(upid = "UP000000354")
 }
 \references{
 \itemize{
-  \item The UniProt Consortium , UniProt: the Universal Protein
-  Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+  \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
-  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated protein
-  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237
   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
   Documentation}
   \item \href{https://www.uniprot.org/help/publications}{Citations note

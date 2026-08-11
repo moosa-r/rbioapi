@@ -2,41 +2,43 @@
 % Please edit documentation in R/uniprot_proteomes.R
 \name{rba_uniprot_proteomes}
 \alias{rba_uniprot_proteomes}
-\title{Get proteome by proteome/proteins UPID}
+\title{Get a Proteome by UPID}
 \usage{
 rba_uniprot_proteomes(upid, get_proteins = FALSE, reviewed = NULL, ...)
 }
 \arguments{
-\item{upid}{\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
-identifier (UPID)}. You can supply up to 100 UPIDs.}
+\item{upid}{Character:
+\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
+identifier (UPID)}.}
 
-\item{get_proteins}{logical: set FALSE (default) to only return information
-of the proteome with supplied UPID, set TRUE to also return the proteins
- of the supplied proteome UPID.}
+\item{get_proteins}{Logical: (default = \code{FALSE}) If \code{TRUE}, embed
+the proteins belonging to the supplied proteome in its genome components.}
 
-\item{reviewed}{Logical:  Only considered when get_proteins is TRUE.
-If TRUE, only return "UniProtKB/Swiss-Prot" (reviewed) proteins;
-If FALSE, only return TrEMBL (un-reviewed) entries. leave it as NULL if you
-do not want to filter proteins based on their review status.}
+\item{reviewed}{Logical: (optional) Used only when \code{get_proteins} is
+\code{TRUE}. If \code{TRUE}, return only reviewed UniProtKB/Swiss-Prot
+proteins; if \code{FALSE}, return only unreviewed UniProtKB/TrEMBL entries;
+if \code{NULL}, do not filter by review status.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-a list containing information of the proteome with your supplied
-  UPID that can contain the proteomes protein entries based on the value of
-  get_proteins argument.
+A list containing the requested proteome. With
+  \code{get_proteins = TRUE}, protein entries are included under each
+  element of \code{component}.
 }
 \description{
-UniProt collects and annotates proteomes(Protein sets expressed in an
-  organism). Using this function you can search UniProt for available
-  proteomes. see \href{https://www.uniprot.org/help/proteome}{What are
-  proteomes?} for more information.
+UniProt collects and annotates proteomes (protein sets expressed in an
+  organism). Retrieve a proteome's metadata by UPID, optionally including
+  its proteins. When proteins are requested, they can be filtered by
+  UniProtKB review status. See
+  \href{https://www.uniprot.org/help/proteome}{What are proteomes?} for
+  more information.
 }
 \section{Corresponding API Resources}{
 
- "GET https://ebi.ac.uk/proteins/api/proteomes/proteins/\{upid\}"
- \cr "GET https://ebi.ac.uk/proteins/api/proteomes/\{upid\}"
+ "GET https://www.ebi.ac.uk/proteins/api/proteomes/proteins/\{upid\}"
+ \cr "GET https://www.ebi.ac.uk/proteins/api/proteomes/\{upid\}"
 }
 
 \examples{
@@ -50,14 +52,14 @@ rba_uniprot_proteomes(upid = "UP000000354", get_proteins = TRUE)
 }
 \references{
 \itemize{
-  \item The UniProt Consortium , UniProt: the Universal Protein
-  Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+  \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
-  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated protein
-  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237
   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
   Documentation}
   \item \href{https://www.uniprot.org/help/publications}{Citations note

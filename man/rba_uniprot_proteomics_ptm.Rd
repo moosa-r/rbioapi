@@ -7,15 +7,15 @@
 rba_uniprot_proteomics_ptm(accession, confidence_score = NULL, ...)
 }
 \arguments{
-\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+\item{accession}{Character:
+\href{https://www.uniprot.org/help/accession_numbers}{
 UniProtKB primary or secondary accession}.}
 
-\item{confidence_score}{(Character) Valid values: "Bronze", "Silver", or
-"gold".\cr UniProt classifies modified residues
- into three categories based on its false localization rate (FLR)
- across multiple dataset. See
- \href{https://www.uniprot.org/help/mod_res_large_scale}{Large scale modified residue}
- for more information.}
+\item{confidence_score}{Character: (optional) One or more of "Bronze",
+"Silver", or "Gold"; you can supply all three values. UniProt classifies
+modified residues by false localization rate across multiple datasets.
+See \href{https://www.uniprot.org/help/mod_res_large_scale}{Large-scale
+modified residues} for more information.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
@@ -27,12 +27,12 @@ your supplied UniProt protein's sequence.
 \description{
 UniProt maps post-translational modification proteomics data from different
   sources to the proteins' sequences. Using this function, you can retrieve
-  all the post-translational modification features that has been map to a
+  all the post-translational-modification features mapped to a
   given UniProt protein's sequence.
 }
 \details{
 see also:
-  \href{https://www.uniprot.org/help/ptm_processing_section}{PTM /
+  \href{https://www.uniprot.org/help/post-translational_modification}{PTM /
   Processing section in UniProtKB}
 
 UniProt categorizes proteomics data sources into three main data categories:
@@ -47,20 +47,20 @@ UniProt categorizes proteomics data sources into three main data categories:
 
 \examples{
 \donttest{
-rba_uniprot_proteomics_ptm(accession = "P04234")
+  rba_uniprot_proteomics_ptm(accession = "P04234")
 }
 
 }
 \references{
 \itemize{
-  \item The UniProt Consortium , UniProt: the Universal Protein
-  Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+  \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
-  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated protein
-  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237
   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
   Documentation}
   \item \href{https://www.uniprot.org/help/publications}{Citations note

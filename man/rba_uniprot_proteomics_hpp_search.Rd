@@ -15,49 +15,46 @@ rba_uniprot_proteomics_hpp_search(
 )
 }
 \arguments{
-\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+\item{accession}{Character: (optional)
+\href{https://www.uniprot.org/help/accession_numbers}{
 UniProtKB primary or secondary accession}(s). You can supply up to 100
 accession numbers.}
 
-\item{taxid}{NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}. You
-can supply up to 20 taxon IDs.}
+\item{taxid}{Numeric: (optional) NIH-NCBI
+\href{https://www.uniprot.org/taxonomy/}{Taxon ID}. You can supply up to
+20 taxon IDs.}
 
-\item{data_source}{Proteomics data source. In addition to manual curation,
-UniProt also import PTM annotations from the following databases:
-\itemize{
-\item \href{https://hupo.org/Initiatives/}{"HPP"}
-}
-Please use `rba_uniprot_proteomics_species()` for more information on
-the available data sources for a given species.}
+\item{data_source}{Character: (optional) Proteomics data source. You can
+supply up to two values. Use \code{rba_uniprot_proteomics_species()} to
+retrieve the sources currently available for each species and category.}
 
-\item{upid}{\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
+\item{upid}{Character: (optional)
+\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
 identifier (UPID)}. You can supply up to 100 UPIDs.}
 
-\item{peptide}{Peptide sequence(s). You can supply up to 20 sequences.}
+\item{peptide}{Character: (optional) Peptide sequence(s). You can supply up
+to 20 sequences.}
 
-\item{unique}{Logical: Should the results be filtered based on the Peptide's
-uniqueness (the fact that a peptide maps to only 1 protein). If TRUE, Only
-unique peptides will be returned, if FALSE only un-unique peptides will be
-returned; If NULL (default) the results will not be filtered based on this.}
+\item{unique}{Logical: (optional) Filter by peptide uniqueness. If
+\code{TRUE}, return peptides mapping to one protein; if \code{FALSE},
+return non-unique peptides; if \code{NULL}, do not apply this filter.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s arguments
 manual for more information on available options.}
 }
 \value{
-A list Where each element correspond to a UniProt protein and
-  proteomics data are organized under the "features"
-  sub-list.
+A list in which each element corresponds to a UniProt protein and
+  proteomics data are stored under the \code{features} element.
 }
 \description{
-Using this function, you can search for HPP (Human Proteome Project)
-  proteomics features that has been map to UniProt proteins. You may also
-  refine your search with modifiers such as data_source, peptide etc. See
-  "Arguments section" for more information.
+Search for Human Proteome Project (HPP) proteomics features mapped to UniProt
+  proteins. Refine the search by data source, peptide, or other supported
+  criteria.
 }
 \details{
-Note that this is a search function. Thus, you are not required to fill every
-argument; You may use whatever combinations of arguments you see fit for your
-query.
+At least one of \code{accession}, \code{taxid}, \code{data_source},
+  \code{upid}, or \code{peptide} is required. \code{unique} only refines
+  those criteria.
 
 UniProt categorizes proteomics data sources into three main data categories:
   PTM (Post-Translational Modification), non-PTM, and HPP (Human Proteome
@@ -66,7 +63,7 @@ UniProt categorizes proteomics data sources into three main data categories:
 }
 \section{Corresponding API Resources}{
  "GET
-  https://www.ebi.ac.uk/proteins/api/proteomics/ptm"
+  https://www.ebi.ac.uk/proteins/api/proteomics/hpp"
 }
 
 \examples{
@@ -77,14 +74,14 @@ UniProt categorizes proteomics data sources into three main data categories:
 }
 \references{
 \itemize{
-  \item The UniProt Consortium , UniProt: the Universal Protein
-  Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+  \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
-  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas Bursteinas,
-  Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd Turner, Maria
-  Martin, The Proteins API: accessing key integrated protein and genome
-  information, Nucleic Acids Research, Volume 45, Issue W1, 3 July 2017,
-  Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237
   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
   Documentation}
   \item \href{https://www.uniprot.org/help/publications}{Citations note

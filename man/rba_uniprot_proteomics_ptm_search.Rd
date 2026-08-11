@@ -17,73 +17,57 @@ rba_uniprot_proteomics_ptm_search(
 )
 }
 \arguments{
-\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+\item{accession}{Character: (optional)
+\href{https://www.uniprot.org/help/accession_numbers}{
 UniProtKB primary or secondary accession}(s). You can supply up to 100
 accession numbers.}
 
-\item{ptm}{Post-translational modification name.
-\href{https://www.uniprot.org/keywords/KW-9991}{Valid values} are:
-"Acetylation ", "ADP-ribosylation ", "Amidation ", "Autocatalytic cleavage
-", "Bromination ", "Citrullination ", "Cleavage on pair of basic residues
-", "Covalent protein-DNA linkage ", "Covalent protein-RNA linkage ", "CTQ
-", "D-amino acid ", "Disulfide bond ", "Formylation ",
-"Gamma-carboxyglutamic acid ", "Glutathionylation ", "Glycoprotein ",
-"Lipoprotein ", "Hydroxylation ", "Hypusine ", "Iodination ", "Isopeptide
-bond ", "LTQ ", "Methylation ", "Nitration ", "Organic radical ",
-"Oxidation ", "Peptidoglycan-anchor ", "Phosphopantetheine ",
-"Phosphoprotein ", "Pyrrolidone carboxylic acid ", "Quinone ",
-"S-nitrosylation ", "Sulfation ", "Thioester bond ", "Thioether bond ",
-"TPQ ", "TTQ ", "Ubl conjugation ", or "Zymogen".}
+\item{ptm}{Character: (optional) Post-translational modification name used
+by the Proteomics API, such as "Phosphorylation" or "SUMOylation".}
 
-\item{taxid}{NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}. You
-can supply up to 20 taxon IDs.}
+\item{taxid}{Numeric: (optional) NIH-NCBI
+\href{https://www.uniprot.org/taxonomy/}{Taxon ID}. You can supply up to
+20 taxon IDs.}
 
-\item{data_source}{Proteomics data source. In addition to manual curation,
-UniProt also import PTM annotations from the following databases:
-\itemize{
-\item \href{https://www.ebi.ac.uk/pride/}{"PRIDE"}
-\item \href{https://www.proteomexchange.org/ptmexchange}{"PTMeXchange"}
-}
-Please use `rba_uniprot_proteomics_species()` for more information on
-the available data sources for a given species.}
+\item{data_source}{Character: (optional) Proteomics data source. You can
+supply up to two values. Use \code{rba_uniprot_proteomics_species()} to
+retrieve the sources currently available for each species and category.}
 
-\item{upid}{\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
+\item{upid}{Character: (optional)
+\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
 identifier (UPID)}. You can supply up to 100 UPIDs.}
 
-\item{peptide}{Peptide sequence(s). You can supply up to 20 sequences.}
+\item{peptide}{Character: (optional) Peptide sequence(s). You can supply up
+to 20 sequences.}
 
-\item{unique}{Logical: Should the results be filtered based on the Peptide's
-uniqueness (the fact that a peptide maps to only 1 protein). If TRUE, Only
-unique peptides will be returned, if FALSE only un-unique peptides will be
-returned; If NULL (default) the results will not be filtered based on this.}
+\item{unique}{Logical: (optional) Filter by peptide uniqueness. If
+\code{TRUE}, return peptides mapping to one protein; if \code{FALSE},
+return non-unique peptides; if \code{NULL}, do not apply this filter.}
 
-\item{confidence_score}{(Character) Valid values: "Bronze", "Silver", or
-"gold".\cr UniProt classifies modified residues
- into three categories based on its false localization rate (FLR)
- across multiple dataset. See
- \href{https://www.uniprot.org/help/mod_res_large_scale}{Large scale modified residue}
- for more information.}
+\item{confidence_score}{Character: (optional) One or more of "Bronze",
+"Silver", or "Gold"; you can supply all three values. UniProt classifies
+modified residues by false localization rate across multiple datasets.
+See \href{https://www.uniprot.org/help/mod_res_large_scale}{Large-scale
+modified residues} for more information.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s arguments
 manual for more information on available options.}
 }
 \value{
-A list Where each element correspond to a UniProt protein and
-  post-translational modification are organized under the "features"
-  sub-list.
+A list in which each element corresponds to a UniProt protein and
+  post-translational modifications are stored under the \code{features}
+  element.
 }
 \description{
-Using this function, you can search for Post-Translational Modification
-  proteomics features that has been map to UniProt proteins. You may also
-  refine your search with modifiers such as data_source, peptide etc. See
-  "Arguments section" for more information.
+Search for post-translational-modification proteomics features mapped to
+  UniProt proteins. Refine the search by data source, peptide, or other
+  supported criteria.
 }
 \details{
-Note that this is a search function. Thus, you are not required to fill every
-argument; You may use whatever combinations of arguments you see fit for your
-query.
+At least one search criterion is required; \code{unique} only refines
+  another criterion.
 
-see also:
+See also:
   \href{https://www.uniprot.org/help/post-translational_modification}{PTM /
   Processing section in UniProtKB}
 
@@ -94,7 +78,7 @@ UniProt categorizes proteomics data sources into three main data categories:
 }
 \section{Corresponding API Resources}{
  "GET
-  https://www.ebi.ac.uk/proteins/api//proteomics/ptm"
+  https://www.ebi.ac.uk/proteins/api/proteomics/ptm"
 }
 
 \examples{
@@ -105,14 +89,14 @@ UniProt categorizes proteomics data sources into three main data categories:
 }
 \references{
 \itemize{
-  \item The UniProt Consortium , UniProt: the Universal Protein
-  Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+  \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
-  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas Bursteinas,
-  Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd Turner, Maria
-  Martin, The Proteins API: accessing key integrated protein and genome
-  information, Nucleic Acids Research, Volume 45, Issue W1, 3 July 2017,
-  Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237
   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
   Documentation}
   \item \href{https://www.uniprot.org/help/publications}{Citations note

@@ -16,33 +16,31 @@ rba_uniprot_ptm_search(
 )
 }
 \arguments{
-\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+\item{accession}{Character: (optional)
+\href{https://www.uniprot.org/help/accession_numbers}{
 UniProtKB primary or secondary accession}(s). You can supply up to 100
 accession numbers.}
 
-\item{ptm}{Post-translational modification name}
+\item{ptm}{Character: (optional) Post-translational modification name.}
 
-\item{data_source}{Proteomics data source. You can choose up to two of:
-\itemize{
-\item \href{https://www.uniprot.org/database/DB-0186}{"MaxQB"}
-\item \href{https://www.uniprot.org/database/DB-0071}{"PeptideAtlas"}
-\item \href{https://www.uniprot.org/database/DB-0205}{"EPD"}
-\item \href{https://www.uniprot.org/database/DB-0229}{"ProteomicsDB"}
-}}
+\item{data_source}{Character: (optional) Proteomics data source. You can
+supply up to two values. Use \code{rba_uniprot_proteomics_species()} to
+retrieve the sources currently available for each species and category.}
 
-\item{taxid}{NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+\item{taxid}{Numeric: (optional) NIH-NCBI
+\href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
 You can supply up to 20 taxon IDs.}
 
-\item{upid}{\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
+\item{upid}{Character: (optional)
+\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
 identifier (UPID)}. You can supply up to 100 UPIDs.}
 
-\item{peptide}{Peptide sequence(s). You can supply up to 20 sequences.}
+\item{peptide}{Character: (optional) Peptide sequence(s). You can supply up
+to 20 sequences.}
 
-\item{unique}{Logical: Should the results be filtered based on the
-Peptide's uniqueness (the fact that a peptide maps to only 1 protein). If
-TRUE, Only unique peptides will be returned, if FALSE only un-unique
-peptides will be returned; If NULL (default) the results will not be
-filtered based on this.}
+\item{unique}{Logical: (optional) Filter by peptide uniqueness. If
+\code{TRUE}, return peptides mapping to one protein; if \code{FALSE},
+return non-unique peptides; if \code{NULL}, do not apply this filter.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
@@ -71,7 +69,7 @@ Note that this is a search function. Thus, you are not required to fill
 }
 \section{Corresponding API Resources}{
 
- "GET https://www.ebi.ac.uk/proteins/api/proteomics-ptm"
+ "GET https://www.ebi.ac.uk/proteins/api/proteomics/ptm"
 }
 
 \examples{
@@ -83,14 +81,14 @@ rba_uniprot_ptm_search(peptide = "NDQVYQPLRDRDDAQYSHLGGNWAR")
 }
 \references{
 \itemize{
-  \item The UniProt Consortium, UniProt: the universal protein
-  knowledgebase in 2021, Nucleic Acids Research, Volume 49, Issue D1,
-  8 January 2021, Pages D480–D489, https://doi.org/10.1093/nar/gkaa1100
-  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated protein
-  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
+  https://doi.org/10.1093/nar/gkae1010
+  \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237
   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
   Documentation}
   \item \href{https://www.uniprot.org/help/publications}{Citations note
