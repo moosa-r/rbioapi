@@ -1,32 +1,30 @@
-#### taxonomy Endpoints ####
+#### Taxonomy Endpoints ####
 
 #' Get Lowest Common Ancestor (LCA) of Two Taxonomy Nodes
 #'
-#' Use this function to retrieve lowest common ancestor (LCA) of two
-#'  taxonomy nodes in
-#'  \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database}
+#' Retrieve the lowest common ancestor (LCA) of two or more nodes in the
+#'   \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database}.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/ancestor/\{ids\}"
+#'  "GET https://www.ebi.ac.uk/proteins/api/taxonomy/ancestor/\{ids\}"
 #'
-#' @param ids (numeric) Numeric vector of
+#' @param ids Numeric:
 #'   \href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
-#'   identifiers}, with minimum length of two.
+#'   identifiers}. Supply at least two IDs.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A list with UniProt taxonomy information of your supplied taxonomy
-#'   elements.
+#' @return A list containing the lowest common ancestor's taxonomy information.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium , UniProt: the Universal Protein
-#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
 #'   https://doi.org/10.1093/nar/gkae1010
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
 #'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
 #'   Documentation}
 #'   \item \href{https://www.uniprot.org/help/publications}{Citations note
@@ -48,7 +46,16 @@ rba_uniprot_taxonomy_lca <- function(ids,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "ids", class = "numeric", min_len = 2)
+      list(
+        arg = "ids", class = c("numeric", "integer"),
+        min_len = 2, min_val = 1
+      )
+    ),
+    cond = list(
+      list(
+        quote(any(!is.finite(ids) | ids %% 1 != 0)),
+        "`ids` values should be finite, positive whole numbers."
+      )
     )
   )
 
@@ -73,53 +80,50 @@ rba_uniprot_taxonomy_lca <- function(ids,
 
 #' Get UniProt Taxonomy Nodes
 #'
-#' Using this function, you can retrieve taxonomic nodes information by
-#' providing their
+#' Retrieve taxonomic-node information using
 #' \href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
-#'   identifiers}. also, you can explicitly retrieve other nodes in relation
-#'   to your supplied node's hierarchy in
+#'   identifiers}. You can also retrieve nodes related to one supplied node in
 #'   \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database}.
+#'   Child and sibling results are paginated.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/ids/\{ids\}"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/ids/id/\{id\}/node"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/node"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/children"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/children/node"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/parent"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/parent/node"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/siblings"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/siblings/node"
+#'  "GET https://www.ebi.ac.uk/proteins/api/taxonomy/id/\{id\}"
+#'  \cr "GET https://www.ebi.ac.uk/proteins/api/taxonomy/ids/\{ids\}"
+#'  \cr "GET https://www.ebi.ac.uk/proteins/api/taxonomy/ids/\{ids\}/node"
+#'  \cr "GET https://www.ebi.ac.uk/proteins/api/taxonomy/id/\{id\}/node"
+#'  \cr "GET https://www.ebi.ac.uk/proteins/api/taxonomy/id/\{id\}/children"
+#'  \cr "GET https://www.ebi.ac.uk/proteins/api/taxonomy/id/\{id\}/children/node"
+#'  \cr "GET https://www.ebi.ac.uk/proteins/api/taxonomy/id/\{id\}/parent"
+#'  \cr "GET https://www.ebi.ac.uk/proteins/api/taxonomy/id/\{id\}/parent/node"
+#'  \cr "GET https://www.ebi.ac.uk/proteins/api/taxonomy/id/\{id\}/siblings"
+#'  \cr "GET https://www.ebi.ac.uk/proteins/api/taxonomy/id/\{id\}/siblings/node"
 #'
-#' @param ids (numeric) a single or a numeric vector of
+#' @param ids Numeric: One or more
 #'   \href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
-#'   identifier(s)}
-#' @param hierarchy Retrieve taxonomic nodes that have specific hierarchical
-#'   relation to your supplied taxonomic node. should be one of: "children",
-#'   "parent" or "siblings".
-#' @param node_only Retrieve only the node(s) information and exclude URL links
-#'  to parents, siblings and children nodes.
-#' @param page_size (numeric) Only when hierarchy is supplied. hierarchy
-#'  information may be very long, thus UniProt API will paginate the results,
-#'  you may use this argument to control the pagination. maximum value is 200.
-#' @param page_number (numeric) Only when hierarchy is supplied. hierarchy
-#'  information may be very long, thus UniProt API will paginate the results,
-#'  you may use this argument to control the pagination.
+#'   identifiers}.
+#' @param hierarchy Character: (optional) Retrieve nodes related to one supplied
+#'   node. One of "children", "parent", or "siblings".
+#' @param node_only Logical: (default = \code{TRUE}) If \code{TRUE}, return
+#'   node information without links to parent, sibling, and child nodes.
+#' @param page_size Numeric: (default = \code{200}) Number of child or sibling
+#'   nodes per page. The maximum is 200.
+#' @param page_number Numeric: (default = \code{1}) Page of child or sibling
+#'   nodes to retrieve.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return a list containing your supplied nodes or their related nodes
-#'   taxonomic information.
+#' @return A list containing taxonomy information for the requested nodes or
+#'   their related nodes.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium , UniProt: the Universal Protein
-#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
 #'   https://doi.org/10.1093/nar/gkae1010
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
 #'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
 #'   Documentation}
 #'   \item \href{https://www.uniprot.org/help/publications}{Citations note
@@ -148,24 +152,50 @@ rba_uniprot_taxonomy <- function(ids,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "ids", class = "numeric"),
+      list(
+        arg = "ids", class = c("numeric", "integer"),
+        min_len = 1L, min_val = 1
+      ),
       list(
         arg = "hierarchy", class = "character",
-        val = c("children", "parent", "siblings")
+        len = 1L, val = c("children", "parent", "siblings")
       ),
-      list(arg = "node_only", class = "logical"),
-      list(arg = "page_size", class = "numeric", ran = c(1,200)),
-      list(arg = "page_number", class = "numeric")
+      list(
+        arg = "node_only", class = "logical", len = 1L,
+        no_null = TRUE
+      ),
+      list(
+        arg = "page_size", class = c("numeric", "integer"),
+        len = 1L, ran = c(1, 200), no_null = TRUE
+      ),
+      list(
+        arg = "page_number", class = c("numeric", "integer"),
+        len = 1L, min_val = 1, no_null = TRUE
+      )
     ),
     cond = list(
       list(
         quote(length(ids) > 1 && !is.null(hierarchy)),
-        "you cannot specify 'hierarchy' when providing more than 1 ids."
+        "`hierarchy` can be used only when one taxonomy ID is supplied."
       ),
       list(
-        quote(is.null(hierarchy) && (page_size != 200 | page_number != 1)),
-        "Because hierarchy argument was not supplied, page_size and page_number were ignored.",
+        quote(
+          (is.null(hierarchy) || identical(hierarchy, "parent")) &&
+            (page_size != 200 || page_number != 1)
+        ),
+        "`page_size` and `page_number` are ignored unless `hierarchy` is `children` or `siblings`.",
         warn = TRUE
+      ),
+      list(
+        quote(any(!is.finite(ids) | ids %% 1 != 0)),
+        "`ids` values should be finite, positive whole numbers."
+      ),
+      list(
+        quote(
+          !is.finite(page_size) || page_size %% 1 != 0 ||
+            !is.finite(page_number) || page_number %% 1 != 0
+        ),
+        "`page_size` and `page_number` should be finite, positive whole numbers."
       )
     )
   )
@@ -177,7 +207,7 @@ rba_uniprot_taxonomy <- function(ids,
   )
 
   ## Build GET API Request's query
-  call_query <- list()
+  call_query <- NULL
 
   ## Build Function-Specific Call
   path_input <- sprintf(
@@ -189,7 +219,9 @@ rba_uniprot_taxonomy <- function(ids,
 
   if (!is.null(hierarchy)) {
     path_input <- paste0(path_input, "/", hierarchy)
-    ## Build GET API Request's query
+  }
+
+  if (!is.null(hierarchy) && hierarchy %in% c("children", "siblings")) {
     call_query <- list("pageSize" = page_size, "pageNumber" = page_number)
   }
 
@@ -224,27 +256,26 @@ rba_uniprot_taxonomy <- function(ids,
 #'   taxonomy node.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/lineage/\{id\}"
+#'  "GET https://www.ebi.ac.uk/proteins/api/taxonomy/lineage/\{id\}"
 #'
-#' @param id (numeric) a
+#' @param id Numeric: An
 #' \href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
-#'   identifier}
+#'   identifier}.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A list with a data frame containing All the nodes that preceded your
-#'   supplied node in the taxonomic tree. with your node as the first row
-#'   and the root node in the last row.
+#' @return A list containing the requested node's lineage, ordered from the
+#'   supplied node to the root.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium , UniProt: the Universal Protein
-#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
 #'   https://doi.org/10.1093/nar/gkae1010
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
 #'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
 #'   Documentation}
 #'   \item \href{https://www.uniprot.org/help/publications}{Citations note
@@ -266,7 +297,16 @@ rba_uniprot_taxonomy_lineage <- function(id,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "id", class = "numeric")
+      list(
+        arg = "id", class = c("numeric", "integer"),
+        len = 1L, min_val = 1
+      )
+    ),
+    cond = list(
+      list(
+        quote(!is.finite(id) || id %% 1 != 0),
+        "`id` should be a finite, positive whole number."
+      )
     )
   )
 
@@ -282,7 +322,7 @@ rba_uniprot_taxonomy_lineage <- function(id,
     path = paste0(.rba_stg("uniprot", "pth"), "taxonomy/lineage/", id),
     accept = "application/json",
     parser = "json->list_simp",
-    save_to = .rba_file("rba_uniprot_taxonomy_lineage.json")
+    save_to = .rba_file("uniprot_taxonomy_lineage.json")
   )
 
   ## Call API
@@ -292,42 +332,39 @@ rba_uniprot_taxonomy_lineage <- function(id,
 
 #' Search UniProt Taxonomic Names
 #'
-#' Using this function, you can search and retrieve taxonomic nodes using
-#'   their names from
+#' Search and retrieve taxonomic nodes by name from the
 #'   \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database}.
+#'   Search results are paginated.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/name/\{name\}"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/name/\{name\}/node"
+#'  "GET https://www.ebi.ac.uk/proteins/api/taxonomy/name/\{name\}"
+#'  \cr "GET https://www.ebi.ac.uk/proteins/api/taxonomy/name/\{name\}/node"
 #'
-#' @param name a name to to be used as search query.
-#' @param field Specify the field that your supplied name should be searched.
-#'   It should be one of : "scientific" (default), "common" or "mnemonic".
-#' @param search_type The logical relationship between your supplied search
-#'   query and the taxonomic name field. It should be one of "equal_to"
-#'   (default), "start_with", "end_with" or "contain".
-#' @param node_only (logical) Retrieve only the node(s) information and exclude URL links
-#'  to parents, siblings and children nodes. default = TRUE
-#' @param page_size (numeric) Your search results may be very long, thus
-#'  UniProt API will paginate the results, you may use this argument to control
-#'  the pagination. maximum value is 200.
-#' @param page_number (numeric) Your search results may be very long, thus
-#'  UniProt API will paginate the results, you may use this argument to control
-#'  the pagination. maximum value is 200.
+#' @param name Character: Taxonomic name to search.
+#' @param field Character: (default = \code{"scientific"}) Name field to
+#'   search. One of "scientific", "common", or "mnemonic".
+#' @param search_type Character: (default = \code{"equal_to"}) Relationship
+#'   between the query and taxonomic name. One of "equal_to", "start_with",
+#'   "end_with", or "contain".
+#' @param node_only Logical: (default = \code{TRUE}) If \code{TRUE}, return
+#'   node information without links to parent, sibling, and child nodes.
+#' @param page_size Numeric: (default = \code{200}) Number of results per page.
+#'   The maximum is 200.
+#' @param page_number Numeric: (default = \code{1}) Page to retrieve.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return a list containing taxonomic nodes that match your supplied inputs.
+#' @return A list containing matching taxonomic nodes and page information.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium , UniProt: the Universal Protein
-#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
 #'   https://doi.org/10.1093/nar/gkae1010
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
 #'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
 #'   Documentation}
 #'   \item \href{https://www.uniprot.org/help/publications}{Citations note
@@ -359,18 +396,36 @@ rba_uniprot_taxonomy_name <- function(name,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "name", class = "character"),
+      list(arg = "name", class = "character", len = 1L),
       list(
-        arg = "field", class = "character",
+        arg = "field", class = "character", len = 1L, no_null = TRUE,
         val = c("scientific", "common", "mnemonic")
       ),
       list(
-        arg = "search_type", class = "character",
+        arg = "search_type", class = "character", len = 1L, no_null = TRUE,
         val = c("equal_to", "start_with", "end_with", "contain")
       ),
-      list(arg = "node_only", class = "logical"),
-      list(arg = "page_size", class = "numeric", ran = c(1,200)),
-      list(arg = "page_number", class = "numeric")
+      list(
+        arg = "node_only", class = "logical", len = 1L,
+        no_null = TRUE
+      ),
+      list(
+        arg = "page_size", class = c("numeric", "integer"),
+        len = 1L, ran = c(1, 200), no_null = TRUE
+      ),
+      list(
+        arg = "page_number", class = c("numeric", "integer"),
+        len = 1L, min_val = 1, no_null = TRUE
+      )
+    ),
+    cond = list(
+      list(
+        quote(
+          !is.finite(page_size) || page_size %% 1 != 0 ||
+            !is.finite(page_number) || page_number %% 1 != 0
+        ),
+        "`page_size` and `page_number` should be finite, positive whole numbers."
+      )
     )
   )
 
@@ -381,7 +436,6 @@ rba_uniprot_taxonomy_name <- function(name,
 
   ## Build GET API Request's query
   call_query <- list(
-    "name" = name,
     "fieldName" = switch(
       field,
       "scientific" = "SCIENTIFICNAME",
@@ -433,34 +487,34 @@ rba_uniprot_taxonomy_name <- function(name,
 
 #' Traverse UniProt Taxonomic Tree Path
 #'
-#' Using this function you can retrieve nodes that are located in the top or
-#'   the bottom of your supplied node in
-#'   \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database tree}
+#' Traverse upward or downward from a supplied node in the
+#'   \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database
+#'   tree}.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/path"
+#'  "GET https://www.ebi.ac.uk/proteins/api/taxonomy/path"
 #'
-#' @param id (numeric) a
+#' @param id Numeric: An
 #' \href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
-#'   identifier}
-#' @param direction direction of the taxonomic path, either "TOP" or "BOTTOM".
-#' @param depth (numeric) How many levels should be traversed on
-#' the taxonomic tree? (from 1 to 5, default = 5)
+#'   identifier}.
+#' @param direction Character: Direction of the taxonomic path, either "TOP"
+#'   or "BOTTOM".
+#' @param depth Numeric: (default = \code{5}) Number of taxonomic-tree levels
+#'   to traverse, from 1 to 5.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return a nested list containing the node which are in the path specified by
-#'   your supplied argument in the UniProt taxonomic tree.
+#' @return A nested list containing the requested taxonomic path.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium , UniProt: the Universal Protein
-#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
 #'   https://doi.org/10.1093/nar/gkae1010
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
 #'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
 #'   Documentation}
 #'   \item \href{https://www.uniprot.org/help/publications}{Citations note
@@ -487,9 +541,27 @@ rba_uniprot_taxonomy_path <- function(id,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "id", class = "numeric"),
-      list(arg = "direction", class = "character", val = c("TOP", "BOTTOM")),
-      list(arg = "depth", class = "numeric", ran = c(1,5))
+      list(
+        arg = "id", class = c("numeric", "integer"),
+        len = 1L, min_val = 1
+      ),
+      list(
+        arg = "direction", class = "character", len = 1L,
+        val = c("TOP", "BOTTOM")
+      ),
+      list(
+        arg = "depth", class = c("numeric", "integer"),
+        len = 1L, ran = c(1, 5), no_null = TRUE
+      )
+    ),
+    cond = list(
+      list(
+        quote(
+          !is.finite(id) || id %% 1 != 0 ||
+            !is.finite(depth) || depth %% 1 != 0
+        ),
+        "`id` and `depth` should be finite, positive whole numbers."
+      )
     )
   )
 
@@ -524,27 +596,29 @@ rba_uniprot_taxonomy_path <- function(id,
 #' \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database}.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/relationship"
+#'  "GET https://www.ebi.ac.uk/proteins/api/taxonomy/relationship"
 #'
-#' @param from \href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI
-#' taxonomic identifier} of your initial node.
-#' @param to \href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI
-#' taxonomic identifier} of your final node.
+#' @param from Numeric:
+#'   \href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
+#'   identifier} of the initial node.
+#' @param to Numeric:
+#'   \href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
+#'   identifier} of the final node.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return a nested list containing the node which are in the shortest path
-#'   between your supplied nodes.
+#' @return A nested list containing the shortest path between the supplied
+#'   nodes.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium , UniProt: the Universal Protein
-#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
 #'   https://doi.org/10.1093/nar/gkae1010
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
 #'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
 #'   Documentation}
 #'   \item \href{https://www.uniprot.org/help/publications}{Citations note
@@ -567,13 +641,28 @@ rba_uniprot_taxonomy_relationship <- function(from,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "from", class = "numeric"),
-      list(arg = "to", class = "numeric")
+      list(
+        arg = "from", class = c("numeric", "integer"),
+        len = 1L, min_val = 1
+      ),
+      list(
+        arg = "to", class = c("numeric", "integer"),
+        len = 1L, min_val = 1
+      )
+    ),
+    cond = list(
+      list(
+        quote(
+          !is.finite(from) || from %% 1 != 0 ||
+            !is.finite(to) || to %% 1 != 0
+        ),
+        "`from` and `to` should be finite, positive whole numbers."
+      )
     )
   )
 
   .msg(
-    "Retrieving the shortest path on the toxonomy tree from node %s to %s.",
+    "Retrieving the shortest path on the taxonomy tree from node %s to %s.",
     from, to
   )
 

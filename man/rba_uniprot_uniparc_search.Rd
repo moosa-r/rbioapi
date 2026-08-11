@@ -27,65 +27,72 @@ rba_uniprot_uniparc_search(
 )
 }
 \arguments{
-\item{upi}{unique UniParc Identifier(s). You can supply up to 100 IDs.}
+\item{upi}{Character: (optional) Unique UniParc identifier(s). You can supply
+up to 100 IDs.}
 
-\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+\item{accession}{Character: (optional)
+\href{https://www.uniprot.org/help/accession_numbers}{
 UniProtKB primary or secondary accession}(s). You can supply up to 100
 accession numbers.}
 
-\item{db_type}{\href{https://www.uniprot.org/database/}{cross-reference}
-(external database) name.}
+\item{db_type}{Character: (optional)
+\href{https://www.uniprot.org/database/}{Cross-reference database} name.}
 
-\item{db_id}{Protein ID in the cross-reference (external) database.
+\item{db_id}{Character: (optional) Protein ID in a cross-reference database.
 You can supply up to 100 IDs.}
 
-\item{gene}{\href{https://www.uniprot.org/help/gene_name}{UniProt gene
+\item{gene}{Character: (optional)
+\href{https://www.uniprot.org/help/gene_name}{UniProt gene
 name(s)}. You can supply up to 20 gene names.}
 
-\item{protein}{\href{https://www.uniprot.org/help/protein_names}{UniProt
+\item{protein}{Character: (optional)
+\href{https://www.uniprot.org/help/protein_names}{UniProt
 protein name}.}
 
-\item{taxid}{NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+\item{taxid}{Numeric: (optional) NIH-NCBI
+\href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
 You can supply up to 20 taxon IDs.}
 
-\item{organism}{\href{https://www.uniprot.org/taxonomy/}{Organism name}.}
+\item{organism}{Character: (optional)
+\href{https://www.uniprot.org/taxonomy/}{Organism name}.}
 
-\item{sequence_checksum}{Sequence CRC64 checksum.}
+\item{sequence_checksum}{Character: (optional) A 16-character hexadecimal
+sequence CRC64 checksum.}
 
-\item{ipr}{\href{https://www.ebi.ac.uk/interpro/about/interpro/}{InterPro
+\item{ipr}{Character: (optional)
+\href{https://www.ebi.ac.uk/interpro/about/interpro/}{InterPro
 identifier(s)}. You can supply up to 20 IDs.}
 
-\item{signature_db}{InterPro's
+\item{signature_db}{Character: (optional) InterPro
 \href{https://interpro-documentation.readthedocs.io/en/latest/databases.html}{signature
-database}. You can supply up to 13 of the following values:
-\cr "CATH", "CDD", "HAMAP", "MobiDB Lite", "Panther", "Pfam", "PIRSF",
-"PRINTS", "Prosite", "SFLD", "SMART", "SUPERFAMILY" and/or "TIGRfams"}
+database}. You can supply up to 20 values.}
 
-\item{signature_id}{Signature ID in the InterPro's
+\item{signature_id}{Character: (optional) Signature ID in an InterPro
 \href{https://interpro-documentation.readthedocs.io/en/latest/databases.html}{signature
 database}. You can supply up to 20 IDs.}
 
-\item{upid}{\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
+\item{upid}{Character: (optional)
+\href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
 identifier (UPID)}. You can supply up to 100 UPIDs.}
 
-\item{seq_length}{An exact sequence length (e.g. 150) or a range of sequence
-lengths (e.g. "130-158").}
+\item{seq_length}{Character or Numeric: (optional) An exact sequence length
+(e.g. 150) or a range of sequence lengths (e.g. "130-158").}
 
-\item{rf_dd_type}{Filter the content of the each UniParc entry by
+\item{rf_dd_type}{Character: (optional) Filter each UniParc entry's content by
 \href{https://www.uniprot.org/database/}{cross-reference} names. You can
 supply multiple values.}
 
-\item{rf_db_id}{Filter the content of the each UniParc entry by protein
+\item{rf_db_id}{Character: (optional) Filter each UniParc entry's content by
+protein
 identifiers in any cross-reference database. You can supply multiple
 values.}
 
-\item{rf_active}{(logical ) Filter the content of each UniParc entry based on
-active status on source database:\itemize{
-\item NULL: (default) don't filter contents based on active status.
-\item TRUE: only return contents which are still active.
-\item FALSE: Only return contents which are not active.}}
+\item{rf_active}{Logical: (optional) Filter each UniParc entry's content by
+active status in the source database: \code{TRUE} retains active database
+references, \code{FALSE} retains inactive references, and \code{NULL}
+applies no active-status filter.}
 
-\item{rf_tax_id}{(Numeric) Filter the content of each UniParc entry by
+\item{rf_tax_id}{Numeric: (optional) Filter each UniParc entry's content by
 NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}. You can
 supply multiple values.}
 
@@ -93,24 +100,20 @@ supply multiple values.}
 arguments manual for more information on available options.}
 }
 \value{
-A List where each element corresponds to one UniParc entry returned
-  by your search query. The element itself is a sub-list containing sequence
-  information and reference entries.
+A list named by UniParc accession. Each element contains sequence
+  information and cross-reference entries for one search hit.
 }
 \description{
 Use this function to search
   \href{https://www.uniprot.org/help/uniparc}{UniProt Archive (UniParc)}
-  entries.You may also refine your search with modifiers such as sequence
-  length, taxon id etc. See "Arguments section" for more information.
-}
-\details{
-Note that this is a search function. Thus, you are not required to fill
-  every argument; You may use whatever combinations of arguments you see
-  fit for your query.
+  entries. Search by identifier, annotation, organism, sequence properties,
+  or other supported criteria. The \code{rf_*} arguments filter the
+  cross-references returned within matching entries; they do not select
+  entries by themselves.
 }
 \section{Corresponding API Resources}{
 
- "GET https://ebi.ac.uk/proteins/api/uniparc"
+ "GET https://www.ebi.ac.uk/proteins/api/uniparc"
 }
 
 \examples{
@@ -124,20 +127,20 @@ rba_uniprot_uniparc_search(accession = "P30914")
 rba_uniprot_uniparc_search(accession = "P30914", rf_active = TRUE)
 }
 \donttest{
-rba_uniprot_uniparc_search(taxid = "694009", protein = "Nucleoprotein")
+rba_uniprot_uniparc_search(taxid = 694009, protein = "Nucleoprotein")
 }
 
 }
 \references{
 \itemize{
-  \item The UniProt Consortium , UniProt: the Universal Protein
-  Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+  \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
-  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated protein
-  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237
   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
   Documentation}
   \item \href{https://www.uniprot.org/help/publications}{Citations note

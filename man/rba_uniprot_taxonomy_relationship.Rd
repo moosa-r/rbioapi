@@ -7,18 +7,20 @@
 rba_uniprot_taxonomy_relationship(from, to, ...)
 }
 \arguments{
-\item{from}{\href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI
-taxonomic identifier} of your initial node.}
+\item{from}{Numeric:
+\href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
+identifier} of the initial node.}
 
-\item{to}{\href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI
-taxonomic identifier} of your final node.}
+\item{to}{Numeric:
+\href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
+identifier} of the final node.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-a nested list containing the node which are in the shortest path
-  between your supplied nodes.
+A nested list containing the shortest path between the supplied
+  nodes.
 }
 \description{
 Use this function to retrieve the shortest path between two nodes
@@ -27,7 +29,7 @@ in the taxonomy tree of
 }
 \section{Corresponding API Resources}{
 
- "GET https://ebi.ac.uk/proteins/api/relationship"
+ "GET https://www.ebi.ac.uk/proteins/api/taxonomy/relationship"
 }
 
 \examples{
@@ -38,14 +40,14 @@ rba_uniprot_taxonomy_relationship(from = 9606, to = 10090)
 }
 \references{
 \itemize{
-  \item The UniProt Consortium , UniProt: the Universal Protein
-  Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+  \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
-  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated protein
-  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237
   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
   Documentation}
   \item \href{https://www.uniprot.org/help/publications}{Citations note

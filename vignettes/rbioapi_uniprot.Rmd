@@ -48,45 +48,45 @@ Directly quoting from [UniProt](https://www.uniprot.org "Universal Protein Resou
 
 # Search vs Retrieve {#search-vs-retrieve}
 
-Most of rbioapi UniProt functions have two variants. one to retrieve data using a proper accession, and the second one (which have a `_search` suffix) is to search using any combination of arguments. We first demonstrate this using an example, then provide a list of such functions in rbioapi.
+Most rbioapi UniProt function families have two variants: one retrieves data using a supported identifier, while the other (with a `_search` suffix) searches using one or more service-specific criteria. We first demonstrate this using an example, then provide a list of these function families in rbioapi.
 
-Suppose we are interested in Human CD40 ligand protein, and we know that it's UniProt accession is "P29965". We can simply do as the following:
+Suppose we are interested in the human CD40 ligand protein and know that its UniProt accession is "P29965". We can retrieve it directly:
 
 ```{r rba_uniprot_proteins}
-## 1 We can retrieve CD40 protein's information by qurying it's UniProt accession:
+## 1 Retrieve CD40 ligand by its UniProt accession
 cd40 <- rba_uniprot_proteins(accession = "P29965")
 
-## 2 We use str() to inspect our object's structure
+## 2 Inspect the returned object's structure
 str(cd40, 1)
 ```
 
-This is the equivalent of the page that UniProt have on this accession ([UniProtKB - P29965](https://www.uniprot.org/uniprot/P29965 "UniProtKB - P29965 (CD40L_HUMAN)")). But what if we didn't know the UniProt accession? Or simply want to perform a search using certain parameters? We can use the function with `_search` suffix:
+This returns the data represented by the [UniProtKB entry for P29965](https://www.uniprot.org/uniprotkb/P29965/entry "UniProtKB - P29965 (CD40L_HUMAN)"). If we do not know the accession, or want to query by other criteria, we can use the function with the `_search` suffix:
 
 ```{r rba_uniprot_proteins_search}
-## 1 From the available arguments, we fill only those which we think is pertinent
+## 1 Supply the criteria pertinent to the search
 cd40_search <- rba_uniprot_proteins_search(
   protein = "CD40 ligand",
   organism = "human",
   reviewed = TRUE
 )
 
-## 2 As always, we use str() to inspect our object's structure
+## 2 Inspect the returned object's structure
 str(cd40_search, 2)
 ```
 
-This is the equivalent of '[advanced search](https://www.uniprot.org/help/advanced_search "UniProtKB advanced search options")' in UniProt web portal. See function `rba_uniprot_proteins_search`'s manual for more information. Remember that in `*_search` functions, you are not required to fill every argument, you can use any combination of arguments you see fit to build your search query.
+This is analogous to an [advanced search](https://www.uniprot.org/help/advanced_search "UniProtKB advanced search options") in the UniProt web portal. See the `rba_uniprot_proteins_search` manual for details. In `*_search` functions you do not need to fill every argument, but the Proteins API requires at least one of the primary search criteria documented for that function; refining modifiers do not constitute a search by themselves.
 
-The applications of `*_search` variants are not limited to what the title 'search' implies. These functions will also retrieve the search hits in their response; Thus you can use them for mass-retrieving. If you see the "argument" section in the functions' manuals, you would see that many arguments accept a vector of values. consider the following examples:
+The applications of `*_search` variants are not limited to what the title 'search' implies. These functions also retrieve their search hits, so you can use them for bulk retrieval. Many arguments accept multiple values; see the functions' manuals for the supported limits. Consider the following examples:
 
 ```{r rba_uniprot_proteins_search1_2}
 ## 1 As the simplest scenario, we can retrieve multiple proteins in one call
 multi_prs1 <- rba_uniprot_proteins_search(
   accession = c("P04637", "P38398", "P24941", "P60953", "P06493", "Q02241")
 )
-## As always, we use str() to inspect our object's structure
+## Inspect the returned object's structure
 str(multi_prs1, 1)
 
-## 2 Or alternatively, search using Gene names, also we want to exclude isoforms and only retrieve swiss-prot entries
+## 2 Search by gene name, excluding isoforms and unreviewed entries
 multi_prs2 <- rba_uniprot_proteins_search(
   gene = c("KIF23", "BRCA1", "TP53", "CDC42"),
   reviewed = TRUE,
@@ -98,7 +98,7 @@ str(multi_prs2, 1)
 ```
 
 ```{r rba_uniprot_proteins_search3}
-## 3 Search for every proteins with chemokines keyword
+## 3 Search for every protein with the chemokines keyword
 multi_prs3 <- rba_uniprot_proteins_search(
   keyword = "chemokines"
 )
@@ -107,7 +107,7 @@ str(multi_prs3, 1)
 ```
 
 ```{r rba_uniprot_proteins_search4}
-## 4 Search for every protein of "SARS-CoV-2" virus in Swiss-Prot
+## 4 Search for every reviewed SARS-CoV-2 protein
 multi_prs4 <- rba_uniprot_proteins_search(
   organism = "SARS-CoV-2",
   reviewed = TRUE
@@ -120,43 +120,39 @@ str(multi_prs4, 1)
 
 # Functions with `*_search` variant {#functions-with-star-search-variant}
 
-The search variants are not limited to the above. Here is a list of the function that have both a retrieve and search variants. See their manuals for detailed guides and examples.
+The search variants are not limited to the examples above. The following function families have both retrieval and search variants. See their manuals for detailed guidance and examples.
 
-1.  `rba_uniprot_proteins()` & `rba_uniprot_proteins_search()`
+1.  `rba_uniprot_proteins()` and `rba_uniprot_proteins_search()`
 
-2.  `rba_uniprot_features()` & `rba_uniprot_features_search()`
+2.  `rba_uniprot_features()` and `rba_uniprot_features_search()`
 
-3.  `rba_uniprot_variation()` & `rba_uniprot_variation_search()`
+3.  `rba_uniprot_variation()` and `rba_uniprot_variation_search()`
 
-4.  `rba_uniprot_proteomics()` & `rba_uniprot_proteomics_search()`
+4.  `rba_uniprot_antigens()` and `rba_uniprot_antigens_search()`
 
-5.  `rba_uniprot_antigens()` & `rba_uniprot_antigens_search()`
+5.  `rba_uniprot_epitope()` and `rba_uniprot_epitope_search()`
 
-6.  `rba_uniprot_epitope()` & `rba_uniprot_epitope_search()`
+6.  `rba_uniprot_rna_edit()` and `rba_uniprot_rna_edit_search()`
 
-7.  `rba_uniprot_rna_edit()` & `rba_uniprot_rna_edit_search()`
+7.  `rba_uniprot_proteomes()` and `rba_uniprot_proteomes_search()`
 
-8.  `rba_uniprot_proteomes()` & `rba_uniprot_proteomes_search()`
+8.  `rba_uniprot_mutagenesis()` and `rba_uniprot_mutagenesis_search()`
 
-9.  `rba_uniprot_ptm()` & `rba_uniprot_ptm_search()`
-
-10.  `rba_uniprot_mutagenesis()` & `rba_uniprot_mutagenesis_search()`
-
-11.  `rba_uniprot_proteomics_hpp()` &  `rba_uniprot_proteomics_hpp_search()`
+9.  `rba_uniprot_proteomics_hpp()` and `rba_uniprot_proteomics_hpp_search()`
  
-12.  `rba_uniprot_proteomics_non_ptm()` & `rba_uniprot_proteomics_non_ptm_search()`
+10.  `rba_uniprot_proteomics_non_ptm()` and `rba_uniprot_proteomics_non_ptm_search()`
  
-13.  `rba_uniprot_proteomics_ptm()` & `rba_uniprot_proteomics_ptm_search()`
+11.  `rba_uniprot_proteomics_ptm()` and `rba_uniprot_proteomics_ptm_search()`
 
-14.  `rba_uniprot_genecentric()` & `rba_uniprot_genecentric_search()`
+12.  `rba_uniprot_genecentric()` and `rba_uniprot_genecentric_search()`
 
-15.  `rba_uniprot_uniparc()` & `rba_uniprot_uniparc_search()`
+13.  `rba_uniprot_uniparc()` and `rba_uniprot_uniparc_search()`
 
 ------------------------------------------------------------------------
 
 # UniProt functions categories {#uniprot-functions-categories}
 
-The UniProt API endpoints are organized into 5 group. Here are those categories and rbioapi functions that correspond to each one. See the functions' manuals for more details.
+The Proteins API endpoints implemented by rbioapi are organized into six groups. Here are those categories and the corresponding rbioapi functions. See the functions' manuals for more details.
 
 ## Proteins {#proteins}
 
@@ -176,9 +172,9 @@ The UniProt API endpoints are organized into 5 group. Here are those categories 
 
 ### Variation {#proteins-variation}
 
-`rba_uniprot_variation()`
+-   `rba_uniprot_variation()`
 
-`rba_uniprot_variation_search()`
+-   `rba_uniprot_variation_search()`
 
 ### Antigens {#antigens}
 
@@ -252,9 +248,9 @@ The UniProt API endpoints are organized into 5 group. Here are those categories 
 
 -   `rba_uniprot_coordinates_location()`
 
--   `rba_uniprot_coordinates_sequence()`
+-   `rba_uniprot_coordinates_location_protein()`
 
--   `rba_uniprot_genome_coordinates_sequence()`
+-   `rba_uniprot_coordinates_location_genome()`
 
 ## UniParc {#uniparc}
 
@@ -272,8 +268,8 @@ The UniProt API endpoints are organized into 5 group. Here are those categories 
 
 To cite UniProt (Please see <https://www.uniprot.org/help/publications>):
 
--   The UniProt Consortium , UniProt: the Universal Protein Knowledgebase in 2025, *Nucleic Acids Research*, 2024;, gkae1010, <https://doi.org/10.1093/nar/gkae1010>
--   Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd Turner, Maria Martin, The Proteins API: accessing key integrated protein and genome information, *Nucleic Acids Research*, Volume 45, Issue W1, 3 July 2017, Pages W539--W544, <https://doi.org/10.1093/nar/gkx237>
+-   The UniProt Consortium. (2025). UniProt: the Universal Protein Knowledgebase in 2025. *Nucleic Acids Research*, *53*(D1), D609–D617. <https://doi.org/10.1093/nar/gkae1010>
+-   Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales, L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The Proteins API: Accessing key integrated protein and genome information. *Nucleic Acids Research*, *45*(W1), W539–W544. <https://doi.org/10.1093/nar/gkx237>
 
 To cite rbioapi:
 
@@ -283,7 +279,7 @@ To cite rbioapi:
 
 # Links {#links}
 
--   [This article in rbioapi documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html "2.F: UniProt & rbioapi")
+-   [This article on the rbioapi documentation site](https://rbioapi.moosa-r.com/articles/rbioapi_uniprot.html "2.G: UniProt & rbioapi")
 
 -   [Functions references in rbioapi documentation site](https://rbioapi.moosa-r.com/reference/index.html#section-uniprot-rba-uniprot- "rbioapi reference")
 

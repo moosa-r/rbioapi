@@ -14,26 +14,31 @@ rba_uniprot_uniparc_bestguess(
 )
 }
 \arguments{
-\item{upi}{unique UniParc Identifier.}
+\item{upi}{Character: (optional) Unique UniParc identifier(s). You can supply
+up to 100 IDs.}
 
-\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+\item{accession}{Character: (optional)
+\href{https://www.uniprot.org/help/accession_numbers}{
 UniProtKB primary or secondary accession}(s). You can supply up to 100
 accession numbers.}
 
-\item{db_id}{Protein ID in the cross-reference (external) database.
+\item{db_id}{Character: (optional) Protein ID in a cross-reference database.
 You can supply up to 100 IDs.}
 
-\item{gene}{\href{https://www.uniprot.org/help/gene_name}{UniProt gene
+\item{gene}{Character: (optional)
+\href{https://www.uniprot.org/help/gene_name}{UniProt gene
 name(s)}. You can supply up to 20 gene names.}
 
-\item{taxid}{NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+\item{taxid}{Numeric: (optional) NIH-NCBI
+\href{https://www.uniprot.org/taxonomy/}{Taxon ID} used to refine the
+search.
 You can supply up to 20 taxon IDs.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-A list where each element correspond to a UniParc entry.
+The best matching UniParc entry.
 }
 \description{
 This function returns the UniParc Entry with a cross-reference to the
@@ -44,7 +49,7 @@ This function returns the UniParc Entry with a cross-reference to the
 }
 \section{Corresponding API Resources}{
 
- "GET https://ebi.ac.uk/proteins/api/uniparc/bestguess"
+ "GET https://www.ebi.ac.uk/proteins/api/uniparc/bestguess"
 }
 
 \examples{
@@ -55,14 +60,14 @@ rba_uniprot_uniparc_bestguess("UPI00000000C9")
 }
 \references{
 \itemize{
-  \item The UniProt Consortium , UniProt: the Universal Protein
-  Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+  \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
-  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated protein
-  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237
   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
   Documentation}
   \item \href{https://www.uniprot.org/help/publications}{Citations note

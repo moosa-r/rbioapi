@@ -7,25 +7,23 @@
 rba_uniprot_taxonomy_lca(ids, ...)
 }
 \arguments{
-\item{ids}{(numeric) Numeric vector of
+\item{ids}{Numeric:
 \href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
-identifiers}, with minimum length of two.}
+identifiers}. Supply at least two IDs.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-A list with UniProt taxonomy information of your supplied taxonomy
-  elements.
+A list containing the lowest common ancestor's taxonomy information.
 }
 \description{
-Use this function to retrieve lowest common ancestor (LCA) of two
- taxonomy nodes in
- \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database}
+Retrieve the lowest common ancestor (LCA) of two or more nodes in the
+  \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database}.
 }
 \section{Corresponding API Resources}{
 
- "GET https://ebi.ac.uk/proteins/api/ancestor/\{ids\}"
+ "GET https://www.ebi.ac.uk/proteins/api/taxonomy/ancestor/\{ids\}"
 }
 
 \examples{
@@ -36,14 +34,14 @@ rba_uniprot_taxonomy_lca(c(9606,10090,9823,7712))
 }
 \references{
 \itemize{
-  \item The UniProt Consortium , UniProt: the Universal Protein
-  Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+  \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
-  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated protein
-  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237
   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
   Documentation}
   \item \href{https://www.uniprot.org/help/publications}{Citations note

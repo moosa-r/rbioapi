@@ -2,76 +2,80 @@
 #'
 #' Use this function to search
 #'   \href{https://www.uniprot.org/help/uniparc}{UniProt Archive (UniParc)}
-#'   entries.You may also refine your search with modifiers such as sequence
-#'   length, taxon id etc. See "Arguments section" for more information.
-#'
-#'   Note that this is a search function. Thus, you are not required to fill
-#'   every argument; You may use whatever combinations of arguments you see
-#'   fit for your query.
+#'   entries. Search by identifier, annotation, organism, sequence properties,
+#'   or other supported criteria. The \code{rf_*} arguments filter the
+#'   cross-references returned within matching entries; they do not select
+#'   entries by themselves.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/uniparc"
+#'  "GET https://www.ebi.ac.uk/proteins/api/uniparc"
 #'
-#' @param upi unique UniParc Identifier(s). You can supply up to 100 IDs.
-#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
+#' @param upi Character: (optional) Unique UniParc identifier(s). You can supply
+#'   up to 100 IDs.
+#' @param accession Character: (optional)
+#'   \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}(s). You can supply up to 100
 #'   accession numbers.
-#' @param db_type \href{https://www.uniprot.org/database/}{cross-reference}
-#'   (external database) name.
-#' @param db_id Protein ID in the cross-reference (external) database.
+#' @param db_type Character: (optional)
+#'   \href{https://www.uniprot.org/database/}{Cross-reference database} name.
+#' @param db_id Character: (optional) Protein ID in a cross-reference database.
 #'   You can supply up to 100 IDs.
-#' @param gene \href{https://www.uniprot.org/help/gene_name}{UniProt gene
+#' @param gene Character: (optional)
+#'   \href{https://www.uniprot.org/help/gene_name}{UniProt gene
 #'   name(s)}. You can supply up to 20 gene names.
-#' @param protein \href{https://www.uniprot.org/help/protein_names}{UniProt
+#' @param protein Character: (optional)
+#'   \href{https://www.uniprot.org/help/protein_names}{UniProt
 #'   protein name}.
-#' @param taxid NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+#' @param taxid Numeric: (optional) NIH-NCBI
+#'   \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
 #'   You can supply up to 20 taxon IDs.
-#' @param organism \href{https://www.uniprot.org/taxonomy/}{Organism name}.
-#' @param sequence_checksum Sequence CRC64 checksum.
-#' @param ipr \href{https://www.ebi.ac.uk/interpro/about/interpro/}{InterPro
+#' @param organism Character: (optional)
+#'   \href{https://www.uniprot.org/taxonomy/}{Organism name}.
+#' @param sequence_checksum Character: (optional) A 16-character hexadecimal
+#'   sequence CRC64 checksum.
+#' @param ipr Character: (optional)
+#'   \href{https://www.ebi.ac.uk/interpro/about/interpro/}{InterPro
 #'   identifier(s)}. You can supply up to 20 IDs.
-#' @param signature_db InterPro's
+#' @param signature_db Character: (optional) InterPro
 #'   \href{https://interpro-documentation.readthedocs.io/en/latest/databases.html}{signature
-#'   database}. You can supply up to 13 of the following values:
-#'   \cr "CATH", "CDD", "HAMAP", "MobiDB Lite", "Panther", "Pfam", "PIRSF",
-#'   "PRINTS", "Prosite", "SFLD", "SMART", "SUPERFAMILY" and/or "TIGRfams"
-#' @param signature_id Signature ID in the InterPro's
+#'   database}. You can supply up to 20 values.
+#' @param signature_id Character: (optional) Signature ID in an InterPro
 #'   \href{https://interpro-documentation.readthedocs.io/en/latest/databases.html}{signature
 #'   database}. You can supply up to 20 IDs.
-#' @param upid \href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
+#' @param upid Character: (optional)
+#'   \href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
 #'   identifier (UPID)}. You can supply up to 100 UPIDs.
-#' @param seq_length An exact sequence length (e.g. 150) or a range of sequence
-#'   lengths (e.g. "130-158").
-#' @param rf_dd_type Filter the content of the each UniParc entry by
+#' @param seq_length Character or Numeric: (optional) An exact sequence length
+#'   (e.g. 150) or a range of sequence lengths (e.g. "130-158").
+#' @param rf_dd_type Character: (optional) Filter each UniParc entry's content by
 #'   \href{https://www.uniprot.org/database/}{cross-reference} names. You can
 #'   supply multiple values.
-#' @param rf_db_id Filter the content of the each UniParc entry by protein
+#' @param rf_db_id Character: (optional) Filter each UniParc entry's content by
+#'   protein
 #'   identifiers in any cross-reference database. You can supply multiple
 #'   values.
-#' @param rf_active (logical ) Filter the content of each UniParc entry based on
-#'   active status on source database:\itemize{
-#'   \item NULL: (default) don't filter contents based on active status.
-#'   \item TRUE: only return contents which are still active.
-#'   \item FALSE: Only return contents which are not active.}
-#' @param rf_tax_id (Numeric) Filter the content of each UniParc entry by
+#' @param rf_active Logical: (optional) Filter each UniParc entry's content by
+#'   active status in the source database: \code{TRUE} retains active database
+#'   references, \code{FALSE} retains inactive references, and \code{NULL}
+#'   applies no active-status filter.
+#' @param rf_tax_id Numeric: (optional) Filter each UniParc entry's content by
 #'   NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}. You can
 #'   supply multiple values.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A List where each element corresponds to one UniParc entry returned
-#'   by your search query. The element itself is a sub-list containing sequence
-#'   information and reference entries.
+#' @return A list named by UniParc accession. Each element contains sequence
+#'   information and cross-reference entries for one search hit.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium , UniProt: the Universal Protein
-#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
 #'   https://doi.org/10.1093/nar/gkae1010
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
 #'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
 #'   Documentation}
 #'   \item \href{https://www.uniprot.org/help/publications}{Citations note
@@ -89,7 +93,7 @@
 #' rba_uniprot_uniparc_search(accession = "P30914", rf_active = TRUE)
 #' }
 #' \donttest{
-#' rba_uniprot_uniparc_search(taxid = "694009", protein = "Nucleoprotein")
+#' rba_uniprot_uniparc_search(taxid = 694009, protein = "Nucleoprotein")
 #' }
 #'
 #' @family "UniProt - UniParc"
@@ -121,22 +125,61 @@ rba_uniprot_uniparc_search <- function(upi = NULL,
     cons = list(
       list(arg = "upi", class = "character", max_len = 100),
       list(arg = "accession", class = "character", max_len = 100),
-      list(arg = "db_type", class = "character"),
-      list(arg = "db_id", class = "character"),
+      list(arg = "db_type", class = "character", len = 1L),
+      list(arg = "db_id", class = "character", max_len = 100),
       list(arg = "gene", class = "character", max_len = 20),
-      list(arg = "protein", class = "character", len = 1),
-      list(arg = "taxid", class = "character", max_len = 20),
-      list(arg = "organism", class = "character"),
-      list(arg = "sequence_checksum", class = "character"),
-      list(arg = "ipr", class = "character", max_len = 100),
-      list(arg = "signature_db", class = "character", max_len = 13),
-      list(arg = "signature_id", class = "character"),
+      list(arg = "protein", class = "character", len = 1L),
+      list(
+        arg = "taxid", class = c("numeric", "integer"),
+        max_len = 20, min_val = 1
+      ),
+      list(arg = "organism", class = "character", len = 1L),
+      list(
+        arg = "sequence_checksum", class = "character", len = 1L,
+        regex = "^[[:xdigit:]]{16}$"
+      ),
+      list(arg = "ipr", class = "character", max_len = 20),
+      list(arg = "signature_db", class = "character", max_len = 20),
+      list(arg = "signature_id", class = "character", max_len = 20),
       list(arg = "upid", class = "character", max_len = 100),
-      list(arg = "seq_length", class = "character"),
+      list(
+        arg = "seq_length", class = c("character", "numeric", "integer"),
+        len = 1L, regex = "^[1-9]\\d*(?:-[1-9]\\d*)?$"
+      ),
       list(arg = "rf_dd_type", class = "character"),
       list(arg = "rf_db_id", class = "character"),
-      list(arg = "rf_active", class = "logical"),
-      list(arg = "rf_tax_id", class = "character")
+      list(arg = "rf_active", class = "logical", len = 1L),
+      list(
+        arg = "rf_tax_id", class = c("numeric", "integer"),
+        min_val = 1
+      )
+    ),
+    cond = list(
+      list(
+        quote(all(
+          is.null(upi), is.null(accession), is.null(db_type), is.null(db_id),
+          is.null(gene), is.null(protein), is.null(taxid), is.null(organism),
+          is.null(sequence_checksum), is.null(ipr), is.null(signature_db),
+          is.null(signature_id), is.null(upid), is.null(seq_length)
+        )),
+        "Supply at least one UniParc search criterion."
+      ),
+      list(
+        quote(
+          (!is.null(taxid) && any(!is.finite(taxid) | taxid %% 1 != 0)) ||
+            (!is.null(rf_tax_id) &&
+              any(!is.finite(rf_tax_id) | rf_tax_id %% 1 != 0))
+        ),
+        "`taxid` and `rf_tax_id` values should be finite, positive whole numbers."
+      ),
+      list(
+        quote(
+          is.character(seq_length) &&
+            grepl("-", seq_length, fixed = TRUE) &&
+            diff(as.numeric(strsplit(seq_length, "-", fixed = TRUE)[[1]])) < 0
+        ),
+        "The start of a `seq_length` range cannot exceed its end."
+      )
     )
   )
 
@@ -187,51 +230,55 @@ rba_uniprot_uniparc_search <- function(upi = NULL,
 
 #' Get UniParc entry
 #'
-#' Use this function to retrieve UniParc entries. You can use either -and only
-#'   one of- UniProt accession, Cross-reference database id, UniParc ID or
-#'   UniProt Proteome UPID. You can also filter the returned content of
-#'   the returned UniParc entry. see "Argument" section for more details.
+#' Retrieve UniParc entries using exactly one UniProt accession,
+#'   cross-reference database ID, UniParc ID, or UniProt Proteome UPID. The
+#'   \code{rf_*} arguments filter cross-references within returned entries.
+#'   Database-reference and proteome lookups may return multiple UniParc
+#'   entries.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/uniparc/accession/\{accession\} "
-#'  \cr "GET https://ebi.ac.uk/proteins/api/uniparc/dbreference/\{dbid\}"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/uniparc/proteome/\{upid\}"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/uniparc/upi/\{upi\}"
+#'  "GET https://www.ebi.ac.uk/proteins/api/uniparc/accession/\{accession\}"
+#'  \cr "GET https://www.ebi.ac.uk/proteins/api/uniparc/dbreference/\{dbid\}"
+#'  \cr "GET https://www.ebi.ac.uk/proteins/api/uniparc/proteome/\{upid\}"
+#'  \cr "GET https://www.ebi.ac.uk/proteins/api/uniparc/upi/\{upi\}"
 #'
-#' @param upi unique UniParc Identifier.
-#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
+#' @param upi Character: (optional) Unique UniParc identifier.
+#' @param accession Character: (optional)
+#'   \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}.
-#' @param db_id Protein ID in the cross-reference (external) database.
-#' @param upid \href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
-#'   identifier (UPID)}. You can supply up to 100 UPIDs.
-#' @param rf_dd_type Filter the content of the UniParc entry by
+#' @param db_id Character: (optional) Protein ID in a cross-reference database.
+#' @param upid Character: (optional)
+#'   \href{https://www.uniprot.org/help/proteome_id}{UniProt Proteome
+#'   identifier (UPID)}.
+#' @param rf_dd_type Character: (optional) Filter the UniParc entry's content by
 #'   \href{https://www.uniprot.org/database/}{cross-reference} names. You can
 #'   supply multiple values.
-#' @param rf_db_id Filter the content of the UniParc entry by protein
+#' @param rf_db_id Character: (optional) Filter the UniParc entry's content by
+#'   protein
 #'   identifiers in any cross-reference database. You can supply multiple
 #'   values.
-#' @param rf_active (logical ) Filter the content of UniParc entry based on
-#'   active status on source database:\itemize{
-#'   \item NULL: (default) don't filter contents based on active status.
-#'   \item TRUE: only return contents which are still active.
-#'   \item FALSE: Only return contents which are not active.}
-#' @param rf_tax_id (Numeric) Filter the content of the UniParc entry by
+#' @param rf_active Logical: (optional) Filter the UniParc entry's content by
+#'   active status in the source database: \code{TRUE} retains active database
+#'   references, \code{FALSE} retains inactive references, and \code{NULL}
+#'   applies no active-status filter.
+#' @param rf_tax_id Numeric: (optional) Filter the UniParc entry's content by
 #'   NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}. You can
 #'   supply multiple values.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A list which correspond to a UniParc entry.
+#' @return A UniParc entry, or a list of entries for a database-reference or
+#'   proteome lookup.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium , UniProt: the Universal Protein
-#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
 #'   https://doi.org/10.1093/nar/gkae1010
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
 #'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
 #'   Documentation}
 #'   \item \href{https://www.uniprot.org/help/publications}{Citations note
@@ -240,7 +287,7 @@ rba_uniprot_uniparc_search <- function(upi = NULL,
 #'
 #' @examples
 #' \donttest{
-#' rba_uniprot_uniparc(upi = "UPI00000000C9")
+#' rba_uniprot_uniparc(accession = "P30914")
 #' }
 #' \donttest{
 #' rba_uniprot_uniparc(upi = "UPI00000000C9")
@@ -266,38 +313,57 @@ rba_uniprot_uniparc <- function(upi = NULL,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "accession", class = "character"),
-      list(arg = "db_id", class = "character"),
-      list(arg = "upid", class = "character"),
-      list(arg = "upi", class = "character"),
+      list(arg = "accession", class = "character", len = 1L),
+      list(arg = "db_id", class = "character", len = 1L),
+      list(arg = "upid", class = "character", len = 1L),
+      list(arg = "upi", class = "character", len = 1L),
       list(arg = "rf_dd_type", class = "character"),
       list(arg = "rf_db_id", class = "character"),
-      list(arg = "rf_active", class = "logical"),
-      list(arg = "rf_tax_id", class = "character")
+      list(arg = "rf_active", class = "logical", len = 1L),
+      list(
+        arg = "rf_tax_id", class = c("numeric", "integer"),
+        min_val = 1
+      )
     ),
     cond = list(
       list(
         quote(sum(!is.null(accession), !is.null(db_id), !is.null(upid), !is.null(upi)) != 1),
-        "Please supply -only- one of the arguments 'accession', 'db_id', 'upid' or 'upi'."
+        "Supply exactly one of `accession`, `db_id`, `upid`, or `upi`."
+      ),
+      list(
+        quote(
+          !is.null(rf_tax_id) &&
+            any(!is.finite(rf_tax_id) | rf_tax_id %% 1 != 0)
+        ),
+        "`rf_tax_id` values should be finite, positive whole numbers."
       )
     )
   )
 
+  if (!is.null(accession)) {
+    id_description <- sprintf("UniProt accession %s", accession)
+  } else if (!is.null(db_id)) {
+    id_description <- sprintf("cross-reference database ID %s", db_id)
+  } else if (!is.null(upid)) {
+    id_description <- sprintf("UniProt Proteome ID %s", upid)
+  } else {
+    id_description <- sprintf("UniParc ID %s", upi)
+  }
+
   .msg(
-    "Retriving UniParc entry with %s.",
-    if (!is.null(accession)) {paste0("UniProt accession ", accession)
-    } else if (!is.null(db_id)) {
-      path_input <- paste0("cross-reference database ID ", accession)
-    } else if (!is.null(upid)) {
-      path_input <- paste0("UniProt Proteome ID ", accession)
-    } else if (!is.null(upi)) {
-      path_input <- paste0("UniParc ID ", accession)
-    }
+    "Retrieving UniParc entry with %s.",
+    id_description
   )
 
   ## Build GET API Request's query
+  if (!is.null(db_id) || !is.null(upid)) {
+    call_query <- list("size" = "-1")
+  } else {
+    call_query <- list()
+  }
+
   call_query <- .rba_query(
-    init = list("size" = "-1"),
+    init = call_query,
     list("rfDdtype", !is.null(rf_dd_type), paste0(rf_dd_type, collapse = ",")),
     list("rfDbid", !is.null(rf_db_id), paste0(rf_db_id, collapse = ",")),
     list("rfActive", !is.null(rf_active), ifelse(rf_active, "true", "false")),
@@ -339,32 +405,37 @@ rba_uniprot_uniparc <- function(upi = NULL,
 #'   references found.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/uniparc/bestguess"
+#'  "GET https://www.ebi.ac.uk/proteins/api/uniparc/bestguess"
 #'
-#' @param upi unique UniParc Identifier.
-#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
+#' @param upi Character: (optional) Unique UniParc identifier(s). You can supply
+#'   up to 100 IDs.
+#' @param accession Character: (optional)
+#'   \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}(s). You can supply up to 100
 #'   accession numbers.
-#' @param db_id Protein ID in the cross-reference (external) database.
+#' @param db_id Character: (optional) Protein ID in a cross-reference database.
 #'   You can supply up to 100 IDs.
-#' @param gene \href{https://www.uniprot.org/help/gene_name}{UniProt gene
+#' @param gene Character: (optional)
+#'   \href{https://www.uniprot.org/help/gene_name}{UniProt gene
 #'   name(s)}. You can supply up to 20 gene names.
-#' @param taxid NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+#' @param taxid Numeric: (optional) NIH-NCBI
+#'   \href{https://www.uniprot.org/taxonomy/}{Taxon ID} used to refine the
+#'   search.
 #'   You can supply up to 20 taxon IDs.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A list where each element correspond to a UniParc entry.
+#' @return The best matching UniParc entry.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium , UniProt: the Universal Protein
-#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
 #'   https://doi.org/10.1093/nar/gkae1010
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
 #'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
 #'   Documentation}
 #'   \item \href{https://www.uniprot.org/help/publications}{Citations note
@@ -392,9 +463,24 @@ rba_uniprot_uniparc_bestguess <- function(upi = NULL,
     cons = list(
       list(arg = "upi", class = "character", max_len = 100),
       list(arg = "accession", class = "character", max_len = 100),
-      list(arg = "db_id", class = "character"),
+      list(arg = "db_id", class = "character", max_len = 100),
       list(arg = "gene", class = "character", max_len = 20),
-      list(arg = "taxid", class = "character", max_len = 20)
+      list(
+        arg = "taxid", class = c("numeric", "integer"),
+        max_len = 20, min_val = 1
+      )
+    ),
+    cond = list(
+      list(
+        quote(all(
+          is.null(upi), is.null(accession), is.null(db_id), is.null(gene)
+        )),
+        "Supply at least one of `upi`, `accession`, `db_id`, or `gene`."
+      ),
+      list(
+        quote(!is.null(taxid) && any(!is.finite(taxid) | taxid %% 1 != 0)),
+        "`taxid` values should be finite, positive whole numbers."
+      )
     )
   )
 
@@ -404,7 +490,7 @@ rba_uniprot_uniparc_bestguess <- function(upi = NULL,
 
   ## Build GET API Request's query
   call_query <- .rba_query(
-    init = list("size" = "-1"),
+    init = list(),
     list("upi", !is.null(upi), paste0(upi, collapse = ",")),
     list("accession", !is.null(accession), paste0(accession, collapse = ",")),
     list("dbid", !is.null(db_id), paste0(db_id, collapse = ",")),
@@ -430,43 +516,43 @@ rba_uniprot_uniparc_bestguess <- function(upi = NULL,
 
 #' Get UniParc Entries by Sequence
 #'
-#' Retrieve UniParc Entry by providing an exact sequence. Note that partial
-#'   matches will not be accepted. You can also filter the returned content of
-#'   the returned UniParc entry. see "Argument" section for more details.
+#' Retrieve a UniParc entry using an exact protein sequence. Partial matches
+#'   are not accepted. The \code{rf_*} arguments filter cross-references within
+#'   the returned entry.
 #'
 #' @section Corresponding API Resources:
-#'  "POST https://ebi.ac.uk/proteins/api/uniparc/sequence"
+#'  "POST https://www.ebi.ac.uk/proteins/api/uniparc/sequence"
 #'
-#' @param sequence Exact UniParc protein sequence. Partial matches will not be
+#' @param sequence Character: Exact protein sequence. Partial matches are not
 #'   accepted.
-#' @param rf_dd_type Filter the content of the UniParc entry by
+#' @param rf_dd_type Character: (optional) Filter the UniParc entry's content by
 #'   \href{https://www.uniprot.org/database/}{cross-reference} names. You can
 #'   supply multiple values.
-#' @param rf_db_id Filter the content of the UniParc entry by protein
+#' @param rf_db_id Character: (optional) Filter the UniParc entry's content by
+#'   protein
 #'   identifiers in any cross-reference database. You can supply multiple
 #'   values.
-#' @param rf_active (logical ) Filter the content of UniParc entry based on
-#'   active status on source database:\itemize{
-#'   \item NULL: (default) don't filter contents based on active status.
-#'   \item TRUE: only return contents which are still active.
-#'   \item FALSE: Only return contents which are not active.}
-#' @param rf_tax_id (Numeric) Filter the content of the UniParc entry by
+#' @param rf_active Logical: (optional) Filter the UniParc entry's content by
+#'   active status in the source database: \code{TRUE} retains active database
+#'   references, \code{FALSE} retains inactive references, and \code{NULL}
+#'   applies no active-status filter.
+#' @param rf_tax_id Numeric: (optional) Filter the UniParc entry's content by
 #'   NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}. You can
 #'   supply multiple values.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A list which correspond to a UniParc entry.
+#' @return The matching UniParc entry.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium , UniProt: the Universal Protein
-#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
 #'   https://doi.org/10.1093/nar/gkae1010
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
 #'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
 #'   Documentation}
 #'   \item \href{https://www.uniprot.org/help/publications}{Citations note
@@ -495,13 +581,25 @@ rba_uniprot_uniparc_sequence <- function(sequence,
       list(arg = "sequence", class = "character", len = 1L),
       list(arg = "rf_dd_type", class = "character"),
       list(arg = "rf_db_id", class = "character"),
-      list(arg = "rf_active", class = "logical"),
-      list(arg = "rf_tax_id", class = "character")
+      list(arg = "rf_active", class = "logical", len = 1L),
+      list(
+        arg = "rf_tax_id", class = c("numeric", "integer"),
+        min_val = 1
+      )
+    ),
+    cond = list(
+      list(
+        quote(
+          !is.null(rf_tax_id) &&
+            any(!is.finite(rf_tax_id) | rf_tax_id %% 1 != 0)
+        ),
+        "`rf_tax_id` values should be finite, positive whole numbers."
+      )
     )
   )
 
   .msg(
-    "Retrieving UniParc entry that corresspond to your procided sequence."
+    "Retrieving the UniParc entry corresponding to the supplied sequence."
   )
 
   ## Build GET API Request's query

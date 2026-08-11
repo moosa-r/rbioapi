@@ -14,51 +14,48 @@ rba_uniprot_taxonomy(
 )
 }
 \arguments{
-\item{ids}{(numeric) a single or a numeric vector of
+\item{ids}{Numeric: One or more
 \href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
-identifier(s)}}
+identifiers}.}
 
-\item{hierarchy}{Retrieve taxonomic nodes that have specific hierarchical
-relation to your supplied taxonomic node. should be one of: "children",
-"parent" or "siblings".}
+\item{hierarchy}{Character: (optional) Retrieve nodes related to one supplied
+node. One of "children", "parent", or "siblings".}
 
-\item{node_only}{Retrieve only the node(s) information and exclude URL links
-to parents, siblings and children nodes.}
+\item{node_only}{Logical: (default = \code{TRUE}) If \code{TRUE}, return
+node information without links to parent, sibling, and child nodes.}
 
-\item{page_size}{(numeric) Only when hierarchy is supplied. hierarchy
-information may be very long, thus UniProt API will paginate the results,
-you may use this argument to control the pagination. maximum value is 200.}
+\item{page_size}{Numeric: (default = \code{200}) Number of child or sibling
+nodes per page. The maximum is 200.}
 
-\item{page_number}{(numeric) Only when hierarchy is supplied. hierarchy
-information may be very long, thus UniProt API will paginate the results,
-you may use this argument to control the pagination.}
+\item{page_number}{Numeric: (default = \code{1}) Page of child or sibling
+nodes to retrieve.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-a list containing your supplied nodes or their related nodes
-  taxonomic information.
+A list containing taxonomy information for the requested nodes or
+  their related nodes.
 }
 \description{
-Using this function, you can retrieve taxonomic nodes information by
-providing their
+Retrieve taxonomic-node information using
 \href{https://www.uniprot.org/help/taxonomic_identifier}{NCBI taxonomic
-  identifiers}. also, you can explicitly retrieve other nodes in relation
-  to your supplied node's hierarchy in
+  identifiers}. You can also retrieve nodes related to one supplied node in
   \href{https://www.uniprot.org/help/taxonomy}{UniProt Taxonomy database}.
+  Child and sibling results are paginated.
 }
 \section{Corresponding API Resources}{
 
- "GET https://ebi.ac.uk/proteins/api/ids/\{ids\}"
- \cr "GET https://ebi.ac.uk/proteins/api/ids/id/\{id\}/node"
- \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/node"
- \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/children"
- \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/children/node"
- \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/parent"
- \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/parent/node"
- \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/siblings"
- \cr "GET https://ebi.ac.uk/proteins/api/id/\{id\}/siblings/node"
+ "GET https://www.ebi.ac.uk/proteins/api/taxonomy/id/\{id\}"
+ \cr "GET https://www.ebi.ac.uk/proteins/api/taxonomy/ids/\{ids\}"
+ \cr "GET https://www.ebi.ac.uk/proteins/api/taxonomy/ids/\{ids\}/node"
+ \cr "GET https://www.ebi.ac.uk/proteins/api/taxonomy/id/\{id\}/node"
+ \cr "GET https://www.ebi.ac.uk/proteins/api/taxonomy/id/\{id\}/children"
+ \cr "GET https://www.ebi.ac.uk/proteins/api/taxonomy/id/\{id\}/children/node"
+ \cr "GET https://www.ebi.ac.uk/proteins/api/taxonomy/id/\{id\}/parent"
+ \cr "GET https://www.ebi.ac.uk/proteins/api/taxonomy/id/\{id\}/parent/node"
+ \cr "GET https://www.ebi.ac.uk/proteins/api/taxonomy/id/\{id\}/siblings"
+ \cr "GET https://www.ebi.ac.uk/proteins/api/taxonomy/id/\{id\}/siblings/node"
 }
 
 \examples{
@@ -72,14 +69,14 @@ rba_uniprot_taxonomy(ids = 9989, hierarchy = "children")
 }
 \references{
 \itemize{
-  \item The UniProt Consortium , UniProt: the Universal Protein
-  Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+  \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
-  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated protein
-  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237
   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
   Documentation}
   \item \href{https://www.uniprot.org/help/publications}{Citations note
