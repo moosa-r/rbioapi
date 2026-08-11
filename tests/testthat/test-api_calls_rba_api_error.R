@@ -81,7 +81,7 @@ test_that(".rba_skeleton distinguishes API errors from parser failures", {
 
   expect_match(
     object = .rba_skeleton(parser_failure_call),
-    regexp = "Internal Error: Failed to parse the server's response",
+    regexp = "The response format changed",
     fixed = TRUE
   )
 

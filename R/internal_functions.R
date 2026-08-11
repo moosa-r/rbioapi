@@ -46,7 +46,20 @@
         speedrichr = "speedrichr/api/"
       ),
       ptn = "^(https?://)?(www\\.)?maayanlab\\.cloud/(.*Enrichr|speedrichr)/",
-      err_ptn = "^$"
+      err_ptn = "^4\\d\\d$",
+      err_prs = list(
+        "text->chr",
+        function(x) {
+          regmatches(
+            x,
+            regexec(
+              "(?is)class=\"title\"[^>]*>\\s*Error\\s*</div\\s*>\\s*<div[^>]*>\\s*(.*?)\\s*</div\\s*>",
+              x,
+              perl = TRUE
+            )
+          )[[1]][[2]]
+        }
+      )
     ),
 
     ensembl = switch(
@@ -57,7 +70,7 @@
       err_ptn = "^4\\d\\d$",
       err_prs = list(
         "json->list_simp",
-        function(x) { x[["error"]][[1]] }
+        function(x) { x[["error"]] }
       )
     ),
 
@@ -70,13 +83,7 @@
       err_ptn = "^4\\d\\d$",
       err_prs = list(
         "json->list_simp",
-        function(x) {
-          stopifnot(
-            utils::hasName(x, "detail"),
-            length(x[["detail"]]) > 0L
-          )
-          paste(as.character(x[["detail"]]), collapse = "\n")
-        }
+        function(x) { x[["detail"]] }
       )
     ),
 
@@ -87,7 +94,15 @@
       pth = "mieaa/api/v1/",
       ptn = "^(https?://)?(www\\.)?ccb-compute2\\.cs\\.uni-saarland\\.de/mieaa/",
       err_ptn = "^4\\d\\d$",
-      err_prs = list("json->chr")
+      err_prs = list(
+        "json->list_simp",
+        function(x) {
+          paste(
+            unlist(x, recursive = TRUE, use.names = FALSE),
+            collapse = "\n"
+          )
+        }
+      )
     ),
 
     panther = switch(
@@ -113,10 +128,10 @@
         content = "ContentService/"
       ),
       ptn = "^(https?://)?(www\\.)?reactome\\.org/(?:AnalysisService|ContentService)/",
-      err_ptn = "^4\\d\\d$",
+      err_ptn = "^[45]\\d\\d$",
       err_prs = list(
         "json->list_simp",
-        function(x) { x[["messages"]][[1]] }
+        function(x) { paste(x[["messages"]], collapse = "\n") }
       )
     ),
 
@@ -129,9 +144,20 @@
       err_ptn = "^4\\d\\d$",
       err_prs = list(
         "json->list_simp",
-        function(x) { paste(x, collapse = "\n") },
-        function(x) { gsub("<.+?>|&nbsp;", "\n", x) },
-        function(x) { gsub("(\n)+", "\n", x) }
+        function(x) {
+          error_message <- paste(
+            x[["ErrorMessage"]],
+            collapse = "\n"
+          )
+          error_message <- gsub(
+            "<br\\b[^>]*>",
+            "\n",
+            error_message,
+            ignore.case = TRUE,
+            perl = TRUE
+          )
+          gsub("&nbsp;", " ", error_message, fixed = TRUE)
+        }
       )
     ),
 
@@ -141,11 +167,11 @@
       url = "https://www.ebi.ac.uk",
       pth = "proteins/api/",
       ptn = "^(https?://)?(www\\.)?ebi\\.ac\\.uk/proteins/api/",
+      err_ptn = "^4\\d\\d$",
       err_prs = list(
         "json->list_simp",
-        function(x) { x[["errorMessage"]][[1]] }
-      ),
-      err_ptn = "^4\\d\\d$"
+        function(x) { paste(x[["errorMessage"]], collapse = "\n") }
+      )
     ),
 
     options = switch(
@@ -246,21 +272,21 @@
 #' Translate HTTP Status Code to Human-Readable Explanation
 #'
 #' It will make HTTP status more informative by trying to translate it to a
-#'   human readable and informative text. this function will be called by
-#'   rba_error_parser().
+#'   human-readable and informative text. This function is used by
+#'   .rba_error_parser() and .rba_api_check().
 #'
-#' @param http_status numeric: A given Standard HTTP status code.
-#' @param verbose logical: Should the function return a sentence case?
+#' @param http_status numeric: A standard HTTP status code.
+#' @param as_sentence logical: Should the function return a complete sentence?
 #'
-#' @return Character string. Returns the HTTP status code with it's class and
-#'   possibly it's meaning.
+#' @return Character string. Returns the HTTP status code with its class and
+#'   possibly its meaning.
 #'
 #' @references \href{https://www.iana.org/assignments/http-status-codes/}{IANA:
 #'   Hypertext Transfer Protocol (HTTP) Status Code Registry}
 #'
 #' @family internal_internet_connectivity
 #' @noRd
-.rba_http_status <- function(http_status, verbose = FALSE){
+.rba_http_status <- function(http_status, as_sentence = FALSE){
   #ref:
   if (
     !is.atomic(http_status) ||
@@ -280,7 +306,7 @@
     substr(http_status, 1, 1),
     "1" = list(
       class = "Informational",
-      deff = switch(
+      meaning = switch(
         http_status,
         "100" = "Continue",
         "101" = "Switching Protocols",
@@ -289,7 +315,7 @@
     ),
     "2" = list(
       class = "Success",
-      deff = switch(
+      meaning = switch(
         http_status,
         "200" = "OK",
         "201" = "Created",
@@ -304,7 +330,7 @@
     ),
     "3" = list(
       class = "Redirection",
-      deff = switch(
+      meaning = switch(
         http_status,
         "300" = "Multiple Choices",
         "301" = "Moved Permanently",
@@ -312,13 +338,13 @@
         "303" = "See Other",
         "304" = "Not Modified",
         "305" = "Use Proxy",
-        "306" = "Switch Proxy",
+        "306" = "Unused",
         "307" = "Temporary Redirect",
         "308" = "Permanent Redirect")
     ),
     "4" = list(
       class = "Client Error",
-      deff = switch(
+      meaning = switch(
         http_status,
         "400" = "Bad Request",
         "401" = "Unauthorized",
@@ -333,13 +359,14 @@
         "410" = "Gone",
         "411" = "Length Required",
         "412" = "Precondition Failed",
-        "413" = "Payload Too Large",
+        "413" = "Content Too Large",
         "414" = "URI Too Long",
         "415" = "Unsupported Media Type",
         "416" = "Range Not Satisfiable",
         "417" = "Expectation Failed",
+        "418" = "Unused",
         "421" = "Misdirected Request",
-        "422" = "Unprocessable Entity",
+        "422" = "Unprocessable Content",
         "423" = "Locked",
         "424" = "Failed Dependency",
         "425" = "Too Early",
@@ -351,7 +378,7 @@
     ),
     "5" = list(
       class = "Server Error",
-      deff = switch(
+      meaning = switch(
         http_status,
         "500" = "Internal Server Error",
         "501" = "Not Implemented",
@@ -362,18 +389,18 @@
         "506" = "Variant Also Negotiates",
         "507" = "Insufficient Storage",
         "508" = "Loop Detected",
-        "510" = "Not Extended",
+        "510" = "Not Extended (Obsoleted)",
         "511" = "Network Authentication Required")
     )
   )
 
-  output <- ifelse(
-    !is.null(resp$deff),
-    yes = sprintf("HTTP Status '%s' (%s: %s)", http_status, resp$class, resp$deff),
-    no = sprintf("HTTP Status '%s' (%s class)", http_status, resp$class)
-  )
+  output <- if (is.null(resp$meaning)) {
+    sprintf("HTTP Status '%s' (%s class)", http_status, resp$class)
+  } else {
+    sprintf("HTTP Status '%s' (%s: %s)", http_status, resp$class, resp$meaning)
+  }
 
-  if (isTRUE(verbose)) {
+  if (isTRUE(as_sentence)) {
     output <- sprintf("The server returned %s.", output)
   }
 
@@ -716,7 +743,7 @@
   } else if (substr(response$status_code, 1, 1) != "2") {
 
     ## 3.2 API call was not successful
-    error_message <- .rba_error_parser(response = response, verbose = verbose)
+    error_message <- .rba_error_parser(response = response)
     if (isTRUE(skip_error)) {
       return(error_message)
     } else {
@@ -1653,58 +1680,99 @@
 
 #' Parse Appropriate, Server-aware Error Message
 #'
-#' In case of server response with status code other than 200, this function
-#'   will be called from .rba_api_call() and tries to parse the informative
-#'   error message which returned by the server as an error message.
+#' In case of a non-successful server response, this function is called from
+#'   .rba_api_call() and tries to extract the service's error message.
 #'
-#' This function will detect the responded server based on "ptn" values stored
-#'   in .rba_stg(). and if that particular servers error format was defined
-#'   under "err", the response will be parsed using "err_prs" argument and will
-#'   be converted to a character string using "err_prs2" value. (all in
-#'   .rba_stg()). if the server was not identified, or the server was not
-#'   recorded to have a defined error response, this function will only return
-#'   the translation of HTTP status code, using .rba_http_status().
+#' The responding service is detected using the "ptn" values in .rba_stg(). If
+#'   the status matches the service's "err_ptn", the response is parsed using
+#'   its "err_prs". If the status does not match, parsing fails, or parsing does
+#'   not produce one non-missing, non-empty character string, the raw response
+#'   is returned instead. If no response body is available, only that fact is
+#'   reported. Every error message begins with the service name, numeric HTTP
+#'   status, and its human-readable translation.
 #'
 #' @param response a formal api server response, with the class 'response'
 #'   from httr package.
-#' @param verbose Should the function generate informative messages?
-#'
 #' @return Character string that contains A server-specific error message or if
 #'   not, a human-understandable explanation of the returned HTTP status code.
 #'
 #' @family internal_response_parser
 #' @noRd
-.rba_error_parser <- function(response,
-                              verbose = FALSE) {
-  ## detect the database name
-  dbs <- vapply(
-    X = .rba_stg("db"),
-    FUN = function(db) {
-      grepl(.rba_stg(db, "ptn"), response$url, perl = TRUE, ignore.case = TRUE)
+.rba_error_parser <- function(response) {
+  # Identify the responding service.
+  services <- .rba_stg("db")
+  service <- services[vapply(
+    X = services,
+    FUN = function(service) {
+      grepl(
+        pattern = .rba_stg(service, "ptn"),
+        x = response$url,
+        perl = TRUE,
+        ignore.case = TRUE
+      )
     },
     FUN.VALUE = logical(1)
-  )
+  )]
 
-  db <- names(dbs)[dbs]
-  ## parse the error
-  if (length(db) == 1 &&
-      grepl(.rba_stg(db, "err_ptn"), response$status_code)) {
-    ## The API server returns an error string for this status code
-    error_message <- tryCatch({
-      sprintf(
-        "%s server returned \"%s\".\n  With this error message:\n  \"%s\"",
-        .rba_stg(db, "name"),
-        .rba_http_status(http_status = response$status_code, verbose = FALSE),
-        .rba_response_parser(response = response, parsers = .rba_stg(db, "err_prs"))
-      )},
-      error = function(e) {
-        .rba_http_status(http_status = response$status_code, verbose = verbose)
-      })
-  } else {
-    ## The API server returns only status code with no error string
-    error_message <- .rba_http_status(http_status = response$status_code, verbose = verbose)
+  is_valid_message <- function(x) {
+    is.character(x) &&
+      length(x) == 1L &&
+      !is.na(x) &&
+      nzchar(x)
   }
-  return(error_message)
+
+  # Try the service-specific parser for its known error statuses.
+  if (
+    grepl(
+      pattern = .rba_stg(service, "err_ptn"),
+      x = response$status_code
+    )
+  ) {
+    parsed_message <- tryCatch(
+      .rba_response_parser(
+        response = response,
+        parsers = .rba_stg(service, "err_prs")
+      ),
+      error = function(e) NULL
+    )
+  } else {
+    parsed_message <- NULL
+  }
+
+  # Use the raw response unless tailored parsing produced a message.
+  if (is_valid_message(parsed_message)) {
+    error_details <- sprintf(
+      "The server provided the following error message:\n%s",
+      parsed_message
+    )
+  } else {
+    raw_response <- tryCatch(
+      httr::content(response, as = "text", encoding = "UTF-8"),
+      error = function(e) NULL
+    )
+
+    if (is_valid_message(raw_response)) {
+      error_details <- sprintf(
+        "The response did not match the service's known error format. For reference, the raw server response was:\n%s",
+        raw_response
+      )
+    } else {
+      error_details <- "The server did not provide a response body."
+    }
+  }
+
+  # Prepend the common service and HTTP-status description.
+  return(
+    sprintf(
+      "%s returned an error response with %s.\n%s",
+      .rba_stg(service, "name"),
+      .rba_http_status(
+        http_status = response$status_code,
+        as_sentence = FALSE
+      ),
+      error_details
+    )
+  )
 }
 #### Miscellaneous ####
 #' Smarter messaging system

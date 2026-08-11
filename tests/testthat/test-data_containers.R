@@ -26,36 +26,62 @@ test_that(".rba_stg reports only supplied traversal arguments", {
 
 })
 
-test_that("an example synthetic 4xx error response parses correctly", {
+test_that(".rba_error_parser reports parsed, raw, and absent responses", {
 
-  response <- structure(
-    list(
-      url = paste0(
-        "https://www.pantherdb.org/services/",
-        "oai/pantherdb/geneinfo"
+  make_response <- function(status_code,
+                            content,
+                            content_type = "application/json") {
+    structure(
+      list(
+        url = "https://reactome.org/ContentService/data/query/not-an-id",
+        status_code = status_code,
+        headers = structure(
+          list(content_type),
+          names = "content-type"
+        ),
+        content = charToRaw(content)
       ),
-      status_code = 400L,
-      headers = structure(
-        list("application/json"),
-        names = "content-type"
-      ),
-      content = charToRaw(
-        '{"search":{"error":"Invalid gene identifier"}}'
-      )
-    ),
-    class = "response"
+      class = "response"
+    )
+  }
+
+  parsed_response <- make_response(
+    status_code = 404L,
+    content = '{"messages":["PARSED_MESSAGE_SENTINEL"]}'
   )
-
-  error_message <- .rba_error_parser(response)
-
+  parsed_message <- .rba_error_parser(parsed_response)
+  expect_type(parsed_message, "character")
+  expect_length(parsed_message, 1L)
   expect_match(
-    object = error_message,
-    regexp = "PANTHER server returned"
+    parsed_message,
+    "Reactome.*404.*Not Found",
+    ignore.case = TRUE
+  )
+  expect_match(
+    parsed_message,
+    "PARSED_MESSAGE_SENTINEL",
+    fixed = TRUE
   )
 
-  expect_match(
-    object = error_message,
-    regexp = "Invalid gene identifier"
+  raw_response <- make_response(
+    status_code = 503L,
+    content = "RAW_RESPONSE_SENTINEL",
+    content_type = "text/plain"
   )
+  raw_message <- .rba_error_parser(raw_response)
+  expect_match(
+    raw_message,
+    "RAW_RESPONSE_SENTINEL",
+    fixed = TRUE
+  )
+
+  absent_response <- make_response(
+    status_code = 404L,
+    content = ""
+  )
+  absent_message <- .rba_error_parser(absent_response)
+  absent_lines <- strsplit(absent_message, "\n", fixed = TRUE)[[1]]
+
+  expect_true(length(absent_lines) >= 2L && all(nzchar(absent_lines)))
 
 })

@@ -26,7 +26,12 @@
     if (test_result == 200) {
       return(TRUE)
     } else {
-      return(.rba_http_status(test_result, verbose = FALSE))
+      return(
+        .rba_http_status(
+          http_status = test_result,
+          as_sentence = FALSE
+        )
+      )
     }
   } else {
     return(test_result)

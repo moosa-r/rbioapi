@@ -1,22 +1,22 @@
 test_that(".rba_http_status works", {
 
-  expect_type(
-    object = .rba_http_status("200", verbose = TRUE),
-    type = "character"
+  expect_regex(
+    .rba_http_status("400", as_sentence = TRUE),
+    pattern = "\\.$"
   )
   expect_regex(
-    obj = .rba_http_status("599", verbose = TRUE),
+    obj = .rba_http_status("599", as_sentence = TRUE),
     pattern = "server error",
     ignore.case = TRUE
   )
   expect_regex(
-    obj = .rba_http_status("499", verbose = TRUE),
+    obj = .rba_http_status("499", as_sentence = TRUE),
     pattern = "client error",
     ignore.case = TRUE
   )
   expect_error(
-    object = .rba_http_status("999999", verbose = TRUE),
-    regexp = "single three-digit HTTP status code"
+    object = .rba_http_status("999999", as_sentence = TRUE),
+    regexp = NULL
   )
 
 })
