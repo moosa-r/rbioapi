@@ -2,12 +2,13 @@
 % Please edit documentation in R/uniprot_proteins.R
 \name{rba_uniprot_rna_edit}
 \alias{rba_uniprot_rna_edit}
-\title{Retrieve Epitope by Accession}
+\title{Retrieve UniProt RNA-Editing Annotations by Accession}
 \usage{
 rba_uniprot_rna_edit(accession, ...)
 }
 \arguments{
-\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+\item{accession}{Character:
+\href{https://www.uniprot.org/help/accession_numbers}{
 UniProtKB primary or secondary accession}.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
@@ -25,7 +26,7 @@ Use this function to retrieve
 }
 \section{Corresponding API Resources}{
 
- "GET https://www.ebi.ac.uk/proteins/api/rna-edit/\{accession\}"
+ "GET https://www.ebi.ac.uk/proteins/api/rna-editing/\{accession\}"
 }
 
 \examples{
@@ -34,9 +35,24 @@ Use this function to retrieve
 }
 
 }
-\seealso{
-Other "UniProt - Epitopes":
-\code{\link[=rba_uniprot_epitope]{rba_uniprot_epitope()}},
-\code{\link[=rba_uniprot_epitope_search]{rba_uniprot_epitope_search()}}
+\references{
+\itemize{
+  \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
+  https://doi.org/10.1093/nar/gkae1010
+  \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237
+  \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+  Documentation}
+  \item \href{https://www.uniprot.org/help/publications}{Citations note
+  on UniProt website}
+  }
 }
-\concept{"UniProt - Epitopes"}
+\seealso{
+Other "UniProt - RNA Editing":
+\code{\link[=rba_uniprot_rna_edit_search]{rba_uniprot_rna_edit_search()}}
+}
+\concept{"UniProt - RNA Editing"}

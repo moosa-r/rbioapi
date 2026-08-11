@@ -2,7 +2,7 @@
 % Please edit documentation in R/uniprot_proteins.R
 \name{rba_uniprot_variation}
 \alias{rba_uniprot_variation}
-\title{Get natural variants in UniProt by NIH-NCBI SNP database identifier}
+\title{Retrieve UniProt Natural Variants by Identifier}
 \usage{
 rba_uniprot_variation(
   id,
@@ -17,36 +17,41 @@ rba_uniprot_variation(
 )
 }
 \arguments{
-\item{id}{An ID which can be either a
+\item{id}{Character: A single identifier: either a
 \href{https://www.uniprot.org/help/accession_numbers}{UniProt primary or
-secondary accession}, NIH-NCBI dbSNP ID or HGVS expression.
-\href{https://www.ncbi.nlm.nih.gov/snp/}{NIH-NCBI dbSNP id} or
-\href{https://varnomen.hgvs.org/}{HGVS Expression}.}
+secondary accession}, an \href{https://www.ncbi.nlm.nih.gov/snp/}{NIH-NCBI
+dbSNP ID}, or an \href{https://varnomen.hgvs.org/}{HGVS expression}.}
 
-\item{id_type}{The type of supplied ID argument, one of:
+\item{id_type}{Character: The type of supplied ID argument, one of:
 \href{https://www.uniprot.org/help/accession_numbers}{"uniprot"},
 \href{https://www.ncbi.nlm.nih.gov/snp/}{"dbsnp"} or
-\href{https://varnomen.hgvs.org/}{"hgvs"}}
+\href{https://varnomen.hgvs.org/}{"hgvs"}.}
 
-\item{source_type}{Variation's source type. You can choose up to two of:
-"UniProt", "large scale study" and/or "mixed".}
+\item{source_type}{Character: (optional) Variation's source type. You
+can choose up to two of:
+"uniprot", "large scale study", "mixed", "clinvar", "nci-tcga",
+"cosmic curated", "ensembl", "gnomad", "topmed", or "exac".}
 
-\item{consequence_type}{Variation's consequence type. You can choose up to
+\item{consequence_type}{Character: (optional) Variation's consequence
+type. You can choose up to
 two of: "missense", "stop gained" or "stop lost".}
 
-\item{wild_type}{Wild type amino acid. Accepted values are IUPAC
-single-letter amino acid (e.g. D for    Aspartic acid) and "*" for stop
-codon. You can supply up to 20 values.}
+\item{wild_type}{Character: (optional) Wild-type amino acid. Accepted
+values are IUPAC
+single-letter amino acid codes and "*" for a stop codon. You can supply up
+to 20 values.}
 
-\item{alternative_sequence}{Alternative amino acid. Accepted values are IUPAC
-single-letter amino acid (e.g. D for    Aspartic acid) and "*" for stop codon
-and "-" for deletion. You can supply up to 20 values.}
+\item{alternative_sequence}{Character: (optional) Alternative amino
+acid. Accepted values are
+IUPAC single-letter amino acid codes, "*" for a stop codon, and "-" for a
+deletion. You can supply up to 20 values.}
 
-\item{location}{A valid amino acid range (e.g. 10-25) within the sequence
-range where the variation occurs. You can supply up to 20 values.}
+\item{location}{Character: (optional) A valid amino acid range (e.g. 10-25)
+within the sequence
+where the variation occurs.}
 
-\item{save_peff}{Logical or Character:\itemize{
-\item FALSE: (default) Do not save PEFF file, just return as a list object.
+\item{save_peff}{Logical or Character: (default = \code{FALSE}) \itemize{
+\item FALSE: Return the parsed JSON response.
 \item TRUE: Save as PEFF file to an automatically-generated path.
 \item Character string: A valid file path to save the PEFF file.}}
 
@@ -54,12 +59,15 @@ range where the variation occurs. You can supply up to 20 values.}
 arguments manual for more information on available options.}
 }
 \value{
-A list where each element is a list that corresponds to a UniProt
-  protein entry.
+If \code{save_peff = FALSE}, a list. For \code{id_type = "uniprot"},
+  it represents the requested entry; for \code{"dbsnp"} or \code{"hgvs"},
+  each element represents a matching entry and is named by accession when
+  available. If PEFF output is requested, the response is written to disk
+  and returned as a character string.
 }
 \description{
-Retrieve natural variant annotations of a sequence using UniProt protein
-  accession, dbSNP or HGVS expression.
+Retrieve natural variant annotations by UniProt accession, dbSNP identifier,
+  or HGVS expression.
 }
 \section{Corresponding API Resources}{
 
@@ -82,14 +90,14 @@ rba_uniprot_variation(id = "O43593", id_type = "uniprot")
 }
 \references{
 \itemize{
-  \item The UniProt Consortium , UniProt: the Universal Protein
-  Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+  \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
-  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated protein
-  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237
   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
   Documentation}
   \item \href{https://www.uniprot.org/help/publications}{Citations note

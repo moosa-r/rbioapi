@@ -18,42 +18,48 @@ rba_uniprot_features_search(
 )
 }
 \arguments{
-\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+\item{accession}{Character: (optional)
+\href{https://www.uniprot.org/help/accession_numbers}{
 UniProtKB primary or secondary accession}(s). You can supply up to 100
 accession numbers.}
 
-\item{gene}{\href{https://www.uniprot.org/help/gene_name}{UniProt gene
-name(s)}. You can supply up to 20 gene names. e.g. if you supply
+\item{gene}{Character: (optional)
+\href{https://www.uniprot.org/help/gene_name}{UniProt gene
+name(s)}. You can supply up to 20 gene names. For example, if you supply
 "CD40", "CD40 ligand" will also be included.}
 
-\item{exact_gene}{\href{https://www.uniprot.org/help/gene_name}{UniProt
-exact gene name(s)}. You can supply up to 20 exact gene names. e.g.
+\item{exact_gene}{Character: (optional)
+\href{https://www.uniprot.org/help/gene_name}{UniProt
+exact gene name(s)}. You can supply up to 20 exact gene names. For example,
 if you supply "CD40", "CD40 ligand" will not be included in the results.}
 
-\item{protein}{\href{https://www.uniprot.org/help/protein_names}{UniProt
-protein name}}
+\item{protein}{Character: (optional)
+\href{https://www.uniprot.org/help/protein_names}{UniProt
+protein name}.}
 
-\item{reviewed}{Logical: If TRUE, only return
-"UniProtKB/Swiss-Prot" (reviewed) entries; If FALSE, only return TrEMBL
-(un-reviewed) entries.}
+\item{reviewed}{Logical: (optional) If \code{TRUE}, return only reviewed
+Swiss-Prot entries. If \code{FALSE}, return only unreviewed TrEMBL entries.}
 
-\item{organism}{\href{https://www.uniprot.org/taxonomy/}{Organism name}.}
+\item{organism}{Character: (optional) Organism name.}
 
-\item{taxid}{NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+\item{taxid}{Numeric: (optional) NIH-NCBI
+\href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
 You can supply up to 20 taxon IDs.}
 
-\item{categories}{\href{https://www.uniprot.org/help/sequence_annotation}{
-Sequence annotation (Features)} categories (subsection). accepted values
+\item{categories}{Character: (optional)
+\href{https://www.uniprot.org/help/sequence_annotation}{
+Sequence annotation (features)} categories. Accepted values
 are: "MOLECULE_PROCESSING", "TOPOLOGY", "SEQUENCE_INFORMATION",
 "STRUCTURAL", "DOMAINS_AND_SITES", "PTM", "VARIANTS" and/or "MUTAGENESIS".
-You can supply up to 8 categories.}
+You can supply up to 20 categories.}
 
-\item{types}{\href{https://www.uniprot.org/help/sequence_annotation}{
-Sequence annotation (Features)} types. accepted values
+\item{types}{Character: (optional)
+\href{https://www.uniprot.org/help/sequence_annotation}{
+Sequence annotation (features)} types. Accepted values
 are: "INIT_MET", "SIGNAL", "PROPEP", "TRANSIT", "CHAIN", "PEPTIDE",
-"TOPO_DOM", "TRANSMEM", "DOMAIN", "REPEAT", "CA_BIND", "ZN_FING",
-"DNA_BIND", "NP_BIND", "REGION", "COILED", "MOTIF", "COMPBIAS",
-"ACT_SITE", "METAL", "BINDING", "SITE", "NON_STD", "MOD_RES", "LIPID",
+"TOPO_DOM", "TRANSMEM", "DOMAIN", "REPEAT", "ZN_FING", "DNA_BIND",
+"REGION", "COILED", "MOTIF", "COMPBIAS", "ACT_SITE", "BINDING",
+"SITE", "NON_STD", "MOD_RES", "LIPID",
 "CARBOHYD", "DISULFID", "CROSSLNK", "VAR_SEQ", "VARIANT", "MUTAGEN",
 "UNSURE", "CONFLICT", "NON_CONS", "NON_TER", "HELIX", "TURN", "STRAND"
 and/or "INTRAMEM". You can supply up to 20 types.}
@@ -62,26 +68,20 @@ and/or "INTRAMEM". You can supply up to 20 types.}
 arguments manual for more information on available options.}
 }
 \value{
-List where each element corresponds to one UniProt entity returned
-  by your search query. The element itself is a sub-list containing all
-  information that UniProt has about that entity.
+A list named by UniProt accession. Each element contains the entry
+  metadata, sequence, and matching annotations in its \code{features}
+  element.
 }
 \description{
-UniProt maintains \href{https://www.uniprot.org/help/sequence_annotation}{
-  sequence annotations (features)} that describe regions
-  in the protein sequence. Using this function, you can search and
-  retrieve UniProt proteins' sequence annotations (features). you may also
-  refine your search query with variety of modifiers.
+\href{https://www.uniprot.org/help/sequence_annotation}{UniProt sequence
+  features} describe biologically relevant sites and regions within protein
+  sequences. Search and retrieve these annotations using protein, gene,
+  organism, and annotation criteria.
 }
 \details{
-Note that this is a search function. Thus, you are not required to fill
-  every argument; You may use whatever combinations of arguments you see
-  fit for your query.
-  \cr UniProt Entries are grouped in two sections:\enumerate{
-  \item Reviewed(Swiss-Prot): Manually annotated records with information
-  extracted from literature and curator-evaluated computational analysis.
-  \item Unreviewed (TrEMBL): Computationally analyzed records that await
-  full manual annotation.}
+At least one of \code{accession}, \code{gene}, \code{exact_gene},
+  \code{protein}, \code{organism}, or \code{taxid} is required. The
+  remaining arguments refine those primary criteria.
 }
 \section{Corresponding API Resources}{
 
@@ -112,14 +112,14 @@ rba_uniprot_features_search(accession = "Q99616", types = "DISULFID")
 }
 \references{
 \itemize{
-  \item The UniProt Consortium , UniProt: the Universal Protein
-  Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+  \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
-  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated protein
-  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237
   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
   Documentation}
   \item \href{https://www.uniprot.org/help/publications}{Citations note

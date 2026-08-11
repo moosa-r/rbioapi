@@ -1,23 +1,42 @@
-#' Name UniProt search hits elements
+#' Name UniProt search-result elements
 #'
-#' Every search hit in uniprot has a character element within it, named
-#'   "accession". this function should be used as the second response
-#'   parser in the *_search functions to set the name each search hit to
-#'   it's accession
+#' Name each result with a scalar character identifier, when every result has
+#'   the requested field. If the response does not have the expected
+#'   structure, return it unchanged.
 #'
-#' @param x object to be parsed
+#' @param x List: Parsed UniProt response.
+#' @param field Character: Name of the identifier field.
 #'
-#' @return a list with the same structure of the input, only named.
+#' @return The input object, named when possible.
 #' @noRd
-.rba_uniprot_search_namer <- function(x) {
-  x_names <- try(expr =  vapply(X = x,
-                                FUN = function(x) {
-                                  x$accession
-                                },
-                                FUN.VALUE = character(1)),
-                 silent = TRUE)
+.rba_uniprot_search_namer <- function(x, field = "accession") {
+  if (!is.list(x) || length(x) == 0L) {
+    return(x)
+  }
 
-  if (length(x) == length(x_names)) {
+  x_names <- vapply(
+    X = x,
+    FUN = function(search_hit) {
+      if (is.list(search_hit)) {
+        identifier <- search_hit[[field]]
+      } else {
+        identifier <- NULL
+      }
+
+      if (
+        is.character(identifier) &&
+        length(identifier) == 1L &&
+        !is.na(identifier) &&
+        nzchar(identifier)
+      ) {
+        return(identifier)
+      }
+      return(NA_character_)
+    },
+    FUN.VALUE = character(1)
+  )
+
+  if (!anyNA(x_names)) {
     names(x) <- x_names
   }
   return(x)
@@ -27,16 +46,16 @@
 
 #' Search UniProt entries
 #'
-#' Using this function, you can search and retrieve UniProt Knowledge-base
-#'   (UniProtKB) protein entries using variety of options. You may also
-#'   refine your search with modifiers such as sequence length, review status
-#'   etc. See "Arguments" section" for more information.
+#' Search and retrieve UniProt Knowledgebase (UniProtKB) protein entries by
+#'   accession, annotation, gene, organism, sequence properties, or other
+#'   supported criteria.
 #'
-#'   Note that this is a search function. Thus, you are not required to fill
-#'   every argument; You may use whatever combinations of arguments you see
-#'   fit for your query.s
-#'   \cr UniProt Entries are grouped in two sections:\enumerate{
-#'   \item Reviewed(Swiss-Prot): Manually annotated records with information
+#' At least one primary search criterion is required. The value
+#'   \code{isoform = 1} can be used by itself; \code{reviewed} and the other
+#'   \code{isoform} values only refine another criterion.
+#'
+#' UniProtKB entries are grouped into two sections:\enumerate{
+#'   \item Reviewed (Swiss-Prot): Manually annotated records with information
 #'   extracted from literature and curator-evaluated computational analysis.
 #'   \item Unreviewed (TrEMBL): Computationally analyzed records that await
 #'   full manual annotation.}
@@ -44,60 +63,72 @@
 #' @section Corresponding API Resources:
 #'  "GET https://www.ebi.ac.uk/proteins/api/proteins"
 #'
-#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
+#' @param accession Character: (optional)
+#'   \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}(s). You can supply up to 100
 #'   accession numbers.
-#' @param reviewed Logical: If TRUE, only return
-#'   "UniProtKB/Swiss-Prot" (reviewed) entries; If FALSE, only return TrEMBL
-#'   (un-reviewed) entries.
-#' @param isoform Numeric: you have three options:\itemize{
-#'   \item 0: Exclude isoforms.
-#'   \item 1: Return isoforms only.
-#'   \item 2: Return both.}
-#'   see: \href{https://www.uniprot.org/help/alternative_products}{Alternative
-#'   products}
-#' @param go_term Limit the search to entries associated with your supplied GO
+#' @param reviewed Logical: (optional) If \code{TRUE}, return only reviewed
+#'   Swiss-Prot entries. If \code{FALSE}, return only unreviewed TrEMBL
+#'   entries. This is a refining filter and cannot be the sole search
+#'   criterion.
+#' @param isoform Numeric: (optional) One of:\itemize{
+#'   \item 0: Exclude isoforms; this only refines another criterion.
+#'   \item 1: Return isoforms only; this can be a stand-alone criterion.
+#'   \item 2: Return canonical entries and isoforms; this only refines another
+#'   criterion.}
+#'   See \href{https://www.uniprot.org/help/alternative_products}{alternative
+#'   products}.
+#' @param go_term Character: (optional) Limit the search to entries associated
+#'   with your
+#'   supplied GO
 #'   (\href{https://www.uniprot.org/help/gene_ontology}{Gene Ontology}) term.
-#'   You can supply Either GO ID or a character string -partially or fully-
-#'   matching the term. e.g. "GO:0001776" or "leukocyte homeostasis". if You
+#'   Supply either a GO ID or a character string partially or fully matching
+#'   the term, e.g. "GO:0001776" or "leukocyte homeostasis". If you
 #'   supply "leukocyte", any term containing that word will be included,
-#'   e.g "leukocyte chemotaxis", "leukocyte activation".
-#' @param keyword Limit the search to entries that contain your supplied
-#'   keyword. see: \href{https://www.uniprot.org/keywords/}{UniProt Keywords}
-#' @param ec \href{https://enzyme.expasy.org/}{EC (Enzyme Commission) number(s)}.
+#'   e.g. "leukocyte chemotaxis" or "leukocyte activation".
+#' @param keyword Character: (optional) Limit the search to entries that contain
+#'   your
+#'   supplied keyword. See
+#'   \href{https://www.uniprot.org/keywords/}{UniProt Keywords}.
+#' @param ec Character: (optional)
+#'   \href{https://enzyme.expasy.org/}{EC (Enzyme Commission) number(s)}.
 #'   You can supply up to 20 EC numbers.
-#' @param gene \href{https://www.uniprot.org/help/gene_name}{UniProt gene
-#'   name(s)}. You can supply up to 20 gene names. e.g. if you supply
-#'   "CD40", "CD40 ligand" will also be included.
-#' @param exact_gene \href{https://www.uniprot.org/help/gene_name}{UniProt
-#'   exact gene name(s)}. You can supply up to 20 exact gene names. e.g.
-#'   if you supply "CD40", "CD40 ligand" will not be included in the results.
-#' @param protein \href{https://www.uniprot.org/help/protein_names}{UniProt
-#'   protein name}
-#' @param organism \href{https://www.uniprot.org/taxonomy/}{Organism name}.
-#' @param taxid NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+#' @param gene Character: (optional)
+#'   \href{https://www.uniprot.org/help/gene_name}{UniProt gene name(s)}.
+#'   You can supply up to 20 gene names. For example, if you supply "CD40",
+#'   "CD40 ligand" will also be included.
+#' @param exact_gene Character: (optional)
+#'   \href{https://www.uniprot.org/help/gene_name}{UniProt exact gene name(s)}.
+#'   You can supply up to 20 exact gene names. For example, if you supply
+#'   "CD40", "CD40 ligand" will not be included in the results.
+#' @param protein Character: (optional)
+#'   \href{https://www.uniprot.org/help/protein_names}{UniProt protein name}.
+#' @param organism Character: (optional) Organism name.
+#' @param taxid Numeric: (optional) NIH-NCBI
+#'   \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
 #'   You can supply up to 20 taxon IDs.
-#' @param pubmed Entries which \href{https://www.uniprot.org/citations/}{cite
-#'   to} the article with your supplied PubMed ID.
-#' @param seq_length An exact sequence length (e.g. 150) or a range of sequence
-#'   lengths (e.g. "130-158").
-#' @param md5 Sequence md5 value.
+#' @param pubmed Character or Numeric: (optional) PubMed ID(s) cited by the
+#'   returned entries. You can supply up to 20 IDs.
+#' @param seq_length Character or Numeric: (optional) An exact sequence length
+#'   (e.g. 150)
+#'   or a range of sequence lengths (e.g. "130-158").
+#' @param md5 Character: (optional) A 32-character hexadecimal sequence MD5
+#'   checksum.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A List where each element corresponds to one UniProt entity returned
-#'   by your search query. The element itself is a sub-list containing all
-#'   information that UniProt has about that entity.
+#' @return A list named by UniProt accession. Each element contains one
+#'   matching UniProtKB entry.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium , UniProt: the Universal Protein
-#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
 #'   https://doi.org/10.1093/nar/gkae1010
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
 #'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
 #'   Documentation}
 #'   \item \href{https://www.uniprot.org/help/publications}{Citations note
@@ -121,7 +152,9 @@
 #' rba_uniprot_proteins_search(gene = "cd40",  reviewed = TRUE, isoform = 1)
 #' }
 #' \donttest{
-#' rba_uniprot_proteins_search(keyword = "Inhibition of host chemokines by virus")
+#' rba_uniprot_proteins_search(
+#'   keyword = "Inhibition of host chemokines by virus"
+#' )
 #' }
 #' \donttest{
 #' rba_uniprot_proteins_search(keyword = "chemokines")
@@ -151,19 +184,66 @@ rba_uniprot_proteins_search <- function(accession = NULL,
   .rba_args(
     cons = list(
       list(arg = "accession", class = "character", max_len = 100),
-      list(arg = "reviewed", class = "logical"),
-      list(arg = "isoform", class = "numeric", val = c(0, 1, 2)),
-      list(arg = "go_term", class = "character"),
-      list(arg = "keyword", class = "character"),
+      list(arg = "reviewed", class = "logical", len = 1L),
+      list(
+        arg = "isoform", class = c("numeric", "integer"), len = 1L,
+        val = c(0, 1, 2)
+      ),
+      list(arg = "go_term", class = "character", len = 1L),
+      list(arg = "keyword", class = "character", len = 1L),
       list(arg = "ec", class = "character", max_len = 20),
       list(arg = "gene", class = "character", max_len = 20),
       list(arg = "exact_gene", class = "character", max_len = 20),
-      list(arg = "protein", class = "character"),
-      list(arg = "organism", class = "character"),
-      list(arg = "taxid", class = "numeric", max_len = 20),
-      list(arg = "pubmed", class = "character", max_len = 20),
-      list(arg = "seq_length", class = c("numeric", "character")),
-      list(arg = "md5", class = "character")
+      list(arg = "protein", class = "character", len = 1L),
+      list(arg = "organism", class = "character", len = 1L),
+      list(
+        arg = "taxid", class = c("numeric", "integer"), max_len = 20,
+        min_val = 1
+      ),
+      list(
+        arg = "pubmed", class = c("character", "numeric", "integer"),
+        max_len = 20, regex = "^[1-9]\\d*$"
+      ),
+      list(
+        arg = "seq_length", class = c("character", "numeric", "integer"),
+        len = 1L, regex = "^[1-9]\\d*(?:-[1-9]\\d*)?$"
+      ),
+      list(
+        arg = "md5", class = "character", len = 1L,
+        regex = "^[[:xdigit:]]{32}$"
+      )
+    ),
+    cond = list(
+      list(
+        quote(
+          all(
+            is.null(accession), is.null(go_term),
+            is.null(keyword), is.null(ec), is.null(gene),
+            is.null(exact_gene), is.null(protein), is.null(organism),
+            is.null(taxid), is.null(pubmed), is.null(seq_length),
+            is.null(md5)
+          ) &&
+            (is.null(isoform) || isoform != 1)
+        ),
+        paste0(
+          "Supply at least one primary search criterion: accession, go_term, ",
+          "keyword, ec, gene, exact_gene, protein, organism, taxid, pubmed, ",
+          "seq_length, md5, or isoform = 1. `reviewed`, `isoform = 0`, and ",
+          "`isoform = 2` only refine another criterion."
+        )
+      ),
+      list(
+        quote(!is.null(taxid) && any(!is.finite(taxid) | taxid %% 1 != 0)),
+        "`taxid` values should be finite, positive whole numbers."
+      ),
+      list(
+        quote(
+          is.character(seq_length) &&
+            grepl("-", seq_length, fixed = TRUE) &&
+            diff(as.numeric(strsplit(seq_length, "-", fixed = TRUE)[[1]])) < 0
+        ),
+        "The start of a `seq_length` range cannot exceed its end."
+      )
     )
   )
 
@@ -181,12 +261,15 @@ rba_uniprot_proteins_search <- function(accession = NULL,
     list("keywords", !is.null(keyword), keyword),
     list("ec", !is.null(ec), paste0(ec, collapse = ",")),
     list("gene", !is.null(gene), paste0(gene, collapse = ",")),
-    list("exact_gene", !is.null(exact_gene), paste0(exact_gene, collapse = ",")),
+    list(
+      "exact_gene", !is.null(exact_gene),
+      paste0(exact_gene, collapse = ",")
+    ),
     list("protein", !is.null(protein), protein),
     list("organism", !is.null(organism), organism),
     list("taxid", !is.null(taxid), paste0(taxid, collapse = ",")),
     list("pubmed", !is.null(pubmed), paste0(pubmed, collapse = ",")),
-    list("seq_length", !is.null(seq_length), seq_length),
+    list("seqLength", !is.null(seq_length), seq_length),
     list("md5", !is.null(md5), md5)
   )
 
@@ -210,40 +293,39 @@ rba_uniprot_proteins_search <- function(accession = NULL,
 
 #' Get UniProt entry by accession
 #'
-#' Use this function to retrieve a UniProt Entry by it's UniProt accession.
-#'   You can also use "isoform" or "interaction" arguments to retrieve
-#'   isoforms or interactor proteins of that entry. Note that in one function
-#'   call you can only set none or only one of "isoform" or "interaction" as
-#'   TRUE, not both of them.
+#' Retrieve a UniProtKB entry by accession. Alternatively, retrieve its
+#'   isoforms or interaction partners by setting \code{isoforms = TRUE} or
+#'   \code{interaction = TRUE}. These two modes are mutually exclusive.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://ebi.ac.uk/proteins/api/proteins/\{accession\}"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/proteins/interaction/\{accession\}"
-#'  \cr "GET https://ebi.ac.uk/proteins/api/proteins/\{accession\}/isoforms"
+#'  "GET https://www.ebi.ac.uk/proteins/api/proteins/\{accession\}"
+#'  \cr "GET https://www.ebi.ac.uk/proteins/api/proteins/interaction/\{accession\}"
+#'  \cr "GET https://www.ebi.ac.uk/proteins/api/proteins/\{accession\}/isoforms"
 #'
-#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
+#' @param accession Character:
+#'   \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}.
-#' @param interaction Logical: (default = FALSE) Only retrieve
+#' @param interaction Logical: (default = \code{FALSE}) Retrieve
 #'   \href{https://www.uniprot.org/help/interaction_section}{interaction}
-#'   information of your supplied UniProt entity?
-#' @param isoforms Logical: (default = FALSE) Only retrieve
+#'   partners instead of the entry itself?
+#' @param isoforms Logical: (default = \code{FALSE}) Retrieve
 #'   \href{https://www.uniprot.org/help/alternative_products}{isoforms} of your
-#'   supplied UniProt entity?
+#'   supplied UniProt entry instead of the canonical entry itself?
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A list that contains UniProt protein informations with your
-#'   supplied accession.
+#' @return A list containing the requested UniProtKB entry. Isoform and
+#'   interaction results are lists named by accession.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium , UniProt: the Universal Protein
-#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
 #'   https://doi.org/10.1093/nar/gkae1010
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
 #'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
 #'   Documentation}
 #'   \item \href{https://www.uniprot.org/help/publications}{Citations note
@@ -273,25 +355,33 @@ rba_uniprot_proteins <- function(accession,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "accession", class = "character"),
-      list(arg = "interaction", class = "logical"),
-      list(arg = "isoforms", class = "logical")
+      list(arg = "accession", class = "character", len = 1L),
+      list(
+        arg = "interaction", class = "logical", len = 1L,
+        no_null = TRUE
+      ),
+      list(
+        arg = "isoforms", class = "logical", len = 1L,
+        no_null = TRUE
+      )
     ),
     cond = list(
       list(
-        quote(sum(interaction, isoforms) == 2),
-        "You can only set only one of interaction or isoform as TRUE in one function call.")
+        quote(isTRUE(interaction) && isTRUE(isoforms)),
+        "Only one of `interaction` and `isoforms` can be TRUE."
+      )
     )
   )
 
   .msg(
-    "Retrieving %sUniProt Entity with accession number %s.",
+    "Retrieving %sUniProt entry with accession %s.",
     if (isTRUE(interaction)) {
-      "Interactions of  "
+      "interactions for "
     } else if (isTRUE(isoforms)) {
       "isoforms of "
     } else {
-      ""},
+      ""
+    },
     accession
   )
 
@@ -300,17 +390,18 @@ rba_uniprot_proteins <- function(accession,
     "%s%s/%s",
     .rba_stg("uniprot", "pth"),
     ifelse(isTRUE(interaction), yes = "proteins/interaction", no = "proteins"),
-    accession)
+    accession
+  )
 
   if (isTRUE(isoforms)) {
     path_input <- paste0(path_input, "/isoforms")
   }
 
-  parser_input <- ifelse(
-    isTRUE(interaction) | isTRUE(isoforms),
-    yes = "json->list",
-    no = "json->list_simp"
-  )
+  if (isTRUE(interaction) || isTRUE(isoforms)) {
+    parser_input <- list("json->list", .rba_uniprot_search_namer)
+  } else {
+    parser_input <- "json->list_simp"
+  }
 
   input_call <- .rba_httr(
     httr = "get",
@@ -328,40 +419,39 @@ rba_uniprot_proteins <- function(accession,
 
 #' Get UniProt Entry by UniProt Cross-Reference Database and ID
 #'
-#' \href{https://www.uniprot.org/database/}{UniProt Cross-Reference} links
-#'   protein Entities with cross-reference (external) databases. Using this
-#'   function, you can retrieve a UniProt entity using external database name
-#'   and protein ID in that database.
+#' UniProt cross-references connect protein entries with identifiers in
+#'   \href{https://www.uniprot.org/database/}{external databases}. Retrieve
+#'   UniProtKB entries associated with an identifier from one of these
+#'   databases.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://www.ebi.ac.uk/proteins/api/proteins/\{dbtype\}:\{dbid\}"
 #'
-#' @param db_id The protein ID in the cross-reference (external) database.
-#' @param db_name \href{https://www.uniprot.org/database/}{cross-reference}
-#'   (external database) name.
-#' @param reviewed Logical: (Optional) If TRUE, only returns
-#'   "UniProtKB/Swiss-Prot" (reviewed) entries; If FALSE, only returns TrEMBL
-#'   (un-reviewed) entries.
-#' @param isoform Numeric: (Optional) you have two options:\itemize{
+#' @param db_id Character: Protein identifier in the cross-reference database.
+#' @param db_name Character:
+#'   \href{https://www.uniprot.org/database/}{Cross-reference database name}.
+#' @param reviewed Logical: (optional) If \code{TRUE}, return only reviewed
+#'   Swiss-Prot entries. If \code{FALSE}, return only unreviewed TrEMBL entries.
+#' @param isoform Numeric: (optional) One of:\itemize{
 #'   \item 0: Exclude isoforms.
 #'   \item 1: Return isoforms only.}
-#'   see: \href{https://www.uniprot.org/help/alternative_products}{Alternative
-#'   products}
+#'   See \href{https://www.uniprot.org/help/alternative_products}{alternative
+#'   products}.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return List which each element is a UniProt entity that correspond to
-#'   your supplied cross-reference database name and ID.
+#' @return A list named by UniProt accession. Each element is a UniProtKB entry
+#'   corresponding to the supplied cross-reference identifier.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium , UniProt: the Universal Protein
-#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
 #'   https://doi.org/10.1093/nar/gkae1010
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
 #'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
 #'   Documentation}
 #'   \item \href{https://www.uniprot.org/help/publications}{Citations note
@@ -392,15 +482,13 @@ rba_uniprot_proteins_crossref <- function(db_id,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "db_name",
-           class = "character"),
-      list(arg = "db_id",
-           class = "character"),
-      list(arg = "reviewed",
-           class = "logical"),
-      list(arg = "isoform",
-           class = "numeric",
-           val = c(0, 1, 2))
+      list(arg = "db_name", class = "character", len = 1L),
+      list(arg = "db_id", class = "character", len = 1L),
+      list(arg = "reviewed", class = "logical", len = 1L),
+      list(
+        arg = "isoform", class = c("numeric", "integer"), len = 1L,
+        val = c(0, 1)
+      )
     )
   )
 
@@ -420,10 +508,12 @@ rba_uniprot_proteins_crossref <- function(db_id,
   input_call <- .rba_httr(
     httr = "get",
     url = .rba_stg("uniprot", "url"),
-    path = sprintf("%sproteins/%s:%s", .rba_stg("uniprot", "pth"), db_name, db_id),
+    path = sprintf(
+      "%sproteins/%s:%s", .rba_stg("uniprot", "pth"), db_name, db_id
+    ),
     query = call_query,
     accept = "application/json",
-    parser = "json->list",
+    parser = list("json->list", .rba_uniprot_search_namer),
     save_to = .rba_file("uniprot_proteins_crossref.json")
   )
 
@@ -436,71 +526,71 @@ rba_uniprot_proteins_crossref <- function(db_id,
 
 #' Search UniProt protein sequence features
 #'
-#' UniProt maintains \href{https://www.uniprot.org/help/sequence_annotation}{
-#'   sequence annotations (features)} that describe regions
-#'   in the protein sequence. Using this function, you can search and
-#'   retrieve UniProt proteins' sequence annotations (features). you may also
-#'   refine your search query with variety of modifiers.
+#' \href{https://www.uniprot.org/help/sequence_annotation}{UniProt sequence
+#'   features} describe biologically relevant sites and regions within protein
+#'   sequences. Search and retrieve these annotations using protein, gene,
+#'   organism, and annotation criteria.
 #'
-#'   Note that this is a search function. Thus, you are not required to fill
-#'   every argument; You may use whatever combinations of arguments you see
-#'   fit for your query.
-#'   \cr UniProt Entries are grouped in two sections:\enumerate{
-#'   \item Reviewed(Swiss-Prot): Manually annotated records with information
-#'   extracted from literature and curator-evaluated computational analysis.
-#'   \item Unreviewed (TrEMBL): Computationally analyzed records that await
-#'   full manual annotation.}
+#' At least one of \code{accession}, \code{gene}, \code{exact_gene},
+#'   \code{protein}, \code{organism}, or \code{taxid} is required. The
+#'   remaining arguments refine those primary criteria.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://www.ebi.ac.uk/proteins/api/features"
 #'
-#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
+#' @param accession Character: (optional)
+#'   \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}(s). You can supply up to 100
 #'   accession numbers.
-#' @param gene \href{https://www.uniprot.org/help/gene_name}{UniProt gene
-#'   name(s)}. You can supply up to 20 gene names. e.g. if you supply
+#' @param gene Character: (optional)
+#'   \href{https://www.uniprot.org/help/gene_name}{UniProt gene
+#'   name(s)}. You can supply up to 20 gene names. For example, if you supply
 #'   "CD40", "CD40 ligand" will also be included.
-#' @param exact_gene \href{https://www.uniprot.org/help/gene_name}{UniProt
-#'   exact gene name(s)}. You can supply up to 20 exact gene names. e.g.
+#' @param exact_gene Character: (optional)
+#'   \href{https://www.uniprot.org/help/gene_name}{UniProt
+#'   exact gene name(s)}. You can supply up to 20 exact gene names. For example,
 #'   if you supply "CD40", "CD40 ligand" will not be included in the results.
-#' @param protein \href{https://www.uniprot.org/help/protein_names}{UniProt
-#'   protein name}
-#' @param reviewed Logical: If TRUE, only return
-#'   "UniProtKB/Swiss-Prot" (reviewed) entries; If FALSE, only return TrEMBL
-#'   (un-reviewed) entries.
-#' @param organism \href{https://www.uniprot.org/taxonomy/}{Organism name}.
-#' @param taxid NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+#' @param protein Character: (optional)
+#'   \href{https://www.uniprot.org/help/protein_names}{UniProt
+#'   protein name}.
+#' @param reviewed Logical: (optional) If \code{TRUE}, return only reviewed
+#'   Swiss-Prot entries. If \code{FALSE}, return only unreviewed TrEMBL entries.
+#' @param organism Character: (optional) Organism name.
+#' @param taxid Numeric: (optional) NIH-NCBI
+#'   \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
 #'   You can supply up to 20 taxon IDs.
-#' @param categories \href{https://www.uniprot.org/help/sequence_annotation}{
-#'   Sequence annotation (Features)} categories (subsection). accepted values
+#' @param categories Character: (optional)
+#'   \href{https://www.uniprot.org/help/sequence_annotation}{
+#'   Sequence annotation (features)} categories. Accepted values
 #'   are: "MOLECULE_PROCESSING", "TOPOLOGY", "SEQUENCE_INFORMATION",
 #'   "STRUCTURAL", "DOMAINS_AND_SITES", "PTM", "VARIANTS" and/or "MUTAGENESIS".
-#'   You can supply up to 8 categories.
-#' @param types \href{https://www.uniprot.org/help/sequence_annotation}{
-#'   Sequence annotation (Features)} types. accepted values
+#'   You can supply up to 20 categories.
+#' @param types Character: (optional)
+#'   \href{https://www.uniprot.org/help/sequence_annotation}{
+#'   Sequence annotation (features)} types. Accepted values
 #'   are: "INIT_MET", "SIGNAL", "PROPEP", "TRANSIT", "CHAIN", "PEPTIDE",
-#'   "TOPO_DOM", "TRANSMEM", "DOMAIN", "REPEAT", "CA_BIND", "ZN_FING",
-#'   "DNA_BIND", "NP_BIND", "REGION", "COILED", "MOTIF", "COMPBIAS",
-#'   "ACT_SITE", "METAL", "BINDING", "SITE", "NON_STD", "MOD_RES", "LIPID",
+#'   "TOPO_DOM", "TRANSMEM", "DOMAIN", "REPEAT", "ZN_FING", "DNA_BIND",
+#'   "REGION", "COILED", "MOTIF", "COMPBIAS", "ACT_SITE", "BINDING",
+#'   "SITE", "NON_STD", "MOD_RES", "LIPID",
 #'   "CARBOHYD", "DISULFID", "CROSSLNK", "VAR_SEQ", "VARIANT", "MUTAGEN",
 #'   "UNSURE", "CONFLICT", "NON_CONS", "NON_TER", "HELIX", "TURN", "STRAND"
 #'   and/or "INTRAMEM". You can supply up to 20 types.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return List where each element corresponds to one UniProt entity returned
-#'   by your search query. The element itself is a sub-list containing all
-#'   information that UniProt has about that entity.
+#' @return A list named by UniProt accession. Each element contains the entry
+#'   metadata, sequence, and matching annotations in its \code{features}
+#'   element.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium , UniProt: the Universal Protein
-#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
 #'   https://doi.org/10.1093/nar/gkae1010
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
 #'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
 #'   Documentation}
 #'   \item \href{https://www.uniprot.org/help/publications}{Citations note
@@ -549,12 +639,15 @@ rba_uniprot_features_search <- function(accession = NULL,
       list(arg = "accession", class = "character", max_len = 100),
       list(arg = "gene", class = "character", max_len = 20),
       list(arg = "exact_gene", class = "character", max_len = 20),
-      list(arg = "protein", class = "character"),
-      list(arg = "reviewed", class = "logical"),
-      list(arg = "organism", class = "character"),
-      list(arg = "taxid", class = "numeric", max_len = 20),
+      list(arg = "protein", class = "character", len = 1L),
+      list(arg = "reviewed", class = "logical", len = 1L),
+      list(arg = "organism", class = "character", len = 1L),
       list(
-        arg = "categories", class = "character", max_len = 8,
+        arg = "taxid", class = c("numeric", "integer"), max_len = 20,
+        min_val = 1
+      ),
+      list(
+        arg = "categories", class = "character", max_len = 20,
         val = c("MOLECULE_PROCESSING",
                 "TOPOLOGY",
                 "SEQUENCE_INFORMATION",
@@ -576,16 +669,13 @@ rba_uniprot_features_search <- function(accession = NULL,
                 "TRANSMEM",
                 "DOMAIN",
                 "REPEAT",
-                "CA_BIND",
                 "ZN_FING",
                 "DNA_BIND",
-                "NP_BIND",
                 "REGION",
                 "COILED",
                 "MOTIF",
                 "COMPBIAS",
                 "ACT_SITE",
-                "METAL",
                 "BINDING",
                 "SITE",
                 "NON_STD",
@@ -606,6 +696,21 @@ rba_uniprot_features_search <- function(accession = NULL,
                 "STRAND",
                 "INTRAMEM")
       )
+    ),
+    cond = list(
+      list(
+        quote(
+          all(
+            is.null(accession), is.null(gene), is.null(exact_gene),
+            is.null(protein), is.null(organism), is.null(taxid)
+          )
+        ),
+        "Supply at least one primary search criterion: accession, gene, exact_gene, protein, organism, or taxid."
+      ),
+      list(
+        quote(!is.null(taxid) && any(!is.finite(taxid) | taxid %% 1 != 0)),
+        "`taxid` values should be finite, positive whole numbers."
+      )
     )
   )
 
@@ -618,12 +723,18 @@ rba_uniprot_features_search <- function(accession = NULL,
     init = list("size" = "-1"),
     list("accession", !is.null(accession), paste0(accession, collapse = ",")),
     list("gene", !is.null(gene), paste0(gene, collapse = ",")),
-    list("exact_gene", !is.null(exact_gene), paste0(exact_gene, collapse = ",")),
+    list(
+      "exact_gene", !is.null(exact_gene),
+      paste0(exact_gene, collapse = ",")
+    ),
     list("protein", !is.null(protein), protein),
     list("reviewed", !is.null(reviewed), ifelse(reviewed, "true", "false")),
     list("organism", !is.null(organism), organism),
     list("taxid", !is.null(taxid), paste0(taxid, collapse = ",")),
-    list("categories", !is.null(categories), paste0(categories, collapse = ",")),
+    list(
+      "categories", !is.null(categories),
+      paste0(categories, collapse = ",")
+    ),
     list("types", !is.null(types), paste0(types, collapse = ","))
   )
 
@@ -645,178 +756,53 @@ rba_uniprot_features_search <- function(accession = NULL,
   return(final_output)
 }
 
-# #' Search protein sequence features of a given type in UniProt
-# #'
-# #' Search for term(s) that appear in feature description for your specified
-# #' feature type. For example, you can search by type=DOMAIN and
-# #' Term=Kinase. Comma separated values
-# #'
-# #' @section Corresponding API Resources:
-# #'  "GET https://www.ebi.ac.uk/proteins/api"
-# #'
-# #' @param terms
-# #' @param type
-# #' @param categories
-# #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
-# #'   arguments manual for more information on available options.
-# #'
-# #' @return
-# #'
-# #' @references \itemize{
-# #'   \item The UniProt Consortium , UniProt: the Universal Protein
-# #'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
-# #'   https://doi.org/10.1093/nar/gkae1010
-# #' \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-# #' Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-# #' Turner, Maria Martin, The Proteins API: accessing key integrated protein
-# #' and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-# #' 3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
-# #' \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
-# #' Documentation}
-# #' \item \href{https://www.uniprot.org/help/publications}{Citations note
-# #' on UniProt website}
-# #'   }
-# #'
-# # #' @examples
-# #'
-# #' @family "UniProt - Features"
-# #' @export
-# rba_uniprot_features_type <- function(terms,
-#                                       type,
-#                                       categories = NULL,
-#                                       ...) {
-#   ## Load Global Options
-#   .rba_ext_args(...)
-#
-#   ## Check User-input Arguments
-#   .rba_args(
-#     cons = list(
-#       list(arg = "terms", class = "character", max_len = 20),
-#       list(
-#         arg = "type", class = "character", len = 1,
-#         val = c("INIT_MET",
-#                 "SIGNAL",
-#                 "PROPEP",
-#                 "TRANSIT",
-#                 "CHAIN",
-#                 "PEPTIDE",
-#                 "TOPO_DOM",
-#                 "TRANSMEM",
-#                 "DOMAIN",
-#                 "REPEAT",
-#                 "CA_BIND",
-#                 "ZN_FING",
-#                 "DNA_BIND",
-#                 "NP_BIND",
-#                 "REGION",
-#                 "COILED",
-#                 "MOTIF",
-#                 "COMPBIAS",
-#                 "ACT_SITE",
-#                 "METAL",
-#                 "BINDING",
-#                 "SITE",
-#                 "NON_STD",
-#                 "MOD_RES",
-#                 "LIPID",
-#                 "CARBOHYD",
-#                 "DISULFID",
-#                 "CROSSLNK",
-#                 "VAR_SEQ",
-#                 "VARIANT",
-#                 "MUTAGEN",
-#                 "UNSURE",
-#                 "CONFLICT",
-#                 "NON_CONS",
-#                 "NON_TER",
-#                 "HELIX",
-#                 "TURN",
-#                 "STRAND",
-#                 "INTRAMEM")
-#       ),
-#       list(
-#         arg = "categories", class = "character", max_len = 8,
-#         val = c("MOLECULE_PROCESSING",
-#                 "TOPOLOGY",
-#                 "SEQUENCE_INFORMATION",
-#                 "STRUCTURAL",
-#                 "DOMAINS_AND_SITES",
-#                 "PTM",
-#                 "VARIANTS",
-#                 "MUTAGENESIS.")
-#       )
-#     )
-#   )
-#
-#   .msg(
-#     "get /features/type/{type} Search protein sequence features of a given type in UniProt"
-#   )
-#
-#   ## Build GET API Request's query
-#   call_query <- .rba_query(
-#     init = list("size" = "-1"),
-#     list("categories", !is.null(categories), paste0(categories, collapse = ",")),
-#     list("terms", !is.null(terms), paste0(terms, collapse = ","))
-#   )
-#
-#   ## Build Function-Specific Call
-#   input_call <- .rba_httr(
-#     httr = "get",
-#     url = .rba_stg("uniprot", "url"),
-#     path = paste0(.rba_stg("uniprot", "pth"), "features/type/", type),
-#     query = call_query,
-#     accept = "application/json",
-#     parser = "json->list",
-#     save_to = .rba_file("uniprot_features_type.json")
-#   )
-#
-#   ## Call API
-#   final_output <- .rba_skeleton(input_call)
-#   return(final_output)
-# }
-
 #' Get UniProt protein sequence features by accession
 #'
-#' Use this function to retrieve
-#' \href{https://www.uniprot.org/help/sequence_annotation}{sequence annotations
-#'   (features)} of a protein by it's UniProt accession.
+#' \href{https://www.uniprot.org/help/sequence_annotation}{UniProt sequence
+#'   features} describe biologically relevant sites and regions within a
+#'   protein sequence. Retrieve these annotations for one UniProtKB accession,
+#'   optionally filtered by annotation type, category, or amino-acid range.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://www.ebi.ac.uk/proteins/api/features/\{accession\}"
 #'
-#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
+#' @param accession Character:
+#'   \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}.
-#' @param types \href{https://www.uniprot.org/help/sequence_annotation}{
-#'   Sequence annotation (Features)} types. accepted values
+#' @param types Character: (optional)
+#'   \href{https://www.uniprot.org/help/sequence_annotation}{
+#'   Sequence annotation (features)} types. Accepted values
 #'   are: "INIT_MET", "SIGNAL", "PROPEP", "TRANSIT", "CHAIN", "PEPTIDE",
-#'   "TOPO_DOM", "TRANSMEM", "DOMAIN", "REPEAT", "CA_BIND", "ZN_FING",
-#'   "DNA_BIND", "NP_BIND", "REGION", "COILED", "MOTIF", "COMPBIAS",
-#'   "ACT_SITE", "METAL", "BINDING", "SITE", "NON_STD", "MOD_RES", "LIPID",
+#'   "TOPO_DOM", "TRANSMEM", "DOMAIN", "REPEAT", "ZN_FING", "DNA_BIND",
+#'   "REGION", "COILED", "MOTIF", "COMPBIAS", "ACT_SITE", "BINDING",
+#'   "SITE", "NON_STD", "MOD_RES", "LIPID",
 #'   "CARBOHYD", "DISULFID", "CROSSLNK", "VAR_SEQ", "VARIANT", "MUTAGEN",
 #'   "UNSURE", "CONFLICT", "NON_CONS", "NON_TER", "HELIX", "TURN", "STRAND"
 #'   and/or "INTRAMEM". You can supply up to 20 types.
-#' @param categories \href{https://www.uniprot.org/help/sequence_annotation}{
-#'   Sequence annotation (Features)} categories (subsection). accepted values
+#' @param categories Character: (optional)
+#'   \href{https://www.uniprot.org/help/sequence_annotation}{
+#'   Sequence annotation (features)} categories. Accepted values
 #'   are: "MOLECULE_PROCESSING", "TOPOLOGY", "SEQUENCE_INFORMATION",
 #'   "STRUCTURAL", "DOMAINS_AND_SITES", "PTM", "VARIANTS" and/or "MUTAGENESIS".
-#'   You can supply up to 8 categories.
-#' @param location (character) Filter the features by the amino acid position in the sequence(s).
-#'   Provide the range as a character string with the format "begin-end", e.g. "35-70"
+#'   You can supply up to 20 categories.
+#' @param location Character: (optional) Amino-acid range in
+#'   \code{"begin-end"} format,
+#'   e.g. \code{"35-70"}.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A list in which you can find all of your given protein's sequence
-#'   annotations in a sub-list named "features".
+#' @return A list containing the entry metadata, sequence, and matching
+#'   annotations in its \code{features} element.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium , UniProt: the Universal Protein
-#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
 #'   https://doi.org/10.1093/nar/gkae1010
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
 #'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
 #'   Documentation}
 #'   \item \href{https://www.uniprot.org/help/publications}{Citations note
@@ -844,9 +830,9 @@ rba_uniprot_features <- function(accession,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "accession", class = "character"),
+      list(arg = "accession", class = "character", len = 1L),
       list(
-        arg = "types", class = "character", len = 1,
+        arg = "types", class = "character", max_len = 20,
         val = c("INIT_MET",
                 "SIGNAL",
                 "PROPEP",
@@ -857,16 +843,13 @@ rba_uniprot_features <- function(accession,
                 "TRANSMEM",
                 "DOMAIN",
                 "REPEAT",
-                "CA_BIND",
                 "ZN_FING",
                 "DNA_BIND",
-                "NP_BIND",
                 "REGION",
                 "COILED",
                 "MOTIF",
                 "COMPBIAS",
                 "ACT_SITE",
-                "METAL",
                 "BINDING",
                 "SITE",
                 "NON_STD",
@@ -888,7 +871,7 @@ rba_uniprot_features <- function(accession,
                 "INTRAMEM")
       ),
       list(
-        arg = "categories", class = "character", max_len = 8,
+        arg = "categories", class = "character", max_len = 20,
         val = c("MOLECULE_PROCESSING",
                 "TOPOLOGY",
                 "SEQUENCE_INFORMATION",
@@ -896,9 +879,21 @@ rba_uniprot_features <- function(accession,
                 "DOMAINS_AND_SITES",
                 "PTM",
                 "VARIANTS",
-                "MUTAGENESIS.")
+                "MUTAGENESIS")
       ),
-      list(arg = "location", class = "character", regex = "^\\d+\\-\\d+$", len = 1)
+      list(
+        arg = "location", class = "character", len = 1L,
+        regex = "^[1-9]\\d*-[1-9]\\d*$"
+      )
+    ),
+    cond = list(
+      list(
+        quote(
+          !is.null(location) &&
+            diff(as.numeric(strsplit(location, "-", fixed = TRUE)[[1]])) < 0
+        ),
+        "The start of `location` cannot exceed its end."
+      )
     )
   )
 
@@ -909,8 +904,11 @@ rba_uniprot_features <- function(accession,
 
   ## Build GET API Request's query
   call_query <- .rba_query(
-    init = list("size" = "-1"),
-    list("categories", !is.null(categories), paste0(categories, collapse = ",")),
+    init = list(),
+    list(
+      "categories", !is.null(categories),
+      paste0(categories, collapse = ",")
+    ),
     list("types", !is.null(types), paste0(types, collapse = ",")),
     list("location", !is.null(location), location)
   )
@@ -935,77 +933,82 @@ rba_uniprot_features <- function(accession,
 
 #' Search UniProt Natural Variants
 #'
-#' Using this function, you can search and retrieve
-#'   \href{https://www.uniprot.org/help/variant}{Natural variant(s)} that
-#'   has been annotated in the protein's sequences. You may also refine your
-#'   search with modifiers such as source type, disease etc. See
-#'   "Arguments section" for more information.
+#' Search and retrieve
+#'   \href{https://www.uniprot.org/help/variant}{natural variants} annotated
+#'   on protein sequences, including variants imported from supported
+#'   large-scale studies.
 #'
-#'   Note that this is a search function. Thus, you are not required to fill
-#'   every argument; You may use whatever combinations of arguments you see
-#'   fit for your query.
+#' At least one primary criterion is required: \code{accession},
+#'   \code{disease}, \code{omim}, \code{evidence}, \code{taxid},
+#'   \code{db_type}, or \code{db_id}. The other arguments refine those
+#'   criteria.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://www.ebi.ac.uk/proteins/api/variation"
 #'
-#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
+#' @param accession Character: (optional)
+#'   \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}(s). You can supply up to 100
 #'   accession numbers.
-#' @param source_type Variation's source type. You can choose up to two of:
-#'   "UniProt", "large scale study" and/or "mixed".
-#' @param consequence_type Variation's consequence type. You can choose up to
-#'   two of: "missense", "stop gained" or "stop lost".
-#' @param wild_type Wild type amino acid. Accepted values are IUPAC
-#'   single-letter amino acid (e.g. D for	Aspartic acid) and "*" for stop
+#' @param source_type Character: (optional) Up to two variant source
+#'   types:
+#'   "uniprot", "large scale study", "mixed", "clinvar", "nci-tcga",
+#'   "cosmic curated", "ensembl", "gnomad", "topmed", or "exac".
+#' @param consequence_type Character: (optional) Up to two consequence
+#'   types:
+#'   "missense", "stop gained", or "stop lost".
+#' @param wild_type Character: (optional) Wild-type amino acid. Accepted
+#'   values are IUPAC
+#'   single-letter amino acid codes and "*" for a stop
 #'   codon. You can supply up to 20 values.
-#' @param alternative_sequence Alternative amino acid. Accepted values are IUPAC
-#'   single-letter amino acid (e.g. D for	Aspartic acid) and "*" for stop codon
-#'   and "-" for deletion. You can supply up to 20 values.
-#' @param location A valid amino acid range (e.g. 10-25) within the sequence
-#'   range where the variation occurs. You can supply up to 20 values.
-#' @param disease \href{https://www.uniprot.org/diseases/}{Human disease}
-#'   that are associated with a sequence variation. Accepted values are
+#' @param alternative_sequence Character: (optional) Alternative amino
+#'   acid. Accepted values are
+#'   IUPAC single-letter amino acid codes, "*" for a stop codon, and "-" for
+#'   a deletion. You can supply up to 20 values.
+#' @param location Character: (optional) A valid amino acid range (e.g. 10-25)
+#'   within the sequence
+#'   where the variation occurs.
+#' @param disease Character: (optional)
+#'   \href{https://www.uniprot.org/diseases/}{Human disease}
+#'   associated with a sequence variation. Accepted values are a
 #'   disease name (e.g. Alzheimer disease 18), partial disease name
-#'   (Alzheimer) and/or disease acronym (e.g. AD). You can supply up to
-#'   20 values.
-#' @param omim \href{https://www.ncbi.nlm.nih.gov/omim}{OMIM} ID that is
+#'   (Alzheimer), or disease acronym (e.g. AD).
+#' @param omim Character or Numeric: (optional)
+#'   \href{https://www.ncbi.nlm.nih.gov/omim}{OMIM} ID that is
 #'   associated with a variation. You can supply up to 20 values.
-#' @param evidence Pubmed ID of the variation's
-#'   \href{https://www.uniprot.org/citations/}{citation} You can supply up
+#' @param evidence Character or Numeric: (optional) PubMed ID of a variation's
+#'   \href{https://www.uniprot.org/citations/}{citation}. You can supply up
 #'   to 20 values.
-#' @param taxid NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+#' @param taxid Numeric: (optional) NIH-NCBI
+#'   \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
 #'   You can supply up to 20 taxon IDs.
-#' @param db_type cross-reference database of the variation. You can supply
-#'   up to two of the following:\itemize{
-#'   \item "dbSNP": \href{https://www.ncbi.nlm.nih.gov/snp/}{NIH-NCBI dbSNP
-#'   database}.
-#'   \item "cosmic curate": \href{https://cancer.sanger.ac.uk/cosmic/}{COSMIC
-#'   (the Catalogue of Somatic Mutations in Cancer)}
-#'   \item "ClinVar": \href{https://www.ncbi.nlm.nih.gov/clinvar/}{NIH-NCBI
-#'   ClinVar}
-#'   }
-#' @param db_id The variation ID in a Cross-reference (external) database.
-#'    You can supply up to 20 values.
-#' @param save_peff Logical or Character:\itemize{
-#'   \item FALSE: (default) Do not save PEFF file, just return as a list object.
-#'   \item TRUE: Save as PEFF file to an automatically-generated path.
+#' @param db_type Character: (optional) Cross-reference database of the
+#'   variation.
+#'   You can supply up to two values. Examples include \code{"dbSNP"},
+#'   \code{"cosmic curated"}, and \code{"ClinVar"}.
+#' @param db_id Character: (optional) Variation identifier in a cross-reference
+#'   database. You can
+#'   supply up to 20 values.
+#' @param save_peff Logical or Character: (default = \code{FALSE}) \itemize{
+#'   \item FALSE: Return the parsed JSON response.
+#'   \item TRUE: Save the PEFF response to an automatically generated path.
 #'   \item Character string: A valid file path to save the PEFF file.}
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return List where each element corresponds to one UniProt entity returned
-#'   by your search query. The element itself is a sub-list containing all
-#'   information that UniProt has about that Variation.
+#' @return With \code{save_peff = FALSE}, a list named by UniProt accession.
+#'   Each element contains one matching entry and its variants. Otherwise, the
+#'   PEFF response is written to disk and returned as a character string.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium , UniProt: the Universal Protein
-#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
 #'   https://doi.org/10.1093/nar/gkae1010
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
 #'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
 #'   Documentation}
 #'   \item \href{https://www.uniprot.org/help/publications}{Citations note
@@ -1049,22 +1052,40 @@ rba_uniprot_variation_search <- function(accession = NULL,
       list(arg = "accession", class = "character", max_len = 100),
       list(
         arg = "source_type", class = "character", max_len = 2,
-        val = c("uniprot", "large scale study", "mixed")
+        val = c(
+          "uniprot", "large scale study", "mixed", "clinvar", "nci-tcga",
+          "cosmic curated", "ensembl", "gnomad", "topmed", "exac"
+        )
       ),
       list(
-        arg = "consequence_type", class = "character",
+        arg = "consequence_type", class = "character", max_len = 2,
         val = c("missense", "stop gained", "stop lost")
       ),
       list(arg = "wild_type", class = "character", max_len = 20),
       list(arg = "alternative_sequence", class = "character", max_len = 20),
-      list(arg = "location", class = "character", regex = "^\\d+\\-\\d+$", len = 1),
-      list(arg = "disease", class = "character"),
-      list(arg = "omim", class = "character", max_len = 20),
-      list(arg = "evidence", class = "numeric", max_len = 20),
-      list(arg = "taxid", class = "numeric", max_len = 20),
+      list(
+        arg = "location", class = "character", len = 1L,
+        regex = "^[1-9]\\d*-[1-9]\\d*$"
+      ),
+      list(arg = "disease", class = "character", len = 1L),
+      list(
+        arg = "omim", class = c("character", "numeric", "integer"),
+        max_len = 20, regex = "^[1-9]\\d*$"
+      ),
+      list(
+        arg = "evidence", class = c("character", "numeric", "integer"),
+        max_len = 20, regex = "^[1-9]\\d*$"
+      ),
+      list(
+        arg = "taxid", class = c("numeric", "integer"), max_len = 20,
+        min_val = 1
+      ),
       list(arg = "db_type", class = "character", max_len = 2),
       list(arg = "db_id", class = "character", max_len = 20),
-      list(arg = "save_peff", class = c("logical", "character"))
+      list(
+        arg = "save_peff", class = c("logical", "character"), len = 1L,
+        no_null = TRUE
+      )
     ),
     cond = list(
       list(
@@ -1072,7 +1093,18 @@ rba_uniprot_variation_search <- function(accession = NULL,
                   is.null(omim), is.null(evidence),
                   is.null(taxid), is.null(db_type),
                   is.null(db_id))),
-        "You should supply at least one of: accession, disease, omim, evidence, taxid, db_type or db_id"
+        "Supply at least one primary search criterion: accession, disease, omim, evidence, taxid, db_type, or db_id."
+      ),
+      list(
+        quote(!is.null(taxid) && any(!is.finite(taxid) | taxid %% 1 != 0)),
+        "`taxid` values should be finite, positive whole numbers."
+      ),
+      list(
+        quote(
+          !is.null(location) &&
+            diff(as.numeric(strsplit(location, "-", fixed = TRUE)[[1]])) < 0
+        ),
+        "The start of `location` cannot exceed its end."
       )
     )
   )
@@ -1085,26 +1117,37 @@ rba_uniprot_variation_search <- function(accession = NULL,
   call_query <- .rba_query(
     init = list("size" = "-1"),
     list("accession", !is.null(accession), paste0(accession, collapse = ",")),
-    list("sourcetype", !is.null(source_type), paste0(source_type, collapse = ",")),
-    list("consequencetype", !is.null(consequence_type), paste0(consequence_type, collapse = ",")),
+    list(
+      "sourcetype", !is.null(source_type),
+      paste0(source_type, collapse = ",")
+    ),
+    list(
+      "consequencetype", !is.null(consequence_type),
+      paste0(consequence_type, collapse = ",")
+    ),
     list("wildtype", !is.null(wild_type), paste0(wild_type, collapse = ",")),
-    list("alternativesequence", !is.null(alternative_sequence), paste0(alternative_sequence, collapse = ",")),
+    list(
+      "alternativesequence", !is.null(alternative_sequence),
+      paste0(alternative_sequence, collapse = ",")
+    ),
     list("location", !is.null(location), location),
     list("disease", !is.null(disease), disease),
     list("omim", !is.null(omim), paste0(omim, collapse = ",")),
     list("evidence", !is.null(evidence), paste0(evidence, collapse = ",")),
     list("taxid", !is.null(taxid), paste0(taxid, collapse = ",")),
     list("dbtype", !is.null(db_type), paste0(db_type, collapse = ",")),
-    list("dbid", !is.null(db_id), paste0(db_type, collapse = ","))
+    list("dbid", !is.null(db_id), paste0(db_id, collapse = ","))
   )
 
   ## Build Function-Specific Call
-  save_to <- ifelse(
-    isFALSE(save_peff),
-    yes = .rba_file(file = "uniprot_variation.json"),
-    no = .rba_file(file = "uniprot_variation.peff",
-                   save_to = save_peff)
-  )
+  if (isFALSE(save_peff)) {
+    save_to <- .rba_file(file = "uniprot_variation_search.json")
+  } else {
+    save_to <- .rba_file(
+      file = "uniprot_variation_search.peff",
+      save_to = save_peff
+    )
+  }
 
   obj_parser_input <- list("json->list", .rba_uniprot_search_namer)
 
@@ -1125,56 +1168,64 @@ rba_uniprot_variation_search <- function(accession = NULL,
   return(final_output)
 }
 
-#' Get natural variants in UniProt by NIH-NCBI SNP database identifier
+#' Retrieve UniProt Natural Variants by Identifier
 #'
-#' Retrieve natural variant annotations of a sequence using UniProt protein
-#'   accession, dbSNP or HGVS expression.
+#' Retrieve natural variant annotations by UniProt accession, dbSNP identifier,
+#'   or HGVS expression.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://www.ebi.ac.uk/proteins/api/variation/dbsnp/\{dbid\}"
 #'  \cr "GET https://www.ebi.ac.uk/proteins/api/variation/hgvs/\{hgvs\}"
 #'  \cr "GET https://www.ebi.ac.uk/proteins/api/variation/\{accession\}"
 #'
-#' @param id An ID which can be either a
+#' @param id Character: A single identifier: either a
 #'   \href{https://www.uniprot.org/help/accession_numbers}{UniProt primary or
-#'   secondary accession}, NIH-NCBI dbSNP ID or HGVS expression.
-#'   \href{https://www.ncbi.nlm.nih.gov/snp/}{NIH-NCBI dbSNP id} or
-#'   \href{https://varnomen.hgvs.org/}{HGVS Expression}.
-#' @param id_type The type of supplied ID argument, one of:
+#'   secondary accession}, an \href{https://www.ncbi.nlm.nih.gov/snp/}{NIH-NCBI
+#'   dbSNP ID}, or an \href{https://varnomen.hgvs.org/}{HGVS expression}.
+#' @param id_type Character: The type of supplied ID argument, one of:
 #'   \href{https://www.uniprot.org/help/accession_numbers}{"uniprot"},
 #'   \href{https://www.ncbi.nlm.nih.gov/snp/}{"dbsnp"} or
-#'   \href{https://varnomen.hgvs.org/}{"hgvs"}
-#' @param source_type Variation's source type. You can choose up to two of:
-#'   "UniProt", "large scale study" and/or "mixed".
-#' @param consequence_type Variation's consequence type. You can choose up to
+#'   \href{https://varnomen.hgvs.org/}{"hgvs"}.
+#' @param source_type Character: (optional) Variation's source type. You
+#'   can choose up to two of:
+#'   "uniprot", "large scale study", "mixed", "clinvar", "nci-tcga",
+#'   "cosmic curated", "ensembl", "gnomad", "topmed", or "exac".
+#' @param consequence_type Character: (optional) Variation's consequence
+#'   type. You can choose up to
 #'   two of: "missense", "stop gained" or "stop lost".
-#' @param wild_type Wild type amino acid. Accepted values are IUPAC
-#'   single-letter amino acid (e.g. D for	Aspartic acid) and "*" for stop
-#'   codon. You can supply up to 20 values.
-#' @param alternative_sequence Alternative amino acid. Accepted values are IUPAC
-#'   single-letter amino acid (e.g. D for	Aspartic acid) and "*" for stop codon
-#'   and "-" for deletion. You can supply up to 20 values.
-#' @param location A valid amino acid range (e.g. 10-25) within the sequence
-#'   range where the variation occurs. You can supply up to 20 values.
-#' @param save_peff Logical or Character:\itemize{
-#'   \item FALSE: (default) Do not save PEFF file, just return as a list object.
+#' @param wild_type Character: (optional) Wild-type amino acid. Accepted
+#'   values are IUPAC
+#'   single-letter amino acid codes and "*" for a stop codon. You can supply up
+#'   to 20 values.
+#' @param alternative_sequence Character: (optional) Alternative amino
+#'   acid. Accepted values are
+#'   IUPAC single-letter amino acid codes, "*" for a stop codon, and "-" for a
+#'   deletion. You can supply up to 20 values.
+#' @param location Character: (optional) A valid amino acid range (e.g. 10-25)
+#'   within the sequence
+#'   where the variation occurs.
+#' @param save_peff Logical or Character: (default = \code{FALSE}) \itemize{
+#'   \item FALSE: Return the parsed JSON response.
 #'   \item TRUE: Save as PEFF file to an automatically-generated path.
 #'   \item Character string: A valid file path to save the PEFF file.}
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A list where each element is a list that corresponds to a UniProt
-#'   protein entry.
+#' @return If \code{save_peff = FALSE}, a list. For \code{id_type = "uniprot"},
+#'   it represents the requested entry; for \code{"dbsnp"} or \code{"hgvs"},
+#'   each element represents a matching entry and is named by accession when
+#'   available. If PEFF output is requested, the response is written to disk
+#'   and returned as a character string.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium , UniProt: the Universal Protein
-#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
 #'   https://doi.org/10.1093/nar/gkae1010
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
 #'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
 #'   Documentation}
 #'   \item \href{https://www.uniprot.org/help/publications}{Citations note
@@ -1209,14 +1260,17 @@ rba_uniprot_variation <- function(id,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "id", class = "character"),
+      list(arg = "id", class = "character", len = 1L),
       list(
-        arg = "id_type", class = "character",
+        arg = "id_type", class = "character", len = 1L,
         val = c("uniprot", "dbsnp", "hgvs")
       ),
       list(
         arg = "source_type", class = "character", max_len = 2,
-        val = c("uniprot", "large scale study", "mixed")
+        val = c(
+          "uniprot", "large scale study", "mixed", "clinvar", "nci-tcga",
+          "cosmic curated", "ensembl", "gnomad", "topmed", "exac"
+        )
       ),
       list(
         arg = "consequence_type", class = "character", max_len = 2,
@@ -1224,27 +1278,57 @@ rba_uniprot_variation <- function(id,
       ),
       list(arg = "wild_type", class = "character", max_len = 20),
       list(arg = "alternative_sequence", class = "character", max_len = 20),
-      list(arg = "location", class = "character"),
-      list(arg = "save_peff", class = c("logical", "character"))
+      list(
+        arg = "location", class = "character", len = 1L,
+        regex = "^[1-9]\\d*-[1-9]\\d*$"
+      ),
+      list(
+        arg = "save_peff", class = c("logical", "character"), len = 1L,
+        no_null = TRUE
+      )
+    ),
+    cond = list(
+      list(
+        quote(
+          !is.null(location) &&
+            diff(as.numeric(strsplit(location, "-", fixed = TRUE)[[1]])) < 0
+        ),
+        "The start of `location` cannot exceed its end."
+      )
     )
   )
 
   .msg(
-    "Retrieving Natural variant of %s.",
+    "Retrieving natural variants for %s.",
     ifelse(
       id_type == "uniprot",
-      yes = paste0("UniProt protein ", id),
-      no = paste0(id_type, " id ", id)
+      yes = sprintf("UniProt protein %s", id),
+      no = sprintf("%s ID %s", id_type, id)
     )
   )
 
   ## Build GET API Request's query
+  if (id_type %in% c("dbsnp", "hgvs")) {
+    call_query <- list("size" = "-1")
+  } else {
+    call_query <- list()
+  }
+
   call_query <- .rba_query(
-    init = list("size" = "-1"),
-    list("sourcetype", !is.null(source_type), paste0(source_type, collapse = ",")),
-    list("consequencetype", !is.null(consequence_type), paste0(consequence_type, collapse = ",")),
+    init = call_query,
+    list(
+      "sourcetype", !is.null(source_type),
+      paste0(source_type, collapse = ",")
+    ),
+    list(
+      "consequencetype", !is.null(consequence_type),
+      paste0(consequence_type, collapse = ",")
+    ),
     list("wildtype", !is.null(wild_type), paste0(wild_type, collapse = ",")),
-    list("alternativesequence", !is.null(alternative_sequence), paste0(alternative_sequence, collapse = ",")),
+    list(
+      "alternativesequence", !is.null(alternative_sequence),
+      paste0(alternative_sequence, collapse = ",")
+    ),
     list("location", !is.null(location), location)
   )
 
@@ -1254,11 +1338,11 @@ rba_uniprot_variation <- function(id,
     id_type, ifelse(isFALSE(save_peff), "json", "peff")
   )
 
-  save_to <- ifelse(
-    isFALSE(save_peff),
-    yes = .rba_file(file = file_name),
-    no = .rba_file(file = file_name, save_to = save_peff)
-  )
+  if (isFALSE(save_peff)) {
+    save_to <- .rba_file(file = file_name)
+  } else {
+    save_to <- .rba_file(file = file_name, save_to = save_peff)
+  }
 
   path_input <- switch(
     id_type,
@@ -1266,6 +1350,12 @@ rba_uniprot_variation <- function(id,
     "hgvs" = paste0(.rba_stg("uniprot", "pth"), "variation/hgvs/", id),
     "dbsnp" = paste0(.rba_stg("uniprot", "pth"), "variation/dbsnp/", id)
   )
+
+  if (id_type == "uniprot") {
+    parser_input <- "json->list"
+  } else {
+    parser_input <- list("json->list", .rba_uniprot_search_namer)
+  }
 
   input_call <- .rba_httr(
     httr = "get",
@@ -1276,7 +1366,7 @@ rba_uniprot_variation <- function(id,
     file_accept = "text/x-peff",
     file_parser = "text->chr",
     obj_accept = "application/json",
-    obj_parser = "json->list"
+    obj_parser = parser_input
   )
 
   ## Call API
@@ -1288,44 +1378,46 @@ rba_uniprot_variation <- function(id,
 
 #' Search Antigens in UniProt
 #'
-#' UniProt maps Antigenic (Antibody-binding) features from different sources
-#'   to the proteins' sequences. Using this function, you can search for
-#'   Antigenic sequences that has been map to UniProt proteins. You may also
-#'   refine your search with modifiers such as score etc. See
-#'   "Arguments section" for more information.
-#'
-#'   Note that this is a search function. Thus, you are not required to fill
-#'   every argument; You may use whatever combinations of arguments you see
-#'   fit for your query.
+#' UniProt maps antigenic (antibody-binding) features from several sources to
+#'   protein sequences. Search those mappings using one or more criteria. At
+#'   least one of \code{accession}, \code{antigen_sequence}, \code{antigen_id},
+#'   \code{ensembl_id}, or \code{match_score} is required.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://www.ebi.ac.uk/proteins/api/antigen"
 #'
-#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
+#' @param accession Character: (optional)
+#'   \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}(s). You can supply up to 100
 #'   accession numbers.
-#' @param antigen_sequence Protein sequence in the antigenic site.
-#' @param antigen_id Human Protein Atlas (HPA) antigen ID. You can supply up to
+#' @param antigen_sequence Character: (optional) A single antigenic protein
+#'   sequence of at least four residues.
+#' @param antigen_id Character: (optional) Human Protein Atlas (HPA) antigen ID.
+#'   You
+#'   can supply up to
 #'   20 IDs.
-#' @param ensembl_id Ensembl Stable Transcript ID. You can supply up to
+#' @param ensembl_id Character: (optional) Ensembl stable transcript ID. You can
+#'   supply up to
 #'   20 IDs.
-#' @param match_score (Numeric) Minimum alignment score for the antigen
-#'   sequence and the target protein sequence.
+#' @param match_score Numeric: (optional) A whole number from 0 to 100 giving
+#'   the minimum
+#'   alignment score between the antigen sequence and target protein sequence.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A list Where each element correspond to a UniProt protein (search
-#'  hit) and Antigenic features are organized under the "features" sub-list.
+#' @return A list in which each element represents a matching UniProt entry,
+#'   named by accession when available. Antigenic annotations are stored in the
+#'   entry's \code{features} element.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium , UniProt: the Universal Protein
-#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
 #'   https://doi.org/10.1093/nar/gkae1010
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
 #'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
 #'   Documentation}
 #'   \item \href{https://www.uniprot.org/help/publications}{Citations note
@@ -1352,10 +1444,37 @@ rba_uniprot_antigens_search <- function(accession = NULL,
   .rba_args(
     cons = list(
       list(arg = "accession", class = "character", max_len = 100),
-      list(arg = "antigen_sequence", class = "character"),
+      list(arg = "antigen_sequence", class = "character", len = 1L),
       list(arg = "antigen_id", class = "character", max_len = 20),
       list(arg = "ensembl_id", class = "character", max_len = 20),
-      list(arg = "match_score", class = "numeric")
+      list(
+        arg = "match_score", class = c("numeric", "integer"), len = 1L,
+        ran = c(0, 100)
+      )
+    ),
+    cond = list(
+      list(
+        quote(
+          all(
+            is.null(accession), is.null(antigen_sequence),
+            is.null(antigen_id), is.null(ensembl_id), is.null(match_score)
+          )
+        ),
+        "Supply at least one search criterion: accession, antigen_sequence, antigen_id, ensembl_id, or match_score."
+      ),
+      list(
+        quote(
+          !is.null(antigen_sequence) && nchar(antigen_sequence) < 4L
+        ),
+        "`antigen_sequence` should contain at least four residues."
+      ),
+      list(
+        quote(
+          !is.null(match_score) &&
+            (!is.finite(match_score) || match_score %% 1 != 0)
+        ),
+        "`match_score` should be a finite whole number from 0 to 100."
+      )
     )
   )
 
@@ -1368,8 +1487,14 @@ rba_uniprot_antigens_search <- function(accession = NULL,
     init = list("size" = "-1"),
     list("accession", !is.null(accession), paste0(accession, collapse = ",")),
     list("antigen_sequence", !is.null(antigen_sequence), antigen_sequence),
-    list("antigen_id", !is.null(antigen_id), paste0(antigen_id, collapse = ",")),
-    list("ensembl_id", !is.null(ensembl_id), paste0(ensembl_id, collapse = ",")),
+    list(
+      "antigen_id", !is.null(antigen_id),
+      paste0(antigen_id, collapse = ",")
+    ),
+    list(
+      "ensembl_ids", !is.null(ensembl_id),
+      paste0(ensembl_id, collapse = ",")
+    ),
     list("match_score", !is.null(match_score), match_score)
   )
 
@@ -1393,30 +1518,31 @@ rba_uniprot_antigens_search <- function(accession = NULL,
 
 #' Get Antigens by UniProt Accession
 #'
-#' UniProt maps Antigenic features from different sources to the proteins'
-#'   sequences. Using this function, you can retrieve all the Antigenic
-#'   features that has been map to a given UniProt protein's sequence.
+#' UniProt maps antigenic (antibody-binding) features from several sources to
+#'   protein sequences. Retrieve the features mapped to one UniProtKB
+#'   accession.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://www.ebi.ac.uk/proteins/api/antigen/\{accession\}"
 #'
-#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
-#'   UniProtKB primary or secondary accession}(s).
+#' @param accession Character:
+#'   \href{https://www.uniprot.org/help/accession_numbers}{
+#'   UniProtKB primary or secondary accession}.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A list containing the Antigenic features of your supplied
-#'   UniProt protein's sequence.
+#' @return A list containing the antigenic features mapped to the requested
+#'   UniProt protein sequence.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium , UniProt: the Universal Protein
-#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
 #'   https://doi.org/10.1093/nar/gkae1010
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
 #'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
 #'   Documentation}
 #'   \item \href{https://www.uniprot.org/help/publications}{Citations note
@@ -1438,7 +1564,7 @@ rba_uniprot_antigens <- function(accession,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "accession", class = "character", len = 1)
+      list(arg = "accession", class = "character", len = 1L)
     )
   )
 
@@ -1466,27 +1592,45 @@ rba_uniprot_antigens <- function(accession,
 
 #' Search UniProt Epitopes
 #'
-#' Use this function to search epitope data associated to UniProt entities,
+#' Use this function to search epitope data associated with UniProt entries,
 #'   using various criteria such as UniProt accession, epitope sequence,
-#'   IEDB ID, and match score.
+#'   IEDB ID, and match score. At least one search criterion is required.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://www.ebi.ac.uk/proteins/api/epitope"
 #'
-#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
+#' @param accession Character: (optional)
+#'   \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}(s). You can supply up to 100
 #'   accession numbers.
-#' @param epitope_sequence (Character) Epitope's proteins sequence
-#' @param iedb_id (Numeric) \href{https://www.iedb.org/}{EIDB} epitope
-#'   Identifier(s). You can supply up to 20 accession numbers.
-#' @param match_score Integer: Minimum alignment score for the antigen sequence
-#'   and the target protein sequence.
+#' @param epitope_sequence Character: (optional) A single epitope protein
+#'   sequence.
+#' @param iedb_id Character or Numeric: (optional)
+#'   \href{https://www.iedb.org/}{IEDB} epitope identifier(s).
+#'   You can supply up to 20 identifiers.
+#' @param match_score Numeric: (optional) A whole number from 0 to 100 giving
+#'   the minimum
+#'   alignment score between the epitope sequence and target protein sequence.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A List where each element corresponds to one UniProt entity returned
-#'   by your search query. The element itself is a sub-list containing all
-#'   information that UniProt has about that entity.
+#' @return A list in which each element represents a matching UniProt entry and
+#'   is named by accession when available.
+#'
+#' @references \itemize{
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
+#'   https://doi.org/10.1093/nar/gkae1010
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
+#'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+#'   Documentation}
+#'   \item \href{https://www.uniprot.org/help/publications}{Citations note
+#'   on UniProt website}
+#'   }
 #'
 #' @examples
 #' \donttest{
@@ -1513,9 +1657,33 @@ rba_uniprot_epitope_search <- function(accession = NULL,
   .rba_args(
     cons = list(
       list(arg = "accession", class = "character", max_len = 100),
-      list(arg = "epitope_sequence", class = "character"),
-      list(arg = "iedb_id", class = "numeric", max_len = 20),
-      list(arg = "match_score", class = "numeric")
+      list(arg = "epitope_sequence", class = "character", len = 1L),
+      list(
+        arg = "iedb_id", class = c("character", "numeric", "integer"),
+        max_len = 20, regex = "^[1-9]\\d*$"
+      ),
+      list(
+        arg = "match_score", class = c("numeric", "integer"), len = 1L,
+        ran = c(0, 100)
+      )
+    ),
+    cond = list(
+      list(
+        quote(
+          all(
+            is.null(accession), is.null(epitope_sequence),
+            is.null(iedb_id), is.null(match_score)
+          )
+        ),
+        "Supply at least one search criterion: accession, epitope_sequence, iedb_id, or match_score."
+      ),
+      list(
+        quote(
+          !is.null(match_score) &&
+            (!is.finite(match_score) || match_score %% 1 != 0)
+        ),
+        "`match_score` should be a finite whole number from 0 to 100."
+      )
     )
   )
 
@@ -1557,13 +1725,29 @@ rba_uniprot_epitope_search <- function(accession = NULL,
 #' @section Corresponding API Resources:
 #'  "GET https://www.ebi.ac.uk/proteins/api/epitope/\{accession\}"
 #'
-#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
+#' @param accession Character:
+#'   \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
 #' @return A list containing the UniProt epitope features details for the given
 #'   accession.
+#'
+#' @references \itemize{
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
+#'   https://doi.org/10.1093/nar/gkae1010
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
+#'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+#'   Documentation}
+#'   \item \href{https://www.uniprot.org/help/publications}{Citations note
+#'   on UniProt website}
+#'   }
 #'
 #' @examples
 #' \donttest{
@@ -1579,7 +1763,7 @@ rba_uniprot_epitope <- function(accession, ...) {
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "accession", class = "character", len = 1)
+      list(arg = "accession", class = "character", len = 1L)
     )
   )
 
@@ -1589,13 +1773,12 @@ rba_uniprot_epitope <- function(accession, ...) {
   )
 
   ## Build Function-Specific Call
-  parser_input <- "json->list"
   input_call <- .rba_httr(
     httr = "get",
     url = .rba_stg("uniprot", "url"),
     path = paste0(.rba_stg("uniprot", "pth"), "epitope/", accession),
     accept = "application/json",
-    parser = parser_input,
+    parser = "json->list",
     save_to = .rba_file("uniprot_epitope.json")
   )
 
@@ -1608,44 +1791,40 @@ rba_uniprot_epitope <- function(accession, ...) {
 
 #' Search Mutagenesis in UniProt
 #'
-#' UniProt describes the effects of mutations in proteins' amino acid
-#'   sequence on the biological properties of the protein, cell or the
-#'   organism. Using this function, you can search for
+#' UniProt describes how sequence mutations affect the biological properties
+#'   of a protein, cell, or organism. Use this function to search for
 #'   \href{https://www.uniprot.org/help/mutagen}{
-#'   mutagenesis description} in UniProt proteins.
-#'   You may also refine your search. See "Arguments section" for more
-#'   information.
-#'
-#'   Note that this is a search function. Thus, you are not required to fill
-#'   every argument; You may use whatever combinations of arguments you see
-#'   fit for your query.
+#'   mutagenesis annotations} using at least one of \code{accession},
+#'   \code{taxid}, or \code{db_id}.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://www.ebi.ac.uk/proteins/api/mutagenesis"
 #'
-#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
+#' @param accession Character: (optional)
+#'   \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}(s). You can supply up to 100
 #'   accession numbers.
-#' @param taxid NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+#' @param taxid Numeric: (optional) NIH-NCBI
+#'   \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
 #'   You can supply up to 20 taxon IDs.
-#' @param db_id The ID in a Cross-reference (external) database.
-#'    You can supply up to 20 values.
+#' @param db_id Character: (optional) The ID in a cross-reference database.
+#'   You can supply up to 20 values.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A list Where each element correspond to a UniProt protein (search
-#'  hit) and mutagenesis description are organized under the
-#'  "features" sub-list.
+#' @return A list in which each element represents a matching UniProt entry,
+#'   named by accession when available. Mutagenesis annotations are stored in
+#'   the entry's \code{features} element.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium , UniProt: the Universal Protein
-#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
 #'   https://doi.org/10.1093/nar/gkae1010
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
 #'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
 #'   Documentation}
 #'   \item \href{https://www.uniprot.org/help/publications}{Citations note
@@ -1671,8 +1850,21 @@ rba_uniprot_mutagenesis_search <- function(accession = NULL,
   .rba_args(
     cons = list(
       list(arg = "accession", class = "character", max_len = 100),
-      list(arg = "taxid", class = "numeric", max_len = 20),
+      list(
+        arg = "taxid", class = c("numeric", "integer"), max_len = 20,
+        min_val = 1
+      ),
       list(arg = "db_id", class = "character", max_len = 20)
+    ),
+    cond = list(
+      list(
+        quote(all(is.null(accession), is.null(taxid), is.null(db_id))),
+        "Supply at least one search criterion: accession, taxid, or db_id."
+      ),
+      list(
+        quote(!is.null(taxid) && any(!is.finite(taxid) | taxid %% 1 != 0)),
+        "`taxid` values should be finite, positive whole numbers."
+      )
     )
   )
 
@@ -1685,7 +1877,7 @@ rba_uniprot_mutagenesis_search <- function(accession = NULL,
     init = list("size" = "-1"),
     list("accession", !is.null(accession), paste0(accession, collapse = ",")),
     list("taxid", !is.null(taxid), paste0(taxid, collapse = ",")),
-    list("db_id", !is.null(db_id), paste0(db_id, collapse = ","))
+    list("dbid", !is.null(db_id), paste0(db_id, collapse = ","))
   )
 
   ## Build Function-Specific Call
@@ -1708,19 +1900,20 @@ rba_uniprot_mutagenesis_search <- function(accession = NULL,
 
 #' Get Mutagenesis by UniProt Accession
 #'
-#' UniProt describes the effects of mutations in proteins' amino acid
-#'   sequence on the biological properties of the protein, cell or the
-#'   organism. Using this function, you can get the
+#' UniProt describes how sequence mutations affect the biological properties
+#'   of a protein, cell, or organism. Retrieve the
 #'   \href{https://www.uniprot.org/help/mutagen}{
-#'   Mutagenesis description} that has been mapped to a given UniProt protein.
+#'   mutagenesis annotations} mapped to one UniProt protein.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://www.ebi.ac.uk/proteins/api/mutagenesis/\{accession\}"
 #'
-#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
-#'   UniProtKB primary or secondary accession}(s).
-#' @param location A valid amino acid range (e.g. 10-25) within the sequence
-#'   range of the given proein.
+#' @param accession Character:
+#'   \href{https://www.uniprot.org/help/accession_numbers}{
+#'   UniProtKB primary or secondary accession}.
+#' @param location Character: (optional) A valid amino acid range (e.g. 10-25)
+#'   within the sequence
+#'   of the given protein.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -1728,14 +1921,14 @@ rba_uniprot_mutagenesis_search <- function(accession = NULL,
 #'   UniProt protein's sequence.
 #'
 #' @references \itemize{
-#'   \item The UniProt Consortium , UniProt: the Universal Protein
-#'   Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
 #'   https://doi.org/10.1093/nar/gkae1010
-#'   \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-#'   Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-#'   Turner, Maria Martin, The Proteins API: accessing key integrated protein
-#'   and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-#'   3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
 #'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
 #'   Documentation}
 #'   \item \href{https://www.uniprot.org/help/publications}{Citations note
@@ -1758,8 +1951,20 @@ rba_uniprot_mutagenesis <- function(accession,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "accession", class = "character", len = 1),
-      list(arg = "location", class = "character", regex = "^\\d+\\-\\d+$", len = 1)
+      list(arg = "accession", class = "character", len = 1L),
+      list(
+        arg = "location", class = "character", len = 1L,
+        regex = "^[1-9]\\d*-[1-9]\\d*$"
+      )
+    ),
+    cond = list(
+      list(
+        quote(
+          !is.null(location) &&
+            diff(as.numeric(strsplit(location, "-", fixed = TRUE)[[1]])) < 0
+        ),
+        "The start of `location` cannot exceed its end."
+      )
     )
   )
 
@@ -1794,27 +1999,44 @@ rba_uniprot_mutagenesis <- function(accession,
 
 #' Search RNA Editing in UniProt
 #'
-#' UniProt Curates \href{https://www.uniprot.org/help/rna_editing}{RNA-editing
+#' UniProt curates \href{https://www.uniprot.org/help/rna_editing}{RNA-editing
 #'   events} (conversion, insertion, deletion of nucleotides). Use this
 #'   function to search RNA editing records in UniProt using various
-#'   criteria such as accession, taxon ID, or variant location.
+#'   criteria such as accession, taxon ID, or protein-level variant location.
+#'   At least one criterion is required.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://www.ebi.ac.uk/proteins/api/rna-editing"
 #'
-#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
+#' @param accession Character: (optional)
+#'   \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}(s). You can supply up to 100
 #'   accession numbers.
-#' @param taxid (Numeric) NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+#' @param taxid Numeric: (optional) NIH-NCBI
+#'   \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
 #'   You can supply up to 20 taxon IDs.
-#' @param variantlocation Character: RNA editing variant location(s).
-#'   You can supply up to 20 taxon IDs.
+#' @param variant_location Character: (optional) Up to four protein-level variant
+#'   locations, for example \code{"p.Leu336Pro"}.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A List where each element corresponds to one UniProt entity returned
-#'   by your search query. The element itself is a sub-list containing all
-#'   information that UniProt has about that entity.
+#' @return A list in which each element represents a matching UniProt entry and
+#'   is named by accession when available.
+#'
+#' @references \itemize{
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
+#'   https://doi.org/10.1093/nar/gkae1010
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
+#'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+#'   Documentation}
+#'   \item \href{https://www.uniprot.org/help/publications}{Citations note
+#'   on UniProt website}
+#'   }
 #'
 #' @examples
 #' \donttest{
@@ -1825,7 +2047,7 @@ rba_uniprot_mutagenesis <- function(accession,
 #' @export
 rba_uniprot_rna_edit_search <- function(accession = NULL,
                                         taxid = NULL,
-                                        variantlocation = NULL,
+                                        variant_location = NULL,
                                         ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -1834,8 +2056,25 @@ rba_uniprot_rna_edit_search <- function(accession = NULL,
   .rba_args(
     cons = list(
       list(arg = "accession", class = "character", max_len = 100),
-      list(arg = "taxid", class = "numeric", max_len = 20),
-      list(arg = "variantlocation", class = "character", max_len = 4)
+      list(
+        arg = "taxid", class = c("numeric", "integer"), max_len = 20,
+        min_val = 1
+      ),
+      list(arg = "variant_location", class = "character", max_len = 4)
+    ),
+    cond = list(
+      list(
+        quote(
+          all(
+            is.null(accession), is.null(taxid), is.null(variant_location)
+          )
+        ),
+        "Supply at least one search criterion: accession, taxid, or variant_location."
+      ),
+      list(
+        quote(!is.null(taxid) && any(!is.finite(taxid) | taxid %% 1 != 0)),
+        "`taxid` values should be finite, positive whole numbers."
+      )
     )
   )
 
@@ -1848,7 +2087,10 @@ rba_uniprot_rna_edit_search <- function(accession = NULL,
     init = list("size" = "-1"),
     list("accession", !is.null(accession), paste0(accession, collapse = ",")),
     list("taxid", !is.null(taxid), paste0(taxid, collapse = ",")),
-    list("variantlocation", !is.null(variantlocation), paste0(variantlocation, collapse = ","))
+    list(
+      "variantlocation", !is.null(variant_location),
+      paste0(variant_location, collapse = ",")
+    )
   )
 
   ## Build Function-Specific Call
@@ -1869,7 +2111,7 @@ rba_uniprot_rna_edit_search <- function(accession = NULL,
   return(final_output)
 }
 
-#' Retrieve Epitope by Accession
+#' Retrieve UniProt RNA-Editing Annotations by Accession
 #'
 #' Use this function to retrieve
 #'   \href{https://www.uniprot.org/help/rna_editing}{RNA-editing
@@ -1877,9 +2119,10 @@ rba_uniprot_rna_edit_search <- function(accession = NULL,
 #'   linked to a UniProt entry.
 #'
 #' @section Corresponding API Resources:
-#'  "GET https://www.ebi.ac.uk/proteins/api/rna-edit/\{accession\}"
+#'  "GET https://www.ebi.ac.uk/proteins/api/rna-editing/\{accession\}"
 #'
-#' @param accession \href{https://www.uniprot.org/help/accession_numbers}{
+#' @param accession Character:
+#'   \href{https://www.uniprot.org/help/accession_numbers}{
 #'   UniProtKB primary or secondary accession}.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
@@ -1887,12 +2130,27 @@ rba_uniprot_rna_edit_search <- function(accession = NULL,
 #' @return A list containing the UniProt RNA-editing features details for the
 #'   given accession.
 #'
+#' @references \itemize{
+#'   \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+#'   Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
+#'   https://doi.org/10.1093/nar/gkae1010
+#'   \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+#'   L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+#'   Proteins API: Accessing key integrated protein and genome information.
+#'   Nucleic Acids Research, 45(W1), W539–W544.
+#'   https://doi.org/10.1093/nar/gkx237
+#'   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+#'   Documentation}
+#'   \item \href{https://www.uniprot.org/help/publications}{Citations note
+#'   on UniProt website}
+#'   }
+#'
 #' @examples
 #' \donttest{
 #'   rba_uniprot_rna_edit(accession = "Q16851")
 #' }
 #'
-#' @family "UniProt - Epitopes"
+#' @family "UniProt - RNA Editing"
 #' @export
 rba_uniprot_rna_edit <- function(accession, ...) {
   ## Load Global Options
@@ -1901,7 +2159,7 @@ rba_uniprot_rna_edit <- function(accession, ...) {
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "accession", class = "character", len = 1)
+      list(arg = "accession", class = "character", len = 1L)
     )
   )
 

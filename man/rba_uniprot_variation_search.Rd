@@ -22,80 +22,85 @@ rba_uniprot_variation_search(
 )
 }
 \arguments{
-\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+\item{accession}{Character: (optional)
+\href{https://www.uniprot.org/help/accession_numbers}{
 UniProtKB primary or secondary accession}(s). You can supply up to 100
 accession numbers.}
 
-\item{source_type}{Variation's source type. You can choose up to two of:
-"UniProt", "large scale study" and/or "mixed".}
+\item{source_type}{Character: (optional) Up to two variant source
+types:
+"uniprot", "large scale study", "mixed", "clinvar", "nci-tcga",
+"cosmic curated", "ensembl", "gnomad", "topmed", or "exac".}
 
-\item{consequence_type}{Variation's consequence type. You can choose up to
-two of: "missense", "stop gained" or "stop lost".}
+\item{consequence_type}{Character: (optional) Up to two consequence
+types:
+"missense", "stop gained", or "stop lost".}
 
-\item{wild_type}{Wild type amino acid. Accepted values are IUPAC
-single-letter amino acid (e.g. D for    Aspartic acid) and "*" for stop
+\item{wild_type}{Character: (optional) Wild-type amino acid. Accepted
+values are IUPAC
+single-letter amino acid codes and "*" for a stop
 codon. You can supply up to 20 values.}
 
-\item{alternative_sequence}{Alternative amino acid. Accepted values are IUPAC
-single-letter amino acid (e.g. D for    Aspartic acid) and "*" for stop codon
-and "-" for deletion. You can supply up to 20 values.}
+\item{alternative_sequence}{Character: (optional) Alternative amino
+acid. Accepted values are
+IUPAC single-letter amino acid codes, "*" for a stop codon, and "-" for
+a deletion. You can supply up to 20 values.}
 
-\item{location}{A valid amino acid range (e.g. 10-25) within the sequence
-range where the variation occurs. You can supply up to 20 values.}
+\item{location}{Character: (optional) A valid amino acid range (e.g. 10-25)
+within the sequence
+where the variation occurs.}
 
-\item{disease}{\href{https://www.uniprot.org/diseases/}{Human disease}
-that are associated with a sequence variation. Accepted values are
+\item{disease}{Character: (optional)
+\href{https://www.uniprot.org/diseases/}{Human disease}
+associated with a sequence variation. Accepted values are a
 disease name (e.g. Alzheimer disease 18), partial disease name
-(Alzheimer) and/or disease acronym (e.g. AD). You can supply up to
-20 values.}
+(Alzheimer), or disease acronym (e.g. AD).}
 
-\item{omim}{\href{https://www.ncbi.nlm.nih.gov/omim}{OMIM} ID that is
+\item{omim}{Character or Numeric: (optional)
+\href{https://www.ncbi.nlm.nih.gov/omim}{OMIM} ID that is
 associated with a variation. You can supply up to 20 values.}
 
-\item{evidence}{Pubmed ID of the variation's
-\href{https://www.uniprot.org/citations/}{citation} You can supply up
+\item{evidence}{Character or Numeric: (optional) PubMed ID of a variation's
+\href{https://www.uniprot.org/citations/}{citation}. You can supply up
 to 20 values.}
 
-\item{taxid}{NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+\item{taxid}{Numeric: (optional) NIH-NCBI
+\href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
 You can supply up to 20 taxon IDs.}
 
-\item{db_type}{cross-reference database of the variation. You can supply
-up to two of the following:\itemize{
-\item "dbSNP": \href{https://www.ncbi.nlm.nih.gov/snp/}{NIH-NCBI dbSNP
-database}.
-\item "cosmic curate": \href{https://cancer.sanger.ac.uk/cosmic/}{COSMIC
-(the Catalogue of Somatic Mutations in Cancer)}
-\item "ClinVar": \href{https://www.ncbi.nlm.nih.gov/clinvar/}{NIH-NCBI
-ClinVar}
-}}
+\item{db_type}{Character: (optional) Cross-reference database of the
+variation.
+You can supply up to two values. Examples include \code{"dbSNP"},
+\code{"cosmic curated"}, and \code{"ClinVar"}.}
 
-\item{db_id}{The variation ID in a Cross-reference (external) database.
-You can supply up to 20 values.}
+\item{db_id}{Character: (optional) Variation identifier in a cross-reference
+database. You can
+supply up to 20 values.}
 
-\item{save_peff}{Logical or Character:\itemize{
-\item FALSE: (default) Do not save PEFF file, just return as a list object.
-\item TRUE: Save as PEFF file to an automatically-generated path.
+\item{save_peff}{Logical or Character: (default = \code{FALSE}) \itemize{
+\item FALSE: Return the parsed JSON response.
+\item TRUE: Save the PEFF response to an automatically generated path.
 \item Character string: A valid file path to save the PEFF file.}}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-List where each element corresponds to one UniProt entity returned
-  by your search query. The element itself is a sub-list containing all
-  information that UniProt has about that Variation.
+With \code{save_peff = FALSE}, a list named by UniProt accession.
+  Each element contains one matching entry and its variants. Otherwise, the
+  PEFF response is written to disk and returned as a character string.
 }
 \description{
-Using this function, you can search and retrieve
-  \href{https://www.uniprot.org/help/variant}{Natural variant(s)} that
-  has been annotated in the protein's sequences. You may also refine your
-  search with modifiers such as source type, disease etc. See
-  "Arguments section" for more information.
+Search and retrieve
+  \href{https://www.uniprot.org/help/variant}{natural variants} annotated
+  on protein sequences, including variants imported from supported
+  large-scale studies.
 }
 \details{
-Note that this is a search function. Thus, you are not required to fill
-  every argument; You may use whatever combinations of arguments you see
-  fit for your query.
+At least one primary criterion is required: \code{accession},
+  \code{disease}, \code{omim}, \code{evidence}, \code{taxid},
+  \code{db_type}, or \code{db_id}. The other arguments refine those
+  criteria.
 }
 \section{Corresponding API Resources}{
 
@@ -117,14 +122,14 @@ rba_uniprot_variation_search(disease = "alzheimer",
 }
 \references{
 \itemize{
-  \item The UniProt Consortium , UniProt: the Universal Protein
-  Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+  \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
-  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated protein
-  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237
   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
   Documentation}
   \item \href{https://www.uniprot.org/help/publications}{Citations note

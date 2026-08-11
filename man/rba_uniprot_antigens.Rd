@@ -7,20 +7,21 @@
 rba_uniprot_antigens(accession, ...)
 }
 \arguments{
-\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
-UniProtKB primary or secondary accession}(s).}
+\item{accession}{Character:
+\href{https://www.uniprot.org/help/accession_numbers}{
+UniProtKB primary or secondary accession}.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-A list containing the Antigenic features of your supplied
-  UniProt protein's sequence.
+A list containing the antigenic features mapped to the requested
+  UniProt protein sequence.
 }
 \description{
-UniProt maps Antigenic features from different sources to the proteins'
-  sequences. Using this function, you can retrieve all the Antigenic
-  features that has been map to a given UniProt protein's sequence.
+UniProt maps antigenic (antibody-binding) features from several sources to
+  protein sequences. Retrieve the features mapped to one UniProtKB
+  accession.
 }
 \section{Corresponding API Resources}{
 
@@ -35,14 +36,14 @@ rba_uniprot_antigens("P04626")
 }
 \references{
 \itemize{
-  \item The UniProt Consortium , UniProt: the Universal Protein
-  Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+  \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
-  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated protein
-  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237
   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
   Documentation}
   \item \href{https://www.uniprot.org/help/publications}{Citations note

@@ -13,39 +13,44 @@ rba_uniprot_features(
 )
 }
 \arguments{
-\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+\item{accession}{Character:
+\href{https://www.uniprot.org/help/accession_numbers}{
 UniProtKB primary or secondary accession}.}
 
-\item{types}{\href{https://www.uniprot.org/help/sequence_annotation}{
-Sequence annotation (Features)} types. accepted values
+\item{types}{Character: (optional)
+\href{https://www.uniprot.org/help/sequence_annotation}{
+Sequence annotation (features)} types. Accepted values
 are: "INIT_MET", "SIGNAL", "PROPEP", "TRANSIT", "CHAIN", "PEPTIDE",
-"TOPO_DOM", "TRANSMEM", "DOMAIN", "REPEAT", "CA_BIND", "ZN_FING",
-"DNA_BIND", "NP_BIND", "REGION", "COILED", "MOTIF", "COMPBIAS",
-"ACT_SITE", "METAL", "BINDING", "SITE", "NON_STD", "MOD_RES", "LIPID",
+"TOPO_DOM", "TRANSMEM", "DOMAIN", "REPEAT", "ZN_FING", "DNA_BIND",
+"REGION", "COILED", "MOTIF", "COMPBIAS", "ACT_SITE", "BINDING",
+"SITE", "NON_STD", "MOD_RES", "LIPID",
 "CARBOHYD", "DISULFID", "CROSSLNK", "VAR_SEQ", "VARIANT", "MUTAGEN",
 "UNSURE", "CONFLICT", "NON_CONS", "NON_TER", "HELIX", "TURN", "STRAND"
 and/or "INTRAMEM". You can supply up to 20 types.}
 
-\item{categories}{\href{https://www.uniprot.org/help/sequence_annotation}{
-Sequence annotation (Features)} categories (subsection). accepted values
+\item{categories}{Character: (optional)
+\href{https://www.uniprot.org/help/sequence_annotation}{
+Sequence annotation (features)} categories. Accepted values
 are: "MOLECULE_PROCESSING", "TOPOLOGY", "SEQUENCE_INFORMATION",
 "STRUCTURAL", "DOMAINS_AND_SITES", "PTM", "VARIANTS" and/or "MUTAGENESIS".
-You can supply up to 8 categories.}
+You can supply up to 20 categories.}
 
-\item{location}{(character) Filter the features by the amino acid position in the sequence(s).
-Provide the range as a character string with the format "begin-end", e.g. "35-70"}
+\item{location}{Character: (optional) Amino-acid range in
+\code{"begin-end"} format,
+e.g. \code{"35-70"}.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-A list in which you can find all of your given protein's sequence
-  annotations in a sub-list named "features".
+A list containing the entry metadata, sequence, and matching
+  annotations in its \code{features} element.
 }
 \description{
-Use this function to retrieve
-\href{https://www.uniprot.org/help/sequence_annotation}{sequence annotations
-  (features)} of a protein by it's UniProt accession.
+\href{https://www.uniprot.org/help/sequence_annotation}{UniProt sequence
+  features} describe biologically relevant sites and regions within a
+  protein sequence. Retrieve these annotations for one UniProtKB accession,
+  optionally filtered by annotation type, category, or amino-acid range.
 }
 \section{Corresponding API Resources}{
 
@@ -63,14 +68,14 @@ rba_uniprot_features(accession = "Q99616", types = "DISULFID")
 }
 \references{
 \itemize{
-  \item The UniProt Consortium , UniProt: the Universal Protein
-  Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+  \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
-  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated protein
-  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237
   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
   Documentation}
   \item \href{https://www.uniprot.org/help/publications}{Citations note

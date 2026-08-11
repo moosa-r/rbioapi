@@ -13,33 +13,32 @@ rba_uniprot_proteins_crossref(
 )
 }
 \arguments{
-\item{db_id}{The protein ID in the cross-reference (external) database.}
+\item{db_id}{Character: Protein identifier in the cross-reference database.}
 
-\item{db_name}{\href{https://www.uniprot.org/database/}{cross-reference}
-(external database) name.}
+\item{db_name}{Character:
+\href{https://www.uniprot.org/database/}{Cross-reference database name}.}
 
-\item{reviewed}{Logical: (Optional) If TRUE, only returns
-"UniProtKB/Swiss-Prot" (reviewed) entries; If FALSE, only returns TrEMBL
-(un-reviewed) entries.}
+\item{reviewed}{Logical: (optional) If \code{TRUE}, return only reviewed
+Swiss-Prot entries. If \code{FALSE}, return only unreviewed TrEMBL entries.}
 
-\item{isoform}{Numeric: (Optional) you have two options:\itemize{
+\item{isoform}{Numeric: (optional) One of:\itemize{
 \item 0: Exclude isoforms.
 \item 1: Return isoforms only.}
-see: \href{https://www.uniprot.org/help/alternative_products}{Alternative
-products}}
+See \href{https://www.uniprot.org/help/alternative_products}{alternative
+products}.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-List which each element is a UniProt entity that correspond to
-  your supplied cross-reference database name and ID.
+A list named by UniProt accession. Each element is a UniProtKB entry
+  corresponding to the supplied cross-reference identifier.
 }
 \description{
-\href{https://www.uniprot.org/database/}{UniProt Cross-Reference} links
-  protein Entities with cross-reference (external) databases. Using this
-  function, you can retrieve a UniProt entity using external database name
-  and protein ID in that database.
+UniProt cross-references connect protein entries with identifiers in
+  \href{https://www.uniprot.org/database/}{external databases}. Retrieve
+  UniProtKB entries associated with an identifier from one of these
+  databases.
 }
 \section{Corresponding API Resources}{
 
@@ -60,14 +59,14 @@ rba_uniprot_proteins_crossref("mica", "hgnc", isoform = 0)
 }
 \references{
 \itemize{
-  \item The UniProt Consortium , UniProt: the Universal Protein
-  Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+  \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
-  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated protein
-  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237
   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
   Documentation}
   \item \href{https://www.uniprot.org/help/publications}{Citations note

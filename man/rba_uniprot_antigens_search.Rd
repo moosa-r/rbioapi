@@ -14,39 +14,40 @@ rba_uniprot_antigens_search(
 )
 }
 \arguments{
-\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+\item{accession}{Character: (optional)
+\href{https://www.uniprot.org/help/accession_numbers}{
 UniProtKB primary or secondary accession}(s). You can supply up to 100
 accession numbers.}
 
-\item{antigen_sequence}{Protein sequence in the antigenic site.}
+\item{antigen_sequence}{Character: (optional) A single antigenic protein
+sequence of at least four residues.}
 
-\item{antigen_id}{Human Protein Atlas (HPA) antigen ID. You can supply up to
+\item{antigen_id}{Character: (optional) Human Protein Atlas (HPA) antigen ID.
+You
+can supply up to
 20 IDs.}
 
-\item{ensembl_id}{Ensembl Stable Transcript ID. You can supply up to
+\item{ensembl_id}{Character: (optional) Ensembl stable transcript ID. You can
+supply up to
 20 IDs.}
 
-\item{match_score}{(Numeric) Minimum alignment score for the antigen
-sequence and the target protein sequence.}
+\item{match_score}{Numeric: (optional) A whole number from 0 to 100 giving
+the minimum
+alignment score between the antigen sequence and target protein sequence.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-A list Where each element correspond to a UniProt protein (search
- hit) and Antigenic features are organized under the "features" sub-list.
+A list in which each element represents a matching UniProt entry,
+  named by accession when available. Antigenic annotations are stored in the
+  entry's \code{features} element.
 }
 \description{
-UniProt maps Antigenic (Antibody-binding) features from different sources
-  to the proteins' sequences. Using this function, you can search for
-  Antigenic sequences that has been map to UniProt proteins. You may also
-  refine your search with modifiers such as score etc. See
-  "Arguments section" for more information.
-}
-\details{
-Note that this is a search function. Thus, you are not required to fill
-  every argument; You may use whatever combinations of arguments you see
-  fit for your query.
+UniProt maps antigenic (antibody-binding) features from several sources to
+  protein sequences. Search those mappings using one or more criteria. At
+  least one of \code{accession}, \code{antigen_sequence}, \code{antigen_id},
+  \code{ensembl_id}, or \code{match_score} is required.
 }
 \section{Corresponding API Resources}{
 
@@ -61,14 +62,14 @@ rba_uniprot_antigens_search(antigen_id = "HPA001060")
 }
 \references{
 \itemize{
-  \item The UniProt Consortium , UniProt: the Universal Protein
-  Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+  \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
-  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated protein
-  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237
   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
   Documentation}
   \item \href{https://www.uniprot.org/help/publications}{Citations note

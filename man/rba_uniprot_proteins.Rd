@@ -7,36 +7,35 @@
 rba_uniprot_proteins(accession, interaction = FALSE, isoforms = FALSE, ...)
 }
 \arguments{
-\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+\item{accession}{Character:
+\href{https://www.uniprot.org/help/accession_numbers}{
 UniProtKB primary or secondary accession}.}
 
-\item{interaction}{Logical: (default = FALSE) Only retrieve
+\item{interaction}{Logical: (default = \code{FALSE}) Retrieve
 \href{https://www.uniprot.org/help/interaction_section}{interaction}
-information of your supplied UniProt entity?}
+partners instead of the entry itself?}
 
-\item{isoforms}{Logical: (default = FALSE) Only retrieve
+\item{isoforms}{Logical: (default = \code{FALSE}) Retrieve
 \href{https://www.uniprot.org/help/alternative_products}{isoforms} of your
-supplied UniProt entity?}
+supplied UniProt entry instead of the canonical entry itself?}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-A list that contains UniProt protein informations with your
-  supplied accession.
+A list containing the requested UniProtKB entry. Isoform and
+  interaction results are lists named by accession.
 }
 \description{
-Use this function to retrieve a UniProt Entry by it's UniProt accession.
-  You can also use "isoform" or "interaction" arguments to retrieve
-  isoforms or interactor proteins of that entry. Note that in one function
-  call you can only set none or only one of "isoform" or "interaction" as
-  TRUE, not both of them.
+Retrieve a UniProtKB entry by accession. Alternatively, retrieve its
+  isoforms or interaction partners by setting \code{isoforms = TRUE} or
+  \code{interaction = TRUE}. These two modes are mutually exclusive.
 }
 \section{Corresponding API Resources}{
 
- "GET https://ebi.ac.uk/proteins/api/proteins/\{accession\}"
- \cr "GET https://ebi.ac.uk/proteins/api/proteins/interaction/\{accession\}"
- \cr "GET https://ebi.ac.uk/proteins/api/proteins/\{accession\}/isoforms"
+ "GET https://www.ebi.ac.uk/proteins/api/proteins/\{accession\}"
+ \cr "GET https://www.ebi.ac.uk/proteins/api/proteins/interaction/\{accession\}"
+ \cr "GET https://www.ebi.ac.uk/proteins/api/proteins/\{accession\}/isoforms"
 }
 
 \examples{
@@ -53,14 +52,14 @@ rba_uniprot_proteins(accession = "Q29983", isoforms = TRUE)
 }
 \references{
 \itemize{
-  \item The UniProt Consortium , UniProt: the Universal Protein
-  Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+  \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
-  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated protein
-  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237
   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
   Documentation}
   \item \href{https://www.uniprot.org/help/publications}{Citations note

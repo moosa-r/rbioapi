@@ -23,78 +23,90 @@ rba_uniprot_proteins_search(
 )
 }
 \arguments{
-\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+\item{accession}{Character: (optional)
+\href{https://www.uniprot.org/help/accession_numbers}{
 UniProtKB primary or secondary accession}(s). You can supply up to 100
 accession numbers.}
 
-\item{reviewed}{Logical: If TRUE, only return
-"UniProtKB/Swiss-Prot" (reviewed) entries; If FALSE, only return TrEMBL
-(un-reviewed) entries.}
+\item{reviewed}{Logical: (optional) If \code{TRUE}, return only reviewed
+Swiss-Prot entries. If \code{FALSE}, return only unreviewed TrEMBL
+entries. This is a refining filter and cannot be the sole search
+criterion.}
 
-\item{isoform}{Numeric: you have three options:\itemize{
-\item 0: Exclude isoforms.
-\item 1: Return isoforms only.
-\item 2: Return both.}
-see: \href{https://www.uniprot.org/help/alternative_products}{Alternative
-products}}
+\item{isoform}{Numeric: (optional) One of:\itemize{
+\item 0: Exclude isoforms; this only refines another criterion.
+\item 1: Return isoforms only; this can be a stand-alone criterion.
+\item 2: Return canonical entries and isoforms; this only refines another
+criterion.}
+See \href{https://www.uniprot.org/help/alternative_products}{alternative
+products}.}
 
-\item{go_term}{Limit the search to entries associated with your supplied GO
+\item{go_term}{Character: (optional) Limit the search to entries associated
+with your
+supplied GO
 (\href{https://www.uniprot.org/help/gene_ontology}{Gene Ontology}) term.
-You can supply Either GO ID or a character string -partially or fully-
-matching the term. e.g. "GO:0001776" or "leukocyte homeostasis". if You
+Supply either a GO ID or a character string partially or fully matching
+the term, e.g. "GO:0001776" or "leukocyte homeostasis". If you
 supply "leukocyte", any term containing that word will be included,
-e.g "leukocyte chemotaxis", "leukocyte activation".}
+e.g. "leukocyte chemotaxis" or "leukocyte activation".}
 
-\item{keyword}{Limit the search to entries that contain your supplied
-keyword. see: \href{https://www.uniprot.org/keywords/}{UniProt Keywords}}
+\item{keyword}{Character: (optional) Limit the search to entries that contain
+your
+supplied keyword. See
+\href{https://www.uniprot.org/keywords/}{UniProt Keywords}.}
 
-\item{ec}{\href{https://enzyme.expasy.org/}{EC (Enzyme Commission) number(s)}.
+\item{ec}{Character: (optional)
+\href{https://enzyme.expasy.org/}{EC (Enzyme Commission) number(s)}.
 You can supply up to 20 EC numbers.}
 
-\item{gene}{\href{https://www.uniprot.org/help/gene_name}{UniProt gene
-name(s)}. You can supply up to 20 gene names. e.g. if you supply
-"CD40", "CD40 ligand" will also be included.}
+\item{gene}{Character: (optional)
+\href{https://www.uniprot.org/help/gene_name}{UniProt gene name(s)}.
+You can supply up to 20 gene names. For example, if you supply "CD40",
+"CD40 ligand" will also be included.}
 
-\item{exact_gene}{\href{https://www.uniprot.org/help/gene_name}{UniProt
-exact gene name(s)}. You can supply up to 20 exact gene names. e.g.
-if you supply "CD40", "CD40 ligand" will not be included in the results.}
+\item{exact_gene}{Character: (optional)
+\href{https://www.uniprot.org/help/gene_name}{UniProt exact gene name(s)}.
+You can supply up to 20 exact gene names. For example, if you supply
+"CD40", "CD40 ligand" will not be included in the results.}
 
-\item{protein}{\href{https://www.uniprot.org/help/protein_names}{UniProt
-protein name}}
+\item{protein}{Character: (optional)
+\href{https://www.uniprot.org/help/protein_names}{UniProt protein name}.}
 
-\item{organism}{\href{https://www.uniprot.org/taxonomy/}{Organism name}.}
+\item{organism}{Character: (optional) Organism name.}
 
-\item{taxid}{NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+\item{taxid}{Numeric: (optional) NIH-NCBI
+\href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
 You can supply up to 20 taxon IDs.}
 
-\item{pubmed}{Entries which \href{https://www.uniprot.org/citations/}{cite
-to} the article with your supplied PubMed ID.}
+\item{pubmed}{Character or Numeric: (optional) PubMed ID(s) cited by the
+returned entries. You can supply up to 20 IDs.}
 
-\item{seq_length}{An exact sequence length (e.g. 150) or a range of sequence
-lengths (e.g. "130-158").}
+\item{seq_length}{Character or Numeric: (optional) An exact sequence length
+(e.g. 150)
+or a range of sequence lengths (e.g. "130-158").}
 
-\item{md5}{Sequence md5 value.}
+\item{md5}{Character: (optional) A 32-character hexadecimal sequence MD5
+checksum.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-A List where each element corresponds to one UniProt entity returned
-  by your search query. The element itself is a sub-list containing all
-  information that UniProt has about that entity.
+A list named by UniProt accession. Each element contains one
+  matching UniProtKB entry.
 }
 \description{
-Using this function, you can search and retrieve UniProt Knowledge-base
-  (UniProtKB) protein entries using variety of options. You may also
-  refine your search with modifiers such as sequence length, review status
-  etc. See "Arguments" section" for more information.
+Search and retrieve UniProt Knowledgebase (UniProtKB) protein entries by
+  accession, annotation, gene, organism, sequence properties, or other
+  supported criteria.
 }
 \details{
-Note that this is a search function. Thus, you are not required to fill
-  every argument; You may use whatever combinations of arguments you see
-  fit for your query.s
-  \cr UniProt Entries are grouped in two sections:\enumerate{
-  \item Reviewed(Swiss-Prot): Manually annotated records with information
+At least one primary search criterion is required. The value
+  \code{isoform = 1} can be used by itself; \code{reviewed} and the other
+  \code{isoform} values only refine another criterion.
+
+UniProtKB entries are grouped into two sections:\enumerate{
+  \item Reviewed (Swiss-Prot): Manually annotated records with information
   extracted from literature and curator-evaluated computational analysis.
   \item Unreviewed (TrEMBL): Computationally analyzed records that await
   full manual annotation.}
@@ -121,7 +133,9 @@ rba_uniprot_proteins_search(gene = "cd40",  reviewed = TRUE)
 rba_uniprot_proteins_search(gene = "cd40",  reviewed = TRUE, isoform = 1)
 }
 \donttest{
-rba_uniprot_proteins_search(keyword = "Inhibition of host chemokines by virus")
+rba_uniprot_proteins_search(
+  keyword = "Inhibition of host chemokines by virus"
+)
 }
 \donttest{
 rba_uniprot_proteins_search(keyword = "chemokines")
@@ -130,14 +144,14 @@ rba_uniprot_proteins_search(keyword = "chemokines")
 }
 \references{
 \itemize{
-  \item The UniProt Consortium , UniProt: the Universal Protein
-  Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+  \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
-  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated protein
-  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237
   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
   Documentation}
   \item \href{https://www.uniprot.org/help/publications}{Citations note

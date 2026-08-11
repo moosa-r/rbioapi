@@ -7,7 +7,8 @@
 rba_uniprot_epitope(accession, ...)
 }
 \arguments{
-\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+\item{accession}{Character:
+\href{https://www.uniprot.org/help/accession_numbers}{
 UniProtKB primary or secondary accession}.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
@@ -31,9 +32,24 @@ rba_uniprot_epitope(accession = "P36222")
 }
 
 }
+\references{
+\itemize{
+  \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
+  https://doi.org/10.1093/nar/gkae1010
+  \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237
+  \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+  Documentation}
+  \item \href{https://www.uniprot.org/help/publications}{Citations note
+  on UniProt website}
+  }
+}
 \seealso{
 Other "UniProt - Epitopes":
-\code{\link[=rba_uniprot_epitope_search]{rba_uniprot_epitope_search()}},
-\code{\link[=rba_uniprot_rna_edit]{rba_uniprot_rna_edit()}}
+\code{\link[=rba_uniprot_epitope_search]{rba_uniprot_epitope_search()}}
 }
 \concept{"UniProt - Epitopes"}

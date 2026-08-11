@@ -7,11 +7,13 @@
 rba_uniprot_mutagenesis(accession, location = NULL, ...)
 }
 \arguments{
-\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
-UniProtKB primary or secondary accession}(s).}
+\item{accession}{Character:
+\href{https://www.uniprot.org/help/accession_numbers}{
+UniProtKB primary or secondary accession}.}
 
-\item{location}{A valid amino acid range (e.g. 10-25) within the sequence
-range of the given proein.}
+\item{location}{Character: (optional) A valid amino acid range (e.g. 10-25)
+within the sequence
+of the given protein.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
@@ -21,11 +23,10 @@ A list containing the mutagenesis description of your supplied
   UniProt protein's sequence.
 }
 \description{
-UniProt describes the effects of mutations in proteins' amino acid
-  sequence on the biological properties of the protein, cell or the
-  organism. Using this function, you can get the
+UniProt describes how sequence mutations affect the biological properties
+  of a protein, cell, or organism. Retrieve the
   \href{https://www.uniprot.org/help/mutagen}{
-  Mutagenesis description} that has been mapped to a given UniProt protein.
+  mutagenesis annotations} mapped to one UniProt protein.
 }
 \section{Corresponding API Resources}{
 
@@ -40,14 +41,14 @@ rba_uniprot_mutagenesis(accession = "P0DTC2", location = "300-400")
 }
 \references{
 \itemize{
-  \item The UniProt Consortium , UniProt: the Universal Protein
-  Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+  \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
-  \item Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated protein
-  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237
+  \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237
   \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
   Documentation}
   \item \href{https://www.uniprot.org/help/publications}{Citations note

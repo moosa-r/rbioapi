@@ -7,34 +7,36 @@
 rba_uniprot_rna_edit_search(
   accession = NULL,
   taxid = NULL,
-  variantlocation = NULL,
+  variant_location = NULL,
   ...
 )
 }
 \arguments{
-\item{accession}{\href{https://www.uniprot.org/help/accession_numbers}{
+\item{accession}{Character: (optional)
+\href{https://www.uniprot.org/help/accession_numbers}{
 UniProtKB primary or secondary accession}(s). You can supply up to 100
 accession numbers.}
 
-\item{taxid}{(Numeric) NIH-NCBI \href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
+\item{taxid}{Numeric: (optional) NIH-NCBI
+\href{https://www.uniprot.org/taxonomy/}{Taxon ID}.
 You can supply up to 20 taxon IDs.}
 
-\item{variantlocation}{Character: RNA editing variant location(s).
-You can supply up to 20 taxon IDs.}
+\item{variant_location}{Character: (optional) Up to four protein-level variant
+locations, for example \code{"p.Leu336Pro"}.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-A List where each element corresponds to one UniProt entity returned
-  by your search query. The element itself is a sub-list containing all
-  information that UniProt has about that entity.
+A list in which each element represents a matching UniProt entry and
+  is named by accession when available.
 }
 \description{
-UniProt Curates \href{https://www.uniprot.org/help/rna_editing}{RNA-editing
+UniProt curates \href{https://www.uniprot.org/help/rna_editing}{RNA-editing
   events} (conversion, insertion, deletion of nucleotides). Use this
   function to search RNA editing records in UniProt using various
-  criteria such as accession, taxon ID, or variant location.
+  criteria such as accession, taxon ID, or protein-level variant location.
+  At least one criterion is required.
 }
 \section{Corresponding API Resources}{
 
@@ -46,5 +48,25 @@ UniProt Curates \href{https://www.uniprot.org/help/rna_editing}{RNA-editing
   rba_uniprot_rna_edit_search(accession = c("Q16851", "Q16849"))
 }
 
+}
+\references{
+\itemize{
+  \item The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
+  https://doi.org/10.1093/nar/gkae1010
+  \item Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237
+  \item \href{https://www.ebi.ac.uk/proteins/api/doc/}{Proteins API
+  Documentation}
+  \item \href{https://www.uniprot.org/help/publications}{Citations note
+  on UniProt website}
+  }
+}
+\seealso{
+Other "UniProt - RNA Editing":
+\code{\link[=rba_uniprot_rna_edit]{rba_uniprot_rna_edit()}}
 }
 \concept{"UniProt - RNA Editing"}
