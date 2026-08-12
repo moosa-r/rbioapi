@@ -131,7 +131,7 @@ rba_uniprot_uniparc_search <- function(upi = NULL,
       list(arg = "protein", class = "character", len = 1L),
       list(
         arg = "taxid", class = c("numeric", "integer"),
-        max_len = 20, min_val = 1
+        max_len = 20, integerish = TRUE, min_val = 1
       ),
       list(arg = "organism", class = "character", len = 1L),
       list(
@@ -151,7 +151,7 @@ rba_uniprot_uniparc_search <- function(upi = NULL,
       list(arg = "rf_active", class = "logical", len = 1L),
       list(
         arg = "rf_tax_id", class = c("numeric", "integer"),
-        min_val = 1
+        integerish = TRUE, min_val = 1
       )
     ),
     cond = list(
@@ -163,14 +163,6 @@ rba_uniprot_uniparc_search <- function(upi = NULL,
           is.null(signature_id), is.null(upid), is.null(seq_length)
         )),
         "Supply at least one UniParc search criterion."
-      ),
-      list(
-        quote(
-          (!is.null(taxid) && any(!is.finite(taxid) | taxid %% 1 != 0)) ||
-            (!is.null(rf_tax_id) &&
-              any(!is.finite(rf_tax_id) | rf_tax_id %% 1 != 0))
-        ),
-        "`taxid` and `rf_tax_id` values should be finite, positive whole numbers."
       ),
       list(
         quote(
@@ -322,20 +314,13 @@ rba_uniprot_uniparc <- function(upi = NULL,
       list(arg = "rf_active", class = "logical", len = 1L),
       list(
         arg = "rf_tax_id", class = c("numeric", "integer"),
-        min_val = 1
+        integerish = TRUE, min_val = 1
       )
     ),
     cond = list(
       list(
         quote(sum(!is.null(accession), !is.null(db_id), !is.null(upid), !is.null(upi)) != 1),
         "Supply exactly one of `accession`, `db_id`, `upid`, or `upi`."
-      ),
-      list(
-        quote(
-          !is.null(rf_tax_id) &&
-            any(!is.finite(rf_tax_id) | rf_tax_id %% 1 != 0)
-        ),
-        "`rf_tax_id` values should be finite, positive whole numbers."
       )
     )
   )
@@ -467,7 +452,7 @@ rba_uniprot_uniparc_bestguess <- function(upi = NULL,
       list(arg = "gene", class = "character", max_len = 20),
       list(
         arg = "taxid", class = c("numeric", "integer"),
-        max_len = 20, min_val = 1
+        max_len = 20, integerish = TRUE, min_val = 1
       )
     ),
     cond = list(
@@ -476,10 +461,6 @@ rba_uniprot_uniparc_bestguess <- function(upi = NULL,
           is.null(upi), is.null(accession), is.null(db_id), is.null(gene)
         )),
         "Supply at least one of `upi`, `accession`, `db_id`, or `gene`."
-      ),
-      list(
-        quote(!is.null(taxid) && any(!is.finite(taxid) | taxid %% 1 != 0)),
-        "`taxid` values should be finite, positive whole numbers."
       )
     )
   )
@@ -584,16 +565,7 @@ rba_uniprot_uniparc_sequence <- function(sequence,
       list(arg = "rf_active", class = "logical", len = 1L),
       list(
         arg = "rf_tax_id", class = c("numeric", "integer"),
-        min_val = 1
-      )
-    ),
-    cond = list(
-      list(
-        quote(
-          !is.null(rf_tax_id) &&
-            any(!is.finite(rf_tax_id) | rf_tax_id %% 1 != 0)
-        ),
-        "`rf_tax_id` values should be finite, positive whole numbers."
+        integerish = TRUE, min_val = 1
       )
     )
   )

@@ -48,13 +48,7 @@ rba_uniprot_taxonomy_lca <- function(ids,
     cons = list(
       list(
         arg = "ids", class = c("numeric", "integer"),
-        min_len = 2, min_val = 1
-      )
-    ),
-    cond = list(
-      list(
-        quote(any(!is.finite(ids) | ids %% 1 != 0)),
-        "`ids` values should be finite, positive whole numbers."
+        min_len = 2, integerish = TRUE, min_val = 1
       )
     )
   )
@@ -154,7 +148,7 @@ rba_uniprot_taxonomy <- function(ids,
     cons = list(
       list(
         arg = "ids", class = c("numeric", "integer"),
-        min_len = 1L, min_val = 1
+        min_len = 1L, integerish = TRUE, min_val = 1
       ),
       list(
         arg = "hierarchy", class = "character",
@@ -166,11 +160,11 @@ rba_uniprot_taxonomy <- function(ids,
       ),
       list(
         arg = "page_size", class = c("numeric", "integer"),
-        len = 1L, ran = c(1, 200), no_null = TRUE
+        len = 1L, integerish = TRUE, ran = c(1, 200), no_null = TRUE
       ),
       list(
         arg = "page_number", class = c("numeric", "integer"),
-        len = 1L, min_val = 1, no_null = TRUE
+        len = 1L, integerish = TRUE, min_val = 1, no_null = TRUE
       )
     ),
     cond = list(
@@ -185,17 +179,6 @@ rba_uniprot_taxonomy <- function(ids,
         ),
         "`page_size` and `page_number` are ignored unless `hierarchy` is `children` or `siblings`.",
         warn = TRUE
-      ),
-      list(
-        quote(any(!is.finite(ids) | ids %% 1 != 0)),
-        "`ids` values should be finite, positive whole numbers."
-      ),
-      list(
-        quote(
-          !is.finite(page_size) || page_size %% 1 != 0 ||
-            !is.finite(page_number) || page_number %% 1 != 0
-        ),
-        "`page_size` and `page_number` should be finite, positive whole numbers."
       )
     )
   )
@@ -299,13 +282,7 @@ rba_uniprot_taxonomy_lineage <- function(id,
     cons = list(
       list(
         arg = "id", class = c("numeric", "integer"),
-        len = 1L, min_val = 1
-      )
-    ),
-    cond = list(
-      list(
-        quote(!is.finite(id) || id %% 1 != 0),
-        "`id` should be a finite, positive whole number."
+        len = 1L, integerish = TRUE, min_val = 1
       )
     )
   )
@@ -411,20 +388,11 @@ rba_uniprot_taxonomy_name <- function(name,
       ),
       list(
         arg = "page_size", class = c("numeric", "integer"),
-        len = 1L, ran = c(1, 200), no_null = TRUE
+        len = 1L, integerish = TRUE, ran = c(1, 200), no_null = TRUE
       ),
       list(
         arg = "page_number", class = c("numeric", "integer"),
-        len = 1L, min_val = 1, no_null = TRUE
-      )
-    ),
-    cond = list(
-      list(
-        quote(
-          !is.finite(page_size) || page_size %% 1 != 0 ||
-            !is.finite(page_number) || page_number %% 1 != 0
-        ),
-        "`page_size` and `page_number` should be finite, positive whole numbers."
+        len = 1L, integerish = TRUE, min_val = 1, no_null = TRUE
       )
     )
   )
@@ -543,7 +511,7 @@ rba_uniprot_taxonomy_path <- function(id,
     cons = list(
       list(
         arg = "id", class = c("numeric", "integer"),
-        len = 1L, min_val = 1
+        len = 1L, integerish = TRUE, min_val = 1
       ),
       list(
         arg = "direction", class = "character", len = 1L,
@@ -551,16 +519,7 @@ rba_uniprot_taxonomy_path <- function(id,
       ),
       list(
         arg = "depth", class = c("numeric", "integer"),
-        len = 1L, ran = c(1, 5), no_null = TRUE
-      )
-    ),
-    cond = list(
-      list(
-        quote(
-          !is.finite(id) || id %% 1 != 0 ||
-            !is.finite(depth) || depth %% 1 != 0
-        ),
-        "`id` and `depth` should be finite, positive whole numbers."
+        len = 1L, integerish = TRUE, ran = c(1, 5), no_null = TRUE
       )
     )
   )
@@ -643,20 +602,11 @@ rba_uniprot_taxonomy_relationship <- function(from,
     cons = list(
       list(
         arg = "from", class = c("numeric", "integer"),
-        len = 1L, min_val = 1
+        len = 1L, integerish = TRUE, min_val = 1
       ),
       list(
         arg = "to", class = c("numeric", "integer"),
-        len = 1L, min_val = 1
-      )
-    ),
-    cond = list(
-      list(
-        quote(
-          !is.finite(from) || from %% 1 != 0 ||
-            !is.finite(to) || to %% 1 != 0
-        ),
-        "`from` and `to` should be finite, positive whole numbers."
+        len = 1L, integerish = TRUE, min_val = 1
       )
     )
   )

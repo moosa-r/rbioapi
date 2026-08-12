@@ -883,7 +883,7 @@ rba_reactome_exporter_diagram <- function(event_id,
       ),
       list(
         arg = "image_quality", class = c("numeric", "integer"),
-        len = 1L, ran = c(1, 10)
+        len = 1L, integerish = TRUE, ran = c(1, 10), no_null = TRUE
       ),
       list(arg = "flag_element", class = "character", len = 1L),
       list(arg = "flg_interactors", class = "logical", len = 1L),
@@ -891,7 +891,7 @@ rba_reactome_exporter_diagram <- function(event_id,
       list(arg = "title", class = "logical", len = 1L),
       list(
         arg = "margin", class = c("numeric", "integer"),
-        len = 1L, ran = c(0, 20)
+        len = 1L, integerish = TRUE, ran = c(0, 20), no_null = TRUE
       ),
       list(arg = "ehld", class = "logical", len = 1L),
       list(
@@ -910,24 +910,15 @@ rba_reactome_exporter_diagram <- function(event_id,
         arg = "analysis_profile", class = "character", len = 1L,
         val = c("Standard", "Strosobar", "Copper Plus")
       ),
-      list(arg = "exp_column", class = c("numeric", "integer"), len = 1L)
+      list(
+        arg = "exp_column", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE
+      )
     ),
     cond = list(
       list(
         quote(!is.null(exp_column) && is.null(token)),
         "You cannot specify expression column without providing a token."
-      ),
-      list(
-        quote(!is.finite(image_quality) || image_quality != floor(image_quality)),
-        "`image_quality` should be a finite integer from 1 to 10."
-      ),
-      list(
-        quote(!is.finite(margin) || margin != floor(margin)),
-        "`margin` should be a finite integer from 0 to 20."
-      ),
-      list(
-        quote(!is.null(exp_column) && (!is.finite(exp_column) || exp_column != floor(exp_column))),
-        "`exp_column` should be a finite integer."
       )
     )
   )
@@ -1227,7 +1218,7 @@ rba_reactome_exporter_overview <- function(species,
       list(arg = "save_to", class = "character", len = 1L, no_na = FALSE),
       list(
         arg = "image_quality", class = c("numeric", "integer"),
-        len = 1L, ran = c(1, 10)
+        len = 1L, integerish = TRUE, ran = c(1, 10), no_null = TRUE
       ),
       list(arg = "flag_element", class = "character", len = 1L),
       list(arg = "flg_interactors", class = "logical", len = 1L),
@@ -1235,7 +1226,7 @@ rba_reactome_exporter_overview <- function(species,
       list(arg = "title", class = "logical", len = 1L),
       list(
         arg = "margin", class = c("numeric", "integer"),
-        len = 1L, ran = c(0, 20)
+        len = 1L, integerish = TRUE, ran = c(0, 20), no_null = TRUE
       ),
       list(
         arg = "diagram_profile", class = "character", len = 1L,
@@ -1252,25 +1243,16 @@ rba_reactome_exporter_overview <- function(species,
           "NCBI_PROTEIN", "EMBL", "COMPOUND", "PUBCHEM_COMPOUND"
         )
       ),
-      list(arg = "exp_column", class = c("numeric", "integer"), len = 1L),
+      list(
+        arg = "exp_column", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE
+      ),
       list(arg = "coverage", class = "logical", len = 1L)
     ),
     cond = list(
       list(
         quote(!is.null(exp_column) && is.null(token)),
         "You cannot specify expression column without providing a token."
-      ),
-      list(
-        quote(!is.finite(image_quality) || image_quality != floor(image_quality)),
-        "`image_quality` should be a finite integer from 1 to 10."
-      ),
-      list(
-        quote(!is.finite(margin) || margin != floor(margin)),
-        "`margin` should be a finite integer from 0 to 20."
-      ),
-      list(
-        quote(!is.null(exp_column) && (!is.finite(exp_column) || exp_column != floor(exp_column))),
-        "`exp_column` should be a finite integer."
       )
     )
   )
@@ -1440,7 +1422,7 @@ rba_reactome_exporter_reaction <- function(event_id,
       ),
       list(
         arg = "image_quality", class = c("numeric", "integer"),
-        len = 1L, ran = c(1, 10)
+        len = 1L, integerish = TRUE, ran = c(1, 10), no_null = TRUE
       ),
       list(arg = "flag_element", class = "character", len = 1L),
       list(arg = "flg_interactors", class = "logical", len = 1L),
@@ -1448,7 +1430,7 @@ rba_reactome_exporter_reaction <- function(event_id,
       list(arg = "title", class = "logical", len = 1L),
       list(
         arg = "margin", class = c("numeric", "integer"),
-        len = 1L, ran = c(0, 20)
+        len = 1L, integerish = TRUE, ran = c(0, 20), no_null = TRUE
       ),
       list(
         arg = "diagram_profile", class = "character", len = 1L,
@@ -1465,24 +1447,15 @@ rba_reactome_exporter_reaction <- function(event_id,
       list(
         arg = "analysis_profile", class = "character", len = 1L,
         val = c("Standard", "Strosobar", "Copper Plus")),
-      list(arg = "exp_column", class = c("numeric", "integer"), len = 1L)
+      list(
+        arg = "exp_column", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE
+      )
     ),
     cond = list(
       list(
         quote(!is.null(exp_column) && is.null(token)),
         "You cannot specify expression column without providing a token."
-      ),
-      list(
-        quote(!is.finite(image_quality) || image_quality != floor(image_quality)),
-        "`image_quality` should be a finite integer from 1 to 10."
-      ),
-      list(
-        quote(!is.finite(margin) || margin != floor(margin)),
-        "`margin` should be a finite integer from 0 to 20."
-      ),
-      list(
-        quote(!is.null(exp_column) && (!is.finite(exp_column) || exp_column != floor(exp_column))),
-        "`exp_column` should be a finite integer."
       )
     )
   )
@@ -2045,13 +2018,7 @@ rba_reactome_orthology <- function(event_ids,
       ),
       list(
         arg = "species_dbid", class = c("numeric", "integer"),
-        len = 1L, min_val = 0
-      )
-    ),
-    cond = list(
-      list(
-        quote(!is.finite(species_dbid) || species_dbid != floor(species_dbid)),
-        "`species_dbid` should be a finite, non-negative integer."
+        len = 1L, integerish = TRUE, min_val = 0
       )
     )
   )
@@ -3006,7 +2973,7 @@ rba_reactome_query <- function(ids,
     cons = list(
       list(
         arg = "ids", class = c("character", "numeric", "integer"),
-        min_len = 1L, max_len = 20
+        min_len = 1L, max_len = 20, integerish = TRUE
       ),
       list(arg = "enhanced", class = "logical", len = 1L),
       list(arg = "map", class = "logical", len = 1L),
@@ -3030,8 +2997,8 @@ rba_reactome_query <- function(ids,
         "`ids` cannot contain empty character strings."
       ),
       list(
-        quote(is.numeric(ids) && any(!is.finite(ids) | ids <= 0 | ids != floor(ids))),
-        "Numeric `ids` should be finite, positive whole numbers."
+        quote(is.numeric(ids) && any(ids <= 0)),
+        "Numeric `ids` should be positive."
       ),
       list(
         quote(!is.null(attribute_name) && !nzchar(trimws(attribute_name))),
@@ -3265,11 +3232,11 @@ rba_reactome_search <- function(query,
       list(arg = "cluster", class = "logical", len = 1L, no_null = TRUE),
       list(
         arg = "page_size", class = c("numeric", "integer"),
-        len = 1L, min_val = 1, no_null = TRUE
+        len = 1L, integerish = TRUE, min_val = 1, no_null = TRUE
       ),
       list(
         arg = "page", class = c("numeric", "integer"),
-        len = 1L, min_val = 1, no_null = TRUE
+        len = 1L, integerish = TRUE, min_val = 1, no_null = TRUE
       ),
       list(
         arg = "scope", class = "character", len = 1L, no_null = TRUE,
@@ -3288,14 +3255,6 @@ rba_reactome_search <- function(query,
       list(
         quote(any(!nzchar(trimws(c(species, types, compartments, keywords))))),
         "Search filters cannot contain empty character strings."
-      ),
-      list(
-        quote(!is.finite(page_size) || page_size != floor(page_size)),
-        "`page_size` should be a finite, positive whole number."
-      ),
-      list(
-        quote(!is.finite(page) || page != floor(page)),
-        "`page` should be a finite, positive whole number."
       )
     )
   )
@@ -3448,11 +3407,11 @@ rba_reactome_xref <- function(xref_id,
       list(arg = "db_filter", class = "character", len = 1L),
       list(
         arg = "page_size", class = c("numeric", "integer"), len = 1L,
-        min_val = 1, no_null = TRUE
+        integerish = TRUE, min_val = 1, no_null = TRUE
       ),
       list(
         arg = "page", class = c("numeric", "integer"), len = 1L,
-        min_val = 1, no_null = TRUE
+        integerish = TRUE, min_val = 1, no_null = TRUE
       )
     ),
     cond = list(
@@ -3471,14 +3430,6 @@ rba_reactome_xref <- function(xref_id,
       list(
         quote(!is.null(db_filter) && !isTRUE(expanded)),
         "You can only supply `db_filter` when `expanded = TRUE`."
-      ),
-      list(
-        quote(!is.finite(page_size) || page_size != floor(page_size)),
-        "`page_size` should be a finite, positive whole number."
-      ),
-      list(
-        quote(!is.finite(page) || page != floor(page)),
-        "`page` should be a finite, positive whole number."
       ),
       list(
         quote(

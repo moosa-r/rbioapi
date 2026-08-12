@@ -649,6 +649,8 @@ rba_mieaa_enrich_submit <- function(test_set,
         arg = "min_hits",
         class = c("numeric", "integer"),
         len = 1L,
+        integerish = TRUE,
+        min_val = 1,
         no_null = TRUE
       ),
       list(arg = "ref_set", class = "character", min_len = 1L)
@@ -657,10 +659,6 @@ rba_mieaa_enrich_submit <- function(test_set,
       list(
         quote(sig_level <= 0 || sig_level > 1),
         "`sig_level` must be greater than 0 and at most 1."
-      ),
-      list(
-        quote(!is.finite(min_hits) || min_hits < 1 || min_hits != floor(min_hits)),
-        "`min_hits` must be a positive integer."
       )
     )
   )

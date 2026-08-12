@@ -354,21 +354,19 @@ rba_reactome_analysis <- function(input,
       ),
       list(arg = "p_value", class = c("numeric", "integer"), len = 1L, ran = c(0, 1)),
       list(arg = "include_disease", class = "logical", len = 1L),
-      list(arg = "min", class = c("numeric", "integer"), len = 1L, min_val = 0),
-      list(arg = "max", class = c("numeric", "integer"), len = 1L, min_val = 0)
+      list(
+        arg = "min", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE, min_val = 0
+      ),
+      list(
+        arg = "max", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE, min_val = 0
+      )
     ),
     cond = list(
       list(
         quote(isTRUE(projection) && !is.null(species)),
         "You cannot supply 'species' when 'projection' argument is TRUE"
-      ),
-      list(
-        quote(!is.null(min) && (!is.finite(min) || min != floor(min))),
-        "`min` should be a finite, non-negative integer."
-      ),
-      list(
-        quote(!is.null(max) && (!is.finite(max) || max != floor(max))),
-        "`max` should be a finite, non-negative integer."
       ),
       list(
         quote(!is.null(min) && !is.null(max) && min > max),
@@ -541,7 +539,10 @@ rba_reactome_analysis_pdf <- function(token,
       list(arg = "token", class = "character", len = 1L),
       list(arg = "species", class = c("character", "numeric", "integer"), len = 1L),
       list(arg = "save_to", class = "character", len = 1L, no_na = FALSE),
-      list(arg = "number", class = c("numeric", "integer"), len = 1L, min_val = 1),
+      list(
+        arg = "number", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE, min_val = 1, no_null = TRUE
+      ),
       list(
         arg = "resource", class = "character", len = 1L,
         val = c("TOTAL",
@@ -566,12 +567,6 @@ rba_reactome_analysis_pdf <- function(token,
       list(
         arg = "fireworks_profile", class = "character", len = 1L,
         val = c("Cooper", "Cooper Plus", "Barium Lithium", "Calcium Salts")
-      )
-    ),
-    cond = list(
-      list(
-        quote(!is.finite(number) || number != floor(number)),
-        "`number` should be a finite, positive integer."
       )
     )
   )
@@ -1147,7 +1142,7 @@ rba_reactome_analysis_species <- function(species_dbid,
     cons = list(
       list(
         arg = "species_dbid", class = c("numeric", "integer"),
-        len = 1L, min_val = 0
+        len = 1L, integerish = TRUE, min_val = 0
       ),
       list(
         arg = "sort_by",
@@ -1180,22 +1175,16 @@ rba_reactome_analysis_species <- function(species_dbid,
                 "PUBCHEM_COMPOUND")
       ),
       list(arg = "p_value", class = c("numeric", "integer"), len = 1L, ran = c(0, 1)),
-      list(arg = "min", class = c("numeric", "integer"), len = 1L, min_val = 0),
-      list(arg = "max", class = c("numeric", "integer"), len = 1L, min_val = 0)
+      list(
+        arg = "min", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE, min_val = 0
+      ),
+      list(
+        arg = "max", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE, min_val = 0
+      )
     ),
     cond = list(
-      list(
-        quote(!is.finite(species_dbid) || species_dbid != floor(species_dbid)),
-        "`species_dbid` should be a finite, non-negative integer."
-      ),
-      list(
-        quote(!is.null(min) && (!is.finite(min) || min != floor(min))),
-        "`min` should be a finite, non-negative integer."
-      ),
-      list(
-        quote(!is.null(max) && (!is.finite(max) || max != floor(max))),
-        "`max` should be a finite, non-negative integer."
-      ),
       list(
         quote(!is.null(min) && !is.null(max) && min > max),
         "`min` cannot be greater than `max`."
@@ -1369,18 +1358,16 @@ rba_reactome_analysis_token <- function(token,
       ),
       list(arg = "p_value", class = c("numeric", "integer"), len = 1L, ran = c(0, 1)),
       list(arg = "include_disease", class = "logical", len = 1L),
-      list(arg = "min", class = c("numeric", "integer"), len = 1L, min_val = 0),
-      list(arg = "max", class = c("numeric", "integer"), len = 1L, min_val = 0)
+      list(
+        arg = "min", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE, min_val = 0
+      ),
+      list(
+        arg = "max", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE, min_val = 0
+      )
     ),
     cond = list(
-      list(
-        quote(!is.null(min) && (!is.finite(min) || min != floor(min))),
-        "`min` should be a finite, non-negative integer."
-      ),
-      list(
-        quote(!is.null(max) && (!is.finite(max) || max != floor(max))),
-        "`max` should be a finite, non-negative integer."
-      ),
       list(
         quote(!is.null(min) && !is.null(max) && min > max),
         "`min` cannot be greater than `max`."

@@ -569,18 +569,13 @@ rba_panther_info <- function(what,
       list(
         arg = "families_page",
         class = c("numeric", "integer"),
-        len = 1L
+        len = 1L,
+        integerish = TRUE,
+        min_val = 1,
+        no_null = TRUE
       )
     ),
     cond = list(
-      list(
-        quote(
-          !is.finite(families_page) ||
-            families_page < 1 ||
-            families_page %% 1 != 0
-        ),
-        "'families_page' should be a positive whole number."
-      ),
       list(
         quote(families_page != 1 && what != "families"),
         "'families_page' was ignored because 'what' argument is not 'families'.",
@@ -758,13 +753,9 @@ rba_panther_genome <- function(organism,
         arg = "page",
         class = c("numeric", "integer"),
         len = 1L,
+        integerish = TRUE,
+        min_val = 1,
         no_null = TRUE
-      )
-    ),
-    cond = list(
-      list(
-        quote(!is.finite(page) || page < 1 || page %% 1 != 0),
-        "'page' should be a positive whole number."
       )
     )
   )

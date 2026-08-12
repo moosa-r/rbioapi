@@ -84,7 +84,7 @@ rba_uniprot_coordinates_search <- function(accession = NULL,
       list(arg = "protein", class = "character", len = 1L),
       list(
         arg = "taxid", class = c("numeric", "integer"), max_len = 20,
-        min_val = 1
+        integerish = TRUE, min_val = 1
       ),
       list(arg = "location", class = "character", len = 1L)
     ),
@@ -97,10 +97,6 @@ rba_uniprot_coordinates_search <- function(accession = NULL,
           )
         ),
         "Supply at least one search criterion: accession, chromosome, ensembl_id, gene, protein, taxid, or location."
-      ),
-      list(
-        quote(!is.null(taxid) && any(!is.finite(taxid) | taxid %% 1 != 0)),
-        "`taxid` values should be finite, positive whole numbers."
       )
     )
   )
@@ -212,15 +208,15 @@ rba_uniprot_coordinates_location_protein <- function(accession,
       list(arg = "accession", class = "character", len = 1L),
       list(
         arg = "p_position", class = c("numeric", "integer"), len = 1L,
-        min_val = 1
+        integerish = TRUE, min_val = 1
       ),
       list(
         arg = "p_start", class = c("numeric", "integer"), len = 1L,
-        min_val = 1
+        integerish = TRUE, min_val = 1
       ),
       list(
         arg = "p_end", class = c("numeric", "integer"), len = 1L,
-        min_val = 1
+        integerish = TRUE, min_val = 1
       )
     ),
     cond = list(
@@ -232,15 +228,6 @@ rba_uniprot_coordinates_location_protein <- function(accession,
               (is.null(p_start) || is.null(p_end)))
         ),
         "Supply either `p_position` alone or `p_start` and `p_end` together."
-      ),
-      list(
-        quote(
-          any(
-            !is.finite(c(p_position, p_start, p_end)) |
-              c(p_position, p_start, p_end) %% 1 != 0
-          )
-        ),
-        "Protein positions should be finite, positive whole numbers."
       ),
       list(
         quote(!is.null(p_start) && !is.null(p_end) && p_start > p_end),
@@ -467,19 +454,13 @@ rba_uniprot_coordinates_location <- function(taxid,
     cons = list(
       list(
         arg = "taxid", class = c("numeric", "integer"), len = 1L,
-        min_val = 1
+        integerish = TRUE, min_val = 1
       ),
       list(arg = "locations", class = "character", len = 1L),
       list(
         arg = "in_range", class = "logical", len = 1L, no_null = TRUE
       ),
       list(arg = "feature", class = "logical", len = 1L, no_null = TRUE)
-    ),
-    cond = list(
-      list(
-        quote(!is.finite(taxid) || taxid %% 1 != 0),
-        "`taxid` should be a finite, positive whole number."
-      )
     )
   )
 
@@ -590,7 +571,7 @@ rba_uniprot_coordinates_location_genome <- function(taxid,
     cons = list(
       list(
         arg = "taxid", class = c("numeric", "integer"), len = 1L,
-        min_val = 1
+        integerish = TRUE, min_val = 1
       ),
       list(
         arg = "chromosome", class = c("numeric", "integer", "character"),
@@ -598,15 +579,15 @@ rba_uniprot_coordinates_location_genome <- function(taxid,
       ),
       list(
         arg = "g_position", class = c("numeric", "integer"), len = 1L,
-        min_val = 1
+        integerish = TRUE, min_val = 1
       ),
       list(
         arg = "g_start", class = c("numeric", "integer"), len = 1L,
-        min_val = 1
+        integerish = TRUE, min_val = 1
       ),
       list(
         arg = "g_end", class = c("numeric", "integer"), len = 1L,
-        min_val = 1
+        integerish = TRUE, min_val = 1
       )
     ),
     cond = list(
@@ -618,16 +599,6 @@ rba_uniprot_coordinates_location_genome <- function(taxid,
               (is.null(g_start) || is.null(g_end)))
         ),
         "Supply either `g_position` alone or `g_start` and `g_end` together."
-      ),
-      list(
-        quote(
-          !is.finite(taxid) || taxid %% 1 != 0 ||
-            any(
-              !is.finite(c(g_position, g_start, g_end)) |
-                c(g_position, g_start, g_end) %% 1 != 0
-            )
-        ),
-        "`taxid` and genomic positions should be finite, positive whole numbers."
       ),
       list(
         quote(!is.null(g_start) && !is.null(g_end) && g_start > g_end),

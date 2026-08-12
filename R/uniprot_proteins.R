@@ -198,7 +198,7 @@ rba_uniprot_proteins_search <- function(accession = NULL,
       list(arg = "organism", class = "character", len = 1L),
       list(
         arg = "taxid", class = c("numeric", "integer"), max_len = 20,
-        min_val = 1
+        integerish = TRUE, min_val = 1
       ),
       list(
         arg = "pubmed", class = c("character", "numeric", "integer"),
@@ -231,10 +231,6 @@ rba_uniprot_proteins_search <- function(accession = NULL,
           "seq_length, md5, or isoform = 1. `reviewed`, `isoform = 0`, and ",
           "`isoform = 2` only refine another criterion."
         )
-      ),
-      list(
-        quote(!is.null(taxid) && any(!is.finite(taxid) | taxid %% 1 != 0)),
-        "`taxid` values should be finite, positive whole numbers."
       ),
       list(
         quote(
@@ -644,7 +640,7 @@ rba_uniprot_features_search <- function(accession = NULL,
       list(arg = "organism", class = "character", len = 1L),
       list(
         arg = "taxid", class = c("numeric", "integer"), max_len = 20,
-        min_val = 1
+        integerish = TRUE, min_val = 1
       ),
       list(
         arg = "categories", class = "character", max_len = 20,
@@ -706,10 +702,6 @@ rba_uniprot_features_search <- function(accession = NULL,
           )
         ),
         "Supply at least one primary search criterion: accession, gene, exact_gene, protein, organism, or taxid."
-      ),
-      list(
-        quote(!is.null(taxid) && any(!is.finite(taxid) | taxid %% 1 != 0)),
-        "`taxid` values should be finite, positive whole numbers."
       )
     )
   )
@@ -1288,7 +1280,7 @@ rba_uniprot_variation_search <- function(accession = NULL,
       ),
       list(
         arg = "taxid", class = c("numeric", "integer"), max_len = 20,
-        min_val = 1
+        integerish = TRUE, min_val = 1
       ),
       list(arg = "db_type", class = "character", max_len = 2),
       list(arg = "db_id", class = "character", max_len = 20),
@@ -1304,10 +1296,6 @@ rba_uniprot_variation_search <- function(accession = NULL,
                   is.null(taxid), is.null(db_type),
                   is.null(db_id))),
         "Supply at least one primary search criterion: accession, disease, omim, evidence, taxid, db_type, or db_id."
-      ),
-      list(
-        quote(!is.null(taxid) && any(!is.finite(taxid) | taxid %% 1 != 0)),
-        "`taxid` values should be finite, positive whole numbers."
       ),
       list(
         quote(
@@ -1456,7 +1444,7 @@ rba_uniprot_variation_locations <- function(accession,
       ),
       list(
         arg = "locations", class = c("character", "numeric", "integer"),
-        min_len = 1L, max_len = 100
+        min_len = 1L, max_len = 100, integerish = TRUE
       ),
       list(
         arg = "save_peff", class = c("logical", "character"), len = 1L,
@@ -1473,7 +1461,7 @@ rba_uniprot_variation_locations <- function(accession,
           switch(
             typeof(locations),
             character = any(!grepl("^[1-9]\\d*(?:,[1-9]\\d*)*$", locations, perl = TRUE)),
-            any(!is.finite(locations) | locations < 1 | locations %% 1 != 0)
+            any(locations < 1)
           )
         ),
         "`locations` should be positive whole-number positions, optionally comma-separated."
@@ -1809,7 +1797,7 @@ rba_uniprot_antigens_search <- function(accession = NULL,
       list(arg = "ensembl_id", class = "character", max_len = 20),
       list(
         arg = "match_score", class = c("numeric", "integer"), len = 1L,
-        ran = c(0, 100)
+        integerish = TRUE, ran = c(0, 100)
       )
     ),
     cond = list(
@@ -1827,13 +1815,6 @@ rba_uniprot_antigens_search <- function(accession = NULL,
           !is.null(antigen_sequence) && nchar(antigen_sequence) < 4L
         ),
         "`antigen_sequence` should contain at least four residues."
-      ),
-      list(
-        quote(
-          !is.null(match_score) &&
-            (!is.finite(match_score) || match_score %% 1 != 0)
-        ),
-        "`match_score` should be a finite whole number from 0 to 100."
       )
     )
   )
@@ -2024,7 +2005,7 @@ rba_uniprot_epitope_search <- function(accession = NULL,
       ),
       list(
         arg = "match_score", class = c("numeric", "integer"), len = 1L,
-        ran = c(0, 100)
+        integerish = TRUE, ran = c(0, 100)
       )
     ),
     cond = list(
@@ -2036,13 +2017,6 @@ rba_uniprot_epitope_search <- function(accession = NULL,
           )
         ),
         "Supply at least one search criterion: accession, epitope_sequence, iedb_id, or match_score."
-      ),
-      list(
-        quote(
-          !is.null(match_score) &&
-            (!is.finite(match_score) || match_score %% 1 != 0)
-        ),
-        "`match_score` should be a finite whole number from 0 to 100."
       )
     )
   )
@@ -2212,7 +2186,7 @@ rba_uniprot_mutagenesis_search <- function(accession = NULL,
       list(arg = "accession", class = "character", max_len = 100),
       list(
         arg = "taxid", class = c("numeric", "integer"), max_len = 20,
-        min_val = 1
+        integerish = TRUE, min_val = 1
       ),
       list(arg = "db_id", class = "character", max_len = 20)
     ),
@@ -2220,10 +2194,6 @@ rba_uniprot_mutagenesis_search <- function(accession = NULL,
       list(
         quote(all(is.null(accession), is.null(taxid), is.null(db_id))),
         "Supply at least one search criterion: accession, taxid, or db_id."
-      ),
-      list(
-        quote(!is.null(taxid) && any(!is.finite(taxid) | taxid %% 1 != 0)),
-        "`taxid` values should be finite, positive whole numbers."
       )
     )
   )
@@ -2418,7 +2388,7 @@ rba_uniprot_rna_edit_search <- function(accession = NULL,
       list(arg = "accession", class = "character", max_len = 100),
       list(
         arg = "taxid", class = c("numeric", "integer"), max_len = 20,
-        min_val = 1
+        integerish = TRUE, min_val = 1
       ),
       list(arg = "variant_location", class = "character", max_len = 4)
     ),
@@ -2430,10 +2400,6 @@ rba_uniprot_rna_edit_search <- function(accession = NULL,
           )
         ),
         "Supply at least one search criterion: accession, taxid, or variant_location."
-      ),
-      list(
-        quote(!is.null(taxid) && any(!is.finite(taxid) | taxid %% 1 != 0)),
-        "`taxid` values should be finite, positive whole numbers."
       )
     )
   )

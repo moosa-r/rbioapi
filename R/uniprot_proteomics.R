@@ -151,7 +151,7 @@ rba_uniprot_proteomics_non_ptm_search <- function(accession = NULL,
       list(arg = "accession", class = "character", max_len = 100),
       list(
         arg = "taxid", class = c("numeric", "integer"),
-        max_len = 20, min_val = 1
+        max_len = 20, integerish = TRUE, min_val = 1
       ),
       list(arg = "upid", class = "character", max_len = 100),
       list(arg = "data_source", class = "character", max_len = 2),
@@ -165,10 +165,6 @@ rba_uniprot_proteomics_non_ptm_search <- function(accession = NULL,
           is.null(data_source), is.null(peptide)
         )),
         "Supply at least one search criterion: accession, taxid, upid, data_source, or peptide."
-      ),
-      list(
-        quote(!is.null(taxid) && any(!is.finite(taxid) | taxid %% 1 != 0)),
-        "`taxid` values should be finite, positive whole numbers."
       )
     )
   )
@@ -381,7 +377,7 @@ rba_uniprot_proteomics_ptm_search <- function(accession = NULL,
       list(arg = "ptm", class = "character", len = 1L),
       list(
         arg = "taxid", class = c("numeric", "integer"),
-        max_len = 20, min_val = 1
+        max_len = 20, integerish = TRUE, min_val = 1
       ),
       list(arg = "upid", class = "character", max_len = 100),
       list(arg = "data_source", class = "character", max_len = 2),
@@ -399,10 +395,6 @@ rba_uniprot_proteomics_ptm_search <- function(accession = NULL,
           is.null(data_source), is.null(peptide), is.null(confidence_score)
         )),
         "Supply at least one search criterion: accession, ptm, taxid, upid, data_source, peptide, or confidence_score."
-      ),
-      list(
-        quote(!is.null(taxid) && any(!is.finite(taxid) | taxid %% 1 != 0)),
-        "`taxid` values should be finite, positive whole numbers."
       )
     )
   )
@@ -629,7 +621,7 @@ rba_uniprot_proteomics_hpp_search <- function(accession = NULL,
       list(arg = "accession", class = "character", max_len = 100),
       list(
         arg = "taxid", class = c("numeric", "integer"),
-        max_len = 20, min_val = 1
+        max_len = 20, integerish = TRUE, min_val = 1
       ),
       list(arg = "upid", class = "character", max_len = 100),
       list(arg = "data_source", class = "character", max_len = 2),
@@ -643,10 +635,6 @@ rba_uniprot_proteomics_hpp_search <- function(accession = NULL,
           is.null(data_source), is.null(peptide)
         )),
         "Supply at least one search criterion: accession, taxid, upid, data_source, or peptide."
-      ),
-      list(
-        quote(!is.null(taxid) && any(!is.finite(taxid) | taxid %% 1 != 0)),
-        "`taxid` values should be finite, positive whole numbers."
       )
     )
   )

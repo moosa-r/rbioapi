@@ -86,7 +86,7 @@ rba_uniprot_proteomes_search <- function(name = NULL,
       list(arg = "name", class = "character", len = 1L),
       list(
         arg = "taxid", class = c("numeric", "integer"),
-        max_len = 20, min_val = 1
+        max_len = 20, integerish = TRUE, min_val = 1
       ),
       list(arg = "keyword", class = "character", len = 1L),
       list(arg = "xref", class = "character", max_len = 20),
@@ -102,10 +102,6 @@ rba_uniprot_proteomes_search <- function(name = NULL,
           is.null(is_redundant)
         )),
         "Supply at least one proteome search criterion."
-      ),
-      list(
-        quote(!is.null(taxid) && any(!is.finite(taxid) | taxid %% 1 != 0)),
-        "`taxid` values should be finite, positive whole numbers."
       )
     )
   )
