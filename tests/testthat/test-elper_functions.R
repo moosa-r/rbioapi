@@ -18,9 +18,13 @@ test_that("rba_options works", {
   on.exit(options(retry_before), add = TRUE)
 
   expect_error(object = rba_options(retry_max = -1), regexp = "retry_max")
-  expect_error2(
-    obj = rba_options(retry_max = Inf, retry_wait = Inf),
-    pattern = c("retry_max", "retry_wait")
+  expect_error(
+    object = rba_options(retry_max = Inf),
+    regexp = "retry_max.*finite whole numbers"
+  )
+  expect_error(
+    object = rba_options(retry_wait = Inf),
+    regexp = "retry_wait"
   )
   expect_identical(
     object = options("rba_retry_max", "rba_retry_wait"),

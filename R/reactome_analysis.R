@@ -323,7 +323,10 @@ rba_reactome_analysis <- function(input,
       ),
       list(arg = "projection", class = "logical", len = 1L),
       list(arg = "interactors", class = "logical", len = 1L),
-      list(arg = "species", class = c("character", "numeric", "integer"), len = 1L),
+      list(
+        arg = "species", class = c("character", "numeric", "integer"),
+        len = 1L, integerish = TRUE
+      ),
       list(
         arg = "sort_by", class = "character", len = 1L,
         val = c("NAME",
@@ -537,7 +540,10 @@ rba_reactome_analysis_pdf <- function(token,
   .rba_args(
     cons = list(
       list(arg = "token", class = "character", len = 1L),
-      list(arg = "species", class = c("character", "numeric", "integer"), len = 1L),
+      list(
+        arg = "species", class = c("character", "numeric", "integer"),
+        len = 1L, integerish = TRUE
+      ),
       list(arg = "save_to", class = "character", len = 1L, no_na = FALSE),
       list(
         arg = "number", class = c("numeric", "integer"), len = 1L,
@@ -1325,7 +1331,10 @@ rba_reactome_analysis_token <- function(token,
   .rba_args(
     cons = list(
       list(arg = "token", class = "character", len = 1L),
-      list(arg = "species", class = c("character", "numeric", "integer"), len = 1L),
+      list(
+        arg = "species", class = c("character", "numeric", "integer"),
+        len = 1L, integerish = TRUE
+      ),
       list(
         arg = "sort_by",
         class = "character", len = 1L,

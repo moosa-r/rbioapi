@@ -150,7 +150,7 @@ rba_mieaa_cats <- function(mirna_type, species, mode = "all", ...) {
       list(
         arg = "species",
         class = c("character", "numeric", "integer"),
-        len = 1L
+        len = 1L, integerish = TRUE
       ),
       list(
         arg = "mode",
@@ -624,6 +624,7 @@ rba_mieaa_enrich_submit <- function(test_set,
         arg = "species",
         class = c("character", "numeric", "integer"),
         len = 1L,
+        integerish = TRUE,
         no_null = TRUE
       ),
       list(arg = "categories", class = "character", min_len = 1L),

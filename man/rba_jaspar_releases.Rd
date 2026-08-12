@@ -9,7 +9,7 @@ rba_jaspar_releases(release_number = NULL, ...)
 \arguments{
 \item{release_number}{Numeric: Which JASPAR database release number should
 be retrieved? If left NULL (the default), a list of all
-JASPAR database releases will be returned. Available options are 1 to 11.}
+JASPAR database releases will be returned.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}

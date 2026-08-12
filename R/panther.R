@@ -140,7 +140,10 @@ rba_panther_mapping <- function(genes,
         min_len = 1L,
         max_len = 5000L
       ),
-      list(arg = "organism", class = c("numeric", "integer"), len = 1L)
+      list(
+        arg = "organism", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE, min_val = 1
+      )
     )
   )
 
@@ -344,7 +347,10 @@ rba_panther_enrich <- function(genes,
         arg = "genes", class = c("character", "data.frame"),
         max_len = 100000L
       ),
-      list(arg = "organism", class = "numeric", len = 1),
+      list(
+        arg = "organism", class = "numeric", len = 1,
+        integerish = TRUE, min_val = 1
+      ),
       list(arg = "annot_dataset", class = "character", len = 1),
       list(
         arg = "test_type", class = "character",  len = 1,
@@ -356,7 +362,10 @@ rba_panther_enrich <- function(genes,
       ),
       list(arg = "cutoff", class = "numeric", len = 1, ran = c(0, 1)),
       list(arg = "ref_genes", class = c("character","numeric"), max_len = 100000L),
-      list(arg = "ref_organism", class = "numeric", len = 1),
+      list(
+        arg = "ref_organism", class = "numeric", len = 1,
+        integerish = TRUE, min_val = 1
+      ),
       list(
         arg = "request_mapped_genes",
         class = "character", len = 1, no_null = TRUE,
@@ -747,7 +756,9 @@ rba_panther_genome <- function(organism,
       list(
         arg = "organism",
         class = c("numeric", "integer"),
-        len = 1L
+        len = 1L,
+        integerish = TRUE,
+        min_val = 1
       ),
       list(
         arg = "page",
@@ -881,10 +892,19 @@ rba_panther_ortholog <- function(genes,
   .rba_args(
     cons = list(
       list(arg = "genes", class = c("character", "numeric"), max_len = 10),
-      list(arg = "organism", class = "numeric", len = 1),
+      list(
+        arg = "organism", class = "numeric", len = 1,
+        integerish = TRUE, min_val = 1
+      ),
       list(arg = "type", class = "character", val = c("LDO", "all"), len = 1),
-      list(arg = "target_organisms", class = "numeric"),
-      list(arg = "seq_pos", class = "numeric", len = 1),
+      list(
+        arg = "target_organisms", class = "numeric",
+        integerish = TRUE, min_val = 1
+      ),
+      list(
+        arg = "seq_pos", class = "numeric", len = 1,
+        integerish = TRUE, min_val = 1
+      ),
       list(arg = "include_msa", class = "logical", len = 1)
     ),
     cond = list(
@@ -1010,9 +1030,15 @@ rba_panther_homolog <- function(genes,
   .rba_args(
     cons = list(
       list(arg = "genes", class = c("character", "numeric"), max_len = 10),
-      list(arg = "organism", class = "numeric", len = 1),
+      list(
+        arg = "organism", class = "numeric", len = 1,
+        integerish = TRUE, min_val = 1
+      ),
       list(arg = "type", class = "character", val = c("P", "X", "LDX"), len = 1),
-      list(arg = "target_organisms", class = "numeric")
+      list(
+        arg = "target_organisms", class = "numeric",
+        integerish = TRUE, min_val = 1
+      )
     ),
     cond = list(
       list(
@@ -1131,7 +1157,10 @@ rba_panther_family <- function(id,
         arg = "what", class = "character", len = 1,
         val = c("ortholog", "msa", "tree")
       ),
-      list(arg = "target_organisms", class = "numeric")
+      list(
+        arg = "target_organisms", class = "numeric",
+        integerish = TRUE, min_val = 1
+      )
     )
   )
 
@@ -1250,7 +1279,10 @@ rba_panther_tree_grafter <- function(protein_seq,
   .rba_args(
     cons = list(
       list(arg = "protein_seq", class = "character", len = 1),
-      list(arg = "target_organisms", class = "numeric")
+      list(
+        arg = "target_organisms", class = "numeric",
+        integerish = TRUE, min_val = 1
+      )
     ),
     cond = list(
       list(

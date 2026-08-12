@@ -652,7 +652,10 @@ rba_enrichr_view_list <- function(user_list_id,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "user_list_id", class = c("numeric", "integer"), len = 1),
+      list(
+        arg = "user_list_id", class = c("numeric", "integer"), len = 1,
+        integerish = TRUE, min_val = 1
+      ),
       list(
         arg = "organism", class = "character", no_null = TRUE,
         val = c("human", "fly", "yeast", "worm", "fish")
@@ -1092,7 +1095,10 @@ rba_enrichr_enrich <- function(user_list_id,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "user_list_id", class = c("numeric", "integer"), len = 1),
+      list(
+        arg = "user_list_id", class = c("numeric", "integer"), len = 1,
+        integerish = TRUE, min_val = 1
+      ),
       list(arg = "gene_set_library", class = "character", min_len = 1),
       list(arg = "regex_library_name", class = "logical"),
       list(arg = "progress_bar", class = "logical"),

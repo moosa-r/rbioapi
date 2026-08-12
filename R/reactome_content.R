@@ -637,7 +637,7 @@ rba_reactome_event_hierarchy <- function(species,
     cons = list(
       list(
         arg = "species", class = c("character", "numeric", "integer"),
-        len = 1L
+        len = 1L, integerish = TRUE
       ),
       list(
         arg = "pathways_only", class = "logical", len = 1L,
@@ -1206,7 +1206,10 @@ rba_reactome_exporter_overview <- function(species,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "species", class = c("character", "numeric", "integer"), len = 1L),
+      list(
+        arg = "species", class = c("character", "numeric", "integer"),
+        len = 1L, integerish = TRUE
+      ),
       list(
         arg = "output_format", class = "character", len = 1L, no_null = TRUE,
         val = c("png",
@@ -1911,7 +1914,10 @@ rba_reactome_mapping <- function(id,
     cons = list(
       list(arg = "id", class = c("character", "numeric", "integer"), len = 1L),
       list(arg = "resource", class = "character", len = 1L),
-      list(arg = "species", class = c("character", "numeric", "integer"), len = 1L),
+      list(
+        arg = "species", class = c("character", "numeric", "integer"),
+        len = 1L, integerish = TRUE
+      ),
       list(
         arg = "map_to", class = "character", len = 1L,
         val = c("pathways", "reactions")
@@ -2546,7 +2552,10 @@ rba_reactome_pathways_low <- function(entity_id,
       list(arg = "entity_id", class = "character", len = 1L),
       list(arg = "all_forms", class = "logical", len = 1L),
       list(arg = "with_diagram", class = "logical", len = 1L),
-      list(arg = "species", class = c("character", "numeric", "integer"), len = 1L)
+      list(
+        arg = "species", class = c("character", "numeric", "integer"),
+        len = 1L, integerish = TRUE
+      )
     )
   )
 
@@ -2643,7 +2652,10 @@ rba_reactome_pathways_top <- function(species,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "species", class = c("character", "numeric", "integer"), len = 1L)
+      list(
+        arg = "species", class = c("character", "numeric", "integer"),
+        len = 1L, integerish = TRUE
+      )
     )
   )
 

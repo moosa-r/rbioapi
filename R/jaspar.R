@@ -179,8 +179,14 @@ rba_jaspar_collections_matrices <- function(collection,
       ),
       list(arg = "search", class = "character"),
       list(arg = "order", class = "character"),
-      list(arg = "page_size", class = "numeric", ran = c(1,1000)),
-      list(arg = "page", class = "numeric", min_val = 1)
+      list(
+        arg = "page_size", class = "numeric", len = 1L,
+        integerish = TRUE, ran = c(1,1000)
+      ),
+      list(
+        arg = "page", class = "numeric", len = 1L,
+        integerish = TRUE, min_val = 1
+      )
     )
   )
 
@@ -319,7 +325,10 @@ rba_jaspar_matrix_search <- function(term = NULL,
       list(arg = "tf_class", class = "character"),
       list(arg = "tf_family", class = "character"),
       list(arg = "tax_group", class = "character"),
-      list(arg = "tax_id", class = "numeric"),
+      list(
+        arg = "tax_id", class = "numeric",
+        integerish = TRUE, min_val = 1
+      ),
       list(arg = "data_type", class = "character"),
       list(
         arg = "collection", class = "character",
@@ -340,8 +349,14 @@ rba_jaspar_matrix_search <- function(term = NULL,
       ),
       list(arg = "order", class = "character"),
       list(arg = "only_last_version", class = "logical"),
-      list(arg = "page_size", class = "numeric", ran = c(1,1000)),
-      list(arg = "page", class = "numeric", min_val = 1)
+      list(
+        arg = "page_size", class = "numeric", len = 1L,
+        integerish = TRUE, ran = c(1,1000)
+      ),
+      list(
+        arg = "page", class = "numeric", len = 1L,
+        integerish = TRUE, min_val = 1
+      )
     )
   )
 
@@ -613,7 +628,7 @@ rba_jaspar_matrix <- function(matrix_id,
 #'
 #' @param release_number Numeric: Which JASPAR database release number should
 #'   be retrieved? If left NULL (the default), a list of all
-#'   JASPAR database releases will be returned. Available options are 1 to 11.
+#'   JASPAR database releases will be returned.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -654,7 +669,10 @@ rba_jaspar_releases  <- function(release_number = NULL,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "release_number", class = "numeric", ran = c(1,11))
+      list(
+        arg = "release_number", class = "numeric", len = 1L,
+        integerish = TRUE, min_val = 1
+      )
     )
   )
 
@@ -955,7 +973,10 @@ rba_jaspar_species_matrices <- function(tax_id,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "tax_id", class = "numeric"),
+      list(
+        arg = "tax_id", class = "numeric", len = 1L,
+        integerish = TRUE, min_val = 1
+      ),
       list(
         arg = "release", class = "numeric", no_null = TRUE,
         val = c(2014, 2016, 2018, 2020, 2022, 2024, 2026)
@@ -963,8 +984,14 @@ rba_jaspar_species_matrices <- function(tax_id,
       list(arg = "only_last_version", class = "logical"),
       list(arg = "search", class = "character"),
       list(arg = "order", class = "character"),
-      list(arg = "page_size", class = "numeric", ran = c(1,1000)),
-      list(arg = "page", class = "numeric", min_val = 1)
+      list(
+        arg = "page_size", class = "numeric", len = 1L,
+        integerish = TRUE, ran = c(1,1000)
+      ),
+      list(
+        arg = "page", class = "numeric", len = 1L,
+        integerish = TRUE, min_val = 1
+      )
     )
   )
 
@@ -1179,8 +1206,14 @@ rba_jaspar_taxons_matrices <- function(tax_group,
       list(arg = "only_last_version", class = "logical"),
       list(arg = "search", class = "character"),
       list(arg = "order", class = "character"),
-      list(arg = "page_size", class = "numeric", ran = c(1,1000)),
-      list(arg = "page", class = "numeric", min_val = 1)
+      list(
+        arg = "page_size", class = "numeric", len = 1L,
+        integerish = TRUE, ran = c(1,1000)
+      ),
+      list(
+        arg = "page", class = "numeric", len = 1L,
+        integerish = TRUE, min_val = 1
+      )
     )
   )
 
@@ -1321,8 +1354,14 @@ rba_jaspar_tffm_search <- function(term = NULL,
       ),
       list(arg = "search", class = "character"),
       list(arg = "order", class = "character"),
-      list(arg = "page_size", class = "numeric", ran = c(1,1000)),
-      list(arg = "page", class = "numeric", min_val = 1)
+      list(
+        arg = "page_size", class = "numeric", len = 1L,
+        integerish = TRUE, ran = c(1,1000)
+      ),
+      list(
+        arg = "page", class = "numeric", len = 1L,
+        integerish = TRUE, min_val = 1
+      )
     ),
     cond = list(
       list(

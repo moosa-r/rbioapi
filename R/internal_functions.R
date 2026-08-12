@@ -983,7 +983,10 @@
       timeout = list(arg = "timeout", class = "numeric", len = 1, ran = c(0.001, 3600)),
       dir_name = list(arg = "dir_name", class = "character", len = 1),
       diagnostics = list(arg = "diagnostics", class = "logical", len = 1),
-      retry_max = list(arg = "retry_max", class = "numeric", len = 1, min_val = 0),
+      retry_max = list(
+        arg = "retry_max", class = "numeric", len = 1,
+        integerish = TRUE, min_val = 0
+      ),
       progress = list(arg = "progress", class = "logical", len = 1),
       save_file = list(arg = "save_file", class = c("logical", "character"), len = 1),
       skip_error = list(arg = "skip_error", class = "logical", len = 1),
@@ -1005,10 +1008,6 @@
             grepl("[\\\\/:\"*?<>|]+", dir_name, perl = TRUE)
         ),
         "Invalid dir_name. Directory name cannot include these characters: \\/?%*:|<>"
-      ),
-      retry_max = list(
-        quote(!is.null(retry_max) && !is.finite(retry_max)),
-        "Invalid retry_max. It should be a finite, non-negative numeric scalar."
       ),
       retry_wait = list(
         quote(!is.null(retry_wait) && !is.finite(retry_wait)),

@@ -61,7 +61,10 @@ rba_string_map_ids <- function(ids,
   .rba_args(
     cons = list(
       list(arg = "ids", class = c("character", "numeric", "integer"), min_len = 1L),
-      list(arg = "species", class = c("numeric", "integer"), len = 1L),
+      list(
+        arg = "species", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE, min_val = 1
+      ),
       list(arg = "echo_query", class = "logical", len = 1L)
     )
   )
@@ -285,15 +288,24 @@ rba_string_network_image <- function(ids,
         no_null = FALSE
       ),
       list(arg = "network_term_id", class = "character", len = 1L),
-      list(arg = "species", class = c("numeric", "integer"), len = 1L),
+      list(
+        arg = "species", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE, min_val = 1
+      ),
       list(
         arg = "image_format", class = "character",
         val = c("image", "highres_image", "svg"),
         len = 1L
       ),
       list(arg = "save_image", class = c("character", "logical"), len = 1L),
-      list(arg = "add_color_nodes", class = c("numeric", "integer"), len = 1L),
-      list(arg = "add_white_nodes", class = c("numeric", "integer"), len = 1L),
+      list(
+        arg = "add_color_nodes", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE, min_val = 0
+      ),
+      list(
+        arg = "add_white_nodes", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE, min_val = 0
+      ),
       list(
         arg = "required_score",
         class = c("numeric", "integer"),
@@ -571,7 +583,10 @@ rba_string_interactions_network <- function(ids,
         no_null = FALSE
       ),
       list(arg = "network_term_id", class = "character", len = 1L),
-      list(arg = "species", class = c("numeric", "integer"), len = 1L),
+      list(
+        arg = "species", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE, min_val = 1
+      ),
       list(
         arg = "required_score",
         class = c("numeric", "integer"),
@@ -582,6 +597,7 @@ rba_string_interactions_network <- function(ids,
       list(
         arg = "add_nodes",
         class = c("numeric", "integer"),
+        integerish = TRUE,
         min_val = 0,
         len = 1L
       ),
@@ -759,7 +775,10 @@ rba_string_interaction_partners <- function(ids,
   .rba_args(
     cons = list(
       list(arg = "ids", class = c("character", "numeric", "integer"), min_len = 1L),
-      list(arg = "species", class = c("numeric", "integer"), len = 1L),
+      list(
+        arg = "species", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE, min_val = 1
+      ),
       list(
         arg = "required_score",
         class = c("numeric", "integer"),
@@ -776,6 +795,7 @@ rba_string_interaction_partners <- function(ids,
       list(
         arg = "limit",
         class = c("numeric", "integer"),
+        integerish = TRUE,
         min_val = 1,
         len = 1L
       )
@@ -892,7 +912,10 @@ rba_string_homology_intra <- function(ids,
   .rba_args(
     cons = list(
       list(arg = "ids", class = c("character", "numeric", "integer"), min_len = 1L),
-      list(arg = "species", class = c("numeric", "integer"), len = 1L)
+      list(
+        arg = "species", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE, min_val = 1
+      )
     ),
     cond = list(
       list(
@@ -1013,8 +1036,14 @@ rba_string_homology_inter <- function(ids,
   .rba_args(
     cons = list(
       list(arg = "ids", class = c("character", "numeric", "integer"), min_len = 1L),
-      list(arg = "species", class = c("numeric", "integer"), len = 1L),
-      list(arg = "species_b", class = c("numeric", "integer"), min_len = 1L)
+      list(
+        arg = "species", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE, min_val = 1
+      ),
+      list(
+        arg = "species_b", class = c("numeric", "integer"), min_len = 1L,
+        integerish = TRUE, min_val = 1
+      )
     ),
     cond = list(
       list(
@@ -1143,7 +1172,10 @@ rba_string_enrichment <- function(ids,
   .rba_args(
     cons = list(
       list(arg = "ids", class = c("character", "numeric", "integer"), min_len = 1L),
-      list(arg = "species", class = c("numeric", "integer"), len = 1L),
+      list(
+        arg = "species", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE, min_val = 1
+      ),
       list(arg = "background", class = "character", min_len = 1L),
       list(arg = "split_df", class = "logical", len = 1L)
     )
@@ -1282,7 +1314,10 @@ rba_string_annotations <- function(ids,
   .rba_args(
     cons = list(
       list(arg = "ids", class = c("character", "numeric", "integer"), min_len = 1L),
-      list(arg = "species", class = c("numeric", "integer"), len = 1L),
+      list(
+        arg = "species", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE, min_val = 1
+      ),
       list(arg = "allow_pubmed", class = "logical", len = 1L),
       list(arg = "split_df", class = "logical", len = 1L),
       list(arg = "only_pubmed", class = "logical", len = 1L)
@@ -1410,7 +1445,10 @@ rba_string_functional_terms <- function(term_text,
   .rba_args(
     cons = list(
       list(arg = "term_text", class = "character", len = 1L),
-      list(arg = "species", class = c("numeric", "integer"), len = 1L)
+      list(
+        arg = "species", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE, min_val = 1
+      )
     )
   )
 
@@ -1515,7 +1553,10 @@ rba_string_enrichment_ppi <- function(ids,
   .rba_args(
     cons = list(
       list(arg = "ids", class = c("character", "numeric", "integer"), min_len = 1L),
-      list(arg = "species", class = c("numeric", "integer"), len = 1L),
+      list(
+        arg = "species", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE, min_val = 1
+      ),
       list(
         arg = "required_score",
         class = c("numeric", "integer"),
@@ -1776,7 +1817,10 @@ rba_string_enrichment_image <- function(ids,
   .rba_args(
     cons = list(
       list(arg = "ids", class = c("character", "numeric", "integer"), min_len = 1L),
-      list(arg = "species", class = c("numeric", "integer"), len = 1L),
+      list(
+        arg = "species", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE, min_val = 1
+      ),
       list(
         arg = "category", class = "character",
         val = c("Process", "Function", "Component",
@@ -1808,6 +1852,7 @@ rba_string_enrichment_image <- function(ids,
       list(
         arg = "number_of_term_shown",
         class = c("numeric", "integer"),
+        integerish = TRUE,
         min_val = 1,
         len = 1L
       ),
