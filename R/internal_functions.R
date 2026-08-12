@@ -1083,6 +1083,8 @@
           value_arg >= cons_i[["ran"]][[1]],
           value_arg <= cons_i[["ran"]][[2]]
         ),
+        "integerish" = !is.numeric(value_arg) ||
+          all(is.finite(value_arg) & value_arg == trunc(value_arg)),
         "len" = length(evl_arg) == cons_i[["len"]],
         "min_len" = length(evl_arg) >= cons_i[["min_len"]],
         "max_len" = length(evl_arg) <= cons_i[["max_len"]],
@@ -1147,6 +1149,10 @@
       cons_i[["ran"]][[1]],
       cons_i[["ran"]][[2]],
       cons_i[["evl_arg"]]
+    ),
+    "integerish" = sprintf(
+      "Invalid Argument: Numeric values in `%s` should be finite whole numbers.",
+      cons_i[["arg"]]
     ),
     "len" = sprintf(
       "Invalid Argument: %s should be of length `%s`.\n\t(Your supplied argument's length is `%s`.)",
@@ -1357,8 +1363,8 @@
 #'   }
 #'
 #' @param cons Define Constrains for input arguments. Currently they may be:
-#'   \cr "no_null", "no_na", "class", "val", "ran", "min_val", "max_val",
-#'   "len", "min_len", "max_len" and/or "regex".
+#'   \cr "no_null", "no_na", "class", "val", "ran", "integerish",
+#'   "min_val", "max_val", "len", "min_len", "max_len" and/or "regex".
 #'   \cr \code{no_null = TRUE} rejects \code{NULL}. When \code{no_null} is
 #'   omitted, it is automatically set to \code{TRUE} only for function
 #'   arguments without default values. Arguments with defaults continue to
@@ -1367,6 +1373,10 @@
 #'   \code{NULL}.
 #'   By default, all non-\code{NULL} arguments reject missing values. Set
 #'   \code{no_na = FALSE} for arguments that intentionally accept \code{NA}.
+#'   \code{integerish = TRUE} requires numeric values to be finite and exactly
+#'   whole-valued without affecting permitted non-numeric alternatives. It does
+#'   not impose sign or range constraints; combine it with \code{min_val},
+#'   \code{max_val}, or \code{ran} when needed.
 #' @param cond Expression which will be evaluated to TRUE or FALSE.
 #' @param cond_warning Should the function produce warning instead of stopping
 #'   code execution? alternatively, you could include an element to

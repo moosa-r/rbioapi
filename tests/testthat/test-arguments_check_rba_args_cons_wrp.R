@@ -22,6 +22,7 @@ test_that(".rba_args_cons_wrp works", {
     class = "numeric",
     val = c(111, 222, 333),
     ran = c(110,112),
+    integerish = TRUE,
     len = 1,
     min_len = 1,
     max_len = 1,
@@ -35,10 +36,11 @@ test_that(".rba_args_cons_wrp works", {
   # All errors are translated into messages
   cons_i_incorrect <- list(
     arg = "arg_X",
-    evl_arg = 111,
+    evl_arg = 111.5,
     class = "character",
     val = c(222, 333),
     ran = c(112,113),
+    integerish = TRUE,
     len = 3,
     min_len = 2,
     max_len = 0,

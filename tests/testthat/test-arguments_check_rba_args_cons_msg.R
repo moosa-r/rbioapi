@@ -3,10 +3,11 @@ test_that(".rba_args_cons_msg works", {
   # Create messages for incorrect constrains
   cons_i_incorrect <- list(
     arg = "arg_X",
-    evl_arg = 111,
+    evl_arg = 111.5,
     class = "character",
     val = c(222, 333),
     ran = c(112,113),
+    integerish = TRUE,
     len = 3,
     min_len = 2,
     max_len = 0,

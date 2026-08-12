@@ -104,6 +104,12 @@ test_that("no_na = FALSE checks every non-missing value constraint", {
       error = "from 1 to 3"
     ),
     list(
+      cons = list(class = "numeric", integerish = TRUE),
+      accepted = c(NA_real_, 2),
+      rejected = c(NA_real_, 2.5),
+      error = "finite whole numbers"
+    ),
+    list(
       cons = list(class = "character", regex = "^[A-Z]+$"),
       accepted = c(NA_character_, "ABC"),
       rejected = c(NA_character_, "abc"),
