@@ -158,6 +158,7 @@ reference:
 - subtitle: Common Data Retrieval
   contents:
     - rba_reactome_query
+    - rba_reactome_search
 - subtitle: ReferenceEntity Queries
   contents:
     - rba_reactome_xref
