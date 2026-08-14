@@ -83,6 +83,7 @@
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_reactome_people_id.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_reactome_people_name.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_reactome_query.html</loc></url>
+<url><loc>https://rbioapi.moosa-r.com/reference/rba_reactome_search.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_reactome_species.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_reactome_version.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_reactome_xref.html</loc></url>
@@ -109,6 +110,7 @@
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_epitope_search.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_features.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_features_search.html</loc></url>
+<url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_features_type.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_genecentric.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_genecentric_search.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_mutagenesis.html</loc></url>
@@ -142,6 +144,7 @@
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_uniparc_search.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_uniparc_sequence.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_variation.html</loc></url>
+<url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_variation_locations.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rba_uniprot_variation_search.html</loc></url>
 <url><loc>https://rbioapi.moosa-r.com/reference/rbioapi.html</loc></url>
 </urlset>

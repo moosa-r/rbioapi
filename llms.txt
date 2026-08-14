@@ -655,7 +655,7 @@ database’s Contents Services API resources.
 - [`rba_reactome_event_ancestors()`](https://rbioapi.moosa-r.com/reference/rba_reactome_event_ancestors.md)
   : Get Reactome Events Ancestors
 - [`rba_reactome_event_hierarchy()`](https://rbioapi.moosa-r.com/reference/rba_reactome_event_hierarchy.md)
-  : Get Full Event Hierarchy of a Species
+  : Retrieve the Reactome Event Hierarchy of a Species
 
 ### Format Exporter
 
@@ -673,7 +673,7 @@ database’s Contents Services API resources.
 - [`rba_reactome_interactors_psicquic()`](https://rbioapi.moosa-r.com/reference/rba_reactome_interactors_psicquic.md)
   : The interface From Reactome to PSICQUIC
 - [`rba_reactome_interactors_static()`](https://rbioapi.moosa-r.com/reference/rba_reactome_interactors_static.md)
-  : Get Static(IntAct) Interaction Information of a Protein
+  : Get Static (IntAct) Interaction Information of a Protein
 
 ### Mapping Related Queries
 
@@ -693,7 +693,7 @@ database’s Contents Services API resources.
 ### Pathway Related Queries
 
 - [`rba_reactome_pathways_events()`](https://rbioapi.moosa-r.com/reference/rba_reactome_pathways_events.md)
-  : Get Events Contained in an Upstream Events
+  : Get Events Contained in an Upstream Event
 - [`rba_reactome_pathways_low()`](https://rbioapi.moosa-r.com/reference/rba_reactome_pathways_low.md)
   : Get lower level pathways Containing a 'Physical Entity' or Event
 - [`rba_reactome_pathways_top()`](https://rbioapi.moosa-r.com/reference/rba_reactome_pathways_top.md)
@@ -709,12 +709,14 @@ database’s Contents Services API resources.
 ### Common Data Retrieval
 
 - [`rba_reactome_query()`](https://rbioapi.moosa-r.com/reference/rba_reactome_query.md)
-  : Query and Retrieve any Reactome knowledge-base Object
+  : Retrieve Reactome Knowledgebase Objects
+- [`rba_reactome_search()`](https://rbioapi.moosa-r.com/reference/rba_reactome_search.md)
+  : Search the Reactome Knowledgebase
 
 ### ReferenceEntity Queries
 
 - [`rba_reactome_xref()`](https://rbioapi.moosa-r.com/reference/rba_reactome_xref.md)
-  : Map Cross References IDs to Reactome ReferenceEntity
+  : Map Cross-Reference Identifiers to Reactome
 
 ### Species Related Queries
 
@@ -770,6 +772,8 @@ Functions that connect you to [UniProt](https://www.uniprot.org/)
   : Get UniProt protein sequence features by accession
 - [`rba_uniprot_features_search()`](https://rbioapi.moosa-r.com/reference/rba_uniprot_features_search.md)
   : Search UniProt protein sequence features
+- [`rba_uniprot_features_type()`](https://rbioapi.moosa-r.com/reference/rba_uniprot_features_type.md)
+  : Search UniProt protein sequence features by description
 - [`rba_uniprot_mutagenesis()`](https://rbioapi.moosa-r.com/reference/rba_uniprot_mutagenesis.md)
   : Get Mutagenesis by UniProt Accession
 - [`rba_uniprot_mutagenesis_search()`](https://rbioapi.moosa-r.com/reference/rba_uniprot_mutagenesis_search.md)
@@ -781,11 +785,13 @@ Functions that connect you to [UniProt](https://www.uniprot.org/)
 - [`rba_uniprot_proteins_search()`](https://rbioapi.moosa-r.com/reference/rba_uniprot_proteins_search.md)
   : Search UniProt entries
 - [`rba_uniprot_rna_edit()`](https://rbioapi.moosa-r.com/reference/rba_uniprot_rna_edit.md)
-  : Retrieve Epitope by Accession
+  : Retrieve UniProt RNA-Editing Annotations by Accession
 - [`rba_uniprot_rna_edit_search()`](https://rbioapi.moosa-r.com/reference/rba_uniprot_rna_edit_search.md)
   : Search RNA Editing in UniProt
 - [`rba_uniprot_variation()`](https://rbioapi.moosa-r.com/reference/rba_uniprot_variation.md)
-  : Get natural variants in UniProt by NIH-NCBI SNP database identifier
+  : Retrieve UniProt Natural Variants by Identifier
+- [`rba_uniprot_variation_locations()`](https://rbioapi.moosa-r.com/reference/rba_uniprot_variation_locations.md)
+  : Retrieve UniProt Natural Variants by Sequence Position
 - [`rba_uniprot_variation_search()`](https://rbioapi.moosa-r.com/reference/rba_uniprot_variation_search.md)
   : Search UniProt Natural Variants
 
@@ -817,7 +823,7 @@ Functions that connect you to [UniProt](https://www.uniprot.org/)
 ### Proteomes
 
 - [`rba_uniprot_proteomes()`](https://rbioapi.moosa-r.com/reference/rba_uniprot_proteomes.md)
-  : Get proteome by proteome/proteins UPID
+  : Get a Proteome by UPID
 - [`rba_uniprot_proteomes_search()`](https://rbioapi.moosa-r.com/reference/rba_uniprot_proteomes_search.md)
   : Search Proteomes in UniProt
 - [`rba_uniprot_genecentric()`](https://rbioapi.moosa-r.com/reference/rba_uniprot_genecentric.md)
@@ -847,9 +853,9 @@ Functions that connect you to [UniProt](https://www.uniprot.org/)
 - [`rba_uniprot_coordinates_location()`](https://rbioapi.moosa-r.com/reference/rba_uniprot_coordinates_location.md)
   : Search UniProt entries by taxonomy and genomic coordinates
 - [`rba_uniprot_coordinates_location_genome()`](https://rbioapi.moosa-r.com/reference/rba_uniprot_coordinates_location_genome.md)
-  : Get Genome coordinate by Gene Sequence position
+  : Map Genomic Coordinates to Protein Sequence Positions
 - [`rba_uniprot_coordinates_location_protein()`](https://rbioapi.moosa-r.com/reference/rba_uniprot_coordinates_location_protein.md)
-  : Get Genome coordinate by Protein Sequence position
+  : Map Protein Sequence Positions to Genomic Coordinates
 - [`rba_uniprot_coordinates_search()`](https://rbioapi.moosa-r.com/reference/rba_uniprot_coordinates_search.md)
   : Search Genomic Coordinates of UniProt entries
 

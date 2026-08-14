@@ -426,5 +426,5 @@ To cite rbioapi:
     #> [17] evaluate_1.0.5    jquerylib_0.1.4   fastmap_1.2.0     yaml_2.3.12      
     #> [21] lifecycle_1.0.5   compiler_4.6.1    fs_2.1.0          htmlwidgets_1.6.4
     #> [25] systemfonts_1.3.2 digest_0.6.39     R6_2.6.1          curl_7.1.0       
-    #> [29] magrittr_2.0.5    bslib_0.11.0      tools_4.6.1       pkgdown_2.2.1    
+    #> [29] magrittr_2.0.5    bslib_0.12.0      tools_4.6.1       pkgdown_2.2.1    
     #> [33] cachem_1.1.0      desc_1.4.3

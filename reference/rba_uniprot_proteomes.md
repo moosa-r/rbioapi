@@ -1,8 +1,9 @@
-# Get proteome by proteome/proteins UPID
+# Get a Proteome by UPID
 
-UniProt collects and annotates proteomes(Protein sets expressed in an
-organism). Using this function you can search UniProt for available
-proteomes. see [What are
+UniProt collects and annotates proteomes (protein sets expressed in an
+organism). Retrieve a proteome's metadata by UPID, optionally including
+its proteins. When proteins are requested, they can be filtered by
+UniProtKB review status. See [What are
 proteomes?](https://www.uniprot.org/help/proteome) for more information.
 
 ## Usage
@@ -15,22 +16,20 @@ rba_uniprot_proteomes(upid, get_proteins = FALSE, reviewed = NULL, ...)
 
 - upid:
 
-  [UniProt Proteome identifier
-  (UPID)](https://www.uniprot.org/help/proteome_id). You can supply up
-  to 100 UPIDs.
+  Character: [UniProt Proteome identifier
+  (UPID)](https://www.uniprot.org/help/proteome_id).
 
 - get_proteins:
 
-  logical: set FALSE (default) to only return information of the
-  proteome with supplied UPID, set TRUE to also return the proteins of
-  the supplied proteome UPID.
+  Logical: (default = `FALSE`) If `TRUE`, embed the proteins belonging
+  to the supplied proteome in its genome components.
 
 - reviewed:
 
-  Logical: Only considered when get_proteins is TRUE. If TRUE, only
-  return "UniProtKB/Swiss-Prot" (reviewed) proteins; If FALSE, only
-  return TrEMBL (un-reviewed) entries. leave it as NULL if you do not
-  want to filter proteins based on their review status.
+  Logical: (optional) Used only when `get_proteins` is `TRUE`. If
+  `TRUE`, return only reviewed UniProtKB/Swiss-Prot proteins; if
+  `FALSE`, return only unreviewed UniProtKB/TrEMBL entries; if `NULL`,
+  do not filter by review status.
 
 - ...:
 
@@ -40,26 +39,24 @@ rba_uniprot_proteomes(upid, get_proteins = FALSE, reviewed = NULL, ...)
 
 ## Value
 
-a list containing information of the proteome with your supplied UPID
-that can contain the proteomes protein entries based on the value of
-get_proteins argument.
+A list containing the requested proteome. With `get_proteins = TRUE`,
+protein entries are included under each element of `component`.
 
 ## Corresponding API Resources
 
-"GET https://ebi.ac.uk/proteins/api/proteomes/proteins/{upid}"  
-"GET https://ebi.ac.uk/proteins/api/proteomes/{upid}"
+"GET https://www.ebi.ac.uk/proteins/api/proteomes/proteins/{upid}"  
+"GET https://www.ebi.ac.uk/proteins/api/proteomes/{upid}"
 
 ## References
 
-- The UniProt Consortium , UniProt: the Universal Protein Knowledgebase
-  in 2025, Nucleic Acids Research, 2024;, gkae1010,
+- The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
 
-- Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated
-  protein and genome information, Nucleic Acids Research, Volume 45,
-  Issue W1, 3 July 2017, Pages W539–W544,
+- Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales, L.,
+  Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
   https://doi.org/10.1093/nar/gkx237
 
 - [Proteins API Documentation](https://www.ebi.ac.uk/proteins/api/doc/)

@@ -25,8 +25,7 @@ rba_reactome_analysis_mapping(
 - input_format:
 
   Character: (optional) This function will automatically identify your
-  supplied input's format. But in case of unexpected issues or if you
-  want to be explicit, set this argument to one of:
+  supplied input's format. To be explicit, set this argument to one of:
 
   - "vector": If you supplied a simple vector (numeric or character) as
     input.
@@ -34,8 +33,13 @@ rba_reactome_analysis_mapping(
   - "file": If you supplied a local file path pointing to a
     correctly-formatted text file.
 
-  - "url": If you supplied a URL pointing to a correctly-formatted text
-    file.
+  - "url": If you supplied an HTTP or HTTPS URL pointing to a
+    correctly-formatted text file.
+
+  An explicit value takes precedence. Otherwise, HTTP and HTTPS
+  addresses are identified first, followed by existing local files, and
+  then other non-empty character or numeric inputs as identifier
+  vectors.
 
 - projection:
 
@@ -60,8 +64,8 @@ mapped to.
 
 ## Corresponding API Resources
 
-"POST https://reactome.org/AnalysisService/mapping"  
-"POST https://reactome.org/AnalysisService/mapping/projection"  
+"POST https://reactome.org/AnalysisService/mapping/form"  
+"POST https://reactome.org/AnalysisService/mapping/form/projection"  
 "POST https://reactome.org/AnalysisService/mapping/url"  
 "POST https://reactome.org/AnalysisService/mapping/url/projection"
 
@@ -72,9 +76,10 @@ mapped to.
   Knowledgebase 2026. Nucleic Acids Res., 54(D1), D673–D681. doi:
   10.1093/nar/gkaf1223
 
-- Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A, Hermjakob H.
-  ReactomeGSA - Efficient Multi-Omics Comparative Pathway Analysis. Mol
-  Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed PMID: 32907876.
+- Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A., &
+  Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+  Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+  doi: 10.1074/mcp.TIR120.002155
 
 - [Reactome Analysis Services API
   Documentation](https://reactome.org/AnalysisService/)

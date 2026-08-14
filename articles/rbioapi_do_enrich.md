@@ -154,7 +154,7 @@ enrichr_enrich <- rba_enrichr(
 #> --Step 2/3:
 #> Uploading 1214 gene symbols to Enrichr human.
 #> --Step 3/3:
-#> Performing Enrichr analysis on gene-list 134489361 against Enrichr human library: KEGG_2021_Human.
+#> Performing Enrichr analysis on gene-list 135481310 against Enrichr human library: KEGG_2021_Human.
 ```
 
 In the `gene_set_library` parameter, you can provide multiple gene set
@@ -176,7 +176,7 @@ enrichr_enrich_kegg <- rba_enrichr(
 #> --Step 2/3:
 #> Uploading 1214 gene symbols to Enrichr human.
 #> --Step 3/3:
-#> Performing Enrichr analysis on gene-list 134489363 using multiple Enrichr human libraries.
+#> Performing Enrichr analysis on gene-list 135481312 using multiple Enrichr human libraries.
 #> Note: You have selected '7' Enrichr human libraries. Note that for each library, a separate call should be sent to Enrichr server. Thus, this could take a while depending on the number of selected libraries.
 ```
 
@@ -332,8 +332,6 @@ panther_sets <- rba_panther_info(what = "datasets")
 #> Retrieving available annotation datasets.
 ```
 
-    #> [1] "Vignette building failed. It is probably because the web service was down during the building."
-
 Note that you should enter the “id” of the datasets, not its label. For
 example, entering `"biological_process"` is incorrect, you should rather
 use `"GO:0008150"`.
@@ -388,13 +386,40 @@ information about your analysis. The names are self-explanatory:
 ``` r
 
 str(panther_enrich, 2)
-#>  NULL
+#> List of 9
+#>  $ reference                 :List of 3
+#>   ..$ organism      : chr "Homo sapiens"
+#>   ..$ mapped_count  :List of 2
+#>   ..$ unmapped_count: int 0
+#>  $ input_list                :List of 5
+#>   ..$ organism      : chr "Homo sapiens"
+#>   ..$ mapped_ids    : chr "SCT,C4BPA,FAM159A,TSEN54,VPREB3,ZC3H12D,SPIB,HTR6,SAMD15,PPP4R2,FAM110B,LIPN,C3AR1,EPSTI1,UBASH3A,SAMD12,SAMD10"| __truncated__
+#>   ..$ mapped_count  : int 1040
+#>   ..$ unmapped_ids  : chr "LOC200772,ELK2AP,CLRN1-AS1,LOC100272216,LOC102723604,LILRP2,UBE2Q1-AS1,MIR3945,MEG3,LOC400927-CSNK1E,MIR6732,MI"| __truncated__
+#>   ..$ unmapped_count: int 174
+#>  $ result                    :'data.frame':  13761 obs. of  11 variables:
+#>   ..$ number_in_list               : int [1:13761] 38 22 20 23 20 166 98 137 96 110 ...
+#>   ..$ fold_enrichment              : num [1:13761] 4.3 7.34 8.23 6.64 7.59 ...
+#>   ..$ fdr                          : num [1:13761] 1.97e-10 2.62e-10 1.85e-10 4.20e-10 7.22e-10 ...
+#>   ..$ expected                     : num [1:13761] 8.84 3 2.43 3.46 2.64 ...
+#>   ..$ number_in_reference          : int [1:13761] 171 58 47 67 51 1923 955 1527 979 1184 ...
+#>   ..$ pValue                       : num [1:13761] 1.43e-14 3.81e-14 4.03e-14 1.22e-13 2.62e-13 ...
+#>   ..$ plus_minus                   : chr [1:13761] "+" "+" "+" "+" ...
+#>   ..$ input_list.mapped_ids        : chr [1:13761] "RPL3,RPL32,RPL34,RPLP1,RPL10A,RPL8,RPL9,RPL7,RPS15,RPS14,RPS16,RPL18A,RPS19,RPS18,RPL36,RPLP2,RPL35,RPL13,RPL38"| __truncated__ "RPL32,RPL34,RPLP1,RPL35A,RPL13A,RPL23A,RPL10A,RPL8,MAPK14,RPL9,RPL7,RPL18A,RPL27A,RPL37A,RPL36,SCGB3A1,RPLP2,RP"| __truncated__ "RPL32,RPL34,RPLP1,RPL35A,RPL13A,RPL23A,RPL10A,RPL8,RPL9,RPL7,RPL18A,RPL27A,RPL37A,RPL36,RPLP2,RPL35,RPL13,RPL38,RPL18,RPL39" "RPL32,RPL34,RPLP1,RPL35A,RPL13A,RPL23A,RPL10A,RPL8,MAPK14,RPL9,RPL7,RPL18A,RPL27A,RPL37A,RPL36,SCGB3A1,ADAM9,RP"| __truncated__ ...
+#>   ..$ input_list.mapped_panther_ids: chr [1:13761] "HUMAN|HGNC=10388|UniProtKB=P62841,HUMAN|HGNC=10372|UniProtKB=P05386,HUMAN|HGNC=10441|UniProtKB=P62241,HUMAN|HGN"| __truncated__ "HUMAN|HGNC=10372|UniProtKB=P05386,HUMAN|HGNC=18384|UniProtKB=Q96QR1,HUMAN|HGNC=10368|UniProtKB=P62917,HUMAN|HGN"| __truncated__ "HUMAN|HGNC=10372|UniProtKB=P05386,HUMAN|HGNC=10368|UniProtKB=P62917,HUMAN|HGNC=10377|UniProtKB=P05387,HUMAN|HGN"| __truncated__ "HUMAN|HGNC=10372|UniProtKB=P05386,HUMAN|HGNC=18384|UniProtKB=Q96QR1,HUMAN|HGNC=10368|UniProtKB=P62917,HUMAN|HGN"| __truncated__ ...
+#>   ..$ term.id                      : chr [1:13761] "GO:0002181" "GO:1901739" "GO:1901740" "GO:0060142" ...
+#>   ..$ term.label                   : chr [1:13761] "cytoplasmic translation" "regulation of myoblast fusion" "negative regulation of myoblast fusion" "regulation of syncytium formation by plasma membrane fusion" ...
+#>  $ search                    :List of 1
+#>   ..$ search_type: chr "overrepresentation"
+#>  $ tool_release_date         : int 20240807
+#>  $ enrichment_test_type      : chr "FISHER"
+#>  $ annotDataSet              : chr "GO:0008150"
+#>  $ annot_version_release_date: chr "GO Ontology database DOI:   Released 2026-04-28"
+#>  $ correction                : chr "FDR"
 ```
 
 The analysis results are returned as a Data Frame with an element named
 result:
-
-    #> [1] "Vignette building failed. It is probably because the web service was down during the building."
 
 ------------------------------------------------------------------------
 
@@ -687,11 +712,11 @@ mieaa_enrich <- rba_mieaa_enrich(
 #> Submitting ORA enrichment request for 23 miRNA IDs of species Homo sapiens to miEAA servers.
 #> 
 #>  -- Step 2/3: Checking for Submitted enrichment analysis's status every 5 seconds.
-#>     Your submitted job ID is: 98aa682a-993c-465b-b9ac-7f85120be8a3
+#>     Your submitted job ID is: e592971f-5292-434b-a717-d60e824398f2
 #> .
 #> 
 #>  -- Step 3/3: Retrieving the results.
-#> Retrieving results of submitted enrichment request with ID: 98aa682a-993c-465b-b9ac-7f85120be8a3
+#> Retrieving results of submitted enrichment request with ID: e592971f-5292-434b-a717-d60e824398f2
 ```
 
 ------------------------------------------------------------------------
@@ -758,5 +783,5 @@ for more details.
     #> [17] evaluate_1.0.5    jquerylib_0.1.4   fastmap_1.2.0     yaml_2.3.12      
     #> [21] lifecycle_1.0.5   compiler_4.6.1    fs_2.1.0          htmlwidgets_1.6.4
     #> [25] systemfonts_1.3.2 digest_0.6.39     R6_2.6.1          curl_7.1.0       
-    #> [29] magrittr_2.0.5    bslib_0.11.0      tools_4.6.1       mime_0.13        
+    #> [29] magrittr_2.0.5    bslib_0.12.0      tools_4.6.1       mime_0.13        
     #> [33] pkgdown_2.2.1     cachem_1.1.0      desc_1.4.3

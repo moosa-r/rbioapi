@@ -87,27 +87,32 @@
 
 
 <dl><dt id="arg-upi">upi<a class="anchor" aria-label="anchor" href="#arg-upi"></a></dt>
-<dd><p>unique UniParc Identifier.</p></dd>
+<dd><p>Character: (optional) Unique UniParc identifier(s). You can supply
+up to 100 IDs.</p></dd>
 
 
 <dt id="arg-accession">accession<a class="anchor" aria-label="anchor" href="#arg-accession"></a></dt>
-<dd><p><a href="https://www.uniprot.org/help/accession_numbers" class="external-link">
+<dd><p>Character: (optional)
+<a href="https://www.uniprot.org/help/accession_numbers" class="external-link">
 UniProtKB primary or secondary accession</a>(s). You can supply up to 100
 accession numbers.</p></dd>
 
 
 <dt id="arg-db-id">db_id<a class="anchor" aria-label="anchor" href="#arg-db-id"></a></dt>
-<dd><p>Protein ID in the cross-reference (external) database.
+<dd><p>Character: (optional) Protein ID in a cross-reference database.
 You can supply up to 100 IDs.</p></dd>
 
 
 <dt id="arg-gene">gene<a class="anchor" aria-label="anchor" href="#arg-gene"></a></dt>
-<dd><p><a href="https://www.uniprot.org/help/gene_name" class="external-link">UniProt gene
+<dd><p>Character: (optional)
+<a href="https://www.uniprot.org/help/gene_name" class="external-link">UniProt gene
 name(s)</a>. You can supply up to 20 gene names.</p></dd>
 
 
 <dt id="arg-taxid">taxid<a class="anchor" aria-label="anchor" href="#arg-taxid"></a></dt>
-<dd><p>NIH-NCBI <a href="https://www.uniprot.org/taxonomy/" class="external-link">Taxon ID</a>.
+<dd><p>Numeric: (optional) NIH-NCBI
+<a href="https://www.uniprot.org/taxonomy/" class="external-link">Taxon ID</a> used to refine the
+search.
 You can supply up to 20 taxon IDs.</p></dd>
 
 
@@ -118,25 +123,25 @@ arguments manual for more information on available options.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A list where each element correspond to a UniParc entry.</p>
+    <p>The best matching UniParc entry.</p>
     </div>
     <div class="section level2">
     <h2 id="corresponding-api-resources">Corresponding API Resources<a class="anchor" aria-label="anchor" href="#corresponding-api-resources"></a></h2>
 
 
-<p>"GET https://ebi.ac.uk/proteins/api/uniparc/bestguess"</p>
+<p>"GET https://www.ebi.ac.uk/proteins/api/uniparc/bestguess"</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
 
-<ul><li><p>The UniProt Consortium , UniProt: the Universal Protein
-  Knowledgebase in 2025, Nucleic Acids Research, 2024;, gkae1010,
+<ul><li><p>The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010</p></li>
-<li><p>Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated protein
-  and genome information, Nucleic Acids Research, Volume 45, Issue W1,
-  3 July 2017, Pages W539–W544, https://doi.org/10.1093/nar/gkx237</p></li>
+<li><p>Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales,
+  L., Liu, W., Luo, J., Qi, G., Turner, E., &amp; Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
+  https://doi.org/10.1093/nar/gkx237</p></li>
 <li><p><a href="https://www.ebi.ac.uk/proteins/api/doc/" class="external-link">Proteins API
   Documentation</a></p></li>
 <li><p><a href="https://www.uniprot.org/help/publications" class="external-link">Citations note

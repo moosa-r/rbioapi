@@ -1,9 +1,11 @@
 # Search UniParc Entries
 
 Use this function to search [UniProt Archive
-(UniParc)](https://www.uniprot.org/help/uniparc) entries.You may also
-refine your search with modifiers such as sequence length, taxon id etc.
-See "Arguments section" for more information.
+(UniParc)](https://www.uniprot.org/help/uniparc) entries. Search by
+identifier, annotation, organism, sequence properties, or other
+supported criteria. The `rf_*` arguments filter the cross-references
+returned within matching entries; they do not select entries by
+themselves.
 
 ## Usage
 
@@ -35,103 +37,104 @@ rba_uniprot_uniparc_search(
 
 - upi:
 
-  unique UniParc Identifier(s). You can supply up to 100 IDs.
+  Character: (optional) Unique UniParc identifier(s). You can supply up
+  to 100 IDs.
 
 - accession:
 
-  [UniProtKB primary or secondary
+  Character: (optional) [UniProtKB primary or secondary
   accession](https://www.uniprot.org/help/accession_numbers)(s). You can
   supply up to 100 accession numbers.
 
 - db_type:
 
-  [cross-reference](https://www.uniprot.org/database/) (external
-  database) name.
+  Character: (optional) [Cross-reference
+  database](https://www.uniprot.org/database/) name.
 
 - db_id:
 
-  Protein ID in the cross-reference (external) database. You can supply
-  up to 100 IDs.
+  Character: (optional) Protein ID in a cross-reference database. You
+  can supply up to 100 IDs.
 
 - gene:
 
-  [UniProt gene name(s)](https://www.uniprot.org/help/gene_name). You
-  can supply up to 20 gene names.
+  Character: (optional) [UniProt gene
+  name(s)](https://www.uniprot.org/help/gene_name). You can supply up to
+  20 gene names.
 
 - protein:
 
-  [UniProt protein name](https://www.uniprot.org/help/protein_names).
+  Character: (optional) [UniProt protein
+  name](https://www.uniprot.org/help/protein_names).
 
 - taxid:
 
-  NIH-NCBI [Taxon ID](https://www.uniprot.org/taxonomy/). You can supply
-  up to 20 taxon IDs.
+  Numeric: (optional) NIH-NCBI [Taxon
+  ID](https://www.uniprot.org/taxonomy/). You can supply up to 20 taxon
+  IDs.
 
 - organism:
 
-  [Organism name](https://www.uniprot.org/taxonomy/).
+  Character: (optional) [Organism
+  name](https://www.uniprot.org/taxonomy/).
 
 - sequence_checksum:
 
-  Sequence CRC64 checksum.
+  Character: (optional) A 16-character hexadecimal sequence CRC64
+  checksum.
 
 - ipr:
 
-  [InterPro
+  Character: (optional) [InterPro
   identifier(s)](https://www.ebi.ac.uk/interpro/about/interpro/). You
   can supply up to 20 IDs.
 
 - signature_db:
 
-  InterPro's [signature
+  Character: (optional) InterPro [signature
   database](https://interpro-documentation.readthedocs.io/en/latest/databases.html).
-  You can supply up to 13 of the following values:  
-  "CATH", "CDD", "HAMAP", "MobiDB Lite", "Panther", "Pfam", "PIRSF",
-  "PRINTS", "Prosite", "SFLD", "SMART", "SUPERFAMILY" and/or "TIGRfams"
+  You can supply up to 20 values.
 
 - signature_id:
 
-  Signature ID in the InterPro's [signature
+  Character: (optional) Signature ID in an InterPro [signature
   database](https://interpro-documentation.readthedocs.io/en/latest/databases.html).
   You can supply up to 20 IDs.
 
 - upid:
 
-  [UniProt Proteome identifier
+  Character: (optional) [UniProt Proteome identifier
   (UPID)](https://www.uniprot.org/help/proteome_id). You can supply up
   to 100 UPIDs.
 
 - seq_length:
 
-  An exact sequence length (e.g. 150) or a range of sequence lengths
-  (e.g. "130-158").
+  Character or Numeric: (optional) An exact sequence length (e.g. 150)
+  or a range of sequence lengths (e.g. "130-158").
 
 - rf_dd_type:
 
-  Filter the content of the each UniParc entry by
+  Character: (optional) Filter each UniParc entry's content by
   [cross-reference](https://www.uniprot.org/database/) names. You can
   supply multiple values.
 
 - rf_db_id:
 
-  Filter the content of the each UniParc entry by protein identifiers in
-  any cross-reference database. You can supply multiple values.
+  Character: (optional) Filter each UniParc entry's content by protein
+  identifiers in any cross-reference database. You can supply multiple
+  values.
 
 - rf_active:
 
-  (logical ) Filter the content of each UniParc entry based on active
-  status on source database:
-
-  - NULL: (default) don't filter contents based on active status.
-
-  - TRUE: only return contents which are still active.
-
-  - FALSE: Only return contents which are not active.
+  Logical: (optional) Filter each UniParc entry's content by active
+  status in the source database: `TRUE` retains active database
+  references, `FALSE` retains inactive references, and `NULL` applies no
+  active-status filter.
 
 - rf_tax_id:
 
-  (Numeric) Filter the content of each UniParc entry by NIH-NCBI [Taxon
-  ID](https://www.uniprot.org/taxonomy/). You can supply multiple
+  Numeric: (optional) Filter each UniParc entry's content by NIH-NCBI
+  [Taxon ID](https://www.uniprot.org/taxonomy/). You can supply multiple
   values.
 
 - ...:
@@ -142,31 +145,23 @@ rba_uniprot_uniparc_search(
 
 ## Value
 
-A List where each element corresponds to one UniParc entry returned by
-your search query. The element itself is a sub-list containing sequence
-information and reference entries.
-
-## Details
-
-Note that this is a search function. Thus, you are not required to fill
-every argument; You may use whatever combinations of arguments you see
-fit for your query.
+A list named by UniParc accession. Each element contains sequence
+information and cross-reference entries for one search hit.
 
 ## Corresponding API Resources
 
-"GET https://ebi.ac.uk/proteins/api/uniparc"
+"GET https://www.ebi.ac.uk/proteins/api/uniparc"
 
 ## References
 
-- The UniProt Consortium , UniProt: the Universal Protein Knowledgebase
-  in 2025, Nucleic Acids Research, 2024;, gkae1010,
+- The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
 
-- Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated
-  protein and genome information, Nucleic Acids Research, Volume 45,
-  Issue W1, 3 July 2017, Pages W539–W544,
+- Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales, L.,
+  Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
   https://doi.org/10.1093/nar/gkx237
 
 - [Proteins API Documentation](https://www.ebi.ac.uk/proteins/api/doc/)
@@ -194,6 +189,6 @@ rba_uniprot_uniparc_search(accession = "P30914")
 rba_uniprot_uniparc_search(accession = "P30914", rf_active = TRUE)
 # }
 # \donttest{
-rba_uniprot_uniparc_search(taxid = "694009", protein = "Nucleoprotein")
+rba_uniprot_uniparc_search(taxid = 694009, protein = "Nucleoprotein")
 # }
 ```

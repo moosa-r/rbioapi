@@ -1,9 +1,10 @@
-# Get Genome coordinate by Protein Sequence position
+# Map Protein Sequence Positions to Genomic Coordinates
 
-Using this function you can retrieve genome coordinates of a given
-UniProt protein by providing protein position or position range. You can
-either supply 'p_position' alone or supply 'p_start' and 'p_end'
-together.
+Map an amino-acid position or range in a UniProt protein sequence to its
+corresponding [genomic
+coordinates](https://www.uniprot.org/help/genomic_coordinates). A
+protein sequence location may have more than one genomic mapping. Supply
+`p_position` alone, or supply `p_start` and `p_end` together.
 
 ## Usage
 
@@ -21,20 +22,21 @@ rba_uniprot_coordinates_location_protein(
 
 - accession:
 
-  [UniProtKB primary or secondary
+  Character: [UniProtKB primary or secondary
   accession](https://www.uniprot.org/help/accession_numbers).
 
 - p_position:
 
-  (numeric) Protein sequence position
+  Numeric: (optional) Protein sequence position. Supply this alone, or
+  supply both `p_start` and `p_end`.
 
 - p_start:
 
-  (numeric) Protein sequence position start
+  Numeric: (optional) Protein sequence range start.
 
 - p_end:
 
-  (numeric) Protein sequence position end
+  Numeric: (optional) Protein sequence range end.
 
 - ...:
 
@@ -44,36 +46,34 @@ rba_uniprot_coordinates_location_protein(
 
 ## Value
 
-Genome coordinates of your supplied proteins.
-
-## Details
-
-For more information about how UniProt imports and calculates genomic
-coordinates data, see:  
-McGarvey, P. B., Nightingale, A., Luo, J., Huang, H., Martin, M. J., Wu,
-C., & UniProt Consortium (2019). UniProt genomic mapping for deciphering
-functional effects of missense variants. Human mutation, 40(6), 694–705.
-https://doi.org/10.1002/humu.23738
+A list with a `locations` element containing the mapped protein and
+genomic boundaries. Records can include chromosome, strand, genome
+assembly, nucleotide and Ensembl identifiers, amino acids, and mapped
+sequence features.
 
 ## Corresponding API Resources
 
-"GET https://ebi.ac.uk/proteins/api/coordinates/location
-/{accession}:{pPosition}"  
-"GET https://ebi.ac.uk/proteins/api/coordinates/location
-/{accession}:{pStart}-{pEnd}"
+"GET
+https://www.ebi.ac.uk/proteins/api/coordinates/location/{accession}:{pPosition}"  
+"GET
+https://www.ebi.ac.uk/proteins/api/coordinates/location/{accession}:{pStart}-{pEnd}"
 
 ## References
 
-- The UniProt Consortium , UniProt: the Universal Protein Knowledgebase
-  in 2025, Nucleic Acids Research, 2024;, gkae1010,
+- The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
 
-- Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated
-  protein and genome information, Nucleic Acids Research, Volume 45,
-  Issue W1, 3 July 2017, Pages W539–W544,
+- Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales, L.,
+  Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
   https://doi.org/10.1093/nar/gkx237
+
+- McGarvey, P. B., Nightingale, A., Luo, J., Huang, H., Martin, M. J.,
+  Wu, C., & The UniProt Consortium. (2019). UniProt genomic mapping for
+  deciphering functional effects of missense variants. Human Mutation,
+  40(6), 694–705. https://doi.org/10.1002/humu.23738
 
 - [Proteins API Documentation](https://www.ebi.ac.uk/proteins/api/doc/)
 

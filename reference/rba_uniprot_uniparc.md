@@ -1,9 +1,10 @@
 # Get UniParc entry
 
-Use this function to retrieve UniParc entries. You can use either -and
-only one of- UniProt accession, Cross-reference database id, UniParc ID
-or UniProt Proteome UPID. You can also filter the returned content of
-the returned UniParc entry. see "Argument" section for more details.
+Retrieve UniParc entries using exactly one UniProt accession,
+cross-reference database ID, UniParc ID, or UniProt Proteome UPID. The
+`rf_*` arguments filter cross-references within returned entries.
+Database-reference and proteome lookups may return multiple UniParc
+entries.
 
 ## Usage
 
@@ -25,49 +26,45 @@ rba_uniprot_uniparc(
 
 - upi:
 
-  unique UniParc Identifier.
+  Character: (optional) Unique UniParc identifier.
 
 - accession:
 
-  [UniProtKB primary or secondary
+  Character: (optional) [UniProtKB primary or secondary
   accession](https://www.uniprot.org/help/accession_numbers).
 
 - db_id:
 
-  Protein ID in the cross-reference (external) database.
+  Character: (optional) Protein ID in a cross-reference database.
 
 - upid:
 
-  [UniProt Proteome identifier
-  (UPID)](https://www.uniprot.org/help/proteome_id). You can supply up
-  to 100 UPIDs.
+  Character: (optional) [UniProt Proteome identifier
+  (UPID)](https://www.uniprot.org/help/proteome_id).
 
 - rf_dd_type:
 
-  Filter the content of the UniParc entry by
+  Character: (optional) Filter the UniParc entry's content by
   [cross-reference](https://www.uniprot.org/database/) names. You can
   supply multiple values.
 
 - rf_db_id:
 
-  Filter the content of the UniParc entry by protein identifiers in any
-  cross-reference database. You can supply multiple values.
+  Character: (optional) Filter the UniParc entry's content by protein
+  identifiers in any cross-reference database. You can supply multiple
+  values.
 
 - rf_active:
 
-  (logical ) Filter the content of UniParc entry based on active status
-  on source database:
-
-  - NULL: (default) don't filter contents based on active status.
-
-  - TRUE: only return contents which are still active.
-
-  - FALSE: Only return contents which are not active.
+  Logical: (optional) Filter the UniParc entry's content by active
+  status in the source database: `TRUE` retains active database
+  references, `FALSE` retains inactive references, and `NULL` applies no
+  active-status filter.
 
 - rf_tax_id:
 
-  (Numeric) Filter the content of the UniParc entry by NIH-NCBI [Taxon
-  ID](https://www.uniprot.org/taxonomy/). You can supply multiple
+  Numeric: (optional) Filter the UniParc entry's content by NIH-NCBI
+  [Taxon ID](https://www.uniprot.org/taxonomy/). You can supply multiple
   values.
 
 - ...:
@@ -78,26 +75,26 @@ rba_uniprot_uniparc(
 
 ## Value
 
-A list which correspond to a UniParc entry.
+A UniParc entry, or a list of entries for a database-reference or
+proteome lookup.
 
 ## Corresponding API Resources
 
-"GET https://ebi.ac.uk/proteins/api/uniparc/accession/{accession} "  
-"GET https://ebi.ac.uk/proteins/api/uniparc/dbreference/{dbid}"  
-"GET https://ebi.ac.uk/proteins/api/uniparc/proteome/{upid}"  
-"GET https://ebi.ac.uk/proteins/api/uniparc/upi/{upi}"
+"GET https://www.ebi.ac.uk/proteins/api/uniparc/accession/{accession}"  
+"GET https://www.ebi.ac.uk/proteins/api/uniparc/dbreference/{dbid}"  
+"GET https://www.ebi.ac.uk/proteins/api/uniparc/proteome/{upid}"  
+"GET https://www.ebi.ac.uk/proteins/api/uniparc/upi/{upi}"
 
 ## References
 
-- The UniProt Consortium , UniProt: the Universal Protein Knowledgebase
-  in 2025, Nucleic Acids Research, 2024;, gkae1010,
+- The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
 
-- Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated
-  protein and genome information, Nucleic Acids Research, Volume 45,
-  Issue W1, 3 July 2017, Pages W539–W544,
+- Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales, L.,
+  Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
   https://doi.org/10.1093/nar/gkx237
 
 - [Proteins API Documentation](https://www.ebi.ac.uk/proteins/api/doc/)
@@ -116,7 +113,7 @@ Other "UniProt - UniParc":
 
 ``` r
 # \donttest{
-rba_uniprot_uniparc(upi = "UPI00000000C9")
+rba_uniprot_uniparc(accession = "P30914")
 # }
 # \donttest{
 rba_uniprot_uniparc(upi = "UPI00000000C9")

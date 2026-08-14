@@ -28,48 +28,44 @@ rba_uniprot_ptm_search(
 
 - accession:
 
-  [UniProtKB primary or secondary
+  Character: (optional) [UniProtKB primary or secondary
   accession](https://www.uniprot.org/help/accession_numbers)(s). You can
   supply up to 100 accession numbers.
 
 - ptm:
 
-  Post-translational modification name
+  Character: (optional) Post-translational modification name.
 
 - data_source:
 
-  Proteomics data source. You can choose up to two of:
-
-  - ["MaxQB"](https://www.uniprot.org/database/DB-0186)
-
-  - ["PeptideAtlas"](https://www.uniprot.org/database/DB-0071)
-
-  - ["EPD"](https://www.uniprot.org/database/DB-0205)
-
-  - ["ProteomicsDB"](https://www.uniprot.org/database/DB-0229)
+  Character: (optional) Proteomics data source. You can supply up to two
+  values. Use
+  [`rba_uniprot_proteomics_species()`](https://rbioapi.moosa-r.com/reference/rba_uniprot_proteomics_species.md)
+  to retrieve the sources currently available for each species and
+  category.
 
 - taxid:
 
-  NIH-NCBI [Taxon ID](https://www.uniprot.org/taxonomy/). You can supply
-  up to 20 taxon IDs.
+  Numeric: (optional) NIH-NCBI [Taxon
+  ID](https://www.uniprot.org/taxonomy/). You can supply up to 20 taxon
+  IDs.
 
 - upid:
 
-  [UniProt Proteome identifier
+  Character: (optional) [UniProt Proteome identifier
   (UPID)](https://www.uniprot.org/help/proteome_id). You can supply up
   to 100 UPIDs.
 
 - peptide:
 
-  Peptide sequence(s). You can supply up to 20 sequences.
+  Character: (optional) Peptide sequence(s). You can supply up to 20
+  sequences.
 
 - unique:
 
-  Logical: Should the results be filtered based on the Peptide's
-  uniqueness (the fact that a peptide maps to only 1 protein). If TRUE,
-  Only unique peptides will be returned, if FALSE only un-unique
-  peptides will be returned; If NULL (default) the results will not be
-  filtered based on this.
+  Logical: (optional) Filter by peptide uniqueness. If `TRUE`, return
+  peptides mapping to one protein; if `FALSE`, return non-unique
+  peptides; if `NULL`, do not apply this filter.
 
 - ...:
 
@@ -93,19 +89,18 @@ UniProtKB](https://www.uniprot.org/help/ptm_processing_section)
 
 ## Corresponding API Resources
 
-"GET https://www.ebi.ac.uk/proteins/api/proteomics-ptm"
+"GET https://www.ebi.ac.uk/proteins/api/proteomics/ptm"
 
 ## References
 
-- The UniProt Consortium, UniProt: the universal protein knowledgebase
-  in 2021, Nucleic Acids Research, Volume 49, Issue D1, 8 January 2021,
-  Pages D480–D489, https://doi.org/10.1093/nar/gkaa1100
+- The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
+  https://doi.org/10.1093/nar/gkae1010
 
-- Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated
-  protein and genome information, Nucleic Acids Research, Volume 45,
-  Issue W1, 3 July 2017, Pages W539–W544,
+- Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales, L.,
+  Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
   https://doi.org/10.1093/nar/gkx237
 
 - [Proteins API Documentation](https://www.ebi.ac.uk/proteins/api/doc/)

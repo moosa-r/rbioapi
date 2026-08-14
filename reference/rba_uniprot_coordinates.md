@@ -1,9 +1,10 @@
 # Get Genomic Coordinates of a Protein
 
-Using this function you can retrieve genomic Coordinates of a Protein by
-either providing the protein's UniProt accession or it's ID in a
-cross-reference database (Ensembl, CCDC, HGNC or RefSeq). You should
-supply either 'accession' alone or 'db_type' and 'db_id' together.
+Retrieve [genomic
+coordinates](https://www.uniprot.org/help/genomic_coordinates) for a
+protein using either its UniProt accession or its ID in a
+cross-reference database (Ensembl, CCDS, HGNC, or RefSeq). You should
+supply either `accession` alone or `db_type` and `db_id` together.
 
 ## Usage
 
@@ -15,17 +16,18 @@ rba_uniprot_coordinates(accession = NULL, db_type = NULL, db_id = NULL, ...)
 
 - accession:
 
-  [UniProtKB primary or secondary
+  Character: (optional) [UniProtKB primary or secondary
   accession](https://www.uniprot.org/help/accession_numbers).
 
 - db_type:
 
-  cross-reference database name, Should be one of: "Ensembl", "CCDC",
-  "HGNC" or "RefSeq".
+  Character: (optional) Cross-reference database name. One of "Ensembl",
+  "CCDS", "HGNC", or "RefSeq".
 
 - db_id:
 
-  Protein's ID in the cross-reference database
+  Character: (optional) Protein identifier in the cross-reference
+  database.
 
 - ...:
 
@@ -35,34 +37,29 @@ rba_uniprot_coordinates(accession = NULL, db_type = NULL, db_id = NULL, ...)
 
 ## Value
 
-A list with genome coordinates of your supplied protein.
-
-## Details
-
-For more information about how UniProt imports and calculates genomic
-coordinates data, see:  
-McGarvey, P. B., Nightingale, A., Luo, J., Huang, H., Martin, M. J., Wu,
-C., & UniProt Consortium (2019). UniProt genomic mapping for deciphering
-functional effects of missense variants. Human mutation, 40(6), 694–705.
-https://doi.org/10.1002/humu.23738
+A list containing the requested protein's genomic coordinates.
 
 ## Corresponding API Resources
 
-"GET https://ebi.ac.uk/proteins/api/coordinates/{accession}"  
-"GET https://ebi.ac.uk/proteins/api/coordinates/{dbtype}:{dbid}"
+"GET https://www.ebi.ac.uk/proteins/api/coordinates/{accession}"  
+"GET https://www.ebi.ac.uk/proteins/api/coordinates/{dbtype}:{dbid}"
 
 ## References
 
-- The UniProt Consortium , UniProt: the Universal Protein Knowledgebase
-  in 2025, Nucleic Acids Research, 2024;, gkae1010,
+- The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
 
-- Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated
-  protein and genome information, Nucleic Acids Research, Volume 45,
-  Issue W1, 3 July 2017, Pages W539–W544,
+- Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales, L.,
+  Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
   https://doi.org/10.1093/nar/gkx237
+
+- McGarvey, P. B., Nightingale, A., Luo, J., Huang, H., Martin, M. J.,
+  Wu, C., & The UniProt Consortium. (2019). UniProt genomic mapping for
+  deciphering functional effects of missense variants. Human Mutation,
+  40(6), 694–705. https://doi.org/10.1002/humu.23738
 
 - [Proteins API Documentation](https://www.ebi.ac.uk/proteins/api/doc/)
 

@@ -161,24 +161,58 @@ a [physical
 Entity](https://reactome.org/content/detail/R-HSA-350870 "Caspase-3 [cytosol]"),
 etc.)
 
+### Search the Reactome knowledge-base
+
+If you do not already know the Reactome identifier of an entry, use
+[`rba_reactome_search()`](https://rbioapi.moosa-r.com/reference/rba_reactome_search.md)
+to search by name or descriptive text. The results can be limited by
+species, entry type, cellular compartment, and keyword. By default,
+matches are grouped by their result type. In the following example, we
+search for TP53 across four representative human entry types and request
+one match from each group.
+
+``` r
+
+search_results <- rba_reactome_search(
+  query = "TP53",
+  species = "Homo sapiens",
+  types = c("Protein", "Complex", "Reaction", "Pathway"),
+  page_size = 1,
+  force_filters = TRUE
+)
+
+str(search_results, 2)
+#> List of 4
+#>  $ results        :'data.frame': 4 obs. of  4 variables:
+#>   ..$ entries     :List of 4
+#>   ..$ typeName    : chr [1:4] "Protein" "Complex" "Reaction" "Pathway"
+#>   ..$ entriesCount: int [1:4] 1341 143 261 55
+#>   ..$ rowCount    : int [1:4] 1 1 1 1
+#>  $ rowCount       : int 4
+#>  $ numberOfGroups : int 4
+#>  $ numberOfMatches: int 1800
+```
+
+The matching entries are stored in the `entries` column of the returned
+result groups. Below, we combine the four groups and display selected
+fields:
+
 ### Retrieve any object from Reactome knowledge-base
 
 Using
 [`rba_reactome_query()`](https://rbioapi.moosa-r.com/reference/rba_reactome_query.md),
-you can retrieve any object from Reactome knowledge-base. In simpler
-terms, what I mean by the object is roughly anything that Reactome
-associated an ID to it. This can range from a person’s entry to
-proteins, reactions, pathways, species, and many more! You can explore
-[Reactome’s data
-schema](https://reactome.org/content/schema/DatabaseObject "Graph Database :: Data Schema")
-to learn about Reactome knowledge-base objects and their organization.
-Here are some examples, note that you are not limited to only one ID per
-query. You can use a vector of inputs, the only limitation is that when
-you supply more than one ID, you cannot have `enhanced = TRUE`.
+you can retrieve any object to which Reactome has assigned a database or
+stable identifier. This includes proteins, reactions, pathways, species,
+people, and many other entries described in [Reactome’s data
+schema](https://reactome.org/content/schema/DatabaseObject "Graph Database :: Data Schema").
+A standard query accepts one or more identifiers. An enhanced query
+accepts one identifier and adds related regulations and catalysts; it
+also lets you control incoming relationships and disease-specific
+information, or request a shorter summary for a reference entity.
 
 ``` r
 
-## 1 query a pathway Entry
+## 1 Query a pathway entry
 pathway <- rba_reactome_query(
   ids = "R-HSA-109581",
   enhanced = TRUE
@@ -186,22 +220,24 @@ pathway <- rba_reactome_query(
 
 ## 2 As always we use str() to inspect the output's structure
 str(pathway, 2)
-#> List of 30
+#> List of 29
 #>  $ dbId               : int 109581
 #>  $ displayName        : chr "Apoptosis"
 #>  $ stId               : chr "R-HSA-109581"
 #>  $ stIdVersion        : chr "R-HSA-109581.6"
-#>  $ created            :List of 5
+#>  $ created            :List of 6
 #>   ..$ dbId       : int 109608
 #>   ..$ displayName: chr "Alnemri, E, Hengartner, Michael, Tschopp, Jürg, Tsujimoto, Yoshihide, Hardwick, JM, 2004-01-16"
 #>   ..$ dateTime   : chr "2004-01-16 21:01:51"
+#>   ..$ author     :List of 5
 #>   ..$ className  : chr "InstanceEdit"
 #>   ..$ schemaClass: chr "InstanceEdit"
-#>  $ modified           :List of 6
+#>  $ modified           :List of 7
 #>   ..$ dbId       : int 11116865
 #>   ..$ displayName: chr "Weiser, Joel, 2026-06-12"
 #>   ..$ dateTime   : chr "2026-06-12 07:49:47"
 #>   ..$ note       : chr "Inserted by org.reactome.orthoinference"
+#>   ..$ author     :List of 1
 #>   ..$ className  : chr "InstanceEdit"
 #>   ..$ schemaClass: chr "InstanceEdit"
 #>  $ isInDisease        : logi FALSE
@@ -214,9 +250,9 @@ str(pathway, 2)
 #>  $ authored           :List of 1
 #>   ..$ : int 109608
 #>  $ edited             :List of 1
-#>   ..$ :List of 5
+#>   ..$ :List of 6
 #>  $ eventOf            :List of 1
-#>   ..$ :List of 19
+#>   ..$ :List of 20
 #>  $ figure             :List of 1
 #>   ..$ :List of 5
 #>  $ goBiologicalProcess:List of 9
@@ -230,30 +266,30 @@ str(pathway, 2)
 #>   ..$ className   : chr "GO_BiologicalProcess"
 #>   ..$ schemaClass : chr "GO_BiologicalProcess"
 #>  $ literatureReference:List of 7
-#>   ..$ :List of 11
-#>   ..$ :List of 11
-#>   ..$ :List of 11
-#>   ..$ :List of 11
-#>   ..$ :List of 11
-#>   ..$ :List of 11
-#>   ..$ :List of 11
+#>   ..$ :List of 12
+#>   ..$ :List of 12
+#>   ..$ :List of 12
+#>   ..$ : int 140368
+#>   ..$ : int 140372
+#>   ..$ : int 141241
+#>   ..$ :List of 12
 #>  $ orthologousEvent   :List of 14
-#>   ..$ :List of 16
-#>   ..$ :List of 16
-#>   ..$ :List of 16
-#>   ..$ :List of 16
-#>   ..$ :List of 16
-#>   ..$ :List of 16
-#>   ..$ :List of 16
-#>   ..$ :List of 16
-#>   ..$ :List of 16
-#>   ..$ :List of 16
-#>   ..$ :List of 16
-#>   ..$ :List of 16
-#>   ..$ :List of 16
-#>   ..$ :List of 16
+#>   ..$ :List of 17
+#>   ..$ :List of 17
+#>   ..$ :List of 17
+#>   ..$ :List of 17
+#>   ..$ :List of 17
+#>   ..$ :List of 17
+#>   ..$ :List of 17
+#>   ..$ :List of 17
+#>   ..$ :List of 17
+#>   ..$ :List of 17
+#>   ..$ :List of 17
+#>   ..$ :List of 17
+#>   ..$ :List of 17
+#>   ..$ :List of 17
 #>  $ reviewed           :List of 1
-#>   ..$ :List of 5
+#>   ..$ :List of 6
 #>  $ species            :List of 1
 #>   ..$ : int 48887
 #>  $ summation          :List of 1
@@ -265,70 +301,50 @@ str(pathway, 2)
 #>   ..$ name       :List of 1
 #>   ..$ className  : chr "ReviewStatus"
 #>   ..$ schemaClass: chr "ReviewStatus"
-#>  $ updateTrackers     :List of 22
-#>   ..$ :List of 6
-#>   ..$ :List of 6
-#>   ..$ :List of 6
-#>   ..$ :List of 6
-#>   ..$ :List of 6
-#>   ..$ :List of 6
-#>   ..$ :List of 6
-#>   ..$ :List of 6
-#>   ..$ :List of 6
-#>   ..$ :List of 6
-#>   ..$ :List of 6
-#>   ..$ :List of 6
-#>   ..$ :List of 6
-#>   ..$ :List of 6
-#>   ..$ :List of 6
-#>   ..$ :List of 6
-#>   ..$ :List of 6
-#>   ..$ :List of 6
-#>   ..$ :List of 6
-#>   ..$ :List of 6
-#>   ..$ :List of 6
-#>   ..$ :List of 6
 #>  $ hasDiagram         : logi TRUE
 #>  $ hasEHLD            : logi TRUE
 #>  $ lastUpdatedDate    : chr "2022-06-09"
 #>  $ hasEvent           :List of 4
-#>   ..$ :List of 18
 #>   ..$ :List of 19
+#>   ..$ :List of 20
+#>   ..$ :List of 20
 #>   ..$ :List of 19
-#>   ..$ :List of 18
 #>  $ schemaClass        : chr "Pathway"
 #>  $ className          : chr "Pathway"
 
 
 
-## 3 You can compare it with the webpage of R-HSA-202939 entry:
-# https://reactome.org/content/detail/R-HSA-202939
+## 3 Compare the result with the pathway's Reactome page
+# https://reactome.org/content/detail/R-HSA-109581
 ```
 
 ``` r
 
-## 1 query a protein Entry
+## 1 Query a reference entity and summarize its physical forms
 protein <- rba_reactome_query(
   ids = 66247,
-  enhanced = TRUE
+  enhanced = TRUE,
+  summarize_reference_entity = TRUE
 )
 
 ## 2 As always we use str() to inspect the output's structure
 str(protein, 1)
-#> List of 29
+#> List of 33
 #>  $ dbId               : int 66247
 #>  $ displayName        : chr "UniProt:P25942-1 CD40"
 #>  $ stId               : chr "uniprot:P25942-1"
-#>  $ modified           :List of 6
+#>  $ name               :List of 1
+#>  $ compartment        :List of 1
+#>  $ componentOf        :List of 1
+#>  $ crossReference     :List of 38
+#>  $ inferredTo         :List of 8
+#>  $ summarisedEntities :List of 1
+#>  $ moleculeType       : chr "Protein"
 #>  $ databaseName       : chr "UniProt"
 #>  $ identifier         : chr "P25942"
-#>  $ name               :List of 1
 #>  $ otherIdentifier    :List of 119
 #>  $ url                : chr "http://purl.uniprot.org/uniprot/P25942-1"
-#>  $ moleculeType       : chr "Protein"
-#>  $ crossReference     :List of 38
-#>  $ referenceDatabase  :List of 9
-#>  $ physicalEntity     :List of 1
+#>  $ referenceDatabase  : int 2
 #>  $ checksum           : chr "BC8776EC2C4A5680"
 #>  $ comment            :List of 1
 #>  $ description        :List of 1
@@ -343,28 +359,31 @@ str(protein, 1)
 #>  $ referenceTranscript:List of 4
 #>  $ variantIdentifier  : chr "P25942-1"
 #>  $ isoformParent      :List of 1
-#>  $ className          : chr "ReferenceIsoform"
-#>  $ schemaClass        : chr "ReferenceIsoform"
+#>  $ referenceType      : chr "ReferenceIsoform"
+#>  $ referenceEntity    : int 66247
+#>  $ className          : chr "SummaryEntity"
+#>  $ schemaClass        : chr "SummaryEntity"
 
 
 
-## 3 You can compare it with the webpage of R-HSA-202939 entry:
-# https://reactome.org/content/detail/R-HSA-202939
+## 3 Compare the result with the entry's Reactome page
+# https://reactome.org/content/detail/66247
 ```
 
 ### Find Cross-Reference IDs in Reactome
 
-As you can see in the second example usage of we used Reactome’s dbID
-`66247` to query CD40 protein. How did we obtain that in the first
-place? You can use `rba_reactome_xref` to map any cross-reference
-(external) IDs to Reactome IDs.
+In the second example, we used Reactome’s database identifier `66247` to
+query the CD40 reference entity.
+[`rba_reactome_xref()`](https://rbioapi.moosa-r.com/reference/rba_reactome_xref.md)
+can map an external identifier, such as a gene symbol, to the
+corresponding Reactome reference entity.
 
 ``` r
 
-## 1 We Supply HGNC ID to find what is the corresponding database ID in Reactome
+## 1 Supply an HGNC symbol to find the corresponding Reactome database ID
 xref_protein <- rba_reactome_xref("CD40")
 
-## 2 As always use str() to inspect the output's structure
+## 2 As always, use str() to inspect the output's structure
 str(xref_protein, 1)
 #> List of 21
 #>  $ dbId               : int 66247
@@ -390,6 +409,30 @@ str(xref_protein, 1)
 #>  $ schemaClass        : chr "ReferenceIsoform"
 ```
 
+Set `expanded = TRUE` to also retrieve other external identifiers
+associated with the reference entity and the stable identifiers of its
+physical forms. Expanded queries can accept a vector of identifiers;
+`page` and `page_size` select which supplied identifiers Reactome
+processes in each call. The optional database filter uses Reactome’s
+database names.
+
+``` r
+
+## Retrieve the ENSEMBL cross-references and associated physical forms
+xref_details <- rba_reactome_xref(
+  "P36897",
+  expanded = TRUE,
+  db_filter = "ENSEMBL"
+)
+
+str(xref_details, 2)
+#> List of 1
+#>  $ :List of 3
+#>   ..$ reference       : chr "P36897"
+#>   ..$ physicalEntities:List of 13
+#>   ..$ crossReferences :List of 7
+```
+
 ### Map Cross-Reference IDs to Reactome
 
 While we are at the cross-reference topic, here is another useful
@@ -408,13 +451,13 @@ xref_mapping <- rba_reactome_mapping(
 
 ------------------------------------------------------------------------
 
-## See also in Functions’ manuals
+## See also in function manuals
 
-There are still more rbioapi f Reactome content functions that were not
-covered in this vignette. Here is a brief overview, see the functions’
-manual for detailed guides and examples.
+Several rbioapi Reactome content functions are not covered in this
+vignette. The following overview links them by purpose; see each
+function’s manual for details and examples.
 
-### Retrieve Reactome Database information
+### Retrieve Reactome database information
 
 - [`rba_reactome_version()`](https://rbioapi.moosa-r.com/reference/rba_reactome_version.md):
   Return current Reactome version
@@ -427,13 +470,20 @@ manual for detailed guides and examples.
 
 ### General Mapping/Querying
 
-- [`rba_reactome_query()`](https://rbioapi.moosa-r.com/reference/rba_reactome_query.md)
+- [`rba_reactome_search()`](https://rbioapi.moosa-r.com/reference/rba_reactome_search.md):
+  Search Reactome entries by text and optional filters.
+
+- [`rba_reactome_query()`](https://rbioapi.moosa-r.com/reference/rba_reactome_query.md):
+  Retrieve Reactome objects, optionally with enhanced relationships or a
+  selected attribute.
 
 - [`rba_reactome_mapping()`](https://rbioapi.moosa-r.com/reference/rba_reactome_mapping.md)
 
-- [`rba_reactome_xref()`](https://rbioapi.moosa-r.com/reference/rba_reactome_xref.md)
+- [`rba_reactome_xref()`](https://rbioapi.moosa-r.com/reference/rba_reactome_xref.md):
+  Map external identifiers to Reactome reference entities and,
+  optionally, their other cross-references and physical forms.
 
-### Things you can do with a Entities
+### Things you can do with entities
 
 - [`rba_reactome_complex_list()`](https://rbioapi.moosa-r.com/reference/rba_reactome_complex_list.md):
   Get a list of complexes that have your molecule in them.
@@ -460,7 +510,8 @@ manual for detailed guides and examples.
 - [`rba_reactome_orthology()`](https://rbioapi.moosa-r.com/reference/rba_reactome_orthology.md)
 
 - [`rba_reactome_event_hierarchy()`](https://rbioapi.moosa-r.com/reference/rba_reactome_event_hierarchy.md):
-  Retrieve full event hierarchy of an species.
+  Retrieve a species’s event or pathway hierarchy, optionally with
+  analysis results added.
 
 ### Pathways
 
@@ -474,7 +525,9 @@ manual for detailed guides and examples.
 
 - [`rba_reactome_interactors_psicquic()`](https://rbioapi.moosa-r.com/reference/rba_reactome_interactors_psicquic.md)
 
-- [`rba_reactome_interactors_static()`](https://rbioapi.moosa-r.com/reference/rba_reactome_interactors_static.md)
+- [`rba_reactome_interactors_static()`](https://rbioapi.moosa-r.com/reference/rba_reactome_interactors_static.md):
+  Retrieve Reactome’s static IntAct interaction details, summaries, or
+  associated pathways.
 
 ### People
 
@@ -581,5 +634,6 @@ To cite rbioapi:
     #> [13] rmarkdown_2.31    crosstalk_1.2.2   evaluate_1.0.5    jquerylib_0.1.4  
     #> [17] fastmap_1.2.0     yaml_2.3.12       lifecycle_1.0.5   compiler_4.6.1   
     #> [21] fs_2.1.0          htmlwidgets_1.6.4 systemfonts_1.3.2 digest_0.6.39    
-    #> [25] R6_2.6.1          curl_7.1.0        magrittr_2.0.5    bslib_0.11.0     
-    #> [29] tools_4.6.1       pkgdown_2.2.1     cachem_1.1.0      desc_1.4.3
+    #> [25] R6_2.6.1          curl_7.1.0        magrittr_2.0.5    bslib_0.12.0     
+    #> [29] tools_4.6.1       mime_0.13         pkgdown_2.2.1     cachem_1.1.0     
+    #> [33] desc_1.4.3

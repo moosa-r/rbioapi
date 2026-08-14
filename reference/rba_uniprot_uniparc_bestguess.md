@@ -23,28 +23,31 @@ rba_uniprot_uniparc_bestguess(
 
 - upi:
 
-  unique UniParc Identifier.
+  Character: (optional) Unique UniParc identifier(s). You can supply up
+  to 100 IDs.
 
 - accession:
 
-  [UniProtKB primary or secondary
+  Character: (optional) [UniProtKB primary or secondary
   accession](https://www.uniprot.org/help/accession_numbers)(s). You can
   supply up to 100 accession numbers.
 
 - db_id:
 
-  Protein ID in the cross-reference (external) database. You can supply
-  up to 100 IDs.
+  Character: (optional) Protein ID in a cross-reference database. You
+  can supply up to 100 IDs.
 
 - gene:
 
-  [UniProt gene name(s)](https://www.uniprot.org/help/gene_name). You
-  can supply up to 20 gene names.
+  Character: (optional) [UniProt gene
+  name(s)](https://www.uniprot.org/help/gene_name). You can supply up to
+  20 gene names.
 
 - taxid:
 
-  NIH-NCBI [Taxon ID](https://www.uniprot.org/taxonomy/). You can supply
-  up to 20 taxon IDs.
+  Numeric: (optional) NIH-NCBI [Taxon
+  ID](https://www.uniprot.org/taxonomy/) used to refine the search. You
+  can supply up to 20 taxon IDs.
 
 - ...:
 
@@ -54,23 +57,22 @@ rba_uniprot_uniparc_bestguess(
 
 ## Value
 
-A list where each element correspond to a UniParc entry.
+The best matching UniParc entry.
 
 ## Corresponding API Resources
 
-"GET https://ebi.ac.uk/proteins/api/uniparc/bestguess"
+"GET https://www.ebi.ac.uk/proteins/api/uniparc/bestguess"
 
 ## References
 
-- The UniProt Consortium , UniProt: the Universal Protein Knowledgebase
-  in 2025, Nucleic Acids Research, 2024;, gkae1010,
+- The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
 
-- Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated
-  protein and genome information, Nucleic Acids Research, Volume 45,
-  Issue W1, 3 July 2017, Pages W539–W544,
+- Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales, L.,
+  Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
   https://doi.org/10.1093/nar/gkx237
 
 - [Proteins API Documentation](https://www.ebi.ac.uk/proteins/api/doc/)

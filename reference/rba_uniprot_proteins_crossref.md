@@ -1,9 +1,9 @@
 # Get UniProt Entry by UniProt Cross-Reference Database and ID
 
-[UniProt Cross-Reference](https://www.uniprot.org/database/) links
-protein Entities with cross-reference (external) databases. Using this
-function, you can retrieve a UniProt entity using external database name
-and protein ID in that database.
+UniProt cross-references connect protein entries with identifiers in
+[external databases](https://www.uniprot.org/database/). Retrieve
+UniProtKB entries associated with an identifier from one of these
+databases.
 
 ## Usage
 
@@ -21,29 +21,28 @@ rba_uniprot_proteins_crossref(
 
 - db_id:
 
-  The protein ID in the cross-reference (external) database.
+  Character: Protein identifier in the cross-reference database.
 
 - db_name:
 
-  [cross-reference](https://www.uniprot.org/database/) (external
-  database) name.
+  Character: [Cross-reference database
+  name](https://www.uniprot.org/database/).
 
 - reviewed:
 
-  Logical: (Optional) If TRUE, only returns "UniProtKB/Swiss-Prot"
-  (reviewed) entries; If FALSE, only returns TrEMBL (un-reviewed)
-  entries.
+  Logical: (optional) If `TRUE`, return only reviewed Swiss-Prot
+  entries. If `FALSE`, return only unreviewed TrEMBL entries.
 
 - isoform:
 
-  Numeric: (Optional) you have two options:
+  Numeric: (optional) One of:
 
   - 0: Exclude isoforms.
 
   - 1: Return isoforms only.
 
-  see: [Alternative
-  products](https://www.uniprot.org/help/alternative_products)
+  See [alternative
+  products](https://www.uniprot.org/help/alternative_products).
 
 - ...:
 
@@ -53,8 +52,8 @@ rba_uniprot_proteins_crossref(
 
 ## Value
 
-List which each element is a UniProt entity that correspond to your
-supplied cross-reference database name and ID.
+A list named by UniProt accession. Each element is a UniProtKB entry
+corresponding to the supplied cross-reference identifier.
 
 ## Corresponding API Resources
 
@@ -62,15 +61,14 @@ supplied cross-reference database name and ID.
 
 ## References
 
-- The UniProt Consortium , UniProt: the Universal Protein Knowledgebase
-  in 2025, Nucleic Acids Research, 2024;, gkae1010,
+- The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
 
-- Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated
-  protein and genome information, Nucleic Acids Research, Volume 45,
-  Issue W1, 3 July 2017, Pages W539–W544,
+- Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales, L.,
+  Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
   https://doi.org/10.1093/nar/gkx237
 
 - [Proteins API Documentation](https://www.ebi.ac.uk/proteins/api/doc/)

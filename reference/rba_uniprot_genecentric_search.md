@@ -1,12 +1,11 @@
 # Search Gene-Centric Proteins
 
-Using this function you can search UniProt for available gene-centrics
-from proteomes. For more information, see [What are
+UniProt gene-centric protein groups organize related protein entries
+from a proteome by gene. Search these groups by proteome, accession, or
+gene identifier. For more information, see [What are
 proteomes?](https://www.uniprot.org/help/proteome) and [Automatic
 gene-centric isoform mapping for eukaryotic reference proteome
-entries.](https://www.uniprot.org/help/gene_centric_isoform_mapping) You
-may also refine your search with modifiers upid, accession and gene. See
-"Arguments section" for more information.
+entries.](https://www.uniprot.org/help/gene_centric_isoform_mapping)
 
 ## Usage
 
@@ -18,19 +17,19 @@ rba_uniprot_genecentric_search(upid = NULL, accession = NULL, gene = NULL, ...)
 
 - upid:
 
-  [UniProt Proteome identifier
+  Character: (optional) [UniProt Proteome identifier
   (UPID)](https://www.uniprot.org/help/proteome_id). You can supply up
   to 100 UPIDs.
 
 - accession:
 
-  [UniProtKB primary or secondary
+  Character: (optional) [UniProtKB primary or secondary
   accession](https://www.uniprot.org/help/accession_numbers)(s). You can
   supply up to 100 accession numbers.
 
 - gene:
 
-  unique gene identifier(s) found in MOD,
+  Character: (optional) Unique gene identifier(s) found in MOD,
   [Ensembl](https://www.ensembl.org/info/genome/genebuild/gene_names.html),
   Ensembl Genomes, [OLN](https://www.uniprot.org/help/gene_name),
   [ORF](https://www.uniprot.org/help/gene_name) or [UniProt Gene
@@ -44,29 +43,26 @@ rba_uniprot_genecentric_search(upid = NULL, accession = NULL, gene = NULL, ...)
 
 ## Value
 
-a list containing gene-centric proteins search hits.
+A list containing matching gene-centric protein groups.
 
 ## Details
 
-Note that this is a search function. Thus, you are not required to fill
-every argument; You may use whatever combinations of arguments you see
-fit for your query.
+At least one search criterion is required.
 
 ## Corresponding API Resources
 
-"GET https://ebi.ac.uk/proteins/api/genecentric"
+"GET https://www.ebi.ac.uk/proteins/api/genecentric"
 
 ## References
 
-- The UniProt Consortium , UniProt: the Universal Protein Knowledgebase
-  in 2025, Nucleic Acids Research, 2024;, gkae1010,
+- The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
 
-- Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated
-  protein and genome information, Nucleic Acids Research, Volume 45,
-  Issue W1, 3 July 2017, Pages W539–W544,
+- Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales, L.,
+  Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
   https://doi.org/10.1093/nar/gkx237
 
 - [Proteins API Documentation](https://www.ebi.ac.uk/proteins/api/doc/)

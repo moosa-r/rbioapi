@@ -1,8 +1,7 @@
 # Get Lowest Common Ancestor (LCA) of Two Taxonomy Nodes
 
-Use this function to retrieve lowest common ancestor (LCA) of two
-taxonomy nodes in [UniProt Taxonomy
-database](https://www.uniprot.org/help/taxonomy)
+Retrieve the lowest common ancestor (LCA) of two or more nodes in the
+[UniProt Taxonomy database](https://www.uniprot.org/help/taxonomy).
 
 ## Usage
 
@@ -14,9 +13,9 @@ rba_uniprot_taxonomy_lca(ids, ...)
 
 - ids:
 
-  (numeric) Numeric vector of [NCBI taxonomic
-  identifiers](https://www.uniprot.org/help/taxonomic_identifier), with
-  minimum length of two.
+  Numeric: [NCBI taxonomic
+  identifiers](https://www.uniprot.org/help/taxonomic_identifier).
+  Supply at least two IDs.
 
 - ...:
 
@@ -26,24 +25,22 @@ rba_uniprot_taxonomy_lca(ids, ...)
 
 ## Value
 
-A list with UniProt taxonomy information of your supplied taxonomy
-elements.
+A list containing the lowest common ancestor's taxonomy information.
 
 ## Corresponding API Resources
 
-"GET https://ebi.ac.uk/proteins/api/ancestor/{ids}"
+"GET https://www.ebi.ac.uk/proteins/api/taxonomy/ancestor/{ids}"
 
 ## References
 
-- The UniProt Consortium , UniProt: the Universal Protein Knowledgebase
-  in 2025, Nucleic Acids Research, 2024;, gkae1010,
+- The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
 
-- Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated
-  protein and genome information, Nucleic Acids Research, Volume 45,
-  Issue W1, 3 July 2017, Pages W539–W544,
+- Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales, L.,
+  Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
   https://doi.org/10.1093/nar/gkx237
 
 - [Proteins API Documentation](https://www.ebi.ac.uk/proteins/api/doc/)

@@ -86,16 +86,19 @@
 
 
 <dl><dt id="arg-input">input<a class="anchor" aria-label="anchor" href="#arg-input"></a></dt>
-<dd><p>Character: A local file path or URL that points to your
--optionally gzipped- JSON file.</p></dd>
+<dd><p>Character: A local file path or HTTP or HTTPS URL that points
+to plain or gzipped saved analysis results.</p></dd>
 
 
 <dt id="arg-input-format">input_format<a class="anchor" aria-label="anchor" href="#arg-input-format"></a></dt>
 <dd><p>Character: (optional) This function will automatically
-identify your supplied input's format. But in case of unexpected issues or
-if you want to be explicit, set this argument to one of:</p><ul><li><p>"file": If you supplied a local file path pointing to the JSON file.</p></li>
-<li><p>"url": If you supplied a URL pointing to the JSON file.</p></li>
-</ul></dd>
+identify your supplied input's format. To be explicit, set this argument to
+one of:</p><ul><li><p>"file": If you supplied a local file path pointing to the saved
+ results file.</p></li>
+<li><p>"url": If you supplied an HTTP or HTTPS URL pointing to the saved
+ results file.</p></li>
+</ul><p>An explicit value takes precedence. Otherwise, HTTP and HTTPS addresses
+ are identified before existing local files. Other inputs are rejected.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -112,7 +115,7 @@ arguments manual for more information on available options.</p></dd>
     <h2 id="corresponding-api-resources">Corresponding API Resources<a class="anchor" aria-label="anchor" href="#corresponding-api-resources"></a></h2>
 
 
-<p>"POST https://reactome.org/AnalysisService/import/"
+<p>"POST https://reactome.org/AnalysisService/import/form"
 <br> "POST https://reactome.org/AnalysisService/import/url"</p>
     </div>
     <div class="section level2">
@@ -121,10 +124,10 @@ arguments manual for more information on available options.</p></dd>
 <ul><li><p>Ragueneau, E., Gong, C., Sinquin, P., Sevilla, C., Beavers, D.,
   Grentner, A., ... D’Eustachio, P. (2026). The Reactome Knowledgebase 2026.
   Nucleic Acids Res., 54(D1), D673–D681. doi: 10.1093/nar/gkaf1223</p></li>
-<li><p>Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A,
-  Hermjakob H. ReactomeGSA - Efficient Multi-Omics Comparative Pathway
-  Analysis. Mol Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed
-  PMID: 32907876.</p></li>
+<li><p>Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A.,
+  &amp; Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+  Pathway Analysis. Molecular &amp; Cellular Proteomics, 19(12), 2115–2125.
+  doi: 10.1074/mcp.TIR120.002155</p></li>
 <li><p><a href="https://reactome.org/AnalysisService/" class="external-link">Reactome Analysis
   Services API Documentation</a></p></li>
 <li><p><a href="https://reactome.org/cite" class="external-link">Citations note on Reactome website</a></p></li>

@@ -1,11 +1,9 @@
 # Search Mutagenesis in UniProt
 
-UniProt describes the effects of mutations in proteins' amino acid
-sequence on the biological properties of the protein, cell or the
-organism. Using this function, you can search for [mutagenesis
-description](https://www.uniprot.org/help/mutagen) in UniProt proteins.
-You may also refine your search. See "Arguments section" for more
-information.
+UniProt describes how sequence mutations affect the biological
+properties of a protein, cell, or organism. Use this function to search
+for [mutagenesis annotations](https://www.uniprot.org/help/mutagen)
+using at least one of `accession`, `taxid`, or `db_id`.
 
 ## Usage
 
@@ -22,19 +20,20 @@ rba_uniprot_mutagenesis_search(
 
 - accession:
 
-  [UniProtKB primary or secondary
+  Character: (optional) [UniProtKB primary or secondary
   accession](https://www.uniprot.org/help/accession_numbers)(s). You can
   supply up to 100 accession numbers.
 
 - taxid:
 
-  NIH-NCBI [Taxon ID](https://www.uniprot.org/taxonomy/). You can supply
-  up to 20 taxon IDs.
+  Numeric: (optional) NIH-NCBI [Taxon
+  ID](https://www.uniprot.org/taxonomy/). You can supply up to 20 taxon
+  IDs.
 
 - db_id:
 
-  The ID in a Cross-reference (external) database. You can supply up to
-  20 values.
+  Character: (optional) The ID in a cross-reference database. You can
+  supply up to 20 values.
 
 - ...:
 
@@ -44,14 +43,9 @@ rba_uniprot_mutagenesis_search(
 
 ## Value
 
-A list Where each element correspond to a UniProt protein (search hit)
-and mutagenesis description are organized under the "features" sub-list.
-
-## Details
-
-Note that this is a search function. Thus, you are not required to fill
-every argument; You may use whatever combinations of arguments you see
-fit for your query.
+A list in which each element represents a matching UniProt entry, named
+by accession when available. Mutagenesis annotations are stored in the
+entry's `features` element.
 
 ## Corresponding API Resources
 
@@ -59,15 +53,14 @@ fit for your query.
 
 ## References
 
-- The UniProt Consortium , UniProt: the Universal Protein Knowledgebase
-  in 2025, Nucleic Acids Research, 2024;, gkae1010,
+- The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
 
-- Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated
-  protein and genome information, Nucleic Acids Research, Volume 45,
-  Issue W1, 3 July 2017, Pages W539–W544,
+- Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales, L.,
+  Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
   https://doi.org/10.1093/nar/gkx237
 
 - [Proteins API Documentation](https://www.ebi.ac.uk/proteins/api/doc/)

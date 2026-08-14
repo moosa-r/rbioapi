@@ -127,9 +127,10 @@ https://reactome.org/ContentService/exporter/fireworks/{species}.{ext}"
   Knowledgebase 2026. Nucleic Acids Res., 54(D1), D673–D681. doi:
   10.1093/nar/gkaf1223
 
-- Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A, Hermjakob H.
-  ReactomeGSA - Efficient Multi-Omics Comparative Pathway Analysis. Mol
-  Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed PMID: 32907876.
+- Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A., &
+  Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+  Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+  doi: 10.1074/mcp.TIR120.002155
 
 - [Reactome Content Services API
   Documentation](https://reactome.org/ContentService/)

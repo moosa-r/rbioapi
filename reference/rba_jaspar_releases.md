@@ -16,7 +16,7 @@ rba_jaspar_releases(release_number = NULL, ...)
 
   Numeric: Which JASPAR database release number should be retrieved? If
   left NULL (the default), a list of all JASPAR database releases will
-  be returned. Available options are 1 to 11.
+  be returned.
 
 - ...:
 

@@ -1,8 +1,8 @@
 # Get Antigens by UniProt Accession
 
-UniProt maps Antigenic features from different sources to the proteins'
-sequences. Using this function, you can retrieve all the Antigenic
-features that has been map to a given UniProt protein's sequence.
+UniProt maps antigenic (antibody-binding) features from several sources
+to protein sequences. Retrieve the features mapped to one UniProtKB
+accession.
 
 ## Usage
 
@@ -14,8 +14,8 @@ rba_uniprot_antigens(accession, ...)
 
 - accession:
 
-  [UniProtKB primary or secondary
-  accession](https://www.uniprot.org/help/accession_numbers)(s).
+  Character: [UniProtKB primary or secondary
+  accession](https://www.uniprot.org/help/accession_numbers).
 
 - ...:
 
@@ -25,8 +25,8 @@ rba_uniprot_antigens(accession, ...)
 
 ## Value
 
-A list containing the Antigenic features of your supplied UniProt
-protein's sequence.
+A list containing the antigenic features mapped to the requested UniProt
+protein sequence.
 
 ## Corresponding API Resources
 
@@ -34,15 +34,14 @@ protein's sequence.
 
 ## References
 
-- The UniProt Consortium , UniProt: the Universal Protein Knowledgebase
-  in 2025, Nucleic Acids Research, 2024;, gkae1010,
+- The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
 
-- Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated
-  protein and genome information, Nucleic Acids Research, Volume 45,
-  Issue W1, 3 July 2017, Pages W539–W544,
+- Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales, L.,
+  Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
   https://doi.org/10.1093/nar/gkx237
 
 - [Proteins API Documentation](https://www.ebi.ac.uk/proteins/api/doc/)

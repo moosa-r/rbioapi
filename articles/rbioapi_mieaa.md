@@ -75,11 +75,11 @@ mieaa_all <- rba_mieaa_enrich(
 #> Submitting ORA enrichment request for 17 miRNA IDs of species Homo sapiens to miEAA servers.
 #> 
 #>  -- Step 2/3: Checking for Submitted enrichment analysis's status every 5 seconds.
-#>     Your submitted job ID is: 91cf39cf-30e2-4db8-8064-25771417b1fb
+#>     Your submitted job ID is: d96f53cb-ea6e-41b1-82e8-eafeb6179175
 #> ....
 #> 
 #>  -- Step 3/3: Retrieving the results.
-#> Retrieving results of submitted enrichment request with ID: 91cf39cf-30e2-4db8-8064-25771417b1fb
+#> Retrieving results of submitted enrichment request with ID: d96f53cb-ea6e-41b1-82e8-eafeb6179175
 
 ## 2b Limit the enrichment to selected data sets (enrichment categories)
 mieaa_kegg <- rba_mieaa_enrich(
@@ -93,11 +93,11 @@ mieaa_kegg <- rba_mieaa_enrich(
 #> Submitting ORA enrichment request for 17 miRNA IDs of species Homo sapiens to miEAA servers.
 #> 
 #>  -- Step 2/3: Checking for Submitted enrichment analysis's status every 5 seconds.
-#>     Your submitted job ID is: 86ffd2be-d485-458f-82e5-f3145f3d5e6f
+#>     Your submitted job ID is: c122c06a-8ea8-48e0-b376-bd278f11df85
 #> .
 #> 
 #>  -- Step 3/3: Retrieving the results.
-#> Retrieving results of submitted enrichment request with ID: 86ffd2be-d485-458f-82e5-f3145f3d5e6f
+#> Retrieving results of submitted enrichment request with ID: c122c06a-8ea8-48e0-b376-bd278f11df85
 ```
 
 ### Approach 2: Going step-by-step
@@ -210,5 +210,5 @@ To cite rbioapi:
     #> [13] rmarkdown_2.31    crosstalk_1.2.2   evaluate_1.0.5    jquerylib_0.1.4  
     #> [17] fastmap_1.2.0     yaml_2.3.12       lifecycle_1.0.5   compiler_4.6.1   
     #> [21] fs_2.1.0          htmlwidgets_1.6.4 systemfonts_1.3.2 digest_0.6.39    
-    #> [25] R6_2.6.1          curl_7.1.0        magrittr_2.0.5    bslib_0.11.0     
+    #> [25] R6_2.6.1          curl_7.1.0        magrittr_2.0.5    bslib_0.12.0     
     #> [29] tools_4.6.1       pkgdown_2.2.1     cachem_1.1.0      desc_1.4.3

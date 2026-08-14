@@ -87,7 +87,11 @@ rba_reactome_analysis_token(
 
 ## Value
 
-List containing the results and information of your analysis.
+A list containing the results and information about the analysis. The
+`pathways` element is a data frame with information about each pathway
+expanded into columns; it is an empty data frame when no pathways match.
+Its structure is the same as the output from
+[`rba_reactome_analysis`](https://rbioapi.moosa-r.com/reference/rba_reactome_analysis.md).
 
 ## Details
 
@@ -112,9 +116,10 @@ to generate a new token.
   Knowledgebase 2026. Nucleic Acids Res., 54(D1), D673–D681. doi:
   10.1093/nar/gkaf1223
 
-- Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A, Hermjakob H.
-  ReactomeGSA - Efficient Multi-Omics Comparative Pathway Analysis. Mol
-  Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed PMID: 32907876.
+- Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A., &
+  Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+  Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+  doi: 10.1074/mcp.TIR120.002155
 
 - [Reactome Analysis Services API
   Documentation](https://reactome.org/AnalysisService/)

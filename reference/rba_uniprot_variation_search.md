@@ -1,10 +1,9 @@
 # Search UniProt Natural Variants
 
-Using this function, you can search and retrieve [Natural
-variant(s)](https://www.uniprot.org/help/variant) that has been
-annotated in the protein's sequences. You may also refine your search
-with modifiers such as source type, disease etc. See "Arguments section"
-for more information.
+Search and retrieve [natural
+variants](https://www.uniprot.org/help/variant) annotated on protein
+sequences, including variants imported from supported large-scale
+studies.
 
 ## Usage
 
@@ -31,86 +30,81 @@ rba_uniprot_variation_search(
 
 - accession:
 
-  [UniProtKB primary or secondary
+  Character: (optional) [UniProtKB primary or secondary
   accession](https://www.uniprot.org/help/accession_numbers)(s). You can
   supply up to 100 accession numbers.
 
 - source_type:
 
-  Variation's source type. You can choose up to two of: "UniProt",
-  "large scale study" and/or "mixed".
+  Character: (optional) Up to two variant source types: "uniprot",
+  "large scale study", "mixed", "clinvar", "nci-tcga", "cosmic curated",
+  "ensembl", "gnomad", "topmed", or "exac".
 
 - consequence_type:
 
-  Variation's consequence type. You can choose up to two of: "missense",
-  "stop gained" or "stop lost".
+  Character: (optional) Up to two consequence types: "missense", "stop
+  gained", or "stop lost".
 
 - wild_type:
 
-  Wild type amino acid. Accepted values are IUPAC single-letter amino
-  acid (e.g. D for Aspartic acid) and "\*" for stop codon. You can
+  Character: (optional) Wild-type amino acid. Accepted values are IUPAC
+  single-letter amino acid codes and "\*" for a stop codon. You can
   supply up to 20 values.
 
 - alternative_sequence:
 
-  Alternative amino acid. Accepted values are IUPAC single-letter amino
-  acid (e.g. D for Aspartic acid) and "\*" for stop codon and "-" for
-  deletion. You can supply up to 20 values.
+  Character: (optional) Alternative amino acid. Accepted values are
+  IUPAC single-letter amino acid codes, "\*" for a stop codon, and "-"
+  for a deletion. You can supply up to 20 values.
 
 - location:
 
-  A valid amino acid range (e.g. 10-25) within the sequence range where
-  the variation occurs. You can supply up to 20 values.
+  Character: (optional) A valid amino acid range (e.g. 10-25) within the
+  sequence where the variation occurs.
 
 - disease:
 
-  [Human disease](https://www.uniprot.org/diseases/) that are associated
-  with a sequence variation. Accepted values are disease name (e.g.
-  Alzheimer disease 18), partial disease name (Alzheimer) and/or disease
-  acronym (e.g. AD). You can supply up to 20 values.
+  Character: (optional) [Human
+  disease](https://www.uniprot.org/diseases/) associated with a sequence
+  variation. Accepted values are a disease name (e.g. Alzheimer disease
+  18), partial disease name (Alzheimer), or disease acronym (e.g. AD).
 
 - omim:
 
+  Character or Numeric: (optional)
   [OMIM](https://www.ncbi.nlm.nih.gov/omim) ID that is associated with a
   variation. You can supply up to 20 values.
 
 - evidence:
 
-  Pubmed ID of the variation's
-  [citation](https://www.uniprot.org/citations/) You can supply up to 20
-  values.
+  Character or Numeric: (optional) PubMed ID of a variation's
+  [citation](https://www.uniprot.org/citations/). You can supply up to
+  20 values.
 
 - taxid:
 
-  NIH-NCBI [Taxon ID](https://www.uniprot.org/taxonomy/). You can supply
-  up to 20 taxon IDs.
+  Numeric: (optional) NIH-NCBI [Taxon
+  ID](https://www.uniprot.org/taxonomy/). You can supply up to 20 taxon
+  IDs.
 
 - db_type:
 
-  cross-reference database of the variation. You can supply up to two of
-  the following:
-
-  - "dbSNP": [NIH-NCBI dbSNP
-    database](https://www.ncbi.nlm.nih.gov/snp/).
-
-  - "cosmic curate": [COSMIC (the Catalogue of Somatic Mutations in
-    Cancer)](https://cancer.sanger.ac.uk/cosmic/)
-
-  - "ClinVar": [NIH-NCBI ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/)
+  Character: (optional) Cross-reference database of the variation. You
+  can supply up to two values. Examples include `"dbSNP"`,
+  `"cosmic curated"`, and `"ClinVar"`.
 
 - db_id:
 
-  The variation ID in a Cross-reference (external) database. You can
-  supply up to 20 values.
+  Character: (optional) Variation identifier in a cross-reference
+  database. You can supply up to 20 values.
 
 - save_peff:
 
-  Logical or Character:
+  Logical or Character: (default = `FALSE`)
 
-  - FALSE: (default) Do not save PEFF file, just return as a list
-    object.
+  - FALSE: Return the parsed JSON response.
 
-  - TRUE: Save as PEFF file to an automatically-generated path.
+  - TRUE: Save the PEFF response to an automatically generated path.
 
   - Character string: A valid file path to save the PEFF file.
 
@@ -122,15 +116,15 @@ rba_uniprot_variation_search(
 
 ## Value
 
-List where each element corresponds to one UniProt entity returned by
-your search query. The element itself is a sub-list containing all
-information that UniProt has about that Variation.
+With `save_peff = FALSE`, a list named by UniProt accession. Each
+element contains one matching entry and its variants. Otherwise, the
+PEFF response is written to disk and returned as a character string.
 
 ## Details
 
-Note that this is a search function. Thus, you are not required to fill
-every argument; You may use whatever combinations of arguments you see
-fit for your query.
+At least one primary criterion is required: `accession`, `disease`,
+`omim`, `evidence`, `taxid`, `db_type`, or `db_id`. The other arguments
+refine those criteria.
 
 ## Corresponding API Resources
 
@@ -138,15 +132,14 @@ fit for your query.
 
 ## References
 
-- The UniProt Consortium , UniProt: the Universal Protein Knowledgebase
-  in 2025, Nucleic Acids Research, 2024;, gkae1010,
+- The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
 
-- Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated
-  protein and genome information, Nucleic Acids Research, Volume 45,
-  Issue W1, 3 July 2017, Pages W539–W544,
+- Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales, L.,
+  Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
   https://doi.org/10.1093/nar/gkx237
 
 - [Proteins API Documentation](https://www.ebi.ac.uk/proteins/api/doc/)
@@ -157,7 +150,8 @@ fit for your query.
 ## See also
 
 Other "UniProt - Variation":
-[`rba_uniprot_variation()`](https://rbioapi.moosa-r.com/reference/rba_uniprot_variation.md)
+[`rba_uniprot_variation()`](https://rbioapi.moosa-r.com/reference/rba_uniprot_variation.md),
+[`rba_uniprot_variation_locations()`](https://rbioapi.moosa-r.com/reference/rba_uniprot_variation_locations.md)
 
 ## Examples
 

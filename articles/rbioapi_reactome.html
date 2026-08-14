@@ -92,7 +92,7 @@
                         <h4 data-toc-skip class="author">Moosa
 Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2026-08-04</h4>
+            <h4 data-toc-skip class="date">2026-08-14</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/master/vignettes/rbioapi_reactome.Rmd" class="external-link"><code>vignettes/rbioapi_reactome.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi_reactome.Rmd</code></div>
@@ -225,20 +225,53 @@ functions cover what you can do with objects in Reactome knowledge-base.
 In simpler terms, most -but not all of them- correspond to what you can
 find in <a href="https://reactome.org/PathwayBrowser/" title="Reactome Pathway Browser" class="external-link">Reactome Pathway Browser</a> and <a href="https://reactome.org/content/query?q=apoptosis&amp;species=Homo+sapiens" title="Search results for apoptosis" class="external-link">search results</a>. (e.g. a <a href="https://reactome.org/content/detail/R-HSA-109581" title="Apoptosis Homo sapiens" class="external-link">pathway</a>, a <a href="https://reactome.org/content/detail/R-HSA-202939" title="Caspase-mediated cleavage of E-Cadherin" class="external-link">reaction</a>, a <a href="https://reactome.org/content/detail/R-HSA-350870" title="Caspase-3 [cytosol]" class="external-link">physical Entity</a>, etc.)</p>
 <div class="section level3">
+<h3 id="search-the-reactome-knowledge-base">Search the Reactome knowledge-base<a class="anchor" aria-label="anchor" href="#search-the-reactome-knowledge-base"></a>
+</h3>
+<p>If you do not already know the Reactome identifier of an entry, use
+<code><a href="../reference/rba_reactome_search.html">rba_reactome_search()</a></code> to search by name or descriptive
+text. The results can be limited by species, entry type, cellular
+compartment, and keyword. By default, matches are grouped by their
+result type. In the following example, we search for TP53 across four
+representative human entry types and request one match from each
+group.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">search_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_search.html">rba_reactome_search</a></span><span class="op">(</span></span>
+<span>  query <span class="op">=</span> <span class="st">"TP53"</span>,</span>
+<span>  species <span class="op">=</span> <span class="st">"Homo sapiens"</span>,</span>
+<span>  types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Protein"</span>, <span class="st">"Complex"</span>, <span class="st">"Reaction"</span>, <span class="st">"Pathway"</span><span class="op">)</span>,</span>
+<span>  page_size <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  force_filters <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">search_results</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="co">#&gt; List of 4</span></span>
+<span><span class="co">#&gt;  $ results        :'data.frame': 4 obs. of  4 variables:</span></span>
+<span><span class="co">#&gt;   ..$ entries     :List of 4</span></span>
+<span><span class="co">#&gt;   ..$ typeName    : chr [1:4] "Protein" "Complex" "Reaction" "Pathway"</span></span>
+<span><span class="co">#&gt;   ..$ entriesCount: int [1:4] 1341 143 261 55</span></span>
+<span><span class="co">#&gt;   ..$ rowCount    : int [1:4] 1 1 1 1</span></span>
+<span><span class="co">#&gt;  $ rowCount       : int 4</span></span>
+<span><span class="co">#&gt;  $ numberOfGroups : int 4</span></span>
+<span><span class="co">#&gt;  $ numberOfMatches: int 1800</span></span></code></pre></div>
+<p>The matching entries are stored in the <code>entries</code> column of
+the returned result groups. Below, we combine the four groups and
+display selected fields:</p>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-e5c8c404fe174e4c81bd" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{"filter":"none","vertical":false,"data":[["R-HSA-69488","R-HSA-3209194","R-HSA-6805479","R-HSA-5633007"],["TP53","TP53 Tetramer","TP53RK phosphorylates TP53","Regulation of TP53 Activity"],["Protein","Complex","Reaction","Pathway"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>id<\/th>\n      <th>name<\/th>\n      <th>type<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","paging":false,"ordering":false,"columnDefs":[{"name":"id","targets":0},{"name":"name","targets":1},{"name":"type","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="section level3">
 <h3 id="retrieve-any-object-from-reactome-knowledge-base">Retrieve any object from Reactome knowledge-base<a class="anchor" aria-label="anchor" href="#retrieve-any-object-from-reactome-knowledge-base"></a>
 </h3>
 <p>Using <code><a href="../reference/rba_reactome_query.html">rba_reactome_query()</a></code>, you can retrieve any object
-from Reactome knowledge-base. In simpler terms, what I mean by the
-object is roughly anything that Reactome associated an ID to it. This
-can range from a person’s entry to proteins, reactions, pathways,
-species, and many more! You can explore <a href="https://reactome.org/content/schema/DatabaseObject" title="Graph Database :: Data Schema" class="external-link">Reactome’s data schema</a> to
-learn about Reactome knowledge-base objects and their organization. Here
-are some examples, note that you are not limited to only one ID per
-query. You can use a vector of inputs, the only limitation is that when
-you supply more than one ID, you cannot have
-<code>enhanced = TRUE</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## 1 query a pathway Entry</span></span>
+to which Reactome has assigned a database or stable identifier. This
+includes proteins, reactions, pathways, species, people, and many other
+entries described in <a href="https://reactome.org/content/schema/DatabaseObject" title="Graph Database :: Data Schema" class="external-link">Reactome’s data schema</a>. A
+standard query accepts one or more identifiers. An enhanced query
+accepts one identifier and adds related regulations and catalysts; it
+also lets you control incoming relationships and disease-specific
+information, or request a shorter summary for a reference entity.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## 1 Query a pathway entry</span></span>
 <span><span class="va">pathway</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_query.html">rba_reactome_query</a></span><span class="op">(</span></span>
 <span>  ids <span class="op">=</span> <span class="st">"R-HSA-109581"</span>,</span>
 <span>  enhanced <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -246,22 +279,24 @@ you supply more than one ID, you cannot have
 <span></span>
 <span><span class="co">## 2 As always we use str() to inspect the output's structure</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">pathway</span>, <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="co">#&gt; List of 30</span></span>
+<span><span class="co">#&gt; List of 29</span></span>
 <span><span class="co">#&gt;  $ dbId               : int 109581</span></span>
 <span><span class="co">#&gt;  $ displayName        : chr "Apoptosis"</span></span>
 <span><span class="co">#&gt;  $ stId               : chr "R-HSA-109581"</span></span>
 <span><span class="co">#&gt;  $ stIdVersion        : chr "R-HSA-109581.6"</span></span>
-<span><span class="co">#&gt;  $ created            :List of 5</span></span>
+<span><span class="co">#&gt;  $ created            :List of 6</span></span>
 <span><span class="co">#&gt;   ..$ dbId       : int 109608</span></span>
 <span><span class="co">#&gt;   ..$ displayName: chr "Alnemri, E, Hengartner, Michael, Tschopp, Jürg, Tsujimoto, Yoshihide, Hardwick, JM, 2004-01-16"</span></span>
 <span><span class="co">#&gt;   ..$ dateTime   : chr "2004-01-16 21:01:51"</span></span>
+<span><span class="co">#&gt;   ..$ author     :List of 5</span></span>
 <span><span class="co">#&gt;   ..$ className  : chr "InstanceEdit"</span></span>
 <span><span class="co">#&gt;   ..$ schemaClass: chr "InstanceEdit"</span></span>
-<span><span class="co">#&gt;  $ modified           :List of 6</span></span>
+<span><span class="co">#&gt;  $ modified           :List of 7</span></span>
 <span><span class="co">#&gt;   ..$ dbId       : int 11116865</span></span>
 <span><span class="co">#&gt;   ..$ displayName: chr "Weiser, Joel, 2026-06-12"</span></span>
 <span><span class="co">#&gt;   ..$ dateTime   : chr "2026-06-12 07:49:47"</span></span>
 <span><span class="co">#&gt;   ..$ note       : chr "Inserted by org.reactome.orthoinference"</span></span>
+<span><span class="co">#&gt;   ..$ author     :List of 1</span></span>
 <span><span class="co">#&gt;   ..$ className  : chr "InstanceEdit"</span></span>
 <span><span class="co">#&gt;   ..$ schemaClass: chr "InstanceEdit"</span></span>
 <span><span class="co">#&gt;  $ isInDisease        : logi FALSE</span></span>
@@ -274,9 +309,9 @@ you supply more than one ID, you cannot have
 <span><span class="co">#&gt;  $ authored           :List of 1</span></span>
 <span><span class="co">#&gt;   ..$ : int 109608</span></span>
 <span><span class="co">#&gt;  $ edited             :List of 1</span></span>
-<span><span class="co">#&gt;   ..$ :List of 5</span></span>
+<span><span class="co">#&gt;   ..$ :List of 6</span></span>
 <span><span class="co">#&gt;  $ eventOf            :List of 1</span></span>
-<span><span class="co">#&gt;   ..$ :List of 19</span></span>
+<span><span class="co">#&gt;   ..$ :List of 20</span></span>
 <span><span class="co">#&gt;  $ figure             :List of 1</span></span>
 <span><span class="co">#&gt;   ..$ :List of 5</span></span>
 <span><span class="co">#&gt;  $ goBiologicalProcess:List of 9</span></span>
@@ -290,30 +325,30 @@ you supply more than one ID, you cannot have
 <span><span class="co">#&gt;   ..$ className   : chr "GO_BiologicalProcess"</span></span>
 <span><span class="co">#&gt;   ..$ schemaClass : chr "GO_BiologicalProcess"</span></span>
 <span><span class="co">#&gt;  $ literatureReference:List of 7</span></span>
-<span><span class="co">#&gt;   ..$ :List of 11</span></span>
-<span><span class="co">#&gt;   ..$ :List of 11</span></span>
-<span><span class="co">#&gt;   ..$ :List of 11</span></span>
-<span><span class="co">#&gt;   ..$ :List of 11</span></span>
-<span><span class="co">#&gt;   ..$ :List of 11</span></span>
-<span><span class="co">#&gt;   ..$ :List of 11</span></span>
-<span><span class="co">#&gt;   ..$ :List of 11</span></span>
+<span><span class="co">#&gt;   ..$ :List of 12</span></span>
+<span><span class="co">#&gt;   ..$ :List of 12</span></span>
+<span><span class="co">#&gt;   ..$ :List of 12</span></span>
+<span><span class="co">#&gt;   ..$ : int 140368</span></span>
+<span><span class="co">#&gt;   ..$ : int 140372</span></span>
+<span><span class="co">#&gt;   ..$ : int 141241</span></span>
+<span><span class="co">#&gt;   ..$ :List of 12</span></span>
 <span><span class="co">#&gt;  $ orthologousEvent   :List of 14</span></span>
-<span><span class="co">#&gt;   ..$ :List of 16</span></span>
-<span><span class="co">#&gt;   ..$ :List of 16</span></span>
-<span><span class="co">#&gt;   ..$ :List of 16</span></span>
-<span><span class="co">#&gt;   ..$ :List of 16</span></span>
-<span><span class="co">#&gt;   ..$ :List of 16</span></span>
-<span><span class="co">#&gt;   ..$ :List of 16</span></span>
-<span><span class="co">#&gt;   ..$ :List of 16</span></span>
-<span><span class="co">#&gt;   ..$ :List of 16</span></span>
-<span><span class="co">#&gt;   ..$ :List of 16</span></span>
-<span><span class="co">#&gt;   ..$ :List of 16</span></span>
-<span><span class="co">#&gt;   ..$ :List of 16</span></span>
-<span><span class="co">#&gt;   ..$ :List of 16</span></span>
-<span><span class="co">#&gt;   ..$ :List of 16</span></span>
-<span><span class="co">#&gt;   ..$ :List of 16</span></span>
+<span><span class="co">#&gt;   ..$ :List of 17</span></span>
+<span><span class="co">#&gt;   ..$ :List of 17</span></span>
+<span><span class="co">#&gt;   ..$ :List of 17</span></span>
+<span><span class="co">#&gt;   ..$ :List of 17</span></span>
+<span><span class="co">#&gt;   ..$ :List of 17</span></span>
+<span><span class="co">#&gt;   ..$ :List of 17</span></span>
+<span><span class="co">#&gt;   ..$ :List of 17</span></span>
+<span><span class="co">#&gt;   ..$ :List of 17</span></span>
+<span><span class="co">#&gt;   ..$ :List of 17</span></span>
+<span><span class="co">#&gt;   ..$ :List of 17</span></span>
+<span><span class="co">#&gt;   ..$ :List of 17</span></span>
+<span><span class="co">#&gt;   ..$ :List of 17</span></span>
+<span><span class="co">#&gt;   ..$ :List of 17</span></span>
+<span><span class="co">#&gt;   ..$ :List of 17</span></span>
 <span><span class="co">#&gt;  $ reviewed           :List of 1</span></span>
-<span><span class="co">#&gt;   ..$ :List of 5</span></span>
+<span><span class="co">#&gt;   ..$ :List of 6</span></span>
 <span><span class="co">#&gt;  $ species            :List of 1</span></span>
 <span><span class="co">#&gt;   ..$ : int 48887</span></span>
 <span><span class="co">#&gt;  $ summation          :List of 1</span></span>
@@ -325,67 +360,47 @@ you supply more than one ID, you cannot have
 <span><span class="co">#&gt;   ..$ name       :List of 1</span></span>
 <span><span class="co">#&gt;   ..$ className  : chr "ReviewStatus"</span></span>
 <span><span class="co">#&gt;   ..$ schemaClass: chr "ReviewStatus"</span></span>
-<span><span class="co">#&gt;  $ updateTrackers     :List of 22</span></span>
-<span><span class="co">#&gt;   ..$ :List of 6</span></span>
-<span><span class="co">#&gt;   ..$ :List of 6</span></span>
-<span><span class="co">#&gt;   ..$ :List of 6</span></span>
-<span><span class="co">#&gt;   ..$ :List of 6</span></span>
-<span><span class="co">#&gt;   ..$ :List of 6</span></span>
-<span><span class="co">#&gt;   ..$ :List of 6</span></span>
-<span><span class="co">#&gt;   ..$ :List of 6</span></span>
-<span><span class="co">#&gt;   ..$ :List of 6</span></span>
-<span><span class="co">#&gt;   ..$ :List of 6</span></span>
-<span><span class="co">#&gt;   ..$ :List of 6</span></span>
-<span><span class="co">#&gt;   ..$ :List of 6</span></span>
-<span><span class="co">#&gt;   ..$ :List of 6</span></span>
-<span><span class="co">#&gt;   ..$ :List of 6</span></span>
-<span><span class="co">#&gt;   ..$ :List of 6</span></span>
-<span><span class="co">#&gt;   ..$ :List of 6</span></span>
-<span><span class="co">#&gt;   ..$ :List of 6</span></span>
-<span><span class="co">#&gt;   ..$ :List of 6</span></span>
-<span><span class="co">#&gt;   ..$ :List of 6</span></span>
-<span><span class="co">#&gt;   ..$ :List of 6</span></span>
-<span><span class="co">#&gt;   ..$ :List of 6</span></span>
-<span><span class="co">#&gt;   ..$ :List of 6</span></span>
-<span><span class="co">#&gt;   ..$ :List of 6</span></span>
 <span><span class="co">#&gt;  $ hasDiagram         : logi TRUE</span></span>
 <span><span class="co">#&gt;  $ hasEHLD            : logi TRUE</span></span>
 <span><span class="co">#&gt;  $ lastUpdatedDate    : chr "2022-06-09"</span></span>
 <span><span class="co">#&gt;  $ hasEvent           :List of 4</span></span>
-<span><span class="co">#&gt;   ..$ :List of 18</span></span>
 <span><span class="co">#&gt;   ..$ :List of 19</span></span>
+<span><span class="co">#&gt;   ..$ :List of 20</span></span>
+<span><span class="co">#&gt;   ..$ :List of 20</span></span>
 <span><span class="co">#&gt;   ..$ :List of 19</span></span>
-<span><span class="co">#&gt;   ..$ :List of 18</span></span>
 <span><span class="co">#&gt;  $ schemaClass        : chr "Pathway"</span></span>
 <span><span class="co">#&gt;  $ className          : chr "Pathway"</span></span>
 <span></span>
 <span></span>
 <span></span>
-<span><span class="co">## 3 You can compare it with the webpage of R-HSA-202939 entry:</span></span>
-<span><span class="co"># https://reactome.org/content/detail/R-HSA-202939</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## 1 query a protein Entry</span></span>
+<span><span class="co">## 3 Compare the result with the pathway's Reactome page</span></span>
+<span><span class="co"># https://reactome.org/content/detail/R-HSA-109581</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## 1 Query a reference entity and summarize its physical forms</span></span>
 <span><span class="va">protein</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_query.html">rba_reactome_query</a></span><span class="op">(</span></span>
 <span>  ids <span class="op">=</span> <span class="fl">66247</span>,</span>
-<span>  enhanced <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  enhanced <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  summarize_reference_entity <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## 2 As always we use str() to inspect the output's structure</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">protein</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="co">#&gt; List of 29</span></span>
+<span><span class="co">#&gt; List of 33</span></span>
 <span><span class="co">#&gt;  $ dbId               : int 66247</span></span>
 <span><span class="co">#&gt;  $ displayName        : chr "UniProt:P25942-1 CD40"</span></span>
 <span><span class="co">#&gt;  $ stId               : chr "uniprot:P25942-1"</span></span>
-<span><span class="co">#&gt;  $ modified           :List of 6</span></span>
+<span><span class="co">#&gt;  $ name               :List of 1</span></span>
+<span><span class="co">#&gt;  $ compartment        :List of 1</span></span>
+<span><span class="co">#&gt;  $ componentOf        :List of 1</span></span>
+<span><span class="co">#&gt;  $ crossReference     :List of 38</span></span>
+<span><span class="co">#&gt;  $ inferredTo         :List of 8</span></span>
+<span><span class="co">#&gt;  $ summarisedEntities :List of 1</span></span>
+<span><span class="co">#&gt;  $ moleculeType       : chr "Protein"</span></span>
 <span><span class="co">#&gt;  $ databaseName       : chr "UniProt"</span></span>
 <span><span class="co">#&gt;  $ identifier         : chr "P25942"</span></span>
-<span><span class="co">#&gt;  $ name               :List of 1</span></span>
 <span><span class="co">#&gt;  $ otherIdentifier    :List of 119</span></span>
 <span><span class="co">#&gt;  $ url                : chr "http://purl.uniprot.org/uniprot/P25942-1"</span></span>
-<span><span class="co">#&gt;  $ moleculeType       : chr "Protein"</span></span>
-<span><span class="co">#&gt;  $ crossReference     :List of 38</span></span>
-<span><span class="co">#&gt;  $ referenceDatabase  :List of 9</span></span>
-<span><span class="co">#&gt;  $ physicalEntity     :List of 1</span></span>
+<span><span class="co">#&gt;  $ referenceDatabase  : int 2</span></span>
 <span><span class="co">#&gt;  $ checksum           : chr "BC8776EC2C4A5680"</span></span>
 <span><span class="co">#&gt;  $ comment            :List of 1</span></span>
 <span><span class="co">#&gt;  $ description        :List of 1</span></span>
@@ -400,26 +415,28 @@ you supply more than one ID, you cannot have
 <span><span class="co">#&gt;  $ referenceTranscript:List of 4</span></span>
 <span><span class="co">#&gt;  $ variantIdentifier  : chr "P25942-1"</span></span>
 <span><span class="co">#&gt;  $ isoformParent      :List of 1</span></span>
-<span><span class="co">#&gt;  $ className          : chr "ReferenceIsoform"</span></span>
-<span><span class="co">#&gt;  $ schemaClass        : chr "ReferenceIsoform"</span></span>
+<span><span class="co">#&gt;  $ referenceType      : chr "ReferenceIsoform"</span></span>
+<span><span class="co">#&gt;  $ referenceEntity    : int 66247</span></span>
+<span><span class="co">#&gt;  $ className          : chr "SummaryEntity"</span></span>
+<span><span class="co">#&gt;  $ schemaClass        : chr "SummaryEntity"</span></span>
 <span></span>
 <span></span>
 <span></span>
-<span><span class="co">## 3 You can compare it with the webpage of R-HSA-202939 entry:</span></span>
-<span><span class="co"># https://reactome.org/content/detail/R-HSA-202939</span></span></code></pre></div>
+<span><span class="co">## 3 Compare the result with the entry's Reactome page</span></span>
+<span><span class="co"># https://reactome.org/content/detail/66247</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="find-cross-reference-ids-in-reactome">Find Cross-Reference IDs in Reactome<a class="anchor" aria-label="anchor" href="#find-cross-reference-ids-in-reactome"></a>
 </h3>
-<p>As you can see in the second example usage of we used Reactome’s dbID
-<code>66247</code> to query CD40 protein. How did we obtain that in the
-first place? You can use <code>rba_reactome_xref</code> to map any
-cross-reference (external) IDs to Reactome IDs.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## 1 We Supply HGNC ID to find what is the corresponding database ID in Reactome</span></span>
+<p>In the second example, we used Reactome’s database identifier
+<code>66247</code> to query the CD40 reference entity.
+<code><a href="../reference/rba_reactome_xref.html">rba_reactome_xref()</a></code> can map an external identifier, such as
+a gene symbol, to the corresponding Reactome reference entity.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## 1 Supply an HGNC symbol to find the corresponding Reactome database ID</span></span>
 <span><span class="va">xref_protein</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_xref.html">rba_reactome_xref</a></span><span class="op">(</span><span class="st">"CD40"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">## 2 As always use str() to inspect the output's structure</span></span>
+<span><span class="co">## 2 As always, use str() to inspect the output's structure</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">xref_protein</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 21</span></span>
 <span><span class="co">#&gt;  $ dbId               : int 66247</span></span>
@@ -443,6 +460,26 @@ cross-reference (external) IDs to Reactome IDs.</p>
 <span><span class="co">#&gt;  $ variantIdentifier  : chr "P25942-1"</span></span>
 <span><span class="co">#&gt;  $ className          : chr "ReferenceIsoform"</span></span>
 <span><span class="co">#&gt;  $ schemaClass        : chr "ReferenceIsoform"</span></span></code></pre></div>
+<p>Set <code>expanded = TRUE</code> to also retrieve other external
+identifiers associated with the reference entity and the stable
+identifiers of its physical forms. Expanded queries can accept a vector
+of identifiers; <code>page</code> and <code>page_size</code> select
+which supplied identifiers Reactome processes in each call. The optional
+database filter uses Reactome’s database names.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Retrieve the ENSEMBL cross-references and associated physical forms</span></span>
+<span><span class="va">xref_details</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_xref.html">rba_reactome_xref</a></span><span class="op">(</span></span>
+<span>  <span class="st">"P36897"</span>,</span>
+<span>  expanded <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  db_filter <span class="op">=</span> <span class="st">"ENSEMBL"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">xref_details</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="co">#&gt; List of 1</span></span>
+<span><span class="co">#&gt;  $ :List of 3</span></span>
+<span><span class="co">#&gt;   ..$ reference       : chr "P36897"</span></span>
+<span><span class="co">#&gt;   ..$ physicalEntities:List of 13</span></span>
+<span><span class="co">#&gt;   ..$ crossReferences :List of 7</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="map-cross-reference-ids-to-reactome">Map Cross-Reference IDs to Reactome<a class="anchor" aria-label="anchor" href="#map-cross-reference-ids-to-reactome"></a>
@@ -450,25 +487,25 @@ cross-reference (external) IDs to Reactome IDs.</p>
 <p>While we are at the cross-reference topic, here is another useful
 resource. Using <code>rba_reactome_mapping</code> you can find the
 Reactome pathways or reactions which include your external ID:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## 1 Again, consider CD40 protein:</span></span>
 <span><span class="va">xref_mapping</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_mapping.html">rba_reactome_mapping</a></span><span class="op">(</span></span>
 <span>  id <span class="op">=</span> <span class="st">"CD40"</span>,</span>
 <span>  resource <span class="op">=</span> <span class="st">"hgnc"</span>,</span>
 <span>  map_to <span class="op">=</span> <span class="st">"pathways"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item" id="htmlwidget-e5c8c404fe174e4c81bd" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4"],[198933,5668541,5676594,9938027],["Immunoregulatory interactions between a Lymphoid and a non-Lymphoid cell","TNFR2 non-canonical NF-kB pathway","TNF receptor superfamily (TNFSF) members mediating non-canonical NF-kB pathway","Affinity selection of immunoglobulins"],["R-HSA-198933","R-HSA-5668541","R-HSA-5676594","R-HSA-9938027"],["R-HSA-198933.9","R-HSA-5668541.5","R-HSA-5676594.3","R-HSA-9938027.1"],[false,false,false,false],[false,false,false,false],[2,3,2,4],[["Immunoregulatory interactions between a Lymphoid and a non-Lymphoid cell"],["TNFR2 non-canonical NF-kB pathway","TNFRSF mediated non-canonical NF-kB pathway"],["TNF receptor superfamily (TNFSF) members mediating non-canonical NF-kB pathway"],["Affinity selection of immunoglobulins"]],["2007-08-21","2015-06-17","2015-06-17","2026-06-17"],["Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens"],["10.3180/r-hsa-198933.2","10.3180/r-hsa-5668541.1",null,"10.3180/R-HSA-9938027.1"],[true,true,false,true],[false,false,false,false],["2020-09-24","2022-09-14",null,null],["Pathway","Pathway","Pathway","Pathway"],["Pathway","Pathway","Pathway","Pathway"],[null,null,null,"NEW"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>dbId<\/th>\n      <th>displayName<\/th>\n      <th>stId<\/th>\n      <th>stIdVersion<\/th>\n      <th>isInDisease<\/th>\n      <th>isInferred<\/th>\n      <th>maxDepth<\/th>\n      <th>name<\/th>\n      <th>releaseDate<\/th>\n      <th>speciesName<\/th>\n      <th>doi<\/th>\n      <th>hasDiagram<\/th>\n      <th>hasEHLD<\/th>\n      <th>lastUpdatedDate<\/th>\n      <th>schemaClass<\/th>\n      <th>className<\/th>\n      <th>releaseStatus<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,7]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"dbId","targets":1},{"name":"displayName","targets":2},{"name":"stId","targets":3},{"name":"stIdVersion","targets":4},{"name":"isInDisease","targets":5},{"name":"isInferred","targets":6},{"name":"maxDepth","targets":7},{"name":"name","targets":8},{"name":"releaseDate","targets":9},{"name":"speciesName","targets":10},{"name":"doi","targets":11},{"name":"hasDiagram","targets":12},{"name":"hasEHLD","targets":13},{"name":"lastUpdatedDate","targets":14},{"name":"schemaClass","targets":15},{"name":"className","targets":16},{"name":"releaseStatus","targets":17}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><hr>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-36aa3d2a04d42bbc2145" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-36aa3d2a04d42bbc2145">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4"],[198933,5668541,5676594,9938027],["Immunoregulatory interactions between a Lymphoid and a non-Lymphoid cell","TNFR2 non-canonical NF-kB pathway","TNF receptor superfamily (TNFSF) members mediating non-canonical NF-kB pathway","Affinity selection of immunoglobulins"],["R-HSA-198933","R-HSA-5668541","R-HSA-5676594","R-HSA-9938027"],["R-HSA-198933.9","R-HSA-5668541.5","R-HSA-5676594.3","R-HSA-9938027.1"],[false,false,false,false],[false,false,false,false],[2,3,2,4],[["Immunoregulatory interactions between a Lymphoid and a non-Lymphoid cell"],["TNFR2 non-canonical NF-kB pathway","TNFRSF mediated non-canonical NF-kB pathway"],["TNF receptor superfamily (TNFSF) members mediating non-canonical NF-kB pathway"],["Affinity selection of immunoglobulins"]],["2007-08-21","2015-06-17","2015-06-17","2026-06-17"],["Homo sapiens","Homo sapiens","Homo sapiens","Homo sapiens"],["10.3180/r-hsa-198933.2","10.3180/r-hsa-5668541.1",null,"10.3180/R-HSA-9938027.1"],[true,true,false,true],[false,false,false,false],["2020-09-24","2022-09-14",null,null],["Pathway","Pathway","Pathway","Pathway"],["Pathway","Pathway","Pathway","Pathway"],[null,null,null,"NEW"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>dbId<\/th>\n      <th>displayName<\/th>\n      <th>stId<\/th>\n      <th>stIdVersion<\/th>\n      <th>isInDisease<\/th>\n      <th>isInferred<\/th>\n      <th>maxDepth<\/th>\n      <th>name<\/th>\n      <th>releaseDate<\/th>\n      <th>speciesName<\/th>\n      <th>doi<\/th>\n      <th>hasDiagram<\/th>\n      <th>hasEHLD<\/th>\n      <th>lastUpdatedDate<\/th>\n      <th>schemaClass<\/th>\n      <th>className<\/th>\n      <th>releaseStatus<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"paging":true,"fixedHeader":true,"keys":true,"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,7]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"dbId","targets":1},{"name":"displayName","targets":2},{"name":"stId","targets":3},{"name":"stIdVersion","targets":4},{"name":"isInDisease","targets":5},{"name":"isInferred","targets":6},{"name":"maxDepth","targets":7},{"name":"name","targets":8},{"name":"releaseDate","targets":9},{"name":"speciesName","targets":10},{"name":"doi","targets":11},{"name":"hasDiagram","targets":12},{"name":"hasEHLD","targets":13},{"name":"lastUpdatedDate","targets":14},{"name":"schemaClass","targets":15},{"name":"className","targets":16},{"name":"releaseStatus","targets":17}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><hr>
 </div>
 </div>
 <div class="section level2">
-<h2 id="see-also-in-functions-manuals">See also in Functions’ manuals<a class="anchor" aria-label="anchor" href="#see-also-in-functions-manuals"></a>
+<h2 id="see-also-in-functions-manuals">See also in function manuals<a class="anchor" aria-label="anchor" href="#see-also-in-functions-manuals"></a>
 </h2>
-<p>There are still more rbioapi f Reactome content functions that were
-not covered in this vignette. Here is a brief overview, see the
-functions’ manual for detailed guides and examples.</p>
+<p>Several rbioapi Reactome content functions are not covered in this
+vignette. The following overview links them by purpose; see each
+function’s manual for details and examples.</p>
 <div class="section level3">
-<h3 id="retrieve-reactome-database-information">Retrieve Reactome Database information<a class="anchor" aria-label="anchor" href="#retrieve-reactome-database-information"></a>
+<h3 id="retrieve-reactome-database-information">Retrieve Reactome database information<a class="anchor" aria-label="anchor" href="#retrieve-reactome-database-information"></a>
 </h3>
 <ul>
 <li><p><code><a href="../reference/rba_reactome_version.html">rba_reactome_version()</a></code>: Return current Reactome
@@ -483,13 +520,18 @@ annotated in Reactome.</p></li>
 <h3 id="general-mapping-querying">General Mapping/Querying<a class="anchor" aria-label="anchor" href="#general-mapping-querying"></a>
 </h3>
 <ul>
-<li><p><code><a href="../reference/rba_reactome_query.html">rba_reactome_query()</a></code></p></li>
+<li><p><code><a href="../reference/rba_reactome_search.html">rba_reactome_search()</a></code>: Search Reactome entries by
+text and optional filters.</p></li>
+<li><p><code><a href="../reference/rba_reactome_query.html">rba_reactome_query()</a></code>: Retrieve Reactome objects,
+optionally with enhanced relationships or a selected attribute.</p></li>
 <li><p><code><a href="../reference/rba_reactome_mapping.html">rba_reactome_mapping()</a></code></p></li>
-<li><p><code><a href="../reference/rba_reactome_xref.html">rba_reactome_xref()</a></code></p></li>
+<li><p><code><a href="../reference/rba_reactome_xref.html">rba_reactome_xref()</a></code>: Map external identifiers to
+Reactome reference entities and, optionally, their other
+cross-references and physical forms.</p></li>
 </ul>
 </div>
 <div class="section level3">
-<h3 id="things-you-can-do-with-a-entities">Things you can do with a Entities<a class="anchor" aria-label="anchor" href="#things-you-can-do-with-a-entities"></a>
+<h3 id="things-you-can-do-with-a-entities">Things you can do with entities<a class="anchor" aria-label="anchor" href="#things-you-can-do-with-a-entities"></a>
 </h3>
 <ul>
 <li><p><code><a href="../reference/rba_reactome_complex_list.html">rba_reactome_complex_list()</a></code>: Get a list of complexes
@@ -511,8 +553,9 @@ pathway etc.) is a participant in them.</p></li>
 <li><p><code><a href="../reference/rba_reactome_pathways_events.html">rba_reactome_pathways_events()</a></code></p></li>
 <li><p><code><a href="../reference/rba_reactome_event_ancestors.html">rba_reactome_event_ancestors()</a></code></p></li>
 <li><p><code><a href="../reference/rba_reactome_orthology.html">rba_reactome_orthology()</a></code></p></li>
-<li><p><code><a href="../reference/rba_reactome_event_hierarchy.html">rba_reactome_event_hierarchy()</a></code>: Retrieve full event
-hierarchy of an species.</p></li>
+<li><p><code><a href="../reference/rba_reactome_event_hierarchy.html">rba_reactome_event_hierarchy()</a></code>: Retrieve a species’s
+event or pathway hierarchy, optionally with analysis results
+added.</p></li>
 </ul>
 </div>
 <div class="section level3">
@@ -529,7 +572,9 @@ hierarchy of an species.</p></li>
 </h3>
 <ul>
 <li><p><code><a href="../reference/rba_reactome_interactors_psicquic.html">rba_reactome_interactors_psicquic()</a></code></p></li>
-<li><p><code><a href="../reference/rba_reactome_interactors_static.html">rba_reactome_interactors_static()</a></code></p></li>
+<li><p><code><a href="../reference/rba_reactome_interactors_static.html">rba_reactome_interactors_static()</a></code>: Retrieve
+Reactome’s static IntAct interaction details, summaries, or associated
+pathways.</p></li>
 </ul>
 </div>
 <div class="section level3">
@@ -641,8 +686,9 @@ vignette index</a></p></li>
 <span><span class="co">#&gt; [13] rmarkdown_2.31    crosstalk_1.2.2   evaluate_1.0.5    jquerylib_0.1.4  </span></span>
 <span><span class="co">#&gt; [17] fastmap_1.2.0     yaml_2.3.12       lifecycle_1.0.5   compiler_4.6.1   </span></span>
 <span><span class="co">#&gt; [21] fs_2.1.0          htmlwidgets_1.6.4 systemfonts_1.3.2 digest_0.6.39    </span></span>
-<span><span class="co">#&gt; [25] R6_2.6.1          curl_7.1.0        magrittr_2.0.5    bslib_0.11.0     </span></span>
-<span><span class="co">#&gt; [29] tools_4.6.1       pkgdown_2.2.1     cachem_1.1.0      desc_1.4.3</span></span></code></pre>
+<span><span class="co">#&gt; [25] R6_2.6.1          curl_7.1.0        magrittr_2.0.5    bslib_0.12.0     </span></span>
+<span><span class="co">#&gt; [29] tools_4.6.1       mime_0.13         pkgdown_2.2.1     cachem_1.1.0     </span></span>
+<span><span class="co">#&gt; [33] desc_1.4.3</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

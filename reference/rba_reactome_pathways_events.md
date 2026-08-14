@@ -1,9 +1,9 @@
-# Get Events Contained in an Upstream Events
+# Get Events Contained in an Upstream Event
 
-A Reactome Event could be comprised of other events (meaning, a pathway
-that include other pathways itself). Use this function to recursively
-return all the events which reside downstream of your supplied event ID
-(or an attribute of that events).
+Reactome events can contain other events; for example, a pathway can
+contain smaller pathways and reactions. This function recursively
+retrieves all events downstream of the supplied event, or one attribute
+of those events.
 
 ## Usage
 
@@ -20,8 +20,8 @@ rba_reactome_pathways_events(event_id, attribute_name = NULL, ...)
 
 - attribute_name:
 
-  Character: (optional) An attribute of the events to be returned
-  instead of the whole events. see [Reactome Data Schema:
+  Character: Optional event attribute to return instead of complete
+  event records. See [Reactome Data Schema:
   Event](https://reactome.org/content/schema/Event) for available
   options.
 
@@ -33,18 +33,25 @@ rba_reactome_pathways_events(event_id, attribute_name = NULL, ...)
 
 ## Value
 
-Data frame where each row is a contained event and columns are event's
-attributes. If an "attribute_name" argument was supplied, a character
-vector will be returned.
+A list with information about the contained events. If `attribute_name`
+is supplied, one value for each contained event is returned. If the
+individual values cannot be identified reliably, the complete result is
+returned as a single value.
 
 ## Details
 
-By Reactome's definition, Events are the building blocks of biological
-processes and could be of two main classes: "Pathway" or "Reaction-like
-events". The events are organized in a hierarchical structure; and each
-event could be child or parent to another event; The hierarchy will
-always begin with a "Top level pathway" event. Also note that a given
-event could be part of more that one hierarchies.
+Reactome defines events as the building blocks of biological processes.
+Events can be pathways or reaction-like events and are organized
+hierarchically. An event can be a child or parent of another event, each
+hierarchy begins with a top-level pathway, and an event can belong to
+more than one hierarchy.
+
+When `attribute_name` is supplied, the function returns one value for
+each contained event whenever the individual values can be identified
+reliably. Empty values and line breaks within a value are preserved.
+Otherwise, the complete result is returned unchanged with a warning.
+When `save_file` is used, the saved file always contains the result
+exactly as supplied by Reactome.
 
 ## Corresponding API Resources
 
@@ -60,9 +67,10 @@ containedEvents/{attributeName}"
   Knowledgebase 2026. Nucleic Acids Res., 54(D1), D673–D681. doi:
   10.1093/nar/gkaf1223
 
-- Griss J, Viteri G, Sidiropoulos K, Nguyen V, Fabregat A, Hermjakob H.
-  ReactomeGSA - Efficient Multi-Omics Comparative Pathway Analysis. Mol
-  Cell Proteomics. 2020 Sep 9. doi: 10.1074/mcp. PubMed PMID: 32907876.
+- Griss, J., Viteri, G., Sidiropoulos, K., Nguyen, V., Fabregat, A., &
+  Hermjakob, H. (2020). ReactomeGSA—Efficient Multi-Omics Comparative
+  Pathway Analysis. Molecular & Cellular Proteomics, 19(12), 2115–2125.
+  doi: 10.1074/mcp.TIR120.002155
 
 - [Reactome Content Services API
   Documentation](https://reactome.org/ContentService/)
@@ -83,6 +91,6 @@ rba_reactome_pathways_events(event_id = "R-HSA-5673001")
 # }
 # \donttest{
 rba_reactome_pathways_events(event_id = "R-HSA-5673001",
-    attribute_name = "displayName")
+    attribute_name = "stId")
 # }
 ```

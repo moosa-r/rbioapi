@@ -1,10 +1,9 @@
 # Get Mutagenesis by UniProt Accession
 
-UniProt describes the effects of mutations in proteins' amino acid
-sequence on the biological properties of the protein, cell or the
-organism. Using this function, you can get the [Mutagenesis
-description](https://www.uniprot.org/help/mutagen) that has been mapped
-to a given UniProt protein.
+UniProt describes how sequence mutations affect the biological
+properties of a protein, cell, or organism. Retrieve the [mutagenesis
+annotations](https://www.uniprot.org/help/mutagen) mapped to one UniProt
+protein.
 
 ## Usage
 
@@ -16,13 +15,13 @@ rba_uniprot_mutagenesis(accession, location = NULL, ...)
 
 - accession:
 
-  [UniProtKB primary or secondary
-  accession](https://www.uniprot.org/help/accession_numbers)(s).
+  Character: [UniProtKB primary or secondary
+  accession](https://www.uniprot.org/help/accession_numbers).
 
 - location:
 
-  A valid amino acid range (e.g. 10-25) within the sequence range of the
-  given proein.
+  Character: (optional) A valid amino acid range (e.g. 10-25) within the
+  sequence of the given protein.
 
 - ...:
 
@@ -41,15 +40,14 @@ protein's sequence.
 
 ## References
 
-- The UniProt Consortium , UniProt: the Universal Protein Knowledgebase
-  in 2025, Nucleic Acids Research, 2024;, gkae1010,
+- The UniProt Consortium. (2025). UniProt: the Universal Protein
+  Knowledgebase in 2025. Nucleic Acids Research, 53(D1), D609–D617.
   https://doi.org/10.1093/nar/gkae1010
 
-- Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas
-  Bursteinas, Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd
-  Turner, Maria Martin, The Proteins API: accessing key integrated
-  protein and genome information, Nucleic Acids Research, Volume 45,
-  Issue W1, 3 July 2017, Pages W539–W544,
+- Nightingale, A., Antunes, R., Alpi, E., Bursteinas, B., Gonzales, L.,
+  Liu, W., Luo, J., Qi, G., Turner, E., & Martin, M. (2017). The
+  Proteins API: Accessing key integrated protein and genome information.
+  Nucleic Acids Research, 45(W1), W539–W544.
   https://doi.org/10.1093/nar/gkx237
 
 - [Proteins API Documentation](https://www.ebi.ac.uk/proteins/api/doc/)

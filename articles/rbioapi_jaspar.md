@@ -329,7 +329,7 @@ insects_tffms <- rba_jaspar_tffm_search(tax_group = "insects")
 TFFM0056 <- rba_jaspar_tffm("TFFM0056.3")
 
 str(TFFM0056)
-#>  chr "The server returned HTTP Status '500' (Server Error: Internal Server Error)."
+#>  chr "JASPAR returned an error response with HTTP Status '500' (Server Error: Internal Server Error).\nThe response d"| __truncated__
 ```
 
 ------------------------------------------------------------------------
@@ -399,6 +399,6 @@ To cite rbioapi:
     #>  [9] rmarkdown_2.31    lifecycle_1.0.5   cli_3.6.6         sass_0.4.10      
     #> [13] pkgdown_2.2.1     textshaping_1.0.5 jquerylib_0.1.4   systemfonts_1.3.2
     #> [17] compiler_4.6.1    httr_1.4.8        tools_4.6.1       ragg_1.5.2       
-    #> [21] curl_7.1.0        bslib_0.11.0      evaluate_1.0.5    yaml_2.3.12      
+    #> [21] curl_7.1.0        bslib_0.12.0      evaluate_1.0.5    yaml_2.3.12      
     #> [25] otel_0.2.0        jsonlite_2.0.0    rlang_1.3.0       fs_2.1.0         
     #> [29] htmlwidgets_1.6.4
