@@ -138,6 +138,8 @@ enriched <- rba_panther_enrich(
 # (`test_type = "BINOMIAL"`).
 ```
 
+    #> [1] "Vignette building failed. It is probably because the web service was down during the building."
+
 #### Statistical enrichment analysis
 
 As you can see in the above example, only a vector of gene names was

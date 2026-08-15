@@ -256,8 +256,8 @@ rba_connection_test(print_output = TRUE)
 #> --->>> Enrichr :
 #> +++ The server is responding.
 #> --->>> Ensembl :
-#> +++ The server is responding.
-#> --->>> JASPAR :
+#> !!! failed with error:
+#>  HTTP Status '500' (Server Error: Internal Server Error)--->>> JASPAR :
 #> +++ The server is responding.
 #> --->>> miEAA :
 #> +++ The server is responding.
