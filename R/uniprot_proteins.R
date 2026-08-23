@@ -140,7 +140,7 @@
 #' rba_uniprot_proteins_search(accession = "Q99616")
 #' }
 #' \donttest{
-#' rba_uniprot_proteins_search(gene = "cd40")
+#' rba_uniprot_proteins_search(gene = "cd40", taxid = 9606)
 #' }
 #' \donttest{
 #' rba_uniprot_proteins_search(gene = "cd40 ligand")
@@ -598,7 +598,7 @@ rba_uniprot_proteins_crossref <- function(db_id,
 #' rba_uniprot_features_search(accession = "Q99616")
 #' }
 #' \donttest{
-#' rba_uniprot_features_search(gene = "cd40")
+#' rba_uniprot_features_search(gene = "cd40", taxid = 9606)
 #' }
 #' \donttest{
 #' rba_uniprot_features_search(gene = "cd40 ligand")

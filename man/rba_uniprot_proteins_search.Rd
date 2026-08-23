@@ -121,7 +121,7 @@ UniProtKB entries are grouped into two sections:\enumerate{
 rba_uniprot_proteins_search(accession = "Q99616")
 }
 \donttest{
-rba_uniprot_proteins_search(gene = "cd40")
+rba_uniprot_proteins_search(gene = "cd40", taxid = 9606)
 }
 \donttest{
 rba_uniprot_proteins_search(gene = "cd40 ligand")

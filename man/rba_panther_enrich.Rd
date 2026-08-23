@@ -131,8 +131,7 @@ Please note that starting from rbioapi version 0.8.2, you can supply a
 \examples{
 \donttest{
 rba_panther_enrich(
-  genes = c("p53", "BRCA1", "cdk2", "Q99835", "CDC42",
-    "CDK1", "KIF23", "PLK1", "RAC2", "RACGAP1"),
+  genes = c("TP53", "BRCA1", "CDK2", "Q99835", "CDC42"),
   organism = 9606, annot_dataset = "GO:0008150",
   cutoff = 0.01
   )
@@ -140,9 +139,8 @@ rba_panther_enrich(
 
 \donttest{
 expression_df <- data.frame(
-  genes = c("p53", "BRCA1", "cdk2", "Q99835", "CDC42",
-    "CDK1", "KIF23", "PLK1", "RAC2", "RACGAP1"),
-  expr = runif(10, 0, 100)
+  genes = c("TP53", "BRCA1", "CDK2", "CDC42", "CDK1"),
+  expr = c(10, 8, 6, 4, 2)
   )
 
 rba_panther_enrich(

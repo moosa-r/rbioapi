@@ -39,7 +39,7 @@ Retrieve one page of genes and their associated information for a genome
 
 \examples{
 \donttest{
-rba_panther_genome(organism = 9606, page = 1)
+rba_panther_genome(organism = 243273, page = 1)
 }
 
 }

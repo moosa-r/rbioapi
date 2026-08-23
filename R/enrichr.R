@@ -1404,7 +1404,7 @@ rba_enrichr_gene_map <- function(gene,
 #' }
 #' \donttest{
 #' rba_enrichr(gene_list = c("TP53", "TNF", "EGFR"),
-#'     gene_set_library = "go",
+#'     gene_set_library = "^GO_Molecular_Function_(2025|2026)$",
 #'     regex_library_name = TRUE)
 #' }
 #'

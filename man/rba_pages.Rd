@@ -86,7 +86,7 @@ rba_pages(
       name = "adenovirus",
       search_type = "contain",
       page_size = 20,
-      page_number = "pages:1:3"
+      page_number = "pages:1:2"
     )
   )
 )
@@ -101,7 +101,7 @@ rba_pages(
     )
   ),
   page_arg = "page_number",
-  pages = c(1, 3, 5)
+  pages = c(1, 3)
 )
 }
 
