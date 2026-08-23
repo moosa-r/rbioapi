@@ -39,7 +39,7 @@ To retrieve pairwise similarity scores among input proteins within one
   species, see \code{\link{rba_string_homology_intra}}.
 
 STRING imports the similarity matrix from the
-  \href{https://pubmed.ncbi.nlm.nih.gov/24165881/}{Similarity Matrix of
+  \href{https://doi.org/10.1093/nar/gkt970}{Similarity Matrix of
   Proteins (SIMAP)} project.
 }
 \section{Corresponding API Resources}{

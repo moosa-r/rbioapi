@@ -34,7 +34,7 @@ To retrieve the best similarity hit for each input protein in other STRING
   \code{\link{rba_string_homology_inter}}.
 
 STRING imports the similarity matrix from the
-  \href{https://pubmed.ncbi.nlm.nih.gov/24165881/}{Similarity Matrix of
+  \href{https://doi.org/10.1093/nar/gkt970}{Similarity Matrix of
   Proteins (SIMAP)} project.
 }
 \section{Corresponding API Resources}{
