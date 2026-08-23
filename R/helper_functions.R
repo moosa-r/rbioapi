@@ -269,239 +269,359 @@ rba_options <- function(diagnostics = NULL,
   }
 }
 
-#' Iterate over function calls
+#' Iterate Over Paginated Calls
 #'
-#' This function accepts a list where each of its elements is a character
-#'   vector which can be parsed and evaluated. currently, this is only used
-#'   in rba_pages
+#' @param input_call Call: Normalized call to evaluate.
+#' @param page_arg Character: Name of the page argument.
+#' @param pages Numeric vector: Page numbers to request.
+#' @param eval_env Environment: Environment in which to evaluate the calls.
+#' @param sleep_time Numeric: Seconds to wait between calls.
+#' @param progress Logical: Display a progress bar?
 #'
-#' @param input_call a list that contains the calls.
-#' @param pb_switch Display a progress bar?
-#'
-#' @return The evaluation results of each input call.
+#' @return A named list containing one result per call.
 #' @noRd
-.rba_pages_do <- function(input_call, pb_switch, sleep_time = 1) {
-  if (pb_switch) {
-    ## initiate progress bar
+.rba_pages_do <- function(input_call,
+                          page_arg,
+                          pages,
+                          eval_env,
+                          sleep_time,
+                          progress) {
+  ## Initialize one progress bar for the complete operation
+  if (isTRUE(progress)) {
     pb <- utils::txtProgressBar(
       min = 0,
-      max = length(input_call),
+      max = length(pages),
       style = 3
     )
-    pb_val <- 0
+    on.exit(close(pb), add = TRUE)
   }
-  #do the calls
-  output <- lapply(
-    X = input_call,
-    FUN = function(x){
-      Sys.sleep(sleep_time)
-      y <- eval(parse(text = x))
-      if (pb_switch) {
-        # advance the progress bar
-        pb_now <- get("pb_val", envir = parent.frame(2))
-        assign("pb_val", pb_now + 1, envir = parent.frame(2))
-        utils::setTxtProgressBar(pb, pb_now + 1)
-      }
-      return(y)
-    }
+
+  ## Preallocate named output
+  output <- stats::setNames(
+    vector(mode = "list", length = length(pages)),
+    paste0(
+      "page_",
+      format(pages, scientific = FALSE, trim = TRUE)
+    )
   )
 
-  if (pb_switch) {close(pb)}
+  ## Evaluate one page at a time
+  for (i in seq_along(pages)) {
+    if (i > 1L) {
+      Sys.sleep(sleep_time)
+    }
+
+    input_call[[page_arg]] <- pages[[i]]
+    output[i] <- list(eval(input_call, envir = eval_env))
+
+    if (isTRUE(progress)) {
+      utils::setTxtProgressBar(pb, i)
+    }
+  }
+
   return(output)
 }
 
-#' Get Multiple Pages of a Paginated Resource
+#' Retrieve Multiple Pages of a Paginated Resource
 #'
-#' Some resources return paginated results, meaning that you have to make
-#'   separate calls for each page. Using this function, you can iterate over
-#'   up to 100 pages. Just supply your rbioapi function and change to page
-#'   argument to "pages:start_page:end_page", for example "pages:1:5".
+#' Evaluate a quoted call to an exported rbioapi function for multiple page
+#'   numbers. Calls are made sequentially, and their results are returned in
+#'   the requested order.
 #'
-#'   To prevent flooding the server, there will be a 1 second delay between
-#'   calls, also the user cannot iterate on more than 100 pages. The function
-#'   will also override skip_error option and will always set it to TRUE.
-#'   This means that in case of server response error (e.g. requesting pages
-#'   that do not exist) an error message be returned to you instead of
-#'   halting function's execution.
+#' Pagination can be specified in either of two ways. To request an inclusive
+#'   range, set the named page argument in \code{input_call} to a character
+#'   string of the form \code{"pages:start:end"}. Alternatively, omit the page
+#'   argument from \code{input_call}, supply its exact name through
+#'   \code{page_arg}, and supply the desired page numbers through \code{pages}.
+#'   The range may run in either direction, and the two forms cannot be
+#'   combined. The page argument must exactly match a formal function argument;
+#'   partial and positional matching are not used for pagination.
 #'
-#' @param input_call A quoted call. supply a regular rbioapi function call,
-#'   but with two differences:\enumerate{
-#'   \item: Wrap a quote() around it. meaning: quote(rba_example())
-#'   \item: Set the argument that corresponds to the page number to
-#'   "pages:start_page:end_page", for example "pages:1:5".}
-#'   See the "examples" section to learn more.
-#' @param ... Experimental internal options.
+#' Page numbers must be unique positive whole numbers, and no more than 100
+#'   pages can be requested in one call. \code{sleep_time} seconds are inserted
+#'   between successive calls.
 #'
-#' @return A named list where each element corresponds to a request's page.
+#' The value of \code{skip_error} is passed to every page call, allowing
+#'   rbioapi's standard error-handling mechanism to determine whether a failed
+#'   request stops the operation. If \code{progress = TRUE}, one progress bar
+#'   is displayed and
+#'   \code{verbose = FALSE} and \code{progress = FALSE} are passed to the
+#'   individual rbioapi calls.
+#'
+#' @param input_call Call: A quoted call to an exported API-endpoint-facing
+#'   rbioapifunction. To request an inclusive range, set the called function's
+#'   named page argument to a character string of the form
+#'   \code{"pages:start:end"}. Alternatively, omit the page argument from
+#'   \code{input_call}, supply its exact name through \code{page_arg}, and
+#'   supply the desired page numbers through \code{pages}. These two forms
+#'   cannot be combined.
+#' @param page_arg Character: (optional) Exact name of the formal argument of
+#'   the called rbioapi function that accepts the page number. Supply together
+#'   with \code{pages} when the page argument is omitted from
+#'   \code{input_call}.
+#' @param pages Numeric vector: (optional) Unique positive whole page numbers
+#'   in the order in which they should be requested. A maximum of 100 values
+#'   can be supplied. Must be supplied together with \code{page_arg}.
+#' @param sleep_time Numeric: (default = \code{2}) Number of seconds to wait
+#'   between successive calls. Must be at least 2.
+#' @param skip_error Logical: (default = \code{TRUE}) Continue the operation
+#'   after an unsuccessful page call and return its error message as that
+#'   page's result? This value is passed to every page call. If
+#'   \code{input_call} already supplies \code{skip_error}, its value is
+#'   overridden and a warning is issued.
+#' @param progress Logical: (default = \code{FALSE}) Display one progress bar
+#'   for the complete operation? When \code{TRUE}, verbose messages and
+#'   progress bars from individual page calls are suppressed.
+#' @param verbose Logical: (default = current \code{rba_verbose} option)
+#'   Generate an informative message describing the complete operation?
+#'
+#' @return A named list containing one element per requested page. Element
+#'   names have the form \code{page_<number>}.
 #'
 #' @examples
 #' \donttest{
-#' rba_pages(input_call = quote(rba_uniprot_taxonomy(ids = 189831,
-#'     hierarchy = "siblings",
-#'     page_size = 50,
-#'     page_number = "pages:1:5")))
+#' rba_pages(
+#'   input_call = quote(
+#'     rba_uniprot_taxonomy_name(
+#'       name = "adenovirus",
+#'       search_type = "contain",
+#'       page_size = 20,
+#'       page_number = "pages:1:3"
+#'     )
+#'   )
+#' )
 #' }
 #' \donttest{
-#' rba_pages(input_call = quote(rba_uniprot_taxonomy_name(name = "adenovirus",
-#'     field = "scientific",
-#'     search_type = "contain",
-#'     page_size = 200,
-#'     page_number = "pages:1:5",
-#'     verbose = FALSE)))
-#' }
-#' \donttest{
-#' rba_pages(input_call = quote(rba_panther_info(what = "families",
-#'     families_page = "pages:9:11")))
+#' rba_pages(
+#'   input_call = quote(
+#'     rba_uniprot_taxonomy_name(
+#'       name = "adenovirus",
+#'       search_type = "contain",
+#'       page_size = 20
+#'     )
+#'   ),
+#'   page_arg = "page_number",
+#'   pages = c(1, 3, 5)
+#' )
 #' }
 #'
 #' @family "Helper functions"
 #' @keywords Helper
 #' @export
-rba_pages <- function(input_call, ...){
-  ## Internal options
-  ext_args <- list(...)
-
-  if (anyNA(ext_args, recursive = TRUE)) {
-    stop(
-      "Invalid Argument: internal options supplied through `...` cannot ",
-      "contain `NA` or `NaN` values.",
-      call. = getOption("rba_diagnostics")
-    )
-  }
-
-  internal_opts <- list(
-    verbose = TRUE,
-    sleep_time = 1,
-    page_check = TRUE,
-    add_skip_error = TRUE,
-    list_names = NULL,
-    force_pb = NULL
-  )
-
-  if (length(ext_args) > 0) {
-    internal_opts[names(ext_args)] <- ext_args
-  }
-  verbose <- internal_opts$verbose
-
-  ## Convert the input_call to character
-  if (!inherits(input_call, "call")) {
-    stop(
-      "The call should be wrapped in qoute()",
-      call. = getOption("rba_diagnostics")
-    )
-  }
-
-  input_call <- gsub(
-    pattern = "\\s+",
-    replacement = " ",
-    x = paste0(deparse(input_call), collapse = "")
-  )
-
-  if (!grepl("^rba_.+\\(", input_call)) {
-    stop(
-      "You should supply a rbioapi function.",
-      call. = getOption("rba_diagnostics")
-    )
-  }
-
-  ## Extract start and end pages
-  start_page <- unlist(
-    regmatches(
-      input_call,
-      gregexpr("(?<=\"pages:)\\d+(?=:\\d+\")", input_call, perl = TRUE)
-    )
-  )
-
-  end_page <- unlist(
-    regmatches(
-      input_call,
-      gregexpr("(?<=\\d:)\\d+(?=\")", input_call, perl = TRUE)
-    )
-  )
-
-  start_page <- as.integer(start_page)
-  end_page <- as.integer(end_page)
-
-  ## Check pages
-  if (length(start_page) != 1 | length(end_page) != 1) {
-    stop(
-      "The variable you want to paginate should be formatted as:",
-      "`pages:start:end`.\nfor example: \"pages:1:5\".",
-      call. = getOption("rba_diagnostics")
-    )
-  }
-
-  if (isTRUE(internal_opts$page_check) && (end_page - start_page > 100)) {
-    stop(
-      "The maximum pages you are allowed to iterate are 100 pages.",
-      call. = getOption("rba_diagnostics")
-    )
-  }
-
-  ## Only show progress bar if verbose, diagnostics and progress bar are off
-  if (is.null(internal_opts$force_pb)) {
-    verbose_on <-
-      !grepl(",\\s*verbose\\s*=\\s*FALSE", input_call) &&
-      (grepl(",\\s*verbose\\s*=\\s*TRUE", input_call) ||
-         isTRUE(getOption("rba_verbose")))
-    diagnostics_on <-
-      !grepl(",\\s*diagnostics\\s*=\\s*FALSE", input_call) &&
-      (grepl(",\\s*diagnostics\\s*=\\s*TRUE", input_call) ||
-         isTRUE(getOption("rba_diagnostics")))
-    progress_on <-
-      !grepl(",\\s*progress\\s*=\\s*FALSE", input_call) &&
-      (grepl(",\\s*progress\\s*=\\s*TRUE", input_call) ||
-         isTRUE(getOption("rba_progress")))
-    pb_switch <- sum(c(verbose_on, diagnostics_on, progress_on)) == 0
-  } else {
-    pb_switch <- isTRUE(internal_opts$force_pb)
-  }
-
-  ## Build the calls
-  elements_seq <- seq.int(
-    from = start_page,
-    to = end_page,
-    by = ifelse(test = start_page > end_page, yes = -1L, no = 1L)
-  )
-
-  # Add skip_error = TRUE and page numbers to the calls
-  input_call <- gsub(
-    pattern = ",\\s*skip_error\\s*=\\s*(TRUE|FALSE)",
-    replacement = "",
-    x = input_call,
-    perl = TRUE
-  )
-  input_call <- sub(
-    pattern = "\"pages:\\d+:\\d+\"",
-    replacement = ifelse(
-      test = isFALSE(internal_opts$add_skip_error),
-      yes = "%s",
-      no = "%s, skip_error = TRUE"
+rba_pages <- function(input_call,
+                      page_arg = NULL,
+                      pages = NULL,
+                      sleep_time = 2,
+                      skip_error = TRUE,
+                      progress = FALSE,
+                      verbose = getOption("rba_verbose")) {
+  ## 1. Validate the main function arguments
+  .rba_args(
+    cons = list(
+      list(arg = "page_arg", class = "character", len = 1L),
+      list(
+        arg = "pages", class = c("numeric", "integer"), min_len = 1L,
+        integerish = TRUE, min_val = 1
+      ),
+      list(
+        arg = "sleep_time", class = c("numeric", "integer"), len = 1L,
+        min_val = 2, max_val = .Machine$double.xmax, no_null = TRUE
+      )
     ),
-    x = input_call,
-    perl = TRUE
+    cond = list(
+      list(
+        quote(missing(input_call) || !is.call(input_call)),
+        "`input_call` should be a quoted function call."
+      ),
+      list(
+        quote(xor(is.null(page_arg), is.null(pages))),
+        "`page_arg` and `pages` should be supplied together."
+      ),
+      list(
+        quote(!is.null(pages) && anyDuplicated(pages) > 0L),
+        "`pages` should contain unique values."
+      )
+    )
+  )
+  .rba_args(
+    cons = list(
+      list(
+        arg = "skip_error", class = "logical", len = 1L, no_null = TRUE
+      ),
+      list(
+        arg = "progress", class = "logical", len = 1L, no_null = TRUE
+      ),
+      list(
+        arg = "verbose", class = "logical", len = 1L, no_null = TRUE
+      )
+    )
   )
 
-  input_call <- as.list(sprintf(input_call, elements_seq))
-
-  # Name the list
-  if (length(internal_opts$list_names) != length(input_call)) {
-    names(input_call) <- paste0("page_", elements_seq)
+  ## 2. Extract the function name from the quoted input call
+  call_head <- input_call[[1L]]
+  if (is.symbol(call_head) || is.call(call_head)) {
+    head_parts <- as.character(call_head)
   } else {
-    names(input_call) <- internal_opts$list_names
+    head_parts <- character()
+  }
+  function_name <- ifelse(
+    is.symbol(call_head) ||
+      (
+        is.call(call_head) &&
+          length(head_parts) == 3L &&
+          identical(head_parts[1:2], c("::", "rbioapi"))
+      ),
+    utils::tail(head_parts, 1L),
+    ""
+  )
+
+  ## 3. Stop early if target is not an exported rbioapi function
+  .rba_args(
+    cond = list(
+      list(
+        quote(
+          !(function_name %in% setdiff(
+            getNamespaceExports("rbioapi"),
+            c("rba_connection_test", "rba_options", "rba_pages")
+          ))
+        ),
+        "`input_call` should call an exported API-endpoint-facing rbioapi function."
+      )
+    )
+  )
+
+  ## 4. Extract the target function arguments
+  input_call[[1L]] <- call(
+    "::",
+    as.name("rbioapi"),
+    as.name(function_name)
+  )
+  call_args <- as.list(input_call)[-1L]
+  range_args <- which(vapply(
+    X = call_args,
+    FUN = function(x) {
+      is.character(x) &&
+        length(x) == 1L &&
+        !is.na(x) &&
+        startsWith(x, "pages:")
+    },
+    FUN.VALUE = logical(1)
+  ))
+
+  ## 5. Resolve and validate the pagination arguments
+  range_mode <- is.null(page_arg)
+  page_spec_valid <- ifelse(
+    range_mode,
+    length(range_args) == 1L && grepl(
+      "^pages:[1-9][0-9]*:[1-9][0-9]*$",
+      call_args[[range_args]]
+    ),
+    length(range_args) == 0L
+  )
+
+  page_limits <- numeric()
+  page_count <- length(pages)
+  if (range_mode && page_spec_valid) {
+    page_arg <- names(call_args)[range_args]
+    page_limits <- suppressWarnings(
+      as.numeric(
+        strsplit(call_args[[range_args]], ":", fixed = TRUE)[[1L]][-1L]
+      )
+    )
+    page_count <- abs(diff(page_limits)) + 1
   }
 
-  ## Do the calls
+  page_limits_finite <- all(is.finite(page_limits))
+  page_arg_valid <- isTRUE(page_arg %in% setdiff(
+    names(formals(getExportedValue("rbioapi", function_name))),
+    "..."
+  ))
+  request_valid <-
+    page_spec_valid &&
+    page_arg_valid &&
+    page_limits_finite &&
+    isTRUE(page_count <= 100L)
+
+  .rba_args(
+    cond = list(
+      list(
+        quote(!page_spec_valid),
+        ifelse(
+          range_mode,
+          "Supply one valid `\"pages:start:end\"` page-range specification, or use `page_arg` with `pages`.",
+          "`page_arg` and `pages` cannot be combined with a `\"pages:start:end\"` page range."
+        )
+      ),
+      list(
+        quote(
+          range_mode &&
+            page_spec_valid &&
+            !page_limits_finite
+        ),
+        "Invalid page range. Page numbers should be finite."
+      ),
+      list(
+        quote(page_spec_valid && !page_arg_valid),
+        sprintf(
+          "`page_arg` should exactly match a formal argument of `%s`.",
+          function_name
+        )
+      ),
+      list(
+        quote(
+          page_spec_valid &&
+            page_limits_finite &&
+            isTRUE(page_count > 100L)
+        ),
+        "No more than 100 pages can be requested in one call."
+      ),
+      list(
+        quote(
+          request_valid &&
+            utils::hasName(call_args, "skip_error")
+        ),
+        "`skip_error` in `input_call` was overridden by the `skip_error` argument of `rba_pages()`.",
+        warn = TRUE
+      ),
+      list(
+        quote(
+          request_valid &&
+            isTRUE(progress) &&
+            any(c("verbose", "progress") %in% names(call_args))
+        ),
+        "Any `verbose` or `progress` setting in `input_call` was overridden because `progress = TRUE` in `rba_pages()`.",
+        warn = TRUE
+      )
+    )
+  )
+
+  if (range_mode && request_valid) {
+    pages <- seq.int(
+      from = page_limits[[1L]],
+      to = page_limits[[2L]]
+    )
+  }
+
+  ## 6. Apply shared call options and run the internal page loop
+  input_call[["skip_error"]] <- skip_error
+  if (isTRUE(progress)) {
+    input_call[["verbose"]] <- FALSE
+    input_call[["progress"]] <- FALSE
+  }
+
   .msg(
-    "Iterating from page %s to page %s.",
-    start_page, end_page
+    "Retrieving %s page(s) using `%s()`.",
+    page_count,
+    function_name
   )
 
-  final_output <- .rba_pages_do(
-    input_call,
-    pb_switch = pb_switch,
-    sleep_time = internal_opts$sleep_time
+  output <- .rba_pages_do(
+    input_call = input_call,
+    page_arg = page_arg,
+    pages = pages,
+    eval_env = parent.frame(),
+    sleep_time = sleep_time,
+    progress = progress
   )
-
-  return(final_output)
+  return(output)
 }

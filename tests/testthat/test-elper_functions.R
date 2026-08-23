@@ -34,34 +34,107 @@ test_that("rba_options works", {
 })
 
 test_that("rba_pages works", {
-  rba_test <- function(x, skip_error = NULL, ...) {
-    if (isTRUE(skip_error)) {
-      LETTERS[[x]]
-    } else {
-      paste0(LETTERS[[x]], "!", collapse = "")
-    }
-  }
+  local_mocked_bindings(
+    rba_panther_info = function(what,
+                                families_page,
+                                skip_error = FALSE,
+                                verbose = TRUE,
+                                progress = TRUE,
+                                ...) {
+      if (identical(what, "failure") && families_page == 2) {
+        if (isTRUE(skip_error)) {
+          return("endpoint failure")
+        }
+        stop("endpoint failure")
+      }
 
-  # Detects errors
-  expect_error(
-    object = rba_pages(input_call = Sys.sleep(0)),
-    regexp = "qoute"
+      if (identical(what, "retain_null") && families_page == 2) {
+        return(NULL)
+      }
+
+      if (identical(what, "options")) {
+        return(c(verbose = verbose, progress = progress))
+      }
+
+      return(families_page)
+    },
+    .package = "rbioapi"
+  )
+  local_mocked_bindings(
+    Sys.sleep = function(...) NULL,
+    .package = "base"
+  )
+  old_options <- options(rba_verbose = FALSE)
+  on.exit(options(old_options), add = TRUE)
+
+  # Both pagination forms preserve caller values, page order, and NULL results
+  caller_value <- "retain_null"
+  explicit_output <- rba_pages(
+    input_call = quote(rba_panther_info(what = caller_value)),
+    page_arg = "families_page",
+    pages = 3:1
+  )
+  range_output <- rba_pages(
+    input_call = quote(
+      rbioapi::rba_panther_info(
+        what = caller_value,
+        families_page = "pages:3:1"
+      )
+    )
+  )
+
+  expected_output <- list(page_3 = 3L, page_2 = NULL, page_1 = 1L)
+  expect_equal(
+    object = explicit_output,
+    expected = expected_output
+  )
+  expect_equal(object = range_output, expected = expected_output)
+
+  # The wrapper's skip_error policy controls the complete operation
+  continued_output <- rba_pages(
+    input_call = quote(rba_panther_info(what = "failure")),
+    page_arg = "families_page",
+    pages = 1:3,
+    skip_error = TRUE
+  )
+  expect_equal(
+    object = continued_output,
+    expected = list(
+      page_1 = 1L,
+      page_2 = "endpoint failure",
+      page_3 = 3L
+    )
   )
   expect_error(
-    object = rba_pages(input_call = quote(Sys.sleep(0))),
-    regexp = "rbioapi"
+    object = rba_pages(
+      input_call = quote(rba_panther_info(what = "failure")),
+      page_arg = "families_page",
+      pages = 1:3,
+      skip_error = FALSE
+    ),
+    regexp = "endpoint failure"
   )
-  expect_error(
-    object = rba_pages(input_call = quote(rba_test(3))),
-    regexp = "pages"
+
+  # One wrapper progress bar suppresses output from the individual calls
+  capture.output(
+    progress_output <- suppressWarnings(
+      rba_pages(
+        input_call = quote(
+          rba_panther_info(
+            what = "options",
+            verbose = TRUE,
+            progress = TRUE
+          )
+        ),
+        page_arg = "families_page",
+        pages = 1,
+        progress = TRUE
+      )
+    )
   )
-  expect_error(
-    object = rba_pages(input_call = quote(rba_test(3))),
-    regexp = "pages"
-  )
-  expect_error(
-    object = rba_pages(input_call = quote(rba_test("pages:1:999"))),
-    regexp = "100"
+  expect_equal(
+    object = progress_output,
+    expected = list(page_1 = c(verbose = FALSE, progress = FALSE))
   )
 
 })
