@@ -1,6 +1,6 @@
 # rbioapi: User-Friendly R Interface to Biologic Web Services’ API
 
-Moosa Rezwani 2026-08-04
+Moosa Rezwani 2026-08-23
 
 # 
 
@@ -274,13 +274,12 @@ rba_connection_test(print_output = TRUE)
 
 # Iterating over paginated results
 
-Some API resources will return paginated responses. This is particularly
-common in API resources which return potentially very large responses.
-In rbioapi, for these cases, there are arguments such as “page_number”
-(with default value of 1) and -if the API resource allows- “page_size”.
-To save your time, you may use
-[`rba_pages()`](https://rbioapi.moosa-r.com/reference/rba_pages.md).
-This function will iterate over the pages you have specified.
+Some API resources return paginated responses, particularly when a query
+can produce many records. Their rbioapi functions generally expose a
+page argument, such as `page_number`, and may also expose a page-size
+argument.
+[`rba_pages()`](https://rbioapi.moosa-r.com/reference/rba_pages.md)
+repeats one quoted rbioapi call for the pages you request.
 
 Take rba_uniprot_taxonomy_name as an example. This function allows you
 to search taxonomic nodes in
@@ -315,16 +314,17 @@ str(adeno, max.level = 2)
 #>   ..$ totalRecords  : int 1259
 ```
 
-As you can see, the server has returned the first page of the response,
-to retrieve the other pages, you should make separate calls and change
-the “page_number” argument within each call, or simply use
-[`rba_pages()`](https://rbioapi.moosa-r.com/reference/rba_pages.md) as
-demonstrated below:
+As you can see, the server has returned the first page of the response.
+To retrieve multiple pages, wrap the function call in
+[`quote()`](https://rdrr.io/r/base/substitute.html) and replace its
+named page argument with a specification of the form
+`"pages:start:end"`. For example, the following call retrieves pages 1
+to 3:
 
 ``` r
 
-adeno_pages = rba_pages(
-  quote(
+adeno_pages <- rba_pages(
+  input_call = quote(
     rba_uniprot_taxonomy_name(
       name = "adenovirus",
       search_type = "contain",
@@ -347,14 +347,26 @@ str(adeno_pages, max.level = 2)
 #>   ..$ pageInfo  :List of 3
 ```
 
-As you can see, what we have done was:
+There is another, functionally equivalent, way to call
+[`rba_pages()`](https://rbioapi.moosa-r.com/reference/rba_pages.md):
+omit the page argument from the quoted call, then supply its exact name
+and the desired page numbers separately. This form is particularly
+useful when you want to provide a vector of page numbers that does not
+necessarily form a contiguous range:
 
-1.  Wrap the function call in `qoute()` and enter that as the input for
-    [`rba_pages()`](https://rbioapi.moosa-r.com/reference/rba_pages.md).
+``` r
 
-2.  Replace the argument we want to iterate over it, with a string in
-    this format: “pages:start:end”. For example, we supplied page_number
-    = “pages:1:3” to get the responses of pages 1 to 3.
+adeno_pages <- rba_pages(
+  input_call = quote(
+    rba_uniprot_taxonomy_name(
+      name = "adenovirus",
+      search_type = "contain"
+    )
+  ),
+  page_arg = "page_number",
+  pages = c(1, 3, 5)
+)
+```
 
 # How and what to cite?
 

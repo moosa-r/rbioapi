@@ -1,46 +1,96 @@
-# Get Multiple Pages of a Paginated Resource
+# Retrieve Multiple Pages of a Paginated Resource
 
-Some resources return paginated results, meaning that you have to make
-separate calls for each page. Using this function, you can iterate over
-up to 100 pages. Just supply your rbioapi function and change to page
-argument to "pages:start_page:end_page", for example "pages:1:5".
+Evaluate a quoted call to an exported rbioapi function for multiple page
+numbers. Calls are made sequentially, and their results are returned in
+the requested order.
 
 ## Usage
 
 ``` r
-rba_pages(input_call, ...)
+rba_pages(
+  input_call,
+  page_arg = NULL,
+  pages = NULL,
+  sleep_time = 2,
+  skip_error = TRUE,
+  progress = FALSE,
+  verbose = getOption("rba_verbose")
+)
 ```
 
 ## Arguments
 
 - input_call:
 
-  A quoted call. supply a regular rbioapi function call, but with two
-  differences:
+  Call: A quoted call to an exported API-endpoint-facing
+  rbioapifunction. To request an inclusive range, set the called
+  function's named page argument to a character string of the form
+  `"pages:start:end"`. Alternatively, omit the page argument from
+  `input_call`, supply its exact name through `page_arg`, and supply the
+  desired page numbers through `pages`. These two forms cannot be
+  combined.
 
-  1.  : Wrap a quote() around it. meaning: quote(rba_example())
+- page_arg:
 
-  2.  : Set the argument that corresponds to the page number to
-      "pages:start_page:end_page", for example "pages:1:5".
+  Character: (optional) Exact name of the formal argument of the called
+  rbioapi function that accepts the page number. Supply together with
+  `pages` when the page argument is omitted from `input_call`.
 
-  See the "examples" section to learn more.
+- pages:
 
-- ...:
+  Numeric vector: (optional) Unique positive whole page numbers in the
+  order in which they should be requested. A maximum of 100 values can
+  be supplied. Must be supplied together with `page_arg`.
 
-  Experimental internal options.
+- sleep_time:
+
+  Numeric: (default = `2`) Number of seconds to wait between successive
+  calls. Must be at least 2.
+
+- skip_error:
+
+  Logical: (default = `TRUE`) Continue the operation after an
+  unsuccessful page call and return its error message as that page's
+  result? This value is passed to every page call. If `input_call`
+  already supplies `skip_error`, its value is overridden and a warning
+  is issued.
+
+- progress:
+
+  Logical: (default = `FALSE`) Display one progress bar for the complete
+  operation? When `TRUE`, verbose messages and progress bars from
+  individual page calls are suppressed.
+
+- verbose:
+
+  Logical: (default = current `rba_verbose` option) Generate an
+  informative message describing the complete operation?
 
 ## Value
 
-A named list where each element corresponds to a request's page.
+A named list containing one element per requested page. Element names
+have the form `page_<number>`.
 
 ## Details
 
-To prevent flooding the server, there will be a 1 second delay between
-calls, also the user cannot iterate on more than 100 pages. The function
-will also override skip_error option and will always set it to TRUE.
-This means that in case of server response error (e.g. requesting pages
-that do not exist) an error message be returned to you instead of
-halting function's execution.
+Pagination can be specified in either of two ways. To request an
+inclusive range, set the named page argument in `input_call` to a
+character string of the form `"pages:start:end"`. Alternatively, omit
+the page argument from `input_call`, supply its exact name through
+`page_arg`, and supply the desired page numbers through `pages`. The
+range may run in either direction, and the two forms cannot be combined.
+The page argument must exactly match a formal function argument; partial
+and positional matching are not used for pagination.
+
+Page numbers must be unique positive whole numbers, and no more than 100
+pages can be requested in one call. `sleep_time` seconds are inserted
+between successive calls.
+
+The value of `skip_error` is passed to every page call, allowing
+rbioapi's standard error-handling mechanism to determine whether a
+failed request stops the operation. If `progress = TRUE`, one progress
+bar is displayed and `verbose = FALSE` and `progress = FALSE` are passed
+to the individual rbioapi calls.
 
 ## See also
 
@@ -52,21 +102,28 @@ Other "Helper functions":
 
 ``` r
 # \donttest{
-rba_pages(input_call = quote(rba_uniprot_taxonomy(ids = 189831,
-    hierarchy = "siblings",
-    page_size = 50,
-    page_number = "pages:1:5")))
+rba_pages(
+  input_call = quote(
+    rba_uniprot_taxonomy_name(
+      name = "adenovirus",
+      search_type = "contain",
+      page_size = 20,
+      page_number = "pages:1:3"
+    )
+  )
+)
 # }
 # \donttest{
-rba_pages(input_call = quote(rba_uniprot_taxonomy_name(name = "adenovirus",
-    field = "scientific",
-    search_type = "contain",
-    page_size = 200,
-    page_number = "pages:1:5",
-    verbose = FALSE)))
-# }
-# \donttest{
-rba_pages(input_call = quote(rba_panther_info(what = "families",
-    families_page = "pages:9:11")))
+rba_pages(
+  input_call = quote(
+    rba_uniprot_taxonomy_name(
+      name = "adenovirus",
+      search_type = "contain",
+      page_size = 20
+    )
+  ),
+  page_arg = "page_number",
+  pages = c(1, 3, 5)
+)
 # }
 ```

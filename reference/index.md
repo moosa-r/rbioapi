@@ -9,7 +9,7 @@ Functions that assist you with the overall experience of rbioapi
 - [`rba_connection_test()`](https://rbioapi.moosa-r.com/reference/rba_connection_test.md)
   : Test if the Supported Services Are Responding
 - [`rba_pages()`](https://rbioapi.moosa-r.com/reference/rba_pages.md) :
-  Get Multiple Pages of a Paginated Resource
+  Retrieve Multiple Pages of a Paginated Resource
 
 ## Enrichr (rba_enrichr\_\*)
 
