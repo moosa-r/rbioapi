@@ -51,7 +51,7 @@ species, see
 [`rba_string_homology_intra`](https://rbioapi.moosa-r.com/reference/rba_string_homology_intra.md).
 
 STRING imports the similarity matrix from the [Similarity Matrix of
-Proteins (SIMAP)](https://pubmed.ncbi.nlm.nih.gov/24165881/) project.
+Proteins (SIMAP)](https://doi.org/10.1093/nar/gkt970) project.
 
 ## Corresponding API Resources
 
