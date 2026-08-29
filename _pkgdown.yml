@@ -78,6 +78,7 @@ reference:
     - rba_options
     - rba_connection_test
     - rba_pages
+    - rba_metadata
 
 - title: Enrichr (rba_enrichr_*)
   desc: >

@@ -13,7 +13,8 @@ rba_options(
   save_file = NULL,
   skip_error = NULL,
   timeout = NULL,
-  verbose = NULL
+  verbose = NULL,
+  metadata = NULL
 )
 }
 \arguments{
@@ -56,6 +57,11 @@ stopping the function execution.}
 
 \item{verbose}{(Logical) (Default = TRUE) Generate short informative
 messages.}
+
+\item{metadata}{(Logical) (default = FALSE) Save API request metadata with
+returned objects? It includes the rbioapi version and, for each request,
+the timestamp, API call, original \code{httr} response, and exact parser
+functions. Use \code{rba_metadata()} to get it.}
 }
 \value{
 If called without any argument, a Data frame with available options
@@ -89,11 +95,19 @@ rba_options(save_file = TRUE)
 \dontrun{
 rba_options(diagnostics = TRUE, progress = TRUE)
 }
+\dontrun{
+## Save metadata with all later rbioapi calls:
+rba_options(metadata = TRUE)
+
+## Turn it off again:
+rba_options(metadata = FALSE)
+}
 
 }
 \seealso{
 Other "Helper functions":
 \code{\link[=rba_connection_test]{rba_connection_test()}},
+\code{\link[=rba_metadata]{rba_metadata()}},
 \code{\link[=rba_pages]{rba_pages()}}
 }
 \concept{"Helper functions"}

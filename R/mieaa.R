@@ -668,7 +668,7 @@ rba_mieaa_enrich_submit <- function(test_set,
   #species
   species <- .rba_mieaa_species(sp = species, to_name = FALSE)
   #categories
-  all_cats <- rba_mieaa_cats(
+  all_cats_result <- rba_mieaa_cats(
     mirna_type = mirna_type,
     species = species,
     mode = "all",
@@ -676,6 +676,7 @@ rba_mieaa_enrich_submit <- function(test_set,
     save_file = FALSE,
     ...
   )
+  all_cats <- all_cats_result
 
   if (
     !is.character(all_cats) ||
@@ -768,6 +769,7 @@ rba_mieaa_enrich_submit <- function(test_set,
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
+  final_output <- .rba_metadata_aggregate(all_cats_result, final_object = final_output)
   return(final_output)
 }
 
@@ -1153,6 +1155,7 @@ rba_mieaa_enrich <- function(test_set,
   ## 2 Poll Job Status
   poll_state <- "pending"
   step2 <- list(status = 0L, `results-URL` = NULL)
+  poll_results <- list()
   poll_started <- Sys.time()
 
   repeat {
@@ -1167,6 +1170,9 @@ rba_mieaa_enrich <- function(test_set,
       save_file = FALSE,
       ...
     )
+    if (isTRUE(get("metadata"))) {
+      poll_results[[length(poll_results) + 1L]] <- step2
+    }
 
     ### 2.1 Classify Polling Response
     if (
@@ -1268,6 +1274,7 @@ rba_mieaa_enrich <- function(test_set,
     sort_asc = sort_asc,
     ...
   )
+  step3 <- .rba_metadata_aggregate(step1, poll_results, final_object = step3)
   return(step3)
 
 }

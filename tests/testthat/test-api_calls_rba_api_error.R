@@ -6,7 +6,7 @@ test_that("API errors stop the response parser", {
     class(api_error),
     c("rba_api_error", "character")
   )
-  parsed_response <- .rba_response_parser(
+  parser_output <- .rba_response_parser(
     response = NULL,
     parsers = list(
       function(x) {
@@ -17,6 +17,7 @@ test_that("API errors stop the response parser", {
       }
     )
   )
+  parsed_response <- parser_output$result
 
   expect_identical(
     parsed_response,

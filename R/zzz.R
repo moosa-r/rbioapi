@@ -35,7 +35,8 @@
       rba_save_file = "save_file",
       rba_skip_error = "skip_error",
       rba_timeout = "timeout",
-      rba_verbose = "verbose"
+      rba_verbose = "verbose",
+      rba_metadata = "metadata"
     ),
     rba_user_options_allowed = c(
       rba_diagnostics = "Logical (TRUE/FALSE)",
@@ -46,8 +47,10 @@
       rba_save_file = "Logical (TRUE/FALSE)",
       rba_skip_error = "Logical (TRUE/FALSE)",
       rba_timeout = "Numeric (0.1 or greater)",
-      rba_verbose = "Logical (TRUE/FALSE)"
-    )
+      rba_verbose = "Logical (TRUE/FALSE)",
+      rba_metadata = "Logical (TRUE/FALSE)"
+    ),
+    rba_metadata = FALSE
   )
   invisible()
 }

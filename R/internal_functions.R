@@ -480,6 +480,68 @@
   return(init)
 }
 
+#' Attach API Request Metadata
+#'
+#' @param result The object returned by rbioapi.
+#' @param requests List of API request records.
+#'
+#' @return \code{result} with request metadata attached.
+#' @noRd
+.rba_metadata_attach <- function(result, requests) {
+  if (is.null(result) || !length(requests)) {
+    return(result)
+  }
+
+  attr(result, "rbioapi_metadata") <- structure(
+    list(
+      rbioapi_version = as.character(utils::packageVersion("rbioapi")),
+      requests = requests
+    ),
+    class = "rba_metadata"
+  )
+  return(result)
+}
+
+#' Aggregate API Request Metadata
+#'
+#' @param ... Intermediate rbioapi results in execution order.
+#' @param final_object The object to return.
+#'
+#' @return \code{final_object} with combined request metadata attached.
+#' @noRd
+.rba_metadata_aggregate <- function(..., final_object) {
+  if (is.null(final_object)) {
+    return(final_object)
+  }
+
+  requests <- list()
+  for (object in append(list(...), list(final_object))) {
+    metadata <- attr(object, "rbioapi_metadata", exact = TRUE)
+    if (!is.null(metadata)) {
+      requests <- append(requests, metadata$requests)
+    } else if (is.list(object) && !is.data.frame(object)) {
+      for (element in object) {
+        metadata <- attr(element, "rbioapi_metadata", exact = TRUE)
+        if (!is.null(metadata)) {
+          requests <- append(requests, metadata$requests)
+        }
+      }
+    }
+  }
+
+  if (!length(requests)) {
+    return(final_object)
+  }
+
+  if (is.list(final_object) && !is.data.frame(final_object)) {
+    for (i in seq_along(final_object)) {
+      attr(final_object[[i]], "rbioapi_metadata") <- NULL
+    }
+  }
+
+  return(.rba_metadata_attach(final_object, requests))
+}
+
 #' Build httr HTTP Query
 #'
 #' Converts package's exported functions input to a function call understandable
@@ -672,10 +734,10 @@
 #' @param verbose should the function generate informative messages?
 #' @param diagnostics logical: Generate diagnostics and detailed messages with
 #'   internal information.
+#' @param metadata Logical: collect request metadata?
 #'
-#' @return A raw server response in the format of httr's class "response". in
-#'   the case of status code other than 200 and skip_error = TRUE, a character
-#'   string with the pertinent error message.
+#' @return A list containing the response or error result and any request
+#'   metadata records.
 #'
 #' @family internal_api_calls
 #' @noRd
@@ -684,12 +746,23 @@
                           retry_max = 0,
                           retry_wait = 10,
                           verbose = TRUE,
-                          diagnostics = FALSE) {
+                          diagnostics = FALSE,
+                          metadata = FALSE) {
+  requests <- list()
+
   ## 1 call API
   response <- try(
     eval(input_call, envir = parent.frame(n = 2)),
     silent = !diagnostics
   )
+  if (isTRUE(metadata) && inherits(response, "response")) {
+    requests[[length(requests) + 1L]] <- list(
+      timestamp = response$date,
+      call = input_call,
+      response = response,
+      parsers = list()
+    )
+  }
 
   ## 2 check the internet connection & 5xx http status
   if (!inherits(response, "response") ||
@@ -710,6 +783,14 @@
         eval(input_call, envir = parent.frame(n = 2)),
         silent = !diagnostics
       )
+      if (isTRUE(metadata) && inherits(response, "response")) {
+        requests[[length(requests) + 1L]] <- list(
+          timestamp = response$date,
+          call = input_call,
+          response = response,
+          parsers = list()
+        )
+      }
     }
 
   } # end of step 2
@@ -735,7 +816,7 @@
 
     # stop or return error?
     if (isTRUE(skip_error)) {
-      return(error_message)
+      return(list(result = error_message, requests = requests))
     } else {
       stop(error_message, call. = diagnostics)
     }
@@ -743,17 +824,20 @@
   } else if (substr(response$status_code, 1, 1) != "2") {
 
     ## 3.2 API call was not successful
-    error_message <- .rba_error_parser(response = response)
+    error_output <- .rba_error_parser(response = response)
+    if (isTRUE(metadata) && length(requests)) {
+      requests[[length(requests)]]$parsers <- error_output$parsers_invoked
+    }
     if (isTRUE(skip_error)) {
-      return(error_message)
+      return(list(result = error_output$result, requests = requests))
     } else {
-      stop(error_message, call. = diagnostics)
+      stop(error_output$result, call. = diagnostics)
     }
 
   } else {
 
     ## 3.3 Everything is OK (HTTP status == 200)
-    return(response)
+    return(list(result = response, requests = requests))
 
   }
 }
@@ -816,20 +900,24 @@
                           response_parser = NULL) {
   ## 0 assign options variables
   diagnostics <- get0("diagnostics", envir = parent.frame(1), ifnotfound = getOption("rba_diagnostics"))
+  metadata <- get0("metadata", envir = parent.frame(1), ifnotfound = getOption("rba_metadata"))
   verbose <- get0("verbose", envir = parent.frame(1), ifnotfound = getOption("rba_verbose"))
   retry_max <- get0("retry_max", envir = parent.frame(1), ifnotfound = getOption("rba_retry_max"))
   retry_wait <- get0("retry_wait", envir = parent.frame(1), ifnotfound = getOption("rba_retry_wait"))
   skip_error <- get0("skip_error", envir = parent.frame(1), ifnotfound = getOption("rba_skip_error"))
 
   ## 1 Make API Call
-  response <- .rba_api_call(
+  api_output <- .rba_api_call(
     input_call = input_call$call,
     skip_error = skip_error,
     retry_max = retry_max,
     retry_wait = retry_wait,
     verbose = verbose,
-    diagnostics = diagnostics
+    diagnostics = diagnostics,
+    metadata = metadata
   )
+  response <- api_output$result
+  requests <- api_output$requests
 
   ## 2 Parse the the response if possible
   # Parser supplied via .rba_skeleton's 'response parser' argument will
@@ -846,10 +934,14 @@
     if (!is.null(parser_input)) {
 
       # A parser is provided for the response
-      parsed_response <- try(
-        .rba_response_parser(response = response, parsers = parser_input),
-        silent = TRUE
+      parser_output <- .rba_response_parser(
+        response = response,
+        parsers = parser_input
       )
+      parsed_response <- parser_output$result
+      if (length(requests)) {
+        requests[[length(requests)]]$parsers <- parser_output$parsers_invoked
+      }
 
       if (!inherits(parsed_response, "try-error")) {
         if (inherits(parsed_response, "rba_api_error")) {
@@ -857,13 +949,13 @@
           error_message <- as.character(parsed_response)
 
           if (isTRUE(skip_error)) {
-            return(error_message)
+            return(.rba_metadata_attach(error_message, requests))
           } else {
             stop(error_message, call. = diagnostics)
           }
         }
         # The parsed API response seems OK
-        return(parsed_response)
+        return(.rba_metadata_attach(parsed_response, requests))
       } else if (identical(httr::content(response, as = "text", encoding = "UTF-8"), "")) {
         # The API returned empty response or the response is empty after parsing
         return(NULL)
@@ -879,7 +971,7 @@
           sep = " "
         )
         if (isTRUE(skip_error)) {
-          return(parse_error_msg)
+          return(.rba_metadata_attach(parse_error_msg, requests))
         } else {
           stop(parse_error_msg, call. = TRUE)
         }
@@ -894,7 +986,7 @@
 
   } else {
 
-    return(response)
+    return(.rba_metadata_attach(response, requests))
 
   }
 }
@@ -983,6 +1075,7 @@
       timeout = list(arg = "timeout", class = "numeric", len = 1, ran = c(0.001, 3600)),
       dir_name = list(arg = "dir_name", class = "character", len = 1),
       diagnostics = list(arg = "diagnostics", class = "logical", len = 1),
+      metadata = list(arg = "metadata", class = "logical", len = 1),
       retry_max = list(
         arg = "retry_max", class = "numeric", len = 1,
         integerish = TRUE, min_val = 0
@@ -1580,14 +1673,14 @@
 #' @param parsers Response parsers, a single value or a vector. Each element
 #'   should be either a function with a single argument or a character string.
 #'
-#' @return A valid R object, depends on the parsers which have been used.
+#' @return A list containing the parsed result and invoked parser functions.
 #'
 #' @family internal_response_parser
 #' @noRd
 .rba_response_parser <- function(response, parsers) {
   if (!is.vector(parsers)) { parsers <- list(parsers)}
 
-  parsers <- sapply(
+  parsers <- lapply(
     X = parsers,
     FUN = function(parser){
       #create a parser if not supplied
@@ -1677,14 +1770,26 @@
   )
 
   # sequentially handle the response to the parsers
+  last_invoked <- 0L
   for (parser in seq_along(parsers)) {
-    response <- do.call(what = parsers[[parser]], args = list(response))
+    last_invoked <- parser
+    response <- try(
+      do.call(what = parsers[[parser]], args = list(response)),
+      silent = TRUE
+    )
 
-    if (inherits(response, "rba_api_error")) {
+    if (
+      inherits(response, "try-error") ||
+      inherits(response, "rba_api_error")
+    ) {
       break
     }
   }
-  return(response)
+
+  return(list(
+    result = response,
+    parsers_invoked = parsers[seq_len(last_invoked)]
+  ))
 }
 
 #' Parse Appropriate, Server-aware Error Message
@@ -1702,8 +1807,7 @@
 #'
 #' @param response a formal api server response, with the class 'response'
 #'   from httr package.
-#' @return Character string that contains A server-specific error message or if
-#'   not, a human-understandable explanation of the returned HTTP status code.
+#' @return A list containing the error message and invoked parser functions.
 #'
 #' @family internal_response_parser
 #' @noRd
@@ -1724,7 +1828,8 @@
   )]
 
   is_valid_message <- function(x) {
-    is.character(x) &&
+    !inherits(x, "try-error") &&
+      is.character(x) &&
       length(x) == 1L &&
       !is.na(x) &&
       nzchar(x)
@@ -1737,16 +1842,14 @@
       x = response$status_code
     )
   ) {
-    parsed_message <- tryCatch(
-      .rba_response_parser(
-        response = response,
-        parsers = .rba_stg(service, "err_prs")
-      ),
-      error = function(e) NULL
+    parser_output <- .rba_response_parser(
+      response = response,
+      parsers = .rba_stg(service, "err_prs")
     )
   } else {
-    parsed_message <- NULL
+    parser_output <- list(result = NULL, parsers_invoked = list())
   }
+  parsed_message <- parser_output$result
 
   # Use the raw response unless tailored parsing produced a message.
   if (is_valid_message(parsed_message)) {
@@ -1771,8 +1874,8 @@
   }
 
   # Prepend the common service and HTTP-status description.
-  return(
-    sprintf(
+  return(list(
+    result = sprintf(
       "%s returned an error response with %s.\n%s",
       .rba_stg(service, "name"),
       .rba_http_status(
@@ -1780,8 +1883,9 @@
         as_sentence = FALSE
       ),
       error_details
-    )
-  )
+    ),
+    parsers_invoked = parser_output$parsers_invoked
+  ))
 }
 #### Miscellaneous ####
 #' Smarter messaging system

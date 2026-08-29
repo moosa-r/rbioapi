@@ -1,7 +1,7 @@
 rbioapi: User-Friendly R Interface to Biologic Web Services’ API
 ================
 Moosa Rezwani
-2026-08-23
+2026-08-29
 
 # <img src="man/figures/logo.svg" align="right" width="200"/>
 
@@ -142,8 +142,9 @@ naming schema:
 6.  rba_string\_\*
 7.  rba_uniprot\_\*
 
-There are three exceptions: `rba_options()`, `rba_connection_test()`,
-and `rba_pages()`; these are helper functions. More on that later.
+There are four exceptions: `rba_options()`, `rba_connection_test()`,
+`rba_pages()`, and `rba_metadata()`; these are helper functions. More on
+that later.
 
 # Changing the options
 
@@ -158,16 +159,17 @@ their current values by calling `rba_options()`without any argument:
 
 ``` r
 rba_options()
-#>   rbioapi_option current_value            allowed_value
-#> 1    diagnostics         FALSE     Logical (TRUE/FALSE)
-#> 2       dir_name       rbioapi                Character
-#> 3       progress         FALSE     Logical (TRUE/FALSE)
-#> 4      retry_max             0   Numeric (0 or greater)
-#> 5     retry_wait            10   Numeric (0 or greater)
-#> 6      save_file         FALSE     Logical (TRUE/FALSE)
-#> 7     skip_error          TRUE     Logical (TRUE/FALSE)
-#> 8        timeout            30 Numeric (0.1 or greater)
-#> 9        verbose          TRUE     Logical (TRUE/FALSE)
+#>    rbioapi_option current_value            allowed_value
+#> 1     diagnostics         FALSE     Logical (TRUE/FALSE)
+#> 2        dir_name       rbioapi                Character
+#> 3        progress         FALSE     Logical (TRUE/FALSE)
+#> 4       retry_max             0   Numeric (0 or greater)
+#> 5      retry_wait            10   Numeric (0 or greater)
+#> 6       save_file         FALSE     Logical (TRUE/FALSE)
+#> 7      skip_error          TRUE     Logical (TRUE/FALSE)
+#> 8         timeout            30 Numeric (0.1 or greater)
+#> 9         verbose          TRUE     Logical (TRUE/FALSE)
+#> 10       metadata         FALSE     Logical (TRUE/FALSE)
 ```
 
 Now, let us consider the ways in which we can alter the settings:
@@ -230,11 +232,10 @@ x <- rba_uniprot_proteins_crossref(
 
 # Connection test
 
-The second exception in functions’ naming schema is
-`rba_connection_test()`. Run this simple function to check your
-connection with the supported services/databases. If you encounter
-errors when using rbioapi, kindly run this function to make sure that
-your internet connection or the servers are fine.
+The `rba_connection_test()` helper checks your internet connection and
+whether supported services and databases are available. If you encounter
+an error while using rbioapi, run this function to check your internet
+connection and the availability of supported services.
 
 ``` r
 rba_connection_test(print_output = TRUE)
@@ -350,6 +351,65 @@ adeno_pages <- rba_pages(
   pages = c(1, 3, 5)
 )
 ```
+
+# Saving API request metadata
+
+rbioapi can store information about the API requests used to create a
+result as an attribute of the returned object. Metadata collection is
+off by default. Set `metadata = TRUE` for one call, then use
+`rba_metadata()` to get it:
+
+``` r
+## Save metadata with one result:
+species <- rba_reactome_species(metadata = TRUE)
+
+## Get and print it:
+request_metadata <- rba_metadata(species)
+request_metadata
+#> <rbioapi metadata>
+#> rbioapi version: 0.8.3.9000
+#> requests: 1
+#> 
+#> host: https://reactome.org
+#> 
+#>   $ requests[[1]]:
+#>     /ContentService/data/species/all
+#>     2026-08-29 01:04:47 GMT | GET | HTTP 200 OK | parsers used: 1
+#> 
+#> Each request contains its call, response, and used parsers.
+#> Use `$` or `[[` to access metadata elements.
+```
+
+The returned `rba_metadata` object prints a short summary and can be
+used like a regular list:
+
+``` r
+## The rbioapi version used to create the result:
+request_metadata$rbioapi_version
+#> [1] "0.8.3.9000"
+
+## Requests are listed in the order they were made. Functions that use several
+## requests to create one result combine their entries. Each result returned by
+## rba_pages() keeps its own metadata. Retry attempts that received an HTTP
+## response are also included. Each entry contains its timestamp, API call,
+## original httr response, and exact parser functions:
+str(request_metadata$requests, max.level = 2)
+#> List of 1
+#>  $ :List of 4
+#>   ..$ timestamp: POSIXct[1:1], format: "2026-08-29 01:04:47"
+#>   ..$ call     : language httr::GET(url = "https://reactome.org", path = "ContentService/data/species/all",      httr::user_agent(getOption| __truncated__ ...
+#>   ..$ response :List of 10
+#>   .. ..- attr(*, "class")= chr "response"
+#>   ..$ parsers  :List of 1
+```
+
+To save metadata with all later rbioapi calls, use
+`rba_options(metadata = TRUE)`. Turn it off again with
+`rba_options(metadata = FALSE)`. For a result without metadata,
+`rba_metadata()` returns `NULL`.
+
+Saving the complete `httr` responses and parser functions can make
+results and saved files much larger.
 
 # How and what to cite?
 

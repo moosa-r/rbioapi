@@ -49,7 +49,7 @@ test_that(".rba_error_parser reports parsed, raw, and absent responses", {
     status_code = 404L,
     content = '{"messages":["PARSED_MESSAGE_SENTINEL"]}'
   )
-  parsed_message <- .rba_error_parser(parsed_response)
+  parsed_message <- .rba_error_parser(parsed_response)$result
   expect_type(parsed_message, "character")
   expect_length(parsed_message, 1L)
   expect_match(
@@ -68,7 +68,7 @@ test_that(".rba_error_parser reports parsed, raw, and absent responses", {
     content = "RAW_RESPONSE_SENTINEL",
     content_type = "text/plain"
   )
-  raw_message <- .rba_error_parser(raw_response)
+  raw_message <- .rba_error_parser(raw_response)$result
   expect_match(
     raw_message,
     "RAW_RESPONSE_SENTINEL",
@@ -79,7 +79,7 @@ test_that(".rba_error_parser reports parsed, raw, and absent responses", {
     status_code = 404L,
     content = ""
   )
-  absent_message <- .rba_error_parser(absent_response)
+  absent_message <- .rba_error_parser(absent_response)$result
   absent_lines <- strsplit(absent_message, "\n", fixed = TRUE)[[1]]
 
   expect_true(length(absent_lines) >= 2L && all(nzchar(absent_lines)))

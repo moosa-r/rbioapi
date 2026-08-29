@@ -185,6 +185,10 @@ rba_connection_test <- function(print_output = TRUE, diagnostics = FALSE) {
 #'   stopping the function execution.
 #' @param verbose (Logical) (Default = TRUE) Generate short informative
 #'   messages.
+#' @param metadata (Logical) (default = FALSE) Save API request metadata with
+#'   returned objects? It includes the rbioapi version and, for each request,
+#'   the timestamp, API call, original \code{httr} response, and exact parser
+#'   functions. Use \code{rba_metadata()} to get it.
 #'
 #' @return If called without any argument, a Data frame with available options
 #'   and their information; If Called with an argument, will Return
@@ -201,6 +205,13 @@ rba_connection_test <- function(print_output = TRUE, diagnostics = FALSE) {
 #' \dontrun{
 #' rba_options(diagnostics = TRUE, progress = TRUE)
 #' }
+#' \dontrun{
+#' ## Save metadata with all later rbioapi calls:
+#' rba_options(metadata = TRUE)
+#'
+#' ## Turn it off again:
+#' rba_options(metadata = FALSE)
+#' }
 #'
 #' @family "Helper functions"
 #' @keywords Helper
@@ -213,7 +224,8 @@ rba_options <- function(diagnostics = NULL,
                         save_file = NULL,
                         skip_error = NULL,
                         timeout = NULL,
-                        verbose = NULL) {
+                        verbose = NULL,
+                        metadata = NULL) {
 
   .rba_args(
     cond = list(
@@ -482,7 +494,10 @@ rba_pages <- function(input_call,
         quote(
           !(function_name %in% setdiff(
             getNamespaceExports("rbioapi"),
-            c("rba_connection_test", "rba_options", "rba_pages")
+            c(
+              "rba_connection_test", "rba_options", "rba_pages",
+              "rba_metadata"
+            )
           ))
         ),
         "`input_call` should call an exported API-endpoint-facing rbioapi function."
@@ -624,4 +639,128 @@ rba_pages <- function(input_call,
     progress = progress
   )
   return(output)
+}
+
+#' Retrieve API Request Metadata
+#'
+#' Retrieve API request metadata saved with an rbioapi result. Metadata is off
+#'   by default. Set \code{metadata = TRUE} on one call to save metadata for
+#'   that result, or use \code{rba_options(metadata = TRUE)} to save it for all
+#'   later calls.
+#'
+#' Saving metadata does not change the result's class. The returned
+#'   \code{rba_metadata} object is a list. Printing it shows a short summary;
+#'   use \code{$} or \code{[[} to access its elements.
+#'   Using \code{rba_metadata(result)} is equivalent to retrieving
+#'   \code{attributes(result)$rbioapi_metadata}.
+#'
+#' The list contains:
+#'   \itemize{
+#'   \item \code{rbioapi_version}: the rbioapi version used to create the
+#'     result.
+#'   \item \code{requests}: request entries in the order they were made. Each
+#'     entry contains:
+#'     \itemize{
+#'     \item \code{timestamp}: the \code{date} value from the original
+#'       \code{httr} response.
+#'     \item \code{call}: the API call used for the request.
+#'     \item \code{response}: the original \code{httr} response object.
+#'     \item \code{parsers}: the exact parser functions used, in the order they
+#'       ran.
+#'     }
+#'   }
+#'
+#' Functions that use several requests to create one result save their entries
+#'   in the order the requests were made. Each result returned by
+#'   \code{rba_pages()} keeps its own metadata. Retry attempts are included when
+#'   they receive an HTTP response. If a response was not parsed, its
+#'   \code{parsers} list is empty.
+#'
+#' Saving the complete \code{httr} responses and parser functions can make
+#'   results and saved files much larger.
+#'
+#' @param result An object returned by an rbioapi function.
+#'
+#' @return An object of class \code{rba_metadata} containing saved API request
+#'   metadata, or \code{NULL} if \code{result} has no metadata.
+#'
+#' @examples
+#' \dontrun{
+#' ## Save metadata with one result:
+#' result <- rba_reactome_species(metadata = TRUE)
+#' request_metadata <- rba_metadata(result)
+#'
+#' ## Print a short summary:
+#' request_metadata
+#'
+#' ## Check the rbioapi version saved with the result:
+#' request_metadata$rbioapi_version
+#'
+#' ## View the requests without printing full functions and responses:
+#' str(request_metadata$requests, max.level = 2)
+#'
+#' ## View one original httr response in more detail:
+#' str(request_metadata$requests[[1]]$response, max.level = 1)
+#' }
+#'
+#' @family "Helper functions"
+#' @keywords Helper
+#' @export
+rba_metadata <- function(result) {
+  return(attr(result, "rbioapi_metadata", exact = TRUE))
+}
+
+#' @export
+#' @noRd
+print.rba_metadata <- function(x, ...) {
+  response_urls <- vapply(
+    X = x$requests,
+    FUN = function(request) request$response$url,
+    FUN.VALUE = character(1)
+  )
+  hosts <- unique(sub(
+    pattern = "^(https?://[^/?#]+).*",
+    replacement = "\\1",
+    x = response_urls
+  ))
+  show_host <- length(hosts) == 1L
+
+  cat(
+    "<rbioapi metadata>\n",
+    "rbioapi version: ", x$rbioapi_version, "\n",
+    "requests: ", length(x$requests), "\n\n",
+    sep = ""
+  )
+  if (show_host) {
+    cat("host: ", hosts, "\n\n", sep = "")
+  }
+
+  for (i in seq_along(x$requests)) {
+    request <- x$requests[[i]]
+    request_url <- response_urls[[i]]
+    if (show_host) {
+      request_url <- sub(hosts, "", request_url, fixed = TRUE)
+    }
+    cat(sprintf(
+      paste0(
+        "  $ requests[[%d]]:\n",
+        "    %s\n",
+        "    %s | %s | HTTP %s %s | parsers used: %d\n\n"
+      ),
+      i,
+      request_url,
+      format(request$timestamp, usetz = TRUE),
+      request$response$request$method,
+      request$response$status_code,
+      httr::http_status(request$response)$reason,
+      length(request$parsers)
+    ))
+  }
+
+  cat(
+    "Each request contains its call, response, and used parsers.\n",
+    "Use `$` or `[[` to access metadata elements.\n",
+    sep = ""
+  )
+  return(invisible(x))
 }

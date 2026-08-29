@@ -307,17 +307,19 @@ rba_enrichr_gene_sets <- function(gene_set_library,
   )
 
   ## get a list of available libraries and check user inputs
+  enrichr_libs_result <- NULL
   if (is.null(getOption("rba_enrichr_libs")[[organism]])) {
     .msg(
       "Calling rba_enrichr_libs() to get the names of available Enrichr %s libraries.",
       organism
     )
 
-    enrichr_libs <- rba_enrichr_libs(
+    enrichr_libs_result <- rba_enrichr_libs(
       organism = organism,
       store_in_options = TRUE,
       ...
     )
+    enrichr_libs <- enrichr_libs_result
 
     get_libs_check <- .rba_enrichr_validate(
       assertion = utils::hasName(enrichr_libs, "libraryName") &&
@@ -445,6 +447,10 @@ rba_enrichr_gene_sets <- function(gene_set_library,
     return(results_check)
   }
 
+  final_output <- .rba_metadata_aggregate(
+    enrichr_libs_result,
+    final_object = final_output
+  )
   return(final_output)
 }
 
@@ -1125,17 +1131,19 @@ rba_enrichr_enrich <- function(user_list_id,
   )
 
   ## get a list of available libraries and check user inputs
+  enrichr_libs_result <- NULL
   if (is.null(getOption("rba_enrichr_libs")[[organism]])) {
     .msg(
       "Calling rba_enrichr_libs() to get the names of available Enrichr %s libraries.",
       organism
     )
 
-    enrichr_libs <- rba_enrichr_libs(
+    enrichr_libs_result <- rba_enrichr_libs(
       organism = organism,
       store_in_options = TRUE,
       ...
     )
+    enrichr_libs <- enrichr_libs_result
 
     if (utils::hasName(enrichr_libs, "libraryName")) {
       enrichr_libs <- enrichr_libs[["libraryName"]]
@@ -1235,6 +1243,7 @@ rba_enrichr_enrich <- function(user_list_id,
 
 
   if (!is_multi_libs) { final_output <- final_output[[1]] }
+  final_output <- .rba_metadata_aggregate(enrichr_libs_result, final_object = final_output)
   return(final_output)
 }
 
@@ -1458,10 +1467,11 @@ rba_enrichr <- function(gene_list,
 
   # Step 1, Get available Enrichr libraries
   .msg("--Step 1/3:")
-  enrichr_libs <- rba_enrichr_libs(
+  enrichr_libs_result <- rba_enrichr_libs(
     organism = organism,
     store_in_options = TRUE,
     ...)
+  enrichr_libs <- enrichr_libs_result
 
   get_libs_check <- .rba_enrichr_validate(
     assertion = utils::hasName(enrichr_libs, "libraryName") &&
@@ -1530,24 +1540,25 @@ rba_enrichr <- function(gene_list,
   }
 
   # Step 2.2 Submit background gene list if requested
+  background_result <- NULL
   if (!is.null(background_genes)) {
     Sys.sleep(2)
-    background_id <- rba_enrichr_add_background(
+    background_result <- rba_enrichr_add_background(
       background_genes = background_genes,
       ...
     )
 
     background_upload_check <- .rba_enrichr_validate(
-      assertion = utils::hasName(background_id, "backgroundid"),
+      assertion = utils::hasName(background_result, "backgroundid"),
       msg_type = "no_background_upload",
-      msg_detail = try(background_id),
+      msg_detail = try(background_result),
       skip_error = isTRUE(get("skip_error"))
     )
 
     if (!isTRUE(background_upload_check)) {
       return(background_upload_check)
     } else {
-      background_id <- background_id$backgroundid
+      background_id <- background_result$backgroundid
     }
 
   } else {
@@ -1579,5 +1590,9 @@ rba_enrichr <- function(gene_list,
   }
 
   # Return
+  enriched <- .rba_metadata_aggregate(
+    enrichr_libs_result, list_id, background_result,
+    final_object = enriched
+  )
   return(enriched)
 }

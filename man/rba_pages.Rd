@@ -109,6 +109,7 @@ rba_pages(
 \seealso{
 Other "Helper functions":
 \code{\link[=rba_connection_test]{rba_connection_test()}},
+\code{\link[=rba_metadata]{rba_metadata()}},
 \code{\link[=rba_options]{rba_options()}}
 }
 \concept{"Helper functions"}

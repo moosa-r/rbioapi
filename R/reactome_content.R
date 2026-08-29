@@ -2306,6 +2306,7 @@ rba_reactome_pathways_events <- function(event_id,
   accept_input <- "application/json"
   parser_input <- "json->list"
   file_ext <- "json"
+  contained_event_ids <- NULL
 
   if (!is.null(attribute_name)) {
 
@@ -2474,6 +2475,10 @@ rba_reactome_pathways_events <- function(event_id,
 
   ## Call API
   final_output <- .rba_skeleton(input_call)
+  final_output <- .rba_metadata_aggregate(
+    contained_event_ids,
+    final_object = final_output
+  )
   return(final_output)
 }
 

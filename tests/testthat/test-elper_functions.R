@@ -1,7 +1,7 @@
 test_that("rba_options works", {
 
   # Return data frame when called empty
-  expect_class(obj = rba_options(),expected = "data.frame")
+  expect_class(obj = rba_options(), expected = "data.frame")
 
   # Changes option
   rba_options(timeout = 91)
