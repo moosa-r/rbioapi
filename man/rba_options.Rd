@@ -18,71 +18,85 @@ rba_options(
 )
 }
 \arguments{
-\item{diagnostics}{(Logical) (default = FALSE) Show diagnostics and
-detailed messages with internal information.}
+\item{diagnostics}{Logical: (optional) Show diagnostics and
+detailed messages with internal information. The package default is
+\code{FALSE}.}
 
-\item{dir_name}{(character) (default = "rbioapi") If the package needs to
+\item{dir_name}{Character: (optional) If the package needs to
 generate a file path to save the server's response, a directory with this
-name will be created in your working directory to save your files.}
+name will be created in your working directory to save your files. The
+package default is
+\code{"rbioapi"}.}
 
-\item{retry_max}{(Numeric) (default = 0) How many times should rbioapi
+\item{retry_max}{Numeric: (optional) How many times should rbioapi
 retry in case of 5xx server responses, errors related to the server
-or no internet connectivity?}
+or no internet connectivity? Must be a finite non-negative whole number.
+The package default is
+\code{0}.}
 
-\item{retry_wait}{(Numeric) (default = 10) Time in seconds to wait before
-next retry in case of internet connection or server problems.}
+\item{retry_wait}{Numeric: (optional) Time in seconds to wait before
+next retry in case of internet connection or server problems. Must be
+finite and non-negative. The package default is
+\code{10}.}
 
-\item{progress}{(Logical) (default = FALSE) Should a progress bar be
-displayed?}
+\item{progress}{Logical: (optional) Should a progress bar be
+displayed? The package default is
+\code{FALSE}.}
 
-\item{save_file}{(Logical or character) (default = FALSE) Either:\itemize{
+\item{save_file}{Logical: (optional) Either:\itemize{
 \item TRUE: In this case, the raw server's response file will be
 automatically saved to a proper file path. use "dir_name" argument to
 change the file's parent directory.
-\item FALSE: (default) Do not automatically save server's response file.
+\item FALSE: Do not automatically save server's response file.
 \item Character: (Only when changing the option via "..." in
 a functions call) A valid file path to save the server's response
-file to the function that you are calling.}}
+file to the function that you are calling.} The package default is
+\code{FALSE}.}
 
-\item{skip_error}{(Logical) (default = FALSE if R is in the interactive mode,
-TRUE otherwise) If TRUE, the code execution  will not be stopped in case
+\item{skip_error}{Logical: (optional) If TRUE, the
+code execution  will not be stopped in case
 of errors (anything but HTTP status 200 from the server); Instead the
 error message will be returned as the function's output. However, if FALSE,
 in case of any error, the code execution will be halted and an error
-message will be issued.}
+message will be issued. The package default is \code{FALSE} in interactive
+sessions and \code{TRUE} otherwise.}
 
-\item{timeout}{(Numeric) (default = 90) The maximum time in seconds that
+\item{timeout}{Numeric: (optional) The maximum time in seconds that
 you are willing to wait for a server response before giving up and
-stopping the function execution.}
+stopping the function execution. Accepted values are between 0.001 and
+3600, inclusive. The package default is
+\code{90}.}
 
-\item{verbose}{(Logical) (Default = TRUE) Generate short informative
-messages.}
+\item{verbose}{Logical: (optional) Generate short informative
+messages. The package default is
+\code{TRUE}.}
 
-\item{metadata}{(Logical) (default = FALSE) Save API request metadata with
+\item{metadata}{Logical: (optional) Save API request metadata with
 returned objects? It includes the rbioapi version and, for each request,
 the timestamp, API call, original \code{httr} response, and exact parser
-functions. Use \code{rba_metadata()} to get it.}
+functions. Use \code{rba_metadata()} to get it. The package default is
+\code{FALSE}.}
 }
 \value{
 If called without any argument, a Data frame with available options
-  and their information; If Called with an argument, will Return
-  NULL but Alters that option globally.
+and their information; If Called with an argument, will Return
+NULL but Alters that option globally.
 }
 \description{
 A safe way to change rbioapi's global options and behavior. see "arguments"
-  section for available options.
-  \cr Note that you are not limited to changing the options globally, you can
-  include the option names and values in the '...' argument of any rbioapi
-  function to alter the option(s) only in that function call;
-  e.g. example_function(x, diagnostics = TRUE, timeout = 300).
-  \cr Alternatively, you can call this function with no arguments, i.e.
-  rba_options(), to retrieve a data frame of available rbioapi options and
-  their current values.
+section for available options.
+\cr Note that you are not limited to changing the options globally, you can
+include the option names and values in the '...' argument of any rbioapi
+function to alter the option(s) only in that function call;
+e.g. example_function(x, diagnostics = TRUE, timeout = 300).
+\cr Alternatively, you can call this function with no arguments, i.e.
+rba_options(), to retrieve a data frame of available rbioapi options and
+their current values.
 }
 \details{
 Because this function validates your supplied changes, please
-  \strong{\emph{only change rbioapi options using this function}} and avoid
-  directly editing them.
+\strong{\emph{only change rbioapi options using this function}} and avoid
+directly editing them.
 }
 \examples{
 rba_options()

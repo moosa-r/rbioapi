@@ -7,10 +7,10 @@
 rba_connection_test(print_output = TRUE, diagnostics = FALSE)
 }
 \arguments{
-\item{print_output}{(Logical) (default = TRUE) Send the tests' output
+\item{print_output}{Logical: (default = \code{TRUE}) Send the tests' output
 to the console?}
 
-\item{diagnostics}{(Logical) (default = FALSE) Show diagnostics and
+\item{diagnostics}{Logical: (default = \code{FALSE}) Show diagnostics and
 detailed messages with internal information.}
 }
 \value{

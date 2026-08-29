@@ -15,8 +15,8 @@ rba_pages(
 )
 }
 \arguments{
-\item{input_call}{Call: A quoted call to an exported API-endpoint-facing
-rbioapifunction. To request an inclusive range, set the called function's
+\item{input_call}{Call: A quoted invocation of an exported API-endpoint-facing
+rbioapi function. To request an inclusive range, set the called function's
 named page argument to a character string of the form
 \code{"pages:start:end"}. Alternatively, omit the page argument from
 \code{input_call}, supply its exact name through \code{page_arg}, and
@@ -28,7 +28,7 @@ the called rbioapi function that accepts the page number. Supply together
 with \code{pages} when the page argument is omitted from
 \code{input_call}.}
 
-\item{pages}{Numeric vector: (optional) Unique positive whole page numbers
+\item{pages}{Numeric: (optional) Unique positive whole page numbers
 in the order in which they should be requested. A maximum of 100 values
 can be supplied. Must be supplied together with \code{page_arg}.}
 
@@ -45,7 +45,7 @@ overridden and a warning is issued.}
 for the complete operation? When \code{TRUE}, verbose messages and
 progress bars from individual page calls are suppressed.}
 
-\item{verbose}{Logical: (default = current \code{rba_verbose} option)
+\item{verbose}{Logical: (default = \code{getOption("rba_verbose")})
 Generate an informative message describing the complete operation?}
 }
 \value{

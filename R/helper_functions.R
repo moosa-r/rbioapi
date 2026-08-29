@@ -51,9 +51,9 @@
 #'   with 'diagnostic = TRUE' and include the output messages in your support
 #'   request.
 #'
-#' @param print_output (Logical) (default = TRUE) Send the tests' output
+#' @param print_output Logical: (default = \code{TRUE}) Send the tests' output
 #'   to the console?
-#' @param diagnostics (Logical) (default = FALSE) Show diagnostics and
+#' @param diagnostics Logical: (default = \code{FALSE}) Show diagnostics and
 #'   detailed messages with internal information.
 #'
 #' @return Connection test for the supported servers will be displayed
@@ -154,41 +154,55 @@ rba_connection_test <- function(print_output = TRUE, diagnostics = FALSE) {
 #'   \strong{\emph{only change rbioapi options using this function}} and avoid
 #'   directly editing them.
 #'
-#' @param diagnostics (Logical) (default = FALSE) Show diagnostics and
-#'   detailed messages with internal information.
-#' @param dir_name (character) (default = "rbioapi") If the package needs to
+#' @param diagnostics Logical: (optional) Show diagnostics and
+#'   detailed messages with internal information. The package default is
+#'   \code{`r .rba_option_defaults[["rba_diagnostics"]]`}.
+#' @param dir_name Character: (optional) If the package needs to
 #'   generate a file path to save the server's response, a directory with this
-#'   name will be created in your working directory to save your files.
-#' @param retry_max (Numeric) (default = 0) How many times should rbioapi
+#'   name will be created in your working directory to save your files. The
+#'   package default is
+#'   \code{"`r .rba_option_defaults[["rba_dir_name"]]`"}.
+#' @param retry_max Numeric: (optional) How many times should rbioapi
 #'   retry in case of 5xx server responses, errors related to the server
-#'   or no internet connectivity?
-#' @param retry_wait (Numeric) (default = 10) Time in seconds to wait before
-#'   next retry in case of internet connection or server problems.
-#' @param progress (Logical) (default = FALSE) Should a progress bar be
-#'   displayed?
-#' @param save_file (Logical or character) (default = FALSE) Either:\itemize{
+#'   or no internet connectivity? Must be a finite non-negative whole number.
+#'   The package default is
+#'   \code{`r .rba_option_defaults[["rba_retry_max"]]`}.
+#' @param retry_wait Numeric: (optional) Time in seconds to wait before
+#'   next retry in case of internet connection or server problems. Must be
+#'   finite and non-negative. The package default is
+#'   \code{`r .rba_option_defaults[["rba_retry_wait"]]`}.
+#' @param progress Logical: (optional) Should a progress bar be
+#'   displayed? The package default is
+#'   \code{`r .rba_option_defaults[["rba_progress"]]`}.
+#' @param save_file Logical: (optional) Either:\itemize{
 #'   \item TRUE: In this case, the raw server's response file will be
 #'   automatically saved to a proper file path. use "dir_name" argument to
 #'   change the file's parent directory.
-#'   \item FALSE: (default) Do not automatically save server's response file.
+#'   \item FALSE: Do not automatically save server's response file.
 #'   \item Character: (Only when changing the option via "..." in
 #'   a functions call) A valid file path to save the server's response
-#'   file to the function that you are calling.}
-#' @param skip_error (Logical) (default = FALSE if R is in the interactive mode,
-#'   TRUE otherwise) If TRUE, the code execution  will not be stopped in case
+#'   file to the function that you are calling.} The package default is
+#'   \code{`r .rba_option_defaults[["rba_save_file"]]`}.
+#' @param skip_error Logical: (optional) If TRUE, the
+#'   code execution  will not be stopped in case
 #'   of errors (anything but HTTP status 200 from the server); Instead the
 #'   error message will be returned as the function's output. However, if FALSE,
 #'   in case of any error, the code execution will be halted and an error
-#'   message will be issued.
-#' @param timeout (Numeric) (default = 90) The maximum time in seconds that
+#'   message will be issued. The package default is \code{FALSE} in interactive
+#'   sessions and \code{TRUE} otherwise.
+#' @param timeout Numeric: (optional) The maximum time in seconds that
 #'   you are willing to wait for a server response before giving up and
-#'   stopping the function execution.
-#' @param verbose (Logical) (Default = TRUE) Generate short informative
-#'   messages.
-#' @param metadata (Logical) (default = FALSE) Save API request metadata with
+#'   stopping the function execution. Accepted values are between 0.001 and
+#'   3600, inclusive. The package default is
+#'   \code{`r .rba_option_defaults[["rba_timeout"]]`}.
+#' @param verbose Logical: (optional) Generate short informative
+#'   messages. The package default is
+#'   \code{`r .rba_option_defaults[["rba_verbose"]]`}.
+#' @param metadata Logical: (optional) Save API request metadata with
 #'   returned objects? It includes the rbioapi version and, for each request,
 #'   the timestamp, API call, original \code{httr} response, and exact parser
-#'   functions. Use \code{rba_metadata()} to get it.
+#'   functions. Use \code{rba_metadata()} to get it. The package default is
+#'   \code{`r .rba_option_defaults[["rba_metadata"]]`}.
 #'
 #' @return If called without any argument, a Data frame with available options
 #'   and their information; If Called with an argument, will Return
@@ -213,6 +227,7 @@ rba_connection_test <- function(print_output = TRUE, diagnostics = FALSE) {
 #' rba_options(metadata = FALSE)
 #' }
 #'
+#' @md
 #' @family "Helper functions"
 #' @keywords Helper
 #' @export
@@ -254,7 +269,7 @@ rba_options <- function(diagnostics = NULL,
         function(x) { as.character(getOption(x)) },
         character(1)
       ),
-      allowed_value = getOption("rba_user_options_allowed"),
+      allowed_value = .rba_user_options_allowed,
       stringsAsFactors = FALSE,
       row.names = NULL
     )
@@ -360,8 +375,8 @@ rba_options <- function(diagnostics = NULL,
 #'   \code{verbose = FALSE} and \code{progress = FALSE} are passed to the
 #'   individual rbioapi calls.
 #'
-#' @param input_call Call: A quoted call to an exported API-endpoint-facing
-#'   rbioapifunction. To request an inclusive range, set the called function's
+#' @param input_call Call: A quoted invocation of an exported API-endpoint-facing
+#'   rbioapi function. To request an inclusive range, set the called function's
 #'   named page argument to a character string of the form
 #'   \code{"pages:start:end"}. Alternatively, omit the page argument from
 #'   \code{input_call}, supply its exact name through \code{page_arg}, and
@@ -371,7 +386,7 @@ rba_options <- function(diagnostics = NULL,
 #'   the called rbioapi function that accepts the page number. Supply together
 #'   with \code{pages} when the page argument is omitted from
 #'   \code{input_call}.
-#' @param pages Numeric vector: (optional) Unique positive whole page numbers
+#' @param pages Numeric: (optional) Unique positive whole page numbers
 #'   in the order in which they should be requested. A maximum of 100 values
 #'   can be supplied. Must be supplied together with \code{page_arg}.
 #' @param sleep_time Numeric: (default = \code{2}) Number of seconds to wait
@@ -384,7 +399,7 @@ rba_options <- function(diagnostics = NULL,
 #' @param progress Logical: (default = \code{FALSE}) Display one progress bar
 #'   for the complete operation? When \code{TRUE}, verbose messages and
 #'   progress bars from individual page calls are suppressed.
-#' @param verbose Logical: (default = current \code{rba_verbose} option)
+#' @param verbose Logical: (default = \code{getOption("rba_verbose")})
 #'   Generate an informative message describing the complete operation?
 #'
 #' @return A named list containing one element per requested page. Element
@@ -679,7 +694,7 @@ rba_pages <- function(input_call,
 #' Saving the complete \code{httr} responses and parser functions can make
 #'   results and saved files much larger.
 #'
-#' @param result An object returned by an rbioapi function.
+#' @param result Any: An object returned by an rbioapi function.
 #'
 #' @return An object of class \code{rba_metadata} containing saved API request
 #'   metadata, or \code{NULL} if \code{result} has no metadata.

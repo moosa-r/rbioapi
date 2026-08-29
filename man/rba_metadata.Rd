@@ -7,7 +7,7 @@
 rba_metadata(result)
 }
 \arguments{
-\item{result}{An object returned by an rbioapi function.}
+\item{result}{Any: An object returned by an rbioapi function.}
 }
 \value{
 An object of class \code{rba_metadata} containing saved API request

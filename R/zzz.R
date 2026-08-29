@@ -14,43 +14,71 @@
 #' @keywords internal
 "_PACKAGE"
 
+#' Default expressions for rbioapi options
+#'
+#' Provides the expressions used by \code{.onLoad()} to initialize package
+#' options and by the \code{rba_options()} documentation to report their
+#' default values.
+#'
+#' @keywords internal
+#' @noRd
+.rba_option_defaults <- alist(
+  rba_diagnostics = FALSE,
+  rba_dir_name = "rbioapi",
+  rba_retry_max = 0,
+  rba_retry_wait = 10,
+  rba_progress = FALSE,
+  rba_save_file = FALSE,
+  rba_skip_error = !interactive(),
+  rba_timeout = 90,
+  rba_verbose = TRUE,
+  rba_metadata = FALSE,
+  rba_user_agent =
+    "rbioapi_R_package_<https://cran.r-project.org/package=rbioapi>"
+)
+
+#' Accepted-value descriptions for rbioapi options
+#'
+#' Provides the descriptions displayed in the \code{allowed_value} column
+#' returned by \code{rba_options()}.
+#'
+#' @keywords internal
+#' @noRd
+.rba_user_options_allowed <- c(
+  rba_diagnostics = "Logical (TRUE/FALSE)",
+  rba_dir_name = "Character",
+  rba_retry_max = "Numeric (finite non-negative whole number)",
+  rba_retry_wait = "Numeric (finite and non-negative)",
+  rba_progress = "Logical (TRUE/FALSE)",
+  rba_save_file = "Logical (TRUE/FALSE)",
+  rba_skip_error = "Logical (TRUE/FALSE)",
+  rba_timeout = "Numeric (0.001 to 3600, inclusive)",
+  rba_verbose = "Logical (TRUE/FALSE)",
+  rba_metadata = "Logical (TRUE/FALSE)"
+)
+
 .onLoad <- function(libname, pkgname) {
   options(
-    rba_timeout = 90,
-    rba_dir_name = "rbioapi",
-    rba_diagnostics = FALSE,
-    rba_retry_max = 0,
-    rba_progress = FALSE,
-    rba_save_file = FALSE,
-    rba_skip_error = !interactive(),
-    rba_user_agent = "rbioapi_R_package_<https://cran.r-project.org/package=rbioapi>",
-    rba_verbose = TRUE,
-    rba_retry_wait = 10,
-    rba_user_options = c(
-      rba_diagnostics = "diagnostics",
-      rba_dir_name = "dir_name",
-      rba_progress = "progress",
-      rba_retry_max = "retry_max",
-      rba_retry_wait = "retry_wait",
-      rba_save_file = "save_file",
-      rba_skip_error = "skip_error",
-      rba_timeout = "timeout",
-      rba_verbose = "verbose",
-      rba_metadata = "metadata"
-    ),
-    rba_user_options_allowed = c(
-      rba_diagnostics = "Logical (TRUE/FALSE)",
-      rba_dir_name = "Character",
-      rba_progress = "Logical (TRUE/FALSE)",
-      rba_retry_max = "Numeric (0 or greater)",
-      rba_retry_wait = "Numeric (0 or greater)",
-      rba_save_file = "Logical (TRUE/FALSE)",
-      rba_skip_error = "Logical (TRUE/FALSE)",
-      rba_timeout = "Numeric (0.1 or greater)",
-      rba_verbose = "Logical (TRUE/FALSE)",
-      rba_metadata = "Logical (TRUE/FALSE)"
-    ),
-    rba_metadata = FALSE
+    c(
+      # Evaluate the documented defaults when the package namespace loads.
+      lapply(
+        X = .rba_option_defaults,
+        FUN = eval,
+        envir = baseenv()
+      ),
+      # Derive the argument names used by rba_options() and .rba_ext_args().
+      list(
+        rba_user_options = stats::setNames(
+          object = sub(
+            pattern = "^rba_",
+            replacement = "",
+            x = names(x = .rba_user_options_allowed)
+          ),
+          nm = names(x = .rba_user_options_allowed)
+        )
+      )
+    )
   )
+
   invisible()
 }
