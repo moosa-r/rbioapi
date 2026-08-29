@@ -22,7 +22,8 @@ rba_options(
   save_file = NULL,
   skip_error = NULL,
   timeout = NULL,
-  verbose = NULL
+  verbose = NULL,
+  metadata = NULL
 )
 ```
 
@@ -87,6 +88,15 @@ rba_options(
 
   (Logical) (Default = TRUE) Generate short informative messages.
 
+- metadata:
+
+  (Logical) (default = FALSE) Save API request metadata with returned
+  objects? It includes the rbioapi version and, for each request, the
+  timestamp, API call, original `httr` response, and exact parser
+  functions. Use
+  [`rba_metadata()`](https://rbioapi.moosa-r.com/reference/rba_metadata.md)
+  to get it.
+
 ## Value
 
 If called without any argument, a Data frame with available options and
@@ -103,6 +113,7 @@ them.
 
 Other "Helper functions":
 [`rba_connection_test()`](https://rbioapi.moosa-r.com/reference/rba_connection_test.md),
+[`rba_metadata()`](https://rbioapi.moosa-r.com/reference/rba_metadata.md),
 [`rba_pages()`](https://rbioapi.moosa-r.com/reference/rba_pages.md)
 
 ## Examples
@@ -117,5 +128,12 @@ rba_options(save_file = TRUE)
 } # }
 if (FALSE) { # \dontrun{
 rba_options(diagnostics = TRUE, progress = TRUE)
+} # }
+if (FALSE) { # \dontrun{
+## Save metadata with all later rbioapi calls:
+rba_options(metadata = TRUE)
+
+## Turn it off again:
+rba_options(metadata = FALSE)
 } # }
 ```

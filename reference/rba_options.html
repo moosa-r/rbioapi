@@ -93,7 +93,8 @@
 <span>  save_file <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  skip_error <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  timeout <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  verbose <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  verbose <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  metadata <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -158,6 +159,13 @@ stopping the function execution.</p></dd>
 <dd><p>(Logical) (Default = TRUE) Generate short informative
 messages.</p></dd>
 
+
+<dt id="arg-metadata">metadata<a class="anchor" aria-label="anchor" href="#arg-metadata"></a></dt>
+<dd><p>(Logical) (default = FALSE) Save API request metadata with
+returned objects? It includes the rbioapi version and, for each request,
+the timestamp, API call, original <code>httr</code> response, and exact parser
+functions. Use <code><a href="rba_metadata.html">rba_metadata()</a></code> to get it.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -175,6 +183,7 @@ messages.</p></dd>
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other "Helper functions":
 <code><a href="rba_connection_test.html">rba_connection_test()</a></code>,
+<code><a href="rba_metadata.html">rba_metadata()</a></code>,
 <code><a href="rba_pages.html">rba_pages()</a></code></p></div>
     </div>
 
@@ -189,6 +198,13 @@ messages.</p></dd>
 <span><span class="op">}</span> <span class="co"># }</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span>
 <span><span class="fu">rba_options</span><span class="op">(</span>diagnostics <span class="op">=</span> <span class="cn">TRUE</span>, progress <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="op">}</span> <span class="co"># }</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span>
+<span><span class="co">## Save metadata with all later rbioapi calls:</span></span>
+<span><span class="fu">rba_options</span><span class="op">(</span>metadata <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Turn it off again:</span></span>
+<span><span class="fu">rba_options</span><span class="op">(</span>metadata <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="op">}</span> <span class="co"># }</span></span>
 <span></span></code></pre></div>
     </div>

@@ -273,5 +273,5 @@ To cite rbioapi:
     #> [13] rmarkdown_2.31    crosstalk_1.2.2   evaluate_1.0.5    jquerylib_0.1.4  
     #> [17] fastmap_1.2.0     yaml_2.3.12       lifecycle_1.0.5   compiler_4.6.1   
     #> [21] fs_2.1.0          htmlwidgets_1.6.4 systemfonts_1.3.2 digest_0.6.39    
-    #> [25] R6_2.6.1          curl_7.1.0        magrittr_2.0.5    bslib_0.12.0     
+    #> [25] R6_2.6.1          curl_8.0.0        magrittr_2.0.5    bslib_0.12.0     
     #> [29] tools_4.6.1       pkgdown_2.2.1     cachem_1.1.0      desc_1.4.3

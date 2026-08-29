@@ -71,15 +71,6 @@ mieaa_all <- rba_mieaa_enrich(
   species = 9606
 )
 #>  -- Step 1/3: Submitting Enrichment analysis request:
-#> No categories were supplied, Requesting enrichment using all of the 32 available categories for species 'Homo sapiens'.
-#> Submitting ORA enrichment request for 17 miRNA IDs of species Homo sapiens to miEAA servers.
-#> 
-#>  -- Step 2/3: Checking for Submitted enrichment analysis's status every 5 seconds.
-#>     Your submitted job ID is: bdf337a3-c338-42e3-86ba-5dbf8ed88dd7
-#> ....
-#> 
-#>  -- Step 3/3: Retrieving the results.
-#> Retrieving results of submitted enrichment request with ID: bdf337a3-c338-42e3-86ba-5dbf8ed88dd7
 
 ## 2b Limit the enrichment to selected data sets (enrichment categories)
 mieaa_kegg <- rba_mieaa_enrich(
@@ -90,15 +81,9 @@ mieaa_kegg <- rba_mieaa_enrich(
   categories = "KEGG_mature"
 )
 #>  -- Step 1/3: Submitting Enrichment analysis request:
-#> Submitting ORA enrichment request for 17 miRNA IDs of species Homo sapiens to miEAA servers.
-#> 
-#>  -- Step 2/3: Checking for Submitted enrichment analysis's status every 5 seconds.
-#>     Your submitted job ID is: 8967478d-06d9-4041-8ee4-cb41b77fe8ec
-#> .
-#> 
-#>  -- Step 3/3: Retrieving the results.
-#> Retrieving results of submitted enrichment request with ID: 8967478d-06d9-4041-8ee4-cb41b77fe8ec
 ```
+
+    #> [1] "Vignette building failed. It is probably because the web service was down during the building."
 
 ### Approach 2: Going step-by-step
 
@@ -204,11 +189,11 @@ To cite rbioapi:
     #> [1] rbioapi_0.8.3.9000
     #> 
     #> loaded via a namespace (and not attached):
-    #>  [1] httr_1.4.8        cli_3.6.6         knitr_1.51        rlang_1.3.0      
-    #>  [5] xfun_0.60         otel_0.2.0        textshaping_1.0.5 jsonlite_2.0.0   
-    #>  [9] DT_0.34.0         htmltools_0.5.9   ragg_1.5.2        sass_0.4.10      
-    #> [13] rmarkdown_2.31    crosstalk_1.2.2   evaluate_1.0.5    jquerylib_0.1.4  
-    #> [17] fastmap_1.2.0     yaml_2.3.12       lifecycle_1.0.5   compiler_4.6.1   
-    #> [21] fs_2.1.0          htmlwidgets_1.6.4 systemfonts_1.3.2 digest_0.6.39    
-    #> [25] R6_2.6.1          curl_7.1.0        magrittr_2.0.5    bslib_0.12.0     
-    #> [29] tools_4.6.1       pkgdown_2.2.1     cachem_1.1.0      desc_1.4.3
+    #>  [1] digest_0.6.39     desc_1.4.3        R6_2.6.1          fastmap_1.2.0    
+    #>  [5] xfun_0.60         cachem_1.1.0      knitr_1.51        htmltools_0.5.9  
+    #>  [9] rmarkdown_2.31    lifecycle_1.0.5   cli_3.6.6         sass_0.4.10      
+    #> [13] pkgdown_2.2.1     textshaping_1.0.5 jquerylib_0.1.4   systemfonts_1.3.2
+    #> [17] compiler_4.6.1    httr_1.4.8        tools_4.6.1       ragg_1.5.2       
+    #> [21] curl_8.0.0        bslib_0.12.0      evaluate_1.0.5    yaml_2.3.12      
+    #> [25] otel_0.2.0        jsonlite_2.0.0    rlang_1.3.0       fs_2.1.0         
+    #> [29] htmlwidgets_1.6.4

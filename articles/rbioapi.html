@@ -88,7 +88,7 @@
                         <h4 data-toc-skip class="author">Moosa
 Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2026-08-23</h4>
+            <h4 data-toc-skip class="date">2026-08-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/master/vignettes/rbioapi.Rmd" class="external-link"><code>vignettes/rbioapi.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi.Rmd</code></div>
@@ -211,9 +211,10 @@ following naming schema:</p>
 <li>rba_string_*</li>
 <li>rba_uniprot_*</li>
 </ol>
-<p>There are three exceptions: <code><a href="../reference/rba_options.html">rba_options()</a></code>,
-<code><a href="../reference/rba_connection_test.html">rba_connection_test()</a></code>, and <code><a href="../reference/rba_pages.html">rba_pages()</a></code>; these
-are helper functions. More on that later.</p>
+<p>There are four exceptions: <code><a href="../reference/rba_options.html">rba_options()</a></code>,
+<code><a href="../reference/rba_connection_test.html">rba_connection_test()</a></code>, <code><a href="../reference/rba_pages.html">rba_pages()</a></code>, and
+<code><a href="../reference/rba_metadata.html">rba_metadata()</a></code>; these are helper functions. More on that
+later.</p>
 <hr>
 </div>
 <div class="section level2">
@@ -230,16 +231,17 @@ options and their current values by calling
 <code><a href="../reference/rba_options.html">rba_options()</a></code>without any argument:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rba_options.html">rba_options</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   rbioapi_option current_value            allowed_value</span></span>
-<span><span class="co">#&gt; 1    diagnostics         FALSE     Logical (TRUE/FALSE)</span></span>
-<span><span class="co">#&gt; 2       dir_name       rbioapi                Character</span></span>
-<span><span class="co">#&gt; 3       progress         FALSE     Logical (TRUE/FALSE)</span></span>
-<span><span class="co">#&gt; 4      retry_max             0   Numeric (0 or greater)</span></span>
-<span><span class="co">#&gt; 5     retry_wait            10   Numeric (0 or greater)</span></span>
-<span><span class="co">#&gt; 6      save_file         FALSE     Logical (TRUE/FALSE)</span></span>
-<span><span class="co">#&gt; 7     skip_error          TRUE     Logical (TRUE/FALSE)</span></span>
-<span><span class="co">#&gt; 8        timeout            30 Numeric (0.1 or greater)</span></span>
-<span><span class="co">#&gt; 9        verbose          TRUE     Logical (TRUE/FALSE)</span></span></code></pre></div>
+<span><span class="co">#&gt;    rbioapi_option current_value            allowed_value</span></span>
+<span><span class="co">#&gt; 1     diagnostics         FALSE     Logical (TRUE/FALSE)</span></span>
+<span><span class="co">#&gt; 2        dir_name       rbioapi                Character</span></span>
+<span><span class="co">#&gt; 3        progress         FALSE     Logical (TRUE/FALSE)</span></span>
+<span><span class="co">#&gt; 4       retry_max             0   Numeric (0 or greater)</span></span>
+<span><span class="co">#&gt; 5      retry_wait            10   Numeric (0 or greater)</span></span>
+<span><span class="co">#&gt; 6       save_file         FALSE     Logical (TRUE/FALSE)</span></span>
+<span><span class="co">#&gt; 7      skip_error          TRUE     Logical (TRUE/FALSE)</span></span>
+<span><span class="co">#&gt; 8         timeout            30 Numeric (0.1 or greater)</span></span>
+<span><span class="co">#&gt; 9         verbose          TRUE     Logical (TRUE/FALSE)</span></span>
+<span><span class="co">#&gt; 10       metadata         FALSE     Logical (TRUE/FALSE)</span></span></code></pre></div>
 <p>Now, let us consider the ways in which we can alter the settings:</p>
 <div class="section level3">
 <h3 id="changing-the-options-change-the-option-globally">Change the option globally<a class="anchor" aria-label="anchor" href="#changing-the-options-change-the-option-globally"></a>
@@ -293,17 +295,16 @@ within that particular function call. For example:</p>
 <span>  db_id <span class="op">=</span> <span class="st">"CD40"</span>,</span>
 <span>  db_name <span class="op">=</span> <span class="st">"HGNC"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<hr>
 </div>
 </div>
 <div class="section level2">
 <h2 id="connection-test">Connection test<a class="anchor" aria-label="anchor" href="#connection-test"></a>
 </h2>
-<p>The second exception in functions’ naming schema is
-<code><a href="../reference/rba_connection_test.html">rba_connection_test()</a></code>. Run this simple function to check
-your connection with the supported services/databases. If you encounter
-errors when using rbioapi, kindly run this function to make sure that
-your internet connection or the servers are fine.</p>
+<p>The <code><a href="../reference/rba_connection_test.html">rba_connection_test()</a></code> helper checks your internet
+connection and whether supported services and databases are available.
+If you encounter an error while using rbioapi, run this function to
+check your internet connection and the availability of supported
+services.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rba_connection_test.html">rba_connection_test</a></span><span class="op">(</span>print_output <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Checking Your connection to the Databases currently supported by rbioapi:</span></span>
@@ -316,7 +317,10 @@ your internet connection or the servers are fine.</p>
 <span><span class="co">#&gt; ---&gt;&gt;&gt; JASPAR :</span></span>
 <span><span class="co">#&gt; +++ The server is responding.</span></span>
 <span><span class="co">#&gt; ---&gt;&gt;&gt; miEAA :</span></span>
-<span><span class="co">#&gt; +++ The server is responding.</span></span>
+<span><span class="co">#&gt; !!! failed with error:</span></span>
+<span><span class="co">#&gt;  Error in curl::curl_fetch_memory(url, handle = handle) : </span></span>
+<span><span class="co">#&gt;   Timeout was reached [ccb-compute2.cs.uni-saarland.de]:</span></span>
+<span><span class="co">#&gt; SSL connection timeout</span></span>
 <span><span class="co">#&gt; ---&gt;&gt;&gt; PANTHER :</span></span>
 <span><span class="co">#&gt; +++ The server is responding.</span></span>
 <span><span class="co">#&gt; ---&gt;&gt;&gt; Reactome Content Service :</span></span>
@@ -408,6 +412,40 @@ numbers that does not necessarily form a contiguous range:</p>
 <span>  page_arg <span class="op">=</span> <span class="st">"page_number"</span>,</span>
 <span>  pages <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="api-request-metadata">Saving API request metadata<a class="anchor" aria-label="anchor" href="#api-request-metadata"></a>
+</h2>
+<p>rbioapi can store information about the API requests used to create a
+result as an attribute of the returned object. Metadata collection is
+off by default. Set <code>metadata = TRUE</code> for one call, then use
+<code><a href="../reference/rba_metadata.html">rba_metadata()</a></code> to get it:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Save metadata with one result:</span></span>
+<span><span class="va">species</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_reactome_species.html">rba_reactome_species</a></span><span class="op">(</span>metadata <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Get and print it:</span></span>
+<span><span class="va">request_metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rba_metadata.html">rba_metadata</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span></span>
+<span><span class="va">request_metadata</span></span></code></pre></div>
+<p>The returned <code>rba_metadata</code> object prints a short summary
+and can be used like a regular list:</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## The rbioapi version used to create the result:</span></span>
+<span><span class="va">request_metadata</span><span class="op">$</span><span class="va">rbioapi_version</span></span>
+<span></span>
+<span><span class="co">## Requests are listed in the order they were made. Functions that use several</span></span>
+<span><span class="co">## requests to create one result combine their entries. Each result returned by</span></span>
+<span><span class="co">## rba_pages() keeps its own metadata. Retry attempts that received an HTTP</span></span>
+<span><span class="co">## response are also included. Each entry contains its timestamp, API call,</span></span>
+<span><span class="co">## original httr response, and exact parser functions:</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">request_metadata</span><span class="op">$</span><span class="va">requests</span>, max.level <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<p>To save metadata with all later rbioapi calls, use
+<code>rba_options(metadata = TRUE)</code>. Turn it off again with
+<code>rba_options(metadata = FALSE)</code>. For a result without
+metadata, <code><a href="../reference/rba_metadata.html">rba_metadata()</a></code> returns <code>NULL</code>.</p>
+<p>Saving the complete <code>httr</code> responses and parser functions
+can make results and saved files much larger.</p>
 <hr>
 </div>
 <div class="section level2">
@@ -551,7 +589,7 @@ site</a></p></li>
 <span><span class="co">#&gt;  [9] rmarkdown_2.31    lifecycle_1.0.5   cli_3.6.6         sass_0.4.10      </span></span>
 <span><span class="co">#&gt; [13] pkgdown_2.2.1     textshaping_1.0.5 jquerylib_0.1.4   systemfonts_1.3.2</span></span>
 <span><span class="co">#&gt; [17] compiler_4.6.1    httr_1.4.8        tools_4.6.1       ragg_1.5.2       </span></span>
-<span><span class="co">#&gt; [21] curl_7.1.0        bslib_0.12.0      evaluate_1.0.5    yaml_2.3.12      </span></span>
+<span><span class="co">#&gt; [21] curl_8.0.0        bslib_0.12.0      evaluate_1.0.5    yaml_2.3.12      </span></span>
 <span><span class="co">#&gt; [25] otel_0.2.0        jsonlite_2.0.0    rlang_1.3.0       fs_2.1.0         </span></span>
 <span><span class="co">#&gt; [29] htmlwidgets_1.6.4</span></span></code></pre>
 </div>

@@ -39,6 +39,7 @@ request.
 ## See also
 
 Other "Helper functions":
+[`rba_metadata()`](https://rbioapi.moosa-r.com/reference/rba_metadata.md),
 [`rba_options()`](https://rbioapi.moosa-r.com/reference/rba_options.md),
 [`rba_pages()`](https://rbioapi.moosa-r.com/reference/rba_pages.md)
 

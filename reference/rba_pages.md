@@ -96,6 +96,7 @@ to the individual rbioapi calls.
 
 Other "Helper functions":
 [`rba_connection_test()`](https://rbioapi.moosa-r.com/reference/rba_connection_test.md),
+[`rba_metadata()`](https://rbioapi.moosa-r.com/reference/rba_metadata.md),
 [`rba_options()`](https://rbioapi.moosa-r.com/reference/rba_options.md)
 
 ## Examples
