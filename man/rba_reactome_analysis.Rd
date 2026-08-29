@@ -21,7 +21,7 @@ rba_reactome_analysis(
 )
 }
 \arguments{
-\item{input}{Character or Numeric vector, Data frame, or Matrix: A vector,
+\item{input}{Character, Numeric, Data frame or Matrix: A vector,
 data frame, matrix or a local file path or URL that points to your data.
 See "Details section" for more information of how to organize and supply
 your input.}

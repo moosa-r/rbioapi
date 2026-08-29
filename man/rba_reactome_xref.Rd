@@ -14,7 +14,7 @@ rba_reactome_xref(
 )
 }
 \arguments{
-\item{xref_id}{Character or Numeric vector: One or more cross-reference
+\item{xref_id}{Character or Numeric: One or more cross-reference
 identifiers from external databases. Multiple identifiers can only be
 supplied when \code{expanded = TRUE}.}
 

@@ -7,17 +7,17 @@
 rba_string_map_ids(ids, species = NULL, echo_query = TRUE, limit = NULL, ...)
 }
 \arguments{
-\item{ids}{Your common gene/protein identifier(s) to be mapped.}
+\item{ids}{Character or Numeric: Your common gene/protein identifier(s) to be mapped.}
 
-\item{species}{Numeric:
+\item{species}{Numeric: (optional)
 \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
 (Recommended, but optional.)}
 
-\item{echo_query}{(default = \code{TRUE}) Include your input IDs as a column of the
+\item{echo_query}{Logical: (default = \code{TRUE}) Include your input IDs as a column of the
 results.}
 
-\item{limit}{Deprecated: Retained temporarily for backward compatibility.
+\item{limit}{Numeric: (optional) Deprecated: Retained temporarily for backward compatibility.
 STRING v12 returns only the single best match per input ID, so this
 argument has no effect.}
 

@@ -7,16 +7,16 @@
 rba_string_homology_inter(ids, species = NULL, species_b = NULL, ...)
 }
 \arguments{
-\item{ids}{Your protein ID(s). It is strongly recommended to supply
+\item{ids}{Character or Numeric: Your protein ID(s). It is strongly recommended to supply
 STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
 
-\item{species}{Numeric:
+\item{species}{Numeric: (optional)
 \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 NCBI Taxonomy identifier} of your input proteins; Human Taxonomy ID is
 9606. (Recommended, but required if your input contains more than 10
 unique IDs.)}
 
-\item{species_b}{Numeric: One or more
+\item{species_b}{Numeric: (optional) One or more
 \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 NCBI Taxonomy identifiers} used to restrict the search for closest
 homologs. The default is \code{NULL}, which searches all STRING species.}

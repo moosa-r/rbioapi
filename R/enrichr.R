@@ -115,11 +115,11 @@
 #' @section Corresponding API Resources:
 #'  "GET https://maayanlab.cloud/Enrichr/datasetStatistics"
 #'
-#' @param organism (default = "human") Which model organism version of Enrichr
+#' @param organism Character: (default = \code{"human"}) Which model organism version of Enrichr
 #'   to use? Available options are: "human", (H. sapiens & M. musculus),
 #'   "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
 #'   and "fish" (D. rerio).
-#' @param store_in_options logical: (default = TRUE) Should a list of available
+#' @param store_in_options Logical: (default = \code{TRUE}) Should a list of available
 #' Enrichr libraries be saved as a global option?
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
@@ -231,11 +231,11 @@ rba_enrichr_libs <- function(organism = "human",
 #'  will be included in the automatically-generated file name. If a term is
 #'  supplied, its name will also be included.
 #'
-#' @param gene_set_library A valid gene-set library name which exists
+#' @param gene_set_library Character: A valid gene-set library name which exists
 #'   in the results retrieved via \code{\link{rba_enrichr_libs}}.
-#' @param term (optional) An exact Enrichr term name. If left NULL, all gene
+#' @param term Character: (optional) An exact Enrichr term name. If left NULL, all gene
 #'   sets in the supplied library will be returned.
-#' @param organism (default = "human") Which model organism version of Enrichr
+#' @param organism Character: (default = \code{"human"}) Which model organism version of Enrichr
 #'   to use? Available options are: "human", (H. sapiens & M. musculus),
 #'   "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
 #'   and "fish" (D. rerio).
@@ -475,14 +475,14 @@ rba_enrichr_gene_sets <- function(gene_set_library,
 #'  "POST https://maayanlab.cloud/Enrichr/addList"
 #'  \cr "POST https://maayanlab.cloud/speedrichr/api/addList"
 #'
-#' @param gene_list A character vector with Entrez gene symbols of test genes.
-#' @param description (optional) A description to be associated with your
+#' @param gene_list Character: A vector with Entrez gene symbols of test genes.
+#' @param description Character: (optional) A description to be associated with your
 #'   uploaded gene-set to Enrichr servers.
-#' @param organism (default = "human") Which model organism version of Enrichr
+#' @param organism Character: (default = \code{"human"}) Which model organism version of Enrichr
 #'   to use? Available options are: "human", (H. sapiens & M. musculus),
 #'   "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
 #'   and "fish" (D. rerio).
-#' @param speedrichr logical (default = FALSE) Set to TRUE if you will use this
+#' @param speedrichr Logical: (default = \code{FALSE}) Set to TRUE if you will use this
 #'   gene list with a background list; otherwise, set to FALSE. Only available
 #'   for human libraries. Refer to the details section for more information.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -604,13 +604,13 @@ rba_enrichr_add_list <- function(gene_list,
 #'  "GET https://maayanlab.cloud/Enrichr/view"
 #'  \cr "GET https://maayanlab.cloud/speedrichr/api/view"
 #
-#' @param user_list_id a user list ID returned after uploading a gene
+#' @param user_list_id Numeric: a user list ID returned after uploading a gene
 #'   list using \code{\link{rba_enrichr_add_list}}
-#' @param organism (default = "human") Which model organism version of Enrichr
+#' @param organism Character: (default = \code{"human"}) Which model organism version of Enrichr
 #'   to use? Available options are: "human", (H. sapiens & M. musculus),
 #'   "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
 #'   and "fish" (D. rerio).
-#' @param speedrichr logical (default = FALSE) Did you upload your gene list
+#' @param speedrichr Logical: (default = \code{FALSE}) Did you upload your gene list
 #'   to speedrichr API? (i.e. did you intend to use this gene list along with
 #'   a background gene list?)
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -716,7 +716,7 @@ rba_enrichr_view_list <- function(user_list_id,
 #' @section Corresponding API Resources:
 #'  "POST https://maayanlab.cloud/speedrichr/api/addbackground"
 #'
-#' @param background_genes A character vector of Entrez gene symbols of the
+#' @param background_genes Character: A vector of Entrez gene symbols of the
 #'   background genes.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
@@ -1018,13 +1018,13 @@ rba_enrichr_add_background <- function(background_genes,
 #'  "GET https://maayanlab.cloud/Enrichr/export"
 #'  \cr "POST https://maayanlab.cloud/speedrichr/api/backgroundenrich"
 #'
-#' @param user_list_id An ID returned after uploading a gene list
+#' @param user_list_id Numeric: An ID returned after uploading a gene list
 #'   using \code{\link{rba_enrichr_add_list}}, with the `speedrichr` set to
 #'   TRUE or FALSE depending on whether you intend to analyze this gene list
 #'   with or without a background gene list, respectively.
-#' @param background_id An ID returned after uploading a background gene
+#' @param background_id Character: (optional) An ID returned after uploading a background gene
 #'   list using \code{\link{rba_enrichr_add_background}}
-#' @param gene_set_library One of the:
+#' @param gene_set_library Character: (default = \code{"all"}) One of the:
 #'   \enumerate{
 #'   \item "all" to select all of the available Enrichr gene-set libraries.
 #'   \item A gene-set library name. You can retrieve the available options
@@ -1032,15 +1032,15 @@ rba_enrichr_add_background <- function(background_genes,
 #'   \item If regex_library_name = TRUE, A partially-matching name a regex
 #'   pattern that correspond to one or more of Enrichr library names.
 #'   }
-#' @param regex_library_name logical: (default = FALSE) if TRUE the supplied
+#' @param regex_library_name Logical: (default = \code{FALSE}) if TRUE the supplied
 #'   gene_set_library will be considered as a regex pattern.
 #'   If FALSE, gene_set_library will be considered as an exact match.
-#' @param organism (default = "human") Which model organism version of Enrichr
+#' @param organism Character: (default = \code{"human"}) Which model organism version of Enrichr
 #'   to use? Available options are: "human", (H. sapiens & M. musculus),
 #'   "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
 #'   and "fish" (D. rerio). If `background_id` is provided, the only available
 #'   option is "human".
-#' @param progress_bar logical: (default = TRUE) if multiple Enrichr libraries
+#' @param progress_bar Logical: (default = \code{TRUE}) if multiple Enrichr libraries
 #'   are selected, should a progress bar be displayed?
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
@@ -1256,9 +1256,9 @@ rba_enrichr_enrich <- function(user_list_id,
 #' @section Corresponding API Resources:
 #'  "GET https://maayanlab.cloud/Enrichr/genemap"
 #'
-#' @param gene character: An Entrez gene symbol.
-#' @param categorize logical: Should the category information be included?
-#' @param organism (default = "human") Which model organism version of Enrichr
+#' @param gene Character: An Entrez gene symbol.
+#' @param categorize Logical: (default = \code{FALSE}) Should the category information be included?
+#' @param organism Character: (default = \code{"human"}) Which model organism version of Enrichr
 #'   to use? Available options are: "human", (H. sapiens & M. musculus),
 #'   "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
 #'   and "fish" (D. rerio).

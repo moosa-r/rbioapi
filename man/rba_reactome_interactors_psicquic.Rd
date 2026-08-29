@@ -12,7 +12,7 @@ rba_reactome_interactors_psicquic(
 )
 }
 \arguments{
-\item{proteins}{Character or Numeric vector: (optional) Proteins to retrieve
+\item{proteins}{Character or Numeric: (optional) Proteins to retrieve
 PSICQUIC interactors.}
 
 \item{resource}{Character: (optional) The PSICQUIC resource for your supplied

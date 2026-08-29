@@ -16,29 +16,29 @@ rba_jaspar_tffm_search(
 )
 }
 \arguments{
-\item{term}{Character: A search term.}
+\item{term}{Character: (optional) A search term.}
 
-\item{release}{Numeric: (default = 2026) Which JASPAR database release
+\item{release}{Numeric: (default = \code{2026}) Which JASPAR database release
 to use? Available options are: 2026, 2024, 2022, 2020, 2018, 2016,
 and 2014.}
 
-\item{tax_group}{Character: Taxonomic group. Use
+\item{tax_group}{Character: (optional) Taxonomic group. Use
 \code{\link{rba_jaspar_taxons}} to get a list of supported taxonomic
 groups.}
 
-\item{search}{Character: An alias for \code{term}. If both are supplied,
+\item{search}{Character: (optional) An alias for \code{term}. If both are supplied,
 they must be identical.}
 
-\item{order}{Character: A character string or a vector of character strings
-of field names that will be used to order the results.
+\item{order}{Character: (optional) A field name or a vector of field names
+that will be used to order the results.
 \cr Providing multiple field names is supported. You can also use the prefix
 "-" before a field name to indicate reverse ordering.}
 
-\item{page_size}{Numeric: (default = 1000) This resource returns paginated
+\item{page_size}{Numeric: (default = \code{1000}) This resource returns paginated
 results. What is the maximum number of results that you want to retrieve
 per page? Accepted values are between 1 and 1000.}
 
-\item{page}{Numeric: Which page of the results to retrieve? The accepted
+\item{page}{Numeric: (default = \code{1}) Which page of the results to retrieve? The accepted
 values depend on the page size and number of results.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s

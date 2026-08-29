@@ -12,15 +12,15 @@ rba_enrichr_view_list(
 )
 }
 \arguments{
-\item{user_list_id}{a user list ID returned after uploading a gene
+\item{user_list_id}{Numeric: a user list ID returned after uploading a gene
 list using \code{\link{rba_enrichr_add_list}}}
 
-\item{organism}{(default = "human") Which model organism version of Enrichr
+\item{organism}{Character: (default = \code{"human"}) Which model organism version of Enrichr
 to use? Available options are: "human", (H. sapiens & M. musculus),
 "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
 and "fish" (D. rerio).}
 
-\item{speedrichr}{logical (default = FALSE) Did you upload your gene list
+\item{speedrichr}{Logical: (default = \code{FALSE}) Did you upload your gene list
 to speedrichr API? (i.e. did you intend to use this gene list along with
 a background gene list?)}
 

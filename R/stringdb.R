@@ -9,14 +9,14 @@
 #'  "POST https://string-db.org/api/tsv/get_string_ids?identifiers=
 #'  \{your_identifiers\}&\{optional_parameters\}"
 #'
-#' @param ids Your common gene/protein identifier(s) to be mapped.
-#' @param species Numeric:
+#' @param ids Character or Numeric: Your common gene/protein identifier(s) to be mapped.
+#' @param species Numeric: (optional)
 #'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 #'   NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
 #'   (Recommended, but optional.)
-#' @param echo_query (default = \code{TRUE}) Include your input IDs as a column of the
+#' @param echo_query Logical: (default = \code{TRUE}) Include your input IDs as a column of the
 #'   results.
-#' @param limit Deprecated: Retained temporarily for backward compatibility.
+#' @param limit Numeric: (optional) Deprecated: Retained temporarily for backward compatibility.
 #'   STRING v12 returns only the single best match per input ID, so this
 #'   argument has no effect.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -145,44 +145,44 @@ rba_string_map_ids <- function(ids,
 #'  \cr "POST https://string-db.org/api/\{output-format\}/network?network_term_id=
 #'  \{your_term\}&\{optional_parameters\}"
 #'
-#' @param ids Your protein ID(s). It is strongly recommended to supply
+#' @param ids Character or Numeric: Your protein ID(s). It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
 #'   \cr Alternatively, you can retrieve the network of proteins annotated with
 #'   a STRING functional term by setting \code{ids = NULL} and supplying
 #'   \code{network_term_id}.
-#' @param network_term_id Character: A functional term identifier (e.g. a Gene
+#' @param network_term_id Character: (optional) A functional term identifier (e.g. a Gene
 #'   Ontology, KEGG, or Reactome identifier). Instead of using proteins supplied
 #'   through \code{ids}, STRING constructs the network from proteins annotated
 #'   with the specified term. Set \code{ids = NULL} and supply \code{species}.
-#' @param species Numeric:
+#' @param species Numeric: (optional)
 #'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 #'   NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
 #'   Required when using \code{network_term_id}; otherwise recommended, but
 #'   required if your input contains more than 10 unique IDs.
-#' @param image_format Character: One of:\itemize{
+#' @param image_format Character: (default = \code{"image"}) One of:\itemize{
 #'   \item "image": PNG image with normal resolution.
 #'   \item "highres_image": High-resolution PNG image.
 #'   \item "svg": Scalable Vector Graphics image.}
-#' @param save_image Logical or Character:\itemize{
+#' @param save_image Logical or Character: (default = \code{TRUE}) \itemize{
 #'   \item TRUE: Save the image to an automatically-generated path.
 #'   \item FALSE: Do not save the image, just return it as an R object.
 #'   \item Character string: A valid file path to save the image to.}
-#' @param add_color_nodes Numeric: The number of colored nodes (queried proteins
+#' @param add_color_nodes Numeric: (optional) The number of colored nodes (queried proteins
 #'   and first shell of interactors) to be added.
-#' @param add_white_nodes Numeric: The number of white nodes (second shell of
+#' @param add_white_nodes Numeric: (optional) The number of white nodes (second shell of
 #'   interactors) to be added after colored nodes.
-#' @param required_score Numeric (between 0 and 1000): Minimum interaction
+#' @param required_score Numeric: (optional) (between 0 and 1000): Minimum interaction
 #'   score required for an interaction to be included in the image. If omitted,
 #'   STRING applies a network-dependent threshold. Common
 #'   confidence thresholds are 150 (low), 400 (medium), 700 (high), and 900
 #'   (highest).
-#' @param network_flavor Character: The network-edge style. One of:\itemize{
+#' @param network_flavor Character: (default = \code{"evidence"}) The network-edge style. One of:\itemize{
 #'   \item "evidence": (default) Edge colors indicate the types of evidence
 #'   supporting each interaction.
 #'   \item "confidence": Edge thickness indicates the interaction confidence
 #'   score.
 #'   \item "actions": Edge shape indicates the predicted mode of action.}
-#' @param network_type Character: One of:\itemize{
+#' @param network_type Character: (default = \code{"functional"}) One of:\itemize{
 #'   \item "functional": (default) Edges indicate both physical and
 #'   functional associations.
 #'   \item "physical": Edges indicate that two proteins have a physical
@@ -199,7 +199,7 @@ rba_string_map_ids <- function(ids,
 #'   instead of the default 3D design.
 #' @param node_labels_center Logical: (default = \code{FALSE}) Center protein labels
 #'   on the nodes.
-#' @param node_labels_font_size Numeric (between 5 and 50; default = 12):
+#' @param node_labels_font_size Numeric: (default = \code{12}) (between 5 and 50; default = 12):
 #'   Font size of the protein node labels.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
@@ -464,33 +464,33 @@ rba_string_network_image <- function(ids,
 #'  \cr "POST https://string-db.org/api/\{output-format\}/network?network_term_id=
 #'  \{your_term\}&\{optional_parameters\}"
 #'
-#' @param ids Your protein IDs. It is strongly recommended to supply
+#' @param ids Character or Numeric: Your protein IDs. It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
 #'   \cr Alternatively, you can retrieve interactions among proteins annotated
 #'   with a STRING functional term by setting \code{ids = NULL} and supplying
 #'   \code{network_term_id}.
-#' @param network_term_id Character: A functional term identifier (e.g. a Gene
+#' @param network_term_id Character: (optional) A functional term identifier (e.g. a Gene
 #'   Ontology, KEGG, or Reactome identifier). Instead of using proteins supplied
 #'   through \code{ids}, STRING constructs the network from proteins annotated
 #'   with the specified term. Set \code{ids = NULL} and supply \code{species}.
-#' @param species Numeric:
+#' @param species Numeric: (optional)
 #'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 #'   NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
 #'   Required when using \code{network_term_id}; otherwise recommended, but
 #'   required if your input contains more than 10 unique IDs.
-#' @param required_score Numeric (between 0 and 1000): Minimum interaction
+#' @param required_score Numeric: (optional) (between 0 and 1000): Minimum interaction
 #'   score required for an interaction to be included in the returned network.
 #'   If omitted, STRING applies a network-dependent threshold. Common
 #'   confidence thresholds are 150 (low), 400 (medium), 700 (high), and 900
 #'   (highest).
-#' @param add_nodes Numeric: Number of neighboring proteins to add to the
+#' @param add_nodes Numeric: (optional) Number of neighboring proteins to add to the
 #'   network. For identifier-based requests, if omitted, STRING determines the
 #'   value from the number of input IDs:\enumerate{
 #'   \item One ID: STRING adds 10 proteins to retrieve its interaction
 #'   neighborhood.
 #'   \item Multiple IDs: STRING adds no proteins, so only interactions among the
 #'   input proteins are returned.}
-#' @param network_type Character: One of:\itemize{
+#' @param network_type Character: (default = \code{"functional"}) One of:\itemize{
 #'   \item "functional": (default) Edges indicate both physical and
 #'   functional associations.
 #'   \item "physical": Edges indicate that two proteins have a physical
@@ -702,23 +702,23 @@ rba_string_interactions_network <- function(ids,
 #'  "POST https://string-db.org/api/\{output-format\}/interaction_partners?
 #'  identifiers=\{your_identifiers\}&\{optional_parameters\}"
 #'
-#' @param ids Your protein ID(s). It is strongly recommended to supply
+#' @param ids Character or Numeric: Your protein ID(s). It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
-#' @param species Numeric:
+#' @param species Numeric: (optional)
 #'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 #'   NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
 #'   (Recommended, but required if your input contains more than 10 unique IDs.)
-#' @param required_score Numeric (between 0 and 1000): Minimum interaction
+#' @param required_score Numeric: (optional) (between 0 and 1000): Minimum interaction
 #'   score required for an interaction to be included in the returned
 #'   interactions. If omitted, STRING applies a network-dependent threshold.
 #'   Common confidence thresholds are 150 (low), 400 (medium), 700 (high), and
 #'   900 (highest).
-#' @param network_type Character: One of:\itemize{
+#' @param network_type Character: (default = \code{"functional"}) One of:\itemize{
 #'   \item "functional": (default) Edges indicate both physical and
 #'   functional associations.
 #'   \item "physical": Edges indicate that two proteins have a physical
 #'   interaction or are parts of a complex.}
-#' @param limit Numeric: Maximum number of interaction partners returned for
+#' @param limit Numeric: (optional) Maximum number of interaction partners returned for
 #'   each input protein, ordered by confidence.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
@@ -863,9 +863,9 @@ rba_string_interaction_partners <- function(ids,
 #'  "POST https://string-db.org/api/\{output-format\}/homology?identifiers=
 #'  \{your_identifiers\}&\{optional_parameters\}"
 #'
-#' @param ids Your protein ID(s). It is strongly recommended to supply
+#' @param ids Character or Numeric: Your protein ID(s). It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
-#' @param species Numeric:
+#' @param species Numeric: (optional)
 #'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 #'   NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
 #'   (Recommended, but required if your input contains more than 10 unique IDs.)
@@ -976,14 +976,14 @@ rba_string_homology_intra <- function(ids,
 #'  "POST https://string-db.org/api/\{output-format\}/homology_best?
 #'  identifiers=\{your_identifiers\}&\{optional_parameters\}"
 #'
-#' @param ids Your protein ID(s). It is strongly recommended to supply
+#' @param ids Character or Numeric: Your protein ID(s). It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
-#' @param species Numeric:
+#' @param species Numeric: (optional)
 #'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 #'   NCBI Taxonomy identifier} of your input proteins; Human Taxonomy ID is
 #'   9606. (Recommended, but required if your input contains more than 10
 #'   unique IDs.)
-#' @param species_b Numeric: One or more
+#' @param species_b Numeric: (optional) One or more
 #'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 #'   NCBI Taxonomy identifiers} used to restrict the search for closest
 #'   homologs. The default is \code{NULL}, which searches all STRING species.
@@ -1109,15 +1109,15 @@ rba_string_homology_inter <- function(ids,
 #'  "POST https://string-db.org/api/\{output-format\}/enrichment?identifiers=
 #'  \{your_identifiers\}&\{optional_parameters\}"
 #'
-#' @param ids Your protein ID(s). It is strongly recommended to supply
+#' @param ids Character or Numeric: Your protein ID(s). It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
 #'   Note that if only one ID is supplied, STRING expands the network by 10
 #'   proteins.
-#' @param species Numeric:
+#' @param species Numeric: (optional)
 #'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 #'   NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
 #'   (Recommended, but optional.)
-#' @param background Character vector: A set of STRING protein IDs
+#' @param background Character: (optional) A set of STRING protein IDs
 #'   to be used as the statistical background (or universe) when computing
 #'   term p-values. Only STRING IDs are accepted. See
 #'   \code{\link{rba_string_map_ids}} to map your IDs.
@@ -1242,19 +1242,19 @@ rba_string_enrichment <- function(ids,
 #'  "POST https://string-db.org/api/\{output-format\}/functional_annotation?
 #'  identifiers=\{your_identifiers\}&\{optional_parameters\}"
 #'
-#' @param ids Your protein ID(s). It is strongly recommended to supply
+#' @param ids Character or Numeric: Your protein ID(s). It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
-#' @param species Numeric:
+#' @param species Numeric: (optional)
 #'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 #'   NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
 #'   (Recommended, but optional.)
-#' @param allow_pubmed Logical (default = \code{FALSE}): Include PubMed
+#' @param allow_pubmed Logical: (default = \code{FALSE}) Include PubMed
 #'   annotations. These annotations are excluded by default because many
 #'   publications may be assigned to each protein. This argument is ignored
 #'   when \code{only_pubmed = TRUE}.
 #' @param split_df Logical: (default = \code{TRUE}) Split results into a list
 #'   of data frames by \code{category}; otherwise, return one data frame.
-#' @param only_pubmed Logical (default = \code{FALSE}): Return only PubMed
+#' @param only_pubmed Logical: (default = \code{FALSE}) Return only PubMed
 #'   annotations. This takes precedence over \code{allow_pubmed}.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
@@ -1492,18 +1492,18 @@ rba_string_functional_terms <- function(term_text,
 #'  "POST https://string-db.org/api/\{output-format\}/ppi_enrichment?identifiers=
 #'  \{your_identifiers\}&\{optional_parameters\}"
 #'
-#' @param ids Your protein ID(s). It is strongly recommended to supply
+#' @param ids Character or Numeric: Your protein ID(s). It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
-#' @param species Numeric:
+#' @param species Numeric: (optional)
 #'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 #'   NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
 #'   (Recommended, but required if your input contains more than 10 unique IDs.)
-#' @param required_score Numeric (between 0 and 1000): Minimum interaction
+#' @param required_score Numeric: (optional) (between 0 and 1000): Minimum interaction
 #'   score used when calculating PPI enrichment. If omitted, STRING applies a
 #'   network-dependent threshold. Common
 #'   confidence thresholds are 150 (low), 400 (medium), 700 (high), and 900
 #'   (highest).
-#' @param background Character vector: A set of STRING protein IDs
+#' @param background Character: (optional) A set of STRING protein IDs
 #'   to be used as the background proteome. Only STRING IDs are acceptable.
 #'   See \code{\link{rba_string_map_ids}} to map your IDs.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -1712,38 +1712,38 @@ rba_string_version <- function(...) {
 #'  "POST https://string-db.org/api/\{output-format\}/enrichmentfigure?
 #'  identifiers=\{your_identifiers\}&\{optional_parameters\}"
 #'
-#' @param ids Your protein ID(s). It is strongly recommended to supply
+#' @param ids Character or Numeric: Your protein ID(s). It is strongly recommended to supply
 #'   STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
 #'   If only one ID is supplied, STRING expands the network by 10
 #'   proteins.
-#' @param species Numeric:
+#' @param species Numeric: (optional)
 #'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 #'   NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
 #'   (Recommended, but required if your input contains more than 10 unique IDs.)
-#' @param category Character: The term set to use for enrichment analysis.
+#' @param category Character: (default = \code{"Process"}) The term set to use for enrichment analysis.
 #'   Valid values are:
 #'   "Process" (default), "Function", "Component", "Keyword", "KEGG", "RCTM",
 #'   "HPO", "MPO", "DPO", "WPO", "ZPO", "FYPO", "Pfam", "SMART", "InterPro",
 #'   "PMID", "NetworkNeighborAL", "COMPARTMENTS", "TISSUES", "DISEASES", or
 #'   "WikiPathways". See Details for descriptions.
-#' @param image_format Character: One of:\itemize{
+#' @param image_format Character: (default = \code{"image"}) One of:\itemize{
 #'   \item "image": PNG image with normal resolution.
 #'   \item "highres_image": High-resolution PNG image.
 #'   \item "svg": Scalable Vector Graphics image.}
-#' @param save_image Logical or Character:\itemize{
+#' @param save_image Logical or Character: (default = \code{TRUE}) \itemize{
 #'   \item TRUE: Save the image to an automatically-generated path.
 #'   \item FALSE: Do not save the image, just return it as an R object.
 #'   \item Character string: A valid file path to save the image to.}
-#' @param group_by_similarity Numeric: Jaccard-index threshold used to group
+#' @param group_by_similarity Numeric: (optional) Jaccard-index threshold used to group
 #'   related terms visually. Valid values range from 0.1 to 1 in increments of
 #'   0.1. The default is \code{NULL}, which disables grouping.
-#' @param color_palette Character: Color palette used to represent FDR values.
+#' @param color_palette Character: (default = \code{"mint_blue"}) Color palette used to represent FDR values.
 #'   Valid values are
 #'   "mint_blue" (default), "lime_emerald", "green_blue", "peach_purple",
 #'   "straw_navy", or "yellow_pink".
-#' @param number_of_term_shown Numeric: (default = 10) Maximum number of terms
+#' @param number_of_term_shown Numeric: (default = \code{10}) Maximum number of terms
 #'   to include in the plot.
-#' @param x_axis Character: Variable displayed on the x-axis and used to rank
+#' @param x_axis Character: (default = \code{"signal"}) Variable displayed on the x-axis and used to rank
 #'   the results. Valid values are "signal" (default), "strength", "FDR", and
 #'   "gene_count".
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s

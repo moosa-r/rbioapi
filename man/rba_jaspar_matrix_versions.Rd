@@ -10,8 +10,8 @@ rba_jaspar_matrix_versions(base_id, order = NULL, ...)
 \item{base_id}{Character: A base (stable) identifier. A matrix profile
 identifier follows a "base_id.version" naming scheme.}
 
-\item{order}{Character: A character string or a vector of character strings
-of field names that will be used to order the results.
+\item{order}{Character: (optional) A field name or a vector of field names
+that will be used to order the results.
 \cr Providing multiple field names is supported. You can also use the prefix
 "-" before a field name to indicate reverse ordering.}
 

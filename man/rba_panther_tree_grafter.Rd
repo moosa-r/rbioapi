@@ -7,10 +7,10 @@
 rba_panther_tree_grafter(protein_seq, target_organisms = NULL, ...)
 }
 \arguments{
-\item{protein_seq}{A character string with the protein's sequence. Maximum
+\item{protein_seq}{Character: A string with the protein's sequence. Maximum
 allowed sequence length is 50,000 characters.}
 
-\item{target_organisms}{(numeric) NCBI taxon ID(s) to filter the results.
+\item{target_organisms}{Numeric: (optional) NCBI taxon ID(s) to filter the results.
 run \code{\link{rba_panther_info}} with argument 'what = "organisms"' to
 get a list of PANTHER's supported organisms.}
 

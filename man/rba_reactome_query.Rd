@@ -16,7 +16,7 @@ rba_reactome_query(
 )
 }
 \arguments{
-\item{ids}{Character or Numeric vector: One or more database identifiers
+\item{ids}{Character or Numeric: One or more database identifiers
 (DbIds), stable identifiers (StIds), or a mixture of both. At most 20
 identifiers can be supplied.}
 

@@ -13,17 +13,17 @@ rba_string_enrichment(
 )
 }
 \arguments{
-\item{ids}{Your protein ID(s). It is strongly recommended to supply
+\item{ids}{Character or Numeric: Your protein ID(s). It is strongly recommended to supply
 STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
 Note that if only one ID is supplied, STRING expands the network by 10
 proteins.}
 
-\item{species}{Numeric:
+\item{species}{Numeric: (optional)
 \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
 (Recommended, but optional.)}
 
-\item{background}{Character vector: A set of STRING protein IDs
+\item{background}{Character: (optional) A set of STRING protein IDs
 to be used as the statistical background (or universe) when computing
 term p-values. Only STRING IDs are accepted. See
 \code{\link{rba_string_map_ids}} to map your IDs.}

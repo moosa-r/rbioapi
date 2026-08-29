@@ -7,11 +7,11 @@
 rba_panther_genome(organism, page, ...)
 }
 \arguments{
-\item{organism}{(numeric) NCBI taxon ID. Run
+\item{organism}{Numeric: NCBI taxon ID. Run
 \code{\link{rba_panther_info}} with argument 'what = "organisms"' to get
 a list of PANTHER's supported organisms.}
 
-\item{page}{(numeric) The results page to retrieve. Pages contain up to
+\item{page}{Numeric: The results page to retrieve. Pages contain up to
 1,000 genes and are numbered starting from 1.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s arguments

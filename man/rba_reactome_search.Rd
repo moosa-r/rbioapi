@@ -21,17 +21,17 @@ rba_reactome_search(
 \arguments{
 \item{query}{Character: Text to search for in the Reactome knowledgebase.}
 
-\item{species}{Character vector: (optional) Scientific species name(s) used
+\item{species}{Character: (optional) Scientific species name(s) used
 to filter the results, e.g. \code{"Homo sapiens"}. See
 \code{\link{rba_reactome_species}} for species available in Reactome.}
 
-\item{types}{Character vector: (optional) Result type(s) used to filter the
+\item{types}{Character: (optional) Result type(s) used to filter the
 search, e.g. \code{"Protein"}, \code{"Pathway"}, or \code{"Reaction"}.}
 
-\item{compartments}{Character vector: (optional) Cellular compartment
+\item{compartments}{Character: (optional) Cellular compartment
 name(s) used to filter the results.}
 
-\item{keywords}{Character vector: (optional) Reactome search keyword(s) used
+\item{keywords}{Character: (optional) Reactome search keyword(s) used
 to filter the results.}
 
 \item{cluster}{Logical: (default = \code{TRUE}) Should matches be separated

@@ -6,7 +6,7 @@
 #'   Using this function, you can retrieve a list of available collections
 #'   in a JASPAR release.
 #'
-#' @param release Numeric: (default = 2026) Which JASPAR database release
+#' @param release Numeric: (default = \code{2026}) Which JASPAR database release
 #'   to use? Available options are: 2026, 2024, 2022, 2020, 2018, 2016,
 #'   and 2014.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -92,25 +92,25 @@ rba_jaspar_collections <- function(release = 2026,
 #'   with the function's arguments. Also, you can use \code{\link{rba_pages}}
 #'   to automatically iterate over multiple pages.
 #'
-#' @param collection JASPAR Collection's name. See
+#' @param collection Character: JASPAR Collection's name. See
 #'   \href{https://jaspar.elixir.no/docs/}{JASPAR Collections} for
 #'   information. The accepted values are: "CORE", "CNE", "PHYLOFACTS",
 #'   "SPLICE", "POLII", "FAM", "PBM", "PBM_HOMEO", "PBM_HLH", and
 #'   "UNVALIDATED".
-#' @param release Numeric: (default = 2026) Which JASPAR database release
+#' @param release Numeric: (default = \code{2026}) Which JASPAR database release
 #'   to use? Available options are: 2026, 2024, 2022, 2020, 2018, 2016,
 #'   and 2014.
-#' @param only_last_version Logical: (default = FALSE) If TRUE, only the
+#' @param only_last_version Logical: (default = \code{FALSE}) If TRUE, only the
 #'   latest version of a matrix profile will be returned.
-#' @param search Character: A search term.
-#' @param order Character: A character string or a vector of character strings
-#'   of field names that will be used to order the results.
+#' @param search Character: (optional) A search term.
+#' @param order Character: (optional) A field name or a vector of field names
+#'   that will be used to order the results.
 #'   \cr Providing multiple field names is supported. You can also use the prefix
 #'   "-" before a field name to indicate reverse ordering.
-#' @param page_size Numeric: (default = 1000) This resource returns paginated
+#' @param page_size Numeric: (default = \code{1000}) This resource returns paginated
 #'   results. What is the maximum number of results that you want to retrieve
 #'   per page? Accepted values are between 1 and 1000.
-#' @param page Numeric: Which page of the results to retrieve? The accepted
+#' @param page Numeric: (default = \code{1}) Which page of the results to retrieve? The accepted
 #'   values depend on the page size and number of results.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
@@ -239,32 +239,32 @@ rba_jaspar_collections_matrices <- function(collection,
 #'   with the function's arguments. Also, you can use \code{\link{rba_pages}}
 #'   to automatically iterate over multiple pages.
 #'
-#' @param term Character: A search term.
-#' @param tf_name Character: Transcription factor names (Case-sensitive).
-#' @param tf_class Character: Transcription factor class
-#' @param tf_family Character: Transcription factor family
-#' @param tax_group Character: Taxonomic group. Use
+#' @param term Character: (optional) A search term.
+#' @param tf_name Character: (optional) Transcription factor names (case-sensitive).
+#' @param tf_class Character: (optional) Transcription factor class
+#' @param tf_family Character: (optional) Transcription factor family
+#' @param tax_group Character: (optional) Taxonomic group. Use
 #'   \code{\link{rba_jaspar_taxons}} to get a list of supported taxonomic
 #'   groups.
-#' @param tax_id Numeric: NCBI taxonomic identifier of a species. Use
+#' @param tax_id Numeric: (optional) NCBI taxonomic identifier of a species. Use
 #'   \code{\link{rba_jaspar_species}} to get a list of supported species.
-#' @param data_type Character: Type of data (i.e., the methodology used
+#' @param data_type Character: (optional) Type of data (i.e., the methodology used
 #'   for matrix construction). For example: "ChIP-seq", "PBM"
-#' @param collection Character: JASPAR matrix profile collection name. Use
+#' @param collection Character: (optional) JASPAR matrix profile collection name. Use
 #'   \code{\link{rba_jaspar_collections}} to get a list of collection names.
-#' @param release Numeric: (default = 2026) Which JASPAR database release
+#' @param release Numeric: (default = \code{2026}) Which JASPAR database release
 #'   to use? Available options are: 2026, 2024, 2022, 2020, 2018, 2016,
 #'   and 2014.
-#' @param only_last_version Logical: (default = FALSE) If TRUE, only the
+#' @param only_last_version Logical: (default = \code{FALSE}) If TRUE, only the
 #'   latest version of a matrix profile will be returned.
-#' @param order Character: A character string or a vector of character strings
-#'   of field names that will be used to order the results.
+#' @param order Character: (optional) A field name or a vector of field names
+#'   that will be used to order the results.
 #'   \cr Providing multiple field names is supported. You can also use the prefix
 #'   "-" before a field name to indicate reverse ordering.
-#' @param page_size Numeric: (default = 1000) This resource returns paginated
+#' @param page_size Numeric: (default = \code{1000}) This resource returns paginated
 #'   results. What is the maximum number of results that you want to retrieve
 #'   per page? Accepted values are between 1 and 1000.
-#' @param page Numeric: Which page of the results to retrieve? The accepted
+#' @param page Numeric: (default = \code{1}) Which page of the results to retrieve? The accepted
 #'   values depend on the page size and number of results.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
@@ -405,8 +405,8 @@ rba_jaspar_matrix_search <- function(term = NULL,
 #'
 #' @param base_id Character: A base (stable) identifier. A matrix profile
 #'   identifier follows a "base_id.version" naming scheme.
-#' @param order Character: A character string or a vector of character strings
-#'   of field names that will be used to order the results.
+#' @param order Character: (optional) A field name or a vector of field names
+#'   that will be used to order the results.
 #'   \cr Providing multiple field names is supported. You can also use the prefix
 #'   "-" before a field name to indicate reverse ordering.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -498,10 +498,10 @@ rba_jaspar_matrix_versions <- function(base_id,
 #'
 #' @param matrix_id Character: A matrix profile
 #'   identifier. It follows a "base_id.version" naming scheme.
-#' @param file_format Character: Instead of returning an R object, you
+#' @param file_format Character: (optional) Instead of returning an R object, you
 #'   can directly download the profile matrix as a file in this format.
 #'   Supported formats are "yaml", "jaspar", "transfac", "meme", and "pfm".
-#' @param save_to NULL or Character:\itemize{
+#' @param save_to Character: (optional) \itemize{
 #'   \item NULL: (only if file_format was supplied) Save the file to an
 #'     automatically-generated path.
 #'   \item Character string: A valid file or directory path to save the file to.}
@@ -626,7 +626,7 @@ rba_jaspar_matrix <- function(matrix_id,
 #'   release. Otherwise, when called without the \code{release_number} argument,
 #'   it returns a list of all JASPAR database releases.
 #'
-#' @param release_number Numeric: Which JASPAR database release number should
+#' @param release_number Numeric: (optional) Which JASPAR database release number should
 #'   be retrieved? If left NULL (the default), a list of all
 #'   JASPAR database releases will be returned.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -812,12 +812,12 @@ rba_jaspar_sites <- function(matrix_id,
 #'   in multiple taxonomic groups. Use this function to retrieve a list of
 #'   available species in a JASPAR database release.
 #'
-#' @param release Numeric: (default = 2026) Which JASPAR database release
+#' @param release Numeric: (default = \code{2026}) Which JASPAR database release
 #'   to use? Available options are: 2026, 2024, 2022, 2020, 2018, 2016,
 #'   and 2014.
-#' @param search Character: A search term.
-#' @param order Character: A character string or a vector of character strings
-#'   of field names that will be used to order the results.
+#' @param search Character: (optional) A search term.
+#' @param order Character: (optional) A field name or a vector of field names
+#'   that will be used to order the results.
 #'   \cr Providing multiple field names is supported. You can also use the prefix
 #'   "-" before a field name to indicate reverse ordering.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -914,20 +914,20 @@ rba_jaspar_species <- function(release = 2026,
 #'
 #' @param tax_id Numeric: NCBI taxonomic identifier of a species. Use
 #'   \code{\link{rba_jaspar_species}} to get a list of supported species.
-#' @param release Numeric: (default = 2026) Which JASPAR database release
+#' @param release Numeric: (default = \code{2026}) Which JASPAR database release
 #'   to use? Available options are: 2026, 2024, 2022, 2020, 2018, 2016,
 #'   and 2014.
-#' @param only_last_version Logical: (default = FALSE) If TRUE, only the
+#' @param only_last_version Logical: (default = \code{FALSE}) If TRUE, only the
 #'   latest version of a matrix profile will be returned.
-#' @param search Character: A search term.
-#' @param order Character: A character string or a vector of character strings
-#'   of field names that will be used to order the results.
+#' @param search Character: (optional) A search term.
+#' @param order Character: (optional) A field name or a vector of field names
+#'   that will be used to order the results.
 #'   \cr Providing multiple field names is supported. You can also use the prefix
 #'   "-" before a field name to indicate reverse ordering.
-#' @param page_size Numeric: (default = 1000) This resource returns paginated
+#' @param page_size Numeric: (default = \code{1000}) This resource returns paginated
 #'   results. What is the maximum number of results that you want to retrieve
 #'   per page? Accepted values are between 1 and 1000.
-#' @param page Numeric: Which page of the results to retrieve? The accepted
+#' @param page Numeric: (default = \code{1}) Which page of the results to retrieve? The accepted
 #'   values depend on the page size and number of results.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
@@ -1036,7 +1036,7 @@ rba_jaspar_species_matrices <- function(tax_id,
 #'   in multiple taxonomic groups. Use this function to retrieve a list of
 #'   available taxonomic groups in a JASPAR database release.
 #'
-#' @param release Numeric: (default = 2026) Which JASPAR database release
+#' @param release Numeric: (default = \code{2026}) Which JASPAR database release
 #'   to use? Available options are: 2026, 2024, 2022, 2020, 2018, 2016,
 #'   and 2014.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -1126,20 +1126,20 @@ rba_jaspar_taxons <- function(release = 2026,
 #' @param tax_group Character: Taxonomic group. Use
 #'   \code{\link{rba_jaspar_taxons}} to get a list of supported taxonomic
 #'   groups.
-#' @param release Numeric: (default = 2026) Which JASPAR database release
+#' @param release Numeric: (default = \code{2026}) Which JASPAR database release
 #'   to use? Available options are: 2026, 2024, 2022, 2020, 2018, 2016,
 #'   and 2014.
-#' @param only_last_version Logical: (default = FALSE) If TRUE, only the
+#' @param only_last_version Logical: (default = \code{FALSE}) If TRUE, only the
 #'   latest version of a matrix profile will be returned.
-#' @param search Character: A search term.
-#' @param order Character: A character string or a vector of character strings
-#'   of field names that will be used to order the results.
+#' @param search Character: (optional) A search term.
+#' @param order Character: (optional) A field name or a vector of field names
+#'   that will be used to order the results.
 #'   \cr Providing multiple field names is supported. You can also use the prefix
 #'   "-" before a field name to indicate reverse ordering.
-#' @param page_size Numeric: (default = 1000) This resource returns paginated
+#' @param page_size Numeric: (default = \code{1000}) This resource returns paginated
 #'   results. What is the maximum number of results that you want to retrieve
 #'   per page? Accepted values are between 1 and 1000.
-#' @param page Numeric: Which page of the results to retrieve? The accepted
+#' @param page Numeric: (default = \code{1}) Which page of the results to retrieve? The accepted
 #'   values depend on the page size and number of results.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
@@ -1266,23 +1266,23 @@ rba_jaspar_taxons_matrices <- function(tax_group,
 #'   with the function's arguments. Also, you can use \code{\link{rba_pages}}
 #'   to automatically iterate over multiple pages.
 #'
-#' @param term Character: A search term.
-#' @param release Numeric: (default = 2026) Which JASPAR database release
+#' @param term Character: (optional) A search term.
+#' @param release Numeric: (default = \code{2026}) Which JASPAR database release
 #'   to use? Available options are: 2026, 2024, 2022, 2020, 2018, 2016,
 #'   and 2014.
-#' @param tax_group Character: Taxonomic group. Use
+#' @param tax_group Character: (optional) Taxonomic group. Use
 #'   \code{\link{rba_jaspar_taxons}} to get a list of supported taxonomic
 #'   groups.
-#' @param search Character: An alias for \code{term}. If both are supplied,
+#' @param search Character: (optional) An alias for \code{term}. If both are supplied,
 #'   they must be identical.
-#' @param order Character: A character string or a vector of character strings
-#'   of field names that will be used to order the results.
+#' @param order Character: (optional) A field name or a vector of field names
+#'   that will be used to order the results.
 #'   \cr Providing multiple field names is supported. You can also use the prefix
 #'   "-" before a field name to indicate reverse ordering.
-#' @param page_size Numeric: (default = 1000) This resource returns paginated
+#' @param page_size Numeric: (default = \code{1000}) This resource returns paginated
 #'   results. What is the maximum number of results that you want to retrieve
 #'   per page? Accepted values are between 1 and 1000.
-#' @param page Numeric: Which page of the results to retrieve? The accepted
+#' @param page Numeric: (default = \code{1}) Which page of the results to retrieve? The accepted
 #'   values depend on the page size and number of results.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.

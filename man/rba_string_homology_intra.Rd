@@ -7,10 +7,10 @@
 rba_string_homology_intra(ids, species = NULL, ...)
 }
 \arguments{
-\item{ids}{Your protein ID(s). It is strongly recommended to supply
+\item{ids}{Character or Numeric: Your protein ID(s). It is strongly recommended to supply
 STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
 
-\item{species}{Numeric:
+\item{species}{Numeric: (optional)
 \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
 (Recommended, but required if your input contains more than 10 unique IDs.)}

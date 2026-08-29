@@ -16,12 +16,12 @@ rba_enrichr(
 )
 }
 \arguments{
-\item{gene_list}{A character vector with Entrez gene symbols of test genes.}
+\item{gene_list}{Character: A vector with Entrez gene symbols of test genes.}
 
-\item{description}{(optional) A description to be associated with your
+\item{description}{Character: (optional) A description to be associated with your
 uploaded gene-set to Enrichr servers.}
 
-\item{gene_set_library}{One of the:
+\item{gene_set_library}{Character: (default = \code{"all"}) One of the:
 \enumerate{
 \item "all" to select all of the available Enrichr gene-set libraries.
 \item A gene-set library name. You can retrieve the available options
@@ -30,19 +30,19 @@ for a given species using \code{\link{rba_enrichr_libs}}.
 pattern that correspond to one or more of Enrichr library names.
 }}
 
-\item{regex_library_name}{logical: (default = FALSE) if TRUE the supplied
+\item{regex_library_name}{Logical: (default = \code{FALSE}) if TRUE the supplied
 gene_set_library will be considered as a regex pattern.
 If FALSE, gene_set_library will be considered as an exact match.}
 
-\item{organism}{(default = "human") Which model organism version of Enrichr
+\item{organism}{Character: (default = \code{"human"}) Which model organism version of Enrichr
 to use? Available options are: "human", (H. sapiens & M. musculus),
 "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
 and "fish" (D. rerio).}
 
-\item{background_genes}{A character vector of Entrez gene symbols of the
+\item{background_genes}{Character: A vector of Entrez gene symbols of the
 background genes.}
 
-\item{progress_bar}{logical: (default = TRUE) if multiple Enrichr libraries
+\item{progress_bar}{Logical: (default = \code{TRUE}) if multiple Enrichr libraries
 are selected, should a progress bar be displayed?}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s

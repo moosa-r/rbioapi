@@ -14,7 +14,7 @@ rba_mieaa_convert_version(
 )
 }
 \arguments{
-\item{mirna}{Character vector: miRNA identifiers to convert.}
+\item{mirna}{Character: miRNA identifiers to convert.}
 
 \item{mirna_type}{Character: Type of the supplied miRNA identifiers; either
 "mature" or "precursor".}

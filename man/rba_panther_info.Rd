@@ -7,18 +7,18 @@
 rba_panther_info(what, organism_chr_loc = FALSE, families_page = 1, ...)
 }
 \arguments{
-\item{what}{what information to retrieve? should be one of: \itemize{
+\item{what}{Character: what information to retrieve? should be one of: \itemize{
 \item "organisms": Retrieve supported organisms in PANTHER.
 \item "datasets": Retrieve available annotation datasets.
 \item "families": Retrieve available family IDs.
 \item "species_tree": Retrieve PANTHER's species tree.
 \item "pathways" Retrieve available pathway IDs.}}
 
-\item{organism_chr_loc}{(Logical) (only when 'what = "organisms"')
+\item{organism_chr_loc}{Logical: (default = \code{FALSE}) (only when 'what = "organisms"')
 If TRUE, only organisms with chromosome location will be returned.
 If FALSE (default), all organisms will be returned.}
 
-\item{families_page}{(Numeric) (only when 'what = "families"')
+\item{families_page}{Numeric: (default = \code{1}) (only when 'what = "families"')
 Family information is very long, so results are returned in pages of up
 to 1,000 families. Use a positive whole number to define the page to
 retrieve.}

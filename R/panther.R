@@ -88,12 +88,12 @@
 #' Using this function, you can search your genes in PANTHER database and
 #'   retrieve attributes and annotations associated to your genes.
 #'
-#' @param genes Character or numeric vector of gene identifiers with maximum
+#' @param genes Character or Numeric: A vector of gene identifiers with maximum
 #'   length of 5,000. Can be any of: Ensembl gene ID, Ensembl protein ID,
 #'   Ensembl transcript ID, Entrez gene ID, gene symbol, NCBI GI, HGNC ID,
 #'   International protein index ID, NCBI UniGene ID, UniProt accession and/or
 #'   UniProt ID.
-#' @param organism (numeric) NCBI taxon ID. run \code{\link{rba_panther_info}}
+#' @param organism Numeric: NCBI taxon ID. run \code{\link{rba_panther_info}}
 #'   with argument 'what = "organisms"' to get a list of PANTHER's
 #'   supported organisms.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -218,7 +218,7 @@ rba_panther_mapping <- function(genes,
 #'   In earlier versions, only a character vector of gene IDs was possible,
 #'   thus only over-representation analysis.
 #'
-#' @param genes Either a character vector or a data frame. Depending on
+#' @param genes Character or Data frame: A vector or data frame. Depending on
 #'   this parameter, the analysis type is determined.
 #'   \describe{
 #'   \item{Character vector:}{If a character vector is supplied,
@@ -235,15 +235,15 @@ rba_panther_mapping <- function(genes,
 #'   Ensembl transcript ID, Entrez gene ID, gene symbol, NCBI GI, HGNC ID,
 #'   International protein index ID, NCBI UniGene ID, UniProt accession
 #'   or UniProt ID.
-#' @param organism (numeric) NCBI taxon ID. run \code{\link{rba_panther_info}}
+#' @param organism Numeric: NCBI taxon ID. run \code{\link{rba_panther_info}}
 #'   with argument 'what = "organisms"' to get a list of PANTHER's
 #'   supported organisms.
-#' @param annot_dataset A PANTHER dataset ID to test your input against it.
+#' @param annot_dataset Character: A PANTHER dataset ID to test your input against it.
 #'   run \code{\link{rba_panther_info}} with argument 'what = "datasets"' to
 #'   get a list of PANTHER's supported datasets. Note that you should enter
 #'   the "id" of the dataset, not its label (e.g. entering "biological_process"
 #'   is incorrect, you should rather enter "GO:0008150").
-#' @param test_type Statistical test type used to calculate p-values.
+#' @param test_type Character: (optional) Statistical test type used to calculate p-values.
 #'   \itemize{
 #'   \item If performing over-representation analysis (i.e. `genes` is a
 #'   character vector), valid values are "FISHER" (default if NULL) or
@@ -251,21 +251,21 @@ rba_panther_mapping <- function(genes,
 #'   \item If performing statistical enrichment analysis (i.e. `genes` is a
 #'   data frame), the only valid value is "Mann-Whitney" (default if NULL).
 #'   }
-#' @param correction p value correction method. either "FDR" (default),
+#' @param correction Character: (default = \code{"FDR"}) p value correction method. either "FDR" (default),
 #'   "BONFERRONI" or "NONE".
-#' @param cutoff (Numeric) (Optional) a threshold to filter the results.
+#' @param cutoff Numeric: (optional) a threshold to filter the results.
 #'   if correction is "FDR", the threshold will be applied to fdr column's
 #'   values; if otherwise, the threshold will be applied to p value column.
-#' @param ref_genes (Optional, only valid if genes is a character vector)
-#'   A character or numeric vector of genes that will be used as the test's
+#' @param ref_genes Character or Numeric: (optional) (only valid if genes is a character vector)
+#'   A vector of genes that will be used as the test's
 #'   background (reference/universe) gene set. If no value is supplied, all of
 #'   the genes in the specified organism will be used. The maximum length and
 #'   supported IDs are the same as the 'genes' argument.
-#' @param ref_organism (Optional, only valid if genes is a character vector)
+#' @param ref_organism Numeric: (optional) (only valid if genes is a character vector)
 #'   if 'ref_genes' is used, you can specify the organisms which correspond to
 #'   your supplied IDs in 'ref_genes' argument. see 'organism' argument for
 #'   supported values.
-#' @param request_mapped_genes (Character, only used if genes is a character
+#' @param request_mapped_genes Character: (default = \code{"input"}) (only used if genes is a character
 #'   vector, hence Over-representation test is requested) Which mapped genes
 #'   should be returned for each result term. One of "input" (default),
 #'   "reference", or "none". Requesting "reference" without supplying
@@ -509,16 +509,16 @@ rba_panther_enrich <- function(genes,
 #'   annotation datasets, families, and pathways which are supported in
 #'   PANTHER.
 #'
-#' @param what what information to retrieve? should be one of: \itemize{
+#' @param what Character: what information to retrieve? should be one of: \itemize{
 #' \item "organisms": Retrieve supported organisms in PANTHER.
 #' \item "datasets": Retrieve available annotation datasets.
 #' \item "families": Retrieve available family IDs.
 #' \item "species_tree": Retrieve PANTHER's species tree.
 #' \item "pathways" Retrieve available pathway IDs.}
-#' @param organism_chr_loc (Logical) (only when 'what = "organisms"')
+#' @param organism_chr_loc Logical: (default = \code{FALSE}) (only when 'what = "organisms"')
 #'   If TRUE, only organisms with chromosome location will be returned.
 #'   If FALSE (default), all organisms will be returned.
-#' @param families_page (Numeric) (only when 'what = "families"')
+#' @param families_page Numeric: (default = \code{1}) (only when 'what = "families"')
 #'   Family information is very long, so results are returned in pages of up
 #'   to 1,000 families. Use a positive whole number to define the page to
 #'   retrieve.
@@ -702,10 +702,10 @@ rba_panther_info <- function(what,
 #' Retrieve one page of genes and their associated information for a genome
 #'   supported by PANTHER. Each page contains up to 1,000 genes.
 #'
-#' @param organism (numeric) NCBI taxon ID. Run
+#' @param organism Numeric: NCBI taxon ID. Run
 #'   \code{\link{rba_panther_info}} with argument 'what = "organisms"' to get
 #'   a list of PANTHER's supported organisms.
-#' @param page (numeric) The results page to retrieve. Pages contain up to
+#' @param page Numeric: The results page to retrieve. Pages contain up to
 #'   1,000 genes and are numbered starting from 1.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s arguments
 #'   manual for more information on available options.
@@ -829,22 +829,22 @@ rba_panther_genome <- function(organism,
 #'   and optionally return the corresponding position in the target organisms'
 #'   protein sequences.
 #'
-#' @param genes Character or numeric vector of gene identifiers with maximum
+#' @param genes Character or Numeric: A vector of gene identifiers with maximum
 #'   length of 10, or only one if \code{seq_pos} is supplied. Can be any of: Ensembl
 #'   gene ID, Ensembl protein ID, Ensembl transcript ID, Entrez gene ID, gene
 #'   symbol, NCBI GI, HGNC ID, International protein index ID, NCBI UniGene ID,
 #'   UniProt accession and/or UniProt ID.
-#' @param organism (numeric) NCBI taxon ID of the organism of your supplied
+#' @param organism Numeric: NCBI taxon ID of the organism of your supplied
 #'   genes. run \code{\link{rba_panther_info}} with argument
 #'   'what = "organisms"' to get a list of PANTHER's supported organisms.
-#' @param type Ortholog types to return. either "all" (default) or "LDO" to
+#' @param type Character: (default = \code{"all"}) Ortholog types to return. either "all" (default) or "LDO" to
 #'   only return least diverged orthologs.
-#' @param target_organisms (numeric) NCBI taxon ID(s) to filter the results.
+#' @param target_organisms Numeric: (optional) NCBI taxon ID(s) to filter the results.
 #'   run \code{\link{rba_panther_info}} with argument 'what = "organisms"' to
 #'   get a list of PANTHER's supported organisms.
-#' @param seq_pos (Numeric) A position in the protein's sequence of the
+#' @param seq_pos Numeric: (optional) A position in the protein's sequence of the
 #'   supplied gene. should be in the range of the protein's length.
-#' @param include_msa (Logical) Only if a sequence position is supplied,
+#' @param include_msa Logical: (optional) Only if a sequence position is supplied,
 #'   should MSA (Multiple Sequence Alignment) information be included in the
 #'   results?
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -971,18 +971,18 @@ rba_panther_ortholog <- function(genes,
 #'
 #' Using this function you can search and retrieve homolog of given gene(s).
 #'
-#' @param genes Character or numeric vector of gene identifiers with maximum
+#' @param genes Character or Numeric: A vector of gene identifiers with maximum
 #'   length of 10. Can be any of: Ensembl gene ID, Ensembl protein ID, Ensembl
 #'   transcript ID, Entrez gene ID, gene symbol, NCBI GI, HGNC ID,
 #'   International protein index ID, NCBI UniGene ID, UniProt accession and/or
 #'   UniProt ID.
-#' @param organism (numeric) NCBI taxon ID of the organism of your supplied
+#' @param organism Numeric: NCBI taxon ID of the organism of your supplied
 #'   genes. run \code{\link{rba_panther_info}} with argument
 #'   'what = "organisms"' to get a list of PANTHER's supported organisms.
-#' @param type Homolog types to return. either "P" (default) for paralogs,
+#' @param type Character: (default = \code{"P"}) Homolog types to return. either "P" (default) for paralogs,
 #'   "X" for horizontal gene transfer and "LDX" for least diverged horizontal
 #'   gene transfer.
-#' @param target_organisms (numeric) NCBI taxon ID(s) to filter the results.
+#' @param target_organisms Numeric: (optional) NCBI taxon ID(s) to filter the results.
 #'   run \code{\link{rba_panther_info}} with argument 'what = "organisms"' to
 #'   get a list of PANTHER's supported organisms.
 #'   This argument is ignored for paralogs, which are searched within the input
@@ -1099,14 +1099,14 @@ rba_panther_homolog <- function(genes,
 #' Using this function, you can retrieve Orthologs, MSA or Tree topology
 #'   information of a given PANTHER family.
 #'
-#' @param id Panther family id.
-#' @param what What to retrieve? One of: \itemize{
+#' @param id Character: Panther family id.
+#' @param what Character: What to retrieve? One of: \itemize{
 #' \item "ortholog": Orthologs ('LDO' for least diverged and 'O' for more
 #'   diverged).
 #' \item "msa": Multiple Sequence Alignment Information,
 #' \item "tree": Tree topology and nodes attributes.
 #' }
-#' @param target_organisms (numeric) NCBI taxon ID(s) to filter the results.
+#' @param target_organisms Numeric: (optional) NCBI taxon ID(s) to filter the results.
 #'   run \code{\link{rba_panther_info}} with argument 'what = "organisms"' to
 #'   get a list of PANTHER's supported organisms.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -1234,9 +1234,9 @@ rba_panther_family <- function(id,
 #'   annotations, Bioinformatics, Volume 35, Issue 3, February 2019, Pages
 #'   518–520, \doi{10.1093/bioinformatics/bty625}
 #'
-#' @param protein_seq A character string with the protein's sequence. Maximum
+#' @param protein_seq Character: A string with the protein's sequence. Maximum
 #'   allowed sequence length is 50,000 characters.
-#' @param target_organisms (numeric) NCBI taxon ID(s) to filter the results.
+#' @param target_organisms Numeric: (optional) NCBI taxon ID(s) to filter the results.
 #'   run \code{\link{rba_panther_info}} with argument 'what = "organisms"' to
 #'   get a list of PANTHER's supported organisms.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s

@@ -7,7 +7,7 @@
 rba_reactome_orthology(event_ids, species_dbid, ...)
 }
 \arguments{
-\item{event_ids}{Character vector: Up to 20 human Reactome event IDs to
+\item{event_ids}{Character: Up to 20 human Reactome event IDs to
 retrieve their orthologous events.}
 
 \item{species_dbid}{Numeric: Reactome database ID (DbId) of the target

@@ -13,7 +13,7 @@ rba_reactome_analysis_mapping(
 )
 }
 \arguments{
-\item{input}{Character or Numeric vector: A vector, local file path or URL
+\item{input}{Character or Numeric: A vector, local file path or URL
 that points to your identifiers list.}
 
 \item{input_format}{Character: (optional) This function will automatically identify

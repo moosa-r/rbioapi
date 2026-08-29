@@ -13,17 +13,17 @@ rba_enrichr_add_list(
 )
 }
 \arguments{
-\item{gene_list}{A character vector with Entrez gene symbols of test genes.}
+\item{gene_list}{Character: A vector with Entrez gene symbols of test genes.}
 
-\item{description}{(optional) A description to be associated with your
+\item{description}{Character: (optional) A description to be associated with your
 uploaded gene-set to Enrichr servers.}
 
-\item{organism}{(default = "human") Which model organism version of Enrichr
+\item{organism}{Character: (default = \code{"human"}) Which model organism version of Enrichr
 to use? Available options are: "human", (H. sapiens & M. musculus),
 "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
 and "fish" (D. rerio).}
 
-\item{speedrichr}{logical (default = FALSE) Set to TRUE if you will use this
+\item{speedrichr}{Logical: (default = \code{FALSE}) Set to TRUE if you will use this
 gene list with a background list; otherwise, set to FALSE. Only available
 for human libraries. Refer to the details section for more information.}
 

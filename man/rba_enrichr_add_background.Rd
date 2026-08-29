@@ -7,7 +7,7 @@
 rba_enrichr_add_background(background_genes, ...)
 }
 \arguments{
-\item{background_genes}{A character vector of Entrez gene symbols of the
+\item{background_genes}{Character: A vector of Entrez gene symbols of the
 background genes.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s

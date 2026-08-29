@@ -10,7 +10,7 @@ rba_reactome_pathways_events(event_id, attribute_name = NULL, ...)
 \item{event_id}{Character or Numeric: Reactome event's database ID (DbId) or
 Stable ID (StId).}
 
-\item{attribute_name}{Character: Optional event attribute to return instead
+\item{attribute_name}{Character: (optional) Optional event attribute to return instead
 of complete event records. See
 \href{https://reactome.org/content/schema/Event}{Reactome Data Schema:
 Event} for available options.}

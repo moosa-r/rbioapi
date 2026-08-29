@@ -205,7 +205,7 @@
 #'   https://reactome.org/AnalysisService/identifiers/url" \cr "POST
 #'   https://reactome.org/AnalysisService/identifiers/url/projection"
 #'
-#' @param input Character or Numeric vector, Data frame, or Matrix: A vector,
+#' @param input Character, Numeric, Data frame or Matrix: A vector,
 #'   data frame, matrix or a local file path or URL that points to your data.
 #'   See "Details section" for more information of how to organize and supply
 #'   your input.
@@ -479,7 +479,7 @@ rba_reactome_analysis <- function(input,
 #'   \code{\link{rba_reactome_species}} or
 #'    \href{https://reactome.org/content/schema/objects/Species/}{Reactome
 #'    Data Schema: Entries: Species}.
-#' @param save_to NULL or Character: (optional) \itemize{ \item NULL: Save the
+#' @param save_to Character: (optional) \itemize{ \item NULL: Save the
 #'   file to an automatically-generated path. \item Character string: A valid
 #'   file path to save the file to.}
 #' @param number Numeric: (default = \code{25}) Positive integer giving the
@@ -656,7 +656,7 @@ rba_reactome_analysis_pdf <- function(token,
 #'   containing the complete analysis results associated with your supplied
 #'   token. \item "results_gz" Same as "results", but the output will be
 #'   compress (gzipped).}
-#' @param save_to NULL or Character: (optional) \itemize{ \item NULL: Save the
+#' @param save_to Character: (optional) \itemize{ \item NULL: Save the
 #'   file to an automatically-generated path. \item Character string: A valid
 #'   file path to save the file to.}
 #' @param resource Character: (default = \code{"TOTAL"}) (Only when request is
@@ -940,7 +940,7 @@ rba_reactome_analysis_import <- function(input,
 #' \cr "POST https://reactome.org/AnalysisService/mapping/url"
 #' \cr "POST https://reactome.org/AnalysisService/mapping/url/projection"
 #'
-#' @param input Character or Numeric vector: A vector, local file path or URL
+#' @param input Character or Numeric: A vector, local file path or URL
 #'   that points to your identifiers list.
 #' @param input_format Character: (optional) This function will automatically identify
 #'   your supplied input's format. To be explicit, set this argument to one

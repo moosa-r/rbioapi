@@ -28,7 +28,7 @@ rba_reactome_exporter_diagram(
 \arguments{
 \item{event_id}{Character: Reactome event's identifier.}
 
-\item{save_to}{NULL or Character: (default = \code{NULL}) \itemize{
+\item{save_to}{Character: (optional) \itemize{
 \item NULL: Save the file to an automatically-generated path.
 \item Character string: A valid file path to save the file to.}}
 
@@ -73,7 +73,7 @@ element to be flagged.}
 "create_document" is FALSE) Should the interactor be considered when
 flagging a diagram element?}
 
-\item{sel}{Character vector: (optional) (Only if "create_document" is FALSE)
+\item{sel}{Character: (optional) (Only if "create_document" is FALSE)
 CSV line for highlighting element(s) selection in the diagram.}
 
 \item{title}{Logical: (default = \code{TRUE}) (Only if "create_document" is

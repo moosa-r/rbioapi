@@ -7,14 +7,14 @@
 rba_jaspar_species(release = 2026, search = NULL, order = NULL, ...)
 }
 \arguments{
-\item{release}{Numeric: (default = 2026) Which JASPAR database release
+\item{release}{Numeric: (default = \code{2026}) Which JASPAR database release
 to use? Available options are: 2026, 2024, 2022, 2020, 2018, 2016,
 and 2014.}
 
-\item{search}{Character: A search term.}
+\item{search}{Character: (optional) A search term.}
 
-\item{order}{Character: A character string or a vector of character strings
-of field names that will be used to order the results.
+\item{order}{Character: (optional) A field name or a vector of field names
+that will be used to order the results.
 \cr Providing multiple field names is supported. You can also use the prefix
 "-" before a field name to indicate reverse ordering.}
 

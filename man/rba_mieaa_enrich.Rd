@@ -23,7 +23,7 @@ rba_mieaa_enrich(
 )
 }
 \arguments{
-\item{test_set}{Character vector: Mature or precursor miRBase miRNA
+\item{test_set}{Character: Mature or precursor miRBase miRNA
 identifiers. Note that \enumerate{
 \item Only miRBase v22 identifiers are accepted. You can use
 \code{\link{rba_mieaa_convert_version}} to convert older identifiers to
@@ -55,7 +55,7 @@ criterion.}
 \item "Sus scrofa", "ssc" or  9823
 }}
 
-\item{categories}{Character vector: (default = \code{NULL}) One or more
+\item{categories}{Character: (optional) One or more
 category identifiers to use for miRNA set enrichment analysis. Note that
 \itemize{
 \item Available categories vary with the selected species and whether
@@ -82,7 +82,7 @@ omitted from the results. Must be greater than 0 and at most 1.}
 the test set that a subcategory must contain to be included in the
 results. Must be a positive integer.}
 
-\item{ref_set}{Character vector: (default = \code{NULL}) Only applicable
+\item{ref_set}{Character: (optional) Only applicable
 when \code{test_type = "ORA"}. Used as the reference (background or
 universe) set for p-value calculations.}
 

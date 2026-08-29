@@ -7,7 +7,7 @@
 rba_jaspar_releases(release_number = NULL, ...)
 }
 \arguments{
-\item{release_number}{Numeric: Which JASPAR database release number should
+\item{release_number}{Numeric: (optional) Which JASPAR database release number should
 be retrieved? If left NULL (the default), a list of all
 JASPAR database releases will be returned.}
 

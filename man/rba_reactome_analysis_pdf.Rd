@@ -26,7 +26,7 @@ ID is 9606.) or species name (e.g. "Homo sapiens"). See
  \href{https://reactome.org/content/schema/objects/Species/}{Reactome
  Data Schema: Entries: Species}.}
 
-\item{save_to}{NULL or Character: (optional) \itemize{ \item NULL: Save the
+\item{save_to}{Character: (optional) \itemize{ \item NULL: Save the
 file to an automatically-generated path. \item Character string: A valid
 file path to save the file to.}}
 

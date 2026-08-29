@@ -28,7 +28,7 @@ containing the complete analysis results associated with your supplied
 token. \item "results_gz" Same as "results", but the output will be
 compress (gzipped).}}
 
-\item{save_to}{NULL or Character: (optional) \itemize{ \item NULL: Save the
+\item{save_to}{Character: (optional) \itemize{ \item NULL: Save the
 file to an automatically-generated path. \item Character string: A valid
 file path to save the file to.}}
 

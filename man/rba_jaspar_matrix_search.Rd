@@ -22,44 +22,44 @@ rba_jaspar_matrix_search(
 )
 }
 \arguments{
-\item{term}{Character: A search term.}
+\item{term}{Character: (optional) A search term.}
 
-\item{tf_name}{Character: Transcription factor names (Case-sensitive).}
+\item{tf_name}{Character: (optional) Transcription factor names (case-sensitive).}
 
-\item{tf_class}{Character: Transcription factor class}
+\item{tf_class}{Character: (optional) Transcription factor class}
 
-\item{tf_family}{Character: Transcription factor family}
+\item{tf_family}{Character: (optional) Transcription factor family}
 
-\item{tax_group}{Character: Taxonomic group. Use
+\item{tax_group}{Character: (optional) Taxonomic group. Use
 \code{\link{rba_jaspar_taxons}} to get a list of supported taxonomic
 groups.}
 
-\item{tax_id}{Numeric: NCBI taxonomic identifier of a species. Use
+\item{tax_id}{Numeric: (optional) NCBI taxonomic identifier of a species. Use
 \code{\link{rba_jaspar_species}} to get a list of supported species.}
 
-\item{data_type}{Character: Type of data (i.e., the methodology used
+\item{data_type}{Character: (optional) Type of data (i.e., the methodology used
 for matrix construction). For example: "ChIP-seq", "PBM"}
 
-\item{collection}{Character: JASPAR matrix profile collection name. Use
+\item{collection}{Character: (optional) JASPAR matrix profile collection name. Use
 \code{\link{rba_jaspar_collections}} to get a list of collection names.}
 
-\item{release}{Numeric: (default = 2026) Which JASPAR database release
+\item{release}{Numeric: (default = \code{2026}) Which JASPAR database release
 to use? Available options are: 2026, 2024, 2022, 2020, 2018, 2016,
 and 2014.}
 
-\item{only_last_version}{Logical: (default = FALSE) If TRUE, only the
+\item{only_last_version}{Logical: (default = \code{FALSE}) If TRUE, only the
 latest version of a matrix profile will be returned.}
 
-\item{order}{Character: A character string or a vector of character strings
-of field names that will be used to order the results.
+\item{order}{Character: (optional) A field name or a vector of field names
+that will be used to order the results.
 \cr Providing multiple field names is supported. You can also use the prefix
 "-" before a field name to indicate reverse ordering.}
 
-\item{page_size}{Numeric: (default = 1000) This resource returns paginated
+\item{page_size}{Numeric: (default = \code{1000}) This resource returns paginated
 results. What is the maximum number of results that you want to retrieve
 per page? Accepted values are between 1 and 1000.}
 
-\item{page}{Numeric: Which page of the results to retrieve? The accepted
+\item{page}{Numeric: (default = \code{1}) Which page of the results to retrieve? The accepted
 values depend on the page size and number of results.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s

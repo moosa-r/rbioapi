@@ -12,7 +12,7 @@ rba_reactome_exporter_event(event_id, output_format, save_to = NULL, ...)
 
 \item{output_format}{Character: Either "sbgn" or "sbml".}
 
-\item{save_to}{NULL or Character: (default = \code{NULL}) \itemize{
+\item{save_to}{Character: (optional) \itemize{
 \item NULL: Save the file to an automatically-generated path.
 \item Character string: A valid file path to save the file to.}}
 

@@ -7,13 +7,13 @@
 rba_enrichr_gene_sets(gene_set_library, term = NULL, organism = "human", ...)
 }
 \arguments{
-\item{gene_set_library}{A valid gene-set library name which exists
+\item{gene_set_library}{Character: A valid gene-set library name which exists
 in the results retrieved via \code{\link{rba_enrichr_libs}}.}
 
-\item{term}{(optional) An exact Enrichr term name. If left NULL, all gene
+\item{term}{Character: (optional) An exact Enrichr term name. If left NULL, all gene
 sets in the supplied library will be returned.}
 
-\item{organism}{(default = "human") Which model organism version of Enrichr
+\item{organism}{Character: (default = \code{"human"}) Which model organism version of Enrichr
 to use? Available options are: "human", (H. sapiens & M. musculus),
 "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
 and "fish" (D. rerio).}

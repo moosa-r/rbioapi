@@ -15,27 +15,27 @@ rba_panther_ortholog(
 )
 }
 \arguments{
-\item{genes}{Character or numeric vector of gene identifiers with maximum
+\item{genes}{Character or Numeric: A vector of gene identifiers with maximum
 length of 10, or only one if \code{seq_pos} is supplied. Can be any of: Ensembl
 gene ID, Ensembl protein ID, Ensembl transcript ID, Entrez gene ID, gene
 symbol, NCBI GI, HGNC ID, International protein index ID, NCBI UniGene ID,
 UniProt accession and/or UniProt ID.}
 
-\item{organism}{(numeric) NCBI taxon ID of the organism of your supplied
+\item{organism}{Numeric: NCBI taxon ID of the organism of your supplied
 genes. run \code{\link{rba_panther_info}} with argument
 'what = "organisms"' to get a list of PANTHER's supported organisms.}
 
-\item{type}{Ortholog types to return. either "all" (default) or "LDO" to
+\item{type}{Character: (default = \code{"all"}) Ortholog types to return. either "all" (default) or "LDO" to
 only return least diverged orthologs.}
 
-\item{target_organisms}{(numeric) NCBI taxon ID(s) to filter the results.
+\item{target_organisms}{Numeric: (optional) NCBI taxon ID(s) to filter the results.
 run \code{\link{rba_panther_info}} with argument 'what = "organisms"' to
 get a list of PANTHER's supported organisms.}
 
-\item{seq_pos}{(Numeric) A position in the protein's sequence of the
+\item{seq_pos}{Numeric: (optional) A position in the protein's sequence of the
 supplied gene. should be in the range of the protein's length.}
 
-\item{include_msa}{(Logical) Only if a sequence position is supplied,
+\item{include_msa}{Logical: (optional) Only if a sequence position is supplied,
 should MSA (Multiple Sequence Alignment) information be included in the
 results?}
 

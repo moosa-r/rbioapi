@@ -14,27 +14,27 @@ rba_string_interaction_partners(
 )
 }
 \arguments{
-\item{ids}{Your protein ID(s). It is strongly recommended to supply
+\item{ids}{Character or Numeric: Your protein ID(s). It is strongly recommended to supply
 STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
 
-\item{species}{Numeric:
+\item{species}{Numeric: (optional)
 \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
 (Recommended, but required if your input contains more than 10 unique IDs.)}
 
-\item{required_score}{Numeric (between 0 and 1000): Minimum interaction
+\item{required_score}{Numeric: (optional) (between 0 and 1000): Minimum interaction
 score required for an interaction to be included in the returned
 interactions. If omitted, STRING applies a network-dependent threshold.
 Common confidence thresholds are 150 (low), 400 (medium), 700 (high), and
 900 (highest).}
 
-\item{network_type}{Character: One of:\itemize{
+\item{network_type}{Character: (default = \code{"functional"}) One of:\itemize{
 \item "functional": (default) Edges indicate both physical and
 functional associations.
 \item "physical": Edges indicate that two proteins have a physical
 interaction or are parts of a complex.}}
 
-\item{limit}{Numeric: Maximum number of interaction partners returned for
+\item{limit}{Numeric: (optional) Maximum number of interaction partners returned for
 each input protein, ordered by confidence.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s

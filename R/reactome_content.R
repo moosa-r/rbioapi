@@ -761,7 +761,7 @@ rba_reactome_event_hierarchy <- function(species,
 #'   \{identifier\}.pdf"
 #'
 #' @param event_id Character: Reactome event's identifier.
-#' @param save_to NULL or Character: (default = \code{NULL}) \itemize{
+#' @param save_to Character: (optional) \itemize{
 #'   \item NULL: Save the file to an automatically-generated path.
 #'   \item Character string: A valid file path to save the file to.}
 #' @param create_document Logical: (default = \code{FALSE}) Create PDF document
@@ -794,7 +794,7 @@ rba_reactome_event_hierarchy <- function(species,
 #' @param flg_interactors Logical: (default = \code{TRUE}) (Only if
 #'   "create_document" is FALSE) Should the interactor be considered when
 #'   flagging a diagram element?
-#' @param sel Character vector: (optional) (Only if "create_document" is FALSE)
+#' @param sel Character: (optional) (Only if "create_document" is FALSE)
 #'   CSV line for highlighting element(s) selection in the diagram.
 #' @param title Logical: (default = \code{TRUE}) (Only if "create_document" is
 #'   FALSE) Should the pathway name be displayed below the image?
@@ -1019,7 +1019,7 @@ rba_reactome_exporter_diagram <- function(event_id,
 #' @param event_id Character: Reactome event's database IDs (DbId) or Stable IDs
 #'   (StId).
 #' @param output_format Character: Either "sbgn" or "sbml".
-#' @param save_to NULL or Character: (default = \code{NULL}) \itemize{
+#' @param save_to Character: (optional) \itemize{
 #'   \item NULL: Save the file to an automatically-generated path.
 #'   \item Character string: A valid file path to save the file to.}
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -1123,7 +1123,7 @@ rba_reactome_exporter_event <- function(event_id,
 #'    Data Schema: Entries: Species}.
 #' @param output_format Character: (default = \code{"png"}) Image format, can be
 #'   one of: png, jpg, jpeg, svg or gif.
-#' @param save_to NULL or Character: (default = \code{NULL}) \itemize{
+#' @param save_to Character: (optional) \itemize{
 #'   \item NULL: Save the file to an automatically-generated path.
 #'   \item Character string: A valid file path to save the file to.}
 #' @param image_quality Numeric: (default = \code{5}) A number  ranging from 1
@@ -1132,7 +1132,7 @@ rba_reactome_exporter_event <- function(event_id,
 #'   or Reactome ID of a diagram's element to be flagged.
 #' @param flg_interactors Logical: (default = \code{TRUE}) Should the interactor
 #'   be considered when flagging a diagram element?
-#' @param sel Character vector: (optional) CSV line for highlighting element(s)
+#' @param sel Character: (optional) CSV line for highlighting element(s)
 #'   selection in the diagram.
 #' @param title Logical: (default = \code{TRUE}) Should the pathway name be
 #'   displayed below the image?
@@ -1334,7 +1334,7 @@ rba_reactome_exporter_overview <- function(species,
 #' event}'s identifier.
 #' @param output_format Character: (default = \code{"png"}) Image format, can be
 #'   one of: png, jpg, jpeg, svg or gif.
-#' @param save_to NULL or Character: (default = \code{NULL}) \itemize{
+#' @param save_to Character: (optional) \itemize{
 #'   \item NULL: Save the file to an automatically-generated path.
 #'   \item Character string: A valid file path to save the file to.}
 #' @param image_quality Numeric: (default = \code{5}) A number  ranging from 1
@@ -1343,7 +1343,7 @@ rba_reactome_exporter_overview <- function(species,
 #'   or Reactome ID of a diagram's element to be flagged.
 #' @param flg_interactors Logical: (default = \code{TRUE}) Should the interactor
 #'   be considered when flagging a diagram element?
-#' @param sel Character vector: (optional) CSV line for highlighting element(s)
+#' @param sel Character: (optional) CSV line for highlighting element(s)
 #'   selection in the diagram.
 #' @param title Logical: (default = \code{TRUE}) Should the pathway name be
 #'   displayed below the image?
@@ -1537,7 +1537,7 @@ rba_reactome_exporter_reaction <- function(event_id,
 #'    \{resource\}/summary"
 #'  \cr "GET https://reactome.org/ContentService/interactors/psicquic/resources"
 #'
-#' @param proteins Character or Numeric vector: (optional) Proteins to retrieve
+#' @param proteins Character or Numeric: (optional) Proteins to retrieve
 #'   PSICQUIC interactors.
 #' @param resource Character: (optional) The PSICQUIC resource for your supplied
 #'   proteins. Call rba_reactome_interactors_psicquic() without argument to get
@@ -1682,7 +1682,7 @@ rba_reactome_interactors_psicquic <- function(proteins = NULL,
 #'  \cr "GET https://reactome.org/ContentService/interactors/static/molecule/
 #'  \{identifier\}/pathways"
 #'
-#' @param proteins Character or Numeric vector: UniProt protein accession(s). If
+#' @param proteins Character or Numeric: UniProt protein accession(s). If
 #'   \code{endpoint = "pathways"}, only a single protein accession can be
 #'   supplied.
 #' @param endpoint Character: (default = \code{"details"}) Can be one of:
@@ -1973,7 +1973,7 @@ rba_reactome_mapping <- function(id,
 #'  "POST https://reactome.org/ContentService/data/orthologies/ids/
 #'    species/\{speciesId\}"
 #'
-#' @param event_ids Character vector: Up to 20 human Reactome event IDs to
+#' @param event_ids Character: Up to 20 human Reactome event IDs to
 #'   retrieve their orthologous events.
 #' @param species_dbid Numeric: Reactome database ID (DbId) of the target
 #'   species. (e.g Mus musculus is 48892). See
@@ -2237,7 +2237,7 @@ rba_reactome_participants <- function(event_id,
 #'
 #' @param event_id Character or Numeric: Reactome event's database ID (DbId) or
 #'   Stable ID (StId).
-#' @param attribute_name Character: Optional event attribute to return instead
+#' @param attribute_name Character: (optional) Optional event attribute to return instead
 #'   of complete event records. See
 #'   \href{https://reactome.org/content/schema/Event}{Reactome Data Schema:
 #'   Event} for available options.
@@ -2916,7 +2916,7 @@ rba_reactome_people_id <- function(person_id,
 #'  \cr "GET https://reactome.org/ContentService/data/query/enhanced/v2/\{id\}"
 #'  \cr "GET https://reactome.org/ContentService/data/query/\{id\}/\{attributeName\}"
 #'
-#' @param ids Character or Numeric vector: One or more database identifiers
+#' @param ids Character or Numeric: One or more database identifiers
 #'   (DbIds), stable identifiers (StIds), or a mixture of both. At most 20
 #'   identifiers can be supplied.
 #' @param enhanced Logical: (default = \code{FALSE}) Should additional related
@@ -3149,14 +3149,14 @@ rba_reactome_query <- function(ids,
 #'  "GET https://reactome.org/ContentService/search/query"
 #'
 #' @param query Character: Text to search for in the Reactome knowledgebase.
-#' @param species Character vector: (optional) Scientific species name(s) used
+#' @param species Character: (optional) Scientific species name(s) used
 #'   to filter the results, e.g. \code{"Homo sapiens"}. See
 #'   \code{\link{rba_reactome_species}} for species available in Reactome.
-#' @param types Character vector: (optional) Result type(s) used to filter the
+#' @param types Character: (optional) Result type(s) used to filter the
 #'   search, e.g. \code{"Protein"}, \code{"Pathway"}, or \code{"Reaction"}.
-#' @param compartments Character vector: (optional) Cellular compartment
+#' @param compartments Character: (optional) Cellular compartment
 #'   name(s) used to filter the results.
-#' @param keywords Character vector: (optional) Reactome search keyword(s) used
+#' @param keywords Character: (optional) Reactome search keyword(s) used
 #'   to filter the results.
 #' @param cluster Logical: (default = \code{TRUE}) Should matches be separated
 #'   into groups according to their result type? If FALSE, matches are returned
@@ -3343,7 +3343,7 @@ rba_reactome_search <- function(query,
 #'  "GET https://reactome.org/ContentService/references/mapping/\{identifier\}"
 #'  \cr "POST https://reactome.org/ContentService/references/mapping/xrefs"
 #'
-#' @param xref_id Character or Numeric vector: One or more cross-reference
+#' @param xref_id Character or Numeric: One or more cross-reference
 #'   identifiers from external databases. Multiple identifiers can only be
 #'   supplied when \code{expanded = TRUE}.
 #' @param expanded Logical: (default = \code{FALSE}) Should other external

@@ -32,7 +32,7 @@ Data Schema: Entries: Species}.}
 \item{output_format}{Character: (default = \code{"png"}) Image format, can be
 one of: png, jpg, jpeg, svg or gif.}
 
-\item{save_to}{NULL or Character: (default = \code{NULL}) \itemize{
+\item{save_to}{Character: (optional) \itemize{
 \item NULL: Save the file to an automatically-generated path.
 \item Character string: A valid file path to save the file to.}}
 
@@ -45,7 +45,7 @@ or Reactome ID of a diagram's element to be flagged.}
 \item{flg_interactors}{Logical: (default = \code{TRUE}) Should the interactor
 be considered when flagging a diagram element?}
 
-\item{sel}{Character vector: (optional) CSV line for highlighting element(s)
+\item{sel}{Character: (optional) CSV line for highlighting element(s)
 selection in the diagram.}
 
 \item{title}{Logical: (default = \code{TRUE}) Should the pathway name be

@@ -217,7 +217,7 @@ rba_mieaa_cats <- function(mirna_type, species, mode = "all", ...) {
 #' miEAA uses miRBase v22 identifiers. This function converts a set of mature
 #'   or precursor miRNA identifiers between two supported miRBase versions.
 #'
-#' @param mirna Character vector: miRNA identifiers to convert.
+#' @param mirna Character: miRNA identifiers to convert.
 #' @param mirna_type Character: Type of the supplied miRNA identifiers; either
 #'   "mature" or "precursor".
 #' @param input_version Numeric: miRBase version of the supplied identifiers.
@@ -362,7 +362,7 @@ rba_mieaa_convert_version <- function(mirna,
 #'   for microRNA annotation}). Use this function to convert mature miRNA
 #'   identifiers to precursor identifiers or vice versa.
 #'
-#' @param mirna Character vector: miRNA identifiers to convert.
+#' @param mirna Character: miRNA identifiers to convert.
 #' @param input_type Character: Type of the supplied miRNA identifiers; either
 #'   "mature" or "precursor".
 #' @param only_unique Logical: (default = \code{FALSE}) Mature and precursor
@@ -503,7 +503,7 @@ rba_mieaa_convert_type <- function(mirna,
 #'   automatically perform this and other required function calls to
 #'   perform enrichment analysis on your input miRNA-set using miEAA.
 #'
-#' @param test_set Character vector: Mature or precursor miRBase miRNA
+#' @param test_set Character: Mature or precursor miRBase miRNA
 #'   identifiers. Note that \enumerate{
 #'   \item Only miRBase v22 identifiers are accepted. You can use
 #'   \code{\link{rba_mieaa_convert_version}} to convert older identifiers to
@@ -531,7 +531,7 @@ rba_mieaa_convert_type <- function(mirna,
 #'  \item "Gallus gallus", "gga" or 9031
 #'  \item "Sus scrofa", "ssc" or  9823
 #'  }
-#' @param categories Character vector: (default = \code{NULL}) One or more
+#' @param categories Character: (optional) One or more
 #'   category identifiers to use for miRNA set enrichment analysis. Note that
 #'   \itemize{
 #'   \item Available categories vary with the selected species and whether
@@ -553,7 +553,7 @@ rba_mieaa_convert_type <- function(mirna,
 #' @param min_hits Numeric: (default = \code{2}) Minimum number of miRNAs from
 #'   the test set that a subcategory must contain to be included in the
 #'   results. Must be a positive integer.
-#' @param ref_set Character vector: (default = \code{NULL}) Only applicable
+#' @param ref_set Character: (optional) Only applicable
 #'   when \code{test_type = "ORA"}. Used as the reference (background or
 #'   universe) set for p-value calculations.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s

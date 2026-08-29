@@ -13,7 +13,7 @@ rba_reactome_interactors_static(
 )
 }
 \arguments{
-\item{proteins}{Character or Numeric vector: UniProt protein accession(s). If
+\item{proteins}{Character or Numeric: UniProt protein accession(s). If
 \code{endpoint = "pathways"}, only a single protein accession can be
 supplied.}
 

@@ -7,11 +7,11 @@
 rba_enrichr_gene_map(gene, categorize = FALSE, organism = "human", ...)
 }
 \arguments{
-\item{gene}{character: An Entrez gene symbol.}
+\item{gene}{Character: An Entrez gene symbol.}
 
-\item{categorize}{logical: Should the category information be included?}
+\item{categorize}{Logical: (default = \code{FALSE}) Should the category information be included?}
 
-\item{organism}{(default = "human") Which model organism version of Enrichr
+\item{organism}{Character: (default = \code{"human"}) Which model organism version of Enrichr
 to use? Available options are: "human", (H. sapiens & M. musculus),
 "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
 and "fish" (D. rerio).}

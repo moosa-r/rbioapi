@@ -18,7 +18,7 @@ rba_panther_enrich(
 )
 }
 \arguments{
-\item{genes}{Either a character vector or a data frame. Depending on
+\item{genes}{Character or Data frame: A vector or data frame. Depending on
 this parameter, the analysis type is determined.
 \describe{
 \item{Character vector:}{If a character vector is supplied,
@@ -36,17 +36,17 @@ Ensembl transcript ID, Entrez gene ID, gene symbol, NCBI GI, HGNC ID,
 International protein index ID, NCBI UniGene ID, UniProt accession
 or UniProt ID.}
 
-\item{organism}{(numeric) NCBI taxon ID. run \code{\link{rba_panther_info}}
+\item{organism}{Numeric: NCBI taxon ID. run \code{\link{rba_panther_info}}
 with argument 'what = "organisms"' to get a list of PANTHER's
 supported organisms.}
 
-\item{annot_dataset}{A PANTHER dataset ID to test your input against it.
+\item{annot_dataset}{Character: A PANTHER dataset ID to test your input against it.
 run \code{\link{rba_panther_info}} with argument 'what = "datasets"' to
 get a list of PANTHER's supported datasets. Note that you should enter
 the "id" of the dataset, not its label (e.g. entering "biological_process"
 is incorrect, you should rather enter "GO:0008150").}
 
-\item{test_type}{Statistical test type used to calculate p-values.
+\item{test_type}{Character: (optional) Statistical test type used to calculate p-values.
 \itemize{
 \item If performing over-representation analysis (i.e. `genes` is a
 character vector), valid values are "FISHER" (default if NULL) or
@@ -55,25 +55,25 @@ character vector), valid values are "FISHER" (default if NULL) or
 data frame), the only valid value is "Mann-Whitney" (default if NULL).
 }}
 
-\item{correction}{p value correction method. either "FDR" (default),
+\item{correction}{Character: (default = \code{"FDR"}) p value correction method. either "FDR" (default),
 "BONFERRONI" or "NONE".}
 
-\item{cutoff}{(Numeric) (Optional) a threshold to filter the results.
+\item{cutoff}{Numeric: (optional) a threshold to filter the results.
 if correction is "FDR", the threshold will be applied to fdr column's
 values; if otherwise, the threshold will be applied to p value column.}
 
-\item{ref_genes}{(Optional, only valid if genes is a character vector)
-A character or numeric vector of genes that will be used as the test's
+\item{ref_genes}{Character or Numeric: (optional) (only valid if genes is a character vector)
+A vector of genes that will be used as the test's
 background (reference/universe) gene set. If no value is supplied, all of
 the genes in the specified organism will be used. The maximum length and
 supported IDs are the same as the 'genes' argument.}
 
-\item{ref_organism}{(Optional, only valid if genes is a character vector)
+\item{ref_organism}{Numeric: (optional) (only valid if genes is a character vector)
 if 'ref_genes' is used, you can specify the organisms which correspond to
 your supplied IDs in 'ref_genes' argument. see 'organism' argument for
 supported values.}
 
-\item{request_mapped_genes}{(Character, only used if genes is a character
+\item{request_mapped_genes}{Character: (default = \code{"input"}) (only used if genes is a character
 vector, hence Over-representation test is requested) Which mapped genes
 should be returned for each result term. One of "input" (default),
 "reference", or "none". Requesting "reference" without supplying

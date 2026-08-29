@@ -7,21 +7,21 @@
 rba_panther_homolog(genes, organism, type = "P", target_organisms = NULL, ...)
 }
 \arguments{
-\item{genes}{Character or numeric vector of gene identifiers with maximum
+\item{genes}{Character or Numeric: A vector of gene identifiers with maximum
 length of 10. Can be any of: Ensembl gene ID, Ensembl protein ID, Ensembl
 transcript ID, Entrez gene ID, gene symbol, NCBI GI, HGNC ID,
 International protein index ID, NCBI UniGene ID, UniProt accession and/or
 UniProt ID.}
 
-\item{organism}{(numeric) NCBI taxon ID of the organism of your supplied
+\item{organism}{Numeric: NCBI taxon ID of the organism of your supplied
 genes. run \code{\link{rba_panther_info}} with argument
 'what = "organisms"' to get a list of PANTHER's supported organisms.}
 
-\item{type}{Homolog types to return. either "P" (default) for paralogs,
+\item{type}{Character: (default = \code{"P"}) Homolog types to return. either "P" (default) for paralogs,
 "X" for horizontal gene transfer and "LDX" for least diverged horizontal
 gene transfer.}
 
-\item{target_organisms}{(numeric) NCBI taxon ID(s) to filter the results.
+\item{target_organisms}{Numeric: (optional) NCBI taxon ID(s) to filter the results.
 run \code{\link{rba_panther_info}} with argument 'what = "organisms"' to
 get a list of PANTHER's supported organisms.
 This argument is ignored for paralogs, which are searched within the input

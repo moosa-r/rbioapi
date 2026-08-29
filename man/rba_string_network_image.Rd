@@ -26,48 +26,48 @@ rba_string_network_image(
 )
 }
 \arguments{
-\item{ids}{Your protein ID(s). It is strongly recommended to supply
+\item{ids}{Character or Numeric: Your protein ID(s). It is strongly recommended to supply
 STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
 \cr Alternatively, you can retrieve the network of proteins annotated with
 a STRING functional term by setting \code{ids = NULL} and supplying
 \code{network_term_id}.}
 
-\item{image_format}{Character: One of:\itemize{
+\item{image_format}{Character: (default = \code{"image"}) One of:\itemize{
 \item "image": PNG image with normal resolution.
 \item "highres_image": High-resolution PNG image.
 \item "svg": Scalable Vector Graphics image.}}
 
-\item{save_image}{Logical or Character:\itemize{
+\item{save_image}{Logical or Character: (default = \code{TRUE}) \itemize{
 \item TRUE: Save the image to an automatically-generated path.
 \item FALSE: Do not save the image, just return it as an R object.
 \item Character string: A valid file path to save the image to.}}
 
-\item{species}{Numeric:
+\item{species}{Numeric: (optional)
 \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
 Required when using \code{network_term_id}; otherwise recommended, but
 required if your input contains more than 10 unique IDs.}
 
-\item{add_color_nodes}{Numeric: The number of colored nodes (queried proteins
+\item{add_color_nodes}{Numeric: (optional) The number of colored nodes (queried proteins
 and first shell of interactors) to be added.}
 
-\item{add_white_nodes}{Numeric: The number of white nodes (second shell of
+\item{add_white_nodes}{Numeric: (optional) The number of white nodes (second shell of
 interactors) to be added after colored nodes.}
 
-\item{required_score}{Numeric (between 0 and 1000): Minimum interaction
+\item{required_score}{Numeric: (optional) (between 0 and 1000): Minimum interaction
 score required for an interaction to be included in the image. If omitted,
 STRING applies a network-dependent threshold. Common
 confidence thresholds are 150 (low), 400 (medium), 700 (high), and 900
 (highest).}
 
-\item{network_flavor}{Character: The network-edge style. One of:\itemize{
+\item{network_flavor}{Character: (default = \code{"evidence"}) The network-edge style. One of:\itemize{
 \item "evidence": (default) Edge colors indicate the types of evidence
 supporting each interaction.
 \item "confidence": Edge thickness indicates the interaction confidence
 score.
 \item "actions": Edge shape indicates the predicted mode of action.}}
 
-\item{network_type}{Character: One of:\itemize{
+\item{network_type}{Character: (default = \code{"functional"}) One of:\itemize{
 \item "functional": (default) Edges indicate both physical and
 functional associations.
 \item "physical": Edges indicate that two proteins have a physical
@@ -91,10 +91,10 @@ instead of the default 3D design.}
 \item{node_labels_center}{Logical: (default = \code{FALSE}) Center protein labels
 on the nodes.}
 
-\item{node_labels_font_size}{Numeric (between 5 and 50; default = 12):
+\item{node_labels_font_size}{Numeric: (default = \code{12}) (between 5 and 50; default = 12):
 Font size of the protein node labels.}
 
-\item{network_term_id}{Character: A functional term identifier (e.g. a Gene
+\item{network_term_id}{Character: (optional) A functional term identifier (e.g. a Gene
 Ontology, KEGG, or Reactome identifier). Instead of using proteins supplied
 through \code{ids}, STRING constructs the network from proteins annotated
 with the specified term. Set \code{ids = NULL} and supply \code{species}.}

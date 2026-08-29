@@ -10,11 +10,11 @@ rba_jaspar_matrix(matrix_id, file_format = NULL, save_to = NULL, ...)
 \item{matrix_id}{Character: A matrix profile
 identifier. It follows a "base_id.version" naming scheme.}
 
-\item{file_format}{Character: Instead of returning an R object, you
+\item{file_format}{Character: (optional) Instead of returning an R object, you
 can directly download the profile matrix as a file in this format.
 Supported formats are "yaml", "jaspar", "transfac", "meme", and "pfm".}
 
-\item{save_to}{NULL or Character:\itemize{
+\item{save_to}{Character: (optional) \itemize{
 \item NULL: (only if file_format was supplied) Save the file to an
   automatically-generated path.
 \item Character string: A valid file or directory path to save the file to.}}

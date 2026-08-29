@@ -14,15 +14,15 @@ rba_string_annotations(
 )
 }
 \arguments{
-\item{ids}{Your protein ID(s). It is strongly recommended to supply
+\item{ids}{Character or Numeric: Your protein ID(s). It is strongly recommended to supply
 STRING IDs. See \code{\link{rba_string_map_ids}} for more information.}
 
-\item{species}{Numeric:
+\item{species}{Numeric: (optional)
 \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
 (Recommended, but optional.)}
 
-\item{allow_pubmed}{Logical (default = \code{FALSE}): Include PubMed
+\item{allow_pubmed}{Logical: (default = \code{FALSE}) Include PubMed
 annotations. These annotations are excluded by default because many
 publications may be assigned to each protein. This argument is ignored
 when \code{only_pubmed = TRUE}.}
@@ -30,7 +30,7 @@ when \code{only_pubmed = TRUE}.}
 \item{split_df}{Logical: (default = \code{TRUE}) Split results into a list
 of data frames by \code{category}; otherwise, return one data frame.}
 
-\item{only_pubmed}{Logical (default = \code{FALSE}): Return only PubMed
+\item{only_pubmed}{Logical: (default = \code{FALSE}) Return only PubMed
 annotations. This takes precedence over \code{allow_pubmed}.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s

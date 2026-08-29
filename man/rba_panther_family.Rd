@@ -7,16 +7,16 @@
 rba_panther_family(id, what, target_organisms = NULL, ...)
 }
 \arguments{
-\item{id}{Panther family id.}
+\item{id}{Character: Panther family id.}
 
-\item{what}{What to retrieve? One of: \itemize{
+\item{what}{Character: What to retrieve? One of: \itemize{
 \item "ortholog": Orthologs ('LDO' for least diverged and 'O' for more
   diverged).
 \item "msa": Multiple Sequence Alignment Information,
 \item "tree": Tree topology and nodes attributes.
 }}
 
-\item{target_organisms}{(numeric) NCBI taxon ID(s) to filter the results.
+\item{target_organisms}{Numeric: (optional) NCBI taxon ID(s) to filter the results.
 run \code{\link{rba_panther_info}} with argument 'what = "organisms"' to
 get a list of PANTHER's supported organisms.}
 

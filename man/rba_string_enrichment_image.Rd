@@ -18,46 +18,46 @@ rba_string_enrichment_image(
 )
 }
 \arguments{
-\item{ids}{Your protein ID(s). It is strongly recommended to supply
+\item{ids}{Character or Numeric: Your protein ID(s). It is strongly recommended to supply
 STRING IDs. See \code{\link{rba_string_map_ids}} for more information.
 If only one ID is supplied, STRING expands the network by 10
 proteins.}
 
-\item{species}{Numeric:
+\item{species}{Numeric: (optional)
 \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
 (Recommended, but required if your input contains more than 10 unique IDs.)}
 
-\item{category}{Character: The term set to use for enrichment analysis.
+\item{category}{Character: (default = \code{"Process"}) The term set to use for enrichment analysis.
 Valid values are:
 "Process" (default), "Function", "Component", "Keyword", "KEGG", "RCTM",
 "HPO", "MPO", "DPO", "WPO", "ZPO", "FYPO", "Pfam", "SMART", "InterPro",
 "PMID", "NetworkNeighborAL", "COMPARTMENTS", "TISSUES", "DISEASES", or
 "WikiPathways". See Details for descriptions.}
 
-\item{image_format}{Character: One of:\itemize{
+\item{image_format}{Character: (default = \code{"image"}) One of:\itemize{
 \item "image": PNG image with normal resolution.
 \item "highres_image": High-resolution PNG image.
 \item "svg": Scalable Vector Graphics image.}}
 
-\item{save_image}{Logical or Character:\itemize{
+\item{save_image}{Logical or Character: (default = \code{TRUE}) \itemize{
 \item TRUE: Save the image to an automatically-generated path.
 \item FALSE: Do not save the image, just return it as an R object.
 \item Character string: A valid file path to save the image to.}}
 
-\item{group_by_similarity}{Numeric: Jaccard-index threshold used to group
+\item{group_by_similarity}{Numeric: (optional) Jaccard-index threshold used to group
 related terms visually. Valid values range from 0.1 to 1 in increments of
 0.1. The default is \code{NULL}, which disables grouping.}
 
-\item{color_palette}{Character: Color palette used to represent FDR values.
+\item{color_palette}{Character: (default = \code{"mint_blue"}) Color palette used to represent FDR values.
 Valid values are
 "mint_blue" (default), "lime_emerald", "green_blue", "peach_purple",
 "straw_navy", or "yellow_pink".}
 
-\item{number_of_term_shown}{Numeric: (default = 10) Maximum number of terms
+\item{number_of_term_shown}{Numeric: (default = \code{10}) Maximum number of terms
 to include in the plot.}
 
-\item{x_axis}{Character: Variable displayed on the x-axis and used to rank
+\item{x_axis}{Character: (default = \code{"signal"}) Variable displayed on the x-axis and used to rank
 the results. Valid values are "signal" (default), "strength", "FDR", and
 "gene_count".}
 
