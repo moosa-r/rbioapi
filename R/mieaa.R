@@ -1,16 +1,25 @@
-#' Handle Species argument input for miEAA endpoints
+#' Normalize miEAA Species Input
 #'
-#' This internal function allows users to supply a supported species as an
-#'   abbreviation, NCBI taxonomy identifier, or scientific name. Invalid or
-#'   unsupported values produce an informative error message.
+#' Match a supported abbreviation, NCBI taxonomy identifier, or scientific name
+#'   to its three-letter miEAA abbreviation. When to_name is TRUE, return the
+#'   scientific name for an abbreviation instead.
 #'
-#' @param sp Character or Numeric: A supported species abbreviation, NCBI
-#'   taxonomy identifier, or scientific name.
-#' @param to_name Logical: (default = \code{FALSE}) Convert a supplied species
-#'   abbreviation to its scientific name.
+#' Used by rba_mieaa_cats() and rba_mieaa_enrich_submit() to normalize species
+#'   values sent to miEAA and to show the corresponding scientific names in
+#'   messages.
 #'
-#' @return If \code{to_name = FALSE}, a three-letter abbreviation for a
-#'   supported miEAA species. Otherwise, the corresponding scientific name.
+#' @param sp Character or Numeric: A single supported species abbreviation,
+#'   NCBI taxonomy identifier, or scientific name. Accepted abbreviations are
+#'   "hsa", "mmu", "rno", "ath", "bta", "cel", "dme", "dre", "gga", and "ssc";
+#'   accepted taxonomy identifiers are 9606, 10090, 10116, 3702, 9913, 6239,
+#'   7227, 7955, 9031, and 9823. Their corresponding scientific names are also
+#'   accepted.
+#' @param to_name Logical: (default = FALSE) Convert a supplied species
+#'   abbreviation to its scientific name. When TRUE, sp must be an
+#'   abbreviation.
+#'
+#' @return A three-letter miEAA species abbreviation when to_name is FALSE; the
+#'   corresponding scientific name otherwise.
 #'
 #' @examples
 #' \donttest{

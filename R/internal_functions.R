@@ -1,18 +1,17 @@
 ##### data containers #######################################################
 #' Internal Data Container for rbioapi
 #'
-#' A central way to return information necessary for the internal functions to
-#'   work.
+#' Retrieve shared service metadata, current package options, configured service
+#'   keys, or connection-test URLs. The first key selects "db", "options",
+#'   "tests", or a configured service key; additional keys select values within
+#'   that entry.
 #'
-#' Consult the source codes to learn about supported arguments and data
-#'   structure. it is straightforward and self-explanatory.
-#'   Currently the first argument can be 'db', 'options', 'tests', or a
-#'   service name.
+#' Used throughout API-facing functions to retrieve service URLs and resource
+#'   paths, by rba_connection_test() to obtain test URLs, and by
+#'   .rba_error_parser() to select service-specific error rules.
 #'
-#' @param ... A sequence of exact keys used to traverse the defined data
-#'   storage tree.
-#' @return Based on the called sequence of arguments, it could be any object
-#'   type. but mostly, it will be of class character.
+#' @param ... Character: One to three exact keys identifying a stored value.
+#' @return The selected value.
 #' @family internal_data_container
 #' @noRd
 .rba_stg <- function(...){
@@ -212,23 +211,27 @@
 
 ##### Internet connectivity ##################################################
 
-#' Handle Situations with Connection or Server Problems
+#' Check Connectivity Before Retrying an API Request
 #'
-#' When called, the function will test the Internet connection. Based on called
-#'   arguments it will try suspend the execution of R codes and retry and test
-#'   if necessary until the device is connected back to the internet.
+#' Send an HTTP HEAD request to Google to test whether the device can reach the
+#'   internet. If the first attempt fails, retry the connectivity test up to
+#'   retry_max times and wait retry_wait seconds between attempts.
 #'
-#' @param retry_max numeric: The maximum times to Retry the connection test.
-#' @param retry_wait numeric: The value in seconds which will be passed to
-#'   sys.sleep() between each connection test.
-#' @param verbose logical: Generate informative messages.
-#' @param diagnostics logical: Generate diagnostics and detailed messages with
-#'   internal information.
-#' @param skip_error logical: If TRUE, in case of an error HTTP status other
-#'  than 200, instead of halting the code execution, the error message will be
-#'  returned as the function's output.
+#' Used by .rba_api_call() after a request fails or returns a 5xx response. The
+#'   result determines whether the original API request is retried or reported
+#'   as a connectivity or server failure.
 #'
-#' @return TRUE if connected to the internet, a character string if not.
+#' @param retry_max Numeric: (default = 0) Maximum retries after the first
+#'   connection test. Must be a finite non-negative whole number.
+#' @param retry_wait Numeric: (default = 10) Seconds to wait between retries.
+#'   Must be finite and non-negative.
+#' @param verbose Logical: (default = FALSE) Show a message before each retry.
+#' @param diagnostics Logical: (default = FALSE) Show httr diagnostics and the
+#'   final connection status.
+#' @param skip_error Logical: (default = TRUE) Currently unused; included
+#'   because .rba_api_call() passes the same argument.
+#'
+#' @return TRUE if any connectivity test returns HTTP 200; FALSE otherwise.
 #' @family internal_internet_connectivity
 #' @noRd
 .rba_net_handle <- function(retry_max = 0,
@@ -269,17 +272,20 @@
   } #end of if net_test
 }
 
-#' Translate HTTP Status Code to Human-Readable Explanation
+#' Describe an HTTP Status Code
 #'
-#' It will make HTTP status more informative by trying to translate it to a
-#'   human-readable and informative text. This function is used by
-#'   .rba_error_parser() and .rba_api_check().
+#' Look up the status class and known meaning of an HTTP status code.
 #'
-#' @param http_status numeric: A standard HTTP status code.
-#' @param as_sentence logical: Should the function return a complete sentence?
+#' Used by .rba_api_check() to describe unsuccessful connection tests and by
+#'   .rba_error_parser() to add status context to service error messages.
 #'
-#' @return Character string. Returns the HTTP status code with its class and
-#'   possibly its meaning.
+#' @param http_status Character or Numeric: A single three-digit HTTP status
+#'   code from 100 through 599.
+#' @param as_sentence Logical: (default = FALSE) Format the description as a
+#'   complete sentence.
+#'
+#' @return A single character string with the status code, HTTP class, and
+#'   known meaning, optionally formatted as a sentence.
 #'
 #' @references \href{https://www.iana.org/assignments/http-status-codes/}{IANA:
 #'   Hypertext Transfer Protocol (HTTP) Status Code Registry}
@@ -409,23 +415,24 @@
 
 ##### API Calls ##################################################
 
-#' Add Additional Parameters to API-Call's Body
+#' Build Optional Parameters for an API Query
 #'
-#' Evaluate the Expression presented in the input format and Builds a list which
-#'  will serve as a query input for httr request.
+#' Add optional parameters to a base query when their conditions are TRUE. Each
+#'   definition keeps the API parameter name, inclusion condition, and value
+#'   together, so endpoint code does not need to build optional entries by hand.
 #'
-#' @param init list: initial default query parameters in the format of named
-#'   list. supply list() if it is empty.
-#' @param ... list: Additional queries to evaluate and possibly append to
-#'   the initial parameters. formatted as lists with the following order:
-#'   \enumerate{
-#'   \item parameter's name based on the API documentation,
-#'   \item An expression to be evaluated to either TRUE or FALSE,
-#'   \item A value that should be appended to the list in case of the expression
-#'   being TRUE.}
+#' Used by API-facing functions across the supported services to combine
+#'   required query values with endpoint-specific optional parameters before
+#'   constructing the request.
 #'
-#' @return Named list. with the formal API parameter's names as name and
-#'   corresponding values.
+#' @param init List: Base query as a named list. Use list() when no base
+#'   parameters are needed.
+#' @param ... List: (optional) Three-element parameter definitions: the API
+#'   parameter name, a TRUE or FALSE condition, and the value to add. Multiple
+#'   definitions may instead be supplied in a named extra_pars list.
+#'
+#' @return The completed query, with selected optional parameters appended to
+#'   init.
 #'
 #' @family internal_api_calls
 #' @noRd
@@ -480,12 +487,19 @@
   return(init)
 }
 
-#' Attach API Request Metadata
+#' Attach Request Metadata to an rbioapi Result
 #'
-#' @param result The object returned by rbioapi.
-#' @param requests List of API request records.
+#' Attach recorded request metadata to a non-NULL rbioapi result.
 #'
-#' @return \code{result} with request metadata attached.
+#' Used by .rba_skeleton() to attach records from one request path and by
+#'   .rba_metadata_aggregate() to attach records combined across a multi-step
+#'   workflow.
+#'
+#' @param result Any: rbioapi result that should receive the metadata.
+#' @param requests List: Request records collected by .rba_api_call().
+#'
+#' @return result with request metadata attached, or result unchanged when it
+#'   is NULL or requests is empty.
 #' @noRd
 .rba_metadata_attach <- function(result, requests) {
   if (is.null(result) || !length(requests)) {
@@ -502,12 +516,23 @@
   return(result)
 }
 
-#' Aggregate API Request Metadata
+#' Combine Request Metadata Across Workflow Steps
 #'
-#' @param ... Intermediate rbioapi results in execution order.
-#' @param final_object The object to return.
+#' Collect request records from intermediate results and final_object in
+#'   execution order. If a non-data-frame list has no metadata of its own,
+#'   inspect its elements. Before attaching the combined history to a list
+#'   final_object, remove metadata from its elements.
 #'
-#' @return \code{final_object} with combined request metadata attached.
+#' Used by rba_enrichr_gene_sets(), rba_enrichr_enrich(), rba_enrichr(),
+#'   rba_mieaa_enrich_submit(), rba_mieaa_enrich(), and
+#'   rba_reactome_pathways_events() so each multi-request workflow returns one
+#'   ordered history rather than metadata split across intermediate results.
+#'
+#' @param ... Any: (optional) Intermediate rbioapi results, in execution order.
+#' @param final_object Any: Object that should receive the combined records.
+#'
+#' @return final_object with combined request metadata attached, or unchanged
+#'   when no request records are found.
 #' @noRd
 .rba_metadata_aggregate <- function(..., final_object) {
   if (is.null(final_object)) {
@@ -542,38 +567,29 @@
   return(.rba_metadata_attach(final_object, requests))
 }
 
-#' Build httr HTTP Query
+#' Build httr Calls for rbioapi Requests
 #'
-#' Converts package's exported functions input to a function call understandable
-#'   by httr package.
+#' Convert request components into an unevaluated httr call, adding the package
+#'   user agent and timeout together with diagnostics, progress, accepted
+#'   response type, and disk writing when requested. Use accept and parser when
+#'   file and R outputs share a format; otherwise, select the file_* or obj_*
+#'   values according to save_to.
 #'
-#' This is a convenient interface between rbioapi exported functions and httr
-#'   package. Apart from producing a standard expression compatible with httr,
-#'   it can resolve the case when multiple parsers or HTTP accept parameters are
-#'   possible according to the end-user's inputs. Also, it will append
-#'   'httr::write()', 'httr::progress' and 'httr::verbose()' based on the
-#'   end-user's inputs.
-#'   \cr There are two scenarios with providing accepted response and response
-#'   parser arguments:
-#'   \cr 1- If it is pre-defined and end-user's inputs will not affect the accepted
-#'   and parser values, pass them as accept = x and parser = y.
-#'   \cr 2- If these values should be chosen according to save_to argument, pass
-#'   them as file_parser, file_accept, obj_parser and obj_accept. In this case,
-#'   if save_to argument is a path or logical TRUE, the response will be saved
-#'   to disk and file parser and accept will be chosen, if not, obj parser and
-#'   accept will be chosen to build httr's function call.
+#' Used by API-facing functions to construct requests consistently. They pass
+#'   its request call and parser to .rba_skeleton() for execution and response
+#'   handling.
 #'
-#' @param httr A HTTP verb's name. Can be one of 'get', 'post', 'head', 'put',
-#'   'patch' or 'delete'.
-#' @param url A URL to the HTTP resource being called.
-#' @param path A path to the HTTP resource being called.
-#' @param ... Additional arguments. 'save_to', 'accept', 'parser',
-#'   'file_accept', 'obj_accept', 'file_parser' and 'obj_parser' will be
-#'   processed. The rest will be passed to httr function's ... argument.
+#' @param httr Character: HTTP method name in lowercase. Accepted values are
+#'   "get", "post", "head", "put", "patch", and "delete".
+#' @param url Character: (optional) Base URL for the requested resource.
+#' @param path Character: (default = "") Resource path passed to the httr
+#'   method.
+#' @param ... Any: (optional) Request arguments and the save_to, accept, parser,
+#'   file_accept, obj_accept, file_parser, and obj_parser controls. All other
+#'   values are passed to the selected httr method.
 #'
-#' @return a list with two elements: call, which is a standard httr function
-#'  call and parser which is a character string that will be used later by other
-#'  rbioapi internal functions.
+#' @return A list with the unevaluated request in call and the selected parser
+#'   specification in parser.
 #'
 #' @family internal_api_calls
 #' @noRd
@@ -706,38 +722,32 @@
   return(httr_call)
 }
 
-#' Internal function to make http request
+#' Execute an API Request and Handle Failures
 #'
-#' This function will be called by .rba_skeleton() and is the internal
-#'   function which resides between making an httr function call using
-#'   .rba_httr and evaluating that call to retrieve a response from the API
-#'   server.
+#' Evaluate a request call from .rba_httr(). If it does not return an HTTP
+#'   response, or returns one with a 5xx status, check connectivity and retry
+#'   the request once when connected. Pass any remaining non-2xx response to
+#'   .rba_error_parser(). When metadata is TRUE, record every completed HTTP
+#'   response, including the response from a retry.
 #'
-#' In case of an error (anything other than status code 200), the function will
-#'   perform extra steps according to the context:
-#'   \cr 1- If it was not possible to establish a connection with the server,
-#'   .rba_net_handle() will be called to handle the situation.
-#'   \cr 2- If the server returned a status code 5xx, calling the server will be
-#'   retried accordingly.
-#'   \cr 3- if the server returned status code other than 200 or 5xx, the response
-#'   and status code will be handed to rba_error_parser() to handle the
-#'   situation.
+#' Used only by .rba_skeleton(), which supplies the per-call option values and
+#'   then parses a successful response or returns the handled failure.
 #'
-#' @param input_call A httr function call made  by .rba_httr().
-#' @param skip_error logical: If TRUE, in case of an error HTTP status other
-#'  than 200, instead of halting the code execution, the error message will be
-#'  returned as the function's output.
-#' @param retry_max numeric: A value to be passed to
-#'   .rba_net_handle() retry_max argument.
-#' @param retry_wait numeric: A value to be passed to
-#'   .rba_net_handle() retry_wait argument.
-#' @param verbose should the function generate informative messages?
-#' @param diagnostics logical: Generate diagnostics and detailed messages with
-#'   internal information.
-#' @param metadata Logical: collect request metadata?
+#' @param input_call Call: Unevaluated httr request call from .rba_httr().
+#' @param skip_error Logical: (default = TRUE) Return request errors and
+#'   non-2xx responses as error messages instead of stopping.
+#' @param retry_max Numeric: (default = 0) Maximum retries after the first
+#'   connectivity test. Must be a finite non-negative whole number.
+#' @param retry_wait Numeric: (default = 10) Seconds between connectivity test
+#'   retries. Must be finite and non-negative.
+#' @param verbose Logical: (default = TRUE) Show connectivity retry messages.
+#' @param diagnostics Logical: (default = FALSE) Show httr diagnostics and
+#'   include calls in error messages.
+#' @param metadata Logical: (default = FALSE) Record each completed HTTP
+#'   response.
 #'
-#' @return A list containing the response or error result and any request
-#'   metadata records.
+#' @return A list with the HTTP response or error message in result and recorded
+#'   request metadata in requests.
 #'
 #' @family internal_api_calls
 #' @noRd
@@ -836,21 +846,26 @@
 
   } else {
 
-    ## 3.3 Everything is OK (HTTP status == 200)
+    ## 3.3 Everything is OK (HTTP status is 2xx)
     return(list(result = response, requests = requests))
 
   }
 }
 
-#' Mark an API Error
+#' Mark API Errors Returned with HTTP 2xx
 #'
-#' Some APIs include an error message in a successful HTTP response. Response
-#'   parsers use this function to mark the message so remaining parsers are
-#'   skipped and .rba_skeleton() can apply 'skip_error'.
+#' Some APIs include an error message in a successful HTTP response. Mark that
+#'   message so the parser sequence stops and .rba_skeleton() can apply
+#'   skip_error.
 #'
-#' @param message A single non-missing, non-empty character string.
+#' Used by .rba_panther_check_response(), rba_panther_info(), and
+#'   rba_panther_genome() when an HTTP 200 body reports an error or a requested
+#'   page falls outside the available range. .rba_response_parser() recognizes
+#'   the added class and stops the remaining parser sequence.
 #'
-#' @return The message with classes `rba_api_error` and `character`.
+#' @param message Character: A single non-missing, non-empty character string.
+#'
+#' @return The message with classes rba_api_error and character.
 #'
 #' @family internal_response_parser
 #' @noRd
@@ -870,29 +885,28 @@
   )
 }
 
-#' A Wrapper for API Calling and Parsing the Response
+#' Execute and Parse an rbioapi Request
 #'
-#' This function will be called at the last step of any exported function to
-#'   call the server API using .rba_api_call() and parse the response using
-#'   .rba_response_parser().
+#' Complete an API request by passing input_call$call to .rba_api_call() and
+#'   applying .rba_response_parser() to a successful response.
+#'   response_parser takes precedence over input_call$parser. diagnostics,
+#'   metadata, verbose, retry_max, retry_wait, and skip_error are read from the
+#'   calling function or the package options.
 #'
-#' The function will try to use the parser specified in the 'input_call' object,
-#'   but if a parser value was supplied with the 'response_parser' argument,
-#'   it will have priority and will overwrite the input_call's parser input.
-#'   \cr diagnostics, verbose, retry_max, retry_wait and skip_error variables
-#'   \cr will be assigned and passed on to the subsequent executed calls.s
-#'   \cr note that the function was much longer at the begging of this package
-#'   development, hence the name 'skeleton'.
+#' Used as the final request step by API-facing functions. All supported
+#'   services therefore share the same execution, error handling, parsing, and
+#'   metadata attachment.
 #'
-#' @param input_call list: The exact output of .rba_httr()
-#' @param response_parser A string vector corresponding to the pre-defined
-#'   parser calls in .rba_response_parser() or an expression to be evaluated by
-#'   .rba_response_parser().
+#' @param input_call List: Output from .rba_httr(), with call and parser
+#'   elements.
+#' @param response_parser Character, Function, or List: (optional) A recognized
+#'   parser name, parser function, or sequence of parser names and functions to
+#'   be applied by .rba_response_parser().
 #'
-#' @return A parsed server Response which may be and R object of any class,
-#'   depending on .rba_response_parser() output. In case of error and
-#'   'skip_error = TRUE', the output will be the error message as a character
-#'   string.
+#' @return The parsed result, or NULL when the response body is empty or no
+#'   parser is available. With skip_error = TRUE, request and parsing failures
+#'   return character error messages. Request metadata is attached when
+#'   metadata is TRUE.
 #'
 #' @family internal_api_calls
 #' @noRd
@@ -993,24 +1007,23 @@
 
 #### Check Arguments #######
 
-#' Detect Required Arguments
+#' Infer NULL Constraints for Required Arguments
 #'
-#' This function is an internal component of .rba_args(). It will
-#'   detect required arguments (arguments without a default value) in the
-#'   function calling .rba_args(). For the corresponding constraints,
-#'   \code{no_null = TRUE} is automatically added unless
-#'   \code{no_null = FALSE} was explicitly supplied.
+#' For each supplied constraint, set no_null = TRUE when its argument has no
+#'   default, unless the constraint explicitly allows NULL. Leave constraints
+#'   for arguments with defaults unchanged. Contributors therefore only need to
+#'   set no_null = TRUE for a defaulted argument whose downstream use cannot
+#'   accept NULL; no_null = FALSE allows a required argument to accept NULL.
 #'
-#' Constraints for arguments with default values are not modified. Therefore,
-#'   contributors only need to explicitly add \code{no_null = TRUE} when an
-#'   argument has a default value but its downstream use cannot accept
-#'   \code{NULL}. Conversely, \code{no_null = FALSE} allows a required
-#'   argument to accept \code{NULL}.
+#' Used by .rba_args() immediately before constraint evaluation so requiredness
+#'   follows the calling function's signature instead of being repeated in each
+#'   constraint definition.
 #'
-#' @param cons Constrains input of .rba_args()
-#' @param n Number of frames to go back
+#' @param cons List: Constraint definitions supplied to .rba_args().
+#' @param n Numeric: (default = 2) Number of calling functions to step back when
+#'   locating the function to inspect.
 #'
-#' @return List: updated cons.
+#' @return cons with required arguments marked as non-NULL.
 #'
 #' @family internal_arguments_check
 #' @noRd
@@ -1047,24 +1060,22 @@
   return(cons)
 }
 
-#' Add rbioapi options to user's Arguments Check
+#' Add rbioapi Option Checks to Argument Validation
 #'
-#' This function is an internal component of .rba_args(). It will
-#'   add user-defiended rbioapi options variables (supplied by the "..."
-#'   arguments in the exported function call) to .rba_args's cond and cons.
+#' Detect standard rbioapi option variables present in the function being
+#'   validated, then add their shared constraints or conditions. Keeping these
+#'   rules here avoids repeating every option check in each API-facing function.
 #'
-#' The aim of this function is to eliminate the need
-#'   to write explicit options arguments checking when writing the exported
-#'   functions. Without this, the developer was forced to repeatably include
-#'   every rbioapi options arguments in argument checking segment of each
-#'   exported function.
+#' Used twice by .rba_args(): once to add option constraints and once to add
+#'   option conditions before endpoint-specific checks are evaluated.
 #'
-#' @param cons Constrains to be evaluated.
-#' @param cond Conditions to be evaluated.
-#' @param what what to build? cond or cons?
+#' @param cons List: (optional) Existing argument constraints to extend.
+#' @param cond List: (optional) Existing argument conditions to extend.
+#' @param what Character: Type of check to return. Accepted values are "cons"
+#'   for constraints and "cond" for conditions.
 #'
-#' @return NULL. If The arguments check failed, the code execution will be
-#' halted or a warning will be issued.
+#' @return The supplied checks plus those for rbioapi options present in the
+#'   calling function.
 #'
 #' @family internal_arguments_check
 #' @noRd
@@ -1129,17 +1140,20 @@
   }
 }
 
-#' Check If A cons Element Follows A Constrain Type
+#' Evaluate One Argument Constraint
 #'
-#' This function will take a single element from the .rba_args()'s
-#'    cons argument and a single constrain type and checks if it is TRUE.
+#' Apply one constraint to the evaluated argument stored in cons_i. NULL passes
+#'   here because .rba_args_cons_wrp() handles it first.
 #'
-#' @param cons_i element i from .rba_args()'s cons argument.
-#' @param what what constrain to check? it should be one of the possible cons
-#'  types defined in .rba_args()'s manual.
+#' Used by .rba_args() for class checks and by .rba_args_cons_wrp() for the
+#'   remaining value, range, length, whole-number, and pattern checks.
 #'
-#' @return Logical. TRUE if element i is correct with regard to the constrain
-#'   "what"; FALSE otherwise.
+#' @param cons_i List: Evaluated argument definition from .rba_args().
+#' @param what Character: Constraint to evaluate. Accepted values are "class",
+#'   "val", "ran", "integerish", "len", "min_len", "max_len", "min_val",
+#'   "max_val", or "regex".
+#'
+#' @return TRUE when the selected constraint passes; FALSE otherwise.
 #'
 #' @family internal_arguments_check
 #' @noRd
@@ -1199,17 +1213,21 @@
   }
 }
 
-#' Produce Error Message If an Element doesn't Follow a constrain
+#' Describe an Argument Constraint Failure
 #'
-#' In case of Constrain Error (i.e. a FALSE returned by
-#'   .rba_args_cons_chk()), this function will produce a related error
-#'   message.
+#' Build the error message for one failed argument constraint.
 #'
-#' @param cons_i element i from .rba_args()'s cons argument.
-#' @param what what constrain produced the error? it should be one of the
-#'  possible cons types defined in .rba_args()'s manual.
+#' Used by .rba_args() and .rba_args_cons_wrp() to turn failed class, NULL,
+#'   missing-value, value, range, length, whole-number, and pattern checks into
+#'   consistent messages.
 #'
-#' @return A character string.
+#' @param cons_i List: Evaluated argument definition associated with the
+#'   failure.
+#' @param what Character: Failed constraint. Accepted values are "no_null",
+#'   "no_na", "class", "val", "ran", "integerish", "len",
+#'   "min_len", "max_len", "min_val", "max_val", or "regex".
+#'
+#' @return The error message as a character string.
 #'
 #' @family internal_arguments_check
 #' @noRd
@@ -1285,15 +1303,18 @@
   )
 }
 
-#' A wrapper to Iterate Constrain Types on a cons' Element
+#' Evaluate All Constraints for One Argument
 #'
-#' Iterates .rba_args_cons_chk() on every defined constrain
-#'   for element i of a cons element. and produce an error message if necessary.
+#' Check whether NULL and missing values are allowed, then evaluate each
+#'   remaining constraint and collect its failure message.
 #'
-#' @param cons_i element i from .rba_args()'s cons argument.
+#' Used by .rba_args() for each evaluated argument after requiredness and class
+#'   handling, allowing all remaining failures for that argument to be reported
+#'   together.
 #'
-#' @return A character vector with containing the error message for failed
-#'   constrains, NA otherwise.
+#' @param cons_i List: Evaluated argument definition from .rba_args().
+#'
+#' @return One or more failure messages, or NA when all constraints pass.
 #'
 #' @family internal_arguments_check
 #' @noRd
@@ -1342,19 +1363,21 @@
 }
 
 
-#' Produce Error Message If an Element Doesn't Follow a Constrain
+#' Evaluate One Custom Argument Condition
 #'
-#' In case of Condition Error (i.e. a TRUE returned by evaluating the
-#'  defined conditions in cond), this function will produce  a list with:
-#'  1- messages that could be used as error or warning, 2- an element named
-#'  "warn" that if FALSE, .rba_args() will stop the code
-#'  execution with message as error, or if TRUE, issues a warning with that
-#'  message.
+#' Evaluate one condition in the environment of the function being checked. In
+#'   the validation protocol, TRUE represents a failure. A condition may add a
+#'   custom message and may mark that failure as a warning.
 #'
-#' @param cond_i element i from .rba_args()'s cond argument.
+#' Used by .rba_args() after value constraints pass to evaluate relationships
+#'   and other rules that cannot be expressed as one argument constraint.
 #'
-#' @return A list containing the messages and warn element to
-#'   determine the behavior of .rba_args().
+#' @param cond_i List: Condition definition with a quoted R call or a
+#'   character string of R code, optionally followed by a message, a warning
+#'   flag, or both.
+#'
+#' @return NA when the condition is FALSE; otherwise, a list with msg and warn
+#'   for .rba_args().
 #'
 #' @family internal_arguments_check
 #' @noRd
@@ -1427,56 +1450,36 @@
   return(err_obj)
 }
 
-#' Internal user's Arguments Check
+#' Validate Arguments in the Calling Function
 #'
-#' This function supply a flexible, yet powerful and vigorous arguments check
-#'   mechanisms. It can check many properties of input variables and also,
-#'   check if a condition holds TRUE.
+#' Validate argument values and relationships among arguments in the calling
+#'   function. A constraint definition takes a form such as
+#'   list(arg = "species", class = c("character", "numeric")). A condition
+#'   definition begins with a quoted call or a character string of R code and
+#'   may add a message, warn = TRUE, or both; a TRUE result marks a failure.
 #'
-#' cons Should be a list, and each element of that list should correspond to one
-#'   input argument and be a lists with the following format:
-#'   \cr list(arg = argument name as character string, constrain type =
-#'   constrain value)
-#'   e.g. list(arg = "species", class = c("character", "numeric"))
-#'   \cr cond should be a list. and each element of that list, should correspond
-#'   to one condition. the condition should be a quoted expression (or a
-#'   character string), which could be evaluated (or parsed and evaluated) to a
-#'   logical TRUE/FALSE object. If that expression is TRUE after the evaluation,
-#'   the code execution will be halted (or warning will be issued if
-#'   cond_warning = TURE or the last element of condition sub-list is
-#'   "warn = TRUE ), optionally with a pre-defined error message.
-#'   \cr cond's elements possible formats: \enumerate{
-#'   \item list(quote(conditional expression))
-#'   \item list(quote(conditional expression), "error message if expression
-#'   is TRUE")
-#'   \item list(quote(conditional expression), "warning message if expression
-#'   is TRUE", warn = TRUE)
-#'   \item list(quote(conditional expression), warn = TRUE)
-#'   }
+#' Used throughout API-facing functions and selected helpers to keep argument
+#'   contracts in one validation path. Standard rbioapi option checks are added
+#'   automatically when their variables are present in the calling function.
 #'
-#' @param cons Define Constrains for input arguments. Currently they may be:
-#'   \cr "no_null", "no_na", "class", "val", "ran", "integerish",
-#'   "min_val", "max_val", "len", "min_len", "max_len" and/or "regex".
-#'   \cr \code{no_null = TRUE} rejects \code{NULL}. When \code{no_null} is
-#'   omitted, it is automatically set to \code{TRUE} only for function
-#'   arguments without default values. Arguments with defaults continue to
-#'   accept \code{NULL} unless \code{no_null = TRUE} is explicitly supplied.
-#'   Set \code{no_null = FALSE} to allow a required argument to accept
-#'   \code{NULL}.
-#'   By default, all non-\code{NULL} arguments reject missing values. Set
-#'   \code{no_na = FALSE} for arguments that intentionally accept \code{NA}.
-#'   \code{integerish = TRUE} requires numeric values to be finite and exactly
-#'   whole-valued without affecting permitted non-numeric alternatives. It does
-#'   not impose sign or range constraints; combine it with \code{min_val},
-#'   \code{max_val}, or \code{ran} when needed.
-#' @param cond Expression which will be evaluated to TRUE or FALSE.
-#' @param cond_warning Should the function produce warning instead of stopping
-#'   code execution? alternatively, you could include an element to
-#'   any condition sub-list as "warn = TRUE", to only produce warning message
-#'   for that condition only.
+#' @param cons List: (optional) Argument constraints. Each list element names an
+#'   argument in arg and may define no_null, no_na, class, val, ran, integerish,
+#'   min_val, max_val, len, min_len, max_len, or regex. Arguments without
+#'   defaults reject NULL unless no_null = FALSE; arguments with defaults allow
+#'   NULL unless no_null = TRUE. Non-NULL values reject NA and NaN unless
+#'   no_na = FALSE. integerish = TRUE requires finite whole numbers but does not
+#'   impose a sign or range.
+#' @param cond List: (optional) Argument conditions evaluated in the calling
+#'   function. Each condition starts with a quoted R call or character string
+#'   of R code and must return one non-missing logical value. TRUE marks a
+#'   failure. Optional elements supply a message and warning flag.
+#' @param cond_warning Logical: (default = FALSE) Treat all condition failures
+#'   as warnings. When FALSE, failures produce a warning only if every failed
+#'   condition has warn = TRUE; otherwise, validation stops.
 #'
-#' @return NULL. if The arguments check failed, the code execution will be
-#'  halted or a warning will be issued.
+#' @return NULL invisibly when validation succeeds or raises warnings only.
+#'   Invalid arguments and condition failures not marked as warnings stop
+#'   execution.
 #'
 #' @family internal_arguments_check
 #' @noRd
@@ -1652,28 +1655,24 @@
 
 #### Response Parsers ####
 
-#' Parse API Response
+#' Apply Parsers to an API Response
 #'
-#' Using the input supplied as 'parser' argument, this function will parse the
-#'   response from a REST API into appropriate R objects.
-#'
-#' The function will be called within .rba_skeleton subsequent of a
-#'   server response with HTTP status code 200.
-#'   \cr each parser  could be either a single-argument function or
-#'   one of the following character strings that will be internally converted
-#'   to a proper function:
+#' Apply one or more parsers sequentially to an HTTP response, passing each
+#'   parser's output to the next. Each parser may be a single-argument function
+#'   or one of these predefined names:
 #'   "json->df", "json->df_no_flat", "json->list_simp", "json->list",
-#'   "json->list_simp_flt_df", "json->chr", text->chr", "text->df", "tsv->df".
-#'   \cr if you supply more than one parser, the parsers will be sequentially
-#'   applied to the response (i.e. response %>% parser1 %>% parser2 %>% ...)
-#'   unless a parser returns an object created by .rba_api_error(). In that
-#'   case, the remaining parsers are skipped.
+#'   "json->list_simp_flt_df", "json->chr", "text->chr", "text->df", "tsv->df".
+#'   Stop after the first parser that fails or returns an rba_api_error object.
 #'
-#' @param response An httr response object.
-#' @param parsers Response parsers, a single value or a vector. Each element
-#'   should be either a function with a single argument or a character string.
+#' Used by .rba_skeleton() for successful responses and by .rba_error_parser()
+#'   for service-specific error bodies.
 #'
-#' @return A list containing the parsed result and invoked parser functions.
+#' @param response Response: An httr response object.
+#' @param parsers Character, Function, or List: One parser or an ordered parser
+#'   sequence.
+#'
+#' @return A list with the parsed result or parser error in result and the
+#'   attempted parser functions in parsers_invoked.
 #'
 #' @family internal_response_parser
 #' @noRd
@@ -1792,22 +1791,21 @@
   ))
 }
 
-#' Parse Appropriate, Server-aware Error Message
+#' Parse a Service-Specific API Error Response
 #'
-#' In case of a non-successful server response, this function is called from
-#'   .rba_api_call() and tries to extract the service's error message.
+#' Match the response URL against each service's ptn value in .rba_stg(). When
+#'   the status matches err_ptn, apply err_prs and use the parsed message if it
+#'   is one non-missing, non-empty character value. Otherwise, fall back to the
+#'   raw response body, or report that no body was returned. Prefix the details
+#'   with the service name and HTTP status.
 #'
-#' The responding service is detected using the "ptn" values in .rba_stg(). If
-#'   the status matches the service's "err_ptn", the response is parsed using
-#'   its "err_prs". If the status does not match, parsing fails, or parsing does
-#'   not produce one non-missing, non-empty character string, the raw response
-#'   is returned instead. If no response body is available, only that fact is
-#'   reported. Every error message begins with the service name, numeric HTTP
-#'   status, and its human-readable translation.
+#' Used by .rba_api_call() for every non-2xx response that remains after
+#'   connectivity handling, so service-specific details follow the common
+#'   error-handling path.
 #'
-#' @param response a formal api server response, with the class 'response'
-#'   from httr package.
-#' @return A list containing the error message and invoked parser functions.
+#' @param response Response: An httr response object from an API service.
+#' @return A list with the formatted error message in result and any attempted
+#'   service-specific parsers in parsers_invoked.
 #'
 #' @family internal_response_parser
 #' @noRd
@@ -1888,27 +1886,28 @@
   ))
 }
 #### Miscellaneous ####
-#' Smarter messaging system
+#' Format and Show a Conditional Message
 #'
-#' This function is a more versatile version of message(), and makes the
-#'   package's messaging system more minimal to code.
+#' Show a message only when the value named by cond is TRUE in the calling
+#'   function. Use sprintf() when enabled and fmt contains "%s"; otherwise,
+#'   join the values with paste().
 #'
-#' By default, the 'fmt' and ... will be passed to sprintf() and the results
-#'   will be issued as a message. but, if 'sprintf = FALSE' or, the 'fmt'
-#'   argument's string input didn't contain "%s", the function will pass the
-#'   the inputs to paste().
+#' Used throughout API-facing functions and internal helpers to keep verbose and
+#'   diagnostics output conditional without repeating the same value lookup and
+#'   formatting logic.
 #'
-#' @param fmt passed to 'fmt' arguments in sprintf() or as the first argument of
-#'   paste(), depending on the situation.
-#' @param sprintf logical: should the 'fmt' and '...' be passed to sprintf if
-#'   possible? set to 'FALSE' to force passing 'fmt' and '...' to paste.
-#' @param cond A variable name to be evaluated, and only produce the message
-#'   if that variable is 'TRUE'. note: the variable should be of class 'logical'.
-#' @param sep,collapse to be passed to paste() if being called.
-#' @param ... will be passed to '...' argument of the function sprintf() or
+#' @param fmt Any: Format string for sprintf(), or the first value passed to
 #'   paste().
+#' @param ... Any: (optional) Additional values passed to sprintf() or paste().
+#' @param sprintf Logical: (default = TRUE) Use sprintf() when fmt is a
+#'   character string containing "%s". If FALSE, always use paste().
+#' @param cond Character: (default = "verbose") Name of a logical value in the
+#'   calling function. The message is suppressed unless the value is exactly
+#'   TRUE.
+#' @param sep Character: (default = "") Separator passed to paste().
+#' @param collapse Character: (optional) Value passed to paste().
 #'
-#' @return NULL, a message will be diplayed if verbose = TRUE
+#' @return NULL invisibly.
 #'
 #' @family internal_misc
 #' @noRd
@@ -1931,18 +1930,27 @@
   invisible()
 }
 
-#' Grammatically Correct Pasting
+#' Join Values as an English List
 #'
-#' This function will append every element by comma and the last element by
-#'   'and'/'or', just like natural and correct English sentence.
+#' Join values with sep, using last before the final value. Optionally quote
+#'   each value or the completed result to produce readable lists such as
+#'   "alpha, beta, and gamma".
 #'
-#' @param ... words to be appended together.
-#' @param last (default: "AND") The separator between the last two words.
-#' @param sep The separator between every words except the last two.
-#' @param quote Should every word be quoted between a character?
-#' @param quote_all Should the final result be quoted between a character?
+#' Used by .rba_args_cons_msg() and .rba_ext_args() for validation messages,
+#'   and by rba_mieaa_enrich_submit(), rba_panther_ortholog(),
+#'   rba_panther_homolog(), rba_uniprot_taxonomy_lca(), and
+#'   rba_uniprot_taxonomy() for readable service messages.
 #'
-#' @return A character string of appended words, in a natural English way.
+#' @param ... Any: (optional) Values to combine.
+#' @param last Character: (default = " and ") Separator between the final two
+#'   values.
+#' @param sep Character: (default = ", ") Separator between preceding values.
+#' @param quote Character: (optional) Delimiter placed around each value.
+#' @param quote_all Character: (optional) Delimiter placed around the completed
+#'   result.
+#'
+#' @return NULL when no values are supplied; one unquoted value unchanged;
+#'   otherwise, one combined character string.
 #'
 #' @family internal_misc
 #' @noRd
@@ -1967,33 +1975,26 @@
   return(input)
 }
 
-#' Validate the supplied File Path or Create One
+#' Resolve a File Path for an API Response
 #'
-#' Based on the 'save_to' argument, this function will handle different
-#'   scenarios for the supplied file path. see details for more information.
+#' Return FALSE when saving is disabled. A character save_to value supplies a
+#'   file or directory path; TRUE builds a path from file and dir_name. An
+#'   invalid character path warns and falls back to path generation. Explicit
+#'   file paths may overwrite, while generated paths receive a numeric suffix
+#'   when needed to preserve an existing file. If save_to is NULL, read
+#'   save_file from the calling function and use FALSE when it is unavailable.
 #'
-#' 1- If 'save_to = FALSE': the function will return "FALSE" and no path will be
+#' Used by API-facing functions that support saving responses. The selected
+#'   path is passed to .rba_httr() so per-call and package-wide saving options
+#'   follow the same rules.
+#'
+#' @param file Character: Default file name, including its extension.
+#' @param save_to Logical or Character: (optional) FALSE to disable saving, TRUE
+#'   to generate a path, or a file or directory path.
+#' @param dir_name Character: (optional) Directory used when a path must be
 #'   generated.
-#'   \cr 2- If 'save_to = character string': The function will validate the
-#'   input, if it is a valid file path, the content of 'save_to' will be
-#'   returned. Otherwise, if the supplied input is not valid, scenario 3 will be
-#'   executed.
-#'   \cr 3- If 'save_to = TRUE': A file path will be generated and returned
-#'   based on 'dir_name' and 'file' inputs.
-#'   \cr Also, in scenario 3, the function will check if any file currently
-#'   exists under the generated path. if so, a numeral suffix will be added to
-#'   the generated file name in order to prevent over-writing of existing files.
 #'
-#'
-#' @param file A template for the file name and file extension. in form of a
-#'   character string: "file_name.file_extension"
-#' @param dir_name A directory which will be created in the working environment
-#'   as a parent directory of the file.
-#' @param save_to logical or character: It is the main switch that dictate the
-#'   function's execution. see details.
-#'
-#' @return FALSE if no file path should be generated or a character string
-#'   which is a file path.
+#' @return FALSE when saving is disabled; otherwise, the selected file path.
 #'
 #' @family internal_misc
 #' @noRd
@@ -2156,26 +2157,24 @@
 }
 
 #### Options ####
-#' Temporary Change rbioapi Options During a Function Call
+#' Apply Per-Call rbioapi Option Overrides
 #'
-#' The '...' argument of any exported function will be passed to this function.
-#'   It will temporary alter the standard rbioapi options during the caller
-#'   function execution.
+#' Read the allowed names from getOption("rba_user_options"). Create option
+#'   variables in the calling function, using a non-NULL supplied override when
+#'   present and the current package option otherwise. These assignments are
+#'   limited to the current call and do not modify package options. Ignore
+#'   unnamed and unknown arguments with a warning.
 #'
-#' The available rbioapi options will be retrieved from
-#'   getOption("rba_user_options"). If the name of parameter in '...' is a
-#'   standard rbioapi option, the content of that option will be checked and
-#'   in case that the content is valid, the caller function's environment will
-#'   be altered in response to the change.
-#'   \cr Also the function will ignore any arguments which is not standard and
-#'   issues an informative warning for the user.
+#' Used near the start of API-facing functions to make option values available
+#'   to argument validation, request construction, messaging, and file handling
+#'   without changing the package options.
 #'
-#' @param ... Extra arguments that were supplied in the endpoints functions.
-#' @param ignore_save if the function has a dedicated file saving argument,
-#'   set this to TRUE.
+#' @param ... Any: (optional) Named rbioapi option overrides.
+#' @param ignore_save Logical: (default = FALSE) Ignore a save_file override
+#'   when the calling API-facing function has its own file-saving argument.
 #'
-#' @return NULL, if arguments check failed, code execution will be stopped.
-#'   otherwise, nothing will be returned nor displayed.
+#' @return NULL invisibly. Warnings identify option overrides that were
+#'   ignored.
 #'
 #' @family internal_options
 #' @noRd

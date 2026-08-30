@@ -1,12 +1,16 @@
-#' Check a PANTHER Response for an Error
+#' Detect Errors in PANTHER HTTP 200 Responses
 #'
-#' PANTHER can include an error message in a response body while returning
-#'   HTTP status 200. This function checks the decoded response before
-#'   endpoint-specific parsing.
+#' PANTHER may include an error message in the response body even when the HTTP
+#'   status is 200. Check the decoded result before endpoint-specific parsing.
 #'
-#' @param response A decoded PANTHER response.
+#' Used as an early parser by rba_panther_mapping(), rba_panther_enrich(),
+#'   rba_panther_info(), rba_panther_genome(), rba_panther_ortholog(),
+#'   rba_panther_homolog(), rba_panther_family(), and rba_panther_tree_grafter()
+#'   so an embedded error stops endpoint-specific parsing.
 #'
-#' @return The response unchanged, or the error message marked by
+#' @param response Any: Decoded PANTHER result.
+#'
+#' @return The decoded result unchanged, or the error message marked by
 #'   .rba_api_error().
 #'
 #' @noRd
@@ -24,14 +28,21 @@
   return(.rba_api_error(search[["error"]]))
 }
 
-#' Keep PANTHER Tabular Results Consistent
+#' Standardize PANTHER Records as Tables
 #'
-#' PANTHER returns one tabular record as a named object and multiple records as
-#'   a table. This function only makes the outer structure consistent; it does
-#'   not define, rename, reorder, or remove PANTHER fields.
+#' PANTHER represents one tabular record as a named list and multiple records as
+#'   a data frame. Convert NULL and empty results to an empty data frame and one
+#'   named record to a one-row data frame. Preserve existing tables, field
+#'   names, order, and values. Normalize named nested records recursively, but
+#'   keep arrays and multi-row nested tables as list-columns.
 #'
-#' @param records Decoded PANTHER records.
-#' @param field Optional field containing the records.
+#' Used by rba_panther_enrich(), rba_panther_info(), rba_panther_genome(),
+#'   rba_panther_ortholog(), rba_panther_homolog(), and rba_panther_family() so
+#'   one and many records have the same outer table structure.
+#'
+#' @param records Any: Decoded PANTHER records, optionally wrapped in a result
+#'   field.
+#' @param field Character: (optional) Name of the field containing the records.
 #'
 #' @return A data frame for empty, single-record, and already-tabular results.
 #'   Other structures are returned unchanged.

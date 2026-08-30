@@ -1,21 +1,25 @@
 #### Internal functions ####
 
-#' Internal Function to Handle Different inputs of Reactome Analysis
+#' Prepare Input for Reactome Analysis
 #'
-#' This function will be called within any Reactome Analysis service which
-#'   requires input from the users.
+#' Identify the Reactome Analysis input type. When prepare_upload is TRUE, write
+#'   table and vector inputs to a temporary file for upload.
 #'
-#' @param input Character or Numeric vector, Data frame, or Matrix: Pass on
-#'   caller function's input argument to this.
-#' @param type Character: (optional) Pass on caller function's input_format
-#'   argument to this.
-#' @param prepare_upload Logical: (default = \code{TRUE}) If TRUE, the input
-#'   will be written to a temporary file when necessary to facilitate uploading
-#'   to Reactome. If FALSE, the input will only be identified.
+#' Used by rba_reactome_analysis() and rba_reactome_analysis_mapping() to
+#'   prepare uploads, and by rba_reactome_analysis_import() to distinguish a
+#'   saved local result from a result available by URL.
 #'
-#' @return If \code{prepare_upload} is FALSE, one of "table", "vector", "file", or
-#'   "url". Otherwise, a list containing the handled type and the temporary or
-#'   user-supplied file location.
+#' @param input Character, Numeric, Data frame, or Matrix: Input accepted by
+#'   API-facing Reactome Analysis functions.
+#' @param type Character: (optional) Explicit input type. Accepted values are
+#'   "table", "vector", "file", and "url".
+#' @param prepare_upload Logical: (default = TRUE) Prepare table and vector
+#'   inputs as temporary files. If FALSE, only identify the input type.
+#'
+#' @return One of "table", "vector", "file", or "url" when prepare_upload is
+#'   FALSE. Otherwise, a list with type and file. Table and vector inputs use
+#'   type = "file" and a temporary path; files and URLs retain their original
+#'   type and location.
 #'
 #' @noRd
 .rba_reactome_input <- function(input,
@@ -118,18 +122,22 @@
   return(output)
 }
 
-#' Keep Reactome Analysis Results Consistent
+#' Standardize Reactome Analysis Results
 #'
-#' Reactome's analysis, token, and species-comparison resources return the same
-#'   pathway result structure. This function applies the same table handling to
-#'   each response without defining, renaming, reordering, or removing Reactome
+#' Reactome's analysis, token, and species-comparison resources share the same
+#'   pathway result structure. Flatten nested columns in data frames and
+#'   represent an empty pathways list as an empty data frame. Leave other fields
+#'   and structures unchanged; do not rename, reorder, or remove Reactome
 #'   fields.
 #'
-#' @param result A parsed Reactome Analysis response.
+#' Used as the final response parser by rba_reactome_analysis(),
+#'   rba_reactome_analysis_species(), and rba_reactome_analysis_token() so their
+#'   shared pathway result structure is normalized consistently.
 #'
-#' @return The result with information within tables expanded into columns and
-#'   an empty pathways result represented by an empty data frame. Other
-#'   structures are returned unchanged.
+#' @param result Any: Parsed Reactome Analysis result.
+#'
+#' @return result with nested data frame columns flattened and an empty pathways
+#'   list converted to an empty data frame. Other structures are unchanged.
 #'
 #' @noRd
 .rba_reactome_analysis_result <- function(result) {

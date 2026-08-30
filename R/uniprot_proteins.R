@@ -1,13 +1,18 @@
-#' Name UniProt search-result elements
+#' Name UniProt Search Results by Identifier
 #'
-#' Name each result with a scalar character identifier, when every result has
-#'   the requested field. If the response does not have the expected
-#'   structure, return it unchanged.
+#' Use the selected identifier as the name of each search result when every
+#'   result has one non-missing, non-empty character value in that field.
+#'   Otherwise, leave x unchanged.
 #'
-#' @param x List: Parsed UniProt response.
-#' @param field Character: Name of the identifier field.
+#' Used as a response parser by UniProt protein, feature, variation, antigen,
+#'   epitope, mutagenesis, RNA editing, proteome, coordinate, UniParc, and
+#'   proteomics endpoints so individual list results can be addressed by their
+#'   identifiers. Most callers use accession; the proteome search uses upid.
 #'
-#' @return The input object, named when possible.
+#' @param x Any: Parsed UniProt search results.
+#' @param field Character: (default = "accession") Identifier field to use.
+#'
+#' @return x, named when every result contains a valid identifier.
 #' @noRd
 .rba_uniprot_search_namer <- function(x, field = "accession") {
   if (!is.list(x) || length(x) == 0L) {

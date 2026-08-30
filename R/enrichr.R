@@ -1,12 +1,16 @@
-#' Internal function to validate rba_enrichr steps
+#' Validate an Enrichr Workflow Step
 #'
-#' This is an internal helper function that after each main step of rba_enrichr,
-#'   checks wether the operation sucedded and stops or returns a character
-#'   string based on the skip_error in the parent environment.
+#' Check one step in a multi-stage Enrichr workflow. Return TRUE when the check
+#'   passes. On failure, combine msg_type and msg_detail into an error message.
+#'   Return the message when skip_error is TRUE; otherwise, stop execution.
 #'
-#' @param assertion logical. A test to vaildate the previous step output.
-#' @param msg_type Character. Chooses which predefined message template to use.
-#'   Valid values:
+#' Used by rba_enrichr_gene_sets(), rba_enrichr_enrich(), and rba_enrichr()
+#'   after library retrieval or validation, uploads, and result retrieval so all
+#'   three workflows follow the same skip_error behavior.
+#'
+#' @param assertion Logical: Single non-missing TRUE or FALSE result from the
+#'   workflow step.
+#' @param msg_type Character: Message template to use. Accepted values:
 #'   - `"no_lib"`: failed to fetch Enrichr libraries
 #'   - `"invalid_lib_regex"`: regex did not match any library names
 #'   - `"invalid_lib_chr"`: one or more explicit library names are invalid
@@ -14,14 +18,12 @@
 #'   - `"no_gene_upload"`: failed to upload the gene list
 #'   - `"no_background_upload"`: failed to upload the background list
 #'   - `"no_result"`: failed to retrieve enrichment results
-#' @param msg_detail Character. Additional information to add to the error
-#'   message template.
+#' @param msg_detail Any: Value added to the selected message template.
+#' @param skip_error Logical: Return the error message instead of stopping when
+#'   the check fails.
 #'
-#' @return If
-#'   - `assertion` is `TRUE`: returns `TRUE`
-#'   Otherwise, if
-#'   - `skip_error = FALSE`: invokes `stop()` with a detailed error message
-#'   - `skip_error = TRUE`: calls `.msg()` and returns the message string
+#' @return TRUE when the check passes. A failed check returns its error message
+#'   when skip_error is TRUE and stops execution otherwise.
 #'
 #' @noRd
 .rba_enrichr_validate <- function(assertion,
@@ -799,32 +801,38 @@ rba_enrichr_add_background <- function(background_genes,
   return(final_output)
 }
 
-#' Internal function for rba_enrichr_enrich
+#' Retrieve an Enrichr Result for One Library
 #'
-#' This is an internal helper function which will retrieve the enrichment
-#'   results of one_user_list id against one library name
+#' Retrieve enrichment results for one uploaded gene list and one gene-set
+#'   library. Use the Enrichr export resource when background_id is NULL and the
+#'   speedrichr background-enrichment resource otherwise.
 #'
-#' The function will be called within \code{\link{rba_enrichr_enrich}} and will
-#' handle API requests to the server.
+#' Used by rba_enrichr_enrich() once for each selected library, allowing single-
+#'   and multi-library requests to share the same request construction, parser,
+#'   saving, and error-handling path.
 #'
 #' @section Corresponding API Resources:
 #'  "GET https://maayanlab.cloud/Enrichr/export"
 #'  \cr "POST https://maayanlab.cloud/speedrichr/api/backgroundenrich"
 #'
-#' @param user_list_id An ID returned to you after uploading a gene
-#'   list using \code{\link{rba_enrichr_add_list}}
-#' @param gene_set_library a valid gene-set library name which exists
-#' in the results retrieved via \code{\link{rba_enrichr_libs}}.
-#' @param save_name default raw file name
-#' @param organism Which model organism version of Enrichr
-#'   to use? Available options are: "human", (H. sapiens & M. musculus),
-#'   "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
-#'   and "fish" (D. rerio).
-#' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
-#'   arguments manual for more information on available options.
+#' @param user_list_id Numeric: Positive whole-number gene list ID returned by
+#'   rba_enrichr_add_list().
+#' @param background_id Character: (optional) Single background list ID returned
+#'   by rba_enrichr_add_background().
+#' @param gene_set_library Character: Single Enrichr library name returned by
+#'   rba_enrichr_libs().
+#' @param save_name Character: Single file name template passed to .rba_file().
+#' @param organism Character: Enrichr deployment to query. Accepted values are
+#'   "human" (H. sapiens and M. musculus), "fly" (D. melanogaster), "yeast"
+#'   (S. cerevisiae), "worm" (C. elegans), and "fish" (D. rerio).
+#' @param sleep_time Numeric: (default = 0) Seconds to wait before sending the
+#'   HTTP request. Must be non-negative.
+#' @param ... Any: (optional) Named rbioapi option overrides processed by
+#'   .rba_ext_args(). See rba_options() for the available names and values.
 #'
-#' @return A data frame with the enrichment results of the supplied user_list_id
-#'   against the gene_set_library
+#' @return Enrichment results for user_list_id and gene_set_library as a data
+#'   frame. A request or parsing failure returns a character error message when
+#'   skip_error is TRUE and stops execution otherwise.
 #'
 #' @references \itemize{
 #'   \item Chen, E.Y., Tan, C.M., Kou, Y. et al. Enrichr: interactive and

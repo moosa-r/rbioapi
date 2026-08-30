@@ -1,14 +1,18 @@
-#' Test connection with a rest server
+#' Test One API Server Connection
 #'
-#' Internal helper function for rba_connection_test(). It will  make HTTP HEAD
-#'   request to the given resource.
+#' Send an HTTP HEAD request with the package timeout and user agent. Return
+#'   TRUE for HTTP 200, describe any other status, and preserve request failures
+#'   as try-error objects.
 #'
-#' @param url A URL to to resource being examined.
-#' @param diagnostics logical: Generate diagnostics and detailed messages with
-#'   internal information.
+#' Used by rba_connection_test() once for each service test URL to distinguish
+#'   a responding server from an HTTP failure or an unreachable resource.
 #'
-#' @return An informative message with the result of HEAD request's success or
-#'   failure.
+#' @param url Character: Absolute URL to test.
+#' @param diagnostics Logical: (default = FALSE) Show httr diagnostics and
+#'   request errors.
+#'
+#' @return TRUE for HTTP 200, a description for any other HTTP status, or a
+#'   try-error object when the request cannot be completed.
 #' @family internal_internet_connectivity
 #' @noRd
 .rba_api_check <- function(url, diagnostics = FALSE){
@@ -296,16 +300,25 @@ rba_options <- function(diagnostics = NULL,
   }
 }
 
-#' Iterate Over Paginated Calls
+#' Run a Paginated API Call Across Pages
 #'
-#' @param input_call Call: Normalized call to evaluate.
-#' @param page_arg Character: Name of the page argument.
-#' @param pages Numeric vector: Page numbers to request.
-#' @param eval_env Environment: Environment in which to evaluate the calls.
-#' @param sleep_time Numeric: Seconds to wait between calls.
-#' @param progress Logical: Display a progress bar?
+#' Evaluate input_call once for each requested page, replacing page_arg before
+#'   each call and preserving the order of pages. Wait sleep_time between calls
+#'   and update one progress bar for the complete operation when requested.
 #'
-#' @return A named list containing one result per call.
+#' Used by rba_pages() after it has normalized and validated the original call,
+#'   so page substitution, delays between requests, progress display, and result
+#'   naming are handled in one place.
+#'
+#' @param input_call Call: Unevaluated call to an API-facing function.
+#' @param page_arg Character: Exact argument name to replace for each page.
+#' @param pages Numeric: Unique positive whole page numbers to request. A
+#'   maximum of 100 values can be supplied.
+#' @param eval_env Environment: Environment in which each call is evaluated.
+#' @param sleep_time Numeric: Seconds to wait between calls. Must be at least 2.
+#' @param progress Logical: Show one progress bar for all pages.
+#'
+#' @return A list of results in the requested order, named page_<number>.
 #' @noRd
 .rba_pages_do <- function(input_call,
                           page_arg,
@@ -725,6 +738,18 @@ rba_metadata <- function(result) {
   return(attr(result, "rbioapi_metadata", exact = TRUE))
 }
 
+#' Print a Summary of API Request Metadata
+#'
+#' Print the shared host once when possible, followed by each request's path,
+#'   timestamp, HTTP method, status, reason, and number of parsers used.
+#'
+#' Dispatched by print() for rba_metadata objects returned by rba_metadata(),
+#'   providing a compact overview while the complete request records remain
+#'   available from the object itself.
+#'
+#' @param x List: An rba_metadata object to print.
+#' @param ... Any: (optional) Additional arguments accepted to match print().
+#' @return x invisibly.
 #' @export
 #' @noRd
 print.rba_metadata <- function(x, ...) {
