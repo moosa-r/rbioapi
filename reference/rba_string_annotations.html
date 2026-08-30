@@ -81,19 +81,19 @@
 
 
 <dl><dt id="arg-ids">ids<a class="anchor" aria-label="anchor" href="#arg-ids"></a></dt>
-<dd><p>Your protein ID(s). It is strongly recommended to supply
+<dd><p>Character or Numeric: Your protein ID(s). It is strongly recommended to supply
 STRING IDs. See <code><a href="rba_string_map_ids.html">rba_string_map_ids</a></code> for more information.</p></dd>
 
 
 <dt id="arg-species">species<a class="anchor" aria-label="anchor" href="#arg-species"></a></dt>
-<dd><p>Numeric:
+<dd><p>Numeric: (optional)
 <a href="https://www.ncbi.nlm.nih.gov/taxonomy/" class="external-link">
 NCBI Taxonomy identifier</a>; Human Taxonomy ID is 9606.
 (Recommended, but optional.)</p></dd>
 
 
 <dt id="arg-allow-pubmed">allow_pubmed<a class="anchor" aria-label="anchor" href="#arg-allow-pubmed"></a></dt>
-<dd><p>Logical (default = <code>FALSE</code>): Include PubMed
+<dd><p>Logical: (default = <code>FALSE</code>) Include PubMed
 annotations. These annotations are excluded by default because many
 publications may be assigned to each protein. This argument is ignored
 when <code>only_pubmed = TRUE</code>.</p></dd>
@@ -105,7 +105,7 @@ of data frames by <code>category</code>; otherwise, return one data frame.</p></
 
 
 <dt id="arg-only-pubmed">only_pubmed<a class="anchor" aria-label="anchor" href="#arg-only-pubmed"></a></dt>
-<dd><p>Logical (default = <code>FALSE</code>): Return only PubMed
+<dd><p>Logical: (default = <code>FALSE</code>) Return only PubMed
 annotations. This takes precedence over <code>allow_pubmed</code>.</p></dd>
 
 

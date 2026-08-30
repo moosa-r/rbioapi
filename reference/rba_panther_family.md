@@ -13,11 +13,11 @@ rba_panther_family(id, what, target_organisms = NULL, ...)
 
 - id:
 
-  Panther family id.
+  Character: Panther family id.
 
 - what:
 
-  What to retrieve? One of:
+  Character: What to retrieve? One of:
 
   - "ortholog": Orthologs ('LDO' for least diverged and 'O' for more
     diverged).
@@ -28,7 +28,7 @@ rba_panther_family(id, what, target_organisms = NULL, ...)
 
 - target_organisms:
 
-  (numeric) NCBI taxon ID(s) to filter the results. run
+  Numeric: (optional) NCBI taxon ID(s) to filter the results. run
   [`rba_panther_info`](https://rbioapi.moosa-r.com/reference/rba_panther_info.md)
   with argument 'what = "organisms"' to get a list of PANTHER's
   supported organisms.

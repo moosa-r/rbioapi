@@ -28,7 +28,7 @@ rba_panther_enrich(
 
 - genes:
 
-  Either a character vector or a data frame. Depending on this
+  Character or Data frame: A vector or data frame. Depending on this
   parameter, the analysis type is determined.
 
   Character vector:
@@ -53,14 +53,14 @@ rba_panther_enrich(
 
 - organism:
 
-  (numeric) NCBI taxon ID. run
+  Numeric: NCBI taxon ID. run
   [`rba_panther_info`](https://rbioapi.moosa-r.com/reference/rba_panther_info.md)
   with argument 'what = "organisms"' to get a list of PANTHER's
   supported organisms.
 
 - annot_dataset:
 
-  A PANTHER dataset ID to test your input against it. run
+  Character: A PANTHER dataset ID to test your input against it. run
   [`rba_panther_info`](https://rbioapi.moosa-r.com/reference/rba_panther_info.md)
   with argument 'what = "datasets"' to get a list of PANTHER's supported
   datasets. Note that you should enter the "id" of the dataset, not its
@@ -69,7 +69,8 @@ rba_panther_enrich(
 
 - test_type:
 
-  Statistical test type used to calculate p-values.
+  Character: (optional) Statistical test type used to calculate
+  p-values.
 
   - If performing over-representation analysis (i.e. \`genes\` is a
     character vector), valid values are "FISHER" (default if NULL) or
@@ -81,38 +82,38 @@ rba_panther_enrich(
 
 - correction:
 
-  p value correction method. either "FDR" (default), "BONFERRONI" or
-  "NONE".
+  Character: (default = `"FDR"`) p value correction method. either "FDR"
+  (default), "BONFERRONI" or "NONE".
 
 - cutoff:
 
-  (Numeric) (Optional) a threshold to filter the results. if correction
+  Numeric: (optional) a threshold to filter the results. if correction
   is "FDR", the threshold will be applied to fdr column's values; if
   otherwise, the threshold will be applied to p value column.
 
 - ref_genes:
 
-  (Optional, only valid if genes is a character vector) A character or
-  numeric vector of genes that will be used as the test's background
+  Character or Numeric: (optional) (only valid if genes is a character
+  vector) A vector of genes that will be used as the test's background
   (reference/universe) gene set. If no value is supplied, all of the
   genes in the specified organism will be used. The maximum length and
   supported IDs are the same as the 'genes' argument.
 
 - ref_organism:
 
-  (Optional, only valid if genes is a character vector) if 'ref_genes'
-  is used, you can specify the organisms which correspond to your
-  supplied IDs in 'ref_genes' argument. see 'organism' argument for
+  Numeric: (optional) (only valid if genes is a character vector) if
+  'ref_genes' is used, you can specify the organisms which correspond to
+  your supplied IDs in 'ref_genes' argument. see 'organism' argument for
   supported values.
 
 - request_mapped_genes:
 
-  (Character, only used if genes is a character vector, hence
-  Over-representation test is requested) Which mapped genes should be
-  returned for each result term. One of "input" (default), "reference",
-  or "none". Requesting "reference" without supplying 'ref_genes' may
-  produce a large response because all genes in the specified organism
-  are used as the reference list.
+  Character: (default = `"input"`) (only used if genes is a character
+  vector, hence Over-representation test is requested) Which mapped
+  genes should be returned for each result term. One of "input"
+  (default), "reference", or "none". Requesting "reference" without
+  supplying 'ref_genes' may produce a large response because all genes
+  in the specified organism are used as the reference list.
 
 - ...:
 

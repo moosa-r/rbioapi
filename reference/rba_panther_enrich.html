@@ -91,7 +91,7 @@
 
 
 <dl><dt id="arg-genes">genes<a class="anchor" aria-label="anchor" href="#arg-genes"></a></dt>
-<dd><p>Either a character vector or a data frame. Depending on
+<dd><p>Character or Data frame: A vector or data frame. Depending on
 this parameter, the analysis type is determined.</p><dl><dt>Character vector:</dt>
 <dd><p>If a character vector is supplied,
 over-representation analysis will be performed using either Fisher's exact
@@ -113,13 +113,13 @@ or UniProt ID.</p></dd>
 
 
 <dt id="arg-organism">organism<a class="anchor" aria-label="anchor" href="#arg-organism"></a></dt>
-<dd><p>(numeric) NCBI taxon ID. run <code><a href="rba_panther_info.html">rba_panther_info</a></code>
+<dd><p>Numeric: NCBI taxon ID. run <code><a href="rba_panther_info.html">rba_panther_info</a></code>
 with argument 'what = "organisms"' to get a list of PANTHER's
 supported organisms.</p></dd>
 
 
 <dt id="arg-annot-dataset">annot_dataset<a class="anchor" aria-label="anchor" href="#arg-annot-dataset"></a></dt>
-<dd><p>A PANTHER dataset ID to test your input against it.
+<dd><p>Character: A PANTHER dataset ID to test your input against it.
 run <code><a href="rba_panther_info.html">rba_panther_info</a></code> with argument 'what = "datasets"' to
 get a list of PANTHER's supported datasets. Note that you should enter
 the "id" of the dataset, not its label (e.g. entering "biological_process"
@@ -127,7 +127,7 @@ is incorrect, you should rather enter "GO:0008150").</p></dd>
 
 
 <dt id="arg-test-type">test_type<a class="anchor" aria-label="anchor" href="#arg-test-type"></a></dt>
-<dd><p>Statistical test type used to calculate p-values.</p><ul><li><p>If performing over-representation analysis (i.e. `genes` is a
+<dd><p>Character: (optional) Statistical test type used to calculate p-values.</p><ul><li><p>If performing over-representation analysis (i.e. `genes` is a
 character vector), valid values are "FISHER" (default if NULL) or
 "BINOMIAL".</p></li>
 <li><p>If performing statistical enrichment analysis (i.e. `genes` is a
@@ -136,33 +136,33 @@ data frame), the only valid value is "Mann-Whitney" (default if NULL).</p></li>
 
 
 <dt id="arg-correction">correction<a class="anchor" aria-label="anchor" href="#arg-correction"></a></dt>
-<dd><p>p value correction method. either "FDR" (default),
+<dd><p>Character: (default = <code>"FDR"</code>) p value correction method. either "FDR" (default),
 "BONFERRONI" or "NONE".</p></dd>
 
 
 <dt id="arg-cutoff">cutoff<a class="anchor" aria-label="anchor" href="#arg-cutoff"></a></dt>
-<dd><p>(Numeric) (Optional) a threshold to filter the results.
+<dd><p>Numeric: (optional) a threshold to filter the results.
 if correction is "FDR", the threshold will be applied to fdr column's
 values; if otherwise, the threshold will be applied to p value column.</p></dd>
 
 
 <dt id="arg-ref-genes">ref_genes<a class="anchor" aria-label="anchor" href="#arg-ref-genes"></a></dt>
-<dd><p>(Optional, only valid if genes is a character vector)
-A character or numeric vector of genes that will be used as the test's
+<dd><p>Character or Numeric: (optional) (only valid if genes is a character vector)
+A vector of genes that will be used as the test's
 background (reference/universe) gene set. If no value is supplied, all of
 the genes in the specified organism will be used. The maximum length and
 supported IDs are the same as the 'genes' argument.</p></dd>
 
 
 <dt id="arg-ref-organism">ref_organism<a class="anchor" aria-label="anchor" href="#arg-ref-organism"></a></dt>
-<dd><p>(Optional, only valid if genes is a character vector)
+<dd><p>Numeric: (optional) (only valid if genes is a character vector)
 if 'ref_genes' is used, you can specify the organisms which correspond to
 your supplied IDs in 'ref_genes' argument. see 'organism' argument for
 supported values.</p></dd>
 
 
 <dt id="arg-request-mapped-genes">request_mapped_genes<a class="anchor" aria-label="anchor" href="#arg-request-mapped-genes"></a></dt>
-<dd><p>(Character, only used if genes is a character
+<dd><p>Character: (default = <code>"input"</code>) (only used if genes is a character
 vector, hence Over-representation test is requested) Which mapped genes
 should be returned for each result term. One of "input" (default),
 "reference", or "none". Requesting "reference" without supplying

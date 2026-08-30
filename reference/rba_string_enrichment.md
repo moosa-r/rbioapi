@@ -23,21 +23,21 @@ rba_string_enrichment(
 
 - ids:
 
-  Your protein ID(s). It is strongly recommended to supply STRING IDs.
-  See
+  Character or Numeric: Your protein ID(s). It is strongly recommended
+  to supply STRING IDs. See
   [`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)
   for more information. Note that if only one ID is supplied, STRING
   expands the network by 10 proteins.
 
 - species:
 
-  Numeric: [NCBI Taxonomy
+  Numeric: (optional) [NCBI Taxonomy
   identifier](https://www.ncbi.nlm.nih.gov/taxonomy/); Human Taxonomy ID
   is 9606. (Recommended, but optional.)
 
 - background:
 
-  Character vector: A set of STRING protein IDs to be used as the
+  Character: (optional) A set of STRING protein IDs to be used as the
   statistical background (or universe) when computing term p-values.
   Only STRING IDs are accepted. See
   [`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)

@@ -13,18 +13,19 @@ rba_enrichr_gene_map(gene, categorize = FALSE, organism = "human", ...)
 
 - gene:
 
-  character: An Entrez gene symbol.
+  Character: An Entrez gene symbol.
 
 - categorize:
 
-  logical: Should the category information be included?
+  Logical: (default = `FALSE`) Should the category information be
+  included?
 
 - organism:
 
-  (default = "human") Which model organism version of Enrichr to use?
-  Available options are: "human", (H. sapiens & M. musculus), "fly" (D.
-  melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans) and "fish"
-  (D. rerio).
+  Character: (default = `"human"`) Which model organism version of
+  Enrichr to use? Available options are: "human", (H. sapiens & M.
+  musculus), "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm"
+  (C. elegans) and "fish" (D. rerio).
 
 - ...:
 

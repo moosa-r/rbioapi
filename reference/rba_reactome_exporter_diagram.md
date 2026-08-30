@@ -43,7 +43,7 @@ rba_reactome_exporter_diagram(
 
 - save_to:
 
-  NULL or Character: (default = `NULL`)
+  Character: (optional)
 
   - NULL: Save the file to an automatically-generated path.
 
@@ -109,8 +109,8 @@ rba_reactome_exporter_diagram(
 
 - sel:
 
-  Character vector: (optional) (Only if "create_document" is FALSE) CSV
-  line for highlighting element(s) selection in the diagram.
+  Character: (optional) (Only if "create_document" is FALSE) CSV line
+  for highlighting element(s) selection in the diagram.
 
 - title:
 

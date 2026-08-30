@@ -24,9 +24,9 @@ rba_reactome_query(
 
 - ids:
 
-  Character or Numeric vector: One or more database identifiers (DbIds),
-  stable identifiers (StIds), or a mixture of both. At most 20
-  identifiers can be supplied.
+  Character or Numeric: One or more database identifiers (DbIds), stable
+  identifiers (StIds), or a mixture of both. At most 20 identifiers can
+  be supplied.
 
 - enhanced:
 

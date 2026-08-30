@@ -164,17 +164,17 @@ any argument:
 ``` r
 
 rba_options()
-#>    rbioapi_option current_value            allowed_value
-#> 1     diagnostics         FALSE     Logical (TRUE/FALSE)
-#> 2        dir_name       rbioapi                Character
-#> 3        progress         FALSE     Logical (TRUE/FALSE)
-#> 4       retry_max             0   Numeric (0 or greater)
-#> 5      retry_wait            10   Numeric (0 or greater)
-#> 6       save_file         FALSE     Logical (TRUE/FALSE)
-#> 7      skip_error          TRUE     Logical (TRUE/FALSE)
-#> 8         timeout            30 Numeric (0.1 or greater)
-#> 9         verbose          TRUE     Logical (TRUE/FALSE)
-#> 10       metadata         FALSE     Logical (TRUE/FALSE)
+#>    rbioapi_option current_value                              allowed_value
+#> 1     diagnostics         FALSE                       Logical (TRUE/FALSE)
+#> 2        dir_name       rbioapi                                  Character
+#> 3       retry_max             0 Numeric (finite non-negative whole number)
+#> 4      retry_wait            10          Numeric (finite and non-negative)
+#> 5        progress         FALSE                       Logical (TRUE/FALSE)
+#> 6       save_file         FALSE                       Logical (TRUE/FALSE)
+#> 7      skip_error          TRUE                       Logical (TRUE/FALSE)
+#> 8         timeout            30         Numeric (0.001 to 3600, inclusive)
+#> 9         verbose          TRUE                       Logical (TRUE/FALSE)
+#> 10       metadata         FALSE                       Logical (TRUE/FALSE)
 ```
 
 Now, let us consider the ways in which we can alter the settings:
@@ -260,10 +260,7 @@ rba_connection_test(print_output = TRUE)
 #> --->>> JASPAR :
 #> +++ The server is responding.
 #> --->>> miEAA :
-#> !!! failed with error:
-#>  Error in curl::curl_fetch_memory(url, handle = handle) : 
-#>   Timeout was reached [ccb-compute2.cs.uni-saarland.de]:
-#> SSL connection timeout
+#> +++ The server is responding.
 #> --->>> PANTHER :
 #> +++ The server is responding.
 #> --->>> Reactome Content Service :

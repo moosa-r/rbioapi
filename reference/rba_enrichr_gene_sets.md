@@ -14,21 +14,21 @@ rba_enrichr_gene_sets(gene_set_library, term = NULL, organism = "human", ...)
 
 - gene_set_library:
 
-  A valid gene-set library name which exists in the results retrieved
-  via
+  Character: A valid gene-set library name which exists in the results
+  retrieved via
   [`rba_enrichr_libs`](https://rbioapi.moosa-r.com/reference/rba_enrichr_libs.md).
 
 - term:
 
-  (optional) An exact Enrichr term name. If left NULL, all gene sets in
-  the supplied library will be returned.
+  Character: (optional) An exact Enrichr term name. If left NULL, all
+  gene sets in the supplied library will be returned.
 
 - organism:
 
-  (default = "human") Which model organism version of Enrichr to use?
-  Available options are: "human", (H. sapiens & M. musculus), "fly" (D.
-  melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans) and "fish"
-  (D. rerio).
+  Character: (default = `"human"`) Which model organism version of
+  Enrichr to use? Available options are: "human", (H. sapiens & M.
+  musculus), "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm"
+  (C. elegans) and "fish" (D. rerio).
 
 - ...:
 

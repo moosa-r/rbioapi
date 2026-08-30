@@ -44,7 +44,7 @@ rba_reactome_analysis_download(
 
 - save_to:
 
-  NULL or Character: (optional)
+  Character: (optional)
 
   - NULL: Save the file to an automatically-generated path.
 

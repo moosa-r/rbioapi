@@ -21,20 +21,20 @@ rba_string_annotations(
 
 - ids:
 
-  Your protein ID(s). It is strongly recommended to supply STRING IDs.
-  See
+  Character or Numeric: Your protein ID(s). It is strongly recommended
+  to supply STRING IDs. See
   [`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)
   for more information.
 
 - species:
 
-  Numeric: [NCBI Taxonomy
+  Numeric: (optional) [NCBI Taxonomy
   identifier](https://www.ncbi.nlm.nih.gov/taxonomy/); Human Taxonomy ID
   is 9606. (Recommended, but optional.)
 
 - allow_pubmed:
 
-  Logical (default = `FALSE`): Include PubMed annotations. These
+  Logical: (default = `FALSE`) Include PubMed annotations. These
   annotations are excluded by default because many publications may be
   assigned to each protein. This argument is ignored when
   `only_pubmed = TRUE`.
@@ -46,7 +46,7 @@ rba_string_annotations(
 
 - only_pubmed:
 
-  Logical (default = `FALSE`): Return only PubMed annotations. This
+  Logical: (default = `FALSE`) Return only PubMed annotations. This
   takes precedence over `allow_pubmed`.
 
 - ...:

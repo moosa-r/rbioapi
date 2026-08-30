@@ -93,7 +93,7 @@
 
 
 <dl><dt id="arg-ids">ids<a class="anchor" aria-label="anchor" href="#arg-ids"></a></dt>
-<dd><p>Your protein ID(s). It is strongly recommended to supply
+<dd><p>Character or Numeric: Your protein ID(s). It is strongly recommended to supply
 STRING IDs. See <code><a href="rba_string_map_ids.html">rba_string_map_ids</a></code> for more information.
 <br> Alternatively, you can retrieve the network of proteins annotated with
 a STRING functional term by setting <code>ids = NULL</code> and supplying
@@ -101,21 +101,21 @@ a STRING functional term by setting <code>ids = NULL</code> and supplying
 
 
 <dt id="arg-image-format">image_format<a class="anchor" aria-label="anchor" href="#arg-image-format"></a></dt>
-<dd><p>Character: One of:</p><ul><li><p>"image": PNG image with normal resolution.</p></li>
+<dd><p>Character: (default = <code>"image"</code>) One of:</p><ul><li><p>"image": PNG image with normal resolution.</p></li>
 <li><p>"highres_image": High-resolution PNG image.</p></li>
 <li><p>"svg": Scalable Vector Graphics image.</p></li>
 </ul></dd>
 
 
 <dt id="arg-save-image">save_image<a class="anchor" aria-label="anchor" href="#arg-save-image"></a></dt>
-<dd><p>Logical or Character:</p><ul><li><p>TRUE: Save the image to an automatically-generated path.</p></li>
+<dd><p>Logical or Character: (default = <code>TRUE</code>)</p><ul><li><p>TRUE: Save the image to an automatically-generated path.</p></li>
 <li><p>FALSE: Do not save the image, just return it as an R object.</p></li>
 <li><p>Character string: A valid file path to save the image to.</p></li>
 </ul></dd>
 
 
 <dt id="arg-species">species<a class="anchor" aria-label="anchor" href="#arg-species"></a></dt>
-<dd><p>Numeric:
+<dd><p>Numeric: (optional)
 <a href="https://www.ncbi.nlm.nih.gov/taxonomy/" class="external-link">
 NCBI Taxonomy identifier</a>; Human Taxonomy ID is 9606.
 Required when using <code>network_term_id</code>; otherwise recommended, but
@@ -123,17 +123,17 @@ required if your input contains more than 10 unique IDs.</p></dd>
 
 
 <dt id="arg-add-color-nodes">add_color_nodes<a class="anchor" aria-label="anchor" href="#arg-add-color-nodes"></a></dt>
-<dd><p>Numeric: The number of colored nodes (queried proteins
+<dd><p>Numeric: (optional) The number of colored nodes (queried proteins
 and first shell of interactors) to be added.</p></dd>
 
 
 <dt id="arg-add-white-nodes">add_white_nodes<a class="anchor" aria-label="anchor" href="#arg-add-white-nodes"></a></dt>
-<dd><p>Numeric: The number of white nodes (second shell of
+<dd><p>Numeric: (optional) The number of white nodes (second shell of
 interactors) to be added after colored nodes.</p></dd>
 
 
 <dt id="arg-required-score">required_score<a class="anchor" aria-label="anchor" href="#arg-required-score"></a></dt>
-<dd><p>Numeric (between 0 and 1000): Minimum interaction
+<dd><p>Numeric: (optional) (between 0 and 1000): Minimum interaction
 score required for an interaction to be included in the image. If omitted,
 STRING applies a network-dependent threshold. Common
 confidence thresholds are 150 (low), 400 (medium), 700 (high), and 900
@@ -141,7 +141,7 @@ confidence thresholds are 150 (low), 400 (medium), 700 (high), and 900
 
 
 <dt id="arg-network-flavor">network_flavor<a class="anchor" aria-label="anchor" href="#arg-network-flavor"></a></dt>
-<dd><p>Character: The network-edge style. One of:</p><ul><li><p>"evidence": (default) Edge colors indicate the types of evidence
+<dd><p>Character: (default = <code>"evidence"</code>) The network-edge style. One of:</p><ul><li><p>"evidence": (default) Edge colors indicate the types of evidence
 supporting each interaction.</p></li>
 <li><p>"confidence": Edge thickness indicates the interaction confidence
 score.</p></li>
@@ -150,7 +150,7 @@ score.</p></li>
 
 
 <dt id="arg-network-type">network_type<a class="anchor" aria-label="anchor" href="#arg-network-type"></a></dt>
-<dd><p>Character: One of:</p><ul><li><p>"functional": (default) Edges indicate both physical and
+<dd><p>Character: (default = <code>"functional"</code>) One of:</p><ul><li><p>"functional": (default) Edges indicate both physical and
 functional associations.</p></li>
 <li><p>"physical": Edges indicate that two proteins have a physical
 interaction or are parts of a complex.</p></li>
@@ -188,12 +188,12 @@ on the nodes.</p></dd>
 
 
 <dt id="arg-node-labels-font-size">node_labels_font_size<a class="anchor" aria-label="anchor" href="#arg-node-labels-font-size"></a></dt>
-<dd><p>Numeric (between 5 and 50; default = 12):
+<dd><p>Numeric: (default = <code>12</code>) (between 5 and 50; default = 12):
 Font size of the protein node labels.</p></dd>
 
 
 <dt id="arg-network-term-id">network_term_id<a class="anchor" aria-label="anchor" href="#arg-network-term-id"></a></dt>
-<dd><p>Character: A functional term identifier (e.g. a Gene
+<dd><p>Character: (optional) A functional term identifier (e.g. a Gene
 Ontology, KEGG, or Reactome identifier). Instead of using proteins supplied
 through <code>ids</code>, STRING constructs the network from proteins annotated
 with the specified term. Set <code>ids = NULL</code> and supply <code>species</code>.</p></dd>

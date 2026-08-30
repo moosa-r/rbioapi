@@ -19,8 +19,8 @@ rba_reactome_analysis_mapping(
 
 - input:
 
-  Character or Numeric vector: A vector, local file path or URL that
-  points to your identifiers list.
+  Character or Numeric: A vector, local file path or URL that points to
+  your identifiers list.
 
 - input_format:
 

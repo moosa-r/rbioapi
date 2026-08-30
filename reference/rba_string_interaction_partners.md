@@ -23,29 +23,29 @@ rba_string_interaction_partners(
 
 - ids:
 
-  Your protein ID(s). It is strongly recommended to supply STRING IDs.
-  See
+  Character or Numeric: Your protein ID(s). It is strongly recommended
+  to supply STRING IDs. See
   [`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)
   for more information.
 
 - species:
 
-  Numeric: [NCBI Taxonomy
+  Numeric: (optional) [NCBI Taxonomy
   identifier](https://www.ncbi.nlm.nih.gov/taxonomy/); Human Taxonomy ID
   is 9606. (Recommended, but required if your input contains more than
   10 unique IDs.)
 
 - required_score:
 
-  Numeric (between 0 and 1000): Minimum interaction score required for
-  an interaction to be included in the returned interactions. If
-  omitted, STRING applies a network-dependent threshold. Common
-  confidence thresholds are 150 (low), 400 (medium), 700 (high), and 900
-  (highest).
+  Numeric: (optional) (between 0 and 1000): Minimum interaction score
+  required for an interaction to be included in the returned
+  interactions. If omitted, STRING applies a network-dependent
+  threshold. Common confidence thresholds are 150 (low), 400 (medium),
+  700 (high), and 900 (highest).
 
 - network_type:
 
-  Character: One of:
+  Character: (default = `"functional"`) One of:
 
   - "functional": (default) Edges indicate both physical and functional
     associations.
@@ -55,8 +55,8 @@ rba_string_interaction_partners(
 
 - limit:
 
-  Numeric: Maximum number of interaction partners returned for each
-  input protein, ordered by confidence.
+  Numeric: (optional) Maximum number of interaction partners returned
+  for each input protein, ordered by confidence.
 
 - ...:
 

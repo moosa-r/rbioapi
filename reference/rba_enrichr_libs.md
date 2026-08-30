@@ -14,15 +14,15 @@ rba_enrichr_libs(organism = "human", store_in_options = TRUE, ...)
 
 - organism:
 
-  (default = "human") Which model organism version of Enrichr to use?
-  Available options are: "human", (H. sapiens & M. musculus), "fly" (D.
-  melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans) and "fish"
-  (D. rerio).
+  Character: (default = `"human"`) Which model organism version of
+  Enrichr to use? Available options are: "human", (H. sapiens & M.
+  musculus), "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm"
+  (C. elegans) and "fish" (D. rerio).
 
 - store_in_options:
 
-  logical: (default = TRUE) Should a list of available Enrichr libraries
-  be saved as a global option?
+  Logical: (default = `TRUE`) Should a list of available Enrichr
+  libraries be saved as a global option?
 
 - ...:
 

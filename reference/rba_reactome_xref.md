@@ -22,9 +22,9 @@ rba_reactome_xref(
 
 - xref_id:
 
-  Character or Numeric vector: One or more cross-reference identifiers
-  from external databases. Multiple identifiers can only be supplied
-  when `expanded = TRUE`.
+  Character or Numeric: One or more cross-reference identifiers from
+  external databases. Multiple identifiers can only be supplied when
+  `expanded = TRUE`.
 
 - expanded:
 

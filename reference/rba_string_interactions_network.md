@@ -24,7 +24,8 @@ rba_string_interactions_network(
 
 - ids:
 
-  Your protein IDs. It is strongly recommended to supply STRING IDs. See
+  Character or Numeric: Your protein IDs. It is strongly recommended to
+  supply STRING IDs. See
   [`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)
   for more information.  
   Alternatively, you can retrieve interactions among proteins annotated
@@ -33,23 +34,24 @@ rba_string_interactions_network(
 
 - species:
 
-  Numeric: [NCBI Taxonomy
+  Numeric: (optional) [NCBI Taxonomy
   identifier](https://www.ncbi.nlm.nih.gov/taxonomy/); Human Taxonomy ID
   is 9606. Required when using `network_term_id`; otherwise recommended,
   but required if your input contains more than 10 unique IDs.
 
 - required_score:
 
-  Numeric (between 0 and 1000): Minimum interaction score required for
-  an interaction to be included in the returned network. If omitted,
-  STRING applies a network-dependent threshold. Common confidence
-  thresholds are 150 (low), 400 (medium), 700 (high), and 900 (highest).
+  Numeric: (optional) (between 0 and 1000): Minimum interaction score
+  required for an interaction to be included in the returned network. If
+  omitted, STRING applies a network-dependent threshold. Common
+  confidence thresholds are 150 (low), 400 (medium), 700 (high), and 900
+  (highest).
 
 - add_nodes:
 
-  Numeric: Number of neighboring proteins to add to the network. For
-  identifier-based requests, if omitted, STRING determines the value
-  from the number of input IDs:
+  Numeric: (optional) Number of neighboring proteins to add to the
+  network. For identifier-based requests, if omitted, STRING determines
+  the value from the number of input IDs:
 
   1.  One ID: STRING adds 10 proteins to retrieve its interaction
       neighborhood.
@@ -59,7 +61,7 @@ rba_string_interactions_network(
 
 - network_type:
 
-  Character: One of:
+  Character: (default = `"functional"`) One of:
 
   - "functional": (default) Edges indicate both physical and functional
     associations.
@@ -74,10 +76,11 @@ rba_string_interactions_network(
 
 - network_term_id:
 
-  Character: A functional term identifier (e.g. a Gene Ontology, KEGG,
-  or Reactome identifier). Instead of using proteins supplied through
-  `ids`, STRING constructs the network from proteins annotated with the
-  specified term. Set `ids = NULL` and supply `species`.
+  Character: (optional) A functional term identifier (e.g. a Gene
+  Ontology, KEGG, or Reactome identifier). Instead of using proteins
+  supplied through `ids`, STRING constructs the network from proteins
+  annotated with the specified term. Set `ids = NULL` and supply
+  `species`.
 
 - ...:
 

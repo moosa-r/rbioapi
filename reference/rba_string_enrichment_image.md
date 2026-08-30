@@ -26,30 +26,31 @@ rba_string_enrichment_image(
 
 - ids:
 
-  Your protein ID(s). It is strongly recommended to supply STRING IDs.
-  See
+  Character or Numeric: Your protein ID(s). It is strongly recommended
+  to supply STRING IDs. See
   [`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)
   for more information. If only one ID is supplied, STRING expands the
   network by 10 proteins.
 
 - species:
 
-  Numeric: [NCBI Taxonomy
+  Numeric: (optional) [NCBI Taxonomy
   identifier](https://www.ncbi.nlm.nih.gov/taxonomy/); Human Taxonomy ID
   is 9606. (Recommended, but required if your input contains more than
   10 unique IDs.)
 
 - category:
 
-  Character: The term set to use for enrichment analysis. Valid values
-  are: "Process" (default), "Function", "Component", "Keyword", "KEGG",
-  "RCTM", "HPO", "MPO", "DPO", "WPO", "ZPO", "FYPO", "Pfam", "SMART",
-  "InterPro", "PMID", "NetworkNeighborAL", "COMPARTMENTS", "TISSUES",
-  "DISEASES", or "WikiPathways". See Details for descriptions.
+  Character: (default = `"Process"`) The term set to use for enrichment
+  analysis. Valid values are: "Process" (default), "Function",
+  "Component", "Keyword", "KEGG", "RCTM", "HPO", "MPO", "DPO", "WPO",
+  "ZPO", "FYPO", "Pfam", "SMART", "InterPro", "PMID",
+  "NetworkNeighborAL", "COMPARTMENTS", "TISSUES", "DISEASES", or
+  "WikiPathways". See Details for descriptions.
 
 - image_format:
 
-  Character: One of:
+  Character: (default = `"image"`) One of:
 
   - "image": PNG image with normal resolution.
 
@@ -59,7 +60,7 @@ rba_string_enrichment_image(
 
 - save_image:
 
-  Logical or Character:
+  Logical or Character: (default = `TRUE`)
 
   - TRUE: Save the image to an automatically-generated path.
 
@@ -69,26 +70,26 @@ rba_string_enrichment_image(
 
 - group_by_similarity:
 
-  Numeric: Jaccard-index threshold used to group related terms visually.
-  Valid values range from 0.1 to 1 in increments of 0.1. The default is
-  `NULL`, which disables grouping.
+  Numeric: (optional) Jaccard-index threshold used to group related
+  terms visually. Valid values range from 0.1 to 1 in increments of 0.1.
+  The default is `NULL`, which disables grouping.
 
 - color_palette:
 
-  Character: Color palette used to represent FDR values. Valid values
-  are "mint_blue" (default), "lime_emerald", "green_blue",
-  "peach_purple", "straw_navy", or "yellow_pink".
+  Character: (default = `"mint_blue"`) Color palette used to represent
+  FDR values. Valid values are "mint_blue" (default), "lime_emerald",
+  "green_blue", "peach_purple", "straw_navy", or "yellow_pink".
 
 - number_of_term_shown:
 
-  Numeric: (default = 10) Maximum number of terms to include in the
+  Numeric: (default = `10`) Maximum number of terms to include in the
   plot.
 
 - x_axis:
 
-  Character: Variable displayed on the x-axis and used to rank the
-  results. Valid values are "signal" (default), "strength", "FDR", and
-  "gene_count".
+  Character: (default = `"signal"`) Variable displayed on the x-axis and
+  used to rank the results. Valid values are "signal" (default),
+  "strength", "FDR", and "gene_count".
 
 - ...:
 

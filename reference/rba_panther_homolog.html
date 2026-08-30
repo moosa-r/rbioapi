@@ -68,7 +68,7 @@
 
 
 <dl><dt id="arg-genes">genes<a class="anchor" aria-label="anchor" href="#arg-genes"></a></dt>
-<dd><p>Character or numeric vector of gene identifiers with maximum
+<dd><p>Character or Numeric: A vector of gene identifiers with maximum
 length of 10. Can be any of: Ensembl gene ID, Ensembl protein ID, Ensembl
 transcript ID, Entrez gene ID, gene symbol, NCBI GI, HGNC ID,
 International protein index ID, NCBI UniGene ID, UniProt accession and/or
@@ -76,19 +76,19 @@ UniProt ID.</p></dd>
 
 
 <dt id="arg-organism">organism<a class="anchor" aria-label="anchor" href="#arg-organism"></a></dt>
-<dd><p>(numeric) NCBI taxon ID of the organism of your supplied
+<dd><p>Numeric: NCBI taxon ID of the organism of your supplied
 genes. run <code><a href="rba_panther_info.html">rba_panther_info</a></code> with argument
 'what = "organisms"' to get a list of PANTHER's supported organisms.</p></dd>
 
 
 <dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
-<dd><p>Homolog types to return. either "P" (default) for paralogs,
+<dd><p>Character: (default = <code>"P"</code>) Homolog types to return. either "P" (default) for paralogs,
 "X" for horizontal gene transfer and "LDX" for least diverged horizontal
 gene transfer.</p></dd>
 
 
 <dt id="arg-target-organisms">target_organisms<a class="anchor" aria-label="anchor" href="#arg-target-organisms"></a></dt>
-<dd><p>(numeric) NCBI taxon ID(s) to filter the results.
+<dd><p>Numeric: (optional) NCBI taxon ID(s) to filter the results.
 run <code><a href="rba_panther_info.html">rba_panther_info</a></code> with argument 'what = "organisms"' to
 get a list of PANTHER's supported organisms.
 This argument is ignored for paralogs, which are searched within the input

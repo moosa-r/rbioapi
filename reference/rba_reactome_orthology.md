@@ -14,7 +14,7 @@ rba_reactome_orthology(event_ids, species_dbid, ...)
 
 - event_ids:
 
-  Character vector: Up to 20 human Reactome event IDs to retrieve their
+  Character: Up to 20 human Reactome event IDs to retrieve their
   orthologous events.
 
 - species_dbid:

@@ -74,12 +74,12 @@
 
 
 <dl><dt id="arg-ids">ids<a class="anchor" aria-label="anchor" href="#arg-ids"></a></dt>
-<dd><p>Your protein ID(s). It is strongly recommended to supply
+<dd><p>Character or Numeric: Your protein ID(s). It is strongly recommended to supply
 STRING IDs. See <code><a href="rba_string_map_ids.html">rba_string_map_ids</a></code> for more information.</p></dd>
 
 
 <dt id="arg-species">species<a class="anchor" aria-label="anchor" href="#arg-species"></a></dt>
-<dd><p>Numeric:
+<dd><p>Numeric: (optional)
 <a href="https://www.ncbi.nlm.nih.gov/taxonomy/" class="external-link">
 NCBI Taxonomy identifier</a> of your input proteins; Human Taxonomy ID is
 9606. (Recommended, but required if your input contains more than 10
@@ -87,7 +87,7 @@ unique IDs.)</p></dd>
 
 
 <dt id="arg-species-b">species_b<a class="anchor" aria-label="anchor" href="#arg-species-b"></a></dt>
-<dd><p>Numeric: One or more
+<dd><p>Numeric: (optional) One or more
 <a href="https://www.ncbi.nlm.nih.gov/taxonomy/" class="external-link">
 NCBI Taxonomy identifiers</a> used to restrict the search for closest
 homologs. The default is <code>NULL</code>, which searches all STRING species.</p></dd>

@@ -21,7 +21,7 @@ rba_reactome_interactors_psicquic(
 
 - proteins:
 
-  Character or Numeric vector: (optional) Proteins to retrieve PSICQUIC
+  Character or Numeric: (optional) Proteins to retrieve PSICQUIC
   interactors.
 
 - resource:

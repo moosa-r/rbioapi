@@ -19,25 +19,26 @@ rba_enrichr_add_list(
 
 - gene_list:
 
-  A character vector with Entrez gene symbols of test genes.
+  Character: A vector with Entrez gene symbols of test genes.
 
 - description:
 
-  (optional) A description to be associated with your uploaded gene-set
-  to Enrichr servers.
+  Character: (optional) A description to be associated with your
+  uploaded gene-set to Enrichr servers.
 
 - organism:
 
-  (default = "human") Which model organism version of Enrichr to use?
-  Available options are: "human", (H. sapiens & M. musculus), "fly" (D.
-  melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans) and "fish"
-  (D. rerio).
+  Character: (default = `"human"`) Which model organism version of
+  Enrichr to use? Available options are: "human", (H. sapiens & M.
+  musculus), "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm"
+  (C. elegans) and "fish" (D. rerio).
 
 - speedrichr:
 
-  logical (default = FALSE) Set to TRUE if you will use this gene list
-  with a background list; otherwise, set to FALSE. Only available for
-  human libraries. Refer to the details section for more information.
+  Logical: (default = `FALSE`) Set to TRUE if you will use this gene
+  list with a background list; otherwise, set to FALSE. Only available
+  for human libraries. Refer to the details section for more
+  information.
 
 - ...:
 

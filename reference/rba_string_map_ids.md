@@ -15,23 +15,25 @@ rba_string_map_ids(ids, species = NULL, echo_query = TRUE, limit = NULL, ...)
 
 - ids:
 
-  Your common gene/protein identifier(s) to be mapped.
+  Character or Numeric: Your common gene/protein identifier(s) to be
+  mapped.
 
 - species:
 
-  Numeric: [NCBI Taxonomy
+  Numeric: (optional) [NCBI Taxonomy
   identifier](https://www.ncbi.nlm.nih.gov/taxonomy/); Human Taxonomy ID
   is 9606. (Recommended, but optional.)
 
 - echo_query:
 
-  (default = `TRUE`) Include your input IDs as a column of the results.
+  Logical: (default = `TRUE`) Include your input IDs as a column of the
+  results.
 
 - limit:
 
-  Deprecated: Retained temporarily for backward compatibility. STRING
-  v12 returns only the single best match per input ID, so this argument
-  has no effect.
+  Numeric: (optional) Deprecated: Retained temporarily for backward
+  compatibility. STRING v12 returns only the single best match per input
+  ID, so this argument has no effect.
 
 - ...:
 

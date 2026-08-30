@@ -83,7 +83,7 @@
 
 
 <dl><dt id="arg-ids">ids<a class="anchor" aria-label="anchor" href="#arg-ids"></a></dt>
-<dd><p>Your protein IDs. It is strongly recommended to supply
+<dd><p>Character or Numeric: Your protein IDs. It is strongly recommended to supply
 STRING IDs. See <code><a href="rba_string_map_ids.html">rba_string_map_ids</a></code> for more information.
 <br> Alternatively, you can retrieve interactions among proteins annotated
 with a STRING functional term by setting <code>ids = NULL</code> and supplying
@@ -91,7 +91,7 @@ with a STRING functional term by setting <code>ids = NULL</code> and supplying
 
 
 <dt id="arg-species">species<a class="anchor" aria-label="anchor" href="#arg-species"></a></dt>
-<dd><p>Numeric:
+<dd><p>Numeric: (optional)
 <a href="https://www.ncbi.nlm.nih.gov/taxonomy/" class="external-link">
 NCBI Taxonomy identifier</a>; Human Taxonomy ID is 9606.
 Required when using <code>network_term_id</code>; otherwise recommended, but
@@ -99,7 +99,7 @@ required if your input contains more than 10 unique IDs.</p></dd>
 
 
 <dt id="arg-required-score">required_score<a class="anchor" aria-label="anchor" href="#arg-required-score"></a></dt>
-<dd><p>Numeric (between 0 and 1000): Minimum interaction
+<dd><p>Numeric: (optional) (between 0 and 1000): Minimum interaction
 score required for an interaction to be included in the returned network.
 If omitted, STRING applies a network-dependent threshold. Common
 confidence thresholds are 150 (low), 400 (medium), 700 (high), and 900
@@ -107,7 +107,7 @@ confidence thresholds are 150 (low), 400 (medium), 700 (high), and 900
 
 
 <dt id="arg-add-nodes">add_nodes<a class="anchor" aria-label="anchor" href="#arg-add-nodes"></a></dt>
-<dd><p>Numeric: Number of neighboring proteins to add to the
+<dd><p>Numeric: (optional) Number of neighboring proteins to add to the
 network. For identifier-based requests, if omitted, STRING determines the
 value from the number of input IDs:</p><ol><li><p>One ID: STRING adds 10 proteins to retrieve its interaction
 neighborhood.</p></li>
@@ -117,7 +117,7 @@ input proteins are returned.</p></li>
 
 
 <dt id="arg-network-type">network_type<a class="anchor" aria-label="anchor" href="#arg-network-type"></a></dt>
-<dd><p>Character: One of:</p><ul><li><p>"functional": (default) Edges indicate both physical and
+<dd><p>Character: (default = <code>"functional"</code>) One of:</p><ul><li><p>"functional": (default) Edges indicate both physical and
 functional associations.</p></li>
 <li><p>"physical": Edges indicate that two proteins have a physical
 interaction or are parts of a complex.</p></li>
@@ -130,7 +130,7 @@ in <code>ids</code> as node labels instead of STRING's default labels.</p></dd>
 
 
 <dt id="arg-network-term-id">network_term_id<a class="anchor" aria-label="anchor" href="#arg-network-term-id"></a></dt>
-<dd><p>Character: A functional term identifier (e.g. a Gene
+<dd><p>Character: (optional) A functional term identifier (e.g. a Gene
 Ontology, KEGG, or Reactome identifier). Instead of using proteins supplied
 through <code>ids</code>, STRING constructs the network from proteins annotated
 with the specified term. Set <code>ids = NULL</code> and supply <code>species</code>.</p></dd>

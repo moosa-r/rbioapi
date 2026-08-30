@@ -30,7 +30,7 @@ rba_reactome_interactors_static(
 
 - proteins:
 
-  Character or Numeric vector: UniProt protein accession(s). If
+  Character or Numeric: UniProt protein accession(s). If
   `endpoint = "pathways"`, only a single protein accession can be
   supplied.
 

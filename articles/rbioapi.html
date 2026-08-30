@@ -88,7 +88,7 @@
                         <h4 data-toc-skip class="author">Moosa
 Rezwani</h4>
             
-            <h4 data-toc-skip class="date">2026-08-29</h4>
+            <h4 data-toc-skip class="date">2026-08-30</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/moosa-r/rbioapi/blob/master/vignettes/rbioapi.Rmd" class="external-link"><code>vignettes/rbioapi.Rmd</code></a></small>
       <div class="d-none name"><code>rbioapi.Rmd</code></div>
@@ -231,17 +231,17 @@ options and their current values by calling
 <code><a href="../reference/rba_options.html">rba_options()</a></code>without any argument:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rba_options.html">rba_options</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt;    rbioapi_option current_value            allowed_value</span></span>
-<span><span class="co">#&gt; 1     diagnostics         FALSE     Logical (TRUE/FALSE)</span></span>
-<span><span class="co">#&gt; 2        dir_name       rbioapi                Character</span></span>
-<span><span class="co">#&gt; 3        progress         FALSE     Logical (TRUE/FALSE)</span></span>
-<span><span class="co">#&gt; 4       retry_max             0   Numeric (0 or greater)</span></span>
-<span><span class="co">#&gt; 5      retry_wait            10   Numeric (0 or greater)</span></span>
-<span><span class="co">#&gt; 6       save_file         FALSE     Logical (TRUE/FALSE)</span></span>
-<span><span class="co">#&gt; 7      skip_error          TRUE     Logical (TRUE/FALSE)</span></span>
-<span><span class="co">#&gt; 8         timeout            30 Numeric (0.1 or greater)</span></span>
-<span><span class="co">#&gt; 9         verbose          TRUE     Logical (TRUE/FALSE)</span></span>
-<span><span class="co">#&gt; 10       metadata         FALSE     Logical (TRUE/FALSE)</span></span></code></pre></div>
+<span><span class="co">#&gt;    rbioapi_option current_value                              allowed_value</span></span>
+<span><span class="co">#&gt; 1     diagnostics         FALSE                       Logical (TRUE/FALSE)</span></span>
+<span><span class="co">#&gt; 2        dir_name       rbioapi                                  Character</span></span>
+<span><span class="co">#&gt; 3       retry_max             0 Numeric (finite non-negative whole number)</span></span>
+<span><span class="co">#&gt; 4      retry_wait            10          Numeric (finite and non-negative)</span></span>
+<span><span class="co">#&gt; 5        progress         FALSE                       Logical (TRUE/FALSE)</span></span>
+<span><span class="co">#&gt; 6       save_file         FALSE                       Logical (TRUE/FALSE)</span></span>
+<span><span class="co">#&gt; 7      skip_error          TRUE                       Logical (TRUE/FALSE)</span></span>
+<span><span class="co">#&gt; 8         timeout            30         Numeric (0.001 to 3600, inclusive)</span></span>
+<span><span class="co">#&gt; 9         verbose          TRUE                       Logical (TRUE/FALSE)</span></span>
+<span><span class="co">#&gt; 10       metadata         FALSE                       Logical (TRUE/FALSE)</span></span></code></pre></div>
 <p>Now, let us consider the ways in which we can alter the settings:</p>
 <div class="section level3">
 <h3 id="changing-the-options-change-the-option-globally">Change the option globally<a class="anchor" aria-label="anchor" href="#changing-the-options-change-the-option-globally"></a>
@@ -317,10 +317,7 @@ services.</p>
 <span><span class="co">#&gt; ---&gt;&gt;&gt; JASPAR :</span></span>
 <span><span class="co">#&gt; +++ The server is responding.</span></span>
 <span><span class="co">#&gt; ---&gt;&gt;&gt; miEAA :</span></span>
-<span><span class="co">#&gt; !!! failed with error:</span></span>
-<span><span class="co">#&gt;  Error in curl::curl_fetch_memory(url, handle = handle) : </span></span>
-<span><span class="co">#&gt;   Timeout was reached [ccb-compute2.cs.uni-saarland.de]:</span></span>
-<span><span class="co">#&gt; SSL connection timeout</span></span>
+<span><span class="co">#&gt; +++ The server is responding.</span></span>
 <span><span class="co">#&gt; ---&gt;&gt;&gt; PANTHER :</span></span>
 <span><span class="co">#&gt; +++ The server is responding.</span></span>
 <span><span class="co">#&gt; ---&gt;&gt;&gt; Reactome Content Service :</span></span>

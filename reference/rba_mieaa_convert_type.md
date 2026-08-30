@@ -22,7 +22,7 @@ rba_mieaa_convert_type(
 
 - mirna:
 
-  Character vector: miRNA identifiers to convert.
+  Character: miRNA identifiers to convert.
 
 - input_type:
 

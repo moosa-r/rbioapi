@@ -20,13 +20,13 @@ rba_jaspar_matrix(matrix_id, file_format = NULL, save_to = NULL, ...)
 
 - file_format:
 
-  Character: Instead of returning an R object, you can directly download
-  the profile matrix as a file in this format. Supported formats are
-  "yaml", "jaspar", "transfac", "meme", and "pfm".
+  Character: (optional) Instead of returning an R object, you can
+  directly download the profile matrix as a file in this format.
+  Supported formats are "yaml", "jaspar", "transfac", "meme", and "pfm".
 
 - save_to:
 
-  NULL or Character:
+  Character: (optional)
 
   - NULL: (only if file_format was supplied) Save the file to an
     automatically-generated path.

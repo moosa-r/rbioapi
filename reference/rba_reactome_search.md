@@ -29,25 +29,25 @@ rba_reactome_search(
 
 - species:
 
-  Character vector: (optional) Scientific species name(s) used to filter
-  the results, e.g. `"Homo sapiens"`. See
+  Character: (optional) Scientific species name(s) used to filter the
+  results, e.g. `"Homo sapiens"`. See
   [`rba_reactome_species`](https://rbioapi.moosa-r.com/reference/rba_reactome_species.md)
   for species available in Reactome.
 
 - types:
 
-  Character vector: (optional) Result type(s) used to filter the search,
-  e.g. `"Protein"`, `"Pathway"`, or `"Reaction"`.
+  Character: (optional) Result type(s) used to filter the search, e.g.
+  `"Protein"`, `"Pathway"`, or `"Reaction"`.
 
 - compartments:
 
-  Character vector: (optional) Cellular compartment name(s) used to
-  filter the results.
+  Character: (optional) Cellular compartment name(s) used to filter the
+  results.
 
 - keywords:
 
-  Character vector: (optional) Reactome search keyword(s) used to filter
-  the results.
+  Character: (optional) Reactome search keyword(s) used to filter the
+  results.
 
 - cluster:
 

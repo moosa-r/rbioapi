@@ -13,15 +13,15 @@ rba_panther_mapping(genes, organism, ...)
 
 - genes:
 
-  Character or numeric vector of gene identifiers with maximum length of
-  5,000. Can be any of: Ensembl gene ID, Ensembl protein ID, Ensembl
+  Character or Numeric: A vector of gene identifiers with maximum length
+  of 5,000. Can be any of: Ensembl gene ID, Ensembl protein ID, Ensembl
   transcript ID, Entrez gene ID, gene symbol, NCBI GI, HGNC ID,
   International protein index ID, NCBI UniGene ID, UniProt accession
   and/or UniProt ID.
 
 - organism:
 
-  (numeric) NCBI taxon ID. run
+  Numeric: NCBI taxon ID. run
   [`rba_panther_info`](https://rbioapi.moosa-r.com/reference/rba_panther_info.md)
   with argument 'what = "organisms"' to get a list of PANTHER's
   supported organisms.

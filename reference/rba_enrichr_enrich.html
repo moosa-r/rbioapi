@@ -79,14 +79,14 @@
 
 
 <dl><dt id="arg-user-list-id">user_list_id<a class="anchor" aria-label="anchor" href="#arg-user-list-id"></a></dt>
-<dd><p>An ID returned after uploading a gene list
+<dd><p>Numeric: An ID returned after uploading a gene list
 using <code><a href="rba_enrichr_add_list.html">rba_enrichr_add_list</a></code>, with the `speedrichr` set to
 TRUE or FALSE depending on whether you intend to analyze this gene list
 with or without a background gene list, respectively.</p></dd>
 
 
 <dt id="arg-gene-set-library">gene_set_library<a class="anchor" aria-label="anchor" href="#arg-gene-set-library"></a></dt>
-<dd><p>One of the:</p><ol><li><p>"all" to select all of the available Enrichr gene-set libraries.</p></li>
+<dd><p>Character: (default = <code>"all"</code>) One of the:</p><ol><li><p>"all" to select all of the available Enrichr gene-set libraries.</p></li>
 <li><p>A gene-set library name. You can retrieve the available options
 for a given species using <code><a href="rba_enrichr_libs.html">rba_enrichr_libs</a></code>.</p></li>
 <li><p>If regex_library_name = TRUE, A partially-matching name a regex
@@ -95,13 +95,13 @@ pattern that correspond to one or more of Enrichr library names.</p></li>
 
 
 <dt id="arg-regex-library-name">regex_library_name<a class="anchor" aria-label="anchor" href="#arg-regex-library-name"></a></dt>
-<dd><p>logical: (default = FALSE) if TRUE the supplied
+<dd><p>Logical: (default = <code>FALSE</code>) if TRUE the supplied
 gene_set_library will be considered as a regex pattern.
 If FALSE, gene_set_library will be considered as an exact match.</p></dd>
 
 
 <dt id="arg-organism">organism<a class="anchor" aria-label="anchor" href="#arg-organism"></a></dt>
-<dd><p>(default = "human") Which model organism version of Enrichr
+<dd><p>Character: (default = <code>"human"</code>) Which model organism version of Enrichr
 to use? Available options are: "human", (H. sapiens &amp; M. musculus),
 "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
 and "fish" (D. rerio). If `background_id` is provided, the only available
@@ -109,12 +109,12 @@ option is "human".</p></dd>
 
 
 <dt id="arg-background-id">background_id<a class="anchor" aria-label="anchor" href="#arg-background-id"></a></dt>
-<dd><p>An ID returned after uploading a background gene
+<dd><p>Character: (optional) An ID returned after uploading a background gene
 list using <code><a href="rba_enrichr_add_background.html">rba_enrichr_add_background</a></code></p></dd>
 
 
 <dt id="arg-progress-bar">progress_bar<a class="anchor" aria-label="anchor" href="#arg-progress-bar"></a></dt>
-<dd><p>logical: (default = TRUE) if multiple Enrichr libraries
+<dd><p>Logical: (default = <code>TRUE</code>) if multiple Enrichr libraries
 are selected, should a progress bar be displayed?</p></dd>
 
 

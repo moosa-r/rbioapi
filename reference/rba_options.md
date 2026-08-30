@@ -31,71 +31,78 @@ rba_options(
 
 - diagnostics:
 
-  (Logical) (default = FALSE) Show diagnostics and detailed messages
-  with internal information.
+  Logical: (optional) Show diagnostics and detailed messages with
+  internal information. The package default is `FALSE`.
 
 - dir_name:
 
-  (character) (default = "rbioapi") If the package needs to generate a
-  file path to save the server's response, a directory with this name
-  will be created in your working directory to save your files.
+  Character: (optional) If the package needs to generate a file path to
+  save the server's response, a directory with this name will be created
+  in your working directory to save your files. The package default is
+  `"rbioapi"`.
 
 - retry_max:
 
-  (Numeric) (default = 0) How many times should rbioapi retry in case of
-  5xx server responses, errors related to the server or no internet
-  connectivity?
+  Numeric: (optional) How many times should rbioapi retry in case of 5xx
+  server responses, errors related to the server or no internet
+  connectivity? Must be a finite non-negative whole number. The package
+  default is `0`.
 
 - retry_wait:
 
-  (Numeric) (default = 10) Time in seconds to wait before next retry in
-  case of internet connection or server problems.
+  Numeric: (optional) Time in seconds to wait before next retry in case
+  of internet connection or server problems. Must be finite and
+  non-negative. The package default is `10`.
 
 - progress:
 
-  (Logical) (default = FALSE) Should a progress bar be displayed?
+  Logical: (optional) Should a progress bar be displayed? The package
+  default is `FALSE`.
 
 - save_file:
 
-  (Logical or character) (default = FALSE) Either:
+  Logical: (optional) Either:
 
   - TRUE: In this case, the raw server's response file will be
     automatically saved to a proper file path. use "dir_name" argument
     to change the file's parent directory.
 
-  - FALSE: (default) Do not automatically save server's response file.
+  - FALSE: Do not automatically save server's response file.
 
   - Character: (Only when changing the option via "..." in a functions
     call) A valid file path to save the server's response file to the
     function that you are calling.
 
+  The package default is `FALSE`.
+
 - skip_error:
 
-  (Logical) (default = FALSE if R is in the interactive mode, TRUE
-  otherwise) If TRUE, the code execution will not be stopped in case of
-  errors (anything but HTTP status 200 from the server); Instead the
-  error message will be returned as the function's output. However, if
-  FALSE, in case of any error, the code execution will be halted and an
-  error message will be issued.
+  Logical: (optional) If TRUE, the code execution will not be stopped in
+  case of errors (anything but HTTP status 200 from the server); Instead
+  the error message will be returned as the function's output. However,
+  if FALSE, in case of any error, the code execution will be halted and
+  an error message will be issued. The package default is `FALSE` in
+  interactive sessions and `TRUE` otherwise.
 
 - timeout:
 
-  (Numeric) (default = 90) The maximum time in seconds that you are
-  willing to wait for a server response before giving up and stopping
-  the function execution.
+  Numeric: (optional) The maximum time in seconds that you are willing
+  to wait for a server response before giving up and stopping the
+  function execution. Accepted values are between 0.001 and 3600,
+  inclusive. The package default is `90`.
 
 - verbose:
 
-  (Logical) (Default = TRUE) Generate short informative messages.
+  Logical: (optional) Generate short informative messages. The package
+  default is `TRUE`.
 
 - metadata:
 
-  (Logical) (default = FALSE) Save API request metadata with returned
-  objects? It includes the rbioapi version and, for each request, the
-  timestamp, API call, original `httr` response, and exact parser
-  functions. Use
+  Logical: (optional) Save API request metadata with returned objects?
+  It includes the rbioapi version and, for each request, the timestamp,
+  API call, original `httr` response, and exact parser functions. Use
   [`rba_metadata()`](https://rbioapi.moosa-r.com/reference/rba_metadata.md)
-  to get it.
+  to get it. The package default is `FALSE`.
 
 ## Value
 

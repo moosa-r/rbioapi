@@ -14,14 +14,14 @@ rba_string_homology_intra(ids, species = NULL, ...)
 
 - ids:
 
-  Your protein ID(s). It is strongly recommended to supply STRING IDs.
-  See
+  Character or Numeric: Your protein ID(s). It is strongly recommended
+  to supply STRING IDs. See
   [`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)
   for more information.
 
 - species:
 
-  Numeric: [NCBI Taxonomy
+  Numeric: (optional) [NCBI Taxonomy
   identifier](https://www.ncbi.nlm.nih.gov/taxonomy/); Human Taxonomy ID
   is 9606. (Recommended, but required if your input contains more than
   10 unique IDs.)

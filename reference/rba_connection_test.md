@@ -13,11 +13,11 @@ rba_connection_test(print_output = TRUE, diagnostics = FALSE)
 
 - print_output:
 
-  (Logical) (default = TRUE) Send the tests' output to the console?
+  Logical: (default = `TRUE`) Send the tests' output to the console?
 
 - diagnostics:
 
-  (Logical) (default = FALSE) Show diagnostics and detailed messages
+  Logical: (default = `FALSE`) Show diagnostics and detailed messages
   with internal information.
 
 ## Value

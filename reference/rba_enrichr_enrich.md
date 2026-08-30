@@ -21,7 +21,7 @@ rba_enrichr_enrich(
 
 - user_list_id:
 
-  An ID returned after uploading a gene list using
+  Numeric: An ID returned after uploading a gene list using
   [`rba_enrichr_add_list`](https://rbioapi.moosa-r.com/reference/rba_enrichr_add_list.md),
   with the \`speedrichr\` set to TRUE or FALSE depending on whether you
   intend to analyze this gene list with or without a background gene
@@ -29,7 +29,7 @@ rba_enrichr_enrich(
 
 - gene_set_library:
 
-  One of the:
+  Character: (default = `"all"`) One of the:
 
   1.  "all" to select all of the available Enrichr gene-set libraries.
 
@@ -42,27 +42,28 @@ rba_enrichr_enrich(
 
 - regex_library_name:
 
-  logical: (default = FALSE) if TRUE the supplied gene_set_library will
-  be considered as a regex pattern. If FALSE, gene_set_library will be
-  considered as an exact match.
+  Logical: (default = `FALSE`) if TRUE the supplied gene_set_library
+  will be considered as a regex pattern. If FALSE, gene_set_library will
+  be considered as an exact match.
 
 - organism:
 
-  (default = "human") Which model organism version of Enrichr to use?
-  Available options are: "human", (H. sapiens & M. musculus), "fly" (D.
-  melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans) and "fish"
-  (D. rerio). If \`background_id\` is provided, the only available
-  option is "human".
+  Character: (default = `"human"`) Which model organism version of
+  Enrichr to use? Available options are: "human", (H. sapiens & M.
+  musculus), "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm"
+  (C. elegans) and "fish" (D. rerio). If \`background_id\` is provided,
+  the only available option is "human".
 
 - background_id:
 
-  An ID returned after uploading a background gene list using
+  Character: (optional) An ID returned after uploading a background gene
+  list using
   [`rba_enrichr_add_background`](https://rbioapi.moosa-r.com/reference/rba_enrichr_add_background.md)
 
 - progress_bar:
 
-  logical: (default = TRUE) if multiple Enrichr libraries are selected,
-  should a progress bar be displayed?
+  Logical: (default = `TRUE`) if multiple Enrichr libraries are
+  selected, should a progress bar be displayed?
 
 - ...:
 

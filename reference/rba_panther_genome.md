@@ -13,15 +13,15 @@ rba_panther_genome(organism, page, ...)
 
 - organism:
 
-  (numeric) NCBI taxon ID. Run
+  Numeric: NCBI taxon ID. Run
   [`rba_panther_info`](https://rbioapi.moosa-r.com/reference/rba_panther_info.md)
   with argument 'what = "organisms"' to get a list of PANTHER's
   supported organisms.
 
 - page:
 
-  (numeric) The results page to retrieve. Pages contain up to 1,000
-  genes and are numbered starting from 1.
+  Numeric: The results page to retrieve. Pages contain up to 1,000 genes
+  and are numbered starting from 1.
 
 - ...:
 

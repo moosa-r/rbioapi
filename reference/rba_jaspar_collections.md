@@ -13,7 +13,7 @@ rba_jaspar_collections(release = 2026, ...)
 
 - release:
 
-  Numeric: (default = 2026) Which JASPAR database release to use?
+  Numeric: (default = `2026`) Which JASPAR database release to use?
   Available options are: 2026, 2024, 2022, 2020, 2018, 2016, and 2014.
 
 - ...:

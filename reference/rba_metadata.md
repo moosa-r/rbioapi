@@ -15,7 +15,7 @@ rba_metadata(result)
 
 - result:
 
-  An object returned by an rbioapi function.
+  Any: An object returned by an rbioapi function.
 
 ## Value
 

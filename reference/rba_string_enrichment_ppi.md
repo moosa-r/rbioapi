@@ -20,28 +20,28 @@ rba_string_enrichment_ppi(
 
 - ids:
 
-  Your protein ID(s). It is strongly recommended to supply STRING IDs.
-  See
+  Character or Numeric: Your protein ID(s). It is strongly recommended
+  to supply STRING IDs. See
   [`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)
   for more information.
 
 - species:
 
-  Numeric: [NCBI Taxonomy
+  Numeric: (optional) [NCBI Taxonomy
   identifier](https://www.ncbi.nlm.nih.gov/taxonomy/); Human Taxonomy ID
   is 9606. (Recommended, but required if your input contains more than
   10 unique IDs.)
 
 - required_score:
 
-  Numeric (between 0 and 1000): Minimum interaction score used when
-  calculating PPI enrichment. If omitted, STRING applies a
+  Numeric: (optional) (between 0 and 1000): Minimum interaction score
+  used when calculating PPI enrichment. If omitted, STRING applies a
   network-dependent threshold. Common confidence thresholds are 150
   (low), 400 (medium), 700 (high), and 900 (highest).
 
 - background:
 
-  Character vector: A set of STRING protein IDs to be used as the
+  Character: (optional) A set of STRING protein IDs to be used as the
   background proteome. Only STRING IDs are acceptable. See
   [`rba_string_map_ids`](https://rbioapi.moosa-r.com/reference/rba_string_map_ids.md)
   to map your IDs.

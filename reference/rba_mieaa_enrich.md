@@ -30,8 +30,7 @@ rba_mieaa_enrich(
 
 - test_set:
 
-  Character vector: Mature or precursor miRBase miRNA identifiers. Note
-  that
+  Character: Mature or precursor miRBase miRNA identifiers. Note that
 
   1.  Only miRBase v22 identifiers are accepted. You can use
       [`rba_mieaa_convert_version`](https://rbioapi.moosa-r.com/reference/rba_mieaa_convert_version.md)
@@ -78,8 +77,8 @@ rba_mieaa_enrich(
 
 - categories:
 
-  Character vector: (default = `NULL`) One or more category identifiers
-  to use for miRNA set enrichment analysis. Note that
+  Character: (optional) One or more category identifiers to use for
+  miRNA set enrichment analysis. Note that
 
   - Available categories vary with the selected species and whether the
     supplied miRNAs are mature or precursor. Use
@@ -115,9 +114,9 @@ rba_mieaa_enrich(
 
 - ref_set:
 
-  Character vector: (default = `NULL`) Only applicable when
-  `test_type = "ORA"`. Used as the reference (background or universe)
-  set for p-value calculations.
+  Character: (optional) Only applicable when `test_type = "ORA"`. Used
+  as the reference (background or universe) set for p-value
+  calculations.
 
 - sort_by:
 

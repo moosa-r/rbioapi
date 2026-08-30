@@ -20,8 +20,8 @@ rba_reactome_pathways_events(event_id, attribute_name = NULL, ...)
 
 - attribute_name:
 
-  Character: Optional event attribute to return instead of complete
-  event records. See [Reactome Data Schema:
+  Character: (optional) Optional event attribute to return instead of
+  complete event records. See [Reactome Data Schema:
   Event](https://reactome.org/content/schema/Event) for available
   options.
 

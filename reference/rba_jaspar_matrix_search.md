@@ -29,70 +29,70 @@ rba_jaspar_matrix_search(
 
 - term:
 
-  Character: A search term.
+  Character: (optional) A search term.
 
 - tf_name:
 
-  Character: Transcription factor names (Case-sensitive).
+  Character: (optional) Transcription factor names (case-sensitive).
 
 - tf_class:
 
-  Character: Transcription factor class
+  Character: (optional) Transcription factor class
 
 - tf_family:
 
-  Character: Transcription factor family
+  Character: (optional) Transcription factor family
 
 - tax_group:
 
-  Character: Taxonomic group. Use
+  Character: (optional) Taxonomic group. Use
   [`rba_jaspar_taxons`](https://rbioapi.moosa-r.com/reference/rba_jaspar_taxons.md)
   to get a list of supported taxonomic groups.
 
 - tax_id:
 
-  Numeric: NCBI taxonomic identifier of a species. Use
+  Numeric: (optional) NCBI taxonomic identifier of a species. Use
   [`rba_jaspar_species`](https://rbioapi.moosa-r.com/reference/rba_jaspar_species.md)
   to get a list of supported species.
 
 - data_type:
 
-  Character: Type of data (i.e., the methodology used for matrix
-  construction). For example: "ChIP-seq", "PBM"
+  Character: (optional) Type of data (i.e., the methodology used for
+  matrix construction). For example: "ChIP-seq", "PBM"
 
 - collection:
 
-  Character: JASPAR matrix profile collection name. Use
+  Character: (optional) JASPAR matrix profile collection name. Use
   [`rba_jaspar_collections`](https://rbioapi.moosa-r.com/reference/rba_jaspar_collections.md)
   to get a list of collection names.
 
 - release:
 
-  Numeric: (default = 2026) Which JASPAR database release to use?
+  Numeric: (default = `2026`) Which JASPAR database release to use?
   Available options are: 2026, 2024, 2022, 2020, 2018, 2016, and 2014.
 
 - only_last_version:
 
-  Logical: (default = FALSE) If TRUE, only the latest version of a
+  Logical: (default = `FALSE`) If TRUE, only the latest version of a
   matrix profile will be returned.
 
 - order:
 
-  Character: A character string or a vector of character strings of
-  field names that will be used to order the results.  
+  Character: (optional) A field name or a vector of field names that
+  will be used to order the results.  
   Providing multiple field names is supported. You can also use the
   prefix "-" before a field name to indicate reverse ordering.
 
 - page_size:
 
-  Numeric: (default = 1000) This resource returns paginated results.
+  Numeric: (default = `1000`) This resource returns paginated results.
   What is the maximum number of results that you want to retrieve per
   page? Accepted values are between 1 and 1000.
 
 - page:
 
-  Numeric: Which page of the results to retrieve? The accepted values
-  depend on the page size and number of results.
+  Numeric: (default = `1`) Which page of the results to retrieve? The
+  accepted values depend on the page size and number of results.
 
 - ...:
 

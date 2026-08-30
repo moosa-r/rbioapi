@@ -17,21 +17,21 @@ rba_enrichr_view_list(
 
 - user_list_id:
 
-  a user list ID returned after uploading a gene list using
+  Numeric: a user list ID returned after uploading a gene list using
   [`rba_enrichr_add_list`](https://rbioapi.moosa-r.com/reference/rba_enrichr_add_list.md)
 
 - organism:
 
-  (default = "human") Which model organism version of Enrichr to use?
-  Available options are: "human", (H. sapiens & M. musculus), "fly" (D.
-  melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans) and "fish"
-  (D. rerio).
+  Character: (default = `"human"`) Which model organism version of
+  Enrichr to use? Available options are: "human", (H. sapiens & M.
+  musculus), "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm"
+  (C. elegans) and "fish" (D. rerio).
 
 - speedrichr:
 
-  logical (default = FALSE) Did you upload your gene list to speedrichr
-  API? (i.e. did you intend to use this gene list along with a
-  background gene list?)
+  Logical: (default = `FALSE`) Did you upload your gene list to
+  speedrichr API? (i.e. did you intend to use this gene list along with
+  a background gene list?)
 
 - ...:
 

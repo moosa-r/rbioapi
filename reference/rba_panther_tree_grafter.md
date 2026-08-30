@@ -14,12 +14,12 @@ rba_panther_tree_grafter(protein_seq, target_organisms = NULL, ...)
 
 - protein_seq:
 
-  A character string with the protein's sequence. Maximum allowed
+  Character: A string with the protein's sequence. Maximum allowed
   sequence length is 50,000 characters.
 
 - target_organisms:
 
-  (numeric) NCBI taxon ID(s) to filter the results. run
+  Numeric: (optional) NCBI taxon ID(s) to filter the results. run
   [`rba_panther_info`](https://rbioapi.moosa-r.com/reference/rba_panther_info.md)
   with argument 'what = "organisms"' to get a list of PANTHER's
   supported organisms.

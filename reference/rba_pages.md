@@ -22,9 +22,9 @@ rba_pages(
 
 - input_call:
 
-  Call: A quoted call to an exported API-endpoint-facing
-  rbioapifunction. To request an inclusive range, set the called
-  function's named page argument to a character string of the form
+  Call: A quoted invocation of an exported API-endpoint-facing rbioapi
+  function. To request an inclusive range, set the called function's
+  named page argument to a character string of the form
   `"pages:start:end"`. Alternatively, omit the page argument from
   `input_call`, supply its exact name through `page_arg`, and supply the
   desired page numbers through `pages`. These two forms cannot be
@@ -38,9 +38,9 @@ rba_pages(
 
 - pages:
 
-  Numeric vector: (optional) Unique positive whole page numbers in the
-  order in which they should be requested. A maximum of 100 values can
-  be supplied. Must be supplied together with `page_arg`.
+  Numeric: (optional) Unique positive whole page numbers in the order in
+  which they should be requested. A maximum of 100 values can be
+  supplied. Must be supplied together with `page_arg`.
 
 - sleep_time:
 
@@ -63,7 +63,7 @@ rba_pages(
 
 - verbose:
 
-  Logical: (default = current `rba_verbose` option) Generate an
+  Logical: (default = `getOption("rba_verbose")`) Generate an
   informative message describing the complete operation?
 
 ## Value

@@ -22,7 +22,7 @@ rba_reactome_exporter_event(event_id, output_format, save_to = NULL, ...)
 
 - save_to:
 
-  NULL or Character: (default = `NULL`)
+  Character: (optional)
 
   - NULL: Save the file to an automatically-generated path.
 

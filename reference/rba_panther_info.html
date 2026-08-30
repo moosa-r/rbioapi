@@ -74,7 +74,7 @@
 
 
 <dl><dt id="arg-what">what<a class="anchor" aria-label="anchor" href="#arg-what"></a></dt>
-<dd><p>what information to retrieve? should be one of:</p><ul><li><p>"organisms": Retrieve supported organisms in PANTHER.</p></li>
+<dd><p>Character: what information to retrieve? should be one of:</p><ul><li><p>"organisms": Retrieve supported organisms in PANTHER.</p></li>
 <li><p>"datasets": Retrieve available annotation datasets.</p></li>
 <li><p>"families": Retrieve available family IDs.</p></li>
 <li><p>"species_tree": Retrieve PANTHER's species tree.</p></li>
@@ -83,13 +83,13 @@
 
 
 <dt id="arg-organism-chr-loc">organism_chr_loc<a class="anchor" aria-label="anchor" href="#arg-organism-chr-loc"></a></dt>
-<dd><p>(Logical) (only when 'what = "organisms"')
+<dd><p>Logical: (default = <code>FALSE</code>) (only when 'what = "organisms"')
 If TRUE, only organisms with chromosome location will be returned.
 If FALSE (default), all organisms will be returned.</p></dd>
 
 
 <dt id="arg-families-page">families_page<a class="anchor" aria-label="anchor" href="#arg-families-page"></a></dt>
-<dd><p>(Numeric) (only when 'what = "families"')
+<dd><p>Numeric: (default = <code>1</code>) (only when 'what = "families"')
 Family information is very long, so results are returned in pages of up
 to 1,000 families. Use a positive whole number to define the page to
 retrieve.</p></dd>

@@ -24,16 +24,16 @@ rba_enrichr(
 
 - gene_list:
 
-  A character vector with Entrez gene symbols of test genes.
+  Character: A vector with Entrez gene symbols of test genes.
 
 - description:
 
-  (optional) A description to be associated with your uploaded gene-set
-  to Enrichr servers.
+  Character: (optional) A description to be associated with your
+  uploaded gene-set to Enrichr servers.
 
 - gene_set_library:
 
-  One of the:
+  Character: (default = `"all"`) One of the:
 
   1.  "all" to select all of the available Enrichr gene-set libraries.
 
@@ -46,25 +46,25 @@ rba_enrichr(
 
 - regex_library_name:
 
-  logical: (default = FALSE) if TRUE the supplied gene_set_library will
-  be considered as a regex pattern. If FALSE, gene_set_library will be
-  considered as an exact match.
+  Logical: (default = `FALSE`) if TRUE the supplied gene_set_library
+  will be considered as a regex pattern. If FALSE, gene_set_library will
+  be considered as an exact match.
 
 - organism:
 
-  (default = "human") Which model organism version of Enrichr to use?
-  Available options are: "human", (H. sapiens & M. musculus), "fly" (D.
-  melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans) and "fish"
-  (D. rerio).
+  Character: (default = `"human"`) Which model organism version of
+  Enrichr to use? Available options are: "human", (H. sapiens & M.
+  musculus), "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm"
+  (C. elegans) and "fish" (D. rerio).
 
 - background_genes:
 
-  A character vector of Entrez gene symbols of the background genes.
+  Character: A vector of Entrez gene symbols of the background genes.
 
 - progress_bar:
 
-  logical: (default = TRUE) if multiple Enrichr libraries are selected,
-  should a progress bar be displayed?
+  Logical: (default = `TRUE`) if multiple Enrichr libraries are
+  selected, should a progress bar be displayed?
 
 - ...:
 

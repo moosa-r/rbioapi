@@ -86,16 +86,16 @@
 
 
 <dl><dt id="arg-gene-list">gene_list<a class="anchor" aria-label="anchor" href="#arg-gene-list"></a></dt>
-<dd><p>A character vector with Entrez gene symbols of test genes.</p></dd>
+<dd><p>Character: A vector with Entrez gene symbols of test genes.</p></dd>
 
 
 <dt id="arg-description">description<a class="anchor" aria-label="anchor" href="#arg-description"></a></dt>
-<dd><p>(optional) A description to be associated with your
+<dd><p>Character: (optional) A description to be associated with your
 uploaded gene-set to Enrichr servers.</p></dd>
 
 
 <dt id="arg-gene-set-library">gene_set_library<a class="anchor" aria-label="anchor" href="#arg-gene-set-library"></a></dt>
-<dd><p>One of the:</p><ol><li><p>"all" to select all of the available Enrichr gene-set libraries.</p></li>
+<dd><p>Character: (default = <code>"all"</code>) One of the:</p><ol><li><p>"all" to select all of the available Enrichr gene-set libraries.</p></li>
 <li><p>A gene-set library name. You can retrieve the available options
 for a given species using <code><a href="rba_enrichr_libs.html">rba_enrichr_libs</a></code>.</p></li>
 <li><p>If regex_library_name = TRUE, A partially-matching name a regex
@@ -104,25 +104,25 @@ pattern that correspond to one or more of Enrichr library names.</p></li>
 
 
 <dt id="arg-regex-library-name">regex_library_name<a class="anchor" aria-label="anchor" href="#arg-regex-library-name"></a></dt>
-<dd><p>logical: (default = FALSE) if TRUE the supplied
+<dd><p>Logical: (default = <code>FALSE</code>) if TRUE the supplied
 gene_set_library will be considered as a regex pattern.
 If FALSE, gene_set_library will be considered as an exact match.</p></dd>
 
 
 <dt id="arg-organism">organism<a class="anchor" aria-label="anchor" href="#arg-organism"></a></dt>
-<dd><p>(default = "human") Which model organism version of Enrichr
+<dd><p>Character: (default = <code>"human"</code>) Which model organism version of Enrichr
 to use? Available options are: "human", (H. sapiens &amp; M. musculus),
 "fly" (D. melanogaster), "yeast" (S. cerevisiae), "worm" (C. elegans)
 and "fish" (D. rerio).</p></dd>
 
 
 <dt id="arg-background-genes">background_genes<a class="anchor" aria-label="anchor" href="#arg-background-genes"></a></dt>
-<dd><p>A character vector of Entrez gene symbols of the
+<dd><p>Character: A vector of Entrez gene symbols of the
 background genes.</p></dd>
 
 
 <dt id="arg-progress-bar">progress_bar<a class="anchor" aria-label="anchor" href="#arg-progress-bar"></a></dt>
-<dd><p>logical: (default = TRUE) if multiple Enrichr libraries
+<dd><p>Logical: (default = <code>TRUE</code>) if multiple Enrichr libraries
 are selected, should a progress bar be displayed?</p></dd>
 
 

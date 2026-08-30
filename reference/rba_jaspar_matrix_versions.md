@@ -20,8 +20,8 @@ rba_jaspar_matrix_versions(base_id, order = NULL, ...)
 
 - order:
 
-  Character: A character string or a vector of character strings of
-  field names that will be used to order the results.  
+  Character: (optional) A field name or a vector of field names that
+  will be used to order the results.  
   Providing multiple field names is supported. You can also use the
   prefix "-" before a field name to indicate reverse ordering.
 

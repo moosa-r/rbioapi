@@ -22,40 +22,41 @@ rba_panther_ortholog(
 
 - genes:
 
-  Character or numeric vector of gene identifiers with maximum length of
-  10, or only one if `seq_pos` is supplied. Can be any of: Ensembl gene
-  ID, Ensembl protein ID, Ensembl transcript ID, Entrez gene ID, gene
-  symbol, NCBI GI, HGNC ID, International protein index ID, NCBI UniGene
-  ID, UniProt accession and/or UniProt ID.
+  Character or Numeric: A vector of gene identifiers with maximum length
+  of 10, or only one if `seq_pos` is supplied. Can be any of: Ensembl
+  gene ID, Ensembl protein ID, Ensembl transcript ID, Entrez gene ID,
+  gene symbol, NCBI GI, HGNC ID, International protein index ID, NCBI
+  UniGene ID, UniProt accession and/or UniProt ID.
 
 - organism:
 
-  (numeric) NCBI taxon ID of the organism of your supplied genes. run
+  Numeric: NCBI taxon ID of the organism of your supplied genes. run
   [`rba_panther_info`](https://rbioapi.moosa-r.com/reference/rba_panther_info.md)
   with argument 'what = "organisms"' to get a list of PANTHER's
   supported organisms.
 
 - type:
 
-  Ortholog types to return. either "all" (default) or "LDO" to only
-  return least diverged orthologs.
+  Character: (default = `"all"`) Ortholog types to return. either "all"
+  (default) or "LDO" to only return least diverged orthologs.
 
 - target_organisms:
 
-  (numeric) NCBI taxon ID(s) to filter the results. run
+  Numeric: (optional) NCBI taxon ID(s) to filter the results. run
   [`rba_panther_info`](https://rbioapi.moosa-r.com/reference/rba_panther_info.md)
   with argument 'what = "organisms"' to get a list of PANTHER's
   supported organisms.
 
 - seq_pos:
 
-  (Numeric) A position in the protein's sequence of the supplied gene.
-  should be in the range of the protein's length.
+  Numeric: (optional) A position in the protein's sequence of the
+  supplied gene. should be in the range of the protein's length.
 
 - include_msa:
 
-  (Logical) Only if a sequence position is supplied, should MSA
-  (Multiple Sequence Alignment) information be included in the results?
+  Logical: (optional) Only if a sequence position is supplied, should
+  MSA (Multiple Sequence Alignment) information be included in the
+  results?
 
 - ...:
 

@@ -14,7 +14,7 @@ rba_panther_info(what, organism_chr_loc = FALSE, families_page = 1, ...)
 
 - what:
 
-  what information to retrieve? should be one of:
+  Character: what information to retrieve? should be one of:
 
   - "organisms": Retrieve supported organisms in PANTHER.
 
@@ -28,15 +28,16 @@ rba_panther_info(what, organism_chr_loc = FALSE, families_page = 1, ...)
 
 - organism_chr_loc:
 
-  (Logical) (only when 'what = "organisms"') If TRUE, only organisms
-  with chromosome location will be returned. If FALSE (default), all
-  organisms will be returned.
+  Logical: (default = `FALSE`) (only when 'what = "organisms"') If TRUE,
+  only organisms with chromosome location will be returned. If FALSE
+  (default), all organisms will be returned.
 
 - families_page:
 
-  (Numeric) (only when 'what = "families"') Family information is very
-  long, so results are returned in pages of up to 1,000 families. Use a
-  positive whole number to define the page to retrieve.
+  Numeric: (default = `1`) (only when 'what = "families"') Family
+  information is very long, so results are returned in pages of up to
+  1,000 families. Use a positive whole number to define the page to
+  retrieve.
 
 - ...:
 

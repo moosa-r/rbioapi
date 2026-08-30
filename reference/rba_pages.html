@@ -82,8 +82,8 @@
 
 
 <dl><dt id="arg-input-call">input_call<a class="anchor" aria-label="anchor" href="#arg-input-call"></a></dt>
-<dd><p>Call: A quoted call to an exported API-endpoint-facing
-rbioapifunction. To request an inclusive range, set the called function's
+<dd><p>Call: A quoted invocation of an exported API-endpoint-facing
+rbioapi function. To request an inclusive range, set the called function's
 named page argument to a character string of the form
 <code>"pages:start:end"</code>. Alternatively, omit the page argument from
 <code>input_call</code>, supply its exact name through <code>page_arg</code>, and
@@ -99,7 +99,7 @@ with <code>pages</code> when the page argument is omitted from
 
 
 <dt id="arg-pages">pages<a class="anchor" aria-label="anchor" href="#arg-pages"></a></dt>
-<dd><p>Numeric vector: (optional) Unique positive whole page numbers
+<dd><p>Numeric: (optional) Unique positive whole page numbers
 in the order in which they should be requested. A maximum of 100 values
 can be supplied. Must be supplied together with <code>page_arg</code>.</p></dd>
 
@@ -124,7 +124,7 @@ progress bars from individual page calls are suppressed.</p></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
-<dd><p>Logical: (default = current <code>rba_verbose</code> option)
+<dd><p>Logical: (default = <code>getOption("rba_verbose")</code>)
 Generate an informative message describing the complete operation?</p></dd>
 
 </dl></div>

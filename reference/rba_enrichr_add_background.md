@@ -14,7 +14,7 @@ rba_enrichr_add_background(background_genes, ...)
 
 - background_genes:
 
-  A character vector of Entrez gene symbols of the background genes.
+  Character: A vector of Entrez gene symbols of the background genes.
 
 - ...:
 

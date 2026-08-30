@@ -21,7 +21,7 @@ rba_mieaa_convert_version(
 
 - mirna:
 
-  Character vector: miRNA identifiers to convert.
+  Character: miRNA identifiers to convert.
 
 - mirna_type:
 

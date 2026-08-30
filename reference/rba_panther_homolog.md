@@ -13,7 +13,7 @@ rba_panther_homolog(genes, organism, type = "P", target_organisms = NULL, ...)
 
 - genes:
 
-  Character or numeric vector of gene identifiers with maximum length
+  Character or Numeric: A vector of gene identifiers with maximum length
   of 10. Can be any of: Ensembl gene ID, Ensembl protein ID, Ensembl
   transcript ID, Entrez gene ID, gene symbol, NCBI GI, HGNC ID,
   International protein index ID, NCBI UniGene ID, UniProt accession
@@ -21,20 +21,20 @@ rba_panther_homolog(genes, organism, type = "P", target_organisms = NULL, ...)
 
 - organism:
 
-  (numeric) NCBI taxon ID of the organism of your supplied genes. run
+  Numeric: NCBI taxon ID of the organism of your supplied genes. run
   [`rba_panther_info`](https://rbioapi.moosa-r.com/reference/rba_panther_info.md)
   with argument 'what = "organisms"' to get a list of PANTHER's
   supported organisms.
 
 - type:
 
-  Homolog types to return. either "P" (default) for paralogs, "X" for
-  horizontal gene transfer and "LDX" for least diverged horizontal gene
-  transfer.
+  Character: (default = `"P"`) Homolog types to return. either "P"
+  (default) for paralogs, "X" for horizontal gene transfer and "LDX" for
+  least diverged horizontal gene transfer.
 
 - target_organisms:
 
-  (numeric) NCBI taxon ID(s) to filter the results. run
+  Numeric: (optional) NCBI taxon ID(s) to filter the results. run
   [`rba_panther_info`](https://rbioapi.moosa-r.com/reference/rba_panther_info.md)
   with argument 'what = "organisms"' to get a list of PANTHER's
   supported organisms. This argument is ignored for paralogs, which are
