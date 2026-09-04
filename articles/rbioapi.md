@@ -314,7 +314,7 @@ str(adeno, max.level = 2)
 #>  $ pageInfo  :List of 3
 #>   ..$ resultsPerPage: int 200
 #>   ..$ currentPage   : int 1
-#>   ..$ totalRecords  : int 1259
+#>   ..$ totalRecords  : int 1297
 ```
 
 As you can see, the server has returned the first page of the response.
@@ -346,7 +346,7 @@ str(adeno_pages, max.level = 2)
 #>   ..$ taxonomies:'data.frame':   200 obs. of  8 variables:
 #>   ..$ pageInfo  :List of 3
 #>  $ page_3:List of 2
-#>   ..$ taxonomies:'data.frame':   200 obs. of  6 variables:
+#>   ..$ taxonomies:'data.frame':   200 obs. of  8 variables:
 #>   ..$ pageInfo  :List of 3
 ```
 
@@ -565,9 +565,9 @@ Bioinformatics](https://doi.org/10.1093/bioinformatics/btac172 "Rezwani, M., Pou
     #> loaded via a namespace (and not attached):
     #>  [1] digest_0.6.39     desc_1.4.3        R6_2.6.1          fastmap_1.2.0    
     #>  [5] xfun_0.60         cachem_1.1.0      knitr_1.51        htmltools_0.5.9  
-    #>  [9] rmarkdown_2.31    lifecycle_1.0.5   cli_3.6.6         sass_0.4.10      
+    #>  [9] rmarkdown_2.32    lifecycle_1.0.5   cli_3.6.6         sass_0.4.10      
     #> [13] pkgdown_2.2.1     textshaping_1.0.5 jquerylib_0.1.4   systemfonts_1.3.2
-    #> [17] compiler_4.6.1    httr_1.4.8        tools_4.6.1       ragg_1.5.2       
+    #> [17] compiler_4.6.1    httr_1.4.9        tools_4.6.1       ragg_1.5.2       
     #> [21] curl_8.0.0        bslib_0.12.0      evaluate_1.0.5    yaml_2.3.12      
     #> [25] otel_0.2.0        jsonlite_2.0.0    rlang_1.3.0       fs_2.1.0         
     #> [29] htmlwidgets_1.6.4

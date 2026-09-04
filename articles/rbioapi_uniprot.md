@@ -46,7 +46,7 @@ str(cd40, 1)
 #>  $ gene            :'data.frame':    1 obs. of  2 variables:
 #>  $ comments        :'data.frame':    12 obs. of  10 variables:
 #>  $ features        :'data.frame':    65 obs. of  9 variables:
-#>  $ dbReferences    :'data.frame':    135 obs. of  4 variables:
+#>  $ dbReferences    :'data.frame':    141 obs. of  4 variables:
 #>  $ keywords        :'data.frame':    14 obs. of  1 variable:
 #>  $ references      :'data.frame':    25 obs. of  3 variables:
 #>  $ sequence        :List of 5
@@ -79,7 +79,7 @@ str(cd40_search, 2)
 #>   ..$ gene            :List of 1
 #>   ..$ comments        :List of 12
 #>   ..$ features        :List of 65
-#>   ..$ dbReferences    :List of 135
+#>   ..$ dbReferences    :List of 141
 #>   ..$ keywords        :List of 14
 #>   ..$ references      :List of 25
 #>   ..$ sequence        :List of 5
@@ -459,9 +459,9 @@ To cite rbioapi:
     #> loaded via a namespace (and not attached):
     #>  [1] digest_0.6.39     desc_1.4.3        R6_2.6.1          fastmap_1.2.0    
     #>  [5] xfun_0.60         cachem_1.1.0      knitr_1.51        htmltools_0.5.9  
-    #>  [9] rmarkdown_2.31    lifecycle_1.0.5   cli_3.6.6         sass_0.4.10      
+    #>  [9] rmarkdown_2.32    lifecycle_1.0.5   cli_3.6.6         sass_0.4.10      
     #> [13] pkgdown_2.2.1     textshaping_1.0.5 jquerylib_0.1.4   systemfonts_1.3.2
-    #> [17] compiler_4.6.1    httr_1.4.8        tools_4.6.1       ragg_1.5.2       
+    #> [17] compiler_4.6.1    httr_1.4.9        tools_4.6.1       ragg_1.5.2       
     #> [21] curl_8.0.0        bslib_0.12.0      evaluate_1.0.5    yaml_2.3.12      
     #> [25] otel_0.2.0        jsonlite_2.0.0    rlang_1.3.0       fs_2.1.0         
     #> [29] htmlwidgets_1.6.4

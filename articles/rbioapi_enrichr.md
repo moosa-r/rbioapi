@@ -212,8 +212,8 @@ element.
 
 str(list_id)
 #> List of 2
-#>  $ shortId   : chr "067042e928b2c3a135142a5eca477d5f"
-#>  $ userListId: int 136635971
+#>  $ shortId   : chr "a8bb3f25b55f7aa73cf8445e64764a5d"
+#>  $ userListId: int 136975473
 ```
 
 Finally, we are ready to submit the enrichment analysis request to
@@ -412,10 +412,10 @@ an in-depth review.
     #> [1] rbioapi_0.8.3.9000
     #> 
     #> loaded via a namespace (and not attached):
-    #>  [1] httr_1.4.8        cli_3.6.6         knitr_1.51        rlang_1.3.0      
+    #>  [1] httr_1.4.9        cli_3.6.6         knitr_1.51        rlang_1.3.0      
     #>  [5] xfun_0.60         otel_0.2.0        textshaping_1.0.5 jsonlite_2.0.0   
     #>  [9] DT_0.34.0         htmltools_0.5.9   ragg_1.5.2        sass_0.4.10      
-    #> [13] rmarkdown_2.31    crosstalk_1.2.2   evaluate_1.0.5    jquerylib_0.1.4  
+    #> [13] rmarkdown_2.32    crosstalk_1.2.2   evaluate_1.0.5    jquerylib_0.1.4  
     #> [17] fastmap_1.2.0     yaml_2.3.12       lifecycle_1.0.5   compiler_4.6.1   
     #> [21] fs_2.1.0          htmlwidgets_1.6.4 systemfonts_1.3.2 digest_0.6.39    
     #> [25] R6_2.6.1          curl_8.0.0        magrittr_2.0.5    bslib_0.12.0     
