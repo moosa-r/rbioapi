@@ -245,7 +245,7 @@ To cite rbioapi:
 
     #> R version 4.6.1 (2026-06-24)
     #> Platform: x86_64-pc-linux-gnu
-    #> Running under: Ubuntu 24.04.4 LTS
+    #> Running under: Ubuntu 24.04.5 LTS
     #> 
     #> Matrix products: default
     #> BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -267,8 +267,8 @@ To cite rbioapi:
     #> [1] rbioapi_0.8.3.9000
     #> 
     #> loaded via a namespace (and not attached):
-    #>  [1] httr_1.4.9        cli_3.6.6         knitr_1.51        rlang_1.3.0      
-    #>  [5] xfun_0.60         otel_0.2.0        textshaping_1.0.5 jsonlite_2.0.0   
+    #>  [1] httr_1.4.9        cli_3.6.6         knitr_1.52        rlang_1.3.0      
+    #>  [5] xfun_0.61         otel_0.2.0        textshaping_1.0.5 jsonlite_2.0.0   
     #>  [9] DT_0.34.0         htmltools_0.5.9   ragg_1.5.2        sass_0.4.10      
     #> [13] rmarkdown_2.32    crosstalk_1.2.2   evaluate_1.0.5    jquerylib_0.1.4  
     #> [17] fastmap_1.2.0     yaml_2.3.12       lifecycle_1.0.5   compiler_4.6.1   

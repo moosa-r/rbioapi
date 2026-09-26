@@ -75,11 +75,11 @@ mieaa_all <- rba_mieaa_enrich(
 #> Submitting ORA enrichment request for 17 miRNA IDs of species Homo sapiens to miEAA servers.
 #> 
 #>  -- Step 2/3: Checking for Submitted enrichment analysis's status every 5 seconds.
-#>     Your submitted job ID is: 6f0bdc8d-4fc5-4630-882c-00689c797292
+#>     Your submitted job ID is: 6ddca368-8687-4a8a-907e-ecf96ab980f0
 #> ....
 #> 
 #>  -- Step 3/3: Retrieving the results.
-#> Retrieving results of submitted enrichment request with ID: 6f0bdc8d-4fc5-4630-882c-00689c797292
+#> Retrieving results of submitted enrichment request with ID: 6ddca368-8687-4a8a-907e-ecf96ab980f0
 
 ## 2b Limit the enrichment to selected data sets (enrichment categories)
 mieaa_kegg <- rba_mieaa_enrich(
@@ -93,11 +93,11 @@ mieaa_kegg <- rba_mieaa_enrich(
 #> Submitting ORA enrichment request for 17 miRNA IDs of species Homo sapiens to miEAA servers.
 #> 
 #>  -- Step 2/3: Checking for Submitted enrichment analysis's status every 5 seconds.
-#>     Your submitted job ID is: 2ea67ff8-a2af-41b5-b187-a68deaa7073e
+#>     Your submitted job ID is: 3cae2f88-362b-4c22-b996-8d312b30280f
 #> .
 #> 
 #>  -- Step 3/3: Retrieving the results.
-#> Retrieving results of submitted enrichment request with ID: 2ea67ff8-a2af-41b5-b187-a68deaa7073e
+#> Retrieving results of submitted enrichment request with ID: 3cae2f88-362b-4c22-b996-8d312b30280f
 ```
 
 ### Approach 2: Going step-by-step
@@ -182,7 +182,7 @@ To cite rbioapi:
 
     #> R version 4.6.1 (2026-06-24)
     #> Platform: x86_64-pc-linux-gnu
-    #> Running under: Ubuntu 24.04.4 LTS
+    #> Running under: Ubuntu 24.04.5 LTS
     #> 
     #> Matrix products: default
     #> BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -204,8 +204,8 @@ To cite rbioapi:
     #> [1] rbioapi_0.8.3.9000
     #> 
     #> loaded via a namespace (and not attached):
-    #>  [1] httr_1.4.9        cli_3.6.6         knitr_1.51        rlang_1.3.0      
-    #>  [5] xfun_0.60         otel_0.2.0        textshaping_1.0.5 jsonlite_2.0.0   
+    #>  [1] httr_1.4.9        cli_3.6.6         knitr_1.52        rlang_1.3.0      
+    #>  [5] xfun_0.61         otel_0.2.0        textshaping_1.0.5 jsonlite_2.0.0   
     #>  [9] DT_0.34.0         htmltools_0.5.9   ragg_1.5.2        sass_0.4.10      
     #> [13] rmarkdown_2.32    crosstalk_1.2.2   evaluate_1.0.5    jquerylib_0.1.4  
     #> [17] fastmap_1.2.0     yaml_2.3.12       lifecycle_1.0.5   compiler_4.6.1   
