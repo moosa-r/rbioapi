@@ -20,8 +20,7 @@ arguments manual for more information on available options.}
 }
 \value{
 A data frame containing pairwise bit scores and self-hits for the
-  supplied proteins. STRING returns only one half of the symmetric similarity
-  matrix to reduce data transfer.
+  supplied proteins. Both orientations of a pair can be returned.
 }
 \description{
 Retrieve Smith-Waterman bit scores among proteins from the same species.
@@ -51,13 +50,13 @@ rba_string_homology_intra(ids = c("CDK1", "CDK2"), species = 9606)
 }
 \references{
 \itemize{
-  \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
-   Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang,
-   Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian
-   von Mering, The STRING database in 2023: protein–protein association
-   networks and functional enrichment analyses for any sequenced genome of
-   interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023,
-   Pages D638–D646, https://doi.org/10.1093/nar/gkac1000
+  \item Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca
+   Kirsch, Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso,
+   Qingyao Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork,
+   Lars J Jensen, Christian von Mering, The STRING database in 2025:
+   protein networks with directionality of regulation, Nucleic Acids
+   Research, Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+   https://doi.org/10.1093/nar/gkae1113
   \item \href{https://string-db.org/help/api/}{STRING API Documentation}
   \item
   \href{https://string-db.org/cgi/about?footer_active_subpage=references}{

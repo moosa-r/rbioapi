@@ -10,7 +10,7 @@ rba_string_functional_terms(term_text, species, ...)
 \item{term_text}{Character: A functional term identifier or descriptive text
 used to match one or more functional terms.}
 
-\item{species}{Numeric:
+\item{species}{Numeric: A single
 \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.}
 
@@ -18,22 +18,17 @@ NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.}
 arguments manual for more information on available options.}
 }
 \value{
-A data frame in which every row is a matching functional term and
-  the columns contain the term category, identifier, description, number of
-  annotated proteins, preferred protein names, and STRING protein IDs.
-  \code{preferredNames} and \code{stringIds} are returned as list-columns.
+A data frame in which every row is a matching functional term,
+  ordered by relevance with the best match first. The columns contain the
+  term category, identifier, description, complete number of annotated
+  proteins (\code{proteinCount}), preferred protein names, and STRING
+  protein IDs. \code{preferredNames} and \code{stringIds} are returned as
+  list-columns.
 }
 \description{
 STRING maps several functional annotation resources onto its proteins. This
   function searches for functional terms using an identifier or descriptive
   text and retrieves the matching terms and their annotated proteins.
-}
-\details{
-This endpoint supports only one species per query. If multiple functional
-  terms match \code{term_text}, STRING returns them in order of relevance,
-  with the best match first.
-  \cr The complete number of annotated proteins is reported in
-  \code{proteinCount}.
 }
 \section{Corresponding API Resources}{
 
@@ -52,13 +47,13 @@ rba_string_functional_terms(
 }
 \references{
 \itemize{
-  \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
-   Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang,
-   Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian
-   von Mering, The STRING database in 2023: protein–protein association
-   networks and functional enrichment analyses for any sequenced genome of
-   interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023,
-   Pages D638–D646, https://doi.org/10.1093/nar/gkac1000
+  \item Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca
+   Kirsch, Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso,
+   Qingyao Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork,
+   Lars J Jensen, Christian von Mering, The STRING database in 2025:
+   protein networks with directionality of regulation, Nucleic Acids
+   Research, Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+   https://doi.org/10.1093/nar/gkae1113
   \item \href{https://string-db.org/help/api/}{STRING API Documentation}
   \item
   \href{https://string-db.org/cgi/about?footer_active_subpage=references}{

@@ -1,3 +1,28 @@
+#' Parse Numeric Scores in a Typed STRING Network
+#'
+#' Convert STRING's missing-score marker to NA while preserving the row
+#'   orientations, identifiers, and regulatory signs returned by the API.
+#'
+#' @param response A data frame parsed from a typed network response.
+#'
+#' @return The data frame with numeric evidence-score columns.
+#' @noRd
+.rba_string_typed_scores <- function(response) {
+  score_columns <- grep(
+    "^(functional|physical|regulatory)_.*_score$",
+    names(response),
+    value = TRUE
+  )
+  response[score_columns] <- lapply(
+    response[score_columns],
+    function(scores) {
+      scores[scores %in% "-"] <- NA
+      as.numeric(scores)
+    }
+  )
+  return(response)
+}
+
 #' Map a Set of Identifiers to STRING Identifiers
 #'
 #' This function calls STRING's API to map a set of common gene or protein
@@ -29,13 +54,13 @@
 #'   retaining the response columns is returned.
 #'
 #' @references \itemize{
-#'   \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
-#'    Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang,
-#'    Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian
-#'    von Mering, The STRING database in 2023: protein–protein association
-#'    networks and functional enrichment analyses for any sequenced genome of
-#'    interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023,
-#'    Pages D638–D646, https://doi.org/10.1093/nar/gkac1000
+#'   \item Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca
+#'    Kirsch, Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso,
+#'    Qingyao Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork,
+#'    Lars J Jensen, Christian von Mering, The STRING database in 2025:
+#'    protein networks with directionality of regulation, Nucleic Acids
+#'    Research, Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+#'    https://doi.org/10.1093/nar/gkae1113
 #'   \item \href{https://string-db.org/help/api/}{STRING API Documentation}
 #'   \item
 #'   \href{https://string-db.org/cgi/about?footer_active_subpage=references}{
@@ -91,7 +116,7 @@ rba_string_map_ids <- function(ids,
       "caller_identity" = getOption("rba_user_agent")
     ),
     list("species", !is.null(species), species),
-    list("echo_query", echo_query, "1")
+    list("echo_query", isTRUE(echo_query), "1")
   )
 
   ## Build Function-Specific Call
@@ -181,12 +206,23 @@ rba_string_map_ids <- function(ids,
 #'   supporting each interaction.
 #'   \item "confidence": Edge thickness indicates the interaction confidence
 #'   score.
-#'   \item "actions": Edge shape indicates the predicted mode of action.}
+#'   \item "actions": Edge shape indicates the predicted mode of action.
+#'   \item "typed": Overlay physical and directed regulatory relationships on
+#'   a functional network. Requires \code{network_type = "functional"}.}
 #' @param network_type Character: (default = \code{"functional"}) One of:\itemize{
 #'   \item "functional": (default) Edges indicate both physical and
 #'   functional associations.
 #'   \item "physical": Edges indicate that two proteins have a physical
-#'   interaction or are parts of a complex.}
+#'   interaction or are parts of a complex.
+#'   \item "regulatory": Directed edges indicate regulation from a source
+#'   protein to a target protein.}
+#' @param typed_physical_edges Logical: (default = \code{TRUE}) Include physical
+#'   relationships when \code{network_flavor = "typed"}.
+#' @param typed_regulatory_edges Logical: (default = \code{TRUE}) Include
+#'   regulatory relationships when \code{network_flavor = "typed"}.
+#' @param show_regulatory_signs Logical: (default = \code{TRUE}) Display positive
+#'   and negative regulatory effects when available. Setting this to
+#'   \code{FALSE} preserves direction but hides the regulatory effect.
 #' @param hide_node_labels Logical: (default = \code{FALSE}) Hide protein names from
 #'   the image.
 #' @param use_query_labels Logical: (default = \code{FALSE}) Use the names supplied
@@ -199,8 +235,8 @@ rba_string_map_ids <- function(ids,
 #'   instead of the default 3D design.
 #' @param node_labels_center Logical: (default = \code{FALSE}) Center protein labels
 #'   on the nodes.
-#' @param node_labels_font_size Numeric: (default = \code{12}) (between 5 and 50; default = 12):
-#'   Font size of the protein node labels.
+#' @param node_labels_font_size Numeric: (default = \code{12}) Font size of the
+#'   protein node labels, between 5 and 50.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
@@ -208,13 +244,13 @@ rba_string_map_ids <- function(ids,
 #'   \code{image_format}.
 #'
 #' @references \itemize{
-#'   \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
-#'    Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang,
-#'    Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian
-#'    von Mering, The STRING database in 2023: protein–protein association
-#'    networks and functional enrichment analyses for any sequenced genome of
-#'    interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023,
-#'    Pages D638–D646, https://doi.org/10.1093/nar/gkac1000
+#'   \item Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca
+#'    Kirsch, Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso,
+#'    Qingyao Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork,
+#'    Lars J Jensen, Christian von Mering, The STRING database in 2025:
+#'    protein networks with directionality of regulation, Nucleic Acids
+#'    Research, Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+#'    https://doi.org/10.1093/nar/gkae1113
 #'   \item \href{https://string-db.org/help/api/}{STRING API Documentation}
 #'   \item
 #'   \href{https://string-db.org/cgi/about?footer_active_subpage=references}{
@@ -247,6 +283,26 @@ rba_string_map_ids <- function(ids,
 #'     save_image = FALSE
 #' )
 #' }
+#' \dontrun{
+#' ## Hide regulatory signs while preserving edge direction
+#' rba_string_network_image(
+#'     ids = c("TP53", "MDM2", "CDKN1A"),
+#'     species = 9606,
+#'     network_type = "regulatory",
+#'     show_regulatory_signs = FALSE,
+#'     save_image = FALSE
+#' )
+#' }
+#' \dontrun{
+#' ## Show the physical overlay on a typed functional network
+#' rba_string_network_image(
+#'     ids = c("TP53", "MDM2", "CDKN1A"),
+#'     species = 9606,
+#'     network_flavor = "typed",
+#'     typed_regulatory_edges = FALSE,
+#'     save_image = FALSE
+#' )
+#' }
 #'
 #' @family "STRING"
 #' @seealso
@@ -274,6 +330,9 @@ rba_string_network_image <- function(ids,
                                      node_labels_center = FALSE,
                                      node_labels_font_size = 12,
                                      network_term_id = NULL,
+                                     typed_physical_edges = TRUE,
+                                     typed_regulatory_edges = TRUE,
+                                     show_regulatory_signs = TRUE,
                                      ...) {
   ## Load Global Options
   .rba_ext_args(..., ignore_save = TRUE)
@@ -295,7 +354,7 @@ rba_string_network_image <- function(ids,
       list(
         arg = "image_format", class = "character",
         val = c("image", "highres_image", "svg"),
-        len = 1L
+        len = 1L, no_null = TRUE
       ),
       list(arg = "save_image", class = c("character", "logical"), len = 1L),
       list(
@@ -315,13 +374,13 @@ rba_string_network_image <- function(ids,
       ),
       list(
         arg = "network_flavor", class = "character",
-        val = c("evidence", "confidence", "actions"),
+        val = c("evidence", "confidence", "actions", "typed"),
         len = 1L
       ),
       list(
         arg = "network_type",
         class = "character",
-        val = c("functional", "physical"),
+        val = c("functional", "physical", "regulatory"),
         len = 1L
       ),
       list(arg = "hide_node_labels", class = "logical", len = 1L),
@@ -330,6 +389,9 @@ rba_string_network_image <- function(ids,
       list(arg = "hide_structure_pics", class = "logical", len = 1L),
       list(arg = "flat_nodes", class = "logical", len = 1L),
       list(arg = "node_labels_center", class = "logical", len = 1L),
+      list(arg = "typed_physical_edges", class = "logical", len = 1L),
+      list(arg = "typed_regulatory_edges", class = "logical", len = 1L),
+      list(arg = "show_regulatory_signs", class = "logical", len = 1L),
       list(
         arg = "node_labels_font_size",
         class = c("numeric", "integer"),
@@ -339,6 +401,13 @@ rba_string_network_image <- function(ids,
       )
     ),
     cond = list(
+      list(
+        quote(
+          isTRUE(network_flavor == "typed") &&
+            !is.null(network_type) && network_type != "functional"
+        ),
+        "`network_flavor = \"typed\"` requires `network_type = \"functional\"`."
+      ),
       list(
         quote(!is.null(ids) && !is.null(network_term_id)),
         paste0(
@@ -398,13 +467,20 @@ rba_string_network_image <- function(ids,
     list("required_score", !is.null(required_score), required_score),
     list("network_flavor", !is.null(network_flavor), network_flavor),
     list("network_type", !is.null(network_type), network_type),
-    list("hide_node_labels", hide_node_labels, "1"),
-    list("show_query_node_labels", use_query_labels, "1"),
-    list("hide_disconnected_nodes", hide_disconnected_nodes, "1"),
-    list("block_structure_pics_in_bubbles", hide_structure_pics, "1"),
-    list("flat_node_design", flat_nodes, "1"),
-    list("center_node_labels", node_labels_center, "1"),
-    list("custom_label_font_size", node_labels_font_size != 12, node_labels_font_size)
+    list("typed_physical_edges", isFALSE(typed_physical_edges), "0"),
+    list("typed_regulatory_edges", isFALSE(typed_regulatory_edges), "0"),
+    list("show_regulatory_signs", isFALSE(show_regulatory_signs), "0"),
+    list("hide_node_labels", isTRUE(hide_node_labels), "1"),
+    list("show_query_node_labels", isTRUE(use_query_labels), "1"),
+    list("hide_disconnected_nodes", isTRUE(hide_disconnected_nodes), "1"),
+    list("block_structure_pics_in_bubbles", isTRUE(hide_structure_pics), "1"),
+    list("flat_node_design", isTRUE(flat_nodes), "1"),
+    list("center_node_labels", isTRUE(node_labels_center), "1"),
+    list(
+      "custom_label_font_size",
+      !is.null(node_labels_font_size) && node_labels_font_size != 12,
+      node_labels_font_size
+    )
   )
 
   ## make file path
@@ -448,15 +524,12 @@ rba_string_network_image <- function(ids,
 
 #' Get STRING Network Interactions
 #'
-#' This function retrieves STRING interaction pairs among the input proteins,
-#'   including the combined score and separate scores for each evidence
-#'   channel. You can expand the network using the \code{add_nodes} parameter.
+#' This function retrieves STRING interaction pairs among the input proteins
+#'   and any added neighbors, including the combined score and separate scores
+#'   for each evidence channel.
 #'
-#' This function returns interactions among the supplied proteins and any
-#'   neighboring proteins added through \code{add_nodes}. To retrieve
-#'   interactions between your input proteins and all their STRING interaction
-#'   partners, see
-#'   \code{\link{rba_string_interaction_partners}}.
+#' To retrieve interactions between your input proteins and all their STRING
+#'   interaction partners, see \code{\link{rba_string_interaction_partners}}.
 #'
 #' @section Corresponding API Resources:
 #'  "POST https://string-db.org/api/\{output-format\}/network?identifiers=
@@ -494,7 +567,18 @@ rba_string_network_image <- function(ids,
 #'   \item "functional": (default) Edges indicate both physical and
 #'   functional associations.
 #'   \item "physical": Edges indicate that two proteins have a physical
-#'   interaction or are parts of a complex.}
+#'   interaction or are parts of a complex.
+#'   \item "regulatory": Directed edges indicate regulation from a source
+#'   protein to a target protein.}
+#' @param network_flavor Character: (optional) Set to \code{"typed"} to retrieve
+#'   functional, physical, and directional regulatory scores in one response.
+#'   Requires \code{network_type = "functional"}. Omit for the ordinary schema.
+#' @param typed_physical_edges Logical: (default = \code{TRUE}) Include physical
+#'   scores in a typed response. If \code{FALSE}, their columns contain
+#'   missing values.
+#' @param typed_regulatory_edges Logical: (default = \code{TRUE}) Include
+#'   regulatory scores in a typed response. If \code{FALSE}, their columns
+#'   contain missing values.
 #' @param use_query_labels Logical: (default = \code{FALSE}) Use the names supplied
 #'   in \code{ids} as node labels instead of STRING's default labels.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
@@ -515,15 +599,34 @@ rba_string_network_image <- function(ids,
 #'   \item escore: experimental score
 #'   \item dscore: database score
 #'   \item tscore: textmining score}
+#'   \cr A \code{network_type = "regulatory"} response instead contains
+#'   \code{source_string_id}, \code{target_string_id},
+#'   \code{source_preferred_name}, \code{target_preferred_name},
+#'   \code{ncbiTaxonId}, \code{experimental_score}, \code{database_score},
+#'   \code{textmining_score}, \code{sign}, and \code{combined_score}. Each row
+#'   reports one direction from source to target; scores apply to that direction.
+#'   \cr A \code{network_flavor = "typed"} response contains the ordinary
+#'   identifier columns, evidence scores prefixed with \code{functional_},
+#'   \code{physical_}, and \code{regulatory_}, and \code{sign}. The combined-score
+#'   columns are \code{functional_combined_score},
+#'   \code{physical_combined_score}, and \code{regulatory_combined_score}.
+#'   Each functional pair is returned in both orientations. Physical scores are
+#'   symmetric; regulatory scores and signs describe the direction from
+#'   \code{stringId_A} to \code{stringId_B}. Missing or below-threshold
+#'   relationships have numeric \code{NA} scores. Disabled overlays have
+#'   \code{NA} score columns.
+#'   \cr Scores range from 0 to 1; the request's \code{required_score} uses
+#'   the 0 to 1000 scale. Regulatory signs are \code{"pos"}, \code{"neg"},
+#'   or \code{"n/a"}.
 #'
 #' @references \itemize{
-#'   \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
-#'    Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang,
-#'    Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian
-#'    von Mering, The STRING database in 2023: protein–protein association
-#'    networks and functional enrichment analyses for any sequenced genome of
-#'    interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023,
-#'    Pages D638–D646, https://doi.org/10.1093/nar/gkac1000
+#'   \item Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca
+#'    Kirsch, Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso,
+#'    Qingyao Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork,
+#'    Lars J Jensen, Christian von Mering, The STRING database in 2025:
+#'    protein networks with directionality of regulation, Nucleic Acids
+#'    Research, Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+#'    https://doi.org/10.1093/nar/gkae1113
 #'   \item \href{https://string-db.org/help/api/}{STRING API Documentation}
 #'   \item
 #'   \href{https://string-db.org/cgi/about?footer_active_subpage=references}{
@@ -552,6 +655,23 @@ rba_string_network_image <- function(ids,
 #'     required_score = 900
 #' )
 #' }
+#' \donttest{
+#' ## Retrieve directed regulatory interactions
+#' rba_string_interactions_network(
+#'     ids = c("TP53", "MDM2", "CDKN1A"),
+#'     species = 9606,
+#'     network_type = "regulatory"
+#' )
+#' }
+#' \donttest{
+#' ## Retrieve typed scores without the physical overlay
+#' rba_string_interactions_network(
+#'     ids = c("TP53", "MDM2", "CDKN1A"),
+#'     species = 9606,
+#'     network_flavor = "typed",
+#'     typed_physical_edges = FALSE
+#' )
+#' }
 #'
 #' @family "STRING"
 #' @seealso
@@ -569,6 +689,9 @@ rba_string_interactions_network <- function(ids,
                                             network_type = "functional",
                                             use_query_labels = FALSE,
                                             network_term_id = NULL,
+                                            network_flavor = NULL,
+                                            typed_physical_edges = TRUE,
+                                            typed_regulatory_edges = TRUE,
                                             ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -604,12 +727,22 @@ rba_string_interactions_network <- function(ids,
       list(
         arg = "network_type",
         class = "character",
-        val = c("functional", "physical"),
+        val = c("functional", "physical", "regulatory"),
         len = 1L
       ),
+      list(arg = "network_flavor", class = "character", val = "typed", len = 1L),
+      list(arg = "typed_physical_edges", class = "logical", len = 1L),
+      list(arg = "typed_regulatory_edges", class = "logical", len = 1L),
       list(arg = "use_query_labels", class = "logical", len = 1L)
     ),
     cond = list(
+      list(
+        quote(
+          isTRUE(network_flavor == "typed") &&
+            !is.null(network_type) && network_type != "functional"
+        ),
+        "`network_flavor = \"typed\"` requires `network_type = \"functional\"`."
+      ),
       list(
         quote(!is.null(ids) && !is.null(network_term_id)),
         paste0(
@@ -667,10 +800,19 @@ rba_string_interactions_network <- function(ids,
     list("required_score", !is.null(required_score), required_score),
     list("add_nodes", !is.null(add_nodes), add_nodes),
     list("network_type", !is.null(network_type), network_type),
-    list("show_query_node_labels", use_query_labels, "1")
+    list("network_flavor", !is.null(network_flavor), network_flavor),
+    list("typed_physical_edges", isFALSE(typed_physical_edges), "0"),
+    list("typed_regulatory_edges", isFALSE(typed_regulatory_edges), "0"),
+    list("show_query_node_labels", isTRUE(use_query_labels), "1")
   )
 
   ## Build Function-Specific Call
+  if (isTRUE(network_flavor == "typed")) {
+    parser_input <- list("json->df", .rba_string_typed_scores)
+  } else {
+    parser_input <- "json->df"
+  }
+
   input_call <- .rba_httr(
     httr = "post",
     url = .rba_stg("string", "url"),
@@ -678,7 +820,7 @@ rba_string_interactions_network <- function(ids,
     body = call_body,
     encode = "form",
     accept = "application/json",
-    parser = "json->df",
+    parser = parser_input,
     save_to = .rba_file("rba_string_interactions_network.json")
   )
 
@@ -717,23 +859,38 @@ rba_string_interactions_network <- function(ids,
 #'   \item "functional": (default) Edges indicate both physical and
 #'   functional associations.
 #'   \item "physical": Edges indicate that two proteins have a physical
-#'   interaction or are parts of a complex.}
+#'   interaction or are parts of a complex.
+#'   \item "regulatory": Directed edges indicate regulation from a source
+#'   protein to a target protein.}
+#' @param network_flavor Character: (optional) Set to \code{"typed"} to retrieve
+#'   functional, physical, and directional regulatory scores in one response.
+#'   Requires \code{network_type = "functional"}. Omit for the ordinary schema.
+#' @param typed_physical_edges Logical: (default = \code{TRUE}) Include physical
+#'   scores in a typed response. If \code{FALSE}, their columns contain
+#'   missing values.
+#' @param typed_regulatory_edges Logical: (default = \code{TRUE}) Include
+#'   regulatory scores in a typed response. If \code{FALSE}, their columns
+#'   contain missing values.
 #' @param limit Numeric: (optional) Maximum number of interaction partners returned for
-#'   each input protein, ordered by confidence.
+#'   each input protein, ordered by confidence. This limits partners rather
+#'   than response rows; directed or typed results can contain more rows.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
 #' @return A data frame in which each row is a network interaction and the
 #'   columns contain interactor information and interaction scores.
+#'   Regulatory and typed requests use the corresponding schemas described
+#'   in \code{\link{rba_string_interactions_network}}. Missing typed evidence
+#'   scores are numeric \code{NA}.
 #'
 #' @references \itemize{
-#'   \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
-#'    Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang,
-#'    Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian
-#'    von Mering, The STRING database in 2023: protein–protein association
-#'    networks and functional enrichment analyses for any sequenced genome of
-#'    interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023,
-#'    Pages D638–D646, https://doi.org/10.1093/nar/gkac1000
+#'   \item Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca
+#'    Kirsch, Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso,
+#'    Qingyao Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork,
+#'    Lars J Jensen, Christian von Mering, The STRING database in 2025:
+#'    protein networks with directionality of regulation, Nucleic Acids
+#'    Research, Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+#'    https://doi.org/10.1093/nar/gkae1113
 #'   \item \href{https://string-db.org/help/api/}{STRING API Documentation}
 #'   \item
 #'   \href{https://string-db.org/cgi/about?footer_active_subpage=references}{
@@ -752,6 +909,15 @@ rba_string_interactions_network <- function(ids,
 #'     species = 9606,
 #'     required_score = 700)
 #' }
+#' \donttest{
+#' ## Limit partners per input protein; directed results can contain more rows
+#' rba_string_interaction_partners(
+#'     ids = "TP53",
+#'     species = 9606,
+#'     network_type = "regulatory",
+#'     limit = 5
+#' )
+#' }
 #'
 #' @family "STRING"
 #' @seealso
@@ -767,6 +933,9 @@ rba_string_interaction_partners <- function(ids,
                                             required_score = NULL,
                                             network_type = "functional",
                                             limit = NULL,
+                                            network_flavor = NULL,
+                                            typed_physical_edges = TRUE,
+                                            typed_regulatory_edges = TRUE,
                                             ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -789,9 +958,12 @@ rba_string_interaction_partners <- function(ids,
       list(
         arg = "network_type",
         class = "character",
-        val = c("functional", "physical"),
+        val = c("functional", "physical", "regulatory"),
         len = 1L
       ),
+      list(arg = "network_flavor", class = "character", val = "typed", len = 1L),
+      list(arg = "typed_physical_edges", class = "logical", len = 1L),
+      list(arg = "typed_regulatory_edges", class = "logical", len = 1L),
       list(
         arg = "limit",
         class = c("numeric", "integer"),
@@ -801,6 +973,13 @@ rba_string_interaction_partners <- function(ids,
       )
     ),
     cond = list(
+      list(
+        quote(
+          isTRUE(network_flavor == "typed") &&
+            !is.null(network_type) && network_type != "functional"
+        ),
+        "`network_flavor = \"typed\"` requires `network_type = \"functional\"`."
+      ),
       list(
         quote(length(unique(ids)) > 10 && is.null(species)),
         sprintf(
@@ -825,10 +1004,19 @@ rba_string_interaction_partners <- function(ids,
     list("species", !is.null(species), species),
     list("limit", !is.null(limit), limit),
     list("required_score", !is.null(required_score), required_score),
-    list("network_type", !is.null(network_type), network_type)
+    list("network_type", !is.null(network_type), network_type),
+    list("network_flavor", !is.null(network_flavor), network_flavor),
+    list("typed_physical_edges", isFALSE(typed_physical_edges), "0"),
+    list("typed_regulatory_edges", isFALSE(typed_regulatory_edges), "0")
   )
 
   ## Build Function-Specific Call
+  if (isTRUE(network_flavor == "typed")) {
+    parser_input <- list("json->df", .rba_string_typed_scores)
+  } else {
+    parser_input <- "json->df"
+  }
+
   input_call <- .rba_httr(
     httr = "post",
     url = .rba_stg("string", "url"),
@@ -836,7 +1024,7 @@ rba_string_interaction_partners <- function(ids,
     body = call_body,
     encode = "form",
     accept = "application/json",
-    parser = "json->df",
+    parser = parser_input,
     save_to = .rba_file("string_interaction_partners.json")
   )
 
@@ -873,17 +1061,16 @@ rba_string_interaction_partners <- function(ids,
 #'   arguments manual for more information on available options.
 #'
 #' @return A data frame containing pairwise bit scores and self-hits for the
-#'   supplied proteins. STRING returns only one half of the symmetric similarity
-#'   matrix to reduce data transfer.
+#'   supplied proteins. Both orientations of a pair can be returned.
 #'
 #' @references \itemize{
-#'   \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
-#'    Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang,
-#'    Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian
-#'    von Mering, The STRING database in 2023: protein–protein association
-#'    networks and functional enrichment analyses for any sequenced genome of
-#'    interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023,
-#'    Pages D638–D646, https://doi.org/10.1093/nar/gkac1000
+#'   \item Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca
+#'    Kirsch, Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso,
+#'    Qingyao Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork,
+#'    Lars J Jensen, Christian von Mering, The STRING database in 2025:
+#'    protein networks with directionality of regulation, Nucleic Acids
+#'    Research, Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+#'    https://doi.org/10.1093/nar/gkae1113
 #'   \item \href{https://string-db.org/help/api/}{STRING API Documentation}
 #'   \item
 #'   \href{https://string-db.org/cgi/about?footer_active_subpage=references}{
@@ -995,13 +1182,13 @@ rba_string_homology_intra <- function(ids,
 #'   \code{species_b}.
 #'
 #' @references \itemize{
-#'   \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
-#'    Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang,
-#'    Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian
-#'    von Mering, The STRING database in 2023: protein–protein association
-#'    networks and functional enrichment analyses for any sequenced genome of
-#'    interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023,
-#'    Pages D638–D646, https://doi.org/10.1093/nar/gkac1000
+#'   \item Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca
+#'    Kirsch, Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso,
+#'    Qingyao Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork,
+#'    Lars J Jensen, Christian von Mering, The STRING database in 2025:
+#'    protein networks with directionality of regulation, Nucleic Acids
+#'    Research, Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+#'    https://doi.org/10.1093/nar/gkae1113
 #'   \item \href{https://string-db.org/help/api/}{STRING API Documentation}
 #'   \item
 #'   \href{https://string-db.org/cgi/about?footer_active_subpage=references}{
@@ -1010,9 +1197,10 @@ rba_string_homology_intra <- function(ids,
 #'
 #' @examples
 #' \donttest{
-#' rba_string_homology_inter(ids = "p53",
+#' ## Find the best hit in mouse and fruit fly for the human input protein
+#' rba_string_homology_inter(ids = "CDK1",
 #'     species = 9606,
-#'     species_b = 7070)
+#'     species_b = c(10090, 7227))
 #' }
 #' \donttest{
 #' rba_string_homology_inter(ids = "ENSP00000269305", species = 9606)
@@ -1068,7 +1256,7 @@ rba_string_homology_inter <- function(ids,
       "caller_identity" = getOption("rba_user_agent")
     ),
     list("species", !is.null(species), species),
-    list("species_b", !is.null(species_b), paste(unique(species_b), collapse = "%0d"))
+    list("species_b", !is.null(species_b), paste(unique(species_b), collapse = "\r"))
   )
 
   ## Build Function-Specific Call
@@ -1100,7 +1288,8 @@ rba_string_homology_inter <- function(ids,
 #'
 #' STRING currently returns enrichment results from Gene
 #'   Ontology (GO), KEGG pathways, UniProt Keywords, PubMed publications, Pfam
-#'   domains, InterPro domains, and SMART domains.
+#'   domains, InterPro domains, SMART domains, and other resources including
+#'   GWAS Catalog and Hallmark gene sets. Category availability depends on species.
 #'   \cr STRING returns only terms with a raw p-value below 0.1. To retrieve
 #'   annotations without filtering by enrichment p-value, use
 #'   \code{\link{rba_string_annotations}}.
@@ -1123,22 +1312,37 @@ rba_string_homology_inter <- function(ids,
 #'   \code{\link{rba_string_map_ids}} to map your IDs.
 #' @param split_df Logical: (default = \code{TRUE}) Split results into a list
 #'   of data frames by \code{category}; otherwise, return one data frame.
+#' @param add_scores Logical: (default = \code{FALSE}) Include \code{strength}
+#'   (log10 of the observed-to-expected gene-count ratio) and \code{signal}
+#'   (a size-aware score combining that ratio and enrichment significance).
+#' @param max_fdr Numeric: (optional) Maximum FDR, greater than 0 and no greater
+#'   than 1. Only terms meeting this threshold are returned.
+#' @param min_gene_count Numeric: (optional) Minimum positive whole number of
+#'   input genes assigned to a returned term.
+#' @param min_strength Numeric: (optional) Minimum enrichment strength.
+#' @param min_signal Numeric: (optional) Minimum enrichment signal.
+#' @param merge_similarity Numeric: (optional) Overlap threshold for merging
+#'   terms based on their assigned input-gene sets, greater than 0 and no
+#'   greater than 1. The most significant term is retained. A value of 1
+#'   merges only identical gene sets. Omit to retain unmerged terms.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A data frame in which each row is an enriched term with a raw p-value
-#'   below 0.1 and the columns contain the term category, description, gene
-#'   counts, p-value, FDR, and other pertinent information. If
-#'   \code{split_df = TRUE}, a list of data frames split by category is returned.
+#' @return A data frame in which each row is an enriched term and the columns
+#'   contain the term category, description, gene counts, p-value, FDR, and other
+#'   pertinent information. If \code{split_df = TRUE}, a list of data frames
+#'   split by category is returned.
+#'   \code{add_scores = TRUE} adds numeric \code{strength} and \code{signal}
+#'   columns. If no terms are returned, the result is a zero-row data frame.
 #'
 #' @references \itemize{
-#'   \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
-#'    Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang,
-#'    Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian
-#'    von Mering, The STRING database in 2023: protein–protein association
-#'    networks and functional enrichment analyses for any sequenced genome of
-#'    interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023,
-#'    Pages D638–D646, https://doi.org/10.1093/nar/gkac1000
+#'   \item Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca
+#'    Kirsch, Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso,
+#'    Qingyao Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork,
+#'    Lars J Jensen, Christian von Mering, The STRING database in 2025:
+#'    protein networks with directionality of regulation, Nucleic Acids
+#'    Research, Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+#'    https://doi.org/10.1093/nar/gkae1113
 #'   \item \href{https://string-db.org/help/api/}{STRING API Documentation}
 #'   \item
 #'   \href{https://string-db.org/cgi/about?footer_active_subpage=references}{
@@ -1148,6 +1352,18 @@ rba_string_homology_inter <- function(ids,
 #' @examples
 #' \donttest{
 #' rba_string_enrichment(ids = c("TP53", "TNF", "EGFR"), species = 9606)
+#' }
+#' \donttest{
+#' ## Include enrichment scores, filter results, and merge similar terms
+#' rba_string_enrichment(
+#'     ids = c("TP53", "MDM2", "CDKN1A", "BRCA1", "CDK1", "CDK2"),
+#'     species = 9606,
+#'     add_scores = TRUE,
+#'     max_fdr = 0.05,
+#'     min_gene_count = 2,
+#'     merge_similarity = 0.8,
+#'     split_df = FALSE
+#' )
 #' }
 #'
 #' @family "STRING"
@@ -1164,6 +1380,12 @@ rba_string_enrichment <- function(ids,
                                   species = NULL,
                                   background = NULL,
                                   split_df = TRUE,
+                                  add_scores = FALSE,
+                                  max_fdr = NULL,
+                                  min_gene_count = NULL,
+                                  min_strength = NULL,
+                                  min_signal = NULL,
+                                  merge_similarity = NULL,
                                   ...) {
   ## Load Global Options
   .rba_ext_args(...)
@@ -1177,7 +1399,36 @@ rba_string_enrichment <- function(ids,
         integerish = TRUE, min_val = 1
       ),
       list(arg = "background", class = "character", min_len = 1L),
-      list(arg = "split_df", class = "logical", len = 1L)
+      list(arg = "split_df", class = "logical", len = 1L),
+      list(arg = "add_scores", class = "logical", len = 1L),
+      list(
+        arg = "max_fdr", class = c("numeric", "integer"), len = 1L,
+        min_val = 0, max_val = 1
+      ),
+      list(
+        arg = "min_gene_count", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE, min_val = 1
+      ),
+      list(arg = "min_strength", class = c("numeric", "integer"), len = 1L),
+      list(arg = "min_signal", class = c("numeric", "integer"), len = 1L),
+      list(
+        arg = "merge_similarity", class = c("numeric", "integer"), len = 1L,
+        min_val = 0, max_val = 1
+      )
+    ),
+    cond = list(
+      list(
+        quote(!is.null(max_fdr) && max_fdr == 0),
+        "`max_fdr` must be greater than 0."
+      ),
+      list(
+        quote(!is.null(merge_similarity) && merge_similarity == 0),
+        "`merge_similarity` must be greater than 0."
+      ),
+      list(
+        quote(any(!is.finite(c(min_strength, min_signal)))),
+        "`min_strength` and `min_signal` must be finite when supplied."
+      )
     )
   )
 
@@ -1193,7 +1444,13 @@ rba_string_enrichment <- function(ids,
       "caller_identity" = getOption("rba_user_agent")
     ),
     list("species", !is.null(species), species),
-    list("background_string_identifiers", !is.null(background), paste(unique(background), collapse = "%0d"))
+    list("background_string_identifiers", !is.null(background), paste(unique(background), collapse = "%0d")),
+    list("add_scores", isTRUE(add_scores), "1"),
+    list("max_fdr", !is.null(max_fdr), max_fdr),
+    list("min_gene_count", !is.null(min_gene_count), min_gene_count),
+    list("min_strength", !is.null(min_strength), min_strength),
+    list("min_signal", !is.null(min_signal), min_signal),
+    list("merge_similarity", !is.null(merge_similarity), merge_similarity)
   )
 
   ## Build Function-Specific Call
@@ -1231,9 +1488,10 @@ rba_string_enrichment <- function(ids,
 #'   proteins, together with information about each term.
 #'
 #' STRING currently retrieves annotations based on Gene Ontology (GO), UniProt
-#'   Keywords, PubMed publications, Pfam domains, InterPro domains, and SMART
-#'   domains. KEGG annotations are unavailable from this endpoint because of
-#'   KEGG licensing restrictions.
+#'   Keywords, PubMed publications, Pfam domains, InterPro domains, SMART
+#'   domains, and other resources including GWAS Catalog and Hallmark gene
+#'   sets. Category availability depends on species. KEGG annotations are
+#'   unavailable from this endpoint because of KEGG licensing restrictions.
 #'   \cr This function returns annotations without enrichment filtering. To
 #'   perform enrichment and retrieve only enriched terms, use
 #'   \code{\link{rba_string_enrichment}}.
@@ -1250,8 +1508,7 @@ rba_string_enrichment <- function(ids,
 #'   (Recommended, but optional.)
 #' @param allow_pubmed Logical: (default = \code{FALSE}) Include PubMed
 #'   annotations. These annotations are excluded by default because many
-#'   publications may be assigned to each protein. This argument is ignored
-#'   when \code{only_pubmed = TRUE}.
+#'   publications may be assigned to each protein.
 #' @param split_df Logical: (default = \code{TRUE}) Split results into a list
 #'   of data frames by \code{category}; otherwise, return one data frame.
 #' @param only_pubmed Logical: (default = \code{FALSE}) Return only PubMed
@@ -1267,13 +1524,13 @@ rba_string_enrichment <- function(ids,
 #'   available.
 #'
 #' @references \itemize{
-#'   \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
-#'    Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang,
-#'    Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian
-#'    von Mering, The STRING database in 2023: protein–protein association
-#'    networks and functional enrichment analyses for any sequenced genome of
-#'    interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023,
-#'    Pages D638–D646, https://doi.org/10.1093/nar/gkac1000
+#'   \item Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca
+#'    Kirsch, Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso,
+#'    Qingyao Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork,
+#'    Lars J Jensen, Christian von Mering, The STRING database in 2025:
+#'    protein networks with directionality of regulation, Nucleic Acids
+#'    Research, Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+#'    https://doi.org/10.1093/nar/gkae1113
 #'   \item \href{https://string-db.org/help/api/}{STRING API Documentation}
 #'   \item
 #'   \href{https://string-db.org/cgi/about?footer_active_subpage=references}{
@@ -1346,8 +1603,8 @@ rba_string_annotations <- function(ids,
       "caller_identity" = getOption("rba_user_agent")
     ),
     list("species", !is.null(species), species),
-    list("allow_pubmed", allow_pubmed && !only_pubmed, 1),
-    list("only_pubmed", only_pubmed, 1)
+    list("allow_pubmed", isTRUE(allow_pubmed) && !isTRUE(only_pubmed), 1),
+    list("only_pubmed", isTRUE(only_pubmed), 1)
   )
 
   ## Build Function-Specific Call
@@ -1382,37 +1639,33 @@ rba_string_annotations <- function(ids,
 #'   function searches for functional terms using an identifier or descriptive
 #'   text and retrieves the matching terms and their annotated proteins.
 #'
-#' This endpoint supports only one species per query. If multiple functional
-#'   terms match \code{term_text}, STRING returns them in order of relevance,
-#'   with the best match first.
-#'   \cr The complete number of annotated proteins is reported in
-#'   \code{proteinCount}.
-#'
 #' @section Corresponding API Resources:
 #'  "POST https://string-db.org/api/\{output-format\}/functional_terms?term_text=
 #'  \{your_term\}&\{optional_parameters\}"
 #'
 #' @param term_text Character: A functional term identifier or descriptive text
 #'   used to match one or more functional terms.
-#' @param species Numeric:
+#' @param species Numeric: A single
 #'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 #'   NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
-#' @return A data frame in which every row is a matching functional term and
-#'   the columns contain the term category, identifier, description, number of
-#'   annotated proteins, preferred protein names, and STRING protein IDs.
-#'   \code{preferredNames} and \code{stringIds} are returned as list-columns.
+#' @return A data frame in which every row is a matching functional term,
+#'   ordered by relevance with the best match first. The columns contain the
+#'   term category, identifier, description, complete number of annotated
+#'   proteins (\code{proteinCount}), preferred protein names, and STRING
+#'   protein IDs. \code{preferredNames} and \code{stringIds} are returned as
+#'   list-columns.
 #'
 #' @references \itemize{
-#'   \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
-#'    Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang,
-#'    Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian
-#'    von Mering, The STRING database in 2023: protein–protein association
-#'    networks and functional enrichment analyses for any sequenced genome of
-#'    interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023,
-#'    Pages D638–D646, https://doi.org/10.1093/nar/gkac1000
+#'   \item Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca
+#'    Kirsch, Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso,
+#'    Qingyao Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork,
+#'    Lars J Jensen, Christian von Mering, The STRING database in 2025:
+#'    protein networks with directionality of regulation, Nucleic Acids
+#'    Research, Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+#'    https://doi.org/10.1093/nar/gkae1113
 #'   \item \href{https://string-db.org/help/api/}{STRING API Documentation}
 #'   \item
 #'   \href{https://string-db.org/cgi/about?footer_active_subpage=references}{
@@ -1512,13 +1765,13 @@ rba_string_functional_terms <- function(term_text,
 #' @return A list with protein-protein interaction enrichment results.
 #'
 #' @references \itemize{
-#'   \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
-#'    Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang,
-#'    Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian
-#'    von Mering, The STRING database in 2023: protein–protein association
-#'    networks and functional enrichment analyses for any sequenced genome of
-#'    interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023,
-#'    Pages D638–D646, https://doi.org/10.1093/nar/gkac1000
+#'   \item Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca
+#'    Kirsch, Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso,
+#'    Qingyao Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork,
+#'    Lars J Jensen, Christian von Mering, The STRING database in 2025:
+#'    protein networks with directionality of regulation, Nucleic Acids
+#'    Research, Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+#'    https://doi.org/10.1093/nar/gkae1113
 #'   \item \href{https://string-db.org/help/api/}{STRING API Documentation}
 #'   \item
 #'   \href{https://string-db.org/cgi/about?footer_active_subpage=references}{
@@ -1627,13 +1880,13 @@ rba_string_enrichment_ppi <- function(ids,
 #' @return A list with STRING version and stable address.
 #'
 #' @references \itemize{
-#'   \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
-#'    Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang,
-#'    Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian
-#'    von Mering, The STRING database in 2023: protein–protein association
-#'    networks and functional enrichment analyses for any sequenced genome of
-#'    interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023,
-#'    Pages D638–D646, https://doi.org/10.1093/nar/gkac1000
+#'   \item Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca
+#'    Kirsch, Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso,
+#'    Qingyao Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork,
+#'    Lars J Jensen, Christian von Mering, The STRING database in 2025:
+#'    protein networks with directionality of regulation, Nucleic Acids
+#'    Research, Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+#'    https://doi.org/10.1093/nar/gkae1113
 #'   \item \href{https://string-db.org/help/api/}{STRING API Documentation}
 #'   \item
 #'   \href{https://string-db.org/cgi/about?footer_active_subpage=references}{
@@ -1684,30 +1937,6 @@ rba_string_version <- function(...) {
 #'   \code{\link{rba_string_enrichment}} to retrieve the results as a data
 #'   frame.
 #'
-#' Available \code{category} values are listed below. The default is "Process".
-#'   \itemize{
-#'   \item Process: Biological Process (Gene Ontology)
-#'   \item Function: Molecular Function (Gene Ontology)
-#'   \item Component: Cellular Component (Gene Ontology)
-#'   \item Keyword: Annotated Keywords (UniProt)
-#'   \item KEGG: KEGG Pathways
-#'   \item RCTM: Reactome Pathways
-#'   \item HPO: Human Phenotype (Monarch)
-#'   \item MPO: The Mammalian Phenotype Ontology (Monarch)
-#'   \item DPO: Drosophila Phenotype (Monarch)
-#'   \item WPO: C. elegans Phenotype Ontology (Monarch)
-#'   \item ZPO: Zebrafish Phenotype Ontology (Monarch)
-#'   \item FYPO: Fission Yeast Phenotype Ontology (Monarch)
-#'   \item Pfam: Protein Domains (Pfam)
-#'   \item SMART: Protein Domains (SMART)
-#'   \item InterPro: Protein Domains and Features (InterPro)
-#'   \item PMID: Reference Publications (PubMed)
-#'   \item NetworkNeighborAL: Local Network Cluster (STRING)
-#'   \item COMPARTMENTS: Subcellular Localization (COMPARTMENTS)
-#'   \item TISSUES: Tissue Expression (TISSUES)
-#'   \item DISEASES: Disease-gene Associations (DISEASES)
-#'   \item WikiPathways: WikiPathways}
-#'
 #' @section Corresponding API Resources:
 #'  "POST https://string-db.org/api/\{output-format\}/enrichmentfigure?
 #'  identifiers=\{your_identifiers\}&\{optional_parameters\}"
@@ -1720,12 +1949,31 @@ rba_string_version <- function(...) {
 #'   \href{https://www.ncbi.nlm.nih.gov/taxonomy/}{
 #'   NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
 #'   (Recommended, but required if your input contains more than 10 unique IDs.)
-#' @param category Character: (default = \code{"Process"}) The term set to use for enrichment analysis.
-#'   Valid values are:
-#'   "Process" (default), "Function", "Component", "Keyword", "KEGG", "RCTM",
-#'   "HPO", "MPO", "DPO", "WPO", "ZPO", "FYPO", "Pfam", "SMART", "InterPro",
-#'   "PMID", "NetworkNeighborAL", "COMPARTMENTS", "TISSUES", "DISEASES", or
-#'   "WikiPathways". See Details for descriptions.
+#' @param category Character: (default = \code{"Process"}) The term set to use
+#'   for enrichment analysis. Valid values are:\itemize{
+#'   \item Process: Biological Process (Gene Ontology)
+#'   \item Function: Molecular Function (Gene Ontology)
+#'   \item Component: Cellular Component (Gene Ontology)
+#'   \item Keyword: Annotated Keywords (UniProt)
+#'   \item KEGG: KEGG Pathways
+#'   \item RCTM: Reactome Pathways
+#'   \item HPO: Human Phenotype (Monarch)
+#'   \item MPO: The Mammalian Phenotype Ontology (Monarch)
+#'   \item DPO: Drosophila Phenotype (Monarch)
+#'   \item WPO: C. elegans Phenotype Ontology (Monarch)
+#'   \item ZPO: Zebrafish Phenotype Ontology (Monarch)
+#'   \item FYPO: Fission Yeast Phenotype Ontology (Monarch)
+#'   \item GWAS: GWAS Catalog
+#'   \item Hallmark: Hallmark Gene Set (Molecular Signatures DB)
+#'   \item Pfam: Protein Domains (Pfam)
+#'   \item SMART: Protein Domains (SMART)
+#'   \item InterPro: Protein Domains and Features (InterPro)
+#'   \item PMID: Reference Publications (PubMed)
+#'   \item NetworkNeighborAL: Local Network Cluster (STRING)
+#'   \item COMPARTMENTS: Subcellular Localization (COMPARTMENTS)
+#'   \item TISSUES: Tissue Expression (TISSUES)
+#'   \item DISEASES: Disease-gene Associations (DISEASES)
+#'   \item WikiPathways: WikiPathways}
 #' @param image_format Character: (default = \code{"image"}) One of:\itemize{
 #'   \item "image": PNG image with normal resolution.
 #'   \item "highres_image": High-resolution PNG image.
@@ -1736,30 +1984,51 @@ rba_string_version <- function(...) {
 #'   \item Character string: A valid file path to save the image to.}
 #' @param group_by_similarity Numeric: (optional) Jaccard-index threshold used to group
 #'   related terms visually. Valid values range from 0.1 to 1 in increments of
-#'   0.1. The default is \code{NULL}, which disables grouping.
+#'   0.1. Omit to use STRING's default threshold of 0.8. This controls visual
+#'   grouping; \code{merge_similarity} controls which terms are retained.
 #' @param color_palette Character: (default = \code{"mint_blue"}) Color palette used to represent FDR values.
 #'   Valid values are
 #'   "mint_blue" (default), "lime_emerald", "green_blue", "peach_purple",
-#'   "straw_navy", or "yellow_pink".
+#'   "straw_navy", "yellow_pink", or "red_blue".
 #' @param number_of_term_shown Numeric: (default = \code{10}) Maximum number of terms
-#'   to include in the plot.
-#' @param x_axis Character: (default = \code{"signal"}) Variable displayed on the x-axis and used to rank
-#'   the results. Valid values are "signal" (default), "strength", "FDR", and
-#'   "gene_count".
+#'   to include in the plot, from 1 to 100.
+#' @param x_axis Character: (default = \code{"signal"}) Variable displayed on the x-axis.
+#'   Valid values are \code{"signal"},
+#'   \code{"strength"}, \code{"fdr"}, \code{"count"}, or \code{"gene_count"}.
+#'   \code{"FDR"} is also accepted for \code{"fdr"}.
+#' @param sort_by Character: (optional) Variable used to select and order terms.
+#'   Valid values are \code{"signal"}, \code{"strength"}, \code{"fdr"},
+#'   \code{"count"}, or \code{"gene_count"}. \code{"FDR"} is also accepted for
+#'   \code{"fdr"}. Omit to sort by the selected axis.
+#' @param graph_type Character: (default = \code{"dotplot"}) Either
+#'   \code{"dotplot"} or \code{"barplot"}.
+#' @param max_fdr Numeric: (optional) Maximum FDR, greater than 0 and no greater
+#'   than 1. Only terms meeting this threshold are shown.
+#' @param min_gene_count Numeric: (optional) Minimum positive whole number of
+#'   input genes assigned to a displayed term.
+#' @param min_strength Numeric: (optional) Minimum enrichment strength.
+#' @param min_signal Numeric: (optional) Minimum enrichment signal.
+#' @param merge_similarity Numeric: (optional) Overlap threshold for merging
+#'   terms based on their assigned input-gene sets, greater than 0 and no
+#'   greater than 1. The most significant term is retained. A value of 1
+#'   merges only identical gene sets. Omit to retain unmerged terms.
 #' @param ... rbioapi option(s). See \code{\link{rba_options}}'s
 #'   arguments manual for more information on available options.
 #'
 #' @return A PNG image array or raw SVG content, depending on
-#'   \code{image_format}.
+#'   \code{image_format}. STRING can return empty content if no terms can be
+#'   plotted. An empty PNG response is returned as a numeric array with
+#'   dimensions \code{c(0L, 0L, 4L)}; an empty SVG response is returned as
+#'   \code{raw(0)}. Both have length zero.
 #'
 #' @references \itemize{
-#'   \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
-#'    Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang,
-#'    Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian
-#'    von Mering, The STRING database in 2023: protein–protein association
-#'    networks and functional enrichment analyses for any sequenced genome of
-#'    interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023,
-#'    Pages D638–D646, https://doi.org/10.1093/nar/gkac1000
+#'   \item Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca
+#'    Kirsch, Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso,
+#'    Qingyao Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork,
+#'    Lars J Jensen, Christian von Mering, The STRING database in 2025:
+#'    protein networks with directionality of regulation, Nucleic Acids
+#'    Research, Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+#'    https://doi.org/10.1093/nar/gkae1113
 #'   \item \href{https://string-db.org/help/api/}{STRING API Documentation}
 #'   \item
 #'   \href{https://string-db.org/cgi/about?footer_active_subpage=references}{
@@ -1789,6 +2058,19 @@ rba_string_version <- function(...) {
 #'   color_palette = "straw_navy"
 #'   )
 #' }
+#' \dontrun{
+#'   ## Display strength on the axis and select/order terms by FDR
+#'   rba_string_enrichment_image(
+#'   ids = c("TP53", "MDM2", "CDKN1A", "BRCA1", "CDK1", "CDK2"),
+#'   species = 9606,
+#'   category = "Hallmark",
+#'   x_axis = "strength",
+#'   sort_by = "fdr",
+#'   graph_type = "barplot",
+#'   color_palette = "red_blue",
+#'   save_image = FALSE
+#'   )
+#' }
 #'
 #' @family "STRING"
 #' @family "Enrichment/Over-representation"
@@ -1809,6 +2091,13 @@ rba_string_enrichment_image <- function(ids,
                                         color_palette = "mint_blue",
                                         number_of_term_shown = 10,
                                         x_axis = "signal",
+                                        sort_by = NULL,
+                                        graph_type = "dotplot",
+                                        max_fdr = NULL,
+                                        min_gene_count = NULL,
+                                        min_strength = NULL,
+                                        min_signal = NULL,
+                                        merge_similarity = NULL,
                                         ...) {
   ## Load Global Options
   .rba_ext_args(..., ignore_save = TRUE)
@@ -1816,7 +2105,10 @@ rba_string_enrichment_image <- function(ids,
   ## Check User-input Arguments
   .rba_args(
     cons = list(
-      list(arg = "ids", class = c("character", "numeric", "integer"), min_len = 1L),
+      list(
+        arg = "ids", class = c("character", "numeric", "integer"),
+        min_len = 1L
+      ),
       list(
         arg = "species", class = c("numeric", "integer"), len = 1L,
         integerish = TRUE, min_val = 1
@@ -1829,24 +2121,26 @@ rba_string_enrichment_image <- function(ids,
                 "Pfam", "SMART", "InterPro",
                 "PMID", "NetworkNeighborAL",
                 "COMPARTMENTS", "TISSUES", "DISEASES",
-                "WikiPathways"),
+                "WikiPathways", "GWAS", "Hallmark"),
         len = 1L
       ),
       list(
         arg = "image_format", class = "character",
         val = c("image", "highres_image", "svg"),
-        len = 1L
+        len = 1L, no_null = TRUE
       ),
       list(arg = "save_image", class = c("character", "logical"), len = 1L),
       list(
         arg = "group_by_similarity",
         class = c("numeric", "integer"),
-        val = seq(0.1, 1, by = 0.1),
+        min_val = 0.1,
+        max_val = 1,
         len = 1L
       ),
       list(
         arg = "color_palette", class = "character",
-        val = c("mint_blue", "lime_emerald", "green_blue", "peach_purple", "straw_navy", "yellow_pink"),
+        val = c("mint_blue", "lime_emerald", "green_blue", "peach_purple",
+                "straw_navy", "yellow_pink", "red_blue"),
         len = 1L
       ),
       list(
@@ -1854,16 +2148,59 @@ rba_string_enrichment_image <- function(ids,
         class = c("numeric", "integer"),
         integerish = TRUE,
         min_val = 1,
+        max_val = 100,
         len = 1L
       ),
       list(
         arg = "x_axis",
         class = "character",
-        val = c("signal", "strength", "FDR", "gene_count"),
+        val = c("signal", "strength", "fdr", "FDR", "count", "gene_count"),
         len = 1L
+      ),
+      list(
+        arg = "sort_by", class = "character", len = 1L,
+        val = c("signal", "strength", "fdr", "FDR", "count", "gene_count")
+      ),
+      list(
+        arg = "graph_type", class = "character",
+        val = c("dotplot", "barplot"), len = 1L
+      ),
+      list(
+        arg = "max_fdr", class = c("numeric", "integer"), len = 1L,
+        min_val = 0, max_val = 1
+      ),
+      list(
+        arg = "min_gene_count", class = c("numeric", "integer"), len = 1L,
+        integerish = TRUE, min_val = 1
+      ),
+      list(arg = "min_strength", class = c("numeric", "integer"), len = 1L),
+      list(arg = "min_signal", class = c("numeric", "integer"), len = 1L),
+      list(
+        arg = "merge_similarity", class = c("numeric", "integer"), len = 1L,
+        min_val = 0, max_val = 1
       )
     ),
     cond = list(
+      list(
+        quote(
+          !is.null(group_by_similarity) &&
+            abs(group_by_similarity * 10 - round(group_by_similarity * 10)) >
+              sqrt(.Machine$double.eps)
+        ),
+        "`group_by_similarity` must be between 0.1 and 1 in increments of 0.1."
+      ),
+      list(
+        quote(!is.null(max_fdr) && max_fdr == 0),
+        "`max_fdr` must be greater than 0."
+      ),
+      list(
+        quote(!is.null(merge_similarity) && merge_similarity == 0),
+        "`merge_similarity` must be greater than 0."
+      ),
+      list(
+        quote(any(!is.finite(c(min_strength, min_signal)))),
+        "`min_strength` and `min_signal` must be finite when supplied."
+      ),
       list(
         quote(length(unique(ids)) > 10 && is.null(species)),
         sprintf(
@@ -1889,8 +2226,19 @@ rba_string_enrichment_image <- function(ids,
     ),
     list("species", !is.null(species), species),
     list("group_by_similarity", !is.null(group_by_similarity), group_by_similarity),
-    list("number_of_term_shown", number_of_term_shown != 10, as.integer(number_of_term_shown)),
-    list("x_axis", x_axis != "signal", x_axis)
+    list(
+      "number_of_term_shown",
+      !is.null(number_of_term_shown) && number_of_term_shown != 10,
+      as.integer(number_of_term_shown)
+    ),
+    list("x_axis", !is.null(x_axis), tolower(x_axis)),
+    list("sort_by", !is.null(sort_by), tolower(sort_by)),
+    list("graph_type", !is.null(graph_type) && graph_type != "dotplot", graph_type),
+    list("max_fdr", !is.null(max_fdr), max_fdr),
+    list("min_gene_count", !is.null(min_gene_count), min_gene_count),
+    list("min_strength", !is.null(min_strength), min_strength),
+    list("min_signal", !is.null(min_signal), min_signal),
+    list("merge_similarity", !is.null(merge_similarity), merge_similarity)
   )
 
   ## make file path
@@ -1905,7 +2253,11 @@ rba_string_enrichment_image <- function(ids,
     ext_input <- "png"
     accept_input <- "image/png"
     parser_input <- function(x) {
-      png::readPNG(httr::content(x, as = "raw"))
+      parsed_response <- httr::content(x, as = "raw")
+      if (length(parsed_response) == 0L) {
+        return(array(numeric(0), dim = c(0L, 0L, 4L)))
+      }
+      return(png::readPNG(parsed_response))
     }
 
   }

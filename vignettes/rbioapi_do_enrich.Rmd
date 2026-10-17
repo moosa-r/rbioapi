@@ -458,8 +458,10 @@ enrich_plot <- rba_string_enrichment_image(
 ```
 
 ```{r string_enrichment_plot_image, echo=FALSE, fig.cap="Visualization of enrichment analysis results", fig.align='center', fig.width=7}
-if (is.array(enrich_plot)) {
+if (is.array(enrich_plot) && length(enrich_plot) > 0L) {
   grid::grid.raster(enrich_plot, just = "center")
+} else if (is.array(enrich_plot)) {
+  print("STRING returned no enrichment plot.")
 } else {
   print("Vignette building failed. It is probably because the web service was down during the building.")
 }

@@ -125,10 +125,10 @@ version resource.
 rba_string_version()
 #> Retrieving the STRING database version and address used by rbioapi.
 #> $string_version
-#> [1] "12.0"
+#> [1] "12.5"
 #> 
 #> $stable_address
-#> [1] "https://version-12-0.string-db.org"
+#> [1] "https://version-12-5.string-db.org"
 ```
 
 Thus, to this version, rbioapi function will have one of the following

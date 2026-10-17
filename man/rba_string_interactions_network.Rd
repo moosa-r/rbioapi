@@ -12,6 +12,9 @@ rba_string_interactions_network(
   network_type = "functional",
   use_query_labels = FALSE,
   network_term_id = NULL,
+  network_flavor = NULL,
+  typed_physical_edges = TRUE,
+  typed_regulatory_edges = TRUE,
   ...
 )
 }
@@ -46,7 +49,9 @@ input proteins are returned.}}
 \item "functional": (default) Edges indicate both physical and
 functional associations.
 \item "physical": Edges indicate that two proteins have a physical
-interaction or are parts of a complex.}}
+interaction or are parts of a complex.
+\item "regulatory": Directed edges indicate regulation from a source
+protein to a target protein.}}
 
 \item{use_query_labels}{Logical: (default = \code{FALSE}) Use the names supplied
 in \code{ids} as node labels instead of STRING's default labels.}
@@ -55,6 +60,18 @@ in \code{ids} as node labels instead of STRING's default labels.}
 Ontology, KEGG, or Reactome identifier). Instead of using proteins supplied
 through \code{ids}, STRING constructs the network from proteins annotated
 with the specified term. Set \code{ids = NULL} and supply \code{species}.}
+
+\item{network_flavor}{Character: (optional) Set to \code{"typed"} to retrieve
+functional, physical, and directional regulatory scores in one response.
+Requires \code{network_type = "functional"}. Omit for the ordinary schema.}
+
+\item{typed_physical_edges}{Logical: (default = \code{TRUE}) Include physical
+scores in a typed response. If \code{FALSE}, their columns contain
+missing values.}
+
+\item{typed_regulatory_edges}{Logical: (default = \code{TRUE}) Include
+regulatory scores in a typed response. If \code{FALSE}, their columns
+contain missing values.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
@@ -75,18 +92,34 @@ A data frame in which each row is a network interaction and the
   \item escore: experimental score
   \item dscore: database score
   \item tscore: textmining score}
+  \cr A \code{network_type = "regulatory"} response instead contains
+  \code{source_string_id}, \code{target_string_id},
+  \code{source_preferred_name}, \code{target_preferred_name},
+  \code{ncbiTaxonId}, \code{experimental_score}, \code{database_score},
+  \code{textmining_score}, \code{sign}, and \code{combined_score}. Each row
+  reports one direction from source to target; scores apply to that direction.
+  \cr A \code{network_flavor = "typed"} response contains the ordinary
+  identifier columns, evidence scores prefixed with \code{functional_},
+  \code{physical_}, and \code{regulatory_}, and \code{sign}. The combined-score
+  columns are \code{functional_combined_score},
+  \code{physical_combined_score}, and \code{regulatory_combined_score}.
+  Each functional pair is returned in both orientations. Physical scores are
+  symmetric; regulatory scores and signs describe the direction from
+  \code{stringId_A} to \code{stringId_B}. Missing or below-threshold
+  relationships have numeric \code{NA} scores. Disabled overlays have
+  \code{NA} score columns.
+  \cr Scores range from 0 to 1; the request's \code{required_score} uses
+  the 0 to 1000 scale. Regulatory signs are \code{"pos"}, \code{"neg"},
+  or \code{"n/a"}.
 }
 \description{
-This function retrieves STRING interaction pairs among the input proteins,
-  including the combined score and separate scores for each evidence
-  channel. You can expand the network using the \code{add_nodes} parameter.
+This function retrieves STRING interaction pairs among the input proteins
+  and any added neighbors, including the combined score and separate scores
+  for each evidence channel.
 }
 \details{
-This function returns interactions among the supplied proteins and any
-  neighboring proteins added through \code{add_nodes}. To retrieve
-  interactions between your input proteins and all their STRING interaction
-  partners, see
-  \code{\link{rba_string_interaction_partners}}.
+To retrieve interactions between your input proteins and all their STRING
+  interaction partners, see \code{\link{rba_string_interaction_partners}}.
 }
 \section{Corresponding API Resources}{
 
@@ -118,17 +151,34 @@ rba_string_interactions_network(
     required_score = 900
 )
 }
+\donttest{
+## Retrieve directed regulatory interactions
+rba_string_interactions_network(
+    ids = c("TP53", "MDM2", "CDKN1A"),
+    species = 9606,
+    network_type = "regulatory"
+)
+}
+\donttest{
+## Retrieve typed scores without the physical overlay
+rba_string_interactions_network(
+    ids = c("TP53", "MDM2", "CDKN1A"),
+    species = 9606,
+    network_flavor = "typed",
+    typed_physical_edges = FALSE
+)
+}
 
 }
 \references{
 \itemize{
-  \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
-   Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang,
-   Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian
-   von Mering, The STRING database in 2023: protein–protein association
-   networks and functional enrichment analyses for any sequenced genome of
-   interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023,
-   Pages D638–D646, https://doi.org/10.1093/nar/gkac1000
+  \item Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca
+   Kirsch, Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso,
+   Qingyao Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork,
+   Lars J Jensen, Christian von Mering, The STRING database in 2025:
+   protein networks with directionality of regulation, Nucleic Acids
+   Research, Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+   https://doi.org/10.1093/nar/gkae1113
   \item \href{https://string-db.org/help/api/}{STRING API Documentation}
   \item
   \href{https://string-db.org/cgi/about?footer_active_subpage=references}{

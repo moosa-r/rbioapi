@@ -9,6 +9,12 @@ rba_string_enrichment(
   species = NULL,
   background = NULL,
   split_df = TRUE,
+  add_scores = FALSE,
+  max_fdr = NULL,
+  min_gene_count = NULL,
+  min_strength = NULL,
+  min_signal = NULL,
+  merge_similarity = NULL,
   ...
 )
 }
@@ -31,14 +37,35 @@ term p-values. Only STRING IDs are accepted. See
 \item{split_df}{Logical: (default = \code{TRUE}) Split results into a list
 of data frames by \code{category}; otherwise, return one data frame.}
 
+\item{add_scores}{Logical: (default = \code{FALSE}) Include \code{strength}
+(log10 of the observed-to-expected gene-count ratio) and \code{signal}
+(a size-aware score combining that ratio and enrichment significance).}
+
+\item{max_fdr}{Numeric: (optional) Maximum FDR, greater than 0 and no greater
+than 1. Only terms meeting this threshold are returned.}
+
+\item{min_gene_count}{Numeric: (optional) Minimum positive whole number of
+input genes assigned to a returned term.}
+
+\item{min_strength}{Numeric: (optional) Minimum enrichment strength.}
+
+\item{min_signal}{Numeric: (optional) Minimum enrichment signal.}
+
+\item{merge_similarity}{Numeric: (optional) Overlap threshold for merging
+terms based on their assigned input-gene sets, greater than 0 and no
+greater than 1. The most significant term is retained. A value of 1
+merges only identical gene sets. Omit to retain unmerged terms.}
+
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
 }
 \value{
-A data frame in which each row is an enriched term with a raw p-value
-  below 0.1 and the columns contain the term category, description, gene
-  counts, p-value, FDR, and other pertinent information. If
-  \code{split_df = TRUE}, a list of data frames split by category is returned.
+A data frame in which each row is an enriched term and the columns
+  contain the term category, description, gene counts, p-value, FDR, and other
+  pertinent information. If \code{split_df = TRUE}, a list of data frames
+  split by category is returned.
+  \code{add_scores = TRUE} adds numeric \code{strength} and \code{signal}
+  columns. If no terms are returned, the result is a zero-row data frame.
 }
 \description{
 STRING cross-references proteins with several annotation resources. (See
@@ -51,7 +78,8 @@ STRING cross-references proteins with several annotation resources. (See
 \details{
 STRING currently returns enrichment results from Gene
   Ontology (GO), KEGG pathways, UniProt Keywords, PubMed publications, Pfam
-  domains, InterPro domains, and SMART domains.
+  domains, InterPro domains, SMART domains, and other resources including
+  GWAS Catalog and Hallmark gene sets. Category availability depends on species.
   \cr STRING returns only terms with a raw p-value below 0.1. To retrieve
   annotations without filtering by enrichment p-value, use
   \code{\link{rba_string_annotations}}.
@@ -66,17 +94,29 @@ STRING currently returns enrichment results from Gene
 \donttest{
 rba_string_enrichment(ids = c("TP53", "TNF", "EGFR"), species = 9606)
 }
+\donttest{
+## Include enrichment scores, filter results, and merge similar terms
+rba_string_enrichment(
+    ids = c("TP53", "MDM2", "CDKN1A", "BRCA1", "CDK1", "CDK2"),
+    species = 9606,
+    add_scores = TRUE,
+    max_fdr = 0.05,
+    min_gene_count = 2,
+    merge_similarity = 0.8,
+    split_df = FALSE
+)
+}
 
 }
 \references{
 \itemize{
-  \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
-   Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang,
-   Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian
-   von Mering, The STRING database in 2023: protein–protein association
-   networks and functional enrichment analyses for any sequenced genome of
-   interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023,
-   Pages D638–D646, https://doi.org/10.1093/nar/gkac1000
+  \item Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca
+   Kirsch, Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso,
+   Qingyao Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork,
+   Lars J Jensen, Christian von Mering, The STRING database in 2025:
+   protein networks with directionality of regulation, Nucleic Acids
+   Research, Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+   https://doi.org/10.1093/nar/gkae1113
   \item \href{https://string-db.org/help/api/}{STRING API Documentation}
   \item
   \href{https://string-db.org/cgi/about?footer_active_subpage=references}{

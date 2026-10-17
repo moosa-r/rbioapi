@@ -45,6 +45,9 @@ co-expression, and computational predictions. rbioapi provides a consistent R
 interface to STRING's mapping, network, homology, annotation, and enrichment
 API resources.
 
+Use `rba_string_version()` to check the STRING release and stable address used
+by rbioapi.
+
 ------------------------------------------------------------------------
 
 # The `species` argument {#note-about-species-argument}
@@ -130,11 +133,16 @@ proteins_mapped <- proteins_mapped_df$stringId
 
 You can retrieve interactions among the proteins in your set, together with the
 scores for each STRING evidence channel. Use `required_score` to set the minimum
-interaction score and `network_type` to select functional or physical
+interaction score and `network_type` to select functional, physical, or regulatory
 associations.
 
 See the Value section of the `rba_string_interactions_network()` manual for
 descriptions of the returned columns.
+
+Regulatory requests return directed source-to-target records with their own
+evidence scores, `combined_score`, and `sign` (`"pos"`, `"neg"`, or `"n/a"`).
+The request threshold uses the 0 to 1000 scale; returned confidence scores use
+the 0 to 1 scale.
 
 ```{r rba_string_interactions_network}
 int_net <- rba_string_interactions_network(
@@ -174,6 +182,10 @@ tcr_terms <- rba_string_functional_terms(
 )
 ```
 
+The `proteinCount` column contains the complete number of proteins annotated
+with each term, while `preferredNames` and `stringIds` are returned as
+list-columns.
+
 The first match for this search is `GO:0050852`, which identifies the GO term
 "T cell receptor signaling pathway":
 
@@ -186,9 +198,34 @@ term_net <- rba_string_interactions_network(
 )
 ```
 
-The `proteinCount` column contains the complete number of proteins annotated
-with each term, while `preferredNames` and `stringIds` are returned as
-list-columns. The `ids` and `network_term_id` input modes cannot be combined.
+The `ids` and `network_term_id` input modes cannot be combined.
+
+To retrieve regulatory relationships or overlay them on a functional network:
+
+```{r rba_string_typed_network, eval=FALSE}
+int_net_regulatory <- rba_string_interactions_network(
+  ids = c("TP53", "MDM2", "CDKN1A"),
+  species = 9606,
+  network_type = "regulatory"
+)
+
+int_net_typed <- rba_string_interactions_network(
+  ids = c("TP53", "MDM2", "CDKN1A"),
+  species = 9606,
+  network_flavor = "typed"
+)
+
+## Compare functional confidence with regulation in each row's direction
+int_net_typed[, c("preferredName_A", "preferredName_B",
+                  "functional_combined_score", "regulatory_combined_score", "sign")]
+```
+
+Typed output combines functional, physical, and regulatory scores. Each
+functional pair is returned in both orientations. Physical scores are symmetric,
+while regulatory scores and signs describe the direction from `stringId_A` to
+`stringId_B`. Missing or below-threshold typed scores are numeric `NA`. Setting
+`typed_physical_edges = FALSE` or `typed_regulatory_edges = FALSE` fills that
+overlay's score columns with `NA`. Typed flavor requires a functional network.
 
 ------------------------------------------------------------------------
 
@@ -197,6 +234,10 @@ list-columns. The `ids` and `network_term_id` input modes cannot be combined.
 The previous example returned interactions among the input proteins. To retrieve
 proteins that interact with one or more input proteins, including proteins
 outside the input set, use `rba_string_interaction_partners()`:
+
+This function also accepts regulatory and typed requests. `limit` caps the
+number of partners per input protein, so directed or typed output can have more
+rows than the specified limit.
 
 ```{r rba_string_interaction_partners}
 ## This example uses one protein (CD40), but `ids` can contain multiple proteins
@@ -233,8 +274,10 @@ STRING can render the interaction network as a static image. The
 the network contents and appearance; see the function manual for details. It
 also supports the same `network_term_id` input mode described above.
 
+First, visualize the mapped proteins using the confidence flavor:
+
 ```{r rba_string_network_image_ex1, fig.show='hide'}
-## Example 1:
+## Network images - Example 1:
 graph_ppi1 <- rba_string_network_image(
   ids = proteins_mapped,
   image_format = "image",
@@ -245,28 +288,18 @@ graph_ppi1 <- rba_string_network_image(
 )
 ```
 
-For example, the network for a functional term can be rendered with:
-
-```{r rba_string_network_image_term, eval=FALSE}
-term_image <- rba_string_network_image(
-  ids = NULL,
-  network_term_id = "GO:0050852",
-  species = 9606,
-  required_score = 900,
-  save_image = FALSE
-)
-```
-
 ```{r rba_string_network_image_ex1_image, echo=FALSE, fig.cap="Network images - Example 1", fig.align='center', fig.width=7}
-if (is.array(graph_ppi1)) {
+if (is.array(graph_ppi1) && length(graph_ppi1) > 0L) {
   grid::grid.raster(graph_ppi1, just = "center")
 } else {
   print("Vignette building failed. It is probably because the web service was down during the building.")
 }
 ```
 
+We can add neighboring proteins and use the actions flavor:
+
 ```{r rba_string_network_image_ex2, fig.show='hide'}
-## Example 2:
+## Network images - Example 2:
 graph_ppi2 <- rba_string_network_image(
   ids = proteins_mapped,
   image_format = "image",
@@ -280,8 +313,53 @@ graph_ppi2 <- rba_string_network_image(
 ```
 
 ```{r rba_string_network_image_ex2_image, echo=FALSE, fig.cap="Network images - Example 2", fig.align='center', fig.width=7}
-if (is.array(graph_ppi2)) {
+if (is.array(graph_ppi2) && length(graph_ppi2) > 0L) {
   grid::grid.raster(graph_ppi2, just = "center")
+} else {
+  print("Vignette building failed. It is probably because the web service was down during the building.")
+}
+```
+
+Network images also support regulatory and typed networks. The following example
+displays functional, physical, and directed regulatory relationships, including
+regulatory signs:
+
+```{r rba_string_network_image_typed, fig.show='hide'}
+## Network images - Example 3:
+typed_image <- rba_string_network_image(
+  ids = c("TP53", "MDM2", "CDKN1A"),
+  species = 9606,
+  network_flavor = "typed",
+  typed_physical_edges = TRUE,
+  show_regulatory_signs = TRUE,
+  save_image = FALSE
+)
+```
+
+```{r rba_string_network_image_typed_image, echo=FALSE, fig.cap="Network images - Example 3", fig.align='center', fig.width=7}
+if (is.array(typed_image) && length(typed_image) > 0L) {
+  grid::grid.raster(typed_image, just = "center")
+} else {
+  print("Vignette building failed. It is probably because the web service was down during the building.")
+}
+```
+
+Alternatively, render the network for a functional term:
+
+```{r rba_string_network_image_term, fig.show='hide'}
+## Network images - Example 4:
+term_image <- rba_string_network_image(
+  ids = NULL,
+  network_term_id = "GO:0050852",
+  species = 9606,
+  required_score = 900,
+  save_image = FALSE
+)
+```
+
+```{r rba_string_network_image_term_image, echo=FALSE, fig.cap="Network images - Example 4", fig.align='center', fig.width=7}
+if (is.array(term_image) && length(term_image) > 0L) {
+  grid::grid.raster(term_image, just = "center")
 } else {
   print("Vignette building failed. It is probably because the web service was down during the building.")
 }
@@ -293,7 +371,7 @@ if (is.array(graph_ppi2)) {
 
 STRING supports two complementary enrichment analyses: functional enrichment
 and protein-protein interaction enrichment. See the
-[STRING publication](https://doi.org/10.1093/nar/gkac1000) for methodological
+[STRING publication](https://doi.org/10.1093/nar/gkae1113) for methodological
 details.
 
 ## Functional enrichment {#functional-enrichment}
@@ -317,6 +395,25 @@ inspect that structure with `str()`:
 
 ```{r rba_string_enrichment_str}
 str(enriched, max.level = 1)
+```
+
+Set `add_scores = TRUE` to include `strength` (the log10 observed-to-expected
+gene-count ratio) and `signal` (a size-aware enrichment score). The following
+example filters the results and merges terms with sufficiently overlapping
+input-gene sets:
+
+```{r rba_string_enrichment_filters, eval=FALSE}
+enriched_filtered <- rba_string_enrichment(
+  ids = proteins_mapped,
+  species = 9606,
+  add_scores = TRUE,
+  max_fdr = 0.05,
+  min_gene_count = 3,
+  min_strength = 0.5,
+  min_signal = 0.5,
+  merge_similarity = 0.8,
+  split_df = FALSE
+)
 ```
 
 Let us see the "KEGG" results as an example. Below, we can see which terms of the [KEGG pathways database](https://www.genome.jp/kegg/pathway.html) were over-represented:
@@ -349,6 +446,7 @@ visualizes the KEGG enrichment for the same protein set:
 
 
 ```{r rba_string_enrichment_plot, fig.show='hide'}
+## Enrichment plots - Example 1
 graph_enrich <- rba_string_enrichment_image(
   ids = proteins_mapped,
   species = 9606,
@@ -359,13 +457,47 @@ graph_enrich <- rba_string_enrichment_image(
 )
 ```
 
-```{r rba_string_enrichment_plot_image, echo=FALSE, fig.cap="Visualization of enrichment analysis results", fig.align='center', fig.width=7}
-if (is.array(graph_enrich)) {
+```{r rba_string_enrichment_plot_image, echo=FALSE, fig.cap="Enrichment plots - Example 1", fig.align='center', fig.width=7}
+if (is.array(graph_enrich) && length(graph_enrich) > 0L) {
   grid::grid.raster(graph_enrich, just = "center")
+} else if (is.array(graph_enrich)) {
+  print("STRING returned no enrichment plot.")
 } else {
   print("Vignette building failed. It is probably because the web service was down during the building.")
 }
 ```
+
+`x_axis` selects the displayed quantity, while `sort_by` independently selects
+and orders terms. This example displays Hallmark enrichment strength in a
+horizontal bar plot, with terms selected and ordered by FDR:
+
+```{r rba_string_enrichment_barplot, fig.show='hide'}
+## Enrichment plots - Example 2
+graph_enrich_bar <- rba_string_enrichment_image(
+  ids = proteins_mapped,
+  species = 9606,
+  category = "Hallmark",
+  x_axis = "strength",
+  sort_by = "fdr",
+  graph_type = "barplot",
+  color_palette = "red_blue",
+  save_image = FALSE
+)
+```
+
+```{r rba_string_enrichment_barplot_image, echo=FALSE, fig.cap="Enrichment plots - Example 2", fig.align='center', fig.width=7}
+if (is.array(graph_enrich_bar) && length(graph_enrich_bar) > 0L) {
+  grid::grid.raster(graph_enrich_bar, just = "center")
+} else if (is.array(graph_enrich_bar)) {
+  print("STRING returned no enrichment plot.")
+} else {
+  print("Vignette building failed. It is probably because the web service was down during the building.")
+}
+```
+
+The plot accepts the same enrichment filters and `merge_similarity` as the
+tabular endpoint. `group_by_similarity` controls visual grouping separately;
+omitting it uses STRING's default of 0.8.
 
 ## Protein-protein interaction enrichment {#protein-protein-interaction-enrichment}
 
@@ -430,7 +562,7 @@ Some rbioapi STRING functions were not covered in this vignette, please check th
 
 To cite STRING (Please see <https://string-db.org/cgi/about?footer_active_subpage=references>):
 
--   Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian von Mering, The STRING database in 2023: protein–protein association networks and functional enrichment analyses for any sequenced genome of interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023, Pages D638–D646, <https://doi.org/10.1093/nar/gkac1000>
+-   Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca Kirsch, Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso, Qingyao Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian von Mering, The STRING database in 2025: protein networks with directionality of regulation, Nucleic Acids Research, Volume 53, Issue D1, 6 January 2025, Pages D730–D737, <https://doi.org/10.1093/nar/gkae1113>
 
 To cite rbioapi:
 

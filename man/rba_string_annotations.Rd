@@ -24,8 +24,7 @@ NCBI Taxonomy identifier}; Human Taxonomy ID is 9606.
 
 \item{allow_pubmed}{Logical: (default = \code{FALSE}) Include PubMed
 annotations. These annotations are excluded by default because many
-publications may be assigned to each protein. This argument is ignored
-when \code{only_pubmed = TRUE}.}
+publications may be assigned to each protein.}
 
 \item{split_df}{Logical: (default = \code{TRUE}) Split results into a list
 of data frames by \code{category}; otherwise, return one data frame.}
@@ -51,9 +50,10 @@ STRING cross-references proteins with several annotation resources. This
 }
 \details{
 STRING currently retrieves annotations based on Gene Ontology (GO), UniProt
-  Keywords, PubMed publications, Pfam domains, InterPro domains, and SMART
-  domains. KEGG annotations are unavailable from this endpoint because of
-  KEGG licensing restrictions.
+  Keywords, PubMed publications, Pfam domains, InterPro domains, SMART
+  domains, and other resources including GWAS Catalog and Hallmark gene
+  sets. Category availability depends on species. KEGG annotations are
+  unavailable from this endpoint because of KEGG licensing restrictions.
   \cr This function returns annotations without enrichment filtering. To
   perform enrichment and retrieve only enriched terms, use
   \code{\link{rba_string_enrichment}}.
@@ -79,13 +79,13 @@ rba_string_annotations(
 }
 \references{
 \itemize{
-  \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
-   Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang,
-   Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian
-   von Mering, The STRING database in 2023: protein–protein association
-   networks and functional enrichment analyses for any sequenced genome of
-   interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023,
-   Pages D638–D646, https://doi.org/10.1093/nar/gkac1000
+  \item Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca
+   Kirsch, Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso,
+   Qingyao Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork,
+   Lars J Jensen, Christian von Mering, The STRING database in 2025:
+   protein networks with directionality of regulation, Nucleic Acids
+   Research, Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+   https://doi.org/10.1093/nar/gkae1113
   \item \href{https://string-db.org/help/api/}{STRING API Documentation}
   \item
   \href{https://string-db.org/cgi/about?footer_active_subpage=references}{

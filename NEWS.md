@@ -2,6 +2,16 @@
 
 ## New features
 
+* STRING network and interaction-partner functions now support directed
+  regulatory networks and typed functional networks, with controls for
+  physical and regulatory overlays. Network images can also hide regulatory
+  signs while preserving edge direction.
+
+* `rba_string_enrichment()` gains enrichment scores, filtering, and term
+  merging by gene-set overlap. `rba_string_enrichment_image()` gains
+  corresponding filters and term merging, independent axis and sorting
+  controls, bar plots, GWAS and Hallmark categories, and the `red_blue` palette.
+
 * `rba_metadata()` retrieves optional request metadata attached to rbioapi
   results. Metadata can be enabled for one call with `metadata = TRUE` or for
   all later calls with `rba_options(metadata = TRUE)`. It records the rbioapi
@@ -61,6 +71,13 @@
 
 ## Changes to existing behavior
 
+* STRING requests now use the stable 12.5 address. Ordinary functional and
+  physical network schemas and default enrichment columns are unchanged,
+  but updated database evidence and annotations can change scores and results.
+  Enrichment figures now enforce the documented limit of 100 displayed terms.
+  Empty PNG enrichment figures, including high-resolution images, now return
+  a zero-length numeric image array instead of `NULL`.
+
 * rbioapi now rejects `NA` and `NaN` unless a function explicitly permits
   them. Numeric identifiers, counts, sequence positions, page numbers, and
   retry counts must be finite whole numbers where applicable. Invalid values
@@ -116,6 +133,8 @@
   input order. Functions subject to STRING's species limit now require
   `species` for more than 10 unique IDs. Empty enrichment results and image
   file names are also handled correctly.
+  Best-hit homology now correctly handles multiple target species.
+  Enrichment-figure grouping now accepts all documented tenths from 0.1 to 1.
 
 * PANTHER requests now follow the current service limits. Mapping accepts up to
   5,000 IDs, enrichment checks the 100,000-ID limit, and TreeGrafter accepts

@@ -22,6 +22,9 @@ rba_string_network_image(
   node_labels_center = FALSE,
   node_labels_font_size = 12,
   network_term_id = NULL,
+  typed_physical_edges = TRUE,
+  typed_regulatory_edges = TRUE,
+  show_regulatory_signs = TRUE,
   ...
 )
 }
@@ -65,13 +68,17 @@ confidence thresholds are 150 (low), 400 (medium), 700 (high), and 900
 supporting each interaction.
 \item "confidence": Edge thickness indicates the interaction confidence
 score.
-\item "actions": Edge shape indicates the predicted mode of action.}}
+\item "actions": Edge shape indicates the predicted mode of action.
+\item "typed": Overlay physical and directed regulatory relationships on
+a functional network. Requires \code{network_type = "functional"}.}}
 
 \item{network_type}{Character: (default = \code{"functional"}) One of:\itemize{
 \item "functional": (default) Edges indicate both physical and
 functional associations.
 \item "physical": Edges indicate that two proteins have a physical
-interaction or are parts of a complex.}}
+interaction or are parts of a complex.
+\item "regulatory": Directed edges indicate regulation from a source
+protein to a target protein.}}
 
 \item{hide_node_labels}{Logical: (default = \code{FALSE}) Hide protein names from
 the image.}
@@ -91,13 +98,23 @@ instead of the default 3D design.}
 \item{node_labels_center}{Logical: (default = \code{FALSE}) Center protein labels
 on the nodes.}
 
-\item{node_labels_font_size}{Numeric: (default = \code{12}) (between 5 and 50; default = 12):
-Font size of the protein node labels.}
+\item{node_labels_font_size}{Numeric: (default = \code{12}) Font size of the
+protein node labels, between 5 and 50.}
 
 \item{network_term_id}{Character: (optional) A functional term identifier (e.g. a Gene
 Ontology, KEGG, or Reactome identifier). Instead of using proteins supplied
 through \code{ids}, STRING constructs the network from proteins annotated
 with the specified term. Set \code{ids = NULL} and supply \code{species}.}
+
+\item{typed_physical_edges}{Logical: (default = \code{TRUE}) Include physical
+relationships when \code{network_flavor = "typed"}.}
+
+\item{typed_regulatory_edges}{Logical: (default = \code{TRUE}) Include
+regulatory relationships when \code{network_flavor = "typed"}.}
+
+\item{show_regulatory_signs}{Logical: (default = \code{TRUE}) Display positive
+and negative regulatory effects when available. Setting this to
+\code{FALSE} preserves direction but hides the regulatory effect.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
@@ -145,17 +162,37 @@ rba_string_network_image(
     save_image = FALSE
 )
 }
+\dontrun{
+## Hide regulatory signs while preserving edge direction
+rba_string_network_image(
+    ids = c("TP53", "MDM2", "CDKN1A"),
+    species = 9606,
+    network_type = "regulatory",
+    show_regulatory_signs = FALSE,
+    save_image = FALSE
+)
+}
+\dontrun{
+## Show the physical overlay on a typed functional network
+rba_string_network_image(
+    ids = c("TP53", "MDM2", "CDKN1A"),
+    species = 9606,
+    network_flavor = "typed",
+    typed_regulatory_edges = FALSE,
+    save_image = FALSE
+)
+}
 
 }
 \references{
 \itemize{
-  \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
-   Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang,
-   Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian
-   von Mering, The STRING database in 2023: protein–protein association
-   networks and functional enrichment analyses for any sequenced genome of
-   interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023,
-   Pages D638–D646, https://doi.org/10.1093/nar/gkac1000
+  \item Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca
+   Kirsch, Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso,
+   Qingyao Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork,
+   Lars J Jensen, Christian von Mering, The STRING database in 2025:
+   protein networks with directionality of regulation, Nucleic Acids
+   Research, Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+   https://doi.org/10.1093/nar/gkae1113
   \item \href{https://string-db.org/help/api/}{STRING API Documentation}
   \item
   \href{https://string-db.org/cgi/about?footer_active_subpage=references}{

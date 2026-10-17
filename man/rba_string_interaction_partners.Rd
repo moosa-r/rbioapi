@@ -10,6 +10,9 @@ rba_string_interaction_partners(
   required_score = NULL,
   network_type = "functional",
   limit = NULL,
+  network_flavor = NULL,
+  typed_physical_edges = TRUE,
+  typed_regulatory_edges = TRUE,
   ...
 )
 }
@@ -32,10 +35,25 @@ Common confidence thresholds are 150 (low), 400 (medium), 700 (high), and
 \item "functional": (default) Edges indicate both physical and
 functional associations.
 \item "physical": Edges indicate that two proteins have a physical
-interaction or are parts of a complex.}}
+interaction or are parts of a complex.
+\item "regulatory": Directed edges indicate regulation from a source
+protein to a target protein.}}
 
 \item{limit}{Numeric: (optional) Maximum number of interaction partners returned for
-each input protein, ordered by confidence.}
+each input protein, ordered by confidence. This limits partners rather
+than response rows; directed or typed results can contain more rows.}
+
+\item{network_flavor}{Character: (optional) Set to \code{"typed"} to retrieve
+functional, physical, and directional regulatory scores in one response.
+Requires \code{network_type = "functional"}. Omit for the ordinary schema.}
+
+\item{typed_physical_edges}{Logical: (default = \code{TRUE}) Include physical
+scores in a typed response. If \code{FALSE}, their columns contain
+missing values.}
+
+\item{typed_regulatory_edges}{Logical: (default = \code{TRUE}) Include
+regulatory scores in a typed response. If \code{FALSE}, their columns
+contain missing values.}
 
 \item{...}{rbioapi option(s). See \code{\link{rba_options}}'s
 arguments manual for more information on available options.}
@@ -43,6 +61,9 @@ arguments manual for more information on available options.}
 \value{
 A data frame in which each row is a network interaction and the
   columns contain interactor information and interaction scores.
+  Regulatory and typed requests use the corresponding schemas described
+  in \code{\link{rba_string_interactions_network}}. Missing typed evidence
+  scores are numeric \code{NA}.
 }
 \description{
 This function retrieves STRING interactions involving any of your input
@@ -73,17 +94,26 @@ rba_string_interaction_partners(ids = c("9606.ENSP00000269305",
     species = 9606,
     required_score = 700)
 }
+\donttest{
+## Limit partners per input protein; directed results can contain more rows
+rba_string_interaction_partners(
+    ids = "TP53",
+    species = 9606,
+    network_type = "regulatory",
+    limit = 5
+)
+}
 
 }
 \references{
 \itemize{
-  \item Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
-   Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang,
-   Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian
-   von Mering, The STRING database in 2023: protein–protein association
-   networks and functional enrichment analyses for any sequenced genome of
-   interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023,
-   Pages D638–D646, https://doi.org/10.1093/nar/gkac1000
+  \item Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca
+   Kirsch, Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso,
+   Qingyao Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork,
+   Lars J Jensen, Christian von Mering, The STRING database in 2025:
+   protein networks with directionality of regulation, Nucleic Acids
+   Research, Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+   https://doi.org/10.1093/nar/gkae1113
   \item \href{https://string-db.org/help/api/}{STRING API Documentation}
   \item
   \href{https://string-db.org/cgi/about?footer_active_subpage=references}{
