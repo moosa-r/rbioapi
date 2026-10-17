@@ -80,6 +80,12 @@
 <span>  species <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  background <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  split_df <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  add_scores <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  max_fdr <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  min_gene_count <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  min_strength <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  min_signal <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  merge_similarity <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -114,6 +120,37 @@ term p-values. Only STRING IDs are accepted. See
 of data frames by <code>category</code>; otherwise, return one data frame.</p></dd>
 
 
+<dt id="arg-add-scores">add_scores<a class="anchor" aria-label="anchor" href="#arg-add-scores"></a></dt>
+<dd><p>Logical: (default = <code>FALSE</code>) Include <code>strength</code>
+(log10 of the observed-to-expected gene-count ratio) and <code>signal</code>
+(a size-aware score combining that ratio and enrichment significance).</p></dd>
+
+
+<dt id="arg-max-fdr">max_fdr<a class="anchor" aria-label="anchor" href="#arg-max-fdr"></a></dt>
+<dd><p>Numeric: (optional) Maximum FDR, greater than 0 and no greater
+than 1. Only terms meeting this threshold are returned.</p></dd>
+
+
+<dt id="arg-min-gene-count">min_gene_count<a class="anchor" aria-label="anchor" href="#arg-min-gene-count"></a></dt>
+<dd><p>Numeric: (optional) Minimum positive whole number of
+input genes assigned to a returned term.</p></dd>
+
+
+<dt id="arg-min-strength">min_strength<a class="anchor" aria-label="anchor" href="#arg-min-strength"></a></dt>
+<dd><p>Numeric: (optional) Minimum enrichment strength.</p></dd>
+
+
+<dt id="arg-min-signal">min_signal<a class="anchor" aria-label="anchor" href="#arg-min-signal"></a></dt>
+<dd><p>Numeric: (optional) Minimum enrichment signal.</p></dd>
+
+
+<dt id="arg-merge-similarity">merge_similarity<a class="anchor" aria-label="anchor" href="#arg-merge-similarity"></a></dt>
+<dd><p>Numeric: (optional) Overlap threshold for merging
+terms based on their assigned input-gene sets, greater than 0 and no
+greater than 1. The most significant term is retained. A value of 1
+merges only identical gene sets. Omit to retain unmerged terms.</p></dd>
+
+
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>rbioapi option(s). See <code><a href="rba_options.html">rba_options</a></code>'s
 arguments manual for more information on available options.</p></dd>
@@ -121,16 +158,19 @@ arguments manual for more information on available options.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A data frame in which each row is an enriched term with a raw p-value
-  below 0.1 and the columns contain the term category, description, gene
-  counts, p-value, FDR, and other pertinent information. If
-  <code>split_df = TRUE</code>, a list of data frames split by category is returned.</p>
+    <p>A data frame in which each row is an enriched term and the columns
+  contain the term category, description, gene counts, p-value, FDR, and other
+  pertinent information. If <code>split_df = TRUE</code>, a list of data frames
+  split by category is returned.
+  <code>add_scores = TRUE</code> adds numeric <code>strength</code> and <code>signal</code>
+  columns. If no terms are returned, the result is a zero-row data frame.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>STRING currently returns enrichment results from Gene
   Ontology (GO), KEGG pathways, UniProt Keywords, PubMed publications, Pfam
-  domains, InterPro domains, and SMART domains.
+  domains, InterPro domains, SMART domains, and other resources including
+  GWAS Catalog and Hallmark gene sets. Category availability depends on species.
   <br> STRING returns only terms with a raw p-value below 0.1. To retrieve
   annotations without filtering by enrichment p-value, use
   <code><a href="rba_string_annotations.html">rba_string_annotations</a></code>.</p>
@@ -145,13 +185,13 @@ arguments manual for more information on available options.</p></dd>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
 
-<ul><li><p>Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
-   Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang,
-   Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian
-   von Mering, The STRING database in 2023: protein–protein association
-   networks and functional enrichment analyses for any sequenced genome of
-   interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023,
-   Pages D638–D646, https://doi.org/10.1093/nar/gkac1000</p></li>
+<ul><li><p>Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca
+   Kirsch, Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso,
+   Qingyao Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork,
+   Lars J Jensen, Christian von Mering, The STRING database in 2025:
+   protein networks with directionality of regulation, Nucleic Acids
+   Research, Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+   https://doi.org/10.1093/nar/gkae1113</p></li>
 <li><p><a href="https://string-db.org/help/api/" class="external-link">STRING API Documentation</a></p></li>
 <li><p><a href="https://string-db.org/cgi/about?footer_active_subpage=references" class="external-link">
   Citations note on STRING website</a></p></li>
@@ -188,6 +228,18 @@ arguments manual for more information on available options.</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># \donttest{</span></span>
 <span><span class="fu">rba_string_enrichment</span><span class="op">(</span>ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"TNF"</span>, <span class="st">"EGFR"</span><span class="op">)</span>, species <span class="op">=</span> <span class="fl">9606</span><span class="op">)</span></span>
+<span><span class="co"># }</span></span>
+<span><span class="co"># \donttest{</span></span>
+<span><span class="co">## Include enrichment scores, filter results, and merge similar terms</span></span>
+<span><span class="fu">rba_string_enrichment</span><span class="op">(</span></span>
+<span>    ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"MDM2"</span>, <span class="st">"CDKN1A"</span>, <span class="st">"BRCA1"</span>, <span class="st">"CDK1"</span>, <span class="st">"CDK2"</span><span class="op">)</span>,</span>
+<span>    species <span class="op">=</span> <span class="fl">9606</span>,</span>
+<span>    add_scores <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    max_fdr <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>    min_gene_count <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>    merge_similarity <span class="op">=</span> <span class="fl">0.8</span>,</span>
+<span>    split_df <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co"># }</span></span>
 <span></span></code></pre></div>
     </div>

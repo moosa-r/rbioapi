@@ -9,6 +9,10 @@ databases, text mining, co-expression, and computational predictions.
 rbioapi provides a consistent R interface to STRING’s mapping, network,
 homology, annotation, and enrichment API resources.
 
+Use
+[`rba_string_version()`](https://rbioapi.moosa-r.com/reference/rba_string_version.md)
+to check the STRING release and stable address used by rbioapi.
+
 ------------------------------------------------------------------------
 
 ## The `species` argument
@@ -59,11 +63,16 @@ proteins_mapped <- proteins_mapped_df$stringId
 You can retrieve interactions among the proteins in your set, together
 with the scores for each STRING evidence channel. Use `required_score`
 to set the minimum interaction score and `network_type` to select
-functional or physical associations.
+functional, physical, or regulatory associations.
 
 See the Value section of the
 [`rba_string_interactions_network()`](https://rbioapi.moosa-r.com/reference/rba_string_interactions_network.md)
 manual for descriptions of the returned columns.
+
+Regulatory requests return directed source-to-target records with their
+own evidence scores, `combined_score`, and `sign` (`"pos"`, `"neg"`, or
+`"n/a"`). The request threshold uses the 0 to 1000 scale; returned
+confidence scores use the 0 to 1 scale.
 
 ``` r
 
@@ -89,6 +98,10 @@ tcr_terms <- rba_string_functional_terms(
 )
 ```
 
+The `proteinCount` column contains the complete number of proteins
+annotated with each term, while `preferredNames` and `stringIds` are
+returned as list-columns.
+
 The first match for this search is `GO:0050852`, which identifies the GO
 term “T cell receptor signaling pathway”:
 
@@ -102,10 +115,37 @@ term_net <- rba_string_interactions_network(
 )
 ```
 
-The `proteinCount` column contains the complete number of proteins
-annotated with each term, while `preferredNames` and `stringIds` are
-returned as list-columns. The `ids` and `network_term_id` input modes
-cannot be combined.
+The `ids` and `network_term_id` input modes cannot be combined.
+
+To retrieve regulatory relationships or overlay them on a functional
+network:
+
+``` r
+
+int_net_regulatory <- rba_string_interactions_network(
+  ids = c("TP53", "MDM2", "CDKN1A"),
+  species = 9606,
+  network_type = "regulatory"
+)
+
+int_net_typed <- rba_string_interactions_network(
+  ids = c("TP53", "MDM2", "CDKN1A"),
+  species = 9606,
+  network_flavor = "typed"
+)
+
+## Compare functional confidence with regulation in each row's direction
+int_net_typed[, c("preferredName_A", "preferredName_B",
+                  "functional_combined_score", "regulatory_combined_score", "sign")]
+```
+
+Typed output combines functional, physical, and regulatory scores. Each
+functional pair is returned in both orientations. Physical scores are
+symmetric, while regulatory scores and signs describe the direction from
+`stringId_A` to `stringId_B`. Missing or below-threshold typed scores
+are numeric `NA`. Setting `typed_physical_edges = FALSE` or
+`typed_regulatory_edges = FALSE` fills that overlay’s score columns with
+`NA`. Typed flavor requires a functional network.
 
 ------------------------------------------------------------------------
 
@@ -115,6 +155,10 @@ The previous example returned interactions among the input proteins. To
 retrieve proteins that interact with one or more input proteins,
 including proteins outside the input set, use
 [`rba_string_interaction_partners()`](https://rbioapi.moosa-r.com/reference/rba_string_interaction_partners.md):
+
+This function also accepts regulatory and typed requests. `limit` caps
+the number of partners per input protein, so directed or typed output
+can have more rows than the specified limit.
 
 ``` r
 
@@ -136,9 +180,11 @@ function supports several options for controlling the network contents
 and appearance; see the function manual for details. It also supports
 the same `network_term_id` input mode described above.
 
+First, visualize the mapped proteins using the confidence flavor:
+
 ``` r
 
-## Example 1:
+## Network images - Example 1:
 graph_ppi1 <- rba_string_network_image(
   ids = proteins_mapped,
   image_format = "image",
@@ -149,27 +195,16 @@ graph_ppi1 <- rba_string_network_image(
 )
 ```
 
-For example, the network for a functional term can be rendered with:
-
-``` r
-
-term_image <- rba_string_network_image(
-  ids = NULL,
-  network_term_id = "GO:0050852",
-  species = 9606,
-  required_score = 900,
-  save_image = FALSE
-)
-```
-
 ![Network images - Example
 1](rbioapi_string_files/figure-html/rba_string_network_image_ex1_image-1.png)
 
 Network images - Example 1
 
+We can add neighboring proteins and use the actions flavor:
+
 ``` r
 
-## Example 2:
+## Network images - Example 2:
 graph_ppi2 <- rba_string_network_image(
   ids = proteins_mapped,
   image_format = "image",
@@ -187,13 +222,54 @@ graph_ppi2 <- rba_string_network_image(
 
 Network images - Example 2
 
+Network images also support regulatory and typed networks. The following
+example displays functional, physical, and directed regulatory
+relationships, including regulatory signs:
+
+``` r
+
+## Network images - Example 3:
+typed_image <- rba_string_network_image(
+  ids = c("TP53", "MDM2", "CDKN1A"),
+  species = 9606,
+  network_flavor = "typed",
+  typed_physical_edges = TRUE,
+  show_regulatory_signs = TRUE,
+  save_image = FALSE
+)
+```
+
+![Network images - Example
+3](rbioapi_string_files/figure-html/rba_string_network_image_typed_image-1.png)
+
+Network images - Example 3
+
+Alternatively, render the network for a functional term:
+
+``` r
+
+## Network images - Example 4:
+term_image <- rba_string_network_image(
+  ids = NULL,
+  network_term_id = "GO:0050852",
+  species = 9606,
+  required_score = 900,
+  save_image = FALSE
+)
+```
+
+![Network images - Example
+4](rbioapi_string_files/figure-html/rba_string_network_image_term_image-1.png)
+
+Network images - Example 4
+
 ------------------------------------------------------------------------
 
 ## Enrichment analysis using STRING
 
 STRING supports two complementary enrichment analyses: functional
 enrichment and protein-protein interaction enrichment. See the [STRING
-publication](https://doi.org/10.1093/nar/gkac1000) for methodological
+publication](https://doi.org/10.1093/nar/gkae1113) for methodological
 details.
 
 ### Functional enrichment
@@ -221,21 +297,43 @@ can inspect that structure with
 ``` r
 
 str(enriched, max.level = 1)
-#> List of 14
+#> List of 16
 #>  $ COMPARTMENTS     :'data.frame':   25 obs. of  10 variables:
-#>  $ Component        :'data.frame':   17 obs. of  10 variables:
-#>  $ DISEASES         :'data.frame':   11 obs. of  10 variables:
-#>  $ Function         :'data.frame':   12 obs. of  10 variables:
+#>  $ Component        :'data.frame':   28 obs. of  10 variables:
+#>  $ DISEASES         :'data.frame':   15 obs. of  10 variables:
+#>  $ Function         :'data.frame':   15 obs. of  10 variables:
+#>  $ Hallmark         :'data.frame':   6 obs. of  10 variables:
+#>  $ HPO              :'data.frame':   4 obs. of  10 variables:
 #>  $ InterPro         :'data.frame':   3 obs. of  10 variables:
-#>  $ KEGG             :'data.frame':   45 obs. of  10 variables:
-#>  $ Keyword          :'data.frame':   14 obs. of  10 variables:
-#>  $ NetworkNeighborAL:'data.frame':   5 obs. of  10 variables:
+#>  $ KEGG             :'data.frame':   46 obs. of  10 variables:
+#>  $ Keyword          :'data.frame':   8 obs. of  10 variables:
+#>  $ NetworkNeighborAL:'data.frame':   6 obs. of  10 variables:
 #>  $ PMID             :'data.frame':   100 obs. of  10 variables:
-#>  $ Process          :'data.frame':   148 obs. of  10 variables:
-#>  $ RCTM             :'data.frame':   59 obs. of  10 variables:
+#>  $ Process          :'data.frame':   151 obs. of  10 variables:
+#>  $ RCTM             :'data.frame':   66 obs. of  10 variables:
 #>  $ SMART            :'data.frame':   1 obs. of  10 variables:
-#>  $ TISSUES          :'data.frame':   12 obs. of  10 variables:
-#>  $ WikiPathways     :'data.frame':   46 obs. of  10 variables:
+#>  $ TISSUES          :'data.frame':   3 obs. of  10 variables:
+#>  $ WikiPathways     :'data.frame':   52 obs. of  10 variables:
+```
+
+Set `add_scores = TRUE` to include `strength` (the log10
+observed-to-expected gene-count ratio) and `signal` (a size-aware
+enrichment score). The following example filters the results and merges
+terms with sufficiently overlapping input-gene sets:
+
+``` r
+
+enriched_filtered <- rba_string_enrichment(
+  ids = proteins_mapped,
+  species = 9606,
+  add_scores = TRUE,
+  max_fdr = 0.05,
+  min_gene_count = 3,
+  min_strength = 0.5,
+  min_signal = 0.5,
+  merge_similarity = 0.8,
+  split_df = FALSE
+)
 ```
 
 Let us see the “KEGG” results as an example. Below, we can see which
@@ -262,6 +360,7 @@ enrichment for the same protein set:
 
 ``` r
 
+## Enrichment plots - Example 1
 graph_enrich <- rba_string_enrichment_image(
   ids = proteins_mapped,
   species = 9606,
@@ -272,10 +371,39 @@ graph_enrich <- rba_string_enrichment_image(
 )
 ```
 
-![Visualization of enrichment analysis
-results](rbioapi_string_files/figure-html/rba_string_enrichment_plot_image-1.png)
+![Enrichment plots - Example
+1](rbioapi_string_files/figure-html/rba_string_enrichment_plot_image-1.png)
 
-Visualization of enrichment analysis results
+Enrichment plots - Example 1
+
+`x_axis` selects the displayed quantity, while `sort_by` independently
+selects and orders terms. This example displays Hallmark enrichment
+strength in a horizontal bar plot, with terms selected and ordered by
+FDR:
+
+``` r
+
+## Enrichment plots - Example 2
+graph_enrich_bar <- rba_string_enrichment_image(
+  ids = proteins_mapped,
+  species = 9606,
+  category = "Hallmark",
+  x_axis = "strength",
+  sort_by = "fdr",
+  graph_type = "barplot",
+  color_palette = "red_blue",
+  save_image = FALSE
+)
+```
+
+![Enrichment plots - Example
+2](rbioapi_string_files/figure-html/rba_string_enrichment_barplot_image-1.png)
+
+Enrichment plots - Example 2
+
+The plot accepts the same enrichment filters and `merge_similarity` as
+the tabular endpoint. `group_by_similarity` controls visual grouping
+separately; omitting it uses STRING’s default of 0.8.
 
 ### Protein-protein interaction enrichment
 
@@ -294,19 +422,19 @@ rba_string_enrichment_ppi(
 #> [1] 14
 #> 
 #> $number_of_edges
-#> [1] 40
+#> [1] 35
 #> 
 #> $average_node_degree
-#> [1] 5.71
+#> [1] 5
 #> 
 #> $local_clustering_coefficient
-#> [1] 0.694
+#> [1] 0.58
 #> 
 #> $expected_number_of_edges
-#> [1] 19
+#> [1] 20
 #> 
 #> $p_value
-#> [1] 1.35e-05
+#> [1] 0.0017
 ```
 
 ------------------------------------------------------------------------
@@ -363,13 +491,13 @@ check their manuals:
 To cite STRING (Please see
 <https://string-db.org/cgi/about?footer_active_subpage=references>):
 
-- Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina Nastou,
-  Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang, Nadezhda T
-  Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian von
-  Mering, The STRING database in 2023: protein–protein association
-  networks and functional enrichment analyses for any sequenced genome
-  of interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January
-  2023, Pages D638–D646, <https://doi.org/10.1093/nar/gkac1000>
+- Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca Kirsch,
+  Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso, Qingyao
+  Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J
+  Jensen, Christian von Mering, The STRING database in 2025: protein
+  networks with directionality of regulation, Nucleic Acids Research,
+  Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+  <https://doi.org/10.1093/nar/gkae1113>
 
 To cite rbioapi:
 
@@ -420,11 +548,11 @@ To cite rbioapi:
     #> 
     #> loaded via a namespace (and not attached):
     #>  [1] httr_1.4.9        cli_3.6.6         knitr_1.52        rlang_1.3.0      
-    #>  [5] xfun_0.61         otel_0.2.0        png_0.1-9         textshaping_1.0.5
+    #>  [5] xfun_0.62         otel_0.2.0        png_0.1-9         textshaping_1.0.5
     #>  [9] jsonlite_2.0.0    DT_0.34.0         htmltools_0.5.9   ragg_1.5.2       
     #> [13] sass_0.4.10       rmarkdown_2.32    grid_4.6.1        crosstalk_1.2.2  
     #> [17] evaluate_1.0.5    jquerylib_0.1.4   fastmap_1.2.0     yaml_2.3.12      
     #> [21] lifecycle_1.0.5   compiler_4.6.1    fs_2.1.0          htmlwidgets_1.6.4
-    #> [25] systemfonts_1.3.2 digest_0.6.39     R6_2.6.1          curl_8.0.0       
+    #> [25] systemfonts_1.3.2 digest_0.6.39     R6_2.6.1          curl_8.1.0       
     #> [29] magrittr_2.0.5    bslib_0.12.0      tools_4.6.1       pkgdown_2.2.1    
     #> [33] cachem_1.1.0      desc_1.4.3

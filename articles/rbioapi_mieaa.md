@@ -75,11 +75,11 @@ mieaa_all <- rba_mieaa_enrich(
 #> Submitting ORA enrichment request for 17 miRNA IDs of species Homo sapiens to miEAA servers.
 #> 
 #>  -- Step 2/3: Checking for Submitted enrichment analysis's status every 5 seconds.
-#>     Your submitted job ID is: 6ddca368-8687-4a8a-907e-ecf96ab980f0
+#>     Your submitted job ID is: 8a79b815-4767-49d2-b068-e0c290785b14
 #> ....
 #> 
 #>  -- Step 3/3: Retrieving the results.
-#> Retrieving results of submitted enrichment request with ID: 6ddca368-8687-4a8a-907e-ecf96ab980f0
+#> Retrieving results of submitted enrichment request with ID: 8a79b815-4767-49d2-b068-e0c290785b14
 
 ## 2b Limit the enrichment to selected data sets (enrichment categories)
 mieaa_kegg <- rba_mieaa_enrich(
@@ -93,11 +93,11 @@ mieaa_kegg <- rba_mieaa_enrich(
 #> Submitting ORA enrichment request for 17 miRNA IDs of species Homo sapiens to miEAA servers.
 #> 
 #>  -- Step 2/3: Checking for Submitted enrichment analysis's status every 5 seconds.
-#>     Your submitted job ID is: 3cae2f88-362b-4c22-b996-8d312b30280f
+#>     Your submitted job ID is: 83e5b831-7e1e-433a-9115-819835a0a141
 #> .
 #> 
 #>  -- Step 3/3: Retrieving the results.
-#> Retrieving results of submitted enrichment request with ID: 3cae2f88-362b-4c22-b996-8d312b30280f
+#> Retrieving results of submitted enrichment request with ID: 83e5b831-7e1e-433a-9115-819835a0a141
 ```
 
 ### Approach 2: Going step-by-step
@@ -205,10 +205,10 @@ To cite rbioapi:
     #> 
     #> loaded via a namespace (and not attached):
     #>  [1] httr_1.4.9        cli_3.6.6         knitr_1.52        rlang_1.3.0      
-    #>  [5] xfun_0.61         otel_0.2.0        textshaping_1.0.5 jsonlite_2.0.0   
+    #>  [5] xfun_0.62         otel_0.2.0        textshaping_1.0.5 jsonlite_2.0.0   
     #>  [9] DT_0.34.0         htmltools_0.5.9   ragg_1.5.2        sass_0.4.10      
     #> [13] rmarkdown_2.32    crosstalk_1.2.2   evaluate_1.0.5    jquerylib_0.1.4  
     #> [17] fastmap_1.2.0     yaml_2.3.12       lifecycle_1.0.5   compiler_4.6.1   
     #> [21] fs_2.1.0          htmlwidgets_1.6.4 systemfonts_1.3.2 digest_0.6.39    
-    #> [25] R6_2.6.1          curl_8.0.0        magrittr_2.0.5    bslib_0.12.0     
+    #> [25] R6_2.6.1          curl_8.1.0        magrittr_2.0.5    bslib_0.12.0     
     #> [29] tools_4.6.1       pkgdown_2.2.1     cachem_1.1.0      desc_1.4.3

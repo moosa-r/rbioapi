@@ -1,9 +1,8 @@
 # Get STRING Network Interactions
 
 This function retrieves STRING interaction pairs among the input
-proteins, including the combined score and separate scores for each
-evidence channel. You can expand the network using the `add_nodes`
-parameter.
+proteins and any added neighbors, including the combined score and
+separate scores for each evidence channel.
 
 ## Usage
 
@@ -16,6 +15,9 @@ rba_string_interactions_network(
   network_type = "functional",
   use_query_labels = FALSE,
   network_term_id = NULL,
+  network_flavor = NULL,
+  typed_physical_edges = TRUE,
+  typed_regulatory_edges = TRUE,
   ...
 )
 ```
@@ -69,6 +71,9 @@ rba_string_interactions_network(
   - "physical": Edges indicate that two proteins have a physical
     interaction or are parts of a complex.
 
+  - "regulatory": Directed edges indicate regulation from a source
+    protein to a target protein.
+
 - use_query_labels:
 
   Logical: (default = `FALSE`) Use the names supplied in `ids` as node
@@ -81,6 +86,22 @@ rba_string_interactions_network(
   supplied through `ids`, STRING constructs the network from proteins
   annotated with the specified term. Set `ids = NULL` and supply
   `species`.
+
+- network_flavor:
+
+  Character: (optional) Set to `"typed"` to retrieve functional,
+  physical, and directional regulatory scores in one response. Requires
+  `network_type = "functional"`. Omit for the ordinary schema.
+
+- typed_physical_edges:
+
+  Logical: (default = `TRUE`) Include physical scores in a typed
+  response. If `FALSE`, their columns contain missing values.
+
+- typed_regulatory_edges:
+
+  Logical: (default = `TRUE`) Include regulatory scores in a typed
+  response. If `FALSE`, their columns contain missing values.
 
 - ...:
 
@@ -119,12 +140,29 @@ contain interactor information and interaction scores:
 
 - tscore: textmining score
 
+  
+A `network_type = "regulatory"` response instead contains
+`source_string_id`, `target_string_id`, `source_preferred_name`,
+`target_preferred_name`, `ncbiTaxonId`, `experimental_score`,
+`database_score`, `textmining_score`, `sign`, and `combined_score`. Each
+row reports one direction from source to target; scores apply to that
+direction.  
+A `network_flavor = "typed"` response contains the ordinary identifier
+columns, evidence scores prefixed with `functional_`, `physical_`, and
+`regulatory_`, and `sign`. The combined-score columns are
+`functional_combined_score`, `physical_combined_score`, and
+`regulatory_combined_score`. Each functional pair is returned in both
+orientations. Physical scores are symmetric; regulatory scores and signs
+describe the direction from `stringId_A` to `stringId_B`. Missing or
+below-threshold relationships have numeric `NA` scores. Disabled
+overlays have `NA` score columns.  
+Scores range from 0 to 1; the request's `required_score` uses the 0 to
+1000 scale. Regulatory signs are `"pos"`, `"neg"`, or `"n/a"`.
+
 ## Details
 
-This function returns interactions among the supplied proteins and any
-neighboring proteins added through `add_nodes`. To retrieve interactions
-between your input proteins and all their STRING interaction partners,
-see
+To retrieve interactions between your input proteins and all their
+STRING interaction partners, see
 [`rba_string_interaction_partners`](https://rbioapi.moosa-r.com/reference/rba_string_interaction_partners.md).
 
 ## Corresponding API Resources
@@ -136,13 +174,13 @@ see
 
 ## References
 
-- Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina Nastou,
-  Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang, Nadezhda T
-  Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian von
-  Mering, The STRING database in 2023: protein–protein association
-  networks and functional enrichment analyses for any sequenced genome
-  of interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January
-  2023, Pages D638–D646, https://doi.org/10.1093/nar/gkac1000
+- Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca Kirsch,
+  Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso, Qingyao
+  Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J
+  Jensen, Christian von Mering, The STRING database in 2025: protein
+  networks with directionality of regulation, Nucleic Acids Research,
+  Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+  https://doi.org/10.1093/nar/gkae1113
 
 - [STRING API Documentation](https://string-db.org/help/api/)
 
@@ -188,6 +226,23 @@ rba_string_interactions_network(
     network_term_id = "GO:0050852",
     species = 9606,
     required_score = 900
+)
+# }
+# \donttest{
+## Retrieve directed regulatory interactions
+rba_string_interactions_network(
+    ids = c("TP53", "MDM2", "CDKN1A"),
+    species = 9606,
+    network_type = "regulatory"
+)
+# }
+# \donttest{
+## Retrieve typed scores without the physical overlay
+rba_string_interactions_network(
+    ids = c("TP53", "MDM2", "CDKN1A"),
+    species = 9606,
+    network_flavor = "typed",
+    typed_physical_edges = FALSE
 )
 # }
 ```

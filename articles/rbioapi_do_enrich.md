@@ -154,7 +154,7 @@ enrichr_enrich <- rba_enrichr(
 #> --Step 2/3:
 #> Uploading 1214 gene symbols to Enrichr human.
 #> --Step 3/3:
-#> Performing Enrichr analysis on gene-list 138577706 against Enrichr human library: KEGG_2021_Human.
+#> Performing Enrichr analysis on gene-list 140124199 against Enrichr human library: KEGG_2021_Human.
 ```
 
 In the `gene_set_library` parameter, you can provide multiple gene set
@@ -176,7 +176,7 @@ enrichr_enrich_kegg <- rba_enrichr(
 #> --Step 2/3:
 #> Uploading 1214 gene symbols to Enrichr human.
 #> --Step 3/3:
-#> Performing Enrichr analysis on gene-list 138577716 using multiple Enrichr human libraries.
+#> Performing Enrichr analysis on gene-list 140124201 using multiple Enrichr human libraries.
 #> Note: You have selected '7' Enrichr human libraries. Note that for each library, a separate call should be sent to Enrichr server. Thus, this could take a while depending on the number of selected libraries.
 ```
 
@@ -261,7 +261,7 @@ element.
 
 str(reactome$summary)
 #> List of 7
-#>  $ token         : chr "MjAyNjA5MjIwODM4MDRfNTU4"
+#>  $ token         : chr "MjAyNjEwMDgxNzUyNThfMjU0MQ%3D%3D"
 #>  $ projection    : logi TRUE
 #>  $ interactors   : logi FALSE
 #>  $ type          : chr "OVERREPRESENTATION"
@@ -494,20 +494,22 @@ listed above:
 ``` r
 
 str(string_enrich, max.level = 1)
-#> List of 13
-#>  $ COMPARTMENTS     :'data.frame':   18 obs. of  10 variables:
-#>  $ Component        :'data.frame':   19 obs. of  10 variables:
-#>  $ DISEASES         :'data.frame':   10 obs. of  10 variables:
-#>  $ Function         :'data.frame':   1 obs. of  10 variables:
-#>  $ HPO              :'data.frame':   3 obs. of  10 variables:
-#>  $ KEGG             :'data.frame':   6 obs. of  10 variables:
-#>  $ Keyword          :'data.frame':   18 obs. of  10 variables:
-#>  $ NetworkNeighborAL:'data.frame':   46 obs. of  10 variables:
+#> List of 15
+#>  $ COMPARTMENTS     :'data.frame':   19 obs. of  10 variables:
+#>  $ Component        :'data.frame':   30 obs. of  10 variables:
+#>  $ DISEASES         :'data.frame':   11 obs. of  10 variables:
+#>  $ Function         :'data.frame':   7 obs. of  10 variables:
+#>  $ Hallmark         :'data.frame':   15 obs. of  10 variables:
+#>  $ InterPro         :'data.frame':   5 obs. of  10 variables:
+#>  $ KEGG             :'data.frame':   8 obs. of  10 variables:
+#>  $ Keyword          :'data.frame':   13 obs. of  10 variables:
+#>  $ NetworkNeighborAL:'data.frame':   55 obs. of  10 variables:
+#>  $ Pfam             :'data.frame':   1 obs. of  10 variables:
 #>  $ PMID             :'data.frame':   100 obs. of  10 variables:
-#>  $ Process          :'data.frame':   77 obs. of  10 variables:
-#>  $ RCTM             :'data.frame':   49 obs. of  10 variables:
-#>  $ TISSUES          :'data.frame':   14 obs. of  10 variables:
-#>  $ WikiPathways     :'data.frame':   3 obs. of  10 variables:
+#>  $ Process          :'data.frame':   155 obs. of  10 variables:
+#>  $ RCTM             :'data.frame':   68 obs. of  10 variables:
+#>  $ TISSUES          :'data.frame':   20 obs. of  10 variables:
+#>  $ WikiPathways     :'data.frame':   4 obs. of  10 variables:
 ```
 
 In the “PMID” element, we see which PubMed papers are over-represented
@@ -542,18 +544,18 @@ publication annotations:
 str(string_annot, max.level = 1)
 #> List of 13
 #>  $ COMPARTMENTS     :'data.frame':   31 obs. of  8 variables:
-#>  $ Component        :'data.frame':   43 obs. of  8 variables:
+#>  $ Component        :'data.frame':   40 obs. of  8 variables:
 #>  $ DISEASES         :'data.frame':   6 obs. of  8 variables:
 #>  $ Function         :'data.frame':   9 obs. of  8 variables:
-#>  $ HPO              :'data.frame':   8 obs. of  8 variables:
-#>  $ InterPro         :'data.frame':   2 obs. of  8 variables:
-#>  $ Keyword          :'data.frame':   13 obs. of  8 variables:
-#>  $ NetworkNeighborAL:'data.frame':   5 obs. of  8 variables:
+#>  $ GWAS             :'data.frame':   14 obs. of  8 variables:
+#>  $ InterPro         :'data.frame':   3 obs. of  8 variables:
+#>  $ Keyword          :'data.frame':   1 obs. of  8 variables:
+#>  $ NetworkNeighborAL:'data.frame':   6 obs. of  8 variables:
 #>  $ Pfam             :'data.frame':   1 obs. of  8 variables:
 #>  $ PMID             :'data.frame':   2486 obs. of  8 variables:
-#>  $ Process          :'data.frame':   92 obs. of  8 variables:
+#>  $ Process          :'data.frame':   83 obs. of  8 variables:
 #>  $ RCTM             :'data.frame':   7 obs. of  8 variables:
-#>  $ TISSUES          :'data.frame':   13 obs. of  8 variables:
+#>  $ TISSUES          :'data.frame':   10 obs. of  8 variables:
 ```
 
 In addition to a data frame, you can also get a plot summarizing the
@@ -712,11 +714,11 @@ mieaa_enrich <- rba_mieaa_enrich(
 #> Submitting ORA enrichment request for 23 miRNA IDs of species Homo sapiens to miEAA servers.
 #> 
 #>  -- Step 2/3: Checking for Submitted enrichment analysis's status every 5 seconds.
-#>     Your submitted job ID is: c31d2782-1b57-42f9-85d4-b758b1da7543
+#>     Your submitted job ID is: c2683b06-8c09-4803-8d95-60eba01e5e82
 #> .
 #> 
 #>  -- Step 3/3: Retrieving the results.
-#> Retrieving results of submitted enrichment request with ID: c31d2782-1b57-42f9-85d4-b758b1da7543
+#> Retrieving results of submitted enrichment request with ID: c2683b06-8c09-4803-8d95-60eba01e5e82
 ```
 
 ------------------------------------------------------------------------
@@ -777,11 +779,11 @@ for more details.
     #> 
     #> loaded via a namespace (and not attached):
     #>  [1] httr_1.4.9        cli_3.6.6         knitr_1.52        rlang_1.3.0      
-    #>  [5] xfun_0.61         otel_0.2.0        png_0.1-9         textshaping_1.0.5
+    #>  [5] xfun_0.62         otel_0.2.0        png_0.1-9         textshaping_1.0.5
     #>  [9] jsonlite_2.0.0    DT_0.34.0         htmltools_0.5.9   ragg_1.5.2       
     #> [13] sass_0.4.10       rmarkdown_2.32    grid_4.6.1        crosstalk_1.2.2  
     #> [17] evaluate_1.0.5    jquerylib_0.1.4   fastmap_1.2.0     yaml_2.3.12      
     #> [21] lifecycle_1.0.5   compiler_4.6.1    fs_2.1.0          htmlwidgets_1.6.4
-    #> [25] systemfonts_1.3.2 digest_0.6.39     R6_2.6.1          curl_8.0.0       
+    #> [25] systemfonts_1.3.2 digest_0.6.39     R6_2.6.1          curl_8.1.0       
     #> [29] magrittr_2.0.5    bslib_0.12.0      tools_4.6.1       mime_0.13        
     #> [33] pkgdown_2.2.1     cachem_1.1.0      desc_1.4.3

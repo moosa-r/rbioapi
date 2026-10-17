@@ -25,6 +25,9 @@ rba_string_network_image(
   node_labels_center = FALSE,
   node_labels_font_size = 12,
   network_term_id = NULL,
+  typed_physical_edges = TRUE,
+  typed_regulatory_edges = TRUE,
+  show_regulatory_signs = TRUE,
   ...
 )
 ```
@@ -97,6 +100,9 @@ rba_string_network_image(
 
   - "actions": Edge shape indicates the predicted mode of action.
 
+  - "typed": Overlay physical and directed regulatory relationships on a
+    functional network. Requires `network_type = "functional"`.
+
 - network_type:
 
   Character: (default = `"functional"`) One of:
@@ -106,6 +112,9 @@ rba_string_network_image(
 
   - "physical": Edges indicate that two proteins have a physical
     interaction or are parts of a complex.
+
+  - "regulatory": Directed edges indicate regulation from a source
+    protein to a target protein.
 
 - hide_node_labels:
 
@@ -137,8 +146,8 @@ rba_string_network_image(
 
 - node_labels_font_size:
 
-  Numeric: (default = `12`) (between 5 and 50; default = 12): Font size
-  of the protein node labels.
+  Numeric: (default = `12`) Font size of the protein node labels,
+  between 5 and 50.
 
 - network_term_id:
 
@@ -147,6 +156,22 @@ rba_string_network_image(
   supplied through `ids`, STRING constructs the network from proteins
   annotated with the specified term. Set `ids = NULL` and supply
   `species`.
+
+- typed_physical_edges:
+
+  Logical: (default = `TRUE`) Include physical relationships when
+  `network_flavor = "typed"`.
+
+- typed_regulatory_edges:
+
+  Logical: (default = `TRUE`) Include regulatory relationships when
+  `network_flavor = "typed"`.
+
+- show_regulatory_signs:
+
+  Logical: (default = `TRUE`) Display positive and negative regulatory
+  effects when available. Setting this to `FALSE` preserves direction
+  but hides the regulatory effect.
 
 - ...:
 
@@ -167,13 +192,13 @@ A PNG image array or raw SVG content, depending on `image_format`.
 
 ## References
 
-- Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina Nastou,
-  Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang, Nadezhda T
-  Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian von
-  Mering, The STRING database in 2023: protein–protein association
-  networks and functional enrichment analyses for any sequenced genome
-  of interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January
-  2023, Pages D638–D646, https://doi.org/10.1093/nar/gkac1000
+- Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca Kirsch,
+  Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso, Qingyao
+  Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J
+  Jensen, Christian von Mering, The STRING database in 2025: protein
+  networks with directionality of regulation, Nucleic Acids Research,
+  Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+  https://doi.org/10.1093/nar/gkae1113
 
 - [STRING API Documentation](https://string-db.org/help/api/)
 
@@ -222,6 +247,26 @@ rba_string_network_image(
     ids = NULL,
     network_term_id = "GO:0050852",
     species = 9606,
+    save_image = FALSE
+)
+} # }
+if (FALSE) { # \dontrun{
+## Hide regulatory signs while preserving edge direction
+rba_string_network_image(
+    ids = c("TP53", "MDM2", "CDKN1A"),
+    species = 9606,
+    network_type = "regulatory",
+    show_regulatory_signs = FALSE,
+    save_image = FALSE
+)
+} # }
+if (FALSE) { # \dontrun{
+## Show the physical overlay on a typed functional network
+rba_string_network_image(
+    ids = c("TP53", "MDM2", "CDKN1A"),
+    species = 9606,
+    network_flavor = "typed",
+    typed_regulatory_edges = FALSE,
     save_image = FALSE
 )
 } # }

@@ -78,6 +78,9 @@
 <span>  required_score <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  network_type <span class="op">=</span> <span class="st">"functional"</span>,</span>
 <span>  limit <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  network_flavor <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  typed_physical_edges <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  typed_regulatory_edges <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -111,12 +114,33 @@ Common confidence thresholds are 150 (low), 400 (medium), 700 (high), and
 functional associations.</p></li>
 <li><p>"physical": Edges indicate that two proteins have a physical
 interaction or are parts of a complex.</p></li>
+<li><p>"regulatory": Directed edges indicate regulation from a source
+protein to a target protein.</p></li>
 </ul></dd>
 
 
 <dt id="arg-limit">limit<a class="anchor" aria-label="anchor" href="#arg-limit"></a></dt>
 <dd><p>Numeric: (optional) Maximum number of interaction partners returned for
-each input protein, ordered by confidence.</p></dd>
+each input protein, ordered by confidence. This limits partners rather
+than response rows; directed or typed results can contain more rows.</p></dd>
+
+
+<dt id="arg-network-flavor">network_flavor<a class="anchor" aria-label="anchor" href="#arg-network-flavor"></a></dt>
+<dd><p>Character: (optional) Set to <code>"typed"</code> to retrieve
+functional, physical, and directional regulatory scores in one response.
+Requires <code>network_type = "functional"</code>. Omit for the ordinary schema.</p></dd>
+
+
+<dt id="arg-typed-physical-edges">typed_physical_edges<a class="anchor" aria-label="anchor" href="#arg-typed-physical-edges"></a></dt>
+<dd><p>Logical: (default = <code>TRUE</code>) Include physical
+scores in a typed response. If <code>FALSE</code>, their columns contain
+missing values.</p></dd>
+
+
+<dt id="arg-typed-regulatory-edges">typed_regulatory_edges<a class="anchor" aria-label="anchor" href="#arg-typed-regulatory-edges"></a></dt>
+<dd><p>Logical: (default = <code>TRUE</code>) Include
+regulatory scores in a typed response. If <code>FALSE</code>, their columns
+contain missing values.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -127,7 +151,10 @@ arguments manual for more information on available options.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A data frame in which each row is a network interaction and the
-  columns contain interactor information and interaction scores.</p>
+  columns contain interactor information and interaction scores.
+  Regulatory and typed requests use the corresponding schemas described
+  in <code><a href="rba_string_interactions_network.html">rba_string_interactions_network</a></code>. Missing typed evidence
+  scores are numeric <code>NA</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -144,13 +171,13 @@ arguments manual for more information on available options.</p></dd>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
 
-<ul><li><p>Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
-   Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang,
-   Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian
-   von Mering, The STRING database in 2023: protein–protein association
-   networks and functional enrichment analyses for any sequenced genome of
-   interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023,
-   Pages D638–D646, https://doi.org/10.1093/nar/gkac1000</p></li>
+<ul><li><p>Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca
+   Kirsch, Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso,
+   Qingyao Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork,
+   Lars J Jensen, Christian von Mering, The STRING database in 2025:
+   protein networks with directionality of regulation, Nucleic Acids
+   Research, Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+   https://doi.org/10.1093/nar/gkae1113</p></li>
 <li><p><a href="https://string-db.org/help/api/" class="external-link">STRING API Documentation</a></p></li>
 <li><p><a href="https://string-db.org/cgi/about?footer_active_subpage=references" class="external-link">
   Citations note on STRING website</a></p></li>
@@ -189,6 +216,15 @@ arguments manual for more information on available options.</p></dd>
 <span>    <span class="fu">rba_string_interaction_partners</span><span class="op">(</span>ids <span class="op">=</span> <span class="st">"9606.ENSP00000269305"</span>,</span>
 <span>    species <span class="op">=</span> <span class="fl">9606</span>,</span>
 <span>    required_score <span class="op">=</span> <span class="fl">700</span><span class="op">)</span></span>
+<span><span class="co"># }</span></span>
+<span><span class="co"># \donttest{</span></span>
+<span><span class="co">## Limit partners per input protein; directed results can contain more rows</span></span>
+<span><span class="fu">rba_string_interaction_partners</span><span class="op">(</span></span>
+<span>    ids <span class="op">=</span> <span class="st">"TP53"</span>,</span>
+<span>    species <span class="op">=</span> <span class="fl">9606</span>,</span>
+<span>    network_type <span class="op">=</span> <span class="st">"regulatory"</span>,</span>
+<span>    limit <span class="op">=</span> <span class="fl">5</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co"># }</span></span>
 <span></span></code></pre></div>
     </div>

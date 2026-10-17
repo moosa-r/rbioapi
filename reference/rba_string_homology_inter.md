@@ -60,13 +60,13 @@ identifiers={your_identifiers}&{optional_parameters}"
 
 ## References
 
-- Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina Nastou,
-  Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang, Nadezhda T
-  Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian von
-  Mering, The STRING database in 2023: protein–protein association
-  networks and functional enrichment analyses for any sequenced genome
-  of interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January
-  2023, Pages D638–D646, https://doi.org/10.1093/nar/gkac1000
+- Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca Kirsch,
+  Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso, Qingyao
+  Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J
+  Jensen, Christian von Mering, The STRING database in 2025: protein
+  networks with directionality of regulation, Nucleic Acids Research,
+  Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+  https://doi.org/10.1093/nar/gkae1113
 
 - [STRING API Documentation](https://string-db.org/help/api/)
 
@@ -94,9 +94,10 @@ Other "STRING":
 
 ``` r
 # \donttest{
-rba_string_homology_inter(ids = "p53",
+## Find the best hit in mouse and fruit fly for the human input protein
+rba_string_homology_inter(ids = "CDK1",
     species = 9606,
-    species_b = 7070)
+    species_b = c(10090, 7227))
 # }
 # \donttest{
 rba_string_homology_inter(ids = "ENSP00000269305", species = 9606)

@@ -121,10 +121,10 @@ version resource.
 rba_string_version()
 #> Retrieving the STRING database version and address used by rbioapi.
 #> $string_version
-#> [1] "12.0"
+#> [1] "12.5"
 #> 
 #> $stable_address
-#> [1] "https://version-12-0.string-db.org"
+#> [1] "https://version-12-5.string-db.org"
 ```
 
 Thus, to this version, rbioapi function will have one of the following
@@ -564,10 +564,10 @@ Bioinformatics](https://doi.org/10.1093/bioinformatics/btac172 "Rezwani, M., Pou
     #> 
     #> loaded via a namespace (and not attached):
     #>  [1] digest_0.6.39     desc_1.4.3        R6_2.6.1          fastmap_1.2.0    
-    #>  [5] xfun_0.61         cachem_1.1.0      knitr_1.52        htmltools_0.5.9  
+    #>  [5] xfun_0.62         cachem_1.1.0      knitr_1.52        htmltools_0.5.9  
     #>  [9] rmarkdown_2.32    lifecycle_1.0.5   cli_3.6.6         sass_0.4.10      
     #> [13] pkgdown_2.2.1     textshaping_1.0.5 jquerylib_0.1.4   systemfonts_1.3.2
     #> [17] compiler_4.6.1    httr_1.4.9        tools_4.6.1       ragg_1.5.2       
-    #> [21] curl_8.0.0        bslib_0.12.0      evaluate_1.0.5    yaml_2.3.12      
+    #> [21] curl_8.1.0        bslib_0.12.0      evaluate_1.0.5    yaml_2.3.12      
     #> [25] otel_0.2.0        jsonlite_2.0.0    rlang_1.3.0       fs_2.1.0         
     #> [29] htmlwidgets_1.6.4

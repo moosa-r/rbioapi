@@ -84,6 +84,9 @@
 <span>  node_labels_center <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  node_labels_font_size <span class="op">=</span> <span class="fl">12</span>,</span>
 <span>  network_term_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  typed_physical_edges <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  typed_regulatory_edges <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_regulatory_signs <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -146,6 +149,8 @@ supporting each interaction.</p></li>
 <li><p>"confidence": Edge thickness indicates the interaction confidence
 score.</p></li>
 <li><p>"actions": Edge shape indicates the predicted mode of action.</p></li>
+<li><p>"typed": Overlay physical and directed regulatory relationships on
+a functional network. Requires <code>network_type = "functional"</code>.</p></li>
 </ul></dd>
 
 
@@ -154,6 +159,8 @@ score.</p></li>
 functional associations.</p></li>
 <li><p>"physical": Edges indicate that two proteins have a physical
 interaction or are parts of a complex.</p></li>
+<li><p>"regulatory": Directed edges indicate regulation from a source
+protein to a target protein.</p></li>
 </ul></dd>
 
 
@@ -188,8 +195,8 @@ on the nodes.</p></dd>
 
 
 <dt id="arg-node-labels-font-size">node_labels_font_size<a class="anchor" aria-label="anchor" href="#arg-node-labels-font-size"></a></dt>
-<dd><p>Numeric: (default = <code>12</code>) (between 5 and 50; default = 12):
-Font size of the protein node labels.</p></dd>
+<dd><p>Numeric: (default = <code>12</code>) Font size of the
+protein node labels, between 5 and 50.</p></dd>
 
 
 <dt id="arg-network-term-id">network_term_id<a class="anchor" aria-label="anchor" href="#arg-network-term-id"></a></dt>
@@ -197,6 +204,22 @@ Font size of the protein node labels.</p></dd>
 Ontology, KEGG, or Reactome identifier). Instead of using proteins supplied
 through <code>ids</code>, STRING constructs the network from proteins annotated
 with the specified term. Set <code>ids = NULL</code> and supply <code>species</code>.</p></dd>
+
+
+<dt id="arg-typed-physical-edges">typed_physical_edges<a class="anchor" aria-label="anchor" href="#arg-typed-physical-edges"></a></dt>
+<dd><p>Logical: (default = <code>TRUE</code>) Include physical
+relationships when <code>network_flavor = "typed"</code>.</p></dd>
+
+
+<dt id="arg-typed-regulatory-edges">typed_regulatory_edges<a class="anchor" aria-label="anchor" href="#arg-typed-regulatory-edges"></a></dt>
+<dd><p>Logical: (default = <code>TRUE</code>) Include
+regulatory relationships when <code>network_flavor = "typed"</code>.</p></dd>
+
+
+<dt id="arg-show-regulatory-signs">show_regulatory_signs<a class="anchor" aria-label="anchor" href="#arg-show-regulatory-signs"></a></dt>
+<dd><p>Logical: (default = <code>TRUE</code>) Display positive
+and negative regulatory effects when available. Setting this to
+<code>FALSE</code> preserves direction but hides the regulatory effect.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -221,13 +244,13 @@ arguments manual for more information on available options.</p></dd>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
 
-<ul><li><p>Damian Szklarczyk, Rebecca Kirsch, Mikaela Koutrouli, Katerina
-   Nastou, Farrokh Mehryary, Radja Hachilif, Annika L Gable, Tao Fang,
-   Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork, Lars J Jensen, Christian
-   von Mering, The STRING database in 2023: protein–protein association
-   networks and functional enrichment analyses for any sequenced genome of
-   interest, Nucleic Acids Research, Volume 51, Issue D1, 6 January 2023,
-   Pages D638–D646, https://doi.org/10.1093/nar/gkac1000</p></li>
+<ul><li><p>Damian Szklarczyk, Katerina Nastou, Mikaela Koutrouli, Rebecca
+   Kirsch, Farrokh Mehryary, Radja Hachilif, Dewei Hu, Matteo E Peluso,
+   Qingyao Huang, Tao Fang, Nadezhda T Doncheva, Sampo Pyysalo, Peer Bork,
+   Lars J Jensen, Christian von Mering, The STRING database in 2025:
+   protein networks with directionality of regulation, Nucleic Acids
+   Research, Volume 53, Issue D1, 6 January 2025, Pages D730–D737,
+   https://doi.org/10.1093/nar/gkae1113</p></li>
 <li><p><a href="https://string-db.org/help/api/" class="external-link">STRING API Documentation</a></p></li>
 <li><p><a href="https://string-db.org/cgi/about?footer_active_subpage=references" class="external-link">
   Citations note on STRING website</a></p></li>
@@ -278,6 +301,26 @@ arguments manual for more information on available options.</p></dd>
 <span>    ids <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>    network_term_id <span class="op">=</span> <span class="st">"GO:0050852"</span>,</span>
 <span>    species <span class="op">=</span> <span class="fl">9606</span>,</span>
+<span>    save_image <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="op">}</span> <span class="co"># }</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span>
+<span><span class="co">## Hide regulatory signs while preserving edge direction</span></span>
+<span><span class="fu">rba_string_network_image</span><span class="op">(</span></span>
+<span>    ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"MDM2"</span>, <span class="st">"CDKN1A"</span><span class="op">)</span>,</span>
+<span>    species <span class="op">=</span> <span class="fl">9606</span>,</span>
+<span>    network_type <span class="op">=</span> <span class="st">"regulatory"</span>,</span>
+<span>    show_regulatory_signs <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>    save_image <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="op">}</span> <span class="co"># }</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span>
+<span><span class="co">## Show the physical overlay on a typed functional network</span></span>
+<span><span class="fu">rba_string_network_image</span><span class="op">(</span></span>
+<span>    ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"MDM2"</span>, <span class="st">"CDKN1A"</span><span class="op">)</span>,</span>
+<span>    species <span class="op">=</span> <span class="fl">9606</span>,</span>
+<span>    network_flavor <span class="op">=</span> <span class="st">"typed"</span>,</span>
+<span>    typed_regulatory_edges <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>    save_image <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span><span class="op">}</span> <span class="co"># }</span></span>
